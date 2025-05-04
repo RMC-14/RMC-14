@@ -1,7 +1,7 @@
 ﻿# Executive Supervisor
 - type: job
   parent: CMJobBase
-  id: RMCCorporateExecutiveSupervisor
+  id: CMCorporateExecutiveSupervisor
   name: rmc-job-name-corp-exec-supervisor
   description: rmc-ghost-role-information-corp-exec-description
   playTimeTracker: RMCJobCorporateExecutiveSupervisor
@@ -43,7 +43,7 @@
     description: rmc-ghost-role-information-corp-exec-description
     rules: rmc-ghost-role-information-corp-exec-rules
     reregister: false
-    job: RMCCorporateExecutiveSupervisor
+    job: CMCorporateExecutiveSupervisor
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
@@ -67,7 +67,7 @@
 # Executive Specialist
 - type: job
   parent: CMJobBase
-  id: RMCCorporateExecutiveSpecialist
+  id: CMCorporateExecutiveSpecialist
   name: rmc-job-name-corp-exec-specialist
   description: rmc-ghost-role-information-corp-exec-description
   playTimeTracker: RMCJobCorporateExecutiveSpecialist
@@ -112,7 +112,7 @@
     description: rmc-ghost-role-information-corp-exec-description
     rules: rmc-ghost-role-information-corp-exec-rules
     reregister: false
-    job: RMCCorporateExecutiveSpecialist
+    job: CMCorporateExecutiveSpecialist
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

@@ -1,7 +1,7 @@
 # Bureau Observer
 - type: job
   parent: CMJobBase
-  id: RMCBureauObserver
+  id: CMBureauObserver
   name: rmc-job-name-bureau-observer
   description: rmc-ghost-role-information-bureau-observer-description
   playTimeTracker: RMCJobBureauObserver
@@ -48,7 +48,7 @@
     description: rmc-ghost-role-information-bureau-observer-description
     rules: rmc-ghost-role-information-bureau-rules
     reregister: false
-    job: RMCBureauObserver
+    job: CMBureauObserver
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

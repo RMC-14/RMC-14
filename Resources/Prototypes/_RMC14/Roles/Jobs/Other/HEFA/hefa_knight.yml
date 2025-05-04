@@ -2,7 +2,7 @@
 
 - type: job
   parent: RMCHEFAShrapnelsworn
-  id: RMCHEFAShrapnelswornMelee
+  id: CMHEFAShrapnelswornMelee
   name: rmc-job-name-hefa-shrapnelsworn
   playTimeTracker: CMJobHEFAShrapnelswornMelee
   startingGear: RMCGearHEFAShrapnelswornMelee
@@ -18,7 +18,7 @@
   components:
   - type: GhostRole
     name: rmc-ghost-name-hefa-hostile-shrapnelsworn
-    job: RMCHEFAShrapnelswornMelee
+    job: CMHEFAShrapnelswornMelee
 
 - type: randomHumanoidSettings
   parent: RMCHEFAShrapnelswornFriendly
@@ -26,7 +26,7 @@
   components:
   - type: GhostRole
     name: rmc-ghost-name-hefa-friendly-shrapnelsworn
-    job: RMCHEFAShrapnelswornMelee
+    job: CMHEFAShrapnelswornMelee
 
 - type: entity
   parent: RMCRandomHumanoidHEFAShrapnelswornHostile

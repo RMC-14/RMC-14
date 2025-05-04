@@ -1,7 +1,7 @@
 # Bureau Liaison
 - type: job
   parent: CMJobBase
-  id: RMCICBLiaison
+  id: CMICBLiaison
   name: rmc-job-name-icb
   description: rmc-ghost-role-information-icb-description
   playTimeTracker: RMCJobICBLiaison
@@ -43,7 +43,7 @@
     description: rmc-ghost-role-information-icb-description
     rules: rmc-ghost-role-information-bureau-rules
     reregister: false
-    job: RMCICBLiaison
+    job: CMICBLiaison
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

@@ -1,7 +1,7 @@
 # Freelancer Rifleman
 - type: job
   parent: CMJobBase
-  id: RMCFreelancerRifleman
+  id: CMFreelancerRifleman
   name: rmc-job-name-freelancer-standard
   description: rmc-ghost-role-information-freelancer-friendly-description
   playTimeTracker: RMCJobFreelancerStandard
@@ -61,7 +61,7 @@
     description: rmc-ghost-role-information-freelancer-hostile-description
     rules: rmc-ghost-role-information-freelancer-rules
     reregister: false
-    job: RMCFreelancerRifleman
+    job: CMFreelancerRifleman
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
@@ -76,7 +76,7 @@
     description: rmc-ghost-role-information-freelancer-friendly-description
     rules: rmc-ghost-role-information-freelancer-rules
     reregister: false
-    job: RMCFreelancerRifleman
+    job: CMFreelancerRifleman
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

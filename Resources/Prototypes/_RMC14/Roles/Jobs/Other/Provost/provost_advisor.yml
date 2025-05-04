@@ -1,6 +1,6 @@
 ﻿- type: job
   parent: CMJobBase
-  id: RMCProvostAdvisor
+  id: CMProvostAdvisor
   name: rmc-job-name-corp-provost-advisor
   description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostAdvisor
@@ -47,7 +47,7 @@
     description: rmc-ghost-role-information-provost-description
     rules: rmc-ghost-role-information-provost-rules
     reregister: false
-    job: RMCProvostAdvisor
+    job: CMProvostAdvisor
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

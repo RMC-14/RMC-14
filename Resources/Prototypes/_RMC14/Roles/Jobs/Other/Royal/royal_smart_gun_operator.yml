@@ -1,6 +1,6 @@
 ﻿- type: job
   parent: CMJobBase
-  id: RMCRoyalMarinesSGO
+  id: CMRoyalMarinesSGO
   name: rmc-job-name-rmc-sgo
   description: rmc-ghost-role-information-rmc-description
   playTimeTracker: RMCJobRoyalSmartGunOperator
@@ -54,7 +54,7 @@
     description: rmc-ghost-role-information-rmc-description
     rules: rmc-ghost-role-information-rmc-rules
     reregister: false
-    job: RMCRoyalMarinesSGO
+    job: CMRoyalMarinesSGO
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

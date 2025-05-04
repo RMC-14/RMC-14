@@ -1,7 +1,7 @@
 ﻿# HEFA Granmdmaster
 - type: job
   parent: CMJobBase
-  id: RMCHEFAShrapnelsworn
+  id: CMHEFAShrapnelsworn
   name: rmc-job-name-hefa-grandmaster
   description: rmc-ghost-name-hefa-friendly-shrapnelsworn
   playTimeTracker: CMJobHEFAShrapnelsworn
@@ -60,7 +60,7 @@
     description: rmc-ghost-role-information-hefa-hostile-description
     rules: rmc-ghost-role-information-hefa-rules
     reregister: false
-    job: RMCHEFAShrapnelsworn
+    job: CMHEFAShrapnelsworn
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
@@ -77,7 +77,7 @@
     description: rmc-ghost-role-information-hefa-friendly-description
     rules: rmc-ghost-role-information-hefa-rules
     reregister: false
-    job: RMCHEFAShrapnelsworn
+    job: CMHEFAShrapnelsworn
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

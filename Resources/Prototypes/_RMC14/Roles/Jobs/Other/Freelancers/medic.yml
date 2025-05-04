@@ -1,7 +1,7 @@
 # Freelancer Medic
 - type: job
   parent: CMJobBase
-  id: RMCFreelancerMedic
+  id: CMFreelancerMedic
   name: rmc-job-name-freelancer-medic
   description: rmc-ghost-role-information-freelancer-friendly-description
   playTimeTracker: RMCJobFreelancerMedic
@@ -63,7 +63,7 @@
     description: rmc-ghost-role-information-freelancer-hostile-description
     rules: rmc-ghost-role-information-freelancer-rules
     reregister: false
-    job: RMCFreelancerMedic
+    job: CMFreelancerMedic
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
@@ -78,7 +78,7 @@
     description: rmc-ghost-role-information-freelancer-friendly-description
     rules: rmc-ghost-role-information-freelancer-rules
     reregister: false
-    job: RMCFreelancerMedic
+    job: CMFreelancerMedic
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

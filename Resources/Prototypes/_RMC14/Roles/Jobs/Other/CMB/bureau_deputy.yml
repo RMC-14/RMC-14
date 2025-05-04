@@ -1,7 +1,7 @@
 # Bureau Deputy
 - type: job
   parent: CMJobBase
-  id: RMCBureauDeputy
+  id: CMBureauDeputy
   name: rmc-job-name-bureau-deputy
   description: rmc-ghost-role-information-bureau-marshal-description
   playTimeTracker: RMCJobBureauDeputy
@@ -55,7 +55,7 @@
     description: rmc-ghost-role-information-bureau-marshal-description
     rules: rmc-ghost-role-information-bureau-rules
     reregister: false
-    job: RMCBureauDeputy
+    job: CMBureauDeputy
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
