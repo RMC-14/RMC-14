@@ -1353,3 +1353,25 @@
     state: khauni_brooks
   - type: PatronFigurine
     id: f68a79ad-3427-4b38-a7bb-84e11ef29a93
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBurniHeatSenira
+  name: Burni 'Heat' Senira figurine
+  description: "Every scar a mistake, and a lesson."
+  components:
+  - type: Sprite
+    state: burni_heat_senira
+  - type: PatronFigurine
+    id: 650b37cd-62d2-411b-a5f3-2991726529bd
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAustinSpectreEventide
+  name: Austin 'Spectre' Eventide figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: austin_spectre_eventide
+  - type: PatronFigurine
+    id: 6ff41436-85a7-4c3b-bb39-b29738fedef5

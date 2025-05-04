@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostAdvisor
-  name: CMProvostAdvisor
-  description: rmc-job-description-provost-advisor
+  name: rmc-job-name-corp-provost-advisor
+  description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostAdvisor
   ranks:
     RMCRankProvostAdvisor: []
@@ -22,6 +22,7 @@
         RMCSkillFireman: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
+    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-advisor
   hidden: true
@@ -29,20 +30,27 @@
 - type: entity
   id: RMCRandomHumanoidProvostAdvisor
   name: provost ghost role advisor
-  suffix: Role, Player, Low Law Understanding
+  suffix: Spawner, Player, Friendly, Low Law Understanding
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: RandomHumanoidSpawner
     settings: RMCProvostAdvisor
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCProvostAdvisor
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-advisor
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
     job: CMProvostAdvisor
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearProvostAdvisor
@@ -69,19 +77,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_pva
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostAdvisor
-  name: provost advisor ID card
-  description: Issued to members of the Provost Office.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: Clothing
-    slots:
-    - idcard
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-  - type: PresetIdCard
-    job: CMProvostAdvisor

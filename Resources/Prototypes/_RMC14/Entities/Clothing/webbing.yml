@@ -30,6 +30,8 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: RMCStorageEjectHand
+      state: Open
     - type: StoreAfterFailedInteract
   - type: ExplosionResistance
     damageCoefficient: 0
@@ -82,6 +84,8 @@
         - PillPacket
         - PillCanister
         - CMSurgicalCase
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -131,6 +135,8 @@
         - PillCanister
         - CMSurgicalCase
     - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -165,6 +171,8 @@
         - PillCanister
         - CMSurgicalCase
     - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -280,6 +288,8 @@
         tags:
         - CMFirstAidKit
         - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false

@@ -31,13 +31,42 @@
         RMCSkillSurgery: 1
         RMCSkillEndurance: 3
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-medic
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCMedic
+  name: weya pmc ghost role medic
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCMedic
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-medic
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCMedic
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCMedic
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
-    jumpsuit: RMCJumpsuitVeteranPMC
+    jumpsuit: RMCJumpsuitVeteranPMCMedic
     outerClothing: CMArmorM4PMCLight
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMC
@@ -49,8 +78,6 @@
     suitstorage: RMCWeaponSMGM63B2
     pocket1: RMCPouchMedkitPMCFilled
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
-  inhand:
-  - RMCWebbingPMCMedic
   storage:
     outerClothing:
     - CMMagazineSMGM63Ext
@@ -77,32 +104,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_md
-
-- type: entity
-  parent: MarkerBase
-  id: RMCRandomHumanoidPMCMedic
-  name: weya pmc ghost role medic
-  suffix: We-Ya PMC
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: RandomHumanoidSpawner
-    settings: RMCPMCMedic
-
-- type: randomHumanoidSettings
-  parent: RMCEventHumanoid
-  id: RMCPMCMedic
-  components:
-  - type: GhostRole
-    name: rmc-ghost-name-pmc-medic
-    description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
-    reregister: false
-    job: RMCPMCMedic
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa
