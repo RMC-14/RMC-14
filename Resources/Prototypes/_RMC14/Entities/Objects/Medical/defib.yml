@@ -105,6 +105,26 @@
   suffix: RMC14, Infinite
 
 - type: entity
+  id: RMCDefibrillatorCompact
+  parent: CMDefibrillator
+  name: compact defibrillator
+  description: This particular defibrillator has halved charge capacity compared to the standard emergency defibrillator, but can fit in your pocket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/compact_defib.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Medical/compact_defib.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
+  - type: Tag
+    tags:
+    - Pouch
+  - type: PowerCellDraw
+    useRate: 132
+
+- type: entity
   parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
   id: RMCSynthResetKey
   name: WeYa synthetic reset key
@@ -156,23 +176,3 @@
     size: Normal
     sprite: _RMC14/Objects/Devices/reset_key.rsi
     heldPrefix: null
-
-- type: entity
-  id: RMCDefibrillatorCompact
-  parent: CMDefibrillator
-  name: compact defibrillator
-  description: This particular defibrillator has halved charge capacity compared to the standard emergency defibrillator, but can fit in your pocket.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Medical/compact_defib.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Medical/compact_defib.rsi
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - pocket
-  - type: Tag
-    tags:
-    - Pouch
-  - type: PowerCellDraw
-    useRate: 132
