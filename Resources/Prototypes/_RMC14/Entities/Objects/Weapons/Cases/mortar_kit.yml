@@ -3,7 +3,6 @@
   id: RMCMortarEquipmentCase
   name: mortar kit
   description: Contains the equipment needed for the mortar.
-  suffix: DO NOT MAP YET
   components:
   - type: Sprite
     layers:
