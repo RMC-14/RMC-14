@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed glass shards preventing doors and resin doors from closing.
-    type: Fix
-  id: 1174
-  time: '2025-01-07T10:01:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5257
 - author: Vermidia
   changes:
   - message: Fixed welding tanks not filling welders
@@ -5520,5 +5513,14 @@
   id: 1676
   time: '2025-05-04T08:12:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6222
+- author: CyberTropic
+  changes:
+  - message: Added lightning effects when it rains.
+    type: Add
+  - message: Fixed rmclight command for ambient lighting changes.
+    type: Fix
+  id: 1677
+  time: '2025-05-04T08:30:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6337
 Name: RMC14
 Order: -1
