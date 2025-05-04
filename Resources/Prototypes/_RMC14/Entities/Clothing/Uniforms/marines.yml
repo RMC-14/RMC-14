@@ -225,6 +225,12 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
+- type: entity
+  parent: CMJumpsuitCOService
+  id: RMCJumsuitWhiteService
+  name: white service uniform
+  description: A white dress shirt and tie with sleek pants. Standard clothing for anyone on professional business.
+
 # Executive officer
 
 - type: entity

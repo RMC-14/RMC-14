@@ -565,12 +565,13 @@
   id: JobRMCSynthetic
   points: 7
   groups:
-  - MarineBackpack
-  - HeadwearRMC
-  - EyewearRMC
+  - SynthBackpackRMC
+  - SynthHeadwearRMC
+  - SynthGlassesRMC
   - MasksRMC
   - HelmetGarbsRMC
   - SynthUniformRMC
+  - SynthSuitsRMC
   - PaperworkRMC
   - PlushiesRMC
   - RMCLoadoutGroupPins
