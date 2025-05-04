@@ -4,11 +4,11 @@
   name: HEFA ID card
   components:
   - type: PresetIdCard
-    job: RMCHEFAShrapnelsworn
+    job: CMHEFAShrapnelsworn
 
 - type: entity
   parent: RMCIDCardHEFAShrapnelsworn
   id: RMCIDCardHEFAShrapnelswornMelee
   components:
   - type: PresetIdCard
-    job: RMCHEFAShrapnelswornMelee
+    job: CMHEFAShrapnelswornMelee
