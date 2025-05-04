@@ -58,9 +58,6 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa
 
 - type: startingGear
   id: RMCJobPMCStandardM63B2
@@ -132,9 +129,6 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa
 
 - type: startingGear
   id: RMCJobPMCStandardSSG45
@@ -204,9 +198,6 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa
 
 - type: startingGear
   id: RMCJobPMCStandardM54C2
