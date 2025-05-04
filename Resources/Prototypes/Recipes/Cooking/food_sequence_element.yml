@@ -91,6 +91,7 @@
   tags:
   - Cooked
   - Meat
+  - Bacon
 
 # Bear meat
 
@@ -841,6 +842,7 @@
     state: produce
   tags:
   - Vegetable
+  - Chili
 
 - type: foodSequenceElement
   id: ChiliPepperSkewer
@@ -850,6 +852,7 @@
     state: skewer-pepper
   tags:
   - Vegetable
+  - Chili
 
 # Chilly pepper
 
@@ -861,6 +864,7 @@
     state: produce
   tags:
   - Vegetable
+  - Chili
 
 - type: foodSequenceElement
   id: ChillyPepperSkewer
@@ -870,6 +874,7 @@
     state: skewer-bluepepper
   tags:
   - Vegetable
+  - Chili
 
 # Corn
 - type: foodSequenceElement
