@@ -1,7 +1,7 @@
 ﻿# HEFA Shrapnelsworn
 
 - type: job
-  parent: RMCHEFAShrapnelsworn
+  parent: CMHEFAShrapnelsworn
   id: CMHEFAShrapnelswornMelee
   name: rmc-job-name-hefa-shrapnelsworn
   playTimeTracker: CMJobHEFAShrapnelswornMelee
