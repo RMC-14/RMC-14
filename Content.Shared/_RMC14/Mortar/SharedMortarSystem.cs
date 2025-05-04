@@ -47,7 +47,7 @@ public abstract class SharedMortarSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -203,6 +203,7 @@ public abstract class SharedMortarSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnHandChange = true,
+            ForceVisible = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

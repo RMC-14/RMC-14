@@ -1,5 +1,6 @@
 - type: entity
   id: RMCDispenserBase
+  abstract: true
   placement:
     mode: SnapgridCenter
   components:
@@ -10,8 +11,8 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49, -0.49, 0.49, 0.49"
+          !type:PhysShapeCircle
+          radius: 0.40
         density: 190
         mask:
         - MachineMask
@@ -20,7 +21,6 @@
   - type: Clickable
   - type: InteractionOutline
   - type: RMCChemicalDispenser
-    network: RMCDispenserChem
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
@@ -73,7 +73,7 @@
           True: { visible: true }
           False: { visible: false }
   - type: RMCChemicalDispenser
-    network: RMCDispenserChem
+    network: RMCChemDispenserGround
   - type: Machine
     board: CMCircuitboardDispenserChem
   - type: RequiresSkill

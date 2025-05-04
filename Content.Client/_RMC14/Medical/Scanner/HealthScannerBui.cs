@@ -18,6 +18,7 @@ using Content.Shared.Temperature;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -50,6 +51,7 @@ public sealed class HealthScannerBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         if (State is HealthScannerBuiState state)
             UpdateState(state);
     }
@@ -64,8 +66,8 @@ public sealed class HealthScannerBui : BoundUserInterface
     {
         if (_window == null)
         {
-            _window = new HealthScannerWindow { Title = "Health Scan" };
-            _window.OnClose += Close;
+            _window = this.CreateWindow<HealthScannerWindow>();
+            _window.Title = "Health Scan";
         }
 
         if (_entities.GetEntity(uiState.Target) is not { Valid: true } target)
@@ -243,13 +245,5 @@ public sealed class HealthScannerBui : BoundUserInterface
 
         msg.Pop();
         label.SetMessage(msg);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
-            _window?.Dispose();
     }
 }

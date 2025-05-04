@@ -50,6 +50,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
     - type: Skills
       skills:
         RMCSkillFirearms: 0
@@ -58,6 +61,10 @@
       points: 50
     - type: JobPrefix
       prefix: cm-job-prefix-liaison
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: cl
 
 - type: startingGear
   id: CMGearLiaison

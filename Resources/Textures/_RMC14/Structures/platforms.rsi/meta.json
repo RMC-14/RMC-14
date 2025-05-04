@@ -123,6 +123,14 @@
       "directions": 4
     },
     {
+      "name": "stone_stair",
+      "directions": 4
+    },
+    {
+      "name": "stone_stair_alt",
+      "directions": 4
+    },
+    {
       "name": "sandstone",
       "directions": 4
     },
@@ -196,6 +204,70 @@
     },
     {
       "name": "engineer_platform_deco",
+      "directions": 4
+    },
+    {
+      "name": "platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "hunter_platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform3_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform2_broken",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform2_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisametal_broken",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform3_broken",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rockdark_broken",
+      "directions": 4
+    },
+    {
+      "name": "sandstone_broken",
+      "directions": 4
+    },
+    {
+      "name": "stone_broken",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rock_broken",
+      "directions": 4
+    },
+    {
+      "name": "strata_platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "shiva_broken",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform_broken",
       "directions": 4
     }
   ]

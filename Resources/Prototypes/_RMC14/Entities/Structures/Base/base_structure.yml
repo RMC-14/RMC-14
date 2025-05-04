@@ -36,6 +36,11 @@
       Brute:
         collection: XenoResinBreak
   - type: XenoConstruct
+  - type: RMCDeleteAnchoredOnInit
+    whitelist:
+      tags:
+      - XenoWeedTile
+      - XenoWeedNode
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: NpcFactionMember
@@ -97,6 +102,8 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#ebe5e5ee"
+  - type: IsRoof
+  - type: SunShadowCast
 
 - type: entity
   abstract: true
@@ -123,6 +130,7 @@
   - type: Corrodible
     isCorrodible: true
     structure: true
+    meltTimeMult: 3
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType

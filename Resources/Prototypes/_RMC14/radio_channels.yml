@@ -183,6 +183,15 @@
   tower: true
 
 - type: radioChannel
+  id: RoyalMarine
+  name: chat-radio-royal-marine
+  keycode: "q"
+  frequency: 1216
+  color: "#e3580e"
+  longRange: true
+  tower: true
+
+- type: radioChannel
   id: Hivemind
   name: chat-radio-hivemind
   keycode: "h"

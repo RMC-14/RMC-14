@@ -31,6 +31,10 @@
   - type: RMCRefinable
     spawn:
     - id: CMSheetMetal1
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
     #RMC TODO: Lattice
 
 - type: entity
@@ -81,6 +85,10 @@
     node: CMRodPlasteel
   - type: StackPrice
     price: 15
+  - type: RMCRefinable
+    amount: 2
+    spawn:
+    - id: CMSheetPlasteel1
 
 - type: entity
   parent: CMRodPlasteel

@@ -111,3 +111,6 @@
 
 - type: Tag
   id: RipOffOnInfection
+
+- type: Tag
+  id: RMCAirburstGrenade

@@ -46,6 +46,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-fireteam-leader
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: tl
 
 - type: startingGear
   id: CMGearFireteamLeader

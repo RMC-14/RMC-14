@@ -1,0 +1,170 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: MAR-50 light machine gun
+  id: RMCWeaponMar50LMG
+  description: A cheap, reliable LMG chambered in 7.62x39mm. Commonly found in the hands of slightly better funded criminals.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/mar50.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/mar50.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    shotsPerBurst: 5
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mar40.ogg
+      params:
+        volume: -0.2
+        pitch: 0.85
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 1
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 3.33
+    burstScatterMult: 3
+    modifiers:
+      Burst:
+        fireDelay: 0.1332
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.65
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineMar50LMG
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineMar50LMG
+          - RMCMagazineRifleMAR40
+          - RMCMagazineRifleMAR40Ext
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentBarrelMar50
+        locked: true
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelMar50
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.5, 0.00
+      rmc-aslot-rail: 0.1, 0.16
+      rmc-aslot-underbarrel: 0.3, -0.25
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Tag
+    tags:
+    - RMCWeaponMar50LMG
+  - type: GunRequiresWield
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineMar50LMG
+  name: MAR drum magazine (7.62x39mm)
+  description: A 7.62x39mm drum magazine for the MAR-50 LMG.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineMar50LMG
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle762x39mm
+    proto: RMCCartridgeRifle762x39mm
+    capacity: 100
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar50.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+#  - type: RefillableByBulletBox No Bullet Box yet
+#    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifle762x39mm
+  name: cartridge (7.62x39mm)
+  description: A 7.62x39mm cartridge. Fits in 7.62x39mm magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle762x39mm
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle762x39mm
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletRifle762x39mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 4
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 16
+      falloff: 10
+
+- type: Tag
+  id: RMCWeaponMar50LMG
+
+- type: Tag
+  id: RMCMagazineMar50LMG
+
+- type: Tag
+  id: RMCCartridgeRifle762x39mm
+

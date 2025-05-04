@@ -5,6 +5,7 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoBoiler
   name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
@@ -69,7 +70,7 @@
     plasmaRegenOnWeeds: 7
   - type: XenoAcid
   - type: CMArmor
-    armor: 20
+    xenoArmor: 20
     explosionArmor: 20
   - type: XenoDevour
   - type: XenoZoom

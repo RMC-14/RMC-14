@@ -46,7 +46,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -620,6 +620,12 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
                     if (step.CheckProtectionPer && !_area.CanOrbitalBombard(coordinates, out _))
                         continue;
+
+                    if (step.ExplosionEffect != null)
+                    {
+                        var effect = Spawn(step.ExplosionEffect.Value, mapCoordinates);
+                        _rmcExplosion.TryDoEffect(effect);
+                    }
 
                     if (step.Type is { } type)
                         _rmcExplosion.QueueExplosion(mapCoordinates, type, step.Total, step.Slope, step.Max, uid, canCreateVacuum: false);

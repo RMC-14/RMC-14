@@ -18,7 +18,7 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] protected readonly MobStateSystem _mobState = default!;
-    [Dependency] protected readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] protected readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;

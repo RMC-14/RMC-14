@@ -14,6 +14,21 @@
       drink:
         maxVol: 100
   - type: CraftsIntoMolotov
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    maxTransferAmount: 5
+  - type: MixableSolution
+    solution: drink
+  - type: Spillable
+    solution: drink
+  - type: FitsInDispenser
+    solution: drink
+  - type: DrawableSolution
+    solution: drink
+  - type: RefillableSolution
+    solution: drink
+  - type: DrainableSolution
+    solution: drink
 
 - type: entity
   parent: RMCDrinkAlcoholBase

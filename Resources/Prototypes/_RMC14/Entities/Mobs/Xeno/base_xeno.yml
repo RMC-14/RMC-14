@@ -95,6 +95,7 @@
   - type: Examiner
   - type: Eye
   - type: ContentEye
+  - type: CameraRecoil
   - type: MindContainer
     showExamineInfo: true
   - type: StatusIcon
@@ -120,6 +121,49 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+      enum.TargetedVisuals.TargetedDirection:
+        targetedDirection:
+          True: { visible: true}
+          False: { visible: false}
+      enum.TargetedVisuals.TargetedDirectionIntense:
+        targetedDirectionIntense:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FocusedVisuals.Focused:
+        focused:
+          True: { visible: true}
+          False: { visible: false}
+  - type: Spottable
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -138,10 +182,11 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 185
+        density: 0
         layer:
         - BulletImpassable
   - type: Xeno
+  - type: XenoRegen
   - type: UserInterface
     interfaces:
       enum.XenoEvolutionUIKey.Key:
@@ -205,6 +250,7 @@
     - SlowedDown
     - Muted
     - Dazed
+    - Blinded
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
@@ -292,12 +338,28 @@
   - type: BlockIdExamine
   - type: NoStunOnExit
   - type: RMCSpeciesSlowdownModifier
-    slowMultiplier: 0.87
-    superSlowMultiplier: 0.75
+    slowModifier: 0.75
+    superSlowModifier: 1.5
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor
   - type: CriticalGraceTime
+  - type: RMCObstacleSlamming
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      tags:
+      - CMRollerBed
+  - type: RMCBuckleDrawDepth
+    buckleDepth: Mobs
+  - type: RMCBuckleOffset
+    offset: 0, 0.5
+  - type: RMCArmorModifier
+  - type: RMCObstacleSlamCauserImmune
+  - type: RMCMobCollisionMass
+  - type: XenoRankNames
 
 - type: entity
   abstract: true
@@ -326,13 +388,18 @@
     autoAttack: true
     widePrimary: true
     altDisarm: true
-    angle: 60
+    angle: 0
     soundHit:
       collection: RCMXenoClaw
     animation: RMCWeaponArcXenoClaw
     damage:
       groups:
         Brute: 12
+    soundSwing:
+      path: /Audio/_RMC14/Weapons/alien_claw_swipe.ogg
+      params:
+        variation: 0.1
+        volume: -5
   - type: Tackle
   - type: XenoClaws
 
@@ -383,18 +450,8 @@
       - XenoFruit
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
+    stacks: -5
   - type: RMCHandEmotes
-  - type: Buckle
-    buckleDelay: 0
-    clickUnbuckle: false
-  - type: BuckleWhitelist
-    whitelist:
-      tags:
-      - CMRollerBed
-  - type: RMCBuckleDrawDepth
-    buckleDepth: Mobs
-  - type: RMCBuckleOffset
-    offset: 0, 0.5
 
 - type: entity
   abstract: true
@@ -404,6 +461,7 @@
     tailDamage:
       groups:
         Brute: 30
+    tailRange: 2.5
 
 - type: entity
   abstract: true
@@ -428,6 +486,14 @@
   components:
   - type: Speech
     speechSounds: Xenonid
+
+- type: entity
+  abstract: true
+  id: RMCXenoMobCollision
+  components:
+  - type: MobCollision
+    minimumSpeedModifier: 0.25
+  - type: RMCMobCollision
 
 - type: speechVerb
   id: Xeno

@@ -25,7 +25,6 @@
   id: CMM54CShoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m54c_1.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m54c_2.ogg
 
 - type: soundCollection
   id: CMSilencedShoot
@@ -52,3 +51,9 @@
   - /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower1.ogg
   - /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
   - /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower3.ogg
+
+- type: soundCollection
+  id: RMCSSG45Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_2.ogg

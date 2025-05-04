@@ -33,6 +33,8 @@
         amount: 50
       - id: CMWeaponPistolM1984
         amount: 50
+      - id: RMCWeaponPistolM13
+        amount: 50
       #- id: CMWeaponFlareM82F
       #  amount: 20
     - name: Restricted Firearms
@@ -278,6 +280,36 @@
         box: CMGrenadeSmoke
         boxAmount: 3
         boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMFFilled
+        name: M74AGM-F grenade packet
+        box: RMC40MMGrenadeM74AGMF
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMIFilled
+        name: M74AGM-I grenade packet
+        box: RMC40MMGrenadeM74AGMI
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSFilled
+        name: M74AGM-S grenade packet
+        box: RMC40MMGrenadeM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSStarShellFilled
+        name: M74AGM-S Starshell grenade packet
+        box: RMCStarShellM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        name: M74AGM-S Hornet grenade packet
+        box: RMCHornetShellM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeBatonSlugHIRRFilled
+        name: HIRR Baton Slug packet
+        box: RMCBatonSlugHIRR
+        boxAmount: 3
+        boxSlots: 3
 
 #AMMUNITION VENDOR
 
@@ -314,6 +346,8 @@
         amount: 80
       - id: CMMagazinePistolM1984
         amount: 100
+      - id: RMCMagazinePistolM13
+        amount: 100
     - name: Armor-piercing ammunition
       entries:
       - id: CMMagazinePistolM77AP
@@ -331,6 +365,10 @@
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
+        amount: 8
+      - id: RMCMagazinePistolM13Ext
+        amount: 10
+      - id: RMCMagazinePistolM13Drum
         amount: 8
     - name: Special ammunition
       entries:
@@ -371,12 +409,15 @@
     - name: Magazine Boxes
       hasBoxes: true
       entries:
-#      - name: Magazine Box (M10 x 22)
-#        box: RMCMagazine10
-#      - name: Magazine Box (Ext M10 x 14)
-#        box: RMCMagazineExtended10
-#      - name: Magazine Box (Drum M10 x 12)
-#        box: RMCMagazineDrum10
+      - id: RMCBoxMagazinePistolM13
+        name: Magazine Box (M13 x 22)
+        box: RMCMagazinePistolM13
+      - id: RMCBoxMagazinePistolM13Ext
+        name: Magazine Box (Ext M13 x 14)
+        box: RMCMagazinePistolM13Ext
+      - id: RMCBoxMagazinePistolM13Drum
+        name: Magazine Box (Drum M13 x 12)
+        box: RMCMagazinePistolM13Drum
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -461,7 +502,33 @@
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (UT-Napthal Fuel x 8)
 #        box: CMMagazineSMGM63
-
+    - name: Ammunition Boxes
+      hasBoxes: true
+      entries:
+      - id: RMCBoxBulletsSMG
+        name: SMG HV ammunition box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsSMGAP
+        name: SMG ammunition box (10x20mm AP) (M63)
+        box: CMMagazineSMGM63AP
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifleAP
+        name: rifle ammunition box (10x24mm AP) (M4SPR)
+        box: CMMagazineRifleM4SPRAP
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+      - id: RMCBoxBulletsRifleAP
+        name: rifle ammunition box (10x24mm AP) (M54C)
+        box: CMMagazineRifleM54CAP
+        boxSlots: 15 # 600 / 40
  #ATTACHMENTS VENDOR
 
 - type: entity
@@ -551,6 +618,7 @@
   id: ColMarTechCargoUniform
   name: ColMarTech surplus uniform vendor
   description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
+  suffix: Requisitions
   components:
   - type: AccessReader
     access:

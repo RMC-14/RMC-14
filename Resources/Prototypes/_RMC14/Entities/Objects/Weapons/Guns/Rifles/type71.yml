@@ -1,0 +1,331 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: Type 71 assault rifle
+  id: RMCWeaponRifleType71
+  description: The primary service rifle of the SPP space forces, the Type 71 is an ergonomic, lightweight assault rifle chambered in 5.45x39mm. In accordance with doctrinal principles of overmatch and suppression, the rifle has a high rate of fire and a high-capacity casket magazine. Despite lackluster precision, an integrated recoil-dampening mechanism makes the rifle surprisingly controllable in bursts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    shotsPerBurst: 4
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: CMM54CShoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 3
+    scatterWielded: 10
+    scatterUnwielded: 14
+    baseFireRate: 2.5
+    burstScatterMult: 1
+    modifiers:
+      Burst:
+        fireDelay: 0.2331
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.65
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleType71
+          - RMCMagazineRifleType71AP
+          - RMCMagazineRifleType71HEAP
+        startingItem: RMCMagazineRifleType71AP
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentType71Stock
+        whitelist:
+          tags:
+          - RMCAttachmentType71Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentBurstFireAssembly
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.8, 0.00
+      rmc-aslot-rail: -0.06, 0.185
+      rmc-aslot-stock: -0.62, -0.03
+      rmc-aslot-underbarrel: 0.4, -0.28
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Tag
+    tags:
+    - RMCWeaponRifleType71
+
+- type: entity
+  parent: RMCWeaponRifleType71
+  name: Type 71-F assault rifle
+  id: RMCWeaponRifleType71Flamer
+  description: This appears to be a less common variant of the Type 71 with an integrated flamethrower that seems especially powerful.
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentType71Stock
+        whitelist:
+          tags:
+          - RMCAttachmentType71Stock
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentMiniFlamethrower
+        whitelist:
+          tags:
+          - RMCAttachmentFlamer
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleType71
+  name: "Type 71 magazine (5.45x39mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleType71
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle545x39mm
+    proto: RMCCartridgeRifle545x39mm
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type71.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+#  - type: RefillableByBulletBox no bullet box yet
+#    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCMagazineRifleType71
+  id: RMCMagazineRifleType71AP
+  name: "Type 71 AP magazine (5.45x39mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleType71AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle545x39mmAP
+    proto: RMCCartridgeRifle545x39mmAP
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type71.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+#  - type: RefillableByBulletBox no bullet box yet
+#    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCMagazineRifleType71
+  id: RMCMagazineRifleType71HEAP
+  name: "Type 71 HEAP magazine (5.45x39mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleType71HEAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle545x39mmHEAP
+    proto: RMCCartridgeRifle545x39mmHEAP
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type71.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#9C9A19"
+#  - type: RefillableByBulletBox no bullet box yet
+#    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifle545x39mm
+  name: cartridge (5.45x39mm)
+  description: A 5.45x39mm cartridge. Fits in 5.45x39mm magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle545x39mm
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle545x39mm
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifle545x39mmAP
+  name: cartridge (5.45x39mm)
+  description: A 5.45x39mm cartridge. Fits in 5.45x39mm magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle545x39mmAP
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle545x39mmAP
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifle545x39mmHEAP
+  name: cartridge (5.45x39mm)
+  description: A 5.45x39mm HEAP cartridge. Fits in 5.45x39mm magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle545x39mmHEAP
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle545x39mmHEAP
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletRifle545x39mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 4
+  - type: CMArmorPiercing
+    amount: 15
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 16
+      falloff: 10
+
+- type: entity
+  parent: RMCBulletRifle545x39mm
+  id: RMCBulletRifle545x39mmAP
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 50
+
+- type: entity
+  parent: RMCBulletRifle545x39mm
+  id: RMCBulletRifle545x39mmHEAP
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 65
+  - type: CMArmorPiercing
+    amount: 50
+
+- type: Tag
+  id: RMCWeaponRifleType71
+
+- type: Tag
+  id: RMCMagazineRifleType71
+
+- type: Tag
+  id: RMCMagazineRifleType71AP
+
+- type: Tag
+  id: RMCMagazineRifleType71HEAP
+
+- type: Tag
+  id: RMCCartridgeRifle545x39mm
+
+- type: Tag
+  id: RMCCartridgeRifle545x39mmAP
+
+- type: Tag
+  id: RMCCartridgeRifle545x39mmHEAP
