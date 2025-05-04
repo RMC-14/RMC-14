@@ -120,7 +120,6 @@
         - RMCAttachmentUnderbarrelExtinguisher
         - RMCAttachmentU7UnderbarrelShotgun
         - RMCAttachmentLaserSight
-        - RMCAttachmentM203GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, -0.03

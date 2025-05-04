@@ -7,6 +7,7 @@
   ranks:
     RMCRankMasterSergeant: [ ]
   startingGear: RMCGearSynthetic
+  dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   requireAdminNotify: true
   joinNotifyCrew: true
@@ -14,6 +15,7 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ShipMasterAccess
+  - Synth
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: synth
@@ -44,6 +46,8 @@
         RMCSkillIntel: 2
         RMCSkillDomestics: 2
         RMCSkillNavigations: 1
+    - type: CMVendorUser
+      points: 45
     - type: MarineOrders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
@@ -60,6 +64,11 @@
 
 - type: startingGear
   id: RMCGearSynthetic
+  equipment:
+    id: RMCIDCardSynth
+
+- type: startingGear
+  id: RMCGearSyntheticEquipped
   equipment:
     jumpsuit: RMCJumpsuitSynthetic
     gloves: CMHandsInsulated
