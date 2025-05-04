@@ -196,6 +196,10 @@
     background:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
     radio: Colony
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -274,6 +278,6 @@
   - type: Tag
     tags:
     - RMCSquadFORECON
-    
+
 - type: Tag
   id: RMCSquadFORECON
