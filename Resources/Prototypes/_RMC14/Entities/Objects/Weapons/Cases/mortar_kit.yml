@@ -51,19 +51,3 @@
       amount: 1
     - id: RMCLaserDesignator
       amount: 1
-
-
-- type: entity
-  parent: BaseItem
-  id: RMCMortarKitPackage
-  name: mortar kit package
-  description: Holds a mortar kit which contains everything you need for a mortar.
-  components:
-  - type: Item
-    size: Huge
-  - type: Sprite
-    sprite: _RMC14/Objects/cargo_package.rsi
-    state: icon
-  - type: SpawnItemsOnUse
-    items:
-    - id: RMCMortarEquipmentCase
