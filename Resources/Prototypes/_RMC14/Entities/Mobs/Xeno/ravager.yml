@@ -5,6 +5,7 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoRavager
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
@@ -37,6 +38,7 @@
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
+  - type: XenoRegen
     standHealingMultiplier: 0.66
   - type: XenoHeavy
   - type: XenoDevolve

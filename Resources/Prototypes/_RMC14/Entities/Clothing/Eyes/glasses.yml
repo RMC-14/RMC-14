@@ -96,6 +96,43 @@
           False: { state: icon }
 
 - type: entity
+  parent: ClothingEyesHudMedical
+  id: RMCGlassesExperimentalMeson
+  name: experimental meson goggles # TODO RMC14 meson tile vision see description below
+  description: An improved but experimental version of the standard issue meson goggles, due to increased complexity these can only be worn by synthetics. Allows for full night vision. # TODO RMC14 and viewing of the surroundings. Click it to toggle.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/experimental_meson_hud.rsi
+    layers:
+    - state: icon
+      map: [ "icon" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/experimental_meson_hud.rsi
+  - type: ItemToggle
+    activated: true
+    soundActivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+    soundDeactivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+  - type: ComponentToggler
+    components:
+    - type: NightVisionItem
+  - type: Appearance
+  - type: RMCItemToggleClothingVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+
+- type: entity
   parent: [ClothingEyesHudMedical, BaseToggleClothing]
   id: RMCGlassesMedicalHUDGlasses
   name: HealthMate HUD

@@ -315,7 +315,7 @@
     back: CMBackpackMarine
     gloves: RMCHandsVeteran
     shoes: RMCBootsCorporate
-    id: RMCIDCardPMCColony
+    id: RMCIDCardPMC
     ears: CMHeadsetColony
     pocket1: RMCPouchFirstAidInjectors
   storage:

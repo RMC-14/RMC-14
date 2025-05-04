@@ -222,3 +222,11 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  parent: RMCPlankWood
+  id: RMCPlankWood2
+  suffix: Single
+  components:
+  - type: Stack
+    count: 2

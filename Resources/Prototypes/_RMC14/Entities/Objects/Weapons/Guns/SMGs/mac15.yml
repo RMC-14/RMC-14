@@ -32,7 +32,7 @@
         maxScatterModifier: 16
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 70 
+        shotsToMaxScatter: 70
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 1
@@ -75,7 +75,6 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
-          - RMCAttachmentBipod
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.84, 0

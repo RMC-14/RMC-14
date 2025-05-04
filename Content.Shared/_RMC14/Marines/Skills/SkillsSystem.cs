@@ -391,11 +391,11 @@ public sealed class SkillsSystem : EntitySystem
                 ent.Comp.Skills.TryGetValue(requiredSkill, out var level) &&
                 level >= requiredLevel)
             {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public bool HasAnySkills(Entity<SkillsComponent?> ent, List<Skill> anyRequired)

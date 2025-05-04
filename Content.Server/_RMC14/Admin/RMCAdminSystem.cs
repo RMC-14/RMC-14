@@ -1,5 +1,6 @@
 ﻿using Content.Server._RMC14.TacticalMap;
 using Content.Server.Administration.Logs;
+using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
@@ -27,6 +28,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
 {
     [Dependency] private readonly AdminSystem _admin = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly EuiManager _eui = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
@@ -66,8 +68,11 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
 
     private void OnSpawnAsJobDialog(SpawnAsJobDialogEvent ev)
     {
-        if (GetEntity(ev.User) is not { Valid: true } user)
+        if (GetEntity(ev.User) is not { Valid: true } user ||
+            !_adminManager.IsAdmin(user))
+        {
             return;
+        }
 
         if (GetEntity(ev.Target) is not { Valid: true } target ||
             !TryComp(target, out ActorComponent? actor) ||

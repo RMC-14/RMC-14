@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostDeputyMarshal
-  name: rmc-job-name-provost-deputy-marshal
+  name: CMProvostDeputyMarshal
   description: rmc-job-description-provost-deputy-marshal
   playTimeTracker: CMJobProvostDeputyMarshal
   ranks:
@@ -44,19 +44,6 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostDeputyMarshal
-  name: provost spawner deputy marshal
-  suffix: Spawner, Whitelisted COs
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostDeputyMarshal
-
-- type: entity
   id: RMCRandomHumanoidProvostDeputyMarshal
   name: provost ghost role deputy marshal
   suffix: Role, Whitelisted COs
@@ -68,42 +55,11 @@
     settings: RMCProvostDeputyMarshal
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCSettingsGhostRole
   id: RMCProvostDeputyMarshal
   components:
-  - type: GhostRole
-    name: rmc-ghost-role-information-provost-deputy-marshal-name
-    description: rmc-ghost-role-information-provost-deputy-marshal-description
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostDeputyMarshal ]
-  - type: Skills
-    skills:
-      RMCSkillConstruction: 2
-      RMCSkillCqc: 1
-      RMCSkillEndurance: 5
-      RMCSkillEngineer: 2
-      RMCSkillExecution: 1
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillIntel: 2
-      RMCSkillJtac: 4
-      RMCSkillLeadership: 3
-      RMCSkillMedical: 3
-      RMCSkillMeleeWeapons: 1
-      RMCSkillOverwatch: 1
-      RMCSkillPolice: 2
-      RMCSkillPowerLoader: 2
-      RMCSkillSmartGun: 1
-      RMCSkillVehicles: 2
-  - type: MarineOrders
-  - type: DemoSpecWhitelist
-  - type: GrenadeSpecWhitelist
-  - type: ScoutWhitelist
-  - type: SniperWhitelist
-  - type: PyroWhitelist
+  - type: RMCJobSpawner
+    job: CMProvostDeputyMarshal
 
 - type: startingGear
   id: RMCGearProvostDeputyMarshal

@@ -6,6 +6,7 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoPraetorianBase
   name: Praetorian
   description: A huge, looming beast of an alien.
@@ -210,6 +211,7 @@
     - type: RMCSlowdown
     - type: RMCSuperSlowdown
     - type: RMCRooted
+    - type: RMCDazed
   - type: XenoHighGallop
 
 - type: entity

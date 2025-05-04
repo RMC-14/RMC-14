@@ -6,8 +6,8 @@
   playTimeTracker: CMJobPilotGunship
   requirements:
   - !type:TotalJobsTimeRequirement
-    group: CMJobsDropship
-    time: 7200 # 2 hours
+    group: CMJobsDropshipPilot
+    time: 18000 # 5 hours
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearPilotGunship
