@@ -58,7 +58,11 @@
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: CMVendorUser
-      points: 50
+      points: 40
+    - type: RMCVendorUserRecharge
+      maxPoints: 50
+      pointsPerUpdate: 1
+      timePerUpdate: 40 # 1 / (0.05 / 2)
     - type: JobPrefix
       prefix: cm-job-prefix-liaison
     - type: TacticalMapIcon

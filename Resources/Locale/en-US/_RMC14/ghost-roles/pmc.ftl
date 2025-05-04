@@ -30,3 +30,9 @@ rmc-ghost-name-pmc-leader = Weston-Yamada PMC (Leader)
 rmc-ghost-name-pmc-lead-investigator = Weston-Yamada PMC (Lead Investigator)
 rmc-ghost-name-pmc-director = Weston-Yamada PMC (Site Director)
 rmc-ghost-name-pmc-synth = Weston-Yamada PMC (Support Synthetic)
+
+rmc-job-name-pmc-bodyguard = Bodyguard
+rmc-ghost-name-pmc-bodyguard = Weston-Yamada Goon (Executive Bodyguard Detail)
+
+rmc-job-name-pmc-bodyguard-lead = Security Lead
+rmc-ghost-name-pmc-bodyguard-lead = Weston-Yamada Goon Leader (Executive Bodyguard Detail)
