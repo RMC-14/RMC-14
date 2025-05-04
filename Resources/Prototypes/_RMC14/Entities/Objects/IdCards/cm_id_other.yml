@@ -188,7 +188,7 @@
     job: RMCJobSynthetic
 
 - type: entity
-  parent: RMCIDCardSynth
+  parent: CMIDCardLanyard
   id: RMCIDCardSynthColony
   name: synth ID card
   suffix: Survivor
