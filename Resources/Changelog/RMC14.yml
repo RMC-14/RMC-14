@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed welding tanks not filling welders
-    type: Fix
-  - message: Fixed welding tanks not exploding
-    type: Fix
-  id: 1175
-  time: '2025-01-07T10:03:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5262
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the radio telephone backpack phone on sprite appearing incorrectly.
@@ -5522,5 +5513,12 @@
   id: 1677
   time: '2025-05-04T08:30:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6337
+- author: noctyrnal
+  changes:
+  - message: Added Long Messy, Pulato Long, Pulato Long 2 and Ponytail 9 hairs.
+    type: Add
+  id: 1678
+  time: '2025-05-04T08:31:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6332
 Name: RMC14
 Order: -1
