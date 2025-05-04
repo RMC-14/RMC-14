@@ -117,6 +117,7 @@
   id: RMCPlushieAlec
   name: conspicuous plush
   description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hyper allergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: alec_plushie
@@ -132,6 +133,7 @@
   id: RMCPlushieNyx
   name: accursed plush
   description: It's rumoured if you ask this plushie for metal, your soul gets trapped in the pit. It's also rumoured that this plushie was made with 99% cotton.
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: plushie_moth
@@ -160,6 +162,7 @@
   id: RMCPlushieXippy
   name: xippy
   description: An accursed agent of chaos and violence.
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: xippy
