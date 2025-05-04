@@ -200,3 +200,37 @@
   components:
   - type: Sprite
     state: gnarp_alt
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieProvost
+  name: intimidating plush
+  description: An icon for all avid tax payers and law enforcement personnel - Don't let anyone know that this plushie is actually behind on their taxes.
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    state: provost
+  - type: StunOnHit
+    whitelist:
+      components:
+      - Marine
+  - type: StaminaDamageOnHit
+    damage: 100
+  - type: MeleeRequiresSkill
+    skills:
+      RMCSkillPolice: 1
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/weh.ogg
