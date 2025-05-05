@@ -109,6 +109,14 @@
       collection: XenoFootstepLarge
       params:
         volume: -6
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_RMC14/Xeno/alien_queen_died.ogg
+      params:
+        volume: -6
+  - type: XenoAnnounceDeath
+    message: cm-xeno-death-king
+    color: "#921992"
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
