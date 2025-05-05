@@ -7,14 +7,6 @@
             <Label Text="{Loc 'cm-ui-rmc14'}"
                    FontColorOverride="{x:Static s:StyleNano.NanoGold}"
                    StyleClasses="LabelKeyText"/>
-            <CheckBox Name="CMVoicelinesArachnid" Text="{Loc 'cm-ui-audio-voicelines-arachnid'}" Margin="0 0 0 5" />
-            <CheckBox Name="CMVoicelinesDiona" Text="{Loc 'cm-ui-audio-voicelines-diona'}" Margin="0 0 0 5" />
-            <CheckBox Name="CMVoicelinesDwarf" Text="{Loc 'cm-ui-audio-voicelines-dwarf'}" Margin="0 0 0 5" />
-            <CheckBox Name="CMVoicelinesFelinid" Text="{Loc 'cm-ui-audio-voicelines-felinid'}" Margin="0 0 0 5" />
-            <CheckBox Name="CMVoicelinesHuman" Text="{Loc 'cm-ui-audio-voicelines-human'}" Margin="0 0 0 5" />
-            <CheckBox Name="CMVoicelinesMoth" Text="{Loc 'cm-ui-audio-voicelines-moth'}" Margin="0 0 0 5" />
-            <CheckBox Name="CMVoicelinesReptilian" Text="{Loc 'cm-ui-audio-voicelines-reptilian'}" Margin="0 0 0 5" />
-            <CheckBox Name="CMVoicelinesSlime" Text="{Loc 'cm-ui-audio-voicelines-slime'}" Margin="0 0 0 5" />
             <Label Text="{Loc 'ui-options-volume-label'}"
                    StyleClasses="LabelKeyText"/>
             <BoxContainer Orientation="Vertical" Margin="0 3 0 0">
