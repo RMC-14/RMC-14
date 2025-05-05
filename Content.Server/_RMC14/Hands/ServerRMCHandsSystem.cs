@@ -8,8 +8,8 @@ public sealed class ServerRMCHandsSystem : RMCHandsSystem
 {
     [Dependency] private readonly HandsSystem _hands = default!;
 
-    public override bool ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f)
+    public override void ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f)
     {
-        return _hands.ThrowHeldItem(player, coordinates, minDistance);
+        _hands.ThrowHeldItem(player, coordinates, minDistance);
     }
 }

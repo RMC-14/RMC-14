@@ -246,5 +246,5 @@ public abstract class RMCHandsSystem : EntitySystem
         return true;
     }
 
-    public virtual bool ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f) { }
+    public virtual void ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f) { }
 }
