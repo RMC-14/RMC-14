@@ -3,75 +3,63 @@
 # UNMC Jumpsuits
 - type: loadout
   id: ScrubsBlueRMC
-  storage:
-    back:
-    - CMScrubsBlue
+  equipment:
+    jumpsuit: CMScrubsBlue
 
 - type: loadout
   id: ScrubsLightBlueRMC
-  storage:
-    back:
-    - RMCScrubsLightBlue
+  equipment:
+    jumpsuit: RMCScrubsLightBlue
 
 - type: loadout
   id: ScrubsGreenRMC
-  storage:
-    back:
-    - CMScrubsGreen
+  equipment:
+    jumpsuit: CMScrubsGreen
 
 - type: loadout
   id: ScrubsPurpleRMC
-  storage:
-    back:
-    - CMScrubsPurple
+  equipment:
+    jumpsuit: CMScrubsPurple
 
 - type: loadout
   id: ScrubsOliveRMC
-  storage:
-    back:
-    - RMCScrubsOlive
+  equipment:
+    jumpsuit: RMCScrubsOlive
 
 - type: loadout
   id: ScrubsGreyRMC
-  storage:
-    back:
-    - RMCScrubsGrey
+  equipment:
+    jumpsuit: RMCScrubsGrey
 
 - type: loadout
   id: ServiceUniformRMC
-  storage:
-    back:
-    - CMJumpsuitBO
+  equipment:
+    jumpsuit: CMJumpsuitBO
 
 - type: loadout
   id: ServiceUniformXORMC
-  storage:
-    back:
-    - CMJumpsuitXOFormal
+  equipment:
+    jumpsuit: CMJumpsuitXOFormal
 
 - type: loadout
   id: ComTechUniformRMC
-  storage:
-    back:
-    - CMJumpsuitMarineEngineer
+  equipment:
+    jumpsuit: CMJumpsuitMarineEngineer
 
 - type: loadout
   id: EngineerUniformRMC
-  storage:
-    back:
-    - CMJumpsuitMaintTech
+  equipment:
+    jumpsuit: CMJumpsuitMaintTech
 
 - type: loadout
   id: MPUniformRMC
-  storage:
-    back:
-    - CMJumpsuitMP
+  equipment:
+    jumpsuit: CMJumpsuitMP
 
 - type: loadout
   id: DCCJumpsuitRMC
-  storage:
-    back:
-    - CMJumpsuitDCC
+  equipment:
+    jumpsuit: CMJumpsuitDCC
 
 # Civilian Jumpsuits
 - type: loadout

@@ -96,7 +96,7 @@
           False: { state: icon }
 
 - type: entity
-  parent: ClothingEyesHudMedical
+  parent: ClothingEyesBase
   id: RMCGlassesExperimentalMeson
   name: experimental meson goggles # TODO RMC14 meson tile vision see description below
   description: An improved but experimental version of the standard issue meson goggles, due to increased complexity these can only be worn by synthetics. Allows for full night vision. # TODO RMC14 and viewing of the surroundings. Click it to toggle.

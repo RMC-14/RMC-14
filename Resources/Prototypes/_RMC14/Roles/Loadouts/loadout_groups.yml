@@ -328,8 +328,7 @@
 - type: loadoutGroup
   id: SynthUniformRMC
   name: rmc-loadout-group-synthetic-uniform
-  minLimit: 0
-  maxLimit: 1
+  minLimit: 1
   loadouts:
   - ScrubsBlueRMC
   - ScrubsLightBlueRMC
