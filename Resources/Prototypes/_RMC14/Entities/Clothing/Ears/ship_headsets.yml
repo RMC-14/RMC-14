@@ -356,6 +356,12 @@
     radioTextIncrease: 3
 
 - type: entity
+  parent: CMHeadsetHighCommand
+  id: RMCHeadsetHighCommandProvostLead
+  components:
+  - type: GrantSquadLeaderTracker
+
+- type: entity
   parent: CMHeadsetSeniorCommand
   id: RMCHeadsetSEA
   name: marine senior enlisted advisor headset
@@ -388,3 +394,10 @@
       - RMCEncryptionKeyMarineCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
+    
+# Prisoner headset
+- type: entity
+  parent: RMCHeadsetShip
+  id: RMCHeadsetPrisoner
+  name: prisoner headset
+  description: Headset provided to prisoners as directed by marine law.

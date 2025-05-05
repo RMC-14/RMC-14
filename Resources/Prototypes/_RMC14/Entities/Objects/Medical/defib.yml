@@ -99,3 +99,23 @@
   parent: CMBaseDefibrillator
   id: CMDefibrillatorInfinite
   suffix: RMC14, Infinite
+
+- type: entity
+  id: RMCDefibrillatorCompact
+  parent: CMDefibrillator
+  name: compact defibrillator
+  description: This particular defibrillator has halved charge capacity compared to the standard emergency defibrillator, but can fit in your pocket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/compact_defib.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Medical/compact_defib.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
+  - type: Tag
+    tags:
+    - Pouch
+  - type: PowerCellDraw
+    useRate: 132

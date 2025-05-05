@@ -83,9 +83,7 @@
   name: executive corporate specialist ID card
   components:
   - type: PresetIdCard
-    job: null
-  - type: IdCard
-    jobTitle: rmc-job-title-corporate-executive-specialist
+    job: CMCorporateExecutiveSpecialist
 
 - type: entity
   parent: CMIDCardLiaison
@@ -93,9 +91,7 @@
   name: executive corporate supervisor ID card
   components:
   - type: PresetIdCard
-    job: null
-  - type: IdCard
-    jobTitle: rmc-job-title-corporate-executive-supervisor
+    job: CMCorporateExecutiveSupervisor
 
 - type: entity
   parent: CMIDCardLiaison
@@ -103,9 +99,7 @@
   name: interstellar commerce bureau liaison ID card
   components:
   - type: PresetIdCard
-    job: null
-  - type: IdCard
-    jobTitle: rmc-job-title-interstellar-commerce-bureau-liaison
+    job: CMICBLiaison
 
 - type: entity
   parent: CMIDCardBase
@@ -134,12 +128,18 @@
   id: RMCIDCardMarshal
   name: bureau marshal gold badge
   description: A coveted gold badge signifying that the wearer is one of the few CMB Marshals patroling the outer rim. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: PresetIdCard
+    job: CMBureauMarshal
 
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardDeputy
   name: bureau deputy silver badge
   description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: PresetIdCard
+    job: CMBureauDeputy
 
 - type: entity
   parent: CMIDCardSilver
@@ -166,18 +166,86 @@
 - type: entity
   parent: CMIDCardLanyard
   id: RMCIDCardBureauObserver
-  name: ID card
+  name: bureau observer ID card
   components:
-  - type: IdCard
-    jobTitle: rmc-job-title-bureau-observer
+  - type: PresetIdCard
+    job: CMBureauObserver
 
 - type: entity
   parent: CMIDCardBase
   id: RMCIDCardFreelancer
-  name: ID card
+  name: freelancer ID card
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardProvost
+  abstract: true
+  name: provost ID card
+  description: Issued to members of the Provost Office.
   components:
-  - type: IdCard
-    jobTitle: rmc-job-title-freelancer
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostAdvisor
+  name: provost advisor ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostAdvisor
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostEnforcer
+  name: provost enforcer ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostEnforcer
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostTeamLeader
+  name: provost team leader ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostTeamLeader
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostChiefInspector
+  name: provost chief inspector ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostChiefInspector
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostDeputyMarshal
+  name: provost deputy marshal ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostDeputyMarshal
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostInspector
+  name: provost inspector ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostInspector
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostMarshal
+  name: provost marshal ID card
+  components:
+  - type: PresetIdCard
+    job: CMProvostMarshal
 
 - type: entity
   parent: CMIDCardGold
