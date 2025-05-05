@@ -249,7 +249,7 @@ public sealed class TackleSystem : EntitySystem
         _colorFlash.RaiseEffect(Color.Aqua, new List<EntityUid> { target }, Filter.PvsExcept(user));
     }
 
-    public void DoPvsPopups(EntityUid user, EntityUid target, string selfPopup, string othersPopup, string targetPopup, PopupType selfPopupType = PopupType.SmallCaution)
+    public void DoPvsPopups(EntityUid user, EntityUid target, string selfPopup, string othersPopup, string targetPopup, PopupType selfPopupType = PopupType.Small)
     {
         _popup.PopupEntity(selfPopup, user, user, selfPopupType);
 
