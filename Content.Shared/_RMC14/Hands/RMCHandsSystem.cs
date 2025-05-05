@@ -17,7 +17,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Hands;
 
-public abstract class SharedRMCHandsSystem : EntitySystem
+public abstract class RMCHandsSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
