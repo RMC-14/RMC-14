@@ -29,6 +29,9 @@
   - type: Clickable
   - type: InteractionOutline
   - type: OrbitalCannon
+    warheadTypes:
+    - RMCOrbitalCannonWarheadExplosive
+    - RMCOrbitalCannonWarheadCluster
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
@@ -129,7 +132,7 @@
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
-    - RMCOrbitalCannonWarheadIncendiary
+#    - RMCOrbitalCannonWarheadIncendiary # TODO RMC14 incend
 
 - type: entity
   parent: MarkerBase

@@ -58,3 +58,15 @@
     - CMDropshipCrewChief
     - CMPilotDropship
     - CMPilotGunship
+
+- type: entity
+  id: CMJobsDropshipPilot
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: JobGroup
+    name: role-timer-dropship-pilot-roles
+    color: "#C38312"
+    jobs:
+    - CMPilotDropship
+    - CMPilotGunship

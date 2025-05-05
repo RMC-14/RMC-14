@@ -253,6 +253,17 @@
 
 - type: entity
   parent: RMCSmartGun
+  id: RMCSmartGunCLF
+  name: ML66B 'freedom' smart gun
+  description: The actual firearm in the 4-piece ML66B Smartgun System. Essentially a heavy, mobile machinegun. This one has the CLF logo carved over the manufacturing stamp.
+  components:
+  - type: GunRequireEquipped
+    whitelist: { }
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: RMCSmartGun
   id: RMCSmartGunRoyal
   name: ML66C 'royal' smart gun
   description: The actual firearm in the 2-piece ML66C Smart Gun System. This Variant is used by the Three Sun Empires Royal Marines Commando units. You may toggle firing restrictions by using a special action.

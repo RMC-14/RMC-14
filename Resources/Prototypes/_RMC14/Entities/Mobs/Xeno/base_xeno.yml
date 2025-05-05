@@ -187,6 +187,7 @@
         - BulletImpassable
   - type: Xeno
   - type: XenoRegen
+  - type: XenoStateVisuals
   - type: UserInterface
     interfaces:
       enum.XenoEvolutionUIKey.Key:
@@ -338,8 +339,8 @@
   - type: BlockIdExamine
   - type: NoStunOnExit
   - type: RMCSpeciesSlowdownModifier
-    slowMultiplier: 0.87
-    superSlowMultiplier: 0.75
+    slowModifier: 0.75
+    superSlowModifier: 1.5
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor

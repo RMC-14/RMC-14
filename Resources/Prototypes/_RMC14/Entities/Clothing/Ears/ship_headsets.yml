@@ -44,7 +44,6 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-  - type: GrantMarineIcons
   - type: GrantTacMapAlert
 
 - type: entity
@@ -441,6 +440,18 @@
     - ProvostDeputyMarshal
     - ProvostChiefInspector
     - ProvostInspector
+
+- type: entity
+  parent: CMHeadsetHighCommand
+  id: RMCHeadsetHighCommandProvostLead
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: ProvostTeamLeader
+    trackerModes:
+    - ProvostMarshal
+    - ProvostDeputyMarshal
+    - ProvostChiefInspector
+    - ProvostInspector
     - ProvostTeamLeader
     - ProvostAdvisor
     - CommandingOfficer
@@ -493,3 +504,10 @@
     - ExecutiveOfficer
     - SquadLeader
     - PrimaryLandingZone
+
+# Prisoner headset
+- type: entity
+  parent: RMCHeadsetShip
+  id: RMCHeadsetPrisoner
+  name: prisoner headset
+  description: Headset provided to prisoners as directed by marine law.
