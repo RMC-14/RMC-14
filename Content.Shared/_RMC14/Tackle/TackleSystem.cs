@@ -148,34 +148,25 @@ public sealed class TackleSystem : EntitySystem
                 {
                     if (_random.Prob(disarm.AccidentalDischargeChance))
                     {
-                        fired = true;
-                        doPopups = false; // Disable other popups if the gun was discharged so we dont get stacked popups
-
-                        var selfMsg = Loc.GetString("rmc-disarm-discharge-others", ("targetName", target), ("gun", item));
-                        var othersMsg = Loc.GetString("rmc-disarm-discharge-others", ("performerName", user), ("targetName", target), ("gun", item));
-                        var targetMsg = Loc.GetString("rmc-disarm-discharge-target", ("performerName", user), ("gun", item));
-                        DoPvsPopups(user, target, selfMsg, othersMsg, targetMsg);
-
                         var coords = _transform.GetMoverCoordinates(user);
                         var shotProjectiles = _gunSystem.AttemptShoot((item, gun), target, coords);
 
                         var ammoCount = new GetAmmoCountEvent();
                         RaiseLocalEvent(item, ref ammoCount);
 
-                        if (shotProjectiles != null)
+                        if (shotProjectiles == null || ammoCount.Count < 0)
                         {
-                            _audio.PlayEntity(gun.SoundGunshotModified, args.User, item);
-                            if (ammoCount.Count == 0)
-                                _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg"), item);
-                        }
-                        else
-                        {
-                            if (ammoCount.Count < 0)
-                                _audio.PlayEntity(gun.SoundEmpty, args.User, item);
-                        }
+                            fired = true;
+                            doPopups = false; // Disable other popups if the gun was discharged so we dont get stacked popups
 
-                        var ev = new UpdateClientAmmoEvent();
-                        RaiseLocalEvent(item, ref ev);
+                            var selfMsg = Loc.GetString("rmc-disarm-discharge-self", ("targetName", target), ("gun", item));
+                            var othersMsg = Loc.GetString("rmc-disarm-discharge-others", ("performerName", user), ("targetName", target), ("gun", item));
+                            var targetMsg = Loc.GetString("rmc-disarm-discharge-target", ("performerName", user), ("gun", item));
+                            DoPvsPopups(user, target, selfMsg, othersMsg, targetMsg, PopupType.MediumCaution);
+
+                            var ev = new UpdateClientAmmoEvent();
+                            RaiseLocalEvent(item, ref ev);
+                        }
                     }
                 }
             }
@@ -192,7 +183,7 @@ public sealed class TackleSystem : EntitySystem
 
         if (disarmChance <= 25)
         {
-            var shoveText = Loc.GetString(attackerSkill > 1 ? _random.Pick(disarm.RandomShoveTexts) : "rmc-disarm-text-skilled");
+            var shoveText = Loc.GetString(attackerSkill > 1 ? "rmc-disarm-text-skilled" : _random.Pick(disarm.RandomShoveTexts));
 
             if (doPopups)
             {
@@ -247,9 +238,9 @@ public sealed class TackleSystem : EntitySystem
             return;
 
         // Disarm failed
-        var selfPopup = Loc.GetString("rmc-disarm-break-pulls-self", ("targetName", target));
-        var othersPopup = Loc.GetString("rmc-disarm-break-pulls-others", ("performerName", user), ("targetName", target));
-        var targetPopup = Loc.GetString("rmc-disarm-break-pulls-target", ("performerName", user));
+        var selfPopup = Loc.GetString("rmc-disarm-attempt-self", ("targetName", target));
+        var othersPopup = Loc.GetString("rmc-disarm-attempt-others", ("performerName", user), ("targetName", target));
+        var targetPopup = Loc.GetString("rmc-disarm-attempt-target", ("performerName", user));
         DoPvsPopups(user, target, selfPopup, othersPopup, targetPopup);
     }
 
@@ -258,9 +249,9 @@ public sealed class TackleSystem : EntitySystem
         _colorFlash.RaiseEffect(Color.Aqua, new List<EntityUid> { target }, Filter.PvsExcept(user));
     }
 
-    public void DoPvsPopups(EntityUid user, EntityUid target, string selfPopup, string othersPopup, string targetPopup)
+    public void DoPvsPopups(EntityUid user, EntityUid target, string selfPopup, string othersPopup, string targetPopup, PopupType selfPopupType = PopupType.SmallCaution)
     {
-        _popup.PopupEntity(selfPopup, user, user);
+        _popup.PopupEntity(selfPopup, user, user, selfPopupType);
 
         foreach (var session in Filter.PvsExcept(user).Recipients)
         {

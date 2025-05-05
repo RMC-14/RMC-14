@@ -21,8 +21,9 @@ public sealed partial class RMCDisarmComponent : Component
     public TimeSpan BaseStunTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public List<LocId> RandomShoveTexts = [
+    public List<LocId> RandomShoveTexts = new List<LocId>
+    {
         "rmc-disarm-text-1",
         "rmc-disarm-text-2"
-    ];
+    };
 }
