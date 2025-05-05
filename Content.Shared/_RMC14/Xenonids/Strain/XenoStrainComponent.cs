@@ -17,6 +17,6 @@ public sealed partial class XenoStrainComponent : Component
     public LocId? Popup;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId StrainOf;
+    public EntProtoId? StrainOf;
 
 }

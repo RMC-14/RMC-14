@@ -8,7 +8,7 @@
         <BoxContainer Orientation="Vertical">
             <BoxContainer Orientation="Vertical" Name="DevolutionsContainer" Access="Public" />
             <userInterface:BlueHorizontalSeparator Name="Separator" Access="Public" />
-            <Label Name="DestrainLabel" Access="Public" Text="De-Strain:" />
+            <Label Name="DestrainLabel" Access="Public" Text="Reset Strain:" />
             <BoxContainer Orientation="Vertical" Name="DestrainContainer" Access="Public" />
         </BoxContainer>
     </ScrollContainer>

@@ -56,7 +56,7 @@ public sealed class XenoDevolveBui : BoundUserInterface
                 control.Set(strainproto.Name, _sprite.Frame0(strainproto));
                 control.Button.OnPressed += _ =>
                 {
-                    SendPredictedMessage(new XenoDeStrainBuiMsg(strain.StrainOf));
+                    SendPredictedMessage(new XenoDeStrainBuiMsg(strainproto.ID));
                     Close();
                 };
                 _window.DestrainContainer.AddChild(control);
