@@ -48,10 +48,9 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
   - type: MeleeWeapon
-    attackRate: 1
     damage:
       types:
-        Slash: 31 # Yes this does this much damage in 13. 51 with a bayonet attached.
+        Blunt: 26 # Yes this does this much damage in 13.
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
