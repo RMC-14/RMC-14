@@ -156,7 +156,7 @@ public partial class ChatSystem
         // if general params for all sounds set - use them
         var param = proto.GeneralParams ?? sound.Params;
 
-        var filter = Filter.Pvs(uid).RemoveWhere(s => !_humanoidVoicelines.ShouldPlayVoiceline(uid, s));
+        var filter = Filter.Pvs(uid).RemoveWhere(s => !_humanoidVoicelines.ShouldPlayEmote(uid, s));
         if (filter.Count == 0)
             return false;
 
