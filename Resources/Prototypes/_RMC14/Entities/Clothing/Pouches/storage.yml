@@ -580,7 +580,8 @@
     sprite: _RMC14/Objects/Clothing/Pouches/sling.rsi
   - type: Storage
     maxItemSize: Normal
-
+  - type: FixedItemSizeStorage
+  - type: PropagateDetectors
 
 # Cassetes Pouch
 - type: entity

@@ -174,8 +174,7 @@
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
-      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
-                           # This has a comment saying "implement this", going to leave it commented out.
+      - id: RMCPouchSling
       - id: RMCPouchToolsFill
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -854,7 +853,7 @@
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
-      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+      - id: RMCPouchSling
       - id: RMCPouchToolsFill
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill

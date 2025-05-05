@@ -129,7 +129,7 @@
       - id: RMCPouchReagentCanister
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
-      #- id: CMSlingPouch
+      - id: RMCPouchSling
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
