@@ -30,9 +30,16 @@ rmc-squad-info-SquadLeader = Squad Leader
 rmc-squad-info-FireteamLeader = Fireteam Leader
 rmc-squad-info-Rifleman = Rifleman
 
-rmc-squad-info-DirectorPmc = PMC Director
-rmc-squad-info-LeaderPmc = PMC Leader
-rmc-squad-info-CorporateLiaison = Liaison
+rmc-squad-info-DirectorPmc = Director
+rmc-squad-info-LeaderPmc = Team Leader
+rmc-squad-info-CorporateLiaison = Corporate Liaison
+
+rmc-squad-info-SupervisorWeYa = Legal Supervisor
+rmc-squad-info-LawyerWeYa = Legal Specialist
+rmc-squad-info-LeaderGoon = Security Leader
+
+rmc-squad-info-SupervisorWeYaExecutive = Supervisor Executive
+rmc-squad-info-SupervisorWeYaSpecialist = Supervisor Specialist
 
 rmc-squad-info-ProvostMarshal = Provost Marshal
 rmc-squad-info-ProvostDeputyMarshal = Provost Deputy Marshal
@@ -41,6 +48,7 @@ rmc-squad-info-ProvostInspector = Provost Inspector
 rmc-squad-info-ProvostTeamLeader = Provost Team Leader
 rmc-squad-info-ProvostAdvisor = Provost Advisor
 
-rmc-squad-info-LeaderSpp = SPP Leader
+rmc-squad-info-LeaderSpp = Leader
+rmc-squad-info-LeaderFreelancer = Leader
 
 rmc-squad-info-PrimaryLandingZone = Primary Landing Zone

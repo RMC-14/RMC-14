@@ -34,6 +34,11 @@ public sealed partial class SquadLeaderTrackerComponent : Component
         {SquadLeaderTrackerMode.DirectorPmc, "RMCPMCDirector"},
         {SquadLeaderTrackerMode.LeaderPmc, "RMCPMCLeader"},
         {SquadLeaderTrackerMode.CorporateLiaison, "CMLiaison"},
+        {SquadLeaderTrackerMode.SupervisorWeYa, "RMCWeYaLawyerSupervisor"},
+        {SquadLeaderTrackerMode.LawyerWeYa, "RMCWeYaLawyer"},
+        {SquadLeaderTrackerMode.LeaderGoon, "RMCWeYaGoonLead"},
+        {SquadLeaderTrackerMode.SupervisorWeYaExecutive, "CMCorporateExecutiveSupervisor"},
+        {SquadLeaderTrackerMode.SupervisorWeYaSpecialist, "CMCorporateExecutiveSpecialist"},
         {SquadLeaderTrackerMode.ProvostMarshal, "CMProvostMarshal"},
         {SquadLeaderTrackerMode.ProvostDeputyMarshal, "CMProvostDeputyMarshal"},
         {SquadLeaderTrackerMode.ProvostChiefInspector, "CMProvostChiefInspector"},
@@ -41,6 +46,7 @@ public sealed partial class SquadLeaderTrackerComponent : Component
         {SquadLeaderTrackerMode.ProvostTeamLeader, "CMProvostTeamLeader"},
         {SquadLeaderTrackerMode.ProvostAdvisor, "CMProvostAdvisor"},
         {SquadLeaderTrackerMode.LeaderSpp, "RMCSPPLeader"},
+        {SquadLeaderTrackerMode.FreelancerLeader, "CMFreelancerLeader"},
     };
 
     /// <summary>

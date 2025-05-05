@@ -20,6 +20,11 @@ public enum SquadLeaderTrackerMode
     DirectorPmc,
     LeaderPmc,
     CorporateLiaison,
+    SupervisorWeYa,
+    LawyerWeYa,
+    LeaderGoon,
+    SupervisorWeYaExecutive,
+    SupervisorWeYaSpecialist,
     ProvostMarshal,
     ProvostDeputyMarshal,
     ProvostChiefInspector,
@@ -27,5 +32,6 @@ public enum SquadLeaderTrackerMode
     ProvostTeamLeader,
     ProvostAdvisor,
     LeaderSpp,
+    FreelancerLeader,
     PrimaryLandingZone,
 }
