@@ -127341,7 +127341,7 @@ entities:
     - type: Transform
       pos: 115.5,56.5
       parent: 1
-- proto: Shovel
+- proto: RMCShovel
   entities:
   - uid: 2859
     components:

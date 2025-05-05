@@ -185,3 +185,75 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: pmc_ld
+
+- type: entity
+  parent: SquadBase
+  id: SquadFreelancer
+  name: Freelancer
+  components:
+  - type: SquadTeam
+    color: "#4559F5"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: Colony
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_free
+    canSupplyDrop: false
+    group: Freelancer
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: free_sl
+
+- type: entity
+  parent: SquadBase
+  id: SquadRoyalMarines
+  name: Royal Marines
+  components:
+  - type: SquadTeam
+    color: "#3D6F43"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: RoyalMarine
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Royal Marines
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: rmc_teamleader
+
+- type: entity
+  parent: SquadBase
+  id: SquadProvost
+  name: Provost
+  components:
+  - type: SquadTeam
+    color: "#990218"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: Provost
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Provost
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_pvl

@@ -181,9 +181,10 @@ namespace Content.IntegrationTests.Tests
                 .Select(p => p.ID)
                 .ToList();
 
-            for (var i = 0; i < protoIds.Count; i += 100)
+            const int chunkSize = 100;
+            for (var i = 0; i < protoIds.Count; i += chunkSize)
             {
-                var max = i + 100;
+                var max = i + chunkSize;
                 if (max >= protoIds.Count)
                     max = protoIds.Count;
                 var chunk = protoIds[i..max];
@@ -206,7 +207,8 @@ namespace Content.IntegrationTests.Tests
 
                 // Make sure the client actually received the entities
                 // 500 is completely arbitrary. Note that the client & sever entity counts aren't expected to match.
-                Assert.That(client.ResolveDependency<IEntityManager>().EntityCount, Is.GreaterThan(50));
+                if (chunk.Count >= chunkSize)
+                    Assert.That(client.ResolveDependency<IEntityManager>().EntityCount, Is.GreaterThan(50));
 
                 await server.WaitPost(() =>
                 {

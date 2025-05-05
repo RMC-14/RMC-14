@@ -1,0 +1,93 @@
+# Bureau Marshal
+- type: job
+  parent: CMJobBase
+  id: CMBureauMarshal
+  name: rmc-job-name-bureau-marshal
+  description: rmc-ghost-role-information-bureau-marshal-description
+  playTimeTracker: RMCJobBureauMarshal
+  ranks:
+    RMCRankCMBMarshal: []
+  startingGear: RMCGearBureauMarshal
+  icon: "RMCJobIconBureauMarshal"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+    - type: Skills
+      skills:
+        RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillConstruction: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillEngineer: 1
+        RMCSkillFireman: 5
+        RMCSkillFirearms: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillVehicles: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 3
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-marshal
+    - type: RMCPointing
+    - type: MarineOrders
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidBureauMarshal
+  name: bureau ghost role marshal
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCBureauMarshal
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCBureauMarshal
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-bureau-marshal
+    description: rmc-ghost-role-information-bureau-marshal-description
+    rules: rmc-ghost-role-information-bureau-rules
+    reregister: false
+    job: CMBureauMarshal
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearBureauMarshal
+  equipment:
+    head: RMCHeadCapBureau
+    # face cigar
+    # shoulder holster with revolver and two magazines
+    back: CMSatchelSecurity
+    gloves: RMCHandsVeteran
+    jumpsuit: RMCJumpsuitMarshal
+    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
+    # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
+    belt: CMBeltSecurityMarshalFilled
+    shoes: RMCBootsPMCFilled
+    id: RMCIDCardMarshal
+    ears: CMHeadsetMPO
+    pocket1: RMCPouchFirstAidERT
+    pocket2: RMCPouchShotgun
+
+- type: playTimeTracker
+  id: RMCJobBureauMarshal
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconBureauMarshal
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_mar
