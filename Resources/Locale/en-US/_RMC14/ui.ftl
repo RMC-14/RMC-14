@@ -4,7 +4,6 @@ rmc-ui-voicelines = Voicelines
 rmc-ui-options-tab-voicelines = Voicelines
 rmc-ui-audio-voicelines-yourself = Play voicelines from yourself
 rmc-ui-audio-voicelines-arachnid = Play voicelines for arachnids
-rmc-ui-audio-voicelines-arachnid = Play voicelines for arachnids
 rmc-ui-audio-voicelines-diona = Play voicelines for dionae
 rmc-ui-audio-voicelines-dwarf = Play voicelines for dwarves
 rmc-ui-audio-voicelines-felinid = Play voicelines for felinids
