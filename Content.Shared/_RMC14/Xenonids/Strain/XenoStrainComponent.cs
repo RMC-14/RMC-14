@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Strain;
 
@@ -14,4 +15,8 @@ public sealed partial class XenoStrainComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId? Popup;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId StrainOf;
+
 }

@@ -14,3 +14,9 @@ public sealed class XenoDevolveBuiMsg(EntProtoId choice) : BoundUserInterfaceMes
 {
     public readonly EntProtoId Choice = choice;
 }
+
+[Serializable, NetSerializable]
+public sealed class XenoDeStrainBuiMsg(EntProtoId choice) : BoundUserInterfaceMessage
+{
+    public readonly EntProtoId Choice = choice;
+}

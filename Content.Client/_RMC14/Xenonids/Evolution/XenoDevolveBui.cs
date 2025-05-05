@@ -1,5 +1,6 @@
 ﻿using Content.Client._RMC14.Xenonids.UI;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Strain;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -46,5 +47,22 @@ public sealed class XenoDevolveBui : BoundUserInterface
 
             _window.DevolutionsContainer.AddChild(control);
         }
+
+        if (EntMan.TryGetComponent(Owner, out XenoStrainComponent? strain))
+        {
+            if (_prototype.TryIndex(strain.StrainOf, out var strainproto))
+            {
+                var control = new XenoChoiceControl();
+                control.Set(strainproto.Name, _sprite.Frame0(strainproto));
+                control.Button.OnPressed += _ =>
+                {
+                    SendPredictedMessage(new XenoDeStrainBuiMsg(strain.StrainOf));
+                    Close();
+                };
+                _window.DestrainContainer.AddChild(control);
+            }
+        }
+
+
     }
 }
