@@ -154,7 +154,7 @@ public sealed class TackleSystem : EntitySystem
                         var ammoCount = new GetAmmoCountEvent();
                         RaiseLocalEvent(item, ref ammoCount);
 
-                        if (shotProjectiles == null || ammoCount.Count < 0)
+                        if (shotProjectiles != null && ammoCount.Count > 0)
                         {
                             fired = true;
                             doPopups = false; // Disable other popups if the gun was discharged so we dont get stacked popups
