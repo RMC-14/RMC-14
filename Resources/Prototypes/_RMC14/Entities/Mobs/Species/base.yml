@@ -348,4 +348,6 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
+  - type: RMCMeleeDamageSkill
+  - type: RMCStripTimeSkill
   - type: StunOnExplosionReceived # TODO should also cause hearing loss
