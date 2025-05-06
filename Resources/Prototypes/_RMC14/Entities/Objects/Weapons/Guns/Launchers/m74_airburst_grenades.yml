@@ -157,10 +157,9 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.15,-0.45,0.15,0.15"
-        hard: false
         mask:
-        - Impassable
-        - BulletImpassable
+        - ItemMask
+        restitution: 1
   - type: IgnorePredictionHide
 
 - type: entity
@@ -276,7 +275,7 @@
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
 
-#Payloads
+#Payload projectiles
 - type: entity
   parent: RMCBaseBullet
   id: RMCStarShellBullet

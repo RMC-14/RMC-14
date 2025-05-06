@@ -62,6 +62,11 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
         var shootCount = 0;
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
+
+        // RMC14 it was sometimes dividing by 0.
+        if(totalCount == 0)
+            return;
+
         var segmentAngle = 360 / totalCount;
 
         _spawned.Clear();

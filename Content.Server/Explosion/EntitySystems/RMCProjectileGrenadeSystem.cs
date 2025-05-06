@@ -1,8 +1,9 @@
 using Content.Server.Explosion.Components;
-using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Explosion.Components;
 using Content.Shared.Projectiles;
 using Robust.Server.GameObjects;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 
 namespace Content.Server.Explosion.EntitySystems;
@@ -11,7 +12,6 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
 
     public override void Initialize()
@@ -25,18 +25,16 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     /// <summary>
     /// Reverses the payload shooting direction if the projectile grenade collides with an entity
     /// </summary>
-    private void OnStartCollide(Entity<ProjectileGrenadeComponent> entity, ref ProjectileHitEvent args)
+    private void OnStartCollide(Entity<ProjectileGrenadeComponent> ent, ref ProjectileHitEvent args)
     {
-        if (!entity.Comp.Rebounds)
+        if (!ent.Comp.Rebounds)
             return;
 
-        //Shoot the payload backwards if colliding with an entity
-        entity.Comp.DirectionAngle += entity.Comp.ReboundAngle;
+        var reboundTimer = EnsureComp<ActiveTimerTriggerComponent>(ent);
+        reboundTimer.TimeRemaining = ent.Comp.ReboundTimer;
 
-        var ev = new RMCProjectileReboundEvent(entity.Comp.ReboundAngle);
-        RaiseLocalEvent(entity, ref ev);
-
-        _trigger.Trigger(entity);
+        var ev = new ActiveTimerTriggerEvent(ent, args.Shooter);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     /// <summary>
@@ -65,6 +63,15 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
             args.Angle = Angle.FromDegrees((angleMin + angleMax) / 2);
         else
             args.Angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
+    }
+
+    public override void Update(float frametime)
+    {
+        var query = EntityQueryEnumerator<ProjectileGrenadeComponent, PhysicsComponent>();
+        while (query.MoveNext(out var projectileUid, out _, out var physics))
+        {
+            _transformSystem.SetWorldRotationNoLerp(projectileUid, physics.LinearVelocity.ToWorldAngle());
+        }
     }
 }
 
