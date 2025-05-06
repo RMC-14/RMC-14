@@ -71,7 +71,7 @@
       attackRate: 1
       damage:
         types:
-          Blunt: 52.5 # 35 base damage, this is because they have melee weapons 2
+          Blunt: 35
     - type: Synth
       welderDamageToRepair:
         types:
@@ -103,6 +103,7 @@
       - type: Dna
       - type: InjectableSolution
       - type: IVDripTarget
+      - type: RMCSuicide
   hidden: true
 
 - type: startingGear
