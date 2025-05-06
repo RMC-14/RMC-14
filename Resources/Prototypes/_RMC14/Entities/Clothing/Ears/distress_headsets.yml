@@ -90,6 +90,13 @@
   - type: GrantMarineIcons
 
 - type: entity
+  parent: RMCHeadsetDistressDukes
+  id: RMCHeadsetDistressDukesLeader
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
+
+- type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetForecon
   name: Force Recon headset
@@ -102,10 +109,3 @@
   - type: RMCHeadset
     channels:
     - MarineForecon
-
-- type: entity
-  parent: RMCHeadsetDistressDukes
-  id: RMCHeadsetDistressDukesLeader
-  components:
-  - type: RMCHeadset
-    radioTextIncrease: 3
