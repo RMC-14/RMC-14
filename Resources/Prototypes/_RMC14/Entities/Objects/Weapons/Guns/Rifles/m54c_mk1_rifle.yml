@@ -93,6 +93,7 @@
           tags:
           - RMCAttachmentMK1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00

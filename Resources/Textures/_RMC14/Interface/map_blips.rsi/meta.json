@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/d4c9feba35665e779300ef64ef652328078939cf/icons/ui_icons/map_blips.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free by github noctyrnal",
   "size": {
     "x": 7,
     "y": 7
@@ -792,6 +792,15 @@
     },
     {
       "name": "field_doctor"
+    },
+    {
+      "name": "background_free"
+    },
+    {
+      "name": "recovery_node"
+    },
+    {
+      "name": "morpher"
     }
   ]
 }
