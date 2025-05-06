@@ -98,6 +98,7 @@
       - type: InjectableSolution
       - type: IVDripTarget
       - type: RMCSuicide
+        damage: { }
   hidden: true
 
 - type: startingGear
