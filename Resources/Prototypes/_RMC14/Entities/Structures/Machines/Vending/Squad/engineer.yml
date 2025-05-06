@@ -161,9 +161,11 @@
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #  points: 12
+      entries:
+      - id: RMCVisorMedical
+        points: 12
+      - id: RMCVisorWelding
+        points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC
@@ -198,6 +200,11 @@
       - id: CMVendorBundleCombatTechnicianApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10Tech
+      - id: RMCArmorHelmetM10Welding
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
