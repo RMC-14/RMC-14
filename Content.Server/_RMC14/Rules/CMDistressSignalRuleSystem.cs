@@ -387,37 +387,34 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 var spawnAsJob = job;
 
-                if (comp.SurvivorJobInserts != null)
+                if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
                 {
-                    if (comp.SurvivorJobInserts.TryGetValue(job, out var insert))
+                    var insertSuccess = false;
+
+                    for (var i = 0; i < insert.Count; i++)
                     {
-                        var insertSuccess = false;
+                        var (insertJob, amount) = insert[i];
 
-                        for (var i = 0; i < insert.Count; i++)
+                        if (amount == -1)
                         {
-                            var (insertJob, amount) = insert[i];
-
-                            if (amount == -1)
-                            {
-                                spawnAsJob = insertJob;
-                                insertSuccess = true;
-                                break;
-                            }
-
-                            if (amount <= 0)
-                                continue;
-
-                            insert[i] = (insertJob, amount - 1);
-                            spawnAsJob = insertJob; // Override the original job with the insert
+                            spawnAsJob = insertJob;
                             insertSuccess = true;
                             break;
                         }
 
-                        if (!insertSuccess)
-                        {
-                            stop = true;
-                            return null; // All insert slots are filled, do not allow job
-                        }
+                        if (amount <= 0)
+                            continue;
+
+                        insert[i] = (insertJob, amount - 1);
+                        spawnAsJob = insertJob; // Override the original job with the insert
+                        insertSuccess = true;
+                        break;
+                    }
+
+                    if (!insertSuccess)
+                    {
+                        stop = true;
+                        return null; // All insert slots are filled, do not allow job
                     }
                 }
 
