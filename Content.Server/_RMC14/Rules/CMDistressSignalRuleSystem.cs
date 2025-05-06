@@ -389,10 +389,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 if (comp.SurvivorJobInserts != null)
                 {
-                    var insertSuccess = false;
-
                     if (comp.SurvivorJobInserts.TryGetValue(job, out var insert))
                     {
+                        var insertSuccess = false;
+
                         for (var i = 0; i < insert.Count; i++)
                         {
                             var (insertJob, amount) = insert[i];
@@ -412,12 +412,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                             insertSuccess = true;
                             break;
                         }
-                    }
 
-                    if (!insertSuccess)
-                    {
-                        stop = true;
-                        return null; // All insert slots are filled, do not allow job
+                        if (!insertSuccess)
+                        {
+                            stop = true;
+                            return null; // All insert slots are filled, do not allow job
+                        }
                     }
                 }
 
