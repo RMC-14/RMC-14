@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostInspector
-  name: CMProvostInspector
-  description: rmc-job-description-provost-inspector
+  name: rmc-job-name-corp-provost-inspector
+  description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostInspector
   ranks:
     RMCRankProvostInspector: []
@@ -29,20 +29,27 @@
 - type: entity
   id: RMCRandomHumanoidProvostInspector
   name: provost ghost role inspector
-  suffix: Role, Player, Medium Law Understanding
+  suffix: Spawner, Player, Friendly, Medium Law Understanding
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: RandomHumanoidSpawner
     settings: RMCProvostInspector
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCProvostInspector
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-inspector
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
     job: CMProvostInspector
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearProvostInspector
@@ -68,20 +75,4 @@
   id: RMCJobIconProvostInspector
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pva
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostInspector
-  name: provost inspector ID card
-  description: Issued to members of the Provost Office.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: Clothing
-    slots:
-    - idcard
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-  - type: PresetIdCard
-    job: CMProvostInspector
+    state: hudsquad_pvi2

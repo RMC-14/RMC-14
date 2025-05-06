@@ -118,7 +118,8 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
-
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCEngineer
 
 # Other factions
 

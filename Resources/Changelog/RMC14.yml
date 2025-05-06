@@ -1,54 +1,4 @@
 ﻿Entries:
-- author: SG6732
-  changes:
-  - message: Tweaked the M4SPR's barrel attachment point to look better with the bayonet.
-    type: Tweak
-  id: 1179
-  time: '2025-01-07T10:33:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5287
-- author: Rainbeon
-  changes:
-  - message: Fixed the XM88 not increasing its damage on a successful hit.
-    type: Fix
-  - message: Fixed the XM88 getting stuck at maximum damage for extended periods of
-      time.
-    type: Fix
-  - message: Fixed XM88 stacks not resetting once the timer runs out.
-    type: Fix
-  - message: Fixed XM88 stacks resetting when hitting something that is not an alive
-      Xeno, it now only resets after the timer runs out.
-    type: Fix
-  - message: Fixed the XM88 not consistently giving a popup that its stacks have reset.
-    type: Fix
-  id: 1180
-  time: '2025-01-09T03:09:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5330
-- author: Vermidia
-  changes:
-  - message: Added new xeno armor alert sprites, by Aleksh!
-    type: Add
-  - message: Fixed the armor alert not updating with different armor changing effects.
-      It also now has a different icon depending on a xenos base armor.
-    type: Fix
-  id: 1181
-  time: '2025-01-09T03:13:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5329
-- author: Whisper
-  changes:
-  - message: Added Kyrus, Taleryn Vogsburg figurine.
-    type: Add
-  id: 1182
-  time: '2025-01-10T04:48:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5319
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added orange and black ballistic goggles to loadouts.
-    type: Add
-  - message: Changed various ballistic goggle sprites.
-    type: Tweak
-  id: 1183
-  time: '2025-01-11T08:21:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5345
 - author: Dutch-VanDerLinde
   changes:
   - message: Added squad headbands and tactical wraps
@@ -5522,5 +5472,52 @@
   id: 1681
   time: '2025-05-04T10:19:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6311
+- author: noctyrnal
+  changes:
+  - message: Faction Spawners have been heavily adjusted. They should all be more
+      consistent now.
+    type: Tweak
+  - message: Added missing content to existing faction spawners, such as icons.
+    type: Add
+  - message: Freelancers, Provost and Royal Marines now have their own squads.
+    type: Add
+  - message: Freelancers now have icons.
+    type: Add
+  id: 1682
+  time: '2025-05-04T23:32:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6250
+- author: CyberTropic
+  changes:
+  - message: Fixed some upstream objects in maps.
+    type: Fix
+  id: 1683
+  time: '2025-05-04T23:35:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6347
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the M890 tactical shotgun on Fiorina being a ghost item.
+    type: Fix
+  - message: Fixed the MK80 attachment spawning on Hybrisa.
+    type: Fix
+  id: 1684
+  time: '2025-05-04T23:39:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6350
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added settings to disable emote sounds per species. These are separate
+      from the voiceline settings that toggle grenade callouts, for example. A new
+      tab has been added in the options tab for both of these settings, the Voicelines
+      tab next to the Audio tab.
+    type: Add
+  id: 1685
+  time: '2025-05-05T00:42:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4138
+- author: DrSmugleaf
+  changes:
+  - message: Fixed large amount of xenonid eggs on one spot lagging the client.
+    type: Fix
+  id: 1686
+  time: '2025-05-05T00:42:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6352
 Name: RMC14
 Order: -1

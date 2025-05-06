@@ -1138,3 +1138,7 @@ ToxinChemistryBottle: ChemistryBottleToxin
 
 # 2025-04-14
 PlantBag: RMCStoragePlantBag
+
+# 2025-05-04
+CrateTrashCart: RMCTrashCart
+RMCVendorBundleXOShotgun: WeaponShotgunM890
