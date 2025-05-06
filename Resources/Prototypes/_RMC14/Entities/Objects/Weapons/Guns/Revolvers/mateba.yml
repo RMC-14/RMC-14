@@ -51,10 +51,14 @@
         startingAttachable: RMCAttachmentMatebaStandard
         whitelist:
           tags:
-          - RMCAttachmentRecoilCompensator
           - RMCAttachmentMatebaStandard
           - RMCAttachmentMatebaMarksman
           - RMCAttachmentMatebaSnubNose
+
+      rmc-bslot-barrel:
+       whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
       rmc-aslot-rail:
         whitelist:
