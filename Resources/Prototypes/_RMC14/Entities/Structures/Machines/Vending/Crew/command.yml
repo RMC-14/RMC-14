@@ -388,8 +388,8 @@
     - name: Dress
       entries:
       - id: CMCoatDressBluesGeneral
-      - id: RMCMarineUniformDressSenior
       - id: CMCoatXOFormal
+      - id: RMCMarineUniformDressSenior
       - id: RMCShoesLaceup
     - name: Dress Headwear
       entries:
