@@ -90,7 +90,7 @@
   - type: GrantMarineIcons
 
 - type: entity
-  parent: RMCHeadsetShip
+  parent: RMCHeadsetMarine
   id: RMCHeadsetForecon
   name: Force Recon headset
   description: A headset given to FORECON marines.
@@ -99,8 +99,6 @@
     containers:
       key_slots:
       - RMCEncryptionKeyFORECON
-  - type: GrantSquadLeaderTracker
-  - type: GrantTacMapAlert
   - type: RMCHeadset
     channels:
     - MarineForecon
