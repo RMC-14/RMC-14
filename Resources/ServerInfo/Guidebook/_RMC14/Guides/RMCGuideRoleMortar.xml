@@ -1,0 +1,74 @@
+<Document>
+    # Mortar Operations: Quick Guide
+
+    The mortar is a powerful [italic]indirect fire support weapon[/italic], capable of launching explosive shells over obstacles and at long distances. Mastering it requires practice and good communication.
+    <GuideEntityEmbed Entity="RMCMortarKit"/>
+
+    ## Prerequisites for Operation
+    Ensure you meet these requirements before operating a mortar:
+
+    -[bold]Skill[/bold]: Minimum [color=#FFFF00]1 Engineering Skill[/color]. A pamphlet inside the mortar kit will give you it if your role doesn't have it.
+    -[bold]A Wrench[/bold]: To move the mortar around. Comes standard with the Kit.
+    -[bold]Targeting Aid and JTAC Key[/bold]:
+    <Box>
+        <GuideEntityEmbed Entity="RMCRangefinder"/>
+        <GuideEntityEmbed Entity="RMCLaserDesignator"/>
+    </Box>  <Box>
+    <GuideEntityEmbed Entity="CMEncryptionKeyJTAC" Caption="JTAC Key, essential for receiving coordinates from other marines"/>
+</Box>
+
+    ## The Shell Types
+
+    <Box HorizontalAlignment="Left">  <GuideEntityEmbed Entity="RMCMortarShellHE"/> </Box>
+
+    - Detonates with a powerful [color=#FFA500]explosion[/color] upon impact at the target coordinates.
+    - Primary use: [italic]Direct damage to hostiles and structures.[/italic]
+
+    <Box HorizontalAlignment="Left"> <GuideEntityEmbed Entity="RMCMortarShellIncendiary"/> </Box>
+
+    - Explodes on impact, creating a [color=#00FF00]large area of intense green fire[/color].
+    - Effects on Xenomorphs:
+    - Reduces their armor.
+    - Inflicts continuous damage.
+    - Significantly slows their movement.
+    - Primary use: [italic]Area denial, blocking retreats, weakening tough targets.[/italic]
+
+
+    <Box HorizontalAlignment="Left"> <GuideEntityEmbed Entity="RMCMortarShellFlare"/> </Box>
+
+    - [color=#ADD8E6]Non-damaging[/color]. Deploys a camera upon impact.
+    - Provides a [bold]10x10 tile view[/bold] of the target area.
+    - The immediate [bold]2x2 area of impact is illuminated[/bold].
+    - Camera feed lasts for approximately [italic]3 minutes[/italic].
+    - Primary use: [italic]Reconnaissance, target spotting, observing enemy movements safely.[/italic]
+
+    ## Operational Factors & Positioning
+    Understanding these is [bold]critical[/bold] to operating the mortar:
+    - [bold]Engagement Range[/bold]: The mortar can only engage targets between [color=#FFFF00]25 tiles (minimum)[/color] and [color=#FFFF00]75 tiles (maximum)[/color] from its deployed position. Firing outside this window is impossible.
+    - [bold]Inherent Inaccuracy[/bold]: Every shell fired has a [italic]random offset[/italic] applied, amplified by distance. This is not a set offset and changes every shot. This offset can be 1 to 8+ tiles from the target. Shells will [bold]not[/bold] hit the exact same spot twice, even with identical coordinates, unless by extreme luck. [color=#ffcc00]Constant adjustment of the coordinates are necessary.[/color]
+    - [bold]Tactical Positioning and Vulnerability [/bold]: Due to its range, the mortar is typically deployed [italic]behind the main frontline[/italic].
+    This backline positioning makes the mortar operator [color=#ff0000]highly susceptible to enemy flanks[/color]. Always be aware of your surroundings, listen for enemy movements, and request security from squadmates if needed.
+
+    ## Coordinate System Example
+    Mortar targeting uses an XY coordinate system. Imagine a grid laid over the battlefield. Your spotter will give you coordinates like "(X) Longitude: 50, (Y) Latitude: -30, HE Shell"
+
+    Here's a simplified visual representation of an XY plane with a 1-meter (or 1-tile, in game terms) range from the origin 0:
+
+    <Box>+Y</Box>
+    <Box>(+1m)</Box>
+    <Box>▲</Box>
+    <Box>|</Box>
+    <Box>|</Box>
+    <Box>(-1m) -X ◀-  -  -  -  -  -  0  -  -  -  -  -  -▶ +X (+1m)</Box>
+    <Box>|</Box>
+    <Box>|</Box>
+    <Box>▼</Box>
+    <Box>(-1m)</Box>
+    <Box>-Y</Box>
+
+    - The 0 is the origin (0,0).
+    - +Y is North/Up, -Y is South/Down.
+    - +X is East/Right, -X is West/Left.
+    - You'll input the target's X and Y values into the mortar UI. Accurate coordinates are key, even with the mortar's inherent offset.
+
+</Document>
