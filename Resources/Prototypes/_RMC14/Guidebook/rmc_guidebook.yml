@@ -44,6 +44,7 @@
   - RMCGuideRoleMaintenanceTechnician
   - RMCGuideRoleSGO
   - RMCGuideCommandRoles
+  - RMCGuideRoleMortar
 
 # marine structures
 - type: guideEntry
@@ -163,7 +164,14 @@
   name: "Who is in Command?"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCommandRoles.xml"
 
-# Chemistry stuff
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleMortar
+  priority: 11
+  name: "Mortar Operator"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMortar.xml"
+
+# Chemistry stuff# Chemistry stuff
 - type: guideEntry
   parent: RMC
   id: RMCChemicals
