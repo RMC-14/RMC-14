@@ -306,7 +306,7 @@ public sealed class HealthScannerBui : BoundUserInterface
 
             if (thresholdsSystem.TryGetDeadThreshold(target, out var deadThreshold))
             {
-                if (deadThreshold + 50 < target.Comp.Damage.GetTotal() && uiState.Chemicals != null
+                if (deadThreshold + 30 < target.Comp.Damage.GetTotal() && uiState.Chemicals != null
                     && !uiState.Chemicals.ContainsReagent("CMEpinephrine", null))
                 {
                     AddAdvice(Loc.GetString("rmc-health-analyzer-advice-epinedrine"), window);
@@ -314,10 +314,10 @@ public sealed class HealthScannerBui : BoundUserInterface
                 else
                 {
                     string defib = String.Empty;
-                    if (deadThreshold + 20 <= target.Comp.Damage.GetTotal() &&
+                    if (deadThreshold - 20 <= target.Comp.Damage.GetTotal() &&
                         wounds != null && !hasBruteWounds && !hasBurnWounds)
                         defib = Loc.GetString("rmc-health-analyzer-advice-defib-repeated");
-                    else if (deadThreshold + 20 > target.Comp.Damage.GetTotal())
+                    else if (deadThreshold > target.Comp.Damage.GetTotal())
                         defib = Loc.GetString("rmc-health-analyzer-advice-defib");
 
                     if (defib != String.Empty && !_skills.HasAllSkills(viewer, DefibSkill))
