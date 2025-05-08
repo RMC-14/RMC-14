@@ -22,6 +22,7 @@ using Robust.Shared.Timing;
 using Content.Shared.Projectiles;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.BlurredVision;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
@@ -82,6 +83,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             neuro.LastStumbleTime = time;
         }
 
+        _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(args.Target, "Blinded", neuro.BlurTime / 6, false);
         neuro.NeurotoxinAmount += ent.Comp.NeuroPerSecond;
         neuro.ToxinDamage = ent.Comp.ToxinDamage;
         neuro.OxygenDamage = ent.Comp.OxygenDamage;
@@ -265,7 +267,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     {
         if (neurotoxin.NeurotoxinAmount >= 10)
         {
-            // TODO RMC14 eye blur here
+            _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(victim, "Blinded", neurotoxin.BlurTime, false);
             if (currTime - neurotoxin.LastAccentTime >= neurotoxin.MinimumDelayBetweenEvents)
             {
                 neurotoxin.LastAccentTime = currTime;

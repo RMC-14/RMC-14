@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -40,6 +40,9 @@ public sealed partial class NeurotoxinComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastStumbleTime;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan BlurTime = TimeSpan.FromSeconds(24);
 
     [DataField, AutoNetworkedField]
     public TimeSpan BlindTime = TimeSpan.FromSeconds(6);
