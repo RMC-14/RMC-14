@@ -44,6 +44,7 @@
   - RMCGuideRoleMaintenanceTechnician
   - RMCGuideRoleSGO
   - RMCGuideCommandRoles
+  - RMCGuideRoleMortar
   - RMCGuideRoleSpec
 
 # marine structures
@@ -166,8 +167,15 @@
 
 - type: guideEntry
   parent: RMC
-  id: RMCGuideRoleSpec
+  id: RMCGuideRoleMortar
   priority: 11
+  name: "Mortar Operator"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMortar.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleSpec
+  priority: 12
   name: "Specialists"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpec.xml"
   children:
