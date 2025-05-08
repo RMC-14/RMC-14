@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Added squad headbands and tactical wraps
-    type: Add
-  id: 1184
-  time: '2025-01-11T08:22:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5346
-- author: Dutch-VanDerLinde
-  changes:
   - message: Phones now go to voicemail after 30 seconds if no one picks up the receiving
       end
     type: Tweak
@@ -5519,5 +5512,12 @@
   id: 1686
   time: '2025-05-05T00:42:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6352
+- author: CyberTropic
+  changes:
+  - message: Fixed Shiva loading error.
+    type: Fix
+  id: 1687
+  time: '2025-05-07T23:37:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6371
 Name: RMC14
 Order: -1
