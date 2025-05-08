@@ -44,6 +44,10 @@ public sealed class HealthScannerBui : BoundUserInterface
     private readonly SharedWoundsSystem _wounds;
     private readonly SharedRottingSystem _rot;
 
+    private Dictionary<EntProtoId<SkillDefinitionComponent>, int> BloodPackSkill = new() { ["RMCSkillSurgery"] = 1 };
+    private Dictionary<EntProtoId<SkillDefinitionComponent>, int> DefibSkill = new() { ["RMCSkillMedical"] = 2 };
+    private Dictionary<EntProtoId<SkillDefinitionComponent>, int> LarvaSurgerySkill = new() { ["RMCSkillSurgery"] = 2 };
+
     public HealthScannerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
@@ -294,6 +298,9 @@ public sealed class HealthScannerBui : BoundUserInterface
         if (wounds != null && _wounds.HasUntreated((target, wounds), wounds.BurnWoundGroup))
             hasBurnWounds = true;
 
+        if (_player.LocalEntity is not { } viewer)
+            return;
+
         //Defibrilation related
         if (state != null && state.CurrentState == MobState.Dead)
         {
@@ -308,12 +315,18 @@ public sealed class HealthScannerBui : BoundUserInterface
                 }
                 else
                 {
-
+                    string defib = String.Empty;
                     if (deadThreshold + 20 <= target.Comp.Damage.GetTotal() &&
                         wounds != null && !hasBruteWounds && !hasBurnWounds)
-                        AddAdvice(Loc.GetString("rmc-health-analyzer-advice-defib-repeated"), window);
+                        defib = Loc.GetString("rmc-health-analyzer-advice-defib-repeated");
                     else if (deadThreshold + 20 > target.Comp.Damage.GetTotal())
-                        AddAdvice(Loc.GetString("rmc-health-analyzer-advice-defib"), window);
+                        defib = Loc.GetString("rmc-health-analyzer-advice-defib");
+
+                    if (defib != String.Empty && !_skills.HasAllSkills(viewer, DefibSkill))
+                        defib = $"[color=#858585]{defib}[/color]";
+
+                    if (defib != String.Empty)
+                        AddAdvice(defib, window);
                 }
             }
 
@@ -322,7 +335,12 @@ public sealed class HealthScannerBui : BoundUserInterface
 
         //Surgery related
         if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) && holocardComponent.HolocardStatus == HolocardStatus.Xeno)
+        {
+            string larvaSurgery = Loc.GetString("rmc-health-analyzer-advice-larva-surgery");
+            if (!_skills.HasAllSkills(viewer, LarvaSurgerySkill))
+                larvaSurgery = $"[color=#858585]{larvaSurgery}[/color]";
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-larva-surgery"), window);
+        }
 
         //TODO RMC14 more surgery advice
 
@@ -339,7 +357,12 @@ public sealed class HealthScannerBui : BoundUserInterface
             var bloodPercent = uiState.Blood / uiState.MaxBlood;
 
             if (bloodPercent < 0.85)
-                AddAdvice(Loc.GetString("rmc-health-analyzer-advice-bloodpack"), window);
+            {
+                string bloodpack = Loc.GetString("rmc-health-analyzer-advice-bloodpack");
+                if (!_skills.HasAllSkills(viewer, BloodPackSkill))
+                    bloodpack = $"[color=#858585]{bloodpack}[/color]";
+                AddAdvice(bloodpack, window);
+            }
 
             if (bloodPercent < 0.9 && uiState.Chemicals != null && !uiState.Chemicals.ContainsReagent("Nutriment", null))
                 AddAdvice(Loc.GetString("rmc-health-analyzer-advice-food"), window);
