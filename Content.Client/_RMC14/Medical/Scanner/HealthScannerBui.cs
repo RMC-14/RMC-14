@@ -309,7 +309,7 @@ public sealed class HealthScannerBui : BoundUserInterface
                 if (deadThreshold + 50 < target.Comp.Damage.GetTotal() && uiState.Chemicals != null
                     && !uiState.Chemicals.ContainsReagent("CMEpinephrine", null))
                 {
-                    AddAdvice(Loc.GetString("rmc-health-analyzer-advice-epi"), window);
+                    AddAdvice(Loc.GetString("rmc-health-analyzer-advice-epinedrine"), window);
                 }
                 else
                 {
@@ -357,7 +357,7 @@ public sealed class HealthScannerBui : BoundUserInterface
 
             if (bloodPercent < 0.85)
             {
-                string bloodpack = Loc.GetString("rmc-health-analyzer-advice-bloodpack");
+                string bloodpack = Loc.GetString("rmc-health-analyzer-advice-blood-pack");
                 if (!_skills.HasAllSkills(viewer, BloodPackSkill))
                     bloodpack = $"[color=#858585]{bloodpack}[/color]";
                 AddAdvice(bloodpack, window);
@@ -376,30 +376,30 @@ public sealed class HealthScannerBui : BoundUserInterface
         var toxin = target.Comp.DamagePerGroup.GetValueOrDefault("Toxin");
         var genetic = target.Comp.DamagePerGroup.GetValueOrDefault("Genetic");
 
-        if (airloss > 0 && state != null && !_mob.IsDead(target))
+        if (airloss > 0 && !_mob.IsDead(target))
         {
-            if (airloss > 10 && state != null && _mob.IsCritical(target))
+            if (airloss > 10 && _mob.IsCritical(target))
                 AddAdvice(Loc.GetString("rmc-health-analyzer-advice-cpr-crit"), window);
 
             if (airloss > 30 && uiState.Chemicals != null &&
                 !uiState.Chemicals.ContainsReagent("CMDexalin", null))
-                AddAdvice(Loc.GetString("rmc-health-analyzer-advice-dex"), window);
+                AddAdvice(Loc.GetString("rmc-health-analyzer-advice-dexalin"), window);
         }
 
         if (brute > 30 && uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMBicaridine", null) &&
-            state != null && !_mob.IsDead(target))
-            AddAdvice(Loc.GetString("rmc-health-analyzer-advice-bic"), window);
+            !_mob.IsDead(target))
+            AddAdvice(Loc.GetString("rmc-health-analyzer-advice-bicaridine"), window);
 
         if (burn > 30 && uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMKelotane", null) &&
-            state != null && !_mob.IsDead(target))
-            AddAdvice(Loc.GetString("rmc-health-analyzer-advice-kelo"), window);
+            !_mob.IsDead(target))
+            AddAdvice(Loc.GetString("rmc-health-analyzer-advice-kelotane"), window);
 
         if (toxin > 10 && uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMDylovene", null) && !uiState.Chemicals.ContainsReagent("Inaprovaline", null) &&
-            state != null && !_mob.IsDead(target))
-            AddAdvice(Loc.GetString("rmc-health-analyzer-advice-dylo"), window);
+            !_mob.IsDead(target))
+            AddAdvice(Loc.GetString("rmc-health-analyzer-advice-dylovene"), window);
 
         //TODO RMC14 Clone damage advice
     }
