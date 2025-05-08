@@ -20,7 +20,7 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     public Dictionary<SquadLeaderTrackerMode, ProtoId<JobPrototype>> RoleTrackers = new()
     {
         {SquadLeaderTrackerMode.CommandingOfficer, "CMCommandingOfficer"},
-        {SquadLeaderTrackerMode.ExecutiveOfficer, "CMExecutiveOfficer}"},
+        {SquadLeaderTrackerMode.ExecutiveOfficer, "CMExecutiveOfficer"},
         {SquadLeaderTrackerMode.AuxiliarySupportOfficer, "CMAuxiliarySupportOfficer"},
         {SquadLeaderTrackerMode.ChiefMilitaryPolice, "CMChiefMP"},
         {SquadLeaderTrackerMode.ChiefEngineer, "CMChiefEngineer"},
