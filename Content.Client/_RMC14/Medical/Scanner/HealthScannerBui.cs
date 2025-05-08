@@ -14,8 +14,6 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Temperature;
 using JetBrains.Annotations;
@@ -43,6 +41,7 @@ public sealed class HealthScannerBui : BoundUserInterface
     private readonly SkillsSystem _skills;
     private readonly SharedWoundsSystem _wounds;
     private readonly SharedRottingSystem _rot;
+    private readonly MobStateSystem _mob;
 
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> BloodPackSkill = new() { ["RMCSkillSurgery"] = 1 };
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> DefibSkill = new() { ["RMCSkillMedical"] = 2 };
@@ -54,6 +53,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         _skills = _entities.System<SkillsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
         _rot = _entities.System<SharedRottingSystem>();
+        _mob = _entities.System<MobStateSystem>();
     }
 
     protected override void Open()
@@ -115,7 +115,7 @@ public sealed class HealthScannerBui : BoundUserInterface
             _window.HealthBar.MaxValue = 100;
 
             if (_entities.HasComponent<VictimBurstComponent>(target) || _rot.IsRotten(target) ||
-                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target))
+                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target) && _mob.IsDead(target))
             {
                 isPermaDead = true;
                 _window.HealthBar.Value = 100;
@@ -285,9 +285,7 @@ public sealed class HealthScannerBui : BoundUserInterface
 
     private void MedicalAdvice(Entity<DamageableComponent> target, HealthScannerBuiState uiState, HealthScannerWindow window)
     {
-        MobStateComponent? state = null;
         WoundedComponent? wounds = null;
-        _entities.TryGetComponent(target, out state);
         _entities.TryGetComponent(target, out wounds);
         bool hasBruteWounds = false;
         bool hasBurnWounds = false;
@@ -302,7 +300,7 @@ public sealed class HealthScannerBui : BoundUserInterface
             return;
 
         //Defibrilation related
-        if (state != null && state.CurrentState == MobState.Dead)
+        if (_mob.IsDead(target))
         {
             var thresholdsSystem = _entities.System<MobThresholdSystem>();
 
@@ -334,7 +332,8 @@ public sealed class HealthScannerBui : BoundUserInterface
         }
 
         //Surgery related
-        if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) && holocardComponent.HolocardStatus == HolocardStatus.Xeno)
+        if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) &&
+            holocardComponent.HolocardStatus == HolocardStatus.Xeno)
         {
             string larvaSurgery = Loc.GetString("rmc-health-analyzer-advice-larva-surgery");
             if (!_skills.HasAllSkills(viewer, LarvaSurgerySkill))
@@ -377,9 +376,9 @@ public sealed class HealthScannerBui : BoundUserInterface
         var toxin = target.Comp.DamagePerGroup.GetValueOrDefault("Toxin");
         var genetic = target.Comp.DamagePerGroup.GetValueOrDefault("Genetic");
 
-        if (airloss > 0 && state != null && state.CurrentState != MobState.Dead)
+        if (airloss > 0 && state != null && !_mob.IsDead(target))
         {
-            if (airloss > 10 && state != null && state.CurrentState == MobState.Critical)
+            if (airloss > 10 && state != null && _mob.IsCritical(target))
                 AddAdvice(Loc.GetString("rmc-health-analyzer-advice-cpr-crit"), window);
 
             if (airloss > 30 && uiState.Chemicals != null &&
@@ -389,17 +388,17 @@ public sealed class HealthScannerBui : BoundUserInterface
 
         if (brute > 30 && uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMBicaridine", null) &&
-            state != null && state.CurrentState != MobState.Dead)
+            state != null && !_mob.IsDead(target))
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-bic"), window);
 
         if (burn > 30 && uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMKelotane", null) &&
-            state != null && state.CurrentState != MobState.Dead)
+            state != null && !_mob.IsDead(target))
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-kelo"), window);
 
         if (toxin > 10 && uiState.Chemicals != null &&
             !uiState.Chemicals.ContainsReagent("CMDylovene", null) && !uiState.Chemicals.ContainsReagent("Inaprovaline", null) &&
-            state != null && state.CurrentState != MobState.Dead)
+            state != null && !_mob.IsDead(target))
             AddAdvice(Loc.GetString("rmc-health-analyzer-advice-dylo"), window);
 
         //TODO RMC14 Clone damage advice
