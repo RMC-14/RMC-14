@@ -23,7 +23,6 @@ rmc-health-analyzer-advice-larva-surgery = Take patient to a surgical table to p
 rmc-health-analyzer-advice-brute-wounds = Use trauma kits or surgical line to repair the lacerated areas.
 rmc-health-analyzer-advice-burn-wounds = Use burn kits or synth-graft to repair the burned areas.
 
-rmc-health-analyzer-advice-iron = Administer a single dose of iron.
 rmc-health-analyzer-advice-bloodpack = Connect blood pack or IV to patient.
 rmc-health-analyzer-advice-food = Administer food or recommend that the patient eat.
 
