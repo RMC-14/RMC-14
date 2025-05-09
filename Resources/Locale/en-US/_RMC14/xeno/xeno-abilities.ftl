@@ -76,13 +76,13 @@ rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
-cm-xeno-paralyzing-slash-expire = You have waited too long, your slash will no longer apply neurotoxin!
-cm-xeno-paralyzing-slash-hit = You add neurotoxin into your attack, {$target} is about to fall over paralyzed!
+cm-xeno-paralyzing-slash-expire = We have waited too long, your slash will no longer apply neurotoxin!
+cm-xeno-paralyzing-slash-hit = We add neurotoxin into your attack, {$target} is about to fall over paralyzed!
 
 # Crippling Strike
 cm-xeno-crippling-strike-activate = Our next slash will apply neurotoxin!
-cm-xeno-crippling-strike-expire = You have waited too long, your slash will no longer apply neurotoxin!
-cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing the unknown!
+cm-xeno-crippling-strike-expire = We have waited too long, your slash will no longer apply neurotoxin!
+cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing {THE($target)}!
 
 # Pheromones
 rmc-xeno-pheromones-help =
@@ -351,3 +351,7 @@ rmc-xeno-produce-eggs-start = We start forming eggs.
 # Eggsac Passive
 rmc-xeno-sustain-egg-decaying = We can only sustain {$max} eggs off hive weeds! Our oldest egg is decaying rapidly.
 rmc-xeno-sustain-death = {CAPITALIZE(THE($xeno))} throes as its eggsac bursts into a mess of acid!
+
+# Apprehend
+rmc-xeno-apprehend-activate = Our next slash will slow!
+rmc-xeno-apprehend-expire = We have waited too long, our slash will no longer slow enemies!

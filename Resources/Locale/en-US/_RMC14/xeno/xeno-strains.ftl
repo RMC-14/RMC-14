@@ -109,3 +109,12 @@ rmc-xeno-eggsac-description = You trade your ability to store parasites and make
    - Sustained Eggs will convert into normal eggs upon touching hive weeds, and cannot produce sentient parasites.
    - Use plasma over time to make eggs.
 rmc-xeno-eggsac-popup = An egg is always an adventure; the next one may be different.
+
+rmc-xeno-berserker-name = Berserker
+rmc-xeno-berserker-description = You lose your empower, charge, and scissor cut, decrease your health, and sacrifice a bit of your influence under frenzy pheromones to increase your movement speed, slightly increase your armor, and gain a new set of abilities that make you a terrifying melee monster.
+  You gain the ability to:
+  - Heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
+  - Apprehend to increase your movement speed and apply a slow on the next target you slash.
+  - Eviscerate to unleash a devastating windmill attack that heals you for every enemy you hit after an immobilizing wind-up.
+  - Clothesline to fling your target to heal yourself, even more-so if you have a rage stack that will be used up. up
+rmc-xeno-berserker-popup = Unbridled fury fills this one. You will become an extension of my rage.

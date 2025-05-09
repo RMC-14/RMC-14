@@ -934,3 +934,18 @@
     deselectOnMiss: false
   - type: ActionBlockIfResting
   - type: XenoOffensiveAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoApprehend
+  name: Apprehend
+  description: Increases your movement speed and applies a slow on the next target you slash.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_enrage
+    event: !type:XenoCripplingStrikeActionEvent
+    useDelay: 18
+  - type: ActionBlockIfResting
