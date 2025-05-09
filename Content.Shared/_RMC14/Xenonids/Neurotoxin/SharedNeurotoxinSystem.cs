@@ -132,7 +132,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 if (time < builtNeurotoxin.NextGasInjectionAt)
                     continue;
 
-                _daze.TryDaze();
+                _daze.TryDaze(marine, neuroGas.DazeTime, true, stutter: true);
                 builtNeurotoxin.NeurotoxinAmount += neuroGas.NeuroPerSecond;
                 builtNeurotoxin.ToxinDamage = neuroGas.ToxinDamage;
                 builtNeurotoxin.OxygenDamage = neuroGas.OxygenDamage;
