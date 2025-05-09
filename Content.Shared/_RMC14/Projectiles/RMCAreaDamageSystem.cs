@@ -4,7 +4,6 @@ using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -19,7 +18,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCAreaDamageComponent, ProjectileHitEvent>(OnAreaDamageProjectileHit);
@@ -36,15 +35,15 @@ public sealed class RMCAreaDamageSystem : EntitySystem
         if(ev.Cancelled)
             return;
 
-        ApplyAreaDamage(ent, args.Target, args.Damage);
+        ApplyAreaDamage(ent, args.Target, args.Damage, args.Shooter);
     }
 
     /// <summary>
     ///     Apply damage to entities near a target.
     /// </summary>
-    private void ApplyAreaDamage(EntityUid uid, EntityUid target, DamageSpecifier damage, RMCAreaDamageComponent? areaDamage = null)
+    private void ApplyAreaDamage(EntityUid uid, EntityUid target, DamageSpecifier damage, EntityUid? shooter = null, RMCAreaDamageComponent? areaDamage = null)
     {
-        if (!Resolve(uid, ref areaDamage) || _net.IsClient)
+        if (!Resolve(uid, ref areaDamage))
             return;
 
         // Only area damage if the initial target is a mob.
@@ -56,7 +55,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
         // Apply damage to all eligible entities in range.
         foreach (var entity in nearbyEntities)
         {
-            if(entity.Owner == target || _mobState.IsDead(target))
+            if(entity.Owner == target || entity == shooter)
                 continue;
 
             var fromCoords = _transform.GetMapCoordinates(target);
@@ -80,7 +79,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
 
             var damageDealt = _damage.TryChangeDamage(entity, newDamage, armorPiercing: armorPiercing);
 
-            if (!(damageDealt?.GetTotal() > FixedPoint2.Zero))
+            if (!(damageDealt?.GetTotal() > FixedPoint2.Zero) || !_net.IsClient)
                 continue;
 
             var filter = Filter.Pvs(entity, entityManager: EntityManager).RemoveWhereAttachedEntity(hit => hit == entity.Owner);
