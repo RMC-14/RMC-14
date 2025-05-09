@@ -11,7 +11,7 @@
   Reminder that charge spit extra movement can be used for escaping, as it lasts a while or until your next spit!
   
   ##Abilities:
-  - [bold]Acid Spit[bold]: Glob acid to deal damage to any targets.
+  - [bold]Acid Spit[/bold]: Glob acid to deal damage to any targets.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoSpit"/>
   - [bold]Charge Spit[/bold]: Grants you extra movement speed and armor and empowers your next spit, which will do extra damage but will be shorter in range. Additionally, it will spatter the target in acid.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoChargeSpit"/>
