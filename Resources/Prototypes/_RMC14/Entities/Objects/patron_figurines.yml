@@ -1402,7 +1402,10 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAnglerAngusSeawing
   name: Angler 'Angus' Seawing figurine
-  #description: ""
+  description: "A fish-looking dragon who is known for telling people they arent a fish.
+
+
+    Usually seen in the hangar or patrolling around."
   components:
   - type: Sprite
     state: angler_angus_seawing
