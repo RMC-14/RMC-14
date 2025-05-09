@@ -1,7 +1,13 @@
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
+using Content.Shared.Effects;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Projectiles;
 
@@ -11,6 +17,9 @@ public sealed class RMCAreaDamageSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCAreaDamageComponent, ProjectileHitEvent>(OnAreaDamageProjectileHit);
@@ -35,7 +44,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
     /// </summary>
     private void ApplyAreaDamage(EntityUid uid, EntityUid target, DamageSpecifier damage, RMCAreaDamageComponent? areaDamage = null)
     {
-        if (!Resolve(uid, ref areaDamage))
+        if (!Resolve(uid, ref areaDamage) || _net.IsClient)
             return;
 
         // Only area damage if the initial target is a mob.
@@ -47,13 +56,14 @@ public sealed class RMCAreaDamageSystem : EntitySystem
         // Apply damage to all eligible entities in range.
         foreach (var entity in nearbyEntities)
         {
-            if(entity.Owner == target)
+            if(entity.Owner == target || _mobState.IsDead(target))
                 continue;
 
             var fromCoords = _transform.GetMapCoordinates(target);
             var toCoords = _transform.GetMapCoordinates(entity);
             var distance = toCoords.Position - fromCoords.Position;
             var newDamage = damage;
+            var armorPiercing = 0;
 
             // Reduce damage if the distance is bigger than the falloff range
             if (areaDamage.FalloffDistance / distance.Length() < 1)
@@ -61,11 +71,20 @@ public sealed class RMCAreaDamageSystem : EntitySystem
 
             _sizeStun.TryGetSize(entity, out var size);
 
+            if (TryComp(uid, out CMArmorPiercingComponent? piercing))
+                armorPiercing = piercing.Amount;
+
             // Xenos take double area damage in CM13 compared to humans, I tried finding out why without success so here's a 2x multiplier.
             if (size >= RMCSizes.SmallXeno)
                 newDamage *= 2;
 
-            _damage.TryChangeDamage(entity, newDamage);
+            var damageDealt = _damage.TryChangeDamage(entity, newDamage, armorPiercing: armorPiercing);
+
+            if (!(damageDealt?.GetTotal() > FixedPoint2.Zero))
+                continue;
+
+            var filter = Filter.Pvs(entity, entityManager: EntityManager).RemoveWhereAttachedEntity(hit => hit == entity.Owner);
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { entity }, filter);
         }
     }
 }
