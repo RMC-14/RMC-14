@@ -183,6 +183,7 @@
   name: "Who is in Command?"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCommandRoles.xml"
 
+# Xenonids
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleDefender
