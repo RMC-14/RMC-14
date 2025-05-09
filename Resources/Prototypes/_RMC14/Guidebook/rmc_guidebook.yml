@@ -84,7 +84,6 @@
   - RMCGuideRoleHivelord
   - RMCGuideRoleBurrower
   - RMCGuideRoleCarrier
-  - RMCGuideRoleEggsac
   - RMCGuideRoleCrusher
   - RMCGuideRolePraetorian
   - RMCGuideRoleOppressor
@@ -246,6 +245,8 @@
   priority: 19
   name: "Carrier Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCarrier.xml"
+  children:
+    - RMCGuideRoleEggsac
 
 - type: guideEntry
   parent: RMC
