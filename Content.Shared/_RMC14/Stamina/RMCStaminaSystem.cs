@@ -105,10 +105,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
         }
 
         if (newLevel >= 3 && newLevel != ent.Comp.Level)
-        {
-            //TODO RMC14 Weldervision
             _daze.TryDaze(ent, ent.Comp.EffectTime, true, stutter: true);
-        }
 
         if (newLevel >= 4)
         {
