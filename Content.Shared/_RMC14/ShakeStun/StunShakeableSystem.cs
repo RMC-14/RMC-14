@@ -56,6 +56,9 @@ public sealed class StunShakeableSystem : EntitySystem
         if (time < shakeableUser.LastShake + shakeableUser.Cooldown)
             return;
 
+        shakeableUser.LastShake = time;
+        Dirty(user, shakeableUser);
+
         //They fall back down instantly in stam crit
         if (TryComp<RMCStaminaComponent>(ent, out var stamina) && stamina.Level >= 4)
         {
@@ -64,9 +67,6 @@ public sealed class StunShakeableSystem : EntitySystem
         }
 
         _rmcStanding.SetRest(target, false);
-
-        shakeableUser.LastShake = time;
-        Dirty(user, shakeableUser);
 
         // Only remove muted & blindness if they're at the same timer
         // Simulating how in CM-13 you can wake up unconscious people (knockedout - knocked down, stunned, blinded, deafened, and muted)
