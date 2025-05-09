@@ -46,6 +46,7 @@
   - RMCGuideCommandRoles
   - RMCGuideRoleMortar
   - RMCGuideRoleSpec
+  - RMCGuideRoleCAS
 
 # marine structures
 - type: guideEntry
@@ -211,6 +212,14 @@
   priority: 4
   name: "Sniper Specialist"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecSniper.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleCAS
+  priority: 4
+  name: "Dropships and CAS"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCAS.xml"
+
 
 # Chemistry stuff
 - type: guideEntry
