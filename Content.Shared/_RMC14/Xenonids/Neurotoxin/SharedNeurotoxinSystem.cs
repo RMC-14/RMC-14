@@ -83,7 +83,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             neuro.LastStumbleTime = time;
         }
 
-        _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(args.Target, "Blinded", neuro.BlurTime * 6, false);
+        _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(args.Target, "Blinded", neuro.BlurTime * 6, true);
         neuro.NeurotoxinAmount += ent.Comp.NeuroPerSecond;
         neuro.ToxinDamage = ent.Comp.ToxinDamage;
         neuro.OxygenDamage = ent.Comp.OxygenDamage;
@@ -130,7 +130,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 if (time < builtNeurotoxin.NextGasInjectionAt)
                     continue;
 
-                _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(marine, "Blinded", builtNeurotoxin.BlurTime * 12, false);
+                _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(marine, "Blinded", builtNeurotoxin.BlurTime * 12, true);
                 builtNeurotoxin.NeurotoxinAmount += neuroGas.NeuroPerSecond;
                 builtNeurotoxin.ToxinDamage = neuroGas.ToxinDamage;
                 builtNeurotoxin.OxygenDamage = neuroGas.OxygenDamage;
