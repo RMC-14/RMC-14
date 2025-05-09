@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Administration.Logs;
@@ -100,7 +101,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
         if (newLevel >= 2)
         {
-            //TODO RMC14 Eye Blur
+            _status.TryAddStatusEffect<RMCBlindedComponent>(ent, "Blinded", ent.Comp.EffectTime, true);
             _stutter.DoStutter(ent, ent.Comp.EffectTime, true);
         }
 
