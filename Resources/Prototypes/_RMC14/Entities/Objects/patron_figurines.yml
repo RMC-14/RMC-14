@@ -1147,7 +1147,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronNanSnowBunnyMazu
-  name: Nan 'Snow Bunny' Mazu figurine
+  name: Nan Mazu figurine
   description: "The Way of Sunlight
 
 
@@ -1375,3 +1375,25 @@
     state: austin_spectre_eventide
   - type: PatronFigurine
     id: 6ff41436-85a7-4c3b-bb39-b29738fedef5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronShei-Teegla
+  name: Shei-Teegla figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: shei-teegla
+  - type: PatronFigurine
+    id: f8e67bb9-5f07-452e-afa1-c6d6eb8fae74
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJazzyJune
+  name: Jazzy June figurine
+  description: "She's trying her best. Can't you tell?"
+  components:
+  - type: Sprite
+    state: jazzy_june
+  - type: PatronFigurine
+    id: 95637346-7df4-4c94-9dee-12204a9f61c1
