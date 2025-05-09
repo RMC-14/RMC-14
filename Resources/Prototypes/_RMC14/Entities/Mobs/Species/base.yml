@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -31,6 +31,7 @@
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
+  - type: RMCStamina
   - type: Bloodstream
     bloodReagent: Blood
     bloodMaxVolume: 560

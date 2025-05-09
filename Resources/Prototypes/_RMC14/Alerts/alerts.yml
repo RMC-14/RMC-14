@@ -102,3 +102,22 @@
   name: Tactical Map
   description: Click to open the Tactical Map.
   clickEvent: !type:OpenTacMapAlertEvent
+
+- type: alert
+  id: RMCStamina
+  category: Stamina
+  icons:
+  - sprite: /Textures/Interface/Alerts/stamina.rsi
+    state: stamina0
+  - sprite: /Textures/Interface/Alerts/stamina.rsi
+    state: stamina1
+  - sprite: /Textures/Interface/Alerts/stamina.rsi
+    state: stamina3
+  - sprite: /Textures/Interface/Alerts/stamina.rsi
+    state: stamina5
+  - sprite: /Textures/Interface/Alerts/stamina.rsi
+    state: stamina6
+  name: alerts-stamina-name
+  description: alerts-stamina-desc
+  minSeverity: 0
+  maxSeverity: 4
