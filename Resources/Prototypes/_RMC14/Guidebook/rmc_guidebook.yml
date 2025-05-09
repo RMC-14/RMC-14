@@ -80,15 +80,11 @@
   - RMCGuideRoleWarrior
   - RMCGuideRoleSpitter
   - RMCGuideRoleLurker
-  - RMCGuideRoleVampire
   - RMCGuideRoleHivelord
   - RMCGuideRoleBurrower
   - RMCGuideRoleCarrier
   - RMCGuideRoleCrusher
   - RMCGuideRolePraetorian
-  - RMCGuideRoleOppressor
-  - RMCGuideRoleValkyrie
-  - RMCGuideRoleVanguard
   - RMCGuideRoleRavager
   - RMCGuideRoleBoiler
   - RMCGuideRoleQueen
@@ -224,6 +220,8 @@
   priority: 16
   name: "Lurker Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleLurker.xml"
+  children:
+    - RMCGuideRoleVampire
 
 - type: guideEntry
   parent: RMC
@@ -261,6 +259,10 @@
   priority: 21
   name: "Praetorian Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRolePraetorian.xml"
+  children:
+    - RMCGuideRoleValkyrie
+    - RMCGuideRoleOppressor
+    - RMCGuideRoleVanguard
 
 - type: guideEntry
   parent: RMC
