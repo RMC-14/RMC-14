@@ -6,6 +6,7 @@ using Content.Shared.Alert;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Rejuvenate;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
@@ -37,6 +38,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
         SubscribeLocalEvent<RMCStaminaComponent, ComponentStartup>(OnStaminaStartup);
         SubscribeLocalEvent<RMCStaminaComponent, RefreshMovementSpeedModifiersEvent>(OnStaminaMovementSpeedModify);
+        SubscribeLocalEvent<RMCStaminaComponent, RejuvenateEvent>(OnStaminaRejuvenate);
 
         SubscribeLocalEvent<RMCStaminaDamageOnHitComponent, MeleeHitEvent>(OnStaminaOnHit);
     }
@@ -44,6 +46,13 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     private void OnStaminaStartup(Entity<RMCStaminaComponent> ent, ref ComponentStartup args)
     {
         SetStaminaAlert(ent);
+    }
+
+    private void OnStaminaRejuvenate(Entity<RMCStaminaComponent> ent, ref RejuvenateEvent args)
+    {
+        var healAmount = ent.Comp.Max - ent.Comp.Current;
+
+        DoStaminaDamage((ent, ent.Comp), healAmount, false);
     }
 
     public override void Update(float frameTime)
