@@ -1397,3 +1397,14 @@
     state: jazzy_june
   - type: PatronFigurine
     id: 95637346-7df4-4c94-9dee-12204a9f61c1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAnglerAngusSeawing
+  name: Angler 'Angus' Seawing figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: angler_angus_seawing
+  - type: PatronFigurine
+    id: 3ee135f9-b228-4f65-8155-40613aaef0dc
