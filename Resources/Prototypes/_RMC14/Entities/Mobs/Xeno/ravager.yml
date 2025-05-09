@@ -182,7 +182,7 @@
     explosionArmor: 80
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.5
-    baseSprintSpeed: 4.6
+    baseSprintSpeed: 4.1
   - type: XenoShield
   - type: XenoStrain
     name: rmc-xeno-berserker-name
@@ -197,4 +197,4 @@
     expireText: rmc-xeno-apprehend-expire
     auraColor: "#522020"
     damageMult: 1
-    speed: 1.35
+    speed: 1.2
