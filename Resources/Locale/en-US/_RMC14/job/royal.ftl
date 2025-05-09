@@ -5,6 +5,6 @@
 
 rmc-ghost-role-information-rmc-description = Ensure the survival of the UNS ship, eliminate any hostiles, and assist the crew in any way possible.
 
-rmc-ghost-name-rmc-sgo = Royal Marines SGO (Friendly)
-rmc-job-name-rmc-sgo = Royal Marines SGO
-rmc-job-prefix-rmc-sgo = RMC SG
+rmc-ghost-name-rmc-sgo = Royal Marines Smart Gun Operator (Friendly)
+rmc-job-name-rmc-sgo = Royal Marines Smart Gun Operator
+rmc-job-prefix-rmc-sgo = RMC SGO
