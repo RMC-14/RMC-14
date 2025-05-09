@@ -42,10 +42,10 @@ public sealed partial class NeurotoxinComponent : Component
     public TimeSpan LastStumbleTime;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan BlurTime = TimeSpan.FromSeconds(24);
+    public TimeSpan BlurTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan BlindTime = TimeSpan.FromSeconds(6);
+    public TimeSpan BlindTime = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
     public TimeSpan MinimumDelayBetweenEvents = TimeSpan.FromSeconds(1);
