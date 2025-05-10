@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Added more words to xeno chat san.
-    type: Add
-  id: 1187
-  time: '2025-01-11T08:25:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5344
-- author: Vermidia
-  changes:
   - message: Xeno spits have different colors now depending on how much damage they
       do. Neuro spit is now also yellow.
     type: Add
@@ -5518,5 +5511,13 @@
   id: 1689
   time: '2025-05-10T02:39:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6354
+- author: Ramiris
+  changes:
+  - message: 'Fixed clothing camo, you can now rep your CamoTech:tm: weapons on your
+      back/belt!'
+    type: Fix
+  id: 1690
+  time: '2025-05-10T03:16:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6325
 Name: RMC14
 Order: -1
