@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -43,6 +43,9 @@ public sealed partial class NeurotoxinComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan BlindTime = TimeSpan.FromSeconds(6);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan DeafenTime = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public TimeSpan MinimumDelayBetweenEvents = TimeSpan.FromSeconds(1);
