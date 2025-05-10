@@ -9,8 +9,13 @@
     layers:
     - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
+    - state: mag-5
       map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 6
+    zeroVisible: true
+    zeroOnlyOnEmpty: true
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi #TODO RMC: Change when new sprites
   - type: ContainerContainer
