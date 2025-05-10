@@ -221,3 +221,4 @@
     fireDelay: 3
     stunDuration: 2
     slowDuration: 0
+    dazeDuration: 15
