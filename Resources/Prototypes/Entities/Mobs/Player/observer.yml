@@ -67,9 +67,6 @@
     radius: 6
     enabled: false
   - type: ActiveInputMover
-  - type: ShowHealthBars
-    damageContainers:
-    - Biological
   - type: GhostColor
   # RMC - FindParasite Event
   - type: FindParasite
