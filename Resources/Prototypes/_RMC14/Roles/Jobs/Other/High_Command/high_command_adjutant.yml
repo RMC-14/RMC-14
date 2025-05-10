@@ -1,0 +1,80 @@
+- type: job
+  parent: CMJobBase
+  id: CMUNMCAdjutant
+  name: rmc-job-name-unmc-adjutant
+  description: rmc-job-description-unmc-adjutant
+  playTimeTracker: CMJobUNMCAdjutant
+  ranks:
+    RMCRankFirstLT: []
+  startingGear: RMCGearUNMCAdjutant
+  icon: "RMCJobIconUNMCAdjutant"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+  hidden: true
+
+- type: startingGear
+  id: RMCGearUNMCAdjutant
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    outerClothing: CMCoatXOFormal
+    shoes: RMCShoesLaceup
+    head: CMHeadCapPeakedService
+    id: RMCIDCardUNMCAdjutant
+    ears: CMHeadsetHighCommand
+    eyes: RMCSunglasses
+    back: CMSatchel
+    belt: RMCMK80BeltFilled
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+  inhand:
+    - CMPenFountain
+
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardUNMCAdjutant
+  name: UNMC Adjutant ID card
+  description: A fancy ID card. Issued to the adjutants of high command.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/general.rsi
+    state: general
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/general.rsi
+  - type: Item
+    heldPrefix: green
+  - type: Access
+    groups:
+    - ShipMasterAccess
+
+- type: playTimeTracker
+  id: CMJobUNMCAdjutant
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconUNMCAdjutant
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_adjutant
+
