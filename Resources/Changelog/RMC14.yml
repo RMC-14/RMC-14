@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: UGL launched grenades timer starts on landing.
-    type: Add
-  - message: Timer is extended to 1.5 seconds.
-    type: Add
-  id: 1198
-  time: '2025-01-11T13:53:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5248
 - author: Dutch-VanDerLinde
   changes:
   - message: Added scarves and more coifs to loadouts
@@ -5541,5 +5532,13 @@
   id: 1700
   time: '2025-05-10T03:54:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6359
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added ear deafness, certain loud noises will prevent you from hearing
+      chat and sounds.
+    type: Add
+  id: 1701
+  time: '2025-05-10T03:58:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6279
 Name: RMC14
 Order: -1
