@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Server rules have been updated. Please check the changelog in the guidebook.
-    type: Tweak
-  id: 1197
-  time: '2025-01-11T13:39:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5347
 - author: blueDev2
   changes:
   - message: UGL launched grenades timer starts on landing.
@@ -5539,5 +5532,14 @@
   id: 1699
   time: '2025-05-10T03:39:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6363
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added functionality for CQC skill. CQC skill will now allow you to do
+      aggressive grabs faster, do extra unarmed damage, let you disarm/tackle other
+      marines better, and decrease inventory strip times.
+    type: Add
+  id: 1700
+  time: '2025-05-10T03:54:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6359
 Name: RMC14
 Order: -1
