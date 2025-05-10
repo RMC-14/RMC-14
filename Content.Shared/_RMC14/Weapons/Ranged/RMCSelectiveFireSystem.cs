@@ -107,7 +107,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         gunComponent.AngleIncrease = gun.Comp.ScatterIncrease;
         gunComponent.AngleDecay = gun.Comp.ScatterDecay;
 
-        var ev = new GunGetFireRateEvent(gunComponent.SelectedMode == SelectiveFire.Burst ? gun.Comp.BaseFireRate * 2 : gun.Comp.BaseFireRate);
+        var ev = new GunGetFireRateEvent(gunComponent.SelectedMode == SelectiveFire.Burst ? gun.Comp.BaseFireRate * gun.Comp.BurstFireRateMultiplier : gun.Comp.BaseFireRate);
         RaiseLocalEvent(gun, ref ev);
         gunComponent.FireRate = ev.FireRate;
 
