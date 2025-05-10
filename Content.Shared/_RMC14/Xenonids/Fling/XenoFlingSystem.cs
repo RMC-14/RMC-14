@@ -86,7 +86,7 @@ public sealed class XenoFlingSystem : EntitySystem
         if (_net.IsServer)
         {
             _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
-            _throwing.TryThrow(targetId, diff, xeno.Comp.Range);
+            _throwing.TryThrow(targetId, diff, xeno.Comp.ThrowSpeed);
 
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
         }
