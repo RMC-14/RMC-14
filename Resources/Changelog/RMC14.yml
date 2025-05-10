@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed XO and ASO not starting with a rangefinder in their pouch, and
-      the XO not starting with 2 large pouches.
-    type: Fix
-  - message: Fixed SO not starting with a rangefinder in their hand and two large
-      pouches.
-    type: Fix
-  - message: Fixed SEA not spawning with a flash, large pouch, whistle, and binoculars.
-    type: Fix
-  - message: Fixed the QM's starting pocket contents being swapped.
-    type: Fix
-  id: 1192
-  time: '2025-01-11T08:39:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5101
-- author: DummeHytteOst
-  changes:
-  - message: Removed the option for players to disable all recoil.
-    type: Fix
-  id: 1193
-  time: '2025-01-11T08:43:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5220
 - author: DummeHytteOst
   changes:
   - message: Removed explosions shaking your screen.
@@ -5517,5 +5495,38 @@
   id: 1694
   time: '2025-05-10T03:26:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6364
+- author: Dygon
+  changes:
+  - message: Fixed the duration of the slow and daze effects applied by tesla turrets
+      being too low. Super slow 4 > 6, daze 8 > 10 for most and 8 > 15 for the overclocked.
+    type: Fix
+  id: 1695
+  time: '2025-05-10T03:33:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6374
+- author: Vermidia
+  changes:
+  - message: Added medical optics, point-buyable for most squad roles and usable without
+      any skills. The corpsman helmet no longer inherently gives a medical HUD, instead
+      it comes with an integrated visor that gives you a medical HUD.
+    type: Add
+  - message: Added welding visors, point-buyable for most squad roles and usable without
+      any skills. The technician helmet no longer inherently protects your eyes from
+      welding, instead it comes with an integrated welding visor.
+    type: Add
+  - message: Added squad optic, integrated into most marine helmets, and only activatable
+      if you have nothing else to show marine icons. It shows marine icons.
+    type: Add
+  - message: Added the m10 welding helmet, combat technicians can now choose between
+      it and the technician helmet.
+    type: Add
+  - message: The M11C, M30, M10 pattern officer now have integrated visors.
+    type: Add
+  - message: Fixed M12 and XM12 not having an additional visor slot.
+    type: Fix
+  - message: Fixed the NV optic not glowing slightly when on.
+    type: Fix
+  id: 1696
+  time: '2025-05-10T03:32:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6366
 Name: RMC14
 Order: -1
