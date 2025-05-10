@@ -113,7 +113,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits:
+    randomOutfits: # todo different backpacks
     - [ CMJumpsuitColonist, RMCShoesBlack ] # Default
     - [ RMCJumpsuitCivilianJanitor, RMCShoesGaloshes, RMCHipsterGlasses, RMCHandsPurple, ClothingHeadHatPurplesoft, RMCHazardVest ] # Janitor
     - [ RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, RMCHydroApron ] # Botanist (TODO: Add Hatchet)
