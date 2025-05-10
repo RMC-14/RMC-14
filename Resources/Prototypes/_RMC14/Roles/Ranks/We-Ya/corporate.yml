@@ -17,11 +17,13 @@
   id: RMCRankWeYaExecutiveSpecialist
   name: Executive Specialist
   prefix: Exec. Spc.
+  paygrade: WYC5
 
 - type: rank
   id: RMCRankWeYaExecutiveSupervisor
   name: Executive Supervisor
   prefix: Exec. Spvsr.
+  paygrade: WYC6
 
 - type: rank
   id: RMCRankWeYaAssistantManager
@@ -47,3 +49,14 @@
   id: RMCRankWeYaDirector
   name: Director
   prefix: Director
+
+# Lawyers
+- type: rank
+  id: RMCRankWeYaLegalSpecialist
+  name: Legal Specialist
+  prefix: Legal Spc.
+
+- type: rank
+  id: RMCRankWeYaLegalSupervisor
+  name: Legal Supervisor
+  prefix: Legal Spvsr.

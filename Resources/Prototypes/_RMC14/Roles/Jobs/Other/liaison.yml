@@ -26,20 +26,8 @@
   icon: "CMJobIconLiaison"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-we-ya
-  access:
-  - RMCAccessWeYa
-  - CMAccessCommand
-  - CMAccessResearch
-  - CMAccessMedical
-  - CMAccessMedPrep
-  - CMAccessColonyPublic
-  - CMAccessColonyResearch
-  - CMAccessColonyEngineering
-  - CMAccessColonyLogistics
-  - CMAccessColonyBrig
-  - CMAccessColonyMedbay
-#  - TODO RMC14 WeYa flight
-  - CMAccessColonyCommand
+  accessGroups:
+  - RMCWeYaExecColony
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: cl
@@ -58,7 +46,11 @@
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: CMVendorUser
-      points: 50
+      points: 40
+    - type: RMCVendorUserRecharge
+      maxPoints: 50
+      pointsPerUpdate: 1
+      timePerUpdate: 40 # 1 / (0.05 / 2)
     - type: JobPrefix
       prefix: cm-job-prefix-liaison
     - type: TacticalMapIcon

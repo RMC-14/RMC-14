@@ -19,17 +19,17 @@
         density: 20
         mask:
         - ItemMask
-        layer:
-        - BulletImpassable
+#        layer: # Added by XenoEggSystem
+#        - BulletImpassable
         restitution: 0.3
         friction: 0.2
-      xeno_egg:
-        shape:
-          !type:PhysShapeCircle
-          radius: 1.5
-        hard: false
-        mask:
-        - MobLayer
+#      xeno_egg: # Added by XenoEggSystem
+#        shape:
+#          !type:PhysShapeCircle
+#          radius: 1.5
+#        hard: false
+#        mask:
+#        - MobLayer
   - type: CollisionWake
     enabled: false
   - type: Flammable
