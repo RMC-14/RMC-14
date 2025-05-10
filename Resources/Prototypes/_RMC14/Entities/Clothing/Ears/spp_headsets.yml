@@ -90,7 +90,7 @@
 
 - type: entity
   abstract: true
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetIconsSPP
   id: RMCHeadsetSPPAbstract
   components:
   - type: GrantSquadLeaderTracker

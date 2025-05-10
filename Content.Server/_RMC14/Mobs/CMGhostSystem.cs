@@ -9,6 +9,7 @@ namespace Content.Server._RMC14.Mobs
     public sealed class CMGhostSystem : EntitySystem
     {
         [Dependency] private readonly SharedActionsSystem _actions = default!;
+        [Dependency] private readonly SharedMarineSystem _marine = default!;
 
         public override void Initialize()
         {
@@ -50,8 +51,8 @@ namespace Content.Server._RMC14.Mobs
             }
             else
             {
-                AddComp<ShowMarineIconsComponent>(uid);
                 EnsureComp<ShowHealthIconsComponent>(uid);
+                _marine.GiveMarineHud(uid, null, true);
                 _actions.SetToggled(comp.ToggleMarineHudEntity, false);
             }
         }

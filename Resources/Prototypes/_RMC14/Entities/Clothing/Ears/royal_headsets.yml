@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: RMCHeadsetShip
+  parent: RMCHeadsetIconsTSE
   id: RMCHeadsetRoyalMarine
   name: royal marine headset
   description: A sleek headset used by the Royal Marines Commando. Low profile enough to fit under their unique helmets.
@@ -14,6 +14,7 @@
     channels:
     - RoyalMarine
     radioTextIncrease: 2
+  - type: GrantTacMapAlert
 
 - type: entity
   parent: CMEncryptionKey

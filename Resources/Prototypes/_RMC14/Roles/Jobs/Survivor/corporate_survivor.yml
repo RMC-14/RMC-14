@@ -37,6 +37,7 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+      - Survivor
     - type: IntelRescueSurvivorObjective
 
 - type: startingGear
