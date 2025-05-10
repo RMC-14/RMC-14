@@ -23,3 +23,6 @@ rmc-dogtags-info-joined-name = information dog tags
 rmc-dogtags-info-joined-desc = Fallen marines' information dog tags.
 
 rmc-unstrippable = You can't take {THE($item)} off of {$owner}!
+
+rmc-no-visors-to-swap = There are no visors you can swap to!
+rmc-visor-down = {CAPITALIZE(THE($visor))} is flipped down.
