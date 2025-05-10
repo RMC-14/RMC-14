@@ -121,7 +121,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         if (size == RMCSizes.Humanoid)
         {
             var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
-            RaiseLocalEvent(ent, ref ev); // todo limb damage
+            RaiseLocalEvent(ent, ref ev); // TODO RMC14 limb damage
 
             var bombArmorMult = (100 - ev.ExplosionArmor) * 0.01;
             var severity = factor * 5;
