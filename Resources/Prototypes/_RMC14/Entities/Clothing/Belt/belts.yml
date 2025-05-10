@@ -593,7 +593,7 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
