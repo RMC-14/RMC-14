@@ -355,3 +355,9 @@ rmc-xeno-sustain-death = {CAPITALIZE(THE($xeno))} throes as its eggsac bursts in
 # Apprehend
 rmc-xeno-apprehend-activate = Our next slash will slow!
 rmc-xeno-apprehend-expire = We have waited too long, our slash will no longer slow enemies!
+
+# Rage
+rmc-xeno-rage-lock = We feel a euphoric rush as we reach max rage! We are LOCKED at max Rage!
+rmc-xeno-rage-expire = Our adrenal glands spasm. We cannot gain any rage for {$cooldown} seconds.
+rmc-xeno-rage-examine = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} has {$amount}/{$max} rage stacks.
+
