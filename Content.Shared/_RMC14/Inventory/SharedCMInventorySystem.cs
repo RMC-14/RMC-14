@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Input;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
@@ -14,6 +15,7 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Strip.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
@@ -41,6 +43,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     private readonly SlotFlags[] _order =
     [
@@ -91,6 +94,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         SubscribeLocalEvent<RMCItemPickupComponent, DroppedEvent>(OnItemDropped);
         SubscribeLocalEvent<RMCItemPickupComponent, RMCDroppedEvent>(OnItemDropped);
+
+        SubscribeLocalEvent<RMCStripTimeSkillComponent, BeforeStripEvent>(OnSkilledBeforeStrip);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
@@ -358,6 +363,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 }
             }
         }
+    }
+
+    protected void OnSkilledBeforeStrip(Entity<RMCStripTimeSkillComponent> ent, ref BeforeStripEvent args)
+    {
+        args.Multiplier = _skills.GetSkillDelayMultiplier(ent.Owner, ent.Comp.Skill);
     }
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)

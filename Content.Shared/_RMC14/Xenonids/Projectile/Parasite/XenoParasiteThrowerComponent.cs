@@ -41,8 +41,6 @@ public sealed partial class XenoParasiteThrowerComponent : Component
 [Serializable, NetSerializable]
 public enum ParasiteOverlayVisuals
 {
-    Resting,
-    Downed,
     States
 }
 

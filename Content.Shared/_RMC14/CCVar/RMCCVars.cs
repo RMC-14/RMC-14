@@ -4,7 +4,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared._RMC14.CCVar;
 
 [CVarDefs]
-public sealed class RMCCVars : CVars
+public sealed partial class RMCCVars : CVars
 {
     public static readonly CVarDef<float> CMXenoDamageDealtMultiplier =
         CVarDef.Create("rmc.xeno_damage_dealt_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
@@ -14,30 +14,6 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> CMXenoSpeedMultiplier =
         CVarDef.Create("rmc.xeno_speed_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesArachnid =
-        CVarDef.Create("rmc.play_voicelines_arachnid", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesDiona =
-        CVarDef.Create("rmc.play_voicelines_diona", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesDwarf =
-        CVarDef.Create("rmc.play_voicelines_dwarf", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesFelinid =
-        CVarDef.Create("rmc.play_voicelines_felinid", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesHuman =
-        CVarDef.Create("rmc.play_voicelines_human", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesMoth =
-        CVarDef.Create("rmc.play_voicelines_moth", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesReptilian =
-        CVarDef.Create("rmc.play_voicelines_reptilian", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
-
-    public static readonly CVarDef<bool> CMPlayVoicelinesSlime =
-        CVarDef.Create("rmc.play_voicelines_slime", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> RMCAutoPunctuate =
         CVarDef.Create("rmc.auto_punctuate", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);

@@ -1,0 +1,93 @@
+# Corporate Security Lead
+- type: job
+  parent: CMJobBase
+  id: RMCWeYaGoonLead
+  name: rmc-job-name-pmc-bodyguard-lead
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobWeYaGoonLead
+  ranks:
+    RMCRankWeYaOperator: []
+  startingGear: RMCJobWeYaGoonLead
+  icon: CMJobIconLiaison
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillEndurance: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillMedical: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillLeadership: 1
+
+- type: playTimeTracker
+  id: RMCJobWeYaGoonLead
+
+- type: startingGear
+  id: RMCJobWeYaGoonLead
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressPMCLeader
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: CMArmorM4PMCCorporate # TODO RMC14: corporate/lead
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMCCorporate
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    suitstorage: WeaponRifleSSG45
+    pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - RMCZipties
+    - RMCZipties
+    - RMCZipties
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    pocket1:
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    outerClothing:
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidWeYaGoonLead
+  name: weya corporate ghost role goon leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaGoonLead
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCWeYaGoonLead
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-bodyguard-lead
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCWeYaGoonLead
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial

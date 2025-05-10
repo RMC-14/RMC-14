@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoRunner
   - RMCXenoCommendationReceiver
@@ -30,3 +30,151 @@
     evolvesTo: [ ]
   - type: Xeno
     hidden: true
+
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  id: RMCXenoLesserCarrier
+  name: Lesser Carrier
+  description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures. Looks... smaller.
+  components:
+  - type: GhostRole
+    name: roles-lesser-carrier-name
+    description: roles-lesser-carrier-description
+    raffle:
+      settings: short
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/lesser_carrier.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.RightArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Head" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
+  - type: Xeno
+    role: CMXenoLesserDrone
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionLesserDronePlantWeeds
+    - ActionXenoThrowParasite
+    - ActionXenoRetrieveEgg
+    - ActionXenoParasiteReserve
+    hidden: true
+    tier: 0
+    hudOffset: -0.15,-0.03
+    contributesToVictory: false
+    countedInSlots: false
+    unlockAt: 0
+   #muteOnSpawn: true
+  - type: XenoLight
+  - type: XenoDevour
+  - type: XenoPlasma
+    plasma: 150
+    maxPlasma: 150
+    plasmaRegenOnWeeds: 3
+  - type: CMArmor
+    explosionArmor: 10
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 25
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead # TODO RMC14 gib on death
+  - type: XenoConstruction
+  - type: XenoNurturing
+  - type: XenoParasiteThrower
+    maxParasites: 2
+    numPositions: 2
+    visiblePositions: [false, false]
+  - type: XenoEggRetriever
+    maxEggs: 1
+  - type: Tackle
+    min: 3
+    max: 5
+    chance: 0.4
+  - type: EggPlantTime
+    plantTime: 2
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoParasite
+      - XenoEgg
+      - XenoFruit
+  - type: TunnelRenamer
+  - type: DamageOffWeeds
+    damage:
+      types:
+        Blunt: 2.5
+  - type: RMCSize
+    size: VerySmallXeno
+  - type: RMCXenoDamageVisuals
+    prefix: lesser
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: lesser_carrier
+  - type: Evasion
+    evasion: 10
+  - type: MultiHandedHolder
+    items:
+    - hands: 2
+      whitelist:
+        components:
+        - XenoEgg
+  - type: XenoInhands
+    prefix: lesser
+  - type: XenoEggSustainer
+    maxSustainedEggs: 1
+    sustainedEggsRange: 7
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
