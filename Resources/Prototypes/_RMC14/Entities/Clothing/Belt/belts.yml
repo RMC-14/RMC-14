@@ -492,6 +492,17 @@
   id: RMCSmartGunSidearmHolster
 
 - type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolForeconFilled
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1984
+      amount: 2
+    - id: CMWeaponPistolM1984
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
   name: M276 pattern M40 grenade rig
@@ -906,6 +917,17 @@
   id: RMCSMGPouchHolster
 
 - type: entity
+  parent: RMCBeltHolsterSMGPouch
+  id: RMCHolsterSMGPouchFilledExtended
+  suffix: Filled, Extended Mag
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63Ext
+      amount: 2
+    - id: RMCWeaponSMGM63ExtendedFilled
+
+- type: entity
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
   name: M276 pattern Mateba holster rig
@@ -999,6 +1021,17 @@
     - id: RMCSpeedLoaderMatebaHIAP
       amount: 2
     - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMateba
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltForeconFilled
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
       amount: 3
     - id: RMCWeaponRevolverMateba
 

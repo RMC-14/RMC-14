@@ -106,3 +106,27 @@
     defaultChannel: MarineCommand
   - type: Sprite
     state: binary_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyFORECON
+  name: forecon encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - MarineCommon
+    defaultChannel: MarineForecon
+  - type: Sprite
+    state: sl_key

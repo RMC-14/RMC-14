@@ -16,7 +16,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public List<EntProtoId> SquadIds = new() { "SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta" };
 
     [DataField]
-    public List<EntProtoId> ExtraSquadIds = new() { "SquadIntel" };
+    public List<EntProtoId> ExtraSquadIds = new() { "SquadIntel", "SquadFORECON" };
 
     [DataField]
     public Dictionary<EntProtoId, EntityUid> Squads = new();
@@ -110,6 +110,12 @@ public sealed partial class CMDistressSignalRuleComponent : Component
         ("CMSurvivorCorporate", 2),
         ("CMSurvivor", -1),
     };
+
+    [DataField]
+    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Insert, int Amount)>>? SurvivorJobInserts;
+
+    [DataField]
+    public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
 
     [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
