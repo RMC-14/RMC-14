@@ -68,6 +68,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
             args.Handled = true;
 
             _stun.TrySlowdown(xeno, windupTime, false, 0f, 0f);
+            _rage.IncrementRage(xeno.Owner, -1);
 
             if (rage > 1)
             {
@@ -97,8 +98,6 @@ public sealed class XenoEviscerateSystem : EntitySystem
         var damage = xeno.Comp.DamageAtRageLevels[args.Rage];
         var range = xeno.Comp.RangeAtRageLevels[args.Rage];
         var transform = Transform(xeno.Owner);
-
-        _rage.IncrementRage(xeno.Owner, -1);
 
         if (_net.IsClient) // todo prediction
             return;
