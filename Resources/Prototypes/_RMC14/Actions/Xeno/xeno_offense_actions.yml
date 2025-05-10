@@ -965,3 +965,21 @@
     useDelay: 23
   - type: ActionBlockIfResting
   - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoClothesline
+  name: Clothesline
+  description: Flings the targeted enemy a few tiles, knocking them down and damaging them.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_clothesline
+    event: !type:XenoFlingActionEvent
+    range: 1.5
+    useDelay: 16
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: RMCDazeableAction
