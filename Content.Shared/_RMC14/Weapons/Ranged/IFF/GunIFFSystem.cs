@@ -138,7 +138,7 @@ public sealed class GunIFFSystem : EntitySystem
         {
             owner = gun;
         }
-        else if (_container.TryGetContainingContainer((gun, null), out var container))
+        else if (_container.TryGetOuterContainer(gun, Transform(gun), out var container))
         {
             owner = container.Owner;
         }

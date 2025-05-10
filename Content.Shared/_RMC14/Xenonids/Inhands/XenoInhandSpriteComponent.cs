@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Inhands;
@@ -20,9 +20,6 @@ public enum XenoInhandVisualLayers
 [Serializable, NetSerializable]
 public enum XenoInhandVisuals
 {
-    Left,
-    Right,
-    Downed,
-    Resting,
-    Ovi,
+    LeftHand,
+    RightHand,
 }

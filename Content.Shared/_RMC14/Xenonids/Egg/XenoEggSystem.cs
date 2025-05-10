@@ -55,6 +55,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -542,6 +543,44 @@ public sealed class XenoEggSystem : EntitySystem
             RemCompDeferred<XenoFriendlyComponent>(egg);
 
         UpdateEggSprite(egg);
+
+        switch (state)
+        {
+            case XenoEggState.Item:
+            {
+                if (!egg.Comp.GrownFixtures)
+                    break;
+
+                egg.Comp.GrownFixtures = false;
+                Dirty(egg);
+
+                if (_fixture.GetFixtureOrNull(egg, egg.Comp.GrowingLayerFixture) is { } fixture)
+                    _physics.SetCollisionLayer(egg, egg.Comp.GrowingLayerFixture, fixture, 0);
+
+                _fixture.DestroyFixture(egg, egg.Comp.GrowingMaskFixture);
+                break;
+            }
+            case XenoEggState.Growing:
+            case XenoEggState.Grown:
+            case XenoEggState.Opening:
+            case XenoEggState.Opened:
+            case XenoEggState.Fragile:
+            case XenoEggState.Sustained:
+            {
+                if (egg.Comp.GrownFixtures)
+                    break;
+
+                egg.Comp.GrownFixtures = true;
+                Dirty(egg);
+
+                _fixture.TryCreateFixture(egg, egg.Comp.GrowingMaskShape, egg.Comp.GrowingMaskFixture, hard: false, collisionMask: (int) egg.Comp.GrowingMask);
+
+                if (_fixture.GetFixtureOrNull(egg, egg.Comp.GrowingLayerFixture) is { } fixture)
+                    _physics.SetCollisionLayer(egg, egg.Comp.GrowingLayerFixture, fixture, (int) egg.Comp.GrowingLayer);
+
+                break;
+            }
+        }
     }
 
     private void SetEggSprite(Entity<XenoEggComponent> egg, string sprite)

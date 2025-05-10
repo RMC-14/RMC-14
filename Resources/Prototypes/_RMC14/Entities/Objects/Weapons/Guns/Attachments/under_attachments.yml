@@ -454,6 +454,8 @@
   - type: RMCSelectiveFire
     baseFireRate: 0.417
   - type: GunIgnorePrediction
+  - type: GunIFF
+    enabled: true
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
@@ -475,6 +477,7 @@
         volume: 5
     timerStart: enum.TimerStartMode.OnHitGround
   - type: ShootAtFixedPoint
+    shootArcProj: true
     maxFixedRange: 7
   - type: UniqueAction
   - type: BreechLoaded
@@ -703,6 +706,7 @@
   id: RMCAttachmentLaserLightModule
   name: MK80 laser-light module
   description: A Laser-Light module for the MK80 Service Pistol which is currently undergoing limited field testing as part of the marines' next generation pistol program. All MK80 pistols come equipped with the module.
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     layers:

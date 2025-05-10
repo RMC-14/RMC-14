@@ -1,12 +1,38 @@
 ﻿cm-ui-rmc14 = RMC14
-cm-ui-audio-voicelines-arachnid = Play voicelines for arachnids
-cm-ui-audio-voicelines-diona = Play voicelines for dionae
-cm-ui-audio-voicelines-dwarf = Play voicelines for dwarves
-cm-ui-audio-voicelines-felinid = Play voicelines for felinids
-cm-ui-audio-voicelines-human = Play voicelines for humans
-cm-ui-audio-voicelines-moth = Play voicelines for moths
-cm-ui-audio-voicelines-reptilian = Play voicelines for reptilians
-cm-ui-audio-voicelines-slime = Play voicelines for slimes
+
+rmc-ui-voicelines = Voicelines
+rmc-ui-options-tab-voicelines = Voicelines
+rmc-ui-audio-voicelines-yourself = Play voicelines from yourself
+rmc-ui-audio-voicelines-arachnid = Play voicelines for arachnids
+rmc-ui-audio-voicelines-diona = Play voicelines for dionae
+rmc-ui-audio-voicelines-dwarf = Play voicelines for dwarves
+rmc-ui-audio-voicelines-felinid = Play voicelines for felinids
+rmc-ui-audio-voicelines-human = Play voicelines for humans
+rmc-ui-audio-voicelines-moth = Play voicelines for moths
+rmc-ui-audio-voicelines-reptilian = Play voicelines for reptilians
+rmc-ui-audio-voicelines-slime = Play voicelines for slimes
+rmc-ui-audio-voicelines-avali = Play voicelines for avalis
+rmc-ui-audio-voicelines-vulpkanin = Play voicelines for vulpkanins
+rmc-ui-audio-voicelines-rodentia = Play voicelines for rodentias
+rmc-ui-audio-voicelines-feroxi = Play voicelines for feroxis
+rmc-ui-audio-voicelines-skrell = Play voicelines for skrells
+
+rmc-ui-emotes = Emotes
+rmc-ui-audio-emotes-yourself = Play emotes from yourself
+rmc-ui-audio-emotes-arachnid = Play emotes for arachnids
+rmc-ui-audio-emotes-diona = Play emotes for dionae
+rmc-ui-audio-emotes-dwarf = Play emotes for dwarves
+rmc-ui-audio-emotes-felinid = Play emotes for felinids
+rmc-ui-audio-emotes-human = Play emotes for humans
+rmc-ui-audio-emotes-moth = Play emotes for moths
+rmc-ui-audio-emotes-reptilian = Play emotes for reptilians
+rmc-ui-audio-emotes-slime = Play emotes for slimes
+rmc-ui-audio-emotes-avali = Play emotes for avalis
+rmc-ui-audio-emotes-vulpkanin = Play emotes for vulpkanins
+rmc-ui-audio-emotes-rodentia = Play emotes for rodentias
+rmc-ui-audio-emotes-feroxi = Play emotes for feroxis
+rmc-ui-audio-emotes-skrell = Play emotes for skrells
+
 cm-ui-roadmap = Roadmap
 
 rmc-ui-link-discord-account = Link Discord Account

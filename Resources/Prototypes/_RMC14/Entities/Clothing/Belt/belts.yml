@@ -609,6 +609,9 @@
       state: b92fs
       map: [ "b92fs_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m13
+      map: [ "m13_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
       map: [ "mk45_fill" ]
     - state: icon-front
@@ -662,6 +665,7 @@
     - mk80_fill
     - b92fs_fill
     - mk45_fill
+    - m13_fill
     mapLayers:
       holstered:
         whitelist:
@@ -687,6 +691,10 @@
         whitelist:
           tags:
           - RMCMK45
+      m13_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
