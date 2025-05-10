@@ -1,56 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added quartermaster cap and beret
-    type: Add
-  id: 1206
-  time: '2025-01-11T22:16:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5356
-- author: RyanStrudfelt
-  changes:
-  - message: Added most of the intended content for the Military Police Armory! Mp's
-      Rejoice!
-    type: Add
-  - message: Red Alert Gun lockers (m890 tactical, M4SPR, M63)
-    type: Add
-  - message: Blue Alert Riot lockers (Riot suits,  riot shotguns, and other riot equipment)
-      **Both of these lockers require Armory access.**
-    type: Add
-  - message: M890 Riot Shotgun, (Semi-automatic Tactical shotgun that will only load
-      Beanbag Shells, has an under-barrel grenade launcher)
-    type: Add
-  - message: RSh-9 Assault Revolver for the Chief of Military Police, with 9x39 Rounds
-      to load into it.
-    type: Add
-  - message: Rubber Magazines & Rounds for ; M54c & M4SPR, M63, M1984 & M77, (SEA's
-      get these in their SEATech vendor too!)
-    type: Add
-  - message: New Flash-bangs using the Actual CM13 Flash-bang sprite, and that stun
-      people in a Seven tile radius, with a 27-second stun! These are compatible with
-      the M81 Riot Grenade launcher, but not any other type of launcher.  (Warning!
-      Sunglasses will not
-    type: Add
-  - message: RiotTech Vendor, Dispenses Riot Equipment.
-    type: Add
-  - message: Flash-bang Boxes, containing 8 flash-bangs each.
-    type: Add
-  - message: M81 Riot Grenade launcher, This is a break action launcher that will
-      only accept Flashbang grenades, and is coincidentally, the only way to launch
-      them aside from throwing them. (In the future, this will also accept Tear-gas)
-      (Thanks to dummehytteost for helping get the Break-action to work and sanity
-      checking my RSI)
-    type: Add
-  - message: Adds RMCStunOnTriggerComponent.cs enabling things to Stun in a radius.
-      (Thanks to NikTheChampiongr for helping me with this!!!)
-    type: Add
-  - message: Removed burst-fire from the m890 Tactical shotgun
-    type: Remove
-  - message: Added Rubber rounds & Beanbag shells to SEA-Tech vendor, and proper flashbangs
-      to Sec-Tech
-    type: Tweak
-  id: 1207
-  time: '2025-01-11T22:23:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5354
 - author: CyberTropic
   changes:
   - message: Added digital clocks that can tell round time!
@@ -5443,5 +5391,19 @@
   id: 1708
   time: '2025-05-10T04:33:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6365
+- author: SharkSnake98
+  changes:
+  - message: Added 4 new vests for the Corporate Liaison.
+    type: Add
+  id: 1709
+  time: '2025-05-10T04:44:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6230
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The M4SPR custom scout rifle now has a quick 2-shot burst.
+    type: Tweak
+  id: 1710
+  time: '2025-05-10T04:46:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6372
 Name: RMC14
 Order: -1
