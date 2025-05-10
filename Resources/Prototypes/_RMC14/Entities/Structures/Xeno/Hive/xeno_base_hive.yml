@@ -2,6 +2,9 @@
   abstract: true
   id: BaseHiveStructure
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideHiveStructures
   - type: Transform
     anchored: true
   - type: Physics
@@ -33,6 +36,9 @@
   abstract: true
   id: BaseHiveStructureNode
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideHiveStructures
   - type: Transform
     anchored: true
   - type: InteractionOutline

@@ -7,6 +7,9 @@
     snap:
     - Wall
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideResinHoles
   - type: Clickable
   - type: Transform
     anchored: true

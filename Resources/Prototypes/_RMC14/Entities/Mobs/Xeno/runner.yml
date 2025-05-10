@@ -120,6 +120,9 @@
   parent: CMXenoRunnerBase
   id: CMXenoRunner
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRunner
   - type: MobThresholds
     thresholds:
       0: Alive
