@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: TsjipTsjip
-  changes:
-  - message: Added end-of-round popup with rules. It can be hidden after the first
-      time it appears.
-    type: Add
-  id: 1205
-  time: '2025-01-11T22:15:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5236
 - author: Dutch-VanDerLinde
   changes:
   - message: Added quartermaster cap and beret
@@ -5444,5 +5436,12 @@
   id: 1707
   time: '2025-05-10T04:29:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6367
+- author: DummeHytteOst
+  changes:
+  - message: Changed the option name "Xeno wide swing" to "Xenonid thrust attack".
+    type: Tweak
+  id: 1708
+  time: '2025-05-10T04:33:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6365
 Name: RMC14
 Order: -1
