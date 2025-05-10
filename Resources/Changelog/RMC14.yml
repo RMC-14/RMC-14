@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Removed explosions shaking your screen.
-    type: Remove
-  id: 1194
-  time: '2025-01-11T08:43:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5221
 - author: J C Denton
   changes:
   - message: Fixed CMO, Doctor, Nurse and Maintenance Technician starting with a headset.
@@ -5528,5 +5521,19 @@
   id: 1696
   time: '2025-05-10T03:32:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6366
+- author: Arcticular1
+  changes:
+  - message: Fixed Mateba, M59a and Winter Wyvern being able to be melted!
+    type: Fix
+  - message: Changed M59a to have the same stats as a MK1 but with added IFF.
+    type: Tweak
+  - message: Fixed the Mateba not having the correct ammo loaded.
+    type: Fix
+  - message: Fixed the Mateba not being able to use barrel attachments and mateba
+      barrels at the same time.
+    type: Fix
+  id: 1697
+  time: '2025-05-10T03:34:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6301
 Name: RMC14
 Order: -1
