@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added civilian playtime award ribbons as a parallel to marine service
-      medals.
-    type: Add
-  id: 1196
-  time: '2025-01-11T08:49:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5081
 - author: Whisper
   changes:
   - message: Server rules have been updated. Please check the changelog in the guidebook.
@@ -5533,5 +5525,19 @@
   id: 1698
   time: '2025-05-10T03:36:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6276
+- author: Arcticular1
+  changes:
+  - message: Added dress blues jacket, dress blues uniform, dress blue officer hat,
+      marine formal service jacket, and marine service peaked cap to the CO clothing
+      rack.
+    type: Add
+  - message: Added M54C rubber magazine to the CO weapon rack.
+    type: Add
+  - message: Replaced insulated gloves with deluxe combat gloves in the CO equipment
+      rack.
+    type: Tweak
+  id: 1699
+  time: '2025-05-10T03:39:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6363
 Name: RMC14
 Order: -1
