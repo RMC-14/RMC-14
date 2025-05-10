@@ -6,7 +6,6 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;

@@ -954,7 +954,7 @@
   parent: ActionXenoBase
   id: ActionXenoEviscerate
   name: Eviscerate
-  description: Eviscerate nearby enemies after a short delay.
+  description: Eviscerate nearby enemies after a short delay. Costs 1 rage stack.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -970,7 +970,7 @@
   parent: ActionXenoBase
   id: ActionXenoClothesline
   name: Clothesline
-  description: Flings the targeted enemy a few tiles, knocking them down and damaging them.
+  description: Flings a target, doing minimal damage and healing you. The amount healed is higher the more rage stacks you have.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
