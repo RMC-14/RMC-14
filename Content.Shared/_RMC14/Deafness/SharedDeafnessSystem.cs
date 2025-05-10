@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Chat;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
@@ -11,7 +10,6 @@ namespace Content.Shared._RMC14.Deafness;
 public abstract class SharedDeafnessSystem : EntitySystem
 {
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
-    [Dependency] private readonly SharedCMChatSystem _chat = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -73,16 +71,9 @@ public abstract class SharedDeafnessSystem : EntitySystem
         return true;
     }
 
-    public void DoEarLossPopups(EntityUid uid, bool end, bool showInChat = false)
+    public void DoEarLossPopups(EntityUid uid, bool end)
     {
         var msg = Loc.GetString(end ? "rmc-deaf-end" : "rmc-deaf-start");
-
-        if (showInChat)
-        {
-            var chatMessage = Loc.GetString("rmc-deaf-chat-color", ("message", msg));
-            _chat.ChatMessageToOne(chatMessage, uid);
-        }
-
         _popup.PopupPredicted(msg, uid, uid, PopupType.MediumCaution);
     }
 
