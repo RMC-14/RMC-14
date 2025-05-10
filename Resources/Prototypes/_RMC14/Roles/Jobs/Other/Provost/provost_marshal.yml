@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostMarshal
-  name: CMProvostMarshal
-  description: rmc-job-description-provost-marshal
+  name: rmc-job-name-corp-provost-marshal
+  description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostMarshal
   ranks:
     RMCRankProvostMarshal: []
@@ -33,22 +33,29 @@
         RMCSkillPowerLoader: 2
         RMCSkillSmartGun: 1
         RMCSkillVehicles: 2
-    - type: JobPrefix
-      prefix: rmc-job-prefix-provost-marshal
     - type: MarineOrders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-marshal
   hidden: true
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCProvostMarshal
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-marshal
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
     job: CMProvostMarshal
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearProvostMarshal
@@ -74,20 +81,4 @@
   id: RMCJobIconProvostMarshal
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pvm
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostMarshal
-  name: provost marshal ID card
-  description: Issued to members of the Provost Office.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: Clothing
-    slots:
-    - idcard
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-  - type: PresetIdCard
-    job: CMProvostMarshal
+    state: hudsquad_pvtml

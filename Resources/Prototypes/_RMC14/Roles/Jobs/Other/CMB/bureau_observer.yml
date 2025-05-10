@@ -1,0 +1,84 @@
+# Bureau Observer
+- type: job
+  parent: CMJobBase
+  id: CMBureauObserver
+  name: rmc-job-name-bureau-observer
+  description: rmc-ghost-role-information-bureau-observer-description
+  playTimeTracker: RMCJobBureauObserver
+  ranks:
+    RMCRankIHROObserver: []
+  startingGear: RMCGearBureauObserver
+  icon: "RMCJobIconBureauObserver"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-observer
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidBureauObserver
+  name: bureau ghost role interstellar sapient-life rights observer
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCBureauObserver
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCBureauObserver
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-bureau-observer
+    description: rmc-ghost-role-information-bureau-observer-description
+    rules: rmc-ghost-role-information-bureau-rules
+    reregister: false
+    job: CMBureauObserver
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearBureauObserver
+  equipment:
+    eyes: RMCGlassesMedicalHUDGlasses # TODO RMC14 sensormate hud
+    mask: CMMaskSterile
+    back: RMCSatchelBureauObserverFill
+    gloves: CMHandsInsulated
+    jumpsuit: CMJumpsuitLiaisonBlue
+    outerClothing: RMCArmorVest
+    belt: CMBeltMedicBagFilled
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardBureauObserver
+    ears: RMCHeadsetDistressBureau
+    ears2: RMCFlashlightPen
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchGeneralLargeBureauObserverFill
+    suitstorage: RMCFlashlight
+  inhand: # TOOD RMC14 camera
+  - CMHealthAnalyzer
+
+- type: playTimeTracker
+  id: RMCJobBureauObserver
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconBureauObserver
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_obs

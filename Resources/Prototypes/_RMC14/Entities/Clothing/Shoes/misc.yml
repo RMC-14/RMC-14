@@ -49,3 +49,10 @@
   parent: [RMCItemSlotM5Bayonet, RMCShoesJackboots]
   id: RMCShoesJackbootsFilled
   suffix: Filled
+
+# Prison Shoes
+- type: entity
+  parent: RMCShoesOrange
+  id: RMCShoesPrisoner
+  name: prisoner shoes
+  description: A pair of orange shoes worn by prisoners as directed by marine law.

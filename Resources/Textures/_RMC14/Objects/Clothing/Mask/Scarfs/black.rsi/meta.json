@@ -37,6 +37,10 @@
     {
       "name": "equipped-NECK-reptilian",
       "directions": 4
+    },
+    {
+      "name": "equipped-NECK-vulpkanin",
+      "directions": 4
     }
   ]
 }
