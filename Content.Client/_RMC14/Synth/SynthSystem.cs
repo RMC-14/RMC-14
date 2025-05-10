@@ -10,7 +10,7 @@ public sealed class SynthSystem : SharedSynthSystem
 { // TODO rework this code why is damage visuals client only
     [Dependency] private readonly DamageVisualsSystem _damageVisuals = default!;
 
-    private readonly ProtoId<DamageGroupPrototype> _groupToChange = "Brute";
+    private static readonly ProtoId<DamageGroupPrototype> GroupToChange = "Brute";
 
     public override void Initialize()
     {
@@ -32,6 +32,6 @@ public sealed class SynthSystem : SharedSynthSystem
         if (!TryComp<DamageVisualsComponent>(ent.Owner, out var damageVisuals))
             return;
 
-        _damageVisuals.ChangeDamageGroupColor(sprite, damageVisuals, _groupToChange, ent.Comp.DamageVisualsColor);
+        _damageVisuals.ChangeDamageGroupColor(sprite, damageVisuals, GroupToChange, ent.Comp.DamageVisualsColor);
     }
 }
