@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
-using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Movement.Systems;
