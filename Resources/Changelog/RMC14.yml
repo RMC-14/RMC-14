@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SG6732
-  changes:
-  - message: Changed the attachment nodes for the XM88 to prevent floating rail attachments.
-    type: Tweak
-  id: 1186
-  time: '2025-01-11T08:26:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5326
 - author: Vermidia
   changes:
   - message: Added more words to xeno chat san.
@@ -5518,5 +5511,12 @@
   id: 1688
   time: '2025-05-10T02:36:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6385
+- author: Arykh
+  changes:
+  - message: Fixed the health analyzer lying about Arithrazine's OD.
+    type: Fix
+  id: 1689
+  time: '2025-05-10T02:39:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6354
 Name: RMC14
 Order: -1
