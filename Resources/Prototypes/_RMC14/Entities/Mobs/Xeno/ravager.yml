@@ -214,8 +214,8 @@
     rangeAtRageLevels: [1.5, 1.5, 1.5, 2.5, 2.5]
     windupReductionAtRageLevels: [0, 0.2, 4, 6, 10]
   - type: XenoFling # TODO RMC14 target head
-    range: 1.5
-    enragedRange: 1
+    range: 1.15
+    enragedRange: 0.8
     healAmount: 75
     enragedHealAmount: 100
     paralyzeTime: 0
