@@ -25,6 +25,9 @@
   id: RMCSkillCqc
   name: Cqc
   categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillDefinition
+    delayMultipliers: [ 0.75, 0.5, 0.5, 0.5, 0.25 ]
 
 - type: entity
   parent: RMCSkillBase
