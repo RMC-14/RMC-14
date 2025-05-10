@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: The emergency autoinjector has gotten its own injection sound.
-    type: Add
-  id: 1191
-  time: '2025-01-11T08:30:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5251
 - author: J C Denton
   changes:
   - message: Fixed XO and ASO not starting with a rangefinder in their pouch, and
@@ -5517,5 +5510,12 @@
   id: 1693
   time: '2025-05-10T03:25:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6361
+- author: Arcticular1
+  changes:
+  - message: Changed D50 in hand + wielded sprites.
+    type: Tweak
+  id: 1694
+  time: '2025-05-10T03:26:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6364
 Name: RMC14
 Order: -1
