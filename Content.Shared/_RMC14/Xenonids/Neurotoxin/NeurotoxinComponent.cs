@@ -48,6 +48,9 @@ public sealed partial class NeurotoxinComponent : Component
     public TimeSpan BlindTime = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan DeafenTime = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan MinimumDelayBetweenEvents = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
