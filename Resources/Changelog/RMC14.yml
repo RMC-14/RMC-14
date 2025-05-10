@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Fixed flechette shotgun ammo shooting one less shell than intended.
-    type: Fix
-  id: 1203
-  time: '2025-01-11T22:08:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5358
-- author: Tobinator
-  changes:
-  - message: Added 3 new lobby backgrounds, Fly the Friendly Skies, Lone Medevac and
-      Move Out by Tobinator.
-    type: Add
-  id: 1204
-  time: '2025-01-11T22:12:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5349
 - author: TsjipTsjip
   changes:
   - message: Added end-of-round popup with rules. It can be hidden after the first
@@ -5443,5 +5428,21 @@
   id: 1705
   time: '2025-05-10T04:24:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6368
+- author: Vermidia
+  changes:
+  - message: Fixed health analyzers not showing clone damage when it's present
+    type: Fix
+  - message: Added medical advice to the health analyzer
+    type: Add
+  id: 1706
+  time: '2025-05-10T04:28:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6378
+- author: Vermidia
+  changes:
+  - message: Changed holocard sprites to be more distinct
+    type: Tweak
+  id: 1707
+  time: '2025-05-10T04:29:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6367
 Name: RMC14
 Order: -1
