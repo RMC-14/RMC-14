@@ -1,115 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added fireteams. These are created by the Squad Leader of each squad
-      by clicking on their Squad Leader tracker alert on the right. Others can also
-      click it to change their tracker to track their assigned Fireteam Leader.
-    type: Add
-  - message: Added echo squad creation. This can be created by the commander for a
-      specific purpose, and acts as a fifth squad. It can be watched normally through
-      the overwatch console, and the Requisitions green E pad corresponds to it for
-      supply drops, which Requisitions uses manually but can also be used by CIC through
-      the overwatch console as normal.
-    type: Add
-  - message: Added night vision optic. These are slotted into your helmet and can
-      be toggled with an action, lasting for 10 minutes of continuous use before needing
-      to be recharged in a recharger. They add a green tint to your screen while in
-      use and cannot be used at the same time as binoculars or scopes. They can be
-      bought by Fireteam Leaders and Squad Leaders, but not Requisitions.
-    type: Add
-  - message: Added weapon-specific crosshairs. These show up while in combat mode
-      and wielding your gun, and make your mouse cursor invisible.
-    type: Add
-  - message: Ported 5 minute cooldown to devolving then re-evolving to the same caste
-      that you were.
-    type: Add
-  - message: Added a list of CM-SS13 contributors and staff to the credits, accessible
-      in the lobby, roadmap, and escape menu. Ask us if you want to be included in
-      it!
-    type: Add
-  - message: Added Penelope 'Cyclops' David and William 'Spurs' Crockett figurines.
-    type: Add
-  - message: Fixed surgery clamp bleed not removing surgery wounds.
-    type: Fix
-  - message: Fixed some visual bugs and jank when using the chemical dispenser and
-      transferring chemicals between bottles and other containers.
-    type: Fix
-  - message: Fixed queen screech not stunning parasites within 11 tiles for 8 seconds.
-    type: Fix
-  - message: Fixed Scout Specialist thermal cloak cooldown being too high, (3 > 0.5
-      seconds).
-    type: Fix
-  - message: Fixed Burrower Burrow range being too large, it now covers the whole
-      screen maximum.
-    type: Fix
-  - message: Fixed removed unused toggle internals alert status.
-    type: Fix
-  - message: Fixed poppies giving lowercase bicaridine and golden apples giving doctor's
-      delight.
-    type: Fix
-  - message: Fixed mortar belts being able to carry 7 items instead of 5. The fifth
-      is a sidearm.
-    type: Fix
-  - message: Fixed prepared meals, protein bars and mre components not being grindable
-      into nutriment.
-    type: Fix
-  - message: Fixed magazine boxes taking too long to craft (1 > 0.25 seconds).
-    type: Fix
-  - message: Fixed pull chains through stairs or ladders sending you to space.
-    type: Fix
-  - message: Fixed duplicate wrench in comtech tools vendor.
-    type: Fix
-  - message: Fixed being able to unanchor and move the medilathe.
-    type: Fix
-  - message: Fixed acid resin traps triggering through walls if placed in a corner.
-    type: Fix
-  - message: Fixed being able to place resin tarps on tunnels and resin structures
-      on sentries.
-    type: Fix
-  - message: Fixed air vents hiding traps.
-    type: Fix
-  - message: Fixed overwatch console looking funny when rotating your camera.
-    type: Fix
-  - message: Fixed hive leader stars sometimes being drawn at 0,0 while observing
-      as a ghost.
-    type: Fix
-  - message: Fixed dropship terminal weapons camera offset affecting each other. Offsetting
-      your camera as the Alamo will no longer adjust it for the Normandy, and vice-versa.
-    type: Fix
-  - message: Fixed move order giving move speed to marines without armor.
-    type: Fix
-  - message: Fixed plasteel max stack being 40 instead of 50. You will still get 40
-      for free as a comtech, this only changes the max you can stack it to.
-    type: Fix
-  - message: Fixed pick up verb being displayed twice for undeployed magazine boxes.
-    type: Fix
-  - message: Fixed being able to place eggs on tunnels.
-    type: Fix
-  - message: Fixed the command tablet not being able to give medals for Commanding
-      Officers.
-    type: Fix
-  - message: Fixed not being able to swap hands by pressing X while stunned.
-    type: Fix
-  - message: Fixed xenos being able to shoot spits directly at corpses.
-    type: Fix
-  - message: Fixed light bulbs not leaving behind an empty fixture when destroyed.
-    type: Fix
-  - message: Fixed parasites not being able to use the larva roar emote.
-    type: Fix
-  - message: Fixed marking and signal flares not being visible in night vision while
-      lit.
-    type: Fix
-  - message: Fixed defender crest preventing the stun when resisting fire.
-    type: Fix
-  - message: Fixed standing still on top of fire not setting you on fire again after
-      a resist.
-    type: Fix
-  - message: Fixed Queen and other explosive armored xenos taking way more explosive
-      damage than intended.
-    type: Fix
-  id: 1202
-  time: '2025-01-11T21:58:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5357
 - author: FungiFellow
   changes:
   - message: Fixed flechette shotgun ammo shooting one less shell than intended.
@@ -5541,5 +5430,18 @@
   id: 1704
   time: '2025-05-10T04:05:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6392
+- author: Dygon
+  changes:
+  - message: Airburst grenades now rebound at the angle of incidence instead of always
+      rebounding at 180 degrees.
+    type: Tweak
+  - message: Airburst grenade projectiles now receive the overpenetration penalty
+      only when a target is directly impacted by the grenade. For example, with the
+      Hornet grenade, you can potentially hit all 15 projectiles if you aim directly
+      in front of a target, instead of the previous limit of 5.
+    type: Fix
+  id: 1705
+  time: '2025-05-10T04:24:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6368
 Name: RMC14
 Order: -1
