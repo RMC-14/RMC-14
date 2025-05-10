@@ -60,6 +60,17 @@
 # Galoshes
 - type: entity
   parent: RMCShoesLaceup
+  id: RMCShoesGaloshes
+  name: galoshes
+  description: A pair of rubber boots.
+  components:
+  - type: Sprite
+    sprite: Clothing/Shoes/Specific/galoshes.rsi
+  - type: Clothing
+    sprite: Clothing/Shoes/Specific/galoshes.rsi
+
+- type: entity
+  parent: RMCShoesLaceup
   id: RMCShoesWeYaStompers
   name: Weston-Yamada stompers
   description: A pair of sneakers designed to elicit a morale boosting response within anyone that witnesses them.
