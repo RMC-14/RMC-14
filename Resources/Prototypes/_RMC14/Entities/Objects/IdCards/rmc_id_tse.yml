@@ -1,0 +1,4 @@
+﻿- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardTSEPA
+  name: TSEPA ID card

@@ -1,0 +1,74 @@
+# Bureau Deputy
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPADeputy
+  name: rmc-job-name-tsepa-deputy
+  description: rmc-job-description-tsepa-deputy
+  playTimeTracker: RMCJobTSEPADeputy
+  ranks:
+    RMCRankTSESergeant: []
+  startingGear: RMCGearTSEPADeputy
+  icon: "RMCJobIconTSEPADeputy"
+  joinNotifyCrew: false
+  accessGroups:
+  - ColonistSec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 3
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-deputy
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPADeputy
+  equipment:
+    head: RMCHeadBeretTSEPA
+    ears: RMCHeadsetTSEPA
+    jumpsuit: RMCJumpsuitTSEPA
+    outerClothing: CMArmorM4PMCCorporateLead
+    gloves: RMCHandsVeteran
+    shoes: CMBootsBlackFilled
+#    suitstorage: RMCWeaponRifleType71
+    id: RMCIDCardTSEPA
+    belt: RMCM1984BeltFilled
+    back: RMCSatchelSPPRifleman
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointTSEPADeputy
+  name: tsepa deputy spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPADeputy
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: auxiliary_support_officer
+
+- type: playTimeTracker
+  id: RMCJobTSEPADeputy
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPADeputy
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: tse_paofficer
