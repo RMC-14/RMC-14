@@ -13,6 +13,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Pierce;
 
@@ -31,8 +32,10 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly HashSet<EntityUid> _pierceEnts = new();
+    private readonly HashSet<EntityUid> _hitEnts = new();
 
     public override void Initialize()
     {
@@ -41,7 +44,7 @@ public sealed class XenoPierceSystem : EntitySystem
 
     private void OnXenoPierceAction(Entity<XenoPierceComponent> xeno, ref XenoPierceActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !_timing.IsFirstTimePredicted)
             return;
 
         if (!_rmcActions.TryUseAction(xeno, args.Action))
@@ -75,6 +78,7 @@ public sealed class XenoPierceSystem : EntitySystem
 
         EntityUid? hitEnt = null;
 
+        _hitEnts.Clear();
         foreach (var tile in tiles)
         {
             _pierceEnts.Clear();
@@ -83,6 +87,9 @@ public sealed class XenoPierceSystem : EntitySystem
 
             foreach (var ent in _pierceEnts)
             {
+                if (_hitEnts.Contains(ent))
+                    continue;
+
                 if (!_interaction.InRangeUnobstructed(entTile, ent, xeno.Comp.Range.Float()))
                     continue;
 
@@ -103,7 +110,7 @@ public sealed class XenoPierceSystem : EntitySystem
                 hits++;
 
                 var change = _damage.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP, tool: xeno);
-
+                _hitEnts.Add(ent);
                 if (change?.GetTotal() > FixedPoint2.Zero)
                 {
                     var filter = Filter.Pvs(ent, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
