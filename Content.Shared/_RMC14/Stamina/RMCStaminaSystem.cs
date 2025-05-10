@@ -1,15 +1,19 @@
 using Content.Shared._RMC14.BlurredVision;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
+using Content.Shared.Damage.Components;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -41,6 +45,9 @@ public sealed partial class RMCStaminaSystem : EntitySystem
         SubscribeLocalEvent<RMCStaminaComponent, RejuvenateEvent>(OnStaminaRejuvenate);
 
         SubscribeLocalEvent<RMCStaminaDamageOnHitComponent, MeleeHitEvent>(OnStaminaOnHit);
+
+        SubscribeLocalEvent<RMCStaminaDamageOnCollideComponent, ProjectileHitEvent>(OnStaminaOnProjectileHit);
+        SubscribeLocalEvent<RMCStaminaDamageOnCollideComponent, ThrowDoHitEvent>(OnStaminaOnThrowHit);
     }
 
     private void OnStaminaStartup(Entity<RMCStaminaComponent> ent, ref ComponentStartup args)
@@ -177,6 +184,25 @@ public sealed partial class RMCStaminaSystem : EntitySystem
             _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(hit):target} was dealt {damage} stamina damage from {args.User} with {args.Weapon}.");
         }
     }
+
+    private void OnStaminaOnProjectileHit(Entity<RMCStaminaDamageOnCollideComponent> ent, ref ProjectileHitEvent args)
+    {
+        OnCollide(ent, args.Target);
+    }
+
+    private void OnStaminaOnThrowHit(Entity<RMCStaminaDamageOnCollideComponent> ent, ref ThrowDoHitEvent args)
+    {
+        OnCollide(ent, args.Target);
+    }
+
+    private void OnCollide(Entity<RMCStaminaDamageOnCollideComponent> ent, EntityUid target)
+    {
+        if (!TryComp<RMCStaminaComponent>(ent, out var stam))
+            return;
+
+        DoStaminaDamage((ent, stam), ent.Comp.Damage, true);
+    }
+
     private void SetStaminaAlert(Entity<RMCStaminaComponent> ent)
     {
         _alerts.ShowAlert(ent, ent.Comp.StaminaAlert, (short)((ent.Comp.TierThresholds.Length - 1) - ent.Comp.Level));
