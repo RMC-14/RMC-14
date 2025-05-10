@@ -247,8 +247,10 @@ public sealed class FiremanCarrySystem : EntitySystem
     private void OnCarrierPullToggle(Entity<CanFiremanCarryComponent> ent, ref RMCPullToggleEvent args)
     {
         args.Handled = true;
+
+        var grabDelay = ent.Comp.AggressiveGrabDelay * _skills.GetSkillDelayMultiplier(ent.Owner, ent.Comp.Skill);
         if (ent.Comp.AggressiveGrab ||
-            _timing.CurTime < ent.Comp.PullTime + ent.Comp.AggressiveGrabDelay)
+            _timing.CurTime < ent.Comp.PullTime + grabDelay)
         {
             return;
         }

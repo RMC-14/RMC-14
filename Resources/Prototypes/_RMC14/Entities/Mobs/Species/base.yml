@@ -149,7 +149,6 @@
         type: ViewIntelObjectivesBui
   - type: Infectable
   - type: Tackleable
-  - type: Tackle
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
@@ -348,4 +347,8 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
+  - type: RMCMeleeDamageSkill
+  - type: RMCStripTimeSkill
+  - type: RMCDisarm
+  - type: RMCDisarmable
   - type: StunOnExplosionReceived # TODO should also cause hearing loss
