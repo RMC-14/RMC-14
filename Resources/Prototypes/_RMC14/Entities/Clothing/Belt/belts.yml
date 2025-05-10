@@ -621,7 +621,7 @@
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
     slots:
     - suitStorage
     - belt
@@ -697,11 +697,11 @@
           - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
       Desert: _RMC14/Objects/Clothing/Belt/holster_pistol/desert.rsi
       Snow: _RMC14/Objects/Clothing/Belt/holster_pistol/snow.rsi
-      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
-      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/urban.rsi
 
 - type: Tag
   id: RMCGeneralPistolHolster

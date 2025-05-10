@@ -40,7 +40,7 @@
     head: RMCHeadBeretTSEPA
     ears: RMCHeadsetTSEPA
     jumpsuit: RMCJumpsuitTSEPA
-    outerClothing: CMArmorM4PMCCorporateLead
+    outerClothing: RMCArmourM4TSEPA
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
 #    suitstorage: RMCWeaponRifleType71
