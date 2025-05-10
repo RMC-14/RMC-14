@@ -14,7 +14,7 @@
     fiberColor: fibers-brown
 
 - type: entity
-  parent: CMHandsBlackMarine
+  parent: ClothingHandsBase
   id: CMHandsBrown
   name: brown gloves
   description: A pair of brown gloves.
@@ -27,7 +27,7 @@
     fiberColor: fibers-brown
 
 - type: entity
-  parent: CMHandsBlackMarine
+  parent: ClothingHandsBase
   id: CMHandsLightBrown
   name: light brown gloves
   description: A pair of light brown gloves.
@@ -40,7 +40,7 @@
     fiberColor: fibers-brown
 
 - type: entity
-  parent: CMHandsBlackMarine
+  parent: ClothingHandsBase
   id: CMHandsWhite
   name: white gloves
   description: A pair of white gloves.

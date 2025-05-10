@@ -38,6 +38,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCUserBulkyArmorIncapable
     - type: NpcFactionMember
       factions:
       - WeYa
