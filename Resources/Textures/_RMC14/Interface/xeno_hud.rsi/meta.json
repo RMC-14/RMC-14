@@ -608,6 +608,9 @@
     },
     {
       "name": "cap100"
+    },
+    {
+      "name": "fake_tall"
     }
   ]
 }

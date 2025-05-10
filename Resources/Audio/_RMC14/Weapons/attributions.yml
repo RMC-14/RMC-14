@@ -47,3 +47,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/weapons/unload.ogg"
+
+- files: ["synthpunch1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/49db80ef5770796bda9056a5e5be54b5eb02d060/sound/weapons/synthpunch1.ogg"
