@@ -1,10 +1,11 @@
 ﻿using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids.Heal;
+using Content.Shared._RMC14.Xenonids.Rage;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
@@ -25,6 +26,8 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
+    [Dependency] private readonly XenoRageSystem _rage = default!;
 
     public override void Initialize()
     {
@@ -51,6 +54,7 @@ public sealed class XenoFlingSystem : EntitySystem
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
         }
 
+        var rage = _rage.GetRage(xeno.Owner);
 
         var targetId = args.Target;
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
@@ -62,18 +66,27 @@ public sealed class XenoFlingSystem : EntitySystem
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { targetId }, filter);
         }
 
+        var healAmount = xeno.Comp.HealAmount;
+        var throwRange = xeno.Comp.Range;
+
+        if (rage >= 2)
+        {
+            throwRange += xeno.Comp.EnragedRange;
+            healAmount += xeno.Comp.EnragedHealAmount;
+        }
+
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.Range;
+        diff = diff.Normalized() * throwRange;
 
         _rmcMelee.DoLunge(xeno, targetId);
-
+        _xenoHeal.CreateHealStacks(xeno, healAmount, xeno.Comp.HealDelay, 1, xeno.Comp.HealDelay);
 
         if (_net.IsServer)
         {
             _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
-            _throwing.TryThrow(targetId, diff, 10);
+            _throwing.TryThrow(targetId, diff, xeno.Comp.ThrowSpeed);
 
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
         }
