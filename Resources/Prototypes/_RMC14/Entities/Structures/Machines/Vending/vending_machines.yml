@@ -539,9 +539,13 @@
       entries:
       - id: FoodContainerEgg
         amount: 12
+      - id: FoodMeatChicken
+        amount: 12
       - id: FoodMeatFish
         amount: 12
       - id: FoodMeat
+        amount: 24
+      - id: FoodMeatBacon
         amount: 24
       - id: DrinkMilkCarton
         amount: 24

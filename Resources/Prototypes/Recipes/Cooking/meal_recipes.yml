@@ -7,6 +7,7 @@
   solids:
     FoodDoughSlice: 1 # one third of a standard bread dough recipe
 
+
 #Bagels
 - type: microwaveMealRecipe
   id: RecipeBagel
@@ -48,7 +49,7 @@
     FoodBreadBun: 1
     OrganHumanAppendix: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeBaconBurger
   name: bacon burger recipe
   result: FoodBurgerBacon
@@ -79,7 +80,7 @@
     FoodBreadBun: 1
     FoodMeatBear: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeBigBiteBurger
   name: big bite burger recipe
   result: FoodBurgerBig
@@ -256,7 +257,7 @@
     FoodBreadBun: 1
     FoodJellyAmanita: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #added to metamorph recipes
   id: RecipeBurgerMcguffin
   name: McGuffin recipe
   result: FoodBurgerMcguffin
@@ -613,6 +614,54 @@
   group: Savory
   solids:
     FoodOnionSlice: 1
+
+#Donuts
+- type: microwaveMealRecipe
+  id: RecipeDonut
+  name: donut recipe
+  result: RMCFoodDonut
+  time: 10
+  group: Breads
+  solids:
+    FoodDoughRope: 1 # created by rolling a dough slice.
+  reagents:
+    Sugar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutFrosted
+  name: frosted donut recipe
+  result: RMCFoodDonutFrosted
+  time: 10
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    Sugar: 5
+    JuiceBerry: 5
+
+
+#Eggs
+- type: microwaveMealRecipe
+  id: RecipeOmelette
+  name: omelette recipe
+  result: FoodMealOmelette
+  time: 10
+  group: Eggs
+  solids:
+    FoodEgg: 1
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFriedEgg
+  name: fried egg recipe
+  result: FoodMealFriedegg
+  time: 10
+  group: Eggs
+  solids:
+    FoodEgg: 1
+  reagents:
+    TableSalt: 1
+    Blackpepper: 1
 
 #Pizzas TODO: contruction graph based pizza
 - type: microwaveMealRecipe
@@ -1869,12 +1918,11 @@
   result: FoodMealQueso
   time: 15
   group: Soup
-  #todo Add blackpepper
-  #reagents:
-    #blackpepper: 5
   solids:
     FoodChiliPepper: 1
     FoodCheeseSlice: 2
+  reagents:
+    Blackpepper: 5
 
 - type: microwaveMealRecipe
   id: RecipeRibs
