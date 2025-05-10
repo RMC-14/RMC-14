@@ -214,6 +214,6 @@
   description: It's the official uniform of the colony's janitor.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
