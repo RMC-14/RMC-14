@@ -10,3 +10,6 @@ rmc-alert-green = Green
 rmc-alert-blue = Blue
 rmc-alert-red = Red
 rmc-alert-change-level = Change alert level
+
+rmc-alerts-pain-name = Pain
+rmc-alerts-pain-desc = [color=green]Green[/color] good. [color=red]Red[/color] bad.

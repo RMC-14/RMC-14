@@ -1,5 +1,4 @@
-﻿# TODO RMC14 other effects
-- type: reagent
+﻿- type: reagent
   parent: [ CMReagentMedicine, Dylovene ]
   id: CMDylovene
   name: reagent-name-cmdylovene
@@ -14,35 +13,45 @@
         damage:
         - Toxin: -1
         - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Remove
+        time: 20
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Brute: 1
-      - !type:Jitter
+            Toxin: 0.5 # antihallucinogenic property
+      - !type:ChemHealEyeDamage
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        amount: 1
+        probability: 0.5
+      - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
-      - !type:PopupMessage
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        type: Local
-        visualType: Medium
-        messages: [ "generic-reagent-effect-nauseous" ]
-        probability: 0.2
+        damage:
+          groups:
+            Brute: 0.5
+            Burn: 0.5
+            Toxin: 1.5
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 60
+        key: ForcedSleep
+        component: ForcedSleeping
+        probability: 0.05
+        time: 10
+        refresh: true
         type: Add
 
-# TODO RMC14 other effects
+# TODO add another alcohols to decrease
 - type: reagent
   parent: [ CMReagentMedicine, Ethylredoxrazine ]
   id: CMEthylredoxrazine
@@ -58,6 +67,40 @@
         key: Drunk
         time: 1.5
         type: Remove
+      - !type:GenericStatusEffect
+        key: Jitter
+        time: 1.5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: ForcedSleep
+        time: 1.5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Stutter
+        time: 1.5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: SlurredSpeech
+        time: 1.5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        time: 1.5
+        type: Remove
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: RMCEthanol
+          min: 0.75
+        reagent: RMCEthanol
+        amount: -0.75
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Ethanol
+          min: 0.75
+        reagent: Ethanol
+        amount: -0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -73,7 +116,6 @@
           groups:
             Toxin: 2.25
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Arithrazine ]
   id: CMArithrazine
@@ -89,52 +131,40 @@
         damage:
         - Toxin: -0.5
       - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Brute: 0.5
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-      - !type:PopupMessage
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        type: Local
-        visualType: Medium
-        messages: [ "generic-reagent-effect-nauseous" ]
-        probability: 0.2
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        key: Drunk
-        component: Drunk
-        time: 30
-        type: Add
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.12
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
         damage:
           groups:
             Brute: 0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
+          min: 15
+        damage:
+          groups:
+            Brute: 0.5
+      - !type:ChemHealEyeDamage
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        amount: 1
+        probability: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Brute: 0.62
+            Brute: 1.25
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        key: ForcedSleep
+        component: ForcedSleeping
+        probability: 0.05
+        refresh: true
+        time: 10
+        type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Bicaridine ]
   id: CMBicaridine
@@ -155,7 +185,7 @@
           min: 30
         damage:
           groups:
-            Burn: 0.25
+            Burn: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -181,19 +211,18 @@
         - !type:Temperature
           max: 170
         damage:
-        - Brute: -1.5
-        - Burn: -1
-        - Toxin: -1.5
+        - Brute: -1 # bonus 0.5, neogenetic 0.5
+        - Burn: -1 # bonus 0.5, anticorrosive 0.5
+        - Toxin: -1.5 # bonus 0.5, antitoxic 1
+        - Airloss: -0.5 # bonus 0.5
       - !type:HealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
           types:
-            Asphyxiation: -1
-            Cellular: -0.12
+            Cellular: -1 # bonus 0.5, anticancerogenic 0.5
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
   id: CMDermaline
@@ -214,18 +243,19 @@
           min: 15
         damage:
           groups:
-            Burn: 0.37
-            Toxin: 0.37
+            Brute: 0.75
+            Toxin: 0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Burn: 0.88
-            Toxin: 0.88
+            Brute: 3.75
+            Toxin: 3.75
 
-# TODO RMC14 other effects
+# TODO implement RMCLexorin
+# TODO Dexalin should remove 1 lexorin
 - type: reagent
   parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
@@ -256,7 +286,8 @@
             Brute: 1
             Toxin: 2
 
-# TODO RMC14 other effects
+# TODO implement RMCLexorin
+# TODO DexalinPlus should remove 1.5 lexorin
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
@@ -286,8 +317,9 @@
             Brute: 1.5
             Toxin: 3
 
-# TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
+# TODO implement opiate receptor deficency
+# TODO CMEpinephrine should deal liver and brain damage over 20u
 - type: reagent
   parent: [ CMReagentMedicine, Epinephrine ]
   id: CMEpinephrine
@@ -300,6 +332,8 @@
     Medicine:
       metabolismRate: 0.2
       effects:
+      - !type:DecreasePain
+        strength: 15
       - !type:EqualHealthChange
         conditions:
         - !type:RecentlyDefibrillated
@@ -321,17 +355,24 @@
           min: 10.5
         damage:
           groups:
-            Toxin: 0.19
+            Toxin: 0.38
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 10.5
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 20
         damage:
-          types:
-            Asphyxiation: 1.5
+          groups:
+            Airloss: 1.5
 
-# TODO RMC14 other effects
-# TODO RMC14 allow breathing in crit instead of reducing asphyxiation
+# TODO heart damage over 100u
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
   id: CMInaprovaline
@@ -343,6 +384,14 @@
     Medicine:
       metabolismRate: 0.1
       effects:
+      - !type:GenericStatusEffect
+        key: PainAsphyxationDisabled
+        component: PainAsphyxationDisabled
+        time: 1
+        refresh: true
+        type: Add
+      - !type:DecreasePain
+        strength: 30
       - !type:HealthChange
         conditions:
         - !type:MobStateCondition
@@ -354,32 +403,22 @@
         conditions:
         - !type:ReagentThreshold
           min: 60
-      - !type:GenericStatusEffect
+        time: 5
+      - !type:Paralyze
         conditions:
         - !type:ReagentThreshold
           min: 60
-        key: Stun
-        component: Stunned
-        time: 40
-        type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
-        type: Add
+        paralyzeTime: 30
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 100
-        key: Drunk
-        component: Drunk
-        time: 40
+        key: ForcedSleep
+        component: ForcedSleeping
+        time: 20
+        refresh: true
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]
   id: CMKelotane
@@ -400,8 +439,8 @@
           min: 30
         damage:
           groups:
-            Brute: 0.3
-            Toxin: 0.3
+            Brute: 0.5
+            Toxin: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -411,7 +450,6 @@
             Brute: 2.5
             Toxin: 2.5
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Leporazine ]
   id: CMLeporazine
@@ -425,33 +463,23 @@
       effects:
       - !type:StabilizeTemperature
         stable: 310
-        change: 60
-      - !type:GenericStatusEffect
+        change: 30
+      - !type:Paralyze
         conditions:
         - !type:ReagentThreshold
           min: 30
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
-        type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Stun
-        component: Stunned
-        time: 40
-        type: Add
+        paralyzeTime: 20
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 30
+        key: ForcedSleep
+        component: ForcedSleeping
+        probability: 0.05
+        time: 10
+        refresh: true
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Tricordrazine ]
   id: CMTricordrazine
@@ -470,36 +498,42 @@
         - Toxin: -0.5
       - !type:HealthChange
         damage:
-          types:
-            Asphyxiation: -0.5
+          Airloss: -0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Brute: 0.13
-            Burn: 0.26
-            Toxin: 0.26
+            Brute: 0.25 # anticorrosive 0.25
+            Burn: 0.25 # neogenetic 0.25
+            Toxin: 0.38 # anticorrosive 0.25, oxygenating 0.125
+      - !type:ChemHealEyeDamage
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        amount: 1 # can't make 0.25 eye damage because of int value
+        probability: 0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 1.5
-            Burn: 1.25
-            Toxin: 2.25
+            Brute: 1.5 # anticorrosive 1.25, oxygenating 0.25
+            Burn: 1.25 # neogenetic 1.25
+            Toxin: 2.25 # neogenetic 0.5, anticorrosive 1.25, oxygenating 0.5
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 60
+        key: ForcedSleep
+        component: ForcedSleeping
+        probability: 0.05
+        time: 10
+        refresh: true
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, CMBicaridine ]
   id: CMMeralyne
@@ -520,7 +554,7 @@
           min: 15
         damage:
           groups:
-            Burn: 0.375
+            Burn: 0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -530,9 +564,9 @@
             Burn: 3.75
             Toxin: 1.5
 
-# TODO RMC14 other effects
-# TODO RMC14 progressive eye healing
+# TODO RMC14 progressive eye healing ??? (for chemical eye damage healing is alrealdy progressive)
 # TODO RMC14 brain damage over 50u
+# TODO implement blindness and blurness separetly from eye damage
 - type: reagent
   parent: [ CMReagentMedicine, CMDylovene ]
   id: CMImidazoline
@@ -545,6 +579,7 @@
       metabolismRate: 0.1
       effects:
       - !type:ChemHealEyeDamage
+        probability: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -560,10 +595,8 @@
           groups:
             Brute: 0.5
             Burn: 0.5
-            Toxin: 2
+            Toxin: 1.5
 
-# TODO RMC14 other effects
-# TODO RMC14 heal cloneloss
 - type: reagent
   parent: [ CMReagentMedicine, CMCryoxadone ]
   id: CMClonexadone
@@ -579,6 +612,121 @@
         - !type:Temperature
           max: 170
         damage:
-        - Toxin: -3.75
-        - Brute: -2.25
-        - Burn: -3
+        - Toxin: -6
+        - Brute: -4.5
+        - Burn: -4.5
+      - !type:HealthChange
+        conditions:
+        - !type:Temperature
+          max: 170
+        damage:
+          types:
+            Cellular: -3
+
+# TODO add liver and brain damage
+- type: reagent
+  parent: [ CMReagentMedicine, CMTramadol ]
+  id: CMParacetamol
+  name: reagent-name-cmparacetamol
+  desc: reagent-desc-cmparacetamol
+  color: "#C855DC"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.03
+      effects:
+      - !type:DecreasePain
+        strength: 20
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        damage:
+          groups:
+            Toxin: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        damage:
+          groups:
+            Airloss: 1.5
+
+# TODO add liver and brain damage
+- type: reagent
+  parent: [ CMReagentMedicine, CMTricordrazine ]
+  id: CMTramadol
+  name: reagent-name-cmtramadol
+  desc: reagent-desc-cmtramadol
+  color: "#d7c7e0"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.03
+      effects:
+      - !type:DecreasePain
+        strength: 50
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 1.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Airloss: 1.5
+
+# TODO add liver and brain damage
+- type: reagent
+  parent: [ CMReagentMedicine, CMTramadol ]
+  id: CMOxycodone
+  name: reagent-name-cmoxycodone
+  desc: reagent-desc-cmoxycodone
+  color: "#1cc282"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.05
+      effects:
+      - !type:DecreasePain
+        strength: 80
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        damage:
+          groups:
+            Toxin: 2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Airloss: 1.5
