@@ -1,9 +1,9 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMRoyalSmartGunOperator
-  name: CMRoyalSmartGunOperator
-  description: rmc-job-description-royal-smart-gun-operator
-  playTimeTracker: CMJobRoyalSmartGunOperator
+  id: CMRoyalMarinesSGO
+  name: rmc-job-name-rmc-sgo
+  description: rmc-ghost-role-information-rmc-description
+  playTimeTracker: RMCJobRoyalSmartGunOperator
   ranks:
     RMCRankLanceCorporal: [ ]
   startingGear: RMCGearRoyalSmartGunOperator
@@ -12,6 +12,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
     - type: Skills
       skills:
         RMCSkillCqc: 2
@@ -27,26 +30,34 @@
         RMCSkillSmartGun: 1
         RMCSkillVehicles: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-royal-smart-gun-operator
+      prefix: rmc-job-prefix-rmc-sgo
+  hasIcon: false
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidRoyalSmartGunOperator
-  name: royal marine smart gun operator role
-  suffix: Role
+  id: RMCRandomHumanoidRoyalMarinesSGO
+  name: royal marines ghost role smart gun operator
+  suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCRoyalSmartGunOperator
+    settings: RMCRoyalMarinesSGO
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
-  id: RMCRoyalSmartGunOperator
+  parent: RMCEventHumanoid
+  id: RMCRoyalMarinesSGO
   components:
-  - type: RMCJobSpawner
-    job: CMRoyalSmartGunOperator
+  - type: GhostRole
+    name: rmc-ghost-name-rmc-sgo
+    description: rmc-ghost-role-information-rmc-description
+    rules: rmc-ghost-role-information-rmc-rules
+    reregister: false
+    job: CMRoyalMarinesSGO
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearRoyalSmartGunOperator
@@ -59,14 +70,14 @@
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCSmartGunRoyal
-    id: RMCDogtagRoyalSmartGunOperator
+    id: RMCIDRoyalMarines
     belt: RMCMK80BeltFilled # TODO RMC14 L905 gunbelt
     back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
     pocket1: RMCPouchGeneralLargeFilledSmartGunDrums
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
-  id: CMJobRoyalSmartGunOperator
+  id: RMCJobRoyalSmartGunOperator
 
 - type: jobIcon
   parent: CMJobIconBase

@@ -9,10 +9,14 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Damage;
 using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids.Inhands;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -51,7 +55,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids;
 
-public sealed class XenoSystem : EntitySystem
+public sealed partial class XenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -131,6 +135,14 @@ public sealed class XenoSystem : EntitySystem
 
         SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
+
+        //In XenoSystem.Visuals
+        SubscribeLocalEvent<XenoStateVisualsComponent, MobStateChangedEvent>(OnVisualsMobStateChanged);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoFortifiedEvent>(OnVisualsFortified);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoRestEvent>(OnVisualsRest);
+        SubscribeLocalEvent<XenoStateVisualsComponent, DownedEvent>(OnVisualsProne);
+        SubscribeLocalEvent<XenoStateVisualsComponent, StoodEvent>(OnVisualsStand);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoOvipositorChangedEvent>(OnVisualsOvipositor);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -334,7 +346,7 @@ public sealed class XenoSystem : EntitySystem
 
     private void OnXenoRegenBeforeCritDamage(Entity<XenoRegenComponent> ent, ref DamageStateCritBeforeDamageEvent args)
     {
-        if (!_rmcFlammable.IsOnFire(ent.Owner) || (!ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner)))
+        if (!_rmcFlammable.IsOnFire(ent.Owner) && !ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner))
             return;
 
         //Don't take bleedout damage on fire or on weeds

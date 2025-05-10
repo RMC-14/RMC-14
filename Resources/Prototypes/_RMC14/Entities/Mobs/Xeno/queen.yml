@@ -1,10 +1,11 @@
-﻿- type: entity
+- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - RMCXenoSpeechSounds
   - RMCXenoMobCollision
-  id: CMXenoQueen
+  id: RMCXenoQueenBase
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
@@ -248,10 +249,40 @@
   - type: StunFriendlyXenoOnStep
 
 - type: entity
+  parent: RMCXenoQueenBase
+  id: CMXenoQueen
+  #components:
+  # - type: XenoEvolution #can be enabled for events like april fools.
+  #   strains:
+  #   - RMCXenoQueenMaid
+
+- type: entity
   id: XenoLeaderPheromoneRelay
   components:
   - type: XenoPheromones
 
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenMaid
+  suffix: Cat Maid Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-maid-name
+    description: rmc-xeno-maid-description
+    popup: rmc-xeno-maid-popup
+  - type: OwOAccent
+  - type: Speech
+    speechSounds: Cat
+    
 - type: entity
   parent: StationAiHolo
   id: RMCQueenEye

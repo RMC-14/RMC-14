@@ -150,7 +150,6 @@
         type: ViewIntelObjectivesBui
   - type: Infectable
   - type: Tackleable
-  - type: Tackle
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
@@ -323,8 +322,8 @@
   - type: RMCPickupDroppedItems
   - type: CommendationReceiver
   - type: RMCSpeciesSlowdownModifier
-    slowMultiplier: 0.66
-    superSlowMultiplier: 0.33
+    slowModifier: 2
+    superSlowModifier: 4
   - type: RMCHandEmotes
   - type: RMCBuckleDrawDepth
   - type: RMCObstacleSlamming
@@ -350,4 +349,10 @@
   - type: RMCMobCollision
   - type: RMCRest
   - type: DeafenWhileCrit
+  - type: RMCMeleeDamageSkill
+  - type: RMCStripTimeSkill
+  - type: RMCDisarm
+  - type: RMCDisarmable
   - type: StunOnExplosionReceived
+  - type: DeafenWhileCrit
+

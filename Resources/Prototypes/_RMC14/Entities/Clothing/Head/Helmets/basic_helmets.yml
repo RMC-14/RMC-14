@@ -106,6 +106,15 @@
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: sql-helmet
   - type: CycleableVisor
+    offIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: sight_up
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
 
 - type: entity
   id: RMCFoldableHelmetBase
