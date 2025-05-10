@@ -1,6 +1,6 @@
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, BasePyrotechnic ]
+  parent: RMCReagentPyrotechnic
   id: RMCPhoron
   name: reagent-name-rmcphoron
   desc: reagent-desc-rmcphoron
@@ -21,18 +21,205 @@
       effects:
       - !type:HealthChange
         damage:
-          types:
-            Poison: 0.25
+          groups:
+            Toxin: 0.25
       - !type:FlammableReaction
         multiplier: 0.2
 
 - type: reagent
-  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCWeldingFuel
+  name: reagent-name-welding-fuel
+  parent: RMCReagentPyrotechnic
+  desc: reagent-desc-welding-fuel
+  physicalDesc: reagent-physical-desc-oily
+  slippery: true
+  flavor: bitter
+  flavorMinimum: 0.01
+  color: "#660000"
+  flammable: true
+  intensity: 10 # Fueling 5 = -10, Oxidizing 3 = 18, Total 8 || intensityTotal = 18?
+  duration: 10 # Fueling 5 = 30, Oxidizing 3 = -6, Total 24  || durationTotal = 34?
+  fireRange: 4 # Viscous 4 = 4
+  explosive: true
+  power: 0.12
+  falloffMod: -0.1
+  tileReactions:
+  - !type:FlammableTileReaction {}
+  metabolisms:
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 1
+      - !type:FlammableReaction
+        multiplier: 0.4
+
+- type: reagent
+  parent: RMCReagentPyrotechnic
   id: RMCNapalmUT
   name: reagent-name-rmcnapalmut
   desc: reagent-desc-rmcnapalmut
   physicalDesc: reagent-physical-desc-shiny
   flavor: bitter
   color: "#DD9B00"
-  intensity: 30
-  duration: 20
+  flammable: true
+  intensity: 30 # BURN_LEVEL_TIER_5
+  duration: 20 # BURN_TIME_TIER_2
+
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCNapalm
+  name: reagent-name-rmcnapalm
+  desc: reagent-desc-rmcnapalm
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: oily
+  color: "#ffb300"
+  flammable: true
+  intensity: 22 # Oxidizing 6 = +36, Fueling 7 = -14
+  duration: 30 # Oxidizing 6 = -12, Fueling 7 = +42
+
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCNapalmSticky
+  name: reagent-name-rmcnapalm-sticky
+  desc: reagent-desc-rmcnapalm-sticky
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: oily
+  color: "#f8e3b2"
+  flammable: true
+  intensity: 15 # BURN_LEVEL_TIER_2
+  duration: 50 # BURN_TIME_TIER_5
+  
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCNapalmHC
+  name: reagent-name-rmcnapalm-high-combustion
+  desc: reagent-desc-rmcnapalm-high-combustion
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: oily
+  color: "#c51c1c"
+  flammable: true
+  intensity: 45 # BURN_LEVEL_TIER_8
+  duration: 10 # BURN_TIME_TIER_1
+
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCThermite
+  name: reagent-name-rmcthermite
+  desc: reagent-desc-rmcthermite
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: metallic
+  color: "#673910"
+  explosive: true
+  power: 0.5
+  falloffMod: 1
+  flammable: true
+  intensity: 16 # Oxidizing 5 = +30, Fueling 7 = -14
+  duration: 32 # Oxidizing 5 = -10, Fueling 7 = +42
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: 0.5
+            
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCChlorineTrifluoride
+  name: reagent-name-rmc-chlorine-trifluoride
+  desc: reagent-desc-rmc-chlorine-trifluoride
+  physicalDesc: reagent-physical-desc-blazing
+  flavor: bitter
+  color: "#00FFFF"
+  flammable: true
+  intensity: 54 # Oxidizing 9
+  duration: -18 # Oxidizing 9
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      #TODO Igniting 1
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: 2 # Corrosive 8
+            Toxin: 1.5 # Toxic 6
+       
+
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCMethane
+  name: reagent-name-rmcmethane
+  desc: reagent-desc-rmcmethane
+  physicalDesc: reagent-physical-desc-blazing
+  flavor: metallic
+  color: "#E5E5E5"
+  explosive: true
+  power: 0.15
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Toxin: 0.5
+            
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCAmmoniumNitrateFuelOil
+  name: reagent-name-rmcammonium-nitrate-fuel-oil
+  desc: reagent-desc-rmcammonium-nitrate-fuel-oil
+  physicalDesc: reagent-physical-desc-grainy
+  flavor: oily
+  color: "#E0E0E0"
+  explosive: true
+  power: 1
+  falloffMod: -0.6
+  
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCNitroglycerin
+  name: reagent-name-rmcnitroglycerin
+  desc: reagent-desc-rmcnitroglycerin
+  physicalDesc: reagent-physical-desc-oily
+  color: "#808080"
+  explosive: true
+  power: 1
+  falloffMod: -0.4
+      
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCCyclonite
+  name: reagent-name-rmccyclonite
+  desc: reagent-desc-rmccyclonite
+  physicalDesc: reagent-physical-desc-blazing
+  color: "#E3E0BA"
+  explosive: true
+  power: 1.5
+  falloffMod: -0.4
+      
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCOctogen
+  name: reagent-name-rmcoctogen
+  desc: reagent-desc-rmcoctogen
+  physicalDesc: reagent-physical-desc-blazing
+  color: "#F5F5F5"
+  intensity: 12 # Oxidizing 2
+  duration: -4 # Oxidizing 2
+  explosive: true
+  power: 2
+  falloffMod: -0.2
+  
+- type: reagent
+  parent: RMCReagentPyrotechnic
+  id: RMCPotassiumHydroxide
+  name: reagent-name-rmcpotassium-hydroxide
+  desc: reagent-desc-rmcpotassium-hydroxide
+  physicalDesc: reagent-physical-desc-shiny
+  explosive: true
+  power: 0.5

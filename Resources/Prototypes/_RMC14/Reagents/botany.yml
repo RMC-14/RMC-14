@@ -1,0 +1,22 @@
+﻿- type: reagent
+  parent: RMCReagentBotanical
+  id: RMCAmmoniumNitrate
+  name: reagent-name-rmcammonium-nitrate
+  desc: reagent-desc-rmcammonium-nitrate
+  flavor: salty
+  physicalDesc: reagent-physical-desc-crystalline
+  color: "#E5E5E5"
+  explosive: true
+  power: 0.4
+  falloffMod: 1.5
+  durationMod: -0.2
+  intensityMod: 0.5
+        
+- type: reagent
+  parent: RMCReagentBotanical
+  id: RMCAmmonia
+  name: reagent-name-rmcammonia
+  desc: reagent-desc-rmcammonia
+  flavor: sharp
+  physicalDesc: reagent-physical-desc-gaseous
+  color: "#404030"
