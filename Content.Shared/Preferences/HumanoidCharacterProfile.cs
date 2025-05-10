@@ -153,6 +153,9 @@ namespace Content.Shared.Preferences
         [DataField]
         public string XenoPostfix { get; private set; } = string.Empty;
 
+        [DataField]
+        public bool AutoItemName { get; private set; } = true;
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -172,7 +175,8 @@ namespace Content.Shared.Preferences
             SharedRMCNamedItems namedItems,
             bool playtimePerks,
             string xenoPrefix,
-            string xenoPostfix)
+            string xenoPostfix,
+            bool autoItemName)
         {
             Name = name;
             FlavorText = flavortext;
@@ -208,6 +212,7 @@ namespace Content.Shared.Preferences
             PlaytimePerks = playtimePerks;
             XenoPrefix = xenoPrefix;
             XenoPostfix = xenoPostfix;
+            AutoItemName = autoItemName;
         }
 
         /// <summary>Copy constructor</summary>
@@ -230,7 +235,8 @@ namespace Content.Shared.Preferences
                 other.NamedItems,
                 other.PlaytimePerks,
                 other.XenoPrefix,
-                other.XenoPostfix)
+                other.XenoPostfix,
+                other.AutoItemName)
         {
         }
 
@@ -547,6 +553,7 @@ namespace Content.Shared.Preferences
             if (PlaytimePerks != other.PlaytimePerks) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;
+            if (AutoItemName != other.AutoItemName) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -871,6 +878,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(PlaytimePerks);
             hashCode.Add(XenoPrefix);
             hashCode.Add(XenoPostfix);
+            hashCode.Add(AutoItemName);
             return hashCode.ToHashCode();
         }
 
@@ -908,6 +916,11 @@ namespace Content.Shared.Preferences
 
             loadout.SetDefault(this, session, protoManager);
             return loadout;
+        }
+
+        public HumanoidCharacterProfile WithAutoItemName(bool autoItemName)
+        {
+            return new(this) { AutoItemName = autoItemName };
         }
 
         public HumanoidCharacterProfile WithNamedItems(SharedRMCNamedItems named)

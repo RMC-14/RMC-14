@@ -9,4 +9,7 @@ public sealed partial class RMCUserNamedItemsComponent : Component
 {
     [DataField]
     public SharedRMCNamedItems Names = new();
+
+    [DataField]
+    public bool NameOnDispense = true;
 }
