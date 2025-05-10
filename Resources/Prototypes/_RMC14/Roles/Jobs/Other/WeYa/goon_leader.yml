@@ -30,6 +30,7 @@
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
         RMCSkillLeadership: 1
+    - type: RMCTrackable
 
 - type: playTimeTracker
   id: RMCJobWeYaGoonLead
@@ -38,7 +39,7 @@
   id: RMCJobWeYaGoonLead
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressPMCLeader
+    ears: RMCHeadsetDistressGoonLeader
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate # TODO RMC14: corporate/lead
     gloves: RMCHandsVeteranPMC

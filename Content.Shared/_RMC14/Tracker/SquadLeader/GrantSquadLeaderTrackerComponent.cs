@@ -9,4 +9,10 @@ public sealed partial class GrantSquadLeaderTrackerComponent : Component, ICloth
 {
     [DataField, AutoNetworkedField]
     public SlotFlags Slots { get; set; } = SlotFlags.EARS;
+
+    [DataField, AutoNetworkedField]
+    public SquadLeaderTrackerMode? DefaultMode;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<SquadLeaderTrackerMode> TrackerModes = new();
 }
