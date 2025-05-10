@@ -23,16 +23,10 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DeafComponent, ComponentInit>(OnDeafInit);
         SubscribeLocalEvent<DeafComponent, ComponentShutdown>(OnDeafShutdown);
-
-        SubscribeLocalEvent<DeafComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<DeafComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
-    }
 
-    private void OnDeafInit(EntityUid uid, DeafComponent component, ComponentInit args)
-    {
-        SetOriginalVolume();
+        Subs.CVar(_cfg, CCVars.AudioMasterVolume, value => _originalVolume = value, true);
     }
 
     private void OnDeafShutdown(EntityUid uid, DeafComponent component, ComponentShutdown args)
@@ -41,19 +35,9 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
             _audio.SetMasterGain(_originalVolume);
     }
 
-    private void OnPlayerAttached(EntityUid uid, DeafComponent component, LocalPlayerAttachedEvent args)
-    {
-        SetOriginalVolume();
-    }
-
     private void OnPlayerDetached(EntityUid uid, DeafComponent component, LocalPlayerDetachedEvent args)
     {
         _audio.SetMasterGain(_originalVolume);
-    }
-
-    private void SetOriginalVolume()
-    {
-        _originalVolume = _cfg.GetCVar(CCVars.AudioMasterVolume);
     }
 
     public override void Update(float frameTime)
