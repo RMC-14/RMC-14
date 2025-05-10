@@ -35,6 +35,7 @@
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
+    - type: RMCRibbon
       factions:
       - WeYa
     - type: IntelRescueSurvivorObjective
