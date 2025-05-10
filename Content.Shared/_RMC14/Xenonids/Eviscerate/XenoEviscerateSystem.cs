@@ -121,7 +121,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
             var filter = Filter.Pvs(marine, entityManager: EntityManager);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { marine }, filter);
 
-            if (range > 1)
+            if (range > 1.5f)
             {
                 _audio.PlayPvs(xeno.Comp.RageHitSound, marine); // todo spawn gibs
             }
