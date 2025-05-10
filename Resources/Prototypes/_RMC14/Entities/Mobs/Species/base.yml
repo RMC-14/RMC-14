@@ -65,6 +65,7 @@
     - Flashed
     - Dazed
     - Blinded
+    - Deaf
   - type: Blindable
   - type: Tag
     tags:
@@ -347,8 +348,11 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
+  - type: DeafenWhileCrit
   - type: RMCMeleeDamageSkill
   - type: RMCStripTimeSkill
   - type: RMCDisarm
   - type: RMCDisarmable
-  - type: StunOnExplosionReceived # TODO should also cause hearing loss
+  - type: StunOnExplosionReceived
+  - type: DeafenWhileCrit
+
