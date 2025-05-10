@@ -1,9 +1,9 @@
 - type: job
   parent: CMJobBase
-  id: RMCUNMCAdjutant
+  id: CMUNMCAdjutant
   name: rmc-job-name-unmc-adjutant
   description: rmc-job-description-unmc-adjutant
-  playTimeTracker: RMCJobUNMCAdjutant
+  playTimeTracker: CMJobUNMCAdjutant
   ranks:
     RMCRankFirstLT: []
   startingGear: RMCGearUNMCAdjutant
@@ -69,7 +69,7 @@
     - ShipMasterAccess
 
 - type: playTimeTracker
-  id: RMCJobUNMCAdjutant
+  id: CMJobUNMCAdjutant
 
 - type: jobIcon
   parent: CMJobIconBase

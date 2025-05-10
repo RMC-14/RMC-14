@@ -3,16 +3,8 @@
   id: RMCUNMCResponder
   name: rmc-job-name-unmc-responder
   description: rmc-job-description-unmc-responder
-  playTimeTracker: RMCJobUNMCResponder
+  playTimeTracker: CMJobUNMCResponder
   ranks:
-    RMCRankMajor:
-    - !type:RoleTimeRequirement
-      role: RMCJobUNMCResponder
-      time: 252000 # 70 hours
-    RMCRankCaptain:
-    - !type:RoleTimeRequirement
-      role: RMCJobUNMCResponder
-      time: 36000 # 10 hours
     RMCRankFirstLT: []
   startingGear: RMCGearUNMCResponder
   icon: "CMJobIconEmpty"
@@ -39,31 +31,6 @@
         RMCSkillVehicles: 2
   hasIcon: false
   hidden: true
-
-- type: entity
-  id: RMCRandomHumanoidUNMCResponder
-  name: UNMC responder ghost role
-  suffix: Spawner, Player, Fax Responder
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/fax_machine.rsi
-    state: icon
-  - type: RandomHumanoidSpawner
-    settings: RMCUNMCResponder
-
-- type: randomHumanoidSettings
-  parent: RMCEventHumanoid
-  id: RMCUNMCResponder
-  components:
-  - type: GhostRole
-    name: rmc-job-name-unmc-responder
-    description: rmc-ghost-role-information-responder-description
-    rules: rmc-ghost-role-information-responder-rules
-    reregister: false
-    job: RMCUNMCResponder
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearUNMCResponder
@@ -96,5 +63,5 @@
     job: RMCUNMCResponder
 
 - type: playTimeTracker
-  id: RMCJobUNMCResponder
+  id: CMJobUNMCResponder
 

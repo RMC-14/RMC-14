@@ -1,9 +1,9 @@
 - type: job
   parent: CMJobBase
-  id: RMCUNMCBrigadierGeneral
+  id: CMUNMCBrigadierGeneral
   name: rmc-job-name-unmc-brigadier-general
   description: rmc-job-description-unmc-brigadier-general
-  playTimeTracker: RMCJobUNMCBrigadierGeneral
+  playTimeTracker: CMJobUNMCBrigadierGeneral
   ranks:
     RMCRankBrigadierGeneral: []
   startingGear: RMCGearUNMCBrigadierGeneral
@@ -82,7 +82,7 @@
     - CMAccessXeno
 
 - type: playTimeTracker
-  id: RMCJobUNMCBrigadierGeneral
+  id: CMJobUNMCBrigadierGeneral
 
 - type: jobIcon
   parent: CMJobIconBase

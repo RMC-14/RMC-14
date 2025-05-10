@@ -1,9 +1,9 @@
 - type: job
   parent: CMJobBase
-  id: RMCCLFResponder
+  id: CMCLFResponder
   name: rmc-job-name-clf-responder
   description: rmc-job-description-clf-responder
-  playTimeTracker: RMCJobCLFResponder
+  playTimeTracker: CMJobCLFResponder
   ranks:
     RMCRankCLFRebelCommander: []
   startingGear: RMCGearCLFResponder
@@ -35,31 +35,6 @@
   hasIcon: false
   hidden: true
 
-- type: entity
-  id: RMCRandomHumanoidCLFResponder
-  name: CLF responder ghost role
-  suffix: Spawner, Player, Fax Responder
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/fax_machine.rsi
-    state: icon
-  - type: RandomHumanoidSpawner
-    settings: RMCCLFResponder
-
-- type: randomHumanoidSettings
-  parent: RMCEventHumanoid
-  id: RMCCLFResponder
-  components:
-  - type: GhostRole
-    name: rmc-job-name-clf-responder
-    description: rmc-ghost-role-information-responder-description
-    rules: rmc-ghost-role-information-responder-rules
-    reregister: false
-    job: RMCCLFResponder
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial
-
 - type: startingGear
   id: RMCGearCLFResponder
   equipment:
@@ -87,9 +62,8 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/silver_id.rsi
   - type: PresetIdCard
-    job: RMCCLFResponder
-
+    job: CMCLFResponder
 
 - type: playTimeTracker
-  id: RMCJobCLFResponder
+  id: CMJobCLFResponder
 
