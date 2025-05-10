@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed CMO, Doctor, Nurse and Maintenance Technician starting with a headset.
-    type: Fix
-  - message: Survivors now spawn with a Colony key in their headset.
-    type: Tweak
-  id: 1195
-  time: '2025-01-11T08:43:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5263
 - author: CyberTropic
   changes:
   - message: Added civilian playtime award ribbons as a parallel to marine service
@@ -5535,5 +5526,12 @@
   id: 1697
   time: '2025-05-10T03:34:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6301
+- author: Magicocity1
+  changes:
+  - message: The M13 and M44 now appear in the pistol pouch when inside it
+    type: Fix
+  id: 1698
+  time: '2025-05-10T03:36:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6276
 Name: RMC14
 Order: -1
