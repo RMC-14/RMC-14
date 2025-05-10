@@ -6,37 +6,37 @@
   color: "#9b0612"
   longRange: true
 
-#- type: radioChannel
-#  id: SPPCommand
-#  name: chat-radio-spp-command
-#  keycode: "k"
-#  frequency: 1252
-#  color: "#9b0612"
-#  longRange: true
+- type: radioChannel
+  id: SPPCommand
+  name: chat-radio-spp-command
+  keycode: "k"
+  frequency: 1252
+  color: "#9b0612"
+  longRange: true
 
-#- type: radioChannel
-#  id: SPPEngi
-#  name: chat-radio-spp-engi
-#  keycode: "s"
-#  frequency: 1253
-#  color: "#9b0612"
-#  longRange: true
+- type: radioChannel
+  id: SPPEngi
+  name: chat-radio-spp-engi
+  keycode: "s"
+  frequency: 1253
+  color: "#9b0612"
+  longRange: true
 
-#- type: radioChannel
-#  id: SPPMed
-#  name: chat-radio-spp-med
-#  keycode: "i"
-#  frequency: 1254
-#  color: "#9b0612"
-#  longRange: true
+- type: radioChannel
+  id: SPPMed
+  name: chat-radio-spp-med
+  keycode: "i"
+  frequency: 1254
+  color: "#9b0612"
+  longRange: true
 
-#- type: radioChannel
-#  id: SPPCCT
-#  name: chat-radio-spp-cct
-#  keycode: "x"
-#  frequency: 1255
-#  color: "#9b0612"
-#  longRange: true
+- type: radioChannel
+  id: SPPCCT
+  name: chat-radio-spp-cct
+  keycode: "x"
+  frequency: 1255
+  color: "#9b0612"
+  longRange: true
 
 - type: entity
   parent: CMEncryptionKey
@@ -58,10 +58,10 @@
   - type: EncryptionKey
     channels:
     - SPP
-#    - SPPCommand
-#    - SPPEngi
-#    - SPPMed
-#    - SPPCCT
+    - SPPCommand
+    - SPPEngi
+    - SPPMed
+    - SPPCCT
     defaultChannel: SPP
 
 - type: entity
@@ -72,8 +72,8 @@
   - type: EncryptionKey
     channels:
     - SPP
-#    - SPPEngi
-#    - SPPCCT
+    - SPPEngi
+    - SPPCCT
     defaultChannel: SPP
 
 - type: entity
@@ -84,8 +84,8 @@
   - type: EncryptionKey
     channels:
     - SPP
-#    - SPPEngi
-#    - SPPMed
+    - SPPEngi
+    - SPPMed
     defaultChannel: SPP
 
 - type: entity

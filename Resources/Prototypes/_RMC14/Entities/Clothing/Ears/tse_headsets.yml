@@ -1,7 +1,7 @@
 ﻿- type: radioChannel
   id: TSE
   name: chat-radio-tse
-  keycode: "s" # RMC14 TODO - Make this function like Golden Arrow radio
+  keycode: "q"
   frequency: 1551
   color: "#9a1228"
   longRange: true

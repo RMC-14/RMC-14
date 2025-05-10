@@ -12,7 +12,7 @@
       - RMCEncryptionKeyRoyalMarine
   - type: RMCHeadset
     channels:
-    - RoyalMarine
+    - TSE
     radioTextIncrease: 2
 
 - type: entity
@@ -24,6 +24,7 @@
     channels:
     - MarineCommand
     - MarineCommon
-    defaultChannel: RoyalMarine
+    - TSE
+    defaultChannel: TSE
   - type: Sprite
     state: sl_key
