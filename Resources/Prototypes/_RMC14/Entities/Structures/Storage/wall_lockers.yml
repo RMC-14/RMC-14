@@ -12,16 +12,19 @@
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Wallmounts/cmdcabinet.rsi
   - type: EntityStorage
+    capacity: 3 # for storing a tablet and headset, as well as for one more additional thing if needed
     isCollidableWhenOpen: true
     enteringOffset: 0, -0.6
     enteringRange: 0.03
     whitelist:
       tags:
       - CommandTablet
+      - RMCHeadset
   - type: RMCEntityStorageWhitelist
     whitelist:
       tags:
       - CommandTablet
+      - RMCHeadset
   - type: AccessReader
     access: [["CMAccessCommand"]]
 
@@ -42,4 +45,4 @@
   table: !type:AllSelector
     children:
     - id: RMCTabletCO
-
+    - id: RMCHeadsetMarineCommand
