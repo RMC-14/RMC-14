@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Xeno spits have different colors now depending on how much damage they
-      do. Neuro spit is now also yellow.
-    type: Add
-  id: 1188
-  time: '2025-01-11T08:25:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5338
 - author: Dutch-VanDerLinde
   changes:
   - message: Made picking up dropped items hotkey pick up the first dropped item,
@@ -5519,5 +5511,12 @@
   id: 1690
   time: '2025-05-10T03:16:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6325
+- author: crazy1112345
+  changes:
+  - message: Added faction stamps for SPP, CLF, TSE, and the Free Press.
+    type: Add
+  id: 1691
+  time: '2025-05-10T03:20:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6310
 Name: RMC14
 Order: -1
