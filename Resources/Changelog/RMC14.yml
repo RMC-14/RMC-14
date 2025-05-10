@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added pistol belts to the senior officer vendor.
-    type: Tweak
-  id: 1200
-  time: '2025-01-11T21:45:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5355
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Pickup dropped items hotkey now picks up important items (like guns and
-      melee) before other items.
-    type: Tweak
-  id: 1201
-  time: '2025-01-11T21:45:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5353
 - author: DrSmugleaf
   changes:
   - message: Added fireteams. These are created by the Squad Leader of each squad
@@ -5542,5 +5527,19 @@
   id: 1702
   time: '2025-05-10T04:02:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6388
+- author: Vermidia
+  changes:
+  - message: Fixed neurotoxin gas not causing blurry vision.
+    type: Fix
+  id: 1703
+  time: '2025-05-10T04:05:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6381
+- author: Vermidia
+  changes:
+  - message: Fixed morgues preventing rot
+    type: Fix
+  id: 1704
+  time: '2025-05-10T04:05:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6392
 Name: RMC14
 Order: -1
