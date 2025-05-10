@@ -95,10 +95,8 @@
         collection: Punch
       damage:
         types:
-          Blunt: 40
+          Blunt: 20
           Structural: 20
-    - type: CMArmorPiercing
-      amount: 100
     - type: MeleeSpeech
     - type: UserInterface
       interfaces:
