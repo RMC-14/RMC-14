@@ -1,32 +1,23 @@
 using Content.Shared._RMC14.Armor;
-using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared.Damage;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Slow;
-using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Aura;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared.Examine;
-using Content.Shared._RMC14.Marines;
 
 namespace Content.Shared._RMC14.Xenonids.Rage;
 
 public sealed class XenoRageSystem : EntitySystem
 {
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedAuraSystem _aura = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
@@ -104,7 +95,7 @@ public sealed class XenoRageSystem : EntitySystem
         var validTarget = false;
         foreach (var entity in args.HitEntities)
         {
-            if (!HasComp<MarineComponent>(entity))
+            if (!_xeno.CanAbilityAttackTarget(xeno.Owner, entity, true))
                 continue;
 
             validTarget = true;

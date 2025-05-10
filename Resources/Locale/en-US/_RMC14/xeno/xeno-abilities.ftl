@@ -361,3 +361,11 @@ rmc-xeno-rage-lock = We feel a euphoric rush as we reach max rage! We are LOCKED
 rmc-xeno-rage-expire = Our adrenal glands spasm. We cannot gain any rage for {$cooldown} seconds.
 rmc-xeno-rage-examine = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} has {$amount}/{$max} rage stacks.
 
+# Eviscerate
+rmc-xeno-eviscerate-fail = We can't do eviscerate with 0 rage stacks!
+
+rmc-xeno-eviscerate-windup-self = We begin digging in for a massive strike!
+rmc-xeno-eviscerate-windup = {$xeno} begins digging in for a massive strike!
+
+rmc-xeno-eviscerate-windup-small-self = We begin digging in for a strike!
+rmc-xeno-eviscerate-windup-small = {$xeno} begins digging in for a strike!

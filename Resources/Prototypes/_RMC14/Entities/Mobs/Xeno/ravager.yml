@@ -169,7 +169,7 @@
     - ActionXenoTailStab
     - ActionXenoApprehend
     # - ActionXenoClothesline
-    # - ActionXenoEviscerate
+    - ActionXenoEviscerate
     - ActionXenoDevolve
     hidden: true
   - type: MobThresholds
@@ -199,3 +199,17 @@
     damageMult: 1
     speed: 1.2
   - type: XenoRage
+  - type: XenoEviscerate
+    damageAtRageLevels:
+    - groups:
+        Brute: 5
+    - groups:
+        Brute: 10
+    - groups:
+        Brute: 25
+    - groups:
+        Brute: 45
+    - groups:
+        Brute: 70
+    rangeAtRageLevels: [1.5, 1.5, 1.5, 2.5, 2.5]
+    windupReductionAtRageLevels: [0, 0.2, 4, 6, 10]

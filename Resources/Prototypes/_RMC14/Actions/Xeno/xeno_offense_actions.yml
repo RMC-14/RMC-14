@@ -949,3 +949,19 @@
     event: !type:XenoCripplingStrikeActionEvent
     useDelay: 18
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoEviscerate
+  name: Eviscerate
+  description: Eviscerate nearby enemies after a short delay.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    event: !type:XenoEviscerateActionEvent
+    useDelay: 23
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
