@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Made picking up dropped items hotkey pick up the first dropped item,
-      instead of the last.
-    type: Tweak
-  id: 1189
-  time: '2025-01-11T08:28:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5343
 - author: DummeHytteOst
   changes:
   - message: Press armor now has a light.
@@ -5518,5 +5510,12 @@
   id: 1691
   time: '2025-05-10T03:20:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6310
+- author: Vermidia
+  changes:
+  - message: Fixed Custom SPR doing slightly too much damage base (31 > 26)
+    type: Fix
+  id: 1692
+  time: '2025-05-10T03:24:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6360
 Name: RMC14
 Order: -1
