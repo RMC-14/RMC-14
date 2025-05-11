@@ -35,7 +35,7 @@ public sealed partial class XenoFlingComponent : Component
     public int EnragedHealAmount = 0;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan HealDelay = TimeSpan.FromSeconds(1);
+    public TimeSpan HealDelay = TimeSpan.FromSeconds(0.05);
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg");

@@ -133,8 +133,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
             validTargets += 1;
         }
 
-        var delay = TimeSpan.FromSeconds(1);
         var healAmount = Math.Clamp(validTargets * xeno.Comp.LifeStealPerMarine, 0, xeno.Comp.MaxLifeSteal);
-        _xenoHeal.CreateHealStacks(xeno, healAmount, delay, 1, delay);
+        _xenoHeal.CreateHealStacks(xeno, healAmount, xeno.Comp.HealDelay, 1, xeno.Comp.HealDelay);
     }
 }

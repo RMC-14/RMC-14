@@ -28,6 +28,9 @@ public sealed partial class XenoEviscerateComponent : Component
     public TimeSpan WindupTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan HealDelay = TimeSpan.FromSeconds(0.05);
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoTailSwipe");
 
     [DataField, AutoNetworkedField]

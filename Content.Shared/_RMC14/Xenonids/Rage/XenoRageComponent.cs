@@ -36,7 +36,7 @@ public sealed partial class XenoRageComponent : Component
     public TimeSpan RageCooldownDuration = TimeSpan.FromSeconds(10);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan RageHealTime = TimeSpan.FromSeconds(1);
+    public TimeSpan RageHealTime = TimeSpan.FromSeconds(0.05);
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 HealAmount = 45; // Equal to the slash damage of the xeno
