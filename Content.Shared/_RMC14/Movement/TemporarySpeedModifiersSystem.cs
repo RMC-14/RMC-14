@@ -107,7 +107,7 @@ public sealed class TemporarySpeedModifiersSystem : EntitySystem
     /// <returns>Null or a float representing the calculated speed multiplier</returns>
     public float? CalculateSpeedModifier(EntityUid uid, float modifier, MovementSpeedModifierComponent? movement = null)
     {
-        if (!Resolve(uid, ref movement))
+        if (!Resolve(uid, ref movement) || movement.CurrentSprintSpeed == 0)
             return null;
 
         var currentSpeed = movement.CurrentSprintSpeed;
