@@ -206,3 +206,16 @@
         color: "#C12D30"
         sprite: Clothing/Uniforms/Jumpsuit/color.rsi
       - state: overlay-inhand-right
+
+# CLF
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCLFSoldier
+  name: colonist uniform
+  description: A bruised and tattered colonist uniform.
+  suffix: CLF
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
