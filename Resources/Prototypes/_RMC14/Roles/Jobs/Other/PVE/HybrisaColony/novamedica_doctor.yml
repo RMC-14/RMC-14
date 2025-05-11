@@ -34,7 +34,7 @@
   id: RMCGearPVENovaMedicaDoctor
   equipment:
     mask: CMMaskSterile
-    ears: CMHeadsetColony
+    ears: RMCHeadsetColonyIcons
     jumpsuit: CMJumpsuitLiaison
     outerClothing: RMCLabcoat
     gloves: CMHandsLatex
