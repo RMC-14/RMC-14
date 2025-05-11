@@ -44,7 +44,6 @@
   - RMCGuideRoleMaintenanceTechnician
   - RMCGuideRoleSGO
   - RMCGuideCommandRoles
-  - RMCGuideRoleMortar
   - RMCGuideRoleSpec
 
 # marine structures
@@ -55,6 +54,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
   children:
   - RMCGuideCommunicationsTowers
+  - RMCGuideRoleMortar
 
 # cooking
 - type: guideEntry
@@ -169,7 +169,7 @@
   parent: RMC
   id: RMCGuideRoleMortar
   priority: 11
-  name: "Mortar Operator"
+  name: "Mortar"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMortar.xml"
 
 - type: guideEntry
