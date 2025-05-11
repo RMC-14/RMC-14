@@ -1125,12 +1125,12 @@
 # Buckshot
 - type: entity
   parent: RMCBoxMagazineShellBase
-  id: RMCBoxShellsBuckshotEmpty
+  id: RMCBoxShellsBuckshotLargeEmpty
   name: shell box (Buckshot x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxShellsBuckshotEmpty
+    node: RMCBoxShellsBuckshotLargeEmpty
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
@@ -1154,7 +1154,7 @@
         - RMCShellShotgunBuckshot
 
 - type: entity
-  parent: RMCBoxShellsBuckshotEmpty
+  parent: RMCBoxShellsBuckshotLargeEmpty
   id: RMCBoxShellsBuckshot
   suffix: Full
   components:

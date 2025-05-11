@@ -373,8 +373,8 @@
 # Shotgun
 - type: construction
   parent: RMC
-  name: Shell Box (Buckshot)
-  id: RMCBoxShellsBuckshotEmpty
+  name: Large Shell Box (Buckshot)
+  id: RMCBoxShellsBuckshotLargeEmpty
   graph: RMCBoxMagazine
   startNode: start
   targetNode: RMCBoxShellsBuckshotEmpty
