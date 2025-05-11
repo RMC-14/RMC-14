@@ -1,14 +1,14 @@
-# TSEPA Deputy
+# TSEPA Marshal
 - type: job
   parent: CMJobBase
-  id: RMCTSEPADeputy
-  name: rmc-job-name-tsepa-deputy
-  description: rmc-job-description-tsepa-deputy
-  playTimeTracker: RMCJobTSEPADeputy
+  id: RMCTSEPAMarshal
+  name: rmc-job-name-tsepa-marshal
+  description: rmc-job-description-tsepa-marshal
+  playTimeTracker: RMCJobTSEPAMarshal
   ranks:
-    RMCRankTSESergeant: []
-  startingGear: RMCGearTSEPADeputy
-  icon: "RMCJobIconTSEPADeputy"
+    RMCRankTSEColourSergeant: []
+  startingGear: RMCGearTSEPAMarshal
+  icon: "RMCJobIconTSEPAMarshal"
   joinNotifyCrew: false
   accessGroups:
   - ColonistSec
@@ -18,25 +18,25 @@
     - type: Skills
       skills:
         RMCSkillEngineer: 1
-        RMCSkillMeleeWeapons: 1
+        RMCSkillMeleeWeapons: 2
         RMCSkillConstruction: 1
         RMCSkillMedical: 1
         RMCSkillEndurance: 2
         RMCSkillCqc: 2
-        RMCSkillFirearms: 1
+        RMCSkillFirearms: 2
         RMCSkillPolice: 0
         RMCSkillFireman: 2
     - type: NpcFactionMember
       factions:
       - TSE
     - type: JobPrefix
-      prefix: rmc-job-prefix-tsepa-deputy
+      prefix: rmc-job-prefix-tsepa-marshal
   hidden: true
 
 - type: startingGear
-  id: RMCGearTSEPADeputy
+  id: RMCGearTSEPAMarshal
   equipment:
-    head: RMCHeadCapTSEPA
+    head: RMCHeadBeretTSEPA
     ears: RMCHeadsetTSEPA
     jumpsuit: RMCJumpsuitTSEPA
     outerClothing: RMCArmourM4TSEPA
@@ -44,7 +44,7 @@
     shoes: CMBootsBlackFilled
     suitstorage: WeaponRifleL83A2
     id: RMCIDCardTSEPA
-    belt: RMCM1984BeltFilled
+    belt: RMCBeltHolsterRevolverSpearheadFill
     back: RMCSatchelTSEPA
   storage:
     back:
@@ -54,11 +54,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointTSEPADeputy
-  name: tsepa deputy spawn point
+  id: RMCSpawnPointTSEPAMarshal
+  name: tsepa marshal spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCTSEPADeputy
+    job_id: RMCTSEPAMarshal
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
@@ -67,12 +67,12 @@
       state: icon
 
 - type: playTimeTracker
-  id: RMCJobTSEPADeputy
+  id: RMCJobTSEPAMarshal
   isHumanoid: true
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconTSEPADeputy
+  id: RMCJobIconTSEPAMarshal
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: tse_paofficer
+    state: tse_pamarshal

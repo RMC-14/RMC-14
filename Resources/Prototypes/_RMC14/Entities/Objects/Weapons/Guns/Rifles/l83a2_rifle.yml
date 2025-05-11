@@ -106,7 +106,7 @@
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer # TODO RMC14 advanced flamer
+          - RMCAttachmentFlamer
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
@@ -142,7 +142,7 @@
       tags:
       - RMCCartridgeRifleL83A2
     proto: RMCCartridgeRifleL83A2
-    capacity: 20
+    capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a2.rsi
     layers:

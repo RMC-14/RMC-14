@@ -1,4 +1,14 @@
 - type: entity
+  parent: CMHeadCapMP
+  id: RMCHeadCapTSEPA
+  name: tsepa cap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap.rsi
+
+- type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretTSEPA
   name: tsepa beret
