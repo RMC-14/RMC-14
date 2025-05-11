@@ -182,16 +182,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers: # Shell boxes dont use markings
-    - state: shell_box
+    - state: largeshell_box
       color: "#944444"
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_color # Second fill state for coloured shells
+    - state: largeshell_ammo_full_color # Second fill state for coloured shells
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ff4444"
     - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: largeshell_lid
       map: [ "lid" ]
       color: "#944444"
   - type: GenericVisualizer
@@ -205,17 +205,17 @@
           False: { visible: true }
       enum.CMItemSlotsLayers.Fill:
         enum.CMItemSlotsLayers.Fill:
-          Empty: { state: shell_ammo_full_base, visible: false }
-          Low: {state: shell_ammo_low_base, visible: true }
-          Medium: {state: shell_ammo_medium_base, visible: true }
-          High: {state: shell_ammo_high_base, visible: true }
-          Full: {state: shell_ammo_full_base, visible: true }
+          Empty: { state: largeshell_ammo_full_base, visible: false }
+          Low: {state: largeshell_ammo_low_base, visible: true }
+          Medium: {state: largeshell_ammo_medium_base, visible: true }
+          High: {state: largeshell_ammo_high_base, visible: true }
+          Full: {state: largeshell_ammo_full_base, visible: true }
         enum.CMItemSlotsLayers2.Fill:  # Second fill state for coloured shells
-          Empty: { state: shell_ammo_full_color, visible: false }
-          Low: { state: shell_ammo_low_color, visible: true }
-          Medium: { state: shell_ammo_medium_color, visible: true }
-          High: { state: shell_ammo_high_color, visible: true }
-          Full: { state: shell_ammo_full_color, visible: true }
+          Empty: { state: largeshell_ammo_full_color, visible: false }
+          Low: { state: largeshell_ammo_low_color, visible: true }
+          Medium: { state: largeshell_ammo_medium_color, visible: true }
+          High: { state: largeshell_ammo_high_color, visible: true }
+          Full: { state: largeshell_ammo_full_color, visible: true }
 
 # Supply Base
 - type: entity
@@ -1126,7 +1126,8 @@
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RMCBoxShellsBuckshotLargeEmpty
-  name: shell box (Buckshot x 100)
+  name: Large Shell Box (Buckshot x 100)
+  suffix: Empty
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1134,16 +1135,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: shell_box # Main box base sprite
+    - state: largeshell_box # Main box base sprite
       color: "#944444"
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: largeshell_ammo_full_base # Default full ammo sprite
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: largeshell_ammo_full_base # Default full ammo sprite
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#944444"
     - state: shell_box_buckshot # Type Markings to place over Box
       color: "#e0d5c2"
-    - state: shell_lid # Lid to match with Box
+    - state: largeshell_lid # Lid to match with Box
       map: [ "lid" ]
       color: "#944444"
   - type: CMItemSlots
@@ -1155,7 +1156,7 @@
 
 - type: entity
   parent: RMCBoxShellsBuckshotLargeEmpty
-  id: RMCBoxShellsBuckshot
+  id: RMCBoxShellsBuckshotLarge
   suffix: Full
   components:
   - type: CMItemSlots
@@ -1169,25 +1170,26 @@
 # Slugs
 - type: entity
   parent: RMCBoxMagazineShellBase
-  id: RMCBoxShellsSlugsEmpty
-  name: shell box (Slugs x 100)
+  id: RMCBoxShellsSlugsLargeEmpty
+  name: Large Shell Box (Slugs x 100)
+  suffix: Empty
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxShellsSlugsEmpty
+    node: RMCBoxShellsSlugsLargeEmpty
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: shell_box
+    - state: largeshell_box
       color: "#578e75"
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#578e75"
     - state: shell_box_slugs
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: largeshell_lid
       map: [ "lid" ]
       color: "#578e75"
   - type: CMItemSlots
@@ -1198,8 +1200,8 @@
         - RMCShellShotgunSlugs
 
 - type: entity
-  parent: RMCBoxShellsSlugsEmpty
-  id: RMCBoxShellsSlugs
+  parent: RMCBoxShellsSlugsLargeEmpty
+  id: RMCBoxShellsSlugsLarge
   suffix: Full
   components:
   - type: CMItemSlots
@@ -1213,25 +1215,26 @@
 # Flechette
 - type: entity
   parent: RMCBoxMagazineShellBase
-  id: RMCBoxShellsFlechetteEmpty
-  name: shell box (Flechette x 100)
+  id: RMCBoxShellsFlechetteLargeEmpty
+  name: Large Shell Box (Flechette x 100)
+  suffix: Empty
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxShellsFlechetteEmpty
+    node: RMCBoxShellsFlechetteLargeEmpty
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: shell_box
+    - state: largeshell_box
       color: "#6551a0"
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#6551a0"
     - state: shell_box_flechette
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: largeshell_lid
       map: [ "lid" ]
       color: "#6551a0"
   - type: CMItemSlots
@@ -1242,8 +1245,8 @@
         - RMCShellShotgunFlechette
 
 - type: entity
-  parent: RMCBoxShellsFlechetteEmpty
-  id: RMCBoxShellsFlechette
+  parent: RMCBoxShellsFlechetteLargeEmpty
+  id: RMCBoxShellsFlechetteLarge
   suffix: Full
   components:
   - type: CMItemSlots
@@ -1257,24 +1260,25 @@
 # Breaching Shell
 - type: entity
   parent: RMCBoxMagazineShellBase
-  id: RMCBoxShellsBreachingEmpty
-  name: shell box (Breaching x 120)
+  id: RMCBoxShellsBreachingLargeEmpty
+  name: Large Shell Box (Breaching x 120)
+  suffix: Empty
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxShellsBreachingEmpty
+    node: RMCBoxShellsBreachingLargeEmpty
   - type: Sprite
     layers:
-    - state: shell_box
+    - state: largeshell_box
       color: "#595959"
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#595959"
     - state: shell_box_breaching
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: largeshell_lid
       map: [ "lid" ]
       color: "#595959"
   - type: CMItemSlots
@@ -1285,8 +1289,8 @@
         - RMCShellShotgunBreaching
 
 - type: entity
-  parent: RMCBoxShellsBreachingEmpty
-  id: RMCBoxShellsBreaching
+  parent: RMCBoxShellsBreachingLargeEmpty
+  id: RMCBoxShellsBreachingLarge
   suffix: Full
   components:
   - type: CMItemSlots
@@ -1300,29 +1304,30 @@
 # Beanbag Shell
 - type: entity
   parent: RMCBoxMagazineShellBase
-  id: RMCBoxShellsBeanbagEmpty
-  name: shell box (Beanbag x 100)
+  id: RMCBoxShellsBeanbagLargeEmpty
+  name: Large Shell Box (Beanbag x 100)
+  suffix: Empty
   components:
   # - type: Construction
   # graph: RMCBoxMagazine
-  # node: RMCBoxShellsBeanbagEmpty
+  # node: RMCBoxShellsBeanbagLargeEmpty
   - type: Sprite
     layers:
-    - state: shell_box
+    - state: largeshell_box
       color: "#5786be"
-    - state: shell_box_marking
+    - state: largeshell_box_marking
       color: "#e0d5c2"
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#5786be"
     - state: shell_box_beanbag
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: largeshell_lid
       map: [ "lid" ]
       color: "#5786be"
-    - state: shell_lid_marking
+    - state: largeshell_lid_marking
       map: [ "lid_marking" ]
       color: "#e0d5c2"
   - type: CMItemSlots
@@ -1333,8 +1338,8 @@
         - RMCShellShotgunBeanbag
 
 - type: entity
-  parent: RMCBoxShellsBeanbagEmpty
-  id: RMCBoxShellsBeanbag
+  parent: RMCBoxShellsBeanbagLargeEmpty
+  id: RMCBoxShellsBeanbagLarge
   suffix: Full
   components:
   - type: CMItemSlots
@@ -1348,29 +1353,30 @@
 # Incendiary Slug
 - type: entity
   parent: RMCBoxMagazineShellBase
-  id: RMCBoxShellsIncendiaryEmpty
-  name: shell box (Incendiary Slug x 100)
+  id: RMCBoxShellsIncendiaryLargeEmpty
+  name: Large Shell Box (Incendiary Slug x 100)
+  suffix: Empty
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxShellsIncendiaryEmpty
+    node: RMCBoxShellsIncendiaryLargeEmpty
   - type: Sprite
     layers:
-    - state: shell_box
+    - state: largeshell_box
       color: "#c6cdd3"
-    - state: shell_box_marking
+    - state: largeshell_box_marking
       color: "#ffcb26"
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffcb26"
     - state: shell_box_incendiary
       color: "#b8533d"
-    - state: shell_lid
+    - state: largeshell_lid
       map: [ "lid" ]
       color: "#c6cdd3"
-    - state: shell_lid_marking
+    - state: largeshell_lid_marking
       map: [ "lid_marking" ]
       color: "#ffcb26"
   - type: CMItemSlots
@@ -1381,8 +1387,8 @@
         - RMCShellShotgunIncendiary
 
 - type: entity
-  parent: RMCBoxShellsIncendiaryEmpty
-  id: RMCBoxShellsIncendiary
+  parent: RMCBoxShellsIncendiaryLargeEmpty
+  id: RMCBoxShellsIncendiaryLarge
   suffix: Full
   components:
   - type: CMItemSlots
@@ -1396,29 +1402,30 @@
 # Incendiary Buckshot
 - type: entity
   parent: RMCBoxMagazineShellBase
-  id: RMCBoxShellsIncendiaryBuckshotEmpty
-  name: shell box (Incendiary Buckshot x 100)
+  id: RMCBoxShellsIncendiaryBuckshotLargeEmpty
+  name: Large Shell Box (Incendiary Buckshot x 100)
+  suffix: Empty
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxShellsIncendiaryBuckshotEmpty
+    node: RMCBoxShellsIncendiaryBuckshotLargeEmpty
   - type: Sprite
     layers:
-    - state: shell_box
+    - state: largeshell_box
       color: "#c6cdd3"
-    - state: shell_box_marking
+    - state: largeshell_box_marking
       color: "#e49331"
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base
+    - state: largeshell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#e49331"
     - state: shell_box_incendiary
       color: "#b8533d"
-    - state: shell_lid
+    - state: largeshell_lid
       map: [ "lid" ]
       color: "#c6cdd3"
-    - state: shell_lid_marking
+    - state: largeshell_lid_marking
       map: [ "lid_marking" ]
       color: "#e49331"
   - type: CMItemSlots
@@ -1429,8 +1436,8 @@
         - RMCShellShotgunIncendiaryBuckshot
 
 - type: entity
-  parent: RMCBoxShellsIncendiaryBuckshotEmpty
-  id: RMCBoxShellsIncendiaryBuckshot
+  parent: RMCBoxShellsIncendiaryBuckshotLargeEmpty
+  id: RMCBoxShellsIncendiaryBuckshotLarge
   suffix: Full
   components:
   - type: CMItemSlots

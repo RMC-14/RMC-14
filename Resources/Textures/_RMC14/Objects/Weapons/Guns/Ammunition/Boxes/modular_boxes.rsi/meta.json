@@ -110,34 +110,34 @@
       "name": "shell"
     },
     {
-      "name": "shell_lid"
+      "name": "largeshell_lid"
     },
     {
-      "name": "shell_box"
+      "name": "largeshell_box"
     },
     {
-      "name": "shell_ammo_low_color"
+      "name": "largeshell_ammo_low_color"
     },
     {
-      "name": "shell_ammo_medium_base"
+      "name": "largeshell_ammo_medium_base"
     },
     {
-      "name": "shell_ammo_medium_color"
+      "name": "largeshell_ammo_medium_color"
     },
     {
-      "name": "shell_ammo_full_base"
+      "name": "largeshell_ammo_full_base"
     },
     {
-      "name": "shell_ammo_full_color"
+      "name": "largeshell_ammo_full_color"
     },
     {
-      "name": "shell_ammo_high_base"
+      "name": "largeshell_ammo_high_base"
     },
     {
-      "name": "shell_ammo_high_color"
+      "name": "largeshell_ammo_high_color"
     },
     {
-      "name": "shell_ammo_low_base"
+      "name": "largeshell_ammo_low_base"
     },
     {
       "name": "shell_box_buckshot"
@@ -197,10 +197,10 @@
       "name": "shell_box_incendiary"
     },
     {
-      "name": "shell_box_marking"
+      "name": "largeshell_box_marking"
     },
     {
-      "name": "shell_lid_marking"
+      "name": "largeshell_lid_marking"
     },
     {
       "name": "shell_box_beanbag"
