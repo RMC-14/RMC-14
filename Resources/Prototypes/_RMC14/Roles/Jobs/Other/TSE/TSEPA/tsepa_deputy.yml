@@ -31,7 +31,7 @@
       factions:
       - TSE
     - type: JobPrefix
-      prefix: rmc-job-prefix-bureau-deputy
+      prefix: rmc-job-prefix-tsepa-deputy
   hidden: true
 
 - type: startingGear
@@ -43,10 +43,15 @@
     outerClothing: RMCArmourM4TSEPA
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
-#    suitstorage: RMCWeaponRifleType71
+    suitstorage: WeaponRifleL83A2
     id: RMCIDCardTSEPA
     belt: RMCM1984BeltFilled
-    back: RMCSatchelSPPRifleman
+    back: RMCSatchelTSEPA
+  storage:
+    back:
+    - RMCMagazineRifleL83A2
+    - RMCMagazineRifleL83A2
+    - RMCMagazineRifleL83A2
 
 - type: entity
   parent: CMSpawnPointJobBase
