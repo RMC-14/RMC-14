@@ -377,102 +377,102 @@
   id: RMCBoxShellsBuckshotLargeEmpty
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxShellsBuckshotEmpty
+  targetNode: RMCBoxShellsBuckshotLargeEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
+    state: largeshell_box
   iconColor: "#944444"
   objectType: Item
 
 - type: construction
   parent: RMC
-  name: Shell Box (Slugs)
-  id: RMCBoxShellsSlugsEmpty
+  name: Large Shell Box (Slugs)
+  id: RMCBoxShellsSlugsLargeEmpty
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxShellsSlugsEmpty
+  targetNode: RMCBoxShellsSlugsLargeEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
+    state: largeshell_box
   iconColor: "#578e75"
   objectType: Item
 
 - type: construction
   parent: RMC
-  name: Shell Box (Flechette)
-  id: RMCBoxShellsFlechetteEmpty
+  name: Large Shell Box (Flechette)
+  id: RMCBoxShellsFlechetteLargeEmpty
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxShellsFlechetteEmpty
+  targetNode: RMCBoxShellsFlechetteLargeEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
+    state: largeshell_box
   iconColor: "#6551a0"
   objectType: Item
 
 - type: construction
   parent: RMC
-  name: Shell Box (Incendiary)
-  id: RMCBoxShellsIncendiaryEmpty
+  name: Large Shell Box (Incendiary Slugs)
+  id: RMCBoxShellsIncendiaryLargeEmpty
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxShellsIncendiaryEmpty
+  targetNode: RMCBoxShellsIncendiaryLargeEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
+    state: largeshell_box
   iconColor: "#c6cdd3"
   objectType: Item
 
 # - type: construction
   # parent: RMC
   # name: Shell Box (Beanbag)
-  # id: RMCBoxShellsBeanbagEmpty
+  # id: RMCBoxShellsBeanbagLargeEmpty
   # graph: RMCBoxMagazine
   # startNode: start
-  # targetNode: RMCBoxShellsBeanbagEmpty
+  # targetNode: RMCBoxShellsBeanbagLargeEmpty
   # category: construction-category-cm-box-magazine
   # description: A box for holding shells.
   # icon:
     # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    # state: shell_box
+    # state: largeshell_box
     # color: "#5786be"
   # objectType: Item
 
 - type: construction
   parent: RMC
-  name: Shell Box (Inc Buckshot)
-  id: RMCBoxShellsIncendiaryBuckshotEmpty
+  name: Large Shell Box (Incendiary Buckshot)
+  id: RMCBoxShellsIncendiaryBuckshotLargeEmpty
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxShellsIncendiaryBuckshotEmpty
-  category: construction-category-cm-box-magazine
-  description: A box for holding shells.
+  targetNode: RMCBoxShellsIncendiaryBuckshotLargeEmpty
+  category: construction-category-cm-box-magazine-large
+  description: A large box for holding shells.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
+    state: largeshell_box
   iconColor: "#c6cdd3"
   objectType: Item
 
 - type: construction
   parent: RMC
-  name: Shell Box (Breaching)
-  id: RMCBoxShellsBreachingEmpty
+  name: Large Shell Box (Breaching)
+  id: RMCBoxShellsBreachingLargeEmpty
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxShellsBreachingEmpty
+  targetNode: RMCBoxShellsBreachingLargeEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
+    state: largeshell_box
   iconColor: "#595959"
   objectType: Item
 
@@ -721,37 +721,37 @@
         doAfter: 0.25
 
     # Shotgun
-    - to: RMCBoxShellsBuckshotEmpty
+    - to: RMCBoxShellsBuckshotLargeEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
-    - to: RMCBoxShellsSlugsEmpty
+    - to: RMCBoxShellsSlugsLargeEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
-    - to: RMCBoxShellsFlechetteEmpty
+    - to: RMCBoxShellsFlechetteLargeEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
-    - to: RMCBoxShellsIncendiaryEmpty
+    - to: RMCBoxShellsIncendiaryLargeEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
-    # - to: RMCBoxShellsBeanbagEmpty
+    # - to: RMCBoxShellsBeanbagLargeEmpty
       # steps:
       # - material: RMCSheetCardboard
         # amount: 1
         # doAfter: 0.25
-    - to: RMCBoxShellsIncendiaryBuckshotEmpty
+    - to: RMCBoxShellsIncendiaryBuckshotLargeEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
-    - to: RMCBoxShellsBreachingEmpty
+    - to: RMCBoxShellsBreachingLargeEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -863,20 +863,20 @@
     entity: RMCBoxBullets458Empty
 
   # Shotgun
-  - node: RMCBoxShellsBuckshotEmpty
-    entity: RMCBoxShellsBuckshotEmpty
-  - node: RMCBoxShellsSlugsEmpty
-    entity: RMCBoxShellsSlugsEmpty
-  - node: RMCBoxShellsFlechetteEmpty
-    entity: RMCBoxShellsFlechetteEmpty
-  - node: RMCBoxShellsIncendiaryEmpty
-    entity: RMCBoxShellsIncendiaryEmpty
-  # - node: RMCBoxShellsBeanbagEmpty
-    # entity: RMCBoxShellsBeanbagEmpty
-  - node: RMCBoxShellsIncendiaryBuckshotEmpty
-    entity: RMCBoxShellsIncendiaryBuckshotEmpty
-  - node: RMCBoxShellsBreachingEmpty
-    entity: RMCBoxShellsBreachingEmpty
+  - node: RMCBoxShellsBuckshotLargeEmpty
+    entity: RMCBoxShellsBuckshotLargeEmpty
+  - node: RMCBoxShellsSlugsLargeEmpty
+    entity: RMCBoxShellsSlugsLargeEmpty
+  - node: RMCBoxShellsFlechetteLargeEmpty
+    entity: RMCBoxShellsFlechetteLargeEmpty
+  - node: RMCBoxShellsIncendiaryLargeEmpty
+    entity: RMCBoxShellsIncendiaryLargeEmpty
+  # - node: RMCBoxShellsBeanbagLargeEmpty
+    # entity: RMCBoxShellsBeanbagLargeEmpty
+  - node: RMCBoxShellsIncendiaryBuckshotLargeEmpty
+    entity: RMCBoxShellsIncendiaryBuckshotLargeEmpty
+  - node: RMCBoxShellsBreachingLargeEmpty
+    entity: RMCBoxShellsBreachingLargeEmpty
 
   # Misc
   - node: RMCBoxMREEmpty

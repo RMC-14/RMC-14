@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBoxMagazineSupplyBase
   id: RMCBoxMagazinePowerCellsHigh
   name: box of high-capacity power cells (x8)
