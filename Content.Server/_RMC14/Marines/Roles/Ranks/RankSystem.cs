@@ -70,7 +70,7 @@ public sealed class RankSystem : SharedRankSystem
         if (!rankPreferences.TryGetValue(ev.JobId, out int rankPreference))
             skipPreferenceEvaluation = true;
 
-        // We offset this because our rank preference has 1 more element because 0 is reserved for Auto.
+        // We offset i here as our rankPreference has 1 more element than there are ranks. This is because 0 is reserved for Auto and we do not want to check against Auto.
         for (int i = 1; i <= jobPrototype.Ranks.Count; i++)
         {
             var rank = jobPrototype.Ranks.ElementAt(i - 1); // We have to counter the offset here to make sure we grab the right equivilant rank without the offset for Auto.
