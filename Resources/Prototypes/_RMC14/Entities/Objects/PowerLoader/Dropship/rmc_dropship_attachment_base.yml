@@ -3,6 +3,9 @@
   parent: CMBaseStructure
   id: RMCDropshipAttachmentBase
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Transform
     anchored: true
   - type: Corrodible
