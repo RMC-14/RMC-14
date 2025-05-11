@@ -9,6 +9,9 @@ using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
@@ -26,6 +29,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -42,16 +46,26 @@ public sealed class XenoChargeSystem : EntitySystem
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
+    private EntityQuery<XenoToggleChargingComponent> _xenoToggleChargingQuery;
 
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
+        _xenoToggleChargingQuery = GetEntityQuery<XenoToggleChargingComponent>();
 
         SubscribeLocalEvent<XenoChargeComponent, XenoChargeActionEvent>(OnXenoChargeAction);
         SubscribeLocalEvent<XenoChargeComponent, ThrowDoHitEvent>(OnXenoChargeHit);
         SubscribeLocalEvent<XenoChargeComponent, XenoChargeDoAfterEvent>(OnXenoChargeDoAfterEvent);
         SubscribeLocalEvent<XenoChargeComponent, StopThrowEvent>(OnXenoChargeStop);
+
+        SubscribeLocalEvent<XenoToggleChargingComponent, XenoToggleChargingActionEvent>(OnXenoToggleChargingAction);
+
+        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, MapInitEvent>(OnActiveToggleChargingMapInit);
+        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, ComponentRemove>(OnActiveToggleChargingRemove);
+        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, RefreshMovementSpeedModifiersEvent>(OnActiveToggleChargingSpeed);
+        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, MoveInputEvent>(OnActiveToggleChargingMoveInput);
+        SubscribeLocalEvent<ActiveXenoToggleChargingComponent, MoveEvent>(OnActiveToggleChargingMove);
     }
 
     private void OnXenoChargeAction(Entity<XenoChargeComponent> xeno, ref XenoChargeActionEvent args)
@@ -81,38 +95,6 @@ public sealed class XenoChargeSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
-
-        var coordinates = GetCoordinates(args.Coordinates);
-        var origin = _transform.GetMapCoordinates(xeno);
-        var diff = _transform.ToMapCoordinates(coordinates).Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.Range;
-
-        xeno.Comp.Charge = diff;
-        Dirty(xeno);
-
-        _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
-    }
-
-    private void OnXenoChargeStop(Entity<XenoChargeComponent> xeno, ref StopThrowEvent args)
-    {
-        if (xeno.Comp.Charge == null)
-            return;
-
-        foreach (var slower in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.SlowRange))
-        {
-            if (!_xeno.CanAbilityAttackTarget(xeno, slower))
-                continue;
-
-            _slow.TrySlowdown(slower, xeno.Comp.SlowTime, ignoreDurationModifier: true);
-        }
-    }
 
     private void OnXenoChargeHit(Entity<XenoChargeComponent> xeno, ref ThrowDoHitEvent args)
     {
@@ -156,5 +138,132 @@ public sealed class XenoChargeSystem : EntitySystem
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
         _throwing.TryThrow(targetId, diff, 10);
+    }
+
+    private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
+
+        var coordinates = GetCoordinates(args.Coordinates);
+        var origin = _transform.GetMapCoordinates(xeno);
+        var diff = _transform.ToMapCoordinates(coordinates).Position - origin.Position;
+        diff = diff.Normalized() * xeno.Comp.Range;
+
+        xeno.Comp.Charge = diff;
+        Dirty(xeno);
+
+        _rmcObstacleSlamming.MakeImmune(xeno);
+        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
+    }
+
+    private void OnXenoChargeStop(Entity<XenoChargeComponent> xeno, ref StopThrowEvent args)
+    {
+        if (xeno.Comp.Charge == null)
+            return;
+
+        foreach (var slower in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.SlowRange))
+        {
+            if (!_xeno.CanAbilityAttackTarget(xeno, slower))
+                continue;
+
+            _slow.TrySlowdown(slower, xeno.Comp.SlowTime, ignoreDurationModifier: true);
+        }
+    }
+
+    private void OnXenoToggleChargingAction(Entity<XenoToggleChargingComponent> ent, ref XenoToggleChargingActionEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (RemComp<ActiveXenoToggleChargingComponent>(ent))
+            return;
+
+        if (!TryComp(ent, out InputMoverComponent? mover))
+            return;
+
+        var direction = mover.HeldMoveButtons & MoveButtons.AnyDirection;
+
+        // Not moving
+        if (direction == MoveButtons.None)
+            return;
+
+        var active = new ActiveXenoToggleChargingComponent();
+        AddComp(ent, active, true);
+
+        // Moving diagonally
+        if ((direction & (direction - 1)) != MoveButtons.None)
+            return;
+
+        active.Direction = direction;
+        Dirty(ent, active);
+    }
+
+    private void OnActiveToggleChargingMapInit(Entity<ActiveXenoToggleChargingComponent> ent, ref MapInitEvent args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnActiveToggleChargingRemove(Entity<ActiveXenoToggleChargingComponent> ent, ref ComponentRemove args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnActiveToggleChargingSpeed(Entity<ActiveXenoToggleChargingComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        var speed = ent.Comp.SpeedMultiplier;
+        args.ModifySpeed(speed, speed);
+    }
+
+    private void OnActiveToggleChargingMoveInput(Entity<ActiveXenoToggleChargingComponent> ent, ref MoveInputEvent args)
+    {
+        var direction = args.Entity.Comp.HeldMoveButtons & MoveButtons.AnyDirection;
+
+        // Same direction and not diagonal
+        if ((ent.Comp.Direction & direction) == direction &&
+            (direction & (direction - 1)) == MoveButtons.None)
+        {
+            return;
+        }
+
+        ent.Comp.Direction = direction;
+        ent.Comp.SpeedMultiplier = 1;
+        Dirty(ent);
+    }
+
+    private void OnActiveToggleChargingMove(Entity<ActiveXenoToggleChargingComponent> ent, ref MoveEvent args)
+    {
+        if (!_xenoToggleChargingQuery.TryComp(ent, out var charging))
+            return;
+
+        if (!args.OldPosition.TryDistance(EntityManager, _transform, args.NewPosition, out var distance))
+            return;
+
+        ent.Comp.Distance += Math.Abs(distance);
+        Dirty(ent);
+
+        if (ent.Comp.Distance < 1)
+            return;
+
+        ent.Comp.SpeedMultiplier += charging.SpeedPerStep;
+        ent.Comp.Distance -= 1;
+        Dirty(ent);
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        Log.Info(ent.Comp.SpeedMultiplier.ToString());
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<ActiveXenoToggleChargingComponent, PhysicsComponent>();
+        while (query.MoveNext(out var uid, out var active, out var physics))
+        {
+            if (physics.BodyStatus != BodyStatus.InAir)
+                continue;
+
+            active.SpeedMultiplier = 1;
+            Dirty(uid, active);
+        }
     }
 }

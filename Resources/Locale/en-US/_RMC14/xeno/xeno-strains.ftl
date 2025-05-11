@@ -109,3 +109,22 @@ rmc-xeno-eggsac-description = You trade your ability to store parasites and make
    - Sustained Eggs will convert into normal eggs upon touching hive weeds, and cannot produce sentient parasites.
    - Use plasma over time to make eggs.
 rmc-xeno-eggsac-popup = An egg is always an adventure; the next one may be different.
+
+rmc-xeno-charger-name = Charger
+rmc-xeno-charger-description = In exchange for:
+    - Your defensive shield ability.
+    - A little bit of your armor and damage.
+    - Your slowdown resist from turrets.
+    - Your influence under frenzy pheromones.
+    - Your stomp no longer knocking down talls.
+    - Your ability to lock your direction.
+
+    You gain:
+    - A considerable amount of health.
+    - Some speed.
+    - Your stomp does extra damage when stomping over a grounded tall
+    - Your charge is now manually-controlled and momentum-based; the further you go, the more damage and speed you will gain until you achieve maximum momentum, indicated by your roar.
+    - Your armor is now directional, being the toughest on the front, weaker on the sides, and weakest from the back.
+    - You gain an ability to tumble to pass through enemies and avoid enemy fire.
+    - You gain an ability to forcefully move enemies via ramming into them.
+rmc-xeno-charger-popup = Nothing stops this hive. This one will become both the immovable object and the unstoppable force.

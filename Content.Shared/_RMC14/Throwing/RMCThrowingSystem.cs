@@ -3,7 +3,7 @@ using Content.Shared.Throwing;
 
 namespace Content.Shared._RMC14.Throwing;
 
-public sealed class ThrowingSystem : EntitySystem
+public sealed class RMCThrowingSystem : EntitySystem
 {
     [Dependency] private readonly ThrownItemSystem _thrown = default!;
 

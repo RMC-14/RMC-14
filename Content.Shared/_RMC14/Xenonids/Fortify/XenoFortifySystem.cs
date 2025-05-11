@@ -80,11 +80,11 @@ public sealed class XenoFortifySystem : EntitySystem
 
     private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)
     {
-        if (xeno.Comp.Fortified)
-        {
-            args.XenoArmor += xeno.Comp.Armor;
-            args.FrontalArmor += xeno.Comp.FrontalArmor;
-        }
+        if (!xeno.Comp.Fortified)
+            return;
+
+        args.XenoArmor += xeno.Comp.Armor;
+        args.FrontalArmor += xeno.Comp.FrontalArmor;
     }
 
     private void OnXenoFortifyBeforeStatusAdded(Entity<XenoFortifyComponent> xeno, ref BeforeStatusEffectAddedEvent args)
