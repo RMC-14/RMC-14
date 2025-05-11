@@ -44,9 +44,7 @@
   - RMCGuideRoleMaintenanceTechnician
   - RMCGuideRoleSGO
   - RMCGuideCommandRoles
-  - RMCGuideRoleMortar
   - RMCGuideRoleSpec
-  - RMCGuideRoleCAS
 
 # marine structures
 - type: guideEntry
@@ -56,6 +54,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
   children:
   - RMCGuideCommunicationsTowers
+  - RMCGuideRoleMortar
 
 # cooking
 - type: guideEntry
@@ -170,7 +169,7 @@
   parent: RMC
   id: RMCGuideRoleMortar
   priority: 11
-  name: "Mortar Operator"
+  name: "Mortar"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMortar.xml"
 
 - type: guideEntry
@@ -212,14 +211,6 @@
   priority: 4
   name: "Sniper Specialist"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecSniper.xml"
-
-- type: guideEntry
-  parent: RMC
-  id: RMCGuideRoleCAS
-  priority: 4
-  name: "Dropships and CAS"
-  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCAS.xml"
-
 
 # Chemistry stuff
 - type: guideEntry
