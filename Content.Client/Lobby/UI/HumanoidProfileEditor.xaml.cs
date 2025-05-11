@@ -1120,7 +1120,7 @@ namespace Content.Client.Lobby.UI
                     };
 
                     // If the job has ranks we will add the options as buttons.
-                    if (job.Ranks != null)
+                    if (job.Ranks != null && job.SetRankPreference)
                     {
                         if (job.Ranks.Count <= 1) rankOptions.Disabled = true;
 
@@ -1645,6 +1645,9 @@ namespace Content.Client.Lobby.UI
                     continue;
 
                 if (job.Ranks == null)
+                    continue;
+
+                if (!job.SetRankPreference)
                     continue;
 
                 if (optionsButton == null)
