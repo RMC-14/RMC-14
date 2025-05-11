@@ -24,3 +24,6 @@ rmc-job-prefix-dynagrid-engineer = DG ENG
 rmc-job-name-novamed-doctor = Nova Medica Doctor
 rmc-job-description-novamed-doctor = Treat inbound patients at the Nova Medica Hospital.
 rmc-job-prefix-novamed-doctor = NM DOC
+
+rmc-job-name-hybrisa-civilian = Hybrisa Prospera Colonist
+rmc-job-description-hybrisa-civilian = Live out your life within Hybrisa Prospera.

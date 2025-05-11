@@ -5,6 +5,8 @@
   name: rmc-job-name-dynagrid-engineer
   description: rmc-job-description-dynagrid-engineer
   playTimeTracker: RMCJobPVEDynagridEngineer
+  ranks:
+    RMCRankCivilian: []
   startingGear: RMCGearPVEDynagridEngineer
   icon: "RMCJobIconPVEDynagridEngineer"
   joinNotifyCrew: false

@@ -5,6 +5,8 @@
   name: rmc-job-name-novamed-doctor
   description: rmc-job-description-novamed-doctor
   playTimeTracker: RMCJobPVENovaMedicaDoctor
+  ranks:
+    RMCRankCivilian: []
   startingGear: RMCGearPVENovaMedicaDoctor
   icon: "RMCJobIconPVENovaMedicaDoctor"
   joinNotifyCrew: false
