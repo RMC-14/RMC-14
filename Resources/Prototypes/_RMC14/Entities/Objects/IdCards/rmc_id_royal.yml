@@ -4,7 +4,7 @@
   - type: IFFFaction
   - type: FactionFrequencies
     channels:
-    - RoyalMarine
+    - TSE
 
 - type: entity
   parent: CMIDCardStandardDogtag
