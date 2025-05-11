@@ -16,3 +16,7 @@ RMCJobSynthetic = Synthetic
 
 rmc-job-name-synth-colony = Colony Synthetic
 rmc-job-description-synth-colony = Support and assist the Colony Personnel.
+
+rmc-job-name-dynagrid-engineer = Dynagrid Engineer
+rmc-job-description-dynagrid-engineer = Maintain the Dynagrid Nexus and other power facilities of Hybrisa Prospera.
+rmc-job-prefix-dynagrid-engineer = DG ENG
