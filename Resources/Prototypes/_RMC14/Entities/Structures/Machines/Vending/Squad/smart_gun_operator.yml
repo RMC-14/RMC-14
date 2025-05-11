@@ -35,14 +35,14 @@
     #  points: 30
       - id: RMCPacketGrenadeSmokeFilled
         points: 15
-    #- id: CMM74AGM-FragAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-IncendiaryAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-SmokeAirburstPacketx3
-    #  points: 10
-    #- id: CMM74AGM-HornetAirburstPacketx3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBox4
     #  points: 20
     - name: Sidearm Ammunitions
@@ -61,8 +61,8 @@
       entries:
       - id: RMCScabbardMacheteSGFilled
         points: 15
-    #- id: CMFuelTankStrapPouch
-    #  points: 5
+      - id: RMCPouchFuelTank
+        points: 5
       - id: RMCPouchGeneralLarge
         points: 6
     - name: Utilities
@@ -86,11 +86,11 @@
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #  points: 15
-    #- id: CMWeldingVisor
-    #  points: 5
+      entries:
+      - id: RMCVisorMedical
+        points: 15
+      - id: RMCVisorWelding
+        points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC

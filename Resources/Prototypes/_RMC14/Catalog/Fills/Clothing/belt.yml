@@ -118,6 +118,18 @@
     # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
 
 - type: entity
+  parent: RMCBeltGrenadeLarge
+  id: RMCBeltGrenadeHEFA
+  name: M276 HEFA rig Mk. XVII
+  description: The M276 HEFA rig Mk. XVII is an upgraded version of the M276 grenade rig, with more storage capacity.
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 17
+
+- type: entity
   parent: CMBeltSmartGunOperator
   id: CMBeltSmartGunOperatorFilled
   suffix: Filled
@@ -155,4 +167,44 @@
   - type: StorageFill
     contents:
     - id: RMCMagazineRifleAR10
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineHunting
+  suffix: Filled, Basira Armstrong
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleHunting
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineBuckshot
+  suffix: Filled, Buckshot
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineMP5
+  suffix: Filled, MP5
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGMP5
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineM16
+  suffix: Filled, M16
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
       amount: 5

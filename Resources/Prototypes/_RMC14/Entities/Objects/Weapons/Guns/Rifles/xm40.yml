@@ -1,0 +1,160 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: XM40 assault rifle
+  id: RMCWeaponRifleXM40
+  description: One of the experimental predecessors to the M54C line that never saw widespread adoption beyond elite marine units. Of the rifles in the UNMC inventory that are still in production, this is the only one to feature an integrated suppressor. It can accept M54C MK2 magazines, but also features its own proprietary magazine system. Extremely lethal in burstfire mode.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm40.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm40.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: CMM54CShoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 4
+    scatterWielded: 2
+    scatterUnwielded: 14
+    baseFireRate: 4
+    burstScatterMult: 1
+    modifiers:
+      Burst:
+        fireDelay: 0.0666
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+    accuracyMultiplierUnwielded: 0.8
+  - type: RMCMagneticItem
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleXM40AP
+          - RMCMagazineRifleXM40HEAP
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentSuppressorXM40
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressorXM40
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.5, 0.03
+      rmc-aslot-underbarrel: 0.4, -0.275
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Tag
+    tags:
+    - RMCWeaponRifleXM40
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleXM40AP
+  name: "XM40 AP magazine (10x24mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleXM40AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/XM40/xm40.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleXM40HEAP
+  name: "XM40 HEAP magazine (10x24mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleXM40HEAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmHEAP
+    proto: RMCCartridgeRifle10x24mmHEAP
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/XM40/xm40heap.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: Tag
+  id: RMCWeaponRifleXM40
+
+- type: Tag
+  id: RMCMagazineRifleXM40AP
+
+- type: Tag
+  id: RMCMagazineRifleXM40HEAP

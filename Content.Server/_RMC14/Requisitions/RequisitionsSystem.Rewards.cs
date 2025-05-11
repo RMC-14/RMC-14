@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Labels.Components;
 using Content.Shared._RMC14.Requisitions.Components;
@@ -97,9 +98,23 @@ namespace Content.Server._RMC14.Requisitions
             }
         }
 
+        private bool IsInvoice(Entity<PaperComponent?> ent, [NotNullWhen(true)] out RequisitionsInvoiceComponent? invoice)
+        {
+            invoice = null;
+            if (!Resolve(ent, ref ent.Comp, false))
+                return false;
+
+            if (!TryComp(ent.Owner, out invoice))
+                return false;
+
+            return ent.Comp.StampState == invoice.RequiredStamp;
+        }
+
         private int SubmitInvoices(EntityUid uid)
         {
-            int compoundRewards = 0;
+            var compoundRewards = 0;
+            if (IsInvoice(uid, out var invoice))
+                compoundRewards += invoice.Reward;
 
             if (!TryComp<ContainerManagerComponent>(uid, out var container))
                 return compoundRewards;
@@ -109,12 +124,8 @@ namespace Content.Server._RMC14.Requisitions
             {
                 foreach (var content in containerValues.ContainedEntities)
                 {
-                    if (TryComp(content, out RequisitionsInvoiceComponent? containerInvoice)
-                        && TryComp(content, out PaperComponent? containerPaper)
-                        && containerPaper.StampState == containerInvoice.RequiredStamp)
-                    {
-                        compoundRewards += containerInvoice.Reward;
-                    }
+                    if (IsInvoice(content, out invoice))
+                        compoundRewards += invoice.Reward;
                 }
             }
 

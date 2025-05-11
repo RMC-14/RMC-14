@@ -31,12 +31,17 @@
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-rifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: private
 
 - type: startingGear
   id: CMGearRifleman
@@ -120,3 +125,20 @@
   components:
   - type: Sprite
     state: rifleman
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCRifleman
+  components:
+  - type: GhostRole
+    name: cm-job-name-rifleman
+    description: cm-job-description-rifleman
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMRifleman
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 1

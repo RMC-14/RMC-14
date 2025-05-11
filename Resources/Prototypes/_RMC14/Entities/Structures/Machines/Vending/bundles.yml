@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMVendorBundleRiflemanApparel
   name: standard marine apparel
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
@@ -38,7 +38,6 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
     - CMJumpsuitMarineMedic
     - CMBootsBlackFilled
@@ -71,11 +70,10 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a M10 helmet, a headset, insulated gloves and combat boots.
+  description: Contains a marine jumpsuit, a headset, insulated gloves and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Tech # TODO RMC14 M4
     - CMVendorHeadsetSquadComTech
     - CMJumpsuitMarineEngineer
     - CMHandsInsulated
@@ -163,3 +161,19 @@
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
 #   - Syringe case # TODO RMC14 syringe cases
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCCommandingOfficerEssentialsBundle
+  name: Commanding Officer Essentials kit
+  description: Contains a laser designator, whistle, and a disabler.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: rangefinder
+  - type: CMVendorBundle
+    bundle:
+    - RMCLaserDesignator
+    - RMCWhistle
+    - RMCWeaponTaser
+    #TODO RMC14 Megaphone, Paper Map.

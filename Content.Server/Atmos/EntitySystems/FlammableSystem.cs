@@ -13,6 +13,7 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.IgnitionSource;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -40,7 +41,7 @@ namespace Content.Server.Atmos.EntitySystems
         [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private readonly StunSystem _stunSystem = default!;
         [Dependency] private readonly TemperatureSystem _temperatureSystem = default!;
-        [Dependency] private readonly IgnitionSourceSystem _ignitionSourceSystem = default!;
+        [Dependency] private readonly SharedIgnitionSourceSystem _ignitionSourceSystem = default!;
         [Dependency] private readonly DamageableSystem _damageableSystem = default!;
         [Dependency] private readonly AlertsSystem _alertsSystem = default!;
         [Dependency] private readonly FixtureSystem _fixture = default!;
@@ -63,6 +64,9 @@ namespace Content.Server.Atmos.EntitySystems
         private float _timer;
 
         private readonly Dictionary<Entity<FlammableComponent>, float> _fireEvents = new();
+
+        // RMC14
+        private EntityQuery<SteppingOnFireComponent> _steppingOnFireQuery;
 
         public override void Initialize()
         {
@@ -87,6 +91,9 @@ namespace Content.Server.Atmos.EntitySystems
             SubscribeLocalEvent<ExtinguishOnInteractComponent, ActivateInWorldEvent>(OnExtinguishActivateInWorld);
 
             SubscribeLocalEvent<IgniteOnHeatDamageComponent, DamageChangedEvent>(OnDamageChanged);
+
+            // RMC14
+            _steppingOnFireQuery = GetEntityQuery<SteppingOnFireComponent>();
         }
 
         private void OnMeleeHit(EntityUid uid, IgniteOnMeleeHitComponent component, MeleeHitEvent args)
@@ -498,6 +505,9 @@ namespace Content.Server.Atmos.EntitySystems
                         damage = flammable.Intensity * (flammable.FireStacks / flammable.Duration * 0.2 + 0.8) * ev.Multiplier * flammable.Damage / 2;
                     else
                         damage = flammable.Intensity / 5f * flammable.Damage;
+
+                    if (_steppingOnFireQuery.HasComp(uid))
+                        damage *= 2;
 
                     _damageableSystem.TryChangeDamage(uid, damage, true, false);
 

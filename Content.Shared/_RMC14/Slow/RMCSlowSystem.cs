@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Standing;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Rejuvenate;
@@ -16,6 +16,7 @@ public sealed class RMCSlowSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly TemporarySpeedModifiersSystem _temporarySpeed = default!;
 
     public override void Initialize()
     {
@@ -61,6 +62,9 @@ public sealed class RMCSlowSystem : EntitySystem
 
     public bool TrySuperSlowdown(EntityUid ent, TimeSpan duration, bool refresh = true, bool ignoreDurationModifier = false)
     {
+        if (_timing.ApplyingState)
+            return false;
+
         if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow))
             return false;
 
@@ -128,9 +132,14 @@ public sealed class RMCSlowSystem : EntitySystem
         if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow) || !ent.Comp.Running)
             return;
 
+        var multiplier = _temporarySpeed.CalculateSpeedModifier(ent, slow.SlowModifier);
+
+        if(multiplier == null)
+            return;
+
         //Don't apply slow when superslow is in effect
         if (!TryComp<RMCSuperSlowdownComponent>(ent, out var comp) || !comp.Running)
-            args.ModifySpeed(slow.SlowMultiplier, slow.SlowMultiplier);
+            args.ModifySpeed(multiplier.Value, multiplier.Value);
     }
 
     private void OnSuperSlowdownRefresh(Entity<RMCSuperSlowdownComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
@@ -138,7 +147,12 @@ public sealed class RMCSlowSystem : EntitySystem
         if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow) || !ent.Comp.Running)
             return;
 
-        args.ModifySpeed(slow.SuperSlowMultiplier, slow.SuperSlowMultiplier);
+        var multiplier = _temporarySpeed.CalculateSpeedModifier(ent, slow.SuperSlowModifier);
+
+        if(multiplier == null)
+            return;
+
+        args.ModifySpeed(multiplier.Value, multiplier.Value);
     }
 
     private void OnRootRefresh(Entity<RMCRootedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)

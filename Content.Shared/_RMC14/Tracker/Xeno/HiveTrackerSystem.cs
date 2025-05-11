@@ -19,7 +19,7 @@ public sealed class HiveTrackerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TrackerSystem _tracker = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedWatchXenoSystem _watchXeno = default!;
+    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
 
     private readonly Dictionary<EntityUid, MapCoordinates> _hiveLeaders = new();
 
@@ -54,7 +54,7 @@ public sealed class HiveTrackerSystem : EntitySystem
             if (member.Hive != hive.Owner)
                 continue;
 
-            _watchXeno.Watch(ent.Owner, (uid, member));
+            _xenoWatch.Watch(ent.Owner, (uid, member));
         }
     }
 

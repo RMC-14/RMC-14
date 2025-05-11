@@ -69,6 +69,11 @@ public abstract class SharedStationSpawningSystem : EntitySystem
     {
         string? name = null;
 
+        if (roleProto.CanCustomizeName)
+        {
+            name = loadout.EntityName;
+        }
+
         if (string.IsNullOrEmpty(name) && PrototypeManager.TryIndex(roleProto.NameDataset, out var nameData))
         {
             name = Loc.GetString(_random.Pick(nameData.Values));

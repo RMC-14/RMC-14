@@ -19,6 +19,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
@@ -26,6 +27,7 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -151,6 +153,8 @@ public sealed class IntelSystem : EntitySystem
         SubscribeLocalEvent<IntelReadObjectiveComponent, IntelReadDoAfterEvent>(OnReadDoAfter);
 
         SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, MapInitEvent>(OnRetrieveMapInit, after: [typeof(AreaSystem)]);
+        SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, ContainerGettingInsertedAttemptEvent>(OnHandPickUp);
+        SubscribeLocalEvent<IntelRetrieveItemObjectiveComponent, PullAttemptEvent>(OnIntelPullAttempt);
 
         SubscribeLocalEvent<ViewIntelObjectivesComponent, MapInitEvent>(OnViewIntelObjectivesMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, ViewIntelObjectivesActionEvent>(OnViewIntelObjectivesAction);
@@ -234,11 +238,42 @@ public sealed class IntelSystem : EntitySystem
     private void OnReadUseInHand(Entity<IntelReadObjectiveComponent> ent, ref UseInHandEvent args)
     {
         var user = args.User;
+
+        if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-intel-survivor-read", ("thing", Name(ent))), ent, user);
+            return;
+        }
+
         var delay = ent.Comp.Delay * _skills.GetSkillDelayMultiplier(user, ent.Comp.Skill);
         var ev = new IntelReadDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent);
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent) { BreakOnDropItem = true, NeedHand = true };
         if (_doAfter.TryStartDoAfter(doAfter))
             _popup.PopupClient($"You start reading the {Name(ent)}", ent, user);
+    }
+
+    private void OnHandPickUp(EntityUid ent,
+        IntelRetrieveItemObjectiveComponent component,
+        ContainerGettingInsertedAttemptEvent args)
+    {
+        var user = args.Container.Owner;
+        if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
+        {
+            args.Cancel();
+            _popup.PopupClient(Loc.GetString("rmc-intel-survivor-pickup", ("thing", Name(ent))), ent, user);
+            return;
+        }
+
+    }
+
+    private void OnIntelPullAttempt(Entity<IntelRetrieveItemObjectiveComponent> ent, ref PullAttemptEvent args)
+    {
+        var user = args.PullerUid;
+        if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
+        {
+            args.Cancelled = true;
+            _popup.PopupClient(Loc.GetString("rmc-intel-survivor-pickup", ("thing", Name(ent))), ent, user);
+        }
     }
 
     private void OnReadDoAfter(Entity<IntelReadObjectiveComponent> ent, ref IntelReadDoAfterEvent args)
@@ -586,7 +621,7 @@ public sealed class IntelSystem : EntitySystem
         return false;
     }
 
-    private void RunSpawners()
+    public void RunSpawners()
     {
         try
         {
@@ -786,8 +821,6 @@ public sealed class IntelSystem : EntitySystem
     {
         if (_net.IsClient)
             return;
-
-        RunSpawners();
 
         var time = _timing.CurTime;
         if (TryGetTechTree(out var tree) &&

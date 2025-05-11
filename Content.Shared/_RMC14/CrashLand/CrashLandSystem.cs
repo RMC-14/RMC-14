@@ -8,6 +8,7 @@ using Content.Shared.Shuttles.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -21,6 +22,7 @@ public sealed class CrashLandSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -40,6 +42,8 @@ public sealed class CrashLandSystem : EntitySystem
 
         SubscribeLocalEvent<CrashLandOnTouchComponent, StartCollideEvent>(OnCrashLandOnTouchStartCollide);
 
+        SubscribeLocalEvent<DeleteCrashLandableOnTouchComponent, StartCollideEvent>(OnDeleteCrashLandableOnTouchStartCollide);
+
         Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
     }
 
@@ -57,6 +61,17 @@ public sealed class CrashLandSystem : EntitySystem
             return;
 
         TryCrashLand(args.OtherEntity, true);
+    }
+
+    private void OnDeleteCrashLandableOnTouchStartCollide(Entity<DeleteCrashLandableOnTouchComponent> ent, ref StartCollideEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!_crashLandEnabled || !_crashLandableQuery.HasComp(args.OtherEntity))
+            return;
+
+        QueueDel(args.OtherEntity);
     }
 
     public bool TryGetCrashLandLocation(out EntityCoordinates location)
@@ -118,6 +133,9 @@ public sealed class CrashLandSystem : EntitySystem
 
     public void TryCrashLand(EntityUid crashLandable, bool doDamage)
     {
+        if (_net.IsClient)
+            return;
+
         if (!TryGetCrashLandLocation(out var location))
             return;
 

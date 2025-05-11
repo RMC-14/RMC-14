@@ -33,6 +33,7 @@
     node: Tan
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: XenoLeapDestroyOnPass
 
 # Reinforced
 - type: entity
@@ -48,6 +49,8 @@
   - type: Construction
     graph: RMCTable
     node: Reinforced
+  - type: XenoLeapDestroyOnPass
+    spawnPrototype: CMRodMetal1 # TODO 50% to spawn 2, 50% to spawn 0
 
 # Reinforced Requisition
 - type: entity
@@ -150,7 +153,7 @@
 
 # Prison
 - type: entity
-  parent: CMTable
+  parent: CMTableReinforced
   id: RMCTablePrison
   name: table
   description: A square metal surface resting on four legs. This one has side panels, making it useful as a desk, but impossible to flip.

@@ -5,6 +5,7 @@
   components:
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/rotary_phone.rsi
     drawdepth: WallMountedItems

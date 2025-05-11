@@ -88,6 +88,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_sniper.ogg"
 
+- files: [ "gun_sniper_heavy.ogg" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/sniper_heavy.ogg"
+
 - files: ["gun_ugl.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -143,7 +148,73 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_m60.ogg"
 
+- files: ["gun_DE50.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_DE50.ogg"
+
 - files: ["gun_mou53.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_mou53.ogg"
+
+- files: ["gun_mar40.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_mar40.ogg"
+
+
+- files: ["gun_m54c_1.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken and modified from freesound.org"
+  source: "https://freesound.org/people/SuperPhat/sounds/417686/"
+
+- files: ["gun_shotgun_small.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_shotgun_small.ogg"
+
+- files: ["gun_cmb_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_cmb_1.ogg"
+
+- files: ["gun_ml66a_2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken and modified from freesound.org"
+  source: "https://freesound.org/people/SuperPhat/sounds/417686/"
+
+- files: ["gun_shotgun_tactical_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_shotgun_tactical_1.ogg"
+
+- files: ["gun_shotgun_tactical_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_shotgun_tactical_2.ogg"
+
+- files: ["gun_shotgun_tactical_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_shotgun_tactical_3.ogg"
+
+- files: ["gun_shotgun_tactical_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_shotgun_tactical_4.ogg"
+
+- files: ["gun_boltaction.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_boltaction.ogg"
+
+- files: ["gun_ssg45_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_1.ogg"
+
+- files: ["gun_ssg45_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_2.ogg"

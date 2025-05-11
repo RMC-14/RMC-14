@@ -1,14 +1,17 @@
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.DoAfter;
+using Content.Shared.Fluids;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Light;
 using Content.Shared.Movement.Events;
 using Content.Shared.Physics;
@@ -40,6 +43,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
 
     private const string attachableToggleUseDelayID = "RMCAttachableToggle";
 
@@ -67,6 +71,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<HandDeselectedEvent>>(OnHandDeselected);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotEquippedHandEvent>>(OnGotEquippedHand);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotUnequippedHandEvent>>(OnGotUnequippedHand);
+        SubscribeLocalEvent<AttachableToggleableComponent, SprayAttemptEvent>(OnSprayAttempt);
+        SubscribeLocalEvent<AttachableToggleableComponent, DroppedEvent>(OnDropped);
+        SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<DroppedEvent>>(OnDropped);
 
         SubscribeLocalEvent<AttachableMovementLockedComponent, MoveInputEvent>(OnAttachableMovementLockedMoveInput);
 
@@ -79,7 +86,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableGunPreventShootComponent, AttemptShootEvent>(OnAttemptShoot);
     }
 
-#region AttachableAlteredEvent handling
+    #region AttachableAlteredEvent handling
     private void OnAttachableAltered(Entity<AttachableToggleableComponent> attachable, ref AttachableAlteredEvent args)
     {
         switch (args.Alteration)
@@ -285,12 +292,59 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
         args.Args.Handled = true;
 
-        if (attachable.Comp.NeedHand && attachable.Comp.Active)
+        if ((attachable.Comp.NeedHand || attachable.Comp.BreakOnDrop) && attachable.Comp.Active)
+        {
             Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
 
+            if (attachable.Comp.SlowOnBreak)
+                BreakSlow(args.Args.User);
+        }
 
         var removeEv = new RemoveAttachableActionsEvent(args.Args.User);
         RaiseLocalEvent(attachable, ref removeEv);
+    }
+
+    private void OnSprayAttempt(Entity<AttachableToggleableComponent> attachable, ref SprayAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            args.Cancelled = true;
+    }
+
+    private void OnDropped(Entity<AttachableToggleableComponent> attachable, ref DroppedEvent args)
+    {
+        if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            return;
+
+        if (!attachable.Comp.BreakOnDrop || !attachable.Comp.Active)
+            return;
+
+        Toggle(attachable, args.User);
+
+        if (attachable.Comp.SlowOnBreak)
+            BreakSlow(args.User);
+    }
+
+    private void OnDropped(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<DroppedEvent> args)
+    {
+        if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            return;
+
+        if (!attachable.Comp.BreakOnDrop || !attachable.Comp.Active)
+            return;
+
+        Toggle(attachable, args.Args.User);
+
+        if (attachable.Comp.SlowOnBreak)
+            BreakSlow(args.Args.User);
+    }
+
+    private void BreakSlow(EntityUid user)
+    {
+        _slow.TrySlowdown(user, TimeSpan.FromSeconds(4));
+        _slow.TrySuperSlowdown(user, TimeSpan.FromSeconds(2));
     }
 
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)
@@ -309,6 +363,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
             }
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
+            if (toggleableComponent.SlowOnBreak)
+                BreakSlow(user);
         }
     }
 
@@ -336,6 +392,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
             }
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
+            if (toggleableComponent.SlowOnBreak)
+                BreakSlow(user);
         }
     }
 
@@ -356,7 +414,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         var playerMapPos = _transformSystem.ToMapCoordinates(playerPos);
         var targetMapPos = _transformSystem.ToMapCoordinates(targetPos);
         var currentAngle = (targetMapPos.Position - playerMapPos.Position).ToWorldAngle();
-        
+
         var differenceFromLockedAngle = (currentAngle.Degrees - initialAngle.Degrees + 180 + 360) % 360 - 180;
 
         if (differenceFromLockedAngle > -90 && differenceFromLockedAngle < 90)
@@ -373,6 +431,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
             }
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
+            if (toggleableComponent.SlowOnBreak)
+                BreakSlow(user);
         }
     }
 #endregion
@@ -471,7 +531,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 {
                     foreach (var entity in ents)
                     {
-                        if (!TryComp(entity, out FixturesComponent? fixturesComponent))
+                        if (!TryComp(entity, out FixturesComponent? fixturesComponent) || !Transform(entity).Anchored)
                             continue;
 
                         foreach (var fixture in fixturesComponent.Fixtures.Values)
@@ -647,7 +707,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             if (directionLockedComponent.LockedDirection == null)
                 directionLockedComponent.LockedDirection = Transform(userUid.Value).LocalRotation.GetCardinalDir();
         }
-        
+
         if (attachable.Comp.BreakOnFullRotate && userUid != null)
         {
             var sideLockedComponent = EnsureComp<AttachableSideLockedComponent>(userUid.Value);

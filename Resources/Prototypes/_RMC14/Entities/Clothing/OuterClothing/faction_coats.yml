@@ -12,7 +12,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/deputy.rsi
   - type: CMArmor
-    armor: 15
+    melee: 15
+    bullet: 15
     bio: 10
     explosionArmor: 10
 
@@ -40,7 +41,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/jacket_general.rsi
   - type: CMArmor
-    armor: 35
+    melee: 35
+    bullet: 35
     bio: 10
     explosionArmor: 40
   - type: ExplosionResistance
@@ -49,3 +51,9 @@
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket

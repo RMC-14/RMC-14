@@ -6,6 +6,7 @@ using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Stacks;
+using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -21,6 +22,7 @@ public abstract partial class SharedGunSystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     // RMC14
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedRMCStackSystem _rmcStack = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -153,6 +155,14 @@ public abstract partial class SharedGunSystem
             Deleted(args.Target) ||
             !TryComp<BallisticAmmoProviderComponent>(args.Target, out var targetComponent) ||
             targetComponent.Whitelist == null)
+        {
+            return;
+        }
+
+        // RMC14
+        if (_container.TryGetContainingContainer((args.Target.Value, null), out var container) &&
+            container.Owner != args.User &&
+            HasComp<StorageComponent>(container.Owner))
         {
             return;
         }

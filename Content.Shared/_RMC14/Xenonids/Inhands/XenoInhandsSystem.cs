@@ -1,12 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids.Egg;
-using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Mobs;
-using Content.Shared.StatusEffect;
-using Content.Shared.Stunnable;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Inhands;
@@ -20,12 +14,6 @@ public sealed class XenoInhandsSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoInhandsComponent, DidEquipHandEvent>(OnXenoSpritePickedUp);
         SubscribeLocalEvent<XenoInhandsComponent, DidUnequipHandEvent>(OnXenoSpriteDropped);
-
-        SubscribeLocalEvent<XenoInhandsComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<XenoInhandsComponent, XenoRestEvent>(OnVisualsRest);
-        SubscribeLocalEvent<XenoInhandsComponent, KnockedDownEvent>(OnVisualsKnockedDown);
-        SubscribeLocalEvent<XenoInhandsComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
-        SubscribeLocalEvent<XenoInhandsComponent, XenoOvipositorChangedEvent>(OnVisualsOvipositor);
     }
 
     public void OnXenoSpritePickedUp(Entity<XenoInhandsComponent> xeno, ref DidEquipHandEvent args)
@@ -56,48 +44,7 @@ public sealed class XenoInhandsSystem : EntitySystem
         }
 
         _appearance.SetData(user,
-        hand.Location == HandLocation.Left ? XenoInhandVisuals.Left : XenoInhandVisuals.Right,
+        hand.Location == HandLocation.Left ? XenoInhandVisuals.LeftHand : XenoInhandVisuals.RightHand,
         held);
-    }
-
-    private void OnMobStateChanged(Entity<XenoInhandsComponent> xeno, ref MobStateChangedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoInhandVisuals.Downed, args.NewMobState != MobState.Alive);
-    }
-
-    private void OnVisualsRest(Entity<XenoInhandsComponent> xeno, ref XenoRestEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoInhandVisuals.Resting, args.Resting);
-    }
-
-    private void OnVisualsKnockedDown(Entity<XenoInhandsComponent> xeno, ref KnockedDownEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoInhandVisuals.Downed, true);
-    }
-
-    private void OnVisualsOvipositor(Entity<XenoInhandsComponent> xeno, ref XenoOvipositorChangedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoInhandVisuals.Ovi, args.Attached);
-    }
-
-    private void OnVisualsStatusEffectEnded(Entity<XenoInhandsComponent> xeno, ref StatusEffectEndedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (args.Key == "KnockedDown")
-            _appearance.SetData(xeno, XenoInhandVisuals.Downed, false);
     }
 }

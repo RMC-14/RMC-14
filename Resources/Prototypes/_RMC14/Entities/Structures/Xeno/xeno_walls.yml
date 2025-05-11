@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseWallXeno
   id: WallXenoResin
   name: resin wall
@@ -168,8 +168,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: XenoConstruct # would be painful to use if it destroyed weeds
-    destroyWeeds: false
   - type: TimedDespawn
     lifetime: 5.0
   - type: XenoStructureUpgradeable

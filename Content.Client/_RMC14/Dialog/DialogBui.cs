@@ -13,6 +13,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<RMCDialogWindow>();
         Refresh();
     }

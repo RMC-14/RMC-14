@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Item;
-using Content.Shared.Roles;
 using Content.Shared.Tag;
 
 namespace Content.Shared.Whitelist;
@@ -8,10 +8,12 @@ namespace Content.Shared.Whitelist;
 public sealed class EntityWhitelistSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _factory = default!;
-    [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
+
+    // RMC14
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     public override void Initialize()
     {
@@ -57,22 +59,6 @@ public sealed class EntityWhitelistSystem : EntitySystem
             }
         }
 
-        if (list.MindRoles != null)
-        {
-            var regs = StringsToRegs(list.MindRoles);
-
-            foreach (var role in regs)
-            {
-                if ( _roles.MindHasRole(uid, role.Type, out _))
-                {
-                    if (!list.RequireAll)
-                        return true;
-                }
-                else if (list.RequireAll)
-                    return false;
-            }
-        }
-
         if (list.Registrations != null && list.Registrations.Count > 0)
         {
             foreach (var reg in list.Registrations)
@@ -99,6 +85,13 @@ public sealed class EntityWhitelistSystem : EntitySystem
                 ? _tag.HasAllTags(uid, list.Tags)
                 : _tag.HasAnyTag(uid, list.Tags);
         }
+
+        // RMC14
+        if (list.Skills != null)
+        {
+            return list.RequireAll ? _skills.HasAllSkills(uid, list.Skills) : _skills.HasAnySkills(uid, list.Skills);
+        }
+        // RMC14
 
         return list.RequireAll;
     }

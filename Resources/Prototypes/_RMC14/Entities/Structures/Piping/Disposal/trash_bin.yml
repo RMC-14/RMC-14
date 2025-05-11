@@ -1,0 +1,108 @@
+- type: entity
+  abstract: true
+  id: RMCTrashBinBase
+  parent: BaseStructure
+  name: trash bin
+  description: A Weston-Yamada trash bin used for disposing your unwanted items, or you can just throw your shit on the ground like every other asshole.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Disposal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Piping/disposal.rsi
+    layers:
+    - state: condisposal
+      map: [ "enum.DisposalUnitVisualLayers.Unanchored" ]
+    - state: trash-can
+      map: [ "enum.DisposalUnitVisualLayers.Base" ]
+    - state: disposal-flush
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
+    - state: dispover-charge
+      map: [ "enum.DisposalUnitVisualLayers.OverlayCharging" ]
+    - state: dispover-ready
+      map: [ "enum.DisposalUnitVisualLayers.OverlayReady" ]
+    - state: dispover-full
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFull" ]
+    - state: dispover-handle
+      map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
+  - type: Physics
+    bodyType: Static
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Anchorable
+    flags:
+    - None
+  - type: ContainerContainer
+    containers:
+      disposals: !type:Container
+  - type: RequireProjectileTarget
+  - type: DisposalUnit
+  - type: ThrowInsertContainer
+    containerId: disposals
+    probability: 0
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCTrashBinBase
+  id: RMCTrashBinGreen
+  components:
+  - type: Sprite
+    layers:
+    - state: trashgreen
+      map: [ "enum.DisposalUnitVisualLayers.Unanchored" ]
+    - state: trashgreen
+      map: [ "enum.DisposalUnitVisualLayers.Base" ]
+    - state: trashgreen
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
+    - state: trashgreen
+      map: [ "enum.DisposalUnitVisualLayers.OverlayCharging" ]
+    - state: trashgreen
+      map: [ "enum.DisposalUnitVisualLayers.OverlayReady" ]
+    - state: trashgreen
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFull" ]
+    - state: trashgreen
+      map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
+
+- type: entity
+  parent: RMCTrashBinBase
+  id: RMCTrashBinBlue
+  components:
+  - type: Sprite
+    layers:
+    - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.Unanchored" ]
+    - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.Base" ]
+    - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
+    - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.OverlayCharging" ]
+    - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.OverlayReady" ]
+    - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.OverlayFull" ]
+    - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]

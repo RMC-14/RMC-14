@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Xenonids.Watch;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.LineEdit;
 
@@ -25,6 +26,7 @@ public sealed class XenoWatchBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         EnsureWindow();
     }
 
@@ -54,21 +56,13 @@ public sealed class XenoWatchBui : BoundUserInterface
         }
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _window?.Dispose();
-    }
-
     private XenoWatchWindow EnsureWindow()
     {
         if (_window != null)
             return _window;
 
-        _window = new XenoWatchWindow();
-        _window.OnClose += Close;
+        _window = this.CreateWindow<XenoWatchWindow>();
         _window.SearchBar.OnTextChanged += OnSearchBarChanged;
-        _window.OpenCentered();
         return _window;
     }
 

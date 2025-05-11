@@ -1,8 +1,10 @@
 - type: entity
-  parent: ChemMaster
   id: CMChemMaster
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
   name: ChemMaster 3000
   description: An industrial grade chemical manipulator with pill and bottle production included.
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Science/chem_master.rsi
@@ -14,14 +16,86 @@
   - type: Icon
     sprite: _RMC14/Structures/Machines/Science/chem_master.rsi
     state: mixer_loaded
+  - type: ChemMaster
+    pillDosageLimit: 20
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.4,0.25,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ActivatableUI
+    key: enum.ChemMasterUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: false # TODO RMC14 power
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: WiresPanel
   - type: Machine
     board: CMCircuitboardChemMaster
+  - type: ContainerContainer
+    containers:
+      beakerSlot: !type:ContainerSlot
+      outputSlot: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: ItemSlots
+    slots:
+      beakerSlot:
+        whitelist:
+          components:
+          - FitsInDispenser
+      outputSlot:
+        whitelistFailPopup: chem-master-component-cannot-put-entity-message
+        whitelist:
+          tags:
+          - Bottle
+          - PillCanister
+  - type: GuideHelp
+    guides:
+    - Chemicals
+    - Chemist
   - type: RequiresSkill
     skills:
       RMCSkillMedical: 3
-  - type: ApcPowerReceiver
-    needsPower: false # TOOD RMC14 power
   - type: ActivatableUIBlacklist
     blacklist:
       components:
       - Xeno
+  - type: UserInterface
+    interfaces:
+      enum.ChemMasterUiKey.Key:
+        type: ChemMasterBoundUserInterface
+      enum.ChangePillBottleUIKey.Key:
+        type: RMCChangePillBottleColorBui
+  - type: SolutionContainerManager
+    solutions:
+      buffer:
+        maxVol: 500

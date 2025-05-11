@@ -11,8 +11,8 @@ public sealed partial class XenoParalyzingSlashComponent : Component
     public TimeSpan ActiveDuration = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StunDelay = TimeSpan.FromSeconds(3);
+    public TimeSpan StunDelay = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StunDuration = TimeSpan.FromSeconds(5);
+    public TimeSpan StunDuration = TimeSpan.FromSeconds(4);
 }

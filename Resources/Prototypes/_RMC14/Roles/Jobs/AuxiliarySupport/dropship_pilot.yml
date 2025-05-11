@@ -7,7 +7,7 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsDropship
-    time: 7200 # 2 hours
+    time: 18000 # 5 hours
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearPilotDropship
@@ -45,6 +45,13 @@
     - type: JobPrefix
       prefix: cm-job-prefix-dropship-pilot
     - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: pilot
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearPilotDropship

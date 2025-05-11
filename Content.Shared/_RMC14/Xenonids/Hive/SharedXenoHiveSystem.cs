@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -24,7 +24,6 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -80,6 +79,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (GetHive(ent.Owner) is {} hive)
         {
             hive.Comp.LastQueenDeath = _timing.CurTime;
+            hive.Comp.CurrentQueen = null;
             Dirty(hive);
         }
     }
@@ -141,6 +141,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// <summary>
     /// Sets the hive for a member, if it's different.
     /// If it does not have HiveMemberComponent this method adds it.
+    /// If the new HiveMember is a queen, it is now the new hiveQueen
     /// </summary>
     public void SetHive(Entity<HiveMemberComponent?> member, EntityUid? hive)
     {
@@ -161,6 +162,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         comp.Hive = hive;
         Dirty(member, comp);
+
+        if (HasComp<XenoEvolutionGranterComponent>(member) && hiveEnt.HasValue)
+            SetHiveQueen(member, hiveEnt.Value);
 
         var ev = new HiveChangedEvent(hiveEnt, old);
         RaiseLocalEvent(member, ref ev);
@@ -201,6 +205,45 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return memberHive.Owner == hive;
     }
 
+    public bool HasHiveQueen(Entity<HiveComponent> hive)
+    {
+        return (hive.Comp.CurrentQueen is not null);
+    }
+    public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
+    {
+        hive.Comp.CurrentQueen = queen;
+        Dirty(hive);
+        return true;
+    }
+
+    public bool HasHiveCore(Entity<HiveComponent> hive)
+    {
+        return GetHiveCore(hive) is not null;
+    }
+
+    public EntityUid? GetHiveCore(Entity<HiveComponent> hive)
+    {
+        var hiveCoreQuerry = EntityQueryEnumerator<HiveCoreComponent>();
+        while (hiveCoreQuerry.MoveNext(out var hiveCoreEnt, out _))
+        {
+            if (GetHive(hiveCoreEnt) == hive)
+            {
+                return hiveCoreEnt;
+            }
+        }
+        return null;
+    }
+
+    public void ResetHiveCoreCooldown(Entity<HiveComponent> hive)
+    {
+        hive.Comp.NewCoreAt = _timing.CurTime;
+        Dirty(hive);
+    }
+
+    public bool TryGetStructureLimit(Entity<HiveComponent> hive, EntProtoId structureProtoId, out int limit)
+    {
+        return hive.Comp.HiveStructureSlots.TryGetValue(structureProtoId, out limit);
+    }
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
     {
         if (!_query.Resolve(hive, ref hive.Comp, false))
@@ -262,24 +305,31 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var uid, out var hive))
         {
-            hive.BurrowedLarva += amount;
-            Dirty(uid, hive);
+            IncreaseBurrowedLarva((uid, hive), amount);
         }
     }
 
     public void IncreaseBurrowedLarva(Entity<HiveComponent> hive, int amount)
     {
-        hive.Comp.BurrowedLarva += amount;
-        Dirty(hive);
+        SetHiveBurrowedLarva(hive, hive.Comp.BurrowedLarva + amount);
     }
 
-    public void JoinBurrowedLarva(Entity<HiveComponent> hive, EntityUid user)
+    private void SetHiveBurrowedLarva(Entity<HiveComponent> hive, int larva)
+    {
+        hive.Comp.BurrowedLarva = larva;
+        Dirty(hive);
+
+        var ev = new BurrowedLarvaChangedEvent(larva);
+        RaiseLocalEvent(hive, ref ev, true);
+    }
+
+    public bool JoinBurrowedLarva(Entity<HiveComponent> hive, ICommonSession session)
     {
         if (_net.IsClient)
-            return;
+            return false;
 
         if (hive.Comp.BurrowedLarva <= 0)
-            return;
+            return false;
 
         EntityUid? larva = null;
 
@@ -306,26 +356,22 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             !TrySpawnAt<XenoEvolutionGranterComponent>() &&
             !TrySpawnAt<XenoComponent>())
         {
-            return;
+            return false;
         }
 
         if (larva == null)
-            return;
+            return false;
 
-        hive.Comp.BurrowedLarva--;
-        Dirty(hive);
+        IncreaseBurrowedLarva(hive, -1);
 
         _xeno.MakeXeno(larva.Value);
-        _hive.SetHive(larva.Value, hive);
+        SetHive(larva.Value, hive);
 
-        if (TryComp(user, out ActorComponent? actor))
-        {
-            var newMind = _mind.CreateMind(actor.PlayerSession.UserId, EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
+        var newMind = _mind.CreateMind(session.UserId, EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
+        _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
+        _adminLog.Add(LogType.RMCBurrowedLarva, $"{session.Name:player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
 
-            _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
-        }
-
-        _adminLog.Add(LogType.RMCBurrowedLarva, $"{ToPrettyString(user):player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
+        return true;
     }
 }
 

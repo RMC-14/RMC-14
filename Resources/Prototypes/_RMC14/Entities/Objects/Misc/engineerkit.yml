@@ -19,7 +19,7 @@
       tags:
       - RMCCircuitboard
       - Flashlight
-      # - TODO RMC14 RMCWeldingGoggles
+      - RMCWeldingGoggle
       # - TODO RMC14 RMCAnalyzer
       # - TODO RMC14 RMCDemoScanner
       # - TODO RMC14 RMCReagentScanner
@@ -27,9 +27,8 @@
       - PowerCell
       # - TODO RMC14 RMCAssembly
       # - TODO RMC14 RMCStockParts,
-      - RMCExplosivePlastic
       - RMCExplosiveBreachingCharge
-      - RMCWeldingGoggle
+      # - TODO RMC14 RMCSynthResetKey
       components:
       - TrayScanner
   - type: FixedItemSizeStorage

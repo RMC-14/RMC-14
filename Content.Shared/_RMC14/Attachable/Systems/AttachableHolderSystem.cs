@@ -15,6 +15,8 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
@@ -49,7 +51,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableDetachDoAfterEvent>(OnDetachDoAfter);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachToSlotMessage>(OnAttachableHolderAttachToSlotMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
-        SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, GunShotEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
         SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
@@ -59,8 +60,11 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GotEquippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(RelayEvent,
-            after: new[] { typeof(WieldableSystem) });
+            after: new[] { typeof(SharedWieldableSystem) });
+        SubscribeLocalEvent<AttachableHolderComponent, BeforeRangedInteractEvent>(OnAttachableHolderBeforeRangedInteract,
+            before: [typeof(SharedStorageSystem)]);
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
+        SubscribeLocalEvent<AttachableHolderComponent, AfterInteractEvent>(OnAttachableHolderAfterInteract);
         SubscribeLocalEvent<AttachableHolderComponent, ActivateInWorldEvent>(OnAttachableHolderInteractInWorld,
             before: new [] { typeof(CMGunSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, ItemWieldedEvent>(OnHolderWielded);
@@ -80,6 +84,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GetFireModesEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetDamageFalloffEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetWeaponAccuracyEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, DroppedEvent>(RelayEvent);
 
 
         CommandBinds.Builder
@@ -157,6 +162,25 @@ public sealed class AttachableHolderSystem : EntitySystem
         Dirty(holder);
     }
 
+    private void OnAttachableHolderBeforeRangedInteract(Entity<AttachableHolderComponent> holder, ref BeforeRangedInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (holder.Comp.SupercedingAttachable is not { } attachable)
+            return;
+
+        var afterInteractEvent = new BeforeRangedInteractEvent(args.User,
+            attachable,
+            args.Target,
+            args.ClickLocation,
+            args.CanReach);
+        RaiseLocalEvent(attachable, afterInteractEvent);
+
+        if (afterInteractEvent.Handled)
+            args.Handled = true;
+    }
+
     private void OnAttachableHolderInteractUsing(Entity<AttachableHolderComponent> holder, ref InteractUsingEvent args)
     {
         if (CanAttach(holder, args.Used))
@@ -191,6 +215,25 @@ public sealed class AttachableHolderSystem : EntitySystem
             args.Handled = true;
     }
 
+    private void OnAttachableHolderAfterInteract(Entity<AttachableHolderComponent> holder, ref AfterInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (holder.Comp.SupercedingAttachable is not { } attachable)
+            return;
+
+        var afterInteractEvent = new AfterInteractEvent(args.User,
+            attachable,
+            args.Target,
+            args.ClickLocation,
+            args.CanReach);
+        RaiseLocalEvent(attachable, afterInteractEvent);
+
+        if (afterInteractEvent.Handled)
+            args.Handled = true;
+    }
+
     private void OnAttachableHolderInteractInWorld(Entity<AttachableHolderComponent> holder, ref ActivateInWorldEvent args)
     {
         if (args.Handled || holder.Comp.SupercedingAttachable == null)
@@ -200,30 +243,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         RaiseLocalEvent(holder.Comp.SupercedingAttachable.Value, activateInWorldEvent);
 
         args.Handled = activateInWorldEvent.Handled;
-    }
-
-    private void OnAttachableHolderAttemptShoot(Entity<AttachableHolderComponent> holder, ref AttemptShootEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (holder.Comp.SupercedingAttachable == null)
-            return;
-
-        args.Cancelled = true;
-
-        if (!TryComp<GunComponent>(holder.Owner, out var holderGunComponent) ||
-            holderGunComponent.ShootCoordinates == null ||
-            !TryComp<GunComponent>(holder.Comp.SupercedingAttachable,
-                out var attachableGunComponent))
-        {
-            return;
-        }
-
-        _gun.AttemptShoot(args.User,
-            holder.Comp.SupercedingAttachable.Value,
-            attachableGunComponent,
-            holderGunComponent.ShootCoordinates.Value);
     }
 
     private void OnAttachableHolderUniqueAction(Entity<AttachableHolderComponent> holder, ref UniqueActionEvent args)
@@ -660,6 +679,26 @@ public sealed class AttachableHolderSystem : EntitySystem
     {
         holder.Comp.SupercedingAttachable = supercedingAttachable;
         Dirty(holder);
+    }
+
+    public bool TryGetInhandSupercedingGun(EntityUid user, out EntityUid attachable, [NotNullWhen(true)] out GunComponent? gunComp)
+    {
+        attachable = default;
+
+        if (!TryComp(user, out HandsComponent? hands) ||
+            hands.ActiveHandEntity == null ||
+            !TryComp(hands.ActiveHandEntity, out AttachableHolderComponent? holderComp) ||
+            holderComp.SupercedingAttachable == null)
+        {
+            gunComp = null;
+            return false;
+        }
+
+        if(!TryComp(holderComp.SupercedingAttachable, out gunComp))
+            return false;
+
+        attachable = holderComp.SupercedingAttachable.Value;
+        return true;
     }
 
     public bool TryGetSlotId(EntityUid holderUid, EntityUid attachableUid, [NotNullWhen(true)] out string? slotId)

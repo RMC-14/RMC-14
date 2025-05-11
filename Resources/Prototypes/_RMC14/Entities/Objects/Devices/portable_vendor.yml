@@ -46,7 +46,7 @@
       #- id: /obj/item/trash/ceramic_plate
       #  points: 10
       - id: RMCSpaceCash1000 # TODO RMC14 counterfiet
-        name: $1000 USD, unmarked bills
+        name: $1000 UND, unmarked bills
         points: 5
       - id: CMEncryptionKeyWEYA
         points: 5
@@ -99,6 +99,8 @@
       - id: CMEncryptionKeyDelta
         points: 15
       - id: CMEncryptionKeyEcho
+        points: 15
+      - id: CMEncryptionKeyFoxtrot
         points: 15
       - id: CMEncryptionKeyColony
         points: 20

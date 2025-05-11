@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostInspector
-  name: rmc-job-name-provost-inspector
-  description: rmc-job-description-provost-inspector
+  name: rmc-job-name-corp-provost-inspector
+  description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostInspector
   ranks:
     RMCRankProvostInspector: []
@@ -27,49 +27,29 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostInspector
-  name: provost spawner inspector
-  suffix: Spawner, Player, Medium Law Understanding
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostInspector
-
-- type: entity
   id: RMCRandomHumanoidProvostInspector
   name: provost ghost role inspector
-  suffix: Role, Player, Medium Law Understanding
+  suffix: Spawner, Player, Friendly, Medium Law Understanding
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: RandomHumanoidSpawner
     settings: RMCProvostInspector
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCProvostInspector
   components:
   - type: GhostRole
-    name: rmc-ghost-role-information-provost-inspector-name
-    description: rmc-ghost-role-information-provost-inspector-description
-    rules: ghost-role-information-nonantagonist-rules
+    name: rmc-ghost-name-corp-provost-inspector
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostInspector
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostInspector ]
-  - type: Skills
-    skills:
-      RMCSkillCqc: 3
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillMeleeWeapons: 1
-      RMCSkillPolice: 2
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearProvostInspector
@@ -78,7 +58,7 @@
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior
-    #    outerClothing: # TODO RMC14 provost jacket, with handcuffs and flash
+    outerClothing: RMCProvostJacketFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
@@ -95,12 +75,4 @@
   id: RMCJobIconProvostInspector
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pva
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostInspector
-  name: provost inspector ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostInspector
+    state: hudsquad_pvi2

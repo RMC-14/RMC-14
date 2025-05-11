@@ -1,19 +1,33 @@
 ﻿using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using JetBrains.Annotations;
+using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Tracker.SquadLeader;
 
 [UsedImplicitly]
-public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class SquadInfoBui : BoundUserInterface
 {
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+
     private SquadInfoWindow? _window;
+
+    private readonly SpriteSystem _sprite;
+
+    public SquadInfoBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        IoCManager.InjectDependencies(this);
+        _sprite = EntMan.System<SpriteSystem>();
+    }
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<SquadInfoWindow>();
         Refresh();
     }
@@ -25,6 +39,14 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
 
         if (!EntMan.TryGetComponent(Owner, out SquadLeaderTrackerComponent? tracker))
             return;
+
+        Texture? background = null;
+        Color backgroundColor = default;
+        if (EntMan.TryGetComponent(Owner, out SquadMemberComponent? ownerMember))
+        {
+            background = _sprite.Frame0(ownerMember.Background);
+            backgroundColor = ownerMember.BackgroundColor;
+        }
 
         var isSquadLeader = EntMan.HasComponent<SquadLeaderComponent>(Owner);
         var squadLeader = tracker.Fireteams.SquadLeader == null
@@ -46,7 +68,7 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                 : Loc.GetString("rmc-squad-info-team-leader-name", ("leader", fireteam.Leader.Value.Name));
             container.LeaderLabel.Text = teamLeader;
 
-            var fireatemIndex = i ;
+            var fireatemIndex = i;
             container.RemoveLeaderButton.OnPressed +=
                 _ => SendPredictedMessage(new SquadLeaderTrackerDemoteFireteamLeaderMsg(fireatemIndex));
             container.RemoveLeaderButton.Visible = fireteam.Leader != null && isSquadLeader;
@@ -57,8 +79,7 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                 if (member.Id == fireteam.Leader?.Id)
                     continue;
 
-                var row = new SquadInfoRow();
-                row.NameLabel.Text = $"[bold]{FormattedMessage.EscapeText(member.Name)}[/bold]";
+                var row = CreateRow(member, background, backgroundColor);
                 container.MembersContainer.AddChild(row);
 
                 var promoteButton = new Button
@@ -109,8 +130,7 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
             if (tracker.Fireteams.SquadLeaderId == unassigned.Id)
                 continue;
 
-            var row = new SquadInfoRow();
-            row.NameLabel.Text = $"[bold]{FormattedMessage.EscapeText(unassigned.Name)}[/bold]";
+            var row = CreateRow(unassigned, background, backgroundColor);
             unassignedContainer.MembersContainer.AddChild(row);
 
             for (var i = 0; i < tracker.Fireteams.Fireteams.Length; i++)
@@ -134,5 +154,22 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
         }
 
         _window.FireteamsContainer.AddChild(unassignedContainer);
+    }
+
+    private SquadInfoRow CreateRow(SquadLeaderTrackerMarine member, Texture? background, Color backgroundColor)
+    {
+        var row = new SquadInfoRow();
+        if (member.Role is { } role &&
+            _prototype.TryIndex(role, out var job))
+        {
+            if (_prototype.TryIndex(job.Icon, out var icon))
+                row.RoleIcon.Texture = _sprite.Frame0(icon.Icon);
+
+            row.RoleBackground.Texture = background;
+            row.RoleBackground.ModulateSelfOverride = backgroundColor;
+        }
+
+        row.NameLabel.Text = $"[bold]{FormattedMessage.EscapeText(member.Name)}[/bold]";
+        return row;
     }
 }

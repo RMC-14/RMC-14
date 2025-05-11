@@ -52,6 +52,14 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/sloths.rsi
+      state: helmet
+  - type: Tag
+    tags:
+    - CigPack
+    - Trash
 
 - type: entity
   parent: CigPackBase
@@ -171,6 +179,10 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/sloths.rsi
+      state: helmet
 
 - type: entity
   parent: Cigarette
@@ -208,6 +220,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/weya.rsi
+      state: helmet
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
@@ -217,3 +233,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
+      state: helmet

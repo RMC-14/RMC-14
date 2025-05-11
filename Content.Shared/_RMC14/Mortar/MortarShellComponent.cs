@@ -20,7 +20,4 @@ public sealed partial class MortarShellComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan ImpactDelay = TimeSpan.FromSeconds(4.5);
-
-    [DataField, AutoNetworkedField]
-    public int PlanetDeviation = 1;
 }

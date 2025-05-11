@@ -14,6 +14,7 @@ using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
@@ -30,6 +31,9 @@ public sealed class SharpSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+
+    // RMC14
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -104,6 +108,9 @@ public sealed class SharpSystem : EntitySystem
             args.Handled = true;
             return;
         }
+
+        if (_net.IsClient)
+            return;
 
         var spawnEntities = EntitySpawnCollection.GetSpawns(butcher.SpawnedEntities, _robustRandom);
         var coords = _transform.GetMapCoordinates(args.Args.Target.Value);
