@@ -55,4 +55,4 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyTSE
+      - RMCEncryptionKeyTSEPA
