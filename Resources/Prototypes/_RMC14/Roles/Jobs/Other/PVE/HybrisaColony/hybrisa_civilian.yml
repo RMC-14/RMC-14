@@ -46,7 +46,7 @@
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - sprite: _RMC14/Objects/CMIDs/lanyards.rsi
+    - sprite: _RMC14/Objects/CMIDs/lanyard.rsi
       state: lanyard
 
 - type: playTimeTracker
