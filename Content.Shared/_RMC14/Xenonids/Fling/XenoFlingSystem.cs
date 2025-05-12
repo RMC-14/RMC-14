@@ -21,7 +21,6 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly RMCSlowSystem _rmcSlow = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -84,6 +83,7 @@ public sealed class XenoFlingSystem : EntitySystem
         diff = diff.Normalized() * throwRange;
 
         _rmcMelee.DoLunge(xeno, targetId);
+        _xenoHeal.CreateHealStacks(xeno, healAmount, xeno.Comp.HealDelay, 1, xeno.Comp.HealDelay);
 
         if (!_net.IsServer)
             return;
