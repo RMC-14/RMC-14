@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added digital clocks that can tell round time!
-    type: Add
-  id: 1208
-  time: '2025-01-11T22:35:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5246
-- author: DrSmugleaf
-  changes:
-  - message: Fixed some belts having error sprites.
-    type: Fix
-  - message: Fixed SLs and FTLs not being able to buy night vision optics.
-    type: Fix
-  - message: Fix the squad info fireteam list not having a scroll bar.
-    type: Fix
-  - message: Fixed helmets not getting camouflage textures.
-    type: Fix
-  - message: Fixed grenade rigs looking like ammo rigs.
-    type: Fix
-  - message: Fixed the riot tech vendor not having items, and the SEA vendor not having
-      M4SPR rubber mags.
-    type: Fix
-  id: 1209
-  time: '2025-01-12T01:36:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5364
-- author: blueDev2
-  changes:
-  - message: Fixed Underbarrel Grenade Launcher grenades not beeping and showing primed
-      status when fired.
-    type: Fix
-  id: 1210
-  time: '2025-01-13T04:15:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5376
 - author: Vermidia
   changes:
   - message: Fixed being able to attach a weapon/insert ammo on a dropship weapon
@@ -5405,5 +5372,26 @@
   id: 1710
   time: '2025-05-10T04:46:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6372
+- author: J C Denton
+  changes:
+  - message: Admin Fax Outpost now has newly added SPP, TSE, CLF and Press stamps.
+    type: Tweak
+  id: 1711
+  time: '2025-05-12T00:23:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6404
+- author: CyberTropic
+  changes:
+  - message: Added edges to snow and ice tiles.
+    type: Add
+  id: 1712
+  time: '2025-05-12T00:23:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6403
+- author: Vermidia
+  changes:
+  - message: Fixed ghost marine HUD toggle action not hiding marine health bars.
+    type: Fix
+  id: 1713
+  time: '2025-05-12T00:35:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6396
 Name: RMC14
 Order: -1
