@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed being able to attach a weapon/insert ammo on a dropship weapon
-      point when it already had a weapon/ammo in it.
-    type: Fix
-  id: 1211
-  time: '2025-01-13T04:16:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5373
-- author: Vermidia
-  changes:
   - message: Fixed visuals of some xeno abilities
     type: Fix
   id: 1212
@@ -5393,5 +5385,14 @@
   id: 1713
   time: '2025-05-12T00:35:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6396
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You will no longer see job icons of factions you are not apart of. For
+      example, if you have a WeYa PMC headset and you see a marine, they will have
+      a generic 'UN' icon instead of their marine one.
+    type: Tweak
+  id: 1714
+  time: '2025-05-12T12:03:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6369
 Name: RMC14
 Order: -1
