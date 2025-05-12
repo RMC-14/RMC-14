@@ -134,7 +134,7 @@
   - type: DamageOnCollide
     damage:
       types:
-        Heat: 100 #TODO make this 200 after adding a way to prevent being hit by multiple shots if you stand in between tiles
+        Heat: 200
   - type: RMCIgniteOnCollide
     maxStacks: 5
     intensity: 75
