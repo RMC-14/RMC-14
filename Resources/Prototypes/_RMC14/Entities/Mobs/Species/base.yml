@@ -355,4 +355,4 @@
   - type: RMCDisarmable
   - type: StunOnExplosionReceived
   - type: DeafenWhileCrit
-
+  - type: RMCStopDropRollVisuals
