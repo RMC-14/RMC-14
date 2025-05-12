@@ -1,37 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed throwing giving you camera recoil and added a lunge to your character
-      when you throw something.
-    type: Fix
-  - message: Fixed night vision optics lasting for 5 hours instead of 10 minutes.
-      Added examine text to helmets on how to take optics out, which is with a screwdriver.
-    type: Fix
-  - message: Fixed showing non-acting squad leaders buttons to modify fireteams, which
-      do nothing for them.
-    type: Fix
-  - message: Fixed some phones on the Almayer having gone missing.
-    type: Fix
-  - message: Fixed the automated utilities squad vendor not having an engineer kit.
-    type: Fix
-  - message: Fixed dropship rotary phones not being able to be used.
-    type: Fix
-  - message: Fixed night vision optics not being marked as recommended and the SL
-      one costing 20 instead of 25 points.
-    type: Fix
-  - message: Fixed mateba holster not fitting into the suitstorage slot.
-    type: Fix
-  - message: Fixed protein bars, prepared meals, and MRE components not being able
-      to have chems injected with a syringe.
-    type: Fix
-  - message: Updated the description of move order to clarify that it does not speed
-      you up without armor equipped.
-    type: Tweak
-  id: 1217
-  time: '2025-01-13T05:38:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5379
-- author: DrSmugleaf
-  changes:
   - message: 'Added 3 new player guidebook guides by Kynthos on Discord:  Communications
       Towers and Sensor Tower, Combat Technician and Maintenance Technician.'
     type: Add
@@ -5400,5 +5369,14 @@
   id: 1719
   time: '2025-05-12T12:16:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6417
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the berserker ravager, a new strain which turns the ravager into
+      a terrifying melee monster. They can build up rage which increases their attack
+      speed, movement speed, and allows them to heal while slashing.
+    type: Add
+  id: 1720
+  time: '2025-05-12T12:29:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6394
 Name: RMC14
 Order: -1
