@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: SG6732
   changes:
-  - message: Tweaked the M54CE2 Sprite and attachment node
-    type: Tweak
-  id: 1221
-  time: '2025-01-17T12:05:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5410
-- author: SG6732
-  changes:
   - message: Fixed underbarrel flashlight grip moving when on.
     type: Fix
   id: 1222
@@ -5418,5 +5411,13 @@
   id: 1723
   time: '2025-05-12T15:07:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6420
+- author: DrSmugleaf
+  changes:
+  - message: Fixed survivor pill packets and MREs showing their contents outside them
+      and the storage UI being buggy until the contents are interacted with.
+    type: Fix
+  id: 1724
+  time: '2025-05-12T15:33:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6421
 Name: RMC14
 Order: -1
