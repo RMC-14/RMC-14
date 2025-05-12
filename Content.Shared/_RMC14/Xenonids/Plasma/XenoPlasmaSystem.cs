@@ -119,8 +119,6 @@ public sealed class XenoPlasmaSystem : EntitySystem
         if (!_rmcActions.TryUseAction(args.Performer, args.Action))
             return;
 
-
-
         args.Handled = true;
 
         var msg = "We channel our plasma and transfer it to a sister.";
