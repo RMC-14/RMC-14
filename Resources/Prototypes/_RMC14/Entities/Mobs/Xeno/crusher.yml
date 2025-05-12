@@ -177,6 +177,9 @@
   - type: XenoTumble
     paralyzeTime: 0
     slowTime: 8
+    damage:
+      types:
+        Blunt: 15
   - type: XenoFling
     paralyzeTime: 0
     slowTime: 8

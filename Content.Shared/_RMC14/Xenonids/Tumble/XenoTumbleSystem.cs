@@ -2,10 +2,12 @@
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
@@ -14,6 +16,8 @@ namespace Content.Shared._RMC14.Xenonids.Tumble;
 
 public sealed class XenoTumbleSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -75,6 +79,7 @@ public sealed class XenoTumbleSystem : EntitySystem
 
         _rmcObstacleSlamming.MakeImmune(xeno);
         _throwing.TryThrow(xeno, diff, 30, animated: false);
+        _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
     }
 
     private void OnXenoTumbleHit(Entity<XenoTumbleComponent> xeno, ref ThrowDoHitEvent args)
@@ -105,6 +110,20 @@ public sealed class XenoTumbleSystem : EntitySystem
 
         if (_net.IsServer)
             _stun.TryParalyze(args.Target, xeno.Comp.StunTime, true);
+
+        var origin = _transform.GetMapCoordinates(xeno);
+        var target = _transform.GetMapCoordinates(args.Target);
+        var diff = target.Position - origin.Position;
+        diff = diff.Normalized() * xeno.Comp.ImpactRange;
+        _throwing.TryThrow(args.Target, diff, 10);
+
+        _damageable.TryChangeDamage(
+            args.Target,
+            xeno.Comp.Damage,
+            origin: xeno,
+            tool: xeno,
+            armorPiercing: xeno.Comp.ArmorPiercing
+        );
     }
 
     private void OnXenoTumbleLand(Entity<XenoTumbleComponent> xeno, ref LandEvent args)

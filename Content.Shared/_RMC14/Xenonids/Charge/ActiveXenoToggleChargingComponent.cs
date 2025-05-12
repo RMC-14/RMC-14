@@ -1,5 +1,4 @@
-﻿using Content.Shared.Movement.Systems;
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Charge;
@@ -18,17 +17,20 @@ public sealed partial class ActiveXenoToggleChargingComponent : Component
     public int Stage;
 
     [DataField, AutoNetworkedField]
-    public MoveButtons Direction;
+    public DirectionFlag Direction;
 
     [DataField, AutoNetworkedField]
     public float SoundSteps;
 
     [DataField, AutoNetworkedField]
-    public MoveButtons Deviated;
+    public DirectionFlag Deviated;
 
     [DataField, AutoNetworkedField]
     public float DeviatedDistance;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastMovedAt;
+
+    [DataField, AutoNetworkedField]
+    public Angle? LastRelativeRotation;
 }

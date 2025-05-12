@@ -150,3 +150,6 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop

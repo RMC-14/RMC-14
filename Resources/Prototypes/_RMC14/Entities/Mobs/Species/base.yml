@@ -349,3 +349,16 @@
   - type: RMCMobCollision
   - type: RMCRest
   - type: StunOnExplosionReceived # TODO should also cause hearing loss
+  - type: XenoToggleChargingDamage
+    damage:
+      types:
+        Blunt: 0.25 # TODO RMC14 to the chest only
+    armorPiercingDamage:
+      types:
+        Blunt: 1
+    armorPiercing: 13
+    defaultMultiplier: 5
+    stageMultipliers:
+      8: 8
+  - type: XenoToggleChargingKnockback
+  - type: XenoToggleChargingParalyze

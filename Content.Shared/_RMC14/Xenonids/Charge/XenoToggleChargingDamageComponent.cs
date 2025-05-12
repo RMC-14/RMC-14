@@ -38,8 +38,20 @@ public sealed partial class XenoToggleChargingDamageComponent : Component
     [DataField, AutoNetworkedField]
     public DamageSpecifier? Damage;
 
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier? ArmorPiercingDamage;
+
+    [DataField, AutoNetworkedField]
+    public int ArmorPiercing;
+
     // TODO RMC14 damageable in shared
     [DataField, AutoNetworkedField]
     [Access(typeof(SharedRMCDamageableSystem))]
     public FixedPoint2 DestroyDamage;
+
+    [DataField, AutoNetworkedField]
+    public int DefaultMultiplier;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<int, int>? StageMultipliers;
 }

@@ -26,7 +26,7 @@ public sealed partial class XenoToggleChargingComponent : Component
     public FixedPoint2 PlasmaPerStep = 3;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_footstep_charge1.ogg");
+    public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_footstep_charge1.ogg", AudioParams.Default.WithVolume(-4));
 
     [DataField, AutoNetworkedField]
     public int SoundEvery = 4;
