@@ -116,7 +116,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         _window.XenoCount.Text = $"Total Sisters: {s.XenoCount}";
         _window.XenoContainer.DisposeAllChildren();
 
-        var icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_watch.rsi"), "hudxenoleader");
+        var icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_leader.rsi/"), "hudxenoleader");
         var iconTexture = _sprite.Frame0(icon);
 
         var xenolist = s.Xenos.OrderByDescending(a => a.Leader);
