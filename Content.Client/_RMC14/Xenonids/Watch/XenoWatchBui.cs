@@ -132,7 +132,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         var total = s.XenoCount + burrowedweight;
 
 
-        var tier2Slots = (total * 0.5f) - s.TierTwoAmount;
+        var tier2Slots = (total * 0.5f) - s.TierTwoAmount * s.TierThreeAmount;
         var tier3Slots = (total * 0.2f) - s.TierThreeAmount;
 
 
