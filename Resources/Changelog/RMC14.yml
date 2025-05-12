@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed shields not absorbing explosion or fire damage.
-    type: Fix
-  id: 1213
-  time: '2025-01-13T04:39:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5372
-- author: CyberTropic
-  changes:
-  - message: Fixed award ribbon order.
-    type: Fix
-  id: 1214
-  time: '2025-01-13T04:41:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5365
 - author: J C Denton
   changes:
   - message: Command tablet cabinet, used for storing the tablet in CIC.
@@ -5395,5 +5381,20 @@
   id: 1715
   time: '2025-05-12T12:05:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6407
+- author: Dygon
+  changes:
+  - message: Entities hit by the sniper's flak ammo area of effect now show that they
+      got hit.
+    type: Fix
+  id: 1716
+  time: '2025-05-12T12:09:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6390
+- author: Vermidia
+  changes:
+  - message: Fixed high levels of neurotoxin not deafening
+    type: Fix
+  id: 1717
+  time: '2025-05-12T12:10:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6393
 Name: RMC14
 Order: -1
