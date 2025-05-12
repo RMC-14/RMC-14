@@ -45,12 +45,6 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
-    layers:
-    - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
-    - state: camo
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
-      map: [ "enum.ItemCamouflageLayers.Layer" ]
     slots:
     - suitStorage
     - Back
