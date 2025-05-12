@@ -65,6 +65,8 @@ public sealed partial class XenoComponent : Component
     [DataField]
     public bool Refresh = true;
 
+    public bool ShowInWatchWindowCounts = true;
+
     public EmoteSoundsPrototype? Sounds;
 
     [DataField, AutoNetworkedField]

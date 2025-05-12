@@ -84,6 +84,9 @@ public sealed class XenoWatchBui : BoundUserInterface
             row.Tier = tier;
             foreach (var xeno in xenos)
             {
+                if (xeno.TryGetComponent(out XenoComponent? xenocomp, _compFactory))
+                    if (!xenocomp.ShowInWatchWindowCounts)
+                        continue;
 
                 var xenocontrol = new XenoHiveCountControl();
                 var xenobutton = new Button();

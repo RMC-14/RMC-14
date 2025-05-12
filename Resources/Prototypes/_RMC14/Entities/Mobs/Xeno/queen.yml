@@ -52,6 +52,7 @@
     - FootstepSound
   - type: Xeno
     role: CMXenoQueen
+    showInWatchWindowCounts: false
     spawnAtLeaderPoint: true
     actionIds:
     - ActionXenoRest
@@ -72,7 +73,7 @@
     - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
-    tier: 4
+    tier: 0
     bypassTierCount: true
     unlockAt: 0
     hudOffset: -0.1,0
@@ -283,7 +284,7 @@
   - type: OwOAccent
   - type: Speech
     speechSounds: Cat
-    
+
 - type: entity
   parent: StationAiHolo
   id: RMCQueenEye
