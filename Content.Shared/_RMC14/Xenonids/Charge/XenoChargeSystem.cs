@@ -181,7 +181,7 @@ public sealed class XenoChargeSystem : EntitySystem
             {
                 var bluntDamage = new DamageSpecifier();
                 bluntDamage.DamageDict[_blunt] = destroyed.Value * damage.Comp.PercentageDamage * stage;
-                _damageable.TryChangeDamage(ent, bluntDamage, damageable: damageable);
+                _damageable.TryChangeDamage(damage, bluntDamage, damageable: damageable);
             }
         }
 
