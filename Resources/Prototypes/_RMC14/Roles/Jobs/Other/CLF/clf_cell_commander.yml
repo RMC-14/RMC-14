@@ -55,7 +55,8 @@
   equipment:
     head: RMCArmorHelmetMercenaryMiner
     ears: RMCHeadsetDistressDukes
-    jumpsuit: JumpsuitMarine # TOOD RMC14
+    jumpsuit: RMCJumpsuitCLFSoldier
+    neck: RMCCLFArmband
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled # TODO RMC14
