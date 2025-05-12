@@ -41,6 +41,7 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+      - UNMC
     - type: Skills
       skills:
         RMCSkillFirearms: 0
