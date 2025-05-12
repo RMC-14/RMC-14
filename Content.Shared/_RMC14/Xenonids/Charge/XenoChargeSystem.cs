@@ -156,7 +156,11 @@ public sealed class XenoChargeSystem : EntitySystem
             if (damage.Comp.StageMultipliers != null &&
                 damage.Comp.StageMultipliers.TryGetValue(stage, out var stageMult))
             {
-                stage = stageMult;
+                stage = stageMult * stageMult;
+            }
+            else if (damage.Comp.DefaultMultiplier != 0)
+            {
+                stage = damage.Comp.DefaultMultiplier * damage.Comp.DefaultMultiplier;
             }
             else if (stage < damage.Comp.MinimumStage)
             {
