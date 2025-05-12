@@ -138,6 +138,13 @@
     foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
+  parent: RMCJumpsuitMarsoc
+  id: RMCJumpsuitMarsocWebbingBuckshot
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingBuckshot
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitFreelancer
   name: freelancer fatigues

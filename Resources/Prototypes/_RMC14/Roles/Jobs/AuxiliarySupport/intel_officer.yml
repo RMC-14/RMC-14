@@ -17,9 +17,6 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - IntelOfficer
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: io
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

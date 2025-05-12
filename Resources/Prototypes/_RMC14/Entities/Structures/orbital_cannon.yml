@@ -132,7 +132,7 @@
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
-#    - RMCOrbitalCannonWarheadIncendiary # TODO RMC14 incend
+    - RMCOrbitalCannonWarheadIncendiary
 
 - type: entity
   parent: MarkerBase

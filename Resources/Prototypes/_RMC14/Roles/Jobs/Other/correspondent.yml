@@ -16,12 +16,6 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCorrespondent
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: correspondent
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_civillian
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

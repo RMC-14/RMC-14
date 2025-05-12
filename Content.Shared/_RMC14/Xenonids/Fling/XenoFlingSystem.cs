@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Rage;
@@ -21,9 +22,10 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly RMCSlowSystem _rmcSlow = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
@@ -83,12 +85,13 @@ public sealed class XenoFlingSystem : EntitySystem
         _rmcMelee.DoLunge(xeno, targetId);
         _xenoHeal.CreateHealStacks(xeno, healAmount, xeno.Comp.HealDelay, 1, xeno.Comp.HealDelay);
 
-        if (_net.IsServer)
-        {
-            _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
-            _throwing.TryThrow(targetId, diff, xeno.Comp.ThrowSpeed);
+        if (!_net.IsServer)
+            return;
 
-            SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
-        }
+        _rmcSlow.TrySlowdown(targetId, xeno.Comp.SlowTime);
+        _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
+        _throwing.TryThrow(targetId, diff, xeno.Comp.ThrowSpeed);
+
+        SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
     }
 }

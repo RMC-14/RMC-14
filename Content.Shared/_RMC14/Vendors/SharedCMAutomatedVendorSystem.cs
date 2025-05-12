@@ -11,7 +11,6 @@ using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -23,7 +22,6 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
 using Content.Shared.Wall;
@@ -550,12 +548,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 return;
             }
-        }
-
-        if (!_prototypes.Index(toVend).HasComponent<ItemComponent>())
-        {
-            SpawnAtPosition(toVend, player.ToCoordinates());
-            return;
         }
 
         var spawn = SpawnNextToOrDrop(toVend, vendor);
