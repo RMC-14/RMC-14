@@ -14,7 +14,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoRest
+  id: RMCGuidebookActionXenoRest
   name: Rest
   description: Lie down to regenerate health more quickly while on weeds.
   categories: [ HideSpawnMenu ]
@@ -35,6 +35,15 @@
     event: !type:XenoWatchActionEvent
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoWatch
+  name: Watch Xenonid
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: watch_xeno
+
+- type: entity
   id: ActionXenoPheromones
   parent: ActionXenoBase
   name: Emit Pheromones (35) # TODO RMC14 proper plasma costs
@@ -47,6 +56,16 @@
       state: emit_pheromones
     event: !type:XenoPheromonesActionEvent
     useDelay: 0.33
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPheromones
+  name: Emit Pheromones
+  description: Gives a buff to nearby xenonids.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emit_pheromones
 
 - type: entity
   id: ActionXenoHide
@@ -63,6 +82,14 @@
     useDelay: 0.5
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoHide
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xenohide
+
+- type: entity
   id: ActionXenoToggleCrest
   parent: ActionXenoBase
   name: Toggle Crest Defense
@@ -77,6 +104,14 @@
     useDelay: 2
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoToggleCrestDefence
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: crest_defense
+
+- type: entity
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
@@ -89,6 +124,14 @@
       state: fortify
     event: !type:XenoFortifyActionEvent
     useDelay: 5
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFortify
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: fortify
 
 - type: entity
   id: ActionXenoFortifySteelcrest
@@ -111,6 +154,14 @@
     useDelay: 0.25
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoResinWalker
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: toggle_speed
+
+- type: entity
   id: ActionXenoZoom
   parent: ActionXenoBase
   name: Toggle Long-Range Sight
@@ -122,6 +173,14 @@
       state: toggle_long_range
     event: !type:XenoZoomActionEvent
     useDelay: 0.2
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoToggleLongRangeSight
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: toggle_long_range
 
 - type: entity
   id: ActionXenoWordQueen
@@ -154,6 +213,16 @@
   - type: XenoGrowOvipositorAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoGrowOvipositor
+  name: Grow Ovipositor
+  description: Become immobile and start laying eggs which will produce parasites.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: grow_ovipositor
+
+- type: entity
   id: ActionXenoTurnInvisible
   parent: ActionXenoBase
   name: Turn Invisible (20) # TODO RMC14 proper plasma costs
@@ -165,6 +234,14 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: lurker_invisibility
     event: !type:XenoTurnInvisibleActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTurnInvisible
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lurker_invisibility
 
 - type: entity
   id: ActionXenoDefensiveShield
@@ -179,6 +256,14 @@
       state: empower
     event: !type:XenoDefensiveShieldActionEvent
     useDelay: 26
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDefensiveShield
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: empower
 
 - type: entity
   id: ActionXenoRetrieveEgg
@@ -196,6 +281,14 @@
     deselectOnMiss: false
     repeat: true
     range: 16
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoRetrieveEgg
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: retrieve_egg
 
 - type: entity
   id: ActionXenoThrowParasite
@@ -216,6 +309,14 @@
     useDelay: 0
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoThrowParasite
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: throw_parasite
+
+- type: entity
   id: ActionXenoParasiteReserve
   parent: ActionXenoBase
   name: Set Parasite Reserve
@@ -228,6 +329,14 @@
       state: reserve_parasite
     event: !type:XenoReserveParasiteActionEvent
     useDelay: 1
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoSetParasiteReserve
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: reserve_parasite
 
 - type: entity
   parent: ActionXenoBase
@@ -276,6 +385,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoBurrow
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: burrow
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoSoak
   name: Soak (20)
@@ -305,6 +422,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoEmpower
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_empower
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoGenerateEggs
   name: Generate Eggs (50)
@@ -316,3 +441,11 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: lay_egg
     event: !type:XenoGenerateEggsActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoGenerateEggs
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lay_egg
