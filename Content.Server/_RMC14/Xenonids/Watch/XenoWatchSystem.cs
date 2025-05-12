@@ -233,21 +233,22 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         FixedPoint2 damage;
         FixedPoint2 percentage = 0;
 
-        if (TryComp<DamageableComponent>(uid, out var damageableComponent))
+        if (!TryComp<DamageableComponent>(uid, out var damageableComponent))
+            return -1;
+
+        if (!TryComp<MobThresholdsComponent>(uid, out var threshold))
+            return -1;
+
+        if (_threshold.TryGetIncapThreshold(uid, out critical))
         {
-            if (TryComp<MobThresholdsComponent>(uid, out var threshold))
+            FixedPoint2 critThreshold = critical?? 0;
+            if (critThreshold != 0)
             {
-                if (_threshold.TryGetIncapThreshold(uid, out critical))
-                {
-                    FixedPoint2 critThreshold = critical?? 0;
-                    if (critThreshold != 0)
-                    {
-                        damage = damageableComponent.TotalDamage;
-                        percentage = (critThreshold - damage) / (critThreshold); // i want the value to be between 0 and 1
-                    }
-                }
+                damage = damageableComponent.TotalDamage;
+                percentage = (critThreshold - damage) / (critThreshold); // i want the value to be between 0 and 1
             }
         }
+
         return percentage;
     }
 
