@@ -12,7 +12,6 @@
     fiberMaterial: fibers-leather
     fiberColor: fibers-black
   - type: FingerprintMask
-  - type: RMCBulkyArmor
 
 - type: entity
   parent: CMHandsBlackMarine
