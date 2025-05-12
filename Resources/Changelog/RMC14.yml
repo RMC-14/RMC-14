@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: SG6732
-  changes:
-  - message: Fixed underbarrel flashlight grip moving when on.
-    type: Fix
-  id: 1222
-  time: '2025-01-17T12:06:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5409
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed armor variants not being patreon named.
-    type: Fix
-  id: 1223
-  time: '2025-01-18T03:34:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5415
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed burst animation looping.
-    type: Fix
-  id: 1224
-  time: '2025-01-18T03:42:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5416
 - author: Vermidia
   changes:
   - message: Added labcoats (for docs and CMO) that can be unbuttoned and medical
@@ -5419,5 +5398,29 @@
   id: 1724
   time: '2025-05-12T15:33:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6421
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Praetorians being able to gain shield by shooting spit at walls.
+    type: Fix
+  - message: Fixed xenonids being able to build resin through walls.
+    type: Fix
+  id: 1725
+  time: '2025-05-12T17:38:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6424
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed berserker ravager eviscerate not stunning if you have 4 or more
+      rage.
+    type: Fix
+  id: 1726
+  time: '2025-05-12T18:47:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6426
+- author: mmails
+  changes:
+  - message: CO sabre to CO weapons vendor
+    type: Add
+  id: 1727
+  time: '2025-05-12T19:13:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5985
 Name: RMC14
 Order: -1

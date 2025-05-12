@@ -124,19 +124,22 @@ public sealed class XenoChargeSystem : EntitySystem
         if (ent.Comp.Stage < damage.Comp.MinimumStage)
             return;
 
-        _audio.PlayPredicted(damage.Comp.Sound, _transform.GetMoverCoordinates(damage), ent);
+        if (_net.IsServer)
+            _audio.PlayPvs(damage.Comp.Sound, _transform.GetMoverCoordinates(damage));
 
         var damageable = CompOrNull<DamageableComponent>(damage);
 
         // TODO RMC14 this needs to keep the charge going if the entity is deleted (or queue deleted)
         if (damage.Comp.Destroy)
         {
-            _popup.PopupClient(
-                Loc.GetString("rmc-xeno-charge-plow-through", ("xeno", ent), ("target", damage)),
-                damage,
-                ent,
-                PopupType.SmallCaution
-            );
+            if (_net.IsServer)
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("rmc-xeno-charge-plow-through", ("xeno", ent), ("target", damage)),
+                    damage,
+                    PopupType.SmallCaution
+                );
+            }
 
             if (_net.IsClient)
                 _transform.DetachEntity(damage, Transform(damage));
@@ -145,18 +148,24 @@ public sealed class XenoChargeSystem : EntitySystem
         }
         else
         {
-            _popup.PopupClient(
-                Loc.GetString("rmc-xeno-charge-smashes", ("xeno", ent), ("target", damage)),
-                damage,
-                ent,
-                PopupType.SmallCaution
-            );
+            if (_net.IsServer)
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("rmc-xeno-charge-smashes", ("xeno", ent), ("target", damage)),
+                    damage,
+                    PopupType.SmallCaution
+                );
+            }
 
             var stage = ent.Comp.Stage;
             if (damage.Comp.StageMultipliers != null &&
                 damage.Comp.StageMultipliers.TryGetValue(stage, out var stageMult))
             {
-                stage = stageMult;
+                stage = stageMult * stageMult;
+            }
+            else if (damage.Comp.DefaultMultiplier != 0)
+            {
+                stage = damage.Comp.DefaultMultiplier * damage.Comp.DefaultMultiplier;
             }
             else if (stage < damage.Comp.MinimumStage)
             {
@@ -181,7 +190,7 @@ public sealed class XenoChargeSystem : EntitySystem
             {
                 var bluntDamage = new DamageSpecifier();
                 bluntDamage.DamageDict[_blunt] = destroyed.Value * damage.Comp.PercentageDamage * stage;
-                _damageable.TryChangeDamage(ent, bluntDamage, damageable: damageable);
+                _damageable.TryChangeDamage(damage, bluntDamage, damageable: damageable);
             }
         }
 
@@ -237,17 +246,19 @@ public sealed class XenoChargeSystem : EntitySystem
         // TODO RMC14 make this take into account relative position instead of being a 50/50 like 13
         var perpendiculars = direction.AsDir().GetPerpendiculars();
         var perpendicular = _random.Prob(0.5f) ? perpendiculars.First : perpendiculars.Second;
-        var diff = perpendicular.ToVec().Normalized() * args.Charger.Comp.Stage * 0.5f;
+        var diff = perpendicular.ToVec().Normalized();
 
         _throwing.TryThrow(ent, diff, 10);
         IncrementStages(args.Charger, -1);
 
-        // TODO RMC14 target msg
-        var userMsg = Loc.GetString("rmc-xeno-charge-knockback-self", ("target", ent));
-        var othersMsg = Loc.GetString("rmc-xeno-charge-knockback-others", ("user", args.Charger), ("target", ent));
-        _popup.PopupPredicted(userMsg, othersMsg, ent, args.Charger, PopupType.MediumCaution);
-
-        _audio.PlayPredicted(ent.Comp.Sound, ent, args.Charger);
+        if (_net.IsServer)
+        {
+            _audio.PlayPvs(ent.Comp.Sound, ent);
+            // TODO RMC14 target msg
+            // var userMsg = Loc.GetString("rmc-xeno-charge-knockback-self", ("target", ent));
+            var othersMsg = Loc.GetString("rmc-xeno-charge-knockback-others", ("user", args.Charger), ("target", ent));
+            _popup.PopupEntity(othersMsg, ent, PopupType.MediumCaution);
+        }
     }
 
     private void OnChargingKnockbackAttemptCollide(Entity<XenoToggleChargingKnockbackComponent> ent, ref AttemptMobTargetCollideEvent args)
@@ -486,6 +497,9 @@ public sealed class XenoChargeSystem : EntitySystem
         if (!_xenoToggleChargingQuery.TryComp(ent, out var charging))
             return;
 
+        if (_rmcPulling.IsBeingPulled(ent.Owner, out _))
+            return;
+
         if (!args.OldPosition.TryDistance(EntityManager, _transform, args.NewPosition, out var distance))
             return;
 
@@ -636,14 +650,17 @@ public sealed class XenoChargeSystem : EntitySystem
                 var ev = new XenoToggleChargingCollideEvent(hit.Crusher);
                 RaiseLocalEvent(hit.Target, ref ev);
 
-                if (ev.Handled && hit.Crusher.Comp.Stage == 0)
+                if (ev.Handled)
                 {
                     recently = EnsureComp<XenoToggleChargingRecentlyHitComponent>(hit.Target);
                     recently.LastHitAt = time;
                     Dirty(hit.Target, recently);
 
-                    hit.Crusher.Comp.Steps = 0;
-                    Dirty(hit.Crusher);
+                    if (hit.Crusher.Comp.Stage == 0)
+                    {
+                        hit.Crusher.Comp.Steps = 0;
+                        Dirty(hit.Crusher);
+                    }
                 }
             }
         }

@@ -212,7 +212,7 @@
     - groups:
         Brute: 70
     rangeAtRageLevels: [1.5, 1.5, 1.5, 2.5, 2.5]
-    windupReductionAtRageLevels: [0, 0.2, 4, 6, 10]
+    windupReductionAtRageLevels: [0, 0.2, 0.4, 0.6, 1]
   - type: XenoFling # TODO RMC14 target head
     range: 1.15
     enragedRange: 0.8

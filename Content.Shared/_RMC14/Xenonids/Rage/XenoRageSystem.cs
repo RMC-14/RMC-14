@@ -1,13 +1,13 @@
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Xenonids.Heal;
+using Content.Shared.Examine;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Aura;
-using Content.Shared.Movement.Systems;
-using Content.Shared.Weapons.Melee;
-using Content.Shared._RMC14.Xenonids.Heal;
-using Content.Shared.Examine;
 
 namespace Content.Shared._RMC14.Xenonids.Rage;
 
@@ -95,7 +95,7 @@ public sealed class XenoRageSystem : EntitySystem
         var validTarget = false;
         foreach (var entity in args.HitEntities)
         {
-            if (!_xeno.CanAbilityAttackTarget(xeno.Owner, entity, true))
+            if (!_xeno.CanAbilityAttackTarget(xeno.Owner, entity))
                 continue;
 
             validTarget = true;

@@ -420,4 +420,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCMinimumHijackBurrowed =
     CVarDef.Create("rmc.hijack_minimum_burrowed", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDistressXenosMinimum =
+        CVarDef.Create("rmc.distress_xenos_minimum", 4, CVar.REPLICATED | CVar.SERVER);
 }

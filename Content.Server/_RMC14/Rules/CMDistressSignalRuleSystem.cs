@@ -154,7 +154,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
 
-
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
     private readonly HashSet<string> _operationSuffixes = new();
@@ -177,6 +176,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private TimeSpan _forceEndHijackTime;
     private float _hijackShipWeight;
     private int _hijackMinBurrowed;
+    private int _xenosMinimum;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -239,6 +239,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCForceEndHijackTimeMinutes, v => _forceEndHijackTime = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCHijackShipWeight, v => _hijackShipWeight = v, true);
         Subs.CVar(_config, RMCCVars.RMCMinimumHijackBurrowed, v => _hijackMinBurrowed = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
 
         ReloadPrototypes();
     }
@@ -1033,7 +1034,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var query = QueryAllRules();
         while (query.MoveNext(out _, out var distress, out _))
         {
-            var xenoCandidate = false;
+            var xenoCandidates = 0;
             foreach (var player in ev.Players)
             {
                 if (_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
@@ -1042,20 +1043,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (profile.JobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
                         xenoPriority > JobPriority.Never)
                     {
-                        xenoCandidate = true;
-                        break;
+                        xenoCandidates++;
                     }
-
-                    if (profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
+                    else if (profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
                         queenPriority > JobPriority.Never)
                     {
-                        xenoCandidate = true;
+                        xenoCandidates++;
                         break;
                     }
                 }
             }
 
-            if (xenoCandidate)
+            if (xenoCandidates < _xenosMinimum)
                 continue;
 
             ChatManager.SendAdminAnnouncement("Can't start distress signal. Requires at least 1 xeno player but we have 0.");
