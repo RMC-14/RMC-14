@@ -124,6 +124,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
             if (range > 1.5f)
             {
                 _audio.PlayPvs(xeno.Comp.RageHitSound, marine); // todo spawn gibs
+                _stun.TryParalyze(marine, xeno.Comp.StunTime, true);
             }
             else
             {
