@@ -177,9 +177,6 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
-    layers:
-    - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
   - type: RMCSelectiveFire
     recoilWielded: 3
     scatterWielded: 10
@@ -247,9 +244,6 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/CO.rsi
-    layers:
-    - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/CO.rsi
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
