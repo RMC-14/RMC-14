@@ -1369,7 +1369,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAustinSpectreEventide
   name: Austin 'Spectre' Eventide figurine
-  description: ""
+  description: "\"Allan please add description\""
   components:
   - type: Sprite
     state: austin_spectre_eventide
@@ -1411,3 +1411,33 @@
     state: angler_angus_seawing
   - type: PatronFigurine
     id: 3ee135f9-b228-4f65-8155-40613aaef0dc
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLilianaShorkGodwin
+  name: Liliana 'Shork' Godwin figurine
+  description: "SHORK GANG RISE UP!!"
+  components:
+  - type: Sprite
+    state: liliana_shork_godwin
+  - type: PatronFigurine
+    id: 4211dfd5-fa9f-4eec-8738-c08356d24571
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/rawr.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 120
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKuafuSpeedDemonLightweaver
+  name: Kuafu 'Speed Demon' Lightweaver figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: kuafu_speed_demon_lightweaver
+  - type: PatronFigurine
+    id: 3c148935-f54d-4c7d-b02c-a9ac360c6479
