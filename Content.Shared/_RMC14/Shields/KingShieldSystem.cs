@@ -62,7 +62,7 @@ public sealed class KingShieldSystem : EntitySystem
             EnsureComp<KingShieldComponent>(ent);
 
             if (_shield.ApplyShield(ent, XenoShieldSystem.ShieldType.King, xeno.Comp.ShieldAmount, duration: xeno.Comp.DecayTime,
-                decay: xeno.Comp.DecayAmount, visualState: xeno.Comp.VisualState);)
+                decay: xeno.Comp.DecayAmount, visualState: xeno.Comp.VisualState))
             {
                 var lightning = EnsureComp<KingLightningComponent>(ent);
                 lightning.Source = xeno;
