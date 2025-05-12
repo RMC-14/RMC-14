@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed armor variants not being patreon named.
-    type: Fix
-  id: 1223
-  time: '2025-01-18T03:34:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5415
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed burst animation looping.
     type: Fix
   id: 1224
@@ -5421,5 +5414,13 @@
   id: 1725
   time: '2025-05-12T17:38:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6424
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed berserker ravager eviscerate not stunning if you have 4 or more
+      rage.
+    type: Fix
+  id: 1726
+  time: '2025-05-12T18:47:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6426
 Name: RMC14
 Order: -1
