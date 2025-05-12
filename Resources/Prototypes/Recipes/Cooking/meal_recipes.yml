@@ -255,7 +255,8 @@
   group: Savory
   solids:
     FoodBreadBun: 1
-    FoodJellyAmanita: 1
+  reagents:
+    CMCherryJelly: 5
 
 - type: microwaveMealRecipe #added to metamorph recipes
   id: RecipeBurgerMcguffin
@@ -584,7 +585,8 @@
   group: Breads
   solids:
     FoodBreadPlainSlice: 1
-    FoodJellyAmanita: 1 #replace with jelly
+  reagents:
+    CMCherryJelly: 5
 
 - type: microwaveMealRecipe
   id: RecipeMoldyBreadSlice
