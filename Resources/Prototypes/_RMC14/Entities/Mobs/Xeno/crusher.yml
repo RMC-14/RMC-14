@@ -32,7 +32,6 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoCharge
     - ActionXenoStomp
     - ActionXenoDevolve
     tier: 3
@@ -50,11 +49,6 @@
       types:
         Blunt: 65
     selfEffect: CMEffectSelfStomp
-  - type: XenoCharge
-    damage:
-      types:
-        Blunt: 60
-        Structural: 750
   - type: XenoAnimateMovement
   - type: XenoPlasma
     plasma: 400
@@ -125,6 +119,11 @@
     - ActionXenoDefensiveShield
     - ActionXenoDevolve
   - type: CrusherShield
+  - type: XenoCharge
+    damage:
+      types:
+        Blunt: 60
+        Structural: 750
   - type: XenoShield
   - type: XenoEvolution
     strains:
@@ -189,3 +188,6 @@
       types:
         Blunt: 75
   - type: XenoToggleCharging
+    damage:
+      types:
+        Blunt: 6
