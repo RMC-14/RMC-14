@@ -26,6 +26,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCUserBulkyArmorIncapable
     - type: Skills
       skills:
         RMCSkillFirearms: 0

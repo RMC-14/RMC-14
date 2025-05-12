@@ -86,6 +86,12 @@ rmc-xeno-steelcrest-description = You trade your tail sweep and a small amount o
    - Soak in damage for 6 seconds for a small heal that also refreshes your tail slam.
 rmc-xeno-steelcrest-popup = This one, like my will, is indomitable. It will become my steel crest against all that defy me.
 
+rmc-xeno-maid-name = Cat Maid
+rmc-xeno-maid-description = You trade your dignity.
+    You gain the ability to:
+    - Cause mental anguish in friends and foes alike.
+rmc-xeno-maid-popup = Rawr :3
+
 rmc-xeno-vampire-name = Vampire
 rmc-xeno-vampire-description = You lose all of your abilities and you forfeit a chunk of your health and damage in exchange for a large amount of armor, a little bit of movement speed, increased attack speed, and brand new abilities that make you an assassin.
   You gain the ability to:
@@ -103,3 +109,12 @@ rmc-xeno-eggsac-description = You trade your ability to store parasites and make
    - Sustained Eggs will convert into normal eggs upon touching hive weeds, and cannot produce sentient parasites.
    - Use plasma over time to make eggs.
 rmc-xeno-eggsac-popup = An egg is always an adventure; the next one may be different.
+
+rmc-xeno-berserker-name = Berserker
+rmc-xeno-berserker-description = You lose your empower, charge, and scissor cut, decrease your health, and sacrifice a bit of your influence under frenzy pheromones to increase your movement speed, slightly increase your armor, and gain a new set of abilities that make you a terrifying melee monster.
+  You gain the ability to:
+  - Heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
+  - Apprehend to increase your movement speed and apply a slow on the next target you slash.
+  - Eviscerate to unleash a devastating windmill attack that heals you for every enemy you hit after an immobilizing wind-up.
+  - Clothesline to fling your target to heal yourself, even more-so if you have a rage stack that will be used up. up
+rmc-xeno-berserker-popup = Unbridled fury fills this one. You will become an extension of my rage.
