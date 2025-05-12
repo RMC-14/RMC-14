@@ -56,6 +56,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityUid QueenRemotePlasmaTransferUid;
+
     public override void Initialize()
     {
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
