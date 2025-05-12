@@ -79,6 +79,7 @@
   - type: StatusEffects # For jitter to work
     allowed:
     - Electrocution
+  - type: DeletedByWeedKiller
 
 
 - type: entity

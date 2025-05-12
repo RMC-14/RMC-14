@@ -72,3 +72,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/30a083c72320b6cc3c724f98d795385b1080fe6a/sound/soundscape/thunderclap2.ogg"
+
+- files: ["gibbed.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/4a4d5467e0889a350de3b6dfef2d9bc91300eee2/sound/effects/gibbed.ogg"

@@ -390,14 +390,18 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         _onCollide.SetChain((spawned, onCollide), chain);
     }
 
-    private void SpawnFires(EntProtoId spawn, EntityCoordinates coordinates, int range, EntityUid chain, int? intensity, int? duration)
+    private void SpawnFires(EntProtoId spawn, EntityCoordinates coordinates, int range, EntityUid chain, int? intensity, int? duration, HashSet<EntityCoordinates>? spawned = null)
     {
         if (_net.IsClient)
             return;
 
+        spawned ??= new HashSet<EntityCoordinates>();
         foreach (var cardinal in _rmcMap.CardinalDirections)
         {
             var target = coordinates.Offset(cardinal);
+            if (!spawned.Add(target))
+                continue;
+
             var nextRange = SpawnFire(target, spawn, chain, range, intensity, duration, out var cont);
             if (nextRange == 0 || cont)
                 continue;
@@ -407,7 +411,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 {
                     try
                     {
-                        SpawnFires(spawn, target, nextRange, chain, intensity, duration);
+                        SpawnFires(spawn, target, nextRange, chain, intensity, duration, spawned);
                     }
                     catch (Exception e)
                     {

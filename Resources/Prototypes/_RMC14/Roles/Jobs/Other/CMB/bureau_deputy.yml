@@ -66,17 +66,19 @@
     head: RMCHeadCapBureau
     # face cigar
     # shoulder holster with revolver and two magazines
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetDistressBureau
     back: CMSatchelSecurity
     gloves: RMCHandsVeteran
     jumpsuit: RMCJumpsuitMarshal
-    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
+    outerClothing: RMCCoatBureauDeputy # add telebaton binoculars/range
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
     belt: CMBeltSecurityMarshalFilled
     shoes: RMCBootsPMCFilled
     id: RMCIDCardDeputy
-    ears: CMHeadsetMPO
-    pocket1: RMCPouchFirstAidERT
-    pocket2: RMCPouchShotgun
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchMagazineLargeMP5
+    suitstorage: WeaponSMGMP5
 
 - type: playTimeTracker
   id: RMCJobBureauDeputy

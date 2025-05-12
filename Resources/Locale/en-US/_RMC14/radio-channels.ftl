@@ -18,7 +18,7 @@ chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-colony = Colony
 chat-radio-WY = We-Ya
-chat-radio-CMB = Colony Marshal Bureau
+chat-radio-CMB = CMB
 chat-radio-provost = Provost
 
 chat-radio-spp-command = SPP Command

@@ -3,12 +3,6 @@
   id: CMXenoPraetorian
   name: cm-job-name-xeno-praetorian
   playTimeTracker: CMJobXenoPraetorian
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: praetorian
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoPraetorian
