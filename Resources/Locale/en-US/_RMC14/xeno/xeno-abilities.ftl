@@ -354,6 +354,7 @@ rmc-xeno-sustain-death = {CAPITALIZE(THE($xeno))} throes as its eggsac bursts in
 
 # Apprehend
 rmc-xeno-apprehend-activate = Our next slash will slow!
+rmc-xeno-apprehend-deactivate = We feel our speed wane!
 rmc-xeno-apprehend-expire = We have waited too long, our slash will no longer slow enemies!
 
 # Rage
