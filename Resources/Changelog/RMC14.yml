@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: 'Added 3 new player guidebook guides by Kynthos on Discord:  Communications
-      Towers and Sensor Tower, Combat Technician and Maintenance Technician.'
-    type: Add
-  id: 1218
-  time: '2025-01-13T07:52:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5381
 - author: CyberTropic
   changes:
   - message: Fixed digital clock showing proper date from the server.
@@ -5378,5 +5370,17 @@
   id: 1720
   time: '2025-05-12T12:29:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6394
+- author: Vermidia
+  changes:
+  - message: Fixed groundside xenos not becoming burrowed larva once hijack begins.
+    type: Fix
+  - message: Ported hijack burrowed larva surge. When hivecore is up, burrowed larva
+      will be generated overtime depending on the initial disparity in numbers between
+      marines and xenos. It generates slightly faster each time a new burrowed is
+      made but speedup resets if hivecore is destroyed.
+    type: Add
+  id: 1721
+  time: '2025-05-12T12:39:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6418
 Name: RMC14
 Order: -1
