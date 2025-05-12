@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Healing lessers drones no longer adds energy
-    type: Fix
-  id: 1220
-  time: '2025-01-17T12:03:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5412
 - author: SG6732
   changes:
   - message: Tweaked the M54CE2 Sprite and attachment node
@@ -5415,5 +5408,15 @@
   id: 1722
   time: '2025-05-12T12:56:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6419
+- author: DrSmugleaf
+  changes:
+  - message: Fixed revolver bullets being invisible for the user that is shooting
+      them.
+    type: Fix
+  - message: Fixed sentries doing double the intended damage.
+    type: Fix
+  id: 1723
+  time: '2025-05-12T15:07:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6420
 Name: RMC14
 Order: -1
