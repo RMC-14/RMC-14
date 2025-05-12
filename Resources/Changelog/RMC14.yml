@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: blueDev2
   changes:
-  - message: Fixed most Almayer tiles being able to have Burrower tunnels placed on
-      them.
-    type: Fix
-  id: 1226
-  time: '2025-01-18T03:45:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5278
-- author: blueDev2
-  changes:
   - message: Prevent parasites from filling up xeno tunnels
     type: Fix
   id: 1227
@@ -5420,5 +5412,12 @@
   id: 1728
   time: '2025-05-12T21:35:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6431
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed vampire lurker and berserker being able to heal while on fire
+    type: Fix
+  id: 1729
+  time: '2025-05-12T21:39:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6430
 Name: RMC14
 Order: -1
