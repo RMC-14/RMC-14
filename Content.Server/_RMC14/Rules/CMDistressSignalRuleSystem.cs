@@ -12,9 +12,11 @@ using Content.Server.Chat.Managers;
 using Content.Server.Fax;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
+using Content.Server.Ghost;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
+using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
@@ -61,11 +63,12 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
-using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -144,6 +147,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
     [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly GhostSystem _ghost = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -166,6 +171,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private TimeSpan _sunsetDuration;
     private TimeSpan _sunriseDuration;
     private TimeSpan _forceEndHijackTime;
+    private float _hijackShipWeight;
+    private int _hijackMinBurrowed;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -226,6 +233,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCSunsetDuration, v => _sunsetDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCSunriseDuration, v => _sunriseDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCForceEndHijackTimeMinutes, v => _forceEndHijackTime = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCHijackShipWeight, v => _hijackShipWeight = v, true);
+        Subs.CVar(_config, RMCCVars.RMCMinimumHijackBurrowed, v => _hijackMinBurrowed = v, true);
 
         ReloadPrototypes();
     }
@@ -861,12 +870,84 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _destruction.DestroyEntity(hiveStructure);
             }
         }
+        var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+        var xenoAmount = 0;
+        var larva = 0;
+        //TODO RMC14 only do main hive
+        while (xenos.MoveNext(out var xeno, out var comp, out var mobstate, out var transformComp))
+        {
+            if (_mobState.IsDead(xeno))
+                continue;
+
+            if (transformComp.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(xeno.ToCoordinates()))
+            {
+                if (comp.CountedInSlots)
+                    larva++;
+
+                //Ghost player and send message
+                if (TryComp(xeno, out ActorComponent? actor))
+                {
+                    var session = actor.PlayerSession;
+
+                    Entity<MindComponent> mind;
+
+                    if (_mind.TryGetMind(session, out var mindId, out var mindComp))
+                        mind = (mindId, mindComp);
+                    else
+                        mind = _mind.CreateMind(session.UserId);
+
+                    var ghost = _ghost.SpawnGhost((mind.Owner, mind.Comp), xeno);
+
+                    var origin = _transform.GetMoverCoordinates(xeno);
+
+                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, Shared.Popups.PopupType.MediumCaution);
+                }
+                QueueDel(xeno);
+            }
+            else
+                xenoAmount++;
+        }
+
+        //Surge
+        var shipQuery = EntityQueryEnumerator<MarineComponent, MobStateComponent, InfectableComponent, TransformComponent>();
+
+        float totalHostWeights = 0;
+        while (shipQuery.MoveNext(out var marine, out var mob, out var _, out var _, out var transformComp))
+        {
+            if (_mobState.IsDead(marine) || !_almayerMaps.Contains(transformComp.MapID))
+                continue;
+
+            if (!TryComp<MindContainerComponent>(marine, out var mindContainer))
+                continue;
+
+            if (mindContainer is null ||
+                !TryComp<MindComponent>(mindContainer.Mind, out var mind))
+                continue;
+
+            foreach (var roleId in mind.MindRoles)
+            {
+                if (!TryComp<MindRoleComponent>(roleId, out var mindRole))
+                    continue;
+
+                if (mindRole.JobPrototype == null || !_prototypes.TryIndex(mindRole.JobPrototype, out var proto))
+                    continue;
+
+                totalHostWeights += proto.RoleWeight;
+            }
+        }
+
+        //Get the maximum of either remaining marines or minimum amount
+        var surgeAmount = Math.Max((int)Math.Ceiling(totalHostWeights * _hijackShipWeight) - xenoAmount, _hijackMinBurrowed);
         var rules = QueryActiveRules();
         while (rules.MoveNext(out _, out var rule, out _))
         {
             // Reset Hivecore Cooldown
             var hiveComp = EnsureComp<HiveComponent>(rule.Hive);
+            //Add all the stranded xenos up
+            _hive.IncreaseBurrowedLarva(larva); // TODO RMC14 should prob make sure it's only main hive
             _hive.ResetHiveCoreCooldown((rule.Hive, hiveComp));
+            var surge = EnsureComp<HijackBurrowedSurgeComponent>(rule.Hive);
+            surge.PooledLarva = surgeAmount;
         }
     }
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
