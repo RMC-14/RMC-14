@@ -11,6 +11,8 @@
     - Burst
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50.ogg
+  - type: Corrodible
+    isCorrodible: false
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto

@@ -1,368 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added squad headbands and tactical wraps
-    type: Add
-  id: 1184
-  time: '2025-01-11T08:22:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5346
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Phones now go to voicemail after 30 seconds if no one picks up the receiving
-      end
-    type: Tweak
-  id: 1185
-  time: '2025-01-11T08:23:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5342
-- author: SG6732
-  changes:
-  - message: Changed the attachment nodes for the XM88 to prevent floating rail attachments.
-    type: Tweak
-  id: 1186
-  time: '2025-01-11T08:26:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5326
-- author: Vermidia
-  changes:
-  - message: Added more words to xeno chat san.
-    type: Add
-  id: 1187
-  time: '2025-01-11T08:25:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5344
-- author: Vermidia
-  changes:
-  - message: Xeno spits have different colors now depending on how much damage they
-      do. Neuro spit is now also yellow.
-    type: Add
-  id: 1188
-  time: '2025-01-11T08:25:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5338
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Made picking up dropped items hotkey pick up the first dropped item,
-      instead of the last.
-    type: Tweak
-  id: 1189
-  time: '2025-01-11T08:28:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5343
-- author: DummeHytteOst
-  changes:
-  - message: Press armor now has a light.
-    type: Add
-  id: 1190
-  time: '2025-01-11T08:30:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5253
-- author: DummeHytteOst
-  changes:
-  - message: The emergency autoinjector has gotten its own injection sound.
-    type: Add
-  id: 1191
-  time: '2025-01-11T08:30:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5251
-- author: J C Denton
-  changes:
-  - message: Fixed XO and ASO not starting with a rangefinder in their pouch, and
-      the XO not starting with 2 large pouches.
-    type: Fix
-  - message: Fixed SO not starting with a rangefinder in their hand and two large
-      pouches.
-    type: Fix
-  - message: Fixed SEA not spawning with a flash, large pouch, whistle, and binoculars.
-    type: Fix
-  - message: Fixed the QM's starting pocket contents being swapped.
-    type: Fix
-  id: 1192
-  time: '2025-01-11T08:39:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5101
-- author: DummeHytteOst
-  changes:
-  - message: Removed the option for players to disable all recoil.
-    type: Fix
-  id: 1193
-  time: '2025-01-11T08:43:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5220
-- author: DummeHytteOst
-  changes:
-  - message: Removed explosions shaking your screen.
-    type: Remove
-  id: 1194
-  time: '2025-01-11T08:43:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5221
-- author: J C Denton
-  changes:
-  - message: Fixed CMO, Doctor, Nurse and Maintenance Technician starting with a headset.
-    type: Fix
-  - message: Survivors now spawn with a Colony key in their headset.
-    type: Tweak
-  id: 1195
-  time: '2025-01-11T08:43:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5263
-- author: CyberTropic
-  changes:
-  - message: Added civilian playtime award ribbons as a parallel to marine service
-      medals.
-    type: Add
-  id: 1196
-  time: '2025-01-11T08:49:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5081
-- author: Whisper
-  changes:
-  - message: Server rules have been updated. Please check the changelog in the guidebook.
-    type: Tweak
-  id: 1197
-  time: '2025-01-11T13:39:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5347
-- author: blueDev2
-  changes:
-  - message: UGL launched grenades timer starts on landing.
-    type: Add
-  - message: Timer is extended to 1.5 seconds.
-    type: Add
-  id: 1198
-  time: '2025-01-11T13:53:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5248
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added scarves and more coifs to loadouts
-    type: Add
-  - message: Fixed tuck in features helmets not updating while using the verb
-    type: Fix
-  id: 1199
-  time: '2025-01-11T15:34:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5348
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added pistol belts to the senior officer vendor.
-    type: Tweak
-  id: 1200
-  time: '2025-01-11T21:45:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5355
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Pickup dropped items hotkey now picks up important items (like guns and
-      melee) before other items.
-    type: Tweak
-  id: 1201
-  time: '2025-01-11T21:45:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5353
-- author: DrSmugleaf
-  changes:
-  - message: Added fireteams. These are created by the Squad Leader of each squad
-      by clicking on their Squad Leader tracker alert on the right. Others can also
-      click it to change their tracker to track their assigned Fireteam Leader.
-    type: Add
-  - message: Added echo squad creation. This can be created by the commander for a
-      specific purpose, and acts as a fifth squad. It can be watched normally through
-      the overwatch console, and the Requisitions green E pad corresponds to it for
-      supply drops, which Requisitions uses manually but can also be used by CIC through
-      the overwatch console as normal.
-    type: Add
-  - message: Added night vision optic. These are slotted into your helmet and can
-      be toggled with an action, lasting for 10 minutes of continuous use before needing
-      to be recharged in a recharger. They add a green tint to your screen while in
-      use and cannot be used at the same time as binoculars or scopes. They can be
-      bought by Fireteam Leaders and Squad Leaders, but not Requisitions.
-    type: Add
-  - message: Added weapon-specific crosshairs. These show up while in combat mode
-      and wielding your gun, and make your mouse cursor invisible.
-    type: Add
-  - message: Ported 5 minute cooldown to devolving then re-evolving to the same caste
-      that you were.
-    type: Add
-  - message: Added a list of CM-SS13 contributors and staff to the credits, accessible
-      in the lobby, roadmap, and escape menu. Ask us if you want to be included in
-      it!
-    type: Add
-  - message: Added Penelope 'Cyclops' David and William 'Spurs' Crockett figurines.
-    type: Add
-  - message: Fixed surgery clamp bleed not removing surgery wounds.
-    type: Fix
-  - message: Fixed some visual bugs and jank when using the chemical dispenser and
-      transferring chemicals between bottles and other containers.
-    type: Fix
-  - message: Fixed queen screech not stunning parasites within 11 tiles for 8 seconds.
-    type: Fix
-  - message: Fixed Scout Specialist thermal cloak cooldown being too high, (3 > 0.5
-      seconds).
-    type: Fix
-  - message: Fixed Burrower Burrow range being too large, it now covers the whole
-      screen maximum.
-    type: Fix
-  - message: Fixed removed unused toggle internals alert status.
-    type: Fix
-  - message: Fixed poppies giving lowercase bicaridine and golden apples giving doctor's
-      delight.
-    type: Fix
-  - message: Fixed mortar belts being able to carry 7 items instead of 5. The fifth
-      is a sidearm.
-    type: Fix
-  - message: Fixed prepared meals, protein bars and mre components not being grindable
-      into nutriment.
-    type: Fix
-  - message: Fixed magazine boxes taking too long to craft (1 > 0.25 seconds).
-    type: Fix
-  - message: Fixed pull chains through stairs or ladders sending you to space.
-    type: Fix
-  - message: Fixed duplicate wrench in comtech tools vendor.
-    type: Fix
-  - message: Fixed being able to unanchor and move the medilathe.
-    type: Fix
-  - message: Fixed acid resin traps triggering through walls if placed in a corner.
-    type: Fix
-  - message: Fixed being able to place resin tarps on tunnels and resin structures
-      on sentries.
-    type: Fix
-  - message: Fixed air vents hiding traps.
-    type: Fix
-  - message: Fixed overwatch console looking funny when rotating your camera.
-    type: Fix
-  - message: Fixed hive leader stars sometimes being drawn at 0,0 while observing
-      as a ghost.
-    type: Fix
-  - message: Fixed dropship terminal weapons camera offset affecting each other. Offsetting
-      your camera as the Alamo will no longer adjust it for the Normandy, and vice-versa.
-    type: Fix
-  - message: Fixed move order giving move speed to marines without armor.
-    type: Fix
-  - message: Fixed plasteel max stack being 40 instead of 50. You will still get 40
-      for free as a comtech, this only changes the max you can stack it to.
-    type: Fix
-  - message: Fixed pick up verb being displayed twice for undeployed magazine boxes.
-    type: Fix
-  - message: Fixed being able to place eggs on tunnels.
-    type: Fix
-  - message: Fixed the command tablet not being able to give medals for Commanding
-      Officers.
-    type: Fix
-  - message: Fixed not being able to swap hands by pressing X while stunned.
-    type: Fix
-  - message: Fixed xenos being able to shoot spits directly at corpses.
-    type: Fix
-  - message: Fixed light bulbs not leaving behind an empty fixture when destroyed.
-    type: Fix
-  - message: Fixed parasites not being able to use the larva roar emote.
-    type: Fix
-  - message: Fixed marking and signal flares not being visible in night vision while
-      lit.
-    type: Fix
-  - message: Fixed defender crest preventing the stun when resisting fire.
-    type: Fix
-  - message: Fixed standing still on top of fire not setting you on fire again after
-      a resist.
-    type: Fix
-  - message: Fixed Queen and other explosive armored xenos taking way more explosive
-      damage than intended.
-    type: Fix
-  id: 1202
-  time: '2025-01-11T21:58:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5357
-- author: FungiFellow
-  changes:
-  - message: Fixed flechette shotgun ammo shooting one less shell than intended.
-    type: Fix
-  id: 1203
-  time: '2025-01-11T22:08:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5358
-- author: Tobinator
-  changes:
-  - message: Added 3 new lobby backgrounds, Fly the Friendly Skies, Lone Medevac and
-      Move Out by Tobinator.
-    type: Add
-  id: 1204
-  time: '2025-01-11T22:12:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5349
-- author: TsjipTsjip
-  changes:
-  - message: Added end-of-round popup with rules. It can be hidden after the first
-      time it appears.
-    type: Add
-  id: 1205
-  time: '2025-01-11T22:15:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5236
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added quartermaster cap and beret
-    type: Add
-  id: 1206
-  time: '2025-01-11T22:16:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5356
-- author: RyanStrudfelt
-  changes:
-  - message: Added most of the intended content for the Military Police Armory! Mp's
-      Rejoice!
-    type: Add
-  - message: Red Alert Gun lockers (m890 tactical, M4SPR, M63)
-    type: Add
-  - message: Blue Alert Riot lockers (Riot suits,  riot shotguns, and other riot equipment)
-      **Both of these lockers require Armory access.**
-    type: Add
-  - message: M890 Riot Shotgun, (Semi-automatic Tactical shotgun that will only load
-      Beanbag Shells, has an under-barrel grenade launcher)
-    type: Add
-  - message: RSh-9 Assault Revolver for the Chief of Military Police, with 9x39 Rounds
-      to load into it.
-    type: Add
-  - message: Rubber Magazines & Rounds for ; M54c & M4SPR, M63, M1984 & M77, (SEA's
-      get these in their SEATech vendor too!)
-    type: Add
-  - message: New Flash-bangs using the Actual CM13 Flash-bang sprite, and that stun
-      people in a Seven tile radius, with a 27-second stun! These are compatible with
-      the M81 Riot Grenade launcher, but not any other type of launcher.  (Warning!
-      Sunglasses will not
-    type: Add
-  - message: RiotTech Vendor, Dispenses Riot Equipment.
-    type: Add
-  - message: Flash-bang Boxes, containing 8 flash-bangs each.
-    type: Add
-  - message: M81 Riot Grenade launcher, This is a break action launcher that will
-      only accept Flashbang grenades, and is coincidentally, the only way to launch
-      them aside from throwing them. (In the future, this will also accept Tear-gas)
-      (Thanks to dummehytteost for helping get the Break-action to work and sanity
-      checking my RSI)
-    type: Add
-  - message: Adds RMCStunOnTriggerComponent.cs enabling things to Stun in a radius.
-      (Thanks to NikTheChampiongr for helping me with this!!!)
-    type: Add
-  - message: Removed burst-fire from the m890 Tactical shotgun
-    type: Remove
-  - message: Added Rubber rounds & Beanbag shells to SEA-Tech vendor, and proper flashbangs
-      to Sec-Tech
-    type: Tweak
-  id: 1207
-  time: '2025-01-11T22:23:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5354
-- author: CyberTropic
-  changes:
-  - message: Added digital clocks that can tell round time!
-    type: Add
-  id: 1208
-  time: '2025-01-11T22:35:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5246
-- author: DrSmugleaf
-  changes:
-  - message: Fixed some belts having error sprites.
-    type: Fix
-  - message: Fixed SLs and FTLs not being able to buy night vision optics.
-    type: Fix
-  - message: Fix the squad info fireteam list not having a scroll bar.
-    type: Fix
-  - message: Fixed helmets not getting camouflage textures.
-    type: Fix
-  - message: Fixed grenade rigs looking like ammo rigs.
-    type: Fix
-  - message: Fixed the riot tech vendor not having items, and the SEA vendor not having
-      M4SPR rubber mags.
-    type: Fix
-  id: 1209
-  time: '2025-01-12T01:36:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5364
-- author: blueDev2
-  changes:
-  - message: Fixed Underbarrel Grenade Launcher grenades not beeping and showing primed
-      status when fired.
-    type: Fix
-  id: 1210
-  time: '2025-01-13T04:15:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5376
 - author: Vermidia
   changes:
   - message: Fixed being able to attach a weapon/insert ammo on a dropship weapon
@@ -5519,5 +5155,243 @@
   id: 1686
   time: '2025-05-05T00:42:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6352
+- author: CyberTropic
+  changes:
+  - message: Fixed Shiva loading error.
+    type: Fix
+  id: 1687
+  time: '2025-05-07T23:37:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6371
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added shockwave effect to the HE orbital bombardment warhead.
+    type: Add
+  id: 1688
+  time: '2025-05-10T02:36:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6385
+- author: Arykh
+  changes:
+  - message: Fixed the health analyzer lying about Arithrazine's OD.
+    type: Fix
+  id: 1689
+  time: '2025-05-10T02:39:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6354
+- author: Ramiris
+  changes:
+  - message: 'Fixed clothing camo, you can now rep your CamoTech:tm: weapons on your
+      back/belt!'
+    type: Fix
+  id: 1690
+  time: '2025-05-10T03:16:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6325
+- author: crazy1112345
+  changes:
+  - message: Added faction stamps for SPP, CLF, TSE, and the Free Press.
+    type: Add
+  id: 1691
+  time: '2025-05-10T03:20:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6310
+- author: Vermidia
+  changes:
+  - message: Fixed Custom SPR doing slightly too much damage base (31 > 26)
+    type: Fix
+  id: 1692
+  time: '2025-05-10T03:24:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6360
+- author: Whisper
+  changes:
+  - message: Added the ability to examine armor values with a button.
+    type: Add
+  id: 1693
+  time: '2025-05-10T03:25:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6361
+- author: Arcticular1
+  changes:
+  - message: Changed D50 in hand + wielded sprites.
+    type: Tweak
+  id: 1694
+  time: '2025-05-10T03:26:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6364
+- author: Dygon
+  changes:
+  - message: Fixed the duration of the slow and daze effects applied by tesla turrets
+      being too low. Super slow 4 > 6, daze 8 > 10 for most and 8 > 15 for the overclocked.
+    type: Fix
+  id: 1695
+  time: '2025-05-10T03:33:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6374
+- author: Vermidia
+  changes:
+  - message: Added medical optics, point-buyable for most squad roles and usable without
+      any skills. The corpsman helmet no longer inherently gives a medical HUD, instead
+      it comes with an integrated visor that gives you a medical HUD.
+    type: Add
+  - message: Added welding visors, point-buyable for most squad roles and usable without
+      any skills. The technician helmet no longer inherently protects your eyes from
+      welding, instead it comes with an integrated welding visor.
+    type: Add
+  - message: Added squad optic, integrated into most marine helmets, and only activatable
+      if you have nothing else to show marine icons. It shows marine icons.
+    type: Add
+  - message: Added the m10 welding helmet, combat technicians can now choose between
+      it and the technician helmet.
+    type: Add
+  - message: The M11C, M30, M10 pattern officer now have integrated visors.
+    type: Add
+  - message: Fixed M12 and XM12 not having an additional visor slot.
+    type: Fix
+  - message: Fixed the NV optic not glowing slightly when on.
+    type: Fix
+  id: 1696
+  time: '2025-05-10T03:32:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6366
+- author: Arcticular1
+  changes:
+  - message: Fixed Mateba, M59a and Winter Wyvern being able to be melted!
+    type: Fix
+  - message: Changed M59a to have the same stats as a MK1 but with added IFF.
+    type: Tweak
+  - message: Fixed the Mateba not having the correct ammo loaded.
+    type: Fix
+  - message: Fixed the Mateba not being able to use barrel attachments and mateba
+      barrels at the same time.
+    type: Fix
+  id: 1697
+  time: '2025-05-10T03:34:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6301
+- author: Magicocity1
+  changes:
+  - message: The M13 and M44 now appear in the pistol pouch when inside it
+    type: Fix
+  id: 1698
+  time: '2025-05-10T03:36:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6276
+- author: Arcticular1
+  changes:
+  - message: Added dress blues jacket, dress blues uniform, dress blue officer hat,
+      marine formal service jacket, and marine service peaked cap to the CO clothing
+      rack.
+    type: Add
+  - message: Added M54C rubber magazine to the CO weapon rack.
+    type: Add
+  - message: Replaced insulated gloves with deluxe combat gloves in the CO equipment
+      rack.
+    type: Tweak
+  id: 1699
+  time: '2025-05-10T03:39:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6363
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added functionality for CQC skill. CQC skill will now allow you to do
+      aggressive grabs faster, do extra unarmed damage, let you disarm/tackle other
+      marines better, and decrease inventory strip times.
+    type: Add
+  id: 1700
+  time: '2025-05-10T03:54:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6359
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added ear deafness, certain loud noises will prevent you from hearing
+      chat and sounds.
+    type: Add
+  id: 1701
+  time: '2025-05-10T03:58:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6279
+- author: Vermidia
+  changes:
+  - message: Fixed how stamina works. It's been overhauled, so you can no longer shake
+      someone in stamina crit, and different stamina levels will slow you down different
+      amounts.
+    type: Fix
+  - message: Fixed Neurotoxin not dazing.
+    type: Fix
+  id: 1702
+  time: '2025-05-10T04:02:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6388
+- author: Vermidia
+  changes:
+  - message: Fixed neurotoxin gas not causing blurry vision.
+    type: Fix
+  id: 1703
+  time: '2025-05-10T04:05:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6381
+- author: Vermidia
+  changes:
+  - message: Fixed morgues preventing rot
+    type: Fix
+  id: 1704
+  time: '2025-05-10T04:05:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6392
+- author: Dygon
+  changes:
+  - message: Airburst grenades now rebound at the angle of incidence instead of always
+      rebounding at 180 degrees.
+    type: Tweak
+  - message: Airburst grenade projectiles now receive the overpenetration penalty
+      only when a target is directly impacted by the grenade. For example, with the
+      Hornet grenade, you can potentially hit all 15 projectiles if you aim directly
+      in front of a target, instead of the previous limit of 5.
+    type: Fix
+  id: 1705
+  time: '2025-05-10T04:24:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6368
+- author: Vermidia
+  changes:
+  - message: Fixed health analyzers not showing clone damage when it's present
+    type: Fix
+  - message: Added medical advice to the health analyzer
+    type: Add
+  id: 1706
+  time: '2025-05-10T04:28:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6378
+- author: Vermidia
+  changes:
+  - message: Changed holocard sprites to be more distinct
+    type: Tweak
+  id: 1707
+  time: '2025-05-10T04:29:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6367
+- author: DummeHytteOst
+  changes:
+  - message: Changed the option name "Xeno wide swing" to "Xenonid thrust attack".
+    type: Tweak
+  id: 1708
+  time: '2025-05-10T04:33:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6365
+- author: SharkSnake98
+  changes:
+  - message: Added 4 new vests for the Corporate Liaison.
+    type: Add
+  id: 1709
+  time: '2025-05-10T04:44:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6230
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The M4SPR custom scout rifle now has a quick 2-shot burst.
+    type: Tweak
+  id: 1710
+  time: '2025-05-10T04:46:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6372
+- author: J C Denton
+  changes:
+  - message: Admin Fax Outpost now has newly added SPP, TSE, CLF and Press stamps.
+    type: Tweak
+  id: 1711
+  time: '2025-05-12T00:23:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6404
+- author: CyberTropic
+  changes:
+  - message: Added edges to snow and ice tiles.
+    type: Add
+  id: 1712
+  time: '2025-05-12T00:23:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6403
+- author: Vermidia
+  changes:
+  - message: Fixed ghost marine HUD toggle action not hiding marine health bars.
+    type: Fix
+  id: 1713
+  time: '2025-05-12T00:35:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6396
 Name: RMC14
 Order: -1

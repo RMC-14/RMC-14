@@ -26,9 +26,9 @@ public sealed class RMCSlowSystem : EntitySystem
         SubscribeLocalEvent<RMCSuperSlowdownComponent, ComponentStartup>(OnAdded);
         SubscribeLocalEvent<RMCRootedComponent, ComponentStartup>(OnAdded);
 
-        SubscribeLocalEvent<RMCSlowdownComponent, ComponentRemove>(OnExpire);
-        SubscribeLocalEvent<RMCSuperSlowdownComponent, ComponentRemove>(OnExpire);
-        SubscribeLocalEvent<RMCRootedComponent, ComponentRemove>(OnExpire);
+        SubscribeLocalEvent<RMCSlowdownComponent, ComponentShutdown>(OnExpire);
+        SubscribeLocalEvent<RMCSuperSlowdownComponent, ComponentShutdown>(OnExpire);
+        SubscribeLocalEvent<RMCRootedComponent, ComponentShutdown>(OnExpire);
 
         SubscribeLocalEvent<RMCSlowdownComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<RMCSuperSlowdownComponent, RejuvenateEvent>(OnRejuvenate);
@@ -107,7 +107,7 @@ public sealed class RMCSlowSystem : EntitySystem
             EnsureComp<XenoImmobileVisualsComponent>(ent);
     }
 
-    private void OnExpire<T>(Entity<T> ent, ref ComponentRemove args) where T : IComponent
+    private void OnExpire<T>(Entity<T> ent, ref ComponentShutdown args) where T : IComponent
     {
         if (!TerminatingOrDeleted(ent))
             _speed.RefreshMovementSpeedModifiers(ent);

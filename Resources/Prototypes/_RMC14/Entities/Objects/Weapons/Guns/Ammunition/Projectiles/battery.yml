@@ -17,7 +17,7 @@
       path: /Audio/_RMC14/Bullets/energy_miss1.ogg
       params:
         volume: 5
-  - type: StaminaDamageOnCollide
+  - type: RMCStaminaDamageOnCollide
     damage: 60
   - type: Projectile
     damage:

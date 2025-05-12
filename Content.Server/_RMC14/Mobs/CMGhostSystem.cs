@@ -35,6 +35,8 @@ namespace Content.Server._RMC14.Mobs
             _actions.AddAction(uid, ref comp.FindParasiteEntity, comp.FindParasite);
 
             EnsureComp<ShowMarineIconsComponent>(uid);
+            var bars = EnsureComp<ShowHealthBarsComponent>(uid);
+            bars.DamageContainers.Add("Biological");
             EnsureComp<ShowHealthIconsComponent>(uid);
             EnsureComp<CMGhostXenoHudComponent>(uid);
         }
@@ -47,12 +49,18 @@ namespace Content.Server._RMC14.Mobs
             {
                 RemComp<ShowMarineIconsComponent>(uid);
                 RemCompDeferred<ShowHealthIconsComponent>(uid);
+                RemCompDeferred<ShowHealthBarsComponent>(uid);
                 _actions.SetToggled(comp.ToggleMarineHudEntity, true);
             }
             else
             {
                 EnsureComp<ShowHealthIconsComponent>(uid);
+
                 _marine.GiveMarineHud(uid, null, true);
+
+                var bars = EnsureComp<ShowHealthBarsComponent>(uid);
+                bars.DamageContainers.Add("Biological");
+
                 _actions.SetToggled(comp.ToggleMarineHudEntity, false);
             }
         }
