@@ -490,6 +490,9 @@ public sealed class XenoChargeSystem : EntitySystem
         if (!_xenoToggleChargingQuery.TryComp(ent, out var charging))
             return;
 
+        if (_rmcPulling.IsBeingPulled(ent.Owner, out _))
+            return;
+
         if (!args.OldPosition.TryDistance(EntityManager, _transform, args.NewPosition, out var distance))
             return;
 
