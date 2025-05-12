@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Fixed Underbarrel Grenade Launcher grenades not beeping and showing primed
-      status when fired.
-    type: Fix
-  id: 1210
-  time: '2025-01-13T04:15:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5376
 - author: Vermidia
   changes:
   - message: Fixed being able to attach a weapon/insert ammo on a dropship weapon
@@ -5394,5 +5386,12 @@
   id: 1712
   time: '2025-05-12T00:23:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6403
+- author: Vermidia
+  changes:
+  - message: Fixed ghost marine HUD toggle action not hiding marine health bars.
+    type: Fix
+  id: 1713
+  time: '2025-05-12T00:35:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6396
 Name: RMC14
 Order: -1
