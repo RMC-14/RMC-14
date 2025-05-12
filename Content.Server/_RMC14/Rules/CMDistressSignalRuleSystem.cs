@@ -481,7 +481,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                     _xeno.MakeXeno(newXeno);
 
-                    _adminLog.Add(LogType.RMCXenoSpawn, $"{ToPrettyString(newXeno)} spawned as a xeno from their corpse {ToPrettyString(corpseMob)}");
+                    _adminLog.Add(LogType.RMCXenoSpawn, $"Player {player} with mob {ToPrettyString(newXeno):xeno} spawned as a xeno from their corpse {ToPrettyString(corpseMob):corpse}");
                     return newXeno;
                 }
 
