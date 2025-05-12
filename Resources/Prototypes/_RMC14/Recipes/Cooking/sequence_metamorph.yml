@@ -3,14 +3,14 @@
 # 2) max SequenceLength must be 1 element greater than the minimum ingredient set requires. This will allow you to put 1 poison fly or 1 other ingredient in different recipes and the recipes will still be valid.
 
 - type: metamorphRecipe
-  id: FoodBurgerCheese
+  id: FoodBurgerPlain
   key: Burger
-  result: FoodBurgerCheese
+  result: FoodBurgerPlain
   rules:
   - !type:SequenceLength
     range:
-      min: 3
-      max: 4
+      min: 2
+      max: 3
   - !type:IngredientsWithTags # 1 meat cutlet
     tags:
     - Cooked
@@ -19,7 +19,93 @@
     count:
       min: 1
       max: 2
-  - !type:IngredientsWithTags # 1 cheese
+  - !type:LastElementHasTags # last bun
+    tags:
+    - Bun
+
+- type: metamorphRecipe
+  id: FoodBurgerBacon
+  key: Burger
+  result: FoodBurgerBacon
+  rules:
+  - !type:SequenceLength
+    range:
+      min: 4
+      max: 5
+  - !type:IngredientsWithTags # 1 bacon
+    tags:
+    - Cooked
+    - Bacon
+    - Meat
+    count:
+      min: 1
+      max: 2
+  - !type:IngredientsWithTags # 2 cheese slices
+    tags:
+    - Cheese
+    count:
+      min: 2
+      max: 3
+  - !type:LastElementHasTags # last bun
+    tags:
+    - Bun
+
+- type: metamorphRecipe
+  id: FoodBurgerMcguffin
+  key: Burger
+  result: FoodBurgerMcguffin
+  rules:
+  - !type:SequenceLength
+    range:
+      min: 2
+      max: 3
+  - !type:IngredientsWithTags # 1 cheese slice
+    tags:
+    - Cheese
+    count:
+      min: 1
+      max: 2
+  - !type:FoodHasReagent # 6 +- 3 Cooked Egg
+    reagent: EggCooked
+    count:
+      min: 3
+      max: 9
+  - !type:LastElementHasTags # last bun
+    tags:
+    - Bun
+
+- type: metamorphRecipe
+  id: FoodBurgerBig
+  key: Burger
+  result: FoodBurgerBig
+  rules:
+  - !type:SequenceLength
+    range:
+      min: 7
+      max: 8
+  - !type:IngredientsWithTags # 2 meat cutlets
+    tags:
+    - Cooked
+    - Cutlet
+    - Meat
+    count:
+      min: 2
+      max: 3
+  - !type:IngredientsWithTags # 1 tomato
+    tags:
+    - Vegetable
+    - Fruit
+    count:
+      min: 1
+      max: 2
+  - !type:IngredientsWithTags # 2 onion slices
+    tags:
+    - Vegetable
+    - Slice
+    count:
+      min: 2
+      max: 3
+  - !type:IngredientsWithTags # 1 cheese slice
     tags:
     - Cheese
     count:
@@ -30,96 +116,29 @@
     - Bun
 
 - type: metamorphRecipe
-  id: FoodBurgerChicken
+  id: FoodBurgerFive
   key: Burger
-  result: FoodBurgerChicken
+  result: FoodBurgerFive
   rules:
   - !type:SequenceLength
     range:
-      min: 2
-      max: 3
-  - !type:IngredientsWithTags # 1 chicken meat
+      min: 5
+      max: 6
+  - !type:IngredientsWithTags # 1 Meat Cutlet
     tags:
     - Cooked
     - Cutlet
     - Meat
-    - Chicken
     count:
       min: 1
       max: 2
-  - !type:FoodHasReagent # 5 +- 2 mayo
-    reagent: Mayo
-    count:
-      min: 3
-      max: 7
-  - !type:LastElementHasTags # last bun
+  - !type:IngredientsWithTags # 3 Chili Peppers
     tags:
-    - Bun
-
-- type: metamorphRecipe
-  id: FoodBurgerCrab
-  key: Burger
-  result: FoodBurgerCrab
-  rules:
-  - !type:SequenceLength
-    range:
+    - Vegetable
+    - Chili
+    count:
       min: 3
       max: 4
-  - !type:IngredientsWithTags # 2 crab meat
-    tags:
-    - Cooked
-    - Meat
-    - Crab
-    count:
-      min: 2
-      max: 3
-  - !type:LastElementHasTags # last bun
-    tags:
-    - Bun
-
-- type: metamorphRecipe
-  id: FoodBurgerDuck
-  key: Burger
-  result: FoodBurgerDuck
-  rules:
-  - !type:SequenceLength
-    range:
-      min: 3
-      max: 4
-  - !type:IngredientsWithTags # 1 duck meat
-    tags:
-    - Cooked
-    - Cutlet
-    - Meat
-    - Duck
-    count:
-      min: 1
-      max: 2
-  - !type:IngredientsWithTags # 1 cheese
-    tags:
-    - Cheese
-    count:
-      min: 1
-      max: 2
-  - !type:LastElementHasTags # last bun
-    tags:
-    - Bun
-
-- type: metamorphRecipe
-  id: FoodBurgerBrain
-  key: Burger
-  result: FoodBurgerBrain
-  rules:
-  - !type:SequenceLength
-    range:
-      min: 2
-      max: 3
-  - !type:IngredientsWithTags # 1 brain
-    tags:
-    - Brain
-    count:
-      min: 1
-      max: 2
   - !type:LastElementHasTags # last bun
     tags:
     - Bun

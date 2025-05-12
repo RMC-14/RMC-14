@@ -1,0 +1,84 @@
+
+#Donuts
+
+- type: microwaveMealRecipe
+  id: RecipeDonut
+  name: donut recipe
+  result: RMCFoodDonut
+  time: 10
+  group: Breads
+  solids:
+    FoodDoughRope: 1 # created by rolling a dough slice.
+  reagents:
+    Sugar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutFrosted
+  name: frosted donut recipe
+  result: RMCFoodDonutFrosted
+  time: 10
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    Sugar: 5
+    JuiceBerry: 5
+
+#Eggs
+
+- type: microwaveMealRecipe
+  id: RecipeOmelette
+  name: omelette recipe
+  result: FoodMealOmelette
+  time: 10
+  group: Eggs
+  solids:
+    FoodEgg: 1
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFriedEgg
+  name: fried egg recipe
+  result: FoodMealFriedegg
+  time: 10
+  group: Eggs
+  solids:
+    FoodEgg: 1
+  reagents:
+    TableSalt: 1
+    Blackpepper: 1
+
+#Misc
+
+- type: microwaveMealRecipe
+  id: RecipeCannoli
+  name: cannoli recipe
+  result: FoodBakedCannoli
+  time: 10
+  group: Dessert
+  solids:
+    FoodDoughFlat: 1
+    FoodSnackChocolateBar: 1
+  reagents:
+    Cream: 5
+
+- type: microwaveMealRecipe
+  id: RecipeHoneyBun
+  name: honey bun recipe
+  result: FoodBakedBunHoney
+  time: 10
+  group: Dessert
+  solids:
+    FoodDoughSlice: 1
+  reagents:
+    Sugar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeCornedBeef
+  name: corned beef and cabbage recipe
+  result: FoodMealCornedbeef
+  time: 15
+  group: Savory
+  solids:
+    FoodMeat: 1
+    FoodCabbage: 1
