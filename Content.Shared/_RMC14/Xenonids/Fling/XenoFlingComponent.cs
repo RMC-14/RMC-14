@@ -17,10 +17,25 @@ public sealed partial class XenoFlingComponent : Component
     public float Range = 3.5f; // 4 tiles from start
 
     [DataField, AutoNetworkedField]
+    public float EnragedRange = 0f;
+
+    [DataField, AutoNetworkedField]
+    public float ThrowSpeed = 10f;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectPunch";
+
+    [DataField, AutoNetworkedField]
+    public int HealAmount = 0;
+
+    [DataField, AutoNetworkedField]
+    public int EnragedHealAmount = 0;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan HealDelay = TimeSpan.FromSeconds(0.05);
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg");
