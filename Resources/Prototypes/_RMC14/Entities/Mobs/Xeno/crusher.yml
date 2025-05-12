@@ -175,8 +175,6 @@
   - type: CombatMode
     toggleMouseRotator: false
   - type: XenoTumble
-    paralyzeTime: 0
-    slowTime: 8
     damage:
       types:
         Blunt: 15
@@ -191,6 +189,3 @@
       types:
         Blunt: 75
   - type: XenoToggleCharging
-    damage:
-      types:
-        Blunt: 6
