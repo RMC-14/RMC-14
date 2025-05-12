@@ -1,10 +1,11 @@
-using Content.Shared._RMC14.Areas;
+﻿using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
@@ -51,6 +52,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
+    private readonly HashSet<EntityUid> _intersecting = new();
 
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
@@ -84,6 +86,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
 
         SubscribeLocalEvent<AffectableByWeedsComponent, RefreshMovementSpeedModifiersEvent>(WeedsRefreshPassiveSpeed);
+        SubscribeLocalEvent<AffectableByWeedsComponent, XenoOvipositorChangedEvent>(WeedsOvipositorChanged);
 
         SubscribeLocalEvent<XenoWeedsSpreadingComponent, MapInitEvent>(OnSpreadingMapInit);
 
@@ -288,11 +291,16 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public bool HasWeedsNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
+    private void WeedsOvipositorChanged(Entity<AffectableByWeedsComponent> ent, ref XenoOvipositorChangedEvent args)
     {
-        var range = 5;
+        if (_affectedQuery.TryComp(ent, out var affected) && !affected.OnXenoSlowResin)
+            _toUpdate.Add(ent);
+    }
+
+    public bool HasWeedsNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
+    {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
-        var checkArea = new Box2(position.X - range, position.Y - range, position.X + range, position.Y + range);
+        var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
         var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
 
         foreach (var anchored in enumerable)
@@ -300,6 +308,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             if (TryComp<XenoWeedsComponent>(anchored, out var weeds) && weeds.IsSource)
                 return true;
         }
+
         return false;
     }
 
@@ -319,10 +328,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
-        return (GetWeedsOnFloor(grid, coordinates, sourceOnly) is EntityUid);
+        return GetWeedsOnFloor(grid, coordinates, sourceOnly) != null;
     }
 
-    public EntityUid? GetWeedsOnFloor(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
+    public Entity<XenoWeedsComponent>? GetWeedsOnFloor(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
@@ -333,7 +342,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 continue;
 
             if (!sourceOnly || weeds.IsSource)
-                return anchored;
+                return (anchored.Value, weeds);
         }
 
         return null;
@@ -404,7 +413,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var weededEntity = _entities.GetEntity(args.CoveredEntity);
 
         if (!TryComp(ent, out XenoWeedsComponent? weedComp) ||
-            Prototype(weededEntity) is not EntityPrototype weededEntityProto ||
+            Prototype(weededEntity) is not { } weededEntityProto ||
             !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId) ||
             TerminatingOrDeleted(weedSource))
         {
@@ -432,7 +441,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         RemComp<XenoWeedsSpreadingComponent>(newWeedSource);
         QueueDel(ent);
     }
-    public bool CanPlaceWeedsPopup(Entity<MapGridComponent> grid, Vector2i tile, EntityUid? user, bool semiWeedable = false, bool source = false)
+
+    public bool CanSpreadWeedsPopup(Entity<MapGridComponent> grid, Vector2i tile, EntityUid? user, bool semiWeedable = false, bool source = false)
     {
         void GenericPopup()
         {
@@ -523,5 +533,40 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 _damageable.TryChangeDamage(uid, damage.Damage, damageable: damageable);
             }
         }
+    }
+
+    public bool CanPlaceWeedsPopup(EntityUid xeno,
+        Entity<MapGridComponent> grid,
+        EntityCoordinates coordinates,
+        bool limitDistance)
+    {
+        if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, out var oldWeeds))
+        {
+            if (oldWeeds.Comp.IsSource)
+            {
+                _popup.PopupClient("There's a pod here already!", oldWeeds, xeno, PopupType.SmallCaution);
+                return false;
+            }
+
+            if (oldWeeds.Comp.BlockOtherWeeds)
+            {
+                _popup.PopupClient("These weeds are too strong to plant a node on!",
+                    oldWeeds,
+                    xeno,
+                    PopupType.SmallCaution);
+                return false;
+            }
+        }
+
+        if (limitDistance && !HasWeedsNearby(grid, coordinates))
+        {
+            _popup.PopupClient("We can only plant weed nodes near other weed nodes our hive owns!",
+                xeno,
+                xeno,
+                PopupType.SmallCaution);
+            return false;
+        }
+
+        return true;
     }
 }

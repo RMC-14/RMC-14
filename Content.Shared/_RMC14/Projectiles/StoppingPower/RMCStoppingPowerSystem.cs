@@ -1,10 +1,11 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Aimed;
+using Content.Shared._RMC14.Stamina;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Ranged.AimedShot;
+using Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared.Camera;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -17,7 +18,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private readonly RMCStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _cameraRecoil = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -26,6 +27,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
     {
         SubscribeLocalEvent<RMCStoppingPowerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCStoppingPowerComponent, ProjectileHitEvent>(OnStoppingPowerHit);
+        SubscribeLocalEvent<RMCStoppingPowerComponent, ShotByAimedShotEvent>(OnShotByAimedShot);
     }
 
     private void OnMapInit(Entity<RMCStoppingPowerComponent> ent, ref MapInitEvent args)
@@ -34,14 +36,31 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnShotByAimedShot(Entity<RMCStoppingPowerComponent> ent, ref ShotByAimedShotEvent args)
+    {
+        if (!TryComp<RMCFocusedShootingComponent>(args.Gun, out var focused))
+            return;
+
+        ent.Comp.FocusedCounter = focused.FocusCounter;
+    }
+
     /// <summary>
     ///     Apply a stun and/or knockback based on the damage of the shot and what kind of target is hit.
     /// </summary>
     private void OnStoppingPowerHit(Entity<RMCStoppingPowerComponent> ent, ref ProjectileHitEvent args)
     {
+        ent.Comp.CurrentStoppingPower = 0;
+        Dirty(ent);
+
+        if (ent.Comp.RequiresAimedShot && !TryComp<AimedProjectileComponent>(ent, out var aimedShot))
+            return;
+
+        if (ent.Comp.FocusedCounterThreshold != null && ent.Comp.FocusedCounter < ent.Comp.FocusedCounterThreshold)
+            return;
+
         var stoppingPower = (float)Math.Min(Math.Ceiling(args.Damage.GetTotal().Float() / ent.Comp.StoppingPowerDivider), ent.Comp.MaxStoppingPower);
 
-        if (!(stoppingPower >= ent.Comp.StoppingThreshold))
+        if (!(stoppingPower > ent.Comp.StoppingThreshold))
             return;
 
         var target = args.Target;
@@ -109,9 +128,9 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
             else
             {
                 // Apply the full projectile damage as stamina damage if possible.
-                if (HasComp<StaminaComponent>(target))
+                if (HasComp<RMCStaminaComponent>(target))
                 {
-                    _stamina.TakeStaminaDamage(target, args.Damage.GetTotal().Float());
+                    _stamina.DoStaminaDamage(target, args.Damage.GetTotal().Float());
                 }
                 // Knock the target down if the target has no stamina component.
                 else

@@ -18,6 +18,14 @@
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/standard/urban.rsi
 
 - type: entity
+  parent: JumpsuitMarine
+  id: JumpsuitMarineRoyal # TODO RMC14 sprite
+  suffix: Filled, Royal
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingPouchRoyal
+
+- type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitMarineFormal
   name: formal marine uniform
@@ -345,7 +353,7 @@
 
 # Colonist
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitColonist
   name: colonist uniform
   description: A stylish gray-green jumpsuit - standard issue for colonists.
@@ -378,3 +386,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/general.rsi
+
+# Synthetic
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitSynthetic
+  name: UNMC Support Uniform
+  description: A simple uniform made for Synthetic crewmembers
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/synthetic.rsi

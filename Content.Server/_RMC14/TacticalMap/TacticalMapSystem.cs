@@ -53,6 +53,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private EntityQuery<TacticalMapComponent> _tacticalMapQuery;
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoMapTrackedComponent> _xenoMapTrackedQuery;
+    private EntityQuery<XenoStructureMapTrackedComponent> _xenoStructureMapTrackedQuery;
 
     private readonly HashSet<Entity<TacticalMapTrackedComponent>> _toInit = new();
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
@@ -75,6 +76,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _tacticalMapQuery = GetEntityQuery<TacticalMapComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoMapTrackedQuery = GetEntityQuery<XenoMapTrackedComponent>();
+        _xenoStructureMapTrackedQuery = GetEntityQuery<XenoStructureMapTrackedComponent>();
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
 
@@ -88,6 +90,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<TacticalMapTrackedComponent, MapInitEvent>(OnTrackedMapInit);
         SubscribeLocalEvent<TacticalMapTrackedComponent, MobStateChangedEvent>(OnTrackedMobStateChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, RoleAddedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, MindAddedMessage>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, EntParentChangedMessage>(OnTrackedChanged);
 
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, ComponentRemove>(OnActiveRemove);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, EntityTerminatingEvent>(OnActiveRemove);
@@ -219,6 +225,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         UpdateActiveTracking(ent, args.NewMobState);
+    }
+
+    private void OnTrackedChanged<T>(Entity<TacticalMapTrackedComponent> ent, ref T args)
+    {
+        if (_timing.ApplyingState || TerminatingOrDeleted(ent))
+            return;
+
+        UpdateActiveTracking(ent);
     }
 
     private void OnActiveRemove<T>(Entity<ActiveTacticalMapTrackedComponent> ent, ref T args)
@@ -384,6 +398,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
+        if (LifeStage(tracked) < EntityLifeStage.MapInitialized)
+            return;
+
         if (EnsureComp<ActiveTacticalMapTrackedComponent>(tracked, out var active))
             return;
 
@@ -406,6 +423,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         tacticalMap.MarineBlips.Remove(tracked.Owner.Id);
         tacticalMap.XenoBlips.Remove(tracked.Owner.Id);
+        tacticalMap.XenoStructureBlips.Remove(tracked.Owner.Id);
         tacticalMap.MapDirty = true;
         tracked.Comp.Map = null;
     }
@@ -522,6 +540,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             tacticalMap.XenoBlips[ent.Owner.Id] = blip;
             tacticalMap.MapDirty = true;
         }
+
+        if (_xenoStructureMapTrackedQuery.HasComp(ent))
+        {
+            tacticalMap.XenoStructureBlips[ent.Owner.Id] = blip;
+            tacticalMap.MapDirty = true;
+        }
     }
 
     private void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
@@ -530,6 +554,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (user.Comp.Xenos)
         {
             user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
+            user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips;
             lines.XenoLines = map.XenoLines;
             lines.MarineLines = _emptyLines;
         }
@@ -575,6 +600,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 map.XenoLines = lines;
                 map.LastUpdateXenoBlips = map.XenoBlips.ToDictionary();
+                map.LastUpdateXenoStructureBlips = map.XenoStructureBlips.ToDictionary();
                 _xenoAnnounce.AnnounceSameHive(user, "The Xenonid tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the xenonid tactical map for {ToPrettyString(mapId)}");
             }
@@ -596,6 +622,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             foreach (var init in _toInit)
             {
+                if (!init.Comp.Running)
+                    continue;
+
                 var wasActive = HasComp<ActiveTacticalMapTrackedComponent>(init);
                 UpdateActiveTracking(init);
 

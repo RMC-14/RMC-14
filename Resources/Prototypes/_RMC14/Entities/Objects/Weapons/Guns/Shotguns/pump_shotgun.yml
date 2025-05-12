@@ -69,7 +69,7 @@
     offsets:
       rmc-aslot-barrel: 0.81, 0.06
       rmc-aslot-rail: -0.025, 0.125
-      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-stock: -0.40625, 0.03125
       rmc-aslot-underbarrel: 0.25, -0.31
   - type: ItemCamouflage
     camouflageVariations:

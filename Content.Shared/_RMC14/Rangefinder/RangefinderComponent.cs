@@ -42,7 +42,7 @@ public sealed partial class RangefinderComponent : Component
     public TimeSpan SwitchModeDelay = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
-    public DoAfter.DoAfter? DoAfter;
+    public Shared.DoAfter.DoAfter? DoAfter;
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(10);

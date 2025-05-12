@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Input;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
@@ -14,10 +15,12 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Strip.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
@@ -40,6 +43,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     private readonly SlotFlags[] _order =
     [
@@ -81,6 +85,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMItemSlotsComponent, ItemSlotEjectAttemptEvent>(OnSlotsEjectAttempt);
         SubscribeLocalEvent<CMItemSlotsComponent, EntInsertedIntoContainerMessage>(OnSlotsEntInsertedIntoContainer);
         SubscribeLocalEvent<CMItemSlotsComponent, EntRemovedFromContainerMessage>(OnSlotsEntRemovedFromContainer);
+        SubscribeLocalEvent<CMItemSlotsComponent, InteractUsingEvent>(OnInteractUsing);
 
         SubscribeLocalEvent<CMHolsterComponent, GetVerbsEvent<AlternativeVerb>>(OnHolsterGetAltVerbs);
         SubscribeLocalEvent<CMHolsterComponent, AfterAutoHandleStateEvent>(OnHolsterComponentHandleState);
@@ -89,6 +94,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         SubscribeLocalEvent<RMCItemPickupComponent, DroppedEvent>(OnItemDropped);
         SubscribeLocalEvent<RMCItemPickupComponent, RMCDroppedEvent>(OnItemDropped);
+
+        SubscribeLocalEvent<RMCStripTimeSkillComponent, BeforeStripEvent>(OnSkilledBeforeStrip);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
@@ -222,6 +229,57 @@ public abstract class SharedCMInventorySystem : EntitySystem
         }
     }
 
+    /// <summary>
+    ///     Try to transfer contents from ItemSlots of one entity to the ItemSlots of another.
+    /// </summary>
+    private void OnInteractUsing(Entity<CMItemSlotsComponent> ent, ref InteractUsingEvent args)
+    {
+        if(!TryComp(args.Used, out ItemSlotsComponent? usedStorage) ||
+           !TryComp(ent, out ItemSlotsComponent? storage) ||
+           args.Handled)
+            return;
+
+        SoundSpecifier? insertSound = null;
+
+        foreach (var usedStorageItemSlot in usedStorage.Slots)
+        {
+            if(!_container.TryGetContainer(args.Used, usedStorageItemSlot.Key, out var usedContainer))
+                continue;
+
+            foreach (var itemSlot in storage.Slots)
+            {
+                if(!_container.TryGetContainer(ent, itemSlot.Key, out var container))
+                    continue;
+
+                if(_itemSlots.CanInsert(ent.Owner, args.Used, args.User, itemSlot.Value))
+                {
+                    // If the container fits, break the loop and insert the container.
+                    if (_container.Insert(args.Used, container))
+                    {
+                        insertSound = itemSlot.Value.InsertSound;
+                        args.Handled = true;
+                        break;
+                    }
+                }
+
+                // If the container does not fit, check if the entities in the container do.
+                foreach (var entity in usedContainer.ContainedEntities)
+                {
+                    if (!_itemSlots.CanInsert(ent.Owner, entity, args.User, itemSlot.Value))
+                        continue;
+
+                    if (!_container.Insert(entity, container))
+                        continue;
+
+                    insertSound = itemSlot.Value.InsertSound;
+                    args.Handled = true;
+                }
+            }
+        }
+
+        _audio.PlayPredicted(insertSound, ent, args.User);
+    }
+
     protected void OnSlotsEntInsertedIntoContainer(Entity<CMItemSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         ContentsUpdated(ent);
@@ -305,6 +363,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 }
             }
         }
+    }
+
+    protected void OnSkilledBeforeStrip(Entity<RMCStripTimeSkillComponent> ent, ref BeforeStripEvent args)
+    {
+        args.Multiplier = _skills.GetSkillDelayMultiplier(ent.Owner, ent.Comp.Skill);
     }
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)

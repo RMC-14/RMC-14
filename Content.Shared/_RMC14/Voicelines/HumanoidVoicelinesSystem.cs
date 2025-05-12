@@ -19,17 +19,44 @@ public sealed class HumanoidVoicelinesSystem : EntitySystem
     private static readonly ProtoId<SpeciesPrototype> MothSpecies = "Moth";
     private static readonly ProtoId<SpeciesPrototype> ReptilianSpecies = "Reptilian";
     private static readonly ProtoId<SpeciesPrototype> SlimeSpecies = "SlimePerson";
+    private static readonly ProtoId<SpeciesPrototype> AvaliSpecies = "Avali";
+    private static readonly ProtoId<SpeciesPrototype> VulpkaninSpecies = "Vulpkanin";
+    private static readonly ProtoId<SpeciesPrototype> RodentiaSpecies = "Rodentia";
+    private static readonly ProtoId<SpeciesPrototype> FeroxiSpecies = "Feroxi";
+    private static readonly ProtoId<SpeciesPrototype> SkrellSpecies = "Skrell";
 
-    private readonly Dictionary<ProtoId<SpeciesPrototype>, CVarDef> _cVars = new()
+    private readonly Dictionary<ProtoId<SpeciesPrototype>, CVarDef> _voicelineCVars = new()
     {
-        [ArachnidSpecies] = RMCCVars.CMPlayVoicelinesArachnid,
-        [DionaSpecies] = RMCCVars.CMPlayVoicelinesDiona,
-        [DwarfSpecies] = RMCCVars.CMPlayVoicelinesDwarf,
-        [FelinidSpecies] = RMCCVars.CMPlayVoicelinesFelinid,
-        [HumanSpecies] = RMCCVars.CMPlayVoicelinesHuman,
-        [MothSpecies] = RMCCVars.CMPlayVoicelinesMoth,
-        [ReptilianSpecies] = RMCCVars.CMPlayVoicelinesReptilian,
-        [SlimeSpecies] = RMCCVars.CMPlayVoicelinesSlime,
+        [ArachnidSpecies] = RMCCVars.RMCPlayVoicelinesArachnid,
+        [DionaSpecies] = RMCCVars.RMCPlayVoicelinesDiona,
+        [DwarfSpecies] = RMCCVars.RMCPlayVoicelinesDwarf,
+        [FelinidSpecies] = RMCCVars.RMCPlayVoicelinesFelinid,
+        [HumanSpecies] = RMCCVars.RMCPlayVoicelinesHuman,
+        [MothSpecies] = RMCCVars.RMCPlayVoicelinesMoth,
+        [ReptilianSpecies] = RMCCVars.RMCPlayVoicelinesReptilian,
+        [SlimeSpecies] = RMCCVars.RMCPlayVoicelinesSlime,
+        [AvaliSpecies] = RMCCVars.RMCPlayVoicelinesAvali,
+        [VulpkaninSpecies] = RMCCVars.RMCPlayVoicelinesVulpkanin,
+        [RodentiaSpecies] = RMCCVars.RMCPlayVoicelinesRodentia,
+        [FeroxiSpecies] = RMCCVars.RMCPlayVoicelinesFeroxi,
+        [SkrellSpecies] = RMCCVars.RMCPlayVoicelinesSkrell,
+    };
+
+    private readonly Dictionary<ProtoId<SpeciesPrototype>, CVarDef> _emoteCVars = new()
+    {
+        [ArachnidSpecies] = RMCCVars.RMCPlayEmotesArachnid,
+        [DionaSpecies] = RMCCVars.RMCPlayEmotesDiona,
+        [DwarfSpecies] = RMCCVars.RMCPlayEmotesDwarf,
+        [FelinidSpecies] = RMCCVars.RMCPlayEmotesFelinid,
+        [HumanSpecies] = RMCCVars.RMCPlayEmotesHuman,
+        [MothSpecies] = RMCCVars.RMCPlayEmotesMoth,
+        [ReptilianSpecies] = RMCCVars.RMCPlayEmotesReptilian,
+        [SlimeSpecies] = RMCCVars.RMCPlayEmotesSlime,
+        [AvaliSpecies] = RMCCVars.RMCPlayEmotesAvali,
+        [VulpkaninSpecies] = RMCCVars.RMCPlayEmotesVulpkanin,
+        [RodentiaSpecies] = RMCCVars.RMCPlayEmotesRodentia,
+        [FeroxiSpecies] = RMCCVars.RMCPlayEmotesFeroxi,
+        [SkrellSpecies] = RMCCVars.RMCPlayEmotesSkrell,
     };
 
     private EntityQuery<HumanoidAppearanceComponent> _humanoidAppearanceQuery;
@@ -41,8 +68,31 @@ public sealed class HumanoidVoicelinesSystem : EntitySystem
 
     public bool ShouldPlayVoiceline(Entity<HumanoidAppearanceComponent?> vocalizer, ICommonSession forPlayer)
     {
+        if (forPlayer.AttachedEntity == vocalizer &&
+            !_config.GetClientCVar(forPlayer.Channel, RMCCVars.RMCPlayVoicelinesYourself))
+        {
+            return false;
+        }
+
         if (!_humanoidAppearanceQuery.Resolve(vocalizer, ref vocalizer.Comp, false) ||
-            !_cVars.TryGetValue(vocalizer.Comp.Species, out var play))
+            !_voicelineCVars.TryGetValue(vocalizer.Comp.Species, out var play))
+        {
+            return true;
+        }
+
+        return _config.GetClientCVar<bool>(forPlayer.Channel, play.Name);
+    }
+
+    public bool ShouldPlayEmote(Entity<HumanoidAppearanceComponent?> vocalizer, ICommonSession forPlayer)
+    {
+        if (forPlayer.AttachedEntity == vocalizer &&
+            !_config.GetClientCVar(forPlayer.Channel, RMCCVars.RMCPlayEmotesYourself))
+        {
+            return false;
+        }
+
+        if (!_humanoidAppearanceQuery.Resolve(vocalizer, ref vocalizer.Comp, false) ||
+            !_emoteCVars.TryGetValue(vocalizer.Comp.Species, out var play))
         {
             return true;
         }

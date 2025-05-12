@@ -10,7 +10,6 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -18,7 +17,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
@@ -307,24 +305,31 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var uid, out var hive))
         {
-            hive.BurrowedLarva += amount;
-            Dirty(uid, hive);
+            IncreaseBurrowedLarva((uid, hive), amount);
         }
     }
 
     public void IncreaseBurrowedLarva(Entity<HiveComponent> hive, int amount)
     {
-        hive.Comp.BurrowedLarva += amount;
-        Dirty(hive);
+        SetHiveBurrowedLarva(hive, hive.Comp.BurrowedLarva + amount);
     }
 
-    public void JoinBurrowedLarva(Entity<HiveComponent> hive, EntityUid user)
+    private void SetHiveBurrowedLarva(Entity<HiveComponent> hive, int larva)
+    {
+        hive.Comp.BurrowedLarva = larva;
+        Dirty(hive);
+
+        var ev = new BurrowedLarvaChangedEvent(larva);
+        RaiseLocalEvent(hive, ref ev, true);
+    }
+
+    public bool JoinBurrowedLarva(Entity<HiveComponent> hive, ICommonSession session)
     {
         if (_net.IsClient)
-            return;
+            return false;
 
         if (hive.Comp.BurrowedLarva <= 0)
-            return;
+            return false;
 
         EntityUid? larva = null;
 
@@ -351,26 +356,22 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             !TrySpawnAt<XenoEvolutionGranterComponent>() &&
             !TrySpawnAt<XenoComponent>())
         {
-            return;
+            return false;
         }
 
         if (larva == null)
-            return;
+            return false;
 
-        hive.Comp.BurrowedLarva--;
-        Dirty(hive);
+        IncreaseBurrowedLarva(hive, -1);
 
         _xeno.MakeXeno(larva.Value);
         SetHive(larva.Value, hive);
 
-        if (TryComp(user, out ActorComponent? actor))
-        {
-            var newMind = _mind.CreateMind(actor.PlayerSession.UserId, EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
+        var newMind = _mind.CreateMind(session.UserId, EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
+        _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
+        _adminLog.Add(LogType.RMCBurrowedLarva, $"{session.Name:player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
 
-            _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
-        }
-
-        _adminLog.Add(LogType.RMCBurrowedLarva, $"{ToPrettyString(user):player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
+        return true;
     }
 }
 

@@ -47,7 +47,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineSMGM63HEAP
+        startingItem: CMMagazineSMGM63AP
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2

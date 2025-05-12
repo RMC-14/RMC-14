@@ -101,7 +101,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SubscribeLocalEvent<TileFireOnTriggerComponent, CMExplosiveTriggeredEvent>(OnTileFireOnTriggerExplosive);
 
         SubscribeLocalEvent<DirectionalTileFireOnTriggerComponent, RMCTriggerEvent>(OnDirectionTileFireTriggered);
-        SubscribeLocalEvent<DirectionalTileFireOnTriggerComponent, RMCProjectileReboundEvent>(OnProjectileRebounded);
 
         SubscribeLocalEvent<RMCIgniteOnCollideComponent, StartCollideEvent>(OnIgniteCollide);
         SubscribeLocalEvent<RMCIgniteOnCollideComponent, DamageCollideEvent>(OnIgniteDamageCollide);
@@ -274,15 +273,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         QueueDel(ent);
     }
 
-    private void OnProjectileRebounded(Entity<DirectionalTileFireOnTriggerComponent> ent,
-        ref RMCProjectileReboundEvent args)
-    {
-        var originalDirection = ent.Comp.Direction.ToAngle().Degrees;
-        ent.Comp.Direction = Angle.FromDegrees(originalDirection + args.ReboundAngle).GetDir();
-        ent.Comp.Rebounded = true;
-        Dirty(ent);
-    }
-
     private void OnTileFireOnTriggerExplosive(Entity<TileFireOnTriggerComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
         var coords = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
@@ -330,7 +320,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         patter.LastPat = time;
         Dirty(user, patter);
 
-        Pat(ent.Owner);
+        Pat(ent.Owner, patter.Stacks);
 
         _audio.PlayPredicted(patter.Sound, user, user);
         _popup.PopupClient($"You try to put out the fire on {Name(ent)}!", ent, user, PopupType.SmallCaution);
@@ -377,7 +367,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
     }
 
-    public virtual void Pat(Entity<FlammableComponent?> flammable)
+    public virtual void Pat(Entity<FlammableComponent?> flammable, int stacks)
     {
     }
 
@@ -400,14 +390,18 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         _onCollide.SetChain((spawned, onCollide), chain);
     }
 
-    private void SpawnFires(EntProtoId spawn, EntityCoordinates coordinates, int range, EntityUid chain, int? intensity, int? duration)
+    private void SpawnFires(EntProtoId spawn, EntityCoordinates coordinates, int range, EntityUid chain, int? intensity, int? duration, HashSet<EntityCoordinates>? spawned = null)
     {
         if (_net.IsClient)
             return;
 
+        spawned ??= new HashSet<EntityCoordinates>();
         foreach (var cardinal in _rmcMap.CardinalDirections)
         {
             var target = coordinates.Offset(cardinal);
+            if (!spawned.Add(target))
+                continue;
+
             var nextRange = SpawnFire(target, spawn, chain, range, intensity, duration, out var cont);
             if (nextRange == 0 || cont)
                 continue;
@@ -417,7 +411,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 {
                     try
                     {
-                        SpawnFires(spawn, target, nextRange, chain, intensity, duration);
+                        SpawnFires(spawn, target, nextRange, chain, intensity, duration, spawned);
                     }
                     catch (Exception e)
                     {

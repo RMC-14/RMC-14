@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis. Parasites sprites recolor by VictorJob",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lesser_egg_left",
+      "directions": 4
+    },
+    {
+      "name": "lesser_egg_right",
+      "directions": 4
+    },
+    {
+      "name": "lesser_parasite_left",
+      "directions": 4
+    },
+    {
+      "name": "lesser_parasite_right",
+      "directions": 4
+    },
+    {
+      "name": "lesser_rest_0"
+    },
+    {
+      "name": "lesser_rest_1"
+    },
+    {
+      "name": "lesser_rest_2"
+    },
+    {
+      "name": "lesser_rest_3"
+    },
+    {
+      "name": "lesser_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "lesser_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "lesser_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "lesser_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "para_0",
+      "directions": 4
+    },
+    {
+      "name": "para_1",
+      "directions": 4
+    },
+    {
+      "name": "para_downed_0"
+    },
+    {
+      "name": "para_downed_1"
+    },
+    {
+      "name": "para_rest_0"
+    },
+    {
+      "name": "para_rest_1"
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "lesser_downed_0"
+    },
+    {
+      "name": "lesser_downed_1"
+    },
+    {
+      "name": "lesser_downed_2"
+    },
+    {
+      "name": "lesser_downed_3"
+    }
+  ]
+}

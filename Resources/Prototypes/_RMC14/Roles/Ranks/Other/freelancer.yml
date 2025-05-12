@@ -1,39 +1,39 @@
 - type: rank
   id: RMCRankFLFreelancer
-  name: Freelancer
+  name: Mercendary
   prefix: Merc.
 
 - type: rank
   id: RMCRankFLMedic
-  name: Freelancer Medic
+  name: Medic
   prefix: Med.
 
 - type: rank
   id: RMCRankFLLeader
-  name: Freelancer Leader
+  name: Leader
   prefix: Warlord
 
 - type: rank
   id: RMCRankFLEliteFreelancer
-  name: Elite Freelancer
+  name: Elite
   prefix: Merc.
 
 - type: rank
   id: RMCRankFLEliteHeavy
-  name: Elite Freelancer Heavy
+  name: Elite Heavy
   prefix: Hvy.
 
 - type: rank
   id: RMCRankFLEliteEngineer
-  name: Elite Freelancer Engineer
+  name: Elite Engineer
   prefix: Eng.
 
 - type: rank
   id: RMCRankFLEliteMedic
-  name: Elite Freelancer Medic
+  name: Elite Medic
   prefix: Med.
 
 - type: rank
   id: RMCRankFLEliteLeader
-  name: Elite Freelancer Leader
+  name: Elite Leader
   prefix: Warlord

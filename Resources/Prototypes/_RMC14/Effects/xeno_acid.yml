@@ -6,7 +6,7 @@
   - type: Transform
   - type: Sprite
     sprite: _RMC14/Effects/xeno_acid.rsi
-    drawdepth: Effects
+    drawdepth: WallMountedItems
     layers:
     - state: acid_normal
 
@@ -169,6 +169,7 @@
     lifetime: 3.0
 
 - type: entity
+  parent: RMCBaseEffect
   id: XenoAcidExtinguishEffect
   description: It's cold...
   categories: [ HideSpawnMenu ]
