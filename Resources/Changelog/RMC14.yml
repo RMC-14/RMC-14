@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed warden armor not having the same stats as M2 MP armor.
-    type: Fix
-  id: 1216
-  time: '2025-01-13T05:15:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5366
 - author: DrSmugleaf
   changes:
   - message: Fixed throwing giving you camera recoil and added a lunge to your character
@@ -5398,5 +5391,14 @@
   id: 1718
   time: '2025-05-12T12:14:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6331
+- author: DrSmugleaf
+  changes:
+  - message: Added a right click verb for patrons to reapply their custom weapon and
+      armor name, removing it from the previously named item and adding it to a new
+      one.
+    type: Add
+  id: 1719
+  time: '2025-05-12T12:16:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6417
 Name: RMC14
 Order: -1
