@@ -140,7 +140,6 @@ public abstract class SharedXenoHealSystem : EntitySystem
         if (TryGetEntity(args.Target, out var targetuid))
         {
             ev.Target = targetuid.Value.ToCoordinates();
-            //Logger.Debug($"Trying to heal {targetuid.Value}");
         }
 
         if (!TryComp<ActionsComponent>(xeno,out var actionscomp))
