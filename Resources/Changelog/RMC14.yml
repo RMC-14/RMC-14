@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed visuals of some xeno abilities
-    type: Fix
-  id: 1212
-  time: '2025-01-13T04:37:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5377
-- author: Vermidia
-  changes:
   - message: Fixed shields not absorbing explosion or fire damage.
     type: Fix
   id: 1213
@@ -5394,5 +5387,13 @@
   id: 1714
   time: '2025-05-12T12:03:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6369
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed crate drag slowdown mispredicting. (Rubberbanding when you pull
+      them)
+    type: Fix
+  id: 1715
+  time: '2025-05-12T12:05:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6407
 Name: RMC14
 Order: -1
