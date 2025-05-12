@@ -900,7 +900,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                     var origin = _transform.GetMoverCoordinates(xeno);
 
-                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, Shared.Popups.PopupType.MediumCaution);
+                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, Shared.Popups.PopupType.MediumXeno);
                 }
                 QueueDel(xeno);
             }
