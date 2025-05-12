@@ -3,8 +3,9 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Plasma;
 
-[RegisterComponent]
+[RegisterComponent, AutoGenerateComponentState, NetworkedComponent]
 public sealed partial class XenoRemoteTransferPlasmaComponent : Component
 {
-    public readonly FixedPoint2 PlasmaPercentage = 0.75;
+    [DataField("Percentage"), AutoNetworkedField]
+    public FixedPoint2 PlasmaPercentage = 0.75;
 }
