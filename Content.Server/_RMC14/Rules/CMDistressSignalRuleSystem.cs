@@ -7,6 +7,7 @@ using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Construction.Tunnel;
 using Content.Server._RMC14.Xenonids.Hive;
+using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Fax;
@@ -63,6 +64,7 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
@@ -74,6 +76,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.StatusEffect;
@@ -96,6 +99,7 @@ namespace Content.Server._RMC14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
@@ -476,6 +480,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _parasite.SetBurstDelay((corpseMob, victimInfected), comp.XenoSurvivorCorpseBurstDelay);
 
                     _xeno.MakeXeno(newXeno);
+
+                    _adminLog.Add(LogType.RMCXenoSpawn, $"{ToPrettyString(newXeno)} spawned as a xeno from their corpse {ToPrettyString(corpseMob)}");
                     return newXeno;
                 }
 
@@ -900,7 +906,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                     var origin = _transform.GetMoverCoordinates(xeno);
 
-                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, Shared.Popups.PopupType.MediumXeno);
+                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
                 }
                 QueueDel(xeno);
             }
