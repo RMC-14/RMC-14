@@ -25,12 +25,6 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCMO
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: doctor
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
