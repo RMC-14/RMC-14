@@ -114,12 +114,18 @@ public sealed class CMArmorSystem : EntitySystem
 
         var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
         RaiseLocalEvent(armored, ref ev);
-        var armorMessage = $"Overall: {FixedPoint2.New(ev.XenoArmor * ev.ArmorModifier)} / {armored.Comp.XenoArmor}";
-        if (ev.FrontalArmor != 0)
-            armorMessage = $"{armorMessage}\nFrontal: {ev.FrontalArmor}";
+        var armorMessage = ev.FrontalArmor == 0 &&
+                           ev.SideArmor == 0 &&
+                           armored.Comp.FrontalArmor == 0 &&
+                           armored.Comp.SideArmor == 0
+            ? $"{FixedPoint2.New(ev.XenoArmor * ev.ArmorModifier)} / {armored.Comp.XenoArmor}"
+            : $"Overall: {FixedPoint2.New(ev.XenoArmor * ev.ArmorModifier)} / {armored.Comp.XenoArmor}";
 
-        if (ev.SideArmor != 0)
-            armorMessage = $"{armorMessage}\nSide: {ev.SideArmor}";
+        if (armored.Comp.FrontalArmor != 0 || ev.FrontalArmor != 0)
+            armorMessage = $"{armorMessage}\nFrontal: {FixedPoint2.New((ev.XenoArmor + ev.FrontalArmor) * ev.ArmorModifier)} / {armored.Comp.XenoArmor + armored.Comp.FrontalArmor}";
+
+        if (armored.Comp.SideArmor != 0 || ev.SideArmor != 0)
+            armorMessage = $"{armorMessage}\nSide: {FixedPoint2.New((ev.XenoArmor + ev.SideArmor) * ev.ArmorModifier)} / {armored.Comp.XenoArmor + armored.Comp.SideArmor}";
 
         var max = _alerts.GetMaxSeverity(xeno.ArmorAlert);
 
