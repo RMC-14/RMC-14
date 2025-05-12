@@ -507,6 +507,7 @@ public abstract class SharedActionsSystem : EntitySystem
 
                 var entityCoordinatesTarget = GetCoordinates(netCoordinatesTarget);
 
+                // RMC14
                 if (worldAction.Rotate)
                     _rotateToFaceSystem.TryFaceCoordinates(user, _transformSystem.ToMapCoordinates(entityCoordinatesTarget).Position);
 
