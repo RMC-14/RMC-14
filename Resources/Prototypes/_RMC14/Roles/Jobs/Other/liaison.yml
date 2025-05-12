@@ -38,9 +38,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCUserBulkyArmorIncapable
     - type: NpcFactionMember
       factions:
       - WeYa
+      - UNMC
     - type: Skills
       skills:
         RMCSkillFirearms: 0

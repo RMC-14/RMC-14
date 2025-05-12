@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free by github noctyrnal",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free by github noctyrnal, lesser_carrier by Vermidia",
   "size": {
     "x": 7,
     "y": 7
@@ -792,6 +792,9 @@
     },
     {
       "name": "field_doctor"
+    },
+    {
+      "name": "lesser_carrier"
     },
     {
       "name": "background_free"

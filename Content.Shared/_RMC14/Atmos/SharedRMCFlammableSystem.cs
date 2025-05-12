@@ -101,7 +101,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SubscribeLocalEvent<TileFireOnTriggerComponent, CMExplosiveTriggeredEvent>(OnTileFireOnTriggerExplosive);
 
         SubscribeLocalEvent<DirectionalTileFireOnTriggerComponent, RMCTriggerEvent>(OnDirectionTileFireTriggered);
-        SubscribeLocalEvent<DirectionalTileFireOnTriggerComponent, RMCProjectileReboundEvent>(OnProjectileRebounded);
 
         SubscribeLocalEvent<RMCIgniteOnCollideComponent, StartCollideEvent>(OnIgniteCollide);
         SubscribeLocalEvent<RMCIgniteOnCollideComponent, DamageCollideEvent>(OnIgniteDamageCollide);
@@ -272,15 +271,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         SpawnFireCone(ent, tile, ent.Comp.Intensity, ent.Comp.Duration);
         QueueDel(ent);
-    }
-
-    private void OnProjectileRebounded(Entity<DirectionalTileFireOnTriggerComponent> ent,
-        ref RMCProjectileReboundEvent args)
-    {
-        var originalDirection = ent.Comp.Direction.ToAngle().Degrees;
-        ent.Comp.Direction = Angle.FromDegrees(originalDirection + args.ReboundAngle).GetDir();
-        ent.Comp.Rebounded = true;
-        Dirty(ent);
     }
 
     private void OnTileFireOnTriggerExplosive(Entity<TileFireOnTriggerComponent> ent, ref CMExplosiveTriggeredEvent args)
