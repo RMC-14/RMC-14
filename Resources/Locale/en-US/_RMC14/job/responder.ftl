@@ -18,7 +18,7 @@ rmc-job-name-unmc-responder = UNMC Communications Officer
 rmc-job-description-unmc-responder = "You are acting on behalf of UNMC Regional Command to respond to faxes sent to UNMC High Command."
 
 #We-Ya fax responder
-rmc-job-name-weya-responder = We-Ya Communications Exec.
+rmc-job-name-weya-responder = We-Ya Communications Executive
 rmc-job-description-weya-responder = "You are acting on behalf of the Regional We-Ya special services department to respond to faxes."
 
 #Provost fax responder
