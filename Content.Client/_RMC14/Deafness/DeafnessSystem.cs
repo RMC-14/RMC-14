@@ -74,7 +74,7 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
                 var fadeOut = 1f - timeDone / fadeOutDuration;
                 volume = fadeOut * _originalVolume;
 
-                if (volume <= 0.1f) // this is so audio doesn't clip out if a status
+                if (volume <= 0.1f) // this is so audio doesn't clip out if a status effect refreshes
                 {
                     volume = 0f;
                     comp.DidFadeOut = true;
