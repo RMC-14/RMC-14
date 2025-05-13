@@ -1,7 +1,7 @@
 ﻿#Put it in here because the other 2 yml files didnt sound right for this
 
 - type: reaction
-  id: CMCherryJelly
+  id: RMCCherryJelly
   minTemp: 342
   reactants:
     JuiceCherry:
@@ -9,4 +9,4 @@
     Sugar:
       amount: 1
   products:
-    CMCherryJelly: 2
+    RMCCherryJelly: 2
