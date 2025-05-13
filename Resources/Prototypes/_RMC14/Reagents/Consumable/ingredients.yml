@@ -3,8 +3,8 @@
 - type: reagent
   parent: CMSodaBase
   id: CMCherryJelly
-  name: Cherry Jelly
-  desc: Pairs well with peanut butter and bread.
+  name: reagent-name-cm-cherry-jelly
+  desc: reagent-desc-cm-cherry-jelly
   physicalDesc: reagent-physical-desc-sweet
   flavor: cherry
   color: "#801E28"
