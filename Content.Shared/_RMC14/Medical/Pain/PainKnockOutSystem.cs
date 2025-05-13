@@ -12,7 +12,7 @@ public sealed class PainKnockOutSystem : EntitySystem
 
 
     [ValidatePrototypeId<StatusEffectPrototype>]
-    private readonly string _painKnockOutKey = "PainKnockOut";
+    private const string _painKnockOutKey = "PainKnockOut";
 
     public override void Initialize()
     {
