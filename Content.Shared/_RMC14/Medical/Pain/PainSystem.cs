@@ -92,6 +92,11 @@ public sealed partial class PainSystem : EntitySystem
 
         _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
     }
+    public void AddPainModificator(EntityUid uid, TimeSpan duration, FixedPoint2 effectStrength, PainModificatorType type, PainComponent? pain = null)
+    {
+        var mod = new PainModificator(duration, effectStrength, type);
+        AddPainModificator(uid, mod, pain);
+    }
 
     public void AddPainModificator(EntityUid uid, PainModificator mod, PainComponent? pain = null)
     {
