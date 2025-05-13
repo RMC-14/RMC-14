@@ -82,7 +82,4 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId BurrowedLarvaId = "CMXenoLarva";
-
-    [DataField, AutoNetworkedField]
-    public string CreatureContainerId = "rmc_burrowed_container";
 }
