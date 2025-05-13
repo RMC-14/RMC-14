@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Deafness;
 ///     Having this component will make clients game volume 0. Will also prevent them from hearing chat.
 /// </summary>
 [Access(typeof(SharedDeafnessSystem))]
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DeafComponent : Component
 {
     /// <summary>
@@ -16,12 +16,6 @@ public sealed partial class DeafComponent : Component
     [DataField, AutoNetworkedField]
     public float HearChance = 0.4f;
 
-    /// <summary>
-    ///     Time it takes for the audio to fully fade out.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan FadeOutDelay = TimeSpan.FromSeconds(2);
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan FadeOutEndAt;
+    [DataField]
+    public bool DidFadeOut = false;
 }

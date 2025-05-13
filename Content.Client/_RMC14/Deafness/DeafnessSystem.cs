@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Deafness;
-using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.CCVar;
 using Content.Shared.StatusEffect;
 using Robust.Client.Audio;
@@ -63,20 +62,23 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
 
             var lastsFor = (float)(statusTime.Item2 - statusTime.Item1).TotalSeconds;
             var timeLeft = (float)(statusTime.Item2 - curTime).TotalSeconds;
-            var timeDone = curTime - statusTime.Item1;
-
-            if (comp.FadeOutEndAt >= TimeSpan.Zero)
-                comp.FadeOutEndAt = curTime + comp.FadeOutDelay;
+            var timeDone = (float)(curTime - statusTime.Item1).TotalSeconds;
 
             var volume = 0f;
 
             var fadeOutDuration = Math.Clamp(lastsFor * 0.35f, 0.2f, 2f);
             var fadeInDuration = Math.Clamp(lastsFor * 0.15f, 0.1f, 1f);
 
-            if (timeDone <= comp.FadeOutDelay && comp.FadeOutEndAt < curTime) // Fade out during two seconds of deafness
+            if (timeDone <= 2f && !comp.DidFadeOut) // Fade out during two seconds of deafness
             {
-                var fadeOut = 1f - (float)timeDone.TotalSeconds / fadeOutDuration;
+                var fadeOut = 1f - timeDone / fadeOutDuration;
                 volume = fadeOut * _originalVolume;
+
+                if (volume <= 0.1f) // this is so audio doesn't clip out if a status
+                {
+                    volume = 0f;
+                    comp.DidFadeOut = true;
+                }
             }
             else if (timeLeft <= 1f) // Fade in during last second of deafness
             {
