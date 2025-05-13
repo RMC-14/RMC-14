@@ -14,4 +14,7 @@ public sealed partial class DeafComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float HearChance = 0.4f;
+
+    [DataField]
+    public bool DidFadeOut = false;
 }
