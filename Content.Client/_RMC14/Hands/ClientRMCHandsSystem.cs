@@ -14,6 +14,8 @@ public sealed class ClientRMCHandsSystem : RMCHandsSystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCInteractWithOtherHand,
                 InputCmdHandler.FromDelegate(session =>

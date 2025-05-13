@@ -11,7 +11,7 @@ namespace Content.Shared._RMC14.Deafness;
 public sealed partial class ActiveDeafenWhileCritComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan Add = TimeSpan.FromSeconds(2);
+    public TimeSpan Add = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
     public TimeSpan Every = TimeSpan.FromSeconds(1);

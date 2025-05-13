@@ -1,30 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Added labcoats (for docs and CMO) that can be unbuttoned and medical
-      aprons (for docs, nurses, and CMO) to med equipment racks + CMO now gets their
-      peaked cap and special labcoat.
-    type: Add
-  id: 1225
-  time: '2025-01-18T03:43:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5405
-- author: blueDev2
-  changes:
-  - message: Fixed most Almayer tiles being able to have Burrower tunnels placed on
-      them.
-    type: Fix
-  id: 1226
-  time: '2025-01-18T03:45:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5278
-- author: blueDev2
-  changes:
-  - message: Prevent parasites from filling up xeno tunnels
-    type: Fix
-  id: 1227
-  time: '2025-01-18T03:46:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5392
-- author: Vermidia
-  changes:
   - message: Fixed the xm88 doing too much damage, it's base firerate and accuracy
       has also been improved (buffed firerate is the same)
     type: Fix
@@ -5422,5 +5398,30 @@
   id: 1727
   time: '2025-05-12T19:13:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5985
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed throwing knives damaging the user
+    type: Fix
+  id: 1728
+  time: '2025-05-12T21:35:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6431
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed vampire lurker and berserker being able to heal while on fire
+    type: Fix
+  id: 1729
+  time: '2025-05-12T21:39:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6430
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Charger Crusher not having its stomp ability.
+    type: Fix
+  - message: Fixed orbital cannon not showing fuel requirements for incendiary OBs.
+    type: Fix
+  - message: Fixed rounds not starting.
+    type: Fix
+  id: 1730
+  time: '2025-05-12T22:39:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6433
 Name: RMC14
 Order: -1
