@@ -344,8 +344,8 @@ public abstract class SharedXenoHiveSystem : EntitySystem
                 if (_mobState.IsDead(uid))
                     continue;
 
-                var position = _transform.GetMoverCoordinates(uid);
-                larva = SpawnAtPosition(hive.Comp.BurrowedLarvaId, position);
+                larva = Spawn(hive.Comp.BurrowedLarvaId, Transform(uid).Coordinates);
+                _transform.AttachToGridOrMap(larva.Value);
                 return true;
             }
 
