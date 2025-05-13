@@ -82,3 +82,12 @@
   solids:
     FoodMeat: 1
     FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipePretzel
+  name: poppy pretzel recipe
+  result: FoodBakedPretzel
+  time: 10
+  solids:
+    FoodDough: 1
+    PoppySeeds: 1
