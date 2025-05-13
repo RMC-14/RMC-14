@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMRoyalMarinesSGO
-  name: rmc-job-name-rmc-sgo
-  description: rmc-ghost-role-information-rmc-description
+  name: rmc-job-name-rcm-sgo
+  description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalSmartGunOperator
   ranks:
     RMCRankLanceCorporal: [ ]
@@ -30,13 +30,13 @@
         RMCSkillSmartGun: 1
         RMCSkillVehicles: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-rmc-sgo
+      prefix: rmc-job-prefix-rcm-sgo
   hasIcon: false
   hidden: true
 
 - type: entity
   id: RMCRandomHumanoidRoyalMarinesSGO
-  name: royal marines ghost role smart gun operator
+  name: royal crown marines ghost role smart gun operator
   suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
@@ -50,9 +50,9 @@
   id: RMCRoyalMarinesSGO
   components:
   - type: GhostRole
-    name: rmc-ghost-name-rmc-sgo
-    description: rmc-ghost-role-information-rmc-description
-    rules: rmc-ghost-role-information-rmc-rules
+    name: rmc-ghost-name-rcm-sgo
+    description: rmc-ghost-role-information-rcm-description
+    rules: rmc-ghost-role-information-rcm-rules
     reregister: false
     job: CMRoyalMarinesSGO
     raffle:
