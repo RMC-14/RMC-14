@@ -1,10 +1,10 @@
 ﻿# Cherry Jelly
 
 - type: reagent
-  parent: CMSodaBase
-  id: CMCherryJelly
-  name: reagent-name-cm-cherry-jelly
-  desc: reagent-desc-cm-cherry-jelly
+  parent: BaseJuice
+  id: RMCCherryJelly
+  name: reagent-name-rmc-cherry-jelly
+  desc: reagent-desc-rmc-cherry-jelly
   physicalDesc: reagent-physical-desc-sweet
   flavor: cherry
   color: "#801E28"

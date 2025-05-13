@@ -256,7 +256,7 @@
   solids:
     FoodBreadBun: 1
   reagents:
-    CMCherryJelly: 5
+    RMCCherryJelly: 5
 
 - type: microwaveMealRecipe #added to metamorph recipes
   id: RecipeBurgerMcguffin
@@ -586,7 +586,7 @@
   solids:
     FoodBreadPlainSlice: 1
   reagents:
-    CMCherryJelly: 5
+    RMCCherryJelly: 5
 
 - type: microwaveMealRecipe
   id: RecipeMoldyBreadSlice
