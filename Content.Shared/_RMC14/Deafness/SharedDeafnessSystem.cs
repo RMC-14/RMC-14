@@ -103,7 +103,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
             if (comp.AddAt < time)
             {
                 comp.AddAt = time + comp.Every;
-                TryDeafen(uid, comp.Add, true, status, ignoreProtection: true);
+                TryDeafen(uid, comp.Add, false, status, ignoreProtection: true);
             }
         }
     }
