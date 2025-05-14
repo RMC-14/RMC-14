@@ -37,6 +37,7 @@
     - type: NpcFactionMember
       factions:
       - WeYa
+      - Survivor
     - type: IntelRescueSurvivorObjective
 
 - type: startingGear
@@ -72,4 +73,22 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetCorporate
-  name: corporate survivor preset # TODO RMC14 random research notes
+  name: corporate colonist preset # TODO RMC14 random research notes
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorCorporate
+  name: corporate colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorCorporate
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorCorporate
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorCorporate

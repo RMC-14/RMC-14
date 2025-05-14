@@ -128,7 +128,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
         if (TryComp<DamageableComponent>(ent, out var damageComp))
             transferredDamage = damageComp.Damage;
 
-        var spawn = Spawn(upgradeComp.UpgradedEntity, coordinates, rotation: rotation);
+        var spawn = Spawn(upgradeComp.UpgradedEntity, coordinates, rotation: rotation.GetCardinalDir().ToAngle());
         _popup.PopupEntity(Loc.GetString(upgradeComp.UpgradedPopup), spawn, user);
 
         // transfer damage

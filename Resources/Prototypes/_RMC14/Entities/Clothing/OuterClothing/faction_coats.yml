@@ -18,6 +18,112 @@
     explosionArmor: 10
 
 - type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatBureauDeputyNoFilter
+  suffix: No Filter
+  components:
+  - type: RMCAllowSuitStorageUserWhitelist
+    defaultWhitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+    allowedWhitelist: RMCAllowSuitStorageClothingJacket
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+
+- type: entity
+  parent: RMCCoatBureauMarshal
+  id: RMCCoatBureauMarshalNoFilter
+  suffix: No Filter
+  components:
+  - type: RMCAllowSuitStorageUserWhitelist
+    defaultWhitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+    allowedWhitelist: RMCAllowSuitStorageClothingJacket
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+
+- type: entity
   parent: RMCBaseJacket
   id: RMCCoatBureauMarshal
   name: bureau marshal jacket

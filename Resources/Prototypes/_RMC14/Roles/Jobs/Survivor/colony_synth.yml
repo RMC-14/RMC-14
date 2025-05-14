@@ -18,12 +18,7 @@
   supervisors: cm-job-supervisors-colonists
   accessGroups:
   - Colonist
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: synth
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
+  - Synth
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

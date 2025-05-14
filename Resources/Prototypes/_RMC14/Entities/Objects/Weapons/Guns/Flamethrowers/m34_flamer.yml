@@ -103,7 +103,8 @@
     state: flametank_custom
     layers:
     - state: flametank_custom
-    - state: flametank_custom_strip0
+    - state: flametank_custom_strip2
+    - state: flametank_custom_strip2
       map: [ "enum.SolutionContainerLayers.Fill" ]
   - type: Item
     size: Normal
@@ -127,8 +128,7 @@
     solution: rmc_flamer_tank
   - type: NoMixingReagents
   - type: SolutionContainerVisuals
-    maxFillLevels: 1
-    emptySpriteName: flametank_custom_strip0
+    maxFillLevels: 2
     fillBaseName: flametank_custom_strip
   - type: Appearance
 

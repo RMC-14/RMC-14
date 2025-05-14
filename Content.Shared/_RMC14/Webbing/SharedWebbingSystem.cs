@@ -193,19 +193,32 @@ public abstract class SharedWebbingSystem : EntitySystem
             return false;
         }
 
-        if (_container.TryGetContainingContainer((clothing, null), out var wearer) &&
-            TryComp(wearer.Owner, out InventoryComponent? inventory))
+        if (_container.TryGetContainingContainer((clothing, null), out var containing))
         {
-            var slots = _inventory.GetSlotEnumerator((wearer.Owner, inventory));
-            while (slots.MoveNext(out var slot))
+            if (TryComp(containing.Owner, out StorageComponent? storage) &&
+                storage.StoredItems.ContainsKey(clothing))
             {
-                if (HasComp<ClothingBlockWebbingComponent>(slot.ContainedEntity))
-                {
-                    handled = true;
+                handled = true;
 
-                    if (user != null)
-                        _popup.PopupClient(Loc.GetString("rmc-webbing-cannot-wear-with-webbing"), webbing, user);
-                    return false;
+                if (user != null)
+                    _popup.PopupClient(Loc.GetString("rmc-webbing-cannot-in-storage"), user, PopupType.LargeCaution);
+
+                return false;
+            }
+
+            if (TryComp(containing.Owner, out InventoryComponent? inventory))
+            {
+                var slots = _inventory.GetSlotEnumerator((containing.Owner, inventory));
+                while (slots.MoveNext(out var slot))
+                {
+                    if (HasComp<ClothingBlockWebbingComponent>(slot.ContainedEntity))
+                    {
+                        handled = true;
+
+                        if (user != null)
+                            _popup.PopupClient(Loc.GetString("rmc-webbing-cannot-wear-with-webbing"), webbing, user, PopupType.SmallCaution);
+                        return false;
+                    }
                 }
             }
         }

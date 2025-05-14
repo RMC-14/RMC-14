@@ -67,6 +67,14 @@
         amount: 1
       - id: RMCJacketCorporateFormal
         amount: 1
+      - id: RMCWeYaBrownVest
+        amount: 1
+      - id: RMCWeYaBlueVest
+        amount: 1
+      - id: RMCWeYaRedVest
+        amount: 1
+      - id: RMCWeYaWhiteVest
+        amount: 1
 #      - id: GreyBomberJacket
 #        amount: 1
 #      - id: RedBomberJacket

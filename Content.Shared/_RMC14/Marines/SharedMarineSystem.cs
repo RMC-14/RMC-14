@@ -1,6 +1,8 @@
 ﻿using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.NPC.Prototypes;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -29,7 +31,7 @@ public abstract class SharedMarineSystem : EntitySystem
         if ((ent.Comp.Slots & args.SlotFlags) == 0)
             return;
 
-        EnsureComp<ShowMarineIconsComponent>(args.Equipee);
+        GiveMarineHud(args.Equipee, ent.Comp.Factions, ent.Comp.BypassFactionIcons);
     }
 
     private void OnGotUnequipped(Entity<GrantMarineIconsComponent> ent, ref GotUnequippedEvent args)
@@ -86,5 +88,21 @@ public abstract class SharedMarineSystem : EntitySystem
     {
         marine.Comp.Icon = null;
         Dirty(marine);
+    }
+
+    public Dictionary<ProtoId<NpcFactionPrototype>, SpriteSpecifier>? GetFactionIcons(EntityUid uid)
+    {
+        if (TryComp<MarineComponent>(uid, out var marine))
+            return marine.GenericFactionIcons;
+
+        return null;
+    }
+
+    public void GiveMarineHud(EntityUid uid, List<ProtoId<NpcFactionPrototype>>? faction, bool bypassIcons)
+    {
+        var icons = EnsureComp<ShowMarineIconsComponent>(uid);
+        icons.Factions = faction;
+        icons.BypassFactionIcons = bypassIcons;
+        Dirty(uid, icons);
     }
 }
