@@ -92,7 +92,7 @@
 
 - type: entity
   parent: CMGuidebookRole
-  id: CMGuidebookRoleIO
+  id: RMCGuidebookRoleIO
   name: Intelligence Officer
   categories: [ HideSpawnMenu ]
   components:

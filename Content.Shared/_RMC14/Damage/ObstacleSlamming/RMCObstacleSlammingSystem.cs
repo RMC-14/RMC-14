@@ -1,10 +1,12 @@
 using System.Numerics;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Effects;
 using Content.Shared.Popups;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -25,12 +27,15 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
 
     private static readonly ProtoId<DamageTypePrototype> SlamDamageType = "Blunt";
     private readonly HashSet<EntityUid> _queuedImmuneEntities = new();
+    private readonly HashSet<EntityUid> _queuedBonusEntities = new();
 
     public override void Initialize()
     {
@@ -87,6 +92,12 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         _damageable.TryChangeDamage(user, damage);
         _color.RaiseEffect(Color.Red, new List<EntityUid>() { user }, Filter.Pvs(user));
 
+        if (TryComp<RMCObstacleSlamBonusEffectsComponent>(user, out var bonus))
+        {
+            _slow.TrySlowdown(user, bonus.Slow, false);
+            _stun.TryParalyze(user, bonus.Stun, false);
+        }
+
         // Knockback around 1 tile
         _physics.SetLinearVelocity(ent, Vector2.Zero);
         _physics.SetAngularVelocity(ent, 0f);
@@ -118,14 +129,23 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         Dirty(uid, comp);
     }
 
+    public void ApplyBonuses(EntityUid uid, TimeSpan stun, TimeSpan slow)
+    {
+        var comp = EnsureComp<RMCObstacleSlamBonusEffectsComponent>(uid);
+        comp.ExpireAt = _timing.CurTime + comp.ExpireIn;
+        comp.Stun = stun;
+        comp.Slow = slow;
+        Dirty(uid, comp);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
         _queuedImmuneEntities.Clear();
 
-        var query = EntityQueryEnumerator<RMCObstacleSlamImmuneComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        var immuneQuery = EntityQueryEnumerator<RMCObstacleSlamImmuneComponent>();
+        while (immuneQuery.MoveNext(out var uid, out var comp))
         {
             if (comp.ExpireAt != null && comp.ExpireAt.Value > _timing.CurTime)
                 continue;
@@ -136,6 +156,22 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         foreach (var queued in _queuedImmuneEntities)
         {
             RemComp<RMCObstacleSlamImmuneComponent>(queued);
+        }
+
+        _queuedBonusEntities.Clear();
+
+        var bonusQuery = EntityQueryEnumerator<RMCObstacleSlamBonusEffectsComponent>();
+        while (bonusQuery.MoveNext(out var uid, out var comp))
+        {
+            if (comp.ExpireAt != null && comp.ExpireAt.Value > _timing.CurTime)
+                continue;
+
+            _queuedBonusEntities.Add(uid);
+        }
+
+        foreach (var queued in _queuedBonusEntities)
+        {
+            RemComp<RMCObstacleSlamBonusEffectsComponent>(queued);
         }
     }
 }

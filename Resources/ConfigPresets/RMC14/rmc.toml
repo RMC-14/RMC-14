@@ -103,7 +103,6 @@ default_guide = "RMC14"
 [shuttle]
 arrivals_planet = false
 arrivals = false
-grid_fill = false
 preload_grids = false
 startup_time = 10
 travel_time = 100

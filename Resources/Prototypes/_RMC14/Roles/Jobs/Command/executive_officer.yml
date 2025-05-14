@@ -90,3 +90,13 @@
 - type: playTimeTracker
   id: CMJobExecutiveOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleXO
+  name: The Executive Officer
+  description: The Executive Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: executive_officer

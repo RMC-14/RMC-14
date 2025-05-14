@@ -1,5 +1,5 @@
 ﻿- type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCSettingsGhostRole
   components:
   - type: GhostRole

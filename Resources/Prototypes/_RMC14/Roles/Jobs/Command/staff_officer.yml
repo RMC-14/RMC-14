@@ -88,3 +88,13 @@
 - type: playTimeTracker
   id: CMJobStaffOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSO
+  name: A Staff Officer
+  description: A Staff Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: staff_officer

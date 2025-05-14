@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Sprite;
+using Content.Shared.Ghost;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
@@ -17,6 +18,9 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
         }
 
         if (_player.LocalEntity is not { } player)
+            return;
+
+        if (HasComp<GhostComponent>(player))
             return;
 
         if (TryComp(player, out SpriteComponent? playerSprite))

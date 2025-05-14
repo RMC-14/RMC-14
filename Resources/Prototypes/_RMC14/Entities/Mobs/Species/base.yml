@@ -315,6 +315,7 @@
   - type: Evasion
   - type: CanBeFirePatted
   - type: FirePatter
+    stacks: -10
     blacklist:
       components:
       - Xeno
@@ -347,3 +348,4 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
+  - type: StunOnExplosionReceived # TODO should also cause hearing loss

@@ -6,6 +6,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -15,12 +16,15 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
@@ -55,6 +59,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
 
     private EntityQuery<DockingComponent> _dockingQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -63,6 +68,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private TimeSpan _lzPrimaryAutoDelay;
     private TimeSpan _flyByTime;
     private TimeSpan _hijackTravelTime;
+
+    private EntityUid _dropshipId;
+    private bool _hijack;
 
     public override void Initialize()
     {
@@ -129,6 +137,32 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             var ev = new DropshipLaunchedFromWarshipEvent(ent);
             RaiseLocalEvent(ent, ref ev, true);
+        }
+
+        if (!_hijack) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
+        {
+            int xenoCount = 0;
+            string dropshipName = string.Empty;
+            var dropship = EnsureComp<DropshipComponent>(_dropshipId);
+            var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+            while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
+            {
+                if (xform.GridUid == _dropshipId && mobState.CurrentState != MobState.Dead)
+                {
+                    xenoCount++;
+                    if (string.IsNullOrEmpty(dropshipName) && _area.TryGetArea(uid, out _, out var areaProto))
+                        dropshipName = areaProto.Name;
+                }
+            }
+
+            if (xenoCount > 0)
+            {
+                _alertLevelSystem.Set(RMCAlertLevels.Red, _dropshipId, false, false);
+                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
+                    ("name", dropshipName),
+                    ("count", xenoCount)),
+                    dropship.UnidentifledlifesignsSound);
+            }
         }
     }
 
@@ -202,7 +236,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
 
+        _hijack = hijack;
         var dropshipId = Transform(computer).GridUid;
+        _dropshipId = dropshipId ?? EntityUid.Invalid;
         if (!TryComp(dropshipId, out ShuttleComponent? shuttleComp))
         {
             Log.Warning($"Tried to launch {ToPrettyString(computer)} outside of a shuttle.");

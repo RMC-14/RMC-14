@@ -245,7 +245,7 @@
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
   - type: QueenEyeAction
-#  - type: StunFriendlyXenoOnStep
+  - type: StunFriendlyXenoOnStep
 
 - type: entity
   id: XenoLeaderPheromoneRelay

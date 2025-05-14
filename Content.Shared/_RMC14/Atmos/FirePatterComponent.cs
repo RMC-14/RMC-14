@@ -22,5 +22,5 @@ public sealed partial class FirePatterComponent : Component
     public TimeSpan Cooldown = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public int Stacks = 10;
+    public int Stacks = -10;
 }
