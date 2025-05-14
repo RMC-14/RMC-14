@@ -33,9 +33,9 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
+    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
-    - type: RMCRibbon
       factions:
       - WeYa
     - type: IntelRescueSurvivorObjective

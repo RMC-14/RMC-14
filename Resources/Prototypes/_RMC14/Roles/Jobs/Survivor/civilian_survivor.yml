@@ -34,12 +34,12 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
     - type: RMCSurvivor
+    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
       - Survivor
     - type: IntelRescueSurvivorObjective
-    - type: RMCRibbon
   greeting: rmc-job-greeting-survivor
   hasIcon: false
 

@@ -26,9 +26,9 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSecurity
     - type: RMCSurvivor
+    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
-    - type: RMCRibbon
       factions:
       - Survivor
     - type: IntelRescueSurvivorObjective
