@@ -25,6 +25,6 @@
     - MarineCommand
     - MarineCommon
     - RoyalMarines
-    defaultChannel: TSE
+    defaultChannel: RoyalMarines
   - type: Sprite
     state: sl_key
