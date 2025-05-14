@@ -5,6 +5,7 @@
   frequency: 1551
   color: "#9a1228"
   longRange: true
+  tower: true
 
 - type: entity
   parent: CMEncryptionKey
