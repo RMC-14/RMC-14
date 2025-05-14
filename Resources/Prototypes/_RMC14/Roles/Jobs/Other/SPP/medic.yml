@@ -92,7 +92,7 @@
     jumpsuit: CMJumpsuitSPPMedic
     outerClothing: RMCArmorSPPSupport
     gloves: RMCHandsVeteranSPP
-    shoes: CMBootsBlackFilled
+    shoes: RMCBootsSPPFilled
     suitstorage: WeaponSMGMP5 # TODO RMC14 : Replace with Bizon SMG
     id: RMCIDSPP
     belt: CMBeltMedicBagFilled
