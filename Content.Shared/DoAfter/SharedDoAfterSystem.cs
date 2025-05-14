@@ -1,8 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using Content.Shared._RMC14.Stun;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Hands.Components;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Tag;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -33,6 +36,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         SubscribeLocalEvent<DoAfterComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<DoAfterComponent, ComponentGetState>(OnDoAfterGetState);
         SubscribeLocalEvent<DoAfterComponent, ComponentHandleState>(OnDoAfterHandleState);
+        SubscribeLocalEvent<DoAfterComponent, AttemptMobCollideEvent>(OnMobCollide);
     }
 
     private void OnUnpaused(EntityUid uid, DoAfterComponent component, ref EntityUnpausedEvent args)
@@ -45,6 +49,13 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         }
 
         Dirty(uid, component);
+    }
+
+    private void OnMobCollide(Entity<DoAfterComponent> ent, ref AttemptMobCollideEvent args)
+    {
+        if (TryComp<ActiveDoAfterComponent>(ent, out var doaftercomp))
+            if (doaftercomp.RootMob)
+                args.Cancelled = true;
     }
 
     /// <summary>
@@ -234,6 +245,9 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         if (args.AttemptFrequency == AttemptFrequency.StartAndEnd && !TryAttemptEvent(doAfter))
             return false;
 
+        if (args.RootMob && TryComp<RMCSizeComponent>(args.User, out var size))
+            size.PreviousSize = size.Size;
+
         // TODO DO AFTER
         // Why does this tag exist? Just make this a bool on the component?
         if (args.Delay <= TimeSpan.Zero || _tag.HasTag(args.User, InstantDoAftersTag))
@@ -244,7 +258,9 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         }
 
         comp.DoAfters.Add(doAfter.Index, doAfter);
-        EnsureComp<ActiveDoAfterComponent>(args.User);
+        var activedoafter = EnsureComp<ActiveDoAfterComponent>(args.User);
+        if (args.RootMob)
+            activedoafter.RootMob = true;
         Dirty(args.User, comp);
         args.Event.DoAfter = doAfter;
         return true;
