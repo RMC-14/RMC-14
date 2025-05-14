@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Created by Cephalopod222, equipped-SUITSTORAGE taken and modified from cmss13 at https://github.com/cmss13-devs/cmss13/commit/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16, camouflaged variants recolored by MACMAN2003",
+  "copyright": "Created by Cephalopod222, equipped-SUITSTORAGE taken and modified from cmss13 at https://github.com/cmss13-devs/cmss13/commit/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16, camouflaged variants recolored by MACMAN2003, mag animation by VictorJob",
   "size": {
     "x": 32,
     "y": 32
@@ -35,7 +35,76 @@
       "name": "icon"
     },
     {
-      "name": "mag-0"
+      "name": "mag-0",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "mag-1",
+      "delays": [
+        [
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125
+        ]
+      ]
+    },
+    {
+      "name": "mag-2",
+      "delays": [
+        [
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125
+        ]
+      ]
+    },
+    {
+      "name": "mag-3",
+      "delays": [
+        [
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125
+        ]
+      ]
+    },
+    {
+      "name": "mag-4",
+      "delays": [
+        [
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125,
+          0.125
+        ]
+      ]
+    },
+    {
+      "name": "mag-5"
     },
     {
       "name": "base"
