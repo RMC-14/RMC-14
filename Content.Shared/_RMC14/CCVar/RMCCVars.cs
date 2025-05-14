@@ -439,7 +439,7 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCMovementBigXenosCancelMovement =
         CVarDef.Create("rmc.movement_big_xenos_cancel_movement", true, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<string> RMCChatColorMode =
-        CVarDef.Create("rmc.chat_color_mode", "SquadName", CVar.CLIENTONLY | CVar.ARCHIVE);
+    public static readonly CVarDef<bool> RMCChatSquadColorMode =
+        CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
 }

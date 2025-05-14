@@ -14,17 +14,6 @@ public sealed partial class AccessibilityTab : Control
     {
         RobustXamlLoader.Load(this);
 
-        var chatColorModeEntries = new List<OptionDropDownCVar<string>.ValueOption>(); //RMC14
-        foreach (var mode in Enum.GetValues(typeof(RMCChatColorMode)))
-        {
-            var key = mode.ToString()!;
-            chatColorModeEntries.Add(new OptionDropDownCVar<string>.ValueOption(
-                key,
-                Loc.GetString($"rmc-ui-options-color-mode-{key.ToLowerInvariant()}")
-            ));
-        }
-
-
         Control.AddOptionCheckBox(CCVars.ChatEnableColorName, EnableColorNameCheckBox);
         Control.AddOptionCheckBox(CCVars.AccessibilityColorblindFriendly, ColorblindFriendlyCheckBox);
         Control.AddOptionCheckBox(CCVars.ReducedMotion, ReducedMotionCheckBox);
@@ -33,8 +22,8 @@ public sealed partial class AccessibilityTab : Control
         Control.AddOptionPercentSlider(CCVars.SpeechBubbleSpeakerOpacity, SpeechBubbleSpeakerOpacitySlider);
         Control.AddOptionPercentSlider(CCVars.SpeechBubbleBackgroundOpacity, SpeechBubbleBackgroundOpacitySlider);
 
-        Control.AddOptionCheckBox(RMCCVars.RMCUseAlternateSprites, RMCUseAlternateSpritesCheckBox);
-        Control.AddOptionDropDown(RMCCVars.RMCChatColorMode, RMCChatColorModeOptionDropDown, chatColorModeEntries);
+        Control.AddOptionCheckBox(RMCCVars.RMCUseAlternateSprites, RMCUseAlternateSpritesCheckBox); // RMC14
+        Control.AddOptionCheckBox(RMCCVars.RMCChatSquadColorMode, RMCChatSquadColorModeCheckBox); // RMC14
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
 

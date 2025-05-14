@@ -6,7 +6,7 @@
             <BoxContainer Orientation="Vertical" Margin="8">
                 <Label Text="{Loc 'cm-ui-rmc14'}"
                         StyleClasses="LabelKeyText"/>
-                <ui:OptionDropDown Name="RMCChatColorModeOptionDropDown" Title="{Loc 'rmc-ui-options-color-mode'}" />
+                <CheckBox Name="RMCChatSquadColorModeCheckBox" Text="{Loc 'rmc-ui-options-chat-squad-color-mode'}" />
                 <CheckBox Name="RMCUseAlternateSpritesCheckBox" Text="{Loc 'rmc-ui-options-alternate-sprites'}" />
                 <Label Text="{Loc 'ui-options-accessability-header-visuals'}"
                        StyleClasses="LabelKeyText"/>

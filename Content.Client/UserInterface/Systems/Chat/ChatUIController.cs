@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.Mentor;
-using Content.Client._RMC14.UserInterface;
 using Content.Client.Administration.Managers;
 using Content.Client.Chat;
 using Content.Client.Chat.Managers;
@@ -18,8 +17,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
 using Content.Client.UserInterface.Systems.Gameplay;
-using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Chat;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -41,6 +39,7 @@ using Robust.Shared.GameObjects.Components.Localization;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
@@ -897,31 +896,15 @@ public sealed class ChatUIController : UIController
         // color the name unless it's something like "the old man"
         if ((msg.Channel == ChatChannel.Local || msg.Channel == ChatChannel.Whisper) && _chatNameColorsEnabled)
         {
-            var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
-            if (grammar != null && grammar.ProperNoun == true)
+            // RMC14 - this allows xenos to have coloured names, but does not give coloured names to
+            // entities without a player
+            // This will likely have a merge conflict if upstream fixes the bug where the wrong grammar
+            // component is read.
+            if (_ent.GetComponentOrNull<ActorComponent>(_ent.GetEntity(msg.SenderEntity)) != null)
             {
-                // The RMC's color changes depending on the squad it is in, otherwise the default color is used.
-                var squad = _ent.System<SquadSystem>();
-                var colorMode = _config.GetCVar(RMCCVars.RMCChatColorMode);
-                Color squadColor;
-                if (colorMode == RMCChatColorMode.SquadName.ToString() && squad.TryGetMemberSquadColor(_ent.GetEntity(msg.SenderEntity), out squadColor))
-                {
-                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", squadColor.ToHex());
-                }
-                else if (colorMode == RMCChatColorMode.SquadSpeech.ToString() && squad.TryGetMemberSquadColor(_ent.GetEntity(msg.SenderEntity), out squadColor))
-                {
-                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "BubbleContent", "color", squadColor.ToHex());
-                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
-                }
-                else if (colorMode == RMCChatColorMode.SquadNameAndSpeech.ToString() && squad.TryGetMemberSquadColor(_ent.GetEntity(msg.SenderEntity), out squadColor))
-                {
-                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "BubbleContent", "color", squadColor.ToHex());
-                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", squadColor.ToHex());
-                }
-                else
-                {
-                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
-                }
+                // RMC14: color changes depending on the squad it is in, otherwise the default color is used.
+                string? squadColor = _ent.System<SharedCMChatSystem>().ColorizeSpeakerNameBySquadOrNull(msg);
+                msg.WrappedMessage = squadColor != null ? squadColor : SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
             }
         }
 
