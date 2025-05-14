@@ -257,3 +257,16 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_pvl
+
+- type: entity
+  parent: SquadBase
+  id: SquadSOF
+  name: SOF
+  components:
+  - type: SquadTeam
+    color: "#400000"
+    radio: null
+    accessLevels: []
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_sof

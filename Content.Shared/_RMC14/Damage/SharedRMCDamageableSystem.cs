@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
@@ -436,6 +437,13 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         }
 
         _damageable.TryChangeDamage(target, damage, ignoreResistances);
+    }
+
+    public virtual bool TryGetDestroyedAt(EntityUid destructible, [NotNullWhen(true)] out FixedPoint2? destroyed)
+    {
+        // TODO RMC14
+        destroyed = default;
+        return false;
     }
 
     public override void Update(float frameTime)

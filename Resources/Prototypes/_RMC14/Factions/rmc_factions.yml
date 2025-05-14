@@ -10,6 +10,7 @@
   - SPP
   - WeYa
   - Survivor
+  - CLF
 
 - type: npcFaction
   id: RMCDumb
@@ -19,9 +20,15 @@
   - SPP
   - WeYa
   - Survivor
+  - CLF
 
 - type: npcFaction
   id: SPP
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: CLF
   hostile:
   - RMCXeno
 

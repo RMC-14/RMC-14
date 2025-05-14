@@ -353,7 +353,7 @@
 
 # Colonist
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitColonist
   name: colonist uniform
   description: A stylish gray-green jumpsuit - standard issue for colonists.

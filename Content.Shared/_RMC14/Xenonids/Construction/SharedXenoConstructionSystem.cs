@@ -851,14 +851,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range)
     {
-        var origin = _transform.GetMoverCoordinates(xeno);
         target = target.SnapToGrid(EntityManager, _map);
-        if (!_transform.InRange(origin, target, range))
+        if (!_interaction.InRangeUnobstructed(xeno, target, range))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), target, xeno);
             return false;
         }
 
+        var origin = _transform.GetMoverCoordinates(xeno);
         if (_transform.InRange(origin, target, 0.75f))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-cant-build-in-self"), target, xeno);

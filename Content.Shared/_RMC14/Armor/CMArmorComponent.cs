@@ -11,6 +11,12 @@ public sealed partial class CMArmorComponent : Component
     public int XenoArmor;
 
     [DataField, AutoNetworkedField]
+    public int FrontalArmor;
+
+    [DataField, AutoNetworkedField]
+    public int SideArmor;
+
+    [DataField, AutoNetworkedField]
     public int Melee;
 
     [DataField, AutoNetworkedField]
