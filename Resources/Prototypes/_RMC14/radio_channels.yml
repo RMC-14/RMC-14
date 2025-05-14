@@ -183,7 +183,7 @@
   tower: true
 
 - type: radioChannel
-  id: RoyalMarines
+  id: RoyalMarine
   name: chat-radio-royal-marine
   keycode: "q"
   frequency: 1551
