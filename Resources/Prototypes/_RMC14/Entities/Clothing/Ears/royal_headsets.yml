@@ -1,4 +1,12 @@
-﻿- type: entity
+﻿- type: radioChannel
+  id: RoyalMarines
+  name: chat-radio-royal-marine
+  keycode: "q"
+  frequency: 1551
+  color: "#e1580e"
+  longRange: true
+
+- type: entity
   parent: RMCHeadsetShip
   id: RMCHeadsetRoyalMarine
   name: royal marine headset
@@ -12,7 +20,7 @@
       - RMCEncryptionKeyRoyalMarine
   - type: RMCHeadset
     channels:
-    - TSE
+    - RoyalMarines
     radioTextIncrease: 2
 
 - type: entity
@@ -24,7 +32,7 @@
     channels:
     - MarineCommand
     - MarineCommon
-    - TSE
+    - RoyalMarines
     defaultChannel: TSE
   - type: Sprite
     state: sl_key
