@@ -40,7 +40,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
 
     private EntityUid _commander = default;
-    private const int SeniorAuthoritylevel = 14; // Corresponds to the level of authority of a executive officer
+    private int _seniorAuthorityLevel;
     private bool _accessesAdded = false;
     private TimeSpan? _adaptationTimerEndTime;
     private TimeSpan? _initialTimerEndTime;
@@ -50,6 +50,8 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarted);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
+
+        _seniorAuthorityLevel = _prototypes.Index(new ProtoId<JobPrototype>("CMExecutiveOfficer")).MarineAuthorityLevel;
     }
 
     private void OnRoundStarted(RoundStartingEvent ev)
@@ -106,7 +108,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (jobProto.MarineAuthorityLevel == 0)
                 continue;
 
-            if (jobProto.MarineAuthorityLevel >= SeniorAuthoritylevel)
+            if (jobProto.MarineAuthorityLevel >= _seniorAuthorityLevel)
             {
                 return; // Senior command found, no need to announce anything.
             }
@@ -156,7 +158,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (jobProto.MarineAuthorityLevel == 0)
                 continue;
 
-            if (jobProto.MarineAuthorityLevel >= SeniorAuthoritylevel) // Senior command found
+            if (jobProto.MarineAuthorityLevel >= _seniorAuthorityLevel) // Senior command found
             {
                 _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-senior-command-found"));
                 return;
@@ -290,7 +292,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         {
             candidates.Add(entity);
         }
-        // If the level is less than the current maximum, we don’t add
+        // If the level is less than the current maximum, we don't add
     }
 
     /// <summary>
