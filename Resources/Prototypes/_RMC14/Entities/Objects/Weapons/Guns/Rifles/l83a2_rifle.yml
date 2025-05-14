@@ -131,6 +131,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL83A2
   name: L83A2 Magazine (5.56x45mm)
+  description: "A magazine of 5.56x45mm rounds for use in the L83A2 rifle."
   components:
   - type: Tag
     tags:
@@ -165,8 +166,65 @@
   - type: CartridgeAmmo
     proto: BulletRifle556x45mm
 
+- type: entity
+  parent: RMCMagazineRifleL83A2
+  id: RMCMagazineRifleL83A2AP
+  description: "A magazine of armor-piercing 5.56x45mm rounds for use in the L83A2 rifle."
+  name: L83A2 AP Magazine (5.56x45mm)
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL83A2AP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL83A2AP
+    proto: RMCCartridgeRifleL83A2AP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a2.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL83A2AP
+  name: AP Cartridge (5.56x45)
+  description: A 5.56x45 AP rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL83A2AP
+  - type: CartridgeAmmo
+    proto: BulletRifle556x45mmAP
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle556x45mmAP
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 40
+
 - type: Tag
   id: RMCMagazineRifleL83A2
 
 - type: Tag
+  id: RMCMagazineRifleL83A2AP
+
+- type: Tag
   id: RMCCartridgeRifleL83A2
+
+- type: Tag
+  id: RMCCartridgeRifleL83A2AP

@@ -769,6 +769,25 @@
   id: RMCBeltHolsterRevolverSpearheadFill
   suffix: Filled
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m44r # TODO RMC14 per-gun underlay
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+      state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+    slots:
+    - suitStorage
+    - belt
   - type: StorageFill
     contents:
     - id: RMCSpeedLoader357
