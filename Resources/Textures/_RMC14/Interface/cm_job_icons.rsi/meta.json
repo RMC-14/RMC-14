@@ -389,13 +389,13 @@
       "name": "hudsquad_pvl"
     },
     {
-      "name": "tse_paofficer"
+      "name": "tse_paconstable"
     },
     {
-      "name": "tse_pamarshal"
+      "name": "tse_paseniorconstable"
     },
     {
-      "name": "tse_pachief"
+      "name": "tse_painspector"
     },
     {
       "name": "pve_dynaengi"

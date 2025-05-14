@@ -1,14 +1,14 @@
-# TSEPA Deputy
+# TSEPA Constable
 - type: job
   parent: CMJobBase
-  id: RMCTSEPADeputy
-  name: rmc-job-name-tsepa-deputy
-  description: rmc-job-description-tsepa-deputy
-  playTimeTracker: RMCJobTSEPADeputy
+  id: RMCTSEPAConstable
+  name: rmc-job-name-tsepa-constable
+  description: rmc-job-description-tsepa-Ccnstable
+  playTimeTracker: RMCJobTSEPAConstable
   ranks:
-    RMCRankTSESergeant: []
-  startingGear: RMCGearTSEPADeputy
-  icon: "RMCJobIconTSEPADeputy"
+    RMCRankTSEPAConstable: []
+  startingGear: RMCGearTSEPAConstable
+  icon: "RMCJobIconTSEPAConstable"
   joinNotifyCrew: false
   accessGroups:
   - ColonistSec
@@ -30,11 +30,11 @@
       factions:
       - TSE
     - type: JobPrefix
-      prefix: rmc-job-prefix-tsepa-deputy
+      prefix: rmc-job-prefix-tsepa-constable
   hidden: true
 
 - type: startingGear
-  id: RMCGearTSEPADeputy
+  id: RMCGearTSEPAConstable
   equipment:
     head: RMCHeadCapTSEPA
     ears: RMCHeadsetTSEPA
@@ -54,11 +54,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointTSEPADeputy
-  name: tsepa deputy spawn point
+  id: RMCSpawnPointTSEPAConstable
+  name: tsepa constable spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCTSEPADeputy
+    job_id: RMCTSEPAConstable
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
@@ -67,12 +67,12 @@
       state: icon
 
 - type: playTimeTracker
-  id: RMCJobTSEPADeputy
+  id: RMCJobTSEPAConstable
   isHumanoid: true
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconTSEPADeputy
+  id: RMCJobIconTSEPAConstable
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: tse_paofficer
+    state: tse_paconstable
