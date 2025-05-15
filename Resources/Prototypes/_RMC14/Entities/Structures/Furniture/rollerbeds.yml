@@ -72,9 +72,6 @@
     slots:
     - suitstorage
   - type: RMCStrapNoDrawDepthChange
-  - type: PhysicalComposition
-    materialComposition:
-      RMCPlastic: 250
 
 - type: entity
   parent: CMRollerBed
@@ -107,9 +104,6 @@
   - type: Appearance
   - type: ReceiverXenoClaws
     minimumClawStrength: ImpossiblySharp
-  - type: PhysicalComposition
-    materialComposition:
-      RMCPlastic: 300
 
 - type: entity
   parent: CMPortableSurgicalBed
@@ -200,10 +194,6 @@
     - CMRollerItem
   - type: ReceiverXenoClaws 
     minimumClawStrength: ImpossiblySharp
-  - type: PhysicalComposition
-    materialComposition:
-      RMCPlastic: 250
-      CMSteel: 133
 
 - type: entity
   parent: RMCMedevacStretcher
