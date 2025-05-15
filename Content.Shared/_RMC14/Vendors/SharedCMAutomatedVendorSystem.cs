@@ -29,6 +29,9 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Roles;
+using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Marines;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -42,6 +45,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -52,6 +56,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private readonly SquadSystem _squads = default!;
+    [Dependency] private readonly SharedMarineSystem _marine = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -500,6 +507,24 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 AmountUpdated(vendor, entry);
             }
         }
+
+        if (entry.JobTitle != null || entry.Icon != null)
+        {
+            var overrideComp = EnsureComp<RMCVendorRoleOverrideComponent>(actor);
+            overrideComp.RoleName = entry.JobTitle;
+            overrideComp.IsAppendTitle = entry.IsAppendTitle;
+            overrideComp.Icon = entry.Icon;
+            Dirty(actor, overrideComp);
+        }
+
+        if (entry.MapBlip != null)
+        {
+            var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(actor);
+            mapBlip.Icon = entry.MapBlip;
+            Dirty(actor, mapBlip);
+        }
+
+        _squads.UpdateSquadTitle(actor);
 
         if (_net.IsClient)
             return;
