@@ -1,0 +1,31 @@
+﻿- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardCLFSoldier
+  name: clf soldier's ID card
+  components:
+  - type: PresetIdCard
+    job: CMCLFSoldier
+
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardCLFEngineer
+  name: clf engineer's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFEngineer
+
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardCLFMedic
+  name: clf medic's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFMedic
+
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardCLFCellCommander
+  name: clf cell commander's ID card
+  components:
+  - type: PresetIdCard
+    job: CMCLFCellCommander

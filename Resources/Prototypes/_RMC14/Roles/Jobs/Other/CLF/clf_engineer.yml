@@ -1,26 +1,24 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMCLFSoldier
-  name: RMCCLFSoldier
+  id: RMCCLFEngineer
+  name: RMCCLFEngineer
   description: rmc-ghost-role-information-clf-description
-  playTimeTracker: CMJobCLFSoldier
+  playTimeTracker: RMCJobCLFEngineer
   ranks:
     RMCRankLanceCorporal: [ ]
-  startingGear: RMCGearCLFSoldier
-  icon: RMCJobIconCLFSoldier
+  startingGear: RMCGearCLFEngineer
+  icon: RMCJobIconCLFEngineer
   joinNotifyCrew: false
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillFirearms: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillPolice: 2
         RMCSkillFireman: 1
-        RMCSkillConstruction: 1
-        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
         RMCSkillMedical: 1
+        RMCSkillPowerLoader: 1
         RMCSkillVehicles: 1
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
@@ -28,53 +26,63 @@
       factions:
       - CLF
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-soldier
+      prefix: rmc-job-prefix-clf-engineer
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidCLFSoldier
-  name: clf soldier role
+  id: RMCRandomHumanoidCLFEngineer
+  name: clf engineer role
   suffix: Role
   components:
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
   - type: RandomHumanoidSpawner
-    settings: RMCCLFSoldier
+    settings: RMCCLFEngineer
 
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
-  id: RMCCLFSoldier
+  id: RMCCLFEngineer
   components:
   - type: RMCJobSpawner
-    job: CMCLFSoldier
+    job: RMCCLFEngineer
 
 - type: startingGear
-  id: RMCGearCLFSoldier
+  id: RMCGearCLFEngineer
   equipment:
-    head: RMCArmorHelmetSecurity
+    head: RMCHelmetWelding
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
+  #  eyes: RMCMesonGoggles TODO RMC14
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
     outerClothing: RMCArmorVestNone
-    gloves: CMHandsBlackMarine
+    gloves: CMHandsInsulated
     shoes: RMCShoesBrown
-    id: RMCIDCardCLFSoldier
-    belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
-    back: RMCWeaponShotgunHG3712
-    pocket1: RMCFlashlight
+    id: RMCIDCardCLFEngineer
+    belt: CMBeltUtility
+    back: RMCSatchelLightpackWelder
+    pocket1: RMCPouchConstructionFillLowGrade
     pocket2: RMCPouchFirstAidInjectors
   inhand:
-  - WeaponSMGM63 # TODO RMC14
-  - CMMagazineSMGM63 # TODO RMC14
+  - WeaponShotgunM357Sawn # TODO RMC14 - Make randomized
+  - CMShellShotgunBuckshot # TODO RMC14 - Make randomized
+  storage:
+    back:
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    - RMCExplosivePlastic
+    - RMCGrenadeMolotov
+    - CMMRE
+    - RMCFlashlight
 
 - type: playTimeTracker
-  id: CMJobCLFSoldier
+  id: RMCJobCLFEngineer
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconCLFSoldier
+  id: RMCJobIconCLFEngineer
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: clf_mil
+    state: clf_engi

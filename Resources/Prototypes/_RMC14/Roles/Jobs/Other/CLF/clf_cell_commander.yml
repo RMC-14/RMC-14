@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMCLFCellCommander
+  id: RMCCLFCellCommander
   name: CMCLFCellCommander
-  description: rmc-job-description-clf-cell-commander
+  description: rmc-ghost-role-information-clf-description
   playTimeTracker: CMJobCLFCellCommander
   ranks:
     RMCRankLanceCorporal: [ ]
@@ -28,6 +28,9 @@
         RMCSkillJtac: 4
         RMCSkillSmartGun: 1
         RMCSkillExecution: 1
+    - type: NpcFactionMember
+      factions:
+      - CLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-cell-commander
   hidden: true
@@ -54,7 +57,7 @@
   id: RMCGearCLFCellCommander
   equipment:
     head: RMCArmorHelmetMercenaryMiner
-    ears: RMCHeadsetDistressDukes
+    ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
     outerClothing: RMCCoatMilitiaHarness
@@ -75,11 +78,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: clf_cellcom
-
-- type: entity
-  parent: CMIDCardBase
-  id: RMCIDCardCLFCellCommander
-  name: clf cell commander's ID card
-  components:
-  - type: PresetIdCard
-    job: CMCLFCellCommander
