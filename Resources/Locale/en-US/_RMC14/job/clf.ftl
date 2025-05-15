@@ -16,3 +16,6 @@ rmc-job-prefix-clf-engineer = TECH
 
 RMCCLFMedic = CLF Medic
 rmc-job-prefix-clf-medic = MED
+
+RMCCLFSpecialist = CLF Specialist
+rmc-job-prefix-clf-specialist = SPC

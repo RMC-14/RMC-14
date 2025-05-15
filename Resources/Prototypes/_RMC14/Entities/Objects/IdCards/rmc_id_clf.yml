@@ -24,6 +24,14 @@
 
 - type: entity
   parent: CMIDCardBase
+  id: RMCIDCardCLFMedic
+  name: clf specialists's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFSpecialist
+
+- type: entity
+  parent: CMIDCardBase
   id: RMCIDCardCLFCellCommander
   name: clf cell commander's ID card
   components:

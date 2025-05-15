@@ -1,13 +1,13 @@
 ﻿- type: job
   parent: CMJobBase
-  id: RMCCLFMedic
-  name: RMCCLFMedic
+  id: RMCCLFSpecialist
+  name: RMCCLFSpecialist
   description: rmc-ghost-role-information-clf-description
-  playTimeTracker: RMCJobCLFMedic
+  playTimeTracker: RMCJobCLFSpecialist
   ranks:
     RMCRankLanceCorporal: [ ]
-  startingGear: RMCGearCLFMedic
-  icon: RMCJobIconCLFMedic
+  startingGear: RMCGearCLFSpecialist
+  icon: RMCJobIconCLFSpecialist
   joinNotifyCrew: false
   special:
   - !type:AddComponentSpecial
@@ -15,8 +15,10 @@
     - type: Skills
       skills:
         RMCSkillFireman: 1
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSpecialistal: 1
+        RMCSkillPowerLoader: 1
         RMCSkillVehicles: 1
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
@@ -24,40 +26,40 @@
       factions:
       - CLF
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-medic
+      prefix: rmc-job-prefix-clf-specialist
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidCLFMedic
-  name: clf medic role
+  id: RMCRandomHumanoidCLFSpecialist
+  name: clf specialist role
   suffix: Role
   components:
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
   - type: RandomHumanoidSpawner
-    settings: RMCCLFMedic
+    settings: RMCCLFSpecialist
 
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
-  id: RMCCLFMedic
+  id: RMCCLFSpecialist
   components:
   - type: RMCJobSpawner
-    job: RMCCLFMedic
+    job: RMCCLFSpecialist
 
 - type: startingGear
-  id: RMCGearCLFMedic
+  id: RMCGearCLFSpecialist
   equipment:
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesSpecialistalHUDGlasses
     jumpsuit: RMCJumpsuitCLFWebbing
     neck: RMCCLFArmband
     outerClothing: RMCArmorVestNone
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
-    id: RMCIDCardCLFMedic
-    belt: CMBeltMedicalFilled
+    id: RMCIDCardCLFSpecialist
+    belt: CMBeltSpecialistalFilled
     back: RMCSatchelLightpack
     pocket1: RMCFlashlight
     pocket2: RMCPouchMagazineLarge
@@ -81,11 +83,11 @@
     - RMCMagazineSMGMAC15
 
 - type: playTimeTracker
-  id: RMCJobCLFMedic
+  id: RMCJobCLFSpecialist
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconCLFMedic
+  id: RMCJobIconCLFSpecialist
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: clf_med
+    state: clf_spec
