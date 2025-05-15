@@ -16,6 +16,7 @@ using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
+using Content.Shared.Toggleable;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee;
@@ -827,10 +828,13 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             {
                 var powered = AnyReactorsOn(map);
                 var lights = EntityQueryEnumerator<RMCReactorPoweredLightComponent, TransformComponent>();
-                while (lights.MoveNext(out var uid, out _, out var xform))
+                while (lights.MoveNext(out var uid, out var comp, out var xform))
                 {
                     if (xform.MapID == map)
+                    {
+                        _appearance.SetData(uid, ToggleableLightVisuals.Enabled, powered);
                         _pointLight.SetEnabled(uid, powered);
+                    }
                 }
             }
         }
