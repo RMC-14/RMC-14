@@ -37,3 +37,8 @@ CMJobCombatTech = Combat Tech
 rmc-job-name-mortar-operator = Mortar Operator
 rmc-job-name-loader = Loader
 rmc-job-name-spotter= Spotter
+
+rmc-job-name-weapons-specialist-demo = (Demolitionist)
+rmc-job-name-weapons-specialist-grenadier = (Grenadier)
+rmc-job-name-weapons-specialist-sniper = (Sniper)
+rmc-job-name-weapons-specialist-anti-materiel-sniper = (Anti-materiel sniper)

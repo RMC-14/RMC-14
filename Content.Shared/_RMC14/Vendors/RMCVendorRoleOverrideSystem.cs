@@ -18,20 +18,20 @@ public sealed class VendorRoleOverrideSystem : EntitySystem
         if (HasComp<SquadLeaderComponent>(ent))
             return;
 
-        if (ent.Comp.Icon == null)
+        if (ent.Comp.GiveIcon == null)
             return;
 
-        args.Icon = ent.Comp.Icon;
+        args.Icon = ent.Comp.GiveIcon;
     }
 
     private void OnGetSquadTitle(Entity<RMCVendorRoleOverrideComponent> ent, ref GetMarineSquadNameEvent args)
     {
-        if (ent.Comp.RoleName == null)
+        if (ent.Comp.GiveSquadRoleName == null)
             return;
 
         if (ent.Comp.IsAppendTitle)
-            args.RoleName = $"{args.RoleName} {Loc.GetString(ent.Comp.RoleName)}";
+            args.RoleName = $"{args.RoleName} {Loc.GetString(ent.Comp.GiveSquadRoleName)}";
         else
-            args.RoleName = Loc.GetString(ent.Comp.RoleName);
+            args.RoleName = Loc.GetString(ent.Comp.GiveSquadRoleName);
     }
 }

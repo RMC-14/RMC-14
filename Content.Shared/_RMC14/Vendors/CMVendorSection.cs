@@ -82,7 +82,7 @@ public sealed partial record CMVendorEntry
     /// New title that will be applied to the marine when this item is purchased.
     /// </summary>
     [DataField]
-    public LocId? JobTitle;
+    public LocId? GiveSquadRoleName;
 
     /// <summary>
     /// If true, JobTitle will be appended to the marine's current title. If false - replaces the current title.
@@ -94,8 +94,8 @@ public sealed partial record CMVendorEntry
     /// New icon that will be applied to the marine when this item is purchased.
     /// </summary>
     [DataField]
-    public SpriteSpecifier.Rsi? Icon;
+    public SpriteSpecifier.Rsi? GiveIcon;
 
     [DataField]
-    public SpriteSpecifier.Rsi? MapBlip;
+    public SpriteSpecifier.Rsi? GiveMapBlip;
 }

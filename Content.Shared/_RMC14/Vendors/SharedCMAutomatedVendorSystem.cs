@@ -508,23 +508,26 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (entry.JobTitle != null || entry.Icon != null)
+        if (entry.GiveSquadRoleName != null || entry.GiveIcon != null || entry.GiveMapBlip != null)
         {
-            var overrideComp = EnsureComp<RMCVendorRoleOverrideComponent>(actor);
-            overrideComp.RoleName = entry.JobTitle;
-            overrideComp.IsAppendTitle = entry.IsAppendTitle;
-            overrideComp.Icon = entry.Icon;
-            Dirty(actor, overrideComp);
-        }
+            if (entry.GiveSquadRoleName != null || entry.GiveIcon != null)
+            {
+                var overrideComp = EnsureComp<RMCVendorRoleOverrideComponent>(actor);
+                overrideComp.GiveSquadRoleName = entry.GiveSquadRoleName;
+                overrideComp.IsAppendTitle = entry.IsAppendTitle;
+                overrideComp.GiveIcon = entry.GiveIcon;
+                Dirty(actor, overrideComp);
+            }
 
-        if (entry.MapBlip != null)
-        {
-            var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(actor);
-            mapBlip.Icon = entry.MapBlip;
-            Dirty(actor, mapBlip);
-        }
+            if (entry.GiveMapBlip != null)
+            {
+                var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(actor);
+                mapBlip.Icon = entry.GiveMapBlip;
+                Dirty(actor, mapBlip);
+            }
 
-        _squads.UpdateSquadTitle(actor);
+            _squads.UpdateSquadTitle(actor);
+        }
 
         if (_net.IsClient)
             return;

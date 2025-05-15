@@ -11,7 +11,7 @@ public sealed partial class RMCVendorRoleOverrideComponent : Component
     /// New title for the marine. If IsAppendTitle is true, it will be appended to the current title.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public LocId? RoleName;
+    public LocId? GiveSquadRoleName;
 
     /// <summary>
     /// If true, RoleName will be appended to the current title. If false - replaces the current title.
@@ -23,5 +23,5 @@ public sealed partial class RMCVendorRoleOverrideComponent : Component
     /// New icon for the marine in the interface.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? Icon;
+    public SpriteSpecifier.Rsi? GiveIcon;
 }

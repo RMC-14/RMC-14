@@ -387,6 +387,18 @@
     },
     {
       "name": "hudsquad_pvl"
+    },
+    {
+      "name": "hudsquad_spec_demo"
+    },
+    {
+      "name": "hudsquad_spec_grenadier"
+    },
+    {
+      "name": "hudsquad_spec_sniper"
+    },
+    {
+      "name": "hudsquad_spec_anti_materiel_sniper"
     }
   ]
 }
