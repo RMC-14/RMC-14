@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed the xm88 doing too much damage, it's base firerate and accuracy
-      has also been improved (buffed firerate is the same)
-    type: Fix
-  id: 1228
-  time: '2025-01-18T03:47:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5404
 - author: SG6732
   changes:
   - message: Fixed typo.
@@ -5423,5 +5415,12 @@
   id: 1730
   time: '2025-05-12T22:39:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6433
+- author: noctyrnal
+  changes:
+  - message: Fixed the camo on the CLF and Royal smartguns.
+    type: Tweak
+  id: 1731
+  time: '2025-05-16T14:08:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6467
 Name: RMC14
 Order: -1
