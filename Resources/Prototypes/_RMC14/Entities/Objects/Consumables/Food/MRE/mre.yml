@@ -355,24 +355,15 @@
         - MREWY
   - type: Sprite
     layers:
-    - state: wy_food_crate
-    - state: magaz_wy_mre
+    - state: supply_box
+      color: "#a89880"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: wy_food_crate_lid
+      color: "#a89880"
+    - state: supply_box_we-ya
+    - state: supply_lid_closed
       map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_wy_mre, visible: false }
-          Low: { state: magaz_wy_mre_1, visible: true }
-          Medium: { state: magaz_wy_mre_2, visible: true }
-          High: { state: magaz_wy_mre_3, visible: true }
-          Full: { state: magaz_wy_mre, visible: true }
+      color: "#a89880"
 
 - type: entity
   parent: RMCBoxMREEmpty
@@ -392,24 +383,16 @@
         - MREButterCookie
   - type: Sprite
     layers:
-    - state: colony_food_crate
-    - state: magaz_colony_mre
+    - state: supply_box
+      color: "#8f887e"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: colony_food_crate_lid
+      color: "#8f887e"
+    - state: supply_box_food
+      color: "#b0afae"
+    - state: supply_lid_closed
       map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_colony_mre, visible: false }
-          Low: { state: magaz_colony_mre_1, visible: true }
-          Medium: { state: magaz_colony_mre_2, visible: true }
-          High: { state: magaz_colony_mre_3, visible: true }
-          Full: { state: magaz_colony_mre, visible: true }
+      color: "#8f887e"
     
 - type: entity
   parent: RMCBoxMREEmpty
@@ -462,8 +445,3 @@
     types:
     - Fork
     - Spoon
-
-- type: entity
-  parent: RMCMRESpork
-  id: RMCFSRSpork
-  name: FSR spork

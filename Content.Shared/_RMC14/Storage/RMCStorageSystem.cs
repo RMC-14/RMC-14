@@ -41,9 +41,6 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly OpenableSystem _open = default!;
 
     private readonly List<EntityUid> _toRemove = new();

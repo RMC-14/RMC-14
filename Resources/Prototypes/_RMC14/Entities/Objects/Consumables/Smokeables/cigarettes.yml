@@ -288,6 +288,10 @@
     contents:
     - id: RMCCigaretteBlackRoll
       amount: 20
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
+      state: helmet
 
 - type: entity
   parent: CMCigarettePackLuckySlothsMini
@@ -301,6 +305,10 @@
     contents:
     - id: RMCCigaretteBlackRoll
       amount: 4
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
+      state: helmet
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
@@ -331,7 +339,3 @@
     - id: Cigarette
       amount: 4
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select.rsi
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
-      state: helmet

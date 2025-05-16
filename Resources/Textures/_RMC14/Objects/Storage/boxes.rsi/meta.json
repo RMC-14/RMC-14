@@ -93,28 +93,6 @@
     },
     {
       "name": "m89_e"
-    },
-    {
-      "name": "lemon_drop_box"
-    },
-    {
-      "name": "teabag_box"
-    },
-    {
-      "name": "lemon_drop_box-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "teabag_box-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "lemon_drop_box-inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "teabag_box-inhand-right",
-      "directions": 4
     }
   ]
 }
