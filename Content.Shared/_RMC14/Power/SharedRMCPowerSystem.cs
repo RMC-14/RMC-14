@@ -828,7 +828,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             {
                 var powered = AnyReactorsOn(map);
                 var lights = EntityQueryEnumerator<RMCReactorPoweredLightComponent, TransformComponent>();
-                while (lights.MoveNext(out var uid, out var comp, out var xform))
+                while (lights.MoveNext(out var uid, out _, out var xform))
                 {
                     if (xform.MapID == map)
                     {
