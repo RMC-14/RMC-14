@@ -30,6 +30,7 @@
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
         RMCSkillLeadership: 1
+        RMCSkillFirearms: 1
 
 - type: playTimeTracker
   id: RMCJobWeYaGoonLead
@@ -39,10 +40,10 @@
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMCLeader
-    jumpsuit: RMCJumpsuitVeteranPMCCorporate
-    outerClothing: CMArmorM4PMCCorporate # TODO RMC14: corporate/lead
+    jumpsuit: RMCJumpsuitVeteranPMCCorporateLead
+    outerClothing: CMArmorM4PMCCorporateLead
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMCCorporate
+    head: ArmorHelmetPMCCorporateLead
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite

@@ -90,6 +90,9 @@
   - type: ResinSurgeReinforcable
   - type: RMCDeleteAnchoredOnInit
     whitelist: { }
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    destroy: true
 
 - type: entity
   parent: DoorXenoResin

@@ -138,6 +138,13 @@
     foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
+  parent: RMCJumpsuitMarsoc
+  id: RMCJumpsuitMarsocWebbingBuckshot
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingBuckshot
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitFreelancer
   name: freelancer fatigues
@@ -217,3 +224,15 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
+
+# CLF
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCLFSoldier
+  name: Colonial Liberation Front uniform
+  description: A stylish grey-green jumpsuit - standard issue for colonists. This version appears to have the symbol of the Colonial Liberation Front emblazoned in select areas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi

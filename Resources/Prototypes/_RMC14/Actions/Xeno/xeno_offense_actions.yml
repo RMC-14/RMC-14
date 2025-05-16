@@ -512,6 +512,20 @@
     useDelay: 18
 
 - type: entity
+  parent: ActionXenoStomp
+  id: ActionXenoCrush
+  name: Crush (25)
+  description: Slam the ground with a 7x7 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoStompActionEvent
+    useDelay: 12
+
+- type: entity
   id: ActionXenoCharge
   parent: ActionXenoBase
   name: Charge (20)
@@ -526,6 +540,33 @@
     range: 9
     useDelay: 14
     checkCanAccess: false
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleCharging
+  name: Toggle Charging
+  description: Enable charging when moving in a straight line, which increases your speed and impact damage depending on the total distance travelled.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: ready_charge
+    event: !type:XenoToggleChargingActionEvent
+    useDelay: 0.25
+
+- type: entity
+  parent: ActionXenoFling
+  id: ActionXenoRam
+  name: Ram (10)
+  components:
+  - type: EntityTargetAction
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: fling # TODO RMC14 ram
+    useDelay: 10
+  - type: XenoActionPlasma
+    cost: 10
 
 - type: entity
   parent: ActionXenoBase
@@ -934,3 +975,73 @@
     deselectOnMiss: false
   - type: ActionBlockIfResting
   - type: XenoOffensiveAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoApprehend
+  name: Apprehend
+  description: Increases your movement speed and applies a slow on the next target you slash.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_enrage
+    event: !type:XenoCripplingStrikeActionEvent
+    useDelay: 18
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoEviscerate
+  name: Eviscerate
+  description: Eviscerate nearby enemies after a short delay. Costs 1 rage stack.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    event: !type:XenoEviscerateActionEvent
+    useDelay: 23
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoClothesline
+  name: Clothesline
+  description: Flings a target, doing minimal damage and healing you. The amount healed is higher the more rage stacks you have.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_clothesline
+    event: !type:XenoFlingActionEvent
+    range: 1.5
+    useDelay: 16
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTumble
+  name: Tumble (25) # TODO RMC14 proper plasma costs
+  description: Charge towards your side and push back the first enemy hit. Can only be used towards either side of where you are facing.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tumble
+    event: !type:XenoTumbleActionEvent
+    range: 20
+    useDelay: 10
+    deselectOnMiss: false
+    checkCanAccess: false
+    rotate: false
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 25

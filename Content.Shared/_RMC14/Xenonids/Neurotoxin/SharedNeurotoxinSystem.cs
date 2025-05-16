@@ -24,7 +24,7 @@ using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Stamina;
 using Content.Shared._RMC14.Stun;
-using System;
+using Content.Shared._RMC14.Deafness;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
@@ -48,6 +48,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
@@ -272,7 +273,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     {
         if (neurotoxin.NeurotoxinAmount >= 10)
         {
-            _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(victim, "Blinded", neurotoxin.BlurTime, false);
+            _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(victim, "Blinded", neurotoxin.BlurTime, true);
             if (currTime - neurotoxin.LastAccentTime >= neurotoxin.MinimumDelayBetweenEvents)
             {
                 neurotoxin.LastAccentTime = currTime;
@@ -300,7 +301,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         {
             _daze.TryDaze(victim, neurotoxin.DazeLength, true, stutter: true);
             _damage.TryChangeDamage(victim, neurotoxin.ToxinDamage * frameTime);
-            // TODO RMC14 tempoarary deafness
+            _deafness.TryDeafen(victim, neurotoxin.DeafenTime, true, ignoreProtection: true);
         }
 
         if (neurotoxin.NeurotoxinAmount >= 50)

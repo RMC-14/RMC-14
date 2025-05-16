@@ -74,7 +74,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
     public void DoEarLossPopups(EntityUid uid, bool end)
     {
         var msg = Loc.GetString(end ? "rmc-deaf-end" : "rmc-deaf-start");
-        _popup.PopupPredicted(msg, uid, uid, PopupType.MediumCaution);
+        _popup.PopupClient(msg, uid, uid, PopupType.MediumCaution);
     }
 
     public bool HasEarProtection(EntityUid uid)
