@@ -23,7 +23,7 @@
       entries:
       - id: RMCDemoSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-demo
-        isAppendTitle: true
+        isAppendSquadRoleName: true
         giveIcon:
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_demo
@@ -32,7 +32,7 @@
           state: spec_demo
       - id: RMCGrenadeSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-grenadier
-        isAppendTitle: true
+        isAppendSquadRoleName: true
         giveIcon:
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_grenadier
@@ -44,9 +44,12 @@
       #  points: 0
       # Don't forget to give Pyro his own role name and icons
       - id: RMCScoutSpecEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-scout
+        isAppendSquadRoleName: true
+        # maybe scout should come up with his own icons
       - id: CMSniperEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-sniper
-        isAppendTitle: true
+        isAppendSquadRoleName: true
         giveIcon:
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_sniper
@@ -57,7 +60,7 @@
         - RMCAntiMaterielEquipmentCase
       - id: RMCAntiMaterielEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-anti-materiel-sniper
-        isAppendTitle: true
+        isAppendSquadRoleName: true
         giveIcon:
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_anti_materiel_sniper
@@ -65,6 +68,7 @@
           sprite: _RMC14/Interface/map_blips.rsi
           state: spec_anti_materiel_sniper
         linkedEntries:
+        - CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact

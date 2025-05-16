@@ -8,16 +8,16 @@ namespace Content.Shared._RMC14.Vendors;
 public sealed partial class RMCVendorRoleOverrideComponent : Component
 {
     /// <summary>
-    /// New title for the marine. If IsAppendTitle is true, it will be appended to the current title.
+    /// New title for the marine. If IsAppendSquadRoleName is true, it will be appended to the current role name.
     /// </summary>
     [DataField, AutoNetworkedField]
     public LocId? GiveSquadRoleName;
 
     /// <summary>
-    /// If true, RoleName will be appended to the current title. If false - replaces the current title.
+    /// If true, RoleName will be appended to the current role name. If false - replaces the current role name.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool IsAppendTitle;
+    public bool IsAppendSquadRoleName;
 
     /// <summary>
     /// New icon for the marine in the interface.

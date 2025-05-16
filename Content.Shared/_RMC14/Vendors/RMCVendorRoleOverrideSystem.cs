@@ -29,7 +29,7 @@ public sealed class VendorRoleOverrideSystem : EntitySystem
         if (ent.Comp.GiveSquadRoleName == null)
             return;
 
-        if (ent.Comp.IsAppendTitle)
+        if (ent.Comp.IsAppendSquadRoleName)
             args.RoleName = $"{args.RoleName} {Loc.GetString(ent.Comp.GiveSquadRoleName)}";
         else
             args.RoleName = Loc.GetString(ent.Comp.GiveSquadRoleName);

@@ -514,7 +514,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 var overrideComp = EnsureComp<RMCVendorRoleOverrideComponent>(actor);
                 overrideComp.GiveSquadRoleName = entry.GiveSquadRoleName;
-                overrideComp.IsAppendTitle = entry.IsAppendTitle;
+                overrideComp.IsAppendSquadRoleName = entry.IsAppendSquadRoleName;
                 overrideComp.GiveIcon = entry.GiveIcon;
                 Dirty(actor, overrideComp);
             }
