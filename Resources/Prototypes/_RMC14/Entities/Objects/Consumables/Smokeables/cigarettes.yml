@@ -309,33 +309,3 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
       state: helmet
-
-- type: entity
-  parent: RMCCigarettePackLuckySloths
-  id: RMCCigarettePackNoble
-  name: noble packet
-  description: Smoking like the 1900s. Quite popular amongst people living in the Three Suns Empire.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/noble.rsi
-  - type: ItemCounter
-    composite: false
-    baseLayer: "cig20"
-  - type: StorageFill
-    contents:
-    - id: Cigarette
-      amount: 20
-
-- type: entity
-  parent: CMCigarettePackLuckySlothsMini
-  id: RMCCigarettePackNobleMini
-  name: noble mini packet
-  description: Smoking like the 1900s. Now in the field, with a new compact package!
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/noble_mini.rsi
-  - type: StorageFill
-    contents:
-    - id: Cigarette
-      amount: 4
-    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select.rsi
