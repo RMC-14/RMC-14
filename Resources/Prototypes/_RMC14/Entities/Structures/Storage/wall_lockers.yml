@@ -1,8 +1,8 @@
 - type: entity
+  parent: CMLockerBase
   id: CMLockerCMDCabinet
   name: command tablet cabinet
   suffix: Empty
-  parent: CMLockerBase
   description: A bulletproof cabinet containing the command tablet for usage by a Commander.
   # description: A bulletproof cabinet containing the command tablet for usage by the CO and XO. Opens only to them and department heads. (Parity desc, once Senior access is implemented)
   components:
@@ -18,13 +18,17 @@
     whitelist:
       tags:
       - CommandTablet
+  - type: RMCEntityStorageWhitelist
+    whitelist:
+      tags:
+      - CommandTablet
   - type: AccessReader
     access: [["CMAccessCommand"]]
 
 - type: entity
+  parent: CMLockerCMDCabinet
   id: CMLockerCMDCabinetFilled
   suffix: Filled
-  parent: CMLockerCMDCabinet
   components:
   - type: EntityTableContainerFill
     containers:

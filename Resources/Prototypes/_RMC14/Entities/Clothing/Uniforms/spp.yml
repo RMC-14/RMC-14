@@ -1,4 +1,3 @@
-
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitSPP
@@ -10,6 +9,27 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPWebbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbing
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPWebbingVestBlack
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingBlack
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPWebbingTools
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbingSmallERTFilled
 
 - type: entity
   parent: CMJumpsuitSPP

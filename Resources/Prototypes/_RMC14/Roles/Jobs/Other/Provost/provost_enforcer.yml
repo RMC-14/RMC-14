@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostEnforcer
-  name: rmc-job-name-provost-enforcer
-  description: rmc-job-description-provost-enforcer
+  name: rmc-job-name-corp-provost-enforcer
+  description: rmc-ghost-role-information-provost-squad-description
   playTimeTracker: CMJobProvostEnforcer
   ranks:
     RMCRankProvostProvostEnforcer: []
@@ -27,49 +27,30 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostEnforcer
-  name: provost spawner enforcer
-  suffix: Spawner, Player, Given Objective
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostEnforcer
-
-- type: entity
   id: RMCRandomHumanoidProvostEnforcer
   name: provost ghost role enforcer
-  suffix: Role, Player, Given Objective
+  suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: RandomHumanoidSpawner
     settings: RMCProvostEnforcer
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCProvostEnforcer
   components:
   - type: GhostRole
-    name: rmc-ghost-role-information-provost-enforcer-name
-    description: rmc-ghost-role-information-provost-enforcer-description
-    rules: ghost-role-information-nonantagonist-rules
+    name: rmc-ghost-name-corp-provost-enforcer
+    description: rmc-ghost-role-information-provost-squad-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostEnforcer
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostEnforcer ]
-  - type: Skills
-    skills:
-      RMCSkillCqc: 3
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillMeleeWeapons: 1
-      RMCSkillPolice: 2
+  - type: GhostRoleApplySpecial
+    squad: SquadProvost
 
 - type: startingGear
   id: RMCGearProvostEnforcer
@@ -96,12 +77,4 @@
   id: RMCJobIconProvostEnforcer
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pva
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostEnforcer
-  name: provost enforcer ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostEnforcer
+    state: hudsquad_pve

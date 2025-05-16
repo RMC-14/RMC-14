@@ -54,12 +54,6 @@
   whitelisted: true
   accessGroups:
   - ShipMasterAccess
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: co
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -93,19 +87,26 @@
     - type: CommendationGiver
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: co
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearCommandingOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
     outerClothing: RMCCoatService
-    id: CMIDCardCommandingOfficer
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchCommand
     pocket2: RMCPouchGeneralLarge
+  inhand:
+    - RMCMatebaCustomizationCase
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -120,3 +121,13 @@
 - type: playTimeTracker
   id: CMJobCommandingOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCO
+  name: The Commanding Officer
+  description: The Commanding Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: commanding_officer

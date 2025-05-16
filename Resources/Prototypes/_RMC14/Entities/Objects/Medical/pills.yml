@@ -24,6 +24,7 @@
       RMCSkillMedical: 1
   - type: Pill
   - type: Food
+    delay: 0
     forceFeedDelay: 1
     transferAmount: null
     eatMessage: food-swallow

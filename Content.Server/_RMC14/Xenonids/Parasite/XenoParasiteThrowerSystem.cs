@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -34,12 +35,14 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnToggleParasiteThrow);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
 
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
@@ -103,11 +106,18 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
                 var fixedTrajectory = (target.Position - coords.Position).Normalized() * xeno.Comp.ParasiteThrowDistance;
                 target = coords.WithPosition(coords.Position + fixedTrajectory);
             }
+
+            _rmcObstacleSlamming.MakeImmune(heldEntity);
             _throw.TryThrow(heldEntity, target, user: xeno, compensateFriction: true);
-            // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle. The stun dur + leap time makes it longer
-            // Then jump time by 2 secs
+
+            // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle.
+            // Should amount to about 10 seconds before they attempt a leap (10 seconds stunned)
+            // Average in parity is waiting 7.5 if you're lucky on idle time which would take 10 seconds still
             if (TryComp<ParasiteAIComponent>(heldEntity, out var ai) && !_mobState.IsDead(heldEntity))
+            {
+                _stun.TryStun(heldEntity, xeno.Comp.ThrownParasiteStunDuration * 2, true);
                 _parasite.GoActive((heldEntity, ai));
+            }
 
             _action.SetUseDelay(args.Action, xeno.Comp.ThrownParasiteCooldown);
 
@@ -186,14 +196,12 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         DropAllStoredParasites(xeno);
     }
 
-    protected override void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
+    private void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
     {
-        base.OnMobStateChanged(xeno, ref args);
-
         if (args.NewMobState != MobState.Dead)
             return;
+
         DropAllStoredParasites(xeno, 0.75f);
-        RemCompDeferred<XenoParasiteThrowerComponent>(xeno.Owner);
     }
 
     private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, float chance = 1.0f)
@@ -278,7 +286,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         Dirty(xeno);
 
         //Need to clone the array for it to dirty properly
-        Appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
     }
 
     private List<int> GetVisualIndexes(bool[] bools, bool visible)
@@ -307,7 +315,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             return null;
         }
 
-        if(_mobState.IsDead(xeno))
+        if (_mobState.IsDead(xeno))
         {
             message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-dead", ("xeno", xeno));
             return null;

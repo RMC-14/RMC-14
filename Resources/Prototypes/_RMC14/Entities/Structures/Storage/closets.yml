@@ -19,6 +19,10 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      map: [ "enum.PaperLabelVisuals.Layer" ]
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: base
@@ -50,6 +54,12 @@
           collection: MetalBreak
           params:
             volume: -6
+  - type: EntityStorageCloseOnMapInit
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    damage:
+      types:
+        Blunt: 40
 
 - type: entity
   parent: CMClosetBase
@@ -189,4 +199,3 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/acloset.rsi
-

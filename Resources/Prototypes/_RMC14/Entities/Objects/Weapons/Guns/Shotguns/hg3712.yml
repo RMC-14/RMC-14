@@ -1,0 +1,88 @@
+﻿- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: HG 37-12 pump shotgun
+  id: RMCWeaponShotgunHG3712
+  description: A eight-round pump action shotgun with four-round capacity dual internal tube magazines allowing for quick reloading and highly accurate fire. Used exclusively by Colony Marshals. You can switch the active internal magazine by toggling the shotgun tube.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/hg3712.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/hg3712.rsi
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_small.ogg
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 0.625
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot1
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunFlechette
+      - RMCShellShotgunIncendiaryBuckshot
+      - RMCShellShotgunIncendiary
+      - RMCShellShotgunBeanbag
+    capacity: 8
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.5
+  - type: PumpAction
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+        random:
+        - RMCAttachmentS5RedDotSight
+        - RMCAttachmentS6ReflexSight
+        - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentFlamer
+        random:
+        - RMCAttachmentMiniFlamethrower
+        - RMCAttachmentFlashlightGrip
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentHG3712Stock
+        whitelist:
+          tags:
+          - RMCAttachmentHG3712Stock
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.78, .02
+      rmc-aslot-rail: -0.18, 0.125
+      rmc-aslot-stock: -0.52, -0.029
+      rmc-aslot-underbarrel: 0.32, -0.31
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunHG3712
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunHG3712

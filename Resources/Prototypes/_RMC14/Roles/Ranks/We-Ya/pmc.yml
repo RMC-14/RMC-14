@@ -1,0 +1,89 @@
+- type: rank
+  id: RMCRankWeYaOperator
+  name: Operator
+  prefix: OPR.
+  paygrade: PMC-OP
+
+- type: rank
+  id: RMCRankWeYaEnforcer
+  name: Enforcer
+  prefix: ENF.
+  paygrade: PMC-EN
+
+- type: rank
+  id: RMCRankWeYaVehicleSpecialist
+  name: Vehicle Specialist
+  prefix: SPV.
+  paygrade: PMC-VS
+
+- type: rank
+  id: RMCRankWeYaSupportSpecialist
+  name: Support Specialist
+  prefix: SPS.
+  paygrade: PMC-SS
+
+- type: rank
+  id: RMCRankWeYaMedicalSpecialist
+  name: Medical Specialist
+  prefix: SPM.
+  paygrade: PMC-MS
+
+- type: rank
+  id: RMCRankWeYaWeaponSpecialist
+  name: Weapon Specialist
+  prefix: SPW.
+  paygrade: PMC-WS
+
+- type: rank
+  id: RMCRankWeYaXenoSpecialist
+  name: Xeno Specialist
+  prefix: SPX.
+  paygrade: PMC-XS
+
+- type: rank
+  id: RMCRankWeYaTraumaSurgeon
+  name: Trauma Surgeon
+  prefix: Dr.
+  paygrade: PMC-DOC
+
+- type: rank
+  id: RMCRankWeYaCorporateTechnician
+  name: Corporate Technician
+  prefix: TEC.
+  paygrade: PMC-TEC
+
+- type: rank
+  id: RMCRankWeYaEliteResponder
+  name: Elite Responder
+  prefix: ELR.
+  paygrade: PMC-ELR
+
+- type: rank
+  id: RMCRankWeYaEliteMedic
+  name: Elite Medic
+  prefix: ELM.
+  paygrade: PMC-ELM
+
+- type: rank
+  id: RMCRankWeYaEliteGunner
+  name: Elite Gunner
+  prefix: ELG.
+  paygrade: PMC-ELG
+
+- type: rank
+  id: RMCRankWeYaTeamLeader
+  name: Team Leader
+  prefix: TML.
+  paygrade: PMC-TL
+
+- type: rank
+  id: RMCRankWeYaEliteTeamLeader
+  name: Elite Team Leader
+  prefix: ETML.
+  paygrade: PMC-ETL
+
+- type: rank
+  id: RMCRankWeYaSiteDirector
+  name: PMC Site Director
+  prefix: Director
+  paygrade: PMC-DIR

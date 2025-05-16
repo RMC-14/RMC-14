@@ -1,11 +1,17 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
+using Robust.Shared.Configuration;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
@@ -13,10 +19,13 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -25,6 +34,8 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     {
         _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
+
+        SubscribeLocalEvent<ActorComponent, AttackAttemptEvent>(OnActorAttackAttempt);
 
         SubscribeLocalEvent<ImmuneToUnarmedComponent, GettingAttackedAttemptEvent>(OnImmuneToUnarmedGettingAttacked);
 
@@ -35,6 +46,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         SubscribeLocalEvent<StunOnHitComponent, MeleeHitEvent>(OnStunOnHitMeleeHit);
 
         SubscribeLocalEvent<MeleeDamageMultiplierComponent, MeleeHitEvent>(OnMultiplierOnHitMeleeHit);
+        SubscribeLocalEvent<RMCMeleeDamageSkillComponent, MeleeHitEvent>(OnSkilledOnHitMeleeHit);
 
         SubscribeAllEvent<LightAttackEvent>(OnLightAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
 
@@ -77,15 +89,41 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 
         var comp = ent.Comp;
 
+        args.BonusDamage = _skills.ApplyMeleeSkillModifier(args.User, args.BonusDamage);
+        var totalDamage = args.BaseDamage + args.BonusDamage;
+
         foreach (var hit in args.HitEntities)
         {
             if (_whitelist.IsValid(comp.Whitelist, hit))
             {
-                var damage = args.BaseDamage * comp.Multiplier;
+                var damage = totalDamage * comp.Multiplier;
                 args.BonusDamage += damage;
                 break;
             }
         }
+    }
+
+    private void OnSkilledOnHitMeleeHit(Entity<RMCMeleeDamageSkillComponent> ent, ref MeleeHitEvent args)
+    {
+        if (!args.IsHit)
+            return;
+
+        if (!_prototypeManager.TryIndex<DamageGroupPrototype>(ent.Comp.BonusDamageType, out var bonusType))
+            return;
+
+        var totalBonusDamage = new DamageSpecifier(bonusType, _skills.GetSkill(ent.Owner, ent.Comp.Skill));
+        args.BonusDamage += totalBonusDamage;
+    }
+
+    private void OnActorAttackAttempt(Entity<ActorComponent> ent, ref AttackAttemptEvent args)
+    {
+        if (args.Uid != args.Target)
+            return;
+
+        if (_netConfig.GetClientCVar(ent.Comp.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
+            return;
+
+        args.Cancel();
     }
 
     private void OnImmuneToUnarmedGettingAttacked(Entity<ImmuneToUnarmedComponent> ent, ref GettingAttackedAttemptEvent args)
@@ -158,8 +196,8 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         TryMeleeReset(weaponUid, weapon, true);
     }
 
-
-    private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm){
+    private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm)
+    {
         if (!TryComp<MeleeResetComponent>(weaponUid, out var reset))
             return;
 

@@ -17,3 +17,27 @@
     state: intact-scrubbers
   - type: Anchorable
   - type: Clickable
+
+- type: entity
+  parent: CMOverheadPipe
+  id: RMCOverheadPipeCorner
+  suffix: Corner
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: intact-scrubbers_corners
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: intact-scrubbers_corners
+
+- type: entity
+  parent: CMOverheadPipe
+  id: RMCOverheadPipeCap
+  suffix: Cap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: cap
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_pipes.rsi
+    state: cap

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ec469846e8340e4e6df04b7d3e8c6f4bb5a823c1/icons/obj/pipes/disposal.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/icons/obj/pipes/disposal.dmi, https://github.com/cmss13-devs/cmss13/blob/icons/obj/structures/props/hybrisa/trash_bins.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -397,6 +397,12 @@
     },
     {
       "name": "disposal-charging"
+    },
+    {
+      "name": "trashgreen"
+    },
+    {
+      "name": "trashblue"
     }
   ]
 }

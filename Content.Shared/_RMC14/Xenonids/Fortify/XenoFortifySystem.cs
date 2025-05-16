@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Stun;
@@ -80,11 +80,11 @@ public sealed class XenoFortifySystem : EntitySystem
 
     private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)
     {
-        if (xeno.Comp.Fortified)
-        {
-            args.Armor += xeno.Comp.Armor;
-            args.FrontalArmor += xeno.Comp.FrontalArmor;
-        }
+        if (!xeno.Comp.Fortified)
+            return;
+
+        args.XenoArmor += xeno.Comp.Armor;
+        args.FrontalArmor += xeno.Comp.FrontalArmor;
     }
 
     private void OnXenoFortifyBeforeStatusAdded(Entity<XenoFortifyComponent> xeno, ref BeforeStatusEffectAddedEvent args)

@@ -26,6 +26,7 @@ public sealed class OrbitalCannonComputerBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<OrbitalCannonWindow>();
         Refresh();
     }

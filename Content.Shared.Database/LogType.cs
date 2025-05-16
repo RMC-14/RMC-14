@@ -445,6 +445,26 @@ public enum LogType
     /// </summary>
     PdaInteract = 96,
 
+    /// <summary>
+    /// An atmos networked device (such as a vent or pump) has had its settings changed, usually through an air alarm
+    /// </summary>
+    AtmosDeviceSetting = 97,
+
+    /// <summary>
+    /// Commands related to admemes. Stuff like config changes, etc.
+    /// </summary>
+    AdminCommands = 98,
+
+    /// <summary>
+    /// A player was selected or assigned antag status
+    /// </summary>
+    AntagSelection = 99,
+
+    /// <summary>
+    /// Logs related to botany, such as planting and harvesting crops
+    /// </summary>
+    Botany = 100,
+
     RMCMarineAnnounce = 10000,
     RMCXenoAnnounce = RMCMarineAnnounce + 1,
     RMCNamedItem = RMCMarineAnnounce + 2,
@@ -474,4 +494,8 @@ public enum LogType
     RMCFireteam = RMCMarineAnnounce + 26,
     RMCAlertLevel = RMCMarineAnnounce + 27,
     RMCSpawnJob = RMCMarineAnnounce + 28,
+    RMCGunShot = RMCMarineAnnounce + 29,
+    RMCSetPose = RMCMarineAnnounce + 30,
+    RMCDropshipWeapon = RMCMarineAnnounce + 31,
+    RMCXenoSpawn = RMCMarineAnnounce + 32,
 }

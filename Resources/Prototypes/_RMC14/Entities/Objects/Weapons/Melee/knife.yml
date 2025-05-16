@@ -6,6 +6,8 @@
     whitelist:
       components:
       - Xeno
+  - type: MeleeWeapon
+    angle: 0
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
@@ -141,6 +143,24 @@
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: DeleteOnExplosion
+
+- type: entity
+  parent: CMM2132Machete
+  id: RMCCeremonialSword
+  name: ceremonial sabre
+  description: A fancy ceremonial sabre passed down from generation to generation. Despite this, it has been very well cared for, and is in top condition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
+    size: Large
+  - type: Tag
+    tags:
+    - RMCCeremonialSword
+
+- type: Tag
+  id: RMCCeremonialSword
 
 - type: Tag
   id: RMCM5Bayonet

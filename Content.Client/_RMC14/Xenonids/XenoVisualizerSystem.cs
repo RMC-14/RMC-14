@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Movement;
@@ -116,8 +117,8 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     break;
                 }
 
-                if ((leaping != null || thrown != null) &&
-                    rsi.TryGetState("thrown", out _))
+                if (rsi.TryGetState("thrown", out _) &&
+                    IsThrown((entity, leaping, thrown, null)))
                 {
                     sprite.LayerSetState(layer, "thrown");
                     break;
@@ -185,6 +186,13 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         RaiseLocalEvent(xeno, ref ev);
 
         xeno.Comp.DrawDepth = (int) ev.DrawDepth;
+    }
+
+    private bool IsThrown(Entity<XenoLeapingComponent?, ThrownItemComponent?, ActiveXenoToggleChargingComponent?> xeno)
+    {
+        return xeno.Comp1 != null ||
+               xeno.Comp2 != null ||
+               Resolve(xeno, ref xeno.Comp3, false) && xeno.Comp3.Stage > 0;
     }
 
     public override void Update(float frameTime)

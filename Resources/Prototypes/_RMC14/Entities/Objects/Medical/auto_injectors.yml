@@ -16,6 +16,7 @@
   - type: Item
     size: Small
     sprite: null
+    inhandVisuals: { }
   - type: Hypospray
     solutionName: pen
     injectSound: /Audio/_RMC14/Medical/hypospray.ogg
@@ -261,6 +262,7 @@
       RMCSkillMedical: 2
   - type: Hypospray
     transferAmount: 15
+  - type: RMCEmptySolution
 
 - type: entity
   parent: RMCMedicAutoInjector15

@@ -34,6 +34,8 @@
   - type: DamageMultiplierFlags
     flags: Breaching
   - type: XenoLeapDestroyOnPass
+  - type: XenoToggleChargingDamage
+    destroy: true
 
 # Reinforced
 - type: entity
@@ -50,7 +52,7 @@
     graph: RMCTable
     node: Reinforced
   - type: XenoLeapDestroyOnPass
-    spawnPrototype: CMRodMetal # TODO 50% to spawn 2, 50% to spawn 0
+    spawnPrototype: CMRodMetal1 # TODO 50% to spawn 2, 50% to spawn 0
 
 # Reinforced Requisition
 - type: entity

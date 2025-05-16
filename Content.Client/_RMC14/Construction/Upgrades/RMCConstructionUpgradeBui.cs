@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Construction.Upgrades;
-using Content.Shared._RMC14.Sentry;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -34,8 +33,8 @@ public sealed class RMCConstructionUpgradeBui : BoundUserInterface
 
     protected override void Open()
     {
-        _menu = new RMCConstructionUpgradeMenu();
-        _menu.OnClose += Close;
+        base.Open();
+        _menu = this.CreateWindow<RMCConstructionUpgradeMenu>();
 
         if (EntMan.TryGetComponent(Owner, out RMCConstructionUpgradeTargetComponent? upgradeComp) &&
             upgradeComp.Upgrades is { } upgrades)
@@ -71,11 +70,5 @@ public sealed class RMCConstructionUpgradeBui : BoundUserInterface
         var pos = _eye.WorldToScreen(_transform.GetMapCoordinates(Owner).Position) / vpSize;
 
         _menu.OpenCenteredAt(pos);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _menu?.Dispose();
     }
 }

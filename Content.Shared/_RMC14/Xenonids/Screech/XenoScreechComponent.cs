@@ -18,6 +18,12 @@ public sealed partial class XenoScreechComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(8);
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan CloseDeafTime = TimeSpan.FromSeconds(7);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan FarDeafTime = TimeSpan.FromSeconds(4);
+
     // TODO RMC14 stun less within 4 tiles
     [DataField, AutoNetworkedField]
     public float StunRange = 7;

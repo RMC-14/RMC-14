@@ -1,11 +1,10 @@
 ﻿using System.Numerics;
 using Content.Server.Decals;
-using Content.Server.Spawners.EntitySystems;
 using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Map;
 using Content.Shared.Decals;
 using Content.Shared.GameTicking;
 using Robust.Server.Physics;
+using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -13,23 +12,24 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.MapInsert;
 
 public sealed class MapInsertSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly GridFixtureSystem _fixture = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly DecalSystem _decals = default!;
+    [Dependency] private readonly GridFixtureSystem _fixture = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private MapId? _map;
     private int _index;
@@ -40,8 +40,6 @@ public sealed class MapInsertSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-
-        SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit, before: [typeof(ConditionalSpawnerSystem), typeof(AreaSystem)]);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -50,19 +48,37 @@ public sealed class MapInsertSystem : EntitySystem
         _index = 0;
     }
 
-    private void OnMapInsertMapInit(Entity<MapInsertComponent> ent, ref MapInitEvent args)
+    public void ProcessMapInsert(Entity<MapInsertComponent> ent, bool forceSpawn = false)
     {
         if (_net.IsClient)
             return;
 
-        if (!_random.Prob(ent.Comp.Probability))
+        if (ent.Comp.Variations.Count <= 0)
         {
             QueueDel(ent);
             return;
         }
 
-        if (ent.Comp.Spawn is not { } spawn)
+        var randomProbability = _random.NextFloat();
+        var cumulativeProbability = 0f;
+        ResPath spawn = default;
+        Vector2 spawnOffset = default;
+        foreach (var variation in ent.Comp.Variations)
+        {
+            cumulativeProbability += variation.Probability;
+            if (forceSpawn ||  cumulativeProbability >= randomProbability)
+            {
+                spawn = variation.Spawn;
+                spawnOffset = variation.Offset;
+                break;
+            }
+        }
+
+        if (spawn == default)
+        {
+            QueueDel(ent);
             return;
+        }
 
         if (_map == null)
         {
@@ -70,20 +86,19 @@ public sealed class MapInsertSystem : EntitySystem
             _map = mapId;
         }
 
-        var matrix = Matrix3x2.CreateTranslation(_index * 50, _index * 50);
+        var offset = new Vector2(_index * 50, _index * 50);
         _index++;
 
-        _rmcMap.TryLoad(_map.Value, spawn.ToString(), out var grids, matrix);
-        if (grids == null || grids.Count == 0)
+        if (!_mapLoader.TryLoadGrid(_map.Value, spawn, out var grid, offset: offset))
             return;
 
-        var insertGrid = grids[0];
+        var insertGrid = grid.Value;
         var xform = Transform(ent);
         var mainGrid = xform.GridUid;
         if (mainGrid == null)
             return;
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
-        coordinates = coordinates.Offset(ent.Comp.Offset);
+        coordinates = coordinates.Offset(spawnOffset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
 
         //Replace areas
@@ -140,12 +155,14 @@ public sealed class MapInsertSystem : EntitySystem
             return;
 
         // Flatten anything not parented to a grid.
+        var transform = _physics.GetRelativePhysicsTransform((uid, xform), xform.MapUid.Value);
+
         foreach (var fixture in manager.Fixtures.Values)
         {
             if (!fixture.Hard)
                 continue;
 
-            var aabb = _physics.GetWorldAABB(uid, xform: xform);
+            var aabb = fixture.Shape.ComputeAABB(transform, 0);
 
             aabb = aabb.Enlarged(-0.05f);
             _lookupEnts.Clear();

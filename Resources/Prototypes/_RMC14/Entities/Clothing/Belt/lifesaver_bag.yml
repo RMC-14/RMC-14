@@ -1,0 +1,107 @@
+﻿- type: entity
+  parent: CMBeltMedical
+  id: CMBeltMedicBag
+  name: M276 pattern lifesaver bag
+  description: The M276 is the standard load-bearing equipment of the UNMC. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,5 # 21 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - BodyBag
+      - Bottle
+      - PillCanister
+      - Syringe
+      - CMAutoInjector
+      - Brutepack
+      - CMBloodPack
+      - Gauze
+      - Ointment
+      - CMOintment
+      - CMTraumaKit
+      - CMBurnKit
+      #      - # TODO RMC14 splints
+      - RMCGlovesLatex
+      components:
+      - Defibrillator
+      - Pill
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - PillCanister
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/medicbag/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: RMCBeltMedicBagERTFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTraumaKit10
+      amount: 2
+    - id: CMBurnKit10
+      amount: 2 # TODO RMC14 2x5 splints
+    - id: CMEpinephrineAutoInjector
+    - id: CMDexalinPlusAutoInjector # TODO RMC14 3 oxycodone autoinjectors
+    - id: CMPillCanisterBicaridine
+      amount: 2
+    - id: CMPillCanisterKelotane
+      amount: 2
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1 # TODO RMC14 1 pill canister tramadol and peridaxon
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: RMCBeltMedicBagPMC
+  name: WY-TM625 pattern medical bag
+  description: The WY-TM625 is the standard load-bearing equipment of the W-Y security forces. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltMedicBagPMC
+  id: RMCBeltMedicBagPMCFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    - id: CMBurnKit10
+    - id: CMEpinephrineAutoInjector
+    - id: CMDexalinPlusAutoInjector
+    # TODO RMC: oxycodone autoinjector
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterDexalin
+    - id: CMPillCanisterDylovene
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterInaprovaline
+    # TODO RMC: tramadol pills
+    # TODO RMC: splint nano
+    - id: CMHealthAnalyzer
+    # TODO RMC: imidazoline pills
+    # TODO RMC: alkysine pills

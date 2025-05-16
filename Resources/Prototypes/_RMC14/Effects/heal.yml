@@ -1,4 +1,5 @@
 ﻿- type: entity
+  parent: RMCBaseEffect
   id: RMCEffectHeal
   categories: [ HideSpawnMenu ]
   components:
@@ -25,6 +26,17 @@
   - type: Sprite
     color: "#FFFFFF"
     state: busy_medical
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealPlasma
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Sprite
+    color: "#00FFFF"
+    state: plasma_overlay
 
 - type: entity
   parent: RMCEffectHeal
@@ -65,3 +77,21 @@
     lifetime: 3
   - type: Sprite
     color: "#D9F500"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealFlurry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+  - type: Sprite
+    color: "#00BE6F"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3

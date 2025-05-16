@@ -1,25 +1,21 @@
 ﻿using Content.Server._RMC14.Rules;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
-using Content.Server.Popups;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Survivor;
-using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
-using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Marines;
@@ -31,17 +27,13 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedRankSystem _rankSystem = default!;
 
-    private int _characterLimit = 1000;
     public readonly SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
     public readonly SoundSpecifier DefaultSquadSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/tech_notification.ogg");
+    public readonly SoundSpecifier AresAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/AI/announce.ogg");
 
     public override void Initialize()
     {
@@ -50,52 +42,32 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
 
+        SubscribeLocalEvent<RMCPlanetComponent, RMCPlanetAddedEvent>(OnPlanetAdded);
+
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
             {
-                subs.Event<MarineCommunicationsComputerMsg>(OnMarineCommunicationsComputerMsg);
                 subs.Event<MarineCommunicationsDesignatePrimaryLZMsg>(OnMarineCommunicationsDesignatePrimaryLZMsg);
             });
-
-        Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
     }
 
-    private void OnMapInit(
-        Entity<MarineCommunicationsComputerComponent> computer,
-        ref MapInitEvent args
-        )
+    private void OnMapInit(Entity<MarineCommunicationsComputerComponent> computer, ref MapInitEvent args)
     {
         UpdatePlanetMap(computer);
     }
 
-    private void OnBUIOpened(
-        Entity<MarineCommunicationsComputerComponent> computer,
-        ref BoundUIOpenedEvent args
-        )
+    private void OnBUIOpened(Entity<MarineCommunicationsComputerComponent> computer, ref BoundUIOpenedEvent args)
     {
         UpdatePlanetMap(computer);
     }
 
-    private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
+    private void OnPlanetAdded(Entity<RMCPlanetComponent> ent, ref RMCPlanetAddedEvent args)
     {
-        _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key);
-
-        var time = _timing.CurTime;
-        if (_timing.CurTime < ent.Comp.LastAnnouncement + ent.Comp.Cooldown)
+        var computers = EntityQueryEnumerator<MarineCommunicationsComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
         {
-            var cooldownMessage = Loc.GetString("rmc-announcement-cooldown", ("seconds", (int) ent.Comp.Cooldown.TotalSeconds));
-            _popup.PopupClient(cooldownMessage, args.Actor);
-            return;
+            UpdatePlanetMap((uid, computer));
         }
-
-        var text = args.Text;
-        if (text.Length > _characterLimit)
-            text = text[.._characterLimit].Trim();
-
-        AnnounceSigned(args.Actor, text);
-
-        ent.Comp.LastAnnouncement = time;
-        Dirty(ent);
     }
 
     private void OnMarineCommunicationsDesignatePrimaryLZMsg(
@@ -113,9 +85,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _dropship.TryDesignatePrimaryLZ(user, lz.Value);
     }
 
-    private void UpdatePlanetMap(
-        Entity<MarineCommunicationsComputerComponent> computer
-        )
+    private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
     {
         var planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
         var operation = _distressSignal.OperationName ?? string.Empty;
@@ -148,7 +118,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<GhostComponent>(e)
             );
 
-        filter.RemoveWhereAttachedEntity(HasComp<SurvivorComponent>);
+        filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
@@ -164,35 +134,6 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         var wrappedMessage = Loc.GetString("rmc-announcement-message", ("author", author), ("message", message));
 
         AnnounceToMarines(wrappedMessage);
-    }
-
-    /// <summary>
-    /// Dispatches a signed announcement to Marines.
-    /// </summary>
-    /// <param name="sender">EntityUid of sender, for job and name params.</param>
-    /// <param name="message">The content of the announcement.</param>
-    /// <param name="author">The author of the message, Command by default.</param>
-    /// <param name="sound">GlobalSound for announcement.</param>
-    public void AnnounceSigned(
-        EntityUid sender,
-        string message,
-        string? author = null,
-        SoundSpecifier? sound = null
-        )
-    {
-        author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
-        var name = _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
-        var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
-
-        // TODO RMC14 receivers
-        var filter = Filter.Empty()
-            .AddWhereAttachedEntity(e =>
-                HasComp<MarineComponent>(e) ||
-                HasComp<GhostComponent>(e)
-            );
-
-        AnnounceToMarines(wrappedMessage);
-        _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
     }
 
     public override void AnnounceRadio(

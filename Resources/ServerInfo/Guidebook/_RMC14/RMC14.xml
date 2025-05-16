@@ -1,5 +1,5 @@
 ﻿<Document>
-  #RMC-14 Guidebook
+  # RMC-14 Guidebook
 
   Welcome to RMC-14.
 
@@ -12,14 +12,33 @@
   Be sure to read the rules if you haven't already.
   - [textlink="The rules" link="RMCOverview"]
 
-  New to RMC-14, SS14, or have no CM13 experience? Be careful! A lot of mechanics and values are not the same as SS14.
+  New to RMC-14, SS14, or have no CM13 experience? Be careful! A lot of mechanics and values are not the same as these games.
   - [textlink="New player guide!" link="RMCGuideNewPlayer"]
+  - [textlink="Your first day as a rifleman!" link="RMCGuideRoleRifleman"]
+  - [textlink="So you've just been born into the hive! Now what?" link="RMCGuideRoleDrone"]
 
-  Have some experience? Check out these guidebook pages!
+  ## Have some experience? Check out these guidebook pages!
+
+  Anyone is free to add guides to this page, either through the discord or github.
+
+  ### Marines
+
+  [bold]Roles[/bold]
   - [textlink="Medical" link="RMCMedical"]
-  - [textlink="Medicines" link="RMCMedicine"]
   - [textlink="Requisitions" link="RMCRequisitions"]
-  - [textlink="Communications towers and senor towers" link="RMCGuideCommunicationsTowers"]
   - [textlink="Combat Technician" link="RMCGuideRoleCombatTechnician"]
   - [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"]
+  - [textlink="Survivor" link="RMCSurvivor"]
+  - [textlink="Smart Gun Operator" link="RMCGuideRoleSGO"]
+
+  [bold]Structures[/bold]
+  - [textlink="Communications towers and sensor towers" link="RMCGuideCommunicationsTowers"]
+
+  ### Xenonids
+
+  [bold]Roles[/bold]
+
+
+  [bold]Structures[/bold]
+
 </Document>

@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -11,6 +11,8 @@ using Robust.Shared.Timing;
 using Robust.Shared.Configuration;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared.Explosion.EntitySystems;
+using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -37,6 +39,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidEvent>(OnXenoCorrosiveAcid);
         SubscribeLocalEvent<XenoAcidComponent, DoAfterAttemptEvent<XenoCorrosiveAcidDoAfterEvent>>(OnXenoCorrosiveAcidDoAfterAttempt);
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
+
+        SubscribeLocalEvent<InheritAcidComponent, AmmoShotEvent>(OnAmmoShot);
+        SubscribeLocalEvent<InheritAcidComponent, GrenadeContentThrownEvent>(OnGrenadeContentThrown);
 
         Subs.CVar(_config,
             RMCCVars.RMCCorrosiveAcidTickDelaySeconds,
@@ -70,7 +75,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopups(xeno, args.Target, out var time))
+            !CheckCorrodiblePopups(xeno, args.Target, out var time, out var _))
         {
             return;
         }
@@ -101,7 +106,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!CheckCorrodiblePopups(xeno, target, out var _))
+        if (!CheckCorrodiblePopups(xeno, target, out var _, out var mult))
             return;
 
         if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
@@ -115,12 +120,38 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         args.Handled = true;
 
-        ApplyAcid(args.AcidId, target, args.Dps, args.ExpendableLightDps, args.Time);
+        ApplyAcid(args.AcidId, target, args.Dps, args.ExpendableLightDps, args.Time * mult);
     }
 
-    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, out TimeSpan time)
+    /// <summary>
+    ///     Transfer any acid stacks from the cartridge to the shot ammo.
+    /// </summary>
+    private void OnAmmoShot(Entity<InheritAcidComponent> ent, ref AmmoShotEvent args)
+    {
+        if(!TryComp(ent, out TimedCorrodingComponent? corroding))
+            return;
+
+        foreach (var projectile in args.FiredProjectiles)
+        {
+            ApplyAcid(corroding.AcidPrototype, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, true);
+        }
+    }
+
+    /// <summary>
+    ///     Transfer any acid stacks from the grenade to the thrown contents.
+    /// </summary>
+    private void OnGrenadeContentThrown(Entity<InheritAcidComponent> ent, ref GrenadeContentThrownEvent args)
+    {
+        if (TryComp(args.Source, out TimedCorrodingComponent? corroding))
+        {
+            ApplyAcid(corroding.AcidPrototype,ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, true);
+        }
+    }
+
+    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, out TimeSpan time, out float mult)
     {
         time = TimeSpan.Zero;
+        mult = 1;
         if (!TryComp(target, out CorrodibleComponent? corrodible) ||
             !corrodible.IsCorrodible)
         {
@@ -141,16 +172,20 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
 
         time = corrodible.TimeToApply;
+        mult = corrodible.MeltTimeMult;
 
         return true;
     }
 
-    public void ApplyAcid(EntProtoId acidId, EntityUid target, float dps, float lightDps, TimeSpan time)
+    public void ApplyAcid(EntProtoId acidId, EntityUid target, float dps, float lightDps, TimeSpan time, bool inherit = false)
     {
         if (_net.IsClient)
             return;
 
         var acid = SpawnAttachedTo(acidId, target.ToCoordinates());
+
+        if (!inherit)
+            time += _timing.CurTime;
 
         var ev = new CorrodingEvent(acid, dps, lightDps);
         RaiseLocalEvent(target, ref ev);
@@ -160,7 +195,10 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         AddComp(target, new TimedCorrodingComponent
         {
             Acid = acid,
-            CorrodesAt = _timing.CurTime + time
+            AcidPrototype = acidId,
+            CorrodesAt = time,
+            Dps = dps,
+            LightDps = lightDps,
         });
     }
 

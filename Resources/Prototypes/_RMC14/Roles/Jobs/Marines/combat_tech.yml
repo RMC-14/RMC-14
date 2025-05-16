@@ -25,11 +25,8 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - CombatTech
-  overwatchSortPriority: 0
+  overwatchSortPriority: -1
   overwatchRoleName: Combat Technicians
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: engi
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -47,6 +44,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-combat-tech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: engi
 
 - type: startingGear
   id: CMGearCombatTech
@@ -122,3 +123,20 @@
     role: CMCombatTech
   - type: Sprite
     state: engi_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCCombatTech
+  components:
+  - type: GhostRole
+    name: cm-job-name-combat-tech
+    description: cm-job-description-combat-tech
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMCombatTech
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 1

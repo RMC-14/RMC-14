@@ -24,12 +24,6 @@
     RMCRankPrivate: []
   accessGroups:
   - MaintTech
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: mt
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -44,6 +38,13 @@
         RMCSkillPowerLoader: 2
     - type: JobPrefix
       prefix: cm-job-prefix-maint-tech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: mt
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
 
 - type: startingGear
   id: CMGearMaintTech

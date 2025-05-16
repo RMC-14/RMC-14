@@ -17,16 +17,10 @@
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: so
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -44,7 +38,8 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 1
-        RMCSkillVehicles: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
@@ -53,6 +48,13 @@
       prefix: cm-job-prefix-staff-officer
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: so
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearStaffOfficer
@@ -80,3 +82,13 @@
 - type: playTimeTracker
   id: CMJobStaffOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSO
+  name: A Staff Officer
+  description: A Staff Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: staff_officer

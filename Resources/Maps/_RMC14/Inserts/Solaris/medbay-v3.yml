@@ -1721,7 +1721,7 @@ entities:
       parent: 1
     - type: Physics
       bodyType: Static
-- proto: CMVendorMedical
+- proto: CMVendorMedicalAllAccess
   entities:
   - uid: 428
     components:

@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Prototypes;
+using Content.Shared.Humanoid.Prototypes;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Spawners;
 
@@ -6,6 +7,6 @@ namespace Content.Server._RMC14.Spawners;
 [Access(typeof(RMCSpawnerSystem))]
 public sealed partial class CorpseSpawnerComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
-    public EntProtoId Spawn;
+    [DataField(required: true)]
+    public ProtoId<RandomHumanoidSettingsPrototype> Spawn;
 }

@@ -1,28 +1,22 @@
 ﻿using Content.Shared._RMC14.Xenonids.Word;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client._RMC14.Xenonids.Word;
 
 [UsedImplicitly]
-public sealed class XenoWordQueenBui : BoundUserInterface
+public sealed class XenoWordQueenBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
     private XenoWordQueenWindow? _window;
 
-    public XenoWordQueenBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-    }
-
     protected override void Open()
     {
-        _window = new XenoWordQueenWindow();
-        _window.OnClose += Close;
-
+        base.Open();
+        _window = this.CreateWindow<XenoWordQueenWindow>();
         _window.SendButton.OnPressed += Send;
-
-        _window.OpenCentered();
     }
 
     private void Send(ButtonEventArgs args)
@@ -37,11 +31,5 @@ public sealed class XenoWordQueenBui : BoundUserInterface
         var msg = new XenoWordQueenBuiMsg(text);
         SendPredictedMessage(msg);
         _window.Close();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _window?.Dispose();
     }
 }

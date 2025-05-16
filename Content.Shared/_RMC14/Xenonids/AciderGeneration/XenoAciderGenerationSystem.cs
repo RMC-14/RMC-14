@@ -19,10 +19,6 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAciderGenerationComponent, MeleeHitEvent>(OnMeleeHit);
-        SubscribeLocalEvent<XenoAciderGenerationComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<XenoAciderGenerationComponent, XenoRestEvent>(OnVisualsRest);
-        SubscribeLocalEvent<XenoAciderGenerationComponent, KnockedDownEvent>(OnVisualsKnockedDown);
-        SubscribeLocalEvent<XenoAciderGenerationComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
     }
 
     private void OnMeleeHit(Entity<XenoAciderGenerationComponent> xeno, ref MeleeHitEvent args)
@@ -45,39 +41,6 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
         Dirty(xeno);
     }
 
-    private void OnMobStateChanged(Entity<XenoAciderGenerationComponent> xeno, ref MobStateChangedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Downed, args.NewMobState != MobState.Alive);
-    }
-
-    private void OnVisualsRest(Entity<XenoAciderGenerationComponent> xeno, ref XenoRestEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Resting, args.Resting);
-    }
-
-    private void OnVisualsKnockedDown(Entity<XenoAciderGenerationComponent> xeno, ref KnockedDownEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Downed, true);
-    }
-
-    private void OnVisualsStatusEffectEnded(Entity<XenoAciderGenerationComponent> xeno, ref StatusEffectEndedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (args.Key == "KnockedDown")
-            _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Downed, false);
-    }
-
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -95,7 +58,7 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
             if (time >= acid.NextIncrease)
             {
                 _energy.AddEnergy((uid, energy), acid.IncreaseAmount, false);
-                acid.NextIncrease = acid.NextIncrease += acid.TimeBetweenGeneration;
+                acid.NextIncrease = time + acid.TimeBetweenGeneration;
                 Dirty(uid, acid);
             }
 

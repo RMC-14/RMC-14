@@ -156,14 +156,14 @@ public sealed class SolutionTransferSystem : EntitySystem
     /// Transfer from a solution to another, allowing either entity to cancel it and show a popup.
     /// </summary>
     /// <returns>The actual amount transferred.</returns>
-    public FixedPoint2 Transfer(EntityUid user,
+    public FixedPoint2 Transfer(EntityUid? user,
         EntityUid sourceEntity,
         Entity<SolutionComponent> source,
         EntityUid targetEntity,
         Entity<SolutionComponent> target,
         FixedPoint2 amount)
     {
-        var transferAttempt = new SolutionTransferAttemptEvent(sourceEntity, targetEntity);
+        var transferAttempt = new SolutionTransferAttemptEvent(sourceEntity, source, targetEntity, target);
 
         // Check if the source is cancelling the transfer
         RaiseLocalEvent(sourceEntity, ref transferAttempt);
@@ -216,7 +216,7 @@ public sealed class SolutionTransferSystem : EntitySystem
 /// To not mispredict this should always be cancelled in shared code and not server or client.
 /// </summary>
 [ByRefEvent]
-public record struct SolutionTransferAttemptEvent(EntityUid From, EntityUid To, string? CancelReason = null)
+public record struct SolutionTransferAttemptEvent(EntityUid From, Entity<SolutionComponent> FromSolution, EntityUid To, Entity<SolutionComponent> ToSolution, string? CancelReason = null)
 {
     /// <summary>
     /// Cancels the transfer.
@@ -231,4 +231,4 @@ public record struct SolutionTransferAttemptEvent(EntityUid From, EntityUid To, 
 /// Raised on the target entity when a non-zero amount of solution gets transferred.
 /// </summary>
 [ByRefEvent]
-public record struct SolutionTransferredEvent(EntityUid From, EntityUid To, EntityUid User, FixedPoint2 Amount);
+public record struct SolutionTransferredEvent(EntityUid From, EntityUid To, EntityUid? User, FixedPoint2 Amount);

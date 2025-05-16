@@ -4,13 +4,13 @@
   id: RMCNailgunCompact
   description: A carpentry tool, used to drive nails into tough surfaces. Cannot fire nails offensively due to a lack of a gas seal around the nail, meaning it cannot build up the pressure to fire.
   suffix: Filled
-  components:  
+  components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/nailgun_compact.rsi    
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/nailgun_compact.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
+    - state: mag-4
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/nailgun_compact.rsi
@@ -24,7 +24,7 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: Item
-    size: Small  
+    size: Small
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -42,7 +42,7 @@
   - type: RMCAmmoEject
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 5
     zeroVisible: true
   - type: Appearance
   - type: AltFireMelee
@@ -65,20 +65,26 @@
   - type: Tag
     tags:
     - RMCNailgunCompact
-    
+
 - type: entity
   parent: RMCNailgunCompact
   name: tactical compact nailgun
   id: RMCNailgunTactical
   description: A carpentry tool, used to drive nails into tough surfaces. This one is military grade, it's olive drab and tacticool. Cannot fire nails as a projectile.
   suffix: Filled
-  components:  
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/nailgun_tactical.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/nailgun_tactical.rsi
   - type: Nailgun
     materialPerRepair: 2
-    
+  - type: Tag
+    tags:
+    - RMCNailgunTactical
+
 - type: Tag
   id: RMCNailgunCompact
+
+- type: Tag
+  id: RMCNailgunTactical

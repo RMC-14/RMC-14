@@ -19,4 +19,7 @@ public sealed partial class WebbingClothingComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<ItemSizePrototype>? UnequippedSize;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<WebbingComponent>? StartingWebbing;
 }

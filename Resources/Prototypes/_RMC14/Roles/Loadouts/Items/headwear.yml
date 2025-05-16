@@ -1,70 +1,84 @@
 # Headwear
 - type: loadout
   id: SquadBeretRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - RMCHeadBeretSquad
 
 - type: loadout
   id: GreenBeretRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - RMCHeadBeretGreen
 
 - type: loadout
   id: TanBeretRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - CMHeadBeretTan
 
 - type: loadout
+  id: BoonieRMC
+  cost: 2
+  storage:
+    back:
+    - RMCBoonie
+
+- type: loadout
+  id: BoonieTanRMC
+  cost: 2
+  storage:
+    back:
+    - RMCBoonieTan
+
+- type: loadout
   id: CapRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - RMCHeadCapFlippable
 
 - type: loadout
   id: BrownHeadbandRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - CMHeadBandBrown
 
 - type: loadout
   id: GreenHeadbandRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - CMHeadBandGreen
 
 - type: loadout
   id: GrayHeadbandRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - CMHeadBandGray
 
 - type: loadout
   id: RedHeadbandRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - CMHeadBandRed
 
 - type: loadout
   id: TanHeadbandRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - CMHeadBandTan
 
 - type: loadout
   id: SquadHeadbandRMC
-  cost: 3
+  cost: 2
   storage:
     back:
     - RMCHeadBandSquad

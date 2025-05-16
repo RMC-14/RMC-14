@@ -133,6 +133,12 @@ cm-chatsan-replacement-arachnid = webspitting host
 cm-chatsan-word-arachnids = arachnids
 cm-chatsan-replacement-arachnids = webspitting hosts
 
+cm-chatsan-word-skrell = skrell
+cm-chatsan-replacement-skrell = frog host
+
+cm-chatsan-word-skrells = skrells
+cm-chatsan-replacement-skrells = frog hosts
+
 cm-chatsan-word-dropship = dropship
 cm-chatsan-replacement-dropship = metal bird
 
@@ -289,6 +295,21 @@ cm-chatsan-replacement-mouse = squeaking host
 cm-chatsan-word-mice = mice
 cm-chatsan-replacement-mice = squeaking hosts
 
+cm-chatsan-word-feroxi = feroxi
+cm-chatsan-replacement-feroxi = aquatic host
+
+cm-chatsan-word-feroxis = feroxis
+cm-chatsan-replacement-feroxis = aquatic hosts
+
+cm-chatsan-word-shark = shark
+cm-chatsan-replacement-shark = aquatic host
+
+cm-chatsan-word-sharks = sharks
+cm-chatsan-replacement-sharks = aquatic hosts
+
+cm-chatsan-word-fish = fish
+cm-chatsan-replacement-fish = aquatic host
+
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
 
@@ -321,11 +342,11 @@ cm-chatsan-replacement-laser = dot
 cm-chatsan-word-lazer = lazer
 cm-chatsan-replacement-lazer = dot
 
-# cm-chatsan-word-# flamer = # flamer
-# cm-chatsan-replacement-# flamer = fire spitter
+cm-chatsan-word-flamer = flamer
+cm-chatsan-replacement-flamer = fire spitter
 
-# cm-chatsan-word-# flamethrower = # flamethrower
-# cm-chatsan-replacement-# flamethrower =  fire spitter
+cm-chatsan-word-flamethrower = flamethrower
+cm-chatsan-replacement-flamethrower = fire spitter
 
 cm-chatsan-word-sadar = sadar
 cm-chatsan-replacement-sadar = tuber

@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyProvost
-  name: provost radio encryption Key
+  name: provost radio encryption key
   components:
   - type: EncryptionKey
     channels:

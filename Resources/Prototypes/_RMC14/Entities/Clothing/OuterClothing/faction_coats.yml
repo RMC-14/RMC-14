@@ -12,9 +12,116 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/deputy.rsi
   - type: CMArmor
-    armor: 15
+    melee: 15
+    bullet: 15
     bio: 10
     explosionArmor: 10
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatBureauDeputyNoFilter
+  suffix: No Filter
+  components:
+  - type: RMCAllowSuitStorageUserWhitelist
+    defaultWhitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+    allowedWhitelist: RMCAllowSuitStorageClothingJacket
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+
+- type: entity
+  parent: RMCCoatBureauMarshal
+  id: RMCCoatBureauMarshalNoFilter
+  suffix: No Filter
+  components:
+  - type: RMCAllowSuitStorageUserWhitelist
+    defaultWhitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+    allowedWhitelist: RMCAllowSuitStorageClothingJacket
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      - RMCSmartPistolHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
 
 - type: entity
   parent: RMCBaseJacket
@@ -40,7 +147,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/jacket_general.rsi
   - type: CMArmor
-    armor: 35
+    melee: 35
+    bullet: 35
     bio: 10
     explosionArmor: 40
   - type: ExplosionResistance
@@ -49,3 +157,9 @@
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket

@@ -32,6 +32,7 @@
         - MachineMask
         layer:
         - MidImpassable
+        - BulletImpassable
   - type: Destructible
     thresholds:
       - trigger:
@@ -40,6 +41,11 @@
         behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMSheetMetal1:
+                min: 2
+                max: 2
   - type: InteractionOutline
   - type: Clickable
   - type: Climbable
@@ -55,6 +61,13 @@
   - type: XenoLeapDestroyOnPass
     spawnPrototype: CMSheetMetal1
     amount: 2
+  - type: RequireProjectileTarget
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    sound: /Audio/_RMC14/Structures/metalhit.ogg
+    damage:
+      types:
+        Blunt: 80
 
 - type: entity
   parent: RMCBaseWindowFrame

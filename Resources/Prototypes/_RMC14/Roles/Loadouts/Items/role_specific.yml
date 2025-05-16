@@ -24,3 +24,26 @@
   storage:
     back:
     - CMHeadBeretCOLtCol
+
+- type: loadout
+  id: ColIDCardRMC
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 630000 # 175 hrs
+  equipment:
+    id: RMCIDCardCommandingOfficerPlus
+
+- type: loadout
+  id: ColNormalIDCardRMC
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 630000 # 175 hrs
+      inverted: true # if you have atleast 175 hours you get the colonel ID, so invert this
+  equipment:
+    id: CMIDCardCommandingOfficer

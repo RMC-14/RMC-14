@@ -103,11 +103,14 @@
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #    CMM74AGMFragAirburstPacketx3airburstgrenades: 20P
-    #    CMM74AGMIncendiaryAirburstPacketx3airburstgrenades: 20P
-    #    CMM74AGMSmokeAirburstPacketx3airburstgrenades: 10P
-    #    CMM74AGMHornetAirburstPacketx3airburstgrenades: 20P
-    #    CMM20MineBoxx4mines: 20P
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
@@ -165,8 +168,9 @@
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
-      entries: [ ]
-    #    CMWeldingVisor: 5P
+      entries:
+      - id: RMCVisorWelding
+        points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletEngineer
@@ -208,6 +212,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
+      - id: RMCArmorVestMedic
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -215,6 +220,12 @@
         recommended: true
       - id: RMCArmorM3HeavyVariants
         name: heavy armor
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10Medic
+      - id: RMCArmorHelmetM10MedicWhite
+        recommended: true
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:

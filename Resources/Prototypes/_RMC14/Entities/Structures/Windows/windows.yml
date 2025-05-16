@@ -1,25 +1,18 @@
 - type: entity
   abstract: true
   parent: CMBaseStructureCorrodible
-  id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
+  id: CMBaseWindowIndestructible
   placement:
     mode: SnapgridCenter
     snap:
     - Wall
   components:
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        collection: GlassSmack
   - type: Transform
     anchored: true
   - type: Sprite
     drawdepth: Walls
   - type: PlacementReplacement
     key: walls
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: Glass
   - type: Airtight
   - type: RadiationBlocker
     resistance: 2
@@ -50,7 +43,29 @@
     flags: Breaching
 
 - type: entity
-  parent: CMBaseWindow
+  abstract: true
+  parent: CMBaseWindowIndestructible
+  id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Glass
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    damage:
+      types:
+        Blunt: 40 # TODO RMC14 reduce window health to 100, check per window
+
+- type: entity
+  parent: CMBaseWindowIndestructible
   id: CMWindowReinforcedAlmayerHull
   name: hull window
   description: A glass window with a special rod matrix inside a wall frame. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
@@ -122,9 +137,10 @@
     spawnPrototype: RMCWindowFrameAlmayer
     sound:
       collection: WindowShatter
+  - type: ImmuneToUnarmed
 
 - type: entity
-  parent: CMBaseWindow
+  parent: CMBaseWindowIndestructible
   id: CMWindowReinforcedWhiteHull
   name: hull window
   description: An ultra-reinforced window designed to keep research a secure area. This one was made out of exotic materials to prevent hull breaches. No way to get through here.

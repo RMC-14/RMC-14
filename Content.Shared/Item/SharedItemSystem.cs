@@ -101,7 +101,7 @@ public abstract class SharedItemSystem : EntitySystem
         {
             args.Handled = true;
             var ev = new ItemPickedUpEvent(args.User, uid);
-            RaiseLocalEvent(ref ev);
+            RaiseLocalEvent(uid, ref ev, true);
         }
     }
 

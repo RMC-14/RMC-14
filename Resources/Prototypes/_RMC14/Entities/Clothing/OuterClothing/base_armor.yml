@@ -20,6 +20,7 @@
       path: /Audio/_RMC14/Machines/armor_equip.ogg
   - type: PlaytimeMedalHolder
   - type: MoveOrderArmor
+  - type: StoreAfterFailedInteract
 
 - type: entity
   abstract: true
@@ -142,7 +143,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
-      #TODO Ceremonial Sword
+      - RMCCeremonialSword
       - RMCDetector
       #TODO walkman
 
@@ -220,6 +221,7 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: sql-armor
+  - type: RMCStorageEjectHand
 
 - type: entity
   parent: RMCBaseMarineArmor

@@ -33,14 +33,15 @@
   - type: DropshipFabricatorPrintable
     cost: 300
   - type: DropshipUtility
-    utilityAttachedSprite:
-      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
-      state: medevac_system_deployed
     activateDelay: 20
     activateInTransport: true
     skills:
       all:
         RMCSkillMedical: 2
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: medevac_system_deployed
   - type: Medevac
   - type: AnimationPlayer
 
@@ -56,10 +57,11 @@
   - type: DropshipFabricatorPrintable
     cost: 200
   - type: DropshipUtility
-    utilityAttachedSprite:
-      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
-      state: fulton_system_deployed
     activateDelay: 5
     activateInTransport: true
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: fulton_system_deployed
   - type: RMCFulton
   - type: AnimationPlayer
