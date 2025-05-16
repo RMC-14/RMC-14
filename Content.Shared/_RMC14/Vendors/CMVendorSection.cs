@@ -91,6 +91,18 @@ public sealed partial record CMVendorEntry
     public bool IsAppendSquadRoleName = false;
 
     /// <summary>
+    /// New prefix that will be applied to the marine when this item is purchased.
+    /// </summary>
+    [DataField]
+    public LocId? GivePrefix;
+
+    /// <summary>
+    /// If true, Prefix will be appended to the marine's current prefix. If false - replaces the current prefix.
+    /// </summary>
+    [DataField]
+    public bool IsAppendPrefix = false;
+
+    /// <summary>
     /// New icon that will be applied to the marine when this item is purchased.
     /// </summary>
     [DataField]

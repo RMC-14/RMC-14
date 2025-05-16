@@ -529,6 +529,26 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             _squads.UpdateSquadTitle(actor);
         }
 
+        if (entry.GivePrefix != null)
+        {
+            if (HasComp<JobPrefixComponent>(actor))
+            {
+                var jobPrefix = Comp<JobPrefixComponent>(actor);
+                if (entry.IsAppendPrefix)
+                    jobPrefix.AdditionalPrefix = entry.GivePrefix;
+                else
+                    jobPrefix.Prefix = entry.GivePrefix!.Value;
+
+                Dirty(actor, jobPrefix);
+            }
+            else
+            {
+                var jobPrefix = EnsureComp<JobPrefixComponent>(actor);
+                jobPrefix.Prefix = entry.GivePrefix!.Value;
+                Dirty(actor, jobPrefix);
+            }
+        }
+
         if (_net.IsClient)
             return;
 

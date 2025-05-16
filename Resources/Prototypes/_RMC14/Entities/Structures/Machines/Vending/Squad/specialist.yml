@@ -24,6 +24,8 @@
       - id: RMCDemoSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-demo
         isAppendSquadRoleName: true
+        givePrefix: rmc-job-prefix-weapons-specialist-demo
+        isAppendPrefix: true
         giveIcon:
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_demo
@@ -33,6 +35,8 @@
       - id: RMCGrenadeSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-grenadier
         isAppendSquadRoleName: true
+        givePrefix: rmc-job-prefix-weapons-specialist-grenadier
+        isAppendPrefix: true
         giveIcon:
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_grenadier
@@ -46,10 +50,14 @@
       - id: RMCScoutSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-scout
         isAppendSquadRoleName: true
+        givePrefix: rmc-job-prefix-weapons-specialist-scout
+        isAppendPrefix: true
         # maybe scout should come up with his own icons
       - id: CMSniperEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-sniper
         isAppendSquadRoleName: true
+        givePrefix: rmc-job-prefix-weapons-specialist-sniper
+        isAppendPrefix: true
         giveIcon:
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_sniper
@@ -61,6 +69,8 @@
       - id: RMCAntiMaterielEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-anti-materiel-sniper
         isAppendSquadRoleName: true
+        givePrefix: rmc-job-prefix-weapons-specialist-anti-materiel-sniper
+        isAppendPrefix: true
         giveIcon:
           sprite: _RMC14/Interface/cm_job_icons.rsi
           state: hudsquad_spec_anti_materiel_sniper
