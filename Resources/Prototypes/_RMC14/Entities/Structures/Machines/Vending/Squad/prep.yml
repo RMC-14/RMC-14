@@ -285,11 +285,12 @@
       - id: RMCM5CameraGear
         amount: 10
     - name: Optics
-      entries: [ ]
-#      - id: Advanced Medical Optic (CORPSMAN ONLY)
-#        amount: 4
-#      - id: Squad Optic
-#        amount: 15
+      entries:
+      - id: RMCVisorMedicalAdvanced
+        name: advanced medical optic (CORPSMAN ONLY)
+        amount: 4
+      - id: RMCVisorSquad
+        amount: 15
 
 
 - type: entity

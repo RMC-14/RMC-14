@@ -22,12 +22,6 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: ce
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

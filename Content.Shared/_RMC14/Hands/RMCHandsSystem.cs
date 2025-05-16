@@ -12,11 +12,12 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Hands;
 
-public sealed class RMCHandsSystem : EntitySystem
+public abstract class RMCHandsSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -244,4 +245,6 @@ public sealed class RMCHandsSystem : EntitySystem
         _hands.TryPickupAnyHand(user, pickUpItem.Value);
         return true;
     }
+
+    public virtual void ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f) { }
 }

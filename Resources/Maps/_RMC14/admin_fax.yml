@@ -1,6 +1,17 @@
 meta:
-  format: 6
-  postmapinit: false
+  format: 7
+  category: Map
+  engineVersion: 251.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 05/10/2025 21:36:26
+  entityCount: 1850
+maps:
+- 1
+grids:
+- 2
+orphans: []
+nullspace: []
 tilemap:
   0: Space
   67: CMFloorCargo
@@ -106,7 +117,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: Map Entity
+      name: RMCAdminFax
     - type: Transform
     - type: Map
       mapPaused: True
@@ -115,11 +126,10 @@ entities:
     - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
-    - type: LoadedMap
   - uid: 2
     components:
     - type: MetaData
-      name: grid
+      name: Fax Responder Outpost
     - type: Transform
       pos: 0.8067627,-0.45703125
       parent: 1
@@ -11107,6 +11117,34 @@ entities:
     components:
     - type: Transform
       pos: 36.5,-2.5
+      parent: 2
+- proto: RMCStampCLF
+  entities:
+  - uid: 1848
+    components:
+    - type: Transform
+      pos: 44.392708,-7.8140173
+      parent: 2
+- proto: RMCStampFreePress
+  entities:
+  - uid: 1847
+    components:
+    - type: Transform
+      pos: 51.367237,-29.793123
+      parent: 2
+- proto: RMCStampSPP
+  entities:
+  - uid: 1850
+    components:
+    - type: Transform
+      pos: 12.310269,-30.769281
+      parent: 2
+- proto: RMCStampTSE
+  entities:
+  - uid: 1849
+    components:
+    - type: Transform
+      pos: 26.33321,-23.76131
       parent: 2
 - proto: RMCWallCorsatHull
   entities:

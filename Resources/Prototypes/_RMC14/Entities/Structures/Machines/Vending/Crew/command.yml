@@ -181,8 +181,8 @@
       - id: RMCMaskRebreather
     - name: Other Supplies
       entries:
-      # - id: CMHelmetVisorMedical
-      #   points: 5
+      - id: RMCVisorWelding
+        points: 5
       - id: RMCAttachmentMagneticHarness
         points: 12
       - id: RMCBackpackRTO
@@ -303,6 +303,8 @@
         points: 15
     - name: Other Supplies
       entries:
+      - id: RMCVisorWelding
+        points: 5
       - id: CMHandsInsulated
         points: 3
       - id: RMCPouchMacheteFilled
@@ -381,12 +383,19 @@
       - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
       - id: RMCHeadCapFlippable # TODO: Check this is the service variant. If so, parent and rename.
+      - id: CMHeadCapPeakedService
     - name: Service Extras
       entries:
       - id: CMCoatCOBomber
-    # - name: Dress  # TODO: Check if this is locked to Council Members; this seems weird for a CO to be able to wear
-    #   entries:
-    # - name: Dress Headwear
+    - name: Dress
+      entries:
+      - id: CMCoatDressBluesGeneral
+      - id: CMCoatXOFormal
+      - id: RMCMarineUniformDressSenior
+      - id: RMCShoesLaceup
+    - name: Dress Headwear
+      entries:
+      - id: CMHeadDressBluesOfficer
     # - name: Dress Extras
 
 # Equipment Vend
@@ -426,7 +435,7 @@
       entries:
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
-      - id: CMHandsInsulated
+      - id: RMCHandsDeluxeMarine
       - id: CMBootsBlackFilled
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -435,7 +444,6 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-    #- id: CMTacticalWaistcoat # TODO Port Waistcoat
       - id: CMWebbingPouch
       - id: CMWebbing
       - id: CMWebbingHolster
@@ -516,6 +524,11 @@
       entries:
       - id: RMCD50WinterWyvernBeltFilled
       - id: RMCMatebaBeltFilled
+    - name: Ceremonial Weapon
+      choices: { CMCeremonial: 1 }
+      entries:
+      - id: RMCScabbardCeremonialFilled
+        name: Commander's Ceremonial Sabre
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
@@ -526,7 +539,7 @@
         recommended: true
       - id: CMMagazineRifleM54CExt
         points: 20
-      - id: CMMagazineRifleM54CAP # When MK1 is ported; replace first two mags with MK1 variants and uncomment this.
+      - id: CMMagazineRifleM54CAP
         points: 20
       - id: RMCMagazineSmartGun
         points: 20
@@ -550,9 +563,8 @@
         points: 20
     - name: Special Ammunition
       entries:
-      - id: RMCMagazineRifleM54CIncendiary
-        points: 65
-      #- id: M54C Rubber Magazine
+      - id: RMCMagazineRifleM54CRubber
+        points: 10
       - id: RMCBoxShotgunBeanbag
         points: 10
     - name: Explosives
@@ -562,6 +574,7 @@
       - id: CMPacketGrenadeFragFilled
         points: 15
       #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      #- id: CMPacketGrenadesG2Filled (x3) # TODO RMC14 Port Electroshock (G2) Grenades
     - name: Rail Attachments
       entries:
       - id: RMCAttachmentS5RedDotSight
@@ -570,10 +583,15 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    - name: Helmet Visors # TODO RMC14 Port Helmet Visors
+    - name: Helmet Visors
       entries:
       - id: RMCVisorNightVision
         points: 10
+        recommended: true
+      - id: RMCVisorWelding
+        points: 5
+      - id: RMCVisorMedicalAdvanced
+        points: 5
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight

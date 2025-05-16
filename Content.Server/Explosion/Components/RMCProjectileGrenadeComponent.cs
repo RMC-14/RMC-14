@@ -18,10 +18,10 @@ public sealed partial class ProjectileGrenadeComponent
     public float DirectionAngle = -90;
 
     /// <summary>
-    ///     The degrees added to the direction angle when the grenade rebounds
+    ///     How many seconds after rebounding the projectile should be triggered.
     /// </summary>
     [DataField]
-    public float ReboundAngle = 180;
+    public float ReboundTimer = 0.05f;
 
     /// <summary>
     ///     The angle of the projectile spray

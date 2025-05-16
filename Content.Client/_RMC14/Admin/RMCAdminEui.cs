@@ -39,10 +39,6 @@ public sealed class RMCAdminEui : BaseEui
         _adminWindow.XenoTab.HiveList.OnItemSelected += OnHiveSelected;
         _adminWindow.XenoTab.CreateHiveButton.OnPressed += OnCreateHivePressed;
 
-        var humanoidRow = new RMCTransformRow();
-        humanoidRow.Label.Text = Loc.GetString("rmc-ui-humanoid");
-        _adminWindow.TransformTab.Container.AddChild(humanoidRow);
-
         var allSpecies = new SortedSet<SpeciesPrototype>(SpeciesComparer);
         foreach (var entity in _prototypes.EnumeratePrototypes<SpeciesPrototype>())
         {
@@ -52,13 +48,29 @@ public sealed class RMCAdminEui : BaseEui
             allSpecies.Add(entity);
         }
 
+        var humanoidRow = new RMCTransformRow();
+        humanoidRow.Label.Text = Loc.GetString("rmc-ui-humanoid");
+        _adminWindow.TransformTab.Container.AddChild(humanoidRow);
+
+        var i = 0;
         foreach (var species in allSpecies)
         {
+            if (i > 0 && i % 5 == 0)
+            {
+                humanoidRow.Container.Margin = new Thickness();
+                humanoidRow = new RMCTransformRow();
+                humanoidRow.Label.Visible = false;
+                humanoidRow.Separator.Visible = false;
+                _adminWindow.TransformTab.Container.AddChild(humanoidRow);
+            }
+
             var button = new RMCTransformButton { Type = TransformType.Humanoid };
             button.TransformName.Text = Loc.GetString(species.Name);
             button.OnPressed += _ => SendMessage(new RMCAdminTransformHumanoidMsg(species.ID));
 
             humanoidRow.Container.AddChild(button);
+
+            i++;
         }
 
         var tiers = new SortedDictionary<int, SortedSet<EntityPrototype>>();

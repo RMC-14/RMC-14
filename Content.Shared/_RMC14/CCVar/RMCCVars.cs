@@ -414,4 +414,13 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCMovementBigXenosCancelMovement =
         CVarDef.Create("rmc.movement_big_xenos_cancel_movement", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCHijackShipWeight =
+        CVarDef.Create("rmc.hijack_ship_weight", 0.5f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCMinimumHijackBurrowed =
+    CVarDef.Create("rmc.hijack_minimum_burrowed", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDistressXenosMinimum =
+        CVarDef.Create("rmc.distress_xenos_minimum", 4, CVar.REPLICATED | CVar.SERVER);
 }

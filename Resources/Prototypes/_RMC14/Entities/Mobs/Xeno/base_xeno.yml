@@ -81,7 +81,7 @@
   - type: Climbing
   - type: Insulated
   - type: Input
-    context: "human"
+    context: "xenonid"
   - type: Clickable
   - type: InteractionOutline
   - type: InputMover
@@ -453,6 +453,7 @@
   - type: FirePatter
     stacks: -5
   - type: RMCHandEmotes
+  - type: XenoToggleChargingKnockback
 
 - type: entity
   abstract: true

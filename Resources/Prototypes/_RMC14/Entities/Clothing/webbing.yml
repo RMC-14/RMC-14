@@ -516,6 +516,16 @@
     - id: RMCPowerCellSmartgun
 
 - type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingBuckshot
+  suffix: Buckshot, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
+
+- type: entity
   parent: CMWebbingPouch
   id: CMWebbingPouchRoyal
   suffix: Filled, Royal

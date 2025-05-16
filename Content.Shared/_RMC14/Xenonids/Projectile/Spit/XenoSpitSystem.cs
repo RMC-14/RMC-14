@@ -59,6 +59,7 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly CMArmorSystem _armor = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
@@ -306,6 +307,9 @@ public sealed class XenoSpitSystem : EntitySystem
         {
             return;
         }
+
+        if (!_xeno.CanAbilityAttackTarget(shooter, args.Target))
+            return;
 
         _xenoShield.ApplyShield(shooter, ent.Comp.Shield, ent.Comp.Amount, addShield: true, maxShield: ent.Comp.Max.Double());
     }
