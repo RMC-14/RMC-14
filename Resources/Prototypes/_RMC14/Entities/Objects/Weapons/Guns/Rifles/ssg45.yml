@@ -30,8 +30,6 @@
     soundGunshot:
       collection: RMCSSG45Shoot
     shotsPerBurst: 3
-  - type: GunDamageModifier
-    multiplier: 1.25
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -75,7 +73,7 @@
           - RMCMagazineRifleSSG45Incend
         startingItem: RMCMagazineRifleSSG45
   - type: GunDamageModifier
-    multiplier: 1.1
+    multiplier: 1.25
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
