@@ -84,6 +84,10 @@
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
     threshold: 1
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    destroy: true
+    minimumStage: 4
 
 - type: entity
   parent: RMCShutterBase

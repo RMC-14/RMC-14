@@ -15,12 +15,6 @@
   accessGroups:
   - Colonist
   - Synth
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: synth
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

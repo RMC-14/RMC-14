@@ -216,7 +216,7 @@
     - multiplier: 0.645
       whitelist:
         components:
-        - ResistLocker #Lockers/Crates
+        - RequisitionsCrate #Lockers/Crates
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -357,3 +357,17 @@
   - type: RMCDisarm
   - type: RMCDisarmable
   - type: StunOnExplosionReceived
+  - type: DeafenWhileCrit
+  - type: XenoToggleChargingDamage
+    damage:
+      types:
+        Blunt: 0.25 # TODO RMC14 to the chest only
+    armorPiercingDamage:
+      types:
+        Blunt: 1
+    armorPiercing: 13
+    defaultMultiplier: 5
+    stageMultipliers:
+      8: 8
+  - type: XenoToggleChargingKnockback
+  - type: XenoToggleChargingParalyze

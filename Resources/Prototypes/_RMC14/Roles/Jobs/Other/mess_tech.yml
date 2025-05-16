@@ -20,12 +20,6 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - MessTech
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: mst
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

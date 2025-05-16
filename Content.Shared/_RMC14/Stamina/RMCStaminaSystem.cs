@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.BlurredVision;
+using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Stun;
@@ -34,6 +35,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
 
     public override void Initialize()
     {
@@ -125,7 +127,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
         if (newLevel >= 4)
         {
-            //TODO RMC14 Deafness
+            _deafness.TryDeafen(ent, ent.Comp.EffectTime, true, ignoreProtection: true);
             _stun.TryParalyze(ent, ent.Comp.EffectTime, true);
             _status.TryAddStatusEffect(ent, "Muted", ent.Comp.EffectTime, true, "Muted");
             _status.TryAddStatusEffect(ent, "TemporaryBlindness", ent.Comp.EffectTime, true, "TemporaryBlindness");

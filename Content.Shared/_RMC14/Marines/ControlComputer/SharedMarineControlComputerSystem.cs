@@ -101,7 +101,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
 
         var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name);
-        _dialog.OpenInput(ent, actor.Value, "What should the medal citation read?", ev, true);
+        _dialog.OpenInput(ent, actor.Value, "What should the medal citation read?", ev, true, _commendation.CharacterLimit);
     }
 
     private void OnComputerMedalMessage(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMessageEvent args)

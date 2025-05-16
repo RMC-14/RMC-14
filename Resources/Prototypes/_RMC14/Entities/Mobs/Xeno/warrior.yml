@@ -58,7 +58,7 @@
   - type: XenoEvolution
     max: 500
     evolvesTo:
-    - CMXenoCrusher
+    - RMCXenoCrusher
     - CMXenoPraetorian
   - type: CMArmor
     xenoArmor: 20

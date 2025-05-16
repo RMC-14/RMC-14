@@ -454,6 +454,7 @@
   - type: FirePatter
     stacks: -5
   - type: RMCHandEmotes
+  - type: XenoToggleChargingKnockback
 
 - type: entity
   abstract: true

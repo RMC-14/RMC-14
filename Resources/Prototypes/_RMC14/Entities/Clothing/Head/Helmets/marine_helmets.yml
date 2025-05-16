@@ -315,6 +315,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: RMCBulkyArmor
+    isBulky: false
 
 # M3-S Scout Spec
 - type: entity

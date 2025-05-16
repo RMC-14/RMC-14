@@ -438,7 +438,8 @@ public abstract partial class SharedGunSystem : EntitySystem
             if (ent == null)
                 continue;
 
-            if (IsClientSide(ent.Value))
+            if (IsClientSide(ent.Value) &&
+                (HasComp<GunIgnorePredictionComponent>(gunUid) || projectiles == null || !projectiles.Contains(ent.Value)))
                 Del(ent);
         }
 
