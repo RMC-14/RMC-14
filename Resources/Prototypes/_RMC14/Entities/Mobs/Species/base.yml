@@ -349,6 +349,9 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
+  - type: IVDripTarget
+  - type: StunOnExplosionReceived
+  - type: DeafenWhileCrit
   - type: RMCMeleeDamageSkill
   - type: RMCStripTimeSkill
   - type: RMCDisarm

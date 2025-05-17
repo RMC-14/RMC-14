@@ -242,6 +242,9 @@ public abstract class SharedWoundsSystem : EntitySystem
             return false;
         }
 
+        if (HasComp<WoundableUntreatableComponent>(target))
+            return false;
+
         var targetName = Identity.Name(target, EntityManager, user);
         var hasSkills = _skills.HasAllSkills(user, treater.Comp.Skills);
         if (!treater.Comp.CanUseUnskilled && !hasSkills)

@@ -51,8 +51,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         SubscribeLocalEvent<IVDripComponent, GetVerbsEvent<InteractionVerb>>(OnIVVerbs);
         SubscribeLocalEvent<IVDripComponent, ExaminedEvent>(OnIVExamine);
 
-        // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
-        SubscribeLocalEvent<MarineComponent, CanDropTargetEvent>(OnMarineCanDropTarget);
+        SubscribeLocalEvent<IVDripTargetComponent, CanDropTargetEvent>(OnIVTargetCanDropTarget);
 
         SubscribeLocalEvent<BloodPackComponent, MapInitEvent>(OnBloodPackMapInit);
         SubscribeLocalEvent<BloodPackComponent, AfterAutoHandleStateEvent>(OnBloodPackAfterState);
@@ -86,15 +85,13 @@ public abstract class SharedIVDripSystem : EntitySystem
 
     private void OnIVDripCanDropDragged(Entity<IVDripComponent> iv, ref CanDropDraggedEvent args)
     {
-        // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
-        if (!HasComp<MarineComponent>(args.Target) || !InRange(iv, args.Target, iv.Comp.Range))
+        if (!HasComp<IVDripTargetComponent>(args.Target) || !InRange(iv, args.Target, iv.Comp.Range))
             return;
         args.Handled = true;
         args.CanDrop = true;
     }
 
-    // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
-    private void OnMarineCanDropTarget(Entity<MarineComponent> marine, ref CanDropTargetEvent args)
+    private void OnIVTargetCanDropTarget(Entity<IVDripTargetComponent> marine, ref CanDropTargetEvent args)
     {
         var iv = args.Dragged;
         if (!TryComp(iv, out IVDripComponent? ivComp) || !InRange(iv, marine, ivComp.Range))
@@ -181,8 +178,7 @@ public abstract class SharedIVDripSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
-        // TODO RMC14 check for BloodstreamComponent instead of MarineComponent
-        if (!InRange(pack, target, pack.Comp.Range) || !HasComp<MarineComponent>(target))
+        if (!InRange(pack, target, pack.Comp.Range) || !HasComp<IVDripTargetComponent>(target))
             return;
 
         args.Handled = true;
