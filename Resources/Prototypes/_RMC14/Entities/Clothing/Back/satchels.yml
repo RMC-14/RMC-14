@@ -523,3 +523,12 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/medic.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelTSEPA
+  name: TSP-4 police pack
+  description: A TSEPA standard-issue Three Suns Pack MK4.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi

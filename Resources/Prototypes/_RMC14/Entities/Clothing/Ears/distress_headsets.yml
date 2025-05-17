@@ -10,6 +10,17 @@
       key_slots:
       - CMEncryptionKeyColony
 
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetColonyIcons
+  name: colony headset
+  description: A standard headset used by colonists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
 # For Bureau Marshals
 - type: entity
   parent: RMCHeadsetIconsCMB
