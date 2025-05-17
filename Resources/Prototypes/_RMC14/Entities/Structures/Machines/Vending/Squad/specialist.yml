@@ -6,7 +6,6 @@
   - type: CMAutomatedVendor
     jobs:
     - CMWeaponsSpecialist
-    - CMWeaponsSpecialistWhiskey
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
@@ -141,7 +140,6 @@
   - type: CMAutomatedVendor
     jobs:
     - CMWeaponsSpecialist
-    - CMWeaponsSpecialistWhiskey
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
