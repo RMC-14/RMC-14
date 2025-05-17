@@ -39,6 +39,8 @@ public sealed class RMCLobbyUIController : UIController
                 system.ClientJoinLarva();
                 _joinXenoWindow.Close();
             };
+
+            _joinXenoWindow.OpenCentered();
         }
 
         if (larva == 0)
@@ -52,7 +54,6 @@ public sealed class RMCLobbyUIController : UIController
             _joinXenoWindow.Buttons.Visible = true;
         }
 
-        _joinXenoWindow.OpenCentered();
         system.RequestBurrowedLarvaStatus();
     }
 }
