@@ -192,7 +192,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: RMCBulletSentryFireProjectileSmoke
-  name: Flaming Ball Smoke
+  name: flaming ball smoke
   description: Huh? You shouldn't be able to see this...
   categories: [ HideSpawnMenu ]
   components:
