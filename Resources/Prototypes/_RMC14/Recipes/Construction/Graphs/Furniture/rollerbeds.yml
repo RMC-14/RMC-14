@@ -1,0 +1,25 @@
+- type: constructionGraph
+  id: RMCRollerBed
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DeleteEntity {}
+    - node: Metal  #for normal rollerbed
+      edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 1
+        steps:
+          - tool: Anchoring
+    - node: Plasteel  #for heavy rollerbed
+      edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: CMSheetPlasteel1
+            amount: 1
+        steps:
+          - tool: Anchoring
