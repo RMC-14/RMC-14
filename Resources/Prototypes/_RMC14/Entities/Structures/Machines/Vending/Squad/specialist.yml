@@ -1,20 +1,12 @@
 # SPECIALIST
-
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSWSGear
-  name: ColMarTech squad weapons specialist gear rack
-  description: An automated gear rack for Squad Weapons Specialists.
+  abstract: true
+  id: RMCVendorWeaponsSpecialistGearBase
   components:
-  - type: RMCVendorSpecialist
-  - type: AccessReader
-    access:
-    - [ "CMAccessSpecPrep" ]
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
   - type: CMAutomatedVendor
     jobs:
     - CMWeaponsSpecialist
+    - CMWeaponsSpecialistWhiskey
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
@@ -77,8 +69,8 @@
         name: M40 HIDP Incendiary Grenades (x6)
         points: 40
         spawn: 6
-    #- id: M40HPDPWhitePhosphorusGrenadesx6
-    #  points: 40
+      #- id: M40HPDPWhitePhosphorusGrenadesx6
+      #  points: 40
       - id: RMC40MMGrenadeM74AGMF
         points: 40
         spawn: 6
@@ -98,6 +90,44 @@
     #  points: 40
 
 - type: entity
+  parent: [ColMarTechBase, RMCVendorWeaponsSpecialistGearBase]
+  id: ColMarTechSWSGear
+  name: ColMarTech squad weapons specialist gear rack
+  description: An automated gear rack for Squad Weapons Specialists.
+  components:
+  - type: RMCVendorSpecialist
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/specialist_gear.rsi
+
+- type: entity
+  parent: [BaseItem, RMCVendorWeaponsSpecialistGearBase]
+  id: RMCKitWeaponsSpecialist
+  name: specialist kit
+  description: A paper box. Open it and get a specialist kit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: CMAutomatedVendor
+    jobs:
+    - CMWeaponsSpecialist
+
+- type: entity
   parent: ColMarTechBase
   id: ColMarTechSWSEquipment
   name: ColMarTech squad weapons specialist equipment rack
@@ -111,6 +141,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMWeaponsSpecialist
+    - CMWeaponsSpecialistWhiskey
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
