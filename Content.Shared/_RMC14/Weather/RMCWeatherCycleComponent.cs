@@ -37,6 +37,9 @@ public sealed partial class RMCWeatherEvent
     public TimeSpan Duration;
 
     [DataField]
+    public TimeSpan DurationRemaining;
+
+    [DataField]
     public ProtoId<WeatherPrototype> WeatherType;
 
     [DataField]

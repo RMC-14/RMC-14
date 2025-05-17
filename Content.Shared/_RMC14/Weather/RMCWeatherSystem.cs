@@ -113,6 +113,7 @@ public sealed class RMCWeatherSystem : EntitySystem
                 var endTime = _timing.CurTime + weatherPick.Duration;
 
                 cycle.CurrentEvent = weatherPick;
+                cycle.CurrentEvent.DurationRemaining = weatherPick.Duration;
                 _weather.SetWeather(Transform(uid).MapID, weatherProto, endTime);
 
                 var minTimeVariance = (-cycle.MinTimeVariance * 0.5) + _random.Next(cycle.MinTimeVariance);
@@ -122,6 +123,13 @@ public sealed class RMCWeatherSystem : EntitySystem
             // Process effects for ongoing weather event
             if (cycle.CurrentEvent != null)
             {
+                cycle.CurrentEvent.DurationRemaining -= TimeSpan.FromSeconds(frameTime);
+                if (cycle.CurrentEvent.DurationRemaining <= TimeSpan.Zero)
+                {
+                    cycle.CurrentEvent = null;
+                    continue;
+                }
+
                 cycle.CurrentEvent.LightningCooldown -= TimeSpan.FromSeconds(frameTime);
                 if (cycle.CurrentEvent.LightningCooldown <= TimeSpan.Zero)
                 {
