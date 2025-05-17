@@ -55,8 +55,8 @@
 - type: entity
   parent: BaseMagazineRifle
   id: RMCMagazineSentryFire
-  name: "Sentry Incinerator Fuel Tank"
-  description: "A fuel tank of Ultra Thick Napthal Fuel, used in the UA 45-FM. Contains 100 units of fuel."
+  name: sentry incinerator fuel tank
+  description: A fuel tank of Ultra Thick Napthal Fuel, used in the UA 45-FM. Contains 100 units of fuel.
   components:
   - type: Tag
     tags:
