@@ -401,9 +401,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (LifeStage(tracked) < EntityLifeStage.MapInitialized)
             return;
 
-        if (EnsureComp<ActiveTacticalMapTrackedComponent>(tracked, out var active))
-            return;
-
+        var active = EnsureComp<ActiveTacticalMapTrackedComponent>(tracked);
         var activeEnt = new Entity<ActiveTacticalMapTrackedComponent>(tracked, active);
         UpdateIcon(activeEnt);
         UpdateRotting(activeEnt);
