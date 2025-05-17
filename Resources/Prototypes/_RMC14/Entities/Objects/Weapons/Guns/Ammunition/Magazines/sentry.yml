@@ -80,8 +80,8 @@
 - type: entity
   parent: BaseMagazineRifle
   id: RMCMagazineSentryFireBlue
-  name: "Sentry Incinerator Fuel Tank"
-  description: "A fuel tank of usually Ultra Thick Napthal Fuel, a sticky combustible liquid chemical, used in the UA 55-FA."
+  name: sentry incinerator fuel tank
+  description: A fuel tank of usually Ultra Thick Napthal Fuel, a sticky combustible liquid chemical, used in the UA 55-FA.
   components:
   - type: Tag
     tags:
