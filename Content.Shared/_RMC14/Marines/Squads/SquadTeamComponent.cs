@@ -19,6 +19,12 @@ public sealed partial class SquadTeamComponent : Component
     [DataField(required: true)]
     public Color Color;
 
+    /// <summary>
+    ///     More accessible color option <see cref = "Color" /> if it is not visible enough in certain situations.
+    /// </summary>
+    [DataField]
+    public Color? AccessibleColor;
+
     [DataField(required: true)]
     public ProtoId<RadioChannelPrototype>? Radio;
 
