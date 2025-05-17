@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SG6732
-  changes:
-  - message: Fixed typo.
-    type: Tweak
-  id: 1229
-  time: '2025-01-18T04:11:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5352
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed cargo technicians not spawning with a M1984 belt.
@@ -5422,5 +5415,12 @@
   id: 1731
   time: '2025-05-16T14:08:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6467
+- author: Vermidia
+  changes:
+  - message: Fixed ravagers having the wrong tacmap icon
+    type: Fix
+  id: 1732
+  time: '2025-05-17T01:29:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6458
 Name: RMC14
 Order: -1
