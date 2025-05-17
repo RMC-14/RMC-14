@@ -39,7 +39,6 @@
   - type: RMCDeleteAnchoredOnInit
     whitelist:
       tags:
-      - XenoWeedTile
       - XenoWeedNode
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
