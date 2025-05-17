@@ -7,14 +7,17 @@ using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Construction.Tunnel;
 using Content.Server._RMC14.Xenonids.Hive;
+using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.Fax;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
+using Content.Server.Ghost;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
+using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
@@ -66,11 +69,14 @@ using Content.Shared.Destructible;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.StatusEffect;
@@ -93,6 +99,7 @@ namespace Content.Server._RMC14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
@@ -144,7 +151,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
     [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
-
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly GhostSystem _ghost = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -166,6 +174,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private TimeSpan _sunsetDuration;
     private TimeSpan _sunriseDuration;
     private TimeSpan _forceEndHijackTime;
+    private float _hijackShipWeight;
+    private int _hijackMinBurrowed;
+    private int _xenosMinimum;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -226,6 +237,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCSunsetDuration, v => _sunsetDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCSunriseDuration, v => _sunriseDuration = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCForceEndHijackTimeMinutes, v => _forceEndHijackTime = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCHijackShipWeight, v => _hijackShipWeight = v, true);
+        Subs.CVar(_config, RMCCVars.RMCMinimumHijackBurrowed, v => _hijackMinBurrowed = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
 
         ReloadPrototypes();
     }
@@ -467,6 +481,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _parasite.SetBurstDelay((corpseMob, victimInfected), comp.XenoSurvivorCorpseBurstDelay);
 
                     _xeno.MakeXeno(newXeno);
+
+                    _adminLog.Add(LogType.RMCXenoSpawn, $"Player {player} with mob {ToPrettyString(newXeno):xeno} spawned as a xeno from their corpse {ToPrettyString(corpseMob):corpse}");
                     return newXeno;
                 }
 
@@ -861,12 +877,84 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _destruction.DestroyEntity(hiveStructure);
             }
         }
+        var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+        var xenoAmount = 0;
+        var larva = 0;
+        //TODO RMC14 only do main hive
+        while (xenos.MoveNext(out var xeno, out var comp, out var mobstate, out var transformComp))
+        {
+            if (_mobState.IsDead(xeno))
+                continue;
+
+            if (transformComp.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(xeno.ToCoordinates()))
+            {
+                if (comp.CountedInSlots)
+                    larva++;
+
+                //Ghost player and send message
+                if (TryComp(xeno, out ActorComponent? actor))
+                {
+                    var session = actor.PlayerSession;
+
+                    Entity<MindComponent> mind;
+
+                    if (_mind.TryGetMind(session, out var mindId, out var mindComp))
+                        mind = (mindId, mindComp);
+                    else
+                        mind = _mind.CreateMind(session.UserId);
+
+                    var ghost = _ghost.SpawnGhost((mind.Owner, mind.Comp), xeno);
+
+                    var origin = _transform.GetMoverCoordinates(xeno);
+
+                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
+                }
+                QueueDel(xeno);
+            }
+            else
+                xenoAmount++;
+        }
+
+        //Surge
+        var shipQuery = EntityQueryEnumerator<MarineComponent, MobStateComponent, InfectableComponent, TransformComponent>();
+
+        float totalHostWeights = 0;
+        while (shipQuery.MoveNext(out var marine, out var mob, out var _, out var _, out var transformComp))
+        {
+            if (_mobState.IsDead(marine) || !_almayerMaps.Contains(transformComp.MapID))
+                continue;
+
+            if (!TryComp<MindContainerComponent>(marine, out var mindContainer))
+                continue;
+
+            if (mindContainer is null ||
+                !TryComp<MindComponent>(mindContainer.Mind, out var mind))
+                continue;
+
+            foreach (var roleId in mind.MindRoles)
+            {
+                if (!TryComp<MindRoleComponent>(roleId, out var mindRole))
+                    continue;
+
+                if (mindRole.JobPrototype == null || !_prototypes.TryIndex(mindRole.JobPrototype, out var proto))
+                    continue;
+
+                totalHostWeights += proto.RoleWeight;
+            }
+        }
+
+        //Get the maximum of either remaining marines or minimum amount
+        var surgeAmount = Math.Max((int)Math.Ceiling(totalHostWeights * _hijackShipWeight) - xenoAmount, _hijackMinBurrowed);
         var rules = QueryActiveRules();
         while (rules.MoveNext(out _, out var rule, out _))
         {
             // Reset Hivecore Cooldown
             var hiveComp = EnsureComp<HiveComponent>(rule.Hive);
+            //Add all the stranded xenos up
+            _hive.IncreaseBurrowedLarva(larva); // TODO RMC14 should prob make sure it's only main hive
             _hive.ResetHiveCoreCooldown((rule.Hive, hiveComp));
+            var surge = EnsureComp<HijackBurrowedSurgeComponent>(rule.Hive);
+            surge.PooledLarva = surgeAmount;
         }
     }
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
@@ -946,7 +1034,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var query = QueryAllRules();
         while (query.MoveNext(out _, out var distress, out _))
         {
-            var xenoCandidate = false;
+            var xenoCandidates = 0;
             foreach (var player in ev.Players)
             {
                 if (_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
@@ -955,23 +1043,22 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (profile.JobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
                         xenoPriority > JobPriority.Never)
                     {
-                        xenoCandidate = true;
-                        break;
+                        xenoCandidates++;
                     }
-
-                    if (profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
+                    else if (profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
                         queenPriority > JobPriority.Never)
                     {
-                        xenoCandidate = true;
-                        break;
+                        xenoCandidates++;
                     }
                 }
             }
 
-            if (xenoCandidate)
+            if (xenoCandidates >= _xenosMinimum)
                 continue;
 
-            ChatManager.SendAdminAnnouncement("Can't start distress signal. Requires at least 1 xeno player but we have 0.");
+            var msg = $"Can't start distress signal. Requires at least {_xenosMinimum} xeno player but we have {xenoCandidates}.";
+            ChatManager.SendAdminAnnouncement(msg);
+            ChatManager.DispatchServerAnnouncement(msg);
             ev.Cancel();
         }
     }

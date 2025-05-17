@@ -3,6 +3,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
@@ -10,6 +11,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
@@ -23,6 +25,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -43,6 +46,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         SubscribeLocalEvent<StunOnHitComponent, MeleeHitEvent>(OnStunOnHitMeleeHit);
 
         SubscribeLocalEvent<MeleeDamageMultiplierComponent, MeleeHitEvent>(OnMultiplierOnHitMeleeHit);
+        SubscribeLocalEvent<RMCMeleeDamageSkillComponent, MeleeHitEvent>(OnSkilledOnHitMeleeHit);
 
         SubscribeAllEvent<LightAttackEvent>(OnLightAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
 
@@ -97,6 +101,18 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
                 break;
             }
         }
+    }
+
+    private void OnSkilledOnHitMeleeHit(Entity<RMCMeleeDamageSkillComponent> ent, ref MeleeHitEvent args)
+    {
+        if (!args.IsHit)
+            return;
+
+        if (!_prototypeManager.TryIndex<DamageGroupPrototype>(ent.Comp.BonusDamageType, out var bonusType))
+            return;
+
+        var totalBonusDamage = new DamageSpecifier(bonusType, _skills.GetSkill(ent.Owner, ent.Comp.Skill));
+        args.BonusDamage += totalBonusDamage;
     }
 
     private void OnActorAttackAttempt(Entity<ActorComponent> ent, ref AttackAttemptEvent args)

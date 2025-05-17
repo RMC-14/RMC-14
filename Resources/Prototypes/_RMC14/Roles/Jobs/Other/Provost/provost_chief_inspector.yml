@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostChiefInspector
-  name: CMProvostChiefInspector
-  description: rmc-job-description-provost-chief-inspector
+  name: rmc-job-name-corp-provost-chief
+  description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostChiefInspector
   ranks:
     RMCRankProvostChiefInspector: []
@@ -23,26 +23,33 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
     - type: JobPrefix
-      prefix: rmc-job-prefix-provost-chief-inspector
+      prefix: rmc-job-prefix-provost-chief
   hidden: true
 
 - type: entity
   id: RMCRandomHumanoidProvostChiefInspector
   name: provost ghost role chief inspector
-  suffix: Role, Player, High Law Understanding
+  suffix: Spawner, Player, Friendly, High Law Understanding
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: RandomHumanoidSpawner
     settings: RMCProvostChiefInspector
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCProvostChiefInspector
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-chief
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
     job: CMProvostChiefInspector
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearProvostChiefInspector
@@ -69,19 +76,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_pvi
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostChiefInspector
-  name: provost chief inspector ID card
-  description: Issued to members of the Provost Office.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: Clothing
-    slots:
-    - idcard
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-  - type: PresetIdCard
-    job: CMProvostChiefInspector

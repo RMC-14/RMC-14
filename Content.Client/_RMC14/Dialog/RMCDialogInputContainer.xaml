@@ -8,6 +8,7 @@
     <ui:BlueHorizontalSeparator />
     <LineEdit Name="MessageLineEdit" Access="Public" />
     <TextEdit Name="MessageTextEdit" Access="Public" VerticalExpand="True" MinSize="500 150" />
+    <Label Name="CharacterCount" Access="Public" />
     <BoxContainer Orientation="Horizontal" Margin="0 5">
         <Control HorizontalExpand="True" />
         <Button Text="Cancel" Name="CancelButton" Access="Public" StyleClasses="OpenBoth" MinWidth="100" Margin="0 0 20 0" />

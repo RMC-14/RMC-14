@@ -330,6 +330,7 @@ public sealed class RangefinderSystem : EntitySystem
             BreakOnMove = true,
             NeedHand = true,
             BreakOnHandChange = true,
+            MovementThreshold = 0.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

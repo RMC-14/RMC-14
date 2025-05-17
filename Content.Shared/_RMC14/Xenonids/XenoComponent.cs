@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Access;
 using Content.Shared.Alert;
 using Content.Shared.Chat.Prototypes;
@@ -66,4 +67,7 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public VisibilityFlags Visibility = VisibilityFlags.Xeno;
+
+    [DataField, AutoNetworkedField]
+    public XenoPheromones? IgnorePheromones;
 }
