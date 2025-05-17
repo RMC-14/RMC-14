@@ -65,7 +65,7 @@ public sealed partial class StorageSystem
         }
 
         // we order the items from biggest to smallest to try and reduce poor placement in the grid.
-        var sortedItems = items;
+        var sortedItems = items; // RMC14
 
         ClearCantFillReasons();
         foreach (var ent in sortedItems)
