@@ -32,6 +32,35 @@
 - type: entity
   parent: PlushieSharkGrey
   id: RMCPlushieSharkGrey
+  suffix: RMC
+  components:
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall
+
+- type: entity
+  parent: PlushieSharkBlue
+  id: RMCPlushieSharkBlue
+  suffix: RMC
+  components:
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall
+
+- type: entity
+  parent: PlushieSharkPink
+  id: RMCPlushieSharkPink
+  suffix: RMC
   components:
   - type: UseDelay
     delay: 120
