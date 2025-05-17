@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Stun;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
@@ -88,6 +89,12 @@ public sealed partial class DoAfterArgs
     /// </summary>
     [DataField]
     public EntProtoId? TargetEffect;
+
+    /// <summary>
+    ///     RMC14: If true, the entity wont be able to be pushed while the doafter is taking place.
+    /// </summary>
+    [DataField]
+    public bool RootMob = false;
     #endregion
 
     #region Break/Cancellation Options
@@ -287,6 +294,7 @@ public sealed partial class DoAfterArgs
         DuplicateCondition = other.DuplicateCondition;
         ForceVisible = other.ForceVisible;
         BreakOnRest = other.BreakOnRest;
+        RootMob = other.RootMob;
 
         // Networked
         NetUser = other.NetUser;
