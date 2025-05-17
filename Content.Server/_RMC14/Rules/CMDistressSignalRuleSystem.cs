@@ -362,6 +362,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
+            if (SelectedPlanetMap != null)
+            {
+                if (SelectedPlanetMap.Value.Comp.SurvivorJobs != null)
+                    comp.SurvivorJobs = SelectedPlanetMap.Value.Comp.SurvivorJobs;
+
+                comp.SurvivorJobInserts = SelectedPlanetMap.Value.Comp.SurvivorJobInserts;
+                comp.SurvivorJobOverrides = SelectedPlanetMap.Value.Comp.SurvivorJobOverrides;
+            }
+
             var survivorSpawnersLeft = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
             foreach (var (job, jobSpawners) in survivorSpawners)
             {
@@ -387,6 +396,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     {
                         stop = true;
                         return null;
+                    }
+                }
+
+                var spawnAsJob = job;
+
+                if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
+                {
+                    var insertSuccess = false;
+
+                    for (var i = 0; i < insert.Count; i++)
+                    {
+                        var (insertJob, amount) = insert[i];
+
+                        if (amount == -1)
+                        {
+                            spawnAsJob = insertJob;
+                            insertSuccess = true;
+                            break;
+                        }
+
+                        if (amount <= 0)
+                            continue;
+
+                        insert[i] = (insertJob, amount - 1);
+                        spawnAsJob = insertJob; // Override the original job with the insert
+                        insertSuccess = true;
+                        break;
+                    }
+
+                    if (!insertSuccess)
+                    {
+                        stop = true;
+                        return null; // All insert slots are filled, do not allow job
                     }
                 }
 
@@ -421,7 +463,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 var profile = GameTicker.GetPlayerProfile(player);
                 var coordinates = _transform.GetMoverCoordinates(spawner);
-                var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, job, profile, null);
+                var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, spawnAsJob, profile, null);
 
                 if (!_mind.TryGetMind(playerId, out var mind))
                     mind = _mind.CreateMind(playerId);
@@ -429,14 +471,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 RemCompDeferred<TacticalMapUserComponent>(survivorMob);
                 _mind.TransferTo(mind.Value, survivorMob);
 
-                _roles.MindAddJobRole(mind.Value, jobPrototype: job);
+                _roles.MindAddJobRole(mind.Value, jobPrototype: spawnAsJob);
 
                 _playTimeTracking.PlayerRolesChanged(player);
 
                 var spawnEv = new PlayerSpawnCompleteEvent(
                     survivorMob,
                     player,
-                    job,
+                    spawnAsJob,
                     false,
                     true,
                     0,
@@ -627,10 +669,29 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!ev.Profiles.TryGetValue(id, out var profile))
                         continue;
 
+                    var overriden = false;
+
+                    if (comp.SurvivorJobOverrides != null)
+                    { // Override the job
+                        foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
+                        {
+                            if (profile.JobPriorities.TryGetValue(originalJob, out var originalPriority) &&
+                                originalPriority > JobPriority.Never && overrideJob == job)
+                            {
+                                players[(int)originalPriority].Add(id);
+                                overriden = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (overriden)
+                        continue;
+
                     if (profile.JobPriorities.TryGetValue(job, out var priority) &&
                         priority > JobPriority.Never)
                     {
-                        players[(int) priority].Add(id);
+                        players[(int)priority].Add(id);
                     }
                 }
             }

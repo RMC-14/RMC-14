@@ -738,6 +738,17 @@
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: snpr-armor
 
+- type: entity
+  parent: CMArmorM45
+  id: RMCArmorUDEPForecon
+  name: UDEP thermal poncho # TODO id lock
+  description: UDEP or the Ultra Diffusive Environmental Poncho is a camouflaged rain-cover worn to protect against the elements and chemical spills. It's commonly treated with an infrared absorbing coating, making a marine almost invisible in the rain. Favoured by UNMC specialists for its comfort and practicality.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/forecon.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # Smart Gun
 - type: entity
   parent: [ RMCAllowSuitStorageClothingSmartgunner, CMArmorM3Medium ]
