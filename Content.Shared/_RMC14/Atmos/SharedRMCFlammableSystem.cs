@@ -118,7 +118,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteOnProjectileHit(Entity<IgniteOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
     {
-        Ignite(args.Target, ent.Comp.Stacks, ent.Comp.Intensity, ent.Comp.Duration, false);
+        Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.Duration, false);
     }
 
     private void OnTileFireMapInit(Entity<TileFireComponent> ent, ref MapInitEvent args)
@@ -674,14 +674,14 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
             return;
 
+        EnsureComp<SteppingOnFireComponent>(other);
+
         var wasOnFire = IsOnFire(flammableEnt);
         if (checkIgnited && wasOnFire)
             return;
 
         if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
             return;
-
-        EnsureComp<SteppingOnFireComponent>(other);
 
         if (!wasOnFire && IsOnFire(flammableEnt) && !HasComp<RMCImmuneToFireTileDamageComponent>(ent))
             _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
