@@ -412,6 +412,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (!damage.Comp.AffectsDead && _mobState.IsDead(target))
             return false;
 
+        if (!damage.Comp.AffectsCrit && _mobState.IsCritical(target))
+            return false;
+
         if (!damage.Comp.AffectsInfectedNested &&
             _xenoNestedQuery.HasComp(target) &&
             _victimInfectedQuery.HasComp(target))
@@ -556,6 +559,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                     continue;
 
                 if (!damage.AffectsDead && _mobState.IsDead(user))
+                    continue;
+
+                if (!damage.AffectsCrit && _mobState.IsCritical(user))
                     continue;
 
                 if (!damage.AffectsInfectedNested &&
