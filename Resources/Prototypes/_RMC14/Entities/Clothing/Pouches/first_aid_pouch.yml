@@ -36,6 +36,18 @@
 
 - type: entity
   parent: RMCPouchFirstAid
+  id: RMCPouchFirstAidInjectorsEZ
+  suffix: Injectors
+  components:
+  - type: StorageFill # TODO RMC14
+    contents:
+    - id: RMCAutoInjectorBicaridineEZ
+    - id: RMCAutoInjectorKelotaneEZ
+    - id: CMEmergencyAutoInjector
+    - id: CMGauze10
+
+- type: entity
+  parent: RMCPouchFirstAid
   id: RMCPouchFirstAidSplintsGauzeOintment
   suffix: Splints, Gauze, Ointment
   components:
