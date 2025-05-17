@@ -2,6 +2,11 @@
 
 # UNMC Jumpsuits
 - type: loadout
+  id: SynthUniformRMC
+  equipment:
+    jumpsuit: RMCJumpsuitSynthetic
+
+- type: loadout
   id: ScrubsBlueRMC
   equipment:
     jumpsuit: CMScrubsBlue
@@ -64,51 +69,43 @@
 # Civilian Jumpsuits
 - type: loadout
   id: TShirtWhiteRMC
-  storage:
-    back:
-    - CMJumpsuitTShirtWhite
+  equipment:
+    jumpsuit: CMJumpsuitTShirtWhite
 
 - type: loadout
   id: TShirtGrayRMC
-  storage:
-    back:
-    - CMJumpsuitTShirtGray
+  equipment:
+    jumpsuit: CMJumpsuitTShirtGray
 
 - type: loadout
   id: TShirtRedRMC
-  storage:
-    back:
-    - CMJumpsuitTShirtRed
+  equipment:
+    jumpsuit: CMJumpsuitTShirtRed
 
 - type: loadout
   id: CivilianJumpsuitRMC
-  storage:
-    back:
-    - RMCJumpsuitCivilian
+  equipment:
+    jumpsuit: RMCJumpsuitCivilian
 
 - type: loadout
   id: WhiteServiceJumpsuitRMC
-  storage:
-    back:
-    - RMCJumsuitWhiteService
+  equipment:
+    jumpsuit: RMCJumsuitWhiteService
 
 - type: loadout
   id: LiaisonBlueJumpsuitRMC
-  storage:
-    back:
-    - CMJumpsuitLiaisonBlue
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBlue
 
 - type: loadout
   id: LiaisonBrownJumpsuitRMC
-  storage:
-    back:
-    - CMJumpsuitLiaisonBrown
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBrown
 
 - type: loadout
   id: LiaisonCorporateFormalJumpsuitRMC
-  storage:
-    back:
-    - CMJumpsuitLiaisonCorporateFormal
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonCorporateFormal
 
 # Glasses
 - type: loadout

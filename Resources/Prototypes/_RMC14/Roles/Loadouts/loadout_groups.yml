@@ -330,6 +330,7 @@
   name: rmc-loadout-group-synthetic-uniform
   minLimit: 1
   loadouts:
+  - SynthUniformRMC
   - ScrubsBlueRMC
   - ScrubsLightBlueRMC
   - ScrubsGreenRMC
