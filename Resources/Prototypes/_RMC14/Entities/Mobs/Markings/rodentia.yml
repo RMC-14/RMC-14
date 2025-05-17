@@ -270,7 +270,7 @@
   id: RodentiaCheeksWhiskers
   markingCategory: Head # for no-cost markings
   bodyPart: HeadTop # for layering
-  speciesRestriction: [Rodentia]
+  speciesRestriction: [Rodentia, Felinid]
   sprites:
     - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
       state: whiskers
