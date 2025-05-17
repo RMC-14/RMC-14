@@ -27,6 +27,9 @@ public sealed partial class XenoCripplingStrikeComponent : Component
     public LocId HitText = "cm-xeno-crippling-strike-hit";
 
     [DataField, AutoNetworkedField]
+    public LocId? DeactivateText;
+
+    [DataField, AutoNetworkedField]
     public LocId ExpireText = "cm-xeno-crippling-strike-expire";
 
     [DataField, AutoNetworkedField]
