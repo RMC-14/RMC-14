@@ -54,7 +54,8 @@
       - id: CMJumpsuitLiaisonOuting
         amount: 1
 #      - id: PinkWorkwear
-#      - id: GreenWorkwear
+      - id: RMCJumpsuitLiaisonGreenWorkwear
+        amount: 1
     - name: Coat
       entries:
       - id: RMCJacketCorporateBlack

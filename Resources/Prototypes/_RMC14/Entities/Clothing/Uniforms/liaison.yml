@@ -21,7 +21,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal.rsi
-    
+
 - type: entity
   parent: CMJumpsuitLiaison
   id: RMCJumpsuitLiaisonCharcoalSuitskirt
@@ -96,7 +96,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field.rsi
-    
+
 - type: entity
   parent: CMJumpsuitLiaison
   id: RMCJumpsuitLiaisonFieldSuitskirt
@@ -140,7 +140,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
-    
+
 - type: entity
   parent: CMJumpsuitLiaison
   id: RMCJumpsuitLiaisonBlackSuitskirt
@@ -173,3 +173,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_blue.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_blue.rsi
+
+- type: entity
+  parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitLiaisonGreenWorkwear
+  name: green workwear
+  description: A pair of brown canvas workpants paired with a green workshirt. An common pairing among blue-collar workers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
