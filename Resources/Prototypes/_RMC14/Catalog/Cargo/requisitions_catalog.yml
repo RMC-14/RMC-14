@@ -72,6 +72,12 @@
         crate: RMCCrateMagazineNapthalUT
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFire
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFireBlue
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFireSmoke
     - name: Attachments
       entries:
       - cost: 3000
