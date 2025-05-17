@@ -108,6 +108,7 @@
   id: RMCXenoCrusher
   components:
   - type: Xeno
+    role: CMXenoCrusher
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -143,7 +144,6 @@
   - type: Xeno
     role: CMXenoCrusher
     ignorePheromones: Frenzy
-    hidden: true
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -190,3 +190,4 @@
       types:
         Blunt: 75
   - type: XenoToggleCharging
+  - type: XenoHidden

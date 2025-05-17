@@ -185,7 +185,6 @@
     - ActionXenoResinSurge
     - ActionXenoTransferPlasma
     - ActionXenoDevolve
-    hidden: true
   - type: XenoRegen
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42
@@ -203,6 +202,7 @@
     - XenoFruitUnstable
     maxFruitAllowed: 6
   - type: XenoResinSurge
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoDroneBase
@@ -251,7 +251,6 @@
     - ActionXenoHealerDroneTransferPlasma
     - ActionXenoSacrifice
     - ActionXenoDevolve
-    hidden: true
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
@@ -290,3 +289,4 @@
     gainAttackDowned: 0
   - type: XenoAcid
   - type: XenoSalveVisuals
+  - type: XenoHidden
