@@ -56,7 +56,7 @@
   parent: BaseMagazineRifle
   id: RMCMagazineSentryFire
   name: sentry incinerator fuel tank
-  description: A fuel tank of Ultra Thick Napthal Fuel, used in the UA 45-FM. Contains 100 units of fuel.
+  description: A fuel tank of Ultra Thick Napthal Fuel, used in the UN 45-FM. Contains 100 units of fuel.
   components:
   - type: Tag
     tags:
@@ -81,7 +81,7 @@
   parent: BaseMagazineRifle
   id: RMCMagazineSentryFireBlue
   name: sentry incinerator fuel tank
-  description: A fuel tank of usually Ultra Thick Napthal Fuel, a sticky combustible liquid chemical, used in the UA 55-FA.
+  description: A fuel tank of usually Ultra Thick Napthal Fuel, a sticky combustible liquid chemical, used in the UN 55-FA.
   components:
   - type: Tag
     tags:
@@ -106,7 +106,7 @@
   parent: BaseMagazineRifle
   id: RMCMagazineSentryFireSmoke
   name: sentry incinerator fuel tank
-  description: A fuel tank of compressed Ultra Thick Napthal Fuel, used in the UA 60-FP.
+  description: A fuel tank of compressed Ultra Thick Napthal Fuel, used in the UN 60-FP.
   components:
   - type: Tag
     tags:
