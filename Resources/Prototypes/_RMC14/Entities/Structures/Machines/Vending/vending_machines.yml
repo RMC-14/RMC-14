@@ -393,16 +393,18 @@
     LimeSeeds: 3
     LemonSeeds: 3
     OrangeSeeds: 3
+    PineappleSeeds: 3
     # GrassSeeds: 3
     CocoaSeeds: 3
     # PlumpSeeds: 2
     CabbageSeeds: 3
     GrapeSeeds: 3
     PumpkinSeeds: 3
-    # CherrySeed: 3
+    CherrySeeds: 3
     RiceSeeds: 3
     GarlicSeeds: 3
     OnionSeeds: 3
+    OnionRedSeeds: 3
 
 
 # Dinnerware
@@ -539,9 +541,13 @@
       entries:
       - id: FoodContainerEgg
         amount: 12
+      - id: FoodMeatChicken
+        amount: 24
       - id: FoodMeatFish
         amount: 12
       - id: FoodMeat
+        amount: 24
+      - id: FoodMeatBacon
         amount: 24
       - id: DrinkMilkCarton
         amount: 24

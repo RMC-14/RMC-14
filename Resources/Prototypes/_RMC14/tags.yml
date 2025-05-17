@@ -114,3 +114,9 @@
 
 - type: Tag
   id: RMCAirburstGrenade
+
+- type: Tag
+  id: Bacon
+
+- type: Tag
+  id: Chili

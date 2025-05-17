@@ -1,0 +1,10 @@
+﻿# Cherry Jelly
+
+- type: reagent
+  parent: BaseJuice
+  id: RMCCherryJelly
+  name: reagent-name-rmc-cherry-jelly
+  desc: reagent-desc-rmc-cherry-jelly
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: cherry
+  color: "#801E28"
