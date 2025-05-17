@@ -274,33 +274,34 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
-    private void SearchForMappedItems(Entity<SquadMemberComponent> ent, EntityUid squad)
+    private void SearchForMappedItems(Entity<SquadMemberComponent> user, EntityUid squad)
     {
-        var user = ent.Owner;
+        if (!_inventory.TryGetContainerSlotEnumerator(user.Owner, out var slots, SlotFlags.All))
+            return;
 
-        if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
+        while (slots.MoveNext(out var slot))
         {
-            while (slots.MoveNext(out var slot))
+            if (slot.ContainedEntity is not { } slotEntity)
+                continue;
+
+            if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
             {
-                if (slot.ContainedEntity != null)
+                MapToSquad((slotEntity, mapToSquad), user, squad);
+            }
+            else if (TryComp<StorageComponent>(slotEntity, out var storage))
+            {
+                foreach (var contained in storage.Container.ContainedEntities)
                 {
-                    var slotEntity = slot.ContainedEntity.Value;
+                    if (!_mapToSquadQuery.TryComp(contained, out var mapToSquadStorage))
+                        continue;
 
-                    if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
-                    {
-                        MapToSquad((slotEntity, mapToSquad), user, squad);
-                    }
-                    else if (TryComp<StorageComponent>(slotEntity, out var storage))
-                    {
-                        foreach (var contained in storage.Container.ContainedEntities)
-                        {
-                            if (!_mapToSquadQuery.TryComp(contained, out var mapToSquadStorage))
-                                continue;
-
-                            MapToSquad((contained, mapToSquadStorage), user, squad);
-                        }
-                    }
+                    MapToSquad((contained, mapToSquadStorage), user, squad);
                 }
+            }
+            else if (TryComp(slotEntity, out EncryptionKeyHolderComponent? holder))
+            {
+                _encryptionKey.UpdateChannels(slotEntity, holder);
+                break;
             }
         }
     }
