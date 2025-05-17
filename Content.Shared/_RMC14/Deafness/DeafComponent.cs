@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Deafness;
 
@@ -14,4 +15,7 @@ public sealed partial class DeafComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float HearChance = 0.4f;
+
+    [DataField]
+    public bool DidFadeOut = false;
 }

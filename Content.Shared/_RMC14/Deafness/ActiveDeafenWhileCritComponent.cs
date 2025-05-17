@@ -14,7 +14,7 @@ public sealed partial class ActiveDeafenWhileCritComponent : Component
     public TimeSpan Add = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Every = TimeSpan.FromSeconds(1);
+    public TimeSpan Every = TimeSpan.FromSeconds(2);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan AddAt = TimeSpan.Zero;

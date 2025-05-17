@@ -35,6 +35,8 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
             || args.Channel == ChatChannel.Damage
             || args.Channel == ChatChannel.Visual
             || args.Channel == ChatChannel.Notifications
+            || args.Channel == ChatChannel.OOC
+            || args.Channel == ChatChannel.LOOC
         )
             return;
 
