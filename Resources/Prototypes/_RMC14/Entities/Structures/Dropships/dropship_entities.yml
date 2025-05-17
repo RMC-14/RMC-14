@@ -24,6 +24,9 @@
   name: utility attach point
   description: An attachment point for utility systems
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Sprite
     sprite: _RMC14/Structures/Machines/dropship_attachment_points.rsi
     layers:
@@ -53,6 +56,9 @@
   name: engine system attach point
   description: A place where heavy equipment can be installed with a powerloader.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Transform
     anchored: false
   - type: Sprite
