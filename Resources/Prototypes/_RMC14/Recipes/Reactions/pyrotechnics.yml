@@ -1,0 +1,97 @@
+#TODO sensitivity threshold
+#if created volume > sensitivity threshold, volatiles triggered
+#if sensitivity threshold is equal to zero, it should act like potassium + water
+#theorhetically, water should negate the effective of volatiles
+#but only if you have an amount of water that is greater than or equal to the volatile chemical.
+
+#TODO sensitivity threshold = 60.01
+- type: reaction
+  id: RMCAmmoniumNitrateFuelOil
+  reactants:
+    RMCAmmoniumNitrate:
+      amount: 2
+    WeldingFuel:
+      amount: 1
+  products:
+    RMCAmmoniumNitrateFuelOil: 2
+ 
+#TODO sensitivity threshold = 5.01
+- type: reaction
+  id: RMCNitroglycerin
+  reactants:
+    RMCGlycerol:
+      amount: 1
+    RMCPolytrinicAcid:
+      amount: 1
+    RMCSulphuricAcid:
+      amount: 1
+  products:
+    RMCNitroglycerin: 2
+
+#TODO sensitivity threshold = 0, or triggers volatiles on reaction
+- type: reaction
+  id: RMCNapalm
+  reactants:
+    RMCAluminum:
+      amount: 1
+    RMCPhoron:
+      amount: 1
+    RMCSulphuricAcid:
+      amount: 1
+  products:
+    RMCNapalm: 2
+
+#TODO sensitivity threshold = 0, or triggers volatiles on reaction
+- type: reaction
+  id: RMCChlorineTrifluoride
+  reactants:
+    RMCChlorine:
+      amount: 1
+    RMCFluorine:
+      amount: 3
+  products:
+    RMCChlorineTrifluoride: 4
+
+- type: reaction
+  id: RMCNapalmSticky
+  reactants:
+    RMCNapalm:
+      amount: 1
+    WeldingFuel:
+      amount: 1
+  products:
+    RMCNapalmSticky: 2
+
+- type: reaction
+  id: RMCNapalmHC
+  reactants:
+    RMCNapalm:
+      amount: 1
+    RMCChlorineTrifluoride:
+      amount: 1
+  products:
+    RMCNapalmHC: 2
+    
+- type: reaction
+  id: RMCOctogen
+  reactants:
+    RMCHexamine:
+      amount: 1
+    RMCPolytrinicAcid:
+      amount: 1
+    RMCParaformaldehyde:
+      amount: 1
+    RMCAmmoniumNitrate:
+      amount: 1
+  products:
+    RMCOctogen: 2
+
+- type: reaction
+  id: RMCCyclonite
+  reactants:
+    RMCHexamine:
+      amount: 1
+    RMCPolytrinicAcid:
+      amount: 1
+  products:
+    RMCCyclonite: 1

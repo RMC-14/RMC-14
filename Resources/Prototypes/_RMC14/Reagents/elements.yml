@@ -17,7 +17,7 @@
         probability: 0
 
 - type: reagent
-  parent: RMCReagentElement
+  parent: [ RMCReagentElement, BasePyrotechnic ]
   id: RMCCarbon
   name: reagent-name-carbon
   group: Elements
@@ -32,6 +32,8 @@
       effects:
       - !type:ChemVomit
         probability: 0
+  intensityMod: 0
+  durationMod: 1
 
 - type: reagent
   parent: RMCReagentElement
@@ -142,6 +144,8 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  explosive: true
+  power: 0.15
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -196,6 +200,8 @@
   flavor: metallic
   color: "#808080"
   unknown: true
+  intensity: 6 # Oxidizing 1
+  duration: -2 # Oxidizing 1
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -412,6 +418,8 @@
   flavor: bitter
   color: "#808080"
   unknown: true
+  intensity: 12 # Oxidizing 2
+  duration: -4 # Oxidizing 2
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?

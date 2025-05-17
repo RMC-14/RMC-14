@@ -14,3 +14,13 @@
     intensityPerUnit: 0.5 # 50+50 reagent for maximum explosion
     intensitySlope: 4
     maxTotalIntensity: 100
+    
+# - type: reaction
+#   id: RMCANFOExplosion
+#   impact: High
+#   reactants:
+#     RMCAmmoniumNitrate:
+#       amount: 60.01
+#     WeldingFuel:
+#       amount: 30.01
+
