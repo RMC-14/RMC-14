@@ -492,8 +492,6 @@
     deviation: 75
   - type: ProjectileDamageReceived
     multiplier: 0.1
-
-
 - type: entity
   parent: RMCSentry
   id: RMCSentryMiniFire
