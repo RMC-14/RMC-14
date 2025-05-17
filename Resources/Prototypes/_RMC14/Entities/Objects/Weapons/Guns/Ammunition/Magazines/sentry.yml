@@ -105,8 +105,8 @@
 - type: entity
   parent: BaseMagazineRifle
   id: RMCMagazineSentryFireSmoke
-  name: "Sentry Incinerator Fuel Tank"
-  description: "A fuel tank of compressed Ultra Thick Napthal Fuel, used in the UA 60-FP."
+  name: sentry incinerator fuel tank
+  description: A fuel tank of compressed Ultra Thick Napthal Fuel, used in the UA 60-FP.
   components:
   - type: Tag
     tags:
