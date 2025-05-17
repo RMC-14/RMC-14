@@ -151,6 +151,30 @@
   - type: DeleteOnExplosion
 
 - type: entity
+  parent: Smoke
+  id: RMCSmokeFireSentry
+  components:
+  - type: Transform
+    anchored: true
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: RMCSmokeAcid
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 1
+  - type: DeleteOnExplosion
+
+- type: entity
   parent: CMGrenadeHighExplosive
   id: CMGrenadeFrag
   name: M40 HEFA grenade
