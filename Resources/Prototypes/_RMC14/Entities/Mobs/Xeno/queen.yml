@@ -52,6 +52,7 @@
     - FootstepSound
   - type: Xeno
     role: CMXenoQueen
+    showInWatchWindowCounts: false
     spawnAtLeaderPoint: true
     actionIds:
     - ActionXenoRest
@@ -232,6 +233,7 @@
   - type: ManageHive
   - type: HiveLeaderGranter
   - type: XenoHeal
+  - type: XenoRemoteTransferPlasma
   - type: StunOnExplosionReceived
     weak: false
   - type: XenoSpit
