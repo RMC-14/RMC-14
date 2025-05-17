@@ -223,11 +223,6 @@
   - type: SpawnOnTerminate
     spawn: RMCSmokeFireSentry
 
-  #- type: edgeSpreader
-  #  id: RMCSmokeAcid
-  #  updatesPerSecond: 5
-  #- type: EvenSmoke
-  #  range: 2
   - type: IgnoreArc
   - type: Fixtures
     fixtures:
