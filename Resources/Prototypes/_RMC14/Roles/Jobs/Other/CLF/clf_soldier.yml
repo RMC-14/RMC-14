@@ -5,7 +5,7 @@
   description: rmc-job-description-clf-soldier
   playTimeTracker: CMJobCLFSoldier
   ranks:
-    RMCRankLanceCorporal: [ ]
+    RMCRankCLFRebel: [ ]
   startingGear: RMCGearCLFSoldier
   icon: RMCJobIconCLFSoldier
   joinNotifyCrew: false

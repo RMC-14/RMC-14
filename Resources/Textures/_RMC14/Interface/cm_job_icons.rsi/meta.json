@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo edited by Sigma Draconis, freelancer icons and provost team lead icon by github noctynral",
+  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo edited by Sigma Draconis, freelancer icons and provost team lead icon by github noctynral. rmc_adjutant made by crazy1112345 (discord), based on staff_officer.",
   "size": {
     "x": 16,
     "y": 16
@@ -234,6 +234,9 @@
     },
     {
       "name": "hudmutineer"
+    },
+    {
+        "name": "rmc_adjutant"
     },
     {
       "name": "pmc_sd"

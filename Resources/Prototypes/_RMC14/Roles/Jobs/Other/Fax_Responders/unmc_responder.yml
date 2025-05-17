@@ -1,0 +1,67 @@
+- type: job
+  parent: CMJobBase
+  id: RMCUNMCResponder
+  name: rmc-job-name-unmc-responder
+  description: rmc-job-description-unmc-responder
+  playTimeTracker: CMJobUNMCResponder
+  ranks:
+    RMCRankFirstLT: []
+  startingGear: RMCGearUNMCResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+  hasIcon: false
+  hidden: true
+
+- type: startingGear
+  id: RMCGearUNMCResponder
+  equipment:
+    jumpsuit: CMJumpsuitXOFormal
+    outerClothing: CMCoatXOFormal
+    shoes: RMCShoesLaceup
+    head: RMCHeadCapFlippable
+    id: RMCIDCardUNMCResponder
+    ears: CMHeadsetHighCommand
+    eyes: RMCSunglasses
+    back: CMSatchel
+    belt: CMClipboard
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardUNMCResponder
+  name: UNMC Communications Officer ID card
+  description: Issued to the fax operators of UNMC Regional Command.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: PresetIdCard
+    job: RMCUNMCResponder
+
+- type: playTimeTracker
+  id: CMJobUNMCResponder
+
