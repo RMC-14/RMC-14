@@ -754,7 +754,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return _hands.TryPickup(user, item);
     }
 
-    public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing)
+    public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing, bool doRangeCheck = true)
     {
         foreach (var order in _quickEquipOrder)
         {
@@ -766,7 +766,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
             while (slots.MoveNext(out var slot))
             {
-                if (_inventory.TryEquip(user, clothing, slot.ID))
+                if (_inventory.TryEquip(user, clothing, slot.ID, doRangeCheck: doRangeCheck))
                     return true;
             }
         }
