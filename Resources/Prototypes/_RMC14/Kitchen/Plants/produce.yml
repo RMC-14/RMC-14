@@ -80,7 +80,7 @@
         - ReagentId: Nutriment
           Quantity: 5
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/Sunflower.rsi
+    sprite: _RMC14/Kitchen/Plants/sunflower.rsi
   - type: Item
     heldPrefix: produce
   - type: Produce
