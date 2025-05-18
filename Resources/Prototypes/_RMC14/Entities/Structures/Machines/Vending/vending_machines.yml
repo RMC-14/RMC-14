@@ -381,14 +381,14 @@
     EggplantSeeds: 3
     PotatoSeeds: 3
     SoybeanSeeds: 3
-    #SunflowerSeeds: 2
+    SunflowerSeeds: 2
     TomatoSeeds: 3
     WheatSeeds: 3
     AppleSeeds: 3
     PoppySeeds: 3
     SugarcaneSeeds: 3
-    #PeanutSeeds: 3
-    #WhitebeetSeeds: 3
+    PeanutSeeds: 3
+    WhiteBeetSeeds: 3
     WatermelonSeeds: 3
     LimeSeeds: 3
     LemonSeeds: 3
@@ -396,7 +396,7 @@
     PineappleSeeds: 3
     # GrassSeeds: 3
     CocoaSeeds: 3
-    # PlumpSeeds: 2
+    PlumpSeeds: 2
     CabbageSeeds: 3
     GrapeSeeds: 3
     PumpkinSeeds: 3
@@ -525,7 +525,7 @@
     CMDrinkCanBoda: 30
 
 
-# Ingridients
+# Ingredients
 - type: entity
   parent: CMVendorDinnerware
   id: CMVendorIngredients
@@ -594,7 +594,8 @@
         amount: 12
       - id: FoodTomato
         amount: 12
-    # TODO RMC14 Whitebeet 12
+      - id: FoodWhiteBeet
+        amount: 12
       - id: FoodOnion
         amount: 12
       - id: FoodOnionRed

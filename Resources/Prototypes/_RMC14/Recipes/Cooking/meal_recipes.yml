@@ -91,3 +91,27 @@
   solids:
     FoodDough: 1
     PoppySeeds: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBeetSoup
+  name: beet soup recipe
+  result: FoodSoupBeet
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodWhiteBeet: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipePlumpPie
+  name: plump pie recipe
+  result: FoodPiePlump
+  time: 15
+  group: Pie
+  solids:
+    FoodDoughPie: 1
+    FoodMushroomPlump: 3
+    FoodPlateTin: 1

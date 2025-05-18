@@ -1,0 +1,112 @@
+﻿
+- type: entity
+  name: plump-helmet
+  parent: FoodProduceBase
+  id: FoodMushroomPlump
+  description: "Plumus Hellmus: Plump, soft and s-so inviting~"
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _RMC14/Kitchen/Plants/plump.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: plump
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: peanut
+  parent: FoodProduceBase
+  id: FoodPeanut
+  description: "Nuts!"
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _RMC14/Kitchen/Plants/peanut.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: peanut
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: white beet
+  parent: FoodProduceBase
+  id: FoodWhiteBeet
+  description: "You can't beat white-beet."
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: RMCSugar
+          Quantity: 2
+  - type: Sprite
+    sprite: _RMC14/Kitchen/Plants/whitebeet.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: whitebeet
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: sunflower
+  parent: FoodProduceBase
+  id: FoodSunflower
+  description: "Sunflower"
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _RMC14/Kitchen/Plants/Sunflower.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: plump
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: grass
+  parent: FoodProduceBase
+  id: FoodGrass
+  description: "Grass"
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _RMC14/Kitchen/Plants/grass.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: grass
+  - type: Tag
+    tags:
+    - Vegetable
