@@ -178,6 +178,7 @@
   equipment:
     jumpsuit: RMCJumpsuitMarshal
     back: CMSatchelSecurity
+    outerClothing: RMCCoatBureauDeputy
     shoes: CMBootsBlackFilled
     head: RMCHeadCapBureau
     eyes: CMGlassesSecurity
