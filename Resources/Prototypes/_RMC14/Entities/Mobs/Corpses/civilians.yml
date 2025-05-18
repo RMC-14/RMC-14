@@ -369,6 +369,12 @@
     back:
     - RMCRadioHandheldColonyOff
 
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaPMCStandard
+  id: RMCCorpseWeYaPMCStandardBurst
+  components:
+  - type: VictimBurst
+
 # Corporate Supervisor
 - type: randomHumanoidSettings
   parent: RMCCorpse

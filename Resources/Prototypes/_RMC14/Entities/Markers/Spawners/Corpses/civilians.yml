@@ -137,6 +137,15 @@
     spawn: RMCCorpseWeYaPMCStandard
 
 - type: entity
+  parent: RMCSpawnerCorpseWeYaPMC
+  id: RMCSpawnerCorpseWeYaPMCStandardBurst
+  name: Corpse Spawner - We-Ya PMC Standard
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaPMCStandardBurst
+
+- type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseWeYaManager
   name: Corpse Spawner - Corporate Supervisor
