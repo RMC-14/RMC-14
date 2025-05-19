@@ -234,3 +234,28 @@
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Items/Toys/weh.ogg
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieCrow
+  name: crow plushie
+  description: hello cro
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    state: crow
+  - type: EmitSoundOnUse
+    sound:
+      collection: CrowKaw
+  - type: EmitSoundOnLand
+    sound:
+      collection: CrowKaw
+  - type: EmitSoundOnActivate
+    sound:
+      collection: CrowKaw
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: CrowKaw
+  - type: MeleeWeapon
+    soundHit:
+      collection: CrowKaw
