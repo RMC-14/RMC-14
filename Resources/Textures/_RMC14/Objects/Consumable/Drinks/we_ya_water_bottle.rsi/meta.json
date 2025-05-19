@@ -32,12 +32,6 @@
       "name": "wy_bug_juice_open"
     },
     {
-      "name": "spp_water"
-    },
-    {
-      "name": "spp_water_open"
-    },
-    {
       "name": "wy_water_crushed"
     },
     {
@@ -48,9 +42,6 @@
     },
     {
       "name": "wy_bug_juice_crushed"
-    },
-    {
-      "name": "spp_water_crushed"
     },
     {
       "name": "wy_water-inhand-left",
@@ -82,22 +73,6 @@
     },
     {
       "name": "wy_bug_juice_open-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "spp_water-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "spp_water_open-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "spp_water_open-inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "spp_water-inhand-right",
       "directions": 4
     },
     {

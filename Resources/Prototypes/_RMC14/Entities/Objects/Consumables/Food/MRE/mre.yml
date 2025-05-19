@@ -360,7 +360,7 @@
     - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#a89880"
-    - state: supply_box_we-ya
+    - state: supply_box_logo_weya_faded
     - state: supply_lid_closed
       map: [ "lid" ]
       color: "#a89880"
@@ -388,6 +388,7 @@
     - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#8f887e"
+    - state: supply_box_logo_weya_faded
     - state: supply_box_food
       color: "#b0afae"
     - state: supply_lid_closed
