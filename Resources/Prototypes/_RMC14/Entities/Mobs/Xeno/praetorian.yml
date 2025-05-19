@@ -160,13 +160,13 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailFountain
+    - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoTantrum
     - ActionXenoHighGallop
     - ActionXenoFightOrFlight
     - ActionXenoRetrieve
     - ActionXenoDevolve
-    - ActionXenoAcidNormal
     hidden: true
   - type: XenoStrain
     name: rmc-xeno-valkyrie-name
