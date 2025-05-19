@@ -38,7 +38,7 @@ rmc-job-name-mortar-operator = Mortar Operator
 rmc-job-prefix-mortar-operator = MO
 
 rmc-job-name-loader = Loader
-rmc-job-prefix-loader LDR
+rmc-job-prefix-loader = LDR
 
 rmc-job-name-spotter = Spotter
 rmc-job-prefix-spotter = SPTR
