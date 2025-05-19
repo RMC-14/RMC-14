@@ -331,6 +331,7 @@
   id: RMCOverheadSignNeonWeYaMart
   components:
   - type: Sprite
+    offset: -0.07,0.75
     layers:
       - state: weyamartsign2 # Temporary until power works.
       - state: weyamartsign2_off
