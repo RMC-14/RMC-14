@@ -201,7 +201,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
         if (!TryComp<RMCStaminaComponent>(target, out var stam))
             return;
 
-        DoStaminaDamage((ent, stam), ent.Comp.Damage, true);
+        DoStaminaDamage((target, stam), ent.Comp.Damage, true);
     }
 
     private void SetStaminaAlert(Entity<RMCStaminaComponent> ent)
