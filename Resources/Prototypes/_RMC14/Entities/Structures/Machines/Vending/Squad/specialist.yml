@@ -23,7 +23,7 @@
       entries:
       - id: RMCDemoSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-demo
-        isAppendSquadRoleName: true
+        isAppendSquadRoleName: false
         givePrefix: rmc-job-prefix-weapons-specialist-demo
         isAppendPrefix: true
         giveIcon:
@@ -34,7 +34,7 @@
           state: spec_demo
       - id: RMCGrenadeSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-grenadier
-        isAppendSquadRoleName: true
+        isAppendSquadRoleName: false
         givePrefix: rmc-job-prefix-weapons-specialist-grenadier
         isAppendPrefix: true
         giveIcon:
@@ -49,13 +49,13 @@
       # Don't forget to give Pyro his own role name and icons
       - id: RMCScoutSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-scout
-        isAppendSquadRoleName: true
+        isAppendSquadRoleName: false
         givePrefix: rmc-job-prefix-weapons-specialist-scout
         isAppendPrefix: true
         # maybe scout should come up with his own icons
       - id: CMSniperEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-sniper
-        isAppendSquadRoleName: true
+        isAppendSquadRoleName: false
         givePrefix: rmc-job-prefix-weapons-specialist-sniper
         isAppendPrefix: true
         giveIcon:
@@ -68,7 +68,7 @@
         - RMCAntiMaterielEquipmentCase
       - id: RMCAntiMaterielEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-anti-materiel-sniper
-        isAppendSquadRoleName: true
+        isAppendSquadRoleName: false
         givePrefix: rmc-job-prefix-weapons-specialist-anti-materiel-sniper
         isAppendPrefix: true
         giveIcon:

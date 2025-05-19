@@ -508,45 +508,33 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (entry.GiveSquadRoleName != null || entry.GiveIcon != null || entry.GiveMapBlip != null)
+        if (entry.GiveSquadRoleName != null || entry.GiveIcon != null)
         {
-            if (entry.GiveSquadRoleName != null || entry.GiveIcon != null)
-            {
-                var overrideComp = EnsureComp<RMCVendorRoleOverrideComponent>(actor);
-                overrideComp.GiveSquadRoleName = entry.GiveSquadRoleName;
-                overrideComp.IsAppendSquadRoleName = entry.IsAppendSquadRoleName;
-                overrideComp.GiveIcon = entry.GiveIcon;
-                Dirty(actor, overrideComp);
-            }
-
-            if (entry.GiveMapBlip != null)
-            {
-                var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(actor);
-                mapBlip.Icon = entry.GiveMapBlip;
-                Dirty(actor, mapBlip);
-            }
+            var overrideComp = EnsureComp<RMCVendorRoleOverrideComponent>(actor);
+            overrideComp.GiveSquadRoleName = entry.GiveSquadRoleName;
+            overrideComp.IsAppendSquadRoleName = entry.IsAppendSquadRoleName;
+            overrideComp.GiveIcon = entry.GiveIcon;
+            Dirty(actor, overrideComp);
 
             _squads.UpdateSquadTitle(actor);
         }
 
+        if (entry.GiveMapBlip != null)
+        {
+            var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(actor);
+            mapBlip.Icon = entry.GiveMapBlip;
+            Dirty(actor, mapBlip);
+        }
+
         if (entry.GivePrefix != null)
         {
-            if (HasComp<JobPrefixComponent>(actor))
-            {
-                var jobPrefix = Comp<JobPrefixComponent>(actor);
-                if (entry.IsAppendPrefix)
-                    jobPrefix.AdditionalPrefix = entry.GivePrefix;
-                else
-                    jobPrefix.Prefix = entry.GivePrefix!.Value;
-
-                Dirty(actor, jobPrefix);
-            }
+            var jobPrefix = EnsureComp<JobPrefixComponent>(actor);
+            if (entry.IsAppendPrefix)
+                jobPrefix.AdditionalPrefix = entry.GivePrefix;
             else
-            {
-                var jobPrefix = EnsureComp<JobPrefixComponent>(actor);
-                jobPrefix.Prefix = entry.GivePrefix!.Value;
-                Dirty(actor, jobPrefix);
-            }
+                jobPrefix.Prefix = entry.GivePrefix.Value;
+
+            Dirty(actor, jobPrefix);
         }
 
         if (_net.IsClient)

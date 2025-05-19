@@ -35,20 +35,25 @@ cm-job-prefix-combat-tech = ComTech
 CMJobCombatTech = Combat Tech
 
 rmc-job-name-mortar-operator = Mortar Operator
-rmc-job-name-loader = Loader
-rmc-job-name-spotter= Spotter
+rmc-job-prefix-mortar-operator = MO
 
-rmc-job-name-weapons-specialist-demo = (Demolitionist)
+rmc-job-name-loader = Loader
+rmc-job-prefix-loader LDR
+
+rmc-job-name-spotter = Spotter
+rmc-job-prefix-spotter = SPTR
+
+rmc-job-name-weapons-specialist-demo = Demolitionist Specialist
 rmc-job-prefix-weapons-specialist-demo = (DEMO)
 
-rmc-job-name-weapons-specialist-grenadier = (Grenadier)
+rmc-job-name-weapons-specialist-grenadier = Grenadier Specialist
 rmc-job-prefix-weapons-specialist-grenadier = (GRND)
 
-rmc-job-name-weapons-specialist-sniper = (Sniper)
+rmc-job-name-weapons-specialist-sniper = Sniper Specialist
 rmc-job-prefix-weapons-specialist-sniper = (SNPR)
 
-rmc-job-name-weapons-specialist-anti-materiel-sniper = (Anti-materiel sniper)
-rmc-job-prefix-weapons-specialist-anti-materiel-sniper = (AMSN)
+rmc-job-name-weapons-specialist-anti-materiel-sniper = AMR Specialist
+rmc-job-prefix-weapons-specialist-anti-materiel-sniper = (AMR)
 
-rmc-job-name-weapons-specialist-scout = (Scout)
+rmc-job-name-weapons-specialist-scout = Scout Specialist
 rmc-job-prefix-weapons-specialist-scout = (SCT)
