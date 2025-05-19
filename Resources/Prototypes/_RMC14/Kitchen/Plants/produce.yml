@@ -71,7 +71,7 @@
   name: sunflower
   parent: FoodProduceBase
   id: FoodSunflower
-  description: "Sunflower"
+  description: "It's beautiful! A certain person might beat you to death if you trample these."
   components:
   - type: SolutionContainerManager
     solutions:
@@ -84,7 +84,7 @@
   - type: Item
     heldPrefix: produce
   - type: Produce
-    seedId: plump
+    seedId: sunflower
   - type: Tag
     tags:
     - Vegetable

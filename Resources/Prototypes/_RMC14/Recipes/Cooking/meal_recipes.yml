@@ -24,6 +24,31 @@
     Sugar: 5
     JuiceBerry: 5
 
+- type: microwaveMealRecipe
+  id: RecipeDonutJelly
+  name: jelly donut recipe
+  result: RMCFoodDonutJelly
+  time: 15
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    Sugar: 5
+    RMCCherryJelly: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutJellyFrosted
+  name: frosted jelly donut recipe
+  result: RMCFoodDonutJellyFrosted
+  time: 15
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    Sugar: 5
+    JuiceBerry: 5
+    RMCCherryJelly: 5
+
 #Eggs
 
 - type: microwaveMealRecipe
