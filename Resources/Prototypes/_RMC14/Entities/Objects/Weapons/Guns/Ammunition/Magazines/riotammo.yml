@@ -72,7 +72,7 @@
     damage:
       types:
         Blunt: 3
-  - type: StaminaDamageOnCollide
+  - type: RMCStaminaDamageOnCollide
     damage: 12.5
   - type: CMArmorPiercing
     amount: 5
@@ -129,7 +129,7 @@
     damage:
       types:
         Blunt: 3
-  - type: StaminaDamageOnCollide
+  - type: RMCStaminaDamageOnCollide
     damage: 10
   - type: CMArmorPiercing
     amount: 5
@@ -214,7 +214,7 @@
     damage:
       types:
         Blunt: 3
-  - type: StaminaDamageOnCollide
+  - type: RMCStaminaDamageOnCollide
     damage: 10
 
 ## Tags

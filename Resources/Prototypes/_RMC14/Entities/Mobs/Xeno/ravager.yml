@@ -120,6 +120,10 @@
     value: 0.7
   - type: TantrumSpeedBuff
   - type: XenoCruelty
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: ravager
 
 - type: entity
   parent: RMCXenoRavagerBase
@@ -161,7 +165,6 @@
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
   - type: Xeno
-    role: CMXenoRavager
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
