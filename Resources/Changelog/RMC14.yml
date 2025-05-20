@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DummeHytteOst
   changes:
-  - message: Crayons now have 30 uses each, increased from 25, crayon colors have
-      also been changed slightly.
-    type: Tweak
-  id: 1234
-  time: '2025-01-18T04:38:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5394
-- author: DummeHytteOst
-  changes:
   - message: You can now as Xenonids hold down your attack, wide swing and tackle
       keybinds, to continue the action.
     type: Add
@@ -5421,5 +5413,12 @@
   id: 1736
   time: '2025-05-20T03:03:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6445
+- author: DummeHytteOst
+  changes:
+  - message: Fixed Warrior punch ability damage being 25 instead of 27.5
+    type: Fix
+  id: 1737
+  time: '2025-05-20T03:04:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6464
 Name: RMC14
 Order: -1
