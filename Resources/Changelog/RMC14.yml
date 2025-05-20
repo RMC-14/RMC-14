@@ -1,29 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed MK1 mags not being transferable between each other and M54C/M54CE2
-      magazines.
-    type: Fix
-  - message: Fixed barrels leaving behind the ghost of metal sheets past when destroyed
-      with a crowbar.
-    type: Fix
-  - message: Fixed bullet boxes not updating visually and not having examine text
-      for rounds left.
-    type: Fix
-  - message: Fixed radio telephone pack inhand sprites being incorrectly swapped.
-    type: Fix
-  id: 1239
-  time: '2025-01-20T00:19:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5424
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed hijack dropship sound not playing
-    type: Fix
-  id: 1240
-  time: '2025-01-20T03:29:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5425
-- author: DrSmugleaf
-  changes:
   - message: Fixed shooting both underbarrel grenade launchers launching grenades
       everywhere except where you are actually aiming.
     type: Fix
@@ -5338,5 +5315,21 @@
   id: 1741
   time: '2025-05-20T03:24:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6423
+- author: J C Denton
+  changes:
+  - message: Fixed corporate survivor job having no description.
+    type: Fix
+  id: 1742
+  time: '2025-05-20T03:29:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6479
+- author: J C Denton
+  changes:
+  - message: 'Added 2 corpse spawners: WeYa PMC and Corporate Supervisor.'
+    type: Add
+  - message: Fixed CMB Deputy corpse not having their jacket.
+    type: Fix
+  id: 1743
+  time: '2025-05-20T03:30:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6470
 Name: RMC14
 Order: -1
