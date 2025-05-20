@@ -3,4 +3,4 @@
 namespace Content.Shared._RMC14.Inventory;
 
 [ByRefEvent]
-public record struct ShouldHandleVirtualItemInteractEvent(BeforeRangedInteractEvent Event, EntityUid Blocking, bool Handle = false);
+public record struct ShouldHandleVirtualItemInteractEvent(BeforeRangedInteractEvent Event, bool Handle = false);

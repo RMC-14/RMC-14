@@ -378,7 +378,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!TryComp(ent, out VirtualItemComponent? comp))
             return;
 
-        var ev = new ShouldHandleVirtualItemInteractEvent(args, comp.BlockingEntity);
+        var ev = new ShouldHandleVirtualItemInteractEvent(args);
         RaiseLocalEvent(comp.BlockingEntity, ref ev);
 
         if (!ev.Handle)

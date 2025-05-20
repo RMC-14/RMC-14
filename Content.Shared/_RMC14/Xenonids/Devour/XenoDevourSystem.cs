@@ -55,7 +55,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevourableComponent, CanDropDraggedEvent>(OnDevourableCanDropDragged);
         SubscribeLocalEvent<DevourableComponent, DragDropDraggedEvent>(OnDevourableDragDropDragged);
         SubscribeLocalEvent<DevourableComponent, BeforeRangedInteractEvent>(OnDevourableBeforeRangedInteract);
-        SubscribeLocalEvent<DevourableComponent, ShouldHandleVirtualItemInteractEvent>(OnDevourableShouldCancel);
+        SubscribeLocalEvent<DevourableComponent, ShouldHandleVirtualItemInteractEvent>(OnDevourableShouldHandle);
 
         SubscribeLocalEvent<DevouredComponent, ComponentStartup>(OnDevouredStartup);
         SubscribeLocalEvent<DevouredComponent, ComponentRemove>(OnDevouredRemove);
@@ -84,10 +84,10 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<UsableWhileDevouredComponent, CMGetArmorPiercingEvent>(OnUsableWhileDevouredGetArmorPiercing);
     }
 
-    private void OnDevourableShouldCancel(Entity<DevourableComponent> ent, ref ShouldHandleVirtualItemInteractEvent args)
+    private void OnDevourableShouldHandle(Entity<DevourableComponent> ent, ref ShouldHandleVirtualItemInteractEvent args)
     {
-        if (args.Event.User == args.Event.Target &&
-            HasComp<DevourableComponent>(args.Blocking))
+        if (HasComp<XenoDevourComponent>(args.Event.User) &&
+            args.Event.User == args.Event.Target)
         {
             args.Handle = true;
         }

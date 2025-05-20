@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Ghost;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -87,6 +88,7 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestComponent, EntityTerminatingEvent>(OnNestTerminating);
 
         SubscribeLocalEvent<XenoNestableComponent, BeforeRangedInteractEvent>(OnNestableBeforeRangedInteract);
+        SubscribeLocalEvent<XenoNestableComponent, ShouldHandleVirtualItemInteractEvent>(OnNestableShouldHandle);
 
         SubscribeLocalEvent<XenoNestedComponent, ComponentStartup>(OnNestedAdd);
         SubscribeLocalEvent<XenoNestedComponent, ComponentRemove>(OnNestedRemove);
@@ -143,7 +145,16 @@ public sealed class XenoNestSystem : EntitySystem
             return;
 
         args.Handled = true;
-        TryStartNesting(args.User, (args.Target.Value, surface), args.Used);
+        TryStartNesting(args.User, (args.Target.Value, surface), ent);
+    }
+
+    private void OnNestableShouldHandle(Entity<XenoNestableComponent> ent, ref ShouldHandleVirtualItemInteractEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Event.User) &&
+            HasComp<XenoNestSurfaceComponent>(args.Event.Target))
+        {
+            args.Handle = true;
+        }
     }
 
     private void OnNestedAdd(Entity<XenoNestedComponent> ent, ref ComponentStartup args)
