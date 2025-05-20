@@ -363,7 +363,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_acid_ball
     event: !type:XenoAcidBallActionEvent
-    useDelay: 18
+    useDelay: 0
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting
