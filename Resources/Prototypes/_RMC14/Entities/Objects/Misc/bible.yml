@@ -19,6 +19,10 @@
       types:
         Holy: 25
         Blunt: 1
+  - type: ReactionMixer
+    mixMessage: "bible-mixing-success"
+    reactionTypes:
+    - Holy
   - type: Clothing
     slots:
     - Belt
@@ -50,7 +54,7 @@
 - type: entity
   parent: RMCBible
   id: RMCBibleBooze
-  name: Mister Booze's Holy Bible
+  name: Mister Booze's Holy Bible # Chaplain Survivors
   description: You will wind up wearing tattered shoes if you mess with Mister Booze, so if you've been so stiff you thought you died, you'll feel better once you have testified! All spirits contained within this bible are for medicinal purposes only.
   suffix: Filled
   components:
@@ -59,7 +63,7 @@
     - id: RMCDrinkAlcoholWhiskey
       amount: 2
     - id: CMDrinkCanBeerLite
-      amount: 3
+      amount: 3 # Parity amount, but it's forcing the storage size to be 10 instead of 8.
 
 - type: entity
   parent: RMCBible
