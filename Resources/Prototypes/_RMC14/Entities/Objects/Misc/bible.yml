@@ -54,7 +54,7 @@
 - type: entity
   parent: RMCBible
   id: RMCBibleBooze
-  name: Mister Booze's Holy Bible # Chaplain Survivors
+  name: Mister Booze's Holy Bible # Chaplain Survivor spawn item?
   description: You will wind up wearing tattered shoes if you mess with Mister Booze, so if you've been so stiff you thought you died, you'll feel better once you have testified! All spirits contained within this bible are for medicinal purposes only.
   suffix: Filled
   components:
