@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: SG6732
-  changes:
-  - message: Tweaked the barrel attachment node for the M44, M63, and M54CE2 to better
-      fit the weapon sprites.
-    type: Tweak
-  id: 1232
-  time: '2025-01-18T04:35:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5327
 - author: DummeHytteOst
   changes:
   - message: Added M1984 AP magazines, and made them purchasable.
@@ -5422,5 +5414,12 @@
   id: 1734
   time: '2025-05-20T02:57:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6454
+- author: CyberTropic
+  changes:
+  - message: Fixed lightning continuing to happening after weather is over
+    type: Fix
+  id: 1735
+  time: '2025-05-20T03:00:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6457
 Name: RMC14
 Order: -1
