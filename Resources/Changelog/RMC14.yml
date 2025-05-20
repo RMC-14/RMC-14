@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Fixed table to table part deconstruction being too short (1 > 5 seconds).
-    type: Fix
-  - message: Fixed table part to metal deconstruction being too long (1 > 0 seconds).
-    type: Fix
-  - message: Fixed rack deconstruction being too long (1 > 0 seconds).
-    type: Fix
-  id: 1245
-  time: '2025-01-26T04:31:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5450
 - author: Vermidia
   changes:
   - message: Lizards can now tail thump and Dionas can now chirp.
@@ -5336,5 +5325,14 @@
   id: 1747
   time: '2025-05-20T03:38:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6441
+- author: DummeHytteOst
+  changes:
+  - message: You can now deconstruct rollerbeds with a wrench.
+    type: Add
+  - message: Rollerbeds no longer drop upstream metal sheets when destroyed.
+    type: Fix
+  id: 1748
+  time: '2025-05-20T12:37:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6370
 Name: RMC14
 Order: -1
