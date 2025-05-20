@@ -1,6 +1,6 @@
 - type: entity
-  name: bible
-  description: Apply to head repeatedly.
+  name: Holy Bible
+  description: A book containing the sacred texts of that one popular guy you heard a lot about.
   parent: BaseStorageItem
   id: RMCBible
   components:
@@ -8,6 +8,7 @@
     sprite: _RMC14/Objects/Misc/bible.rsi
     state: icon
   - type: Item
+    size: Normal # medium weight class
     sprite: _RMC14/Objects/Misc/bible.rsi
   - type: UseDelay
     delay: 10.0
@@ -23,7 +24,21 @@
     - Belt
   - type: Storage
     grid:
-    - 0,0,0,1
+    - 0,0,7,1 # max_storage_space = 8
+    blacklist: # can't hold tools
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - Flashlight
+      components:
+      - Welder
+      - TrayScanner
+      - GasAnalyzer
+      - EntrenchingTool
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -31,3 +46,32 @@
   - type: Tag
     tags:
     - Book
+
+- type: entity
+  parent: RMCBible
+  id: RMCBibleBooze
+  name: Mister Booze's Holy Bible
+  description: You will wind up wearing tattered shoes if you mess with Mister Booze, so if you've been so stiff you thought you died, you'll feel better once you have testified! All spirits contained within this bible are for medicinal purposes only.
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkAlcoholWhiskey
+      amount: 2
+    - id: CMDrinkCanBeerLite
+      amount: 3
+
+- type: entity
+  parent: RMCBible
+  id: RMCBibleHEFA
+  name: Holy texts of the High Explosive Fragmenting Anti-personnel hand grenade.
+  description: Praised be thee, reverend Clearsmire who has brought us into the light of the shrapnel! Sworn to the holy service of the HEFA lord are we, and while few, we are the voices of the silent many! Printed in the RESS.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/books.rsi
+    state: tome_hefa
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3
