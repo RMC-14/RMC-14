@@ -1,0 +1,23 @@
+- type: entity
+  parent: Clothing
+  id: RMCEarMiscClothingBase
+  abstract: true
+  components:
+  - type: Clothing
+    slots:
+    - ears
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Ears/earmuffs.rsi
+    state: equipped-EARS
+  - type: Icon
+    sprite: _RMC14/Objects/Clothing/Ears/earmuffs.rsi
+    state: icon
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: RMCEarMiscClothingBase
+  id: RMCEarmuffs
+  name: earmuffs
+  description: Protects your hearing from loud noises, and quiet ones as well.
+  # TODO RMC14 - Wearing this should make you immune to being deafened.

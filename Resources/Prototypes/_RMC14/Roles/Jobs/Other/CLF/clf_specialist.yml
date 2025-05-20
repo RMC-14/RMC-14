@@ -14,14 +14,18 @@
     components:
     - type: Skills
       skills:
-        RMCSkillFireman: 1
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillSpecialistal: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillVehicles: 1
-        RMCSkillEndurance: 1
+        RMCSkillMedical: 1
+        RMCSkillCQC: 1
+        RMCSkillEngineer: 1
+        RMCSkillLeadership: 1
+        RMCSkillEndurance: 2
+        RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
     - type: NpcFactionMember
       factions:
       - CLF
@@ -50,37 +54,32 @@
 - type: startingGear
   id: RMCGearCLFSpecialist
   equipment:
+    head: RMCArmorHelmetSecurity
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
-    eyes: RMCGlassesSpecialistalHUDGlasses
-    jumpsuit: RMCJumpsuitCLFWebbing
+    eyes: RMCGlassesM4SPRBattleSight
+    jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
     outerClothing: RMCArmorVestNone
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSpecialist
-    belt: CMBeltSpecialistalFilled
-    back: RMCSatchelLightpack
-    pocket1: RMCFlashlight
-    pocket2: RMCPouchMagazineLarge
+    belt: CMM77BeltFilled
+    back: RMCWeaponMar50LMG
+    pocket1: RMCPouchExplosiveFilledC4SPP
+    pocket2: RMCPouchFirstAidERT
   inhand:
-  - WeaponSMGMAC15  # TODO RMC14 - Make randomized
+  - RMCWeaponLauncherM5ATL  # TODO RMC14 - Make foldable variant that goes into the bag
+  - RMCEarmuffs
   storage:
     back:
-    - RMCGrenadeIED
-    - CMAdvFirstAidKitFilled
-    - CMAdvFirstAidKitFilled
-    - CMPortableSurgicalBedSpawnFolded
-    - RMCCigarettePackLuckySloths
-    - CMMRE
-    - CMSynthGraft
+    - RMCFlashlight
+    - CMFirstAidKitFilled
     - CMCrowbar
-    pocket2:
-    - RMCMagazineSMGMAC15
-    - RMCMagazineSMGMAC15
-    - RMCMagazineSMGMAC15
-    - RMCMagazineSMGMAC15
-    - RMCMagazineSMGMAC15
+    - CMMRE
+    - RMCRangefinder
+    - RMCGrenadeIED
+    - RMCGrenadeIED
 
 - type: playTimeTracker
   id: RMCJobCLFSpecialist
