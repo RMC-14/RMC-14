@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Fixed Kutjevo areas. Now you can mortar Colony and Hydro Dam buildings.
-    type: Fix
-  id: 1243
-  time: '2025-01-26T04:26:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5453
 - author: Vermidia
   changes:
   - message: Fixed Sentinel Neurospit draining fewer units of chemicals than intended,
@@ -5337,5 +5330,12 @@
   id: 1745
   time: '2025-05-20T03:34:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6271
+- author: crazy1112345
+  changes:
+  - message: Adds playtime ribbons for CL and Correspondent
+    type: Add
+  id: 1746
+  time: '2025-05-20T03:36:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6327
 Name: RMC14
 Order: -1
