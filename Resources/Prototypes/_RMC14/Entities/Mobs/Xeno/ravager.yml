@@ -120,6 +120,10 @@
     value: 0.7
   - type: TantrumSpeedBuff
   - type: XenoCruelty
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: ravager
 
 - type: entity
   parent: RMCXenoRavagerBase
