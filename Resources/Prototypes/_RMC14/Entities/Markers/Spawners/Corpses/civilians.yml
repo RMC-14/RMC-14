@@ -127,3 +127,28 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseWeYaGoonKutjevo
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaPMC
+  name: Corpse Spawner - We-Ya PMC Standard
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaPMCStandard
+
+- type: entity
+  parent: RMCSpawnerCorpseWeYaPMC
+  id: RMCSpawnerCorpseWeYaPMCStandardBurst
+  name: Corpse Spawner - We-Ya PMC Standard
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaPMCStandardBurst
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaManager
+  name: Corpse Spawner - Corporate Supervisor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaManager
