@@ -37,8 +37,8 @@
   suffix: Role
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCCLFSoldier
 
