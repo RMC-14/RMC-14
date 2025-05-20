@@ -1,5 +1,5 @@
 - type: reagent
-  parent: Water
+  parent: [Water, CMReagent]
   id: RMCHolywater
   name: reagent-name-holywater
   desc: reagent-desc-rmcholywater
