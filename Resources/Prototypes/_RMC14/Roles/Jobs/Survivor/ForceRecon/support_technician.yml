@@ -3,9 +3,6 @@
   id: RMCSurvivorForeconSupportTech
   name: rmc-job-name-forecon-support-tech
   playTimeTracker: RMCJobSurvivorSupportTechForecon
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: engi
   startingGear: RMCGearForeconSupportTech
   icon: "CMJobIconCombatTech"
   special:

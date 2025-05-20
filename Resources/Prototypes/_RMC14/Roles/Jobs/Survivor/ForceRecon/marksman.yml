@@ -3,9 +3,6 @@
   id: RMCSurvivorForeconMarksman
   name: rmc-job-name-forecon-marksman
   playTimeTracker: RMCJobSurvivorMarksmanForecon
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: spec
   startingGear: RMCGearForeconBase
   icon: "CMJobIconWeaponsSpecialist"
   special:

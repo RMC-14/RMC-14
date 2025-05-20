@@ -3,9 +3,6 @@
   id: RMCSurvivorForeconSniper
   name: rmc-job-name-forecon-sniper
   playTimeTracker: RMCJobSurvivorSniperForecon
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: spec
   startingGear: RMCGearForeconSniper
   icon: "RMCJobIconForeconSniper"
   special:

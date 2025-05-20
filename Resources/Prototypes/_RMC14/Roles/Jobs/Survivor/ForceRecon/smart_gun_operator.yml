@@ -3,9 +3,6 @@
   id: RMCSurvivorForeconSmartgunOperator
   name: cm-job-name-smart-gun-operator
   playTimeTracker: RMCJobSurvivorSmartgunOperatorForecon
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: smartgunner
   startingGear: RMCGearForeconSmartgunOperator
   icon: "CMJobIconSmartGunOperator"
   special:

@@ -8,12 +8,6 @@
     RMCRankMajor: []
   startingGear: RMCGearForeconCommander
   supervisors: cm-job-supervisors-marine-high-command
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: co
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   icon: "RMCJobIconForeconCommander"
   hasIcon: true

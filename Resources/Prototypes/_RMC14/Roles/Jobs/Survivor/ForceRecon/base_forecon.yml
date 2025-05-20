@@ -11,9 +11,6 @@
   joinNotifyCrew: false
   startingGear: RMCGearForeconBase
   hasIcon: false
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: private
   greeting: rmc-job-greeting-forecon
   playTimeTracker: RMCSurvivorForecon
   hidden: true
