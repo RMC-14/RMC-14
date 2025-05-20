@@ -21,7 +21,7 @@ public sealed partial class XenoRageComponent : Component
     public int ArmorPerRage = 3;
 
     [DataField, AutoNetworkedField]
-    public float SpeedBuffPerRage = 0.01f;
+    public float SpeedBuffPerRage = 0.028f;
 
     [DataField, AutoNetworkedField]
     public float AttackSpeedPerRage = 0.28f;
