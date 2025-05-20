@@ -40,6 +40,7 @@
       factions:
       - Survivor
     - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
   greeting: rmc-job-greeting-survivor
   hasIcon: false
 

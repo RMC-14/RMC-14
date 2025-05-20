@@ -23,7 +23,7 @@
     allowedWhitelist: RMCAllowSuitStorageClothingJacket
     user:
       components:
-      - RMCSurvivor
+      - RMCAllowSuitStorage
 
 - type: entity
   abstract: True
