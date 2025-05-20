@@ -563,6 +563,8 @@
       path: /Audio/Items/shovel_dig.ogg
     openSound:
       path: /Audio/Items/shovel_dig.ogg
+  - type: RMCEntityStorageWhitelist # RMC14
+    whitelist: {}
 
 - type: entity
   parent: CrateWoodenGrave
