@@ -108,7 +108,6 @@
   id: RMCXenoCrusher
   components:
   - type: Xeno
-    role: CMXenoCrusher
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -142,7 +141,6 @@
       780: Critical
       880: Dead
   - type: Xeno
-    role: CMXenoCrusher
     ignorePheromones: Frenzy
     actionIds:
     - ActionXenoRest
