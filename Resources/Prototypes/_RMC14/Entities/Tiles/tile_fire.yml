@@ -60,7 +60,7 @@
   - type: RMCScorchEffectOnSpawn
     decalTag: burnt
     tileLimit: 3
-  - type: BlockWeedSpread
+  - type: BlockWeeds
 
 - type: entity
   parent: RMCTileFire

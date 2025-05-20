@@ -35,7 +35,6 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
     private EntityQuery<AirtightComponent> _airtightQuery;
     private EntityQuery<AllowWeedSpreadComponent> _allowWeedSpreadQuery;
-    private EntityQuery<BlockWeedSpreadComponent> _blockSpreadQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
     private EntityQuery<XenoNestSurfaceComponent> _xenoNestSurfaceQuery;
     private EntityQuery<XenoWeedableComponent> _xenoWeedableQuery;
@@ -47,7 +46,6 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
         _airtightQuery = GetEntityQuery<AirtightComponent>();
         _allowWeedSpreadQuery = GetEntityQuery<AllowWeedSpreadComponent>();
-        _blockSpreadQuery = GetEntityQuery<BlockWeedSpreadComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
         _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
         _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
@@ -88,12 +86,6 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(grid, neighbor);
                 while (anchored.MoveNext(out var anchoredId))
                 {
-                    if (_blockSpreadQuery.HasComp(anchoredId))
-                    {
-                        blocked = true;
-                        continue;
-                    }
-
                     if (_airtightQuery.TryGetComponent(anchoredId, out var airtight) &&
                         airtight.AirBlocked &&
                         !_tag.HasTag(anchoredId, IgnoredTag) &&
