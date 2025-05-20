@@ -10,5 +10,6 @@ cm-job-supervisors-cmp = the Chief MP
 cm-job-supervisors-qm = the Quartermaster
 cm-job-supervisors-ce = the Chief Engineer
 cm-job-supervisors-sl = the acting Squad Leader
+cm-job-supervisors-staff = Server Staff
 cm-job-supervisors-nobody = nobody, you are on your own
 cm-job-supervisors-colonists = the sapient colonists

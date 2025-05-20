@@ -197,6 +197,17 @@
       tags:
       - Sidearm
 
+#Filled Command Pouch
+- type: entity
+  parent: RMCPouchCommand
+  id: RMCPouchCommandFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+
 
 # Magazine Pouch
 - type: entity
