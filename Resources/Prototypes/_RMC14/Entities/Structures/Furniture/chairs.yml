@@ -5,15 +5,6 @@
   id: CMSeatBase
   name: abstract chair
   components:
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.2
-        density: 100
-        mask:
-        - HighImpassable
   - type: Corrodible
     timeToApply: 4
     structure: true
