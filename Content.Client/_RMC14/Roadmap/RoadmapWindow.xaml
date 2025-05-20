@@ -47,6 +47,8 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Charger Crusher strain" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Berserker Ravager strain" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Praetorian" Text="Tier 3 xeno" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Weather" Text="Depends on the planet map: rain on LV, sandstorms on Solaris, etc." />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Eggsac Carrier strain" />
@@ -92,9 +94,7 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Charger Crusher strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Trapper Boiler strain" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Berserker Ravager strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Hedgehog Ravager strain" />
                 </BoxContainer>
                 <BoxContainer Name="ThirdVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
