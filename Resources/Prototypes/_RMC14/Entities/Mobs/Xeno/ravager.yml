@@ -161,7 +161,6 @@
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
   - type: Xeno
-    role: CMXenoRavager
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
