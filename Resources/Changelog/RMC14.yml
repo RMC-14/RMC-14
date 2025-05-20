@@ -1,96 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added bullet boxes. These can be bought by Requisitions and carry 50%
-      more ammunition for the same price, and can be clicked on with an empty magazine
-      to refill it. There are rifle, rifle AP, SMG and SMG AP boxes. They can also
-      be worn on your back slot.
-    type: Add
-  - message: Added an option to disable auto-ejecting magazines from guns. If you
-      disable it, you will have to eject it manually, either with a hotkey or through
-      the right click menu. This lets you preserve your magazines for when you want
-      to refill them with a bullets box.
-    type: Add
-  - message: Added opening barrels with crowbars to get 2 metal sheets each.
-    type: Add
-  - message: Added the M54C MK1 assault rifle. It has 95 round mags instead of 40,
-      less scatter, and one more round in burst fire compared to the MK2 that you
-      are used to. Its underbarrel grenade launcher also carries 5 grenades instead
-      of 3, but fires slower. The only place you can get it from is Requisitions,
-      CIC armory, and the SEA vendor..
-    type: Add
-  - message: Added the right-side Requisitions vendor being able to dispense filled
-      magazine boxes, which drains the magazines from the vendor when dispensed. You
-      no longer have to get a wrist injury playing Requisitions.
-    type: Add
-  - message: Added random ARES crates that are given to Requisitions every 10 minutes,
-      depending on the time and amount of live xenos on the planet. These can be magazine,
-      bullet and supply crates. The Requisitions budget has been adjusted to compensate
-      for this. For the first 5 sets of free crates (minute 10, 20, 30, 40, and 50)
-      will always have a minimum of 4 crates.
-    type: Add
-  - message: Added CIC, Upper Medbay, Req and Engi armories.
-    type: Add
-  - message: Removed APC access checks until cutting the access wire is implemented.
-      This lets anyone with the skill such as FTLs but not the access interact with
-      an APC.
-    type: Remove
-  - message: Fixed the Liaison having XO access. Their correct access is We-Ya, Command,
-      Research, Medical, Medical Prep, Colony Public, Coolony Research, Colony Engineering,
-      Colony Logistics, Colony Brig, Colony Medbay and Colony Command.
-    type: Fix
-  - message: Fixed Command roles other than CO/CMP/XO/SO/ASO being able to access
-      brig. MP roles and the SEA can still access it.
-    type: Fix
-  - message: Fixed the Dropship Crew Chief not having Command access and access to
-      the medbay.
-    type: Fix
-  - message: Fixed cargo technicians being able to access the automated weapons rack
-      and surplus uniform vendor. They can still access the automated munition, automated
-      utilities and squad attachments vendors. The Quartermaster can still access
-      all of them.
-    type: Fix
-  - message: Fixed thermal cloak cooldown still being 3 seconds instead of 0.5.
-    type: Fix
-  - message: Fixed knives not being deleted by explosions.
-    type: Fix
-  - message: Fixed holstering and unholstering being inconsistent, specially with
-      belt holsters.
-    type: Fix
-  - message: Fixed the mouse cursor being invisible while wielding and having disabled
-      combat crosshairs in the options or hovering over an UI element such as the
-      chat.
-    type: Fix
-  - message: Fixed knocking on a window not saying who knocked on it for other players.
-    type: Fix
-  - message: Fixed bedrolls being able to delete items.
-    type: Fix
-  - message: Fixed welding goggles being stored sideways.
-    type: Fix
-  - message: Fixed survivors not getting accents and other traits.
-    type: Fix
-  - message: Ported squad transfers not being able to make a squad have more than
-      1 squad leader, 1 specialist, 1 smart gun operator, 2 fireteam leaders, 3 combat
-      technicians, or 4 hospital corpsmen. Because apparently people can't control
-      themselves when making Echo squad. Any complaints should go to your XOs.
-    type: Fix
-  - message: Fixed cryoing as a non-rifleman squad role sometimes breaking which squad
-      a late-joining player would be in.
-    type: Fix
-  - message: Fixed being able to secrete resin on top of generators.
-    type: Fix
-  - message: Fixed Requisitions stamped invoices giving 300 credits back instead of
-      100.
-    type: Fix
-  - message: Fixed throwing not making you face towards the direction you threw something
-      at.
-    type: Fix
-  - message: Requisitions starting budget now correctly uses the same factor as vendors,
-      instead of the total amount of marines.
-    type: Tweak
-  id: 1237
-  time: '2025-01-19T12:51:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5382
 - author: blueDev2
   changes:
   - message: Prevent client side entities of metal from barrel deconstruction
@@ -5419,5 +5327,16 @@
   id: 1739
   time: '2025-05-20T03:12:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6472
+- author: J C Denton
+  changes:
+  - message: 'LV-759 got updated with guns, P90s, SSG-45, HG 37-12s, Spearhead Revolvers
+      and Incinerators: check out the Police Authority armory, Biogenomic lab as a
+      whole and the streets north of it.'
+    type: Tweak
+  - message: Vault area north of caves checkpoint now has a missing MOU53 shotgun.
+    type: Tweak
+  id: 1740
+  time: '2025-05-20T03:14:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6462
 Name: RMC14
 Order: -1
