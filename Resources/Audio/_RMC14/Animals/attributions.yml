@@ -1,4 +1,4 @@
 - files: ["crow1.ogg, crow2.ogg, crow3.ogg"]
-  license: "CC-BY-NC-SA-3.0"
-  copyright: "Created by pixabay user 'kakaist'. The original audio was trimmed and renamed"
-  source: "https://pixabay.com/sound-effects/crow-sfx-318131/"
+  license: "CC-BY-3.0"
+  copyright: "Modified from 'SWAG CROW FX.wav' by freesound user 'harrisonlace'. The original audio was trimmed, split to mono, and converted from WAV to OGG format"
+  source: "https://freesound.org/people/harrisonlace/sounds/792222/"
