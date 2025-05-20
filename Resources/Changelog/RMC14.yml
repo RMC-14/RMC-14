@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed shooting both underbarrel grenade launchers launching grenades
-      everywhere except where you are actually aiming.
-    type: Fix
-  - message: Fixed the CO's M59A prototype rifle not starting with a locked M54C collapsible
-      stock.
-    type: Fix
-  id: 1241
-  time: '2025-01-20T03:32:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5426
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the M54C Mk1 and the tactical shotgun not being in the executive
@@ -5331,5 +5320,19 @@
   id: 1743
   time: '2025-05-20T03:30:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6470
+- author: Vermidia
+  changes:
+  - message: Felinids can now take a new cat snout marking and can also have whiskers.
+    type: Add
+  - message: Felinids can now be any color. Their current colors have shifted slightly
+      because of this.
+    type: Add
+  - message: Felinids can now stop wagging their tail.
+    type: Add
+  - message: Various emotes now have their own icons.
+    type: Add
+  id: 1744
+  time: '2025-05-20T03:32:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6456
 Name: RMC14
 Order: -1
