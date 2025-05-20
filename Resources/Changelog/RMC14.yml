@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Prevent client side entities of metal from barrel deconstruction
-    type: Fix
-  id: 1238
-  time: '2025-01-19T22:37:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5423
 - author: DrSmugleaf
   changes:
   - message: Fixed MK1 mags not being transferable between each other and M54C/M54CE2
@@ -5338,5 +5331,12 @@
   id: 1740
   time: '2025-05-20T03:14:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6462
+- author: x5tink
+  changes:
+  - message: Added more shark plushie colours
+    type: Add
+  id: 1741
+  time: '2025-05-20T03:24:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6423
 Name: RMC14
 Order: -1
