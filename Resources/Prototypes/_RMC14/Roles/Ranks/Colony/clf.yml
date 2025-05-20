@@ -1,0 +1,9 @@
+- type: rank
+  id: RMCRankCLFRebel
+  name: Rebel
+  prefix: REB.
+
+- type: rank
+  id: RMCRankCLFRebelCommander
+  name: Rebel Commander
+  prefix: REBC.

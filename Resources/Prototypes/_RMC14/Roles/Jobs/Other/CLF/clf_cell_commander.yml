@@ -5,7 +5,7 @@
   description: rmc-job-description-clf-cell-commander
   playTimeTracker: CMJobCLFCellCommander
   ranks:
-    RMCRankLanceCorporal: [ ]
+    RMCRankCLFRebelCommander: [ ]
   startingGear: RMCGearCLFCellCommander
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
