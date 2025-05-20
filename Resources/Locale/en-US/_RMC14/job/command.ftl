@@ -21,3 +21,12 @@ CMJobExecutiveOfficer = Executive Officer
 
 # Admin only right now.
 cm-job-name-high-command = High Command
+
+# Admin only brig gen.
+rmc-job-name-unmc-brigadier-general = High Command
+rmc-job-description-unmc-brigadier-general = "High Command. Congrats, you're a Brigadier General!"
+
+# admin spawn only high comm Adjutant
+rmc-job-name-unmc-adjutant = High Command Adjutant
+rmc-job-description-unmc-adjutant = "You're the Adjutant to a high ranked officer. They must be important!"
+rmc-job-prefix-unmc-adjutant = ADJ

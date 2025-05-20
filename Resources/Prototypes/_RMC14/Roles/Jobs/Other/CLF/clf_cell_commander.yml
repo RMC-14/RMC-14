@@ -5,7 +5,7 @@
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: CMJobCLFCellCommander
   ranks:
-    RMCRankLanceCorporal: [ ]
+    RMCRankCLFRebelCommander: [ ]
   startingGear: RMCGearCLFCellCommander
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
