@@ -1265,6 +1265,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNells-the-Jobs
+  name: Nells-the-Jobs figurine
+  description: "A silly little lizard that is known for enjoying Slaw."
+  components:
+  - type: Sprite
+    state: nells-the-jobs
+  - type: PatronFigurine
+    id: 6472b9d8-4e6a-447e-af75-4b2a6d3961d1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFast-pawsChip
   name: Fast-paws Chip figurine
   components:
@@ -1273,6 +1284,17 @@
   - type: PatronFigurine
     id: c5f5b62a-5206-4948-9745-e4d9bbb87764
 
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDryWetbrush
+  name: Dry Wetbrush figurine
+  description: "He wonders what you are thinking about."
+  components:
+  - type: Sprite
+    state: dry_wetbrush
+  - type: PatronFigurine
+    id: 72a61df6-9a4f-4d32-840b-f1d0c4e2b051
+    
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHaileyMorgan
@@ -1441,3 +1463,4 @@
     state: kuafu_speed_demon_lightweaver
   - type: PatronFigurine
     id: 3c148935-f54d-4c7d-b02c-a9ac360c6479
+
