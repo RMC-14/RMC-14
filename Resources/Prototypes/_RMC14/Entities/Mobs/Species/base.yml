@@ -368,3 +368,6 @@
       8: 8
   - type: XenoToggleChargingKnockback
   - type: XenoToggleChargingParalyze
+  - type: RMCMobStateDrawDepth
+    drawDepths:
+      Dead: DeadMobs
