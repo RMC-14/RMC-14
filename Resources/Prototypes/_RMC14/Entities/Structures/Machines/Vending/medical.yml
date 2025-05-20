@@ -145,9 +145,7 @@
   suffix: ""
   components:
   - type: AccessReader
-    access:
-    - [ "CMAccessMedical" ]
-    - [ "CMAccessDropship" ]
+    access: [["CMAccessMedical"]]
 
 - type: entity
   parent: CMVendorMedical
@@ -340,7 +338,6 @@
   - type: AccessReader
     access:
     - [ "CMAccessMedical" ]
-    - [ "CMAccessDropship" ]
   - type: CMAutomatedVendor
     hackable: true
     sections:
