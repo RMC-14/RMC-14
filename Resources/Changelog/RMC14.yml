@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added new dropship hijack effects
-    type: Tweak
-  id: 1236
-  time: '2025-01-19T11:46:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5397
 - author: DrSmugleaf
   changes:
   - message: Added bullet boxes. These can be bought by Requisitions and carry 50%
@@ -5419,5 +5412,12 @@
   id: 1738
   time: '2025-05-20T03:08:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6435
+- author: J C Denton
+  changes:
+  - message: Fixed the SSG-45 having a 1.1x damage multiplier instead of 1.25x.
+    type: Fix
+  id: 1739
+  time: '2025-05-20T03:12:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6472
 Name: RMC14
 Order: -1
