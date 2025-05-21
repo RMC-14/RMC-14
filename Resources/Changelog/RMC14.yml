@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: SG6732
   changes:
-  - message: Updated autolathe with new recipes.
-    type: Add
-  - message: Updated T-ray Scanner with CM sprites.
-    type: Add
-  id: 1257
-  time: '2025-01-26T06:53:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5341
-- author: SG6732
-  changes:
   - message: Added the UNMC decal. Semper Fi!
     type: Add
   id: 1258
@@ -5326,5 +5317,16 @@
   id: 1759
   time: '2025-05-21T13:53:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6505
+- author: J C Denton
+  changes:
+  - message: PMC corpse spawners on Hybrisa Biogenom and Cave Camp, Solaris Lambda
+      and ETA labs.
+    type: Add
+  - message: Corporate Supervisor corpse spawners on 624 Hydro Nightmare insert, Northwest
+      colony streets on Hybrisa.
+    type: Add
+  id: 1760
+  time: '2025-05-21T13:56:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6496
 Name: RMC14
 Order: -1
