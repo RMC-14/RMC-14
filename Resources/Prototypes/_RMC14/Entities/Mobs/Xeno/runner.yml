@@ -189,7 +189,6 @@
     - ActionXenoAcidAcider
     - ActionXenoForTheHive
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
@@ -252,6 +251,4 @@
       whitelist:
         components:
         - XenoHeavy
-
-
-
+  - type: XenoHidden

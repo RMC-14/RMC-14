@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: FloorDeathEntity
   name: death
   placement:
@@ -15,7 +15,7 @@
         Brute: 5000
     whitelist:
       components:
-        - MobState
+      - MobState
     ignoreResistances: true
   - type: Physics
     bodyType: Static

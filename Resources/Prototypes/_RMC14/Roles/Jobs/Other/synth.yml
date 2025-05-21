@@ -109,7 +109,6 @@
 - type: startingGear
   id: RMCGearSyntheticEquipped
   equipment:
-    jumpsuit: RMCJumpsuitSynthetic
     gloves: CMHandsInsulated
     shoes: RMCShoesWhite
     id: RMCIDCardSynth

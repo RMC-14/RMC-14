@@ -66,6 +66,7 @@
       params:
         volume: -4
   - type: HealthExaminable
+    examineShowEmpty: false
     examinableTypes:
     - Blunt
     - Slash
@@ -440,6 +441,7 @@
     tags:
     - DoorBumpOpener
   - type: Hands
+    examineShowEmpty: false
   - type: GiveHands
     hands:
     - name: Right Hand

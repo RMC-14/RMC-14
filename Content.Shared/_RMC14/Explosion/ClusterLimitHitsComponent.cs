@@ -8,4 +8,7 @@ public sealed partial class ClusterLimitHitsComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Limit = 1;
+
+    [DataField, AutoNetworkedField]
+    public bool IgnoreFirstHit;
 }

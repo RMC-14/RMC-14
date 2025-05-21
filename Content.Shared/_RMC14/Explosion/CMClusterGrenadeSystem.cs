@@ -26,7 +26,10 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
         foreach (var spawned in args.Spawned)
         {
             var projectile = EnsureComp<ProjectileLimitHitsComponent>(spawned);
-            projectile.IgnoredEntities = args.HitEntities;
+
+            if (ent.Comp.IgnoreFirstHit)
+                projectile.IgnoredEntities = args.HitEntities;
+
             projectile.Limit = ent.Comp.Limit;
             projectile.OriginEntity = args.OriginEntity;
             Dirty(spawned, projectile);

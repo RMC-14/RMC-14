@@ -10,6 +10,17 @@
       key_slots:
       - CMEncryptionKeyColony
 
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetColonyIcons
+  name: colony headset
+  description: A standard headset used by colonists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
 # For Bureau Marshals
 - type: entity
   parent: RMCHeadsetIconsCMB
@@ -93,3 +104,17 @@
   components:
   - type: RMCHeadset
     radioTextIncrease: 3
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetForecon
+  name: Force Recon headset
+  description: A headset given to FORECON marines.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyFORECON
+  - type: RMCHeadset
+    channels:
+    - MarineForecon
