@@ -12,7 +12,7 @@
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: CMJobSynthetic
+      role: RMCJobSynthetic
       time: 630000 # 175 hrs
 
 - type: loadout
