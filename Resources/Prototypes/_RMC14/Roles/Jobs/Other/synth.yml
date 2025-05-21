@@ -115,15 +115,15 @@
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
 
-#- type: entity
-#  parent: CMSpawnPointJobBase
-#  id: RMCSpawnPointSynth
-#  name: synthetic spawn point
-#  components:
-#  - type: SpawnPoint
-#    job_id: RMCJobSynthetic
-#  - type: Sprite
-#    state: syn_spawn
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSynth
+  name: synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCJobSynthetic
+  - type: Sprite
+    state: syn_spawn
 
 - type: playTimeTracker
   id: RMCJobSynthetic
