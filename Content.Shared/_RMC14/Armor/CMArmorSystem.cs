@@ -252,7 +252,7 @@ public sealed class CMArmorSystem : EntitySystem
                 return;
 
             // Last 1 is for sandboxing, see https://github.com/space-wizards/RobustToolbox/pull/5955
-            examine.Insert(0, $"{Loc.GetString("rmc-examine-armor-xeno-header")}\n", 1);
+            examine.Insert(0, $"{Loc.GetString("rmc-examine-armor-xeno-header", ("xeno", ent))}\n", 1);
             args.AddMarkup(examine.ToString());
         }
     }
