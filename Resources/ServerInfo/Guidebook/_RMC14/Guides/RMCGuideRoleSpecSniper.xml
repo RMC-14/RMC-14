@@ -1,0 +1,113 @@
+<Document>
+  # Sniper Specialist: The Long-Range Solution
+
+  ## Precision, Patience, Power
+  Difficulty: [color=#4CAF50]Medium to Hard[/color]
+
+  This guide covers both the Anti-material Sniper and Sniper specialist
+
+  So, you've picked the Sniper specialist, or you're stepping up as their vital Spotter? Wonderful! You're about to become a critical asset on the battlefield, capable of halting Xenomorph advances, eliminating high-value targets, and instilling a healthy dose of fear into the enemy. Let’s get started, shall we?
+
+  # The Sniper's Equipment
+  When you open your specialist kit, you'll find several key pieces of gear:
+  <Box><GuideEntityEmbed Entity="CMM96SSniperRifle"/> <GuideEntityEmbed Entity="RMCXM43E1AntiMaterielRifle"/> <GuideEntityEmbed Entity="CMGlassesM42ScoutSight"/></Box>
+
+  # The Spotter's Equipment
+  <GuideEntityEmbed Entity="RMCKitSpotter"/>
+  <Box>If you're taking on the crucial role of the Spotter, your kit will contain these important equipment:</Box>
+  <Box><GuideEntityEmbed Entity="CMPamphletSpotter"/> <GuideEntityEmbed Entity="RMCLaserDesignatorSpotter"/> <GuideEntityEmbed Entity="CMGlassesM42ScoutSight"/></Box>
+
+  ## Understanding Aimed Shot & Enhancements: The Core of Your Craft
+
+  The Aimed Shot is your signature ability. When successfully channeled and fired, it deals significant damage and, crucially, applies a [color=#ADD8E6][bold]debuff[/bold][/color] to the target depending on ammo. This debuff works on [italic]ANY[/italic] target, including Queens and Tier 3 Xenomorphs.
+
+  Both the Sniper's Targeting Laser and the Spotter's "Spot" ability enhance the Aimed Shot by reducing its channel time, along with the distance to the target:
+
+  <Box>[bold]Sniper's Targeting Laser[/bold]:</Box>
+  -   Toggling this on creates a [color=#FF0000]highly visible red laser beam[/color] tethering you to your target.
+  -   [italic]Benefit[/italic]: Reduces Aimed Shot channel time by 50% (halves it).
+  -   [italic]Downside[/italic]: Clearly reveals your position and target to the enemy.
+
+  <Box>[bold]Spotter's "Spot" Ability[/bold]:</Box>
+  -   When a Spotter "spots" a target, a [color=#FFA500]orange line[/color] tethers the Spotter to the target if the Spotter is visible.
+  -   [color=#00FF00]Crucially, if the Spotter is cloaked, the spotting laser inherits the cloaker's transparency, making it invisible and not revealing the Spotter's position.[/color]
+
+  ### Sniper Controls
+
+  When you have your Sniper Rifle in hand, you'll have access to two additional UI buttons:
+  -   [italic]Aimed Shot[/italic]: This initiates the powerful, focused shot that is your primary damage and debuff tool.
+  -   [italic]Toggle Laser[/italic]: Activates a visible laser beam from your rifle to the target, significantly speeding up your Aimed Shot.
+  -   Once Aimed shot is active on your hotbar use [color=#FFA500][keybind="CMUniqueAction"][/color] to begin channeling, speed of which depends on if the target was being spotted or if you had your laser toggled on, once finished, you will fire a homing round at the target
+
+  ### Spotter Controls
+
+  As a Spotter using your designator, you have one key ability:
+  -   [italic]Spot Target[/italic]: This marks an enemy target, providing benefits to your Sniper by allowing them to use aimed shot faster
+  -   Once Spot Target is active on your hotbar use [color=#FFA500][keybind="CMUniqueAction"][/color] to begin spotting it for you sniper.
+
+  ## The Ghillie Suit: Become the Unseen Anchor!
+  <GuideEntityEmbed Entity="CMArmorM45"/>
+  Both Sniper and Spotter can utilize the Ghillie Suit, advanced camouflage that's more than just a pretty outfit!
+
+  -   [bold]Stationary Stealth Mode[/bold]: After a [color=#FFA500]brief channel time[/color], if you stay [color=#ADD8E6]perfectly still[/color], you become [italic]invisible[/italic] to everyone! Move, and you're visible again.
+  -   [color=#00FF00][bold]Ghostly Passthrough![/bold][/color]: While invisible and stationary, bullets [italic]pass right through you[/italic] as if you weren't there! No more blocking shots from your forward perch!
+  -   [bold]Tactical Uses[/bold]:
+  -   Set up [color=#DAA520]daring forward positions[/color] for sniping/spotting.
+  -   Become an [color=#FF6347]unseen lynchpin[/color] in an ambush.
+  -   Hold [color=#ADD8E6]unexpected angles[/color] in defense.
+  -   [bold]Heads Up![/bold]: You're stuck if found while still. This isn't an instant escape tool!
+
+  ## The M96S Sniper Rifle & Ammunition
+
+  The Standard Sniper, a weapon designed for accurate, debilitating shots from afar using specialized ammunition. This weapon excels at controlling enemy movement and applying potent status effects to key targets.
+
+  <Box> Ammunition Types & Their Aimed Shot Effects: </Box>
+  <Box>[bold]Flak Ammo[/bold]</Box>
+  -Normal Shot: Deals direct damage and AoE spread damage to nearby entities, especially effective against groups or Xenonids.
+  -Aimed Shot Effect: If it hits the designated target, it deals increased damage and applies a [color=#ADD8E6]powerful SUPERSLOW[/color] debuff, crippling their movement.
+  <Box>[bold]Incendiary Ammo[/bold]</Box>
+  -Normal Shot: Deals direct damage and ignites targets with [color=#FFA500]intense fire[/color].
+  -Aimed Shot Effect: Inflicts additional fire effects on the target and will [color=#B0B0B0]temporarily impair their vision[/color].
+  <Box>[bold]Marskman Ammo[/bold]</Box>
+  -Normal Shot: Delivers reliable piercing damage.
+  -Aimed Shot Effect: Enhances damage output to amazing levels, capable of removing any threat with ease.
+
+  ## XM43E1 Anti Materiel Rifle & Ammunition
+
+  An anti-materiel rifle designed to penetrate obstacles and multiple foes, delivering devastating blows particularly effective against the largest and most durable threats.
+
+  <Box>Marksman Ammo & Effects:</Box>
+  <Box>[bold]Normal Shot[/bold]:</Box>
+  -Delivers a very high damage shot with significant armor penetration.
+  -Rounds can pass through multiple targets and cover. Each entity or obstacle hit reduces the projectile's subsequent damage and effective range.
+  -Larger/tougher targets and denser obstacles will reduce damage and range more significantly.
+  <Box>[bold]Aimed Shot Effect[/bold]:</Box>
+  -On top of its powerful base damage (factoring in penetration), an Aimed Shot inflicts [italic]substantial bonus damage[/italic].
+  -This bonus damage often scales with the target's size and current health, making it exceptionally effective against large, high-health enemies like T3 Xenomorphs or Queens, often dealing a significant percentage of their current health as additional damage.
+  -[bold]Consecutive Hit Bonus:[/bold] Repeatedly hitting the [italic]same target[/italic] with Aimed Shots can increase the potency of this bonus damage, rewarding sustained focus on a single, high-value enemy. Hitting a different target will reset this damage ramp-up.
+
+  ## General Sniper & Spotter Tactics
+
+  -   [bold]Homing Aids Accuracy, Positioning Remains Key[/bold]: While Aimed Shots [color=#00FF00]guide themselves to the target[/color], good initial positioning for clear lines of sight and to manage the aim time (influenced by distance) is still [color=#ADD8E6]vital for effective engagement[/color].
+  -   [bold]Understand Your Ammunition's Purpose[/bold]:
+  -   Standard Sniper: [color=#FFA500]Use Flak for its powerful slowing effect on key targets, or Incendiary for sustained fire damage and visual impairment. Choose based on the desired tactical outcome.[/color]
+  -   Heavy Sniper: [color=#FF6347]Your Aimed Shot is designed to cripple or eliminate the toughest enemies. Focus on building the consecutive hit bonus against these targets. Understand how penetration affects your shots when dealing with groups or cover.[/color]
+  -   [bold]Patience & Opportunity ("The WAIT Strategy")[/bold]: [color=#ADD8E6]Allowing enemies to over-extend and then striking with a debilitating Aimed Shot remains a core, highly effective tactic.[/color] Homing projectiles make these crucial opportunities more reliable.
+  -   [bold]Strategic Target Prioritization[/bold]:
+  -   Standard Sniper: [color=#FFA500]Which debuff (Superslow, Fire/Blur) is most tactically valuable for your team right now?[/color]
+  -   Heavy Sniper: [color=#FF6347]Is it better to continue focusing fire on a damaged T3 to maximize the consecutive hit bonus, or switch to a new, immediate threat? Evaluate when to fire through lesser enemies to hit a target behind them.[/color]
+  -   [bold]Judicious Use of the Sniper's Targeting Laser[/bold]: The Sniper's own laser [color=#FFD700]greatly speeds up Aimed Shots but reveals their position with a clear beam[/color]. Use it when speed is more critical than stealth, or if the enemy is already aware of your general location.
+  -   [bold]The Power of a Cloaked Spotter[/bold]: If your Spotter can remain concealed, their ability to reduce the Sniper's aim time [color=#00FF00]without revealing their own position is a significant tactical advantage[/color].
+
+  ## Concluding Thoughts: The Distant Death-Dealer
+
+  Mastering the Sniper role, whether as the versatile Standard Sniper or the devastating Heavy Sniper, is a journey of precision, patience, and acute tactical awareness. These are not roles for the impulsive; they reward methodical approaches, careful target selection, and seamless coordination with your Spotter and the wider team.
+
+  The ability to cripple an enemy advance with a well-placed Flak shot, to melt hostiles with an Incendiary payload, or to vaporize a high-value target with a penetrating Marksman round from the XM43E1, can single-handedly turn the tide of an engagement. Remember the value of your Spotter – they are your force multiplier, your second pair of eyes, and the key to unlocking your rifle's fastest engagement potential.
+
+  So, take up your rifle, calibrate your sights, and communicate with your team. Whether you're providing overwatch, eliminating critical threats, or acting as a powerful psychological deterrent, your impact from afar will be undeniable. Stay sharp, stay patient, and make every shot count.
+
+  Good hunting, Sniper.
+
+
+</Document>
