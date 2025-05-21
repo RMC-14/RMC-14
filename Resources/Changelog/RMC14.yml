@@ -1,60 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added sticky and fast resin. Building castes can make these faster than
-      walls and doors, and they're quite cheap. Sticky resin slows non-hivemembers
-      on it more than hive weeds. Fast resin speeds up hivemember xenos on it.
-    type: Add
-  - message: Fixed how much weeds slow marines down. Generally slow on normal weeds
-      for armored marines is slightly less now, but the penalty is heavier unarmored.
-      Hardy and Hive weeds now also have stronger slows compared to normal weeds.
-    type: Fix
-  - message: Fixed Resin Whisperer nodes not costing plasma. Placing a node now also
-      has an animation.
-    type: Fix
-  - message: Fixed Hive Core spawning hiveless hive weeds.
-    type: Fix
-  id: 1261
-  time: '2025-01-26T12:09:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5402
-- author: DrSmugleaf
-  changes:
-  - message: Added alert levels. They can be changed to Red in CIC by setting both
-      keycard authentication devices right of the CIC bubble to red alert, then quickly
-      swiping a command-level ID on both of them at the same time. The Almayer control
-      console allows you to change it back to green or blue alert. Read the guidebook
-      to know when to set each one. There is a sound and message associated with each
-      one.
-    type: Add
-  - message: Added armory shutters automatically opening and closing, and red alert
-      gun cabinets automatically unlocking and locking, when the alert level is set
-      to or away from Red.
-    type: Add
-  - message: Added alert level status displays around the Almayer, showing the current
-      alert level.
-    type: Add
-  - message: Added directional armor lights. You will be able to see more in front
-      of you, and less behind.
-    type: Add
-  - message: Fixed some cases where more special roles could be assigned to a single
-      squad than intended.
-    type: Fix
-  - message: Fixed red alert gun cabinets being able to be destroyed by damaging them.
-      Xenonid corrosive acid will still destroy them.
-    type: Fix
-  - message: Fixed LV vines not having interaction outlines, making it difficult to
-      know if you are targeting them with a melee weapon.
-    type: Fix
-  - message: Fixed M5-ATL crosshair not being the square explosive crosshair.
-    type: Fix
-  - message: Fixed being able to move while crafting molotovs.
-    type: Fix
-  - message: Fixed some red glass security doors not allowing roles with only command
-      but not brig access through.
-    type: Fix
-  id: 1262
-  time: '2025-01-26T12:13:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5466
 - author: Whisper
   changes:
   - message: Command, MP and some squad roles roles now require more experience to
@@ -5321,5 +5265,19 @@
   id: 1763
   time: '2025-05-21T14:33:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6501
+- author: CyberTropic
+  changes:
+  - message: Changed floodlight brightness values, no more blinding floodlights
+    type: Tweak
+  id: 1764
+  time: '2025-05-21T14:35:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6465
+- author: RangerXVII
+  changes:
+  - message: '''Officer'' and ''OW'' will no longer be changed in the dwarf accent.'
+    type: Fix
+  id: 1765
+  time: '2025-05-21T14:34:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6476
 Name: RMC14
 Order: -1
