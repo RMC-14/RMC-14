@@ -18,23 +18,23 @@
       - id: RMCCassettePlayer
         amount: 50
       - id: RMCCassetteTapeWigWoo1
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeMendax
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeNighty
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeGoodShowOldChap
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeRedQwesta
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeBolgarich
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeQwertyquerty
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapePigeonBeans
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeCustom
-        amount: 30
+        amount: 20
     - name: Cards
       entries: []
     - name: Other

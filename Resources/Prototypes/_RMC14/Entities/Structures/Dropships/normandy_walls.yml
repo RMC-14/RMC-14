@@ -12,7 +12,7 @@
     sprite: _RMC14/Structures/Dropships/normandy.rsi
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall1]
+  parent: [CMAlamoWall1, CMBaseNormandyWall]
   id: CMNormandyWall1
   suffix: 1
   components:
@@ -22,7 +22,7 @@
     state: "1"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall2]
+  parent: [CMAlamoWall2, CMBaseNormandyWall]
   id: CMNormandyWall2
   suffix: 2
   components:
@@ -32,7 +32,7 @@
     state: "2"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall3]
+  parent: [CMAlamoWall3, CMBaseNormandyWall]
   id: CMNormandyWall3
   suffix: 3
   components:
@@ -42,7 +42,7 @@
     state: "3"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall4]
+  parent: [CMAlamoWall4, CMBaseNormandyWall]
   id: CMNormandyWall4
   suffix: 4
   components:
@@ -52,7 +52,7 @@
     state: "4"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall5]
+  parent: [CMAlamoWall5, CMBaseNormandyWall]
   id: CMNormandyWall5
   suffix: 5
   components:
@@ -62,7 +62,7 @@
     state: "5"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall6]
+  parent: [CMAlamoWall6, CMBaseNormandyWall]
   id: CMNormandyWall6
   suffix: 6
   components:
@@ -72,7 +72,7 @@
     state: "6"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall7]
+  parent: [CMAlamoWall7, CMBaseNormandyWall]
   id: CMNormandyWall7
   suffix: 7
   components:
@@ -82,7 +82,7 @@
     state: "7"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall8]
+  parent: [CMAlamoWall8, CMBaseNormandyWall]
   id: CMNormandyWall8
   suffix: 8
   components:
@@ -92,7 +92,7 @@
     state: "8"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall9]
+  parent: [CMAlamoWall9, CMBaseNormandyWall]
   id: CMNormandyWall9
   suffix: 9
   components:
@@ -102,7 +102,7 @@
     state: "9"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall10]
+  parent: [CMAlamoWall10, CMBaseNormandyWall]
   id: CMNormandyWall10
   suffix: 10
   components:
@@ -112,7 +112,7 @@
     state: "10"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall11]
+  parent: [CMAlamoWall11, CMBaseNormandyWall]
   id: CMNormandyWall11
   suffix: 11
   components:
@@ -122,7 +122,7 @@
     state: "11"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall12]
+  parent: [CMAlamoWall12, CMBaseNormandyWall]
   id: CMNormandyWall12
   suffix: 12
   components:
@@ -132,7 +132,7 @@
     state: "12"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall13]
+  parent: [CMAlamoWall13, CMBaseNormandyWall]
   id: CMNormandyWall13
   suffix: 13
   components:
@@ -142,7 +142,7 @@
     state: "13"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall14]
+  parent: [CMAlamoWall14, CMBaseNormandyWall]
   id: CMNormandyWall14
   suffix: 14
   components:
@@ -152,7 +152,7 @@
     state: "14"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall15]
+  parent: [CMAlamoWall15, CMBaseNormandyWall]
   id: CMNormandyWall15
   suffix: 15
   components:
@@ -162,7 +162,7 @@
     state: "15"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall16]
+  parent: [CMAlamoWall16, CMBaseNormandyWall]
   id: CMNormandyWall16
   suffix: 16
   components:
@@ -172,7 +172,7 @@
     state: "16"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall17]
+  parent: [CMAlamoWall17, CMBaseNormandyWall]
   id: CMNormandyWall17
   suffix: 17
   components:
@@ -182,7 +182,7 @@
     state: "17"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall18]
+  parent: [CMAlamoWall18, CMBaseNormandyWall]
   id: CMNormandyWall18
   suffix: 18
   components:
@@ -192,7 +192,7 @@
     state: "18"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall19]
+  parent: [CMAlamoWall19, CMBaseNormandyWall]
   id: CMNormandyWall19
   suffix: 19
   components:
@@ -202,7 +202,7 @@
     state: "19"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall20]
+  parent: [CMAlamoWall20, CMBaseNormandyWall]
   id: CMNormandyWall20
   suffix: 20
   components:
@@ -212,7 +212,7 @@
     state: "20"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall21]
+  parent: [CMAlamoWall21, CMBaseNormandyWall]
   id: CMNormandyWall21
   suffix: 21
   components:
@@ -222,7 +222,7 @@
     state: "21"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall22]
+  parent: [CMAlamoWall22, CMBaseNormandyWall]
   id: CMNormandyWall22
   suffix: 22
   components:
@@ -232,7 +232,7 @@
     state: "22"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall23]
+  parent: [CMAlamoWall23, CMBaseNormandyWall]
   id: CMNormandyWall23
   suffix: 23
   components:
@@ -242,7 +242,7 @@
     state: "23"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall24]
+  parent: [CMAlamoWall24, CMBaseNormandyWall]
   id: CMNormandyWall24
   suffix: 24
   components:
@@ -252,7 +252,7 @@
     state: "24"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall25]
+  parent: [CMAlamoWall25, CMBaseNormandyWall]
   id: CMNormandyWall25
   suffix: 25
   components:
@@ -262,7 +262,7 @@
     state: "25"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall26]
+  parent: [CMAlamoWall26, CMBaseNormandyWall]
   id: CMNormandyWall26
   suffix: 26
   components:
@@ -272,7 +272,7 @@
     state: "26"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall27]
+  parent: [CMAlamoWall27, CMBaseNormandyWall]
   id: CMNormandyWall27
   suffix: 27
   components:
@@ -282,7 +282,7 @@
     state: "27"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall28]
+  parent: [CMAlamoWall28, CMBaseNormandyWall]
   id: CMNormandyWall28
   suffix: 28
   components:
@@ -292,7 +292,7 @@
     state: "28"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall29]
+  parent: [CMAlamoWall29, CMBaseNormandyWall]
   id: CMNormandyWall29
   suffix: 29
   components:
@@ -302,7 +302,7 @@
     state: "29"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall30]
+  parent: [CMAlamoWall30, CMBaseNormandyWall]
   id: CMNormandyWall30
   suffix: 30
   components:
@@ -312,7 +312,7 @@
     state: "30"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall31]
+  parent: [CMAlamoWall31, CMBaseNormandyWall]
   id: CMNormandyWall31
   suffix: 31
   components:
@@ -322,7 +322,7 @@
     state: "31"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall32]
+  parent: [CMAlamoWall32, CMBaseNormandyWall]
   id: CMNormandyWall32
   suffix: 32
   components:
@@ -332,7 +332,7 @@
     state: "32"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall33]
+  parent: [CMAlamoWall33, CMBaseNormandyWall]
   id: CMNormandyWall33
   suffix: 33
   components:
@@ -342,7 +342,7 @@
     state: "33"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall34]
+  parent: [CMAlamoWall34, CMBaseNormandyWall]
   id: CMNormandyWall34
   suffix: 34
   components:
@@ -352,7 +352,7 @@
     state: "34"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall35]
+  parent: [CMAlamoWall35, CMBaseNormandyWall]
   id: CMNormandyWall35
   suffix: 35
   components:
@@ -362,7 +362,7 @@
     state: "35"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall36]
+  parent: [CMAlamoWall36, CMBaseNormandyWall]
   id: CMNormandyWall36
   suffix: 36
   components:
@@ -372,7 +372,7 @@
     state: "36"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall37]
+  parent: [CMAlamoWall37, CMBaseNormandyWall]
   id: CMNormandyWall37
   suffix: 37
   components:
@@ -382,7 +382,7 @@
     state: "37"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall38]
+  parent: [CMAlamoWall38, CMBaseNormandyWall]
   id: CMNormandyWall38
   suffix: 38
   components:
@@ -392,7 +392,7 @@
     state: "38"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall39]
+  parent: [CMAlamoWall39, CMBaseNormandyWall]
   id: CMNormandyWall39
   suffix: 39
   components:
@@ -402,7 +402,7 @@
     state: "39"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall40]
+  parent: [CMAlamoWall40, CMBaseNormandyWall]
   id: CMNormandyWall40
   suffix: 40
   components:
@@ -412,7 +412,7 @@
     state: "40"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall41]
+  parent: [CMAlamoWall41, CMBaseNormandyWall]
   id: CMNormandyWall41
   suffix: 41
   components:
@@ -422,7 +422,7 @@
     state: "41"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall42]
+  parent: [CMAlamoWall42, CMBaseNormandyWall]
   id: CMNormandyWall42
   suffix: 42
   components:
@@ -432,7 +432,7 @@
     state: "42"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall43]
+  parent: [CMAlamoWall43, CMBaseNormandyWall]
   id: CMNormandyWall43
   suffix: 43
   components:
@@ -442,7 +442,7 @@
     state: "43"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall44]
+  parent: [CMAlamoWall44, CMBaseNormandyWall]
   id: CMNormandyWall44
   suffix: 44
   components:
@@ -452,7 +452,7 @@
     state: "44"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall45]
+  parent: [CMAlamoWall45, CMBaseNormandyWall]
   id: CMNormandyWall45
   suffix: 45
   components:
@@ -462,7 +462,7 @@
     state: "45"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall46]
+  parent: [CMAlamoWall46, CMBaseNormandyWall]
   id: CMNormandyWall46
   suffix: 46
   components:
@@ -472,7 +472,7 @@
     state: "46"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall47]
+  parent: [CMAlamoWall47, CMBaseNormandyWall]
   id: CMNormandyWall47
   suffix: 47
   components:
@@ -482,7 +482,7 @@
     state: "47"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall48]
+  parent: [CMAlamoWall48, CMBaseNormandyWall]
   id: CMNormandyWall48
   suffix: 48
   components:
@@ -492,7 +492,7 @@
     state: "48"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall49]
+  parent: [CMAlamoWall49, CMBaseNormandyWall]
   id: CMNormandyWall49
   suffix: 49
   components:
@@ -502,7 +502,7 @@
     state: "49"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall50]
+  parent: [CMAlamoWall50, CMBaseNormandyWall]
   id: CMNormandyWall50
   suffix: 50
   components:
@@ -512,7 +512,7 @@
     state: "50"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall51]
+  parent: [CMAlamoWall51, CMBaseNormandyWall]
   id: CMNormandyWall51
   suffix: 51
   components:
@@ -522,7 +522,7 @@
     state: "51"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall52]
+  parent: [CMAlamoWall52, CMBaseNormandyWall]
   id: CMNormandyWall52
   suffix: 52
   components:
@@ -532,7 +532,7 @@
     state: "52"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall53]
+  parent: [CMAlamoWall53, CMBaseNormandyWall]
   id: CMNormandyWall53
   suffix: 53
   components:
@@ -542,7 +542,7 @@
     state: "53"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall54]
+  parent: [CMAlamoWall54, CMBaseNormandyWall]
   id: CMNormandyWall54
   suffix: 54
   components:
@@ -552,7 +552,7 @@
     state: "54"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall55]
+  parent: [CMAlamoWall55, CMBaseNormandyWall]
   id: CMNormandyWall55
   suffix: 55
   components:
@@ -562,7 +562,7 @@
     state: "55"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall56]
+  parent: [CMAlamoWall56, CMBaseNormandyWall]
   id: CMNormandyWall56
   suffix: 56
   components:
@@ -572,7 +572,7 @@
     state: "56"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall57]
+  parent: [CMAlamoWall57, CMBaseNormandyWall]
   id: CMNormandyWall57
   suffix: 57
   components:
@@ -582,7 +582,7 @@
     state: "57"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall58]
+  parent: [CMAlamoWall58, CMBaseNormandyWall]
   id: CMNormandyWall58
   suffix: 58
   components:
@@ -592,7 +592,7 @@
     state: "58"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall59]
+  parent: [CMAlamoWall59, CMBaseNormandyWall]
   id: CMNormandyWall59
   suffix: 59
   components:
@@ -602,7 +602,7 @@
     state: "59"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall60]
+  parent: [CMAlamoWall60, CMBaseNormandyWall]
   id: CMNormandyWall60
   suffix: 60
   components:
@@ -612,7 +612,7 @@
     state: "60"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall61]
+  parent: [CMAlamoWall61, CMBaseNormandyWall]
   id: CMNormandyWall61
   name: port wing weapon attach point
   description: A place where heavy equipment can be installed with a powerloader.
@@ -627,7 +627,7 @@
     state: "61"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall62]
+  parent: [CMAlamoWall62, CMBaseNormandyWall]
   id: CMNormandyWall62
   suffix: 62
   components:
@@ -637,7 +637,7 @@
     state: "62"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall63]
+  parent: [CMAlamoWall63, CMBaseNormandyWall]
   id: CMNormandyWall63
   suffix: 63
   components:
@@ -647,7 +647,7 @@
     state: "63"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall64]
+  parent: [CMAlamoWall64, CMBaseNormandyWall]
   id: CMNormandyWall64
   suffix: 64
   components:
@@ -657,7 +657,7 @@
     state: "64"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall65]
+  parent: [CMAlamoWall65, CMBaseNormandyWall]
   id: CMNormandyWall65
   name: starboard wing weapon attach point
   description: A place where heavy equipment can be installed with a powerloader.
@@ -672,7 +672,7 @@
     state: "65"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall66]
+  parent: [CMAlamoWall66, CMBaseNormandyWall]
   id: CMNormandyWall66
   suffix: 66
   components:
@@ -682,7 +682,7 @@
     state: "66"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall67]
+  parent: [CMAlamoWall67, CMBaseNormandyWall]
   id: CMNormandyWall67
   suffix: 67
   components:
@@ -692,7 +692,7 @@
     state: "67"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall68]
+  parent: [CMAlamoWall68, CMBaseNormandyWall]
   id: CMNormandyWall68
   suffix: 68
   components:
@@ -702,7 +702,7 @@
     state: "68"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall69]
+  parent: [CMAlamoWall69, CMBaseNormandyWall]
   id: CMNormandyWall69
   suffix: 69
   components:
@@ -712,7 +712,7 @@
     state: "69"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall70]
+  parent: [CMAlamoWall70, CMBaseNormandyWall]
   id: CMNormandyWall70
   suffix: 70
   components:
@@ -722,7 +722,7 @@
     state: "70"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall71]
+  parent: [CMAlamoWall71, CMBaseNormandyWall]
   id: CMNormandyWall71
   suffix: 71
   components:
@@ -732,7 +732,7 @@
     state: "71"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall72]
+  parent: [CMAlamoWall72, CMBaseNormandyWall]
   id: CMNormandyWall72
   suffix: 72
   components:
@@ -742,7 +742,7 @@
     state: "72"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall73]
+  parent: [CMAlamoWall73, CMBaseNormandyWall]
   id: CMNormandyWall73
   suffix: 73
   components:
@@ -752,7 +752,7 @@
     state: "73"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall74]
+  parent: [CMAlamoWall74, CMBaseNormandyWall]
   id: CMNormandyWall74
   suffix: 74
   components:
@@ -762,7 +762,7 @@
     state: "74"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall75]
+  parent: [CMAlamoWall75, CMBaseNormandyWall]
   id: CMNormandyWall75
   suffix: 75
   components:
@@ -772,7 +772,7 @@
     state: "75"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall76]
+  parent: [CMAlamoWall76, CMBaseNormandyWall]
   id: CMNormandyWall76
   suffix: 76
   components:
@@ -782,7 +782,7 @@
     state: "76"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall77]
+  parent: [CMAlamoWall77, CMBaseNormandyWall]
   id: CMNormandyWall77
   suffix: 77
   components:
@@ -792,7 +792,7 @@
     state: "77"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall78]
+  parent: [CMAlamoWall78, CMBaseNormandyWall]
   id: CMNormandyWall78
   suffix: 78
   components:
@@ -802,7 +802,7 @@
     state: "78"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall79]
+  parent: [CMAlamoWall79, CMBaseNormandyWall]
   id: CMNormandyWall79
   suffix: 79
   components:
@@ -812,7 +812,7 @@
     state: "79"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall80]
+  parent: [CMAlamoWall80, CMBaseNormandyWall]
   id: CMNormandyWall80
   suffix: 80
   components:
@@ -822,7 +822,7 @@
     state: "80"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall81]
+  parent: [CMAlamoWall81, CMBaseNormandyWall]
   id: CMNormandyWall81
   suffix: 81
   components:
@@ -832,7 +832,7 @@
     state: "81"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall82]
+  parent: [CMAlamoWall82, CMBaseNormandyWall]
   id: CMNormandyWall82
   suffix: 82
   components:
@@ -842,7 +842,7 @@
     state: "82"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall83]
+  parent: [CMAlamoWall83, CMBaseNormandyWall]
   id: CMNormandyWall83
   suffix: 83
   components:
@@ -852,7 +852,7 @@
     state: "83"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall84]
+  parent: [CMAlamoWall84, CMBaseNormandyWall]
   id: CMNormandyWall84
   name: port fore weapon attach point
   description: A place where heavy equipment can be installed with a powerloader.
@@ -867,7 +867,7 @@
     state: "84"
 
 - type: entity
-  parent: [CMNormandyWall84, CMAlamoWall84Flipped]
+  parent: [CMAlamoWall84Flipped, CMNormandyWall84]
   id: CMNormandyWall84Flipped
   name: starboard fore weapon attach point
   description: A place where heavy equipment can be installed with a powerloader.
@@ -880,7 +880,7 @@
       offset: 0.5, 0.5
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall85]
+  parent: [CMAlamoWall85, CMBaseNormandyWall]
   id: CMNormandyWall85
   name: electronic system attach point
   description: A place where heavy equipment can be installed with a powerloader.
@@ -903,7 +903,7 @@
       offset: 0.5, 0.5
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall86]
+  parent: [CMAlamoWall86, CMBaseNormandyWall]
   id: CMNormandyWall86
   suffix: 86
   components:
@@ -913,7 +913,7 @@
     state: "86"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall87]
+  parent: [CMAlamoWall87, CMBaseNormandyWall]
   id: CMNormandyWall87
   suffix: 87
   components:
@@ -923,7 +923,7 @@
     state: "87"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall88]
+  parent: [CMAlamoWall88, CMBaseNormandyWall]
   id: CMNormandyWall88
   suffix: 88
   components:
@@ -933,7 +933,7 @@
     state: "88"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall89]
+  parent: [CMAlamoWall89, CMBaseNormandyWall]
   id: CMNormandyWall89
   suffix: 89
   components:
@@ -943,7 +943,7 @@
     state: "89"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall90]
+  parent: [CMAlamoWall90, CMBaseNormandyWall]
   id: CMNormandyWall90
   suffix: 90
   components:
@@ -953,7 +953,7 @@
     state: "90"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall91]
+  parent: [CMAlamoWall91, CMBaseNormandyWall]
   id: CMNormandyWall91
   suffix: 91
   components:
@@ -963,7 +963,7 @@
     state: "91"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall92]
+  parent: [CMAlamoWall92, CMBaseNormandyWall]
   id: CMNormandyWall92
   suffix: 92
   components:
@@ -973,7 +973,7 @@
     state: "92"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall93]
+  parent: [CMAlamoWall93, CMBaseNormandyWall]
   id: CMNormandyWall93
   suffix: 93
   components:
@@ -983,7 +983,7 @@
     state: "93"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall94]
+  parent: [CMAlamoWall94, CMBaseNormandyWall]
   id: CMNormandyWall94
   suffix: 94
   components:
@@ -993,7 +993,7 @@
     state: "94"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall95]
+  parent: [CMAlamoWall95, CMBaseNormandyWall]
   id: CMNormandyWall95
   suffix: 95
   components:
@@ -1003,7 +1003,7 @@
     state: "95"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall96]
+  parent: [CMAlamoWall96, CMBaseNormandyWall]
   id: CMNormandyWall96
   suffix: 96
   components:
@@ -1013,7 +1013,7 @@
     state: "96"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall97]
+  parent: [CMAlamoWall97, CMBaseNormandyWall]
   id: CMNormandyWall97
   suffix: 97
   components:
@@ -1023,7 +1023,7 @@
     state: "97"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall98]
+  parent: [CMAlamoWall98, CMBaseNormandyWall]
   id: CMNormandyWall98
   suffix: 98
   components:
@@ -1033,7 +1033,7 @@
     state: "98"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall99]
+  parent: [CMAlamoWall99, CMBaseNormandyWall]
   id: CMNormandyWall99
   suffix: 99
   components:
@@ -1043,7 +1043,7 @@
     state: "99"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall100]
+  parent: [CMAlamoWall100, CMBaseNormandyWall]
   id: CMNormandyWall100
   suffix: 100
   components:
@@ -1053,7 +1053,7 @@
     state: "100"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall101]
+  parent: [CMAlamoWall101, CMBaseNormandyWall]
   id: CMNormandyWall101
   suffix: 101
   components:
@@ -1063,7 +1063,7 @@
     state: "101"
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall102]
+  parent: [CMAlamoWall102, CMBaseNormandyWall]
   id: CMNormandyWall102
   suffix: 102
   components:

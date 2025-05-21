@@ -84,7 +84,7 @@ public sealed class CassetteSystem : SharedCassetteSystem
         if (!_timing.IsFirstTimePredicted)
             return null;
 
-        var audioParams = player.Comp.AudioParams.AddVolume(SharedAudioSystem.GainToVolume(_gain));
+        var audioParams = player.Comp.AudioParams.WithVolume(SharedAudioSystem.GainToVolume(_gain));
         return _audio.PlayGlobal(stream, null, audioParams)?.Entity;
     }
 

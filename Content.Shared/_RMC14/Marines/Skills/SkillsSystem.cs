@@ -114,6 +114,9 @@ public sealed class SkillsSystem : EntitySystem
         {
             foreach (var (name, level) in _skillsSorted)
             {
+                if (level == 0)
+                    continue;
+
                 msg.AddMarkupPermissive(Loc.GetString("rmc-skills-examine-skill", ("name", name), ("level", level)));
                 msg.PushNewline();
             }
