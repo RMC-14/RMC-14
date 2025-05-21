@@ -44,16 +44,16 @@ rmc-job-name-spotter = Spotter
 rmc-job-prefix-spotter = SPTR
 
 rmc-job-name-weapons-specialist-demo = Demolitionist Specialist
-rmc-job-prefix-weapons-specialist-demo = (DEMO)
+rmc-job-prefix-weapons-specialist-demo = DEMO
 
 rmc-job-name-weapons-specialist-grenadier = Grenadier Specialist
-rmc-job-prefix-weapons-specialist-grenadier = (GRND)
+rmc-job-prefix-weapons-specialist-grenadier = GRND
 
 rmc-job-name-weapons-specialist-sniper = Sniper Specialist
-rmc-job-prefix-weapons-specialist-sniper = (SNPR)
+rmc-job-prefix-weapons-specialist-sniper = SNPR
 
 rmc-job-name-weapons-specialist-anti-materiel-sniper = AMR Specialist
-rmc-job-prefix-weapons-specialist-anti-materiel-sniper = (AMR)
+rmc-job-prefix-weapons-specialist-anti-materiel-sniper = AMR
 
 rmc-job-name-weapons-specialist-scout = Scout Specialist
-rmc-job-prefix-weapons-specialist-scout = (SCT)
+rmc-job-prefix-weapons-specialist-scout = SCT
