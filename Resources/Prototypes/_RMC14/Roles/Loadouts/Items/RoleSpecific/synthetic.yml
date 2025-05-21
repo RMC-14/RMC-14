@@ -7,13 +7,15 @@
     jumpsuit: RMCJumpsuitSynthetic
 
 - type: loadout
-  id: CMJumpsuitSyntheticPristine
+  id: SynthJumpsuitPristineRMC
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
-      !type:RoleTimeRequirement
-      role: RMCJobSynthetic
-      time: 630000 # 175 hrs
+     !type:RoleTimeRequirement
+    role: RMCJobSynthetic
+    time: 630000 # 175 hours
+  equipment:
+   jumpsuit: CMJumpsuitSyntheticPristine
 
 - type: loadout
   id: ScrubsBlueRMC
