@@ -77,7 +77,7 @@ public sealed class AimedProjectileSystem : EntitySystem
         // Apply firestacks
         if (TryComp(ent, out IgniteOnProjectileHitComponent? ignite))
         {
-            ignite.Stacks += aimedEffect.FireStacksOnHit;
+            ignite.Duration += aimedEffect.FireStacksOnHit;
         }
     }
 

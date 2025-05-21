@@ -68,3 +68,5 @@ command-description-withxenotier = Filters entities or entity prototypes to thos
 command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.
 
 command-description-rmcresetahelptracking = Resets all data about tracked AHelp conversations on the Discord. Useful for when AHelps are not showing up on the Discord relay properly.
+
+command-description-hijack-trigger = Triggers hijack on the map that you are currently on.

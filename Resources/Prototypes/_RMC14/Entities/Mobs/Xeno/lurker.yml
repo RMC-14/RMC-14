@@ -100,6 +100,9 @@
   id: CMXenoLurker
   suffix: Base
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleLurker
   - type: XenoLeap
     plasmaCost: 20
     delay: 0
@@ -123,6 +126,9 @@
   id: RMCXenoLurkerVampire
   suffix: Vampire
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleVampire
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Lurker/vampire_lurker.rsi
   - type: Xeno
