@@ -687,7 +687,7 @@
   - type: Sprite
     state: cheesewheel
   - type: SliceableFood
-    count: 4
+    count: 6 # RMC14
     slice: FoodCheeseSlice
 
 - type: entity
