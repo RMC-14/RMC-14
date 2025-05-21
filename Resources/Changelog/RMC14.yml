@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Boiler bombard/shroud does not get stuck disabled after stun during a
-      doafter
-    type: Fix
-  id: 1269
-  time: '2025-01-28T00:40:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5472
-- author: CyberTropic
-  changes:
-  - message: Added time display to status screens when on green alert.
-    type: Add
-  id: 1270
-  time: '2025-01-28T20:38:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5482
 - author: Whisper
   changes:
   - message: Fixed water-filled reagent tanks not showing it's contents and always
@@ -5370,5 +5355,29 @@
   id: 1771
   time: '2025-05-21T16:17:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6273
+- author: Community members
+  changes:
+  - message: Adds a plethora of Xenonid guides.
+    type: Add
+  id: 1772
+  time: '2025-05-21T18:11:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6303
+- author: Dygon
+  changes:
+  - message: Fixed fire from incendiary projectiles dealing 50% less damage than intended
+      and having a 33% longer duration than intended.
+    type: Fix
+  - message: You no longer need to move before you start taking double fire damage
+      when a fire tile spawns below you.
+    type: Fix
+  - message: Fixed fortifying as a defender while on a fire tile preventing taking
+      double fire damage.
+    type: Fix
+  - message: The fire effect applied by fire tiles spawned from the AGM-99 'Napalm'
+      now lasts 50% longer, making it harder to extinguish.
+    type: Fix
+  id: 1773
+  time: '2025-05-21T18:11:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6513
 Name: RMC14
 Order: -1
