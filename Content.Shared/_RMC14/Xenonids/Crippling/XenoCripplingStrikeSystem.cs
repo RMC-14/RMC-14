@@ -52,9 +52,11 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         _rmcMelee.MeleeResetInit((xeno.Owner, reset));
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
+        active.NextSlashBuffed = true;
         active.SlowDuration = xeno.Comp.SlowDuration;
         active.DamageMult = xeno.Comp.DamageMult;
         active.HitText = xeno.Comp.HitText;
+        active.DeactivateText = xeno.Comp.DeactivateText;
         active.ExpireText = xeno.Comp.ExpireText;
         active.Speed = xeno.Comp.Speed;
 
@@ -69,6 +71,9 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
     private void OnXenoCripplingStrikeHit(Entity<XenoActiveCripplingStrikeComponent> xeno, ref MeleeHitEvent args)
     {
+        if (!xeno.Comp.NextSlashBuffed)
+            return;
+
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
@@ -93,7 +98,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             if (_net.IsServer)
                 _popup.PopupEntity(message, entity, xeno);
 
-            RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
+            xeno.Comp.NextSlashBuffed = false;
             break;
         }
     }
@@ -134,7 +139,13 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             if (time < active.ExpireAt)
                 continue;
 
-            _popup.PopupEntity(Loc.GetString(active.ExpireText), uid, uid, PopupType.SmallCaution);
+            if (active.NextSlashBuffed)
+                _popup.PopupEntity(Loc.GetString(active.ExpireText), uid, uid, PopupType.SmallCaution);
+            // the deactivate text is supposed to show up together with the expire text
+            // but in ss14 popups overlap making it unreadable so else if will have to do...
+            else if (active.DeactivateText is { } deactivateText)
+                _popup.PopupEntity(Loc.GetString(deactivateText), uid, uid, PopupType.MediumCaution);
+
             RemCompDeferred<XenoActiveCripplingStrikeComponent>(uid);
         }
     }

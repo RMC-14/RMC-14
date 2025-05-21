@@ -32,8 +32,9 @@
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetCivilian
+      preset: RMCSurvivorPresetCivilianOutfits
     - type: RMCSurvivor
+    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -45,9 +46,9 @@
 - type: startingGear
   id: RMCGearSurvivor
   equipment:
-    jumpsuit: CMJumpsuitColonist
+    # jumpsuit: CMJumpsuitColonist See RMCSurvivorPresetCivilianOutfits
     back: RMCSatchelCivilianFill
-    shoes: RMCShoesBlack
+    # shoes: RMCShoesBlack
     id: CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
@@ -105,6 +106,20 @@
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
     - [ CMBeltMarineAR10, WeaponRifleAR10 ]
     primaryWeaponChance: 0.6
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetCivilianOutfits
+  name: civilian colonist preset with random outfits
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits: # todo different backpacks
+    - [ CMJumpsuitColonist, RMCShoesBlack ] # Default
+    - [ RMCJumpsuitCivilianJanitor, RMCShoesGaloshes, RMCHipsterGlasses, RMCHandsPurple, ClothingHeadHatPurplesoft, RMCHazardVest ] # Janitor
+    - [ RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, RMCHydroApron ] # Botanist (TODO: Add Hatchet)
+    - [ CMJumpsuitLiaisonBlack, RMCShoesLaceup, RMCJacketCorporateBlue, ClothingHeadHatBowlerHat ] # Bartender
+    - [ CMJumpsuitTShirtGray, RMCShoesWeYaStompers, RMCOuterClothingExternalWebbing ] # Protagonist
 
 - type: entity
   parent: MarkerBase
