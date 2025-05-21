@@ -1,8 +1,10 @@
 using System.Linq;
+using System.Runtime.InteropServices.Marshalling;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -66,6 +68,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private TimeSpan _evolutionAccumulatePointsBefore;
     private TimeSpan _evolveSameCasteCooldown;
     private TimeSpan _earlyEvoBoostBefore;
+    private TimeSpan _deStrainCooldown;
 
     private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
@@ -103,11 +106,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
             {
                 subs.Event<XenoDevolveBuiMsg>(OnXenoDevolveBui);
             });
+        Subs.BuiEvents<XenoStrainComponent>(XenoDevolveUIKey.Key,
+            subs =>
+            {
+                subs.Event<XenoDeStrainBuiMsg>(OnXenoDeStrainBui);
+            });
+
 
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsRequireOvipositorMinutes, v => _evolutionPointsRequireOvipositorAfter = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEvolveSameCasteCooldownSeconds, v => _evolveSameCasteCooldown = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCXenoEarlyEvoPointBoostBeforeMinutes, v => _earlyEvoBoostBefore = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDeStrainCooldownMinutes, v => _deStrainCooldown = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -234,6 +244,22 @@ public sealed class XenoEvolutionSystem : EntitySystem
     {
         _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
         TryDevolve(xeno, args.Choice);
+    }
+
+    private void OnXenoDeStrainBui(Entity<XenoStrainComponent> ent, ref XenoDeStrainBuiMsg args)
+    {
+        if (TryComp<XenoRecentlyDeStrainedComponent>(ent.Owner, out var comp))
+        {
+            if (CanDestrain(comp))
+            {
+                _ui.CloseUi(ent.Owner, XenoEvolutionUIKey.Key, ent);
+                TryDeStrain(ent, comp ,args.Choice);
+                return;
+            }
+            _ui.CloseUi(ent.Owner, XenoEvolutionUIKey.Key, ent);
+            //_popup.PopupEntity("Cant destrain yet!",ent,PopupType.LargeCaution);
+            _popup.PopupPredicted("Cant destrain yet!",ent,ent,PopupType.LargeCaution);
+        }
     }
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
@@ -473,6 +499,17 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return true;
     }
 
+    private bool CanDestrain(XenoRecentlyDeStrainedComponent xeno)
+    {
+        if(!xeno.HasDestrained)
+            return true;
+
+        if (_timing.CurTime >= xeno.LastDestrain + _deStrainCooldown)
+            return true;
+
+        return false;
+    }
+
     private bool CanEvolveAny(Entity<XenoEvolutionComponent> xeno)
     {
         if (xeno.Comp.Points >= xeno.Comp.Max && xeno.Comp.EvolvesTo.Count > 0)
@@ -597,8 +634,25 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
         }
 
+        var newRecentlyDestrained = EnsureComp<XenoRecentlyDeStrainedComponent>(newXeno);
+        if (TryComp(xeno, out XenoRecentlyDeStrainedComponent? oldRecentlyDestrained))
+        {
+            newRecentlyDestrained.LastDestrain = oldRecentlyDestrained.LastDestrain;
+            newRecentlyDestrained.HasDestrained = oldRecentlyDestrained.HasDestrained;
+        }
+
+
         if (Prototype(xeno)?.ID is { } oldId)
             newRecently.Recent[oldId] = _timing.CurTime;
+        if (TryComp<XenoStrainComponent>(xeno, out var xenoStrainComp))
+        {
+            if (Prototype(newXeno)?.ID is { } newid)
+                if (newid == xenoStrainComp.StrainOf)
+                {
+                    newRecentlyDestrained.HasDestrained = true;
+                    newRecentlyDestrained.LastDestrain = _timing.CurTime;
+                }
+        }
 
         return newXeno;
     }
@@ -612,8 +666,43 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
     }
 
+    private void TryDeStrain(Entity<XenoStrainComponent> xeno, XenoRecentlyDeStrainedComponent destrain , EntProtoId to, bool damagedCheck = true)
+    {
+        if (damagedCheck && !DamagedCheckPopup(xeno))
+            return;
+
+        if (DeStrain(xeno, to) is { } newXeno && _net.IsServer)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-de-strain", ("xeno", newXeno)),
+                newXeno,
+                newXeno,
+                PopupType.LargeCaution);
+        }
+    }
+
+    public EntityUid? DeStrain(Entity<XenoStrainComponent> xeno, EntProtoId to)
+    {
+        if (_net.IsClient || xeno.Comp.StrainOf != to)
+            return null;
+
+
+        var newXeno = TransferXeno(xeno, to);
+        var ev = new XenoDevolvedEvent(xeno, newXeno);
+        RaiseLocalEvent(newXeno, ref ev, true);
+
+        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} De-Strained into {ToPrettyString(newXeno)}"); // Destraining is basically devolving anyways
+
+        Del(xeno.Owner);
+
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
+
+        return newXeno;
+    }
+
     public EntityUid? Devolve(Entity<XenoDevolveComponent> xeno, EntProtoId to)
     {
+
         if (_net.IsClient ||
             !xeno.Comp.DevolvesTo.Contains(to))
         {
