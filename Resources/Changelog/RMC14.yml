@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed xenos being able to examine marine ranks
-    type: Fix
-  id: 1267
-  time: '2025-01-28T00:40:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5474
 - author: Vermidia
   changes:
   - message: Fixed weedless sticky resin slowing you down after leaving it
@@ -5370,5 +5363,12 @@
   id: 1769
   time: '2025-05-21T14:44:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6482
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed civilian survivors not spawning with primary weapons.
+    type: Fix
+  id: 1770
+  time: '2025-05-21T15:01:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6510
 Name: RMC14
 Order: -1
