@@ -134,6 +134,7 @@
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #      - # TODO circuit board
       components:
       - Welder
@@ -176,6 +177,7 @@
       - RMCExplosiveBreachingCharge
       - RodMetal1
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #     - # TODO circuit board, stock parts
       components:
       - Welder
@@ -241,6 +243,7 @@
       - CMFireExtinguisherPortable
       - RMCShellShotgun
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #      - # TODO circuit board
       components:
       - Welder
