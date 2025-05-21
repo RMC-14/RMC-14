@@ -1,15 +1,3 @@
-# Holy - TODO: make it so only the chaplain can use the bible to start these reactions, not anyone with a bible
-- type: reaction
-  id: RMCWatertoHolyWater
-  impact: Low
-  requiredMixerCategories:
-  - Holy
-  reactants:
-    Water:
-      amount: 1
-  products:
-    RMCHolywater: 1
-
 - type: reaction
   id: RMCCreateWater
   reactants:

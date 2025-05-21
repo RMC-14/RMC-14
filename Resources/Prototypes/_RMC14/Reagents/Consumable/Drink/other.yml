@@ -1,8 +1,0 @@
-- type: reagent
-  parent: Water
-  id: RMCHolywater
-  name: reagent-name-holywater
-  desc: reagent-desc-rmcholywater
-  physicalDesc: reagent-physical-desc-holy
-  flavor: holy
-  color: "#E0E8EF" # rgb: 224, 232, 239
