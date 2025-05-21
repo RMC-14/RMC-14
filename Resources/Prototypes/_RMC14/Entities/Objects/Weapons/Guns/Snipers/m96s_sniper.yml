@@ -5,6 +5,9 @@
   description: "A heavy sniper rifle manufactured by Aegis Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
     'Peace Through Superior Firepower'"
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSpecSniper
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
     layers:
