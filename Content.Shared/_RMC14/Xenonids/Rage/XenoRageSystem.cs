@@ -13,6 +13,7 @@ namespace Content.Shared._RMC14.Xenonids.Rage;
 
 public sealed class XenoRageSystem : EntitySystem
 {
+    [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -109,6 +110,9 @@ public sealed class XenoRageSystem : EntitySystem
 
         var healAmount = (0.05 * xeno.Comp.Rage + 0.3) * xeno.Comp.HealAmount;
         _xenoHeal.CreateHealStacks(xeno, healAmount, xeno.Comp.RageHealTime, 1, xeno.Comp.RageHealTime);
+
+        xeno.Comp.LastHit = _timing.CurTime;
+        Dirty(xeno);
     }
 
     private void OnRageRefreshSpeed(Entity<XenoRageComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -147,13 +151,17 @@ public sealed class XenoRageSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
-
-        var rageQuery = EntityQueryEnumerator<XenoRageComponent, MeleeWeaponComponent>();
-
-        while (rageQuery.MoveNext(out var uid, out var rage, out var melee))
+        var rageQuery = EntityQueryEnumerator<XenoRageComponent>();
+        while (rageQuery.MoveNext(out var uid, out var rage))
         {
-            if (melee.NextAttack + rage.RageDecayTime <= time && rage.Rage > 0 && !rage.RageLocked)
+            if (rage.LastHit + rage.RageDecayTime <= time &&
+                rage.Rage > 0 &&
+                !rage.RageLocked)
+            {
                 IncrementRage((uid, rage), -1);
+                rage.LastHit = time;
+                Dirty(uid, rage);
+            }
 
             if (!rage.RageLocked)
                 continue;

@@ -189,6 +189,12 @@ public abstract class RMCHandsSystem : EntitySystem
 
     public bool TryStorageEjectHand(EntityUid user, EntityUid item)
     {
+        var ev = new RMCStorageEjectHandItemEvent(user);
+        RaiseLocalEvent(item, ref ev);
+
+        if (ev.Handled)
+            return true;
+
         if (!TryComp(item, out RMCStorageEjectHandComponent? eject) ||
             !TryComp(item, out StorageComponent? storage))
         {

@@ -193,7 +193,9 @@ public sealed class RadioSystem : EntitySystem
             RaiseLocalEvent(receiver, ref ev);
         }
 
-        if (canSend && !HasComp<XenoComponent>(messageSource))
+        if (canSend &&
+            !HasComp<XenoComponent>(messageSource) &&
+            HasComp<RMCHeadsetComponent>(radioSource))
         {
             var filter = Filter.Pvs(messageSource).RemoveWhereAttachedEntity(HasComp<XenoComponent>);
             _audio.PlayEntity(_radioSound, filter, messageSource, false); // RMC14

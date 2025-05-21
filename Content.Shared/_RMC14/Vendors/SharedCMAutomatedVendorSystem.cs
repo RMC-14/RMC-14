@@ -621,7 +621,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return _hands.TryPickupAnyHand(player, item);
         }
 
-        if (_cmInventory.TryEquipClothing(player, (item, clothing)))
+        if (_cmInventory.TryEquipClothing(player, (item, clothing), doRangeCheck: false))
             return true;
 
         return _hands.TryPickupAnyHand(player, item);

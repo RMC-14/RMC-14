@@ -39,7 +39,6 @@
   - type: RMCDeleteAnchoredOnInit
     whitelist:
       tags:
-      - XenoWeedTile
       - XenoWeedNode
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
@@ -104,6 +103,9 @@
     color: "#ebe5e5ee"
   - type: IsRoof
   - type: SunShadowCast
+  - type: Tag
+    tags:
+    - Wall
 
 - type: entity
   abstract: true

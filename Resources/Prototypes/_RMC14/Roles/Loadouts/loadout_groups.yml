@@ -207,6 +207,15 @@
 
 # Weapons
 - type: loadoutGroup
+  id: RecreationalRMC
+  name: rmc-loadout-group-recreational
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - CassettePlayerRMC
+
+# Weapons
+- type: loadoutGroup
   id: WeaponsRMC
   name: rmc-loadout-group-weapons
   minLimit: 0

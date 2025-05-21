@@ -5158,8 +5158,9 @@
   url: https://github.com/RMC-14/RMC-14/pull/6500
 - author: Dygon
   changes:
-  - message: The Praetorian's acid ball can once again only hit a maximum of four
-      projectiles on the same target.
+  - message: Fixed Praetorian acid ball and non-airburst grenades having lost
+      their max amount of times that they can hit the same target when
+      splitting.
     type: Fix
   id: 1753
   time: '2025-05-21T03:57:51.0000000+00:00'

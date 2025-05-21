@@ -101,7 +101,7 @@
 - type: entity
   parent: RMCSkillBase
   id: RMCSkillMeleeWeapons
-  name: MeleeWeapons
+  name: Melee Weapons
   categories: [ HideSpawnMenu ]
 
 - type: entity
@@ -132,7 +132,7 @@
 - type: entity
   parent: RMCSkillBase
   id: RMCSkillPowerLoader
-  name: PowerLoader
+  name: Power Loader
   categories: [ HideSpawnMenu ]
 
 - type: entity
@@ -144,13 +144,13 @@
 - type: entity
   parent: RMCSkillBase
   id: RMCSkillSmartGun
-  name: SmartGun
+  name: Smart Gun
   categories: [ HideSpawnMenu ]
 
 - type: entity
   parent: RMCSkillBase
   id: RMCSkillSpecialistWeapons
-  name: SpecialistWeapons
+  name: Specialist Weapons
   categories: [ HideSpawnMenu ]
 
 # No longer a week away

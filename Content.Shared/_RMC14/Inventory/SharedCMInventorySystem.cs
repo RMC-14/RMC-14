@@ -11,6 +11,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
@@ -96,6 +97,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<RMCItemPickupComponent, RMCDroppedEvent>(OnItemDropped);
 
         SubscribeLocalEvent<RMCStripTimeSkillComponent, BeforeStripEvent>(OnSkilledBeforeStrip);
+
+        SubscribeLocalEvent<CMVirtualItemComponent, BeforeRangedInteractEvent>(OnVirtualBeforeRangedInteract, after: [typeof(SharedVirtualItemSystem)]);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
@@ -368,6 +371,20 @@ public abstract class SharedCMInventorySystem : EntitySystem
     protected void OnSkilledBeforeStrip(Entity<RMCStripTimeSkillComponent> ent, ref BeforeStripEvent args)
     {
         args.Multiplier = _skills.GetSkillDelayMultiplier(ent.Owner, ent.Comp.Skill);
+    }
+
+    private void OnVirtualBeforeRangedInteract(Entity<CMVirtualItemComponent> ent, ref BeforeRangedInteractEvent args)
+    {
+        if (!TryComp(ent, out VirtualItemComponent? comp))
+            return;
+
+        var ev = new ShouldHandleVirtualItemInteractEvent(args);
+        RaiseLocalEvent(comp.BlockingEntity, ref ev);
+
+        if (!ev.Handle)
+            return;
+
+        RaiseLocalEvent(comp.BlockingEntity, args);
     }
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
@@ -754,7 +771,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return _hands.TryPickup(user, item);
     }
 
-    public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing)
+    public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing, bool doRangeCheck = true)
     {
         foreach (var order in _quickEquipOrder)
         {
@@ -766,7 +783,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
             while (slots.MoveNext(out var slot))
             {
-                if (_inventory.TryEquip(user, clothing, slot.ID))
+                if (_inventory.TryEquip(user, clothing, slot.ID, doRangeCheck: doRangeCheck))
                     return true;
             }
         }
