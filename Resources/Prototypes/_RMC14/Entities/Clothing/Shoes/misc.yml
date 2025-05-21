@@ -56,3 +56,26 @@
   id: RMCShoesPrisoner
   name: prisoner shoes
   description: A pair of orange shoes worn by prisoners as directed by marine law.
+
+# Galoshes
+- type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesGaloshes
+  name: galoshes
+  description: A pair of rubber boots.
+  components:
+  - type: Sprite
+    sprite: Clothing/Shoes/Specific/galoshes.rsi
+  - type: Clothing
+    sprite: Clothing/Shoes/Specific/galoshes.rsi
+
+- type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesWeYaStompers
+  name: Weston-Yamada stompers
+  description: A pair of sneakers designed to elicit a morale boosting response within anyone that witnesses them.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Misc/stompers.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Misc/stompers.rsi
