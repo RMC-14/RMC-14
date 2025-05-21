@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Chat;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
@@ -215,6 +216,17 @@ namespace Content.Client.Chat.UI
 
             label.SetMessage(FormatSpeech(message.WrappedMessage, fontColor));
 
+            var entityManager = IoCManager.Resolve<IEntityManager>();
+            var senderUid = entityManager.GetEntity(message.SenderEntity);
+
+            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
+            {
+                if (entityManager.TryGetComponent<RMCSpeechBubbleSpecificStyleComponent>(senderUid, out var specificStyleComponent) && specificStyleComponent.SpeechStyleClass != null)
+                    speechStyleClass = specificStyleComponent.SpeechStyleClass;
+                else if (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid))
+                    speechStyleClass = "commanderSpeech";
+            }
+
             var panel = new PanelContainer
             {
                 StyleClasses = { "speechBox", speechStyleClass },
@@ -275,11 +287,12 @@ namespace Content.Client.Chat.UI
             var entityManager = IoCManager.Resolve<IEntityManager>();
             var senderUid = entityManager.GetEntity(message.SenderEntity);
 
-            //RMC14 If the speaker is a squad leader or a hive leader and speaks in normal speech, use the command style.
-            if (speechStyleClass == "sayBox" &&
-                (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid)))
+            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
             {
-                speechStyleClass = "commanderSpeech";
+                if (entityManager.TryGetComponent<RMCSpeechBubbleSpecificStyleComponent>(senderUid, out var specificStyleComponent) && specificStyleComponent.SpeechStyleClass != null)
+                    speechStyleClass = specificStyleComponent.SpeechStyleClass;
+                else if (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid))
+                    speechStyleClass = "commanderSpeech";
             }
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr

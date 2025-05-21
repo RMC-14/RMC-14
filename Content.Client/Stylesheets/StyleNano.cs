@@ -988,6 +988,21 @@ namespace Content.Client.Stylesheets
                     new StyleProperty(PanelContainer.StylePropertyPanel, tooltipBox)
                 }),
 
+                // RMC14
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(PanelContainer), new[] { "speechBox", "megaphoneSpeech" }, null, null),
+                    new SelectorElement(typeof(RichTextLabel), new[] { "bubbleContent" }, null, null)),
+                    new[]
+                {
+                    new StyleProperty("font", notoSansBold18),
+                }),
+
+                // RMC14
+                new StyleRule(new SelectorElement(typeof(PanelContainer), new[] {"speechBox", "megaphoneSpeech"}, null, null), new[]
+                {
+                    new StyleProperty(PanelContainer.StylePropertyPanel, tooltipBox)
+                }),
+
                 new StyleRule(new SelectorElement(typeof(RichTextLabel), new[] {StyleClassLabelKeyText}, null, null), new[]
                 {
                     new StyleProperty(Label.StylePropertyFont, notoSansBold12),
@@ -1684,6 +1699,12 @@ namespace Content.Client.Stylesheets
                 new StyleRule(new SelectorElement(typeof(Label), new[] { CMStyleClasses.CMLabelAlignLeft }, null, null), new[]
                 {
                     new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
+                }),
+
+                new StyleRule(new SelectorElement(typeof(RichTextLabel), new[] {"megaphoneText"}, null, null), new[]
+                {
+                    new StyleProperty("font", notoSans16),
+                    new StyleProperty("font-size", 18),
                 }),
             }).ToList());
         }

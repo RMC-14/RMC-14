@@ -183,3 +183,17 @@
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: sniper_aim
     event: !type:AimedShotActionEvent
+
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionToggleMegaphone
+  name: Toggle Megaphone
+  description: Toggle the megaphone on or off. When on, your speech will be amplified.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Objects/Tools/megaphone.rsi
+      state: megaphone
+    event: !type:RMCToggleMegaphoneActionEvent
+    useDelay: 0.25
+    itemIconStyle: NoItem
