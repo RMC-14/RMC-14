@@ -78,7 +78,7 @@
   - type: CassetteTape
     songs:
     - /Audio/_RMC14/Lobby/enemy_is_unknown.ogg
-    - /Audio/_RMC14/Lobby/Time_Is_running_Out.ogg
+    - /Audio/_RMC14/Lobby/Time_Is_Running_Out.ogg
     - /Audio/_RMC14/Hijack/storm_the_iron_hive.ogg
     - /Audio/_RMC14/Hijack/Last_Stand.ogg
 

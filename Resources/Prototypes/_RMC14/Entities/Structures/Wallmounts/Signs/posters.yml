@@ -349,7 +349,7 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterCassettePlayer
+  id: RMCPosterCassettePlayer
   name: "Cassette Player"
   description: "This poster depicts a cassette player and reads 'Don't Forget Your Cassette Player.'"
   components:
