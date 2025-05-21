@@ -42,6 +42,7 @@
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
+    - type: RMCRibbon
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:

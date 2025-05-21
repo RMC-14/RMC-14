@@ -17,6 +17,7 @@ stamp-component-stamped-name-cm-cmo = Chief Medical Officer
 stamp-component-stamped-name-cm-qm = Quartermaster
 stamp-component-stamped-name-cm-ce = Chief Engineer
 stamp-component-stamped-name-cm-cl = Corporate Liaison
+stamp-component-stamped-name-cm-mw = Military Warden
 
 stamp-component-stamped-name-cm-approve = APPROVED
 stamp-component-stamped-name-cm-deny = DENIED
