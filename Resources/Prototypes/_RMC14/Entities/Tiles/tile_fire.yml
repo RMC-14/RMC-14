@@ -135,12 +135,10 @@
   - type: DamageOnCollide
     damage:
       types:
-        Heat: 100
+        Heat: 200
   - type: RMCIgniteOnCollide
     maxStacks: 5
-    tileDamage:
-      types:
-        Heat: 0.13
+    intensity: 75
   - type: TileFire
     duration: 5
   - type: PointLight
