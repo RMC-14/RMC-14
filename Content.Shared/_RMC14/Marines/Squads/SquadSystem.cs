@@ -27,6 +27,7 @@ using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage;
+using Content.Shared.GameTicking;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -99,7 +100,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged, before: [typeof(SharedHeadsetSystem)]);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
 
-        SubscribeLocalEvent<AssignSquadComponent, MapInitEvent>(OnAssignSquadMapInit);
+        SubscribeLocalEvent<AssignSquadComponent, PlayerSpawnCompleteEvent>(OnAssignSquadPlayerSpawnComplete);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -262,7 +263,7 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
-    private void OnAssignSquadMapInit(Entity<AssignSquadComponent> ent, ref MapInitEvent args)
+    private void OnAssignSquadPlayerSpawnComplete(Entity<AssignSquadComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
         var query = EntityQueryEnumerator<SquadTeamComponent>();
         while (query.MoveNext(out var uid, out var comp))
@@ -270,7 +271,7 @@ public sealed class SquadSystem : EntitySystem
             if (!_entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, uid))
                 continue;
 
-            AssignSquad(ent, (uid, comp), null);
+            AssignSquad(ent, (uid, comp), args.JobId);
         }
     }
 
