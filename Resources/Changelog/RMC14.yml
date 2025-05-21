@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Command, MP and some squad roles roles now require more experience to
-      play.
-    type: Tweak
-  id: 1263
-  time: '2025-01-26T12:30:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3751
 - author: Djvarik
   changes:
   - message: Fixed riot armor being classified as light armor instead of heavy for
@@ -5279,5 +5271,13 @@
   id: 1765
   time: '2025-05-21T14:34:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6476
+- author: AlexisMoonlight
+  changes:
+  - message: Added medbay, We-Ya Med Plus, and Blood dispenser access to pilots and
+      dropship crew chiefs.
+    type: Add
+  id: 1766
+  time: '2025-05-21T14:37:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6494
 Name: RMC14
 Order: -1
