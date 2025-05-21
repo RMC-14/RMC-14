@@ -314,6 +314,7 @@
       - Multitool
       - PowerCell
       - RMCNailgunCompact
+      - RMCNailgunTactical
       components:
       - Welder
       - PowerCell
@@ -340,6 +341,7 @@
         - Multitool
         - PowerCell
         - RMCNailgunCompact
+        - RMCNailgunTactical
         components:
         - Welder
         - PowerCell
