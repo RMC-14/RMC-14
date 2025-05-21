@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Marine law has been added. Ensure you read it before playing Command
-      and MP positions, even if you have read another version of it.
-    type: Add
-  - message: Squad Leaders have access to a ziptie box.
-    type: Add
-  - message: Added the RSH-9 Assault Revolver to the CMP vendor.
-    type: Add
-  - message: MP now have access to pistol cases in their vendors.
-    type: Fix
-  - message: MP now have access to additional policing equipment in their vendors.
-    type: Fix
-  - message: Various rule changes. Ensure you read them.
-    type: Tweak
-  - message: Many sections of the guidebook have been reworked and should be easier
-      to use.
-    type: Tweak
-  id: 1260
-  time: '2025-01-26T11:58:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3440
 - author: Vermidia
   changes:
   - message: Added sticky and fast resin. Building castes can make these faster than
@@ -5334,5 +5313,13 @@
   id: 1762
   time: '2025-05-21T14:28:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6315
+- author: J C Denton
+  changes:
+  - message: One additional variant for Navigation Console (transport shuttle) and
+      Passenger Seat (dark seat).
+    type: Add
+  id: 1763
+  time: '2025-05-21T14:33:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6501
 Name: RMC14
 Order: -1
