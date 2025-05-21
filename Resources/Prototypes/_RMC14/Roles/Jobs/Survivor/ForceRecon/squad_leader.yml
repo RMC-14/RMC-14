@@ -65,4 +65,4 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ WeaponShotgunM42A2, CMShellShotgunSlugs ]
+    - [ WeaponShotgunM42A2, RMCBoxShotgunSlugs ]

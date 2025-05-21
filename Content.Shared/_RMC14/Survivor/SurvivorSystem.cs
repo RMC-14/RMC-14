@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Armor;
 using Content.Shared.GameTicking;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -18,6 +19,8 @@ public sealed class SurvivorSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+
 
     public override void Initialize()
     {
@@ -49,7 +52,7 @@ public sealed class SurvivorSystem : EntitySystem
             var gear = _random.Pick(comp.PrimaryWeapons);
             foreach (var item in gear)
             {
-                Equip(mob, item);
+                Equip(mob, item, tryInHand: true);
             }
         }
 
@@ -87,7 +90,7 @@ public sealed class SurvivorSystem : EntitySystem
         }
     }
 
-    private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true)
+    private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false)
     {
         if (_net.IsClient)
             return;
@@ -115,6 +118,9 @@ public sealed class SurvivorSystem : EntitySystem
                         return;
                 }
             }
+
+            if (tryInHand && _hands.TryPickupAnyHand(mob, spawn))
+                return;
 
             if (_inventory.TryEquip(mob, spawn, slot.ID, true))
                 return;
