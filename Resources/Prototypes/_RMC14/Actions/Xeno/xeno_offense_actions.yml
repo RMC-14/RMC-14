@@ -534,7 +534,7 @@
     useDelay: 4.5
     deselectOnMiss: false
   - type: XenoOffensiveAction
-  
+
 - type: entity
   parent: CMGuidebookActionXenoBase
   id: RMCGuidebookActionXenoPunch
@@ -645,7 +645,7 @@
   components:
     - type: Sprite
       state: stomp
-      
+
 - type: entity
   parent: ActionXenoStomp
   id: ActionXenoCrush
@@ -1238,7 +1238,7 @@
   components:
     - type: Sprite
       state: headbite
-      
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoApprehend
