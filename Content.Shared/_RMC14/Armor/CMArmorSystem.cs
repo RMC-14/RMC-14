@@ -251,8 +251,8 @@ public sealed class CMArmorSystem : EntitySystem
             if (examine.Length == 0)
                 return;
 
-            // Last 0 is for sandboxing, see https://github.com/space-wizards/RobustToolbox/pull/5955
-            examine.Insert(0, $"{Loc.GetString("rmc-examine-armor-xeno-header")}\n", 0);
+            // Last 1 is for sandboxing, see https://github.com/space-wizards/RobustToolbox/pull/5955
+            examine.Insert(0, $"{Loc.GetString("rmc-examine-armor-xeno-header")}\n", 1);
             args.AddMarkup(examine.ToString());
         }
     }
