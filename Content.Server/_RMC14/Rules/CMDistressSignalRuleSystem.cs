@@ -712,7 +712,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     foreach (var (job, players) in survivorCandidates)
                     {
                         var list = players[i];
-                        while (list.Count > 0 && selectedSurvivors < totalSurvivors)
+                        var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
+                        while (list.Count > 0 && (ignoreLimit || selectedSurvivors < totalSurvivors))
                         {
                             if (SpawnSurvivor(job, list, out var stop) is { } id)
                             {
@@ -724,7 +725,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                                     }
                                 }
 
-                                selectedSurvivors++;
+                                if (!ignoreLimit)
+                                    selectedSurvivors++;
                             }
 
                             if (stop)
