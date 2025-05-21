@@ -1148,3 +1148,7 @@ RMCArmorHelmetM12Dust: CMArmorHelmetM12
 
 # 2025-05-20
 GrenadeFlashBang: RMCGrenadeFlashBang
+
+# 2025-05-21
+CMVendorWalkman: CMVendorCassettes
+CMPosterWalkman: CMPosterCassettePlayer

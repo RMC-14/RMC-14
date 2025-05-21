@@ -5,6 +5,7 @@ rmc-loadout-group-headwear = Headwear
 rmc-loadout-group-helmet-garbs = Helmet accessories
 rmc-loadout-group-paperwork = Paperwork
 rmc-loadout-group-plushies = Plushies
+rmc-loadout-group-recreational = Recreational
 rmc-loadout-group-weapons = Weapons
 rmc-loadout-group-canned-drinks = Canned Drinks
 rmc-loadout-group-flasks = Flasks

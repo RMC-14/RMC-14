@@ -1,7 +1,7 @@
 #Base Jacket
 - type: entity
   abstract: true
-  parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket]
+  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket ]
   id: RMCBaseJacket
   components:
   - type: Storage
@@ -27,7 +27,7 @@
 
 - type: entity
   abstract: True
-  parent: [RMCBaseJacket, BaseFoldable]
+  parent: [ RMCBaseJacket, BaseFoldable ]
   id: RMCBaseJacketButtonable
   components:
   - type: Appearance
@@ -44,7 +44,7 @@
       map: [ "unfoldedLayer" ]
       visible: true
     - state: icon-open
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: false
 
 - type: entity
@@ -65,7 +65,7 @@
       map: [ "unfoldedLayer" ]
       visible: false
     - state: icon-open
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: true
 
 - type: entity
@@ -148,6 +148,7 @@
       - Stunbaton
       - Gun
       - CrewMonitoringConsole
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -168,7 +169,6 @@
       - RMCMacheteScabbard
       #TODO Katana scabbard
       - RMCDetector
-      #TODO Walkman
 
 - type: entity
   abstract: true
@@ -188,7 +188,7 @@
       - CMBurnKit
       - Gauze
       - Brutepack
-# TODO RMC14 splints
+      # TODO RMC14 splints
       - Dropper
       - Syringe
       - Hypospray
@@ -200,7 +200,7 @@
       - CMSynthGraft
       - CMRollerItem
       - CMBloodPack
-# TODO RMC14 spray bottle
+      # TODO RMC14 spray bottle
       - Handcuffs
       - GasTank
       - Flashlight
@@ -224,7 +224,7 @@
     whitelist:
       tags:
       - Knife
-#TODO RMC kitchen knife
+      #TODO RMC kitchen knife
       - Pen
       - Crowbar
       - Radio

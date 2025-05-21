@@ -1,24 +1,42 @@
 # GENERAL
-
 - type: entity
   parent: ColMarTechBaseAnchorable
-  id: CMVendorWalkman
+  id: CMVendorCassettes
   name: Rec-Vend
-  description: Contains We-Ya approved recreational items, like Walkmans and Cards.
+  description: Contains We-Ya approved recreational items, like Cassette Players and Cards.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/walkman.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/cassette_player.rsi
     layers:
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: WalkMan
-      entries: []
+    - name: Cassettes
+      entries:
+      - id: RMCCassettePlayer
+        amount: 50
+      - id: RMCCassetteTapeWigWoo1
+        amount: 15
+      - id: RMCCassetteTapeMendax
+        amount: 15
+      - id: RMCCassetteTapeNighty
+        amount: 15
+      - id: RMCCassetteTapeGoodShowOldChap
+        amount: 15
+      - id: RMCCassetteTapeRedQwesta
+        amount: 15
+      - id: RMCCassetteTapeBolgarich
+        amount: 15
+      - id: RMCCassetteTapeQwertyquerty
+        amount: 15
+      - id: RMCCassetteTapePigeonBeans
+        amount: 15
+      - id: RMCCassetteTapeCustom
+        amount: 30
     - name: Cards
       entries: []
-    #TODO RMC14 Walkman and music
     - name: Other
       entries:
       - id: CMPaper
