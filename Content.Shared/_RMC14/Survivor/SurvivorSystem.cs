@@ -120,10 +120,10 @@ public sealed class SurvivorSystem : EntitySystem
 
             if (_inventory.TryEquip(mob, spawn, slot.ID, true))
                 return;
-
-            if (tryInHand && _hands.TryPickupAnyHand(mob, spawn))
-                return;
         }
+
+        if (tryInHand && _hands.TryPickupAnyHand(mob, spawn))
+            return;
 
         Log.Warning($"Couldn't equip {ToPrettyString(spawn)} on {ToPrettyString(mob)}");
         QueueDel(spawn);
