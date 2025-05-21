@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed weedless sticky resin slowing you down after leaving it
-    type: Fix
-  id: 1268
-  time: '2025-01-28T00:40:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5471
 - author: blueDev2
   changes:
   - message: Boiler bombard/shroud does not get stuck disabled after stun during a
@@ -5370,5 +5363,12 @@
   id: 1770
   time: '2025-05-21T15:01:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6510
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the synthetic race for admin use
+    type: Add
+  id: 1771
+  time: '2025-05-21T16:17:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6273
 Name: RMC14
 Order: -1
