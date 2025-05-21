@@ -98,8 +98,6 @@
       CMSurvivorDoctor: RMCSurvivorForeconBase
       CMSurvivorEngineer: RMCSurvivorForeconBase
       CMSurvivorSecurity: RMCSurvivorForeconBase
-    ignoreSurvivorMaximumLimitJobs: # todo synth
-    - RMCSurvivorCommandingOfficer
 
 - type: entity
   id: RMCPlanetHybrisa
