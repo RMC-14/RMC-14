@@ -342,6 +342,7 @@
   minLimit: 1
   loadouts:
   - SynthUniformRMC
+  - SynthJumpsuitPristineRMC
   - ScrubsBlueRMC
   - ScrubsLightBlueRMC
   - ScrubsGreenRMC
