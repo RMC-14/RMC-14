@@ -1017,7 +1017,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: rav_clothesline
+      state: prae_cleave_fling
     event: !type:XenoFlingActionEvent
     range: 1.5
     useDelay: 16
