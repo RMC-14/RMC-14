@@ -32,6 +32,7 @@
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
+  marineAuthorityLevel: 2
   accessGroups:
   - SquadLeader
   overwatchSortPriority: -6
