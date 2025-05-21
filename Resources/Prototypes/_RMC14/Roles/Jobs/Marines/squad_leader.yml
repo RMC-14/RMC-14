@@ -37,9 +37,6 @@
   overwatchSortPriority: -6
   overwatchShowName: true
   overwatchRoleName: Squad Leader
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: leader
   roleWeight: 1
   special:
   - !type:AddComponentSpecial

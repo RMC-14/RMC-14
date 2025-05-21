@@ -15,6 +15,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeret
+  suffix: Camo
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret/jungle.rsi

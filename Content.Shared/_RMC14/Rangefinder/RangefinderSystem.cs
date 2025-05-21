@@ -132,11 +132,15 @@ public sealed class RangefinderSystem : EntitySystem
             return;
         }
 
-        if (!_area.CanCAS(coordinates) || (rangefinder.Comp.Mode == Designator && !_area.CanLase(coordinates)))
+        if (!_dropshipWeapon.CasDebug)
         {
-            msg = Loc.GetString("rmc-laser-designator-not-cas");
-            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
-            return;
+            if (!_area.CanCAS(coordinates) ||
+                (rangefinder.Comp.Mode == Designator && !_area.CanLase(coordinates)))
+            {
+                msg = Loc.GetString("rmc-laser-designator-not-cas");
+                _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
+                return;
+            }
         }
 
         TryTarget(rangefinder, args.User, delay, coordinates);
@@ -330,6 +334,7 @@ public sealed class RangefinderSystem : EntitySystem
             BreakOnMove = true,
             NeedHand = true,
             BreakOnHandChange = true,
+            MovementThreshold = 0.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

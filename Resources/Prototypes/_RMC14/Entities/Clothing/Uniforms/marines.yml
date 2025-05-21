@@ -225,6 +225,12 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
+- type: entity
+  parent: CMJumpsuitCOService
+  id: RMCJumsuitWhiteService
+  name: white service uniform
+  description: A white dress shirt and tie with sleek pants. Standard clothing for anyone on professional business.
+
 # Executive officer
 
 - type: entity
@@ -313,7 +319,7 @@
 
 # Dropship Crew Chief
 - type: entity
-  parent: CMJumpsuitPilot
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitDCC
   name: dropship crew chief bodysuit
   description: A bodysuit worn by dropship crew chiefs of the UNMC, and is meant for survival in inhospitable conditions. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -353,7 +359,7 @@
 
 # Colonist
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitColonist
   name: colonist uniform
   description: A stylish gray-green jumpsuit - standard issue for colonists.
@@ -374,6 +380,13 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: CMJumpsuitSurvivorMarine
+  id: RMCJumpsuitSurvivorMarineDropPouch
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchForecon
 
 # High Command
 

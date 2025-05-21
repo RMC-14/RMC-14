@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Drunk;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
@@ -22,6 +21,10 @@ using Robust.Shared.Timing;
 using Content.Shared.Projectiles;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.BlurredVision;
+using Content.Shared._RMC14.Stamina;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Deafness;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
@@ -31,12 +34,13 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private readonly RMCStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedSlurredSystem _slurred = default!;
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
+    [Dependency] private readonly RMCDazedSystem _daze = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!; //It's how this fakes movement
@@ -44,6 +48,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
@@ -82,6 +87,8 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             neuro.LastStumbleTime = time;
         }
 
+        _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(args.Target, "Blinded", neuro.BlurTime * 6, true);
+        _daze.TryDaze(ent, ent.Comp.DazeTime, true, stutter: true);
         neuro.NeurotoxinAmount += ent.Comp.NeuroPerSecond;
         neuro.ToxinDamage = ent.Comp.ToxinDamage;
         neuro.OxygenDamage = ent.Comp.OxygenDamage;
@@ -128,7 +135,8 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 if (time < builtNeurotoxin.NextGasInjectionAt)
                     continue;
 
-                // TODO RMC14 blurriness added here too
+                _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(marine, "Blinded", builtNeurotoxin.BlurTime * 12, true);
+                _daze.TryDaze(marine, neuroGas.DazeTime, true, stutter: true);
                 builtNeurotoxin.NeurotoxinAmount += neuroGas.NeuroPerSecond;
                 builtNeurotoxin.ToxinDamage = neuroGas.ToxinDamage;
                 builtNeurotoxin.OxygenDamage = neuroGas.OxygenDamage;
@@ -143,7 +151,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         {
             neuro.NeurotoxinAmount -= frameTime * neuro.DepletionPerSecond;
 
-            if(neuro.NeurotoxinAmount <= 0)
+            if (neuro.NeurotoxinAmount <= 0)
             {
                 RemCompDeferred<NeurotoxinComponent>(uid);
                 continue;
@@ -153,7 +161,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 continue;
 
             //Basic Effects
-            _stamina.TakeStaminaDamage(uid, neuro.StaminaDamagePerSecond * frameTime, visual: false);
+            _stamina.DoStaminaDamage(uid, neuro.StaminaDamagePerSecond * frameTime, visual: false);
             _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrength, true);
 
             NeurotoxinNonStackingEffects(uid, neuro, time, out var coughChance, out var stumbleChance);
@@ -172,7 +180,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 }
                 _popup.PopupEntity(Loc.GetString("rmc-stumble-others", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.SmallCaution);
                 _popup.PopupEntity(Loc.GetString("rmc-stumble"), uid, uid, PopupType.MediumCaution);
-                _stutter.DoStutter(uid, neuro.DazeLength * 5, true);
+                _daze.TryDaze(uid, neuro.DazeLength * 5, true, stutter: true);
                 _jitter.DoJitter(uid, neuro.StumbleJitterTime, true);
                 _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrengthOnStumble, true);
                 var ev = new NeurotoxinEmoteEvent() { Emote = neuro.PainId };
@@ -265,7 +273,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     {
         if (neurotoxin.NeurotoxinAmount >= 10)
         {
-            // TODO RMC14 eye blur here
+            _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(victim, "Blinded", neurotoxin.BlurTime, true);
             if (currTime - neurotoxin.LastAccentTime >= neurotoxin.MinimumDelayBetweenEvents)
             {
                 neurotoxin.LastAccentTime = currTime;
@@ -291,10 +299,9 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
         if (neurotoxin.NeurotoxinAmount >= 27)
         {
-            // TODO RMC14 gives weldervision too
-            _stutter.DoStutter(victim, neurotoxin.DazeLength, true);
+            _daze.TryDaze(victim, neurotoxin.DazeLength, true, stutter: true);
             _damage.TryChangeDamage(victim, neurotoxin.ToxinDamage * frameTime);
-            // TODO RMC14 tempoarary deafness
+            _deafness.TryDeafen(victim, neurotoxin.DeafenTime, true, ignoreProtection: true);
         }
 
         if (neurotoxin.NeurotoxinAmount >= 50)

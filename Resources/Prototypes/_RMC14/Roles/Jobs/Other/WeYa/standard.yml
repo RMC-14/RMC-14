@@ -29,19 +29,18 @@
         RMCSkillEngineer: 1
         RMCSkillEndurance: 5
     - type: SquadArmorWearer
-
-- type: playTimeTracker
-  id: RMCJobPMCStandardM63B2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-standard
+  hidden: true
 
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardM63B2
-  name: weya pmc ghost role standard m63b2
-  suffix: We-Ya PMC
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, M63B2
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardM63B2
 
@@ -52,15 +51,13 @@
   - type: GhostRole
     name: rmc-ghost-name-pmc-standard
     description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
+    rules: rmc-ghost-role-information-pmc-rules
     reregister: false
     job: RMCPMCStandardM63B2
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCStandardM63B2
@@ -78,8 +75,6 @@
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     suitstorage: RMCWeaponSMGM63B2
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - RMCGrenadeBlastM12
@@ -104,18 +99,14 @@
   playTimeTracker: RMCJobPMCStandardSSG45
   startingGear: RMCJobPMCStandardSSG45
 
-- type: playTimeTracker
-  id: RMCJobPMCStandardSSG45
-
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardSSG45
-  name: weya pmc ghost role standard ssg45
-  suffix: We-Ya PMC
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, SSG45
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardSSG45
 
@@ -126,15 +117,13 @@
   - type: GhostRole
     name: rmc-ghost-name-pmc-standard
     description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
+    rules: rmc-ghost-role-information-pmc-rules
     reregister: false
     job: RMCPMCStandardSSG45
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCStandardSSG45
@@ -152,8 +141,6 @@
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     suitstorage: WeaponRifleSSG45
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - RMCGrenadeBlastM12
@@ -176,18 +163,14 @@
   playTimeTracker: RMCJobPMCStandardM54C2
   startingGear: RMCJobPMCStandardM54C2
 
-- type: playTimeTracker
-  id: RMCJobPMCStandardM54C2
-
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardM54C2
-  name: weya pmc ghost role standard m54c2
-  suffix: We-Ya PMC
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, M54C2
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardM54C2
 
@@ -198,15 +181,13 @@
   - type: GhostRole
     name: rmc-ghost-name-pmc-standard
     description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
+    rules: rmc-ghost-role-information-pmc-rules
     reregister: false
     job: RMCPMCStandardM54C2
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCStandardM54C2
@@ -224,8 +205,6 @@
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     suitstorage: RMCWeaponRifleM54C2
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - RMCGrenadeBlastM12
@@ -241,7 +220,15 @@
     - CMMagazineRifleM54CAP
     - CMMagazineRifleM54CAP
 
-# Shared
+- type: playTimeTracker
+  id: RMCJobPMCStandardM63B2
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardM54C2
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardSSG45
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconPMCStandard

@@ -177,7 +177,7 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
 
         var ev = new ManageHiveJellyMessageEvent(args.Xeno, args.Name);
-        _dialog.OpenInput(ent, "What should the pheromone read?", ev, true);
+        _dialog.OpenInput(ent, "What should the pheromone read?", ev, true, _commendation.CharacterLimit);
     }
 
     private void OnManageHiveJellyMessage(Entity<ManageHiveComponent> ent, ref ManageHiveJellyMessageEvent args)

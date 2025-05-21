@@ -238,7 +238,7 @@ namespace Content.Server.Hands.Systems
             if (IsHolding(player, throwEnt, out _, hands) && !TryDrop(player, throwEnt, handsComp: hands))
                 return false;
 
-            _throwingSystem.TryThrow(ev.ItemUid, ev.Direction, ev.ThrowSpeed, ev.PlayerUid, compensateFriction: !HasComp<LandAtCursorComponent>(ev.ItemUid));
+            _throwingSystem.TryThrow(ev.ItemUid, ev.Direction, ev.ThrowSpeed, player, compensateFriction: !HasComp<LandAtCursorComponent>(ev.ItemUid));
 
             return true;
         }

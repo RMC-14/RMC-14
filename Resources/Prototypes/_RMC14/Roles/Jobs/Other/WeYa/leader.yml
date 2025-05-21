@@ -40,6 +40,35 @@
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: pmc_ld
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-leader
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCLeader
+  name: weya pmc ghost role leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-leader
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCLeader
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCLeader
@@ -58,8 +87,6 @@
     suitstorage: RMCWeaponRifleM54C2
     pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     pocket2: RMCPouchFirstAidPMCFill
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - CMStunbaton
@@ -79,7 +106,6 @@
     - CMMagazineRifleM54CAP
     - CMMagazineRifleM54CAP
 
-
 - type: playTimeTracker
   id: RMCJobPMCLeader
 
@@ -89,32 +115,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_ld
-
-- type: entity
-  parent: MarkerBase
-  id: RMCRandomHumanoidPMCLeader
-  name: weya pmc ghost role leader
-  suffix: We-Ya PMC
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: RandomHumanoidSpawner
-    settings: RMCPMCLeader
-
-- type: randomHumanoidSettings
-  parent: RMCEventHumanoid
-  id: RMCPMCLeader
-  components:
-  - type: GhostRole
-    name: rmc-ghost-name-pmc-leader
-    description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
-    reregister: false
-    job: RMCPMCLeader
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa

@@ -160,13 +160,13 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailFountain
+    - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoTantrum
     - ActionXenoHighGallop
     - ActionXenoFightOrFlight
     - ActionXenoRetrieve
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-valkyrie-name
     description: rmc-xeno-valkyrie-description
@@ -213,6 +213,7 @@
     - type: RMCRooted
     - type: RMCDazed
   - type: XenoHighGallop
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -231,7 +232,6 @@
     - ActionXenoDodge
     - ActionXenoTailTrip
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-dancer-name
     description: rmc-xeno-dancer-description
@@ -248,6 +248,7 @@
       groups:
         Brute: 40
   - type: XenoTailTrip
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -272,7 +273,6 @@
     - ActionXenoCleaveRoot
     - ActionXenoCleaveFling
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-vanguard-name
     description: rmc-xeno-vanguard-description
@@ -296,6 +296,7 @@
       groups:
         Brute: 40
   - type: XenoCleave
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -314,7 +315,6 @@
     - ActionXenoDislocate
     - ActionXenoTailLash
     - ActionXenoDevolve
-    hidden: true
   - type: MeleeWeapon
     damage:
       groups:
@@ -359,3 +359,4 @@
     damage:
       groups:
         Brute: 15
+  - type: XenoHidden

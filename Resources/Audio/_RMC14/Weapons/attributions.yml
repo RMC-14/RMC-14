@@ -33,6 +33,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/5fc3c2ca34b8ebabe139555a33d56b65cfa2479b/sound/weapons/gun_orbital_travel.ogg"
 
+- files: ["handcuffs.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d5913ef37c373d523c9ea9f23ab8a4a534860e58/sound/weapons/handcuffs.ogg"
+
 - files: ["pierce.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

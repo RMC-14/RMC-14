@@ -48,7 +48,7 @@
   - type: XenoPunch
     damage:
       types:
-        Blunt: 25
+        Blunt: 27.5
   - type: XenoFling
   - type: XenoLunge
   - type: XenoPlasma
@@ -58,7 +58,7 @@
   - type: XenoEvolution
     max: 500
     evolvesTo:
-    - CMXenoCrusher
+    - RMCXenoCrusher
     - CMXenoPraetorian
   - type: CMArmor
     xenoArmor: 20
