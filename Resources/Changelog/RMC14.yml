@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Fixed not being able to reload M44 revolvers with M44 marksman speedloaders.
-    type: Fix
-  id: 1274
-  time: '2025-01-28T20:36:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5479
 - author: DrSmugleaf
   changes:
   - message: Ported weed killer. This removes all weeds and resin structures around
@@ -5363,5 +5356,22 @@
   id: 1776
   time: '2025-05-21T22:09:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6289
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to load weapons onto the Normandy.
+    type: Fix
+  - message: Fixed FORECON survivors only spawning on the first round that Chance's
+      Claim is chosen.
+    type: Fix
+  - message: Fixed custom cassettes being deathly quiet.
+    type: Fix
+  - message: Fixed Praetorian acid ball cooldown for real this time.
+    type: Fix
+  - message: Fixed skill examine sometimes showing some skills that are set to a value
+      of 0.
+    type: Fix
+  id: 1777
+  time: '2025-05-21T22:12:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6519
 Name: RMC14
 Order: -1
