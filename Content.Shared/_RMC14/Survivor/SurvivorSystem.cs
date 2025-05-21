@@ -118,10 +118,10 @@ public sealed class SurvivorSystem : EntitySystem
                 }
             }
 
-            if (tryInHand && _hands.TryPickupAnyHand(mob, spawn))
+            if (_inventory.TryEquip(mob, spawn, slot.ID, true))
                 return;
 
-            if (_inventory.TryEquip(mob, spawn, slot.ID, true))
+            if (tryInHand && _hands.TryPickupAnyHand(mob, spawn))
                 return;
         }
 
