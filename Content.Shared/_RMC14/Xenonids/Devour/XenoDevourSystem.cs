@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.ActionBlocker;
@@ -42,7 +43,6 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly EntityManager _entManager = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -78,6 +78,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<XenoDevourComponent, XenoRegurgitateActionEvent>(OnXenoRegurgitateAction);
         SubscribeLocalEvent<XenoDevourComponent, EntityTerminatingEvent>(OnXenoTerminating);
         SubscribeLocalEvent<XenoDevourComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
+        SubscribeLocalEvent<XenoDevourComponent, RMCCombatModeInteractOverrideUserEvent>(OnXenoCombatModeInteract);
 
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeDamageEvent>(OnUsableWhileDevouredGetMeleeDamage);
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeAttackRateEvent>(OnUsableWhileDevouredGetMeleeAttackRate);
@@ -285,7 +286,7 @@ public sealed class XenoDevourSystem : EntitySystem
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
         foreach (var ent in ents)
         {
-            var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(ent));
+            var ev = new RegurgitateEvent(GetNetEntity(xeno.Owner), GetNetEntity(ent));
             RaiseLocalEvent(xeno, ev);
 
             _stun.TryStun(ent, xeno.Comp.RegurgitationStun, true);
@@ -306,6 +307,20 @@ public sealed class XenoDevourSystem : EntitySystem
             return;
 
         RegurgitateAll(xeno);
+    }
+
+    private void OnXenoCombatModeInteract(Entity<XenoDevourComponent> ent, ref RMCCombatModeInteractOverrideUserEvent args)
+    {
+        if (ent.Owner != args.Target)
+            return;
+
+        if (CompOrNull<PullerComponent>(ent)?.Pulling is not { } pulling)
+            return;
+
+        if (!HasComp<DevourableComponent>(pulling))
+            return;
+
+        args.Handled = true;
     }
 
     private void OnUsableWhileDevouredGetMeleeDamage(Entity<UsableWhileDevouredComponent> ent, ref GetMeleeDamageEvent args)
@@ -444,7 +459,7 @@ public sealed class XenoDevourSystem : EntitySystem
             return true;
         }
 
-        var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(devoured.Owner));
+        var ev = new RegurgitateEvent(GetNetEntity(xeno.Owner), GetNetEntity(devoured.Owner));
         RaiseLocalEvent(xeno, ev);
 
         if (doFeedback)
