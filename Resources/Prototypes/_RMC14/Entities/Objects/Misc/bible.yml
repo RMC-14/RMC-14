@@ -43,6 +43,7 @@
     sprite: _RMC14/Objects/Misc/books.rsi
     state: tome_hefa
   - type: Storage
+    maxItemSize: Small
     grid:
     - 0,0,5,1 # 3 HEFA nades
     whitelist:
