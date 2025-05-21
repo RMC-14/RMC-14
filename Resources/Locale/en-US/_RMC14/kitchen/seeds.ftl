@@ -8,3 +8,6 @@ seeds-whitebeet-name = white beet
 seeds-whitebeet-display-name = white beets
 seeds-grass-name = grass
 seeds-grass-display-name = grass
+seeds-rmc-grape-name = grape
+seeds-rmc-grape-display-name = grape vines
+

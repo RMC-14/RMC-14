@@ -21,7 +21,7 @@
     AlliesCocktail: 3
 
 - type: reaction
-  id: Amasec
+  id: Amasec #Changed for RMC
   requiredMixerCategories:
   - Shake
   reactants:
@@ -177,7 +177,7 @@
     BananaHonk: 3
 
 - type: reaction
-  id: BeepskySmash
+  id: BeepskySmash #Changed for RMC
   requiredMixerCategories:
   - Shake
   reactants:

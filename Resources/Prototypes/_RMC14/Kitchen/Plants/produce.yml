@@ -32,7 +32,14 @@
       food:
         reagents:
         - ReagentId: Nutriment
-          Quantity: 5
+          Quantity: 2
+        - ReagentId: RMCPeanutButter
+          Quantity: 2
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: RMCPeanutButter
+        Quantity: 5
   - type: Sprite
     sprite: _RMC14/Kitchen/Plants/peanut.rsi
   - type: Item

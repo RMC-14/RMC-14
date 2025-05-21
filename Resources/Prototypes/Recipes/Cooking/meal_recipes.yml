@@ -247,7 +247,7 @@
     FoodBreadBun: 1
     FoodMeatHuman: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeJellyBurger
   name: jelly burger recipe
   result: FoodBurgerJelly
@@ -343,7 +343,7 @@
     FoodBreadBun: 1
     ClothingHeadHatWizard: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeSuperBiteBurger
   name: super bite burger recipe
   result: FoodBurgerSuper
@@ -577,7 +577,7 @@
     FoodGarlic: 1
     FoodButterSlice: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeJellyToast
   name: jelly toast recipe
   result: FoodBreadJellySlice
@@ -622,7 +622,7 @@
 - type: microwaveMealRecipe
   id: RecipeMargheritaPizza
   name: margherita pizza recipe
-  result: RMCFoodPizzaMargheritaFull
+  result: RMCFoodPizzaMargheritaFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
@@ -633,7 +633,7 @@
 - type: microwaveMealRecipe
   id: RecipeMushroomPizza
   name: mushroom pizza recipe
-  result: RMCFoodPizzaMushroomFull
+  result: RMCFoodPizzaMushroomFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
@@ -643,7 +643,7 @@
 - type: microwaveMealRecipe
   id: RecipeMeatPizza
   name: meat pizza recipe
-  result: RMCFoodPizzaMeatFull
+  result: RMCFoodPizzaMeatFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
@@ -655,7 +655,7 @@
 - type: microwaveMealRecipe
   id: RecipeVegetablePizza
   name: vegetable pizza recipe
-  result: RMCFoodPizzaVegetableFull
+  result: RMCFoodPizzaVegetableFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
@@ -1247,7 +1247,7 @@
     FoodSnackChocolateBar: 3
     FoodPlateTin: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeGappleTart
   name: golden apple streusel tart recipe
   result: FoodTartGapple
@@ -1866,7 +1866,7 @@
     FoodTomato: 1
     ClothingShoesClown: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeQueso
   name: queso recipe
   result: FoodMealQueso
