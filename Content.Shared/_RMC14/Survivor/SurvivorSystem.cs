@@ -37,7 +37,6 @@ public sealed class SurvivorSystem : EntitySystem
         if (comp.RandomOutfits.Count > 0)
         {
             var gear = _random.Pick(comp.RandomOutfits);
-
             foreach (var item in gear)
             {
                 Equip(mob, item, false);
