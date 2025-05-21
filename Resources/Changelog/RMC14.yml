@@ -1,68 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Ported weed killer. This removes all weeds and resin structures around
-      the chosen LZ 20 seconds after a dropship first launches from the Almayer, while
-      blocking their spread and rebuild for 8 minutes. This replaces both the LZ poison
-      fog, and the 45 minute early hive spread blocker.
-    type: Add
-  - message: Made survivors get civilian playtime ribbons, by CyberTropic. These might
-      spawn on the floor if you get too lucky with your initial gear.
-    type: Add
-  - message: Fixed the forever hunger this has been a bug for 20 days apparently.
-    type: Fix
-  - message: Fixed not being able to pry closed doors. This one has been a bug since
-      the end of November apparently!
-    type: Fix
-  - message: Fixed nutriment not healing brute at the same rate as tricordrazine (Neogenetic
-      1).
-    type: Fix
-  - message: Fixed duplicate flashbangs in SecTechs.
-    type: Fix
-  - message: Fixed lesser drones being able to place sticky and fast resin.
-    type: Fix
-  - message: Fixed unanchorable vendors being invincible.
-    type: Fix
-  - message: Fixed xenos being a tool that pries on examine.
-    type: Fix
-  - message: Fixed fast and sticky resin hiding weed nodes, they will now draw under
-      them, but over regular weeds.
-    type: Fix
-  - message: Fixed status displays on walls not being examinable.
-    type: Fix
-  - message: Fixed rank examine having incorrect grammar with they/them pronouns (They
-      holds > They hold).
-    type: Fix
-  - message: Fixed trying to unanchor a we-ya med plus or we-ya chem plus instead
-      telling you that your wrench is not refillable.
-    type: Fix
-  - message: Fixed some cases where a gun's max scatter would not update properly.
-    type: Fix
-  - message: Fixed SMG mags being 2-wide instead of 3-wide.
-    type: Fix
-  - message: Fixed welder satchels and backpacks being able to transfer solutions
-      to things other than to/from fuel tanks.
-    type: Fix
-  - message: Fixed fire extinguishers playing throwing effects when used.
-    type: Fix
-  - message: Fixed M44 sharpshooter stock making the revolver bigger while collapsed.
-    type: Fix
-  - message: Fixed the sidearm pouch fitting pistols that are bigger than Normal size.
-      Remember to collapse your stocks!
-    type: Fix
-  - message: Survivors have had tool vendor privilege restored until hacking and survivor
-      jobs are in.
-    type: Fix
-  - message: Fixed devolving making you lose hive leader status.
-    type: Fix
-  - message: Fixed fireteam UI sometimes not refreshing with new members.
-    type: Fix
-  - message: Fixed announcements being slightly too small, removes bolding from Signed
-      By section.
-    type: Fix
-  id: 1275
-  time: '2025-01-28T20:52:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5483
 - author: Vermidia
   changes:
   - message: Fixed blitz not hitting anything
@@ -5373,5 +5309,12 @@
   id: 1777
   time: '2025-05-21T22:12:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6519
+- author: DrSmugleaf
+  changes:
+  - message: Fixed custom cassettes not being able to be paused.
+    type: Fix
+  id: 1778
+  time: '2025-05-21T22:56:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6520
 Name: RMC14
 Order: -1
