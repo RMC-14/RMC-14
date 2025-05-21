@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Djvarik
-  changes:
-  - message: Fixed riot armor being classified as light armor instead of heavy for
-      movement speed.
-    type: Fix
-  id: 1264
-  time: '2025-01-26T13:50:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5464
 - author: DrSmugleaf
   changes:
   - message: Fixed crafted M1984 AP magazine boxes not fitting any mags.
@@ -5279,5 +5271,12 @@
   id: 1766
   time: '2025-05-21T14:37:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6494
+- author: Vermidia
+  changes:
+  - message: Fixed Acider Runner's For the Hive radius being slightly too small.
+    type: Fix
+  id: 1767
+  time: '2025-05-21T14:38:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6463
 Name: RMC14
 Order: -1
