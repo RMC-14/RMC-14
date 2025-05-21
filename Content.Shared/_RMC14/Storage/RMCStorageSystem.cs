@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
@@ -16,6 +16,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System.Diagnostics;
 using static Content.Shared.Storage.StorageComponent;
 
 namespace Content.Shared._RMC14.Storage;
@@ -406,6 +407,28 @@ public sealed class RMCStorageSystem : EntitySystem
         if (!CanInsertStoreSkill((storage, storage, null), toInsert, user, out popup))
             return false;
 
+        return true;
+    }
+
+    public bool CanDraw(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid user, out LocId popup)
+    {
+        popup = default;
+        Log.Debug("Went to CanDraw");
+
+        if (!Resolve(store, ref store.Comp2, false))
+        {
+            return true;
+        }
+
+        foreach (var entry in store.Comp2.Entries)
+        {
+
+            if (_skills.HasSkills(user, entry.Skills))
+                continue;
+
+            popup = "rmc-storage-store-skill-unable";
+            return false;
+        }
         return true;
     }
 
