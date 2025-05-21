@@ -6,6 +6,7 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
@@ -14,6 +15,7 @@ using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Cassette;
@@ -24,11 +26,14 @@ public abstract class SharedCassetteSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
+
         SubscribeLocalEvent<CassettePlayerComponent, GetItemActionsEvent>(OnPlayerGetItemActions);
         SubscribeLocalEvent<CassettePlayerComponent, CassettePlayPauseActionEvent>(OnPlayerPlayPause);
         SubscribeLocalEvent<CassettePlayerComponent, CassetteNextActionEvent>(OnPlayerNext);
@@ -39,10 +44,23 @@ public abstract class SharedCassetteSystem : EntitySystem
         SubscribeLocalEvent<CassettePlayerComponent, GotUnequippedEvent>(OnPlayerUnequipped);
         SubscribeLocalEvent<CassettePlayerComponent, ExaminedEvent>(OnPlayerExamined);
         SubscribeLocalEvent<CassettePlayerComponent, AfterAutoHandleStateEvent>(OnPlayerState);
+        SubscribeLocalEvent<CassettePlayerComponent, EntRemovedFromContainerMessage>(OnPlayerRemovedFromContainer);
 
         SubscribeLocalEvent<CassetteTapeComponent, ExaminedEvent>(OnTapeExamined);
         SubscribeLocalEvent<CassetteTapeComponent, UseInHandEvent>(OnPlayerUseInHand);
         SubscribeLocalEvent<CassetteTapeComponent, GetVerbsEvent<AlternativeVerb>>(OnTapeGetVerbsAlternative);
+    }
+
+    private void OnPlayerDetached(PlayerDetachedEvent ev)
+    {
+        var slots = _inventory.GetSlotEnumerator(ev.Entity);
+        while (slots.MoveNext(out var slot))
+        {
+            if (!TryComp(slot.ContainedEntity, out CassettePlayerComponent? player))
+                continue;
+
+            StopAllAudio((slot.ContainedEntity.Value, player));
+        }
     }
 
     private void OnPlayerGetItemActions(Entity<CassettePlayerComponent> ent, ref GetItemActionsEvent args)
@@ -111,6 +129,7 @@ public abstract class SharedCassetteSystem : EntitySystem
         }
 
         _audio.PlayLocal(ent.Comp.PlayPauseSound, ent, args.Performer);
+        Dirty(ent);
     }
 
     private void OnPlayerNext(Entity<CassettePlayerComponent> ent, ref CassetteNextActionEvent args)
@@ -134,10 +153,9 @@ public abstract class SharedCassetteSystem : EntitySystem
             return;
         }
 
-        _audio.Stop(player.Comp.AudioStream);
+        StopAllAudio(player);
         if (tapeComp.Custom)
         {
-            _audio.Stop(player.Comp.CustomAudioStream);
             if (PlayCustomTrack(player, (tapeId.Value, tapeComp)) is { } custom)
                 player.Comp.CustomAudioStream = custom;
 
@@ -173,6 +191,9 @@ public abstract class SharedCassetteSystem : EntitySystem
 
         if (contained != null)
             _hands.TryPickupAnyHand(args.User, contained.Value);
+
+        ent.Comp.Tape = 0;
+        Dirty(ent);
 
         _audio.PlayLocal(ent.Comp.InsertEjectSound, ent, args.User);
     }
@@ -212,10 +233,7 @@ public abstract class SharedCassetteSystem : EntitySystem
 
     private void OnPlayerUnequipped(Entity<CassettePlayerComponent> ent, ref GotUnequippedEvent args)
     {
-        _audio.Stop(ent.Comp.AudioStream);
-        _audio.Stop(ent.Comp.CustomAudioStream);
-        ent.Comp.State = AudioState.Stopped;
-        Dirty(ent);
+        StopAllAudio(ent);
     }
 
     private void OnPlayerExamined(Entity<CassettePlayerComponent> ent, ref ExaminedEvent args)
@@ -232,6 +250,11 @@ public abstract class SharedCassetteSystem : EntitySystem
     private void OnPlayerState(Entity<CassettePlayerComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         _item.VisualsChanged(ent);
+    }
+
+    private void OnPlayerRemovedFromContainer(Entity<CassettePlayerComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        _audio.Stop(_net.IsServer ? ent.Comp.AudioStream : ent.Comp.CustomAudioStream);
     }
 
     private void OnTapeExamined(Entity<CassetteTapeComponent> ent, ref ExaminedEvent args)
@@ -302,5 +325,16 @@ public abstract class SharedCassetteSystem : EntitySystem
 
     protected virtual void ChooseCustomTrack(Entity<CassetteTapeComponent> tape)
     {
+    }
+
+    private void StopAllAudio(Entity<CassettePlayerComponent> ent)
+    {
+        _audio.Stop(ent.Comp.AudioStream);
+        _audio.Stop(ent.Comp.CustomAudioStream);
+
+        ent.Comp.State = AudioState.Stopped;
+        Dirty(ent);
+
+        _item.VisualsChanged(ent);
     }
 }
