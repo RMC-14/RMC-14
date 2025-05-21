@@ -58,7 +58,7 @@
         layer:
         - MobMask
   - type: Sprite
-    sprite: _RMC14/Structures/vehicles.rsi
+    sprite: _RMC14/Structures/Vehicles/vehicles.rsi
     offset: 0.5, 0.5
     noRot: true
   - type: Clickable
