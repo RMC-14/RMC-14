@@ -22,15 +22,61 @@
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-demo
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-demo
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_demo
+        giveMapBlip:
+          sprite: _RMC14/Interface/map_blips.rsi
+          state: spec_demo
       - id: RMCGrenadeSpecEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-grenadier
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-grenadier
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_grenadier
+        giveMapBlip:
+          sprite: _RMC14/Interface/map_blips.rsi
+          state: spec_grenadier
       #  points: 0
       #- id: PyroSet
       #  points: 0
+      # Don't forget to give Pyro his own role name and icons
       - id: RMCScoutSpecEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-scout
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-scout
+        isAppendPrefix: true
+        # maybe scout should come up with his own icons
       - id: CMSniperEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-sniper
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-sniper
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_sniper
+        giveMapBlip:
+          sprite: _RMC14/Interface/map_blips.rsi
+          state: spec_sniper
         linkedEntries:
         - RMCAntiMaterielEquipmentCase
       - id: RMCAntiMaterielEquipmentCase
+        giveSquadRoleName: rmc-job-name-weapons-specialist-anti-materiel-sniper
+        isAppendSquadRoleName: false
+        givePrefix: rmc-job-prefix-weapons-specialist-anti-materiel-sniper
+        isAppendPrefix: true
+        giveIcon:
+          sprite: _RMC14/Interface/cm_job_icons.rsi
+          state: hudsquad_spec_anti_materiel_sniper
+        giveMapBlip:
+          sprite: _RMC14/Interface/map_blips.rsi
+          state: spec_anti_materiel_sniper
         linkedEntries:
         - CMSniperEquipmentCase
     - name: Extra Scout Ammunition
