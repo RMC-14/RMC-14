@@ -19,7 +19,9 @@
 
   ## Have some experience? Check out these guidebook pages!
 
-  Anyone is free to add guides to this page, either through the discord or github.
+  Anyone is free to add guides to this page, either through the discord or GitHub.
+
+  Many of these guides are also accessible by examining the role or item they're related to!
 
   ### Marines
 
@@ -37,20 +39,7 @@
   ### Xenonids
 
   [bold]Roles[/bold]
-  - [textlink="Defender" link="RMCGuideRoleDefender"]
-  - [textlink="Sentinel" link="RMCGuideRoleSentinel"]
-  - [textlink="Runner" link="RMCGuideRoleRunner"]
-  - [textlink="Lurker" link="RMCGuideRoleLurker"]
-  - [textlink="Warrior" link="RMCGuideRoleWarrior"]
-  - [textlink="Hivelord" link="RMCGuideRoleHivelord"]
-  - [textlink="Carrier" link="RMCGuideRoleCarrier"]
-  - [textlink="Burrower" link="RMCGuideRoleBurrower"]
-  - [textlink="Ravager" link="RMCGuideRoleRavager"]
-  - [textlink="Praetorian" link="RMCGuideRolePraetorian"]
-  - [textlink="Boiler" link="RMCGuideRoleBoiler"]
-  - [textlink="Crusher" link="RMCGuideRoleCrusher"]
-  - [textlink="Queen" link="RMCGuideRoleQueen"]
-  - [textlink="Parasite" link="RMCGuideRoleParasite"]
+  - [textlink="Castes" link="RMCGuideXenonidRoles"]
 
   [bold]Structures[/bold]
   - [textlink="Hive Structures" link="RMCGuideHiveStructures"]

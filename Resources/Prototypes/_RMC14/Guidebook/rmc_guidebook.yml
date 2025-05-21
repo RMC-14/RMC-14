@@ -14,8 +14,8 @@
   - RMCChemicals
   - RMCGuideMarineRoles
   - RMCGuideMarineStructures
-#  - RMCGuideXenonidRoles
-#  - RMCGuideXenonidStructures
+  - RMCGuideXenonidRoles
+  - RMCGuideXenonidStructures
   - RMCGuideFood
   - RMCGuideDrinks
 
@@ -71,24 +71,48 @@
 - type: guideEntry
   parent: RMC
   id: RMCGuideXenonidRoles
-  name: "Xenonid Roles"
-  text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
+  name: "Xenonid Castes"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideXenonidRoles.xml"
+  children:
+  - RMCGuideXenonidT1
+  - RMCGuideXenonidT2
+  - RMCGuideXenonidT3
+  - RMCGuideRoleQueen
+  - RMCGuideRoleParasite
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideXenonidT1
+  name: "Tier 1 Xenonids"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideXenonidRoles.xml"
   children:
   - RMCGuideRoleDefender
   - RMCGuideRoleSentinel
   - RMCGuideRoleRunner
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideXenonidT2
+  name: "Tier 2 Xenonids"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideXenonidRoles.xml"
+  children:
   - RMCGuideRoleWarrior
   - RMCGuideRoleSpitter
   - RMCGuideRoleLurker
   - RMCGuideRoleHivelord
   - RMCGuideRoleBurrower
   - RMCGuideRoleCarrier
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideXenonidT3
+  name: "Tier 3 Xenonids"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideXenonidRoles.xml"
+  children:
   - RMCGuideRoleCrusher
   - RMCGuideRolePraetorian
   - RMCGuideRoleRavager
   - RMCGuideRoleBoiler
-  - RMCGuideRoleQueen
-  - RMCGuideRoleParasite
 
 # Xenonid structures
 - type: guideEntry
