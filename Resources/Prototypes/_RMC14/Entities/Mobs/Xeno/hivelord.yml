@@ -97,6 +97,9 @@
   parent: CMXenoHivelordBase
   id: CMXenoHivelord
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleHivelord
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Hivelord/hivelord.rsi
   - type: Xeno
