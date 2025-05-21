@@ -1,19 +1,32 @@
-﻿# Components
+# Main Components
+# UNMC
 - type: entity
   abstract: true
   parent: CMMREComponentBase
   id: CMMREMainComponentBase
+  name: MRE main dish
   description: An MRE entree component. Contains the main course for nutrients.
   components:
   - type: Sprite
     state: entree
+  - type: Tag
+    tags:
+    - MREMain
+
+- type: Tag
+  id: MREMain
+
+- type: Tag
+  id: MREButterCookie
 
 - type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentBonelessPorkRibs
-  name: MRE component (boneless pork ribs)
   description: An MRE entree component. Contains the main course for nutrients. This one is boneless pork ribs.
+  suffix: boneless pork ribs
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-pork-ribs
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodBonelessPorkRibs
@@ -21,9 +34,11 @@
 - type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentGrilledChicken
-  name: MRE component (grilled chicken)
   description: An MRE entree component. Contains the main course for nutrients. This one is grilled chicken.
+  suffix: grilled chicken
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-grilled-chicken
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodGrilledChicken
@@ -31,137 +46,670 @@
 - type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentPizzaSquare
-  name: MRE component (pizza square)
   description: An MRE entree component. Contains the main course for nutrients. This one is a pizza square.
+  suffix: pizza square
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-pizza-square
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodPizzaSquare
 
 - type: entity
   parent: CMMREMainComponentBase
-  id: CMMREComponentSpaghettiChunks
-  name: MRE component (spaghetti chunks)
-  description: An MRE entree component. Contains the main course for nutrients. This one is spaghetti chunks.
+  id: CMMREComponentChickenTender
+  description: An MRE entree component. Contains the main course for nutrients. This one is a chicken tender.
+  suffix: chicken tender
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-chicken-tender
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodChickenTender
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: RMCMREComponentPepperoniSquare
+  description: An MRE entree component. Contains the main course for nutrients. This one is a pepperoni pizza square.
+  suffix: pepperoni pizza square
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-pepperoni-square
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodPepperoniSquare
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentSpaghettiChunks
+  description: An MRE entree component. Contains the main course for nutrients. This one is meat spaghetti.
+  suffix: meat spaghetti
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-spaghetti-chunks
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodSpaghettiChunks
 
 - type: entity
   parent: CMMREMainComponentBase
-  id: CMMREComponentChickenTender
-  name: MRE component (chicken tender)
-  description: An MRE entree component. Contains the main course for nutrients. This one is a chicken tender.
+  id: RMCMREComponentChiliConCarne
+  description: An MRE entree component. Contains the main course for nutrients. This one is chili con carne.
+  suffix: chili con carne
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-chili-con-carne
   - type: SpawnItemsOnUse
     items:
-    - id: CMMREFoodChickenTender
+    - id: RMCMREFoodChiliConCarne
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: RMCMREComponentNoodleSoup
+  description: An MRE entree component. Contains the main course for nutrients. This one is noodle soup.
+  suffix: noodle soup
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-noodle-soup
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodNoodleSoup
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: RMCMREComponentGrilledChickenBreast
+  description: An MRE entree component. Contains the main course for nutrients. This one is grilled chicken breast.
+  suffix: grilled chicken breast
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-grilled-chicken-breast
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodGrilledChickenBreast
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: RMCMREComponentFeijoada
+  description: An MRE entree component. Contains the main course for nutrients. This one is brazilian-style feijoada.
+  suffix: brazilian-style feijoada
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-feijoada
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodFeijoada
+
+#We-Ya ration pack
+- type: entity
+  parent: CMMREComponentBonelessPorkRibs
+  id: RMCMREComponentWYBonelessPorkRibs
+  name: We-Ya brand ration main dish
+  description: Probably the most edible component of it, contains main nutrition contents. This one is boneless pork ribs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/wy_mre.rsi
+    state: wy_main
+
+- type: entity
+  parent: CMMREComponentGrilledChicken
+  id: RMCMREComponentWYGrilledChicken
+  name: We-Ya brand ration main dish
+  description: Probably the most edible component of it, contains main nutrition contents. This one is grilled chicken.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/wy_mre.rsi
+    state: wy_main
+
+- type: entity
+  parent: CMMREComponentChickenTender
+  id: RMCMREComponentWYChickenTender
+  name: We-Ya brand ration main dish
+  description: Probably the most edible component of it, contains main nutrition contents. This one is a chicken tender.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/wy_mre.rsi
+    state: wy_main
+
+- type: entity
+  parent: CMMREComponentSpaghettiChunks
+  id: RMCMREComponentWYSpaghettiChunks
+  name: We-Ya brand ration main dish
+  description: Probably the most edible component of it, contains main nutrition contents. This one is meat spaghetti.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/wy_mre.rsi
+    state: wy_main
+
+- type: entity
+  parent: RMCMREComponentGrilledChickenBreast
+  id: RMCMREComponentWYGrilledChickenBreast
+  name: We-Ya brand ration main dish
+  description: Probably the most edible component of it, contains main nutrition contents. This one is grilled chicken breast.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/wy_mre.rsi
+    state: wy_main
+
+#We-Ya emergency ration
+- type: entity
+  parent: CMMREMainComponentBase
+  id: RMCMREComponentWYCookieBriquette
+  name: emergency food packet
+  description: A brick of a cookie, designed to be stored for prolonged periods of time, in extreme conditions, but still tastes like a compressed buttery cookie.
+  components:
+  - type: Label
+    currentLabel: rmc-mre-emergency-cookie-briquette
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/wy_mre.rsi
+    state: cookie_brick
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREWYFoodCookieBriquette
+  - type: Tag
+    tags:
+    - MREButterCookie
+
 
 # Foods
+# UNMC
 - type: entity
   abstract: true
   parent: CMMREFoodBase
   id: CMMREFoodMain
   components:
   - type: Food
-    transferAmount: 4
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 14
-        - ReagentId: TableSalt
-          Quantity: 6
-  - type: Extractable
-    grindableSolutionName: food
-  - type: InjectableSolution
-    solution: food
 
 - type: entity
   parent: CMMREFoodMain
   id: CMMREFoodBonelessPorkRibs
   name: boneless pork ribs
-  description: The contents of a Marine Standard issue MRE. This one is boneless pork ribs.
+  description: You can't even taste processed meat taste under all those spices!
   components:
+  - type: Food
+    transferAmount: 7
   - type: Sprite
     state: boneless_pork_ribs
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 14
+        - ReagentId: TableSalt
+          Quantity: 2
+        - ReagentId: Blackpepper
+          Quantity: 4
   - type: FlavorProfile
     flavors:
-    - BonelessPorkRibs
+    - Pork
 
 - type: entity
   parent: CMMREFoodMain
   id: CMMREFoodGrilledChicken
   name: grilled chicken
-  description: The contents of a Marine Standard issue MRE. This one is grilled chicken.
+  description: Doesn't actually tastes like grilled one, but do you really expect that luxury here?
   components:
+  - type: Food
+    transferAmount: 6
   - type: Sprite
     state: grilled_chicken
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 14
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - GrilledChicken
+    - chicken
 
 - type: entity
   parent: CMMREFoodMain
   id: CMMREFoodPizzaSquare
   name: pizza square
-  description: The contents of a Marine Standard issue MRE. This one is a pizza square.
+  description: An American classic, been added and removed from the menu about 27 times at this point, still loved despite being cheap parody of a real thing.
   components:
+  - type: Food
+    transferAmount: 7
   - type: Sprite
     state: pizza_square
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCCheese
+          Quantity: 4
+        - ReagentId: RMCMeatProtein
+          Quantity: 3
+        - ReagentId: RMCBread
+          Quantity: 5
+        - ReagentId: RMCVegetable
+          Quantity: 2
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - PizzaSquare
+    - oily
 
 - type: entity
   parent: CMMREFoodMain
-  id: CMMREFoodSpaghettiChunks
-  name: spaghetti chunks
-  description: The contents of a Marine Standard issue MRE. This one is spaghetti chunks.
+  id: RMCMREFoodPepperoniSquare
+  name: pepperoni pizza square
+  description: A newer addition to the timeless MRE classic, very similar.
   components:
+  - type: Food
+    transferAmount: 7
   - type: Sprite
-    state: spaghetti_chunks
+    state: pepperoni_square
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCCheese
+          Quantity: 3
+        - ReagentId: RMCMeatProtein
+          Quantity: 5
+        - ReagentId: RMCBread
+          Quantity: 6
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - SpaghettiChunks
+    - oily
+    - PizzaSquarePepperoni
 
 - type: entity
   parent: CMMREFoodMain
   id: CMMREFoodChickenTender
   name: chicken tender
-  description: The contents of a Marine Standard issue MRE. This one is a chicken tender.
+  description: Really tasty and has nice crumbs texture, but makes you wish for some good chicken wings...
   components:
+  - type: Food
+    transferAmount: 6
   - type: Sprite
     state: chicken_tender
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 10
+        - ReagentId: RMCBread
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - ChickenTender
+    - chicken
+
+- type: entity
+  parent: CMMREFoodMain
+  id: RMCMREFoodGrilledChickenBreast
+  name: grilled chicken breast
+  description: Very plain grilled chicken meat, simple but yet very classic taste.
+  components:
+  - type: Food
+    transferAmount: 6
+  - type: Sprite
+    state: grilled_chicken_breast
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 14
+        - ReagentId: TableSalt
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - chicken
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodSpaghettiChunks
+  name: meat spaghetti
+  description: Spaghetti with some cooked meat chunks, all covered in a tomato sauce.
+  components:
+  - type: Food
+    transferAmount: 7
+  - type: Sprite
+    state: spaghetti_chunks
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCNoodles
+          Quantity: 8
+        - ReagentId: RMCMeatProtein
+          Quantity: 6
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - pasta
+
+- type: entity
+  parent: CMMREFoodMain
+  id: RMCMREFoodChiliConCarne
+  name: chili con carne
+  description: Spicy minced meat dish, there is no limit on adding chili in there, having some milk in near proximity is recommended.
+  components:
+  - type: Food
+    transferAmount: 8
+    utensil: Spoon
+  - type: Sprite
+    state: chili_con_carne
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 10
+        - ReagentId: Hotsauce
+          Quantity: 6
+        - ReagentId: RMCVegetable
+          Quantity: 4
+        - ReagentId: RMCTomatoJuice
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - Chili
+
+- type: entity
+  parent: CMMREFoodMain
+  id: RMCMREFoodNoodleSoup
+  name: noodle soup
+  description: Very nourishing noodle soup with vegetables and a chicken flavor, will keep you warm for a long time if heated.
+  components:
+  - type: Food
+    transferAmount: 8
+    useSound:
+      path: /Audio/Items/drink.ogg
+    utensil: Spoon
+  - type: Sprite
+    state: noodle_soup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCNoodles
+          Quantity: 9
+        - ReagentId: RMCVegetable
+          Quantity: 4
+        - ReagentId: Water
+          Quantity: 5
+        - ReagentId: RMCMeatProtein
+          Quantity: 5
+  - type: FlavorProfile
+    flavors:
+    - NoodleSoup
+
+- type: entity
+  parent: CMMREFoodMain
+  id: RMCMREFoodFeijoada
+  name: brazilian-style feijoada
+  description: A Brazillian dish filled with black beans, different kinds of meat, vegetables and spices, very nourishing and rich in flavor.
+  components:
+  - type: Food
+    transferAmount: 6
+  - type: Sprite
+    state: brazilian-style_feijoada
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCVegetable
+          Quantity: 7
+        - ReagentId: RMCMeatProtein
+          Quantity: 5
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: RMCPlantMatter
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - Feijoada
+
+- type: entity
+  parent: CMMREFoodMain
+  id: RMCMREFoodMainCLF
+  abstract: true
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Consumable/Food/clf_mre.rsi
+
+- type: entity
+  parent: RMCMREFoodMainCLF
+  id: RMCMREFoodCLFMeatPie
+  name: wrapped meat pie
+  description: A wrapped homemade minced meat pie, made with love.
+  components:
+  - type: Food
+    transferAmount: 10
+  - type: Sprite
+    state: clf_meatpie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 20
+        - ReagentId: RMCBread
+          Quantity: 6
+        - ReagentId: TableSalt
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - meaty
+
+- type: entity
+  parent: RMCMREFoodMainCLF
+  id: RMCMREFoodCLFBananaPie
+  name: wrapped banana pie
+  description: A wrapped homemade banana pie, sweet and creamy, made by someone with a sense of humor.
+  components:
+  - type: Food
+    transferAmount: 12
+  - type: Sprite
+    state: clf_pie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCBananaJuice
+          Quantity: 16
+        - ReagentId: RMCBread
+          Quantity: 10
+        - ReagentId: RMCCream
+          Quantity: 5
+        - ReagentId: RMCSugar
+          Quantity: 4
+  - type: FlavorProfile
+    flavors:
+    - banana
+
+- type: entity
+  parent: RMCMREFoodMainCLF
+  id: RMCMREFoodCLFCheesePizza
+  name: wrapped cheese pizza
+  description: A smaller size wrapped pizza, has multiple different kinds of cheese on it.
+  components:
+  - type: Food
+    transferAmount: 10
+  - type: Sprite
+    state: clf_cheesepizza
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCCheese
+          Quantity: 16
+        - ReagentId: RMCBread
+          Quantity: 10
+        - ReagentId: TableSalt
+          Quantity: 4
+  - type: FlavorProfile
+    flavors:
+    - oily
+
+- type: entity
+  parent: RMCMREFoodMainCLF
+  id: RMCMREFoodCLFMushroomPizza
+  name: wrapped mushroom pizza
+  description: A smaller size wrapped pizza, made with creamy sauce and some mushroom slices.
+  components:
+  - type: Food
+    transferAmount: 10
+  - type: Sprite
+    state: clf_mushroompizza
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCMushroom
+          Quantity: 14
+        - ReagentId: RMCBread
+          Quantity: 8
+        - ReagentId: RMCCheese
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 4
+  - type: FlavorProfile
+    flavors:
+    - oily
+
+- type: entity
+  parent: RMCMREFoodMainCLF
+  id: RMCMREFoodCLFVegetablePizza
+  name: wrapped vegetable pizza
+  description: A smaller size wrapped pizza, vegeterian friendly, has some cheese on it tho.
+  components:
+  - type: Food
+    transferAmount: 12
+  - type: Sprite
+    state: clf_vegetablepizza
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCVegetable
+          Quantity: 14
+        - ReagentId: RMCBread
+          Quantity: 8
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: RMCCheese
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 4
+  - type: FlavorProfile
+    flavors:
+    - oily
+
+- type: entity
+  parent: RMCMREFoodMainCLF
+  id: RMCMREFoodCLFMeatPizza
+  name: wrapped meat pizza
+  description: A smaller size wrapped pizza, has some slices of beef and bacon on it.
+  components:
+  - type: Food
+    transferAmount: 12
+  - type: Sprite
+    state: clf_meatpizza
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 14
+        - ReagentId: RMCBread
+          Quantity: 8
+        - ReagentId: RMCTomatoJuice
+          Quantity: 6
+        - ReagentId: RMCCheese
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 4
+  - type: FlavorProfile
+    flavors:
+    - oily
+
+# We-Ya emergency ration
+- type: entity
+  parent: CMMREFoodMain
+  id: RMCMREWYFoodCookieBriquette
+  name: We-Ya brand emergency nutrition briquette
+  description: A brick of a cookie, designed to be stored for prolonged periods of time, in extreme conditions, but still tastes like a compressed buttery cookie.
+  components:
+  - type: Food
+    transferAmount: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/wy_mre.rsi
+    state: cookie_brick_open
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 12
+        - ReagentId: RMCBread
+          Quantity: 12
+        - ReagentId: RMCSugar
+          Quantity: 4
+  - type: FlavorProfile
+    flavors:
+    - nutrition
+    - butter
 
 # Flavors
 - type: flavor
-  id: BonelessPorkRibs
+  id: Pork
   flavorType: Complex
-  description: like boneless pork ribs
+  description: like pork
 
 - type: flavor
-  id: GrilledChicken
+  id: PizzaSquarePepperoni
   flavorType: Complex
-  description: like grilled chicken
+  description: like pepperoni
 
 - type: flavor
-  id: PizzaSquare
+  id: Chili
   flavorType: Complex
-  description: like pizza
+  description: like chili
 
 - type: flavor
-  id: SpaghettiChunks
+  id: NoodleSoup
   flavorType: Complex
-  description: like spaghetti
+  description: like warm soup
 
 - type: flavor
-  id: ChickenTender
+  id: Feijoada
   flavorType: Complex
-  description: like chicken
+  description: like brazil

@@ -5,11 +5,14 @@ using Content.Server.Inventory;
 using Content.Server.Nutrition.Components;
 using Content.Server.Popups;
 using Content.Server.Stack;
+using Content.Shared._RMC14.Food;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
@@ -33,6 +36,7 @@ using Content.Shared.Whitelist;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Nutrition.EntitySystems;
@@ -62,6 +66,8 @@ public sealed class FoodSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     public const float MaxFeedDistance = SharedInteractionSystem.InteractionRange;
+    public readonly ProtoId<ReagentPrototype> BonusToolReagent = "Nutriment";
+    public readonly FixedPoint2 BonusToolReagentAmount = FixedPoint2.New(1);
 
     public override void Initialize()
     {
@@ -103,7 +109,7 @@ public sealed class FoodSystem : EntitySystem
     /// <summary>
     /// Tries to feed the food item to the target entity
     /// </summary>
-    public (bool Success, bool Handled) TryFeed(EntityUid user, EntityUid target, EntityUid food, FoodComponent foodComp)
+    public (bool Success, bool Handled) TryFeed(EntityUid user, EntityUid target, EntityUid food, FoodComponent foodComp, bool usedTool = false)
     {
         //Suppresses eating yourself and alive mobs
         if (food == user || (_mobState.IsAlive(food) && foodComp.RequireDead))
@@ -191,10 +197,12 @@ public sealed class FoodSystem : EntitySystem
             _adminLogger.Add(LogType.Ingestion, LogImpact.Low, $"{ToPrettyString(target):target} is eating {ToPrettyString(food):food} {SharedSolutionContainerSystem.ToPrettyString(foodSolution)}");
         }
 
+        var forceFeedDelay = forceFeed && !usedTool ? foodComp.ForceFeedDelay : foodComp.Delay;
+
         var doAfterArgs = new DoAfterArgs(EntityManager,
             user,
-            forceFeed ? foodComp.ForceFeedDelay : foodComp.Delay,
-            new ConsumeDoAfterEvent(foodComp.Solution, flavors),
+            forceFeedDelay,
+            new ConsumeDoAfterEvent(foodComp.Solution, flavors, usedTool),
             eventTarget: food,
             target: target,
             used: food)
@@ -275,6 +283,13 @@ public sealed class FoodSystem : EntitySystem
         _reaction.DoEntityReaction(args.Target.Value, solution, ReactionMethod.Ingestion);
         _stomach.TryTransferSolution(stomachToUse!.Value.Owner, split, stomachToUse);
 
+        // RMC14 - gives +1 nutriment when anything is eaten with a utensil
+        if (args.ToolBonus)
+        {
+            var bonusSolu = new Solution(BonusToolReagent, BonusToolReagentAmount);
+            _stomach.TryTransferSolution(stomachToUse!.Value.Owner, bonusSolu, stomachToUse);
+        }
+
         var flavors = args.FlavorMessage;
 
         if (forceFeed)
@@ -304,7 +319,10 @@ public sealed class FoodSystem : EntitySystem
             _utensil.TryBreak(utensil, args.User);
         }
 
-        args.Repeat = !forceFeed;
+        if (HasComp<RMCFoodScoopingComponent>(entity))
+            args.Repeat = false;
+        else
+            args.Repeat = !forceFeed;
 
         if (TryComp<StackComponent>(entity, out var stack))
         {
@@ -537,6 +555,9 @@ public sealed class FoodSystem : EntitySystem
     {
         if (!Resolve(uid, ref comp))
             return 0;
+
+        if (HasComp<RMCFoodScoopingComponent>(uid))
+            return 1;
 
         if (!_solutionContainer.TryGetSolution(uid, comp.Solution, out _, out var solution) || solution.Volume == 0)
             return 0;
