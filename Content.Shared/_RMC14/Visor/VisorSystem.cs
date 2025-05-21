@@ -232,6 +232,8 @@ public sealed class VisorSystem : EntitySystem
 
             if (rev.Cancelled)
             {
+                DeactivateVisor(ent, newContained, args.Equipee);
+
                 current = null;
                 _item.VisualsChanged(ent);
                 if (ent.Comp.Action != null)

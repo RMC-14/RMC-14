@@ -64,6 +64,18 @@
 
 - type: entity
   parent: CMStampBase
+  id: CMStampMW
+  name: Military Warden's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-mw
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-mw
+    stampedColor: "#ac0316"
+    stampState: "paper_stamp-mw"
+
+- type: entity
+  parent: CMStampBase
   id: CMStampCMO
   name: chief medical officer's rubber stamp
   components:

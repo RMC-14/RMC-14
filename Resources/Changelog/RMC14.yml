@@ -1,85 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Fixed table to table part deconstruction being too short (1 > 5 seconds).
-    type: Fix
-  - message: Fixed table part to metal deconstruction being too long (1 > 0 seconds).
-    type: Fix
-  - message: Fixed rack deconstruction being too long (1 > 0 seconds).
-    type: Fix
-  id: 1245
-  time: '2025-01-26T04:31:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5450
-- author: Vermidia
-  changes:
-  - message: Lizards can now tail thump and Dionas can now chirp.
-    type: Add
-  id: 1246
-  time: '2025-01-26T04:38:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5463
-- author: Whisper
-  changes:
-  - message: Added Sips-On-Puddles figurine.
-    type: Add
-  id: 1247
-  time: '2025-01-26T04:37:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5449
-- author: to4no_fix
-  changes:
-  - message: Added support for localization of job prefixes
-    type: Fix
-  id: 1248
-  time: '2025-01-26T05:02:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5367
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added the electronics pouch to the combat technician equipment rack.
-    type: Add
-  - message: Added the machete scabbard to the dropship crew equipment rack.
-    type: Add
-  id: 1249
-  time: '2025-01-26T05:27:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5452
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added marine playtime ranks!
-    type: Add
-  id: 1250
-  time: '2025-01-26T05:41:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3797
-- author: Tunguso4ka
-  changes:
-  - message: Fixed not being able to unwrench and pull medical vendors, food vendors,
-      booze-o-mats, chess-o-mats, and rec-vends.
-    type: Fix
-  id: 1251
-  time: '2025-01-26T05:54:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5448
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the dropship incoming and crash sounds being too quiet compared
-      to the explosion sound.
-    type: Fix
-  id: 1252
-  time: '2025-01-26T05:58:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5441
-- author: blueDev2
-  changes:
-  - message: Boiler abilities Acid Shroud and Bombard can no longer be used at the
-      same time.
-    type: Fix
-  id: 1253
-  time: '2025-01-26T06:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3752
-- author: CyberTropic
-  changes:
-  - message: Added compact and tactical nailguns. Tactical nailgun comes with the
-      essential engineer set. These must be used to repair a barricade if it is too
-      damaged, as welders won't be able to anymore.
-    type: Add
-  id: 1254
-  time: '2025-01-26T06:05:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5028
 - author: Dutch-VanDerLinde
   changes:
   - message: Added new MOU53 sounds
@@ -5336,5 +5255,79 @@
   id: 1747
   time: '2025-05-20T03:38:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6441
+- author: DummeHytteOst
+  changes:
+  - message: You can now deconstruct rollerbeds with a wrench.
+    type: Add
+  - message: Rollerbeds no longer drop upstream metal sheets when destroyed.
+    type: Fix
+  id: 1748
+  time: '2025-05-20T12:37:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6370
+- author: Vermidia
+  changes:
+  - message: Fixed skill-locked visors not deactivating correctly on equip.
+    type: Fix
+  id: 1749
+  time: '2025-05-21T03:32:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6503
+- author: Vermidia
+  changes:
+  - message: Fixed arachnids not making a sound on infect.
+    type: Fix
+  id: 1750
+  time: '2025-05-21T03:33:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6502
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Civilian survivors now spawn with random outfits.
+    type: Tweak
+  id: 1751
+  time: '2025-05-21T03:49:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6405
+- author: AlexisMoonlight
+  changes:
+  - message: Added MW stamp.
+    type: Add
+  id: 1752
+  time: '2025-05-21T03:51:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6500
+- author: Dygon
+  changes:
+  - message: The Praetorian's acid ball can once again only hit a maximum of four
+      projectiles on the same target.
+    type: Fix
+  id: 1753
+  time: '2025-05-21T03:57:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6497
+- author: Dygon
+  changes:
+  - message: Fixed cutting a cheese wheel only giving you 4 wedges instead of 6.
+    type: Fix
+  id: 1754
+  time: '2025-05-21T03:59:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6498
+- author: Tyzemol
+  changes:
+  - message: Fixed Berserker Ravager Apprehend bonus movement speed being removed
+      after an attack instead of lasting for the full 5 seconds.
+    type: Fix
+  id: 1755
+  time: '2025-05-21T04:03:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6422
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed weeds being able to spread onto fire tiles.
+    type: Fix
+  id: 1756
+  time: '2025-05-21T04:07:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6471
+- author: noctyrnal
+  changes:
+  - message: Changed the hitbox of filing cabinets to make them less obtrusive.
+    type: Tweak
+  id: 1757
+  time: '2025-05-21T04:06:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6461
 Name: RMC14
 Order: -1
