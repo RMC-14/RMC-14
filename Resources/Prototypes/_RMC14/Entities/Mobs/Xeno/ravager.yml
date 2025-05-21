@@ -197,6 +197,7 @@
     plasmaRegenOnWeeds: 0
   - type: XenoCripplingStrike
     activateText: rmc-xeno-apprehend-activate
+    deactivateText: rmc-xeno-apprehend-deactivate
     expireText: rmc-xeno-apprehend-expire
     auraColor: "#522020"
     damageMult: 1

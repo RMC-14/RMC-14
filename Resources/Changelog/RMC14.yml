@@ -1,62 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the dropship incoming and crash sounds being too quiet compared
-      to the explosion sound.
-    type: Fix
-  id: 1252
-  time: '2025-01-26T05:58:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5441
-- author: blueDev2
-  changes:
-  - message: Boiler abilities Acid Shroud and Bombard can no longer be used at the
-      same time.
-    type: Fix
-  id: 1253
-  time: '2025-01-26T06:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3752
-- author: CyberTropic
-  changes:
-  - message: Added compact and tactical nailguns. Tactical nailgun comes with the
-      essential engineer set. These must be used to repair a barricade if it is too
-      damaged, as welders won't be able to anymore.
-    type: Add
-  id: 1254
-  time: '2025-01-26T06:05:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5028
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added new MOU53 sounds
-    type: Tweak
-  id: 1255
-  time: '2025-01-26T06:08:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5422
-- author: DummeHytteOst
-  changes:
-  - message: Fixed M4SPR A19 incendiary rounds having 95 accuracy instead of 105.
-    type: Fix
-  - message: Fixed incendiary slugs having 20 AP instead of 5, and regular buckshot
-      having 0 AP instead of 5.
-    type: Fix
-  id: 1256
-  time: '2025-01-26T06:47:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5328
-- author: SG6732
-  changes:
-  - message: Updated autolathe with new recipes.
-    type: Add
-  - message: Updated T-ray Scanner with CM sprites.
-    type: Add
-  id: 1257
-  time: '2025-01-26T06:53:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5341
-- author: SG6732
-  changes:
-  - message: Added the UNMC decal. Semper Fi!
-    type: Add
-  id: 1258
-  time: '2025-01-26T07:00:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5435
 - author: Hyenh
   changes:
   - message: Added a lighter with an USA flag.
@@ -5332,5 +5274,66 @@
   id: 1754
   time: '2025-05-21T03:59:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6498
+- author: Tyzemol
+  changes:
+  - message: Fixed Berserker Ravager Apprehend bonus movement speed being removed
+      after an attack instead of lasting for the full 5 seconds.
+    type: Fix
+  id: 1755
+  time: '2025-05-21T04:03:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6422
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed weeds being able to spread onto fire tiles.
+    type: Fix
+  id: 1756
+  time: '2025-05-21T04:07:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6471
+- author: noctyrnal
+  changes:
+  - message: Changed the hitbox of filing cabinets to make them less obtrusive.
+    type: Tweak
+  id: 1757
+  time: '2025-05-21T04:06:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6461
+- author: noctyrnal
+  changes:
+  - message: Added loadouts to UNMC Synthetics.
+    type: Add
+  id: 1758
+  time: '2025-05-21T13:52:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6349
+- author: Timemaster99
+  changes:
+  - message: Fixed tactical compact nailguns not fitting into tool storages.
+    type: Fix
+  id: 1759
+  time: '2025-05-21T13:53:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6505
+- author: J C Denton
+  changes:
+  - message: PMC corpse spawners on Hybrisa Biogenom and Cave Camp, Solaris Lambda
+      and ETA labs.
+    type: Add
+  - message: Corporate Supervisor corpse spawners on 624 Hydro Nightmare insert, Northwest
+      colony streets on Hybrisa.
+    type: Add
+  id: 1760
+  time: '2025-05-21T13:56:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6496
+- author: noctyrnal
+  changes:
+  - message: Added TSEPA personnel, Hybrisa's policing force, and their respective
+      gear - Designed for the PVE server.
+    type: Add
+  - message: Added new colony jobs for PVE.
+    type: Add
+  - message: The pistol belt has new urban camo.
+    type: Tweak
+  - message: Added a spearhead revolver belt.
+    type: Tweak
+  id: 1761
+  time: '2025-05-21T14:05:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6414
 Name: RMC14
 Order: -1

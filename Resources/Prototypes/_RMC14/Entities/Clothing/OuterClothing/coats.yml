@@ -370,6 +370,12 @@
     foldedEquippedPrefix: jacket
 
 - type: entity
+  parent: CMCoatCOBomber
+  id: RMCCoatBomber
+  name: brown bomber jacket
+  description: A well-worn leather bomber jacket.
+
+- type: entity
   parent: CMCoatCO
   id: CMCoatCOFormalBlack
   name: commanding officer gray dress jacket

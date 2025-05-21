@@ -134,6 +134,7 @@
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #      - # TODO circuit board
       components:
       - Welder
@@ -176,6 +177,7 @@
       - RMCExplosiveBreachingCharge
       - RodMetal1
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #     - # TODO circuit board, stock parts
       components:
       - Welder
@@ -241,6 +243,7 @@
       - CMFireExtinguisherPortable
       - RMCShellShotgun
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #      - # TODO circuit board
       components:
       - Welder
@@ -604,7 +607,7 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -632,7 +635,7 @@
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
     slots:
     - suitStorage
     - belt
@@ -708,11 +711,11 @@
           - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
       Desert: _RMC14/Objects/Clothing/Belt/holster_pistol/desert.rsi
       Snow: _RMC14/Objects/Clothing/Belt/holster_pistol/snow.rsi
-      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
-      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/urban.rsi
 
 - type: Tag
   id: RMCGeneralPistolHolster
@@ -774,6 +777,38 @@
 
 - type: Tag
   id: RMCGeneralRevolverHolster
+
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCBeltHolsterRevolverSpearheadFill
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m44r # TODO RMC14 per-gun underlay
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+      state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoader357
+      amount: 2
+    - id: RMCSpeedLoader357Hollowpoint
+      amount: 3
+    - id: RMCWeaponRevolverSpearhead
 
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
