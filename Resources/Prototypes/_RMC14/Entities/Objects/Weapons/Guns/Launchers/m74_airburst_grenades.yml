@@ -146,6 +146,7 @@
       path: /Audio/Effects/gen_hit.ogg
   - type: ClusterLimitHits
     limit: 0
+    ignoreFirstHit: true
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: ContainerContainer

@@ -29,13 +29,14 @@
       factions:
       - Survivor
     - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
 
 - type: startingGear
   id: RMCGearSurvivorDoctor
   equipment:
     mask: CMMaskSterile
     ears: CMHeadsetColony
-    jumpsuit: CMJumpsuitLiaison
+    jumpsuit: CMJumpsuitLiaisonBlue
     outerClothing: RMCLabcoat
     gloves: CMHandsLatex
     shoes: RMCShoesLaceup

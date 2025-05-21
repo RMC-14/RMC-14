@@ -197,7 +197,6 @@
     - ActionXenoGenerateEggs
     - ActionXenoRetrieveEgg
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-eggsac-name
     description: rmc-xeno-eggsac-description
@@ -212,4 +211,5 @@
     distance: 2.5
   - type: XenoGenerateEggs
   - type: XenoEggSustainer
+  - type: XenoHidden
 

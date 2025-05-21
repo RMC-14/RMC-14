@@ -314,6 +314,7 @@
       - Multitool
       - PowerCell
       - RMCNailgunCompact
+      - RMCNailgunTactical
       components:
       - Welder
       - PowerCell
@@ -340,6 +341,7 @@
         - Multitool
         - PowerCell
         - RMCNailgunCompact
+        - RMCNailgunTactical
         components:
         - Welder
         - PowerCell
@@ -535,3 +537,14 @@
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalBeret
       - id: CMMRE # TODO RMC14 TSE ORP ration
+
+- type: entity
+  parent: CMWebbingPouch
+  id: RMCWebbingPouchForecon
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMMarineFlask
+      # - id: RMCFacepaint # TODO FACEPAINT
+      - id: CMMRE

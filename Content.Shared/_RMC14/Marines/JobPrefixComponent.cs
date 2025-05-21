@@ -7,4 +7,10 @@ public sealed partial class JobPrefixComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public LocId Prefix = string.Empty;
+
+    /// <summary>
+    /// Additional prefix that will be appended to the main prefix
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public LocId? AdditionalPrefix;
 }

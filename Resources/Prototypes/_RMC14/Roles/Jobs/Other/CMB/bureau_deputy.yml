@@ -33,6 +33,7 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-deputy
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: entity
