@@ -66,3 +66,5 @@ command-description-weedkiller = Runs weed killer on the current location's area
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
 
 command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.
+
+command-description-rmcresetahelptracking = Resets all data about tracked AHelp conversations on the Discord. Useful for when AHelps are not showing up on the Discord relay properly.

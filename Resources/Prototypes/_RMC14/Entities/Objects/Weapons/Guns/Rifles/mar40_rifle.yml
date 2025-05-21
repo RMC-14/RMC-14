@@ -72,6 +72,7 @@
           tags:
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
+          - RMCAttachmentRecoilCompensator
           - RMCM5Bayonet
         random:
           - RMCAttachmentExtendedBarrel
@@ -95,9 +96,16 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentFlamer
         random:
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00

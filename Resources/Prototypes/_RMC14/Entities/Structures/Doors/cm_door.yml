@@ -159,6 +159,9 @@
   - type: Corrodible
     isCorrodible: true
     timeToApply: 4
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    percentageDamage: 0.25
 
 - type: entity
   abstract: true

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: ColMarTechBase
   id: ColMarTechIntelGear
   name: ColMarTech intelligence officer gear rack
@@ -90,10 +90,10 @@
         points: 15
     - name: Helmet Optics
       entries:
-#      - id: TODO RMC14 medical helmet optic
-#        points: 5
-#      - id: TOOD RMC14 welding visor
-#        points: 5
+      - id: RMCVisorMedical
+        points: 5
+      - id: RMCVisorWelding
+        points: 5
       - id: RMCVisorNightVision
         points: 25
         recommended: true

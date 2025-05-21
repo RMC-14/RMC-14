@@ -6,6 +6,8 @@
     whitelist:
       components:
       - Xeno
+  - type: MeleeWeapon
+    angle: 0
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
@@ -150,6 +152,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
+    size: Large
   - type: Tag
     tags:
     - RMCCeremonialSword

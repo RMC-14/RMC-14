@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -18,6 +19,7 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deaf = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
@@ -58,6 +60,7 @@ public sealed class XenoScreechSystem : EntitySystem
         foreach (var receiver in _marines)
         {
             Stun(xeno, receiver, xeno.Comp.StunTime, true);
+            Deafen(xeno, receiver, xeno.Comp.FarDeafTime);
         }
 
         _marines.Clear();
@@ -66,6 +69,7 @@ public sealed class XenoScreechSystem : EntitySystem
         foreach (var receiver in _marines)
         {
             Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
+            Deafen(xeno, receiver, xeno.Comp.CloseDeafTime);
         }
 
         _parasites.Clear();
@@ -92,5 +96,16 @@ public sealed class XenoScreechSystem : EntitySystem
             _stun.TryStun(receiver, time, true);
         else
             _stun.TryParalyze(receiver, time, true);
+    }
+
+    private void Deafen(EntityUid xeno, EntityUid receiver, TimeSpan time)
+    {
+        if (_mobState.IsDead(receiver))
+            return;
+
+        if (!_examineSystem.InRangeUnOccluded(xeno, receiver))
+            return;
+
+        _deaf.TryDeafen(receiver, time, true);
     }
 }

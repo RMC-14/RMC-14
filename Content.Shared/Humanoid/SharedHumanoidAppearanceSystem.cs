@@ -19,6 +19,7 @@ using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
+using Content.Shared._RMC14.Humanoid;
 
 namespace Content.Shared.Humanoid;
 
@@ -109,6 +110,15 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         var identity = Identity.Entity(uid, EntityManager);
         var species = GetSpeciesRepresentation(component.Species).ToLower();
         var age = GetAgeRepresentation(component.Species, component.Age);
+
+        if (TryComp<RMCHumanoidRepresentationOverrideComponent>(uid, out var humanoidRepComp))
+        {
+            if (humanoidRepComp.Species != null) // RMC14 humanoid representation override comp
+                species = Loc.GetString(humanoidRepComp.Species).ToLower();
+
+            if (humanoidRepComp.Age != null)
+                age = Loc.GetString(humanoidRepComp.Age).ToLower();
+        }
 
         args.PushText(Loc.GetString("humanoid-appearance-component-examine", ("user", identity), ("age", age), ("species", species)));
     }

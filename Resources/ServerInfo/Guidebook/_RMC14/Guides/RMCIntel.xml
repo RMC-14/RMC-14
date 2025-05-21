@@ -27,7 +27,7 @@
   <Box>
     <GuideEntityEmbed Entity="CMXenoDefender" />
     <GuideEntityEmbed Entity="CMXenoWarrior" />
-    <GuideEntityEmbed Entity="CMXenoCrusher" />
+    <GuideEntityEmbed Entity="RMCXenoCrusher" />
     <GuideEntityEmbed Entity="CMXenoQueen" />
   </Box>
 

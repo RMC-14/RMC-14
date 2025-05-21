@@ -1,7 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
 using Content.Server.Damage.Components;
-using Content.Server.IgnitionSource;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Systems;
 using Content.Shared._RMC14.Atmos;
@@ -13,8 +12,8 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Database;
-using Content.Shared.IgnitionSource;
 using Content.Shared.FixedPoint;
+using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Physics;
@@ -425,7 +424,7 @@ namespace Content.Server.Atmos.EntitySystems
             _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
-            uid.SpawnTimer(2000, () =>
+            uid.SpawnTimer(1000, () =>
             {
                 flammable.Resisting = false;
                 Dirty(uid, flammable);

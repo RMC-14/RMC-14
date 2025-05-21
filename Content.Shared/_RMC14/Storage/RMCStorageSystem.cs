@@ -94,7 +94,8 @@ public sealed class RMCStorageSystem : EntitySystem
     private void OnStorageFillItem(Entity<StorageComponent> storage, ref CMStorageItemFillEvent args)
     {
         var tries = 0;
-        while (!_storage.CanInsert(storage, args.Item, null, out var reason) &&
+        // Ignore stackables because SharedStorageSystem.OnAttemptInsert does not stack items.
+        while (!_storage.CanInsert(storage, args.Item, null, out var reason, ignoreStacks: true) &&
                reason == "comp-storage-insufficient-capacity" &&
                tries < 3)
         {
@@ -363,6 +364,34 @@ public sealed class RMCStorageSystem : EntitySystem
             {
                 item = stored;
                 lastLocation = location;
+            }
+        }
+
+        return item != default;
+    }
+
+    public bool TryGetFirstItem(Entity<StorageComponent?> storage, out EntityUid item)
+    {
+        item = default;
+        if (!Resolve(storage, ref storage.Comp, false))
+            return false;
+
+        ItemStorageLocation? firstLocation = null;
+        foreach (var (stored, location) in storage.Comp.StoredItems)
+        {
+            if (firstLocation is not { } first ||
+                first.Position.Y > location.Position.Y)
+            {
+                item = stored;
+                firstLocation = location;
+                continue;
+            }
+
+            if (first.Position.Y == location.Position.Y &&
+                first.Position.X < location.Position.X)
+            {
+                item = stored;
+                firstLocation = location;
             }
         }
 

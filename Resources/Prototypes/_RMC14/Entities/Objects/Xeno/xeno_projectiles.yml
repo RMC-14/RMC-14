@@ -405,6 +405,7 @@
   - type: ProjectileGrenade
     fillPrototype: XenoAcidBallSpitProjectile
     capacity: 14
+    directHit: false
   - type: ProjectileMaxRange
     max: 5
     delete: false
@@ -438,4 +439,4 @@
   - type: RMCProjectileAccuracy
     accuracy: 185
   - type: XenoHookOnHit
- 
+

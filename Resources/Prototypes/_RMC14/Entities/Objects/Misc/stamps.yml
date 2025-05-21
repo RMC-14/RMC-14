@@ -64,6 +64,18 @@
 
 - type: entity
   parent: CMStampBase
+  id: CMStampMW
+  name: Military Warden's rubber stamp
+  components:
+  - type: Sprite
+    state: stamp-mw
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-mw
+    stampedColor: "#ac0316"
+    stampState: "paper_stamp-mw"
+
+- type: entity
+  parent: CMStampBase
   id: CMStampCMO
   name: chief medical officer's rubber stamp
   components:
@@ -150,7 +162,7 @@
   parent: CMStampBase
   id: CMStampMarine
   name: marine rubber stamp
-  suffix: Admin
+  suffix: Admin, UNMC
   components:
   - type: Sprite
     state: stamp-marine
@@ -163,7 +175,7 @@
   parent: CMStampBase
   id: CMStampCMB
   name: colony marshal bureau rubber stamp
-  suffix: Admin
+  suffix: Admin, CMB
   components:
   - type: Sprite
     state: stamp-cmb
@@ -176,7 +188,7 @@
   parent: CMStampBase
   id: CMStampProvost
   name: provost rubber stamp
-  suffix: Admin
+  suffix: Admin, Provost
   components:
   - type: Sprite
     state: stamp-provost # update sprite
@@ -184,3 +196,55 @@
     stampedName: stamp-component-stamped-name-cm-provost
     stampedColor: "#cb0000"
     stampState: "paper_stamp-provost"
+
+- type: entity
+  parent: CMStampBase
+  id: RMCStampCLF
+  name: colony liberation front rubber stamp
+  suffix: Admin, CLF
+  components:
+  - type: Sprite
+    state: stamp-clf
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-clf
+    stampedColor: "#6B6B6B"
+    stampState: "paper_stamp-clf"
+
+- type: entity
+  parent: CMStampBase
+  id: RMCStampSPP
+  name: socialist progressive peoples rubber stamp
+  suffix: Admin, SPP
+  components:
+  - type: Sprite
+    state: stamp-spp
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-spp
+    stampedColor: "#A70707"
+    stampState: "paper_stamp-spp"
+
+- type: entity
+  parent: CMStampBase
+  id: RMCStampTSE
+  name: three suns empire rubber stamp
+  suffix: Admin, TSE
+  components:
+  - type: Sprite
+    state: stamp-tse
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-tse
+    stampedColor: "#BE601B"
+    stampState: "paper_stamp-tse"
+
+- type: entity
+  parent: CMStampBase
+  id: RMCStampFreePress
+  name: free press rubber stamp
+  suffix: Admin, Press
+  components:
+  - type: Sprite
+    state: stamp-free-press
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-free-press
+    stampedColor: "#1e5bd2"
+    stampState: "paper_stamp-free-press"
