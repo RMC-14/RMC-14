@@ -371,3 +371,4 @@
   - type: RMCMobStateDrawDepth
     drawDepths:
       Dead: DeadMobs
+  - type: IVDripTarget
