@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Lizards can now tail thump and Dionas can now chirp.
-    type: Add
-  id: 1246
-  time: '2025-01-26T04:38:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5463
-- author: Whisper
-  changes:
-  - message: Added Sips-On-Puddles figurine.
-    type: Add
-  id: 1247
-  time: '2025-01-26T04:37:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5449
 - author: to4no_fix
   changes:
   - message: Added support for localization of job prefixes
@@ -5334,5 +5320,19 @@
   id: 1748
   time: '2025-05-20T12:37:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6370
+- author: Vermidia
+  changes:
+  - message: Fixed skill-locked visors not deactivating correctly on equip.
+    type: Fix
+  id: 1749
+  time: '2025-05-21T03:32:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6503
+- author: Vermidia
+  changes:
+  - message: Fixed arachnids not making a sound on infect.
+    type: Fix
+  id: 1750
+  time: '2025-05-21T03:33:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6502
 Name: RMC14
 Order: -1
