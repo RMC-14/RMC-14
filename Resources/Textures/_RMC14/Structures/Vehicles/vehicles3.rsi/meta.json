@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/vehicles",
+  "size": {
+    "x": 128,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "ambulance"
+    },
+    {
+      "name": "ambulance_f  "
+    },
+    {
+      "name": "armored_truck_blue"
+    },
+    {
+      "name": "armored_truck_blue_f"
+    },
+    {
+      "name": "armored_truck_blue_loaded"
+    },
+    {
+      "name": "armored_truck_blue_loaded_f"
+    },
+    {
+      "name": "armored_truck_teal_loaded"
+    },
+    {
+      "name": "armored_truck_teal_loaded_f"
+    },
+    {
+      "name": "armored_truck_white_loaded"
+    },
+    {
+      "name": "armored_truck_white_loaded_f"
+    },
+    {
+      "name": "armored_truck_wy_black"
+    },
+    {
+      "name": "armored_truck_wy_black_f"
+    },
+    {
+      "name": "armored_truck_wy_black_loaded",
+      "delays": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "armored_truck_wy_black_loaded_f",
+      "delays": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "armored_truck_wy_white"
+    },
+    {
+      "name": "armored_truck_wy_white_f"
+    },
+    {
+      "name": "armored_truck_wy_white_loaded",
+      "delays": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "armored_truck_wy_white_loaded_f",
+      "delays": [
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "box_van_bluegrey"
+    },
+    {
+      "name": "box_van_bluegrey_f"
+    },
+    {
+      "name": "box_van_red"
+    },
+    {
+      "name": "box_van_red_f"
+    },
+    {
+      "name": "box_van_mining"
+    },
+    {
+      "name": "box_van_mining_f"
+    },
+    {
+      "name": "box_van_maintenanceblue",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "box_van_maintenanceblue_f",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

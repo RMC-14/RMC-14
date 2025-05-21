@@ -1,0 +1,44 @@
+﻿- type: entity
+  parent: RMCPropVehicleBase
+  id: RMCPropVehicleLargeBase
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,1.6,0.5"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/vehicles3.rsi
+    offset: 1.5, 0.5
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleAmbulance
+  name: ambulance
+  description: It's locked and seems to be broken down, forget driving this.
+  components:
+  - type: Sprite
+    state: ambulance
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruck
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  components:
+  - type: Sprite
+    state: armored_truck_blue
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckFilled
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded
+  components:
+  - type: Sprite
+    state: armored_truck_blue_loaded
