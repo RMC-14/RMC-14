@@ -50,8 +50,8 @@
   - !type:FoodHasReagent # 5 +- 2 mayo
     reagent: Mayo
     count:
-      min: 3
-      max: 7
+     min: 3
+     max: 7
   - !type:LastElementHasTags # last bun
     tags:
     - Bun
