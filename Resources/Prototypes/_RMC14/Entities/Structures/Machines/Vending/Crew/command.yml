@@ -329,7 +329,10 @@
         points: 5
       - id: RMCFlashlight
         points: 1
-       #TODO Synthetic Reset Key
+      - id: RMCFlashlight
+        points: 1
+      - id: RMCSynthResetKey
+        points: 10
 
 # Commanding Officer #
 
@@ -524,6 +527,11 @@
       entries:
       - id: RMCD50WinterWyvernBeltFilled
       - id: RMCMatebaBeltFilled
+    - name: Ceremonial Weapon
+      choices: { CMCeremonial: 1 }
+      entries:
+      - id: RMCScabbardCeremonialFilled
+        name: Commander's Ceremonial Sabre
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
@@ -558,8 +566,6 @@
         points: 20
     - name: Special Ammunition
       entries:
-      - id: RMCMagazineRifleM54CIncendiary
-        points: 65
       - id: RMCMagazineRifleM54CRubber
         points: 10
       - id: RMCBoxShotgunBeanbag
@@ -1055,7 +1061,8 @@
       entries:
       - id: CMHeadsetEngineer
         amount: 15
-      # TODO 15 Synthetic Reset Key
+      - id: RMCSynthResetKey
+        amount: 15
     # ////////////////////////////////////
     # Quartermaster
     # ////////////////////////////////////

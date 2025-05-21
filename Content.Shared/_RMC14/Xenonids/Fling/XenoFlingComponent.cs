@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Content.Shared.Damage;
+﻿using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -24,6 +23,9 @@ public sealed partial class XenoFlingComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SlowTime = TimeSpan.FromSeconds(8);
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectPunch";

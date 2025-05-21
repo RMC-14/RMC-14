@@ -11,6 +11,9 @@
   description: A huge, nasty red alien with enormous scythed claws.
   abstract: true
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRavager
   - type: GhostRole
     name: cm-job-name-xeno-ravager
   - type: Sprite
@@ -120,6 +123,10 @@
     value: 0.7
   - type: TantrumSpeedBuff
   - type: XenoCruelty
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: ravager
 
 - type: entity
   parent: RMCXenoRavagerBase
@@ -161,7 +168,6 @@
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
   - type: Xeno
-    role: CMXenoRavager
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -171,7 +177,6 @@
     - ActionXenoClothesline
     - ActionXenoEviscerate
     - ActionXenoDevolve
-    hidden: true
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -180,9 +185,7 @@
   - type: CMArmor
     xenoArmor: 30
     explosionArmor: 80
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2.5
-    baseSprintSpeed: 4.1
+  - type: MovementSpeedModifier # This is not actually faster in 13 at base if you test it
   - type: XenoShield
   - type: XenoStrain
     name: rmc-xeno-berserker-name
@@ -194,6 +197,7 @@
     plasmaRegenOnWeeds: 0
   - type: XenoCripplingStrike
     activateText: rmc-xeno-apprehend-activate
+    deactivateText: rmc-xeno-apprehend-deactivate
     expireText: rmc-xeno-apprehend-expire
     auraColor: "#522020"
     damageMult: 1
@@ -212,7 +216,7 @@
     - groups:
         Brute: 70
     rangeAtRageLevels: [1.5, 1.5, 1.5, 2.5, 2.5]
-    windupReductionAtRageLevels: [0, 0.2, 4, 6, 10]
+    windupReductionAtRageLevels: [0, 0.2, 0.4, 0.6, 1]
   - type: XenoFling # TODO RMC14 target head
     range: 1.15
     enragedRange: 0.8
@@ -223,3 +227,4 @@
     damage:
       groups:
         Brute: 20
+  - type: XenoHidden

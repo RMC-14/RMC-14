@@ -111,7 +111,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         if (text.Length > _characterLimit)
             text = text[.._characterLimit].Trim();
 
-        AnnounceSigned(args.Actor, text);
+        AnnounceSigned(args.Actor, text, name: ent.Comp.AnnounceName);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
@@ -223,11 +223,13 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     /// <param name="sender">EntityUid of sender, for job and name params.</param>
     /// <param name="message">The content of the announcement.</param>
     /// <param name="author">The author of the message, Command by default.</param>
+    /// <param name="name">The name to sign the message with, defaults to the name of <see cref="author"/>.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
     public void AnnounceSigned(
         EntityUid sender,
         string message,
         string? author = null,
+        string? name = null,
         SoundSpecifier? sound = null
     )
     {
@@ -235,7 +237,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
             return;
 
         author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
-        var name = _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
+        name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
         // TODO RMC14 receivers

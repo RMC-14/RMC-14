@@ -71,6 +71,9 @@
   - type: StaticPrice
     price: 50
   - type: ItemSlots
+  - type: XenoToggleChargingDamage
+    stageLoss: 1
+    destroy: true
 
 - type: entity
   parent: RMCCrateOpenableBase

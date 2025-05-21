@@ -804,6 +804,18 @@
     },
     {
       "name": "morpher"
+    },
+    {
+      "name": "spec_demo"
+    },
+    {
+      "name": "spec_grenadier"
+    },
+    {
+      "name": "spec_sniper"
+    },
+    {
+      "name": "spec_anti_materiel_sniper"
     }
   ]
 }

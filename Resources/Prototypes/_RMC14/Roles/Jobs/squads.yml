@@ -224,7 +224,7 @@
     - Helmet
     - Goggles
     - Armor
-    radio: RoyalMarine
+    radio: TSE
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_twe
@@ -257,3 +257,40 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_pvl
+
+- type: entity
+  parent: SquadBase
+  id: SquadFORECON
+  name: Reconnaissance
+  components:
+  - type: SquadTeam
+    color: "#32CD32"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: MarineForecon
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_forecon
+    canSupplyDrop: false
+    group: FORECON
+  - type: Tag
+    tags:
+    - RMCSquadFORECON
+
+- type: Tag
+  id: RMCSquadFORECON
+
+- type: entity
+  parent: SquadBase
+  id: SquadSOF
+  name: SOF
+  components:
+  - type: SquadTeam
+    color: "#400000"
+    radio: null
+    accessLevels: []
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_sof

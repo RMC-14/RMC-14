@@ -1,0 +1,19 @@
+<Document>
+  #Parasite
+  <GuideEntityEmbed Entity="CMXenoParasite"/>
+  ##How to play as a Parasite
+  Parasites are unique from regular Xenonid gameplay, they are expendable and help infect captured hosts, or can attempt to hide under objects to catch unsuspecting victims.
+
+  To become a parasite you can use the Find Parasite ability as a ghost or click on an egg. If you have recently died you will have to wait to become one.
+
+  Once you have become a parasite, you can walk to the front and wait for your sisters to drag a cap. To infect somebody on the ground, you must use [color=yellow][bold][keybind="Use"][/bold][/color] on them and wait for the action to complete.
+
+  Every successful infection you get will let you become a parasite again without the need to wait. You can also infect standing targets by leaping onto them within a one tile range. If you leap from far away it won't infect them, only briefly stunning them and leaving you exposed.
+
+  ##Non-Player Parasites
+  Drones, carriers and hivelords can all pick up uncontrolled parasites and use them to infect captures in the same way by using [color=yellow][bold][keybind="Use"][/bold][/color] on them while they are held.
+
+  - If your target is nested on a wall then you may need to walk closer to it with a parasite in hand and use [color=yellow][bold][keybind="UIRightClick"/][/bold][/color] to bring up the context menu, then [color=yellow][bold][keybind="Use"][/bold][/color] the target.
+
+  Uncontrolled parasites will die if not held by a sister and left for 30 seconds. Make sure to keep them in safe spots such as on a host or in an egg morpher. You can also put them inside empty eggs to refill them or fill resin holes as a trap.
+</Document>

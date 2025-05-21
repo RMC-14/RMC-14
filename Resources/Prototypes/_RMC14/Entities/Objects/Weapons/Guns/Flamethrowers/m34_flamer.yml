@@ -93,6 +93,23 @@
           False: { visible: false }
 
 - type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerUnloaded
+  suffix: Unloaded
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: null
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          components:
+          - RMCFlamerTank
+
+- type: entity
   parent: BaseItem
   id: RMCTankFlamer
   name: incinerator tank

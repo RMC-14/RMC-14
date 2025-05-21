@@ -1,0 +1,10 @@
+# TSEPA
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitTSEPA
+  name: tsepa uniform
+  description: The standard uniform of a TSEPA officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/TSEPA/standard.rsi

@@ -94,7 +94,7 @@
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPHeavySpecialist
     gloves: RMCHandsVeteranSPP
-    shoes: CMBootsBlackFilled
+    shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponLMGM60 # TODO RMC14 : Replace with PKP
     id: RMCIDSPP
     belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver

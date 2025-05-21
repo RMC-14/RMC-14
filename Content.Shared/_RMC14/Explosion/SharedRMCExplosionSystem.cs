@@ -3,6 +3,7 @@ using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Prototypes;
@@ -143,7 +144,9 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             _dazed.TryDaze(ent, knockoutTime * 2, stutter: true);
             _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(ent, BlindKey, ent.Comp.BlurTime, false);
 
-            _throwing.TryThrow(ent, dir, (float)severity);
+            if (!HasComp<XenoNestedComponent>(ent))
+                _throwing.TryThrow(ent, dir, (float) severity);
+
             return;
         }
 
