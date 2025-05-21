@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Fixed water-filled reagent tanks not showing it's contents and always
-      being named a water tank.
-    type: Fix
-  - message: Fixed the CMP revolver not using mono audio, causing it to be VERY LOUD.
-    type: Fix
-  id: 1271
-  time: '2025-01-28T20:37:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5478
 - author: Vermidia
   changes:
   - message: Fixed xeno slowdowns from different abilities stacking.
@@ -5379,5 +5369,12 @@
   id: 1773
   time: '2025-05-21T18:11:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6513
+- author: DrSmugleaf
+  changes:
+  - message: Add volume sliders for hijack themes and cassettes in Options > Audio.
+    type: Add
+  id: 1774
+  time: '2025-05-21T18:13:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6514
 Name: RMC14
 Order: -1
