@@ -120,6 +120,126 @@
           0.1
         ]
       ]
+    },
+    {
+      "name": "box_van_maintenancewhite",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "box_van_maintenancewhite_f",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "box_van_white"
+    },
+    {
+      "name": "box_van_white_f"
+    },
+    {
+      "name": "box_van_pizza"
+    },
+    {
+      "name": "box_van_pizza_f"
+    },
+    {
+      "name": "longtruck_blue"
+    },
+    {
+      "name": "longtruck_blue_f"
+    },
+    {
+      "name": "longtruck_brown"
+    },
+    {
+      "name": "longtruck_brown_f"
+    },
+    {
+      "name": "longtruck_donk"
+    },
+    {
+      "name": "longtruck_donk_f"
+    },
+    {
+      "name": "longtruck_mining"
+    },
+    {
+      "name": "longtruck_mining_f"
+    },
+    {
+      "name": "longtruck_red"
+    },
+    {
+      "name": "longtruck_red_f"
+    },
+    {
+      "name": "longtruck_wy_blue"
+    },
+    {
+      "name": "longtruck_wy_blue_f"
+    },
+    {
+      "name": "small_truck_blue"
+    },
+    {
+      "name": "small_truck_blue_f"
+    },
+    {
+      "name": "small_truck_blue_cargo"
+    },
+    {
+      "name": "small_truck_blue_cargo_f"
+    },
+    {
+      "name": "small_truck_brown"
+    },
+    {
+      "name": "small_truck_brown_f"
+    },
+    {
+      "name": "small_truck_brown_cargo"
+    },
+    {
+      "name": "small_truck_brown_cargo_f"
+    },
+    {
+      "name": "small_truck_brown_cargobarrels"
+    },
+    {
+      "name": "small_truck_brown_cargobarrels_f"
+    },
+    {
+      "name": "small_truck_garbage"
+    },
+    {
+      "name": "small_truck_garbage_f"
+    },
+    {
+      "name": "small_truck_medical"
+    },
+    {
+      "name": "small_truck_medical_f"
+    },
+    {
+      "name": "small_truck_mining"
+    },
+    {
+      "name": "small_truck_mining_f"
+    },
+    {
+      "name": "small_truck_red"
+    },
+    {
+      "name": "small_truck_red_f"
     }
   ]
 }

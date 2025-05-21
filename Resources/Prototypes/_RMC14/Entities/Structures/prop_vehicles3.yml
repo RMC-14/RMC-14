@@ -26,7 +26,17 @@
 
 - type: entity
   parent: RMCPropVehicleLargeBase
-  id: RMCPropVehicleLoaderTruck
+  id: RMCPropVehicleAmbulanceF
+  name: ambulance
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: ambulance_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlue
   name: heavy-loader truck
   description: It's locked and seems to be broken down, forget driving this.
   components:
@@ -35,10 +45,186 @@
 
 - type: entity
   parent: RMCPropVehicleLargeBase
-  id: RMCPropVehicleLoaderTruckFilled
+  id: RMCPropVehicleLoaderTruckBlueF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_blue_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlueFilled
   name: heavy-loader truck
   description: It's locked and seems to be broken down, forget driving this.
   suffix: Loaded
   components:
   - type: Sprite
     state: armored_truck_blue_loaded
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlueFilledF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded, Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_blue_loaded_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckTeal
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  components:
+  - type: Sprite
+    state: armored_truck_teal
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckTealF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_teal_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckTealFilled
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded
+  components:
+  - type: Sprite
+    state: armored_truck_teal_loaded
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckTealFilledF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded, Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_teal_loaded_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckWhite
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  components:
+  - type: Sprite
+    state: armored_truck_white
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckWhiteF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_white_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckWhiteFilled
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded
+  components:
+  - type: Sprite
+    state: armored_truck_white_loaded
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckWhiteFilledF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded, Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_white_loaded_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlack
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  components:
+  - type: Sprite
+    state: armored_truck_wy_black
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlackF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_wy_black_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlackFilled
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded
+  components:
+  - type: Sprite
+    state: armored_truck_wy_black_loaded
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlackFilledF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded, Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_wy_black_loaded_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlack
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  components:
+  - type: Sprite
+    state: armored_truck_wy_white
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlackF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_wy_white_f
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlackFilled
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded
+  components:
+  - type: Sprite
+    state: armored_truck_wy_white_loaded
+
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCPropVehicleLoaderTruckBlackFilledF
+  name: heavy-loader truck
+  description: It's locked and seems to be broken down, forget driving this.
+  suffix: Loaded, Flipped
+  components:
+  - type: Sprite
+    state: armored_truck_wy_white_loaded_f
