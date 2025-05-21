@@ -536,3 +536,29 @@
     contents:
     - id: CMFlash
     - id: RMCHandcuffs
+
+- type: entity
+  parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
+  id: RMCJacketWindbreaker
+  name: green windbreaker
+  description: A green windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: jacket-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket
