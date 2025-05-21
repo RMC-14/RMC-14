@@ -162,6 +162,11 @@ public abstract class SharedCassetteSystem : EntitySystem
         }
 
         StopAllAudio(player);
+
+        tape ??= player.Comp.Tape;
+        if (tape < 0 || tape >= tapeComp.Songs.Count)
+            tape = 0;
+
         if (tapeComp.Custom)
         {
             if (PlayCustomTrack(player, (tapeId.Value, tapeComp)) is { } custom)
@@ -171,10 +176,6 @@ public abstract class SharedCassetteSystem : EntitySystem
         }
         else if (_net.IsServer)
         {
-            tape ??= player.Comp.Tape;
-            if (tape < 0 || tape >= tapeComp.Songs.Count)
-                tape = 0;
-
             var song = tapeComp.Songs[tape.Value];
             var audioParams = player.Comp.AudioParams;
             if (TryComp(actor, out ActorComponent? actorComp))
@@ -184,9 +185,9 @@ public abstract class SharedCassetteSystem : EntitySystem
             }
 
             player.Comp.AudioStream = _audio.PlayGlobal(song, actor, audioParams)?.Entity;
-            player.Comp.Tape = tape.Value;
         }
 
+        player.Comp.Tape = tape.Value;
         player.Comp.State = AudioState.Playing;
         Dirty(player);
         _item.VisualsChanged(player);
