@@ -10973,7 +10973,7 @@ entities:
   - uid: 1595
     components:
     - type: MetaData
-      name: CLF Information Correspondant
+      name: CLF Information Correspondent
     - type: Transform
       pos: 45.153496,-7.3006563
       parent: 2
