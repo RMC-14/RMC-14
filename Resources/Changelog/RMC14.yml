@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added marine playtime ranks!
-    type: Add
-  id: 1250
-  time: '2025-01-26T05:41:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3797
 - author: Tunguso4ka
   changes:
   - message: Fixed not being able to unwrench and pull medical vendors, food vendors,
@@ -5332,5 +5325,13 @@
   id: 1752
   time: '2025-05-21T03:51:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6500
+- author: Dygon
+  changes:
+  - message: The Praetorian's acid ball can once again only hit a maximum of four
+      projectiles on the same target.
+    type: Fix
+  id: 1753
+  time: '2025-05-21T03:57:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6497
 Name: RMC14
 Order: -1
