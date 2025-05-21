@@ -705,7 +705,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         }
                     }
                 }
-;
+
                 var selectedSurvivors = 0;
                 for (var i = priorities - 1; i >= 0; i--)
                 {
