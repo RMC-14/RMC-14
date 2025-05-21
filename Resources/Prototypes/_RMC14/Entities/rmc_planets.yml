@@ -84,7 +84,7 @@
     - RMCSurvivorForeconBase: 7
     survivorJobInserts:
       RMCSurvivorCommandingOfficer:
-      - RMCSurvivorForeconCommander: -1
+      - RMCSurvivorForeconCommander: 1
       RMCSurvivorForeconBase:
       - RMCSurvivorForeconSupportTech: 1
       - RMCSurvivorForeconSquadLeader: 1
