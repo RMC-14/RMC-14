@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Hands;
+﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Hands;
 using Content.Shared.Actions;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
@@ -13,6 +14,7 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -28,6 +30,7 @@ public abstract class SharedCassetteSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
@@ -168,7 +171,14 @@ public abstract class SharedCassetteSystem : EntitySystem
                 tape = 0;
 
             var song = tapeComp.Songs[tape.Value];
-            player.Comp.AudioStream = _audio.PlayGlobal(song, actor, player.Comp.AudioParams)?.Entity;
+            var audioParams = player.Comp.AudioParams;
+            if (TryComp(actor, out ActorComponent? actorComp))
+            {
+                var gain = _netConfig.GetClientCVar(actorComp.PlayerSession.Channel, RMCCVars.VolumeGainCassettes);
+                audioParams = audioParams.WithVolume(SharedAudioSystem.GainToVolume(gain));
+            }
+
+            player.Comp.AudioStream = _audio.PlayGlobal(song, actor, audioParams)?.Entity;
             player.Comp.Tape = tape.Value;
         }
 

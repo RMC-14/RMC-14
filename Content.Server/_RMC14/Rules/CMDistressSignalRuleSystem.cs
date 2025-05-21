@@ -1039,7 +1039,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 break;
 
             rule.HijackSongPlayed = true;
-            _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
+            var song = _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
+            if (song?.Entity is { } songEnt)
+                EnsureComp<RMCHijackSongComponent>(songEnt);
+
             rule.ForceEndAt = time + _forceEndHijackTime;
             break;
         }
