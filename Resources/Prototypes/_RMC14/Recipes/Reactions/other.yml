@@ -1,0 +1,9 @@
+- type: reaction
+  id: RMCCreateWater
+  reactants:
+    RMCHydrogen:
+      amount: 2
+    RMCOxygen:
+      amount: 1
+  products:
+    Water: 1
