@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added new MOU53 sounds
-    type: Tweak
-  id: 1255
-  time: '2025-01-26T06:08:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5422
-- author: DummeHytteOst
-  changes:
-  - message: Fixed M4SPR A19 incendiary rounds having 95 accuracy instead of 105.
-    type: Fix
-  - message: Fixed incendiary slugs having 20 AP instead of 5, and regular buckshot
-      having 0 AP instead of 5.
-    type: Fix
-  id: 1256
-  time: '2025-01-26T06:47:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5328
 - author: SG6732
   changes:
   - message: Updated autolathe with new recipes.
@@ -5329,5 +5312,19 @@
   id: 1757
   time: '2025-05-21T04:06:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6461
+- author: noctyrnal
+  changes:
+  - message: Added loadouts to UNMC Synthetics.
+    type: Add
+  id: 1758
+  time: '2025-05-21T13:52:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6349
+- author: Timemaster99
+  changes:
+  - message: Fixed tactical compact nailguns not fitting into tool storages.
+    type: Fix
+  id: 1759
+  time: '2025-05-21T13:53:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6505
 Name: RMC14
 Order: -1
