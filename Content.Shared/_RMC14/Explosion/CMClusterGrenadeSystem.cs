@@ -44,7 +44,7 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
             return;
         }
 
-        limit.HitBy.Add(new Hit(GetNetEntity(ent.Owner), _timing.CurTime + limit.Expire));
+        limit.HitBy.Add(new Hit(GetNetEntity(ent.Comp.OriginEntity), _timing.CurTime + limit.Expire));
         Dirty(args.Target, limit);
     }
 
