@@ -16,6 +16,8 @@ chat-radio-marine-delta = Delta
 chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
 
+chat-radio-forecon = FORECON
+
 chat-radio-colony = Colony
 chat-radio-WY = We-Ya
 chat-radio-CMB = CMB
@@ -28,5 +30,6 @@ chat-radio-spp-med = SPP Med
 chat-radio-spp-cct = SPP CCT
 
 chat-radio-royal-marine = Royal Marine
+chat-radio-tse = Three Suns Empire
 
 chat-radio-hivemind = Hivemind

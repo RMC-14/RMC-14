@@ -178,6 +178,7 @@
   equipment:
     jumpsuit: RMCJumpsuitMarshal
     back: CMSatchelSecurity
+    outerClothing: RMCCoatBureauDeputy
     shoes: CMBootsBlackFilled
     head: RMCHeadCapBureau
     eyes: CMGlassesSecurity
@@ -340,3 +341,59 @@
     head: RMCArmorHelmetPMCKutjevoSecurity
     jumpsuit: RMCJumpsuitVeteranPMCKutjevo
     eyes: RMCGogglesKutjevo
+
+# We-Ya PMC
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseWeYaPMCStandard
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaPMCStandard ]
+
+- type: startingGear
+  id: RMCGearCorpseWeYaPMCStandard # TODO RMC14 gasmask, lightpack, 50% chance to have bulletproof armor variant and black cap
+  equipment:
+    head: ArmorHelmetPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMCLight
+    belt: CMM77BeltFilled
+    back: RMCSatchelLightpack
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressWeYaColony
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchToolsFill
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaPMCStandard
+  id: RMCCorpseWeYaPMCStandardBurst
+  components:
+  - type: VictimBurst
+
+# Corporate Supervisor
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseWeYaManager
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaManager ]
+
+- type: startingGear
+  id: RMCGearCorpseWeYaManager # TODO RMC14 manager jacket, jumpsuit and hat, lockable satchel
+  equipment:
+    ears: RMCHeadsetDistressWeYaColony
+    back: CMSatchel
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCJacketCorporateBlack
+    belt: RMCMK80BeltFilled
+    shoes: RMCShoesLaceup
+    id: RMCIDCardExecutiveCorporateSupervisor
+    pocket2: RMCPouchToolsFill
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
