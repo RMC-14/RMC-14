@@ -5354,8 +5354,8 @@
   url: https://github.com/RMC-14/RMC-14/pull/6303
 - author: Dygon
   changes:
-  - message: Fixed fire from incendiary projectiles dealing 50% less damage than intended
-      and having a 33% longer duration than intended.
+  - message: Fixed fire from incendiary projectiles dealing 33% less damage than intended
+      and having a 50% longer duration than intended.
     type: Fix
   - message: You no longer need to move before you start taking double fire damage
       when a fire tile spawns below you.

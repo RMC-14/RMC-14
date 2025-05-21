@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.EntitySystems;
@@ -48,6 +49,7 @@ public abstract class SharedCassetteSystem : EntitySystem
         SubscribeLocalEvent<CassettePlayerComponent, ExaminedEvent>(OnPlayerExamined);
         SubscribeLocalEvent<CassettePlayerComponent, AfterAutoHandleStateEvent>(OnPlayerState);
         SubscribeLocalEvent<CassettePlayerComponent, EntRemovedFromContainerMessage>(OnPlayerRemovedFromContainer);
+        SubscribeLocalEvent<CassettePlayerComponent, GetVerbsEvent<AlternativeVerb>>(OnPlayerGetVerbsAlternative);
 
         SubscribeLocalEvent<CassetteTapeComponent, ExaminedEvent>(OnTapeExamined);
         SubscribeLocalEvent<CassetteTapeComponent, UseInHandEvent>(OnPlayerUseInHand);
@@ -88,9 +90,6 @@ public abstract class SharedCassetteSystem : EntitySystem
         var total = GetTotalSongs(ent);
         var tape = GetTape(ent);
 
-        if (tape is { Comp.CustomTrack: not null })
-            total++;
-
         switch (ent.Comp.State)
         {
             case AudioState.Stopped:
@@ -98,7 +97,7 @@ public abstract class SharedCassetteSystem : EntitySystem
                 PlaySong(ent, args.Performer);
                 var msg = Loc.GetString("rmc-cassette-playing",
                     ("player", ent),
-                    ("current", ent.Comp.Tape + 1),
+                    ("current", GetCurrentSongCount(ent)),
                     ("total", total));
                 _popup.PopupClient(msg, ent, args.Performer);
                 break;
@@ -123,7 +122,7 @@ public abstract class SharedCassetteSystem : EntitySystem
 
                 var msg = Loc.GetString("rmc-cassette-resume",
                     ("player", ent),
-                    ("current", ent.Comp.Tape + 1),
+                    ("current", GetCurrentSongCount(ent)),
                     ("total", total));
                 _popup.PopupClient(msg, ent, args.Performer);
                 ent.Comp.State = AudioState.Playing;
@@ -138,13 +137,19 @@ public abstract class SharedCassetteSystem : EntitySystem
     private void OnPlayerNext(Entity<CassettePlayerComponent> ent, ref CassetteNextActionEvent args)
     {
         PlaySong(ent, args.Performer, ent.Comp.Tape + 1);
-        _popup.PopupClient(Loc.GetString("rmc-cassette-change"), ent, args.Performer);
+        var msg = Loc.GetString("rmc-cassette-change",
+            ("current", GetCurrentSongCount(ent)),
+            ("total", GetTotalSongs(ent)));
+        _popup.PopupClient(msg, ent, args.Performer);
     }
 
     private void OnPlayerRestart(Entity<CassettePlayerComponent> ent, ref CassetteRestartActionEvent args)
     {
         PlaySong(ent, args.Performer);
-        _popup.PopupClient(Loc.GetString("rmc-cassette-restart"), ent, args.Performer);
+        var msg = Loc.GetString("rmc-cassette-restart",
+            ("current", GetCurrentSongCount(ent)),
+            ("total", GetTotalSongs(ent)));
+        _popup.PopupClient(msg, ent, args.Performer);
     }
 
     private void PlaySong(Entity<CassettePlayerComponent> player, EntityUid actor, int? tape = null)
@@ -157,6 +162,11 @@ public abstract class SharedCassetteSystem : EntitySystem
         }
 
         StopAllAudio(player);
+
+        tape ??= player.Comp.Tape;
+        if (tape < 0 || tape >= tapeComp.Songs.Count)
+            tape = 0;
+
         if (tapeComp.Custom)
         {
             if (PlayCustomTrack(player, (tapeId.Value, tapeComp)) is { } custom)
@@ -166,10 +176,6 @@ public abstract class SharedCassetteSystem : EntitySystem
         }
         else if (_net.IsServer)
         {
-            tape ??= player.Comp.Tape;
-            if (tape < 0 || tape >= tapeComp.Songs.Count)
-                tape = 0;
-
             var song = tapeComp.Songs[tape.Value];
             var audioParams = player.Comp.AudioParams;
             if (TryComp(actor, out ActorComponent? actorComp))
@@ -179,9 +185,9 @@ public abstract class SharedCassetteSystem : EntitySystem
             }
 
             player.Comp.AudioStream = _audio.PlayGlobal(song, actor, audioParams)?.Entity;
-            player.Comp.Tape = tape.Value;
         }
 
+        player.Comp.Tape = tape.Value;
         player.Comp.State = AudioState.Playing;
         Dirty(player);
         _item.VisualsChanged(player);
@@ -210,17 +216,14 @@ public abstract class SharedCassetteSystem : EntitySystem
 
     private void OnPlayerEjectHand(Entity<CassettePlayerComponent> ent, ref RMCStorageEjectHandItemEvent args)
     {
-        if (!_hands.IsHolding(args.User, ent) ||
-            !_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
-            !container.ContainedEntities.TryFirstOrNull(out var first) ||
-            !_container.Remove(first.Value, container))
-        {
+        if (args.Handled)
             return;
-        }
 
-        args.Handled = true;
-        _hands.TryPickupAnyHand(args.User, first.Value);
-        _audio.PlayLocal(ent.Comp.InsertEjectSound, ent, args.User);
+        if (!_hands.IsHolding(args.User, ent))
+            return;
+
+        if (EjectTape(ent, args.User))
+            args.Handled = true;
     }
 
     private void OnPlayerGetEquipmentVisuals(Entity<CassettePlayerComponent> ent, ref GetEquipmentVisualsEvent args)
@@ -265,6 +268,25 @@ public abstract class SharedCassetteSystem : EntitySystem
     private void OnPlayerRemovedFromContainer(Entity<CassettePlayerComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         _audio.Stop(_net.IsServer ? ent.Comp.AudioStream : ent.Comp.CustomAudioStream);
+        ent.Comp.State = AudioState.Stopped;
+        ent.Comp.Tape = 0;
+        Dirty(ent);
+    }
+
+    private void OnPlayerGetVerbsAlternative(Entity<CassettePlayerComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        var user = args.User;
+        if (HasComp<XenoComponent>(user))
+            return;
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-cassette-player-eject"),
+            Act = () => EjectTape(ent, user),
+        });
     }
 
     private void OnTapeExamined(Entity<CassetteTapeComponent> ent, ref ExaminedEvent args)
@@ -321,11 +343,21 @@ public abstract class SharedCassetteSystem : EntitySystem
         return TryGetTape(player, out var tape) ? tape : null;
     }
 
+    private int GetCurrentSongCount(Entity<CassettePlayerComponent> player)
+    {
+        return player.Comp.Tape + 1;
+    }
+
     private int GetTotalSongs(Entity<CassettePlayerComponent> player)
     {
-        return !TryGetTape(player, out var tape)
-            ? 0
-            : tape.Comp.Songs.Count;
+        if (!TryGetTape(player, out var tape))
+            return 0;
+
+        var total = tape.Comp.Songs.Count;
+        if (tape is { Comp.CustomTrack: not null })
+            total++;
+
+        return total;
     }
 
     protected virtual EntityUid? PlayCustomTrack(Entity<CassettePlayerComponent> player, Entity<CassetteTapeComponent> tape)
@@ -346,5 +378,19 @@ public abstract class SharedCassetteSystem : EntitySystem
         Dirty(ent);
 
         _item.VisualsChanged(ent);
+    }
+
+    private bool EjectTape(Entity<CassettePlayerComponent> ent, EntityUid user)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
+            !container.ContainedEntities.TryFirstOrNull(out var first) ||
+            !_container.Remove(first.Value, container))
+        {
+            return false;
+        }
+
+        _hands.TryPickupAnyHand(user, first.Value);
+        _audio.PlayLocal(ent.Comp.InsertEjectSound, ent, user);
+        return true;
     }
 }
