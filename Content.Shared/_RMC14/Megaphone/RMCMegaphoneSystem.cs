@@ -77,7 +77,12 @@ public sealed class RMCMegaphoneSystem : EntitySystem
             _actions.SetToggled(ent.Comp.Action, ent.Comp.Enabled);
         }
 
-        _actions.RemoveAction(args.User, ent.Comp.Action);
+        if (ent.Comp.Action != null)
+        {
+            _actions.RemoveProvidedAction(args.User, ent.Owner, ent.Comp.Action.Value);
+            ent.Comp.Action = null;
+            Dirty(ent);
+        }
     }
 
     private void OnSpeakAttempt(Entity<RMCMegaphoneUserComponent> ent, ref SpeakAttemptEvent args)
