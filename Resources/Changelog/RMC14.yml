@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed xeno slowdowns from different abilities stacking.
-    type: Fix
-  - message: Fixed stronger slows stacking with smaller slows
-    type: Fix
-  - message: Fixed stomp not causing any slowdown
-    type: Fix
-  - message: Fixed slowing and stunning visual effects being visible to marines
-    type: Fix
-  - message: Fixed slows being applied to xenos in most cases not having 2/3rds of
-      the duration
-    type: Fix
-  - message: Fixed charge not slowing down marines in the area of impact.
-    type: Fix
-  - message: Fixed tail sweep having a lower range than all other melee abilities
-      (1.25 > 1.5). It and blitz can no longer hit through walls.
-    type: Fix
-  id: 1272
-  time: '2025-01-28T20:36:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5477
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the wrong tools being able to infinitely repair the sensor tower
@@ -5376,5 +5355,14 @@
   id: 1774
   time: '2025-05-21T18:13:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6514
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed FORECON CO not being rolled first.
+    type: Fix
+  - message: Fixed FORECON CO not being ignoring the maximum survivor limit.
+    type: Fix
+  id: 1775
+  time: '2025-05-21T22:02:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6518
 Name: RMC14
 Order: -1
