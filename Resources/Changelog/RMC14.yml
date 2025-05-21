@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Boiler abilities Acid Shroud and Bombard can no longer be used at the
-      same time.
-    type: Fix
-  id: 1253
-  time: '2025-01-26T06:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3752
-- author: CyberTropic
-  changes:
-  - message: Added compact and tactical nailguns. Tactical nailgun comes with the
-      essential engineer set. These must be used to repair a barricade if it is too
-      damaged, as welders won't be able to anymore.
-    type: Add
-  id: 1254
-  time: '2025-01-26T06:05:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5028
 - author: Dutch-VanDerLinde
   changes:
   - message: Added new MOU53 sounds
@@ -5332,5 +5315,19 @@
   id: 1755
   time: '2025-05-21T04:03:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6422
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed weeds being able to spread onto fire tiles.
+    type: Fix
+  id: 1756
+  time: '2025-05-21T04:07:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6471
+- author: noctyrnal
+  changes:
+  - message: Changed the hitbox of filing cabinets to make them less obtrusive.
+    type: Tweak
+  id: 1757
+  time: '2025-05-21T04:06:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6461
 Name: RMC14
 Order: -1
