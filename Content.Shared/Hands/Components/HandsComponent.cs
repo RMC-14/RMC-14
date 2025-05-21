@@ -101,6 +101,10 @@ public sealed partial class HandsComponent : Component
     /// </summary>
     [DataField]
     public bool CanBeStripped = true;
+
+    // RMC14
+    [DataField]
+    public bool ExamineShowEmpty = true;
 }
 
 [Serializable, NetSerializable]
