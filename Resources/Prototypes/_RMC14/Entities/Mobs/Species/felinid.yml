@@ -12,6 +12,8 @@
     - HeadTop
   - type: Sprite
     drawdepth: Mobs
+  - type: Wagging
+    action: ActionToggleFelinidWagging
   - type: Vocal
     sounds:
       Male: RMCMaleFelinid

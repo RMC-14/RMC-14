@@ -71,7 +71,9 @@
         Arms: 0.1
         Legs: 0.1
       Felinid:
+        Head: 0.25
         HeadTop: 0.5
+        Snout: 0.3
         Tail: 1
       Human:
         Head: 0.25
