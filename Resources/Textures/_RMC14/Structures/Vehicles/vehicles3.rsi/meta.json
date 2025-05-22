@@ -11,7 +11,7 @@
       "name": "ambulance"
     },
     {
-      "name": "ambulance_f  "
+      "name": "ambulance_f"
     },
     {
       "name": "armored_truck_blue"
@@ -26,10 +26,22 @@
       "name": "armored_truck_blue_loaded_f"
     },
     {
+      "name": "armored_truck_teal"
+    },
+    {
+      "name": "armored_truck_teal_f"
+    },
+    {
       "name": "armored_truck_teal_loaded"
     },
     {
       "name": "armored_truck_teal_loaded_f"
+    },
+    {
+      "name": "armored_truck_white"
+    },
+    {
+      "name": "armored_truck_white_f"
     },
     {
       "name": "armored_truck_white_loaded"
@@ -222,6 +234,12 @@
     },
     {
       "name": "small_truck_garbage_f"
+    },
+    {
+      "name": "small_truck_green"
+    },
+    {
+      "name": "small_truck_green_f"
     },
     {
       "name": "small_truck_medical"
