@@ -3,7 +3,7 @@
   name: plump-helmet
   parent: FoodProduceBase
   id: FoodMushroomPlump
-  description: "Plumus Hellmus: Plump, soft and s-so inviting~"
+  description: "Plumus Hellmus: Oh, SHUT UP about the BLOODY mushrooms already! MOVE IT, marines!"
   components:
   - type: SolutionContainerManager
     solutions:
