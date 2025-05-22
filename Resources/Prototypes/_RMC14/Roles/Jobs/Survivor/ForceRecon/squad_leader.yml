@@ -38,7 +38,7 @@
         tags:
         - RMCSquadFORECON
     - type: JobPrefix
-      prefix: rmc-job-prefix-forecon
+      prefix: cm-job-prefix-squad-leader
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconSquadLead
   hidden: true
