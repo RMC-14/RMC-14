@@ -21,7 +21,7 @@ CMJobExecutiveOfficer = Executive Officer
 
 # Special operation capable
 rmc-job-prefix-forecon-marksman = MKSMN
-rmc-job-prefix-forecon-support-tech = ST
+rmc-job-prefix-forecon-support-tech = SPT
 rmc-job-prefix-forecon-co = CDR
 
 # Admin only right now.
