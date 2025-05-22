@@ -189,6 +189,7 @@
     - MarineRequisition
     - MarineJTAC
     - MarineIntel
+    - MarineForecon
     - WEYA
 
 - type: entity

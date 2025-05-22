@@ -51,3 +51,8 @@
   id: Bureau
   hostile:
   - RMCXeno
+
+- type: npcFaction
+  id: TSE
+  hostile:
+  - RMCXeno

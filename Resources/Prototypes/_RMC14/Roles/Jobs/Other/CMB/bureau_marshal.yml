@@ -37,6 +37,7 @@
       prefix: rmc-job-prefix-bureau-marshal
     - type: RMCPointing
     - type: MarineOrders
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: entity

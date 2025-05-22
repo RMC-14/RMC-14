@@ -1,0 +1,43 @@
+﻿- type: entity
+  abstract: true
+  parent: ActionMarineBase
+  id: RMCActionCassetteBase
+  components:
+  - type: InstantAction
+    useDelay: 0.5
+
+- type: entity
+  parent: RMCActionCassetteBase
+  id: RMCActionCassettePlayPause
+  name: Play/Pause
+  description: Starts or stops playing music.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/cassette_player.rsi
+      state: walkman_playpause
+    event: !type:CassettePlayPauseActionEvent
+
+- type: entity
+  parent: RMCActionCassetteBase
+  id: RMCActionCassetteNext
+  name: Next song
+  description: Moves to the next track.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/cassette_player.rsi
+      state: walkman_next
+    event: !type:CassetteNextActionEvent
+
+- type: entity
+  parent: RMCActionCassetteBase
+  id: RMCActionCassetteRestart
+  name: Restart song
+  description: Restarts the current track.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/cassette_player.rsi
+      state: walkman_restart
+    event: !type:CassetteRestartActionEvent
