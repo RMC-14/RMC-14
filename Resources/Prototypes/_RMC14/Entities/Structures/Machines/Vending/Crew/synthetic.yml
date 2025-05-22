@@ -306,7 +306,8 @@
     - name: Experimental Tools
       entries:
       # autocompressor - 15 Points
-      # breaching hammer - 15 Points
+      - id: RMCSynthBreachingHammer
+        points: 15
       - id: RMCDefibrillatorCompact
         points: 15
       - id: RMCVendorBundleCompactNailgunKit
