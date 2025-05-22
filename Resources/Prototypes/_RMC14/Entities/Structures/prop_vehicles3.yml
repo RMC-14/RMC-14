@@ -192,7 +192,7 @@
 
 - type: entity
   parent: RMCPropVehicleLargeBase
-  id: RMCPropVehicleLoaderTruckBlack
+  id: RMCPropVehicleLoaderTruckWhiteWeYa
   name: heavy-loader truck
   description: It's locked and seems to be broken down, forget driving this.
   components:
@@ -201,7 +201,7 @@
 
 - type: entity
   parent: RMCPropVehicleLargeBase
-  id: RMCPropVehicleLoaderTruckBlackF
+  id: RMCPropVehicleLoaderTruckWhiteWeYaF
   name: heavy-loader truck
   description: It's locked and seems to be broken down, forget driving this.
   suffix: Flipped
@@ -211,7 +211,7 @@
 
 - type: entity
   parent: RMCPropVehicleLargeBase
-  id: RMCPropVehicleLoaderTruckBlackFilled
+  id: RMCPropVehicleLoaderTruckWhiteWeYaFilled
   name: heavy-loader truck
   description: It's locked and seems to be broken down, forget driving this.
   suffix: Loaded
@@ -221,7 +221,7 @@
 
 - type: entity
   parent: RMCPropVehicleLargeBase
-  id: RMCPropVehicleLoaderTruckBlackFilledF
+  id: RMCPropVehicleLoaderTruckWhiteWeYaFilledF
   name: heavy-loader truck
   description: It's locked and seems to be broken down, forget driving this.
   suffix: Loaded, Flipped
