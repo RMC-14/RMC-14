@@ -30,6 +30,7 @@
   - CMAccessDropship
   - CMAccessPilot
   - CMAccessCrewman
+  - CMAccessMedical
 
 - type: accessGroup
   id: DropshipCrewChief
@@ -38,6 +39,7 @@
   - CMAccessCommand
   - CMAccessDropship
   - CMAccessPilot
+  - CMAccessMedical
 
 - type: accessGroup
   id: IntelOfficer
