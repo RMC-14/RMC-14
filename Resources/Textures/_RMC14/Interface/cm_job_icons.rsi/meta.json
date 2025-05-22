@@ -380,9 +380,6 @@
       "name": "rmc_commander"
     },
     {
-      "name": "hudsquad_spec_sniper"
-    },
-    {
       "name": "hudsquad_vo"
     },
     {
@@ -411,6 +408,18 @@
     },
     {
       "name": "pve_novameddoc"
+    },
+    {
+      "name": "hudsquad_spec_demo"
+    },
+    {
+      "name": "hudsquad_spec_grenadier"
+    },
+    {
+      "name": "hudsquad_spec_sniper"
+    },
+    {
+      "name": "hudsquad_spec_anti_materiel_sniper"
     }
   ]
 }

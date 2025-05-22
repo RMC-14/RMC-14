@@ -17,6 +17,7 @@
   ranks:
     RMCRankCivilian: []
   startingGear: RMCGearSurvivor
+  dummyStartingGear: RMCGearSurvivorEquipped
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
@@ -40,6 +41,7 @@
       factions:
       - Survivor
     - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
   greeting: rmc-job-greeting-survivor
   hasIcon: false
 
@@ -53,6 +55,13 @@
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneral
+
+- type: startingGear
+  parent: RMCGearSurvivor
+  id: RMCGearSurvivorEquipped
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    shoes: RMCShoesBlack
 
 - type: entity
   parent: CMSpawnPointJobBase

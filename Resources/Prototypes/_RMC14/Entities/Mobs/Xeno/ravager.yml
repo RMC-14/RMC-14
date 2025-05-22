@@ -11,6 +11,9 @@
   description: A huge, nasty red alien with enormous scythed claws.
   abstract: true
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRavager
   - type: GhostRole
     name: cm-job-name-xeno-ravager
   - type: Sprite
@@ -174,7 +177,6 @@
     - ActionXenoClothesline
     - ActionXenoEviscerate
     - ActionXenoDevolve
-    hidden: true
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -183,9 +185,7 @@
   - type: CMArmor
     xenoArmor: 30
     explosionArmor: 80
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2.5
-    baseSprintSpeed: 4.1
+  - type: MovementSpeedModifier # This is not actually faster in 13 at base if you test it
   - type: XenoShield
   - type: XenoStrain
     name: rmc-xeno-berserker-name
@@ -227,3 +227,4 @@
     damage:
       groups:
         Brute: 20
+  - type: XenoHidden
