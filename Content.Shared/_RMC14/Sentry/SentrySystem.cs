@@ -404,8 +404,6 @@ public sealed class SentrySystem : EntitySystem
     {
         coordinates = default;
         rotation = default;
-        if (!HasSkillPopup(sentry, user))
-            return false;
 
         var moverCoordinates = _transform.GetMoverCoordinateRotation(user, Transform(user));
         coordinates = moverCoordinates.Coords;
