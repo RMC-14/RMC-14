@@ -52,3 +52,22 @@
     flavors:
     - bread
     - sweet
+
+- type: entity
+  name: peanut butter cookie
+  parent: CMFoodBase
+  id: RMCFoodCookiePeanutButter
+  description: Soft, chewy, and absolutely delicious!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Kitchen/food.rsi
+    state: cookie-peanutbutter
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: RMCPeanutButter
+          Quantity: 3

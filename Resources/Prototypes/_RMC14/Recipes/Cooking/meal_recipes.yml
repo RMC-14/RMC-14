@@ -140,3 +140,14 @@
     FoodDoughPie: 1
     FoodMushroomPlump: 3
     FoodPlateTin: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCookiePeanutButter
+  name: peanut butter cookie recipe
+  result: RMCFoodCookiePeanutButter
+  time: 5
+  group: BarsAndCookies
+  reagents:
+    Flour: 5
+    Sugar: 5
+    RMCPeanutButter: 5
