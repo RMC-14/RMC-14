@@ -172,6 +172,7 @@
   id: RMCOverheadSignNeonMiscVert
   components:
   - type: Sprite
+    offset: 0.75,0.5
     layers:
       - state: miscvert_on # Temporary until power works.
       - state: miscvert_off
