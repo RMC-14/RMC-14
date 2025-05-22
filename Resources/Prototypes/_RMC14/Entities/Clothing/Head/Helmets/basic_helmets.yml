@@ -24,11 +24,12 @@
         - RMCFlask
         - CMScalpel
         - Figurine
+        - CassettePlayer
+        - CassetteTape
         tags:
-#       - TODO RMC14 cards
+        #       - TODO RMC14 cards
         - Slice
-#       - TODO RMC14 glasses (eyewear)
-#       - TODO RMC14 walkman and casettes
+        #       - TODO RMC14 glasses (eyewear)
         - Pen
         - Crayon
         - RMCHandful
@@ -62,13 +63,14 @@
       - Figurine
       - Matchbox
       - HelmetAccessory
+      - CassettePlayer
+      - CassetteTape
       tags:
       - CigPack
       - Cigarette
-#      - TODO RMC14 cards
+      #      - TODO RMC14 cards
       - Slice
-#      - TODO RMC14 glasses (eyewear)
-#      - TODO RMC14 walkman and casettes
+      #      - TODO RMC14 glasses (eyewear)
       - Pen
       - Crayon
       - RMCHandful
@@ -121,7 +123,7 @@
   abstract: true
   components:
   - type: Foldable
-    unfoldVerbText : "rmc-untuck"
+    unfoldVerbText: "rmc-untuck"
     foldVerbText: "rmc-tuck"
     canFoldInsideContainer: true
   - type: FoldableClothing
@@ -129,5 +131,5 @@
     - Hair
     - HeadTop
     - HeadSide
-    unfoldedHideLayers: []
+    unfoldedHideLayers: [ ]
   - type: HideLayerClothing

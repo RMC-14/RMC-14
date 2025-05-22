@@ -137,6 +137,16 @@
   longRange: true
   tower: true
 
+# Marine Special Forces
+- type: radioChannel
+  id: MarineForecon
+  name: chat-radio-forecon
+  keycode: "k"
+  frequency: 1724
+  color: "#32CD32"
+  longRange: true
+  tower: true
+
 # Non Marine
 - type: radioChannel
   id: Colony
@@ -186,8 +196,8 @@
   id: RoyalMarine
   name: chat-radio-royal-marine
   keycode: "q"
-  frequency: 1216
-  color: "#e3580e"
+  frequency: 1551
+  color: "#e1580e"
   longRange: true
   tower: true
 

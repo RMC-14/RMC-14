@@ -35,3 +35,47 @@
     contents:
     - id: CMGrenadeFrag
       amount: 6
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineForeconSurvivorFill
+  suffix: FORECON, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+
+- type: entity
+  parent: RMCSatchelMarineLogisticsBig
+  id: RMCSatchelMarineLogisticsBigForeconSurvivorFill
+  suffix: FORECON Support Tech, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMFireExtinguisherPortable
+    - id: CMDefibrillator
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineForeconSurvivorCommanderFill
+  suffix: FORECON CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCLaserDesignator
+    - id: RMCDrinkAlcoholDavenport
+    - id: RMCZippoGold
+    - id: CMTarbackCigar
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineForeconSurvivorSmartgunOperatorFill
+  suffix: FORECON CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCPowerCellSmartgun

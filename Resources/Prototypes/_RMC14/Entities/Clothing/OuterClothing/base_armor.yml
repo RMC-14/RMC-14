@@ -32,6 +32,7 @@
       - RMCLighter
       - Bible
       - Gun
+      - CassettePlayer
       tags:
       - GasTank
       - Flashlight
@@ -49,7 +50,6 @@
       - RMCXM51Holster
       - RMCDetector
       - RMCMatebaHolster
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -83,6 +83,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - CrewMonitoringConsole
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -95,7 +96,6 @@
       - RMCMacheteScabbard
       #TODO katana scabbard
       - RMCDetector
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -106,6 +106,7 @@
       components:
       - BallisticAmmoProvider #Note should get all maganizes
       - SmartGun
+      - CassettePlayer
       tags:
       - GasTank
       - Flashlight
@@ -113,7 +114,6 @@
       - RMCG8Pouch
       #TODO mines
       - RMCDetector
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -127,6 +127,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - Gun
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -145,7 +146,6 @@
       - RMCMatebaHolster
       - RMCCeremonialSword
       - RMCDetector
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -159,6 +159,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - Gun
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -168,7 +169,6 @@
       - Flashlight
       - Machete
       - RMCDetector
-      #TODO walkman
 
 # TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
 
