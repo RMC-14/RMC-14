@@ -100,7 +100,7 @@
   name: grass
   parent: FoodProduceBase
   id: FoodGrass
-  description: "Grass"
+  description: "Grass."
   components:
   - type: SolutionContainerManager
     solutions:
