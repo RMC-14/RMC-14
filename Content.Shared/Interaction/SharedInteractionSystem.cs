@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.CombatMode;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -332,6 +333,12 @@ namespace Content.Shared.Interaction
         /// <returns></returns>
         public bool CombatModeCanHandInteract(EntityUid user, EntityUid? target)
         {
+            // RMC14
+            var ev = new RMCCombatModeInteractOverrideUserEvent(target);
+            RaiseLocalEvent(user, ref ev);
+            if (ev.Handled)
+                return ev.CanInteract;
+
             // Always allow attack in these cases
             if (target == null || !_handsQuery.TryComp(user, out var hands) || hands.ActiveHand?.HeldEntity is not null)
                 return false;

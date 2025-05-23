@@ -1147,7 +1147,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronNanSnowBunnyMazu
-  name: Nan 'Snow Bunny' Mazu figurine
+  name: Nan Mazu figurine
   description: "The Way of Sunlight
 
 
@@ -1265,6 +1265,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNells-the-Jobs
+  name: Nells-the-Jobs figurine
+  description: "A silly little lizard that is known for enjoying Slaw."
+  components:
+  - type: Sprite
+    state: nells-the-jobs
+  - type: PatronFigurine
+    id: 6472b9d8-4e6a-447e-af75-4b2a6d3961d1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFast-pawsChip
   name: Fast-paws Chip figurine
   components:
@@ -1273,6 +1284,17 @@
   - type: PatronFigurine
     id: c5f5b62a-5206-4948-9745-e4d9bbb87764
 
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDryWetbrush
+  name: Dry Wetbrush figurine
+  description: "He wonders what you are thinking about."
+  components:
+  - type: Sprite
+    state: dry_wetbrush
+  - type: PatronFigurine
+    id: 72a61df6-9a4f-4d32-840b-f1d0c4e2b051
+    
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHaileyMorgan
@@ -1369,9 +1391,76 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAustinSpectreEventide
   name: Austin 'Spectre' Eventide figurine
-  description: ""
+  description: "\"Allan please add description\""
   components:
   - type: Sprite
     state: austin_spectre_eventide
   - type: PatronFigurine
     id: 6ff41436-85a7-4c3b-bb39-b29738fedef5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronShei-Teegla
+  name: Shei-Teegla figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: shei-teegla
+  - type: PatronFigurine
+    id: f8e67bb9-5f07-452e-afa1-c6d6eb8fae74
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJazzyJune
+  name: Jazzy June figurine
+  description: "She's trying her best. Can't you tell?"
+  components:
+  - type: Sprite
+    state: jazzy_june
+  - type: PatronFigurine
+    id: 95637346-7df4-4c94-9dee-12204a9f61c1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAnglerAngusSeawing
+  name: Angler 'Angus' Seawing figurine
+  description: "A fish-looking dragon who is known for telling people they arent a fish.
+
+
+    Usually seen in the hangar or patrolling around."
+  components:
+  - type: Sprite
+    state: angler_angus_seawing
+  - type: PatronFigurine
+    id: 3ee135f9-b228-4f65-8155-40613aaef0dc
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLilianaShorkGodwin
+  name: Liliana 'Shork' Godwin figurine
+  description: "SHORK GANG RISE UP!!"
+  components:
+  - type: Sprite
+    state: liliana_shork_godwin
+  - type: PatronFigurine
+    id: 4211dfd5-fa9f-4eec-8738-c08356d24571
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/rawr.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 120
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKuafuSpeedDemonLightweaver
+  name: Kuafu 'Speed Demon' Lightweaver figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: kuafu_speed_demon_lightweaver
+  - type: PatronFigurine
+    id: 3c148935-f54d-4c7d-b02c-a9ac360c6479
+

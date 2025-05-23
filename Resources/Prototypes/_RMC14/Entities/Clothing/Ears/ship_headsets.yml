@@ -26,16 +26,10 @@
       enum.RMCRadioFilterUI.Key:
         type: RMCRadioFilterBui
   - type: HeadsetMultiBroadcast
+  - type: RMCHeadset
 
 - type: entity
-  abstract: true
-  parent: CMHeadset
-  id: RMCHeadsetIcons
-  components:
-  - type: GrantMarineIcons
-
-- type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetIconsUNMC
   id: RMCHeadsetShip
   name: marine radio headset
   description: A standard military radio headset. Bulkier than combat models.
@@ -305,6 +299,10 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+    factions:
+    - UNMC
+    - WeYa
 
 - type: entity
   parent: RMCHeadsetShip
@@ -394,7 +392,7 @@
       - RMCEncryptionKeyMarineCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
-    
+
 # Prisoner headset
 - type: entity
   parent: RMCHeadsetShip

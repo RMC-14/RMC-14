@@ -18,11 +18,20 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
+    - Burst
     recoilWielded: 1
     recoilUnwielded: 4
     scatterWielded: 2.5
     scatterUnwielded: 8
     baseFireRate: 1.8
+    burstFireRateMultiplier: 15
+    modifiers:
+      Burst:
+        # fireDelay: 0.01
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.1
   - type: GunDamageModifier
@@ -34,9 +43,11 @@
     heavy: 1
   - type: Gun
     shotsPerBurst: 2
+    burstCooldown: 0.75
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
+    - Burst
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
   - type: GunUserWhitelist
@@ -48,10 +59,9 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
   - type: MeleeWeapon
-    attackRate: 1
     damage:
       types:
-        Slash: 31 # Yes this does this much damage in 13. 51 with a bayonet attached.
+        Blunt: 26 # Yes this does this much damage in 13.
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:

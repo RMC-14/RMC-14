@@ -11,7 +11,6 @@ using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -23,7 +22,6 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
 using Content.Shared.Wall;
@@ -31,6 +29,9 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Roles;
+using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Marines;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -44,6 +45,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -54,6 +56,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly SharedIdCardSystem _idCard = default!;
+    [Dependency] private readonly SquadSystem _squads = default!;
+    [Dependency] private readonly SharedMarineSystem _marine = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -503,6 +508,35 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
+        if (entry.GiveSquadRoleName != null || entry.GiveIcon != null)
+        {
+            var overrideComp = EnsureComp<RMCVendorRoleOverrideComponent>(actor);
+            overrideComp.GiveSquadRoleName = entry.GiveSquadRoleName;
+            overrideComp.IsAppendSquadRoleName = entry.IsAppendSquadRoleName;
+            overrideComp.GiveIcon = entry.GiveIcon;
+            Dirty(actor, overrideComp);
+
+            _squads.UpdateSquadTitle(actor);
+        }
+
+        if (entry.GiveMapBlip != null)
+        {
+            var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(actor);
+            mapBlip.Icon = entry.GiveMapBlip;
+            Dirty(actor, mapBlip);
+        }
+
+        if (entry.GivePrefix != null)
+        {
+            var jobPrefix = EnsureComp<JobPrefixComponent>(actor);
+            if (entry.IsAppendPrefix)
+                jobPrefix.AdditionalPrefix = entry.GivePrefix;
+            else
+                jobPrefix.Prefix = entry.GivePrefix.Value;
+
+            Dirty(actor, jobPrefix);
+        }
+
         if (_net.IsClient)
             return;
 
@@ -552,12 +586,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (!_prototypes.Index(toVend).HasComponent<ItemComponent>())
-        {
-            SpawnAtPosition(toVend, player.ToCoordinates());
-            return;
-        }
-
         var spawn = SpawnNextToOrDrop(toVend, vendor);
         var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
@@ -593,7 +621,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return _hands.TryPickupAnyHand(player, item);
         }
 
-        if (_cmInventory.TryEquipClothing(player, (item, clothing)))
+        if (_cmInventory.TryEquipClothing(player, (item, clothing), doRangeCheck: false))
             return true;
 
         return _hands.TryPickupAnyHand(player, item);

@@ -28,19 +28,15 @@
   supervisors: cm-job-supervisors-we-ya
   accessGroups:
   - RMCWeYaExecColony
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cl
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_goon
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCUserBulkyArmorIncapable
     - type: NpcFactionMember
       factions:
       - WeYa
+      - UNMC
     - type: Skills
       skills:
         RMCSkillFirearms: 0
@@ -57,6 +53,7 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: cl
+    - type: RMCRibbon
 
 - type: startingGear
   id: CMGearLiaison

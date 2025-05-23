@@ -34,6 +34,8 @@
   - type: DamageMultiplierFlags
     flags: Breaching
   - type: XenoLeapDestroyOnPass
+  - type: XenoToggleChargingDamage
+    destroy: true
 
 # Reinforced
 - type: entity

@@ -9,6 +9,9 @@
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
   - type: Sprite
@@ -247,6 +250,9 @@
     value: 1.4
   - type: QueenEyeAction
   - type: StunFriendlyXenoOnStep
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
 
 - type: entity
   parent: RMCXenoQueenBase
@@ -282,7 +288,7 @@
   - type: OwOAccent
   - type: Speech
     speechSounds: Cat
-    
+
 - type: entity
   parent: StationAiHolo
   id: RMCQueenEye

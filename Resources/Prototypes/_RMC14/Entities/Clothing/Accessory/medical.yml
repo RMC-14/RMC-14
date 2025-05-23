@@ -1,7 +1,7 @@
 # Nurse
 - type: entity
   parent: ClothingNeckBase
-  id: RMCNurseArmband
+  id: RMCNurseArmband # TODO make this a uniform accessory when those are made
   name: nurse armband
   description: An armband, worn by the rookie nurses to display they are still not doctors. This one is dark red.
   components:
