@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by discord user Crow",
+  "size": {
+    "x": 96,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "clfflag"
+    },
+    {
+      "name": "clfflag_worn"
+    },
+    {
+      "name": "cmflag"
+    },
+    {
+      "name": "cmflag_worn"
+    },
+    {
+      "name": "sppflag"
+    },
+    {
+      "name": "sppflag_worn"
+    },
+    {
+      "name": "tseflag"
+    },
+    {
+      "name": "tseflag_worn"
+    },
+    {
+      "name": "unflag"
+    },
+    {
+      "name": "unflag_worn"
+    }
+  ]
+}
