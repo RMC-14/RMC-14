@@ -44,4 +44,4 @@
   - type: UsableWhileDevoured
     damage:
       types:
-        Slash: 1777.6
+        Slash: 1777
