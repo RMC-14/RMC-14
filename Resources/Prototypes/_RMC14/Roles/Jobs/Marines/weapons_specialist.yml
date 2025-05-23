@@ -20,7 +20,7 @@
     RMCRankLanceCorporal: []
   startingGear: CMGearWeaponsSpecialist
   dummyStartingGear: CMGearWeaponsSpecialistEquipped
-  icon: "CMJobIconWeaponsSpecialist"
+  icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   accessGroups:
