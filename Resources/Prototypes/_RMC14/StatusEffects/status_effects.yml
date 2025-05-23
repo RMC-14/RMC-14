@@ -1,0 +1,12 @@
+- type: statusEffect
+  id: Deaf
+
+- type: statusEffect
+  id: Dazed
+
+- type: statusEffect
+  id: Blinded
+
+- type: statusEffect
+  id: Unconscious
+  alert: RMCUnconscious
