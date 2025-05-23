@@ -15,6 +15,7 @@
     - type: NpcFactionMember
       factions:
       - RoyalMarines
+      - TSE
     - type: Skills
       skills:
         RMCSkillCqc: 2
