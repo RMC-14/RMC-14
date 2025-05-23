@@ -1,5 +1,7 @@
-﻿using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Map;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -10,6 +12,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
@@ -34,6 +37,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
 
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionFromContainerOnStoreInserted);
+
+        SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
     }
 
     private void OnRefillableSolutionExamined(Entity<CMRefillableSolutionComponent> ent, ref ExaminedEvent args)
@@ -106,7 +111,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     private void OnRefillSolutionOnStoreInserted(Entity<RMCRefillSolutionOnStoreComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.SolutionId, out var solutionEnt) ||
-            !_solution.TryGetRefillableSolution(args.Entity, out var refillable, out _))
+            !TryGetStorageFillableSolution(args.Entity, out var refillable, out _))
         {
             return;
         }
@@ -123,8 +128,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             return;
         }
 
-        if (!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out _) ||
-            !_solution.TryGetRefillableSolution(args.Entity, out var refillable, out _))
+        if ((!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out _) && !TryGetPressurizedSolution(contained.Value, out drainable, out _)) ||
+            !TryGetStorageFillableSolution(args.Entity, out var refillable, out _))
         {
             return;
         }
@@ -167,6 +172,81 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
                 return;
 
             comp.Current = FixedPoint2.Min(comp.Max, comp.Current + comp.Recharge);
+        }
+    }
+
+    public bool TryGetStorageFillableSolution(Entity<SolutionStorageFillableComponent?, SolutionContainerManagerComponent?> entity, [NotNullWhen(true)] out Entity<SolutionComponent>? soln, [NotNullWhen(true)] out Solution? solution)
+    {
+        if (!Resolve(entity, ref entity.Comp1, logMissing: false))
+        {
+            (soln, solution) = (default!, null);
+            return false;
+        }
+
+        return _solution.TryGetSolution((entity.Owner, entity.Comp2), entity.Comp1.Solution, out soln, out solution);
+    }
+
+    public bool TryGetPressurizedSolution(Entity<RMCPressurizedSolutionComponent?, SolutionContainerManagerComponent?> entity, [NotNullWhen(true)] out Entity<SolutionComponent>? soln, [NotNullWhen(true)] out Solution? solution)
+    {
+        if (!Resolve(entity, ref entity.Comp1, logMissing: false))
+        {
+            (soln, solution) = (default!, null);
+            return false;
+        }
+
+        return _solution.TryGetSolution((entity.Owner, entity.Comp2), entity.Comp1.Solution, out soln, out solution);
+    }
+
+    private void OnPressurizedRefillAttempt(Entity<RMCPressurizedSolutionComponent> beaker, ref AfterInteractEvent args)
+    {
+        if (!args.CanReach || args.Target is not { } target)
+            return;
+
+        var (uid, comp) = beaker;
+
+        //Note below is the solutiontransfer code
+
+        if (!HasComp<ReagentTankComponent>(target) || !TryComp<SolutionTransferComponent>(beaker, out var transfer))
+            return;
+
+        //Special case for reagent tanks, because normally clicking another container will give solution, not take it.
+        if (!HasComp<RefillableSolutionComponent>(target) // target must not be refillable (e.g. Reagent Tanks)
+            && _solution.TryGetDrainableSolution(target, out var targetSoln, out _) // target must be drainable
+            && TryGetPressurizedSolution((uid, null, null), out var ownerSoln, out var ownerRefill))
+        {
+            var transferAmount = transfer.TransferAmount; // This is the player-configurable transfer amount of "uid," not the target reagent tank.
+
+            var transferred = _solutionTransfer.Transfer(args.User, target, targetSoln.Value, uid, ownerSoln.Value, transferAmount);
+            args.Handled = true;
+            if (transferred > 0)
+            {
+                var toTheBrim = ownerRefill.AvailableVolume == 0;
+                var msg = toTheBrim
+                    ? "comp-solution-transfer-fill-fully"
+                    : "comp-solution-transfer-fill-normal";
+
+                _popup.PopupPredicted(Loc.GetString(msg, ("owner", args.Target), ("amount", transferred), ("target", uid)), uid, args.User);
+                return;
+            }
+        }
+
+        // if target is refillable, and owner is drainable
+        if (TryComp<RefillableSolutionComponent>(target, out var targetRefill)
+            && _solution.TryGetRefillableSolution((target, targetRefill, null), out targetSoln, out _)
+            && TryGetPressurizedSolution(uid, out ownerSoln, out _))
+        {
+            var transferAmount = transfer.TransferAmount;
+
+            if (targetRefill?.MaxRefill is { } maxRefill)
+                transferAmount = FixedPoint2.Min(transferAmount, maxRefill);
+
+            var transferred = _solutionTransfer.Transfer(args.User, uid, ownerSoln.Value, target, targetSoln.Value, transferAmount);
+            args.Handled = true;
+            if (transferred > 0)
+            {
+                var message = Loc.GetString("comp-solution-transfer-transfer-solution", ("amount", transferred), ("target", target));
+                _popup.PopupEntity(message, uid, args.User);
+            }
         }
     }
 }
