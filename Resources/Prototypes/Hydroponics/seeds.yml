@@ -1598,9 +1598,9 @@
 
 - type: seed
   id: grape
-  name: seeds-grape-name
+  name: seeds-rmc-grape-name #changed for RMC
   noun: seeds-noun-seeds
-  displayName: seeds-grape-display-name
+  displayName: seeds-rmc-grape-display-name
   plantRsi: Objects/Specific/Hydroponics/grape.rsi
   packetPrototype: GrapeSeeds
   productPrototypes:
