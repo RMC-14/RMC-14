@@ -4,3 +4,9 @@
   name: HEFA sword
   description: A blade known to be used by the Order of the HEFA. # this highly dangerous blade blows up in a shower of shrapnel on impact. # TODO RMC14 HEFA sword explosion
   components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/claymore.rsi #TODO cm hefa sword sprite?
+    state: icon
+  - type: Item
+    size: Large
+    sprite: Objects/Weapons/Melee/claymore.rsi #TODO cm hefa sword sprite?
