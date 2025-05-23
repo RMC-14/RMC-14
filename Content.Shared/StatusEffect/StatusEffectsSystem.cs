@@ -115,7 +115,7 @@ namespace Content.Shared.StatusEffect
             if (!TryAddStatusEffect(uid, key, time, refresh, status, force: force))
                 return false;
 
-            if (TryComp<T>(uid, out var comp))
+            if (HasComp<T>(uid))
             {
                 status.ActiveEffects[key].RelevantComponent = _componentFactory.GetComponentName<T>();
                 return true;
