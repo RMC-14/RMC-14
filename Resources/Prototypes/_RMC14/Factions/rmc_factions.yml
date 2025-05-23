@@ -38,7 +38,7 @@
   - RMCXeno
 
 - type: npcFaction
-  id: Survivor
+  id: Civilian
   hostile:
   - RMCXeno
 

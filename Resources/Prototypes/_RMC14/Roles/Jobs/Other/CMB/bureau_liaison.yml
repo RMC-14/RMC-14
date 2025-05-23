@@ -13,6 +13,9 @@
   accessGroups:
   - RMCWeYaExecColony
   special:
+  - type: NpcFactionMember
+    factions:
+    - Bureau
   - !type:AddComponentSpecial
     components:
     - type: Skills
