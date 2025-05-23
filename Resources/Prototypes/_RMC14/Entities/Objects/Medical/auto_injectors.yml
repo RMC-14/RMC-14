@@ -501,6 +501,8 @@
     - RMCAutoInjectorMedical
   - type: RMCEmptySolution
   - type: SolutionStorageFillable
+    solution: pen
+    
 
 - type: entity
   parent: RMCMedicAutoInjectorBase

@@ -135,8 +135,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         }
 
         var volume = refillable.Value.Comp.Solution.AvailableVolume;
-        var drained = _solution.Drain(contained.Value, drainable.Value, volume);
-        _solution.Refill(args.Entity, refillable.Value, drained);
+        var drained = _solution.SplitSolution(drainable.Value, volume);
+        _solution.AddSolution(refillable.Value, drained);
     }
 
     public override void Update(float frameTime)
