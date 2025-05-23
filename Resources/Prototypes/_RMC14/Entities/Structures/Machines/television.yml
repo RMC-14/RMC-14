@@ -6,6 +6,7 @@
   components:
   - type: Transform
     anchored: true
+    noRot: false
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     layers:
