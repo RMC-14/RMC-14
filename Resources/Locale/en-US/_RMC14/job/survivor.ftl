@@ -30,7 +30,7 @@ rmc-job-greeting-forecon = You are UNMC Force Reconnaissance (FORECON) marine fr
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-name-survivor-co = FORECON Commander
+rmc-job-name-survivor-co = Survivor Commander
 rmc-job-description-survivor-co = You are a Major of the UNMC.
 
 rmc-job-name-forecon = FORECON Survivor

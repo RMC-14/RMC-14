@@ -21,7 +21,8 @@ CMJobExecutiveOfficer = Executive Officer
 
 # Special forces
 rmc-job-prefix-forecon = FORECON
-rmc-job-prefix-forecon-co = FORECON Maj.
+rmc-job-prefix-forecon-co = FORECON Cmdr.
+
 # Admin only right now.
 cm-job-name-high-command = High Command
 
