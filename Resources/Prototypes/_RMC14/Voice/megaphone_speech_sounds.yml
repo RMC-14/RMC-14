@@ -1,0 +1,8 @@
+- type: speechSounds
+  id: RMCMegaphone
+  saySound:
+    path: /Audio/_RMC14/Items/megaphone.ogg
+  askSound:
+    path: /Audio/_RMC14/Items/megaphone.ogg
+  exclaimSound:
+    path: /Audio/_RMC14/Items/megaphone.ogg

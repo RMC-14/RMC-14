@@ -7,6 +7,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Random;
+using Content.Shared._RMC14.Megaphone;
 
 namespace Content.Server.Speech
 {
@@ -72,7 +73,7 @@ namespace Content.Server.Speech
 
             var sound = GetSpeechSound((uid, component), args.Message);
             component.LastTimeSoundPlayed = currentTime;
-            _audio.PlayPvs(sound, uid);
+            _audio.PlayPvs(sound, uid); // PlayPredicted does not work WHY. Cant use for megaphone.
         }
     }
 }

@@ -994,7 +994,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(RichTextLabel), new[] { "bubbleContent" }, null, null)),
                     new[]
                 {
-                    new StyleProperty("font", notoSansBold18),
+                    new StyleProperty("font", resCache.NotoStack(variation: "Bold", size: 20)),
                 }),
 
                 // RMC14
