@@ -1700,12 +1700,6 @@ namespace Content.Client.Stylesheets
                 {
                     new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
                 }),
-
-                new StyleRule(new SelectorElement(typeof(RichTextLabel), new[] {"megaphoneText"}, null, null), new[]
-                {
-                    new StyleProperty("font", notoSans16),
-                    new StyleProperty("font-size", 18),
-                }),
             }).ToList());
         }
     }
