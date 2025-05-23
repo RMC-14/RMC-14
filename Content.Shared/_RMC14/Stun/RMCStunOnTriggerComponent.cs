@@ -12,7 +12,10 @@ public sealed partial class RMCStunOnTriggerComponent : Component
     public float Range = 7;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Stun = TimeSpan.FromSeconds(6);
+    public TimeSpan Stun;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan Paralyze = TimeSpan.FromSeconds(6);
 
     [DataField, AutoNetworkedField]
     public TimeSpan Flash = TimeSpan.FromSeconds(4);
@@ -36,6 +39,9 @@ public sealed partial class RMCStunOnTriggerFilter
 
     [DataField]
     public TimeSpan? Stun;
+
+    [DataField]
+    public TimeSpan? Paralyze;
 
     [DataField]
     public TimeSpan? Flash;

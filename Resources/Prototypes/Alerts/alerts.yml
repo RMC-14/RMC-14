@@ -20,6 +20,7 @@
     - category: Piloting
     - alertType: Corporeal
     - alertType: Stun
+    - alertType: Unconscious
     - category: Breathing # Vox gang not calling this oxygen
     - category: Pressure
     - alertType: Bleed
