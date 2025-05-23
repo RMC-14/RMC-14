@@ -504,7 +504,7 @@
 
 - type: entity
   parent: RMCMedicAutoInjectorBase
-  id: RMCMedicAutoInjectorCS15
+  id: RMCMedicAutoInjectorCS5
   name: autoinjector (C-XS)
   description: A custom-made autoinjector, likely from research.
   components:
@@ -526,7 +526,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: RMCMedicAutoInjectorCS45
+  id: RMCMedicAutoInjectorCS15
   name: autoinjector (C-M)
   components:
   - type: Sprite
@@ -546,7 +546,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: RMCMedicAutoInjectorCS90
+  id: RMCMedicAutoInjectorCS30
   name: autoinjector (C-XL)
   components:
   - type: Sprite
@@ -566,7 +566,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: RMCMedicAutoInjectorCS180
+  id: RMCMedicAutoInjectorCS60
   name: autoinjector (C-XXL)
   components:
   - type: Sprite
