@@ -31,7 +31,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doafter = default;
+    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
 
     public override void Initialize()
     {
