@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b0bca8ef7dedf94a30f456544bec6ef3aaa7ec8a/icons/obj/items/syringe.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b0bca8ef7dedf94a30f456544bec6ef3aaa7ec8a/icons/obj/items/syringe.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi, autoinjector_tag by Vermidia",
   "size": {
     "x": 32,
     "y": 32
@@ -34,7 +34,7 @@
       "name": "tricord0"
     },
     {
-      "name": "tricord"
+      "name": "autoinjector_tag"
     }
   ]
 }
