@@ -12,6 +12,11 @@
       map: [ "openLayer" ]
     - state: closed
       map: [ "closedLayer" ]
+    - state: loaded
+      map: [ "loaded" ]
+    - state: reagent
+      map: [ "enum.SolutionContainerStoreVisuals.Base" ]
+      visible: false
   - type: Storage
     whitelist:
       tags:

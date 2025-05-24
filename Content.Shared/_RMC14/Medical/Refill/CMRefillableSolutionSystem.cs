@@ -13,6 +13,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
@@ -26,6 +27,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     public override void Initialize()
     {
@@ -128,8 +131,15 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             return;
         }
 
-        if ((!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out _) && !TryGetPressurizedSolution(contained.Value, out drainable, out _)) ||
-            !TryGetStorageFillableSolution(args.Entity, out var refillable, out _))
+        if (!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out var sol) && !TryGetPressurizedSolution(contained.Value, out drainable, out sol))
+        {
+            return;
+        }
+
+        if (sol != null)
+            _appearance.SetData(ent, SolutionContainerStoreVisuals.Color, sol.GetColor(_proto));
+
+        if (!TryGetStorageFillableSolution(args.Entity, out var refillable, out _))
         {
             return;
         }
