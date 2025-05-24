@@ -69,7 +69,7 @@ public sealed class JoinXenoSystem : EntitySystem
 
     private void OnJoinXenoAction(Entity<JoinXenoComponent> ent, ref JoinXenoActionEvent args)
     {
-        if (args.Handled)
+        if (_net.IsClient)
             return;
 
         var user = args.Performer;
@@ -89,8 +89,6 @@ public sealed class JoinXenoSystem : EntitySystem
                 return;
             }
         }
-
-        args.Handled = true;
 
         var options = new List<DialogOption>();
         var hives = EntityQueryEnumerator<HiveComponent>();
