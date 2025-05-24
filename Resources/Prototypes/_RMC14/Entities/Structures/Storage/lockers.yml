@@ -55,6 +55,26 @@
 
 - type: entity
   parent: CMLockerBase
+  id: RMCLockerSecureSafe
+  name: secure safe
+  description: A safe for an important person to store any valuables or equipment they need. The hinges have begun to rust.
+  suffix: All Access
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+
+- type: entity
+  parent: RMCLockerSecureSafe
+  id: RMCLockerSecureSafeColony
+  suffix: Colony Command
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"]]
+
+- type: entity
+  parent: CMLockerBase
   id: CMLockerStaff
   name: staff officer's locker
   components:
