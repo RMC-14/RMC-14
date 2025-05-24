@@ -16,6 +16,7 @@
   - RMCGuideMarineStructures
   - RMCGuideXenonidRoles
   - RMCGuideXenonidStructures
+  - RMCGuideXenonidMap
   - RMCGuideFood
   - RMCGuideDrinks
 
@@ -124,6 +125,7 @@
   - RMCGuideHiveStructures
   - RMCGuideResinHoles
 
+# Xenonid map icons
 - type: guideEntry
   parent: RMC
   id: RMCGuideXenonidMap
