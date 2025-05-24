@@ -13,12 +13,14 @@
   ## Xenonid Icons
 
   <Box>
-    <GuideEntityEmbed Entity="CMXenoLesserDrone" Caption=""/> <!--TODO PARASITE-->
+    <GuideEntityEmbed Entity="CMXenoLesserDrone" Caption=""/>
+    <GuideEntityEmbed Entity="CMXenoParasite" Caption=""/>
     <GuideEntityEmbed Entity="CMXenoLarva" Caption=""/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="RMCLesserMapIcon" Margin="0 0 19 0"/> <!--TODO PARASITE-->
+    <GuideEntityEmbed Entity="RMCLesserMapIcon" Margin="0 0 19 0"/>
     <GuideEntityEmbed Entity="RMCLarvaMapIcon" Margin="10 0 0 0"/>
+    <GuideEntityEmbed Entity="RMCParasiteMapIcon"/>
   </Box>
   - Drone Castes
   <Box>

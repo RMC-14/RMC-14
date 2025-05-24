@@ -2,21 +2,12 @@
   id: RMCBaseMapIcon
   parent: BaseItem
   name: Icon
+  suffix: GuideBookEntity
   components:
   - type: Sprite
     sprite: _RMC14/Interface/map_blips.rsi
 
-# Tier 0 
-- type: entity
-  parent: RMCBaseMapIcon
-  id: RMCLarvaMapIcon
-  name: Larva
-  components:
-  - type: Sprite
-    layers:
-    - state: background_xeno
-    - state: larva
-  
+# Tier 0
 - type: entity
   parent: RMCBaseMapIcon
   id: RMCLesserMapIcon
@@ -26,6 +17,26 @@
     layers:
     - state: background_xeno
     - state: lesser_drone
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCParasiteMapIcon
+  name: Parasite
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: parasite
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCLarvaMapIcon
+  name: Larva
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: larva
 
 # Drone Castes
 - type: entity
