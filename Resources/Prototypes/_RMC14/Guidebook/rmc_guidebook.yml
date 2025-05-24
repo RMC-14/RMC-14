@@ -1,4 +1,4 @@
-﻿- type: guideEntry
+- type: guideEntry
   abstract: true
   id: RMC
   isCM: true
@@ -365,13 +365,20 @@
   name: "Parasite Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleParasite.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideXenonidMap
+  priority: 33
+  name: "Xenonid Map Icons"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideXenonidMapIcons.xml"
+
 # Chemistry stuff
 - type: guideEntry
   parent: RMC
   id: RMCChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/RMCChemicals.xml"
-  priority: 33
+  priority: 34
   children:
   #  - RMCElements
   - RMCMedicine
