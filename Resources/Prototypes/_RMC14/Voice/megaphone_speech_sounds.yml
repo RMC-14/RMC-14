@@ -2,7 +2,13 @@
   id: RMCMegaphone
   saySound:
     path: /Audio/_RMC14/Items/megaphone.ogg
+    params:
+      referenceDistance: 3
   askSound:
     path: /Audio/_RMC14/Items/megaphone.ogg
+    params:
+      referenceDistance: 3
   exclaimSound:
     path: /Audio/_RMC14/Items/megaphone.ogg
+    params:
+      referenceDistance: 3

@@ -73,7 +73,11 @@ namespace Content.Server.Speech
 
             var sound = GetSpeechSound((uid, component), args.Message);
             component.LastTimeSoundPlayed = currentTime;
-            _audio.PlayPvs(sound, uid); // PlayPredicted does not work WHY. Cant use for megaphone.
+
+            if (HasComp<RMCMegaphoneUserComponent>(uid)) // RMC14 Megaphone allows you to hear without being able to see the sound source
+                _audio.PlayEntity(sound, Filter.Broadcast(), uid, recordReplay: true);
+            else
+                _audio.PlayPvs(sound, uid);
         }
     }
 }
