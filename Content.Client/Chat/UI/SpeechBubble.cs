@@ -216,17 +216,6 @@ namespace Content.Client.Chat.UI
 
             label.SetMessage(FormatSpeech(message.WrappedMessage, fontColor));
 
-            var entityManager = IoCManager.Resolve<IEntityManager>();
-            var senderUid = entityManager.GetEntity(message.SenderEntity);
-
-            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
-            {
-                if (entityManager.TryGetComponent<RMCSpeechBubbleSpecificStyleComponent>(senderUid, out var specificStyleComponent) && specificStyleComponent.SpeechStyleClass != null)
-                    speechStyleClass = specificStyleComponent.SpeechStyleClass;
-                else if (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid))
-                    speechStyleClass = "commanderSpeech";
-            }
-
             var panel = new PanelContainer
             {
                 StyleClasses = { "speechBox", speechStyleClass },
@@ -248,11 +237,23 @@ namespace Content.Client.Chat.UI
 
         protected override Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor = null)
         {
+            var entityManager = IoCManager.Resolve<IEntityManager>();
+            var senderUid = entityManager.GetEntity(message.SenderEntity);
+
+            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
+            {
+                if (entityManager.TryGetComponent<RMCSpeechBubbleSpecificStyleComponent>(senderUid, out var specificStyleComponent) && specificStyleComponent.SpeechStyleClass != null)
+                    speechStyleClass = specificStyleComponent.SpeechStyleClass;
+                else if (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid))
+                    speechStyleClass = "commanderSpeech";
+            }
+
             if (!ConfigManager.GetCVar(CCVars.ChatEnableFancyBubbles))
             {
                 var label = new RichTextLabel
                 {
-                    MaxWidth = SpeechMaxWidth
+                    MaxWidth = SpeechMaxWidth,
+                    StyleClasses = { "bubbleContent" }, //RMC14 The simplified bubble does not have any styles of its own and in order to apply styles to it we mark it in the same way as a regular bubble but it's a dummy, just a marker. damned.
                 };
 
                 label.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
@@ -283,17 +284,6 @@ namespace Content.Client.Chat.UI
             //We'll be honest. *Yes* this is hacky. Doing this in a cleaner way would require a bottom-up refactor of how saycode handles sending chat messages. -Myr
             bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor));
             bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
-
-            var entityManager = IoCManager.Resolve<IEntityManager>();
-            var senderUid = entityManager.GetEntity(message.SenderEntity);
-
-            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
-            {
-                if (entityManager.TryGetComponent<RMCSpeechBubbleSpecificStyleComponent>(senderUid, out var specificStyleComponent) && specificStyleComponent.SpeechStyleClass != null)
-                    speechStyleClass = specificStyleComponent.SpeechStyleClass;
-                else if (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid))
-                    speechStyleClass = "commanderSpeech";
-            }
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr
             var mainPanel = new PanelContainer
