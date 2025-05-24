@@ -1152,3 +1152,6 @@ GrenadeFlashBang: RMCGrenadeFlashBang
 # 2025-05-21
 CMVendorWalkman: CMVendorCassettes
 CMPosterWalkman: RMCPosterCassettePlayer
+
+# 2025-05-24
+Katana: RMCKatana
