@@ -124,6 +124,11 @@
   - RMCGuideHiveStructures
   - RMCGuideResinHoles
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideXenonidMap
+  name: "Xenonid Map Icons"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideXenonidMapIcons.xml"
 
 - type: guideEntry
   parent: RMC
@@ -364,13 +369,6 @@
   priority: 32
   name: "Parasite Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleParasite.xml"
-
-- type: guideEntry
-  parent: RMC
-  id: RMCGuideXenonidMap
-  priority: 33
-  name: "Xenonid Map Icons"
-  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideXenonidMapIcons.xml"
 
 # Chemistry stuff
 - type: guideEntry

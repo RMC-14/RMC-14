@@ -10,9 +10,9 @@
   - [color=Red][bold]Red[/bold][/color] is given to Tier 3 Xenonids.
 
   ## Xenonid Icons
-  - [bold]Lesser[/bold] <GuideEntityEmbed Entity="CMXenoLesserDrone"/> <GuideEntityEmbed Entity="RMCPlushieXippy"/> place holder icon
+<GuideEntityEmbed Entity="CMXenoLesserDrone"/> <GuideEntityEmbed Entity="RMCPlushieXippy"/> place holder icon
 
 
 ## Structure Icons
   insert entities, names etc
-  <Document>
+  </Document>
