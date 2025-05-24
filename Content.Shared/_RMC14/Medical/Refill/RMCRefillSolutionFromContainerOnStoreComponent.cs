@@ -12,6 +12,12 @@ public sealed partial class RMCRefillSolutionFromContainerOnStoreComponent : Com
     public string ContainerId = "pressurized_reagent_canister";
 
     [DataField, AutoNetworkedField]
+    public bool CanFlush = false;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan FlushTime = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
     public float LayerOpacity = 0.75f;
 }
 

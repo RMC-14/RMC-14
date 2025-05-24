@@ -47,6 +47,7 @@
     state: Last
   - type: RMCRefillSolutionOnStore
   - type: RMCRefillSolutionFromContainerOnStore
+    canFlush: true
   - type: Appearance
   - type: CMStorageVisualizer
     storageClosed: closedLayer

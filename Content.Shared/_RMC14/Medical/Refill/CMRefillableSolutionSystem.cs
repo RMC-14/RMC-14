@@ -14,6 +14,8 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
+using Content.Shared.Verbs;
+using Content.Shared.DoAfter;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
@@ -29,6 +31,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doafter = default;
 
     public override void Initialize()
     {
@@ -40,6 +43,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
 
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionFromContainerOnStoreInserted);
+        SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, GetVerbsEvent<AlternativeVerb>>(OnRefillSolutionFromContainerOnStoreGetVerbs);
+        SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, ContainerFlushDoAfterEvent>(OnRefillSolutionFromContainerOnStoreFlush);
 
         SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
     }
@@ -258,5 +263,80 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
                 _popup.PopupEntity(message, uid, args.User);
             }
         }
+    }
+
+    private void OnRefillSolutionFromContainerOnStoreGetVerbs(Entity<RMCRefillSolutionFromContainerOnStoreComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!ent.Comp.CanFlush)
+            return;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
+    !container.ContainedEntities.TryFirstOrNull(out var contained))
+        {
+            return;
+        }
+
+        EntityUid user = args.User;
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-refillsolution-flush"),
+            Act = () =>
+            {
+                TryFlushContainer(ent, user);
+            },
+        });
+    }
+
+    private void TryFlushContainer(Entity<RMCRefillSolutionFromContainerOnStoreComponent> ent, EntityUid user)
+    {
+        if (!ent.Comp.CanFlush)
+            return;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
+!container.ContainedEntities.TryFirstOrNull(out var contained))
+        {
+            return;
+        }
+
+        if (!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out var sol) && !TryGetPressurizedSolution(contained.Value, out drainable, out sol))
+        {
+            return;
+        }
+        //TODO RMC immovable
+        _popup.PopupClient(Loc.GetString("rmc-refillsolution-flush-start", ("time", ent.Comp.FlushTime.TotalSeconds)), user, user, PopupType.SmallCaution);
+        _doafter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, ent.Comp.FlushTime, new ContainerFlushDoAfterEvent(), ent, target: ent)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameTarget,
+
+        });
+    }
+
+    private void OnRefillSolutionFromContainerOnStoreFlush(Entity<RMCRefillSolutionFromContainerOnStoreComponent> ent, ref ContainerFlushDoAfterEvent args)
+    {
+        if (!ent.Comp.CanFlush)
+            return;
+
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
+!container.ContainedEntities.TryFirstOrNull(out var contained))
+        {
+            return;
+        }
+
+        if (!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out var sol) && !TryGetPressurizedSolution(contained.Value, out drainable, out sol))
+        {
+            return;
+        }
+
+        _solution.RemoveAllSolution(drainable.Value);
+
+        if (TryComp<AppearanceComponent>(ent, out var appearance))
+            _appearance.QueueUpdate(ent, appearance);
     }
 }
