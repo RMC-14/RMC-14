@@ -28,6 +28,7 @@
   overwatchSortPriority: -1
   overwatchRoleName: Combat Technicians
   roleWeight: 1
+  displayWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
