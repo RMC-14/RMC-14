@@ -197,6 +197,17 @@
       tags:
       - Sidearm
 
+#Filled Command Pouch
+- type: entity
+  parent: RMCPouchCommand
+  id: RMCPouchCommandFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+
 
 # Magazine Pouch
 - type: entity
@@ -307,6 +318,10 @@
     items:
       tags:
       - RMCShellShotgun
+  - type: Tag
+    tags:
+    - Pouch
+    - RMCPouchShotgunShells
 
 
 # Large Shotgun Shell Pouch
@@ -603,6 +618,22 @@
     - id: CMMultitool
     - id: CMWrench
 
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocMarineRaiderFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMCrowbar
+    - id: RMCCableCoil
+    - id: CMMultitool
+    - id: CMWrench
+    - id: RMCExplosivePlastic
+      amount: 2
+
 
 # Sling Pouch
 - type: entity
@@ -661,3 +692,6 @@
     contents:
     - id: RMCMagazineSmartGunirradiated
       amount: 3
+
+- type: Tag
+  id: RMCPouchShotgunShells

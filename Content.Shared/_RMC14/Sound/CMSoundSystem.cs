@@ -16,12 +16,16 @@ public sealed class CMSoundSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<RandomSoundComponent, MapInitEvent>(OnRandomMapInit);
 
         SubscribeLocalEvent<SoundOnDeathComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
+        SubscribeLocalEvent<SoundOnDeathComponent, EntityTerminatingEvent>(OnDeathMobTerminating);
+
+        SubscribeLocalEvent<SoundOnDeathSoundComponent, EntityTerminatingEvent>(OnDeathSoundTerminating);
 
         SubscribeLocalEvent<EmitSoundOnActionComponent, SoundActionEvent>(OnEmitSoundOnAction);
     }
@@ -42,8 +46,39 @@ public sealed class CMSoundSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (_net.IsServer)
-            _audio.PlayPvs(ent.Comp.Sound, ent);
+        if (!_net.IsServer)
+            return;
+
+        ent.Comp.Entity = _audio.PlayPvs(ent.Comp.Sound, ent)?.Entity;
+        Dirty(ent);
+    }
+
+    private void OnDeathMobTerminating(Entity<SoundOnDeathComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (ent.Comp.Entity == null ||
+            TerminatingOrDeleted(ent.Comp.Entity))
+        {
+            return;
+        }
+
+        var coordinates = _transform.GetMoverCoordinates(ent);
+        if (TerminatingOrDeleted(coordinates.EntityId))
+            return;
+
+        _transform.SetCoordinates(ent.Comp.Entity.Value, coordinates);
+        ent.Comp.Entity = null;
+    }
+
+    private void OnDeathSoundTerminating(Entity<SoundOnDeathSoundComponent> ent, ref EntityTerminatingEvent args)
+    {
+        var parent = ent.Comp.Parent;
+        ent.Comp.Parent = null;
+
+        if (!TryComp(parent, out SoundOnDeathComponent? death))
+            return;
+
+        death.Entity = null;
+        Dirty(parent.Value, death);
     }
 
     private void OnEmitSoundOnAction(Entity<EmitSoundOnActionComponent> ent, ref SoundActionEvent args)

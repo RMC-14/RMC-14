@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
-using Robust.Shared.Utility;
 
 // ReSharper disable CheckNamespace
 namespace Content.Shared.Roles;
@@ -41,12 +40,6 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
-
-    [DataField]
-    public SpriteSpecifier.Rsi? MinimapIcon;
-
-    [DataField]
-    public SpriteSpecifier.Rsi? MinimapBackground;
 
     [DataField]
     public float RoleWeight;

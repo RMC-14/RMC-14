@@ -1,0 +1,28 @@
+<Document>
+  #Vanguard, Tier 3
+
+  <GuideEntityEmbed Entity="RMCXenoPraetorianVanguard"/>
+
+  ##Playing as a Vanguard
+
+  Firstly let's see what's changed from your Base form. You lose a portion of your health, but you are now slightly faster than your base form. You also trade your corrosive acid and spit to get a regenerating shield that perfectly blocks one attack, which recharges out of combat.
+
+  You gain the ability to use Pierce, that penetrates through opponents, and it will also instantly recharge your shield if you hit 2 targets.
+
+  You also gain cleave, which has two states: Root, which will immobilise a target and Fling, which will fling a target away from you.
+
+  Your dash has changed as well, it now has an area slash after you dash. By activating your dash again, you can do the area slash.
+
+  Vanguard is similar to an upgraded Warrior, specializing in consistent melee attacks or doing heavy burst damage and having a dash ability. They can combine multiple abilities to deal bursts of damage from around corners or just frontline combat.
+
+  ##Abilities:
+  - [bold][color=green]PASSIVE[/color][/bold]: You are granted a shield that perfectly blocks one attack and rapidly decays after you're hit. The shield recharges while out of combat.
+  - [bold]Pierce[/bold]: Stab through your enemies with your tail against hosts. If you hit two people with your pierce, your shield is instantly recharged. This ability does slight extra damage than normal slash. The ability also has slight AP (armor piercing).
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPierce"/>
+  - [bold]Blitz[/bold]: Charge through enemies with a range of 4 tiles. Upon stopping, activate again to do an AoE slash in a 3x3 tile range, otherwise the ability will activate automatically after a 3 second delay. If the AoE slash hits, it will instantly regenerate your shield.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoDash"/>
+  - [bold]Root[/bold]: Immobilizes your target shortly, making them a sitting duck. Shares cooldown with Fling.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCleaveRoot"/>
+  - [bold]Fling[/bold]: Flings your target away from you, sending them flying backwards. Shares cooldown with Root.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCleaveFling"/>
+</Document>

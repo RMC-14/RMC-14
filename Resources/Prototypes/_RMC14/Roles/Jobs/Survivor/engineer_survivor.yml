@@ -22,11 +22,13 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetEngineer
     - type: RMCSurvivor
+    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
       - Survivor
     - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
 
 - type: startingGear
   id: RMCGearSurvivorEngineer
@@ -64,9 +66,27 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetEngineer
-  name: engineer survivor preset
+  name: engineer colonist preset
   components:
   - type: SurvivorPreset
     randomGearOther:
     -
       - [ CMBeltUtilityFilled ]
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorEngineer
+  name: engineer colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorEngineer
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorEngineer
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorEngineer

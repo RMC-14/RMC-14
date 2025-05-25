@@ -1,7 +1,9 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.BlurredVision;
+using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage.Prototypes;
@@ -35,6 +37,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
 
     private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
     private static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
@@ -119,12 +122,13 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         if (size == RMCSizes.Humanoid)
         {
             var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
-            RaiseLocalEvent(ent, ref ev);
+            RaiseLocalEvent(ent, ref ev); // TODO RMC14 limb damage
 
             var bombArmorMult = (100 - ev.ExplosionArmor) * 0.01;
             var severity = factor * 5;
 
             _statusEffects.TryAddStatusEffect<FlashedComponent>(ent, FlashedKey, ent.Comp.BlindTime * bombArmorMult, true);
+            _deafness.TryDeafen(ent, TimeSpan.FromSeconds(severity * 0.5), true);
 
             var knockdownValue = severity * 0.1;
             var knockoutValue = damage.Double() * 0.1;
@@ -140,7 +144,9 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             _dazed.TryDaze(ent, knockoutTime * 2, stutter: true);
             _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(ent, BlindKey, ent.Comp.BlurTime, false);
 
-            _throwing.TryThrow(ent, dir, (float)severity);
+            if (!HasComp<XenoNestedComponent>(ent))
+                _throwing.TryThrow(ent, dir, (float) severity);
+
             return;
         }
 

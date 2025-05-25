@@ -1,0 +1,48 @@
+﻿<controls:VoicelinesTab
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.UserInterface.Options"
+    xmlns:s="clr-namespace:Content.Client.Stylesheets"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="clr-namespace:Content.Client.Options.UI">
+    <BoxContainer Orientation="Vertical">
+        <ScrollContainer VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
+                <CheckBox Name="RMCVoicelinesYourself" Text="{Loc 'rmc-ui-audio-voicelines-yourself'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesYourself" Text="{Loc 'rmc-ui-audio-emotes-yourself'}" Margin="0 0 0 5" />
+                <Label Text="{Loc 'rmc-ui-voicelines'}"
+                       FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                       StyleClasses="LabelKeyText"/>
+                <CheckBox Name="RMCVoicelinesArachnid" Text="{Loc 'rmc-ui-audio-voicelines-arachnid'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesDiona" Text="{Loc 'rmc-ui-audio-voicelines-diona'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesDwarf" Text="{Loc 'rmc-ui-audio-voicelines-dwarf'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesFelinid" Text="{Loc 'rmc-ui-audio-voicelines-felinid'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesHuman" Text="{Loc 'rmc-ui-audio-voicelines-human'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesMoth" Text="{Loc 'rmc-ui-audio-voicelines-moth'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesReptilian" Text="{Loc 'rmc-ui-audio-voicelines-reptilian'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesSlime" Text="{Loc 'rmc-ui-audio-voicelines-slime'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesAvali" Text="{Loc 'rmc-ui-audio-voicelines-avali'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesVulpkanin" Text="{Loc 'rmc-ui-audio-voicelines-vulpkanin'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesRodentia" Text="{Loc 'rmc-ui-audio-voicelines-rodentia'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesFeroxi" Text="{Loc 'rmc-ui-audio-voicelines-feroxi'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCVoicelinesSkrell" Text="{Loc 'rmc-ui-audio-voicelines-skrell'}" Margin="0 0 0 5" />
+                <Label Text="{Loc 'rmc-ui-emotes'}"
+                       FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                       StyleClasses="LabelKeyText"/>
+                <CheckBox Name="RMCEmotesArachnid" Text="{Loc 'rmc-ui-audio-emotes-arachnid'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesDiona" Text="{Loc 'rmc-ui-audio-emotes-diona'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesDwarf" Text="{Loc 'rmc-ui-audio-emotes-dwarf'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesFelinid" Text="{Loc 'rmc-ui-audio-emotes-felinid'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesHuman" Text="{Loc 'rmc-ui-audio-emotes-human'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesMoth" Text="{Loc 'rmc-ui-audio-emotes-moth'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesReptilian" Text="{Loc 'rmc-ui-audio-emotes-reptilian'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesSlime" Text="{Loc 'rmc-ui-audio-emotes-slime'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesAvali" Text="{Loc 'rmc-ui-audio-emotes-avali'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesVulpkanin" Text="{Loc 'rmc-ui-audio-emotes-vulpkanin'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesRodentia" Text="{Loc 'rmc-ui-audio-emotes-rodentia'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesFeroxi" Text="{Loc 'rmc-ui-audio-emotes-feroxi'}" Margin="0 0 0 5" />
+                <CheckBox Name="RMCEmotesSkrell" Text="{Loc 'rmc-ui-audio-emotes-skrell'}" Margin="0 0 0 5" />
+            </BoxContainer>
+        </ScrollContainer>
+        <ui:OptionsTabControlRow Name="Control" Access="Public" />
+    </BoxContainer>
+</controls:VoicelinesTab>

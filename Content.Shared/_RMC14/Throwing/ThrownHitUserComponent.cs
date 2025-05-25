@@ -3,5 +3,5 @@
 namespace Content.Shared._RMC14.Throwing;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(ThrowingSystem))]
+[Access(typeof(RMCThrowingSystem))]
 public sealed partial class ThrownHitUserComponent : Component;
