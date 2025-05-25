@@ -3,6 +3,7 @@
   id: RMCSurvivorForeconRifleman
   name: cm-job-name-rifleman
   playTimeTracker: RMCJobSurvivorRiflemanForecon
+  icon: "RMCJobIconForeconRifleman"
   special:
   - !type:AddComponentSpecial
     components:
@@ -46,3 +47,10 @@
     job_id: RMCSurvivorForeconRifleman
   - type: Sprite
     state: marine_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconForeconRifleman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_rifleman
