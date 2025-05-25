@@ -36,6 +36,8 @@ public sealed class CrewManifestSystem : EntitySystem
 
     private readonly Dictionary<EntityUid, Dictionary<ICommonSession, CrewManifestEui>> _openEuis = new();
 
+    private readonly HashSet<EntityUid> _queuedManifests = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<AfterGeneralRecordCreatedEvent>(AfterGeneralRecordCreated);
@@ -46,6 +48,16 @@ public sealed class CrewManifestSystem : EntitySystem
 
         SubscribeLocalEvent<CrewManifestViewerComponent, BoundUIClosedEvent>(OnBoundUiClose);
         SubscribeLocalEvent<CrewManifestViewerComponent, CrewManifestOpenUiMessage>(OpenEuiFromBui);
+    }
+
+    public override void Update(float frameTime)
+    {
+        foreach (var queuedStation in _queuedManifests)
+        {
+            BuildCrewManifest(queuedStation);
+            UpdateEuis(queuedStation);
+        }
+        base.Update(frameTime);
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
@@ -73,25 +85,24 @@ public sealed class CrewManifestSystem : EntitySystem
         OpenEui(GetEntity(message.Id), sessionCast);
     }
 
-    // Not a big fan of this one. Rebuilds the crew manifest every time
-    // somebody spawns in, meaning that at round start, it rebuilds the crew manifest
-    // wrt the amount of players readied up.
+    private void QueueCrewManifestBuild(EntityUid station)
+    {
+        _queuedManifests.Add(station);
+    }
+
     private void AfterGeneralRecordCreated(AfterGeneralRecordCreatedEvent ev)
     {
-        BuildCrewManifest(ev.Key.OriginStation);
-        UpdateEuis(ev.Key.OriginStation);
+        QueueCrewManifestBuild(ev.Key.OriginStation);
     }
 
     private void OnRecordModified(RecordModifiedEvent ev)
     {
-        BuildCrewManifest(ev.Key.OriginStation);
-        UpdateEuis(ev.Key.OriginStation);
+        QueueCrewManifestBuild(ev.Key.OriginStation);
     }
 
     private void OnRecordRemoved(RecordRemovedEvent ev)
     {
-        BuildCrewManifest(ev.Key.OriginStation);
-        UpdateEuis(ev.Key.OriginStation);
+        QueueCrewManifestBuild(ev.Key.OriginStation);
     }
 
     private void OnBoundUiClose(EntityUid uid, CrewManifestViewerComponent component, BoundUIClosedEvent ev)
