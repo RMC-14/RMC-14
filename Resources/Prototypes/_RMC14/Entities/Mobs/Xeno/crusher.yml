@@ -11,6 +11,9 @@
   name: Crusher
   description: A huge alien with an enormous armored crest.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCrusher
   - type: GhostRole
     name: cm-job-name-xeno-crusher
   - type: Sprite
@@ -108,7 +111,6 @@
   id: RMCXenoCrusher
   components:
   - type: Xeno
-    role: CMXenoCrusher
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -142,7 +144,6 @@
       780: Critical
       880: Dead
   - type: Xeno
-    role: CMXenoCrusher
     ignorePheromones: Frenzy
     actionIds:
     - ActionXenoRest
@@ -190,3 +191,4 @@
       types:
         Blunt: 75
   - type: XenoToggleCharging
+  - type: XenoHidden

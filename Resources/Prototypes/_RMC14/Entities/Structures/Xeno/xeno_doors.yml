@@ -30,6 +30,7 @@
         layer:
         - AirlockLayer
   - type: Door
+    canPry: false
     crushDamage:
       types:
         Blunt: 15

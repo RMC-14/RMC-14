@@ -871,6 +871,23 @@
     - RMCAttachmentStock
     - RMCAttachmentSSG45Stock
 
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL83A2Stock
+  name: L83A2 solid stock
+  description: Intergrated into the L83A2. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: l83a2_a
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentL83A2Stock
+
 - type: Tag
   id: RMCAttachmentHG3712Stock
 
@@ -948,3 +965,6 @@
 
 - type: Tag
   id: RMCAttachmentSSG45Stock
+
+- type: Tag
+  id: RMCAttachmentL83A2Stock

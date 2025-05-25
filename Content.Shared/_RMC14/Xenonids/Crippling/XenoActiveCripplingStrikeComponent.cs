@@ -11,6 +11,9 @@ public sealed partial class XenoActiveCripplingStrikeComponent : Component
     public TimeSpan ExpireAt;
 
     [DataField, AutoNetworkedField]
+    public bool NextSlashBuffed = true;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan SlowDuration = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
@@ -18,6 +21,9 @@ public sealed partial class XenoActiveCripplingStrikeComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId HitText = "cm-xeno-crippling-strike-hit";
+
+    [DataField, AutoNetworkedField]
+    public LocId? DeactivateText;
 
     [DataField, AutoNetworkedField]
     public LocId ExpireText = "cm-xeno-crippling-strike-expire";

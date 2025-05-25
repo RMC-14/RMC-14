@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/structures/props/furniture/chairs.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base",
+      "directions": 4
+    },
+    {
+      "name": "buckled",
+      "directions": 4
+    },
+    {
+      "name": "bars",
+      "directions": 4
+    },
+    {
+      "name": "new_folding",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "new_unfolding",
+      "directions": 4,
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ],
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ],
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ],
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "new_folded",
+      "directions": 4
+    },
+    {
+      "name": "destroyed",
+      "directions": 4
+    }
+  ]
+}

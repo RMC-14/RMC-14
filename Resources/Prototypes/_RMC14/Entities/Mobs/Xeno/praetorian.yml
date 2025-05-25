@@ -123,6 +123,9 @@
   parent: CMXenoPraetorianBase
   id: CMXenoPraetorian
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRolePraetorian
   - type: XenoSprayAcid
     barricadeDamage:
       types:
@@ -152,6 +155,9 @@
   id: RMCXenoPraetorianValkyrie
   suffix: Valkyrie
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleValkyrie
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/valkyrie_praetorian.rsi
   - type: Xeno
@@ -160,13 +166,13 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailFountain
+    - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoTantrum
     - ActionXenoHighGallop
     - ActionXenoFightOrFlight
     - ActionXenoRetrieve
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-valkyrie-name
     description: rmc-xeno-valkyrie-description
@@ -213,6 +219,7 @@
     - type: RMCRooted
     - type: RMCDazed
   - type: XenoHighGallop
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -231,7 +238,6 @@
     - ActionXenoDodge
     - ActionXenoTailTrip
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-dancer-name
     description: rmc-xeno-dancer-description
@@ -248,12 +254,16 @@
       groups:
         Brute: 40
   - type: XenoTailTrip
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoPraetorianBase
   id: RMCXenoPraetorianVanguard
   suffix: Vanguard
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleVanguard
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/vanguard_praetorian.rsi
   - type: MobThresholds
@@ -272,7 +282,6 @@
     - ActionXenoCleaveRoot
     - ActionXenoCleaveFling
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-vanguard-name
     description: rmc-xeno-vanguard-description
@@ -296,12 +305,16 @@
       groups:
         Brute: 40
   - type: XenoCleave
+  - type: XenoHidden
 
 - type: entity
   parent: CMXenoPraetorianBase
   id: RMCXenoPraetorianOppressor
   suffix: Oppressor
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleOppressor
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/oppressor_praetorian.rsi
   - type: Xeno
@@ -314,7 +327,6 @@
     - ActionXenoDislocate
     - ActionXenoTailLash
     - ActionXenoDevolve
-    hidden: true
   - type: MeleeWeapon
     damage:
       groups:
@@ -359,3 +371,4 @@
     damage:
       groups:
         Brute: 15
+  - type: XenoHidden
