@@ -8,9 +8,12 @@ using Content.Shared.Doors.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
+using Content.Shared.Tools.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -25,6 +28,7 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
@@ -40,6 +44,8 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
 
         SubscribeLocalEvent<RMCPodDoorComponent, BeforePryEvent>(OnPodDoorBeforePry);
+
+        SubscribeLocalEvent<LayerChangeOnWeldComponent, DoorBoltsChangedEvent>(OnDoorBoltStateChanged);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -117,6 +123,25 @@ public sealed class CMDoorSystem : EntitySystem
 
         if (_rmcPower.IsPowered(ent))
             args.Cancelled = true;
+    }
+
+    private void OnDoorBoltStateChanged(Entity<LayerChangeOnWeldComponent> ent, ref DoorBoltsChangedEvent args)
+    {
+        if(!TryComp(ent, out FixturesComponent? fixtureComp) || !TryComp(ent, out DoorComponent? door))
+            return;
+
+        foreach (var fixture in fixtureComp.Fixtures)
+        {
+            switch (args.BoltsDown)
+            {
+                case true when fixture.Value.CollisionLayer == (int) ent.Comp.UnWeldedLayer && door.State == DoorState.Closed:
+                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) ent.Comp.WeldedLayer);
+                    break;
+                case false when fixture.Value.CollisionLayer == (int) ent.Comp.WeldedLayer:
+                    _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) ent.Comp.UnWeldedLayer);
+                    break;
+            }
+        }
     }
 
     private AnchoredEntitiesEnumerator? GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)
