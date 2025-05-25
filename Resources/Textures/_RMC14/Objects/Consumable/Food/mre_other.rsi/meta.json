@@ -57,6 +57,23 @@
     },
     {
       "name": "food-2"
+    },
+    {
+      "name": "pmc_mealpack"
+    },
+    {
+      "name": "pmc_mealpackopened"
+    },
+    {
+      "name": "pmc_mealpackempty"
+    },
+    {
+      "name": "pmc_mealpack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pmc_mealpack-inhand-right",
+      "directions": 4
     }
   ]
 }

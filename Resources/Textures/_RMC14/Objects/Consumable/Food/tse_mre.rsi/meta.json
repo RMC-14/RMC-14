@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": "Taken from cmss13 at https://github.com/Blundir/cmss13/blob/38b0e961a0e111eece059564869764fd36ba6024/icons/obj/items/food/mre_food/twe.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "twe_entree"
+    },
+    {
+      "name": "bacon"
+    },
+    {
+      "name": "tomato_beans"
+    },
+    {
+      "name": "fish_n_rice"
+    },
+    {
+      "name": "rice_noodles"
+    },
+    {
+      "name": "fish_n_chips"
+    },
+    {
+      "name": "twe_side"
+    },
+    {
+      "name": "mushroom_soup"
+    },
+    {
+      "name": "bean_soup"
+    },
+    {
+      "name": "nut_patty"
+    },
+    {
+      "name": "nigiri_sushi"
+    },
+    {
+      "name": "tomato_chips"
+    },
+    {
+      "name": "twe_snack"
+    },
+    {
+      "name": "almond"
+    },
+    {
+      "name": "cheese"
+    },
+    {
+      "name": "twe_dessert"
+    },
+    {
+      "name": "tiny_chocolate_bar"
+    },
+    {
+      "name": "tiny_applepie"
+    },
+    {
+      "name": "tiny_cheesecake"
+    },
+    {
+      "name": "tiny_pancakes"
+    },
+    {
+      "name": "cookie_bar"
+    },
+    {
+      "name": "cookie_bar-o"
+    },
+    {
+      "name": "paste1"
+    },
+    {
+      "name": "paste2"
+    },
+    {
+      "name": "paste3"
+    },
+    {
+      "name": "paste_cap"
+    },
+    {
+      "name": "paste_vegemite"
+    },
+    {
+      "name": "paste_strawberry"
+    },
+    {
+      "name": "paste_blackberry"
+    },
+    {
+      "name": "teabag"
+    },
+    {
+      "name": "lemondrop"
+    }
+  ]
+}
