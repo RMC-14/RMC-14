@@ -84,6 +84,8 @@
   - type: Transform
     anchored: true
     noRot: true
+  - type: Physics
+    bodyType: Static
   - type: Clickable
   - type: Sprite
     sprite: _RMC14/Objects/tents.rsi
