@@ -12,6 +12,7 @@
   - type: Anchorable
   - type: Transform
     anchored: true
+    noRot: true
   - type: Sprite
     sprite: _RMC14/Objects/tents.rsi
     offset: 1,0
@@ -34,7 +35,7 @@
     size: Large
   - type: Appearance
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1: # Left Wall
@@ -82,6 +83,7 @@
   - type: Anchorable
   - type: Transform
     anchored: true
+    noRot: true
   - type: Clickable
   - type: Sprite
     sprite: _RMC14/Objects/tents.rsi
