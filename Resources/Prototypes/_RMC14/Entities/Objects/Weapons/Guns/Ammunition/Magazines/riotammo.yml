@@ -109,6 +109,38 @@
     - RMCMagazineSMGM63Rubber
 
 - type: entity
+  parent: RMCMagazineSMGMP90
+  id: RMCRubberMagazineSMGMP90
+  name: "UN MP90 rubber magazine (10x20mm)"
+  description: "A less then lethal Rubber 10x20mm magazine for the UN MP90."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGMP90
+    - RMCRubberMagazineSMGMP90
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge10x20mmRubber
+    proto: RMCCartridge10x20mmRubber
+    capacity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/RubberMP90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - type: MagazineVisuals
+      magState: mag
+      steps: 2
+      zeroVisible: false
+      zeroOnlyOnEmpty: true
+    - type: Appearance
+
+- type: entity
   parent: CMCartridgeSMGBase
   id: RMCCartridge10x20mmRubber
   name: rubber cartridge (10x20mm)
@@ -245,3 +277,6 @@
 
 - type: Tag
   id: RMCCartridgePistol9mmRubber
+
+- type: Tag
+  id: RMCRubberMagazineSMGMP90

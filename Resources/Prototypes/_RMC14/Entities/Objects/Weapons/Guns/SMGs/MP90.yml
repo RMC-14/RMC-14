@@ -1,0 +1,162 @@
+﻿- type: entity
+  parent: CMBaseWeaponSMG
+  name: UN MP90 Submachinegun
+  id: RMCWeaponSMGMP90
+  description: A modification of the famous FN P90 submachinegun for the Military Police to improve its combat effectiveness by changing its caliber to 10x20mm.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/MP90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/MP90.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/smg_light.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 0.1
+    recoilUnwielded: 3
+    scatterWielded: 14
+    scatterUnwielded: 45
+    baseFireRate: 10
+    burstScatterMult: 3
+    modifiers:
+      Burst:
+        fireDelay: 0.0980
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.8
+  - type: MagazineAmmoProvider
+    autoEject: true
+    soundAutoEject: null
+  - type: WieldableSpeedModifiers
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSMGMP90
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSMGMP90
+          - RMCAPMagazineSMGMP90
+          - RMCRubberMagazineSMGMP90
+
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.84, -0.02
+      rmc-aslot-rail: 0.2, 0.219
+
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: RMCMagazineSMGMP90
+  name: "UN MP90 magazine (10x20mm)"
+  description: "A 10x20mm magazine for the UN MP90."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGMP90
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridge10x20mm
+    proto: CMCartridge10x20mm
+    capacity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/MP90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: RMCAPMagazineSMGMP90
+  name: "UN MP90 APmagazine (10x20mm)"
+  description: "A AP10x20mm magazine for the UN MP90."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGMP90
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridge10x20mmAP
+    proto: CMCartridge10x20mmAP
+    capacity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/APMP90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: apmag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: True
+  - type: Appearance
+
+- type: Tag
+  id: RMCAPMagazineSMGMP90
+
+- type: Tag
+  id: RMCMagazineSMGMP90
+
+
+
