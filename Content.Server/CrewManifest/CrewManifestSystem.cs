@@ -15,7 +15,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Server.CrewManifest;
 
@@ -52,12 +51,17 @@ public sealed class CrewManifestSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
+        if (_queuedManifests.Count < 1)
+            return;
+
         foreach (var queuedStation in _queuedManifests)
         {
             BuildCrewManifest(queuedStation);
             UpdateEuis(queuedStation);
         }
-        base.Update(frameTime);
+        _queuedManifests.Clear();
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
