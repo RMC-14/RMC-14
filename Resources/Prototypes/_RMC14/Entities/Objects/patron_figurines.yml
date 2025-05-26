@@ -1294,7 +1294,7 @@
     state: dry_wetbrush
   - type: PatronFigurine
     id: 72a61df6-9a4f-4d32-840b-f1d0c4e2b051
-    
+
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHaileyMorgan
@@ -1464,3 +1464,14 @@
   - type: PatronFigurine
     id: 3c148935-f54d-4c7d-b02c-a9ac360c6479
 
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJackHunterDunes
+  name: Jack 'Hunter' Dunes figurine
+  description: "This item smells of old MRE, and blood......seems like people thrown this one at their targets with all the dents on it."
+  components:
+  - type: Sprite
+    state: jack_hunter_dunes
+  - type: PatronFigurine
+    id: 8ccb1d66-4449-4674-a193-1077eeab8f57
