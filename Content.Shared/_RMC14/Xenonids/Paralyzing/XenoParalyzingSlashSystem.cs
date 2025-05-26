@@ -46,6 +46,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
         active.ParalyzeDelay = xeno.Comp.StunDelay;
         active.ParalyzeDuration = xeno.Comp.StunDuration;
+        active.DazeTime = xeno.Comp.DazeTime;
 
         Dirty(xeno, active);
 

@@ -69,12 +69,9 @@ public sealed class XenoCleaveSystem : EntitySystem
         }
         else
         {
-            var rootTime = (buffed ? xeno.Comp.RootTimeBuffed : xeno.Comp.RootTime);
+            var rootTime = buffed ? xeno.Comp.RootTimeBuffed : xeno.Comp.RootTime;
 
-            if (_sizeStun.TryGetSize(args.Target, out var size) && _sizeStun.IsXenoSized(size))
-                rootTime *= 1.25; //Xenos get rooted slightly longer
-
-            _slow.TryRoot(args.Target, rootTime);
+            _slow.TryRoot(args.Target, _xeno.TryApplyXenoDebuffMultiplier(args.Target, rootTime));
 
             if (_net.IsServer)
             {
