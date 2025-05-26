@@ -14,6 +14,25 @@
         damage:
         - Toxin: -1
         - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
+      - !type:GenericStatusEffect # TODO -5 hallucination/s
+        key: SeeingRainbows
+        component: SeeingRainbows
+        time: 5
+        type: Remove
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: RMCMindbreakerToxin
+          min: 1
+        reagent: RMCMindbreakerToxin
+        amount: -2.5
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: RMCSpaceDrugs
+          min: 1
+        reagent: RMCSpaceDrugs
+        amount: -2.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -582,3 +601,66 @@
         - Toxin: -3.75
         - Brute: -2.25
         - Burn: -3
+
+# Antidepressants
+- type: reagent
+  parent: CMReagentMedicine
+  id: RMCMethylphenidate
+  name: reagent-name-rmcmethylphenidate
+  desc: reagent-desc-rmcmethylphenidate
+  color: "#C8A5DC"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01 # 1, 200 seconds is 0.005, but fixed point 2
+      effects:
+      - !type:PopupMessage #TODO -2 confusion stat
+        type: Local
+        visualType: Medium
+        messages: [ "antidepressant-effect-rmcmethylphenidate" ]
+        delay: 300 # every 5 min
+
+- type: reagent
+  parent: CMReagentMedicine
+  id: RMCCitalopram
+  name: reagent-name-rmccitalopram
+  desc: reagent-desc-rmccitalopram
+  color: "#C8A5DC"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01 # 1, 200 seconds
+      effects:
+      - !type:PopupMessage #TODO -1 confusion stat
+        type: Local
+        visualType: Medium
+        messages: [ "antidepressant-effect-rmccitalopram" ]
+        delay: 300
+
+- type: reagent
+  parent: CMReagentMedicine
+  id: RMCParoxetine
+  name: reagent-name-rmcparoxetine
+  desc: reagent-desc-rmcparoxetine
+  color: "#C8A5DC"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01 # 1, 200 seconds
+      effects:
+      - !type:PopupMessage #TODO -3 confusion stat
+        type: Local
+        visualType: Medium
+        messages: [ "antidepressant-effect-rmcparoxetine" ]
+        delay: 300
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 1.5 #TODO max 30
+        refresh: false
+      - !type:Emote
+        emote: [ twitches, drools, moans, giggles ]
+        probability: 0.05
+      - !type:GenericStatusEffect
+        key: Jitter
+        type: Add
+        time: 2.5
+        refresh: false

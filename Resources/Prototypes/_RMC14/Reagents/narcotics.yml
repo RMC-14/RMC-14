@@ -1,0 +1,58 @@
+- type: reagent
+  parent: CMReagent
+  id: RMCSpaceDrugs
+  name: reagent-name-rmcspacedrugs
+  desc: reagent-desc-rmcspacedrugs
+  physicalDesc: reagent-physical-desc-syrupy
+  group: Narcotics
+  flavor: bitter
+  color: "#60A584"
+  unknown: true
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.1
+      effects:
+      - !type:Emote
+        emote: [ twitches, drools, moans, giggles ]
+        probability: 0.05
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 0.5 #TODO max 10
+        refresh: false
+      - !type:GenericStatusEffect
+        key: Jitter
+        type: Add
+        time: 2.5
+        refresh: false
+        condition:
+        - !type:ReagentThreshold #TODO Hallucinations +5 no max.
+          min: 30                #TODO RandomWalk starts at 30 OD
+      - !type:GenericStatusEffect
+        key: Unconscious
+        component: RMCUnconscious
+        type: Add
+        time: 10
+        refresh: false
+        condition:
+        - !type:ReagentThreshold #TODO 0.5 brain damage/s at 50 OD
+          min: 50
+
+- type: reagent
+  parent: RMCSpaceDrugs
+  id: RMCPsilocybin #Shrooms
+  name: reagent-name-rmcpsilocybin
+  desc: reagent-desc-rmcpsilocybin
+  color: "#E700E7"
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.1
+      effects:
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 0.75 #TODO max 15
+        refresh: false
+#TODO 0.75 brain damage/tick at 50 OD
