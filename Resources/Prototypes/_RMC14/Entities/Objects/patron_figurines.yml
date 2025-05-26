@@ -291,7 +291,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBites-The-Dust
   name: Bites-The-Dust figurine
-  description: A small, detailed miniature of a skilled corpsman.
+  description: One of the best smart gun operators within the UNMC, though, they seem to get hurt a lot...
   components:
   - type: Sprite
     state: bites-the-dust
