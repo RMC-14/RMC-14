@@ -508,15 +508,15 @@
       state: mini_uac_sentry_handheld
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    state: Mini uac_flamer_handheld
+    state: mini_uac_flamer_handheld
   - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.SentryLayers.Layer:
         sentry:
-          Item: { state: Mini uac_flamer_handheld }
-          Off: { state: Mini uac_flamer_noammo }
-          On: { state: Mini uac_flamer_on }
+          Item: { state: mini_uac_flamer_handheld }
+          Off: { state: mini_uac_flamer_noammo }
+          On: { state: mini_uac_flamer_on }
   - type: Gun
     fireRate: 1
     projectileSpeed: 20.0
@@ -572,7 +572,7 @@
     projectileSpeed: 20.0
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    state: Normal uac_flamer_handheld
+    state: normal_uac_flamer_handheld
   - type: GenericVisualizer
     visuals:
       enum.SentryLayers.Layer:
@@ -581,9 +581,9 @@
           Off: { state: defense_base_off, visible: true }
           On: { state: defense_base, visible: true }
         sentry:
-          Item: { state: Normal uac_flamer_handheld }
-          Off: { state: Normal uac_flamer_noammo }
-          On: { state: Normal uac_flamer_on }
+          Item: { state: normal_uac_flamer_handheld }
+          Off: { state: normal_uac_flamer_noammo }
+          On: { state: normal_uac_flamer_on }
   - type: NpcFactionMember
     factions:
     - UNMC
@@ -610,7 +610,7 @@
     - map: [ "base" ]
       state: defense_base_off
     - map: [ "sentry" ]
-      state: Plasma uac_flamer_handheld
+      state: plasma_uac_flamer_handheld
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     state: Plasma uac_flamer_handheld
@@ -623,9 +623,9 @@
           Off: { state: defense_base_off, visible: true }
           On: { state: defense_base, visible: true }
         sentry:
-          Item: { state: Plasma uac_flamer_handheld }
-          Off: { state: Plasma uac_flamer_noammo }
-          On: { state: Plasma uac_flamer_on }
+          Item: { state: plasma_uac_flamer_handheld }
+          Off: { state: plasma_uac_flamer_noammo }
+          On: { state: plasma_uac_flamer_on }
   - type: Gun
     fireRate: 0.14
     projectileSpeed: 20.0
