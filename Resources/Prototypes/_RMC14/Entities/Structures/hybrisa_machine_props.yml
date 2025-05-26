@@ -42,6 +42,20 @@
         - MachineLayer
 
 - type: entity
+  id: RMCMachinePropBaseWall
+  abstract: true
+  name: machinery
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_machine_wall_props.rsi
+    drawdepth: WallMountedItems
+  - type: Appearance
+  - type: WallMount
+    arc: 360
+
+- type: entity
   id: RMCMachinePropBaseOverhead
   abstract: true
   name: machinery
@@ -197,3 +211,24 @@
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_machine_props.rsi
     state: buildingventbig13
+
+- type: entity
+  parent: RMCMachinePropBaseWall
+  id: RMCMachinePropSmallVent
+  components:
+  - type: Sprite
+    state: smallwallvent1
+
+- type: entity
+  parent: RMCMachinePropBaseWall
+  id: RMCMachinePropSmallVent2
+  components:
+  - type: Sprite
+    state: smallwallvent2
+
+- type: entity
+  parent: RMCMachinePropBaseWall
+  id: RMCMachinePropSmallVent3
+  components:
+  - type: Sprite
+    state: smallwallvent3
