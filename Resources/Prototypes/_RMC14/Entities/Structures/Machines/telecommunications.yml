@@ -347,7 +347,7 @@
 
 - type: entity
   id: RMCWhiteSensorComputer2
-  parent: RMCBlackMappingComputer2
+  parent: RMCBlackMappingComputer
   components:
   - type: Sprite
     layers:
@@ -357,7 +357,7 @@
 
 - type: entity
   id: RMCWhiteSensorComputer3
-  parent: RMCBlackMappingComputer3
+  parent: RMCBlackMappingComputer
   components:
   - type: Sprite
     layers:
