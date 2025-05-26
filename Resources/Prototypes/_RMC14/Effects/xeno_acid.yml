@@ -69,9 +69,11 @@
     whitelist:
       components:
       - Marine
+      - Xeno
   - type: UncloakOnHit
   - type: ExtinguishFire
   - type: IgnorePredictionHit
+  - type: XenoBonusAcid
 
 - type: entity
   parent: XenoAcidSprayWeak

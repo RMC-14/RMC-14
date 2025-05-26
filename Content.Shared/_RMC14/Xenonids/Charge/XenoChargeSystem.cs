@@ -348,13 +348,28 @@ public sealed class XenoChargeSystem : EntitySystem
             _xenoAnimations.PlayLungeAnimationEvent(xeno, charge);
         }
 
-        if (!_xeno.CanAbilityAttackTarget(xeno, targetId, true))
+        XenoCrusherChargableComponent? crush = null;
+
+        if (!_xeno.CanAbilityAttackTarget(xeno, targetId) && !TryComp(targetId, out crush))
             return;
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, origin: xeno, tool: xeno);
+        var structDamage = xeno.Comp.Damage;
+
+        if (crush != null && crush.InstantDestroy)
+        {
+            if (crush.SetDamage != null)
+                structDamage = crush.SetDamage;
+
+            if (_net.IsServer)
+                QueueDel(targetId);
+
+            return;
+        }
+
+        var damage = _damageable.TryChangeDamage(targetId, _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage), origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

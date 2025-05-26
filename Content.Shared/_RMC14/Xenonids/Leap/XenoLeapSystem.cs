@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -56,6 +57,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -244,6 +246,9 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
 
         if (HasComp<LeapIncapacitatedComponent>(target))
+            return false;
+
+        if (_size.TryGetSize(target, out var size) && size >= RMCSizes.Big)
             return false;
 
         return true;

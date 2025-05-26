@@ -79,6 +79,10 @@
     - UNMC
   - type: UserIFF
     faction: FactionMarine
+  - type: XenoCrusherChargable
+    damage:
+      types:
+        Blunt: 40
 
 - type: entity
   parent: RMCSentry

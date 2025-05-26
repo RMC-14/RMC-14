@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -29,6 +29,7 @@ public sealed class XenoTumbleSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -111,15 +112,18 @@ public sealed class XenoTumbleSystem : EntitySystem
         if (_net.IsServer)
             _stun.TryParalyze(args.Target, xeno.Comp.StunTime, true);
 
-        var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(args.Target);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.ImpactRange;
-        _throwing.TryThrow(args.Target, diff, 10);
+        if (!HasComp<XenoComponent>(args.Target))
+        {
+            var origin = _transform.GetMapCoordinates(xeno);
+            var target = _transform.GetMapCoordinates(args.Target);
+            var diff = target.Position - origin.Position;
+            diff = diff.Normalized() * xeno.Comp.ImpactRange;
+            _throwing.TryThrow(args.Target, diff, 10);
+        }
 
         _damageable.TryChangeDamage(
             args.Target,
-            xeno.Comp.Damage,
+            _xeno.TryApplyXenoSlashDamageMultiplier(args.Target, xeno.Comp.Damage),
             origin: xeno,
             tool: xeno,
             armorPiercing: xeno.Comp.ArmorPiercing

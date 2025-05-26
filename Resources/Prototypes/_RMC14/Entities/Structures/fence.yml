@@ -129,6 +129,10 @@
   - type: Construction
     graph: RMCFenceHybrisaElectric
     node: fenceMetal
+  - type: XenoCrusherChargable
+    damage:
+      types:
+        Blunt: 50
 
 - type: entity
   parent: RMCFenceBroken

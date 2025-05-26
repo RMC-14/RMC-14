@@ -224,6 +224,7 @@
     enragedHealAmount: 100
     paralyzeTime: 0
     throwSpeed: 12
+    dazeTime: 4
     damage:
       groups:
         Brute: 20
