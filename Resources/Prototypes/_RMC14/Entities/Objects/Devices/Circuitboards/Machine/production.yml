@@ -132,9 +132,9 @@
 
 - type: entity
   parent: CMBaseMachineCircuitboard
-  id: CMArmylatheMachineCircuitboard
+  id: RMCArmylatheMachineCircuitboard
   name: armylathe machine board
   description: A machine printed circuit board for an armylathe
-  components: # TODO RMC14 autolathe
+  components:
     - type: MachineBoard
-      prototype: RMCAutolatheEmpty
+      prototype: RMCArmylatheEmpty
