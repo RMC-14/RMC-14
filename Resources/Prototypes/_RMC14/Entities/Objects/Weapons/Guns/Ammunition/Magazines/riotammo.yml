@@ -109,7 +109,7 @@
     - RMCMagazineSMGM63Rubber
 
 - type: entity
-  parent: RMCMagazineSMGMP90
+  parent: CMMagazineRifleBase
   id: RMCRubberMagazineSMGMP90
   name: "UN MP90 rubber magazine (10x20mm)"
   description: "A less then lethal Rubber 10x20mm magazine for the UN MP90."
