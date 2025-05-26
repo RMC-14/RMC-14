@@ -47,7 +47,7 @@ public sealed class XenoTailTripSystem : EntitySystem
         {
             if (!_size.TryGetSize(args.Target, out var size) || size < RMCSizes.Big)
                 _stun.TryParalyze(args.Target, xeno.Comp.MarkedStunTime, true);
-            // TODO RMC14 welder vision
+
             _daze.TryDaze(args.Target, xeno.Comp.MarkedDazeTime, true, stutter: true);
             RemCompDeferred<XenoMarkedComponent>(args.Target);
         }
