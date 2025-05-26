@@ -71,6 +71,7 @@
     sprite: _RMC14/Structures/Machines/status_display_large.rsi
     drawdepth: WallMountedItems
     state: frame
+    offset: 0.5, 0.0
   - type: Appearance
   - type: WallMount
     arc: 360
