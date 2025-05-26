@@ -58,6 +58,14 @@
     sprite: _RMC14/Objects/Misc/paint.rsi
   - type: Crayon
     capacity: 30
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: MindbreakerToxin
+          Quantity: 0
 
 #red
 - type: entity
