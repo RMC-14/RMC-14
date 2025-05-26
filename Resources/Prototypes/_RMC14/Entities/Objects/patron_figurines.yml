@@ -1496,3 +1496,14 @@
     state: adrian_archangel_gutierrez
   - type: PatronFigurine
     id: 846a3f90-ba27-4c17-a00b-93818511a7a6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNeza
+  name: Neza figurine
+  description: "Charlie squad till the day he dies, again."
+  components:
+  - type: Sprite
+    state: neza
+  - type: PatronFigurine
+    id: 33ee0269-f61d-467c-916b-139146ce2a54
