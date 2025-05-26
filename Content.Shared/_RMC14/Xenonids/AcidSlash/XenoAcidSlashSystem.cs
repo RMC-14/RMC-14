@@ -25,7 +25,7 @@ public sealed class XenoAcidSlashSystem : EntitySystem
                 continue;
 
             if (HasComp<XenoComponent>(hit))
-                return;
+                continue;
 
             if (xeno.Comp.Acid is { } add)
                 EntityManager.AddComponents(hit, add);
