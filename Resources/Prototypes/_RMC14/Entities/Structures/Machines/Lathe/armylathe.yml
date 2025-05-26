@@ -1,0 +1,110 @@
+- type: entity
+  parent: [ BaseMachinePowered, RMCConstructibleMachine ]
+  id: CMArmylathe
+  name: armylathe
+  description: The armylathe is a specialized USCM autolathe meant for printing parts to construct various ordnance, such as grenade casings and mortar shells.
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/armylathe.rsi
+    layers:
+    - state: armylathe
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: armylathe_u
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: armylathe_t
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Appearance
+  - type: WiresVisuals
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Lathe
+    idleState: armylathe
+    runningState: armylathe_n
+    producingSound: /Audio/_RMC14/Machines/print.ogg
+    staticPacks:
+    - RMCRecipesArmyLathe
+  - type: MaterialStorage
+    storage:
+      CMSteel: 800
+      RMCPlastic: 100
+    whitelist:
+      components:
+      - FloorTile
+      tags:
+      - Metal
+      - RMCGlass
+      - RMCTablePartMetal
+      - RMCRackParts
+      - RMCTablePartMetalReinforced
+      - RodMetal1
+      - Plastic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: WiresPanel
+  - type: ActivatableUI
+    key: enum.LatheUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+  - type: StaticPrice
+    price: 800
+  - type: Machine
+    board: CMAutolatheMachineCircuitboard
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: CMArmylathe
+  id: RMCArmylatheEmpty
+  suffix: Empty
+  components:
+  - type: MaterialStorage
+    storage: {}
+
+- type: latheRecipePack
+  id: RMCRecipesArmyLathe
+  recipes:
+  - RMCM40GrenadeCasing
+  - RMCM15GrenadeCasing
+  - RMCM20MineCasing
+  - RMCC4PlasticCasing
+  - RMC84mmRocketTube
+  - RMC84mmRocketWarhead
+  - RMC80mmMortarShell
+  - RMC80mmMortarWarhead
+  - RMC80mmMortarCameraWarhead
+  - RMCCustomM34A1FuelTankCase
+  - RMCCustomM34A1SmokeTankCase
+  - RMCCustomM34TFuelTankCase
