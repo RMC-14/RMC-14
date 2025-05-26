@@ -1475,3 +1475,14 @@
     state: jack_hunter_dunes
   - type: PatronFigurine
     id: 8ccb1d66-4449-4674-a193-1077eeab8f57
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDurganChumCarlyle
+  name: Durgan 'Chum' Carlyle figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: durgan_chum_carlyle
+  - type: PatronFigurine
+    id: c66c10c5-80f8-4251-a545-6d473638259a
