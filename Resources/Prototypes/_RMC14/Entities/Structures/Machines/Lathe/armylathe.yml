@@ -39,7 +39,7 @@
   - type: MaterialStorage
     storage:
       CMSteel: 800
-      Plastic: 100
+      RMCPlastic: 100
     whitelist:
       components:
       - FloorTile
