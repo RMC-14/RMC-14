@@ -221,6 +221,7 @@
       entries:
       - id: RMCArmorB12Zipties
         name: leader B12 pattern marine armor (zipties)
+        recommended: true
       - id: RMCArmorM4Zipties
         name: leader M4 pattern marine armor (zipties)
     - name: Backpack
