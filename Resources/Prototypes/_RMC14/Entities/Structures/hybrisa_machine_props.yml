@@ -47,7 +47,6 @@
   name: machinery
   components:
   - type: Transform
-    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_machine_wall_props.rsi
     drawdepth: WallMountedItems
@@ -215,6 +214,7 @@
 - type: entity
   parent: RMCMachinePropBaseWall
   id: RMCMachinePropSmallVent
+  name: wall vent
   components:
   - type: Sprite
     state: smallwallvent1
@@ -222,6 +222,7 @@
 - type: entity
   parent: RMCMachinePropBaseWall
   id: RMCMachinePropSmallVent2
+  name: wall vent
   components:
   - type: Sprite
     state: smallwallvent2
@@ -229,6 +230,7 @@
 - type: entity
   parent: RMCMachinePropBaseWall
   id: RMCMachinePropSmallVent3
+  name: wall vent
   components:
   - type: Sprite
     state: smallwallvent3
