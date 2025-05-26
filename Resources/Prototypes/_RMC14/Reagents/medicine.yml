@@ -622,7 +622,7 @@
         delay: 300 # every 5 min
 
 - type: reagent
-  parent: CMReagentMedicine
+  parent: RMCMethylphenidate
   id: RMCCitalopram
   name: reagent-name-rmccitalopram
   desc: reagent-desc-rmccitalopram
@@ -638,7 +638,7 @@
         delay: 300
 
 - type: reagent
-  parent: CMReagentMedicine
+  parent: RMCMethylphenidate
   id: RMCParoxetine
   name: reagent-name-rmcparoxetine
   desc: reagent-desc-rmcparoxetine

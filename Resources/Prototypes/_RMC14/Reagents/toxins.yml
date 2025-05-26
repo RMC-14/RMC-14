@@ -57,7 +57,7 @@
         time: 2.5
         refresh: false
       - !type:GenericStatusEffect
-        condition:
+        conditions:
         - !type:ReagentThreshold #TODO RandomWalk starts at 30 OD
           min: 30
         key: Jitter
@@ -65,7 +65,7 @@
         time: 2.5
         refresh: false
       - !type:GenericStatusEffect
-        condition:
+        conditions:
         - !type:ReagentThreshold #TODO 2 brain damage/s at 50 OD
           min: 50
         key: Unconscious
