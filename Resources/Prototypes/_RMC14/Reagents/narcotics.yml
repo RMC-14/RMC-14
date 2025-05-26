@@ -1,10 +1,9 @@
 - type: reagent
-  parent: CMReagent
+  parent: [ CMReagent, SpaceDrugs ]
   id: RMCSpaceDrugs
   name: reagent-name-rmcspacedrugs
   desc: reagent-desc-rmcspacedrugs
   physicalDesc: reagent-physical-desc-syrupy
-  group: Narcotics
   flavor: bitter
   color: "#60A584"
   unknown: true
@@ -13,7 +12,16 @@
       metabolismRate: 0.1
       effects:
       - !type:Emote
-        emote: [ twitches, drools, moans, giggles ]
+        emote: twitches
+        probability: 0.05
+      - !type:Emote
+        emote: drools
+        probability: 0.05
+      - !type:Emote
+        emote: moans
+        probability: 0.05
+      - !type:Emote
+        emote: giggles
         probability: 0.05
       - !type:GenericStatusEffect
         key: SeeingRainbows
@@ -22,22 +30,22 @@
         time: 0.5 #TODO max 10
         refresh: false
       - !type:GenericStatusEffect
+        condition:
+        - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
+          min: 30                #TODO RandomWalk at 30 OD
         key: Jitter
         type: Add
         time: 2.5
         refresh: false
-        condition:
-        - !type:ReagentThreshold #TODO Hallucinations +5 no max.
-          min: 30                #TODO RandomWalk starts at 30 OD
       - !type:GenericStatusEffect
+        condition:
+        - !type:ReagentThreshold #TODO 0.5 brain damage/s at 50 OD
+          min: 50
         key: Unconscious
         component: RMCUnconscious
         type: Add
         time: 10
         refresh: false
-        condition:
-        - !type:ReagentThreshold #TODO 0.5 brain damage/s at 50 OD
-          min: 50
 
 - type: reagent
   parent: RMCSpaceDrugs

@@ -23,13 +23,10 @@
         probability: 0.2
 
 - type: reagent
-  parent: CMReagent
+  parent: [ CMReagent, MindbreakerToxin ]
   id: RMCMindbreakerToxin
   name: reagent-name-rmcmindbreakertoxin
   desc: reagent-desc-rmcmindbreakertoxin
-  physicalDesc: reagent-physical-desc-opaque
-  group: Toxins
-  flavor: bitter
   color: "#B31008"
   unknown: true
   metabolisms:
@@ -43,7 +40,16 @@
         time: 2 #TODO max 40
         refresh: false
       - !type:Emote
-        emote: [ twitches, drools, moans, giggles ]
+        emote: twitches
+        probability: 0.05
+      - !type:Emote
+        emote: drools
+        probability: 0.05
+      - !type:Emote
+        emote: moans
+        probability: 0.05
+      - !type:Emote
+        emote: giggles
         probability: 0.05
       - !type:GenericStatusEffect
         key: Jitter
@@ -51,19 +57,19 @@
         time: 2.5
         refresh: false
       - !type:GenericStatusEffect
+        condition:
+        - !type:ReagentThreshold #TODO RandomWalk starts at 30 OD
+          min: 30
         key: Jitter
         type: Add
         time: 2.5
         refresh: false
-        condition:
-        - !type:ReagentThreshold #TODO RandomWalk starts at 30 OD
-          min: 30
       - !type:GenericStatusEffect
+        condition:
+        - !type:ReagentThreshold #TODO 2 brain damage/s at 50 OD
+          min: 50
         key: Unconscious
         component: RMCUnconscious
         type: Add
         time: 10
         refresh: false
-        condition:
-        - !type:ReagentThreshold #TODO 2 brain damage/s at 50 OD
-          min: 50
