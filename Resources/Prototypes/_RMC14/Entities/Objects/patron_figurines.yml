@@ -1457,13 +1457,12 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKuafuSpeedDemonLightweaver
   name: Kuafu 'Speed Demon' Lightweaver figurine
-  description: ""
+  #description: ""
   components:
   - type: Sprite
     state: kuafu_speed_demon_lightweaver
   - type: PatronFigurine
     id: 3c148935-f54d-4c7d-b02c-a9ac360c6479
-
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -1491,7 +1490,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAdrianArchangelGutierrez
   name: Adrian 'Archangel' Gutierrez figurine
-  description: ""
+  description: "The Armor and looks worn and battered, You notice a faded cross on his left shoulder pad.  On the back of the helmet you see his callsign. \"Archangel\" In a faded red. You can almost notice a faint smile."
   components:
   - type: Sprite
     state: adrian_archangel_gutierrez
