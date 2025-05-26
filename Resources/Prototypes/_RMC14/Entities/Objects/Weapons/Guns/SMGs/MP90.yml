@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseWeaponSMG
   name: UN MP90 Submachinegun
   id: RMCWeaponSMGMP90
@@ -143,7 +143,7 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: apmag-1
+    - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
