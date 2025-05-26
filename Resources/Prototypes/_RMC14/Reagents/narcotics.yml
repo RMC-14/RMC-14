@@ -53,10 +53,34 @@
     Narcotic:
       metabolismRate: 0.1
       effects:
+      - !type:Emote
+        emote: twitches
+        probability: 0.05
+      - !type:Emote
+        emote: drools
+        probability: 0.05
+      - !type:Emote
+        emote: moans
+        probability: 0.05
+      - !type:Emote
+        emote: giggles
+        probability: 0.05
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows
         type: Add
         time: 0.75 #TODO max 15
         refresh: false
-#TODO 0.75 brain damage/tick at 50 OD
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
+          min: 30                #TODO RandomWalk at 30 OD
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold #TODO 0.75 brain damage/tick at 50 OD
+          min: 50
+        key: Unconscious
+        component: RMCUnconscious
+        type: Add
+        time: 10
+        refresh: false
