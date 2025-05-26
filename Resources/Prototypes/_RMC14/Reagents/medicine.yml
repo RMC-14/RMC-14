@@ -615,11 +615,11 @@
     Medicine:
       metabolismRate: 0.01 # 1, 200 seconds is 0.005, but fixed point 2
       effects:
-      - !type:PopupMessage #TODO -2 confusion stat
+      - !type:PopupMessage #TODO -2 confusion stat every 5 min
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmcmethylphenidate" ]
-        delay: 300 # every 5 min
+        probability: 0.05 #TODO message every 5 min
 
 - type: reagent
   parent: RMCMethylphenidate
@@ -631,11 +631,11 @@
     Medicine:
       metabolismRate: 0.01 # 1, 200 seconds
       effects:
-      - !type:PopupMessage #TODO -1 confusion stat
+      - !type:PopupMessage #TODO -1 confusion stat every 5 min
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmccitalopram" ]
-        delay: 300
+        probability: 0.05 #TODO message every 5 min
 
 - type: reagent
   parent: RMCMethylphenidate
@@ -647,11 +647,11 @@
     Medicine:
       metabolismRate: 0.01 # 1, 200 seconds
       effects:
-      - !type:PopupMessage #TODO -3 confusion stat
+      - !type:PopupMessage #TODO -3 confusion stat every 5 min
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmcparoxetine" ]
-        delay: 300
+        probability: 0.05 #TODO message every 5 min
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows
