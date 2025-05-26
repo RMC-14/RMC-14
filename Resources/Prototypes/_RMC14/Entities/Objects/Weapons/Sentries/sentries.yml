@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCSentryPremade
   id: RMCBaseSentry #Conversion Rate for turret vision range = CM + 1
@@ -80,7 +80,7 @@
   - type: UserIFF
     faction: FactionMarine
   - type: XenoCrusherChargable
-    damage:
+    setDamage:
       types:
         Blunt: 40
 

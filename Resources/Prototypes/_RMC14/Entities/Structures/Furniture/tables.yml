@@ -37,7 +37,8 @@
   - type: XenoToggleChargingDamage
     destroy: true
   - type: XenoCrusherChargable
-    instantDestroy: True
+    instantDestroy: true
+    passOnDestroy: true
 
 # Reinforced
 - type: entity

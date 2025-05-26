@@ -103,7 +103,7 @@
   - type: RMCNameItemOnVend
     item: Sentry
   - type: XenoCrusherChargable
-    damage:
+    setDamage:
       types:
         Blunt: 40
 

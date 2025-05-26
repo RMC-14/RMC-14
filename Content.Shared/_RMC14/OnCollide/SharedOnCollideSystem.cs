@@ -79,7 +79,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
             var damage = ent.Comp.Damage;
-            if (HasComp<XenoBonusAcidComponent>(ent))
+            if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
             _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
             DoEmote(ent, other);
@@ -88,7 +88,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
         else
         {
             var damage = ent.Comp.ChainDamage;
-            if (HasComp<XenoBonusAcidComponent>(ent))
+            if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
             _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
         }

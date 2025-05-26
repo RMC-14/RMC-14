@@ -69,7 +69,7 @@
       types:
         Blunt: 22
   - type: XenoCrusherChargable
-    damage:
+    setDamage:
       types:
         Blunt: 150
 

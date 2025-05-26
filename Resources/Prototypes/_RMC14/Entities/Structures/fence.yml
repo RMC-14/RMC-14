@@ -54,6 +54,7 @@
     damage:
       types:
         Blunt: 22
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: CMBaseStructureCorrodible
@@ -130,9 +131,11 @@
     graph: RMCFenceHybrisaElectric
     node: fenceMetal
   - type: XenoCrusherChargable
-    damage:
+    setDamage:
       types:
         Blunt: 50
+    passOnDestroy: true
+    destroyDamage: 50
 
 - type: entity
   parent: RMCFenceBroken

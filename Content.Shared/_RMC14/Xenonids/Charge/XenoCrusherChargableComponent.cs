@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Charge;
@@ -10,5 +11,14 @@ public sealed partial class XenoCrusherChargableComponent : Component
     public bool InstantDestroy = false;
 
     [DataField]
+    public bool PassOnDestroy = false;
+
+    [DataField]
     public DamageSpecifier? SetDamage;
+
+    [DataField]
+    public FixedPoint2? DestroyDamage;
+
+    [DataField]
+    public float? ThrowRange;
 }
