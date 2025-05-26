@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Spray;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
@@ -30,7 +31,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly INetManager _net = default!;
 
@@ -54,9 +55,6 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
     private void OnCollide(Entity<DamageOnCollideComponent> ent, EntityUid other)
     {
-        if (_net.IsClient)
-            return;
-
         if (ent.Comp.Damaged.Contains(other))
             return;
 
@@ -95,7 +93,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
         _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
 
-        if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.Down(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
+        if (ent.Comp.Paralyze > TimeSpan.Zero && !_status.HasStatusEffect(other, "KnockedDown") && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
         {
             _stun.TryParalyze(other, ent.Comp.Paralyze, true);
 

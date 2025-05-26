@@ -90,6 +90,7 @@
     whitelist:
       components:
       - Marine
+      - Xeno
   - type: ProjectileMaxRange
     max: 6
 
