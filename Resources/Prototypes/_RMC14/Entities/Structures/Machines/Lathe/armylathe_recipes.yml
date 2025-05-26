@@ -62,7 +62,6 @@
   materials:
     CMSteel: 400 # 15000
 
-
 - type: latheRecipe
   id: RMCCustomM34A1FuelTankCase
   result: RMCCustomM34A1FuelTankCase
