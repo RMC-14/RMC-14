@@ -346,7 +346,7 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
 
 - type: entity
-  id: RMCWhiteSensorComputer
+  id: RMCWhiteSensorComputer2
   parent: RMCBlackMappingComputer2
   components:
   - type: Sprite
@@ -356,21 +356,11 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
 
 - type: entity
-  id: RMCWhiteSensorComputer
+  id: RMCWhiteSensorComputer3
   parent: RMCBlackMappingComputer3
   components:
   - type: Sprite
     layers:
     - state: sensor_comp3_off
     - state: sensor_comp3
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
-
-- type: entity
-  id: RMCWhiteSensorComputer
-  parent: RMCBlackMappingComputer
-  components:
-  - type: Sprite
-    layers:
-    - state: sensor_comp1_off
-    - state: sensor_comp1
       map: ["enum.PowerDeviceVisualLayers.Powered"]
