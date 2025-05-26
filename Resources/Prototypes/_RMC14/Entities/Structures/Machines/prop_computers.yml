@@ -41,15 +41,15 @@
 
 - type: entity
   parent: RMCPropComputerBase
-  id: RMCCommunicationsConsole
+  id: RMCPropCommunicationsConsole
   name: communications console
   components:
   - type: Sprite
     state: comm
 
 - type: entity
-  parent: RMCCommunicationsConsole
-  id: RMCCommunicationsConsoleAlt
+  parent: RMCPropCommunicationsConsole
+  id: RMCPropCommunicationsConsoleAlt
   suffix: Alt
   components:
   - type: Sprite
