@@ -57,7 +57,7 @@
 
 - type: entity
   parent: RMCPropComputerBase
-  id: RMCCommunicationsConsole
+  id: RMCPersonalDesktop
   name: personal desktop
   components:
   - type: Sprite

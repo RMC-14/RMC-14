@@ -254,7 +254,7 @@
 
 - type: entity
   parent: RMCCurtainColourableTransparentOpenAlt
-  id: RMCCurtainTransparentRed
+  id: RMCCurtainTransparentRedOpen
   suffix: Red, Open
   components:
   - type: Sprite
