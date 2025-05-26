@@ -105,6 +105,10 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+  - type: Occluder
+    enabled: false
+  - type: Door
+    occludes: false
 
 - type: entity
   parent: RMCCurtainColourableTransparent
