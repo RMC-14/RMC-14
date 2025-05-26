@@ -670,8 +670,4 @@
       - !type:Emote
         emote: giggles
         probability: 0.05
-      - !type:GenericStatusEffect
-        key: Jitter
-        type: Add
-        time: 2.5
-        refresh: false
+      - !type:Jitter

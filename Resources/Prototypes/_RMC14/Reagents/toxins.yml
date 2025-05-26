@@ -51,19 +51,8 @@
       - !type:Emote
         emote: giggles
         probability: 0.05
-      - !type:GenericStatusEffect
-        key: Jitter
-        type: Add
-        time: 2.5
-        refresh: false
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold #TODO RandomWalk starts at 30 OD
-          min: 30
-        key: Jitter
-        type: Add
-        time: 2.5
-        refresh: false
+      - !type:Jitter
+        #TODO RandomWalk at 30 OD and more intense jitter?
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold #TODO 2 brain damage/s at 50 OD

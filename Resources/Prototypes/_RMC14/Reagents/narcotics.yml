@@ -29,14 +29,10 @@
         type: Add
         time: 0.5 #TODO max 10
         refresh: false
-      - !type:GenericStatusEffect
+      - !type:Jitter
         conditions:
         - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
           min: 30                #TODO RandomWalk at 30 OD
-        key: Jitter
-        type: Add
-        time: 2.5
-        refresh: false
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold #TODO 0.5 brain damage/s at 50 OD
