@@ -112,14 +112,11 @@ public sealed class XenoTumbleSystem : EntitySystem
         if (_net.IsServer)
             _stun.TryParalyze(args.Target, xeno.Comp.StunTime, true);
 
-        if (!HasComp<XenoComponent>(args.Target))
-        {
-            var origin = _transform.GetMapCoordinates(xeno);
-            var target = _transform.GetMapCoordinates(args.Target);
-            var diff = target.Position - origin.Position;
-            diff = diff.Normalized() * xeno.Comp.ImpactRange;
-            _throwing.TryThrow(args.Target, diff, 10);
-        }
+        var origin = _transform.GetMapCoordinates(xeno);
+        var target = _transform.GetMapCoordinates(args.Target);
+        var diff = target.Position - origin.Position;
+        diff = diff.Normalized() * xeno.Comp.ImpactRange;
+        _throwing.TryThrow(args.Target, diff, 10);
 
         _damageable.TryChangeDamage(
             args.Target,
