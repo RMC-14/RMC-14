@@ -41,7 +41,8 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             Dirty(user, speech);
 
             // Send a message to the chat
-            _chat.TrySendInGameICMessage(user, ev.Message, InGameICChatType.Speak, false);
+            var session = ent.Comp.PlayerSession;
+            _chat.TrySendInGameICMessage(user, ev.Message, InGameICChatType.Speak, ChatTransmitRange.Normal, false, null, session);
 
             // Restore the original speech settings
             speech.SpeechVerb = userComp.OriginalSpeechVerb ?? "Default";
@@ -50,7 +51,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             Dirty(user, speech);
         }
 
-        RemComp<RMCSpeechBubbleSpecificStyleComponent>(user);
         RemComp<RMCMegaphoneUserComponent>(user);
+        RemComp<RMCSpeechBubbleSpecificStyleComponent>(user);
     }
 }
