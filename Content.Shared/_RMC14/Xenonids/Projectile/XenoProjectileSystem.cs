@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
@@ -62,7 +61,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.DeleteOnFriendlyXeno)
+        if (!ent.Comp.DeleteOnFriendlyXeno)
             return;
 
         if (_hive.FromSameHive(ent.Owner, args.OtherEntity) &&

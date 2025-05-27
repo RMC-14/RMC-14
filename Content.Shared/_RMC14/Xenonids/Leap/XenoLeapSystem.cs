@@ -285,7 +285,7 @@ public sealed class XenoLeapSystem : EntitySystem
             _stun.TrySlowdown(xeno, xeno.Comp.MoveDelayTime, true, 0f, 0f);
 
             if (_net.IsServer)
-                _stun.TryParalyze(target, xeno.Comp.ParalyzeTime, true);
+                _stun.TryParalyze(target, _xeno.TryApplyXenoDebuffMultiplier(target, xeno.Comp.ParalyzeTime), true);
         }
 
         if (xeno.Comp.HitEffect != null)
@@ -294,7 +294,7 @@ public sealed class XenoLeapSystem : EntitySystem
                 SpawnAttachedTo(xeno.Comp.HitEffect, target.ToCoordinates());
         }
 
-        var damage = _damagable.TryChangeDamage(target, xeno.Comp.Damage, origin: xeno, tool: xeno);
+        var damage = _damagable.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, xeno.Comp.Damage), origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
