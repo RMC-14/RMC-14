@@ -56,6 +56,18 @@
   tags:
   - Cheese
 
+# Fried Egg
+
+- type: foodSequenceElement
+  id: MealFriedEgg
+  name: food-sequence-content-friedegg
+  sprites:
+  - sprite: Objects/Consumable/Food/meals.rsi
+    state: friedegg
+  tags:
+  - Meat
+  - Egg
+
 # Steak
 
 - type: foodSequenceElement

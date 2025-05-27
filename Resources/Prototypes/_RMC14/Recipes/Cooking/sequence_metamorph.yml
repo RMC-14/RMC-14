@@ -57,19 +57,21 @@
   rules:
   - !type:SequenceLength
     range:
-      min: 2
-      max: 3
+      min: 4
+      max: 5
   - !type:IngredientsWithTags # 1 cheese slice
     tags:
     - Cheese
     count:
       min: 1
       max: 2
-  - !type:FoodHasReagent # 6 +- 3 Cooked Egg
-    reagent: EggCooked
+  - !type:IngredientsWithTags # 2 fried eggs
+    tags:
+    - Meat
+    - Egg
     count:
-      min: 3
-      max: 9
+      min: 2
+      max: 3
   - !type:LastElementHasTags # last bun
     tags:
     - Bun
