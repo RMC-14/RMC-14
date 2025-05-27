@@ -38,9 +38,10 @@
         component: SeeingRainbows
         type: Add
         time: 2 #TODO max 40
+        refresh: false
       - !type:Emote
         emote: Laugh #TODO twitches, drools, moans.
-        chatMessages: giggles
+        showInChat: true
         probability: 0.05
       - !type:Jitter
         #TODO RandomWalk at 30 OD
@@ -53,3 +54,4 @@
         component: RMCUnconscious
         type: Add
         time: 10
+        refresh: false

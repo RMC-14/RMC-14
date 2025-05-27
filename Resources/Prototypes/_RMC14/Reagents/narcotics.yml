@@ -13,13 +13,14 @@
       effects:
       - !type:Emote
         emote: Laugh #TODO twitches, drools, moans.
-        chatMessages: giggles
+        showInChat: true
         probability: 0.05
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows
         type: Add
         time: 0.5 #TODO max 10
+        refresh: false
       - !type:Jitter
         conditions:
         - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
@@ -32,6 +33,7 @@
         component: RMCUnconscious
         type: Add
         time: 10
+        refresh: false
 
 - type: reagent
   parent: RMCSpaceDrugs
@@ -45,16 +47,17 @@
       effects:
       - !type:Emote
         emote: Laugh #TODO twitches, drools, moans.
-        chatMessages: giggles
+        showInChat: true
         probability: 0.05
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows
         type: Add
         time: 0.75 #TODO max 15
+        refresh: false
       - !type:Jitter
         conditions:
-        - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
+        - !type:ReagentThreshold #TODO Hallucinations +5/s
           min: 30                #TODO RandomWalk at 30 OD
       - !type:GenericStatusEffect
         conditions:
@@ -64,3 +67,4 @@
         component: RMCUnconscious
         type: Add
         time: 10
+        refresh: false
