@@ -1,44 +1,42 @@
 <Document>
   # Xenonid Tactical Map Icons
-  This guide will explain what each icon,
-  and Xenonid icon colors mean for Xenonids.
-
-  ## Xenonid Icon Color
-  Every Xenonid got their own respective map icon, each having a specific color.
+  Every Xenonid got their own respective map icon, each having a specific color depending on their Tier.
   - [color=Purple][bold]Purple[/bold][/color] is given to Tier 0 Xenonids.
   - [color=Green][bold]Green[/bold][/color] is given to Tier 1 Xenonids.
   - [color=Yellow][bold]Yellow[/bold][/color] is given to Tier 2 Xenoninds.
   - [color=Red][bold]Red[/bold][/color] is given to Tier 3 Xenonids.
 
+  ## Leader Crown
+  Xenonids appointed as a [color=lightblue]Leader[/color] by the [textlink="Queen" link="RMCGuideRoleQueen"], will have a blue crown added to their map icon.
+  <GuideEntityEmbed Entity="RMCLeaderMapIcon"/>
   ## Xenonid Icons
-
   <Box>
     <GuideEntityEmbed Entity="CMXenoLesserDrone" Caption=""/>
     <GuideEntityEmbed Entity="CMXenoParasite" Caption=""/>
     <GuideEntityEmbed Entity="CMXenoLarva" Caption=""/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="RMCLesserMapIcon" Margin="0 0 19 0"/>
-    <GuideEntityEmbed Entity="RMCLarvaMapIcon" Margin="10 0 0 0"/>
-    <GuideEntityEmbed Entity="RMCParasiteMapIcon"/>
+    <GuideEntityEmbed Entity="RMCLesserMapIcon" Margin="0 0 24 0"/>
+    <GuideEntityEmbed Entity="RMCLarvaMapIcon" Margin="5 0 0 0"/>
+    <GuideEntityEmbed Entity="RMCParasiteMapIcon" Margin="19 0 0 0"/>
   </Box>
   - Drone Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoDrone" Caption=""/>
+    <GuideEntityEmbed Entity="CMXenoDrone" Caption="" Margin="0 40 0 0"/>
     <GuideEntityEmbed Entity="CMXenoHivelord" Caption=""/>
-    <GuideEntityEmbed Entity="CMXenoBurrower" Caption=""/>
+    <GuideEntityEmbed Entity="CMXenoBurrower" Caption="" Margin="0 37 0 0"/>
     <GuideEntityEmbed Entity="CMXenoCarrier" Caption=""/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="RMCDroneMapIcon"/>
-    <GuideEntityEmbed Entity="RMCHivelordMapIcon"/>
-    <GuideEntityEmbed Entity="RMCBurrowerMapIcon"/>
-    <GuideEntityEmbed Entity="RMCCarrierMapIcon"/>
+    <GuideEntityEmbed Entity="RMCDroneMapIcon" Margin="0 0 55 0"/>
+    <GuideEntityEmbed Entity="RMCHivelordMapIcon" Margin="0 0 25 0"/>
+    <GuideEntityEmbed Entity="RMCBurrowerMapIcon" Margin="25 0 0 0"/>
+    <GuideEntityEmbed Entity="RMCCarrierMapIcon" Margin="55 0 0 0"/>
   </Box>
   - Defender Castes
   <Box>
     <GuideEntityEmbed Entity="CMXenoDefender" Caption=""/>
-    <GuideEntityEmbed Entity="CMXenoWarrior" Caption=""/>
+    <GuideEntityEmbed Entity="CMXenoWarrior" Caption="" Margin="0 20 0 0"/>
     <GuideEntityEmbed Entity="RMCXenoCrusher" Caption=""/>
   </Box>
   <Box>
@@ -48,8 +46,8 @@
   </Box>
   - Sentinel Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoSentinel" Caption=""/>
-    <GuideEntityEmbed Entity="CMXenoSpitter" Caption=""/>
+    <GuideEntityEmbed Entity="CMXenoSentinel" Caption="" Margin="0 25 0 0"/>
+    <GuideEntityEmbed Entity="CMXenoSpitter" Caption="" Margin="0 25 0 0"/>
     <GuideEntityEmbed Entity="CMXenoBoiler" Caption=""/>
   </Box>
   <Box>
@@ -59,8 +57,8 @@
   </Box>
   - Runner Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoRunner" Caption=""/>
-    <GuideEntityEmbed Entity="CMXenoLurker" Caption=""/>
+    <GuideEntityEmbed Entity="CMXenoRunner" Caption="" Margin="0 40 0 0"/>
+    <GuideEntityEmbed Entity="CMXenoLurker" Caption="" Margin="0 40 0 0"/>
     <GuideEntityEmbed Entity="CMXenoRavager" Caption=""/>
   </Box>
   <Box>
@@ -70,11 +68,11 @@
   </Box>
   - Special Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoPraetorian" Caption=""/>
+    <GuideEntityEmbed Entity="CMXenoPraetorian" Caption="" Margin="27 15 0 0"/>
     <GuideEntityEmbed Entity="CMXenoQueen" Caption=""/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="RMCPraetorianMapIcon"/>
+    <GuideEntityEmbed Entity="RMCPraetorianMapIcon" Margin="14 10 48 0"/>
     <GuideEntityEmbed Entity="RMCQueenMapIcon"/>
   </Box>
   ## Xenonid Structure Icons
@@ -82,13 +80,17 @@
     <GuideEntityEmbed Entity="HiveCoreXeno" Caption=""/>
     <GuideEntityEmbed Entity="HiveEggMorpherXeno" Caption=""/>
     <GuideEntityEmbed Entity="HiveClusterXeno" Caption=""/>
-    <GuideEntityEmbed Entity="XenoTunnel" Caption=""/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="RMCHiveCoreMapIcon" Margin="15 0 15 0"/>
+    <GuideEntityEmbed Entity="RMCMorpherMapIcon" Margin="15 0 15 0"/>
+    <GuideEntityEmbed Entity="RMCClusterMapIcon" Margin="15 0 15 0"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="XenoTunnel" Caption="" Margin="0 50 0 0"/>
     <GuideEntityEmbed Entity="HiveRecoveryNodeXeno" Caption=""/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="RMCHiveCoreMapIcon"/>
-    <GuideEntityEmbed Entity="RMCMorpherMapIcon"/>
-    <GuideEntityEmbed Entity="RMCClusterMapIcon"/>
     <GuideEntityEmbed Entity="RMCTunnelMapIcon"/>
     <GuideEntityEmbed Entity="RMCRecovNodeMapIcon"/>
   </Box>

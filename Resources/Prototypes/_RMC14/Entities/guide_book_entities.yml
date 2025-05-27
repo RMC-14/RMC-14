@@ -190,8 +190,19 @@
   components:
   - type: Sprite
     layers:
-    - state: background_xeno
+    - state: xeno_ruler
     - state: xenoqueen
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCLeaderMapIcon
+  name: Leader Crown
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: xeno
+    - state: xenoleader
 
 # Structures
 
@@ -214,7 +225,7 @@
 - type: entity
   parent: RMCBaseMapIcon
   id: RMCClusterMapIcon
-  name: Hive Cluster
+  name: Hive cluster
   components:
   - type: Sprite
     state: cluster
