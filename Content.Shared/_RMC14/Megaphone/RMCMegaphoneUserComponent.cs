@@ -6,7 +6,6 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Megaphone;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCMegaphoneSystem))]
 public sealed partial class RMCMegaphoneUserComponent : Component
 {
     /// <summary>
