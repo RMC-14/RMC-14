@@ -61,7 +61,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
         }
 
-        if (!ent.Comp.DeleteOnFriendlyXeno)
+        if (ent.Comp.DeleteOnFriendlyXeno)
             return;
 
         if (_hive.FromSameHive(ent.Owner, args.OtherEntity) &&
