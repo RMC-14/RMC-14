@@ -11,87 +11,117 @@
   <GuideEntityEmbed Entity="RMCLeaderMapIcon"/>
   ## Xenonid Icons
   <Box>
-    <GuideEntityEmbed Entity="CMXenoLesserDrone" Caption=""/>
-    <GuideEntityEmbed Entity="CMXenoParasite" Caption=""/>
-    <GuideEntityEmbed Entity="CMXenoLarva" Caption=""/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCLesserMapIcon" Margin="0 0 24 0"/>
-    <GuideEntityEmbed Entity="RMCLarvaMapIcon" Margin="5 0 0 0"/>
-    <GuideEntityEmbed Entity="RMCParasiteMapIcon" Margin="19 0 0 0"/>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoLesserDrone" Caption=""/>
+      <GuideEntityEmbed Entity="RMCLesserMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoParasite" Caption=""/>
+      <GuideEntityEmbed Entity="RMCParasiteMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoLarva" Caption=""/>
+      <GuideEntityEmbed Entity="RMCLarvaMapIcon"/>
+    </Box>
   </Box>
   - Drone Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoDrone" Caption="" Margin="0 40 0 0"/>
-    <GuideEntityEmbed Entity="CMXenoHivelord" Caption=""/>
-    <GuideEntityEmbed Entity="CMXenoBurrower" Caption="" Margin="0 37 0 0"/>
-    <GuideEntityEmbed Entity="CMXenoCarrier" Caption=""/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCDroneMapIcon" Margin="0 0 55 0"/>
-    <GuideEntityEmbed Entity="RMCHivelordMapIcon" Margin="0 0 25 0"/>
-    <GuideEntityEmbed Entity="RMCBurrowerMapIcon" Margin="25 0 0 0"/>
-    <GuideEntityEmbed Entity="RMCCarrierMapIcon" Margin="55 0 0 0"/>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoDrone" Caption=""/>
+      <GuideEntityEmbed Entity="RMCDroneMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoHivelord" Caption=""/>
+      <GuideEntityEmbed Entity="RMCHivelordMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoBurrower" Caption=""/>
+      <GuideEntityEmbed Entity="RMCBurrowerMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoCarrier" Caption=""/>
+      <GuideEntityEmbed Entity="RMCCarrierMapIcon"/>
+    </Box>
   </Box>
   - Defender Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoDefender" Caption=""/>
-    <GuideEntityEmbed Entity="CMXenoWarrior" Caption="" Margin="0 20 0 0"/>
-    <GuideEntityEmbed Entity="RMCXenoCrusher" Caption=""/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCDefenderMapIcon"/>
-    <GuideEntityEmbed Entity="RMCWarriorMapIcon"/>
-    <GuideEntityEmbed Entity="RMCCrusherMapIcon"/>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoDefender" Caption=""/>
+      <GuideEntityEmbed Entity="RMCDefenderMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoWarrior" Caption=""/>
+      <GuideEntityEmbed Entity="RMCWarriorMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="RMCXenoCrusher" Caption=""/>
+      <GuideEntityEmbed Entity="RMCCrusherMapIcon"/>
+    </Box>
   </Box>
   - Sentinel Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoSentinel" Caption="" Margin="0 25 0 0"/>
-    <GuideEntityEmbed Entity="CMXenoSpitter" Caption="" Margin="0 25 0 0"/>
-    <GuideEntityEmbed Entity="CMXenoBoiler" Caption=""/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCSentinelMapIcon"/>
-    <GuideEntityEmbed Entity="RMCSpitterMapIcon"/>
-    <GuideEntityEmbed Entity="RMCBoilerMapIcon"/>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoSentinel" Caption=""/>
+      <GuideEntityEmbed Entity="RMCSentinelMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoSpitter" Caption=""/>
+      <GuideEntityEmbed Entity="RMCSpitterMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoBoiler" Caption=""/>
+      <GuideEntityEmbed Entity="RMCBoilerMapIcon"/>
+    </Box>
   </Box>
   - Runner Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoRunner" Caption="" Margin="0 40 0 0"/>
-    <GuideEntityEmbed Entity="CMXenoLurker" Caption="" Margin="0 40 0 0"/>
-    <GuideEntityEmbed Entity="CMXenoRavager" Caption=""/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCRunnerMapIcon"/>
-    <GuideEntityEmbed Entity="RMCLurkerMapIcon"/>
-    <GuideEntityEmbed Entity="RMCRavagerMapIcon"/>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoRunner" Caption=""/>
+      <GuideEntityEmbed Entity="RMCRunnerMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoLurker" Caption=""/>
+      <GuideEntityEmbed Entity="RMCLurkerMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoRavager" Caption=""/>
+      <GuideEntityEmbed Entity="RMCRavagerMapIcon"/>
+    </Box>
   </Box>
   - Special Castes
   <Box>
-    <GuideEntityEmbed Entity="CMXenoPraetorian" Caption="" Margin="27 15 0 0"/>
-    <GuideEntityEmbed Entity="CMXenoQueen" Caption=""/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCPraetorianMapIcon" Margin="14 10 48 0"/>
-    <GuideEntityEmbed Entity="RMCQueenMapIcon"/>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoPraetorian" Caption=""/>
+      <GuideEntityEmbed Entity="RMCPraetorianMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="CMXenoQueen" Caption=""/>
+      <GuideEntityEmbed Entity="RMCQueenMapIcon"/>
+    </Box>
   </Box>
   ## Xenonid Structure Icons
   <Box>
-    <GuideEntityEmbed Entity="HiveCoreXeno" Caption=""/>
-    <GuideEntityEmbed Entity="HiveEggMorpherXeno" Caption=""/>
-    <GuideEntityEmbed Entity="HiveClusterXeno" Caption=""/>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="HiveCoreXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCHiveCoreMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="HiveEggMorpherXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCMorpherMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="HiveClusterXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCClusterMapIcon"/>
+    </Box>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="RMCHiveCoreMapIcon" Margin="15 0 15 0"/>
-    <GuideEntityEmbed Entity="RMCMorpherMapIcon" Margin="15 0 15 0"/>
-    <GuideEntityEmbed Entity="RMCClusterMapIcon" Margin="15 0 15 0"/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="XenoTunnel" Caption="" Margin="0 50 0 0"/>
-    <GuideEntityEmbed Entity="HiveRecoveryNodeXeno" Caption=""/>
-  </Box>
-  <Box>
-    <GuideEntityEmbed Entity="RMCTunnelMapIcon"/>
-    <GuideEntityEmbed Entity="RMCRecovNodeMapIcon"/>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="XenoTunnel" Caption=""/>
+      <GuideEntityEmbed Entity="RMCTunnelMapIcon"/>
+    </Box>
+    <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="HiveRecoveryNodeXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCRecovNodeMapIcon"/>
+    </Box>
   </Box>
 </Document>
