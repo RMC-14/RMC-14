@@ -186,7 +186,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
 
     private void OnXenoSuperEmpoweredLeapHit(Entity<XenoSuperEmpoweredComponent> xeno, ref XenoLeapHitEvent args)
     {
-        if (!_xeno.CanAbilityAttackTarget(xeno, args.Hit) || HasComp<XenoComponent>(args.Hit))
+        if (!_xeno.CanAbilityAttackTarget(xeno, args.Hit))
             return;
 
         _rmcPulling.TryStopAllPullsFromAndOn(args.Hit);
