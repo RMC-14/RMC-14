@@ -64,6 +64,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Breakage"]
+  - type: PointLight
+    enabled: true
+    castShadows: false
+    radius: 1.5
   - type: GenericVisualizer
     visuals:
       enum.RMCApcVisualsLayers.Layer:
@@ -124,8 +128,8 @@
       enum.RMCApcVisualsLayers.Power:
         enum.ApcVisualLayers.ChargeState: # TODO RMC14
           NotCharging: { state: display-lack }
-          Charging: { state: display-full }
-          FullCharge: { state: display-charging }
+          Charging: { state: display-charging }
+          FullCharge: { state: display-full }
 
 # APC under construction
 - type: entity
