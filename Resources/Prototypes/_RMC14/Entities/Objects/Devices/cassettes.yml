@@ -13,6 +13,9 @@
     slots:
     - ears
   - type: CassettePlayer
+  - type: ClothingLimit
+    slot: All
+    id: RMCCassettePlayer
 
 - type: entity
   abstract: true
