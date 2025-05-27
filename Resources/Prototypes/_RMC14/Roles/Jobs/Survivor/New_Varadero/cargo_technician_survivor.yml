@@ -1,0 +1,57 @@
+- type: job
+  parent: CMSurvivorCivilian
+  id: CMSurvivorCargoTechnician
+  name: cm-job-name-survivor-cargo-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorCargoTechnician
+  startingGear: RMCGearSurvivorCargoTechnician
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCargoTechnician
+
+- type: startingGear
+  id: RMCGearSurvivor
+  equipment:
+    jumpsuit: RMCJumpsuitCivilian # TODO RMC colored utility jumpsuits (brown)
+    back: CMSatchelEngineerSurvivorFill
+    head: RMCHeadRoyalBeanie # TODO RMC beanie
+    shoes: RMCShoesJackboots
+    hands: CMHandsInsulated
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneral
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCargoTechnician
+  name: survivor un peacekeeper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorCargoTechnician
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetCargoTechnician
+  name: cargo technician colonist preset # TODO RMC14 random research notes

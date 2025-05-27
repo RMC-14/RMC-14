@@ -1,0 +1,63 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorUNPeacekeeper
+  name: cm-job-name-survivor-un-peacekeeper
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorUNPeacekeeper
+  startingGear: RMCGearSurvivorUNPeacekeeper
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetUNPeacekeeper
+
+- type: startingGear
+  id: RMCGearSurvivorUNPeacekeeper
+  equipment:
+    head: ArmorHelmetPMCRiot
+    ears: CMHeadsetColony
+    eyes: CMGlassesSecurity
+    jumpsuit: RMCSwatCMBUniform # TODO RMC14 replace with UN security uniform
+    outerClothing: RMCArmorVest
+    gloves: RMCHandsVeteran
+    shoes: RMCShoesJackboots
+    back: CMSatchelSecuritySurvivorFill
+    id: CMIDCardColonistSecurity
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchMagazine
+  inhand:
+  - RMCVisorSWAT # TODO RMC14 replace with RC6 visor
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorUNPeacekeeper
+  name: survivor un peacekeeper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorUNPeacekeeper
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetUNPeacekeeper
+  name: un peacekeeper colonist preset # TODO RMC14 random research notes

@@ -2,21 +2,27 @@
   parent: CMSurvivorCorporate
   id: CMSurvivorICB
   name: cm-job-name-survivor-icb
-  description: cm-job-description-icb
+  description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorICB
   ranks:
     RMCRankICBCorporateLiaison: []
   startingGear: RMCGearSurvivorICB
-  accessGroups:
-  - ColonistCorporate
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetICB
     - type: NpcFactionMember
       factions:
       - Survivor
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-icb
 
 - type: startingGear
   id: RMCGearSurvivorICB
@@ -30,7 +36,7 @@
     back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
     id: CMIDCardLiaisonColony
     pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchGeneralLargeICBLiaison
+    pocket2: RMCPouchDocument
   inhand:
   - CMClipboard
 

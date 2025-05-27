@@ -45,25 +45,18 @@ rmc-job-name-forecon-commander = Commander
 
 # New Varadero Survs
 
-rmc-job-greeting-nv-survivor = You are a survivor of the attack on the UN owned colony of New Varadero. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
-
-  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
-
-  You are NOT aware of the marines or their intentions.
-
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
-
-cm-job-name-survivor-
-CMJobSurvivor = Civilian Colonist
+cm-job-name-survivor-cargo-technician = Colonial Cargo Technician
+CMJobSurvivorMedicalTechnician = Colonial Cargo Technician
 
 cm-job-name-survivor-medical-technician = Medical Technician
 CMJobSurvivorMedicalTechnician = Medical Technician
 
 cm-job-name-survivor-technician = Engineering Technician
-CMJobSurvivorEngineer = Engineering Technician
+CMJobSurvivorTechnician = Engineering Technician
 
-cm-job-name-survivor-un-peacekeeper = UN Peacekeeper
-CMJobSurvivorUNPeacekeeper = UN Peacekeeper
+cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
+CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
 
-cm-job-name-survivor-icb = ICB Liaison
-CMJobSurvivorCorporate = ICB Liaison
+cm-job-name-survivor-icb = Colonial Interstellar Commerce Bureau Liaison
+CMJobSurvivorICB = Colonial Interstellar Commerce Bureau Liaison
+cm-job-prefix-survivor-icb = ICB
