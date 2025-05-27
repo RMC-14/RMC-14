@@ -619,7 +619,7 @@
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmcmethylphenidate" ]
-        probability: 0.05 #TODO message every 5 min
+        interval: 300
 
 - type: reagent
   parent: RMCMethylphenidate
@@ -635,7 +635,7 @@
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmccitalopram" ]
-        probability: 0.05 #TODO message every 5 min
+        interval: 300
 
 - type: reagent
   parent: RMCMethylphenidate
@@ -651,7 +651,7 @@
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmcparoxetine" ]
-        probability: 0.05 #TODO message every 5 min
+        interval: 300
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows
