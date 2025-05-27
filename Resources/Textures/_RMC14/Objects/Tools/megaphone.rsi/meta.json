@@ -15,12 +15,6 @@
       "name": "megaphone"
     },
     {
-      "name": "light_off"
-    },
-    {
-      "name": "light_on"
-    },
-    {
       "name": "inhand-left",
       "directions": 4
     }

@@ -6,22 +6,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/megaphone.rsi
-    layers:
-    - state: megaphone
-      map: ["base"]
-    - state: light_off
-      map: ["light"]
+    state: megaphone
   - type: Item
     size: Small
   - type: Clothing
     slots:
     - pocket
   - type: RMCMegaphone
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.MegaphoneVisuals.Light:
-        light:
-          On: { state: light_on }
-          Off: { state: light_off }
-
