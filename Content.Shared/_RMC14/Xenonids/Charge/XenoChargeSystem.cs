@@ -362,7 +362,6 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
 
         if (!_xeno.CanAbilityAttackTarget(xeno, targetId) && !TryComp(targetId, out crush))
         {
-            StopCrusherCharge(xeno);
             return;
         }
 
