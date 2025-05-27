@@ -38,21 +38,13 @@
         component: SeeingRainbows
         type: Add
         time: 2 #TODO max 40
-        refresh: false
       - !type:Emote
-        emote: twitches
-        probability: 0.05
-      - !type:Emote
-        emote: drools
-        probability: 0.05
-      - !type:Emote
-        emote: moans
-        probability: 0.05
-      - !type:Emote
-        emote: giggles
+        emote: Laugh #TODO twitches, drools, moans.
+        chatMessages: giggles
         probability: 0.05
       - !type:Jitter
-        #TODO RandomWalk at 30 OD and more intense jitter?
+        #TODO RandomWalk at 30 OD
+        #TODO more intense jitter at 30 OD?
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold #TODO 2 brain damage/s at 50 OD
@@ -61,4 +53,3 @@
         component: RMCUnconscious
         type: Add
         time: 10
-        refresh: false

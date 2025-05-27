@@ -619,7 +619,7 @@
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmcmethylphenidate" ]
-        probability: 0.05 #TODO message every 5 min
+        probability: 0.05 #TODO message 5 min intervals
 
 - type: reagent
   parent: RMCMethylphenidate
@@ -635,7 +635,7 @@
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmccitalopram" ]
-        probability: 0.05 #TODO message every 5 min
+        probability: 0.05 #TODO message 5 min intervals
 
 - type: reagent
   parent: RMCMethylphenidate
@@ -651,23 +651,14 @@
         type: Local
         visualType: Medium
         messages: [ "antidepressant-effect-rmcparoxetine" ]
-        probability: 0.05 #TODO message every 5 min
+        probability: 0.05 #TODO message 5 min intervals
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows
         type: Add
         time: 1.5 #TODO max 30
-        refresh: false
-      - !type:Emote
-        emote: twitches
-        probability: 0.05
-      - !type:Emote
-        emote: drools
-        probability: 0.05
-      - !type:Emote
-        emote: moans
-        probability: 0.05
-      - !type:Emote
-        emote: giggles
-        probability: 0.05
       - !type:Jitter
+      - !type:Emote
+        emote: Laugh #TODO twitches, drools, moans.
+        chatMessages: giggles
+        probability: 0.05
