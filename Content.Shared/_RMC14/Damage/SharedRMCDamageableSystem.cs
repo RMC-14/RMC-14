@@ -590,10 +590,10 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 userDamage.NextDamageAt = time + userDamage.DamageEvery;
 
                 if (damage.Damage != null)
-                    DoDamage((contact, damage), user, damage.Damage, acidic: damage.Acidic);
+                    DoDamage((contact, damage), user, damage.Damage);
 
                 if (damage.ArmorPiercingDamage != null)
-                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true);
+                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true, acidic: damage.Acidic);
 
                 if (damage.Emotes is { Count: > 0 } emotes)
                 {
