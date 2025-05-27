@@ -45,7 +45,7 @@
         probability: 0.05
       - !type:Jitter
         #TODO RandomWalk at 30 OD
-        #TODO more intense jitter at 30 OD?
+        #TODO more jitter at 30 OD
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold #TODO 2 brain damage/s at 50 OD
@@ -53,5 +53,4 @@
         key: Unconscious
         component: RMCUnconscious
         type: Add
-        time: 10
-        refresh: false
+        time: 20
