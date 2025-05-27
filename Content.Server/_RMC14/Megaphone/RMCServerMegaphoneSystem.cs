@@ -2,8 +2,10 @@ using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Megaphone;
 using Content.Shared.Speech;
+using Robust.Server.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Megaphone;
 
@@ -11,6 +13,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly IServerConsoleHost _console = default!;
 
     public override void Initialize()
     {
@@ -40,9 +43,9 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             speech.SuffixSpeechVerbs = userComp.SuffixSpeechVerbs;
             Dirty(user, speech);
 
-            // Send a message to the chat
+            // Send a message using the say command
             var session = ent.Comp.PlayerSession;
-            _chat.TrySendInGameICMessage(user, ev.Message, InGameICChatType.Speak, ChatTransmitRange.Normal, false, null, session);
+            _console.ExecuteCommand(session, $"say \"{CommandParsing.Escape(ev.Message)}\"");
 
             // Restore the original speech settings
             speech.SpeechVerb = userComp.OriginalSpeechVerb ?? "Default";
