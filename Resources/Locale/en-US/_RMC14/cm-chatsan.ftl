@@ -462,9 +462,6 @@ cm-chatsan-replacement-bvro = sister
 cm-chatsan-word-xro = xro
 cm-chatsan-replacement-xro = sister
 
-cm-chatsan-word-xister = xister
-cm-chatsan-replacement-xister = sister
-
 cm-chatsan-word-naur = naur
 cm-chatsan-replacement-naur = no
 
