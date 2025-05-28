@@ -112,9 +112,10 @@
           min: 25
         key: Unconscious
         component: RMCUnconscious
-        time: 30
+        probability: 0.05
+        time: 10
+        refresh: true
         type: Add
-
 
 # TODO RMC14 other effects
 - type: reagent
@@ -604,5 +605,7 @@
           min: 30
         key: Unconscious
         component: RMCUnconscious
-        time: 30
+        probability: 0.05
+        time: 10
+        refresh: true
         type: Add
