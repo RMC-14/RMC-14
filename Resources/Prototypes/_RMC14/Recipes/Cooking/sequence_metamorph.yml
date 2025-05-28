@@ -144,3 +144,45 @@
   - !type:LastElementHasTags # last bun
     tags:
     - Bun
+
+
+- type: metamorphRecipe
+  id: FoodBurgerSuper
+  key: Burger
+  result: FoodBurgerSuper
+  rules:
+  - !type:SequenceLength
+    range:
+      min: 9
+      max: 10
+  - !type:IngredientsWithTags # 2 meat cutlets
+    tags:
+    - Cooked
+    - Cutlet
+    - Meat
+    count:
+      min: 2
+      max: 3
+  - !type:IngredientsWithTags # 2 tomatoes
+    tags:
+    - Vegetable
+    - Fruit
+    count:
+      min: 2
+      max: 3
+  - !type:IngredientsWithTags # 2 cheese slices
+    tags:
+    - Cheese
+    count:
+      min: 2
+      max: 3
+  - !type:IngredientsWithTags # 2 fried eggs
+    tags:
+    - Meat
+    - Egg
+    count:
+      min: 2
+      max: 3
+  - !type:LastElementHasTags # last bun
+    tags:
+    - Bun
