@@ -28,7 +28,7 @@
     head: ArmorHelmetPMCRiot
     ears: CMHeadsetColony
     eyes: CMGlassesSecurity
-    jumpsuit: RMCSwatCMBUniform # TODO RMC14 replace with UN security uniform
+    jumpsuit: RMCJumpsuitUNSecurity
     outerClothing: RMCArmorVest
     gloves: RMCHandsVeteran
     shoes: RMCShoesJackboots

@@ -28,7 +28,7 @@
     back: CMSatchelMarineTechSurvivorFill
     head: RMCHeadBeanie # TODO RMC14 colored beanies
     shoes: RMCShoesJackboots
-    hands: CMHandsInsulated
+    gloves: CMHandsBrown
     id: CMIDCardColonistEngineer
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill

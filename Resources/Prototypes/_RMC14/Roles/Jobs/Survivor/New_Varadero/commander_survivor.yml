@@ -1,0 +1,111 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorCommander
+  name: rmc-job-name-survivor-commander
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCommander
+  ranks:
+    RMCRankLieutenantColonel: []
+  startingGear: RMCGearSurvivorCommander
+  supervisors: cm-job-supervisors-marine-high-command
+  roleWeight: 0.25
+  icon: "RMCJobIconSurvivorCommander"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillExecution: 1
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSmartGun: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-co
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: xo
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSurvivorCommander
+  equipment:
+    ears: CMHeadsetColony
+    jumpsuit: CMJumpsuitBO
+    head: RMCHeadCapFlippable
+    outerClothing: RMCCoatService
+    shoes: CMBootsBlackFilled
+    back: CMSatchelFillSurvivor
+    belt: RMCM1984BeltFilled
+    id: CMIDCardGold
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneralLargeFilledSurvivorCommander
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledSurvivorCommander
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMClipboard
+    - id: CMPenFountain
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointCommander
+  name: commanding officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorCommander
+  - type: Sprite
+    state: co_spawn
+
+- type: playTimeTracker
+  id: RMCJobSurvivorCommander
+  isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetNoGun
+  name: no gun colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ RMCGrenadeMolotov ]
+    - [ CMPackFlare ]
+    - [ WeaponNailgun ]
+    - [ RMCFireAxe ]
+    - [ CMWelder ] # TODO RMC14 industrial welder
+    - [ CMAdvFirstAidKitFilled ]
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorCommander
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_nv_co

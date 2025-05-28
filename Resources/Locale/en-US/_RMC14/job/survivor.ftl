@@ -16,7 +16,8 @@ CMJobSurvivorSecurity = Security Colonist
 cm-job-name-survivor-corporate = Corporate Colonist
 CMJobSurvivorCorporate = Corporate Colonist
 
-cm-job-name-survivor-miner = nothing
+cm-job-name-survivor-miner = Miner
+CMJobSurvivorMiner = Miner
 
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
@@ -49,8 +50,12 @@ rmc-job-name-forecon-commander = Commander
 
 # New Varadero Survs
 
-cm-job-name-surivor-beachbum = Beachbum
-CMJobSurvivorBeachbum = Beachbum
+rmc-job-name-survivor-commander = Commander
+CMJobSurvivorCommander = Commander
+rmc-job-prefix-survivor-co = test
+
+cm-job-name-surivor-beach-bum = Beach Bum
+CMJobSurvivorBeachBum = Beach Bum
 
 cm-job-name-survivor-cargo-technician = Cargo Technician
 CMJobSurvivorCargoTechnician = Cargo Technician

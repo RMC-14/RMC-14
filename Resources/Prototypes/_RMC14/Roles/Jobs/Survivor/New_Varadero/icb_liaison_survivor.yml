@@ -34,7 +34,7 @@
     outerClothing: RMCHazardVestBlack
     shoes: RMCShoesLaceup
     eyes: RMCSunglasses
-    back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
+    back: CMSatchelFillSurvivor
     id: CMIDCardLiaisonColony
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchDocument

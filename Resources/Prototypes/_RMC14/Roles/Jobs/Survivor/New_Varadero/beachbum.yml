@@ -21,14 +21,25 @@
   id: RMCGearSurvivorBeachBum
   equipment:
     jumpsuit: RMCJumpsuitRedShorts
-    back: CMSatchelMarineTechSurvivorFill
-    head: RMCHeadBeanie # TODO RMC14 colored beanies
-    shoes: RMCShoesJackboots
-    hands: CMHandsInsulated
-    id: CMIDCardColonistEngineer
+    back: CMSatchelFillSurvivorBeachBum
+    head: RMCBoonie
+    mask: RMCCigarette
+    shoes: RMCShoesLeather # TODO RMC14 sandals
+    gloves: CMHandsBrown
+    id: CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchToolsFill
+
+- type: entity
+  parent: CMSatchelFillSurvivor
+  id: CMSatchelFillSurvivorBeachBum
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCigarettePackWeYaGold
+    - id: RMCKitchenKnifeButcher
+    - id: CMDrinkCanBeerLite
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -49,6 +60,6 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetEngineer
+  parent: RMCSurvivorPresetCivilian
   id: RMCGearSurvivorPresetBeachBum
-  name: cargo technician colonist preset
+  name: beach bum colonist preset
