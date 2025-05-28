@@ -167,6 +167,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
 
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitRedShorts
+  name: red shorts
+  description: A ratty pair of red shorts. Smells of ciggarettes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/survivor/varadero_shorts.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/survivor/varadero_shorts.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase

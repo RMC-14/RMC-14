@@ -20,7 +20,7 @@
 - type: startingGear
   id: RMCGearSurvivorBeachBum
   equipment:
-    jumpsuit: RMCJumpsuitCivilian # TODO RMC colored utility jumpsuits (brown)
+    jumpsuit: RMCJumpsuitRedShorts
     back: CMSatchelMarineTechSurvivorFill
     head: RMCHeadBeanie # TODO RMC14 colored beanies
     shoes: RMCShoesJackboots
