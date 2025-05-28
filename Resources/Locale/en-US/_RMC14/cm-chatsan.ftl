@@ -382,10 +382,10 @@ cm-chatsan-word-cas = cas
 cm-chatsan-replacement-cas = skyspit
 
 cm-chatsan-word-sensors = sensors
-cm-chatsan-replacement-sensors = tall eye tower
+cm-chatsan-replacement-sensors = tall evil eye tower
 
 cm-chatsan-word-sensor-tower = sensor tower
-cm-chatsan-replacement-sensor-tower = tall eye tower
+cm-chatsan-replacement-sensor-tower = tall evil eye tower
 
 cm-chatsan-word-comms = comms
 cm-chatsan-replacement-comms = tall hivemind tower
@@ -452,3 +452,48 @@ cm-chatsan-replacement-surv = planet tall
 
 cm-chatsan-word-survs = survs
 cm-chatsan-replacement-survs = planet talls
+
+cm-chatsan-word-bro = bro
+cm-chatsan-replacement-bro = sister
+
+cm-chatsan-word-bvro = bvro
+cm-chatsan-replacement-bvro = sister
+
+cm-chatsan-word-xro = xro
+cm-chatsan-replacement-xro = sister
+
+cm-chatsan-word-xister = xister
+cm-chatsan-replacement-xister = sister
+
+cm-chatsan-word-naur = naur
+cm-chatsan-replacement-naur = no
+
+cm-chatsan-word-weedkiller = weedkiller
+cm-chatsan-replacement-weedkiller = evil fog
+
+cm-chatsan-word-dancer = d*ncer
+cm-chatsan-replacement-dancer = dancer
+
+cm-chatsan-word-larba = larba
+cm-chatsan-replacement-larba = larva
+
+cm-chatsan-word-toob = toob
+cm-chatsan-replacement-toob = tube
+
+cm-chatsan-word-toober = toober
+cm-chatsan-replacement-toober = tuber
+
+cm-chatsan-word-cooked = cooked
+cm-chatsan-replacement-cooked = doomed
+
+cm-chatsan-word-xooked = xooked
+cm-chatsan-replacement-xooked = doomed
+
+cm-chatsan-word-xibidi = xibidi
+cm-chatsan-replacement-xibidi = tall seat
+
+cm-chatsan-word-mcxonald = mcxonald
+cm-chatsan-replacement-mcxonald = tall garden
+
+cm-chatsan-word-mcxonalds = mcxonalds
+cm-chatsan-replacement-mcxonalds = tall garden
