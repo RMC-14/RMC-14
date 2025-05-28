@@ -98,6 +98,14 @@
 
 - type: entity
   parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCRiotShield
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRC6RiotShield
+
+- type: entity
+  parent: ArmorHelmetPMC
   id: ArmorHelmetPMCKutjevo
   name: kutjevo helmet
   description: Standard issued helmet for the workers of Kutjevo. Contains a small webbing to hold small items like pens, oil or even a photo of a loved one.

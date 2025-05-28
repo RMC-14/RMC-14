@@ -54,7 +54,7 @@
 - type: startingGear
   id: RMCGearSurvivorCommander
   equipment:
-    ears: CMHeadsetColony
+    ears: RMCHeadsetMarineDistress
     jumpsuit: CMJumpsuitBO
     head: RMCHeadCapFlippable
     outerClothing: RMCCoatService

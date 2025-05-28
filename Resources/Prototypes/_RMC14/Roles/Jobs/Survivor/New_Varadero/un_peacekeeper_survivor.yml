@@ -25,7 +25,7 @@
 - type: startingGear
   id: RMCGearSurvivorUNPeacekeeper
   equipment:
-    head: ArmorHelmetPMCRiot
+    head: ArmorHelmetPMCRiotShield
     ears: CMHeadsetColony
     eyes: CMGlassesSecurity
     jumpsuit: RMCJumpsuitUNSecurity
@@ -36,8 +36,6 @@
     id: CMIDCardColonistSecurity
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchMagazine
-  inhand:
-  - RMCVisorSWAT # TODO RMC14 replace with RC6 visor
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -296,6 +296,22 @@
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
       state: helmet
 
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCRC6RiotShield
+  name: RC6 riot shield
+  description: The complimentary, but sold separate face shield associated with the RC6 riot helmet.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/riot_shield.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/riot_shield.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/riot_shield.rsi
+      state: helmet
+
 # Feathers
 
 - type: entity

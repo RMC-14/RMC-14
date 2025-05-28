@@ -118,3 +118,15 @@
   - type: RMCHeadset
     channels:
     - MarineForecon
+
+#for UNMC personnel
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetMarineDistress
+  name: UNMC headset
+  description: A standard issue UNMC headset. This one is used by marines on colonial protection duties, and only comes equipped with civilian channels.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
