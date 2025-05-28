@@ -110,8 +110,8 @@
         conditions:
         - !type:ReagentThreshold
           min: 25
-        key: Drowsiness
-        component: Drowsiness
+        key: Unconscious
+        component: RMCUnconscious
         time: 30
         type: Add
 
@@ -602,7 +602,7 @@
         conditions:
         - !type:ReagentThreshold
           min: 30
-        key: Drowsiness
-        component: Drowsiness
+        key: Unconscious
+        component: RMCUnconscious
         time: 30
         type: Add
