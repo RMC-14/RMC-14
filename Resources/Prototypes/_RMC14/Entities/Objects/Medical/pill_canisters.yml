@@ -235,6 +235,6 @@
     - id: RMCPillRussianRed
       amount: 16
   - type: IconLabel
-    labelTextLocId: rmc-russianred-container-label-text = Rr
+    labelTextLocId: rmc-russianred-container-label-text
 
 # TODO RMC14 peridaxon, tramadol
