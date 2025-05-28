@@ -126,7 +126,7 @@
 #          Working: { visible: false }
 #          Broken: { visible: false }
       enum.RMCApcVisualsLayers.Power:
-        enum.ApcVisualLayers.ChargeState: # TODO RMC14
+        enum.ApcVisualLayers.ChargeState:
           NotCharging: { state: display-lack }
           Charging: { state: display-charging }
           FullCharge: { state: display-full }
