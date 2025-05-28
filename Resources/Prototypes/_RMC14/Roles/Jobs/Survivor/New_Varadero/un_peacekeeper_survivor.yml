@@ -58,6 +58,6 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetUNPeacekeeper
   name: un peacekeeper colonist preset # TODO RMC14 random research notes

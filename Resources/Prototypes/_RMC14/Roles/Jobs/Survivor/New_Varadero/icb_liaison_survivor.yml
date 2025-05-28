@@ -4,6 +4,7 @@
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorICB
+  #spawnMenuRoleName: Interstellar Commerce Buero Liaison (NV Survivor)
   ranks:
     RMCRankICBCorporateLiaison: []
   startingGear: RMCGearSurvivorICB
@@ -59,6 +60,6 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetCorporate
   id: RMCGearSurvivorPresetICB
-  name: icb colonist preset # TODO RMC14 random research notes
+  name: icb colonist preset

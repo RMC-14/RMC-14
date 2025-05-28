@@ -24,7 +24,7 @@
   equipment:
     mask: CMMaskSterile
     ears: CMHeadsetColony
-    head: CMHeadCap
+    head: RMCHeadCapFlippable
     jumpsuit: RMCJumpsuitCivilian # TODO green utility jumpsuit
     outerClothing: RMCLabcoat
     gloves: CMHandsLatex
@@ -52,6 +52,6 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetMedicalTechnician
   name: medical technician colonist preset # TODO RMC14 random research notes

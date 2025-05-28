@@ -283,6 +283,16 @@
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
 
 - type: entity
+  parent: CMSatchelMarineTech
+  id: CMSatchelMarineTechSurvivorFill
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetPlasteel20
+    - id: CMSheetMetal20
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelGrenadeSpec
   name: UNMC IMP M63A1 grenade satchel

@@ -1,0 +1,54 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorBeachBum
+  name: cm-job-name-survivor-beach-bum
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorBeachBum
+  startingGear: RMCGearSurvivorBeachBum
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetBeachBum
+
+- type: startingGear
+  id: RMCGearSurvivorBeachBum
+  equipment:
+    jumpsuit: RMCJumpsuitCivilian # TODO RMC colored utility jumpsuits (brown)
+    back: CMSatchelMarineTechSurvivorFill
+    head: RMCHeadBeanie # TODO RMC14 colored beanies
+    shoes: RMCShoesJackboots
+    hands: CMHandsInsulated
+    id: CMIDCardColonistEngineer
+    ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchToolsFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorBeachBum
+  name: survivor un peacekeeper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorBeachBum
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetBeachBum
+  name: cargo technician colonist preset

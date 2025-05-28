@@ -545,3 +545,16 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+
+# beanies
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeanie
+  name: beanie
+  description: A typical beanie. Often worn by those who are too cool for helmets, or just want to keep their head warm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/beanie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/beanie.rsi

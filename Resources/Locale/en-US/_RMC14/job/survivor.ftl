@@ -1,4 +1,6 @@
-﻿cm-job-name-survivor = Civilian Colonist
+﻿# generic survs
+
+cm-job-name-survivor = Civilian Colonist
 cm-job-description-survivor = You are a survivor of the attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
 CMJobSurvivor = Civilian Colonist
 
@@ -13,6 +15,8 @@ CMJobSurvivorSecurity = Security Colonist
 
 cm-job-name-survivor-corporate = Corporate Colonist
 CMJobSurvivorCorporate = Corporate Colonist
+
+cm-job-name-survivor-miner = nothing
 
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
@@ -45,8 +49,11 @@ rmc-job-name-forecon-commander = Commander
 
 # New Varadero Survs
 
-cm-job-name-survivor-cargo-technician = Colonial Cargo Technician
-CMJobSurvivorMedicalTechnician = Colonial Cargo Technician
+cm-job-name-surivor-beachbum = Beachbum
+CMJobSurvivorBeachbum = Beachbum
+
+cm-job-name-survivor-cargo-technician = Cargo Technician
+CMJobSurvivorCargoTechnician = Cargo Technician
 
 cm-job-name-survivor-medical-technician = Medical Technician
 CMJobSurvivorMedicalTechnician = Medical Technician
@@ -57,6 +64,6 @@ CMJobSurvivorTechnician = Engineering Technician
 cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
 CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
 
-cm-job-name-survivor-icb = Colonial Interstellar Commerce Bureau Liaison
-CMJobSurvivorICB = Colonial Interstellar Commerce Bureau Liaison
+cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
+CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
 cm-job-prefix-survivor-icb = ICB

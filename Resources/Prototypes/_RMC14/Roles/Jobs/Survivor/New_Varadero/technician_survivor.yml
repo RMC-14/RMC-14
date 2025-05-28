@@ -54,6 +54,6 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetTechnician
-  name: technician colonist preset # TODO RMC14 random research notes
+  name: technician colonist preset
