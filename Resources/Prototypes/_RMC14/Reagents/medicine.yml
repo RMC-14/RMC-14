@@ -10,7 +10,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         damage:
         - Toxin: -1
         - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
@@ -85,7 +85,7 @@
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -113,7 +113,7 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 10
+        time: 5
         refresh: true
         type: Add
 
@@ -446,7 +446,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         damage:
         - Brute: -0.25
         - Burn: -0.25
@@ -578,7 +578,7 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -606,6 +606,6 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 10
+        time: 5
         refresh: true
         type: Add
