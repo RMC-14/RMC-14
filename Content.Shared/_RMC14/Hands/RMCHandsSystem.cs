@@ -195,12 +195,6 @@ public abstract class RMCHandsSystem : EntitySystem
             return false;
         }
 
-        if (!_rmcStorage.CanDraw(item, user, out var popup))
-        {
-            _popup.PopupClient(popup, user, user);
-            return false;
-        }
-
         if (eject.State == RMCStorageEjectState.Unequip)
         {
             return false;
@@ -209,6 +203,12 @@ public abstract class RMCHandsSystem : EntitySystem
         {
             _storage.OpenStorageUI(item, user, storage, false, false);
             return true;
+        }
+
+        if (!_rmcStorage.CanEject(item, user, out var popup))
+        {
+            _popup.PopupClient(popup, user, user);
+            return false;
         }
 
         if (eject.Whitelist != null)

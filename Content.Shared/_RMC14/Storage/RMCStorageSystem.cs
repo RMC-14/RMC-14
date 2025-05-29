@@ -343,6 +343,27 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
+    private bool CanEjectStoreSkill(Entity<StorageComponent?, StorageSkillRequiredComponent?> store, EntityUid? user, out LocId popup)
+    {
+        popup = default;
+        if (user == null)
+            return true;
+
+        if (!Resolve(store, ref store.Comp2, false) ||
+            !_storageQuery.Resolve(store, ref store.Comp1, false))
+        {
+            return true;
+        }
+
+        if (!_skills.HasAllSkills(user.Value, store.Comp2.Skills))
+        {
+            _popup.PopupClient(Loc.GetString("cm-storage-unskilled"), store, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return true;
+    }
+
     public bool TryGetLastItem(Entity<StorageComponent?> storage, out EntityUid item)
     {
         item = default;
@@ -410,25 +431,12 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
-    public bool CanDraw(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid user, out LocId popup)
+    public bool CanEject(EntityUid storage, EntityUid user, out LocId popup)
     {
-        popup = default;
-        Log.Debug("Went to CanDraw");
 
-        if (!Resolve(store, ref store.Comp2, false))
-        {
-            return true;
-        }
-
-        foreach (var entry in store.Comp2.Entries)
-        {
-
-            if (_skills.HasSkills(user, entry.Skills))
-                continue;
-
-            popup = "rmc-storage-store-skill-unable";
+        if (!CanEjectStoreSkill(storage, user, out popup))
             return false;
-        }
+
         return true;
     }
 
