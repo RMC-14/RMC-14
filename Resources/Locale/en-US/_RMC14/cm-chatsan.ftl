@@ -536,3 +536,9 @@ cm-chatsan-replacement-woyer = warrior
 
 cm-chatsan-word-senti = senti
 cm-chatsan-replacement-senti = sentinel
+
+cm-chatsan-word-sigma = sigma
+cm-chatsan-replacement-sigma = prime
+
+cm-chatsan-word-xigma = xigma
+cm-chatsan-replacement-xigma = prime
