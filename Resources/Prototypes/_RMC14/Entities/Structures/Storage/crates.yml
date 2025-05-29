@@ -102,6 +102,11 @@
   - type: RMCCanBeFultoned
   - type: ReceiverXenoClaws
     minimumClawStrength: ImpossiblySharp
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 0
+    throwRange: 2
 
 - type: entity
   parent: RMCCrateBase

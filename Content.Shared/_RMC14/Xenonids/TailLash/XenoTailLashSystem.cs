@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Abduct;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Sweep;
@@ -38,6 +39,7 @@ public sealed class XenoTailLashSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     public override void Initialize()
     {
@@ -127,8 +129,11 @@ public sealed class XenoTailLashSystem : EntitySystem
             if (!_interaction.InRangeUnobstructed(xeno.Owner, ent.Owner, xeno.Comp.Width * xeno.Comp.Height, collisionMask: CollisionGroup.MobMask)) //Ditto
                 continue;
 
-            _stun.TryParalyze(ent, xeno.Comp.StunTime, true);
-            _slow.TrySlowdown(ent, xeno.Comp.SlowTime);
+            if (_size.TryGetSize(ent, out var size) && size >= RMCSizes.Big)
+                continue;
+
+            _stun.TryParalyze(ent, _xeno.TryApplyXenoDebuffMultiplier(ent, xeno.Comp.StunTime), true);
+            _slow.TrySlowdown(ent, _xeno.TryApplyXenoDebuffMultiplier(ent, xeno.Comp.SlowTime));
 
             _pulling.TryStopAllPullsFromAndOn(ent);
 

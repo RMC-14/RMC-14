@@ -17,6 +17,7 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: BaseStructure

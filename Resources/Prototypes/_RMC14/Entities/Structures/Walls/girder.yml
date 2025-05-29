@@ -42,6 +42,7 @@
     damage:
       types:
         Blunt: 40
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: CMGirder

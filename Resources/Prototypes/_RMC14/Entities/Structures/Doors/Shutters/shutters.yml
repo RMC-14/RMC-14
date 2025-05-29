@@ -88,6 +88,8 @@
     stageLoss: 2
     destroy: true
     minimumStage: 4
+  - type: XenoCrusherChargable
+    instantDestroy: true
 
 - type: entity
   parent: RMCShutterBase
