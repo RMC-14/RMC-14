@@ -8,10 +8,10 @@
   },
   "states": [
     {
-      "name": "m54c-solid"
+      "name": "pve-sling"
     },
     {
-      "name": "m54c-col"
+      "name": "pve-sling_a"
     }
   ]
 }

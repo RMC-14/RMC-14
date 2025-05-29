@@ -113,6 +113,7 @@
   description: A traditional strip of toughened nylon fabric with clips on either end for attaching to suitable mounting points on most longarms in the UN armed forces arsenals.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
     state: pve-sling
   - type: AttachableMagnetic
   - type: AttachableVisuals
