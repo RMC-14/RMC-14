@@ -61,6 +61,28 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+    survivorJobs:
+    - RMCSurvivorCommandingOfficer: 1
+    - CMSurvivor: -1
+    - CMSurvivorCorporate: 2
+    - CMSurvivorDoctor: 3
+    - CMSurvivorEngineer: 4
+    - CMSurvivorSecurity: 2
+    survivorJobInserts:
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorCommander: 1
+      CMSurvivor:
+      - CMSurvivorBeachBum: -1
+      - CMSurvivorMiner: -1
+      CMSurvivorCorporate:
+      - CMSurvivorICB: 2
+      CMSurvivorDoctor:
+      - CMSurvivorMedicalTechnician: 3
+      CMSurvivorEngineer:
+      - CMSurvivorTechnician: 2
+      - CMSurvivorCargoTechnician: 2
+      CMSurvivorSecurity:
+      - CMSurvivorUNPeacekeeper: 2
 
 - type: entity
   id: RMCPlanetKutjevo
