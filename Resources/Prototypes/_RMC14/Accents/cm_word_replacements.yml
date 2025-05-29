@@ -159,7 +159,6 @@
     cm-chatsan-word-survivors: cm-chatsan-replacement-survivors
     cm-chatsan-word-surv: cm-chatsan-replacement-surv
     cm-chatsan-word-survs: cm-chatsan-replacement-survs
-    cm-chatsan-word-sis: cm-chatsan-replacement-sis
     cm-chatsan-word-bro: cm-chatsan-replacement-bro
     cm-chatsan-word-bruh: cm-chatsan-replacement-bruh
     cm-chatsan-word-bvro: cm-chatsan-replacement-bvro
@@ -183,3 +182,6 @@
     cm-chatsan-word-christ: cm-chatsan-replacement-christ
     cm-chatsan-word-jesus-christ: cm-chatsan-replacement-christ
     cm-chatsan-word-froot: cm-chatsan-replacement-froot
+    cm-chatsan-word-yung: cm-chatsan-replacement-yung
+    cm-chatsan-word-croosh: cm-chatsan-replacement-croosh
+    cm-chatsan-word-bald: cm-chatsan-replacement-bald

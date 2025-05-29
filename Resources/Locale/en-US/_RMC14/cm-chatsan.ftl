@@ -453,9 +453,6 @@ cm-chatsan-replacement-surv = planet tall
 cm-chatsan-word-survs = survs
 cm-chatsan-replacement-survs = planet talls
 
-cm-chatsan-word-sis = sis
-cm-chatsan-replacement-sis = sister
-
 cm-chatsan-word-bro = bro
 cm-chatsan-replacement-bro = sister
 
@@ -521,3 +518,12 @@ cm-chatsan-replacement-jesus-christ = queen mother
 
 cm-chatsan-word-froot = froot
 cm-chatsan-replacement-froot = fruit
+
+cm-chatsan-word-yung = yung
+cm-chatsan-replacement-yung = young
+
+cm-chatsan-word-croosh = croosh
+cm-chatsan-replacement-croosh = crush
+
+cm-chatsan-word-bald = bald
+cm-chatsan-replacement-bald = crestless
