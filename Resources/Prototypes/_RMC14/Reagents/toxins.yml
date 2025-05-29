@@ -1,9 +1,10 @@
-﻿- type: reagent
+- type: reagent
   parent: CMReagent
   id: RMCMolecularAcid
   name: reagent-name-rmcmolecularacid
   desc: reagent-desc-rmcmolecularacid
   physicalDesc: reagent-physical-desc-acidic
+  group: Toxins
   color: "#669900"
   unknown: true
   metabolisms:

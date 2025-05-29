@@ -1,0 +1,54 @@
+- type: reaction
+  id: RMCGrapeJuice
+  quantized: true
+  reactants:
+    RMCDrinkPowderGrape:
+      amount: 1
+    Water:
+      amount: 5
+  products:
+    RMCGrapeJuice: 5
+
+- type: reaction
+  id: RMCOrangeJuice
+  quantized: true
+  reactants:
+    RMCDrinkPowderOrange:
+      amount: 1
+    Water:
+      amount: 5
+  products:
+    RMCOrangeJuice: 5
+
+- type: reaction
+  id: RMCLemonLime
+  quantized: true
+  reactants:
+    RMCDrinkPowderLemonLime:
+      amount: 1
+    Water:
+      amount: 5
+  products:
+    RMCLemonLime: 5
+
+- type: reaction
+  id: RMCChocolateHazelnut
+  quantized: true
+  reactants:
+    RMCDrinkPowderHazelnut:
+      amount: 1
+    Water:
+      amount: 5
+  products:
+    RMCChocolateDrinkHazelnut: 5
+
+- type: reaction
+  id: RMCChocolateDrink
+  quantized: true
+  reactants:
+    RMCDrinkPowderChocolate:
+      amount: 1
+    Water:
+      amount: 5
+  products:
+    RMCChocolateDrink: 5

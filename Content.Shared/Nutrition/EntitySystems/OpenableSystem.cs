@@ -9,6 +9,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Utility;
+using Robust.Shared.Network;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
@@ -21,6 +22,7 @@ public sealed partial class OpenableSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -174,7 +176,7 @@ public sealed partial class OpenableSystem : EntitySystem
         if (comp.Opened)
             return false;
 
-        if (user != null)
+        if (user != null && _net.IsServer)
             _popup.PopupEntity(Loc.GetString(comp.ClosedPopup, ("owner", uid)), user.Value, user.Value);
 
         return true;
