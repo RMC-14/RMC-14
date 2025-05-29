@@ -39,18 +39,17 @@
     - type: CommandAccent
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-    - type: TacticalMapIcon
     - type: NpcFactionMember
       factions:
       - Survivor
       - UNMC
+    - type: TacticalMapIcon
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: xo
       background:
         sprite: _RMC14/Interface/map_blips.rsi
         state: background_command
-    - type: IntelRescueSurvivorObjective
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
   hidden: true
