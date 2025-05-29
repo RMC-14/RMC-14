@@ -5,6 +5,7 @@
   playTimeTracker: RMCJobSurvivorSniperForecon
   startingGear: RMCGearForeconSniper
   icon: "RMCJobIconForeconSniper"
+  spawnMenuRoleName: FORECON Sniper (Survivor)
   special:
   - !type:AddComponentSpecial
     components:

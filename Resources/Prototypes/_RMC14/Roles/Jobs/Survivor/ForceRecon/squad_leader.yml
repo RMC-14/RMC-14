@@ -8,6 +8,7 @@
   icon: "CMJobIconSquadLeader"
   roleWeight: 1
   hasIcon: true
+  spawnMenuRoleName: FORECON Squad Leader (Survivor)
   special:
   - !type:AddComponentSpecial
     components:

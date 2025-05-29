@@ -180,7 +180,7 @@ namespace Content.Server.Administration.Systems
                             foreach (var job in _prototypeManager.EnumerateCM<JobPrototype>())
                             {
                                 var ev = new SpawnAsJobDialogEvent(GetNetEntity(args.User), GetNetEntity(args.Target), job.ID);
-                                jobs.Add(new DialogOption(job.LocalizedName, ev));
+                                jobs.Add(new DialogOption(job.SpawnMenuRoleName ?? job.LocalizedName, ev));
                             }
 
                             jobs.Sort((a, b) => string.Compare(a.Text, b.Text, StringComparison.Ordinal));
