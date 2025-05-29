@@ -202,7 +202,7 @@ public sealed class FoodSystem : EntitySystem
             BreakOnHandChange = false,
             BreakOnMove = forceFeed,
             BreakOnDamage = true,
-            MovementThreshold = 0.01f,
+            MovementThreshold = 0.3f, // RMC14
             DistanceThreshold = MaxFeedDistance,
             // do-after will stop if item is dropped when trying to feed someone else
             // or if the item started out in the user's own hands
