@@ -67,7 +67,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorBeachBum
-  name: survivor un peacekeeper spawn point
+  name: survivor beach bum spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
