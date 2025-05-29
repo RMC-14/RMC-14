@@ -1,0 +1,86 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorMiner
+  name: cm-job-name-survivor-miner
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorMiner
+  startingGear: RMCGearSurvivorMiner
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetMiner
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  id: RMCGearSurvivorMiner
+  equipment:
+    head: RMCHardhatOrange
+    ears: CMHeadsetColony
+    gloves: RMCHandsBlack
+    jumpsuit: CMJumpsuitLiaisonBlue
+    outerClothing: RMCHazardVestYellow
+    shoes: RMCShoesJackboots
+    back: CMSatchelEngineerMinerSurvivorFill
+    id: CMIDCardColonist
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchToolsFill
+  inhand:
+    - RMCPickaxe
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorMiner
+  name: survivor miner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorMiner
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetMiner
+  name: miner colonist preset # TODO RMC14 random research notes
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorMiner
+  name: miner colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorMiner
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorMiner
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorMiner

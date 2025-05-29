@@ -1,0 +1,70 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorUNPeacekeeper
+  name: cm-job-name-survivor-un-peacekeeper
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorUNPeacekeeper
+  startingGear: RMCGearSurvivorUNPeacekeeper
+  #spawnMenuRoleName: UN Peacekeeper (NV Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetUNPeacekeeper
+
+- type: startingGear
+  id: RMCGearSurvivorUNPeacekeeper
+  equipment:
+    head: ArmorHelmetPMCRiotShield
+    ears: CMHeadsetColony
+    eyes: CMGlassesSecurity
+    jumpsuit: RMCJumpsuitUNSecurity
+    outerClothing: RMCArmorPMCRiot
+    gloves: RMCHandsVeteran
+    shoes: RMCShoesJackboots
+    back: CMSatchelSecuritySurvivorFill
+    id: CMIDCardColonistSecurity
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchMagazine
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorUNPeacekeeper
+  name: survivor un peacekeeper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorUNPeacekeeper
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetUNPeacekeeper
+  name: un peacekeeper colonist preset # TODO RMC14 random research notes
