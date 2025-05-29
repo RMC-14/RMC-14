@@ -116,6 +116,7 @@
   components:
   - type: SquadTeam
     color: "#053818"
+    accessibleColor: "#09662b" # original color is too indistinguishable in most situations
     blacklistedSquadArmor:
     - Helmet
     - Armor

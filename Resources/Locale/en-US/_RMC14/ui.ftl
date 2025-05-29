@@ -96,3 +96,5 @@ rmc-tacmap-alert-area = Current Area: {$area}
 rmc-tacmap-alert-no-area = Unknown
 
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
+
+rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads
