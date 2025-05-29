@@ -464,6 +464,26 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     return null;
                 }
 
+                if (!IsAllowed(playerId, spawnAsJob)) // check insert playtime requirements
+                {
+                    if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var spawningInsert))
+                    {
+                        for (var i = 0; i < spawningInsert.Count; i++)
+                        {
+                            var (insertJob, amount) = spawningInsert[i];
+                            if (insertJob != spawnAsJob)
+                                continue;
+
+                            if (amount == -1)
+                                break;
+
+                            spawningInsert[i] = (insertJob, amount + 1); // take back the removed slot
+                        }
+                    }
+
+                    return null;
+                }
+
                 var spawner = _random.PickAndTake(jobSpawnersLeft);
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
@@ -677,25 +697,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         var id = player.UserId;
                         if (!IsAllowed(id, comp.CivilianSurvivorJob) || !IsAllowed(id, job))
                             continue;
-
-                        if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
-                        {
-                            // Check inserts aswell
-                            var canRollInsert = false;
-
-                            for (var i = 0; i < insert.Count; i++)
-                            {
-                                var (insertJob, amount) = insert[i];
-                                if (!IsAllowed(id, insertJob))
-                                    continue;
-
-                                canRollInsert = true;
-                            }
-
-                            if (!canRollInsert)
-                                continue;
-                        }
-
 
                         if (!ev.Profiles.TryGetValue(id, out var profile))
                             continue;
