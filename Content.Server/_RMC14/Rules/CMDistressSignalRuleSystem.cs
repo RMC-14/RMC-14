@@ -447,6 +447,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (survJob != job)
                         continue;
 
+                    if (selectRandomInsert) // select a random insert if there are any and if this map supports random inserts
+                    {
+                        if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var randomInsertList))
+                            spawnAsJob = _random.Pick(randomInsertList).Insert;
+                    }
+
                     if (amount == -1)
                         break;
 
@@ -454,12 +460,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     {
                         stop = true;
                         return null;
-                    }
-
-                    if (selectRandomInsert) // select a random insert if there are any and if this map supports random inserts
-                    {
-                        if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var randomInsertList))
-                            spawnAsJob = _random.Pick(randomInsertList).Insert;
                     }
 
                     comp.SurvivorJobs[i] = (survJob, amount - 1);

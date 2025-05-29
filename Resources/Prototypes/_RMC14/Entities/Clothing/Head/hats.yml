@@ -552,9 +552,20 @@
   parent: CMHeadBeret
   id: RMCHeadBeanie
   name: beanie
-  description: A typical beanie. Often worn by those who are too cool for helmets, or just want to keep their head warm.
+  description: A standard military beanie, often worn by non-combat military personnel and support crews, though it is not uncommon to see combat personnel who no longer care about self-preservation wearing one of these as well. Popular due to being comfortable and snug.
+  suffix: Black, RMC
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/beanie.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/beanie.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/beanie.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/beanie.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieTan
+  suffix: Tan, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
