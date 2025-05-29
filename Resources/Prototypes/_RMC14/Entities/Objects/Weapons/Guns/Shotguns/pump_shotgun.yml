@@ -24,6 +24,7 @@
     baseFireRate: 0.5
     burstScatterMult: 5
   - type: BallisticAmmoProvider
+    capacity: 10 # todo change to 9 when bullet chambering is added
     whitelist:
       tags:
       - RMCShellShotgunBuckshot
