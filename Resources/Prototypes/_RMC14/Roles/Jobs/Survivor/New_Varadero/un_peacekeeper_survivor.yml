@@ -32,19 +32,12 @@
       preset: RMCGearSurvivorPresetUNPeacekeeper
 
 - type: startingGear
+  parent: RMCGearSurvivorSecurity
   id: RMCGearSurvivorUNPeacekeeper
   equipment:
     head: ArmorHelmetPMCRiotShield
-    ears: CMHeadsetColony
-    eyes: CMGlassesSecurity
     jumpsuit: RMCJumpsuitUNSecurity
     outerClothing: RMCArmorPMCRiot
-    gloves: RMCHandsVeteran
-    shoes: RMCShoesJackboots
-    back: CMSatchelSecuritySurvivorFill
-    id: CMIDCardColonistSecurity
-    pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchMagazine
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -31,18 +31,14 @@
       prefix: cm-job-prefix-survivor-icb
 
 - type: startingGear
+  parent: RMCGearSurvivorCorporate
   id: RMCGearSurvivorICB
   equipment:
     ears: RMCHeadsetDistressBureauDamaged
     jumpsuit: CMJumpsuitLiaisonBlack
     head: RMCHardhatWhite
     outerClothing: RMCHazardVestBlack
-    shoes: RMCShoesLaceup
     eyes: RMCSunglasses
-    back: CMSatchelFillSurvivor
-    id: CMIDCardLiaisonColony
-    pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchDocument
   inhand:
   - CMClipboard
 

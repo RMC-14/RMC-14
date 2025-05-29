@@ -40,6 +40,7 @@
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchToolsFill
+# TODO RMC Meson Goggles
 
 - type: entity
   parent: CMSpawnPointJobBase

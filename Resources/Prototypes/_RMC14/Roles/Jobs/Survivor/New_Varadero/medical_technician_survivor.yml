@@ -29,18 +29,11 @@
       preset: RMCGearSurvivorPresetMedicalTechnician
 
 - type: startingGear
+  parent: RMCGearSurvivorDoctor
   id: RMCGearSurvivorMedicalTechnician
   equipment:
-    mask: CMMaskSterile
-    ears: CMHeadsetColony
     head: RMCHeadCapFlippable
     jumpsuit: RMCJumpsuitCivilian # TODO green utility jumpsuit
-    outerClothing: RMCLabcoat
-    gloves: CMHandsLatex
-    shoes: RMCShoesLaceup
-    back: CMSatchelMedical
-    id: CMIDCardColonistDoctor
-    pocket1: RMCPouchSurvivalFill
 
 - type: entity
   parent: CMSpawnPointJobBase
