@@ -40,14 +40,12 @@
 - type: entity
   abstract: true
   id: RMCPropVehicleBase
-  placement:
-    mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
     noRot: true
   - type: Physics
     bodyType: Static
+    fixedRotation: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -58,10 +56,9 @@
         layer:
         - MobMask
   - type: Sprite
-    sprite: _RMC14/Structures/vehicles.rsi
+    sprite: _RMC14/Structures/Vehicles/vehicles.rsi
     offset: 0.5, 0.5
     noRot: true
-  - type: Clickable
   - type: DeleteOnExplosion
   - type: Damageable
     damageContainer: Inorganic
@@ -73,6 +70,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RequireProjectileTarget
 
 # Vehicles
 
@@ -84,18 +84,8 @@
   description: The 'Mono-Supron', a mass-produced civilian vehicle for the colonial markets, in and outside of the United Nations. Produced by 'Mizutani' a car marque and associated operating division of the Weston-Yamada Corporation.
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/vehicles.rsi
     state: mizutani_orange
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 3000
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCPropVehicleMonoSupronOrange
