@@ -1,9 +1,11 @@
 ﻿using Content.Server._RMC14.Rules;
+using Content.Server.Administration.Logs;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.GhostColor;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -15,6 +17,7 @@ namespace Content.Server._RMC14.LinkAccount;
 
 public sealed class LinkAccountSystem : EntitySystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
@@ -157,7 +160,10 @@ public sealed class LinkAccountSystem : EntitySystem
         _nextLobbyMessageTime = time + _timeBetweenLobbyMessages;
 
         if (_nextLobbyMessage is { } message)
+        {
+            _adminLog.Add(LogType.RMCLobbyMessage, $"Displaying lobby message from {message.User:user}: {message.Message:message}");
             RaiseNetworkEvent(new SharedRMCDisplayLobbyMessageEvent(message.Message, message.User));
+        }
 
         GetRandomLobbyMessage();
     }
