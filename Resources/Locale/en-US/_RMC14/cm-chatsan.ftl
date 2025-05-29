@@ -453,6 +453,9 @@ cm-chatsan-replacement-surv = planet tall
 cm-chatsan-word-survs = survs
 cm-chatsan-replacement-survs = planet talls
 
+cm-chatsan-word-sis = sis
+cm-chatsan-replacement-sis = sister
+
 cm-chatsan-word-bro = bro
 cm-chatsan-replacement-bro = sister
 
