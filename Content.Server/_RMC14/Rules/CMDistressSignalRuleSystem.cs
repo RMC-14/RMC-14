@@ -456,7 +456,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         return null;
                     }
 
-                    if (selectRandomInsert) // select a random insert if there are any and this map supports random inserts
+                    if (selectRandomInsert) // select a random insert if there are any and if this map supports random inserts
                     {
                         if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var randomInsertList))
                             spawnAsJob = _random.Pick(randomInsertList).Insert;
