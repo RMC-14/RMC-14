@@ -291,7 +291,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBites-The-Dust
   name: Bites-The-Dust figurine
-  description: A small, detailed miniature of a skilled corpsman.
+  description: One of the best smart gun operators within the UNMC, though, they seem to get hurt a lot...
   components:
   - type: Sprite
     state: bites-the-dust
@@ -1294,7 +1294,7 @@
     state: dry_wetbrush
   - type: PatronFigurine
     id: 72a61df6-9a4f-4d32-840b-f1d0c4e2b051
-    
+
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHaileyMorgan
@@ -1457,10 +1457,53 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKuafuSpeedDemonLightweaver
   name: Kuafu 'Speed Demon' Lightweaver figurine
-  description: ""
+  #description: ""
   components:
   - type: Sprite
     state: kuafu_speed_demon_lightweaver
   - type: PatronFigurine
     id: 3c148935-f54d-4c7d-b02c-a9ac360c6479
 
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJackHunterDunes
+  name: Jack 'Hunter' Dunes figurine
+  description: "This item smells of old MRE, and blood......seems like people thrown this one at their targets with all the dents on it."
+  components:
+  - type: Sprite
+    state: jack_hunter_dunes
+  - type: PatronFigurine
+    id: 8ccb1d66-4449-4674-a193-1077eeab8f57
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDurganChumCarlyle
+  name: Durgan 'Chum' Carlyle figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: durgan_chum_carlyle
+  - type: PatronFigurine
+    id: c66c10c5-80f8-4251-a545-6d473638259a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAdrianArchangelGutierrez
+  name: Adrian 'Archangel' Gutierrez figurine
+  description: "The Armor and looks worn and battered, You notice a faded cross on his left shoulder pad.  On the back of the helmet you see his callsign. \"Archangel\" In a faded red. You can almost notice a faint smile."
+  components:
+  - type: Sprite
+    state: adrian_archangel_gutierrez
+  - type: PatronFigurine
+    id: 846a3f90-ba27-4c17-a00b-93818511a7a6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNeza
+  name: Neza figurine
+  description: "Charlie squad till the day he dies, again."
+  components:
+  - type: Sprite
+    state: neza
+  - type: PatronFigurine
+    id: 33ee0269-f61d-467c-916b-139146ce2a54
