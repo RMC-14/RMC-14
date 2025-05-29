@@ -525,5 +525,8 @@ cm-chatsan-replacement-yung = young
 cm-chatsan-word-croosh = croosh
 cm-chatsan-replacement-croosh = crush
 
+cm-chatsan-word-croosher = croosher
+cm-chatsan-replacement-croosher = crusher
+
 cm-chatsan-word-bald = bald
 cm-chatsan-replacement-bald = crestless
