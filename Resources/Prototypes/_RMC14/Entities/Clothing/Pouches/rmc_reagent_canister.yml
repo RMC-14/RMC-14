@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCPouchStorage
   id: RMCPouchReagentCanister
   name: pressurized reagent canister pouch
@@ -6,6 +6,17 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/pressurized_reagent_canister.rsi
+    layers:
+    - state: icon
+    - state: closed
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: loaded
+      map: [ "loaded" ]
+    - state: reagent
+      map: [ "enum.SolutionContainerStoreVisuals.Base" ]
+      visible: false
   - type: Storage
     whitelist:
       tags:
@@ -26,10 +37,21 @@
           tags:
           - PressurizedCanister
         insertOnInteract: true
+  - type: ItemMapper
+    mapLayers:
+      loaded:
+        whitelist:
+          tags:
+          - PressurizedCanister
   - type: RMCStorageEjectHand
     state: Last
   - type: RMCRefillSolutionOnStore
   - type: RMCRefillSolutionFromContainerOnStore
+    canFlush: true
+  - type: Appearance
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
 
 - type: entity
   parent: RMCPouchReagentCanister
