@@ -126,6 +126,13 @@ entities:
     - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
+    - type: SpreaderGrid
+      updateAccumulator: 0.50122494
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+      inherent: True
+      enabled: True
   - uid: 2
     components:
     - type: MetaData
