@@ -17,19 +17,10 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 30 #TODO 0.5 eye damage/s
+          min: 30
         damage:
           groups:
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 0.5
-            Burn: 0.5
-            Toxin: 1.5
+            Brute: 1
       - !type:Jitter
         conditions:
         - !type:ReagentThreshold
