@@ -382,10 +382,10 @@ cm-chatsan-word-cas = cas
 cm-chatsan-replacement-cas = skyspit
 
 cm-chatsan-word-sensors = sensors
-cm-chatsan-replacement-sensors = tall evil eye tower
+cm-chatsan-replacement-sensors = evil eye tower
 
 cm-chatsan-word-sensor-tower = sensor tower
-cm-chatsan-replacement-sensor-tower = tall evil eye tower
+cm-chatsan-replacement-sensor-tower = evil eye tower
 
 cm-chatsan-word-comms = comms
 cm-chatsan-replacement-comms = tall hivemind tower
@@ -456,6 +456,9 @@ cm-chatsan-replacement-survs = planet talls
 cm-chatsan-word-bro = bro
 cm-chatsan-replacement-bro = sister
 
+cm-chatsan-word-bruh = bruh
+cm-chatsan-replacement-bruh = sister
+
 cm-chatsan-word-bvro = bvro
 cm-chatsan-replacement-bvro = sister
 
@@ -464,9 +467,6 @@ cm-chatsan-replacement-xro = sister
 
 cm-chatsan-word-naur = naur
 cm-chatsan-replacement-naur = no
-
-cm-chatsan-word-weedkiller = weedkiller
-cm-chatsan-replacement-weedkiller = evil fog
 
 cm-chatsan-word-dancer = d*ncer
 cm-chatsan-replacement-dancer = dancer
@@ -500,3 +500,15 @@ cm-chatsan-replacement-slop = hell
 
 cm-chatsan-word-spam = spam
 cm-chatsan-replacement-spam = flood
+
+cm-chatsan-word-god = god
+cm-chatsan-replacement-god = queen mother
+
+cm-chatsan-word-xod = xod
+cm-chatsan-replacement-xod = queen mother
+
+cm-chatsan-word-jesus = jesus
+cm-chatsan-replacement-jesus = queen mother
+
+cm-chatsan-word-xesus = xesus
+cm-chatsan-replacement-xesus = queen mother

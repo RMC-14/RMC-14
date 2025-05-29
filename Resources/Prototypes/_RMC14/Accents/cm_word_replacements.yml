@@ -159,10 +159,11 @@
     cm-chatsan-word-survivors: cm-chatsan-replacement-survivors
     cm-chatsan-word-surv: cm-chatsan-replacement-surv
     cm-chatsan-word-survs: cm-chatsan-replacement-survs
+    cm-chatsan-word-bro: cm-chatsan-replacement-bro
+    cm-chatsan-word-bruh: cm-chatsan-replacement-bruh
     cm-chatsan-word-bvro: cm-chatsan-replacement-bvro
     cm-chatsan-word-xro: cm-chatsan-replacement-xro
     cm-chatsan-word-naur: cm-chatsan-replacement-naur
-    cm-chatsan-word-weedkiller: cm-chatsan-replacement-weedkiller
     cm-chatsan-word-dancer: cm-chatsan-replacement-dancer
     cm-chatsan-word-larba: cm-chatsan-replacement-larba
     cm-chatsan-word-toob: cm-chatsan-replacement-toob
@@ -174,3 +175,7 @@
     cm-chatsan-word-mcxonalds: cm-chatsan-replacement-mcxonalds
     cm-chatsan-word-slop: cm-chatsan-replacement-slop
     cm-chatsan-word-spam: cm-chatsan-replacement-spam
+    cm-chatsan-word-god: cm-chatsan-replacement-god
+    cm-chatsan-word-xod: cm-chatsan-replacement-xod
+    cm-chatsan-word-jesus: cm-chatsan-replacement-jesus
+    cm-chatsan-word-xesus: cm-chatsan-replacement-xesus
