@@ -20,6 +20,10 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+      - UNMC
     - type: RMCUserBulkyArmorIncapable
     - type: Skills
       skills:
