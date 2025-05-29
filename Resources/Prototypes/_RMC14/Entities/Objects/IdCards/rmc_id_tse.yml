@@ -2,3 +2,6 @@
   parent: CMIDCardLanyard
   id: RMCIDCardTSEPA
   name: TSEPA ID card
+  components:
+  - type: ItemIFF
+    faction: FactionTSE
