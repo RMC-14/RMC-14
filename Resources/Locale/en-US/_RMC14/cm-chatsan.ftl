@@ -494,3 +494,6 @@ cm-chatsan-replacement-mcxonald = tall garden
 
 cm-chatsan-word-mcxonalds = mcxonalds
 cm-chatsan-replacement-mcxonalds = tall garden
+
+cm-chatsan-word-slop = slop
+cm-chatsan-replacement-slop = hell
