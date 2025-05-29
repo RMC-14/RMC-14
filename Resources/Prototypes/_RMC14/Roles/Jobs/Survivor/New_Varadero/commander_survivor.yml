@@ -49,7 +49,7 @@
         state: xo
       background:
         sprite: _RMC14/Interface/map_blips.rsi
-        state: background_command
+        state: background_shipside
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
   hidden: true
