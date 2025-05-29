@@ -155,7 +155,7 @@
           min: 30
         damage:
           groups:
-            Burn: 0.25
+            Burn: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -214,16 +214,16 @@
           min: 15
         damage:
           groups:
-            Burn: 0.37
-            Toxin: 0.37
+            Burn: 0.75
+            Toxin: 0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Burn: 0.88
-            Toxin: 0.88
+            Burn: 3.75
+            Toxin: 3.75
 
 # TODO RMC14 other effects
 - type: reagent
@@ -321,7 +321,7 @@
           min: 10.5
         damage:
           groups:
-            Toxin: 0.19
+            Toxin: 0.38
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -400,8 +400,8 @@
           min: 30
         damage:
           groups:
-            Brute: 0.3
-            Toxin: 0.3
+            Brute: 0.5
+            Toxin: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -471,16 +471,16 @@
       - !type:HealthChange
         damage:
           types:
-            Asphyxiation: -0.5
+            Asphyxiation: -0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 30
+          min: 30 #TODO 0.25 eye damage/s
         damage:
           groups:
-            Brute: 0.13
-            Burn: 0.26
-            Toxin: 0.26
+            Brute: 0.25
+            Burn: 0.25
+            Toxin: 0.38
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -520,7 +520,7 @@
           min: 15
         damage:
           groups:
-            Burn: 0.375
+            Burn: 0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -555,12 +555,12 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 50
+          min: 50 #TODO 0.5 brain damage/s
         damage:
           groups:
             Brute: 0.5
             Burn: 0.5
-            Toxin: 2
+            Toxin: 1.5
 
 # TODO RMC14 other effects
 # TODO RMC14 heal cloneloss
