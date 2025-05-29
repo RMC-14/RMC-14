@@ -1,4 +1,6 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Chemistry.ChemMaster;
@@ -44,8 +46,9 @@ public sealed class RMCChemMasterPillBottleEjectMsg(NetEntity bottle) : BoundUse
 public sealed class RMCChemMasterBeakerEjectMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class RMCChemMasterBeakerTransferMsg(FixedPoint2 amount) : BoundUserInterfaceMessage
+public sealed class RMCChemMasterBeakerTransferMsg(ProtoId<ReagentPrototype> reagent, FixedPoint2 amount) : BoundUserInterfaceMessage
 {
+    public readonly ProtoId<ReagentPrototype> Reagent = reagent;
     public readonly FixedPoint2 Amount = amount;
 }
 
@@ -62,8 +65,9 @@ public sealed class RMCChemMasterBufferModeMsg(RMCChemMasterBufferMode mode) : B
 }
 
 [Serializable, NetSerializable]
-public sealed class RMCChemMasterBufferTransferMsg(FixedPoint2 amount) : BoundUserInterfaceMessage
+public sealed class RMCChemMasterBufferTransferMsg(ProtoId<ReagentPrototype> reagent, FixedPoint2 amount) : BoundUserInterfaceMessage
 {
+    public readonly ProtoId<ReagentPrototype> Reagent = reagent;
     public readonly FixedPoint2 Amount = amount;
 }
 

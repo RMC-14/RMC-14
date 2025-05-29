@@ -11,7 +11,7 @@ public enum RMCPillBottleVisuals
 [Serializable, NetSerializable]
 public enum RMCPillBottleColors
 {
-    Orange,
+    Orange = 0,
     Blue,
     Yellow,
     LightPurple,

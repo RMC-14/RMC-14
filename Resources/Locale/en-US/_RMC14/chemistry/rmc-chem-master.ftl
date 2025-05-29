@@ -4,6 +4,7 @@ rmc-chem-master-status = [bold]Status[/bold]
 rmc-chem-master-reagent-amount = {$name}, {$amount} units
 rmc-chem-master-all = All
 rmc-chem-master-custom = Custom
+rmc-chem-master-all-reagents = All reagents
 
 rmc-chem-master-beaker = Beaker:
 rmc-chem-master-beaker-none = No beaker inserted.
@@ -25,7 +26,6 @@ rmc-chem-master-buffer = [bold]Buffer[/bold]
 rmc-chem-master-buffer-to-beaker = To Beaker
 rmc-chem-master-buffer-to-disposal = To Disposal
 rmc-chem-master-buffer-empty = Buffer is empty.
-rmc-chem-master-buffer-all-reagents = All reagents
 
 rmc-chem-master-pills = [bold]Pills[/bold]
 rmc-chem-master-pills-create = Create Pills

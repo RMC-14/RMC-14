@@ -35,6 +35,10 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
     private FixedPoint2? _lastBottleAmount;
 
     private readonly List<EntityUid> _lastPillBottleRows = new();
+    private readonly Dictionary<EntityUid, RMCChemMasterPillBottleRow> _bottleRows = new();
+    private readonly Dictionary<int, RMCChemMasterReagentRow> _beakerRows = new();
+    private readonly Dictionary<int, RMCChemMasterReagentRow> _bufferRows = new();
+    private readonly List<int> _toRemove = new();
 
     public RMCChemMasterBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -55,8 +59,10 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             return;
 
         _window.BeakerEjectButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBeakerEjectMsg());
+        _window.BeakerAllButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBeakerTransferAllMsg());
         _window.BufferModeButton.OnPressed += _ =>
             SendPredictedMessage(new RMCChemMasterBufferModeMsg(chemMaster.BufferTransferMode.NextWrap()));
+        _window.BufferAllButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBufferTransferAllMsg());
 
         var pillAmount = UIExtensions.CreateDialSpinBox(buttons: false, minWidth: 10);
         pillAmount.OnValueChanged += args => SendPredictedMessage(new RMCChemMasterSetPillAmountMsg((int) args.Value));
@@ -122,40 +128,70 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         if (_window == null)
             return;
 
-        if (_itemSlots.TryGetSlot(Owner, chemMaster.Comp.BeakerSlot, out var slot) &&
-            slot.ContainerSlot?.ContainedEntity is { } beaker &&
-            EntMan.TryGetComponent(beaker, out FitsInDispenserComponent? fits) &&
-            _solution.TryGetSolution(beaker, fits.Solution, out var solution))
-        {
-            _window.BeakerLabel.Text = Loc.GetString("rmc-chem-master-beaker-amount",
-                ("amount", solution.Value.Comp.Solution.Volume));
-
-            _window.BeakerEmptyLabel.Visible = solution.Value.Comp.Solution.Volume <= FixedPoint2.Zero;
-            _window.BeakerContentsContainer.RemoveAllChildren();
-
-            foreach (var content in solution.Value.Comp.Solution.Contents)
-            {
-                var row = CreateReagentRow(
-                    chemMaster,
-                    content,
-                    setting => SendPredictedMessage(new RMCChemMasterBeakerTransferMsg(setting))
-                );
-
-                row.AllButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBeakerTransferAllMsg());
-                row.CustomEdit.OnTextEntered += args =>
-                {
-                    if (!double.TryParse(args.Text, out var amount))
-                        return;
-
-                    SendPredictedMessage(new RMCChemMasterBeakerTransferMsg(FixedPoint2.New(amount)));
-                };
-
-                _window.BeakerContentsContainer.AddChild(row);
-            }
-        }
-        else
+        if (!_itemSlots.TryGetSlot(Owner, chemMaster.Comp.BeakerSlot, out var slot) ||
+            slot.ContainerSlot?.ContainedEntity is not { } beaker ||
+            !EntMan.TryGetComponent(beaker, out FitsInDispenserComponent? fits) ||
+            !_solution.TryGetSolution(beaker, fits.Solution, out var solution))
         {
             _window.BeakerLabel.Text = Loc.GetString("rmc-chem-master-beaker-none");
+            _window.BeakerEmptyLabel.Visible = true;
+            _window.BeakerAllButton.Visible = false;
+            _window.BeakerContentsContainer.RemoveAllChildren();
+            _beakerRows.Clear();
+            return;
+        }
+
+        _window.BeakerLabel.Text = Loc.GetString("rmc-chem-master-beaker-amount",
+            ("amount", solution.Value.Comp.Solution.Volume));
+        var any = solution.Value.Comp.Solution.Volume > FixedPoint2.Zero;
+        _window.BeakerEmptyLabel.Visible = !any;
+        _window.BeakerAllButton.Visible = any;
+
+        for (var i = 0; i < solution.Value.Comp.Solution.Contents.Count; i++)
+        {
+            var content = solution.Value.Comp.Solution.Contents[i];
+            if (!_beakerRows.TryGetValue(i, out var row))
+            {
+                row = CreateReagentRow(
+                    chemMaster,
+                    content,
+                    setting => SendPredictedMessage(new RMCChemMasterBeakerTransferMsg(content.Reagent.Prototype, setting))
+                );
+
+                _beakerRows[i] = row;
+                _window.BeakerContentsContainer.AddChild(row);
+            }
+
+            UpdateReagentRow(
+                row,
+                content,
+                setting => SendPredictedMessage(new RMCChemMasterBeakerTransferMsg(content.Reagent.Prototype, setting))
+            );
+
+            row.AllButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBeakerTransferMsg(content.Reagent.Prototype, content.Quantity));
+            row.CustomEdit.OnTextEntered += args =>
+            {
+                if (!double.TryParse(args.Text, out var amount))
+                    return;
+
+                SendPredictedMessage(
+                    new RMCChemMasterBeakerTransferMsg(content.Reagent.Prototype, FixedPoint2.New(amount)));
+            };
+        }
+
+        _toRemove.Clear();
+        foreach (var (index, row) in _beakerRows)
+        {
+            if (index < solution.Value.Comp.Solution.Contents.Count)
+                continue;
+
+            row.Orphan();
+            _toRemove.Add(index);
+        }
+
+        foreach (var remove in _toRemove)
+        {
+            _beakerRows.Remove(remove);
         }
     }
 
@@ -168,7 +204,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         if (_container.TryGetContainer(Owner, chemMaster.Comp.PillBottleContainer, out var container) &&
             container.ContainedEntities.Count > 0)
         {
-            _window.PillBottleColumnLabel.Margin = new Thickness(0, 6, 5, 0);
+            _window.PillBottleColumnLabel.Margin = new Thickness(0, 3, 5, 0);
             _window.PillBottlesNoneLabel.Visible = false;
 
             foreach (var child in _window.PillBottlesContainer.Children)
@@ -182,12 +218,21 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             }
 
             if (_lastPillBottleRows.SequenceEqual(container.ContainedEntities))
+            {
+                foreach (var contained in container.ContainedEntities)
+                {
+                    if (_bottleRows.TryGetValue(contained, out var row))
+                        UpdatePillBottleName(row, contained);
+                }
+
                 return;
+            }
 
             _lastPillBottleRows.Clear();
             _lastPillBottleRows.AddRange(container.ContainedEntities);
 
             _window.PillBottlesContainer.RemoveChildExcept(_window.PillBottlesNoneLabel);
+            _bottleRows.Clear();
 
             for (var i = 0; i < container.ContainedEntities.Count; i++)
             {
@@ -213,16 +258,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                     row.ColorView.SetEntity(contained);
                 }
 
-                if (EntMan.TryGetComponent(contained, out IconLabelComponent? label) &&
-                    label.LabelTextLocId != null &&
-                    _localization.TryGetString(label.LabelTextLocId, out var labelStr, label.LabelTextParams.ToArray()) &&
-                    labelStr.Length > 0)
-                {
-                    if (labelStr.Length > 3)
-                        labelStr = labelStr[..3];
-
-                    row.NameLabel.Text = $"({labelStr})";
-                }
+                UpdatePillBottleName(row, contained);
 
                 if (i == 0)
                 {
@@ -240,9 +276,9 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                         _colorPopup.OnClose += () => _colorPopup = null;
                         _colorPopup.OpenCentered();
 
-                        for (var j = 0; j < chemMaster.Comp.PillTypes; j++)
+                        for (var j = 0; j < chemMaster.Comp.PillCanisterTypes; j++)
                         {
-                            var state = _sprite.GetState(new SpriteSpecifier.Rsi(chemMaster.Comp.PillCanisterRsi, $"pill_canister{j + 1}"));
+                            var state = _sprite.GetState(new SpriteSpecifier.Rsi(chemMaster.Comp.PillCanisterRsi, $"pill_canister{j}"));
                             var button = new TextureButton
                             {
                                 TextureNormal = state.Frame0,
@@ -282,6 +318,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 row.TransferButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterPillBottleTransferMsg(netContained.Value));
                 row.EjectButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterPillBottleEjectMsg(netContained.Value));
                 _window.PillBottlesContainer.AddChild(row);
+                _bottleRows[contained] = row;
             }
         }
         else
@@ -305,55 +342,95 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             _ => _window.BufferModeButton.Text,
         };
 
-        _window.BufferContainer.RemoveChildExcept(_window.BufferEmptyLabel);
-        if (_solution.TryGetSolution(Owner, chemMaster.Comp.BufferSolutionId, out var buffer) &&
-            buffer.Value.Comp.Solution.Volume > FixedPoint2.Zero)
-        {
-            _window.BufferEmptyLabel.Visible = false;
-
-            foreach (var content in buffer.Value.Comp.Solution.Contents)
-            {
-                var row = CreateReagentRow(
-                    chemMaster,
-                    content,
-                    setting => SendPredictedMessage(new RMCChemMasterBufferTransferMsg(setting))
-                );
-
-                row.AllButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBufferTransferAllMsg());
-                row.CustomEdit.OnTextEntered += args =>
-                {
-                    if (!double.TryParse(args.Text, out var amount))
-                        return;
-
-                    SendPredictedMessage(new RMCChemMasterBufferTransferMsg(FixedPoint2.New(amount)));
-                };
-
-                _window.BufferContainer.AddChild(row);
-            }
-        }
-        else
+        if (!_solution.TryGetSolution(Owner, chemMaster.Comp.BufferSolutionId, out var buffer) ||
+            buffer.Value.Comp.Solution.Volume <= FixedPoint2.Zero)
         {
             _window.BufferEmptyLabel.Visible = true;
+            _window.BufferAllButton.Visible = false;
+            _window.BufferContainer.RemoveAllChildren();
+            _bufferRows.Clear();
+            return;
+        }
+
+        _window.BufferEmptyLabel.Visible = false;
+        _window.BufferAllButton.Visible = true;
+        for (var i = 0; i < buffer.Value.Comp.Solution.Contents.Count; i++)
+        {
+            var content = buffer.Value.Comp.Solution.Contents[i];
+            if (!_bufferRows.TryGetValue(i, out var row))
+            {
+                row = CreateReagentRow(
+                    chemMaster,
+                    content,
+                    setting => SendPredictedMessage(new RMCChemMasterBufferTransferMsg(content.Reagent.Prototype, setting))
+                );
+
+                _bufferRows[i] = row;
+                _window.BufferContainer.AddChild(row);
+            }
+
+            UpdateReagentRow(
+                row,
+                content,
+                setting => SendPredictedMessage(
+                    new RMCChemMasterBufferTransferMsg(content.Reagent.Prototype, setting))
+            );
+            row.AllButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBufferTransferMsg(content.Reagent.Prototype, content.Quantity));
+            row.CustomEdit.OnTextEntered += args =>
+            {
+                if (!double.TryParse(args.Text, out var amount))
+                    return;
+
+                SendPredictedMessage(
+                    new RMCChemMasterBufferTransferMsg(content.Reagent.Prototype, FixedPoint2.New(amount)));
+            };
+        }
+
+        _toRemove.Clear();
+        foreach (var (index, row) in _bufferRows)
+        {
+            if (index < buffer.Value.Comp.Solution.Contents.Count)
+                continue;
+
+            row.Orphan();
+            _toRemove.Add(index);
+        }
+
+        foreach (var remove in _toRemove)
+        {
+            _bufferRows.Remove(remove);
         }
     }
 
     private RMCChemMasterReagentRow CreateReagentRow(RMCChemMasterComponent chemMaster, ReagentQuantity reagent, Action<FixedPoint2> onTransfer)
     {
         var row = new RMCChemMasterReagentRow();
+        foreach (var setting in chemMaster.TransferSettings)
+        {
+            var transferButton = new RMCChemMasterTransferButton { Amount = setting };
+            row.TransferSettingsContainer.AddChild(transferButton);
+        }
+
+        UpdateReagentRow(row, reagent, onTransfer);
+        return row;
+    }
+
+    private void UpdateReagentRow(RMCChemMasterReagentRow row, ReagentQuantity reagent, Action<FixedPoint2> onTransfer)
+    {
         var name = reagent.Reagent.Prototype;
         if (_prototype.TryIndex(name, out ReagentPrototype? reagentProto))
             name = reagentProto.LocalizedName;
 
         row.ReagentLabel.Text = Loc.GetString("rmc-chem-master-reagent-amount", ("name", name), ("amount", reagent.Quantity));
-        foreach (var setting in chemMaster.TransferSettings)
+        foreach (var child in row.TransferSettingsContainer.Children)
         {
-            var transferButton = new Button { StyleClasses = { "OpenBoth" } };
-            transferButton.Text = setting.ToString();
-            transferButton.OnPressed += _ => onTransfer(setting);
-            row.TransferSettingsContainer.AddChild(transferButton);
-        }
+            if (child is not RMCChemMasterTransferButton button)
+                continue;
 
-        return row;
+            button.Button.Text = button.Amount.ToString();
+            button.OnPressed = null;
+            button.OnPressed += onTransfer;
+        }
     }
 
     private void OnLabelInputChanged(LineEdit.LineEditEventArgs args)
@@ -362,5 +439,22 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             return;
 
         SendPredictedMessage(new RMCChemMasterPillBottleLabelMsg(args.Text));
+    }
+
+    private void UpdatePillBottleName(RMCChemMasterPillBottleRow row, EntityUid contained)
+    {
+        if (!EntMan.TryGetComponent(contained, out IconLabelComponent? label) ||
+            label.LabelTextLocId == null ||
+            !_localization.TryGetString(label.LabelTextLocId, out var labelStr, label.LabelTextParams.ToArray()) ||
+            labelStr.Length <= 0)
+        {
+            row.NameLabel.Text = string.Empty;
+            return;
+        }
+
+        if (labelStr.Length > 3)
+            labelStr = labelStr[..3];
+
+        row.NameLabel.Text = $"({labelStr})";
     }
 }

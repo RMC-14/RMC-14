@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.UserInterface;
+using Content.Shared.Labels.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -19,6 +20,7 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
 
     private readonly EntityQuery<RMCSmartFridgeInsertableComponent> _insertableQuery;
     private readonly EntityQuery<MetaDataComponent> _metaDataQuery;
+    private readonly EntityQuery<LabelComponent> _labelQuery;
 
     private RMCSmartFridgeWindow? _window;
     private readonly Dictionary<string, RMCSmartFridgeRow> _oldCategories = new();
@@ -31,6 +33,7 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
         _container = EntMan.System<ContainerSystem>();
         _insertableQuery = EntMan.GetEntityQuery<RMCSmartFridgeInsertableComponent>();
         _metaDataQuery = EntMan.GetEntityQuery<MetaDataComponent>();
+        _labelQuery = EntMan.GetEntityQuery<LabelComponent>();
     }
 
     protected override void Open()
@@ -81,6 +84,9 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
                 categoryName = categoryLoc;
 
             var name = metaData.EntityName;
+            if (_labelQuery.CompOrNull(contained)?.CurrentLabel is { Length: > 0 } label)
+                name = $"{name} ({label})";
+
             var category = _contents.GetOrNew(categoryName);
             category[name] = category.GetValueOrDefault(name) + 1;
             _first.TryAdd(name, contained);

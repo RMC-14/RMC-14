@@ -30,7 +30,7 @@
             <Label Text="Beaker:" MinWidth="100" />
             <Label Name="BeakerStatus" Access="Public" Text="No beaker loaded!" />
             <Control HorizontalExpand="True" />
-            <Button Name="EjectBeakerButton" Access="Public" Text="Eject" />
+            <Button Name="EjectBeakerButton" Access="Public" Text="Eject" StyleClasses="OpenBoth" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Text="Contents:" MinWidth="100" VerticalAlignment="Top" />

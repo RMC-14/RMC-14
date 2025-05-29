@@ -12,4 +12,3 @@ public sealed partial class RMCChemMasterReagentRow : Control
         RobustXamlLoader.Load(this);
     }
 }
-

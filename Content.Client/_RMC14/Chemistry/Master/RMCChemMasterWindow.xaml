@@ -33,6 +33,8 @@
                 <RichTextLabel Name="BeakerEmptyLabel" Access="Public"
                                Text="{Loc rmc-chem-master-beaker-empty}" />
                 <BoxContainer Name="BeakerContentsContainer" Access="Public" Orientation="Vertical" />
+                <Button Name="BeakerAllButton" Access="Public" HorizontalExpand="True"
+                        Text="{Loc rmc-chem-master-all-reagents}" StyleClasses="OpenBoth" />
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="0 20 0 0">
                 <RichTextLabel Text="{Loc rmc-chem-master-buffer}" />
@@ -41,9 +43,12 @@
                         Text="{Loc rmc-chem-master-buffer-to-disposal}" />
             </BoxContainer>
             <ui:BlueHorizontalSeparator />
-            <BoxContainer Name="BufferContainer" Access="Public" Orientation="Vertical">
+            <BoxContainer Orientation="Vertical">
+                <BoxContainer Name="BufferContainer" Access="Public" Orientation="Vertical" />
                 <RichTextLabel Name="BufferEmptyLabel" Access="Public"
                                Text="{Loc rmc-chem-master-buffer-empty}" />
+                <Button Name="BufferAllButton" Access="Public" HorizontalExpand="True"
+                        Text="{Loc rmc-chem-master-all-reagents}" StyleClasses="OpenBoth" />
             </BoxContainer>
             <RichTextLabel Text="{Loc rmc-chem-master-pills}" Margin="0 20 0 0" />
             <ui:BlueHorizontalSeparator />
@@ -54,17 +59,19 @@
                 <GridContainer Name="PillTypeContainer" Access="Public"
                                StyleClasses="OpenBoth" Margin="0 0 5 0" Columns="8" />
             </BoxContainer>
-            <RichTextLabel Text="{Loc rmc-chem-master-glassware}" Margin="0 20 0 0" />
-            <ui:BlueHorizontalSeparator />
-            <BoxContainer Orientation="Horizontal">
-                <BoxContainer Orientation="Vertical">
-                    <Button Name="CreateBottleButton" Access="Public" StyleClasses="OpenBoth" />
-                    <Button Name="CreateTransferBottleButton" Access="Public" StyleClasses="OpenBoth"
-                            Text="{Loc rmc-chem-master-create-transfer-bottle}" />
+            <Control Visible="False"> <!-- TODO RMC14 -->
+                <RichTextLabel Text="{Loc rmc-chem-master-glassware}" Margin="0 20 0 0" />
+                <ui:BlueHorizontalSeparator />
+                <BoxContainer Orientation="Horizontal">
+                    <BoxContainer Orientation="Vertical">
+                        <Button Name="CreateBottleButton" Access="Public" StyleClasses="OpenBoth" />
+                        <Button Name="CreateTransferBottleButton" Access="Public" StyleClasses="OpenBoth"
+                                Text="{Loc rmc-chem-master-create-transfer-bottle}" />
+                    </BoxContainer>
+                    <Control />
+                    <Control />
                 </BoxContainer>
-                <Control />
-                <Control />
-            </BoxContainer>
+            </Control>
         </BoxContainer>
     </ScrollContainer>
 </controls:RMCChemMasterWindow>

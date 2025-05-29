@@ -204,7 +204,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (!TryGetBeaker(ent, out _, out var slot, out _))
             return;
 
-        _itemSlots.TryEjectToHands(ent, slot, args.Actor);
+        _itemSlots.TryEjectToHands(ent, slot, args.Actor, true);
 
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
@@ -218,14 +218,25 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (args.Amount < FixedPoint2.Zero)
             return;
 
-        if (!TryGetBeaker(ent, out var beaker, out _, out var solution))
+        if (!TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
             return;
 
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
-        _solutionTransfer.Transfer(args.Actor, beaker, solution, ent, buffer.Value, args.Amount);
+        var removed = beakerSolution.Comp.Solution.RemoveReagent(args.Reagent, args.Amount);
+
+        if (_solution.TryAddReagent(buffer.Value, args.Reagent, removed, out var accepted))
+            removed -= accepted;
+
+        if (removed > FixedPoint2.Zero)
+            _solution.TryAddReagent(beakerSolution, args.Reagent, removed);
+
+        _solution.UpdateChemicals(buffer.Value);
+        _solution.UpdateChemicals(beakerSolution);
         Dirty(ent);
+
+        RefreshUIs(ent);
     }
 
     private void OnBeakerTransferAllMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterBeakerTransferAllMsg args)
@@ -260,8 +271,18 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
-        _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, args.Amount);
+        var removed = buffer.Value.Comp.Solution.RemoveReagent(args.Reagent, args.Amount);
+        if (_solution.TryAddReagent(beakerSolution, args.Reagent, removed, out var accepted))
+            removed -= accepted;
+
+        if (removed > FixedPoint2.Zero)
+            _solution.TryAddReagent(buffer.Value, args.Reagent, removed);
+
+        _solution.UpdateChemicals(buffer.Value);
+        _solution.UpdateChemicals(beakerSolution);
         Dirty(ent);
+
+        RefreshUIs(ent);
     }
 
     private void OnBufferTransferAllMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterBufferTransferAllMsg args)
