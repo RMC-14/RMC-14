@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server._RMC14.Marines;
 using Content.Server.Doors.Systems;
 using Content.Server.GameTicking;
@@ -33,6 +33,8 @@ using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -191,8 +193,28 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         if (TryComp(ent, out FTLComponent? ftl))
         {
+            var oldState = ent.Comp.State;
             ent.Comp.State = ftl.State;
             Dirty(ent);
+
+            if (oldState != FTLState.Arriving && ftl.State == FTLState.Arriving &&
+                ent.Comp.Crashed && !ent.Comp.DidExplosion && ent.Comp.Destination != null)
+            {
+                var destinationCoords = _transform.GetMapCoordinates(ent.Comp.Destination.Value);
+                var destinationEntityCoords = _transform.GetMoverCoordinates(ent.Comp.Destination.Value);
+                var destinationFilter = Filter.BroadcastMap(destinationCoords.MapId);
+
+                ent.Comp.DidExplosion = true;
+                Dirty(ent, ent.Comp);
+
+                _audio.PlayGlobal(ent.Comp.CrashSound, destinationFilter, true);
+
+                var exclusionZones = GetShipExclusionZones(ent.Owner, destinationEntityCoords);
+                _rmcFlammable.SpawnFireDiamond(ent.Comp.FireId, destinationEntityCoords, ent.Comp.FireRange, 11, null, exclusionZones);
+                _rmcExplosion.QueueExplosion(destinationCoords, "RMCOB", 50000, 1500, 90, ent.Owner, default, default, false);
+
+                Log.Info($"Hijacked dropship {ToPrettyString(ent.Owner)} exploded at destination on state transition to Arriving");
+            }
         }
 
         RefreshUI();
@@ -230,6 +252,30 @@ public sealed class DropshipSystem : SharedDropshipSystem
         dropship.Locked = !dropship.Locked;
         dropship.LastLocked = time;
         SetAllDocks(grid, dropship.Locked);
+    }
+
+    public List<Box2> GetShipExclusionZones(EntityUid shuttleUid, EntityCoordinates targetCoords)
+    {
+        var exclusionZones = new List<Box2>();
+
+        if (!TryComp<FixturesComponent>(shuttleUid, out var manager) ||
+            !TryComp<TransformComponent>(shuttleUid, out var shuttleXform))
+            return exclusionZones;
+
+        var targetAngle = shuttleXform.LocalRotation;
+        var transform = new Transform(targetCoords.Position, targetAngle);
+
+        foreach (var fixture in manager.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            var aabb = fixture.Shape.ComputeAABB(transform, 0);
+            aabb = aabb.Enlarged(-0.1f);
+            exclusionZones.Add(aabb);
+        }
+
+        return exclusionZones;
     }
 
     public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null)
@@ -550,18 +596,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 Dirty(uid, dropship);
 
                 _audio.PlayGlobal(dropship.IncomingSound, destinationFilter, true);
-                continue;
-            }
-
-            if (dropship.HijackLandAt - dropship.ExplodeTime <= time && !dropship.DidExplosion)
-            {
-                dropship.DidExplosion = true;
-                Dirty(uid, dropship);
-
-                _audio.PlayGlobal(dropship.CrashSound, destinationFilter, true);
-                _rmcFlammable.SpawnFireDiamond(dropship.FireId, destinationEntityCoords, dropship.FireRange, 11);
-                _rmcExplosion.QueueExplosion(destinationCoords, "RMCOB", 50000, 1500, 90, uid);
-
                 continue;
             }
         }
