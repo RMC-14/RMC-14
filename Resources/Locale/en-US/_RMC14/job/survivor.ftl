@@ -50,9 +50,8 @@ rmc-job-name-forecon-commander = Commander
 
 # New Varadero Survs
 
-rmc-job-name-survivor-commander = Commander
-CMJobSurvivorCommander = Commander
-rmc-job-prefix-survivor-co = test
+rmc-job-name-survivor-commander-new-varadero = Commander
+CMJobSurvivorCommanderNewVaradero = Commander
 
 cm-job-name-surivor-beach-bum = Beach Bum
 CMJobSurvivorBeachBum = Beach Bum

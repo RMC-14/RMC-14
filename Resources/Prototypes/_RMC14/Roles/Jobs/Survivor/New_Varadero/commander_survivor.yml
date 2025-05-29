@@ -1,15 +1,15 @@
 - type: job
   parent: CMSurvivor
-  id: RMCSurvivorCommander
-  name: rmc-job-name-survivor-commander
+  id: RMCSurvivorCommanderNewVaradero
+  name: rmc-job-name-survivor-commander-new-varadero
   description: cm-job-description-commanding-officer
-  playTimeTracker: RMCJobSurvivorCommander
+  playTimeTracker: RMCJobSurvivorCommanderNewVaradero
   ranks:
     RMCRankLieutenantColonel: []
-  startingGear: RMCGearSurvivorCommander
+  startingGear: RMCGearSurvivorCommanderNewVaradero
   supervisors: cm-job-supervisors-marine-high-command
   roleWeight: 0.25
-  icon: "RMCJobIconSurvivorCommander"
+  icon: "RMCJobIconSurvivorCommanderNewVaradero"
   hasIcon: true
   special:
   - !type:AddComponentSpecial
@@ -36,8 +36,6 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: RMCPointing
-    - type: JobPrefix
-      prefix: rmc-job-prefix-survivor-co
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
@@ -52,7 +50,7 @@
   hidden: true
 
 - type: startingGear
-  id: RMCGearSurvivorCommander
+  id: RMCGearSurvivorCommanderNewVaradero
   equipment:
     ears: RMCHeadsetMarineDistress
     jumpsuit: CMJumpsuitBO
@@ -63,11 +61,11 @@
     belt: RMCM1984BeltFilled
     id: CMIDCardGold
     pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchGeneralLargeFilledSurvivorCommander
+    pocket2: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
 
 - type: entity
   parent: RMCPouchGeneralLarge
-  id: RMCPouchGeneralLargeFilledSurvivorCommander
+  id: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
   suffix: Filled, Survivor
   components:
   - type: StorageFill
@@ -77,16 +75,16 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointCommander
-  name: commanding officer spawn point
+  id: CMSpawnPointSurvivorCommanderNewVardero
+  name: new varadero commanding officer spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorCommander
+    job_id: RMCSurvivorCommanderNewVaradero
   - type: Sprite
     state: co_spawn
 
 - type: playTimeTracker
-  id: RMCJobSurvivorCommander
+  id: RMCJobSurvivorCommanderNewVaradero
   isHumanoid: true
 
 - type: entity
@@ -105,7 +103,7 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconSurvivorCommander
+  id: RMCJobIconSurvivorCommanderNewVaradero
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_nv_co

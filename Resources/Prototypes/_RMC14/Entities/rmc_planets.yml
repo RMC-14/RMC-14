@@ -70,7 +70,7 @@
     - CMSurvivorSecurity: 2
     survivorJobInserts:
       RMCSurvivorCommandingOfficer:
-      - RMCSurvivorCommander: 1
+      - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
       - CMSurvivorBeachBum: -1
       - CMSurvivorMiner: -1
