@@ -173,9 +173,12 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
         {
             if (args.Sprite != null)
             {
-                if (args.Sprite.LayerMapTryGet(ItemCamouflageLayers.Layer, out var layer))
+                foreach (var camoLayer in Enum.GetValues(typeof(ItemCamouflageLayers)))
                 {
-                    args.Sprite.LayerSetColor(layer, color);
+                    if (args.Sprite.LayerMapTryGet(camoLayer, out var layer))
+                    {
+                        args.Sprite.LayerSetColor(layer, color);
+                    }
                 }
             }
         }
