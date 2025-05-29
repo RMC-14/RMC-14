@@ -512,3 +512,9 @@ cm-chatsan-replacement-jesus = queen mother
 
 cm-chatsan-word-xesus = xesus
 cm-chatsan-replacement-xesus = queen mother
+
+cm-chatsan-word-jesus-christ = jesus christ
+cm-chatsan-replacement-jesus-christ = queen mother
+
+cm-chatsan-word-froot = froot
+cm-chatsan-replacement-froot = fruit
