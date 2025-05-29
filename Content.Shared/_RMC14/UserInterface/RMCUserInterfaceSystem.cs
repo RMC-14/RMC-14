@@ -7,6 +7,8 @@ public sealed class RMCUserInterfaceSystem : EntitySystem
 {
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
+    private readonly List<(Entity<UserInterfaceComponent?> Ent, Action<Entity<UserInterfaceComponent?>, RMCUserInterfaceSystem> Act)> _toRefresh = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<ActivatableUIBlacklistComponent, ActivatableUIOpenAttemptEvent>(OnUIBlacklistAttempt);
@@ -51,5 +53,45 @@ public sealed class RMCUserInterfaceSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public void RefreshUIs<T>(Entity<UserInterfaceComponent?> uiEnt) where T : BoundUserInterface, IRefreshableBui
+    {
+        _toRefresh.Add((uiEnt, static (uiEnt, system) =>
+        {
+            try
+            {
+                if (system.TerminatingOrDeleted(uiEnt))
+                    return;
+
+                if (!system.Resolve(uiEnt, ref uiEnt.Comp))
+                    return;
+
+                foreach (var bui in uiEnt.Comp.ClientOpenInterfaces.Values)
+                {
+                    if (bui is T ui)
+                        ui.Refresh();
+                }
+            }
+            catch (Exception e)
+            {
+                system.Log.Error($"Error refreshing {nameof(T)}\n{e}");
+            }
+        }));
+    }
+
+    public override void Update(float frameTime)
+    {
+        try
+        {
+            foreach (var refresh in _toRefresh)
+            {
+                refresh.Act(refresh.Ent, this);
+            }
+        }
+        finally
+        {
+            _toRefresh.Clear();
+        }
     }
 }

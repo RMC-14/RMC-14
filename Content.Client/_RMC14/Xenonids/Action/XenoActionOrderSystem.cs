@@ -7,7 +7,7 @@ using static Content.Client.Actions.ActionsSystem;
 
 namespace Content.Client._RMC14.Xenonids.Action;
 
-public sealed class XenoActionSystem : EntitySystem
+public sealed class XenoActionOrderSystem : EntitySystem
 {
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly IPlayerManager _player = default!;

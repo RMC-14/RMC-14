@@ -29,6 +29,7 @@
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 2
     damage: {}
+  - type: RMCSmartFridgeInsertable
 
 - type: entity
   parent: BaseBeakerMetallic

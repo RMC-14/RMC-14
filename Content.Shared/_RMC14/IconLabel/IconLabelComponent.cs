@@ -21,7 +21,7 @@ public sealed partial class IconLabelComponent : Component
     public int TextSize = 1;
 
     [DataField, AutoNetworkedField]
-    public String TextColor = "Black";
+    public string TextColor = "Black";
 
     [DataField, AutoNetworkedField]
     public Vector2i StoredOffset = new(0, 0);

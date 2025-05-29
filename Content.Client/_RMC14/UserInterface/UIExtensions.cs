@@ -40,4 +40,14 @@ public static class UIExtensions
 
         return window;
     }
+
+    public static void RemoveChildExcept(this Control parent, Control except)
+    {
+        for (var i = parent.ChildCount - 1; i >= 0; i--)
+        {
+            var child = parent.GetChild(i);
+            if (child != except)
+                parent.RemoveChild(i);
+        }
+    }
 }

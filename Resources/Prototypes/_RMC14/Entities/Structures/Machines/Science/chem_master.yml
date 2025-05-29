@@ -16,8 +16,6 @@
   - type: Icon
     sprite: _RMC14/Structures/Machines/Science/chem_master.rsi
     state: mixer_loaded
-  - type: ChemMaster
-    pillDosageLimit: 20
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -31,6 +29,8 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: AccessReader
+    access: [ [ "CMAccessCMO" ], [ "CMAccessChemistry" ], [ "CMAccessMedPrep" ] ]
   - type: Destructible
     thresholds:
     - trigger:
@@ -45,7 +45,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: ActivatableUI
-    key: enum.ChemMasterUiKey.Key
+    key: enum.RMCChemMasterUI.Key
   - type: ActivatableUIRequiresPower
   - type: ApcPowerReceiver
     powerLoad: 250
@@ -62,8 +62,6 @@
     board: CMCircuitboardChemMaster
   - type: ContainerContainer
     containers:
-      beakerSlot: !type:ContainerSlot
-      outputSlot: !type:ContainerSlot
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: ItemSlots
@@ -72,12 +70,6 @@
         whitelist:
           components:
           - FitsInDispenser
-      outputSlot:
-        whitelistFailPopup: chem-master-component-cannot-put-entity-message
-        whitelist:
-          tags:
-          - Bottle
-          - PillCanister
   - type: GuideHelp
     guides:
     - Chemicals
@@ -91,11 +83,13 @@
       - Xeno
   - type: UserInterface
     interfaces:
-      enum.ChemMasterUiKey.Key:
-        type: ChemMasterBoundUserInterface
-      enum.ChangePillBottleUIKey.Key:
-        type: RMCChangePillBottleColorBui
+      enum.RMCChemMasterUI.Key:
+        type: RMCChemMasterBui
   - type: SolutionContainerManager
     solutions:
       buffer:
         maxVol: 500
+  - type: RMCChemMaster
+    pillBottleWhitelist:
+      tags:
+      - PillCanister

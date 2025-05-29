@@ -42,12 +42,14 @@ public sealed class RMCStorageSystem : EntitySystem
     private readonly List<EntityUid> _toRemove = new();
     private readonly List<EntityUid> _toClose = new();
 
+    private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StorageComponent> _storageQuery;
 
     private readonly TimeSpan _stunStorage = TimeSpan.FromSeconds(4);
 
     public override void Initialize()
     {
+        _itemQuery = GetEntityQuery<ItemComponent>();
         _storageQuery = GetEntityQuery<StorageComponent>();
 
         SubscribeLocalEvent<StorageComponent, CMStorageItemFillEvent>(OnStorageFillItem);
@@ -407,6 +409,35 @@ public sealed class RMCStorageSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public int EstimateFreeColumns(Entity<StorageComponent?> storage)
+    {
+        if (!Resolve(storage, ref storage.Comp, false))
+            return 0;
+
+        // Since RMC14 storage is simplified we can make assumptions about how
+        // items are laid out and not allocate 100 lists just to check this
+        var columns = 0;
+        foreach (var grid in storage.Comp.Grid)
+        {
+            columns += (grid.Width + 1) * (grid.Height + 1 / 2);
+        }
+
+        foreach (var (item, _) in storage.Comp.StoredItems)
+        {
+            if (!_itemQuery.TryComp(item, out var itemComp))
+                continue;
+
+            var shapes = _item.GetItemShape(storage, (item, itemComp));
+            if (shapes.Count == 0)
+                continue;
+
+            var shape = shapes[0];
+            columns -= shape.Width;
+        }
+
+        return columns;
     }
 
     public override void Update(float frameTime)

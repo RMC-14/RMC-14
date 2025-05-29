@@ -218,7 +218,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
             }
         }
 
-        _entityManager.System<RMCIconLabelsSystem>().DrawStorage(Entity, UIScale, iconPosition, handle);
+        _entityManager.System<RMCIconLabelSystem>().DrawStorage(Entity, UIScale, iconPosition, handle);
     }
 
     protected override bool HasPoint(Vector2 point)

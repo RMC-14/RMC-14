@@ -1,10 +1,7 @@
-using Content.Shared._RMC14.Chemistry.ChemMaster;
 using Content.Shared.Chemistry;
 using Content.Shared.Containers.ItemSlots;
 using JetBrains.Annotations;
-using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client.Chemistry.UI
 {
@@ -50,9 +47,6 @@ namespace Content.Client.Chemistry.UI
                     (uint) _window.BottleDosage.Value, _window.LabelLine));
             _window.BufferSortButton.OnPressed += _ => SendMessage(
                     new ChemMasterSortingTypeCycleMessage());
-            // RMC - Change Pill Bottle Color Button
-            _window.ChangePillBottleColorButton.OnPressed += (BaseButton.ButtonEventArgs args) =>
-            SendMessage(new OpenChangePillBottleColorMenuMessage());
 
             for (uint i = 0; i < _window.PillTypeButtons.Length; i++)
             {
