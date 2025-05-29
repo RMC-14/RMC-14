@@ -42,6 +42,15 @@
       - Survivor
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: RMCConditionalMarkings
+      targetCategory: Undershirt
+      markings:
+        Male:
+        - RMCUndershirtNone
+        Female:
+        - RMCUndershirtClassicJungle
+        - RMCUndershirtSportsJungle
+        - RMCUndershirtStraplessJungle
   greeting: rmc-job-greeting-survivor
   hasIcon: false
 
