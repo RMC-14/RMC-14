@@ -497,3 +497,6 @@ cm-chatsan-replacement-mcxonalds = tall garden
 
 cm-chatsan-word-slop = slop
 cm-chatsan-replacement-slop = hell
+
+cm-chatsan-word-spam = spam
+cm-chatsan-replacement-spam = flood
