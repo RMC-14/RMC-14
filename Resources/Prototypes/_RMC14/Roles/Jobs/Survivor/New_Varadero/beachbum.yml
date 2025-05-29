@@ -48,7 +48,7 @@
     back: CMSatchelFillSurvivorBeachBum
     head: RMCBoonie
     mask: RMCCigarette
-    shoes: RMCShoesLeather # TODO RMC14 sandals
+    shoes: RMCShoesSandals
     gloves: CMHandsBrown
     id: CMIDCardColonist
     ears: CMHeadsetColony

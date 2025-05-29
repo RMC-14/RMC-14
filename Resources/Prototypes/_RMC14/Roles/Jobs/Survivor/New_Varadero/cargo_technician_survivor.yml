@@ -31,9 +31,9 @@
 - type: startingGear
   id: RMCGearSurvivorCargoTechnician
   equipment:
-    jumpsuit: RMCJumpsuitCivilian # TODO RMC colored utility jumpsuits (brown)
+    jumpsuit: RMCJumpsuitCivilianBrown
     back: CMSatchelMarineTechSurvivorFill
-    head: RMCHeadBeanie # TODO RMC14 colored beanies
+    head: RMCHeadBeanieTan
     shoes: RMCShoesJackboots
     gloves: CMHandsBrown
     id: CMIDCardColonistEngineer
