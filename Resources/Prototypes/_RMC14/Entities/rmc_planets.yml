@@ -63,7 +63,7 @@
       No further information available at this time."
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
-    - CMSurvivor: 7 #Should remain equal to RMCSurvivorMaximum. Setting to -1 makes this spawn normal civ survs for some reason.
+    - CMSurvivor: -1
     - CMSurvivorCorporate: 2
     - CMSurvivorDoctor: 3
     - CMSurvivorEngineer: 4
