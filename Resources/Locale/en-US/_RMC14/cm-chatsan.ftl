@@ -530,3 +530,9 @@ cm-chatsan-replacement-croosher = crusher
 
 cm-chatsan-word-bald = bald
 cm-chatsan-replacement-bald = crestless
+
+cm-chatsan-word-woyer = woyer
+cm-chatsan-replacement-woyer = warrior
+
+cm-chatsan-word-senti = senti
+cm-chatsan-replacement-senti = sentinel
