@@ -1,5 +1,5 @@
 ﻿- type: entity
-  id: RMCOverheadSignNeon
+  id: RMCOverheadSign
   abstract: true
   name: sign
   placement:
@@ -12,16 +12,24 @@
     anchored: true
   - type: Sprite
     noRot: true
-    sprite: _RMC14/Structures/overhead_neon_signs.rsi
+    sprite: _RMC14/Structures/overhead_signs.rsi
     offset: 0.25,0.5
+    drawdepth: Overdoors
+  - type: Anchorable
+  - type: Clickable
+
+- type: entity
+  parent: RMCOverheadSign
+  id: RMCOverheadSignNeon
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_neon_signs.rsi
     layers:
       - state: open_on # Temporary until power works.
       - state: open
         visible: false
         map: [ "light" ]
-    drawdepth: Overdoors
-  - type: Anchorable
-  - type: Clickable
   - type: PointLight
     enabled: true
     radius: 4
@@ -31,6 +39,18 @@
     color: "#ECFFFF"
     mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
   - type: RMCReactorPoweredLight
+
+# Signs
+
+- type: entity
+  parent: RMCOverheadSign
+  id: RMCOverheadSignBarCrow
+  name: The Drowning Crow Bar
+  description: A sign for 'The Drowning Crow' bar. The sign is old and delapitated.
+  components:
+  - type: Sprite
+    state: crow_bar
+    offset: -0.15,0.75
 
 # Neon Signs
 
