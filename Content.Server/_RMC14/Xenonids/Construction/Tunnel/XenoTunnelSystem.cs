@@ -146,7 +146,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         {
             BlockDuplicate = true,
             BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameTarget
+            DuplicateCondition = DuplicateConditions.SameTarget,
+            RootMob = true, //why does opening the ui of the tunnel crash grr
         };
         _doAfter.TryStartDoAfter(doAfterTunnelCreationArgs);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), args.Performer, args.Performer);

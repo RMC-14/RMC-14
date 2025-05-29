@@ -1,10 +1,12 @@
 using Content.Shared._RMC14.DoAfter;
+using Content.Shared._RMC14.Stun;
 using Content.Shared.Gravity;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.DoAfter;
@@ -54,13 +56,25 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
         for (var i = 0; i < count; i++)
         {
             var doAfter = _doAfters[i];
+            TryComp<RMCSizeComponent>(doAfter.Args.User, out var sizeComponent);
             if (doAfter.CancelledTime != null)
             {
                 if (time - doAfter.CancelledTime.Value > ExcessTime)
                 {
                     comp.DoAfters.Remove(doAfter.Index);
                     dirty = true;
+                    if (doAfter.Args.RootMob && sizeComponent is not null)
+                    {
+                        sizeComponent.Size = sizeComponent.PreviousSize;
+                    }
                 }
+                continue;
+            }
+
+
+            if (doAfter.Args.RootMob && sizeComponent is null)
+            {
+                Logger.Error("Attempted a doafter with RootMob flag, but mob doesnt have a size!");
                 continue;
             }
 
@@ -71,6 +85,12 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
                     comp.DoAfters.Remove(doAfter.Index);
                     dirty = true;
                 }
+
+                if (doAfter.Args.RootMob && sizeComponent is not null)
+                {
+                    sizeComponent.Size = sizeComponent.PreviousSize;
+                }
+
                 continue;
             }
 
@@ -101,6 +121,9 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
                 dirty = true;
                 continue;
             }
+
+            if (doAfter.Args.RootMob && sizeComponent is not null)
+                sizeComponent.Size = RMCSizes.Immobile;
 
             if (time - doAfter.StartTime >= doAfter.Args.Delay)
             {
