@@ -97,7 +97,7 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: ArmorHelmetPMCRiot
   id: ArmorHelmetPMCRiotShield
   components:
   - type: StorageFill

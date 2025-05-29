@@ -13,7 +13,7 @@
         RMCSkillConstruction: 1
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
-        RMCSkillFireman: 2
+        RMCSkillFireman: 1
         RMCSkillEngineer: 1
         RMCSkillPowerLoader: 2
         RMCSkillVehicles: 1
@@ -33,11 +33,12 @@
   equipment:
     head: RMCHardhatOrange
     ears: CMHeadsetColony
+    gloves: RMCHandsBlack
     jumpsuit: CMJumpsuitLiaisonBlue
     outerClothing: RMCHazardVestYellow
     shoes: RMCShoesJackboots
     back: CMSatchelEngineerMinerSurvivorFill
-    id: CMIDCardLiaisonColony
+    id: CMIDCardColonist
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchToolsFill
   inhand:

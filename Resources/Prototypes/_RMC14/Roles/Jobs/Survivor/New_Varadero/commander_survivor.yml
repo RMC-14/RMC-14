@@ -37,7 +37,13 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
     - type: TacticalMapIcon
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+      - UNMC
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: xo

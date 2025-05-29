@@ -14,8 +14,19 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
+        RMCSkillVehicles: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 2
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetBeachBum
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
     - type: RMCConditionalMarkings
       targetCategory: Undershirt
       markings:
