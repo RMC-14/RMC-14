@@ -16,6 +16,18 @@
         RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetBeachBum
+    - type: RMCConditionalMarkings
+      targetCategory: Undershirt
+      markings:
+        Male:
+        - RMCUndershirtNone
+        Female:
+        - RMCUndershirtClassic
+        - RMCUndershirtSports
+        - RMCUndershirtStrapless
+        - RMCUndershirtClassicJungle
+        - RMCUndershirtSportsJungle
+        - RMCUndershirtStraplessJungle
 
 - type: startingGear
   id: RMCGearSurvivorBeachBum
