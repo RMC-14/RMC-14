@@ -157,15 +157,29 @@
 
 # "Civilian"
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitCivilian
   name: gray utility uniform
-  description: A stylish gray jumpsuit - standard issue for civilian support personnel.
+  description: A stylish gray jumpsuit, popularly issued to UN contract workers on the frontier.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/gray_utility.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/gray_utility.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianBrown
+  name: brown utility uniform
+  description: A stylish brown jumpsuit, popularly issued to UN contract workers on the frontier.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_utility.rsi
 
 # Kutjevo
 - type: entity
