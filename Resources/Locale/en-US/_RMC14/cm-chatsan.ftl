@@ -534,9 +534,6 @@ cm-chatsan-replacement-bald = crestless
 cm-chatsan-word-woyer = woyer
 cm-chatsan-replacement-woyer = warrior
 
-cm-chatsan-word-senti = senti
-cm-chatsan-replacement-senti = sentinel
-
 cm-chatsan-word-sigma = sigma
 cm-chatsan-replacement-sigma = prime
 
