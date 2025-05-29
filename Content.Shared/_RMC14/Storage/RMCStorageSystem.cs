@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
@@ -342,6 +342,27 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
+    private bool CanEjectStoreSkill(Entity<StorageComponent?, StorageSkillRequiredComponent?> store, EntityUid? user, out LocId popup)
+    {
+        popup = default;
+        if (user == null)
+            return true;
+
+        if (!Resolve(store, ref store.Comp2, false) ||
+            !_storageQuery.Resolve(store, ref store.Comp1, false))
+        {
+            return true;
+        }
+
+        if (!_skills.HasAllSkills(user.Value, store.Comp2.Skills))
+        {
+            _popup.PopupClient(Loc.GetString("cm-storage-unskilled"), store, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return true;
+    }
+
     public bool TryGetLastItem(Entity<StorageComponent?> storage, out EntityUid item)
     {
         item = default;
@@ -404,6 +425,15 @@ public sealed class RMCStorageSystem : EntitySystem
             return false;
 
         if (!CanInsertStoreSkill((storage, storage, null), toInsert, user, out popup))
+            return false;
+
+        return true;
+    }
+
+    public bool CanEject(EntityUid storage, EntityUid user, out LocId popup)
+    {
+
+        if (!CanEjectStoreSkill(storage, user, out popup))
             return false;
 
         return true;

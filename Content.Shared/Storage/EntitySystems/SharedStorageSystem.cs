@@ -42,6 +42,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Hands;
 
 namespace Content.Shared.Storage.EntitySystems;
 
@@ -74,6 +75,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
     // RMC14
     [Dependency] protected readonly RMCStorageSystem RMCStorage = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StackComponent> _stackQuery;
@@ -658,6 +660,9 @@ public abstract class SharedStorageSystem : EntitySystem
         // If the user's active hand is empty, try pick up the item.
         if (player.Comp.ActiveHandEntity == null)
         {
+            if (_rmcHands.TryStorageEjectHand(player, item))
+                return;
+
             _adminLog.Add(
                 LogType.Storage,
                 LogImpact.Low,
