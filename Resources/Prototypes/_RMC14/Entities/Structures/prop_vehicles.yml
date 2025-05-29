@@ -40,11 +40,8 @@
 - type: entity
   abstract: true
   id: RMCPropVehicleBase
-  placement:
-    mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
     noRot: true
   - type: Physics
     bodyType: Static

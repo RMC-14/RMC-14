@@ -1,6 +1,7 @@
 ﻿- type: entity
   parent: RMCPropVehicleBase
   id: RMCPropVehicleLargeBase
+  abstract: true
   components:
   - type: Fixtures
     fixtures:
