@@ -8,6 +8,13 @@
   icon: "CMJobIconSquadLeader"
   roleWeight: 1
   hasIcon: true
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 3600 # 1 hour
   special:
   - !type:AddComponentSpecial
     components:

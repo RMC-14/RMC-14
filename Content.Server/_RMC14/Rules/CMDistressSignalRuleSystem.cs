@@ -678,6 +678,25 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         if (!IsAllowed(id, comp.CivilianSurvivorJob) || !IsAllowed(id, job))
                             continue;
 
+                        if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
+                        {
+                            // Check inserts aswell
+                            var canRollInsert = false;
+
+                            for (var i = 0; i < insert.Count; i++)
+                            {
+                                var (insertJob, amount) = insert[i];
+                                if (!IsAllowed(id, insertJob))
+                                    continue;
+
+                                canRollInsert = true;
+                            }
+
+                            if (!canRollInsert)
+                                continue;
+                        }
+
+
                         if (!ev.Profiles.TryGetValue(id, out var profile))
                             continue;
 

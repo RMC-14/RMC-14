@@ -5,6 +5,10 @@
   playTimeTracker: RMCJobSurvivorMarksmanForecon
   startingGear: RMCGearForeconBase
   icon: "CMJobIconWeaponsSpecialist"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobWeaponsSpecialist
+    time: 3600 # 1 hour
   special:
   - !type:AddComponentSpecial
     components:
