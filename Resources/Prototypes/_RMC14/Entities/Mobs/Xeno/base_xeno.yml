@@ -253,6 +253,9 @@
     - Muted
     - Dazed
     - Blinded
+    - Unconscious
+    - TemporaryBlindness
+    - Deaf
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
@@ -363,6 +366,7 @@
   - type: RMCObstacleSlamCauserImmune
   - type: RMCMobCollisionMass
   - type: XenoRankNames
+  - type: Blindable
 
 - type: entity
   abstract: true

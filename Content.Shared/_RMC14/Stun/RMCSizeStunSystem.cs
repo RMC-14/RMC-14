@@ -1,23 +1,30 @@
 using System.Numerics;
+using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stamina;
 using Content.Shared.Coordinates;
+using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Flash;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Speech.Muting;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Stun;
 
@@ -25,6 +32,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 {
     private const double DazedMultiplierSmallXeno = 0.7;
     private const double DazedMultiplierBigXeno = 1.2;
+    private static readonly ProtoId<StatusEffectPrototype> KnockedOut = "Unconscious";
 
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
@@ -42,6 +50,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
 
@@ -54,6 +64,13 @@ public sealed class RMCSizeStunSystem : EntitySystem
         SubscribeLocalEvent<RMCStunOnHitComponent, RMCTriggerEvent>(OnTrigger);
 
         SubscribeLocalEvent<RMCStunOnTriggerComponent, RMCTriggerEvent>(OnStunOnTrigger);
+
+        SubscribeLocalEvent<RMCUnconsciousComponent, ComponentStartup>(OnUnconsciousStart);
+        SubscribeLocalEvent<RMCUnconsciousComponent, ComponentShutdown>(OnUnconsciousEnd);
+        SubscribeLocalEvent<RMCUnconsciousComponent, StatusEffectEndedEvent>(OnUnconsciousUpdate);
+
+        SubscribeLocalEvent<RMCKnockOutOnCollideComponent, ProjectileHitEvent>(OnKnockOutCollideProjectileHit);
+        SubscribeLocalEvent<RMCKnockOutOnCollideComponent, ThrowDoHitEvent>(OnKnockOutCollideThrowHit);
     }
 
     public bool IsHumanoidSized(Entity<RMCSizeComponent> ent)
@@ -218,7 +235,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
                     var stun = filter.Stun ?? ent.Comp.Stun;
                     var flash = filter.Flash ?? ent.Comp.Flash;
                     var flashAdditionalStunTime = filter.FlashAdditionalStunTime ?? ent.Comp.FlashAdditionalStunTime;
-                    Stun(ent, target, args.User, probability, range, stun, flash, flashAdditionalStunTime);
+                    var paralyze = filter.Paralyze ?? ent.Comp.Paralyze;
+                    Stun(ent, target, args.User, probability, range, stun, flash, flashAdditionalStunTime, paralyze);
                     passedFilter = true;
                     break;
                 }
@@ -235,23 +253,98 @@ public sealed class RMCSizeStunSystem : EntitySystem
                 ent.Comp.Range,
                 ent.Comp.Stun,
                 ent.Comp.Flash,
-                ent.Comp.FlashAdditionalStunTime
+                ent.Comp.FlashAdditionalStunTime,
+                ent.Comp.Paralyze
             );
         }
 
         args.Handled = true;
     }
 
-    private void Stun(Entity<RMCStunOnTriggerComponent> ent, EntityUid target, EntityUid? user, float probability, float range, TimeSpan stun, TimeSpan flash, TimeSpan flashAdditionalStunTime)
+    private void Stun(Entity<RMCStunOnTriggerComponent> ent, EntityUid target, EntityUid? user, float probability, float range, TimeSpan stun, TimeSpan flash, TimeSpan flashAdditionalStunTime, TimeSpan paralyze)
     {
         var coordinates = Transform(target).Coordinates;
         if (!_random.Prob(probability) || !_interaction.InRangeUnobstructed(ent, coordinates, range))
             return;
 
-        if (_flash.Flash(target, user, ent, (float) flash.TotalMilliseconds, displayPopup: false))
+        if (_flash.Flash(target, user, ent, (float)flash.TotalMilliseconds, displayPopup: false))
+        {
             stun += flashAdditionalStunTime;
+            paralyze += flashAdditionalStunTime;
+        }
 
-        _stun.TryStun(target, stun, true);
-        _stun.TryKnockdown(target, stun, true);
+        if (stun > TimeSpan.Zero)
+        {
+            _stun.TryStun(target, stun, true);
+            _stun.TryKnockdown(target, stun, true);
+        }
+
+        if (paralyze > TimeSpan.Zero)
+        {
+            TryKnockOut(target, paralyze, true);
+        }
+    }
+
+    //Equal to KnockOut/PARALYZE in parity
+    public bool TryKnockOut(EntityUid uid, TimeSpan duration, bool refresh = true, StatusEffectsComponent? status = null)
+    {
+        if (duration <= TimeSpan.Zero)
+            return false;
+
+        if (!Resolve(uid, ref status, false))
+            return false;
+
+        if (!_status.TryAddStatusEffect<RMCUnconsciousComponent>(uid, KnockedOut, duration, refresh))
+            return false;
+
+        return true;
+    }
+
+    private void OnUnconsciousStart(Entity<RMCUnconsciousComponent> ent, ref ComponentStartup args)
+    {
+        //Applies stun, knockdown, blind, deafen, and mute
+        //Note applies comps directly to not mess with other status effect timers
+        EnsureComp<StunnedComponent>(ent);
+        EnsureComp<KnockedDownComponent>(ent);
+        EnsureComp<TemporaryBlindnessComponent>(ent);
+        EnsureComp<MutedComponent>(ent);
+        EnsureComp<DeafComponent>(ent);
+    }
+
+    private void OnUnconsciousEnd(Entity<RMCUnconsciousComponent> ent, ref ComponentShutdown args)
+    {
+        var time = _timing.CurTime;
+        if (!_status.TryGetTime(ent, "Stun", out var statusTime) || statusTime.Value.Item2 < time)
+            RemCompDeferred<StunnedComponent>(ent);
+        if (!_status.TryGetTime(ent, "KnockedDown", out statusTime) || statusTime.Value.Item2 < time)
+            RemCompDeferred<KnockedDownComponent>(ent);
+        if (!_status.TryGetTime(ent, "TemporaryBlindness", out statusTime) || statusTime.Value.Item2 < time)
+            RemCompDeferred<TemporaryBlindnessComponent>(ent);
+        if (!_status.TryGetTime(ent, "Muted", out statusTime) || statusTime.Value.Item2 < time)
+            RemCompDeferred<MutedComponent>(ent);
+        if (!_status.TryGetTime(ent, "Deaf", out statusTime) || statusTime.Value.Item2 < time)
+            RemCompDeferred<DeafComponent>(ent);
+    }
+
+    private void OnUnconsciousUpdate(Entity<RMCUnconsciousComponent> ent, ref StatusEffectEndedEvent args)
+    {
+        if (!_status.HasStatusEffect(ent, KnockedOut))
+            return;
+
+        //Readd comps just in case they were removed by a status
+        EnsureComp<StunnedComponent>(ent);
+        EnsureComp<KnockedDownComponent>(ent);
+        EnsureComp<TemporaryBlindnessComponent>(ent);
+        EnsureComp<MutedComponent>(ent);
+        EnsureComp<DeafComponent>(ent);
+    }
+    private void OnKnockOutCollideProjectileHit(Entity<RMCKnockOutOnCollideComponent> ent, ref ProjectileHitEvent args)
+    {
+        TryKnockOut(args.Target, ent.Comp.ParalyzeTime);
+    }
+
+    private void OnKnockOutCollideThrowHit(Entity<RMCKnockOutOnCollideComponent> ent, ref ThrowDoHitEvent args)
+    {
+        TryKnockOut(args.Target, ent.Comp.ParalyzeTime);
     }
 }
