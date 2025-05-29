@@ -816,6 +816,9 @@
     },
     {
       "name": "spec_anti_materiel_sniper"
+    },
+    {
+      "name": "spec_scout"
     }
   ]
 }
