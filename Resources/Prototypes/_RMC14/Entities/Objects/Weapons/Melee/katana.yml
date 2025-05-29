@@ -1,0 +1,11 @@
+- type: entity
+  parent: [Katana, RMCBaseMeleeWeapon]
+  id: RMCKatana
+  suffix: RMC14
+  components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 45
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg

@@ -8,6 +8,8 @@
       - Xeno
   - type: MeleeWeapon
     angle: 0
+  - type: CMArmorPiercing
+    amount: 20
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
