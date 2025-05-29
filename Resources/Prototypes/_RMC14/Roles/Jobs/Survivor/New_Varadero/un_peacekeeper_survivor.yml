@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorUNPeacekeeper
   startingGear: RMCGearSurvivorUNPeacekeeper
+  #spawnMenuRoleName: UN Peacekeeper (NV Survivor)
   special:
   - !type:AddComponentSpecial
     components:
