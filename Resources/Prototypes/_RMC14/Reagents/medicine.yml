@@ -36,29 +36,28 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 30
+          min: 30 #TODO 0.5 eye damage/s
         damage:
           groups:
-            Brute: 1
-      - !type:Jitter
+            Toxin: 0.5
+      - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
-      - !type:PopupMessage
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        type: Local
-        visualType: Medium
-        messages: [ "generic-reagent-effect-nauseous" ]
-        probability: 0.2
+        damage:
+          groups:
+            Brute: 0.5
+            Burn: 0.5
+            Toxin: 1.5
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 60
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 5
+        refresh: true
         type: Add
 
 # TODO RMC14 other effects
