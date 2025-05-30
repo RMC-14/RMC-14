@@ -30,7 +30,9 @@ using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
@@ -168,7 +170,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
         }
 
-        var oldDuration = ent.Comp.Duration;
         ent.Comp.Duration -= TimeSpan.FromSeconds(7);
         Dirty(ent);
     }
@@ -183,7 +184,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         patter.Last = time;
         Dirty(user, patter);
 
-        var oldDuration = ent.Comp.Duration;
         ent.Comp.Duration -= patter.RemoveDuration * ent.Comp.PatExtinguishMultiplier;
         Dirty(ent);
 
@@ -277,7 +277,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnSteppingOnFireGetArmor(Entity<SteppingOnFireComponent> ent, ref CMGetArmorEvent args)
     {
-        var oldModifier = args.ArmorModifier;
         args.ArmorModifier *= ent.Comp.ArmorMultiplier;
     }
 
@@ -387,11 +386,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         _extinguishContacts.Remove(ent.Owner);
     }
 
-    private void OnEntityTerminating(EntityUid uid, EntityTerminatingEvent args)
-    {
-        CleanupDeletedEntity(uid);
-    }
-
     private void CheckForExistingOverlaps(Entity<RMCIgniteOnCollideComponent> ent)
     {
         if (TerminatingOrDeleted(ent.Owner)) return;
@@ -426,7 +420,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (_fireContacts.TryGetValue(fireSource, out var contacts))
         {
             contacts.Remove(target);
-
             if (contacts.Count == 0)
             {
                 _fireContacts.Remove(fireSource);
@@ -459,11 +452,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         foreach (var contacts in _fireContacts.Values)
         {
             if (contacts.Contains(entity))
-            {
                 return true;
-            }
         }
-
         return false;
     }
 
@@ -609,9 +599,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return false;
     }
 
-    /// <summary>
-    ///     Spawns fire in a cone shape in the direction the entity is facing.
-    /// </summary>
     private void SpawnFireCone(Entity<DirectionalTileFireOnTriggerComponent> ent, EntityCoordinates center, int? intensity = null, int? duration = null)
     {
         if (_net.IsClient) return;
@@ -738,7 +725,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 var msg = $"There's not enough flammable liquid in the {Name(ent)}!";
                 _popup.PopupClient(msg, ent, user, PopupType.SmallCaution);
             }
-
             return false;
         }
 
@@ -776,33 +762,17 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private void TryIgnite(Entity<RMCIgniteOnCollideComponent> ent, EntityUid other, bool checkIgnited)
     {
         var flammableEnt = new Entity<FlammableComponent?>(other, null);
-        if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
-        {
-            return;
-        }
+        if (!Resolve(flammableEnt, ref flammableEnt.Comp, false)) return;
 
         EnsureComp<SteppingOnFireComponent>(other);
 
         var wasOnFire = IsOnFire(flammableEnt);
-        if (checkIgnited && wasOnFire)
-        {
-            return;
-        }
+        if (checkIgnited && wasOnFire) return;
 
         var igniteResult = Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks);
-
-        if (!igniteResult)
-        {
-            return;
-        }
+        if (!igniteResult) return;
 
         var isNowOnFire = IsOnFire(flammableEnt);
-
-        if (!igniteResult)
-        {
-            return;
-        }
-
         if (!wasOnFire && isNowOnFire && !HasComp<RMCImmuneToFireTileDamageComponent>(ent))
         {
             var damage = flammableEnt.Comp.Damage * ent.Comp.Intensity;
@@ -891,15 +861,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             foreach (var (fireEntity, contacts) in _fireContacts)
             {
                 if (!contacts.Contains(uid)) continue;
-                if (!_igniteOnCollideQuery.TryComp(fireEntity, out var ignite))
-                {
-                    continue;
-                }
-
-                if (ignite.TileDamage is not { } tile)
-                {
-                    continue;
-                }
+                if (!_igniteOnCollideQuery.TryComp(fireEntity, out var ignite)) continue;
+                if (ignite.TileDamage is not { } tile) continue;
 
                 ProcessSteppingDamage(uid, stepping, ignite, tile);
                 isStepping = true;
@@ -921,11 +884,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         if (ignite.ArmorMultiplier < stepping.ArmorMultiplier && _entityWhitelist.IsWhitelistPassOrNull(ignite.ArmorWhitelist, uid))
         {
-            var oldMultiplier = stepping.ArmorMultiplier;
             stepping.ArmorMultiplier = ignite.ArmorMultiplier;
             if (TryComp<RMCFireArmorDebuffModifierComponent>(uid, out var mod))
             {
-                var preModMultiplier = stepping.ArmorMultiplier;
                 stepping.ArmorMultiplier *= mod.DebuffModifier;
             }
             _armor.UpdateArmorValue((uid, null));
@@ -1004,10 +965,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         foreach (var (fireEntity, contacts) in _fireContacts.ToList())
         {
-            if (contacts.Remove(deletedEntity))
-            {
-            }
-
+            contacts.Remove(deletedEntity);
             if (contacts.Count == 0)
             {
                 _fireContacts.Remove(fireEntity);
@@ -1016,10 +974,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         foreach (var (extinguishEntity, contacts) in _extinguishContacts.ToList())
         {
-            if (contacts.Remove(deletedEntity))
-            {
-            }
-
+            contacts.Remove(deletedEntity);
             if (contacts.Count == 0)
             {
                 _extinguishContacts.Remove(extinguishEntity);
