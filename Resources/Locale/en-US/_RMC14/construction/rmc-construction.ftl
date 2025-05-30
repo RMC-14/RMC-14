@@ -13,3 +13,5 @@ rmc-construction-more-material = You need more {$material} to build the {$object
 
 rmc-construction-list = {$name}
 rmc-construction-entry = {$name} ({$amount} {$material})
+
+rmc-construction-build-here = Build Here
