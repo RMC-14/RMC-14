@@ -489,7 +489,7 @@
           Quantity: 3.5
 
 - type: entity
-  name: dough rope
+  name: cotton dough rope
   parent: FoodBakingBase
   id: FoodDoughCottonRope
   description: A thin noodle of cotton dough. Can be cooked into a cotton bagel.
@@ -687,7 +687,7 @@
   - type: Sprite
     state: cheesewheel
   - type: SliceableFood
-    count: 4
+    count: 6 # RMC14
     slice: FoodCheeseSlice
 
 - type: entity

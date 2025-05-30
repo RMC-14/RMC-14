@@ -231,6 +231,17 @@
     accuracy: 95
 
 - type: entity
+  id: CMGuidebookXenoBombardAcidProjectile
+  name: Acid Glob
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: acid_glob
+      shader: unshaded
+
+- type: entity
   parent: XenoBaseProjectile
   id: XenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
@@ -276,6 +287,17 @@
           Brute: 5
   - type: RMCProjectileAccuracy
     accuracy: 95
+
+- type: entity
+  id: CMGuidebookXenoBombardNeurotoxinProjectile
+  name: Neurotoxin Glob
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neuro_glob
+      shader: unshaded
 
 - type: entity
   parent: XenoSpitProjectile
@@ -383,6 +405,7 @@
   - type: ProjectileGrenade
     fillPrototype: XenoAcidBallSpitProjectile
     capacity: 14
+    directHit: false
   - type: ProjectileMaxRange
     max: 5
     delete: false
@@ -391,3 +414,29 @@
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
+
+- type: entity
+  parent: XenoBaseProjectile
+  id: XenoOppressorTailHook
+  name: tail hook
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/beam.rsi
+    state: oppressor_tail_hook
+    drawDepth: Effects # Draws above mobs
+  - type: ProjectileMaxRange
+    max: 3.5
+  - type: PreventCollideWithDead
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Slash: 40
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: RMCProjectileAccuracy
+    accuracy: 185
+  - type: XenoHookOnHit
+

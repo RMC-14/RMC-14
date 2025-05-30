@@ -6,6 +6,7 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoDefenderBase
   name: Defender
   description: An alien with an armored crest.
@@ -35,15 +36,18 @@
     - CMXenoLarva
     canBeDevolvedByOther: false
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
     max: 200
     evolvesTo:
     - CMXenoWarrior
+    evolvesToWithoutPoints:
+    - CMXenoQueen
   - type: XenoPlasma
     plasma: 100
     maxPlasma: 100
     plasmaRegenOnWeeds: 5
   - type: CMArmor
-    armor: 35
+    xenoArmor: 35
     explosionArmor: 70
   - type: XenoCrest
   - type: XenoDevour
@@ -91,11 +95,16 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: defender
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.1
 
 - type: entity
   parent: CMXenoDefenderBase
   id: CMXenoDefender
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDefender
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -133,7 +142,6 @@
     - ActionXenoSoak
     - ActionXenoFortifySteelcrest
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-steelcrest-name
     description: rmc-xeno-steelcrest-description
@@ -147,8 +155,8 @@
       groups:
         Brute: 30
   - type: XenoFortify
-    frontalArmor: 15
     armor: 10
+    frontalArmor: 15
     changeExplosionWeakness: false
     canHeadbuttFortified: true
     canMoveFortified: true
@@ -160,4 +168,5 @@
       types:
         Blunt: 37.5
   - type: XenoSoak
+  - type: XenoHidden
 

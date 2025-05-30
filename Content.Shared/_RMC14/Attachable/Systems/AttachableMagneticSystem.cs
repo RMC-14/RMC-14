@@ -1,12 +1,14 @@
 using Content.Shared._RMC14.Armor.Magnetic;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableMagneticSystem : EntitySystem
 {
     [Dependency] private readonly RMCMagneticSystem _magneticSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -15,6 +17,9 @@ public sealed class AttachableMagneticSystem : EntitySystem
 
     private void OnAttachableAltered(Entity<AttachableMagneticComponent> attachable, ref AttachableAlteredEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         switch (args.Alteration)
         {
             case AttachableAlteredType.Attached:

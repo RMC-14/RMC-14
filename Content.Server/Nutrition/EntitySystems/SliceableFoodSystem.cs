@@ -1,19 +1,19 @@
 using Content.Server.DoAfter;
 using Content.Server.Nutrition.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Nutrition;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Nutrition;
+using Content.Shared.Nutrition.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Random;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Random;
 
 namespace Content.Server.Nutrition.EntitySystems;
 
@@ -38,6 +38,12 @@ public sealed class SliceableFoodSystem : EntitySystem
     private void OnInteractUsing(Entity<SliceableFoodComponent> entity, ref InteractUsingEvent args)
     {
         if (args.Handled)
+            return;
+
+        // RMC14
+#pragma warning disable RA0002
+        if (!CompOrNull<UtensilComponent>(args.Used)?.Types.HasFlag(UtensilType.Knife) ?? true)
+#pragma warning restore RA0002
             return;
 
         var doAfterArgs = new DoAfterArgs(EntityManager,

@@ -30,6 +30,7 @@
         layer:
         - AirlockLayer
   - type: Door
+    canPry: false
     crushDamage:
       types:
         Blunt: 15
@@ -85,8 +86,14 @@
   - type: ExplosionResistance
     damageCoefficient: 7.5 # Doors take 15x explosive damage, resin doors reduce that by 50%
   - type: XenoConstruct
-    destroyWeeds: false
   - type: ResinDoor
+  - type: AllowWeedSpread
+  - type: ResinSurgeReinforcable
+  - type: RMCDeleteAnchoredOnInit
+    whitelist: { }
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    destroy: true
 
 - type: entity
   parent: DoorXenoResin

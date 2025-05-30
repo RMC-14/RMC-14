@@ -15,6 +15,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeret
+  suffix: Camo
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret/jungle.rsi
@@ -80,6 +81,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
@@ -164,6 +166,7 @@
     whitelist:
       components:
       - RMCLighter
+      - HelmetAccessory
       tags:
       - Cigarette
       - Matchstick
@@ -176,6 +179,11 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - HelmetAccessory
+  - type: HelmetAccessoryHolder
 
 - type: entity
   parent: CMHeadCapMP
@@ -294,7 +302,7 @@
 - type: entity
   parent: RMCHeadCapFlippable
   id: CMHeadCapOfficer
-  name: officer cap
+  name: UNMC officer cap
   description: A hat usually worn by officers in the UNMC. While it provides no protection, some officers wear it in the field to make themselves more recognisable.
   components:
   - type: Sprite
@@ -336,12 +344,31 @@
   parent: CMHeadCap
   id: CMHeadCapCMO
   name: chief medical officer's peaked cap
-  description: A peaked cap given to high-ranking civilian medical officers. Looks just a touch silly.
+  description: A peaked cap given to high-ranking medical officers. Looks just a touch silly.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
+
+- type: entity
+  parent: CMHeadCapMP
+  id: CMHeadFlapCap
+  name: UNMC expedition cap
+  description: It's a cap, with flaps. A patch stitched across the front reads "UNS ALMAYER".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/flapcap/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/flapcap/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/flapcap/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/flapcap/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/flapcap/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/flapcap/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/flapcap/urban.rsi
 
 # surgical caps
 - type: entity
@@ -428,7 +455,7 @@
       SquadDelta: RMCHeadBeretSquadDelta
       SquadEcho: RMCHeadBeretSquadEcho
       SquadFoxtrot: RMCHeadBeretSquadFoxtrot
-      # TODO SquadIntel: RMCHeadBeretSquadIntel
+      SquadIntel: RMCHeadBeretSquadIntel
 
 - type: entity
   parent: CMHeadBeret
@@ -507,3 +534,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCProvostCommandBeret
+  name: UNMC provost command beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi

@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.UI;
@@ -9,9 +10,13 @@ using Content.Server.Ghost.Roles;
 using Content.Server.Mind;
 using Content.Server.Mind.Commands;
 using Content.Server.Prayer;
+using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
 using Content.Server.Xenoarchaeology.XenoArtifacts;
 using Content.Server.Xenoarchaeology.XenoArtifacts.Triggers.Components;
+using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared.Administration;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -21,25 +26,24 @@ using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Mind.Components;
+using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
+using Content.Shared.Silicons.Laws.Components;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.Verbs;
 using Robust.Server.Console;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Toolshed;
 using Robust.Shared.Utility;
-using System.Linq;
-using Content.Server.Silicons.Laws;
-using Content.Shared.Movement.Components;
-using Content.Shared.Silicons.Laws.Components;
-using Robust.Server.Player;
-using Content.Shared.Silicons.StationAi;
-using Robust.Shared.Physics.Components;
 using static Content.Shared.Configurable.ConfigurationComponent;
 
 namespace Content.Server.Administration.Systems
@@ -53,7 +57,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IConsoleHost _console = default!;
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IMapManager _mapManager = default!;
+        [Dependency] private readonly SharedMapSystem _map = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly AdminSystem _adminSystem = default!;
         [Dependency] private readonly DisposalTubeSystem _disposalTubes = default!;
@@ -73,6 +77,9 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly AdminFrozenSystem _freeze = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly SiliconLawSystem _siliconLawSystem = default!;
+
+        // RMC14
+        [Dependency] private readonly DialogSystem _dialog = default!;
 
         private readonly Dictionary<ICommonSession, List<EditSolutionsEui>> _openSolutionUis = new();
 
@@ -105,7 +112,7 @@ namespace Content.Server.Administration.Systems
                 mark.Text = Loc.GetString("toolshed-verb-mark");
                 mark.Message = Loc.GetString("toolshed-verb-mark-description");
                 mark.Category = VerbCategory.Admin;
-                mark.Act = () => _toolshed.InvokeCommand(player, "=> $marked", Enumerable.Repeat(args.Target, 1), out _);
+                mark.Act = () => _toolshed.InvokeCommand(player, "=> $marked", new List<EntityUid> {args.Target}, out _);
                 mark.Impact = LogImpact.Low;
                 args.Verbs.Add(mark);
 
@@ -153,12 +160,31 @@ namespace Content.Server.Administration.Systems
 
                             var profile = _ticker.GetPlayerProfile(targetActor.PlayerSession);
                             var mobUid = _spawning.SpawnPlayerMob(coords.Value, null, profile, stationUid);
-                            var targetMind = _mindSystem.GetMind(args.Target);
 
-                            if (targetMind != null)
+                            if (_mindSystem.TryGetMind(args.Target, out var mindId, out var mindComp))
+                                _mindSystem.TransferTo(mindId, mobUid, true, mind: mindComp);
+
+                        },
+                        ConfirmationPopup = true,
+                        Impact = LogImpact.High,
+                    });
+
+                    // RMC14
+                    args.Verbs.Add(new Verb()
+                    {
+                        Text = Loc.GetString("rmc-admin-player-actions-spawn-here-as-job"),
+                        Category = VerbCategory.Admin,
+                        Act = () =>
+                        {
+                            var jobs = new List<DialogOption>();
+                            foreach (var job in _prototypeManager.EnumerateCM<JobPrototype>())
                             {
-                                _mindSystem.TransferTo(targetMind.Value, mobUid, true);
+                                var ev = new SpawnAsJobDialogEvent(GetNetEntity(args.User), GetNetEntity(args.Target), job.ID);
+                                jobs.Add(new DialogOption(job.LocalizedName, ev));
                             }
+
+                            jobs.Sort((a, b) => string.Compare(a.Text, b.Text, StringComparison.Ordinal));
+                            _dialog.OpenOptions(args.User, "Choose a job", jobs);
                         },
                         ConfirmationPopup = true,
                         Impact = LogImpact.High,
@@ -370,7 +396,7 @@ namespace Content.Server.Administration.Systems
 
                 }
 
-                if (lawBoundComponent != null && target != null)
+                if (lawBoundComponent != null && target != null && _adminManager.HasAdminFlag(player, AdminFlags.Moderator))
                 {
                     args.Verbs.Add(new Verb()
                     {

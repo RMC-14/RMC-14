@@ -19,6 +19,6 @@ public sealed class MentorWhoCommand : LocalizedCommands
         if (!_mentor.IsMentor(shell.Player.UserId))
             return;
 
-        shell.WriteLine(string.Join("\n", _mentor.GetActiveMentors().Order()));
+        shell.WriteLine(string.Join("\n", _mentor.GetActiveMentors().Select(m => m.Name).Order()));
     }
 }

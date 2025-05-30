@@ -7,7 +7,7 @@ CMJobRifleman = Rifleman
 cm-job-name-squad-leader = Squad Leader
 cm-job-description-squad-leader = Leader of one of the four marine squads. Give your squad and fireteams objectives and follow orders from Command. Keep your squad in one piece.
 cm-job-prefix-squad-leader = SL
-CMJobSquaderLeader = Squad Leader
+CMJobSquadLeader = Squad Leader
 
 cm-job-name-fireteam-leader = Fireteam Leader
 cm-job-description-fireteam-leader = Follow the squad leader's orders and command your fireteam. Co-ordinate with CAS and fire support elements.
@@ -33,3 +33,27 @@ cm-job-name-combat-tech = Combat Technician
 cm-job-description-combat-tech = Build or remove fortifications. Establish and maintain FOB and Power. Gain access to blocked off areas.
 cm-job-prefix-combat-tech = ComTech
 CMJobCombatTech = Combat Tech
+
+rmc-job-name-mortar-operator = Mortar Operator
+rmc-job-prefix-mortar-operator = MO
+
+rmc-job-name-loader = Loader
+rmc-job-prefix-loader = LDR
+
+rmc-job-name-spotter = Spotter
+rmc-job-prefix-spotter = SPTR
+
+rmc-job-name-weapons-specialist-demo = Demolitionist Specialist
+rmc-job-prefix-weapons-specialist-demo = DEMO
+
+rmc-job-name-weapons-specialist-grenadier = Grenadier Specialist
+rmc-job-prefix-weapons-specialist-grenadier = GRND
+
+rmc-job-name-weapons-specialist-sniper = Sniper Specialist
+rmc-job-prefix-weapons-specialist-sniper = SNPR
+
+rmc-job-name-weapons-specialist-anti-materiel-sniper = AMR Specialist
+rmc-job-prefix-weapons-specialist-anti-materiel-sniper = AMR
+
+rmc-job-name-weapons-specialist-scout = Scout Specialist
+rmc-job-prefix-weapons-specialist-scout = SCT

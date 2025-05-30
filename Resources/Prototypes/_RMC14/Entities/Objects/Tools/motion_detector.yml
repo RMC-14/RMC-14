@@ -43,7 +43,7 @@
           9: { state: detector_on_9, visible: true }
   - type: Tag
     tags:
-    - RMCMotionDetector
+    - RMCDetector
 
 - type: Tag
-  id: RMCMotionDetector
+  id: RMCDetector

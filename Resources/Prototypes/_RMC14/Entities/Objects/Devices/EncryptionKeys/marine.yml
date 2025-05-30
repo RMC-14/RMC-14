@@ -15,7 +15,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyAlpha
-  name: alpha encryption Key
+  name: alpha encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -28,7 +28,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyBravo
-  name: bravo encryption Key
+  name: bravo encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -41,7 +41,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyCharlie
-  name: charlie encryption Key
+  name: charlie encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -54,7 +54,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyDelta
-  name: delta encryption Key
+  name: delta encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -67,7 +67,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyEcho
-  name: echo encryption Key
+  name: echo encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -80,7 +80,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeyFoxtrot
-  name: foxtrot encryption Key
+  name: foxtrot encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -93,7 +93,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: CMEncryptionKeySOF
-  name: sof's encryption Key
+  name: sof's encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -106,3 +106,27 @@
     defaultChannel: MarineCommand
   - type: Sprite
     state: binary_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyFORECON
+  name: forecon encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - MarineCommon
+    defaultChannel: MarineForecon
+  - type: Sprite
+    state: sl_key

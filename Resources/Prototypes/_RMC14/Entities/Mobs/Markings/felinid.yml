@@ -164,3 +164,79 @@
       state: m_tail_tiger_secondary
     - sprite: _RMC14/Mobs/Felinids/tiger_tail.rsi
       state: m_tail_tiger_tertiary
+
+#Animated Tails
+
+- type: marking
+  id: FelinidTailBasicAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_tip_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_even_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_odd_wag
+
+- type: marking
+  id: FelinidTailBasicWithBowAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_tip_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_even_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_odd_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_bow_wag
+
+- type: marking
+  id: FelinidTailBasicWithBellAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_tip_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_even_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_odd_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_bell_wag
+
+- type: marking
+  id: FelinidTailBasicWithBowAndBellAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_tip_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_even_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_odd_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_bow_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_bell_wag
+
+# Snout
+
+- type: marking
+  id: FelinidCatSnout
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/felinid_snouts.rsi
+      state: snout_cat
+    - sprite: _RMC14/Mobs/Felinids/felinid_snouts.rsi
+      state: snout_cat_nose
+  

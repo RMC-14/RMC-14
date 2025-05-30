@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Xenonids.Construction;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.Construction;
@@ -23,9 +24,9 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
 
     protected override void Open()
     {
-        _window = new XenoChooseStructureWindow();
-        _window.OnClose += Close;
+        base.Open();
 
+        _window = this.CreateWindow<XenoChooseStructureWindow>();
         _window.Title = Loc.GetString("cm-xeno-order-construction");
 
         if (EntMan.TryGetComponent(Owner, out XenoConstructionComponent? xeno))
@@ -46,15 +47,5 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
                 _window.StructureContainer.AddChild(control);
             }
         }
-
-        _window.OpenCentered();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
-            _window?.Dispose();
     }
 }

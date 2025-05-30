@@ -9,9 +9,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Festive Meals
-      holidays: 
+      holidays:
       - FestiveSeason
       entries:
       - id: RMCMarinePreparedMealCookies
@@ -44,6 +45,7 @@
       - id: CMCanteen
         amount: 10
       - id: CMMetalFlask
+        name: metal flask (empty)
         amount: 10
       - id: CMMarineFlask
         amount: 5
@@ -66,6 +68,11 @@
     - [ "CMAccessKitchen" ]
     - [ "CMAccessColonyPublic" ]
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessKitchen"
+    - "CMAccessColonyPublic"
+    hackable: true
+    scaling: false
     sections:
     - name: Alcohol
       entries:
@@ -78,7 +85,7 @@
 #      - id: DrinkTequilaBottleFull
 #        amount: 5
       - id: RMCDrinkAlcoholRum
-        amount: 5
+        amount: 27 # TODO RMC14 5
       - id: RMCDrinkAlcoholCognac
         amount: 5
       - id: RMCDrinkAlcoholWhiskey
@@ -90,13 +97,13 @@
 #      - id: DrinkVermouthBottleFull
 #        amount: 5
       - id: RMCDrinkAlcoholGin
-        amount: 5
+        amount: 10 # TODO RMC14 5
       - id: RMCDrinkAlcoholAbsinthe
         amount: 2
 #      - id: DrinkBlueCuracaoBottleFull
 #        amount: 2
       - id: RMCDrinkAlcoholVodka
-        amount: 5
+        amount: 12 # TODO RMC14 5
 #      - id: DrinkCoffeeLiqueurBottleFull
 #        amount: 5
     - name: Craft Beers
@@ -120,6 +127,7 @@
     - name: Containers
       entries:
       - id: CMMetalFlask
+        name: metal flask (empty)
         amount: 5
       - id: DrinkGlass
         amount: 30
@@ -138,6 +146,7 @@
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Chess
       entries:

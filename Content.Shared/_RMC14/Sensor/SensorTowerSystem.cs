@@ -3,6 +3,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
@@ -84,6 +85,9 @@ public sealed class SensorTowerSystem : EntitySystem
         var user = args.User;
         if (HasComp<XenoComponent>(user))
         {
+            if (!HasComp<HandsComponent>(user))
+                return;
+
             Destroy(ent, user);
             return;
         }
@@ -204,7 +208,6 @@ public sealed class SensorTowerSystem : EntitySystem
             _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
         };
 
-        delay *= _skills.GetSkillDelayMultiplier(user, tower.Comp.Skill);
         _tool.UseTool(
             used,
             user,
@@ -230,7 +233,11 @@ public sealed class SensorTowerSystem : EntitySystem
         }
 
         var ev = new SensorTowerDestroyDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, tower.Comp.DestroyDelay, ev, tower, tower, user);
+        var doAfter = new DoAfterArgs(EntityManager, user, tower.Comp.DestroyDelay, ev, tower, tower, user)
+        {
+            ForceVisible = true,
+        };
+
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             _popup.PopupClient($"You start wrenching apart the {Name(tower)}'s panels and reaching inside it!", tower, user, PopupType.Medium);
@@ -255,6 +262,7 @@ public sealed class SensorTowerSystem : EntitySystem
             if (!_random.Prob(tower.BreakChance))
             {
                 tower.NextBreakAt = time + tower.BreakEvery;
+                Dirty(uid, tower);
                 continue;
             }
 
@@ -262,11 +270,13 @@ public sealed class SensorTowerSystem : EntitySystem
             {
                 _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wrench;
+                Dirty(uid, tower);
             }
             else
             {
                 _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wire;
+                Dirty(uid, tower);
             }
 
             UpdateAppearance((uid, tower));

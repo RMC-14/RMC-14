@@ -12,18 +12,18 @@ using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
-using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
-using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.TacticalMap;
 
@@ -33,10 +33,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -54,7 +53,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private EntityQuery<TacticalMapComponent> _tacticalMapQuery;
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoMapTrackedComponent> _xenoMapTrackedQuery;
+    private EntityQuery<XenoStructureMapTrackedComponent> _xenoStructureMapTrackedQuery;
 
+    private readonly HashSet<Entity<TacticalMapTrackedComponent>> _toInit = new();
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
     private readonly List<TacticalMapLine> _emptyLines = new();
 
@@ -75,6 +76,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _tacticalMapQuery = GetEntityQuery<TacticalMapComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoMapTrackedQuery = GetEntityQuery<XenoMapTrackedComponent>();
+        _xenoStructureMapTrackedQuery = GetEntityQuery<XenoStructureMapTrackedComponent>();
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
 
@@ -88,6 +90,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<TacticalMapTrackedComponent, MapInitEvent>(OnTrackedMapInit);
         SubscribeLocalEvent<TacticalMapTrackedComponent, MobStateChangedEvent>(OnTrackedMobStateChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, RoleAddedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, MindAddedMessage>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, EntParentChangedMessage>(OnTrackedChanged);
 
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, ComponentRemove>(OnActiveRemove);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, EntityTerminatingEvent>(OnActiveRemove);
@@ -97,6 +103,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnActiveSquadMemberUpdated);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnHiveLeaderStatusChanged);
+
+        SubscribeLocalEvent<MapBlipIconOverrideComponent, MapInitEvent>(OnMapBlipOverrideMapInit);
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -144,6 +152,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTacticalMapMapInit(Entity<TacticalMapComponent> ent, ref MapInitEvent args)
     {
+        var tracked = EntityQueryEnumerator<ActiveTacticalMapTrackedComponent, TacticalMapTrackedComponent>();
+        while (tracked.MoveNext(out var uid, out var active, out var comp))
+        {
+            UpdateActiveTracking((uid, comp));
+            UpdateTracked((uid, active));
+        }
+
         var users = EntityQueryEnumerator<TacticalMapUserComponent>();
         while (users.MoveNext(out var userId, out var userComp))
         {
@@ -199,9 +214,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTrackedMapInit(Entity<TacticalMapTrackedComponent> ent, ref MapInitEvent args)
     {
-        var state = _mobStateQuery.CompOrNull(ent)?.CurrentState ?? MobState.Alive;
-        UpdateActiveTracking(ent, state);
-
+        _toInit.Add(ent);
         if (TryComp(ent, out ActiveTacticalMapTrackedComponent? active))
             _toUpdate.Add((ent, active));
     }
@@ -212,6 +225,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         UpdateActiveTracking(ent, args.NewMobState);
+    }
+
+    private void OnTrackedChanged<T>(Entity<TacticalMapTrackedComponent> ent, ref T args)
+    {
+        if (_timing.ApplyingState || TerminatingOrDeleted(ent))
+            return;
+
+        UpdateActiveTracking(ent);
     }
 
     private void OnActiveRemove<T>(Entity<ActiveTacticalMapTrackedComponent> ent, ref T args)
@@ -263,6 +284,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateIcon(ent);
         UpdateHiveLeader(ent, args.BecameLeader);
         UpdateTracked(ent);
+    }
+
+    private void OnMapBlipOverrideMapInit(Entity<MapBlipIconOverrideComponent> ent, ref MapInitEvent args)
+    {
+        if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
+        {
+            UpdateIcon((ent.Owner, active));
+            UpdateTracked((ent.Owner, active));
+        }
     }
 
     private void OnRottingMapInit(Entity<RottingComponent> ent, ref MapInitEvent args)
@@ -368,13 +398,20 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
-        if (EnsureComp<ActiveTacticalMapTrackedComponent>(tracked, out var active))
+        if (LifeStage(tracked) < EntityLifeStage.MapInitialized)
             return;
 
+        var active = EnsureComp<ActiveTacticalMapTrackedComponent>(tracked);
         var activeEnt = new Entity<ActiveTacticalMapTrackedComponent>(tracked, active);
         UpdateIcon(activeEnt);
         UpdateRotting(activeEnt);
         UpdateColor(activeEnt);
+    }
+
+    private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked)
+    {
+        var state = _mobStateQuery.CompOrNull(tracked)?.CurrentState ?? MobState.Alive;
+        UpdateActiveTracking(tracked, state);
     }
 
     private void BreakTracking(Entity<ActiveTacticalMapTrackedComponent> tracked)
@@ -384,33 +421,27 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         tacticalMap.MarineBlips.Remove(tracked.Owner.Id);
         tacticalMap.XenoBlips.Remove(tracked.Owner.Id);
+        tacticalMap.XenoStructureBlips.Remove(tracked.Owner.Id);
         tacticalMap.MapDirty = true;
         tracked.Comp.Map = null;
     }
 
     private void UpdateIcon(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
+        SpriteSpecifier.Rsi? mapBlipOverride = null;
+        if (TryComp<MapBlipIconOverrideComponent>(tracked, out var mapBlipOverrideComp) && mapBlipOverrideComp.Icon != null)
+            mapBlipOverride = mapBlipOverrideComp.Icon;
+
         if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
         {
-            tracked.Comp.Icon = iconComp.Icon;
+            tracked.Comp.Icon = mapBlipOverride ?? iconComp.Icon;
             tracked.Comp.Background = iconComp.Background;
-
             UpdateSquadBackground(tracked);
-
             return;
         }
 
-        if (!_mind.TryGetMind(tracked, out var mindId, out _) ||
-            !_job.MindTryGetJob(mindId, out var jobProto) ||
-            jobProto.MinimapIcon == null)
-        {
-            return;
-        }
-
-        tracked.Comp.Icon = jobProto.MinimapIcon;
-        tracked.Comp.Background = jobProto.MinimapBackground;
+        tracked.Comp.Icon = mapBlipOverride;
         UpdateSquadBackground(tracked);
-
     }
 
     private void UpdateSquadBackground(Entity<ActiveTacticalMapTrackedComponent> tracked)
@@ -420,10 +451,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (!_squad.TryGetMemberSquad(tracked.Owner, out var squad))
             return;
 
-        if (squad.Comp.MinimapBackground == null)
-            tracked.Comp.Background = null;
-        else
-            tracked.Comp.Background = squad.Comp.MinimapBackground;
+        tracked.Comp.Background = squad.Comp.MinimapBackground;
+        if (TryComp(tracked, out TacticalMapIconComponent? icon))
+        {
+            icon.Background = tracked.Comp.Background;
+            Dirty(tracked, icon);
+        }
     }
 
     private void UpdateRotting(Entity<ActiveTacticalMapTrackedComponent> tracked)
@@ -444,7 +477,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             }
         }
         else
+        {
             tracked.Comp.Color = Color.White;
+        }
+
+        if (TryComp(tracked, out TacticalMapIconComponent? icon))
+        {
+            icon.Background = tracked.Comp.Background;
+            Dirty(tracked, icon);
+        }
     }
 
     private void UpdateHiveLeader(Entity<ActiveTacticalMapTrackedComponent> tracked, bool isLeader)
@@ -454,12 +495,20 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void UpdateTracked(Entity<ActiveTacticalMapTrackedComponent> ent)
     {
-        if (ent.Comp.Icon is not { } icon ||
-            !_transformQuery.TryComp(ent.Owner, out var xform) ||
+        if (!_transformQuery.TryComp(ent.Owner, out var xform) ||
             xform.GridUid is not { } gridId ||
             !_mapGridQuery.TryComp(gridId, out var gridComp) ||
             !_tacticalMapQuery.TryComp(gridId, out var tacticalMap) ||
             !_transform.TryGetGridTilePosition((ent.Owner, xform), out var indices, gridComp))
+        {
+            BreakTracking(ent);
+            return;
+        }
+
+        if (ent.Comp.Icon == null)
+            UpdateIcon(ent);
+
+        if (ent.Comp.Icon is not { } icon)
         {
             BreakTracking(ent);
             return;
@@ -489,6 +538,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             tacticalMap.XenoBlips[ent.Owner.Id] = blip;
             tacticalMap.MapDirty = true;
         }
+
+        if (_xenoStructureMapTrackedQuery.HasComp(ent))
+        {
+            tacticalMap.XenoStructureBlips[ent.Owner.Id] = blip;
+            tacticalMap.MapDirty = true;
+        }
     }
 
     private void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
@@ -497,6 +552,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (user.Comp.Xenos)
         {
             user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
+            user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips;
             lines.XenoLines = map.XenoLines;
             lines.MarineLines = _emptyLines;
         }
@@ -542,6 +598,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 map.XenoLines = lines;
                 map.LastUpdateXenoBlips = map.XenoBlips.ToDictionary();
+                map.LastUpdateXenoStructureBlips = map.XenoStructureBlips.ToDictionary();
                 _xenoAnnounce.AnnounceSameHive(user, "The Xenonid tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the xenonid tactical map for {ToPrettyString(mapId)}");
             }
@@ -553,6 +610,31 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+        {
+            _toInit.Clear();
+            _toUpdate.Clear();
+        }
+
+        try
+        {
+            foreach (var init in _toInit)
+            {
+                if (!init.Comp.Running)
+                    continue;
+
+                var wasActive = HasComp<ActiveTacticalMapTrackedComponent>(init);
+                UpdateActiveTracking(init);
+
+                if (!wasActive && TryComp(init, out ActiveTacticalMapTrackedComponent? active))
+                    UpdateTracked((init, active));
+            }
+        }
+        finally
+        {
+            _toInit.Clear();
+        }
+
         try
         {
             foreach (var update in _toUpdate)

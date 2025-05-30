@@ -1,0 +1,182 @@
+# Helmet Garbs
+- type: loadout
+  id: FakeNVGRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbNightVision
+
+- type: loadout
+  id: NettingRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbNetting
+
+- type: loadout
+  id: NettingUrbanRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbNettingUrban
+
+- type: loadout
+  id: NettingDesertRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbNettingDesert
+
+- type: loadout
+  id: NettingJungleRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbNettingJungle
+
+- type: loadout
+  id: RaincoverRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbRainCover
+
+- type: loadout
+  id: RaincoverUrbanRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbRainCoverUrban
+
+- type: loadout
+  id: RaincoverDesertRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbRainCoverDesert
+
+- type: loadout
+  id: RaincoverJungleRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbRainCoverJungle
+
+- type: loadout
+  id: BuckshotSpentRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbBuckshot
+
+- type: loadout
+  id: FlechetteSpentRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFlechette
+
+- type: loadout
+  id: SlugSpentRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbSlug
+
+- type: loadout
+  id: CartridgeSpentRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbCartridge
+
+- type: loadout
+  id: HelmetGasmaskRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbGasmask
+
+- type: loadout
+  id: HelmetGasmaskDesertRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHelmetGarbGasmaskDesert
+
+- type: loadout
+  id: HelmetGasmaskJungleRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHelmetGarbGasmaskJungle
+
+- type: loadout
+  id: HelmetGasmaskUrbanRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHelmetGarbGasmaskUrban
+
+- type: loadout
+  id: FeatherRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeather
+
+- type: loadout
+  id: FeatherRedRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeatherRed
+
+- type: loadout
+  id: FeatherBlueRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeatherBlue
+
+- type: loadout
+  id: FeatherYellowRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeatherYellow
+
+- type: loadout
+  id: FeatherPurpleRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeatherPurple
+
+- type: loadout
+  id: GunOilRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbGunOil
+
+- type: loadout
+  id: RosaryRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbRosary
+
+- type: loadout
+  id: PrescriptionRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbPrescription
+
+- type: loadout
+  id: TrimmedWireRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbWire

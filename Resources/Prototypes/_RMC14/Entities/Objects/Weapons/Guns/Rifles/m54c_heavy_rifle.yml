@@ -1,6 +1,6 @@
 ﻿- type: entity
   name: M54CE2 heavy assault rifle
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
@@ -142,8 +142,79 @@
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifle
 
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: CMMagazineRifleM54CE2HT
+  name: "M54CE2 HT magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmHT
+    proto: CMCartridgeRifle10x24mmHT
+    capacity: 200
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#38CBE0"
+
+- type: entity
+  parent: CMCartridgeRifle10x24mm
+  id: CMCartridgeRifle10x24mmHT
+  name: cartridge (10x24mm)
+  description: A 10x24mm HT cartridge. Fits in 10x24mm holo targeting magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeRifle10x24mmHT
+  - type: CartridgeAmmo
+    proto: BulletRifle10x24mmHT
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle10x24mmHT
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: HoloTargeting
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: CMMagazineRifleM54CE2AP
+  name: "M54CE2 AP magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
+    capacity: 300
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+
 - type: Tag
   id: WeaponRifleM54CE2
 
 - type: Tag
   id: CMMagazineRifleM54CE2
+
+- type: Tag
+  id: CMCartridgeRifle10x24mmHT

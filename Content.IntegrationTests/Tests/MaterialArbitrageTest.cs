@@ -6,18 +6,15 @@ using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds.Behaviors;
 using Content.Server.Stack;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.Construction.Components;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Construction.Steps;
 using Content.Shared.FixedPoint;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
-using Content.Shared.Research.Prototypes;
 using Content.Shared.Stacks;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.IntegrationTests.Tests;
 
@@ -59,7 +56,7 @@ public sealed class MaterialArbitrageTest
 
         // Lets assume the possible lathe for resource multipliers:
         // TODO: each recipe can technically have its own cost multiplier associated with it, so this test needs redone to factor that in.
-        var multiplier = MathF.Pow(0.85f, 3);
+        var multiplier = 1; // RMC14: We do not have any upgraded lathes.
 
         // create construction dictionary
         Dictionary<string, ConstructionComponent> constructionRecipes = new();
@@ -346,7 +343,7 @@ public sealed class MaterialArbitrageTest
             }
         });
 
-        await server.WaitPost(() => mapManager.DeleteMap(testMap.MapId));
+        await server.WaitPost(() => mapSystem.DeleteMap(testMap.MapId));
         await pair.CleanReturnAsync();
 
         async Task<double> GetSpawnedPrice(Dictionary<string, int> ents)

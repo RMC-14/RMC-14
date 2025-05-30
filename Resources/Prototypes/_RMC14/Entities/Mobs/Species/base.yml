@@ -24,13 +24,14 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.25
-        density: 185
+        density: 0
         restitution: 0.0
         layer:
         - BulletImpassable
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
+  - type: RMCStamina
   - type: Bloodstream
     bloodReagent: Blood
     bloodMaxVolume: 560
@@ -63,6 +64,9 @@
     - Pacified
     - StaminaModifier
     - Flashed
+    - Dazed
+    - Blinded
+    - Deaf
   - type: Blindable
   - type: Tag
     tags:
@@ -114,7 +118,7 @@
   - type: MeleeWeapon
     soundHit:
       collection: Punch
-    angle: 30
+    angle: 0
     animation: WeaponArcFist
     attackRate: 1
     damage:
@@ -143,9 +147,10 @@
         type: SquadInfoBui
       enum.DialogUiKey.Key:
         type: DialogBui
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
   - type: Infectable
   - type: Tackleable
-  - type: Tackle
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
@@ -208,6 +213,10 @@
       whitelist:
         tags:
         - BodyBag
+    - multiplier: 0.645
+      whitelist:
+        components:
+        - RequisitionsCrate #Lockers/Crates
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -247,6 +256,39 @@
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
+      enum.HookedVisuals.Hooked:
+        hooked:
+          True: { visible: true }
+          False: { visible: false }
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+      enum.TargetedVisuals.TargetedDirection:
+        targetedDirection:
+          True: { visible: true}
+          False: { visible: false}
+      enum.TargetedVisuals.TargetedDirectionIntense:
+        targetedDirectionIntense:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FocusedVisuals.Focused:
+        focused:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Spottable
   - type: ActiveInputMover
   - type: DropItemsOnRest
   - type: UserBlockShootingInsideContainers
@@ -270,14 +312,63 @@
       - CanBeSupplyDropped
   - type: NewPlayerLabel
   - type: MarineMapTracked
+  - type: RMCSetPose
   - type: Evasion
   - type: CanBeFirePatted
   - type: FirePatter
+    stacks: -10
     blacklist:
       components:
       - Xeno
   - type: RMCPickupDroppedItems
   - type: CommendationReceiver
   - type: RMCSpeciesSlowdownModifier
-    slowMultiplier: 0.66
-    superSlowMultiplier: 0.33
+    slowModifier: 2
+    superSlowModifier: 4
+  - type: RMCHandEmotes
+  - type: RMCBuckleDrawDepth
+  - type: RMCObstacleSlamming
+  - type: AllowPullWhileDeadAndInfected
+  - type: DamageOnPulledWhileCrit
+    damage:
+      types:
+        Asphyxiation: 1.6
+    pullerWhitelist:
+      components:
+      - Xeno # TODO RMC14 not allied xenos
+  - type: IgnoreInteractionRange
+    whitelist:
+      components:
+      - OverwatchConsole
+      tags:
+      - RMCDropshipEnginePoint
+    range: 2
+  - type: RMCArmorModifier
+    meleeArmorModifier: 5
+  - type: RMCObstacleSlamCauserImmune
+  - type: MobCollision
+  - type: RMCMobCollision
+  - type: RMCRest
+  - type: RMCMeleeDamageSkill
+  - type: RMCStripTimeSkill
+  - type: RMCDisarm
+  - type: RMCDisarmable
+  - type: StunOnExplosionReceived
+  - type: DeafenWhileCrit
+  - type: XenoToggleChargingDamage
+    damage:
+      types:
+        Blunt: 0.25 # TODO RMC14 to the chest only
+    armorPiercingDamage:
+      types:
+        Blunt: 1
+    armorPiercing: 13
+    defaultMultiplier: 5
+    stageMultipliers:
+      8: 8
+  - type: XenoToggleChargingKnockback
+  - type: XenoToggleChargingParalyze
+  - type: RMCMobStateDrawDepth
+    drawDepths:
+      Dead: DeadMobs
+  - type: IVDripTarget

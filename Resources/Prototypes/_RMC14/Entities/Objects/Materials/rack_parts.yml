@@ -15,6 +15,10 @@
   - type: Construction
     graph: RMCRackParts
     node: parts
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 100
 
 - type: Tag
   id: RMCRackParts

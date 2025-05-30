@@ -1,0 +1,7 @@
+﻿# Recreational
+- type: loadout
+  id: CassettePlayerRMC
+  cost: 2
+  storage:
+    back:
+    - RMCCassettePlayer

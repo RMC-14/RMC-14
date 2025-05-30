@@ -24,12 +24,6 @@
     RMCRankPrivate: []
   accessGroups:
   - MaintTech
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: mt
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -44,6 +38,13 @@
         RMCSkillPowerLoader: 2
     - type: JobPrefix
       prefix: cm-job-prefix-maint-tech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: mt
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
 
 - type: startingGear
   id: CMGearMaintTech
@@ -60,10 +61,7 @@
   - type: SpawnPoint
     job_id: CMMaintTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: maintenance_tech
+    state: mt_spawn
 
 - type: playTimeTracker
   id: CMJobMaintTech

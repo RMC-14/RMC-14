@@ -1,4 +1,6 @@
-﻿using Content.Shared.Interaction.Events;
+﻿using Content.Shared.Hands.Components;
+using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Light.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -7,12 +9,24 @@ namespace Content.Shared._RMC14.Interaction;
 
 public sealed class RMCInteractionSystem : EntitySystem
 {
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<InteractedBlacklistComponent, GettingInteractedWithAttemptEvent>(OnBlacklistInteractionAttempt);
-        SubscribeLocalEvent<InsertBlacklistComponent, ContainerGettingInsertedAttemptEvent>(OnInsertBlacklistContainerInsertedAttempt);
+        SubscribeLocalEvent<NoHandsInteractionBlockedComponent, GettingInteractedWithAttemptEvent>(OnNoHandsInteractionAttempt);
+        SubscribeLocalEvent<InsertBlacklistComponent, ContainerIsInsertingAttemptEvent>(OnInsertBlacklistContainerIsInsertingAttempt);
+        SubscribeLocalEvent<IgnoreInteractionRangeComponent, InRangeOverrideEvent>(OnInRangeOverride);
+    }
+
+    private void OnNoHandsInteractionAttempt(Entity<NoHandsInteractionBlockedComponent> ent, ref GettingInteractedWithAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!HasComp<HandsComponent>(args.Uid))
+            args.Cancelled = true;
     }
 
     private void OnBlacklistInteractionAttempt(Entity<InteractedBlacklistComponent> ent, ref GettingInteractedWithAttemptEvent args)
@@ -27,13 +41,25 @@ public sealed class RMCInteractionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnInsertBlacklistContainerInsertedAttempt(Entity<InsertBlacklistComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
+    private void OnInsertBlacklistContainerIsInsertingAttempt(Entity<InsertBlacklistComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
         if (args.Cancelled || ent.Comp.Blacklist is not { } blacklist)
             return;
 
         if (_whitelist.IsValid(blacklist, args.EntityUid))
             args.Cancel();
+    }
+
+    private void OnInRangeOverride(Entity<IgnoreInteractionRangeComponent> ent, ref InRangeOverrideEvent args)
+    {
+        if (!_whitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Target))
+            return;
+
+        if (!_transform.InRange(args.User, args.Target, SharedInteractionSystem.InteractionRange))
+            return;
+
+        args.InRange = true;
+        args.Handled = true;
     }
 
     public void TryCapWorldRotation(Entity<MaxRotationComponent?, TransformComponent?> max, ref Angle angle)

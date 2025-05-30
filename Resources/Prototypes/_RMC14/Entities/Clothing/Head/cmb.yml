@@ -1,0 +1,13 @@
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetM10CMB
+  name: M11R pattern CMB Riot helmet
+  description: A CMB variant of the standard M10 pattern. The front plate is reinforced. This one is a lot more tight fitting.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/cmb_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/cmb_helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: RMCEarProtection

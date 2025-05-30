@@ -29,6 +29,7 @@
     blacklist:
       components:
       - Xeno
+  - type: StoreAfterFailedInteract
 
 
 - type: entity
@@ -45,6 +46,7 @@
       tags:
       - Pouch
       - ThrowingKnife
+  - type: RMCStorageEjectHand
 
 
 - type: entity

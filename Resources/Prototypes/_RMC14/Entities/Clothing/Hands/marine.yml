@@ -32,9 +32,9 @@
 
 - type: entity
   parent: CMHandsBlackMarine
-  id: RMCHandsCOGloves
-  name: commanding officer's gloves
-  description: You may like these gloves, but THEY think you are unworthy of them.
+  id: RMCHandsDeluxeMarine
+  name: deluxe combat gloves
+  description: Combat gloves finished in an almost golden-looking fabric. Insulated, fasionable, and capable of protecting the soft hands it's likely wrapped around.
   components:
   - type: Insulated
   - type: Sprite
@@ -56,5 +56,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grenadier.rsi
   - type: CMArmor
-    armor: 40
+    melee: 40
+    bullet: 40
     explosionArmor: 50

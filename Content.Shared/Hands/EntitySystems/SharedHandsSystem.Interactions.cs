@@ -16,7 +16,7 @@ namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem : EntitySystem
 {
-    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
 
     private void InitializeInteractions()
     {
@@ -196,11 +196,13 @@ public abstract partial class SharedHandsSystem : EntitySystem
         if (args.Handled)
             return;
 
-        // TODO: this pattern is super uncommon, but it might be worth changing GetUsedEntityEvent to be recursive.
-        if (TryComp<VirtualItemComponent>(component.ActiveHandEntity, out var virtualItem))
-            args.Used = virtualItem.BlockingEntity;
-        else
-            args.Used = component.ActiveHandEntity;
+        if (component.ActiveHandEntity.HasValue)
+        {
+            // allow for the item to return a different entity, e.g. virtual items
+            RaiseLocalEvent(component.ActiveHandEntity.Value, ref args);
+        }
+
+        args.Used ??= component.ActiveHandEntity;
     }
 
     //TODO: Actually shows all items/clothing/etc.
@@ -211,6 +213,10 @@ public abstract partial class SharedHandsSystem : EntitySystem
             .Select(item => FormattedMessage.EscapeText(Identity.Name(item, EntityManager)))
             .Select(itemName => Loc.GetString("comp-hands-examine-wrapper", ("item", itemName)))
             .ToList();
+
+        // RMC14
+        if (heldItemNames.Count == 0 && !handsComp.ExamineShowEmpty)
+            return;
 
         var locKey = heldItemNames.Count != 0 ? "comp-hands-examine" : "comp-hands-examine-empty";
         var locUser = ("user", Identity.Entity(examinedUid, EntityManager));

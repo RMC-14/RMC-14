@@ -1,155 +1,3 @@
-# First Aid Pouch
-- type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchFirstAid
-  name: first-aid pouch
-  description: It contains, by default, autoinjectors. But it may also hold ointments, bandages, and pill packets.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/firstaid.rsi
-  - type: Storage
-    grid:
-    - 0,0,7,1 #4 slots
-    whitelist:
-      tags:
-      - CMOintment
-      - CMAutoInjector
-      - Brutepack
-      # TODO RMC14 splint
-      - PillPacket
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - PillPacket
-
-- type: entity
-  parent: RMCPouchFirstAid
-  id: RMCPouchFirstAidInjectors
-  suffix: Injectors
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMBicaridineAutoInjector
-    - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector # TODO RMC14
-    - id: CMEmergencyAutoInjector
-
-- type: entity
-  parent: RMCPouchFirstAid
-  id: RMCPouchFirstAidSplintsGauzeOintment
-  suffix: Splints, Gauze, Ointment
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMTricordrazineAutoInjector
-#    - id: CMSplints5
-    - id: CMOintment10
-    - id: CMGauze10
-
-- type: entity
-  parent: RMCPouchFirstAid
-  id: RMCPouchFirstAidPills
-  suffix: Pills
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMPacketPillsBicaridine
-    - id: CMPacketPillsKelotane
-#    - id: CMPacketPillsTramadol # TODO RMC14
-#    - id: CMPacketPillsTramadol # TODO RMC14
-
-
-# First Aid ERT
-- type: entity
-  parent: RMCPouchFirstAid
-  id: RMCPouchFirstAidERT
-  description: It can contain autoinjectors, ointments, and bandages. This one has some extra stuff.
-  suffix: ERT
-  components:
-  - type: Storage
-    grid:
-    - 0,0,9,1 #5 slots
-  - type: FixedItemSizeStorage
-
-- type: entity
-  parent: RMCPouchFirstAidERT
-  id: RMCPouchFirstAidERTFill
-  suffix: ERT, Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMBicaridineAutoInjector
-    - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector
-    - id: CMEmergencyAutoInjector
-    - id: CMGauze10
-
-
-# Medical Pouch
-- type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchMedical
-  name: medical pouch
-  description: It can carry small medical supplies.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/medical.rsi
-  - type: Storage
-    maxItemSize: Large
-    grid:
-    - 0,0,7,1 #4 slots
-    whitelist:
-      tags:
-      - DiscreteHealthAnalyzer
-      - Dropper
-      - Pill
-      - Bottle
-      - Syringe
-      - PillCanister
-      - CMTraumaKit
-      - CMBurnKit
-      - CMOintment
-      - Brutepack
-      - CMBloodPack
-      #      - TODO RMC14 splint
-      - RMCPenlight
-      - CMAutoInjector
-      - CMFireExtinguisherPortable
-      #      - TODO RMC14 syringe cases
-      - CMSurgicalLine
-      - CMSynthGraft
-      - PillPacket
-      - Hypospray
-      components:
-      - Hypospray
-  - type: FixedItemSizeStorage
-
-- type: entity
-  parent: RMCPouchMedical
-  id: RMCPouchMedicalFill
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMHealthAnalyzer
-      # splint
-    - id: CMBurnKit10
-    - id: CMTraumaKit10
-
-- type: entity
-  parent: RMCPouchMedical
-  id: RMCPouchMedicalPills
-  suffix: Pills
-  components:
-  - type: StorageFill
-    contents:
-    # TODO RMC14 pill bottle tramadol
-    - id: CMPillCanisterBicaridine
-    - id: CMPillCanisterKelotane
-    - id: CMPillCanisterDexalin
-
-
 # Tactical Medical
 - type: entity
   parent: RMCPouchMedical
@@ -224,6 +72,25 @@
       amount: 1
 
 - type: entity
+  parent: RMCPouchMedicalSoc
+  id: RMCPouchMedicalSocMarineRaiderFill
+  suffix: Filled
+  components:
+  - type: StorageFill # TODO RMC14
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMTraumaKit10
+      amount: 2
+    - id: CMBurnKit10
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    - id: CMEmergencyAutoInjector
+      amount: 2
+    - id: CMFireExtinguisherPortable
+    - id: Stimpack
+      amount: 3
+
+- type: entity
   parent: RMCPouchMedicalSocDutch
   id: RMCPouchMedicalSocDutchUnmarked
   name: tactical medical pouch
@@ -257,7 +124,7 @@
       #      - TODO RMC14 splint
       - CMAutoInjector
       - CMFireExtinguisherPortable
-      - CMRollerBed
+      - CMRollerItem
       - BodyBag
       - PillPacket
       - Hypospray
@@ -273,7 +140,9 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-    # todo rmc14 roller cryobag
+    - id: CMRollerBedSpawnFolded
+    - id: CMFireExtinguisherPortable
+    - id: CMStasisBagFolded
 
 
 # Vial Pouch
@@ -368,7 +237,6 @@
     - id: CMEmergencyAutoInjector
       amount: 1
 
-
 # Syringe Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -395,93 +263,3 @@
     contents:
     - id: CMSyringe
       amount: 6
-
-
-# MedKit Pouch
-- type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchMedkit
-  name: medical kit pouch
-  description: It's specifically made to hold medical items.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/medkit.rsi
-  - type: StorageStoreSkillRequired
-    entries:
-    - whitelist:
-        tags:
-        - DiscreteHealthAnalyzer
-        - Dropper
-        - Pill
-        - Bottle
-        - Syringe
-        - PillCanister
-        - CMTraumaKit
-        - CMBurnKit
-        - CMOintment
-        - Brutepack
-        - CMBloodPack
-      # - TODO RMC14 splint
-        - CMAutoInjector
-      # - TODO RMC14 syringe case
-        - CMSurgicalCase
-        - CMFireExtinguisherPortable
-        - CMRollerBed
-        - CMSurgicalLine
-        - CMSynthGraft
-        - BodyBag
-#       - TODO RMC14 fixovein
-        - Hypospray
-        components:
-        - Hypospray
-      skills:
-        all:
-          RMCSkillMedical: 2
-  - type: Storage
-    grid:
-    - 0,0,13,1 #7 slots
-    maxItemSize: Large
-    whitelist:
-      tags:
-      - DiscreteHealthAnalyzer
-      - Dropper
-      - Pill
-      - Bottle
-      - Syringe
-      - PillCanister
-      - CMTraumaKit
-      - CMBurnKit
-      - CMOintment
-      - Brutepack
-      - CMBloodPack
-      #      - TODO RMC14 splint
-      - CMAutoInjector
-      #      - TODO RMC14 syringe case
-      - CMSurgicalCase
-      - CMFireExtinguisherPortable
-      - CMRollerBed
-      - CMSurgicalLine
-      - CMSynthGraft
-      - BodyBag
-#      - TODO RMC14 fixovein
-      - Hypospray
-      components:
-      - Hypospray
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - CMSurgicalCase
-
-- type: entity
-  parent: RMCPouchMedkit
-  id: RMCPouchMedkitFill
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMTraumaKit10
-    - id: CMBurnKit10
-    # splint
-    - id: CMBicaridineAutoInjector
-    - id: CMKelotaneAutoInjector

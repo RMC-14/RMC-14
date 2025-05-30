@@ -1,0 +1,72 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaGreenBase
+  name: tiles-cm-default-green
+
+- type: tile
+  parent: RMCFloorHybrisaGreenBase
+  id: RMCFloorHybrisaGreenMetal
+  name: green metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetalfull.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenTile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilegreen.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenMetal1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal1.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenMetal2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal2.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenMetal3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal3.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenMetal4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal4.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenMetal5
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal5.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenMetal6
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal6.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenMetal7
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal7.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenMetal8
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal8.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenBase
+  id: RMCFloorHybrisaGreenCarpet
+  name: green carpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetgreen.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenCarpet
+  id: RMCFloorHybrisaGreenCarpetDeco
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetgreen_deco.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenCarpet
+  id: RMCFloorHybrisaGreenDingy
+  sprite: /Textures/_RMC14/Tiles/hybrisa/grimy.png

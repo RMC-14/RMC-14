@@ -20,6 +20,7 @@
       path: /Audio/_RMC14/Machines/armor_equip.ogg
   - type: PlaytimeMedalHolder
   - type: MoveOrderArmor
+  - type: StoreAfterFailedInteract
 
 - type: entity
   abstract: true
@@ -31,6 +32,7 @@
       - RMCLighter
       - Bible
       - Gun
+      - CassettePlayer
       tags:
       - GasTank
       - Flashlight
@@ -46,9 +48,8 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCXM51Holster
-      - RMCMotionDetector
+      - RMCDetector
       - RMCMatebaHolster
-      #TODO walkman
 
 - type: entity
   abstract: true
@@ -82,6 +83,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - CrewMonitoringConsole
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -93,8 +95,7 @@
       - Crowbar
       - RMCMacheteScabbard
       #TODO katana scabbard
-      - RMCMotionDetector
-      #TODO walkman
+      - RMCDetector
 
 - type: entity
   abstract: true
@@ -105,14 +106,14 @@
       components:
       - BallisticAmmoProvider #Note should get all maganizes
       - SmartGun
+      - CassettePlayer
       tags:
       - GasTank
       - Flashlight
       - Knife
       - RMCG8Pouch
       #TODO mines
-      - RMCMotionDetector
-      #TODO walkman
+      - RMCDetector
 
 - type: entity
   abstract: true
@@ -126,6 +127,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - Gun
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -142,9 +144,8 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
-      #TODO Ceremonial Sword
-      - RMCMotionDetector
-      #TODO walkman
+      - RMCCeremonialSword
+      - RMCDetector
 
 - type: entity
   abstract: true
@@ -158,6 +159,7 @@
       - BallisticAmmoProvider #Note should get all maganizes
       - Stunbaton
       - Gun
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -166,8 +168,7 @@
       - Grenade
       - Flashlight
       - Machete
-      - RMCMotionDetector
-      #TODO walkman
+      - RMCDetector
 
 # TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
 
@@ -220,6 +221,7 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: sql-armor
+  - type: RMCStorageEjectHand
 
 - type: entity
   parent: RMCBaseMarineArmor
@@ -272,6 +274,7 @@
       path: /Audio/_RMC14/Machines/suitlight_off.ogg
     turnOnSound:
       path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour

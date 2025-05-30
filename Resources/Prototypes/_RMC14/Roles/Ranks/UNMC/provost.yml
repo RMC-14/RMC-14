@@ -26,6 +26,12 @@
   prefix: PvDM.
   paygrade: O6
 
+# Fax responder
+- type: rank
+  id: RMCRankProvostCommunicationsOfficer
+  name: Communications Officer
+  prefix: ComOff.
+
 # Any player with high law understanding
 - type: rank
   id: RMCRankProvostChiefInspector
@@ -60,4 +66,3 @@
   name: Staff Sergeant
   prefix: SSgt.
   paygrade: E6
-

@@ -28,7 +28,6 @@
     anchored: false
   - type: Physics
     bodyType: Static
-  - type: Anchorable
   - type: Construction
     graph: CMSeat
     node: chair
@@ -65,7 +64,6 @@
     anchored: true
   - type: Physics
     bodyType: Static
-  - type: Anchorable
   - type: Construction
     graph: CMSeat
     node: chairComfy
@@ -162,6 +160,15 @@
   components:
   - type: Sprite
     state: comfychair_delta
+
+- type: entity
+  parent: CMChairComfy
+  id: RMCChairComfyAlien
+  name: alien chair
+  suffix: Alien
+  components:
+  - type: Sprite
+    state: comfychair_alien
 
 # Office chair
 - type: entity

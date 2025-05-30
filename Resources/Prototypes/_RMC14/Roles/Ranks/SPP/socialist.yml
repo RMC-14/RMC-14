@@ -1,0 +1,123 @@
+- type: rank
+  id: RMCRankSPPRyadovoy
+  name: Ryadovoy
+  prefix: Rya.
+  paygrade: E1
+
+- type: rank
+  id: RMCRankSPPEfreitor
+  name: Efreitor
+  prefix: Efr.
+  paygrade: E2
+
+- type: rank
+  id: RMCRankSPPMladshiySerzhant
+  name: Mladshiy Serzhant
+  prefix: MSzht.
+  paygrade: E3
+
+- type: rank
+  id: RMCRankSPPSerzhant
+  name: Serzhant
+  prefix: Sgt.
+  paygrade: E4
+
+- type: rank
+  id: RMCRankSPPStarshiySerzhant
+  name: Starshiy Serzhant
+  prefix: SSgt.
+  paygrade: E5
+
+- type: rank
+  id: RMCRankSPPStarshyna
+  name: Starshyna
+  prefix: StS.
+  paygrade: E6
+
+# THE RANKS BELOW ARE USED FOR THE SPP DEATHSQUAD, PLEASE DON'T USE THEM FOR ANYTHING ELSE
+
+- type: rank
+  id: RMCRankSPPJuniorKommando
+  name: Junior Kommando
+  prefix: JKdo.
+  paygrade: E7
+
+- type: rank
+  id: RMCRankSPP2ndKommando
+  name: 2nd Kommando
+  prefix: 2ndKdo.
+  paygrade: E8
+
+- type: rank
+  id: RMCRankSPP1stKommando
+  name: 1st Kommando
+  prefix: 1stKdo.
+  paygrade: E9
+
+# THE RANKS ABOVE ARE USED FOR THE SPP DEATHSQUAD, PLEASE DON'T USE THEM FOR ANYTHING ELSE
+
+- type: rank
+  id: RMCRankSPPMladshiyLeytenant
+  name: Mladshiy Leytenant
+  prefix: MsLt.
+  paygrade: O1
+
+- type: rank
+  id: RMCRankSPPStarshiyLeytenant
+  name: Starshiy Leytenant
+  prefix: SrLt.
+  paygrade: O2
+
+- type: rank
+  id: RMCRankSPPKapitan
+  name: Kapitan
+  prefix: Kpt.
+  paygrade: O3
+
+- type: rank
+  id: RMCRankSPPMayjor
+  name: Mayjor
+  prefix: May.
+  paygrade: O4
+
+- type: rank
+  id: RMCRankSPPPoliticalCommissar
+  name: Political Commissar
+  prefix: Pol.
+  # This is a civilian rank, so it doesn't have a paygrade
+
+- type: rank
+  id: RMCRankSPPPodpolkovnik
+  name: Podpolkovnik
+  prefix: Pdk.
+  paygrade: O5
+
+- type: rank
+  id: RMCRankSPPPolkovnik
+  name: Polkovnik
+  prefix: Plk.
+  paygrade: O6
+
+- type: rank
+  id: RMCRankSPPGeneralMayjor
+  name: General Mayjor
+  prefix: GenMay.
+  paygrade: O7
+
+- type: rank
+  id: RMCRankSPPGeneralLeytenant
+  name: General Leytenant
+  prefix: GenLt.
+  paygrade: O8
+
+- type: rank
+  id: RMCRankSPPGeneralPolkovnik
+  name: General Polkovnik
+  prefix: GenPlk.
+  paygrade: O9
+
+- type: rank
+  id: RMCRankSPPGeneralArmii
+  name: General Armii
+  prefix: GenArm.
+  paygrade: O10

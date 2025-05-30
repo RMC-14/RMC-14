@@ -1,3 +1,7 @@
+using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Weather;
+using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Maps;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -17,6 +21,9 @@ public abstract class SharedWeatherSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metadata = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly SharedRoofSystem _roof = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly RMCWeatherSystem _rmcWeather = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
 
@@ -38,10 +45,17 @@ public abstract class SharedWeatherSystem : EntitySystem
         }
     }
 
-    public bool CanWeatherAffect(EntityUid uid, MapGridComponent grid, TileRef tileRef)
+    public bool CanWeatherAffect(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
     {
+        //RMC14 - This goes first, if the grid uses areas, we use the RMC Area Weather system instead of upstream.
+        if (TryComp<AreaGridComponent>(uid, out _))
+            return _rmcWeather.CanWeatherAffectArea(uid, grid, tileRef, roofComp);
+
         if (tileRef.Tile.IsEmpty)
             return true;
+
+        if (Resolve(uid, ref roofComp, false) && _roof.IsRooved((uid, grid, roofComp), tileRef.GridIndices))
+            return false;
 
         var tileDef = (ContentTileDefinition) _tileDefManager[tileRef.Tile.TypeId];
 

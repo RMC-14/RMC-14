@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.Shuttles;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
@@ -38,12 +39,12 @@ public sealed partial class ShuttleSystem
 
     private readonly SoundSpecifier _startupSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_startup.ogg")
     {
-        Params = AudioParams.Default.WithVolume(-5f),
+        Params = AudioParams.Default.WithVolume(6f),
     };
 
     private readonly SoundSpecifier _arrivalSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_landing.ogg")
     {
-        Params = AudioParams.Default.WithVolume(-5f),
+        Params = AudioParams.Default.WithVolume(5f),
     };
 
     public float DefaultStartupTime;
@@ -393,6 +394,10 @@ public sealed partial class ShuttleSystem
         var ftlMap = EnsureFTLMap();
         var body = _physicsQuery.GetComponent(entity);
         var shuttleCenter = grid.LocalAABB.Center;
+
+        // RMC14
+        var beforeFTL = new BeforeFTLStartedEvent(uid);
+        RaiseLocalEvent(uid, ref beforeFTL);
 
         // Leave audio at the old spot
         // Just so we don't clip

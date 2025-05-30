@@ -1,0 +1,2187 @@
+meta:
+  format: 6
+  postmapinit: false
+tilemap:
+  0: Space
+  1: CMFloorAsteroidFloor
+  5: CMFloorAsteroidStriped2
+  6: CMFloorAsteroidStriped3
+  200: CMFloorPlating
+  276: CMFloorSteelPlanet
+  278: CMFloorSteelPlanetBlack
+  292: CMFloorSteelPlanetBot
+  354: CMFloorSteelPlanetDarkYellow0
+  355: CMFloorSteelPlanetDarkYellow1
+  356: CMFloorSteelPlanetDarkYellow2
+  357: CMFloorSteelPlanetDarkYellow3
+  358: CMFloorSteelPlanetDarkYellow4
+  359: CMFloorSteelPlanetDarkYellow5
+  360: CMFloorSteelPlanetDarkYellow6
+  361: CMFloorSteelPlanetDarkYellow7
+  363: CMFloorSteelPlanetDarkYellowCorners1
+  365: CMFloorSteelPlanetDarkYellowCorners3
+  367: CMFloorSteelPlanetDelivery
+  368: CMFloorSteelPlanetEngine
+  860: CMFloorTest0
+  934: CMPlanetMarsCave1
+  962: CMPlanetMarsDirt2
+  965: CMPlanetMarsDirt5
+  968: CMPlanetMarsDirt8
+  970: CMPlanetMarsSand
+  1241: RMCFloorCementSunBleached1
+  1244: RMCFloorCementSunBleached12
+  1246: RMCFloorCementSunBleached14
+  1247: RMCFloorCementSunBleached15
+  1252: RMCFloorCementSunBleached2
+  1254: RMCFloorCementSunBleached3
+  1255: RMCFloorCementSunBleached4
+  1256: RMCFloorCementSunBleached5
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      pos: -0.5,-0.51425934
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: yAAAAAAAYwEAAAAAYwEAAAAAYwEAAAAAyAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZAEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+        0,-1:
+          ind: 0,-1
+          tiles: BgAAAAAAAQAAAAAAbwEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAbwEAAAAAAQAAAAAABQAAAAAApgMAAAAApgMAAAAABgAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAXAMAAAAAXAMAAAAAXAMAAAAAXAMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAQAAAAAAyAAAAAAAyAAAAAAAZwEAAAAAYgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZgEAAAAAyAAAAAAAcAEAAAAAcAEAAAAAcAEAAAAAcAEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZAEAAAAAyAAAAAAAcAEAAAAAcAEAAAAAcAEAAAAAcAEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZAEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAZwEAAAAAYgEAAAAAbQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZAEAAAAAyAAAAAAAZwEAAAAAYgEAAAAAYgEAAAAAYgEAAAAAYgEAAAAAyAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAXAMAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAyAAAAAAAaQEAAAAAFgEAAAAAYwEAAAAAYwEAAAAAYwEAAAAAFgEAAAAAYwEAAAAAYwEAAAAAaAEAAAAAyAAAAAAAaQEAAAAAFgEAAAAAYwEAAAAAYwEAAAAAYwEAAAAAyAAAAAAAyAAAAAAAXAMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAXAMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAXAMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAXAMAAAAAFgEAAAAAXAMAAAAAyAAAAAAAZwEAAAAAFgEAAAAAYgEAAAAAYgEAAAAAYgEAAAAAYgEAAAAAYgEAAAAAFgEAAAAAYgEAAAAAZgEAAAAAyAAAAAAAyAAAAAAAXAMAAAAAFgEAAAAAXAMAAAAAyAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZAEAAAAAyAAAAAAAyAAAAAAAXAMAAAAAFgEAAAAAXAMAAAAAyAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZAEAAAAAyAAAAAAAyAAAAAAAXAMAAAAAFgEAAAAAXAMAAAAAyAAAAAAAaQEAAAAAFgEAAAAAYwEAAAAAFgEAAAAAYwEAAAAAYwEAAAAAYwEAAAAAYwEAAAAAYwEAAAAAaAEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAXAMAAAAAyAAAAAAAXAMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAYgEAAAAAYgEAAAAAYgEAAAAAyAAAAAAAZwEAAAAAFgEAAAAAYgEAAAAAFgEAAAAAYgEAAAAAZgEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAXAMAAAAAFgEAAAAAFgEAAAAAFgEAAAAAXAMAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZAEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAA
+          version: 6
+        1,-1:
+          ind: 1,-1
+          tiles: pgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAXAMAAAAAXAMAAAAAXAMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAZgEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAawEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAaAEAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAJAEAAAAAyAAAAAAAygMAAAAAygMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZQEAAAAAFgEAAAAAFgEAAAAAFgEAAAAAJAEAAAAAyAAAAAAAygMAAAAAygMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAXAMAAAAAXAMAAAAAXAMAAAAAyAAAAAAAyAAAAAAAygMAAAAAygMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3gQAAAAA3AQAAAAA3AQAAAAA3AQAAAAA3wQAAAAAyAMAAAAAygMAAAAAygMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5gQAAAAA6AQAAAAA6AQAAAAA6AQAAAAA2QQAAAAAxQMAAAAAwgMAAAAAwgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5gQAAAAA6AQAAAAA6AQAAAAA6AQAAAAA6AQAAAAA3AQAAAAA3AQAAAAA3AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5gQAAAAA6AQAAAAA6AQAAAAA6AQAAAAA6AQAAAAA6AQAAAAA6AQAAAAA6AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+        0,-2:
+          ind: 0,-2
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAApgMAAAAApgMAAAAABgAAAAAAAQAAAAAAbwEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAbwEAAAAAAQAAAAAABQAAAAAApgMAAAAApgMAAAAABgAAAAAAAQAAAAAAbwEAAAAAFAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAFAEAAAAAbwEAAAAAAQAAAAAABQAAAAAApgMAAAAApgMAAAAABgAAAAAAAQAAAAAAbwEAAAAAFAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAFAEAAAAAbwEAAAAAAQAAAAAABQAAAAAApgMAAAAApgMAAAAABgAAAAAAAQAAAAAAbwEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAbwEAAAAAAQAAAAAABQAAAAAApgMAAAAApgMAAAAABgAAAAAAAQAAAAAAbwEAAAAAFAEAAAAAJAEAAAAAJAEAAAAAFAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAFAEAAAAAbwEAAAAAAQAAAAAABQAAAAAApgMAAAAApgMAAAAABgAAAAAAAQAAAAAAbwEAAAAAFAEAAAAAJAEAAAAAJAEAAAAAFAEAAAAAJAEAAAAAJAEAAAAAJAEAAAAAFAEAAAAAbwEAAAAAAQAAAAAABQAAAAAApgMAAAAApgMAAAAABgAAAAAAAQAAAAAAbwEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAFAEAAAAAbwEAAAAAAQAAAAAABQAAAAAApgMAAAAApgMAAAAA
+          version: 6
+        1,0:
+          ind: 1,0
+          tiles: 5AQAAAAA5wQAAAAA5wQAAAAA5wQAAAAA5wQAAAAA6AQAAAAA6AQAAAAA6AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+        1,-2:
+          ind: 1,-2
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        7,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        23,-7: RMCAreaBigredv2OutsideSe
+        23,-6: RMCAreaBigredv2OutsideSe
+        23,-5: RMCAreaBigredv2OutsideSe
+        22,-7: RMCAreaBigredv2OutsideSe
+        22,-6: RMCAreaBigredv2OutsideSe
+        22,-5: RMCAreaBigredv2OutsideSe
+        23,-4: RMCAreaBigredv2OutsideSe
+        23,-3: RMCAreaBigredv2OutsideSe
+        23,-2: RMCAreaBigredv2OutsideSe
+        23,-1: RMCAreaBigredv2OutsideSe
+        23,0: RMCAreaBigredv2OutsideSe
+        22,-4: RMCAreaBigredv2OutsideSe
+        22,-3: RMCAreaBigredv2OutsideSe
+        22,-2: RMCAreaBigredv2OutsideSe
+        22,-1: RMCAreaBigredv2OutsideSe
+        22,0: RMCAreaBigredv2OutsideSe
+        21,-4: RMCAreaBigredv2OutsideSe
+        21,-3: RMCAreaBigredv2OutsideSe
+        21,-2: RMCAreaBigredv2OutsideSe
+        21,-1: RMCAreaBigredv2OutsideSe
+        21,0: RMCAreaBigredv2OutsideSe
+        20,-4: RMCAreaBigredv2OutsideSe
+        20,-3: RMCAreaBigredv2OutsideSe
+        20,-2: RMCAreaBigredv2OutsideSe
+        20,-1: RMCAreaBigredv2OutsideSe
+        20,0: RMCAreaBigredv2OutsideSe
+        19,-4: RMCAreaBigredv2OutsideSe
+        19,-3: RMCAreaBigredv2OutsideSe
+        19,-2: RMCAreaBigredv2OutsideSe
+        19,-1: RMCAreaBigredv2OutsideSe
+        19,0: RMCAreaBigredv2OutsideSe
+        18,-4: RMCAreaBigredv2OutsideSe
+        18,-3: RMCAreaBigredv2OutsideSe
+        18,-2: RMCAreaBigredv2OutsideSe
+        18,-1: RMCAreaBigredv2OutsideSe
+        18,0: RMCAreaBigredv2OutsideSe
+        17,-4: RMCAreaBigredv2OutsideSe
+        17,-3: RMCAreaBigredv2OutsideSe
+        17,-2: RMCAreaBigredv2OutsideSe
+        17,-1: RMCAreaBigredv2OutsideSe
+        17,0: RMCAreaBigredv2OutsideSe
+        16,-4: RMCAreaBigredv2OutsideSe
+        16,-3: RMCAreaBigredv2OutsideSe
+        16,-2: RMCAreaBigredv2OutsideSe
+        16,-1: RMCAreaBigredv2OutsideSe
+        16,0: RMCAreaBigredv2OutsideSe
+        22,-16: RMCAreaBigredv2Caves
+        22,-17: RMCAreaBigredv2Caves
+        23,-18: RMCAreaBigredv2Caves
+        23,-17: RMCAreaBigredv2Caves
+        23,-16: RMCAreaBigredv2Caves
+        23,-15: RMCAreaBigredv2Caves
+        23,-14: RMCAreaBigredv2Caves
+        23,-13: RMCAreaBigredv2Caves
+        22,-13: RMCAreaBigredv2Caves
+        7,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-24: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-23: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-22: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-21: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-20: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-19: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-18: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-17: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-16: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-15: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-14: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-13: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        23,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        23,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        23,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        23,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        22,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        22,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        22,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        22,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        22,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        21,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        21,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        21,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        21,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        21,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        23,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        21,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        21,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        21,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        20,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        20,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        20,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        20,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        20,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        20,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        20,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        20,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        19,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        19,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        19,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        19,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        19,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        19,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        19,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        19,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        18,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        18,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        18,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        18,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        18,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        18,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        18,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        18,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        17,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        17,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        17,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        17,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        17,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        17,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        17,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        17,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-12: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-5: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-6: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-7: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-8: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-9: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-10: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-11: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        15,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        15,0: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        14,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        14,0: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        13,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        13,0: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        12,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        12,0: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        11,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        11,0: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        10,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        10,0: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        9,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        9,0: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        8,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        8,0: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        7,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        7,0: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        6,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        6,0: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        5,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        5,0: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        4,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        4,0: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        3,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        3,0: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        2,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        2,0: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        1,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        1,0: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-4: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-3: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-2: RMCAreaBigredv2OutsideFiltrationPlant
+        0,-1: RMCAreaBigredv2OutsideFiltrationPlant
+        0,0: RMCAreaBigredv2OutsideFiltrationPlant
+        16,-13: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-14: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-15: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-13: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-14: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-15: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-13: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-14: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-15: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-13: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-14: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-15: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-13: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-14: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-15: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-13: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-14: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-15: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-15: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-14: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-16: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-17: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-16: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-17: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-16: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-17: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-16: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-17: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-16: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-17: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-16: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-17: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-16: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-17: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-16: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-17: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-18: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        14,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        15,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        16,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        17,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        18,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        19,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        20,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        21,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        22,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+        23,-19: RMCAreaBigredv2OutsideFiltrationCaveCas
+        23,-20: RMCAreaBigredv2OutsideFiltrationCaveCas
+        23,-21: RMCAreaBigredv2OutsideFiltrationCaveCas
+        23,-22: RMCAreaBigredv2OutsideFiltrationCaveCas
+        23,-23: RMCAreaBigredv2OutsideFiltrationCaveCas
+        23,-24: RMCAreaBigredv2OutsideFiltrationCaveCas
+- proto: CMAirlockEngineerLockedColony
+  entities:
+  - uid: 112
+    components:
+    - type: MetaData
+      name: Atmospherics Condenser Storage
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,-0.5
+      parent: 1
+  - uid: 113
+    components:
+    - type: MetaData
+      name: Atmospherics Condenser Storage
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,-0.5
+      parent: 1
+  - uid: 114
+    components:
+    - type: MetaData
+      name: Filtration Facility
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,-7.5
+      parent: 1
+  - uid: 115
+    components:
+    - type: MetaData
+      name: Filtration Facility
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,-7.5
+      parent: 1
+  - uid: 116
+    components:
+    - type: MetaData
+      name: Atmospherics Condenser Storage
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,-2.5
+      parent: 1
+  - uid: 117
+    components:
+    - type: MetaData
+      name: Atmospherics Condenser Storage
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,-2.5
+      parent: 1
+  - uid: 118
+    components:
+    - type: MetaData
+      name: Filtration Facility
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,-7.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: MetaData
+      name: Filtration Facility
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,-9.5
+      parent: 1
+- proto: CMChair
+  entities:
+  - uid: 156
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,-1.5
+      parent: 1
+- proto: CMClosetFireFilled
+  entities:
+  - uid: 166
+    components:
+    - type: Transform
+      pos: 20.5,-6.5
+      parent: 1
+  - uid: 167
+    components:
+    - type: Transform
+      pos: 20.5,-5.5
+      parent: 1
+  - uid: 168
+    components:
+    - type: Transform
+      pos: 11.5,-3.5
+      parent: 1
+  - uid: 169
+    components:
+    - type: Transform
+      pos: 10.5,-3.5
+      parent: 1
+- proto: CMLightFixture
+  entities:
+  - uid: 176
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,-3.5
+      parent: 1
+  - uid: 177
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,-3.5
+      parent: 1
+  - uid: 178
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
+      parent: 1
+  - uid: 179
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 13.5,-3.5
+      parent: 1
+  - uid: 180
+    components:
+    - type: Transform
+      pos: 13.5,-6.5
+      parent: 1
+  - uid: 181
+    components:
+    - type: Transform
+      pos: 9.5,-6.5
+      parent: 1
+  - uid: 182
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,-8.5
+      parent: 1
+  - uid: 183
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,-8.5
+      parent: 1
+  - uid: 184
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 13.5,-8.5
+      parent: 1
+  - uid: 185
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 16.5,-5.5
+      parent: 1
+  - uid: 186
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 20.5,-5.5
+      parent: 1
+  - uid: 187
+    components:
+    - type: Transform
+      pos: 16.5,-10.5
+      parent: 1
+  - uid: 188
+    components:
+    - type: Transform
+      pos: 20.5,-10.5
+      parent: 1
+  - uid: 189
+    components:
+    - type: Transform
+      pos: 13.5,-10.5
+      parent: 1
+  - uid: 190
+    components:
+    - type: Transform
+      pos: 9.5,-13.5
+      parent: 1
+  - uid: 191
+    components:
+    - type: Transform
+      pos: 4.5,-13.5
+      parent: 1
+  - uid: 192
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,-15.5
+      parent: 1
+  - uid: 193
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,-15.5
+      parent: 1
+  - uid: 194
+    components:
+    - type: Transform
+      pos: 4.5,-22.5
+      parent: 1
+  - uid: 195
+    components:
+    - type: Transform
+      pos: 9.5,-22.5
+      parent: 1
+  - uid: 196
+    components:
+    - type: Transform
+      pos: 1.5,-22.5
+      parent: 1
+  - uid: 197
+    components:
+    - type: Transform
+      pos: 12.5,-22.5
+      parent: 1
+- proto: CMRack
+  entities:
+  - uid: 162
+    components:
+    - type: Transform
+      pos: 9.5,-6.5
+      parent: 1
+  - uid: 163
+    components:
+    - type: Transform
+      pos: 10.5,-6.5
+      parent: 1
+  - uid: 164
+    components:
+    - type: Transform
+      pos: 16.5,-7.5
+      parent: 1
+  - uid: 165
+    components:
+    - type: Transform
+      pos: 16.5,-6.5
+      parent: 1
+- proto: CMSemioticDistribution_pipes
+  entities:
+  - uid: 255
+    components:
+    - type: Transform
+      pos: 21.5,-7.5
+      parent: 1
+  - uid: 259
+    components:
+    - type: Transform
+      pos: 21.5,-11.5
+      parent: 1
+- proto: CMTable
+  entities:
+  - uid: 139
+    components:
+    - type: Transform
+      pos: 11.5,-10.5
+      parent: 1
+  - uid: 140
+    components:
+    - type: Transform
+      pos: 12.5,-10.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      pos: 13.5,-10.5
+      parent: 1
+  - uid: 142
+    components:
+    - type: Transform
+      pos: 14.5,-10.5
+      parent: 1
+  - uid: 143
+    components:
+    - type: Transform
+      pos: 14.5,-6.5
+      parent: 1
+  - uid: 144
+    components:
+    - type: Transform
+      pos: 14.5,-5.5
+      parent: 1
+  - uid: 145
+    components:
+    - type: Transform
+      pos: 14.5,-4.5
+      parent: 1
+  - uid: 146
+    components:
+    - type: Transform
+      pos: 14.5,-3.5
+      parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 13.5,-3.5
+      parent: 1
+  - uid: 148
+    components:
+    - type: Transform
+      pos: 12.5,-3.5
+      parent: 1
+  - uid: 149
+    components:
+    - type: Transform
+      pos: 3.5,-11.5
+      parent: 1
+  - uid: 150
+    components:
+    - type: Transform
+      pos: 3.5,-12.5
+      parent: 1
+  - uid: 151
+    components:
+    - type: Transform
+      pos: 3.5,-13.5
+      parent: 1
+  - uid: 152
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 153
+    components:
+    - type: Transform
+      pos: 10.5,0.5
+      parent: 1
+  - uid: 154
+    components:
+    - type: Transform
+      pos: 10.5,-0.5
+      parent: 1
+  - uid: 155
+    components:
+    - type: Transform
+      pos: 10.5,-1.5
+      parent: 1
+- proto: CMVentPump
+  entities:
+  - uid: 205
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-9.5
+      parent: 1
+  - uid: 206
+    components:
+    - type: Transform
+      pos: 10.5,-4.5
+      parent: 1
+  - uid: 207
+    components:
+    - type: Transform
+      pos: 18.5,-8.5
+      parent: 1
+  - uid: 208
+    components:
+    - type: Transform
+      pos: 7.5,-0.5
+      parent: 1
+- proto: CMWallSolaris
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 15.5,0.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 15.5,-0.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 15.5,-1.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 15.5,-2.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 15.5,-3.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 15.5,-4.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 15.5,-5.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 15.5,-6.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 15.5,-7.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 14.5,-7.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 13.5,-7.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 14.5,-2.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 13.5,-2.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 12.5,-2.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 11.5,-2.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 10.5,-2.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 9.5,-2.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 5.5,-2.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 4.5,-2.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 3.5,-2.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 1.5,-2.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 0.5,-2.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 0.5,-1.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 4.5,-1.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 0.5,-3.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 0.5,-4.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 0.5,-5.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 0.5,-6.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 0.5,-7.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 1.5,-7.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 3.5,-7.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 4.5,-7.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 5.5,-7.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 4.5,-6.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 4.5,-5.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 4.5,-4.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 4.5,-3.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 9.5,-7.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 10.5,-7.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 11.5,-7.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 10.5,-8.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 16.5,-11.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 10.5,-10.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: 13.5,-23.5
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 0.5,-23.5
+      parent: 1
+- proto: CMWallSolarisHull
+  entities:
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 10.5,-11.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 11.5,-11.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 12.5,-11.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 13.5,-11.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 14.5,-11.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 15.5,-11.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 15.5,-14.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 14.5,-14.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 13.5,-14.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 12.5,-14.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      pos: 11.5,-14.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 10.5,-14.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 2.5,-14.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 2.5,-13.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 2.5,-12.5
+      parent: 1
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 2.5,-11.5
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 1.5,-14.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 1.5,-13.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 1.5,-12.5
+      parent: 1
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 1.5,-11.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 0.5,-12.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 0.5,-11.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 1.5,-23.5
+      parent: 1
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 5.5,-23.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 6.5,-23.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 7.5,-23.5
+      parent: 1
+- proto: CMWallSolarisReinforced
+  entities:
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 4.5,-14.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 3.5,-14.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 9.5,-14.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 20.5,-4.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 21.5,-4.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 21.5,-5.5
+      parent: 1
+  - uid: 77
+    components:
+    - type: Transform
+      pos: 21.5,-6.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 16.5,-4.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 20.5,-11.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 21.5,-11.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 22.5,-11.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 23.5,-11.5
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 23.5,-10.5
+      parent: 1
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 23.5,-9.5
+      parent: 1
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 23.5,-8.5
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 23.5,-7.5
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 22.5,-7.5
+      parent: 1
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 21.5,-7.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 8.5,-23.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 9.5,-23.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 10.5,-23.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 11.5,-23.5
+      parent: 1
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 12.5,-23.5
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 2.5,-23.5
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 3.5,-23.5
+      parent: 1
+  - uid: 102
+    components:
+    - type: Transform
+      pos: 4.5,-23.5
+      parent: 1
+- proto: CMWallSolarisRock
+  entities:
+  - uid: 103
+    components:
+    - type: Transform
+      pos: 22.5,-12.5
+      parent: 1
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 23.5,-12.5
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      pos: 23.5,-13.5
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 23.5,-14.5
+      parent: 1
+  - uid: 107
+    components:
+    - type: Transform
+      pos: 23.5,-15.5
+      parent: 1
+  - uid: 108
+    components:
+    - type: Transform
+      pos: 23.5,-16.5
+      parent: 1
+  - uid: 109
+    components:
+    - type: Transform
+      pos: 22.5,-15.5
+      parent: 1
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 22.5,-16.5
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      pos: 23.5,-17.5
+      parent: 1
+- proto: CMWardrobeYellow
+  entities:
+  - uid: 173
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 174
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 175
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+- proto: CMWarningCone
+  entities:
+  - uid: 263
+    components:
+    - type: Transform
+      pos: 14.5,-20.5
+      parent: 1
+  - uid: 264
+    components:
+    - type: Transform
+      pos: 14.5,-17.5
+      parent: 1
+  - uid: 265
+    components:
+    - type: Transform
+      pos: 16.5,-16.5
+      parent: 1
+  - uid: 266
+    components:
+    - type: Transform
+      pos: 20.5,-16.5
+      parent: 1
+- proto: CMWindowSolaris
+  entities:
+  - uid: 120
+    components:
+    - type: Transform
+      pos: 7.5,-7.5
+      parent: 1
+  - uid: 121
+    components:
+    - type: Transform
+      pos: 8.5,-7.5
+      parent: 1
+  - uid: 122
+    components:
+    - type: Transform
+      pos: 7.5,-2.5
+      parent: 1
+  - uid: 123
+    components:
+    - type: Transform
+      pos: 11.5,-1.5
+      parent: 1
+  - uid: 124
+    components:
+    - type: Transform
+      pos: 11.5,-0.5
+      parent: 1
+  - uid: 125
+    components:
+    - type: Transform
+      pos: 11.5,0.5
+      parent: 1
+  - uid: 130
+    components:
+    - type: Transform
+      pos: 0.5,-8.5
+      parent: 1
+  - uid: 131
+    components:
+    - type: Transform
+      pos: 0.5,-9.5
+      parent: 1
+  - uid: 133
+    components:
+    - type: Transform
+      pos: 21.5,-8.5
+      parent: 1
+  - uid: 134
+    components:
+    - type: Transform
+      pos: 21.5,-9.5
+      parent: 1
+  - uid: 135
+    components:
+    - type: Transform
+      pos: 21.5,-10.5
+      parent: 1
+- proto: CMWindowSolarisHull
+  entities:
+  - uid: 126
+    components:
+    - type: Transform
+      pos: 10.5,-12.5
+      parent: 1
+  - uid: 127
+    components:
+    - type: Transform
+      pos: 10.5,-13.5
+      parent: 1
+  - uid: 128
+    components:
+    - type: Transform
+      pos: 15.5,-13.5
+      parent: 1
+  - uid: 129
+    components:
+    - type: Transform
+      pos: 15.5,-12.5
+      parent: 1
+- proto: GasPipeBend
+  entities:
+  - uid: 209
+    components:
+    - type: Transform
+      pos: 6.5,-0.5
+      parent: 1
+  - uid: 210
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,-1.5
+      parent: 1
+  - uid: 211
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,-5.5
+      parent: 1
+  - uid: 212
+    components:
+    - type: Transform
+      pos: 12.5,-5.5
+      parent: 1
+  - uid: 213
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 18.5,-9.5
+      parent: 1
+- proto: GasPipeStraight
+  entities:
+  - uid: 218
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,-0.5
+      parent: 1
+  - uid: 219
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,-0.5
+      parent: 1
+  - uid: 220
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,-0.5
+      parent: 1
+  - uid: 221
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-0.5
+      parent: 1
+  - uid: 222
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,-0.5
+      parent: 1
+  - uid: 223
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,-0.5
+      parent: 1
+  - uid: 224
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,-0.5
+      parent: 1
+  - uid: 225
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,0.5
+      parent: 1
+  - uid: 226
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,-3.5
+      parent: 1
+  - uid: 227
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,-4.5
+      parent: 1
+  - uid: 228
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,-2.5
+      parent: 1
+  - uid: 229
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,-8.5
+      parent: 1
+  - uid: 230
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,-7.5
+      parent: 1
+  - uid: 231
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,-6.5
+      parent: 1
+  - uid: 232
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.5,-9.5
+      parent: 1
+  - uid: 233
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,-9.5
+      parent: 1
+  - uid: 234
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,-9.5
+      parent: 1
+  - uid: 235
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,-9.5
+      parent: 1
+  - uid: 236
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,-9.5
+      parent: 1
+  - uid: 237
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,-9.5
+      parent: 1
+  - uid: 238
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,-9.5
+      parent: 1
+  - uid: 239
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,-9.5
+      parent: 1
+  - uid: 240
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,-9.5
+      parent: 1
+  - uid: 241
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,-5.5
+      parent: 1
+  - uid: 242
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,-5.5
+      parent: 1
+  - uid: 243
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,-9.5
+      parent: 1
+  - uid: 244
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 14.5,-9.5
+      parent: 1
+  - uid: 245
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,-9.5
+      parent: 1
+  - uid: 246
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 16.5,-9.5
+      parent: 1
+  - uid: 247
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,-9.5
+      parent: 1
+- proto: GasPipeTJunction
+  entities:
+  - uid: 214
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,-9.5
+      parent: 1
+  - uid: 215
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,-5.5
+      parent: 1
+  - uid: 216
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,-1.5
+      parent: 1
+  - uid: 217
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,-1.5
+      parent: 1
+- proto: RMCContainerRedLeft
+  entities:
+  - uid: 260
+    components:
+    - type: Transform
+      pos: 5.5,-21.5
+      parent: 1
+- proto: RMCContainerRedMiddle
+  entities:
+  - uid: 261
+    components:
+    - type: Transform
+      pos: 6.5,-21.5
+      parent: 1
+- proto: RMCContainerRedRight
+  entities:
+  - uid: 262
+    components:
+    - type: Transform
+      pos: 7.5,-21.5
+      parent: 1
+- proto: RMCCrateLarge
+  entities:
+  - uid: 171
+    components:
+    - type: Transform
+      pos: 9.5,-13.5
+      parent: 1
+  - uid: 172
+    components:
+    - type: Transform
+      pos: 9.5,-12.5
+      parent: 1
+- proto: RMCFireAxe
+  entities:
+  - uid: 198
+    components:
+    - type: Transform
+      pos: 1.5,-10.5
+      parent: 1
+- proto: RMCLighter
+  entities:
+  - uid: 256
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+- proto: RMCPickaxe
+  entities:
+  - uid: 253
+    components:
+    - type: Transform
+      pos: 16.5,-7.5
+      parent: 1
+  - uid: 254
+    components:
+    - type: Transform
+      pos: 16.5,-6.5
+      parent: 1
+  - uid: 258
+    components:
+    - type: Transform
+      pos: 9.5,-18.5
+      parent: 1
+- proto: RMCPodDoorButton
+  entities:
+  - uid: 199
+    components:
+    - type: Transform
+      pos: 3.5,-13.5
+      parent: 1
+    - type: RMCDoorButton
+      id: FiltrationShutters
+    - type: Fixtures
+      fixtures: {}
+  - uid: 200
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,-14.5
+      parent: 1
+    - type: RMCDoorButton
+      id: FiltrationShutters
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCShutterAlmayer
+  entities:
+  - uid: 201
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: FiltrationShutters
+  - uid: 202
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: FiltrationShutters
+  - uid: 203
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: FiltrationShutters
+  - uid: 204
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: FiltrationShutters
+- proto: RMCSpawnerRandomToolbox
+  entities:
+  - uid: 249
+    components:
+    - type: Transform
+      pos: 14.5,-4.5
+      parent: 1
+  - uid: 250
+    components:
+    - type: Transform
+      pos: 13.5,-3.5
+      parent: 1
+- proto: RMCSpawnerRandomTools
+  entities:
+  - uid: 248
+    components:
+    - type: Transform
+      pos: 14.5,-3.5
+      parent: 1
+  - uid: 251
+    components:
+    - type: Transform
+      pos: 10.5,-6.5
+      parent: 1
+  - uid: 252
+    components:
+    - type: Transform
+      pos: 9.5,-6.5
+      parent: 1
+- proto: RMCTablePartTan
+  entities:
+  - uid: 136
+    components:
+    - type: Transform
+      pos: 16.5,-10.5
+      parent: 1
+  - uid: 137
+    components:
+    - type: Transform
+      pos: 17.5,-9.5
+      parent: 1
+  - uid: 138
+    components:
+    - type: Transform
+      pos: 19.5,-10.5
+      parent: 1
+- proto: RMCTankReagentFuel
+  entities:
+  - uid: 157
+    components:
+    - type: Transform
+      pos: 1.5,-6.5
+      parent: 1
+  - uid: 158
+    components:
+    - type: Transform
+      pos: 1.5,-5.5
+      parent: 1
+  - uid: 159
+    components:
+    - type: Transform
+      pos: 1.5,-3.5
+      parent: 1
+  - uid: 170
+    components:
+    - type: Transform
+      pos: 9.5,-11.5
+      parent: 1
+  - uid: 257
+    components:
+    - type: Transform
+      pos: 8.5,-20.5
+      parent: 1
+- proto: RMCTankReagentWater
+  entities:
+  - uid: 160
+    components:
+    - type: Transform
+      pos: 3.5,-4.5
+      parent: 1
+  - uid: 161
+    components:
+    - type: Transform
+      pos: 1.5,-1.5
+      parent: 1
+- proto: RMCWindowFrameSolaris
+  entities:
+  - uid: 132
+    components:
+    - type: Transform
+      pos: 0.5,-10.5
+      parent: 1
+...

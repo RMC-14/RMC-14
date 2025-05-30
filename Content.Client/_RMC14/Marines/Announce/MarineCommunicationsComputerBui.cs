@@ -1,10 +1,10 @@
-﻿using Content.Shared._RMC14.Marines.Announce;
+﻿using Content.Client.UserInterface.Controls;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Marines.Announce;
@@ -17,6 +17,7 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
     protected override void Open()
     {
+        base.Open();
         if (_window != null)
             return;
 
@@ -71,7 +72,11 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
             foreach (var zone in s.LandingZones)
             {
-                var button = new Button { Text = zone.Name };
+                var button = new ConfirmButton
+                {
+                    Text = zone.Name,
+                    StyleClasses = { "OpenBoth" },
+                };
                 button.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsDesignatePrimaryLZMsg(zone.Id));
                 _window.LandingZonesContainer.AddChild(button);
             }

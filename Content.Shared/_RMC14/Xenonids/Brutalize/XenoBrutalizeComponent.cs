@@ -1,4 +1,4 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -25,10 +25,4 @@ public sealed partial class XenoBrutalizeComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan AddtionalCooldownReductions = TimeSpan.FromSeconds(0.5);
-
-    [DataField, AutoNetworkedField]
-    public string CummulativeCooldownAction = "ActionXenoCharge";
-
-    [DataField, AutoNetworkedField]
-    public string BaseCooldownAction = "ActionXenoDefensiveShield";
 }

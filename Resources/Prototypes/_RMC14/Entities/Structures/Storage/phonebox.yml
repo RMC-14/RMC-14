@@ -1,0 +1,162 @@
+# Base
+
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCPhoneboxBase
+  name: phonebox
+  description: It's a phonebox, outdated but realiable technology. These are used to communicate throughout the colony and connected colonies without interference. As reliable as they are, it seems the line is down.
+  abstract: true
+  components:
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/Storage/Closets/phonebox_off.rsi
+    offset: 0.15,0.5
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: base
+    stateDoorOpen: open
+    stateDoorClosed: closed
+  - type: ItemSlots
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: EntityStorage
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+      paper_label: !type:ContainerSlot
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Anchorable
+    flags:
+    - None
+  - type: PlaceableSurface
+    placeCentered: true
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+
+# Broken Base
+
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCPhoneboxBrokenBase
+  name: wrecked phonebox
+  description: It's a phonebox, outdated but realiable technology. These are used to communicate throughout the colony and connected colonies without interference. It seems it's completely wrecked, covered in blood and the glass is smashed. Hiding inside would be pointless.
+  abstract: true
+  components:
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/Storage/Closets/phonebox_off.rsi
+    offset: 0.15,0.5
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Anchorable
+    flags:
+    - None
+  - type: PlaceableSurface
+    placeCentered: true
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+
+# Phone Box
+
+- type: entity
+  parent: RMCPhoneboxBase
+  id: RMCPhoneboxOff
+  suffix: Off
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/phonebox_off.rsi
+
+- type: entity
+  parent: RMCPhoneboxBase
+  id: RMCPhoneboxOn
+  suffix: On
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/phonebox_on.rsi
+
+# Broken Phone Box
+
+- type: entity
+  parent: RMCPhoneboxBrokenBase
+  id: RMCPhoneboxBroken
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/broken_phonebox.rsi
+    state: phonebox_off_broken
+
+- type: entity
+  parent: RMCPhoneboxBrokenBase
+  id: RMCPhoneboxBrokenBloody
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/broken_phonebox.rsi
+    state: phonebox_bloody_off_broken

@@ -1,0 +1,19 @@
+﻿- type: entity
+  id: FactionSPP
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - SPP
+    - SPPCommand
+    - SPPEngi
+    - SPPMed
+    - SPPCCT
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDSPP
+  description: A soldier dog tag.
+  components:
+  - type: ItemIFF
+    faction: FactionSPP

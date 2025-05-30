@@ -6,7 +6,8 @@ namespace Content.Shared._RMC14.Xenonids.Deathcloud;
 
 public sealed class XenoDeathcloudSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!; 
+    [Dependency] private readonly INetManager _net = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoDeathcloudComponent, MobStateChangedEvent>(OnStateChanged);
@@ -21,5 +22,6 @@ public sealed class XenoDeathcloudSystem : EntitySystem
             return;
 
         SpawnAtPosition(xeno.Comp.Spawn, xeno.Owner.ToCoordinates());
+        QueueDel(xeno);
     }
 }

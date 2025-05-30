@@ -16,7 +16,6 @@ using Robust.Client.UserInterface;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Client.Hands.Systems
 {
@@ -156,7 +155,7 @@ namespace Content.Client.Hands.Systems
         /// <summary>
         ///     Called when a user clicked on their hands GUI
         /// </summary>
-        public void UIHandClick(HandsComponent hands, string handName)
+        public void UIHandClick(HandsComponent hands, string handName, bool switchHand = true)
         {
             if (!hands.Hands.TryGetValue(handName, out var pressedHand))
                 return;
@@ -175,7 +174,7 @@ namespace Content.Client.Hands.Systems
                 return;
             }
 
-            if (pressedHand != hands.ActiveHand && pressedEntity == null)
+            if (switchHand && pressedHand != hands.ActiveHand && pressedEntity == null)
             {
                 // change active hand
                 EntityManager.RaisePredictiveEvent(new RequestSetHandEvent(handName));
@@ -349,7 +348,12 @@ namespace Content.Client.Hands.Systems
                 sprite.LayerSetData(index, layerData);
 
                 //Add displacement maps
-                if (handComp.HandDisplacement is not null)
+                if (hand.Location == HandLocation.Left && handComp.LeftHandDisplacement is not null)
+                    _displacement.TryAddDisplacement(handComp.LeftHandDisplacement, sprite, index, key, revealedLayers);
+                else if (hand.Location == HandLocation.Right && handComp.RightHandDisplacement is not null)
+                    _displacement.TryAddDisplacement(handComp.RightHandDisplacement, sprite, index, key, revealedLayers);
+                //Fallback to default displacement map
+                else if (handComp.HandDisplacement is not null)
                     _displacement.TryAddDisplacement(handComp.HandDisplacement, sprite, index, key, revealedLayers);
             }
 

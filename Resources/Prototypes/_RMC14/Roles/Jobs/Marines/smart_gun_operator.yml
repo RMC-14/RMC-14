@@ -25,12 +25,9 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - SmartGunOperator
-  overwatchSortPriority: -2
+  overwatchSortPriority: -3
   overwatchShowName: true
   overwatchRoleName: Smart Gun Operator
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: smartgunner
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -46,6 +43,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-gun-operator
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: smartgunner
 
 - type: startingGear
   id: CMGearSmartGunOperator
@@ -75,10 +76,7 @@
   - type: SpawnPoint
     job_id: CMSmartGunOperator
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: smart_gun_operator
+    state: smartgunner_spawn
 
 - type: entity
   parent: CMSpawnPointSmartGunOperator
@@ -88,6 +86,8 @@
   - type: SquadSpawner
     squad: SquadAlpha
     role: CMSmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointSmartGunOperator
@@ -97,6 +97,8 @@
   - type: SquadSpawner
     squad: SquadBravo
     role: CMSmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointSmartGunOperator
@@ -106,6 +108,8 @@
   - type: SquadSpawner
     squad: SquadCharlie
     role: CMSmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointSmartGunOperator
@@ -115,4 +119,22 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMSmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn_delta
 
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCSmartGunOperator
+  components:
+  - type: GhostRole
+    name: cm-job-name-smart-gun-operator
+    description: cm-job-description-smart-gun-operator
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMSmartGunOperator
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 1

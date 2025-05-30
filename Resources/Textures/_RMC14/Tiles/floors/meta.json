@@ -17,6 +17,12 @@
       "name": "plating"
     },
     {
+      "name": "carpet"
+    },
+	{ 
+	  "name": "carpet_singular"
+	},
+    {
       "name": "dark"
     },
     {

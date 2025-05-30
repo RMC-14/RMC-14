@@ -159,7 +159,7 @@
 
 - type: stack
   id: RMCWood
-  name: wood plank
+  name: wooden plank
   icon: { sprite: _RMC14/Objects/Materials/Sheets/wood.rsi, state: wood }
   spawn: RMCPlankWood
   maxCount: 50
@@ -167,7 +167,7 @@
 - type: entity
   parent: SheetOtherBase
   id: RMCPlankWood
-  name: wood plank
+  name: wooden plank
   description: One can only guess that this is a bunch of wood.
   suffix: Full
   components:
@@ -222,3 +222,11 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  parent: RMCPlankWood
+  id: RMCPlankWood2
+  suffix: Single
+  components:
+  - type: Stack
+    count: 2

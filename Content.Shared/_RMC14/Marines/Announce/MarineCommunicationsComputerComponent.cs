@@ -16,6 +16,12 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
     public TimeSpan? LastAnnouncement;
 
     [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> AnnounceSkill = "RMCSkillLeadership";
+
+    [DataField, AutoNetworkedField]
+    public int AnnounceSkillLevel = 1;
+
+    [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> OverwatchSkill = "RMCSkillOverwatch";
 
     [DataField, AutoNetworkedField]
@@ -26,6 +32,9 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanGiveMedals;
+
+    [DataField, AutoNetworkedField]
+    public string? AnnounceName;
 
     /*
     [DataField, AutoNetworkedField]

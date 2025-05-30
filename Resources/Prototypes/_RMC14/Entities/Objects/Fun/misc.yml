@@ -1,0 +1,19 @@
+- type: entity
+  parent: RMCWhistle
+  id: RMCDebugSoundDevice
+  name: unknown device
+  description: "???"
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/declaration_of_war.rsi
+    state: declarator
+    color: Blue
+  - type: RMCSelectableSounds
+    sounds:
+      rmc-sound-select-whistle: # Loc ID
+        collection: TrenchWhistle
+      rmc-sound-select-crowbar:
+        path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
+      rmc-sound-select-detector:
+        path: /Audio/_RMC14/Effects/motion_detector.ogg

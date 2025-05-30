@@ -18,16 +18,10 @@
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: ce
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -49,6 +43,15 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-chief-engineer
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: ce
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearChiefEngineer
@@ -69,11 +72,18 @@
   - type: SpawnPoint
     job_id: CMChiefEngineer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_engineer
+    state: ce_spawn
 
 - type: playTimeTracker
   id: CMJobChiefEngineer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCE
+  name: The CE
+  description: The Chief Engineer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_engineer

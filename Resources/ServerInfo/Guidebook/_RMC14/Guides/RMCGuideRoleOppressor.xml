@@ -1,0 +1,26 @@
+<Document>
+  #Oppressor, Tier 3
+  <GuideEntityEmbed Entity="RMCXenoPraetorianOppressor"/>
+  ##Playing as an Oppressor
+  You are now specialized in being the Queen of Fishing. Firstly let's see what's changed from your Base form. You trade a portion of your speed, a bit of slash damage, slight loss in armor, and acid abilities to become a bulwark of the Queen that gains stun resistance from grenades. Your slashes deal increased damage to prone targets, and you gain a lash that knocks over and flings opponents in front of you as well as two abilities that can pull in hosts.
+
+  Oppressor is unique in its playstyle, specializing in capturing hosts from afar and keeping them there to them to be captured.
+
+  Your dislocation abilities can become very lethal when used in the right way. The usual combo is to first abduct, dislocate them, then walking behind them to tail lash them towards the hive, and tackling if it's safe to do so.
+
+  Remember to use fire to your advantage by hooking hosts into them, by either standing behind the fire and abducting or tail seizing.
+
+  ##Abilities:
+  - [bold][color=green]PASSIVE[/color][/bold]: Your slashes deal additional damage to prone/knock targets.
+  - [bold]Abduct[/bold]: Landing this long ranged ability on:
+  - 1 person will drag them in front of you and slow them.
+  - 2 people will drag them in front of you, slow them, daze them and briefly root them.
+  - 3 or more people will drag them in front of you, slow them and briefly stun them.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoAbduct"/>
+  - [bold]Dislocate[/bold]: A powerful punch, similar to the warrior's punch. Deals armor piercing damage, more if your enemy is slowed. Will also root slowed targets. Reduces other ability cooldowns.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoDislocate"/>
+  - [bold]Tail Lash[/bold]: Knock hosts back in a 2x3 area in front of you and slow them. Take note that this ability has a wind up.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailLash"/>
+  - [bold]Tail Seize[/bold]: The Oppressor has a unique tail stab, instead called Tail Seize. It has a range of 3 tiles - however, it deals no damage, instead pulling the target in towards you and slowing them upon their arrival.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailSeize"/>
+</Document>

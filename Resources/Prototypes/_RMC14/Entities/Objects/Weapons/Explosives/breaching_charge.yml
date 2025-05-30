@@ -1,6 +1,3 @@
-- type: Tag
-  id: RMCExplosiveBreachingCharge
-
 - type: entity
   parent: BaseItem
   id: RMCExplosiveBreachingCharge
@@ -40,7 +37,34 @@
         base:
           Primed: { state: active }
           Unprimed: { state: icon }
-  - type: RMCExplosiveDeleteWalls
+  - type: RMCExplosiveDelete
   - type: Tag
     tags:
     - RMCExplosiveBreachingCharge
+
+- type: entity
+  parent: RMCExplosiveBreachingCharge
+  id: RMCExplosivePlastic
+  name: plastic explosives
+  description: Used to put holes in specific areas without too much extra hole.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
+  - type: Explosive
+    totalIntensity: 350
+    intensitySlope: 6
+    maxIntensity: 20
+  - type: Sticky
+    stickDelay: 5
+    whitelist:
+      components:
+      - RMCWallExplosionDeletable
+      - XenoTunnel
+  - type: RMCExplosiveDelete
+    delay: 10
+    whitelist:
+      components:
+      - XenoTunnel
+
+- type: Tag
+  id: RMCExplosiveBreachingCharge

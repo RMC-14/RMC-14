@@ -29,14 +29,14 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -344,7 +344,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        if (_rmcMap.HasAnchoredEntityEnumerator<BarricadeComponent>(coordinates, facing: direction.AsFlag()))
+        if (direction != Direction.Invalid && _rmcMap.HasAnchoredEntityEnumerator<BarricadeComponent>(coordinates, facing: direction.AsFlag()))
         {
             popup = Loc.GetString("rmc-construction-not-barricade-clear");
             return false;

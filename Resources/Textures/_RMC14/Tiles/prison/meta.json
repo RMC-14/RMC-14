@@ -221,6 +221,18 @@
     },
     {
       "name": "platingdmg3"
+    },
+    {
+      "name": "ramptop_north"
+    },
+    {
+      "name": "ramptop_east"
+    },
+    {
+      "name": "ramptop_south"
+    },
+    {
+      "name": "ramptop_west"
     }
   ]
 }

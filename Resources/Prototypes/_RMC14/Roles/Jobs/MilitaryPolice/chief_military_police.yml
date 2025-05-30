@@ -24,16 +24,10 @@
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cmp
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_mp
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -57,6 +51,12 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-mp
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: cmp
 
 - type: startingGear
   id: CMGearChiefMP
@@ -81,11 +81,18 @@
   - type: SpawnPoint
     job_id: CMChiefMP
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_military_police
+    state: cmp_spawn
 
 - type: playTimeTracker
   id: CMJobChiefMP
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCMP
+  name: The Chief MP
+  description: The Chief of Military Police.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_military_police

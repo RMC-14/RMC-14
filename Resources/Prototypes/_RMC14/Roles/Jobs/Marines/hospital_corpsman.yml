@@ -28,11 +28,8 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - HospitalCorpsman
-  overwatchSortPriority: -1
+  overwatchSortPriority: -2
   overwatchRoleName: Hospital Corpsmen
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: medic
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -49,6 +46,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-hospital-corpsman
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: medic
 
 - type: startingGear
   id: CMGearHospitalCorpsman
@@ -79,10 +80,7 @@
   - type: SpawnPoint
     job_id: CMHospitalCorpsman
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: hospital_corpsman
+    state: medic_spawn
 
 - type: entity
   parent: CMSpawnPointHospitalCorpsman
@@ -92,6 +90,8 @@
   - type: SquadSpawner
     squad: SquadAlpha
     role: CMHospitalCorpsman
+  - type: Sprite
+    state: medic_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointHospitalCorpsman
@@ -101,6 +101,8 @@
   - type: SquadSpawner
     squad: SquadBravo
     role: CMHospitalCorpsman
+  - type: Sprite
+    state: medic_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointHospitalCorpsman
@@ -110,6 +112,8 @@
   - type: SquadSpawner
     squad: SquadCharlie
     role: CMHospitalCorpsman
+  - type: Sprite
+    state: medic_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointHospitalCorpsman
@@ -119,5 +123,22 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMHospitalCorpsman
+  - type: Sprite
+    state: medic_spawn_delta
 
-
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCHospitalCorpsman
+  components:
+  - type: GhostRole
+    name: cm-job-name-hospital-corpsman
+    description: cm-job-description-hospital-corpsman
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMHospitalCorpsman
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 1

@@ -50,6 +50,10 @@ public sealed class PryingSystem : EntitySystem
         if (!TryComp<PryingComponent>(args.User, out _))
             return;
 
+        // RMC14
+        if (!CanPry(uid, args.User, out _))
+            return;
+
         args.Verbs.Add(new AlternativeVerb()
         {
             Text = Loc.GetString("door-pry"),
@@ -143,9 +147,10 @@ public sealed class PryingSystem : EntitySystem
         RaiseLocalEvent(target, ref modEv);
         var doAfterArgs = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(modEv.BaseTime * modEv.PryTimeModifier / toolModifier), new DoorPryDoAfterEvent(), target, target, tool)
         {
-            BreakOnDamage = true,
+            BreakOnDamage = false,
             BreakOnMove = true,
             NeedHand = tool != user,
+            ForceVisible = tool == null,
         };
 
         if (tool != user && tool != null)

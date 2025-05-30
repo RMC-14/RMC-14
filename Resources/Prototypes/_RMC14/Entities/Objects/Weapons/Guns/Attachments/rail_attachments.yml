@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCAttachableBase
   id: RMCRailAttachmentBase
@@ -27,6 +27,7 @@
     addPrefix: false
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour
@@ -107,7 +108,7 @@
 
 - type: entity
   parent: RMCRailAttachmentBase
-  id: RMCAttachmentS5RedDotSight
+  id: RMCAttachmentS5RedDotSight # reddot
   name: S5 red-dot sight
   description: An all-weather collimator sight, designated as the AN/PVQ-64 Dot Sight. Equipped with a sunshade to increase clarity in bright conditions and resist weathering. Compact and efficient, a marvel of military design, until you realize that this is actually just an off-the-shelf design that got a military designation slapped on.
   components:
@@ -129,7 +130,7 @@
 
 - type: entity
   parent: RMCRailAttachmentBase
-  id: RMCAttachmentS6ReflexSight
+  id: RMCAttachmentS6ReflexSight # reflex
   name: S6 reflex sight
   description: An AEGIS S6 reflex sight. A zero-magnification alternative to iron sights with a more open optic window when compared to the S5 red-dot. Helps to reduce scatter during automated fire.
   components:
@@ -251,7 +252,7 @@
 
 - type: entity
   parent: RMCAttachmentScopeBase
-  id: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentS42xTelescopicMiniscope # mini
   name: S4 2x telescopic mini-scope
   description: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
   components:
@@ -296,6 +297,19 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05 #TODO: Add flare gun modifiers when it's implemented.
+
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentHuntingScope
+  name: 2x hunting mini-scope
+  description: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
+  components:
+  - type: Sprite
+    state: huntingscope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentHuntingScope
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
@@ -427,6 +441,25 @@
       doAfter: 0
 
 - type: entity
+  parent: RMCM96SIntegratedScope
+  id: RMCXM43E1IntegratedScope
+  name: XM43E1 integrated scope
+  description: This isn't supposed to come off the gun. How did you get it?
+  components:
+  - type: Sprite
+    state: xm43e1_scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCXM43E1IntegratedScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: xm43e1_scope
+    actionName: Look through the XM43E1's Integrated Scope
+    actionDesc: Lets you see further.
+
+- type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
@@ -519,4 +552,10 @@
   id: RMCM96SIntegratedScope
 
 - type: Tag
+  id: RMCXM43E1IntegratedScope
+
+- type: Tag
   id: RMCAttachmentXS-9
+
+- type: Tag
+  id: RMCAttachmentHuntingScope

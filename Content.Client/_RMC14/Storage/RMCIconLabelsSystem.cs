@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Text;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.IconLabel;
 using Robust.Client.Graphics;
@@ -33,11 +34,13 @@ public sealed class RMCIconLabelsSystem : SharedRMCIconLabelSystem
 
         var scale = 2 * uiScale;
         if (iconLabel.LabelTextLocId is null ||
-            !Loc.TryGetString(iconLabel.LabelTextLocId, out var msg, iconLabel.LabelTextParams.ToArray()) ||
-            msg.Length > iconLabel.LabelMaxSize)
+            !Loc.TryGetString(iconLabel.LabelTextLocId, out var msg, iconLabel.LabelTextParams.ToArray()))
         {
             return;
         }
+
+        if (msg.Length > iconLabel.LabelMaxSize)
+            msg = msg[..iconLabel.LabelMaxSize];
 
         Color.TryFromName(iconLabel.TextColor, out var textColor);
 
@@ -51,7 +54,7 @@ public sealed class RMCIconLabelsSystem : SharedRMCIconLabelSystem
         foreach (var chr in charArray)
         {
             iconLabelPosition.X += sep;
-            sep = _font.DrawChar(handle, new System.Text.Rune(chr), iconLabelPosition, textSize * scale, textColor);
+            sep = _font.DrawChar(handle, new Rune(chr), iconLabelPosition, textSize * scale, textColor);
         }
     }
 }
