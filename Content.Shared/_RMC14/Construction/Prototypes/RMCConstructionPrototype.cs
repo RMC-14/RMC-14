@@ -44,6 +44,9 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     [DataField]
     public EntProtoId<SkillDefinitionComponent>? Skill;
 
+    [DataField]
+    public EntProtoId<SkillDefinitionComponent> DelaySkill = "RMCSkillConstruction";
+
     [AlwaysPushInheritance]
     [DataField]
     public int RequiredSkillLevel = 1;

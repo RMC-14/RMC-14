@@ -85,10 +85,10 @@
   id: RMCWallGirderBuild
   name: wall girder
   prototype: CMGirder
+  restrictedCollisionGroup: MidImpassable
   noRotate: true
   doAfterTime: 5
   materialCost: 2
-  restrictedCollisionGroup: MidImpassable
   skill: RMCSkillConstruction
   requiredSkillLevel: 2
 
@@ -96,10 +96,10 @@
   id: RMCWindowFrameBuild
   name: window frame
   prototype: RMCWindowFrameAlmayer
+  restrictedCollisionGroup: MidImpassable
   noRotate: true
   doAfterTime: 5
   materialCost: 5
-  restrictedCollisionGroup: MidImpassable
   skill: RMCSkillConstruction
   requiredSkillLevel: 2
 

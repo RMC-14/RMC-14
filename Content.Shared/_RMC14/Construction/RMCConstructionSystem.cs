@@ -133,7 +133,8 @@ public sealed class RMCConstructionSystem : EntitySystem
             direction
         );
 
-        var delay = proto.Skill != null ? proto.DoAfterTime * _skills.GetSkillDelayMultiplier(user, proto.Skill.Value) : proto.DoAfterTime;
+        var skillMultiplier = _skills.HasSkill(user, proto.DelaySkill, 2) ? 1 : 2;
+        var delay = proto.DoAfterTime * skillMultiplier;
         var doAfterTime = Math.Max(delay.TotalSeconds, proto.DoAfterTimeMin.TotalSeconds);
 
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(doAfterTime), ev, ent, ent)
