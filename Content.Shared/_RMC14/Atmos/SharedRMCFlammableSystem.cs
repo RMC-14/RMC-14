@@ -484,7 +484,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             if (!spawned.Add(target)) continue;
             var nextRange = SpawnFire(target, spawn, chain, range, intensity, duration, out var cont, exclusionZones);
             if (nextRange == 0 || cont) continue;
-            Timer.Spawn(TimeSpan.FromMilliseconds(10), () =>
+            Timer.Spawn(TimeSpan.FromMilliseconds(50), () =>
             {
                 try { SpawnFires(spawn, target, nextRange, chain, intensity, duration, spawned, exclusionZones); }
                 catch (Exception e) { Log.Error($"Error occurred spawning fires:\n{e}"); }
@@ -552,10 +552,13 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return false;
     }
 
+    /// <summary>
+    ///     Spawns fire in a cone shape in the direction the entity is facing.
+    /// </summary>
     private void SpawnFireCone(Entity<DirectionalTileFireOnTriggerComponent> ent, EntityCoordinates center, int? intensity = null, int? duration = null)
     {
-        var chain = _onCollide.SpawnChain();
         if (_net.IsClient) return;
+        var chain = _onCollide.SpawnChain();
         ent.Comp.DiagonalRange = (int)Math.Floor((double)ent.Comp.Range / 2);
         Dirty(ent);
         var initialShot = !ent.Comp.InitialSpread;
