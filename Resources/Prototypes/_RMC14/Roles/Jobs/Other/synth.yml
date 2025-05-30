@@ -99,6 +99,8 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+      - type: RMCLeapProtection
+        stunDuration: 3
   hidden: true
 
 - type: startingGear
