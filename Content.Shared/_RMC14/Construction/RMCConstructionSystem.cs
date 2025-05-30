@@ -13,7 +13,6 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
-using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -38,7 +37,6 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -84,23 +82,19 @@ public sealed class RMCConstructionSystem : EntitySystem
 
     public bool Build(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount)
     {
+        if (_net.IsClient)
+            return false;
+
         if (!_prototype.TryIndex<RMCConstructionPrototype>(protoID, out var proto))
             return false;
 
         if (!TryComp(user, out TransformComponent? transform))
             return false;
 
-        if (!_whitelist.CheckBoth(user, proto.Blacklist, proto.Whitelist))
-        {
-            var message = Loc.GetString("rmc-construction-untrained-build");
-            _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
-            return false;
-        }
-
         if (proto.Skill is { } skill && !_skills.HasSkill(user, skill, proto.RequiredSkillLevel))
         {
             var message = Loc.GetString("rmc-construction-untrained-build");
-            _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
+            _popup.PopupEntity(message, ent, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -109,14 +103,14 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
         {
-            _popup.PopupClient(popup, ent, user, PopupType.SmallCaution);
+            _popup.PopupEntity(popup, ent, user, PopupType.SmallCaution);
             return false;
         }
 
         if (proto.RestrictedTags is { } tags && _rmcMap.TileHasAnyTag(coordinates, tags))
         {
-            var message = Loc.GetString("rmc-construction-not-proper-surface");
-            _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
+            var message = Loc.GetString("rmc-construction-not-proper-surface", ("construction", proto.Name));
+            _popup.PopupEntity(message, ent, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -125,7 +119,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             if (stack.Count < materialCost * amount)
             {
                 var message = Loc.GetString("rmc-construction-more-material", ("material", ent), ("object", proto.Name));
-                _popup.PopupClient(message, user, user, PopupType.SmallCaution);
+                _popup.PopupEntity(message, user, user, PopupType.SmallCaution);
                 return false;
             }
         }
@@ -133,12 +127,10 @@ public sealed class RMCConstructionSystem : EntitySystem
         // TODO add the ability to combine materials
 
         var ev = new RMCConstructionBuildDoAfterEvent(
-            proto.Prototype,
+            proto,
             amount,
-            proto.MaterialCost ?? 0,
             GetNetCoordinates(coordinates),
-            direction,
-            proto.NoRotate
+            direction
         );
 
         var delay = proto.Skill != null ? proto.DoAfterTime * _skills.GetSkillDelayMultiplier(user, proto.Skill.Value) : proto.DoAfterTime;
@@ -161,37 +153,44 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
+        if (_net.IsClient)
+            return;
+
+        var constructionEntry = args.Prototype;
+
         var coordinates = GetCoordinates(args.Coordinates);
         args.Handled = true;
 
+        // If the stack amount is equal to the default amount, use the default material cost.
+        // Otherwise, use the material cost times the stack amount.
+        var cost = (args.Amount == constructionEntry.Amount) ? constructionEntry.MaterialCost : constructionEntry.MaterialCost * args.Amount;
+
         if (TryComp<StackComponent>(ent.Owner, out var stack))
         {
-            if (!_stack.Use(ent.Owner, args.MaterialCost * args.Amount, stack))
+            if (!_stack.Use(ent.Owner, cost ?? 1, stack))
             {
-                var message = Loc.GetString("rmc-construction-more-material");
-                _popup.PopupClient(message, args.User, args.User, PopupType.SmallCaution);
+                var message = Loc.GetString("rmc-construction-more-material", ("material", ent.Owner), ("object", constructionEntry.Name));
+                _popup.PopupEntity(message, args.User, args.User, PopupType.SmallCaution);
                 return;
             }
         }
         else if (_net.IsServer)
         {
-            QueueDel(ent);
+            QueueDel(ent.Owner);
         }
 
-        UpdateStackAmountUI(ent);
-
-        if (_net.IsClient)
-            return;
+        if (!Deleted(ent))
+            UpdateStackAmountUI(ent);
 
         if (args.Amount > 1)
         {
-            SpawnMultiple(args.Prototype, args.Amount, coordinates);
+            SpawnMultiple(constructionEntry.Prototype, args.Amount, coordinates);
         }
         else
         {
-            var built = SpawnAtPosition(args.Prototype, coordinates);
+            var built = SpawnAtPosition(constructionEntry.Prototype, coordinates);
 
-            if (!args.NoRotate)
+            if (!constructionEntry.NoRotate)
                 _transform.SetLocalRotation(built, args.Direction.ToAngle());
         }
     }

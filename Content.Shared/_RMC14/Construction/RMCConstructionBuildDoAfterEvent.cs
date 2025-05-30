@@ -1,4 +1,5 @@
-﻿using Content.Shared.DoAfter;
+﻿using Content.Shared._RMC14.Construction.Prototypes;
+using Content.Shared.DoAfter;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -9,30 +10,21 @@ namespace Content.Shared._RMC14.Construction;
 public sealed partial class RMCConstructionBuildDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField(required: true)]
-    public EntProtoId Prototype;
+    public RMCConstructionPrototype Prototype;
 
     [DataField(required: true)]
     public int Amount;
-
-    [DataField(required: true)]
-    public int MaterialCost;
 
     [DataField(required: true)]
     public NetCoordinates Coordinates;
 
     [DataField(required: true)]
     public Direction Direction;
-
-    [DataField(required: true)]
-    public bool NoRotate;
-
-    public RMCConstructionBuildDoAfterEvent(EntProtoId prototype, int amount, int materialCost, NetCoordinates coordinates, Direction direction, bool noRotate)
+    public RMCConstructionBuildDoAfterEvent(RMCConstructionPrototype prototype, int amount, NetCoordinates coordinates, Direction direction)
     {
         Prototype = prototype;
         Amount = amount;
-        MaterialCost = materialCost;
         Coordinates = coordinates;
         Direction = direction;
-        NoRotate = noRotate;
     }
 }

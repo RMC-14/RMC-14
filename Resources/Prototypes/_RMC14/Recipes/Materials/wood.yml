@@ -5,10 +5,17 @@
   # materialCost: 1
 
 - type: rmcConstruction
-  parent: RMCFloorTileBuild
   id: RMCFloorTileWoodBuild
   name: wood floor tile
   prototype: CMTileItemWood
+  doAfterTime: 0
+  doAfterTimeMin: 0
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+  amount: 4
+  stackAmounts:
+  - 20
 
 - type: rmcConstruction
   id: RMCCampfireBuild
@@ -28,9 +35,10 @@
   materialCost: 5
 
 - type: rmcConstruction
-  parent: RMCMetalCrateBuild
   id: RMCWoodenCrateBuild
   name: wooden crate
   prototype: RMCCrateWoodenBuildable
+  restrictedCollisionGroup: MidImpassable
+  noRotate: true
   doAfterTime: 2
   materialCost: 5

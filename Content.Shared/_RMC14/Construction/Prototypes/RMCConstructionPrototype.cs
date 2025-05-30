@@ -3,11 +3,12 @@ using Content.Shared.Physics;
 using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Shared._RMC14.Construction.Prototypes;
 
-[Prototype("rmcConstruction")]
+[Prototype("rmcConstruction"), Serializable, NetSerializable]
 public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPrototype
 {
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<RMCConstructionPrototype>))]
@@ -26,42 +27,34 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     public string Name { get; set; } = default!;
 
     [DataField]
-    public bool IsDivider { get; set; } = false;
+    public bool IsDivider = false;
 
     [AlwaysPushInheritance]
     [DataField]
-    public bool NoRotate { get; set; } = false;
+    public bool NoRotate = false;
 
     /// <summary>
     /// Which other construction prototypes are listed when this button is pressed.
     /// Useful for things like comfy chairs which have multiple variants.
     /// </summary>
     [DataField]
-    public ProtoId<RMCConstructionPrototype>[]? Listed { get; set; }
+    public ProtoId<RMCConstructionPrototype>[]? Listed;
 
     [AlwaysPushInheritance]
     [DataField]
-    public EntityWhitelist? Whitelist { get; set; }
+    public EntProtoId<SkillDefinitionComponent>? Skill;
 
     [AlwaysPushInheritance]
     [DataField]
-    public EntityWhitelist? Blacklist { get; set; }
+    public int RequiredSkillLevel = 1;
 
     [AlwaysPushInheritance]
     [DataField]
-    public EntProtoId<SkillDefinitionComponent>? Skill { get; set; }
+    public TimeSpan DoAfterTime = TimeSpan.Zero;
 
     [AlwaysPushInheritance]
     [DataField]
-    public int RequiredSkillLevel { get; set; } = 1;
-
-    [AlwaysPushInheritance]
-    [DataField]
-    public TimeSpan DoAfterTime { get; set; } = TimeSpan.Zero;
-
-    [AlwaysPushInheritance]
-    [DataField]
-    public TimeSpan DoAfterTimeMin { get; set; } = TimeSpan.Zero;
+    public TimeSpan DoAfterTimeMin = TimeSpan.Zero;
 
     [AlwaysPushInheritance]
     [DataField]
@@ -69,28 +62,28 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
 
     [AlwaysPushInheritance]
     [DataField]
-    public ProtoId<TagPrototype>[]? RestrictedTags { get; set; }
+    public ProtoId<TagPrototype>[]? RestrictedTags;
 
     [AlwaysPushInheritance]
     [DataField]
     public bool IgnoreBuildRestrictions = false;
 
     [DataField]
-    public EntProtoId Prototype { get; set; } = default!;
+    public EntProtoId Prototype = default!;
 
     [AlwaysPushInheritance]
     [DataField]
-    public int? MaterialCost { get; set; }
+    public int? MaterialCost;
 
     /// <summary>
     /// How many objects spawn when this prototype is crafted.
     /// </summary>
     [DataField]
-    public int Amount { get; set; } = 1;
+    public int Amount = 1;
 
     /// <summary>
     /// List of all the possible stack amounts that appear in the construction menu.
     /// </summary>
     [DataField]
-    public HashSet<int>? StackAmounts { get; set; }
+    public HashSet<int>? StackAmounts;
 }
