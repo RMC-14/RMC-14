@@ -6,7 +6,7 @@
   doAfterTime: 4
   doAfterTimeMin: 2
   materialCost: 8
-  skillLevel: 2
+  requiredSkillLevel: 2
 
 - type: rmcConstruction
   parent: RMCPlasteelBarricadeFoldableBuild

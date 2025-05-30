@@ -25,10 +25,10 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     [DataField(required: true)]
     public string Name { get; set; } = default!;
 
-    [NeverPushInheritance]
     [DataField]
     public bool IsDivider { get; set; } = false;
 
+    [AlwaysPushInheritance]
     [DataField]
     public bool NoRotate { get; set; } = false;
 
