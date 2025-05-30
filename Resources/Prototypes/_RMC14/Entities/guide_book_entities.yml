@@ -1,0 +1,248 @@
+- type: entity
+  id: RMCBaseMapIcon
+  parent: BaseItem
+  name: Icon
+  abstract: true
+  suffix: GuideBookEntity
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/map_blips.rsi
+
+# Tier 0
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCLesserMapIcon
+  name: Lesser
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: lesser_drone
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCParasiteMapIcon
+  name: Parasite
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: parasite
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCLarvaMapIcon
+  name: Larva
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: larva
+
+# Drone Castes
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCDroneMapIcon
+  name: Drone
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: drone
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCHivelordMapIcon
+  name: Hivelord
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: hivelord
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCBurrowerMapIcon
+  name: Burrower
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: burrower
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCCarrierMapIcon
+  name: Carrier
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: carrier
+  
+# Defender Castes
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCDefenderMapIcon
+  name: Defender
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: defender
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCWarriorMapIcon
+  name: Warrior
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: warrior
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCCrusherMapIcon
+  name: Crusher
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: crusher
+# Sentinel Castes
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCSentinelMapIcon
+  name: Sentinel
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: sentinel
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCSpitterMapIcon
+  name: Spitter
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: spitter
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCBoilerMapIcon
+  name: Boiler
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: boiler
+  
+# Runner Castes
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCRunnerMapIcon
+  name: Runner
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: runner
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCLurkerMapIcon
+  name: Lurker
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: lurker
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCRavagerMapIcon
+  name: Ravager
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: ravager
+  
+# Special Castes
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCPraetorianMapIcon
+  name: Praetorian
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: praetorian
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCQueenMapIcon
+  name: Queen
+  components:
+  - type: Sprite
+    layers:
+    - state: xeno_ruler
+    - state: xenoqueen
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCLeaderMapIcon
+  name: Leader Crown
+  components:
+  - type: Sprite
+    layers:
+    - state: background_xeno
+    - state: xeno
+    - state: xenoleader
+
+# Structures
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCHiveCoreMapIcon
+  name: Hive core
+  components:
+  - type: Sprite
+    state: core
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCMorpherMapIcon
+  name: Egg morpher
+  components:
+  - type: Sprite
+    state: morpher
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCClusterMapIcon
+  name: Hive cluster
+  components:
+  - type: Sprite
+    state: cluster
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCTunnelMapIcon
+  name: Tunnel
+  components:
+  - type: Sprite
+    state: xenotunnel
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCRecovNodeMapIcon
+  name: Recovery node
+  components:
+  - type: Sprite
+    state: recovery_node

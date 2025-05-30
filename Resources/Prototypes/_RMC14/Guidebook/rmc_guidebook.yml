@@ -1,4 +1,4 @@
-﻿- type: guideEntry
+- type: guideEntry
   abstract: true
   id: RMC
   isCM: true
@@ -16,6 +16,7 @@
   - RMCGuideMarineStructures
   - RMCGuideXenonidRoles
   - RMCGuideXenonidStructures
+  - RMCGuideXenonidMap
   - RMCGuideFood
   - RMCGuideDrinks
 
@@ -124,6 +125,12 @@
   - RMCGuideHiveStructures
   - RMCGuideResinHoles
 
+# Xenonid map icons
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideXenonidMap
+  name: "Xenonid Map Icons"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideXenonidMapIcons.xml"
 
 - type: guideEntry
   parent: RMC
@@ -371,7 +378,7 @@
   id: RMCChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/RMCChemicals.xml"
-  priority: 33
+  priority: 34
   children:
   #  - RMCElements
   - RMCMedicine
