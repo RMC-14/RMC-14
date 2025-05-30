@@ -177,7 +177,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private void OnTileFireInteractHand(Entity<TileFireComponent> ent, ref InteractHandEvent args)
     {
         var user = args.User;
-        if (!TryComp(user, out TileFirePatterComponent? patter)) return;
+        if (!TryComp(user, out TileFirePatterComponent? patter))
+            return;
+
         var time = _timing.CurTime;
         if (time < patter.Last + patter.Cooldown) return;
 
@@ -231,8 +233,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         if (args.Handled || args.Cancelled)
             return;
-        args.Handled = true;
 
+        args.Handled = true;
         if (!HasComp<PaperComponent>(args.Used))
             return;
 
@@ -264,7 +266,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         QueueDel(ent);
     }
 
-
     private void OnDirectionTileFireTriggered(Entity<DirectionalTileFireOnTriggerComponent> ent,
         ref RMCTriggerEvent args)
     {
@@ -273,6 +274,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         ent.Comp.Direction = Angle.FromDegrees(ent.Comp.Direction.ToAngle().Degrees + moverCoordinates.worldRot.Degrees).GetDir();
         Dirty(ent);
+
         if (ent.Comp.Rebounded)
             tile = tile.Offset(ent.Comp.Direction);
 
@@ -314,6 +316,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         Dirty(user, patter);
 
         Pat(ent.Owner, patter.Stacks);
+
         _audio.PlayPredicted(patter.Sound, user, user);
         _popup.PopupClient($"You try to put out the fire on {Name(ent)}!", ent, user, PopupType.SmallCaution);
         _popup.PopupEntity($"{Name(user)} tries to put out the fire on you!", ent, ent, PopupType.SmallCaution);
@@ -500,7 +503,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         if (ev.Show)
             _alerts.ShowAlert(ent, FireAlert);
-
         else
             _alerts.ClearAlert(ent, FireAlert);
     }
@@ -543,7 +545,6 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         if (_net.IsClient) return;
         spawned ??= new HashSet<EntityCoordinates>();
-
         foreach (var cardinal in _rmcMap.CardinalDirections)
         {
             var target = coordinates.Offset(cardinal);
@@ -603,6 +604,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 nextRange = 0;
                 break;
             }
+
             if (_tag.HasAnyTag(uid, StructureTag, WallTag) &&
                 !_doorQuery.HasComp(uid))
             {
@@ -744,6 +746,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         return true;
     }
+
     private bool CanCraftMolotovPopup(Entity<CraftsIntoMolotovComponent> ent, EntityUid user, bool popup, out FixedPoint2 intensity)
     {
         intensity = default;
@@ -806,6 +809,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
             Dirty(ent, ent.Comp1);
         }
+
         if (ent.Comp2 != null)
         {
             if (duration != null)
@@ -827,7 +831,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (checkIgnited && wasOnFire)
             return;
 
-        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks)) return;
+        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
+            return;
 
         if (!wasOnFire && IsOnFire(flammableEnt) && !HasComp<RMCImmuneToFireTileDamageComponent>(ent))
             _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
