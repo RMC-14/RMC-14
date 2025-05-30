@@ -89,7 +89,7 @@
       path: /Audio/Effects/bite.ogg
     animation: WeaponArcBite
   - type: Inventory
-    speciesId: reptilian
+    speciesId: feroxi
 
 - type: entity
   parent: BaseSpeciesDummy
