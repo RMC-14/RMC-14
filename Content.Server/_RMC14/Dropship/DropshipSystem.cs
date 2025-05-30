@@ -212,8 +212,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 var exclusionZones = GetShipExclusionZones(ent.Owner, destinationEntityCoords);
                 _rmcFlammable.SpawnFireDiamond(ent.Comp.FireId, destinationEntityCoords, ent.Comp.FireRange, 11, null, exclusionZones);
                 _rmcExplosion.QueueExplosion(destinationCoords, "RMCOB", 50000, 1500, 90, ent.Owner, default, default, false);
-
-                Log.Info($"Hijacked dropship {ToPrettyString(ent.Owner)} exploded at destination on state transition to Arriving");
             }
         }
 
@@ -420,8 +418,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 });
             }
 
-            // Add 10 seconds to compensate for the arriving times
-            dropship.HijackLandAt = _timing.CurTime + TimeSpan.FromSeconds(hyperspaceTime.Value) + TimeSpan.FromSeconds(10);
             Dirty(dropshipId.Value, dropship);
         }
 
