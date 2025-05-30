@@ -30,9 +30,7 @@ using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
@@ -215,7 +213,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         if (!HasComp<PaperComponent>(args.Used)) return;
         if (!CanCraftMolotovPopup(ent, args.User, true, out _)) return;
-        
+
         var ev = new CraftMolotovDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.Delay, ev, ent, ent, args.Used) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
@@ -603,7 +601,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Spawns fire in a cone shape in the direction the entity is facing.Add commentMore actions
+    ///     Spawns fire in a cone shape in the direction the entity is facing.
     /// </summary>
     private void SpawnFireCone(Entity<DirectionalTileFireOnTriggerComponent> ent, EntityCoordinates center, int? intensity = null, int? duration = null)
     {
@@ -611,9 +609,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         var chain = _onCollide.SpawnChain();
         ent.Comp.DiagonalRange = (int)Math.Floor((double)ent.Comp.Range / 2);
         Dirty(ent);
+
         var initialShot = !ent.Comp.InitialSpread;
         var target = center;
         var targets = new HashSet<EntityCoordinates> { };
+
         while (ent.Comp.Range > 0)
         {
             var shapeTargets = AddTarget(ent, target, initialShot);
@@ -621,6 +621,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 targets.Add(coordinate);
             initialShot = false;
             var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(target);
+
             while (anchored.MoveNext(out var uid))
             {
                 if (_tag.HasAnyTag(uid, WallTag) && !_doorQuery.HasComp(uid))
@@ -633,6 +634,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             ent.Comp.Range--;
             ent.Comp.DiagonalRange--;
         }
+
         foreach (var ignitionTarget in targets)
         {
             if (CheckViableTile(ent, ignitionTarget))
