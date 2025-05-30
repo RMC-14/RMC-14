@@ -2,6 +2,7 @@
   id: RMCBaseMapIcon
   parent: BaseItem
   name: Icon
+  abstract: true
   suffix: GuideBookEntity
   components:
   - type: Sprite
