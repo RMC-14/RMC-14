@@ -98,7 +98,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        var direction = _transform.GetWorldRotation(user).GetDir();
+        var direction = transform.LocalRotation.GetCardinalDir();
         var coordinates = transform.Coordinates;
 
         if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
