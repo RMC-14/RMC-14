@@ -1,8 +1,10 @@
 - type: constructionGraph
   parent: RMC
   id: RMCFlashLightGraph
-  start: Flashlight
+  start: start
   graph:
+    - node: start
+
     - node: RailLight
       entity: RMCAttachmentRailFlashlight
       edges:
