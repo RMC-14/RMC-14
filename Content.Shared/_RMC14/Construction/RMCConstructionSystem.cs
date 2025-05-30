@@ -37,6 +37,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedDoAfterSystem _whitelist = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -88,17 +89,17 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (!TryComp(user, out TransformComponent? transform))
             return false;
 
-        if (proto.Skill != null && !_skills.HasSkill(user, proto.Skill.Value, proto.SkillLevel))
+        if (!_whitelist.CheckBoth(item, proto.Blacklist, proto.Whitelist))
         {
             var message = Loc.GetString("rmc-construction-untrained-build");
             _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
             return false;
         }
 
-        var direction = transform.LocalRotation.GetCardinalDir();
+        var direction = _transform.GetWorldRotation(xform).GetDir();
         var coordinates = transform.Coordinates;
 
-        if (proto.HasBuildRestriction && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
+        if (CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
         {
             _popup.PopupClient(popup, ent, user, PopupType.SmallCaution);
             return false;
@@ -137,7 +138,8 @@ public sealed class RMCConstructionSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(doAfterTime), ev, ent, ent)
         {
             BreakOnMove = true,
-            BreakOnDamage = false
+            BreakOnDamage = false,
+            MovementThreshold = 0.5f
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -312,7 +314,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         return !HasComp<DisableConstructionComponent>(user);
     }
 
-    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup collision = CollisionGroup.Impassable)
+    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision)
     {
         popup = default;
         if (_transform.GetGrid(coordinates) is not { } gridId)
@@ -350,6 +352,9 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        return !_turf.IsTileBlocked(turf.Value, collision);
+        if (collision != null)
+            return !_turf.IsTileBlocked(turf.Value, collision);
+
+        return true;
     }
 }

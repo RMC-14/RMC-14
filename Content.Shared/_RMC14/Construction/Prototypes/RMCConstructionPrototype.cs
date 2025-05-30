@@ -32,11 +32,23 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
 
     [AlwaysPushInheritance]
     [DataField]
-    public bool HasBuildRestriction { get; set; } = true;
+    public EntityWhitelist? Whitelist { get; set; }
 
     [AlwaysPushInheritance]
     [DataField]
-    public CollisionGroup RestrictedCollisionGroup = CollisionGroup.Impassable;
+    public EntityWhitelist? Blacklist { get; set; }
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public TimeSpan DoAfterTime { get; set; } = TimeSpan.Zero;
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public TimeSpan DoAfterTimeMin { get; set; } = TimeSpan.Zero;
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public CollisionGroup RestrictedCollisionGroup? = CollisionGroup.Impassable;
 
     [AlwaysPushInheritance]
     [DataField]
@@ -51,20 +63,4 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
 
     [DataField]
     public HashSet<int>? StackAmounts { get; set; }
-
-    [AlwaysPushInheritance]
-    [DataField]
-    public EntProtoId<SkillDefinitionComponent>? Skill { get; set; }
-
-    [AlwaysPushInheritance]
-    [DataField]
-    public int SkillLevel { get; set; } = 1;
-
-    [AlwaysPushInheritance]
-    [DataField]
-    public TimeSpan DoAfterTime { get; set; } = TimeSpan.Zero;
-
-    [AlwaysPushInheritance]
-    [DataField]
-    public TimeSpan DoAfterTimeMin { get; set; } = TimeSpan.Zero;
 }

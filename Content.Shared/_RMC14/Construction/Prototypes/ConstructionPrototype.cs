@@ -18,9 +18,9 @@ public sealed partial class ConstructionPrototype : IInheritingPrototype, ICMSpe
     [DataField]
     public bool IsCM { get; }
 
-    [DataField]
+    [DataField("rmcPrototype")]
     public ProtoId<RMCConstructionPrototype>? RMCPrototype { get; }
 
-    [DataField("iconColor")]
+    [DataField]
     public Color IconColor = Color.FromHex("#ffffff");
 }
