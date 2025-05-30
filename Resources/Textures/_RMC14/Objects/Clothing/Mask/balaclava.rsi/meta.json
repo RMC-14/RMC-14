@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/mask.dmi, equipped-MASK-monkey taken from https://github.com/cmss13-devs/cmss13/commit/f7b9367cb5c083a8c052a40dece9417031e28ffe",
+  "copyright": "Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/mask.dmi, equipped-MASK-monkey taken from https://github.com/cmss13-devs/cmss13/commit/f7b9367cb5c083a8c052a40dece9417031e28ffe, feroxi version modified by Sigma Draconis",
   "size": {
     "x": 32,
     "y": 32
@@ -16,6 +16,10 @@
     },
     {
       "name": "equipped-MASK-monkey",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-feroxi",
       "directions": 4
     }
   ]
