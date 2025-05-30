@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../Robust.Roslyn.Shared/Robust.Roslyn.Shared.props" />
+
+</Project>

@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\MSBuild\Robust.Engine.props" />
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>CA1416</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" />
+    <PackageReference Include="Microsoft.ILVerification" PrivateAssets="compile" />
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
+    <PackageReference Include="Nett" PrivateAssets="compile" />
+    <PackageReference Include="VorbisPizza" PrivateAssets="compile" />
+    <PackageReference Include="Pidgin" />
+    <PackageReference Include="prometheus-net" />
+    <PackageReference Include="Robust.Shared.AuthLib" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="YamlDotNet" />
+    <PackageReference Include="Microsoft.Win32.Registry" PrivateAssets="compile" />
+    <PackageReference Include="Linguini.Bundle" />
+    <PackageReference Include="SharpZstd.Interop" PrivateAssets="compile" />
+    <PackageReference Include="SpaceWizards.Sodium" PrivateAssets="compile" />
+    <PackageReference Include="SixLabors.ImageSharp" />
+    <PackageReference Include="TerraFX.Interop.Windows" PrivateAssets="compile" />
+
+    <!-- Needed to pin transitive dependency versions. -->
+    <PackageReference Include="System.Reflection.Metadata" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lidgren.Network\Lidgren.Network.csproj" />
+    <ProjectReference Include="..\NetSerializer\NetSerializer\NetSerializer.csproj" />
+    <ProjectReference Include="..\Robust.Shared.Maths\Robust.Shared.Maths.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Utility\TypeAbbreviations.yaml">
+      <LogicalName>Robust.Shared.Utility.TypeAbbreviations.yaml</LogicalName>
+    </EmbeddedResource>
+    <None Remove="ContentPack\Sandbox.yml" />
+    <EmbeddedResource Include="ContentPack\Sandbox.yml">
+      <LogicalName>Robust.Shared.ContentPack.Sandbox.yml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Input\CommandBindMapping.cs" />
+    <Compile Update="Serialization\RobustMappedStringSerializer.MappedStringDict.cs">
+      <DependentUpon>RobustMappedStringSerializer.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Serialization\RobustSerializer.Handshake.cs">
+      <DependentUpon>RobustSerializer.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Serialization\RobustMappedStringSerializer.MappedStringDict.cs">
+      <DependentUpon>RobustMappedStringSerializer.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <Import Project="..\MSBuild\Robust.Properties.targets" />
+  <Import Project="..\MSBuild\Robust.CompNetworkGenerator.targets" />
+</Project>

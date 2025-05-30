@@ -1,0 +1,23 @@
+preset raw;
+
+#include "/Shaders/Internal/shadow_cast_shared.swsl"
+
+#include "/Shaders/Internal/fov_shared.swsl"
+
+const highp float g_MinVariance = 0.0;
+uniform highp vec4 occludeColor;
+
+void fragment()
+{
+    highp float ourDist = length(worldSpaceDiff);
+
+    highp float occlDist = occludeDepth(worldSpaceDiff, TEXTURE, 0.75).r;
+
+    // *Very* simple biased shadow check for FOV.
+    if (!doesOcclude(worldSpaceDiff, TEXTURE, 0.75, -0.75/32.0))
+    {
+        discard;
+    }
+
+    COLOR = vec4(occludeColor.rgb, 1.0);
+}

@@ -1,0 +1,80 @@
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Roslyn cache directories
+*.ide/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Program databases
+*.pdb
+
+# WinMerge backups
+*.bak
+
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+
+*.userprefs
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# Build results
+bin/
+obj/
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Resources
+*.resources
+/Media
+/setenv.bat
+
+# NuGet stuff.
+/.nuget
+*.nupkg
+project.lock.json
+*.nuget.props
+
+.vs/
+.vscode/
+/packages/
+
+
+.sync/
+
+# MacOS finder makes these.
+.DS_Store
+# KDE Dolphin makes these, maybe it's even XDG standard, kinda hard to Google.
+# I do know it doesn't make them by merely opening the directory like some other file manager *cough* *cough*
+.directory
+
+# Created by NUnit.
+TestResult.xml
+
+# Python stuff
+__pycache__
+.mypy_cache
+
+MSBuild/Robust.Custom.targets
+
+.idea/
+
+
+release/
+Robust.Docfx/*-site
+Robust.Docfx/api

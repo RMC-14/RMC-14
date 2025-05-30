@@ -1,0 +1,33 @@
+<Control xmlns="https://spacestation14.io"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         x:Class="Robust.Client.UserInterface.DevWindowTabUI"
+         xmlns:gfx="clr-namespace:Robust.Client.Graphics">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="#25252add" ContentMarginTopOverride="3" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer Name="TopbarButtons" HorizontalExpand="True">
+                <BoxContainer HorizontalExpand="True" Orientation="Horizontal">
+                    <Button Name="ControlPicker" ToggleMode="True" Text="Inspect Element" />
+                    <Button Name="RefreshPropertiesButton" Text="Refresh Props" />
+                </BoxContainer>
+            </PanelContainer>
+            <SplitContainer HorizontalExpand="True" VerticalExpand="True"
+                            Orientation="Horizontal" ResizeMode="RespectChildrenMinSize">
+                <ScrollContainer>
+                    <PanelContainer Name="TreeRootBG">
+                        <BoxContainer Name="ControlTreeRoot" Orientation="Vertical" MouseFilter="Stop"  />
+                    </PanelContainer>
+                </ScrollContainer>
+                <ScrollContainer>
+                    <BoxContainer Name="ControlProperties" Orientation="Vertical" MouseFilter="Stop" />
+                </ScrollContainer>
+            </SplitContainer>
+        </BoxContainer>
+    </PanelContainer>
+    <!-- TODO Remove and replace with a popup container on WindowRoot -->
+    <PopupContainer Name="PopupContainer" Access="Public">
+        <DevWindowTabUIPopup Name="UIPopup" />
+    </PopupContainer>
+</Control>

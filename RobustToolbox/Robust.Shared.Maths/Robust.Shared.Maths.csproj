@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\MSBuild\Robust.Engine.props" />
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+  </ItemGroup>
+
+  <Import Project="..\MSBuild\Robust.Properties.targets" />
+</Project>

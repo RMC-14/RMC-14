@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\MSBuild\Robust.Engine.props" />
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>../bin/UnitTesting</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" />
+    <PackageReference Include="JetBrains.Annotations" />
+    <PackageReference Include="Microsoft.CodeCoverage" />
+    <PackageReference Include="Microsoft.DotNet.RemoteExecutor" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Moq" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="NUnit.Analyzers" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lidgren.Network\Lidgren.Network.csproj" />
+    <ProjectReference Include="..\Robust.Shared.Maths\Robust.Shared.Maths.csproj" />
+    <ProjectReference Include="..\Robust.Shared\Robust.Shared.csproj" />
+    <ProjectReference Include="..\Robust.Client\Robust.Client.csproj" />
+    <ProjectReference Include="..\Robust.Server\Robust.Server.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Shared\ContentPack\ZipTest.zip">
+      <LogicalName>Robust.UnitTesting.Shared.ContentPack.ZipTest.zip</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="..\MSBuild\Robust.Properties.targets" />
+  <Import Project="..\MSBuild\Robust.CompNetworkGenerator.targets" />
+</Project>

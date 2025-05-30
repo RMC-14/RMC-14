@@ -1,0 +1,24 @@
+preset raw;
+
+#include "/Shaders/Internal/shadow_cast_shared.swsl"
+
+#include "/Shaders/Internal/fov_shared.swsl"
+
+const highp float g_MinVariance = 0.0;
+uniform highp vec4 occludeColor;
+
+void fragment()
+{
+    highp float ourDist = length(worldSpaceDiff);
+
+    highp vec2 occlDist = occludeDepth(worldSpaceDiff, TEXTURE, 0.25);
+
+    highp float occlusion = ChebyshevUpperBound(occlDist, ourDist);
+
+    if (occlusion >= 1.0)
+    {
+        discard;
+    }
+
+    COLOR = vec4(occludeColor.rgb, 1.0 - occlusion);
+}
