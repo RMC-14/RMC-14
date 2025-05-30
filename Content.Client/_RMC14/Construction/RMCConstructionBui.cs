@@ -104,7 +104,7 @@ public sealed class RMCConstructionBui : BoundUserInterface
 
         control.Button.OnPressed += _ =>
         {
-            SendPredictedMessage(new RMCConstructionBuiMsg(build, 1));
+            SendPredictedMessage(new RMCConstructionBuiMsg(build, build.Amount));
         };
 
         _window?.ConstructionContainer.AddChild(control);

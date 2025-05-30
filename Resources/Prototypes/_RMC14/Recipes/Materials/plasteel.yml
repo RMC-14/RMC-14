@@ -22,3 +22,22 @@
   id: RMCReinforcedWindowFrameBuild
   name: reinforced window frame
   prototype: RMCWindowFrameColonyReinforced
+
+- type: rmcConstruction
+  parent: RMCMetalRodBuild
+  id: RMCPlasteelRodBuild
+  name: plasteel rod
+  prototype: CMRodPlasteel1
+  materialCost: 1
+  amount: 1
+  stackAmounts:
+  - 15
+  - 30
+
+- type: rmcConstruction
+  id: RMCMetalCrateBuild
+  name: metal crate
+  prototype: RMCCrateMetalBuildable
+  doAfterTime: 5
+  materialCost: 5
+  restrictedCollisionGroup: MidImpassable

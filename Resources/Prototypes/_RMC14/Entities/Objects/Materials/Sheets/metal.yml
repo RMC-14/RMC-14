@@ -41,10 +41,29 @@
       - RMCMetalBarricadeBuild
       - RMCMetalBarricadeFoldableBuild
       - RMCHandrailBuild
+      # - RMCDividerConstruction
+      # APC frame
+      # Fire alarm frame
       - RMCDividerConstruction
+      - RMCFloorTileBuild
+      - RMCMetalRodBuild
+      - RMCWallGirderBuild
       - RMCWindowFrameBuild
+      # Airlock assembly
+      # large airlock assembly
       - RMCDividerConstruction
+      # Bed
+      # Chair
       - RMCComfyChairList
+      # squad chairs
+      # office chairs
+      # stool
+      - RMCDividerConstruction
+      # computer frame
+      - RMCMachineFrameBuild
+      - RMCDividerConstruction
+      # metal baseball bat
+      - RMCDividerConstruction
     - type: RMCConstructionUpgradeItem
       whitelist:
         tags:
@@ -180,6 +199,8 @@
       - RMCDividerConstruction
       - RMCReinforcedWindowFrameBuild
       - RMCDividerConstruction
+      - RMCPlasteelRodBuild
+      - RMCMetalCrateBuild
     - type: Material
     - type: PhysicalComposition
       materialComposition:

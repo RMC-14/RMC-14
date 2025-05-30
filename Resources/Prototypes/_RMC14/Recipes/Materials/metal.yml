@@ -1,7 +1,6 @@
 - type: rmcConstruction
-  parent: RMCMetalBarricadeBuild
   id: RMCDividerConstruction
-  name: test
+  name: divider
   isDivider: true
 
 - type: rmcConstruction
@@ -12,7 +11,7 @@
   doAfterTimeMin: 1
   skill: RMCSkillConstruction
   materialCost: 1
-  hasBuildRestriction: false
+  ignoreBuildRestrictions: true
   stackAmounts:
   - 5
   - 10
@@ -24,8 +23,10 @@
   prototype: CMBarricadeMetal
   doAfterTime: 2
   doAfterTimeMin: 1
-  skill: RMCSkillConstruction
   materialCost: 4
+  restrictedCollisionGroup: Impassable
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 1
 
 - type: rmcConstruction
   parent: RMCMetalBarricadeBuild
@@ -35,7 +36,7 @@
   doAfterTime: 3
   doAfterTimeMin: 1.5
   materialCost: 6
-  skillLevel: 2
+  requiredSkillLevel: 2
 
 - type: rmcConstruction
   parent: RMCMetalBarricadeBuild
@@ -47,15 +48,54 @@
   materialCost: 2
 
 - type: rmcConstruction
+  id: RMCFloorTileBuild
+  name: floor tile (x4)
+  prototype: CMTileItemSteel
+  doAfterTime: 0
+  doAfterTimeMin: 0
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  amount: 4
+  stackAmounts:
+  - 20
+
+- type: rmcConstruction
+  id: RMCMetalRodBuild
+  name: metal rod (x2)
+  prototype: CMRodMetal1
+  doAfterTime: 0
+  doAfterTimeMin: 0
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  amount: 2
+  stackAmounts:
+  - 10
+  - 20
+  - 40
+  - 60
+
+- type: rmcConstruction
   parent: RMCMetalBarricadeFoldableBuild
+  id: RMCWallGirderBuild
+  name: wall girder
+  prototype: CMGirder
+  doAfterTime: 5
+  materialCost: 2
+  restrictedCollisionGroup: MidImpassable
+  noRotate: true
+  requiredSkillLevel: 2
+
+- type: rmcConstruction
+  parent: RMCWallGirderBuild
   id: RMCWindowFrameBuild
   name: window frame
   prototype: RMCWindowFrameAlmayer
-  doAfterTime: 10
-  doAfterTimeMin: 4
+  doAfterTime: 5
   materialCost: 5
   restrictedCollisionGroup: MidImpassable
+  requiredSkillLevel: 2
 
+# Comfy Chairs
 - type: rmcConstruction
   id: RMCComfyChairList
   name: comfy chairs
@@ -69,7 +109,7 @@
 
 - type: rmcConstruction
   abstract: true
-  id: RMCComfyChairBase
+  id: RMCComfyChairBase # Base
   name: chair comfy
   materialCost: 2
   restrictedTags: RMCSeat
@@ -103,3 +143,12 @@
   id: RMCComfyChairTealBuild
   name: teal comfy chair
   prototype: CMChairComfyTeal
+
+- type: rmcConstruction
+  parent: RMCWallGirderBuild
+  id: RMCMachineFrameBuild
+  name: machine frame
+  prototype: CMMachineFrameUnfinished
+  doAfterTime: 2.5
+  materialCost: 5
+  restrictedCollisionGroup: MachineLayer

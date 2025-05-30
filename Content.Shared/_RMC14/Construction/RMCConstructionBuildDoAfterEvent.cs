@@ -23,12 +23,16 @@ public sealed partial class RMCConstructionBuildDoAfterEvent : SimpleDoAfterEven
     [DataField(required: true)]
     public Direction Direction;
 
-    public RMCConstructionBuildDoAfterEvent(EntProtoId prototype, int amount, int materialCost, NetCoordinates coordinates, Direction direction)
+    [DataField(required: true)]
+    public bool NoRotate;
+
+    public RMCConstructionBuildDoAfterEvent(EntProtoId prototype, int amount, int materialCost, NetCoordinates coordinates, Direction direction, bool noRotate)
     {
         Prototype = prototype;
         Amount = amount;
         MaterialCost = materialCost;
         Coordinates = coordinates;
         Direction = direction;
+        NoRotate = noRotate;
     }
 }

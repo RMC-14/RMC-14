@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -24,9 +25,17 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     [DataField(required: true)]
     public string Name { get; set; } = default!;
 
+    [NeverPushInheritance]
     [DataField]
     public bool IsDivider { get; set; } = false;
 
+    [DataField]
+    public bool NoRotate { get; set; } = false;
+
+    /// <summary>
+    /// Which other construction prototypes are listed when this button is pressed.
+    /// Useful for things like comfy chairs which have multiple variants.
+    /// </summary>
     [DataField]
     public ProtoId<RMCConstructionPrototype>[]? Listed { get; set; }
 
@@ -40,6 +49,14 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
 
     [AlwaysPushInheritance]
     [DataField]
+    public EntProtoId<SkillDefinitionComponent>? Skill { get; set; }
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public int RequiredSkillLevel { get; set; } = 1;
+
+    [AlwaysPushInheritance]
+    [DataField]
     public TimeSpan DoAfterTime { get; set; } = TimeSpan.Zero;
 
     [AlwaysPushInheritance]
@@ -48,11 +65,15 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
 
     [AlwaysPushInheritance]
     [DataField]
-    public CollisionGroup RestrictedCollisionGroup? = CollisionGroup.Impassable;
+    public CollisionGroup? RestrictedCollisionGroup = CollisionGroup.Impassable;
 
     [AlwaysPushInheritance]
     [DataField]
     public ProtoId<TagPrototype>[]? RestrictedTags { get; set; }
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public bool IgnoreBuildRestrictions = false;
 
     [DataField]
     public EntProtoId Prototype { get; set; } = default!;
@@ -61,6 +82,15 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     [DataField]
     public int? MaterialCost { get; set; }
 
+    /// <summary>
+    /// How many objects spawn when this prototype is crafted.
+    /// </summary>
+    [DataField]
+    public int Amount { get; set; } = 1;
+
+    /// <summary>
+    /// List of all the possible stack amounts that appear in the construction menu.
+    /// </summary>
     [DataField]
     public HashSet<int>? StackAmounts { get; set; }
 }

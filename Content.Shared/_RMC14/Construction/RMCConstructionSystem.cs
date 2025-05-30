@@ -13,6 +13,7 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
+using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -37,7 +38,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedDoAfterSystem _whitelist = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -89,17 +90,24 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (!TryComp(user, out TransformComponent? transform))
             return false;
 
-        if (!_whitelist.CheckBoth(item, proto.Blacklist, proto.Whitelist))
+        if (!_whitelist.CheckBoth(user, proto.Blacklist, proto.Whitelist))
         {
             var message = Loc.GetString("rmc-construction-untrained-build");
             _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
             return false;
         }
 
-        var direction = _transform.GetWorldRotation(xform).GetDir();
+        if (proto.Skill is { } skill && !_skills.HasSkill(user, skill, proto.RequiredSkillLevel))
+        {
+            var message = Loc.GetString("rmc-construction-untrained-build");
+            _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        var direction = _transform.GetWorldRotation(user).GetDir();
         var coordinates = transform.Coordinates;
 
-        if (CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
+        if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
         {
             _popup.PopupClient(popup, ent, user, PopupType.SmallCaution);
             return false;
@@ -129,7 +137,8 @@ public sealed class RMCConstructionSystem : EntitySystem
             amount,
             proto.MaterialCost ?? 0,
             GetNetCoordinates(coordinates),
-            direction
+            direction,
+            proto.NoRotate
         );
 
         var delay = proto.Skill != null ? proto.DoAfterTime * _skills.GetSkillDelayMultiplier(user, proto.Skill.Value) : proto.DoAfterTime;
@@ -181,7 +190,9 @@ public sealed class RMCConstructionSystem : EntitySystem
         else
         {
             var built = SpawnAtPosition(args.Prototype, coordinates);
-            _transform.SetLocalRotation(built, args.Direction.ToAngle());
+
+            if (!args.NoRotate)
+                _transform.SetLocalRotation(built, args.Direction.ToAngle());
         }
     }
 
@@ -314,7 +325,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         return !HasComp<DisableConstructionComponent>(user);
     }
 
-    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision)
+    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null)
     {
         popup = default;
         if (_transform.GetGrid(coordinates) is not { } gridId)
@@ -352,8 +363,8 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        if (collision != null)
-            return !_turf.IsTileBlocked(turf.Value, collision);
+        if (collision is { } collisionGroup)
+            return !_turf.IsTileBlocked(turf.Value, collisionGroup);
 
         return true;
     }

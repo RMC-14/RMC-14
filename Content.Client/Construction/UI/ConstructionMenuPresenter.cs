@@ -401,7 +401,7 @@ namespace Content.Client.Construction.UI
                     return;
                 }
 
-                if (_selected.Type == ConstructionType.Item)
+                if (_selected.Type == ConstructionType.Item || _selected.RMCPrototype != null)
                 {
                     _constructionSystem.TryStartItemConstruction(_selected.ID);
                     _constructionView.BuildButtonPressed = false;

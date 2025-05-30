@@ -1,0 +1,16 @@
+- type: rmcConstruction
+  parent: RMCWindowFrameBuild
+  id: RMCGrilleBuild
+  name: grille
+  prototype: RMCGrille
+  doAfterTime: 2
+  materialCost: 4
+  requiredSkillLevel: 1
+
+- type: rmcConstruction
+  parent: RMCGrilleBuild
+  id: RMCFenceBuild
+  name: fence
+  prototype: CMFence
+  doAfterTime: 2
+  materialCost: 10
