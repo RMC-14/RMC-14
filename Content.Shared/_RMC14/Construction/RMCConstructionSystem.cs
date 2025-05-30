@@ -81,7 +81,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         Build(ent, args.Actor, args.Build, args.Amount);
     }
 
-    private bool Build(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount)
+    public bool Build(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount)
     {
         if (!_prototype.TryIndex<RMCConstructionPrototype>(protoID, out var proto))
             return false;
