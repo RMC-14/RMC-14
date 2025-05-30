@@ -159,4 +159,4 @@
   doAfterTime: 2.5
   materialCost: 5
   skill: RMCSkillConstruction
-  requiredSkillLevel: 2
+  requiredSkillLevel: 3
