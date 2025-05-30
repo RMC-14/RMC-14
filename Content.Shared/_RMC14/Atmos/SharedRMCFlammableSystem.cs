@@ -151,6 +151,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         if (_net.IsClient) return;
         var water = false;
+
         foreach (var container in args.Solution.Comp.Containers)
         {
             if (!_solutionContainer.TryGetSolution(args.Solution.Owner, container, out _, out var solution))
@@ -162,6 +163,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 break;
             }
         }
+
         if (!water) return;
 
         if (ent.Comp.ExtinguishInstantly)
@@ -213,6 +215,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         if (!HasComp<PaperComponent>(args.Used)) return;
         if (!CanCraftMolotovPopup(ent, args.User, true, out _)) return;
+        
         var ev = new CraftMolotovDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.Delay, ev, ent, ent, args.Used) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
@@ -599,6 +602,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return false;
     }
 
+    /// <summary>
+    ///     Spawns fire in a cone shape in the direction the entity is facing.Add commentMore actions
+    /// </summary>
     private void SpawnFireCone(Entity<DirectionalTileFireOnTriggerComponent> ent, EntityCoordinates center, int? intensity = null, int? duration = null)
     {
         if (_net.IsClient) return;
