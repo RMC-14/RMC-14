@@ -343,7 +343,8 @@ namespace Content.Client.Construction.UI
                 _spriteSystem.Frame0(prototype.Icon),
                 prototype.IconColor,
                 prototype.Type != ConstructionType.Item,
-                !_favoritedRecipes.Contains(prototype));
+                !_favoritedRecipes.Contains(prototype),
+                prototype);
 
             var stepList = _constructionView.RecipeStepList;
             GenerateStepList(prototype, stepList);
