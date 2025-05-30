@@ -157,20 +157,21 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var constructionEntry = args.Prototype;
+        var entry = args.Prototype;
 
         var coordinates = GetCoordinates(args.Coordinates);
         args.Handled = true;
 
         // If the stack amount is equal to the default amount, use the default material cost.
         // Otherwise, use the material cost times the stack amount.
-        var cost = (args.Amount == constructionEntry.Amount) ? constructionEntry.MaterialCost : constructionEntry.MaterialCost * args.Amount;
+        var totalMaterialCost = args.Amount / entry.Amount; // So a stack of 20 with an amount of 4 and a cost of 1 is correctly 5 cost
+        var cost = (args.Amount == entry.Amount) ? entry.MaterialCost : totalMaterialCost * args.Amount;
 
         if (TryComp<StackComponent>(ent.Owner, out var stack))
         {
             if (!_stack.Use(ent.Owner, cost ?? 1, stack))
             {
-                var message = Loc.GetString("rmc-construction-more-material", ("material", ent.Owner), ("object", constructionEntry.Name));
+                var message = Loc.GetString("rmc-construction-more-material", ("material", ent.Owner), ("object", entry.Name));
                 _popup.PopupEntity(message, args.User, args.User, PopupType.SmallCaution);
                 return;
             }
@@ -185,13 +186,13 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         if (args.Amount > 1)
         {
-            SpawnMultiple(constructionEntry.Prototype, args.Amount, coordinates);
+            SpawnMultiple(entry.Prototype, args.Amount, coordinates);
         }
         else
         {
-            var built = SpawnAtPosition(constructionEntry.Prototype, coordinates);
+            var built = SpawnAtPosition(entry.Prototype, coordinates);
 
-            if (!constructionEntry.NoRotate)
+            if (!entry.NoRotate)
                 _transform.SetLocalRotation(built, args.Direction.ToAngle());
         }
     }
