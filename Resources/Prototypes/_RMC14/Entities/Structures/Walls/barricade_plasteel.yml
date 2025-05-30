@@ -96,6 +96,9 @@
     thornsDamage:
       types:
         Slash: 10
+  - type: Construction
+    graph: BarricadePlasteelGraph
+    node: nodePlasteel
   - type: RMCConstructionUpgradeTarget
     upgrades: ["RMCExplosiveUpgradePlasteel", "RMCBiohazardUpgradePlasteel", "RMCBruteUpgradePlasteel"]
   - type: Tag
@@ -245,3 +248,6 @@
       path: /Audio/Items/ratchet.ogg
     closeSound:
       path: /Audio/Items/ratchet.ogg
+  - type: Construction
+    graph: BarricadePlasteelDoorGraph
+    node: nodeBarricadePlasteelDoor
