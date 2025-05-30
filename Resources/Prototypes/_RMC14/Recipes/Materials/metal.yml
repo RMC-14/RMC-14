@@ -154,7 +154,7 @@
   id: RMCMachineFrameBuild
   name: machine frame
   prototype: CMMachineFrameUnfinished
-  restrictedCollisionGroup: MachineLayer
+  restrictedCollisionGroup: MidImpassable
   noRotate: true
   doAfterTime: 2.5
   materialCost: 5
