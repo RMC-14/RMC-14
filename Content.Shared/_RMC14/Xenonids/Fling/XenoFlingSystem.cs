@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Rage;
@@ -30,6 +31,7 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
     [Dependency] private readonly XenoRageSystem _rage = default!;
+    [Dependency] private readonly RMCDazedSystem _dazed = default!;
 
     public override void Initialize()
     {
@@ -89,6 +91,7 @@ public sealed class XenoFlingSystem : EntitySystem
             return;
 
         _rmcSlow.TrySlowdown(targetId, xeno.Comp.SlowTime);
+        _dazed.TryDaze(targetId, xeno.Comp.DazeTime, true);
         _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
         _throwing.TryThrow(targetId, diff, xeno.Comp.ThrowSpeed);
 

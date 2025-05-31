@@ -223,6 +223,8 @@
     healAmount: 75
     enragedHealAmount: 100
     paralyzeTime: 0
+    slowTime: 0
+    dazeTime: 4
     throwSpeed: 12
     damage:
       groups:
