@@ -190,7 +190,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/survivor/varadero_shorts.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
 
 # Kutjevo
 - type: entity
