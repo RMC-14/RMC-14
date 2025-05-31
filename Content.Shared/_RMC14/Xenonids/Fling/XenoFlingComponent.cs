@@ -25,7 +25,7 @@ public sealed partial class XenoFlingComponent : Component
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SlowTime = TimeSpan.FromSeconds(8);
+    public TimeSpan SlowTime = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectPunch";
