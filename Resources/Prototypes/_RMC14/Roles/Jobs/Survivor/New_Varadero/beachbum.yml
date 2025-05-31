@@ -42,7 +42,7 @@
         - RMCUndershirtStraplessJungle
 
 - type: startingGear
-  parent: RMCGearSurvivor
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorBeachBum
   equipment:
     jumpsuit: RMCJumpsuitRedShorts
