@@ -33,7 +33,7 @@
   id: RMCGearSurvivorMedicalTechnician
   equipment:
     head: RMCHeadCapFlippable
-    jumpsuit: RMCJumpsuitCivilianGreen # TODO green utility jumpsuit
+    jumpsuit: RMCJumpsuitCivilianGreen
 
 - type: entity
   parent: CMSpawnPointJobBase
