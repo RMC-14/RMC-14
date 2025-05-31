@@ -5,7 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorBeachBum
   startingGear: RMCGearSurvivorBeachBum
-  #spawnMenuRoleName: Beach Bum (NV Survivor)
+  spawnMenuRoleName: Beach Bum (NV Survivor)
   special:
   - !type:AddComponentSpecial
     components:
