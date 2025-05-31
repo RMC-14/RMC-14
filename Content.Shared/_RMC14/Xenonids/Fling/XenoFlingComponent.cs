@@ -22,7 +22,7 @@ public sealed partial class XenoFlingComponent : Component
     public float ThrowSpeed = 10f;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(2);
+    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
     public TimeSpan SlowTime = TimeSpan.FromSeconds(8);
