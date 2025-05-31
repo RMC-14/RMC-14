@@ -1,0 +1,23 @@
+- type: reaction
+  id: RMCMindbreakerToxin
+  reactants:
+    RMCSilicon:
+      amount: 1
+    RMCHydrogen:
+      amount: 1
+    CMDylovene:
+      amount: 1
+  products:
+    RMCMindbreakerToxin: 3
+
+- type: reaction
+  id: RMCSpaceDrugs
+  reactants:
+    RMCMercury:
+      amount: 1
+    RMCSugar:
+      amount: 1
+    RMCLithium:
+      amount: 1
+  products:
+    RMCSpaceDrugs: 3
