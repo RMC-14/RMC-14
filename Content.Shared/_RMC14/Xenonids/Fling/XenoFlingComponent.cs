@@ -28,6 +28,9 @@ public sealed partial class XenoFlingComponent : Component
     public TimeSpan SlowTime = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan DazeTime = TimeSpan.FromSeconds(0);
+
+    [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectPunch";
 
     [DataField, AutoNetworkedField]
