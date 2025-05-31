@@ -42,6 +42,7 @@
         - RMCUndershirtStraplessJungle
 
 - type: startingGear
+  parent: RMCGearSurvivor
   id: RMCGearSurvivorBeachBum
   equipment:
     jumpsuit: RMCJumpsuitRedShorts
@@ -50,9 +51,6 @@
     mask: RMCCigarette
     shoes: RMCShoesSandals
     gloves: CMHandsBrown
-    id: CMIDCardColonist
-    ears: CMHeadsetColony
-    pocket1: RMCPouchSurvivalFill
 
 - type: entity
   parent: CMSatchelFillSurvivor

@@ -54,7 +54,6 @@
     id: CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchGeneral
 
 - type: startingGear
   parent: RMCGearSurvivor
@@ -62,6 +61,7 @@
   equipment:
     jumpsuit: CMJumpsuitColonist
     shoes: RMCShoesBlack
+    pocket2: RMCPouchGeneral
 
 - type: entity
   parent: CMSpawnPointJobBase
