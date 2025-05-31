@@ -13,3 +13,5 @@
     slots:
     - pocket
   - type: RMCMegaphone
+  - type: UseDelay
+    delay: 2

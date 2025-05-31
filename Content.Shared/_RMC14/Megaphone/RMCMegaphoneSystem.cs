@@ -1,6 +1,7 @@
 using Content.Shared.Interaction.Events;
 using Content.Shared._RMC14.Dialog;
 using Robust.Shared.Serialization;
+using Content.Shared.Examine;
 
 namespace Content.Shared._RMC14.Megaphone;
 
@@ -10,7 +11,10 @@ public sealed class RMCMegaphoneSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<RMCMegaphoneComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<RMCMegaphoneComponent, ExaminedEvent>(OnExamined);
     }
 
     private void OnUseInHand(Entity<RMCMegaphoneComponent> ent, ref UseInHandEvent args)
@@ -19,6 +23,11 @@ public sealed class RMCMegaphoneSystem : EntitySystem
 
         var ev = new MegaphoneInputEvent(GetNetEntity(args.User));
         _dialog.OpenInput(args.User, "Enter a message for the megaphone:", ev, largeInput: false, characterLimit: 100);
+    }
+
+    private void OnExamined(Entity<RMCMegaphoneComponent> ent, ref ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString("rmc-megaphone-examine"));
     }
 }
 

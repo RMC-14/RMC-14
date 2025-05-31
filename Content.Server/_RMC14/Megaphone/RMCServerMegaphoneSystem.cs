@@ -12,12 +12,12 @@ namespace Content.Server._RMC14.Megaphone;
 public sealed class RMCServerMegaphoneSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IServerConsoleHost _console = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<ActorComponent, MegaphoneInputEvent>(OnMegaphoneInput);
+        SubscribeLocalEvent<RMCMegaphoneUserComponent, EntitySpokeEvent>(OnEntitySpoke);
     }
 
     private void OnMegaphoneInput(Entity<ActorComponent> ent, ref MegaphoneInputEvent ev)
@@ -53,8 +53,15 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             speech.SuffixSpeechVerbs = userComp.OriginalSuffixSpeechVerbs ?? new();
             Dirty(user, speech);
         }
+    }
 
-        RemComp<RMCMegaphoneUserComponent>(user);
-        RemComp<RMCSpeechBubbleSpecificStyleComponent>(user);
+    private void OnEntitySpoke(Entity<RMCMegaphoneUserComponent> ent, ref EntitySpokeEvent args)
+    {
+        if (args.Channel != null)
+            return;
+
+        // Remove components after the message is sent
+        RemComp<RMCMegaphoneUserComponent>(ent);
+        RemComp<RMCSpeechBubbleSpecificStyleComponent>(ent);
     }
 }
