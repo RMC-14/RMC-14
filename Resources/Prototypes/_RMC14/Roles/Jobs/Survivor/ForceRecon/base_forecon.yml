@@ -36,10 +36,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # TODO durag and grey beanie
+    randomOutfits: # TODO durag
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
+    - [ RMCHeadBeanie ]
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]
