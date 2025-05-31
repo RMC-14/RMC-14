@@ -384,6 +384,7 @@
     explosionArmor: 40
   - type: Corrodible
     isCorrodible: false
+  - type: RMCLeapProtection
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/jungle.rsi

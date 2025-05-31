@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -11,6 +12,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Inventory;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -56,6 +58,8 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -66,6 +70,10 @@ public sealed class XenoLeapSystem : EntitySystem
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
         SubscribeLocalEvent<XenoLeapComponent, MeleeHitEvent>(OnXenoLeapMelee);
+
+        SubscribeLocalEvent<InventoryComponent, XenoLeapHitAttempt>(_inventory.RelayEvent);
+        SubscribeLocalEvent<RMCLeapProtectionComponent, XenoLeapHitAttempt>(OnXenoLeapHitAttempt);
+        SubscribeLocalEvent<RMCLeapProtectionComponent, InventoryRelayedEvent<XenoLeapHitAttempt>>(OnXenoLeapHitAttemptRelayed);
 
         SubscribeLocalEvent<XenoLeapingComponent, StartCollideEvent>(OnXenoLeapingDoHit);
         SubscribeLocalEvent<XenoLeapingComponent, ComponentRemove>(OnXenoLeapingRemove);
@@ -217,6 +225,44 @@ public sealed class XenoLeapSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    private void OnXenoLeapHitAttempt(Entity<RMCLeapProtectionComponent> ent, ref XenoLeapHitAttempt args)
+    {
+        args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp, args.Leaper);
+    }
+
+    private void OnXenoLeapHitAttemptRelayed(Entity<RMCLeapProtectionComponent> ent,
+        ref InventoryRelayedEvent<XenoLeapHitAttempt> args)
+    {
+        args.Args.Cancelled = AttemptBlockLeap(_transform.GetParentUid(ent), ent.Comp, args.Args.Leaper);
+    }
+
+    private bool AttemptBlockLeap(EntityUid blocker, RMCLeapProtectionComponent leapProtection, EntityUid leaper)
+    {
+        if(!TryComp(leaper, out XenoLeapingComponent? leaping))
+            return false;
+
+        var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
+        var diff = leaping.Origin.Position - blockerCoordinates.Coords.Position;
+        var dir = diff.Normalized().GetDir();
+        var blockerDirection = blockerCoordinates.worldRot.GetDir();
+        var relativeDiff = Math.Abs(dir - blockerDirection);
+
+        // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing.
+        // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the North-West, North, or North-East of the blocker.
+        if(relativeDiff != 0 && relativeDiff != 1 && relativeDiff != 7)
+            return false;
+
+        _stun.TryParalyze(leaper, leapProtection.StunDuration, true);
+        _sizeStun.KnockBack(leaper, blockerCoordinates.Coords);
+        _audio.PlayPredicted(leapProtection.BlockSound, leaper, leaper);
+
+        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", leaper), ("object", blocker));
+        var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", leaper), ("object", blocker));
+        _popup.PopupPredicted(selfMessage, othersMessage, leaper, leaper, PopupType.MediumCaution);
+
+        return true;
+    }
+
     private bool IsValidLeapHit(Entity<XenoLeapingComponent> xeno, EntityUid target)
     {
         if (xeno.Comp.KnockedDown)
@@ -269,6 +315,14 @@ public sealed class XenoLeapSystem : EntitySystem
 
             if (physics.Awake)
                 _broadphase.RegenerateContacts(xeno, physics);
+        }
+
+        var leapEv = new XenoLeapHitAttempt(SlotFlags.HEAD | SlotFlags.OUTERCLOTHING, xeno.Owner);
+        RaiseLocalEvent(target, ref leapEv);
+
+        if (leapEv.Cancelled)
+        {
+            return true;
         }
 
         if (!xeno.Comp.KnockdownRequiresInvisibility || HasComp<XenoActiveInvisibleComponent>(xeno))
@@ -350,3 +404,7 @@ public sealed class XenoLeapSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct XenoLeapHitAttempt
+    (SlotFlags TargetSlots, EntityUid Leaper, bool Cancelled = false) : IInventoryRelayEvent;
