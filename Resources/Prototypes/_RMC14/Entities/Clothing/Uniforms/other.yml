@@ -185,7 +185,7 @@
   parent: RMCJumpsuitCivilian
   id: RMCJumpsuitCivilianGreen
   name: green utility uniform
-  description: A stylish brown jumpsuit, popularly issued to UN contract workers on the frontier.
+  description: A stylish green jumpsuit, popularly issued to UN contract workers on the frontier.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/green_utility.rsi
