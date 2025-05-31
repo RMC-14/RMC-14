@@ -616,7 +616,6 @@
       effects:
       - !type:PopupMessage #TODO -2 confusion stat and message in 5 min intervals
         type: Local
-        visualType: Medium
         messages: [ "antidepressant-effect-rmcmethylphenidate" ]
         probability: 0.05
 
@@ -632,7 +631,6 @@
       effects:
       - !type:PopupMessage #TODO -1 confusion stat and message in 5 min intervals
         type: Local
-        visualType: Medium
         messages: [ "antidepressant-effect-rmccitalopram" ]
         probability: 0.05
 
@@ -648,7 +646,6 @@
       effects:
       - !type:PopupMessage #TODO -3 confusion stat and message in 5 min intervals
         type: Local
-        visualType: Medium
         messages: [ "antidepressant-effect-rmcparoxetine" ]
         probability: 0.05
       - !type:GenericStatusEffect
