@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed weed killer not removing resin traps and sticky/fast resin in its
-      area.
-    type: Fix
-  - message: Fixed weed killer not also disabling weed node placement for 8 minutes.
-    type: Fix
-  - message: Fixed early heavy spread still being disabled.
-    type: Fix
-  - message: Fixed weed killer on Shiva's Snowball southern LZ not removing weeds
-      directly east of it.
-    type: Fix
-  - message: The popup on the ASRS console in Requisitions now also includes the money
-      you get back for selling a crate (200 per).
-    type: Tweak
-  id: 1279
-  time: '2025-01-29T18:03:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5490
 - author: Tunguso4ka
   changes:
   - message: Fixed Riflemen not being able to buy M1984 AP ammo in their vendor.
@@ -5317,5 +5299,13 @@
   id: 1781
   time: '2025-06-01T10:20:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6577
+- author: Vermidia
+  changes:
+  - message: Fixed using tail seize during melee cooldown not properly cancelling
+      the ability.
+    type: Fix
+  id: 1782
+  time: '2025-06-01T10:23:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6599
 Name: RMC14
 Order: -1
