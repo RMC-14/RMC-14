@@ -47,13 +47,15 @@
     baseFireModes:
     - SemiAuto
     - Burst
+    recoilWielded: 4
+    recoilUnwielded: 4
     baseFireRate: 1.111
     scatterWielded: 8
     scatterUnwielded: 20
     burstScatterMult: 5
     modifiers:
       Burst:
-        fireDelay: 0.1333
+        fireDelay: 0.2664
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
