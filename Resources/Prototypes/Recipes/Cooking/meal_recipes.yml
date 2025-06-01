@@ -618,6 +618,30 @@
   solids:
     FoodOnionSlice: 1
 
+#Eggs
+
+- type: microwaveMealRecipe
+  id: RecipeOmelette
+  name: omelette recipe
+  result: FoodMealOmelette
+  time: 10
+  group: Eggs
+  solids:
+    FoodCheeseSlice: 1
+  reagents:
+    Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeFriedEgg
+  name: fried egg recipe
+  result: FoodMealFriedegg
+  time: 10
+  group: Eggs
+  reagents:
+    Egg: 6
+    TableSalt: 1
+    Blackpepper: 1
+
 #Pizzas TODO: contruction graph based pizza
 - type: microwaveMealRecipe
   id: RecipeMargheritaPizza
@@ -1866,7 +1890,7 @@
     FoodTomato: 1
     ClothingShoesClown: 1
 
-- type: microwaveMealRecipe #Changed for RMC
+- type: microwaveMealRecipe
   id: RecipeQueso
   name: queso recipe
   result: FoodMealQueso
@@ -2360,3 +2384,38 @@
     FoodBreadPlainSlice: 2
     FoodCheeseSlice: 1
     FoodButterSlice: 1
+
+
+- type: microwaveMealRecipe
+  id: RecipeCannoli
+  name: cannoli recipe
+  result: FoodBakedCannoli
+  time: 10
+  group: Dessert
+  solids:
+    FoodDoughFlat: 1
+    FoodSnackChocolateBar: 1
+  reagents:
+    Cream: 5
+
+- type: microwaveMealRecipe
+  id: RecipeCornedBeef
+  name: corned beef and cabbage recipe
+  result: FoodMealCornedbeef
+  time: 15
+  group: Savory
+  solids:
+    FoodMeat: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipePretzel
+  name: poppy pretzel recipe
+  result: FoodBakedPretzel
+  group: Breads
+  time: 10
+  solids:
+    FoodDoughRope: 1
+    PoppySeeds: 1
+  reagents:
+    SodaWater: 5
