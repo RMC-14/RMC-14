@@ -227,12 +227,18 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapHitAttempt(Entity<RMCLeapProtectionComponent> ent, ref XenoLeapHitAttempt args)
     {
+        if(args.Cancelled)
+            return;
+
         args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp, args.Leaper);
     }
 
     private void OnXenoLeapHitAttemptRelayed(Entity<RMCLeapProtectionComponent> ent,
         ref InventoryRelayedEvent<XenoLeapHitAttempt> args)
     {
+        if(args.Args.Cancelled)
+            return;
+
         args.Args.Cancelled = AttemptBlockLeap(_transform.GetParentUid(ent), ent.Comp, args.Args.Leaper);
     }
 
@@ -317,13 +323,11 @@ public sealed class XenoLeapSystem : EntitySystem
                 _broadphase.RegenerateContacts(xeno, physics);
         }
 
-        var leapEv = new XenoLeapHitAttempt(SlotFlags.HEAD | SlotFlags.OUTERCLOTHING, xeno.Owner);
+        var leapEv = new XenoLeapHitAttempt(SlotFlags.OUTERCLOTHING, xeno.Owner);
         RaiseLocalEvent(target, ref leapEv);
 
         if (leapEv.Cancelled)
-        {
             return true;
-        }
 
         if (!xeno.Comp.KnockdownRequiresInvisibility || HasComp<XenoActiveInvisibleComponent>(xeno))
         {
