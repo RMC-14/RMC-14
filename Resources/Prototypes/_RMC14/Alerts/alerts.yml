@@ -87,6 +87,7 @@
   clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerAlpha
   category: SquadTracker
   icons:
@@ -110,14 +111,11 @@
     state: trackon-west_asl
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_asl
-  name: Marine Squad Tracker
   description: Tracks the Alpha Squad Leader.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
   id: SquadTrackerBravo
+  parent: SquadTracker
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -140,13 +138,10 @@
     state: trackon-west_bsl
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_bsl
-  name: Marine Squad Tracker
   description: Tracks the Bravo Squad Leader.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerCharlie
   category: SquadTracker
   icons:
@@ -170,13 +165,10 @@
     state: trackon-west_csl
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_csl
-  name: Marine Squad Tracker
   description: Tracks the Charlie Squad Leader.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerDelta
   category: SquadTracker
   icons:
@@ -200,13 +192,10 @@
     state: trackon-west_dsl
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_dsl
-  name: Marine Squad Tracker
   description: Tracks the Delta Squad Leader.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerEcho
   category: SquadTracker
   icons:
@@ -230,13 +219,10 @@
     state: trackon-west_esl
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_esl
-  name: Marine Squad Tracker
   description: Tracks the Echo Squad Leader.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerFoxtrot
   category: SquadTracker
   icons:
@@ -260,13 +246,37 @@
     state: trackon-west_fsl
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_fsl
-  name: Marine Squad Tracker
   description: Tracks the Foxtrot Squad Leader.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
+  id: SquadTrackerReconnaissance
+  category: SquadTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-direct_fosl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-south_fosl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southeast_fosl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-east_fosl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northeast_fosl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-north_fosl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northwest_fosl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-west_fosl
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southwest_fosl
+  description: Tracks the FORECON Squad Leader.
+
+- type: alert
+  parent: SquadTracker
   id: SquadTrackerCommandingOfficer
   category: SquadTracker
   icons:
@@ -290,13 +300,10 @@
     state: trackon-west_co
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_co
-  name: Marine Squad Tracker
   description: Tracks the Commanding Officer.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerExecutiveOfficer
   category: SquadTracker
   icons:
@@ -320,13 +327,10 @@
     state: trackon-west_xo
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_xo
-  name: Marine Squad Tracker
   description: Tracks the Executive Officer.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerChiefMilitaryPolice
   category: SquadTracker
   icons:
@@ -350,13 +354,10 @@
     state: trackon-west_cmp
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_cmp
-  name: Marine Squad Tracker
   description: Tracks the Chief Military Police
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerLandingZone
   category: SquadTracker
   icons:
@@ -380,13 +381,10 @@
     state: trackon-west_lz
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_lz
-  name: Marine Squad Tracker
   description: Tracks the Primary Landing Zone
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerCorporateLiaison
   category: SquadTracker
   icons:
@@ -412,9 +410,6 @@
     state: trackon-southwest_cl
   name: We-Ya Squad Tracker
   description: Tracks the Corporate Liaison.
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
   id: SquadTrackerPMCTeamLeader
@@ -442,9 +437,6 @@
     state: trackon-southwest_tl
   name: We-Ya Squad Tracker
   description: Tracks the Team Leader
-  minSeverity: 0
-  maxSeverity: 10
-  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
   id: MarineTacMapAlert

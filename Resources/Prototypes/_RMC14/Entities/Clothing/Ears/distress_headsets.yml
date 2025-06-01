@@ -194,3 +194,4 @@
     defaultMode: FORECONCommandingOfficer
     trackerModes:
     - FORECONCommandingOfficer
+    - SquadLeader

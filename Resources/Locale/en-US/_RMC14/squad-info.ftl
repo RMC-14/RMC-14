@@ -51,4 +51,6 @@ rmc-squad-info-ProvostAdvisor = Provost Advisor
 rmc-squad-info-LeaderSpp = Leader
 rmc-squad-info-LeaderFreelancer = Leader
 
+rmc-squad-info-FORECONCommandingOfficer = Commanding Officer
+
 rmc-squad-info-PrimaryLandingZone = Primary Landing Zone
