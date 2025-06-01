@@ -55,6 +55,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCLeader
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCLeader
+  name: weya pmc squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCLeader
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCLeader
