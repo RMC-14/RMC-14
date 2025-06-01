@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Ported Burrower Unburrow stunning marines in a 0.5 tile range for 4 seconds.
-    type: Add
-  id: 1282
-  time: '2025-02-03T11:14:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5495
-- author: whisper
-  changes:
-  - message: Kamiel Lancoaster, Eric Rasczak figurine
-    type: Add
-  id: 1283
-  time: '2025-02-03T11:20:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5492
 - author: Dutch-VanDerLinde
   changes:
   - message: Added radio tuning. This will allow you to select what channels you can
@@ -5309,5 +5295,26 @@
   id: 1784
   time: '2025-06-01T10:29:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6580
+- author: Vermidia
+  changes:
+  - message: Fixed custom rifle bullets not having a maximum range of 24 (they no
+      longer do damage past that).
+    type: Fix
+  - message: Fixed custom rifle incind and impact bullets not having a minimum range
+      of 4 (they lose accuracy if too close or too far)
+    type: Fix
+  - message: Fixed custom rifle incind bullets just having different accuracy falloff
+      from the other custom rifle bullets.
+    type: Fix
+  id: 1785
+  time: '2025-06-01T10:32:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6606
+- author: Vermidia
+  changes:
+  - message: Fixed acid ball cooldown being 0 and applying before the doafter finished.
+    type: Fix
+  id: 1786
+  time: '2025-06-01T10:31:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6579
 Name: RMC14
 Order: -1
