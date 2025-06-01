@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Tracker.SquadLeader;
 
@@ -11,8 +12,8 @@ public sealed partial class GrantSquadLeaderTrackerComponent : Component, ICloth
     public SlotFlags Slots { get; set; } = SlotFlags.EARS;
 
     [DataField, AutoNetworkedField]
-    public SquadLeaderTrackerMode? DefaultMode;
+    public ProtoId<TrackerModePrototype> DefaultMode;
 
     [DataField, AutoNetworkedField]
-    public HashSet<SquadLeaderTrackerMode> TrackerModes = new();
+    public HashSet<ProtoId<TrackerModePrototype>> TrackerModes = new();
 }
