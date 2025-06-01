@@ -77,14 +77,15 @@
         points: 30
     - name: Clothing Items
       entries:
+      - id: RMCBackpackRTO
+        recommended: true
+        points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
         points: 5
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         points: 15
-      - id: RMCBackpackRTO
-        points: 5
       #- id: RMCWeldingGoggles
       #  points: 3
       - id: CMBeltUtilityCombat
@@ -128,10 +129,10 @@
       - id: RMCVisorNightVision
         points: 30
         recommended: true
-    #- id: CMMedicalHelmetOptic
-    #  points: 15
-    #- id: CMWeldingVisor
-    #  points: 5
+      - id: RMCVisorMedical
+        points: 15
+      - id: RMCVisorWelding
+        points: 5
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

@@ -6,6 +6,7 @@ deadmin_on_join = true
 see_own_notes = true
 server_ban_erase_player = true
 new_player_threshold = 600
+alert.explosion_min_intensity = -1
 
 [adminlogs]
 server_name = "rouny"
@@ -72,7 +73,6 @@ wiki = "https://wiki.rouny-ss14.com"
 
 [net]
 tickrate = 25
-port = 1212
 bindto = "::,0.0.0.0"
 
 [physics]
@@ -103,7 +103,6 @@ default_guide = "RMC14"
 [shuttle]
 arrivals_planet = false
 arrivals = false
-grid_fill = false
 preload_grids = false
 startup_time = 10
 travel_time = 100
@@ -117,10 +116,9 @@ auto_call_time = 0
 # The status server is the TCP side, used by the launcher to determine engine version, etc.
 # To be clear: Disabling it makes the launcher unable to connect!
 enabled = true
-
-# This is the address and port the status server binds to.
-# The port is by default set based on net.port so it will follow what you set there.
-bind = "*:1212"
+privacy_policy_link = "https://wiki.rouny-ss14.com/wiki/Privacy_Policy"
+privacy_policy_identifier = "rmc14"
+privacy_policy_version = "2025-04-12"
 
 [tips]
 dataset = "CM_Tips"

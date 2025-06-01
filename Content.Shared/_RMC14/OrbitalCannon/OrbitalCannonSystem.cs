@@ -621,6 +621,12 @@ public sealed class OrbitalCannonSystem : EntitySystem
                     if (step.CheckProtectionPer && !_area.CanOrbitalBombard(coordinates, out _))
                         continue;
 
+                    if (step.ExplosionEffect != null)
+                    {
+                        var effect = Spawn(step.ExplosionEffect.Value, mapCoordinates);
+                        _rmcExplosion.TryDoEffect(effect);
+                    }
+
                     if (step.Type is { } type)
                         _rmcExplosion.QueueExplosion(mapCoordinates, type, step.Total, step.Slope, step.Max, uid, canCreateVacuum: false);
 

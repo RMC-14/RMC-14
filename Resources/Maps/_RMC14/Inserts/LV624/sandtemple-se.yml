@@ -662,7 +662,7 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: RMCWallSandstone
+- proto: RMCWallSandstoneTemple
   entities:
   - uid: 53
     components:
@@ -759,7 +759,7 @@ entities:
     - type: Transform
       pos: 8.5,2.5
       parent: 1
-- proto: RMCWallSandstoneRuned
+- proto: RMCWallSandstoneTempleRuned
   entities:
   - uid: 58
     components:

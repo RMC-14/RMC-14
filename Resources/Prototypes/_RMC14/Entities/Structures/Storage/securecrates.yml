@@ -5,8 +5,8 @@
   components:
   - type: CrateOpenable
     spawn:
-    - id: RMCPlankWood1
-      amount: 2 # TODO RMC14 other drops
+    - id: RMCPlankWood2
+      amount: 1 # TODO RMC14 other drops
 
 - type: entity
   parent: RMCCrateOpenableBase
@@ -71,6 +71,9 @@
   - type: StaticPrice
     price: 50
   - type: ItemSlots
+  - type: XenoToggleChargingDamage
+    stageLoss: 1
+    destroy: true
 
 - type: entity
   parent: RMCCrateOpenableBase

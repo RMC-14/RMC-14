@@ -1,4 +1,6 @@
+using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Fireman;
@@ -18,4 +20,7 @@ public sealed partial class CanFiremanCarryComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan AggressiveGrabDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillCqc";
 }

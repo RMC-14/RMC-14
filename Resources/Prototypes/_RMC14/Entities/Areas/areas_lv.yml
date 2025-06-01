@@ -63,6 +63,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -87,6 +88,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -175,6 +177,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -197,6 +200,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -227,6 +231,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -504,6 +509,24 @@
   components:
   - type: Sprite
     state: away3
+    
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesNorthCentralCavesLakeHouseTower
+  name: Lake House Communications Relay
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624GroundCaves
@@ -846,6 +869,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624

@@ -4,6 +4,10 @@
   name: cm-job-name-messtech
   description: cm-job-description-messtech
   playTimeTracker: CMJobMessTech
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 7200 # 2 hours
   ranks:
     RMCRankLanceCorporal:
     - !type:RoleTimeRequirement
@@ -20,12 +24,6 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - MessTech
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: mst
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

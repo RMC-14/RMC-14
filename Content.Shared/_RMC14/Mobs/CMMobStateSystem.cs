@@ -1,4 +1,6 @@
-﻿using Content.Shared.Mobs.Components;
+﻿using Content.Shared._RMC14.Sprite;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Console;
 using Robust.Shared.Network;
@@ -11,11 +13,15 @@ public sealed class CMMobStateSystem : EntitySystem
     [Dependency] private readonly IConsoleHost _host = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<MobStateActionsComponent, CMGhostActionEvent>(OnMobStateActionsGhost);
+
+        SubscribeLocalEvent<RMCMobStateDrawDepthComponent, GetDrawDepthEvent>(OnMobStateDrawDepth);
+        SubscribeLocalEvent<RMCMobStateDrawDepthComponent, MobStateChangedEvent>(OnMobStateChanged);
 
         Subs.BuiEvents<MobStateActionsComponent>(CMMobStateActionsUI.Key,
             subs =>
@@ -39,6 +45,23 @@ public sealed class CMMobStateSystem : EntitySystem
 
         args.Handled = true;
         _ui.OpenUi(ent.Owner, CMMobStateActionsUI.Key, ent);
+    }
+
+    private void OnMobStateDrawDepth(Entity<RMCMobStateDrawDepthComponent> ent, ref GetDrawDepthEvent args)
+    {
+        if (!TryComp(ent, out MobStateComponent? mobState))
+            return;
+
+        if (args.DrawDepth == ent.Comp.Default &&
+            ent.Comp.DrawDepths.TryGetValue(mobState.CurrentState, out var depth))
+        {
+            args.DrawDepth = depth;
+        }
+    }
+
+    private void OnMobStateChanged(Entity<RMCMobStateDrawDepthComponent> ent, ref MobStateChangedEvent args)
+    {
+        _rmcSprite.UpdateDrawDepth(ent);
     }
 
     private void OnGhostActionBuiMsg(Entity<MobStateActionsComponent> ent, ref CMGhostActionBuiMsg args)

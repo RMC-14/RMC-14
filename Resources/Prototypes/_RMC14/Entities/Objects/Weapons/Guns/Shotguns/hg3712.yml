@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: HG 37-12 pump shotgun
   id: RMCWeaponShotgunHG3712
@@ -63,9 +63,7 @@
           tags:
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
-          - RMCAttachmentFlamer
         random:
-        - RMCAttachmentMiniFlamethrower
         - RMCAttachmentFlashlightGrip
       rmc-aslot-stock:
         locked: true

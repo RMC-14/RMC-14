@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CCVar;
+﻿using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
@@ -41,6 +42,9 @@ public sealed class ScalingSystem : EntitySystem
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!ev.LateJoin || !HasComp<MarineComponent>(ev.Mob))
+            return;
+
+        if (HasComp<RMCAdminSpawnedComponent>(ev.Mob))
             return;
 
         if (ev.JobId is not { } jobId ||
