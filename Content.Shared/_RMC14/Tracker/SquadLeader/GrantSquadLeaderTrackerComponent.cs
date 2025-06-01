@@ -11,7 +11,7 @@ public sealed partial class GrantSquadLeaderTrackerComponent : Component, ICloth
     [DataField, AutoNetworkedField]
     public SlotFlags Slots { get; set; } = SlotFlags.EARS;
 
-    [DataField, AutoNetworkedField]
+    [DataField(required: true), AutoNetworkedField]
     public ProtoId<TrackerModePrototype> DefaultMode;
 
     [DataField, AutoNetworkedField]

@@ -66,6 +66,7 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
+    defaultMode: PrimaryLandingZone
     trackerModes:
     - SquadLeader
     - PrimaryLandingZone
