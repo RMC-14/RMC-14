@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed ability slows rarely not wearing off.
-    type: Fix
-  id: 1281
-  time: '2025-02-03T11:00:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5509
 - author: blueDev2
   changes:
   - message: Ported Burrower Unburrow stunning marines in a 0.5 tile range for 4 seconds.
@@ -5307,5 +5300,14 @@
   id: 1783
   time: '2025-06-01T10:25:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6583
+- author: CyberTropic
+  changes:
+  - message: Added APC status lights.
+    type: Add
+  - message: Fixed leaky roof on the Normandy.
+    type: Fix
+  id: 1784
+  time: '2025-06-01T10:29:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6580
 Name: RMC14
 Order: -1
