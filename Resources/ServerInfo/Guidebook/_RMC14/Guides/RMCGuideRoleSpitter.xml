@@ -1,0 +1,26 @@
+<Document>
+  #Spitter, Tier 2
+  <GuideEntityEmbed Entity="CMXenoSpitter"/>
+  ##Playing as a Spitter
+  The Spitter turns from a harasser to now being able to go on the offensive. Its slower speed is now counteracted by better health and damaging spits along with stronger Corrosive Acid.
+
+  Its new acid based abilities allow it to deal consistent damage at the frontline at range.
+
+  Its unique combo is Charged Spit, Acid Spit and then Acid Spray, if used on the same host it will stun them to the ground and upgrade the Charged Spit on them, this can let you walk up and tailstab.
+
+  Stay at the frontline spitting hosts from afar, and in your downtime use your acid to melt flares and weapons.
+
+  Reminder that charge spits extra movement can be used for escaping, as it lasts a while or until your next spit!
+
+  ##Abilities:
+  - [bold]Acid Spit[/bold]: Glob acid to deal damage to any targets.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSpit"/>
+  - [bold]Charge Spit[/bold]: Grants you extra movement speed and armor and empowers your next spit, which will do extra damage but will be shorter in range. Additionally, it will spatter the target in acid.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoChargeSpit"/>
+  - [bold]Spray Acid[/bold]: Sprays acid along the ground in a line, covering any barricades and dealing damage to hosts.
+  - Will also extinguish any sisters if they are on fire.
+  - If used on a host affected by Charged Spit, will upgrade the spit and stun them.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSprayAcid"/>
+  - [bold]Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCorrosiveAcid"/>
+</Document>

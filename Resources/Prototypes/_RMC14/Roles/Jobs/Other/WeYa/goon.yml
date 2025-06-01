@@ -26,6 +26,7 @@
         RMCSkillFireman: 2
         RMCSkillEndurance: 2
         RMCSkillMeleeWeapons: 1
+        RMCSkillFirearms: 1
 
 - type: playTimeTracker
   id: RMCJobWeYaGoon

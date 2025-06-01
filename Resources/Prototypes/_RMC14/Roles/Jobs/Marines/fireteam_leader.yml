@@ -27,9 +27,6 @@
   - FTL
   overwatchSortPriority: -5
   overwatchRoleName: Fire Team Leaders
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: tl
   roleWeight: 1
   special:
   - !type:AddComponentSpecial

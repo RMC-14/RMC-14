@@ -112,3 +112,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "The CM-SS13 development team"
   source: "https://github.com/cmss13-devs/cmss13/commits/master/sound/items/weldingtool_off.ogg"
+
+- files: ["hud_on.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/handling/hud_on.ogg"
+
+- files: ["hud_off.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/handling/hud_off.ogg"

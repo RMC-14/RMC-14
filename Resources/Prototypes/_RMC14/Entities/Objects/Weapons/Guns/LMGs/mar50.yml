@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: MAR-50 light machine gun
   id: RMCWeaponMar50LMG
@@ -78,10 +78,6 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-      rmc-aslot-underbarrel:
-        whitelist:
-          tags:
-          - RMCAttachmentBipod
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.5, 0.00

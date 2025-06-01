@@ -1,0 +1,19 @@
+<Document>
+  #Vampire, Tier 2
+  <GuideEntityEmbed Entity="RMCXenoLurkerVampire"/>
+  ##Playing as a Vampire
+  You lose all of your abilities, and you forfeit a chunk of your health and damage in exchange for a large amount of armor, a little bit of movement speed, increased attack and brand new abilities that make you an assassin in the backlines, or a frontline demon if you are good enough.
+
+  Rush on your opponent to disorient them and Flurry to unleash a forward cleave that can hit and slow three hosts and heal you for every host you hit. Use your special Tail Jab to knock hosts away. You also deal more damage and a stun if they impact a wall. Finally, execute unconscious hosts with a headbite that bypasses armor and heals you for a grand amount of health.
+
+  ##Abilities:
+  - [bold]Rush[/bold]: A four-tile pounce that causes your targets screen to shake. This ability does not stun them.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPounce"/>
+  - [bold]Flurry[/bold]: An attack that has a range of 1x3 tiles, dealing moderate damage per target and healing you. A short slow is also applied to you upon landing it.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoFlurry"/>
+  - [bold]Tail Jab[/bold]: An attack dealing high damage to the target, alongside pushing the target back. If they impact an obstacle such as a wall, window, door or barricade, they will take more damage and will temporarily be stunned.
+  - For utility, this can instantly break windows.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPierce"/>
+  - [bold]Headbite[/bold]: A high-damage attack that bypasses all armor, instantly killing your target and healing you greatly. Requires your target to be unconscious and adjacent to you, and has a windup before it will hit them.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoHeadbite"/>
+</Document>

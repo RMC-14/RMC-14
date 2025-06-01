@@ -5,11 +5,7 @@
   description: rmc-job-description-synth-colony
   playTimeTracker: RMCJobSyntheticColony
   ranks:
-    RMCRankSyntheticMG:
-    - !type:RoleTimeRequirement
-      role: RMCJobSynthetic
-      time: 252000 # 70 hours
-    RMCRankSynthetic: []
+    RMCRankSyntheticColonist: []
   startingGear: RMCGearSyntheticColonist
   icon: "RMCJobIconSynth"
   requireAdminNotify: true
@@ -19,12 +15,6 @@
   accessGroups:
   - Colonist
   - Synth
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: synth
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -52,11 +42,58 @@
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
+    - type: RMCRibbon
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      generation: rmc-species-synth-generation-second
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      # TODO darksight instead of night vision
+      - type: NightVision
+        innate: true
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
+      - type: RMCSuicide
+        damage: { }
   hidden: true
 
 - type: startingGear
@@ -65,7 +102,7 @@
     jumpsuit: RMCJumpsuitSynthetic
     gloves: CMHandsInsulated
     shoes: RMCShoesWhite
-    id: RMCIDCardSynth
+    id: RMCIDCardSynthColony
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
 
