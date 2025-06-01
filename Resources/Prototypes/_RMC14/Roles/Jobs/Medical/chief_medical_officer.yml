@@ -21,16 +21,10 @@
   startingGear: CMGearCMO
   icon: "CMJobIconCMO"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCMO
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: doctor
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -94,3 +88,13 @@
 - type: playTimeTracker
   id: CMJobCMO
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCMO
+  name: The CMO
+  description: The Chief Medical Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_medical_officer

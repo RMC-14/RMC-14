@@ -1,0 +1,70 @@
+# Bureau Liaison
+- type: job
+  parent: CMJobBase
+  id: CMICBLiaison
+  name: rmc-job-name-icb
+  description: rmc-ghost-role-information-icb-description
+  playTimeTracker: RMCJobICBLiaison
+  ranks:
+    RMCRankICBCorporateLiaison: [ ]
+  startingGear: RMCGearICBLiaison
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExecColony
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-icb
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidICBLiaison
+  name: interstellar commerce bureau liaison ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCICBLiaison
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCICBLiaison
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-icb
+    description: rmc-ghost-role-information-icb-description
+    rules: rmc-ghost-role-information-bureau-rules
+    reregister: false
+    job: CMICBLiaison
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearICBLiaison
+  equipment:
+    eyes: RMCSunglasses
+    head: RMCHardhatWhite
+    ears: RMCHeadsetDistressICBLiaison # TODO RMC14 tape recorder
+    back: RMCSatchelICBLiaisonFill # TODO RMC14 secure leather satchel
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCHazardVestYellow
+    gloves: CMHandsInsulated
+    shoes: RMCBootsPMCFilled
+    id: RMCIDCardICBLiaison
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchGeneralLargeICBLiaison
+    suitStorage: RMCFlashlight
+  inhand:
+  - CMClipboard
+
+- type: playTimeTracker
+  id: RMCJobICBLiaison

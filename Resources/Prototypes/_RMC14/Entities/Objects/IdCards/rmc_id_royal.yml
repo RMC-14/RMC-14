@@ -1,0 +1,15 @@
+﻿- type: entity
+  id: FactionRoyalMarines
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - RoyalMarine
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDRoyalMarines
+  name: royal marine dogtags
+  components:
+  - type: ItemIFF
+    faction: FactionRoyalMarines

@@ -1,5 +1,6 @@
 ﻿using Content.Server._RMC14.TacticalMap;
 using Content.Server.Administration.Logs;
+using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
@@ -13,6 +14,7 @@ using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -26,6 +28,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
 {
     [Dependency] private readonly AdminSystem _admin = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly EuiManager _eui = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
@@ -65,11 +68,21 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
 
     private void OnSpawnAsJobDialog(SpawnAsJobDialogEvent ev)
     {
-        if (GetEntity(ev.User) is not { Valid: true } user)
+        if (GetEntity(ev.User) is not { Valid: true } user ||
+            GetEntity(ev.Target) is not { Valid: true } target)
+        {
+            return;
+        }
+
+        SpawnAsJob(user, target, ev.JobId);
+    }
+
+    public void SpawnAsJob(EntityUid user, EntityUid target, ProtoId<JobPrototype> job)
+    {
+        if (!_adminManager.IsAdmin(user))
             return;
 
-        if (GetEntity(ev.Target) is not { Valid: true } target ||
-            !TryComp(target, out ActorComponent? actor) ||
+        if (!TryComp(target, out ActorComponent? actor) ||
             !_transform.TryGetMapOrGridCoordinates(target, out var coords))
         {
             _popup.PopupEntity(Loc.GetString("admin-player-spawn-failed"), user, user);
@@ -83,16 +96,31 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
         var newMind = _mind.CreateMind(player.UserId, profile.Name);
         _mind.SetUserId(newMind, player.UserId);
         _playTimeTracking.PlayerRolesChanged(player);
-        var mobUid = _stationSpawning.SpawnPlayerCharacterOnStation(stationUid, ev.JobId, profile);
+        var mobUid = _stationSpawning.SpawnPlayerCharacterOnStation(stationUid, job, profile);
 
         _mind.TransferTo(newMind, mobUid);
-        _role.MindAddJobRole(newMind, jobPrototype: ev.JobId);
+        _role.MindAddJobRole(newMind, jobPrototype: job);
 
         var jobName = _job.MindTryGetJobName(newMind);
         _admin.UpdatePlayerList(player);
 
         if (mobUid != null)
+        {
+            EnsureComp<RMCAdminSpawnedComponent>(mobUid.Value);
             _transform.SetCoordinates(mobUid.Value, coords.Value);
+
+            var spawnEv = new PlayerSpawnCompleteEvent(
+                mobUid.Value,
+                player,
+                job,
+                true,
+                true,
+                0,
+                default,
+                profile
+            );
+            RaiseLocalEvent(mobUid.Value, spawnEv, true);
+        }
 
         _adminLog.Add(LogType.RMCSpawnJob, $"{ToPrettyString(user)} spawned {ToPrettyString(mobUid)} as job {jobName}");
     }

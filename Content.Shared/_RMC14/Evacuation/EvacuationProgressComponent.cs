@@ -11,6 +11,9 @@ public sealed partial class EvacuationProgressComponent : Component
     public bool Enabled;
 
     [DataField, AutoNetworkedField]
+    public bool DropShipCrashed;
+
+    [DataField, AutoNetworkedField]
     public bool StartAnnounced;
 
     [DataField, AutoNetworkedField]

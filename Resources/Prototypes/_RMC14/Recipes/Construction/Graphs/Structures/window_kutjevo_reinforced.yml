@@ -1,0 +1,50 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCWindowKutjevoReinforced
+  start: start
+  graph:
+  - node: start # not currently buildable
+
+  - node: windowFrameKutjevoReinforced
+    entity: RMCWindowFrameKutjevoReinforced
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 2
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Anchoring
+        doAfter: 2
+        duplicateConditions: All
+
+    - to: windowKutjevoReinforced
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: CMGlassReinforced
+        amount: 2
+        doAfter: 2
+
+  - node: windowKutjevoReinforced
+    entity: RMCWindowKutjevoReinforced
+    edges:
+    - to: windowFrameKutjevoReinforced
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 2
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+      - tool: Prying
+      - tool: Screwing

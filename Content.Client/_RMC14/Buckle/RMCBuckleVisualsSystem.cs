@@ -1,5 +1,7 @@
-﻿using Content.Client._RMC14.Xenonids;
+﻿using Content.Client._RMC14.Sprite;
+using Content.Client._RMC14.Xenonids;
 using Content.Shared._RMC14.Buckle;
+using Content.Shared._RMC14.Sprite;
 using Content.Shared.Buckle.Components;
 using Robust.Client.GameObjects;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
@@ -8,7 +10,7 @@ namespace Content.Client._RMC14.Buckle;
 
 public sealed class RMCBuckleVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly XenoVisualizerSystem _xenoVisualizer = default!;
+    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
 
     public override void Initialize()
     {
@@ -18,7 +20,7 @@ public sealed class RMCBuckleVisualsSystem : EntitySystem
 
     private void OnBuckleState(Entity<BuckleComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        _xenoVisualizer.UpdateDrawDepth(ent.Owner);
+        _rmcSprite.UpdateDrawDepth(ent.Owner);
     }
 
     private void OnGetDrawDepth(Entity<RMCBuckleDrawDepthComponent> ent, ref GetDrawDepthEvent args)

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCAttachableBase
   id: RMCStockAttachmentBase
@@ -61,11 +61,6 @@
   - type: AttachableWieldDelayMods
     modifiers:
       - delay: 0.4
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -102,11 +97,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentMOU53Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -143,11 +133,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentType23Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableWieldDelayMods
     modifiers:
       - delay: 0.3
@@ -461,6 +446,11 @@
     - conditions:
         activeOnly: true
       delay: 0.2
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 5
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -666,6 +656,11 @@
     - conditions:
         activeOnly: true
       delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -800,11 +795,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentXM88Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 5
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -849,11 +839,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentHG3712Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -869,11 +854,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentHG3712Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
 
 - type: entity
   parent: RMCAttachableBase
@@ -890,6 +870,23 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentSSG45Stock
+
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL83A2Stock
+  name: L83A2 solid stock
+  description: Intergrated into the L83A2. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: l83a2_a
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentL83A2Stock
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
@@ -968,3 +965,6 @@
 
 - type: Tag
   id: RMCAttachmentSSG45Stock
+
+- type: Tag
+  id: RMCAttachmentL83A2Stock

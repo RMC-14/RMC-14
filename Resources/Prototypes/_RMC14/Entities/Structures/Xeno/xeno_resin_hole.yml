@@ -7,6 +7,9 @@
     snap:
     - Wall
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideResinHoles
   - type: Clickable
   - type: Transform
     anchored: true
@@ -87,6 +90,5 @@
   - type: Corrodible
     isCorrodible: false
   - type: XenoConstruct
-    destroyWeedNodes: false
   - type: RequireProjectileTarget
   - type: DeletedByWeedKiller

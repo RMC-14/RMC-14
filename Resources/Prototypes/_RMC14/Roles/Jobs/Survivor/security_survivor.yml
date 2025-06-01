@@ -26,10 +26,13 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSecurity
     - type: RMCSurvivor
+    - type: RMCRibbon
     - type: MotionDetectorTracked
-    - type: UserIFF
-      faction: FactionSurvivor
+    - type: NpcFactionMember
+      factions:
+      - Survivor
     - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
 
 - type: startingGear
   id: RMCGearSurvivorSecurity
@@ -67,7 +70,7 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetSecurity
-  name: security survivor preset
+  name: security colonist preset
   components:
   - type: SurvivorPreset
     primaryWeapons:
@@ -75,3 +78,21 @@
     - [ CMBeltMarineMP5, WeaponSMGMP5 ]
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
     - [ CMBeltMarineM16, WeaponRifleM16 ]
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorSecurity
+  name: security colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorSecurity
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorSecurity
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorSecurity
