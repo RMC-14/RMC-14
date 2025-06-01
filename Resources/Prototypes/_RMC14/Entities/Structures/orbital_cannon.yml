@@ -166,6 +166,36 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCOrbitalCannonExplosionExplosiveTest
+  name: explosive test OB explosion
+  suffix: FIRES AN OB!!!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: OrbitalCannonExplosion
+    steps:
+    - type: RMCOBXenoTunnel
+      total: 5000
+      slope: 1500
+      max: 200
+      delay: 1
+    - type: RMCOBXenoTunnel
+      total: 90000
+      slope: 10
+      max: 50
+      delay: 0.3
+    - fire: RMCTileFireOBtest
+      fireRange: 32
+    - type: RMCOBXenoTunneltest
+      total: 200
+      slope: 1
+      max: 10
+      delay: 2.5
+  - type: WarpPoint
+    location: 1 orbital bombardment
+
+- type: entity
+  parent: MarkerBase
   id: RMCOrbitalCannonExplosionIncendiary
   name: incendiary OB explosion
   suffix: FIRES AN OB!!!

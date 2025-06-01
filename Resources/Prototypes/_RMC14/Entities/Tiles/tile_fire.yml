@@ -127,6 +127,33 @@
 
 - type: entity
   parent: RMCTileFire
+  id: RMCTileFireOBtest
+  components:
+  - type: Sprite
+    color: "#C8FFFF"
+    layers:
+    - map: [ "base" ]
+      state: blue_4
+  - type: PointLight
+    color: "#8fcbeb"
+  - type: RMCIgniteOnCollide
+    intensity: 80
+    duration: 70
+  - type: TileFire
+    id: RMCTileFireOBtest
+    extinguishInstantly: false
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: blue_1 }
+          Two: { state: blue_2 }
+          Three: { state: blue_3 }
+          Four: { state: blue_4 }
+
+
+- type: entity
+  parent: RMCTileFire
   id: RMCTileFireLaser
   components:
   - type: Sprite
