@@ -116,6 +116,11 @@
   job: CMFreelancerLeader
 
 - type: trackerMode
+  id: FORECONCommandingOfficer
+  job: RMCSurvivorForeconCommander
+  alert: SquadTrackerCommandingOfficer
+
+- type: trackerMode
   id: PrimaryLandingZone
   component: PrimaryLandingZone
   alert: SquadTrackerLandingZone
