@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed blitz not hitting anything
-    type: Fix
-  id: 1276
-  time: '2025-01-29T00:48:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5485
-- author: Tunguso4ka
-  changes:
-  - message: Welderpack and weldersatchel can refuel welder tools ones again!
-    type: Fix
-  id: 1277
-  time: '2025-01-29T17:24:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5489
-- author: blueDev2
-  changes:
-  - message: Fixed Boiler Ability locking after stun
-    type: Fix
-  id: 1278
-  time: '2025-01-29T17:23:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5487
 - author: DrSmugleaf
   changes:
   - message: Fixed weed killer not removing resin traps and sticky/fast resin in its
@@ -5316,5 +5295,27 @@
   id: 1778
   time: '2025-05-21T22:56:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6520
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed survivors not spawning with a fireaxe as random gear.
+    type: Fix
+  id: 1779
+  time: '2025-06-01T10:20:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6578
+- author: noctyrnal
+  changes:
+  - message: Added the Two-Point Sling for PVE - A magnetic harness that offers benefits
+      when one handing a gun.
+    type: Add
+  id: 1780
+  time: '2025-06-01T10:21:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6591
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the pump shotgun only holding 9 shells instead of 10.
+    type: Fix
+  id: 1781
+  time: '2025-06-01T10:20:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6577
 Name: RMC14
 Order: -1
