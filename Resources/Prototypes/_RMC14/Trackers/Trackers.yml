@@ -116,6 +116,14 @@
   job: CMFreelancerLeader
 
 - type: trackerMode
+  id: SeniorConstableTSEPA
+  job: RMCTSEPASeniorConstable
+
+- type: trackerMode
+  id: InspectorTSEPA
+  job: RMCTSEPAInspector
+
+- type: trackerMode
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
