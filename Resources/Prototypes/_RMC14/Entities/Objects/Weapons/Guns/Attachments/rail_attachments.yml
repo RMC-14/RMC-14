@@ -107,6 +107,34 @@
     - accuracyAddMult: -0.05
 
 - type: entity
+  parent: RMCAttachmentMagneticHarness
+  id: RMCAttachmentTwoPointSling # PVE
+  name: two-point sling
+  description: A traditional strip of toughened nylon fabric with clips on either end for attaching to suitable mounting points on most longarms in the UN armed forces arsenals.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
+    state: pve-sling
+  - type: AttachableMagnetic
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: 0.05
+      recoilFlat: -4
+      scatterFlat: -10
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/snow-urban.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/snow-urban.rsi
+
+
+- type: entity
   parent: RMCRailAttachmentBase
   id: RMCAttachmentS5RedDotSight # reddot
   name: S5 red-dot sight
