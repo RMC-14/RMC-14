@@ -133,7 +133,7 @@
     color: "#C8FFFF"
     layers:
     - map: [ "base" ]
-      state: blue_4
+      state: purple_4
   - type: PointLight
     color: "#8fcbeb"
   - type: RMCIgniteOnCollide
@@ -146,10 +146,10 @@
     visuals:
       enum.TileFireLayers.Base:
         base:
-          One: { state: blue_1 }
-          Two: { state: blue_2 }
-          Three: { state: blue_3 }
-          Four: { state: blue_4 }
+          One: { state: purple_1 }
+          Two: { state: purple_2 }
+          Three: { state: purple_3 }
+          Four: { state: purple_4 }
 
 
 - type: entity
