@@ -8,6 +8,8 @@ using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
+using Content.Shared.Examine;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -18,6 +20,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 
@@ -37,6 +40,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -47,6 +51,8 @@ public sealed class RMCConstructionSystem : EntitySystem
     public override void Initialize()
     {
         _doorQuery = GetEntityQuery<DoorComponent>();
+
+        SubscribeLocalEvent<RMCConstructionPreventCollideComponent, PreventCollideEvent>(OnConstructionPreventCollide);
 
         SubscribeLocalEvent<RMCConstructionItemComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RMCConstructionItemComponent, RMCConstructionBuildDoAfterEvent>(OnBuildDoAfter);
@@ -152,6 +158,36 @@ public sealed class RMCConstructionSystem : EntitySystem
         return true;
     }
 
+    private void OnConstructionPreventCollide(Entity<RMCConstructionPreventCollideComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (ent.Comp.Target is not { } target || Deleted(target))
+        {
+            RemCompDeferred<RMCConstructionPreventCollideComponent>(ent.Owner);
+            return;
+        }
+
+        if (args.OtherEntity != target)
+            return;
+
+        if (!_examine.InRangeUnOccluded(ent.Owner, target, ent.Comp.Range))
+        {
+            RemCompDeferred<RMCConstructionPreventCollideComponent>(ent.Owner);
+            return;
+        }
+
+        args.Cancelled = true;
+    }
+
+    public void MakeConstructionImmuneToCollision(EntityUid construction, EntityUid user)
+    {
+        var constructionComp = EnsureComp<RMCConstructionPreventCollideComponent>(construction);
+        constructionComp.Target = user;
+        Dirty(construction, constructionComp);
+    }
+
     private void OnBuildDoAfter(Entity<RMCConstructionItemComponent> ent, ref RMCConstructionBuildDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
@@ -197,6 +233,9 @@ public sealed class RMCConstructionSystem : EntitySystem
 
             if (!entry.NoRotate)
                 _transform.SetLocalRotation(built, args.Direction.ToAngle());
+
+            if (!HasComp<BarricadeComponent>(built))
+                MakeConstructionImmuneToCollision(built, args.User);
         }
     }
 
