@@ -9,4 +9,7 @@ public sealed partial class OrbitalCannonWarheadComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId<OrbitalCannonExplosionComponent> Explosion;
+
+    [DataField, AutoNetworkedField]
+    public bool IsAegis;
 }

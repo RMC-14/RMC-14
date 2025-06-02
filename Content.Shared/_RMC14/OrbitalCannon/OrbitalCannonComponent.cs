@@ -18,7 +18,7 @@ public sealed partial class OrbitalCannonComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId<OrbitalCannonWarheadComponent>[] WarheadTypes =
-        ["RMCOrbitalCannonWarheadExplosive", "RMCOrbitalCannonWarheadIncendiary", "RMCOrbitalCannonWarheadCluster"];
+        ["RMCOrbitalCannonWarheadExplosive", "RMCOrbitalCannonWarheadIncendiary", "RMCOrbitalCannonWarheadCluster", "RMCOrbitalCannonWarheadAegis"];
 
     [DataField, AutoNetworkedField]
     public int[] PossibleFuelRequirements = [4, 5, 6];
@@ -61,6 +61,9 @@ public sealed partial class OrbitalCannonComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? TravelSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_orbital_travel.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? AegisBoomSound = new SoundPathSpecifier("/Audio/_RMC14/Explosion/aegis-boom.ogg");
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? LastFireAt;

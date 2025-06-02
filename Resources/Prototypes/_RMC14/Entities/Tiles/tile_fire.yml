@@ -127,20 +127,20 @@
 
 - type: entity
   parent: RMCTileFire
-  id: RMCTileFireOBtest
+  id: RMCTileFireOBAegis
   components:
   - type: Sprite
-    color: "#C8FFFF"
+    color: "#ffffff"
     layers:
     - map: [ "base" ]
       state: purple_4
   - type: PointLight
-    color: "#8fcbeb"
+    color: "#ffffff"
   - type: RMCIgniteOnCollide
     intensity: 80
     duration: 70
   - type: TileFire
-    id: RMCTileFireOBtest
+    id: RMCTileFireOBAegis
     extinguishInstantly: false
   - type: GenericVisualizer
     visuals:

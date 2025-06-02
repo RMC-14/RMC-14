@@ -471,6 +471,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 RemCompDeferred<OrbitalCannonFiringComponent>(uid);
                 continue;
             }
+                var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
 
             if (!firing.Alerted && time > firing.StartedAt + firing.AlertDelay)
             {
@@ -515,7 +516,6 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
                 _audio.PlayPvs(cannon.FireSound, uid);
 
-                var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
                 _audio.PlayPvs(cannon.TravelSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(75));
 
                 _mortar.PopupWarning(planetCoordinates, 30, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
@@ -533,6 +533,21 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 firing.WarnedTwo = true;
                 Dirty(uid, firing);
                 _mortar.PopupWarning(planetCoordinates, 15, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+            }
+
+            if (!firing.AegisBoomed && time > firing.StartedAt + firing.AegisBoomDelay)
+            {
+                firing.AegisBoomed = true;
+                Dirty(uid, firing);
+
+                var cannonEnt = new Entity<OrbitalCannonComponent>(uid, cannon);
+                if (CannonHasWarhead(cannonEnt, out var warhead) &&
+                    TryComp(warhead, out OrbitalCannonWarheadComponent? warheadComp) &&
+                    warheadComp.IsAegis)
+                {
+                    _audio.PlayPvs(cannon.AegisBoomSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(500));
+                    _rmcChat.ChatMessageToMany("[color=yellow]DEBUG: Aegis boom sound triggered[/color]", "[color=yellow]DEBUG: Aegis boom sound triggered[/color]", Filter.Broadcast(), ChatChannel.Radio);
+                }
             }
 
             if (!firing.Impacted && time > firing.StartedAt + firing.ImpactDelay)

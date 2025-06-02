@@ -85,22 +85,4 @@
     params:
       maxDistance: 50
 
-- type: explosion
-  id: RMCOBXenoTunneltest # This one also destroys xeno tunnels.
-  damagePerIntensity:
-    types:
-      Blunt: 0
-      Heat: 0
-      Structural: 0
-  tileBreakChance: [0]
-  tileBreakIntensity: [0]
-  tileBreakRerollReduction: 0
-  lightColor: Orange
-  texturePath: /Textures/Effects/fire.rsi
-  fireColor: Transparent
-  sound:
-    collection: RMCOBLaugh
-    params:
-      maxDistance: 500
-
 
