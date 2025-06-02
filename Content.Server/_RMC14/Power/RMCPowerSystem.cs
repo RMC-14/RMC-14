@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Power;
 using Content.Shared.Examine;
 using Content.Shared.Power;
 using Content.Shared.PowerCell;
+using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -22,6 +23,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedPointLightSystem _light = default!;
 
     [ViewVariables]
     private TimeSpan _nextUpdate;
@@ -241,7 +243,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     var battery = new Entity<BatteryComponent>(cell.Value, cell.Value.Comp);
                     var drawn = wattsPer;
                     drawn -= totalLoad;
-                    if (drawn < 0)
+                    if (drawn <= 0)
                     {
                         apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
                         _battery.UseCharge(battery, -drawn, battery);
@@ -281,6 +283,16 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                         UpdateApcChannel(apc, area, RMCPowerChannel.Environment, false);
                         break;
                 }
+
+                _appearance.SetData(apc, RMCApcVisualsLayers.Power, apcComp.ChargeStatus);
+                _light.SetColor(apc,
+                    apcComp.ChargeStatus switch
+                    {
+                        RMCApcChargeStatus.FullCharge => Color.FromHex("#64C864"),
+                        RMCApcChargeStatus.Charging => Color.FromHex("#6496FA"),
+                        RMCApcChargeStatus.NotCharging => Color.FromHex("#ff3b3b"),
+                        _ => Color.White,
+                    });
 
                 Dirty(apc, apcComp);
             }

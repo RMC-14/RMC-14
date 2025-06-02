@@ -1,71 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed blitz not hitting anything
-    type: Fix
-  id: 1276
-  time: '2025-01-29T00:48:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5485
-- author: Tunguso4ka
-  changes:
-  - message: Welderpack and weldersatchel can refuel welder tools ones again!
-    type: Fix
-  id: 1277
-  time: '2025-01-29T17:24:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5489
-- author: blueDev2
-  changes:
-  - message: Fixed Boiler Ability locking after stun
-    type: Fix
-  id: 1278
-  time: '2025-01-29T17:23:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5487
-- author: DrSmugleaf
-  changes:
-  - message: Fixed weed killer not removing resin traps and sticky/fast resin in its
-      area.
-    type: Fix
-  - message: Fixed weed killer not also disabling weed node placement for 8 minutes.
-    type: Fix
-  - message: Fixed early heavy spread still being disabled.
-    type: Fix
-  - message: Fixed weed killer on Shiva's Snowball southern LZ not removing weeds
-      directly east of it.
-    type: Fix
-  - message: The popup on the ASRS console in Requisitions now also includes the money
-      you get back for selling a crate (200 per).
-    type: Tweak
-  id: 1279
-  time: '2025-01-29T18:03:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5490
-- author: Tunguso4ka
-  changes:
-  - message: Fixed Riflemen not being able to buy M1984 AP ammo in their vendor.
-    type: Fix
-  id: 1280
-  time: '2025-02-03T10:57:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5514
-- author: Vermidia
-  changes:
-  - message: Fixed ability slows rarely not wearing off.
-    type: Fix
-  id: 1281
-  time: '2025-02-03T11:00:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5509
-- author: blueDev2
-  changes:
-  - message: Ported Burrower Unburrow stunning marines in a 0.5 tile range for 4 seconds.
-    type: Add
-  id: 1282
-  time: '2025-02-03T11:14:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5495
-- author: whisper
-  changes:
-  - message: Kamiel Lancoaster, Eric Rasczak figurine
-    type: Add
-  id: 1283
-  time: '2025-02-03T11:20:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5492
 - author: Dutch-VanDerLinde
   changes:
   - message: Added radio tuning. This will allow you to select what channels you can
@@ -5316,5 +5249,72 @@
   id: 1778
   time: '2025-05-21T22:56:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6520
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed survivors not spawning with a fireaxe as random gear.
+    type: Fix
+  id: 1779
+  time: '2025-06-01T10:20:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6578
+- author: noctyrnal
+  changes:
+  - message: Added the Two-Point Sling for PVE - A magnetic harness that offers benefits
+      when one handing a gun.
+    type: Add
+  id: 1780
+  time: '2025-06-01T10:21:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6591
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the pump shotgun only holding 9 shells instead of 10.
+    type: Fix
+  id: 1781
+  time: '2025-06-01T10:20:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6577
+- author: Vermidia
+  changes:
+  - message: Fixed using tail seize during melee cooldown not properly cancelling
+      the ability.
+    type: Fix
+  id: 1782
+  time: '2025-06-01T10:23:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6599
+- author: DummeHytteOst
+  changes:
+  - message: Fixed being able to attach a bipod to the Mar-50.
+    type: Fix
+  id: 1783
+  time: '2025-06-01T10:25:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6583
+- author: CyberTropic
+  changes:
+  - message: Added APC status lights.
+    type: Add
+  - message: Fixed leaky roof on the Normandy.
+    type: Fix
+  id: 1784
+  time: '2025-06-01T10:29:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6580
+- author: Vermidia
+  changes:
+  - message: Fixed custom rifle bullets not having a maximum range of 24 (they no
+      longer do damage past that).
+    type: Fix
+  - message: Fixed custom rifle incind and impact bullets not having a minimum range
+      of 4 (they lose accuracy if too close or too far)
+    type: Fix
+  - message: Fixed custom rifle incind bullets just having different accuracy falloff
+      from the other custom rifle bullets.
+    type: Fix
+  id: 1785
+  time: '2025-06-01T10:32:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6606
+- author: Vermidia
+  changes:
+  - message: Fixed acid ball cooldown being 0 and applying before the doafter finished.
+    type: Fix
+  id: 1786
+  time: '2025-06-01T10:31:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6579
 Name: RMC14
 Order: -1
