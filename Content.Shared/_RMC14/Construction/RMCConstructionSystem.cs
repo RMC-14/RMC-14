@@ -408,8 +408,11 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        if (collision is { } collisionGroup)
-            return !_turf.IsTileBlocked(turf.Value, collisionGroup);
+        if (collision is { } collisionGroup && _turf.IsTileBlocked(turf.Value, collisionGroup))
+        {
+            popup = Loc.GetString("rmc-construction-not-proper-surface", ("construction", prototypeName));
+            return false;
+        }
 
         return true;
     }

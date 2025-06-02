@@ -2,7 +2,6 @@
   id: RMCPlasteelBarricadeFoldableBuild
   name: folding plasteel barricade
   prototype: CMBarricadePlasteelDoor
-  restrictedCollisionGroup: Impassable
   doAfterTime: 4
   doAfterTimeMin: 2
   materialCost: 8
@@ -13,7 +12,6 @@
   id: RMCPlasteelBarricadeBuild
   name: plasteel barricade
   prototype: RMCBarricadePlasteel
-  restrictedCollisionGroup: Impassable
   doAfterTime: 8
   doAfterTimeMin: 2
   materialCost: 6
@@ -24,7 +22,6 @@
   id: RMCReinforcedWindowFrameBuild
   name: reinforced window frame
   prototype: RMCWindowFrameColonyReinforced
-  restrictedCollisionGroup: Impassable
   noRotate: true
   doAfterTime: 4
   materialCost: 5

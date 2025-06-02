@@ -26,7 +26,6 @@
   doAfterTime: 2
   doAfterTimeMin: 1
   materialCost: 4
-  restrictedCollisionGroup: Impassable
   skill: RMCSkillConstruction
   requiredSkillLevel: 1
 
@@ -37,7 +36,6 @@
   doAfterTime: 3
   doAfterTimeMin: 1.5
   materialCost: 6
-  restrictedCollisionGroup: Impassable
   skill: RMCSkillConstruction
   requiredSkillLevel: 2
 
@@ -48,7 +46,6 @@
   doAfterTime: 2
   doAfterTimeMin: 1
   materialCost: 2
-  restrictedCollisionGroup: Impassable
   skill: RMCSkillConstruction
   requiredSkillLevel: 1
 
@@ -85,7 +82,6 @@
   id: RMCWallGirderBuild
   name: wall girder
   prototype: CMGirder
-  restrictedCollisionGroup: Impassable
   noRotate: true
   doAfterTime: 5
   materialCost: 2
@@ -96,7 +92,6 @@
   id: RMCWindowFrameBuild
   name: window frame
   prototype: RMCWindowFrameAlmayer
-  restrictedCollisionGroup: Impassable
   noRotate: true
   doAfterTime: 5
   materialCost: 5
@@ -154,7 +149,6 @@
   id: RMCMachineFrameBuild
   name: machine frame
   prototype: CMMachineFrameUnfinished
-  restrictedCollisionGroup: MidImpassable
   noRotate: true
   doAfterTime: 2.5
   materialCost: 5
