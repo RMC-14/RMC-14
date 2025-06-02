@@ -2,7 +2,7 @@
 server_name = "normandy"
 
 [game]
-desc = "Inspired by CMSS13 from Byond! Special PvE gamemode run by a gamemaster."
+desc = "Official RMC special PvE gamemode, run by a gamemaster."
 hostname = "[EN][HRP] PvE Rouny's Marine Corps Normandy [US East]"
 
 [hub]
