@@ -55,7 +55,7 @@
     burstScatterMult: 5
     modifiers:
       Burst:
-        fireDelay: 0.2664
+        fireDelay: 0.0666 #0.2664 is way too slow
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
