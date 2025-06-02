@@ -234,6 +234,8 @@ public sealed class RMCConstructionSystem : EntitySystem
             if (!entry.NoRotate)
                 _transform.SetLocalRotation(built, args.Direction.ToAngle());
 
+            // This is so you won't be stuck inside of a construction you build
+            // Removes collision with the construction until you leave
             if (!HasComp<BarricadeComponent>(built))
                 MakeConstructionImmuneToCollision(built, args.User);
         }
