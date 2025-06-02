@@ -53,7 +53,7 @@
     scatterWielded: 8
     scatterUnwielded: 20
     burstScatterMult: 5
-    burstFireRateMultiplier: 3
+    burstFireRateMultiplier: 3 #This + 0.1332 = perfect
     modifiers:
       Burst:
         fireDelay: 0.1332 #0.2664
