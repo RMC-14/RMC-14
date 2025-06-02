@@ -53,9 +53,10 @@
     scatterWielded: 8
     scatterUnwielded: 20
     burstScatterMult: 5
+    burstFireRateMultiplier: 3
     modifiers:
       Burst:
-        fireDelay: 0.0666 #0.2664 is way too slow
+        fireDelay: 0.1332 #0.2664
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
