@@ -96,3 +96,13 @@
     Flour: 5
     Sugar: 5
     RMCPeanutButter: 5
+
+- type: microwaveMealRecipe
+  id: RecipeEggplantParm
+  name: eggplant parm recipe
+  result: FoodMealEggplantParm
+  time: 15
+  group: Savory
+  solids:
+    FoodCheeseSlice: 1
+    FoodEggplant: 1
