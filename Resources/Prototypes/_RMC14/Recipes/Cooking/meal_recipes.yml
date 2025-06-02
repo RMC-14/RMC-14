@@ -106,3 +106,15 @@
   solids:
     FoodCheeseSlice: 1
     FoodEggplant: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFriedChicken
+  name: fried chicken recipe
+  result: FoodMeatChickenFried
+  time: 15
+  group: Savory
+  solids:
+    FoodMeatChickenCutlet: 1
+  reagents:
+    Flour: 5
+    Egg: 6
