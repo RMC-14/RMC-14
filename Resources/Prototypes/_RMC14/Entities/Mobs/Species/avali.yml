@@ -25,6 +25,8 @@
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#E6C4FF"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Weapons/pierce.ogg
