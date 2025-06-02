@@ -85,7 +85,7 @@
   id: RMCWallGirderBuild
   name: wall girder
   prototype: CMGirder
-  restrictedCollisionGroup: MidImpassable
+  restrictedCollisionGroup: Impassable
   noRotate: true
   doAfterTime: 5
   materialCost: 2
@@ -96,7 +96,7 @@
   id: RMCWindowFrameBuild
   name: window frame
   prototype: RMCWindowFrameAlmayer
-  restrictedCollisionGroup: MidImpassable
+  restrictedCollisionGroup: Impassable
   noRotate: true
   doAfterTime: 5
   materialCost: 5

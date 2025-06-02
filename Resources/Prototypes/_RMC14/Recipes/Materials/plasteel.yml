@@ -24,7 +24,7 @@
   id: RMCReinforcedWindowFrameBuild
   name: reinforced window frame
   prototype: RMCWindowFrameColonyReinforced
-  restrictedCollisionGroup: MidImpassable
+  restrictedCollisionGroup: Impassable
   noRotate: true
   doAfterTime: 4
   materialCost: 5
