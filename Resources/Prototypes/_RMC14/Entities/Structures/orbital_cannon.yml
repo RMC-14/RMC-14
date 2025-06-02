@@ -120,6 +120,18 @@
     explosion: RMCOrbitalCannonExplosionCluster
 
 - type: entity
+  parent: RMCOrbitalCannonWarheadBase
+  id: RMCOrbitalCannonWarheadAegis
+  name: Aegis orbital warhead
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/ob_warhead_aegis.rsi
+    state: ob_warhead_aegis
+  - type: OrbitalCannonWarhead
+    explosion: RMCOrbitalCannonExplosionAegis
+    isAegis: true
+
+- type: entity
   id: RMCOrbitalCannonWarheadSpawner
   name: random orbital warhead
   description: "This is a random orbital warhead."
@@ -166,8 +178,8 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCOrbitalCannonExplosionExplosiveTest
-  name: explosive test OB explosion
+  id: RMCOrbitalCannonExplosionAegis
+  name: explosive Aegis OB explosion
   suffix: FIRES AN OB!!!
   placement:
     mode: SnapgridCenter
@@ -184,13 +196,13 @@
       slope: 10
       max: 50
       delay: 0.3
-    - fire: RMCTileFireOBtest
+    - type: RMCOBXenoTunnel
+      total: 90000
+      slope: 10
+      max: 50
+      delay: 0.3
+    - fire: RMCTileFireOBAegis
       fireRange: 32
-    - type: RMCOBXenoTunneltest
-      total: 200
-      slope: 1
-      max: 10
-      delay: 2.5
   - type: WarpPoint
     location: 1 orbital bombardment
 

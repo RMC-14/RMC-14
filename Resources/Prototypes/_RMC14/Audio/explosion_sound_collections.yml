@@ -16,9 +16,9 @@
   - /Audio/_RMC14/Explosion/bigboom4.ogg
 
 - type: soundCollection
-  id: RMCOBLaugh
+  id: RMCOBAegis
   files:
-  - /Audio/_RMC14/Explosion/ob-laugh.ogg
+  - /Audio/_RMC14/Explosion/aegis-boom.ogg
 
 - type: soundCollection
   id: CMHumanFemaleGrenadeThrow
