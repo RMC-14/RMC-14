@@ -118,3 +118,17 @@
   reagents:
     Flour: 5
     Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeRMCVegetablePizza
+  name: RMC vegetable pizza recipe
+  result: RMCFoodPizzaVegetableFull #Changed for RMC
+  time: 30
+  group: Pizza
+  solids:
+    FoodDoughFlat: 1
+    FoodCheeseSlice: 1
+    FoodChiliPepper: 2
+    FoodOnionRedSlice: 1
+    FoodCorn: 1
+    FoodTomato: 1

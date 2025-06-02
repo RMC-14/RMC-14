@@ -679,7 +679,7 @@
 - type: microwaveMealRecipe
   id: RecipeVegetablePizza
   name: vegetable pizza recipe
-  result: RMCFoodPizzaVegetableFull #Changed for RMC
+  result: FoodPizzaVegetable
   time: 30
   group: Pizza
   solids:
