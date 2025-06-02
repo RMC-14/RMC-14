@@ -59,7 +59,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         SubscribeLocalEvent<GrantSquadLeaderTrackerComponent, GotUnequippedEvent>(OnGotUnequipped);
 
         SubscribeLocalEvent<SquadLeaderTrackerComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<SquadLeaderTrackerComponent, ComponentShutdown>(OnShutDown);
+        SubscribeLocalEvent<SquadLeaderTrackerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<SquadLeaderTrackerComponent, SquadLeaderTrackerClickedEvent>(OnSquadLeaderTrackerClicked);
         SubscribeLocalEvent<SquadLeaderTrackerComponent, SquadLeaderTrackerChangeModeEvent>(OnSquadLeaderTrackerChangeMode);
         SubscribeLocalEvent<SquadLeaderTrackerComponent, LeaderTrackerSelectTargetEvent>(OnLeaderTrackerSelectTargetEvent);
@@ -136,8 +136,11 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnShutDown(Entity<SquadLeaderTrackerComponent> ent, ref ComponentShutdown args)
+    private void OnRemove(Entity<SquadLeaderTrackerComponent> ent, ref ComponentRemove args)
     {
+        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
+            return;
+
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
