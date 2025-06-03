@@ -134,9 +134,9 @@
     FoodTomato: 1
 
 - type: microwaveMealRecipe
-  id: RecipeRMCVegetablePizza
-  name: RMC vegetable pizza recipe
-  result: RMCFoodPizzaVegetableFull
+  id: RecipeRMCPBJSandwich
+  name: peanut butter and jelly sandwich recipe
+  result: RMCFoodPBJSandwich
   time: 5
   group: Savory
   solids:
