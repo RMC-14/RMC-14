@@ -122,7 +122,7 @@
 - type: microwaveMealRecipe
   id: RecipeRMCVegetablePizza
   name: RMC vegetable pizza recipe
-  result: RMCFoodPizzaVegetableFull #Changed for RMC
+  result: RMCFoodPizzaVegetableFull
   time: 30
   group: Pizza
   solids:
@@ -132,3 +132,15 @@
     FoodOnionRedSlice: 1
     FoodCorn: 1
     FoodTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCVegetablePizza
+  name: RMC vegetable pizza recipe
+  result: RMCFoodPizzaVegetableFull
+  time: 5
+  group: Savory
+  solids:
+    FoodBreadSlice: 2
+  reagents:
+    RMCCherryJelly: 5
+    RMCPeanutButter: 5

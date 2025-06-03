@@ -1,7 +1,7 @@
 ﻿{
     "version": 1,
     "license": "CC-BY-SA-4.0",
-    "copyright": "sprite by Crow/noctrn. on discord",
+    "copyright": "peanut butter cookie sprite by Crow/noctrn., PB&J sprite by SurfinNinja",
     "size": {
         "x": 32,
         "y": 32
@@ -9,6 +9,9 @@
     "states": [
         {
             "name": "cookie-peanutbutter"
+        },
+        {
+            "name": "pbandj"
         }
     ]
 }
