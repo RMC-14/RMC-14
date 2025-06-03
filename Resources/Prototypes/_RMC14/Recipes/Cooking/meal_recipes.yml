@@ -140,7 +140,7 @@
   time: 5
   group: Savory
   solids:
-    FoodBreadSlice: 2
+    FoodBreadPlainSlice: 2
   reagents:
     RMCCherryJelly: 5
     RMCPeanutButter: 5
