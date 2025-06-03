@@ -60,7 +60,7 @@
   description: Soft, chewy, and absolutely delicious!
   components:
   - type: Sprite
-    sprite: _RMC14/Kitchen/food.rsi
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
     state: cookie-peanutbutter
   - type: SolutionContainerManager
     solutions:

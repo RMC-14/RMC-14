@@ -7,7 +7,7 @@
   - type: Seed
     seedId: plump
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/plump.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/plump.rsi
 
 - type: entity
   parent: SeedBase
@@ -17,7 +17,7 @@
   - type: Seed
     seedId: grass
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/grass.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/grass.rsi
 
 - type: entity
   parent: SeedBase
@@ -27,7 +27,7 @@
   - type: Seed
     seedId: whitebeet
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/whitebeet.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/whitebeet.rsi
 
 - type: entity
   parent: SeedBase
@@ -37,7 +37,7 @@
   - type: Seed
     seedId: peanut
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/peanut.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/peanut.rsi
 
 - type: entity
   parent: SeedBase
@@ -47,14 +47,14 @@
   - type: Seed
     seedId: sunflower
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/sunflower.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
 
 - type: seed
   id: plump
   name: seeds-plump-name
   noun: seeds-noun-spores
   displayName: seeds-plump-display-name
-  plantRsi: _RMC14/Kitchen/Plants/plump.rsi
+  plantRsi: _RMC14/Objects/Kitchen/Plants/plump.rsi
   packetPrototype: PlumpSeeds
   productPrototypes:
   - FoodMushroomPlump
@@ -79,7 +79,7 @@
   name: seeds-peanut-name
   noun: seeds-noun-seeds
   displayName: seeds-peanut-display-name
-  plantRsi: _RMC14/Kitchen/Plants/peanut.rsi
+  plantRsi: _RMC14/Objects/Kitchen/Plants/peanut.rsi
   packetPrototype: PeanutSeeds
   harvestRepeat: Repeat
   productPrototypes:
@@ -105,7 +105,7 @@
   name: seeds-sunflower-name
   noun: seeds-noun-seeds
   displayName: seeds-sunflower-display-name
-  plantRsi: _RMC14/Kitchen/Plants/sunflower.rsi
+  plantRsi: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
   packetPrototype: SunflowerSeeds
   productPrototypes:
   - FoodSunflower
@@ -130,7 +130,7 @@
   name: seeds-whitebeet-name
   noun: seeds-noun-seeds
   displayName: seeds-whitebeet-display-name
-  plantRsi: _RMC14/Kitchen/Plants/whitebeet.rsi
+  plantRsi: _RMC14/Objects/Kitchen/Plants/whitebeet.rsi
   packetPrototype: WhiteBeetSeeds
   productPrototypes:
   - FoodWhiteBeet
@@ -155,7 +155,7 @@
   name: seeds-grass-name
   noun: seeds-noun-seeds
   displayName: seeds-grass-display-name
-  plantRsi: _RMC14/Kitchen/Plants/grass.rsi
+  plantRsi: _RMC14/Objects/Kitchen/Plants/grass.rsi
   packetPrototype: GrassSeeds
   productPrototypes:
   - FoodGrass

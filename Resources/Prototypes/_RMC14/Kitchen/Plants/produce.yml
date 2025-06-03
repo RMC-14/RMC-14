@@ -12,7 +12,7 @@
         - ReagentId: Nutriment
           Quantity: 5
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/plump.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/plump.rsi
   - type: Item
     heldPrefix: produce
   - type: Produce
@@ -41,7 +41,7 @@
       - ReagentId: RMCPeanutButter
         Quantity: 5
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/peanut.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/peanut.rsi
   - type: Item
     heldPrefix: produce
   - type: Produce
@@ -65,7 +65,7 @@
         - ReagentId: RMCSugar
           Quantity: 2
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/whitebeet.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/whitebeet.rsi
   - type: Item
     heldPrefix: produce
   - type: Produce
@@ -87,7 +87,7 @@
         - ReagentId: Nutriment
           Quantity: 5
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/sunflower.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
   - type: Item
     heldPrefix: produce
   - type: Produce
@@ -109,7 +109,7 @@
         - ReagentId: Nutriment
           Quantity: 5
   - type: Sprite
-    sprite: _RMC14/Kitchen/Plants/grass.rsi
+    sprite: _RMC14/Objects/Kitchen/Plants/grass.rsi
   - type: Item
     heldPrefix: produce
   - type: Produce
