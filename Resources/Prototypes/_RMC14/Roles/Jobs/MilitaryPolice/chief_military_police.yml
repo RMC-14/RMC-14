@@ -7,10 +7,10 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 72000 # 20 hours
+    time: 54000 # 15 hours
   - !type:RoleTimeRequirement
     role: CMJobMilitaryWarden
-    time: 36000 # 10 hours
+    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 18000 # 5 hours
