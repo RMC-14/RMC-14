@@ -73,6 +73,8 @@
     - "CMAccessColonyPublic"
     hackable: true
     scaling: false
+    randomUnstockAmount: 3 # between 1 and 3
+    randomEmptyChance: 0.25 # 25% chance
     sections:
     - name: Alcohol
       entries:
