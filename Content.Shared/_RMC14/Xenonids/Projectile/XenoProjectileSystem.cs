@@ -1,10 +1,11 @@
-﻿using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -80,6 +81,9 @@ public sealed class XenoProjectileSystem : EntitySystem
             return;
         }
 
+        if (HasComp<XenoComponent>(args.Target))
+            args.Damage = _xeno.TryApplyXenoProjectileDamageMultiplier(args.Target, args.Damage);
+
         if (_projectileQuery.TryComp(ent, out var projectile) &&
             projectile.Shooter is { } shooter)
         {
@@ -132,7 +136,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             FiredProjectiles = new List<EntityUid>(shots)
         };
 
-        if (target != null && !_xeno.CanAbilityAttackTarget(xeno, target.Value, true))
+        if (target != null && HasComp<MobStateComponent>(target) && !_xeno.CanAbilityAttackTarget(xeno, target.Value))
             target = null;
 
         var originalDiff = targetMap.Position - origin.Position;

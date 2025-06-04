@@ -68,6 +68,10 @@
     damage:
       types:
         Blunt: 22
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 150
 
 - type: entity
   parent: RMCBarricadeUpgradeBase

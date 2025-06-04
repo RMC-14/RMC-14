@@ -25,6 +25,7 @@ public sealed class XenoImpaleSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
 
     public override void Initialize()
@@ -64,7 +65,7 @@ public sealed class XenoImpaleSystem : EntitySystem
     private void Impale(DamageSpecifier damage, int aP, EntProtoId animation, SoundSpecifier sound, EntityUid target, EntityUid xeno)
     {
         //TODO RMC14 targets chest
-        var damageTaken = _damage.TryChangeDamage(target, damage, armorPiercing: aP, origin: xeno, tool: xeno);
+        var damageTaken = _damage.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, damage), armorPiercing: aP, origin: xeno, tool: xeno);
         if (damageTaken?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno);

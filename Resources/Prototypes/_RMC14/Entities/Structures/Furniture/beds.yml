@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: Bed
   id: CMBed
   name: bed

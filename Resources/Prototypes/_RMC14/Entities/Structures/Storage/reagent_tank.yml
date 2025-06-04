@@ -53,6 +53,11 @@
     tags:
     - RMCTankReagent
     - Structure
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 0
+    throwRange: 2
 
 - type: entity
   parent: RMCTankReagentEmpty

@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.GasToggle;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -10,6 +11,7 @@ public sealed class XenoAcidShroudSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
@@ -52,7 +54,8 @@ public sealed class XenoAcidShroudSystem : EntitySystem
             return;
 
         args.Handled = true;
-        SpawnAtPosition(ent.Comp.Spawn, ent.Owner.ToCoordinates());
+        var spawn = SpawnAtPosition(ent.Comp.Spawn, ent.Owner.ToCoordinates());
+        _hive.SetSameHive(ent.Owner, spawn);
 
         _rmcActions.ActivateSharedCooldown(action, ent);
     }
