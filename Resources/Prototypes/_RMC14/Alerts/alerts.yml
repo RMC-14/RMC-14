@@ -121,3 +121,21 @@
   description: alerts-stamina-desc
   minSeverity: 0
   maxSeverity: 4
+
+- type: alert
+  id: MarineAreaAlert
+  icons:
+  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
+    state: maptable
+  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
+    state: maptable
+  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
+    state: maptable
+  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
+    state: maptable
+  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
+    state: maptable
+  name: Current Area
+  description: Shows your current area, ceiling level, and restrictions.
+  minSeverity: 0
+  maxSeverity: 4

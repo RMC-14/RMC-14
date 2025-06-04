@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.TacticalMap;
 public sealed partial class TacMapMarineAlertComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ProtoId<AlertPrototype> Alert = "MarineTacMapAlert";
+    public ProtoId<AlertPrototype> Alert = "MarineAreaAlert";
 
     [DataField, AutoNetworkedField]
     public TimeSpan NextUpdateTime;

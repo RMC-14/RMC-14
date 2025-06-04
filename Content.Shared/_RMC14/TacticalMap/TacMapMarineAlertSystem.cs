@@ -33,6 +33,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.RMCMaxTacmapAlertProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
     }
+
     private void OnGotEquipped(Entity<GrantTacMapAlertComponent> ent, ref GotEquippedEvent args)
     {
         if (_timing.ApplyingState)
@@ -43,6 +44,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
 
         EnsureComp<TacMapMarineAlertComponent>(args.Equipee);
     }
+
     private void OnGotUnequipped(Entity<GrantTacMapAlertComponent> ent, ref GotUnequippedEvent args)
     {
         if (_timing.ApplyingState)
@@ -53,42 +55,80 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
         if (!_inv.TryGetInventoryEntity<GrantTacMapAlertComponent>(args.Equipee, out _))
             RemCompDeferred<TacMapMarineAlertComponent>(args.Equipee);
     }
+
     private void OnMapInit(Entity<TacMapMarineAlertComponent> ent, ref MapInitEvent args)
     {
-        _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
+        var (areaName, ceilingLevel, restrictions) = GetAreaInfo(ent);
+        _alerts.ShowAlert(ent, ent.Comp.Alert,
+            severity: ceilingLevel,
+            dynamicMessage: Loc.GetString("rmc-tacmap-alert-area-info",
+                ("area", areaName),
+                ("ceilingLevel", ceilingLevel),
+                ("restrictions", restrictions)));
     }
+
     private void OnRemove(Entity<TacMapMarineAlertComponent> ent, ref ComponentRemove args)
     {
         _alerts.ClearAlert(ent, ent.Comp.Alert);
     }
 
-    private string GetAreaName(EntityUid ent)
+    private (string areaName, short ceilingLevel, string restrictions) GetAreaInfo(EntityUid ent)
     {
         if (!_area.TryGetArea(ent.ToCoordinates(), out var area, out var areaProto))
-            return Loc.GetString("rmc-tacmap-alert-no-area");
+            return (Loc.GetString("rmc-tacmap-alert-no-area"), 0, string.Empty);
 
-        var properties = new List<string>();
-        if (area.Value.Comp.CAS) properties.Add("CAS");
-        if (area.Value.Comp.Fulton) properties.Add("Fulton");
-        if (area.Value.Comp.Lasing) properties.Add("Lasing");
-        if (area.Value.Comp.MortarPlacement) properties.Add("Mortar");
-        if (area.Value.Comp.MortarFire) properties.Add("MortarFire");
-        if (area.Value.Comp.Medevac) properties.Add("Medevac");
-        if (area.Value.Comp.OB) properties.Add("OB");
-        if (area.Value.Comp.SupplyDrop) properties.Add("Supply");
-        if (area.Value.Comp.AvoidBioscan) properties.Add("NoBioscan");
-        if (area.Value.Comp.NoTunnel) properties.Add("NoTunnel");
-        if (area.Value.Comp.Unweedable) properties.Add("Unweedable");
-        if (area.Value.Comp.BuildSpecial) properties.Add("BuildSpecial");
-        if (!area.Value.Comp.ResinAllowed) properties.Add("NoResin");
-        if (!area.Value.Comp.ResinConstructionAllowed) properties.Add("NoResinBuild");
-        if (!area.Value.Comp.WeatherEnabled) properties.Add("NoWeather");
-        if (area.Value.Comp.LandingZone) properties.Add("LZ");
-        if (area.Value.Comp.WeedKilling) properties.Add("WeedKilling");
-        if (area.Value.Comp.RetrieveItemObjective) properties.Add("RetrieveItem");
+        var restrictions = new List<string>();
 
-        var propertiesStr = properties.Count > 0 ? $" ({string.Join(", ", properties)})" : "";
-        return $"{areaProto.Name}{propertiesStr}";
+        // Determine ceiling level based on restrictions
+        short ceilingLevel = 0;
+        if (area.Value.Comp.OB)
+            ceilingLevel = 4;
+        else if (area.Value.Comp.CAS)
+            ceilingLevel = 3;
+        else if (area.Value.Comp.SupplyDrop || area.Value.Comp.MortarFire)
+            ceilingLevel = 2;
+        else if (area.Value.Comp.MortarPlacement || area.Value.Comp.Lasing || area.Value.Comp.Medevac)
+            ceilingLevel = 1;
+
+        // Build the restrictions string
+        var allowedActions = new List<string>();
+        var restrictedActions = new List<string>();
+
+        // Add ceiling level restrictions
+        restrictedActions.Add(Loc.GetString($"rmc-tacmap-alert-ceiling-level-{ceilingLevel}"));
+
+        // Add allowed actions based on ceiling level
+        if (ceilingLevel < 4)
+            allowedActions.Add("OB");
+        if (ceilingLevel < 3)
+            allowedActions.Add("CAS");
+        if (ceilingLevel < 2)
+        {
+            allowedActions.Add("Supply Drops");
+            allowedActions.Add("Mortar Fire");
+        }
+        if (ceilingLevel < 1)
+        {
+            allowedActions.Add("Mortar Placement");
+            allowedActions.Add("Lasing");
+            allowedActions.Add("Medevac");
+        }
+
+        // Add tunnel and resin restrictions
+        if (area.Value.Comp.NoTunnel)
+            restrictedActions.Add("Tunneling");
+        if (area.Value.Comp.Unweedable)
+            restrictedActions.Add("Weed Placement");
+        else if (!area.Value.Comp.ResinAllowed)
+            restrictedActions.Add("Resin Placement");
+
+        var restrictionsStr = "\n";
+        if (allowedActions.Count > 0)
+            restrictionsStr += Loc.GetString("rmc-tacmap-alert-allowed-actions", ("actions", string.Join(", ", allowedActions))) + "\n";
+        if (restrictedActions.Count > 0)
+            restrictionsStr += string.Join("\n", restrictedActions);
+
+        return (areaProto.Name, ceilingLevel, restrictionsStr);
     }
 
     public override void Update(float frameTime)
@@ -107,7 +147,13 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
                 if (TerminatingOrDeleted(ent))
                     continue;
 
-                _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
+                var (areaName, ceilingLevel, restrictions) = GetAreaInfo(ent);
+                _alerts.ShowAlert(ent, ent.Comp.Alert,
+                    severity: ceilingLevel,
+                    dynamicMessage: Loc.GetString("rmc-tacmap-alert-area-info",
+                        ("area", areaName),
+                        ("ceilingLevel", ceilingLevel),
+                        ("restrictions", restrictions)));
             }
         }
 
