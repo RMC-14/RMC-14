@@ -204,6 +204,14 @@
     # NON BOBDA
     CMDrinkCanCola: 10
 
+- type: entity
+  parent: CMVendorCola
+  id: RMCVendorNutriCoDrink
+  name: NutriCo AutoDrink
+  description: A NutriCo AutoDrink dispenser, capable of making a variety of drinks to consume from a mixture of water and instant flavoring juice and caffeine additives.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/drink.rsi
 
 # Cigarettes
 - type: entity
