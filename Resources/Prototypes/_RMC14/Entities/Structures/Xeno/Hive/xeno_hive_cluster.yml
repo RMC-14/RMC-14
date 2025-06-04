@@ -33,6 +33,7 @@
       RMCCommunicationsTower: HivePylonXeno
   - type: XenoWeedsSpreading
   - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionRequiresWeedableSurface
   - type: HiveConstructionLimited
     id: HiveClusterXeno
   - type: RepairableXenoStructure
