@@ -50,7 +50,7 @@ public sealed partial class CMAutomatedVendorComponent : Component
 
     /// <summary>
     ///     If this is a colony vendor, randomize the amount the sections have from 1 and this number.
-    ///     If this number is put as -1, it the stock will be between 1 and the original amount.
+    ///     If this number is put as -1, the stock will be between 1 and the original amount.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int? RandomUnstockAmount;
