@@ -64,10 +64,31 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
 
     private string GetAreaName(EntityUid ent)
     {
-        if (!_area.TryGetArea(ent.ToCoordinates(), out var _, out var areaProto))
+        if (!_area.TryGetArea(ent.ToCoordinates(), out var area, out var areaProto))
             return Loc.GetString("rmc-tacmap-alert-no-area");
 
-        return areaProto.Name;
+        var properties = new List<string>();
+        if (area.Value.Comp.CAS) properties.Add("CAS");
+        if (area.Value.Comp.Fulton) properties.Add("Fulton");
+        if (area.Value.Comp.Lasing) properties.Add("Lasing");
+        if (area.Value.Comp.MortarPlacement) properties.Add("Mortar");
+        if (area.Value.Comp.MortarFire) properties.Add("MortarFire");
+        if (area.Value.Comp.Medevac) properties.Add("Medevac");
+        if (area.Value.Comp.OB) properties.Add("OB");
+        if (area.Value.Comp.SupplyDrop) properties.Add("Supply");
+        if (area.Value.Comp.AvoidBioscan) properties.Add("NoBioscan");
+        if (area.Value.Comp.NoTunnel) properties.Add("NoTunnel");
+        if (area.Value.Comp.Unweedable) properties.Add("Unweedable");
+        if (area.Value.Comp.BuildSpecial) properties.Add("BuildSpecial");
+        if (!area.Value.Comp.ResinAllowed) properties.Add("NoResin");
+        if (!area.Value.Comp.ResinConstructionAllowed) properties.Add("NoResinBuild");
+        if (!area.Value.Comp.WeatherEnabled) properties.Add("NoWeather");
+        if (area.Value.Comp.LandingZone) properties.Add("LZ");
+        if (area.Value.Comp.WeedKilling) properties.Add("WeedKilling");
+        if (area.Value.Comp.RetrieveItemObjective) properties.Add("RetrieveItem");
+
+        var propertiesStr = properties.Count > 0 ? $" ({string.Join(", ", properties)})" : "";
+        return $"{areaProto.Name}{propertiesStr}";
     }
 
     public override void Update(float frameTime)

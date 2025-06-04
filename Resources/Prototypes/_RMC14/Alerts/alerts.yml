@@ -121,12 +121,3 @@
   description: alerts-stamina-desc
   minSeverity: 0
   maxSeverity: 4
-
-- type: alert
-  id: RMCTestAlert
-  icons:
-  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
-    state: maptable
-  name: Test Alert
-  description: This is a test alert.
-  clickEvent: !type:OpenTacMapAlertEvent
