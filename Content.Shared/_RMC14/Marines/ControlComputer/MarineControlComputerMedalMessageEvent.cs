@@ -7,7 +7,8 @@ namespace Content.Shared._RMC14.Marines.ControlComputer;
 [Serializable, NetSerializable]
 public sealed record MarineControlComputerMedalMessageEvent(
     NetEntity Actor,
-    NetEntity Marine,
+    NetEntity? Marine,
     string Name,
-    string Message = ""
+    string Message = "",
+    string? LastPlayerId = null
 ) : DialogInputEvent(Message);

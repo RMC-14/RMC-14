@@ -62,6 +62,16 @@ public abstract class SharedCommendationSystem : EntitySystem
     {
     }
 
+    public virtual void GiveCommendationByLastPlayerId(
+        Entity<CommendationGiverComponent?, ActorComponent?> giver,
+        string lastPlayerId,
+        string receiverName,
+        string name,
+        string text,
+        CommendationType type)
+    {
+    }
+
     public IReadOnlyList<Commendation> GetCommendations()
     {
         return RoundCommendations;

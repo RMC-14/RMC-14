@@ -67,15 +67,24 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void OnComputerMedalMarine(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMarineEvent args)
     {
-        if (!TryGetEntity(args.Actor, out var actor) ||
-            !TryGetEntity(args.Marine, out var marine))
-        {
+        if (!TryGetEntity(args.Actor, out var actor))
             return;
-        }
 
-        if (marine == actor)
+        // For not gibbed marines
+        if (args.Marine != null)
         {
-            _popup.PopupClient(Loc.GetString("rmc-medal-error-self-award"), actor, PopupType.MediumCaution);
+            if (!TryGetEntity(args.Marine, out var marine))
+                return;
+
+            if (marine == actor)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-medal-error-self-award"), actor, PopupType.MediumCaution);
+                return;
+            }
+        }
+        // For gibbed marines
+        else if (args.LastPlayerId == null)
+        {
             return;
         }
 
@@ -85,7 +94,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         var options = new List<DialogOption>();
         foreach (var name in _medalsDataset.Values)
         {
-            options.Add(new DialogOption(Loc.GetString(name), new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, name)));
+            options.Add(new DialogOption(Loc.GetString(name), new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, name, args.LastPlayerId)));
         }
 
         _dialog.OpenOptions(ent, actor.Value, Loc.GetString("rmc-medal-type"), options, Loc.GetString("rmc-medal-type-prompt"));
@@ -99,23 +108,43 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (!TryGetEntity(args.Actor, out var actor))
             return;
 
-        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name);
+        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name, LastPlayerId: args.LastPlayerId);
         _dialog.OpenInput(ent, actor.Value, Loc.GetString("rmc-medal-citation-prompt"), ev, true, _commendation.CharacterLimit);
     }
 
     private void OnComputerMedalMessage(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMessageEvent args)
     {
         if (!TryGetEntity(args.Actor, out var actor) ||
-            !TryGetEntity(args.Marine, out var marine) ||
             !HasComp<CommendationGiverComponent>(actor) ||
-            !TryComp(marine, out CommendationReceiverComponent? receiver) ||
-            receiver.LastPlayerId == null ||
             string.IsNullOrWhiteSpace(args.Message.Trim()))
         {
             return;
         }
 
-        _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal);
+        // For not gibbed marines
+        if (args.Marine != null)
+        {
+            if (!TryGetEntity(args.Marine, out var marine) ||
+                !TryComp(marine, out CommendationReceiverComponent? receiver) ||
+                receiver.LastPlayerId == null)
+            {
+                return;
+            }
+            _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal);
+        }
+        // For gibbed marines
+        else if (args.LastPlayerId != null)
+        {
+            if (TryComp<MarineControlComputerComponent>(ent, out var computer) &&
+                computer.GibbedMarines.TryGetValue(args.LastPlayerId, out var info))
+            {
+                _commendation.GiveCommendationByLastPlayerId(actor.Value, args.LastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
+            }
+        }
+        else
+        {
+            return;
+        }
 
         if (_net.IsClient)
             return;
@@ -171,9 +200,10 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // TODO RMC14 gibbed marines
         var netActor = GetNetEntity(actor);
         var options = new List<DialogOption>();
+
+        // Add living marines
         var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
         while (receivers.MoveNext(out var uid, out var receiver, out _))
         {
@@ -190,6 +220,20 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
                 continue;
 
             options.Add(new DialogOption(Name(uid), new MarineControlComputerMedalMarineEvent(netActor, GetNetEntity(uid))));
+        }
+
+        // Add dead marines
+        if (TryComp<MarineControlComputerComponent>(computer, out var comp))
+        {
+            foreach (var (playerId, info) in comp.GibbedMarines)
+            {
+                if (info.LastPlayerId == null)
+                {
+                    continue;
+                }
+
+                options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, playerId)));
+            }
         }
 
         _dialog.OpenOptions(computer, actor, Loc.GetString("rmc-medal-recipient"), options, Loc.GetString("rmc-medal-recipient-prompt"));

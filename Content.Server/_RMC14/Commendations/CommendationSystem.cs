@@ -68,4 +68,54 @@ public sealed class CommendationSystem : SharedCommendationSystem
             Log.Error($"Error giving commendation, giver: {giver.Owner}, receiver: {receiver.Owner} ");
         }
     }
+
+    public override async void GiveCommendationByLastPlayerId(
+        Entity<CommendationGiverComponent?, ActorComponent?> giver,
+        string lastPlayerId,
+        string receiverName,
+        string name,
+        string text,
+        CommendationType type)
+    {
+        try
+        {
+            base.GiveCommendationByLastPlayerId(giver, lastPlayerId, receiverName, name, text, type);
+
+            if (!Resolve(giver, ref giver.Comp1, ref giver.Comp2, false))
+                return;
+
+            text = text.Trim();
+            if (string.IsNullOrWhiteSpace(text))
+                return;
+
+            if (CharacterLimit > 0 && text.Length > CharacterLimit)
+                text = text[..CharacterLimit];
+
+            var giverId = giver.Comp2.PlayerSession.UserId;
+            var giverName = Name(giver);
+            var receiverId = Guid.Parse(lastPlayerId);
+            var round = _gameTicker.RoundId;
+
+            giver.Comp1.Given++;
+            Dirty(giver, giver.Comp1);
+
+            var commendation = new Commendation(giverName, receiverName, name, text, type, round);
+            RoundCommendations.Add(commendation);
+            _commendation.CommendationAdded(new NetUserId(receiverId), commendation);
+            _adminLog.Add(LogType.RMCMedal, $"{ToPrettyString(giver)} gave a medal to {receiverName} of type {type} {name} that reads:\n{text}");
+
+            try
+            {
+                await _db.AddCommendation(giverId, receiverId, giverName, receiverName, name, text, type, round);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error saving commendation to database, giver: {giverName}, receiver: {receiverName}, round: {round}:\n{e}");
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error giving commendation by last player id, giver: {giver.Owner}, lastPlayerId: {lastPlayerId}");
+        }
+    }
 }
