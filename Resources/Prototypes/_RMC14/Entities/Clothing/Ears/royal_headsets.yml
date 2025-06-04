@@ -15,6 +15,7 @@
     - RoyalMarine
     radioTextIncrease: 2
   - type: GrantTacMapAlert
+  - type: GrantTestAlert
 
 - type: entity
   parent: CMEncryptionKey

@@ -39,6 +39,7 @@
       key_slots:
       - CMEncryptionKeyCommon
   - type: GrantTacMapAlert
+  - type: GrantTestAlert
 
 - type: entity
   parent: RMCHeadsetShip
