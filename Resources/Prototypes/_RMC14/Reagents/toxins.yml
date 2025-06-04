@@ -21,3 +21,42 @@
         visualType: SmallCaution
         messages: [ "rmc-body-stings" ]
         probability: 0.2
+
+- type: reagent
+  parent: [ CMReagent, Lexorin ]
+  id: RMCLexorin
+  name: reagent-name-rmclexorin
+  desc: reagent-desc-rmclexorin
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#C8A5DC"
+  overdose: 30
+  unknown: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: 0.25
+            Airloss: 4
+      - !type:Emote
+        emote: Gasp
+        probability: 0.7
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 2.5
+            Toxin: 2
+            Airloss: 10
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 11.25
+            Toxin: 4
