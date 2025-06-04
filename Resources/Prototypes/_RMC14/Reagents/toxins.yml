@@ -42,7 +42,7 @@
             Airloss: 4
       - !type:Emote
         emote: Gasp
-        probability: 0.1
+        probability: 0.10
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
