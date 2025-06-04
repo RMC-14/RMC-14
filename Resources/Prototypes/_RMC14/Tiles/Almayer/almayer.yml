@@ -149,6 +149,26 @@
 
 - type: tile
   parent: CMFloorPlate
+  id: RMCFloorAlmayerEdgeSmoothCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/floor_edge_sc_1.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: RMCFloorAlmayerEdgeSmoothCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/floor_edge_sc_2.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: RMCFloorAlmayerEdgeSmoothCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/floor_edge_sc_3.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: RMCFloorAlmayerEdgeSmoothCorner4
+  sprite: /Textures/_RMC14/Tiles/almayer/floor_edge_sc_4.png
+
+- type: tile
+  parent: CMFloorPlate
   id: RMCFloorAlmayerEdgeSmooth21
   sprite: /Textures/_RMC14/Tiles/almayer/floor_edge_s2_1.png
 
