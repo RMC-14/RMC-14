@@ -15,7 +15,7 @@ cm-job-prefix-commanding-officer = CO
 CMJobCommandingOfficer = Commanding Officer
 
 cm-job-name-executive-officer = Executive Officer
-cm-job-description-executive-officer = You are second in command aboard the ship, and are the next in the chain of command after the Commanding Officer.
+cm-job-description-executive-officer = You are second in command aboard the ship, and are the next in the Commander Succession after the Commanding Officer.
 cm-job-prefix-executive-officer = XO
 CMJobExecutiveOfficer = Executive Officer
 
