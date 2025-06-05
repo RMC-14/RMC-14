@@ -75,6 +75,7 @@ public sealed class XenoLeapSystem : EntitySystem
         SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotUnequippedHandEvent>(OnUnequippedHand);
         SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotUnequippedEvent>(OnGotUnequipped);
+        SubscribeLocalEvent<RMCLeapProtectionComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCLeapProtectionComponent, XenoLeapHitAttempt>(OnXenoLeapHitAttempt);
 
         SubscribeLocalEvent<XenoLeapingComponent, StartCollideEvent>(OnXenoLeapingDoHit);
@@ -279,6 +280,14 @@ public sealed class XenoLeapSystem : EntitySystem
         RemCompDeferred<RMCLeapProtectionComponent>(args.User);
     }
 
+    private void OnMapInit(Entity<RMCLeapProtectionComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.InherentStunDuration == null)
+            return;
+
+        ent.Comp.StunDuration = ent.Comp.InherentStunDuration.Value;
+    }
+
     /// <summary>
     ///     Apply the <see cref="RMCLeapProtectionComponent"/> to the given entity.
     /// </summary>
@@ -289,7 +298,7 @@ public sealed class XenoLeapSystem : EntitySystem
         var leapProtection = EnsureComp<RMCLeapProtectionComponent>(receiver);
         leapProtection.ProtectionProviders.Add(protection);
 
-        if (protection.Comp.StunDuration <= leapProtection.StunDuration)
+        if (protection.Comp.StunDuration >= leapProtection.StunDuration)
         {
             leapProtection.StunDuration = protection.Comp.StunDuration;
             leapProtection.BlockSound = protection.Comp.BlockSound;
