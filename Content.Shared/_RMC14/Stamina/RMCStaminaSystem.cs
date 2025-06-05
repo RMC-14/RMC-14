@@ -1,6 +1,4 @@
 using Content.Shared._RMC14.BlurredVision;
-using Content.Shared._RMC14.Deafness;
-using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Administration.Logs;
@@ -12,7 +10,6 @@ using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
-using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
@@ -29,13 +26,12 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
     [Dependency] private readonly RMCDazedSystem _daze = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly TemporarySpeedModifiersSystem _temporarySpeed = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     public override void Initialize()
     {
@@ -127,10 +123,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
         if (newLevel >= 4)
         {
-            _deafness.TryDeafen(ent, ent.Comp.EffectTime, true, ignoreProtection: true);
-            _stun.TryParalyze(ent, ent.Comp.EffectTime, true);
-            _status.TryAddStatusEffect(ent, "Muted", ent.Comp.EffectTime, true, "Muted");
-            _status.TryAddStatusEffect(ent, "TemporaryBlindness", ent.Comp.EffectTime, true, "TemporaryBlindness");
+            _sizeStun.TryKnockOut(ent, ent.Comp.EffectTime, true);
         }
 
         var oldLevel = ent.Comp.Level;
