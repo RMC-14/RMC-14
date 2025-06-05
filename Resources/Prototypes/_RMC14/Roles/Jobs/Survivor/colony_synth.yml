@@ -81,7 +81,7 @@
       - type: WoundableUntreatable
       - type: Insulated
       - type: RMCLeapProtection
-        stunDuration: 3
+        inherentStunDuration: 3
       removeComponents:
       - type: CMSurgeryTarget
       - type: Infectable

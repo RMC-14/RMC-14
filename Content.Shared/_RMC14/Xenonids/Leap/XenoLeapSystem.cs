@@ -12,7 +12,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Inventory;
+using Content.Shared.Hands;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -58,7 +59,6 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -71,9 +71,11 @@ public sealed class XenoLeapSystem : EntitySystem
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
         SubscribeLocalEvent<XenoLeapComponent, MeleeHitEvent>(OnXenoLeapMelee);
 
-        SubscribeLocalEvent<InventoryComponent, XenoLeapHitAttempt>(_inventory.RelayEvent);
+        SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotEquippedHandEvent>(OnEquippedHand);
+        SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotUnequippedHandEvent>(OnUnequippedHand);
+        SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotEquippedEvent>(OnGotEquipped);
+        SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotUnequippedEvent>(OnGotUnequipped);
         SubscribeLocalEvent<RMCLeapProtectionComponent, XenoLeapHitAttempt>(OnXenoLeapHitAttempt);
-        SubscribeLocalEvent<RMCLeapProtectionComponent, InventoryRelayedEvent<XenoLeapHitAttempt>>(OnXenoLeapHitAttemptRelayed);
 
         SubscribeLocalEvent<XenoLeapingComponent, StartCollideEvent>(OnXenoLeapingDoHit);
         SubscribeLocalEvent<XenoLeapingComponent, ComponentRemove>(OnXenoLeapingRemove);
@@ -233,13 +235,112 @@ public sealed class XenoLeapSystem : EntitySystem
         args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp, args.Leaper);
     }
 
-    private void OnXenoLeapHitAttemptRelayed(Entity<RMCLeapProtectionComponent> ent,
-        ref InventoryRelayedEvent<XenoLeapHitAttempt> args)
+    private void OnGotEquipped(Entity<RMCGrantLeapProtectionComponent> ent, ref GotEquippedEvent args)
     {
-        if(args.Args.Cancelled)
+        if (_timing.ApplyingState)
             return;
 
-        args.Args.Cancelled = AttemptBlockLeap(_transform.GetParentUid(ent), ent.Comp, args.Args.Leaper);
+        if ((ent.Comp.Slots & args.SlotFlags) == 0)
+            return;
+
+        ApplyLeapProtection(args.Equipee, ent);
+    }
+
+    private void OnGotUnequipped(Entity<RMCGrantLeapProtectionComponent> ent, ref GotUnequippedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if ((ent.Comp.Slots & args.SlotFlags) == 0)
+            return;
+
+        if(!RemoveLeapProtection(args.Equipee, ent))
+            return;
+
+        RemCompDeferred<RMCLeapProtectionComponent>(args.Equipee);
+    }
+
+    private void OnEquippedHand(Entity<RMCGrantLeapProtectionComponent> ent, ref GotEquippedHandEvent args)
+    {
+        if(!ent.Comp.ProtectsInHand)
+            return;
+
+        ApplyLeapProtection(args.User, ent);
+    }
+
+    private void OnUnequippedHand(Entity<RMCGrantLeapProtectionComponent> ent, ref GotUnequippedHandEvent args)
+    {
+        if(!ent.Comp.ProtectsInHand)
+            return;
+
+        if(!RemoveLeapProtection(args.User, ent))
+            return;
+
+        RemCompDeferred<RMCLeapProtectionComponent>(args.User);
+    }
+
+    /// <summary>
+    ///     Apply the <see cref="RMCLeapProtectionComponent"/> to the given entity.
+    /// </summary>
+    /// <param name="receiver">The entity that receives the <see cref="RMCLeapProtectionComponent"/></param>
+    /// <param name="protection">The entity that provides the component using <see cref="RMCGrantLeapProtectionComponent"/></param>
+    private void ApplyLeapProtection(EntityUid receiver, Entity<RMCGrantLeapProtectionComponent> protection)
+    {
+        var leapProtection = EnsureComp<RMCLeapProtectionComponent>(receiver);
+        leapProtection.ProtectionProviders.Add(protection);
+
+        if (protection.Comp.StunDuration <= leapProtection.StunDuration)
+        {
+            leapProtection.StunDuration = protection.Comp.StunDuration;
+            leapProtection.BlockSound = protection.Comp.BlockSound;
+        }
+
+        Dirty(receiver, leapProtection);
+    }
+
+    /// <summary>
+    ///     Remove the entity with the <see cref="RMCGrantLeapProtectionComponent"/> from the list of entities that
+    ///     provide the <see cref="RMCLeapProtectionComponent"/> to the user.
+    ///     Then check if there are any other entities equipped that provide the component.
+    /// </summary>
+    /// <param name="user">The entity that unequipped an entity with <see cref="RMCGrantLeapProtectionComponent"/></param>
+    /// <param name="protection">The entity that got unequipped</param>
+    /// <returns>If the entity should keep the <see cref="RMCLeapProtectionComponent"/></returns>
+    private bool RemoveLeapProtection(EntityUid user, Entity<RMCGrantLeapProtectionComponent> protection)
+    {
+        if (!TryComp(user, out RMCLeapProtectionComponent? leapProtection))
+            return true;
+
+        var stunDuration = new TimeSpan();
+        leapProtection.ProtectionProviders.Remove(protection);
+
+        // Set the inherent stun duration if it exists.
+        if (leapProtection.InherentStunDuration != null)
+        {
+            stunDuration = leapProtection.InherentStunDuration.Value;
+            leapProtection.InherentBlockSound = leapProtection.InherentBlockSound;
+        }
+
+        // Check if there are any other entities equipped that provide leap protection.
+        foreach (var protectionGranter in leapProtection.ProtectionProviders)
+        {
+            if (!TryComp(protectionGranter, out RMCGrantLeapProtectionComponent? grantProtection) ||
+                grantProtection.StunDuration < stunDuration)
+                continue;
+
+            stunDuration = grantProtection.StunDuration;
+            leapProtection.BlockSound = grantProtection.BlockSound;
+        }
+
+        // Don't remove the component if it's inherent or if another component provides protection.
+        if (stunDuration != new TimeSpan())
+        {
+            leapProtection.StunDuration = stunDuration;
+            Dirty(user, leapProtection);
+            return false;
+        }
+
+        return true;
     }
 
     private bool AttemptBlockLeap(EntityUid blocker, RMCLeapProtectionComponent leapProtection, EntityUid leaper)
@@ -323,7 +424,7 @@ public sealed class XenoLeapSystem : EntitySystem
                 _broadphase.RegenerateContacts(xeno, physics);
         }
 
-        var leapEv = new XenoLeapHitAttempt(SlotFlags.OUTERCLOTHING, xeno.Owner);
+        var leapEv = new XenoLeapHitAttempt(xeno.Owner);
         RaiseLocalEvent(target, ref leapEv);
 
         if (leapEv.Cancelled)
@@ -410,5 +511,4 @@ public sealed class XenoLeapSystem : EntitySystem
 }
 
 [ByRefEvent]
-public record struct XenoLeapHitAttempt
-    (SlotFlags TargetSlots, EntityUid Leaper, bool Cancelled = false) : IInventoryRelayEvent;
+public record struct XenoLeapHitAttempt(EntityUid Leaper, bool Cancelled = false);
