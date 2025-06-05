@@ -30,6 +30,16 @@
     needsPower: false
   - type: Docking
   - type: DockingSignalControl
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMAirlock
