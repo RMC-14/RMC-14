@@ -49,6 +49,3 @@
   - type: ItemSlots
   - type: CMItemSlots
   - type: Appearance
-  - type: ContainerContainer
-    containers:
-      item_storage: !type:Container
