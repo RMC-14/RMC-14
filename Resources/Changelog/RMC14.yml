@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Fixed SG drum belt not having two drums
-    type: Fix
-  id: 1290
-  time: '2025-02-04T22:39:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5522
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed Executive Officer not starting with a marine service peaked cap.
@@ -5312,5 +5305,12 @@
   id: 1792
   time: '2025-06-05T00:31:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6612
+- author: Whisper
+  changes:
+  - message: Chain of Command has been replaced with "Commander Succession".
+    type: Tweak
+  id: 1793
+  time: '2025-06-05T00:32:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6566
 Name: RMC14
 Order: -1
