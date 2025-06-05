@@ -164,7 +164,7 @@
   production: 6
   yield: 6
   potency: 10
-  growthStages: 6
+  growthStages: 2
   lightTolerance: 6
   waterConsumption: 0.60
   nutrientConsumption: 0.50

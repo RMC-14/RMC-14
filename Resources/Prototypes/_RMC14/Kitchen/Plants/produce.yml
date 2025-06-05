@@ -76,7 +76,7 @@
 
 - type: entity
   name: sunflower
-  parent: FoodProduceBase
+  parent: ProduceBase
   id: FoodSunflower
   description: "It's beautiful! A certain person might beat you to death if you trample these."
   components:
@@ -85,7 +85,7 @@
       food:
         reagents:
         - ReagentId: Nutriment
-          Quantity: 5
+          Quantity: 2
   - type: Sprite
     sprite: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
   - type: Item
@@ -97,17 +97,11 @@
     - Vegetable
 
 - type: entity
-  name: grass
-  parent: FoodProduceBase
+  name: bundle of grass
+  parent: ProduceBase
   id: FoodGrass
-  description: "Grass."
+  description: "Go ahead, touch some grass."
   components:
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
   - type: Sprite
     sprite: _RMC14/Objects/Kitchen/Plants/grass.rsi
   - type: Item
