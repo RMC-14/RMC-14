@@ -116,7 +116,10 @@ namespace Content.Shared.StatusEffect
                 return false;
 
             if (HasComp<T>(uid))
+            {
+                status.ActiveEffects[key].RelevantComponent = _componentFactory.GetComponentName<T>();
                 return true;
+            }
 
             EntityManager.AddComponent<T>(uid);
             status.ActiveEffects[key].RelevantComponent = _componentFactory.GetComponentName<T>();
