@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed hypospray tactical reloads not working in most cases
-    type: Fix
-  id: 1293
-  time: '2025-02-07T02:13:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5528
-- author: Dygon
-  changes:
-  - message: Chair are now instantly deconstructed with a wrench, instead of a screwdriver.
-    type: Tweak
-  id: 1294
-  time: '2025-02-07T02:15:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5491
 - author: SG6732
   changes:
   - message: Made it possible to wear tactical wraps/scarves around the accessory
@@ -5317,5 +5303,19 @@
   id: 1795
   time: '2025-06-05T01:12:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6540
+- author: Vermidia
+  changes:
+  - message: Fixed abduct's range being 1 too long (7 > 6)
+    type: Fix
+  id: 1796
+  time: '2025-06-05T01:14:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6527
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added different job spawn menu names for FORECON and WeYA PMC operators.
+    type: Add
+  id: 1797
+  time: '2025-06-05T01:14:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6537
 Name: RMC14
 Order: -1
