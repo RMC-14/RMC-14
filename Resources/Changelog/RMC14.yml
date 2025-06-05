@@ -1,33 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added radio tuning. This will allow you to select what channels you can
-      hear, useful for staff officers filtering out other squad chatter.
-    type: Add
-  id: 1284
-  time: '2025-02-03T11:19:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5511
-- author: UnicornOnLSD
-  changes:
-  - message: Gigantic shipments of a very conspicuous plushie have been received in
-      the almayer cargo holds. They are not accessible by any means yet. (Added conspicuous
-      plushie)
-    type: Add
-  id: 1285
-  time: '2025-02-03T11:19:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5498
-- author: Vermidia
-  changes:
-  - message: Fixed resin surge reinforcing non-walls and doors
-    type: Fix
-  - message: Fixed resin surge making sticky weeds if a non-wall non-fruit entity
-      was targeted on weeds (it now makes a wall as intended)
-    type: Fix
-  - message: Reverted weed node layering changes for now.
-    type: Tweak
-  id: 1286
-  time: '2025-02-03T11:21:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5500
 - author: Whisper
   changes:
   - message: Increased the volume of dropship startup and landing.
@@ -5316,5 +5287,26 @@
   id: 1786
   time: '2025-06-01T10:31:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6579
+- author: noctyrnal
+  changes:
+  - message: Hybrisa's LZ2 is now filled with fog which drops at 15 minutes.
+    type: Tweak
+  id: 1787
+  time: '2025-06-05T00:15:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6605
+- author: Vermidia
+  changes:
+  - message: Fixed req being able to order an SG kit.
+    type: Fix
+  id: 1788
+  time: '2025-06-05T00:14:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6620
+- author: J C Denton and noctyrnal
+  changes:
+  - message: Fixed Admin Fax having 451 Fahrenheit temperature and levitating rats.
+    type: Fix
+  id: 1789
+  time: '2025-06-05T00:14:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6576
 Name: RMC14
 Order: -1
