@@ -1,0 +1,13 @@
+- type: entity
+  parent: Ashtray
+  id: RMCAshtray
+  name: plastic ashtray
+  description: Cheap platic ashtray.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/ashtray.rsi
+    layers:
+      - state: icon-0
+        map: ["enum.StorageFillLayers.Fill"]
+  - type: StorageFillVisualizer
+    maxFillLevels: 2

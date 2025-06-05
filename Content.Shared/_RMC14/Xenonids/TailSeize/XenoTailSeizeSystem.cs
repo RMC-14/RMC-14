@@ -89,8 +89,6 @@ public sealed class XenoTailSeizeSystem : EntitySystem
         if (!_actionBlocker.CanAttack(xeno))
             return;
 
-        _projectile.TryShoot(xeno, args.Coords.Value, 0, xeno.Comp.Projectile, null, 1, Angle.Zero, xeno.Comp.Speed, target: args.Entity);
-
         if (TryComp(xeno, out MeleeWeaponComponent? melee))
         {
             if (_timing.CurTime < melee.NextAttack)
@@ -99,6 +97,8 @@ public sealed class XenoTailSeizeSystem : EntitySystem
             melee.NextAttack = _timing.CurTime + TimeSpan.FromSeconds(1);
             Dirty(xeno, melee);
         }
+
+        _projectile.TryShoot(xeno, args.Coords.Value, 0, xeno.Comp.Projectile, null, 1, Angle.Zero, xeno.Comp.Speed, target: args.Entity);
 
         var attackEv = new MeleeAttackEvent(xeno);
         RaiseLocalEvent(xeno, ref attackEv);
