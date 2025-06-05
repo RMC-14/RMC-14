@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Some marine uniforms can now be toggled to roll sleeves and take off
-      the jacket. Right click on a uniform to toggle it.
-    type: Tweak
-  id: 1302
-  time: '2025-02-07T23:00:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5539
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed ME3 hand welder (the small one) blinding you without eye protection.
     type: Fix
   id: 1303
@@ -5320,5 +5312,12 @@
   id: 1804
   time: '2025-06-05T01:29:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6627
+- author: SG6732
+  changes:
+  - message: Added new sprites for SPP weaponry. Type 71s for everyone!
+    type: Add
+  id: 1805
+  time: '2025-06-05T12:11:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6489
 Name: RMC14
 Order: -1
