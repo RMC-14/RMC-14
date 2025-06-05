@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: SOP clarification; The deconstruction of crates and barrels are not considered
-      ship modifications.
-    type: Tweak
-  id: 1289
-  time: '2025-02-03T11:33:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5510
 - author: FungiFellow
   changes:
   - message: Fixed SG drum belt not having two drums
@@ -5313,5 +5305,12 @@
   id: 1791
   time: '2025-06-05T00:17:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6623
+- author: noctyrnal
+  changes:
+  - message: PMCs now have job spawners, for PvE.
+    type: Tweak
+  id: 1792
+  time: '2025-06-05T00:31:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6612
 Name: RMC14
 Order: -1
