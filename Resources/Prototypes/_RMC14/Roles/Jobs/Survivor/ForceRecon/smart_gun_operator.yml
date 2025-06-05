@@ -5,6 +5,7 @@
   playTimeTracker: RMCJobSurvivorSmartgunOperatorForecon
   startingGear: RMCGearForeconSmartgunOperator
   icon: "CMJobIconSmartGunOperator"
+  spawnMenuRoleName: FORECON Smart Gun Operator (Survivor)
   special:
   - !type:AddComponentSpecial
     components:

@@ -3,8 +3,9 @@
   id: RMCSurvivorForeconMarksman
   name: rmc-job-name-forecon-marksman
   playTimeTracker: RMCJobSurvivorMarksmanForecon
-  startingGear: RMCGearForeconBase
+  startingGear: RMCGearForeconMarksman
   icon: "CMJobIconWeaponsSpecialist"
+  spawnMenuRoleName: FORECON Marksman (Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -41,6 +42,12 @@
 - type: playTimeTracker
   id: RMCJobSurvivorMarksmanForecon
   isHumanoid: true
+
+- type: startingGear
+  parent: RMCGearForeconBase
+  id: RMCGearForeconMarksman
+  equipment:
+    shoes: RMCScoutShoes
 
 - type: entity
   parent: CMSpawnPointJobBase

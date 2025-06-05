@@ -851,13 +851,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 ev.SpawnResult = _stationSpawning.SpawnPlayerMob(coordinates, ev.Job, ev.HumanoidCharacterProfile, ev.Station);
             }
 
-            // TODO RMC14 split this out with an event
-            SpriteSpecifier? icon = null;
-            if (job.HasIcon && _prototypes.TryIndex(job.Icon, out var jobIcon))
-                icon = jobIcon.Icon;
-
-            _marines.MakeMarine(ev.SpawnResult.Value, icon);
-
             if (squad != null)
             {
                 _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, jobId);
