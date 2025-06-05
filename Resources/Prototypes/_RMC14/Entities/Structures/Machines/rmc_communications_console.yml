@@ -190,6 +190,28 @@
         layer:
         - MidImpassable
         - LowImpassable
+  - type: PlaceableSurface
+
+- type: entity
+  parent: RMCTacticalMapTableLarge
+  id: RMCTacticalMapTableLargeRotated
+  suffix: Rotated
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/large_map_table_rotated.rsi
+    offset: 0.5, 1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.4,1.4,2.4"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
