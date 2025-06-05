@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Night vision visors now have their film grain overlay
-    type: Tweak
-  id: 1299
-  time: '2025-02-07T08:15:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5484
 - author: Tunguso4ka
   changes:
   - message: A somewhat unlucky UNS Savannah returns from her refit.
@@ -5315,5 +5308,13 @@
   id: 1801
   time: '2025-06-05T01:18:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6526
+- author: SharkSnake98
+  changes:
+  - message: Added the WEYA mug, accessible through the Liaison's Automated Storage
+      Briefcase.
+    type: Add
+  id: 1802
+  time: '2025-06-05T01:21:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6592
 Name: RMC14
 Order: -1
