@@ -107,7 +107,7 @@
       drink:
         maxVol: 50
         reagents:
-        - ReagentId: Whiskey # TODO RMC
+        - ReagentId: RMCSpecialBlendWhiskey
           Quantity: 50
 
 - type: entity

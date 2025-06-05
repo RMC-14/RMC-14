@@ -102,7 +102,7 @@
         amount: 5
       - id: RMCDrinkAlcoholCognac
         amount: 5
-      - id: RMCDrinkAlcoholWhiskey
+      - id: RMCDrinkAlcoholDavenport
         amount: 5
       - id: RMCDrinkAlcoholPurpleWine
         amount: 5
@@ -119,6 +119,8 @@
       - id: RMCDrinkAlcoholVodka
         amount: 5
       - id: RMCDrinkAlcoholKahlua
+        amount: 5
+      - id: RMCDrinkAlcoholWhiskey
         amount: 5
     - name: Craft Beers
       entries: []
