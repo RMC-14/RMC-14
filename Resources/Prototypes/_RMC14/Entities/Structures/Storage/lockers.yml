@@ -355,3 +355,26 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/detective.rsi
+
+# PVE
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerSquadLeader
+  name: section sergeant locker
+  components:
+  - type: AccessReader
+    access: [["CMAccessSquadLeaderPrep"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerSmartGunOperatorOne
+  name: squad one smartgun operator locker
+  components:
+  - type: AccessReader
+    access: [["CMAccessSmartPrep"]]
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorTwo
+  name: squad two smartgun operator locker

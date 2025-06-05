@@ -1,12 +1,10 @@
 # Base
 - type: entity
   parent: ClosetBase
-  id: CMClosetBase
+  id: CMClosetBaseUnanchored
   name: closet
   description: It's a basic storage unit.
   components:
-  - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
   - type: Sprite
@@ -60,6 +58,13 @@
     damage:
       types:
         Blunt: 40
+
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: CMClosetBase
+  components:
+  - type: Transform
+    anchored: true
 
 - type: entity
   parent: CMClosetBase
