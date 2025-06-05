@@ -35,7 +35,5 @@ public sealed partial class MarineControlComputerComponent : Component
 public sealed class GibbedMarineInfo
 {
     public string Name = string.Empty;
-    public string Rank = string.Empty;
-    public string Squad = string.Empty;
     public string? LastPlayerId;
 }

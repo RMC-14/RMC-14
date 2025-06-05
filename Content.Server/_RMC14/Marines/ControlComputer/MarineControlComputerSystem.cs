@@ -33,8 +33,6 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             var info = new GibbedMarineInfo
             {
                 Name = Name(uid),
-                Rank = string.Empty,
-                Squad = string.Empty,
                 LastPlayerId = receiver.LastPlayerId
             };
 
