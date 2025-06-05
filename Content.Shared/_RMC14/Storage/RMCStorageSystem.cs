@@ -356,7 +356,7 @@ public sealed class RMCStorageSystem : EntitySystem
 
         if (!_skills.HasAllSkills(user.Value, store.Comp2.Skills))
         {
-            _popup.PopupClient(Loc.GetString("cm-storage-unskilled"), store, user, PopupType.SmallCaution);
+            popup = Loc.GetString("cm-storage-unskilled");
             return false;
         }
 

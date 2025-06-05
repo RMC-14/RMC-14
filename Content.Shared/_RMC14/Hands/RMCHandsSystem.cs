@@ -207,7 +207,7 @@ public abstract class RMCHandsSystem : EntitySystem
 
         if (!_rmcStorage.CanEject(item, user, out var popup))
         {
-            _popup.PopupClient(popup, user, user);
+            _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
             return false;
         }
 
