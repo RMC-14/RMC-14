@@ -48,6 +48,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCSniper
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCSniper
+  name: weya pmc sniper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCSniper
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCSniper
