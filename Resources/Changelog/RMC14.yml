@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed Executive Officer not starting with a marine service peaked cap.
-    type: Fix
-  id: 1291
-  time: '2025-02-07T02:11:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5532
 - author: Whisper
   changes:
   - message: Fixed MOU53 being too loud, the sound was not mono.
@@ -5312,5 +5305,14 @@
   id: 1793
   time: '2025-06-05T00:32:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6566
+- author: Vermidia
+  changes:
+  - message: Fix lifesaver bags being able to hold blood packs.
+    type: Fix
+  - message: Fix medical storage rig not storing some items.
+    type: Fix
+  id: 1794
+  time: '2025-06-05T00:36:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6556
 Name: RMC14
 Order: -1
