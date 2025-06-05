@@ -1,5 +1,5 @@
 - type: reaction
-  id: CMDylovene
+  id: RMCLexorin
   reactants:
     RMCPhoron:
       amount: 1
