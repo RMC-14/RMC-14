@@ -45,7 +45,7 @@
         points: 6
       - id: CMFirstAidO2KitFilled
         points: 6
-      - id: RMCRadiationAidKit
+      - id: RMCRadiationAidKitFilled
         points: 6
     - name: Pill Bottles
       entries:
