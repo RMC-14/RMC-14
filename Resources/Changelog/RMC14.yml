@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Increased the volume of dropship startup and landing.
-    type: Tweak
-  id: 1287
-  time: '2025-02-03T11:23:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5505
-- author: Vermidia
-  changes:
-  - message: Avalis now have their own laugh sound.
-    type: Add
-  id: 1288
-  time: '2025-02-03T11:34:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5503
-- author: Whisper
-  changes:
   - message: SOP clarification; The deconstruction of crates and barrels are not considered
       ship modifications.
     type: Tweak
@@ -5308,5 +5294,24 @@
   id: 1789
   time: '2025-06-05T00:14:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6576
+- author: Dygon
+  changes:
+  - message: Fixed the Warrior's fling ability stunning and slowing for too long.
+      It now stuns for 1 second instead of 2 seconds, and slows for 4 seconds instead
+      of 8 seconds.
+    type: Fix
+  - message: Fixed the Ravager's Clothesline ability applying the wrong effect, it
+      now dazes for 4 seconds instead of slowing for 8 seconds.
+    type: Fix
+  id: 1790
+  time: '2025-06-05T00:17:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6598
+- author: noctyrnal
+  changes:
+  - message: Added a white neckerchief to loadouts.
+    type: Add
+  id: 1791
+  time: '2025-06-05T00:17:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6623
 Name: RMC14
 Order: -1
