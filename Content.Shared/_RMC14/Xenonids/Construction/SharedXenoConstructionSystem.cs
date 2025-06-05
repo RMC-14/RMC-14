@@ -983,8 +983,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                     tileDef.ID == ContentTileDefinition.SpaceID ||
                     tileDef is ContentTileDefinition { WeedsSpreadable: false })
                 {
-                    if (_net.IsServer)
-                        _popup.PopupEntity(Loc.GetString("cm-xeno-construction-failed-cant-build"), xeno, xeno);
+                    _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), xeno, xeno);
                     return false;
                 }
             }
