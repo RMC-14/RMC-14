@@ -33,7 +33,7 @@
       key_slots:
       - RMCEncryptionKeyBureau
 
-# For ICB Liaison
+# For CMB and ICB survivors.
 - type: entity
   parent: RMCHeadsetIconsCMB
   id: RMCHeadsetDistressBureauDamaged
