@@ -53,6 +53,16 @@
         amount: 5
 
 - type: entity
+  parent: ColMarTechFood
+  id: RMCNutriCoVendor
+  name: NutriCo AutoChef
+  description: An autochef food dispenser, capable of distributing food containing all the essential vitamins and nutrients anyone could ever need. Inedible-looking sludge is passed through a variety of heaters, re-shapers, and solidifiers before being artificially flavored to create something that looks and tastes mostly edible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/food.rsi
+    offset: 0, 0.5
+
+- type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorBooze
   name: Booze-O-Mat

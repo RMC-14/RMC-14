@@ -121,3 +121,11 @@
   description: alerts-stamina-desc
   minSeverity: 0
   maxSeverity: 4
+
+- type: alert
+  id: RMCUnconscious
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/status.rsi
+    state: sleeping
+  name: rmc-alerts-unconscious-name
+  description: rmc-alerts-unconscious-desc

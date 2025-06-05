@@ -33,6 +33,7 @@
       RMCCommunicationsTower: HivePylonXeno
   - type: XenoWeedsSpreading
   - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionRequiresWeedableSurface
   - type: HiveConstructionLimited
     id: HiveClusterXeno
   - type: RepairableXenoStructure
@@ -76,6 +77,7 @@
     plasmaCost: 300
     spawn: HiveClusterXeno
   - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionRequiresWeedableSurface
   - type: HiveConstructionLimited
     id: HiveClusterXeno
   - type: WarpPoint
