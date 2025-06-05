@@ -7,6 +7,7 @@
     RMCRankSecondLT: []
   icon: "CMJobIconSquadLeader"
   roleWeight: 1
+  spawnMenuRoleName: FORECON Squad Leader (Survivor)
   special:
   - !type:AddComponentSpecial
     components:

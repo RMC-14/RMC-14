@@ -253,6 +253,11 @@
     - range: 4
       falloff: 10
       buildup: true
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
 
 - type: entity
   parent: RMCBaseBullet
@@ -278,6 +283,12 @@
       falloff: 10
     - range: 4
       falloff: 10
+      buildup: true
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
 
 - type: entity
   parent: RMCBaseBullet
@@ -292,7 +303,18 @@
     amount: 25
   - type: RMCProjectileAccuracy
     accuracy: 105
+    thresholds:
+    - range: 16
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
   - type: IgniteOnProjectileHit
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
 
 - type: Tag
   id: RMCMagazineRifleM4SPRA19
