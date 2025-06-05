@@ -20,6 +20,19 @@
 
 - type: entity
   parent: CMAirlock
+  id: CMAirlockShuttle
+  suffix: Shuttle
+  components:
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Docking
+  - type: DockingSignalControl
+
+- type: entity
+  parent: CMAirlock
   id: CMAirlockCommand
   name: command airlock
   suffix: Command
