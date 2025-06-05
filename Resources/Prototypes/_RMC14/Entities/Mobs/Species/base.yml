@@ -67,6 +67,7 @@
     - Dazed
     - Blinded
     - Deaf
+    - Unconscious
   - type: Blindable
   - type: Tag
     tags:

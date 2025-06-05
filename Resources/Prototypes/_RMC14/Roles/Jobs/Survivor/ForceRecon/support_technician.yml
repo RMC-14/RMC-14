@@ -15,6 +15,7 @@
   - !type:TotalJobsTimeRequirement
     group: RMCJobsSurvivor
     time: 5400 # 1.5 hours
+  spawnMenuRoleName: FORECON Support Technician (Survivor)
   special:
   - !type:AddComponentSpecial
     components:
