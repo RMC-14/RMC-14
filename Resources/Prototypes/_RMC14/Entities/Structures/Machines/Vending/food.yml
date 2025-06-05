@@ -153,8 +153,8 @@
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorChess
-  name: Chess-o-mat
-  description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
+  name: Chess-O-Mat
+  description: In 2107 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/chessomat.rsi
@@ -169,7 +169,42 @@
       - id: ChessBoard
         amount: 5
     - name: White Pieces
-      entries: []
+      entries:
+      - id: RMCDrinkAlcoholVodkaChessWhitePawn
+        name: Pawn
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteBishop
+        name: Bishop
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteKnight
+        name: Knight
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteRook
+        name: Rook
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteKing
+        name: King
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteQueen
+        name: Queen
+        amount: 2
     - name: Black Pieces
-      entries: []
-    # TODO RMC14 vodka chess pieces
+      entries:
+      - id: RMCDrinkAlcoholVodkaChessBlackPawn
+        name: Pawn
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackBishop
+        name: Bishop
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackKnight
+        name: Knight
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackRook
+        name: Rook
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackKing
+        name: King
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackQueen
+        name: Queen
+        amount: 2
