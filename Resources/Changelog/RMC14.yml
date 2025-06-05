@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: A somewhat unlucky UNS Savannah returns from her refit.
-    type: Add
-  id: 1300
-  time: '2025-02-07T11:50:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5097
 - author: Dutch-VanDerLinde
   changes:
   - message: Added fist-bumping and high-fiving emotes. Right click on a fellow marine
@@ -5316,5 +5309,13 @@
   id: 1802
   time: '2025-06-05T01:21:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6592
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed hive clusters being able to be placed on unweedable surfaces, like
+      grass.
+    type: Fix
+  id: 1803
+  time: '2025-06-05T01:26:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6625
 Name: RMC14
 Order: -1
