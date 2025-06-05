@@ -79,10 +79,10 @@
     - name: Alcohol
       entries:
       - id: CMDrinkCanAle
-        name: We-Ya IPA Ale
+        name: ale
         amount: 6
       - id: CMDrinkCanBeerLite
-        name: We-Ya Lite Beer
+        name: beer
         amount: 6
       - id: RMCDrinkAlcoholGrenadine
         amount: 5
