@@ -203,7 +203,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         var netActor = GetNetEntity(actor);
         var options = new List<DialogOption>();
 
-        // Add living marines
+        // Add not gibbed marines
         var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
         while (receivers.MoveNext(out var uid, out var receiver, out _))
         {
@@ -222,7 +222,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             options.Add(new DialogOption(Name(uid), new MarineControlComputerMedalMarineEvent(netActor, GetNetEntity(uid))));
         }
 
-        // Add dead marines
+        // Add gibbed marines
         if (TryComp<MarineControlComputerComponent>(computer, out var comp))
         {
             foreach (var (playerId, info) in comp.GibbedMarines)
