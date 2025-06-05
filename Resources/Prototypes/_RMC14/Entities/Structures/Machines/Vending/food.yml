@@ -78,16 +78,18 @@
     sections:
     - name: Alcohol
       entries:
-#      - id: DrinkAleBottleFull
-#        amount: 6
-#      - id: DrinkBeerBottleFull
-#        amount: 6
-#      - id: DrinkGrenadineBottleFull
-#        amount: 5
-#      - id: DrinkTequilaBottleFull
-#        amount: 5
+      - id: CMDrinkCanAle
+        name: We-Ya IPA Ale
+        amount: 6
+      - id: CMDrinkCanBeerLite
+        name: We-Ya Lite Beer
+        amount: 6
+      - id: RMCDrinkAlcoholGrenadine
+        amount: 5
+      - id: RMCDrinkAlcoholTequila
+        amount: 5
       - id: RMCDrinkAlcoholRum
-        amount: 27 # TODO RMC14 5
+        amount: 5
       - id: RMCDrinkAlcoholCognac
         amount: 5
       - id: RMCDrinkAlcoholWhiskey
@@ -96,18 +98,18 @@
         amount: 5
       - id: RMCDrinkAlcoholMelonLiquor
         amount: 2
-#      - id: DrinkVermouthBottleFull
-#        amount: 5
+      - id: RMCDrinkAlcoholVermouth
+        amount: 5
       - id: RMCDrinkAlcoholGin
-        amount: 10 # TODO RMC14 5
+        amount: 5
       - id: RMCDrinkAlcoholAbsinthe
         amount: 2
-#      - id: DrinkBlueCuracaoBottleFull
-#        amount: 2
+      - id: RMCDrinkAlcoholBlueCuracao
+        amount: 2
       - id: RMCDrinkAlcoholVodka
-        amount: 12 # TODO RMC14 5
-#      - id: DrinkCoffeeLiqueurBottleFull
-#        amount: 5
+        amount: 5
+      - id: RMCDrinkAlcoholKahlua
+        amount: 5
     - name: Craft Beers
       entries: []
     - name: Non-Alcohol
