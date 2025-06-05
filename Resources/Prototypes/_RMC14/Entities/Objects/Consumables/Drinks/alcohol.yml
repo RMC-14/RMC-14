@@ -193,7 +193,7 @@
 - type: entity
   parent: RMCDrinkAlcoholBase
   id: RMCDrinkAlcoholBlueCuracao
-  name: Miss Blue Curacao
+  name: miss blue curacao
   description: A fruity, exceptionally azure drink. Does not allow the imbiber to use the fifth magic.
   components:
   - type: Sprite
