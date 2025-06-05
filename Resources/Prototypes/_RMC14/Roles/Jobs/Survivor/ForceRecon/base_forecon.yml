@@ -13,6 +13,7 @@
   hasIcon: false
   greeting: rmc-job-greeting-forecon
   playTimeTracker: RMCSurvivorForecon
+  spawnMenuRoleName: FORECON Survivor (Base)
   hidden: true
 
 - type: startingGear
