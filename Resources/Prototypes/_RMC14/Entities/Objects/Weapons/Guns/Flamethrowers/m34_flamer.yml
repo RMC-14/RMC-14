@@ -91,6 +91,12 @@
         enum.RMCIgniterVisuals.Ignited:
           True: { visible: true }
           False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorM34
+
+- type: Tag
+  id: RMCWeaponIncineratorM34
 
 - type: entity
   parent: RMCWeaponFlamer
