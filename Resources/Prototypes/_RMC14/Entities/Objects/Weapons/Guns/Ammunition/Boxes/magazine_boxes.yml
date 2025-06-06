@@ -1729,6 +1729,56 @@
         tags:
         - RMCShellShotgunIncendiaryBuckshot
 
+# Breaching
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunBreachingEmpty
+  name: box of breaching shells
+  description: A box filled with breaching shotgun shells. 16 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBreachingEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#595959"
+    - state: shell_box_breaching
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_12g_color
+      color: "#595959"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+  - type: Tag
+    tags:
+    - RMCBoxShotgunBreaching
+
+- type: entity
+  parent: RMCBoxShotgunBreachingEmpty
+  id: RMCBoxShotgunBreaching
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunBreaching
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+  - type: Tag
+    tags:
+    - RMCBoxShotgunBreaching
+
+- type: Tag
+  id: RMCBoxShotgunBreaching
+
 # -- SUPPLY BOXES --
 
 # Nailgun

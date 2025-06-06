@@ -37,8 +37,8 @@
   - type: RMCStorageEjectHand
     state: Last
 
-- type: Tag
-  id: RMCBoxShotgunShells
+# - type: Tag
+#   id: RMCBoxShotgunShells
 
 # - type: entity
 #   parent: RMCBoxShotgunBase
@@ -218,40 +218,40 @@
 #       map: [ "empty" ]
 #       color: "#c6cdd3"
 
-- type: entity
-  parent: RMCBoxShotgunBase
-  id: RMCBoxShotgunBreaching
-  name: box of breaching shells
-  description: A box filled with breaching shotgun shells. 16 Gauge.
-  components:
-  - type: Storage
-    whitelist:
-      tags:
-      - RMCShellShotgunBreaching
-  - type: StorageFill
-    contents:
-    - id: RMCShellShotgunBreaching
-      amount: 5
-  - type: Sprite
-    layers:
-    - state: smallshell_box
-      color: "#595959"
-    - state: shell_box_breaching
-      color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
-      color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
-      color: "#595959"
-      map: [ "full" ]
-    - state: smallshell_empty
-      map: [ "empty" ]
-      color: "#595959"
-  - type: Tag
-    tags:
-    - RMCBoxShotgunBreaching
+# - type: entity
+#   parent: RMCBoxShotgunBase
+#   id: RMCBoxShotgunBreaching
+#   name: box of breaching shells
+#   description: A box filled with breaching shotgun shells. 16 Gauge.
+#   components:
+#   - type: Storage
+#     whitelist:
+#       tags:
+#       - RMCShellShotgunBreaching
+#   - type: StorageFill
+#     contents:
+#     - id: RMCShellShotgunBreaching
+#       amount: 5
+#   - type: Sprite
+#     layers:
+#     - state: smallshell_box
+#       color: "#595959"
+#     - state: shell_box_breaching
+#       color: "#e0d5c2"
+#     - state: smallshell_ammo_full_12g_base
+#       color: "#ffffff"
+#     - state: smallshell_ammo_full_12g_color
+#       color: "#595959"
+#       map: [ "full" ]
+#     - state: smallshell_empty
+#       map: [ "empty" ]
+#       color: "#595959"
+#   - type: Tag
+#     tags:
+#     - RMCBoxShotgunBreaching
 
-- type: Tag
-  id: RMCBoxShotgunBreaching
+# - type: Tag
+#   id: RMCBoxShotgunBreaching
 
 
 - type: entity
