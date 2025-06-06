@@ -232,7 +232,7 @@ public sealed partial class CCVars
     /// Should an admin message be made if the connection got rejected cause of ipintel?
     /// </summary>
     public static readonly CVarDef<bool> GameIPIntelAlertAdminReject =
-        CVarDef.Create("game.ipintel_alert_admin_rejected", false, CVar.SERVERONLY);
+        CVarDef.Create("game.ipintel_alert_admin_rejected", true, CVar.SERVERONLY);
 
     /// <summary>
     /// A contact email to be sent along with the request. Required by IPIntel
@@ -290,19 +290,19 @@ public sealed partial class CCVars
     /// </remarks>>
     /// </summary>
     public static readonly CVarDef<TimeSpan> GameIPIntelExemptPlaytime =
-        CVarDef.Create("game.ipintel_exempt_playtime", TimeSpan.FromMinutes(300), CVar.SERVERONLY);
+        CVarDef.Create("game.ipintel_exempt_playtime", TimeSpan.FromHours(1), CVar.SERVERONLY);
 
     /// <summary>
     /// Rating to reject at. Anything equal to or higher than this will reject the connection.
     /// </summary>
     public static readonly CVarDef<float> GameIPIntelBadRating =
-        CVarDef.Create("game.ipintel_bad_rating", 0.95f, CVar.SERVERONLY);
+        CVarDef.Create("game.ipintel_bad_rating", 0.90f, CVar.SERVERONLY);
 
     /// <summary>
     /// Rating to send an admin warning over, but not reject the connection. Set to 0 to disable
     /// </summary>
     public static readonly CVarDef<float> GameIPIntelAlertAdminWarnRating =
-        CVarDef.Create("game.ipintel_alert_admin_warn_rating", 0f, CVar.SERVERONLY);
+        CVarDef.Create("game.ipintel_alert_admin_warn_rating", 0.80f, CVar.SERVERONLY);
 
     /// <summary>
     ///     Make people bonk when trying to climb certain objects like tables.
