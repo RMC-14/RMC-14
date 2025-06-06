@@ -1520,6 +1520,47 @@
         tags:
         - RMCShellShotgunBuckshot
 
+# Slugs
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunSlugsEmpty
+  name: box of slug shells
+  description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsSlugsEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#578e75"
+    - state: shell_box_slugs
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_12g_color
+      color: "#578e75"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunSlugs
+
+- type: entity
+  parent: RMCBoxShotgunSlugsEmpty
+  id: RMCBoxShotgunSlugs
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunSlugs
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunSlugs
+
 # -- SUPPLY BOXES --
 
 # Nailgun

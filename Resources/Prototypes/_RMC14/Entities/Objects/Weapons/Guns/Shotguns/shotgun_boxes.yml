@@ -69,34 +69,34 @@
 #       map: [ "empty" ]
 #       color: "#944444"
 
-- type: entity
-  parent: RMCBoxShotgunBase
-  id: RMCBoxShotgunSlugs
-  name: box of slug shells
-  description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
-  components:
-  - type: Storage
-    whitelist:
-      tags:
-      - RMCShellShotgunSlugs
-  - type: StorageFill
-    contents:
-    - id: CMShellShotgunSlugs
-      amount: 5
-  - type: Sprite
-    layers:
-    - state: smallshell_box
-      color: "#578e75"
-    - state: shell_box_slugs
-      color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
-      color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
-      color: "#578e75"
-      map: [ "full" ]
-    - state: smallshell_empty
-      map: [ "empty" ]
-      color: "#578e75"
+# - type: entity
+#   parent: RMCBoxShotgunBase
+#   id: RMCBoxShotgunSlugs
+#   name: box of slug shells
+#   description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
+#   components:
+#   - type: Storage
+#     whitelist:
+#       tags:
+#       - RMCShellShotgunSlugs
+#   - type: StorageFill
+#     contents:
+#     - id: CMShellShotgunSlugs
+#       amount: 5
+#   - type: Sprite
+#     layers:
+#     - state: smallshell_box
+#       color: "#578e75"
+#     - state: shell_box_slugs
+#       color: "#e0d5c2"
+#     - state: smallshell_ammo_full_12g_base
+#       color: "#ffffff"
+#     - state: smallshell_ammo_full_12g_color
+#       color: "#578e75"
+#       map: [ "full" ]
+#     - state: smallshell_empty
+#       map: [ "empty" ]
+#       color: "#578e75"
 
 - type: entity
   parent: RMCBoxShotgunBase
