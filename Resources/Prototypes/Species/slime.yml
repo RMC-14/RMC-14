@@ -75,77 +75,77 @@
 - type: humanoidBaseSprite
   id: MobSlimeHeadMale
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: head_m
 
 - type: humanoidBaseSprite
   id: MobSlimeHeadFemale
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: head_f
 
 - type: humanoidBaseSprite
   id: MobSlimeTorso
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: torso_m
 
 - type: humanoidBaseSprite
   id: MobSlimeTorsoMale
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: torso_m
 
 - type: humanoidBaseSprite
   id: MobSlimeTorsoFemale
   baseSprite:
-    sprite: _RMC/Mobs/Species/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: torso_f
 
 - type: humanoidBaseSprite
   id: MobSlimeLLeg
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: l_leg
 
 - type: humanoidBaseSprite
   id: MobSlimeLArm
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: l_arm
 
 - type: humanoidBaseSprite
   id: MobSlimeLHand
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: l_hand
 
 - type: humanoidBaseSprite
   id: MobSlimeLFoot
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: l_foot
 
 - type: humanoidBaseSprite
   id: MobSlimeRLeg
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: r_leg
 
 - type: humanoidBaseSprite
   id: MobSlimeRArm
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: r_arm
 
 - type: humanoidBaseSprite
   id: MobSlimeRHand
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: r_hand
 
 - type: humanoidBaseSprite
   id: MobSlimeRFoot
   baseSprite:
-    sprite: _RMC/Mobs/Slime/parts.rsi
+    sprite: _RMC14/Mobs/Slimes/parts.rsi
     state: r_foot
