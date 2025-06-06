@@ -354,6 +354,22 @@
   iconColor: "#7c4c1b"
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Small Box (.458 SOCOM)
+  id: RMCBox458SOCOMEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBox458SOCOMEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding handfuls of bullets.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smallshell_box
+  iconColor: "#62757b"
+  objectType: Item
+
+
 # Nailgun
 - type: construction
   parent: RMC
@@ -473,6 +489,113 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: shell_box
+  iconColor: "#595959"
+  objectType: Item
+
+# Small Shotgun
+
+- type: construction
+  parent: RMC
+  name: Small Shell Box (Buckshot)
+  id: RMCBoxShotgunBuckshotEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShotgunBuckshotEmpty
+  category: construction-category-cm-box-magazine
+  description: A small box for holding handfuls of shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smallshell_box
+  iconColor: "#944444"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Small Shell Box (Slugs)
+  id: RMCBoxShotgunSlugsEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShotgunSlugsEmpty
+  category: construction-category-cm-box-magazine
+  description: A small box for holding handfuls of shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smallshell_box
+  iconColor: "#578e75"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Small Shell Box (Incendiary)
+  id: RMCBoxShotgunIncendiaryEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShotgunIncendiaryEmpty
+  category: construction-category-cm-box-magazine
+  description: A small box for holding handfuls of shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smallshell_box
+  iconColor: "#c6cdd3"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Small Shell Box (Beanbags)
+  id: RMCBoxShotgunBeanbagEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShotgunBeanbagEmpty
+  category: construction-category-cm-box-magazine
+  description: A small box for holding handfuls of shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smallshell_box
+  iconColor: "#5786be"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Small Shell Box (Flechette)
+  id: RMCBoxShotgunFlechetteEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShotgunFlechetteEmpty
+  category: construction-category-cm-box-magazine
+  description: A small box for holding handfuls of shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smallshell_box
+  iconColor: "#6551a0"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Small Shell Box (Incendiary Buckshot)
+  id: RMCBoxShotgunIncendiaryBuckshotEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShotgunIncendiaryBuckshotEmpty
+  category: construction-category-cm-box-magazine
+  description: A small box for holding handfuls of shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smallshell_box
+  iconColor: "#c6cdd3"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Small Shell Box (Breaching)
+  id: RMCBoxShotgunBreachingEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShotgunBreachingEmpty
+  category: construction-category-cm-box-magazine
+  description: A small box for holding handfuls of shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smallshell_box
   iconColor: "#595959"
   objectType: Item
 
@@ -714,7 +837,7 @@
         doAfter: 0.25
 
     # XM88
-    - to: RMCBoxBullets458Empty
+    - to: RMCBox458SOCOMEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -752,6 +875,46 @@
         amount: 1
         doAfter: 0.25
     - to: RMCBoxShellsBreachingEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShotgunBuckshotEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShotgunSlugsEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShotgunIncendiaryEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShotgunBeanbagEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShotgunFlechetteEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShotgunIncendiaryBuckshotEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShotgunBreachingEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBox458SOCOMEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -859,8 +1022,8 @@
     entity: RMCBoxMagazineSMGNailgunEmpty
 
   # XM88
-  - node: RMCBoxBullets458Empty
-    entity: RMCBoxBullets458Empty
+  - node: RMCBox458SOCOMEmpty
+    entity: RMCBox458SOCOMEmpty
 
   # Shotgun
   - node: RMCBoxShellsBuckshotEmpty
@@ -877,6 +1040,22 @@
     entity: RMCBoxShellsIncendiaryBuckshotEmpty
   - node: RMCBoxShellsBreachingEmpty
     entity: RMCBoxShellsBreachingEmpty
+
+  # Small Shotgun
+  - node: RMCBoxShotgunBuckshotEmpty
+    entity: RMCBoxShotgunBuckshotEmpty
+  - node: RMCBoxShotgunSlugsEmpty
+    entity: RMCBoxShotgunSlugsEmpty
+  - node: RMCBoxShotgunIncendiaryEmpty
+    entity: RMCBoxShotgunIncendiaryEmpty
+  - node: RMCBoxShotgunBeanbagEmpty
+    entity: RMCBoxShotgunBeanbagEmpty
+  - node: RMCBoxShotgunFlechetteEmpty
+    entity: RMCBoxShotgunFlechetteEmpty
+  - node: RMCBoxShotgunIncendiaryBuckshotEmpty
+    entity: RMCBoxShotgunIncendiaryBuckshotEmpty
+  - node: RMCBoxShotgunBreachingEmpty
+    entity: RMCBoxShotgunBreachingEmpty
 
   # Misc
   - node: RMCBoxMREEmpty
