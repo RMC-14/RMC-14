@@ -43,12 +43,7 @@
         isAppendSquadRoleName: false
         givePrefix: rmc-job-prefix-weapons-specialist-scout
         isAppendPrefix: true
-        giveIcon:
-          sprite: _RMC14/Interface/cm_job_icons.rsi
-          state: hudsquad_spec_scout
-        giveMapBlip:
-          sprite: _RMC14/Interface/map_blips.rsi
-          state: spec_scout
+        # maybe scout should come up with his own icons
       - id: CMSniperEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-sniper
         isAppendSquadRoleName: false
