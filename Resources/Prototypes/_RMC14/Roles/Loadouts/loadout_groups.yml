@@ -113,6 +113,7 @@
   - NeckerchiefBlackRMC
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefWhiteRMC
 
 # Headwear
 - type: loadoutGroup
@@ -481,3 +482,4 @@
   - NeckerchiefBlackRMC
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefWhiteRMC

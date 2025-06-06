@@ -442,7 +442,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_acid_ball
     event: !type:XenoAcidBallActionEvent
-    useDelay: 0
+    useDelay: 18
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting
@@ -1100,7 +1100,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: abduct
     event: !type:XenoAbductActionEvent
-    range: 7
+    range: 6
     useDelay: 15
     deselectOnMiss: false
     checkCanAccess: false

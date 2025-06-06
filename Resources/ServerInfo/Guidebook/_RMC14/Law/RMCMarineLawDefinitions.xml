@@ -11,21 +11,23 @@
 
   [color=#008000][bold]Commander[/bold][/color]
   - The current [color=#008000][bold]Commander[/bold][/color] of an operation.
-  - Transferable to a new [color=#008000][bold]Commander[/bold][/color], per the [textlink="Chain of Command" link="RMCCommandChain"].
+  - Transferable to a new [color=#008000][bold]Commander[/bold][/color], per the [textlink="Commander Succession" link="RMCCommandChain"].
 
   If the [color=#008000][bold]Commander[/bold][/color] is rendered incapable of command [bold]temporarily[/bold], the [color=#90EE90][bold]Duty Officer[/bold][/color] inherits [color=#008000][bold]Commander[/bold][/color] rights, but should the [color=#008000][bold]Commander[/bold][/color] return, they are still the [color=#008000][bold]Commander[/bold][/color]. This includes but is not limited to:
 
   - Prolonged communications outage.
   - The [color=#008000][bold]Commander[/bold][/color] deploying in the field.
 
-  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Chain of Command" link="RMCCommandChain"] becomes the [color=#008000][bold]Commander[/bold][/color], rather than becoming a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
+  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Commander Succession" link="RMCCommandChain"] becomes the [color=#008000][bold]Commander[/bold][/color], rather than becoming a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
   - The [color=#008000][bold]Commander[/bold][/color] is relieved of duty due to [bold]arrest[/bold] or [bold]mutiny[/bold].
   - The [color=#008000][bold]Commander[/bold][/color] becoming [bold]unrevivable[/bold].
+
+  Ensure when assigning a new [color=#008000][bold]Commander[/bold][/color], that this is announced. Include the new [color=#008000][bold]Commander[/bold][/color]'s name and the reason for them being assigned as the new [color=#008000][bold]Commander[/bold][/color], to avoid confusion.
 
   \n
 
   [color=#90EE90][bold]Duty Officer[/bold][/color]
-  - The ranking officer in the [textlink="Chain of Command" link="RMCCommandChain"] who, in the temporary absence of the [color=#008000][bold]Commander[/bold][/color], is placed in command of the warship.
+  - The ranking officer in the [textlink="Commander Succession" link="RMCCommandChain"] who, in the temporary absence of the [color=#008000][bold]Commander[/bold][/color], is placed in command of the warship.
   - Unless explicitly stated otherwise, the [color=#90EE90][bold]Duty Officer[/bold][/color] is interchangeable with, and inherits the rights of [color=#008000][bold]Commander[/bold][/color] in this case.
 
   \n
@@ -117,7 +119,7 @@
   [color=#ffa500][bold]Provost Marshal Office[/bold][/color]
   - Hold significant weight on how Marine Law is handled in their operational areas.
   - In the event that Marine Law is being mishandled aboard a UNMC warship or within the AO of a UNMC warship, [color=#ffa500][bold]Provost Marshal Office[/bold][/color] may see fit to dispatch personnel.
-  - Members of the [color=#ffa500][bold]Provost Marshal Office[/bold][/color] obey only their direct superiors and are not beholden to the Marine Chain of Command.
+  - Members of the [color=#ffa500][bold]Provost Marshal Office[/bold][/color] obey only their direct superiors and are not beholden to Marine command or officers.
   - Provost [bold]Marshals[/bold] are not required to follow Marine Law.
   - Provost [bold]Inspectors[/bold] and above are the final word on Marine Law in their AO.
   - Provost [bold]Advisors[/bold] do not hold any direct authority themselves, however they are expected to ensure Marine Law is correctly handled.
