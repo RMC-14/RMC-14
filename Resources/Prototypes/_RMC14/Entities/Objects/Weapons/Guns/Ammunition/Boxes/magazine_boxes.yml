@@ -242,15 +242,15 @@
       enum.CMItemSlotsLayers.Fill:
         enum.CMItemSlotsLayers.Fill:
           Empty: { state: smallshell_ammo_12g_full_base, visible: false }
-          Low: { state: smallshell_ammo_12g_full_base, visible: true }
-          Medium: { state: smallshell_ammo_12g_full_base, visible: true }
-          High: { state: smallshell_ammo_12g_full_base, visible: true }
+          Low: { state: smallshell_ammo_12g_low_base, visible: true }
+          Medium: { state: smallshell_ammo_12g_medium_base, visible: true }
+          High: { state: smallshell_ammo_12g_high_base, visible: true }
           Full: { state: smallshell_ammo_12g_full_base, visible: true }
         enum.CMItemSlotsLayers2.Fill:  # Second fill state for coloured shells
           Empty: { state: smallshell_ammo_12g_full_color, visible: false }
-          Low: { state: smallshell_ammo_12g_full_color, visible: true }
-          Medium: { state: smallshell_ammo_12g_full_color, visible: true }
-          High: { state: smallshell_ammo_12g_full_color, visible: true }
+          Low: { state: smallshell_ammo_12g_low_color, visible: true }
+          Medium: { state: smallshell_ammo_12g_medium_color, visible: true }
+          High: { state: smallshell_ammo_12g_high_color, visible: true }
           Full: { state: smallshell_ammo_12g_full_color, visible: true }
 
 # Supply Base
