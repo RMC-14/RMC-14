@@ -182,7 +182,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers: # Shell boxes dont use markings
-    - state: shell_box
+    - state: shell_box 
       color: "#944444"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
@@ -216,6 +216,42 @@
           Medium: { state: shell_ammo_medium_color, visible: true }
           High: { state: shell_ammo_high_color, visible: true }
           Full: { state: shell_ammo_full_color, visible: true }
+
+  # Small Shells Base
+- type: entity
+  abstract: true
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineShellBaseSmall
+  name: generic shell bundle box (? x ?)
+  description: A small box of bundled shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: smallshell_box
+      color: "#ff0000"
+    - state: smallshell_box_12g
+      color: "#00ff00"
+    - state: smallshell_ammo_full_12g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_12g_color
+      color: "#0000ff"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: smallshell_ammo_full_12g_base, visible: false }
+          Low: { state: smallshell_ammo_full_12g_base, visible: true }
+          Medium: { state: smallshell_ammo_full_12g_base, visible: true }
+          High: { state: smallshell_ammo_full_12g_base, visible: true }
+          Full: { state: smallshell_ammo_full_12g_base, visible: true }
+        enum.CMItemSlotsLayers2.Fill:  # Second fill state for coloured shells
+          Empty: { state: smallshell_ammo_full_12g_color, visible: false }
+          Low: { state: smallshell_ammo_full_12g_color, visible: true }
+          Medium: { state: smallshell_ammo_full_12g_color, visible: true }
+          High: { state: smallshell_ammo_full_12g_color, visible: true }
+          Full: { state: smallshell_ammo_full_12g_color, visible: true }      
 
 # Supply Base
 - type: entity
@@ -1120,7 +1156,7 @@
         tags:
         - RMCSpeedLoader44Marksman
 
-# -- SHELL BOXES --
+# -- LARGE SHELL BOXES --
 
 # Buckshot
 - type: entity
@@ -1138,7 +1174,7 @@
       color: "#944444"
     - state: shell_ammo_full_base # Default full ammo sprite
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: shell_ammo_full_base # Default full ammo sprite & color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#944444"
     - state: shell_box_buckshot # Type Markings to place over Box
@@ -1440,6 +1476,49 @@
       whitelist:
         tags:
         - RMCShellShotgunIncendiaryBuckshot
+
+# -- SMALL SHELL BOXES --
+
+# Buckshot
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunBuckshotEmpty
+  name: box of buckshot shells
+  description: A box filled with buckshot spread shotgun shells. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBuckshotEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#944444"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_12g_color
+      color: "#944444"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBuckshot
+
+- type: entity
+  parent: RMCBoxShotgunBuckshotEmpty
+  id: RMCBoxShotgunBuckshot
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunBuckshot
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBuckshot
 
 # -- SUPPLY BOXES --
 
