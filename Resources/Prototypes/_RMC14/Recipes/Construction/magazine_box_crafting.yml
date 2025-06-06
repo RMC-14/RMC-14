@@ -362,7 +362,7 @@
   startNode: start
   targetNode: RMCBox458SOCOMEmpty
   category: construction-category-cm-box-magazine
-  description: A box for holding handfuls of bullets.
+  description: A small box for holding handfuls of bullets.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: smallshell_box
