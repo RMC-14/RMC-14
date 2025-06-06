@@ -16,9 +16,9 @@
       color: "#ff0000"
     - state: smallshell_box_12g
       color: "#00ff00"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#0000ff"
       map: [ "full" ]
     - state: smallshell_empty
@@ -60,9 +60,9 @@
 #       color: "#944444"
 #     - state: shell_box_buckshot
 #       color: "#e0d5c2"
-#     - state: smallshell_ammo_full_12g_base
+#     - state: smallshell_ammo_12g_full_base
 #       color: "#ffffff"
-#     - state: smallshell_ammo_full_12g_color
+#     - state: smallshell_ammo_12g_full_color
 #       color: "#944444"
 #       map: [ "full" ]
 #     - state: smallshell_empty
@@ -89,9 +89,9 @@
 #       color: "#578e75"
 #     - state: shell_box_slugs
 #       color: "#e0d5c2"
-#     - state: smallshell_ammo_full_12g_base
+#     - state: smallshell_ammo_12g_full_base
 #       color: "#ffffff"
-#     - state: smallshell_ammo_full_12g_color
+#     - state: smallshell_ammo_12g_full_color
 #       color: "#578e75"
 #       map: [ "full" ]
 #     - state: smallshell_empty
@@ -120,9 +120,9 @@
 #       color: "#ffcb26"
 #     - state: shell_box_incendiary
 #       color: "#b8533d"
-#     - state: smallshell_ammo_full_12g_base
+#     - state: smallshell_ammo_12g_full_base
 #       color: "#ffffff"
-#     - state: smallshell_ammo_full_12g_color
+#     - state: smallshell_ammo_12g_full_color
 #       color: "#ffcb26"
 #       map: [ "full" ]
 #     - state: smallshell_empty
@@ -149,9 +149,9 @@
 #       color: "#5786be"
 #     - state: shell_box_beanbag
 #       color: "#e0d5c2"
-#     - state: smallshell_ammo_full_12g_base
+#     - state: smallshell_ammo_12g_full_base
 #       color: "#ffffff"
-#     - state: smallshell_ammo_full_12g_color
+#     - state: smallshell_ammo_12g_full_color
 #       color: "#5786be"
 #       map: [ "full" ]
 #     - state: smallshell_empty
@@ -178,9 +178,9 @@
 #       color: "#6551a0"
 #     - state: shell_box_flechette
 #       color: "#e0d5c2"
-#     - state: smallshell_ammo_full_12g_base
+#     - state: smallshell_ammo_12g_full_base
 #       color: "#ffffff"
-#     - state: smallshell_ammo_full_12g_color
+#     - state: smallshell_ammo_12g_full_color
 #       color: "#6551a0"
 #       map: [ "full" ]
 #     - state: smallshell_empty
@@ -209,9 +209,9 @@
 #       color: "#e49331"
 #     - state: shell_box_incendiary
 #       color: "#b8533d"
-#     - state: smallshell_ammo_full_12g_base
+#     - state: smallshell_ammo_12g_full_base
 #       color: "#ffffff"
-#     - state: smallshell_ammo_full_12g_color
+#     - state: smallshell_ammo_12g_full_color
 #       color: "#e49331"
 #       map: [ "full" ]
 #     - state: smallshell_empty
@@ -238,9 +238,9 @@
 #       color: "#595959"
 #     - state: shell_box_breaching
 #       color: "#e0d5c2"
-#     - state: smallshell_ammo_full_12g_base
+#     - state: smallshell_ammo_12g_full_base
 #       color: "#ffffff"
-#     - state: smallshell_ammo_full_12g_color
+#     - state: smallshell_ammo_12g_full_color
 #       color: "#595959"
 #       map: [ "full" ]
 #     - state: smallshell_empty

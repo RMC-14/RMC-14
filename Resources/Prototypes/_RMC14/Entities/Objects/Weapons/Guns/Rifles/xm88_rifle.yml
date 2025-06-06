@@ -151,9 +151,9 @@
       color: "#62757b"
     - state: smallshell_box_458
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#719380"
       map: [ "full" ]
     - state: smallshell_empty

@@ -182,7 +182,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers: # Shell boxes dont use markings
-    - state: shell_box 
+    - state: shell_box
       color: "#944444"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
@@ -232,26 +232,26 @@
       color: "#ff0000"
     - state: smallshell_box_12g
       color: "#00ff00"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#0000ff"
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
   - type: GenericVisualizer
     visuals:
       enum.CMItemSlotsLayers.Fill:
         enum.CMItemSlotsLayers.Fill:
-          Empty: { state: smallshell_ammo_full_12g_base, visible: false }
-          Low: { state: smallshell_ammo_full_12g_base, visible: true }
-          Medium: { state: smallshell_ammo_full_12g_base, visible: true }
-          High: { state: smallshell_ammo_full_12g_base, visible: true }
-          Full: { state: smallshell_ammo_full_12g_base, visible: true }
+          Empty: { state: smallshell_ammo_12g_full_base, visible: false }
+          Low: { state: smallshell_ammo_12g_full_base, visible: true }
+          Medium: { state: smallshell_ammo_12g_full_base, visible: true }
+          High: { state: smallshell_ammo_12g_full_base, visible: true }
+          Full: { state: smallshell_ammo_12g_full_base, visible: true }
         enum.CMItemSlotsLayers2.Fill:  # Second fill state for coloured shells
-          Empty: { state: smallshell_ammo_full_12g_color, visible: false }
-          Low: { state: smallshell_ammo_full_12g_color, visible: true }
-          Medium: { state: smallshell_ammo_full_12g_color, visible: true }
-          High: { state: smallshell_ammo_full_12g_color, visible: true }
-          Full: { state: smallshell_ammo_full_12g_color, visible: true }      
+          Empty: { state: smallshell_ammo_12g_full_color, visible: false }
+          Low: { state: smallshell_ammo_12g_full_color, visible: true }
+          Medium: { state: smallshell_ammo_12g_full_color, visible: true }
+          High: { state: smallshell_ammo_12g_full_color, visible: true }
+          Full: { state: smallshell_ammo_12g_full_color, visible: true }
 
 # Supply Base
 - type: entity
@@ -1495,9 +1495,9 @@
       color: "#944444"
     - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#944444"
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
   - type: CMItemSlots
@@ -1536,9 +1536,9 @@
       color: "#578e75"
     - state: shell_box_slugs
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#578e75"
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
   - type: CMItemSlots
@@ -1579,9 +1579,9 @@
       color: "#b8533d"
     - state: smallshell_box_marking
       color: "#ffcb26"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#ffcb26"
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
   - type: CMItemSlots
@@ -1620,9 +1620,9 @@
       color: "#5786be"
     - state: shell_box_beanbag
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#5786be"
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
   - type: CMItemSlots
@@ -1661,9 +1661,9 @@
       color: "#6551a0"
     - state: shell_box_flechette
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#6551a0"
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
   - type: CMItemSlots
@@ -1704,9 +1704,9 @@
       color: "#b8533d"
     - state: smallshell_box_marking
       color: "#e49331"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#e49331"
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
   - type: CMItemSlots
@@ -1745,9 +1745,9 @@
       color: "#595959"
     - state: shell_box_breaching
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_12g_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_12g_full_color
       color: "#595959"
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
   - type: CMItemSlots
