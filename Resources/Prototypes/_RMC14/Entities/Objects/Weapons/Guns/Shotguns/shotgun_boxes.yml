@@ -129,34 +129,34 @@
 #       map: [ "empty" ]
 #       color: "#c6cdd3"
 
-- type: entity
-  parent: RMCBoxShotgunBase
-  id: RMCBoxShotgunBeanbag
-  name: box of beanbag shells
-  description: A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
-  components:
-  - type: Storage
-    whitelist:
-      tags:
-      - RMCShellShotgunBeanbag
-  - type: StorageFill
-    contents:
-    - id: CMShellShotgunBeanbag
-      amount: 5
-  - type: Sprite
-    layers:
-    - state: smallshell_box
-      color: "#5786be"
-    - state: shell_box_beanbag
-      color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
-      color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
-      color: "#5786be"
-      map: [ "full" ]
-    - state: smallshell_empty
-      map: [ "empty" ]
-      color: "#5786be"
+# - type: entity
+#   parent: RMCBoxShotgunBase
+#   id: RMCBoxShotgunBeanbag
+#   name: box of beanbag shells
+#   description: A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
+#   components:
+#   - type: Storage
+#     whitelist:
+#       tags:
+#       - RMCShellShotgunBeanbag
+#   - type: StorageFill
+#     contents:
+#     - id: CMShellShotgunBeanbag
+#       amount: 5
+#   - type: Sprite
+#     layers:
+#     - state: smallshell_box
+#       color: "#5786be"
+#     - state: shell_box_beanbag
+#       color: "#e0d5c2"
+#     - state: smallshell_ammo_full_12g_base
+#       color: "#ffffff"
+#     - state: smallshell_ammo_full_12g_color
+#       color: "#5786be"
+#       map: [ "full" ]
+#     - state: smallshell_empty
+#       map: [ "empty" ]
+#       color: "#5786be"
 
 - type: entity
   parent: RMCBoxShotgunBase

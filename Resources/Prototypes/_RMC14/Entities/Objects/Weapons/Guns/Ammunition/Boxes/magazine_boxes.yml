@@ -1604,6 +1604,47 @@
         tags:
         - RMCShellShotgunIncendiary
 
+# Beanbag
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunBeanbagEmpty
+  name: box of beanbag shells
+  description: A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBeanbagEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#5786be"
+    - state: shell_box_beanbag
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_12g_color
+      color: "#5786be"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBeanbag
+
+- type: entity
+  parent: RMCBoxShotgunBeanbagEmpty
+  id: RMCBoxShotgunBeanbag
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunBeanbag
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBeanbag
+
 # -- SUPPLY BOXES --
 
 # Nailgun
