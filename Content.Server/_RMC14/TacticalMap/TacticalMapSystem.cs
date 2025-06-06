@@ -54,10 +54,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoMapTrackedComponent> _xenoMapTrackedQuery;
     private EntityQuery<XenoStructureMapTrackedComponent> _xenoStructureMapTrackedQuery;
+    private EntityQuery<TacticalMapAlwaysVisibleComponent> _alwaysVisibleQuery;
 
     private readonly HashSet<Entity<TacticalMapTrackedComponent>> _toInit = new();
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
     private readonly List<TacticalMapLine> _emptyLines = new();
+
+    private readonly HashSet<EntityUid> _alwaysVisibleToMarines = new();
+    private readonly HashSet<EntityUid> _alwaysVisibleToXenos = new();
+    private readonly HashSet<EntityUid> _alwaysVisibleAsXenoStructures = new();
 
     private TimeSpan _announceCooldown;
     private TimeSpan _mapUpdateEvery;
@@ -77,6 +82,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoMapTrackedQuery = GetEntityQuery<XenoMapTrackedComponent>();
         _xenoStructureMapTrackedQuery = GetEntityQuery<XenoStructureMapTrackedComponent>();
+        _alwaysVisibleQuery = GetEntityQuery<TacticalMapAlwaysVisibleComponent>();
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
 
@@ -112,6 +118,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, MapInitEvent>(OnLiveUpdateOnOviMapInit);
         SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, MobStateChangedEvent>(OnLiveUpdateOnOviStateChanged);
 
+        SubscribeLocalEvent<TacticalMapAlwaysVisibleComponent, MapInitEvent>(OnAlwaysVisibleMapInit);
+        SubscribeLocalEvent<TacticalMapAlwaysVisibleComponent, ComponentRemove>(OnAlwaysVisibleRemove);
+
         Subs.BuiEvents<TacticalMapUserComponent>(TacticalMapUserUi.Key,
             subs =>
             {
@@ -135,6 +144,34 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             RMCCVars.RMCTacticalMapUpdateEverySeconds,
             v => _mapUpdateEvery = TimeSpan.FromSeconds(v),
             true);
+    }
+
+    private void OnAlwaysVisibleMapInit(Entity<TacticalMapAlwaysVisibleComponent> ent, ref MapInitEvent args)
+    {
+        UpdateAlwaysVisibleCache(ent);
+    }
+
+    private void OnAlwaysVisibleRemove(Entity<TacticalMapAlwaysVisibleComponent> ent, ref ComponentRemove args)
+    {
+        _alwaysVisibleToMarines.Remove(ent);
+        _alwaysVisibleToXenos.Remove(ent);
+        _alwaysVisibleAsXenoStructures.Remove(ent);
+    }
+
+    private void UpdateAlwaysVisibleCache(Entity<TacticalMapAlwaysVisibleComponent> ent)
+    {
+        _alwaysVisibleToMarines.Remove(ent);
+        _alwaysVisibleToXenos.Remove(ent);
+        _alwaysVisibleAsXenoStructures.Remove(ent);
+
+        if (ent.Comp.VisibleToMarines)
+            _alwaysVisibleToMarines.Add(ent);
+
+        if (ent.Comp.VisibleToXenos)
+            _alwaysVisibleToXenos.Add(ent);
+
+        if (ent.Comp.VisibleAsXenoStructure)
+            _alwaysVisibleAsXenoStructures.Add(ent);
     }
 
     private void OnOvipositorChanged(ref XenoOvipositorChangedEvent ev)
@@ -553,6 +590,24 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
             user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips;
+
+            foreach (var entityUid in _alwaysVisibleToXenos)
+            {
+                var entityId = entityUid.Id;
+
+                if (user.Comp.XenoBlips.ContainsKey(entityId) || user.Comp.XenoStructureBlips.ContainsKey(entityId))
+                    continue;
+
+                var blip = FindBlipInMap(entityId, map);
+                if (blip == null)
+                    continue;
+
+                if (_alwaysVisibleAsXenoStructures.Contains(entityUid))
+                    user.Comp.XenoStructureBlips[entityId] = blip.Value;
+                else
+                    user.Comp.XenoBlips[entityId] = blip.Value;
+            }
+
             lines.XenoLines = map.XenoLines;
             lines.MarineLines = _emptyLines;
         }
@@ -560,12 +615,36 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (user.Comp.Marines)
         {
             user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips;
+
+            foreach (var entityUid in _alwaysVisibleToMarines)
+            {
+                var entityId = entityUid.Id;
+
+                if (user.Comp.MarineBlips.ContainsKey(entityId))
+                    continue;
+
+                var blip = FindBlipInMap(entityId, map);
+                if (blip != null)
+                    user.Comp.MarineBlips[entityId] = blip.Value;
+            }
+
             lines.MarineLines = map.MarineLines;
             lines.XenoLines = _emptyLines;
         }
 
         Dirty(user);
         Dirty(user, lines);
+    }
+
+    private TacticalMapBlip? FindBlipInMap(int entityId, TacticalMapComponent map)
+    {
+        if (map.MarineBlips.TryGetValue(entityId, out var marineBlip))
+            return marineBlip;
+        if (map.XenoStructureBlips.TryGetValue(entityId, out var structureBlip))
+            return structureBlip;
+        if (map.XenoBlips.TryGetValue(entityId, out var xenoBlip))
+            return xenoBlip;
+        return null;
     }
 
     private void UpdateCanvas(List<TacticalMapLine> lines, bool marine, bool xeno, EntityUid user, SoundSpecifier? sound = null)
