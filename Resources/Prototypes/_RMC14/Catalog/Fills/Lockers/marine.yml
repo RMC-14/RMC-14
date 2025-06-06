@@ -1,0 +1,7 @@
+- type: entityTable
+  id: RMCClosetGoldenArrowFill
+  table: !type:AllSelector
+    children:
+    - id: CMBootsBlackFilled
+    - id: JumpsuitMarine
+    - id: RMCHeadsetGoldenArrow

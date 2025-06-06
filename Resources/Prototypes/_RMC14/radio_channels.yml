@@ -208,3 +208,13 @@
   frequency: 426
   color: "#8b36a6"
   longRange: true
+
+# PVE Channels
+
+- type: radioChannel
+  id: MarineSunRider
+  name: chat-radio-marine-sun-riders
+  keycode: "/"
+  frequency: 1491
+  color: "#828cff"
+  longRange: true

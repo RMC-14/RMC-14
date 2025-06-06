@@ -204,3 +204,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/acloset.rsi
+
+# PVE
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: RMCClosetGoldenArrowGear
+  name: personal locker
+  description: An immobile storag unit.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetGoldenArrowFill
