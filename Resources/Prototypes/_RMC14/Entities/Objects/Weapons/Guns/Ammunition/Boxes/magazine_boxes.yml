@@ -1645,6 +1645,47 @@
         tags:
         - RMCShellShotgunBeanbag
 
+# Flechette
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunFlechetteEmpty
+  name: box of flechette shells
+  description: A box filled with flechette shotgun shells. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsFlechetteEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#6551a0"
+    - state: shell_box_flechette
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_12g_color
+      color: "#6551a0"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunFlechette
+
+- type: entity
+  parent: RMCBoxShotgunFlechetteEmpty
+  id: RMCBoxShotgunFlechette
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunFlechette
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunFlechette
+
 # -- SUPPLY BOXES --
 
 # Nailgun
