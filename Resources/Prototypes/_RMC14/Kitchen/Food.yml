@@ -62,6 +62,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
     state: cookie-peanutbutter
+  - type: Food
+    transferAmount: 3
   - type: SolutionContainerManager
     solutions:
       food:
@@ -78,6 +80,8 @@
   id: RMCFoodPBJSandwich
   description: A sweet and savory sandwich loved by adults and marines alike!
   components:
+  - type: Food
+    transferAmount: 4
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/misc.rsi
     state: pbandj
@@ -97,3 +101,27 @@
     - bread
     - sweet
     - nutty
+
+- type: entity
+  name: onigiri
+  parent: CMFoodBase
+  id: RMCFoodOnigiri
+  description: These donuts are great! Jelly-filled are my favorite! Nothing beats a jelly-filled donut!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: onigiri
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: FlavorProfile
+    flavors:
+    - rice
+    - sweet
+    - salty

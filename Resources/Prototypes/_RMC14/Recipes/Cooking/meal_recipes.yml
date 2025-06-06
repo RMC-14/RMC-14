@@ -144,3 +144,16 @@
   reagents:
     RMCCherryJelly: 5
     RMCPeanutButter: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCOnigiri
+  name: onigiri recipe
+  result: RMCFoodPBJSandwich
+  time: 5
+  group: Savory
+  solids:
+    FoodRiceBoiled: 1
+  reagents:
+    TableSalt: 5
+    Vinegar: 5
+    Sugar: 5
