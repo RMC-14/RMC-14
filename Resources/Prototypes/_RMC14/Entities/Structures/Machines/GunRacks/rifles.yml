@@ -107,7 +107,7 @@
 # M54C Mk 1
 
 - type: entity
-  parent: RMCGunRackBase
+  parent: RMCGunRackM54CEmpty
   id: RMCGunRackM54CMk1Empty
   name: M54C Mk1 gun rack
   suffix: M54C Mk1, Empty
