@@ -7,6 +7,28 @@
   suffix: M54C, Empty
   description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC comissioned racks with fixed slots which only fit M54C rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
   components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_2: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_3: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_4: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_5: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m54c_rack.rsi
   - type: ItemSlots
@@ -85,7 +107,7 @@
 # M54C Mk 1
 
 - type: entity
-  parent: RMCGunRackBase
+  parent: RMCGunRackM54CEmpty
   id: RMCGunRackM54CMk1Empty
   name: M54C Mk1 gun rack
   suffix: M54C Mk1, Empty
