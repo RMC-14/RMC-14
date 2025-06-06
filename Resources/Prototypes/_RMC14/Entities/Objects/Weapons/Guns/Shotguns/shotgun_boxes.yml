@@ -254,31 +254,31 @@
 #   id: RMCBoxShotgunBreaching
 
 
-- type: entity
-  parent: RMCBoxShotgunBase
-  id: RMCBoxShotgunBuckshot8g
-  name: box of buckshot shells
-  description: A box filled with buckshot spread shotgun shells. 8 Gauge.
-  components:
-  - type: Storage
-    whitelist:
-      tags:
-      - RMCShellShotgunBuckshot
-  - type: StorageFill
-    contents:
-    - id: CMShellShotgunBuckshot
-      amount: 5
-  - type: Sprite
-    layers:
-    - state: smallshell_box
-      color: "#944444"
-    - state: shell_box_buckshot
-      color: "#e0d5c2"
-    - state: smallshell_ammo_full_8g_base
-      color: "#ffffff"
-    - state: smallshell_ammo_full_8g_color
-      color: "#944444"
-      map: [ "full" ]
-    - state: smallshell_empty
-      map: [ "empty" ]
-      color: "#944444"
+# - type: entity
+#   parent: RMCBoxShotgunBase
+#   id: RMCBoxShotgunBuckshot8g
+#   name: box of buckshot shells
+#   description: A box filled with buckshot spread shotgun shells. 8 Gauge.
+#   components:
+#   - type: Storage
+#     whitelist:
+#       tags:
+#       - RMCShellShotgunBuckshot
+#   - type: StorageFill
+#     contents:
+#     - id: CMShellShotgunBuckshot
+#       amount: 5
+#   - type: Sprite
+#     layers:
+#     - state: smallshell_box
+#       color: "#944444"
+#     - state: shell_box_buckshot
+#       color: "#e0d5c2"
+#     - state: smallshell_ammo_full_8g_base
+#       color: "#ffffff"
+#     - state: smallshell_ammo_full_8g_color
+#       color: "#944444"
+#       map: [ "full" ]
+#     - state: smallshell_empty
+#       map: [ "empty" ]
+#       color: "#944444"

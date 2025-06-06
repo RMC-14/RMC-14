@@ -1779,6 +1779,35 @@
 - type: Tag
   id: RMCBoxShotgunBreaching
 
+# Buckshot 8g
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunBuckshot8gEmpty
+  name: box of buckshot shells
+  suffix: 8g
+  description: A box filled with buckshot spread shotgun shells. 8 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsSlugsEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#944444"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_8g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_8g_color
+      color: "#944444"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBuckshot
+
 # -- SUPPLY BOXES --
 
 # Nailgun
