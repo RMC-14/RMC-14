@@ -1561,6 +1561,49 @@
         tags:
         - RMCShellShotgunSlugs
 
+# Incendiary
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunIncendiaryEmpty
+  name: box of incendiary slug shells
+  description: A box filled with self-detonating incendiary shotgun rounds. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsIncendiaryEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#c6cdd3"
+    - state: shell_box_incendiary
+      color: "#b8533d"
+    - state: smallshell_box_marking
+      color: "#ffcb26"
+    - state: smallshell_ammo_full_12g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_12g_color
+      color: "#ffcb26"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiary
+
+- type: entity
+  parent: RMCBoxShotgunIncendiaryEmpty
+  id: RMCBoxShotgunIncendiary
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunIncendiary
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiary
+
 # -- SUPPLY BOXES --
 
 # Nailgun
