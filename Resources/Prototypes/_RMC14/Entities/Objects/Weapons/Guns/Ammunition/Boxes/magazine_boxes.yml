@@ -1686,6 +1686,49 @@
         tags:
         - RMCShellShotgunFlechette
 
+# IncendiaryBuckshot
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunIncendiaryBuckshotEmpty
+  name: box of incendiary buckshot shells
+  description: A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsIncendiaryBuckshotEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#c6cdd3"
+    - state: shell_box_incendiary
+      color: "#b8533d"
+    - state: smallshell_box_marking
+      color: "#e49331"
+    - state: smallshell_ammo_full_12g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_12g_color
+      color: "#e49331"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiaryBuckshot
+
+- type: entity
+  parent: RMCBoxShotgunIncendiaryBuckshotEmpty
+  id: RMCBoxShotgunIncendiaryBuckshot
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunIncendiaryBuckshot
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiaryBuckshot
+
 # -- SUPPLY BOXES --
 
 # Nailgun

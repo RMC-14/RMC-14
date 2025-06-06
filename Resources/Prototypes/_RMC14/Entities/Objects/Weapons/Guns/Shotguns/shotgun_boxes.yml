@@ -187,36 +187,36 @@
 #       map: [ "empty" ]
 #       color: "#6551a0"
 
-- type: entity
-  parent: RMCBoxShotgunBase
-  id: RMCBoxShotgunIncendiaryBuckshot
-  name: box of incendiary buckshot shells
-  description: A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
-  components:
-  - type: Storage
-    whitelist:
-      tags:
-      - RMCShellShotgunIncendiaryBuckshot
-  - type: StorageFill
-    contents:
-    - id: CMShellShotgunIncendiaryBuckshot
-      amount: 5
-  - type: Sprite
-    layers:
-    - state: smallshell_box
-      color: "#c6cdd3"
-    - state: smallshell_box_marking
-      color: "#e49331"
-    - state: shell_box_incendiary
-      color: "#b8533d"
-    - state: smallshell_ammo_full_12g_base
-      color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
-      color: "#e49331"
-      map: [ "full" ]
-    - state: smallshell_empty
-      map: [ "empty" ]
-      color: "#c6cdd3"
+# - type: entity
+#   parent: RMCBoxShotgunBase
+#   id: RMCBoxShotgunIncendiaryBuckshot
+#   name: box of incendiary buckshot shells
+#   description: A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
+#   components:
+#   - type: Storage
+#     whitelist:
+#       tags:
+#       - RMCShellShotgunIncendiaryBuckshot
+#   - type: StorageFill
+#     contents:
+#     - id: CMShellShotgunIncendiaryBuckshot
+#       amount: 5
+#   - type: Sprite
+#     layers:
+#     - state: smallshell_box
+#       color: "#c6cdd3"
+#     - state: smallshell_box_marking
+#       color: "#e49331"
+#     - state: shell_box_incendiary
+#       color: "#b8533d"
+#     - state: smallshell_ammo_full_12g_base
+#       color: "#ffffff"
+#     - state: smallshell_ammo_full_12g_color
+#       color: "#e49331"
+#       map: [ "full" ]
+#     - state: smallshell_empty
+#       map: [ "empty" ]
+#       color: "#c6cdd3"
 
 - type: entity
   parent: RMCBoxShotgunBase
