@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the small document pouch being half the intended size.
-    type: Fix
-  id: 1314
-  time: '2025-02-09T21:59:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5563
-- author: Vermidia
-  changes:
-  - message: Fixed burrower unburrow stunning allies
-    type: Fix
-  id: 1315
-  time: '2025-02-10T00:23:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5565
-- author: DrSmugleaf
-  changes:
   - message: Fixed ghost role menu sometimes not showing any ghost roles, including
       larva ghost roleas.
     type: Fix
@@ -5193,5 +5179,30 @@
   id: 1816
   time: '2025-06-07T03:10:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6569
+- author: Arykh
+  changes:
+  - message: Fixed damage done from overdoses being too low.
+    type: Fix
+  - message: Fixed Tricordrazine's healing 0.5 asphyxiation instead of 0.25.
+    type: Fix
+  id: 1817
+  time: '2025-06-07T03:20:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6589
+- author: Arykh
+  changes:
+  - message: Narcotics have been added! Mindbreaker Toxin, Space Drugs, and Psilocybin.
+    type: Add
+  - message: Antidepressants have been added! Methylphenidate, Citalopram, and Paroxetine.
+    type: Add
+  - message: Dylovene can now remove Space Drugs and Mindbreaker Toxin.
+    type: Tweak
+  - message: Dylovene was missing it's damaging effects at the critical OD of 50u.
+    type: Tweak
+  - message: Dylovene can now treat patients that are high and seeing psychedelic
+      colors.
+    type: Tweak
+  id: 1818
+  time: '2025-06-07T03:21:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6567
 Name: RMC14
 Order: -1
