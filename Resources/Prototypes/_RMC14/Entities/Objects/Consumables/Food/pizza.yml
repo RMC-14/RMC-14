@@ -211,6 +211,52 @@
         - ReagentId: Vitamin
           Quantity: 1
 
+- type: entity
+  parent: RMCFoodPizzaFullBase
+  id: RMCFoodPizzaHawaiianFull
+  name: hawaiian pizza
+  description: Makes people burst into tears. Tears of joy or sadness depends on the person's fondness for pineapple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/hawaiian.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/hawaiian.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - pineapple
+    - cheesy
+    - oily
+    - bread
+  - type: SliceableFood
+    slice: RMCFoodPizzaHawaiianSlice
+
+- type: entity
+  parent: RMCFoodPizzaSliceBase
+  id: RMCFoodPizzaHawaiianSlice
+  name: hawaiian slice
+  description: A slice of joy/sin.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/hawaiian.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - pineapple
+    - cheesy
+    - oily
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: JuicePineapple
+          Quantity: 1
+        - ReagentId: Vitamin
+          Quantity: 1
 
 # Pizza Box Base
 - type: entity

@@ -21,7 +21,7 @@
     AlliesCocktail: 3
 
 - type: reaction
-  id: Amasec
+  id: Amasec #Changed for RMC
   requiredMixerCategories:
   - Shake
   reactants:
@@ -29,7 +29,7 @@
       amount: 2
     Vodka:
       amount: 2
-    Iron:
+    RMCIron:
       amount: 1
   products:
     Amasec: 5
@@ -177,11 +177,11 @@
     BananaHonk: 3
 
 - type: reaction
-  id: BeepskySmash
+  id: BeepskySmash #Changed for RMC
   requiredMixerCategories:
   - Shake
   reactants:
-    Iron:
+    RMCIron:
       amount: 1
     JuiceLime:
       amount: 1
@@ -1219,7 +1219,7 @@
       amount: 1
   products:
     Cola: 4
-    
+
 - type: reaction
   id: Caipirinha
   requiredMixerCategories:
