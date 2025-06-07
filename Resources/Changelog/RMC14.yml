@@ -1,40 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to buy T1 techs after unlocking T2.
-    type: Fix
-  - message: Fixed ARES always listing all points as being new in the command and
-      intel radio announcement.
-    type: Fix
-  - message: Fixed intel officers not getting squad trackers.
-    type: Fix
-  - message: Fixed the ghost role amount shown on the button at the bottom sometimes
-      being incorrect.
-    type: Fix
-  - message: Fixed repurchasable intel tech tree options only ever increasing in price
-      the first time they are bought.
-    type: Fix
-  - message: Fixed 2 missing breaching charges in Chance's Claim.
-    type: Fix
-  - message: Fixed the XM4 armor not showing motion detector blips.
-    type: Fix
-  - message: Fixed returned fultons that crash back to the planet still being listed
-      on the dropship fulton target UI.
-    type: Fix
-  - message: Fixed picked up fultons still being listed on the dropship fulton target
-      UI.
-    type: Fix
-  - message: Fixed thunderdome humanoids and xenos showing up bioscans and being counted
-      for round end conditions.
-    type: Fix
-  - message: Fixed thunderdome humanoids being able to talk with or hear humanoids
-      outside the thunderdome.
-    type: Fix
-  - message: Fixed the thunderdome having no lights.
-    type: Fix
-  id: 1323
-  time: '2025-02-10T23:42:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5572
 - author: Ian321
   changes:
   - message: You can now actually read your collected clues inside the tech tree window.
@@ -5214,5 +5178,20 @@
   id: 1825
   time: '2025-06-07T03:39:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6615
+- author: Dygon
+  changes:
+  - message: Resin traps now have weeds as part of their sprite, making them more
+      visible and easier to target.
+    type: Tweak
+  - message: Xeno acid effects now have their hitbox reduced to match the size of
+      fire tiles, meaning you'll only get hit if a larger portion of your sprite clips
+      into the acid.
+    type: Tweak
+  - message: Acid traps no longer apply or reapply their paralyze effect when you
+      are already downed.
+    type: Fix
+  id: 1826
+  time: '2025-06-07T10:02:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6640
 Name: RMC14
 Order: -1
