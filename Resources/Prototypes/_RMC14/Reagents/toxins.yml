@@ -35,8 +35,6 @@
     damage:
       groups:
         Brute: 0.25
-  - !type:HealthChange
-    damage:
       types:
         Asphyxiation: 4
   - !type:Emote
@@ -50,7 +48,8 @@
       groups:
         Brute: 2.5
         Toxin: 2
-        Airloss: 10
+      types:
+        Asphyxiation: 10
   - !type:HealthChange
     conditions:
     - !type:ReagentThreshold
