@@ -1,42 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed CT, SL, SGO, Specs and FTLs not being able to buy fultons.
-    type: Fix
-  id: 1318
-  time: '2025-02-10T00:42:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5570
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed dropship weed-killer effects, for real this time.
-    type: Fix
-  id: 1319
-  time: '2025-02-10T22:26:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5578
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed snow camo marine uniforms appearing invisible when sleeves are
-      toggled.
-    type: Fix
-  id: 1320
-  time: '2025-02-10T22:37:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5574
-- author: Ian321
-  changes:
-  - message: A guidebook page explaining intel has been added.
-    type: Add
-  id: 1321
-  time: '2025-02-10T23:16:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5575
-- author: Vermidia
-  changes:
-  - message: Fixed slows lingering forever in some cases.
-    type: Fix
-  id: 1322
-  time: '2025-02-10T23:15:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5571
-- author: DrSmugleaf
-  changes:
   - message: Fixed not being able to buy T1 techs after unlocking T2.
     type: Fix
   - message: Fixed ARES always listing all points as being new in the command and
@@ -5204,5 +5168,51 @@
   id: 1820
   time: '2025-06-07T03:25:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6626
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Weed nodes will now have 5 health when they're first made and will get
+      11 health when they stop spreading.
+    type: Tweak
+  id: 1821
+  time: '2025-06-07T03:34:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6604
+- author: Arykh
+  changes:
+  - message: Added Russian Red and Radiation First-Aid Kit.
+    type: Add
+  - message: Arithrazine's OD and passive damage was lower than intended.
+    type: Tweak
+  id: 1822
+  time: '2025-06-07T03:35:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6581
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed booze-o-mats and WEYA med vendors on the colony starting with full
+      contents and reagents.
+    type: Fix
+  - message: Added new booze to the Booze-O-Mat.
+    type: Tweak
+  - message: Fixed the Chess-O-Mat not having any contents.
+    type: Fix
+  id: 1823
+  time: '2025-06-07T03:37:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6624
+- author: Timemaster99
+  changes:
+  - message: Pill canisters can now toggle storage ejection, and can be used while
+      nested inside storage.
+    type: Tweak
+  id: 1824
+  time: '2025-06-07T03:38:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6588
+- author: Arykh
+  changes:
+  - message: The Golden Mateba now has rail and barrel attachments.
+    type: Add
+  - message: The Mateba and it's variants now have burst fire.
+    type: Add
+  id: 1825
+  time: '2025-06-07T03:39:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6615
 Name: RMC14
 Order: -1

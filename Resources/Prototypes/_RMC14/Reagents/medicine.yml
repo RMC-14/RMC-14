@@ -10,7 +10,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         damage:
         - Toxin: -1
         - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
@@ -103,54 +103,37 @@
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Brute: 0.5
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-      - !type:PopupMessage
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        type: Local
-        visualType: Medium
-        messages: [ "generic-reagent-effect-nauseous" ]
-        probability: 0.2
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        key: Drunk
-        component: Drunk
-        time: 30
-        type: Add
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.12
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
         damage:
           groups:
             Brute: 0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
+          min: 15 #TODO 0.25 eye damage/s at 15 OD
+        damage:
+          groups:
+            Brute: 1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Brute: 0.62
+            Brute: 1.25
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 5
+        refresh: true
+        type: Add
 
 # TODO RMC14 other effects
 - type: reagent
@@ -495,7 +478,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         damage:
         - Brute: -0.25
         - Burn: -0.25
@@ -614,6 +597,50 @@
         - Toxin: -3.75
         - Brute: -2.25
         - Burn: -3
+
+# TODO RMC14 other effects
+- type: reagent
+  parent: [ CMReagentMedicine, CMArithrazine ]
+  id: RMCRussianRed
+  name: reagent-name-rmcrussianred
+  desc: reagent-desc-rmcrussianred
+  color: "#ce2727"
+  overdose: 20
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+        damage:
+        - Toxin: -0.5
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 20 #TODO 0.25 eye damage/s at 20 OD
+        damage:
+          groups:
+            Brute: 1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 2.5
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 5
+        refresh: true
+        type: Add
 
 # Antidepressants
 - type: reagent
