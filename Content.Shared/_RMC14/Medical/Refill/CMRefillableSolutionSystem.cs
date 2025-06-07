@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -10,6 +11,7 @@ using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
@@ -29,6 +31,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
@@ -38,6 +42,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<CMRefillableSolutionComponent, ExaminedEvent>(OnRefillableSolutionExamined);
 
+        SubscribeLocalEvent<CMSolutionRefillerComponent, MapInitEvent>(OnRefillerMapInit);
         SubscribeLocalEvent<CMSolutionRefillerComponent, InteractUsingEvent>(OnRefillerInteractUsing);
 
         SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
@@ -54,6 +59,19 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         using (args.PushGroup(nameof(CMRefillableSolutionComponent)))
         {
             args.PushMarkup("[color=cyan]This can be refilled by clicking on a medical vendor with it![/color]");
+        }
+    }
+
+    private void OnRefillerMapInit(Entity<CMSolutionRefillerComponent> ent, ref MapInitEvent args)
+    {
+        var transform = Transform(ent.Owner);
+
+        if (ent.Comp.RandomizeReagentsPlanetside && _rmcPlanet.IsOnPlanet(transform))
+        {
+            // Random interval of 25 for reagents
+            var amount = _random.NextDouble(0, ent.Comp.Max.Double() * 0.04) * 25;
+            ent.Comp.Current = FixedPoint2.New(amount);
+            Dirty(ent);
         }
     }
 

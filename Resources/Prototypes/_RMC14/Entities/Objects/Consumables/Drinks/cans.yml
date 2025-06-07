@@ -269,7 +269,7 @@
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanBeerLite
-  name: we-ya lite
+  name: We-Ya Lite
   description: Beer. You've dialed in your target. Time to fire for effect.
   components:
   - type: Sprite
@@ -287,7 +287,7 @@
 - type: entity
   parent: CMDrinkCanBase
   id: CMDrinkCanAle
-  name: we-ya IPA
+  name: We-Ya IPA
   description: Beer's misunderstood cousin.
   components:
   - type: Sprite
