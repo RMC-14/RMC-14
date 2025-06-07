@@ -62,7 +62,7 @@
 
 - type: entity
   parent: RMCAreaShuttleNS
-  id: RMCAreaShuttleERT #Not Sulaco
+  id: RMCAreaShuttleERT
   name: ERT Shuttle
   components:
   - type: Sprite
