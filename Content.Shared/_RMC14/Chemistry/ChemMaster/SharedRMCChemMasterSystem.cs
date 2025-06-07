@@ -345,7 +345,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         }
 
         var solution = buffer.Value.Comp.Solution.Volume;
-        var perPill = solution / (_toFill.Count * ent.Comp.PillAmount);
+        var divider = (_toFill.Count * ent.Comp.PillAmount);
+        if (divider == 0)
+            return;
+
+        var perPill = solution / divider;
         if (solution <= FixedPoint2.Zero || perPill <= FixedPoint2.Zero)
         {
             var msg = Loc.GetString("rmc-chem-master-not-enough-space-solution");
