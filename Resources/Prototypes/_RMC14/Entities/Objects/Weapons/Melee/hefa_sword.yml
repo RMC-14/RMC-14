@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [Claymore, RMCBaseMeleeWeapon]
+  parent: [ RMCBaseMeleeWeapon, CMM2132Machete ]
   id: RMCSwordHEFA
   name: HEFA sword
   description: A blade known to be used by the Order of the HEFA. # this highly dangerous blade blows up in a shower of shrapnel on impact. # TODO RMC14 HEFA sword explosion
@@ -9,3 +9,9 @@
     damage:
       types:
         Slash: 35
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/claymore.rsi
+    state: icon
+  - type: Item
+    size: Large
+    sprite: Objects/Weapons/Melee/claymore.rsi
