@@ -342,7 +342,7 @@ public sealed class XenoLeapSystem : EntitySystem
         }
 
         // Don't remove the component if it's inherent or if another component provides protection.
-        if (stunDuration != new TimeSpan())
+        if (stunDuration != TimeSpan.Zero)
         {
             leapProtection.StunDuration = stunDuration;
             Dirty(user, leapProtection);
