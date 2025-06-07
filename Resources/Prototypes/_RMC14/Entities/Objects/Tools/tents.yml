@@ -117,6 +117,9 @@
   parent: RMCTentRoofBase
   id: RMCTentRoofStandard
   suffix: For Mapping Only (Roof)
+  components:
+  - type: Physics
+    canCollide: false
 
 # Standard Extended
 - type: entity
@@ -195,4 +198,6 @@
       map: [ "enum.ItemCamouflageLayers.Layer3" ]
     - state: extension_roof
       map: [ "enum.ItemCamouflageLayers.Layer4" ]
+  - type: Physics
+    canCollide: false
 
