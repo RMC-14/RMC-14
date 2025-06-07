@@ -167,12 +167,15 @@
   name: M2100 "Ngájhe" machete
   description: An older issue UNMC machete, never left testing. Designed in the Central African Republic. The notching made it hard to clean, and as such the UNMC refused to adopt it - despite the superior bludgeoning power offered.
   components:
+  - type: Tag
+    tags:
+    - RMCM2100Machete
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Melee/machete.rsi #TODO arnold machete sprite
+    sprite: _RMC14/Objects/Weapons/Melee/M2100.rsi
     state: icon
   - type: Item
     size: Large
-    sprite: _RMC14/Objects/Weapons/Melee/machete.rsi #TODO arnold machete sprite
+    sprite: _RMC14/Objects/Weapons/Melee/M2100.rsi
   - type: MeleeWeapon
     damage:
       types:
@@ -187,3 +190,6 @@
 
 - type: Tag
   id: RMCM5Bayonet
+
+- type: Tag
+  id: RMCM2100Machete

@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ RMCBaseMeleeWeapon, CMM2132Machete ]
+  parent: CMM2132Machete
   id: RMCKatana
   name: katana
   description: A finely made Japanese sword, with a well sharpened blade. The blade has been filed to a molecular edge, and is extremely deadly. Commonly found in the hands of mercenaries and yakuza.
@@ -7,13 +7,13 @@
   components:
   - type: Tag
     tags:
-    - Katana
+    - RMCKatana
   - type: Sprite
-    sprite: Objects/Weapons/Melee/katana.rsi #TODO cm13 katana sprite (Or our own sprites)
+    sprite: _RMC14/Objects/Weapons/Melee/katana.rsi
     state: icon
   - type: Item
     size: Large
-    sprite: Objects/Weapons/Melee/katana.rsi #TODO cm13 katana sprite (Or our own sprites)
+    sprite: _RMC14/Objects/Weapons/Melee/katana.rsi
   - type: MeleeWeapon
     damage:
       types:
@@ -44,3 +44,6 @@
     damage:
       types:
         Slash: 1777
+
+- type: Tag
+  id: RMCKatana
