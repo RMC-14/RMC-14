@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Toolshed.Commands.Math;
 
 namespace Content.Shared.DoAfter;
 
@@ -8,4 +9,6 @@ namespace Content.Shared.DoAfter;
 [RegisterComponent]
 public sealed partial class ActiveDoAfterComponent : Component
 {
+    [DataField("RootMob")]
+    public bool RootMob = false;
 }

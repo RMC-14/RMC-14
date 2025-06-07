@@ -60,6 +60,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, xeno, windupTime, ev, xeno)
         {
             BreakOnMove = true,
+            RootMob = true,
             Hidden = true,
         };
 

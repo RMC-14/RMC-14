@@ -255,7 +255,7 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
 
         var ev = new XenoAcidBallDoAfterEvent(GetNetCoordinates(args.Target));
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true };
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true, RootMob = true};
         _doAfter.TryStartDoAfter(doAfter);
     }
 

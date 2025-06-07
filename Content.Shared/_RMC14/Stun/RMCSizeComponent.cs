@@ -8,6 +8,9 @@ public sealed partial class RMCSizeComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public RMCSizes Size = RMCSizes.Xeno;
+
+    [DataField, AutoNetworkedField]
+    public RMCSizes PreviousSize;
 }
 
 
