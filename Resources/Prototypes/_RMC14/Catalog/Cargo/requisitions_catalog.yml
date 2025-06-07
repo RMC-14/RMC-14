@@ -283,8 +283,6 @@
 #      entries: []
     - name: Weapons
       entries:
-      - cost: 10000
-        crate: RMCCrateSmartGunSet
       - cost: 4000
         crate: RMCCrateM54CE2
       - cost: 3000

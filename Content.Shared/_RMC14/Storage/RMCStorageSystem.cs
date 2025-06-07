@@ -344,6 +344,27 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
+    private bool CanEjectStoreSkill(Entity<StorageComponent?, StorageSkillRequiredComponent?> store, EntityUid? user, out LocId popup)
+    {
+        popup = default;
+        if (user == null)
+            return true;
+
+        if (!Resolve(store, ref store.Comp2, false) ||
+            !_storageQuery.Resolve(store, ref store.Comp1, false))
+        {
+            return true;
+        }
+
+        if (!_skills.HasAllSkills(user.Value, store.Comp2.Skills))
+        {
+            popup = Loc.GetString("cm-storage-unskilled");
+            return false;
+        }
+
+        return true;
+    }
+
     public bool TryGetLastItem(Entity<StorageComponent?> storage, out EntityUid item)
     {
         item = default;
@@ -406,6 +427,15 @@ public sealed class RMCStorageSystem : EntitySystem
             return false;
 
         if (!CanInsertStoreSkill((storage, storage, null), toInsert, user, out popup))
+            return false;
+
+        return true;
+    }
+
+    public bool CanEject(EntityUid storage, EntityUid user, out LocId popup)
+    {
+
+        if (!CanEjectStoreSkill(storage, user, out popup))
             return false;
 
         return true;

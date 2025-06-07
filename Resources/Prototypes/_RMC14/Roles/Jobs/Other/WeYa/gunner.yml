@@ -46,6 +46,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCGunner
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCGunner
+  name: weya pmc gunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCGunner
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: EventHumanoid
   id: RMCPMCGunner
