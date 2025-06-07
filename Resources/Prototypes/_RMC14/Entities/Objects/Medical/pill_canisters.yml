@@ -76,6 +76,8 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: RMCStorageEjectHand
+    state: Last
 
 
 - type: entity
