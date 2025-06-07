@@ -123,6 +123,9 @@ public sealed class ResinWhispererSystem : EntitySystem
 
     private void OnInRangeOverride(Entity<ResinWhispererComponent> ent, ref InRangeOverrideEvent args)
     {
+        if (!HasComp<ResinDoorComponent>(args.Target))
+            return;
+
         if (!CanRemoteOpenDoorPopup(ent.Owner, args.Target, false))
             return;
 
