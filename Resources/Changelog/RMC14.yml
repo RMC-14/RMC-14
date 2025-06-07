@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dicerson
-  changes:
-  - message: Spam cans are now available to be built in the construction menu, for
-      1 Cardboard per can.
-    type: Add
-  - message: Alt-Clicking on a spam can with a valid magazine in hand now load all
-      bullets from the magazine into the can after a 5 second doafter (Try HAR Magazines!)
-    type: Add
-  id: 1307
-  time: '2025-02-09T01:52:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5444
 - author: Farrellka
   changes:
   - message: Removed the old long ears for human!
@@ -5321,5 +5310,13 @@
   id: 1809
   time: '2025-06-07T02:47:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6597
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the burrowed larva cooldown. You now need to be dead for atleast
+      2.5 minutes to take a burrowed larva.
+    type: Add
+  id: 1810
+  time: '2025-06-07T02:48:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6557
 Name: RMC14
 Order: -1
