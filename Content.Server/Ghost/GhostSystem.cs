@@ -366,7 +366,7 @@ namespace Content.Server.Ghost
 
             while (allQuery.MoveNext(out var uid, out var warp))
             {
-                yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), true);
+                yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), null, true);
             }
         }
 
@@ -380,11 +380,11 @@ namespace Content.Server.Ghost
                 if (attached == except) continue;
 
                 TryComp<MindContainerComponent>(attached, out var mind);
-
                 var jobName = _jobs.MindTryGetJobName(mind?.Mind);
-                var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
+                var playerName = Comp<MetaDataComponent>(attached).EntityName;
 
-                yield return new GhostWarp(GetNetEntity(attached), playerInfo, false);
+                if (_mobState.IsAlive(attached) || _mobState.IsCritical(attached))
+                    yield return new GhostWarp(GetNetEntity(attached), playerName, jobName, false);
             }
         }
 
