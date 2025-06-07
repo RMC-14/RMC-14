@@ -19,6 +19,9 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     [DataField, AutoNetworkedField]
     public int MinPlayers;
 
+    [DataField, AutoNetworkedField]
+    public int MaxPlayers;
+
     [DataField(required: true), AutoNetworkedField]
     public string Announcement = string.Empty;
 
