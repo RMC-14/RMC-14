@@ -160,7 +160,7 @@
     - CMSynthGraft
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
-#   - Syringe case # TODO RMC14 syringe cases
+    - RMCSyringeCase
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

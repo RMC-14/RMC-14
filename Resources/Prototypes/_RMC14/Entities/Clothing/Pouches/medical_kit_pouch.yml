@@ -24,7 +24,7 @@
         - CMBloodPack
         # - TODO RMC14 splint
         - CMAutoInjector
-        # - TODO RMC14 syringe case
+        - RMCSyringeCase
         - CMSurgicalCase
         - CMFireExtinguisherPortable
         - CMRollerItem
@@ -57,7 +57,7 @@
       - CMBloodPack
       #      - TODO RMC14 splint
       - CMAutoInjector
-      #      - TODO RMC14 syringe case
+      - RMCSyringeCase
       - CMSurgicalCase
       - CMFireExtinguisherPortable
       - CMRollerItem
