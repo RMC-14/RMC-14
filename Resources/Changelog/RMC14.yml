@@ -1,25 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed ghost role menu sometimes not showing any ghost roles, including
-      larva ghost roleas.
-    type: Fix
-  - message: Fixed not being able to transfer IOs to other squads.
-    type: Fix
-  id: 1316
-  time: '2025-02-10T00:23:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5568
-- author: Vermidia
-  changes:
-  - message: Fixed xenos being able to destroy mortars. They now make them drop the
-      kit on the floor. Mortar health reverted back, and xenos now knock them over
-      in 1 hit.
-    type: Fix
-  id: 1317
-  time: '2025-02-10T00:24:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5564
-- author: DrSmugleaf
-  changes:
   - message: Fixed CT, SL, SGO, Specs and FTLs not being able to buy fultons.
     type: Fix
   id: 1318
@@ -5204,5 +5185,24 @@
   id: 1818
   time: '2025-06-07T03:21:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6567
+- author: Arykh
+  changes:
+  - message: Added the "Holy texts of the High Explosive Fragmenting Anti-personnel
+      hand grenade" bible.
+    type: Add
+  - message: You can now create water by mixing hydrogen and oxygen. (Very inefficient)
+    type: Add
+  id: 1819
+  time: '2025-06-07T03:25:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6487
+- author: Arykh
+  changes:
+  - message: Added Lexorin!
+    type: Add
+  - message: Dexalin and Dexalin Plus can now remove Lexorin!
+    type: Tweak
+  id: 1820
+  time: '2025-06-07T03:25:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6626
 Name: RMC14
 Order: -1
