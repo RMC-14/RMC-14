@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed CT, SL, SGO, Specs and FTLs not being able to buy fultons.
-    type: Fix
-  id: 1318
-  time: '2025-02-10T00:42:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5570
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed dropship weed-killer effects, for real this time.
-    type: Fix
-  id: 1319
-  time: '2025-02-10T22:26:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5578
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed snow camo marine uniforms appearing invisible when sleeves are
@@ -5204,5 +5190,22 @@
   id: 1820
   time: '2025-06-07T03:25:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6626
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Weed nodes will now have 5 health when they're first made and will get
+      11 health when they stop spreading.
+    type: Tweak
+  id: 1821
+  time: '2025-06-07T03:34:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6604
+- author: Arykh
+  changes:
+  - message: Added Russian Red and Radiation First-Aid Kit.
+    type: Add
+  - message: Arithrazine's OD and passive damage was lower than intended.
+    type: Tweak
+  id: 1822
+  time: '2025-06-07T03:35:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6581
 Name: RMC14
 Order: -1
