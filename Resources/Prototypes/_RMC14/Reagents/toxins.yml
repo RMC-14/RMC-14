@@ -35,7 +35,10 @@
     damage:
       groups:
         Brute: 0.25
-        Airloss: 4
+  - !type:HealthChange
+    damage:
+      types:
+        Asphyxiation: 4
   - !type:Emote
     emote: Gasp
     probability: 0.1
