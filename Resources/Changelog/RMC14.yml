@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: IO can now pick up armor and a backpack from their equipment vendor.
-    type: Fix
-  id: 1312
-  time: '2025-02-09T19:47:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5559
 - author: DrSmugleaf
   changes:
   - message: Fixed ghost roles crashing the server this code is a blight I hate it
@@ -5196,5 +5189,14 @@
   id: 1814
   time: '2025-06-07T03:06:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6632
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Renamed FORECON squad to 'Recon', from Reconnaissance.
+    type: Tweak
+  - message: Changed FORECON job prefixes to be shorter.
+    type: Tweak
+  id: 1815
+  time: '2025-06-07T03:08:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6536
 Name: RMC14
 Order: -1
