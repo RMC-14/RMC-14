@@ -1,0 +1,31 @@
+- type: entity
+  id: SpecialBox
+  name: Special Box
+  description: A secure storage box for orbital bombardment warheads.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Secure-Box.rsi
+      layers:
+        - state: special_box
+          map: ["enum.SpecialBoxVisualLayers.Base"]
+    - type: SpecialBox
+    - type: InteractionOutline
+    - type: Clickable
+    - type: Physics
+      bodyType: Static
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.49,-0.49,0.49,0.49"   # 1x1 tile, centered
+          density: 100
+          mask:
+            - FullTileMask
+          layer:
+            - WallLayer
+    - type: AccessReader
+      access: [["CMAccessCO"]]
+    - type: Lock
+    - type: Appearance
+    - type: AnimationPlayer
