@@ -15,6 +15,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -335,6 +336,46 @@ namespace Content.Server.Construction
             {
                 Log.Error($"Tried to start construction of invalid recipe '{prototype}'!");
                 return false;
+            }
+
+            if (constructionPrototype.RMCPrototype is { } rmcProto) // rmc14
+            {
+                Entity<RMCConstructionItemComponent>? constructionItem = null;
+
+                var lastStackAmount = 0;
+
+                foreach (var hand in _handsSystem.EnumerateHands(user))
+                {
+                    if (hand.HeldEntity == null) // Find any valid construction item
+                        continue;
+
+                    if (TryComp<RMCConstructionItemComponent>(hand.HeldEntity, out var constructionItemComp))
+                    {
+                        if (constructionItemComp.Buildable is { } buildable && !buildable.Contains(rmcProto))
+                            continue;
+
+                        if (TryComp<StackComponent>(hand.HeldEntity, out var stack))
+                        {
+                            if (lastStackAmount > stack.Count)
+                                continue; // Choose the stack with the biggest amount
+
+                            lastStackAmount = stack.Count;
+                        }
+
+                        constructionItem = (hand.HeldEntity.Value, constructionItemComp);
+                        break;
+                    }
+                }
+
+                if (constructionItem != null)
+                {
+                    return _rmcConstruction.Build(constructionItem.Value, user, rmcProto, 1);
+                }
+                else
+                {
+                    _popup.PopupEntity(Loc.GetString("construction-system-construct-no-materials"), user, user);
+                    return false;
+                }
             }
 
             if (!PrototypeManager.TryIndex(constructionPrototype.Graph,

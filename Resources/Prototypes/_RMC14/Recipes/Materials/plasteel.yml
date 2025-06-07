@@ -1,0 +1,51 @@
+- type: rmcConstruction
+  id: RMCPlasteelBarricadeFoldableBuild
+  name: folding plasteel barricade
+  prototype: CMBarricadePlasteelDoor
+  doAfterTime: 4
+  doAfterTimeMin: 2
+  materialCost: 8
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2
+
+- type: rmcConstruction
+  id: RMCPlasteelBarricadeBuild
+  name: plasteel barricade
+  prototype: RMCBarricadePlasteel
+  doAfterTime: 8
+  doAfterTimeMin: 2
+  materialCost: 6
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2
+
+- type: rmcConstruction
+  id: RMCReinforcedWindowFrameBuild
+  name: reinforced window frame
+  prototype: RMCWindowFrameColonyReinforced
+  noRotate: true
+  doAfterTime: 4
+  materialCost: 5
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2
+
+- type: rmcConstruction
+  id: RMCPlasteelRodBuild
+  name: plasteel rod
+  prototype: CMRodPlasteel1
+  doAfterTime: 0
+  doAfterTimeMin: 0
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+  stackAmounts:
+  - 15
+  - 30
+
+- type: rmcConstruction
+  id: RMCMetalCrateBuild
+  name: metal crate
+  prototype: RMCCrateMetalBuildable
+  restrictedCollisionGroup: MidImpassable
+  noRotate: true
+  doAfterTime: 5
+  materialCost: 5
