@@ -306,6 +306,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/medium_shotshells.rsi
+    layers:
+    - state: icon
+    - state: half
+      visible: false
+    - state: full
+      visible: false
   - type: Storage
     grid:
     - 0,0,9,1 #5 slots
@@ -322,7 +328,20 @@
     tags:
     - Pouch
     - RMCPouchShotgunShells
-
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 # Large Shotgun Shell Pouch
 - type: entity
@@ -344,6 +363,20 @@
     items:
       tags:
       - RMCShellShotgun
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 - type: entity
   parent: RMCPouchShotgunLarge
