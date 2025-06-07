@@ -36,7 +36,7 @@
       preset: RMCSurvivorPresetForeconNoPrimary
     - type: SniperWhitelist
     - type: JobPrefix
-      prefix: rmc-job-prefix-forecon
+      prefix: rmc-job-prefix-weapons-specialist-sniper
   hidden: true
 
 - type: startingGear

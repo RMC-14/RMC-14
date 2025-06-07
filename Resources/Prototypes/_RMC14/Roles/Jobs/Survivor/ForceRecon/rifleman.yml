@@ -30,7 +30,7 @@
         tags:
         - RMCSquadFORECON
     - type: JobPrefix
-      prefix: rmc-job-prefix-forecon
+      prefix: cm-job-prefix-rifleman
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForecon
   hidden: true

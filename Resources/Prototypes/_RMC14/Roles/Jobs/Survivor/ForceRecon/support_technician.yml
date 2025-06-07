@@ -35,7 +35,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconSupportTech
     - type: JobPrefix
-      prefix: rmc-job-prefix-forecon
+      prefix: rmc-job-prefix-forecon-support-tech
   hidden: true
 
 - type: playTimeTracker
