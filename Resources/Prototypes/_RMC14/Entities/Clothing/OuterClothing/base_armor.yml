@@ -41,6 +41,7 @@
       - Knife
       - RMCG8Pouch
       - RMCMacheteScabbard
+      - RMCScabbardKatana
       #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
       - RMCSmartPistolHolster
       - RMCSMGHolster
@@ -94,7 +95,7 @@
       - RMCG8Pouch
       - Crowbar
       - RMCMacheteScabbard
-      #TODO katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
 
 - type: entity

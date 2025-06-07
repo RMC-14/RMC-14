@@ -73,6 +73,54 @@
 
 - type: entity
   parent: RMCScabbardBase
+  id: RMCScabbardMacheteM2100
+  name: QH20 pattern M2100 custom machete scabbard
+  description: A large leather scabbard used to carry a M2100 "Ngájhe" machete. It can be strapped to the back or the armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_qh20.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_qh20.rsi
+    quickEquip: false
+    slots:
+    - back
+    - belt
+    - suitstorage
+  - type: ItemSlots
+    slots:
+      item:
+        name: M2100
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCM2100Machete
+  - type: ItemMapper
+    mapLayers:
+      sheath-machete:
+        whitelist:
+          tags:
+          - RMCM2100Machete
+  - type: Tag
+    tags:
+    - Scabbard
+    - RMCMacheteScabbard
+
+- type: entity
+  parent: RMCScabbardMacheteM2100
+  id: RMCScabbardMacheteM2100Filled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - RMCM2100Machete
+
+- type: entity
+  parent: RMCScabbardBase
   id: RMCScabbardMacheteSG
   name: ML66A harness machete scabbard
   description: A scabbard that connects to the ML66A combat harness for carrying a M2132 machete.
@@ -183,8 +231,69 @@
       item:
       - RMCCeremonialSword
 
+- type: entity
+  parent: RMCScabbardBase
+  id: RMCScabbardKatana
+  name: katana scabbard
+  description: A large, vibrantly colored katana scabbard used to carry a Japanese sword. It can be strapped to the back or worn at the belt. Because of the sturdy wood casing of the scabbard, it makes an okay defensive weapon in a pinch.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/katana_sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/katana_sheath.rsi
+    quickEquip: false
+    slots:
+    - back
+    - belt
+    - suitstorage
+  - type: ItemSlots
+    slots:
+      item:
+        name: Katana
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCKatana
+  - type: ItemMapper
+    mapLayers:
+      sheath-katana:
+        whitelist:
+          tags:
+          - RMCKatana
+  - type: Tag
+    tags:
+    - Scabbard
+    - RMCScabbardKatana
+
+- type: entity
+  parent: RMCScabbardKatana
+  id: RMCScabbardKatanaFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - RMCKatana
+
+- type: entity
+  parent: RMCScabbardKatana
+  id: RMCScabbardKatanaSharpFilled
+  suffix: Admeme, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - RMCKatanaSharp
+
 - type: Tag
   id: RMCShotgunScabbard
 
 - type: Tag
   id: RMCCeremonialScabbard
+
+- type: Tag
+  id: RMCScabbardKatana
