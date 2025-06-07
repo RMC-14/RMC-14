@@ -18,8 +18,6 @@
     damage:
       types:
         Slash: 45
-    soundHit:
-        path: /Audio/Weapons/bladeslice.ogg
   - type: UsableWhileDevoured
     damage:
       types:
