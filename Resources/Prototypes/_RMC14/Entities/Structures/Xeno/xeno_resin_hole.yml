@@ -49,8 +49,7 @@
     sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
     drawdepth: FloorObjects
     layers:
-    - sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
-      state: trapbackground
+    - state: trapbackground
     - state: trap
       map: [ "enum.XenoResinHoleLayers.Base" ]
   - type: GenericVisualizer
