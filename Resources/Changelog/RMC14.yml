@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed Acid Resin Traps not triggering around open corners. (Traps will
-      still not trigger if they are entirely obstructed)
-    type: Fix
-  id: 1304
-  time: '2025-02-08T08:15:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5548
-- author: Rainbeon
-  changes:
-  - message: Dragging dead bodies that are on top of Parasite traps no longer triggers
-      the trap.
-    type: Fix
-  id: 1305
-  time: '2025-02-08T11:58:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5549
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed welder packs not refueling by just clicking on them.
@@ -5323,5 +5307,22 @@
   id: 1806
   time: '2025-06-07T02:27:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6546
+- author: DummeHytteOst
+  changes:
+  - message: Added a guidebook named "Xenonid Map Icons", it shows what each xenonid
+      icon represents, and goes over some of their colors.
+    type: Add
+  - message: Changed the Lurker's minimap blip, to match the icons of Runner and Ravager.
+    type: Tweak
+  id: 1807
+  time: '2025-06-07T02:28:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6582
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Made all FORECON survivor icons visible to marines.
+    type: Tweak
+  id: 1808
+  time: '2025-06-07T02:29:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6535
 Name: RMC14
 Order: -1
