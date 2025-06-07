@@ -435,4 +435,8 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> VolumeGainHijackSong =
         CVarDef.Create("rmc.volume_gain_hijack_song", 0.5f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCChatSquadColorMode =
+        CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
 }
