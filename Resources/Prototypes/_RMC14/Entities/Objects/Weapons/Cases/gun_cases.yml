@@ -130,13 +130,14 @@
     whitelist:
       tags:
       - CMWeaponPistolM1984
+      - RMCMagazinePistolM1984AP
       - CMMagazinePistolM1984
       - RMCAttachmentRailFlashlight
   - type: StorageFill
     contents:
     - id: RMCAttachmentRailFlashlight
     - id: CMWeaponPistolM1984
-    - id: CMMagazinePistolM1984
+    - id: RMCMagazinePistolM1984AP
       amount: 6
 
 # RSh9 Assault Revolver
