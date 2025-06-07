@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed ME3 hand welder (the small one) blinding you without eye protection.
-    type: Fix
-  id: 1303
-  time: '2025-02-08T05:16:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5541
 - author: Rainbeon
   changes:
   - message: Fixed Acid Resin Traps not triggering around open corners. (Traps will
@@ -5319,5 +5312,16 @@
   id: 1805
   time: '2025-06-05T12:11:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6489
+- author: RangerXVII
+  changes:
+  - message: Scout weapon specialist now has it's own icon.
+    type: Tweak
+  - message: Weapon specialists that have not chosen a kit now have no icon.
+    type: Tweak
+  - message: Fixed a random space being in front of the weapon specialist prefixes.
+    type: Fix
+  id: 1806
+  time: '2025-06-07T02:27:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6546
 Name: RMC14
 Order: -1
