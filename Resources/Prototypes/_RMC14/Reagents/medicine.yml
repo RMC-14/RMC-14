@@ -241,6 +241,13 @@
       - !type:EqualHealthChange
         damage:
         - Airloss: -1
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: RMCLexorin
+          min: 0.5
+        reagent: RMCLexorin
+        amount: -1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -271,6 +278,13 @@
       effects:
       - !type:RemoveDamage
         group: Airloss
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: RMCLexorin
+          min: 0.5
+        reagent: RMCLexorin
+        amount: -1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold

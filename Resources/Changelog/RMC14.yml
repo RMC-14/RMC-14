@@ -1,39 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the small document pouch being half the intended size.
-    type: Fix
-  id: 1314
-  time: '2025-02-09T21:59:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5563
-- author: Vermidia
-  changes:
-  - message: Fixed burrower unburrow stunning allies
-    type: Fix
-  id: 1315
-  time: '2025-02-10T00:23:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5565
-- author: DrSmugleaf
-  changes:
-  - message: Fixed ghost role menu sometimes not showing any ghost roles, including
-      larva ghost roleas.
-    type: Fix
-  - message: Fixed not being able to transfer IOs to other squads.
-    type: Fix
-  id: 1316
-  time: '2025-02-10T00:23:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5568
-- author: Vermidia
-  changes:
-  - message: Fixed xenos being able to destroy mortars. They now make them drop the
-      kit on the floor. Mortar health reverted back, and xenos now knock them over
-      in 1 hit.
-    type: Fix
-  id: 1317
-  time: '2025-02-10T00:24:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5564
-- author: DrSmugleaf
-  changes:
   - message: Fixed CT, SL, SGO, Specs and FTLs not being able to buy fultons.
     type: Fix
   id: 1318
@@ -5193,5 +5160,49 @@
   id: 1816
   time: '2025-06-07T03:10:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6569
+- author: Arykh
+  changes:
+  - message: Fixed damage done from overdoses being too low.
+    type: Fix
+  - message: Fixed Tricordrazine's healing 0.5 asphyxiation instead of 0.25.
+    type: Fix
+  id: 1817
+  time: '2025-06-07T03:20:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6589
+- author: Arykh
+  changes:
+  - message: Narcotics have been added! Mindbreaker Toxin, Space Drugs, and Psilocybin.
+    type: Add
+  - message: Antidepressants have been added! Methylphenidate, Citalopram, and Paroxetine.
+    type: Add
+  - message: Dylovene can now remove Space Drugs and Mindbreaker Toxin.
+    type: Tweak
+  - message: Dylovene was missing it's damaging effects at the critical OD of 50u.
+    type: Tweak
+  - message: Dylovene can now treat patients that are high and seeing psychedelic
+      colors.
+    type: Tweak
+  id: 1818
+  time: '2025-06-07T03:21:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6567
+- author: Arykh
+  changes:
+  - message: Added the "Holy texts of the High Explosive Fragmenting Anti-personnel
+      hand grenade" bible.
+    type: Add
+  - message: You can now create water by mixing hydrogen and oxygen. (Very inefficient)
+    type: Add
+  id: 1819
+  time: '2025-06-07T03:25:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6487
+- author: Arykh
+  changes:
+  - message: Added Lexorin!
+    type: Add
+  - message: Dexalin and Dexalin Plus can now remove Lexorin!
+    type: Tweak
+  id: 1820
+  time: '2025-06-07T03:25:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6626
 Name: RMC14
 Order: -1
