@@ -67,10 +67,8 @@
     - state: icon
     - state: half
       visible: false
-      map: [ "halfLayer" ]
     - state: full
       visible: false
-      map: [ "fullLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: Item
@@ -98,13 +96,13 @@
       Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: ItemMapper
     mapLayers:
-      halfLayer:
+      half:
         minCount: 1
         whitelist:
           tags:
           - RMCShellShotgun
           - RMCCartridge458SOCOM
-      fullLayer:
+      full:
         minCount: 14
         whitelist:
           tags:

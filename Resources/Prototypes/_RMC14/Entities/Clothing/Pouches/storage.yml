@@ -310,10 +310,8 @@
     - state: icon
     - state: half
       visible: false
-      map: [ "halfLayer" ]
     - state: full
       visible: false
-      map: [ "fullLayer" ]
   - type: Storage
     grid:
     - 0,0,9,1 #5 slots
@@ -332,13 +330,13 @@
     - RMCPouchShotgunShells
   - type: ItemMapper
     mapLayers:
-      halfLayer:
+      half:
         minCount: 1
         whitelist:
           tags:
           - RMCShellShotgun
           - RMCCartridge458SOCOM
-      fullLayer:
+      full:
         minCount: 5
         whitelist:
           tags:
@@ -365,6 +363,20 @@
     items:
       tags:
       - RMCShellShotgun
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 - type: entity
   parent: RMCPouchShotgunLarge
