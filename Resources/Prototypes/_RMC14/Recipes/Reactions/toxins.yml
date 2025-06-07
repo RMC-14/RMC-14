@@ -1,0 +1,57 @@
+- type: reaction
+  id: RMCSulphuricAcid
+  reactants:
+    RMCHydrogen:
+      amount: 2
+    RMCSulfur:
+      amount: 1
+    RMCOxygen:
+      amount: 4
+  products:
+    RMCSulphuricAcid: 1
+        
+- type: reaction
+  id: RMCEthanol
+  reactants:
+    RMCHydrogen:
+      amount: 6
+    RMCCarbon:
+      amount: 2
+    RMCOxygen:
+      amount: 1
+  products:
+    RMCEthanol: 1
+
+- type: reaction
+  id: RMCPolytrinicAcid
+  reactants:
+    RMCSulphuricAcid:
+      amount: 1
+    RMCChlorine:
+      amount: 1
+    RMCPotassium:
+      amount: 1
+  products:
+    RMCPolytrinicAcid: 2
+
+- type: reaction
+  id: RMCFormaldehyde
+  reactants:
+    RMCMethane:
+      amount: 1
+    RMCOxygen:
+      amount: 1
+    RMCPhoron:
+      amount: 1
+  products:
+    RMCFormaldehyde: 3
+    
+- type: reaction
+  id: RMCParaformaldehyde
+  reactants:
+    RMCFormaldehyde:
+      amount: 1
+    Frostoil:
+      amount: 1
+  products:
+    RMCParaformaldehyde: 1

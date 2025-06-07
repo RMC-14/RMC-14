@@ -1,0 +1,17 @@
+﻿- type: reagent
+  parent: RMCReagentOther
+  id: RMCGlycerol
+  name: reagent-name-rmcglycerol
+  desc: reagent-desc-rmcglycerol
+  flavor: sweet
+  physicalDesc: reagent-physical-desc-syrupy
+  color: "#808080"
+        
+- type: reagent
+  parent: RMCReagentOther
+  id: RMCHexamine
+  name: reagent-name-rmchexamine
+  desc: reagent-desc-rmchexamine
+  flavor: terrible
+  physicalDesc: reagent-physical-desc-crystalline
+  color: "#F0F0F0"
