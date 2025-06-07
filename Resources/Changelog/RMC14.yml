@@ -1,18 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed ghost roles crashing the server this code is a blight I hate it
-      here this shit is ass 100 years of pain give me RMC14 ERT system so we can forget
-      they exist
-    type: Fix
-  - message: Mortars now have more health until them only being knocked over by xenos
-      is implemented.
-    type: Tweak
-  id: 1313
-  time: '2025-02-09T21:57:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5562
-- author: DrSmugleaf
-  changes:
   - message: Fixed the small document pouch being half the intended size.
     type: Fix
   id: 1314
@@ -5198,5 +5186,12 @@
   id: 1815
   time: '2025-06-07T03:08:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6536
+- author: AlexisMoonlight
+  changes:
+  - message: Added armylathe and casings for a future Ordnance Technician.
+    type: Add
+  id: 1816
+  time: '2025-06-07T03:10:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6569
 Name: RMC14
 Order: -1
