@@ -20,9 +20,9 @@
     sections:
     - name: Medical Set (Mandatory)
       jobs:
-      - CMCMO
       - CMDoctor
       - CMResearcher
+      - CMCMO
       takeAll: CMMedicalSet
       entries:
       - id: RMCVendorBundleCrewMedicalEssentialsDoctor
