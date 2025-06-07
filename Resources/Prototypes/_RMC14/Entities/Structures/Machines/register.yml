@@ -1,0 +1,88 @@
+﻿- type: entity
+  abstract: true
+  parent: [ CMBaseStructure, BaseBagOpenClose ]
+  id: RMCCashRegisterBase
+  name: cash register
+  description: A Novaris brand point of sales system that accepts credit chits... and cash assuming it is operated. Rumor has it these use the same logic board as Novaris Average Joes. You are becoming financially unstable.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,6,2
+    maxItemSize: Normal
+    whitelist:
+      tags:
+        - RMCSpaceCash
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: on
+    layers: [ ]
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: WallMount
+    arc: 360
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: StorageFill
+    contents:
+    - id: RMCSpaceCash10
+      prob: 0.5
+    - id: RMCSpaceCash10
+      prob: 0.4
+    - id: RMCSpaceCash50
+      prob: 0.3
+    - id: RMCSpaceCash100
+      prob: 0.1
+    - id: RMCSpaceCash1000
+      prob: 0.01
+
+- type: entity
+  parent: RMCCashRegisterBase
+  id: RMCCashRegisterOff
+  components:
+  - type: Sprite
+    state: register_off
+    layers:
+    - state: register_off
+    - state: register_off-open
+      map: ["openLayer"]
+
+- type: entity
+  parent: RMCCashRegisterBase
+  id: RMCCashRegisterOn
+  components:
+  - type: Sprite
+    state: register_on
+    layers:
+    - state: register_on
+    - state: register_on-open
+      map: ["openLayer"]
