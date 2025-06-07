@@ -1,4 +1,4 @@
-﻿# Divide original costs by 37.5 each - except plastic which is 20
+# Divide original costs by 37.5 each - except plastic which is 20
 - type: latheRecipe
   id: CMSyringe
   result: CMSyringe
@@ -195,6 +195,38 @@
   id: RMCMedicAutoInjector30
   name: rmc-autoinjector-medic-30
   result: RMCMedicAutoInjector30
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom5
+  name: rmc-autoinjector-custom-5
+  result: RMCMedicAutoInjectorCS5
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom15
+  name: rmc-autoinjector-custom-15
+  result: RMCMedicAutoInjectorCS15
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom30
+  name: rmc-autoinjector-custom-30
+  result: RMCMedicAutoInjectorCS30
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom60
+  name: rmc-autoinjector-custom-60
+  result: RMCMedicAutoInjectorCS60
   completetime: 4
   materials:
     RMCPlastic: 19 # 375
