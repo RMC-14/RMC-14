@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Damage;
 using Content.Server.Body.Components;
 using Content.Server.EntityEffects.Effects;
 using Content.Server.Fluids.EntitySystems;
@@ -41,7 +42,9 @@ public sealed class BloodstreamSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly SharedStutteringSystem _stutteringSystem = default!;
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
+
     [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
+    [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
 
     public override void Initialize()
     {
@@ -166,10 +169,17 @@ public sealed class BloodstreamSystem : EntitySystem
             else if (!_mobStateSystem.IsDead(uid))
             {
                 // If they're healthy, we'll try and heal some bloodloss instead.
-                _damageableSystem.TryChangeDamage(
-                    uid,
-                    bloodstream.BloodlossHealDamage * bloodPercentage,
-                    ignoreResistances: true, interruptsDoAfters: false);
+                // RMC14, to call change damage less often
+                if (_rmcDamageable.HasAnyDamage(uid, bloodstream.BloodlossHealDamage))
+                {
+                    _damageableSystem.TryChangeDamage(
+                        uid,
+                        bloodstream.BloodlossHealDamage * bloodPercentage,
+                        ignoreResistances: true,
+                        interruptsDoAfters: false
+                    );
+                }
+                // RMC14
 
                 // Remove the drunk effect when healthy. Should only remove the amount of drunk and stutter added by low blood level
                 _drunkSystem.TryRemoveDrunkenessTime(uid, bloodstream.StatusTime.TotalSeconds);
