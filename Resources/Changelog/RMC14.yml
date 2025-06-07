@@ -5298,10 +5298,6 @@
   url: https://github.com/RMC-14/RMC-14/pull/6489
 - author: RangerXVII
   changes:
-  - message: Scout weapon specialist now has it's own icon.
-    type: Tweak
-  - message: Weapon specialists that have not chosen a kit now have no icon.
-    type: Tweak
   - message: Fixed a random space being in front of the weapon specialist prefixes.
     type: Fix
   id: 1806
