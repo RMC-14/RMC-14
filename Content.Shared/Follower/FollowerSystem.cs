@@ -328,6 +328,17 @@ public sealed class FollowerSystem : EntitySystem
 
         return picked;
     }
+
+    /// <summary>
+    ///  RMC14 Gets the number of followers for an entity.
+    /// </summary>
+    public int GetFollowerCount(EntityUid uid)
+    {
+        if (!TryComp<FollowedComponent>(uid, out var followed))
+            return 0;
+
+        return followed.Following.Count;
+    }
 }
 
 public abstract class FollowEvent : EntityEventArgs
