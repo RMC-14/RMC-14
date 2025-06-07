@@ -25,8 +25,9 @@ public sealed class StorageRefillContainerVisualizerSystem : VisualizerSystem<RM
             return;
 
         if (!_container.TryGetContainer(uid, component.ContainerId, out var container) ||
-    !container.ContainedEntities.TryFirstOrNull(out var contained) || (!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out var sol) &&
-    !_refillable.TryGetPressurizedSolution(contained.Value, out drainable, out sol)) || sol.Volume == 0)
+            !container.ContainedEntities.TryFirstOrNull(out var contained) ||
+            (!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out var sol) && !_refillable.TryGetPressurizedSolution(contained.Value, out drainable, out sol)) ||
+            sol.Volume == 0)
         {
             sprite.LayerSetVisible(colorLayer, false);
             return;
