@@ -1,62 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added intel. Intel spawns at random spots on the planet. Paper scraps,
-      progress reports, folders and technical manuals must be read and then stored
-      in the Almayer's intel room for points. They can be found by using the data
-      detector. Progress reports may require a paper scrap to be read first, and its
-      data submitted in the intel computer inside the intel room; these clues are
-      listed on the View Intel Objectives window available to all intel-trained personnel.
-      Other sources of intels are dead xenos, which can be fultoned, perma-dead humanoid
-      bodies, rescuing live survivors, restoring colony power, and restoring colony
-      communications. Intel points can be exchanged for requisitions budget and additional
-      OB warheads in CIC through the tech tree console.
-    type: Add
-  - message: Added the intelligence officer and its equipment, gear and weapons racks.
-      The XM4 armor has an integrated motion detector, but does not allow webbing
-      to be used alongside it.
-    type: Add
-  - message: Added fultons. These can be attached to crates and dead xenos and instantly
-      picked up by a dropship with a fulton recovery system attached to its utility
-      point.
-    type: Add
-  - message: Added plastic explosives. These are similar to breaching charges but
-      deal more damage around them, and can be attached to xeno tunnels to quickly
-      collapse them.
-    type: Add
-  - message: Mapped in intel spawners nailguns, barrels, and plastic explosives to
-      each planet map.
-    type: Add
-  - message: Added the thunderdome, where admins may spawn ghost roles.
-    type: Add
-  - message: Added admin commands to change the current requisitions budget and intel
-      points.
-    type: Add
-  - message: Added Provost playtime trackers and ghost role spawners, used by admins.
-    type: Add
-  - message: Added a verb for admins to spawn someone with a certain job.
-    type: Add
-  - message: Fixed Boilers leaving behind a body after dying and exploding.
-    type: Fix
-  - message: Fixed being able to damage yourself by touching lights.
-    type: Fix
-  - message: Fixed Requisitions not having M1984 AP magazines and signal flare packs
-      in their vendor.
-    type: Fix
-  - message: Fixed throwing cooldown being higher than intended (0.5s > 0.25s).
-    type: Fix
-  - message: Fixed the smart gun's motion detector automatically turning off when
-      dropped.
-    type: Fix
-  - message: Updated the roadmap.
-    type: Tweak
-  - message: Watching a xeno no longer closes the UI.
-    type: Tweak
-  id: 1310
-  time: '2025-02-09T11:33:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5554
-- author: DrSmugleaf
-  changes:
   - message: Added Nan 'Snow Bunny' Mazu figurine
     type: Add
   id: 1311
@@ -5242,5 +5186,14 @@
   id: 1812
   time: '2025-06-07T02:53:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6544
+- author: Ramiris
+  changes:
+  - message: Added tents!
+    type: Add
+  - message: Allowed camo to be applied to 5 layers at once.
+    type: Tweak
+  id: 1813
+  time: '2025-06-07T02:56:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6559
 Name: RMC14
 Order: -1
