@@ -9057,8 +9057,6 @@ entities:
 - proto: ActionToggleLight
   entities:
   - uid: 1367
-    mapInit: true
-    paused: true
     components:
     - type: Transform
       parent: 1366
@@ -9066,8 +9064,6 @@ entities:
       originalIconColor: '#FFFFFFFF'
       container: 1366
   - uid: 1997
-    mapInit: true
-    paused: true
     components:
     - type: Transform
       parent: 1996
@@ -22301,8 +22297,6 @@ entities:
 - proto: RMCActionCycleVisor
   entities:
   - uid: 1995
-    mapInit: true
-    paused: true
     components:
     - type: Transform
       parent: 1994
