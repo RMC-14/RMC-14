@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -412,6 +413,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         _adminLog.Add(LogType.RMCPrimaryLZ, $"{ToPrettyString(actor):player} designated {ToPrettyString(lz):lz} as primary landing zone");
 
         EnsureComp<PrimaryLandingZoneComponent>(lz);
+        EnsureComp<RMCTrackableComponent>(lz);
         RefreshUI();
 
         var message = Loc.GetString("rmc-announcement-ares-lz-designated", ("name", Name(lz)));

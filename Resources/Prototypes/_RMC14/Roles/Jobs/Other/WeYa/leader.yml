@@ -42,6 +42,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-leader
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

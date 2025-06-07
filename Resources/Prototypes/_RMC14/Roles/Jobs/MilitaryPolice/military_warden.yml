@@ -50,6 +50,7 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: warden
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearMilitaryWarden
@@ -61,7 +62,7 @@
     gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryWarden
     outerClothing: CMArmorM3Warden
-    ears: CMHeadsetCMP
+    ears: RMCHeadsetMW
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge
