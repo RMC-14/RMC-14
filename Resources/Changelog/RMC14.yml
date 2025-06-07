@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: A guidebook page explaining intel has been added.
-    type: Add
-  id: 1321
-  time: '2025-02-10T23:16:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5575
-- author: Vermidia
-  changes:
-  - message: Fixed slows lingering forever in some cases.
-    type: Fix
-  id: 1322
-  time: '2025-02-10T23:15:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5571
 - author: DrSmugleaf
   changes:
   - message: Fixed not being able to buy T1 techs after unlocking T2.
@@ -5211,5 +5197,22 @@
   id: 1823
   time: '2025-06-07T03:37:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6624
+- author: Timemaster99
+  changes:
+  - message: Pill canisters can now toggle storage ejection, and can be used while
+      nested inside storage.
+    type: Tweak
+  id: 1824
+  time: '2025-06-07T03:38:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6588
+- author: Arykh
+  changes:
+  - message: The Golden Mateba now has rail and barrel attachments.
+    type: Add
+  - message: The Mateba and it's variants now have burst fire.
+    type: Add
+  id: 1825
+  time: '2025-06-07T03:39:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6615
 Name: RMC14
 Order: -1
