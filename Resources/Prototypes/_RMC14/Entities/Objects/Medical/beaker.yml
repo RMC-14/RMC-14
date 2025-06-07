@@ -266,7 +266,7 @@
       beaker:
         maxVol: 480
   - type: SolutionContainerVisuals
-    maxFillLevels: 1
+    maxFillLevels: 4
     fillBaseName: can
   - type: StaticPrice
     price: 40
@@ -274,8 +274,6 @@
     tags:
     - PressurizedCanister
     - ChemDispensable
-  - type: DrainableSolution
-    solution: beaker
   - type: Clothing
     quickEquip: false
     slots:
@@ -310,16 +308,14 @@
     solution: beaker
   - type: FitsInDispenser
     solution: beaker
-  - type: RefillableSolution
-    solution: beaker
   - type: ExaminableSolution
-    solution: beaker
-  - type: DrawableSolution
-    solution: beaker
-  - type: InjectableSolution
     solution: beaker
   - type: SolutionTransfer
     canChangeTransferAmount: true
+    canSend: false
+    canReceive: false
+  - type: RMCPressurizedSolution
+    solution: beaker
   - type: SolutionItemStatus
     solution: beaker
   - type: UserInterface
