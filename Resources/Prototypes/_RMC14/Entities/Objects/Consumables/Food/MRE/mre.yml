@@ -1,5 +1,14 @@
-﻿- type: Tag
+- type: Tag
   id: MRE
+
+- type: Tag
+  id: MREUNMC
+
+- type: Tag
+  id: MRECLF
+
+- type: Tag
+  id: MREWY
 
 - type: entity
   parent: BaseStorageItem
@@ -10,19 +19,23 @@
   - type: Tag
     tags:
     - MRE
+    - MREUNMC
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/mre.rsi
-    state: closed
+    sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+    state: mealpack
   - type: Item
     size: Small
+    heldPrefix: mealpack
   - type: Storage
     grid:
-    - 0,0,13,1
+    - 0,0,13,3 #11 slots min
     maxItemSize: Small
     whitelist:
       components:
       - MREItem
   - type: Openable
+    opened: false
+    closeable: false
     sound:
       collection: CMFoodRip
   - type: Appearance
@@ -30,41 +43,68 @@
     visuals:
       enum.OpenableVisuals.Opened:
         enum.OpenableVisuals.Layer:
-          True: { state: "open" }
-          False: { state: "closed" }
+          True: { state: "mealpackopened" }
+          False: { state: "mealpack" }
   - type: StorageFill
     contents:
+    # entree
     - id: CMMREComponentBonelessPorkRibs
       orGroup: main
     - id: CMMREComponentGrilledChicken
       orGroup: main
     - id: CMMREComponentPizzaSquare
       orGroup: main
-    - id: CMMREComponentSpaghettiChunks
-      orGroup: main
     - id: CMMREComponentChickenTender
       orGroup: main
+    - id: RMCMREComponentPepperoniSquare
+      orGroup: main
+    - id: CMMREComponentSpaghettiChunks
+      orGroup: main
+    - id: RMCMREComponentChiliConCarne
+      orGroup: main
+    - id: RMCMREComponentNoodleSoup
+      orGroup: main
+    - id: RMCMREComponentGrilledChickenBreast
+      orGroup: main
+    - id: RMCMREComponentFeijoada
+      orGroup: main
+    # side
     - id: CMMREComponentCracker
-      orGroup: side
-    - id: CMMREComponentRiceOnigiri
       orGroup: side
     - id: CMMREComponentMashedPotatoes
       orGroup: side
     - id: CMMREComponentRisotto
       orGroup: side
+    - id: CMMREComponentRiceOnigiri
+      orGroup: side
+    - id: RMCMREComponentCornbread
+      orGroup: side
+    - id: RMCMREComponentKale
+      orGroup: side
+    - id: RMCMREComponentTortillas
+      orGroup: side
+    - id: RMCMREComponentCinnamonAppleSlices
+      orGroup: side
+    - id: RMCMREComponentBoiledRice
+      orGroup: side
+    - id: RMCMREComponentBiscuitsSide
+      orGroup: side
+    # snack
     - id: CMMREComponentBiscuit
       orGroup: snack
     - id: CMMREComponentMeatballs
       orGroup: snack
-    - id: RMCMREComponentMeatzels
-      orGroup: snack
     - id: CMMREComponentPretzels
       orGroup: snack
-    - id: CMMREComponentPeanuts
+    - id: RMCMREComponentMeatzels
+      prob: 0.1 # its an easter egg
       orGroup: snack
     - id: CMMREComponentSushi
       orGroup: snack
-    - id: CMMREComponentBiscuit
+    - id: CMMREComponentPeanuts
+      orGroup: snack
+    # dessert
+    - id: CMMREComponentSpicedApples
       orGroup: dessert
     - id: CMMREComponentChocolateBrownie
       orGroup: dessert
@@ -76,10 +116,24 @@
       orGroup: dessert
     - id: CMMREComponentHoneyFlan
       orGroup: dessert
+    - id: RMCMREComponentCookie
+      orGroup: dessert
+    - id: RMCMREComponentLemonPie
+      orGroup: dessert
+    - id: RMCMREComponentKeyLimePie
+      orGroup: dessert
+    - id: RMCMREComponentBrigadeiroBalls
+      orGroup: dessert
+    - id: RMCMREComponentStrawberryToasterPastry
+      orGroup: dessert
+    # drink
     - id: CMDrinkWEYAWaterBottle30
+    # cookie
     - id: CMFortuneCookie
       prob: 0.333
+    # cigs
     - id: CMCigarettePackLuckySlothsMini
+    # matches
     - id: CMMatchBook
       orGroup: matchbook
     - id: CMBrownMatchBook
@@ -90,12 +144,131 @@
       orGroup: matchbook
     - id: CMExecutiveWEYAMatchbook
       orGroup: matchbook
+    # spread
+    - id: RMCMREDrinkSpreadPacketCheese
+      orGroup: spread
+    - id: RMCMREDrinkSpreadPacketJalapenoCheese
+      orGroup: spread
+    - id: RMCMREDrinkSpreadPacketPeanutButter
+      orGroup: spread
+    # beverage
+    - id: RMCBeveragePowderGrape
+      orGroup: beverage
+    - id: RMCBeveragePowderOrange
+      orGroup: beverage
+    - id: RMCBeveragePowderLemonLime
+      orGroup: beverage
+    - id: RMCBeveragePowderChocolate
+      orGroup: beverage
+    - id: RMCBeveragePowderChocolateHazelnut
+      orGroup: beverage
+    # utensil
+    - id: RMCMRESpork
   - type: FixedItemSizeStorage
   - type: RemoveOnlyStorage
+  - type: RMCLabelByContained
+  - type: StorageRequireOpened
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+  - type: UseDelay
+    delay: 0.1
+    
+
+- type: entity
+  parent: CMMRE
+  id: RMCWYMRE
+  name: We-Ya brand ration pack
+  description: "A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life. On the box is the Westom-Yamada logo, with a slogan surrounding it: WESTON-YAMADA. FEEDING THE FUTURE."
+  components:
+  - type: Tag
+    tags:
+    - MRE
+    - MREWY
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+    state: wy_mealpack
+  - type: Item
+    size: Small
+    heldPrefix: wy_mealpack
+  - type: Storage
+    grid:
+    - 0,0,9,1 #5 slots min
+    whitelist: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: "wy_mealpackopened" }
+          False: { state: "wy_mealpack" }
+  - type: StorageFill
+    contents:
+    # entree
+    - id: RMCMREComponentWYBonelessPorkRibs
+      orGroup: main
+    - id: RMCMREComponentWYGrilledChicken
+      orGroup: main
+    - id: RMCMREComponentWYChickenTender
+      orGroup: main
+    - id: RMCMREComponentWYSpaghettiChunks
+      orGroup: main
+    - id: RMCMREComponentWYGrilledChickenBreast
+      orGroup: main
+    # side
+    - id: RMCFoodSnackCheeseburgerPackaged
+      orGroup: side
+    - id: RMCFoodSnackBurritoPackaged
+      orGroup: side
+    # snack
+    - id: RMCFoodSnackHotdogPackaged
+    # dessert
+    - id: RMCFoodSnackEATBar
+      orGroup: dessert
+    - id: RMCFoodSnackBoonie
+      orGroup: dessert
+    - id: RMCFoodSnackBarcaridine
+      orGroup: dessert
+    - id: RMCFoodSnackCHUNK
+      orGroup: dessert
+    # drink
+    - id: RMCDrinkWEYABugJuice
+
+- type: entity
+  parent: BaseItem
+  id: RMCCLFMRE
+  name: wrapped makeshift meal
+  description: Some home cooked or salvaged meal, you do what you must within your capabilities.
+  components:
+  - type: Tag
+    tags:
+    - MRE
+    - MRECLF
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/clf_mre.rsi
+    state: clf_mealpack
+  - type: Item
+    size: Small
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodCLFMeatPie
+      orGroup: main
+    - id: RMCMREFoodCLFBananaPie
+      orGroup: main
+    - id: RMCMREFoodCLFCheesePizza
+      orGroup: main
+    - id: RMCMREFoodCLFMushroomPizza
+      orGroup: main
+    - id: RMCMREFoodCLFVegetablePizza
+      orGroup: main
+    - id: RMCMREFoodCLFMeatPizza
+      orGroup: main
+
+#Components
 
 - type: entity
   abstract: true
@@ -105,7 +278,7 @@
   description: A package from a Meal Ready-to-Eat, property of the Marines. Contains a part of a meal, prepared for field consumption.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/mre_components.rsi
+    sprite: _RMC14/Objects/Consumable/Food/unmc_mre.rsi
   - type: Item
     size: Small
   - type: SpawnItemsOnUse
@@ -113,6 +286,7 @@
       collection: CMFoodRip
   - type: MREItem
 
+# Note for MRES - all should have 50 volume
 - type: entity
   abstract: true
   parent: CMFoodBase
@@ -120,10 +294,19 @@
   description: The contents of a Marine Standard issue MRE.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/mre_contents.rsi
+    sprite: _RMC14/Objects/Consumable/Food/unmc_mre.rsi
   - type: Item
     size: Small
   - type: MREItem
+  - type: RefillableSolution
+    solution: food
+  - type: InjectableSolution
+    solution: food
+  - type: Extractable
+    grindableSolutionName: food
+  - type: FlavorProfile
+    flavors:
+    - cheap
 
 - type: entity
   parent: RMCBoxMagazineSupplyBase
@@ -157,8 +340,109 @@
 
 - type: entity
   parent: RMCBoxMREEmpty
+  id: RMCBoxMREWYEmpty
+  name: box of We-Ya brand rations
+  description: "A box of basic packed foods, comes with all sorts of We-Ya branded snacks. On the box is the Weston-Yamada logo, with a slogan surrounding it: WESTON-YAMADA. FEEDING THE FUTURE."
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMREWYEmpty
+  - type: CMItemSlots
+    slot:
+      name: MREWY
+      whitelist:
+        tags:
+        - MREWY
+  - type: Sprite
+    layers:
+    - state: supply_box
+      color: "#a89880"
+    - state: supply_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#a89880"
+    - state: supply_box_logo_weya_faded
+    - state: supply_lid_closed
+      map: [ "lid" ]
+      color: "#a89880"
+
+- type: entity
+  parent: RMCBoxMREEmpty
+  id: RMCBoxMREEmergencyEmpty
+  name: box of emergency rations
+  description: A box of emergency rations. Designed to withstand.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMREEmergencyEmpty
+  - type: CMItemSlots
+    count: 20
+    slot:
+      name: MREButterCookies
+      whitelist:
+        tags:
+        - MREButterCookie
+  - type: Sprite
+    layers:
+    - state: supply_box
+      color: "#8f887e"
+    - state: supply_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#8f887e"
+    - state: supply_box_logo_weya_faded
+    - state: supply_box_food
+      color: "#b0afae"
+    - state: supply_lid_closed
+      map: [ "lid" ]
+      color: "#8f887e"
+    
+- type: entity
+  parent: RMCBoxMREEmpty
   id: RMCBoxMRE
   suffix: Filled
   components:
   - type: CMItemSlots
     startingItem: CMMRE
+
+- type: entity
+  parent: RMCBoxMREWYEmpty
+  id: RMCBoxWYMRE
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCWYMRE
+
+- type: entity
+  parent: RMCBoxMREEmergencyEmpty
+  id: RMCBoxMREEmergency
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMREComponentWYCookieBriquette
+
+- type: entity
+  parent: RMCFork
+  id: RMCMRESpork
+  name: MRE spork
+  description: It's a plastic brown spork. Very robust for what it is, legends tell about stranded marines who dug trenches with these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+    layers:
+    - state: mre_spork
+    - map: ["enum.SolutionContainerLayers.Fill"]
+      state: food-1
+      visible: false
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+    heldPrefix: mre_spork
+  - type: MREItem
+  - type: ReactionMixer
+    mixMessage: "spoon-mixing-success"
+    timeToMix: 0.5
+    reactionTypes:
+    - Stir
+  - type: Utensil
+    types:
+    - Fork
+    - Spoon

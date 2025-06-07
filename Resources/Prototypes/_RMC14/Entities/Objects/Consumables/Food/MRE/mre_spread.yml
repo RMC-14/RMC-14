@@ -1,0 +1,150 @@
+# "Drinks"
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCMREDrinkSpreadPacketBase
+  name: spread packet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/unmc_mre.rsi
+  - type: Item
+    size: Small
+  - type: Drink
+    solution: food
+  - type: SolutionContainerManager
+  - type: Appearance
+  - type: DrainableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
+  - type: Sealable
+  - type: Openable
+    sound:
+      collection: CMFoodRip
+    closeable: false
+  - type: TrashOnSolutionEmpty
+    solution: food
+  - type: Spillable
+    solution: food
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    minTransferAmount: 1
+    maxTransferAmount: 5
+    canReceive: false
+    transferAmounts: [1, 2, 3, 5]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 0
+    changeColor: false
+  - type: RMCOpenChangeFillLevels
+    fillLevelsOpen: 1
+    fillLevelsClosed: 0
+  - type: MREItem
+
+- type: entity
+  parent: RMCMREDrinkSpreadPacketBase
+  id: RMCMREDrinkSpreadPacketCheese
+  description: A creamy and cheesy spread, made out of a processed cheese, combines well with tortillas and other snacks.
+  suffix: cheese
+  components:
+  - type: Label
+    currentLabel: rmc-mre-spread-cheese
+  - type: SolutionContainerVisuals
+    baseFillSprite: cheese_spread-
+  - type: Sprite
+    layers:
+      - state: spread
+        map: ["enum.OpenableVisuals.Layer"]
+      - state: cheese_spread-1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {state: "spread_open"}
+          False: {state: "spread"}
+        enum.SolutionContainerLayers.Fill:
+          True: {visible: true}
+          False: {visible: false}
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: RMCCheese
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
+
+- type: entity
+  parent: RMCMREDrinkSpreadPacketBase
+  id: RMCMREDrinkSpreadPacketJalapenoCheese
+  description: A creamy and cheesy spread, made out of a processed cheese, combines well with tortillas and other snacks, this one has a spicy jalapeno flavor.
+  suffix: jalapeno cheese
+  components:
+  - type: Label
+    currentLabel: rmc-mre-spread-jalapeno-cheese
+  - type: SolutionContainerVisuals
+    baseFillSprite: jalapeno_cheese_spread-
+  - type: Sprite
+    layers:
+      - state: spread
+        map: ["enum.OpenableVisuals.Layer"]
+      - state: jalapeno_cheese_spread-1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {state: "spread_open"}
+          False: {state: "spread"}
+        enum.SolutionContainerLayers.Fill:
+          True: {visible: true}
+          False: {visible: false}
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: RMCCheese
+          Quantity: 4
+        - ReagentId: RMCCapsaicin
+          Quantity: 2
+
+- type: entity
+  parent: RMCMREDrinkSpreadPacketBase
+  id: RMCMREDrinkSpreadPacketPeanutButter
+  description: A creamy and nutty spread, made out of a processed peanuts, combines well with tortillas and other snacks.
+  suffix: peanut butter
+  components:
+  - type: Label
+    currentLabel: rmc-mre-spread-peanut-butter
+  - type: SolutionContainerVisuals
+    baseFillSprite: peanut_butter_spread-
+  - type: Sprite
+    layers:
+      - state: spread
+        map: ["enum.OpenableVisuals.Layer"]
+      - state: peanut_butter-1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {state: "spread_open"}
+          False: {state: "spread"}
+        enum.SolutionContainerLayers.Fill:
+          True: {visible: true}
+          False: {visible: false}
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: RMCNuts
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
+
