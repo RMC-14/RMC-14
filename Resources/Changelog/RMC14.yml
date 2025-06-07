@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed snow camo marine uniforms appearing invisible when sleeves are
-      toggled.
-    type: Fix
-  id: 1320
-  time: '2025-02-10T22:37:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5574
 - author: Ian321
   changes:
   - message: A guidebook page explaining intel has been added.
@@ -5207,5 +5199,17 @@
   id: 1822
   time: '2025-06-07T03:35:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6581
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed booze-o-mats and WEYA med vendors on the colony starting with full
+      contents and reagents.
+    type: Fix
+  - message: Added new booze to the Booze-O-Mat.
+    type: Tweak
+  - message: Fixed the Chess-O-Mat not having any contents.
+    type: Fix
+  id: 1823
+  time: '2025-06-07T03:37:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6624
 Name: RMC14
 Order: -1
