@@ -32,7 +32,7 @@
       #      - TODO RMC14 splint
       - RMCPenlight
       - CMAutoInjector
-      #      - TODO RMC14 syringe cases
+      - RMCSyringeCase
       - CMSurgicalLine
       - CMSynthGraft
       - CMRollerItem
@@ -95,7 +95,7 @@
       #      - TODO RMC14 splint
       - RMCPenlight
       - CMAutoInjector
-      #      - TODO RMC14 syringe cases
+      - RMCSyringeCase
       - CMSurgicalLine
       - CMSynthGraft
       - CMRollerItem

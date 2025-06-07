@@ -1,0 +1,47 @@
+- type: entity
+  parent: BaseStorageItem
+  id: RMCSyringeCase
+  name: syringe case
+  description: It's a medical case for storing syringes and bottles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/syringe_case.rsi
+    state: syringe_case
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Medical/syringe_case.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      components:
+      - Pill
+      tags:
+      - Bottle
+      - Pill
+      - Syringe
+      - CMAutoInjector
+      - Paper
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCSyringeCase
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: Tag
+  id: RMCSyringeCase
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSyringe
+    - id: CMBottleInaprovaline
+    - id: CMBottleTricordrazine
