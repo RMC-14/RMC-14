@@ -76,6 +76,8 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: RMCStorageEjectHand
+    state: Last
 
 
 - type: entity
@@ -215,5 +217,26 @@
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-tricordazine-container-label-text
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterRussianRed
+  name: Russian red pill bottle
+  suffix: Russian Red, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillRussianRed
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-russianred-container-label-text
 
 # TODO RMC14 peridaxon, tramadol
