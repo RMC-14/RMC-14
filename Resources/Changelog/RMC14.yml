@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Survivors can no longer interact with intel objectives.
-    type: Tweak
-  - message: Rules change; Survivors may not secure intel objectives without marine
-      support.
-    type: Tweak
-  id: 1326
-  time: '2025-02-11T22:41:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5583
 - author: Ian321
   changes:
   - message: Undeployed mortars can no longer be destroyed.
@@ -5205,5 +5195,12 @@
   id: 1828
   time: '2025-06-08T00:28:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6543
+- author: Arykh
+  changes:
+  - message: Added the Syringe Case!
+    type: Add
+  id: 1829
+  time: '2025-06-08T01:38:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6641
 Name: RMC14
 Order: -1
