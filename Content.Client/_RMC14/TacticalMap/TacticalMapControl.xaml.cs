@@ -9,7 +9,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
-using Robust.Shared.Maths;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -38,21 +37,21 @@ public sealed partial class TacticalMapControl : TextureRect
     public Action<Vector2i>? OnBlipClicked;
     public Action<Vector2i, string>? OnBlipRightClicked;
 
-    private Label? _tunnelInfoLabel;
+    private readonly Label? _tunnelInfoLabel;
     private readonly Vector2[] _reusableLineVectors = new Vector2[6];
 
-    private const float MAP_SCALE = 3f;
-    private const float BASE_BLIP_SIZE = 14f;
-    private const float CLICK_TOLERANCE = 8f;
-    private const float BLIP_EDGE_RATIO = 0.7f;
-    private const float CLOSE_BLIP_THRESHOLD = 2.2f;
-    private const float CLOSE_BLIP_SAFETY = 0.8f;
-    private const int DASH_LENGTH = 6;
-    private const int GAP_LENGTH = 3;
-    private const int ARROW_LENGTH = 15;
-    private const int ARROW_WIDTH = 8;
-    private const float MIN_DRAG_DISTANCE = 10f;
-    private const float LABEL_Y_OFFSET = 6f;
+    private const float MapScale = 3f;
+    private const float BaseBlipSize = 14f;
+    private const float ClickTolerance = 8f;
+    private const float BlipEdgeRatio = 0.7f;
+    private const float CloseBlipThreshold = 2.2f;
+    private const float CloseBlipSafety = 0.8f;
+    private const int DashLength = 6;
+    private const int GapLength = 3;
+    private const int ArrowLength = 15;
+    private const int ArrowWidth = 8;
+    private const float MinDragDistance = 10f;
+    private const float LabelYOffset = 6f;
 
     public TacticalMapControl()
     {
@@ -66,8 +65,8 @@ public sealed partial class TacticalMapControl : TextureRect
             StyleClasses = { "LabelHeading" },
             FontColorOverride = Color.Black,
             Margin = new Thickness(8, 8),
-            HorizontalAlignment = Control.HAlignment.Center,
-            VerticalAlignment = Control.VAlignment.Center
+            HorizontalAlignment = HAlignment.Center,
+            VerticalAlignment = VAlignment.Center,
         };
 
         AddChild(_tunnelInfoLabel);
@@ -75,7 +74,8 @@ public sealed partial class TacticalMapControl : TextureRect
 
     public void UpdateTexture(Entity<AreaGridComponent> grid)
     {
-        if (grid.Comp.Colors.Count == 0) return;
+        if (grid.Comp.Colors.Count == 0)
+            return;
 
         _min = Vector2i.Zero;
         var max = Vector2i.Zero;
@@ -85,7 +85,8 @@ public sealed partial class TacticalMapControl : TextureRect
             max = Vector2i.ComponentMax(max, position);
         }
 
-        if (max.X - _min.X <= 0 || max.Y - _min.Y <= 0) return;
+        if (max.X - _min.X <= 0 || max.Y - _min.Y <= 0)
+            return;
 
         _delta = max - _min;
         var image = new Image<Rgba32>(_delta.X + 1, _delta.Y + 1);
@@ -111,12 +112,12 @@ public sealed partial class TacticalMapControl : TextureRect
 
     public Vector2 IndicesToPosition(Vector2i indices)
     {
-        return GetDrawPosition(indices) * MAP_SCALE;
+        return GetDrawPosition(indices) * MapScale;
     }
 
     public Vector2i PositionToIndices(Vector2 screenPosition)
     {
-        var relativePos = screenPosition / MAP_SCALE;
+        var relativePos = screenPosition / MapScale;
         return new Vector2i(
             (int)relativePos.X + _min.X,
             _delta.Y - (int)relativePos.Y + _min.Y
@@ -125,17 +126,18 @@ public sealed partial class TacticalMapControl : TextureRect
 
     private TacticalMapBlip? GetBlipAtPosition(Vector2 controlPosition)
     {
-        if (_blips == null || Texture == null) return null;
+        if (_blips == null || Texture == null)
+            return null;
 
         var draw = GetDrawDimensions(Texture);
         var screenPosition = controlPosition * UIScale;
-        var clickTolerance = CLICK_TOLERANCE * UIScale;
+        var clickTolerance = ClickTolerance * UIScale;
 
         foreach (var blip in _blips)
         {
             var blipRect = UIBox2.FromDimensions(
                 IndicesToPosition(blip.Indices) * UIScale + new Vector2(draw.Left, draw.Top) - new Vector2(clickTolerance, clickTolerance),
-                new Vector2(BASE_BLIP_SIZE * UIScale + clickTolerance * 2, BASE_BLIP_SIZE * UIScale + clickTolerance * 2)
+                new Vector2(BaseBlipSize * UIScale + clickTolerance * 2, BaseBlipSize * UIScale + clickTolerance * 2)
             );
 
             if (blipRect.Contains(screenPosition))
@@ -148,7 +150,8 @@ public sealed partial class TacticalMapControl : TextureRect
     protected override void Draw(DrawingHandleScreen handle)
     {
         base.Draw(handle);
-        if (Texture == null) return;
+        if (Texture == null)
+            return;
 
         var system = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
         var backgroundRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "background");
@@ -163,7 +166,7 @@ public sealed partial class TacticalMapControl : TextureRect
             foreach (var blip in _blips)
             {
                 var position = IndicesToPosition(blip.Indices) * UIScale + offset;
-                var scaledBlipSize = BASE_BLIP_SIZE * UIScale;
+                var scaledBlipSize = BaseBlipSize * UIScale;
                 var rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
 
                 handle.DrawTextureRect(blip.Background != null ? system.Frame0(blip.Background) : background, rect, blip.Color);
@@ -208,7 +211,7 @@ public sealed partial class TacticalMapControl : TextureRect
                 var position = IndicesToPosition(indices) * UIScale + offset;
 
                 // Center vertically
-                position = position with { Y = position.Y - LABEL_Y_OFFSET * UIScale };
+                position = position with { Y = position.Y - LabelYOffset * UIScale };
 
                 // Get text size
                 var drawn = handle.DrawString(_font, position, label, Color.Transparent);
@@ -284,7 +287,7 @@ public sealed partial class TacticalMapControl : TextureRect
 
     public Vector2i ConvertIndicesToLineCoordinates(Vector2i indices)
     {
-        var scaled = GetDrawPosition(indices) * MAP_SCALE;
+        var scaled = GetDrawPosition(indices) * MapScale;
         return new Vector2i((int)scaled.X, (int)scaled.Y);
     }
 
@@ -314,11 +317,14 @@ public sealed partial class TacticalMapControl : TextureRect
         }
 
         var diff = relative - _lastDrag.Value;
-        if (diff == Vector2i.Zero) return;
+        if (diff == Vector2i.Zero)
+            return;
 
-        if (diff.Length < MIN_DRAG_DISTANCE) return;
+        if (diff.Length < MinDragDistance)
+            return;
 
-        if (Texture == null) return;
+        if (Texture == null)
+            return;
 
         var draw = GetDrawDimensions(Texture);
         var controlOffset = new Vector2(draw.Left, draw.Top) / UIScale;
@@ -343,7 +349,8 @@ public sealed partial class TacticalMapControl : TextureRect
         if (removeExisting)
             RemoveLinesByColor(pathColor);
 
-        if (waypoints.Count < 2) return;
+        if (waypoints.Count < 2)
+            return;
 
         for (int i = 0; i < waypoints.Count - 1; i++)
         {
@@ -364,11 +371,12 @@ public sealed partial class TacticalMapControl : TextureRect
         var direction = targetPoint - sourcePoint;
         var distance = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
 
-        if (distance == 0) return sourcePoint;
+        if (distance == 0)
+            return sourcePoint;
 
-        var edgeOffset = (int)(BASE_BLIP_SIZE * BLIP_EDGE_RATIO);
-        if (distance < edgeOffset * CLOSE_BLIP_THRESHOLD)
-            edgeOffset = (int)(edgeOffset * (distance / (edgeOffset * CLOSE_BLIP_THRESHOLD)) * CLOSE_BLIP_SAFETY);
+        var edgeOffset = (int)(BaseBlipSize * BlipEdgeRatio);
+        if (distance < edgeOffset * CloseBlipThreshold)
+            edgeOffset = (int)(edgeOffset * (distance / (edgeOffset * CloseBlipThreshold)) * CloseBlipSafety);
 
         return new Vector2i(
             sourcePoint.X + (int)(direction.X / distance * edgeOffset),
@@ -385,9 +393,10 @@ public sealed partial class TacticalMapControl : TextureRect
         var direction = targetPoint - sourcePoint;
         var distance = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
 
-        if (distance == 0) return sourcePoint;
+        if (distance == 0)
+            return sourcePoint;
 
-        var scaledBlipSize = BASE_BLIP_SIZE * MAP_SCALE;
+        const float scaledBlipSize = BaseBlipSize * MapScale;
         var edgeOffset = (int)(scaledBlipSize * 0.4f);
 
         var minOffset = (int)(scaledBlipSize * 0.2f);
@@ -408,14 +417,15 @@ public sealed partial class TacticalMapControl : TextureRect
         if (removeExisting)
             RemoveLinesByColor(pathColor);
 
-        if (waypoints.Count < 2) return;
+        if (waypoints.Count < 2)
+            return;
 
         if (waypoints.Count == 2)
         {
             var startPos = ConvertIndicesToLineCoordinates(waypoints[0]);
             var endPos = ConvertIndicesToLineCoordinates(waypoints[1]);
             var distance = Math.Sqrt(Math.Pow(endPos.X - startPos.X, 2) + Math.Pow(endPos.Y - startPos.Y, 2));
-            var scaledBlipSize = BASE_BLIP_SIZE * MAP_SCALE;
+            var scaledBlipSize = BaseBlipSize * MapScale;
 
             if (distance < scaledBlipSize * 1.2f)
                 return;
@@ -433,8 +443,8 @@ public sealed partial class TacticalMapControl : TextureRect
 
                 if (lineLength > 0)
                 {
-                    var scaledBlipSize = BASE_BLIP_SIZE * MAP_SCALE;
-                    var arrowStartOffset = (int)(scaledBlipSize * 0.45f + ARROW_LENGTH);
+                    var scaledBlipSize = BaseBlipSize * MapScale;
+                    var arrowStartOffset = (int)(scaledBlipSize * 0.45f + ArrowLength);
 
                     if (lineLength > arrowStartOffset)
                     {
@@ -452,8 +462,8 @@ public sealed partial class TacticalMapControl : TextureRect
         if (waypoints.Count >= 2)
         {
             AddSimpleArrowHead(
-                ConvertIndicesToLineCoordinates(waypoints[waypoints.Count - 2]),
-                ConvertIndicesToLineCoordinates(waypoints[waypoints.Count - 1]),
+                ConvertIndicesToLineCoordinates(waypoints[^2]),
+                ConvertIndicesToLineCoordinates(waypoints[^1]),
                 pathColor
             );
         }
@@ -464,20 +474,21 @@ public sealed partial class TacticalMapControl : TextureRect
         if (removeExisting)
             RemoveLinesByColor(pathColor);
 
-        if (waypoints.Count < 2) return;
+        if (waypoints.Count < 2)
+            return;
 
         if (waypoints.Count == 2)
         {
             var startPos = ConvertIndicesToLineCoordinates(waypoints[0]);
             var endPos = ConvertIndicesToLineCoordinates(waypoints[1]);
             var distance = Math.Sqrt(Math.Pow(endPos.X - startPos.X, 2) + Math.Pow(endPos.Y - startPos.Y, 2));
-            var scaledBlipSize = BASE_BLIP_SIZE * MAP_SCALE;
+            var scaledBlipSize = BaseBlipSize * MapScale;
 
             if (distance < scaledBlipSize * 1.2f)
                 return;
         }
 
-        for (int i = 0; i < waypoints.Count - 1; i++)
+        for (var i = 0; i < waypoints.Count - 1; i++)
         {
             var start = waypoints[i];
             var end = waypoints[i + 1];
@@ -492,8 +503,8 @@ public sealed partial class TacticalMapControl : TextureRect
 
                 if (lineLength > 0)
                 {
-                    var scaledBlipSize = BASE_BLIP_SIZE * MAP_SCALE;
-                    var arrowStartOffset = (int)(scaledBlipSize * 0.45f + ARROW_LENGTH);
+                    var scaledBlipSize = BaseBlipSize * MapScale;
+                    var arrowStartOffset = (int)(scaledBlipSize * 0.45f + ArrowLength);
 
                     if (lineLength > arrowStartOffset)
                     {
@@ -511,8 +522,8 @@ public sealed partial class TacticalMapControl : TextureRect
         if (waypoints.Count >= 2)
         {
             AddSimpleArrowHead(
-                ConvertIndicesToLineCoordinates(waypoints[waypoints.Count - 2]),
-                ConvertIndicesToLineCoordinates(waypoints[waypoints.Count - 1]),
+                ConvertIndicesToLineCoordinates(waypoints[^2]),
+                ConvertIndicesToLineCoordinates(waypoints[^1]),
                 pathColor
             );
         }
@@ -523,9 +534,10 @@ public sealed partial class TacticalMapControl : TextureRect
         var direction = toUI - fromUI;
         var totalLength = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
 
-        if (totalLength < 1) return;
+        if (totalLength < 1)
+            return;
 
-        for (double distance = 0; distance < totalLength; distance += DASH_LENGTH + GAP_LENGTH)
+        for (double distance = 0; distance < totalLength; distance += DashLength + GapLength)
         {
             Lines.Add(new TacticalMapLine(
                 new Vector2i(
@@ -533,8 +545,8 @@ public sealed partial class TacticalMapControl : TextureRect
                     fromUI.Y + (int)(direction.Y / totalLength * distance)
                 ),
                 new Vector2i(
-                    fromUI.X + (int)(direction.X / totalLength * Math.Min(distance + DASH_LENGTH, totalLength)),
-                    fromUI.Y + (int)(direction.Y / totalLength * Math.Min(distance + DASH_LENGTH, totalLength))
+                    fromUI.X + (int)(direction.X / totalLength * Math.Min(distance + DashLength, totalLength)),
+                    fromUI.Y + (int)(direction.Y / totalLength * Math.Min(distance + DashLength, totalLength))
                 ),
                 color
             ));
@@ -546,9 +558,10 @@ public sealed partial class TacticalMapControl : TextureRect
         var direction = end - start;
         var length = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
 
-        if (length < 10) return;
+        if (length < 10)
+            return;
 
-        var scaledBlipSize = BASE_BLIP_SIZE * MAP_SCALE;
+        var scaledBlipSize = BaseBlipSize * MapScale;
         var blipEdgeOffset = (int)(scaledBlipSize * 0.45f);
 
         var arrowTip = new Vector2i(
@@ -557,21 +570,21 @@ public sealed partial class TacticalMapControl : TextureRect
         );
 
         var arrowBase = new Vector2i(
-            arrowTip.X - (int)(direction.X / length * ARROW_LENGTH),
-            arrowTip.Y - (int)(direction.Y / length * ARROW_LENGTH)
+            arrowTip.X - (int)(direction.X / length * ArrowLength),
+            arrowTip.Y - (int)(direction.Y / length * ArrowLength)
         );
 
         var perpX = -direction.Y / length;
         var perpY = direction.X / length;
 
         var leftWing = new Vector2i(
-            arrowBase.X + (int)(perpX * ARROW_WIDTH),
-            arrowBase.Y + (int)(perpY * ARROW_WIDTH)
+            arrowBase.X + (int)(perpX * ArrowWidth),
+            arrowBase.Y + (int)(perpY * ArrowWidth)
         );
 
         var rightWing = new Vector2i(
-            arrowBase.X - (int)(perpX * ARROW_WIDTH),
-            arrowBase.Y - (int)(perpY * ARROW_WIDTH)
+            arrowBase.X - (int)(perpX * ArrowWidth),
+            arrowBase.Y - (int)(perpY * ArrowWidth)
         );
 
         Lines.Add(new TacticalMapLine(arrowTip, leftWing, color));
@@ -586,8 +599,8 @@ public sealed partial class TacticalMapControl : TextureRect
         if (waypoints.Count >= 2)
         {
             AddSimpleArrowHead(
-                ConvertIndicesToLineCoordinates(waypoints[waypoints.Count - 2]),
-                ConvertIndicesToLineCoordinates(waypoints[waypoints.Count - 1]),
+                ConvertIndicesToLineCoordinates(waypoints[^2]),
+                ConvertIndicesToLineCoordinates(waypoints[^1]),
                 pathColor
             );
         }
@@ -595,7 +608,8 @@ public sealed partial class TacticalMapControl : TextureRect
 
     public void ShowTunnelInfo(Vector2i indices, string tunnelName, Vector2 screenPosition)
     {
-        if (_tunnelInfoLabel == null) return;
+        if (_tunnelInfoLabel == null)
+            return;
 
         _tunnelInfoLabel.Text = tunnelName;
         _tunnelInfoLabel.Visible = true;

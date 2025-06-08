@@ -29,7 +29,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Construction.Tunnel;
 
@@ -490,20 +489,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         }
 
         _container.Insert(traversingXeno, mobContainer);
-
-        _ui.CloseUi(destinationXenoTunnel.Owner, SelectDestinationTunnelUI.Key, traversingXeno);
-        _ui.CloseUi(startingTunnel, SelectDestinationTunnelUI.Key, traversingXeno);
-
-        var destinationTunnelId = destinationXenoTunnel.Owner;
-        var userId = traversingXeno;
-
-        Timer.Spawn(100, () => {
-            if (EntityManager.EntityExists(destinationTunnelId) &&
-                EntityManager.EntityExists(userId))
-            {
-                _ui.OpenUi(destinationTunnelId, SelectDestinationTunnelUI.Key, userId);
-            }
-        });
+        _ui.OpenUi(destinationXenoTunnel.Owner, SelectDestinationTunnelUI.Key, args.User);
 
         args.Handled = true;
     }
@@ -538,12 +524,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void GetAllAvailableTunnels(Entity<XenoTunnelComponent> destinationXenoTunnel, ref OpenBoundInterfaceMessage args)
     {
         var hive = Hive.GetHive(destinationXenoTunnel.Owner);
-        if (hive is null ||
-            !TryComp(hive, out HiveComponent? hiveComp))
-        {
+        if (!TryComp(hive, out HiveComponent? hiveComp))
             return;
-        }
-
 
         var hiveTunnels = hiveComp.HiveTunnels;
         Dictionary<string, NetEntity> netHiveTunnels = new();

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
@@ -28,7 +26,7 @@ public struct TunnelPathfindingConfig
         TunnelHopPenalty = 0.3,
         BacktrackingPenalty = 5.0,
         MaxConnectionDistance = 800.0,
-        MaxIntermediateTunnels = 1
+        MaxIntermediateTunnels = 1,
     };
 }
 
@@ -41,7 +39,7 @@ public struct TunnelCacheEntry
 }
 
 [UsedImplicitly]
-public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
+public sealed class SelectDestinationTunnelBui : BoundUserInterface
 {
     [Dependency] private readonly IPlayerManager _player = default!;
 
@@ -57,9 +55,8 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
     private readonly Dictionary<(Vector2i, Vector2i), double> _distanceCache = new();
     private readonly Dictionary<(Vector2i, Vector2i), List<Vector2i>> _pathCache = new();
     private readonly List<TacticalMapBlip> _reusableBlipsList = new();
-    private readonly HashSet<int> _reusableTunnelSet = new();
 
-    private bool _cacheValid = false;
+    private bool _cacheValid;
     private Vector2i? _cachedCurrentPos;
     private Vector2i? _cachedSelectedPos;
 
@@ -70,20 +67,17 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        if (!EntMan.EntityExists(Owner))
-        {
-            Close();
+        if (state is not SelectDestinationTunnelInterfaceState newState)
             return;
-        }
 
-        base.UpdateState(state);
+        Refresh(newState);
+    }
 
-        if (state is not SelectDestinationTunnelInterfaceState newState) return;
-
-        NetEntity? previouslySelectedTunnel = _selectedTunnel;
-
-        bool tunnelsChanged = !_availableTunnels.SequenceEqual(newState.HiveTunnels);
-        _availableTunnels = newState.HiveTunnels;
+    private void Refresh(SelectDestinationTunnelInterfaceState state)
+    {
+        var previouslySelectedTunnel = _selectedTunnel;
+        var tunnelsChanged = !_availableTunnels.SequenceEqual(state.HiveTunnels);
+        _availableTunnels = state.HiveTunnels;
 
         if (tunnelsChanged)
         {
@@ -98,7 +92,7 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
         _window.SelectableTunnels.Clear();
 
-        UpdateTunnelList(newState);
+        UpdateTunnelList(state);
         UpdateSelectedTunnel(previouslySelectedTunnel);
         UpdateTacticalMapDisplay();
         UpdateBlips();
@@ -117,6 +111,9 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
     private void UpdateTunnelList(SelectDestinationTunnelInterfaceState newState)
     {
+        if (_window == null)
+            return;
+
         _currentTunnelNetEntityKey = null;
         string? currentTunnelName = null;
 
@@ -129,41 +126,41 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
                 continue;
             }
 
-            _window!.SelectableTunnels.Add(new ItemList.Item(_window.SelectableTunnels)
+            _window.SelectableTunnels.Add(new ItemList.Item(_window.SelectableTunnels)
             {
                 Text = tunnel.Key,
                 Metadata = tunnel.Value
             });
         }
 
-        _window!.UpdateCurrentTunnelDisplay(currentTunnelName);
+        _window.UpdateCurrentTunnelDisplay(currentTunnelName);
     }
 
     private void UpdateSelectedTunnel(NetEntity? previouslySelectedTunnel)
     {
+        if (_window == null)
+            return;
+
         if (previouslySelectedTunnel != null && _availableTunnels.ContainsValue(previouslySelectedTunnel.Value))
         {
             _selectedTunnel = previouslySelectedTunnel;
-            _window!.SelectButton.Disabled = false;
+            _window.SelectButton.Disabled = false;
             _window.UpdateSelectedTunnelDisplay(GetTunnelNameCached(_selectedTunnel.Value));
         }
         else
         {
             _selectedTunnel = null;
-            _window!.SelectButton.Disabled = true;
+            _window.SelectButton.Disabled = true;
             _window.UpdateSelectedTunnelDisplay(null);
         }
     }
 
     private string? GetTunnelNameCached(NetEntity tunnel)
     {
-        int entityId = (int)tunnel;
-        if (_tunnelCache.TryGetValue(entityId, out var cached))
-        {
-            return cached.Name;
-        }
-
-        return GetTunnelName(tunnel);
+        var entityId = (int)tunnel;
+        return _tunnelCache.TryGetValue(entityId, out var cached)
+            ? cached.Name
+            : GetTunnelName(tunnel);
     }
 
     private string? GetTunnelName(NetEntity tunnel)
@@ -178,7 +175,8 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
     private void UpdateTacticalMapDisplay()
     {
-        if (_window == null) return;
+        if (_window == null)
+            return;
 
         if (_player.LocalEntity is { } player &&
             EntMan.TryGetComponent(player, out TacticalMapUserComponent? user) &&
@@ -190,7 +188,8 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
     private void BuildTunnelCache(TacticalMapUserComponent user)
     {
-        if (_cacheValid) return;
+        if (_cacheValid)
+            return;
 
         _tunnelCache.Clear();
         _positionToEntityCache.Clear();
@@ -206,10 +205,10 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
         {
             foreach (var kvp in blipCollection)
             {
-                int entityId = kvp.Key;
+                var entityId = kvp.Key;
                 var blip = kvp.Value;
 
-                string? tunnelName = GetTunnelNameByEntityId(entityId);
+                var tunnelName = GetTunnelNameByEntityId(entityId);
                 if (tunnelName != null && _availableTunnels.ContainsKey(tunnelName))
                 {
                     var cacheEntry = new TunnelCacheEntry
@@ -243,7 +242,8 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
         _reusableBlipsList.Clear();
 
         var (currentTunnelPosition, selectedTunnelPosition) = ProcessBlipCollections(user,
-            _selectedTunnel != null ? (int)_selectedTunnel.Value : null, _reusableBlipsList);
+            _selectedTunnel != null ? (int)_selectedTunnel.Value : null,
+            _reusableBlipsList);
 
         _window.TacticalMapWrapper.UpdateBlips(_reusableBlipsList.ToArray());
 
@@ -261,14 +261,17 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
             output.Add(_currentTunnelNetEntityKey.Value);
 
         foreach (var netTunnel in _availableTunnels.Values)
+        {
             output.Add((int)netTunnel);
+        }
 
         if (selectedTunnelKey.HasValue)
             output.Add(selectedTunnelKey.Value);
     }
 
     private (Vector2i? currentPos, Vector2i? selectedPos) ProcessBlipCollections(TacticalMapUserComponent user,
-        int? selectedTunnelKey, List<TacticalMapBlip> blipsList)
+        int? selectedTunnelKey,
+        List<TacticalMapBlip> blipsList)
     {
         Vector2i? currentTunnelPosition = null;
         Vector2i? selectedTunnelPosition = null;
@@ -327,7 +330,7 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
     private List<Vector2i> GetTunnelsOnDirectLine(Vector2i start, Vector2i end, List<Vector2i> allPositions)
     {
-        var maxDistanceFromLine = 30.0;
+        const double maxDistanceFromLine = 30.0;
 
         var tunnelsOnLine = allPositions
             .Where(pos => pos != start && pos != end)
@@ -341,13 +344,15 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
     private bool IsDirectlyOnPath(Vector2i start, Vector2i end, Vector2i tunnel, double maxDistance)
     {
         var distanceFromLine = CalculateDistanceFromLine(start, end, tunnel);
-        if (distanceFromLine > maxDistance) return false;
+        if (distanceFromLine > maxDistance)
+            return false;
 
         var minDistanceFromEndpoints = 50.0;
         var distanceFromStart = CalculateDistance(start, tunnel);
         var distanceFromEnd = CalculateDistance(end, tunnel);
 
-        if (distanceFromStart < minDistanceFromEndpoints || distanceFromEnd < minDistanceFromEndpoints) return false;
+        if (distanceFromStart < minDistanceFromEndpoints || distanceFromEnd < minDistanceFromEndpoints)
+            return false;
 
         var progress = CalculateProgressAlongPath(start, end, tunnel);
         return progress >= 0.15 && progress <= 0.85;
@@ -356,7 +361,7 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
     private List<Vector2i> BuildOptimalPath(Vector2i start, Vector2i end, List<Vector2i> tunnelsOnLine)
     {
         var path = new List<Vector2i> { start };
-        int addedIntermediateTunnels = 0;
+        var addedIntermediateTunnels = 0;
 
         if (_pathfindingConfig.MaxIntermediateTunnels <= 0)
         {
@@ -365,14 +370,17 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
         }
 
         var tunnelCosts = tunnelsOnLine.Select(tunnel => new
-        {
-            Position = tunnel,
-            Cost = CalculateTunnelCost(path.Last(), tunnel, end)
-        }).OrderBy(t => t.Cost).ToList();
+            {
+                Position = tunnel,
+                Cost = CalculateTunnelCost(path.Last(), tunnel, end)
+            })
+            .OrderBy(t => t.Cost)
+            .ToList();
 
         foreach (var tunnelInfo in tunnelCosts)
         {
-            if (addedIntermediateTunnels >= _pathfindingConfig.MaxIntermediateTunnels) break;
+            if (addedIntermediateTunnels >= _pathfindingConfig.MaxIntermediateTunnels)
+                break;
 
             var distanceFromLast = CalculateDistance(path.Last(), tunnelInfo.Position);
             if (distanceFromLast <= _pathfindingConfig.MaxConnectionDistance)
@@ -421,7 +429,8 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
         var pointVec = new Vector2(point.X - start.X, point.Y - start.Y);
 
         var totalLengthSquared = totalVec.LengthSquared();
-        if (totalLengthSquared < 0.001) return 0;
+        if (totalLengthSquared < 0.001)
+            return 0;
 
         var dotProduct = Vector2.Dot(pointVec, totalVec);
         return dotProduct / totalLengthSquared;
@@ -433,7 +442,7 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
         if (_distanceCache.TryGetValue(key, out var cached))
             return cached;
 
-        double result = Math.Sqrt(Math.Pow(pos2.X - pos1.X, 2) + Math.Pow(pos2.Y - pos1.Y, 2));
+        var result = Math.Sqrt(Math.Pow(pos2.X - pos1.X, 2) + Math.Pow(pos2.Y - pos1.Y, 2));
         _distanceCache[key] = result;
         return result;
     }
@@ -453,7 +462,8 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
     private void UpdateDirectionalArrow(Vector2i? currentPosition, Vector2i? selectedPosition)
     {
-        if (_window == null) return;
+        if (_window == null)
+            return;
 
         _window.TacticalMapWrapper.Map.RemoveLinesByColor(Color.FromHex("#F535AA"));
 
@@ -490,61 +500,81 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
     private void OnBlipClicked(Vector2i clickedIndices)
     {
-        if (_player.LocalEntity is not { } player) return;
+        if (_window == null)
+            return;
 
-        if (!EntMan.TryGetComponent(player, out TacticalMapUserComponent? user)) return;
+        if (_player.LocalEntity is not { } player)
+            return;
 
-        int? foundEntityId = _positionToEntityCache.TryGetValue(clickedIndices, out var entityId)
+        if (!EntMan.TryGetComponent(player, out TacticalMapUserComponent? user))
+            return;
+
+        var foundEntityId = _positionToEntityCache.TryGetValue(clickedIndices, out var entityId)
             ? entityId
             : FindEntityIdAtIndices(clickedIndices, user);
 
-        if (foundEntityId.HasValue)
-        {
-            string? tunnelName = GetTunnelNameByEntityId(foundEntityId.Value);
+        if (!foundEntityId.HasValue)
+            return;
 
-            if (tunnelName != null && _availableTunnels.ContainsKey(tunnelName))
-            {
-                if (_currentTunnelNetEntityKey.HasValue && foundEntityId.Value == _currentTunnelNetEntityKey.Value) return;
+        var tunnelName = GetTunnelNameByEntityId(foundEntityId.Value);
+        if (tunnelName == null || !_availableTunnels.TryGetValue(tunnelName, out var value))
+            return;
 
-                _selectedTunnel = _availableTunnels[tunnelName];
-                _window!.SelectButton.Disabled = false;
-                _window.UpdateSelectedTunnelDisplay(tunnelName);
-                UpdateBlips();
-            }
-        }
+        if (_currentTunnelNetEntityKey.HasValue && foundEntityId.Value == _currentTunnelNetEntityKey.Value)
+            return;
+
+        _selectedTunnel = value;
+        _window.SelectButton.Disabled = false;
+        _window.UpdateSelectedTunnelDisplay(tunnelName);
+        UpdateBlips();
     }
 
     private void OnBlipRightClicked(Vector2i clickedIndices, string _)
     {
-        if (_player.LocalEntity is not { } player ||
-            !EntMan.TryGetComponent(player, out TacticalMapUserComponent? user)) return;
+        if (_window == null)
+            return;
 
-        int? foundEntityId = _positionToEntityCache.TryGetValue(clickedIndices, out var entityId)
+        if (_player.LocalEntity is not { } player ||
+            !EntMan.TryGetComponent(player, out TacticalMapUserComponent? user))
+        {
+            return;
+        }
+
+        var foundEntityId = _positionToEntityCache.TryGetValue(clickedIndices, out var entityId)
             ? entityId
             : FindEntityIdAtIndices(clickedIndices, user);
 
-        if (foundEntityId.HasValue)
-        {
-            string? tunnelName = GetTunnelNameByEntityId(foundEntityId.Value);
-            if (tunnelName != null && _availableTunnels.ContainsKey(tunnelName))
-            {
-                Vector2 screenPos = _window!.TacticalMapWrapper.Map.IndicesToPosition(clickedIndices);
-                _window.TacticalMapWrapper.Map.ShowTunnelInfo(clickedIndices, tunnelName, screenPos);
-                _window.TacticalMapWrapper.Canvas.ShowTunnelInfo(clickedIndices, tunnelName, screenPos);
-            }
-        }
+        if (!foundEntityId.HasValue)
+            return;
+
+        var tunnelName = GetTunnelNameByEntityId(foundEntityId.Value);
+        if (tunnelName == null || !_availableTunnels.ContainsKey(tunnelName))
+            return;
+
+        var screenPos = _window.TacticalMapWrapper.Map.IndicesToPosition(clickedIndices);
+        _window.TacticalMapWrapper.Map.ShowTunnelInfo(clickedIndices, tunnelName, screenPos);
+        _window.TacticalMapWrapper.Canvas.ShowTunnelInfo(clickedIndices, tunnelName, screenPos);
     }
 
     private int? FindEntityIdAtIndices(Vector2i indices, TacticalMapUserComponent user)
     {
         foreach (var kvp in user.XenoStructureBlips)
-            if (kvp.Value.Indices == indices) return kvp.Key;
+        {
+            if (kvp.Value.Indices == indices)
+                return kvp.Key;
+        }
 
         foreach (var kvp in user.XenoBlips)
-            if (kvp.Value.Indices == indices) return kvp.Key;
+        {
+            if (kvp.Value.Indices == indices)
+                return kvp.Key;
+        }
 
         foreach (var kvp in user.MarineBlips)
-            if (kvp.Value.Indices == indices) return kvp.Key;
+        {
+            if (kvp.Value.Indices == indices)
+                return kvp.Key;
+        }
 
         return null;
     }
@@ -560,6 +590,9 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
     {
         base.Open();
 
+        if (_window is { IsOpen: true })
+            return;
+
         _window = this.CreateWindow<SelectDestinationTunnelWindow>();
         _window.SelectButton.Disabled = true;
 
@@ -570,13 +603,13 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
         wrapper.Map.MouseFilter = MouseFilterMode.Stop;
         wrapper.Canvas.MouseFilter = MouseFilterMode.Stop;
 
-        _window.ShowOnlyTunnelsCheckbox.OnPressed += (BaseButton.ButtonEventArgs args) =>
+        _window.ShowOnlyTunnelsCheckbox.OnPressed += args =>
         {
             _showOnlyTunnels = args.Button.Pressed;
             UpdateBlips();
         };
 
-        _window.SelectableTunnels.OnItemSelected += (ItemList.ItemListSelectedEventArgs args) =>
+        _window.SelectableTunnels.OnItemSelected += args =>
         {
             _window.SelectButton.Disabled = false;
             _selectedTunnel = (NetEntity)args.ItemList[args.ItemIndex].Metadata!;
@@ -584,9 +617,9 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
             UpdateBlips();
         };
 
-        _window.SelectButton.OnButtonDown += (BaseButton.ButtonEventArgs args) =>
+        _window.SelectButton.OnButtonDown += args =>
         {
-            
+
             if (_selectedTunnel is null)
             {
                 args.Button.Disabled = true;
