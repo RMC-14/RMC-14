@@ -258,6 +258,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         ent.Comp.BufferTransferMode = args.Mode;
         Dirty(ent);
+        RefreshUIs(ent);
     }
 
     private void OnBufferTransferMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterBufferTransferMsg args)
@@ -310,6 +311,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         ent.Comp.SelectedType = args.Type;
         Dirty(ent);
+        RefreshUIs(ent);
     }
 
     private void OnCreatePillsMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterCreatePillsMsg args)
