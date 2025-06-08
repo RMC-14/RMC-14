@@ -25,4 +25,7 @@ public sealed partial class DropshipNavigationComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public float SkillRechargeMultiplier = 0.75f;
+
+    [DataField, AutoNetworkedField]
+    public bool Hijackable = true;
 }
