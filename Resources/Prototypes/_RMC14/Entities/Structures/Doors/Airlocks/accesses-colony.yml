@@ -135,6 +135,14 @@
     access: [["RMCAccessTSEPA"], ["CMAccessColonyCommand"]]
 
 - type: entity
+  parent: CMAirlockSecurity
+  id: RMCAirlockSecurityLockedTSEPA
+  suffix: TSEPA, Colony, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"], ["CMAccessColonyCommand"]]
+
+- type: entity
   parent: RMCAirlockGlassSecurityLockedTSEPA
   id: RMCAirlockGlassSecurityLockedTSEPAAlt
   name: airlock

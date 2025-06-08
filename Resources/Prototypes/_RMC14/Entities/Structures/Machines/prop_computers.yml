@@ -51,7 +51,7 @@
 - type: entity
   parent: RMCPropCommunicationsConsole
   id: RMCPropCommunicationsConsoleAlt
-  suffix: Alt
+  suffix: Prop, Alt
   components:
   - type: Sprite
     state: comm_alt
@@ -79,3 +79,11 @@
   components:
   - type: Sprite
     state: jas
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCIdentificationComputer
+  name: identification computer
+  components:
+  - type: Sprite
+    state: engineering_terminal
