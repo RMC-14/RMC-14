@@ -781,3 +781,21 @@
     state: billboard2_d
   - type: Icon
     state: billboard2_d
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount29
+  components:
+  - type: Sprite
+    state: billboard5_d
+  - type: Icon
+    state: billboard5_d
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount30
+  components:
+  - type: Sprite
+    state: billboard1_f
+  - type: Icon
+    state: billboard1_f

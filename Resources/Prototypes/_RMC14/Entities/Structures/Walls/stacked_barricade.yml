@@ -1,0 +1,40 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCBarricadeStacked
+  name: metal Barricades
+  description: Two metal barricades stacked ontop of eachother to make a makeshift wall.
+  components:
+  - type: Rotatable
+  - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.38"
+        density: 500
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: RotationDrawDepth
+    southDrawDepth: OverMobs
+  - type: Barricade
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMBarricade
+  - type: InteractionOutline
+  - type: RMCDropshipBlocked
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/Barricades/stacked_barricade.rsi
+    state: metal
+    drawdepth: WallTops
+    offset: -0.5, 0
+
+- type: entity
+  parent: RMCBarricadeStacked
+  id: RMCBarricadeStackedFlipped
+  components:
+  - type: Sprite
+    state: metal_f
+    offset: 0.5, 0

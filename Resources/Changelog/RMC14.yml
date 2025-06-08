@@ -1,88 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Fixed Power loaders continuing to load or unload after the operator gets
-      out.
-    type: Fix
-  id: 1330
-  time: '2025-02-16T04:16:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5643
-- author: Vermidia
-  changes:
-  - message: Fixed xenos being unable to pat fire on marines.
-    type: Fix
-  id: 1331
-  time: '2025-02-16T04:16:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5644
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed intelligence headband and squad beret not spawning
-    type: Fix
-  id: 1332
-  time: '2025-02-16T04:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5637
-- author: Vermidia
-  changes:
-  - message: Fixed burrower visibility while burrowed. It is correctly invisible to
-      all but itself, and is transparent on the xeno overlay.
-    type: Fix
-  - message: Fixed burrower burrow/unburrow thinking you were still unmoving, preventing
-      movement prediction from kicking in. mostly.
-    type: Fix
-  - message: Fixed burrower not having seperate burrow and tunneling cooldowns. The
-      burrow cooldown is 2 seconds and kicks in when successfully burrowing, unburrowing,
-      or cancelling a burrow. Tunneling is 7 seconds and kicks in when cancelling
-      a tunneling.
-    type: Fix
-  id: 1333
-  time: '2025-02-16T04:19:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5628
-- author: Vermidia
-  changes:
-  - message: More xeno chatsans, most for abbreviated terms, intel, and survivors.
-    type: Add
-  - message: Scout is no longer part of the xeno chatsan. Scout spec and scout specialist
-      are sanitized instead.
-    type: Tweak
-  id: 1334
-  time: '2025-02-16T04:20:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5634
-- author: Ian321
-  changes:
-  - message: Survivors can handle intel after being rescued.
-    type: Tweak
-  id: 1336
-  time: '2025-02-16T04:26:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5594
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added equipment visuals when turning on night vision goggles.
-    type: Add
-  id: 1337
-  time: '2025-02-16T04:25:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5633
-- author: Whisper
-  changes:
-  - message: Added Zver' Nemesis figurine
-    type: Add
-  id: 1338
-  time: '2025-02-16T04:26:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5609
-- author: Djvarik
-  changes:
-  - message: Space dollars are now legal UN tender.
-    type: Tweak
-  id: 1339
-  time: '2025-02-16T04:30:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5601
-- author: Djvarik
-  changes:
-  - message: The LZ sign on Fiorina now says "UN" instead of "UA" and has the correct
-      flag.
-    type: Tweak
-  id: 1340
-  time: '2025-02-16T04:32:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5620
 - author: Vermidia
   changes:
   - message: Fixed Resin Surge not working through membranes/windows
@@ -5228,5 +5144,97 @@
   id: 1832
   time: '2025-06-08T06:16:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6353
+- author: Dutch-VanDerLinde
+  changes:
+  - message: FORECON Survivors Squad Leader, Marksman, Smart Gun Operator, and support
+      technician now require some extra playtime, compared to normal survivors.
+    type: Add
+  id: 1833
+  time: '2025-06-08T06:53:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6593
+- author: noctyrnal
+  changes:
+  - message: Added additional Xeno chat sanitization.
+    type: Add
+  id: 1834
+  time: '2025-06-08T07:36:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6584
+- author: Vixting
+  changes:
+  - message: Added a new tunnel UI that shows you where each tunnel is on a map when
+      selected. The map on the new UI also lets you directly click on a tunnel to
+      select it.
+    type: Add
+  id: 1835
+  time: '2025-06-08T09:12:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6636
+- author: noctyrnal
+  changes:
+  - message: Added a new version of the "Golden Arrow" map for PVE.
+    type: Add
+  - message: Added multiple missing props found on the Golden Arrow.
+    type: Add
+  id: 1836
+  time: '2025-06-08T12:08:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6646
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Corporate survivor now ranks up from sum of time in liaison and time
+      in corporate survivor.
+    type: Tweak
+  id: 1837
+  time: '2025-06-08T12:09:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6550
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added a 70 hour playtime reward for security survivors, senior officer
+      rank.
+    type: Add
+  id: 1838
+  time: '2025-06-08T12:23:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6088
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Reworked the construction system. Press Z with a material inhand to open
+      the menu. The G menu for construction still works, with the added restrictions.
+    type: Add
+  - message: You will now be restricted to building objects one at a time, and only
+      on the tile you're currently on.
+    type: Tweak
+  - message: Added construction skill requirements for building some objects
+    type: Add
+  id: 1839
+  time: '2025-06-08T12:30:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6594
+- author: noctyrnal
+  changes:
+  - message: Added missing content for Hybrisa.
+    type: Add
+  - message: The television can now be rotated.
+    type: Tweak
+  - message: The "ON" Phonebox now glows.
+    type: Tweak
+  id: 1840
+  time: '2025-06-08T12:29:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6553
+- author: Vermidia
+  changes:
+  - message: Fixed base crusher's charge not deleting or doing enough damage against
+      some objects.
+    type: Fix
+  - message: Fixed screech not stacking with existing stuns.
+    type: Fix
+  - message: Fixed ground acid stunning if you were downed.
+    type: Fix
+  id: 1841
+  time: '2025-06-08T12:31:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6568
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed sentries not being able to be deployed if you have 0 skill.
+    type: Fix
+  id: 1842
+  time: '2025-06-08T12:33:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6524
 Name: RMC14
 Order: -1
