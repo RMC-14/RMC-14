@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed intelligence headband and squad beret not spawning
-    type: Fix
-  id: 1332
-  time: '2025-02-16T04:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5637
 - author: Vermidia
   changes:
   - message: Fixed burrower visibility while burrowed. It is correctly invisible to
@@ -5228,5 +5221,14 @@
   id: 1834
   time: '2025-06-08T07:36:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6584
+- author: Vixting
+  changes:
+  - message: Added a new tunnel UI that shows you where each tunnel is on a map when
+      selected. The map on the new UI also lets you directly click on a tunnel to
+      select it.
+    type: Add
+  id: 1835
+  time: '2025-06-08T09:12:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6636
 Name: RMC14
 Order: -1
