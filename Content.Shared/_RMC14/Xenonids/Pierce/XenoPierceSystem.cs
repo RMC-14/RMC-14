@@ -46,7 +46,7 @@ public sealed class XenoPierceSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         if (_transform.GetGrid(args.Target) is not { } gridId || !HasComp<MapGridComponent>(gridId))

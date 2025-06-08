@@ -1,12 +1,13 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
-using Content.Shared.FixedPoint;
+using Content.Shared.Interaction;
 
 namespace Content.Shared._RMC14.Actions;
 
 public sealed class RMCActionsSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     private EntityQuery<ActionSharedCooldownComponent> _actionSharedCooldownQuery;
 
@@ -17,7 +18,9 @@ public sealed class RMCActionsSystem : EntitySystem
         SubscribeLocalEvent<ActionSharedCooldownComponent, ActionPerformedEvent>(OnSharedCooldownPerformed);
 
         SubscribeLocalEvent<ActionCooldownComponent, RMCActionUseEvent>(OnCooldownUse);
-        
+
+        SubscribeLocalEvent<ActionInRangeUnobstructedComponent, RMCActionUseAttemptEvent>(OnInRangeUnobstructedUseAttempt);
+
         SubscribeLocalEvent<InstantActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
         SubscribeLocalEvent<EntityTargetActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
         SubscribeLocalEvent<WorldTargetActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
@@ -50,7 +53,7 @@ public sealed class RMCActionsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Enable all events that have a shared cooldown with the provided action 
+    /// Enable all events that have a shared cooldown with the provided action
     /// </summary>
     public void EnableSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer)
     {
@@ -58,7 +61,7 @@ public sealed class RMCActionsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Disable all events that have a shared cooldown with the provided action 
+    /// Disable all events that have a shared cooldown with the provided action
     /// </summary>
     public void DisableSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer)
     {
@@ -66,7 +69,7 @@ public sealed class RMCActionsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Sets the enabled status of all events that have a shared cooldown with the provided action 
+    /// Sets the enabled status of all events that have a shared cooldown with the provided action
     /// </summary>
     private void SetStatusOfSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer, bool newStatus)
     {
@@ -146,25 +149,64 @@ public sealed class RMCActionsSystem : EntitySystem
         _actions.SetIfBiggerCooldown(ent, ent.Comp.Cooldown);
     }
 
-    public bool CanUseActionPopup(EntityUid user, EntityUid action)
+    private void OnInRangeUnobstructedUseAttempt(Entity<ActionInRangeUnobstructedComponent> ent, ref RMCActionUseAttemptEvent args)
     {
-        var ev = new RMCActionUseAttemptEvent(user);
+        if (args.Cancelled)
+            return;
+
+        if (args.Target is not { } target)
+            return;
+
+        if (!_interaction.InRangeUnobstructed(ent.Owner, target, ent.Comp.Range))
+            args.Cancelled = true;
+    }
+
+    public bool CanUseActionPopup(EntityUid user, EntityUid action, EntityUid? target = null)
+    {
+        var ev = new RMCActionUseAttemptEvent(user, target);
         RaiseLocalEvent(action, ref ev);
         return !ev.Cancelled;
     }
 
-    public void ActionUsed(EntityUid user, EntityUid action)
+    private void ActionUsed(EntityUid user, EntityUid action)
     {
         var ev = new RMCActionUseEvent(user);
         RaiseLocalEvent(action, ref ev);
     }
 
-    public bool TryUseAction(EntityUid user, EntityUid action)
+    public bool TryUseAction(EntityUid user, EntityUid action, EntityUid target)
     {
-        if (!CanUseActionPopup(user, action))
+        if (!CanUseActionPopup(user, action, target))
             return false;
 
         ActionUsed(user, action);
+        return true;
+    }
+
+    public bool TryUseAction(InstantActionEvent action)
+    {
+        if (!CanUseActionPopup(action.Performer, action.Action))
+            return false;
+
+        ActionUsed(action.Performer, action.Action);
+        return true;
+    }
+
+    public bool TryUseAction(EntityTargetActionEvent action)
+    {
+        if (!CanUseActionPopup(action.Performer, action.Action, action.Target))
+            return false;
+
+        ActionUsed(action.Performer, action.Action);
+        return true;
+    }
+
+    public bool TryUseAction(WorldTargetActionEvent action)
+    {
+        if (!CanUseActionPopup(action.Performer, action.Action))
+            return false;
+
+        ActionUsed(action.Performer, action.Action);
         return true;
     }
 }

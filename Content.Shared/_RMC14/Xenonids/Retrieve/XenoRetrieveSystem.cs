@@ -156,7 +156,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
         if (!TryComp(target, out PhysicsComponent? physics))
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, action.Value))
+        if (!_rmcActions.TryUseAction(xeno, action.Value, target))
             return;
 
         _rmcPulling.TryStopAllPullsFromAndOn(target);
