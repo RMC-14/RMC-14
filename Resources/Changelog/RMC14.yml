@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: You can now actually read your collected clues inside the tech tree window.
-    type: Fix
-  id: 1324
-  time: '2025-02-11T19:53:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5591
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed light armor chosen from the intel vendor appearing as medium armor
@@ -5193,5 +5186,13 @@
   id: 1826
   time: '2025-06-07T10:02:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6640
+- author: Vermidia
+  changes:
+  - message: Fixed light armors having better explosion protection than medium. Their
+      values are now swapped.
+    type: Fix
+  id: 1827
+  time: '2025-06-08T00:04:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6648
 Name: RMC14
 Order: -1
