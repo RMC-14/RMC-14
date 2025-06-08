@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseMachinePowered
   id: RMCMedilathe
   name: medilathe
@@ -156,7 +156,7 @@
   - CMAdvFirstAidKit
   - CMFirstAidO2Kit
   - RMCRadiationAidKit
-  #    - Syringe Case (1000 Plastic)
+  - RMCSyringeCase
   - RMCSurgicalTrayEmpty
   - RMCVialBox
   - RMCPouchReagentCanister
