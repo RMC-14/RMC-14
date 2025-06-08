@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.SpecialBox;
+using Content.Shared._RMC14.AegisCrate;
 using Content.Shared.Storage;
 using Content.Shared.Interaction;
 using Robust.Shared.GameObjects;
@@ -13,9 +13,9 @@ using Content.Shared.Physics;
 using Robust.Shared.Physics;
 using Content.Shared.Tag;
 
-namespace Content.Server._RMC14.SpecialBox;
+namespace Content.Server._RMC14.AegisCrate;
 
-public sealed class SpecialBoxSystem : EntitySystem
+public sealed class AegisCrateSystem : EntitySystem
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
@@ -26,31 +26,31 @@ public sealed class SpecialBoxSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<SpecialBoxComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<SpecialBoxComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<AegisCrateComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<AegisCrateComponent, InteractHandEvent>(OnInteractHand);
         // Subscribe to state change event
-        SubscribeLocalEvent<SpecialBoxComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<AegisCrateComponent, ComponentInit>(OnComponentInit);
     }
 
-    private void OnStartup(EntityUid uid, SpecialBoxComponent component, ComponentStartup args)
+    private void OnStartup(EntityUid uid, AegisCrateComponent component, ComponentStartup args)
     {
         var x = MathF.Floor(Transform(uid).WorldPosition.X) + 0.5f;
         var y = MathF.Floor(Transform(uid).WorldPosition.Y) + 0.5f;
         Transform(uid).WorldPosition = new Vector2(x, y);
     }
 
-    private void OnComponentInit(EntityUid uid, SpecialBoxComponent comp, ComponentInit args)
+    private void OnComponentInit(EntityUid uid, AegisCrateComponent comp, ComponentInit args)
     {
         comp.StateChanged += OnStateChanged;
     }
 
-    private void OnStateChanged(EntityUid uid, SpecialBoxComponent comp)
+    private void OnStateChanged(EntityUid uid, AegisCrateComponent comp)
     {
-        if (comp.State == SpecialBoxState.Open)
+        if (comp.State == AegisCrateState.Open)
         {
             // Offset OB spawn slightly south (down)
             var coords = Transform(uid).Coordinates.Offset(new Vector2(0, -0.2f));
-            var ob = _entityManager.SpawnEntity("RMCOrbitalCannonWarheadCluster", coords);
+            var ob = _entityManager.SpawnEntity("RCMPlushieRounyLizard", coords);
 
             // Add the tag so only this OB is interactable from range
 
@@ -62,9 +62,9 @@ public sealed class SpecialBoxSystem : EntitySystem
         }
     }
 
-    private void OnInteractHand(EntityUid uid, SpecialBoxComponent comp, InteractHandEvent args)
+    private void OnInteractHand(EntityUid uid, AegisCrateComponent comp, InteractHandEvent args)
     {
-        if (comp.State != SpecialBoxState.Closed)
+        if (comp.State != AegisCrateState.Closed)
             return;
 
         if (!_accessReader.IsAllowed(args.User, uid))
@@ -73,15 +73,15 @@ public sealed class SpecialBoxSystem : EntitySystem
             return;
         }
 
-        comp.State = SpecialBoxState.Opening;
+        comp.State = AegisCrateState.Opening;
         Dirty(uid, comp);
 
         // Start a timer to set state to Open after animation duration
         Timer.Spawn(TimeSpan.FromSeconds(OpeningDuration), () =>
         {
-            if (!Deleted(uid) && comp.State == SpecialBoxState.Opening)
+            if (!Deleted(uid) && comp.State == AegisCrateState.Opening)
             {
-                comp.State = SpecialBoxState.Open;
+                comp.State = AegisCrateState.Open;
                 Dirty(uid, comp);
             }
         });

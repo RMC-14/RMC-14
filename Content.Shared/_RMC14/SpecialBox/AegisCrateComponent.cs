@@ -4,18 +4,18 @@ using Content.Shared._RMC14.Storage;
 using Content.Shared.Storage;
 using System;
 
-namespace Content.Shared._RMC14.SpecialBox;
+namespace Content.Shared._RMC14.AegisCrate;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class SpecialBoxComponent : Component
+public sealed partial class AegisCrateComponent : Component
 {
-    public delegate void StateChangedDelegate(EntityUid uid, SpecialBoxComponent component);
+    public delegate void StateChangedDelegate(EntityUid uid, AegisCrateComponent component);
     public event StateChangedDelegate? StateChanged;
 
-    private SpecialBoxState _state = SpecialBoxState.Closed;
+    private AegisCrateState _state = AegisCrateState.Closed;
 
     [DataField, AutoNetworkedField]
-    public SpecialBoxState State
+    public AegisCrateState State
     {
         get => _state;
         set
@@ -30,14 +30,14 @@ public sealed partial class SpecialBoxComponent : Component
     public EntityUid? StorageUid;
 }
 
-public enum SpecialBoxState
+public enum AegisCrateState
 {
     Closed,
     Opening,
     Open
 }
 
-public enum SpecialBoxVisualLayers
+public enum AegisCrateVisualLayers
 {
     Base
 }
