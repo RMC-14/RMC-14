@@ -97,6 +97,14 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi
 
 - type: entity
+  parent: ArmorHelmetPMCRiot
+  id: ArmorHelmetPMCRiotShield
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRC6RiotShield
+
+- type: entity
   parent: ArmorHelmetPMC
   id: ArmorHelmetPMCKutjevo
   name: kutjevo helmet
