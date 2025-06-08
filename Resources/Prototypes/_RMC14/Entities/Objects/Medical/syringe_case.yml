@@ -83,12 +83,12 @@
   parent: RMCSyringeCase
   id: RMCSyringeCaseFilledRCM
   suffix: RCM, Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: #TODO oxycodone autoinjector
-    - id: #TODO oxycodone autoinjector
-    - id: #TODO oxycodone autoinjector
+#  components:
+#  - type: StorageFill
+#    contents:
+#    - id: #TODO oxycodone autoinjector
+#    - id: #TODO oxycodone autoinjector
+#    - id: #TODO oxycodone autoinjector
 
 - type: entity
   parent: RMCSyringeCase
