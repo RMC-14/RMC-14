@@ -35,6 +35,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         { ":D", "chatsan-smiles-widely" },
         { "D:", "chatsan-frowns-deeply" },
         { ":O", "chatsan-surprised" },
+        { "!", "chatsan-surprised" }, // RMC14
         { ":3", "chatsan-smiles" },
         { ":S", "chatsan-uncertain" },
         { ":>", "chatsan-grins" },
@@ -64,6 +65,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         { "o.o", "chatsan-wide-eyed" },
         { "._.", "chatsan-surprised" },
         { ".-.", "chatsan-confused" },
+        { "?", "chatsan-confused" }, // RMC14
         { "-_-", "chatsan-unimpressed" },
         { "smh", "chatsan-unimpressed" },
         { "o/", "chatsan-waves" },

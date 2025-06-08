@@ -418,9 +418,11 @@ cm-chatsan-word-smart-gunner = smart gunner
 cm-chatsan-replacement-smart-gunner = smart spitter
 
 cm-chatsan-word-sentry = sentry
+cm-chatsan-word-turret = turret
 cm-chatsan-replacement-sentry = auto spitter
 
 cm-chatsan-word-sentries = sentries
+cm-chatsan-word-turrets = turrets
 cm-chatsan-replacement-sentries = auto spitters
 
 cm-chatsan-word-squad = squad
@@ -542,3 +544,167 @@ cm-chatsan-replacement-sigma = prime
 
 cm-chatsan-word-xigma = xigma
 cm-chatsan-replacement-xigma = prime
+
+cm-chatsan-word-para = para
+cm-chatsan-word-parasite = parasite
+cm-chatsan-replacement-parasite = child
+
+cm-chatsan-word-paras = paras
+cm-chatsan-word-parasites = parasites
+cm-chatsan-replacement-parasites = children
+
+cm-chatsan-word-baricade = baricade
+cm-chatsan-word-cade = cade
+cm-chatsan-word-baricades = baricades
+cm-chatsan-word-cades = cades
+cm-chatsan-replacement-baricades = metal resin
+
+cm-chatsan-word-barbed = barbed
+cm-chatsan-replacement-barbed = spiked
+
+cm-chatsan-word-barbs = barbs
+cm-chatsan-word-barbed-wire = barbed wire
+cm-chatsan-word-barbed-wires = barbed wires
+cm-chatsan-replacement-barbed-wires = spikes
+
+cm-chatsan-word-medal = medal
+cm-chatsan-replacement-medal = jelly
+
+cm-chatsan-word-fob = fob
+cm-chatsan-replacement-fob = tall nest
+
+cm-chatsan-word-rifle = rifle
+cm-chatsan-word-gun = gun
+cm-chatsan-replacement-rifle = spitter
+
+cm-chatsan-word-rifles = rifles
+cm-chatsan-word-gun = guns
+cm-chatsan-replacement-rifles = spitters
+
+cm-chatsan-word-pistol = pistol
+cm-chatsan-replacement-pistol = small spitter
+
+cm-chatsan-word-pistols = pistols
+cm-chatsan-replacement-pistols = small spitters
+
+cm-chatsan-word-revolver = revolver
+cm-chatsan-replacement-revolver = spinning spitter
+
+cm-chatsan-word-knife = knife
+cm-chatsan-replacement-knife = fang
+
+cm-chatsan-word-knives = knives
+cm-chatsan-replacement-knives = fangs
+
+cm-chatsan-word-armor = armor
+cm-chatsan-replacement-armor = carapace
+
+cm-chatsan-word-armorless = armorless
+cm-chatsan-replacement-armorless = carapaceless
+
+cm-chatsan-word-helmet = helmet
+cm-chatsan-replacement-helmet = head carapace
+
+cm-chatsan-word-medkit = medkit
+cm-chatsan-replacement-medkit = healing bundle
+
+cm-chatsan-word-medkits = medkits
+cm-chatsan-replacement-medkits = healing bundles
+
+cm-chatsan-word-injector = injector
+cm-chatsan-word-autoinjector = autoinjector
+cm-chatsan-replacement-injector = sting tool
+
+cm-chatsan-word-injectors = injectors
+cm-chatsan-word-autoinjectors = autoinjectors
+cm-chatsan-replacement-injectors = sting tools
+
+cm-chatsan-word-bandage = bandage
+cm-chatsan-replacement-bandage = wrap
+
+cm-chatsan-word-bandages = bandages
+cm-chatsan-replacement-bandages = wraps
+
+cm-chatsan-word-baton = baton
+cm-chatsan-replacement-baton = shock stick
+
+cm-chatsan-word-batons = batons
+cm-chatsan-replacement-batons = shock sticks
+
+cm-chatsan-word-flashbang = flashbang
+cm-chatsan-replacement-flashbang = bright bang
+
+cm-chatsan-word-prisoner = prisoner
+cm-chatsan-replacement-prisoner = caged one
+
+cm-chatsan-word-battery = battery
+cm-chatsan-replacement-battery = light core
+
+cm-chatsan-word-console = console
+cm-chatsan-word-radio = radio
+cm-chatsan-word-computer = computer
+cm-chatsan-word-terminal = terminal
+cm-chatsan-word-tablet = tablet
+cm-chatsan-replacement-console = talk box
+
+cm-chatsan-word-generator = generator
+cm-chatsan-replacement-generator = light core
+
+cm-chatsan-word-generators = generators
+cm-chatsan-replacement-generators = light cores
+
+cm-chatsan-word-disk = disk
+cm-chatsan-word-disc = disc
+cm-chatsan-replacement-disk = memory wheel
+
+cm-chatsan-word-canteen = canteen
+cm-chatsan-replacement-canteen = liquid carrier
+
+cm-chatsan-word-canteens = canteens
+cm-chatsan-replacement-canteens = liquid carriers
+
+cm-chatsan-word-flashlight = flashlight
+cm-chatsan-replacement-flashlight = glow tube
+
+cm-chatsan-word-flashlights = flashlights
+cm-chatsan-replacement-flashlights = glow tubes
+
+cm-chatsan-word-window = window
+cm-chatsan-replacement-window = tall membrane
+
+cm-chatsan-word-windows = windows
+cm-chatsan-replacement-windows = tall membranes
+
+cm-chatsan-word-light-bulb = light bulb
+cm-chatsan-word-lightbulb = lightbulb
+cm-chatsan-replacement-light-bulb = glow orb
+
+cm-chatsan-word-light-bulbs = light bulbs
+cm-chatsan-word-lightbulbs = lightbulbs
+cm-chatsan-replacement-light-bulbs = glow orbs
+
+cm-chatsan-word-case = case
+cm-chatsan-word-crate = crate
+cm-chatsan-replacement-case = containment box
+
+cm-chatsan-word-cases = cases
+cm-chatsan-word-crates = crates
+cm-chatsan-replacement-cases = containment boxes
+
+cm-chatsan-word-gunshot = gunshot
+cm-chatsan-replacement-gunshot = spit burst
+
+cm-chatsan-word-gunshots = gunshots
+cm-chatsan-replacement-gunshots = spit bursts
+
+cm-chatsan-word-paper = paper
+cm-chatsan-replacement-paper = message sheet
+
+cm-chatsan-word-papers = papers
+cm-chatsan-replacement-papers = message sheets
+
+cm-chatsan-word-folder = folder
+cm-chatsan-replacement-folder = sheet holder
+
+cm-chatsan-word-folders = folders
+cm-chatsan-replacement-folders = sheet holders
