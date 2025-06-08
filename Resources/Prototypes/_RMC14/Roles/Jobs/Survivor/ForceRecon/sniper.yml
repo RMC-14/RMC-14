@@ -26,7 +26,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
-        state: spec
+        state: spec_sniper
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
       whitelist:
@@ -36,7 +36,7 @@
       preset: RMCSurvivorPresetForeconNoPrimary
     - type: SniperWhitelist
     - type: JobPrefix
-      prefix: rmc-job-prefix-forecon
+      prefix: rmc-job-prefix-weapons-specialist-sniper
   hidden: true
 
 - type: startingGear
