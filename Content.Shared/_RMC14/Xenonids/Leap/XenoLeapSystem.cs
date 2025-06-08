@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.CameraShake;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -24,7 +25,9 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -60,6 +63,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -167,6 +171,7 @@ public sealed class XenoLeapSystem : EntitySystem
         leaping.LeapSound = xeno.Comp.LeapSound;
         leaping.LeapEndTime = _timing.CurTime + TimeSpan.FromSeconds(direction.Length() / xeno.Comp.Strength);
 
+        _obstacleSlamming.MakeImmune(xeno, 0.5f);
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
         _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
 
@@ -233,7 +238,10 @@ public sealed class XenoLeapSystem : EntitySystem
         if(args.Cancelled)
             return;
 
-        args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp, args.Leaper);
+        if(!TryComp(args.Leaper, out XenoLeapingComponent? leaping))
+            return;
+
+        args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration, ent.Comp.BlockSound, args.Leaper, leaping.Origin, ent.Comp.FullProtection);
     }
 
     private void OnGotEquipped(Entity<RMCGrantLeapProtectionComponent> ent, ref GotEquippedEvent args)
@@ -352,25 +360,22 @@ public sealed class XenoLeapSystem : EntitySystem
         return true;
     }
 
-    private bool AttemptBlockLeap(EntityUid blocker, RMCLeapProtectionComponent leapProtection, EntityUid leaper)
+    public bool AttemptBlockLeap(EntityUid blocker, TimeSpan stunDuration, SoundSpecifier blockSound, EntityUid leaper, EntityCoordinates leapOrigin, bool omnidirectionalProtection = false)
     {
-        if(!TryComp(leaper, out XenoLeapingComponent? leaping))
-            return false;
-
         var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
-        var diff = leaping.Origin.Position - blockerCoordinates.Coords.Position;
+        var diff = leapOrigin.Position - blockerCoordinates.Coords.Position;
         var dir = diff.Normalized().GetDir();
         var blockerDirection = blockerCoordinates.worldRot.GetDir();
         var relativeDiff = Math.Abs(dir - blockerDirection);
 
         // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing.
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the North-West, North, or North-East of the blocker.
-        if(relativeDiff != 0 && relativeDiff != 1 && relativeDiff != 7)
+        if(relativeDiff != 0 && relativeDiff != 1 && relativeDiff != 7 && !omnidirectionalProtection)
             return false;
 
-        _stun.TryParalyze(leaper, leapProtection.StunDuration, true);
+        _stun.TryParalyze(leaper, stunDuration, true);
         _sizeStun.KnockBack(leaper, blockerCoordinates.Coords);
-        _audio.PlayPredicted(leapProtection.BlockSound, leaper, leaper);
+        _audio.PlayPredicted(blockSound, leaper, leaper);
 
         var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", leaper), ("object", blocker));
         var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", leaper), ("object", blocker));
@@ -400,7 +405,10 @@ public sealed class XenoLeapSystem : EntitySystem
         }
 
         if (!HasComp<MobStateComponent>(target) || _mobState.IsIncapacitated(target))
-            return false;
+        {
+            if (!HasComp<RMCLeapProtectionComponent>(target))
+                return false;
+        }
 
         if (_standing.IsDown(target))
             return false;

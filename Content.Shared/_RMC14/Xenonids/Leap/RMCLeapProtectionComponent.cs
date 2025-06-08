@@ -40,14 +40,14 @@ public sealed partial class RMCLeapProtectionComponent : Component
     };
 
     /// <summary>
-    ///     The component will only be granted if the item is equipped in one of these slots.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public SlotFlags Slots { get; set; } = SlotFlags.OUTERCLOTHING;
-
-    /// <summary>
     ///     All equipped entities that are providing this component to an entity.
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> ProtectionProviders = new();
+
+    /// <summary>
+    ///     If this is true the entity is protected from leaps from all directions.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool FullProtection;
 }

@@ -1,8 +1,7 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Coordinates;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
@@ -36,6 +35,7 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly XenoLeapSystem _leap = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -48,6 +48,8 @@ public sealed class XenoLungeSystem : EntitySystem
         SubscribeLocalEvent<XenoLungeComponent, XenoLungeActionEvent>(OnXenoLungeAction);
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
         SubscribeLocalEvent<XenoLungeComponent, LandEvent>(OnXenoLungeLand);
+
+        SubscribeLocalEvent<RMCLungeProtectionComponent, XenoLungeHitAttempt>(OnXenoLungeHitAttempt);
 
         SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
     }
@@ -77,9 +79,10 @@ public sealed class XenoLungeSystem : EntitySystem
 
         xeno.Comp.Charge = diff;
         xeno.Comp.Target = args.Target;
+        xeno.Comp.Origin = origin;
         Dirty(xeno);
 
-        _rmcObstacleSlamming.MakeImmune(xeno);
+        _rmcObstacleSlamming.MakeImmune(xeno, 0.5f);
         _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
@@ -131,6 +134,9 @@ public sealed class XenoLungeSystem : EntitySystem
         if (_mobState.IsDead(targetId))
             return false;
 
+        if (xeno.Comp.Charge == null)
+            return false;
+
         if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
             _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         {
@@ -142,6 +148,12 @@ public sealed class XenoLungeSystem : EntitySystem
             xeno.Comp.Charge = null;
 
         if (_hive.FromSameHive(xeno.Owner, targetId))
+            return true;
+
+        var ev = new XenoLungeHitAttempt(xeno);
+        RaiseLocalEvent(targetId, ref ev);
+
+        if (ev.Cancelled)
             return true;
 
         if (_net.IsServer)
@@ -174,6 +186,17 @@ public sealed class XenoLungeSystem : EntitySystem
         }
     }
 
+    private void OnXenoLungeHitAttempt(Entity<RMCLungeProtectionComponent> ent, ref XenoLungeHitAttempt args)
+    {
+        if(args.Cancelled)
+            return;
+
+        if(!TryComp(args.Lunging, out XenoLungeComponent? lunging) || lunging.Origin == null)
+            return;
+
+        args.Cancelled = _leap.AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration,ent.Comp.BlockSound, args.Lunging, _transform.ToCoordinates(lunging.Origin.Value), ent.Comp.FullProtection);
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
@@ -187,3 +210,6 @@ public sealed class XenoLungeSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct XenoLungeHitAttempt(EntityUid Lunging, bool Cancelled = false);
