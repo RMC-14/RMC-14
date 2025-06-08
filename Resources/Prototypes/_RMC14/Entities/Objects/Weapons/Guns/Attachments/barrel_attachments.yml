@@ -212,7 +212,7 @@
     - fireDelayFlat: -0.5
 
 - type: entity
-  parent: RMCAttachmentMatebaMarksman
+  parent: RMCAttachmentMatebaStandard
   id: RMCAttachmentMatebaStandardGolden
   components:
   - type: Sprite
@@ -223,7 +223,7 @@
     - RMCAttachmentMatebaStandardGolden
 
 - type: entity
-  parent: RMCAttachmentMatebaStandard
+  parent: RMCAttachmentMatebaMarksman
   id: RMCAttachmentMatebaMarksmanGolden
   components:
   - type: Sprite

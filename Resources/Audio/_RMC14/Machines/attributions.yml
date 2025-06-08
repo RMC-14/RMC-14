@@ -102,3 +102,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/d3d6bb77f88d63c4fbac64596f154306cd099b1f/sound/machines/hydraulics_3.ogg"
+
+- files: [ "bonk.ogg" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/17e3399a76ce7d6bf66706ff6dfbe15252328fd9/sound/machines/bonk.ogg"
