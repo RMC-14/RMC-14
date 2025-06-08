@@ -1,0 +1,68 @@
+- type: reagent
+  parent: [ CMReagent, SpaceDrugs ]
+  id: RMCSpaceDrugs
+  name: reagent-name-rmcspacedrugs
+  desc: reagent-desc-rmcspacedrugs
+  physicalDesc: reagent-physical-desc-syrupy
+  flavor: bitter
+  color: "#60A584"
+  unknown: true
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.1
+      effects:
+      - !type:Emote
+        emote: Laugh #TODO twitches, drools, moans.
+        showInChat: true
+        probability: 0.05
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 0.5 #TODO max 10
+        refresh: false
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
+          min: 30                #TODO RandomWalk at 30 OD
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold #TODO 0.5 brain damage/s at 50 OD
+          min: 50
+        key: Unconscious
+        component: RMCUnconscious
+        type: Add
+        time: 20
+
+- type: reagent
+  parent: RMCSpaceDrugs
+  id: RMCPsilocybin #Shrooms
+  name: reagent-name-rmcpsilocybin
+  desc: reagent-desc-rmcpsilocybin
+  color: "#E700E7"
+  metabolisms:
+    Narcotic:
+      metabolismRate: 0.1
+      effects:
+      - !type:Emote
+        emote: Laugh #TODO twitches, drools, moans.
+        showInChat: true
+        probability: 0.05
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 0.75 #TODO max 15
+        refresh: false
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold #TODO Hallucinations +5/s
+          min: 30                #TODO RandomWalk at 30 OD
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold #TODO 0.75 brain damage/tick at 50 OD
+          min: 50
+        key: Unconscious
+        component: RMCUnconscious
+        type: Add
+        time: 20

@@ -74,6 +74,33 @@
 # Survivor roles. At this time pointless, but will probably be used in the future.
 
 - type: entity
+  id: RMCJobsSurvivor
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: JobGroup
+    name: role-timer-survivor-roles
+    color: "#00b7ff"
+    jobs:
+    # Base Survivors
+    - RMCJobSyntheticColony
+    - CMSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    - RMCSurvivorCommandingOfficer
+    # Chance's Claim
+    - RMCSurvivorForeconCommander
+    - RMCSurvivorForeconSupportTech
+    - RMCSurvivorForeconSquadLeader
+    - RMCSurvivorForeconSniper
+    - RMCSurvivorForeconSmartgunOperator
+    - RMCSurvivorForeconMarksman
+    - RMCSurvivorForeconRifleman
+    # New Varadero
+
+- type: entity
   id: CMJobsSurvivorCivilian
   categories:
   - HideSpawnMenu
