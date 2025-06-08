@@ -33,7 +33,6 @@
     back: CMSatchel
     shoes: RMCShoesBlack
     id: CMIDCardColonist
-    ears: RMCHeadsetColonyIcons
 
 - type: entity
   parent: CMSpawnPointJobBase
