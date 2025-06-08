@@ -28,6 +28,7 @@
   - type: Construction
     graph: CMGirder
     node: wall
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: CMWallMetal

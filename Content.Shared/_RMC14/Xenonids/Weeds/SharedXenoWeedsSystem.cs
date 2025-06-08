@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -210,6 +210,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var anyWeeds = false;
         var anySlowResin = false;
         var anyFastResin = false;
+        var friendlyWeeds = false;
         var entriesResin = 0;
         var entriesWeeds = 0;
         foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
@@ -248,6 +249,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
             {
                 speedWeeds += weeds.SpeedMultiplierXeno;
+                friendlyWeeds = true;
                 entriesWeeds++;
             }
             else if (hive == null || !_hive.IsMember(contacting, hive.Hive))
@@ -286,6 +288,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         args.ModifySpeed(finalSpeed, finalSpeed);
 
         ent.Comp.OnXenoWeeds = anyWeeds;
+        ent.Comp.OnFriendlyWeeds = friendlyWeeds;
         ent.Comp.OnXenoSlowResin = anySlowResin;
         ent.Comp.OnXenoFastResin = anyFastResin;
         Dirty(ent);
@@ -371,6 +374,30 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         return IsOnWeeds((gridUid, grid), coordinates);
+    }
+
+    public bool IsOnFriendlyWeeds(Entity<TransformComponent?> entity)
+    {
+        if (!Resolve(entity, ref entity.Comp))
+            return false;
+
+        var coordinates = _transform.GetMoverCoordinates(entity, entity.Comp).SnapToGrid(EntityManager, _map);
+
+        if (_transform.GetGrid(coordinates) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? grid))
+        {
+            return false;
+        }
+
+        var weeds = GetWeedsOnFloor((gridUid, grid), coordinates);
+        if (weeds == null)
+            return false;
+
+        if (!_hive.FromSameHive(entity.Owner, weeds.Value.Owner))
+            return false;
+
+        return true;
+
     }
 
     private void OnResinSlowdownStartCollide(Entity<ResinSlowdownModifierComponent> ent, ref StartCollideEvent args)

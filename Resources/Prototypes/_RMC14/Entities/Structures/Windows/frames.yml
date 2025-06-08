@@ -68,6 +68,7 @@
     damage:
       types:
         Blunt: 80
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: RMCBaseWindowFrame

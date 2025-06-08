@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
@@ -36,6 +37,7 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -141,15 +143,17 @@ public sealed class XenoLungeSystem : EntitySystem
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge != null)
             xeno.Comp.Charge = null;
 
-        if (_hive.FromSameHive(xeno.Owner, targetId))
+        if (!_xeno.CanAbilityAttackTarget(xeno, targetId) || (_size.TryGetSize(targetId, out var size) && size >= RMCSizes.Big) ||
+            (TryComp<XenoComponent>(targetId, out var xenoComp) && xenoComp.Tier >= 2)) //Fails if big or tier 2 or more
             return true;
 
         if (_net.IsServer)
         {
-            _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
+            var stunTime = _xeno.TryApplyXenoDebuffMultiplier(targetId, xeno.Comp.StunTime);
+            _stun.TryParalyze(targetId, stunTime, true);
 
             var stunned = EnsureComp<XenoLungeStunnedComponent>(targetId);
-            stunned.ExpireAt = _timing.CurTime + xeno.Comp.StunTime;
+            stunned.ExpireAt = _timing.CurTime + stunTime;
             Dirty(targetId, stunned);
         }
 

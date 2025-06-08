@@ -36,6 +36,9 @@
   - type: XenoLeapDestroyOnPass
   - type: XenoToggleChargingDamage
     destroy: true
+  - type: XenoCrusherChargable
+    instantDestroy: true
+    passOnDestroy: true
 
 - type: entity
   parent: BaseStructure

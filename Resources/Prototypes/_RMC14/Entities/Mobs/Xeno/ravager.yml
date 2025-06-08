@@ -226,6 +226,7 @@
     slowTime: 0
     dazeTime: 4
     throwSpeed: 12
+    dazeTime: 4
     damage:
       groups:
         Brute: 20
