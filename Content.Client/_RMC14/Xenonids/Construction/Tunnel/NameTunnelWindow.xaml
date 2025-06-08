@@ -1,9 +1,9 @@
 <DefaultWindow
-    SetSize="200 150"
+    MinSize="200 125"
     Margin="4 0"
     xmlns="https://spacestation14.io">
     <BoxContainer Orientation="Vertical">
-        <LineEdit Name="TunnelName" Access="Public"  Margin ="0 4"/>
-        <Button Name="SubmitButton"  Access="Public" Margin ="0 4"/>
+        <LineEdit Name="TunnelName" Access="Public"  Margin ="0 4" />
+        <Button Name="SubmitButton"  Access="Public" Margin ="0 4" StyleClasses="OpenBoth" />
     </BoxContainer>
 </DefaultWindow>
