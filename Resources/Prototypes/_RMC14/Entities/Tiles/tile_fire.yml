@@ -135,7 +135,7 @@
     - map: [ "base" ]
       state: purple_4
   - type: PointLight
-    color: "#ffffff"
+    color: "#faeffa"
   - type: RMCIgniteOnCollide
     intensity: 80
     duration: 70
