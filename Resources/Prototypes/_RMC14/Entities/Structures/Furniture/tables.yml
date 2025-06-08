@@ -76,7 +76,6 @@
   - type: XenoLeapDestroyOnPass
   - type: XenoToggleChargingDamage
     destroy: true
-    components:
   - type: Animateable
   - type: Damageable
     damageContainer: StructuralInorganic
