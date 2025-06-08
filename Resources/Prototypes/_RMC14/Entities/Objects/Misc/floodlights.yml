@@ -382,7 +382,7 @@
         visible: false
         map: [ "light" ]
   - type: Construction
-    graph: RMCTrafficlightBrokenAlt
+    graph: RMCTrafficLightBrokenAlt
     node: completed
 
 - type: entity
@@ -395,5 +395,5 @@
     state: trafficlight_alt_damaged
     drawdepth: Mobs
   - type: Construction
-    graph: RMCTrafficlightBrokenAlt
+    graph: RMCTrafficLightBrokenAlt
     node: start

@@ -1,48 +1,10 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCTrafficlightBroken
+  id: RMCTrafficLightBroken
   start: start
   graph:
   - node: start
-    entity: RMCTrafficlightBroken
-    edges:
-    - to: panel
-      steps:
-      - tool: Screwing
-        doAfter: 2
-
-  - node: panel
-    entity: RMCTrafficlightBroken
-    edges:
-    - to: welding
-      steps:
-      - tool: Prying
-        doAfter: 2
-
-  - node: welding
-    entity: RMCTrafficlightBroken
-    edges:
-    - to: cabling
-      steps:
-      - tool: Welding
-        doAfter: 4
-
-  - node: cabling
-    entity: RMCTrafficlightBroken
-    edges:
-    - to: finish
-      steps:
-      - material: RMCCable
-        amount: 2
-        doAfter: 2
-
-  - node: finish
-    entity: RMCTrafficlightBroken
-    edges:
-    - to: completed
-      steps:
-      - tool: Screwing
-        doAfter: 2
+    entity: RMCTrafficLightBroken
 
   - node: completed
-    entity: RMCTrafficlight
+    entity: RMCTrafficLight
