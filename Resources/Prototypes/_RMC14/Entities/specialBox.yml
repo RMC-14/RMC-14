@@ -25,7 +25,11 @@
           layer:
             - WallLayer
     - type: AccessReader
-      access: [["CMAccessCO"]]
+      access: [["CMAccessAegis"]]
     - type: Lock
     - type: Appearance
     - type: AnimationPlayer
+    - type: Corrodible
+      isCorrodible: False
+    - type: DestroyedByExplosionType
+      exlosion: RMCOBXenoTunnel
