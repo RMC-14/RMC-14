@@ -4,8 +4,8 @@ meta:
   engineVersion: 251.0.1
   forkId: ""
   forkVersion: ""
-  time: 05/30/2025 17:24:52
-  entityCount: 1232
+  time: 06/07/2025 13:29:56
+  entityCount: 1236
 maps:
 - 1
 grids:
@@ -21717,6 +21717,34 @@ entities:
     components:
     - type: Transform
       pos: -28.5,-2.5
+      parent: 1
+- proto: RMCSpawnerERTShuttle
+  entities:
+  - uid: 1235
+    components:
+    - type: Transform
+      pos: -40.5,-9.5
+      parent: 1
+- proto: RMCSpawnerERTShuttleSPP
+  entities:
+  - uid: 1234
+    components:
+    - type: Transform
+      pos: -16.5,-27.5
+      parent: 1
+- proto: RMCSpawnerERTShuttleTSE
+  entities:
+  - uid: 1236
+    components:
+    - type: Transform
+      pos: -16.5,-9.5
+      parent: 1
+- proto: RMCSpawnerERTShuttleWeYa
+  entities:
+  - uid: 1233
+    components:
+    - type: Transform
+      pos: -40.5,-27.5
       parent: 1
 - proto: RMCSprayBottleSpaceCleaner
   entities:

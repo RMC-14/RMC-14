@@ -23,7 +23,7 @@
       - DiscreteHealthAnalyzer
       - Pen
       - RMCMacheteScabbard
-      #TODO Katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
 
 - type: entity

@@ -1,35 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: You can now actually read your collected clues inside the tech tree window.
-    type: Fix
-  id: 1324
-  time: '2025-02-11T19:53:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5591
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed light armor chosen from the intel vendor appearing as medium armor
-    type: Fix
-  id: 1325
-  time: '2025-02-11T22:38:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5592
-- author: Whisper
-  changes:
-  - message: Survivors can no longer interact with intel objectives.
-    type: Tweak
-  - message: Rules change; Survivors may not secure intel objectives without marine
-      support.
-    type: Tweak
-  id: 1326
-  time: '2025-02-11T22:41:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5583
-- author: Ian321
-  changes:
-  - message: Undeployed mortars can no longer be destroyed.
-    type: Fix
-  id: 1327
-  time: '2025-02-11T22:42:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5588
 - author: DrSmugleaf
   changes:
   - message: Fixed scout and sniper invis randomly going on extremely long cooldowns,
@@ -5193,5 +5162,45 @@
   id: 1826
   time: '2025-06-07T10:02:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6640
+- author: Vermidia
+  changes:
+  - message: Fixed light armors having better explosion protection than medium. Their
+      values are now swapped.
+    type: Fix
+  id: 1827
+  time: '2025-06-08T00:04:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6648
+- author: Arykh
+  changes:
+  - message: "Added the M2100 \"Ng\xE1jhe\" machete and it's scabbard."
+    type: Add
+  - message: Added the (incomplete) absurdly sharp katana!
+    type: Add
+  - message: Added the katana scabbard!
+    type: Add
+  - message: Increased the M2132 machete's throw damage from 4 to 10.
+    type: Tweak
+  - message: the HEFA sword now looks like a proper HEFA sword.
+    type: Tweak
+  - message: "Added M5 bayonet\u2019s missing description. It now tells you it can\
+      \ be attached to the end of a rifle."
+    type: Fix
+  id: 1828
+  time: '2025-06-08T00:28:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6543
+- author: Arykh
+  changes:
+  - message: Added the Syringe Case!
+    type: Add
+  id: 1829
+  time: '2025-06-08T01:38:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6641
+- author: J C Denton
+  changes:
+  - message: ERT Shuttles now spawn on Thunderdrome map.
+    type: Tweak
+  id: 1830
+  time: '2025-06-08T01:57:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6645
 Name: RMC14
 Order: -1
