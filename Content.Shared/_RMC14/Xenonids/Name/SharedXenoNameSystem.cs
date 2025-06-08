@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -20,6 +21,8 @@ public abstract class SharedXenoNameSystem : EntitySystem
     [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
+    private const string DefaultPrefix = "XX";
+
     private TimeSpan _xenoPrefixThreeTime;
     private TimeSpan _xenoPostfixTime;
     private TimeSpan _xenoPostfixTwoTime;
@@ -31,6 +34,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
 
         SubscribeLocalEvent<XenoNameComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
         SubscribeLocalEvent<XenoNameComponent, MindAddedMessage>(OnMindAdded);
+        SubscribeLocalEvent<XenoNameComponent, RMCGetFixedIdentityEvent>(OnGetFixedIdentity);
 
         Subs.CVar(_config,
             RMCCVars.RMCPlaytimeXenoPrefixThreeTimeHours,
@@ -64,7 +68,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
 
         var prefix = ent.Comp.Prefix;
         if (prefix.Length == 0)
-            prefix = "XX";
+            prefix = DefaultPrefix;
 
         var postfix = ent.Comp.Postfix;
 
@@ -86,9 +90,28 @@ public abstract class SharedXenoNameSystem : EntitySystem
             mind.CharacterName = args.GetModifiedName();
     }
 
-    private void OnMindAdded(EntityUid uid, XenoNameComponent component, MindAddedMessage args)
+    private void OnMindAdded(Entity<XenoNameComponent> ent, ref MindAddedMessage args)
     {
-        SetupName(uid);
+        SetupName(ent);
+    }
+
+    private void OnGetFixedIdentity(Entity<XenoNameComponent> ent, ref RMCGetFixedIdentityEvent args)
+    {
+        if (HasComp<XenoOmitNumberComponent>(ent))
+        {
+            args.Name = Loc.GetString("rmc-xeno-name",
+                ("baseName", args.Name),
+                ("prefix", DefaultPrefix),
+                ("postfix", string.Empty));
+        }
+        else
+        {
+            args.Name = Loc.GetString("rmc-xeno-name-number",
+                ("baseName", args.Name),
+                ("prefix", DefaultPrefix),
+                ("number", ent.Comp.Number),
+                ("postfix", string.Empty));
+        }
     }
 
     private TimeSpan GetXenoPlaytime(ICommonSession player)

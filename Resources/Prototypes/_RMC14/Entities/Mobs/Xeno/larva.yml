@@ -89,6 +89,8 @@
       3: rmc-xeno-elder-larva
       4: rmc-xeno-elder-larva
       5: rmc-xeno-elder-larva
+  - type: FixedIdentity
+    name: cm-job-name-xeno-larva
 
 # For surgeries/failed incubations
 - type: entity

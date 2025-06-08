@@ -94,7 +94,7 @@ public sealed class InteractionPopupSystem : EntitySystem
         if (_random.Prob(component.SuccessChance))
         {
             if (component.InteractSuccessString != null)
-                msg = Loc.GetString(component.InteractSuccessString, ("target", Identity.Entity(uid, EntityManager))); // Success message (localized).
+                msg = Loc.GetString(component.InteractSuccessString, ("target", Identity.Name(uid, EntityManager, user))); // Success message (localized).
 
             if (component.InteractSuccessSound != null)
                 sfx = component.InteractSuccessSound;
@@ -108,7 +108,7 @@ public sealed class InteractionPopupSystem : EntitySystem
         else
         {
             if (component.InteractFailureString != null)
-                msg = Loc.GetString(component.InteractFailureString, ("target", Identity.Entity(uid, EntityManager))); // Failure message (localized).
+                msg = Loc.GetString(component.InteractFailureString, ("target", Identity.Name(uid, EntityManager, user))); // Failure message (localized).
 
             if (component.InteractFailureSound != null)
                 sfx = component.InteractFailureSound;
@@ -122,9 +122,19 @@ public sealed class InteractionPopupSystem : EntitySystem
 
         if (!string.IsNullOrEmpty(component.MessagePerceivedByOthers))
         {
-            var msgOthers = Loc.GetString(component.MessagePerceivedByOthers,
-                ("user", Identity.Entity(user, EntityManager)), ("target", Identity.Entity(uid, EntityManager)));
-            _popupSystem.PopupEntity(msgOthers, uid, Filter.PvsExcept(user, entityManager: EntityManager), true);
+            // RMC14
+            var others = Filter.PvsExcept(user, entityManager: EntityManager).Recipients;
+            foreach (var other in others)
+            {
+                if (other.AttachedEntity is not { } otherEnt)
+                    continue;
+
+                var msgOther = Loc.GetString(component.MessagePerceivedByOthers,
+                    ("user", Identity.Entity(user, EntityManager, otherEnt)),
+                    ("target", Identity.Name(uid, EntityManager, otherEnt)));
+                _popupSystem.PopupEntity(msgOther, uid, otherEnt);
+            }
+            // RMC14
         }
 
         if (!predict)

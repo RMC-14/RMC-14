@@ -66,7 +66,7 @@
       components:
       - Xeno
   - type: FixedIdentity
-    name: paper
+    name: rmc-paper
     whitelist:
       components:
       - Xeno

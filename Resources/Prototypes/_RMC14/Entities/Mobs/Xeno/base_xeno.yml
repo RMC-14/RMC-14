@@ -367,6 +367,11 @@
   - type: RMCMobCollisionMass
   - type: XenoRankNames
   - type: Blindable
+  - type: FixedIdentity
+    name: cm-xeno-name
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
   abstract: true

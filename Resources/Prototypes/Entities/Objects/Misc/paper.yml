@@ -48,7 +48,7 @@
         - ReagentId: Fiber
           Quantity: 1
   - type: FixedIdentity
-    name: paper
+    name: rmc-paper
     whitelist:
       components:
       - Xeno

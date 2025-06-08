@@ -125,7 +125,7 @@ public sealed class SkillsSystem : EntitySystem
         _examine.AddDetailedExamineVerb(args,
             ent,
             msg,
-            Loc.GetString("rmc-skills-examinable-text"),
+            Loc.GetString("rmc-skills-examine", ("target", ent)),
             "/Textures/Interface/students-cap.svg.192dpi.png",
             Loc.GetString("rmc-skills-examine", ("target", ent))
         );

@@ -1,35 +1,34 @@
-using Content.Shared._RMC14.Humanoid;
+﻿using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
 using Robust.Shared.Enums;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Utility;
 
-namespace Content.Shared.Humanoid;
+namespace Content.Shared._RMC14.Humanoid;
 
-[NetworkedComponent, RegisterComponent, AutoGenerateComponentState(true)]
-public sealed partial class HumanoidAppearanceComponent : Component, IRMCHumanoidAppearance
+[DataDefinition]
+[Serializable, NetSerializable]
+public sealed partial class RMCHumanoidAppearance : IRMCHumanoidAppearance
 {
     public MarkingSet ClientOldMarkings { get; set; } = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public MarkingSet MarkingSet { get; set; } = new();
 
     [DataField]
     public Dictionary<HumanoidVisualLayers, HumanoidSpeciesSpriteLayer> BaseLayers { get; set; } = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public HashSet<HumanoidVisualLayers> PermanentlyHidden { get; set; } = new();
 
     // Couldn't these be somewhere else?
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Gender Gender { get; set; }
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int Age { get; set; } = 18;
 
     /// <summary>
@@ -38,14 +37,14 @@ public sealed partial class HumanoidAppearanceComponent : Component, IRMCHumanoi
     ///     Stored on the server, this is merged in the client into
     ///     all layer settings.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<HumanoidVisualLayers, CustomBaseLayerInfo> CustomBaseLayers { get; set; } = new();
 
     /// <summary>
     ///     Current species. Dictates things like base body sprites,
     ///     base humanoid to spawn, etc.
     /// </summary>
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public ProtoId<SpeciesPrototype> Species { get; set; }
 
     /// <summary>
@@ -57,7 +56,7 @@ public sealed partial class HumanoidAppearanceComponent : Component, IRMCHumanoi
     /// <summary>
     ///     Skin color of this humanoid.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Color SkinColor { get; set; } = Color.FromHex("#C0967F");
 
     /// <summary>
@@ -65,13 +64,13 @@ public sealed partial class HumanoidAppearanceComponent : Component, IRMCHumanoi
     ///     slots that are currently hiding them. This will affect the base
     ///     sprite on this humanoid layer, and any markings that sit above it.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<HumanoidVisualLayers, SlotFlags> HiddenLayers { get; set; } = new();
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Sex Sex { get; set; } = Sex.Male;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Color EyeColor { get; set; } = Color.Brown;
 
     /// <summary>
@@ -100,28 +99,4 @@ public sealed partial class HumanoidAppearanceComponent : Component, IRMCHumanoi
 
     [DataField]
     public ProtoId<MarkingPrototype>? UndergarmentBottom { get; set; } = new ProtoId<MarkingPrototype>("UndergarmentBottomBoxers");
-}
-
-[DataDefinition]
-[Serializable, NetSerializable]
-public readonly partial struct CustomBaseLayerInfo
-{
-    public CustomBaseLayerInfo(string? id, Color? color = null)
-    {
-        DebugTools.Assert(id == null || IoCManager.Resolve<IPrototypeManager>().HasIndex<HumanoidSpeciesSpriteLayer>(id));
-        Id = id;
-        Color = color;
-    }
-
-    /// <summary>
-    ///     ID of this custom base layer. Must be a <see cref="HumanoidSpeciesSpriteLayer"/>.
-    /// </summary>
-    [DataField]
-    public ProtoId<HumanoidSpeciesSpriteLayer>? Id { get; init; }
-
-    /// <summary>
-    ///     Color of this custom base layer. Null implies skin colour if the corresponding <see cref="HumanoidSpeciesSpriteLayer"/> is set to match skin.
-    /// </summary>
-    [DataField]
-    public Color? Color { get; init; }
 }

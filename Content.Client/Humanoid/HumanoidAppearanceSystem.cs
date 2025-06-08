@@ -1,3 +1,5 @@
+using Content.Client.Items.Systems;
+using Content.Shared._RMC14.Humanoid;
 using Content.Shared.CCVar;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -6,6 +8,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Robust.Client.GameObjects;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -17,6 +20,11 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
     [Dependency] private readonly MarkingManager _markingManager = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
 
+    // RMC14
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly ItemSystem _item = default!;
+    [Dependency] private readonly RMCHumanoidAppearanceSystem _rmcHumanoid = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -24,6 +32,12 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         SubscribeLocalEvent<HumanoidAppearanceComponent, AfterAutoHandleStateEvent>(OnHandleState);
         Subs.CVar(_configurationManager, CCVars.AccessibilityClientCensorNudity, OnCvarChanged, true);
         Subs.CVar(_configurationManager, CCVars.AccessibilityServerCensorNudity, OnCvarChanged, true);
+
+        // RMC14
+        SubscribeLocalEvent<LocalPlayerAttachedEvent>(UpdateHiddenSprites);
+        SubscribeLocalEvent<LocalPlayerDetachedEvent>(UpdateHiddenSprites);
+
+        SubscribeLocalEvent<HiddenAppearanceComponent, ComponentRemove>(OnHiddenRemove);
     }
 
     private void OnHandleState(EntityUid uid, HumanoidAppearanceComponent component, ref AfterAutoHandleStateEvent args)
@@ -42,16 +56,37 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 
     private void UpdateSprite(HumanoidAppearanceComponent component, SpriteComponent sprite)
     {
-        UpdateLayers(component, sprite);
-        ApplyMarkingSet(component, sprite);
+        ClearAllMarkings(component, sprite);
+        foreach (var key in component.BaseLayers)
+        {
+            if (sprite.LayerMapTryGet(key, out var index))
+                sprite[index].Visible = false;
+        }
 
-        sprite[sprite.LayerMapReserveBlank(HumanoidVisualLayers.Eyes)].Color = component.EyeColor;
+        IRMCHumanoidAppearance appearance = component;
+        if (_rmcHumanoid.TryGetLocalHiddenAppearance(component.Owner, out var hidden))
+            appearance = hidden;
+
+        if (hidden != null)
+        {
+            ClearAllMarkings(hidden, sprite);
+            foreach (var key in hidden.BaseLayers)
+            {
+                if (sprite.LayerMapTryGet(key, out var index))
+                    sprite[index].Visible = false;
+            }
+        }
+
+        UpdateLayers(appearance, sprite);
+        ApplyMarkingSet(appearance, sprite);
+
+        sprite[sprite.LayerMapReserveBlank(HumanoidVisualLayers.Eyes)].Color = appearance.EyeColor;
     }
 
-    private static bool IsHidden(HumanoidAppearanceComponent humanoid, HumanoidVisualLayers layer)
+    private static bool IsHidden(IRMCHumanoidAppearance humanoid, HumanoidVisualLayers layer)
         => humanoid.HiddenLayers.ContainsKey(layer) || humanoid.PermanentlyHidden.Contains(layer);
 
-    private void UpdateLayers(HumanoidAppearanceComponent component, SpriteComponent sprite)
+    private void UpdateLayers(IRMCHumanoidAppearance component, SpriteComponent sprite)
     {
         var oldLayers = new HashSet<HumanoidVisualLayers>(component.BaseLayers.Keys);
         component.BaseLayers.Clear();
@@ -83,7 +118,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
     }
 
     private void SetLayerData(
-        HumanoidAppearanceComponent component,
+        IRMCHumanoidAppearance component,
         SpriteComponent sprite,
         HumanoidVisualLayers key,
         string? protoId,
@@ -216,7 +251,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         UpdateSprite(humanoid, Comp<SpriteComponent>(uid));
     }
 
-    private void ApplyMarkingSet(HumanoidAppearanceComponent humanoid, SpriteComponent sprite)
+    private void ApplyMarkingSet(IRMCHumanoidAppearance humanoid, SpriteComponent sprite)
     {
         // I am lazy and I CBF resolving the previous mess, so I'm just going to nuke the markings.
         // Really, markings should probably be a separate component altogether.
@@ -248,7 +283,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         AddUndergarments(humanoid, sprite, applyUndergarmentTop, applyUndergarmentBottom);
     }
 
-    private void ClearAllMarkings(HumanoidAppearanceComponent humanoid, SpriteComponent sprite)
+    private void ClearAllMarkings(IRMCHumanoidAppearance humanoid, SpriteComponent sprite)
     {
         foreach (var markingList in humanoid.ClientOldMarkings.Markings.Values)
         {
@@ -294,7 +329,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         }
     }
 
-    private void AddUndergarments(HumanoidAppearanceComponent humanoid, SpriteComponent sprite, bool undergarmentTop, bool undergarmentBottom)
+    private void AddUndergarments(IRMCHumanoidAppearance humanoid, SpriteComponent sprite, bool undergarmentTop, bool undergarmentBottom)
     {
         if (undergarmentTop && humanoid.UndergarmentTop != null)
         {
@@ -321,7 +356,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
     private void ApplyMarking(MarkingPrototype markingPrototype,
         IReadOnlyList<Color>? colors,
         bool visible,
-        HumanoidAppearanceComponent humanoid,
+        IRMCHumanoidAppearance humanoid,
         SpriteComponent sprite)
     {
         if (!sprite.LayerMapTryGet(markingPrototype.BodyPart, out int targetLayer))
@@ -418,13 +453,51 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         // I fucking hate this. I'll get around to refactoring sprite layers eventually I swear
         // Just a week away...
 
+        IRMCHumanoidAppearance appearance = ent.Comp;
+        if (_rmcHumanoid.TryGetLocalHiddenAppearance(ent, out var hidden))
+            appearance = hidden;
+
         foreach (var markingList in ent.Comp.MarkingSet.Markings.Values)
         {
             foreach (var marking in markingList)
             {
                 if (_markingManager.TryGetMarking(marking, out var markingPrototype) && markingPrototype.BodyPart == layer)
-                    ApplyMarking(markingPrototype, marking.MarkingColors, marking.Visible, ent, sprite);
+                    ApplyMarking(markingPrototype, marking.MarkingColors, marking.Visible, appearance, sprite);
             }
+        }
+    }
+
+    // RMC14
+    private void UpdateHiddenSprites<T>(T ev)
+    {
+        // TODO RMC14 chunk this out into an update loop
+        var query = AllEntityQuery<HiddenAppearanceComponent, HumanoidAppearanceComponent, SpriteComponent>();
+        while (query.MoveNext(out var uid, out _, out var appearance, out var sprite))
+        {
+            UpdateSprite(appearance, sprite);
+            UpdatePlayerMedals(uid);
+        }
+    }
+
+    private void OnHiddenRemove(Entity<HiddenAppearanceComponent> ent, ref ComponentRemove args)
+    {
+        if (!TryComp(ent, out HumanoidAppearanceComponent? appearance) ||
+            !TryComp(ent, out SpriteComponent? sprite))
+        {
+            return;
+        }
+
+        UpdateSprite(appearance, sprite);
+        UpdatePlayerMedals(ent);
+    }
+
+    private void UpdatePlayerMedals(EntityUid player)
+    {
+        var slots = _inventory.GetSlotEnumerator(player);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is { } contained)
+                _item.VisualsChanged(contained);
         }
     }
 }

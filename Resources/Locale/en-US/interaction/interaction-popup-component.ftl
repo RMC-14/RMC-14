@@ -95,9 +95,11 @@ fence-rattle-success = *rattle*
 
 ## Hugging players
 
-hugging-success-generic = You hug {THE($target)}.
-hugging-success-generic-others = { CAPITALIZE(THE($user)) } hugs {THE($target)}.
-hugging-success-generic-target = { CAPITALIZE(THE($user)) } hugs you.
+# RMC14
+hugging-success-generic = You hug {$target}.
+hugging-success-generic-others = {$user} hugs {$target}.
+hugging-success-generic-target = {$user} hugs you.
+# RMC14
 
 ## Other
 

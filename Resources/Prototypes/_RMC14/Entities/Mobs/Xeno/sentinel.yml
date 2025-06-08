@@ -91,3 +91,5 @@
     spray: XenoAcidSprayTrapWeak
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-sentinel

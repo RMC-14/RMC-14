@@ -127,6 +127,8 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: ravager
+  - type: FixedIdentity
+    name: cm-job-name-xeno-ravager
 
 - type: entity
   parent: RMCXenoRavagerBase

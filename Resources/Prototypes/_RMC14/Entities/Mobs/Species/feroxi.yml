@@ -92,6 +92,8 @@
     animation: WeaponArcBite
   - type: Inventory
     speciesId: reptilian
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-feroxi
 
 - type: entity
   parent: BaseSpeciesDummy
