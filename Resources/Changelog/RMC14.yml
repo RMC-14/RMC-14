@@ -1,22 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed burrower visibility while burrowed. It is correctly invisible to
-      all but itself, and is transparent on the xeno overlay.
-    type: Fix
-  - message: Fixed burrower burrow/unburrow thinking you were still unmoving, preventing
-      movement prediction from kicking in. mostly.
-    type: Fix
-  - message: Fixed burrower not having seperate burrow and tunneling cooldowns. The
-      burrow cooldown is 2 seconds and kicks in when successfully burrowing, unburrowing,
-      or cancelling a burrow. Tunneling is 7 seconds and kicks in when cancelling
-      a tunneling.
-    type: Fix
-  id: 1333
-  time: '2025-02-16T04:19:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5628
-- author: Vermidia
-  changes:
   - message: More xeno chatsans, most for abbreviated terms, intel, and survivors.
     type: Add
   - message: Scout is no longer part of the xeno chatsan. Scout spec and scout specialist
@@ -5230,5 +5214,14 @@
   id: 1835
   time: '2025-06-08T09:12:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6636
+- author: noctyrnal
+  changes:
+  - message: Added a new version of the "Golden Arrow" map for PVE.
+    type: Add
+  - message: Added multiple missing props found on the Golden Arrow.
+    type: Add
+  id: 1836
+  time: '2025-06-08T12:08:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6646
 Name: RMC14
 Order: -1
