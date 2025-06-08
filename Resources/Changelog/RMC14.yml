@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed xenos being unable to pat fire on marines.
-    type: Fix
-  id: 1331
-  time: '2025-02-16T04:16:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5644
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed intelligence headband and squad beret not spawning
@@ -5228,5 +5221,12 @@
   id: 1833
   time: '2025-06-08T06:53:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6593
+- author: noctyrnal
+  changes:
+  - message: Added additional Xeno chat sanitization.
+    type: Add
+  id: 1834
+  time: '2025-06-08T07:36:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6584
 Name: RMC14
 Order: -1
