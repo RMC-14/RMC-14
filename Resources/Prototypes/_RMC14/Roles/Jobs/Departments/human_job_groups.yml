@@ -71,8 +71,6 @@
     - CMPilotDropship
     - CMPilotGunship
 
-# Survivor roles. At this time pointless, but will probably be used in the future.
-
 - type: entity
   id: RMCJobsCorporate
   categories:
@@ -84,7 +82,10 @@
     jobs:
     - CMLiaison
     - CMSurvivorCorporate
-    
+    - CMSurvivorICB
+
+# Survivor roles. At this time pointless, but will probably be used in the future.
+
 - type: entity
   id: RMCJobsSurvivor
   categories:
@@ -111,7 +112,14 @@
     - RMCSurvivorForeconMarksman
     - RMCSurvivorForeconRifleman
     # New Varadero
-
+    - CMSurvivorBeachBum
+    - CMSurvivorMiner
+    - CMSurvivorTechnician
+    - CMSurvivorCargoTechnician
+    - CMSurvivorMedicalTechnician
+    - CMSurvivorUNPeacekeeper
+    - CMSurvivorICB
+    - RMCSurvivorCommanderNewVaradero
 - type: entity
   id: CMJobsSurvivorCivilian
   categories:

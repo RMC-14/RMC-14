@@ -11,14 +11,6 @@
   - CMSurvivorEngineer
   - CMSurvivorSecurity
   - CMSurvivorCorporate
-  - CMSurvivorBeachBum
-  - CMSurvivorMiner
-  - CMSurvivorTechnician
-  - CMSurvivorCargoTechnician
-  - CMSurvivorMedicalTechnician
-  - CMSurvivorUNPeacekeeper
-  - CMSurvivorICB
-  - RMCSurvivorCommanderNewVaradero
   - RMCSurvivorCommandingOfficer
   departmentRadio: null
   headOfDepartment: null
