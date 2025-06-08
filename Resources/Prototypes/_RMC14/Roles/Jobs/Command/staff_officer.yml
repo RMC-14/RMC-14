@@ -17,16 +17,10 @@
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: so
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -88,3 +82,13 @@
 - type: playTimeTracker
   id: CMJobStaffOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSO
+  name: A Staff Officer
+  description: A Staff Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: staff_officer

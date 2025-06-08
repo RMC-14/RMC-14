@@ -4,8 +4,8 @@
   abstract: true
   components:
   - type: HideLayerClothing
-    slots:
-    - Snout
+    layers:
+      Snout: Mask
     hideOnToggle: true
 
 - type: entity
@@ -42,6 +42,12 @@
     sprite: _RMC14/Objects/Clothing/Mask/sterile.rsi
   - type: Item
     storedRotation: -90
+  - type: Tag
+    tags:
+    - SterileMask
+
+- type: Tag
+  id: SterileMask
 
 - type: entity # TODO RMC14 this needs a lizard sprite
   parent: ClothingMaskGas
@@ -68,7 +74,7 @@
     - Mask
   - type: Item
     size: Small
-    
+
 - type: entity
   parent: CMBaseMask
   id: RMCMaskKutjevoRespirator
@@ -228,7 +234,7 @@
     size: Small
 
 - type: entity
-  parent: CMBaseMask
+  parent: [CMBaseMask, RMCHelmetGarbToggleableBase]
   id: RMCVisorSWAT
   name: TC2 CMB riot shield
   description: Yellowish protective glass piece, can be lifted up when needed, makes you see everything in yellow.
@@ -245,6 +251,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+      state: helmet-down
 
 
 # Keffiyehs

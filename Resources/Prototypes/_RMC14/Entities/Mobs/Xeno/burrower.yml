@@ -5,10 +5,14 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleBurrower
   - type: GhostRole
     name: cm-job-name-xeno-burrower
   - type: Sprite

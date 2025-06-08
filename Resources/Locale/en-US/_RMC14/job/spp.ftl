@@ -3,26 +3,35 @@
                                              You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                              You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
 
-CMSPPLeader = SPP Starshiy Serzhant
-rmc-job-description-spp-leader = ""
+rmc-ghost-role-information-spp-friendly-description = Render assistance towards the UN Forces, Listen to your superior officers.
+rmc-ghost-role-information-spp-hostile-description = Eliminate the UN Forces to ensure the SPP presence in this sector is continued. Listen to your superior officers and take over the main UNS vessel at all costs.
+
+rmc-ghost-name-spp-hostile-leader = SPP Squad Leader (Hostile)
+rmc-ghost-name-spp-friendly-leader = SPP Squad Leader (Friendly)
+rmc-job-name-spp-leader = Starshiy Serzhant
 rmc-job-prefix-spp-leader = SL
 
-CMSPPSpecialist = SPP Serzhant
-rmc-job-description-spp-specialist = ""
+rmc-ghost-name-spp-hostile-specialist = SPP Squad Specialist (Hostile)
+rmc-ghost-name-spp-friendly-specialist = SPP Squad Specialist (Friendly)
+rmc-job-name-spp-specialist = Serzhant
 rmc-job-prefix-spp-specialist = Spc
 
-CMSPPSoldier = SPP Ryadovoy
-rmc-job-description-spp-soldier = ""
-rmc-job-prefix-spp-soldier = Sol
+rmc-ghost-name-spp-hostile-rifleman = SPP Squad Conscript (Hostile)
+rmc-ghost-name-spp-friendly-rifleman = SPP Squad Conscript (Friendly)
+rmc-job-name-spp-rifleman = Conscript
+rmc-job-prefix-spp-rifleman = Sol
 
-CMSPPEngineer = SPP MSzht Engineer
-rmc-job-description-spp-engineer = ""
+rmc-ghost-name-spp-hostile-engineer = SPP Squad Sapper (Hostile)
+rmc-ghost-name-spp-friendly-engineer = SPP Squad Sapper (Friendly)
+rmc-job-name-spp-engineer = MSzht Engineer
 rmc-job-prefix-spp-engineer = Sap
 
-CMSPPMedic = SPP MSzht Medic
-rmc-job-description-spp-medic = ""
+rmc-ghost-name-spp-hostile-medic = SPP Squad Medic (Hostile)
+rmc-ghost-name-spp-friendly-medic = SPP Squad Medic (Friendly)
+rmc-job-name-spp-medic = MSzht Medic
 rmc-job-prefix-spp-medic = Med
 
-CMSPPMilitaryPolice = SPP Politsiya
-rmc-job-description-spp-military-police = ""
-rmc-job-prefix-spp-military-police = MP
+rmc-ghost-name-spp-hostile-mp = SPP Military Police (Hostile)
+rmc-ghost-name-spp-friendly-mp = SPP Military Police (Friendly)
+rmc-job-name-spp-mp = Politsiya
+rmc-job-prefix-spp-mp = MP

@@ -1,0 +1,75 @@
+- type: job
+  parent: RMCSurvivorForeconBase
+  id: RMCSurvivorForeconSquadLeader
+  name: cm-job-name-squad-leader
+  playTimeTracker: RMCJobSurvivorSquadLeaderForecon
+  ranks:
+    RMCRankSecondLT: []
+  icon: "CMJobIconSquadLeader"
+  roleWeight: 1
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 3600 # 1 hour
+  spawnMenuRoleName: FORECON Squad Leader (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 0
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 1
+        RMCSkillVehicles: 0
+    - type: MarineOrders
+    - type: SquadLeader
+    - type: RMCPointing
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetForeconSquadLead
+  hidden: true
+
+- type: playTimeTracker
+  id: RMCJobSurvivorSquadLeaderForecon
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointForeconSquadLeader
+  name: forecon squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorForeconSquadLeader
+  - type: Sprite
+    state: leader_spawn
+
+- type: entity
+  parent: RMCSurvivorPresetForecon
+  id: RMCSurvivorPresetForeconSquadLead
+  name: forecon squad leader survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ WeaponShotgunM42A2, RMCBoxShotgunSlugs ]

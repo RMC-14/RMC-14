@@ -78,7 +78,26 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/chances.yml
     camouflage: Classic
-    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
+    announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
+    survivorJobs:
+    - RMCSurvivorCommandingOfficer: 1
+    - RMCSurvivorForeconBase: 7
+    survivorJobInserts:
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorForeconCommander: 1
+      RMCSurvivorForeconBase:
+      - RMCSurvivorForeconSupportTech: 1
+      - RMCSurvivorForeconSquadLeader: 1
+      - RMCSurvivorForeconSniper: 1
+      - RMCSurvivorForeconSmartgunOperator: 1
+      - RMCSurvivorForeconMarksman: 1
+      - RMCSurvivorForeconRifleman: 3
+    survivorJobOverrides:
+      CMSurvivor: RMCSurvivorForeconBase
+      CMSurvivorCorporate: RMCSurvivorForeconBase
+      CMSurvivorDoctor: RMCSurvivorForeconBase
+      CMSurvivorEngineer: RMCSurvivorForeconBase
+      CMSurvivorSecurity: RMCSurvivorForeconBase
 
 - type: entity
   id: RMCPlanetHybrisa

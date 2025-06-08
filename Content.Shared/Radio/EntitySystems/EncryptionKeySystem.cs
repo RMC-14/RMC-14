@@ -86,6 +86,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         }
 
         RaiseLocalEvent(uid, new EncryptionChannelsChangedEvent(component));
+        Dirty(uid, component);
     }
 
     private void OnContainerModified(EntityUid uid, EncryptionKeyHolderComponent component, ContainerModifiedMessage args)
@@ -177,7 +178,8 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        if (component.KeyContainer.ContainedEntities.Count == 0)
+        if (component.KeyContainer.ContainedEntities.Count == 0 &&
+            component.Channels.Count == 0)
         {
             args.PushMarkup(Loc.GetString("encryption-keys-no-keys"));
             return;

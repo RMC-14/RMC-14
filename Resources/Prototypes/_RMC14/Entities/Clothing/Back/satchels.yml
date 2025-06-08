@@ -186,8 +186,8 @@
 - type: entity
   parent: CMSatchel
   id: CMSatchelMarine
-  name: Marine satchel
-  description: A heavy-duty satchel carried by some Marine soldiers and support personnel.
+  name: UNMC satchel
+  description: A heavy-duty satchel carried by some UNMC soldiers and support personnel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
@@ -233,6 +233,12 @@
       Snow: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchelMarineIntel # Reskin for FORECON
+  id: RMCSatchelMarineLogisticsBig
+  name: UNMC logistics IMP backpack
+  description: A standard-issue backpack worn by logistics personnel. It is occasionally issued to combat personnel for longer term expeditions and deep space incursions.
 
 - type: entity
   parent: CMSatchelMarineIntel
@@ -438,6 +444,21 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
 
 - type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFirstAidKitFilled
+    - id: RMCPowerCellSmartgun
+    - id: RMCMagazineSmartGunHT
+      amount: 2
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: CMPackFlare
+
+- type: entity
   parent: RMCSatchelWelder
   id: RMCSatchelLightpackWelder
   name: lightweight technician welderpack
@@ -445,3 +466,75 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelSPP
+  name: UCP3 combat pack
+  description: An SPP military standard-issue Union Combat Pack MK3.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/SPP/standard.rsi
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPRifleman
+  suffix: Filled, Rifleman
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: CMFireExtinguisherPortable
+    - id: CMPackFlare
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPMedic
+  suffix: Filled, Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMRollerBedSpawnFolded
+
+- type: entity
+  parent: RMCSatchelWelder
+  id: RMCSatchelSPPWelder
+  name: UCP3-E technician welderpack
+  description: A special version of the Union Combat Pack MK3 featuring a small fueltank for quick blowtorch refueling. Used by SPP Sappers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/SPP/welder.rsi
+
+- type: entity
+  parent: RMCSatchelSPPWelder
+  id: RMCSatchelSPPWelderEngineer
+  suffix: Filled, Engineer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: RMCMotionDetector # TODO RMC14: hacked MD
+    - id: RMCSentryMiniSPP
+
+- type: entity
+  parent: CMSatchelMarineMedic
+  id: RMCSatchelPMCMedic
+  description: pmc medic combat pack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/medic.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelTSEPA
+  name: TSP-4 police pack
+  description: A TSEPA standard-issue Three Suns Pack MK4.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi

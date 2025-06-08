@@ -120,7 +120,7 @@
       ignoreModifiers: true
     - range: 0
       falloff: 1
-  - type: StaminaDamageOnCollide
+  - type: RMCStaminaDamageOnCollide
     damage: 45
   - type: RMCProjectileAccuracy
     accuracy: 100

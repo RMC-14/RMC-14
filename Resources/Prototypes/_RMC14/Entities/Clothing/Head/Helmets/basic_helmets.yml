@@ -24,11 +24,12 @@
         - RMCFlask
         - CMScalpel
         - Figurine
+        - CassettePlayer
+        - CassetteTape
         tags:
-#       - TODO RMC14 cards
+        #       - TODO RMC14 cards
         - Slice
-#       - TODO RMC14 glasses (eyewear)
-#       - TODO RMC14 walkman and casettes
+        #       - TODO RMC14 glasses (eyewear)
         - Pen
         - Crayon
         - RMCHandful
@@ -62,13 +63,14 @@
       - Figurine
       - Matchbox
       - HelmetAccessory
+      - CassettePlayer
+      - CassetteTape
       tags:
       - CigPack
       - Cigarette
-#      - TODO RMC14 cards
+      #      - TODO RMC14 cards
       - Slice
-#      - TODO RMC14 glasses (eyewear)
-#      - TODO RMC14 walkman and casettes
+      #      - TODO RMC14 glasses (eyewear)
       - Pen
       - Crayon
       - RMCHandful
@@ -106,13 +108,22 @@
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: sql-helmet
   - type: CycleableVisor
+    offIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: sight_up
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
 
 - type: entity
   id: RMCFoldableHelmetBase
   abstract: true
   components:
   - type: Foldable
-    unfoldVerbText : "rmc-untuck"
+    unfoldVerbText: "rmc-untuck"
     foldVerbText: "rmc-tuck"
     canFoldInsideContainer: true
   - type: FoldableClothing
@@ -120,36 +131,5 @@
     - Hair
     - HeadTop
     - HeadSide
-    unfoldedHideLayers: []
+    unfoldedHideLayers: [ ]
   - type: HideLayerClothing
-
-# riot
-- type: entity
-  parent: [RMCHelmetBase, RMCFoldableHelmetBase]
-  id: ArmorHelmetRiot
-  name: riot helmet
-  description: It's a helmet specifically designed to protect against close range attacks. It covers your ears.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
-  - type: CMArmor
-    melee: 30
-    bullet: 10
-    explosionArmor: 0
-  - type: CMHardArmor
-
-- type: entity
-  parent: ArmorHelmetRiot
-  id: ArmorHelmetRiotOld
-  description: BA scarred riot helmet covered in cobwebs. It still protects your ears.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/old_riot.rsi
-    layers:
-    - state: icon
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/old_riot.rsi
-    equipDelay: 2
-    unequipDelay: 2

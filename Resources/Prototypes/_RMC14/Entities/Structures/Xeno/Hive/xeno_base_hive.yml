@@ -2,6 +2,9 @@
   abstract: true
   id: BaseHiveStructure
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideHiveStructures
   - type: Transform
     anchored: true
   - type: Physics
@@ -23,7 +26,6 @@
     priority: -1
     transparency: 0.2
   - type: XenoConstruct
-    destroyWeedNodes: false
   - type: MeleeReceivedMultiplier
     otherMultiplier: 8.2
   - type: XenoAnnounceStructureDestruction
@@ -34,6 +36,9 @@
   abstract: true
   id: BaseHiveStructureNode
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideHiveStructures
   - type: Transform
     anchored: true
   - type: InteractionOutline

@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
+using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -18,6 +19,7 @@ using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -60,6 +62,7 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, UseInHandEvent>(OnSentryUseInHand);
         SubscribeLocalEvent<SentryComponent, SentryDeployDoAfterEvent>(OnSentryDeployDoAfter);
         SubscribeLocalEvent<SentryComponent, ActivateInWorldEvent>(OnSentryActivateInWorld);
+        SubscribeLocalEvent<SentryComponent, AmmoShotEvent>(OnSentryAmmoShot);
         SubscribeLocalEvent<SentryComponent, AttemptShootEvent>(OnSentryAttemptShoot);
         SubscribeLocalEvent<SentryComponent, InteractUsingEvent>(OnSentryInteractUsing);
         SubscribeLocalEvent<SentryComponent, SentryInsertMagazineDoAfterEvent>(OnSentryInsertMagazineDoAfter);
@@ -176,6 +179,22 @@ public sealed class SentrySystem : EntitySystem
     {
         if (args.User != ent.Owner)
             args.Cancelled = true;
+    }
+
+    private void OnSentryAmmoShot(Entity<SentryComponent> ent, ref AmmoShotEvent args)
+    {
+        if(!ent.Comp.HomingShots)
+            return;
+
+        //Make projectiles shot from a sentry gun homing.
+        foreach (var projectile in args.FiredProjectiles)
+        {
+            if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
+                return;
+
+            var homing = EnsureComp<HomingProjectileComponent>(projectile);
+            homing.Target = targeted.Target;
+        }
     }
 
     private void OnSentryInteractUsing(Entity<SentryComponent> sentry, ref InteractUsingEvent args)
@@ -516,6 +535,17 @@ public sealed class SentrySystem : EntitySystem
             var othersMsg = Loc.GetString("rmc-sentry-disassemble-start-others", ("user", user), ("sentry", sentry));
             _popup.PopupPredicted(selfMsg, othersMsg, sentry, user);
         }
+    }
+
+    public bool TrySetMode(Entity<SentryComponent> sentry, SentryMode mode)
+    {
+        if (sentry.Comp.Mode == mode)
+            return false;
+
+        sentry.Comp.Mode = mode;
+        UpdateState(sentry);
+        Dirty(sentry, sentry.Comp);
+        return true;
     }
 
     public override void Update(float frameTime)

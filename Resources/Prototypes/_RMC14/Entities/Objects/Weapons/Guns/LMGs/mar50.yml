@@ -1,5 +1,5 @@
-﻿- type: entity
-  parent: CMBaseWeaponRifle
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: MAR-50 light machine gun
   id: RMCWeaponMar50LMG
   description: A cheap, reliable LMG chambered in 7.62x39mm. Commonly found in the hands of slightly better funded criminals.
@@ -40,7 +40,7 @@
     recoilUnwielded: 4
     scatterWielded: 10
     scatterUnwielded: 20
-    baseFireRate: 5
+    baseFireRate: 3.33
     burstScatterMult: 3
     modifiers:
       Burst:
@@ -78,10 +78,6 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-      rmc-aslot-underbarrel:
-        whitelist:
-          tags:
-          - RMCAttachmentBipod
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.5, 0.00

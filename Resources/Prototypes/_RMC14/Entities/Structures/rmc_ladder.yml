@@ -19,3 +19,20 @@
   - type: PlacementReplacement
     key: ladders
   - type: Ladder
+  - type: BlockXenoConstruction
+
+- type: entity
+  parent: RMCLadder
+  id: RMCLadderUp
+  suffix: Up
+  components:
+  - type: Sprite
+    state: ladderup
+
+- type: entity
+  parent: RMCLadder
+  id: RMCLadderThrough
+  suffix: Through
+  components:
+  - type: Sprite
+    state: ladder11

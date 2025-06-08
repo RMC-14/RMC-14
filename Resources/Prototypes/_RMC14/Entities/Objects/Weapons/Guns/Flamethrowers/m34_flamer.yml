@@ -34,6 +34,9 @@
     soundGunshot:
       collection: RMCFlamerShoot
   - type: ShootUseDelay
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -46,6 +49,11 @@
           components:
           - RMCFlamerTank
   - type: Wieldable
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: GunRequiresWield
   - type: RMCFlamerAmmoProvider
   - type: MagazineVisuals
@@ -72,6 +80,7 @@
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
   - type: RMCIgniter
+  - type: RMCAmmoEject
   - type: GenericVisualizer
     visuals:
       enum.RMCFlamerVisualLayers.Strip:
@@ -82,6 +91,29 @@
         enum.RMCIgniterVisuals.Ignited:
           True: { visible: true }
           False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorM34
+
+- type: Tag
+  id: RMCWeaponIncineratorM34
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerUnloaded
+  suffix: Unloaded
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: null
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          components:
+          - RMCFlamerTank
 
 - type: entity
   parent: BaseItem
@@ -94,7 +126,8 @@
     state: flametank_custom
     layers:
     - state: flametank_custom
-    - state: flametank_custom_strip0
+    - state: flametank_custom_strip2
+    - state: flametank_custom_strip2
       map: [ "enum.SolutionContainerLayers.Fill" ]
   - type: Item
     size: Normal
@@ -118,10 +151,11 @@
     solution: rmc_flamer_tank
   - type: NoMixingReagents
   - type: SolutionContainerVisuals
-    maxFillLevels: 1
-    emptySpriteName: flametank_custom_strip0
+    maxFillLevels: 2
     fillBaseName: flametank_custom_strip
   - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
 
 - type: entity
   parent: RMCGunCaseBase

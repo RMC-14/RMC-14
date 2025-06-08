@@ -1,0 +1,85 @@
+- type: latheRecipe
+  id: RMCM40GrenadeCasing
+  result: RMCM40GrenadeCasing
+  completetime: 4
+  materials:
+    CMSteel: 67 # 4250
+
+- type: latheRecipe
+  id: RMCM15GrenadeCasing
+  result: RMCM15GrenadeCasing
+  completetime: 4
+  materials:
+    CMSteel: 187 # 7000
+
+- type: latheRecipe
+  id: RMCM20MineCasing
+  result: RMCM20MineCasing
+  completetime: 4
+  materials:
+    CMSteel: 100 # 3750
+
+- type: latheRecipe
+  id: RMCC4PlasticCasing
+  result: RMCC4PlasticCasing
+  completetime: 4
+  materials:
+    CMSteel: 200 # 7500
+    RMCPlastic: 53 # 2000
+
+- type: latheRecipe
+  id: RMC84mmRocketTube
+  result: RMC84mmRocketTube
+  completetime: 4
+  materials:
+    CMSteel: 200 # 7500
+
+- type: latheRecipe
+  id: RMC84mmRocketWarhead
+  result: RMC84mmRocketWarhead
+  completetime: 4
+  materials:
+    CMSteel: 300 # 11250
+
+- type: latheRecipe
+  id: RMC80mmMortarShell
+  result: RMC80mmMortarShell
+  completetime: 4
+  materials:
+    CMSteel: 500 # 18750
+
+- type: latheRecipe
+  id: RMC80mmMortarWarhead
+  result: RMC80mmMortarWarhead
+  completetime: 4
+  materials:
+    CMSteel: 300 # 11250
+
+- type: latheRecipe
+  id: RMC80mmMortarCameraWarhead
+  result: RMC80mmMortarCameraWarhead
+  completetime: 4
+  materials:
+    CMSteel: 400 # 15000
+
+- type: latheRecipe
+  id: RMCCustomM34A1FuelTankCase
+  result: RMCCustomM34A1FuelTankCase
+  completetime: 4
+  materials:
+    CMSteel: 100 # 3750
+
+- type: latheRecipe
+  id: RMCCustomM34TFuelTankCase
+  result: RMCCustomM34TFuelTankCase
+  completetime: 4
+  materials:
+    CMSteel: 100 # 3750 (Not listed in CM13 code, this is a guess.)
+
+- type: latheRecipe
+  id: RMCCustomM34A1SmokeTankCase
+  result: RMCCustomM34A1SmokeTankCase
+  completetime: 4
+  materials:
+    CMSteel: 100 # 3750
+

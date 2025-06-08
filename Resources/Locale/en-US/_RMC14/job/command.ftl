@@ -15,9 +15,23 @@ cm-job-prefix-commanding-officer = CO
 CMJobCommandingOfficer = Commanding Officer
 
 cm-job-name-executive-officer = Executive Officer
-cm-job-description-executive-officer = You are second in command aboard the ship, and are the next in the chain of command after the Commanding Officer.
+cm-job-description-executive-officer = You are second in command aboard the ship, and are the next in the Commander Succession after the Commanding Officer.
 cm-job-prefix-executive-officer = XO
 CMJobExecutiveOfficer = Executive Officer
 
+# Special operation capable
+rmc-job-prefix-forecon-marksman = MKSMN
+rmc-job-prefix-forecon-support-tech = SPT
+rmc-job-prefix-forecon-co = Cmdr.
+
 # Admin only right now.
 cm-job-name-high-command = High Command
+
+# Admin only brig gen.
+rmc-job-name-unmc-brigadier-general = High Command
+rmc-job-description-unmc-brigadier-general = "High Command. Congrats, you're a Brigadier General!"
+
+# admin spawn only high comm Adjutant
+rmc-job-name-unmc-adjutant = High Command Adjutant
+rmc-job-description-unmc-adjutant = "You're the Adjutant to a high ranked officer. They must be important!"
+rmc-job-prefix-unmc-adjutant = ADJ

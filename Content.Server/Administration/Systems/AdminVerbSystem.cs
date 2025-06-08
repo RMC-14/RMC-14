@@ -57,7 +57,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IConsoleHost _console = default!;
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly IMapManager _mapManager = default!;
+        [Dependency] private readonly SharedMapSystem _map = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly AdminSystem _adminSystem = default!;
         [Dependency] private readonly DisposalTubeSystem _disposalTubes = default!;
@@ -160,12 +160,10 @@ namespace Content.Server.Administration.Systems
 
                             var profile = _ticker.GetPlayerProfile(targetActor.PlayerSession);
                             var mobUid = _spawning.SpawnPlayerMob(coords.Value, null, profile, stationUid);
-                            var targetMind = _mindSystem.GetMind(args.Target);
 
-                            if (targetMind != null)
-                            {
-                                _mindSystem.TransferTo(targetMind.Value, mobUid, true);
-                            }
+                            if (_mindSystem.TryGetMind(args.Target, out var mindId, out var mindComp))
+                                _mindSystem.TransferTo(mindId, mobUid, true, mind: mindComp);
+
                         },
                         ConfirmationPopup = true,
                         Impact = LogImpact.High,
@@ -182,7 +180,7 @@ namespace Content.Server.Administration.Systems
                             foreach (var job in _prototypeManager.EnumerateCM<JobPrototype>())
                             {
                                 var ev = new SpawnAsJobDialogEvent(GetNetEntity(args.User), GetNetEntity(args.Target), job.ID);
-                                jobs.Add(new DialogOption(job.LocalizedName, ev));
+                                jobs.Add(new DialogOption(job.SpawnMenuRoleName ?? job.LocalizedName, ev));
                             }
 
                             jobs.Sort((a, b) => string.Compare(a.Text, b.Text, StringComparison.Ordinal));

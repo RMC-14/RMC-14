@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
@@ -94,7 +94,8 @@ public sealed class RMCStorageSystem : EntitySystem
     private void OnStorageFillItem(Entity<StorageComponent> storage, ref CMStorageItemFillEvent args)
     {
         var tries = 0;
-        while (!_storage.CanInsert(storage, args.Item, null, out var reason) &&
+        // Ignore stackables because SharedStorageSystem.OnAttemptInsert does not stack items.
+        while (!_storage.CanInsert(storage, args.Item, null, out var reason, ignoreStacks: true) &&
                reason == "comp-storage-insufficient-capacity" &&
                tries < 3)
         {
@@ -341,6 +342,27 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
+    private bool CanEjectStoreSkill(Entity<StorageComponent?, StorageSkillRequiredComponent?> store, EntityUid? user, out LocId popup)
+    {
+        popup = default;
+        if (user == null)
+            return true;
+
+        if (!Resolve(store, ref store.Comp2, false) ||
+            !_storageQuery.Resolve(store, ref store.Comp1, false))
+        {
+            return true;
+        }
+
+        if (!_skills.HasAllSkills(user.Value, store.Comp2.Skills))
+        {
+            popup = Loc.GetString("cm-storage-unskilled");
+            return false;
+        }
+
+        return true;
+    }
+
     public bool TryGetLastItem(Entity<StorageComponent?> storage, out EntityUid item)
     {
         item = default;
@@ -369,12 +391,49 @@ public sealed class RMCStorageSystem : EntitySystem
         return item != default;
     }
 
+    public bool TryGetFirstItem(Entity<StorageComponent?> storage, out EntityUid item)
+    {
+        item = default;
+        if (!Resolve(storage, ref storage.Comp, false))
+            return false;
+
+        ItemStorageLocation? firstLocation = null;
+        foreach (var (stored, location) in storage.Comp.StoredItems)
+        {
+            if (firstLocation is not { } first ||
+                first.Position.Y > location.Position.Y)
+            {
+                item = stored;
+                firstLocation = location;
+                continue;
+            }
+
+            if (first.Position.Y == location.Position.Y &&
+                first.Position.X < location.Position.X)
+            {
+                item = stored;
+                firstLocation = location;
+            }
+        }
+
+        return item != default;
+    }
+
     public bool CanInsert(Entity<StorageComponent?> storage, EntityUid toInsert, EntityUid? user, out LocId popup)
     {
         if (!CanInsertStorageLimit((storage, storage, null), toInsert, out popup))
             return false;
 
         if (!CanInsertStoreSkill((storage, storage, null), toInsert, user, out popup))
+            return false;
+
+        return true;
+    }
+
+    public bool CanEject(EntityUid storage, EntityUid user, out LocId popup)
+    {
+
+        if (!CanEjectStoreSkill(storage, user, out popup))
             return false;
 
         return true;
