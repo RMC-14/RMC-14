@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed scout and sniper invis randomly going on extremely long cooldowns,
-      which is only supposed to happen if they are the last marine left alive.
-    type: Fix
-  id: 1328
-  time: '2025-02-11T22:46:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5593
 - author: Ian321
   changes:
   - message: Fixed clothes with attached webbing not being larger.
@@ -5202,5 +5194,12 @@
   id: 1830
   time: '2025-06-08T01:57:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6645
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added fill visuals for shotgun shell pouch and loading rig.
+    type: Add
+  id: 1831
+  time: '2025-06-08T04:27:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6644
 Name: RMC14
 Order: -1
