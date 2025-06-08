@@ -36,7 +36,6 @@
   id: RMCHeadsetTSEAbstract
   components:
   - type: GrantSquadLeaderTracker
-  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetTSEAbstract
