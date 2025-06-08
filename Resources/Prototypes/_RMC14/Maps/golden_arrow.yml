@@ -1,6 +1,6 @@
 - type: gameMap
-  id: Golden Arrow
-  mapName: "Golden Arrow"
+  id: GoldenArrow
+  mapName: "GoldenArrow"
   mapPath: /Maps/_RMC14/golden_arrow.yml
   minPlayers: 0
   maxRandomOffset: 0
