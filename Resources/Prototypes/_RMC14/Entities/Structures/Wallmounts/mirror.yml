@@ -1,0 +1,25 @@
+- type: entity
+  id: RMCMirror
+  name: mirror
+  description: Mirror mirror on the wall, who's the most robust of them all?
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: WallMount
+    arc: 360
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Rotatable
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/mirror.rsi
+    state: mirror
+    snapCardinals: true

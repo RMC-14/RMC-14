@@ -1,9 +1,38 @@
 <DefaultWindow
-    SetSize="300 400"
     Margin="4 0"
-    xmlns="https://spacestation14.io">
-    <BoxContainer Orientation="Vertical">
-        <ItemList Name="SelectableTunnels" Access="Public" SelectMode="Single" VerticalExpand="True"  Margin ="0 4"/>
-        <Button Name="SelectButton" Access="Public" Margin ="0 4"/>
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap">
+
+    <BoxContainer Orientation="Horizontal">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" MinSize="300 0">
+            <Label Text="Available Tunnels" StyleClasses="LabelHeading" Margin="0 4"/>
+            <ItemList Name="SelectableTunnels" Access="Public" SelectMode="Single"
+                    VerticalExpand="True" Margin="0 4" MinSize="0 300"/>
+
+            <BoxContainer Orientation="Vertical" Margin="0 8">
+                <Label Text="Selected Tunnel:" StyleClasses="LabelSubHeading"/>
+                <Label Name="SelectedTunnelLabel" Access="Public" Text="None selected"
+                       Margin="4 2" StyleClasses="LabelSecondary" ClipText="True"
+                       ToolTip="None selected"/>
+                <Label Name="CurrentTunnelLabel" Access="Public" Text="Current: Unknown"
+                       Margin="4 2" StyleClasses="LabelSecondary" ClipText="True"
+                       ToolTip="Current: Unknown"/>
+            </BoxContainer>
+
+            <Button Name="SelectButton" Access="Public" Margin="0 4"
+                    Text="Travel to Selected Tunnel" MinSize="0 40"/>
+        </BoxContainer>
+
+
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" Margin="0 4">
+                <Label Text="Tunnel Network" StyleClasses="LabelHeading" HorizontalExpand="True"/>
+                <CheckBox Name="ShowOnlyTunnelsCheckbox" Access="Public" Text="Show Only Tunnels" Pressed="True" Margin="8 0"/>
+            </BoxContainer>
+
+            <controls:TacticalMapWrapper Name="TacticalMapWrapper"
+                                        Access="Public"
+                                        Margin="0 4"/>
+        </BoxContainer>
     </BoxContainer>
 </DefaultWindow>

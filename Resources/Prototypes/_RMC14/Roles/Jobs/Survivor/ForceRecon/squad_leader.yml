@@ -7,7 +7,14 @@
     RMCRankSecondLT: []
   icon: "CMJobIconSquadLeader"
   roleWeight: 1
-  hasIcon: true
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 3600 # 1 hour
+  spawnMenuRoleName: FORECON Squad Leader (Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,7 +45,7 @@
         tags:
         - RMCSquadFORECON
     - type: JobPrefix
-      prefix: rmc-job-prefix-forecon
+      prefix: cm-job-prefix-squad-leader
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconSquadLead
   hidden: true

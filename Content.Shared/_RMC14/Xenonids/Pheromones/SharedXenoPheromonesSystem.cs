@@ -168,7 +168,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (_rmcFlammable.IsOnFire(warding.Owner))
             return;
 
-        if (!TryComp<XenoRegenComponent>(warding, out var xeno) || (!xeno.HealOffWeeds && !_weeds.IsOnWeeds(warding.Owner)))
+        if (!TryComp<XenoRegenComponent>(warding, out var xeno) || (!xeno.HealOffWeeds && !_weeds.IsOnFriendlyWeeds(warding.Owner)))
         {
             var damageReduct = _rmcDamageable.DistributeHealing(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.25);
             args.Damage -= damageReduct;
@@ -272,7 +272,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (newWardMult > warding.Multiplier)
             return false;
 
-        if ((TryComp<XenoRegenComponent>(ent, out var xeno) && xeno.HealOffWeeds) || !_weeds.IsOnWeeds(ent))
+        if ((TryComp<XenoRegenComponent>(ent, out var xeno) && xeno.HealOffWeeds) || !_weeds.IsOnFriendlyWeeds(ent))
             return false;
 
         return true;
