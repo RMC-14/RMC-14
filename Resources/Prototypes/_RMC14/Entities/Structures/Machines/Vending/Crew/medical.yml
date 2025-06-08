@@ -31,7 +31,7 @@
       - CMNurse
       takeAll: CMMedicalSet
       entries:
-      - id: RMCVendorBundleCrewMedicalEssentialsNurse
+      - id: CMVendorBundleCrewMedicalEssentialsNurse
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
