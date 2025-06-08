@@ -500,4 +500,5 @@ public enum LogType
     RMCXenoSpawn = RMCMarineAnnounce + 32,
     RMCLobbyMessage = RMCMarineAnnounce + 33,
     RMCChemMaster = RMCMarineAnnounce + 34,
+    RMCCharacterDescription = RMCMarineAnnounce + 35,
 }
