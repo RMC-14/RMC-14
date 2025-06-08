@@ -97,9 +97,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: #TODO redemption stimulant autoinjector
+#    - id: #TODO redemption stimulant autoinjector
     - id: CMEmergencyAutoInjector
-    - id: #TODO oxycodone autoinjector
+#    - id: #TODO oxycodone autoinjector
 
 - type: entity
   parent: RMCSyringeCase
