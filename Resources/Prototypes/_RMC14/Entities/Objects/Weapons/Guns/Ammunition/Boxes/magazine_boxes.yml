@@ -772,7 +772,7 @@
     - state: smg_box_63
       color: "#ffcb26"
     - state: smg_box_marking
-      color: "#ffcb26"
+      color: "#cffb26"
     - state: smg_lid
       map: [ "lid" ]
       color: "#727e90"
@@ -903,17 +903,17 @@
       color: "#b2976e"
     - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-      color: "#318b11"
+      color: "#9C4E00"
     - state: pistol_box_1984
       color: "#ffcb26"
     - state: pistol_box_marking
-      color: "#318b11"
+      color: "#ffcb26"
     - state: pistol_lid
       map: [ "lid" ]
       color: "#b2976e"
     - state: pistol_lid_marking
       map: [ "lid_marking" ]
-      color: "#318b11"
+      color: "#ffcb26"
   - type: CMItemSlots
     count: 16
     slot:
