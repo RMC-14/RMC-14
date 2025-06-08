@@ -47,47 +47,58 @@ public abstract class SharedBarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, RMCConstructionUpgradedEvent>(OnConstructionUpgraded);
     }
 
-    public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
+    private void OnAttacked(Entity<BarbedComponent> barbed, ref AttackedEvent args)
     {
-        if (!component.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
+        if (!barbed.Comp.IsBarbed)
+            return;
+
+        _damageableSystem.TryChangeDamage(args.User, barbed.Comp.ThornsDamage, origin: barbed, tool: barbed);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), barbed, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnInteractUsing(Entity<BarbedComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!ent.Comp.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
             var ev = new BarbedDoAfterEvent();
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.WireTime, ev, uid, used: args.Used)
+            var barbDoAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.WireTime, ev, ent, ent, used: args.Used)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
                 NeedHand = true,
                 AttemptFrequency = AttemptFrequency.EveryTick,
                 CancelDuplicate = false,
-                DuplicateCondition = DuplicateConditions.None
+                DuplicateCondition = DuplicateConditions.SameTarget,
             };
-            if (_doAfterSystem.TryStartDoAfter(doAfterEventArgs))
+
+            if (_doAfterSystem.TryStartDoAfter(barbDoAfter))
             {
-                _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), uid, args.User);
+                _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), ent, args.User);
             }
+
             return;
         }
 
-        if (component.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
+        if (ent.Comp.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), uid, args.User);
+            _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), ent, args.User);
             return;
         }
 
-        if (component.IsBarbed && TryComp<ToolComponent>(args.Used, out var tool))
+        if (!ent.Comp.IsBarbed || !TryComp<ToolComponent>(args.Used, out var tool))
+            return;
+
+        if (!_toolSystem.HasQuality(args.Used, ent.Comp.RemoveQuality, tool))
+            return;
+
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), ent, args.User);
+        var cutDoAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.CutTime, new CutBarbedDoAfterEvent(), ent, used: args.Used)
         {
-            if (_toolSystem.HasQuality(args.Used, component.RemoveQuality, tool))
-            {
-                _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), uid, args.User);
-                var wirecutterDoAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.CutTime, new CutBarbedDoAfterEvent(), uid, used: args.Used)
-                {
-                    BreakOnMove = true,
-                    BreakOnDamage = true,
-                    NeedHand = true,
-                };
-                _doAfterSystem.TryStartDoAfter(wirecutterDoAfterEventArgs);
-            }
-        }
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = true,
+        };
+        _doAfterSystem.TryStartDoAfter(cutDoAfter);
     }
 
     private void OnDoAfterAttempt(Entity<BarbedComponent> barbed, ref DoAfterAttemptEvent<BarbedDoAfterEvent> args)
@@ -144,15 +155,6 @@ public abstract class SharedBarbedSystem : EntitySystem
         UpdateAppearance(barbed);
 
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
-    }
-
-    private void OnAttacked(Entity<BarbedComponent> barbed, ref AttackedEvent args)
-    {
-        if (barbed.Comp.IsBarbed)
-        {
-            _damageableSystem.TryChangeDamage(args.User, barbed.Comp.ThornsDamage, origin: barbed, tool: barbed);
-            _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), barbed, args.User, PopupType.SmallCaution);
-        }
     }
 
     private void OnDoorStateChanged(Entity<BarbedComponent> barbed, ref DoorStateChangedEvent args)
