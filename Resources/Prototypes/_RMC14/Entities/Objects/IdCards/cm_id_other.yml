@@ -263,3 +263,18 @@
   components:
   - type: PresetIdCard
     job: RMCJobSyntheticColony
+
+
+- type: entity
+  id: RMCIDCardAegis
+  name: Aegis ID card
+  description: An Aegis ID card, can be used to access many secret weapons of theirs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: keycard
+  - type: Access
+    groups:
+      - CMAccessAegis
+  - type: IdCard
+    fullName: "Aegis ID Card"
