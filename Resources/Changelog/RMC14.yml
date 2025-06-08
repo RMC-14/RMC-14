@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Fixed Power loaders continuing to load or unload after the operator gets
-      out.
-    type: Fix
-  id: 1330
-  time: '2025-02-16T04:16:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5643
 - author: Vermidia
   changes:
   - message: Fixed xenos being unable to pat fire on marines.
@@ -5228,5 +5220,13 @@
   id: 1832
   time: '2025-06-08T06:16:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6353
+- author: Dutch-VanDerLinde
+  changes:
+  - message: FORECON Survivors Squad Leader, Marksman, Smart Gun Operator, and support
+      technician now require some extra playtime, compared to normal survivors.
+    type: Add
+  id: 1833
+  time: '2025-06-08T06:53:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6593
 Name: RMC14
 Order: -1
