@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Prototypes;
+﻿using Content.Shared._RMC14.Construction.Prototypes;
+using Content.Shared._RMC14.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -17,6 +18,9 @@ public sealed partial class ConstructionPrototype : IInheritingPrototype, ICMSpe
     [DataField]
     public bool IsCM { get; }
 
-    [DataField("iconColor")]
+    [DataField("rmcPrototype")]
+    public ProtoId<RMCConstructionPrototype>? RMCPrototype { get; }
+
+    [DataField]
     public Color IconColor = Color.FromHex("#ffffff");
 }

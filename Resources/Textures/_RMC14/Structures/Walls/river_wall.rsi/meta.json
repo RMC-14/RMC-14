@@ -1,0 +1,53 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "Sprites made by github noctyrnal",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "river_1"
+        },
+        {
+            "name": "river_2"
+        },
+        {
+            "name": "river_3"
+        },
+        {
+            "name": "river_4"
+        },
+        {
+            "name": "river_5"
+        },
+        {
+            "name": "river_6"
+        },
+        {
+            "name": "river_7"
+        },
+        {
+            "name": "river_8"
+        },
+        {
+            "name": "river_9"
+        },
+        {
+            "name": "river_10"
+        },
+        {
+            "name": "river_11"
+        },
+        {
+            "name": "river_12"
+        },
+        {
+            "name": "river_13"
+        },
+        {
+            "name": "river_14"
+        }
+    ]
+}

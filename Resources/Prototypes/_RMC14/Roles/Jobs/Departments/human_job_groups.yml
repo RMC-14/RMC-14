@@ -74,6 +74,18 @@
 # Survivor roles. At this time pointless, but will probably be used in the future.
 
 - type: entity
+  id: RMCJobsCorporate
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: JobGroup
+    name: role-timer-corporate-roles
+    color: "#78ec0b"
+    jobs:
+    - CMLiaison
+    - CMSurvivorCorporate
+    
+- type: entity
   id: RMCJobsSurvivor
   categories:
   - HideSpawnMenu

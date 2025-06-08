@@ -1,0 +1,10 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCTrafficLightBroken
+  start: start
+  graph:
+  - node: start
+    entity: RMCTrafficLightBroken
+
+  - node: completed
+    entity: RMCTrafficLight
