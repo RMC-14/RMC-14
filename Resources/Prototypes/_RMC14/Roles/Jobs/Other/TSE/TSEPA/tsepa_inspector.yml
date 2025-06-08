@@ -11,7 +11,7 @@
   icon: "RMCJobIconTSEPAInspector"
   joinNotifyCrew: false
   accessGroups:
-  - ColonistSec
+  - ColonistTSEPAInspector
   special:
   - !type:AddComponentSpecial
     components:

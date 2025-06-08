@@ -176,6 +176,7 @@
   - type: Tag
     tags:
     - CMMagazineRifle
+    - RMCMagazineRifleL83A2
     - RMCMagazineRifleL83A2AP
   - type: BallisticAmmoProvider
     whitelist:

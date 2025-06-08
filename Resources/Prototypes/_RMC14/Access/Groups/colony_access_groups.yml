@@ -66,3 +66,30 @@
   - CMAccessColonyPublic
   - CMAccessColonyCommand
   - RMCAccessWeYa # TODO RMC14 weya colonial, weya exec
+
+- type: accessGroup
+  id: ColonistTSEPA
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyBrig
+  - CMAccessColonyCommand
+  - RMCAccessTSEPA
+
+- type: accessGroup
+  id: ColonistTSEPABrig
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyBrig
+  - CMAccessColonyCommand
+  - RMCAccessTSEPA
+  - RMCAccessTSEPABrig
+
+- type: accessGroup
+  id: ColonistTSEPAInspector
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyBrig
+  - CMAccessColonyCommand
+  - RMCAccessTSEPA
+  - RMCAccessTSEPABrig
+  - RMCAccessTSEPAInspector

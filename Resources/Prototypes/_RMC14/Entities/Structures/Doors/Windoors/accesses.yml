@@ -47,3 +47,11 @@
   components:
   - type: AccessReader
     access: [ [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: CMWindoorSecure
+  id: RMCWindoorSecureTSEPABrig
+  suffix: TSEPA, Brig, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessTSEPABrig" ] ]
