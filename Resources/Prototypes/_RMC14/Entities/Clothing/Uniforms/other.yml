@@ -182,15 +182,26 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_utility.rsi
 
 - type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianGreen
+  name: green utility uniform
+  description: A stylish green jumpsuit, popularly issued to UN contract workers on the frontier.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/green_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/green_utility.rsi
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitRedShorts
   name: red shorts
   description: A ratty pair of red shorts. Smells of ciggarettes.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/survivor/varadero_shorts.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/survivor/varadero_shorts.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
 
 # Kutjevo
 - type: entity

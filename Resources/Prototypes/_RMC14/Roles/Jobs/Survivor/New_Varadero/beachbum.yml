@@ -5,7 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorBeachBum
   startingGear: RMCGearSurvivorBeachBum
-  #spawnMenuRoleName: Beach Bum (NV Survivor)
+  spawnMenuRoleName: Beach Bum (NV Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,6 +42,7 @@
         - RMCUndershirtStraplessJungle
 
 - type: startingGear
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorBeachBum
   equipment:
     jumpsuit: RMCJumpsuitRedShorts
@@ -50,9 +51,6 @@
     mask: RMCCigarette
     shoes: RMCShoesSandals
     gloves: CMHandsBrown
-    id: CMIDCardColonist
-    ears: CMHeadsetColony
-    pocket1: RMCPouchSurvivalFill
 
 - type: entity
   parent: CMSatchelFillSurvivor
