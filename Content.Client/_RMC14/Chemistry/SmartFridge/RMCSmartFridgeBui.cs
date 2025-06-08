@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.UserInterface;
 using JetBrains.Annotations;
@@ -21,10 +21,9 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
     private readonly EntityQuery<MetaDataComponent> _metaDataQuery;
 
     private RMCSmartFridgeWindow? _window;
-    private readonly Dictionary<string, RMCSmartFridgeSection> _oldCategories = new();
+
     private readonly SortedDictionary<string, SortedDictionary<string, int>> _contents = new();
     private readonly Dictionary<string, EntityUid> _first = new();
-    private readonly List<string> _toRemove = new();
 
     public RMCSmartFridgeBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -48,19 +47,19 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
         if (_window == null)
             return;
 
+        var tabs = _window.ContentsTabs;
         if (!EntMan.TryGetComponent(Owner, out RMCSmartFridgeComponent? fridge) ||
             !_container.TryGetContainer(Owner, fridge.ContainerId, out var container) ||
             container.ContainedEntities.Count == 0)
         {
-            _window.ContentsTabs.RemoveAllChildren();
-            _oldCategories.Clear();
+            tabs.RemoveAllChildren();
             _window.ContentsEmptyLabel.Visible = true;
-            _window.ContentsTabs.Visible = false;
+            tabs.Visible = false;
             return;
         }
 
         _window.ContentsEmptyLabel.Visible = false;
-        _window.ContentsTabs.Visible = true;
+        tabs.Visible = true;
 
         foreach (var list in _contents.Values)
         {
@@ -92,27 +91,45 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
             if (contents.Count == 0)
                 continue;
 
-            if (!_oldCategories.TryGetValue(category, out var section))
+            RMCSmartFridgeSection section;
+            if (i < tabs.ChildCount)
+            {
+                section = (RMCSmartFridgeSection) tabs.GetChild(i);
+            }
+            else
             {
                 section = new RMCSmartFridgeSection();
-                _oldCategories[category] = section;
-                _window.ContentsTabs.AddChild(section);
+                tabs.AddChild(section);
             }
 
             TabContainer.SetTabTitle(section, category);
-            section.SetPositionInParent(i);
+            TabContainer.SetTabVisible(section, true);
 
-            section.Container.RemoveAllChildren();
+            var j = 0;
             foreach (var (name, amount) in contents)
             {
                 if (!_first.TryGetValue(name, out var first))
+                {
+                    j++;
                     continue;
+                }
 
                 var netFirst = EntMan.GetNetEntity(first);
-                var row = new RMCSmartFridgeRow();
+                RMCSmartFridgeRow row;
+                if (j < section.Container.ChildCount)
+                {
+                    row = (RMCSmartFridgeRow) section.Container.GetChild(j);
+                }
+                else
+                {
+                    row = new RMCSmartFridgeRow();
+                    section.Container.AddChild(row);
+                }
+
                 row.SpriteView.SetEntity(first);
                 row.AmountLabel.Text = $"{amount}";
                 row.NameButton.Text = name;
+                row.NameButton.ClearOnPressed();
                 row.NameButton.OnPressed += _ => SendPredictedMessage(new RMCSmartFridgeVendMsg(netFirst));
 
                 if (EntMan.TryGetComponent(first, out MetaDataComponent? metaData))
@@ -137,28 +154,20 @@ public sealed class RMCSmartFridgeBui : BoundUserInterface, IRefreshableBui
                     row.TooltipLabel.Visible = false;
                 }
 
-                section.Container.AddChild(row);
+                j++;
             }
 
+            section.Container.RemoveChildrenAfter(j);
             i++;
         }
 
-        _toRemove.Clear();
-        foreach (var (oldCategory, row) in _oldCategories)
+        tabs.SetTabVisibleAfter(i, false);
+        tabs.SetVisibleAfter(i, false);
+        var tabIndex = tabs.CurrentTab;
+        if (tabIndex < tabs.ChildCount &&
+            !tabs.GetChild(tabIndex).Visible)
         {
-            if (_contents.TryGetValue(oldCategory, out var category) &&
-                category.All(e => e.Value > 0))
-            {
-                continue;
-            }
-
-            row.Orphan();
-            _toRemove.Add(oldCategory);
-        }
-
-        foreach (var remove in _toRemove)
-        {
-            _oldCategories.Remove(remove);
+            tabs.CurrentTab = 0;
         }
     }
 }

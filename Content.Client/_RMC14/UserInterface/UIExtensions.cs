@@ -50,4 +50,30 @@ public static class UIExtensions
                 parent.RemoveChild(i);
         }
     }
+
+    public static void RemoveChildrenAfter(this Control parent, int after)
+    {
+        for (var i = parent.ChildCount - 1; i >= after; i--)
+        {
+            parent.RemoveChild(i);
+        }
+    }
+
+    public static void SetTabVisibleAfter(this Control parent, int after, bool visible)
+    {
+        for (var i = parent.ChildCount - 1; i >= after; i--)
+        {
+            var child = parent.GetChild(i);
+            TabContainer.SetTabVisible(child, visible);
+        }
+    }
+
+    public static void SetVisibleAfter(this Control parent, int after, bool visible)
+    {
+        for (var i = parent.ChildCount - 1; i >= after; i--)
+        {
+            var child = parent.GetChild(i);
+            child.Visible = visible;
+        }
+    }
 }
