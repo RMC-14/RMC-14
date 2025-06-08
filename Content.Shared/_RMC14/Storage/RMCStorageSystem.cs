@@ -434,7 +434,6 @@ public sealed class RMCStorageSystem : EntitySystem
 
     public bool CanEject(EntityUid storage, EntityUid user, out LocId popup)
     {
-
         if (!CanEjectStoreSkill(storage, user, out popup))
             return false;
 

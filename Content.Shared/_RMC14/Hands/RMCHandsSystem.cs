@@ -94,7 +94,7 @@ public abstract class RMCHandsSystem : EntitySystem
         AlternativeVerb switchStorageVerb = new()
         {
             Text = Loc.GetString("rmc-storage-hand-switch"),
-            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/flip.svg.192dpi.png")),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/flip.svg.192dpi.png")),
             Priority = -2,
             Act = () =>
             {
@@ -107,7 +107,7 @@ public abstract class RMCHandsSystem : EntitySystem
                     RMCStorageEjectState.First => "rmc-storage-hand-eject-first-item",
                     RMCStorageEjectState.Unequip => "rmc-storage-hand-eject-unequips",
                     RMCStorageEjectState.Open => "rmc-storage-hand-eject-open",
-                    _ => string.Empty
+                    _ => string.Empty,
                 };
 
                 _popup.PopupClient(Loc.GetString(popup, ("storage", ent.Owner)), user, user, PopupType.Medium);
@@ -170,6 +170,22 @@ public abstract class RMCHandsSystem : EntitySystem
         return true;
     }
 
+    public bool TryGetNestedStorageParent(EntityUid item, out EntityUid user)
+    {
+        user = default;
+        if (!_container.TryGetContainingContainer((item, null), out var container))
+            return false;
+
+        if (!TryComp(container.Owner, out StorageComponent? storage) ||
+            !storage.StoredItems.ContainsKey(item))
+        {
+            return false;
+        }
+
+        user = container.Owner;
+        return true;
+    }
+
     public bool TryStorageEjectHand(EntityUid user, string handName)
     {
         if (!_hands.TryGetHand(user, handName, out var hand) ||
@@ -201,14 +217,22 @@ public abstract class RMCHandsSystem : EntitySystem
             return false;
         }
 
-        if (eject.State == RMCStorageEjectState.Unequip)
+        if (eject.NestedWhitelist != null)
         {
-            return false;
+            if (!TryGetNestedStorageParent(item, out var parent) ||
+                !_whitelist.IsWhitelistPass(eject.NestedWhitelist, parent))
+            {
+                return false;
+            }
         }
-        else if (eject.State == RMCStorageEjectState.Open)
+
+        switch (eject.State)
         {
-            _storage.OpenStorageUI(item, user, storage, false, false);
-            return true;
+            case RMCStorageEjectState.Unequip:
+                return false;
+            case RMCStorageEjectState.Open:
+                _storage.OpenStorageUI(item, user, storage, false, false);
+                return true;
         }
 
         if (!_rmcStorage.CanEject(item, user, out var popup))
@@ -230,25 +254,36 @@ public abstract class RMCHandsSystem : EntitySystem
         }
 
         EntityUid? pickUpItem = null;
-        if (eject.State == RMCStorageEjectState.Last)
+        switch (eject.State)
         {
-            if (!_rmcStorage.TryGetLastItem((item, storage), out var last))
+            case RMCStorageEjectState.Last:
             {
+                if (_rmcStorage.TryGetLastItem((item, storage), out var last))
+                {
+                    pickUpItem = last;
+                    break;
+                }
+
+                if (eject.EjectWhenEmpty)
+                    return false;
+
                 _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
                 return true;
             }
-
-            pickUpItem = last;
-        }
-        else if (eject.State == RMCStorageEjectState.First)
-        {
-            if (!_rmcStorage.TryGetFirstItem((item, storage), out var first))
+            case RMCStorageEjectState.First:
             {
+                if (_rmcStorage.TryGetFirstItem((item, storage), out var first))
+                {
+                    pickUpItem = first;
+                    break;
+                }
+
+                if (eject.EjectWhenEmpty)
+                    return false;
+
                 _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
                 return true;
             }
-
-            pickUpItem = first;
         }
 
         if (pickUpItem == null)

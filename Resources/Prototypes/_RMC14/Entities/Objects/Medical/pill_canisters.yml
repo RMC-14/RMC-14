@@ -78,7 +78,11 @@
     - suitstorage
   - type: RMCStorageEjectHand
     state: Last
-
+    canToggleStorage: false
+    ejectWhenEmpty: true
+    nestedWhitelist:
+      tags:
+      - RMCBeltMedical
   - type: RMCSmartFridgeInsertable
     category: Pills
 

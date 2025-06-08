@@ -5199,8 +5199,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/6624
 - author: Timemaster99
   changes:
-  - message: Pill canisters can now toggle storage ejection, and can be used while
-      nested inside storage.
+  - message: Clicking a pill canister within a medical belt now pops out a pill.
     type: Tweak
   id: 1824
   time: '2025-06-07T03:38:38.0000000+00:00'
