@@ -907,13 +907,13 @@
     - state: pistol_box_1984
       color: "#ffcb26"
     - state: pistol_box_marking
-      color: "#ffcb26"
+      color: "#6A3200"
     - state: pistol_lid
       map: [ "lid" ]
       color: "#b2976e"
     - state: pistol_lid_marking
       map: [ "lid_marking" ]
-      color: "#ffcb26"
+      color: "#6A3200"
   - type: CMItemSlots
     count: 16
     slot:
