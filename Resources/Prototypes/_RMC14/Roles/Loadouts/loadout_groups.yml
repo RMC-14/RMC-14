@@ -113,6 +113,7 @@
   - NeckerchiefBlackRMC
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefWhiteRMC
 
 # Headwear
 - type: loadoutGroup
@@ -342,6 +343,7 @@
   minLimit: 1
   loadouts:
   - SynthUniformRMC
+  - SynthJumpsuitPristineRMC
   - ScrubsBlueRMC
   - ScrubsLightBlueRMC
   - ScrubsGreenRMC
@@ -480,3 +482,4 @@
   - NeckerchiefBlackRMC
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefWhiteRMC

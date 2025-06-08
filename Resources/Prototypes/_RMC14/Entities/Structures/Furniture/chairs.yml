@@ -72,6 +72,15 @@
     state: comfychair_ares
 
 - type: entity
+  parent: CMChairComfyARES
+  id: RMCChairComfyAI
+  name: AI interface chair
+  suffix: AI
+  components:
+  - type: Sprite
+    state: ai_interface_chair
+
+- type: entity
   parent: CMChairComfy
   id: CMChairComfyBeige
   suffix: Beige

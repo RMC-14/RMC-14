@@ -133,7 +133,7 @@
       - GasTank
       - Pen
       - RMCMacheteScabbard
-      #TODO Katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
 
 
@@ -167,7 +167,7 @@
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
       - RMCMacheteScabbard
-      #TODO Katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
 
 - type: entity
@@ -536,6 +536,21 @@
     contents:
     - id: CMFlash
     - id: RMCHandcuffs
+
+# Synthetic Utility Vest
+- type: entity
+  parent: RMCBaseJacket
+  id: CMUtilityVestSynth
+  name: synthetic utility vest
+  description: A leather utility vest worn by synthetic UNMC personnel. The vest is rather lightweight but has a few pockets for carrying small items. It is not very protective, but it is a good choice for the Synthetics who want to look stylish while working.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
 
 - type: entity
   parent: [RMCOuterClothingExternalWebbing, BaseFoldable]

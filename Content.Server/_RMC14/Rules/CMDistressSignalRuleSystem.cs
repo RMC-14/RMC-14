@@ -93,6 +93,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules;
@@ -153,6 +154,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -370,10 +372,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (SelectedPlanetMap != null)
             {
                 if (SelectedPlanetMap.Value.Comp.SurvivorJobs != null)
-                    comp.SurvivorJobs = SelectedPlanetMap.Value.Comp.SurvivorJobs;
+                    comp.SurvivorJobs = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobs, notNullableOverride: true);
 
-                comp.SurvivorJobInserts = SelectedPlanetMap.Value.Comp.SurvivorJobInserts;
-                comp.SurvivorJobOverrides = SelectedPlanetMap.Value.Comp.SurvivorJobOverrides;
+                comp.SurvivorJobInserts = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobInserts);
+                comp.SurvivorJobOverrides = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobOverrides);
             }
 
             var survivorSpawnersLeft = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
@@ -406,6 +408,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 var spawnAsJob = job;
 
+                var playerId = _random.Pick(list);
+                if (!_player.TryGetSessionById(playerId, out var player))
+                {
+                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
+                    return null;
+                }
+
                 if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
                 {
                     var insertSuccess = false;
@@ -413,6 +422,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     for (var i = 0; i < insert.Count; i++)
                     {
                         var (insertJob, amount) = insert[i];
+
+                        if (!IsAllowed(playerId, insertJob))
+                            continue; // check insert playtime requirements
 
                         if (amount == -1)
                         {
@@ -455,12 +467,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     comp.SurvivorJobs[i] = (survJob, amount - 1);
                 }
 
-                var playerId = _random.PickAndTake(list);
-                if (!_player.TryGetSessionById(playerId, out var player))
-                {
-                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
-                    return null;
-                }
+                list.Remove(playerId); // remove the player from the pool because they passed the checks
 
                 var spawner = _random.PickAndTake(jobSpawnersLeft);
                 ev.PlayerPool.Remove(player);
@@ -712,7 +719,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     foreach (var (job, players) in survivorCandidates)
                     {
                         var list = players[i];
-                        while (list.Count > 0 && selectedSurvivors < totalSurvivors)
+                        var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
+                        while (list.Count > 0 && (ignoreLimit || selectedSurvivors < totalSurvivors))
                         {
                             if (SpawnSurvivor(job, list, out var stop) is { } id)
                             {
@@ -724,7 +732,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                                     }
                                 }
 
-                                selectedSurvivors++;
+                                if (!ignoreLimit)
+                                    selectedSurvivors++;
                             }
 
                             if (stop)
@@ -846,13 +855,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var coordinates = _transform.GetMoverCoordinates(spawner);
                 ev.SpawnResult = _stationSpawning.SpawnPlayerMob(coordinates, ev.Job, ev.HumanoidCharacterProfile, ev.Station);
             }
-
-            // TODO RMC14 split this out with an event
-            SpriteSpecifier? icon = null;
-            if (job.HasIcon && _prototypes.TryIndex(job.Icon, out var jobIcon))
-                icon = jobIcon.Icon;
-
-            _marines.MakeMarine(ev.SpawnResult.Value, icon);
 
             if (squad != null)
             {

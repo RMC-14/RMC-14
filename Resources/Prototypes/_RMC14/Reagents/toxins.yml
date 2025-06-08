@@ -21,3 +21,76 @@
         visualType: SmallCaution
         messages: [ "rmc-body-stings" ]
         probability: 0.2
+
+- type: reagent
+  parent: [ CMReagent, Lexorin ]
+  id: RMCLexorin
+  name: reagent-name-rmclexorin
+  desc: reagent-desc-rmclexorin
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#C8A5DC"
+  overdose: 30
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: 0.25
+          types:
+            Asphyxiation: 4
+      - !type:Emote
+        emote: Gasp
+        probability: 0.1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 2.5
+            Toxin: 2
+          types:
+            Asphyxiation: 10
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 11.25
+            Toxin: 4
+
+- type: reagent
+  parent: [ CMReagent, MindbreakerToxin ]
+  id: RMCMindbreakerToxin
+  name: reagent-name-rmcmindbreakertoxin
+  desc: reagent-desc-rmcmindbreakertoxin
+  color: "#B31008"
+  unknown: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects: #TODO Hallucinations +2 max 40.
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 2 #TODO max 40
+        refresh: false
+      - !type:Emote
+        emote: Laugh #TODO twitches, drools, moans.
+        showInChat: true
+        probability: 0.05
+      - !type:Jitter
+        #TODO RandomWalk at 30 OD
+        #TODO more jitter at 30 OD
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold #TODO 2 brain damage/s at 50 OD
+          min: 50
+        key: Unconscious
+        component: RMCUnconscious
+        type: Add
+        time: 20

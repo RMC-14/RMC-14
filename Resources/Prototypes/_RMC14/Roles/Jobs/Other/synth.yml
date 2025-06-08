@@ -85,6 +85,8 @@
       - type: EyeProtection
       - type: WoundableUntreatable
       - type: Insulated
+      - type: RMCLeapProtection
+        inherentStunDuration: 3
       removeComponents:
       - type: CMSurgeryTarget
       - type: Infectable
@@ -115,15 +117,15 @@
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
 
-#- type: entity
-#  parent: CMSpawnPointJobBase
-#  id: RMCSpawnPointSynth
-#  name: synthetic spawn point
-#  components:
-#  - type: SpawnPoint
-#    job_id: RMCJobSynthetic
-#  - type: Sprite
-#    state: syn_spawn
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSynth
+  name: synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCJobSynthetic
+  - type: Sprite
+    state: syn_spawn
 
 - type: playTimeTracker
   id: RMCJobSynthetic

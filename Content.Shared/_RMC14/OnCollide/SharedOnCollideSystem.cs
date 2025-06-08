@@ -28,6 +28,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private EntityQuery<CollideChainComponent> _collideChainQuery;
     private EntityQuery<DamageOnCollideComponent> _damageOnCollideQuery;
@@ -87,7 +88,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
         _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
 
-        if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.Down(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
+        if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
         {
             _stun.TryParalyze(other, ent.Comp.Paralyze, true);
 

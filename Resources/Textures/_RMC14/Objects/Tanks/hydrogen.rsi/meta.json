@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2021ea2ace2a21b3cfbed0afa5cfb1615472624c/icons/obj/items/tank.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_lefthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2021ea2ace2a21b3cfbed0afa5cfb1615472624c/icons/obj/items/tank.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/tanks_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/tanks_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -11,11 +11,11 @@
       "name": "icon"
     },
     {
-      "name": "inhand-left",
+      "name": "inhand-right",
       "directions": 4
     },
     {
-      "name": "inhand-right",
+      "name": "inhand-left",
       "directions": 4
     }
   ]

@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Operator (M63B2)
   special:
   - !type:AddComponentSpecial
     components:
@@ -43,6 +44,18 @@
     state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardM63B2
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCStandardM63B2
+  name: weya pmc operator spawn point
+  suffix: M63B2
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardM63B2
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
@@ -98,6 +111,7 @@
   id: RMCPMCStandardSSG45
   playTimeTracker: RMCJobPMCStandardSSG45
   startingGear: RMCJobPMCStandardSSG45
+  spawnMenuRoleName: WEYA PMC Operator (SSG-45)
 
 - type: entity
   id: RMCRandomHumanoidPMCStandardSSG45
@@ -109,6 +123,18 @@
     state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardSSG45
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCStandardSSG45
+  name: weya pmc operator spawn point
+  suffix: SSG45
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardSSG45
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
@@ -162,6 +188,7 @@
   id: RMCPMCStandardM54C2
   playTimeTracker: RMCJobPMCStandardM54C2
   startingGear: RMCJobPMCStandardM54C2
+  spawnMenuRoleName: WEYA PMC Operator (M54C2)
 
 - type: entity
   id: RMCRandomHumanoidPMCStandardM54C2
@@ -173,6 +200,18 @@
     state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardM54C2
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCPMCStandardM54C2
+  name: weya pmc operator spawn point
+  suffix: M54C2
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardM54C2
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid

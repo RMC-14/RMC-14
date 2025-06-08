@@ -254,7 +254,6 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
         var ev = new XenoAcidBallDoAfterEvent(GetNetCoordinates(args.Target));
         var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
@@ -285,15 +284,16 @@ public sealed class XenoSpitSystem : EntitySystem
             distance
         );
 
+        foreach (var (actionId, action) in _actions.GetActions(ent))
+        {
+            if (action.BaseEvent is XenoAcidBallActionEvent)
+                _actions.SetUseDelay(actionId, ent.Comp.Cooldown);
+        }
+
         if (!args.Handled)
             return;
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-acid-ball-shoot-self"), ent, ent);
-        foreach (var (actionId, action) in _actions.GetActions(ent))
-        {
-            if (action.BaseEvent is XenoAcidBallActionEvent)
-                _actions.StartUseDelay(actionId);
-        }
     }
 
     private void OnApplyAcidStacksProjectileHit(Entity<ApplyAcidStacksComponent> ent, ref ProjectileHitEvent args)

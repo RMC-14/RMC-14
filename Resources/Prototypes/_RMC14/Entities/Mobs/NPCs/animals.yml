@@ -14,6 +14,7 @@
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature
+    damageCap: 0
     heatDamageThreshold: 423
     coldDamageThreshold: 0
 

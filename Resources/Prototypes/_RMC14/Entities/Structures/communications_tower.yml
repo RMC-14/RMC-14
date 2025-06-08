@@ -4,6 +4,9 @@
   name: TC-3T static telecommunications tower
   description: A static heavy-duty TC-3T telecommunications tower. Used to set up subspace communications lines between planetary and extra-planetary locations. Will need to have extra communication frequencies programmed into it by multitool.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideCommunicationsTowers
   - type: Transform
     anchored: true
   - type: Clickable

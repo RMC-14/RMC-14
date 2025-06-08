@@ -64,6 +64,36 @@
 
 - type: entity
   parent: RMCPropVehicleCargoCrane
+  id: RMCPropVehicleCargoCraneAltHitbox
+  suffix: Alt Hitbox, East
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-1.4,1,0.5"
+        density: 190
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: RMCPropVehicleCargoCraneAltHitbox
+  id: RMCPropVehicleCargoCraneAltHitboxWest
+  suffix: Alt Hitbox, West
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-0.5,0.5,1.4"
+        density: 190
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: RMCPropVehicleCargoCrane
   id: RMCPropVehicleCargoCraneCargo
   name: cargo crane
   description: A crane used for loading and unloading cargo.

@@ -35,6 +35,7 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDazedSystem _daze = default!;
+    [Dependency] private readonly RMCDazedSystem _dazed = default!;
 
     public override void Initialize()
     {
@@ -107,6 +108,7 @@ public sealed class XenoFlingSystem : EntitySystem
         if (daze)
             _daze.TryDaze(targetId, xeno.Comp.DazeTime);
 
+        _dazed.TryDaze(targetId, xeno.Comp.DazeTime, true);
         _throwing.TryThrow(targetId, diff, xeno.Comp.ThrowSpeed);
 
         SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
