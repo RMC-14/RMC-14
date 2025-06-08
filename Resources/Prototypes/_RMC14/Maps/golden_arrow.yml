@@ -6,7 +6,7 @@
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    Savannah:
+    GoldenArrow:
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
