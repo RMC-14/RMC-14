@@ -91,7 +91,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
             Dirty(entity, victim);
 
-            _slow.TrySlowdown(entity, xeno.Comp.SlowDuration, ignoreDurationModifier: true);
+            _slow.TrySlowdown(entity, _xeno.TryApplyXenoDebuffMultiplier(entity, xeno.Comp.SlowDuration), ignoreDurationModifier: true);
 
             var message = Loc.GetString(xeno.Comp.HitText, ("target", entity));
 

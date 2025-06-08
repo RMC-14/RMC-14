@@ -56,13 +56,19 @@
       Classic: _RMC14/Objects/Clothing/Belt/marine/jungle-classic.rsi
 
 - type: entity
-  parent: CMBeltBaseStorage
+  parent: RMCBeltBaseStorageNoVisuals
   id: RMCM276ShotgunShellLoadingRig
   name: M276 pattern shotgun shell loading rig
   description: An ammunition belt designed to hold shotgun shells. # or individual bullets. TODO RMC14
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
+    layers:
+    - state: icon
+    - state: half
+      visible: false
+    - state: full
+      visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: Item
@@ -88,6 +94,20 @@
       Desert: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/shotgun/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 14
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 - type: entity
   parent: RMCM276ShotgunShellLoadingRig

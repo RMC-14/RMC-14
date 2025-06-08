@@ -36,6 +36,74 @@
   - type: XenoLeapDestroyOnPass
   - type: XenoToggleChargingDamage
     destroy: true
+  - type: XenoCrusherChargable
+    instantDestroy: true
+    passOnDestroy: true
+
+- type: entity
+  parent: BaseStructure
+  id: RMCLargeTable
+  name: table
+  description: A square metal surface resting on four legs. Useful to put stuff on.
+  abstract: true
+  components:
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
+    state: full
+    offset: 0.5, 0.5
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
+    state: full
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageMultiplierFlags
+    flags: Breaching
+  - type: XenoLeapDestroyOnPass
+  - type: XenoToggleChargingDamage
+    destroy: true
+  - type: Animateable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: PlaceableSurface
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,1.45,0.45"
+        density: 55
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: SpriteFade
+  - type: Climbable
+  - type: Bonkable
+    bonkDamage:
+      types:
+        Blunt: 4
+  - type: Clickable
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepHull
+  - type: Tag
+    tags:
+    - ForceFixRotations
 
 # Reinforced
 - type: entity
@@ -178,3 +246,15 @@
     sprite: _RMC14/Structures/Furniture/Tables/hunter.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/hunter.rsi
+
+# Bar
+- type: entity
+  parent: RMCLargeTable
+  id: RMCLargeTableBar
+  name: bar table
+  description: A wooden table that has seen better days. There's the stickly sensation of spilled drinks within the cracks of the wood.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/bar.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/bar.rsi

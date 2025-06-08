@@ -19,7 +19,7 @@
         layer:
         - MobMask
   - type: Sprite
-    sprite: _RMC14/Structures/vehicles2.rsi
+    sprite: _RMC14/Structures/Vehicles/vehicles2.rsi
     noRot: true
     state: crane
     offset: 0.5,0.5
@@ -58,6 +58,36 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.8,-0.9,0.8,0.9"
+        density: 190
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: RMCPropVehicleCargoCrane
+  id: RMCPropVehicleCargoCraneAltHitbox
+  suffix: Alt Hitbox, East
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-1.4,1,0.5"
+        density: 190
+        layer:
+        - TableLayer
+
+- type: entity
+  parent: RMCPropVehicleCargoCraneAltHitbox
+  id: RMCPropVehicleCargoCraneAltHitboxWest
+  suffix: Alt Hitbox, West
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-0.5,0.5,1.4"
         density: 190
         layer:
         - TableLayer

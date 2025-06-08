@@ -1,5 +1,6 @@
 - type: entity
   parent: BaseMachinePowered
+  abstract: true
   id: RMCBasePhotocopier
   name: Photocopier
   description: A photocopier used for copying... you know, photos! Also useful for copying documents on paper. This specific model has been manufactured by Aegis Armaments in a cheaper frame than most modern photocopiers. It uses more primitive copying technology resulting in more toner waste and less printing capabilities. Nonetheless, its cheap construction means cheaper costs, and for people that only need to print a paper or two most of the time, it becomes cost-effective.
@@ -41,6 +42,23 @@
   - type: Icon
     sprite: _RMC14/Structures/Machines/photocopier.rsi
     state: bigscanner
+
+- type: entity
+  parent: RMCPhotocopier
+  id: RMCPhotocopierSmallHitbox
+  suffix: Smaller
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.05,0.4,0.05"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
 
 - type: entity
   parent: RMCBasePhotocopier
