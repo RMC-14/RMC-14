@@ -97,7 +97,7 @@
   recipes:
   - RMCBucket
   - CMBucketMop
-  #    - Janitorial bucket (10000 metal)
+  - CMBucketJani
   - RMCFlashlight
   - CMFireExtinguisher
   - CMCrowbar
@@ -109,7 +109,7 @@
   - CMWrench
   - CMHeadset
   - CMRadioHandheld
-  #    - Welding mask (3750 metal, 1250 glass)
+  #    - Welding mask (3000 metal, 1000 glass)
   - CMSheetGlassReinforced
   - CMRodMetal
   - RMCKitchenKnife
