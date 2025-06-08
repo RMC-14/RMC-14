@@ -1,0 +1,21 @@
+﻿# Cherry Jelly
+
+- type: reagent
+  parent: BaseJuice
+  id: RMCCherryJelly
+  name: reagent-name-rmc-cherry-jelly
+  desc: reagent-desc-rmc-cherry-jelly
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: cherry
+  color: "#801E28"
+
+# Peanut Butter
+
+- type: reagent
+  parent: BaseJuice
+  id: RMCPeanutButter
+  name: reagent-name-rmc-peanut-butter
+  desc: reagent-desc-rmc-peanut-butter
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: nutty
+  color: "#BE893F"
