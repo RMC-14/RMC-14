@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Undeployed mortars can no longer be destroyed.
-    type: Fix
-  id: 1327
-  time: '2025-02-11T22:42:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5588
 - author: DrSmugleaf
   changes:
   - message: Fixed scout and sniper invis randomly going on extremely long cooldowns,
@@ -5202,5 +5195,12 @@
   id: 1829
   time: '2025-06-08T01:38:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6641
+- author: J C Denton
+  changes:
+  - message: ERT Shuttles now spawn on Thunderdrome map.
+    type: Tweak
+  id: 1830
+  time: '2025-06-08T01:57:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6645
 Name: RMC14
 Order: -1
