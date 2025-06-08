@@ -37,24 +37,6 @@
 
 - type: construction
   parent: RMC
-  name: comfy chair
-  id: CMChairComfy
-  graph: CMSeat
-  startNode: start
-  targetNode: chairComfy
-  category: construction-category-cm-furniture
-  description: A comfortable chair for sitting.
-  icon:
-    sprite: _RMC14/Structures/Furniture/chairs.rsi
-    state: comfychair
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
-  parent: RMC
   name: dark office chair
   id: CMChairOfficeDark
   graph: CMSeat

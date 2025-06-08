@@ -45,8 +45,8 @@
         points: 6
       - id: CMFirstAidO2KitFilled
         points: 6
-#      - id: #    CMRadiationFirstaidKit # TODO RMC14
-#        points: 6
+      - id: RMCRadiationAidKitFilled
+        points: 6
     - name: Pill Bottles
       entries:
       - id: CMPillCanisterBicaridine

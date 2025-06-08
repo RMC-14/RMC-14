@@ -29,6 +29,7 @@
     - state: "off"
     - state: "normal-unshaded"
   - type: CMSolutionRefiller
+    randomizeReagentsPlanetside: true
     current: 600
     max: 600
     recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
@@ -53,6 +54,8 @@
       - Bottle
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     hackable: true
+    randomUnstockAmount: -1 # -1 is between 1 and the original amount
+    randomEmptyChance: 0.25 # 25% chance
     sections:
     - name: Field supplies
       entries:
