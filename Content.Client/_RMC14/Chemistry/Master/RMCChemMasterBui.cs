@@ -220,8 +220,11 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             {
                 foreach (var contained in container.ContainedEntities)
                 {
-                    if (_bottleRows.TryGetValue(contained, out var row))
-                        UpdatePillBottleName(row, contained);
+                    if (!_bottleRows.TryGetValue(contained, out var row))
+                        continue;
+
+                    UpdatePillBottleFill(row, contained);
+                    UpdatePillBottleName(row, contained);
                 }
 
                 return;
@@ -244,19 +247,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 row.FillBottleButton.Pressed = fillBottles.Contains(contained);
                 row.FillBottleButton.OnPressed += args => SendPredictedMessage(new RMCChemMasterPillBottleFillMsg(netContained.Value, args.Button.Pressed));
 
-                if (EntMan.TryGetComponent(contained, out StorageComponent? storage))
-                {
-                    var total = 0;
-                    if (storage.Grid.TryFirstOrNull(out var firstGrid))
-                        total = firstGrid.Value.Width + 1;
-
-                    row.PillAmountLabel.Text = Loc.GetString("rmc-chem-master-pill-bottle-pills",
-                        ("amount", storage.StoredItems.Count),
-                        ("total", total));
-
-                    row.ColorView.SetEntity(contained);
-                }
-
+                UpdatePillBottleFill(row, contained);
                 UpdatePillBottleName(row, contained);
 
                 if (i == 0)
@@ -438,6 +429,22 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             return;
 
         SendPredictedMessage(new RMCChemMasterPillBottleLabelMsg(args.Text));
+    }
+
+    private void UpdatePillBottleFill(RMCChemMasterPillBottleRow row, EntityUid contained)
+    {
+        if (!EntMan.TryGetComponent(contained, out StorageComponent? storage))
+            return;
+
+        var total = 0;
+        if (storage.Grid.TryFirstOrNull(out var firstGrid))
+            total = firstGrid.Value.Width + 1;
+
+        row.PillAmountLabel.Text = Loc.GetString("rmc-chem-master-pill-bottle-pills",
+            ("amount", storage.StoredItems.Count),
+            ("total", total));
+
+        row.ColorView.SetEntity(contained);
     }
 
     private void UpdatePillBottleName(RMCChemMasterPillBottleRow row, EntityUid contained)
