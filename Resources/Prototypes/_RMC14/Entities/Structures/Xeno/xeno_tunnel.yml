@@ -24,6 +24,10 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: xenotunnel
+  - type: TacticalMapAlwaysVisible
+    visibleToXenos: true
+    visibleAsXenoStructure: true
+    visibleToMarines: false
   - type: UserInterface
     interfaces:
       enum.SelectDestinationTunnelUI.Key:
@@ -31,6 +35,7 @@
       enum.NameTunnelUI.Key:
         type: NameTunnelBui
   - type: DeletedByWeedKiller
+  - type: XenoFriendly
 
 - type: entity
   parent: XenoTunnel

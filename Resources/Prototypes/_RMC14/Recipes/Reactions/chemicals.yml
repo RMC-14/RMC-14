@@ -14,3 +14,13 @@
     intensityPerUnit: 0.5 # 50+50 reagent for maximum explosion
     intensitySlope: 4
     maxTotalIntensity: 100
+
+- type: reaction
+  id: RMCTableSalt
+  reactants:
+    RMCChlorine:
+      amount: 1
+    RMCSodium:
+      amount: 1
+  products:
+    TableSalt: 2
