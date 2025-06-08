@@ -1,3 +1,6 @@
+cm-chatsan-word-u = u
+cm-chatsan-replacement-u = you
+
 cm-chatsan-word-deltard = deltard
 cm-chatsan-replacement-deltard = delta
 
