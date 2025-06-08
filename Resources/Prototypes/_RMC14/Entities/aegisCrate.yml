@@ -1,14 +1,14 @@
 - type: entity
-  id: SpecialBox
-  name: Special Box
-  description: A secure storage box for orbital bombardment warheads.
+  id: AegisBox
+  name: Aegis Secure Crate
+  description: A secure storage crate for transportation of Aegis equipment. It is locked and requires an Aegis ID card to open.
   components:
     - type: Sprite
       sprite: _RMC14/Secure-Box.rsi
       layers:
-        - state: special_box
-          map: ["enum.SpecialBoxVisualLayers.Base"]
-    - type: SpecialBox
+        - state: aegis_crate
+          map: ["enum.AegisCrateVisualLayers.Base"]
+    - type: AegisCrate
     - type: InteractionOutline
     - type: Clickable
     - type: Physics

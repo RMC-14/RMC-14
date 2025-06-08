@@ -267,14 +267,18 @@
 
 - type: entity
   id: RMCIDCardAegis
-  name: Aegis ID card
-  description: An Aegis ID card, can be used to access many secret weapons of theirs.
+  name: Aegis Access Badge
+  description: High-Level Aegis Access Badge, granting access to many of their restricted areas and equipment.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/aegis.rsi
     state: keycard
+  - type: Item
+  - type: Clothing
+    slots:
+      - idcard
+  - type: Clickable
+  - type: InteractionOutline
   - type: Access
     groups:
       - CMAccessAegis
-  - type: IdCard
-    fullName: "Aegis ID Card"

@@ -8,10 +8,10 @@
   },
  "states": [
     {
-      "name": "special_box_open"
+      "name": "aegis_crate_open"
     },
     {
-      "name": "special_box_opening",
+      "name": "aegis_crate_opening",
       "delays": [
         [
           0.24,
@@ -23,7 +23,7 @@
      ]
     },
     {
-      "name": "special_box",
+      "name": "aegis_crate",
       "delays": [
         [
           0.3,
