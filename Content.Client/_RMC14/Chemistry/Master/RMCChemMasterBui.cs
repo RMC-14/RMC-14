@@ -78,7 +78,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             var specifier = new SpriteSpecifier.Rsi(chemMaster.PillRsi.RsiPath, $"pill{type}");
             button.Texture.Texture = _sprite.Frame0(specifier);
 
-            button.Button.OnPressed += _ => SendPredictedMessage(new RMCChemMasterSetPillTypeMsg(type));
+            button.Button.OnPressed += _ => SendPredictedMessage(new RMCChemMasterSetPillTypeMsg((uint) type));
             _window.PillTypeContainer.AddChild(button);
         }
 
@@ -105,9 +105,8 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         UpdatePillBottles((Owner, chemMaster));
         UpdateBuffer((Owner, chemMaster));
 
-        var type = chemMaster.SelectedType - 1;
-        if (type >= 0 &&
-            chemMaster.SelectedType < _window.PillTypeContainer.ChildCount &&
+        var type = (int) chemMaster.SelectedType - 1;
+        if (chemMaster.SelectedType < _window.PillTypeContainer.ChildCount &&
             _window.PillTypeContainer.GetChild(type) is RMCChemMasterPillButton pillButton)
         {
             pillButton.Button.Pressed = true;

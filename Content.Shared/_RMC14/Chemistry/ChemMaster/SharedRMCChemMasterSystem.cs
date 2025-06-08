@@ -377,6 +377,10 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                     continue;
                 }
 
+                var pillComp = EnsureComp<PillComponent>(pill);
+                pillComp.PillType = ent.Comp.SelectedType;
+                Dirty(pill, pillComp);
+
                 if (label != null)
                     _label.Label(pill, label);
 

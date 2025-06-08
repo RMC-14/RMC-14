@@ -60,7 +60,7 @@ public sealed partial class RMCChemMasterComponent : Component
     public int MaxPillAmount = 20;
 
     [DataField, AutoNetworkedField]
-    public int SelectedType = 1;
+    public uint SelectedType = 1;
 
     [DataField, AutoNetworkedField]
     public float LinkRange = 5;

@@ -81,9 +81,9 @@ public sealed class RMCChemMasterSetPillAmountMsg(int amount) : BoundUserInterfa
 }
 
 [Serializable, NetSerializable]
-public sealed class RMCChemMasterSetPillTypeMsg(int type) : BoundUserInterfaceMessage
+public sealed class RMCChemMasterSetPillTypeMsg(uint type) : BoundUserInterfaceMessage
 {
-    public readonly int Type = type;
+    public readonly uint Type = type;
 }
 
 [Serializable, NetSerializable]
