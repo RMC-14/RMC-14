@@ -4,7 +4,7 @@
   result: RMCBucket
   completetime: 4
   materials:
-    CMSteel: 67 # 2500
+    CMSteel: 53 # 2000
 
 - type: latheRecipe
   id: CMBucketMop
@@ -12,6 +12,13 @@
   completetime: 4
   materials:
     CMSteel: 107 # 4000
+    
+- type: latheRecipe
+  id: CMBucketJani
+  result: CMBucketJani
+  completetime: 4
+  materials:
+    CMSteel: 213 # 8000
 
 - type: latheRecipe
   id: CMLightTube
