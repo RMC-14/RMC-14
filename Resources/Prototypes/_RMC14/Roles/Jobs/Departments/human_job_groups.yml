@@ -85,7 +85,6 @@
     
 - type: entity
   id: RMCJobsSurvivor
-  name: role-timer-survivor-role
   categories:
   - HideSpawnMenu
   components:
