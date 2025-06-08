@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Armor.ThermalCloak;
+﻿using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -26,7 +26,6 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
 
