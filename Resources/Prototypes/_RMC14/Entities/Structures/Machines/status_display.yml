@@ -57,3 +57,21 @@
   - type: RMCAlertLevelDisplay
   - type: WallMount
     arc: 360
+
+- type: entity
+  id: RMCStatusDisplayLarge
+  name: large status display
+  description: A large wall mounted monitor. It doesnt seem to work properly.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/status_display_large.rsi
+    drawdepth: WallMountedItems
+    state: frame
+    offset: 0.5, 0.0
+  - type: Appearance
+  - type: WallMount
+    arc: 360
