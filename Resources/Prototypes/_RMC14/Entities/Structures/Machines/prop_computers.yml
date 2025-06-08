@@ -4,6 +4,7 @@
   id: RMCPropComputerBase
   name: terminal
   description: This can be used for various functions.
+  suffix: Prop
   components:
   - type: Transform
     anchored: false
@@ -62,3 +63,19 @@
   components:
   - type: Sprite
     state: terminal1
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCSecurityCameraConsole
+  name: security cameras console
+  components:
+  - type: Sprite
+    state: security_cam
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCSecurityRecordsConsole
+  name: security records
+  components:
+  - type: Sprite
+    state: jas
