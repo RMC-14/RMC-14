@@ -122,6 +122,14 @@
     contents:
     - id: RMCBoxMagazinePistolM1984AP
 
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM1984HP
+  name: Magazine box (M1984, 16x HP mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM1984HP
 # M77
 - type: entity
   parent: RMCCrateAmmo

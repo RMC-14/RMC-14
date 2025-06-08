@@ -888,6 +888,47 @@
   - type: CMItemSlots
     startingItem: RMCMagazinePistolM1984AP
 
+# M1984 HP
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM1984HPEmpty
+  name: magazine box (HP M1984 x 16)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM1984HPEmpty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#b2976e"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#318b11"
+    - state: pistol_box_1984
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#318b11"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#b2976e"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM1984HP
+
+- type: entity
+  parent: RMCBoxMagazinePistolM1984HPEmpty
+  id: RMCBoxMagazinePistolM1984HP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM1984HP
+
 # MK80 REG
 - type: entity
   parent: RMCBoxMagazinePistolBase

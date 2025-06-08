@@ -41,6 +41,8 @@
       - cost: 3000
         crate: RMCCrateBoxMagazinePistolM1984AP
       - cost: 3000
+        crate: RMCCrateBoxMagazinePistolM1984HP
+      - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunBuckshot

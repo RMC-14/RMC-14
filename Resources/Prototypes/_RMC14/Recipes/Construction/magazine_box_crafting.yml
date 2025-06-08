@@ -229,6 +229,21 @@
   iconColor: "#b2976e"
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Magazine Box (M1984 HP)
+  id: RMCBoxMagazinePistolM1984HP
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM1984HPEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain hollow point M1984 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: pistol_box
+  iconColor: "#b2976e"
+  objectType: Item
+
 # 88 mod 4 / 88m4
 - type: construction
   parent: RMC
