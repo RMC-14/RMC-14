@@ -164,7 +164,7 @@
   suffix: TSEPA, Glass, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessTSEPA" ], [ "CMAccessCommand" ] ]
 
 - type: entity
   parent: RMCDoubleDoorSecurityGlassLockedTSEPA

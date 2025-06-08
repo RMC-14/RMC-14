@@ -32,6 +32,5 @@
   id: RMCClosetTSEPAFill
   table: !type:AllSelector
     children:
-    - id: RMCArmourM4TSEPA
     - id: RMCCoatTSEPAHighVis
     - id: RMCCoatTSEPAHighVisVest
