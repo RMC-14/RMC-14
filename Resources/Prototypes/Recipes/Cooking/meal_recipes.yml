@@ -692,7 +692,7 @@
 - type: microwaveMealRecipe
   id: RecipeHawaiianPizza
   name: Hawaiian pizza recipe
-  result: FoodPizzaPineapple
+  result: RMCFoodPizzaHawaiianFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
