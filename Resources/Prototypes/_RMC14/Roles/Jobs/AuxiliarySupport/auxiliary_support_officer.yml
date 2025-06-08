@@ -17,20 +17,23 @@
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
     time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 3600 # 1 hour
+  ranks:
+    RMCRankCaptain:
+    - !type:RoleTimeRequirement
+      role: CMJobAuxiliarySupportOfficer
+      time: 252000 # 70 hours
+    RMCRankFirstLT: []
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ASO
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: aso
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -55,7 +58,16 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "ASO"
+      prefix: cm-job-prefix-aso
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: aso
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearASO
@@ -78,11 +90,21 @@
   components:
   - type: SpawnPoint
     job_id: CMAuxiliarySupportOfficer
-  - type: Sprite
+  - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: auxiliary_support_officer
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: auxiliary_support_officer
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleASO
+  name: Auxiliary Support Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: auxiliary_support_officer
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer

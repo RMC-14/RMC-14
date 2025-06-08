@@ -1,12 +1,19 @@
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Radio;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Speech;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -28,11 +35,23 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!; // RMC14
+    [Dependency] private readonly IChatManager _chatManager = default!; // RMC14
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
 
     private EntityQuery<TelecomExemptComponent> _exemptQuery;
+
+    private readonly SoundSpecifier _radioSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/radiostatic.ogg")
+    {
+        Params = new AudioParams
+        {
+            Volume = -8f,
+            Variation = 0.1f,
+            MaxDistance = 3.75f,
+        },
+    }; // RMC14
 
     public override void Initialize()
     {
@@ -83,6 +102,22 @@ public sealed class RadioSystem : EntitySystem
         var name = evt.VoiceName;
         name = FormattedMessage.EscapeText(name);
 
+        if (TryComp(messageSource, out JobPrefixComponent? prefix))
+        {
+            var prefixText = (prefix.AdditionalPrefix != null ? $"{Loc.GetString(prefix.AdditionalPrefix.Value)} " : "") + Loc.GetString(prefix.Prefix);
+            if (TryComp(messageSource, out SquadMemberComponent? member) &&
+                TryComp(member.Squad, out SquadTeamComponent? team) &&
+                team.Radio != null &&
+                team.Radio != channel.ID)
+            {
+                name = $"({Name(member.Squad.Value)} {prefixText}) {name}";
+            }
+            else
+            {
+                name = $"({prefixText}) {name}";
+            }
+        }
+
         SpeechVerbPrototype speech;
         if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))
             speech = evntProto;
@@ -93,10 +128,18 @@ public sealed class RadioSystem : EntitySystem
             ? FormattedMessage.EscapeText(message)
             : message;
 
+        // RMC14 increase font size
+        var radioFontSize = speech.FontSize;
+        if (TryComp<WearingHeadsetComponent>(messageSource, out var wearingHeadset) &&
+            TryComp<RMCHeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
+        {
+            radioFontSize += headsetComp.RadioTextIncrease ?? 0;
+        }
+
         var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
             ("color", channel.Color),
             ("fontType", speech.FontId),
-            ("fontSize", speech.FontSize),
+            ("fontSize", radioFontSize), // RMC14
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("channel", $"\\[{channel.LocalizedName}\\]"),
             ("name", name),
@@ -107,8 +150,8 @@ public sealed class RadioSystem : EntitySystem
             ChatChannel.Radio,
             message,
             wrappedMessage,
-            NetEntity.Invalid,
-            null);
+            GetNetEntity(messageSource),
+            _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key);
         var chatMsg = new MsgChatMessage { Message = chat };
         var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg);
 
@@ -148,6 +191,14 @@ public sealed class RadioSystem : EntitySystem
 
             // send the message
             RaiseLocalEvent(receiver, ref ev);
+        }
+
+        if (canSend &&
+            !HasComp<XenoComponent>(messageSource) &&
+            HasComp<RMCHeadsetComponent>(radioSource))
+        {
+            var filter = Filter.Pvs(messageSource).RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+            _audio.PlayEntity(_radioSound, filter, messageSource, false); // RMC14
         }
 
         if (name != Name(messageSource))

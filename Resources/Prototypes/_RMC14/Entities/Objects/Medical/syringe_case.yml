@@ -1,0 +1,124 @@
+- type: entity
+  parent: BaseStorageItem
+  id: RMCSyringeCase
+  name: syringe case
+  description: It's a medical case for storing syringes and bottles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/syringe_case.rsi
+    state: syringe_case
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Medical/syringe_case.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      components:
+      - Pill
+      tags:
+      - Bottle
+      - Pill
+      - Syringe
+      - CMAutoInjector
+      - Paper
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCSyringeCase
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: Tag
+  id: RMCSyringeCase
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSyringe
+    - id: CMBottleInaprovaline
+    - id: CMBottleTricordrazine
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledBurn
+  suffix: Burn, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSyringe
+    - id: CMBottleKelotane
+    - id: CMBottleTricordrazine
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledToxin
+  suffix: Toxin, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSyringe
+    - id: CMBottleDylovene
+    - id: CMBottleDylovene
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledOxygen
+  suffix: Oxygen, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSyringe
+    - id: CMBottleInaprovaline
+    - id: CMBottleDexalin
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledRCM
+  suffix: RCM, Filled
+#  components:
+#  - type: StorageFill
+#    contents:
+#    - id: #TODO oxycodone autoinjector
+#    - id: #TODO oxycodone autoinjector
+#    - id: #TODO oxycodone autoinjector
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledWhiteout
+  suffix: Whiteout, Filled
+  components:
+  - type: StorageFill
+    contents:
+#    - id: #TODO redemption stimulant autoinjector
+    - id: CMEmergencyAutoInjector
+#    - id: #TODO oxycodone autoinjector
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledPMC
+  suffix: PMC, Filled
+  components:
+  - type: StorageFill
+    contents:
+#    - id: #TODO ultrazine autoinjector
+    - id: CMInaprovalineAutoInjector
+    - id: CMEpinephrineAutoInjector
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledPMCLooted
+  suffix: PMC, Looted
+  components:
+  - type: StorageFill
+    contents:
+#    - id: #TODO ultrazine autoinjector EMPTY
+    - id: CMInaprovalineAutoInjector
+    - id: CMEpinephrineAutoInjector

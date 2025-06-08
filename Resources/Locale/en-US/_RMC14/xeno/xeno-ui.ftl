@@ -2,6 +2,7 @@
 
 xeno-ui-reserve-parasites-title = Reserve Parasites
 xeno-ui-reserve-parasites-apply-button-text = Apply
+xeno-reserve-parasites-verb = Reserve Parasites
 
 xeno-ui-find-parasite-title = Find Parasite
 xeno-ui-find-parasite-spawn-button = Take Parasite
@@ -15,3 +16,5 @@ xeno-ui-enter-tunnel-verb = Enter Tunnel
 
 xeno-ui-select-destination-tunnel-title = Select Destination Tunnel
 xeno-ui-select-destination-tunnel-submit-text = Select Tunnel
+
+rmc-xeno-ui-burrowed-need-time = You ghosted too recently. You cannot become a burrowed larva until 2.5 minutes have passed ({$seconds} seconds remaining).

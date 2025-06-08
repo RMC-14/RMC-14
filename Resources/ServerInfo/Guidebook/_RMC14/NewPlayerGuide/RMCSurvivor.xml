@@ -1,0 +1,223 @@
+﻿<Document>
+
+  Guide by frog6645 on Discord
+
+  [bold]If you are reading this roundstart with no idea what you are doing, go find somebody who does, get a shotgun, and follow them. You're probably going to die. Goodluck![/bold]
+
+  #Survivor
+
+  Survivor is not a role meant for newer players. You will die dozens of times to things out of your control. Be sure to know medical, engineering, and combat before you attempt to play survivor for an optimal experience.
+
+  ##Important Notes
+
+  Survivors are colonists who are trapped on the colony with xenonids. All survivors have a role. Be sure to know what you are doing before you pick a role. If you are new to survivor, pick security survivor!
+
+  As a survivor, time is working against you. Every second you spend looting is a second that the xenonids can organize an attack on you. By 50 seconds into the game, it is likely that you are already about to be rushed by dozens of drones.
+
+  Your first priority should be to check in over the radio. Say hi, say your job, let people know where you are. Ideally, you will try to approach another survivor so that you are not alone. The only thing you have on any xenonid is teamwork, be sure to use it.
+
+  Another highly important thing is to get a shotgun. Shotguns allow you to kill xenonids through stuns. Almost any xenonid that you stand a chance of fighting will be stunnable with a shotgun. For fighting on the go, shotguns will be extremely useful.
+
+  [bold]Act Fast[/bold]. You will not be able to reach certain places as easily as you can early in the round as the round progresses. Trijent Medical, for example, is very close to the hive. Loot close to the hive first, then close in on where your hold will be.
+
+  ##Starting Out
+
+  The first thing you should do is check your survival pouch!
+
+  <GuideEntityEmbed Entity="RMCPouchSurvival"/>
+
+  The inside of your survival pouch contains multiple items that you need to survive. Depending on your job, you can spawn with an assortion of different things, but the survival pouch is the main thing that stays consistent.
+
+  [bold]The most important item is your flashlight![/bold]
+
+  <GuideEntityEmbed Entity="RMCFlashlight"/>
+
+  Nothing you have matters if you can't see what you are doing. Be sure to either hold your flashlight, put it in your suit storage slot, or put it in one of your pockets so that you can navigate the map. The [bold]Engineer Survivor[/bold] spawns with a hardhat, which is slightly worse but keeps your hands and pockets free!
+
+  [bold]If you are stuck in a room, use your crowbar![/bold]
+
+  <GuideEntityEmbed Entity="CMCrowbarRed"/>
+
+  A crowbar can instantly pry any unpowered door or shutter open.
+
+  [bold] You spawn with basic medicine![/bold]
+
+  <GuideEntityEmbed Entity="CMPacketPillsTricordrazine"/>
+
+  Tricordazine is horrible at healing, but you take anything that you can get. Tricordazine heals a tiny amount of brute and burn, each pill has 15u. You can safely take two pills before overdosing, but don't forget that you can also use other medicines with tricordazine to heal far faster. Use the pills as supplements.
+
+  ##Navigation
+
+  [bold]Navigating the map relies heavily on map knowledge. Be sure to check the webmaps to know where you are going![/bold]
+
+  As a survivor, the colony will likely be unpowered unless you take actions to power it. This means that you will need to use your [bold]crowbar[/bold] to navigate the map! A shotgun with buckshot can blast down a door with two shots in a pinch. Powered doors cannot be forced open with a crowbar, so be sure to know an alternate route. Sometimes you can break a window and deconstruct the frame.
+
+  A useful tip is to note that [bold]Landing Zones[/bold] have a trend to hug a certain side of the map. The opposite side of the map is almost always the location of the [bold]Hive[/bold]. The hive is somewhere that you should avoid unless you are itching for a fight or loot located within it. Judgement on interacting with locations under xenonid control cannot be explained, only learned. Choose your path wisely.
+
+  When navigating through weeded areas, tread very carefully. As a survivor, you are banking on acting quickly and you do not have the time to wait for weeds to dissipate after breaking the nodes. If you are going to travel, do it as quickly as possible and do not bother attempting to secure your flank. You are not able to.
+
+  Finally, most colonies have some sort of organization. Even if you do not know the map, you will find that living quarters are usually nearby medical areas and that security zones are usually close to those as well. This is not always true, but mind that common sense can get you far without any prior knowledge.
+
+  ##Survivor Jobs
+
+  All survivors have some sort of role, and even the worse ones are fairly powerful in comparison to marines! All survivors can [bold]Fireman Carry[/bold], and they all have [bold] Endurance 2 [/bold]. Fireman carrying can be done by grabbing somebody, grabbing them again, then clicking their sprite and dragging it onto yours. After a short doafter, you will haul them onto your back! The best part is, this only takes one hand.
+
+  Here is a quick breakdown of what every survivor role can do.
+
+  [bold]Security Survivor[/bold]
+  <GuideEntityEmbed Entity="RMCWeaponRevolverSpearhead"/>
+
+  The [bold]Security Survivor[/bold] is the fighter of the group. They don't have any skills that make them too important to die and have innate bonuses to combat. They have a bonus to melee damage, are skilled in CQC, and can instantly use autoinjectors. In addition, they spawn with better supplies. In general, you should be protecting the other survivors and helping them loot dangerous places. [bold] This is the best role for your first game![/bold]
+
+  [bold]Engineering Survivor[/bold]
+  <GuideEntityEmbed Entity="RMCHardhatWhite"/>
+
+  The [bold] Engineering Survivor[/bold] is capable of reparing APCs, generators, and communications. Like the security survivor, they are not so important that their death dooms their team, but they should be careful and do their engineering duties before fighting! Build and repair barricades and fix generators if your team needs it. [bold]Don't forget, fixing generators on highly urban maps may hinder your team more than it helps them![/bold]
+
+  [bold]Medical Survivor[/bold]
+  <GuideEntityEmbed Entity="CMSurgicalCase"/>
+
+  The [bold]Medical Survivor[/bold] is the lifeblood of the group. If you play a medical survivor, you should be incredibly careful. If all of the medical survivors die, nobody can bring them back. Your job is to heal the other survivors and make sure they are in proper shape to do their jobs. When everybody is on good health, you can weave in a few molotovs. [bold]Focus on stabilizing critical survivors and reviving dead ones over anything else.[/bold]
+
+  [bold]Corporate Survivor[/bold]
+  <GuideEntityEmbed Entity="CMPen"/>
+
+  The [bold]Corporate Survivor[/bold] is a roleplay role. You are extremely similar to the civilian survivor, the only difference is your position. You can't roleplay if you're dead, however. Find a place to hold with the other survivors or if things go south, a place to hide. Fight side by side with the security survivor and earn your paycheck or get captured by a lesser drone after you abandon everybody to hide in a locker. [bold]Once you are rescued, find the Alamyer's Corporate Liaison and introduce yourself![/bold]
+
+  [bold]Civilian Survivor[/bold]
+  <GuideEntityEmbed Entity="CMJumpsuitColonist"/>
+
+  The [bold]Civilian Survivor[/bold] is without any unique benefits. You are a rifleman with the ability to fireman carry and are ever so slightly harder to tackle. Do whatever you can to survive.
+
+
+  ##Looting
+
+  Looting as a survivor is the most important step. Even if you choose the best hold and fight perfectly, if you do not have equipment, you will fail. The following statements are generally true and will help you decide where to loot.
+
+  Medical has medical vendors with just about everything you need in them. Ideally you will take the entire medical vendor by unwrenching it and dragging it with you. If there is no vendor, medical still likely has ramshackle equipment that can be of use in a pinch.
+
+  Security has weaponry and armor. In addition, corpses may have armor and medical supplies.
+
+  Cargo/Storage often have a variety of supplies.
+
+  Administrative Buildings often have paper which is used for molotovs. Paper bins can be picked up by right clicking them! In addition, they can fit into backpacks and crates.
+  The Bar has alcohol which is used for molotovs. Ideally, you will bring the entire booze vendor with you.
+
+
+  Many of these things may seem pointless, but without any of these things, your chances of survival plummet. You want to have a well rounded setup with a surplus of medicine, ammo, and strong barricades.
+
+  [bold]Looting is the most important part of survival! Your skill doesn't matter if you have nothing to express it with![/bold]
+
+  ##Weapons
+
+  Survivors have access to weapons that marines do not. You likely will not be familiar with many of them. These weapons often have a certain gimmick or trait to make them stand out from the marine variants. Some weapons on the colony are the same as marine weapons, but will still be mentioned due to their application being different in the hands of a survivor.
+
+  [bold]Shotguns will likely be your main weapon as you are traversing the map due to their ability to stun and destroy out of place xenonids.[/bold]
+
+  <GuideEntityEmbed Entity="WeaponShotgunM42A2"/>
+
+  The M42A2 pump shotgun is the most reliable weapon for a survivor. With a mounted bayonet, the pump shotgun is capable of brawling, breaking weeds, and beating back most foes. This weapon should be used one handed and loaded with buckshot. When using the pump shotgun, be extremely careful to not shoot your allies. A poorly placed buckshot can instantly kill anybody not wearing armor and deliver a lengthy stun to anybody who survives the hit. Fortunately, buckshot can also briefingly stun xenonids and slow them for an extended time after you land a stike. Weave around enemies and pick off weaker targets and provide openings for your allies.
+
+  <GuideEntityEmbed Entity="RMCWeaponShotgunHG3712"/>
+
+  The HG 37-12 pump shotgun is a less reliable more specialized version of the M42A2 pump shotgun. The HG 37 is currently crippled by not having it's dual tube feature, allowing the user to swap on the go. The HG 37 should be wielded and loaded with the user's choice of ammo. If using slugs, the HG 37 is highly accurate. If you use buckshot, use the HG 37 similarly to the pump shotgun, but be sure to wield the weapon before firing it to prevent your target from dodging.
+
+  <GuideEntityEmbed Entity="WeaponShotgunCustomBuilt"/>
+
+  This is arguably the most deadly weapon obtainable without admin intervention. The custom built shotgun, often called the "custom" in character, is a shotgun with a 6 shell capacity. It sports a burst fire mode, capable of quickly firing two buckshot consecutively. This can kill almost any T1 instantly or greviously wound any T2 horribly. Be extremely careful when using this weapon around allies.
+
+  <GuideEntityEmbed Entity="WeaponShotgunM890"/>
+
+  The M890 is a highly robust shotgun capable of holding eight shells in the tube, not requiring pumping. A marine may be familiar with this shotgun as the code red armory shotguns on the Almayer. The M890 sports a superior fire rate to the M42A2 pump shotgun, making it extremely effective in a brawl. This is effectively a linear upgrade to the pump shotguns and a competitor to the custom shotgun.
+
+
+  [bold]Rifles are highly effective options, however many of the survivor exclusive rifles are not very useful unless used in a specific manner.[/bold]
+
+  <GuideEntityEmbed Entity="WeaponRifleAR10"/>
+
+  The AR10 Assault Rifle is a weapon known for being laughably terrible by the survivor community, however it does have a few merits. In spite of it's low DPS, each bullet does a large amount of damage, making it very ammo efficient and good at keeping xenonids off of your barricades for an extended period. In addition, any AR10 on the map is [bold]guranteed[/bold] to start with attachments to strip and put onto a less terrible gun. Make use of what you have, even if it is an AR10.
+
+  <GuideEntityEmbed Entity="WeaponRifleM16"/>
+
+  The M16 is a direct upgrade to the AR10. It sports a higher fire rate, accuracy, and a similar damage per bullet to the AR10, making it a reliable weapon. The M16 has very far falloff as well and responds well to attachments. This is one of the most reliable guns that you can come across as a survivor and typically when it is present, ammo for it is plentiful. Use the M16 as a brawling gun in the backline of your group or to shoot xenonids attacking your cades with the intention to put serious hurt out.
+
+  <GuideEntityEmbed Entity="WeaponRifleM54C"/> <GuideEntityEmbed Entity="WeaponRifleM54CMK1"/> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom"/>
+
+  Highly standardized marine weapons. Ammo for these weapons is best conserved for bigger fights and the holding phase, however they are incredibly useful for brawling if used properly. The M4SPR allows full movement speed while wielded, the MK2 has high DPS, and the MK1 is like the MK2 but slighly better overall. Use these as you would as a marine but more conservatively. You cannot call requisitions for a supply drop... usually.
+
+  <GuideEntityEmbed Entity="WeaponRifleMAR40"/>
+
+  A highly unreliable weapon, contrary to the in game description. The MAR40 is laughably inaccurate and cannot be used outside of extremely close range, similar to that of a shotgun. If you are to use this weapon, use it because it has a surplus of ammo and can consistently put lead down range. In addition, a bipod and reflex sight allow this weapon to shoot fairly straight and take advantage of its powerful bullets. Use this weapon as a last resort, similar to the AR10, or whenever you are in a brawl and need to hurt something that cannot be stunned by a shotgun.
+
+
+  [bold] Survivors get access to some very powerful and very terrible pistols. [/bold]
+
+
+  <GuideEntityEmbed Entity="RMCWeaponPistolMK45"/>
+
+  The MK45 is a slow, reliable pistol known for it's armor piercing. Poor against soft targets, the MK45 is best used as a supplement or a backup weapon. It is also incredibly useful during a hold if you have no other way to deal with armor.
+
+  <GuideEntityEmbed Entity="RMCWeaponRevolverSpearhead"/>
+
+  The Spearhead is a revolver known for having incredibly low scatter, usable one handed to great effect. Notably poor against enemies with [bold]evasion[/bold] due to it's low accuracy stat, but extremely powerful against moderately armored targets. Sports hollow point munitions that nearly compete with the best of the best. In addition, the spearhead has little to no falloff. Use it to nail any target running away from you.
+
+
+  [bold]The MAR50, Nailgun, and Basira Armstrong are not comparable to the other weapons, holding more niche roles.[/bold]
+
+
+  <GuideEntityEmbed Entity="RMCWeaponMar50LMG"/>
+
+  The MAR50, one of the most dangerous weapons a survivor or any marine could get their hands on. Similar to the MAR40, the MAR50 fires 7.62x39 bullets, meaning it can take the mags of the MAR40. In addition, the MAR50 is pinpoint accurate, sports an acceptable fire rate, and packs an immense punch. The MAR50 also has specialized drum mags capable of holding up to 100 rounds. When put on a bipod, the MAR50 can decimate anything that comes its way. Even without a bipod, this is the strongest option you have. Don't lose it.
+
+  <GuideEntityEmbed Entity="RMCWeaponBoltActionRifle"/>
+
+  The Basira hunting rifle is a rifle that is moderately situational. It sports armor piercing bullets that have little to no noticable falloff and can fire fairly quickly. The weapon must be bolted after each shot, similar to how the shotgun is pumped. [INSERT HOW TO DO SO WITH THE SPECIAL KEY HERE WHEN I FIGURE IT OUT]. Use it during the hold to pepper tankier enemies and force them off of your barricades. Be very careful to not strike your allies with it, they will not appreciate the AP shot to the back.
+
+  <GuideEntityEmbed Entity="WeaponNailgun"/>
+
+  The nailgun, unlike its marine counterpart, can fire nails! Each nail does moderate AP and the nailgun itself can be set to burst fire, firing fairly quickly. The nailgun suffers from falloff, however it is good at keeping tankier castes off of barricades or even running them down. More notably, the nailgun can also fix barricades! Hold the material the barricade is made of in your hand, then click the barricade with the nailgun selected. You will consume a few nails and a little bit of material but it will quickly repair the barricade.
+
+
+  ##Cell Combat
+
+  The idea when fighting as a survivor is that you aren't fighting to wipe the xenonids out, you are fighting to break their morale and make sure less can come back to kill you later. In a normal round, you won't beat the xenonids. They are too plentiful, too strong, and you don't have any way to fight the most powerful enemies when it comes down to it. That being said, you aren't helpless.
+
+  During the first 15 minutes of the round, you can fight the xenonids with proper [bold]Cell Combat.[/bold] As a marine, one typically moves with a large collective of marines and rushes xenonids down with superior firepower. Since you don't have that, you need to use superior tactics. Have everybody equip a weapon that fits their role best. Outfit security survivors with your best shotguns and most protective armor and have your medics in the back with rifles so that they stay out of harms way. Have everybody else be flexible and assist in combat where needed.
+
+  You are not fighting a battle of attrition with xenonids, you are working to score quick victories that crush their morale or numbers. This means that if a fight is going on for any extended duration at all, you should disengage before the xenonids return with backup.
+
+  Fire is an incredibly important tool in Cell Combat because it is battlefield control, something that you otherwise lack. Fire does damage over time and stops xenonids from healing by any means. This means that if a xenonid chooses to engage through fire, it is stating to you that it is confident that it can get in, attack you, then back up without the ability to heal while taking constant damage over time. Prove to it otherwise.
+
+  Fire is a tool used to stop xenonids from engaging, usually not to be used on retreating xenonids. If you ignite a xenonid and it is alone, it is effectively marked for death because it has to roll or it will burn. Multiple xenonids can flee and pat fire out on eachother. This means that unless you are threatening damage over time during an active fight, fire does very little. In addition, igniting a xenonid during combat gives it the same ultimatum of "flee or face me with a debuff". At the very least, it will force their allies to spend time that could have been spent attacking you on patting them out.
+
+  Target prioritization is heavily important due to your lower damage. [bold]When somebody is attacking a certain xenonid, you should try to attack it too![/bold] Take care to deal as little friendly fire as possible in doing so. You should try to get as many kills as possible to tip numbers in your favor during a fight.
+
+  Finally, this may be the most important saying for a survivor! [bold]SHAKE OVER SHOOT!!![/bold] Shaking your allies brings them back to their feet. This allows them to shake you and shoot their gun, bringing the numbers back in your favor. A stunned ally is as good as a dead one, so shake them so you can both support eachother! Cell Combat is all about cohesion and teamwork. You need to look out for your allies so that they can look out for you.
+
+
+  ##Choosing a Hold
+
+  Deciding on a hold location is highly important to do early into the round as it prevents splitting of resources. If somebody suggests a hold and it is viable, you should not argue with them to save time. Your objective should be to get loot to the hold and survive doing it.
+
+  Obviously any location that you would make a hold needs to be survivable. Try to hold close to an LZ in a location that has choke points but leaves you enough room to avoid area of effect attacks such as boiler spit. An open location that provides little cover for attackers with enough places to focus fire is essential for surviving.
+
+  Another consideration is how difficult it is to transport loot to a location. If you need to move a booze vendor across an entire map to a location, it is already immediately less favorable.
+
+  Molotovs are incredibly important to hold. On maps with more molotovs, you can afford to hold more open spaces because they require more molotovs. On maps with very few molotovs, it is worth being more vulnerable to area of effect attacks so that you can conserve molotovs.
+
+  The final main consideration is resources. Do you have enough metal and plasteel to properly foritfy this location? If you cannot, you should not attempt to hold it. Xenonids are very good at finding your weakest link. Do not forget that they can melt walls. They will always find a way in.
+
+  ##Holding
+
+  <GuideEntityEmbed Entity="RMCGrenadeMolotov"/>
+
+  [bold]Before anything else, molotov handling conduct is the most important part of holding. Molotovs have a randomized 1-4 second fuse. This means that a molotov can go off in your hand within the second you light it. Before lighting a molotov, know exactly where you are going to throw it and do so without any other thought. No matter what happens, you need to throw it there or else you may freeze up and carry the molotov. It is literally a ticking time bomb.[/bold]
+
+  One of the most important parts of the hold is the usage of molotovs. Molotovs are firebombs that can be created by holding a piece of paper and clicking an applicable bottle of alcohol. If you inspect a bottle, it will say that it can be turned into a molotov if it is able to. Molotovs create a zone of fire that does somewhat weak fire damage to any xenonid that touches it. All fire, including fire from molotovs, can be patted out, but will otherwise last for quite some time.
+
+  Molotovs are incredibly useful at buying time. Do note that molotovs do not function very intuitively. Molotovs have an initial explosion before they create fire. This fire damages barricades and deals outright burn damage in addition to any damage sustained by the fire. Avoid throwing molotovs directly on your barricades unless you are desperate.
+  A way to control fire is also highly important as survivor. Be sure to use fire extinguishers and to stockpile them properly to remedy any mistakes caused by molotovs.
+
+  Otherwise, barricade construction is incredibly simple. Build your barricades to stall, not to last. Make every barricade a biohazard barricade if possible. Throw molotovs, shoot xenonids, and heal when you can. In addition, do mind rationing your resources. Once you are holding, you likely will not get any kills unless you choose to counterattack, which is sometimes a correct choice. Do everything with the idea of doing a little with a lot.
+
+</Document>

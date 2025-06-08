@@ -7,7 +7,17 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 36000 # 10 hours
+    time: 72000 # 20 hours
+  ranks:
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 252000 # 70 hours
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 36000 # 10 hours
+    RMCRankCorporal: []
   weight: 5
   startingGear: CMGearMilitaryPolice
   icon: "CMJobIconMilitaryPolice"
@@ -15,12 +25,6 @@
   supervisors: cm-job-supervisors-cmp
   accessGroups:
   - MP
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: mp
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_mp
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -33,7 +37,12 @@
         RMCSkillFireman: 2
         RMCSkillPolice: 2
     - type: JobPrefix
-      prefix: "MP"
+      prefix: cm-job-prefix-militarypolice
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: mp
 
 - type: startingGear
   id: CMGearMilitaryPolice
@@ -58,10 +67,7 @@
   - type: SpawnPoint
     job_id: CMMilitaryPolice
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: military_police
+    state: mp_spawn
 
 - type: playTimeTracker
   id: CMJobMilitaryPolice

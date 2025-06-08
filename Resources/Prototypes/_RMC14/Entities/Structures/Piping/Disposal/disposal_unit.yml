@@ -53,4 +53,8 @@
     blacklist:
       components:
       - Xeno
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    minimumStage: 2
+    unanchor: true
   - type: RMCMesonsNonviewable

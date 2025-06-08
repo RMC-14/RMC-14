@@ -19,6 +19,16 @@
     - CMCMO
     sections:
     - name: Medical Set (Mandatory)
+      jobs:
+      - CMDoctor
+      - CMResearcher
+      - CMCMO
+      takeAll: CMMedicalSet
+      entries:
+      - id: RMCVendorBundleCrewMedicalEssentialsDoctor
+    - name: Medical Set (Mandatory)
+      jobs:
+      - CMNurse
       takeAll: CMMedicalSet
       entries:
       - id: CMVendorBundleCrewMedicalEssentialsNurse
@@ -41,10 +51,19 @@
       - id: CMScrubsPurple
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
-#    - name: Suit
-#      choices: { CMSuit: 1 }
-#      entries:
-#      - id: Medical's apron
+    - name: Suit
+      jobs:
+      - CMNurse
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCMedicalApron
+    - name: Suit
+      jobs:
+      - CMDoctor
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCLabcoat
+      - id: RMCMedicalApron
 #    - name: Snow gear (Snow use only)
 #      takeall: CMSnowgear
 #      entries:
@@ -62,7 +81,9 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:

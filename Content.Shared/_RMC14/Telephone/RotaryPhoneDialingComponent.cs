@@ -4,7 +4,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Telephone;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedTelephoneSystem))]
+[Access(typeof(SharedRMCTelephoneSystem))]
 public sealed partial class RotaryPhoneDialingComponent : Component
 {
     [DataField, AutoNetworkedField]

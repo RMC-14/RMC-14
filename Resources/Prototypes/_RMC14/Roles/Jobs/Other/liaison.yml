@@ -7,32 +7,53 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 36000 # 10 hours
+  ranks:
+    RMCRankWeYaExecutiveSpecialist:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 630000 # 175 hours
+    RMCRankWeYaSeniorExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 252000 # 70 hours
+    RMCRankWeYaExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 90000 # 25 hours
+    RMCRankWeYaJuniorExecutive: []
   playTimeTracker: CMJobLiaison
   startingGear: CMGearLiaison
   icon: "CMJobIconLiaison"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-we-ya
   accessGroups:
-  - MarineMain
-  - RMCWeYa
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cl
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_civillian
+  - RMCWeYaExecColony
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCUserBulkyArmorIncapable
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - UNMC
     - type: Skills
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: CMVendorUser
-      points: 50
+      points: 40
+    - type: RMCVendorUserRecharge
+      maxPoints: 50
+      pointsPerUpdate: 1
+      timePerUpdate: 40 # 1 / (0.05 / 2)
     - type: JobPrefix
-      prefix: "CL"
+      prefix: cm-job-prefix-liaison
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: cl
+    - type: RMCRibbon
 
 - type: startingGear
   id: CMGearLiaison
@@ -50,10 +71,7 @@
   - type: SpawnPoint
     job_id: CMLiaison
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: corp_liaison
+    state: cl_spawn
 
 - type: playTimeTracker
   id: CMJobLiaison

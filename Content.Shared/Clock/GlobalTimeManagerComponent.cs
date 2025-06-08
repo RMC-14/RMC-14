@@ -13,4 +13,7 @@ public sealed partial class GlobalTimeManagerComponent : Component
     /// </summary>
     [DataField, AutoPausedField, AutoNetworkedField]
     public TimeSpan TimeOffset;
+
+    [DataField, AutoNetworkedField]
+    public DateTime DateOffset;
 }

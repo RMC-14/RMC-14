@@ -34,6 +34,7 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/urban.rsi
+# TODO squad HUD visor should be security visor
 
 - type: entity
   parent: ArmorHelmetM10
@@ -70,43 +71,26 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/urban.rsi
-
-- type: entity
-  parent: ArmorHelmetM10
-  id: CMArmorHelmetM10CO
-  name: M10 pattern commanding officer helmet
-  description: A special M10 Pattern Helmet worn by Commanding Officers of the UNMC. It reads on the label, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/co.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/co.rsi
-  - type: CMArmor
-    armor: 30
-    bio: 25
-    explosionArmor: 10 #same as base m10 helmet
-    #todo RMC: melee armor: 25
-    #todo RMC: energy armor: 15
-  - type: ItemCamouflage
-    camouflageVariations: { }
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorMedicalAdvancedIntegrated
 
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Medic
   name: M10 medic helmet
-  description: A special variant of the M10 Pattern Helmet worn by the medic marines of the Marines.
+  description: A special variant of the M10 Pattern Helmet worn by the medic marines of the Marines. Comes with a built in medical display HUD.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
-  - type: ShowHealthBars # TODO RMC14 Hack
-    damageContainers:
-    - Biological
-  - type: HolocardScanner # TODO RMC14 Hack
-  - type: ShowHealthIcons # TODO RMC14 Hack
-    damageContainers:
-    - Biological
   - type: SquadArmor
     layer: Helmet
     slot: HEAD
@@ -123,18 +107,41 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/urban.rsi
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    startToggled: true
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
+    
+
+- type: entity
+  parent: CMArmorHelmetM10Medic
+  id: RMCArmorHelmetM10MedicWhite
+  name: M10 white corpsman helmet
+  description: An M10 marine helmet version worn by marine hospital corpsmen. Painted in medical white and has white cross in a blue square painted on its front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic_white.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Tech
-  name: M10 tech helmet
-  description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the Marines.
+  name: M10 technician helmet
+  description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the Marines. Features a toggleable welding screen for protection.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/jungle.rsi
-  - type: EyeProtection # TODO RMC14 toggleable
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/jungle.rsi
@@ -142,6 +149,31 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/urban.rsi
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorWeldingIntegrated
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetM10Welding
+  name: M10 welding helmet
+  description: A modified M10 marine helmet, Features a toggleable welding screen for eye protection. Completely invisible while toggled off as opposed to the technician helmet.
+  components:
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorWeldingIntegrated
 
 # M11
 - type: entity
@@ -162,11 +194,63 @@
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m11/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m11/urban.rsi
 
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM11CCO
+  name: M11C pattern commanding officer helmet
+  description: A special M11 Pattern Helmet worn by Commanding Officers of the UNMC. It reads on the label, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/co.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/co.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 30
+    bio: 25
+    explosionArmor: 10 #same as base m10 helmet
+    #todo RMC: energy armor: 15
+  - type: ItemCamouflage
+    camouflageVariations:
+     Jungle: _RMC14/Objects/Clothing/Head/Helmets/m11/co/jungle.rsi
+     Desert: _RMC14/Objects/Clothing/Head/Helmets/m11/co/desert.rsi
+     Snow: _RMC14/Objects/Clothing/Head/Helmets/m11/co/snow.rsi
+     Classic: _RMC14/Objects/Clothing/Head/Helmets/m11/co/classic.rsi
+     Urban: _RMC14/Objects/Clothing/Head/Helmets/m11/co/urban.rsi
+  - type: CycleableVisor # TODO 4 visor slots but integrated security visor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorMedicalAdvancedIntegrated
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM11CGeneral
+  name: M11C pattern ceremonial helmet
+  description: A special M11 pattern ceremonial helmet worn occasionally by general officers of the UNMC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 30
+    bio: 25
+    explosionArmor: 10 #same as base m10 helmet
+    #todo RMC: energy armor: 15
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # M12
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM12
-  name: M12 pattern helmet
+  name: M12 pattern dust helmet
   description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work or for your fantastic leadership.
   components:
   - type: Sprite
@@ -180,13 +264,22 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m12/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m12/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m12/urban.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 25
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
 
 # M30
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM30
   name: M30 tactical helmet
-  description: The M30 tactical helmet has an left eyepiece filter used to filter tactical data.
+  description: The M30 tactical helmet has an eyepiece filter used to filter tactical data. It is required to fly the dropships manually and in safety.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m30/jungle.rsi
@@ -199,6 +292,15 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m30/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m30/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m30/urban.rsi
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
 
 # Press
 - type: entity
@@ -213,6 +315,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: RMCBulkyArmor
+    isBulky: false
 
 # M3-S Scout Spec
 - type: entity
@@ -237,7 +341,7 @@
 - type: entity
   parent: RMCArmorHelmetM3Scout
   id: RMCArmorHelmetM3G4
-  name: M3-G4 helmet
+  name: M3-G4 grenadier helmet
   description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. # As such, it also resists some parasite latching attempts.
   components:
   - type: Sprite
@@ -245,7 +349,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 25
     explosionArmor: 50
   - type: ParasiteResistance
     maxCount: 6
@@ -256,6 +361,9 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/urban.rsi
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCEarProtection
 
 # M35 Pyro Spec
 - type: entity
@@ -287,12 +395,9 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
-  - type: HideLayerClothing # coif
+  - type: HideLayerClothing
     slots:
-    - Hair
     - Snout
-    - HeadTop
-    - HeadSide
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
@@ -300,6 +405,24 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m45/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m45/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m45/urban.rsi
+  - type: SquadArmor
+    layer: Helmet
+    slot: HEAD
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: snpr-helmet
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: snpr-helmet
+  - type: FoldableClothing
+    foldedEquippedPrefix: closed
+    foldedHeldPrefix: closed
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    unfoldedHideLayers:
+    - Snout
 
 # M3-T Demo Spec
 - type: entity
@@ -311,7 +434,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi # TODO RMC14 Give hearing protection component if ear damage is added
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
+  - type: RMCEarProtection
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
@@ -319,3 +443,9 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/urban.rsi
+
+- type: entity
+  parent: CMArmorHelmetM12
+  id: RMCArmorHelmetM12Intel
+  name: XM12 pattern intelligence helmet
+  description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation, can also hold a second visor optic. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work.

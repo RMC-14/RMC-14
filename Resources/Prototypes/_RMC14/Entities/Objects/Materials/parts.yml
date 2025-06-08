@@ -13,6 +13,7 @@
     size: Small
     sprite: _RMC14/Objects/Materials/parts.rsi
   - type: Stack
+    count: 60
     stackType: CMRodMetal
     baseLayer: base
     layerStates:
@@ -27,7 +28,21 @@
   - type: FloorTile
     outputs:
     - CMFloorSteelPlanetEngine
-    #RMC TODO: Lattice
+  - type: RMCRefinable
+    spawn:
+    - id: CMSheetMetal1
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+  - type: RMCConstructionItem
+    buildable:
+    - RMCGrilleBuild
+    - RMCFenceBuild
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: CMRodMetal
@@ -62,6 +77,7 @@
     materialComposition:
       CMPlasteel: 50 #Half of a regular plasteel sheet to reflect the crafting recipe
   - type: Stack
+    count: 60
     stackType: CMRodPlasteel
     baseLayer: base
     layerStates:
@@ -76,6 +92,10 @@
     node: CMRodPlasteel
   - type: StackPrice
     price: 15
+  - type: RMCRefinable
+    amount: 2
+    spawn:
+    - id: CMSheetPlasteel1
 
 - type: entity
   parent: CMRodPlasteel

@@ -11,18 +11,22 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 3600 # 1 hours
+  ranks:
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobDropshipCrewChief
+      time: 252000 # 70 hours
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobDropshipCrewChief
+      time: 36000 # 10 hours
+    RMCRankCorporal: []
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-po
   accessGroups:
   - DropshipCrewChief
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: dcc
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -43,7 +47,14 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "DCC"
+      prefix: cm-job-prefix-dcc
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: dcc
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
   hidden: false
 
 - type: startingGear
@@ -62,10 +73,7 @@
   - type: SpawnPoint
     job_id: CMDropshipCrewChief
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: dropship_crew_chief
+    state: dcc_spawn
 
 - type: playTimeTracker
   id: CMJobDropshipCrewChief

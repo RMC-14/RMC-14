@@ -21,11 +21,11 @@ public abstract class SharedMedevacSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<MedevacComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<MedevacComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MedevacComponent, InteractHandEvent>(OnInteract);
     }
 
-    private void OnInit(Entity<MedevacComponent> ent, ref ComponentInit args)
+    private void OnMapInit(Entity<MedevacComponent> ent, ref MapInitEvent args)
     {
         _useDelay.SetLength(ent.Owner, ent.Comp.DelayLength, MedevacComponent.AnimationDelay);
     }
@@ -94,10 +94,11 @@ public abstract class SharedMedevacSystem : EntitySystem
         var stretcherEnt = (target.Value, stretcherComp);
 
         ent.Comp.IsActivated = false;
-        if (utilComp.UtilityAttachedSprite != null &&
+        if (TryComp(ent, out DropshipAttachedSpriteComponent? sprite) &&
+            sprite.Sprite != null &&
             utilId != null)
         {
-            _appearance.SetData(utilId.Value, DropshipUtilityVisuals.State, utilComp.UtilityAttachedSprite.RsiState);
+            _appearance.SetData(utilId.Value, DropshipUtilityVisuals.State, sprite.Sprite.RsiState);
         }
 
         _stretcher.Medevac(stretcherEnt, ent.Owner);

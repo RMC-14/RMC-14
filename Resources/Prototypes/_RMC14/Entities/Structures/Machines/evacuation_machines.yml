@@ -10,7 +10,7 @@
   - type: Sprite
     state: green
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/escape_pod_south.yml"
+    spawn: "/Maps/_RMC14/Shuttles/escape_pod_south.yml"
     offset: 1.5,0.5
 
 - type: entity
@@ -19,7 +19,7 @@
   suffix: East
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/escape_pod_east.yml"
+    spawn: "/Maps/_RMC14/Shuttles/escape_pod_east.yml"
 
 - type: entity
   parent: RMCSpawnerEvacuationPodSouth
@@ -27,7 +27,7 @@
   suffix: North
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/escape_pod_north.yml"
+    spawn: "/Maps/_RMC14/Shuttles/escape_pod_north.yml"
 
 - type: entity
   parent: RMCSpawnerEvacuationPodSouth
@@ -35,7 +35,7 @@
   suffix: West
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/escape_pod_west.yml"
+    spawn: "/Maps/_RMC14/Shuttles/escape_pod_west.yml"
 
 - type: entity
   parent: RMCSpawnerEvacuationPodSouth
@@ -43,7 +43,7 @@
   suffix: East, Liaison
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/escape_pod_east_liaison.yml"
+    spawn: "/Maps/_RMC14/Shuttles/escape_pod_east_liaison.yml"
 
 - type: entity
   parent: MarkerBase
@@ -56,5 +56,5 @@
   - type: Sprite
     state: green
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/lifeboat.yml"
+    spawn: "/Maps/_RMC14/Shuttles/lifeboat.yml"
     offset: 12.5,2.5

@@ -15,7 +15,7 @@ public sealed partial class ThermalCloakComponent : Component
     public bool Enabled;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Cooldown = TimeSpan.FromSeconds(3);
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
     public TimeSpan ForcedCooldown = TimeSpan.FromSeconds(10);

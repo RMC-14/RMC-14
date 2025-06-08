@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/storage.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3a94024f59bfd350ecf02c511a7d99d597da3d6c/icons/obj/items/storage/kits.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -33,6 +33,9 @@
     },
     {
       "name": "smartgun"
+    },
+    {
+      "name": "mortar"
     }
   ]
 }

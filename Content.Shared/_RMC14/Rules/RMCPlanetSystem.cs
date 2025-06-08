@@ -1,5 +1,7 @@
 ﻿using System.Collections.Immutable;
 using Content.Shared._RMC14.CCVar;
+using Robust.Shared.Audio.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -18,17 +20,25 @@ public sealed class RMCPlanetSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private int _coordinateVariance;
+    private float _hijackSongGain;
+
+    private EntityQuery<RMCPlanetComponent> _rmcPlanetQuery;
 
     public ImmutableDictionary<string, EntProtoId<RMCPlanetMapPrototypeComponent>> PlanetPaths { get; private set; } =
         ImmutableDictionary<string, EntProtoId<RMCPlanetMapPrototypeComponent>>.Empty;
 
     public override void Initialize()
     {
+        _rmcPlanetQuery = GetEntityQuery<RMCPlanetComponent>();
+
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         SubscribeLocalEvent<RMCPlanetComponent, MapInitEvent>(OnPlanetMapInit);
 
+        SubscribeLocalEvent<RMCHijackSongComponent, ComponentStartup>(OnHijackSongStartup);
+
         Subs.CVar(_config, RMCCVars.RMCPlanetCoordinateVariance, v => _coordinateVariance = v, true);
+        Subs.CVar(_config, RMCCVars.VolumeGainHijackSong, SetVolumeHijack, true);
 
         ReloadPlanets();
     }
@@ -44,14 +54,46 @@ public sealed class RMCPlanetSystem : EntitySystem
         var x = _random.Next(-_coordinateVariance, _coordinateVariance + 1);
         var y = _random.Next(-_coordinateVariance, _coordinateVariance + 1);
         ent.Comp.Offset = (x, y);
+
+        var ev = new RMCPlanetAddedEvent();
+        RaiseLocalEvent(ent, ref ev);
+    }
+
+    private void OnHijackSongStartup(Entity<RMCHijackSongComponent> ent, ref ComponentStartup args)
+    {
+        if (TryComp(ent, out AudioComponent? audio))
+            audio.Gain = _hijackSongGain;
+    }
+
+    private void SetVolumeHijack(float gain)
+    {
+        _hijackSongGain = gain;
+        var query = AllEntityQuery<RMCHijackSongComponent, AudioComponent>();
+        while (query.MoveNext(out _, out _, out var audio))
+        {
+#pragma warning disable RA0002
+            audio.Params = audio.Params with { Volume = SharedAudioSystem.GainToVolume(gain) };
+#pragma warning restore RA0002
+        }
     }
 
     public bool IsOnPlanet(EntityCoordinates coordinates)
     {
-        if (HasComp<RMCPlanetComponent>(_transform.GetGrid(coordinates)))
+        if (_rmcPlanetQuery.HasComp(_transform.GetGrid(coordinates)))
             return true;
 
-        if (HasComp<RMCPlanetComponent>(_transform.GetMap(coordinates)))
+        if (_rmcPlanetQuery.HasComp(_transform.GetMap(coordinates)))
+            return true;
+
+        return false;
+    }
+
+    public bool IsOnPlanet(TransformComponent xform)
+    {
+        if (_rmcPlanetQuery.HasComp(xform.GridUid))
+            return true;
+
+        if (_rmcPlanetQuery.HasComp(xform.MapUid))
             return true;
 
         return false;
@@ -123,7 +165,7 @@ public sealed class RMCPlanetSystem : EntitySystem
                 continue;
             }
 
-            if (players == 0 || comp.MinPlayers == 0 || players >= comp.MinPlayers)
+            if (players == 0 || (comp.MinPlayers == 0 || players >= comp.MinPlayers) && (comp.MaxPlayers == 0 || players <= comp.MaxPlayers))
                 candidates.Add(new RMCPlanet(planetProto, comp));
         }
 

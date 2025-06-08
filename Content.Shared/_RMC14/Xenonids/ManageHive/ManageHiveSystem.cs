@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -26,10 +27,11 @@ public sealed class ManageHiveSystem : EntitySystem
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SharedWatchXenoSystem _watchXeno = default!;
+    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
@@ -122,6 +124,21 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
         }
 
+        try
+        {
+            var playTimes = _playtime.GetPlayTimes(giverActor.PlayerSession);
+            if (!playTimes.TryGetValue(ent.Comp.PlayTime, out var time) ||
+                time < ent.Comp.JellyRequiredTime)
+            {
+                _popup.PopupCursor($"You don't have the time required to hand out jellies ({(int) ent.Comp.JellyRequiredTime.TotalHours} hours)", ent, PopupType.LargeCaution);
+                return;
+            }
+        }
+        catch
+        {
+            // ignored
+        }
+
         if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.JellyPlasmaCost, false))
             return;
 
@@ -160,7 +177,7 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
 
         var ev = new ManageHiveJellyMessageEvent(args.Xeno, args.Name);
-        _dialog.OpenInput(ent, "What should the pheromone read?", ev, true);
+        _dialog.OpenInput(ent, "What should the pheromone read?", ev, true, _commendation.CharacterLimit);
     }
 
     private void OnManageHiveJellyMessage(Entity<ManageHiveComponent> ent, ref ManageHiveJellyMessageEvent args)
@@ -230,7 +247,7 @@ public sealed class ManageHiveSystem : EntitySystem
     private bool CanDevolveTargetPopup(Entity<ManageHiveComponent> manage, out Entity<XenoDevolveComponent> watched)
     {
         watched = default;
-        if (!_watchXeno.TryGetWatched(manage.Owner, out var watchedId) ||
+        if (!_xenoWatch.TryGetWatched(manage.Owner, out var watchedId) ||
             watchedId == manage.Owner)
         {
             _popup.PopupEntity("You must overwatch the xeno you want to de-evolve.", manage, manage, PopupType.MediumCaution);

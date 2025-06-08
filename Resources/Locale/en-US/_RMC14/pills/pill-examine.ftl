@@ -9,3 +9,5 @@ cm-pill-contents-dylovene = An anti-toxin pill. It neutralizes many common toxin
 cm-pill-contents-inaprovaline = An Inaprovaline pill. Used to stabilize patients.
 cm-pill-contents-kelotane = A Kelotane pill. Used to treat burns.
 cm-pill-contents-tricordrazine = A Tricordrazine pill. A weak general use medicine for treating damage.
+rmc-pill-contents-meralyne-bicaridine = A Meralyne-Bicaridine pill. Rapidly heals brute damage.
+rmc-pill-contents-russianred = A Russian Red pill. A very dangerous radiation-countering substance.

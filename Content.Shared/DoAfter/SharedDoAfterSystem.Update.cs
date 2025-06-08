@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.DoAfter;
 using Content.Shared.Gravity;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -15,6 +16,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCDoafterSystem _rmcDoafter = default!;
 
     private DoAfter[] _doAfters = Array.Empty<DoAfter>();
 
@@ -86,6 +88,14 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             }
 
             if (ShouldCancel(doAfter, xformQuery, handsQuery))
+            {
+                InternalCancel(doAfter, comp);
+                dirty = true;
+                continue;
+            }
+
+            // RMC14
+            if (_rmcDoafter.ShouldCancel(doAfter))
             {
                 InternalCancel(doAfter, comp);
                 dirty = true;

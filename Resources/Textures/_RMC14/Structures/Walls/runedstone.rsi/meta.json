@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f74929c306a5d2ec5832abcdc695aea1b0786664/icons/turf/walls/runedstone.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blank"
+    },
+    {
+      "name": "runedstone"
+    },
+    {
+      "name": "runedstone0",
+      "directions": 4
+    },
+    {
+      "name": "runedstone1",
+      "directions": 4
+    },
+    {
+      "name": "runedstone2",
+      "directions": 4
+    },
+    {
+      "name": "runedstone3",
+      "directions": 4
+    },
+    {
+      "name": "runedstone4",
+      "directions": 4
+    },
+    {
+      "name": "runedstone5",
+      "directions": 4
+    },
+    {
+      "name": "runedstone6",
+      "directions": 4
+    },
+    {
+      "name": "runedstone7",
+      "directions": 4
+    }
+  ]
+}

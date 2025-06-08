@@ -77,6 +77,8 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             ev.Squad.Comp.Fireteams.SquadLeader = null;
             ev.Squad.Comp.Fireteams.SquadLeaderId = null;
         }
+
+        SyncMemberFireteams(ev.Member);
     }
 
     private void OnSquadMemberRemoved(ref SquadMemberRemovedEvent ev)

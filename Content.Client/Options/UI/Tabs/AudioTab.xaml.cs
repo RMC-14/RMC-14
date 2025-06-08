@@ -1,3 +1,4 @@
+using Content.Client.Administration.Managers;
 using Content.Client.Audio;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.CCVar;
@@ -13,8 +14,9 @@ namespace Content.Client.Options.UI.Tabs;
 [GenerateTypedNameReferences]
 public sealed partial class AudioTab : Control
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IAudioManager _audio = default!;
+    [Dependency] private readonly IClientAdminManager _admin = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     public AudioTab()
     {
@@ -52,6 +54,17 @@ public sealed partial class AudioTab : Control
             SliderVolumeInterface,
             scale: ContentAudioSystem.InterfaceMultiplier);
 
+        // RMC14
+        Control.AddOptionPercentSlider(
+            RMCCVars.VolumeGainCassettes,
+            SliderVolumeCassettes,
+            scale: 0.12f);
+
+        Control.AddOptionPercentSlider(
+            RMCCVars.VolumeGainHijackSong,
+            SliderVolumeHijackSong,
+            scale: 0.32f);
+
         Control.AddOptionSlider(
             CCVars.MaxAmbientSources,
             SliderMaxAmbienceSounds,
@@ -62,16 +75,28 @@ public sealed partial class AudioTab : Control
         Control.AddOptionCheckBox(CCVars.RestartSoundsEnabled, RestartSoundsCheckBox);
         Control.AddOptionCheckBox(CCVars.EventMusicEnabled, EventMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.AdminSoundsEnabled, AdminSoundsCheckBox);
-        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesArachnid, CMVoicelinesArachnid);
-        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesDiona, CMVoicelinesDiona);
-        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesDwarf, CMVoicelinesDwarf);
-        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesFelinid, CMVoicelinesFelinid);
-        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesHuman, CMVoicelinesHuman);
-        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesMoth, CMVoicelinesMoth);
-        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesReptilian, CMVoicelinesReptilian);
-        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesSlime, CMVoicelinesSlime);
+        Control.AddOptionCheckBox(CCVars.BwoinkSoundEnabled, BwoinkSoundCheckBox);
 
         Control.Initialize();
+    }
+
+    protected override void EnteredTree()
+    {
+        base.EnteredTree();
+        _admin.AdminStatusUpdated += UpdateAdminButtonsVisibility;
+        UpdateAdminButtonsVisibility();
+    }
+
+    protected override void ExitedTree()
+    {
+        base.ExitedTree();
+        _admin.AdminStatusUpdated -= UpdateAdminButtonsVisibility;
+    }
+
+
+    private void UpdateAdminButtonsVisibility()
+    {
+        BwoinkSoundCheckBox.Visible = _admin.IsActive();
     }
 
     private void OnMasterVolumeSliderChanged(float value)

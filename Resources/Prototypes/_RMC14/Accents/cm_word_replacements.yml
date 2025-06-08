@@ -1,4 +1,4 @@
-﻿- type: accent
+- type: accent
   id: CMChatSanitize
   wordReplacements:
     cm-chatsan-word-deltard: cm-chatsan-replacement-deltard
@@ -113,13 +113,21 @@
     cm-chatsan-word-rat: cm-chatsan-replacement-rat
     cm-chatsan-word-rats: cm-chatsan-replacement-rats
     cm-chatsan-word-mouse: cm-chatsan-replacement-mouse
-    cm-chatsan-word-mice: cm-chatsan-replacement-mice 
+    cm-chatsan-word-mice: cm-chatsan-replacement-
+    cm-chatsan-word-feroxi: cm-chatsan-replacement-feroxi
+    cm-chatsan-word-feroxis: cm-chatsan-replacement-feroxi
+    cm-chatsan-word-shark: cm-chatsan-replacement-shark
+    cm-chatsan-word-sharks: cm-chatsan-replacement-sharks
+    cm-chatsan-word-fish: cm-chatsan-replacement-fish
     cm-chatsan-word-laser: cm-chatsan-replacement-laser
     cm-chatsan-word-lazer: cm-chatsan-replacement-lazer
+    cm-chatsan-word-flamer: cm-chatsan-replacement-flamer
+    cm-chatsan-word-flamethrower: cm-chatsan-replacement-flamethrower
     cm-chatsan-word-sadar: cm-chatsan-replacement-sadar
     cm-chatsan-word-rocket: cm-chatsan-replacement-rocket
     cm-chatsan-word-grenadier: cm-chatsan-replacement-grenadier
     cm-chatsan-word-scout: cm-chatsan-replacement-scout
+    cm-chatsan-word-scout-specialist: cm-chatsan-replacement-scout-specialist
     cm-chatsan-word-mortar: cm-chatsan-replacement-mortar
     cm-chatsan-word-demo: cm-chatsan-replacement-demo
     cm-chatsan-word-demolitionist: cm-chatsan-replacement-demolitionist
@@ -129,6 +137,7 @@
     cm-chatsan-word-sensors: cm-chatsan-replacement-sensors
     cm-chatsan-word-sensor-tower: cm-chatsan-replacement-sensor-tower
     cm-chatsan-word-comms: cm-chatsan-replacement-comms
+    cm-chatsan-word-tcomms: cm-chatsan-replacement-tcomms
     cm-chatsan-word-communications-tower: cm-chatsan-replacement-communications-tower
     cm-chatsan-word-smart-gun: cm-chatsan-replacement-smart-gun
     cm-chatsan-word-smartgun: cm-chatsan-replacement-smartgun
@@ -139,4 +148,44 @@
     cm-chatsan-word-shotgun: cm-chatsan-replacement-shotgun
     cm-chatsan-word-squad: cm-chatsan-replacement-squad
     cm-chatsan-word-squads: cm-chatsan-replacement-squads
-
+    cm-chatsan-word-sg: cm-chatsan-replacement-sg
+    cm-chatsan-word-sgs: cm-chatsan-replacement-sgs
+    cm-chatsan-word-flares: cm-chatsan-replacement-flares
+    cm-chatsan-word-nade: cm-chatsan-replacement-nade
+    cm-chatsan-word-nades: cm-chatsan-replacement-nades
+    cm-chatsan-word-nuke: cm-chatsan-replacement-nuke
+    cm-chatsan-word-intel: cm-chatsan-replacement-intel
+    cm-chatsan-word-survivor: cm-chatsan-replacement-survivor
+    cm-chatsan-word-survivors: cm-chatsan-replacement-survivors
+    cm-chatsan-word-surv: cm-chatsan-replacement-surv
+    cm-chatsan-word-survs: cm-chatsan-replacement-survs
+    cm-chatsan-word-bro: cm-chatsan-replacement-bro
+    cm-chatsan-word-bruh: cm-chatsan-replacement-bruh
+    cm-chatsan-word-bvro: cm-chatsan-replacement-bvro
+    cm-chatsan-word-xro: cm-chatsan-replacement-xro
+    cm-chatsan-word-naur: cm-chatsan-replacement-naur
+    cm-chatsan-word-dancer: cm-chatsan-replacement-dancer
+    cm-chatsan-word-larba: cm-chatsan-replacement-larba
+    cm-chatsan-word-toob: cm-chatsan-replacement-toob
+    cm-chatsan-word-toober: cm-chatsan-replacement-toober
+    cm-chatsan-word-cooked: cm-chatsan-replacement-cooked
+    cm-chatsan-word-xooked: cm-chatsan-replacement-xooked
+    cm-chatsan-word-xibidi: cm-chatsan-replacement-xibidi
+    cm-chatsan-word-mcxonald: cm-chatsan-replacement-mcxonald
+    cm-chatsan-word-mcxonalds: cm-chatsan-replacement-mcxonalds
+    cm-chatsan-word-slop: cm-chatsan-replacement-slop
+    cm-chatsan-word-spam: cm-chatsan-replacement-spam
+    cm-chatsan-word-god: cm-chatsan-replacement-god
+    cm-chatsan-word-xod: cm-chatsan-replacement-xod
+    cm-chatsan-word-jesus: cm-chatsan-replacement-jesus
+    cm-chatsan-word-xesus: cm-chatsan-replacement-xesus
+    cm-chatsan-word-christ: cm-chatsan-replacement-christ
+    cm-chatsan-word-jesus-christ: cm-chatsan-replacement-christ
+    cm-chatsan-word-froot: cm-chatsan-replacement-froot
+    cm-chatsan-word-yung: cm-chatsan-replacement-yung
+    cm-chatsan-word-croosh: cm-chatsan-replacement-croosh
+    cm-chatsan-word-croosher: cm-chatsan-replacement-croosher
+    cm-chatsan-word-bald: cm-chatsan-replacement-bald
+    cm-chatsan-word-woyer: cm-chatsan-replacement-woyer
+    cm-chatsan-word-sigma: cm-chatsan-replacement-sigma
+    cm-chatsan-word-xigma: cm-chatsan-replacement-xigma

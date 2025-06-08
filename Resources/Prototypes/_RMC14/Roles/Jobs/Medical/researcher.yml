@@ -8,18 +8,14 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearResearcher
   icon: "CMJobIconResearcher"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmo
   accessGroups:
   - Researcher
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: researcher
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_medical
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -33,7 +29,15 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Rsr"
+      prefix: cm-job-prefix-researcher
+    - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: researcher
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -61,10 +65,7 @@
   - type: SpawnPoint
     job_id: CMResearcher
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: researcher
+    state: res_spawn
 
 - type: playTimeTracker
   id: CMJobResearcher

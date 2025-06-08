@@ -6,7 +6,6 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
@@ -56,6 +55,7 @@ public sealed class RMCWieldableSystem : EntitySystem
     private void OnMapInit(Entity<WieldDelayComponent> wieldable, ref MapInitEvent args)
     {
         wieldable.Comp.ModifiedDelay = wieldable.Comp.BaseDelay;
+        Dirty(wieldable);
     }
 
 #region Wield speed modifiers
@@ -178,6 +178,7 @@ public sealed class RMCWieldableSystem : EntitySystem
         RaiseLocalEvent(wieldable, ref ev);
 
         wieldable.Comp.ModifiedDelay = ev.Delay >= TimeSpan.Zero ? ev.Delay : TimeSpan.Zero;
+        Dirty(wieldable);
     }
 
     private void OnItemWieldedWithDelay(Entity<WieldDelayComponent> wieldable, ref ItemWieldedEvent args)

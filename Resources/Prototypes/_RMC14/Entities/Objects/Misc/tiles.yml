@@ -23,12 +23,16 @@
     - Plating
     - CMFloorSteel
   - type: Stack
-    stackType: FloorTileSteel
+    stackType: RMCTileSteel
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 25
 
 - type: entity
   parent: CMTileItemBase
   id: CMTileItemWood
-  name: wood floor
+  name: wooden floor tile
   components:
   - type: Sprite
     state: wood
@@ -39,4 +43,19 @@
     - Plating
     - CMFloorWood
   - type: Stack
-    stackType: FloorTileWood
+    stackType: RMCTileWood
+  - type: Construction
+    graph: RMCTileWood
+    node: start
+
+- type: stack
+  id: RMCTileSteel
+  name: steel tile
+  spawn: CMTileItemSteel
+  maxCount: 60
+
+- type: stack
+  id: RMCTileWood
+  name: wooden floor tile
+  spawn: CMTileItemWood
+  maxCount: 60

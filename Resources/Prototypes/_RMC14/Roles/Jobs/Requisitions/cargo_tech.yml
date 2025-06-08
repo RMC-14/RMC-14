@@ -4,18 +4,26 @@
   name: cm-job-name-cargotech
   description: cm-job-description-cargotech
   playTimeTracker: CMJobCargoTech
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobCargoTech
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobCargoTech
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   startingGear: CMGearCargoTech
   icon: "CMJobIconCargoTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-qm
   accessGroups:
   - CMCargoTech
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cargo
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -27,7 +35,11 @@
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
     - type: JobPrefix
-      prefix: "CT"
+      prefix: cm-job-prefix-cargotech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: cargo
 
 - type: startingGear
   id: CMGearCargoTech
@@ -40,7 +52,7 @@
     ears: CMHeadsetRequisition
     pocket1: RMCPouchGeneralMedium
     pocket2: CMStampApproved
-#    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
+    belt: RMCM1984BeltFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -50,10 +62,7 @@
   - type: SpawnPoint
     job_id: CMCargoTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: cargo_tech
+    state: ct_spawn
 
 - type: playTimeTracker
   id: CMJobCargoTech

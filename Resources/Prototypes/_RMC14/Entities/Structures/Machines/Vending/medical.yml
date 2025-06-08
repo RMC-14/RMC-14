@@ -18,21 +18,19 @@
 
 
 - type: entity
-  parent: ColMarTechBase
-  id: CMVendorMedical
+  parent: ColMarTechBaseAnchorable
+  id: CMVendorMedicalAllAccess
   name: We-Ya-Med Plus
   description: Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
+  suffix: All Access
   components:
-  - type: Transform
-    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
     layers:
     - state: "off"
     - state: "normal-unshaded"
-  - type: AccessReader
-    access: [["CMAccessMedical"]]
   - type: CMSolutionRefiller
+    randomizeReagentsPlanetside: true
     current: 600
     max: 600
     recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
@@ -56,6 +54,9 @@
       tags:
       - Bottle
   - type: CMAutomatedVendor # TODO RMC14 different ui style
+    hackable: true
+    randomUnstockAmount: -1 # -1 is between 1 and the original amount
+    randomEmptyChance: 0.25 # 25% chance
     sections:
     - name: Field supplies
       entries:
@@ -142,6 +143,13 @@
       - id: CMSyringe
         amount: 7
 
+- type: entity
+  parent: CMVendorMedicalAllAccess
+  id: CMVendorMedical
+  suffix: ""
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
 
 - type: entity
   parent: CMVendorMedical
@@ -149,8 +157,6 @@
   name: We-Ya-Chem Plus
   description: Medical chemistry dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
   components:
-  - type: Transform
-    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/chem.rsi
     layers:
@@ -201,13 +207,11 @@
 
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: ColMarTechMarineMedical
   name: ColMarTech MarineMed
   description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
   components:
-  - type: Transform
-    anchored: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -260,7 +264,7 @@
 #        amount: 7
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: RMCNanoMed
   name: NanoMed
   description: A wall-mounted medical equipment dispenser.
@@ -295,6 +299,7 @@
       components:
       - Hypospray
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Supplies
       entries:
@@ -314,7 +319,7 @@
         amount: 3
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: CMVendorBlood
   name: MM Blood Dispenser
   description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
@@ -338,6 +343,7 @@
     access:
     - [ "CMAccessMedical" ]
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Blood Packs
       entries:

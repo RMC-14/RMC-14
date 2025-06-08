@@ -21,7 +21,7 @@
   description: A machine printed circuit board for an autolathe
   components: # TODO RMC14 autolathe
     - type: MachineBoard
-      prototype: CMAutolathe
+      prototype: RMCAutolatheEmpty
 #      requirements:
 #        MatterBin: 3
 #        Manipulator: 1
@@ -103,7 +103,7 @@
   - type: Sprite
     state: blank_mod
   - type: MachineBoard
-    prototype: CMDispenserSodaEmpty
+    prototype: CMDispenserSoda
     # TODO RMC14 material requirements
 
 - type: entity
@@ -129,3 +129,12 @@
   - type: MachineBoard
     prototype: CMMicrowave
 #    # TODO RMC14 material requirements
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: RMCArmylatheMachineCircuitboard
+  name: armylathe machine board
+  description: A machine printed circuit board for an armylathe
+  components:
+    - type: MachineBoard
+      prototype: RMCArmylatheEmpty

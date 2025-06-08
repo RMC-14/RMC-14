@@ -1,14 +1,55 @@
 - type: entity
-  name: bible
-  description: Apply to head repeatedly.
-  parent: Bible
+  name: Holy Bible
+  description: A book containing the sacred texts of that one popular guy you heard a lot about.
+  parent: BaseStorageItem
   id: RMCBible
   components:
-  - type: Bible
-    damageOnUntrainedUse: ## What a non-chaplain takes when attempting to heal someone
-      groups:
-        Burn: 15
   - type: Sprite
     sprite: _RMC14/Objects/Misc/bible.rsi
+    state: icon
   - type: Item
     sprite: _RMC14/Objects/Misc/bible.rsi
+  - type: UseDelay
+    delay: 10.0
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    damage:
+      types:
+        Holy: 25
+        Blunt: 1
+  - type: Clothing
+    slots:
+    - Belt
+  - type: Storage
+    grid:
+    - 0,0,0,1
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Tag
+    tags:
+    - Book
+
+- type: entity
+  parent: RMCBible
+  id: RMCBibleHEFA
+  name: Holy texts of the High Explosive Fragmenting Anti-personnel hand grenade.
+  description: Praised be thee, reverend Clearsmire who has brought us into the light of the shrapnel! Sworn to the holy service of the HEFA lord are we, and while few, we are the voices of the silent many! Printed in the RESS.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/books.rsi
+    state: tome_hefa
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 HEFA nades
+    whitelist:
+      tags:
+      - RMCGrenadeHEFA
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3

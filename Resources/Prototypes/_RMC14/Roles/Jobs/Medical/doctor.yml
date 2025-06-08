@@ -8,18 +8,14 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 3600 # 1 hour
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearDoctor
   icon: "CMJobIconDoctor"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cmo
   accessGroups:
   - CMMedbay
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: doctor
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_medical
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -32,7 +28,14 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Doc"
+      prefix: cm-job-prefix-doctor
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: doctor
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_medical
 
 - type: startingGear
   id: CMGearDoctor
@@ -61,10 +64,7 @@
   - type: SpawnPoint
     job_id: CMDoctor
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: doctor
+    state: doc_spawn
 
 - type: playTimeTracker
   id: CMJobDoctor

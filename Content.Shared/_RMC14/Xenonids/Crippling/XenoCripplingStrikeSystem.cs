@@ -1,41 +1,49 @@
-﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Aura;
+using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Crippling;
 
 public sealed class XenoCripplingStrikeSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedAuraSystem _aura = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<XenoCripplingStrikeComponent, XenoCripplingStrikeActionEvent>(OnXenoCripplingStrikeAction);
 
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeHitEvent>(OnXenoCripplingStrikeHit);
+        SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, RefreshMovementSpeedModifiersEvent>(OnActiveCripplingRefreshSpeed);
+        SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, ComponentRemove>(OnActiveCripplingRemove);
 
-        SubscribeLocalEvent<VictimCripplingStrikeSlowedComponent, DamageModifyEvent>(OnVictimCripplingModify, before: [typeof(CMArmorSystem)]);
-        SubscribeLocalEvent<VictimCripplingStrikeSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnVictimCripplingRefreshSpeed);
-        SubscribeLocalEvent<VictimCripplingStrikeSlowedComponent, ComponentRemove>(OnVictimCripplingRemove);
+        SubscribeLocalEvent<VictimCripplingStrikeDamageComponent, DamageModifyEvent>(OnVictimCripplingModify, before: [typeof(CMArmorSystem)]);
     }
 
     private void OnXenoCripplingStrikeAction(Entity<XenoCripplingStrikeComponent> xeno, ref XenoCripplingStrikeActionEvent args)
     {
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+        if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
         args.Handled = true;
@@ -44,102 +52,101 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         _rmcMelee.MeleeResetInit((xeno.Owner, reset));
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
-        active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
+        active.NextSlashBuffed = true;
         active.SlowDuration = xeno.Comp.SlowDuration;
         active.DamageMult = xeno.Comp.DamageMult;
+        active.HitText = xeno.Comp.HitText;
+        active.DeactivateText = xeno.Comp.DeactivateText;
+        active.ExpireText = xeno.Comp.ExpireText;
+        active.Speed = xeno.Comp.Speed;
 
         Dirty(xeno, active);
 
-        _popup.PopupClient(Loc.GetString("cm-xeno-crippling-strike-activate"), xeno, xeno);
+        _popup.PopupClient(Loc.GetString(xeno.Comp.ActivateText), xeno, xeno);
+        _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        if (xeno.Comp.AuraColor is { } color)
+            _aura.GiveAura(xeno, color, xeno.Comp.ActiveDuration, 1);
     }
 
     private void OnXenoCripplingStrikeHit(Entity<XenoActiveCripplingStrikeComponent> xeno, ref MeleeHitEvent args)
     {
+        if (!xeno.Comp.NextSlashBuffed)
+            return;
+
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
         foreach (var entity in args.HitEntities)
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, entity) ||
-                HasComp<VictimCripplingStrikeSlowedComponent>(entity))
+                HasComp<VictimCripplingStrikeDamageComponent>(entity))
             {
                 continue;
             }
 
-            var victim = EnsureComp<VictimCripplingStrikeSlowedComponent>(entity);
+            var victim = EnsureComp<VictimCripplingStrikeDamageComponent>(entity);
 
-            victim.ExpireAt = _timing.CurTime + xeno.Comp.SlowDuration;
-            victim.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
             victim.DamageMult = xeno.Comp.DamageMult;
-            victim.WasHit = false;
 
             Dirty(entity, victim);
 
-            _movementSpeed.RefreshMovementSpeedModifiers(entity);
+            _slow.TrySlowdown(entity, _xeno.TryApplyXenoDebuffMultiplier(entity, xeno.Comp.SlowDuration), ignoreDurationModifier: true);
 
-            var message = Loc.GetString("cm-xeno-crippling-strike-hit", ("target", entity));
-            
+            var message = Loc.GetString(xeno.Comp.HitText, ("target", entity));
 
             if (_net.IsServer)
-            {
                 _popup.PopupEntity(message, entity, xeno);
-                SpawnAttachedTo(xeno.Comp.Effect, entity.ToCoordinates());
-            }
 
-            RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
+            xeno.Comp.NextSlashBuffed = false;
             break;
         }
     }
 
-    private void OnVictimCripplingModify(Entity<VictimCripplingStrikeSlowedComponent> victim, ref DamageModifyEvent args)
+    private void OnActiveCripplingRefreshSpeed(Entity<XenoActiveCripplingStrikeComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!victim.Comp.WasHit)
-        {
-            args.Damage *= victim.Comp.DamageMult;
-            victim.Comp.WasHit = true;
-        }
+        if (xeno.Comp.Speed is not { } speed)
+            return;
+
+        args.ModifySpeed(speed, speed);
     }
 
-
-    private void OnVictimCripplingRefreshSpeed(Entity<VictimCripplingStrikeSlowedComponent> victim, ref RefreshMovementSpeedModifiersEvent args)
+    private void OnActiveCripplingRemove(Entity<XenoActiveCripplingStrikeComponent> xeno, ref ComponentRemove args)
     {
-        var multiplier = victim.Comp.SpeedMultiplier.Float();
-        args.ModifySpeed(multiplier, multiplier);
+        if (!TerminatingOrDeleted(xeno))
+            _movementSpeed.RefreshMovementSpeedModifiers(xeno);
     }
 
-    private void OnVictimCripplingRemove(Entity<VictimCripplingStrikeSlowedComponent> victim, ref ComponentRemove args)
+    private void OnVictimCripplingModify(Entity<VictimCripplingStrikeDamageComponent> victim, ref DamageModifyEvent args)
     {
-        if (!TerminatingOrDeleted(victim))
-            _movementSpeed.RefreshMovementSpeedModifiers(victim);
+        args.Damage *= victim.Comp.DamageMult;
+        RemCompDeferred<VictimCripplingStrikeDamageComponent>(victim);
     }
 
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
+        if (_net.IsClient)
+            return;
+
         var time = _timing.CurTime;
 
-        if (_net.IsServer)
+        var activeQuery = EntityQueryEnumerator<XenoActiveCripplingStrikeComponent>();
+
+        while (activeQuery.MoveNext(out var uid, out var active))
         {
-            var activeQuery = EntityQueryEnumerator<XenoActiveCripplingStrikeComponent>();
-            while (activeQuery.MoveNext(out var uid, out var active))
-            {
-                if (active.ExpireAt > time)
-                    continue;
-
-                RemCompDeferred<XenoActiveCripplingStrikeComponent>(uid);
-                RemCompDeferred<MeleeResetComponent>(uid);
-
-                _popup.PopupEntity(Loc.GetString("cm-xeno-crippling-strike-expire"), uid, uid, PopupType.SmallCaution);
-            }
-        }
-
-        var victimQuery = EntityQueryEnumerator<VictimCripplingStrikeSlowedComponent>();
-        while (victimQuery.MoveNext(out var uid, out var victim))
-        {
-            if (victim.ExpireAt > time)
+            if (time < active.ExpireAt)
                 continue;
 
-            RemCompDeferred<VictimCripplingStrikeSlowedComponent>(uid);
-            _movementSpeed.RefreshMovementSpeedModifiers(uid);
+            if (active.NextSlashBuffed)
+                _popup.PopupEntity(Loc.GetString(active.ExpireText), uid, uid, PopupType.SmallCaution);
+            // the deactivate text is supposed to show up together with the expire text
+            // but in ss14 popups overlap making it unreadable so else if will have to do...
+            else if (active.DeactivateText is { } deactivateText)
+                _popup.PopupEntity(Loc.GetString(deactivateText), uid, uid, PopupType.MediumCaution);
+
+            RemCompDeferred<XenoActiveCripplingStrikeComponent>(uid);
         }
     }
 }

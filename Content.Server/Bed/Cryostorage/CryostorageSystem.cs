@@ -1,4 +1,5 @@
 using System.Globalization;
+using Content.Server._RMC14.Announce;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
@@ -9,6 +10,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared.Access.Systems;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Chat;
@@ -49,6 +51,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly MarinePresenceAnnounceSystem _marinePresenceAnnounce = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -221,6 +224,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         UpdateCryostorageUIState((cryostorageEnt.Value, cryostorageComponent));
         AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent):player} was entered into cryostorage inside of {ToPrettyString(cryostorageEnt.Value)}");
 
+        var ev = new EnteredCryostorageEvent();
+        RaiseLocalEvent(ent, ref ev);
         if (!TryComp<StationRecordsComponent>(station, out var stationRecords))
             return;
 
@@ -235,6 +240,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             _stationRecords.RemoveRecord(key, stationRecords);
         }
 
+        _marinePresenceAnnounce.AnnounceEarlyLeave(ent, recordId, station, jobName); // RMC14
+        return; // RMC14
         _chatSystem.DispatchStationAnnouncement(station.Value,
             Loc.GetString(
                 "earlyleave-cryo-announcement",
@@ -274,6 +281,9 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         cryostorageComponent.StoredPlayers.Remove(uid);
         AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(entity):player} re-entered the game from cryostorage {ToPrettyString(cryostorage)}");
         UpdateCryostorageUIState((cryostorage, cryostorageComponent));
+
+        var ev = new LeftCryostorageEvent();
+        RaiseLocalEvent(entity, ref ev);
     }
 
     protected override void OnInsertedContainer(Entity<CryostorageComponent> ent, ref EntInsertedIntoContainerMessage args)

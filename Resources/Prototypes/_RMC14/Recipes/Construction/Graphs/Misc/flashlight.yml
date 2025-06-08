@@ -1,0 +1,22 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCFlashLightGraph
+  start: start
+  graph:
+    - node: start
+
+    - node: RailLight
+      entity: RMCAttachmentRailFlashlight
+      edges:
+        - to: Flashlight
+          steps:
+            - tool: Screwing
+              doAfter: 1
+
+    - node: Flashlight
+      entity: RMCFlashlight
+      edges:
+        - to: RailLight
+          steps:
+            - tool: Screwing
+              doAfter: 1

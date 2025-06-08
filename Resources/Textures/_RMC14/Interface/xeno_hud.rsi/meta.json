@@ -1,12 +1,15 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/029cdbdae1a118c40b558a75e8171fbd49d560a6/icons/mob/hud/hud.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/daac1b70c46480c55b1e93b64f04529d364dd60f/icons/mob/hud/hud.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
+    {
+        "name": "xeno_structure_node_indicator"
+    },
     {
       "name": "plasma0"
     },
@@ -572,6 +575,42 @@
     },
     {
       "name": "xenoshield100"
+    },
+    {
+      "name": "cap0"
+    },
+    {
+      "name": "cap10"
+    },
+    {
+      "name": "cap20"
+    },
+    {
+      "name": "cap30"
+    },
+    {
+      "name": "cap40"
+    },
+    {
+      "name": "cap50"
+    },
+    {
+      "name": "cap60"
+    },
+    {
+      "name": "cap70"
+    },
+    {
+      "name": "cap80"
+    },
+    {
+      "name": "cap90"
+    },
+    {
+      "name": "cap100"
+    },
+    {
+      "name": "fake_tall"
     }
   ]
 }

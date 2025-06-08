@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   name: M79 grenade launcher
   parent: [ RMCBaseWeaponGrenadeLauncher ]
   id: CMWeaponLauncherM79
@@ -26,7 +26,7 @@
     capacity: 1
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m79_reload.ogg
-  #    proto: CMGrenadeHighExplosive # This needs to start with an HIRR baton slug when those get implemented.
+    proto: RMCBatonSlugHIRR
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
@@ -46,3 +46,9 @@
     offsets:
       rmc-aslot-rail: 0, 0.093
       rmc-aslot-stock: -0.56, 0.0
+  - type: Tag
+    tags:
+    - RMCWeaponLauncherM79
+
+- type: Tag
+  id: RMCWeaponLauncherM79

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: Bed
   id: CMBed
   name: bed
@@ -54,6 +54,28 @@
     graph: RMCBed
     node: bedPsych
 
+- type: entity
+  parent: CMBed
+  id: RMCBedDingy
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: dingy_bed
+  - type: Construction
+    graph: RMCBed
+    node: bedDingy
+
+- type: entity
+  parent: CMBed
+  id: RMCBedAlien
+  name: alien bed
+  suffix: Alien
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: alien_bed
+  - type: Construction
+
 # Bedroll
 
 - type: entity
@@ -108,8 +130,6 @@
   - type: Construction
     graph: bed
     node: bed
-  - type: PlaceableSurface
-    placeCentered: true
   - type: Appearance
   - type: GenericVisualizer
     visuals:

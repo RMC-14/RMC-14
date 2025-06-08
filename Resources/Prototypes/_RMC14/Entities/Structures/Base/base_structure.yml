@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStructure
   id: CMBaseStructure
   abstract: true
@@ -17,6 +17,7 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: BaseStructure
@@ -36,6 +37,10 @@
       Brute:
         collection: XenoResinBreak
   - type: XenoConstruct
+  - type: RMCDeleteAnchoredOnInit
+    whitelist:
+      tags:
+      - XenoWeedNode
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: NpcFactionMember
@@ -51,6 +56,7 @@
     hitsToInvulnerability: 3
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: DeletedByWeedKiller
 
 - type: entity
   id: CMCorrodible
@@ -96,6 +102,11 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#ebe5e5ee"
+  - type: IsRoof
+  - type: SunShadowCast
+  - type: Tag
+    tags:
+    - Wall
 
 - type: entity
   abstract: true
@@ -122,6 +133,7 @@
   - type: Corrodible
     isCorrodible: true
     structure: true
+    meltTimeMult: 3
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
@@ -131,6 +143,11 @@
     hitsToDestroy: 20
   - type: Appearance
   - type: Bullethole
+  - type: XenoToggleChargingDamage
+    stop: true
+    damage:
+      types:
+        Blunt: 13
 
 - type: entity
   parent:
@@ -156,6 +173,15 @@
     flags:
     - Turf
     - Xeno
+  - type: ResinSurgeReinforcable
+  - type: Tag
+    tags:
+    - SpreaderIgnore
+  - type: XenoToggleChargingDamage
+    stop: true
+    damage:
+      types:
+        Blunt: 5
 
 # Invisible Wall
 

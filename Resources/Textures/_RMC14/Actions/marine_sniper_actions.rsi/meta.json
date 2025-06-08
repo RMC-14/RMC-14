@@ -9,6 +9,18 @@
   "states": [
     {
       "name": "prepare_position"
+    },
+    {
+      "name": "sniper_toggle_laser_off"
+    },
+    {
+      "name": "sniper_toggle_laser_on"
+    },
+    {
+      "name": "spotter_target"
+    },
+    {
+      "name": "sniper_aim"
     }
   ]
 }

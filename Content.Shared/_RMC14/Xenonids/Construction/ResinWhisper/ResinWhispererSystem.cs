@@ -27,6 +27,7 @@ public sealed class ResinWhispererSystem : EntitySystem
         SubscribeLocalEvent<ResinDoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
 
         SubscribeLocalEvent<ResinWhispererComponent, XenoSecreteStructureAdjustFields>(OnRemoteSecreteStructure);
+        SubscribeLocalEvent<ResinWhispererComponent, InRangeOverrideEvent>(OnInRangeOverride);
     }
 
     private void OnDoorAltVerb(Entity<ResinDoorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -42,16 +43,13 @@ public sealed class ResinWhispererSystem : EntitySystem
             Impact = LogImpact.Low,
             Act = () =>
             {
-                if (!_weeds.IsOnWeeds(user))
-                {
-                    _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), user, user);
+                if (!CanRemoteOpenDoorPopup(user, target))
                     return;
-                }
 
                 if (!TryComp(target, out DoorComponent? doorComp))
                     return;
 
-                if (!_door.TryToggleDoor(target))
+                if (!_door.TryToggleDoor(target, predicted: true))
                     return;
 
                 if (doorComp.State == DoorState.Opening)
@@ -65,6 +63,28 @@ public sealed class ResinWhispererSystem : EntitySystem
             },
             Priority = 100,
         });
+    }
+
+    private bool CanRemoteOpenDoorPopup(Entity<ResinWhispererComponent?> user, EntityUid target, bool doPopup = true)
+    {
+        if (!Resolve(user, ref user.Comp, false))
+            return false;
+
+        if (!_weeds.IsOnFriendlyWeeds(user.Owner))
+        {
+            if (doPopup)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), user, user);
+
+            return false;
+        }
+
+        if (!HasComp<DoorComponent>(target) ||
+            !HasComp<ResinDoorComponent>(target))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private void OnRemoteSecreteStructure(Entity<ResinWhispererComponent> ent, ref XenoSecreteStructureAdjustFields args)
@@ -91,7 +111,7 @@ public sealed class ResinWhispererSystem : EntitySystem
             return;
         }
 
-        if (!_weeds.IsOnWeeds(ent.Owner))
+        if (!_weeds.IsOnFriendlyWeeds(ent.Owner))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), ent, ent);
             return;
@@ -99,6 +119,15 @@ public sealed class ResinWhispererSystem : EntitySystem
 
         constructComp.BuildDelay = ent.Comp.StandardConstructDelay.Value.Multiply(ent.Comp.RemoteConstructDelayMultiplier);
         constructComp.BuildRange = ent.Comp.MaxRemoteConstructDistance;
+    }
+
+    private void OnInRangeOverride(Entity<ResinWhispererComponent> ent, ref InRangeOverrideEvent args)
+    {
+        if (!CanRemoteOpenDoorPopup(ent.Owner, args.Target, false))
+            return;
+
+        args.InRange = true;
+        args.Handled = true;
     }
 
     private bool TileIsVisible(Entity<ResinWhispererComponent> ent, EntityCoordinates targetCoordinates)

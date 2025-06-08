@@ -1,9 +1,10 @@
-﻿using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
@@ -25,17 +26,18 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -51,7 +53,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
 
     private void OnXenoHeadbuttAction(Entity<XenoHeadbuttComponent> xeno, ref XenoHeadbuttActionEvent args)
     {
-        if (!_xeno.CanAbilityAttackTarget(xeno, args.Target))
+        if (args.Handled)
             return;
 
         if (TryComp<XenoCrestComponent>(xeno, out var crest) && crest.Lowered && !_interaction.InRangeUnobstructed(xeno.Owner, args.Target))
@@ -60,16 +62,13 @@ public sealed class XenoHeadbuttSystem : EntitySystem
             return;
         }
 
-        if (args.Handled)
-            return;
-
         var attempt = new XenoHeadbuttAttemptEvent();
         RaiseLocalEvent(xeno, ref attempt);
 
         if (attempt.Cancelled)
             return;
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
         _rmcPulling.TryStopAllPullsFromAndOn(xeno);
@@ -83,6 +82,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
+        _rmcObstacleSlamming.MakeImmune(xeno);
         _throwing.TryThrow(xeno, diff, 10);
     }
 
@@ -90,6 +90,9 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     {
         // TODO RMC14 lag compensation
         var targetId = args.Target;
+        if (!_xeno.CanAbilityAttackTarget(xeno, targetId))
+            return;
+
         if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
             _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         {
@@ -106,9 +109,6 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        if (_hive.FromSameHive(xeno.Owner, targetId))
-            return;
-
         var finalDamage = xeno.Comp.Damage;
 
         if (TryComp<XenoCrestComponent>(xeno, out var crest) && crest.Lowered)
@@ -116,7 +116,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
             finalDamage.ExclusiveAdd(xeno.Comp.CrestedDamageReduction);
         }
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, armorPiercing: xeno.Comp.AP);
+        var damage = _damageable.TryChangeDamage(targetId, _xeno.TryApplyXenoSlashDamageMultiplier(targetId, finalDamage), armorPiercing: xeno.Comp.AP, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

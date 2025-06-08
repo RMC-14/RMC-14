@@ -107,7 +107,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         gunComponent.AngleIncrease = gun.Comp.ScatterIncrease;
         gunComponent.AngleDecay = gun.Comp.ScatterDecay;
 
-        var ev = new GunGetFireRateEvent(gunComponent.SelectedMode == SelectiveFire.Burst ? gun.Comp.BaseFireRate * 2 : gun.Comp.BaseFireRate);
+        var ev = new GunGetFireRateEvent(gunComponent.SelectedMode == SelectiveFire.Burst ? gun.Comp.BaseFireRate * gun.Comp.BurstFireRateMultiplier : gun.Comp.BaseFireRate);
         RaiseLocalEvent(gun, ref ev);
         gunComponent.FireRate = ev.FireRate;
 
@@ -116,7 +116,16 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
             var mods = gun.Comp.Modifiers[gunComponent.SelectedMode];
             ev = new GunGetFireRateEvent(1f / (1f / gunComponent.FireRate + mods.FireDelay));
             RaiseLocalEvent(gun, ref ev);
-            gunComponent.FireRate = ev.FireRate;
+
+            switch (gunComponent.SelectedMode)
+            {
+                case SelectiveFire.Burst:
+                    gunComponent.BurstFireRate = ev.FireRate;
+                    break;
+                default:
+                    gunComponent.FireRate = ev.FireRate;
+                    break;
+            }
         }
 
         RefreshWieldableFireModeValues(gun);

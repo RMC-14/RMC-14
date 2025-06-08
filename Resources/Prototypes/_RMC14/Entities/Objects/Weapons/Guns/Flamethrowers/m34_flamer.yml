@@ -1,0 +1,181 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  id: RMCWeaponFlamer
+  name: M34 incinerator unit
+  description: M34 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34.rsi
+    state: base
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: strip
+      color: "#DD9B00"
+      map: ["enum.RMCFlamerVisualLayers.Strip"]
+    - state: lit
+      map: ["enum.RMCIgniterVisuals.Ignited"]
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34.rsi
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34.rsi
+    slots:
+    - suitStorage
+    - Back
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 0.333
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: ShootUseDelay
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankFlamer
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          components:
+          - RMCFlamerTank
+  - type: Wieldable
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
+  - type: GunRequiresWield
+  - type: RMCFlamerAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: AttachableHolder # TODO RMC14 barrel nozzle
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtinguisher
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.032, 0.092
+      rmc-aslot-underbarrel: 0.284, -0.313
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
+  - type: RMCIgniter
+  - type: RMCAmmoEject
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFlamerVisualLayers.Strip:
+        enum.RMCFlamerVisualLayers.Strip:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCIgniterVisuals.Ignited:
+        enum.RMCIgniterVisuals.Ignited:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorM34
+
+- type: Tag
+  id: RMCWeaponIncineratorM34
+
+- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerUnloaded
+  suffix: Unloaded
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: null
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          components:
+          - RMCFlamerTank
+
+- type: entity
+  parent: BaseItem
+  id: RMCTankFlamer
+  name: incinerator tank
+  description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
+    state: flametank_custom
+    layers:
+    - state: flametank_custom
+    - state: flametank_custom_strip2
+    - state: flametank_custom_strip2
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: Item
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 100
+  - type: RMCFlamerTank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
+    targetWhitelist:
+      tags:
+      - RMCTankReagent
+      - RMCBackpackFlamer
+  - type: RefillableSolution
+    solution: rmc_flamer_tank
+  - type: DetailedExaminableSolution
+    solution: rmc_flamer_tank
+  - type: NoMixingReagents
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: flametank_custom_strip
+  - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCCaseFlamer
+  name: M34 incinerator case
+  description: A gun case containing the M34 incinerator unit. It does come loaded, but you'll still have to find extra tanks as you go.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,7,1
+    whitelist:
+      components:
+      - RMCFlamerAmmoProvider
+      - RMCFlamerTank
+      tags:
+      - RMCAttachmentExtinguisher
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponFlamer
+    - id: RMCTankFlamer
+      amount: 2
+    - id: RMCAttachmentUnderbarrelExtinguisher

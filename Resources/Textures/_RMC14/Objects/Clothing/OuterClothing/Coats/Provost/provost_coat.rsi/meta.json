@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a70e62e5a4fd30059e21efdea1bc840e3be487eb/icons/obj/items/clothing/suits/suits_by_faction/UA.dmi, https://github.com/cmss13-devs/cmss13/blob/a70e62e5a4fd30059e21efdea1bc840e3be487eb/icons/mob/humans/onmob/clothing/suits/suits_by_faction/UA.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    }
+  ]
+}

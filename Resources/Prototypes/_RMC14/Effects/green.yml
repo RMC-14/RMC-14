@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCEffectXenoTelegraphGreen
   categories: [ HideSpawnMenu ]
   components:
@@ -14,3 +14,78 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: RMCEffectXenoTelegraphGreen
+  id: RMCEffectXenoTelegraphInvisible
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+      - state: xeno_telegraph_base
+        visible: false
+
+- type: entity
+  parent: RMCEffectXenoTelegraphGreen
+  id: RMCEffectXenoTelegraphRed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.25
+  - type: Sprite
+    color: "#A50824"
+
+- type: entity
+  parent: RMCEffectXenoTelegraphRed
+  id: RMCEffectXenoTelegraphRedSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xeno_telegraph_base_small
+
+- type: entity
+  parent: RMCEffectXenoTelegraphRed
+  id: RMCEffectXenoTelegraphRedEmpower
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+
+
+- type: entity
+  id: RMCEffectXenoTelegraphAbduct
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/xeno_telegraph.rsi
+    noRot: true
+    state: xeno_telegraph_abduct_hook_anim
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: RMCEffectXenoTelegraphLash
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/xeno_telegraph.rsi
+    noRot: true
+    state: xeno_telegraph_lash
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCEffectXenoTelegraphLash
+  id: RMCEffectXenoTelegraphLashAnim
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xeno_telegraph_lash_anim

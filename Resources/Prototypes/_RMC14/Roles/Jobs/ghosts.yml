@@ -1,0 +1,144 @@
+# base
+- type: randomHumanoidSettings
+  id: RMCEventHumanoid
+  components:
+  - type: GhostTakeoverAvailable
+  - type: RandomHumanoidAppearance
+  - type: RMCRandomMarkings
+    markings:
+      Moth:
+        Head: 0.5
+        HeadTop: 1
+        Chest: 0.25
+        Tail: 1
+        Arms: 0.25
+        Legs: 0.25
+      Reptilian:
+        Head: 0.25
+        Snout: 0.3
+        HeadTop: 0.5
+        HeadSide: 0.6
+        Chest: 0.5
+        Tail: 1
+        Arms: 0.25
+        Legs: 0.25
+      SlimePerson:
+        Head: 0.25
+        Arms: 0.25
+        Legs: 0.25
+      Diona:
+        Head: 0.5
+        HeadSide: 0.5
+        HeadTop: 0.5
+        Chest: 0.5
+      Arachnid:
+        HeadSide: 0.5
+        Chest: 0.25
+        Arms: 0.5
+        Legs: 0.5
+        Tail: 0.5
+      Skrell:
+        HeadTop: 1
+        Chest: 0.25
+      Avali:
+        Head: 0.5
+        HeadTop: 0.75
+        HeadSide: 0.25
+        Chest: 0.5
+        Tail: 0.75
+        Arms: 0.25
+        Legs: 0.25
+      Feroxi:
+        Head: 0.25
+        HeadTop: 0.75
+        HeadSide: 0.25
+        Chest: 0.5
+        Tail: 0.75
+        Arms: 0.25
+        Legs: 0.25
+      Rodentia:
+        Head: 0.25
+        HeadTop: 1
+        HeadSide: 1
+        Tail: 1
+        Arms: 1
+        Legs: 1
+      Vulpkanin:
+        Head: 0.25
+        HeadTop: 0.5
+        Chest: 0.25
+        Tail: 0.5
+        Arms: 0.1
+        Legs: 0.1
+      Felinid:
+        Head: 0.25
+        HeadTop: 0.5
+        Snout: 0.3
+        Tail: 1
+      Human:
+        Head: 0.25
+        Chest: 0.25
+        Arms: 0.25
+        Legs: 0.25
+      Dwarf:
+        Head: 0.25
+        Chest: 0.25
+        Arms: 0.25
+        Legs: 0.25
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCRandomHumanoidBase
+  components:
+  - type: GhostRolePreventCryoSleep
+  - type: GhostRoleApplySpecial
+
+# squads
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCAlphaBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadAlpha
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCBravoBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadBravo
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCCharlieBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadCharlie
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCDeltaBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadDelta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCEchoBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadEcho
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCFoxtrotBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadFoxtrot
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCIntelBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadIntel

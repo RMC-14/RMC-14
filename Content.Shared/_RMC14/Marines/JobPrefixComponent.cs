@@ -6,5 +6,11 @@ namespace Content.Shared._RMC14.Marines;
 public sealed partial class JobPrefixComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public string Prefix = string.Empty;
+    public LocId Prefix = string.Empty;
+
+    /// <summary>
+    /// Additional prefix that will be appended to the main prefix
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public LocId? AdditionalPrefix;
 }

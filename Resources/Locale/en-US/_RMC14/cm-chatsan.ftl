@@ -1,4 +1,4 @@
-﻿cm-chatsan-word-deltard = deltard
+cm-chatsan-word-deltard = deltard
 cm-chatsan-replacement-deltard = delta
 
 cm-chatsan-word-deltards = deltards
@@ -54,6 +54,9 @@ cm-chatsan-replacement-sniper = long spitter
 
 cm-chatsan-word-flare = flare
 cm-chatsan-replacement-flare = glow stick
+
+cm-chatsan-word-flares = flares
+cm-chatsan-replacement-flares = glow sticks
 
 cm-chatsan-word-synth = synth
 cm-chatsan-replacement-synth = fake hosts
@@ -129,6 +132,12 @@ cm-chatsan-replacement-arachnid = webspitting host
 
 cm-chatsan-word-arachnids = arachnids
 cm-chatsan-replacement-arachnids = webspitting hosts
+
+cm-chatsan-word-skrell = skrell
+cm-chatsan-replacement-skrell = frog host
+
+cm-chatsan-word-skrells = skrells
+cm-chatsan-replacement-skrells = frog hosts
 
 cm-chatsan-word-dropship = dropship
 cm-chatsan-replacement-dropship = metal bird
@@ -286,6 +295,21 @@ cm-chatsan-replacement-mouse = squeaking host
 cm-chatsan-word-mice = mice
 cm-chatsan-replacement-mice = squeaking hosts
 
+cm-chatsan-word-feroxi = feroxi
+cm-chatsan-replacement-feroxi = aquatic host
+
+cm-chatsan-word-feroxis = feroxis
+cm-chatsan-replacement-feroxis = aquatic hosts
+
+cm-chatsan-word-shark = shark
+cm-chatsan-replacement-shark = aquatic host
+
+cm-chatsan-word-sharks = sharks
+cm-chatsan-replacement-sharks = aquatic hosts
+
+cm-chatsan-word-fish = fish
+cm-chatsan-replacement-fish = aquatic host
+
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
 
@@ -318,11 +342,11 @@ cm-chatsan-replacement-laser = dot
 cm-chatsan-word-lazer = lazer
 cm-chatsan-replacement-lazer = dot
 
-# cm-chatsan-word-# flamer = # flamer
-# cm-chatsan-replacement-# flamer = fire spitter
+cm-chatsan-word-flamer = flamer
+cm-chatsan-replacement-flamer = fire spitter
 
-# cm-chatsan-word-# flamethrower = # flamethrower
-# cm-chatsan-replacement-# flamethrower =  fire spitter
+cm-chatsan-word-flamethrower = flamethrower
+cm-chatsan-replacement-flamethrower = fire spitter
 
 cm-chatsan-word-sadar = sadar
 cm-chatsan-replacement-sadar = tuber
@@ -333,8 +357,11 @@ cm-chatsan-replacement-rocket = boom spit
 cm-chatsan-word-grenadier = grenadier
 cm-chatsan-replacement-grenadier = boomstick spitter
 
-cm-chatsan-word-scout = scout
+cm-chatsan-word-scout = scout spec
 cm-chatsan-replacement-scout = tall lurker
+
+cm-chatsan-word-scout-specialist = scout specialist
+cm-chatsan-replacement-scout-specialist = tall lurker
 
 cm-chatsan-word-mortar = mortar
 cm-chatsan-replacement-mortar = skyboom
@@ -355,19 +382,28 @@ cm-chatsan-word-cas = cas
 cm-chatsan-replacement-cas = skyspit
 
 cm-chatsan-word-sensors = sensors
-cm-chatsan-replacement-sensors = tall eye tower
+cm-chatsan-replacement-sensors = evil eye tower
 
 cm-chatsan-word-sensor-tower = sensor tower
-cm-chatsan-replacement-sensor-tower = tall eye tower
+cm-chatsan-replacement-sensor-tower = evil eye tower
 
 cm-chatsan-word-comms = comms
 cm-chatsan-replacement-comms = tall hivemind tower
+
+cm-chatsan-word-tcomms = tcomms
+cm-chatsan-replacement-tcomms = tall hivemind tower
 
 cm-chatsan-word-communications-tower = communications tower
 cm-chatsan-replacement-communications-tower = tall hivemind tower
 
 cm-chatsan-word-smart-gun = smart gun
 cm-chatsan-replacement-smartgun = smart spitter
+
+cm-chatsan-word-sg = sg
+cm-chatsan-replacement-sg = smart spitter
+
+cm-chatsan-word-sgs = sgs
+cm-chatsan-replacement-sgs = smart spitters
 
 cm-chatsan-word-smartgun = smartgun
 cm-chatsan-replacement-smart-gun = smart spitter
@@ -392,3 +428,114 @@ cm-chatsan-replacement-squads = castes
 
 cm-chatsan-word-shotgun = shotgun
 cm-chatsan-replacement-shotgun = scatter spitter
+
+cm-chatsan-word-nade = nade
+cm-chatsan-replacement-nade = boomstick
+
+cm-chatsan-word-nades = nades
+cm-chatsan-replacement-nades = boomsticks
+
+cm-chatsan-word-nuke = nuke
+cm-chatsan-replacement-nuke = hive killer
+
+cm-chatsan-word-intel = intel
+cm-chatsan-replacement-intel = scavenger talls
+
+cm-chatsan-word-survivor = survivor
+cm-chatsan-replacement-survivor = planet tall
+
+cm-chatsan-word-survivors = survivors
+cm-chatsan-replacement-survivors = planet talls
+
+cm-chatsan-word-surv = surv
+cm-chatsan-replacement-surv = planet tall
+
+cm-chatsan-word-survs = survs
+cm-chatsan-replacement-survs = planet talls
+
+cm-chatsan-word-bro = bro
+cm-chatsan-replacement-bro = sister
+
+cm-chatsan-word-bruh = bruh
+cm-chatsan-replacement-bruh = sister
+
+cm-chatsan-word-bvro = bvro
+cm-chatsan-replacement-bvro = sister
+
+cm-chatsan-word-xro = xro
+cm-chatsan-replacement-xro = sister
+
+cm-chatsan-word-naur = naur
+cm-chatsan-replacement-naur = no
+
+cm-chatsan-word-dancer = d*ncer
+cm-chatsan-replacement-dancer = dancer
+
+cm-chatsan-word-larba = larba
+cm-chatsan-replacement-larba = larva
+
+cm-chatsan-word-toob = toob
+cm-chatsan-replacement-toob = tube
+
+cm-chatsan-word-toober = toober
+cm-chatsan-replacement-toober = tuber
+
+cm-chatsan-word-cooked = cooked
+cm-chatsan-replacement-cooked = doomed
+
+cm-chatsan-word-xooked = xooked
+cm-chatsan-replacement-xooked = doomed
+
+cm-chatsan-word-xibidi = xibidi
+cm-chatsan-replacement-xibidi = tall seat
+
+cm-chatsan-word-mcxonald = mcxonald
+cm-chatsan-replacement-mcxonald = tall garden
+
+cm-chatsan-word-mcxonalds = mcxonalds
+cm-chatsan-replacement-mcxonalds = tall garden
+
+cm-chatsan-word-slop = slop
+cm-chatsan-replacement-slop = hell
+
+cm-chatsan-word-spam = spam
+cm-chatsan-replacement-spam = flood
+
+cm-chatsan-word-god = god
+cm-chatsan-replacement-god = queen mother
+
+cm-chatsan-word-xod = xod
+cm-chatsan-replacement-xod = queen mother
+
+cm-chatsan-word-jesus = jesus
+cm-chatsan-replacement-jesus = queen mother
+
+cm-chatsan-word-xesus = xesus
+cm-chatsan-replacement-xesus = queen mother
+
+cm-chatsan-word-jesus-christ = jesus christ
+cm-chatsan-replacement-jesus-christ = queen mother
+
+cm-chatsan-word-froot = froot
+cm-chatsan-replacement-froot = fruit
+
+cm-chatsan-word-yung = yung
+cm-chatsan-replacement-yung = young
+
+cm-chatsan-word-croosh = croosh
+cm-chatsan-replacement-croosh = crush
+
+cm-chatsan-word-croosher = croosher
+cm-chatsan-replacement-croosher = crusher
+
+cm-chatsan-word-bald = bald
+cm-chatsan-replacement-bald = crestless
+
+cm-chatsan-word-woyer = woyer
+cm-chatsan-replacement-woyer = warrior
+
+cm-chatsan-word-sigma = sigma
+cm-chatsan-replacement-sigma = prime
+
+cm-chatsan-word-xigma = xigma
+cm-chatsan-replacement-xigma = prime

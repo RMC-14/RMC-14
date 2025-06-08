@@ -1,7 +1,7 @@
 #Base Jacket
 - type: entity
   abstract: true
-  parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket]
+  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket ]
   id: RMCBaseJacket
   components:
   - type: Storage
@@ -17,10 +17,61 @@
       - PillCanister
       - CMSurgicalCase
   - type: PlaytimeMedalHolder
+  - type: AllowSuitStorage
+    whitelist: { }
+  - type: RMCAllowSuitStorageUserWhitelist
+    allowedWhitelist: RMCAllowSuitStorageClothingJacket
+    user:
+      components:
+      - RMCAllowSuitStorage
 
 - type: entity
-  abstract: true
+  abstract: True
+  parent: [ RMCBaseJacket, BaseFoldable ]
+  id: RMCBaseJacketButtonable
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: icon-open
+      map: [ "foldedLayer" ]
+      visible: false
+
+- type: entity
+  abstract: True
+  parent: RMCBaseJacketButtonable
+  id: RMCBaseJacketButtonableOpened
+  suffix: opened
+  components:
+  - type: Item
+    heldPrefix: open
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: open
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon-open
+      map: [ "foldedLayer" ]
+      visible: true
+
+- type: entity
   id: RMCAllowSuitStorageClothingJacket
+  categories:
+  - HideSpawnMenu
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -47,8 +98,9 @@
       - RMCMatebaHolster
 
 - type: entity
-  abstract: true
   id: RMCAllowSuitStorageClothingHazardVest
+  categories:
+  - HideSpawnMenu
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -81,8 +133,8 @@
       - GasTank
       - Pen
       - RMCMacheteScabbard
-      #TODO Katana scabbard
-      - RMCMotionDetector
+      - RMCScabbardKatana
+      - RMCDetector
 
 
 - type: entity
@@ -96,6 +148,7 @@
       - Stunbaton
       - Gun
       - CrewMonitoringConsole
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -114,11 +167,72 @@
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
       - RMCMacheteScabbard
-      #TODO Katana scabbard
-      - RMCMotionDetector
-      #TODO Walkman
+      - RMCScabbardKatana
+      - RMCDetector
 
-# TODO RMC14 labcoat has it's own list
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingLabcoat
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - CMSurgeryTool
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - DiscreteHealthAnalyzer
+      - CMOintment
+      - CMTraumaKit
+      - CMBurnKit
+      - Gauze
+      - Brutepack
+      # TODO RMC14 splints
+      - Dropper
+      - Syringe
+      - Hypospray
+      - GlassBeaker
+      - Pill
+      - PillCanister
+      - Paper
+      - CMSurgicalLine
+      - CMSynthGraft
+      - CMRollerItem
+      - CMBloodPack
+      # TODO RMC14 spray bottle
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Crowbar
+      - Radio
+      - RMCDetector
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingChefApron
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      tags:
+      - Knife
+      #TODO RMC kitchen knife
+      - Pen
+      - Crowbar
+      - Radio
+      - GasTank
+      - DiscreteHealthAnalyzer
+      - Flashlight
+
+
 
 # TODO RMC14 chef/medical apron have a shared list
 
@@ -133,6 +247,9 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
+  - type: CMArmor
+    melee: 10
+
 
 # Military Warden
 - type: entity
@@ -145,6 +262,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/warden.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/warden.rsi
+  - type: CMArmor
+    melee: 10
 
 # Military Police
 - type: entity
@@ -157,6 +276,28 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+
+# Quartermaster
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCQuartermasterJacket
+  name: quartermaster jacket
+  description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/qm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/qm.rsi
+
 
 # Mess Seargeant/Tech
 - type: entity
@@ -169,6 +310,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef.rsi
+  - type: CMArmor
+    melee: 10
 
 # Auxiliary Supply Officer
 - type: entity
@@ -181,6 +324,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+  - type: CMArmor
+    melee: 10
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
@@ -201,6 +346,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
+  - type: CMArmor
+    melee: 10
 
 - type: entity
   parent: CMCoatCO
@@ -212,6 +359,21 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+
+- type: entity
+  parent: CMCoatCOBomber
+  id: RMCCoatBomber
+  name: brown bomber jacket
+  description: A well-worn leather bomber jacket.
 
 - type: entity
   parent: CMCoatCO
@@ -223,6 +385,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
+  - type: CMArmor
+    melee: 10
 
 - type: entity
   parent: CMCoatCO
@@ -234,6 +398,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
+  - type: CMArmor
+    melee: 10
 
 # Executive Officer
 
@@ -247,29 +413,40 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
 
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatOfficer
-  name: marine service jacket
-  description: A service jacket typically worn by officers of the UNMC.
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
+  - type: CMArmor
+    melee: 10
 
 - type: entity
   parent: CMCoatOfficer
   id: RMCCoatService
-  description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: marine service jacket
+  description: A service jacket typically worn by officers of the UNMC.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
-    armor: 10 # TODO RMC14 10 melee
+    melee: 10
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true
@@ -284,3 +461,119 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCProvostCoat
+  name: Provost Coat
+  description: The crisp coat of a Provost Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat.rsi
+
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCProvostCoatMarshal
+  name: Provost Marshal Coat
+  description: The crisp coat of a Provost Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat_marshal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat_marshal.rsi
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCProvostJacket
+  name: Provost Jacket
+  description: A crisp jacket with the Provost sigil.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_jacket.rsi
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCProvostCommandJacket
+  name: Provost Command Jacket
+  description: A crisp jacket with the Provost sigil.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provostci_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provostci_jacket.rsi
+
+- type: entity
+  parent: RMCProvostJacket
+  id: RMCProvostJacketFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs
+
+- type: entity
+  parent: RMCProvostCommandJacket
+  id: RMCProvostCommandJacketFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs
+
+- type: entity
+  parent: RMCProvostCoatMarshal
+  id: RMCProvostCoatMarshalFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs
+
+# Synthetic Utility Vest
+- type: entity
+  parent: RMCBaseJacket
+  id: CMUtilityVestSynth
+  name: synthetic utility vest
+  description: A leather utility vest worn by synthetic UNMC personnel. The vest is rather lightweight but has a few pockets for carrying small items. It is not very protective, but it is a good choice for the Synthetics who want to look stylish while working.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
+
+- type: entity
+  parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
+  id: RMCJacketWindbreaker
+  name: green windbreaker
+  description: A green windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: jacket-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket

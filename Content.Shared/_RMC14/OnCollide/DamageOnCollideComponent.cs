@@ -1,4 +1,5 @@
-﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared._RMC14.Atmos;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.Physics;
 using Content.Shared.Whitelist;
@@ -18,6 +19,7 @@ public sealed partial class DamageOnCollideComponent : Component
     public EntityUid? Chain;
 
     [DataField(required: true)]
+    [Access(typeof(SharedOnCollideSystem), typeof(SharedRMCFlammableSystem))]
     public DamageSpecifier Damage = new();
 
     [DataField]
@@ -34,6 +36,12 @@ public sealed partial class DamageOnCollideComponent : Component
 
     [DataField]
     public ProtoId<EmotePrototype>? Emote = "Scream";
+
+    [DataField]
+    public ProtoId<EmotePrototype>? XenoEmote = "Hiss";
+
+    [DataField]
+    public bool Acidic = true;
 
     [DataField]
     public CollisionGroup Collision = CollisionGroup.FullTileLayer;

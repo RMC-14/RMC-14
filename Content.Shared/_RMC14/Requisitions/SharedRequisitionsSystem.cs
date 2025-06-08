@@ -18,7 +18,9 @@ public abstract class SharedRequisitionsSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
-    protected int StartingDollarsPerMarine { get; private set; }
+    public int Starting { get; private set; }
+    public int StartingDollarsPerMarine { get; private set; }
+    public int PointsScale { get; private set; }
 
     public override void Initialize()
     {
@@ -30,7 +32,9 @@ public abstract class SharedRequisitionsSystem : EntitySystem
 
         SubscribeLocalEvent<RequisitionsRailingComponent, MapInitEvent>(OnRailingMapInit);
 
+        Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingBalance, v => Starting = v, true);
         Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingDollarsPerMarine, v => StartingDollarsPerMarine = v, true);
+        Subs.CVar(_config, RMCCVars.RMCRequisitionsPointsScale, v => PointsScale = v, true);
     }
 
     private void OnMarineScaleChanged(ref MarineScaleChangedEvent ev)
@@ -42,7 +46,7 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         while (accounts.MoveNext(out var uid, out var account))
         {
             // TODO RMC14 initial money should depend on the scale too
-            account.Balance += (int) ev.Delta * StartingDollarsPerMarine;
+            account.Balance += (int) ev.Delta * PointsScale;
             Dirty(uid, account);
         }
     }
@@ -166,5 +170,20 @@ public abstract class SharedRequisitionsSystem : EntitySystem
             return elevators[0];
 
         return closest;
+    }
+
+    public void StartAccount(Entity<RequisitionsAccountComponent> account, double scale, float marines)
+    {
+        if (account.Comp.Started)
+            return;
+
+        account.Comp.Started = true;
+
+        var startingPoints = Starting;
+        var scalePoints = (int) (PointsScale * scale);
+        var perMarinePoints = (int) (StartingDollarsPerMarine * marines);
+        account.Comp.Balance = startingPoints + scalePoints + perMarinePoints;
+
+        Dirty(account);
     }
 }

@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.Shuttles;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
@@ -38,12 +39,12 @@ public sealed partial class ShuttleSystem
 
     private readonly SoundSpecifier _startupSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_startup.ogg")
     {
-        Params = AudioParams.Default.WithVolume(-5f),
+        Params = AudioParams.Default.WithVolume(6f),
     };
 
     private readonly SoundSpecifier _arrivalSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_landing.ogg")
     {
-        Params = AudioParams.Default.WithVolume(-5f),
+        Params = AudioParams.Default.WithVolume(5f),
     };
 
     public float DefaultStartupTime;
@@ -234,12 +235,6 @@ public sealed partial class ShuttleSystem
 
         if (TryComp<PhysicsComponent>(shuttleUid, out var shuttlePhysics))
         {
-            // Static physics type is set when station anchor is enabled
-            if (shuttlePhysics.BodyType == BodyType.Static)
-            {
-                reason = Loc.GetString("shuttle-console-static");
-                return false;
-            }
 
             // Too large to FTL
             if (FTLMassLimit > 0 &&  shuttlePhysics.Mass > FTLMassLimit)
@@ -400,6 +395,10 @@ public sealed partial class ShuttleSystem
         var body = _physicsQuery.GetComponent(entity);
         var shuttleCenter = grid.LocalAABB.Center;
 
+        // RMC14
+        var beforeFTL = new BeforeFTLStartedEvent(uid);
+        RaiseLocalEvent(uid, ref beforeFTL);
+
         // Leave audio at the old spot
         // Just so we don't clip
         if (fromMapUid != null && TryComp(comp.StartupStream, out AudioComponent? startupAudio))
@@ -471,6 +470,10 @@ public sealed partial class ShuttleSystem
 
         _console.RefreshShuttleConsoles(entity.Owner);
         _dropship.RaiseUpdate(entity);
+
+        // RMC14
+        var audio = _audio.PlayPvs(_arrivalSound, entity.Owner);
+        _audio.SetGridAudio(audio);
     }
 
     /// <summary>
@@ -554,8 +557,8 @@ public sealed partial class ShuttleSystem
         _thruster.DisableLinearThrusters(entity.Comp2);
 
         comp.TravelStream = _audio.Stop(comp.TravelStream);
-        var audio = _audio.PlayPvs(_arrivalSound, uid);
-        _audio.SetGridAudio(audio);
+        // RMC14 var audio = _audio.PlayPvs(_arrivalSound, uid);
+        // RMC14 _audio.SetGridAudio(audio);
 
         if (TryComp<FTLDestinationComponent>(uid, out var dest))
         {
@@ -1023,6 +1026,7 @@ public sealed partial class ShuttleSystem
                     continue;
                 }
 
+                // If it has the FTLSmashImmuneComponent ignore it.
                 if (_immuneQuery.HasComponent(ent))
                 {
                     continue;

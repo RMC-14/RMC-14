@@ -1,0 +1,92 @@
+﻿- type: entity
+  parent: CMLockerBase
+  id: CMLockerFridge
+  name: fridge
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/fridge.rsi
+  - type: AccessReader
+    access: [["CMAccessKitchen"]]
+  - type: AntiRottingContainer
+
+- type: entity
+  parent: CMLockerFridge
+  id: RMCLockerFridgeGroceries
+  name: groceries
+  components:
+  - type: StorageFill
+    contents:
+    - id: DrinkMilkCarton
+      amount: 2
+    - id: DrinkSoyMilkCarton
+      amount: 2
+    - id: FoodContainerEgg
+    - id: FoodCondimentBottleEnzyme
+
+- type: entity
+  parent: CMLockerFridge
+  id: RMCLockerFridgeOrganic
+  name: organic
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodApple
+      amount: 2
+    - id: FoodCabbage
+      amount: 2
+    - id: FoodCarrot
+      amount: 2
+    - id: FoodMushroom
+      amount: 2
+    - id: FoodChiliPepper
+      amount: 2
+    - id: FoodCorn
+      amount: 2
+    - id: FoodEggplant
+      amount: 2
+    - id: FoodPotato
+      amount: 2
+    - id: FoodTomato
+      amount: 2 # TODO RMC14 +2 whitebeet
+    - id: FoodCherry
+      amount: 2
+    - id: FoodLime
+      amount: 2
+    - id: FoodLemon
+      amount: 2
+    - id: FoodOrange
+      amount: 2
+    - id: FoodBanana
+      amount: 2
+
+- type: entity
+  parent: CMLockerFridge
+  id: RMCLockerFridgeDry
+  name: dry
+  components:
+  - type: StorageFill
+    contents:
+    - id: ReagentContainerFlour
+      amount: 4
+    - id: ReagentContainerSugar
+      amount: 1
+
+- type: entity
+  parent: CMLockerFridge
+  id: RMCLockerFridgeMeat
+  name: meat
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodMeat # TODO RMC14 2 boxes of 7
+      amount: 14
+
+- type: entity
+  parent: CMLockerFridge
+  id: RMCLockerFridgeFish
+  name: fish
+  components:
+  - type: StorageFill
+    contents:
+    - id: FoodMeatFish # TODO RMC14 2 boxes of 7
+      amount: 14

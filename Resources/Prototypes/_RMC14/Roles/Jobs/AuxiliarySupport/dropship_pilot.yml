@@ -7,19 +7,15 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsDropship
-    time: 7200 # 2 hours
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearPilotDropship
   icon: "CMJobIconPilotDropship"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: pilot
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -41,7 +37,15 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "DP"
+      prefix: cm-job-prefix-dropship-pilot
+    - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: pilot
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearPilotDropship
@@ -59,10 +63,7 @@
   - type: SpawnPoint
     job_id: CMPilotDropship
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: pilot
+    state: po_spawn
 
 - type: playTimeTracker
   id: CMJobPilotDropship

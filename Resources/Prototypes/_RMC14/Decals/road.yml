@@ -128,3 +128,61 @@
   sprite:
     sprite: _RMC14/Decals/road.rsi
     state: stop_decal5
+
+# Tiremarks
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadTiremark1
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: tiremarks_1
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadTiremark2
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: tiremarks_2
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadTiremark3
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: tiremarks_3
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadTiremark4
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: tiremarks_4
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadTiremark5
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: tiremarks_5
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadTiremark6
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: tiremarks_6
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadTiremark7
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: tiremarks_7
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadTiremark8
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: tiremarks_8

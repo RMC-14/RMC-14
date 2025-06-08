@@ -8,7 +8,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/pmc.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
@@ -29,7 +29,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
   - type: CMArmor
-    armor: 20 # CLOTHING_ARMOR_MEDIUM
+    melee: 15
+    bullet: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
@@ -73,6 +74,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
+  - type: CMArmor
+    bullet: 25
+    explosionArmor: 20
 
 - type: entity
   parent: CMArmorM4PMCLight
@@ -84,7 +88,10 @@
     equipDelay: 1
     unequipDelay: 0.5
   - type: CMArmor
-    armor: 0 # CLOTHING_ARMOR_NONE
+    melee: 0 # CLOTHING_ARMOR_NONE
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
@@ -101,9 +108,11 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/heavy.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMArmorM4PMCSmartGunHarness
@@ -114,7 +123,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
   - type: CMArmor
-    armor: 40 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented
+    melee: 30 # CLOTHING_ARMOR_HIGH (melee)
+    bullet: 50 # CLOTHING_ARMOR_ULTRAHIGH (bullets)
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: RMCArmorSpeedTier
@@ -134,7 +144,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
   - type: CMArmor
-    armor: 45 # CLOTHING_ARMOR_VERYHIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented (more likely to be hit by bullets than melee)
+    melee: 40 # CLOTHING_ARMOR_VERYHIGH (melee);
+    bullet: 50 # CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented (more likely to be hit by bullets than melee)
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: RMCArmorSpeedTier
@@ -144,3 +155,39 @@
     sprintModifier: 0.727
   - type: Corrodible
     isCorrodible: false
+
+# TODO RMC14: Do we not have something for fire resistance?
+- type: entity
+  parent: CMArmorM4PMC
+  id: RMCArmorM4PMCEngineer
+  name: M4 pattern engineer PMC armor
+  description: A modification of the standard M3 armor. Designed for high elemental protection, like shock, fire and fragments, lacks in terms of kevlar for bullet protection.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/engineer.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15 # CLOTHING_ARMOR_MEDIUMLOW
+    bio: 20 # CLOTHING_ARMOR_MEDIUM
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.725
+    sprintModifier: 0.725
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCArmorPMCDirector
+  name: director's jacket
+  description: A jacket that belongs to someone very important. It is made of insulating material and offers minor protection from all forms of damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/director.rsi
+  # TODO RMC14: Taser immunity?
+  - type: CMArmor
+    melee: 15 # CLOTHING_ARMOR_MEDIUMLOW
+    bullet: 20 # CLOTHING_ARMOR_MEDIUM
+    bio: 20 # CLOTHING_ARMOR_MEDIUM
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots

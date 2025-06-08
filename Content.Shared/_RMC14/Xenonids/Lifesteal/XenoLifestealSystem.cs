@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -9,6 +10,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Lifesteal;
@@ -21,20 +23,18 @@ public sealed class XenoLifestealSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedAuraSystem _aura = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
-    private readonly HashSet<Entity<MarineComponent>> _targets = new();
+    private readonly HashSet<Entity<MobStateComponent>> _targets = new();
 
     private EntityQuery<DamageableComponent> _damageableQuery;
     private EntityQuery<MarineComponent> _marineQuery;
-    private EntityQuery<MobStateComponent> _mobStateQuery;
-    private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
     public override void Initialize()
     {
         _damageableQuery = GetEntityQuery<DamageableComponent>();
         _marineQuery = GetEntityQuery<MarineComponent>();
-        _mobStateQuery = GetEntityQuery<MobStateComponent>();
-        _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<XenoLifestealComponent, MeleeHitEvent>(OnMeleeHit);
     }
@@ -50,17 +50,8 @@ public sealed class XenoLifestealSystem : EntitySystem
         var found = false;
         foreach (var hit in args.HitEntities)
         {
-            if (!_marineQuery.HasComp(hit))
+            if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
-
-            if (_xenoNestedQuery.HasComp(hit))
-                continue;
-
-            if (_mobStateQuery.TryComp(hit, out var mobState) &&
-                mobState.CurrentState == MobState.Dead)
-            {
-                continue;
-            }
 
             found = true;
             break;
@@ -85,17 +76,8 @@ public sealed class XenoLifestealSystem : EntitySystem
         var lifesteal = xeno.Comp.BasePercentage;
         foreach (var hit in _targets)
         {
-            if (!_marineQuery.HasComp(hit))
+            if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
-
-            if (_xenoNestedQuery.HasComp(hit))
-                continue;
-
-            if (_mobStateQuery.TryComp(hit, out var mobState) &&
-                mobState.CurrentState == MobState.Dead)
-            {
-                continue;
-            }
 
             lifesteal += xeno.Comp.TargetIncreasePercentage;
             if (lifesteal >= xeno.Comp.MaxPercentage)
@@ -107,7 +89,7 @@ public sealed class XenoLifestealSystem : EntitySystem
 
         var amount = -FixedPoint2.Clamp(total * lifesteal, xeno.Comp.MinHeal, xeno.Comp.MaxHeal);
         var heal = _rmcDamageable.DistributeTypes(xeno.Owner, amount);
-        _damageable.TryChangeDamage(xeno, heal, true);
+        _damageable.TryChangeDamage(xeno, heal, true, origin: xeno, tool: xeno);
 
         if (lifesteal >= xeno.Comp.MaxPercentage)
         {
@@ -117,8 +99,9 @@ public sealed class XenoLifestealSystem : EntitySystem
 
             var selfMsg = Loc.GetString("rmc-lifesteal-more-self");
             _popup.PopupClient(selfMsg, xeno, xeno);
+            _aura.GiveAura(xeno, xeno.Comp.AuraColor, TimeSpan.FromSeconds(1));
 
-            if (xeno.Comp.MaxEffect is { } effect)
+            if (_net.IsServer && xeno.Comp.MaxEffect is { } effect)
                 SpawnAttachedTo(effect, xeno.Owner.ToCoordinates());
         }
     }

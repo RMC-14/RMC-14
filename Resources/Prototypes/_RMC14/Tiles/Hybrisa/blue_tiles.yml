@@ -1,0 +1,152 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaBlueBase
+  name: tiles-cm-default-blue
+
+- type: tile
+  parent: RMCFloorHybrisaBlueBase
+  id: RMCFloorHybrisaBlueFull
+  name: blue metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalfull.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueTile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tileblue.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueTileCheck
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilebluecheck.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueSupermart
+  sprite: /Textures/_RMC14/Tiles/hybrisa/supermartfloor1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueSouth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueNorth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_4.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueSouthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_5.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueSouthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_6.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueNorthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_7.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueNorthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_8.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueCornerSouthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueCornerNorthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueCornerNorthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueCornerSouthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_4.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueBase
+  id: RMCFloorHybrisaBlueCarpet
+  name: blue carpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetblue.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBlueDarkerCarpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetdarkerblue.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBlueCarpetDeco
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetblue_deco.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBluePatternCarpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetpatternblue.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBlueSpacePort1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/spaceport1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBlueSpacePort2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/spaceport2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropship1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropship2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropship3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor3.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropship4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor4.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropshipCorner1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloorcorner1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropshipCorner2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloorcorner2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropshipFull
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloorfull.png

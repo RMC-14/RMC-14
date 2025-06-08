@@ -1,0 +1,68 @@
+- type: job
+  parent: RMCSurvivorForeconBase
+  id: RMCSurvivorForeconSniper
+  name: rmc-job-name-forecon-sniper
+  playTimeTracker: RMCJobSurvivorSniperForecon
+  startingGear: RMCGearForeconSniper
+  icon: "RMCJobIconForeconSniper"
+  spawnMenuRoleName: FORECON Sniper (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 0
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillSpecialistWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 0
+        RMCSkillVehicles: 0
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: spec_sniper
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetForeconNoPrimary
+    - type: SniperWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-weapons-specialist-sniper
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearForeconBase
+  id: RMCGearForeconSniper
+  equipment:
+    outerClothing: RMCArmorUDEPForeconFilled
+    # todo sniper facepaint
+
+- type: playTimeTracker
+  id: RMCJobSurvivorSniperForecon
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointForeconSniper
+  name: forecon sniper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorForeconSniper
+  - type: Sprite
+    state: spec_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconForeconSniper
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_spec_sniper

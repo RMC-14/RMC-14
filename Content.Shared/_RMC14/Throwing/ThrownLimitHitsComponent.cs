@@ -3,7 +3,7 @@
 namespace Content.Shared._RMC14.Throwing;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(ThrowingSystem))]
+[Access(typeof(RMCThrowingSystem))]
 public sealed partial class ThrownLimitHitsComponent : Component
 {
     [DataField, AutoNetworkedField]

@@ -11,12 +11,13 @@
     equipDelay: 2
     unequipDelay: 2
   - type: RMCArmorSpeedTier
-    speedTier: light
+    speedTier: heavy
   - type: ClothingSpeedModifier
-    walkModifier: 0.725
-    sprintModifier: 0.725
+    walkModifier: 0.62
+    sprintModifier: 0.62
   - type: CMArmor
-    armor: 30
+    melee: 30
+    bullet: 30
     explosionArmor: 10
   - type: CMHardArmor
   - type: RMCNameItemOnVend

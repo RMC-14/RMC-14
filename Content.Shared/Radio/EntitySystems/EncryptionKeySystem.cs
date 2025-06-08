@@ -55,7 +55,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         _container.EmptyContainer(component.KeyContainer, reparent: false);
         foreach (var ent in contained)
         {
-            _hands.PickupOrDrop(args.User, ent);
+            _hands.PickupOrDrop(args.User, ent, dropNear: true);
         }
 
         if (!_timing.IsFirstTimePredicted)
@@ -86,6 +86,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         }
 
         RaiseLocalEvent(uid, new EncryptionChannelsChangedEvent(component));
+        Dirty(uid, component);
     }
 
     private void OnContainerModified(EntityUid uid, EncryptionKeyHolderComponent component, ContainerModifiedMessage args)
@@ -177,7 +178,8 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        if (component.KeyContainer.ContainedEntities.Count == 0)
+        if (component.KeyContainer.ContainedEntities.Count == 0 &&
+            component.Channels.Count == 0)
         {
             args.PushMarkup(Loc.GetString("encryption-keys-no-keys"));
             return;
@@ -230,7 +232,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                 ("color", proto.Color),
                 ("key", key),
                 ("id", proto.LocalizedName),
-                ("freq", proto.Frequency)));
+                ("freq", proto.Frequency / 10f)));
         }
 
         if (defaultChannel != null && _protoManager.TryIndex(defaultChannel, out proto))

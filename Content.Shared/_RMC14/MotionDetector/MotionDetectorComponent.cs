@@ -1,6 +1,5 @@
 ﻿using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -8,7 +7,7 @@ namespace Content.Shared._RMC14.MotionDetector;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(MotionDetectorSystem))]
-public sealed partial class MotionDetectorComponent : Component
+public sealed partial class MotionDetectorComponent : Component, IDetectorComponent
 {
     [DataField, AutoNetworkedField]
     public bool Enabled;
@@ -38,13 +37,13 @@ public sealed partial class MotionDetectorComponent : Component
     public TimeSpan MoveTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public List<MapCoordinates> Blips = new();
+    public List<Blip> Blips { get; set; } = new();
 
     [DataField, AutoNetworkedField]
-    public TimeSpan LastScan;
+    public TimeSpan LastScan { get; set; }
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ScanDuration = TimeSpan.FromSeconds(1);
+    public TimeSpan ScanDuration { get; set; } = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ScanSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/motion_detector.ogg");
@@ -57,6 +56,9 @@ public sealed partial class MotionDetectorComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool HandToggleable = true;
+
+    [DataField, AutoNetworkedField]
+    public bool DeactivateOnDrop = true;
 }
 
 [Serializable, NetSerializable]

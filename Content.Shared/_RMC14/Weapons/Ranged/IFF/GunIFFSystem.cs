@@ -138,7 +138,7 @@ public sealed class GunIFFSystem : EntitySystem
         {
             owner = gun;
         }
-        else if (_container.TryGetContainingContainer((gun, null), out var container))
+        else if (_container.TryGetOuterContainer(gun, Transform(gun), out var container))
         {
             owner = container.Owner;
         }
@@ -165,5 +165,12 @@ public sealed class GunIFFSystem : EntitySystem
             iff.Enabled = enabled;
             Dirty(projectile, iff);
         }
+    }
+
+    public void GiveAmmoIFF(EntityUid uid, EntProtoId<IFFFactionComponent>? faction, bool enabled)
+    {
+        var projectileIFFComponent = EnsureComp<ProjectileIFFComponent>(uid);
+        projectileIFFComponent.Faction = faction;
+        projectileIFFComponent.Enabled = enabled;
     }
 }

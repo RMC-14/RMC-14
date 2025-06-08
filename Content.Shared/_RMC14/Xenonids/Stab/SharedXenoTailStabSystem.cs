@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.GasToggle;
@@ -45,6 +45,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -146,6 +147,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         // TODO RMC14 sounds
         // TODO RMC14 lag compensation
         var damage = new DamageSpecifier(stab.Comp.TailDamage);
+        var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
+        RaiseLocalEvent(stab, ref eve);
+        damage += eve.Damage;
         if (actualResults.Count == 0)
         {
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
@@ -180,14 +184,14 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     RaiseLocalEvent(hit, attackedEv);
 
                     var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
-                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab);
+                    var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab);
 
                     if (change?.GetTotal() > FixedPoint2.Zero)
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
 
                     if (stab.Comp.InjectNeuro)
                     {
-                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox))
+                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) || HasComp<XenoComponent>(hit))
                            continue;
 
                         if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
@@ -204,6 +208,18 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     else if (stab.Comp.Inject != null &&
                         _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
                     {
+                        var total = FixedPoint2.Zero;
+                        foreach (var amount in stab.Comp.Inject.Values)
+                        {
+                            total += amount;
+                        }
+
+                        var available = solutionEnt.Value.Comp.Solution.AvailableVolume;
+                        if (available < total)
+                        {
+                            _solutionContainer.SplitSolution(solutionEnt.Value, total - available);
+                        }
+
                         foreach (var (reagent, amount) in stab.Comp.Inject)
                         {
                             _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);

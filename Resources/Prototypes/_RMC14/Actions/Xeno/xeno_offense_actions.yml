@@ -1,8 +1,8 @@
-﻿- type: entity
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoAcidNormal
   name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -12,16 +12,24 @@
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidNormal
       plasmaCost: 100
-      time: 225 # seconds or 3.75 minutes
+      time: 50 # seconds
       dps: 8
       expendableLightDps: 2.5
     checkCanInteract: false
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoCorrosiveAcid
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: corrosive_acid
+
+- type: entity
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidWeak
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -31,7 +39,7 @@
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
       plasmaCost: 75
-      time: 562.5 # seconds or 9.375 minutes
+      time: 125 # seconds or 2~ minutes
       dps: 4
       expendableLightDps: 0.3
     checkCanInteract: false
@@ -40,7 +48,7 @@
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidStrong
   name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -50,7 +58,7 @@
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       plasmaCost: 125
-      time: 90 # seconds or 1.5 minutes
+      time: 20 # seconds
       dps: 20
       expendableLightDps: 23.4375
     checkCanInteract: false
@@ -71,7 +79,7 @@
       plasmaCost: 0
       energyCost: 100
       applyTimeMultiplier: 0.25
-      time: 90 # seconds or 1.5 minutes
+      time: 20 # seconds
       dps: 20
       expendableLightDps: 23.4375
     checkCanInteract: false
@@ -88,6 +96,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: regurgitate
     event: !type:XenoRegurgitateActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoTailStab
@@ -105,6 +114,7 @@
     useDelay: 10
     checkCanAccess: false
   - type: XenoTailStabAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoTailSlam
@@ -123,7 +133,7 @@
       state: tail_attack_acid
 
 - type: entity
-  parent: ActionXenoTailStab
+  parent: ActionXenoTailStabCorrosive
   id: ActionXenoTailStabBoiler
   name: Corrosive Tail Stab
   description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
@@ -143,6 +153,19 @@
     range: 15
     useDelay: 3
     checkCanAccess: false
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoRush
+  parent: ActionXenoLeap
+  name: Rush
+  description: Jump towards a given location and slash the enemy you hit, shaking their screen.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    event: !type:XenoLeapActionEvent
+    useDelay: 6
+    checkCanAccess: false
 
 - type: entity
   parent: ActionXenoLeap
@@ -158,6 +181,38 @@
     event: !type:XenoLeapActionEvent
     useDelay: 6
     checkCanAccess: false
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPounce
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: pounce
+
+- type: entity
+  parent: ActionXenoLeap
+  id: ActionXenoAssault
+  name: Assault (25)
+  description: Charge towards a location. Destroys some objects in your path. Melee slashes reduce assault's cooldown. If Super-Empowered, stuns and flings back the first enemy hit.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    event: !type:XenoLeapActionEvent
+    useDelay: 14
+    checkCanAccess: false
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoAssault
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: charge
 
 - type: entity
   parent: ActionXenoLeap
@@ -175,6 +230,14 @@
     checkCanAccess: false
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDash
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_dash
+
+- type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
   name: Headbutt (10) # TODO RMC14 proper plasma costs
@@ -189,6 +252,17 @@
     range: 3
     useDelay: 6
     deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: XenoActionPlasma
+    cost: 10
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoHeadbutt
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: headbutt
 
 - type: entity
   id: ActionXenoTailSweep
@@ -203,6 +277,15 @@
       state: tail_sweep
     event: !type:XenoTailSweepActionEvent
     useDelay: 15
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTailSweep
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: tail_sweep
 
 - type: entity
   id: ActionXenoSlowingSpit
@@ -233,10 +316,18 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
     event: !type:XenoScatteredSpitActionEvent
-    useDelay: 6
+    useDelay: 7
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoScatteredSpit
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: acid_shotgun
 
 - type: entity
   id: ActionXenoSpit
@@ -256,6 +347,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoSpit
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: xeno_spit
+
+- type: entity
   id: ActionXenoChargeSpit
   parent: ActionXenoBase
   name: Charge Spit (50) # TODO RMC14 proper plasma costs
@@ -268,6 +367,16 @@
       state: charge_spit
     event: !type:XenoChargeSpitActionEvent
     useDelay: 12
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoChargeSpit
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: charge_spit
 
 - type: entity
   parent: ActionXenoBase
@@ -282,9 +391,16 @@
       state: spray_acid
     event: !type:XenoSprayAcidActionEvent
     useDelay: 8
-    range: 6
+    range: 15
   - type: ActionBlockIfResting
 
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoSprayAcid
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: spray_acid
 
 - type: entity
   parent: ActionXenoSprayAcid
@@ -304,7 +420,6 @@
   description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid![/color]
   components:
   - type: WorldTargetAction
-    range: 7
     useDelay: 10
 
 - type: entity
@@ -333,6 +448,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoAcidBall
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_acid_ball
+
+- type: entity
   id: ActionXenoParalyzingSlash
   parent: ActionXenoBase
   name: Paralyzing Slash (50) # TODO RMC14 proper plasma costs
@@ -345,6 +468,8 @@
       state: lurker_inject_neuro
     event: !type:XenoParalyzingSlashActionEvent
     useDelay: 12
+  - type: XenoActionPlasma
+    cost: 50
 
 - type: entity
   parent: ActionXenoBase
@@ -359,6 +484,16 @@
       state: lurker_inject_neuro
     event: !type:XenoCripplingStrikeActionEvent
     useDelay: 10
+  - type: XenoActionPlasma
+    cost: 20
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoCripplingStrike
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lurker_inject_neuro
 
 - type: entity
   id: ActionXenoBoneChips
@@ -376,6 +511,14 @@
     range: 15
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoBoneChips
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: runner_bonespur
+
+- type: entity
   id: ActionXenoPunch
   parent: ActionXenoBase
   name: Punch
@@ -387,10 +530,18 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: punch
     event: !type:XenoPunchActionEvent
-    range: 1
+    range: 1.5
     useDelay: 4.5
     deselectOnMiss: false
   - type: XenoOffensiveAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPunch
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: punch
 
 - type: entity
   id: ActionXenoFling
@@ -404,10 +555,19 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: fling
     event: !type:XenoFlingActionEvent
-    range: 1
+    range: 1.5
     useDelay: 7
     deselectOnMiss: false
   - type: XenoOffensiveAction
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFling
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: fling
 
 - type: entity
   id: ActionXenoLunge
@@ -425,6 +585,15 @@
     useDelay: 10
     deselectOnMiss: false
   - type: XenoOffensiveAction
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoLunge
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lunge
 
 - type: entity
   id: ActionXenoScreech
@@ -439,6 +608,7 @@
       state: screech
     event: !type:XenoScreechActionEvent
     useDelay: 50
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoGut
@@ -469,10 +639,32 @@
     useDelay: 18
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoStomp
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: stomp
+
+- type: entity
+  parent: ActionXenoStomp
+  id: ActionXenoCrush
+  name: Crush (25)
+  description: Slam the ground with a 7x7 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoStompActionEvent
+    useDelay: 12
+
+- type: entity
   id: ActionXenoCharge
   parent: ActionXenoBase
   name: Charge (20)
-  description: Click on a tile you want to charge at, after a brief non cancel-able windup time. [color=green]Cooldown is partially refunded upon attacking an enemy, scaling with the amount of enemies you cleave with your passive.[/color]
+  description: Click on a tile you want to charge at, after a brief non cancel-able windup time. Slows around the impact area. [color=green]Cooldown is partially refunded upon attacking an enemy, scaling with the amount of enemies you cleave with your passive.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -483,6 +675,41 @@
     range: 9
     useDelay: 14
     checkCanAccess: false
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoCharge
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: ready_charge
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleCharging
+  name: Toggle Charging
+  description: Enable charging when moving in a straight line, which increases your speed and impact damage depending on the total distance travelled.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: ready_charge
+    event: !type:XenoToggleChargingActionEvent
+    useDelay: 0.25
+
+- type: entity
+  parent: ActionXenoFling
+  id: ActionXenoRam
+  name: Ram (10)
+  components:
+  - type: EntityTargetAction
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: fling # TODO RMC14 ram
+    useDelay: 10
+  - type: XenoActionPlasma
+    cost: 10
 
 - type: entity
   parent: ActionXenoBase
@@ -503,8 +730,17 @@
     id: ActionXenoBombard
     ids:
     - ActionXenoAcidShroud
-    cooldown: 20
+    cooldown: 30
     onPerform: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoBombard
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: bombard
 
 - type: entity
   parent: ActionXenoBase
@@ -523,6 +759,14 @@
       state: shift_spit_neuro_glob
     event: !type:XenoGasToggleActionEvent
     useDelay: 1
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoToggleGasType
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: shift_spit_acid_glob
 
 - type: entity
   parent: ActionXenoBase
@@ -546,6 +790,14 @@
     onPerform: false
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoAcidShroud
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: acid_shroud
+
+- type: entity
   id: ActionXenoTremor
   parent: ActionXenoBase
   name: Tremor (100)
@@ -557,7 +809,15 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tremor
     event: !type:XenoStompActionEvent
-    useDelay: 45
+    useDelay: 30
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTremor
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: tremor
 
 - type: entity
   parent: ActionXenoBase
@@ -589,6 +849,8 @@
     deselectOnMiss: false
   - type: XenoOffensiveAction
   - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 80
 
 - type: entity
   parent: ActionXenoBase
@@ -606,13 +868,15 @@
     useDelay: 13
     deselectOnMiss: false
   - type: XenoOffensiveAction
+  - type: XenoActionPlasma
+    cost: 30
   - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoPierce
   name: Pierce (50)
-  description: Pierce through enemies in a line doing high damage and piercing some armor. Hitting 2 or more recharges your shield.
+  description: Pierce through enemies in a 3 tile range, doing high damage and piercing some armor. Hitting 2 or more recharges your shield.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -623,8 +887,17 @@
     range: 15
     useDelay: 3
     checkCanAccess: false
-  - type: XenoOffensiveAction
   - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPierce
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_pierce
 
 - type: entity
   parent: ActionXenoDash
@@ -657,7 +930,15 @@
     ids:
     - ActionXenoCleaveFling
     cooldown: 12
-  
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoCleaveRoot
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_cleave_root
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoCleaveFling
@@ -680,6 +961,14 @@
     ids:
     - ActionXenoCleaveRoot
     cooldown: 12
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoCleaveFling
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_cleave_fling
 
 #- type: entity
 #  parent: ActionXenoBase
@@ -721,3 +1010,301 @@
       state: shift_spit_xeno_acid
     event: !type:XenoSpitToggleActionEvent
 
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHighGallop
+  name: High Gallop
+  description: Stuns foes in a 2x3 area in targeted direction, and slows them. Also flings back grenades.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoHighGallopActionEvent
+    range: 15
+    useDelay: 12
+    checkCanAccess: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoHighGallop
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: stomp
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoScissorCut
+  name: Scissor Cut (25)
+  description: Cuts enemies and fences in a straight line. If Super-Empowered, slows enemies hit too.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_scissor_cut
+    event: !type:XenoScissorCutActionEvent
+    useDelay: 6
+    checkCanAccess: false
+    range: 15
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 25
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoScissorCut
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_scissor_cut
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailSeize
+  name: Tail Seize
+  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_seize
+    event: !type:XenoTailSeizeActionEvent
+    range: 15
+    useDelay: 15
+    deselectOnMiss: false
+    checkCanAccess: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTailSeize
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: tail_seize
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAbduct
+  name: Abduct (180)
+  description: Cast out a line that after a small doafter pulls in enemies towards you, disarming them. Catching 1 target slows them, 2 roots them, and 3 or more stuns them.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: abduct
+    event: !type:XenoAbductActionEvent
+    range: 6
+    useDelay: 15
+    deselectOnMiss: false
+    checkCanAccess: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoAbduct
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: abduct
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailLash
+  name: Tail Lash (80)
+  description: Fling back foes in a 2x3 area in targeted direction after a very short doafter. Also slows.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_tail_lash
+    event: !type:XenoTailLashActionEvent
+    range: 15
+    useDelay: 13
+    deselectOnMiss: false
+    checkCanAccess: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTailLash
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_tail_lash
+
+- type: entity
+  id: ActionXenoDislocate
+  parent: ActionXenoBase
+  name: Dislocate (55)
+  description: Punch a targeted enemy, doing some damage and pushing them back. If the target is slowed, stunned, downed, or rooted, instead roots and completely pierces armor. Reduces the cooldown of Abduct and Tail Lash.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: dislocate
+    event: !type:XenoDislocateActionEvent
+    range: 1.5
+    useDelay: 10
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 55
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDislocate
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: dislocate
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailJab
+  name: Tail Jab
+  description: Jab an enemy in a 2.5 tile range, doing high damage and slowing them.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_pierce
+    event: !type:XenoTailJabActionEvent
+    range: 2.5
+    useDelay: 7
+    checkCanAccess: false
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: XenoOffensiveAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFlurry
+  name: Flurry
+  description: An attack that has a range of 1x3 tiles, dealing damage per target and healing you.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_spike
+    event: !type:XenoFlurryActionEvent
+    useDelay: 3
+    checkCanAccess: false
+    range: 15
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFlurry
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_spike
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHeadbite
+  name: Headbite
+  description: Instantly kills unconscious targets and heals you for 150 HP.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: headbite
+    event: !type:XenoHeadbiteActionEvent
+    range: 1.5
+    useDelay: 10
+    checkCanAccess: false
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: XenoOffensiveAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: headbite
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoApprehend
+  name: Apprehend
+  description: Increases your movement speed and applies a slow on the next target you slash.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_enrage
+    event: !type:XenoCripplingStrikeActionEvent
+    useDelay: 18
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoEviscerate
+  name: Eviscerate
+  description: Eviscerate nearby enemies after a short delay. Costs 1 rage stack.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    event: !type:XenoEviscerateActionEvent
+    useDelay: 23
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoClothesline
+  name: Clothesline
+  description: Flings a target, doing minimal damage and healing you. The amount healed is higher the more rage stacks you have.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_cleave_fling
+    event: !type:XenoFlingActionEvent
+    range: 1.5
+    useDelay: 16
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTumble
+  name: Tumble (25) # TODO RMC14 proper plasma costs
+  description: Charge towards your side and push back the first enemy hit. Can only be used towards either side of where you are facing.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tumble
+    event: !type:XenoTumbleActionEvent
+    range: 20
+    useDelay: 10
+    deselectOnMiss: false
+    checkCanAccess: false
+    rotate: false
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 25

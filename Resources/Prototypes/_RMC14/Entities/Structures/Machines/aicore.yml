@@ -1,0 +1,203 @@
+- type: entity
+  id: RMCAICore
+  name: ARES v3.2.
+  description: This is the artificial intelligence system for the UNS Almayer. Like many other military-grade AI systems, this one was manufactured by We-Ya.
+  placement:
+    mode: SnapgridCenter
+  components: #has no collission in 13 they have invisible walls behind it
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aicore.rsi
+    layers:
+    - state: hydra-off
+    - state: hydra
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000 # Okey hear me out down there... Health is 1000 in 13 but you can go over 1000+ and it goes on...
+#      behaviors:
+#      - !type:DoActsBehavior Commented this part out because in 13 after 200+ damage it fucking explodes
+#        acts: [ "Destruction" ] Explosion does not destroy it and just disables it till a AI techie arrives(admin)
+# to fix the AI core. Leaving it here for now because of that
+
+- type: entity
+  id: RMCAICoreProcessor
+  name: ARES Processor
+  description: An external processor for ARES, used to process vast amounts of information.
+  placement:
+    mode: SnapgridCenter
+  components: #has no collission in 13 they have invisible walls behind it
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
+    layers:
+    - state: processor_off
+    - state: processor
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000 # Okey hear me out down there... Health is 1000 in 13 but you can go over 1000+ and it goes on...
+#      behaviors:
+#      - !type:DoActsBehavior
+#        acts: [ "Destruction" ]
+
+- type: entity
+  id: RMCAICoreProcessorBioscan
+  parent: RMCAICoreProcessor
+  name: ARES Processor (Bioscan)
+  description: The external component of ARES' Bioscan systems. Without this, the UNS Almayer would be incapable of running bioscans!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
+    layers:
+    - state: bio_processor_off
+    - state: bio_processor
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCAICoreProcessorInterface
+  parent: RMCAICoreProcessor
+  name: ARES Processor (Interface)
+  description: An external processor for ARES; this one handles core processes for interfacing with the crew, including radio transmissions and broadcasts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
+    layers:
+    - state: bio_processor_off
+    - state: bio_processor
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCAICoreProcessorHERMES
+  parent: RMCAICoreProcessor
+  name: ARES Processor (HERMES)
+  description: The external component of ARES' HERMES processor. Primarily responsible for coordinating Average Joes and Maintenance Drones. It definitely wasn't stolen from Novaris Industries.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
+    layers:
+    - state: apollo_processor_off
+    - state: apollo_processor
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCAICoreCPU
+  parent: RMCAICoreProcessor
+  name: ARES CPU
+  description: This is ARES' central processor. Made of a casing designed to withstand nuclear blasts, the CPU also contains ARES' blackbox recorder.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
+    layers:
+    - state: cpu_off
+    - state: cpu
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCAICoreSubstrate
+  parent: RMCAICoreProcessor
+  name: ARES Substrate
+  description: The memory substrate of ARES, containing complex protocols and information. Limited capabilities can operate on substrate alone, without the main ARES Unit operational.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
+    layers:
+    - state: substrate_off
+    - state: substrate
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCAIConsoleARES
+  name: ARES Interface
+  description: A console built to interface with ARES, allowing for 1:1 communication.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
+    state: console
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # Intentional
+
+- type: entity
+  parent: RMCAIConsoleARES
+  id: RMCAIConsoleInterface
+  name: AI interface console
+  description: A large, bulky computer intended to allow the user to interface with the ship's AI.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/aiconsoleinterface.rsi
+    state: console
+    offset: 0, -0.55
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCAIConsoleHERMES
+  name: HERMES Maintenance Controller.
+  description: A console built to facilitate Average Joes and their operation, allowing for simple allocation of resources.
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
+    state: console
+    layers: [ ]
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # Intentional

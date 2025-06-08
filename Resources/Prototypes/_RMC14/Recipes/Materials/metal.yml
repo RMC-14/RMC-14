@@ -1,0 +1,156 @@
+- type: rmcConstruction
+  id: RMCDividerConstruction
+  name: divider
+  isDivider: true
+  prototype: Error
+
+- type: rmcConstruction
+  id: RMCBarbedWireBuild
+  name: barbed wire
+  prototype: BarbedWire1
+  doAfterTime: 1
+  doAfterTimeMin: 1
+  skill: RMCSkillConstruction
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+  stackAmounts:
+  - 5
+  - 10
+  - 20
+
+- type: rmcConstruction
+  id: RMCMetalBarricadeBuild
+  name: metal barricade
+  prototype: CMBarricadeMetal
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  materialCost: 4
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 1
+
+- type: rmcConstruction
+  id: RMCMetalBarricadeFoldableBuild
+  name: folding metal barricade
+  prototype: CMBarricadeMetalDoor
+  doAfterTime: 3
+  doAfterTimeMin: 1.5
+  materialCost: 6
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2
+
+- type: rmcConstruction
+  id: RMCHandrailBuild
+  name: handrail
+  prototype: RMCBarricadeHandrail
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  materialCost: 2
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 1
+
+- type: rmcConstruction
+  id: RMCFloorTileBuild
+  name: floor tile (x4)
+  prototype: CMTileItemSteel
+  doAfterTime: 0
+  doAfterTimeMin: 0
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+  amount: 4
+  stackAmounts:
+  - 20
+
+- type: rmcConstruction
+  id: RMCMetalRodBuild
+  name: metal rod (x2)
+  prototype: CMRodMetal1
+  doAfterTime: 0
+  doAfterTimeMin: 0
+  materialCost: 1
+  ignoreBuildRestrictions: true
+  restrictedCollisionGroup: null
+  amount: 2
+  stackAmounts:
+  - 10
+  - 20
+  - 40
+  - 60
+
+- type: rmcConstruction
+  id: RMCWallGirderBuild
+  name: wall girder
+  prototype: CMGirder
+  noRotate: true
+  doAfterTime: 5
+  materialCost: 2
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2
+
+- type: rmcConstruction
+  id: RMCWindowFrameBuild
+  name: window frame
+  prototype: RMCWindowFrameAlmayer
+  noRotate: true
+  doAfterTime: 5
+  materialCost: 5
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 2
+
+# Comfy Chairs
+- type: rmcConstruction
+  id: RMCComfyChairList
+  name: comfy chairs
+  prototype: CMChairComfy
+  listed:
+  - RMCComfyChairBeigeBuild
+  - RMCComfyChairBlackBuild
+  - RMCComfyChairBrownBuild
+  - RMCComfyChairLimeBuild
+  - RMCComfyChairTealBuild
+
+- type: rmcConstruction
+  id: RMCComfyChairBeigeBuild
+  name: beige comfy chair
+  prototype: CMChairComfyBeige
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairBlackBuild
+  name: black comfy chair
+  prototype: CMChairComfyBlack
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairBrownBuild
+  name: brown comfy chair
+  prototype: CMChairComfy
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairLimeBuild
+  name: lime comfy chair
+  prototype: CMChairComfyLime
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCComfyChairTealBuild
+  name: teal comfy chair
+  prototype: CMChairComfyTeal
+  materialCost: 2
+  restrictedTags: [RMCSeat]
+
+- type: rmcConstruction
+  id: RMCMachineFrameBuild
+  name: machine frame
+  prototype: CMMachineFrameUnfinished
+  noRotate: true
+  doAfterTime: 2.5
+  materialCost: 5
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 3

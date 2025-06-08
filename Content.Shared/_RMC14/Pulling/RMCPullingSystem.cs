@@ -1,5 +1,6 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -22,6 +23,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -57,8 +59,11 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
 
+        SubscribeLocalEvent<XenoComponent, RMCPullToggleEvent>(OnXenoPullToggle);
+
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
+        SubscribeLocalEvent<MeleeWeaponComponent, PullAttemptEvent>(OnMeleePullAttempt);
 
         SubscribeLocalEvent<SlowOnPullComponent, PullStartedMessage>(OnSlowPullStarted);
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
@@ -203,7 +208,7 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
-        if (_mobState.IsDead(args.PulledUid))
+        if (!CanPullDead(ent, args.PulledUid))
         {
             _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
@@ -233,6 +238,20 @@ public sealed class RMCPullingSystem : EntitySystem
             _popup.PopupClient(msg, ent, args.PullerUid, PopupType.SmallCaution);
             args.Cancelled = true;
         }
+    }
+
+    private void OnMeleePullAttempt(Entity<MeleeWeaponComponent> ent, ref PullAttemptEvent args)
+    {
+        if (args.PullerUid != ent.Owner)
+            return;
+
+        if (ent.Comp.NextAttack > _timing.CurTime)
+            args.Cancelled = true;
+    }
+
+    private void OnXenoPullToggle(Entity<XenoComponent> ent, ref RMCPullToggleEvent args)
+    {
+        args.Handled = true;
     }
 
     private void OnPreventPulledWhileAliveStart(Entity<PreventPulledWhileAliveComponent> ent, ref PullStartedMessage args)
@@ -363,6 +382,9 @@ public sealed class RMCPullingSystem : EntitySystem
 
     public void PlayPullEffect(EntityUid puller, EntityUid pulled)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         var userXform = Transform(puller);
         var targetPos = _transform.GetWorldPosition(pulled);
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
@@ -371,8 +393,24 @@ public sealed class RMCPullingSystem : EntitySystem
         _melee.DoLunge(puller, puller, Angle.Zero, localPos, null);
         _audio.PlayPredicted(_pullSound, pulled, puller);
 
-        if (_net.IsServer)
+        if (_net.IsClient) // TODO replace with PredictedSpawnAttachedTo when robust toolbox is updated
             SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
+    }
+
+    private bool CanPullDead(EntityUid puller, EntityUid pulled)
+    {
+        if (!_mobState.IsDead(pulled))
+            return true;
+
+        if (HasComp<IgnoreBlockPullingDeadComponent>(pulled))
+            return true;
+
+        if (TryComp<VictimInfectedComponent>(pulled, out var infect) &&
+            TryComp<AllowPullWhileDeadAndInfectedComponent>(pulled, out var deadPull) &&
+            infect.CurrentStage > deadPull.InfectionStageThreshold)
+            return true;
+
+        return false;
     }
 
     public override void Update(float frameTime)
@@ -386,7 +424,7 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
             }
 
-            if (_mobState.IsDead(pulling))
+            if (!CanPullDead(uid, pulling))
                 _pulling.TryStopPull(pulling, pullable, uid);
         }
 

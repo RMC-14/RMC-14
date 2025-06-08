@@ -167,8 +167,8 @@ public sealed class MedevacStretcherSystem : EntitySystem
         var stretcherCoords = stretcher.ToCoordinates();
         var snappedCoords = stretcher.ToCoordinates().SnapToGrid(EntityManager, _mapManager);
         if (!_dropshipWeapon.CasDebug &&
-            (!_areas.TryGetArea(snappedCoords, out var stretcherArea, out _, out _) ||
-            !stretcherArea.Medevac))
+            (!_areas.TryGetArea(snappedCoords, out var stretcherArea, out _) ||
+            !stretcherArea.Value.Comp.Medevac))
         {
             _popup.PopupClient(Loc.GetString("rmc-medevac-area-not-cas"), stretcherCoords, user);
             return;
@@ -178,13 +178,8 @@ public sealed class MedevacStretcherSystem : EntitySystem
             return;
 
         var name = GetName(stretcher);
-        var targetComp = new DropshipTargetComponent()
-        {
-            Abbreviation = name,
-            IsTargetableByWeapons = false,
-        };
+        _dropshipWeapon.MakeTarget(stretcher, name, false);
 
-        AddComp(stretcher, targetComp, true);
         _appearance.SetData(stretcher, MedevacStretcherVisuals.BeaconState, BeaconVisuals.On);
         _popup.PopupClient(Loc.GetString("rmc-medevac-activate-beacon"), stretcherCoords, user);
     }

@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
+using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -18,6 +19,7 @@ using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -38,7 +40,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
     [Dependency] private readonly SharedRMCNPCSystem _rmcNpc = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -60,6 +62,7 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, UseInHandEvent>(OnSentryUseInHand);
         SubscribeLocalEvent<SentryComponent, SentryDeployDoAfterEvent>(OnSentryDeployDoAfter);
         SubscribeLocalEvent<SentryComponent, ActivateInWorldEvent>(OnSentryActivateInWorld);
+        SubscribeLocalEvent<SentryComponent, AmmoShotEvent>(OnSentryAmmoShot);
         SubscribeLocalEvent<SentryComponent, AttemptShootEvent>(OnSentryAttemptShoot);
         SubscribeLocalEvent<SentryComponent, InteractUsingEvent>(OnSentryInteractUsing);
         SubscribeLocalEvent<SentryComponent, SentryInsertMagazineDoAfterEvent>(OnSentryInsertMagazineDoAfter);
@@ -176,6 +179,22 @@ public sealed class SentrySystem : EntitySystem
     {
         if (args.User != ent.Owner)
             args.Cancelled = true;
+    }
+
+    private void OnSentryAmmoShot(Entity<SentryComponent> ent, ref AmmoShotEvent args)
+    {
+        if(!ent.Comp.HomingShots)
+            return;
+
+        //Make projectiles shot from a sentry gun homing.
+        foreach (var projectile in args.FiredProjectiles)
+        {
+            if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
+                return;
+
+            var homing = EnsureComp<HomingProjectileComponent>(projectile);
+            homing.Target = targeted.Target;
+        }
     }
 
     private void OnSentryInteractUsing(Entity<SentryComponent> sentry, ref InteractUsingEvent args)
@@ -385,8 +404,6 @@ public sealed class SentrySystem : EntitySystem
     {
         coordinates = default;
         rotation = default;
-        if (!HasSkillPopup(sentry, user))
-            return false;
 
         var moverCoordinates = _transform.GetMoverCoordinateRotation(user, Transform(user));
         coordinates = moverCoordinates.Coords;
@@ -411,8 +428,6 @@ public sealed class SentrySystem : EntitySystem
         [NotNullWhen(true)] out ContainerSlot? slot)
     {
         slot = null;
-        if (!HasSkillPopup(sentry, user))
-            return false;
 
         slot = _container.EnsureContainer<ContainerSlot>(sentry, sentry.Comp.ContainerSlotId);
         if (!_container.CanInsert(used, slot, true))
@@ -432,16 +447,6 @@ public sealed class SentrySystem : EntitySystem
         }
 
         return true;
-    }
-
-    private bool HasSkillPopup(Entity<SentryComponent> sentry, EntityUid user)
-    {
-        if (_skills.HasSkill(user, sentry.Comp.Skill, sentry.Comp.SkillLevel))
-            return true;
-
-        var msg = Loc.GetString("rmc-skills-no-training", ("target", sentry));
-        _popup.PopupClient(msg, sentry, user, PopupType.SmallCaution);
-        return false;
     }
 
     private void OpenUpgradeMenu(
@@ -516,6 +521,17 @@ public sealed class SentrySystem : EntitySystem
             var othersMsg = Loc.GetString("rmc-sentry-disassemble-start-others", ("user", user), ("sentry", sentry));
             _popup.PopupPredicted(selfMsg, othersMsg, sentry, user);
         }
+    }
+
+    public bool TrySetMode(Entity<SentryComponent> sentry, SentryMode mode)
+    {
+        if (sentry.Comp.Mode == mode)
+            return false;
+
+        sentry.Comp.Mode = mode;
+        UpdateState(sentry);
+        Dirty(sentry, sentry.Comp);
+        return true;
     }
 
     public override void Update(float frameTime)

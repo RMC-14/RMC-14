@@ -1,0 +1,153 @@
+﻿# MedKit Pouch
+- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchMedkit
+  name: medical kit pouch
+  description: It's specifically made to hold medical items.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/medkit.rsi
+  - type: StorageStoreSkillRequired
+    entries:
+    - whitelist:
+        tags:
+        - DiscreteHealthAnalyzer
+        - Dropper
+        - Pill
+        - Bottle
+        - Syringe
+        - PillCanister
+        - CMTraumaKit
+        - CMBurnKit
+        - CMOintment
+        - Brutepack
+        - CMBloodPack
+        # - TODO RMC14 splint
+        - CMAutoInjector
+        - RMCSyringeCase
+        - CMSurgicalCase
+        - CMFireExtinguisherPortable
+        - CMRollerItem
+        - CMSurgicalLine
+        - CMSynthGraft
+        - BodyBag
+        #       - TODO RMC14 fixovein
+        - Hypospray
+        components:
+        - Hypospray
+      skills:
+        all:
+          RMCSkillMedical: 2
+  - type: Storage
+    grid:
+    - 0,0,13,1 #7 slots
+    maxItemSize: Large
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - Dropper
+      - Pill
+      - Bottle
+      - Syringe
+      - PillCanister
+      - CMTraumaKit
+      - CMBurnKit
+      - CMOintment
+      - Brutepack
+      - CMBloodPack
+      #      - TODO RMC14 splint
+      - CMAutoInjector
+      - RMCSyringeCase
+      - CMSurgicalCase
+      - CMFireExtinguisherPortable
+      - CMRollerItem
+      - CMSurgicalLine
+      - CMSynthGraft
+      - BodyBag
+      #      - TODO RMC14 fixovein
+      - Hypospray
+      components:
+      - Hypospray
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMSurgicalCase
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    # splint
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillAdvanced
+  suffix: Filled, Advanced
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTricordrazineAutoInjector
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    - id: CMBurnKit10
+#    - id: CMSplints5 # TODO RMC14
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillSPP
+  suffix: Filled, SPP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+    - id: CMHealthAnalyzer
+    - id: CMHyposprayFilledTricord
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitPMC
+  suffix: PMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/wy_medkit.rsi
+
+- type: entity
+  parent: RMCPouchMedkitPMC
+  id: RMCPouchMedkitPMCFilled
+  suffix: Filled, PMC
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+    - id: CMRollerBedSpawnFolded
+    - id: CMSurgicalCaseFilled
+    - id: CMBloodPackFull
+    - id: CMBloodPackFull
+    # TODO RMC14: splint nano
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+    #    - id: CMSplints5 # TODO RMC14
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    #    - id: CMOxycodoneAutoInjector # TODO RMC14
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    - id: CMHealthAnalyzer

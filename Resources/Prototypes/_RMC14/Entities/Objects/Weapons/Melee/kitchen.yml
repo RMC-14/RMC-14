@@ -33,6 +33,7 @@
   - type: Tag
     tags:
     - Knife
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: RMCKitchenKnife
