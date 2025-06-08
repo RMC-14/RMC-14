@@ -120,6 +120,7 @@
     - CMSurvivorUNPeacekeeper
     - CMSurvivorICB
     - RMCSurvivorCommanderNewVaradero
+
 - type: entity
   id: CMJobsSurvivorCivilian
   categories:
