@@ -108,7 +108,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: #TODO ultrazine autoinjector
+#    - id: #TODO ultrazine autoinjector
     - id: CMInaprovalineAutoInjector
     - id: CMEpinephrineAutoInjector
 
