@@ -104,7 +104,7 @@ public sealed class RadioSystem : EntitySystem
 
         if (TryComp(messageSource, out JobPrefixComponent? prefix))
         {
-            var prefixText = (prefix.AdditionalPrefix != null ? $" {Loc.GetString(prefix.AdditionalPrefix.Value)}" : "") + Loc.GetString(prefix.Prefix);
+            var prefixText = (prefix.AdditionalPrefix != null ? $"{Loc.GetString(prefix.AdditionalPrefix.Value)} " : "") + Loc.GetString(prefix.Prefix);
             if (TryComp(messageSource, out SquadMemberComponent? member) &&
                 TryComp(member.Squad, out SquadTeamComponent? team) &&
                 team.Radio != null &&

@@ -311,7 +311,7 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
-      # dropper
+      - Dropper
       - GlassBeaker
       - Bottle
       - PillCanister
@@ -329,12 +329,20 @@
       - CMAutoInjector
       - CMRollerItem
       - BodyBag
-      #      - # TODO RMC14 latex gloves
+      - RMCGlovesLatex
+      - SterileMask
       - Hypospray
+      - CigPack
+      - RMCPenlight
+      - Flare
+      #      - # TODO RMC14 reagent analyzer
+      #      - # TODO RMC14 plant analyzer
+      #      - # TODO RMC14 minitank
       components:
       - Hypospray
       - Defibrillator
       - Pill
+      - RMCLighter
   - type: FixedItemSizeStorage
 
 - type: entity
