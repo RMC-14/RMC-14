@@ -51,6 +51,8 @@
       visible: false
     - map: [ "enum.HumanoidVisualLayers.Underwear" ]
     - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.LFoot" ]
     - map: [ "enum.HumanoidVisualLayers.RFoot" ]

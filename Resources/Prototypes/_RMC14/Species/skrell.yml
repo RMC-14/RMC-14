@@ -22,6 +22,8 @@
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobSkrellTorso
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Underwear: MobHumanoidAnyMarking
     Undershirt: MobHumanoidAnyMarking
     Eyes: MobSkrellEyes
