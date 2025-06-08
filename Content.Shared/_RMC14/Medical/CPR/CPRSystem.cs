@@ -183,12 +183,7 @@ public sealed class CPRSystem : EntitySystem
         EnsureComp<ReceivingCPRComponent>(target);
 
         // If the performer has skills in medical their CPR time will be reduced.
-        var delay = TimeSpan.FromSeconds(4);
-
-        if (_skills.HasSkill(performer, SkillType, 4))
-            delay = TimeSpan.FromSeconds(1.4); // 4 * 0.35
-        else if (_skills.HasSkill(performer, SkillType, 2))
-            delay = TimeSpan.FromSeconds(3); // 4 * 0.75
+        var delay = TimeSpan.FromSeconds(4 * _skills.GetSkillDelayMultiplier(performer, SkillType));
 
         var doAfter = new DoAfterArgs(EntityManager, performer, delay, new CPRDoAfterEvent(), performer, target)
         {
