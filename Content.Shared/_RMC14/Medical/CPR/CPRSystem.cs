@@ -180,10 +180,10 @@ public sealed class CPRSystem : EntitySystem
         if (!CanCPRPopup(performer, target, true, out _))
             return false;
 
-        EnsureComp<ReceivingCPRComponent>(target);
+        var cprComp = EnsureComp<ReceivingCPRComponent>(target);
 
         // If the performer has skills in medical their CPR time will be reduced.
-        var delay = TimeSpan.FromSeconds(4 * _skills.GetSkillDelayMultiplier(performer, SkillType));
+        var delay = TimeSpan.FromSeconds(cprComp.CPRPerformingTime * _skills.GetSkillDelayMultiplier(performer, SkillType));
 
         var doAfter = new DoAfterArgs(EntityManager, performer, delay, new CPRDoAfterEvent(), performer, target)
         {
