@@ -524,12 +524,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void GetAllAvailableTunnels(Entity<XenoTunnelComponent> destinationXenoTunnel, ref OpenBoundInterfaceMessage args)
     {
         var hive = Hive.GetHive(destinationXenoTunnel.Owner);
-        if (hive is null ||
-            !TryComp(hive, out HiveComponent? hiveComp))
-        {
+        if (!TryComp(hive, out HiveComponent? hiveComp))
             return;
-        }
-
 
         var hiveTunnels = hiveComp.HiveTunnels;
         Dictionary<string, NetEntity> netHiveTunnels = new();

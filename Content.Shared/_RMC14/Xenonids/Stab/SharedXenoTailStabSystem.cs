@@ -45,6 +45,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -183,14 +184,14 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     RaiseLocalEvent(hit, attackedEv);
 
                     var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
-                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab , tool: stab);
+                    var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab);
 
                     if (change?.GetTotal() > FixedPoint2.Zero)
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
 
                     if (stab.Comp.InjectNeuro)
                     {
-                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox))
+                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) || HasComp<XenoComponent>(hit))
                            continue;
 
                         if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))

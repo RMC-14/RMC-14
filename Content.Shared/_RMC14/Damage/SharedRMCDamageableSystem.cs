@@ -4,8 +4,11 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.ForTheHive;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Armor;
@@ -50,6 +53,8 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -425,21 +430,26 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return true;
     }
 
-    private void DoDamage(Entity<DamageOverTimeComponent> damageEnt, EntityUid target, DamageSpecifier damage, bool ignoreResistances = false)
+    private void DoDamage(Entity<DamageOverTimeComponent> damageEnt, EntityUid target, DamageSpecifier damage, bool ignoreResistances = false, bool acidic = false)
     {
+        var damageBase = damage;
+
+        if (acidic)
+            damageBase = _xeno.TryApplyXenoAcidDamageMultiplier(target, damageBase);
+
         if (damageEnt.Comp.Multipliers is { } multipliers)
         {
             foreach (var multiplier in multipliers)
             {
                 if (_entityWhitelist.IsWhitelistPass(multiplier.Whitelist, target))
                 {
-                    _damageable.TryChangeDamage(target, damage * multiplier.Multiplier, ignoreResistances);
+                    _damageable.TryChangeDamage(target, damageBase * multiplier.Multiplier, ignoreResistances);
                     return;
                 }
             }
         }
 
-        _damageable.TryChangeDamage(target, damage, ignoreResistances);
+        _damageable.TryChangeDamage(target, damageBase, ignoreResistances);
     }
 
     public virtual bool TryGetDestroyedAt(EntityUid destructible, [NotNullWhen(true)] out FixedPoint2? destroyed)
@@ -574,13 +584,16 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 if (!_entityWhitelist.IsWhitelistPassOrNull(damage.Whitelist, user))
                     continue;
 
+                if (_hive.FromSameHive(contact, user))
+                    continue;
+
                 userDamage.NextDamageAt = time + userDamage.DamageEvery;
 
                 if (damage.Damage != null)
                     DoDamage((contact, damage), user, damage.Damage);
 
                 if (damage.ArmorPiercingDamage != null)
-                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true);
+                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true, acidic: damage.Acidic);
 
                 if (damage.Emotes is { Count: > 0 } emotes)
                 {

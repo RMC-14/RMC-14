@@ -11,7 +11,7 @@
     - state: kit_empty
       map: [ "openLayer" ]
       visible: false
-  - type: Storage # TODO RMC14 require medical skill for opening this while in another container
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,1 # 7 slots
@@ -32,7 +32,7 @@
       #      - TODO RMC14 splint
       - RMCPenlight
       - CMAutoInjector
-      #      - TODO RMC14 syringe cases
+      - RMCSyringeCase
       - CMSurgicalLine
       - CMSynthGraft
       - CMRollerItem
@@ -74,7 +74,7 @@
   id: CMFirstAidKitSurgery
   name: basic field surgery kit
   components:
-  - type: Storage # TODO RMC14 require medical skill for opening this while in another container
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,1 # 7 slots
@@ -95,7 +95,7 @@
       #      - TODO RMC14 splint
       - RMCPenlight
       - CMAutoInjector
-      #      - TODO RMC14 syringe cases
+      - RMCSyringeCase
       - CMSurgicalLine
       - CMSynthGraft
       - CMRollerItem
@@ -110,7 +110,7 @@
 - type: entity
   parent: CMFirstAidKit
   id: CMFirstAidKitFilled
-  description: It's an emergency medical kit containing basic medication and equipment. No training required to use. # With medical training you can fit this in a backpack. # TODO RMC14
+  description: It's an emergency medical kit containing basic medication and equipment. No training required to use. With medical training you can fit this in a backpack.
   suffix: Filled
   components:
   - type: StorageFill
@@ -141,7 +141,7 @@
 - type: entity
   parent: CMFirstAidKitSurgery
   id: CMFirstAidKitSurgeryFilled
-  description: Contains a surgical line, cautery, scalpel, hemostat, retractor, drapes and an oxycodone injector for tending wounds surgically. # With medical training you can fit this in a backpack. # TODO RMC14
+  description: Contains a surgical line, cautery, scalpel, hemostat, retractor, drapes and an oxycodone injector for tending wounds surgically. With medical training you can fit this in a backpack.
   suffix: Filled
   components:
   - type: StorageFill
@@ -158,7 +158,7 @@
   parent: CMFirstAidKit
   id: CMBurnAidKit
   name: fire first-aid kit
-  description: It's an emergency medical kit for when the dropship ammo storage spontaneously burns down. # With medical training you can fit this in a backpack. # TODO RMC14 medical skill
+  description: It's an emergency medical kit for when the dropship ammo storage spontaneously burns down. With medical training you can fit this in a backpack.
   components:
   - type: Sprite
     layers:
@@ -187,7 +187,7 @@
   parent: CMFirstAidKit
   id: CMFirstAidO2Kit
   name: oxygen deprivation first-aid kit
-  description: A box full of reoxygenating goodies. # With medical training you can fit this in a backpack. # TODO RMC14 medical skill
+  description: A box full of reoxygenating goodies. With medical training you can fit this in a backpack.
   components:
   - type: Sprite
     layers:
@@ -216,7 +216,7 @@
   parent: CMFirstAidKit
   id: CMAdvFirstAidKit
   name: advanced first-aid kit
-  description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. # With medical training you can fit this in a backpack. # TODO RMC14 medical skill
+  description: Contains more effective methods of medical treatment than a basic first-aid kit, such as burn and trauma kits. With medical training you can fit this in a backpack.
   components:
   - type: Sprite
     layers:
@@ -245,7 +245,7 @@
   parent: CMFirstAidKit
   id: CMToxinAidKit
   name: toxin first-aid kit
-  description: It's an emergency medical kit containing lifesaving anti-toxic medication. # With medical training you can fit this in a backpack. # TODO RMC14 medical skill
+  description: It's an emergency medical kit containing lifesaving anti-toxic medication. With medical training you can fit this in a backpack.
   components:
   - type: Sprite
     layers:
@@ -267,3 +267,30 @@
     - id: CMPillCanisterDylovene
     - id: CMPillDylovene
       amount: 3
+
+- type: entity
+  parent: CMFirstAidKit
+  id: RMCRadiationAidKit
+  name: radiation first-aid kit
+  description: Contains treatment for radiation exposure. With medical training you can fit this in a backpack.
+  components:
+  - type: Sprite
+    layers:
+    - state: purplefirstaid
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Item
+    heldPrefix: purplefirstaid
+
+- type: entity
+  parent: RMCRadiationAidKit
+  id: RMCRadiationAidKitFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPillCanisterRussianRed
+      amount: 4
+    - id: CMBicaridineAutoInjector
+      amount: 2

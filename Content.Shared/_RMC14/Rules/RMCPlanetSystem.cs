@@ -165,7 +165,7 @@ public sealed class RMCPlanetSystem : EntitySystem
                 continue;
             }
 
-            if (players == 0 || comp.MinPlayers == 0 || players >= comp.MinPlayers)
+            if (players == 0 || (comp.MinPlayers == 0 || players >= comp.MinPlayers) && (comp.MaxPlayers == 0 || players <= comp.MaxPlayers))
                 candidates.Add(new RMCPlanet(planetProto, comp));
         }
 

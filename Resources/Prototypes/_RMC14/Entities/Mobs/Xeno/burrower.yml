@@ -64,8 +64,10 @@
     range: 4
     plasmaCost: 100
     paralyzeTime: 2
+    slowBigInsteadOfStun: true
     slows: false
     sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
+    debuffsHurtXenosMore: false
   - type: XenoBurrow
   - type: MeleeWeapon
     damage:

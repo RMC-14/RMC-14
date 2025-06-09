@@ -10,7 +10,7 @@
   - ColonistEngi
   joinNotifyCrew: false
   startingGear: RMCGearForeconBase
-  hasIcon: false
+  hasIcon: true
   greeting: rmc-job-greeting-forecon
   playTimeTracker: RMCSurvivorForecon
   spawnMenuRoleName: FORECON Survivor (Base)

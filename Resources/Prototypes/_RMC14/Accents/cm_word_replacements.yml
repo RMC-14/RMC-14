@@ -15,6 +15,7 @@
     cm-chatsan-word-deltoids: cm-chatsan-replacement-deltoids
     cm-chatsan-word-xenoid: cm-chatsan-replacement-xenoid
     cm-chatsan-word-xenoids: cm-chatsan-replacement-xenoids
+    cm-chatsan-word-u: cm-chatsan-replacement-u
 
 - type: accent
   id: CMChatSanitizeMarine
@@ -159,4 +160,33 @@
     cm-chatsan-word-survivors: cm-chatsan-replacement-survivors
     cm-chatsan-word-surv: cm-chatsan-replacement-surv
     cm-chatsan-word-survs: cm-chatsan-replacement-survs
-
+    cm-chatsan-word-bro: cm-chatsan-replacement-bro
+    cm-chatsan-word-bruh: cm-chatsan-replacement-bruh
+    cm-chatsan-word-bvro: cm-chatsan-replacement-bvro
+    cm-chatsan-word-xro: cm-chatsan-replacement-xro
+    cm-chatsan-word-naur: cm-chatsan-replacement-naur
+    cm-chatsan-word-dancer: cm-chatsan-replacement-dancer
+    cm-chatsan-word-larba: cm-chatsan-replacement-larba
+    cm-chatsan-word-toob: cm-chatsan-replacement-toob
+    cm-chatsan-word-toober: cm-chatsan-replacement-toober
+    cm-chatsan-word-cooked: cm-chatsan-replacement-cooked
+    cm-chatsan-word-xooked: cm-chatsan-replacement-xooked
+    cm-chatsan-word-xibidi: cm-chatsan-replacement-xibidi
+    cm-chatsan-word-mcxonald: cm-chatsan-replacement-mcxonald
+    cm-chatsan-word-mcxonalds: cm-chatsan-replacement-mcxonalds
+    cm-chatsan-word-slop: cm-chatsan-replacement-slop
+    cm-chatsan-word-spam: cm-chatsan-replacement-spam
+    cm-chatsan-word-god: cm-chatsan-replacement-god
+    cm-chatsan-word-xod: cm-chatsan-replacement-xod
+    cm-chatsan-word-jesus: cm-chatsan-replacement-jesus
+    cm-chatsan-word-xesus: cm-chatsan-replacement-xesus
+    cm-chatsan-word-christ: cm-chatsan-replacement-christ
+    cm-chatsan-word-jesus-christ: cm-chatsan-replacement-christ
+    cm-chatsan-word-froot: cm-chatsan-replacement-froot
+    cm-chatsan-word-yung: cm-chatsan-replacement-yung
+    cm-chatsan-word-croosh: cm-chatsan-replacement-croosh
+    cm-chatsan-word-croosher: cm-chatsan-replacement-croosher
+    cm-chatsan-word-bald: cm-chatsan-replacement-bald
+    cm-chatsan-word-woyer: cm-chatsan-replacement-woyer
+    cm-chatsan-word-sigma: cm-chatsan-replacement-sigma
+    cm-chatsan-word-xigma: cm-chatsan-replacement-xigma

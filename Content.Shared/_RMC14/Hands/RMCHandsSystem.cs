@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Storage;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -86,25 +86,7 @@ public abstract class RMCHandsSystem : EntitySystem
         if (!args.CanInteract)
             return;
 
-        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
-            return;
-
         var user = args.User;
-
-        AlternativeVerb unequipVerb = new()
-        {
-            Text = "Unequip",
-            Act = () =>
-            {
-                if (_inventory.TryGetContainingSlot(ent.Owner, out slot) &&
-                    _inventory.TryUnequip(user, user, slot.Name, checkDoafter: true))
-                {
-                    _hands.TryPickupAnyHand(user, ent.Owner);
-                }
-            },
-        };
-
-        args.Verbs.Add(unequipVerb);
 
         if (!ent.Comp.CanToggleStorage)
             return;
@@ -133,6 +115,24 @@ public abstract class RMCHandsSystem : EntitySystem
         };
 
         args.Verbs.Add(switchStorageVerb);
+
+        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+            return;
+
+        AlternativeVerb unequipVerb = new()
+        {
+            Text = "Unequip",
+            Act = () =>
+            {
+                if (_inventory.TryGetContainingSlot(ent.Owner, out slot) &&
+                    _inventory.TryUnequip(user, user, slot.Name, checkDoafter: true))
+                {
+                    _hands.TryPickupAnyHand(user, ent.Owner);
+                }
+            },
+        };
+
+        args.Verbs.Add(unequipVerb);
     }
 
     private static RMCStorageEjectState GetNextState(RMCStorageEjectState current) =>
@@ -209,6 +209,12 @@ public abstract class RMCHandsSystem : EntitySystem
         {
             _storage.OpenStorageUI(item, user, storage, false, false);
             return true;
+        }
+
+        if (!_rmcStorage.CanEject(item, user, out var popup))
+        {
+            _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
+            return false;
         }
 
         if (eject.Whitelist != null)
