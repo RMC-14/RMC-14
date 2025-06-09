@@ -26,6 +26,29 @@
     tags:
     - RMCAmmoBox
 
+# Non-Deployable version (for small mag boxes like SOCOM/Buckshot)
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCSmallBoxMagazineBase
+  name: generic magazine box (? x ?)
+  description: A box of magazines.
+  components:
+  - type: Item
+    size: Huge
+  - type: ItemSlots
+  - type: Appearance
+  - type: RMCUnfoldCardboard
+    spawns:
+    - id: RMCSheetCardboard1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Tag
+    tags:
+    - RMCAmmoBox
+
 # Rifle Base
 - type: entity
   abstract: true
@@ -220,7 +243,7 @@
   # Small Shells Base
 - type: entity
   abstract: true
-  parent: RMCBoxMagazineBase
+  parent: RMCSmallBoxMagazineBase
   id: RMCBoxMagazineShellBaseSmall
   name: generic shell bundle box (? x ?)
   description: A small box of bundled shells.

@@ -837,7 +837,7 @@
         doAfter: 0.25
 
     # XM88
-    - to: RMCBox458SOCOMEmpty
+    - to: RMCBoxBullets458Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
