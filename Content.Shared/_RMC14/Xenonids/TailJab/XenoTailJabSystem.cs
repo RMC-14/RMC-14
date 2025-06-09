@@ -30,8 +30,6 @@ public sealed class XenoTailJabSystem : EntitySystem
     [Dependency] private readonly XenoRotateSystem _rotate = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoRotateSystem _rotate = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
