@@ -128,8 +128,8 @@
   components:
   - type: TacticalMapIcon
     icon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: aegis_ob_2
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: aegis_ob_2
   - type: TacticalMapTracked
   - type: XenoMapTracked
   - type: MarineMapTracked
