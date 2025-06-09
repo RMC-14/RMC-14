@@ -21,6 +21,8 @@
       Female: RMCFemaleFelinid
   - type: Speech
     allowedEmotes: ['Hiss', 'Meow', 'Mew', 'Growl', 'Purr']
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-felinid
 
 - type: entity
   parent: BaseSpeciesDummy

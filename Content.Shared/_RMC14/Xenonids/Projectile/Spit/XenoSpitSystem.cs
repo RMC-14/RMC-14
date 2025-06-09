@@ -197,7 +197,7 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -221,7 +221,7 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
 
         var target = args.Target;
-        if (_hive.FromSameHive(spit.Owner, target))
+        if (_hive.FromSameHive(spit.Owner, target) || HasComp<XenoComponent>(target))
         {
             QueueDel(spit);
             return;

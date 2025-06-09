@@ -6,11 +6,14 @@
   playTimeTracker: RMCJobSurvivorCommanderForecon
   ranks:
     RMCRankMajor: []
+  accessGroups:
+  - ColonistEngi
+  - ShipMasterAccess # TODO RMC14 here until we have the id console
   startingGear: RMCGearForeconCommander
+  spawnMenuRoleName: FORECON Commander (Survivor)
   supervisors: cm-job-supervisors-marine-high-command
   roleWeight: 0.25
   icon: "RMCJobIconForeconCommander"
-  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -67,7 +70,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointForeconCommander
-  name: commanding officer spawn point
+  name: FORECON Commander spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorForeconCommander

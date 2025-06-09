@@ -118,6 +118,8 @@
         - XenoHeavy
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
+  - type: FixedIdentity
+    name: cm-job-name-xeno-praetorian
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -217,7 +219,6 @@
     - type: RMCSlowdown
     - type: RMCSuperSlowdown
     - type: RMCRooted
-    - type: RMCDazed
   - type: XenoHighGallop
   - type: XenoHidden
 

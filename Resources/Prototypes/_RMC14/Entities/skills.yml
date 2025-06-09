@@ -97,6 +97,9 @@
   id: RMCSkillMedical
   name: Medical
   categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillDefinition
+    delayMultipliers: [ 1, 1, 1, 0.75, 0.35 ]
 
 - type: entity
   parent: RMCSkillBase

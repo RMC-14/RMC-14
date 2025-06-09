@@ -102,6 +102,11 @@
   - type: RMCCanBeFultoned
   - type: ReceiverXenoClaws
     minimumClawStrength: ImpossiblySharp
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 0
+    throwRange: 2
 
 - type: entity
   parent: RMCCrateBase
@@ -815,3 +820,36 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/trash_cart.rsi
+
+# Buildable crates, req cannot sell them
+- type: entity
+  parent: RMCCrateBase
+  id: RMCCrateMetalBuildable
+  suffix: Buildable, No Req Reward
+  components:
+  - type: RequisitionsCrate
+    reward: 0
+
+- type: entity
+  parent: RMCCrateMetalBuildable
+  id: RMCCrateWoodenBuildable
+  name: wooden crate
+  description: A wooden crate. Shoddily assembled, spacious and worthless on the ASRS.
+  suffix: Buildable, No Req Reward
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/woodcrate.rsi

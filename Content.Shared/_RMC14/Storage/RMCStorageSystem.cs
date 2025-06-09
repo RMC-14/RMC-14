@@ -42,12 +42,14 @@ public sealed class RMCStorageSystem : EntitySystem
     private readonly List<EntityUid> _toRemove = new();
     private readonly List<EntityUid> _toClose = new();
 
+    private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StorageComponent> _storageQuery;
 
     private readonly TimeSpan _stunStorage = TimeSpan.FromSeconds(4);
 
     public override void Initialize()
     {
+        _itemQuery = GetEntityQuery<ItemComponent>();
         _storageQuery = GetEntityQuery<StorageComponent>();
 
         SubscribeLocalEvent<StorageComponent, CMStorageItemFillEvent>(OnStorageFillItem);
@@ -342,6 +344,27 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
+    private bool CanEjectStoreSkill(Entity<StorageComponent?, StorageSkillRequiredComponent?> store, EntityUid? user, out LocId popup)
+    {
+        popup = default;
+        if (user == null)
+            return true;
+
+        if (!Resolve(store, ref store.Comp2, false) ||
+            !_storageQuery.Resolve(store, ref store.Comp1, false))
+        {
+            return true;
+        }
+
+        if (!_skills.HasAllSkills(user.Value, store.Comp2.Skills))
+        {
+            popup = Loc.GetString("cm-storage-unskilled");
+            return false;
+        }
+
+        return true;
+    }
+
     public bool TryGetLastItem(Entity<StorageComponent?> storage, out EntityUid item)
     {
         item = default;
@@ -407,6 +430,43 @@ public sealed class RMCStorageSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public bool CanEject(EntityUid storage, EntityUid user, out LocId popup)
+    {
+        if (!CanEjectStoreSkill(storage, user, out popup))
+            return false;
+
+        return true;
+    }
+
+    public int EstimateFreeColumns(Entity<StorageComponent?> storage)
+    {
+        if (!Resolve(storage, ref storage.Comp, false))
+            return 0;
+
+        // Since RMC14 storage is simplified we can make assumptions about how
+        // items are laid out and not allocate 100 lists just to check this
+        var columns = 0;
+        foreach (var grid in storage.Comp.Grid)
+        {
+            columns += (grid.Width + 1) * (grid.Height + 1 / 2);
+        }
+
+        foreach (var (item, _) in storage.Comp.StoredItems)
+        {
+            if (!_itemQuery.TryComp(item, out var itemComp))
+                continue;
+
+            var shapes = _item.GetItemShape(storage, (item, itemComp));
+            if (shapes.Count == 0)
+                continue;
+
+            var shape = shapes[0];
+            columns -= shape.Width;
+        }
+
+        return columns;
     }
 
     public override void Update(float frameTime)

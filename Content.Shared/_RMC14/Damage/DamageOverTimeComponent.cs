@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Physics;
@@ -43,6 +43,12 @@ public sealed partial class DamageOverTimeComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool AffectsCrit = true;
+
+    /// <summary>
+    /// Does bonus damage to xenos
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Acidic = true;
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<EmotePrototype>>? Emotes = new() { "Cough" };

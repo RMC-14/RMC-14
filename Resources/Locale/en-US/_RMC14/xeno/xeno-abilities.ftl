@@ -370,3 +370,6 @@ rmc-xeno-eviscerate-windup = {$xeno} begins digging in for a massive strike!
 
 rmc-xeno-eviscerate-windup-small-self = We begin digging in for a strike!
 rmc-xeno-eviscerate-windup-small = {$xeno} begins digging in for a strike!
+
+# Fling
+rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!

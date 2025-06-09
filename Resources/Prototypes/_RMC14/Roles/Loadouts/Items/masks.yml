@@ -105,6 +105,13 @@
     - RMCMaskNeckerchiefGreen
 
 - type: loadout
+  id: NeckerchiefWhiteRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskNeckerchiefWhite
+
+- type: loadout
   id: TornScarfBlackRMC
   cost: 2
   storage:

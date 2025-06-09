@@ -447,6 +447,14 @@ public sealed class OrbitalCannonSystem : EntitySystem
         firing.WarheadName = Name(warhead);
         firing.Squad = squad;
         firing.StartedAt = time;
+
+        if (TryComp(warhead, out OrbitalCannonWarheadComponent? warheadComp))
+        {
+            firing.FirstWarningRange = warheadComp.FirstWarningRange;
+            firing.SecondWarningRange = warheadComp.SecondWarningRange;
+            firing.ThirdWarningRange = warheadComp.ThirdWarningRange;
+        }
+
         Dirty(cannon, firing);
 
         _popup.PopupCursor("Orbital bombardment launched!", user);

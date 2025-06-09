@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -11,6 +12,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.CPR;
@@ -25,6 +27,9 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popups = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+
+    public static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
 
     // TODO RMC14 move this to a component
     [ValidatePrototypeId<DamageTypePrototype>]
@@ -175,10 +180,12 @@ public sealed class CPRSystem : EntitySystem
         if (!CanCPRPopup(performer, target, true, out _))
             return false;
 
-        EnsureComp<ReceivingCPRComponent>(target);
+        var cprComp = EnsureComp<ReceivingCPRComponent>(target);
 
-        // TODO RMC14 less time for skilled doctors
-        var doAfter = new DoAfterArgs(EntityManager, performer, TimeSpan.FromSeconds(4), new CPRDoAfterEvent(), performer, target)
+        // If the performer has skills in medical their CPR time will be reduced.
+        var delay = TimeSpan.FromSeconds(cprComp.CPRPerformingTime * _skills.GetSkillDelayMultiplier(performer, SkillType));
+
+        var doAfter = new DoAfterArgs(EntityManager, performer, delay, new CPRDoAfterEvent(), performer, target)
         {
             BreakOnMove = true,
             NeedHand = true,

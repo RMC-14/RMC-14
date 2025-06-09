@@ -12,6 +12,7 @@
   accessGroups:
   - Colonist
   - HospitalCorpsman
+  spawnMenuRoleName: SPP Specialist
   special:
   - !type:AddComponentSpecial
     components:

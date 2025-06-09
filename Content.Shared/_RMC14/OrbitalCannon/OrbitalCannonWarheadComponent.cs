@@ -12,6 +12,7 @@ public sealed partial class OrbitalCannonWarheadComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool IsAegis;
+
     public int FirstWarningRange = 30;
 
     [DataField, AutoNetworkedField]
