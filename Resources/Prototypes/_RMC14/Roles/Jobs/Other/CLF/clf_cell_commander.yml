@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCCLFCellCommander
-  name: CMCLFCellCommander
+  name: rmc-clf-cell-commander
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: CMJobCLFCellCommander
   ranks:
@@ -37,8 +37,8 @@
 
 - type: entity
   id: RMCRandomHumanoidCLFCellCommander
-  name: clf cell commander role
-  suffix: Role
+  name: clf ghost role cell commander
+  suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
@@ -47,11 +47,18 @@
     settings: RMCCLFCellCommander
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCCLFCellCommander
   components:
-  - type: RMCJobSpawner
-    job: CMCLFCellCommander
+  - type: GhostRole
+    name: rmc-ghost-role-clf-cell-commander
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFCellCommander
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearCLFCellCommander
@@ -63,7 +70,7 @@
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled # TODO RMC14
-    suitstorage: RMCSmartGun
+    suitstorage: RMCSmartGunCLF
     id: RMCIDCardCLFCellCommander # TODO RMC14
     belt: RMCMatebaBeltFilled # TODO RMC14
     pocket1: RMCPouchSurvivalFill

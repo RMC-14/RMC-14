@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCCLFSpecialist
-  name: RMCCLFSpecialist
+  name: rmc-clf-specialist
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: RMCJobCLFSpecialist
   ranks:
@@ -15,7 +15,7 @@
     - type: Skills
       skills:
         RMCSkillMedical: 1
-        RMCSkillCQC: 1
+        RMCSkillCqc: 1
         RMCSkillEngineer: 1
         RMCSkillLeadership: 1
         RMCSkillEndurance: 2
@@ -35,8 +35,8 @@
 
 - type: entity
   id: RMCRandomHumanoidCLFSpecialist
-  name: clf specialist role
-  suffix: Role
+  name: clf ghost role specialist
+  suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
@@ -45,11 +45,18 @@
     settings: RMCCLFSpecialist
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCCLFSpecialist
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-role-clf-specialist
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
     job: RMCCLFSpecialist
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearCLFSpecialist

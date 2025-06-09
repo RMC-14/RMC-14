@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCCLFMedic
-  name: RMCCLFMedic
+  name: rmc-clf-medic
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: RMCJobCLFMedic
   ranks:
@@ -29,8 +29,8 @@
 
 - type: entity
   id: RMCRandomHumanoidCLFMedic
-  name: clf medic role
-  suffix: Role
+  name: clf ghost role medic
+  suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
@@ -39,11 +39,18 @@
     settings: RMCCLFMedic
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCCLFMedic
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-role-clf-medic
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
     job: RMCCLFMedic
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearCLFMedic

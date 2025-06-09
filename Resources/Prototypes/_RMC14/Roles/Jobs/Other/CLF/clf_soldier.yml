@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMCLFSoldier
-  name: RMCCLFSoldier
+  id: RMCCLFSoldier
+  name: rmc-clf-soldier
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: CMJobCLFSoldier
   ranks:
@@ -33,8 +33,8 @@
 
 - type: entity
   id: RMCRandomHumanoidCLFSoldier
-  name: clf soldier role
-  suffix: Role
+  name: clf ghost role soldier
+  suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
@@ -43,11 +43,18 @@
     settings: RMCCLFSoldier
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCCLFSoldier
   components:
-  - type: RMCJobSpawner
-    job: CMCLFSoldier
+  - type: GhostRole
+    name: rmc-ghost-role-clf-soldier
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFSoldier
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearCLFSoldier

@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCCLFEngineer
-  name: RMCCLFEngineer
+  name: rmc-clf-engineer
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: RMCJobCLFEngineer
   ranks:
@@ -31,8 +31,8 @@
 
 - type: entity
   id: RMCRandomHumanoidCLFEngineer
-  name: clf engineer role
-  suffix: Role
+  name: clf ghost role engineer
+  suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
@@ -41,11 +41,18 @@
     settings: RMCCLFEngineer
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCCLFEngineer
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-role-clf-engineer
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
     job: RMCCLFEngineer
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearCLFEngineer
@@ -60,7 +67,7 @@
     gloves: CMHandsInsulated
     shoes: RMCShoesBrown
     id: RMCIDCardCLFEngineer
-    belt: CMBeltUtility
+    belt: CMBeltUtilityFilled
     back: RMCSatchelLightpackWelder
     pocket1: RMCPouchConstructionFillLowGrade
     pocket2: RMCPouchFirstAidInjectors
