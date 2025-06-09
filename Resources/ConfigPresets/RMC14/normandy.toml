@@ -10,3 +10,6 @@ tags = "lang:en,region:am_n_e,rp:high"
 
 [loki]
 name = "normandy"
+
+[rmc]
+planet_map_vote = false
