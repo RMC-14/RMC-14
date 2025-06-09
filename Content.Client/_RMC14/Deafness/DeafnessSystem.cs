@@ -55,7 +55,16 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
             if (player != uid)
                 continue;
 
-            if (!_statusEffects.TryGetTime(player, DeafKey, out var time))
+            (TimeSpan, TimeSpan)? time = null;
+            (TimeSpan, TimeSpan)? time2 = null;
+
+            if (!_statusEffects.TryGetTime(player, DeafKey, out time) && !_statusEffects.TryGetTime(player, "Unconscious", out time2))
+                continue;
+
+            if (time2 != null && (time == null || time.Value.Item2 < time2.Value.Item2))
+                time = time2.Value;
+
+            if (time == null)
                 continue;
 
             var statusTime = time.Value;

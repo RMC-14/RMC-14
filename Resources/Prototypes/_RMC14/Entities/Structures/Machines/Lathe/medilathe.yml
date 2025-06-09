@@ -129,10 +129,10 @@
   - CMSyringe
   - RMCDropper
   #    - RMC Spray bottle (500 plastic)
-  #    - Autoinjector (C-T) (300 Plastic)
-  #    - Autoinjector (C-S) (300 Plastic)
-  #    - Autoinjector (C-M) (300 Plastic)
-  #    - Autoinjector (C-L) (300 Plastic)
+  - RMCMedicAutoInjectorCustom5
+  - RMCMedicAutoInjectorCustom15
+  - RMCMedicAutoInjectorCustom30
+  - RMCMedicAutoInjectorCustom60
   - RMCMedicAutoInjectorEZ1
   - RMCMedicAutoInjectorEZ5
   - RMCMedicAutoInjectorEZ10
@@ -155,8 +155,8 @@
   - CMToxinAidKit
   - CMAdvFirstAidKit
   - CMFirstAidO2Kit
-  #    - Radiation First Aid Kit (2000 Plastic)
-  #    - Syringe Case (1000 Plastic)
+  - RMCRadiationAidKit
+  - RMCSyringeCase
   - RMCSurgicalTrayEmpty
   - RMCVialBox
   - RMCPouchReagentCanister

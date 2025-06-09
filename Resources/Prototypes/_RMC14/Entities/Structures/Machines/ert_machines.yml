@@ -1,0 +1,38 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerERTShuttle
+  name: ert shuttle spawner
+  suffix: Generic
+  description: Defines a location to spawn an ERT shuttle in.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_response_shuttle.yml"
+    offset: -0.5,-0.5
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleWeYa
+  suffix: PMC
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_pmc_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleSPP
+  suffix: SPP
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_spp_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleTSE
+  suffix: TSE
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_tse_shuttle.yml"

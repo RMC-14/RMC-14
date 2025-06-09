@@ -40,6 +40,9 @@
   id: ATVKeys
 
 - type: Tag
+  id: Bacon
+
+- type: Tag
   id: Balloon
 
 - type: Tag
@@ -203,6 +206,9 @@
 
 - type: Tag
   id: Cake
+
+- type: Tag
+  id: Chili
 
 - type: Tag
   id: CaneBlade

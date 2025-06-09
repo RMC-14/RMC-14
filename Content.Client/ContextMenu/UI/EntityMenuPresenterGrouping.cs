@@ -1,6 +1,6 @@
+using System.Linq;
 using Content.Shared.IdentityManagement;
 using Robust.Client.GameObjects;
-using System.Linq;
 
 namespace Content.Client.ContextMenu.UI
 {
@@ -18,7 +18,7 @@ namespace Content.Client.ContextMenu.UI
         {
             if (GroupingContextMenuType == 0)
             {
-                var newEntities = entities.GroupBy(e => Identity.Name(e, _entityManager)).ToList();
+                var newEntities = entities.GroupBy(e => Identity.Name(e, _entityManager, _playerManager.LocalEntity)).ToList();
                 return newEntities.Select(grp => grp.ToList()).ToList();
             }
             else

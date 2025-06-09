@@ -129,3 +129,12 @@
   - type: MachineBoard
     prototype: CMMicrowave
 #    # TODO RMC14 material requirements
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: RMCArmylatheMachineCircuitboard
+  name: armylathe machine board
+  description: A machine printed circuit board for an armylathe
+  components:
+    - type: MachineBoard
+      prototype: RMCArmylatheEmpty

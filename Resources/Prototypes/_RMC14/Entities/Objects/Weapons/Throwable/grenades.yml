@@ -47,7 +47,7 @@
     sprite: _RMC14/Objects/Weapons/Grenades/flashbang.rsi
   - type: RMCStunOnTrigger
     filters:
-    - stun: 2.5
+    - paralyze: 2.5
       whitelist:
         skills:
           RMCSkillPolice: 2

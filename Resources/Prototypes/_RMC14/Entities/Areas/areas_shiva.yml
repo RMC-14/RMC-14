@@ -23,6 +23,7 @@
   - type: Area
     linkedLz: dropship_lz1
     minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -35,6 +36,7 @@
   - type: Area
     linkedLz: dropship_lz2
     minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShivaExterior

@@ -12,6 +12,11 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
   - type: Gun
+    shotsPerBurst: 3
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
   - type: Tag
@@ -39,8 +44,23 @@
   - type: GunDamageModifier
     multiplier: 1.5
   - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 4
+    recoilUnwielded: 4
     baseFireRate: 1.111
     scatterWielded: 8
+    scatterUnwielded: 20
+    burstScatterMult: 5
+    burstFireRateMultiplier: 3 #This + 0.1332 = perfect
+    modifiers:
+      Burst:
+        fireDelay: 0.1332 #0.2664
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.1
     accuracyMultiplierUnwielded: 0.75
@@ -54,7 +74,6 @@
           - RMCAttachmentMatebaStandard
           - RMCAttachmentMatebaMarksman
           - RMCAttachmentMatebaSnubNose
-
       rmc-bslot-barrel:
        whitelist:
           tags:
@@ -97,11 +116,24 @@
         startingAttachable: RMCAttachmentMatebaStandardGolden
         whitelist:
           tags:
-          - RMCAttachmentRecoilCompensator
           - RMCAttachmentMatebaStandardGolden
           - RMCAttachmentMatebaMarksmanGolden
           - RMCAttachmentMatebaSnubNoseGolden
+      rmc-bslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.215, 0.19
+      rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
     camouflageVariations: {}
 

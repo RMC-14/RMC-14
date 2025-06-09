@@ -404,6 +404,9 @@
       "name": "tse_painspector"
     },
     {
+      "name": "tse_pasynth"
+    },
+    {
       "name": "pve_dynaengi"
     },
     {
@@ -420,6 +423,9 @@
     },
     {
       "name": "hudsquad_spec_anti_materiel_sniper"
+    },
+    {
+      "name": "hudsquad_rifleman"
     }
   ]
 }
