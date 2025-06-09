@@ -1,72 +1,79 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMMarineRaider
-  name: rmc-job-name-marine-raider
-  description: "" # TODO RMC14
-  playTimeTracker: CMJobMarineRaider
+  id: CMMarineRaiderLeader
+  name: rmc-job-name-marine-raider-leader
+  description: rmc-ghost-role-information-sof-description
+  playTimeTracker: CMJobMarineRaiderLeader
   ranks:
-    RMCRankStaffSergeant: [ ]
-  startingGear: RMCGearMarineRaider
+    RMCRankGunnerySergeant: [ ]
+  startingGear: RMCGearMarineRaiderLeader
   icon: RMCJobIconMarineRaider
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: MARSOC Raider
+  spawnMenuRoleName: MARSOC Raider Team Leader
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillCqc: 5
-        RMCSkillFireman: 2
+        RMCSkillFireman: 5
         RMCSkillEngineer: 2
         RMCSkillConstruction: 2
         RMCSkillFirearms: 2
+        RMCSkillLeadership: 1
         RMCSkillMedical: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillEndurance: 5
         RMCSkillJtac: 1
     - type: JobPrefix
-      prefix: rmc-job-prefix-marine-raider
+      prefix: rmc-job-prefix-marine-raider-leader
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: MarineOrders
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: hudsquad_soctl_a
+    - type: RMCPointing
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidMarineRaider
-  name: DEATHSQUAD marine raider ghost role
+  id: RMCRandomHumanoidMarineRaiderLead
+  name: DEATHSQUAD marine raider team leader ghost role
   suffix: Role
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCMarineRaider
+    settings: RMCMarineRaiderLeader
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCMarineRaider
+  id: RMCMarineRaiderLeader
   components:
   - type: GhostRole
-    name: rmc-job-name-marine-raider
+    name: rmc-job-name-marine-raider-leader
     description: rmc-ghost-role-information-sof-description
     rules: rmc-ghost-role-information-sof-rules
     reregister: false
-    job: CMMarineRaider
+    job: CMMarineRaiderLeader
     raffle:
       settings: short
     requirements:
     - !type:RoleTimeRequirement
-      role: CMJobRifleman
+      role: CMJobSquadLeader
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSOF
 
 - type: startingGear
-  id: RMCGearMarineRaider
+  id: RMCGearMarineRaiderLeader
   equipment:
     head: RMCArmorHelmetMARSOC
     mask: RMCMaskBalaclavaMARSOC
@@ -76,7 +83,7 @@
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponRifleXM40
-    id: RMCDogtagMarineRaider
+    id: RMCDogtagMarineRaiderLeader
     belt: RMCWeaponShotgunXM38Filled
     back: RMCSatchelMARSOC
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
@@ -86,19 +93,19 @@
     - RMCVisorNightVision # TODO RMC14
 
 - type: playTimeTracker
-  id: CMJobMarineRaider
+  id: CMJobMarineRaiderLeader
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconMarineRaider
+  id: RMCJobIconMarineRaiderLeader
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_soc
+    state: hudsquad_soctl
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: RMCDogtagMarineRaider
-  name: Marine Raider's dogtags
+  id: RMCDogtagMarineRaiderLeader
+  name: Marine Raider Team Leader's dogtags
   components:
   - type: PresetIdCard
-    job: CMMarineRaider
+    job: CMMarineRaiderLeader
