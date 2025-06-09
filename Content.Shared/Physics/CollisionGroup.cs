@@ -92,7 +92,4 @@ public enum CollisionGroup
     FullTileLayer = Opaque | HighImpassable | MidImpassable | LowImpassable | BulletImpassable | InteractImpassable,
 
     SubfloorMask = Impassable | LowImpassable,
-
-    CustomBoxMask = Impassable | HighImpassable | MidImpassable | LowImpassable | BulletImpassable | InteractImpassable,
-    CustomBoxLayer = Opaque | Impassable | HighImpassable | MidImpassable | LowImpassable | BulletImpassable | InteractImpassable,
 }
