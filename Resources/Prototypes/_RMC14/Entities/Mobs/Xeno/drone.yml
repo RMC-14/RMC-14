@@ -96,6 +96,8 @@
     prefix: drone
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-drone
 
 - type: entity
   parent: CMXenoDroneBase

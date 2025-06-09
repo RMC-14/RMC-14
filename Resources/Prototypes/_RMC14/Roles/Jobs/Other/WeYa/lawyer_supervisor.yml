@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA Corporate Executive Supervisor
   special:
   - !type:AddComponentSpecial
     components:

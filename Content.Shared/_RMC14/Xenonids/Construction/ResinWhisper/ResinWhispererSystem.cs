@@ -70,7 +70,7 @@ public sealed class ResinWhispererSystem : EntitySystem
         if (!Resolve(user, ref user.Comp, false))
             return false;
 
-        if (!_weeds.IsOnWeeds(user.Owner))
+        if (!_weeds.IsOnFriendlyWeeds(user.Owner))
         {
             if (doPopup)
                 _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), user, user);
@@ -111,7 +111,7 @@ public sealed class ResinWhispererSystem : EntitySystem
             return;
         }
 
-        if (!_weeds.IsOnWeeds(ent.Owner))
+        if (!_weeds.IsOnFriendlyWeeds(ent.Owner))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), ent, ent);
             return;

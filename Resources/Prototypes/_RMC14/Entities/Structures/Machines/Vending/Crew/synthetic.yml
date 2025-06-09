@@ -143,6 +143,16 @@
       - id: CMMaskSterile
 
 - type: entity
+  parent: ColMarTechCrewSynthetic
+  id: ColMarTechCrewSyntheticColony
+  name: ColMarTech Synthetic Equipment Rack
+  suffix: Colony Synth Access
+  components:
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSyntheticColony
+
+- type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSyntheticGear
   name: ColMarTech Synthetic Auxiliary Gear Rack
@@ -198,7 +208,8 @@
         points: 6
       - id: CMFirstAidO2KitFilled
         points: 6
-      # /obj/item/storage/firstaid/rad - 6 Points
+      - id: RMCRadiationAidKit
+        points: 6
     - name: Medical Supplies
       entries:
       - id: CMBurnKit1

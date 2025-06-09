@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMBaseStructure
   id: RMCDropshipAttachmentBase
@@ -41,4 +41,6 @@
     virtualRight: RMCVirtualDropshipGearRight
     virtualLeft: RMCVirtualDropshipGearLeft
   - type: Item
+  - type: XenoCrusherChargable
+    instantDestroy: true
 # TODO RMC14 make these climbable when we have single climb technology

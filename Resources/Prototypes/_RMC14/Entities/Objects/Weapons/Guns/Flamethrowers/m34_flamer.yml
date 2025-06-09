@@ -154,6 +154,8 @@
     maxFillLevels: 2
     fillBaseName: flametank_custom_strip
   - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
 
 - type: entity
   parent: RMCGunCaseBase

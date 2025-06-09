@@ -19,9 +19,10 @@ cm-job-description-executive-officer = You are second in command aboard the ship
 cm-job-prefix-executive-officer = XO
 CMJobExecutiveOfficer = Executive Officer
 
-# Special forces
-rmc-job-prefix-forecon = FORECON
-rmc-job-prefix-forecon-co = FORECON Cmdr.
+# Special operation capable
+rmc-job-prefix-forecon-marksman = MKSMN
+rmc-job-prefix-forecon-support-tech = SPT
+rmc-job-prefix-forecon-co = Cmdr.
 
 # Admin only right now.
 cm-job-name-high-command = High Command

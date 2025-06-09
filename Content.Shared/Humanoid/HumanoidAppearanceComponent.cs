@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Inventory;
@@ -10,26 +11,26 @@ using Robust.Shared.Utility;
 namespace Content.Shared.Humanoid;
 
 [NetworkedComponent, RegisterComponent, AutoGenerateComponentState(true)]
-public sealed partial class HumanoidAppearanceComponent : Component
+public sealed partial class HumanoidAppearanceComponent : Component, IRMCHumanoidAppearance
 {
-    public MarkingSet ClientOldMarkings = new();
+    public MarkingSet ClientOldMarkings { get; set; } = new();
 
     [DataField, AutoNetworkedField]
-    public MarkingSet MarkingSet = new();
+    public MarkingSet MarkingSet { get; set; } = new();
 
     [DataField]
-    public Dictionary<HumanoidVisualLayers, HumanoidSpeciesSpriteLayer> BaseLayers = new();
+    public Dictionary<HumanoidVisualLayers, HumanoidSpeciesSpriteLayer> BaseLayers { get; set; } = new();
 
     [DataField, AutoNetworkedField]
-    public HashSet<HumanoidVisualLayers> PermanentlyHidden = new();
+    public HashSet<HumanoidVisualLayers> PermanentlyHidden { get; set; } = new();
 
     // Couldn't these be somewhere else?
 
     [DataField, AutoNetworkedField]
-    public Gender Gender;
+    public Gender Gender { get; set; }
 
     [DataField, AutoNetworkedField]
-    public int Age = 18;
+    public int Age { get; set; } = 18;
 
     /// <summary>
     ///     Any custom base layers this humanoid might have. See:
@@ -38,7 +39,7 @@ public sealed partial class HumanoidAppearanceComponent : Component
     ///     all layer settings.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<HumanoidVisualLayers, CustomBaseLayerInfo> CustomBaseLayers = new();
+    public Dictionary<HumanoidVisualLayers, CustomBaseLayerInfo> CustomBaseLayers { get; set; } = new();
 
     /// <summary>
     ///     Current species. Dictates things like base body sprites,
@@ -65,40 +66,40 @@ public sealed partial class HumanoidAppearanceComponent : Component
     ///     sprite on this humanoid layer, and any markings that sit above it.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<HumanoidVisualLayers, SlotFlags> HiddenLayers = new();
+    public Dictionary<HumanoidVisualLayers, SlotFlags> HiddenLayers { get; set; } = new();
 
     [DataField, AutoNetworkedField]
-    public Sex Sex = Sex.Male;
+    public Sex Sex { get; set; } = Sex.Male;
 
     [DataField, AutoNetworkedField]
-    public Color EyeColor = Color.Brown;
+    public Color EyeColor { get; set; } = Color.Brown;
 
     /// <summary>
     ///     Hair color of this humanoid. Used to avoid looping through all markings
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    public Color? CachedHairColor;
+    public Color? CachedHairColor { get; set; }
 
     /// <summary>
     ///     Facial Hair color of this humanoid. Used to avoid looping through all markings
     /// </summary>
     [ViewVariables(VVAccess.ReadOnly)]
-    public Color? CachedFacialHairColor;
+    public Color? CachedFacialHairColor { get; set; }
 
     /// <summary>
     ///     Which layers of this humanoid that should be hidden on equipping a corresponding item..
     /// </summary>
     [DataField]
-    public HashSet<HumanoidVisualLayers> HideLayersOnEquip = [HumanoidVisualLayers.Hair];
+    public HashSet<HumanoidVisualLayers> HideLayersOnEquip { get; set; } = [HumanoidVisualLayers.Hair];
 
     /// <summary>
     ///     Which markings the humanoid defaults to when nudity is toggled off.
     /// </summary>
     [DataField]
-    public ProtoId<MarkingPrototype>? UndergarmentTop = new ProtoId<MarkingPrototype>("UndergarmentTopTanktop");
+    public ProtoId<MarkingPrototype>? UndergarmentTop { get; set; } = new ProtoId<MarkingPrototype>("UndergarmentTopTanktop");
 
     [DataField]
-    public ProtoId<MarkingPrototype>? UndergarmentBottom = new ProtoId<MarkingPrototype>("UndergarmentBottomBoxers");
+    public ProtoId<MarkingPrototype>? UndergarmentBottom { get; set; } = new ProtoId<MarkingPrototype>("UndergarmentBottomBoxers");
 }
 
 [DataDefinition]
