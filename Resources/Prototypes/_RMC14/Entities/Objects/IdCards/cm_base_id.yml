@@ -213,3 +213,12 @@
   - type: FactionFrequencies
     channels:
     - Colony
+
+- type: entity
+  id: FactionTSE
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+    - TSE

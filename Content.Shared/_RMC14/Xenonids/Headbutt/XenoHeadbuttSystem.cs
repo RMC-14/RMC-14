@@ -68,7 +68,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         _rmcPulling.TryStopAllPullsFromAndOn(xeno);

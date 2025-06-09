@@ -5019,8 +5019,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/6624
 - author: Timemaster99
   changes:
-  - message: Pill canisters can now toggle storage ejection, and can be used while
-      nested inside storage.
+  - message: Clicking a pill canister within a medical belt now pops out a pill.
     type: Tweak
   id: 1824
   time: '2025-06-07T03:38:38.0000000+00:00'
@@ -5163,14 +5162,6 @@
   id: 1836
   time: '2025-06-08T12:08:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6646
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Corporate survivor now ranks up from sum of time in liaison and time
-      in corporate survivor.
-    type: Tweak
-  id: 1837
-  time: '2025-06-08T12:09:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6550
 - author: Dutch-VanDerLinde
   changes:
   - message: Added a 70 hour playtime reward for security survivors, senior officer

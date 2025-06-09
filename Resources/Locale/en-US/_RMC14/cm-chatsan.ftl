@@ -1,6 +1,3 @@
-cm-chatsan-word-u = u
-cm-chatsan-replacement-u = you
-
 cm-chatsan-word-deltard = deltard
 cm-chatsan-replacement-deltard = delta
 
@@ -578,7 +575,7 @@ cm-chatsan-word-gun = gun
 cm-chatsan-replacement-rifle = spitter
 
 cm-chatsan-word-rifles = rifles
-cm-chatsan-word-gun = guns
+cm-chatsan-word-guns = guns
 cm-chatsan-replacement-rifles = spitters
 
 cm-chatsan-word-pistol = pistol

@@ -9,7 +9,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System;
 
 namespace Content.Shared._RMC14.Xenonids.Paralyzing;
 
@@ -37,7 +36,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;

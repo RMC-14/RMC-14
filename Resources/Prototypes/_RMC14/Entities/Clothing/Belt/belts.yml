@@ -364,6 +364,9 @@
       - Pill
       - RMCLighter
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCBeltMedical
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -1462,3 +1465,6 @@
 
 - type: Tag
   id: RMCNailgunHolster
+
+- type: Tag
+  id: RMCBeltMedical

@@ -152,6 +152,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         ent.Comp.Spread.Clear();
+        Dirty(ent);
     }
 
     private void OnWeedsMapInit(Entity<XenoWeedsComponent> ent, ref MapInitEvent args)
