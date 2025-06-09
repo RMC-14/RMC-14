@@ -180,7 +180,7 @@
   suffix: Brown
   components:
   - type: Sprite
-    color: "#b3aa9b"
+    color: "#887362"
 
 - type: entity
   parent: RMCCurtainColourableTransparentOpenAlt
@@ -188,7 +188,7 @@
   suffix: Brown, Open
   components:
   - type: Sprite
-    color: "#b3aa9b"
+    color: "#887362"
 
 # Blue
 
@@ -206,7 +206,7 @@
   suffix: Desat Blue, Open
   components:
   - type: Sprite
-    color: "#687d89"
+    color: "#788685"
 
 - type: entity
   parent: RMCCurtainColourableTransparentAlt
@@ -222,7 +222,7 @@
   suffix: Blue, Open
   components:
   - type: Sprite
-    color: "#788685"
+    color: "#687d89"
 
 # Green
 

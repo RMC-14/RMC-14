@@ -2314,6 +2314,11 @@
     state: security_checkpoint_west
 
 - type: entity
+  parent: RMCAreaLv759IndoorsWySecurityCheckpointWest
+  id: RMCAreaLv759IndoorsWySecurityCheckpointWestCaves
+  name: Weston-Yamada Security Checkpoint - Caverns Entrance
+
+- type: entity
   parent: RMCAreaLv759IndoorsWySecurity
   id: RMCAreaLv759IndoorsWySecurityCheckpointNorthwest
   name: Weston-Yamada Security Checkpoint - North West

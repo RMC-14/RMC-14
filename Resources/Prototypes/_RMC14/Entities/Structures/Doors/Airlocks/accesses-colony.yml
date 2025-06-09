@@ -123,3 +123,76 @@
   components:
   - type: AccessReader
     access: [["CMAccessColonyCommand"]] # TODO RMC14 Research and WeYa Research
+
+# PVE
+
+- type: entity
+  parent: CMAirlockGlassSecurity
+  id: RMCAirlockGlassSecurityLockedTSEPA
+  suffix: TSEPA, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"], ["CMAccessColonyCommand"]]
+
+- type: entity
+  parent: CMAirlockSecurity
+  id: RMCAirlockSecurityLockedTSEPA
+  suffix: TSEPA, Colony, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"], ["CMAccessColonyCommand"]]
+
+- type: entity
+  parent: RMCAirlockGlassSecurityLockedTSEPA
+  id: RMCAirlockGlassSecurityLockedTSEPAAlt
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_personal_door_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlassSecurity
+  id: RMCAirlockGlassSecurityLockedTSEPABrig
+  suffix: TSEPA Brig, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPABrig"], ["CMAccessColonyCommand"]]
+
+- type: entity
+  parent: CMDoubleDoorSecurityGlass
+  id: RMCDoubleDoorSecurityGlassLockedTSEPA
+  suffix: TSEPA, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessTSEPA" ], [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: RMCDoubleDoorSecurityGlassLockedTSEPA
+  id: RMCDoubleDoorSecurityGlassLockedTSEPAAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_glass.rsi
+
+- type: entity
+  parent: CMAirlockMaint
+  id: RMCAirlockMaintLockedTSEPA
+  suffix: TSEPA, Maint, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"], ["CMAccessColonyCommand"]]
+
+- type: entity
+  parent: RMCAirlockHybrisaPersonal
+  id: RMCAirlockHybrisaPersonalLockedTSEPA
+  suffix: TSEPA, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"], ["CMAccessColonyCommand"]]
+
+- type: entity
+  parent: RMCAirlockHybrisaPersonal
+  id: RMCAirlockHybrisaPersonalLockedTSEPABrig
+  suffix: TSEPA Brig, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPABrig"], ["CMAccessColonyCommand"]]
