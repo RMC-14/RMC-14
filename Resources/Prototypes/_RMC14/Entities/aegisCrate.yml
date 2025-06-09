@@ -1,7 +1,7 @@
 - type: entity
   id: AegisBox
-  name: Aegis Secure Crate
-  description: A secure storage crate for transportation of Aegis equipment. It is locked and requires an Aegis ID card to open.
+  name: AEGIS Secure Crate
+  description: A secure storage crate for transportation of AEGIS equipment. It is locked and requires an AEGIS ID card to open.
   components:
     - type: Sprite
       sprite: _RMC14/Secure-Box.rsi

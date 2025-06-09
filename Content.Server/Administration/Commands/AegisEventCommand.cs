@@ -14,7 +14,7 @@ namespace Content.Server.Administration.Commands;
 public sealed class AegisEventCommand : IConsoleCommand
 {
     public string Command => "aegisevent";
-    public string Description => "Announces an Aegis event to both marines and xenos and sends an item through ASRS.";
+    public string Description => "Announces the AEGIS event to both marines and xenos and sends an item through ASRS.";
     public string Help => $"Usage: {Command} <message>";
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
