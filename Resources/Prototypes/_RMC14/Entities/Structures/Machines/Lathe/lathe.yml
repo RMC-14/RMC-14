@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ BaseMachinePowered, RMCConstructibleMachine ]
   id: CMAutolathe
   name: autolathe
@@ -109,7 +109,7 @@
   - CMWrench
   - CMHeadset
   - CMRadioHandheld
-  #    - Welding mask (3000 metal, 1000 glass)
+  #    - Welding mask (3750 metal, 1250 glass)
   - CMSheetGlassReinforced
   - CMRodMetal
   - RMCKitchenKnife
