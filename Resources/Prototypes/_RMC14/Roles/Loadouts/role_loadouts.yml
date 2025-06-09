@@ -522,13 +522,13 @@
   - PaperworkRMC
   - RecreationalRMC
   - PlushiesRMC
-  - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - RMCCorrespondentLoadoutGroup
 
 - type: roleLoadout
   id: JobCMLiaison

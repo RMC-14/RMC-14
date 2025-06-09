@@ -20,6 +20,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: Correspondent
     - type: RMCUserBulkyArmorIncapable
     - type: Skills
       skills:
