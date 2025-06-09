@@ -21,7 +21,7 @@ public sealed partial class OrbitalCannonComponent : Component
         ["RMCOrbitalCannonWarheadExplosive", "RMCOrbitalCannonWarheadIncendiary", "RMCOrbitalCannonWarheadCluster", "RMCOrbitalCannonWarheadAegis"];
 
     [DataField, AutoNetworkedField]
-    public int[] PossibleFuelRequirements = [4, 5, 6];
+    public int[] PossibleFuelRequirements = [4, 5, 6, 6];
 
     [DataField, AutoNetworkedField]
     public List<WarheadFuelRequirement> FuelRequirements = new();
