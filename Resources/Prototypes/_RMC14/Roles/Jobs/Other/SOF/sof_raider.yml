@@ -51,23 +51,22 @@
   id: RMCMarineRaider
   components:
   - type: GhostRole
-    name: rmc-ghost-name-bureau-marshal
-    description: rmc-ghost-role-information-bureau-marshal-description
-    rules: rmc-ghost-role-information-bureau-rules
+    name: rmc-job-name-marine-raider
+    description: ""
+    rules: ""
     reregister: false
-    job: CMBureauMarshal
+    job: CMMarineRaider
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  - type: RMCJobSpawner
-    job: CMMarineRaider
+    squad: SquadSOF
 
 - type: startingGear
   id: RMCGearMarineRaider
   equipment:
     head: RMCArmorHelmetMARSOC
     mask: RMCMaskBalaclava # TODO RMC14
-    ears: RMCHeadsetDistressDukes # TODO RMC14
+    ears: RMCHeadsetMARSOC
     jumpsuit: RMCJumpsuitMarsocWebbingBuckshot
     outerClothing: RMCArmorMARSOCXM40
     gloves: CMHandsBlackMarine
@@ -78,8 +77,9 @@
     back: CMSatchelMarine
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
     pocket2: RMCPouchToolsSocMarineRaiderFill
-  inhand:
-  - RMCVisorNightVision # TODO RMC14
+  storage:
+    back:
+    - RMCVisorNightVision # TODO RMC14
 
 - type: playTimeTracker
   id: CMJobMarineRaider

@@ -118,3 +118,16 @@
   - type: RMCHeadset
     channels:
     - MarineForecon
+
+# For MARSOC
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetMARSOC
+  name: UNMC SOF headset
+  description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeySOF
+  - type: GrantMarineIcons
