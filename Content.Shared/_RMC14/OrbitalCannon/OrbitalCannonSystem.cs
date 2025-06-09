@@ -475,10 +475,22 @@ public sealed class OrbitalCannonSystem : EntitySystem
         while (firingQuery.MoveNext(out var uid, out var firing, out var cannon))
         {
             if (!_rmcPlanet.TryPlanetToCoordinates(firing.Coordinates, out var planetCoordinates))
-            {
-                RemCompDeferred<OrbitalCannonFiringComponent>(uid);
                 continue;
+            var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
+
+            // Get warhead and its component once per loop
+            OrbitalCannonWarheadComponent? warheadComp = null;
+            if (_container.TryGetContainer(uid, cannon.WarheadContainer, out var warheadContainer) &&
+                warheadContainer.ContainedEntities.Count > 0)
+            {
+                var warheadUid = warheadContainer.ContainedEntities[0];
+                TryComp(warheadUid, out warheadComp);
             }
+
+            // Set warning ranges (default if null)
+            int warn1 = warheadComp?.FirstWarningRange ?? 30;
+            int warn2 = warheadComp?.SecondWarningRange ?? 25;
+            int warn3 = warheadComp?.ThirdWarningRange ?? 15;
 
             if (!firing.Alerted && time > firing.StartedAt + firing.AlertDelay)
             {
@@ -522,25 +534,38 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 Dirty(uid, firing);
 
                 _audio.PlayPvs(cannon.FireSound, uid);
-
-                var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
                 _audio.PlayPvs(cannon.TravelSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(75));
 
-                _mortar.PopupWarning(planetCoordinates, firing.FirstWarningRange, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
+                _mortar.PopupWarning(planetCoordinates, warn1, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
             }
 
             if (!firing.WarnedOne && time > firing.StartedAt + firing.WarnOneDelay)
             {
                 firing.WarnedOne = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, firing.SecondWarningRange, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
+                _mortar.PopupWarning(planetCoordinates, warn2, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
             }
 
             if (!firing.WarnedTwo && time > firing.StartedAt + firing.WarnTwoDelay)
             {
                 firing.WarnedTwo = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, firing.ThirdWarningRange, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+                _mortar.PopupWarning(planetCoordinates, warn3, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+            }
+
+            if (!firing.AegisBoomed && time > firing.StartedAt + firing.AegisBoomDelay)
+            {
+                firing.AegisBoomed = true;
+                Dirty(uid, firing);
+
+                var cannonEnt = new Entity<OrbitalCannonComponent>(uid, cannon);
+                if (CannonHasWarhead(cannonEnt, out var foundWarhead) &&
+                    TryComp(foundWarhead, out OrbitalCannonWarheadComponent? foundWarheadComp) &&
+                    foundWarheadComp.IsAegis)
+                {
+                    _audio.PlayPvs(cannon.AegisBoomSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(50));
+                    _rmcChat.ChatMessageToMany("[color=yellow]DEBUG: Aegis boom sound triggered[/color]", "[color=yellow]DEBUG: Aegis boom sound triggered[/color]", Filter.Broadcast(), ChatChannel.Radio);
+                }
             }
 
             if (!firing.Impacted && time > firing.StartedAt + firing.ImpactDelay)
@@ -552,20 +577,20 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
                 var cannonEnt = new Entity<OrbitalCannonComponent>(uid, cannon);
                 var fuel = CannonGetFuel(cannonEnt);
-                if (CannonHasWarhead(cannonEnt, out var warhead))
+                if (CannonHasWarhead(cannonEnt, out var foundWarhead))
                 {
-                    var ev = new OrbitalBombardmentFireEvent(cannonEnt, warhead, fuel, planetCoordinates);
-                    RaiseLocalEvent(warhead, ref ev);
+                    var ev = new OrbitalBombardmentFireEvent(cannonEnt, foundWarhead, fuel, planetCoordinates);
+                    RaiseLocalEvent(foundWarhead, ref ev);
                 }
 
                 CannonStatusChanged(cannonEnt);
                 RemCompDeferred<OrbitalCannonFiringComponent>(uid);
 
-                if (_container.TryGetContainer(uid, cannon.FuelContainer, out var fuelContainer))
-                    _container.CleanContainer(fuelContainer);
+                if (_container.TryGetContainer(uid, cannon.FuelContainer, out var foundFuelContainer))
+                    _container.CleanContainer(foundFuelContainer);
 
-                if (_container.TryGetContainer(uid, cannon.WarheadContainer, out var warheadContainer))
-                    _container.CleanContainer(warheadContainer);
+                if (_container.TryGetContainer(uid, cannon.WarheadContainer, out var foundWarheadContainer))
+                    _container.CleanContainer(foundWarheadContainer);
             }
         }
 

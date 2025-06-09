@@ -52,6 +52,11 @@ public sealed partial class OrbitalCannonFiringComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ImpactDelay = TimeSpan.FromSeconds(24);
 
+    public TimeSpan AegisBoomDelay => ImpactDelay - TimeSpan.FromSeconds(4.5);
+
+    [DataField, AutoNetworkedField]
+    public bool AegisBoomed;
+
     [DataField, AutoNetworkedField]
     public bool Impacted;
 
