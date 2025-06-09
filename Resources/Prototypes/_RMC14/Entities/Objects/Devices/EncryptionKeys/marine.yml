@@ -103,7 +103,8 @@
     - MarineEngineer
     - MarineIntel
     - MarineJTAC
-    defaultChannel: MarineCommand
+    - MarineHighCommand
+    defaultChannel: MarineHighCommand
   - type: Sprite
     state: binary_key
 

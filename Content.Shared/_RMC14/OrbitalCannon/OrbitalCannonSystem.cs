@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
@@ -48,6 +49,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -541,6 +543,22 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 firing.WarnedTwo = true;
                 Dirty(uid, firing);
                 _mortar.PopupWarning(planetCoordinates, firing.ThirdWarningRange, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+            }
+
+            if (!firing.AegisBoomed && time > firing.StartedAt + firing.AegisBoomDelay)
+            {
+                firing.AegisBoomed = true;
+                Dirty(uid, firing);
+
+                if (CannonHasWarhead((uid, cannon), out var foundWarhead) &&
+                    TryComp(foundWarhead, out OrbitalCannonWarheadComponent? foundWarheadComp) &&
+                    foundWarheadComp.IsAegis)
+                {
+                    var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
+                    var sound = _audio.PlayPvs(cannon.AegisBoomSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(300));
+                    if (sound != null)
+                        _rmcPvs.AddGlobalOverride(sound.Value.Entity);
+                }
             }
 
             if (!firing.Impacted && time > firing.StartedAt + firing.ImpactDelay)

@@ -263,3 +263,22 @@
   components:
   - type: PresetIdCard
     job: RMCJobSyntheticColony
+
+
+- type: entity
+  id: RMCIDCardAegis
+  name: Aegis Access Badge
+  description: High-Level Aegis Access Badge, granting access to many of their restricted areas and equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: keycard
+  - type: Item
+  - type: Clothing
+    slots:
+      - idcard
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Access
+    groups:
+      - CMAccessAegis

@@ -21,6 +21,13 @@
       key_slots:
       - CMEncryptionKeyColony
 
+# For CLF
+- type: entity
+  parent: RMCHeadsetColonyIcons
+  id: RMCHeadsetDistressCLF
+  name: CLF headset
+  description: A special headset used by small groups of trained operatives. Or terrorists.
+
 # For Bureau Marshals
 - type: entity
   parent: RMCHeadsetIconsCMB
@@ -195,3 +202,18 @@
     trackerModes:
     - FORECONCommandingOfficer
     - SquadLeader
+
+# For MARSOC
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetMARSOC
+  name: UNMC SOF headset
+  description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeySOF
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker

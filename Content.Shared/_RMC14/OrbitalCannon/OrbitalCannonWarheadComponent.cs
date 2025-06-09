@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+﻿﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.OrbitalCannon;
@@ -11,6 +11,8 @@ public sealed partial class OrbitalCannonWarheadComponent : Component
     public EntProtoId<OrbitalCannonExplosionComponent> Explosion;
 
     [DataField, AutoNetworkedField]
+    public bool IsAegis;
+
     public int FirstWarningRange = 30;
 
     [DataField, AutoNetworkedField]

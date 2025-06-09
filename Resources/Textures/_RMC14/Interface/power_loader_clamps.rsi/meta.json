@@ -50,6 +50,12 @@
       "name": "ob_warhead_right"
     },
     {
+      "name": "ob_warhead_aegis"
+    },
+    {
+      "name": "ob_warhead_aegis_right"
+    },
+    {
       "name": "vehicle_module"
     },
     {
