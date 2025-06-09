@@ -9,6 +9,7 @@
         - state: aegis_crate
           map: ["enum.AegisCrateVisualLayers.Base"]
     - type: AegisCrate
+      openSound: /Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg
     - type: InteractionOutline
     - type: Clickable
     - type: Physics
@@ -33,6 +34,4 @@
       isCorrodible: False
     - type: DestroyedByExplosionType
       exlosion: RMCOBXenoTunnel
-    - type: Audio
-      sound:
-        path: /Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg
+

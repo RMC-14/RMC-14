@@ -3,6 +3,7 @@ using Robust.Shared.GameStates;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Storage;
 using System;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.AegisCrate;
 
@@ -28,6 +29,12 @@ public sealed partial class AegisCrateComponent : Component
 
     [NonSerialized]
     public EntityUid? StorageUid;
+
+    [DataField("openSound")]
+    public SoundSpecifier? OpenSound = new SoundPathSpecifier("/Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg");
+
+    [DataField("closeSound")]
+    public SoundSpecifier? CloseSound;
 }
 
 public enum AegisCrateState
