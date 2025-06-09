@@ -132,6 +132,9 @@
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionAegis
     isAegis: true
+    firstWarningRange: 60
+    secondWarningRange: 55
+    thirdWarningRange: 45
   - type: PowerLoaderGrabbable
     virtualRight: RMCVirtualWarheadRightAegis
     virtualLeft: RMCVirtualWarheadLeftAegis

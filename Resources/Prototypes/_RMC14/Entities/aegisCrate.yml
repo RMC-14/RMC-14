@@ -33,5 +33,5 @@
     - type: Corrodible
       isCorrodible: False
     - type: DestroyedByExplosionType
-      exlosion: RMCOBXenoTunnel
+      explosion: RMCOBXenoTunnel
 
