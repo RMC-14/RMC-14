@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Engineer
   special:
   - !type:AddComponentSpecial
     components:
