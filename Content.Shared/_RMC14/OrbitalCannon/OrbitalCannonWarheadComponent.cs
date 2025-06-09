@@ -9,4 +9,13 @@ public sealed partial class OrbitalCannonWarheadComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId<OrbitalCannonExplosionComponent> Explosion;
+
+    [DataField, AutoNetworkedField]
+    public int FirstWarningRange = 30;
+
+    [DataField, AutoNetworkedField]
+    public int SecondWarningRange = 25;
+
+    [DataField, AutoNetworkedField]
+    public int ThirdWarningRange = 15;
 }
