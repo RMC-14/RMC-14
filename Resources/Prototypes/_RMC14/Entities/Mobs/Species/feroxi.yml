@@ -36,6 +36,8 @@
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
       - map: [ "enum.HumanoidVisualLayers.Underwear" ]
       - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - shader: StencilClear
         sprite: Mobs/Species/Human/parts.rsi #PJB on stencil clear being on the left leg: "...this is 'fine'" -https://github.com/space-wizards/space-station-14/pull/12217#issuecomment-1291677115
         # its fine, but its still very stupid that it has to be done like this instead of allowing sprites to just directly insert a stencil clear.
@@ -89,7 +91,9 @@
       path: /Audio/Effects/bite.ogg
     animation: WeaponArcBite
   - type: Inventory
-    speciesId: reptilian
+    speciesId: feroxi
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-feroxi
 
 - type: entity
   parent: BaseSpeciesDummy

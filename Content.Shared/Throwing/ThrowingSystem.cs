@@ -6,6 +6,7 @@ using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.Friction;
 using Content.Shared.Gravity;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -267,7 +268,16 @@ public sealed class ThrowingSystem : EntitySystem
                 _physics.ApplyLinearImpulse(user.Value, -impulseVector / physics.Mass * pushbackRatio * MathF.Min(massLimit, physics.Mass), body: userPhysics);
         }
 
-        var popup = Loc.GetString("throwing-user-threw-others", ("user", user), ("thrown", uid));
-        _popup.PopupEntity(popup, user.Value, Filter.PvsExcept(user.Value), true, PopupType.SmallCaution);
+        var others = Filter.PvsExcept(user.Value);
+        foreach (var other in others.Recipients)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var popup = Loc.GetString("throwing-user-threw-others",
+                ("user", Identity.Name(user.Value, EntityManager, otherEnt)),
+                ("thrown", Identity.Name(uid, EntityManager, otherEnt)));
+            _popup.PopupEntity(popup, user.Value, otherEnt, PopupType.SmallCaution);
+        }
     }
 }

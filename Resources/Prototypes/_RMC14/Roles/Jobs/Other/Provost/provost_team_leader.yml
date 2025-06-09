@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
+  spawnMenuRoleName: Provost Team Leader
   special:
   - !type:AddComponentSpecial
     components:

@@ -27,3 +27,13 @@
     sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_beret.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_beret.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPA
+  id: RMCHeadCapTSEPAPeaked
+  name: peaked tsepa cap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked.rsi

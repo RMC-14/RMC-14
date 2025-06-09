@@ -24,10 +24,12 @@ using Content.Shared.Configurable;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
+using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Mind.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
+using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Silicons.StationAi;
@@ -36,7 +38,6 @@ using Robust.Server.Console;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Console;
-using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
@@ -170,7 +171,7 @@ namespace Content.Server.Administration.Systems
                     });
 
                     // RMC14
-                    args.Verbs.Add(new Verb()
+                    args.Verbs.Add(new Verb
                     {
                         Text = Loc.GetString("rmc-admin-player-actions-spawn-here-as-job"),
                         Category = VerbCategory.Admin,
@@ -180,7 +181,7 @@ namespace Content.Server.Administration.Systems
                             foreach (var job in _prototypeManager.EnumerateCM<JobPrototype>())
                             {
                                 var ev = new SpawnAsJobDialogEvent(GetNetEntity(args.User), GetNetEntity(args.Target), job.ID);
-                                jobs.Add(new DialogOption(job.LocalizedName, ev));
+                                jobs.Add(new DialogOption(job.SpawnMenuRoleName ?? job.LocalizedName, ev));
                             }
 
                             jobs.Sort((a, b) => string.Compare(a.Text, b.Text, StringComparison.Ordinal));
@@ -189,6 +190,22 @@ namespace Content.Server.Administration.Systems
                         ConfirmationPopup = true,
                         Impact = LogImpact.High,
                     });
+
+                    if (TryComp(args.Target, out HumanoidAppearanceComponent? appearance))
+                    {
+                        args.Verbs.Add(new Verb
+                        {
+                            Text = Loc.GetString("rmc-admin-player-actions-random-name"),
+                            Category = VerbCategory.Admin,
+                            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/die.svg.192dpi.png")),
+                            Act = () =>
+                            {
+                                _metaSystem.SetEntityName(args.Target, HumanoidCharacterProfile.GetName(appearance.Species, appearance.Gender));
+                            },
+                            ConfirmationPopup = true,
+                            Impact = LogImpact.High,
+                        });
+                    }
 
                     // Clone - Spawn but without the mind transfer, also spawns at the user's coordinates not the target's
                     args.Verbs.Add(new Verb()

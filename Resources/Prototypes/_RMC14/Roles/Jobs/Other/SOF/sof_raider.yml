@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
+  spawnMenuRoleName: MARSOC Raider
   special:
   - !type:AddComponentSpecial
     components:
