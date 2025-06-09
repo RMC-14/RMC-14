@@ -287,7 +287,10 @@ public sealed class XenoSpitSystem : EntitySystem
         foreach (var (actionId, action) in _actions.GetActions(ent))
         {
             if (action.BaseEvent is XenoAcidBallActionEvent)
+            {
                 _actions.SetUseDelay(actionId, ent.Comp.Cooldown);
+                _actions.SetCooldown(actionId, ent.Comp.Cooldown);
+            }
         }
 
         if (!args.Handled)
