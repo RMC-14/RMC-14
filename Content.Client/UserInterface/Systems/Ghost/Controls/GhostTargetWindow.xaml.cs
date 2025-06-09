@@ -3,11 +3,9 @@ using System.Numerics;
 using Content.Shared.Ghost;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Follower.Components;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Survivor.Components;
@@ -18,17 +16,16 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Client.ResourceManagement;
-using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Graphics;
 using Robust.Shared.Utility;
 using Robust.Client.Graphics;
-using Robust.Shared.Graphics.RSI;
 using Content.Client.UserInterface.ControlExtensions;
 
 namespace Content.Client.UserInterface.Systems.Ghost.Controls
 {
+    /// <remarks>
+    /// RMC14 the whole window has been significantly changed.
+    /// Preferably NOT accepting changes in merge conflicts from upstream.
+    /// </remarks>
     [GenerateTypedNameReferences]
     public sealed partial class GhostTargetWindow : DefaultWindow
     {
@@ -36,9 +33,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         private sealed class WarpGroup
         {
-            public required string Title;
+            public required LocId Title;
             public List<(string displayName, NetEntity Entity, bool IsWarpPoint, string? DisplayJob)> Warps = new();
-
+            public Color HeaderColor = Color.FromHex("#696969");
             public bool IsExpandedByDefault = true;
         }
 
@@ -62,25 +59,15 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
         {
             _warpGroups.Clear();
 
-            // Создаем группы
-            var marines = new WarpGroup { Title = Loc.GetString("rmc-ghost-target-window-group-marines") };
-            var xenos = new WarpGroup { Title = Loc.GetString("rmc-ghost-target-window-group-xenos") };
-            var others = new WarpGroup { Title = Loc.GetString("rmc-ghost-target-window-group-others") };
-            var warpPoints = new WarpGroup { Title = Loc.GetString("rmc-ghost-target-window-group-warp-points"), IsExpandedByDefault = false };
+            // Creating groups
+            var marines = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-marines") };
+            var xenos = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-xenos") };
+            var others = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-others") };
+            var warpPoints = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-warp-points"), IsExpandedByDefault = false };
 
             foreach (var warp in warps)
             {
-                string displayName;
-                if (warp.IsWarpPoint)
-                {
-                    displayName = Loc.GetString("ghost-target-window-current-button", ("name", warp.DisplayName));
-                }
-                else
-                {
-                    displayName = warp.DisplayName;
-                }
-
-                var entry = (displayName, warp.Entity, warp.IsWarpPoint, warp.DisplayJob);
+                var entry = (warp.DisplayName, warp.Entity, warp.IsWarpPoint, warp.DisplayJob);
 
                 if (warp.IsWarpPoint)
                 {
@@ -104,13 +91,13 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                 }
             }
 
-            // Сортируем внутри групп
-            marines.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.Ordinal));
-            xenos.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.Ordinal));
-            others.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.Ordinal));
-            warpPoints.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.Ordinal));
+            // Sorting inside groups
+            marines.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
+            xenos.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
+            others.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
+            warpPoints.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
 
-            // Добавляем группы в порядке приоритета
+            // Adding groups in order of priority
             _warpGroups.Add(marines);
             _warpGroups.Add(xenos);
             _warpGroups.Add(others);
@@ -119,11 +106,11 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         public void Populate()
         {
-            ButtonContainer.DisposeAllChildren();
-            AddButtons();
+            ContentContainer.DisposeAllChildren();
+            AddContent();
         }
 
-        private void AddButtons()
+        private void AddContent()
         {
             var spriteSystem = _entityManager.System<SpriteSystem>();
             var mobThreshold = _entityManager.System<MobThresholdSystem>();
@@ -135,34 +122,76 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                     continue;
 
                 var heading = new CollapsibleHeading($"{Loc.GetString(group.Title)} — ({group.Warps.Count})");
-                var body = new CollapsibleBody();
-
-                var groupContainer = new BoxContainer
+                heading.StyleBoxOverride = new StyleBoxTexture
                 {
-                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    Texture = spriteSystem.Frame0(new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Nano/rounded_button.svg.96dpi.png"))),
+                    Modulate = group.HeaderColor,
+                    PatchMarginTop = 5,
+                    PatchMarginBottom = 5,
+                    PatchMarginLeft = 5,
+                    PatchMarginRight = 5,
+                    ContentMarginTopOverride = 2,
+                    ContentMarginLeftOverride = 5,
+                    ContentMarginRightOverride = 5,
+                    ContentMarginBottomOverride = 2,
+                    Padding = new Thickness(2)
+                };
+
+                // Add hover effect
+                heading.OnMouseEntered += _ =>
+                {
+                    if (heading.StyleBoxOverride is StyleBoxTexture styleBox)
+                    {
+                        var currentColor = styleBox.Modulate;
+                        styleBox.Modulate = new Color(
+                            Math.Min(currentColor.R + 0.1f, 1.0f),
+                            Math.Min(currentColor.G + 0.1f, 1.0f),
+                            Math.Min(currentColor.B + 0.1f, 1.0f),
+                            currentColor.A
+                        );
+                    }
+                };
+
+                heading.OnMouseExited += _ =>
+                {
+                    if (heading.StyleBoxOverride is StyleBoxTexture styleBox)
+                    {
+                        styleBox.Modulate = group.HeaderColor;
+                    }
+                };
+
+                var body = new CollapsibleBody
+                {
                     HorizontalExpand = true
+                };
+
+                var groupContainer = new GridContainer
+                {
+                    HorizontalExpand = true,
+                    VerticalExpand = true
+                };
+
+                body.OnResized += () =>
+                {
+                    if (body.Width > 0)
+                        groupContainer.MaxGridWidth = body.Width;
                 };
 
                 foreach (var (name, warpTarget, isWarpPoint, job) in group.Warps)
                 {
-                    Logger.Debug($"Creating button: name={name}, isWarpPoint={isWarpPoint}, warpTarget={warpTarget}");
-
                     var buttonContainer = new BoxContainer
                     {
                         Orientation = BoxContainer.LayoutOrientation.Horizontal,
                         HorizontalAlignment = Control.HAlignment.Center,
                         VerticalAlignment = Control.VAlignment.Center,
-                        HorizontalExpand = true,
+                        HorizontalExpand = true
                     };
-
-                    Logger.Debug($"[GHOST] Created buttonContainer: {buttonContainer.GetType().Name}");
 
                     float? healthPercent = null;
 
                     if (!isWarpPoint)
                     {
                         var entity = _entityManager.GetEntity(warpTarget);
-                        Logger.Debug($"Getting icon for entity {entity}");
 
                         // Adding a Health Icon
                         if (!mobState.IsDead(entity))
@@ -180,7 +209,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                                     string healthIconPath;
                                     if (healthPercent >= 80)
                                         healthIconPath = "/Textures/_RMC14/Interface/health_hud.rsi/health_high.png";
-                                    else if (healthPercent >= 45)
+                                    else if (healthPercent >= 40)
                                         healthIconPath = "/Textures/_RMC14/Interface/health_hud.rsi/health_medium.png";
                                     else
                                         healthIconPath = "/Textures/_RMC14/Interface/health_hud.rsi/health_low.png";
@@ -191,8 +220,8 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                                         VerticalAlignment = Control.VAlignment.Center,
                                         Texture = spriteSystem.Frame0(new SpriteSpecifier.Texture(new ResPath(healthIconPath))),
                                         Stretch = TextureRect.StretchMode.KeepAspectCentered,
-                                        MinSize = new Vector2(14, 14),
-                                        MaxSize = new Vector2(14, 14),
+                                        MinSize = new Vector2(13, 13),
+                                        MaxSize = new Vector2(13, 13),
                                         Margin = new Thickness(0, 0, 4, 0)
                                     };
                                     buttonContainer.AddChild(healthIcon);
@@ -203,7 +232,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                         // Adding a Job Icon (if it exists)
                         if (_entityManager.TryGetComponent<TacticalMapIconComponent>(entity, out var icon) && icon.Icon != null)
                         {
-                            Logger.Debug($"Found icon for entity {entity}");
                             var iconPanel = new PanelContainer
                             {
                                 Margin = new Thickness(0, 0, 4, 0)
@@ -217,8 +245,8 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                                     VerticalAlignment = Control.VAlignment.Center,
                                     Texture = spriteSystem.Frame0(icon.Background),
                                     Stretch = TextureRect.StretchMode.KeepAspectCentered,
-                                    MinSize = new Vector2(17, 17),
-                                    MaxSize = new Vector2(17, 17)
+                                    MinSize = new Vector2(16, 16),
+                                    MaxSize = new Vector2(16, 16)
                                 };
                                 iconPanel.AddChild(backgroundView);
                             }
@@ -229,13 +257,12 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                                 VerticalAlignment = Control.VAlignment.Center,
                                 Texture = spriteSystem.Frame0(icon.Icon),
                                 Stretch = TextureRect.StretchMode.KeepAspectCentered,
-                                MinSize = new Vector2(17, 17),
-                                MaxSize = new Vector2(17, 17)
+                                MinSize = new Vector2(16, 16),
+                                MaxSize = new Vector2(16, 16)
                             };
                             iconPanel.AddChild(iconView);
 
                             buttonContainer.AddChild(iconPanel);
-                            Logger.Debug($"[GHOST] Added icon panel to container");
                         }
                     }
 
@@ -243,11 +270,14 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                     {
                         Text = name,
                         HorizontalAlignment = Control.HAlignment.Left,
+                        // We prevent buttons from inflating the column to width and allow more to fit on a single line.
+                        // If ss14 had something like WrapPanel - a smart container with auto-wrapping of elements,
+                        // I would use it, but I don't have the strength and knowledge to build an auto-wrapping architecture.
                         ClipText = false,
-                        Name = job != null ? $"{name} ({job})" : name // Saving full name for search
+                        Name = job != null ? $"{name} {job}" : name, // Saving full name for search
+                        StyleClasses = { "LabelSmall" } // Adding a style for a smaller font
                     };
                     buttonContainer.AddChild(label);
-                    Logger.Debug($"[GHOST] Added label to container: {label.Text}");
 
                     // Adding a ghost counter
                     if (!isWarpPoint)
@@ -262,7 +292,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
                                 HorizontalAlignment = Control.HAlignment.Right,
                                 VerticalAlignment = Control.VAlignment.Center,
-                                Margin = new Thickness(4, 0, 0, 0)
                             };
 
                             var ghostIcon = new TextureRect
@@ -273,7 +302,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                                 Stretch = TextureRect.StretchMode.KeepAspectCentered,
                                 MinSize = new Vector2(17, 17),
                                 MaxSize = new Vector2(17, 17),
-                                Margin = new Thickness(0, 0, 4, 0)
                             };
                             ghostCounter.AddChild(ghostIcon);
 
@@ -291,8 +319,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
                     var button = new Button
                     {
-                        HorizontalExpand = true,
-                        Name = job != null ? $"{name} ({job})" : name // Saving full name for search
+                        Name = job != null ? $"{name} {job}" : name // Saving full name for search
                     };
 
                     // Adding a tooltip
@@ -313,9 +340,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                         button.ToolTip = tooltipText;
                     }
 
-                    Logger.Debug($"[GHOST] Created button, adding container");
                     button.AddChild(buttonContainer);
-                    Logger.Debug($"[GHOST] Button children count: {button.ChildCount}");
 
                     button.OnPressed += _ => WarpClicked?.Invoke(warpTarget);
                     button.Visible = ButtonIsVisible(button);
@@ -331,11 +356,11 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                     HorizontalExpand = true
                 };
 
-                // Открываем аккордеон для всех групп кроме варп-точек
+                // Open the accordion
                 if (group.IsExpandedByDefault)
                     collapsible.BodyVisible = true;
 
-                ButtonContainer.AddChild(collapsible);
+                ContentContainer.AddChild(collapsible);
                 _collapsibleGroups[collapsible] = group;
             }
         }
@@ -345,20 +370,19 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             if (string.IsNullOrEmpty(_searchText))
                 return true;
 
-            Logger.Debug($"[GHOST] Search: text='{_searchText}'");
             return button.ChildrenContainText(_searchText) ||
                    (button.Name != null && button.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase));
         }
 
         private void UpdateVisibleButtons()
         {
-            foreach (var collapsible in ButtonContainer.Children.OfType<Collapsible>())
+            foreach (var collapsible in ContentContainer.Children.OfType<Collapsible>())
             {
                 var body = collapsible.GetChild(1) as CollapsibleBody;
                 if (body?.ChildCount != 1)
                     continue;
 
-                var groupContainer = body.GetChild(0) as BoxContainer;
+                var groupContainer = body.GetChild(0) as GridContainer;
                 if (groupContainer == null)
                     continue;
 
@@ -372,12 +396,12 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         private void UpdateVisibleCollapsibles()
         {
-            foreach (var child in ButtonContainer.Children)
+            foreach (var child in ContentContainer.Children)
             {
                 if (child is Collapsible collapsible)
                 {
                     var body = collapsible.GetChild(1) as CollapsibleBody;
-                    var container = body?.GetChild(0) as BoxContainer;
+                    var container = body?.GetChild(0) as GridContainer;
                     var hasVisibleButtons = container?.Children.OfType<Button>().Any(b => ButtonIsVisible(b)) ?? false;
 
                     collapsible.Visible = hasVisibleButtons;
@@ -395,7 +419,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
         private void OnSearchTextChanged(LineEdit.LineEditEventArgs args)
         {
             _searchText = args.Text;
-            Logger.Debug($"[GHOST] Search text changed to: '{_searchText}'");
 
             UpdateVisibleButtons();
             UpdateVisibleCollapsibles();
