@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: Freelancer Conscript
   special:
   - !type:AddComponentSpecial
     components:

@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - Colonist
+  spawnMenuRoleName: SPP Conscript
   special:
   - !type:AddComponentSpecial
     components:

@@ -12,6 +12,7 @@
   accessGroups:
   - Colonist
   - HospitalCorpsman
+  spawnMenuRoleName: SPP Squad Leader
   special:
   - !type:AddComponentSpecial
     components:
