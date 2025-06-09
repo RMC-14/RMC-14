@@ -33,6 +33,7 @@
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
     - RMCOrbitalCannonWarheadIncendiary
+    - RMCOrbitalCannonWarheadAegis
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
