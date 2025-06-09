@@ -22,17 +22,18 @@ public sealed class PlaytimeMedalSystem : EntitySystem
     private TimeSpan _silverTime;
     private TimeSpan _goldTime;
     private TimeSpan _platinumTime;
+    private TimeSpan _emeraldTime;
 
     public override void Initialize()
     {
         base.Initialize();
-
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
 
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _bronzeTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _silverTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _goldTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _platinumTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeEmeraldMedalTimeHours, v => _emeraldTime = TimeSpan.FromHours(v), true);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -46,13 +47,15 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         {
             return;
         }
-
+        
         if (job.Medals is not { } medals)
             return;
-
+            
         RMCPlaytimeMedalType? medalType = null;
 
-        if (time >= _platinumTime)
+        if (time >= _emeraldTime)
+            medalType = RMCPlaytimeMedalType.Emerald;
+        else if (time >= _platinumTime)
             medalType = RMCPlaytimeMedalType.Platinum;
         else if (time >= _goldTime)
             medalType = RMCPlaytimeMedalType.Gold;
@@ -65,6 +68,8 @@ public sealed class PlaytimeMedalSystem : EntitySystem
             return;
 
         if (!medals.TryGetValue(medalType.Value, out var medalId))
+
+        if (medalId == null)
             return;
 
         var medal = SpawnAtPosition(medalId, ev.Mob.ToCoordinates());

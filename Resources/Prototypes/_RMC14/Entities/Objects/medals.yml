@@ -95,7 +95,27 @@
   name: platinum service medal
   description: The highest service medal that can be awarded to a marine; such medals are hand-given by UNMC Generals to a marine. It signifies the sheer amount of time a marine has spent in the line of duty.
 
-# Civilian Ribbons
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalEmerald
+  name: emerald medal
+  description: A ultra prestigious emerald medal, only able to be handed out by High Command due to especially special circumstances.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/emerald.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/emerald.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalEmerald
+  id: RMCMedalEmeraldService
+  name: emerald service medal
+  description: The highest service medal that can be awarded to a marine; such medals are hand-given by UNMC High Command directly to a marine. It signifies the exorbitant amount of time a marine has spent in the line of duty.
+  
+# Civilian Ribbons 
 
 - type: entity
   parent: RMCMedalBase
@@ -176,6 +196,26 @@
   id: RMCMedalRibbonBlueService
   name: blue award ribbon
   description: A very prestigious blue ribbon awarded to civilians for placing first in a UNMC-sponsored event. Such awards require significant amounts of time and dedication to achieve.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalRibbonEmerald
+  name: emerald ribbon
+  description: An emerald ribbon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/emerald_ribbon.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/emerald_ribbon.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalRibbonEmerald
+  id: RMCMedalRibbonEmeraldService
+  name: emerald award ribbon
+  description: A very prestigious emerald ribbon awarded to civilians for going above and beyond in UNMC-sponsored events. Such awards require exorbitant amounts of time and dedication to achieve.
 
 # Liaison Medals
 - type: entity
