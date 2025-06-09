@@ -169,7 +169,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
-    private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
+    private readonly TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
     private bool _landingZoneMiasmaEnabled;
     private TimeSpan _sunsetDuration;
     private TimeSpan _sunriseDuration;
@@ -196,6 +196,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     public string? OperationName { get; private set; }
 
     private readonly Dictionary<EntProtoId<RMCPlanetMapPrototypeComponent>, int> _carryoverVotes = new();
+
+    private IVoteHandle? _currentVote;
 
     public override void Initialize()
     {
@@ -1678,6 +1680,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMap = null;
     }
 
+    public void SetPlanet(RMCPlanet planet)
+    {
+        SelectedPlanetMap = planet;
+    }
+
     private void StartPlanetVote()
     {
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
@@ -1713,9 +1720,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         };
         vote.SetInitiatorOrServer(null);
 
-        var handle = _voteManager.CreateVote(vote);
-        handle.OnFinished += (_, args) =>
+        _currentVote = _voteManager.CreateVote(vote);
+        _currentVote.OnFinished += (_, args) =>
         {
+            _currentVote = null;
             RMCPlanet picked;
 
             var voteResult = planets.Zip(args.Votes);
@@ -1745,6 +1753,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _carryoverVotes[picked.Proto.ID] = 0;
             SelectedPlanetMap = picked;
         };
+        _currentVote.OnCancelled += _ => _currentVote = null;
+    }
+
+    public bool HasPlanetVoteRunning()
+    {
+        return _currentVote != null;
+    }
+
+    public void CancelPlanetVote()
+    {
+        _currentVote?.Cancel();
     }
 
     private string GetRandomOperationName()

@@ -153,9 +153,8 @@ public sealed class RMCPlanetSystem : EntitySystem
         PlanetPaths = planetPaths.ToImmutableDictionary();
     }
 
-    public List<RMCPlanet> GetCandidates()
+    public List<RMCPlanet> GetAllPlanets()
     {
-        var players = _player.PlayerCount;
         var candidates = new List<RMCPlanet>();
         foreach (var planet in PlanetPaths.Values)
         {
@@ -165,8 +164,28 @@ public sealed class RMCPlanetSystem : EntitySystem
                 continue;
             }
 
-            if (players == 0 || comp.MinPlayers == 0 || players >= comp.MinPlayers)
-                candidates.Add(new RMCPlanet(planetProto, comp));
+            candidates.Add(new RMCPlanet(planetProto, comp));
+        }
+
+        return candidates;
+    }
+
+    public List<RMCPlanet> GetCandidates()
+    {
+        var candidates = GetAllPlanets();
+        var players = _player.PlayerCount;
+        if (players == 0)
+            return candidates;
+
+        for (var i = candidates.Count - 1; i >= 0; i--)
+        {
+            var comp = candidates[i].Comp;
+
+            if ((comp.MinPlayers != 0 && players < comp.MinPlayers) ||
+                (comp.MaxPlayers != 0 && players > comp.MaxPlayers))
+            {
+                candidates.RemoveAt(i);
+            }
         }
 
         return candidates;
