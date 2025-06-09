@@ -1,12 +1,12 @@
 - type: gameMap
-  id: GoldenArrow
-  mapName: "GoldenArrow"
-  mapPath: /Maps/_RMC14/golden_arrow.yml
+  id: GoldenArrowLarge
+  mapName: "GoldenArrowLarge"
+  mapPath: /Maps/_RMC14/golden_arrow_large.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    GoldenArrow:
+    GoldenArrowLarge:
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
