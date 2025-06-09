@@ -253,6 +253,8 @@
   - type: XenoToggleChargingKnockback
     enabled: false
   - type: XenoToggleChargingStop
+  - type: FixedIdentity
+    name: cm-job-name-xeno-queen
 
 - type: entity
   parent: RMCXenoQueenBase

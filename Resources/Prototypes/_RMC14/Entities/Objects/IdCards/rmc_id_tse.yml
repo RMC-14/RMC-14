@@ -11,6 +11,8 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/tsepa_silver.rsi
+  - type: ItemIFF
+    faction: FactionTSE
 
 - type: entity
   parent: CMIDCardBase
@@ -25,6 +27,8 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/tsepa_silver_gold.rsi
+  - type: ItemIFF
+    faction: FactionTSE
 
 - type: entity
   parent: CMIDCardBase
@@ -39,3 +43,5 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/tsepa_gold.rsi
+  - type: ItemIFF
+    faction: FactionTSE

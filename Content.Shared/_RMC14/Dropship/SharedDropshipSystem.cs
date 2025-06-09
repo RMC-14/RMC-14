@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
@@ -177,7 +178,8 @@ public abstract class SharedDropshipSystem : EntitySystem
             _popup.PopupEntity("There are no dropship destinations near you!", user, user, PopupType.MediumCaution);
             return;
         }
-        else if (closestDestination.Value.Comp1.Ship != null)
+
+        if (closestDestination.Value.Comp1.Ship != null)
         {
             _popup.PopupEntity("There's already a dropship coming here!", user, user, PopupType.MediumCaution);
             return;
@@ -190,15 +192,21 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
-        var dropships = EntityQueryEnumerator<DropshipComponent>();
-        while (dropships.MoveNext(out var uid, out var dropship))
+        var dropships = EntityQueryEnumerator<DropshipComponent, TransformComponent>();
+        while (dropships.MoveNext(out var uid, out var dropship, out var xform))
         {
             if (dropship.Crashed || IsInFTL(uid))
+                continue;
+
+            if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
                 continue;
 
             var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
             while (computerQuery.MoveNext(out var computerId, out var computer))
             {
+                if (!computer.Hijackable)
+                    continue;
+
                 if (Transform(computerId).GridUid == uid &&
                     FlyTo((computerId, computer), closestDestination.Value, user))
                 {

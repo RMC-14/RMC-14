@@ -23,6 +23,7 @@
         density: 155
         mask:
         - MachineMask
+        - HighImpassable
         layer:
         - HighImpassable
         - BulletImpassable
