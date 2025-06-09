@@ -31,6 +31,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 
@@ -49,6 +50,7 @@ public sealed class XenoTunnelSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -660,16 +662,16 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnTunnelEntInserted(Entity<XenoTunnelComponent> xenoTunnel, ref EntInsertedIntoContainerMessage args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!HasComp<MobStateComponent>(args.Entity))
             return;
 
         if (!_mobState.IsAlive(args.Entity))
-        {
             RemoveFromTunnel(args.Entity, xenoTunnel);
-        }
 
         EnsureComp<InXenoTunnelComponent>(args.Entity);
-
     }
 
     /// <summary>
