@@ -12,13 +12,6 @@
   completetime: 4
   materials:
     CMSteel: 107 # 4000
-    
-- type: latheRecipe
-  id: CMBucketJani
-  result: CMBucketJani
-  completetime: 4
-  materials:
-    CMSteel: 267 # 10000
 
 - type: latheRecipe
   id: RMCBucketJanitorial
