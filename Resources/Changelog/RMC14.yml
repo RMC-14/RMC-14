@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed Resin Surge not working through membranes/windows
-    type: Fix
-  id: 1341
-  time: '2025-02-16T04:35:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5629
-- author: Vermidia
-  changes:
-  - message: Fixed resin walls and doors not being resin surgable
-    type: Fix
-  id: 1342
-  time: '2025-02-16T04:38:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5621
-- author: Vermidia
-  changes:
   - message: Added the name of the current area you are in in the tacmap alert tooltip.
     type: Add
   id: 1343
@@ -5235,5 +5221,23 @@
   id: 1842
   time: '2025-06-08T12:33:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6524
+- author: noctyrnal
+  changes:
+  - message: The PVE version of Hybrisa has received a massive update, adding lots
+      of missing content and fixing many issues with it.
+    type: Tweak
+  - message: Added the TSEPA Peaked Cap, Jacket, High-Vis Vest / Jacket and the TSEPA
+      Synthetic role. These are exclusive to PVE outside of admins.
+    type: Add
+  id: 1843
+  time: '2025-06-09T01:53:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6658
+- author: Utmanarn
+  changes:
+  - message: CPR time now depends medical skill.
+    type: Tweak
+  id: 1844
+  time: '2025-06-09T01:55:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6656
 Name: RMC14
 Order: -1

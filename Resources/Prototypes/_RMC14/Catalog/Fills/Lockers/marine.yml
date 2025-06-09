@@ -27,3 +27,10 @@
     - id: RMCGlassesSmartGunSight
     - id: RMCWebbingClipOnPouch
     - id: RMCWebbingGrenade
+
+- type: entityTable
+  id: RMCClosetTSEPAFill
+  table: !type:AllSelector
+    children:
+    - id: RMCCoatTSEPAHighVis
+    - id: RMCCoatTSEPAHighVisVest
