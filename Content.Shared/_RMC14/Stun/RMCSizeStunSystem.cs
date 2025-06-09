@@ -77,10 +77,18 @@ public sealed class RMCSizeStunSystem : EntitySystem
     {
         return ent.Comp.Size <= RMCSizes.Humanoid;
     }
+    public bool IsHumanoidSized(RMCSizes size)
+    {
+        return size <= RMCSizes.Humanoid;
+    }
 
     public bool IsXenoSized(Entity<RMCSizeComponent> ent)
     {
         return ent.Comp.Size >= RMCSizes.VerySmallXeno;
+    }
+    public bool IsXenoSized(RMCSizes size)
+    {
+        return size >= RMCSizes.VerySmallXeno;
     }
 
     public bool TryGetSize(EntityUid ent, out RMCSizes size)

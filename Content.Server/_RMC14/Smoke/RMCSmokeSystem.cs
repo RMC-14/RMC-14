@@ -1,6 +1,7 @@
-﻿using Content.Server.Spreader;
+using Content.Server.Spreader;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Smoke;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -12,6 +13,7 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private readonly List<(MapGridComponent Grid, TileRef Tile)> _tiles = new();
 
@@ -55,6 +57,7 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
                 continue;
 
             var smoke = SpawnAtPosition(ent.Comp.Spawn, coords);
+            _hive.SetSameHive(ent.Owner, smoke);
             if (_evenSmokeQuery.TryComp(smoke, out var smokeComp))
                 smokeComp.Range = ent.Comp.Range - 1;
 

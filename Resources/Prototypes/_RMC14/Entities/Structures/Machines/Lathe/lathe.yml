@@ -97,7 +97,7 @@
   recipes:
   - RMCBucket
   - CMBucketMop
-  - CMBucketJani
+  - RMCBucketJanitorial
   - RMCFlashlight
   - CMFireExtinguisher
   - CMCrowbar

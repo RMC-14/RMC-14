@@ -367,6 +367,11 @@
   - type: RMCMobCollisionMass
   - type: XenoRankNames
   - type: Blindable
+  - type: FixedIdentity
+    name: cm-xeno-name
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
   abstract: true
@@ -407,6 +412,10 @@
       params:
         variation: 0.1
         volume: -5
+  - type: MeleeDamageMultiplier # 1.5x Damage against other xenos
+    whitelist:
+      components:
+      - Xeno
   - type: Tackle
   - type: XenoClaws
 
