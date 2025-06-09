@@ -95,6 +95,8 @@
         points: 15
       - id: CMHandsInsulated
         points: 3
+      - id: CMHandsBlackInsulated
+        points: 3
     - name: Engineering Supplies
       entries:
       - id: RMCExplosivePlastic

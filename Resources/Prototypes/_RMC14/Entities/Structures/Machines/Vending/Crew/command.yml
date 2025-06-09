@@ -364,6 +364,7 @@
       - id: CMBootsBrown
       - id: CMHandsBlackMarine
       - id: CMHandsBrown
+      - id: CMHandsBlackInsulated
     - name: Utility Extras
       entries:
       - id: RMCSunglasses

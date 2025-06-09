@@ -126,6 +126,7 @@
       takeAll: RMCIntelEquipment
       entries:
       - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
       - id: CMHeadsetIntel
       - id: CMMRE
     - name: Armor
