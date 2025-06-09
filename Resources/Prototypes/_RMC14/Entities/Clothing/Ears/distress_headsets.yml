@@ -10,18 +10,23 @@
       key_slots:
       - CMEncryptionKeyColony
 
-# For CLF
-
 - type: entity
-  parent: RMCHeadsetIconsCLF
-  id: RMCHeadsetDistressCLF
-  name: CLF headset
-  description: A special headset used by small groups of trained operatives. Or terrorists.
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetColonyIcons
+  name: colony headset
+  description: A standard headset used by colonists.
   components:
   - type: ContainerFill
     containers:
       key_slots:
       - CMEncryptionKeyColony
+
+# For CLF
+- type: entity
+  parent: RMCHeadsetColonyIcons
+  id: RMCHeadsetDistressCLF
+  name: CLF headset
+  description: A special headset used by small groups of trained operatives. Or terrorists.
 
 # For Bureau Marshals
 - type: entity
