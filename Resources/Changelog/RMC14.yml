@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added the name of the current area you are in in the tacmap alert tooltip.
-    type: Add
-  id: 1343
-  time: '2025-02-16T04:40:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5615
 - author: SG6732
   changes:
   - message: Added new vulp wrap sprites.
@@ -5305,5 +5298,19 @@
   id: 1845
   time: '2025-06-09T12:58:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6667
+- author: stranthbackup
+  changes:
+  - message: Janitorial Bucket now shows in Autolathe Recipes.
+    type: Fix
+  - message: Mop Buckets and Janitorial buckets now fit into most storage items.
+    type: Fix
+  - message: Janitorial Buckets now exist in your hand, for everyone to see.
+    type: Fix
+  - message: Janitorial Carts start with a Janitorial Bucket and Mop now, as the UN
+      intended.
+    type: Fix
+  id: 1846
+  time: '2025-06-09T13:25:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6652
 Name: RMC14
 Order: -1
