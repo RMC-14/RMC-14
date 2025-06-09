@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -374,3 +374,5 @@
     drawDepths:
       Dead: DeadMobs
   - type: IVDripTarget
+  - type: RMCMesonsNonviewable
+    xenoVisible: true

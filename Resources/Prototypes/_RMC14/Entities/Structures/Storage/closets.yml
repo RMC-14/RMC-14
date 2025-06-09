@@ -65,6 +65,7 @@
   components:
   - type: Transform
     anchored: true
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMClosetBase

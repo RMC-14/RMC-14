@@ -67,6 +67,8 @@
     consumeDelay: 2
     canConsumeAtFull: true
     outlineColor: "#000000FF"
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
 
 - type: entity
   parent: XenoFruitBase

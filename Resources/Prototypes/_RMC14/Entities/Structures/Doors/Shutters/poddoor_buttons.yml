@@ -21,6 +21,7 @@
   - type: WallMount
     arc: 360
   - type: RMCDoorButton
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCPodDoorButton

@@ -29,6 +29,7 @@
   - type: XenoToggleChargingDamage
     stageLoss: 4
     destroy: true
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCContainerBase

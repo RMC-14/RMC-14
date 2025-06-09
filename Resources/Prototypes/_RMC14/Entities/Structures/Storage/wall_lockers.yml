@@ -24,6 +24,7 @@
       - CommandTablet
   - type: AccessReader
     access: [["CMAccessCommand"]]
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMLockerCMDCabinet

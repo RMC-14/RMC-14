@@ -72,6 +72,7 @@
     setDamage:
       types:
         Blunt: 150
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCBarricadeUpgradeBase

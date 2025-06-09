@@ -67,6 +67,7 @@
   - type: AccessReader
     containerAccessProvider: null
   - type: XenoCrusherChargable
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: BaseSecureWindoor
