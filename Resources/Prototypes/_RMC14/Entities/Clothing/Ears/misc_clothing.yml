@@ -22,4 +22,4 @@
     sprite: _RMC14/Objects/Clothing/Ears/earmuffs.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Ears/earmuffs.rsi
-  # TODO RMC14 - Wearing this should make you immune to being deafened.
+  - type: RMCEarProtection
