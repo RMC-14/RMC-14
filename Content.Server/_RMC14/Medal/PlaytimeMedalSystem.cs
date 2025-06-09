@@ -22,16 +22,19 @@ public sealed class PlaytimeMedalSystem : EntitySystem
     private static readonly EntProtoId SilverMedal = "RMCMedalSilverService";
     private static readonly EntProtoId GoldMedal = "RMCMedalGoldService";
     private static readonly EntProtoId PlatinumMedal = "RMCMedalPlatinumService";
+    private static readonly EntProtoId EmeraldMedal = "RMCMedalEmeraldService";
 
     private static readonly EntProtoId WhiteRibbon = "RMCMedalRibbonWhiteService";
     private static readonly EntProtoId YellowRibbon = "RMCMedalRibbonYellowService";
     private static readonly EntProtoId RedRibbon = "RMCMedalRibbonRedService";
     private static readonly EntProtoId BlueRibbon = "RMCMedalRibbonBlueService";
+    private static readonly EntProtoId EmeraldRibbon = "RMCMedalRibbonEmeraldService";
 
     private TimeSpan _bronzeTime;
     private TimeSpan _silverTime;
     private TimeSpan _goldTime;
     private TimeSpan _platinumTime;
+    private TimeSpan _emeraldTime;
 
     public override void Initialize()
     {
@@ -42,6 +45,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _silverTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _goldTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _platinumTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeEmeraldMedalTimeHours, v => _emeraldTime = TimeSpan.FromHours(v), true);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -59,7 +63,9 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         EntProtoId? medalId = null;
         if (HasComp<RMCRibbonComponent>(ev.Mob))
         {
-            if (time >= _platinumTime)
+            if (time >= _emeraldTime)
+                medalId = EmeraldRibbon;
+            else if (time >= _platinumTime)
                 medalId = BlueRibbon;
             else if (time >= _goldTime)
                 medalId = RedRibbon;
@@ -70,7 +76,9 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         }
         else
         {
-            if (time >= _platinumTime)
+            if (time >= _emeraldTime)
+                medalId = EmeraldMedal;
+            else if (time >= _platinumTime)
                 medalId = PlatinumMedal;
             else if (time >= _goldTime)
                 medalId = GoldMedal;
