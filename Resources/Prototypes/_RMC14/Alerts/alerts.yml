@@ -277,7 +277,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerReconnaissance
+  id: SquadTrackerRecon
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
