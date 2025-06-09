@@ -12,7 +12,7 @@
   name: clf soldier's ID card
   components:
   - type: PresetIdCard
-    job: CMCLFSoldier
+    job: RMCCLFSoldier
 
 - type: entity
   parent: RMCIDCardCLFBase
