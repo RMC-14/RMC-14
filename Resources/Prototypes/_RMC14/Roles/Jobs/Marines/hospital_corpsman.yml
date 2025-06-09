@@ -7,7 +7,7 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
-    time: 3600 # 1 hours
+    time: 7200 # 2 hours
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 3600 # 1 hour

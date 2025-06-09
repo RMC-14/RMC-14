@@ -4,6 +4,19 @@
   name: cm-job-name-survivor-doctor
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobDoctor
+    time: 18000 # 5 hours
   ranks:
     RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorDoctor
