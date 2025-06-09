@@ -1,4 +1,7 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Dodge;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Jittering;
 using Content.Shared.Popups;
@@ -19,6 +22,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly RMCDazedSystem _daze = default!;
 
     public override void Initialize()
     {
@@ -41,6 +45,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
         active.ParalyzeDelay = xeno.Comp.StunDelay;
         active.ParalyzeDuration = xeno.Comp.StunDuration;
+        active.DazeTime = xeno.Comp.DazeTime;
 
         Dirty(xeno, active);
 
@@ -69,19 +74,24 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         foreach (var entity in args.HitEntities)
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, entity) ||
-                HasComp<VictimBeingParalyzedComponent>(entity))
+                HasComp<VictimBeingParalyzedComponent>(entity) ||
+                HasComp<XenoComponent>(entity))
             {
                 continue;
             }
 
-            // TODO RMC14 daze
-            var victim = EnsureComp<VictimBeingParalyzedComponent>(entity);
-
-            victim.ParalyzeAt = _timing.CurTime + xeno.Comp.ParalyzeDelay;
-            victim.ParalyzeDuration = xeno.Comp.ParalyzeDuration;
+            _daze.TryDaze(entity, xeno.Comp.DazeTime, true, stutter: true);
             _jitter.DoJitter(entity, xeno.Comp.ParalyzeDelay, true);
 
-            Dirty(entity, victim);
+            if (!HasComp<XenoComponent>(entity))
+            {
+                var victim = EnsureComp<VictimBeingParalyzedComponent>(entity);
+
+                victim.ParalyzeAt = _timing.CurTime + xeno.Comp.ParalyzeDelay;
+                victim.ParalyzeDuration = xeno.Comp.ParalyzeDuration;
+
+                Dirty(entity, victim);
+            }
 
             var message = Loc.GetString("cm-xeno-paralyzing-slash-hit", ("target", entity));
 

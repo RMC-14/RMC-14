@@ -30,6 +30,9 @@ public sealed class XenoTailJabSystem : EntitySystem
     [Dependency] private readonly XenoRotateSystem _rotate = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoRotateSystem _rotate = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -56,7 +59,7 @@ public sealed class XenoTailJabSystem : EntitySystem
         RaiseLocalEvent(xeno, ref ev);
         damage += ev.Damage;
 
-        var damageTaken = _damage.TryChangeDamage(target, damage, origin: xeno, tool: xeno);
+        var damageTaken = _damage.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, damage), origin: xeno, tool: xeno);
         if (damageTaken?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

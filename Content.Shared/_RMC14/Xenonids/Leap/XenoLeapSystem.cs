@@ -59,6 +59,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -408,6 +409,9 @@ public sealed class XenoLeapSystem : EntitySystem
         if (HasComp<LeapIncapacitatedComponent>(target))
             return false;
 
+        if (_size.TryGetSize(target, out var size) && size >= RMCSizes.Big)
+            return false;
+
         return true;
     }
 
@@ -448,7 +452,7 @@ public sealed class XenoLeapSystem : EntitySystem
             _stun.TrySlowdown(xeno, xeno.Comp.MoveDelayTime, true, 0f, 0f);
 
             if (_net.IsServer)
-                _stun.TryParalyze(target, xeno.Comp.ParalyzeTime, true);
+                _stun.TryParalyze(target, _xeno.TryApplyXenoDebuffMultiplier(target, xeno.Comp.ParalyzeTime), true);
         }
 
         if (xeno.Comp.HitEffect != null)
@@ -457,7 +461,7 @@ public sealed class XenoLeapSystem : EntitySystem
                 SpawnAttachedTo(xeno.Comp.HitEffect, target.ToCoordinates());
         }
 
-        var damage = _damagable.TryChangeDamage(target, xeno.Comp.Damage, origin: xeno, tool: xeno);
+        var damage = _damagable.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, xeno.Comp.Damage), origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

@@ -32,6 +32,7 @@ public sealed class XenoDislocateSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoDislocateComponent, XenoDislocateActionEvent>(OnDislocateAction);
@@ -68,7 +69,7 @@ public sealed class XenoDislocateSystem : EntitySystem
 
         if (isDebuffed)
         {
-            _slow.TryRoot(targetId, xeno.Comp.RootTime, true);
+            _slow.TryRoot(targetId, _xeno.TryApplyXenoDebuffMultiplier(targetId, xeno.Comp.RootTime), true);
         }
         else
         {

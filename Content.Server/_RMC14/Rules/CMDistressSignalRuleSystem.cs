@@ -408,6 +408,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 var spawnAsJob = job;
 
+                var playerId = _random.Pick(list);
+                if (!_player.TryGetSessionById(playerId, out var player))
+                {
+                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
+                    return null;
+                }
+
                 if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
                 {
                     var insertSuccess = false;
@@ -415,6 +422,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     for (var i = 0; i < insert.Count; i++)
                     {
                         var (insertJob, amount) = insert[i];
+
+                        if (!IsAllowed(playerId, insertJob))
+                            continue; // check insert playtime requirements
 
                         if (amount == -1)
                         {
@@ -457,12 +467,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     comp.SurvivorJobs[i] = (survJob, amount - 1);
                 }
 
-                var playerId = _random.PickAndTake(list);
-                if (!_player.TryGetSessionById(playerId, out var player))
-                {
-                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
-                    return null;
-                }
+                list.Remove(playerId); // remove the player from the pool because they passed the checks
 
                 var spawner = _random.PickAndTake(jobSpawnersLeft);
                 ev.PlayerPool.Remove(player);

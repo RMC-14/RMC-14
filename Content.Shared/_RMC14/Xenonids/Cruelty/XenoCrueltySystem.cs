@@ -15,7 +15,7 @@ public sealed partial class XenoCrueltySystem : EntitySystem
         SubscribeLocalEvent<XenoCrueltyComponent, MeleeHitEvent>(OnCrueltyHit);
     }
 
-    private void OnCrueltyHit(Entity<XenoCrueltyComponent> xeno, ref  MeleeHitEvent args)
+    private void OnCrueltyHit(Entity<XenoCrueltyComponent> xeno, ref MeleeHitEvent args)
     {
         bool hit = false;
         foreach (var ent in args.HitEntities)

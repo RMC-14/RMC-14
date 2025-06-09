@@ -1,3 +1,6 @@
+cm-chatsan-word-u = u
+cm-chatsan-replacement-u = you
+
 cm-chatsan-word-deltard = deltard
 cm-chatsan-replacement-deltard = delta
 
@@ -382,10 +385,10 @@ cm-chatsan-word-cas = cas
 cm-chatsan-replacement-cas = skyspit
 
 cm-chatsan-word-sensors = sensors
-cm-chatsan-replacement-sensors = tall eye tower
+cm-chatsan-replacement-sensors = evil eye tower
 
 cm-chatsan-word-sensor-tower = sensor tower
-cm-chatsan-replacement-sensor-tower = tall eye tower
+cm-chatsan-replacement-sensor-tower = evil eye tower
 
 cm-chatsan-word-comms = comms
 cm-chatsan-replacement-comms = tall hivemind tower
@@ -452,3 +455,90 @@ cm-chatsan-replacement-surv = planet tall
 
 cm-chatsan-word-survs = survs
 cm-chatsan-replacement-survs = planet talls
+
+cm-chatsan-word-bro = bro
+cm-chatsan-replacement-bro = sister
+
+cm-chatsan-word-bruh = bruh
+cm-chatsan-replacement-bruh = sister
+
+cm-chatsan-word-bvro = bvro
+cm-chatsan-replacement-bvro = sister
+
+cm-chatsan-word-xro = xro
+cm-chatsan-replacement-xro = sister
+
+cm-chatsan-word-naur = naur
+cm-chatsan-replacement-naur = no
+
+cm-chatsan-word-dancer = d*ncer
+cm-chatsan-replacement-dancer = dancer
+
+cm-chatsan-word-larba = larba
+cm-chatsan-replacement-larba = larva
+
+cm-chatsan-word-toob = toob
+cm-chatsan-replacement-toob = tube
+
+cm-chatsan-word-toober = toober
+cm-chatsan-replacement-toober = tuber
+
+cm-chatsan-word-cooked = cooked
+cm-chatsan-replacement-cooked = doomed
+
+cm-chatsan-word-xooked = xooked
+cm-chatsan-replacement-xooked = doomed
+
+cm-chatsan-word-xibidi = xibidi
+cm-chatsan-replacement-xibidi = tall seat
+
+cm-chatsan-word-mcxonald = mcxonald
+cm-chatsan-replacement-mcxonald = tall garden
+
+cm-chatsan-word-mcxonalds = mcxonalds
+cm-chatsan-replacement-mcxonalds = tall garden
+
+cm-chatsan-word-slop = slop
+cm-chatsan-replacement-slop = hell
+
+cm-chatsan-word-spam = spam
+cm-chatsan-replacement-spam = flood
+
+cm-chatsan-word-god = god
+cm-chatsan-replacement-god = queen mother
+
+cm-chatsan-word-xod = xod
+cm-chatsan-replacement-xod = queen mother
+
+cm-chatsan-word-jesus = jesus
+cm-chatsan-replacement-jesus = queen mother
+
+cm-chatsan-word-xesus = xesus
+cm-chatsan-replacement-xesus = queen mother
+
+cm-chatsan-word-jesus-christ = jesus christ
+cm-chatsan-replacement-jesus-christ = queen mother
+
+cm-chatsan-word-froot = froot
+cm-chatsan-replacement-froot = fruit
+
+cm-chatsan-word-yung = yung
+cm-chatsan-replacement-yung = young
+
+cm-chatsan-word-croosh = croosh
+cm-chatsan-replacement-croosh = crush
+
+cm-chatsan-word-croosher = croosher
+cm-chatsan-replacement-croosher = crusher
+
+cm-chatsan-word-bald = bald
+cm-chatsan-replacement-bald = crestless
+
+cm-chatsan-word-woyer = woyer
+cm-chatsan-replacement-woyer = warrior
+
+cm-chatsan-word-sigma = sigma
+cm-chatsan-replacement-sigma = prime
+
+cm-chatsan-word-xigma = xigma
+cm-chatsan-replacement-xigma = prime

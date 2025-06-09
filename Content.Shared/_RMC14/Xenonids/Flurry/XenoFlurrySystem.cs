@@ -92,7 +92,7 @@ public sealed class XenoFlurrySystem : EntitySystem
 
             hits++;
 
-            var change = _damage.TryChangeDamage(victim, damage, origin: xeno, tool: xeno);
+            var change = _damage.TryChangeDamage(victim, _xeno.TryApplyXenoSlashDamageMultiplier(victim, damage), origin: xeno, tool: xeno);
 
             if (change?.GetTotal() > FixedPoint2.Zero)
             {
