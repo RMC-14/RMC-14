@@ -13,7 +13,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
-        state: aegiscrate # or use 'burrower' if you don't have a custom state
+        state: aegiscrate
     - type: TacticalMapTracked
     - type: XenoMapTracked
     - type: MarineMapTracked
