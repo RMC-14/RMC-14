@@ -1,0 +1,36 @@
+- type: entityTable
+  id: RMCClosetGoldenArrowFill
+  table: !type:AllSelector
+    children:
+    - id: CMBootsBlackFilled
+    - id: JumpsuitMarine
+    - id: RMCHeadsetGoldenArrow
+
+- type: entityTable
+  id: RMCClosetGoldenArrowSLFill
+  table: !type:AllSelector
+    children:
+    - id: CMArmorHelmetM11
+    - id: RMCLaserDesignator
+    - id: RMCWhistle
+
+- type: entityTable
+  id: RMCClosetGoldenArrowSGOFill
+  table: !type:AllSelector
+    children:
+    - id: RMCSmartGun
+    - id: RMCPowerCellSmartgun
+    - id: CMArmorSmartGunCombatHarness
+    - id: RMCBeltSmartGunOperatorPistolFilled
+    - id: RMCMagazineSmartGun
+    - id: RMCMagazineSmartGun
+    - id: RMCGlassesSmartGunSight
+    - id: RMCWebbingClipOnPouch
+    - id: RMCWebbingGrenade
+
+- type: entityTable
+  id: RMCClosetTSEPAFill
+  table: !type:AllSelector
+    children:
+    - id: RMCCoatTSEPAHighVis
+    - id: RMCCoatTSEPAHighVisVest

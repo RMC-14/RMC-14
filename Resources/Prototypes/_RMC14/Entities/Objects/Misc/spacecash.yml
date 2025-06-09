@@ -16,6 +16,7 @@
   - type: Tag
     tags:
     - Holdout
+    - RMCSpaceCash
   - type: Stack
     stackType: Dollar
     count: 1
@@ -53,6 +54,9 @@
   name: 1 dollar bill
   icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
   spawn: RMCSpaceCash1
+
+- type: Tag
+  id: RMCSpaceCash
 
 # TODO RMC14 make different bills
 

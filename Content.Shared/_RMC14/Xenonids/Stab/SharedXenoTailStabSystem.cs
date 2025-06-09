@@ -10,6 +10,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
@@ -45,6 +46,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -183,14 +185,14 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     RaiseLocalEvent(hit, attackedEv);
 
                     var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
-                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab , tool: stab);
+                    var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab);
 
                     if (change?.GetTotal() > FixedPoint2.Zero)
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
 
                     if (stab.Comp.InjectNeuro)
                     {
-                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox))
+                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) || HasComp<XenoComponent>(hit))
                            continue;
 
                         if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
@@ -225,16 +227,24 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                         }
                     }
 
-                    var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hit));
+                    var hitName = Identity.Name(hit, EntityManager, stab);
+                    var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hitName));
                     if (_net.IsServer)
                         _popup.PopupEntity(msg, stab, stab);
 
                     msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", stab));
                     _popup.PopupEntity(msg, stab, hit, PopupType.MediumCaution);
 
-                    msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", stab), ("target", hit));
                     var othersFilter = Filter.PvsExcept(stab).RemovePlayerByAttachedEntity(hit);
-                    _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
+                    foreach (var other in othersFilter.Recipients)
+                    {
+                        if (other.AttachedEntity is not { } otherEnt)
+                            continue;
+
+                        hitName = Identity.Name(hit, EntityManager, otherEnt);
+                        msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", stab), ("target", hitName));
+                        _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
+                    }
                 }
             }
         }

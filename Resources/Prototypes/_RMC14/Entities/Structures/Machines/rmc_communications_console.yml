@@ -141,6 +141,79 @@
     sound: null
 
 - type: entity
+  parent: RMCTacticalMapTable
+  id: RMCTacticalMapTableLarge
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/large_map_table.rsi
+    offset: 1, 0.5
+    layers:
+    - state: maptable
+    - state: maptable-on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.TacticalMapComputerUi.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
+  - type: TacticalMapComputer
+  - type: EmitSoundOnUIOpen
+    sound: null
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.5,2.4,1.4"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: PlaceableSurface
+
+- type: entity
+  parent: RMCTacticalMapTableLarge
+  id: RMCTacticalMapTableLargeRotated
+  suffix: Rotated
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/large_map_table_rotated.rsi
+    offset: 0.5, 1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.4,1.4,2.4"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+
+- type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCEscapePodController
   name: escape pod controller

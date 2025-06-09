@@ -7,16 +7,6 @@
   description: Can hold various things.
   components:
   - type: Appearance
-  - type: Sprite
-    layers:
-    - state: icon
-    - state: half
-      map: [ "openLayer" ]
-    - state: full
-      map: [ "closedLayer" ]
-  - type: CMStorageVisualizer
-    storageClosed: closedLayer
-    storageOpen: openLayer
   - type: Item
     size: Large
   - type: UserInterface
@@ -34,7 +24,7 @@
 - type: entity
   abstract: true
   parent: CMBeltBase
-  id: CMBeltBaseStorage
+  id: RMCBeltBaseStorageNoVisuals
   components:
   - type: Storage
     maxItemSize: Small
@@ -47,3 +37,18 @@
   - type: RMCStorageEjectHand
   - type: StoreAfterFailedInteract
 
+- type: entity
+  abstract: true
+  parent: RMCBeltBaseStorageNoVisuals
+  id: CMBeltBaseStorage
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer

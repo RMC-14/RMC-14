@@ -1,4 +1,7 @@
 # Basic chair
+- type: Tag
+  id: RMCSeat
+
 - type: entity
   abstract: true
   parent: SeatBase
@@ -11,6 +14,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/chairs.rsi
     state: chair
+  - type: Tag
+    tags:
+    - RMCSeat
 
 - type: entity
   parent: CMSeatBase
@@ -70,6 +76,15 @@
   components:
   - type: Sprite
     state: comfychair_ares
+
+- type: entity
+  parent: CMChairComfyARES
+  id: RMCChairComfyAI
+  name: AI interface chair
+  suffix: AI
+  components:
+  - type: Sprite
+    state: ai_interface_chair
 
 - type: entity
   parent: CMChairComfy

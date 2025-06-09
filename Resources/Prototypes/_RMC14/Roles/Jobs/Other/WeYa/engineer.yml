@@ -47,6 +47,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCEngineer
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCEngineer
+  name: weya pmc engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCEngineer
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCEngineer

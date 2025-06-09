@@ -48,6 +48,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCDirector
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCSiteDirector
+  name: weya pmc director spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCDirector
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCDirector

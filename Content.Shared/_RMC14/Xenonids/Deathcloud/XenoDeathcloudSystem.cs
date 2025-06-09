@@ -1,4 +1,5 @@
-﻿using Content.Shared.Coordinates;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Coordinates;
 using Content.Shared.Mobs;
 using Robust.Shared.Network;
 
@@ -7,6 +8,7 @@ namespace Content.Shared._RMC14.Xenonids.Deathcloud;
 public sealed class XenoDeathcloudSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
@@ -21,7 +23,8 @@ public sealed class XenoDeathcloudSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        SpawnAtPosition(xeno.Comp.Spawn, xeno.Owner.ToCoordinates());
+        var spawn = SpawnAtPosition(xeno.Comp.Spawn, xeno.Owner.ToCoordinates());
+        _hive.SetSameHive(xeno.Owner, spawn);
         QueueDel(xeno);
     }
 }

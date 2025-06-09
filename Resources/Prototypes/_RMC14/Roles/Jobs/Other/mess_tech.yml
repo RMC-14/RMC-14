@@ -21,7 +21,7 @@
   startingGear: CMGearMessTech
   icon: "CMJobIconMessTech"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-aso
+  supervisors: cm-job-supervisors-qm
   accessGroups:
   - MessTech
   roleWeight: 0.25
