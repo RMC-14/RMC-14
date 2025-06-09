@@ -84,7 +84,7 @@
       visible: false
   - type: Item
     sprite: _RMC14/Objects/Misc/Janitorial/bucket.rsi
-    size: Large
+    size: Normal
   - type: SolutionContainerVisuals
     fillBaseName: mopbucket-
   - type: SolutionContainerManager
@@ -106,6 +106,7 @@
       state: janibucket-1
       visible: false
   - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/bucket.rsi
     size: Normal
   - type: SolutionContainerVisuals
     fillBaseName: janibucket-
