@@ -63,7 +63,7 @@ public sealed partial class OrbitalCannonComponent : Component
     public SoundSpecifier? TravelSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_orbital_travel.ogg");
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? AegisBoomSound = new SoundPathSpecifier("/Audio/_RMC14/Explosion/aegis-boom.ogg");
+    public SoundSpecifier? AegisBoomSound = new SoundPathSpecifier("/Audio/_RMC14/Explosion/aegis-close.ogg");
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? LastFireAt;

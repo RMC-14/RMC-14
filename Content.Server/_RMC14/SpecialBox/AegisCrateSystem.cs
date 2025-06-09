@@ -5,13 +5,14 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Storage.Components;
-using Content.Shared.Access.Systems;    // Keep this line, remove Content.Server.Access.Systems if present
 using Robust.Shared.Timing;
 using Robust.Shared.Maths;
 using System.Numerics;
 using Content.Shared.Physics;
 using Robust.Shared.Physics;
 using Content.Shared.Tag;
+using Content.Shared.Access.Systems;
+
 
 namespace Content.Server._RMC14.AegisCrate;
 
@@ -50,9 +51,8 @@ public sealed class AegisCrateSystem : EntitySystem
         {
             // Offset OB spawn slightly south (down)
             var coords = Transform(uid).Coordinates.Offset(new Vector2(0, -0.2f));
-            var ob = _entityManager.SpawnEntity("RCMPlushieRounyLizard", coords);
+            var ob = _entityManager.SpawnEntity("RMCOrbitalCannonWarheadAegis", coords);
 
-            // Add the tag so only this OB is interactable from range
 
 
             var tagSystem = EntitySystem.Get<TagSystem>();
@@ -75,6 +75,8 @@ public sealed class AegisCrateSystem : EntitySystem
 
         comp.State = AegisCrateState.Opening;
         Dirty(uid, comp);
+
+
 
         // Start a timer to set state to Open after animation duration
         Timer.Spawn(TimeSpan.FromSeconds(OpeningDuration), () =>
