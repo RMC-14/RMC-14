@@ -61,7 +61,7 @@
             tags:
               - Bucket
           priority: 4 # Higher than trash bag slot
-          startingItem: CMBucketJani
+          startingItem: RMCBucketJanitorial
         trashbag_slot:
           name: janitorial-trolley-slot-component-slot-name-trashbag
           whitelist:
