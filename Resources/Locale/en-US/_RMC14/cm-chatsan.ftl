@@ -575,7 +575,7 @@ cm-chatsan-word-gun = gun
 cm-chatsan-replacement-rifle = spitter
 
 cm-chatsan-word-rifles = rifles
-cm-chatsan-word-gun = guns
+cm-chatsan-word-guns = guns
 cm-chatsan-replacement-rifles = spitters
 
 cm-chatsan-word-pistol = pistol
