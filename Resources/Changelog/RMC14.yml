@@ -5164,14 +5164,6 @@
   url: https://github.com/RMC-14/RMC-14/pull/6646
 - author: Dutch-VanDerLinde
   changes:
-  - message: Corporate survivor now ranks up from sum of time in liaison and time
-      in corporate survivor.
-    type: Tweak
-  id: 1837
-  time: '2025-06-08T12:09:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6550
-- author: Dutch-VanDerLinde
-  changes:
   - message: Added a 70 hour playtime reward for security survivors, senior officer
       rank.
     type: Add
