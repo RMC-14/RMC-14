@@ -447,6 +447,14 @@ public sealed class OrbitalCannonSystem : EntitySystem
         firing.WarheadName = Name(warhead);
         firing.Squad = squad;
         firing.StartedAt = time;
+
+        if (TryComp(warhead, out OrbitalCannonWarheadComponent? warheadComp))
+        {
+            firing.FirstWarningRange = warheadComp.FirstWarningRange;
+            firing.SecondWarningRange = warheadComp.SecondWarningRange;
+            firing.ThirdWarningRange = warheadComp.ThirdWarningRange;
+        }
+
         Dirty(cannon, firing);
 
         _popup.PopupCursor("Orbital bombardment launched!", user);
@@ -518,21 +526,21 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
                 _audio.PlayPvs(cannon.TravelSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(75));
 
-                _mortar.PopupWarning(planetCoordinates, 30, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
+                _mortar.PopupWarning(planetCoordinates, firing.FirstWarningRange, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
             }
 
             if (!firing.WarnedOne && time > firing.StartedAt + firing.WarnOneDelay)
             {
                 firing.WarnedOne = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, 25, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
+                _mortar.PopupWarning(planetCoordinates, firing.SecondWarningRange, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
             }
 
             if (!firing.WarnedTwo && time > firing.StartedAt + firing.WarnTwoDelay)
             {
                 firing.WarnedTwo = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, 15, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+                _mortar.PopupWarning(planetCoordinates, firing.ThirdWarningRange, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
             }
 
             if (!firing.AegisBoomed && time > firing.StartedAt + firing.AegisBoomDelay)

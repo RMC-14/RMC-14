@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
@@ -34,7 +33,7 @@ public sealed class XenoFightOrFlightSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         if (!TryComp<XenoEnergyComponent>(xeno, out var energy))

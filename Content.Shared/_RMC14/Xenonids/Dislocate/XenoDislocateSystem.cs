@@ -15,11 +15,10 @@ using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using System;
 
 namespace Content.Shared._RMC14.Xenonids.Dislocate;
 
-public sealed partial class XenoDislocateSystem : EntitySystem
+public sealed class XenoDislocateSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
@@ -33,6 +32,7 @@ public sealed partial class XenoDislocateSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoDislocateComponent, XenoDislocateActionEvent>(OnDislocateAction);
@@ -43,7 +43,7 @@ public sealed partial class XenoDislocateSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -54,14 +54,11 @@ public sealed partial class XenoDislocateSystem : EntitySystem
         var targetId = args.Target;
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
-        var isDebuffed = false;
-
-        if (HasComp<RMCSlowdownComponent>(targetId) || HasComp<RMCSuperSlowdownComponent>(targetId) ||
-            HasComp<RMCRootedComponent>(targetId) || HasComp<StunnedComponent>(targetId) ||
-            _standing.IsDown(targetId))
-        {
-            isDebuffed = true;
-        }
+        var isDebuffed = HasComp<RMCSlowdownComponent>(targetId) ||
+                         HasComp<RMCSuperSlowdownComponent>(targetId) ||
+                         HasComp<RMCRootedComponent>(targetId) ||
+                         HasComp<StunnedComponent>(targetId) ||
+                         _standing.IsDown(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, ignoreResistances: isDebuffed, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
@@ -72,7 +69,7 @@ public sealed partial class XenoDislocateSystem : EntitySystem
 
         if (isDebuffed)
         {
-            _slow.TryRoot(targetId, xeno.Comp.RootTime, true);
+            _slow.TryRoot(targetId, _xeno.TryApplyXenoDebuffMultiplier(targetId, xeno.Comp.RootTime), true);
         }
         else
         {

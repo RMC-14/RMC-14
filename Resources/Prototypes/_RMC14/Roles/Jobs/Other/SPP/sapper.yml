@@ -12,6 +12,7 @@
   accessGroups:
   - Colonist
   - CombatTech
+  spawnMenuRoleName: SPP Sapper
   special:
   - !type:AddComponentSpecial
     components:

@@ -1,0 +1,89 @@
+﻿- type: entity
+  abstract: true
+  parent: CMBaseStructure
+  id: RMCPropComputerBase
+  name: terminal
+  description: This can be used for various functions.
+  suffix: Prop
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal
+    layers: [ ]
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: WallMount
+    arc: 360
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPropCommunicationsConsole
+  name: communications console
+  components:
+  - type: Sprite
+    state: comm
+
+- type: entity
+  parent: RMCPropCommunicationsConsole
+  id: RMCPropCommunicationsConsoleAlt
+  suffix: Prop, Alt
+  components:
+  - type: Sprite
+    state: comm_alt
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCPersonalDesktop
+  name: personal desktop
+  components:
+  - type: Sprite
+    state: terminal1
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCSecurityCameraConsole
+  name: security cameras console
+  components:
+  - type: Sprite
+    state: security_cam
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCSecurityRecordsConsole
+  name: security records
+  components:
+  - type: Sprite
+    state: jas
+
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCIdentificationComputer
+  name: identification computer
+  components:
+  - type: Sprite
+    state: engineering_terminal

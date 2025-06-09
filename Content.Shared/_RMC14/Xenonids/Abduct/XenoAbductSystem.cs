@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hook;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
@@ -41,6 +42,8 @@ public sealed partial class XenoAbductSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCDazedSystem _dazed = default!;
 
     private readonly HashSet<EntityUid> _abductEnts = new();
 
@@ -132,7 +135,8 @@ public sealed partial class XenoAbductSystem : EntitySystem
                 //Not human, not harmable
                 //Dead, Incapacitated, or big
                 //Incapacitated includes dead, crit, or stunned looks like
-                if (HasComp<StunnedComponent>(ent) || !_xeno.CanAbilityAttackTarget(xeno, ent) || _mob.IsCritical(ent))
+                if (HasComp<StunnedComponent>(ent) || !_xeno.CanAbilityAttackTarget(xeno, ent) || _mob.IsCritical(ent) ||
+                    (_size.TryGetSize(ent, out var targetSize) && targetSize >= RMCSizes.Big))
                     continue;
 
                 if (!targets.Contains(ent))
@@ -190,9 +194,9 @@ public sealed partial class XenoAbductSystem : EntitySystem
                 //TODO RMC14 Camera shake
 
                 _slow.TrySlowdown(ent, slowTime, ignoreDurationModifier: true);
-                _slow.TryRoot(ent, rootTime);
-                _stutter.DoStutter(ent, dazeTime, true);
-                _stun.TryParalyze(ent, stunTime, true);
+                _slow.TryRoot(ent, _xeno.TryApplyXenoDebuffMultiplier(ent, rootTime));
+                _dazed.TryDaze(ent, dazeTime, true, stutter: true);
+                _stun.TryParalyze(ent, _xeno.TryApplyXenoDebuffMultiplier(ent, stunTime), true);
 
                 _rmcObstacleSlamming.MakeImmune(ent);
                 _throwing.TryThrow(ent, diff, 10, user: xeno);

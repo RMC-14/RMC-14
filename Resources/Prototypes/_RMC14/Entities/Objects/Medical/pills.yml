@@ -35,7 +35,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 20
+        maxVol: 60
   - type: SolutionSpiker
     sourceSolution: food
   - type: Extractable
@@ -49,6 +49,7 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: RMCSmartFridgeInsertable
 
 # TODO RMC14 these need to have a random state per round
 - type: entity
@@ -158,5 +159,23 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
     skilledExamine: cm-pill-contents-tricordrazine
+
+- type: entity
+  parent: CMPill
+  id: RMCPillRussianRed
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: RMCRussianRed
+          Quantity: 10
+  - type: Sprite
+    layers:
+    - state: pill12
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-russianred
 
 # TODO RMC14 peridaxon, tramadol

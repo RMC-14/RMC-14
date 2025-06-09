@@ -38,3 +38,25 @@
   parent: CMMemorialMaintainers
   id: CMMemorialAdmins
   description: A memorial to all Admins and Moderators who have retired from RMC-14. No mentor names are present.
+
+- type: entity
+  parent: CMMemorial
+  id: RMCMemorialWall
+  components:
+  - type: Sprite
+    state: ship_memorial_wall
+    offset: 0.5,0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: WallMount
+    arc: 360
+  - type: Physics
+    bodyType: Static
+    canCollide: false
