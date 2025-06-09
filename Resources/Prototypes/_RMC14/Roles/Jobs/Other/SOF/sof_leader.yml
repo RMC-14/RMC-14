@@ -6,12 +6,12 @@
   playTimeTracker: CMJobMarineRaiderLeader
   ranks:
     RMCRankGunnerySergeant: [ ]
-  startingGear: RMCGearMarineRaider
+  startingGear: RMCGearMarineRaiderLeader
   icon: RMCJobIconMarineRaider
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: MARSOC Raider
+  spawnMenuRoleName: MARSOC Raider Team Leader
   special:
   - !type:AddComponentSpecial
     components:
@@ -48,8 +48,8 @@
   suffix: Role
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Food/Baked/pizza.rsi
-    state: box
+    sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCMarineRaiderLeader
 
@@ -81,7 +81,7 @@
     suitstorage: RMCWeaponRifleXM40
     id: RMCDogtagMarineRaiderLeader
     belt: RMCWeaponShotgunXM38Filled
-    back: CMSatchelMarine
+    back: RMCSatchelMARSOC
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
     pocket2: RMCPouchToolsSocMarineRaiderFill
   storage:

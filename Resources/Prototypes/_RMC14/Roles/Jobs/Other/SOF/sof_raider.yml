@@ -41,8 +41,8 @@
   suffix: Role
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Food/Baked/pizza.rsi
-    state: box
+    sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCMarineRaider
 
@@ -65,7 +65,7 @@
   id: RMCGearMarineRaider
   equipment:
     head: RMCArmorHelmetMARSOC
-    mask: RMCMaskBalaclava # TODO RMC14
+    mask: RMCMaskBalaclavaMARSOC
     ears: RMCHeadsetMARSOC
     jumpsuit: RMCJumpsuitMarsocWebbingBuckshot
     outerClothing: RMCArmorMARSOCXM40
@@ -74,7 +74,7 @@
     suitstorage: RMCWeaponRifleXM40
     id: RMCDogtagMarineRaider
     belt: RMCWeaponShotgunXM38Filled
-    back: CMSatchelMarine
+    back: RMCSatchelMARSOC
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
     pocket2: RMCPouchToolsSocMarineRaiderFill
   storage:
