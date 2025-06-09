@@ -1,7 +1,12 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Medical.CPR;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(CPRSystem))]
-public sealed partial class ReceivingCPRComponent : Component;
+public sealed partial class ReceivingCPRComponent : Component
+{
+    // The time it takes to perform CPR pre skill modification.
+    [DataField, AutoNetworkedField]
+    public int CPRPerformingTime = 4;
+}

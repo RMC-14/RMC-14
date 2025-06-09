@@ -1185,6 +1185,8 @@
     checkCanAccess: false
     deselectOnMiss: false
   - type: ActionBlockIfResting
+  - type: ActionInRangeUnobstructed
+    range: 2.5
   - type: XenoOffensiveAction
 
 - type: entity

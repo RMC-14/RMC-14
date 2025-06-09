@@ -9,6 +9,7 @@
   startingGear: RMCGearRoyalSmartGunOperator
   icon: RMCJobIconRoyalSmartGunOperator
   joinNotifyCrew: false
+  spawnMenuRoleName: RCM Smart Gun Operator
   special:
   - !type:AddComponentSpecial
     components:
@@ -57,6 +58,10 @@
     job: CMRoyalMarinesSGO
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear

@@ -147,6 +147,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/large_map_table.rsi
     offset: 1, 0.5
+    drawdepth: Objects
     layers:
     - state: maptable
     - state: maptable-on

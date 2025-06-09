@@ -106,3 +106,21 @@
   - type: Sprite
     sprite: _RMC14/Interface/power_loader_clamps.rsi
     state: ob_warhead
+
+- type: entity
+  parent: RMCVirtualPowerLoaderLeft
+  id: RMCVirtualWarheadLeftAegis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ob_warhead_aegis
+
+- type: entity
+  parent: RMCVirtualPowerLoaderRight
+  id: RMCVirtualWarheadRightAegis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ob_warhead_aegis_right

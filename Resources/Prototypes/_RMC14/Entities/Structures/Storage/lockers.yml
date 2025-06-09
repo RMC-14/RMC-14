@@ -416,3 +416,35 @@
   parent: RMCLockerSmartGunOperatorOne
   id: RMCLockerSmartGunOperatorFour
   name: squad four smartgun operator locker
+
+- type: entity
+  parent: RMCCabinet
+  id: RMCCabinetTSEPAInspector
+  name: inspector's cabinet
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPAInspector"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerTSEPASeniorConstable
+  name: senior constable's locker
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPABrig"]]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetTSEPAFill
+
+- type: entity
+  parent: CMLockerPolice
+  id: RMCLockerTSEPA
+  name: constable's locker
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"]]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetTSEPAFill

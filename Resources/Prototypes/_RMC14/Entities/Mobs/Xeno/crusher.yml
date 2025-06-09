@@ -108,6 +108,8 @@
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
   - type: TantrumSpeedBuff
+  - type: FixedIdentity
+    name: cm-job-name-xeno-crusher
 
 - type: entity
   parent: CMXenoCrusherBase

@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 251.0.0
+  engineVersion: 251.0.1
   forkId: ""
   forkVersion: ""
-  time: 04/27/2025 07:30:52
-  entityCount: 962
+  time: 05/29/2025 05:44:43
+  entityCount: 970
 maps:
 - 1
 grids:
@@ -3025,7 +3025,7 @@ entities:
     - type: Transform
       pos: -6.5,4.5
       parent: 2
-- proto: ClothingHeadHatWelding
+- proto: RMCHelmetWelding
   entities:
   - uid: 388
     components:
@@ -6823,6 +6823,23 @@ entities:
     - type: Transform
       pos: -14.5,9.5
       parent: 2
+- proto: RMCBeakerHighCapacity
+  entities:
+  - uid: 254
+    components:
+    - type: Transform
+      pos: 14.5,9.5
+      parent: 2
+  - uid: 255
+    components:
+    - type: Transform
+      pos: 15.5,9.5
+      parent: 2
+  - uid: 256
+    components:
+    - type: Transform
+      pos: 16.5,9.5
+      parent: 2
 - proto: RMCBoxShotgunBuckshot
   entities:
   - uid: 1259
@@ -6901,6 +6918,34 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 15.5,9.5
+      parent: 2
+- proto: RMCChemStorageDrinks
+  entities:
+  - uid: 249
+    components:
+    - type: Transform
+      pos: 8.5,16.5
+      parent: 2
+- proto: RMCChemStorageGround
+  entities:
+  - uid: 250
+    components:
+    - type: Transform
+      pos: 8.5,16.5
+      parent: 2
+- proto: RMCChemStorageMedbay
+  entities:
+  - uid: 251
+    components:
+    - type: Transform
+      pos: 8.5,16.5
+      parent: 2
+- proto: RMCChemStorageResearch
+  entities:
+  - uid: 252
+    components:
+    - type: Transform
+      pos: 8.5,16.5
       parent: 2
 - proto: RMCDropshipAttachmentAmmoGAU
   entities:
@@ -7243,6 +7288,13 @@ entities:
     components:
     - type: Transform
       pos: -4.641217,7.6039085
+      parent: 2
+- proto: RMCSmartFridge
+  entities:
+  - uid: 253
+    components:
+    - type: Transform
+      pos: 17.5,11.5
       parent: 2
 - proto: RMCSpawnMobDoc
   entities:

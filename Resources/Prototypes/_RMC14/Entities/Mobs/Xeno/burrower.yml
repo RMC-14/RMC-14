@@ -118,3 +118,5 @@
     - HiveRecoveryNodeXenoConstructionNode
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-burrower
