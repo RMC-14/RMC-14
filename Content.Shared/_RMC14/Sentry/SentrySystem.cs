@@ -110,6 +110,7 @@ public sealed class SentrySystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, sentry)
         {
             BreakOnMove = true,
+            RootMob = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -513,6 +514,7 @@ public sealed class SentrySystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, sentry)
         {
             BreakOnMove = true,
+            RootMob = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
