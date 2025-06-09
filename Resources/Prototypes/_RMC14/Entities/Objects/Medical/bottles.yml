@@ -75,6 +75,8 @@
     - 30
     - 40
     - 60
+  - type: RMCSmartFridgeInsertable
+    category: Bottle
 
 - type: entity
   parent: CMBottleEmpty

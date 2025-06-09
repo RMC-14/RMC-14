@@ -47,6 +47,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Charger Crusher strain" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Berserker Ravager strain" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Tesla ComTech deployable" />
@@ -93,9 +94,10 @@
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="ARES" Text="Shipside AI with its own room that you need an access ticket to get into." />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Emergency response teams" Text="Factions that randomly spawn, are called to the Almayer through a distress signal sent by CIC, or spawned by admins. Each has their own objectives" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Fractures and internal bleeding" Text="Fractures are caused to a body part through physical damage. Internal bleeding is also caused by physical damage but also by moving with unsplinted fractures." />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Organ damage" Text="Caused by physical damage to unarmored parts, moving with unsplinted fractures, and overdoses." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Trapper Boiler strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Hedgehog Ravager strain" />
@@ -104,8 +106,6 @@
                     <controls:RoadmapVersionHeader Text="Future versions" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More lobby art and music" Text="We are always looking for people to contribute more lobby art and music!" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Sorokyne Strata planet map" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Fractures and internal bleeding" Text="Fractures are caused to a body part through physical damage. Internal bleeding is also caused by physical damage but also by moving with unsplinted fractures." />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Organ damage" Text="Caused by physical damage to unarmored parts, moving with unsplinted fractures, and overdoses." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Clone damage and cryo cells" Text="Clone damage is rarely caused by some chemicals, cryo cells treats this kind of damage." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Autodoc and body scanners" Text="Automatically but very inefficiently treats marines in the medbay." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Vehicles, the tank and the ARC" Text="Driveable vehicles such as the colony van, which can be repaired. The tank unlocks at 200 players for the marines." />

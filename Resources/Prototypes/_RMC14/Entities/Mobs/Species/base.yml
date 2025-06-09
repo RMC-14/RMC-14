@@ -374,3 +374,12 @@
     drawDepths:
       Dead: DeadMobs
   - type: IVDripTarget
+  - type: FixedIdentity
+    name: rmc-host
+    whitelist:
+      components:
+      - Xeno
+  - type: HiddenAppearance
+    whitelist:
+      components:
+      - Xeno

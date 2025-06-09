@@ -47,7 +47,7 @@
       entries:
       - id: RMCHardhatOrange
         name: orange hard hat
-      - id: ClothingHeadHatWelding
+      - id: RMCHelmetWelding
       # /obj/item/clothing/head/cmcap/flap
 #    - name: Suit
 #      choices: { CMSuit: 1 }
@@ -141,6 +141,16 @@
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskSterile
+
+- type: entity
+  parent: ColMarTechCrewSynthetic
+  id: ColMarTechCrewSyntheticColony
+  name: ColMarTech Synthetic Equipment Rack
+  suffix: Colony Synth Access
+  components:
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSyntheticColony
 
 - type: entity
   parent: ColMarTechBase

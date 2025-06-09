@@ -10,6 +10,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
@@ -226,16 +227,24 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                         }
                     }
 
-                    var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hit));
+                    var hitName = Identity.Name(hit, EntityManager, stab);
+                    var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hitName));
                     if (_net.IsServer)
                         _popup.PopupEntity(msg, stab, stab);
 
                     msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", stab));
                     _popup.PopupEntity(msg, stab, hit, PopupType.MediumCaution);
 
-                    msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", stab), ("target", hit));
                     var othersFilter = Filter.PvsExcept(stab).RemovePlayerByAttachedEntity(hit);
-                    _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
+                    foreach (var other in othersFilter.Recipients)
+                    {
+                        if (other.AttachedEntity is not { } otherEnt)
+                            continue;
+
+                        hitName = Identity.Name(hit, EntityManager, otherEnt);
+                        msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", stab), ("target", hitName));
+                        _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
+                    }
                 }
             }
         }

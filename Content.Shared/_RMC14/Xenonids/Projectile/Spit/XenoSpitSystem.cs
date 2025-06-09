@@ -197,7 +197,7 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -287,7 +287,7 @@ public sealed class XenoSpitSystem : EntitySystem
         foreach (var (actionId, action) in _actions.GetActions(ent))
         {
             if (action.BaseEvent is XenoAcidBallActionEvent)
-                _actions.SetUseDelay(actionId, ent.Comp.Cooldown);
+                _actions.SetCooldown(actionId, ent.Comp.Cooldown);
         }
 
         if (!args.Handled)

@@ -1,17 +1,17 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Finesse;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Coordinates;
-using Robust.Shared.Timing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Actions;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Impale;
 
@@ -40,7 +40,7 @@ public sealed class XenoImpaleSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;

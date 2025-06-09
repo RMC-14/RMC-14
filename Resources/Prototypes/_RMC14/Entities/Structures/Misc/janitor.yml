@@ -18,6 +18,7 @@
             tags:
               - Mop
           priority: 9 # Higher than bucket slot
+          startingItem: CMMop
         wetfloorsign_slot4:
           name: janitorial-trolley-slot-component-slot-name-sign
           whitelist:
@@ -60,6 +61,7 @@
             tags:
               - Bucket
           priority: 4 # Higher than trash bag slot
+          startingItem: RMCBucketJanitorial
         trashbag_slot:
           name: janitorial-trolley-slot-component-slot-name-trashbag
           whitelist:

@@ -97,6 +97,8 @@
       state: defender
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-defender
 
 - type: entity
   parent: CMXenoDefenderBase

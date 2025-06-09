@@ -35,6 +35,8 @@
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
       - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
       - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: [ "jumpsuit" ]
       - map: [ "enum.HumanoidVisualLayers.LHand" ]
       - map: [ "enum.HumanoidVisualLayers.RHand" ]
@@ -91,6 +93,8 @@
       Unsexed: RMCMaleRodentia
   - type: Inventory
     speciesId: rodentia
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rodentia
 
 - type: entity
   save: false
