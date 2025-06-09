@@ -122,6 +122,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadAegis
+  description: "An experimental phoron-based Aegis Orbital Warhead, straight from the R&D Division of Aegis."
   name: Aegis orbital warhead
   components:
   - type: Sprite
@@ -130,6 +131,9 @@
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionAegis
     isAegis: true
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualWarheadRightAegis
+    virtualLeft: RMCVirtualWarheadLeftAegis
 
 - type: entity
   id: RMCOrbitalCannonWarheadSpawner
@@ -192,17 +196,17 @@
       max: 200
       delay: 1
     - type: RMCOBXenoTunnel
-      total: 90000
+      total: 150000
       slope: 10
-      max: 50
+      max: 90
       delay: 0.3
     - type: RMCOBXenoTunnel
-      total: 90000
+      total: 150000
       slope: 10
-      max: 50
+      max: 90
       delay: 0.3
     - fire: RMCTileFireOBAegis
-      fireRange: 32
+      fireRange: 35
   - type: WarpPoint
     location: 1 orbital bombardment
 

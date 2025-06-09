@@ -33,3 +33,6 @@
       isCorrodible: False
     - type: DestroyedByExplosionType
       exlosion: RMCOBXenoTunnel
+    - type: Audio
+      sound:
+        path: /Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg

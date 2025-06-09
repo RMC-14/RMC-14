@@ -50,13 +50,12 @@ public sealed partial class OrbitalCannonFiringComponent : Component
     public bool WarnedTwo;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AegisBoomDelay = TimeSpan.FromSeconds(14);
+    public TimeSpan ImpactDelay = TimeSpan.FromSeconds(24);
+
+    public TimeSpan AegisBoomDelay => ImpactDelay - TimeSpan.FromSeconds(4.5);
 
     [DataField, AutoNetworkedField]
     public bool AegisBoomed;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan ImpactDelay = TimeSpan.FromSeconds(24);
 
     [DataField, AutoNetworkedField]
     public bool Impacted;

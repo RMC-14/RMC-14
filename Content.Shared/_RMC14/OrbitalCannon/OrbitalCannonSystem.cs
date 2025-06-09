@@ -545,7 +545,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
                     TryComp(warhead, out OrbitalCannonWarheadComponent? warheadComp) &&
                     warheadComp.IsAegis)
                 {
-                    _audio.PlayPvs(cannon.AegisBoomSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(500));
+                    _audio.PlayPvs(cannon.AegisBoomSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(50));
                     _rmcChat.ChatMessageToMany("[color=yellow]DEBUG: Aegis boom sound triggered[/color]", "[color=yellow]DEBUG: Aegis boom sound triggered[/color]", Filter.Broadcast(), ChatChannel.Radio);
                 }
             }
