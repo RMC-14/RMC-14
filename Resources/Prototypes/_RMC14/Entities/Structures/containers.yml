@@ -110,13 +110,13 @@
   - type: Sprite
     state: tartarus_l
   - type: Occluder
-    boundingBox: "-0.5,-0.5,0.5,0.8"
+    boundingBox: "-0.5,-0.5,0.5,0.5"
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.8"
+          bounds: "-0.5,-0.5,0.5,0.5"
         density: 190
         layer:
         - MobMask

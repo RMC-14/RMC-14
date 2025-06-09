@@ -154,7 +154,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     private void OnDamageMobStateMapInit(Entity<DamageMobStateComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.DamageAt = _timing.CurTime + ent.Comp.Cooldown;
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(ent.Comp.DamageAt));
     }
 
     private void OnDamageOverTimeStartCollide(Entity<DamageOverTimeComponent> ent, ref StartCollideEvent args)
@@ -459,6 +459,23 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return false;
     }
 
+    public bool HasAnyDamage(Entity<DamageableComponent?> damageable, DamageSpecifier damage)
+    {
+        if (!_damageableQuery.Resolve(damageable, ref damageable.Comp, false))
+            return false;
+
+        foreach (var (type, _) in damage.DamageDict)
+        {
+            if (damageable.Comp.Damage.DamageDict.TryGetValue(type, out var healValue) &&
+                healValue > FixedPoint2.Zero)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
@@ -469,7 +486,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 continue;
 
             comp.DamageAt = time + comp.Cooldown;
-            Dirty(uid, comp);
+            DirtyField(uid, comp, nameof(comp.DamageAt));
 
             if (!_mobStateQuery.TryComp(uid, out var state) ||
                 !_damageableQuery.TryComp(uid, out var damageable))
@@ -480,6 +497,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             switch (state.CurrentState)
             {
                 case MobState.Alive:
+                    if (!HasAnyDamage((uid, damageable), comp.NonDeadDamage))
+                        break;
+
                     _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
                     break;
                 case MobState.Critical:
