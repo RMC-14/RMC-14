@@ -32,9 +32,14 @@ public sealed class AegisEventCommand : IConsoleCommand
         // Announce to both marines and xenos
         AegisSharedAnnouncement.AnnounceToBoth(systemManager, message);
 
-        var item = entityManager.SpawnEntity("RMCIDCardAegis", MapCoordinates.Nullspace);
-        entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(item);
+        // Spawn and send the Aegis ID card
+        var idItem = entityManager.SpawnEntity("RMCIDCardAegis", MapCoordinates.Nullspace);
+        entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(idItem);
 
-        shell.WriteLine("Aegis event announced to marines and xenos, and item sent through ASRS.");
+        // Spawn and send the Powerloader pamphlet
+        var pamphletItem = entityManager.SpawnEntity("CMPamphletPowerloader", MapCoordinates.Nullspace);
+        entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(pamphletItem);
+
+        shell.WriteLine("Aegis event announced to marines and xenos, and items sent through ASRS.");
     }
 }

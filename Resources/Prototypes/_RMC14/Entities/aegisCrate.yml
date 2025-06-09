@@ -10,6 +10,13 @@
           map: ["enum.AegisCrateVisualLayers.Base"]
     - type: AegisCrate
       openSound: /Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: aegiscrate # or use 'burrower' if you don't have a custom state
+    - type: TacticalMapTracked
+    - type: XenoMapTracked
+    - type: MarineMapTracked
     - type: InteractionOutline
     - type: Clickable
     - type: Physics
