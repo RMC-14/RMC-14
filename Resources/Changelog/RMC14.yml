@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Updated Medical, Requisition departments and Intel and Pilot rooms on
-      Savannah.
-    type: Add
-  id: 1345
-  time: '2025-02-16T04:42:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5550
-- author: Whisper
-  changes:
-  - message: Updated Kazi Priestess figurine
-    type: Tweak
-  id: 1346
-  time: '2025-02-16T04:56:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5645
-- author: Djvarik
-  changes:
-  - message: Adds landing zone signs to Shiva, Fiorina, and New Varadero
-    type: Fix
-  id: 1347
-  time: '2025-02-16T04:56:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5600
 - author: ShadowCommander
   changes:
   - message: You can use items in your hand on other items in storage. If there is
@@ -5309,5 +5287,34 @@
   id: 1847
   time: '2025-06-09T14:44:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6669
+- author: DoguhanOzgurAkca
+  changes:
+  - message: Added the Aegis OB, Aegis Secure Box, and Aegis keycard.
+    type: Add
+  id: 1848
+  time: '2025-06-09T20:23:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6668
+- author: noctyrnal
+  changes:
+  - message: Added CLF Engineer, Specialist and Medic roles.
+    type: Add
+  - message: Added Earmuffs and IEDs, commonly used by the CLF.
+    type: Add
+  id: 1849
+  time: '2025-06-09T20:24:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6671
+- author: noctyrnal
+  changes:
+  - message: Added the MARSOC Team Leader role for ERTs.
+    type: Add
+  - message: Added the missing MARSOC Balaclava, Headset and shells in their shotgun.
+    type: Add
+  - message: MARSOC now correctly start in their squads with fixed icons.
+    type: Tweak
+  - message: Most Ghost Roles now have playtime requirements.
+    type: Tweak
+  id: 1850
+  time: '2025-06-09T20:25:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6673
 Name: RMC14
 Order: -1
