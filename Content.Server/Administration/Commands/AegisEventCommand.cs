@@ -32,8 +32,6 @@ public sealed class AegisEventCommand : IConsoleCommand
         // Announce to both marines and xenos
         AegisSharedAnnouncement.AnnounceToBoth(systemManager, message);
 
-        // Send item through ASRS (example: "AegisSpecialItem")
-
         var item = entityManager.SpawnEntity("RMCIDCardAegis", MapCoordinates.Nullspace);
         entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(item);
 

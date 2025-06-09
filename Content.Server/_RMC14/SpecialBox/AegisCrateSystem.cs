@@ -29,7 +29,6 @@ public sealed class AegisCrateSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<AegisCrateComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<AegisCrateComponent, InteractHandEvent>(OnInteractHand);
-        // Subscribe to state change event
         SubscribeLocalEvent<AegisCrateComponent, ComponentInit>(OnComponentInit);
     }
 
@@ -49,7 +48,7 @@ public sealed class AegisCrateSystem : EntitySystem
     {
         if (comp.State == AegisCrateState.Open)
         {
-            // Offset OB spawn slightly south (down)
+            // Offset OB spawn slightly south
             var coords = Transform(uid).Coordinates.Offset(new Vector2(0, -0.2f));
             var ob = _entityManager.SpawnEntity("RMCOrbitalCannonWarheadAegis", coords);
 
@@ -69,7 +68,6 @@ public sealed class AegisCrateSystem : EntitySystem
 
         if (!_accessReader.IsAllowed(args.User, uid))
         {
-            // Optionally send a popup message to the user
             return;
         }
 

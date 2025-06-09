@@ -7,7 +7,6 @@ namespace Content.Shared._RMC14.AegisEvent;
 public static class AegisSharedAnnouncement
 {
     /// <summary>
-    /// Announces an Aegis event to both marines and xenos.
     /// </summary>
     public static void AnnounceToBoth(IEntitySystemManager sysMan, string message)
     {
