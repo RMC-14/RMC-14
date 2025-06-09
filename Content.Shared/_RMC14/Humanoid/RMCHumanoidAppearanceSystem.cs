@@ -54,26 +54,27 @@ public sealed class RMCHumanoidAppearanceSystem : EntitySystem
         var hidden = EnsureComp<HiddenAppearanceComponent>(ev.Mob);
         hidden.Appearance = new RMCHumanoidAppearance
         {
-            ClientOldMarkings = fakeLook.ClientOldMarkings,
-            MarkingSet = fakeLook.MarkingSet,
-            BaseLayers = fakeLook.BaseLayers,
-            PermanentlyHidden = fakeLook.PermanentlyHidden,
+            ClientOldMarkings = new(fakeLook.ClientOldMarkings),
+            MarkingSet = new(fakeLook.MarkingSet),
+            BaseLayers = new(fakeLook.BaseLayers),
+            PermanentlyHidden = new(fakeLook.PermanentlyHidden),
             Gender = fakeLook.Gender,
             Age = fakeLook.Age,
-            CustomBaseLayers = fakeLook.CustomBaseLayers,
+            CustomBaseLayers = new(fakeLook.CustomBaseLayers),
             Species = fakeLook.Species,
             SkinColor = fakeLook.SkinColor,
-            HiddenLayers = fakeLook.HiddenLayers,
+            HiddenLayers = new(fakeLook.HiddenLayers),
             Sex = fakeLook.Sex,
             EyeColor = fakeLook.EyeColor,
             CachedHairColor = fakeLook.CachedHairColor,
             CachedFacialHairColor = fakeLook.CachedFacialHairColor,
-            HideLayersOnEquip = fakeLook.HideLayersOnEquip,
+            HideLayersOnEquip = new(fakeLook.HideLayersOnEquip),
             UndergarmentTop = fakeLook.UndergarmentTop,
             UndergarmentBottom = fakeLook.UndergarmentBottom,
         };
 
         Dirty(ev.Mob, hidden);
+        QueueDel(random);
     }
 
     private void OnHidePlayerIdentitiesChanged(bool value)
