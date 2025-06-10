@@ -166,7 +166,7 @@
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolM1984HP
   name: M1984 HP magazine (9mm)
-  description: A pistol magazine. This one contains hollow-point bullets. More effect against unarmored targets.
+  description: A pistol magazine. This one contains hollow-point bullets. More effective against unarmored targets.
   components:
   - type: Tag
     tags:
