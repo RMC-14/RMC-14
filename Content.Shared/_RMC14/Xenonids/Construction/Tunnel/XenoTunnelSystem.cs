@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -52,6 +53,7 @@ public sealed class XenoTunnelSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -399,7 +401,6 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnInteract(Entity<XenoTunnelComponent> xenoTunnel, ref InteractHandEvent args)
     {
-        var (ent, comp) = xenoTunnel;
         if (args.Handled)
             return;
 
@@ -407,7 +408,7 @@ public sealed class XenoTunnelSystem : EntitySystem
 
         if (_container.ContainsEntity(xenoTunnel.Owner, enteringEntity))
         {
-            _ui.OpenUi(ent, SelectDestinationTunnelUI.Key, enteringEntity);
+            OpenDestinationUI(xenoTunnel, enteringEntity);
             return;
         }
 
@@ -436,19 +437,19 @@ public sealed class XenoTunnelSystem : EntitySystem
         if (!TryComp(enteringEntity, out RMCSizeComponent? xenoSize))
             return;
 
-        var enterDelay = comp.StandardXenoEnterDelay;
+        var enterDelay = xenoTunnel.Comp.StandardXenoEnterDelay;
         TryGetHiveTunnelName(xenoTunnel, out var tunnelName);
         var enterMessageLocId = "rmc-xeno-construction-tunnel-default-xeno-enter";
 
         switch (xenoSize.Size)
         {
             case RMCSizes.Small:
-                enterDelay = comp.SmallXenoEnterDelay;
+                enterDelay = xenoTunnel.Comp.SmallXenoEnterDelay;
                 enterMessageLocId = "rmc-xeno-construction-tunnel-default-xeno-enter";
                 break;
             case RMCSizes.Big:
             case RMCSizes.Immobile:
-                enterDelay = comp.LargeXenoEnterDelay;
+                enterDelay = xenoTunnel.Comp.LargeXenoEnterDelay;
                 enterMessageLocId = "rmc-xeno-construction-tunnel-large-xeno-enter";
                 break;
         }
@@ -531,7 +532,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         }
 
         _container.Insert(enteringEntity, mobContainer);
-        _ui.OpenUi(xenoTunnel.Owner, SelectDestinationTunnelUI.Key, enteringEntity);
+        OpenDestinationUI(xenoTunnel, enteringEntity);
 
         args.Handled = true;
     }
@@ -559,7 +560,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         }
 
         _container.Insert(traversingXeno, mobContainer);
-        _ui.OpenUi(destinationXenoTunnel.Owner, SelectDestinationTunnelUI.Key, args.User);
+        OpenDestinationUI(destinationXenoTunnel, args.User);
 
         args.Handled = true;
     }
@@ -816,6 +817,17 @@ public sealed class XenoTunnelSystem : EntitySystem
             _hive.SetSameHive(builder.Owner, tunnelEnt.Value);
 
         return hasPlacedTunnel;
+    }
+
+    private void OpenDestinationUI(Entity<XenoTunnelComponent> tunnel, EntityUid enteringEntity)
+    {
+        if (_tacticalMap.TryGetTacticalMap(out var map) &&
+            TryComp(enteringEntity, out TacticalMapUserComponent? userComp))
+        {
+            _tacticalMap.UpdateUserData((enteringEntity, userComp), map);
+        }
+
+        _ui.OpenUi(tunnel.Owner, SelectDestinationTunnelUI.Key, enteringEntity);
     }
 }
 
