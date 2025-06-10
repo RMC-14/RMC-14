@@ -91,7 +91,6 @@
           groups:
             Toxin: 2.25
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Arithrazine ]
   id: CMArithrazine
@@ -103,7 +102,7 @@
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.03125 toxin/s 0.03u?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -177,22 +176,16 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Brute: -1.5
+        - Brute: -1
         - Burn: -1
         - Toxin: -1.5
-        - Airloss: -1
-      - !type:HealthChange
-        conditions:
-        - !type:Temperature
-          max: 170
-        damage:
-          types:
-            Cellular: -0.12
+        - Airloss: -0.5
+        - Genetic: -1
 
 # TODO RMC14 other effects
 - type: reagent
@@ -511,7 +504,6 @@
         time: 60
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, CMBicaridine ]
   id: CMMeralyne
@@ -575,7 +567,6 @@
             Toxin: 1.5
 
 # TODO RMC14 other effects
-# TODO RMC14 heal cloneloss
 - type: reagent
   parent: [ CMReagentMedicine, CMCryoxadone ]
   id: CMClonexadone
@@ -586,14 +577,15 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Toxin: -3.75
         - Brute: -2.25
-        - Burn: -3
+        - Burn: -2.25
+        - Toxin: -3
+        - Genetic: -1.5
 
 # TODO RMC14 other effects
 - type: reagent
@@ -607,7 +599,7 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.625u toxin/s 0.63?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -639,7 +631,7 @@
         refresh: true
         type: Add
 
-# Antidepressants
+# Antidepressants/ADHD meds
 - type: reagent
   parent: CMReagentMedicine
   id: RMCMethylphenidate
