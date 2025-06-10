@@ -379,7 +379,7 @@
       - id: RMCSpeedLoader44Heavy
         amount: 10
       - id: RMCSpeedLoader44Marksman
-        amount: 16 # TODO RMC14 6 once heavy is in
+        amount: 6
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
       - id: CMMagazineRifleM54CE2HT
@@ -498,7 +498,10 @@
       - id: RMCBoxMagazineRevolverM44Marksman
         name: Magazine Box (Marksman M44 x 16)
         box: RMCSpeedLoader44Marksman
-#      - name: Magazine Box (Heavy M44 x 16)
+      - id: RMCBoxMagazineRevolverM44Heavy
+        name: Magazine Box (Heavy M44 x 16)
+        box: RMCSpeedLoader44Heavy
+
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (UT-Napthal Fuel x 8)
 #        box: CMMagazineSMGM63
