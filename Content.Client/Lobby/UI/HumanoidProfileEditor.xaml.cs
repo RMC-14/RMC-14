@@ -1122,6 +1122,7 @@ namespace Content.Client.Lobby.UI
                     // If the job has ranks we will add the options as buttons.
                     if (job.Ranks != null && job.SetRankPreference)
                     {
+                        // If the job only has 1 rank we do not make it selectable.
                         if (job.Ranks.Count <= 1) rankOptions.Disabled = true;
 
                         rankOptions.AddItem("Auto");

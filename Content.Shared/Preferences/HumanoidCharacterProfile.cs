@@ -372,7 +372,12 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithRankPreference(ProtoId<JobPrototype> jobId, int rankPriority)
         {
             var dictionary = new Dictionary<ProtoId<JobPrototype>, int>(_rankPreferences);
-            dictionary[jobId] = rankPriority;
+
+            // In order to not save the default prefs in the dictionary we remove any default prefs saved.
+            if (rankPriority == 0)
+                dictionary.Remove(jobId);
+            else
+                dictionary[jobId] = rankPriority;
 
             return new(this) { _rankPreferences = dictionary };
         }
@@ -566,7 +571,7 @@ namespace Content.Shared.Preferences
             if (FlavorText != other.FlavorText) return false;
             if (NamedItems != other.NamedItems) return false;
             if (ArmorPreference != other.ArmorPreference) return false;
-            if (!_rankPreferences.SequenceEqual(other.RankPreferences)) return false;
+            if (!_rankPreferences.SequenceEqual(other._rankPreferences)) return false;
             if (PlaytimePerks != other.PlaytimePerks) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;

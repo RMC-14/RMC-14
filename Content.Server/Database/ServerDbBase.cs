@@ -345,9 +345,11 @@ namespace Content.Server.Database
                         .Select(t => new Trait {TraitName = t})
             );
 
+            // We add only ranks that are not the default value to avoid having to save default values in the DB.
             profile.Ranks.Clear();
             profile.Ranks.AddRange(
                 humanoid.RankPreferences
+                    .Where(r => r.Value != 0)
                     .Select(r => new Rank {JobName = r.Key, Priority = r.Value })
                 );
 
