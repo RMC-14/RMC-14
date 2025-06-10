@@ -479,8 +479,15 @@ public sealed partial class XenoSystem : EntitySystem
 
             if (!xeno.HealOffWeeds)
             {
-                if (!_affectableQuery.TryComp(uid, out var affectable) ||
-                    !affectable.OnXenoWeeds || !affectable.OnFriendlyWeeds)
+                // Engine bug where entities that do not move do not process new contacts for anything newly
+                // spawned under them
+                if (Transform(uid).Anchored)
+                    _weeds.UpdateQueued(uid);
+
+                var affectable = _affectableQuery.CompOrNull(uid);
+                var onWeeds = affectable != null && affectable.OnXenoWeeds && affectable.OnFriendlyWeeds;
+
+                if (affectable == null || !onWeeds)
                 {
                     if (_xenoPlasmaQuery.TryComp(uid, out var plasmaComp))
                     {
