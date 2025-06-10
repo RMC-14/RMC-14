@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: N0lim
-  changes:
-  - message: health analyzer closed the window while it was not in hand
-    type: Fix
-  id: 1353
-  time: '2025-02-16T06:42:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5439
 - author: Ian321
   changes:
   - message: Lights, beakers and pressurized canisters no longer leave glass shards
@@ -5312,5 +5305,17 @@
   id: 1855
   time: '2025-06-10T01:30:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6682
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Queen sometimes not getting plasma regen while on weeds and in
+      ovi.
+    type: Fix
+  - message: Fixed to disposal on the chem master not deleting chems.
+    type: Fix
+  - message: Fixed forceplanetmap command autocomplete.
+    type: Fix
+  id: 1856
+  time: '2025-06-10T04:56:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6687
 Name: RMC14
 Order: -1
