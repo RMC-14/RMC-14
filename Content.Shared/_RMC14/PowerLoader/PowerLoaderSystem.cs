@@ -11,6 +11,7 @@ using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -72,8 +73,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, UnstrappedEvent>(OnUnstrapped);
         SubscribeLocalEvent<PowerLoaderComponent, PowerLoaderGrabDoAfterEvent>(OnGrabDoAfter);
         SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity);
-
-        SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnPowerloaderUserGrab);
+        SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnUserGrab);
+        SubscribeLocalEvent<PowerLoaderComponent, DestructionEventArgs>(OnDestruction);
 
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
@@ -225,7 +226,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
-    private void OnPowerloaderUserGrab(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
+    private void OnUserGrab(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
     {
         if (!CanPickupPopup(ent, args.Target, out var delay))
             return;
@@ -239,6 +240,15 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doAfter))
             ent.Comp.DoAfter = ev.DoAfter;
+    }
+
+    private void OnDestruction(Entity<PowerLoaderComponent> ent, ref DestructionEventArgs args)
+    {
+        var held = _hands.EnumerateHeld(ent).ToList();
+        foreach (var item in held)
+        {
+            _hands.TryDrop(ent, item);
+        }
     }
 
     private void OnPointActivateInWorld(Entity<DropshipWeaponPointComponent> ent, ref ActivateInWorldEvent args)
