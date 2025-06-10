@@ -552,6 +552,19 @@
     melee: 10
   - type: Appearance
 
+# Normal utility vest
+- type: entity
+  parent: RMCBaseJacket
+  id: CMUtilityVest
+  name: utility vest
+  description: A leather utility vest, often used to hold tools.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Appearance
+
 - type: entity
   parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
   id: RMCJacketWindbreaker
