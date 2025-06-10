@@ -220,6 +220,7 @@
   - type: StorageFill
     contents:
     - id: RMCBoxMagazineRevolverM44Marksman
+  
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineRevolverM44Heavy
