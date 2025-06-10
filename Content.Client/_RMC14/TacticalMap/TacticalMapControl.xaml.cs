@@ -332,7 +332,7 @@ public sealed partial class TacticalMapControl : TextureRect
         var textureStartF = new Vector2(_lastDrag.Value.X, _lastDrag.Value.Y) - controlOffset;
         var textureEndF = new Vector2(relative.X, relative.Y) - controlOffset;
 
-        var textureStart = new Vector2i((int)textureStartF.X, (int)textureEndF.Y);
+        var textureStart = new Vector2i((int)textureStartF.X, (int)textureStartF.Y);
         var textureEnd = new Vector2i((int)textureEndF.X, (int)textureEndF.Y);
 
         Lines.Add(new TacticalMapLine(textureStart, textureEnd, Color));

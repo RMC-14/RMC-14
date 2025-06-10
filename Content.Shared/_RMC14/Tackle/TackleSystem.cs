@@ -87,9 +87,8 @@ public sealed class TackleSystem : EntitySystem
         {
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tried to tackle {ToPrettyString(target)}.");
 
-            var targetName = Identity.Name(target, EntityManager, user);
-            var selfPopup = Loc.GetString("cm-tackle-try-self", ("target", targetName));
-            var targetPopup = Loc.GetString("cm-tackle-try-target", ("user", user));
+            var selfPopup = Loc.GetString("cm-tackle-try-self", ("target", Identity.Name(target, EntityManager, user)));
+            var targetPopup = Loc.GetString("cm-tackle-try-target", ("user", Identity.Name(user, EntityManager, target)));
             DoPvsPopups(user,
                 target,
                 selfPopup,
@@ -105,8 +104,8 @@ public sealed class TackleSystem : EntitySystem
         {
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tackled down {ToPrettyString(target)}.");
 
-            var selfPopup = Loc.GetString("cm-tackle-success-self", ("target", target.Owner));
-            var targetPopup = Loc.GetString("cm-tackle-success-target", ("user", user));
+            var selfPopup = Loc.GetString("cm-tackle-success-self", ("target", Identity.Name(target, EntityManager, user)));
+            var targetPopup = Loc.GetString("cm-tackle-success-target", ("user", Identity.Name(user, EntityManager, target)));
             DoPvsPopups(user,
                 target,
                 selfPopup,
@@ -172,8 +171,8 @@ public sealed class TackleSystem : EntitySystem
                             fired = true;
                             doPopups = false; // Disable other popups if the gun was discharged so we dont get stacked popups
 
-                            var selfMsg = Loc.GetString("rmc-disarm-discharge-self", ("targetName", target), ("gun", item));
-                            var targetMsg = Loc.GetString("rmc-disarm-discharge-target", ("performerName", user), ("gun", item));
+                            var selfMsg = Loc.GetString("rmc-disarm-discharge-self", ("targetName", Identity.Name(target, EntityManager, user)), ("gun", item));
+                            var targetMsg = Loc.GetString("rmc-disarm-discharge-target", ("performerName", Identity.Name(user, EntityManager, target)), ("gun", item));
                             DoPvsPopups(user,
                                 target,
                                 selfMsg,
@@ -207,8 +206,8 @@ public sealed class TackleSystem : EntitySystem
 
             if (doPopups)
             {
-                var selfMsg = Loc.GetString("rmc-disarm-shove-self", ("targetName", target), ("shoveText", shoveText));
-                var targetMsg = Loc.GetString("rmc-disarm-shove-target", ("performerName", user), ("shoveText", shoveText));
+                var selfMsg = Loc.GetString("rmc-disarm-shove-self", ("targetName", Identity.Name(target, EntityManager, user)), ("shoveText", shoveText));
+                var targetMsg = Loc.GetString("rmc-disarm-shove-target", ("performerName", Identity.Name(user, EntityManager, target)), ("shoveText", shoveText));
                 DoPvsPopups(user,
                     target,
                     selfMsg,
@@ -232,8 +231,8 @@ public sealed class TackleSystem : EntitySystem
             {
                 if (doPopups)
                 {
-                    var selfMsg = Loc.GetString("rmc-disarm-break-pulls-self", ("targetName", target), ("object", pulledObject));
-                    var targetMsg = Loc.GetString("rmc-disarm-break-pulls-target", ("performerName", user), ("object", pulledObject));
+                    var selfMsg = Loc.GetString("rmc-disarm-break-pulls-self", ("targetName", Identity.Name(target, EntityManager, user)), ("object", pulledObject));
+                    var targetMsg = Loc.GetString("rmc-disarm-break-pulls-target", ("performerName", Identity.Name(user, EntityManager, target)), ("object", pulledObject));
                     DoPvsPopups(user,
                         target,
                         selfMsg,
@@ -251,8 +250,8 @@ public sealed class TackleSystem : EntitySystem
             {
                 if (doPopups)
                 {
-                    var selfMsg = Loc.GetString("rmc-disarm-success-self", ("targetName", target));
-                    var targetMsg = Loc.GetString("rmc-disarm-success-target", ("performerName", user));
+                    var selfMsg = Loc.GetString("rmc-disarm-success-self", ("targetName", Identity.Name(target, EntityManager, user)));
+                    var targetMsg = Loc.GetString("rmc-disarm-success-target", ("performerName", Identity.Name(user, EntityManager, target)));
                     DoPvsPopups(user,
                         target,
                         selfMsg,
@@ -278,8 +277,8 @@ public sealed class TackleSystem : EntitySystem
             return;
 
         // Disarm failed
-        var selfPopup = Loc.GetString("rmc-disarm-attempt-self", ("targetName", target));
-        var targetPopup = Loc.GetString("rmc-disarm-attempt-target", ("performerName", user));
+        var selfPopup = Loc.GetString("rmc-disarm-attempt-self", ("targetName", Identity.Name(target, EntityManager, user)));
+        var targetPopup = Loc.GetString("rmc-disarm-attempt-target", ("performerName", Identity.Name(user, EntityManager, target)));
         DoPvsPopups(user,
             target,
             selfPopup,
