@@ -18,6 +18,7 @@
       tags:
       - RMCSpeedLoaderM44
       - RMCSpeedLoader44Marksman
+      - RMCSpeedLoader44Heavy
       - RMCCartridgeRevolver44
     proto: RMCCartridgeRevolver44
     capacity: 7
@@ -138,6 +139,30 @@
     capacity: 7
 
 - type: entity
+  parent: RMCSpeedLoaderM44
+  id: RMCSpeedLoader44Heavy
+  name: "M44 heavy speed loader (.44)"
+  description: A revolver speed loader filled with Heavy ammo.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader44Heavy
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: base-unshaded-5
+      color: "#7866FF"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver44Heavy
+    capacity: 7
+
+- type: entity
   id: RMCCartridgeRevolver44
   name: cartridge (.44)
   parent: CMCartridgePistolBase
@@ -151,7 +176,7 @@
 
 - type: entity
   id: RMCCartridgeRevolver44Marksman
-  name: cartridge (.44)
+  name: cartridge (.44 Marksman)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -160,6 +185,18 @@
     - RMCCartridgeRevolver44
   - type: CartridgeAmmo
     proto: RMCBulletRevolver44Marksman
+
+- type: entity
+  id: RMCCartridgeRevolver44Heavy
+  name: cartridge (.44 Heavy)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver44
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolver44Heavy
 
 - type: entity
   parent: CMBulletBase
@@ -197,8 +234,38 @@
     - range: 12
       falloff: 10
 
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolver44Heavy
+  name: bullet (.44 Heavy)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 20
+  - type: RMCStunOnHit
+    maxRange: 4
+    stunTime: 0
+    superSlowTime: 2 
+    slowTime: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+    thresholds:
+    - range: 12
+      falloff: 10
+
 - type: Tag
   id: RMCSpeedLoaderM44
 
 - type: Tag
   id: RMCSpeedLoader44Marksman
+
+- type: Tag
+  id: RMCSpeedLoader44Heavy

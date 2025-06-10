@@ -69,6 +69,8 @@
       - cost: 3000
         crate: RMCCrateBoxMagazineRevolverM44Marksman
       - cost: 4000
+      - crate: RMCCrateBoxMagazineRevolverM44Heavy
+      - cost: 4000      
         crate: RMCCrateBoxMagazineSentry
       - cost: 4000
         crate: RMCCrateMagazineNapthalUT

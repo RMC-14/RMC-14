@@ -220,6 +220,14 @@
   - type: StorageFill
     contents:
     - id: RMCBoxMagazineRevolverM44Marksman
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineRevolverM44Heavy
+  name: Speedloader box (Heavy M44, 16x loaders)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazineRevolverM44Heavy
 
 - type: entity
   parent: RMCCrateAmmo

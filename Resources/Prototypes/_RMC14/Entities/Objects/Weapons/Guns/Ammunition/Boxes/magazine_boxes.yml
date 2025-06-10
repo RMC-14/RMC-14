@@ -1161,6 +1161,53 @@
         tags:
         - RMCSpeedLoader44Marksman
 
+# M44 Heavy
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazineRevolverM44HeavyEmpty
+  name: speedloader box (Heavy M44 x 16)
+  description: A box of revolver speedloaders.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRevolverM44HeavyEmpty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#727e90"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#d25539"
+    - state: pistol_box_44
+      color: "#BA5D00"
+    - state: pistol_box_marking
+      color: "#BA5D00"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#727e90"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#BA5D00"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoader44Heavy
+
+- type: entity
+  parent: RMCBoxMagazineRevolverM44HeavyEmpty
+  id: RMCBoxMagazineRevolverM44Heavy
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoader44Heavy
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoader44Heavy
+
 # -- SHELL BOXES --
 
 # Buckshot

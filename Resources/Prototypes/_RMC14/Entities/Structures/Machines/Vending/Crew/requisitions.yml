@@ -376,8 +376,8 @@
         amount: 4
       - id: RMCMagazineSmartGun
         amount: 4
-      #- id: M44 Heavy Speed Loader (.44)
-      #  amount: 10
+      - id: RMCSpeedLoader44Heavy
+        amount: 10
       - id: RMCSpeedLoader44Marksman
         amount: 16 # TODO RMC14 6 once heavy is in
       #- id: M4A3 HP Magazine (9mm)
