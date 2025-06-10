@@ -22,4 +22,7 @@ public sealed partial class XenoAcidBallComponent : Component
 
     [DataField, AutoNetworkedField]
     public float MaxRange = 6;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan Cooldown = TimeSpan.FromSeconds(18);
 }

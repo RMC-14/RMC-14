@@ -160,7 +160,28 @@
     - CMSynthGraft
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
-#   - Syringe case # TODO RMC14 syringe cases
+    - RMCSyringeCase
+      #TODO RMC Stethoscope
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewMedicalEssentialsDoctor
+  name: essential medical set
+  description: Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    state: defib
+  - type: CMVendorBundle
+    bundle:
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    - RMCFlashlightPen
+    - RMCSyringeCase
+      #TODO RMC Stethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

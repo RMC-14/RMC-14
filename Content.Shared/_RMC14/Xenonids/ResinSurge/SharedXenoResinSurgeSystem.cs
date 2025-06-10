@@ -163,7 +163,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             }
 
             // Check if target is on weeds
-            if (TryComp(entity, out XenoWeedsComponent? weeds) || _weeds.IsOnWeeds(entity))
+            if (TryComp(entity, out XenoWeedsComponent? weeds) || _weeds.IsOnFriendlyWeeds(entity))
             {
                 EntityUid weedEnt = entity;
                 if (weeds == null)

@@ -30,8 +30,8 @@ rmc-job-greeting-forecon = You are UNMC Force Reconnaissance (FORECON) marine fr
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-name-survivor-co = Survivor CO
-rmc-job-description-survivor-co = You are a commanding officer of the UNMC.
+rmc-job-name-survivor-co = Survivor Commander
+rmc-job-description-survivor-co = You are a Major of the UNMC.
 
 rmc-job-name-forecon = FORECON Survivor
 rmc-job-description-forecon = You are a stranded UNMC Forecon marine. Your ship, the UNS Hanyut, crashed and you are stranded on the planet. Do what it takes to survive!

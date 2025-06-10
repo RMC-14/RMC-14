@@ -351,6 +351,25 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
 
+- type: entity
+  parent: CMHeadCapMP
+  id: CMHeadFlapCap
+  name: UNMC expedition cap
+  description: It's a cap, with flaps. A patch stitched across the front reads "UNS ALMAYER".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/flapcap/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/flapcap/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/flapcap/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/flapcap/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/flapcap/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/flapcap/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/flapcap/urban.rsi
+
 # surgical caps
 - type: entity
   parent: CMHeadCap

@@ -44,7 +44,7 @@ public sealed class XenoFlurrySystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -92,7 +92,7 @@ public sealed class XenoFlurrySystem : EntitySystem
 
             hits++;
 
-            var change = _damage.TryChangeDamage(victim, damage, origin: xeno, tool: xeno);
+            var change = _damage.TryChangeDamage(victim, _xeno.TryApplyXenoSlashDamageMultiplier(victim, damage), origin: xeno, tool: xeno);
 
             if (change?.GetTotal() > FixedPoint2.Zero)
             {

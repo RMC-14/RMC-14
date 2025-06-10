@@ -202,10 +202,6 @@
     lifetime: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
-  - type: SmokeOnTrigger
-    smokePrototype: RMCSmokeAcid
-    duration: 30
-    spreadAmount: 50
   - type: SpawnOnTerminate
     spawn: RMCSmokeAcid
     popup: rmc-glob-land
@@ -257,10 +253,6 @@
     lifetime: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
-  - type: SmokeOnTrigger
-    smokePrototype: RMCSmokeNeurotoxin
-    duration: 30
-    spreadAmount: 50
   - type: SpawnOnTerminate
     spawn: RMCSmokeNeurotoxin
     popup: rmc-glob-land
