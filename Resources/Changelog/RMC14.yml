@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added Nightmare map insert system.
-    type: Add
-  - message: Added Solaris SE Checkpoint insert with 70% probability.
-    type: Add
-  - message: Added Kutjevo Communications insert with 35% probability.
-    type: Add
-  id: 1352
-  time: '2025-02-16T05:11:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5508
 - author: N0lim
   changes:
   - message: health analyzer closed the window while it was not in hand
@@ -5309,5 +5298,19 @@
   id: 1854
   time: '2025-06-10T01:15:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6681
+- author: DrSmugleaf
+  changes:
+  - message: Fixed obstacle slamming popups showing someone's true identity.
+    type: Fix
+  - message: Fixed popup spam when making tunnels.
+    type: Fix
+  - message: Fixed xenonids being able to examine character descriptions.
+    type: Fix
+  - message: Fixed needing to open the tactical map manually before it shows in the
+      tunnel UI.
+    type: Fix
+  id: 1855
+  time: '2025-06-10T01:30:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6682
 Name: RMC14
 Order: -1
