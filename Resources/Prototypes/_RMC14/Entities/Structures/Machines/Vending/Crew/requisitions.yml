@@ -380,8 +380,8 @@
         amount: 10
       - id: RMCSpeedLoader44Marksman
         amount: 6
-      #- id: M4A3 HP Magazine (9mm)
-      #  amount: 2
+      - id: RMCMagazinePistolM1984HP
+        amount: 2
       - id: CMMagazineRifleM54CE2HT
         amount: 2
       - id: RMCBox458SOCOM
@@ -439,10 +439,12 @@
       - id: RMCBoxMagazinePistolM1984
         name: Magazine Box (M1984 x 16)
         box: CMMagazinePistolM1984
-#      - name: Magazine Box (AP M1984 x 16)
-#        box: CMMagazinePistolM1984AP
-#      - name: Magazine Box (HP M1984 x 16)
-#        box: CMMagazineSMGM63
+      - id: RMCBoxMagazinePistolM1984AP
+        name: Magazine Box (AP M1984 x 16)
+        box: RMCMagazinePistolM1984AP
+      - id: RMCBoxMagazinePistolM1984HP
+        name: Magazine Box (HP M1984 x 16)
+        box: RMCMagazinePistolM1984HP
       - id: RMCBoxMagazineRifleM4SPR
         name: Magazine Box (M4SPR x 16)
         box: CMMagazineRifleM4SPR
