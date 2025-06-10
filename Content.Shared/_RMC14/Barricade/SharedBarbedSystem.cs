@@ -139,18 +139,18 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         args.Handled = true;
 
-        if (_netManager.IsClient)
-            return;
-
-        var coordinates = _transform.GetMoverCoordinates(barbed);
-        EntityManager.SpawnEntity(barbed.Comp.Spawn, coordinates);
-
         barbed.Comp.IsBarbed = false;
         Dirty(barbed);
         UpdateBarricade(barbed);
 
         _audio.PlayPredicted(barbed.Comp.CutSound, barbed.Owner, args.User);
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
+
+        if (_netManager.IsClient)
+            return;
+
+        var coordinates = _transform.GetMoverCoordinates(barbed);
+        EntityManager.SpawnEntity(barbed.Comp.Spawn, coordinates);
     }
 
     private void OnDoorStateChanged(Entity<BarbedComponent> barbed, ref DoorStateChangedEvent args)
