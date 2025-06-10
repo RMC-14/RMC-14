@@ -167,8 +167,11 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 setting => SendPredictedMessage(new RMCChemMasterBeakerTransferMsg(content.Reagent.Prototype, setting))
             );
 
+            row.AllButton.ClearOnPressed();
             row.AllButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBeakerTransferMsg(content.Reagent.Prototype, content.Quantity));
-            row.CustomEdit.OnTextEntered += args =>
+
+            row.OnSubmit = null;
+            row.OnSubmit += args =>
             {
                 if (!double.TryParse(args.Text, out var amount))
                     return;
@@ -365,8 +368,12 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 setting => SendPredictedMessage(
                     new RMCChemMasterBufferTransferMsg(content.Reagent.Prototype, setting))
             );
+
+            row.AllButton.ClearOnPressed();
             row.AllButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterBufferTransferMsg(content.Reagent.Prototype, content.Quantity));
-            row.CustomEdit.OnTextEntered += args =>
+
+            row.OnSubmit = null;
+            row.OnSubmit += args =>
             {
                 if (!double.TryParse(args.Text, out var amount))
                     return;
