@@ -1,4 +1,4 @@
-﻿<controls:RMCChemMasterWindow
+<controls:RMCChemMasterWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
@@ -17,7 +17,7 @@
                                Text="{Loc rmc-chem-master-pill-bottle}" Margin="0 0 5 0"
                                VerticalAlignment="Top" />
                 <BoxContainer Name="PillBottlesContainer" Access="Public"
-                              Orientation="Vertical">
+                              Orientation="Vertical" HorizontalExpand="True">
                     <RichTextLabel Name="PillBottlesNoneLabel" Access="Public"
                                    Text="{Loc rmc-chem-master-pill-bottle-none}" />
                 </BoxContainer>
