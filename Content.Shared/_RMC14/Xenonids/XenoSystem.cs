@@ -343,7 +343,7 @@ public sealed partial class XenoSystem : EntitySystem
 
     private void OnXenoRegenBeforeCritDamage(Entity<XenoRegenComponent> ent, ref DamageStateCritBeforeDamageEvent args)
     {
-        if (!_rmcFlammable.IsOnFire(ent.Owner) && !ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner))
+        if (!_rmcFlammable.IsOnFire(ent.Owner) && !ent.Comp.HealOffWeeds && !_weeds.IsOnFriendlyWeeds(ent.Owner))
             return;
 
         //Don't take bleedout damage on fire or on weeds
@@ -419,7 +419,7 @@ public sealed partial class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target)
     {
         if (xeno == target)
             return false;
@@ -437,7 +437,7 @@ public sealed partial class XenoSystem : EntitySystem
         if (_xenoNestedQuery.HasComp(target))
             return false;
 
-        return HasComp<MarineComponent>(target) || hitNonMarines;
+        return HasComp<MarineComponent>(target) || HasComp<XenoComponent>(target);
     }
 
     public bool CanHeal(EntityUid xeno)
@@ -479,8 +479,15 @@ public sealed partial class XenoSystem : EntitySystem
 
             if (!xeno.HealOffWeeds)
             {
-                if (!_affectableQuery.TryComp(uid, out var affectable) ||
-                    !affectable.OnXenoWeeds)
+                // Engine bug where entities that do not move do not process new contacts for anything newly
+                // spawned under them
+                if (Transform(uid).Anchored)
+                    _weeds.UpdateQueued(uid);
+
+                var affectable = _affectableQuery.CompOrNull(uid);
+                var onWeeds = affectable != null && affectable.OnXenoWeeds && affectable.OnFriendlyWeeds;
+
+                if (affectable == null || !onWeeds)
                 {
                     if (_xenoPlasmaQuery.TryComp(uid, out var plasmaComp))
                     {

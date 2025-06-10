@@ -3,6 +3,8 @@
   id: RMCSurvivorForeconRifleman
   name: cm-job-name-rifleman
   playTimeTracker: RMCJobSurvivorRiflemanForecon
+  icon: "RMCJobIconForeconRifleman"
+  spawnMenuRoleName: FORECON Rifleman (Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,7 +30,7 @@
         tags:
         - RMCSquadFORECON
     - type: JobPrefix
-      prefix: rmc-job-prefix-forecon
+      prefix: cm-job-prefix-rifleman
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForecon
   hidden: true
@@ -46,3 +48,10 @@
     job_id: RMCSurvivorForeconRifleman
   - type: Sprite
     state: marine_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconForeconRifleman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_rifleman

@@ -57,3 +57,43 @@
     foldVerbText: rmc-buttons-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
+
+# TSEPA
+
+- type: entity
+  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
+  id: RMCCoatTSEPA
+  name: TSEPA jacket
+  description: A black polyester jacket with a silver Sakura emblem of the TSEPA pinned to it. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 10
+    explosionArmor: 10
+
+- type: entity
+  parent: RMCCoatTSEPA
+  id: RMCCoatTSEPAHighVis
+  name: TSEPA high-vis jacket
+  description: A green and white striped (high-visibility) polyester vest commonly used by TSEPA personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_jacket.rsi
+
+- type: entity
+  parent: RMCCoatTSEPA
+  id: RMCCoatTSEPAHighVisVest
+  name: TSEPA high-vis vest
+  description: A green and white striped (high-visibility) polyester vest commonly used by TSEPA personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_vest.rsi

@@ -66,6 +66,7 @@
   - type: RMCDropshipBlocked
   - type: AccessReader
     containerAccessProvider: null
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: BaseSecureWindoor

@@ -1,0 +1,19 @@
+- type: rmcConstruction
+  id: RMCGrilleBuild
+  name: grille
+  prototype: RMCGrille
+  noRotate: true
+  doAfterTime: 2
+  materialCost: 4
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 1
+
+- type: rmcConstruction
+  id: RMCFenceBuild
+  name: fence
+  prototype: CMFence
+  noRotate: true
+  doAfterTime: 2
+  materialCost: 10
+  skill: RMCSkillConstruction
+  requiredSkillLevel: 1

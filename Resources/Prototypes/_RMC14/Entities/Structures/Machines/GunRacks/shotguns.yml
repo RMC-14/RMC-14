@@ -1,0 +1,55 @@
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackM42A2Empty
+  name: M42A2 gun rack
+  suffix: M42A2, Empty
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, USCM comissioned racks with fixed slots which only fit M42A2 shotguns. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_2: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m42a2_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M42A2
+        whitelist:
+          tags:
+          - RMCWeaponShotgunM42A2
+      item_2:
+        name: M42A2
+        whitelist:
+          tags:
+          - RMCWeaponShotgunM42A2
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponShotgunM42A2
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponShotgunM42A2
+
+- type: entity
+  parent: RMCGunRackM42A2Empty
+  id: RMCGunRackM42A2Filled
+  suffix: M42A2, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - WeaponShotgunM42A2
+      item_2:
+      - WeaponShotgunM42A2

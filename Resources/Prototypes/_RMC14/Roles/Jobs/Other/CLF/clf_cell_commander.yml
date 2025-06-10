@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMCLFCellCommander
-  name: CMCLFCellCommander
-  description: rmc-job-description-clf-cell-commander
+  id: RMCCLFCellCommander
+  name: rmc-clf-cell-commander
+  description: rmc-ghost-role-information-clf-description
   playTimeTracker: CMJobCLFCellCommander
   ranks:
     RMCRankCLFRebelCommander: [ ]
@@ -28,39 +28,49 @@
         RMCSkillJtac: 4
         RMCSkillSmartGun: 1
         RMCSkillExecution: 1
+    - type: NpcFactionMember
+      factions:
+      - CLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-cell-commander
   hidden: true
 
 - type: entity
   id: RMCRandomHumanoidCLFCellCommander
-  name: clf cell commander role
-  suffix: Role
+  name: clf ghost role cell commander
+  suffix: Spawner, Player
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCCLFCellCommander
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCCLFCellCommander
   components:
-  - type: RMCJobSpawner
-    job: CMCLFCellCommander
+  - type: GhostRole
+    name: rmc-ghost-role-clf-cell-commander
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFCellCommander
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearCLFCellCommander
   equipment:
     head: RMCArmorHelmetMercenaryMiner
-    ears: RMCHeadsetDistressDukes
+    ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled # TODO RMC14
-    suitstorage: RMCSmartGun
+    suitstorage: RMCSmartGunCLF
     id: RMCIDCardCLFCellCommander # TODO RMC14
     belt: RMCMatebaBeltFilled # TODO RMC14
     pocket1: RMCPouchSurvivalFill
@@ -75,11 +85,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: clf_cellcom
-
-- type: entity
-  parent: CMIDCardBase
-  id: RMCIDCardCLFCellCommander
-  name: clf cell commander's ID card
-  components:
-  - type: PresetIdCard
-    job: CMCLFCellCommander

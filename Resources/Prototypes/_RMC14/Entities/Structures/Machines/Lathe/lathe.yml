@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ BaseMachinePowered, RMCConstructibleMachine ]
   id: CMAutolathe
   name: autolathe
@@ -97,7 +97,7 @@
   recipes:
   - RMCBucket
   - CMBucketMop
-  #    - Janitorial bucket (10000 metal)
+  - RMCBucketJanitorial
   - RMCFlashlight
   - CMFireExtinguisher
   - CMCrowbar

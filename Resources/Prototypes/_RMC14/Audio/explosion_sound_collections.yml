@@ -16,6 +16,11 @@
   - /Audio/_RMC14/Explosion/bigboom4.ogg
 
 - type: soundCollection
+  id: RMCOBAegis
+  files:
+  - /Audio/_RMC14/Explosion/aegis-boom.ogg
+
+- type: soundCollection
   id: CMHumanFemaleGrenadeThrow
   files:
   - /Audio/_RMC14/Voice/Human/human_female_grenadethrow_1.ogg
@@ -28,3 +33,4 @@
   - /Audio/_RMC14/Voice/Human/human_male_grenadethrow_1.ogg
   - /Audio/_RMC14/Voice/Human/human_male_grenadethrow_2.ogg
   - /Audio/_RMC14/Voice/Human/human_male_grenadethrow_3.ogg
+

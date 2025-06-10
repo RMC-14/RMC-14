@@ -99,6 +99,20 @@
     RMCPlastic: 50 # 1000
 
 - type: latheRecipe
+  id: RMCRadiationAidKit
+  result: RMCRadiationAidKit
+  completetime: 4
+  materials:
+    RMCPlastic: 100 # 2000
+
+- type: latheRecipe
+  id: RMCSyringeCase
+  result: RMCSyringeCase
+  completetime: 4
+  materials:
+    RMCPlastic: 50 # 1000
+
+- type: latheRecipe
   id: RMCVialBox
   result: RMCVialBox
   completetime: 4
@@ -195,6 +209,38 @@
   id: RMCMedicAutoInjector30
   name: rmc-autoinjector-medic-30
   result: RMCMedicAutoInjector30
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom5
+  name: rmc-autoinjector-custom-5
+  result: RMCMedicAutoInjectorCS5
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom15
+  name: rmc-autoinjector-custom-15
+  result: RMCMedicAutoInjectorCS15
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom30
+  name: rmc-autoinjector-custom-30
+  result: RMCMedicAutoInjectorCS30
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom60
+  name: rmc-autoinjector-custom-60
+  result: RMCMedicAutoInjectorCS60
   completetime: 4
   materials:
     RMCPlastic: 19 # 375

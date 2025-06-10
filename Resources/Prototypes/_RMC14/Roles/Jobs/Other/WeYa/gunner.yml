@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Support Gunner
   special:
   - !type:AddComponentSpecial
     components:
@@ -46,6 +47,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCGunner
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCGunner
+  name: weya pmc gunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCGunner
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: EventHumanoid
   id: RMCPMCGunner
@@ -58,6 +70,10 @@
     job: RMCPMCGunner
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 

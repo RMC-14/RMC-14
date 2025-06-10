@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -57,6 +57,7 @@
     - CMXenoRavager
   - type: XenoMeleeSlow
     requiresKnockDown: true
+    higherOnXenos: true
   - type: XenoClaws
     clawType: Sharp
   - type: MeleeWeapon
@@ -92,6 +93,8 @@
       state: lurker
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-lurker
 
 - type: entity
   parent:

@@ -236,3 +236,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
+
+# TODO RMC14 - Should be surgical webbing instead
+- type: entity
+  parent: RMCJumpsuitCLFSoldier
+  id: RMCJumpsuitCLFWebbing
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingBrown
