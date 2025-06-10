@@ -12,9 +12,6 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: NpcFactionMember
-      factions:
-      - CLF
     - type: Skills
       skills:
         RMCSkillFirearms: 2

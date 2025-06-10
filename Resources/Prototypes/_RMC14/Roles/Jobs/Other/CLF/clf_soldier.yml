@@ -27,9 +27,6 @@
         RMCSkillVehicles: 1
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
-    - type: NpcFactionMember
-      factions:
-      - CLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-soldier
   hidden: true
