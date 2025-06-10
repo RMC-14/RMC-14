@@ -332,6 +332,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         var ev = new AttachParasiteDoAfterEvent();
         var delay = parasite.Comp.ManualAttachDelay;
 
+        if (parasite.Owner == user)
+            delay = parasite.Comp.SelfAttachDelay;
+
         if (HasComp<TrapParasiteComponent>(parasite))
             delay = TimeSpan.Zero;
 
