@@ -31,6 +31,8 @@
     stateDoorClosed: closed
   - type: AccessReader
   - type: Lock
+  - type: XenoCrusherChargable
+    instantDestroy: true
 
 - type: entity
   parent: CMLockerBase
