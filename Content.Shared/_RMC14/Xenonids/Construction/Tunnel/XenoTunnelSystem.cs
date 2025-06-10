@@ -28,6 +28,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
@@ -48,6 +49,7 @@ public sealed class XenoTunnelSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -204,7 +206,7 @@ public sealed class XenoTunnelSystem : EntitySystem
             !TryComp(gridId, out MapGridComponent? grid) ||
             HasComp<AlmayerComponent>(gridId))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
@@ -213,7 +215,7 @@ public sealed class XenoTunnelSystem : EntitySystem
 
         if (!_area.TryGetArea(location, out var area, out _) || area.Value.Comp.NoTunnel)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
@@ -233,7 +235,7 @@ public sealed class XenoTunnelSystem : EntitySystem
                 DuplicateCondition = DuplicateConditions.SameTarget
             };
             _doAfter.TryStartDoAfter(doAfterWeedRemovalArgs);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-tunnel-uproot"), args.Performer, args.Performer);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-resin-tunnel-uproot"), args.Performer, args.Performer);
             args.Handled = true;
             return;
         }
@@ -246,7 +248,7 @@ public sealed class XenoTunnelSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameTarget
         };
         _doAfter.TryStartDoAfter(doAfterTunnelCreationArgs);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), args.Performer, args.Performer);
+        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), args.Performer, args.Performer);
         args.Handled = true;
     }
 
@@ -274,7 +276,8 @@ public sealed class XenoTunnelSystem : EntitySystem
         if (!_xenoPlasma.HasPlasmaPopup(xenoBuilder.Owner, args.PlasmaCost, false))
             return;
 
-        QueueDel(args.Target);
+        if (_net.IsClient)
+            QueueDel(args.Target);
 
         var createTunnelEv = new XenoDigTunnelDoAfter(args.Prototype, args.PlasmaCost);
         var doAfterTunnelCreationArgs = new DoAfterArgs(EntityManager, xenoBuilder.Owner, args.CreateTunnelDelay, createTunnelEv, xenoBuilder.Owner)
@@ -284,7 +287,7 @@ public sealed class XenoTunnelSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameTarget
         };
         _doAfter.TryStartDoAfter(doAfterTunnelCreationArgs);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), xenoBuilder.Owner, xenoBuilder.Owner);
+        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), xenoBuilder.Owner, xenoBuilder.Owner);
         args.Handled = true;
     }
 
@@ -320,6 +323,9 @@ public sealed class XenoTunnelSystem : EntitySystem
 
         _xenoPlasma.TryRemovePlasma(xenoBuilder.Owner, args.PlasmaCost);
 
+        if (_net.IsClient)
+            return;
+
         if (!TryPlaceTunnel(xenoBuilder.Owner, null, out var newTunnelEnt))
         {
             _popup.PopupClient(tunnelFailureMessage, xenoBuilder.Owner, xenoBuilder.Owner);
@@ -334,6 +340,9 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OnNameTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref NameTunnelMessage args)
     {
+        if (_net.IsClient)
+            return;
+
         var name = args.TunnelName;
         if (name.Length > 50)
             name = name[..50];
@@ -408,19 +417,19 @@ public sealed class XenoTunnelSystem : EntitySystem
             var msg = mobContainer.Count == 0
                 ? Loc.GetString("rmc-xeno-construction-tunnel-empty-non-xeno-enter-failure")
                 : Loc.GetString("rmc-xeno-construction-tunnel-occupied-non-xeno-enter-failure");
-            _popup.PopupEntity(msg, enteringEntity, enteringEntity);
+            _popup.PopupClient(msg, enteringEntity, enteringEntity);
             return;
         }
 
         if (mobContainer.Count >= xenoTunnel.Comp.MaxMobs)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), enteringEntity, enteringEntity);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), enteringEntity, enteringEntity);
             return;
         }
 
         if (!_actionBlocker.CanMove(enteringEntity) || Transform(enteringEntity).Anchored)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-xeno-immobile-failure"), enteringEntity, enteringEntity);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-xeno-immobile-failure"), enteringEntity, enteringEntity);
             return;
         }
 
@@ -445,7 +454,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         }
 
         if (tunnelName != null)
-            _popup.PopupEntity(Loc.GetString(enterMessageLocId, ("tunnelName", tunnelName)), enteringEntity, enteringEntity);
+            _popup.PopupClient(Loc.GetString(enterMessageLocId, ("tunnelName", tunnelName)), enteringEntity, enteringEntity);
 
         var ev = new EnterXenoTunnelDoAfterEvent();
         var doAfterArgs = new DoAfterArgs(EntityManager, enteringEntity, enterDelay, ev, xenoTunnel.Owner)
@@ -474,7 +483,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         var mobContainer = _container.EnsureContainer<Container>(destinationTunnel, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= xenoTunnel.Comp.MaxMobs)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
             return;
         }
 
@@ -511,13 +520,13 @@ public sealed class XenoTunnelSystem : EntitySystem
         var mobContainer = _container.EnsureContainer<Container>(xenoTunnel, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= xenoTunnel.Comp.MaxMobs)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), enteringEntity, enteringEntity);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), enteringEntity, enteringEntity);
             return;
         }
 
         if (!_actionBlocker.CanMove(enteringEntity) || Transform(enteringEntity).Anchored)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-xeno-immobile-failure"), enteringEntity, enteringEntity);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-xeno-immobile-failure"), enteringEntity, enteringEntity);
             return;
         }
 
@@ -545,7 +554,7 @@ public sealed class XenoTunnelSystem : EntitySystem
         var mobContainer = _container.EnsureContainer<Container>(destinationXenoTunnel, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= destinationXenoTunnel.Comp.MaxMobs)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
             return;
         }
 
@@ -627,7 +636,7 @@ public sealed class XenoTunnelSystem : EntitySystem
                 BreakOnHandChange = true,
             };
 
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill"), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-tunnel-fill"), args.User, args.User);
             _doAfter.TryStartDoAfter(doAfterArgs);
         }
     }
@@ -680,6 +689,9 @@ public sealed class XenoTunnelSystem : EntitySystem
     /// <param name="xenoTunnel"></param>
     private void CollapseTunnel(Entity<XenoTunnelComponent> xenoTunnel)
     {
+        if (_net.IsClient)
+            return;
+
         if (_hive.GetHive(xenoTunnel.Owner) is { } hive && TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
             hive.Comp.HiveTunnels.Remove(tunnelName);
 
@@ -750,22 +762,22 @@ public sealed class XenoTunnelSystem : EntitySystem
 
         if (!canPlaceStructure)
         {
-            popupType = popupType + "-tunnel";
-            _popup.PopupEntity(Loc.GetString(popupType), user, user, PopupType.SmallCaution);
+            popupType += "-tunnel";
+            _popup.PopupClient(Loc.GetString(popupType), user, user, PopupType.SmallCaution);
             return false;
         }
 
         if (Transform(user).GridUid is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? gridComp))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
             return false;
         }
 
         var tileRef = _map.GetTileRef(gridId, gridComp, coords);
         if (!tileRef.GetContentTileDefinition().CanPlaceTunnel)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
             return false;
         }
 
