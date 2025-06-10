@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
@@ -88,6 +89,22 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         {
             subs.Event<NameTunnelMessage>(OnNameTunnel);
         });
+
+        Subs.BuiEvents<XenoTunnelComponent>(SelectDestinationTunnelUI.Key, subs =>
+        {
+            subs.Event<BoundUIOpenedEvent>(OnTunnelUIOpened);
+            subs.Event<BoundUIClosedEvent>(OnTunnelUIClosed);
+        });
+    }
+
+    private void OnTunnelUIOpened(Entity<XenoTunnelComponent> tunnel, ref BoundUIOpenedEvent args)
+    {
+        EnsureComp<TunnelUIUserComponent>(args.Actor);
+    }
+
+    private void OnTunnelUIClosed(Entity<XenoTunnelComponent> tunnel, ref BoundUIClosedEvent args)
+    {
+        RemCompDeferred<TunnelUIUserComponent>(args.Actor);
     }
 
     private void OnCreateTunnel(Entity<XenoComponent> xenoBuilder, ref XenoDigTunnelActionEvent args)

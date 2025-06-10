@@ -720,6 +720,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 UpdateUserData((userId, userComp), map);
             }
+
+            var tunnelUsers = EntityQueryEnumerator<TunnelUIUserComponent, TacticalMapUserComponent>();
+            while (tunnelUsers.MoveNext(out var tunnelUserId, out _, out var tunnelUserComp))
+            {
+                UpdateUserData((tunnelUserId, tunnelUserComp), map);
+            }
         }
     }
 }
