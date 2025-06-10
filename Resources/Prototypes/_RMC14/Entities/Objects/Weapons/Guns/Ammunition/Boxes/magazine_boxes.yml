@@ -1177,17 +1177,17 @@
       color: "#727e90"
     - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-      color: "#d25539"
+      color: "#7866FF"
     - state: pistol_box_44
-      color: "#BA5D00"
+      color: "#ffcb26"
     - state: pistol_box_marking
-      color: "#BA5D00"
+      color: "#7866FF"
     - state: pistol_lid
       map: [ "lid" ]
       color: "#727e90"
     - state: pistol_lid_marking
       map: [ "lid_marking" ]
-      color: "#BA5D00"
+      color: "#7866FF"
   - type: CMItemSlots
     count: 16
     slot:
