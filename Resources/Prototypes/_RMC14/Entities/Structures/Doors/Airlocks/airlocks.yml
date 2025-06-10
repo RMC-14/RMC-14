@@ -17,6 +17,8 @@
   - type: Occluder
   - type: PaintableAirlock
     department: CMSquad
+  - type: XenoCrusherChargable
+    instantDestroy: True
 
 - type: entity
   parent: CMAirlock

@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
+  spawnMenuRoleName: MARSOC Raider
   special:
   - !type:AddComponentSpecial
     components:
@@ -40,8 +41,8 @@
   suffix: Role
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Food/Baked/pizza.rsi
-    state: box
+    sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCMarineRaider
 
@@ -50,35 +51,39 @@
   id: RMCMarineRaider
   components:
   - type: GhostRole
-    name: rmc-ghost-name-bureau-marshal
-    description: rmc-ghost-role-information-bureau-marshal-description
-    rules: rmc-ghost-role-information-bureau-rules
+    name: rmc-job-name-marine-raider
+    description: rmc-ghost-role-information-sof-description
+    rules: rmc-ghost-role-information-sof-rules
     reregister: false
-    job: CMBureauMarshal
+    job: CMMarineRaider
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
-  - type: RMCJobSpawner
-    job: CMMarineRaider
+    squad: SquadSOF
 
 - type: startingGear
   id: RMCGearMarineRaider
   equipment:
     head: RMCArmorHelmetMARSOC
-    mask: RMCMaskBalaclava # TODO RMC14
-    ears: RMCHeadsetDistressDukes # TODO RMC14
+    mask: RMCMaskBalaclavaMARSOC
+    ears: RMCHeadsetMARSOC
     jumpsuit: RMCJumpsuitMarsocWebbingBuckshot
     outerClothing: RMCArmorMARSOCXM40
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponRifleXM40
     id: RMCDogtagMarineRaider
-    belt: RMCWeaponShotgunXM38
-    back: CMSatchelMarine
+    belt: RMCWeaponShotgunXM38Filled
+    back: RMCSatchelMARSOC
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
     pocket2: RMCPouchToolsSocMarineRaiderFill
-  inhand:
-  - RMCVisorNightVision # TODO RMC14
+  storage:
+    back:
+    - RMCVisorNightVision # TODO RMC14
 
 - type: playTimeTracker
   id: CMJobMarineRaider

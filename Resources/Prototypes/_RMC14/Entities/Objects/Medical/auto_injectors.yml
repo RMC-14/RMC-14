@@ -41,6 +41,7 @@
   - type: IconLabel
     textColor: White
     storedOffset: 0, 12
+  - type: RMCSmartFridgeInsertable
 
 - type: entity
   parent: CMAutoInjectorBase

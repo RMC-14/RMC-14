@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCShutterBaseIndestructible
   id: RMCPodDoorIndestructible
   name: podlock
@@ -99,6 +99,8 @@
   components:
   - type: Door
     canPry: false # TODO RMC14
+  - type: XenoCrusherChargable
+    instantDestroy: true
 
 - type: entity
   parent: RMCPodDoor

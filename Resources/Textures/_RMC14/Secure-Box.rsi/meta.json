@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Created by Sigma Draconis",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "aegis_crate_open"
+    },
+    {
+      "name": "aegis_crate_opening",
+      "delays": [
+        [
+          0.365,
+          0.365,
+          0.365,
+          0.365
+        ]
+      ]
+    },
+    {
+      "name": "aegis_crate",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    }
+  ]
+}

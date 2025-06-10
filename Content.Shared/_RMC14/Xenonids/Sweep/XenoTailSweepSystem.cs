@@ -1,10 +1,12 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
@@ -30,8 +32,9 @@ public sealed class XenoTailSweepSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
-    private readonly HashSet<Entity<MarineComponent>> _hit = new();
+    private readonly HashSet<Entity<MobStateComponent>> _hit = new();
 
     public override void Initialize()
     {
@@ -65,31 +68,32 @@ public sealed class XenoTailSweepSystem : EntitySystem
         _entityLookup.GetEntitiesInRange(transform.Coordinates, xeno.Comp.Range, _hit);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        foreach (var marine in _hit)
+        foreach (var mob in _hit)
         {
-            if (!_xeno.CanAbilityAttackTarget(xeno, marine))
+            if (!_xeno.CanAbilityAttackTarget(xeno, mob))
                 continue;
 
-            if (!_interact.InRangeUnobstructed(xeno.Owner, marine.Owner, xeno.Comp.Range))
+            if (!_interact.InRangeUnobstructed(xeno.Owner, mob.Owner, xeno.Comp.Range))
                 continue;
 
-            _rmcPulling.TryStopAllPullsFromAndOn(marine);
+            _rmcPulling.TryStopAllPullsFromAndOn(mob);
 
-            var marineCoords = _transform.GetMapCoordinates(marine);
+            var marineCoords = _transform.GetMapCoordinates(mob);
             var diff = marineCoords.Position - origin.Position;
             diff = diff.Normalized() * xeno.Comp.Range;
 
             if (xeno.Comp.Damage is { } damage)
-                _damageable.TryChangeDamage(marine, damage, origin: xeno, tool: xeno);
+                _damageable.TryChangeDamage(mob, _xeno.TryApplyXenoSlashDamageMultiplier(mob, damage), origin: xeno, tool: xeno);
 
-            var filter = Filter.Pvs(marine, entityManager: EntityManager);
-            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { marine }, filter);
+            var filter = Filter.Pvs(mob, entityManager: EntityManager);
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { mob }, filter);
 
-            _throwing.TryThrow(marine, diff, 5);
-            _stun.TryParalyze(marine, xeno.Comp.ParalyzeTime, true);
+            _throwing.TryThrow(mob, diff, 5);
+            if (!_size.TryGetSize(mob, out var size) || size < RMCSizes.Big)
+                _stun.TryParalyze(mob, _xeno.TryApplyXenoDebuffMultiplier(mob, xeno.Comp.ParalyzeTime), true);
 
-            _audio.PlayPvs(xeno.Comp.HitSound, marine);
-            SpawnAttachedTo(xeno.Comp.HitEffect, marine.Owner.ToCoordinates());
+            _audio.PlayPvs(xeno.Comp.HitSound, mob);
+            SpawnAttachedTo(xeno.Comp.HitEffect, mob.Owner.ToCoordinates());
         }
     }
 

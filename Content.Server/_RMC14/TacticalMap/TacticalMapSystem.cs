@@ -195,6 +195,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         if (TryGetTacticalMap(out var map))
             UpdateUserData(ent, map);
+
         _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
     }
 
@@ -545,7 +546,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
     }
 
-    private void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
+    public override void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
     {
         var lines = EnsureComp<TacticalMapLinesComponent>(user);
         if (user.Comp.Xenos)

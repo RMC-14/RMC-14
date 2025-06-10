@@ -113,6 +113,7 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
+  - type: XenoCrusherChargable #TODO RMC14 tip over
 
 - type: vendingMachineInventory
   id: CMVendomat
@@ -618,3 +619,13 @@
         amount: 12
       - id: FoodCondimentBottleVinegar
         amount: 12
+
+# PVE
+
+- type: entity
+  parent: CMVendorSec
+  id: RMCVendorSecTSEPA
+  suffix: TSEPA
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"]]
