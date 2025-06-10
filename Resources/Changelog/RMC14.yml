@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed drone transfer plasma's doafter taking too long (3 > 2 seconds)
-    type: Fix
-  - message: Fixed hivelord having drone's transfer plasma. They now transfer 200
-      plasma in 0.5 seconds, up to 7 tiles away.
-    type: Fix
-  id: 1350
-  time: '2025-02-16T05:12:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5613
 - author: Dutch-VanDerLinde
   changes:
   - message: MP5 and M16 now have a small chance to spawn with a single-shot underbarrel
@@ -5313,5 +5303,12 @@
   id: 1852
   time: '2025-06-09T23:00:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6676
+- author: Vixting
+  changes:
+  - message: Fixed not being able to draw vertical lines on the tactical map.
+    type: Fix
+  id: 1853
+  time: '2025-06-10T00:04:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6680
 Name: RMC14
 Order: -1
