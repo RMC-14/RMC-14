@@ -772,7 +772,7 @@
     - state: smg_box_63
       color: "#ffcb26"
     - state: smg_box_marking
-      color: "#cffb26"
+      color: "#ffcb26"
     - state: smg_lid
       map: [ "lid" ]
       color: "#727e90"
