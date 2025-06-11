@@ -372,10 +372,15 @@ public sealed class XenoLeapSystem : EntitySystem
         if (HasComp<BarricadeComponent>(blocker) && (!TryComp(blocker, out BarbedComponent? barbed) || !barbed.IsBarbed))
             return false;
 
+        if (_size.TryGetSize(leaper, out var size) && size >= RMCSizes.Big && !HasComp<BarbedComponent>(blocker))
+            return false;
+
         var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
 
-        _stun.TryParalyze(leaper, stunDuration, true);
-        _size.KnockBack(leaper, blockerCoordinates.Coords);
+        if (size < RMCSizes.Big)
+            _stun.TryParalyze(leaper, stunDuration, true);
+
+        _size.KnockBack(leaper, blockerCoordinates.Coords, ignoreSize: true);
         _audio.PlayPredicted(blockSound, leaper, leaper);
 
         var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", leaper), ("object", blocker));
@@ -405,12 +410,6 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
         }
 
-        if (!HasComp<MobStateComponent>(target) || _mobState.IsIncapacitated(target))
-        {
-            if (!HasComp<RMCLeapProtectionComponent>(target))
-                return false;
-        }
-
         if (_standing.IsDown(target))
             return false;
 
@@ -437,6 +436,15 @@ public sealed class XenoLeapSystem : EntitySystem
         xeno.Comp.KnockedDown = true;
         Dirty(xeno);
 
+        var leapEv = new XenoLeapHitAttempt(xeno.Owner);
+        RaiseLocalEvent(target, ref leapEv);
+
+        if (leapEv.Cancelled)
+            return true;
+
+        if (!HasComp<MobStateComponent>(target) || _mobState.IsIncapacitated(target))
+            return false;
+
         if (_physicsQuery.TryGetComponent(xeno, out var physics))
         {
             _physics.SetBodyStatus(xeno, physics, BodyStatus.OnGround);
@@ -444,12 +452,6 @@ public sealed class XenoLeapSystem : EntitySystem
             if (physics.Awake)
                 _broadphase.RegenerateContacts(xeno, physics);
         }
-
-        var leapEv = new XenoLeapHitAttempt(xeno.Owner);
-        RaiseLocalEvent(target, ref leapEv);
-
-        if (leapEv.Cancelled)
-            return true;
 
         if (!xeno.Comp.KnockdownRequiresInvisibility || HasComp<XenoActiveInvisibleComponent>(xeno))
         {
