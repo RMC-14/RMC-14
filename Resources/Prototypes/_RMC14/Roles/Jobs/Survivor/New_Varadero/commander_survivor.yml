@@ -61,7 +61,7 @@
     ears: RMCHeadsetMarineDistress
     jumpsuit: CMJumpsuitBO
     head: RMCHeadCapFlippable
-    outerClothing: RMCCoatService
+    outerClothing: RMCCoatServiceFolded
     shoes: CMBootsBlackFilled
     back: CMSatchelFillSurvivor
     belt: RMCM1984BeltFilled

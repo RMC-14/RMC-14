@@ -463,6 +463,13 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
 
 - type: entity
+  parent: RMCCoatService
+  id: RMCCoatServiceFolded
+  components:
+  - type: Foldable
+    folded: true
+
+- type: entity
   parent: CMCoatOfficer
   id: RMCProvostCoat
   name: Provost Coat
