@@ -34,7 +34,7 @@
   id: RMCGearSurvivorLV624Archeologist
   equipment:
     head: RMCBoonie
-    jumpsuit: CMJumpsuitColonist # TODO RMC blue workwear
+    jumpsuit: RMCJumpsuitBlueWorkwear
     outerClothing: CMUtilityVest
     eyes: RMCGlassesAviators
   inhand:

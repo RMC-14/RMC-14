@@ -37,7 +37,7 @@
   id: RMCGearSurvivorLV624CMBDeputy
   equipment:
     head: RMCHeadCapBureau
-    jumpsuit: RMCSwatCMBUniform # TODO RMC CMB uniform (the off-white one)
+    jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauDeputy
     ears: RMCHeadsetDistressBureau
 

@@ -35,7 +35,7 @@
   parent: RMCGearSurvivorCorporate
   id: RMCGearSurvivorLV624CorporateLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonBlack # TODO RMC colony administrator jumpsuit
+    jumpsuit: CMJumpsuitLiaisonField # parity jumpsuit has Wey-Yu logo, so using liaison one
     eyes: RMCSunglasses
 
 - type: entity

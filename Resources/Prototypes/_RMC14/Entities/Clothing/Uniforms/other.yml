@@ -163,9 +163,9 @@
   description: A stylish gray jumpsuit - standard issue for civilian support personnel.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilians/civilian.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilians/civilian.rsi
 
 # Kutjevo
 - type: entity
