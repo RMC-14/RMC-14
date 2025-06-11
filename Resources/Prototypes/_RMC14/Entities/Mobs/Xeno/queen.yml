@@ -255,6 +255,7 @@
   - type: XenoToggleChargingStop
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
+  - type: RMCTrackable
 
 - type: entity
   parent: RMCXenoQueenBase

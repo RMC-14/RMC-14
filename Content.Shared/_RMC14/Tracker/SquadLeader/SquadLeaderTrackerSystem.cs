@@ -109,7 +109,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         var leaderTracker = EnsureComp<SquadLeaderTrackerComponent>(args.Equipee);
         leaderTracker.TrackerModes = ent.Comp.TrackerModes;
-        SetRole((args.Equipee, leaderTracker), ent.Comp.DefaultMode);
+        SetMode((args.Equipee, leaderTracker), ent.Comp.DefaultMode);
         Dirty(args.Equipee, leaderTracker);
     }
 
@@ -158,61 +158,8 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if(!_timing.IsFirstTimePredicted)
             return;
 
-        _prototypeManager.TryIndex(args.Mode, out var trackerMode);
-        if(trackerMode == null)
+        if(!TryFindTargets(args.Mode, out var options, out var trackingOptions))
             return;
-
-        var options = new List<DialogOption>();
-        var trackingOptions = new List<EntityUid>();
-
-        // Try to find all entities that fit the selected role.
-        var query = EntityQueryEnumerator<RMCTrackableComponent>();
-        while (query.MoveNext(out var trackableUid, out _))
-        {
-            // Check if a non-role mode has been selected.
-            if (trackerMode.Component != null)
-            {
-                var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
-                var targetName = "";
-
-                if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
-                {
-                    if (!_net.IsClient)
-                        targetName = Name(trackableUid);
-
-                    options.Add(new DialogOption(targetName,
-                        new LeaderTrackerSelectTargetEvent(GetNetEntity(trackableUid), args.Mode)));
-
-                    trackingOptions.Add(trackableUid);
-                }
-                continue;
-            }
-
-            var originalRole = "NoOriginalRole";
-            var targetSquadName = "";
-
-            if (_originalRoleQuery.TryComp(trackableUid, out var original))
-                originalRole = original.Job;
-
-            if (originalRole != trackerMode.Job &&
-                (args.Mode != SquadLeaderMode||
-                 !HasComp<SquadLeaderComponent>(trackableUid)))
-                continue;
-
-            // Can't call Name() clientside
-            if (!_net.IsClient)
-            {
-                if (_squadMemberQuery.TryComp(trackableUid, out var targetSquadMember) && targetSquadMember.Squad is { } targetSquad)
-                    targetSquadName = Name(targetSquad);
-            }
-
-            // Populate the dialogue window with all trackable entities of the selected role.
-            options.Add(new DialogOption("(" + targetSquadName + ") " + _rank.GetSpeakerFullRankName(trackableUid),
-                new LeaderTrackerSelectTargetEvent(GetNetEntity(trackableUid), args.Mode)
-            ));
-
-            trackingOptions.Add(trackableUid);
-        }
 
         // Remove targets that are not in the same squad as the tracking entity.
         if (_squadMemberQuery.TryComp(ent, out var squadMember))
@@ -240,7 +187,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             else
                 SetTarget(ent, null);
 
-            SetRole(ent, args.Mode);
+            SetMode(ent, args.Mode);
         }
         // There are multiple entities of the selected role, open a new ui window to choose which entity should be tracked.
         else
@@ -275,7 +222,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     private void OnLeaderTrackerSelectTargetEvent(Entity<SquadLeaderTrackerComponent> ent, ref LeaderTrackerSelectTargetEvent args)
     {
         SetTarget(ent, GetEntity(args.Target));
-        SetRole(ent, args.Mode);
+        SetMode(ent, args.Mode);
         Dirty(ent);
     }
 
@@ -538,10 +485,77 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void SetRole(Entity<SquadLeaderTrackerComponent> ent, ProtoId<TrackerModePrototype> mode)
+    private void SetMode(Entity<SquadLeaderTrackerComponent> ent, ProtoId<TrackerModePrototype> mode)
     {
         ent.Comp.Mode = mode;
         Dirty(ent);
+    }
+
+    public bool TryFindTargets(ProtoId<TrackerModePrototype> mode, out List<DialogOption> options, out List<EntityUid> trackingOptions)
+    {
+        options = new List<DialogOption>();
+        trackingOptions = new List<EntityUid>();
+
+        _prototypeManager.TryIndex(mode, out var trackerMode);
+        if(trackerMode == null)
+            return false;
+
+        // Try to find all entities that fit the selected role.
+        var query = EntityQueryEnumerator<RMCTrackableComponent>();
+        while (query.MoveNext(out var trackableUid, out _))
+        {
+            // Check if a non-role mode has been selected.
+            if (trackerMode.Component != null)
+            {
+                var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
+                var targetName = "";
+
+                if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
+                {
+                    if (!_net.IsClient)
+                        targetName = Name(trackableUid);
+
+                    var nameEv = new RequestTrackableNameEvent();
+                    RaiseLocalEvent(trackableUid, ref nameEv);
+                    if (nameEv.Name != null)
+                        targetName = nameEv.Name;
+
+                    options.Add(new DialogOption(targetName,
+                        new LeaderTrackerSelectTargetEvent(GetNetEntity(trackableUid), mode)));
+
+                    trackingOptions.Add(trackableUid);
+                }
+                continue;
+            }
+
+            // Search for a specific role, the target has to have it as their original role
+            var originalRole = "NoOriginalRole";
+            var targetSquadName = "";
+
+            if (_originalRoleQuery.TryComp(trackableUid, out var original))
+                originalRole = original.Job;
+
+            if (originalRole != trackerMode.Job &&
+                (mode != SquadLeaderMode||
+                 !HasComp<SquadLeaderComponent>(trackableUid)))
+                continue;
+
+            // Can't call Name() clientside
+            if (!_net.IsClient)
+            {
+                if (_squadMemberQuery.TryComp(trackableUid, out var targetSquadMember) && targetSquadMember.Squad is { } targetSquad)
+                    targetSquadName = Name(targetSquad);
+            }
+
+            // Populate the dialogue window with all trackable entities of the selected role.
+            options.Add(new DialogOption("(" + targetSquadName + ") " + _rank.GetSpeakerFullRankName(trackableUid),
+                new LeaderTrackerSelectTargetEvent(GetNetEntity(trackableUid), mode)
+            ));
+
+            trackingOptions.Add(trackableUid);
+        }
+
+        return true;
     }
 
     public override void Update(float frameTime)
@@ -659,8 +673,10 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                     var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
                     if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
                     {
-                        tracker.Target = trackableUid;
-                        UpdateDirection((uid, tracker), _transform.GetMapCoordinates(tracker.Target.Value), targetSquadName);
+                        SetTarget((uid, tracker), trackableUid);
+
+                        if (tracker.Target != null)
+                            UpdateDirection((uid, tracker), _transform.GetMapCoordinates(tracker.Target.Value), targetSquadName);
                     }
                     break;
                 }
@@ -684,3 +700,5 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         }
     }
 }
+[ByRefEvent]
+public record struct RequestTrackableNameEvent(string? Name = null, bool Handled = false);

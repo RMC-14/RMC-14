@@ -23,9 +23,22 @@
     state: trackon-southwest
   name: Xenonid Tracker
   description: Tracks the Queen.
-#  clickEvent: !type:SelectTrackerAlertEvent
+  clickEvent: !type:HiveTrackerClickedAlertEvent
+  altClickEvent: !type:HiveTrackerAltClickedAlertEvent
   minSeverity: 0
   maxSeverity: 10
+
+- type: alert
+  parent: HiveTracker
+  id: LeaderTracker
+  name: Hive Leader Tracker
+  description: Tracks a hive leader.
+
+- type: alert
+  parent: HiveTracker
+  id: TunnelTracker
+  name: Tunnel Tracker
+  description: Tracks a tunnel.
 
 - type: alert
   id: ResinMarkerTracker
@@ -512,3 +525,6 @@
 
 - type: alertCategory
   id: SquadTracker
+
+- type: alertCategory
+  id: HiveTracker

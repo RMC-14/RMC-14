@@ -9,12 +9,21 @@ namespace Content.Shared._RMC14.Tracker.Xeno;
 [Access(typeof(HiveTrackerSystem))]
 public sealed partial class HiveTrackerComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public ProtoId<AlertPrototype> Alert = "HiveTracker";
-
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan UpdateAt;
 
     [DataField]
     public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
+
+    [DataField(required: true), AutoNetworkedField]
+    public ProtoId<TrackerModePrototype> DefaultMode;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<ProtoId<TrackerModePrototype>> TrackerModes = new();
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<TrackerModePrototype> Mode;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Target;
 }

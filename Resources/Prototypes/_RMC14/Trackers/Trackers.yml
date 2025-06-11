@@ -1,3 +1,5 @@
+# Humanoid Role Trackers
+
 - type: trackerMode
   id: CommandingOfficer
   job: CMCommandingOfficer
@@ -129,6 +131,29 @@
   alert: SquadTrackerCommandingOfficer
 
 - type: trackerMode
+  id: MARSOCLeader
+  job: CMJobMarineRaiderLeader
+
+# Humanoid component trackers
+
+- type: trackerMode
   id: PrimaryLandingZone
   component: PrimaryLandingZone
   alert: SquadTrackerLandingZone
+
+# Xeno component trackers
+
+- type: trackerMode
+  id: Queen
+  component: XenoOvipositorCapable
+  alert: HiveTracker
+
+- type: trackerMode
+  id: HiveLeader
+  component: HiveLeader
+  alert: HiveTracker
+
+- type: trackerMode
+  id: Tunnel
+  component: XenoTunnel
+  alert: HiveTracker
