@@ -12,6 +12,7 @@
   accessGroups:
   - Colonist
   - HospitalCorpsman
+  spawnMenuRoleName: SPP Specialist
   special:
   - !type:AddComponentSpecial
     components:
@@ -68,6 +69,10 @@
     job: RMCSPPSpecialist
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 

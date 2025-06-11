@@ -359,7 +359,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 if (!_job.MindHasJobWithId(mindId, job.Id))
                     validJob = false;
                 else
+                {
                     validJob = true;
+                    break;
+                }
             }
         }
 

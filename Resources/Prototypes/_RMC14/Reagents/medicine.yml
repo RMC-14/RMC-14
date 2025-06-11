@@ -185,13 +185,13 @@
         - Brute: -1.5
         - Burn: -1
         - Toxin: -1.5
+        - Airloss: -1
       - !type:HealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
           types:
-            Asphyxiation: -1
             Cellular: -0.12
 
 # TODO RMC14 other effects
@@ -483,10 +483,7 @@
         - Brute: -0.25
         - Burn: -0.25
         - Toxin: -0.5
-      - !type:HealthChange
-        damage:
-          types:
-            Asphyxiation: -0.25
+        - Airloss: -0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold

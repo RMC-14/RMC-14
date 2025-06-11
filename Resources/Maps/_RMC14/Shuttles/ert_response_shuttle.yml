@@ -4,8 +4,8 @@ meta:
   engineVersion: 251.0.1
   forkId: ""
   forkVersion: ""
-  time: 06/04/2025 20:58:03
-  entityCount: 67
+  time: 06/07/2025 13:28:34
+  entityCount: 73
 maps: []
 grids:
 - 1
@@ -77,6 +77,98 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        -3,4: RMCAreaShuttleERT
+        -2,4: RMCAreaShuttleERT
+        -1,4: RMCAreaShuttleERT
+        0,4: RMCAreaShuttleERT
+        1,4: RMCAreaShuttleERT
+        2,4: RMCAreaShuttleERT
+        3,4: RMCAreaShuttleERT
+        -1,5: RMCAreaShuttleERT
+        0,5: RMCAreaShuttleERT
+        1,5: RMCAreaShuttleERT
+        -3,3: RMCAreaShuttleERT
+        -3,2: RMCAreaShuttleERT
+        -3,1: RMCAreaShuttleERT
+        -3,0: RMCAreaShuttleERT
+        -3,-1: RMCAreaShuttleERT
+        -3,-2: RMCAreaShuttleERT
+        -3,-3: RMCAreaShuttleERT
+        -3,-4: RMCAreaShuttleERT
+        -3,-5: RMCAreaShuttleERT
+        -2,3: RMCAreaShuttleERT
+        -2,2: RMCAreaShuttleERT
+        -2,1: RMCAreaShuttleERT
+        -2,0: RMCAreaShuttleERT
+        -2,-1: RMCAreaShuttleERT
+        -2,-2: RMCAreaShuttleERT
+        -2,-3: RMCAreaShuttleERT
+        -2,-4: RMCAreaShuttleERT
+        -2,-5: RMCAreaShuttleERT
+        -2,-6: RMCAreaShuttleERT
+        -2,-7: RMCAreaShuttleERT
+        -1,3: RMCAreaShuttleERT
+        -1,2: RMCAreaShuttleERT
+        -1,1: RMCAreaShuttleERT
+        -1,0: RMCAreaShuttleERT
+        -1,-1: RMCAreaShuttleERT
+        -1,-2: RMCAreaShuttleERT
+        -1,-3: RMCAreaShuttleERT
+        -1,-4: RMCAreaShuttleERT
+        -1,-5: RMCAreaShuttleERT
+        -1,-6: RMCAreaShuttleERT
+        -1,-7: RMCAreaShuttleERT
+        0,3: RMCAreaShuttleERT
+        0,2: RMCAreaShuttleERT
+        0,1: RMCAreaShuttleERT
+        0,0: RMCAreaShuttleERT
+        0,-1: RMCAreaShuttleERT
+        0,-2: RMCAreaShuttleERT
+        0,-3: RMCAreaShuttleERT
+        0,-4: RMCAreaShuttleERT
+        0,-5: RMCAreaShuttleERT
+        0,-6: RMCAreaShuttleERT
+        0,-7: RMCAreaShuttleERT
+        1,3: RMCAreaShuttleERT
+        1,2: RMCAreaShuttleERT
+        1,1: RMCAreaShuttleERT
+        1,0: RMCAreaShuttleERT
+        1,-1: RMCAreaShuttleERT
+        1,-2: RMCAreaShuttleERT
+        1,-3: RMCAreaShuttleERT
+        1,-4: RMCAreaShuttleERT
+        1,-5: RMCAreaShuttleERT
+        1,-6: RMCAreaShuttleERT
+        1,-7: RMCAreaShuttleERT
+        2,3: RMCAreaShuttleERT
+        2,2: RMCAreaShuttleERT
+        2,1: RMCAreaShuttleERT
+        2,0: RMCAreaShuttleERT
+        2,-1: RMCAreaShuttleERT
+        2,-2: RMCAreaShuttleERT
+        2,-3: RMCAreaShuttleERT
+        2,-4: RMCAreaShuttleERT
+        2,-5: RMCAreaShuttleERT
+        2,-6: RMCAreaShuttleERT
+        2,-7: RMCAreaShuttleERT
+        3,3: RMCAreaShuttleERT
+        3,2: RMCAreaShuttleERT
+        3,1: RMCAreaShuttleERT
+        3,0: RMCAreaShuttleERT
+        3,-1: RMCAreaShuttleERT
+        3,-2: RMCAreaShuttleERT
+        3,-3: RMCAreaShuttleERT
+        3,-4: RMCAreaShuttleERT
+        3,-5: RMCAreaShuttleERT
+        3,-6: RMCAreaShuttleERT
+        3,-7: RMCAreaShuttleERT
+        -3,-6: RMCAreaShuttleERT
+        -3,-7: RMCAreaShuttleERT
 - proto: CMAdvFirstAidKitFilled
   entities:
   - uid: 59
@@ -408,6 +500,42 @@ entities:
     components:
     - type: Transform
       pos: 3.5,-3.5
+      parent: 1
+- proto: RMCLightFixtureDoubleAlwaysPowered
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      pos: -1.5,-2.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,3.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,-4.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,-4.5
       parent: 1
 - proto: RMCSeatDark
   entities:

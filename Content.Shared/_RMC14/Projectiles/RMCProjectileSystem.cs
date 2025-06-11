@@ -1,7 +1,8 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
@@ -27,6 +28,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
@@ -204,7 +206,8 @@ public sealed class RMCProjectileSystem : EntitySystem
             coordinates = coordinates.Offset(delta.Normalized() / -2);
         }
 
-        SpawnAtPosition(ent.Comp.Spawn, coordinates);
+        var spawn = SpawnAtPosition(ent.Comp.Spawn, coordinates);
+        _hive.SetSameHive(ent.Owner, spawn);
 
         if (ent.Comp.Popup is { } popup)
             _popup.PopupCoordinates(Loc.GetString(popup), coordinates, ent.Comp.PopupType ?? PopupType.Small);

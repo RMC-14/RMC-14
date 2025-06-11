@@ -5,6 +5,10 @@
   playTimeTracker: RMCJobSurvivorSmartgunOperatorForecon
   startingGear: RMCGearForeconSmartgunOperator
   icon: "CMJobIconSmartGunOperator"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSmartGunOperator
+    time: 3600 # 1 hour
   spawnMenuRoleName: FORECON Smart Gun Operator (Survivor)
   special:
   - !type:AddComponentSpecial

@@ -113,6 +113,7 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
+  - type: XenoCrusherChargable #TODO RMC14 tip over
 
 - type: vendingMachineInventory
   id: CMVendomat
@@ -390,28 +391,31 @@
     EggplantSeeds: 3
     PotatoSeeds: 3
     SoybeanSeeds: 3
-    #SunflowerSeeds: 2
+    SunflowerSeeds: 2
     TomatoSeeds: 3
     WheatSeeds: 3
+    OatSeeds: 3
     AppleSeeds: 3
     PoppySeeds: 3
     SugarcaneSeeds: 3
-    #PeanutSeeds: 3
-    #WhitebeetSeeds: 3
+    PeanutSeeds: 3
+    WhiteBeetSeeds: 3
     WatermelonSeeds: 3
     LimeSeeds: 3
     LemonSeeds: 3
     OrangeSeeds: 3
-    # GrassSeeds: 3
+    PineappleSeeds: 3
+    GrassSeeds: 3
     CocoaSeeds: 3
-    # PlumpSeeds: 2
+    PlumpSeeds: 2
     CabbageSeeds: 3
     GrapeSeeds: 3
     PumpkinSeeds: 3
-    # CherrySeed: 3
+    CherrySeeds: 3
     RiceSeeds: 3
     GarlicSeeds: 3
     OnionSeeds: 3
+    OnionRedSeeds: 3
 
 
 # Dinnerware
@@ -532,7 +536,7 @@
     CMDrinkCanBoda: 30
 
 
-# Ingridients
+# Ingredients
 - type: entity
   parent: CMVendorDinnerware
   id: CMVendorIngredients
@@ -548,9 +552,13 @@
       entries:
       - id: FoodContainerEgg
         amount: 12
+      - id: FoodMeatChicken
+        amount: 24
       - id: FoodMeatFish
         amount: 12
       - id: FoodMeat
+        amount: 24
+      - id: FoodMeatBacon
         amount: 24
       - id: DrinkMilkCarton
         amount: 24
@@ -597,7 +605,8 @@
         amount: 12
       - id: FoodTomato
         amount: 12
-    # TODO RMC14 Whitebeet 12
+      - id: FoodWhiteBeet
+        amount: 12
       - id: FoodOnion
         amount: 12
       - id: FoodOnionRed
@@ -610,3 +619,13 @@
         amount: 12
       - id: FoodCondimentBottleVinegar
         amount: 12
+
+# PVE
+
+- type: entity
+  parent: CMVendorSec
+  id: RMCVendorSecTSEPA
+  suffix: TSEPA
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"]]
