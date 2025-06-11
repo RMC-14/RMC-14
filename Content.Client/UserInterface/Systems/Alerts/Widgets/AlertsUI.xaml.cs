@@ -44,7 +44,6 @@ public sealed partial class AlertsUI : UIWidget
         foreach (var alertControl in _alertControls.Values)
         {
             alertControl.OnPressed -= AlertControlPressed;
-            alertControl.OnAltPressed -= AlertControlAltPressed;
             alertControl.Dispose();
         }
 
@@ -154,7 +153,6 @@ public sealed partial class AlertsUI : UIWidget
             DynamicMessage = dynamicMessage,
         };
         alertControl.OnPressed += AlertControlPressed;
-        alertControl.OnAltPressed += AlertControlAltPressed;
         return alertControl;
     }
 
@@ -163,20 +161,9 @@ public sealed partial class AlertsUI : UIWidget
         if (args.Button is not AlertControl control)
             return;
 
-        if (args.Event.Function != EngineKeyFunctions.UIClick)
-            return;
-
-        AlertPressed?.Invoke(this, control.Alert.ID);
-    }
-
-    private void AlertControlAltPressed(BaseButton.ButtonEventArgs args)
-    {
-        if (args.Button is not AlertControl control)
-            return;
-
-        if (args.Event.Function != EngineKeyFunctions.UIRightClick)
-            return;
-
-        AlertAltPressed?.Invoke(this, control.Alert.ID);
+        if (args.Event.Function == EngineKeyFunctions.UIClick)
+            AlertPressed?.Invoke(this, control.Alert.ID);
+        else if (args.Event.Function == EngineKeyFunctions.UIRightClick)
+            AlertAltPressed?.Invoke(this, control.Alert.ID);
     }
 }
