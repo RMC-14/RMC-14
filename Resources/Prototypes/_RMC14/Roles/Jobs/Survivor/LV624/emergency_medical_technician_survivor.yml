@@ -33,7 +33,7 @@
   id: RMCGearSurvivorLV624MedicalTechnician
   equipment:
     head: RMCHeadCapFlippable # TODO RMC blue cap
-    jumpsuit: RMCJumpsuitCivilianGreen # TODO RMC blue workwear
+    jumpsuit: CMJumpsuitColonist # TODO RMC blue workwear
     outerClothing: RMCJacketCorporateBlack # TODO RMC first reponder jacket
     eyes: RMCGlassesMedicalHUDGlasses
 

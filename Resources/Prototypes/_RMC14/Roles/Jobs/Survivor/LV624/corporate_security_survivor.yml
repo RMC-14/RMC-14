@@ -1,11 +1,11 @@
 - type: job
   parent: CMSurvivorSecurity
-  id: CMSurvivorLV624CMBDeputy
-  name: cm-job-name-survivor-lv624-cmb-deputy
+  id: CMSurvivorLV624SecurityGuard
+  name: cm-job-name-survivor-lv624-security-guard
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624CMBDeputy
-  startingGear: RMCGearSurvivorLV624CMBDeputy
-  spawnMenuRoleName: CMB Deputy (LV624 Survivor)
+  playTimeTracker: CMJobSurvivorLV624SecurityGuard
+  startingGear: RMCGearSurvivorLV624SecurityGuard
+  spawnMenuRoleName: Security Guard (LV624 Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,24 +26,24 @@
     - type: NpcFactionMember
       factions:
       - Survivor
-      - Buero
+      - WeYa
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetLV624CMBDeputy
+      preset: RMCGearSurvivorPresetLV624SecurityGuard
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
-  id: RMCGearSurvivorLV624CMBDeputy
+  id: RMCGearSurvivorLV624SecurityGuard
   equipment:
-    head: RMCHeadCapBureau
-    jumpsuit: RMCSwatCMBUniform # TODO RMC CMB uniform (the off-white one)
-    outerClothing: RMCCoatBureauDeputy
-    ears: RMCHeadsetDistressBureau
+    head: ArmorHelmetPMC
+    jumpsuit: RMCJumsuitWhiteService
+    outerClothing: RMCArmorVestWeYa
+    ears: RMCHeadsetDistressWeYaColony
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorLV624CMBDeputy
+  id: RMCSpawnPointSurvivorLV624SecurityGuard
   name: survivor lv624 cmb deputy spawn point
   components:
   - type: SpawnPoint
@@ -56,10 +56,10 @@
       state: survivor
 
 - type: playTimeTracker
-  id: CMJobSurvivorLV624CMBDeputy
+  id: CMJobSurvivorLV624SecurityGuard
   isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
-  id: RMCGearSurvivorPresetLV624CMBDeputy
+  id: RMCGearSurvivorPresetLV624SecurityGuard
   name: lv624 cmb deputy colonist preset

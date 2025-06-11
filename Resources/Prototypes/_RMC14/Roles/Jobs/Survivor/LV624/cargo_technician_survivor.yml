@@ -31,7 +31,7 @@
 - type: startingGear
   id: RMCGearSurvivorLV624CargoTechnician
   equipment:
-    jumpsuit: RMCJumpsuitCivilianBrown # TODO RMC kahki workwear
+    jumpsuit: CMJumpsuitColonist # TODO RMC kahki workwear
     back: CMSatchelEngineerSurvivorFill
     head: RMCHeadCapFlippable #TODO RMC yellow cap
     shoes: RMCShoesJackboots
@@ -60,6 +60,6 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetDoctor
+  parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetLV624CargoTechnician
   name: lv624 cargo technician colonist preset # TODO RMC14 random research notes
