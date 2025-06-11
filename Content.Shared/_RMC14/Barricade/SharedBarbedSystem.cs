@@ -120,6 +120,9 @@ public abstract class SharedBarbedSystem : EntitySystem
         UpdateAppearance(barbed);
 
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), barbed.Owner, args.User);
+
+        var ev = new BarbedStateChangedEvent();
+        RaiseLocalEvent(barbed, ref ev);
     }
 
     private void WireCutterOnDoAfter(Entity<BarbedComponent> barbed, ref CutBarbedDoAfterEvent args)
@@ -144,6 +147,9 @@ public abstract class SharedBarbedSystem : EntitySystem
         UpdateAppearance(barbed);
 
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
+
+        var ev = new BarbedStateChangedEvent();
+        RaiseLocalEvent(barbed, ref ev);
     }
 
     private void OnAttacked(Entity<BarbedComponent> barbed, ref AttackedEvent args)
@@ -198,3 +204,6 @@ public abstract class SharedBarbedSystem : EntitySystem
         _appearance.SetData(barbed, BarbedWireVisualLayers.Wire, visual);
     }
 }
+
+[ByRefEvent]
+public record struct BarbedStateChangedEvent;
