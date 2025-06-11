@@ -32,7 +32,7 @@
   parent: RMCGearSurvivorDoctor
   id: RMCGearSurvivorLV624MedicalTechnician
   equipment:
-    head: RMCHeadCapFlippable # TODO RMC blue cap
+    head: RMCHeadBlueSoftCap
     jumpsuit: RMCJumpsuitBlueWorkwear
     outerClothing: RMCJacketWindbreakerFirstResponder
     eyes: RMCGlassesMedicalHUDGlasses

@@ -33,7 +33,7 @@
   equipment:
     jumpsuit: RMCJumpsuitKhakiWorkwear
     back: CMSatchelEngineerSurvivorFill
-    head: RMCHeadCapFlippable #TODO RMC yellow cap
+    head: RMCHeadYellowSoftCap
     shoes: RMCShoesJackboots
     id: CMIDCardColonistEngineer
     ears: CMHeadsetColony
