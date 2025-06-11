@@ -362,6 +362,8 @@
         amount: 2
     - name: Extended ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 10
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
@@ -381,6 +383,8 @@
       - id: RMCSpeedLoader44Marksman
         amount: 6
       - id: RMCMagazinePistolM1984HP
+        amount: 2
+      - id: RMCMagazinePistolM1984AP
         amount: 2
       - id: CMMagazineRifleM54CE2HT
         amount: 2
@@ -418,6 +422,15 @@
       - id: RMCBoxMagazinePistolM13Drum
         name: Magazine Box (Drum M13 x 12)
         box: RMCMagazinePistolM13Drum
+      - id: RMCBoxMagazineRifleM4SPR
+        name: Magazine Box (M4SPR x 16)
+        box: CMMagazineRifleM4SPR
+      - id: RMCBoxMagazineRifleM4SPRAP
+        name: Magazine Box (AP M4SPR x 16)
+        box: CMMagazineRifleM4SPRAP
+      - id: RMCBoxMagazineRifleM4SPRExt
+        name: Magazine Box (Ext M4SPR x 16)
+        box: CMMagazineRifleM4SPRExt
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -445,12 +458,6 @@
       - id: RMCBoxMagazinePistolM1984HP
         name: Magazine Box (HP M1984 x 16)
         box: RMCMagazinePistolM1984HP
-      - id: RMCBoxMagazineRifleM4SPR
-        name: Magazine Box (M4SPR x 16)
-        box: CMMagazineRifleM4SPR
-      - id: RMCBoxMagazineRifleM4SPRAP
-        name: Magazine Box (AP M4SPR x 16)
-        box: CMMagazineRifleM4SPRAP
 #      - name: Magazine Box (M54CE2 x 8)
 #        box: RMCCrateMagazineRifleM54CE2
 #      - name: Magazine Box (M54CE2 Holo-Target x 8)

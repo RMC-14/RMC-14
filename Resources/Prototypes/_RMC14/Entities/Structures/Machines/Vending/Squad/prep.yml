@@ -328,22 +328,26 @@
         amount: 3
     - name: Extended Ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 2
       - id: CMMagazineSMGM63Ext
         amount: 2
       - id: CMMagazineRifleM54CExt
-        amount: 2
-    - name: Special Ammunition
-      entries:
-      - id: RMCMagazineSmartGun
-        amount: 1
-      #- id: CMSpeedLoaderM44Heavy
-      #  amount: 2
-      - id: RMCSpeedLoader44Marksman
         amount: 2
       - id: RMCMagazinePistolM13Ext
         amount: 6
       - id: RMCMagazinePistolM13Drum
         amount: 6
+    - name: Special Ammunition
+      entries:
+      - id: RMCMagazineSmartGun
+        amount: 1
+      - id: RMCSpeedLoader44Heavy
+        amount: 2
+      - id: RMCSpeedLoader44Marksman
+        amount: 2
+      - id: RMCMagazinePistolM1984AP
+        amount: 2
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80

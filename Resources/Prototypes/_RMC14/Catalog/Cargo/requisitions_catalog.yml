@@ -32,6 +32,8 @@
         crate: RMCCrateBoxMagazineRifleM4SPR
       - cost: 4000
         crate: RMCCrateBoxMagazineRifleM4SPRAP
+      - cost: 3000
+        crate: RMCCrateBoxMagazineRifleM4SPRExt
       - cost: 2000
         crate: RMCCrateBoxMagazineSMGM63
       - cost: 4000
