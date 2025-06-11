@@ -64,6 +64,8 @@
       entries:
       - id: CMHandsInsulated
         recommended: true
+      - id: CMHandsBlackInsulated
+        recommmended: true
       - id: CMHandsBlackMarine
       - id: CMHandsLatex
     - name: Backpack
