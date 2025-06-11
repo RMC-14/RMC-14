@@ -148,7 +148,7 @@
 - type: microwaveMealRecipe
   id: RecipeRMCOnigiri
   name: onigiri recipe
-  result: RMCFoodPBJSandwich
+  result: RMCFoodOnigiri
   time: 5
   group: Savory
   solids:

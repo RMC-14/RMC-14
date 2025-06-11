@@ -49,7 +49,7 @@
       entries:
       - id: RMCHardhatOrange
         name: orange hard hat
-      - id: ClothingHeadHatWelding
+      - id: RMCHelmetWelding
       # /obj/item/clothing/head/cmcap/flap
 #    - name: Suit
 #      choices: { CMSuit: 1 }
