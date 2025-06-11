@@ -3,6 +3,14 @@
   name: AEGIS Secure Crate
   description: A secure storage crate for transportation of AEGIS equipment. It is locked and requires an AEGIS ID card to open.
   components:
+    - type: WarpPoint
+    - type: PointLight
+      radius: 20
+      energy: 5.0
+      color: "#FFE4CEFF"
+      mask: /Textures/Effects/LightMasks/double_cone.png
+    - type: RotatingLight
+      speed: 90
     - type: Sprite
       sprite: _RMC14/Secure-Box.rsi
       layers:
@@ -41,4 +49,3 @@
       isCorrodible: False
     - type: DestroyedByExplosionType
       explosion: RMCOBXenoTunnel
-
