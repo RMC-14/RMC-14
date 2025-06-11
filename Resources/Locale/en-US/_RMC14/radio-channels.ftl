@@ -30,6 +30,8 @@ chat-radio-spp-med = SPP Med
 chat-radio-spp-cct = SPP CCT
 
 chat-radio-royal-marine = Royal Marine
-chat-radio-tse = Three Suns Empire
+chat-radio-tse = TSE
 
 chat-radio-hivemind = Hivemind
+
+chat-radio-marine-sun-riders = Sun Riders

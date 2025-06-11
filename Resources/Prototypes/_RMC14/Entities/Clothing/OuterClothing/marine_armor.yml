@@ -11,7 +11,7 @@
     melee: 20
     bullet: 20
     bio: 20
-    explosionArmor: 15
+    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: medium
   - type: ClothingSpeedModifier
@@ -139,7 +139,6 @@
   - type: CMArmor
     melee: 25
     bio: 25
-    explosionArmor: 20
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/jungle.rsi
@@ -335,7 +334,6 @@
   - type: CMArmor
     bullet: 30
     bio: 20
-    explosionArmor: 15
   - type: SmartGunArmor
   - type: Storage
     maxItemSize: Small
@@ -360,7 +358,6 @@
   - type: CMArmor
     bullet: 30
     bio: 20
-    explosionArmor: 15
   - type: SmartGunArmor
   - type: Storage
     maxItemSize: Small
@@ -384,6 +381,7 @@
     explosionArmor: 40
   - type: Corrodible
     isCorrodible: false
+  - type: RMCGrantLeapProtection
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/jungle.rsi
@@ -429,7 +427,7 @@
     melee: 15
     bullet: 15
     bio: 15
-    explosionArmor: 20
+    explosionArmor: 15
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier
@@ -762,8 +760,6 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
-  - type: CMArmor
-    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier
@@ -792,7 +788,6 @@
     melee: 25
     bullet: 20
     bio: 15
-    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier

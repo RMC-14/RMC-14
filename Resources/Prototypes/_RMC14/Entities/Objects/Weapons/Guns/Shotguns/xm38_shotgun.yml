@@ -70,3 +70,11 @@
       rmc-aslot-rail: -0.2, 0.198
       rmc-aslot-underbarrel: 0.30, -0.31
       rmc-aslot-stock: -0.55, -0.01
+
+- type: entity
+  parent: RMCWeaponShotgunXM38
+  id: RMCWeaponShotgunXM38Filled
+  suffix: Filled
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot

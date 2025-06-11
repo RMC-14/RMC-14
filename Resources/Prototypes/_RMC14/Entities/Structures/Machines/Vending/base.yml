@@ -78,3 +78,4 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  # - type: XenoCrusherChargable TODO knock over by crusher

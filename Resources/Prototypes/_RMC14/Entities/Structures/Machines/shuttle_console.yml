@@ -39,6 +39,8 @@
   components:
   - type: Sprite
     state: syndishuttle
+  - type: DropshipNavigationComputer
+    hijackable: false
 
 - type: entity
   parent: CMComputerDropship

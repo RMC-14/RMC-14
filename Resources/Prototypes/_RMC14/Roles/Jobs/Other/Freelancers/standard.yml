@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: Freelancer Conscript
   special:
   - !type:AddComponentSpecial
     components:
@@ -64,6 +65,10 @@
     job: CMFreelancerRifleman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadFreelancer
 
@@ -79,6 +84,10 @@
     job: CMFreelancerRifleman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadFreelancer
 

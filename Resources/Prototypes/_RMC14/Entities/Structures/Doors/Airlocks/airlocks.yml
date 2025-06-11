@@ -20,6 +20,29 @@
 
 - type: entity
   parent: CMAirlock
+  id: CMAirlockShuttle
+  suffix: Shuttle
+  components:
+  - type: Airlock
+    powered: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Docking
+  - type: DockingSignalControl
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: CMAirlock
   id: CMAirlockCommand
   name: command airlock
   suffix: Command
