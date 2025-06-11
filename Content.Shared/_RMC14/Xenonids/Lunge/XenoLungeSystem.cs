@@ -149,14 +149,14 @@ public sealed class XenoLungeSystem : EntitySystem
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge != null)
             xeno.Comp.Charge = null;
 
-        if (!_xeno.CanAbilityAttackTarget(xeno, targetId) || (_size.TryGetSize(targetId, out var size) && size >= RMCSizes.Big) ||
-            (TryComp<XenoComponent>(targetId, out var xenoComp) && xenoComp.Tier >= 2)) //Fails if big or tier 2 or more
-            return true;
-
         var ev = new XenoLungeHitAttempt(xeno);
         RaiseLocalEvent(targetId, ref ev);
 
         if (ev.Cancelled)
+            return true;
+
+        if (!_xeno.CanAbilityAttackTarget(xeno, targetId) || (_size.TryGetSize(targetId, out var size) && size >= RMCSizes.Big) ||
+            (TryComp<XenoComponent>(targetId, out var xenoComp) && xenoComp.Tier >= 2)) //Fails if big or tier 2 or more
             return true;
 
         if (_net.IsServer)

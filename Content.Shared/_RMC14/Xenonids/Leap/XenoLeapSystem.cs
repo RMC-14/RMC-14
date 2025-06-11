@@ -245,9 +245,6 @@ public sealed class XenoLeapSystem : EntitySystem
         if(!TryComp(args.Leaper, out XenoLeapingComponent? leaping))
             return;
 
-        if (HasComp<BarricadeComponent>(ent) && (!TryComp(ent, out BarbedComponent? barbed) || !barbed.IsBarbed))
-            return;
-
         args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration, ent.Comp.BlockSound, args.Leaper, leaping.Origin, ent.Comp.FullProtection);
     }
 
@@ -370,6 +367,9 @@ public sealed class XenoLeapSystem : EntitySystem
     public bool AttemptBlockLeap(EntityUid blocker, TimeSpan stunDuration, SoundSpecifier blockSound, EntityUid leaper, EntityCoordinates leapOrigin, bool omnidirectionalProtection = false)
     {
         if (!_directionalBlock.IsFacingTarget(blocker, leaper, leapOrigin) && !omnidirectionalProtection)
+            return false;
+
+        if (HasComp<BarricadeComponent>(blocker) && (!TryComp(blocker, out BarbedComponent? barbed) || !barbed.IsBarbed))
             return false;
 
         var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
