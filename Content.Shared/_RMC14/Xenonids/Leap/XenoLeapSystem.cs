@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
@@ -64,6 +65,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalBlock = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -363,14 +365,8 @@ public sealed class XenoLeapSystem : EntitySystem
     public bool AttemptBlockLeap(EntityUid blocker, TimeSpan stunDuration, SoundSpecifier blockSound, EntityUid leaper, EntityCoordinates leapOrigin, bool omnidirectionalProtection = false)
     {
         var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
-        var diff = leapOrigin.Position - blockerCoordinates.Coords.Position;
-        var dir = diff.Normalized().GetDir();
-        var blockerDirection = blockerCoordinates.worldRot.GetDir();
-        var relativeDiff = Math.Abs(dir - blockerDirection);
 
-        // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing.
-        // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the North-West, North, or North-East of the blocker.
-        if(relativeDiff != 0 && relativeDiff != 1 && relativeDiff != 7 && !omnidirectionalProtection)
+        if (!_directionalBlock.IsFacingTarget(blocker, leaper))
             return false;
 
         _stun.TryParalyze(leaper, stunDuration, true);

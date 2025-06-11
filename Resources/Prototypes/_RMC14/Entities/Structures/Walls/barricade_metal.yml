@@ -35,7 +35,7 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
-  - type: DirectionalMeleeBlocker
+  - type: DirectionalAttackBlocker
   - type: RMCLeapProtection
     inherentStunDuration: 3
     fullProtection: true

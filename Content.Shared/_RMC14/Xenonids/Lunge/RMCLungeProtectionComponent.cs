@@ -1,8 +1,9 @@
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Lunge;
 
-[RegisterComponent, AutoGenerateComponentState()]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCLungeProtectionComponent : Component
 {
     /// <summary>
