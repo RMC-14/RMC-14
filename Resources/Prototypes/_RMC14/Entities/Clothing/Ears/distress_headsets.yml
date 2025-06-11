@@ -10,9 +10,20 @@
       key_slots:
       - CMEncryptionKeyColony
 
-# For Bureau Marshals
 - type: entity
   parent: RMCHeadsetIcons
+  id: RMCHeadsetColonyIcons
+  name: colony headset
+  description: A standard headset used by colonists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
+# For Bureau Marshals
+- type: entity
+  parent: RMCHeadsetIconsCMB
   id: RMCHeadsetDistressBureau
   name: bureau earpiece
   description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
@@ -24,7 +35,7 @@
 
 # For WeYa civilians
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetIconsWeYa
   id: RMCHeadsetDistressWeYa
   name: WeYa corporate headset
   description: A headset commonly worn by WeYa corporate personnel.
@@ -36,7 +47,7 @@
 
 # For WeYa PMC
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetIconsWeYa
   id: RMCHeadsetDistressPMC
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -46,7 +57,6 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
-  - type: GrantMarineIcons
   - type: GrantSquadLeaderTracker
   - type: GrantTacMapAlert
 
@@ -60,7 +70,7 @@
     radioTextIncrease: 2
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetIconsWeYa
   id: RMCHeadsetDistressPMCDirector
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -71,7 +81,6 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
-  - type: GrantMarineIcons
   - type: GrantTacMapAlert
   - type: RMCHeadset
     radioTextIncrease: 3
@@ -87,3 +96,25 @@
     containers:
       key_slots:
       - RMCEncryptionKeyDukes
+  - type: GrantMarineIcons
+
+- type: entity
+  parent: RMCHeadsetDistressDukes
+  id: RMCHeadsetDistressDukesLeader
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetForecon
+  name: Force Recon headset
+  description: A headset given to FORECON marines.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyFORECON
+  - type: RMCHeadset
+    channels:
+    - MarineForecon

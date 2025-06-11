@@ -48,6 +48,12 @@
     damage:
       types:
         Slash: 50
+  - type: XenoToggleChargingDamage
+    stageLoss: 1
+    stageLossProbability: 0.5
+    damage:
+      types:
+        Blunt: 22
 
 - type: entity
   parent: CMBaseStructureCorrodible

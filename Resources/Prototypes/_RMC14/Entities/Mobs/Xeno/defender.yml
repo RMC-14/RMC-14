@@ -102,6 +102,9 @@
   parent: CMXenoDefenderBase
   id: CMXenoDefender
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDefender
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -139,7 +142,6 @@
     - ActionXenoSoak
     - ActionXenoFortifySteelcrest
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-steelcrest-name
     description: rmc-xeno-steelcrest-description
@@ -166,4 +168,5 @@
       types:
         Blunt: 37.5
   - type: XenoSoak
+  - type: XenoHidden
 

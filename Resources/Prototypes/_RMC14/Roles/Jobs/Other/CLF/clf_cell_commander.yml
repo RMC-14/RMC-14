@@ -5,7 +5,7 @@
   description: rmc-job-description-clf-cell-commander
   playTimeTracker: CMJobCLFCellCommander
   ranks:
-    RMCRankLanceCorporal: [ ]
+    RMCRankCLFRebelCommander: [ ]
   startingGear: RMCGearCLFCellCommander
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
@@ -55,7 +55,8 @@
   equipment:
     head: RMCArmorHelmetMercenaryMiner
     ears: RMCHeadsetDistressDukes
-    jumpsuit: JumpsuitMarine # TOOD RMC14
+    jumpsuit: RMCJumpsuitCLFSoldier
+    neck: RMCCLFArmband
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled # TODO RMC14

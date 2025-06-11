@@ -1,0 +1,134 @@
+﻿# Executive Supervisor
+- type: job
+  parent: CMJobBase
+  id: CMCorporateExecutiveSupervisor
+  name: rmc-job-name-corp-exec-supervisor
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateExecutiveSupervisor
+  ranks:
+    RMCRankWeYaExecutiveSupervisor: [ ]
+  startingGear: RMCGearCorporateExecutiveSupervisor
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corp-exec-supervisor
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCorporateExecutiveSupervisor
+  name: corporate executive supervisor ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCorporateExecutiveSupervisor
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorporateExecutiveSupervisor
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-exec-supervisor
+    description: rmc-ghost-role-information-corp-exec-description
+    rules: rmc-ghost-role-information-corp-exec-rules
+    reregister: false
+    job: CMCorporateExecutiveSupervisor
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearCorporateExecutiveSupervisor
+  equipment:
+    ears: RMCHeadsetDistressWeYaColony # TODO RMC14 tape recorder
+    back: CMSatchel
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCJacketCorporateBlack
+    shoes: RMCShoesLaceup
+    id: RMCIDCardExecutiveCorporateSupervisor
+    pocket2: CMClipboard # TODO RMC14 notepad
+  inhand:
+  - RMCBriefcasePaperPen # TODO RMC14 secure briefcase
+
+- type: playTimeTracker
+  id: RMCJobCorporateExecutiveSupervisor
+
+# Executive Specialist
+- type: job
+  parent: CMJobBase
+  id: CMCorporateExecutiveSpecialist
+  name: rmc-job-name-corp-exec-specialist
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateExecutiveSpecialist
+  ranks:
+    RMCRankWeYaExecutiveSpecialist: [ ]
+  startingGear: RMCGearCorporateExecutiveSpecialist
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corp-exec-specialist
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCorporateExecutiveSpecialist
+  name: corporate executive specialist ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCorporateExecutiveSpecialist
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorporateExecutiveSpecialist
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-exec-specialist
+    description: rmc-ghost-role-information-corp-exec-description
+    rules: rmc-ghost-role-information-corp-exec-rules
+    reregister: false
+    job: CMCorporateExecutiveSpecialist
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearCorporateExecutiveSpecialist
+  equipment:
+    ears: RMCHeadsetDistressWeYaColony # TODO RMC14 tape recorder
+    back: CMSatchel
+    jumpsuit: CMJumpsuitLiaisonBlue
+    outerClothing: RMCJacketCorporateBlue
+    shoes: RMCShoesLaceup
+    id: RMCIDCardExecutiveCorporateSpecialist
+    pocket2: CMClipboard # TODO RMC14 notepad
+  inhand:
+  - CMPaper
+
+- type: playTimeTracker
+  id: RMCJobCorporateExecutiveSpecialist

@@ -1,56 +1,99 @@
-
-# Freelancer Leader (Neutral faction, can be friendly, can be not. Depends on admin intentions)
+# Freelancer Leader
+- type: job
+  parent: CMJobBase
+  id: CMFreelancerLeader
+  name: rmc-job-name-freelancer-leader
+  description: rmc-ghost-role-information-freelancer-friendly-description
+  playTimeTracker: RMCJobFreelancerLeader
+  ranks:
+    RMCRankFLLeader: []
+  startingGear: RMCGearFreelancerLeader
+  icon: RMCJobIconFreelancerLeader
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSmartGun: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 1
+      # TODO RMC14 add English, russian, Chinese and Japanese languages
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-leader
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: free_sl
+    - type: RMCPointing
+  hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerFreelancerLeader
-  name: Freelancer Leader spawner
-  suffix: Spawner
+  id: RMCRandomHumanoidFreelancerLeaderHostile
+  name: freelancer ghost role leader
+  suffix: Spawner, Player, Hostile
   components:
   - type: Sprite
-    layers:
-    - state: red
-    - sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
-      state: icon
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidFreelancerLeader
-
-- type: entity
-  id: RMCRandomHumanoidFreelancerLeader
-  name: Freelancer Leader ghost role
-  suffix: Role
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
     state: icon
   - type: RandomHumanoidSpawner
     settings: RMCFreelancerLeader
+
+- type: entity
+  id: RMCRandomHumanoidFreelancerLeaderFriendly
+  name: freelancer ghost role leader
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCFreelancerLeaderFriendly
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCFreelancerLeader
   components:
   - type: GhostRole
-    name: rmc-ghost-role-information-freelancer-leader-name
-    description: rmc-ghost-role-information-freelancer-standart-description
-    rules: ghost-role-information-freeagent-rules
+    name: rmc-ghost-name-freelancer-hostile-leader
+    description: rmc-ghost-role-information-freelancer-hostile-description
+    rules: rmc-ghost-role-information-freelancer-rules
+    reregister: false
+    job: CMFreelancerLeader
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearFreelancerLeader ]
-  - type: Skills
-    skills:
-      RMCSkillFireman: 1
-      RMCSkillConstruction: 2
-      RMCSkillEngineer: 1
-      RMCSkillEndurance: 2
-      RMCSkillMedical: 2
-      RMCSkillCqc: 1
-      RMCSkillLeadership: 2
-      RMCSkillOverwatch: 1
-      RMCSkillJtac: 3
-  # TODO RMC14 add English, russian, Chinese and Japanese languages
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCFreelancerLeaderFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-freelancer-friendly-leader
+    description: rmc-ghost-role-information-freelancer-friendly-description
+    rules: rmc-ghost-role-information-freelancer-rules
+    reregister: false
+    job: CMFreelancerLeader
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
 
 - type: startingGear
   id: RMCGearFreelancerLeader
@@ -64,4 +107,14 @@
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
-    ears: RMCHeadsetDistressDukes
+    ears: RMCHeadsetDistressDukesLeader
+
+- type: playTimeTracker
+  id: RMCJobFreelancerLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconFreelancerLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: free_sl

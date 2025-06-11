@@ -58,6 +58,11 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Glass
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    damage:
+      types:
+        Blunt: 40 # TODO RMC14 reduce window health to 100, check per window
 
 - type: entity
   parent: CMBaseWindowIndestructible

@@ -31,16 +31,42 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 1
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-gunner
+  hidden: true
 
-- type: playTimeTracker
-  id: RMCJobPMCGunner
+- type: entity
+  id: RMCRandomHumanoidPMCGunner
+  name: weya pmc ghost role gunner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCGunner
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCGunner
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-gunner
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCGunner
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCGunner
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
-    jumpsuit: RMCJumpsuitVeteranPMC
+    jumpsuit: RMCJumpsuitVeteranPMCGunner
     outerClothing: CMArmorM4PMCSmartGunHarness
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMCGunner
@@ -51,8 +77,6 @@
     pocket2: RMCPouchDrumPMCFill
     belt: RMCBeltSmartGunOperatorPistolPMCFilled
     eyes: RMCGlassesSmartGunSight
-  inhand:
-  - RMCWebbingPMCGunner
   storage:
     outerClothing:
     - CMMagazinePistolMK80
@@ -61,38 +85,12 @@
     - CMGauze10
     - CMGauze10
 
+- type: playTimeTracker
+  id: RMCJobPMCGunner
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconPMCGunner
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_sg
-
-- type: entity
-  parent: MarkerBase
-  id: RMCRandomHumanoidPMCGunner
-  name: weya pmc ghost role gunner
-  suffix: We-Ya PMC
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: RandomHumanoidSpawner
-    settings: RMCPMCGunner
-
-- type: randomHumanoidSettings
-  parent: RMCEventHumanoid
-  id: RMCPMCGunner
-  components:
-  - type: GhostRole
-    name: rmc-ghost-name-pmc-gunner
-    description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
-    reregister: false
-    job: RMCPMCGunner
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa

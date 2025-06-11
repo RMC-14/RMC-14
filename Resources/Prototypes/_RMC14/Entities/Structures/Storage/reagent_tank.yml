@@ -24,7 +24,7 @@
         mask:
         - MachineMask
         layer:
-        - MobMask
+        - HighImpassable
         - BulletImpassable
   - type: Destructible
     thresholds:

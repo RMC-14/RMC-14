@@ -55,6 +55,11 @@
           params:
             volume: -6
   - type: EntityStorageCloseOnMapInit
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    damage:
+      types:
+        Blunt: 40
 
 - type: entity
   parent: CMClosetBase

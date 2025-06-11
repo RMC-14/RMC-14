@@ -83,3 +83,9 @@
   id: Corp
   tags:
   - CMAccessCorp
+
+# Synth access
+- type: accessGroup
+  id: Synth
+  tags:
+  - RMCAccessSynth

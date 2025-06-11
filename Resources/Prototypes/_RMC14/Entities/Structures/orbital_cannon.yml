@@ -32,6 +32,7 @@
     warheadTypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
+    - RMCOrbitalCannonWarheadIncendiary
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
@@ -132,7 +133,7 @@
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
-#    - RMCOrbitalCannonWarheadIncendiary # TODO RMC14 incend
+    - RMCOrbitalCannonWarheadIncendiary
 
 - type: entity
   parent: MarkerBase
@@ -159,6 +160,7 @@
       slope: 10
       max: 90
       delay: 0.6
+      explosionEffect: RMCExplosionEffectClusterOB
   - type: WarpPoint
     location: 1 orbital bombardment
 

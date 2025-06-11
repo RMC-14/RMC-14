@@ -33,6 +33,34 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 4
         RMCSkillExecution: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-director
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCDirector
+  name: weya pmc ghost role director
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCDirector
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCDirector
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-director
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCDirector
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCJobPMCDirector
@@ -61,32 +89,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_sd
-
-- type: entity
-  parent: MarkerBase
-  id: RMCRandomHumanoidPMCDirector
-  name: weya pmc ghost role director
-  suffix: We-Ya PMC
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: RandomHumanoidSpawner
-    settings: RMCPMCDirector
-
-- type: randomHumanoidSettings
-  parent: RMCEventHumanoid
-  id: RMCPMCDirector
-  components:
-  - type: GhostRole
-    name: rmc-ghost-name-pmc-director
-    description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
-    reregister: false
-    job: RMCPMCDirector
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa

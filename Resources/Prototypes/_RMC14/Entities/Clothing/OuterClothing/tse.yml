@@ -1,0 +1,38 @@
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RMCArmourM4TSEPA
+  name: M4 pattern light TSEPA armour
+  description: A modified variant of the M4R armor, stripped of additional riot plating for civilian officer use. A 'TSEPA' badge is sewn into the chestplate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/standard.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 15
+  - type: ClothingSpeedModifier
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RMCArmourM4TSEPAChief
+  name: M4 pattern inspector TSEPA armour
+  description: A modified variant of the M4 TSEPA armour to have the additional riot plating returned, feauturing a golden insignia on the chestplate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/marshal.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 15
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.666
+    sprintModifier: 0.666
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false

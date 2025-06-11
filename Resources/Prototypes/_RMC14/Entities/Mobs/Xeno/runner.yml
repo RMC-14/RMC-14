@@ -120,6 +120,9 @@
   parent: CMXenoRunnerBase
   id: CMXenoRunner
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRunner
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -189,7 +192,6 @@
     - ActionXenoAcidAcider
     - ActionXenoForTheHive
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
@@ -252,6 +254,4 @@
       whitelist:
         components:
         - XenoHeavy
-
-
-
+  - type: XenoHidden

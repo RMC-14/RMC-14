@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMVendorBundleRiflemanApparel
   name: standard marine apparel
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
@@ -70,11 +70,10 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a M10 helmet, a headset, insulated gloves and combat boots.
+  description: Contains a marine jumpsuit, a headset, insulated gloves and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Tech # TODO RMC14 M4
     - CMVendorHeadsetSquadComTech
     - CMJumpsuitMarineEngineer
     - CMHandsInsulated

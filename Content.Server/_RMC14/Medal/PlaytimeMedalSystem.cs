@@ -3,6 +3,7 @@ using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Medal;
 using Content.Shared._RMC14.Survivor;
+using Content.Shared._RMC14.Ribbon;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
@@ -57,7 +58,7 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
         }
 
         EntProtoId? medalId = null;
-        if (HasComp<RMCSurvivorComponent>(ev.Mob))
+        if (HasComp<RMCRibbonComponent>(ev.Mob))
         {
             if (time >= _platinumTime)
                 medalId = BlueRibbon;

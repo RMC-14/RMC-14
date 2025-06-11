@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostTeamLeader
-  name: CMProvostTeamLeader
-  description: rmc-job-description-provost-team-leader
+  name: rmc-job-name-corp-provost-team-leader
+  description: rmc-ghost-role-information-provost-squad-description
   playTimeTracker: CMJobProvostTeamLeader
   ranks:
     RMCRankProvostProvostTeamLeader: []
@@ -29,35 +29,48 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillIntel: 1
         RMCSkillFirearms: 1
+    - type: MarineOrders
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: hudsquad_pvl
+    - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-team-leader
-    - type: MarineOrders
   hidden: true
 
 - type: entity
   id: RMCRandomHumanoidProvostTeamLeader
   name: provost ghost role team leader
-  suffix: Role, Player
+  suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: RandomHumanoidSpawner
     settings: RMCProvostTeamLeader
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCProvostTeamLeader
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-team-leader
+    description: rmc-ghost-role-information-provost-squad-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
     job: CMProvostTeamLeader
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadProvost
 
 - type: startingGear
   id: RMCGearProvostTeamLeader
   equipment:
     head: RMCHeadBeretProvostSenior
     eyes: CMGlassesSecurity
-    ears: CMHeadsetHighCommand
+    ears: RMCHeadsetHighCommandProvostLead
     jumpsuit: CMJumpsuitProvostSenior
     outerClothing: RMCArmorProvostSeniorFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
@@ -77,20 +90,4 @@
   id: RMCJobIconProvostTeamLeader
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pvtml
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostTeamLeader
-  name: provost team leader ID card
-  description: Issued to members of the Provost Office.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: Clothing
-    slots:
-    - idcard
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-  - type: PresetIdCard
-    job: CMProvostTeamLeader
+    state: hudsquad_pvl

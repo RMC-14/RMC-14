@@ -547,6 +547,8 @@
   name: press body armor
   description: Body armor used by war correspondents in battles and wars across the universe.
   components:
+  - type: RMCBulkyArmor
+    isBulky: false
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
   - type: ItemCamouflage # this is needed, otherwise it looks like M3MediumArmor
@@ -619,10 +621,10 @@
     camouflageVariations: { }
 
 - type: entity
-  parent: CMArmorM3Medium
+  parent: CMArmorM3Light
   id: CMArmorM3VLSynth
-  name: M3A1 Synthetic Utility Vest
-  description: This variant of the ubiquitous M3 pattern vest has been extensively modified, providing no protection in exchange for maximum mobility and added storage. Synthetic programming compliant.
+  name: M3A1 synthetic utility vest
+  description: This variant of the ubiquitous M3 pattern vest has been extensively modified to become superlight, providing zero protection in exchange for maximum mobility and added storage. Compliant will all synthetic armor regulations.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/jungle.rsi
@@ -735,6 +737,17 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: snpr-armor
+
+- type: entity
+  parent: CMArmorM45
+  id: RMCArmorUDEPForecon
+  name: UDEP thermal poncho # TODO id lock
+  description: UDEP or the Ultra Diffusive Environmental Poncho is a camouflaged rain-cover worn to protect against the elements and chemical spills. It's commonly treated with an infrared absorbing coating, making a marine almost invisible in the rain. Favoured by UNMC specialists for its comfort and practicality.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/forecon.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # Smart Gun
 - type: entity

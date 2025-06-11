@@ -3,8 +3,8 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stamina;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Flash;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -37,7 +37,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private readonly RMCStaminaSystem _stamina = default!;
     [Dependency] private readonly StandingStateSystem _stand = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -134,7 +134,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-xeno-stun-shaken"), args.Target, args.Target, PopupType.MediumCaution);
         }
         else
-            _stamina.TakeStaminaDamage(args.Target, args.Damage.GetTotal().Float());
+            _stamina.DoStaminaDamage(args.Target, args.Damage.GetTotal().Float());
 
     }
 

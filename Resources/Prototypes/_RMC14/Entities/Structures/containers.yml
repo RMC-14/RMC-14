@@ -26,6 +26,9 @@
   - type: Occluder
     boundingBox: "-0.5,-0.5,0.5,1.5"
   - type: DeleteOnExplosion
+  - type: XenoToggleChargingDamage
+    stageLoss: 4
+    destroy: true
 
 - type: entity
   parent: RMCContainerBase

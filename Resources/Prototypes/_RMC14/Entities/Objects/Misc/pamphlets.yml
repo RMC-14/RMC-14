@@ -74,6 +74,8 @@
     addSkills:
       RMCSkillJtac: 1
     giveJobTitle: rmc-job-name-spotter
+    givePrefix: rmc-job-prefix-spotter
+    isAppendPrefix: false
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_ass
@@ -153,6 +155,8 @@
     skillCap:
       RMCSkillEndurance: 2
     giveJobTitle: rmc-job-name-loader
+    givePrefix: rmc-job-prefix-loader
+    isAppendPrefix: false
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_load
@@ -180,6 +184,8 @@
       RMCSkillEngineer: 1
       RMCSkillJtac: 2
     giveJobTitle: rmc-job-name-mortar-operator
+    givePrefix: rmc-job-prefix-mortar-operator
+    isAppendPrefix: false
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_mortar

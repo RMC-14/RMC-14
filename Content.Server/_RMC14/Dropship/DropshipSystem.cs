@@ -176,7 +176,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         var map = args.MapUid;
         if (HasComp<RMCPlanetComponent>(map))
         {
-            var ev = new DropshipLandedOnPlanetEvent();
+            var ev = new DropshipLandedOnPlanetEvent(ent);
             RaiseLocalEvent(ref ev);
         }
 

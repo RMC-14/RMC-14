@@ -166,6 +166,7 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48
+    directHit: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -198,6 +199,7 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48 #same as HEFA
+    directHit: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -228,6 +230,7 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 1 #same as HEFA
+    directHit: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container

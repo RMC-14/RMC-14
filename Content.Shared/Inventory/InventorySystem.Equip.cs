@@ -129,11 +129,11 @@ public abstract partial class InventorySystem
     }
 
     public bool TryEquip(EntityUid uid, EntityUid itemUid, string slot, bool silent = false, bool force = false, bool predicted = false,
-        InventoryComponent? inventory = null, ClothingComponent? clothing = null, bool checkDoafter = false) =>
-        TryEquip(uid, uid, itemUid, slot, silent, force, predicted, inventory, clothing, checkDoafter);
+        InventoryComponent? inventory = null, ClothingComponent? clothing = null, bool checkDoafter = false, bool doRangeCheck = true) =>
+        TryEquip(uid, uid, itemUid, slot, silent, force, predicted, inventory, clothing, checkDoafter, doRangeCheck);
 
     public bool TryEquip(EntityUid actor, EntityUid target, EntityUid itemUid, string slot, bool silent = false, bool force = false, bool predicted = false,
-        InventoryComponent? inventory = null, ClothingComponent? clothing = null, bool checkDoafter = false)
+        InventoryComponent? inventory = null, ClothingComponent? clothing = null, bool checkDoafter = false, bool doRangeCheck = true)
     {
         if (!Resolve(target, ref inventory, false))
         {
@@ -153,7 +153,7 @@ public abstract partial class InventorySystem
             return false;
         }
 
-        if (!force && !CanEquip(actor, target, itemUid, slot, out var reason, slotDefinition, inventory, clothing))
+        if (!force && !CanEquip(actor, target, itemUid, slot, out var reason, slotDefinition, inventory, clothing, doRangeCheck: doRangeCheck))
         {
             if(!silent)
                 _popup.PopupCursor(Loc.GetString(reason));
@@ -202,7 +202,7 @@ public abstract partial class InventorySystem
         return true;
     }
 
-    public bool CanAccess(EntityUid actor, EntityUid target, EntityUid itemUid)
+    public bool CanAccess(EntityUid actor, EntityUid target, EntityUid itemUid, bool doRangeCheck = true)
     {
         // if the item is something like a hardsuit helmet, it may be contained within the hardsuit.
         // in that case, we check accesibility for the owner-entity instead.
@@ -210,7 +210,7 @@ public abstract partial class InventorySystem
             itemUid = attachedComp.AttachedUid;
 
         // Can the actor reach the target?
-        if (actor != target && !(_interactionSystem.InRangeUnobstructed(actor, target) && _containerSystem.IsInSameOrParentContainer(actor, target)))
+        if (actor != target && !(doRangeCheck && _interactionSystem.InRangeUnobstructed(actor, target) && _containerSystem.IsInSameOrParentContainer(actor, target)))
             return false;
 
         // Can the actor reach the item?
@@ -228,11 +228,11 @@ public abstract partial class InventorySystem
 
     public bool CanEquip(EntityUid uid, EntityUid itemUid, string slot, [NotNullWhen(false)] out string? reason,
         SlotDefinition? slotDefinition = null, InventoryComponent? inventory = null,
-        ClothingComponent? clothing = null, ItemComponent? item = null) =>
-        CanEquip(uid, uid, itemUid, slot, out reason, slotDefinition, inventory, clothing, item);
+        ClothingComponent? clothing = null, ItemComponent? item = null, bool doRangeCheck = true) =>
+        CanEquip(uid, uid, itemUid, slot, out reason, slotDefinition, inventory, clothing, item, doRangeCheck: doRangeCheck);
 
     public bool CanEquip(EntityUid actor, EntityUid target, EntityUid itemUid, string slot, [NotNullWhen(false)] out string? reason, SlotDefinition? slotDefinition = null,
-        InventoryComponent? inventory = null, ClothingComponent? clothing = null, ItemComponent? item = null)
+        InventoryComponent? inventory = null, ClothingComponent? clothing = null, ItemComponent? item = null, bool doRangeCheck = true)
     {
         reason = "inventory-component-can-equip-cannot";
         if (!Resolve(target, ref inventory, false))
@@ -273,7 +273,7 @@ public abstract partial class InventorySystem
             return false;
         }
 
-        if (!CanAccess(actor, target, itemUid))
+        if (!CanAccess(actor, target, itemUid, doRangeCheck: doRangeCheck))
         {
             reason = "interaction-system-user-interaction-cannot-reach";
             return false;

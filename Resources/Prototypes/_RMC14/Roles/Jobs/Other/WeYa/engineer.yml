@@ -32,6 +32,35 @@
         RMCSkillCqc: 1
         RMCSkillPowerLoader: 2
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-engineer
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCEngineer
+  name: weya pmc ghost role engineer
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCEngineer
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCEngineer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-engineer
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCEngineer
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCEngineer
@@ -49,8 +78,6 @@
     back: RMCBackpackWelderPMC
     pocket1: RMCPouchToolsSocFill
     pocket2: RMCPouchConstructionFillFull
-  inhand:
-  - RMCWebbingPMCEngineer
   storage:
     belt:
     - RMCMagazineRifleSSG45Extended
@@ -83,32 +110,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_ct
-
-- type: entity
-  parent: MarkerBase
-  id: RMCRandomHumanoidPMCEngineer
-  name: weya pmc ghost role engineer
-  suffix: We-Ya PMC
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: RandomHumanoidSpawner
-    settings: RMCPMCEngineer
-
-- type: randomHumanoidSettings
-  parent: RMCEventHumanoid
-  id: RMCPMCEngineer
-  components:
-  - type: GhostRole
-    name: rmc-ghost-name-pmc-engineer
-    description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
-    reregister: false
-    job: RMCPMCEngineer
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa

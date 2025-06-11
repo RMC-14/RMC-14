@@ -80,7 +80,7 @@
   name: reagent-name-cmarithrazine
   desc: reagent-desc-cmarithrazine
   color: "#3c8529"
-  overdose: 7.5
+  overdose: 15
   metabolisms:
     Medicine:
       metabolismRate: 0.03

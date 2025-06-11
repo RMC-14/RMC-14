@@ -6,6 +6,7 @@ deadmin_on_join = true
 see_own_notes = true
 server_ban_erase_player = true
 new_player_threshold = 600
+alert.explosion_min_intensity = -1
 
 [adminlogs]
 server_name = "rouny"
@@ -72,7 +73,6 @@ wiki = "https://wiki.rouny-ss14.com"
 
 [net]
 tickrate = 25
-port = 1212
 bindto = "::,0.0.0.0"
 
 [physics]

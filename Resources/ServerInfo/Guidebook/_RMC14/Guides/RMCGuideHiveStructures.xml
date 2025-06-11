@@ -1,0 +1,42 @@
+<Document>
+  #Hive Structures
+  Xenonids thrive by constructing a range of specialized structures, these have to be made by a member of the drone caste line using the Order Construction ability on top of hive weeds then filled with plasma.
+  <Box>
+    <GuideEntityEmbed Entity="XenoHiveWeeds"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoOrderConstruction"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="HiveEggMorpherXeno"/>
+    <GuideEntityEmbed Entity="HiveCoreXeno"/>
+    <GuideEntityEmbed Entity="HivePylonXeno"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="HiveClusterXeno"/>
+    <GuideEntityEmbed Entity="HiveRecoveryNodeXeno"/>
+  </Box>
+  ##Each have limits!
+  - 1 Hive Core
+  - 6 Egg Morphers
+  - 6 Recovery Nodes
+  - 8 Hive Clusters
+  - 2 Hive Pylons
+
+  ##What do they do?
+
+  [bold]Egg Morphers[/bold]: Egg morphers act as a large egg that launch parasites upon any host that enters its vicinity. Gradually produces up to 6 parasites and stores 12 which can be retrieved by Xenonids.
+
+  [bold]Hive Core[/bold]: This is constructed at the start of the match usually by the Queen to designate where the hive will be located and allows other hive structures to be built. Once constructed it will provide bonus evolution point gain rate, energy to produce Lesser Drones, hive weeds, and roofing protection from skyfire (orbital bombardment) and skyspit (close air support). If the hivecore is destroyed then a 5 minute penalty will be incurred before another hivecore can be made, so be sure to protect it!
+
+  [bold]Hive Pylon[/bold]: These are created by planting a hive cluster near a signal tower and then filling it, once it reaches the tower with its weeds it will convert to a Pylon. These generate lesser drones and have roofing protection from skyspit.
+
+  [bold]Hive Cluster[/bold]: Hive Clusters emit hive weeds which allow other hive structures to be built around them, it also can be repaired with plasma if it loses any weeds or health.
+
+  [bold]Recovery Node[/bold]: Recovery Node allows for Xenonids resting near it to be healed. Only one Xenonid can be healed at a time.
+
+  ##Where to place!
+  Since they are limited it is always best to communicate with your hive when you are placing one.
+
+  Hive clusters can be used at the frontline to stall host pushes or at the backline for nesting spots, usually accompanied by a tunnel, these nesting spots will also have 2 or more egg morphers.
+
+  Recovery nodes should be put at the frontline near a hive cluster to help sisters fight extended battles.
+</Document>

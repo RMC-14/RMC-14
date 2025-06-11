@@ -19,7 +19,9 @@
 
   ## Have some experience? Check out these guidebook pages!
 
-  Anyone is free to add guides to this page, either through the discord or github.
+  Anyone is free to add guides to this page, either through the discord or GitHub.
+
+  Many of these guides are also accessible by examining the role or item they're related to!
 
   ### Marines
 
@@ -37,8 +39,10 @@
   ### Xenonids
 
   [bold]Roles[/bold]
-
+  - [textlink="Castes" link="RMCGuideXenonidRoles"]
 
   [bold]Structures[/bold]
+  - [textlink="Hive Structures" link="RMCGuideHiveStructures"]
+  - [textlink="Resin Holes" link="RMCGuideResinHoles"]
 
 </Document>

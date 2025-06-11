@@ -382,6 +382,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
                             continue;
 
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Recovery)
+                            continue;
+
                         oldRecovery.Remove(receiver);
                         var recovery = EnsureComp<XenoRecoveryPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref recovery.Multiplier, pheromones.PheromonesMultiplier);
@@ -394,6 +397,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
                             continue;
 
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Warding)
+                            continue;
+
                         oldWarding.Remove(receiver);
                         var warding = EnsureComp<XenoWardingPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref warding.Multiplier, pheromones.PheromonesMultiplier);
@@ -404,6 +410,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                     foreach (var receiver in active.Receivers)
                     {
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
+                            continue;
+
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Frenzy)
                             continue;
 
                         oldFrenzy.Remove(receiver);
@@ -463,6 +472,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
             var (_, _, pheromones, xform) = Pheromones[index];
             receivers.Receivers.Clear();
+            // TODO RMC14 make this use a component that gets added when alive, removed when dead, and respects ignored pheromones
             Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, receivers.Receivers);
         }
     }

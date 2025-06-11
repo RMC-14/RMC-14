@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -31,6 +30,9 @@ public sealed partial class XenoStompComponent : Component
 
     [DataField, AutoNetworkedField]
     public float Range = 2.82f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan Delay = TimeSpan.Zero;
 
     [DataField, AutoNetworkedField]
     public EntProtoId? SelfEffect;

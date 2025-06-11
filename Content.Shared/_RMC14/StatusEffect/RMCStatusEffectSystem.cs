@@ -15,8 +15,11 @@ public sealed class RMCStatusEffectSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<SkillsComponent, RMCStatusEffectTimeEvent>(OnSkillsStatusEffectTime);
         SubscribeLocalEvent<XenoComponent, RMCStatusEffectTimeEvent>(OnXenoStatusEffectTime);
+        SubscribeLocalEvent<RMCStunResistanceComponent, RMCStatusEffectTimeEvent>(OnStunResistanceStatusEffectTime);
     }
 
     private void OnSkillsStatusEffectTime(Entity<SkillsComponent> ent, ref RMCStatusEffectTimeEvent args)
@@ -39,5 +42,20 @@ public sealed class RMCStatusEffectSystem : EntitySystem
             return;
 
         args.Duration *= 0.667;
+    }
+
+    private void OnStunResistanceStatusEffectTime(Entity<RMCStunResistanceComponent> ent, ref RMCStatusEffectTimeEvent args)
+    {
+        if (args.Key != Knockdown && args.Key != Stun)
+            return;
+
+        args.Duration /= ent.Comp.Resistance;
+    }
+
+    public void GiveStunResistance(EntityUid target, float resistance)
+    {
+        var resistanceComp = EnsureComp<RMCStunResistanceComponent>(target);
+        resistanceComp.Resistance = resistance;
+        Dirty(target, resistanceComp);
     }
 }

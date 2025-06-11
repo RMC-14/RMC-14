@@ -19,6 +19,8 @@
     - Sidearm
     - RMCRevolver
     - RMCMateba
+  - type: Corrodible
+    isCorrodible: false
   - type: RevolverAmmoProvider
     whitelist:
       tags:
@@ -30,7 +32,7 @@
       - RMCCartridgeRevolverMatebaHIAP
       - RMCCartridgeRevolverMatebaHighImpact
       - RMCCartridgeRevolverMateba
-    proto: RMCCartridgeRevolverMateba
+    proto: RMCCartridgeRevolverMatebaHighImpact
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -49,10 +51,14 @@
         startingAttachable: RMCAttachmentMatebaStandard
         whitelist:
           tags:
-          - RMCAttachmentRecoilCompensator
           - RMCAttachmentMatebaStandard
           - RMCAttachmentMatebaMarksman
           - RMCAttachmentMatebaSnubNose
+
+      rmc-bslot-barrel:
+       whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
       rmc-aslot-rail:
         whitelist:

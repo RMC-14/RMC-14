@@ -37,6 +37,11 @@
   - type: RMCDropshipBlocked
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: XenoToggleChargingDamage
+    stageLoss: 4
+    damage:
+      types:
+        Blunt: 40
 
 - type: entity
   parent: CMGirder

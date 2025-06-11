@@ -18,51 +18,49 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: Gun
-    shotsPerBurst: 4
-    selectedMode: SemiAuto
+    selectedMode: FullAuto
     availableModes:
     - SemiAuto
     - Burst
     - FullAuto
     soundGunshot:
       collection: CMM54CShoot
+    shotsPerBurst: 4
+  - type: Corrodible
+    isCorrodible: false
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     - Burst
-    # - FullAuto #TODO RMC: re-enable when the full auto fire mode switch crash to desktop is fixed
+    - FullAuto
     recoilUnwielded: 4
-    #fireDelay: 0.2332
-    scatterWielded: 6
+    scatterWielded: 4
     scatterUnwielded: 20
-    baseFireRate: 4.85 #semi auto is -> 171 rpm - 2.86/s
-    burstScatterMult: 3
+    baseFireRate: 4
+    burstScatterMult: 1
     modifiers:
-      SemiAuto:
-        fireDelay: 0.15
       Burst:
-        fireDelay: 0.1 #290 rpm - 4.85/s
+        fireDelay: 0.1665
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 6
       FullAuto:
-        fireDelay: 0  #290rpm - 4.85/s same as burst
-        maxScatterModifier: 8
+        fireDelay: 0
+        maxScatterModifier: 13
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.65
   - type: GunIDLock
   - type: GunIFF
     enabled: true
   - type: IFFToggle
     requireIDLock: true
-    changeStats: true
-    iFFFireModes:
-    - SemiAuto
-    iFFModifiers:
-      SemiAuto:
-        fireDelay: 0.25 #133 rpm - 2.22/s
+
+
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -79,9 +77,9 @@
           - CMMagazineRifleM54CMK1AP
           - RMCMagazineRifleM54CIncendiary
           - RMCMagazineRifleM54CMK1Incendiary
-        startingItem: RMCMagazineRifleM54CIncendiary
+        startingItem: CMMagazineRifleM54CMK1
   - type: GunDamageModifier
-    multiplier: 1.15
+    multiplier: 1.1
   - type: RMCMagneticItem
   - type: AttachableHolder
     slots:

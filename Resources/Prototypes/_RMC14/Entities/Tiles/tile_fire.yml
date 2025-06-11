@@ -35,6 +35,7 @@
     tags:
     - HideContextMenu
   - type: RMCIgniteOnCollide
+    maxStacks: 20
     tileDamage:
       types:
         Heat: 0.5
@@ -60,6 +61,7 @@
   - type: RMCScorchEffectOnSpawn
     decalTag: burnt
     tileLimit: 3
+  - type: BlockWeeds
 
 - type: entity
   parent: RMCTileFire
@@ -108,6 +110,7 @@
   - type: PointLight
     color: "#8fcbeb"
   - type: RMCIgniteOnCollide
+    maxStacks: 70
     intensity: 80
     duration: 70
   - type: TileFire
@@ -137,6 +140,8 @@
         Heat: 100
   - type: RMCIgniteOnCollide
     maxStacks: 5
+    intensity: 75
+    duration: 5
     tileDamage:
       types:
         Heat: 0.13
@@ -159,3 +164,6 @@
   components:
   - type: TileFire
     duration: 30
+  - type: RMCIgniteOnCollide
+    maxStacks: 60
+    intensity: 60

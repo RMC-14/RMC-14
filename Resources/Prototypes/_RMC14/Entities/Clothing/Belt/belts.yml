@@ -134,6 +134,7 @@
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #      - # TODO circuit board
       components:
       - Welder
@@ -176,6 +177,7 @@
       - RMCExplosiveBreachingCharge
       - RodMetal1
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #     - # TODO circuit board, stock parts
       components:
       - Welder
@@ -241,6 +243,7 @@
       - CMFireExtinguisherPortable
       - RMCShellShotgun
       - RMCNailgunCompact
+      - RMCNailgunTactical
       #      - # TODO circuit board
       components:
       - Welder
@@ -492,6 +495,17 @@
   id: RMCSmartGunSidearmHolster
 
 - type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolForeconFilled
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1984
+      amount: 2
+    - id: CMWeaponPistolM1984
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
   name: M276 pattern M40 grenade rig
@@ -593,7 +607,7 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -609,6 +623,9 @@
       state: b92fs
       map: [ "b92fs_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m13
+      map: [ "m13_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
       map: [ "mk45_fill" ]
     - state: icon-front
@@ -618,7 +635,7 @@
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
     slots:
     - suitStorage
     - belt
@@ -662,6 +679,7 @@
     - mk80_fill
     - b92fs_fill
     - mk45_fill
+    - m13_fill
     mapLayers:
       holstered:
         whitelist:
@@ -687,13 +705,17 @@
         whitelist:
           tags:
           - RMCMK45
+      m13_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolM13
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
       Desert: _RMC14/Objects/Clothing/Belt/holster_pistol/desert.rsi
       Snow: _RMC14/Objects/Clothing/Belt/holster_pistol/snow.rsi
-      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
-      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/urban.rsi
 
 - type: Tag
   id: RMCGeneralPistolHolster
@@ -755,6 +777,38 @@
 
 - type: Tag
   id: RMCGeneralRevolverHolster
+
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCBeltHolsterRevolverSpearheadFill
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m44r # TODO RMC14 per-gun underlay
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+      state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoader357
+      amount: 2
+    - id: RMCSpeedLoader357Hollowpoint
+      amount: 3
+    - id: RMCWeaponRevolverSpearhead
 
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
@@ -898,6 +952,17 @@
   id: RMCSMGPouchHolster
 
 - type: entity
+  parent: RMCBeltHolsterSMGPouch
+  id: RMCHolsterSMGPouchFilledExtended
+  suffix: Filled, Extended Mag
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63Ext
+      amount: 2
+    - id: RMCWeaponSMGM63ExtendedFilled
+
+- type: entity
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
   name: M276 pattern Mateba holster rig
@@ -980,6 +1045,7 @@
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
     - id: RMCWeaponRevolverMatebaGold
+    - id: RMCMatebaCustomizationCaseLuxury
 
 - type: entity
   parent: RMCMatebaBelt
@@ -991,6 +1057,17 @@
     - id: RMCSpeedLoaderMatebaHIAP
       amount: 2
     - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMateba
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltForeconFilled
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
       amount: 3
     - id: RMCWeaponRevolverMateba
 
@@ -1273,3 +1350,87 @@
           tags:
           - RMCWeaponSMGM63
           - RMCWeaponSMGM63B2
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterNailgun
+  name: customized nailgun holster
+  description: Combination of a M276 pistol holster and engineering toolbelt that have been cannibalized into a unique belt that can holster a compact nailgun and two spare nailgun magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_nailgun.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun_tac
+      map: [ "nailguntactical_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun_compact
+      map: [ "nailguncompact_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun
+      map: [ "nailgun_fill" ]
+    - state: icon-front
+      map: [ "holstered" ]
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_nailgun.rsi
+  - type: Storage # holds up to 2 mags plus gun
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      components:
+      - Nailgun
+      tags:
+      - RMCMagazineSMGNailgun
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-max-mags
+      count: 2
+      whitelist:
+        tags:
+        - RMCMagazineSMGNailgun
+  - type: CMHolster
+    whitelist:
+      components:
+      - Nailgun
+  - type: Tag
+    tags:
+    - RMCNailgunHolster
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    - nailgun_fill
+    - nailguncompact_fill
+    - nailguntactical_fill
+    mapLayers:
+      holstered:
+        whitelist:
+          components:
+          - Nailgun
+      nailgun_fill:
+        whitelist:
+          tags:
+          - RMCWeaponSMGNailgun
+      nailguncompact_fill:
+        whitelist:
+          tags:
+          - RMCNailgunCompact
+      nailguntactical_fill:
+        whitelist:
+          tags:
+          - RMCNailgunTactical
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: Tag
+  id: RMCNailgunHolster

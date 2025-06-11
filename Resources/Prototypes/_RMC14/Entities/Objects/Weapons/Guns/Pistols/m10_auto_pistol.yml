@@ -81,9 +81,9 @@
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.6, 0.05
-      rmc-aslot-rail: -0.05, 0.11
-      rmc-aslot-underbarrel: 0.31, -0.25
+      rmc-aslot-barrel: 0.75, 0.13
+      rmc-aslot-rail: 0.05, 0.2
+      rmc-aslot-underbarrel: 0.35, -0.15
   #- type: Tag
    # id: RMCWeaponPistolM13
 

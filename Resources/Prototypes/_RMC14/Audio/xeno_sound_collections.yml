@@ -38,6 +38,13 @@
   - /Audio/_RMC14/Xeno/alien_footstep_large3.ogg
 
 - type: soundCollection
+  id: XenoFootstepThud
+  files:
+  - /Audio/Effects/metal_thud1.ogg
+  - /Audio/Effects/metal_thud2.ogg
+  - /Audio/Effects/metal_thud3.ogg
+
+- type: soundCollection
   id: XenoQueenBreath
   files: []
 

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: M42A2 pump shotgun
   id: WeaponShotgunM42A2
@@ -63,7 +63,6 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentFlamer
           - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:

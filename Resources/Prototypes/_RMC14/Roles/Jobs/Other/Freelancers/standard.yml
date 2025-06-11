@@ -1,49 +1,86 @@
-# Freelancer Rifleman (Neutral faction, can be friendly, can be not. Depends on admin intentions)
+# Freelancer Rifleman
+- type: job
+  parent: CMJobBase
+  id: CMFreelancerRifleman
+  name: rmc-job-name-freelancer-standard
+  description: rmc-ghost-role-information-freelancer-friendly-description
+  playTimeTracker: RMCJobFreelancerStandard
+  ranks:
+    RMCRankFLFreelancer: []
+  startingGear: RMCGearFreelancerStandard
+  icon: RMCJobIconFreelancerStandard
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 2
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-standard
+  hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerFreelancerStandard
-  name: Freelancer Standard spawner
-  suffix: Spawner
+  id: RMCRandomHumanoidFreelancerStandardHostile
+  name: freelancer ghost role rifleman
+  suffix: Spawner, Player, Hostile
   components:
   - type: Sprite
-    layers:
-    - state: red
-    - sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
-      state: icon
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidFreelancerStandard
-
-- type: entity
-  id: RMCRandomHumanoidFreelancerStandard
-  name: Freelancer Standard ghost role
-  suffix: Role
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
     state: icon
   - type: RandomHumanoidSpawner
     settings: RMCFreelancerStandard
+
+- type: entity
+  id: RMCRandomHumanoidFreelancerStandardFriendly
+  name: freelancer ghost role rifleman
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCFreelancerStandardFriendly
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCFreelancerStandard
   components:
   - type: GhostRole
-    name: rmc-ghost-role-information-freelancer-standard-name
-    description: rmc-ghost-role-information-freelancer-standard-description
-    rules: ghost-role-information-freeagent-rules
+    name: rmc-ghost-name-freelancer-hostile-standard
+    description: rmc-ghost-role-information-freelancer-hostile-description
+    rules: rmc-ghost-role-information-freelancer-rules
+    reregister: false
+    job: CMFreelancerRifleman
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearFreelancerStandard ]
-  - type: Skills
-    skills:
-      RMCSkillFireman: 1
-      RMCSkillConstruction: 2
-      RMCSkillEngineer: 1
-      RMCSkillEndurance: 2
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCFreelancerStandardFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-freelancer-friendly-standard
+    description: rmc-ghost-role-information-freelancer-friendly-description
+    rules: rmc-ghost-role-information-freelancer-rules
+    reregister: false
+    job: CMFreelancerRifleman
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
 
 - type: startingGear
   id: RMCGearFreelancerStandard
@@ -56,3 +93,13 @@
     id: RMCIDCardFreelancer
     ears: RMCHeadsetDistressDukes
     pocket1: RMCPouchFirstAidERTFill
+
+- type: playTimeTracker
+  id: RMCJobFreelancerStandard
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconFreelancerStandard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: free_rfn

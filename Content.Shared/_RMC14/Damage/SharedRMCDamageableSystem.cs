@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
@@ -411,6 +412,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (!damage.Comp.AffectsDead && _mobState.IsDead(target))
             return false;
 
+        if (!damage.Comp.AffectsCrit && _mobState.IsCritical(target))
+            return false;
+
         if (!damage.Comp.AffectsInfectedNested &&
             _xenoNestedQuery.HasComp(target) &&
             _victimInfectedQuery.HasComp(target))
@@ -436,6 +440,13 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         }
 
         _damageable.TryChangeDamage(target, damage, ignoreResistances);
+    }
+
+    public virtual bool TryGetDestroyedAt(EntityUid destructible, [NotNullWhen(true)] out FixedPoint2? destroyed)
+    {
+        // TODO RMC14
+        destroyed = default;
+        return false;
     }
 
     public override void Update(float frameTime)
@@ -548,6 +559,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                     continue;
 
                 if (!damage.AffectsDead && _mobState.IsDead(user))
+                    continue;
+
+                if (!damage.AffectsCrit && _mobState.IsCritical(user))
                     continue;
 
                 if (!damage.AffectsInfectedNested &&

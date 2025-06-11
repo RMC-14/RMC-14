@@ -5,7 +5,7 @@
   description: rmc-job-description-clf-soldier
   playTimeTracker: CMJobCLFSoldier
   ranks:
-    RMCRankLanceCorporal: [ ]
+    RMCRankCLFRebel: [ ]
   startingGear: RMCGearCLFSoldier
   icon: RMCJobIconCLFSoldier
   joinNotifyCrew: false
@@ -52,7 +52,8 @@
     head: RMCArmorHelmetSecurity
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressDukes
-    jumpsuit: JumpsuitMarine # TOOD RMC14
+    jumpsuit: RMCJumpsuitCLFSoldier
+    neck: RMCCLFArmband
     outerClothing: RMCArmorVestNone
     gloves: ClothingHandsGlovesLeather
     shoes: RMCShoesBrown

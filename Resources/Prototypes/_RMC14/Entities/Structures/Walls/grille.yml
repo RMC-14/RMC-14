@@ -85,6 +85,11 @@
     - type: AnimationPlayer
     - type: DamageMultiplierFlags
       flags: Breaching
+    - type: XenoToggleChargingDamage
+      stageLoss: 1
+      damage:
+        types:
+          Blunt: 40
 
 - type: entity
   id: RMCGrilleBroken

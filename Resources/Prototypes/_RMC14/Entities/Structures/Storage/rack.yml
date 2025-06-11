@@ -60,3 +60,5 @@
     flags: Breaching
   - type: XenoLeapDestroyOnPass
     spawnPrototype: CMSheetMetalBase
+  - type: XenoToggleChargingDamage
+    destroy: true

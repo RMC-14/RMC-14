@@ -44,5 +44,6 @@
     containers:
       storagebase: !type:Container
         ents: []
+  - type: RMCStorageEjectHand
   - type: StoreAfterFailedInteract
 

@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 public sealed partial class XenoConstructionComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 BuildRange = 1.9;
+    public FixedPoint2 BuildRange = 1.75;
 
     [DataField, AutoNetworkedField]
     public List<EntProtoId> CanBuild = new();
@@ -24,7 +24,7 @@ public sealed partial class XenoConstructionComponent : Component
     public TimeSpan BuildDelay = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 OrderConstructionRange = 1.9;
+    public FixedPoint2 OrderConstructionRange = 1.75;
 
     [DataField, AutoNetworkedField]
     public List<EntProtoId> CanOrderConstruction = new();

@@ -1,8 +1,9 @@
+# Pizza Delivery
 - type: job
   parent: CMJobBase
   id: CMPizzaDeliverer
-  name: CMPizzaDeliverer
-  description: cm-job-description-pizza-deliverer
+  name: rmc-job-name-pizza
+  description: rmc-ghost-role-information-pizza-description
   playTimeTracker: CMJobPizzaDeliverer
   ranks:
     RMCRankCivilian: [ ]
@@ -18,14 +19,14 @@
       skills:
         RMCSkillVehicles: 1
     - type: JobPrefix
-      prefix: cm-job-prefix-pizza-deliverer
+      prefix: rmc-job-prefix-pizza
   hasIcon: false
   hidden: true
 
 - type: entity
   id: RMCRandomHumanoidPizzaDeliveryBoy
   name: pizza delivery boy ghost role
-  suffix: Role
+  suffix: Spawner, Player, Neutral
   components:
   - type: Sprite
     sprite: Objects/Consumable/Food/Baked/pizza.rsi
@@ -37,8 +38,15 @@
   parent: RMCEventHumanoid
   id: RMCPizzaDeliveryBoy
   components:
-  - type: RMCJobSpawner
+  - type: GhostRole
+    name: rmc-ghost-name-pizza
+    description: rmc-ghost-role-information-pizza-description
+    rules: rmc-ghost-role-information-pizza-rules
+    reregister: false
     job: CMPizzaDeliverer
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearPizzaDeliveryBoy

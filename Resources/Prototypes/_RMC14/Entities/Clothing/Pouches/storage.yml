@@ -197,6 +197,17 @@
       tags:
       - Sidearm
 
+#Filled Command Pouch
+- type: entity
+  parent: RMCPouchCommand
+  id: RMCPouchCommandFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+
 
 # Magazine Pouch
 - type: entity
@@ -606,6 +617,22 @@
     - id: RMCCableCoil
     - id: CMMultitool
     - id: CMWrench
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocMarineRaiderFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMCrowbar
+    - id: RMCCableCoil
+    - id: CMMultitool
+    - id: CMWrench
+    - id: RMCExplosivePlastic
+      amount: 2
 
 
 # Sling Pouch

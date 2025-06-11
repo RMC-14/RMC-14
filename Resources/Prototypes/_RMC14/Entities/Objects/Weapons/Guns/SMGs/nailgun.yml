@@ -68,6 +68,9 @@
     angleIncrease: 0
     recoil: 0
     damageMultiplier: 1
+  - type: Tag
+    tags:
+    - RMCWeaponSMGNailgun
 
 - type: entity
   parent: BaseMagazineRifle
@@ -134,6 +137,9 @@
     thresholds:
     - range: 5
       falloff: 10
+
+- type: Tag
+  id: RMCWeaponSMGNailgun
 
 - type: Tag
   id: RMCMagazineSMGNailgun
