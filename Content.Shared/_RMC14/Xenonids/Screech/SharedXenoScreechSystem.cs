@@ -57,19 +57,9 @@ public sealed class XenoScreechSystem : EntitySystem
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
         _mobs.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _mobs);
-
-        foreach (var receiver in _mobs)
-        {
-            if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
-                continue;
-
-            Stun(xeno, receiver, xeno.Comp.StunTime, true);
-            Deafen(xeno, receiver, xeno.Comp.FarDeafTime);
-        }
-
-        _mobs.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _mobs);
+
+        List<EntityUid> closeTargets = new();
 
         foreach (var receiver in _mobs)
         {
@@ -78,6 +68,22 @@ public sealed class XenoScreechSystem : EntitySystem
 
             Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
             Deafen(xeno, receiver, xeno.Comp.CloseDeafTime);
+            closeTargets.Add(receiver);
+        }
+
+        _mobs.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _mobs);
+
+        foreach (var receiver in _mobs)
+        {
+            if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
+                continue;
+
+            if (closeTargets.Contains(receiver))
+                continue;
+
+            Stun(xeno, receiver, xeno.Comp.StunTime, true);
+            Deafen(xeno, receiver, xeno.Comp.FarDeafTime);
         }
 
         _parasites.Clear();
