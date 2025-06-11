@@ -60,4 +60,4 @@
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetUNPeacekeeper
-  name: un peacekeeper colonist preset # TODO RMC14 random research notes
+  name: un peacekeeper colonist preset
