@@ -1,0 +1,65 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorLV624CMBDeputy
+  name: cm-job-name-survivor-lv624-cmb-deputy
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorLV624CMBDeputy
+  startingGear: RMCGearSurvivorLV624CMBDeputy
+  spawnMenuRoleName: CMB Deputy (LV624 Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+      - Buero
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetLV624CMBDeputy
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorLV624CMBDeputy
+  equipment:
+    head: RMCHeadCapBureau
+    jumpsuit: RMCSwatCMBUniform # TODO RMC CMB uniform (the off-white one)
+    outerClothing: RMCCoatBureauDeputy
+    ears: RMCHeadsetDistressBureauDamaged
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624CMBDeputy
+  name: survivor lv624 cmb deputy spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorLV624CMBDeputy
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetLV624CMBDeputy
+  name: lv624 cmb deputy colonist preset
