@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
-using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -53,8 +52,6 @@ public sealed class BarricadeSystem : EntitySystem
         SubscribeLocalEvent<FullSandbagComponent, ActivateInWorldEvent>(OnFullActivateInWorld);
         SubscribeLocalEvent<FullSandbagComponent, AfterInteractEvent>(OnFullAfterInteract);
         SubscribeLocalEvent<FullSandbagComponent, SandbagBuildDoAfterEvent>(OnFullBuildDoAfter);
-
-        SubscribeLocalEvent<BarricadeComponent, XenoLeapHitAttempt>(OnXenoLeapHitAttempt, after: new[] { typeof(XenoLeapSystem) });
     }
 
     private void OnAfterInteract(Entity<EntrenchingToolComponent> tool, ref AfterInteractEvent args)
@@ -270,11 +267,6 @@ public sealed class BarricadeSystem : EntitySystem
         _transform.SetLocalRotation(built, args.Direction.ToAngle());
 
         args.Handled = true;
-    }
-
-    private void OnXenoLeapHitAttempt(Entity<BarricadeComponent> ent, ref XenoLeapHitAttempt args)
-    {
-        args.Cancelled = true;
     }
 
     private bool StartDigging(Entity<EntrenchingToolComponent> tool, EntityUid user, EntityCoordinates clicked)

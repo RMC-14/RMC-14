@@ -1,7 +1,9 @@
 using System.Numerics;
 using Content.Shared._RMC14.Barricade;
+using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -64,7 +66,6 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
     [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalBlock = default!;
 
@@ -244,6 +245,9 @@ public sealed class XenoLeapSystem : EntitySystem
         if(!TryComp(args.Leaper, out XenoLeapingComponent? leaping))
             return;
 
+        if (HasComp<BarricadeComponent>(ent) && (!TryComp(ent, out BarbedComponent? barbed) || !barbed.IsBarbed))
+            return;
+
         args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration, ent.Comp.BlockSound, args.Leaper, leaping.Origin, ent.Comp.FullProtection);
     }
 
@@ -365,13 +369,13 @@ public sealed class XenoLeapSystem : EntitySystem
 
     public bool AttemptBlockLeap(EntityUid blocker, TimeSpan stunDuration, SoundSpecifier blockSound, EntityUid leaper, EntityCoordinates leapOrigin, bool omnidirectionalProtection = false)
     {
-        if (!_directionalBlock.IsFacingTarget(blocker, leaper, leapOrigin) || omnidirectionalProtection)
+        if (!_directionalBlock.IsFacingTarget(blocker, leaper, leapOrigin) && !omnidirectionalProtection)
             return false;
 
         var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
 
         _stun.TryParalyze(leaper, stunDuration, true);
-        _sizeStun.KnockBack(leaper, blockerCoordinates.Coords);
+        _size.KnockBack(leaper, blockerCoordinates.Coords);
         _audio.PlayPredicted(blockSound, leaper, leaper);
 
         var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", leaper), ("object", blocker));
