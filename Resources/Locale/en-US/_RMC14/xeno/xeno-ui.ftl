@@ -16,3 +16,5 @@ xeno-ui-enter-tunnel-verb = Enter Tunnel
 
 xeno-ui-select-destination-tunnel-title = Select Destination Tunnel
 xeno-ui-select-destination-tunnel-submit-text = Select Tunnel
+
+rmc-xeno-ui-burrowed-need-time = You ghosted too recently. You cannot become a burrowed larva until 2.5 minutes have passed ({$seconds} seconds remaining).

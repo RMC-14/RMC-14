@@ -26,8 +26,6 @@ public sealed partial class XenoAciderGenerationComponent : Component
 public enum XenoAcidGeneratingVisuals
 {
     Generating,
-    Downed,
-    Resting,
 }
 
 [Serializable, NetSerializable]

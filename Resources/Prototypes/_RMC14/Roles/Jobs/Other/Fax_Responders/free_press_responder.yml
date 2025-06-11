@@ -1,14 +1,25 @@
 - type: job
   parent: CMJobBase
+<<<<<<< HEAD
   id: RMCFreePressResponder
   name: rmc-job-name-free-press-responder
   description: rmc-job-description-free-press-responder
   playTimeTracker: RMCJobFreePressResponder
+=======
+  id: CMFreePressResponder
+  name: rmc-job-name-free-press-responder
+  description: rmc-job-description-free-press-responder
+  playTimeTracker: CMJobFreePressResponder
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
   ranks:
     RMCRankCivilian: []
   startingGear: RMCGearFreePressResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+<<<<<<< HEAD
+=======
+  supervisors: cm-job-supervisors-staff
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
   accessGroups:
   - ShipMasterAccess
   special:
@@ -28,6 +39,7 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
+<<<<<<< HEAD
   hasIcon: false
   hidden: true
 
@@ -56,6 +68,12 @@
       settings: short
   - type: GhostRoleApplySpecial
 
+=======
+    - type: RMCRibbon
+  hasIcon: false
+  hidden: true
+
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
 - type: startingGear
   id: RMCGearFreePressResponder
   equipment:
@@ -65,7 +83,13 @@
     head: ClothingHeadHatFedoraBrown
     id: RMCIDCardFreePressResponder
     ears: CMHeadsetReporter
+<<<<<<< HEAD
     back: CMSatchel
+=======
+    eyes: RMCSunglasses
+    back: CMSatchel
+    belt: CMClipboard
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
 
@@ -82,7 +106,14 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/silver_id.rsi
   - type: PresetIdCard
+<<<<<<< HEAD
     job: RMCFreePressResponder
 
 - type: playTimeTracker
   id: RMCJobFreePressResponder
+=======
+    job: CMFreePressResponder
+
+- type: playTimeTracker
+  id: CMJobFreePressResponder
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a

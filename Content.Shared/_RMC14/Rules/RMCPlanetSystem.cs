@@ -1,5 +1,7 @@
 ﻿using System.Collections.Immutable;
 using Content.Shared._RMC14.CCVar;
+using Robust.Shared.Audio.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -18,6 +20,7 @@ public sealed class RMCPlanetSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private int _coordinateVariance;
+    private float _hijackSongGain;
 
     private EntityQuery<RMCPlanetComponent> _rmcPlanetQuery;
 
@@ -32,7 +35,10 @@ public sealed class RMCPlanetSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPlanetComponent, MapInitEvent>(OnPlanetMapInit);
 
+        SubscribeLocalEvent<RMCHijackSongComponent, ComponentStartup>(OnHijackSongStartup);
+
         Subs.CVar(_config, RMCCVars.RMCPlanetCoordinateVariance, v => _coordinateVariance = v, true);
+        Subs.CVar(_config, RMCCVars.VolumeGainHijackSong, SetVolumeHijack, true);
 
         ReloadPlanets();
     }
@@ -51,6 +57,24 @@ public sealed class RMCPlanetSystem : EntitySystem
 
         var ev = new RMCPlanetAddedEvent();
         RaiseLocalEvent(ent, ref ev);
+    }
+
+    private void OnHijackSongStartup(Entity<RMCHijackSongComponent> ent, ref ComponentStartup args)
+    {
+        if (TryComp(ent, out AudioComponent? audio))
+            audio.Gain = _hijackSongGain;
+    }
+
+    private void SetVolumeHijack(float gain)
+    {
+        _hijackSongGain = gain;
+        var query = AllEntityQuery<RMCHijackSongComponent, AudioComponent>();
+        while (query.MoveNext(out _, out _, out var audio))
+        {
+#pragma warning disable RA0002
+            audio.Params = audio.Params with { Volume = SharedAudioSystem.GainToVolume(gain) };
+#pragma warning restore RA0002
+        }
     }
 
     public bool IsOnPlanet(EntityCoordinates coordinates)
@@ -129,9 +153,8 @@ public sealed class RMCPlanetSystem : EntitySystem
         PlanetPaths = planetPaths.ToImmutableDictionary();
     }
 
-    public List<RMCPlanet> GetCandidates()
+    public List<RMCPlanet> GetAllPlanets()
     {
-        var players = _player.PlayerCount;
         var candidates = new List<RMCPlanet>();
         foreach (var planet in PlanetPaths.Values)
         {
@@ -141,8 +164,28 @@ public sealed class RMCPlanetSystem : EntitySystem
                 continue;
             }
 
-            if (players == 0 || comp.MinPlayers == 0 || players >= comp.MinPlayers)
-                candidates.Add(new RMCPlanet(planetProto, comp));
+            candidates.Add(new RMCPlanet(planetProto, comp));
+        }
+
+        return candidates;
+    }
+
+    public List<RMCPlanet> GetCandidates()
+    {
+        var candidates = GetAllPlanets();
+        var players = _player.PlayerCount;
+        if (players == 0)
+            return candidates;
+
+        for (var i = candidates.Count - 1; i >= 0; i--)
+        {
+            var comp = candidates[i].Comp;
+
+            if ((comp.MinPlayers != 0 && players < comp.MinPlayers) ||
+                (comp.MaxPlayers != 0 && players > comp.MaxPlayers))
+            {
+                candidates.RemoveAt(i);
+            }
         }
 
         return candidates;

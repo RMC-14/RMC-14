@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Maps;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
@@ -27,6 +28,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
 
@@ -131,7 +133,16 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 var sourceLocal = _mapSystem.CoordinatesToTile(grid, gridComp, transform.Coordinates);
                 var diff = Vector2.Abs(neighbor - sourceLocal);
                 if (diff.X >= weeds.Range || diff.Y >= weeds.Range)
+                {
+                    if (source != null && sourceWeeds != null && !sourceWeeds.HasHealed)
+                    {
+                        sourceWeeds.HasHealed = true;
+                        _damageable.TryChangeDamage(source, sourceWeeds.HealOnStopSpreading, true);
+                        Dirty(source.Value, sourceWeeds);
+                    }
+
                     break;
+                }
 
                 if (!CanSpreadWeedsPopup(grid, neighbor, null, weeds.SpreadsOnSemiWeedable))
                     continue;

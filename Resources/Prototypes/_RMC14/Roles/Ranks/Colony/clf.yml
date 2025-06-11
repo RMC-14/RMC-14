@@ -7,8 +7,11 @@
   id: RMCRankCLFRebelCommander
   name: Rebel Commander
   prefix: REBC.
+<<<<<<< HEAD
 
 - type: rank
   id: RMCRankCLFRebelResponder
   name: Rebel Information Correspondent
   prefix: RComm.
+=======
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a

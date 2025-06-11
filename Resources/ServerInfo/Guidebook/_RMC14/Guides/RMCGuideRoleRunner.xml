@@ -1,0 +1,18 @@
+<Document>
+  #Runner, Tier 1
+  <GuideEntityEmbed Entity="CMXenoRunner"/>
+  ##Playing as a Runner
+  You are the fastest and weakest. Use your speed to transport hosts from the frontline and scout the backlines, you can run over window frames and under tables. Use your pounce to slash or begin tackling hosts, however beware of shotguns as they will kill you instantly at close range.
+
+  If you are new, the easiest way to contribute is focusing on dragging captures from the frontline to backline, remember that if they stab you from the inside you can regurgitate and tackle them down again to devour.
+
+  ##Abilities:
+  - [bold]Hide[/bold]: Hide under objects such as tables.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoHide"/>
+  - [bold]Leap[/bold]: Leap at a target, knocking them down for a brief moment and locking your movement a bit. This can also be used for mobility.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPounce"/>
+  - [bold]Bone Chips[/bold]: Shred some bone chips at your target which will slow them down.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoBoneChips"/>
+  - [bold]Toggle Long-Range Sight[/bold]: Increases your vision.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoToggleLongRangeSight"/>
+</Document>

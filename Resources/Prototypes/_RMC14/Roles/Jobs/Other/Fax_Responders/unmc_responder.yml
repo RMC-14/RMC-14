@@ -3,12 +3,22 @@
   id: RMCUNMCResponder
   name: rmc-job-name-unmc-responder
   description: rmc-job-description-unmc-responder
+<<<<<<< HEAD
   playTimeTracker: RMCJobUNMCResponder
   ranks:
     RMCRankFirstLT: [] #goes to O4
   startingGear: RMCGearUNMCResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+=======
+  playTimeTracker: CMJobUNMCResponder
+  ranks:
+    RMCRankFirstLT: []
+  startingGear: RMCGearUNMCResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
   accessGroups:
   - ShipMasterAccess
   special:
@@ -31,6 +41,7 @@
   hasIcon: false
   hidden: true
 
+<<<<<<< HEAD
 - type: entity
   id: RMCRandomHumanoidUNMCResponder
   name: UNMC responder ghost role
@@ -60,12 +71,24 @@
   id: RMCGearUNMCResponder
   equipment:
     jumpsuit: CMJumpsuitBO
+=======
+- type: startingGear
+  id: RMCGearUNMCResponder
+  equipment:
+    jumpsuit: CMJumpsuitXOFormal
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
     outerClothing: CMCoatXOFormal
     shoes: RMCShoesLaceup
     head: RMCHeadCapFlippable
     id: RMCIDCardUNMCResponder
     ears: CMHeadsetHighCommand
+<<<<<<< HEAD
     back: CMSatchel
+=======
+    eyes: RMCSunglasses
+    back: CMSatchel
+    belt: CMClipboard
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
 
@@ -85,5 +108,9 @@
     job: RMCUNMCResponder
 
 - type: playTimeTracker
+<<<<<<< HEAD
   id: RMCJobUNMCResponder
+=======
+  id: CMJobUNMCResponder
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
 

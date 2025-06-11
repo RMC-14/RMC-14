@@ -829,7 +829,7 @@ entities:
     - type: Transform
       pos: 9.5,11.5
       parent: 1
-- proto: RMCMagazineSMGMAC15
+- proto: CMMagazineSMGM63
   entities:
   - uid: 110
     components:
@@ -954,7 +954,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,7.5
       parent: 1
-- proto: WeaponSMGMAC15
+- proto: WeaponSMGM63
   entities:
   - uid: 129
     components:

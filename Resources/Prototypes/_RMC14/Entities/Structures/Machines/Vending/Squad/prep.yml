@@ -285,12 +285,20 @@
       - id: RMCM5CameraGear
         amount: 10
     - name: Optics
-      entries: [ ]
-#      - id: Advanced Medical Optic (CORPSMAN ONLY)
-#        amount: 4
-#      - id: Squad Optic
-#        amount: 15
+      entries:
+      - id: RMCVisorMedicalAdvanced
+        name: advanced medical optic (CORPSMAN ONLY)
+        amount: 4
+      - id: RMCVisorSquad
+        amount: 15
 
+- type: entity
+  parent: ColMarTechSurplus
+  id: RMCColMarTechSurplusPVE
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/squad_prep.rsi
 
 - type: entity
   parent: ColMarTechBase
@@ -403,8 +411,8 @@
 #      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: RMCBoxFlashlights
-#      #  amount: 1
+      - id: RMCBoxFlashlights
+        amount: 1
       - id: RMCBoxPackFlare
         amount: 1
       - id: CMPackFlare
@@ -437,6 +445,13 @@
       - id: RMCMagazineSMGNailgun
         amount: 2
 
+- type: entity
+  parent: ColMarTechUtilities
+  id: RMCColMarTechUtilitiesPVE
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
 
 - type: entity
   parent: ColMarTechBase

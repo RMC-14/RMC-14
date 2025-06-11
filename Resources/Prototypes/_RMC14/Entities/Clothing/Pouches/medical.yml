@@ -72,6 +72,25 @@
       amount: 1
 
 - type: entity
+  parent: RMCPouchMedicalSoc
+  id: RMCPouchMedicalSocMarineRaiderFill
+  suffix: Filled
+  components:
+  - type: StorageFill # TODO RMC14
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMTraumaKit10
+      amount: 2
+    - id: CMBurnKit10
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    - id: CMEmergencyAutoInjector
+      amount: 2
+    - id: CMFireExtinguisherPortable
+    - id: Stimpack
+      amount: 3
+
+- type: entity
   parent: RMCPouchMedicalSocDutch
   id: RMCPouchMedicalSocDutchUnmarked
   name: tactical medical pouch

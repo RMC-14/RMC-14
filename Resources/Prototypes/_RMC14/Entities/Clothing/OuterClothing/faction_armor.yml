@@ -26,6 +26,16 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
+- type: entity
+  parent: RMCArmorMARSOC
+  id: RMCArmorMARSOCXM40
+  suffix: XM40 HEAP, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleXM40HEAP
+      amount: 4
+
 # Iron Bear
 - type: entity
   parent: CMArmorM4PMC
@@ -54,8 +64,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Dutch/vest.rsi
   - type: CMArmor
-    melee: 30 # CLOTHING_ARMOR_HIGH 
-    bullet: 35 # CLOTHING_ARMOR_HIGHPLUS 
+    melee: 30 # CLOTHING_ARMOR_HIGH
+    bullet: 35 # CLOTHING_ARMOR_HIGHPLUS
     bio: 20
     explosionArmor: 30 # CLOTHING_ARMOR_HIGH
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
@@ -129,7 +139,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/rebel.rsi
   - type: CMArmor
-    melee: 20 # CLOTHING_ARMOR_MEDIUM 
+    melee: 20 # CLOTHING_ARMOR_MEDIUM
     bullet: 15 # CLOTHING_ARMOR_MEDIUMLOW (bullets)
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
@@ -231,8 +241,8 @@
   description: A set of grey, heavy ceramic armor with dark blue highlights. It has been modified with extra ceramic plates placed in its storage pouch, and seems intended to support an extremely heavy weapon.
   components:
   - type: CMArmor
-    melee: 50 # CLOTHING_ARMOR_ULTRAHIGH 
-    bullet: 55 # CLOTHING_ARMOR_ULTRAHIGHPLUS 
+    melee: 50 # CLOTHING_ARMOR_ULTRAHIGH
+    bullet: 55 # CLOTHING_ARMOR_ULTRAHIGHPLUS
     bio: 20
     explosionArmor: 35 # CLOTHING_ARMOR_HIGHPLUS
   - type: Storage

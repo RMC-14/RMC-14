@@ -438,7 +438,8 @@ public abstract partial class SharedGunSystem : EntitySystem
             if (ent == null)
                 continue;
 
-            if (IsClientSide(ent.Value))
+            if (IsClientSide(ent.Value) &&
+                (HasComp<GunIgnorePredictionComponent>(gunUid) || projectiles == null || !projectiles.Contains(ent.Value)))
                 Del(ent);
         }
 
@@ -761,7 +762,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
         }
 
-        Logs.Add(LogType.RMCGunShot, LogImpact.Low, $"{ToPrettyString(user)} shot {ToPrettyString(gunUid)} with {shotProjectiles.Count} projectiles aiming at {toCoordinates}.");
+        Logs.Add(LogType.RMCGunShot, LogImpact.Low, $"{ToPrettyString(user)} shot {ToPrettyString(gunUid)} with {shotProjectiles.Count} projectiles aiming at {_transform.ToMapCoordinates(toCoordinates)}.");
         return shotProjectiles;
     }
 

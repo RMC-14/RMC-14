@@ -47,7 +47,7 @@
     sprite: _RMC14/Objects/Weapons/Grenades/flashbang.rsi
   - type: RMCStunOnTrigger
     filters:
-    - stun: 2.5
+    - paralyze: 2.5
       whitelist:
         skills:
           RMCSkillPolice: 2
@@ -166,6 +166,7 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48
+    directHit: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -198,6 +199,7 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48 #same as HEFA
+    directHit: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -228,6 +230,7 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 1 #same as HEFA
+    directHit: false
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -294,6 +297,31 @@
   - type: Tag
     tags:
     - Grenade
+
+- type: entity
+  parent: CMGrenadeBase
+  id: RMCGrenadeIED
+  name: improvised explosive device
+  description: An improvised chemical explosive grenade. Designed to kill through fragmentation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/ied.rsi
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    maxIntensity: 20
+    intensitySlope: 8
+    totalIntensity: 280
+    deleteAfterExplosion: false
+  - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
+    capacity: 48
+  - type: CMExplosionEffect
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - RMCGrenadeIED
 
 - type: entity
   id: CMExplosionEffectGrenade
@@ -367,3 +395,6 @@
 
 - type: Tag
   id: RMCGrenadeFlashBang
+
+- type: Tag
+  id: RMCGrenadeIED

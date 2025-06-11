@@ -1,5 +1,6 @@
 - type: job
   parent: CMJobBase
+<<<<<<< HEAD
   id: RMCSPPResponder
   name: rmc-job-name-spp-responder
   description: rmc-job-description-spp-responder
@@ -9,6 +10,18 @@
   startingGear: RMCGearSPPResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+=======
+  id: CMSPPResponder
+  name: rmc-job-name-spp-responder
+  description: rmc-job-description-spp-responder
+  playTimeTracker: CMJobSPPResponder
+  ranks:
+    RMCRankSPPStarshiyLeytenant: []
+  startingGear: RMCGearSPPResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
   accessGroups:
   - ShipMasterAccess
   special:
@@ -31,6 +44,7 @@
   hasIcon: false
   hidden: true
 
+<<<<<<< HEAD
 - type: entity
   id: RMCRandomHumanoidSPPResponder
   name: SPP responder ghost role
@@ -56,6 +70,8 @@
       settings: short
   - type: GhostRoleApplySpecial
 
+=======
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
 - type: startingGear
   id: RMCGearSPPResponder
   equipment:
@@ -66,6 +82,10 @@
     id: RMCIDCardSPPResponder
     ears: RMCHeadsetSPPCommand
     back: CMSatchel
+<<<<<<< HEAD
+=======
+    belt: CMClipboard
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
 
@@ -82,9 +102,16 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/silver_id.rsi
   - type: PresetIdCard
+<<<<<<< HEAD
     job: RMCSPPResponder
 
 - type: playTimeTracker
   id: RMCJobSPPResponder
+=======
+    job: CMSPPResponder
+
+- type: playTimeTracker
+  id: CMJobSPPResponder
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
 
 

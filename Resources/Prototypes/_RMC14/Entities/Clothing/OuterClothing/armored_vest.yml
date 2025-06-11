@@ -98,3 +98,9 @@
   - type: CMArmor
     melee: 0
     bullet: 10
+
+- type: entity
+  parent: RMCArmorVestMedic
+  id: RMCArmorVestNone
+  name: armor vest
+  suffix: None

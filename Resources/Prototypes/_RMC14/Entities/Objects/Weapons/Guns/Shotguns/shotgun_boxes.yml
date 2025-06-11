@@ -35,6 +35,7 @@
   - type: CMStorageVisualizer
     storageEmpty: empty
   - type: RMCStorageEjectHand
+    state: Last
 
 - type: Tag
   id: RMCBoxShotgunShells

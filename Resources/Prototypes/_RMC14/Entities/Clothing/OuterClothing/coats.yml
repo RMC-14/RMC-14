@@ -1,7 +1,7 @@
 #Base Jacket
 - type: entity
   abstract: true
-  parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket]
+  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket ]
   id: RMCBaseJacket
   components:
   - type: Storage
@@ -23,11 +23,11 @@
     allowedWhitelist: RMCAllowSuitStorageClothingJacket
     user:
       components:
-      - RMCSurvivor
+      - RMCAllowSuitStorage
 
 - type: entity
   abstract: True
-  parent: [RMCBaseJacket, BaseFoldable]
+  parent: [ RMCBaseJacket, BaseFoldable ]
   id: RMCBaseJacketButtonable
   components:
   - type: Appearance
@@ -44,7 +44,7 @@
       map: [ "unfoldedLayer" ]
       visible: true
     - state: icon-open
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: false
 
 - type: entity
@@ -65,7 +65,7 @@
       map: [ "unfoldedLayer" ]
       visible: false
     - state: icon-open
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: true
 
 - type: entity
@@ -133,7 +133,7 @@
       - GasTank
       - Pen
       - RMCMacheteScabbard
-      #TODO Katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
 
 
@@ -148,6 +148,7 @@
       - Stunbaton
       - Gun
       - CrewMonitoringConsole
+      - CassettePlayer
       tags:
       - Handcuffs
       - GasTank
@@ -166,9 +167,8 @@
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
       - RMCMacheteScabbard
-      #TODO Katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
-      #TODO Walkman
 
 - type: entity
   abstract: true
@@ -188,7 +188,7 @@
       - CMBurnKit
       - Gauze
       - Brutepack
-# TODO RMC14 splints
+      # TODO RMC14 splints
       - Dropper
       - Syringe
       - Hypospray
@@ -200,7 +200,7 @@
       - CMSynthGraft
       - CMRollerItem
       - CMBloodPack
-# TODO RMC14 spray bottle
+      # TODO RMC14 spray bottle
       - Handcuffs
       - GasTank
       - Flashlight
@@ -224,7 +224,7 @@
     whitelist:
       tags:
       - Knife
-#TODO RMC kitchen knife
+      #TODO RMC kitchen knife
       - Pen
       - Crowbar
       - Radio
@@ -368,6 +368,12 @@
     foldVerbText: rmc-buttons-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
+
+- type: entity
+  parent: CMCoatCOBomber
+  id: RMCCoatBomber
+  name: brown bomber jacket
+  description: A well-worn leather bomber jacket.
 
 - type: entity
   parent: CMCoatCO
@@ -530,3 +536,44 @@
     contents:
     - id: CMFlash
     - id: RMCHandcuffs
+
+# Synthetic Utility Vest
+- type: entity
+  parent: RMCBaseJacket
+  id: CMUtilityVestSynth
+  name: synthetic utility vest
+  description: A leather utility vest worn by synthetic UNMC personnel. The vest is rather lightweight but has a few pockets for carrying small items. It is not very protective, but it is a good choice for the Synthetics who want to look stylish while working.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: CMArmor
+    melee: 10
+  - type: Appearance
+
+- type: entity
+  parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
+  id: RMCJacketWindbreaker
+  name: green windbreaker
+  description: A green windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: jacket-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket

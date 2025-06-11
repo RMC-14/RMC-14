@@ -155,6 +155,13 @@ public sealed partial class DoAfterArgs
     /// </summary>
     [DataField]
     public bool RequireCanInteract = true;
+
+    /// <summary>
+    ///     RMC14
+    ///     If the doafter should break when the user rests.
+    /// </summary>
+    [DataField]
+    public bool BreakOnRest = true;
     #endregion
 
     #region Duplicates
@@ -279,6 +286,7 @@ public sealed partial class DoAfterArgs
         CancelDuplicate = other.CancelDuplicate;
         DuplicateCondition = other.DuplicateCondition;
         ForceVisible = other.ForceVisible;
+        BreakOnRest = other.BreakOnRest;
 
         // Networked
         NetUser = other.NetUser;

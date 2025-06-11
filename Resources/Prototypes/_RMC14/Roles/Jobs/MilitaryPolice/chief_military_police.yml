@@ -28,12 +28,6 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cmp
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_mp
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

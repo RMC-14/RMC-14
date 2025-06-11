@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Storage;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -8,13 +8,16 @@ using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Hands;
 
-public sealed class RMCHandsSystem : EntitySystem
+public abstract class RMCHandsSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -23,6 +26,7 @@ public sealed class RMCHandsSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     public override void Initialize()
     {
@@ -82,11 +86,40 @@ public sealed class RMCHandsSystem : EntitySystem
         if (!args.CanInteract)
             return;
 
+        var user = args.User;
+
+        if (!ent.Comp.CanToggleStorage)
+            return;
+
+        AlternativeVerb switchStorageVerb = new()
+        {
+            Text = Loc.GetString("rmc-storage-hand-switch"),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/VerbIcons/flip.svg.192dpi.png")),
+            Priority = -2,
+            Act = () =>
+            {
+                ent.Comp.State = GetNextState(ent.Comp.State);
+                Dirty(ent);
+
+                var popup = ent.Comp.State switch
+                {
+                    RMCStorageEjectState.Last => "rmc-storage-hand-eject-last-item",
+                    RMCStorageEjectState.First => "rmc-storage-hand-eject-first-item",
+                    RMCStorageEjectState.Unequip => "rmc-storage-hand-eject-unequips",
+                    RMCStorageEjectState.Open => "rmc-storage-hand-eject-open",
+                    _ => string.Empty,
+                };
+
+                _popup.PopupClient(Loc.GetString(popup, ("storage", ent.Owner)), user, user, PopupType.Medium);
+            },
+        };
+
+        args.Verbs.Add(switchStorageVerb);
+
         if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
             return;
 
-        var user = args.User;
-        args.Verbs.Add(new AlternativeVerb
+        AlternativeVerb unequipVerb = new()
         {
             Text = "Unequip",
             Act = () =>
@@ -97,8 +130,13 @@ public sealed class RMCHandsSystem : EntitySystem
                     _hands.TryPickupAnyHand(user, ent.Owner);
                 }
             },
-        });
+        };
+
+        args.Verbs.Add(unequipVerb);
     }
+
+    private static RMCStorageEjectState GetNextState(RMCStorageEjectState current) =>
+        (RMCStorageEjectState)(((int)current + 1) % Enum.GetValues<RMCStorageEjectState>().Length);
 
     private void OnDropOnUseInHand(Entity<DropOnUseInHandComponent> ent, ref UseInHandEvent args)
     {
@@ -132,6 +170,22 @@ public sealed class RMCHandsSystem : EntitySystem
         return true;
     }
 
+    public bool TryGetNestedStorageParent(EntityUid item, out EntityUid user)
+    {
+        user = default;
+        if (!_container.TryGetContainingContainer((item, null), out var container))
+            return false;
+
+        if (!TryComp(container.Owner, out StorageComponent? storage) ||
+            !storage.StoredItems.ContainsKey(item))
+        {
+            return false;
+        }
+
+        user = container.Owner;
+        return true;
+    }
+
     public bool TryStorageEjectHand(EntityUid user, string handName)
     {
         if (!_hands.TryGetHand(user, handName, out var hand) ||
@@ -151,9 +205,39 @@ public sealed class RMCHandsSystem : EntitySystem
 
     public bool TryStorageEjectHand(EntityUid user, EntityUid item)
     {
+        var ev = new RMCStorageEjectHandItemEvent(user);
+        RaiseLocalEvent(item, ref ev);
+
+        if (ev.Handled)
+            return true;
+
         if (!TryComp(item, out RMCStorageEjectHandComponent? eject) ||
             !TryComp(item, out StorageComponent? storage))
         {
+            return false;
+        }
+
+        if (eject.NestedWhitelist != null)
+        {
+            if (!TryGetNestedStorageParent(item, out var parent) ||
+                !_whitelist.IsWhitelistPass(eject.NestedWhitelist, parent))
+            {
+                return false;
+            }
+        }
+
+        switch (eject.State)
+        {
+            case RMCStorageEjectState.Unequip:
+                return false;
+            case RMCStorageEjectState.Open:
+                _storage.OpenStorageUI(item, user, storage, false, false);
+                return true;
+        }
+
+        if (!_rmcStorage.CanEject(item, user, out var popup))
+        {
+            _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -169,13 +253,45 @@ public sealed class RMCHandsSystem : EntitySystem
             }
         }
 
-        if (!_rmcStorage.TryGetLastItem((item, storage), out var last))
+        EntityUid? pickUpItem = null;
+        switch (eject.State)
         {
-            _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
-            return true;
+            case RMCStorageEjectState.Last:
+            {
+                if (_rmcStorage.TryGetLastItem((item, storage), out var last))
+                {
+                    pickUpItem = last;
+                    break;
+                }
+
+                if (eject.EjectWhenEmpty)
+                    return false;
+
+                _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
+                return true;
+            }
+            case RMCStorageEjectState.First:
+            {
+                if (_rmcStorage.TryGetFirstItem((item, storage), out var first))
+                {
+                    pickUpItem = first;
+                    break;
+                }
+
+                if (eject.EjectWhenEmpty)
+                    return false;
+
+                _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
+                return true;
+            }
         }
 
-        _hands.TryPickupAnyHand(user, last);
+        if (pickUpItem == null)
+            return false;
+
+        _hands.TryPickupAnyHand(user, pickUpItem.Value);
         return true;
     }
+
+    public virtual void ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f) { }
 }

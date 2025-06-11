@@ -50,6 +50,10 @@ public sealed class PryingSystem : EntitySystem
         if (!TryComp<PryingComponent>(args.User, out _))
             return;
 
+        // RMC14
+        if (!CanPry(uid, args.User, out _))
+            return;
+
         args.Verbs.Add(new AlternativeVerb()
         {
             Text = Loc.GetString("door-pry"),

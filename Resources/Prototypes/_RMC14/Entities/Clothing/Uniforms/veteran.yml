@@ -6,6 +6,22 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/standard.rsi
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMC
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCMedic
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCMedic
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMC
+  id: RMCJumpsuitVeteranPMCGunner
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCGunner
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -15,6 +31,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/officer.rsi
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMC
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]

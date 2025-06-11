@@ -188,6 +188,9 @@ public sealed class RMCStandingSystem : EntitySystem
         if (args.Puller != ent.Owner)
             return;
 
+        if (!ent.Comp.Resting)
+            return;
+
         args.Cancel();
     }
 

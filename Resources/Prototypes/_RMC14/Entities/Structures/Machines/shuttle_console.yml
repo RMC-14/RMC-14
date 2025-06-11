@@ -32,6 +32,17 @@
         type: DropshipHijackerBui
 
 - type: entity
+  parent: CMComputerDropshipNavigation
+  id: CMComputerDropshipNavigationERT
+  name: transport shuttle
+  description: A transport shuttle flight computer.
+  components:
+  - type: Sprite
+    state: syndishuttle
+  - type: DropshipNavigationComputer
+    hijackable: false
+
+- type: entity
   parent: CMComputerDropship
   id: CMComputerDropshipNavigationPlanetside
   name: dropship navigation computer

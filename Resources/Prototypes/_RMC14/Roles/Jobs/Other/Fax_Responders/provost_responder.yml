@@ -1,5 +1,6 @@
 - type: job
   parent: CMJobBase
+<<<<<<< HEAD
   id: RMCProvostResponder
   name: rmc-job-name-provost-responder
   description: rmc-job-description-provost-responder
@@ -9,6 +10,18 @@
   startingGear: RMCGearProvostResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+=======
+  id: CMProvostResponder
+  name: rmc-job-name-provost-responder
+  description: rmc-job-description-provost-responder
+  playTimeTracker: CMJobProvostResponder
+  ranks:
+    RMCRankProvostCommunicationsOfficer: []
+  startingGear: RMCGearProvostResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
   accessGroups:
   - ShipMasterAccess
   special:
@@ -31,6 +44,7 @@
   hasIcon: false
   hidden: true
 
+<<<<<<< HEAD
 - type: entity
   id: RMCRandomHumanoidProvostResponder
   name: Provost responder ghost role
@@ -56,6 +70,8 @@
       settings: short
   - type: GhostRoleApplySpecial
 
+=======
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
 - type: startingGear
   id: RMCGearProvostResponder
   equipment:
@@ -67,7 +83,11 @@
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
+<<<<<<< HEAD
     belt: CMBeltSecurityMP
+=======
+    belt: CMClipboard
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
     back: CMSatchelSecurity
     pocket1: RMCPouchDocument
     pocket2: RMCPouchGeneralLarge
@@ -86,8 +106,15 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: PresetIdCard
+<<<<<<< HEAD
     job: RMCProvostResponder
 
 - type: playTimeTracker
   id: RMCJobProvostResponder
+=======
+    job: CMProvostResponder
+
+- type: playTimeTracker
+  id: CMJobProvostResponder
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
 

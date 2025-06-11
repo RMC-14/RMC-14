@@ -1,14 +1,25 @@
 - type: job
   parent: CMJobBase
+<<<<<<< HEAD
   id: RMCWeYaResponder
   name: rmc-job-name-weya-responder
   description: rmc-job-description-weya-responder
   playTimeTracker: RMCJobWeYaResponder
+=======
+  id: CMWeYaresponder
+  name: rmc-job-name-weya-responder
+  description: rmc-job-description-weya-responder
+  playTimeTracker: CMJobWeYaResponder
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
   ranks:
     RMCRankWeYaExecutiveSpecialist: []
   startingGear: RMCGearWeYaResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+<<<<<<< HEAD
+=======
+  supervisors: cm-job-supervisors-staff
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
   accessGroups:
   - ShipMasterAccess
   special:
@@ -28,6 +39,7 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
+<<<<<<< HEAD
   hasIcon: false
   hidden: true
 
@@ -56,11 +68,21 @@
       settings: short
   - type: GhostRoleApplySpecial
 
+=======
+    - type: RMCRibbon
+  hasIcon: false
+  hidden: true
+
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
 - type: startingGear
   id: RMCGearWeYaResponder
   equipment:
     ears: RMCHeadsetDistressPMCDirector
     back: CMSatchel
+<<<<<<< HEAD
+=======
+    belt: CMClipboard
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a
     head: ArmorHelmetPMC
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateFormal
@@ -82,7 +104,14 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/gold_id.rsi
   - type: PresetIdCard
+<<<<<<< HEAD
     job: RMCWeYaResponder
 
 - type: playTimeTracker
   id: RMCJobWeYaResponder
+=======
+    job: CMWeYaresponder
+
+- type: playTimeTracker
+  id: CMJobWeYaResponder
+>>>>>>> ab2d3a0c72a90f03cf68ad3770fbe024e1b1c30a

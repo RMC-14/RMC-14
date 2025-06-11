@@ -1,7 +1,15 @@
 ﻿- type: entity
-  parent: CMIDCardStandardDogtag
-  id: RMCDogtagRoyalSmartGunOperator
-  name: Royal Marine SGO's dogtags
+  id: FactionRoyalMarines
   components:
-  - type: PresetIdCard
-    job: CMRoyalSmartGunOperator
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - RoyalMarine
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDRoyalMarines
+  name: royal marine dogtags
+  components:
+  - type: ItemIFF
+    faction: FactionRoyalMarines

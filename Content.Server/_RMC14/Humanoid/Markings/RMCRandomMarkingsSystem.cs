@@ -36,6 +36,10 @@ public sealed class RMCRandomMarkingsSystem : EntitySystem
                 continue;
 
             var possibleMarkings = _markings.MarkingsByCategoryAndSpeciesAndSex(type.Key, humanoid.Species, humanoid.Sex);
+
+            if (possibleMarkings.Count == 0)
+                continue;
+
             var pickedMarking = _random.Pick(possibleMarkings);
 
             if (!humanoid.MarkingSet.Markings.TryGetValue(type.Key, out var markings))

@@ -75,7 +75,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
-        if (!_rmcActions.TryUseAction(args.Performer, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -292,7 +292,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
-        SacraficialHealShout(ent);
+        SacrificialHealShout(ent);
         _xenoAnnounce.AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-sacrifice-heal-target-announcement", ("healer_xeno", ent), ("target_xeno", target)), popup:PopupType.Large);
         _popup.PopupPredicted(Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), target, ent, PopupType.Medium);
 
@@ -312,25 +312,28 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 
-        if(_net.IsServer)
-         SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
-
-        var corpsePosition = _transform.GetMoverCoordinates(ent);
-
-        // TODO: Gib the healing xeno here
-
-        if (!TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) ||
-            !_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
+        if (TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) &&
+            _xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
         {
-            return;
+            var corpsePosition = _transform.GetMoverCoordinates(ent);
+
+            if (GetHiveCore(ent))
+                SacrificialHealRespawn(ent, args.RespawnDelay);
+            else
+                SacrificialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
+        }
+        else
+        {
+            SacrificeNoRespawn(ent);
         }
 
-        if (GetHiveCore(ent))
-            SacraficialHealRespawn(ent, args.RespawnDelay);
-        else
-            SacraficialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
+        if (_net.IsServer)
+        {
+            SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
 
-        QueueDel(ent);
+            // TODO: Gib the healing xeno here
+            QueueDel(ent);
+        }
     }
 
     public void Heal(EntityUid target, FixedPoint2 amount)
@@ -343,8 +346,11 @@ public abstract class SharedXenoHealSystem : EntitySystem
         _damageable.TryChangeDamage(target, -damage, true);
     }
 
-    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt)
+    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt, bool ignoreFire = false)
     {
+        if (!ignoreFire && _flammable.IsOnFire(target))
+            return;
+
         var heal = EnsureComp<XenoBeingHealedComponent>(target);
         var healStack = new XenoHealStack()
         {
@@ -375,11 +381,15 @@ public abstract class SharedXenoHealSystem : EntitySystem
         return false;
     }
 
-    protected virtual void SacraficialHealShout(EntityUid xeno)
+    protected virtual void SacrificialHealShout(EntityUid xeno)
     {
     }
 
-    protected virtual void SacraficialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
+    protected virtual void SacrificialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
+    {
+    }
+
+    protected virtual void SacrificeNoRespawn(EntityUid xeno)
     {
     }
 

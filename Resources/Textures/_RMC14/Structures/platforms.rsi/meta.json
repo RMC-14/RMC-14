@@ -123,6 +123,14 @@
       "directions": 4
     },
     {
+      "name": "stone_stair",
+      "directions": 4
+    },
+    {
+      "name": "stone_stair_alt",
+      "directions": 4
+    },
+    {
       "name": "sandstone",
       "directions": 4
     },

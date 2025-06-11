@@ -129,10 +129,10 @@
       - id: RMCVisorNightVision
         points: 30
         recommended: true
-    #- id: CMMedicalHelmetOptic
-    #  points: 15
-    #- id: CMWeldingVisor
-    #  points: 5
+      - id: RMCVisorMedical
+        points: 15
+      - id: RMCVisorWelding
+        points: 5
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

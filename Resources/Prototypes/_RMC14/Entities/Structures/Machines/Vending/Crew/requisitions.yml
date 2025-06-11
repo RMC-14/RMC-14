@@ -618,6 +618,7 @@
   id: ColMarTechCargoUniform
   name: ColMarTech surplus uniform vendor
   description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
+  suffix: Requisitions
   components:
   - type: AccessReader
     access:

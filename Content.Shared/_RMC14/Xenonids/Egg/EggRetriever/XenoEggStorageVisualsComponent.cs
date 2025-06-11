@@ -22,9 +22,6 @@ public enum XenoEggStorageVisualLayers
 [Serializable, NetSerializable]
 public enum XenoEggStorageVisuals
 {
-    Resting,
-    Downed,
     Active,
-    Dead,
     Number
 }

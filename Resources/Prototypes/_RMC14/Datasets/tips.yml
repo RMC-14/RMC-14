@@ -47,7 +47,7 @@
   - "CIC staff can track every Marine-aligned person via the suit sensors console and overwatch console - useful for finding escaped prisoners or dead marines."
   - "Remember that you need to put a defibrillator's paddles away in order to store it."
   - "We-Ya PMCs do not have marine IFF. Don't fire Smart Guns at them!"
-  - "To talk on multiple radio channels at once, put a COMMA \\[,\\] before your message and add up to four prefixes. E.g, ,abcd talks on the main four squad channels at once."
+  - "To talk on multiple radio channels at once, add up to four prefixes after the semicolon ':'. E.g, :abcd talks on the main four squad channels at once."
   - "Put .w or :w before your message to whisper. Another way to whisper is to use the verb 'whisper' in the IC tab or command bar."
   - "Minirockets pack the most punch per cost as far as CAS weaponry is concerned."
   - "The U7 underbarrel shotgun can instantly break down both resin doors and mechanical airlocks, and it's not bad at breaking walls down either."

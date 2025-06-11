@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/clothing/helmet_visors.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/clothing/helmet_visors.dmi, modified by Vermidia",
   "size": {
     "x": 32,
     "y": 32
@@ -51,6 +51,12 @@
     },
     {
       "name": "sec_sight_down"
+    },
+    {
+      "name": "med_adv_sight"
+    },
+    {
+      "name": "med_adv_sight_down"
     }
   ]
 }

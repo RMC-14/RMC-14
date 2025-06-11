@@ -1,0 +1,75 @@
+# TSEPA Inspector
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPAInspector
+  name: rmc-job-name-tsepa-inspector
+  description: rmc-job-description-tsepa-inspector
+  playTimeTracker: RMCJobTSEPAInspector
+  ranks:
+    RMCRankTSEPAInspector: []
+  startingGear: RMCGearTSEPAInspector
+  icon: "RMCJobIconTSEPAInspector"
+  joinNotifyCrew: false
+  accessGroups:
+  - ColonistTSEPAInspector
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 2
+        RMCSkillEndurance: 3
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 0
+        RMCSkillFireman: 2
+        RMCSkillLeadership: 2
+    - type: MarineOrders
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-inspector
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPAInspector
+  equipment:
+    head: RMCHeadCapTSEPAPeaked
+    ears: RMCHeadsetTSEPA
+    jumpsuit: RMCJumpsuitTSEPA
+    gloves: RMCHandsVeteran
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardTSEPAGold
+    belt: RMCBeltHolsterRevolverSpearheadFill
+    back: RMCSatchelTSEPA
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointTSEPAInspector
+  name: tsepa inspector spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPAInspector
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_sheriff_armor.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobTSEPAInspector
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPAInspector
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: tse_painspector

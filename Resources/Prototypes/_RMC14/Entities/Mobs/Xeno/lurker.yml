@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -57,6 +57,7 @@
     - CMXenoRavager
   - type: XenoMeleeSlow
     requiresKnockDown: true
+    higherOnXenos: true
   - type: XenoClaws
     clawType: Sharp
   - type: MeleeWeapon
@@ -92,6 +93,8 @@
       state: lurker
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-lurker
 
 - type: entity
   parent:
@@ -100,6 +103,9 @@
   id: CMXenoLurker
   suffix: Base
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleLurker
   - type: XenoLeap
     plasmaCost: 20
     delay: 0
@@ -123,6 +129,9 @@
   id: RMCXenoLurkerVampire
   suffix: Vampire
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleVampire
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Lurker/vampire_lurker.rsi
   - type: Xeno
@@ -136,7 +145,6 @@
     - ActionXenoTailJab
     - ActionXenoHeadbite
     - ActionXenoDevolve
-    hidden: true
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -187,3 +195,4 @@
     plasma: 0
     maxPlasma: 0
     plasmaRegenOnWeeds: 0
+  - type: XenoHidden

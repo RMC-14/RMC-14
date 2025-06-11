@@ -10,7 +10,9 @@ using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -51,7 +53,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids;
 
-public sealed class XenoSystem : EntitySystem
+public sealed partial class XenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -132,6 +134,14 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
 
+        //In XenoSystem.Visuals
+        SubscribeLocalEvent<XenoStateVisualsComponent, MobStateChangedEvent>(OnVisualsMobStateChanged);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoFortifiedEvent>(OnVisualsFortified);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoRestEvent>(OnVisualsRest);
+        SubscribeLocalEvent<XenoStateVisualsComponent, DownedEvent>(OnVisualsProne);
+        SubscribeLocalEvent<XenoStateVisualsComponent, StoodEvent>(OnVisualsStand);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoOvipositorChangedEvent>(OnVisualsOvipositor);
+
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
@@ -155,11 +165,10 @@ public sealed class XenoSystem : EntitySystem
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
 
         if (xeno.Comp.MuteOnSpawn)
-        {
             _status.TryAddStatusEffect(xeno, "Muted", _xenoSpawnMuteDuration, true, "Muted");
-        }
 
         _eye.RefreshVisibilityMask(xeno.Owner);
+        Dirty(xeno);
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -334,7 +343,7 @@ public sealed class XenoSystem : EntitySystem
 
     private void OnXenoRegenBeforeCritDamage(Entity<XenoRegenComponent> ent, ref DamageStateCritBeforeDamageEvent args)
     {
-        if (!_rmcFlammable.IsOnFire(ent.Owner) || (!ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner)))
+        if (!_rmcFlammable.IsOnFire(ent.Owner) && !ent.Comp.HealOffWeeds && !_weeds.IsOnFriendlyWeeds(ent.Owner))
             return;
 
         //Don't take bleedout damage on fire or on weeds
@@ -410,7 +419,7 @@ public sealed class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target)
     {
         if (xeno == target)
             return false;
@@ -428,7 +437,7 @@ public sealed class XenoSystem : EntitySystem
         if (_xenoNestedQuery.HasComp(target))
             return false;
 
-        return HasComp<MarineComponent>(target) || hitNonMarines;
+        return HasComp<MarineComponent>(target) || HasComp<XenoComponent>(target);
     }
 
     public bool CanHeal(EntityUid xeno)
@@ -470,8 +479,15 @@ public sealed class XenoSystem : EntitySystem
 
             if (!xeno.HealOffWeeds)
             {
-                if (!_affectableQuery.TryComp(uid, out var affectable) ||
-                    !affectable.OnXenoWeeds)
+                // Engine bug where entities that do not move do not process new contacts for anything newly
+                // spawned under them
+                if (Transform(uid).Anchored)
+                    _weeds.UpdateQueued(uid);
+
+                var affectable = _affectableQuery.CompOrNull(uid);
+                var onWeeds = affectable != null && affectable.OnXenoWeeds && affectable.OnFriendlyWeeds;
+
+                if (affectable == null || !onWeeds)
                 {
                     if (_xenoPlasmaQuery.TryComp(uid, out var plasmaComp))
                     {

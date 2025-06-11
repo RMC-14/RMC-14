@@ -103,6 +103,45 @@
     - MarineEngineer
     - MarineIntel
     - MarineJTAC
-    defaultChannel: MarineCommand
+    - MarineHighCommand
+    defaultChannel: MarineHighCommand
   - type: Sprite
     state: binary_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyFORECON
+  name: forecon encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - MarineCommon
+    defaultChannel: MarineForecon
+  - type: Sprite
+    state: sl_key
+
+# PVE
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeySunRiders
+  name: sun riders encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineAlpha
+    defaultChannel: MarineAlpha
+  - type: Sprite
+    state: delta_key

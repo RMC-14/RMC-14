@@ -174,6 +174,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (!_config.GetCVar(CCVars.GridFill))
+            return;
+
         if (_map == null)
         {
             _mapSystem.CreateMap(out var mapId);
