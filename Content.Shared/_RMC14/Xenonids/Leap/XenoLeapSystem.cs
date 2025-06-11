@@ -364,10 +364,10 @@ public sealed class XenoLeapSystem : EntitySystem
 
     public bool AttemptBlockLeap(EntityUid blocker, TimeSpan stunDuration, SoundSpecifier blockSound, EntityUid leaper, EntityCoordinates leapOrigin, bool omnidirectionalProtection = false)
     {
-        var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
-
-        if (!_directionalBlock.IsFacingTarget(blocker, leaper))
+        if (!_directionalBlock.IsFacingTarget(blocker, leaper, leapOrigin) || omnidirectionalProtection)
             return false;
+
+        var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
 
         _stun.TryParalyze(leaper, stunDuration, true);
         _sizeStun.KnockBack(leaper, blockerCoordinates.Coords);

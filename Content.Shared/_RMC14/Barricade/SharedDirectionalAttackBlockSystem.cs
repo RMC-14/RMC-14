@@ -64,11 +64,16 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
     /// </summary>
     /// <param name="blocker">The entity whose direction is checked.</param>
     /// <param name="target">The entity that is checked to see if it is in front of the blocker</param>
+    /// <param name="originCoordinates">The target coordinates to check, if left empty the targets current coordinates will be used</param>
     /// <returns>True if the blocker is facing the target</returns>
-    public bool IsFacingTarget(EntityUid blocker, EntityUid target)
+    public bool IsFacingTarget(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
     {
+        var targetCoordinates = _transform.GetMoverCoordinates(blocker);
+        if (originCoordinates != null)
+            targetCoordinates = originCoordinates.Value;
+
         var blockerCoordinates = _transform.GetMoverCoordinateRotation(target, Transform(target));
-        var diff = _transform.GetMoverCoordinates(blocker).Position - blockerCoordinates.Coords.Position;
+        var diff = targetCoordinates.Position - blockerCoordinates.Coords.Position;
         var dir = diff.Normalized().GetDir();
         var blockerDirection = blockerCoordinates.worldRot.GetDir();
         var relativeDiff = Math.Abs(dir - blockerDirection);
