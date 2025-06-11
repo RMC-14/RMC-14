@@ -132,7 +132,7 @@
 
 - type: trackerMode
   id: MARSOCLeader
-  job: CMJobMarineRaiderLeader
+  job: CMMarineRaiderLeader
 
 # Humanoid component trackers
 
