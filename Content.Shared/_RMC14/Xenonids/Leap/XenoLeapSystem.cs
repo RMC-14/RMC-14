@@ -17,6 +17,7 @@ using Content.Shared.Effects;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Components;
@@ -383,9 +384,19 @@ public sealed class XenoLeapSystem : EntitySystem
         _size.KnockBack(leaper, blockerCoordinates.Coords, ignoreSize: true);
         _audio.PlayPredicted(blockSound, leaper, leaper);
 
-        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", leaper), ("object", blocker));
-        var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", leaper), ("object", blocker));
-        _popup.PopupPredicted(selfMessage, othersMessage, leaper, leaper, PopupType.MediumCaution);
+        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("object", Identity.Name(blocker, EntityManager, leaper)));
+
+        _popup.PopupClient(selfMessage, leaper, leaper, PopupType.MediumCaution);
+
+        var others = Filter.PvsExcept(leaper).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", Identity.Name(leaper, EntityManager, otherEnt)), ("object", Identity.Name(blocker, EntityManager, otherEnt)));
+            _popup.PopupEntity(othersMessage, leaper, otherEnt, PopupType.MediumCaution);
+        }
 
         return true;
     }
