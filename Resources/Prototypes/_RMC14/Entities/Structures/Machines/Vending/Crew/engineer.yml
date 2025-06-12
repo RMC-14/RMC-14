@@ -26,6 +26,7 @@
       # map
     - name: Gloves
       choices: { CMHands: 1 }
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Helmet

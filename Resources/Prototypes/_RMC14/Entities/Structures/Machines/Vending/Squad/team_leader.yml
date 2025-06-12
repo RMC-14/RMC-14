@@ -97,8 +97,6 @@
         points: 3
       - id: CMHandsBlackInsulated
         points: 3
-      - id: CMHandsBlackInsulated
-        points: 3
     - name: Engineering Supplies
       entries:
       - id: RMCExplosivePlastic
@@ -172,7 +170,8 @@
       #- id: CMMap # TODO: Make a map
       - id: RMCVendorBundleCrewFireteamLeader
     - name: Gloves
-      choices: { CMHands: 1}
+      choices: { CMHands: 1 }
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Belt

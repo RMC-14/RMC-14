@@ -1,4 +1,4 @@
-f- type: entity
+- type: entity
   parent: ColMarTechBase
   id: ColMarTechIntelGear
   name: ColMarTech intelligence officer gear rack
@@ -128,7 +128,7 @@ f- type: entity
       - id: CMHeadsetIntel
       - id: CMMRE
     - name: Gloves 
-      choices: { CMHands: 1}
+      choices: { CMHands: 1 }
       entries: 
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated

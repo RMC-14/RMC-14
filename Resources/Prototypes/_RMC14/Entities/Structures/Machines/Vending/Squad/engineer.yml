@@ -201,7 +201,7 @@
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Gloves 
-      choices: { CMHands: 1}
+      choices: { CMHands: 1 }
       entries: 
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
