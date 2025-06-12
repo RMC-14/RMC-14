@@ -46,11 +46,12 @@
   id: RMCHeadsetDistressWeYa
   name: WeYa corporate headset
   description: A headset commonly worn by WeYa corporate personnel.
+  suffix: WeYa, Colony
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyWEYA
+      - CMEncryptionKeyWEYAColony
 
 # For WeYa PMC
 - type: entity
