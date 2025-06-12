@@ -226,6 +226,12 @@
     },
     {
       "name": "pmc_sniperbarrel"
+    },
+    {
+      "name": "blank"
+    },
+    {
+      "name": "blank_a"
     }
   ]
 }

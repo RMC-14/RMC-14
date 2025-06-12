@@ -157,6 +157,25 @@
     modifiers:
     - damageFalloffAddMult: 0.1
 
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentSuppressorNPZ92
+  name: NPZ92 intergrated suppressor
+  description: You shouldn't have this.
+  components:
+  - type: Sprite
+    state: blank
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentSuppressor
+  - type: AttachableVisuals
+    prefix: blank
+  - type: AttachableSilencer
+    sound:
+      collection: CMSilencedShoot
+      params:
+        maxDistance: 6
 
 - type: entity
   parent: RMCBarrelAttachmentBase
