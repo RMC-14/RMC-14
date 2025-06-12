@@ -9,6 +9,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Screech;
 
@@ -59,7 +60,7 @@ public sealed class XenoScreechSystem : EntitySystem
         _mobs.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _mobs);
 
-        List<EntityUid> closeTargets = new();
+        HashSet<Entity<MobStateComponent>> closeTargets = _mobs.ToHashSet(); //Duplicate
 
         foreach (var receiver in _mobs)
         {
@@ -68,7 +69,6 @@ public sealed class XenoScreechSystem : EntitySystem
 
             Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
             Deafen(xeno, receiver, xeno.Comp.CloseDeafTime);
-            closeTargets.Add(receiver);
         }
 
         _mobs.Clear();
