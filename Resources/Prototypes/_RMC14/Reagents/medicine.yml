@@ -10,12 +10,12 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         damage:
         - Toxin: -1
         - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
       - !type:GenericStatusEffect # TODO -5 hallucination/s
-        key: SeeingRainbows
+        key: SeeingRainbows #SeeingRainbow = druggy effect
         component: SeeingRainbows
         time: 5
         type: Remove
@@ -56,9 +56,9 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 5
-        refresh: true
+        time: 10
         type: Add
+        refresh: false
 
 # TODO RMC14 other effects
 - type: reagent
@@ -91,6 +91,7 @@
           groups:
             Toxin: 2.25
 
+# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Arithrazine ]
   id: CMArithrazine
@@ -102,7 +103,7 @@
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:EqualHealthChange #TODO removes 0.03125 toxin/s 0.03u?
+      - !type:EqualHealthChange #TODO removes 0.03125 toxin/s?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -130,11 +131,10 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 5
-        refresh: true
+        time: 10
         type: Add
+        refresh: false
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Bicaridine ]
   id: CMBicaridine
@@ -176,7 +176,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         conditions:
         - !type:Temperature
           max: 170
@@ -187,7 +187,6 @@
         - Airloss: -0.5
         - Genetic: -1
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
   id: CMDermaline
@@ -219,7 +218,6 @@
             Burn: 3.75
             Toxin: 3.75
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
@@ -257,7 +255,6 @@
             Brute: 1
             Toxin: 2
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
@@ -338,7 +335,7 @@
           types:
             Asphyxiation: 1.5
 
-# TODO RMC14 other effects
+# TODO RMC14 other effects (heart damage) (pain)
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
@@ -366,28 +363,22 @@
         conditions:
         - !type:ReagentThreshold
           min: 60
-        key: Stun
-        component: Stunned
-        time: 40
+        key: Unconscious
+        component: RMCUnconscious
+        time: 20 #40s per life tick. No max
         type: Add
+        refresh: false
       - !type:GenericStatusEffect
         conditions:
-        - !type:ReagentThreshold
-          min: 60
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
+        - !type:ReagentThreshold #0.25 heart damage/s
+          min: 100               #5% chance emote twitch, blink_r, shiver
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 10
         type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 100
-        key: Drunk
-        component: Drunk
-        time: 40
-        type: Add
+        refresh: false
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]
   id: CMKelotane
@@ -433,31 +424,26 @@
       effects:
       - !type:StabilizeTemperature
         stable: 310
-        change: 60
+        change: 30
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 30
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
+        key: Unconscious
+        component: RMCUnconscious
+        time: 20 #40s per life tick. No max
         type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Stun
-        component: Stunned
-        time: 40
-        type: Add
+        refresh: false
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 30
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 10
         type: Add
+        refresh: false
 
 # TODO RMC14 other effects
 - type: reagent
@@ -471,7 +457,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         damage:
         - Brute: -0.25
         - Burn: -0.25
@@ -498,11 +484,13 @@
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
-          min: 50
-        key: Drunk
-        component: Drunk
-        time: 60
+          min: 30
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 10
         type: Add
+        refresh: false
 
 - type: reagent
   parent: [ CMReagentMedicine, CMBicaridine ]
@@ -577,7 +565,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         conditions:
         - !type:Temperature
           max: 170
@@ -599,7 +587,7 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-      - !type:EqualHealthChange #TODO removes 0.625u toxin/s 0.63?
+      - !type:EqualHealthChange #TODO removes 0.625u toxin/s?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -627,9 +615,9 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 5
-        refresh: true
+        time: 10
         type: Add
+        refresh: false
 
 # Antidepressants/ADHD meds
 - type: reagent
