@@ -42,4 +42,11 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
+
+    /// <summary>
+    /// Instead of using the limits of the insert, this will select a random insert and use the base job's limit when true.
+    /// If it is false, it will use the job slots of the insert. See Chance's Claim.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool SelectRandomSurvivorInsert = true;
 }

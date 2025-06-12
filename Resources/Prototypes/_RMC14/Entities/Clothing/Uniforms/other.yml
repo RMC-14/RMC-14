@@ -157,15 +157,62 @@
 
 # "Civilian"
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitCivilian
   name: gray utility uniform
-  description: A stylish gray jumpsuit - standard issue for civilian support personnel.
+  description: A stylish gray jumpsuit, popularly issued to UN contract workers on the frontier.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/gray_utility.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/gray_utility.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianBrown
+  name: brown utility uniform
+  description: A stylish brown jumpsuit, popularly issued to UN contract workers on the frontier.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_utility.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianGreen
+  name: green utility uniform
+  description: A stylish green jumpsuit, popularly issued to UN contract workers on the frontier.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/green_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/green_utility.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitRedShorts
+  name: red shorts
+  description: A ratty pair of red shorts. Smells of ciggarettes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitChaplain
+  name: chaplain's jumpsuit
+  description: It's a black jumpsuit, often worn by religious folk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/chaplain_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/chaplain_uniform.rsi
 
 # Kutjevo
 - type: entity
@@ -213,6 +260,17 @@
         color: "#C12D30"
         sprite: Clothing/Uniforms/Jumpsuit/color.rsi
       - state: overlay-inhand-right
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitUNSecurity
+  name: United Nations Security uniform
+  description: Overalls made of kevlar cover a snazzy blue dress shirt. Often utilized by United Nations security personnel in riot control situations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_riot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_riot.rsi
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
