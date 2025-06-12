@@ -14,4 +14,7 @@ public sealed partial class XenoLungeStunnedComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan ExpireAt;
+
+    [DataField, AutoNetworkedField]
+    public NetEntity? Stunner;
 }
