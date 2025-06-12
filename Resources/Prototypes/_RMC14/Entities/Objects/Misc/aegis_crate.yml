@@ -1,9 +1,10 @@
 - type: entity
-  id: AegisBox
+  id: RMCAegisBox
   name: AEGIS Secure Crate
   description: A secure storage crate for transportation of AEGIS equipment. It is locked and requires an AEGIS ID card to open.
   components:
     - type: WarpPoint
+      follow: true
     - type: PointLight
       radius: 20
       energy: 5.0
@@ -12,7 +13,7 @@
     - type: RotatingLight
       speed: 90
     - type: Sprite
-      sprite: _RMC14/Secure-Box.rsi
+      sprite: _RMC14/Objects/secure_box.rsi
       layers:
         - state: aegis_crate
           map: ["enum.AegisCrateVisualLayers.Base"]
