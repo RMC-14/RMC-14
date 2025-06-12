@@ -18,13 +18,11 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
-    - Burst
     recoilWielded: 2
     recoilUnwielded: 4
     scatterWielded: 10
     scatterUnwielded: 20
-    baseFireRate: 2
-    burstScatterMult: 1
+    baseFireRate: 0.7
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.15
     accuracyMultiplierUnwielded: 0.95
