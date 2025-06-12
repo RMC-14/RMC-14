@@ -203,6 +203,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
 
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitChaplain
+  name: chaplain's jumpsuit
+  description: It's a black jumpsuit, often worn by religious folk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/chaplain_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/chaplain_uniform.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase
