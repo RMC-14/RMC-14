@@ -1165,3 +1165,7 @@ DrinkWineBottleFull: RMCDrinkAlcoholPurpleWine
 DrinkVodkaBottleFull: RMCDrinkAlcoholVodka
 DrinkVermouthBottleFull: RMCDrinkAlcoholVermouth
 DrinkSakeBottleFull: RMCDrinkAlcoholSake
+
+# 2025-06-12
+DrinkMelonLiquorBottleFull: RMCDrinkAlcoholMelonLiquor
+DrinkBlueCuracaoBottleFull: RMCDrinkAlcoholBlueCuracao
