@@ -7,6 +7,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Slow;
 
@@ -222,10 +223,10 @@ public sealed class RMCSlowSystem : EntitySystem
 
     private void OnModifierEffectEnd(Entity<RMCSpeciesSlowdownModifierComponent> ent, ref StatusEffectEndedEvent args)
     {
-        if (args.Key != "Stun" && args.Key != "KnockedDown")
+        if (!ent.Comp.StatusesToUpdateOn.Contains(args.Key))
             return;
 
-        if (args.Key == "Stun" && !HasComp<RMCRootedComponent>(ent))
+        if (args.Key != "KnockedDown" && !HasComp<RMCRootedComponent>(ent))
             RemCompDeferred<XenoImmobileVisualsComponent>(ent);
         else if ((args.Key == "KnockedDown" || !_standing.IsDown(ent)) && HasComp<StunnedComponent>(ent))
             EnsureComp<XenoImmobileVisualsComponent>(ent);
