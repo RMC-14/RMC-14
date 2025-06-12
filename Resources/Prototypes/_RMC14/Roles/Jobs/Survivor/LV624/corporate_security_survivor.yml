@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorLV624SecurityGuard
-  name: cm-job-name-survivor-lv624-security-guard
+  name: rmc-job-name-survivor-lv624-security-guard
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624SecurityGuard
   startingGear: RMCGearSurvivorLV624SecurityGuard

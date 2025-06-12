@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorLV624CMBDeputy
-  name: cm-job-name-survivor-lv624-cmb-deputy
+  name: rmc-job-name-survivor-lv624-cmb-deputy
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624CMBDeputy
   startingGear: RMCGearSurvivorLV624CMBDeputy
@@ -26,7 +26,7 @@
     - type: NpcFactionMember
       factions:
       - Survivor
-      - Buero
+      - Bureau
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset

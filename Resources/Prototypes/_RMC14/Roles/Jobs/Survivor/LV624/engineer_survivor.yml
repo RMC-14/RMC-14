@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorEngineer
   id: CMSurvivorLV624Engineer
-  name: cm-job-name-survivor-lv624-engineer
+  name: rmc-job-name-survivor-lv624-engineer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624Engineer
   startingGear: RMCGearSurvivorLV624Engineer

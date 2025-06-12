@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorDoctor
   id: CMSurvivorLV624MedicalTechnician
-  name: cm-job-name-survivor-lv624-medical-technician
+  name: rmc-job-name-survivor-lv624-medical-technician
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624MedicalTechnician
   startingGear: RMCGearSurvivorLV624MedicalTechnician
