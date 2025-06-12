@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction.Upgrades;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -45,6 +46,7 @@ public abstract class SharedBarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, AttemptClimbEvent>(OnClimbAttempt);
         SubscribeLocalEvent<BarbedComponent, CMGetArmorPiercingEvent>(OnGetArmorPiercing);
         SubscribeLocalEvent<BarbedComponent, RMCConstructionUpgradedEvent>(OnConstructionUpgraded);
+        SubscribeLocalEvent<BarbedComponent, XenoLeapHitAttempt>(OnXenoLeapHitAttempt, after: new[] { typeof(XenoLeapSystem) });
     }
 
     private void OnAttacked(Entity<BarbedComponent> barbed, ref AttackedEvent args)
@@ -131,6 +133,9 @@ public abstract class SharedBarbedSystem : EntitySystem
         UpdateAppearance(barbed);
 
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), barbed.Owner, args.User);
+
+        var ev = new BarbedStateChangedEvent();
+        RaiseLocalEvent(barbed, ref ev);
     }
 
     private void WireCutterOnDoAfter(Entity<BarbedComponent> barbed, ref CutBarbedDoAfterEvent args)
@@ -155,6 +160,9 @@ public abstract class SharedBarbedSystem : EntitySystem
         UpdateAppearance(barbed);
 
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
+
+        var ev = new BarbedStateChangedEvent();
+        RaiseLocalEvent(barbed, ref ev);
     }
 
     private void OnDoorStateChanged(Entity<BarbedComponent> barbed, ref DoorStateChangedEvent args)
@@ -186,6 +194,16 @@ public abstract class SharedBarbedSystem : EntitySystem
         UpdateAppearance((args.New, newComp));
     }
 
+    private void OnXenoLeapHitAttempt(Entity<BarbedComponent> ent, ref XenoLeapHitAttempt args)
+    {
+        if (!ent.Comp.IsBarbed)
+            return;
+
+        _damageableSystem.TryChangeDamage(args.Leaper, ent.Comp.ThornsDamage, origin: ent, tool: ent);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), ent, args.Leaper, PopupType.SmallCaution);
+        args.Cancelled = true;
+    }
+
     protected void UpdateAppearance(Entity<BarbedComponent> barbed)
     {
         var open = TryComp(barbed, out DoorComponent? door) && door.State == DoorState.Open;
@@ -200,3 +218,6 @@ public abstract class SharedBarbedSystem : EntitySystem
         _appearance.SetData(barbed, BarbedWireVisualLayers.Wire, visual);
     }
 }
+
+[ByRefEvent]
+public record struct BarbedStateChangedEvent;
