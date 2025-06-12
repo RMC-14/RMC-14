@@ -16,6 +16,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
     - type: Skills
       skills:
         RMCSkillConstruction: 2

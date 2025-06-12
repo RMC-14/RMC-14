@@ -50,7 +50,7 @@
         state: synth
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCSurvivor
     - type: MotionDetectorTracked
