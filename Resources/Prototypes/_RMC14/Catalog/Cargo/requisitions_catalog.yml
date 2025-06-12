@@ -32,6 +32,8 @@
         crate: RMCCrateBoxMagazineRifleM4SPR
       - cost: 4000
         crate: RMCCrateBoxMagazineRifleM4SPRAP
+      - cost: 3000
+        crate: RMCCrateBoxMagazineRifleM4SPRExt
       - cost: 2000
         crate: RMCCrateBoxMagazineSMGM63
       - cost: 4000
@@ -40,6 +42,8 @@
         crate: RMCCrateBoxMagazinePistolM1984
       - cost: 3000
         crate: RMCCrateBoxMagazinePistolM1984AP
+      - cost: 3000
+        crate: RMCCrateBoxMagazinePistolM1984HP
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000
@@ -67,6 +71,8 @@
       - cost: 3000
         crate: RMCCrateBoxMagazineRevolverM44Marksman
       - cost: 4000
+        crate: RMCCrateBoxMagazineRevolverM44Heavy
+      - cost: 4000      
         crate: RMCCrateBoxMagazineSentry
       - cost: 4000
         crate: RMCCrateMagazineNapthalUT

@@ -362,6 +362,8 @@
         amount: 2
     - name: Extended ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 10
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
@@ -376,12 +378,14 @@
         amount: 4
       - id: RMCMagazineSmartGun
         amount: 4
-      #- id: M44 Heavy Speed Loader (.44)
-      #  amount: 10
+      - id: RMCSpeedLoader44Heavy
+        amount: 10
       - id: RMCSpeedLoader44Marksman
-        amount: 16 # TODO RMC14 6 once heavy is in
-      #- id: M4A3 HP Magazine (9mm)
-      #  amount: 2
+        amount: 6
+      - id: RMCMagazinePistolM1984HP
+        amount: 2
+      - id: RMCMagazinePistolM1984AP
+        amount: 2
       - id: CMMagazineRifleM54CE2HT
         amount: 2
       - id: RMCBox458SOCOM
@@ -418,6 +422,15 @@
       - id: RMCBoxMagazinePistolM13Drum
         name: Magazine Box (Drum M13 x 12)
         box: RMCMagazinePistolM13Drum
+      - id: RMCBoxMagazineRifleM4SPR
+        name: Magazine Box (M4SPR x 16)
+        box: CMMagazineRifleM4SPR
+      - id: RMCBoxMagazineRifleM4SPRAP
+        name: Magazine Box (AP M4SPR x 16)
+        box: CMMagazineRifleM4SPRAP
+      - id: RMCBoxMagazineRifleM4SPRExt
+        name: Magazine Box (Ext M4SPR x 16)
+        box: CMMagazineRifleM4SPRExt
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -439,16 +452,12 @@
       - id: RMCBoxMagazinePistolM1984
         name: Magazine Box (M1984 x 16)
         box: CMMagazinePistolM1984
-#      - name: Magazine Box (AP M1984 x 16)
-#        box: CMMagazinePistolM1984AP
-#      - name: Magazine Box (HP M1984 x 16)
-#        box: CMMagazineSMGM63
-      - id: RMCBoxMagazineRifleM4SPR
-        name: Magazine Box (M4SPR x 16)
-        box: CMMagazineRifleM4SPR
-      - id: RMCBoxMagazineRifleM4SPRAP
-        name: Magazine Box (AP M4SPR x 16)
-        box: CMMagazineRifleM4SPRAP
+      - id: RMCBoxMagazinePistolM1984AP
+        name: Magazine Box (AP M1984 x 16)
+        box: RMCMagazinePistolM1984AP
+      - id: RMCBoxMagazinePistolM1984HP
+        name: Magazine Box (HP M1984 x 16)
+        box: RMCMagazinePistolM1984HP
 #      - name: Magazine Box (M54CE2 x 8)
 #        box: RMCCrateMagazineRifleM54CE2
 #      - name: Magazine Box (M54CE2 Holo-Target x 8)
@@ -498,7 +507,10 @@
       - id: RMCBoxMagazineRevolverM44Marksman
         name: Magazine Box (Marksman M44 x 16)
         box: RMCSpeedLoader44Marksman
-#      - name: Magazine Box (Heavy M44 x 16)
+      - id: RMCBoxMagazineRevolverM44Heavy
+        name: Magazine Box (Heavy M44 x 16)
+        box: RMCSpeedLoader44Heavy
+
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (UT-Napthal Fuel x 8)
 #        box: CMMagazineSMGM63
