@@ -94,6 +94,9 @@ public sealed class GunIFFSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    /// <summary>
+    ///     Gets the UserIFF faction of the user.
+    /// </summary>
     public bool TryGetUserFaction(Entity<UserIFFComponent?> user, out EntProtoId<IFFFactionComponent> faction)
     {
         faction = default;
@@ -102,6 +105,25 @@ public sealed class GunIFFSystem : EntitySystem
             return false;
 
         faction = userFaction;
+        return true;
+    }
+
+    /// <summary>
+    ///     Gets the IFFFaction of the user. Includes the UserIFFComponent and any items on the given slot flags that have the ItemIFFComponent.
+    /// </summary>
+    public bool TryGetFaction(Entity<UserIFFComponent?> user, out EntProtoId<IFFFactionComponent> faction, SlotFlags slots = SlotFlags.IDCARD)
+    {
+        faction = default;
+        if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
+            return false;
+
+        var ev = new GetIFFFactionEvent(null, slots);
+        RaiseLocalEvent(user, ref ev);
+
+        if (ev.Faction is not { } newFaction)
+            return false;
+
+        faction = newFaction;
         return true;
     }
 
