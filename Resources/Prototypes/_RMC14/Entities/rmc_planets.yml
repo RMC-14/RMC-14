@@ -74,6 +74,7 @@
       CMSurvivor:
       - CMSurvivorBeachBum: -1
       - CMSurvivorMiner: -1
+      - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorICB: 2
       CMSurvivorDoctor:

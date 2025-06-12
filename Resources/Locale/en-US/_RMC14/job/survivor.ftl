@@ -16,8 +16,11 @@ CMJobSurvivorSecurity = Security Colonist
 cm-job-name-survivor-corporate = Corporate Colonist
 CMJobSurvivorCorporate = Corporate Colonist
 
-cm-job-name-survivor-miner = Miner
-CMJobSurvivorMiner = Miner
+cm-job-name-survivor-miner = Miner Colonist
+CMJobSurvivorMiner = Miner Colonist
+
+cm-job-name-surivor-priest = Priest Colonist
+CMJobSurvivorPriest = Priest Colonist
 
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
@@ -56,14 +59,14 @@ CMJobSurvivorCommanderNewVaradero = Commander
 cm-job-name-surivor-beach-bum = Beach Bum
 CMJobSurvivorBeachBum = Beach Bum
 
-cm-job-name-survivor-cargo-technician = Cargo Technician
-CMJobSurvivorCargoTechnician = Cargo Technician
+cm-job-name-survivor-cargo-technician = New Varadero Cargo Technician
+CMJobSurvivorCargoTechnician = New Varadero Cargo Technician
 
-cm-job-name-survivor-medical-technician = Medical Technician
-CMJobSurvivorMedicalTechnician = Medical Technician
+cm-job-name-survivor-medical-technician = New Varadero Medical Technician
+CMJobSurvivorMedicalTechnician = New Varadero Medical Technician
 
-cm-job-name-survivor-technician = Engineering Technician
-CMJobSurvivorTechnician = Engineering Technician
+cm-job-name-survivor-technician = New Varadero Engineering Technician
+CMJobSurvivorTechnician = New Varadero Engineering Technician
 
 cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
 CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
