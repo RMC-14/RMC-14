@@ -20,6 +20,7 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-corp-exec-supervisor
+    - type: RMCTrackable
   hasIcon: false
   hidden: true
 
@@ -89,6 +90,7 @@
         RMCSkillFireman: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-corp-exec-specialist
+    - type: RMCTrackable
   hasIcon: false
   hidden: true
 
