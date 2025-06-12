@@ -31,7 +31,7 @@
 - type: startingGear
   id: RMCGearSurvivorLV624CargoTechnician
   equipment:
-    jumpsuit: RMCJumpsuitKhakiWorkwear
+    jumpsuit: RMCJumpsuitKhakiWorkwearJacketless
     back: CMSatchelEngineerSurvivorFill
     head: RMCHeadYellowSoftCap
     shoes: RMCShoesJackboots

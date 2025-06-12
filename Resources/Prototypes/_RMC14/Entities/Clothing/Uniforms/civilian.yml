@@ -17,3 +17,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilians/khaki_workwear.rsi
+
+# jacketless workwears for certain survs
+- type: entity
+  parent: RMCJumpsuitKhakiWorkwear
+  id: RMCJumpsuitKhakiWorkwearJacketless
+  components:
+  - type: Foldable
+    folded: true
