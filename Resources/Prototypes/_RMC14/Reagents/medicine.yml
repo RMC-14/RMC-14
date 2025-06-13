@@ -116,7 +116,7 @@
           min: 15 #TODO 0.25 eye damage/s at 15 OD
         damage:
           groups:
-            Brute: 1
+            Brute: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -365,7 +365,7 @@
           min: 60
         key: Unconscious
         component: RMCUnconscious
-        time: 20 #40s per life tick. No max
+        time: 20 #Yes, it's this much.
         type: Add
         refresh: false
       - !type:GenericStatusEffect
@@ -431,7 +431,7 @@
           min: 30
         key: Unconscious
         component: RMCUnconscious
-        time: 20 #40s per life tick. No max
+        time: 20 #Yes, it's this much.
         type: Add
         refresh: false
       - !type:GenericStatusEffect
