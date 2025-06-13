@@ -96,7 +96,7 @@
       rmc-aslot-underbarrel: 0.21875, -0.343
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineSniperM96S
   id: RMCMagazineSniperType88
   name: "Type 88 marksman magazine (7.62x54mmR)"
   description: A magazine of type 88 marksman ammo.
@@ -119,12 +119,6 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-  - type: MagazineVisuals
-    magState: mag
-    steps: 2
-    zeroVisible: false
-    zeroOnlyOnEmpty: true
-  - type: Appearance
 
 - type: entity
   parent: CMBaseCartridgeRifle
