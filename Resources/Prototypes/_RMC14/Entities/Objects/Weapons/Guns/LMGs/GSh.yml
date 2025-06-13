@@ -25,15 +25,15 @@
     availableModes:
     - FullAuto
     soundGunshot:
-    path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+    path: /Audio/_RMC14/Weapons/Guns/Gunshots/Gun_GSh.ogg
 
   - type: RMCSelectiveFire
     baseFireModes:
     - FullAuto
     recoilWielded: 0
     recoilUnwielded: 0
-    scatterWielded: 4
-    scatterUnwielded: 4
+    scatterWielded: 2
+    scatterUnwielded: 0
     baseFireRate: 10
     modifiers:
         FullAuto:
@@ -94,6 +94,7 @@
   id: RMCCartridgeGSh
   name: Cartridge (7.62x51)
   description: A 7.62x51mm SPP cartridge
+  categories: [ HideSpawnMenu ]
   components:
   - type: Tag
     tags:
@@ -122,8 +123,8 @@
   - type: RMCProjectileAccuracy
     accuracy: 95
     thresholds:
-    - range: 12
-      falloff: 10
+    - range: 20
+      falloff: 15
 
 
 - type: Tag
