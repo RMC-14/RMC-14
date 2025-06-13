@@ -86,10 +86,19 @@
     zeroVisible: true
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: BaseItem
   id: CMMagazineRifleBase
   abstract: true
   components:
+  - type: Tag
+    tags:
+      - MagazineRifle
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeRifle
+    capacity: 25
   - type: Item
     size: Normal
   - type: MagazineVisuals
@@ -97,6 +106,16 @@
     steps: 2
     zeroVisible: false
     zeroOnlyOnEmpty: true
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
   - type: Clothing
     slots:

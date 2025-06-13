@@ -73,7 +73,7 @@
     - RMCWeaponSMGNailgun
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: RMCMagazineSMGNailgun
   name: "nailgun magazine (7x45mm)"
   description: "A large magazine of oversized plasteel nails. Unfortunately, the production cost of those nail makes them ill-affordable for most military projects, and only some specific construction projects requires them."
