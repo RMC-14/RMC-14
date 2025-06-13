@@ -366,25 +366,36 @@ namespace Content.Server.Ghost
 
             while (allQuery.MoveNext(out var uid, out var warp))
             {
-                yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), null, true);
+                yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), null, true); // RMC14: Added null for display job
             }
         }
 
+        /// <remarks> RMC14: Method changed to support dead and ghosts in GhostTargetWindow. </remarks>
         private IEnumerable<GhostWarp> GetPlayerWarps(EntityUid except)
         {
-            foreach (var player in _playerManager.Sessions)
+            // RMC14: Get ghosts
+            var ghostQuery = EntityQueryEnumerator<GhostComponent, MetaDataComponent>();
+            while (ghostQuery.MoveNext(out var uid, out var ghost, out var meta))
             {
-                if (player.AttachedEntity is not {Valid: true} attached)
+                if (uid == except) continue;
+
+                yield return new GhostWarp(GetNetEntity(uid), meta.EntityName, null, false);
+            }
+
+            // RMC14: Get other players
+            var query = EntityQueryEnumerator<MetaDataComponent, MobStateComponent, MindContainerComponent>();
+            while (query.MoveNext(out var uid, out var meta, out var _, out var mindContainer))
+            {
+                if (uid == except) continue;
+                if (HasComp<GhostComponent>(uid)) continue; // RMC14: Added to exclude ghosts
+
+                if (mindContainer.Mind == null)
                     continue;
 
-                if (attached == except) continue;
+                var jobName = _jobs.MindTryGetJobName(mindContainer.Mind);
+                var playerName = meta.EntityName;
 
-                TryComp<MindContainerComponent>(attached, out var mind);
-                var jobName = _jobs.MindTryGetJobName(mind?.Mind);
-                var playerName = Comp<MetaDataComponent>(attached).EntityName;
-
-                if (_mobState.IsAlive(attached) || _mobState.IsCritical(attached))
-                    yield return new GhostWarp(GetNetEntity(attached), playerName, jobName, false);
+                yield return new GhostWarp(GetNetEntity(uid), playerName, jobName, false); // RMC14: Added jobName for display job
             }
         }
 

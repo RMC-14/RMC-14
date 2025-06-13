@@ -76,11 +76,11 @@ namespace Content.Shared.Ghost
     [Serializable, NetSerializable]
     public struct GhostWarp
     {
-        public GhostWarp(NetEntity entity, string displayName, string? displayJob, bool isWarpPoint)
+        public GhostWarp(NetEntity entity, string displayName, string? displayJob, bool isWarpPoint) // RMC14: Added display job
         {
             Entity = entity;
             DisplayName = displayName;
-            DisplayJob = displayJob;
+            DisplayJob = displayJob; // RMC14: Added display job
             IsWarpPoint = isWarpPoint;
         }
 
@@ -96,7 +96,7 @@ namespace Content.Shared.Ghost
         public string DisplayName { get; }
 
         /// <summary>
-        /// The job name for player warps, null for warp points
+        /// RMC14: The job name for player warps, null for warp points
         /// </summary>
         public string? DisplayJob { get; }
 

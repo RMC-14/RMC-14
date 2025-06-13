@@ -48,6 +48,15 @@
     },
     {
       "name": "huddeadclose"
+    },
+    {
+        "name": "health_high"
+    },
+    {
+        "name": "health_medium"
+    },
+    {
+        "name": "health_low"
     }
   ]
 }
