@@ -62,3 +62,5 @@
     spawnPrototype: CMSheetMetalBase
   - type: XenoToggleChargingDamage
     destroy: true
+  - type: XenoCrusherChargable
+    instantDestroy: true

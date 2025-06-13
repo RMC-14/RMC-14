@@ -1,0 +1,159 @@
+
+#Donuts
+
+- type: microwaveMealRecipe
+  id: RecipeDonut
+  name: donut recipe
+  result: RMCFoodDonut
+  time: 10
+  group: Breads
+  solids:
+    FoodDoughRope: 1 # created by rolling a dough slice.
+  reagents:
+    Sugar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutFrosted
+  name: frosted donut recipe
+  result: RMCFoodDonutFrosted
+  time: 10
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    Sugar: 5
+    JuiceBerry: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutJelly
+  name: jelly donut recipe
+  result: RMCFoodDonutJelly
+  time: 15
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    Sugar: 5
+    RMCCherryJelly: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutJellyFrosted
+  name: frosted jelly donut recipe
+  result: RMCFoodDonutJellyFrosted
+  time: 15
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    Sugar: 5
+    JuiceBerry: 5
+    RMCCherryJelly: 5
+
+#Misc
+
+- type: microwaveMealRecipe
+  id: RecipeHoneyBun
+  name: honey bun recipe
+  result: FoodBakedBunHoney
+  time: 10
+  group: Dessert
+  solids:
+    FoodDoughSlice: 1
+  reagents:
+    Sugar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeBeetSoup
+  name: beet soup recipe
+  result: FoodSoupBeet
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodWhiteBeet: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipePlumpPie
+  name: plump pie recipe
+  result: FoodPiePlump
+  time: 15
+  group: Pie
+  solids:
+    FoodDoughPie: 1
+    FoodMushroomPlump: 3
+    FoodPlateTin: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCookiePeanutButter
+  name: peanut butter cookie recipe
+  result: RMCFoodCookiePeanutButter
+  time: 5
+  group: BarsAndCookies
+  reagents:
+    Flour: 5
+    Sugar: 5
+    RMCPeanutButter: 5
+
+- type: microwaveMealRecipe
+  id: RecipeEggplantParm
+  name: eggplant parm recipe
+  result: FoodMealEggplantParm
+  time: 15
+  group: Savory
+  solids:
+    FoodCheeseSlice: 1
+    FoodEggplant: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFriedChicken
+  name: fried chicken recipe
+  result: FoodMeatChickenFried
+  time: 15
+  group: Savory
+  solids:
+    FoodMeatChickenCutlet: 1
+  reagents:
+    Flour: 5
+    Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeRMCVegetablePizza
+  name: RMC vegetable pizza recipe
+  result: RMCFoodPizzaVegetableFull
+  time: 30
+  group: Pizza
+  solids:
+    FoodDoughFlat: 1
+    FoodCheeseSlice: 1
+    FoodChiliPepper: 2
+    FoodOnionRedSlice: 1
+    FoodCorn: 1
+    FoodTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPBJSandwich
+  name: peanut butter and jelly sandwich recipe
+  result: RMCFoodPBJSandwich
+  time: 5
+  group: Savory
+  solids:
+    FoodBreadPlainSlice: 2
+  reagents:
+    RMCCherryJelly: 5
+    RMCPeanutButter: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCOnigiri
+  name: onigiri recipe
+  result: RMCFoodOnigiri
+  time: 5
+  group: Savory
+  solids:
+    FoodRiceBoiled: 1
+  reagents:
+    TableSalt: 5
+    Vinegar: 5
+    Sugar: 5

@@ -23,6 +23,7 @@ public sealed class XenoPunchSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -48,7 +49,7 @@ public sealed class XenoPunchSystem : EntitySystem
         var targetId = args.Target;
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, origin: xeno, tool: xeno);
+        var damage = _damageable.TryChangeDamage(targetId, _xeno.TryApplyXenoSlashDamageMultiplier(targetId, xeno.Comp.Damage), origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
@@ -64,7 +65,8 @@ public sealed class XenoPunchSystem : EntitySystem
 
         _throwing.TryThrow(targetId, diff, 10);
 
-        _slow.TrySlowdown(targetId, xeno.Comp.SlowDuration);
+        if (!HasComp<XenoComponent>(targetId))
+            _slow.TrySlowdown(targetId, xeno.Comp.SlowDuration);
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());

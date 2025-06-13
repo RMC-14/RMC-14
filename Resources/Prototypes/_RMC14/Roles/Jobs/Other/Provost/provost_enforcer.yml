@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
+  spawnMenuRoleName: Provost Enforcer
   special:
   - !type:AddComponentSpecial
     components:
@@ -49,6 +50,10 @@
     job: CMProvostEnforcer
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadProvost
 

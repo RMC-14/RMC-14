@@ -5,7 +5,6 @@ using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
-using Content.Server._RMC14.Xenonids.Construction.Tunnel;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -114,7 +113,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly ItemCamouflageSystem _camo = default!;
-    [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
@@ -171,7 +169,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
-    private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
+    private readonly TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
     private bool _landingZoneMiasmaEnabled;
     private TimeSpan _sunsetDuration;
     private TimeSpan _sunriseDuration;
@@ -198,6 +196,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     public string? OperationName { get; private set; }
 
     private readonly Dictionary<EntProtoId<RMCPlanetMapPrototypeComponent>, int> _carryoverVotes = new();
+
+    private IVoteHandle? _currentVote;
 
     public override void Initialize()
     {
@@ -408,6 +408,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 var spawnAsJob = job;
 
+                var playerId = _random.Pick(list);
+                if (!_player.TryGetSessionById(playerId, out var player))
+                {
+                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
+                    return null;
+                }
+
                 if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
                 {
                     var insertSuccess = false;
@@ -415,6 +422,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     for (var i = 0; i < insert.Count; i++)
                     {
                         var (insertJob, amount) = insert[i];
+
+                        if (!IsAllowed(playerId, insertJob))
+                            continue; // check insert playtime requirements
 
                         if (amount == -1)
                         {
@@ -457,12 +467,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     comp.SurvivorJobs[i] = (survJob, amount - 1);
                 }
 
-                var playerId = _random.PickAndTake(list);
-                if (!_player.TryGetSessionById(playerId, out var player))
-                {
-                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
-                    return null;
-                }
+                list.Remove(playerId); // remove the player from the pool because they passed the checks
 
                 var spawner = _random.PickAndTake(jobSpawnersLeft);
                 ev.PlayerPool.Remove(player);
@@ -850,13 +855,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var coordinates = _transform.GetMoverCoordinates(spawner);
                 ev.SpawnResult = _stationSpawning.SpawnPlayerMob(coordinates, ev.Job, ev.HumanoidCharacterProfile, ev.Station);
             }
-
-            // TODO RMC14 split this out with an event
-            SpriteSpecifier? icon = null;
-            if (job.HasIcon && _prototypes.TryIndex(job.Icon, out var jobIcon))
-                icon = jobIcon.Icon;
-
-            _marines.MakeMarine(ev.SpawnResult.Value, icon);
 
             if (squad != null)
             {
@@ -1687,6 +1685,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMap = null;
     }
 
+    public void SetPlanet(RMCPlanet planet)
+    {
+        SelectedPlanetMap = planet;
+    }
+
     private void StartPlanetVote()
     {
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
@@ -1722,9 +1725,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         };
         vote.SetInitiatorOrServer(null);
 
-        var handle = _voteManager.CreateVote(vote);
-        handle.OnFinished += (_, args) =>
+        _currentVote = _voteManager.CreateVote(vote);
+        _currentVote.OnFinished += (_, args) =>
         {
+            _currentVote = null;
             RMCPlanet picked;
 
             var voteResult = planets.Zip(args.Votes);
@@ -1754,6 +1758,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _carryoverVotes[picked.Proto.ID] = 0;
             SelectedPlanetMap = picked;
         };
+        _currentVote.OnCancelled += _ => _currentVote = null;
+    }
+
+    public bool HasPlanetVoteRunning()
+    {
+        return _currentVote != null;
+    }
+
+    public void CancelPlanetVote()
+    {
+        _currentVote?.Cancel();
     }
 
     private string GetRandomOperationName()

@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Emote;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Rage;
@@ -8,6 +7,7 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -34,7 +34,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
 
-    private readonly HashSet<Entity<MarineComponent>> _hit = new();
+    private readonly HashSet<Entity<MobStateComponent>> _hit = new();
 
     public override void Initialize()
     {
@@ -107,28 +107,29 @@ public sealed class XenoEviscerateSystem : EntitySystem
 
         var validTargets = 0;
         var origin = _transform.GetMapCoordinates(xeno);
-        foreach (var marine in _hit)
+        foreach (var mob in _hit)
         {
-            if (!_xeno.CanAbilityAttackTarget(xeno, marine))
+            if (!_xeno.CanAbilityAttackTarget(xeno, mob))
                 continue;
 
-            if (!_interact.InRangeUnobstructed(xeno.Owner, marine.Owner, range))
+            if (!_interact.InRangeUnobstructed(xeno.Owner, mob.Owner, range))
                 continue;
 
-            _rmcPulling.TryStopAllPullsFromAndOn(marine);
-            _damageable.TryChangeDamage(marine, damage, origin: xeno, tool: xeno);
+            _rmcPulling.TryStopAllPullsFromAndOn(mob);
 
-            var filter = Filter.Pvs(marine, entityManager: EntityManager);
-            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { marine }, filter);
+            _damageable.TryChangeDamage(mob, _xeno.TryApplyXenoSlashDamageMultiplier(mob, damage), origin: xeno, tool: xeno);
+
+            var filter = Filter.Pvs(mob, entityManager: EntityManager);
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { mob }, filter);
 
             if (range > 1.5f)
             {
-                _audio.PlayPvs(xeno.Comp.RageHitSound, marine); // todo spawn gibs
-                _stun.TryParalyze(marine, xeno.Comp.StunTime, true);
+                _audio.PlayPvs(xeno.Comp.RageHitSound, mob); // todo spawn gibs
+                _stun.TryParalyze(mob, xeno.Comp.StunTime, true);
             }
             else
             {
-                _audio.PlayPvs(xeno.Comp.HitSound, marine);
+                _audio.PlayPvs(xeno.Comp.HitSound, mob);
             }
 
             validTargets += 1;
