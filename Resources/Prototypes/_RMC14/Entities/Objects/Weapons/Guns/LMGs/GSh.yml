@@ -117,8 +117,8 @@
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22
-    falloff: 9999
-    ignoreModifiers: true
+      falloff: 9999
+      ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 30
   - type: RMCProjectileAccuracy
