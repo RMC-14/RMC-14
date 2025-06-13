@@ -93,7 +93,7 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.80, 0.06
-      rmc-aslot-underbarrel: 0.21875, -0.343
+      rmc-aslot-underbarrel: 0.31875, -0.243
 
 - type: entity
   parent: CMMagazineSniperM96S
@@ -115,7 +115,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type88.rsi
     layers:
-    - state: mag-0
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]

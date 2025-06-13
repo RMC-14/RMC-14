@@ -71,12 +71,6 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
-      rmc-aslot-stock:
-        whitelist:
-          tags:
-          - RMCAttachmentM63ArmBrace
-          - RMCAttachmentM63Stock
-          - RMCAttachmentM63StockCollapsible
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -87,7 +81,7 @@
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.71875, 0.03125
+      rmc-aslot-barrel: 0.83875, 0.05125
       rmc-aslot-rail: 0.032, 0.155
       rmc-aslot-stock: -0.81, 0.032
       rmc-aslot-underbarrel: 0.25, -0.25

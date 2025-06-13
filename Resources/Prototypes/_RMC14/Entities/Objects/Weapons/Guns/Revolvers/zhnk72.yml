@@ -65,8 +65,7 @@
     offsets:
       rmc-aslot-barrel: 0.75, 0.1
       rmc-aslot-rail: -0.14, 0.158
-      rmc-aslot-stock: -0.59375, 0.09375
-      rmc-aslot-underbarrel: 0.38, -0.24
+      rmc-aslot-underbarrel: 0.38, -0.17
 
 - type: entity
   parent: RMCWeaponRevolverZHNK72

@@ -71,14 +71,13 @@
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.625, 0.125
-      rmc-aslot-rail: -0.03, 0.185
-      rmc-aslot-underbarrel: 0.25, -0.125
+      rmc-aslot-barrel: 0.71, 0.125
+      rmc-aslot-rail: 0.06, 0.185
 
 - type: entity
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolT74
-  name: Type74 pistol
+  name: Type 74 pistol
   description: The Type 74 is the designation for a specially modified Type 73 with an integrated laser sight system, multiple lightning cuts to reduce weight in order to allow a higher pressure round to be used with the same recoil sping, and a more comfortable grip. Due to the adoption of the NP92, the Type 74 was produced in limited numbers, because of this it is typically only issued on request to high-ranking officers
   components:
   - type: Tag
@@ -135,9 +134,8 @@
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.625, 0.125
-      rmc-aslot-rail: -0.03, 0.185
-      rmc-aslot-underbarrel: 0.25, -0.125
+      rmc-aslot-barrel: 0.71, 0.125
+      rmc-aslot-rail: 0.06, 0.185
 
 - type: entity
   parent: RMCWeaponPistolT73
