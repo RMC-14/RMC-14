@@ -150,5 +150,5 @@ public sealed partial class NeurotoxinComponent : Component
 
     [DataField]
     public EntProtoId<OrbitalCannonWarheadComponent>[] WarheadTypes =
-    ["RMCOrbitalCannonWarheadExplosive", "RMCOrbitalCannonWarheadIncendiary", "RMCOrbitalCannonWarheadCluster", "RMCOrbitalCannonWarheadAegis"];
+    ["RMCOrbitalCannonWarheadExplosive", "RMCOrbitalCannonWarheadIncendiary", "RMCOrbitalCannonWarheadCluster"];
 }
