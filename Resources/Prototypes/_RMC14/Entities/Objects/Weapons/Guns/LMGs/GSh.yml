@@ -26,7 +26,6 @@
     - FullAuto
     soundGunshot:
     path: /Audio/_RMC14/Weapons/Guns/Gunshots/Gun_GSh.ogg
-
   - type: RMCSelectiveFire
     baseFireModes:
     - FullAuto
@@ -117,13 +116,13 @@
     thresholds:
     - range: 22
     falloff: 9999
-    ingoreModifiers: true
+    ignoremodifiers: true
   - type: CMArmorPiercing
     amount: 30
   - type: RMCProjectileAccuracy
     accuracy: 95
     thresholds:
-    - range: 20
+    - range: 12
       falloff: 10
 
 
