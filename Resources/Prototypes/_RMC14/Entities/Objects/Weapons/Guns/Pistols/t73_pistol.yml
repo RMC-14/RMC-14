@@ -1,7 +1,7 @@
 - type: entity
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolT73
-  name: Type-73 pistol
+  name: Type 73 pistol
   description: The Type 73 is the once-standard issue sidearm of the SPP. Replaced by the NP92 in SPP use, it remains popular with veteran SPP troops due to familiarity and extra power. Due to an extremely large amount being produced, they tend to end up in the hands of forces attempting to arm themselves on a budget. Users include the Socialist Progressive Peoples, Colonial Liberation Front, and just about any mercenary or pirate group out there.
   components:
   - type: Tag
@@ -78,7 +78,7 @@
 - type: entity
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolT74
-  name: Type-74 pistol
+  name: Type74 pistol
   description: The Type 74 is the designation for a specially modified Type 73 with an integrated laser sight system, multiple lightning cuts to reduce weight in order to allow a higher pressure round to be used with the same recoil sping, and a more comfortable grip. Due to the adoption of the NP92, the Type 74 was produced in limited numbers, because of this it is typically only issued on request to high-ranking officers
   components:
   - type: Tag
@@ -158,7 +158,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolT73
-  name: Type-73 magazine (7.62x25mm)
+  name: Type 73 magazine (7.62x25mm)
   components:
   - type: Tag
     tags:
@@ -184,7 +184,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolT74Impact
-  name: Type-74 impact magazine (7.62x25mm)
+  name: Type 74 impact magazine (7.62x25mm)
   components:
   - type: Tag
     tags:
