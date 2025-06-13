@@ -1,0 +1,136 @@
+- type: entity
+  parent: RMCBaseWeaponLMG
+  id: RMCGSh_rotary_machinegun
+  name: GSh-7.62 rotary machinegun
+  description: A gas-operated rotary machine gun used by UPP Weapon Specialists. Its enormous volume of fire and ammunition capacity allows the suppression of large concentrations of enemy forces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/GSh.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/GSh.rsi
+  - type: Tag
+    tags:
+    - RMCGSh_rotary_machinegun
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+    path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    recoilWielded: 0
+    recoilUnwielded: 0
+    scatterWielded: 4
+    scatterUnwielded: 4
+    baseFireRate: 10
+    modifiers:
+        FullAuto:
+         fireDelay: 0.01
+         maxScatterModifier: 4
+         shotsToMaxScatter: 6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCAmmoDrum
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCAmmoDrum
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: RMCMagneticItem
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+
+
+
+
+- type: entity
+  parent: RMCMagazineLMGBase
+  id: RMCAmmoDrum
+  name: "rotating ammo drum (7.62x51mm)."
+  description:  A huge 7.62x51mm ammo drum for a huge rotary machinegun.
+  components:
+  - type: Tag
+    tags:
+    - RMCAmmoDrum
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+     tags:
+     - RMCCartridgeGSh
+    proto: RMCCartridgeGSh
+    capacity: 300
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/GSh.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+
+
+- type: entity
+  parent: RMCCartridgeRifleAR10
+  id: RMCCartridgeGSh
+  name: Cartridge (7.62x51)
+  description: A 7.62x51mm SPP cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeGSh
+  - type: CartridgeAmmo
+    proto: RMCBulletGSh
+
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletGSh
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+       types:
+        Piercing: 35
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+    falloff: 9999
+    ingoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 12
+      falloff: 10
+
+
+- type: Tag
+  id: RMCGSh_rotary_machinegun
+
+- type: Tag
+  id: RMCAmmoDrum
+
+- type: Tag
+  id: RMCCartridgeGSh
