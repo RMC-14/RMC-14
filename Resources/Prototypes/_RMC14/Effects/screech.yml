@@ -32,15 +32,6 @@
       visible: false
 
 - type: entity
-  parent: CMEffectScreech
-  id: RMCEffectScreechHallucination
-  components:
-  - type: Sprite
-    layers:
-    - state: screech
-      visible: false
-
-- type: entity
   parent: RMCEffectScreechValkyrie
   id: RMCEffectScreechValkyrieWeak
   categories: [ HideSpawnMenu ]
