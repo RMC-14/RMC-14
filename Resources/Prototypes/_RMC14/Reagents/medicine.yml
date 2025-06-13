@@ -10,12 +10,12 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         damage:
         - Toxin: -1
         - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
       - !type:GenericStatusEffect # TODO -5 hallucination/s
-        key: SeeingRainbows
+        key: SeeingRainbows #SeeingRainbow = druggy effect
         component: SeeingRainbows
         time: 5
         type: Remove
@@ -56,9 +56,9 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 5
-        refresh: true
+        time: 10
         type: Add
+        refresh: false
 
 # TODO RMC14 other effects
 - type: reagent
@@ -103,7 +103,7 @@
     Medicine:
       metabolismRate: 0.03
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.03125 toxin/s?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -116,7 +116,7 @@
           min: 15 #TODO 0.25 eye damage/s at 15 OD
         damage:
           groups:
-            Brute: 1
+            Brute: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -131,11 +131,10 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 5
-        refresh: true
+        time: 10
         type: Add
+        refresh: false
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Bicaridine ]
   id: CMBicaridine
@@ -177,24 +176,17 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Brute: -1.5
+        - Brute: -1
         - Burn: -1
         - Toxin: -1.5
-        - Airloss: -1
-      - !type:HealthChange
-        conditions:
-        - !type:Temperature
-          max: 170
-        damage:
-          types:
-            Cellular: -0.12
+        - Airloss: -0.5
+        - Genetic: -1
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
   id: CMDermaline
@@ -226,7 +218,6 @@
             Burn: 3.75
             Toxin: 3.75
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
@@ -264,7 +255,6 @@
             Brute: 1
             Toxin: 2
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
@@ -345,7 +335,7 @@
           types:
             Asphyxiation: 1.5
 
-# TODO RMC14 other effects
+# TODO RMC14 other effects (heart damage) (pain)
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
@@ -373,28 +363,22 @@
         conditions:
         - !type:ReagentThreshold
           min: 60
-        key: Stun
-        component: Stunned
-        time: 40
+        key: Unconscious
+        component: RMCUnconscious
+        time: 20 #Yes, it's this much.
         type: Add
+        refresh: false
       - !type:GenericStatusEffect
         conditions:
-        - !type:ReagentThreshold
-          min: 60
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
+        - !type:ReagentThreshold #0.25 heart damage/s
+          min: 100               #5% chance emote twitch, blink_r, shiver
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 10
         type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 100
-        key: Drunk
-        component: Drunk
-        time: 40
-        type: Add
+        refresh: false
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]
   id: CMKelotane
@@ -440,31 +424,26 @@
       effects:
       - !type:StabilizeTemperature
         stable: 310
-        change: 60
+        change: 30
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 30
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
+        key: Unconscious
+        component: RMCUnconscious
+        time: 20 #Yes, it's this much.
         type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Stun
-        component: Stunned
-        time: 40
-        type: Add
+        refresh: false
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 30
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 10
         type: Add
+        refresh: false
 
 # TODO RMC14 other effects
 - type: reagent
@@ -478,7 +457,7 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         damage:
         - Brute: -0.25
         - Burn: -0.25
@@ -505,13 +484,14 @@
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
-          min: 50
-        key: Drunk
-        component: Drunk
-        time: 60
+          min: 30
+        key: Unconscious
+        component: RMCUnconscious
+        probability: 0.05
+        time: 10
         type: Add
+        refresh: false
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, CMBicaridine ]
   id: CMMeralyne
@@ -575,7 +555,6 @@
             Toxin: 1.5
 
 # TODO RMC14 other effects
-# TODO RMC14 heal cloneloss
 - type: reagent
   parent: [ CMReagentMedicine, CMCryoxadone ]
   id: CMClonexadone
@@ -586,14 +565,15 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
+      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Toxin: -3.75
         - Brute: -2.25
-        - Burn: -3
+        - Burn: -2.25
+        - Toxin: -3
+        - Genetic: -1.5
 
 # TODO RMC14 other effects
 - type: reagent
@@ -607,7 +587,7 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
+      - !type:EqualHealthChange #TODO removes 0.625u toxin/s?
         damage:
         - Toxin: -0.5
       - !type:HealthChange
@@ -635,11 +615,11 @@
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
-        time: 5
-        refresh: true
+        time: 10
         type: Add
+        refresh: false
 
-# Antidepressants
+# Antidepressants/ADHD meds
 - type: reagent
   parent: CMReagentMedicine
   id: RMCMethylphenidate
