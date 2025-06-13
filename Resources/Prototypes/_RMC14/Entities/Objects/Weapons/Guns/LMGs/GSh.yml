@@ -25,9 +25,9 @@
     availableModes:
     - FullAuto
     soundGunshot:
-    path: /Audio/_RMC14/Weapons/Guns/Gunshots/Gun_GSh.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/Gun_GSh.ogg
     soundEmpty:
-    path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - FullAuto
