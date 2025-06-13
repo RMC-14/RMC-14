@@ -19,6 +19,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility;
 using Robust.Client.Graphics;
 using Content.Client.UserInterface.ControlExtensions;
+using Content.Shared._RMC14.Marines.Squads;
 
 namespace Content.Client.UserInterface.Systems.Ghost.Controls
 {
@@ -39,6 +40,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             public List<(string displayName, NetEntity Entity, bool IsWarpPoint, string? DisplayJob)> Warps = new();
             public Color HeaderColor = Color.FromHex("#696969");
             public bool IsExpandedByDefault = true;
+            public List<WarpGroup>? Subgroups;
         }
 
         private List<WarpGroup> _warpGroups = new();
@@ -92,7 +94,47 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                     }
                     else if (_entityManager.HasComponent<MarineComponent>(entity) && !_entityManager.HasComponent<RMCSurvivorComponent>(entity))
                     {
-                        marines.Warps.Add(entry);
+                        if (_entityManager.TryGetComponent<SquadMemberComponent>(entity, out var squadMember) &&
+                            squadMember.Squad is { } squad)
+                        {
+                            if (marines.Subgroups == null)
+                                marines.Subgroups = new List<WarpGroup>();
+
+                            var squadName = _entityManager.GetComponent<MetaDataComponent>(squad).EntityName;
+                            var squadGroup = marines.Subgroups.Find(g =>
+                                Loc.GetString(g.Title) == squadName);
+
+                            if (squadGroup == null)
+                            {
+                                // Создаем новую подгруппу для отряда
+                                squadGroup = new WarpGroup
+                                {
+                                    Title = new LocId(squadName),
+                                    HeaderColor = _entityManager.GetComponent<SquadTeamComponent>(squad).Color,
+                                    IsExpandedByDefault = true
+                                };
+                                marines.Subgroups.Add(squadGroup);
+                            }
+
+                            squadGroup.Warps.Add(entry);
+                        }
+                        else
+                        {
+                            if (marines.Subgroups == null)
+                                marines.Subgroups = new List<WarpGroup>();
+
+                            var othersGroup = marines.Subgroups.Find(g =>
+                                Loc.GetString(g.Title) == "rmc-ghost-target-window-group-others");
+
+                            if (othersGroup == null)
+                            {
+                                // Создаем подгруппу "Остальные"
+                                othersGroup = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-others") };
+                                marines.Subgroups.Add(othersGroup);
+                            }
+
+                            othersGroup.Warps.Add(entry);
+                        }
                     }
                     else if (_entityManager.HasComponent<XenoComponent>(entity))
                     {
