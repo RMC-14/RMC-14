@@ -28,11 +28,14 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Random.Helpers;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Drugs;
 using Robust.Shared.Map;
 using Content.Shared.Stunnable;
+using Content.Shared.Chat;
+using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Areas;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
@@ -59,6 +62,11 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
@@ -214,6 +222,37 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
         }
 
+        var neuroHallucinationQuery = EntityQueryEnumerator<NeurotoxinLingeringHallucinationComponent>();
+
+        while (neuroHallucinationQuery.MoveNext(out var uid, out var hallu))
+        {
+            if (hallu.Hallucinations.Count == 0)
+            {
+                RemCompDeferred<NeurotoxinLingeringHallucinationComponent>(uid);
+                continue;
+            }
+
+            List<(string, int, TimeSpan, EntityCoordinates?)> toRemove = new();
+            List<(string, int, TimeSpan, EntityCoordinates?)> toAdd = new();
+
+            foreach (var entry in hallu.Hallucinations)
+            {
+                if (entry.Item3 > time)
+                    continue;
+
+                var newEntry = ProcessHallucination(uid, hallu, entry);
+
+                toRemove.Add(entry);
+
+                if (newEntry != null)
+                    toAdd.Add(newEntry.Value);
+            }
+
+            hallu.Hallucinations.RemoveAll(a => toRemove.Contains(a));
+
+            hallu.Hallucinations.AddRange(toAdd);
+        }
+
     }
 
     private void NeurotoxinNonStackingEffects(EntityUid victim, NeurotoxinComponent neurotoxin, TimeSpan time, out float coughChance, out float stumbleChance)
@@ -235,7 +274,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         else if (neurotoxin.NeurotoxinAmount <= 19)
         {
             int chance = _random.Next(4);
-            if(chance == 0)
+            if (chance == 0)
             {
                 message = "rmc-neuro-where";
                 poptype = PopupType.Large;
@@ -309,7 +348,6 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 neurotoxin.NextHallucination = currTime + _random.Next(neurotoxin.HallucinationEveryMin, neurotoxin.HallucinationEveryMax);
                 DoNeuroHallucination(victim, neurotoxin);
             }
-            // Will need...alot of work
         }
 
         if (neurotoxin.NeurotoxinAmount >= 20)
@@ -334,18 +372,48 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     private void DoNeuroHallucination(EntityUid victim, NeurotoxinComponent neurotoxin)
     {
         var hallucination = SharedRandomExtensions.Pick(neurotoxin.Hallucinations, _random.GetRandom());
-
+        //Note event times are hardcoded for now since thers alot of them
         switch (hallucination)
         {
             case "AlienAttack":
+                _audio.PlayStatic(neurotoxin.Pounce, victim, victim.ToCoordinates());
+                _stun.TryParalyze(victim, neurotoxin.PounceDownTime, true);
+                var lingering = EnsureComp<NeurotoxinLingeringHallucinationComponent>(victim);
+                lingering.Hallucinations.Add(("AlienAttack", 0, _timing.CurTime + TimeSpan.FromSeconds(1), null));
                 break;
             case "OB":
+                //Little extra to confuse the player
+                //TODO RMC14 replace if it gets a locId
+                if (_player.TryGetSessionByEntity(victim, out var session))
+                {
+                    var msg = "[font size=16][color=red]Orbital bombardment launch command detected![/color][/font]";
+                    msg = $"[bold][font size=24][color=red]\n{msg}\n[/color][/font][/bold]";
+                    _rmcChat.ChatMessageToOne(ChatChannel.Radio, msg, msg, default, false, session.Channel, recordReplay: true);
+
+                    if (_area.TryGetArea(victim.ToCoordinates(), out _, out var areaProto))
+                    {
+                        var warhead = _random.Pick(neurotoxin.WarheadTypes);
+
+                        if (_proto.TryIndex(warhead, out var warHeadProto))
+                        {
+                            msg = $"[color=red]Launch command informs {warHeadProto.Name}. Estimated impact area: {areaProto.Name}[/color]";
+                            _rmcChat.ChatMessageToOne(ChatChannel.Radio, msg, msg, default, false, session.Channel, recordReplay: true);
+                        }
+                    }
+                }
+                _audio.PlayGlobal(neurotoxin.OBAlert, victim);
+                lingering = EnsureComp<NeurotoxinLingeringHallucinationComponent>(victim);
+                lingering.Hallucinations.Add(("OB", 0, _timing.CurTime + TimeSpan.FromSeconds(2), null));
                 break;
             case "Screech":
                 _audio.PlayStatic(neurotoxin.Screech, victim, HallucinationSoundOffset(victim, 3));
                 _stun.TryParalyze(victim, neurotoxin.ScreechDownTime, true);
                 break;
             case "CAS":
+                var position = HallucinationSoundOffset(victim, 7);
+                _audio.PlayStatic(neurotoxin.FiremissionStart, victim, position);
+                lingering = EnsureComp<NeurotoxinLingeringHallucinationComponent>(victim);
+                lingering.Hallucinations.Add(("CAS", 0, _timing.CurTime + TimeSpan.FromSeconds(3.5), position));
                 break;
             case "Giggle":
                 var ev = new NeurotoxinEmoteEvent() { Emote = neurotoxin.GiggleId };
@@ -354,12 +422,153 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 _statusEffects.TryAddStatusEffect<SeeingRainbowsComponent>(victim, "SeeingRainbows", neurotoxin.RainbowDuration, true);
                 break;
             case "Mortar":
+                position = HallucinationSoundOffset(victim, 7);
+                FakeWarning(position, victim, "rmc-mortar-shell-impact-warning", "rmc-mortar-shell-impact-warning-above");
+                lingering = EnsureComp<NeurotoxinLingeringHallucinationComponent>(victim);
+                lingering.Hallucinations.Add(("Mortar", 0, _timing.CurTime + TimeSpan.FromSeconds(1), position));
+                break;
             case "Sounds":
                 var sound = _random.Pick(neurotoxin.HallucinationRandomSounds);
                 //Random offset to make it spookier if it's real or not
                 _audio.PlayStatic(sound, victim, HallucinationSoundOffset(victim, 7));
                 break;
         }
+    }
+
+    //Returns true if the hallucination is done.
+    private (string, int, TimeSpan, EntityCoordinates?)? ProcessHallucination(EntityUid victim, NeurotoxinLingeringHallucinationComponent lingering, (string, int, TimeSpan, EntityCoordinates?) hallucination)
+    {
+        switch (hallucination.Item1)
+        {
+            case "AlienAttack":
+                if (hallucination.Item2 == 0)
+                {
+                    _audio.PlayStatic(lingering.XenoClaw, victim, victim.ToCoordinates());
+                    _audio.PlayStatic(lingering.BoneBreak, victim, victim.ToCoordinates());
+                    hallucination.Item2 = 1;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 < 3)
+                {
+                    _audio.PlayStatic(lingering.XenoClaw, victim, victim.ToCoordinates());
+                    hallucination.Item2 += 1;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else
+                {
+                    _audio.PlayStatic(lingering.BoneBreak, victim, victim.ToCoordinates());
+                    // TODO RMC14 Agony
+                    var ev = new NeurotoxinEmoteEvent() { Emote = lingering.PainEmote };
+                    RaiseLocalEvent(victim, ev);
+                }
+                break;
+
+            case "OB":
+                _audio.PlayStatic(lingering.OBTravel, victim, HallucinationSoundOffset(victim, 7));
+                break;
+
+            case "CAS": //Very long unfortunately
+                if (hallucination.Item2 == 0)
+                {
+                    FakeWarning(hallucination.Item4 ?? victim.ToCoordinates(), victim, "rmc-dropship-firemission-warning", "rmc-dropship-firemission-warning-above");
+                    hallucination.Item2 = 1;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 1)
+                {
+                    _audio.PlayStatic(lingering.RocketFire, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 2;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 2)
+                {
+                    _audio.PlayStatic(lingering.GauFire, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 3;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 3)
+                {
+                    _audio.PlayStatic(lingering.RocketFire, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 4;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(1);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 4)
+                {
+                    _audio.PlayStatic(lingering.Explosion, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 5;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(1);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 5)
+                {
+                    _audio.PlayStatic(lingering.RocketFire, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 6;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(1);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 6)
+                {
+                    _audio.PlayStatic(lingering.Explosion, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 7;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 7)
+                {
+                    _audio.PlayStatic(lingering.BigExplosion, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 8;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 8)
+                {
+                    _audio.PlayStatic(lingering.RocketFire, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 9;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 9)
+                {
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.Explosion, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 10;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else if (hallucination.Item2 == 10)
+                {
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    hallucination.Item2 = 11;
+                    hallucination.Item3 = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+                    return hallucination;
+                }
+                else
+                {
+                    _audio.PlayStatic(lingering.Explosion, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    _audio.PlayStatic(lingering.GauHit, victim, HallucinationSoundOffset(hallucination.Item4 ?? victim.ToCoordinates(), 7));
+                    var ev = new NeurotoxinEmoteEvent() { Emote = lingering.PainEmote };
+                    RaiseLocalEvent(victim, ev);
+                }
+                break;
+
+            case "Mortar":
+                _audio.PlayStatic(lingering.MortarTravel, victim, hallucination.Item4 ?? victim.ToCoordinates());
+                break;
+        }
+        return null;
     }
 
     private EntityCoordinates HallucinationSoundOffset(EntityUid victim, float maxDistance)
@@ -374,5 +583,39 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         var newCoords = Transform(victim).Coordinates.Offset(randomOffset);
 
         return newCoords;
+    }
+
+    private EntityCoordinates HallucinationSoundOffset(EntityCoordinates coords, float maxDistance)
+    {
+        var randomOffset =
+        new Vector2
+        (
+            _random.NextFloat(-maxDistance, maxDistance + 0.01f),
+            _random.NextFloat(-maxDistance, maxDistance + 0.01f)
+        );
+
+        var newCoords = coords.Offset(randomOffset);
+
+        return newCoords;
+    }
+
+    private void FakeWarning(EntityCoordinates coords, EntityUid player, LocId directionWarning, LocId aboveWarning)
+    {
+        var distanceVec = _transform.GetMapCoordinates(player).Position - _transform.ToMapCoordinates(coords).Position;
+        var distance = distanceVec.Length();
+
+        var direction = distanceVec.GetDir().ToString().ToUpperInvariant();
+
+        var msg = distance < 1
+        ? Loc.GetString(aboveWarning)
+        : Loc.GetString(directionWarning, ("direction", direction));
+
+        _popup.PopupEntity(msg, player, player, PopupType.LargeCaution);
+
+        if (_player.TryGetSessionByEntity(player, out var session))
+        {
+            msg = $"[bold][font size=24][color=red]\n{msg}\n[/color][/font][/bold]";
+            _rmcChat.ChatMessageToOne(ChatChannel.Radio, msg, msg, default, false, session.Channel, recordReplay: true);
+        }
     }
 }

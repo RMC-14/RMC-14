@@ -1,6 +1,6 @@
+using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
-using Content.Shared.Random;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -135,4 +135,20 @@ public sealed partial class NeurotoxinComponent : Component
 
     [DataField]
     public TimeSpan ScreechDownTime = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public SoundSpecifier Pounce = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_pounce.ogg");
+
+    [DataField]
+    public TimeSpan PounceDownTime = TimeSpan.FromSeconds(5);
+
+    [DataField]
+    public SoundSpecifier OBAlert = new SoundPathSpecifier("/Audio/_RMC14/Effects/ob_alert.ogg");
+
+    [DataField]
+    public SoundSpecifier FiremissionStart = new SoundPathSpecifier("/Audio/_RMC14/Weapons/dropship_sonic_boom.ogg");
+
+    [DataField]
+    public EntProtoId<OrbitalCannonWarheadComponent>[] WarheadTypes =
+    ["RMCOrbitalCannonWarheadExplosive", "RMCOrbitalCannonWarheadIncendiary", "RMCOrbitalCannonWarheadCluster", "RMCOrbitalCannonWarheadAegis"];
 }
