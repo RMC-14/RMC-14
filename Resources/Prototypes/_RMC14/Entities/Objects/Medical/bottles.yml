@@ -75,6 +75,8 @@
     - 30
     - 40
     - 60
+  - type: RMCSmartFridgeInsertable
+    category: Bottle
 
 - type: entity
   parent: CMBottleEmpty
@@ -171,5 +173,22 @@
   - type: CMRefillableSolution
     reagents:
       CMInaprovaline: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleTricordrazine
+  name: tricordrazine bottle
+  description: A small bottle. Contains tricordrazine - A weak but catch-all medicine for treating all sorts of damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMTricordrazine: 60
 
 # TODO RMC14 oxycodone, peridaxon, tramadol

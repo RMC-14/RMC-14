@@ -1,12 +1,10 @@
 # Base
 - type: entity
   parent: ClosetBase
-  id: CMClosetBase
+  id: CMClosetBaseUnanchored
   name: closet
   description: It's a basic storage unit.
   components:
-  - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
   - type: Sprite
@@ -60,6 +58,13 @@
     damage:
       types:
         Blunt: 40
+
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: CMClosetBase
+  components:
+  - type: Transform
+    anchored: true
 
 - type: entity
   parent: CMClosetBase
@@ -199,3 +204,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/acloset.rsi
+
+# PVE
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: RMCClosetGoldenArrowGear
+  name: personal locker
+  description: An immobile storag unit.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetGoldenArrowFill

@@ -36,21 +36,21 @@
     sprite: _RMC14/Objects/Chemistry/pill_canister.rsi
   - type: GenericVisualizer
     visuals:
-      enum.PillBottleVisuals.Color:
+      enum.RMCPillBottleVisuals.Color:
         bottleSurfaceLayer:
-          Orange: {state: pill_canister}
-          Blue: {state: pill_canister1}
-          Yellow: {state: pill_canister2}
-          Light_Purple: {state: pill_canister3}
-          Light_Grey: {state: pill_canister4}
-          White: {state: pill_canister5}
-          Light_Green: {state: pill_canister6}
-          Cyan: {state: pill_canister7}
-          Bordeaux: {state: pill_canister8}
-          Aquamarine: {state: pill_canister9}
-          Grey: {state: pill_canister10}
-          Red: {state: pill_canister11}
-          Black: {state: pill_canister12}
+          Orange: { state: pill_canister }
+          Blue: { state: pill_canister1 }
+          Yellow: { state: pill_canister2 }
+          LightPurple: { state: pill_canister3 }
+          LightGrey: { state: pill_canister4 }
+          White: { state: pill_canister5 }
+          LightGreen: { state: pill_canister6 }
+          Cyan: { state: pill_canister7 }
+          Pink: { state: pill_canister8 }
+          Aquamarine: { state: pill_canister9 }
+          Grey: { state: pill_canister10 }
+          Red: { state: pill_canister11 }
+          Black: { state: pill_canister12 }
       enum.SharedBagOpenVisuals.BagState:
         openLayer:
           Open: { visible: true }
@@ -76,7 +76,15 @@
     quickEquip: false
     slots:
     - suitstorage
-
+  - type: RMCStorageEjectHand
+    state: Last
+    canToggleStorage: false
+    ejectWhenEmpty: true
+    nestedWhitelist:
+      tags:
+      - RMCBeltMedical
+  - type: RMCSmartFridgeInsertable
+    category: Pills
 
 - type: entity
   parent: CMPillCanister
@@ -215,5 +223,26 @@
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-tricordazine-container-label-text
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterRussianRed
+  name: Russian red pill bottle
+  suffix: Russian Red, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillRussianRed
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-russianred-container-label-text
 
 # TODO RMC14 peridaxon, tramadol

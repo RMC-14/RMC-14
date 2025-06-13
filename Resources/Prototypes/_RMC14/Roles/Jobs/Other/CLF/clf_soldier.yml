@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMCLFSoldier
-  name: CMCLFSoldier
-  description: rmc-job-description-clf-soldier
+  id: RMCCLFSoldier
+  name: rmc-clf-soldier
+  description: rmc-ghost-role-information-clf-description
   playTimeTracker: CMJobCLFSoldier
   ranks:
     RMCRankCLFRebel: [ ]
@@ -24,38 +24,48 @@
         RMCSkillVehicles: 1
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
+    - type: NpcFactionMember
+      factions:
+      - CLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-soldier
   hidden: true
 
 - type: entity
   id: RMCRandomHumanoidCLFSoldier
-  name: clf soldier role
-  suffix: Role
+  name: clf ghost role soldier
+  suffix: Spawner, Player
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCCLFSoldier
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCCLFSoldier
   components:
-  - type: RMCJobSpawner
-    job: CMCLFSoldier
+  - type: GhostRole
+    name: rmc-ghost-role-clf-soldier
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFSoldier
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearCLFSoldier
   equipment:
     head: RMCArmorHelmetSecurity
     mask: RMCM5Bayonet # TODO RMC14
-    ears: RMCHeadsetDistressDukes
+    ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
     outerClothing: RMCArmorVestNone
-    gloves: ClothingHandsGlovesLeather
+    gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSoldier
     belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
@@ -75,11 +85,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: clf_mil
-
-- type: entity
-  parent: CMIDCardBase
-  id: RMCIDCardCLFSoldier
-  name: clf soldier's ID card
-  components:
-  - type: PresetIdCard
-    job: CMCLFSoldier

@@ -321,7 +321,7 @@ public abstract class SharedLadderSystem : EntitySystem
             if (toUpdate.Owner == uid)
                 continue;
 
-            if (ladder.Other is { } old)
+            if (ladder.Other is { } old && old != toUpdate.Owner)
                 Log.Error($"Found {ToPrettyString(toUpdate)} with duplicate ID {toUpdate.Comp.Id}, previous ladder: {ToPrettyString(old)}");
 
             ladder.Other = toUpdate;

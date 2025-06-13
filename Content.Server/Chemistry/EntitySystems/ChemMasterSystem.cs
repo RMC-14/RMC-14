@@ -1,12 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server._RMC14.IconLabel;
 using Content.Server.Chemistry.Components;
 using Content.Server.Labels;
 using Content.Server.Popups;
 using Content.Server.Storage.EntitySystems;
-using Content.Shared._RMC14.Chemistry.ChemMaster;
-using Content.Shared._RMC14.IconLabel;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -42,13 +39,8 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private readonly LabelSystem _labelSystem = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
-        // RMC - Add Icon labels to custom chemical containers
-        [Dependency] private readonly RMCIconLabelSystem _rmcIconLabel = default!;
-        [Dependency] private readonly AppearanceSystem _appearance = default!;
-
         [ValidatePrototypeId<EntityPrototype>]
         private const string PillPrototypeId = "CMPill";
-        private const int PillSize = 2;
 
         public override void Initialize()
         {
@@ -66,7 +58,6 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterReagentAmountButtonMessage>(OnReagentButtonMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterCreatePillsMessage>(OnCreatePillsMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterOutputToBottleMessage>(OnOutputToBottleMessage);
-            SubscribeLocalEvent<ChemMasterComponent, ChangePillBottleColorMessage>(OnChangePillBottleColorMessage);
         }
 
         private void SubscribeUpdateUiState<T>(Entity<ChemMasterComponent> ent, ref T ev)
@@ -87,7 +78,7 @@ namespace Content.Server.Chemistry.EntitySystems
 
             var state = new ChemMasterBoundUserInterfaceState(
                 chemMaster.Mode, chemMaster.SortingType, BuildInputContainerInfo(inputContainer), BuildOutputContainerInfo(outputContainer),
-                bufferReagents, bufferCurrentVolume, chemMaster.PillType, chemMaster.PillBottleColor, chemMaster.PillDosageLimit, chemMaster.PillDosagePrevious, updateLabel);
+                bufferReagents, bufferCurrentVolume, chemMaster.PillType, chemMaster.PillDosageLimit, updateLabel);
 
             _userInterfaceSystem.SetUiState(owner, ChemMasterUiKey.Key, state);
         }
@@ -123,16 +114,6 @@ namespace Content.Server.Chemistry.EntitySystems
             ClickSound(chemMaster);
         }
 
-        private void OnChangePillBottleColorMessage(Entity<ChemMasterComponent> chemMaster, ref ChangePillBottleColorMessage message)
-        {
-            if (message.NewColor > PillbottleColor.Black)
-                return;
-
-            chemMaster.Comp.PillBottleColor = message.NewColor;
-            UpdateUiState(chemMaster);
-            ClickSound(chemMaster);
-        }
-
         private void OnReagentButtonMessage(Entity<ChemMasterComponent> chemMaster, ref ChemMasterReagentAmountButtonMessage message)
         {
             // Ensure the amount corresponds to one of the reagent amount buttons.
@@ -160,7 +141,7 @@ namespace Content.Server.Chemistry.EntitySystems
             var container = _itemSlotsSystem.GetItemOrNull(chemMaster, SharedChemMaster.InputSlotName);
             if (container is null ||
                 !_solutionContainerSystem.TryGetFitsInDispenser(container.Value, out var containerSoln, out var containerSolution) ||
-                !_solutionContainerSystem.TryGetSolution(chemMaster.Owner, SharedChemMaster.BufferSolutionName, out var bufferSolutionEnt, out var bufferSolution))
+                !_solutionContainerSystem.TryGetSolution(chemMaster.Owner, SharedChemMaster.BufferSolutionName, out _, out var bufferSolution))
             {
                 return;
             }
@@ -176,7 +157,7 @@ namespace Content.Server.Chemistry.EntitySystems
                 amount = FixedPoint2.Min(amount, containerSolution.GetReagentQuantity(id));
                 amount = FixedPoint2.Min(amount, bufferSolution.AvailableVolume);
                 _solutionContainerSystem.RemoveReagent(containerSoln.Value, id, amount);
-                _solutionContainerSystem.TryAddReagent(bufferSolutionEnt.Value, id, amount, out _);
+                bufferSolution.AddReagent(id, amount);
             }
 
             UpdateUiState(chemMaster, updateLabel: true);
@@ -236,22 +217,14 @@ namespace Content.Server.Chemistry.EntitySystems
                 return;
 
             _labelSystem.Label(container, message.Label);
-            _appearance.SetData(container, PillBottleVisuals.Color, chemMaster.Comp.PillBottleColor);
-            chemMaster.Comp.PillDosagePrevious = message.Dosage;
 
-            /// RMC - Add Icon Label Text to custom pill bottle
-            if (TryComp(container, out IconLabelComponent? iconLabel))
-            {
-                _rmcIconLabel.SetText((container, iconLabel), "rmc-custom-container-label-text", ("customLabel", message.Label));
-            }
-
-            for (var i = 0; i < number; i++)
+            for (var i = 0; i < message.Number; i++)
             {
                 var item = Spawn(PillPrototypeId, Transform(container).Coordinates);
                 _storageSystem.Insert(container, item, out _, user: user, storage);
                 _labelSystem.Label(item, message.Label);
 
-                _solutionContainerSystem.EnsureSolutionEntity(item, SharedChemMaster.PillSolutionName, out var itemSolution, message.Dosage);
+                _solutionContainerSystem.EnsureSolutionEntity(item, SharedChemMaster.PillSolutionName,out var itemSolution ,message.Dosage);
                 if (!itemSolution.HasValue)
                     return;
 
@@ -292,13 +265,6 @@ namespace Content.Server.Chemistry.EntitySystems
                 return;
 
             _labelSystem.Label(container, message.Label);
-
-            /// RMC - Add Icon Label Text to custom chemical bottle
-            if (TryComp(container, out IconLabelComponent? iconLabel))
-            {
-                _rmcIconLabel.SetText((container, iconLabel), "rmc-custom-container-label-text", ("customLabel", message.Label));
-            }
-
             _solutionContainerSystem.TryAddSolution(soln.Value, withdrawal);
 
             // Log bottle creation by a user
@@ -376,14 +342,14 @@ namespace Content.Server.Chemistry.EntitySystems
             if (!TryComp(container, out StorageComponent? storage))
                 return null;
 
-            var pills = storage.Container.ContainedEntities.Select(pill =>
+            var pills = storage.Container.ContainedEntities.Select((Func<EntityUid, (string, FixedPoint2 quantity)>) (pill =>
             {
                 _solutionContainerSystem.TryGetSolution(pill, SharedChemMaster.PillSolutionName, out _, out var solution);
                 var quantity = solution?.Volume ?? FixedPoint2.Zero;
                 return (Name(pill), quantity);
-            }).ToList();
+            })).ToList();
 
-            return new ContainerInfo(name, _storageSystem.GetCumulativeItemAreas((container.Value, storage)) / PillSize, storage.Grid.GetArea() / PillSize)
+            return new ContainerInfo(name, _storageSystem.GetCumulativeItemAreas((container.Value, storage)), storage.Grid.GetArea())
             {
                 Entities = pills
             };

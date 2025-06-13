@@ -199,6 +199,7 @@
     state: shuttle
   - type: Area
     linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -209,6 +210,7 @@
     state: shuttle2
   - type: Area
     linkedLz: dropship_lz2
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorina
