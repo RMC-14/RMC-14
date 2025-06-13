@@ -83,6 +83,15 @@
     isCorrodible: false
 
 - type: entity
+  parent: RMCBackpackScout
+  id: RMCBackpackSPPCommando
+  name: V86 thermal cloak
+  description: A thermo-optic camouflage cloak commonly used by SPP commando units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/scout_cloak.rsi
+
+- type: entity
   parent: CMSatchel
   id: CMSatchelEngineer
   name: industrial satchel

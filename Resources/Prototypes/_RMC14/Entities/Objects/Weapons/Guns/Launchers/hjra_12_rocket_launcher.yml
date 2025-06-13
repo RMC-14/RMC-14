@@ -188,9 +188,6 @@
   name: HJRA-12 Extreme-Intensity Incendiary Rocket
   description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is an extreme-intensity incendiary rocket.
   components:
-  - type: CartridgeAmmo
-    proto: RMCProjectileRocket84mmIncen
-    deleteOnSpawn: false
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
     layers:
