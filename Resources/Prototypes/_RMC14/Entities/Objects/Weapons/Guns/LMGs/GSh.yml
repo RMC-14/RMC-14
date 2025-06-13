@@ -124,7 +124,7 @@
     accuracy: 95
     thresholds:
     - range: 20
-      falloff: 15
+      falloff: 10
 
 
 - type: Tag
