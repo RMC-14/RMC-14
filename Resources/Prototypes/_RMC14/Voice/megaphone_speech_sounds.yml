@@ -1,0 +1,14 @@
+- type: speechSounds
+  id: RMCMegaphone
+  saySound:
+    path: /Audio/_RMC14/Items/megaphone.ogg
+    params:
+      referenceDistance: 4
+  askSound:
+    path: /Audio/_RMC14/Items/megaphone.ogg
+    params:
+      referenceDistance: 4
+  exclaimSound:
+    path: /Audio/_RMC14/Items/megaphone.ogg
+    params:
+      referenceDistance: 4

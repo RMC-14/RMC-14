@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/Blundir/cmss13/blob/e49bbb12af47e71489d9f1ad935eeff202fe4a68/icons/mob/humans/onmob/items_lefthand_0.dmi, https://github.com/Blundir/cmss13/blob/e49bbb12af47e71489d9f1ad935eeff202fe4a68/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "megaphone"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    }
+  ]
+}
