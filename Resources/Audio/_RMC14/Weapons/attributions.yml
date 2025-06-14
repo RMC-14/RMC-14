@@ -57,3 +57,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/49db80ef5770796bda9056a5e5be54b5eb02d060/sound/weapons/synthpunch1.ogg"
+
+- files: ["dropship_sonic_boom.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/91cf6ebdfb47c650faf7ac72fdfff8cd6fc636a0/sound/weapons/dropship_sonic_boom.ogg"
