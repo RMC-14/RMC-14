@@ -1,5 +1,6 @@
 ﻿using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Marines.ControlComputer;
 
@@ -25,4 +26,14 @@ public sealed partial class MarineControlComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastToggle;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, GibbedMarineInfo> GibbedMarines = new();
+}
+
+[Serializable, NetSerializable]
+public sealed class GibbedMarineInfo
+{
+    public string Name = string.Empty;
+    public string? LastPlayerId;
 }
