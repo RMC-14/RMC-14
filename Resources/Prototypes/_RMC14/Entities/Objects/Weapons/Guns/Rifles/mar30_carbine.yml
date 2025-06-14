@@ -15,6 +15,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/mar30.rsi
   - type: Gun
+    burstCooldown: 0.1665
     shotsPerBurst: 3
   - type: RMCSelectiveFire
     baseFireModes:
