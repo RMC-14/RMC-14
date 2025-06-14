@@ -73,6 +73,7 @@
       - Xeno
   - type: UncloakOnHit
   - type: ExtinguishFire
+    extinguishingPower: 6
   - type: IgnorePredictionHit
 
 - type: entity
@@ -91,6 +92,8 @@
         Heat: 36
   - type: TimedDespawn
     lifetime: 1.0
+  - type: ExtinguishFire
+    extinguishingPower: 18
 
 - type: entity
   parent: XenoAcidSprayWeak
@@ -109,6 +112,8 @@
         Heat: 24
   - type: TimedDespawn
     lifetime: 1.0
+  - type: ExtinguishFire
+    extinguishingPower: 13
 
 - type: entity
   parent: XenoAcidSprayWeak
@@ -129,6 +134,8 @@
         Heat: 14.2
   - type: TimedDespawn
     lifetime: 1.0
+  - type: ExtinguishFire
+    extinguishingPower: 13
 
 - type: entity
   parent: XenoAcidSprayTrap
@@ -149,6 +156,8 @@
         Heat: 12.2
   - type: TimedDespawn
     lifetime: 0.6
+  - type: ExtinguishFire
+    extinguishingPower: 6
 
 - type: entity
   parent: XenoAcidSprayTrap
@@ -169,6 +178,8 @@
         Heat: 21.3
   - type: TimedDespawn
     lifetime: 3.0
+  - type: ExtinguishFire
+    extinguishingPower: 18
 
 - type: entity
   parent: RMCBaseEffect
