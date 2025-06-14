@@ -80,13 +80,6 @@
     showActive: true
   - type: AttachableTemporarySpeedMods
     alteration: Interrupted
-    modifiers:
-    - duration: 1
-      walk: 0.5
-      sprint: 0.357
-    - duration: 2
-      walk: 0.66
-      sprint: 0.526
   - type: AttachableSizeMods
     modifiers:
     - size: 2

@@ -90,10 +90,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 _cmGunSystem.RefreshGunDamageMultiplier(args.Holder);
 
                 if (attachable.Comp.FireModeMods != null)
-                {
                     _rmcSelectiveFireSystem.RefreshFireModes(args.Holder, true);
-                    break;
-                }
 
                 _rmcSelectiveFireSystem.RefreshModifiableFireModeValues(args.Holder);
                 break;
