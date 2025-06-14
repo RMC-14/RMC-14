@@ -1,4 +1,4 @@
-﻿# Divide original costs by 37.5 each - except plastic which is 20
+# Divide original costs by 37.5 each - except plastic which is 20
 - type: latheRecipe
   id: CMSyringe
   result: CMSyringe
@@ -108,6 +108,13 @@
 - type: latheRecipe
   id: RMCSyringeCase
   result: RMCSyringeCase
+  completetime: 4
+  materials:
+    RMCPlastic: 50 # 1000
+
+- type: latheRecipe
+  id: CMSurgicalCase
+  result: CMSurgicalCase
   completetime: 4
   materials:
     RMCPlastic: 50 # 1000
