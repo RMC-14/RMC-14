@@ -16,8 +16,6 @@
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/mar30.rsi
   - type: Gun
     shotsPerBurst: 3
-  - type: WieldDelay
-    baseDelay: 0.4
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
