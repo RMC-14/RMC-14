@@ -9,12 +9,14 @@ public sealed class BarbedSystem : SharedBarbedSystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<BarbedComponent, ConstructionChangeEntityEvent>(OnBarbedEntityConstructionChange);
     }
+
     private void OnBarbedEntityConstructionChange(EntityUid ent, BarbedComponent comp, ConstructionChangeEntityEvent args)
     {
         var newComp = EnsureComp<BarbedComponent>(args.New);
         newComp.IsBarbed = comp.IsBarbed;
-        base.UpdateAppearance((args.New, newComp));
+        base.UpdateBarricade((args.New, newComp));
     }
 }

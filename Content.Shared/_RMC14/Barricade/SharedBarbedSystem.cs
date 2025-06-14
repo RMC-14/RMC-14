@@ -13,6 +13,7 @@ using Content.Shared.Stacks;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 
@@ -21,6 +22,7 @@ namespace Content.Shared._RMC14.Barricade;
 public abstract class SharedBarbedSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
@@ -124,12 +126,9 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         barbed.Comp.IsBarbed = true;
         Dirty(barbed);
+        UpdateBarricade(barbed);
 
-        if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
-            _physics.AddCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int) CollisionGroup.BarbedBarricade);
-
-        UpdateAppearance(barbed);
-
+        _audio.PlayPredicted(barbed.Comp.BarbSound, barbed.Owner, args.User);
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), barbed.Owner, args.User);
     }
 
@@ -140,26 +139,23 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         args.Handled = true;
 
+        barbed.Comp.IsBarbed = false;
+        Dirty(barbed);
+        UpdateBarricade(barbed);
+
+        _audio.PlayPredicted(barbed.Comp.CutSound, barbed.Owner, args.User);
+        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
+
         if (_netManager.IsClient)
             return;
 
         var coordinates = _transform.GetMoverCoordinates(barbed);
         EntityManager.SpawnEntity(barbed.Comp.Spawn, coordinates);
-
-        barbed.Comp.IsBarbed = false;
-        Dirty(barbed);
-
-        if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
-            _physics.RemoveCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int) CollisionGroup.BarbedBarricade);
-
-        UpdateAppearance(barbed);
-
-        _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
     }
 
     private void OnDoorStateChanged(Entity<BarbedComponent> barbed, ref DoorStateChangedEvent args)
     {
-        UpdateAppearance(barbed);
+        UpdateBarricade(barbed);
     }
 
     private void OnClimbAttempt(Entity<BarbedComponent> barbed, ref AttemptClimbEvent args)
@@ -183,10 +179,10 @@ public abstract class SharedBarbedSystem : EntitySystem
         newComp.IsBarbed = barbed.Comp.IsBarbed;
 
         Dirty(args.New, newComp);
-        UpdateAppearance((args.New, newComp));
+        UpdateBarricade((args.New, newComp));
     }
 
-    protected void UpdateAppearance(Entity<BarbedComponent> barbed)
+    protected void UpdateBarricade(Entity<BarbedComponent> barbed)
     {
         var open = TryComp(barbed, out DoorComponent? door) && door.State == DoorState.Open;
 
@@ -196,6 +192,15 @@ public abstract class SharedBarbedSystem : EntitySystem
             (true, false) => BarbedWireVisuals.WiredClosed,
             _ => BarbedWireVisuals.UnWired,
         };
+
+        // Set fixtures
+        if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
+        {
+            if (barbed.Comp.IsBarbed)
+                _physics.AddCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int)CollisionGroup.BarbedBarricade);
+            else
+                _physics.RemoveCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int)CollisionGroup.BarbedBarricade);
+        }
 
         _appearance.SetData(barbed, BarbedWireVisualLayers.Wire, visual);
     }
