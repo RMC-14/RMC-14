@@ -161,6 +161,17 @@
   id: RMCWelderIndustrial
   name: industrial blowtorch
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/welder_industrial.rsi
+    layers:
+    - state: icon
+      map: ["enum.ToggleVisuals.Toggled"]
+    - state: welder_on
+      map: ["enum.ToggleVisuals.Layer"]
+      visible: false
+      shader: unshaded
+  - type: Item
+    sprite: _RMC14/Objects/Tools/welder_industrial.rsi
   - type: RequiresEyeProtection
   - type: SolutionContainerManager
     solutions:
