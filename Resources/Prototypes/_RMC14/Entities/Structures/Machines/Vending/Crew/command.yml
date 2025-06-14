@@ -272,11 +272,11 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    # - name: Helmet Visors # TODO RMC14 Port Helmet Welding Visor
-    #   entries:
-    #   - id: RMCHelmetWeldingVisor
-    #     points: 5
-    #     recommended: true
+    - name: Helmet Visors 
+      entries:
+        - id: RMCVisorWelding
+          points: 5
+          recommended: true
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight
@@ -303,8 +303,6 @@
         points: 15
     - name: Other Supplies
       entries:
-      - id: RMCVisorWelding
-        points: 5
       - id: CMHandsInsulated
         points: 3
       - id: RMCPouchMacheteFilled
@@ -327,8 +325,6 @@
         points: 2
       - id: RMCWhistle
         points: 5
-      - id: RMCFlashlight
-        points: 1
       - id: RMCFlashlight
         points: 1
       - id: RMCSynthResetKey
