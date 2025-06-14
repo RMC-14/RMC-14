@@ -1,0 +1,155 @@
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolCC55
+  name: CC55 combat pistol # TODO RMC14 sounds
+  description: A pistol carried by some civilians, this one seems poorly maintained.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m77.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m77.rsi
+  - type: Gun
+    correspondentProof: true
+    shotsPerBurst: 3
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_88m4_v7.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    scatterWielded: 8
+    scatterUnwielded: 8
+    baseFireRate: 4
+    burstScatterMult: 4
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolCC55
+        startingItem: CMMagazinePistolCC55
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: Tag
+    tags:
+    - RMCWeaponPistolCC55
+
+
+- type: entity
+  parent: RMCWeaponPistolCC55
+  id: RMCWeaponPistolCC55Empty
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolCC55
+
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: CMMagazinePistolCC55
+  name: CC55 magazine (8mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - CMMagazinePistolCC55
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistol8mm
+    proto: CMCartridgePistolCC55
+    capacity: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m77.rsi
+    layers:
+    - state: base_ap
+      map: ["enum.GunVisualLayers.Base"]
+    - state: base_ap-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: base_ap
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistolCC55
+  name: bullet (8mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+
+- type: entity
+  id: CMCartridgePistolCC55
+  name: cartridge (8mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgePistol8mm
+  - type: CartridgeAmmo
+    proto: CMBulletPistolCC55
+
+- type: Tag
+  id: CMMagazinePistolCC55
+- type: Tag
+  id: CMCartridgePistol8mm
+- type: Tag
+  id: RMCWeaponPistolCC55
+
+- type: entity
+  parent: BaseStorageItem
+  id: CC55Case
+  name: CC55 pistol case
+  description: A box containing a CC55 pistol and a magazine
+  components:
+  - type: Item
+    size: Tiny
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCWeaponPistolCC55
+      - CMMagazinePistolCC55
+  - type: Sprite
+    noRot: false
+    sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+    layers:
+    - state: closed
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/D18case.rsi
+    state: closed
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,1
+    whitelist:
+      tags:
+      - RMCWeaponPistolCC55
+      - CMMagazinePistolCC55
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolCC55
+    - id: CMMagazinePistolCC55
