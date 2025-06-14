@@ -505,7 +505,6 @@
     solution: pen
   - type: MedicallyUnskilledDoAfter
 
-
 - type: entity
   parent: RMCMedicAutoInjectorBase
   id: RMCMedicAutoInjectorCS5
