@@ -26,6 +26,29 @@
     tags:
     - RMCAmmoBox
 
+# Non-Deployable version (for small mag boxes like SOCOM/Buckshot)
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCSmallBoxMagazineBase
+  name: generic magazine box (? x ?)
+  description: A box of magazines.
+  components:
+  - type: Item
+    size: Huge
+  - type: ItemSlots
+  - type: Appearance
+  - type: RMCUnfoldCardboard
+    spawns:
+    - id: RMCSheetCardboard1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Tag
+    tags:
+    - RMCAmmoBox
+
 # Rifle Base
 - type: entity
   abstract: true
@@ -216,6 +239,42 @@
           Medium: { state: shell_ammo_medium_color, visible: true }
           High: { state: shell_ammo_high_color, visible: true }
           Full: { state: shell_ammo_full_color, visible: true }
+
+  # Small Shells Base
+- type: entity
+  abstract: true
+  parent: RMCSmallBoxMagazineBase
+  id: RMCBoxMagazineShellBaseSmall
+  name: generic shell bundle box (? x ?)
+  description: A small box of bundled shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: smallshell_box
+      color: "#ff0000"
+    - state: smallshell_box_12g
+      color: "#00ff00"
+    - state: smallshell_ammo_12g_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_12g_full_color
+      color: "#0000ff"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: smallshell_ammo_12g_full_base, visible: false }
+          Low: { state: smallshell_ammo_12g_low_base, visible: true }
+          Medium: { state: smallshell_ammo_12g_medium_base, visible: true }
+          High: { state: smallshell_ammo_12g_high_base, visible: true }
+          Full: { state: smallshell_ammo_12g_full_base, visible: true }
+        enum.CMItemSlotsLayers2.Fill:  # Second fill state for coloured shells
+          Empty: { state: smallshell_ammo_12g_full_color, visible: false }
+          Low: { state: smallshell_ammo_12g_low_color, visible: true }
+          Medium: { state: smallshell_ammo_12g_medium_color, visible: true }
+          High: { state: smallshell_ammo_12g_high_color, visible: true }
+          Full: { state: smallshell_ammo_12g_full_color, visible: true }
 
 # Supply Base
 - type: entity
@@ -1120,7 +1179,7 @@
         tags:
         - RMCSpeedLoader44Marksman
 
-# -- SHELL BOXES --
+# -- LARGE SHELL BOXES --
 
 # Buckshot
 - type: entity
@@ -1138,7 +1197,7 @@
       color: "#944444"
     - state: shell_ammo_full_base # Default full ammo sprite
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: shell_ammo_full_base # Default full ammo sprite & color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#944444"
     - state: shell_box_buckshot # Type Markings to place over Box
@@ -1440,6 +1499,337 @@
       whitelist:
         tags:
         - RMCShellShotgunIncendiaryBuckshot
+
+# -- SMALL SHELL BOXES --
+
+# Buckshot
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunBuckshotEmpty
+  name: box of buckshot shells
+  description: A box filled with buckshot spread shotgun shells. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBuckshotEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#944444"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_12g_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_12g_full_color
+      color: "#944444"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBuckshot
+
+- type: entity
+  parent: RMCBoxShotgunBuckshotEmpty
+  id: RMCBoxShotgunBuckshot
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunBuckshot
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBuckshot
+
+# Slugs
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunSlugsEmpty
+  name: box of slug shells
+  description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsSlugsEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#578e75"
+    - state: shell_box_slugs
+      color: "#e0d5c2"
+    - state: smallshell_ammo_12g_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_12g_full_color
+      color: "#578e75"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunSlugs
+
+- type: entity
+  parent: RMCBoxShotgunSlugsEmpty
+  id: RMCBoxShotgunSlugs
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunSlugs
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunSlugs
+
+# Incendiary
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunIncendiaryEmpty
+  name: box of incendiary slug shells
+  description: A box filled with self-detonating incendiary shotgun rounds. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsIncendiaryEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#c6cdd3"
+    - state: shell_box_incendiary
+      color: "#b8533d"
+    - state: smallshell_box_marking
+      color: "#ffcb26"
+    - state: smallshell_ammo_12g_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_12g_full_color
+      color: "#ffcb26"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiary
+
+- type: entity
+  parent: RMCBoxShotgunIncendiaryEmpty
+  id: RMCBoxShotgunIncendiary
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunIncendiary
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiary
+
+# Beanbag
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunBeanbagEmpty
+  name: box of beanbag shells
+  description: A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBeanbagEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#5786be"
+    - state: shell_box_beanbag
+      color: "#e0d5c2"
+    - state: smallshell_ammo_12g_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_12g_full_color
+      color: "#5786be"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBeanbag
+
+- type: entity
+  parent: RMCBoxShotgunBeanbagEmpty
+  id: RMCBoxShotgunBeanbag
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunBeanbag
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBeanbag
+
+# Flechette
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunFlechetteEmpty
+  name: box of flechette shells
+  description: A box filled with flechette shotgun shells. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsFlechetteEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#6551a0"
+    - state: shell_box_flechette
+      color: "#e0d5c2"
+    - state: smallshell_ammo_12g_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_12g_full_color
+      color: "#6551a0"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunFlechette
+
+- type: entity
+  parent: RMCBoxShotgunFlechetteEmpty
+  id: RMCBoxShotgunFlechette
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunFlechette
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunFlechette
+
+# IncendiaryBuckshot
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunIncendiaryBuckshotEmpty
+  name: box of incendiary buckshot shells
+  description: A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsIncendiaryBuckshotEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#c6cdd3"
+    - state: shell_box_incendiary
+      color: "#b8533d"
+    - state: smallshell_box_marking
+      color: "#e49331"
+    - state: smallshell_ammo_12g_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_12g_full_color
+      color: "#e49331"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiaryBuckshot
+
+- type: entity
+  parent: RMCBoxShotgunIncendiaryBuckshotEmpty
+  id: RMCBoxShotgunIncendiaryBuckshot
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunIncendiaryBuckshot
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiaryBuckshot
+
+# Breaching
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunBreachingEmpty
+  name: box of breaching shells
+  description: A box filled with breaching shotgun shells. 16 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBreachingEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#595959"
+    - state: shell_box_breaching
+      color: "#e0d5c2"
+    - state: smallshell_ammo_12g_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_12g_full_color
+      color: "#595959"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+  - type: Tag
+    tags:
+    - RMCBoxShotgunBreaching
+
+- type: entity
+  parent: RMCBoxShotgunBreachingEmpty
+  id: RMCBoxShotgunBreaching
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunBreaching
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+  - type: Tag
+    tags:
+    - RMCBoxShotgunBreaching
+
+- type: Tag
+  id: RMCBoxShotgunBreaching
+
+# Buckshot 8g
+- type: entity
+  parent: RMCBoxMagazineShellBaseSmall
+  id: RMCBoxShotgunBuckshot8gEmpty
+  name: box of buckshot shells
+  suffix: 8g
+  description: A box filled with buckshot spread shotgun shells. 8 Gauge.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsSlugsEmpty
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#944444"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_8g_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: smallshell_ammo_full_8g_color
+      color: "#944444"
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+  - type: CMItemSlots
+    count: 5
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBuckshot
 
 # -- SUPPLY BOXES --
 
