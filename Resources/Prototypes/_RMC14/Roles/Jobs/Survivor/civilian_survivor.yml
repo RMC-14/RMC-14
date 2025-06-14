@@ -101,7 +101,7 @@
     - [ CMPackFlare ]
     - [ WeaponNailgun ]
     - [ RMCFireAxe ]
-    - [ CMWelder ] # TODO RMC14 industrial welder
+    - [ RMCWelderIndustrial ]
     - [ CMAdvFirstAidKitFilled ]
     randomWeapon:
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
