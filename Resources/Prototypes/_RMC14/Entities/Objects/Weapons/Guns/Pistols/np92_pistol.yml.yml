@@ -1,0 +1,251 @@
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolNP92
+  name: NP92 pistol
+  description: The standard issue sidearm of the SPP. The NP92 is a small but powerful sidearm, well-liked by most it is issued to, although some prefer the weapon it was meant to replace, the Type 73. Takes 12 round magazines.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolNP92
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/np92.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/np92.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Gun
+    shotsPerBurst: 3
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_88m4_v7.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 5
+    scatterUnwielded: 5
+    baseFireRate: 3.5
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolNP92
+          - RMCMagazinePistolNP92Extended
+        startingItem: RMCMagazinePistolNP92
+  - type: GunDamageModifier
+    multiplier: 1.15
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.625, 0.125
+      rmc-aslot-rail: -0.03, 0.185
+
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolNPZ92
+  name: NPZ92 pistol
+  description: The NPZ92 is a version of the NP92 that includes an integrated suppressor, issued sparingly to Kommando units.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolNPZ92
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/npz92.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/npz92.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Gun
+    shotsPerBurst: 3
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_88m4_v7.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 5
+    scatterUnwielded: 5
+    baseFireRate: 3.5
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolNP92 # TODO RMC14 - Add Tranq mags
+        startingItem: RMCMagazinePistolNP92
+  - type: GunDamageModifier
+    multiplier: 1.15
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentSuppressorNPZ92
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressorNPZ92
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.625, 0.125
+      rmc-aslot-rail: -0.13, 0.185
+
+- type: entity
+  parent: RMCWeaponPistolNP92
+  id: RMCWeaponPistolNP92Empty
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolNP92
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolNP92
+  name: NP92 magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolNP92
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolNP92
+    proto: RMCCartridgePistolNP92
+    capacity: 12
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/np92.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolNP92Extended
+  name: NP92 extended magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolNP92Extended
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolNP92
+    proto: RMCCartridgePistolNP92
+    capacity: 36
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/np92.rsi
+    layers:
+    - state: ext
+      map: ["enum.GunVisualLayers.Base"]
+    - state: ext-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: ext
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolNP92
+  name: bullet (9mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+
+- type: entity
+  id: RMCCartridgePistolNP92
+  name: cartridge (9mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolNP92
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolNP92
+
+- type: Tag
+  id: RMCWeaponPistolNP92
+
+- type: Tag
+  id: RMCWeaponPistolNPZ92
+
+- type: Tag
+  id: RMCMagazinePistolNP92
+
+- type: Tag
+  id: RMCMagazinePistolNP92Extended
+
+- type: Tag
+  id: RMCCartridgePistolNP92

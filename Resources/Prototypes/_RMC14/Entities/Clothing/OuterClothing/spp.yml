@@ -85,6 +85,9 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
+  - type: Tag
+    tags:
+      - RMCScoutArmor
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -104,7 +107,7 @@
     sprintModifier: 0.62
   - type: CMArmor
     melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH (melee)
-    bullet: 35 # CLOTHING_ARMOR_HIGHPLUS (bullets) 
+    bullet: 35 # CLOTHING_ARMOR_HIGHPLUS (bullets)
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 30 # CLOTHING_ARMOR_HIGH
   - type: Storage

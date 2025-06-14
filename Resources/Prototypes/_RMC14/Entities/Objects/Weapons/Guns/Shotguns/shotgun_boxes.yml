@@ -253,7 +253,6 @@
 - type: Tag
   id: RMCBoxShotgunBreaching
 
-
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunBuckshot8g
@@ -282,3 +281,148 @@
     - state: smallshell_empty
       map: [ "empty" ]
       color: "#944444"
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunHeavyBuckshot
+  name: box of heavy buckshot shells
+  description: A box filled with heavy buckshot spread shotgun shells. 8 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunHeavyBuckshot
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunHeavyBuckshot
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#681a1a"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#681a1a"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#681a1a"
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunHeavySlugs
+  name: box of heavy slugs shells
+  description: A box filled with heavy shotgun shells. A timeless classic.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunHeavySlugs
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunHeavySlugs
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#1e4c1e"
+    - state: shell_box_slugs
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#1e4c1e"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#1e4c1e"
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunHeavyBeanbagSlugs
+  name: box of heavy beanbag slugs shells
+  description: A box filled with heavy beanbag shotgun shells used for non-lethal crowd control. 8 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunHeavyBeanbag
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunHeavyBeanbag
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#162f41"
+    - state: shell_box_beanbag
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#162f41"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#162f41"
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunHeavyFlechette
+  name: box of heavy flechette shells
+  description: A box filled with heavy flechette shotgun shells. 8 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunHeavyFlechette
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunHeavyFlechette
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#4b1c68"
+    - state: shell_box_flechette
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#4b1c68"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#4b1c68"
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunHeavyDragonbreath
+  name: box of dragonbreath buckshot shells
+  description: A box filled with dragonbreath buckshot shotgun shells. 8 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunIncendiaryHeavyBuckshot
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunIncendiaryHeavyBuckshot
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#757575"
+    - state: shell_box_incendiary
+      color: "#ab4008"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#ab4008"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#757575"

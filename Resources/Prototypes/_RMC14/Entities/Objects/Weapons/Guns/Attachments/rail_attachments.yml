@@ -488,6 +488,25 @@
     actionDesc: Lets you see further.
 
 - type: entity
+  parent: RMCM96SIntegratedScope
+  id: RMCType88IntegratedScope
+  name: Type 88 integrated scope
+  description: This isn't supposed to come off the gun. How did you get it?
+  components:
+  - type: Sprite
+    state: type88_scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCType88IntegratedScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: type88_scope
+    actionName: Look through the Type 88's Integrated Scope
+    actionDesc: Lets you see further.
+
+- type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
@@ -581,6 +600,9 @@
 
 - type: Tag
   id: RMCXM43E1IntegratedScope
+
+- type: Tag
+  id: RMCType88IntegratedScope
 
 - type: Tag
   id: RMCAttachmentXS-9

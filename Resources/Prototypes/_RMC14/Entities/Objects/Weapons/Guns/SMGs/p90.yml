@@ -89,7 +89,7 @@
     multiplier: 1.2
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: RMCMagazineSMGP90
   name: "FN P90 magazine (5.7×28mm)"
   description: "A 5.7×28mm magazine for the FN P90."
