@@ -1,4 +1,6 @@
-# Divide cm13 numbers by 37.5 to get an accurate conversion
+# Divide original costs by 37.5 each - except plastic which is 20
+# For all non-stackable/material-sheet items, multiply original costs by 1.25 rounded down
+# Example: Bucket is 2000 x 1.25 = 2500 / 37.5 = 67 CMSteel
 - type: latheRecipe
   id: RMCBucket
   result: RMCBucket
@@ -142,48 +144,48 @@
   result: CMScalpel
   completetime: 4
   materials:
-    CMSteel: 333 # 12500
-    CMGlass: 167 # 6250
+    CMSteel: 267 # 10000
+    CMGlass: 133 # 5000
 
 - type: latheRecipe
   id: CMCircularSaw
   result: CMCircularSaw
   completetime: 4
   materials:
-    CMSteel: 667 # 25000
-    CMGlass: 333 # 12500
+    CMSteel: 533 # 20000
+    CMGlass: 267 # 10000
 
 - type: latheRecipe
   id: CMSurgicalDrill
   result: CMSurgicalDrill
   completetime: 4
   materials:
-    CMSteel: 500 # 18750
-    CMGlass: 333 # 12500
+    CMSteel: 400 # 15000
+    CMGlass: 267 # 10000
 
 - type: latheRecipe
   id: CMRetractor
   result: CMRetractor
   completetime: 4
   materials:
-    CMSteel: 333 # 12500
-    CMGlass: 167 # 6250
+    CMSteel: 267 # 10000
+    CMGlass: 133 # 5000
 
 - type: latheRecipe
   id: CMCautery
   result: CMCautery
   completetime: 4
   materials:
-    CMSteel: 167 # 6250
-    CMGlass: 83 # 3125
+    CMSteel: 133 # 5000
+    CMGlass: 67 # 2500
 
 - type: latheRecipe
   id: CMHemostat
   result: CMHemostat
   completetime: 4
   materials:
-    CMSteel: 167 # 6250
-    CMGlass: 83 # 3125
+    CMSteel: 133 # 5000
+    CMGlass: 67 # 2500
 
 - type: latheRecipe
   id: CMBeaker
