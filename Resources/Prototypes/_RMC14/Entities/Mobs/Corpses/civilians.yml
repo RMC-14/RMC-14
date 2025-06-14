@@ -152,11 +152,13 @@
   id: RMCGearCorpseSecurity
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
-    back: CMBackpackSecurity
+    back: CMSatchelSecurity
+    head: RMCArmorHelmetSecurity
+    outerClothing: RMCArmorSecurity
     shoes: RMCShoesJackboots
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
-    id: CMIDCardColonist
+    id: CMIDCardColonistSecurity
     ears: CMHeadsetColony
     belt: CMBeltSecurityMPFilled
   storage:
