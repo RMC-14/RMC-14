@@ -127,6 +127,8 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
+      - id: CMMagazineRifleM4SPRExt
+        points: 10
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -137,12 +139,12 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
-      #- id: M44 Heavy Speedloader
-      #  points: 10
+      - id: RMCSpeedLoader44Heavy
+        points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
-      #- id: M1984 Hollow Point magazine
-      #  points: 5
+      - id: RMCMagazinePistolM1984HP
+        points: 5
       - id: RMCMagazinePistolM1984AP
         points: 5
       - id: CMMagazinePistolMK80

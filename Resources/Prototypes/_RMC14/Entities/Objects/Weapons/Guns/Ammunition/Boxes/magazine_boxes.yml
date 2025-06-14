@@ -888,6 +888,47 @@
   - type: CMItemSlots
     startingItem: RMCMagazinePistolM1984AP
 
+# M1984 HP
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolM1984HPEmpty
+  name: magazine box (HP M1984 x 16)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM1984HPEmpty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#b2976e"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#9C4E00"
+    - state: pistol_box_1984
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#6A3200"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#b2976e"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#6A3200"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM1984HP
+
+- type: entity
+  parent: RMCBoxMagazinePistolM1984HPEmpty
+  id: RMCBoxMagazinePistolM1984HP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM1984HP
+
 # MK80 REG
 - type: entity
   parent: RMCBoxMagazinePistolBase
@@ -1119,6 +1160,53 @@
       whitelist:
         tags:
         - RMCSpeedLoader44Marksman
+
+# M44 Heavy
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazineRevolverM44HeavyEmpty
+  name: speedloader box (Heavy M44 x 16)
+  description: A box of revolver speedloaders.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRevolverM44HeavyEmpty
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#727e90"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#7866FF"
+    - state: pistol_box_44
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7866FF"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#727e90"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7866FF"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoader44Heavy
+
+- type: entity
+  parent: RMCBoxMagazineRevolverM44HeavyEmpty
+  id: RMCBoxMagazineRevolverM44Heavy
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoader44Heavy
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoader44Heavy
 
 # -- SHELL BOXES --
 
