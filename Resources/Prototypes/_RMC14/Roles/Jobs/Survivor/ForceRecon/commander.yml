@@ -39,6 +39,7 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: RMCPointing
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon-co
     - type: CommandAccent
