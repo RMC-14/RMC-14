@@ -16,10 +16,10 @@ public sealed partial class AttachableTemporarySpeedModsComponent : Component
     public List<TemporarySpeedModifierSet> Modifiers = new();
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SlowDuration = TimeSpan.FromSeconds(2);
+    public TimeSpan SlowDuration = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SuperSlowDuration = TimeSpan.FromSeconds(1);
+    public TimeSpan SuperSlowDuration = TimeSpan.FromSeconds(2);
 }
 
 
