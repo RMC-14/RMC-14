@@ -158,8 +158,8 @@
     shoes: RMCShoesJackboots
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
-    id: CMIDCardColonist
-    ears: CMIDCardColonistSecurity
+    id: CMIDCardColonistSecurity
+    ears: CMHeadsetColony
     belt: CMBeltSecurityMPFilled
   storage:
     back:
