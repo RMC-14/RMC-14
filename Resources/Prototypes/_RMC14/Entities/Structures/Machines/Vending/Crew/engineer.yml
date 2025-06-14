@@ -20,11 +20,15 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMHeadsetEngineer
       - id: CMMRE
         name: MRE
       # map
+    - name: Gloves
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
