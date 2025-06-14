@@ -6,10 +6,24 @@
   components:
   - type: EncryptionKey
     channels:
+    - CMB
     - MarineCommon
     - MarineCommand
     - MarineMedical
     - MarineIntel
+    - Colony
+    defaultChannel: CMB
+  - type: Sprite
+    state: cap_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyBureauDamaged
+  name: damaged bureau encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - CMB
     - Colony
     defaultChannel: Colony
   - type: Sprite
