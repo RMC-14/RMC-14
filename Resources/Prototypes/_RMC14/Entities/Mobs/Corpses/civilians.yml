@@ -362,7 +362,7 @@
     shoes: RMCBootsPMCFilled
     mask: RMCMaskBalaclava
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressWeYaColony
+    ears: RMCHeadsetDistressWeYa
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchToolsFill
   storage:
@@ -386,7 +386,7 @@
 - type: startingGear
   id: RMCGearCorpseWeYaManager # TODO RMC14 manager jacket, jumpsuit and hat, lockable satchel
   equipment:
-    ears: RMCHeadsetDistressWeYaColony
+    ears: RMCHeadsetDistressWeYa
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateBlack

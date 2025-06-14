@@ -51,7 +51,7 @@
 - type: startingGear
   id: RMCGearCorporateExecutiveSupervisor
   equipment:
-    ears: RMCHeadsetDistressWeYaColony # TODO RMC14 tape recorder
+    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateBlack
@@ -120,7 +120,7 @@
 - type: startingGear
   id: RMCGearCorporateExecutiveSpecialist
   equipment:
-    ears: RMCHeadsetDistressWeYaColony # TODO RMC14 tape recorder
+    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlue
     outerClothing: RMCJacketCorporateBlue
