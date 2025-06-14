@@ -36,6 +36,8 @@
       - id: CMWebbingPouch
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: CMWebbingSurgicalBlue
+      - id: CMWebbingSurgicalGreen
     - name: Shoes
       choices: { RMCShoes: 1 }
       entries:
