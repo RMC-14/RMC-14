@@ -19,8 +19,8 @@
         key: SeeingRainbows
         component: SeeingRainbows
         type: Add
-        time: 0.5 #TODO max 10
-        refresh: false
+        time: 10 #0.5/s is too slow
+        refresh: true #10s cap
       - !type:Jitter
         conditions:
         - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
@@ -33,6 +33,7 @@
         component: RMCUnconscious
         type: Add
         time: 20
+        refresh: false
 
 - type: reagent
   parent: RMCSpaceDrugs
@@ -52,17 +53,18 @@
         key: SeeingRainbows
         component: SeeingRainbows
         type: Add
-        time: 0.75 #TODO max 15
-        refresh: false
+        time: 15 #0.75/s is too slow
+        refresh: true #15s cap
       - !type:Jitter
         conditions:
-        - !type:ReagentThreshold #TODO Hallucinations +5/s
+        - !type:ReagentThreshold #TODO Hallucinations +5 no max at 30 OD
           min: 30                #TODO RandomWalk at 30 OD
       - !type:GenericStatusEffect
         conditions:
-        - !type:ReagentThreshold #TODO 0.75 brain damage/tick at 50 OD
+        - !type:ReagentThreshold #TODO 0.75 brain damage/s 50 OD
           min: 50
         key: Unconscious
         component: RMCUnconscious
         type: Add
         time: 20
+        refresh: false
