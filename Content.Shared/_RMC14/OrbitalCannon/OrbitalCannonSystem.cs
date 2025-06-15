@@ -14,13 +14,17 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Destructible;
 using Content.Shared.Ghost;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -42,6 +46,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
@@ -50,6 +55,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -165,7 +171,48 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
     private void OnWarheadOrbitalBombardmentFire(Entity<OrbitalCannonWarheadComponent> ent, ref OrbitalBombardmentFireEvent args)
     {
-        Spawn(ent.Comp.Explosion, args.Coordinates);
+        var coordinates = _transform.ToCoordinates(args.Coordinates);
+
+        // chck for indestructible walls at impact location and try to find alternative
+        if (TileHasIndestructibleWalls(coordinates))
+        {
+            var found = false;
+            var adjacentOffsets = new Vector2i[]
+            {
+                new(-1, -1), new(0, -1), new(1, -1),  // Top row
+                new(-1,  0),             new(1,  0),  // Middle row (excluding center)
+                new(-1,  1), new(0,  1), new(1,  1)   // Bottom row
+            };
+
+            foreach (var offset in adjacentOffsets)
+            {
+                var testMapCoordinates = args.Coordinates.Offset(offset);
+                if (!_rmcMap.TryGetTileDef(testMapCoordinates, out var tile) ||
+                    tile.ID == ContentTileDefinition.SpaceID)
+                    continue;
+
+                var testCoordinates = _transform.ToCoordinates(testMapCoordinates);
+                if (!_area.CanOrbitalBombard(testCoordinates, out var roofed))
+                    continue;
+
+                if (!TileHasIndestructibleWalls(testCoordinates))
+                {
+                    coordinates = testCoordinates;
+                    Log.Info($"Orbital bombardment impact redirected due to indestructible wall at impact site");
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                // No valid alternative found, warhead fizzles out like in BYOND
+                Log.Info($"Orbital bombardment impact blocked by indestructible walls, no valid alternative found");
+                return;
+            }
+        }
+
+        Spawn(ent.Comp.Explosion, coordinates);
     }
 
     private void OnFuelPowerLoaderInteract(Entity<OrbitalCannonFuelComponent> ent, ref PowerLoaderInteractEvent args)
@@ -378,6 +425,24 @@ public sealed class OrbitalCannonSystem : EntitySystem
         _appearance.SetData(cannon, OrbitalCannonVisuals.Base, cannon.Comp.Status);
         var ev = new OrbitalCannonChangedEvent(cannon, CannonHasWarhead(cannon), CannonGetFuel(cannon));
         RaiseLocalEvent(cannon, ref ev, true);
+    }
+
+    private bool TileHasIndestructibleWalls(EntityCoordinates coordinates)
+    {
+        var anchoredEntities = _rmcMap.GetAnchoredEntitiesEnumerator(coordinates);
+
+        while (anchoredEntities.MoveNext(out var entity))
+        {
+            // This part is shitty because there might be a wall that just... doesn't exactly go with this logic. Hope it works.
+            if (HasComp<TagComponent>(entity) &&
+                _tags.HasTag(entity, "Wall") &&
+                !EntityManager.HasComponent(entity, EntityManager.ComponentFactory.GetRegistration("Destructible")))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public bool Fire(Entity<OrbitalCannonComponent> cannon, Vector2i fireCoordinates, EntityUid user, EntityUid squad)

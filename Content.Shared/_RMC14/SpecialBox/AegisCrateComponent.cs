@@ -44,6 +44,11 @@ public enum AegisCrateState
     Open
 }
 
+public enum AegisCrateVisuals
+{
+    State
+}
+
 public enum AegisCrateVisualLayers
 {
     Base
