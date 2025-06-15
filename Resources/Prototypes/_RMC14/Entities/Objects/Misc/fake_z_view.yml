@@ -5,4 +5,5 @@
   - type: Sprite
     sprite: _RMC14/Objects/Misc/fake_z_view.rsi
     state: fake
+    drawdepth: FloorTiles
   - type: Appearance
