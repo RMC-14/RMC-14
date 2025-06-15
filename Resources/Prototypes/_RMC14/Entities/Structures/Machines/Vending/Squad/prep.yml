@@ -201,7 +201,7 @@
         amount: 15
     - name: Pouches
       entries:
-      - id: RMCPouchBayonet
+      - id: RMCPouchBayonetFill
         name: Bayonet Sheath (Full)
         amount: 15
       - id: RMCPouchFirstAidSplintsGauzeOintment
