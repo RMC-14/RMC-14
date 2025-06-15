@@ -4,7 +4,7 @@
    parent: CMClosetBio
    components:
    - type: StorageFill
-     contents: []
+     contents:
        - id: RMCSuitBioGeneral
        - id: RMCHoodBioGeneral
 
