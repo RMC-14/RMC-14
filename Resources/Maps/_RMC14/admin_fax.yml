@@ -120,7 +120,7 @@ entities:
   - uid: 2
     components:
     - type: MetaData
-      name: grid
+      name: Admin Fax
     - type: Transform
       pos: 26.843964,-19.422953
       parent: 1
@@ -202,6 +202,8 @@ entities:
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+      inherent: True
+      enabled: True
     - type: DecalGrid
       chunkCollection:
         version: 2
