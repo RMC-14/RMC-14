@@ -405,7 +405,6 @@
         amount: 1
     - name: Flare and light
       entries:
-#      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
       - id: RMCBoxFlashlights
