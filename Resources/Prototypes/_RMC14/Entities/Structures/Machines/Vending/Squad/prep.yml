@@ -1,5 +1,4 @@
 # SQUAD PREPARATION
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechGuns
@@ -84,7 +83,6 @@
       - id: CMPackFlare
         amount: 10
         recommended: true
-
 
 - type: entity
   parent: ColMarTechBase
@@ -364,7 +362,6 @@
         amount: 4
       - id: RMCHornetShellM74AGMS
         amount: 4
-
 
 - type: entity
   parent: ColMarTechBase
