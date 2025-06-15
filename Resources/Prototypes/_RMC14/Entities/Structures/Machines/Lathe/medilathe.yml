@@ -123,9 +123,6 @@
 - type: latheRecipePack
   id: RMCRecipesMedilathe
   recipes:
-  - CMBeaker
-  - CMBeakerLarge
-  #    - Drinking glass (625 glass)
   - CMSyringe
   - RMCDropper
   #    - RMC Spray bottle (500 plastic)

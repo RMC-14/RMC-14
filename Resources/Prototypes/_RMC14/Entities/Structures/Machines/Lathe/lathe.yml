@@ -39,7 +39,7 @@
   - type: MaterialStorage
     storage:
       CMSteel: 800
-      CMGlass: 100
+      CMGlass: 53
     whitelist:
       components:
       - FloorTile

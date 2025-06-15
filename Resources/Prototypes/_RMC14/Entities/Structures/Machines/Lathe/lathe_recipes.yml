@@ -1,5 +1,5 @@
 # Divide original costs by 37.5 each - except plastic which is 20
-# For all non-stackable/material-sheet items, multiply original costs by 1.25 rounded down
+# For all non-stackable/sheet items, multiply original costs by 1.25 rounded down
 # Example: Bucket is 2000 x 1.25 = 2500 / 37.5 = 67 CMSteel
 - type: latheRecipe
   id: RMCBucket
@@ -13,7 +13,7 @@
   result: CMBucketMop
   completetime: 4
   materials:
-    CMSteel: 107 # 4000
+    CMSteel: 133 # 5000
 
 - type: latheRecipe
   id: RMCBucketJanitorial
@@ -137,55 +137,55 @@
   result: CMRodMetal1
   completetime: 4
   materials:
-    CMSteel: 62 # 2343
+    CMSteel: 50 # 1875
 
 - type: latheRecipe
   id: CMScalpel
   result: CMScalpel
   completetime: 4
   materials:
-    CMSteel: 267 # 10000
-    CMGlass: 133 # 5000
+    CMSteel: 333 # 12500
+    CMGlass: 167 # 6250
 
 - type: latheRecipe
   id: CMCircularSaw
   result: CMCircularSaw
   completetime: 4
   materials:
-    CMSteel: 533 # 20000
-    CMGlass: 267 # 10000
+    CMSteel: 667 # 25000
+    CMGlass: 333 # 12500
 
 - type: latheRecipe
   id: CMSurgicalDrill
   result: CMSurgicalDrill
   completetime: 4
   materials:
-    CMSteel: 400 # 15000
-    CMGlass: 267 # 10000
+    CMSteel: 500 # 18750
+    CMGlass: 333 # 12500
 
 - type: latheRecipe
   id: CMRetractor
   result: CMRetractor
   completetime: 4
   materials:
-    CMSteel: 267 # 10000
-    CMGlass: 133 # 5000
+    CMSteel: 333 # 12500
+    CMGlass: 167 # 6250
 
 - type: latheRecipe
   id: CMCautery
   result: CMCautery
   completetime: 4
   materials:
-    CMSteel: 133 # 5000
-    CMGlass: 67 # 2500
+    CMSteel: 167 # 6250
+    CMGlass: 83 # 3125
 
 - type: latheRecipe
   id: CMHemostat
   result: CMHemostat
   completetime: 4
   materials:
-    CMSteel: 133 # 5000
-    CMGlass: 67 # 2500
+    CMSteel: 167 # 6250
+    CMGlass: 83 # 3125
 
 - type: latheRecipe
   id: CMBeaker
@@ -206,7 +206,7 @@
 #  result: DrinkGlass <- todo RMC14, rest is already complete
 #  completetime: 4
 #  materials:
-#  CMGlass: 13 # 500
+#  CMGlass: 17 # 625
 
 - type: latheRecipe
   id: RMCTablePartTan
@@ -234,7 +234,7 @@
   result: RMCRackParts
   completetime: 4
   materials:
-    CMSteel: 125 # 2500(4687 metal)
+    CMSteel: 125 # 4687
 
 - type: latheRecipe
   id: RMCKitchenKnife

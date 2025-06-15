@@ -1,5 +1,5 @@
 # Divide original costs by 37.5 each - except plastic which is 20
-# For all non-stackable/material-sheet items, multiply original costs by 1.25 rounded down
+# For all non-stackable/sheet items, multiply original costs by 1.25 rounded down
 # Example: M40 is 4250 x 1.25 = 5312 / 37.5 = 142 CMSteel
 - type: latheRecipe
   id: RMCM40GrenadeCasing
@@ -77,7 +77,7 @@
   result: RMCCustomM34TFuelTankCase
   completetime: 4
   materials:
-    CMSteel: 125 # 4687 (Inherited)
+    CMSteel: 125 # 4687
 
 - type: latheRecipe
   id: RMCCustomM34A1SmokeTankCase
