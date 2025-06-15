@@ -35,6 +35,20 @@
     isCorrodible: false
   - type: RMCUnstrippable
 
+- type: entity
+  parent: BaseItem
+  id: RMCInformationDogtagProp
+  name: faded information dog tag
+  description: A fallen marine's information dog tag. It looks battered and the name is worn out.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/infotags.rsi
+    state: dogtag_1
+  - type: Corrodible
+    isCorrodible: false
+  - type: Appearance
 
 - type: entity
   parent: BaseItem
@@ -189,6 +203,7 @@
     - MarineRequisition
     - MarineJTAC
     - MarineIntel
+    - MarineForecon
     - WEYA
 
 - type: entity
@@ -198,3 +213,12 @@
   - type: FactionFrequencies
     channels:
     - Colony
+
+- type: entity
+  id: FactionTSE
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+    - TSE

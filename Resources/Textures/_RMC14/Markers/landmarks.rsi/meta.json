@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP and PMC spawn by github noctynral",
   "size": {
     "x": 32,
     "y": 32
@@ -478,6 +478,12 @@
     },
     {
       "name": "merge_conflict_marker"
+    },
+    {
+      "name": "spp_spawn"
+    },
+    {
+      "name": "pmc_spawn"
     }
   ]
 }

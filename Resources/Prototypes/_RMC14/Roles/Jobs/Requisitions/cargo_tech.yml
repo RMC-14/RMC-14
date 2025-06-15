@@ -24,12 +24,6 @@
   supervisors: cm-job-supervisors-qm
   accessGroups:
   - CMCargoTech
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cargo
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial

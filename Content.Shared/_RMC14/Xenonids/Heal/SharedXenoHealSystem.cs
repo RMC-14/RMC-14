@@ -75,7 +75,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
-        if (!_rmcActions.TryUseAction(args.Performer, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -346,8 +346,11 @@ public abstract class SharedXenoHealSystem : EntitySystem
         _damageable.TryChangeDamage(target, -damage, true);
     }
 
-    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt)
+    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt, bool ignoreFire = false)
     {
+        if (!ignoreFire && _flammable.IsOnFire(target))
+            return;
+
         var heal = EnsureComp<XenoBeingHealedComponent>(target);
         var healStack = new XenoHealStack()
         {

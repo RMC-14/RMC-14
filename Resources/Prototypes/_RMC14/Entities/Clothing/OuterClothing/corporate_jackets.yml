@@ -52,3 +52,47 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_ivy_jacket.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_ivy_jacket.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaBrownVest
+  name: WeYa brown vest
+  description: A brown puffer vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_brown_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_brown_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaBlueVest
+  name: WeYa blue vest
+  description: A blue puffer vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_blue_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_blue_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaRedVest
+  name: WeYa red vest
+  description: A red puffer vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_red_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_red_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaWhiteVest
+  name: WeYa white vest
+  description: A white puffer vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_white_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_white_vest.rsi

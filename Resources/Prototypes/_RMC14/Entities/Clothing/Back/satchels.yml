@@ -186,8 +186,8 @@
 - type: entity
   parent: CMSatchel
   id: CMSatchelMarine
-  name: Marine satchel
-  description: A heavy-duty satchel carried by some Marine soldiers and support personnel.
+  name: UNMC satchel
+  description: A heavy-duty satchel carried by some UNMC soldiers and support personnel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
@@ -233,6 +233,12 @@
       Snow: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchelMarineIntel # Reskin for FORECON
+  id: RMCSatchelMarineLogisticsBig
+  name: UNMC logistics IMP backpack
+  description: A standard-issue backpack worn by logistics personnel. It is occasionally issued to combat personnel for longer term expeditions and deep space incursions.
 
 - type: entity
   parent: CMSatchelMarineIntel
@@ -523,3 +529,21 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/medic.rsi
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelTSEPA
+  name: TSP-4 police pack
+  description: A TSEPA standard-issue Three Suns Pack MK4.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelMARSOC
+  name: UNMC SOF combat pack
+  description: A streamlined combat pack for UNMC SOF Raiders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi

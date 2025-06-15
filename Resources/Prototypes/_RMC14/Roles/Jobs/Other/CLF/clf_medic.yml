@@ -1,0 +1,98 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCCLFMedic
+  name: rmc-clf-medic
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: RMCJobCLFMedic
+  ranks:
+    RMCRankCLFRebel: [ ]
+  startingGear: RMCGearCLFMedic
+  icon: RMCJobIconCLFMedic
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 2
+        RMCSkillVehicles: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-medic
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCLFMedic
+  name: clf ghost role medic
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCLFMedic
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCLFMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-clf-medic
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFMedic
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearCLFMedic
+  equipment:
+    mask: RMCM5Bayonet # TODO RMC14
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitCLFWebbing
+    neck: RMCCLFArmband
+    outerClothing: RMCArmorVestNone
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesBrown
+    id: RMCIDCardCLFMedic
+    belt: CMBeltMedicalFilled
+    back: RMCSatchelLightpack
+    pocket1: RMCFlashlight
+    pocket2: RMCPouchMagazineLarge
+  inhand:
+  - WeaponSMGMAC15  # TODO RMC14 - Make randomized
+  storage:
+    back:
+    - RMCGrenadeIED
+    - CMAdvFirstAidKitFilled
+    - CMAdvFirstAidKitFilled
+    - CMPortableSurgicalBedSpawnFolded
+    - RMCCigarettePackLuckySloths
+    - CMMRE
+    - CMSynthGraft
+    - CMCrowbar
+    pocket2:
+    - RMCMagazineSMGMAC15
+    - RMCMagazineSMGMAC15
+    - RMCMagazineSMGMAC15
+    - RMCMagazineSMGMAC15
+    - RMCMagazineSMGMAC15
+
+- type: playTimeTracker
+  id: RMCJobCLFMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_med

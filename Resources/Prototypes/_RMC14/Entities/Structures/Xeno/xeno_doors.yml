@@ -30,6 +30,7 @@
         layer:
         - AirlockLayer
   - type: Door
+    canPry: false
     crushDamage:
       types:
         Blunt: 15
@@ -88,6 +89,11 @@
   - type: ResinDoor
   - type: AllowWeedSpread
   - type: ResinSurgeReinforcable
+  - type: RMCDeleteAnchoredOnInit
+    whitelist: { }
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    destroy: true
 
 - type: entity
   parent: DoorXenoResin

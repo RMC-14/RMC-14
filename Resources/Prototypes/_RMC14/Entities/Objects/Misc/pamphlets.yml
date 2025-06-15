@@ -74,6 +74,8 @@
     addSkills:
       RMCSkillJtac: 1
     giveJobTitle: rmc-job-name-spotter
+    givePrefix: rmc-job-prefix-spotter
+    isAppendPrefix: false
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_ass
@@ -89,11 +91,15 @@
   parent: CMPamphlet
   id: CMPamphletPowerloader
   name: powerloader instructional pamphlet
-  description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to Caterpillar P-5000 Work Loader'.
+  description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to a Work Loader'.
   suffix: NOT IMPLEMENTED
   components:
-  - type: Sprite
-    state: pamphlet_powerloader
+    - type: Sprite
+      state: pamphlet_powerloader
+    - type: SkillPamphlet
+      addSkills:
+        RMCSkillPowerLoader: 1
+      bypassLimit: true
 
 # gives police skill / bypasses limit
 - type: entity
@@ -153,6 +159,8 @@
     skillCap:
       RMCSkillEndurance: 2
     giveJobTitle: rmc-job-name-loader
+    givePrefix: rmc-job-prefix-loader
+    isAppendPrefix: false
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_load
@@ -180,6 +188,8 @@
       RMCSkillEngineer: 1
       RMCSkillJtac: 2
     giveJobTitle: rmc-job-name-mortar-operator
+    givePrefix: rmc-job-prefix-mortar-operator
+    isAppendPrefix: false
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_mortar

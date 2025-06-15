@@ -13,6 +13,14 @@
     range: 2
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTransferPlasma
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: transfer_plasma
+
+- type: entity
   id: ActionXenoHealerDroneTransferPlasma
   parent: ActionXenoBase
   name: Transfer plasma (100) # TODO RMC14 proper plasma costs
@@ -84,6 +92,14 @@
   - type: ActionCooldown
     cooldown: 10
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoRetrieve
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: retrieve
 
 - type: entity
   parent: ActionXenoBase
@@ -167,6 +183,16 @@
     useDelay: 3
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoLeader
+  name: Choose Leaders
+  description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: xeno_lead
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoHeal
   name: Heal Xenonid (600) # TODO RMC14 proper plasma costs
@@ -233,6 +259,14 @@
     useDelay: 10
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTailFountain
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_tail_fountain
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoTantrum
   name: Tantrum (100 plasma, 75 fury)
@@ -247,6 +281,14 @@
     checkCanAccess: false
     range: 8
     useDelay: 7
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTantrum
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: warden_heal
 
 - type: entity
   parent: ActionXenoBase
@@ -265,6 +307,14 @@
     cost: 75
   - type: XenoActionPlasma
     cost: 300
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFightOrFlight
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: screech
 
 - type: entity
   parent: ActionXenoBase

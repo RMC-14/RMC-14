@@ -30,6 +30,8 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: RMCStorageEjectHand
+      state: Open
     - type: StoreAfterFailedInteract
   - type: ExplosionResistance
     damageCoefficient: 0
@@ -82,6 +84,8 @@
         - PillPacket
         - PillCanister
         - CMSurgicalCase
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -131,6 +135,8 @@
         - PillCanister
         - CMSurgicalCase
     - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -165,6 +171,8 @@
         - PillCanister
         - CMSurgicalCase
     - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -280,6 +288,84 @@
         tags:
         - CMFirstAidKit
         - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingClipOnPouch
+  name: clip-on pouch
+  description: A clip on synth-leather pouch designed to house a small collection of items for ML66A weapon operators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/ml66a_pouch.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    blacklist:
+      components:
+      - Bible
+      tags:
+      - CMFirstAidKit
+      - RMCBoxStorage
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/ml66a_pouch.rsi
+      state: equipped
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      blacklist:
+        components:
+        - Bible
+        tags:
+        - CMFirstAidKit
+        - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingGrenade
+  name: clip-on grenade band
+  description: A sturdy mess of synth-leather band designed to store a few grenades for ML66A weapon operators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/grenade_pouch.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    whitelist:
+      tags:
+      - Grenade
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/grenade_pouch.rsi
+      state: equipped
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      whitelist:
+        tags:
+        - Grenade
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -304,6 +390,7 @@
       - Multitool
       - PowerCell
       - RMCNailgunCompact
+      - RMCNailgunTactical
       components:
       - Welder
       - PowerCell
@@ -330,6 +417,7 @@
         - Multitool
         - PowerCell
         - RMCNailgunCompact
+        - RMCNailgunTactical
         components:
         - Welder
         - PowerCell
@@ -506,6 +594,16 @@
     - id: RMCPowerCellSmartgun
 
 - type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingBuckshot
+  suffix: Buckshot, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
+
+- type: entity
   parent: CMWebbingPouch
   id: CMWebbingPouchRoyal
   suffix: Filled, Royal
@@ -515,3 +613,14 @@
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalBeret
       - id: CMMRE # TODO RMC14 TSE ORP ration
+
+- type: entity
+  parent: CMWebbingPouch
+  id: RMCWebbingPouchForecon
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMMarineFlask
+      # - id: RMCFacepaint # TODO FACEPAINT
+      - id: CMMRE

@@ -1,9 +1,9 @@
-﻿using Content.Server.Administration;
-using Content.Shared.Administration;
-using Robust.Shared.Console;
-using System.Linq;
+﻿using System.Linq;
+using Content.Server.Administration;
 using Content.Shared._RMC14.Light;
+using Content.Shared.Administration;
 using Content.Shared.Dataset;
+using Robust.Shared.Console;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 
@@ -45,13 +45,13 @@ public sealed class RMCAmbientLightCommand : EntitySystem
 
         _entityManager.EnsureComponent<RMCAmbientLightComponent>(gridUid, out var rmcLight);
 
-        //Color Proto parsing
+        //Color string parsing
         Color colorHex = default;
         if (!args[1].Equals("null"))
         {
             if (!Color.TryParse(args[1], out colorHex))
             {
-                shell.WriteError(Loc.GetString("cmd-weather-error-unknown-proto"));
+                shell.WriteError("Invalid color, pick a color from the list or enter a hex code in format #RRGGBB");
                 return;
             }
         }
@@ -78,7 +78,7 @@ public sealed class RMCAmbientLightCommand : EntitySystem
         return args.Length switch
         {
             1 => CompletionResult.FromHintOptions(CompletionHelper.Components<MapGridComponent>(args[0], _entityManager), "Grid Id"),
-            2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<DatasetPrototype>(true, _prototype), Loc.GetString("ColorHex")),
+            2 => CompletionResult.FromHintOptions(Color.GetAllDefaultColors().Select(x => x.Key), "Hex color"),
             3 => CompletionResult.FromHint(Loc.GetString("duration")),
             _ => CompletionResult.Empty,
         };

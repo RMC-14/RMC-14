@@ -67,12 +67,11 @@
         points: 5
     - name: Helmet Optics
       entries:
-    #- id: CMWeldingVisor
-    #  points: 5
-    #  recommended: true
-    #- id: CMMedicalHelmetOptic
-    #  points: 4
-    #  recommended: true
+      - id: RMCVisorWelding
+        points: 5
+      - id: RMCVisorMedical
+        points: 4
+        recommended: true
       - id: RMCVisorNightVision
         points: 25
         recommended: true

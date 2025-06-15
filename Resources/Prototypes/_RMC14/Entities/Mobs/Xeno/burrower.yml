@@ -10,6 +10,9 @@
   name: Burrower
   description: A beefy alien with sharp claws.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleBurrower
   - type: GhostRole
     name: cm-job-name-xeno-burrower
   - type: Sprite
@@ -61,8 +64,10 @@
     range: 4
     plasmaCost: 100
     paralyzeTime: 2
+    slowBigInsteadOfStun: true
     slows: false
     sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
+    debuffsHurtXenosMore: false
   - type: XenoBurrow
   - type: MeleeWeapon
     damage:
@@ -113,3 +118,5 @@
     - HiveRecoveryNodeXenoConstructionNode
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-burrower

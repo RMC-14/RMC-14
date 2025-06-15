@@ -62,6 +62,7 @@
         shader: unshaded
   - type: Corrodible
     isCorrodible: false
+  - type: RMCEarProtection
 
 - type: entity
   parent: ArmorHelmetPMC

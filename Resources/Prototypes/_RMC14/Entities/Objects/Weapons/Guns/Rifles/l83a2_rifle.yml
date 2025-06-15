@@ -1,0 +1,232 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: WeaponRifleL83A2
+  name: L83A2 rifle
+  description: A civilian grade caseless rifle utilised by TSEPA officers.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l83a2.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l83a2.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m16.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilUnwielded: 3
+    scatterWielded: 2
+    scatterUnwielded: 20
+    baseFireRate: 4
+    burstScatterMult: 2
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0
+        maxScatterModifier: 13
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.35
+    accuracyMultiplierUnwielded: 0.65
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL83A2
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL83A2
+          - RMCMagazineRifleL83A2AP
+  - type: GunDamageModifier
+    multiplier: 1.3
+  - type: AttachableHolder
+    randomAttachmentChance: 0.42
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+        random:
+        - RMCAttachmentSuppressor
+        - RMCM5Bayonet
+        - RMCAttachmentRecoilCompensator
+        - RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+        random:
+        - RMCAttachmentS5RedDotSight
+        - RMCAttachmentS6ReflexSight
+        - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentL83A2Stock
+        whitelist:
+          tags:
+          - RMCAttachmentL83A2Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentLaserSight
+          - RMCAttachmentM203GrenadeLauncher
+        random:
+        - RMCAttachmentAngledGrip
+        - RMCAttachmentVerticalGrip
+        - RMCAttachmentGyroscopicStabilizer
+        - RMCAttachmentBurstFireAssembly
+        - RMCAttachmentBipod
+        - RMCAttachmentUnderbarrelExtinguisher
+        - RMCAttachmentU7UnderbarrelShotgun
+        - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.03
+      rmc-aslot-rail: -0.15, 0.215
+      rmc-aslot-stock: -0.87, 0.03
+      rmc-aslot-underbarrel: 0.3, -0.30
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleL83A2
+  name: L83A2 Magazine (5.56x45mm)
+  description: "A magazine of 5.56x45mm rounds for use in the L83A2 rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL83A2
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL83A2
+    proto: RMCCartridgeRifleL83A2
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a2.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL83A2
+  name: Cartridge (5.56x45)
+  description: A 5.56x45 rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL83A2
+  - type: CartridgeAmmo
+    proto: BulletRifle556x45mm
+
+- type: entity
+  parent: RMCMagazineRifleL83A2
+  id: RMCMagazineRifleL83A2AP
+  description: "A magazine of armor-piercing 5.56x45mm rounds for use in the L83A2 rifle."
+  name: L83A2 AP Magazine (5.56x45mm)
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL83A2
+    - RMCMagazineRifleL83A2AP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL83A2AP
+    proto: RMCCartridgeRifleL83A2AP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l83a2.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL83A2AP
+  name: AP Cartridge (5.56x45)
+  description: A 5.56x45 AP rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL83A2AP
+  - type: CartridgeAmmo
+    proto: BulletRifle556x45mmAP
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle556x45mmAP
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 40
+
+- type: Tag
+  id: RMCMagazineRifleL83A2
+
+- type: Tag
+  id: RMCMagazineRifleL83A2AP
+
+- type: Tag
+  id: RMCCartridgeRifleL83A2
+
+- type: Tag
+  id: RMCCartridgeRifleL83A2AP

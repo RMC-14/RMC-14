@@ -1,11 +1,14 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Slow;
-using Content.Shared._RMC14.Standing;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
@@ -17,9 +20,11 @@ namespace Content.Shared._RMC14.Xenonids.Stomp;
 
 public sealed class XenoStompSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
@@ -27,34 +32,64 @@ public sealed class XenoStompSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoStompComponent, XenoStompActionEvent>(OnXenoStompAction);
+        SubscribeLocalEvent<XenoStompComponent, XenoStompDoAfterEvent>(OnXenoStompDoAfter);
     }
 
-    private readonly HashSet<Entity<MarineComponent>> _receivers = new();
+    private readonly HashSet<Entity<MobStateComponent>> _receivers = new();
 
     private void OnXenoStompAction(Entity<XenoStompComponent> xeno, ref XenoStompActionEvent args)
     {
-        var ev = new XenoStompAttemptEvent();
-        RaiseLocalEvent(xeno, ref ev);
+        var attemptEv = new XenoStompAttemptEvent();
+        RaiseLocalEvent(xeno, ref attemptEv);
 
-        if (ev.Cancelled)
+        if (attemptEv.Cancelled)
             return;
 
-        if (!TryComp(xeno, out TransformComponent? xform) ||
-            _mobState.IsDead(xeno))
+        if (_mobState.IsDead(xeno))
+            return;
+
+        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
+        args.Handled = true;
+        var ev = new XenoStompDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.Delay, ev, xeno)
         {
+            BreakOnMove = true,
+        };
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnXenoStompDoAfter(Entity<XenoStompComponent> xeno, ref XenoStompDoAfterEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        if (args.Cancelled)
+        {
+            foreach (var action in _actions.GetActions(xeno))
+            {
+                if (action.Comp.BaseEvent is XenoStompActionEvent)
+                    _actions.ClearCooldown(action.Id);
+            }
+
             return;
         }
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
-        args.Handled = true;
+        if (!TryComp(xeno, out TransformComponent? xform))
+            return;
 
         _receivers.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.Range, _receivers);
@@ -64,10 +99,16 @@ public sealed class XenoStompSystem : EntitySystem
 
         foreach (var receiver in _receivers)
         {
-            if (_mobState.IsDead(receiver))
+            if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
                 continue;
 
-            _stun.TryParalyze(receiver, xeno.Comp.ParalyzeTime, true);
+            if (xeno.Comp.SlowBigInsteadOfStun && _size.TryGetSize(receiver, out var size) && size >= RMCSizes.Big)
+                _slow.TrySlowdown(receiver, xeno.Comp.DebuffsHurtXenosMore ? _xeno.TryApplyXenoDebuffMultiplier(receiver, xeno.Comp.ParalyzeTime)
+                    : xeno.Comp.ParalyzeTime, true);
+            else if (!xeno.Comp.ParalyzeUnderOnly)
+                _stun.TryParalyze(receiver, xeno.Comp.DebuffsHurtXenosMore ? _xeno.TryApplyXenoDebuffMultiplier(receiver, xeno.Comp.ParalyzeTime)
+                    : xeno.Comp.ParalyzeTime, true);
+
             if (xeno.Comp.Slows)
                 _slow.TrySuperSlowdown(receiver, xeno.Comp.SlowTime, true);
 
@@ -76,12 +117,16 @@ public sealed class XenoStompSystem : EntitySystem
                 if (!_standing.IsDown(receiver))
                     continue;
 
-                var damage = _damageable.TryChangeDamage(receiver, xeno.Comp.Damage, origin: xeno, tool: xeno);
+                var damage = _damageable.TryChangeDamage(receiver, _xeno.TryApplyXenoSlashDamageMultiplier(receiver, xeno.Comp.Damage), origin: xeno, tool: xeno);
                 if (damage?.GetTotal() > FixedPoint2.Zero)
                 {
                     var filter = Filter.Pvs(receiver, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
                     _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { receiver }, filter);
                 }
+
+                if (xeno.Comp.ParalyzeUnderOnly && _size.TryGetSize(receiver, out size) && size < RMCSizes.Big)
+                    _stun.TryParalyze(receiver, xeno.Comp.DebuffsHurtXenosMore ? _xeno.TryApplyXenoDebuffMultiplier(receiver, xeno.Comp.ParalyzeTime)
+                    : xeno.Comp.ParalyzeTime, true);
             }
         }
 

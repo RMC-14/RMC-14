@@ -10,6 +10,9 @@
   name: Sentinel
   description: A slithery, spitting kind of alien.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSentinel
   - type: GhostRole
     name: cm-job-name-xeno-sentinel
   - type: Sprite
@@ -88,3 +91,5 @@
     spray: XenoAcidSprayTrapWeak
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-sentinel

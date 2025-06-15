@@ -8,7 +8,6 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Medical.Wounds;
 
@@ -96,9 +95,10 @@ public sealed class WoundsSystem : SharedWoundsSystem
                 _damageable.TryChangeDamage(uid, _passiveDamage, true, false, damageable, uid);
             }
 
-            foreach (var i in _toRemove)
+            for (var i = _toRemove.Count - 1; i >= 0; i--)
             {
-                comp.Wounds.RemoveSwap(i);
+                var remove = _toRemove[i];
+                comp.Wounds.RemoveAt(remove);
             }
 
             if (comp.Wounds.Count == 0)

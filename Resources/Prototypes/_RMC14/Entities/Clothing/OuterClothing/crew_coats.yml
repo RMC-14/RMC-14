@@ -129,3 +129,14 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/medicalapron.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/medicalapron.rsi
+
+- type: entity
+  parent: RMCMedicalApron
+  id: RMCHydroApron
+  name: apron
+  description: A basic blue apron.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Misc/apronbotanist.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Misc/apronbotanist.rsi

@@ -202,10 +202,6 @@
     lifetime: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
-  - type: SmokeOnTrigger
-    smokePrototype: RMCSmokeAcid
-    duration: 30
-    spreadAmount: 50
   - type: SpawnOnTerminate
     spawn: RMCSmokeAcid
     popup: rmc-glob-land
@@ -231,6 +227,17 @@
     accuracy: 95
 
 - type: entity
+  id: CMGuidebookXenoBombardAcidProjectile
+  name: Acid Glob
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: acid_glob
+      shader: unshaded
+
+- type: entity
   parent: XenoBaseProjectile
   id: XenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
@@ -246,10 +253,6 @@
     lifetime: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
-  - type: SmokeOnTrigger
-    smokePrototype: RMCSmokeNeurotoxin
-    duration: 30
-    spreadAmount: 50
   - type: SpawnOnTerminate
     spawn: RMCSmokeNeurotoxin
     popup: rmc-glob-land
@@ -276,6 +279,17 @@
           Brute: 5
   - type: RMCProjectileAccuracy
     accuracy: 95
+
+- type: entity
+  id: CMGuidebookXenoBombardNeurotoxinProjectile
+  name: Neurotoxin Glob
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neuro_glob
+      shader: unshaded
 
 - type: entity
   parent: XenoSpitProjectile
@@ -383,6 +397,7 @@
   - type: ProjectileGrenade
     fillPrototype: XenoAcidBallSpitProjectile
     capacity: 14
+    directHit: false
   - type: ProjectileMaxRange
     max: 5
     delete: false
@@ -416,4 +431,4 @@
   - type: RMCProjectileAccuracy
     accuracy: 185
   - type: XenoHookOnHit
- 
+

@@ -56,7 +56,7 @@ public sealed class XenoCollisionSystem : EntitySystem
     private void OnStunUpdated<T>(Entity<StunFriendlyXenoOnStepComponent> ent, ref T args)
     {
         ent.Comp.Enabled = _mobState.IsAlive(ent) &&
-                           HasComp<XenoRestingComponent>(ent) &&
+                           !HasComp<XenoRestingComponent>(ent) &&
                            !_statusEffects.HasStatusEffect(ent, ent.Comp.DisableStatus) &&
                            CompOrNull<XenoAttachedOvipositorComponent>(ent) is not { Running: true };
         Dirty(ent);
@@ -68,6 +68,9 @@ public sealed class XenoCollisionSystem : EntitySystem
         var query = EntityQueryEnumerator<StunFriendlyXenoOnStepComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var xform))
         {
+            if (!comp.Enabled)
+                continue;
+
             _contacts.Clear();
             _physics.GetContactingEntities(uid, _contacts);
 

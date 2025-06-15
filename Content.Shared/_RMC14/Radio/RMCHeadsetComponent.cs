@@ -8,6 +8,9 @@ namespace Content.Shared._RMC14.Radio;
 [Access(typeof(RMCRadioSystem))]
 public sealed partial class RMCHeadsetComponent : Component
 {
+    /// <summary>
+    ///     Set of radio channels built-in to the headset.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<ProtoId<RadioChannelPrototype>> Channels = new();
 

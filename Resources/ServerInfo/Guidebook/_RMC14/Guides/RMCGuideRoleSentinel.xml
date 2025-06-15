@@ -1,0 +1,18 @@
+<Document>
+  #Sentinel, Tier 1
+  <GuideEntityEmbed Entity="CMXenoSentinel"/>
+  ##Playing as a Sentinel
+  You are relatively fragile and ranged. Use your spits to disrupt hosts on the frontline and transport hosts.
+
+  Corner peak around corners and stack scattered spit and slowing spit in the same volley, this lets you spit while minimizing risk to yourself, if any host gets too close then you can paralyzing slash them.
+
+  You can also capture hosts that are alone by scatter spitting them and slashing them with paralyzing slash, wait for them to drop and then tackle them.
+
+  ##Abilities:
+  - [bold]Slowing Spit[/bold]: Glob a spit that slows hosts and drains their chemicals, if they have no armor it will stun them down.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSpit"/>
+  - [bold]Scattered Spit[/bold]: Glob spits in a shotgun like fashion that briefly knocks down hosts, very useful for any hosts that are pushing.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoScatteredSpit"/>
+  - [bold]Paralyzing Slash[/bold]: Empowers your next attack or tailstab to inject neurotoxin which will make them fall over after a brief period of time.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCripplingStrike"/>
+</Document>

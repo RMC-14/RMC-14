@@ -173,8 +173,8 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                     if (!TryComp<XenoEnergyComponent>(xeno, out var acid))
                         return;
 
-                    var acidRange = acid.Current / active.AcidRangeRatio;
-                    var burnRange = acid.Current / active.BurnRangeRatio;
+                    var acidRange = (float)Math.Sqrt(Math.Pow((acid.Current / active.AcidRangeRatio) * 2 + 1, 2) / Math.PI);
+                    var burnRange = (float)Math.Sqrt(Math.Pow((acid.Current / active.BurnRangeRatio) * 2 + 1, 2) / Math.PI);
 
                     var maxBurnDamage = acid.Current / active.BurnDamageRatio;
 
@@ -217,7 +217,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                         var damage = ((burnRange - distance) * maxBurnDamage) / burnRange;
 
-                        _damage.TryChangeDamage(mob, active.BaseDamage * damage, true, origin: xeno, tool: xeno);
+                        _damage.TryChangeDamage(mob, _xeno.TryApplyXenoAcidDamageMultiplier(mob, active.BaseDamage * damage), true, origin: xeno, tool: xeno);
 
                     }
 

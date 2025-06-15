@@ -121,7 +121,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             var shooterOrWeapon = EntityManager.EntityExists(component.Shooter) ? component.Shooter!.Value : component.Weapon!.Value;
 
             _adminLogger.Add(LogType.BulletHit,
-                LogImpact.Medium,
+                HasComp<ActorComponent>(target) ? LogImpact.Medium : LogImpact.Low,
                 $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(shooterOrWeapon):source} hit {otherName:target} and dealt {modifiedDamage.GetTotal():damage} damage");
         }
 

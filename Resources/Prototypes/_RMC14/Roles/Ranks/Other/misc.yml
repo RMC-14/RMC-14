@@ -12,3 +12,15 @@
   id: RMCRankSynthetic
   name: Synthetic
   prefix: Syn.
+  paygrade: E8
+
+- type: rank
+  id: RMCRankSyntheticMG
+  name: Synthetic
+  prefix: Syn.
+  paygrade: E9
+
+- type: rank
+  id: RMCRankSyntheticColonist
+  name: Synthetic
+  prefix: Syn.

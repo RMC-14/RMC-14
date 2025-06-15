@@ -1,0 +1,72 @@
+# TSEPA Senior Constable
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPASeniorConstable
+  name: rmc-job-name-tsepa-senior-constable
+  description: rmc-job-description-tsepa-senior-constable
+  playTimeTracker: RMCJobTSEPASeniorConstable
+  ranks:
+    RMCRankTSEPASeniorConstable: []
+  startingGear: RMCGearTSEPASeniorConstable
+  icon: "RMCJobIconTSEPASeniorConstable"
+  joinNotifyCrew: false
+  accessGroups:
+  - ColonistTSEPABrig
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 0
+        RMCSkillFireman: 2
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-senior-constable
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPASeniorConstable
+  equipment:
+    head: RMCHeadBeretTSEPA
+    ears: RMCHeadsetTSEPA
+    jumpsuit: RMCJumpsuitTSEPA
+    outerClothing: RMCCoatTSEPA
+    gloves: RMCHandsVeteran
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardTSEPASilverGold
+    belt: RMCBeltHolsterRevolverSpearheadFill
+    back: RMCSatchelTSEPA
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointTSEPASeniorConstable
+  name: tsepa senior constable spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPASeniorConstable
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_light_armor.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobTSEPASeniorConstable
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPASeniorConstable
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: tse_paseniorconstable

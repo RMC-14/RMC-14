@@ -1,5 +1,5 @@
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.AciderGeneration;
-using Content.Shared._RMC14.Xenonids.Heal;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.Acider;
@@ -26,9 +26,9 @@ public sealed class XenoAciderGenerationVisualsSystem : VisualizerSystem<XenoAci
 
         string layerState = "acid";
 
-        if (AppearanceSystem.TryGetData(uid, XenoHealerVisuals.Downed, out bool downed) && downed)
+        if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out bool downed) && downed)
             layerState += "_downed";
-        else if (AppearanceSystem.TryGetData(uid, XenoHealerVisuals.Resting, out bool resting) && resting)
+        else if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
             layerState += "_rest";
 
         sprite.LayerSetState(layer, layerState);

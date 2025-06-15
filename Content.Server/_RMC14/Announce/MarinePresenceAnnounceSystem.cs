@@ -37,72 +37,66 @@ namespace Content.Server._RMC14.Announce
             {
                 if (jobPrototype.JoinNotifyCrew)
                 {
-                    Timer.Spawn(TimeSpan.FromSeconds(2), () =>
-                    {
-                        _marineAnnounce.AnnounceARES(ares,
-                            Loc.GetString("rmc-latejoin-arrival-announcement-special",
-                            ("character", fullRankName)),
-                            jobPrototype.LatejoinArrivalSound,
-                            null);
-                    });
+                    _marineAnnounce.AnnounceARES(ares,
+                        Loc.GetString("rmc-latejoin-arrival-announcement-special",
+                        ("character", fullRankName)),
+                        jobPrototype.LatejoinArrivalSound,
+                        null);
                 }
                 else
                 {
-                    Timer.Spawn(TimeSpan.FromSeconds(2), () =>
+                    // Getting all department prototypes
+                    var departmentPrototypes = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToList();
+
+                    // To track channels that have already been processed, prevents spam in the same channel multiple times
+                    var processedChannels = new HashSet<ProtoId<RadioChannelPrototype>>();
+                    bool departmentChannelFound = false;
+                    bool isHead = false;
+
+                    // We are trying to send a message about arrival to the radio channel of the departments to which the player belongs
+                    foreach (var department in departmentPrototypes)
                     {
-                        // Getting all department prototypes
-                        var departmentPrototypes = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToList();
+                        if (!department.Roles.Contains(jobId))
+                            continue;
 
-                        // To track channels that have already been processed, prevents spam in the same channel multiple times
-                        var processedChannels = new HashSet<ProtoId<RadioChannelPrototype>>();
-                        bool departmentChannelFound = false;
-                        bool isHead = false;
-
-                        // We are trying to send a message about arrival to the radio channel of the departments to which the player belongs
-                        foreach (var department in departmentPrototypes)
+                        // Check if this role is a department head
+                        if (department.HeadOfDepartment == jobId)
                         {
-                            if (!department.Roles.Contains(jobId))
-                                continue;
-
-                            // Check if this role is a department head
-                            if (department.HeadOfDepartment == jobId)
-                            {
-                                isHead = true;
-                            }
-
-                            var channelId = department.DepartmentRadio;
-
-                            // If the department doesn't have a channel, but it's a combat marine, we try to get his squad channel
-                            if (channelId == null && _squad.TryGetMemberSquad(mob, out var squad) && squad.Comp.Radio != null)
-                            {
-                                channelId = squad.Comp.Radio;
-                            }
-
-                            // If after all checks the channel is still not found or we have already processed this channel, skip it
-                            if (channelId == null || !processedChannels.Add(channelId.Value))
-                                continue;
-
-                            departmentChannelFound = true;
-
-                            _marineAnnounce.AnnounceRadio(ares,
-                                Loc.GetString("rmc-latejoin-arrival-announcement",
-                                ("character", rankName),
-                                ("entity", mob),
-                                ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
-                                channelId.Value);
+                            isHead = true;
                         }
 
-                        // If no department channel found OR the player is the head of the department, send to CommonChannel
-                        if (!departmentChannelFound || isHead)
+                        var channelId = department.DepartmentRadio;
+
+                        // If the department doesn't have a channel, but it's a combat marine, we try to get his squad channel
+                        if (channelId == null && _squad.TryGetMemberSquad(mob, out var squad) && squad.Comp.Radio != null)
                         {
-                            _marineAnnounce.AnnounceRadio(ares,
-                                Loc.GetString("rmc-latejoin-arrival-announcement",
-                                ("character", rankName),
-                                ("entity", mob),
-                                ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
-                                CommonChannel);
+                            channelId = squad.Comp.Radio;
                         }
-                    });
+
+                        // If after all checks the channel is still not found or we have already processed this channel, skip it
+                        if (channelId == null || !processedChannels.Add(channelId.Value))
+                            continue;
+
+                        departmentChannelFound = true;
+
+                        _marineAnnounce.AnnounceRadio(ares,
+                            Loc.GetString("rmc-latejoin-arrival-announcement",
+                            ("character", rankName),
+                            ("entity", mob),
+                            ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
+                            channelId.Value);
+                    }
+
+                    // If no department channel found OR the player is the head of the department, send to CommonChannel
+                    if (!departmentChannelFound || isHead)
+                    {
+                        _marineAnnounce.AnnounceRadio(ares,
+                            Loc.GetString("rmc-latejoin-arrival-announcement",
+                            ("character", rankName),
+                            ("entity", mob),
+                            ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
+                            CommonChannel);
+                    }
                 }
             }
         }
