@@ -5,8 +5,8 @@
    components:
    - type: StorageFill
      contents: []
-##       - id: ClothingOuterBioGeneral 
-##       - id: ClothingHeadHatHoodBioGeneral
+       - id: RMCSuitBioGeneral
+       - id: RMCHoodBioGeneral
 
  - type: entity
    id: CMClosetBioVirologyFilled
@@ -17,7 +17,7 @@
      contents: []
 ##       - id: ClothingOuterBioVirology
 ##       - id: ClothingHeadHatHoodBioVirology
-  
+
  - type: entity
    id: CMClosetBioSecurityFilled
    suffix: Filled, Security
