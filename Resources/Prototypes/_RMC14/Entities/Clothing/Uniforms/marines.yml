@@ -1,4 +1,4 @@
-﻿# Marines
+# Marines
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -23,7 +23,7 @@
   suffix: Filled, Royal
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingPouchRoyal
+    startingWebbing: CMWebbingDropPouchRoyal
 
 - type: entity
   parent: RMCMarineUniformBase

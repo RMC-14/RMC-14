@@ -285,7 +285,7 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: CMWebbingDropPouch
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
