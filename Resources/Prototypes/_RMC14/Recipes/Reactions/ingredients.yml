@@ -10,3 +10,77 @@
       amount: 1
   products:
     RMCCherryJelly: 2
+
+- type: reaction
+  id: CookingMayoOliveOil
+  reactants:
+    Vinegar:
+      amount: 5
+    OilOlive:
+      amount: 5
+    Egg:
+      amount: 6
+  products:
+    Mayo: 15
+
+- type: reaction
+  id: Grenadine
+  reactants:
+    Enzyme:
+      amount: 1
+    JuiceBerry:
+      amount: 1
+  products:
+    Grenadine: 2
+
+- type: reaction
+  id: Vodka
+  reactants:
+    Enzyme:
+      amount: 1
+    JuicePotato:
+      amount: 1
+  products:
+    Vodka: 2
+
+- type: reaction
+  id: Sake
+  reactants:
+    Enzyme:
+      amount: 1
+    Rice:
+      amount: 1
+  products:
+    BlueCuracao: 2
+
+- type: reaction
+  id: Kahlua
+  reactants:
+    Enzyme:
+      amount: 1
+    Coffee:
+      amount: 1
+    Sugar:
+      Amount: 1
+  products:
+    BlueCuracao: 2
+
+- type: reaction
+  id: MelonLiquor
+  reactants:
+    Enzyme:
+      amount: 1
+    JuiceWatermelon:
+      amount: 1
+  products:
+    BlueCuracao: 2
+
+- type: reaction
+  id: Wine
+  reactants:
+    Enzyme:
+      amount: 1
+    JuiceGrape:
+      amount: 1
+  products:
+    BlueCuracao: 2
