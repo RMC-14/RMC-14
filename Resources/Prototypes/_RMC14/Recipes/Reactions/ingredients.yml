@@ -34,6 +34,16 @@
     Grenadine: 2
 
 - type: reaction
+  id: BlueCuracao
+  reactants:
+    Enzyme:
+      amount: 1
+    JuiceOrange:
+      amount: 1
+  products:
+    BlueCuracao: 2
+
+- type: reaction
   id: Vodka
   reactants:
     Enzyme:
@@ -51,10 +61,10 @@
     Rice:
       amount: 1
   products:
-    BlueCuracao: 2
+    Sake: 2
 
 - type: reaction
-  id: Kahlua
+  id: CoffeeLiqueur
   reactants:
     Enzyme:
       amount: 1
@@ -63,7 +73,7 @@
     Sugar:
       Amount: 1
   products:
-    BlueCuracao: 2
+    CoffeeLiqueur: 2
 
 - type: reaction
   id: MelonLiquor
@@ -73,7 +83,7 @@
     JuiceWatermelon:
       amount: 1
   products:
-    BlueCuracao: 2
+    MelonLiquor: 2
 
 - type: reaction
   id: Wine
@@ -83,4 +93,4 @@
     JuiceGrape:
       amount: 1
   products:
-    BlueCuracao: 2
+    Wine: 2
