@@ -1475,6 +1475,7 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m82f
       map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: -0.03625, -0.08
       visible: false
     - sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
       state: icon-front
