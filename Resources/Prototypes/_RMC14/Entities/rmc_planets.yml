@@ -108,3 +108,13 @@
     camouflage: Urban
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     minPlayers: 130
+
+- type: entity
+  id: RMCPlanetSorokyne
+  name: LV-976 Sorokyne Strata
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/sorokyne.yml
+    camouflage: Snow
+    minPlayers: 130
+    announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
