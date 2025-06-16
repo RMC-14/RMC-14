@@ -8,7 +8,6 @@ using Content.Shared.CombatMode;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
-using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -32,6 +31,7 @@ public sealed class RMCAirShotSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedDropshipWeaponSystem _dropship = default!;
 
     public override void Initialize()
     {
@@ -107,7 +107,14 @@ public sealed class RMCAirShotSystem : EntitySystem
             if (TryComp(casing, out RMCAirProjectileComponent? projectile))
             {
                 if (_net.IsServer)
-                    Spawn(projectile.Prototype, GetCoordinates(args.Coordinates));
+                {
+                    var spawned = Spawn(projectile.Prototype, GetCoordinates(args.Coordinates));
+                    if (HasComp<FlareSignalComponent>(spawned))
+                    {
+                        var id = _dropship.ComputeNextId();
+                        _dropship.MakeDropshipTarget(spawned, _dropship.GetUserAbbreviation(args.User, id));
+                    }
+                }
             }
 
             // Signal flares don't like being instantly deleted.

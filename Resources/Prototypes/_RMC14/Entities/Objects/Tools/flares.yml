@@ -353,8 +353,10 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
         mask:
-        - ItemMask
+        - Impassable
+        - BulletImpassable
 
 - type: entity
   parent: RMCFlareBullet

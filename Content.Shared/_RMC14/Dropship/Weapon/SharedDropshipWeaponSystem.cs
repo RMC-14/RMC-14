@@ -21,12 +21,14 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Examine;
+using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.GameTicking;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
@@ -91,6 +93,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, ExaminedEvent>(OnFlareSignalExamined);
         SubscribeLocalEvent<FlareSignalComponent, DroppedEvent>(OnFlareSignalDropped);
         SubscribeLocalEvent<FlareSignalComponent, ThrownEvent>(OnFlareSignalThrown);
+        SubscribeLocalEvent<FlareSignalComponent, GrenadeContentThrownEvent>(OnFlareSignalGrenadeContentThrown);
         SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
         SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
 
@@ -216,6 +219,19 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (IsFlareLit(ent))
             args.Cancel();
+    }
+
+    private void OnFlareSignalGrenadeContentThrown(Entity<FlareSignalComponent> ent, ref GrenadeContentThrownEvent args)
+    {
+        if (!TryComp(args.Source, out ProjectileComponent? projectile))
+            return;
+
+        var id = ComputeNextId();
+        var abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
+        if (projectile.Shooter != null)
+            abbreviation = GetUserAbbreviation(projectile.Shooter.Value, id);
+
+        MakeDropshipTarget(ent, abbreviation);
     }
 
     private void OnTerminalMapInit(Entity<DropshipTerminalWeaponsComponent> ent, ref MapInitEvent args)
