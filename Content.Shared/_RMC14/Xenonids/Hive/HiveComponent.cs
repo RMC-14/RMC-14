@@ -38,6 +38,9 @@ public sealed partial class HiveComponent : Component
     public SoundSpecifier AnnounceSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_distantroar_3.ogg", AudioParams.Default.WithVolume(-6));
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier MarineAnnounceSound = new SoundCollectionSpecifier("XenoEchoRoar", AudioParams.Default.WithVolume(-2));
+
+    [DataField, AutoNetworkedField]
     public bool SeeThroughContainers;
 
     [DataField, AutoNetworkedField]
