@@ -259,6 +259,18 @@
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
 
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitASOWhite
+  name: aso white uniform
+  description: A service uniform typycally used by Auxiliary Support Officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_white.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
 # Officer
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
