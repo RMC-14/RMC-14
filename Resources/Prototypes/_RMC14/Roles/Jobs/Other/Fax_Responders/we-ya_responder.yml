@@ -12,6 +12,7 @@
   supervisors: cm-job-supervisors-staff
   accessGroups:
   - ShipMasterAccess
+  spawnMenuRoleName: WEYA Communications Executive
   special:
   - !type:AddComponentSpecial
     components:
