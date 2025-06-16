@@ -16,6 +16,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -32,6 +33,7 @@ public sealed class RMCAirShotSystem : EntitySystem
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedDropshipWeaponSystem _dropship = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -97,16 +99,16 @@ public sealed class RMCAirShotSystem : EntitySystem
         if (!TryComp(ent, out GunComponent? gun))
             return;
 
-        var coordinates = GetCoordinates(args.Coordinates);
-
-        var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordinates, args.User);
-        RaiseLocalEvent(ent, ev);
-
-        foreach (var (casing, _) in ev.Ammo)
+        if (_net.IsServer)
         {
-            if (TryComp(casing, out RMCAirProjectileComponent? projectile))
+            var coordinates = GetCoordinates(args.Coordinates);
+
+            var ev = new TakeAmmoEvent(1, new List<(EntityUid? Entity, IShootable Shootable)>(), coordinates, args.User);
+            RaiseLocalEvent(ent, ev);
+
+            foreach (var (casing, _) in ev.Ammo)
             {
-                if (_net.IsServer)
+                if (TryComp(casing, out RMCAirProjectileComponent? projectile))
                 {
                     var spawned = Spawn(projectile.Prototype, GetCoordinates(args.Coordinates));
                     if (HasComp<FlareSignalComponent>(spawned))
@@ -115,14 +117,6 @@ public sealed class RMCAirShotSystem : EntitySystem
                         _dropship.MakeDropshipTarget(spawned, _dropship.GetUserAbbreviation(args.User, id));
                     }
                 }
-            }
-
-            // Signal flares don't like being instantly deleted.
-            if (HasComp<FlareSignalComponent>(casing))
-                QueueDel(casing);
-            // Projectiles hurt the shooting entity if they are not deleted on the same tick.
-            else
-            {
                 Del(casing);
             }
         }
