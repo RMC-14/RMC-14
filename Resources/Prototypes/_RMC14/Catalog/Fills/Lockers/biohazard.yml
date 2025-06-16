@@ -1,6 +1,6 @@
  - type: entity
    id: CMClosetBioFilled
-   suffix: Filled, Generic
+   suffix: Filled, Generic, RMC
    parent: CMClosetBio
    components:
    - type: StorageFill
@@ -10,7 +10,7 @@
 
  - type: entity
    id: CMClosetBioVirologyFilled
-   suffix: Filled, Virology
+   suffix: Filled, Virology, RMC
    parent: CMClosetBioVirology
    components:
    - type: StorageFill
@@ -20,7 +20,7 @@
 
  - type: entity
    id: CMClosetBioSecurityFilled
-   suffix: Filled, Security
+   suffix: Filled, Security, RMC
    parent: CMClosetBioSecurity
    components:
    - type: StorageFill
@@ -30,7 +30,7 @@
 
  - type: entity
    id: CMClosetBioJanitorFilled
-   suffix: Filled, Janitor
+   suffix: Filled, Janitor, RMC
    parent: CMClosetBioJanitor
    components:
    - type: StorageFill
@@ -40,7 +40,7 @@
 
  - type: entity
    id: CMClosetBioScientistFilled
-   suffix: Filled, Science
+   suffix: Filled, Science, RMC
    parent: CMClosetBioScientist
    components:
    - type: StorageFill

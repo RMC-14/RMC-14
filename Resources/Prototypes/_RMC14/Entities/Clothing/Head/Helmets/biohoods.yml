@@ -3,7 +3,7 @@
   id: RMCHoodBioGeneral
   name: bio hood
   description: A hood that protects the head and face from biological contaminants.
-  suffix: Generic
+  suffix: Generic, RMC
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/biohelmet.rsi
