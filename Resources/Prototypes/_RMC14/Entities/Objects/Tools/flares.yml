@@ -58,6 +58,9 @@
         startValue: 7.0
         endValue: 1.0
   - type: RMCNightVisionVisibleOnIgnite
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCFlareBullet
 
 - type: entity
   parent: CMFlare
@@ -101,6 +104,8 @@
       maxDuration: 150
       startValue: 7.0
       endValue: 1.0
+  - type: CartridgeAmmo
+    proto: RMCFlareCASBullet
 
 - type: entity
   parent: CMFlare
@@ -298,6 +303,72 @@
       whitelist:
         tags:
         - RMCFlareCAS
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCFlareBullet
+  name: flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
+    layers:
+    - state: flare
+  - type: GunIFF
+    enabled: true
+  - type: Projectile
+    deleteOnCollide: false
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 2.5
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ScatteringGrenade
+    directHitTrigger: true
+    fillPrototype: CMFlare
+    capacity: 1
+    delayBeforeTriggerContents: 0
+    distance: 0
+    toggleContents: true
+  - type: PointLight
+    enabled: true
+    color: "#FFCCCC"
+    radius: 2.0
+    energy: 7.0
+  - type: IgniteOnProjectileHit
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: IgnorePredictionHide
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        mask:
+        - ItemMask
+
+- type: entity
+  parent: RMCFlareBullet
+  id: RMCFlareCASBullet
+  name: signal flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
+    layers:
+    - state: flare_signal
+  - type: ScatteringGrenade
+    fillPrototype: RMCFlareCAS
+  - type: PointLight
+    enabled: true
+    color: "#A7FFA7"
+    radius: 2.0
+    energy: 7.0
 
 - type: Tag
   id: RMCFlare
