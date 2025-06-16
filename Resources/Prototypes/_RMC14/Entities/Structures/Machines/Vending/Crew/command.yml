@@ -1295,6 +1295,7 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbing
+      - id: CMWebbingDropPouch
     - name: Spare Equipment
       jobs:
       - CMCMO
