@@ -849,7 +849,7 @@
   - type: StorageFill
     contents:
     - id: RMCSpeedLoaderZHNK72
-      amount: 5
+      amount: 6
     - id: RMCWeaponRevolverZHNK72
 
 - type: entity
