@@ -56,7 +56,7 @@ public sealed class RMCAirShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Try to shoot the gun in the air, spawns an entity on the shooters location if it's ammo has the <see cref="RMCAirProjectileComponent"/>.
+    ///     Try to fire the gun into the air, spawns an entity on the shooters location if it's ammo has the <see cref="RMCAirProjectileComponent"/>.
     /// </summary>
     /// <param name="ent">The entity that wants to shoot into the air</param>
     /// <param name="shooter">The entity using the weapon.</param>

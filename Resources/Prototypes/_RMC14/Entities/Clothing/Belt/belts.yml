@@ -1490,7 +1490,7 @@
     slots:
     - suitStorage
     - belt
-  - type: Storage # holds up to 6 mags plus gun
+  - type: Storage
     maxItemSize: Normal
     grid:
     - 0,0,17,3 # 18 slots
