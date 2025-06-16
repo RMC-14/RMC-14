@@ -194,7 +194,6 @@
     whitelist:
       tags:
       - Sidearm
-      # TODO: Flare gun
       - CMMagazinePistol
       - RMCMagazineRevolver
   - type: FixedItemSizeStorage
@@ -229,7 +228,7 @@
       whitelist:
         tags:
         - Sidearm
-        # TODO: Flare gun
+        - RMCFlareGun
         - CMMagazinePistol
         - RMCMagazineRevolver
     - type: FixedItemSizeStorage

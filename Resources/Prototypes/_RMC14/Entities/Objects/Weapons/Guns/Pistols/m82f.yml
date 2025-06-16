@@ -12,9 +12,6 @@
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Item
     size: Normal
-  - type: Tag
-    tags:
-    - Sidearm
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m82f.rsi
     slots:
@@ -73,3 +70,10 @@
     enabled: true
   - type: GunIgnorePrediction
   - type: RMCAirShot
+  - type: Tag
+    tags:
+    - RMCFlareGun
+    - Sidearm
+
+- type: Tag
+  id: RMCFlareGun

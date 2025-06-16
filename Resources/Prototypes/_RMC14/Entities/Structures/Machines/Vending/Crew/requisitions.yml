@@ -35,8 +35,8 @@
         amount: 50
       - id: RMCWeaponPistolM13
         amount: 50
-      #- id: CMWeaponFlareM82F
-      #  amount: 20
+      - id: RMCWeaponPistolM82F
+        amount: 20
     - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
