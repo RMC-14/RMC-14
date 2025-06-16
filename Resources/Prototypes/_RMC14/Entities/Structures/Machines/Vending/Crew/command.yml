@@ -1294,15 +1294,26 @@
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
+    - name: Uniform
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMJumpsuitBO
+      - id: RMCJumpsuitASOBlack
+    - name: Coat
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMCoatASO
     - name: Standard Equipment
       jobs:
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
       - id: CMHandsInsulated
-      - id: CMJumpsuitBO
       - id: CMHeadsetSeniorCommand
-      - id: CMCoatASO
     - name: Bag
       jobs:
       - CMAuxiliarySupportOfficer
