@@ -42,7 +42,6 @@
   - type: ShootAtFixedPoint
     maxFixedRange: 15
   - type: BallisticAmmoProvider
-    cycleable: false
     whitelist:
       tags:
       - Flare
@@ -73,3 +72,4 @@
   - type: GunIFF
     enabled: true
   - type: GunIgnorePrediction
+  - type: RMCAirShot

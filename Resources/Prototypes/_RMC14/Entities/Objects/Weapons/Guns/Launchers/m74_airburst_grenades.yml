@@ -314,6 +314,15 @@
     energy: 7.0
   - type: IgniteOnProjectileHit
     intensity: 2
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        mask:
+        - Impassable
+        - BulletImpassable
 
 - type: entity
   parent: RMCBaseBullet

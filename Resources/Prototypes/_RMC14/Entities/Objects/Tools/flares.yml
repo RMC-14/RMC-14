@@ -61,6 +61,8 @@
   - type: CartridgeAmmo
     deleteOnSpawn: true
     proto: RMCFlareBullet
+  - type: RMCAirProjectile
+    prototype: RMCAirFlare
 
 - type: entity
   parent: CMFlare
@@ -106,6 +108,8 @@
       endValue: 1.0
   - type: CartridgeAmmo
     proto: RMCFlareCASBullet
+  - type: RMCAirProjectile
+    prototype: RMCAirFlareCAS
 
 - type: entity
   parent: CMFlare
@@ -369,6 +373,33 @@
     color: "#A7FFA7"
     radius: 2.0
     energy: 7.0
+
+- type: entity
+  parent: BaseItem
+  id: RMCAirFlare
+  name: air flare
+  components:
+  - type: PointLight
+    enabled: true
+    color: "#FFCCCC"
+    radius: 8.0
+    energy: 0.6
+  - type: TimedDespawn
+    lifetime: 300
+
+- type: entity
+  parent: BaseItem
+  id: RMCAirFlareCAS
+  name: air signal flare
+  components:
+  - type: PointLight
+    enabled: true
+    color: "#A7FFA7"
+    radius: 8.0
+    energy: 0.6
+  - type: FlareSignal
+  - type: TimedDespawn
+    lifetime: 300
 
 - type: Tag
   id: RMCFlare
