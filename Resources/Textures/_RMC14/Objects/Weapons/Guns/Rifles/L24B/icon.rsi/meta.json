@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Modified from SSG45 and taken Insperation from the cm13 sprite for the L23B. Created by RavenCaat",
+  "size": {
+    "x": 64,
+    "y": 32
+  },
+  "states": [
+    {
+        "name": "icon"
+    },
+    {
+        "name": "base"
+    },
+    {
+        "name": "bolt-open"
+    },
+    {
+        "name": "mag-0"
+    }
+  ]
+}
