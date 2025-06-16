@@ -87,7 +87,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: CMWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Glasses

@@ -261,7 +261,7 @@
 
 - type: entity
   parent: CMWebbingBase
-  id: CMWebbingPouch
+  id: CMWebbingDropPouch
   name: drop pouch
   description: A convenient pouch to carry loose items around.
   components:
@@ -609,8 +609,8 @@
       amount: 5
 
 - type: entity
-  parent: CMWebbingPouch
-  id: CMWebbingPouchRoyal
+  parent: CMWebbingDropPouch
+  id: CMWebbingDropPouchRoyal
   suffix: Filled, Royal
   components:
   - type: StorageFill
@@ -620,7 +620,7 @@
       - id: CMMRE # TODO RMC14 TSE ORP ration
 
 - type: entity
-  parent: CMWebbingPouch
+  parent: CMWebbingDropPouch
   id: RMCWebbingPouchForecon
   suffix: Filled, Forecon
   components:
