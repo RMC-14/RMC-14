@@ -1301,7 +1301,8 @@
       entries:
       - id: CMJumpsuitBO
       - id: RMCJumpsuitASOBlack
-      - id: RMCJumpsuitASOWhite
+      - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOBlackAlt
     - name: Coat
       jobs:
       - CMAuxiliarySupportOfficer
