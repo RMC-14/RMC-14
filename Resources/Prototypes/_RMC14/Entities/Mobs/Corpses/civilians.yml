@@ -151,7 +151,7 @@
 - type: startingGear
   id: RMCGearCorpseSecurity
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: RMCJumpsuitCivilianSecurity
     back: CMSatchelSecurity
     head: RMCArmorHelmetSecurity
     outerClothing: RMCArmorSecurity
@@ -194,22 +194,45 @@
   id: RMCCorpseLiaison
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseLiaison ]
+    prototypes:
+    - RMCGearCorpseLiaison
+    - RMCGearCorpseLiaisonBlue
+    - RMCGearCorpseLiaisonBrown
+    - RMCGearCorpseLiaisonWhite
   - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonField
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCArmorVest
     back: CMSatchel
     shoes: RMCShoesLaceup
     eyes: RMCGlassesAviators
     id: CMIDCardLiaisonColony
     ears: RMCHeadsetDistressWeYa
-#    belt: /obj/item/storage/belt/gun/m4a3/mod88
+    belt: CMM77BeltFilled
   storage:
     back:
     - RMCRadioHandheldColonyOff
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonBlue
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBlue
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonBrown
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBrown
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonWhite
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonCorporateFormal
 
 # Prison Guard
 - type: randomHumanoidSettings
