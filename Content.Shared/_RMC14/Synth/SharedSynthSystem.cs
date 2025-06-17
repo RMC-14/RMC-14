@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -64,6 +65,7 @@ public abstract class SharedSynthSystem : EntitySystem
             _rmcStatusEffects.GiveStunResistance(ent.Owner, ent.Comp.StunResistance.Value);
 
         _mobThreshold.SetMobStateThreshold(ent.Owner, ent.Comp.CritThreshold, MobState.Critical);
+        RemCompDeferred<SlowOnDamageComponent>(ent.Owner);
     }
 
     private void OnMeleeAttempted(Entity<SynthComponent> ent, ref AttackAttemptEvent args)
