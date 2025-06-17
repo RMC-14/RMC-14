@@ -1310,6 +1310,9 @@
       choices: { CMHelmet: 1 }
       entries:
       - id: CMCoatASO
+      - id: RMCCoatASOBlack
+      - id: RMCCoatASOWhite
+      - id: RMCCoatASOBlackAlt
     - name: Standard Equipment
       jobs:
       - CMAuxiliarySupportOfficer
