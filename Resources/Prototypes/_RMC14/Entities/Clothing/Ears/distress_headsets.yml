@@ -23,7 +23,7 @@
 
 # For CLF
 - type: entity
-  parent: RMCHeadsetColonyIcons
+  parent: [RMCHeadsetIconsCLF, CMHeadsetColony]
   id: RMCHeadsetDistressCLF
   name: CLF headset
   description: A special headset used by small groups of trained operatives. Or terrorists.
