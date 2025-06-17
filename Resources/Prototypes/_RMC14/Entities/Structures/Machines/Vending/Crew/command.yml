@@ -1303,7 +1303,8 @@
       - id: RMCJumpsuitASOBlack
       - id: RMCJumpsuitASOFormal
       - id: RMCJumpsuitASOBlackAlt
-    - name: Coat
+      - id: RMCJumpsuitASOOperations
+    - name: Outer Wear
       jobs:
       - CMAuxiliarySupportOfficer
       choices: { CMHelmet: 1 }
