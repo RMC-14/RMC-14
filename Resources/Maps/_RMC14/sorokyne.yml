@@ -4,8 +4,8 @@ meta:
   engineVersion: 251.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/17/2025 18:11:19
-  entityCount: 30192
+  time: 06/17/2025 18:24:20
+  entityCount: 30223
 maps:
 - 1
 grids:
@@ -1295,7 +1295,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -25109.99
+      secondsUntilStateChange: -25873.057
       state: Opening
   - uid: 25048
     components:
@@ -1356,6 +1356,18 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 44.5,129.5
+      parent: 1
+  - uid: 30212
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,59.5
+      parent: 1
+  - uid: 30213
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 12.5,59.5
       parent: 1
 - proto: CMAirlockCell
   entities:
@@ -1680,7 +1692,7 @@ entities:
       pos: 142.5,103.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -24879.758
+      secondsUntilStateChange: -25642.822
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2135,7 +2147,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -24890.59
+      secondsUntilStateChange: -25653.656
       state: Opening
   - uid: 25141
     components:
@@ -67927,7 +67939,7 @@ entities:
       pos: 153.5,152.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -33616.414
+      secondsUntilStateChange: -34379.48
       state: Opening
   - uid: 24156
     components:
@@ -80097,6 +80109,169 @@ entities:
     - type: Transform
       pos: 104.5,102.5
       parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 30193
+    components:
+    - type: MetaData
+      name: LZ1
+    - type: Transform
+      pos: 10.5,108.5
+      parent: 1
+  - uid: 30194
+    components:
+    - type: MetaData
+      name: Mining canteen
+    - type: Transform
+      pos: 40.5,124.5
+      parent: 1
+  - uid: 30195
+    components:
+    - type: MetaData
+      name: Flight Control
+    - type: Transform
+      pos: 64.5,83.5
+      parent: 1
+  - uid: 30196
+    components:
+    - type: MetaData
+      name: North Deck
+    - type: Transform
+      pos: 83.5,112.5
+      parent: 1
+  - uid: 30197
+    components:
+    - type: MetaData
+      name: Engineering
+    - type: Transform
+      pos: 101.5,100.5
+      parent: 1
+  - uid: 30198
+    components:
+    - type: MetaData
+      name: Colony Power
+    - type: Transform
+      pos: 109.5,109.5
+      parent: 1
+  - uid: 30199
+    components:
+    - type: MetaData
+      name: Security
+    - type: Transform
+      pos: 133.5,113.5
+      parent: 1
+  - uid: 30200
+    components:
+    - type: MetaData
+      name: Administration
+    - type: Transform
+      pos: 123.5,96.5
+      parent: 1
+  - uid: 30201
+    components:
+    - type: MetaData
+      name: South Deck
+    - type: Transform
+      pos: 100.5,68.5
+      parent: 1
+  - uid: 30202
+    components:
+    - type: MetaData
+      name: Telecomms
+    - type: Transform
+      pos: 76.5,33.5
+      parent: 1
+  - uid: 30203
+    components:
+    - type: MetaData
+      name: LZ2
+    - type: Transform
+      pos: 46.5,18.5
+      parent: 1
+  - uid: 30204
+    components:
+    - type: MetaData
+      name: Cryo-Thermal Marshes
+    - type: Transform
+      pos: 36.5,45.5
+      parent: 1
+  - uid: 30205
+    components:
+    - type: MetaData
+      name: Lifeboat
+    - type: Transform
+      pos: 14.5,59.5
+      parent: 1
+  - uid: 30214
+    components:
+    - type: MetaData
+      name: Medical
+    - type: Transform
+      pos: 115.5,76.5
+      parent: 1
+  - uid: 30215
+    components:
+    - type: MetaData
+      name: Aerodrom
+    - type: Transform
+      pos: 143.5,75.5
+      parent: 1
+  - uid: 30216
+    components:
+    - type: MetaData
+      name: Jungle Deck
+    - type: Transform
+      pos: 153.5,44.5
+      parent: 1
+  - uid: 30217
+    components:
+    - type: MetaData
+      name: Carp Lake
+    - type: Transform
+      pos: 194.5,77.5
+      parent: 1
+  - uid: 30218
+    components:
+    - type: MetaData
+      name: Canteen
+    - type: Transform
+      pos: 150.5,106.5
+      parent: 1
+  - uid: 30219
+    components:
+    - type: MetaData
+      name: B-Ball Caves
+    - type: Transform
+      pos: 113.5,154.5
+      parent: 1
+  - uid: 30220
+    components:
+    - type: MetaData
+      name: Minehead
+    - type: Transform
+      pos: 189.5,137.5
+      parent: 1
+  - uid: 30221
+    components:
+    - type: MetaData
+      name: Deep Security
+    - type: Transform
+      pos: 232.5,131.5
+      parent: 1
+  - uid: 30222
+    components:
+    - type: MetaData
+      name: Thermal Springs
+    - type: Transform
+      pos: 237.5,87.5
+      parent: 1
+  - uid: 30223
+    components:
+    - type: MetaData
+      name: Core Monitoring
+    - type: Transform
+      pos: 208.5,49.5
+      parent: 1
 - proto: RMCMedevacStretcher
   entities:
   - uid: 22387
@@ -89279,6 +89454,30 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 141.5,72.5
       parent: 1
+  - uid: 30206
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,60.5
+      parent: 1
+  - uid: 30207
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,58.5
+      parent: 1
+  - uid: 30208
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,58.5
+      parent: 1
+  - uid: 30209
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,60.5
+      parent: 1
 - proto: RMCSecureCaseDouble
   entities:
   - uid: 23132
@@ -89484,6 +89683,11 @@ entities:
     components:
     - type: Transform
       pos: 32.5,127.5
+      parent: 1
+  - uid: 30210
+    components:
+    - type: Transform
+      pos: 14.5,56.5
       parent: 1
 - proto: RMCSecurityCameraConsole
   entities:
@@ -90741,6 +90945,11 @@ entities:
     components:
     - type: Transform
       pos: 38.5,127.5
+      parent: 1
+  - uid: 30211
+    components:
+    - type: Transform
+      pos: 14.5,60.5
       parent: 1
 - proto: RMCSpawnerIntelFar
   entities:
