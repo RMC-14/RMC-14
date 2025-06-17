@@ -60,7 +60,7 @@
     eyes: RMCGlassesMedicalHUDGlasses
     jumpsuit: RMCJumpsuitCLFWebbing
     neck: RMCCLFArmband
-    outerClothing: RMCArmorVestNone
+    outerClothing: RMCCoatMilitiaVest
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFMedic

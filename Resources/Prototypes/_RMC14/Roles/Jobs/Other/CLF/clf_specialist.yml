@@ -61,13 +61,13 @@
 - type: startingGear
   id: RMCGearCLFSpecialist
   equipment:
-    head: RMCArmorHelmetSecurity
+    head: RMCHeadMilitiaBucket
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesM4SPRBattleSight
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
-    outerClothing: RMCArmorVestNone
+    outerClothing: RMCCoatMilitiaHauberk
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSpecialist

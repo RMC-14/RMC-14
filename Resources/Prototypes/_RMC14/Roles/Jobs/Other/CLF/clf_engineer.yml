@@ -63,7 +63,7 @@
   #  eyes: RMCMesonGoggles TODO RMC14
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
-    outerClothing: RMCArmorVestNone
+    outerClothing: RMCCoatMilitia
     gloves: CMHandsInsulated
     shoes: RMCShoesBrown
     id: RMCIDCardCLFEngineer

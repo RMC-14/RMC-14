@@ -59,12 +59,12 @@
 - type: startingGear
   id: RMCGearCLFSoldier
   equipment:
-    head: RMCArmorHelmetSecurity
+    head: RMCHeadMilitiaHood
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
-    outerClothing: RMCArmorVestNone
+    outerClothing: RMCCoatMilitiaVest
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSoldier
@@ -73,8 +73,8 @@
     pocket1: RMCFlashlight
     pocket2: RMCPouchFirstAidInjectors
   inhand:
-  - WeaponSMGM63 # TODO RMC14
-  - CMMagazineSMGM63 # TODO RMC14
+  - RMCWeaponSMGP90
+  - RMCMagazineSMGP90
 
 - type: playTimeTracker
   id: CMJobCLFSoldier
