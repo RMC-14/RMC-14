@@ -37,6 +37,8 @@
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: clf_cellcom
+    - type: RMCPointing
+    - type: MarineOrders
   hidden: true
 
 - type: entity
