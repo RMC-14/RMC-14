@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Djvarik
-  changes:
-  - message: Added missing trash carts in casino alley in Chance's
-    type: Fix
-  id: 1358
-  time: '2025-02-18T22:22:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5656
 - author: Whisper
   changes:
   - message: Fixed duplicated traits and traits not intended to be selectable, and
@@ -5316,5 +5309,24 @@
   id: 1860
   time: '2025-06-18T02:47:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6720
+- author: noctyrnal
+  changes:
+  - message: Added the NP92 Pistol, NPZ92 Pistol, Type-73 Pistol, Type-74 Pistol,
+      ZHNK-72 Revolver, Type-88 Marksman Rifle, Type-64 SMG and QYJ-72 LMG for the
+      SPP.
+    type: Add
+  - message: Added the HE and Incend rockets for the HJRA-12
+    type: Add
+  - message: The HJRA-12 now has different sprites.
+    type: Tweak
+  - message: Adds shell boxes for the heavy shotgun shells used by the Type-23 shotgun.
+    type: Add
+  - message: Magazines no longer wrongly display as contraband.
+    type: Fix
+  - message: SPP now spawn with the correct weapons.
+    type: Fix
+  id: 1861
+  time: '2025-06-18T11:40:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6729
 Name: RMC14
 Order: -1
