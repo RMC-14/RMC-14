@@ -56,6 +56,22 @@
 
 - type: entity
   parent: RMCContainerBase
+  id: RMCContainerFujinLeft
+  suffix: Fujin, Left
+  components:
+  - type: Sprite
+    state: fujincontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerFujinMiddle
+  suffix: Fujin, Middle
+  components:
+  - type: Sprite
+    state: fujincontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
   id: RMCContainerGreenLeft
   suffix: Green, Left
   components:
@@ -101,6 +117,134 @@
   components:
   - type: Sprite
     state: redcontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerApocraphyLeft
+  suffix: Apocraphy, Left
+  components:
+  - type: Sprite
+    state: apocraphycontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerApocraphyMiddle
+  suffix: Apocraphy, Middle
+  components:
+  - type: Sprite
+    state: apocraphycontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerPathosLeft
+  suffix: Pathos, Left
+  components:
+  - type: Sprite
+    state: pathoscontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerPathosMiddle
+  suffix: Pathos, Middle
+  components:
+  - type: Sprite
+    state: pathoscontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerWeYaLeft
+  suffix: WeYa, Left
+  components:
+  - type: Sprite
+    state: weyacontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerWeYaMiddle
+  suffix: WeYa, Middle
+  components:
+  - type: Sprite
+    state: weyacontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerWeYaRight
+  suffix: WeYa, Right
+  components:
+  - type: Sprite
+    state: weyacontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTrijentLeft
+  suffix: Trijent, Left
+  components:
+  - type: Sprite
+    state: trijentcontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTrijentMiddle
+  suffix: Trijent, Middle
+  components:
+  - type: Sprite
+    state: trijentcontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTrijentRight
+  suffix: Trijent, Right
+  components:
+  - type: Sprite
+    state: trijentcontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTrijentAltLeft
+  suffix: Trijent Alt, Left
+  components:
+  - type: Sprite
+    state: trijentaltcontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTrijentAltMiddle
+  suffix: Trijent Alt, Middle
+  components:
+  - type: Sprite
+    state: trijentaltcontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTrijentAltRight
+  suffix: Trijent Alt, Right
+  components:
+  - type: Sprite
+    state: trijentaltcontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerFerretLeft
+  suffix: Ferret, Left
+  components:
+  - type: Sprite
+    state: ferretcontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerFerretMiddle
+  suffix: Ferret, Middle
+  components:
+  - type: Sprite
+    state: ferretcontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerFerretRight
+  suffix: Ferret, Right
+  components:
+  - type: Sprite
+    state: ferretcontainerright
 
 - type: entity
   parent: RMCContainerBase
