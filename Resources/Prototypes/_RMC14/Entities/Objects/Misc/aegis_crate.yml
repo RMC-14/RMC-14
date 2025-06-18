@@ -13,7 +13,8 @@
     - type: RotatingLight
       speed: 90
     - type: Sprite
-      sprite: _RMC14/Objects/secure_box.rsi
+      sprite: _RMC14/Secure-Box.rsi
+      noRot: true
       layers:
         - state: aegis_crate
           map: ["enum.AegisCrateVisualLayers.Base"]
@@ -38,14 +39,14 @@
             bounds: "-0.49,-0.49,0.49,0.49"   # 1x1 tile, centered
           density: 100
           mask:
-            - FullTileMask
+            - CrateMask
           layer:
-            - WallLayer
+            - MachineLayer
     - type: AccessReader
       access: [["CMAccessAegis"]]
     - type: Lock
-    - type: Appearance
     - type: AnimationPlayer
+    - type: Appearance
     - type: Corrodible
       isCorrodible: False
     - type: DestroyedByExplosionType
