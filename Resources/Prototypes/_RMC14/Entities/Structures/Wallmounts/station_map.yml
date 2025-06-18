@@ -6,27 +6,27 @@
   placement:
     mode: SnapgridCenter
   components:
-    - type: StationMap
-    - type: Transform
-      anchored: true
-    - type: Sprite
-      sprite: _RMC14/Structures/Machines/status_display.rsi
-      layers:
-      - map: ["computerLayerBody"]
-        state: frame
-      - map: ["computerLayerScreen"]
-        state: map
-    - type: Icon
-      sprite: Structures/Machines/station_map.rsi
+  - type: StationMap
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/status_display.rsi
+    layers:
+    - map: ["computerLayerBody"]
       state: frame
-    - type: WallMount
-      arc: 360
-    - type: Clickable
-    - type: InteractionOutline
-    - type: ExtensionCableReceiver
-    - type: ActivatableUI
-      key: enum.StationMapUiKey.Key
-    - type: UserInterface
-      interfaces:
-        enum.StationMapUiKey.Key:
-          type: StationMapBoundUserInterface
+    - map: ["computerLayerScreen"]
+      state: map
+  - type: Icon
+    sprite: Structures/Machines/station_map.rsi
+    state: frame
+  - type: WallMount
+    arc: 360
+  - type: Clickable
+  - type: InteractionOutline
+  - type: ExtensionCableReceiver
+  - type: ActivatableUI
+    key: enum.StationMapUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
