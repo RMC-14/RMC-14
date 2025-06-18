@@ -48,30 +48,30 @@
 
 - type: entity
   parent: CMBaseWallInvincible
-  id: RMCWallStrataIce
-  name: ice columns
-  description: An absolutely massive collection of columns made of ice. The longer you stare, the deeper the ice seems to go.
+  id: RMCWallStrataRock
+  name: rock wall
+  description: A rough wall of hardened rock.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Walls/strata_ice.rsi
-    state: strata_ice
+    sprite: _RMC14/Structures/Walls/strata_rock.rsi
+    state: strata_rock
   - type: Icon
-    sprite: _RMC14/Structures/Walls/strata_ice.rsi
-    state: strata_ice
+    sprite: _RMC14/Structures/Walls/strata_rock.rsi
+    state: strata_rock
   - type: IconSmooth
     key: walls
-    base: strata_ice
+    base: strata_rock
 
 - type: entity
-  parent: RMCWallStrataIce
-  id: RMCWallStrataIceDirty
+  parent: RMCWallStrataRock
+  id: RMCWallStrataRockDirty
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Walls/strata_ice_dirty.rsi
-    state: strata_ice_dirty
+    sprite: _RMC14/Structures/Walls/strata_rock_dirty.rsi
+    state: strata_rock_dirty
   - type: Icon
-    sprite: _RMC14/Structures/Walls/strata_ice_dirty.rsi
-    state: strata_ice_dirty
+    sprite: _RMC14/Structures/Walls/strata_rock_dirty.rsi
+    state: strata_rock_dirty
   - type: IconSmooth
     key: walls
-    base: strata_ice_dirty
+    base: strata_rock_dirty
