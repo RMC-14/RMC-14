@@ -5,6 +5,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Effects;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -115,9 +116,18 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         if (_net.IsServer)
             SpawnAttachedTo(ent.Comp.HitEffect, user.ToCoordinates());
 
-        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", user), ("object", obstacle));
-        var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", user), ("object", obstacle));
-        _popup.PopupPredicted(selfMessage, othersMessage, user, user, PopupType.MediumCaution);
+        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", user), ("object", Identity.Name(obstacle, EntityManager, user)));
+        _popup.PopupClient(selfMessage, user, user, PopupType.MediumCaution);
+
+        var others = Filter.PvsExcept(user).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var otherMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", user), ("object", Identity.Name(obstacle, EntityManager, otherEnt)));
+            _popup.PopupEntity(otherMessage, user, otherEnt, PopupType.MediumCaution);
+        }
 
         args.Handled = true;
     }
