@@ -190,3 +190,19 @@
   id: CMPlanetTatami
   name: tatami flooring
   sprite: /Textures/_RMC14/Tiles/planet/interior/tatami.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetDirtBrownRoad
+  name: dirt road
+  sprite: /Textures/_RMC14/Tiles/planet/browndirt_road/browndirt_road.png
+
+- type: tile
+  parent: CMPlanetDirt
+  id: RMCPlanetDirtBrown
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_desert/desert.png
+
+- type: tile
+  parent: RMCPlanetDirtBrown
+  id: RMCPlanetDirtBrownDug
+  sprite: /Textures/_RMC14/Tiles/planet/sorokyne/sorokyne_desert/desert_dug.png
