@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Fixed duplicated traits and traits not intended to be selectable, and
-      lowered the frequency of replacements for some accents.
-    type: Fix
-  - message: Spawning as a command role now removes stuttering accent and frontal
-      lisps from the character for that round.
-    type: Fix
-  id: 1359
-  time: '2025-02-19T05:18:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4872
 - author: CyberTropic
   changes:
   - message: Fixed fences connecting to walls.
@@ -5328,5 +5317,14 @@
   id: 1861
   time: '2025-06-18T11:40:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6729
+- author: crazy1112345
+  changes:
+  - message: Added New Varadero survivors! This includes the Beach Bum, Miner, Priest,
+      Cargo Technician, Engineering Technician, UN Peacekeeper, ICB Liaison, Medical
+      Technician, and the vacationing Lt. Colonel Commander.
+    type: Add
+  id: 1862
+  time: '2025-06-18T13:03:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6585
 Name: RMC14
 Order: -1
