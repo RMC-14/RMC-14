@@ -42,4 +42,10 @@ public sealed partial class RMCAirShotComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int>? RequiredSkills;
+
+    /// <summary>
+    ///     The identifier of the last shot signal flare.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public string? LastFlareId;
 }

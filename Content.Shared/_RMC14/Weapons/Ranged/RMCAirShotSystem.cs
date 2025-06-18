@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.CombatMode;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged;
@@ -16,7 +17,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -33,12 +33,12 @@ public sealed class RMCAirShotSystem : EntitySystem
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedDropshipWeaponSystem _dropship = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCAirShotComponent, UniqueActionEvent>(OnUniqueAction, before: new[] { typeof(CMGunSystem) } );
         SubscribeLocalEvent<RMCAirShotComponent, AirShotDoAfterEvent>(OnAirShotDoAfter);
+        SubscribeLocalEvent<RMCAirShotComponent, ExaminedEvent>(OnAirShotExamined);
     }
 
     private void OnUniqueAction(Entity<RMCAirShotComponent> ent, ref UniqueActionEvent args)
@@ -55,40 +55,6 @@ public sealed class RMCAirShotSystem : EntitySystem
         AttemptAirShot(ent, args.UserUid);
 
         args.Handled = true;
-    }
-
-    /// <summary>
-    ///     Try to fire the gun into the air, spawns an entity on the shooters location if it's ammo has the <see cref="RMCAirProjectileComponent"/>.
-    /// </summary>
-    /// <param name="ent">The entity that wants to shoot into the air</param>
-    /// <param name="shooter">The entity using the weapon.</param>
-    private void AttemptAirShot(Entity<RMCAirShotComponent> ent, EntityUid shooter)
-    {
-        var ammoCountEv = new GetAmmoCountEvent();
-        RaiseLocalEvent(ent, ref ammoCountEv);
-
-        if (ammoCountEv.Count <= 0)
-            return;
-
-        var shooterCoordinates = _transform.GetMoverCoordinates(shooter);
-
-        if (!ent.Comp.IgnoreRoof && !_area.CanCAS(shooterCoordinates))
-        {
-            var msg = Loc.GetString("rmc-gun-shoot-air-blocked");
-            _popup.PopupClient(msg, shooterCoordinates, shooter, PopupType.SmallCaution);
-            return;
-        }
-
-        var ev = new AirShotDoAfterEvent(GetNetCoordinates(shooterCoordinates));
-        var doAfter = new DoAfterArgs(EntityManager, shooter, ent.Comp.PreparationTime, ev, ent)
-        {
-            BreakOnMove = true,
-            NeedHand = true,
-            BreakOnHandChange = true,
-            MovementThreshold = 0.5f,
-        };
-
-        _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnAirShotDoAfter(Entity<RMCAirShotComponent> ent, ref AirShotDoAfterEvent args)
@@ -114,7 +80,11 @@ public sealed class RMCAirShotSystem : EntitySystem
                     if (HasComp<FlareSignalComponent>(spawned))
                     {
                         var id = _dropship.ComputeNextId();
-                        _dropship.MakeDropshipTarget(spawned, _dropship.GetUserAbbreviation(args.User, id));
+                        var flareIdentifier = _dropship.GetUserAbbreviation(args.User, id);
+                        _dropship.MakeDropshipTarget(spawned, flareIdentifier);
+
+                        ent.Comp.LastFlareId = flareIdentifier;
+                        Dirty(ent);
                     }
                 }
                 Del(casing);
@@ -153,8 +123,48 @@ public sealed class RMCAirShotSystem : EntitySystem
                 _cameraShake.ShakeCamera(players, ent.Comp.ShakeAmount, ent.Comp.ShakeStrength);
         }
 
-        var ammoEv = new UpdateClientAmmoEvent();
+        var ammoEv = new UpdateClientAmmoEvent(-1);
         RaiseLocalEvent(ent, ref ammoEv);
+    }
+
+    private void OnAirShotExamined(Entity<RMCAirShotComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.LastFlareId is { } id)
+            args.PushMarkup(Loc.GetString("rmc-flare-gun-examine", ("id", id)));
+    }
+
+    /// <summary>
+    ///     Try to fire the gun into the air, spawns an entity on the shooters location if it's ammo has the <see cref="RMCAirProjectileComponent"/>.
+    /// </summary>
+    /// <param name="ent">The entity that wants to shoot into the air</param>
+    /// <param name="shooter">The entity using the weapon.</param>
+    private void AttemptAirShot(Entity<RMCAirShotComponent> ent, EntityUid shooter)
+    {
+        var ammoCountEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(ent, ref ammoCountEv);
+
+        if (ammoCountEv.Count <= 0)
+            return;
+
+        var shooterCoordinates = _transform.GetMoverCoordinates(shooter);
+
+        if (!ent.Comp.IgnoreRoof && !_area.CanCAS(shooterCoordinates))
+        {
+            var msg = Loc.GetString("rmc-gun-shoot-air-blocked");
+            _popup.PopupClient(msg, shooterCoordinates, shooter, PopupType.SmallCaution);
+            return;
+        }
+
+        var ev = new AirShotDoAfterEvent(GetNetCoordinates(shooterCoordinates));
+        var doAfter = new DoAfterArgs(EntityManager, shooter, ent.Comp.PreparationTime, ev, ent)
+        {
+            BreakOnMove = true,
+            NeedHand = true,
+            BreakOnHandChange = true,
+            MovementThreshold = 0.5f,
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
     }
 }
 

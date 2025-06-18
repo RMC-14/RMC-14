@@ -15,6 +15,7 @@ using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -96,6 +97,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, GrenadeContentThrownEvent>(OnFlareSignalGrenadeContentThrown);
         SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
         SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
+
+        SubscribeLocalEvent<ActiveFlareSignalComponent, ExaminedEvent>(OnActiveFlareExamined);
 
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, MapInitEvent>(OnTerminalMapInit);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIOpenedEvent>(OnTerminalBUIOpened);
@@ -231,7 +234,22 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (projectile.Shooter != null)
             abbreviation = GetUserAbbreviation(projectile.Shooter.Value, id);
 
+        if (projectile.Weapon != null)
+        {
+            if (TryComp(projectile.Weapon, out RMCAirShotComponent? airShot))
+            {
+                airShot.LastFlareId = abbreviation;
+                Dirty(projectile.Weapon.Value, airShot);
+            }
+        }
+
         MakeDropshipTarget(ent, abbreviation);
+    }
+
+    private void OnActiveFlareExamined(Entity<ActiveFlareSignalComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.Abbreviation is { } id)
+            args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine-id", ("id", id)));
     }
 
     private void OnTerminalMapInit(Entity<DropshipTerminalWeaponsComponent> ent, ref MapInitEvent args)
@@ -908,6 +926,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return true;
 
         if (!IsFlareLit(ent))
+            return false;
+
+        if (ent.Comp.Abbreviation == null)
             return false;
 
         var target = new DropshipTargetComponent { Abbreviation = ent.Comp.Abbreviation };
