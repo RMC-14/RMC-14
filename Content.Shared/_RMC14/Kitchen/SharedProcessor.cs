@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Kitchen
@@ -84,7 +84,7 @@ namespace Content.Shared._RMC14.Kitchen
         public NetEntity[] ChamberContents;
         public ReagentQuantity[]? ReagentQuantities;
 
-        public ProcessorInterfaceState(bool isBusy, bool hasBeaker, bool powered, bool canProcess, NetEntity[] chamberContents, ReagentQuantity[]? heldBeakerContents)
+        public ProcessorInterfaceState(bool isBusy, bool powered, bool canProcess, NetEntity[] chamberContents, ReagentQuantity[]? heldBeakerContents)
         {
             IsBusy = isBusy;
             Powered = powered;

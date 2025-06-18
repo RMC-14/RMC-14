@@ -1,4 +1,4 @@
-﻿using Content.Server.Power.EntitySystems;
+using Content.Server.Power.EntitySystems;
 using Content.Server.Stack;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Components;
@@ -75,9 +75,6 @@ namespace Content.Server._RMC14.EntitySystems
                 RemCompDeferred<ActiveProcessorComponent>(uid);
 
                 var inputContainer = _containerSystem.EnsureContainer<Container>(uid, SharedProcessor.InputContainerId);
-                var outputContainer = _itemSlotsSystem.GetItemOrNull(uid, SharedProcessor.BeakerSlotId);
-                if (outputContainer is null || !_solutionContainersSystem.TryGetFitsInDispenser(outputContainer.Value, out var containerSoln, out var containerSolution))
-                    continue;
 
                 foreach (var item in inputContainer.ContainedEntities.ToList())
                 {
@@ -92,36 +89,17 @@ namespace Content.Server._RMC14.EntitySystems
 
                     if (TryComp<StackComponent>(item, out var stack))
                     {
-                        var totalVolume = solution.Volume * stack.Count;
-                        if (totalVolume <= 0)
-                            continue;
-
-                        // Maximum number of items we can process in the stack without going over AvailableVolume
-                        // We add a small tolerance, because floats are inaccurate.
-                        var fitsCount = (int) (stack.Count * FixedPoint2.Min(containerSolution.AvailableVolume / totalVolume + 0.01, 1));
-                        if (fitsCount <= 0)
-                            continue;
-
-                        // Make a copy of the solution to scale
-                        // Otherwise we'll actually change the volume of the remaining stack too
-                        var scaledSolution = new Solution(solution);
-                        scaledSolution.ScaleSolution(fitsCount);
-                        solution = scaledSolution;
-
-                        _stackSystem.SetCount(item, stack.Count - fitsCount); // Setting to 0 will QueueDel
+                        /// IM Guessing you need to put the output of the recipe in here some where. You may want to remove the else, and do the process all in one statement.
                     }
                     else
                     {
-                        if (solution.Volume > containerSolution.AvailableVolume)
-                            continue;
 
+                        /// This part is here is what is eating all the contents of the machine, and emptying the processor
                         var dev = new DestructionEventArgs();
                         RaiseLocalEvent(item, dev);
 
                         QueueDel(item);
                     }
-
-                    _solutionContainersSystem.TryAddSolution(containerSoln.Value, solution);
                 }
 
                 _userInterfaceSystem.ServerSendUiMessage(uid, ProcessorUiKey.Key,
@@ -192,20 +170,17 @@ namespace Content.Server._RMC14.EntitySystems
                 return;
 
             var inputContainer = _containerSystem.EnsureContainer<Container>(uid, SharedProcessor.InputContainerId);
-            var outputContainer = _itemSlotsSystem.GetItemOrNull(uid, SharedProcessor.BeakerSlotId);
             Solution? containerSolution = null;
             var isBusy = HasComp<ActiveProcessorComponent>(uid);
             var canProcess = false;
 
-            if (outputContainer is not null
-                && inputContainer.ContainedEntities.Count > 0)
+            if (inputContainer.ContainedEntities.Count > 0)
             {
                 canProcess = inputContainer.ContainedEntities.All(CanProcess);
             }
 
             var state = new ProcessorInterfaceState(
                 isBusy,
-                outputContainer.HasValue,
                 this.IsPowered(uid, EntityManager),
                 canProcess,
                 GetNetEntityArray(inputContainer.ContainedEntities.ToArray()),
@@ -284,8 +259,7 @@ namespace Content.Server._RMC14.EntitySystems
 
             Processor.AudioStream = _audioSystem.PlayPvs(sound, uid,
                 AudioParams.Default.WithPitchScale(1 / Processor.WorkTimeMultiplier))?.Entity; //slightly higher pitched
-            _userInterfaceSystem.ServerSendUiMessage(uid, ProcessorUiKey.Key,
-                new ProcessorWorkStartedMessage(program));
+            _userInterfaceSystem.ServerSendUiMessage(uid, ProcessorUiKey.Key, new ProcessorWorkStartedMessage(program));
         }
 
         private void ClickSound(Entity<ProcessorComponent> Processor)
