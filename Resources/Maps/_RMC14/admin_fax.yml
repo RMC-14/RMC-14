@@ -10607,7 +10607,7 @@ entities:
     - type: Transform
       pos: 9.5,-25.5
       parent: 1
-- proto: RMCPlatformStrataRock
+- proto: RMCPlatformShivaRock
   entities:
   - uid: 1532
     components:
@@ -10627,7 +10627,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 12.5,-22.5
       parent: 1
-- proto: RMCPlatformStrataRockCornerSmall
+- proto: RMCPlatformShivaRockCornerSmall
   entities:
   - uid: 1535
     components:
