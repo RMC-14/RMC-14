@@ -4,7 +4,7 @@ meta:
   engineVersion: 251.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/18/2025 11:12:11
+  time: 06/18/2025 11:32:34
   entityCount: 2335
 maps:
 - 1
@@ -187,6 +187,14 @@ entities:
           tiles: AQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAASgAAAAAAUAAAAAAASgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAVwAAAAAASgAAAAAAUAAAAAAASgAAAAAAWAAAAAAASwAAAAAASwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAVwAAAAAASgAAAAAAUAAAAAAASgAAAAAAWAAAAAAASwAAAAAASwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAVwAAAAAASgAAAAAAUAAAAAAASgAAAAAAWAAAAAAASwAAAAAASwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAASgAAAAAAUAAAAAAASgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAASgAAAAAAAAAAAAAASgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAA
           version: 6
     - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
     - type: OccluderTree
     - type: SpreaderGrid
     - type: GridPathfinding
@@ -2264,44 +2272,44 @@ entities:
         15,-38: RMCAreaERTFaxExterior
         13,-38: RMCAreaERTFaxExterior
         15,-36: RMCAreaERTFaxExterior
-        46,-32: RMCAreaSpace
-        46,-30: RMCAreaSpace
-        45,-32: RMCAreaSpace
-        45,-31: RMCAreaSpace
-        46,-31: RMCAreaSpace
-        44,-32: RMCAreaSpace
-        44,-30: RMCAreaSpace
-        45,-30: RMCAreaSpace
-        44,-31: RMCAreaSpace
-        43,-32: RMCAreaSpace
-        43,-31: RMCAreaSpace
-        43,-30: RMCAreaSpace
+        46,-32: RMCAreaERTFax
+        46,-30: RMCAreaERTFax
+        45,-32: RMCAreaERTFax
+        45,-31: RMCAreaERTFax
+        46,-31: RMCAreaERTFax
+        44,-32: RMCAreaERTFax
+        44,-30: RMCAreaERTFax
+        45,-30: RMCAreaERTFax
+        44,-31: RMCAreaERTFax
+        43,-32: RMCAreaERTFax
+        43,-31: RMCAreaERTFax
+        43,-30: RMCAreaERTFax
         42,-32: RMCAreaSpace
         42,-31: RMCAreaSpace
         42,-30: RMCAreaSpace
-        41,-31: RMCAreaSpace
-        40,-31: RMCAreaSpace
-        40,-30: RMCAreaSpace
-        39,-31: RMCAreaSpace
-        39,-30: RMCAreaSpace
-        41,-30: RMCAreaSpace
-        39,-29: RMCAreaSpace
-        39,-27: RMCAreaSpace
-        39,-26: RMCAreaSpace
-        39,-25: RMCAreaSpace
+        41,-31: RMCAreaERTFax
+        40,-31: RMCAreaERTFax
+        40,-30: RMCAreaERTFax
+        39,-31: RMCAreaERTFax
+        39,-30: RMCAreaERTFax
+        41,-30: RMCAreaERTFax
+        39,-29: RMCAreaERTFax
+        39,-27: RMCAreaERTFax
+        39,-26: RMCAreaERTFax
+        39,-25: RMCAreaERTFax
         39,-24: RMCAreaSpace
-        40,-29: RMCAreaSpace
-        40,-28: RMCAreaSpace
-        39,-28: RMCAreaSpace
-        40,-27: RMCAreaSpace
-        40,-26: RMCAreaSpace
-        40,-25: RMCAreaSpace
+        40,-29: RMCAreaERTFax
+        40,-28: RMCAreaERTFax
+        39,-28: RMCAreaERTFax
+        40,-27: RMCAreaERTFax
+        40,-26: RMCAreaERTFax
+        40,-25: RMCAreaERTFax
         40,-24: RMCAreaSpace
-        41,-29: RMCAreaSpace
-        41,-28: RMCAreaSpace
-        41,-27: RMCAreaSpace
-        41,-26: RMCAreaSpace
-        41,-25: RMCAreaSpace
+        41,-29: RMCAreaERTFax
+        41,-28: RMCAreaERTFax
+        41,-27: RMCAreaERTFax
+        41,-26: RMCAreaERTFax
+        41,-25: RMCAreaERTFax
         41,-24: RMCAreaSpace
         42,-29: RMCAreaSpace
         42,-28: RMCAreaSpace
@@ -2309,12 +2317,12 @@ entities:
         42,-26: RMCAreaSpace
         42,-25: RMCAreaSpace
         42,-24: RMCAreaSpace
-        43,-29: RMCAreaSpace
-        43,-28: RMCAreaSpace
-        43,-27: RMCAreaSpace
-        43,-26: RMCAreaSpace
-        43,-25: RMCAreaSpace
-        43,-24: RMCAreaSpace
+        43,-29: RMCAreaERTFax
+        43,-28: RMCAreaERTFaxExterior
+        43,-27: RMCAreaERTFaxExterior
+        43,-26: RMCAreaERTFaxExterior
+        43,-25: RMCAreaERTFaxExterior
+        43,-24: RMCAreaERTFaxExterior
         40,-23: RMCAreaSpace
         40,-21: RMCAreaSpace
         40,-20: RMCAreaSpace
@@ -2330,10 +2338,10 @@ entities:
         42,-21: RMCAreaSpace
         42,-20: RMCAreaSpace
         42,-19: RMCAreaSpace
-        43,-23: RMCAreaSpace
-        43,-22: RMCAreaSpace
-        43,-21: RMCAreaSpace
-        43,-20: RMCAreaSpace
+        43,-23: RMCAreaERTFaxExterior
+        43,-22: RMCAreaERTFaxExterior
+        43,-21: RMCAreaERTFaxExterior
+        43,-20: RMCAreaERTFaxExterior
         43,-19: RMCAreaSpace
         44,-19: RMCAreaSpace
         46,-19: RMCAreaSpace
@@ -2360,24 +2368,24 @@ entities:
         57,-28: RMCAreaSpace
         57,-29: RMCAreaSpace
         57,-30: RMCAreaSpace
-        54,-30: RMCAreaSpace
-        56,-30: RMCAreaSpace
-        55,-30: RMCAreaSpace
-        54,-31: RMCAreaSpace
-        54,-32: RMCAreaSpace
-        54,-33: RMCAreaSpace
-        53,-33: RMCAreaSpace
-        55,-33: RMCAreaSpace
-        56,-33: RMCAreaSpace
-        56,-34: RMCAreaSpace
-        56,-36: RMCAreaSpace
-        56,-37: RMCAreaSpace
-        56,-38: RMCAreaSpace
-        56,-39: RMCAreaSpace
-        56,-35: RMCAreaSpace
-        53,-39: RMCAreaSpace
-        55,-39: RMCAreaSpace
-        54,-39: RMCAreaSpace
+        54,-30: RMCAreaERTFax
+        56,-30: RMCAreaERTFax
+        55,-30: RMCAreaERTFax
+        54,-31: RMCAreaERTFax
+        54,-32: RMCAreaERTFax
+        54,-33: RMCAreaERTFax
+        53,-33: RMCAreaERTFax
+        55,-33: RMCAreaERTFax
+        56,-33: RMCAreaERTFax
+        56,-34: RMCAreaERTFax
+        56,-36: RMCAreaERTFax
+        56,-37: RMCAreaERTFax
+        56,-38: RMCAreaERTFax
+        56,-39: RMCAreaERTFax
+        56,-35: RMCAreaERTFax
+        53,-39: RMCAreaERTFax
+        55,-39: RMCAreaERTFax
+        54,-39: RMCAreaERTFax
         53,-40: RMCAreaSpace
         52,-40: RMCAreaSpace
         50,-40: RMCAreaSpace
@@ -2397,66 +2405,66 @@ entities:
         42,-34: RMCAreaSpace
         42,-38: RMCAreaSpace
         42,-33: RMCAreaSpace
-        39,-35: RMCAreaSpace
-        40,-35: RMCAreaSpace
-        41,-35: RMCAreaSpace
-        39,-36: RMCAreaSpace
-        39,-37: RMCAreaSpace
-        39,-39: RMCAreaSpace
+        39,-35: RMCAreaERTFax
+        40,-35: RMCAreaERTFax
+        41,-35: RMCAreaERTFax
+        39,-36: RMCAreaERTFax
+        39,-37: RMCAreaERTFax
+        39,-39: RMCAreaERTFax
         39,-40: RMCAreaSpace
-        40,-39: RMCAreaSpace
+        40,-39: RMCAreaERTFax
         40,-40: RMCAreaSpace
-        41,-39: RMCAreaSpace
+        41,-39: RMCAreaERTFax
         41,-40: RMCAreaSpace
-        27,-39: RMCAreaSpace
-        28,-39: RMCAreaSpace
+        27,-39: RMCAreaERTFax
+        28,-39: RMCAreaERTFax
         28,-40: RMCAreaSpace
-        29,-39: RMCAreaSpace
+        29,-39: RMCAreaERTFax
         29,-40: RMCAreaSpace
-        30,-39: RMCAreaSpace
+        30,-39: RMCAreaERTFax
         30,-40: RMCAreaSpace
         27,-40: RMCAreaSpace
-        31,-39: RMCAreaSpace
+        31,-39: RMCAreaERTFax
         31,-40: RMCAreaSpace
-        32,-39: RMCAreaSpace
+        32,-39: RMCAreaERTFax
         32,-40: RMCAreaSpace
-        33,-39: RMCAreaSpace
+        33,-39: RMCAreaERTFax
         33,-40: RMCAreaSpace
-        34,-39: RMCAreaSpace
+        34,-39: RMCAreaERTFax
         34,-40: RMCAreaSpace
-        35,-39: RMCAreaSpace
+        35,-39: RMCAreaERTFax
         35,-40: RMCAreaSpace
-        36,-39: RMCAreaSpace
+        36,-39: RMCAreaERTFax
         36,-40: RMCAreaSpace
-        37,-39: RMCAreaSpace
+        37,-39: RMCAreaERTFax
         37,-40: RMCAreaSpace
-        38,-39: RMCAreaSpace
+        38,-39: RMCAreaERTFax
         38,-40: RMCAreaSpace
-        41,-38: RMCAreaSpace
-        41,-37: RMCAreaSpace
-        40,-38: RMCAreaSpace
-        40,-37: RMCAreaSpace
-        40,-36: RMCAreaSpace
-        41,-36: RMCAreaSpace
-        39,-38: RMCAreaSpace
-        38,-37: RMCAreaSpace
-        37,-37: RMCAreaSpace
-        37,-38: RMCAreaSpace
-        38,-38: RMCAreaSpace
-        36,-38: RMCAreaSpace
-        35,-38: RMCAreaSpace
-        34,-38: RMCAreaSpace
-        33,-38: RMCAreaSpace
-        32,-38: RMCAreaSpace
-        31,-38: RMCAreaSpace
-        30,-38: RMCAreaSpace
-        28,-38: RMCAreaSpace
-        29,-38: RMCAreaSpace
-        27,-38: RMCAreaSpace
-        27,-37: RMCAreaSpace
-        28,-37: RMCAreaSpace
-        32,-37: RMCAreaSpace
-        33,-37: RMCAreaSpace
+        41,-38: RMCAreaERTFax
+        41,-37: RMCAreaERTFax
+        40,-38: RMCAreaERTFax
+        40,-37: RMCAreaERTFax
+        40,-36: RMCAreaERTFax
+        41,-36: RMCAreaERTFax
+        39,-38: RMCAreaERTFax
+        38,-37: RMCAreaERTFax
+        37,-37: RMCAreaERTFax
+        37,-38: RMCAreaERTFax
+        38,-38: RMCAreaERTFax
+        36,-38: RMCAreaERTFax
+        35,-38: RMCAreaERTFax
+        34,-38: RMCAreaERTFax
+        33,-38: RMCAreaERTFax
+        32,-38: RMCAreaERTFax
+        31,-38: RMCAreaERTFax
+        30,-38: RMCAreaERTFax
+        28,-38: RMCAreaERTFax
+        29,-38: RMCAreaERTFax
+        27,-38: RMCAreaERTFax
+        27,-37: RMCAreaERTFax
+        28,-37: RMCAreaERTFax
+        32,-37: RMCAreaERTFax
+        33,-37: RMCAreaERTFax
         26,-40: RMCAreaSpace
         26,-38: RMCAreaSpace
         26,-37: RMCAreaSpace
@@ -2756,6 +2764,11 @@ entities:
         -8,-16: RMCAreaSpace
         -8,-17: RMCAreaSpace
         -8,-18: RMCAreaSpace
+        55,-32: RMCAreaERTFax
+        55,-31: RMCAreaERTFax
+        56,-31: RMCAreaERTFax
+        56,-32: RMCAreaERTFax
+    - type: Shuttle
 - proto: Ashtray
   entities:
   - uid: 501
@@ -9958,7 +9971,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -6870.583
+      secondsUntilStateChange: -6959.0073
       state: Opening
   - uid: 1278
     components:
