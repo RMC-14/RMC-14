@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Nightmare Inserts added to Solaris.
-    type: Add
-  id: 1357
-  time: '2025-02-18T22:20:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5650
 - author: Djvarik
   changes:
   - message: Added missing trash carts in casino alley in Chance's
@@ -5316,5 +5309,12 @@
   id: 1859
   time: '2025-06-10T06:19:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6683
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added more soul to Big Red (Solaris Ridge)
+    type: Tweak
+  id: 1860
+  time: '2025-06-18T02:47:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6720
 Name: RMC14
 Order: -1
