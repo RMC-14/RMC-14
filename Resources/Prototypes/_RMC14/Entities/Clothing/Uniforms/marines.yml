@@ -23,7 +23,7 @@
   suffix: Filled, Royal
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingDropPouchRoyal
+    startingWebbing: RMCWebbingDropPouchRoyal
 
 - type: entity
   parent: RMCMarineUniformBase
