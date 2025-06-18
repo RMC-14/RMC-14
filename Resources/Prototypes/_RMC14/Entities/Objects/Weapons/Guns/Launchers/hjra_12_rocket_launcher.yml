@@ -5,12 +5,13 @@
   description: "The HJRA-12 Handheld Anti-Tank Grenade Launcher is the standard Anti-Armor weapon of the SPP. It is designed to be easy to use and to take out or disable armored vehicles."
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/hjra12.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/hjra12/hjra12_inhands.rsi
     layers:
       - state: base
+        sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/hjra12/hjra12_icon.rsi
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/hjra12.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/hjra12/hjra12_inhands.rsi
     quickEquip: true
     slots:
     - suitStorage
@@ -28,7 +29,7 @@
     mayTransfer: false
     insertDelay: 6.0
     cycleDelay: 6.0
-    proto: RMCRocketHJRA12
+    proto: RMCRocketHJRA12AT
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Cock/m5_ammo.ogg
   - type: Corrodible
@@ -73,7 +74,7 @@
       state: all
 
 - type: entity
-  id: RMCRocketHJRA12
+  id: RMCRocketHJRA12AT
   name: HJRA-12 Anti-Tank Rocket
   parent: BaseItem
   description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard Anti-Tank rocket designed to disable or destroy hostile vehicles.
@@ -82,10 +83,10 @@
     tags:
     - RMCProjectileRocketHJRA12
   - type: CartridgeAmmo
-    proto: RMCProjectileRocketHJRA12
+    proto: RMCProjectileRocketHJRA12AT
     deleteOnSpawn: false
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjraantitank.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
     layers:
     - state: hjra_tank
       map: ["enum.AmmoVisualLayers.Base"]
@@ -98,21 +99,147 @@
   - type: IgnorePredictionHide
 
 - type: entity
-  parent: RMCProjectileRocket84mm # I'm not doing explosion UI bro that shit caused my wife to leave me
+  id: RMCRocketHJRA12HE
+  name: HJRA-12 High-Explosive Rocket
+  parent: BaseItem
+  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard high-explosive rocket for use against light vehicles or as an anti-personnel grenade.
+  components:
+  - type: Tag
+    tags:
+    - RMCProjectileRocketHJRA12
+  - type: CartridgeAmmo
+    proto: RMCProjectileRocketHJRA12HE
+    deleteOnSpawn: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
+    layers:
+    - state: hjra_explosive
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Item
+    size: Normal
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: hjra_explosive
+    suffix: false
+  - type: IgnorePredictionHide
+
+- type: entity
+  id: RMCRocketHJRA12Incen
+  name: HJRA-12 Extreme-Intensity Incendiary Rocket
+  parent: BaseItem
+  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is an extreme-intensity incendiary rocket.
+  components:
+  - type: Tag
+    tags:
+    - RMCProjectileRocketHJRA12
+  - type: CartridgeAmmo
+    proto: RMCProjectileRocketHJRA12Incen
+    deleteOnSpawn: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
+    layers:
+    - state: hjra_incen
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Item
+    size: Normal
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: hjra_incen
+    suffix: false
+  - type: IgnorePredictionHide
+
+- type: entity
+  parent: RMCProjectileRocket84mmAntiArmor
   categories: [ HideSpawnMenu ]
-  id: RMCProjectileRocketHJRA12
-  name: 84mm high-explosive rocket
-  description: A rocket tube compatible with the M5-ATL loaded with an AP warhead. Capable of piercing and downing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets. Has high accuracy within 7 meters.
+  id: RMCProjectileRocketHJRA12AT
+  name: HJRA-12 Anti-Tank Rocket
+  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard Anti-Tank rocket designed to disable or destroy hostile vehicles.
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmAntiArmor
     deleteOnSpawn: false
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjraantitank.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
     layers:
     - state: hjra_tank
       map: ["enum.AmmoVisualLayers.Base"]
   - type: IgnorePredictionHide
+
+- type: entity
+  parent: RMCProjectileRocket84mm
+  categories: [ HideSpawnMenu ]
+  id: RMCProjectileRocketHJRA12HE
+  name: HJRA-12 High-Explosive Rocket
+  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard high-explosive rocket for use against light vehicles or as an anti-personnel grenade.
+  components:
+  - type: CartridgeAmmo
+    proto: RMCProjectileRocket84mm
+    deleteOnSpawn: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
+    layers:
+    - state: hjra_explosive
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: IgnorePredictionHide
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: RMCProjectileRocketHJRA12Incen
+  name: HJRA-12 Extreme-Intensity Incendiary Rocket
+  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is an extreme-intensity incendiary rocket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
+    layers:
+    - state: hjra_incen
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: TriggerOnCollide
+    # TODO RMC14 Make TriggerOnCollide spawn the explosion on the OtherEntity tile more consistently, so the explosion is centered properly
+    fixtureID: projectile # no parent entity from BaseBulletTrigger because it has Clickable
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.15,0.15,0.15"
+          # Bigger than bullets. Rectangle won't work since AABB shapes don't rotate. This should help significantly with explosion consistency.
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        restitution: 0.0
+        density: 20
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 15
+    maxFixedRange: 6 # 7 tiles
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 0
+    intensitySlope: 0
+    totalIntensity: 0
+    canCreateVacuum: false
+  - type: TileFireOnTrigger
+    spawn: RMCTileFire
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower3.ogg
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect
+  - type: PointLight
+    radius: 3.5
+    color: orange
+    energy: 0.5
+  - type: IgnorePredictionHide
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 7
+      falloff: 10
 
 - type: Tag
   id: RMCRocketHJRA12
