@@ -89,6 +89,7 @@ namespace Content.IntegrationTests.Tests
             "Almayer",
             "RMCAdminFax",
             "GoldenArrow",
+            "OCP-583",
         };
 
         /// <summary>
