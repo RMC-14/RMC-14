@@ -101,6 +101,51 @@
     - RMCWeaponRifleAK4047
 
 - type: entity
+  parent: RMCWeaponRifleAK4047
+  id: RMCWeaponRifleAK4047Tactical
+  suffix: Tactical
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentSuppressor
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentAK4047StockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentAK4047StockCollapsible
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentVerticalGrip
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+
+- type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleAK4047
   name: "AK4047 magazine (10x24mm)"
