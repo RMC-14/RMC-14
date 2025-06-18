@@ -1,0 +1,15 @@
+﻿<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface.FoodProcessorUI"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:ui1="clr-namespace:Content.Client.Kitchen.UI"
+                      Title="{Loc processor-menu-title}" MinSize="468 256">
+    <BoxContainer Orientation="Horizontal">
+        <BoxContainer Orientation="Vertical" VerticalAlignment="Center" Margin="8" MinWidth="100">
+            <Label Text="{Loc processor-menu-confirmation-text}" HorizontalAlignment="Center" Margin="0 0 0 18"/>
+            <Button Name="ProcessButton" Text="{Loc processor-menu-process-button}" TextAlign="Center" MinSize="64 48" Margin="0 0 0 32" />
+        </BoxContainer>
+
+        <ui1:LabelledContentBox Name="ChamberContentBox" LabelText="{Loc processor-menu-chamber-content-box-label}" ButtonText="{Loc processor-menu-chamber-content-box-button}" VerticalExpand="True" HorizontalExpand="True" Margin="8" SizeFlagsStretchRatio="2"/>
+
+    </BoxContainer>
+</controls:FancyWindow>
