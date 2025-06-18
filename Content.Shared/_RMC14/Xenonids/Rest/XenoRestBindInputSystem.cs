@@ -3,7 +3,7 @@ using Robust.Shared.Input.Binding;
 
 namespace Content.Shared._RMC14.Xenonids.Rest;
 
-public sealed class XenoRestInputSystem : EntitySystem
+public sealed class XenoRestBindInputSystem : EntitySystem
 {
     public override void Initialize()
     {
@@ -22,12 +22,12 @@ public sealed class XenoRestInputSystem : EntitySystem
                     },
                     handle: false
                 ))
-            .Register<XenoRestInputSystem>();
+            .Register<XenoRestBindInputSystem>();
     }
 
     public override void Shutdown()
     {
         base.Shutdown();
-        CommandBinds.Unregister<XenoRestInputSystem>();
+        CommandBinds.Unregister<XenoRestBindInputSystem>();
     }
 }
