@@ -187,6 +187,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
                 SetFlightHeader("Refueling in progress");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Ready to launch in T-{time}s"));
                 _window.LockdownButton.Disabled = false;
+                SetCancelDisabled(true);
                 break;
             default:
                 return;

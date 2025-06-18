@@ -277,7 +277,6 @@ public abstract class SharedDropshipSystem : EntitySystem
         ref DropshipNavigationLaunchMsg args)
     {
         var user = args.Actor;
-        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, user);
 
         if (!TryGetEntity(args.Target, out var destination))
         {
