@@ -1,0 +1,65 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorGoon
+  name: rmc-job-name-survivor-goon
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorGoon
+  startingGear: RMCGearSurvivorGoon
+  spawnMenuRoleName: Corporate Goon (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+      - Bureau
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetGoon
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorGoon
+  equipment:
+    head: RMCHeadCapBureau
+    jumpsuit: RMCMarshalCMBUniform
+    outerClothing: RMCCoatBureauDeputy
+    ears: RMCHeadsetDistressBureau
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorGoon
+  name: survivor goon spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorGoon
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetGoon
+  name: goon colonist preset
