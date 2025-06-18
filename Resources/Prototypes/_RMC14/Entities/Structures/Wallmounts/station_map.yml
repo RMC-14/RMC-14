@@ -17,7 +17,7 @@
     - map: ["computerLayerScreen"]
       state: map
   - type: Icon
-    sprite: Structures/Machines/station_map.rsi
+    sprite: _RMC14/Structures/Machines/status_display.rsi
     state: frame
   - type: WallMount
     arc: 360
