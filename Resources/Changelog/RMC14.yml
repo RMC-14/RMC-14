@@ -1,105 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Nightmare Inserts added to Solaris.
-    type: Add
-  id: 1357
-  time: '2025-02-18T22:20:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5650
-- author: Djvarik
-  changes:
-  - message: Added missing trash carts in casino alley in Chance's
-    type: Fix
-  id: 1358
-  time: '2025-02-18T22:22:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5656
-- author: Whisper
-  changes:
-  - message: Fixed duplicated traits and traits not intended to be selectable, and
-      lowered the frequency of replacements for some accents.
-    type: Fix
-  - message: Spawning as a command role now removes stuttering accent and frontal
-      lisps from the character for that round.
-    type: Fix
-  id: 1359
-  time: '2025-02-19T05:18:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4872
-- author: CyberTropic
-  changes:
-  - message: Fixed fences connecting to walls.
-    type: Fix
-  id: 1360
-  time: '2025-02-19T05:19:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5668
-- author: Vermidia
-  changes:
-  - message: Fixed APC boards not fitting in a few pouches
-    type: Fix
-  - message: Fixed plastic explosives not fitting in the tools pouch
-    type: Fix
-  - message: Added the engineer kit pouch, which requires engineering skill to put
-      stuff inside. Holds various engineering items.
-    type: Add
-  id: 1361
-  time: '2025-02-19T05:36:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5664
-- author: Vermidia
-  changes:
-  - message: Added Valkyrie, a replacement to the Warden praetorian strain, which
-      focuses on frontline support.
-    type: Add
-  - message: Fixed Burrower's burrow having too high a range (15 > 8).
-    type: Fix
-  - message: Fixed Resin Whisperer construction range being too high (13 > 11).
-    type: Fix
-  - message: Fruits glow when ready to be harvested
-    type: Fix
-  id: 1362
-  time: '2025-02-19T05:39:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5610
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added helmet accessories. Currently, only the M1A1 ballistic goggles
-      are valid accessories.
-    type: Add
-  - message: Helmets now have 4 slots, 2 of those slots being reserved for helmet
-      accessories.
-    type: Tweak
-  id: 1363
-  time: '2025-02-19T05:52:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5654
-- author: CyberTropic
-  changes:
-  - message: Added the rest of the nightmare inserts to Kutjevo.
-    type: Add
-  - message: Added tall grass to Kutjevo.
-    type: Add
-  - message: Added civilian binoculars.
-    type: Add
-  id: 1364
-  time: '2025-02-21T13:01:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5669
-- author: noctyrnal
-  changes:
-  - message: Changed flare colour to be more white than red.
-    type: Tweak
-  id: 1365
-  time: '2025-02-21T13:02:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5680
-- author: Djvarik
-  changes:
-  - message: Ported sprites for Sorokyne Strata & ERT Shuttles
-    type: Add
-  id: 1366
-  time: '2025-02-21T13:04:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5657
-- author: J C Denton
-  changes:
-  - message: M890 Riot Shotgun now has a slightly different sprite.
-    type: Tweak
-  id: 1367
-  time: '2025-02-21T13:05:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5683
 - author: Binbagg
   changes:
   - message: Fixed larvas not starting with full plasma.
@@ -5316,5 +5215,103 @@
   id: 1859
   time: '2025-06-10T06:19:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6683
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added more soul to Big Red (Solaris Ridge)
+    type: Tweak
+  id: 1860
+  time: '2025-06-18T02:47:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6720
+- author: noctyrnal
+  changes:
+  - message: Added the NP92 Pistol, NPZ92 Pistol, Type-73 Pistol, Type-74 Pistol,
+      ZHNK-72 Revolver, Type-88 Marksman Rifle, Type-64 SMG and QYJ-72 LMG for the
+      SPP.
+    type: Add
+  - message: Added the HE and Incend rockets for the HJRA-12
+    type: Add
+  - message: The HJRA-12 now has different sprites.
+    type: Tweak
+  - message: Adds shell boxes for the heavy shotgun shells used by the Type-23 shotgun.
+    type: Add
+  - message: Magazines no longer wrongly display as contraband.
+    type: Fix
+  - message: SPP now spawn with the correct weapons.
+    type: Fix
+  id: 1861
+  time: '2025-06-18T11:40:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6729
+- author: crazy1112345
+  changes:
+  - message: Added New Varadero survivors! This includes the Beach Bum, Miner, Priest,
+      Cargo Technician, Engineering Technician, UN Peacekeeper, ICB Liaison, Medical
+      Technician, and the vacationing Lt. Colonel Commander.
+    type: Add
+  id: 1862
+  time: '2025-06-18T13:03:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6585
+- author: noctyrnal
+  changes:
+  - message: Added new sprites for the OW console's south and north face.
+    type: Add
+  - message: Changed the Fax Responder map to be more 'appealing' visually.
+    type: Tweak
+  id: 1863
+  time: '2025-06-19T13:58:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6759
+- author: Dutch-VanDerLinde
+  changes:
+  - message: FIxed CLF headset not having a CLF HUD
+    type: Fix
+  id: 1864
+  time: '2025-06-19T13:59:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6782
+- author: noctyrnal
+  changes:
+  - message: Provost Enforcers and Provost Team Leaders now require 5 hours of MP
+      playtime.
+    type: Fix
+  id: 1865
+  time: '2025-06-19T14:00:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6783
+- author: Arcticular1
+  changes:
+  - message: Filled the contents of staff officer lockers
+    type: Tweak
+  - message: Added white gloves to CO vendor
+    type: Add
+  id: 1866
+  time: '2025-06-19T14:01:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6778
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed barricade collision breaking when upgrading a barricade
+    type: Fix
+  id: 1867
+  time: '2025-06-19T14:03:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6691
+- author: Arykh
+  changes:
+  - message: Fixed custom autoinjectors not working properly.
+    type: Fix
+  id: 1868
+  time: '2025-06-19T14:07:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6733
+- author: Arykh
+  changes:
+  - message: Fixed bayonet pouch coming out empty when vended from surplus uniform
+      and req armaments vendors.
+    type: Fix
+  id: 1869
+  time: '2025-06-19T14:08:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6755
+- author: Arykh
+  changes:
+  - message: Fixed radiation first aid kits containing Russian Red pill bottles instead
+      of pills.
+    type: Fix
+  id: 1870
+  time: '2025-06-19T14:09:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6760
 Name: RMC14
 Order: -1
