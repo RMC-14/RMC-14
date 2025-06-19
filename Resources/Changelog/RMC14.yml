@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Changed flare colour to be more white than red.
-    type: Tweak
-  id: 1365
-  time: '2025-02-21T13:02:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5680
-- author: Djvarik
-  changes:
-  - message: Ported sprites for Sorokyne Strata & ERT Shuttles
-    type: Add
-  id: 1366
-  time: '2025-02-21T13:04:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5657
-- author: J C Denton
-  changes:
-  - message: M890 Riot Shotgun now has a slightly different sprite.
-    type: Tweak
-  id: 1367
-  time: '2025-02-21T13:05:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5683
 - author: Binbagg
   changes:
   - message: Fixed larvas not starting with full plasma.
@@ -5311,5 +5290,28 @@
   id: 1867
   time: '2025-06-19T14:03:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6691
+- author: Arykh
+  changes:
+  - message: Fixed custom autoinjectors not working properly.
+    type: Fix
+  id: 1868
+  time: '2025-06-19T14:07:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6733
+- author: Arykh
+  changes:
+  - message: Fixed bayonet pouch coming out empty when vended from surplus uniform
+      and req armaments vendors.
+    type: Fix
+  id: 1869
+  time: '2025-06-19T14:08:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6755
+- author: Arykh
+  changes:
+  - message: Fixed radiation first aid kits containing Russian Red pill bottles instead
+      of pills.
+    type: Fix
+  id: 1870
+  time: '2025-06-19T14:09:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6760
 Name: RMC14
 Order: -1
