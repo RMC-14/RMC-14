@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added the rest of the nightmare inserts to Kutjevo.
-    type: Add
-  - message: Added tall grass to Kutjevo.
-    type: Add
-  - message: Added civilian binoculars.
-    type: Add
-  id: 1364
-  time: '2025-02-21T13:01:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5669
 - author: noctyrnal
   changes:
   - message: Changed flare colour to be more white than red.
@@ -5315,5 +5304,12 @@
   id: 1866
   time: '2025-06-19T14:01:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6778
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed barricade collision breaking when upgrading a barricade
+    type: Fix
+  id: 1867
+  time: '2025-06-19T14:03:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6691
 Name: RMC14
 Order: -1
