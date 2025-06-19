@@ -1,20 +1,20 @@
 using System.Linq;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.Kitchen
+namespace Content.Shared._RMC14.Kitchen
 {
-    public sealed class RecipeManager
+    public sealed class ProcessorRecipeManager
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-        public List<FoodRecipePrototype> Recipes { get; private set; } = new();
+        public List<ProcessorRecipePrototype> Recipes { get; private set; } = new();
 
         public void Initialize()
         {
-            Recipes = new List<FoodRecipePrototype>();
-            foreach (var item in _prototypeManager.EnumeratePrototypes<FoodRecipePrototype>())
+            Recipes = new List<ProcessorRecipePrototype>();
+            foreach (var item in _prototypeManager.EnumeratePrototypes<ProcessorRecipePrototype>())
             {
-                if (!item.SecretRecipe)
+                if (!item.ProcessorSecretRecipe)
                     Recipes.Add(item);
             }
 
@@ -28,9 +28,9 @@ namespace Content.Shared.Kitchen
             return Recipes.Any(recipe => recipe.IngredientsSolids.ContainsKey(solidId));
         }
 
-        private sealed class RecipeComparer : Comparer<FoodRecipePrototype>
+        private sealed class RecipeComparer : Comparer<ProcessorRecipePrototype>
         {
-            public override int Compare(FoodRecipePrototype? x, FoodRecipePrototype? y)
+            public override int Compare(ProcessorRecipePrototype? x, ProcessorRecipePrototype? y)
             {
                 if (x == null || y == null)
                 {

@@ -12,6 +12,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Kitchen;
 
 namespace Content.Client.Guidebook.Controls;
 
