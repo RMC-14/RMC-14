@@ -255,6 +255,7 @@
   - type: XenoToggleChargingStop
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
+  - type: RMCImmuneToFireTileDamage
 
 - type: entity
   parent: RMCXenoQueenBase
