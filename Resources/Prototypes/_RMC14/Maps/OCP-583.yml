@@ -6,8 +6,8 @@
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    AdminFax:
-      stationProto: NanotrasenCentralCommand
+    OCP-583:
+      stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
           mapNameTemplate: 'OCP-583'

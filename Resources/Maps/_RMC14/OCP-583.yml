@@ -647,6 +647,8 @@ entities:
             204: -12,-11
             205: -9,-11
             206: -8,-11
+    - type: BecomesStation
+      id: OCP-583
     - type: GridAtmosphere
       version: 2
       data:
@@ -7791,8 +7793,6 @@ entities:
         0,-3: RMCAreaOCP-583
         0,-2: RMCAreaOCP-583
         0,-1: RMCAreaOCP-583
-    - type: BecomesStation
-      id: OCP-583
 - proto: ActionToggleLight
   entities:
   - uid: 955
