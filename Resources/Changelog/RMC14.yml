@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed fences connecting to walls.
-    type: Fix
-  id: 1360
-  time: '2025-02-19T05:19:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5668
 - author: Vermidia
   changes:
   - message: Fixed APC boards not fitting in a few pouches
@@ -5326,5 +5319,14 @@
   id: 1862
   time: '2025-06-18T13:03:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6585
+- author: noctyrnal
+  changes:
+  - message: Added new sprites for the OW console's south and north face.
+    type: Add
+  - message: Changed the Fax Responder map to be more 'appealing' visually.
+    type: Tweak
+  id: 1863
+  time: '2025-06-19T13:58:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6759
 Name: RMC14
 Order: -1
