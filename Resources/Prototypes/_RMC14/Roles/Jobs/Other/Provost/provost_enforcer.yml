@@ -54,6 +54,9 @@
     - !type:RoleTimeRequirement
       role: CMJobRifleman
       time: 18000 # 5 Hours
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadProvost
 

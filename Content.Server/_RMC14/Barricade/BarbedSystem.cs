@@ -12,14 +12,16 @@ public sealed class BarbedSystem : SharedBarbedSystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<BarbedComponent, ConstructionChangeEntityEvent>(OnBarbedEntityConstructionChange);
         SubscribeLocalEvent<BarbedComponent, BarbedStateChangedEvent>(OnBarbedStateChanged);
     }
+
     private void OnBarbedEntityConstructionChange(EntityUid ent, BarbedComponent comp, ConstructionChangeEntityEvent args)
     {
         var newComp = EnsureComp<BarbedComponent>(args.New);
         newComp.IsBarbed = comp.IsBarbed;
-        base.UpdateAppearance((args.New, newComp));
+        base.UpdateBarricade((args.New, newComp));
     }
 
     private void OnBarbedStateChanged(Entity<BarbedComponent>ent, ref BarbedStateChangedEvent args)

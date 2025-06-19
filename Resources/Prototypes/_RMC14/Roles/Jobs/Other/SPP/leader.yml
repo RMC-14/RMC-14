@@ -113,7 +113,7 @@
     shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponRifleType71
     id: RMCIDSPP
-    belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
+    belt: RMCBeltHolsterRevolverZHNK72Fill
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchFuelTankFilledExtinguisher
