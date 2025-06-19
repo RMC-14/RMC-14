@@ -1,30 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed APC boards not fitting in a few pouches
-    type: Fix
-  - message: Fixed plastic explosives not fitting in the tools pouch
-    type: Fix
-  - message: Added the engineer kit pouch, which requires engineering skill to put
-      stuff inside. Holds various engineering items.
-    type: Add
-  id: 1361
-  time: '2025-02-19T05:36:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5664
-- author: Vermidia
-  changes:
-  - message: Added Valkyrie, a replacement to the Warden praetorian strain, which
-      focuses on frontline support.
-    type: Add
-  - message: Fixed Burrower's burrow having too high a range (15 > 8).
-    type: Fix
-  - message: Fixed Resin Whisperer construction range being too high (13 > 11).
-    type: Fix
-  - message: Fruits glow when ready to be harvested
-    type: Fix
-  id: 1362
-  time: '2025-02-19T05:39:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5610
 - author: Dutch-VanDerLinde
   changes:
   - message: Added helmet accessories. Currently, only the M1A1 ballistic goggles
@@ -5328,5 +5302,20 @@
   id: 1863
   time: '2025-06-19T13:58:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6759
+- author: Dutch-VanDerLinde
+  changes:
+  - message: FIxed CLF headset not having a CLF HUD
+    type: Fix
+  id: 1864
+  time: '2025-06-19T13:59:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6782
+- author: noctyrnal
+  changes:
+  - message: Provost Enforcers and Provost Team Leaders now require 5 hours of MP
+      playtime.
+    type: Fix
+  id: 1865
+  time: '2025-06-19T14:00:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6783
 Name: RMC14
 Order: -1
