@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added helmet accessories. Currently, only the M1A1 ballistic goggles
-      are valid accessories.
-    type: Add
-  - message: Helmets now have 4 slots, 2 of those slots being reserved for helmet
-      accessories.
-    type: Tweak
-  id: 1363
-  time: '2025-02-19T05:52:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5654
 - author: CyberTropic
   changes:
   - message: Added the rest of the nightmare inserts to Kutjevo.
@@ -5317,5 +5306,14 @@
   id: 1865
   time: '2025-06-19T14:00:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6783
+- author: Arcticular1
+  changes:
+  - message: Filled the contents of staff officer lockers
+    type: Tweak
+  - message: Added white gloves to CO vendor
+    type: Add
+  id: 1866
+  time: '2025-06-19T14:01:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6778
 Name: RMC14
 Order: -1
