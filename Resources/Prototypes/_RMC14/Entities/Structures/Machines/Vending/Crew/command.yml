@@ -864,6 +864,12 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+    - name: Jacket
+      jobs:
+      - CMChiefMP
+      choices: { CMCoat: 1}
+      entries:
+      - id: CMCoatChiefMP
     - name: Pouches
       jobs:
       - CMChiefMP

@@ -110,6 +110,10 @@
       entries:
       - id: CMArmorM3Warden
       - id: CMHeadCapWarden
+    - name: Jacket
+      choices: { CMCoat: 1}
+      entries:
+      - id: CMCoatWarden
     - name: Handgun Case
       choices: { CMGunCase: 1 }
       entries:
