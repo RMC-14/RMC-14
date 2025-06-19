@@ -100,8 +100,8 @@
       - type: InjectableSolution
       - type: IVDripTarget
       - type: RMCSuicide
-      - type: SlowOnDamage
         damage: { }
+      - type: SlowOnDamage
   hidden: true
 
 - type: startingGear
