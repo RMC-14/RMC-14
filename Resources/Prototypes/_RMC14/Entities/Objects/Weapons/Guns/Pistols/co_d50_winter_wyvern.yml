@@ -72,6 +72,13 @@
       rmc-aslot-barrel: 0.75, 0.070
       rmc-aslot-rail: 0.090, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
 
 - type: entity
   parent: CMBaseMagazinePistol

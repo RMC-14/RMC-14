@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Dropship.Weapon;
 public sealed partial class ActiveFlareSignalComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string Abbreviation;
+    public string? Abbreviation;
 
     [DataField, AutoNetworkedField]
     public Queue<NetCoordinates> LastCoordinates = new();
