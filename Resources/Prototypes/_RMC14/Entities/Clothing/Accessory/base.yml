@@ -1,0 +1,44 @@
+- type: entity
+  abstract: true
+  id: RMCBaseUniformAccessoryItemOuterClothing
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - Patch
+    - Medal
+    - Armband
+    - Rank
+    - Decor
+    - Poncho
+    - Mask
+
+- type: entity
+  abstract: true
+  id: RMCBaseUniformAccessoryItemJumpsuit
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - Patch
+    - Medal
+    - Armband
+    - Rank
+    - Decor
+    - Poncho
+    - Mask
+
+- type: entity
+  abstract: true
+  id: RMCBaseUniformAccessoryItemGloves
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - WristL
+    - WristR
+
+- type: entity
+  abstract: true
+  id: RMCBaseUniformAccessoryItemHelmet
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - Helmet
