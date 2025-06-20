@@ -138,11 +138,7 @@ public sealed class XenoTailLashSystem : EntitySystem
             _pulling.TryStopAllPullsFromAndOn(ent);
 
             var origin = _transform.GetMapCoordinates(xeno);
-            var target = _transform.GetMapCoordinates(ent);
-            var diff = target.Position - origin.Position;
-            diff = diff.Normalized() * xeno.Comp.FlingDistance;
-
-            _throwing.TryThrow(ent, diff, 10, xeno);
+            _size.KnockBack(ent, origin, xeno.Comp.FlingDistance, xeno.Comp.FlingDistance, 10);
         }
 
         xeno.Comp.Area = null;

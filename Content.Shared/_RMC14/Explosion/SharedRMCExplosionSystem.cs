@@ -111,12 +111,9 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         _sizeStun.TryGetSize(ent, out var size);
 
+        // TODO RMC14 size-based throw ranges and speeds
         var pos = _transform.GetWorldPosition(ent);
         var dir = pos - args.Epicenter.Position;
-        if (dir.IsLengthZero())
-            dir = _random.NextVector2();
-
-        dir = dir.Normalized(); // TODO RMC14 size-based throw ranges and speeds
 
         // Humanoid calcuations
         if (size == RMCSizes.Humanoid)
@@ -129,6 +126,11 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
             _statusEffects.TryAddStatusEffect<FlashedComponent>(ent, FlashedKey, ent.Comp.BlindTime * bombArmorMult, true);
             _deafness.TryDeafen(ent, TimeSpan.FromSeconds(severity * 0.5), true);
+
+            var knockBackDistance = (float) Math.Clamp(severity / 5 / dir.Length(), 0.5, severity / 10);
+
+            if (!HasComp<XenoNestedComponent>(ent))
+                _sizeStun.KnockBack(ent, args.Epicenter, knockBackDistance, knockBackDistance, knockBackSpeed: (float) severity);
 
             var knockdownValue = severity * 0.1;
             var knockoutValue = damage.Double() * 0.1;
@@ -143,10 +145,6 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
             _dazed.TryDaze(ent, knockoutTime * 2, stutter: true);
             _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(ent, BlindKey, ent.Comp.BlurTime, false);
-
-            if (!HasComp<XenoNestedComponent>(ent))
-                _throwing.TryThrow(ent, dir, (float) severity);
-
             return;
         }
 
@@ -164,7 +162,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             else
                 _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3));
 
-            _throwing.TryThrow(ent, dir, 5);
+            _sizeStun.KnockBack(ent, args.Epicenter, knockBackSpeed: 5, ignoreSize: true);
         }
         else if (factor > 10)
         {

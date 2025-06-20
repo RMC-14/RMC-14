@@ -1,11 +1,12 @@
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -18,12 +19,13 @@ public sealed class XenoPunchSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     public override void Initialize()
     {
@@ -57,13 +59,10 @@ public sealed class XenoPunchSystem : EntitySystem
         }
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(targetId);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.Range;
 
         _rmcMelee.DoLunge(xeno, targetId);
-
-        _throwing.TryThrow(targetId, diff, 10);
+        _obstacleSlamming.MakeImmune(targetId);
+        _size.KnockBack(targetId, origin, xeno.Comp.Range, xeno.Comp.Range, xeno.Comp.ThrowSpeed);
 
         if (!HasComp<XenoComponent>(targetId))
             _slow.TrySlowdown(targetId, xeno.Comp.SlowDuration);

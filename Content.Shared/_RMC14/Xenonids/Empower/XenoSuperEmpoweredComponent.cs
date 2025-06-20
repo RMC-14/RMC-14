@@ -31,7 +31,7 @@ public sealed partial class XenoSuperEmpoweredComponent : Component
     public DamageSpecifier LeapDamage = new();
 
     [DataField, AutoNetworkedField]
-    public float FlingDistance = 1.75f; // 3 tiles from start
+    public float FlingDistance = 3;
 
     [DataField, AutoNetworkedField]
     public TimeSpan StunDuration = TimeSpan.FromSeconds(3.2);

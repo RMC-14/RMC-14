@@ -60,7 +60,6 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -370,7 +369,7 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
 
         _stun.TryParalyze(leaper, leapProtection.StunDuration, true);
-        _sizeStun.KnockBack(leaper, blockerCoordinates.Coords);
+        _size.KnockBack(leaper, _transform.GetMapCoordinates(blocker));
         _audio.PlayPredicted(leapProtection.BlockSound, leaper, leaper);
 
         var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", leaper), ("object", blocker));

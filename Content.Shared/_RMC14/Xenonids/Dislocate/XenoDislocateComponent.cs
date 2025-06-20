@@ -15,7 +15,7 @@ public sealed partial class XenoDislocateComponent : Component
     public EntProtoId Effect = "CMEffectPunch";
 
     [DataField, AutoNetworkedField]
-    public float FlingRange = 1; // 1 tile from start
+    public float FlingRange = 1;
 
     [DataField, AutoNetworkedField]
     public TimeSpan RootTime = TimeSpan.FromSeconds(1.2);
