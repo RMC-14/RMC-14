@@ -254,7 +254,7 @@ public sealed partial class TacticalMapControl : TextureRect
         {
             var clickedBlip = GetBlipAtPosition(args.RelativePosition);
 
-            if (clickedBlip != null)
+            if (clickedBlip != null && !Drawing)
             {
                 OnBlipClicked?.Invoke(clickedBlip.Value.Indices);
                 args.Handle();
