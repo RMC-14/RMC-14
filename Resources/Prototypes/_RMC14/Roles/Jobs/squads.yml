@@ -261,7 +261,7 @@
 - type: entity
   parent: SquadBase
   id: SquadFORECON
-  name: Reconnaissance
+  name: Recon
   components:
   - type: SquadTeam
     color: "#32CD32"
@@ -289,8 +289,15 @@
   components:
   - type: SquadTeam
     color: "#400000"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
     radio: null
     accessLevels: []
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_sof
+    group: SOF
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_soctl

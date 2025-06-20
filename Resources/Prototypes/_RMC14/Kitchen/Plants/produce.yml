@@ -1,0 +1,113 @@
+﻿
+- type: entity
+  name: plump-helmet
+  parent: FoodProduceBase
+  id: FoodMushroomPlump
+  description: "Plumus Hellmus: Oh, SHUT UP about the BLOODY mushrooms already! MOVE IT, marines!"
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/plump.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: plump
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: peanut
+  parent: FoodProduceBase
+  id: FoodPeanut
+  description: "Nuts!"
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: RMCPeanutButter
+          Quantity: 2
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: RMCPeanutButter
+        Quantity: 5
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/peanut.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: peanut
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: white beet
+  parent: FoodProduceBase
+  id: FoodWhiteBeet
+  description: "You can't beat white-beet."
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: RMCSugar
+          Quantity: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/whitebeet.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: whitebeet
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: sunflower
+  parent: ProduceBase
+  id: FoodSunflower
+  description: "It's beautiful! A certain person might beat you to death if you trample these."
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: sunflower
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  name: bundle of grass
+  parent: ProduceBase
+  id: FoodGrass
+  description: "Go ahead, touch some grass."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/grass.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: grass
+  - type: Tag
+    tags:
+    - Vegetable

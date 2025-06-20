@@ -395,6 +395,7 @@
       - id: CMCoatDressBluesGeneral
       - id: CMCoatXOFormal
       - id: RMCMarineUniformDressSenior
+      - id: CMHandsWhite
       - id: RMCShoesLaceup
     - name: Dress Headwear
       entries:
@@ -1147,7 +1148,7 @@
       - CMCMO
       takeAll: CMMedicalSet
       entries:
-      - id: CMVendorBundleCrewMedicalEssentialsNurse
+      - id: RMCVendorBundleCrewMedicalEssentialsDoctor
     - name: Standard Equipment
       jobs:
       - CMCMO

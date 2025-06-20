@@ -20,6 +20,8 @@
     Head: MobFeroxiHead
     Snout: MobHumanoidAnyMarking
     Chest: MobFeroxiTorso
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Underwear: MobHumanoidAnyMarking
     Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking

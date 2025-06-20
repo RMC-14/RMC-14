@@ -19,6 +19,16 @@
     - CMCMO
     sections:
     - name: Medical Set (Mandatory)
+      jobs:
+      - CMDoctor
+      - CMResearcher
+      - CMCMO
+      takeAll: CMMedicalSet
+      entries:
+      - id: RMCVendorBundleCrewMedicalEssentialsDoctor
+    - name: Medical Set (Mandatory)
+      jobs:
+      - CMNurse
       takeAll: CMMedicalSet
       entries:
       - id: CMVendorBundleCrewMedicalEssentialsNurse

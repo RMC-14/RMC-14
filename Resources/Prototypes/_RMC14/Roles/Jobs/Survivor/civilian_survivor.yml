@@ -46,14 +46,19 @@
   hasIcon: false
 
 - type: startingGear
-  id: RMCGearSurvivor
+  id: RMCGearSurvivorBase
   equipment:
-    # jumpsuit: CMJumpsuitColonist See RMCSurvivorPresetCivilianOutfits
     back: RMCSatchelCivilianFill
-    # shoes: RMCShoesBlack
     id: CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivor
+  equipment:
+    # jumpsuit: CMJumpsuitColonist See RMCSurvivorPresetCivilianOutfits
+    # shoes: RMCShoesBlack
     pocket2: RMCPouchGeneral
 
 - type: startingGear

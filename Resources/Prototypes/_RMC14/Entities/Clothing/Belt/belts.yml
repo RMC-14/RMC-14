@@ -56,13 +56,19 @@
       Classic: _RMC14/Objects/Clothing/Belt/marine/jungle-classic.rsi
 
 - type: entity
-  parent: CMBeltBaseStorage
+  parent: RMCBeltBaseStorageNoVisuals
   id: RMCM276ShotgunShellLoadingRig
   name: M276 pattern shotgun shell loading rig
   description: An ammunition belt designed to hold shotgun shells. # or individual bullets. TODO RMC14
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
+    layers:
+    - state: icon
+    - state: half
+      visible: false
+    - state: full
+      visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: Item
@@ -88,6 +94,20 @@
       Desert: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/shotgun/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 14
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 - type: entity
   parent: RMCM276ShotgunShellLoadingRig
@@ -311,7 +331,7 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
-      # dropper
+      - Dropper
       - GlassBeaker
       - Bottle
       - PillCanister
@@ -329,13 +349,24 @@
       - CMAutoInjector
       - CMRollerItem
       - BodyBag
-      #      - # TODO RMC14 latex gloves
+      - RMCGlovesLatex
+      - SterileMask
       - Hypospray
+      - CigPack
+      - RMCPenlight
+      - Flare
+      #      - # TODO RMC14 reagent analyzer
+      #      - # TODO RMC14 plant analyzer
+      #      - # TODO RMC14 minitank
       components:
       - Hypospray
       - Defibrillator
       - Pill
+      - RMCLighter
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCBeltMedical
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -811,6 +842,17 @@
     - id: RMCWeaponRevolverSpearhead
 
 - type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCBeltHolsterRevolverZHNK72Fill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderZHNK72
+      amount: 6
+    - id: RMCWeaponRevolverZHNK72
+
+- type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
   name: M276 pattern M63 holster rig
@@ -1114,6 +1156,17 @@
     - id: RMCSpeedLoaderM44
       amount: 6
     - id: RMCWeaponRevolverM44
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCT73BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolT73
+      amount: 6
+    - id: RMCWeaponPistolT73
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -1434,3 +1487,6 @@
 
 - type: Tag
   id: RMCNailgunHolster
+
+- type: Tag
+  id: RMCBeltMedical

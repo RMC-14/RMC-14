@@ -263,3 +263,24 @@
   components:
   - type: PresetIdCard
     job: RMCJobSyntheticColony
+
+
+- type: entity
+  id: RMCIDCardAegis
+  name: AEGIS Access Badge
+  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates.
+  components:
+  - type: WarpPoint
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: keycard
+  - type: Item
+    size: Tiny
+  - type: Clothing
+    slots:
+      - idcard
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Access
+    groups:
+      - CMAccessAegis
