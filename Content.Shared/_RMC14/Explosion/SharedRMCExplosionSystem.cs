@@ -33,6 +33,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
@@ -111,6 +112,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         _sizeStun.TryGetSize(ent, out var size);
 
         // TODO RMC14 size-based throw ranges and speeds
+        var pos = _transform.GetWorldPosition(ent);
+        var dir = pos - args.Epicenter.Position;
 
         // Humanoid calcuations
         if (size == RMCSizes.Humanoid)
@@ -123,6 +126,11 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
             _statusEffects.TryAddStatusEffect<FlashedComponent>(ent, FlashedKey, ent.Comp.BlindTime * bombArmorMult, true);
             _deafness.TryDeafen(ent, TimeSpan.FromSeconds(severity * 0.5), true);
+
+            var knockBackDistance = (float)Math.Clamp(severity / 5 / dir.Length(), 0.5, severity / 10);
+
+            if (!HasComp<XenoNestedComponent>(ent))
+                _sizeStun.KnockBack(ent, args.Epicenter, knockBackDistance,knockBackDistance , knockBackSpeed: (float) severity);
 
             var knockdownValue = severity * 0.1;
             var knockoutValue = damage.Double() * 0.1;
@@ -137,10 +145,6 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
             _dazed.TryDaze(ent, knockoutTime * 2, stutter: true);
             _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(ent, BlindKey, ent.Comp.BlurTime, false);
-
-            if (!HasComp<XenoNestedComponent>(ent))
-                _sizeStun.KnockBack(ent, args.Epicenter, knockBackSpeed: (float) severity);
-
             return;
         }
 

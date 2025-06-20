@@ -77,8 +77,6 @@ public sealed class XenoTailSweepSystem : EntitySystem
 
             _rmcPulling.TryStopAllPullsFromAndOn(mob);
 
-            var marineCoords = _transform.GetMapCoordinates(mob);
-
             if (xeno.Comp.Damage is { } damage)
                 _damageable.TryChangeDamage(mob, _xeno.TryApplyXenoSlashDamageMultiplier(mob, damage), origin: xeno, tool: xeno);
 
@@ -86,7 +84,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { mob }, filter);
 
             _obstacleSlamming.MakeImmune(mob);
-            _size.KnockBack(mob, marineCoords, xeno.Comp.KnockBackDistance, xeno.Comp.KnockBackDistance);
+            _size.KnockBack(mob, origin, xeno.Comp.KnockBackDistance, xeno.Comp.KnockBackDistance);
             if (!_size.TryGetSize(mob, out var size) || size < RMCSizes.Big)
                 _stun.TryParalyze(mob, _xeno.TryApplyXenoDebuffMultiplier(mob, xeno.Comp.ParalyzeTime), true);
 
