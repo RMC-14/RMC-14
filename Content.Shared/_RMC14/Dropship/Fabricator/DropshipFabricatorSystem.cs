@@ -7,6 +7,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -19,14 +20,15 @@ namespace Content.Shared._RMC14.Dropship.Fabricator;
 public sealed class DropshipFabricatorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly PowerLoaderSystem _powerLoader = default!;
 
     private int _startingPoints;
     private TimeSpan _gainEvery;
@@ -81,8 +83,9 @@ public sealed class DropshipFabricatorSystem : EntitySystem
 
         points.Points += (int)(refund * printable.RecycleMultiplier);
         Dirty(ent.Comp.Account.Value, points);
-
         Del(args.Used);
+
+        _audio.PlayPvs(ent.Comp.RecycleSound, ent);
         _powerLoader.TrySyncHands(args.User);
     }
 
