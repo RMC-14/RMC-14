@@ -1,0 +1,59 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorMedicalTechnician
+  name: cm-job-name-survivor-medical-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorMedicalTechnician
+  startingGear: RMCGearSurvivorMedicalTechnician
+  spawnMenuRoleName: Medical Technician (NV Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetMedicalTechnician
+
+- type: startingGear
+  parent: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorMedicalTechnician
+  equipment:
+    head: RMCHeadCapFlippable
+    jumpsuit: RMCJumpsuitCivilianGreen
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorMedicalTechnician
+  name: survivor medical technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorMedicalTechnician
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetDoctor
+  id: RMCGearSurvivorPresetMedicalTechnician
+  name: medical technician colonist preset # TODO RMC14 random research notes

@@ -1,0 +1,70 @@
+# used in NV and LV-624
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorPriest
+  name: cm-job-name-surivor-priest
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorPriest
+  startingGear: RMCGearSurvivorPriest
+  spawnMenuRoleName: Priest (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPriest
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorEquipped
+  id: RMCGearSurvivorPriest
+  equipment:
+    jumpsuit: RMCJumpsuitChaplain
+    outerClothing: RMCClothingPriestRobes
+    back: CMSatchelFillSurvivorPriest
+    shoes: RMCShoesLaceup
+
+- type: entity
+  parent: CMSatchelFillSurvivor
+  id: CMSatchelFillSurvivorPriest
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBible
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorPriest
+  name: survivor priest spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorPriest
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetPriest
+  name: priest colonist preset
