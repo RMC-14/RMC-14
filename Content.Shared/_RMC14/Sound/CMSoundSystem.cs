@@ -20,6 +20,7 @@ public sealed class CMSoundSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCEmitSoundOnSpawnComponent, MapInitEvent>(OnEmitSpawnOnInit);
         SubscribeLocalEvent<RandomSoundComponent, MapInitEvent>(OnRandomMapInit);
 
         SubscribeLocalEvent<SoundOnDeathComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
@@ -28,6 +29,27 @@ public sealed class CMSoundSystem : EntitySystem
         SubscribeLocalEvent<SoundOnDeathSoundComponent, EntityTerminatingEvent>(OnDeathSoundTerminating);
 
         SubscribeLocalEvent<EmitSoundOnActionComponent, SoundActionEvent>(OnEmitSoundOnAction);
+    }
+
+    private void OnEmitSpawnOnInit(Entity<RMCEmitSoundOnSpawnComponent> ent, ref MapInitEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (ent.Comp.Sound == null)
+            return;
+
+        ent.Comp.Entity = _audio.PlayPvs(ent.Comp.Sound, ent.Owner)?.Entity;
+
+        var coordinates = _transform.GetMoverCoordinates(ent);
+        if (TerminatingOrDeleted(coordinates.EntityId))
+            return;
+
+        if (ent.Comp.Entity == null)
+            return;
+
+        _transform.SetCoordinates(ent.Comp.Entity.Value, coordinates);
+        QueueDel(ent.Owner);
     }
 
     private void OnRandomMapInit(Entity<RandomSoundComponent> ent, ref MapInitEvent args)

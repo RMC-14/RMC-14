@@ -1,0 +1,252 @@
+﻿# Bases
+
+- type: entity
+  parent: MarkerBase
+  id: RMCMarkerSoundBase
+  abstract: true
+  name: sound marker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: sound
+
+- type: entity
+  parent: RMCMarkerSoundBase
+  id: RMCMarkerSoundAmbientBase
+  abstract: true
+  name: ambient sound marker
+  components:
+  - type: AmbientSound
+    enabled: true
+    volume: 10
+    range: 50
+  - type: Sprite
+    state: ambient
+
+- type: entity
+  parent: RMCMarkerSoundBase
+  id: RMCMarkerSoundSingleBase
+  abstract: true
+  name: non-loop sound marker
+  components:
+  - type: RMCEmitSoundOnSpawn
+
+# Sound Markers
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundRoar
+  suffix: Xenonid Roar
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      collection: XenoRoar
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundDenyBuzz
+  suffix: Deny Buzz
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Machines/buzz_two.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundShortBeep
+  suffix: Short Beep
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Medical/reset_key_shortbeep.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundAnalogRelease
+  suffix: Analog Release
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Medical/reset_key_release.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundMachinePowerUp
+  suffix: Machine Power Up
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Medical/reset_key_powerup.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundMachineBootUp
+  suffix: Machine Boot Up
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Medical/reset_key_boot_on.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundBlastdoor
+  suffix: Blastdoor
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Machines/blastdoor.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundCrateOpen
+  suffix: Crate Open
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Machines/Techpod/techpod_open.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundCrateHit
+  suffix: Crate Hit
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Machines/Techpod/techpod_hit.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundCrateLanding
+  suffix: Crate Landing
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Machines/Techpod/techpod_drill.ogg
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundMetalThud
+  suffix: Metal Thud
+  components:
+  - type: RMCEmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Structures/metalhit.ogg
+
+# Ambient Markers
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundPump
+  suffix: Pump
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/_RMC14/Machines/fuel_pump_active.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundMachineBuzz
+  suffix: Machine Buzz
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/_RMC14/Machines/fuel_pump_idle.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundHijackAlarm
+  suffix: Hijack Alarm
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/_RMC14/Machines/Shuttle/queen_alarm.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundScaryWhispers
+  suffix: Scary Whispers
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Ambience/anomaly_scary.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundAlienDrone
+  suffix: Alien Drone
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/Ambience/anomaly_drone.ogg
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundGeneric
+  suffix: Generic Ambience
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceGeneric
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundAlienRuin
+  suffix: Alien Ruin
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceRuin
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundHoly
+  suffix: Holy
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceHoly
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundHymms
+  suffix: Hymms
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceHymms
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundDanger
+  suffix: Danger
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceDanger
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundCaves
+  suffix: Caves
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceCave
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundMaintenanceShaft
+  suffix: Maintenance Shaft
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceMaintenance
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWar
+  suffix: War Ambience
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/_RMC14/Ambience/ambiwar.ogg
