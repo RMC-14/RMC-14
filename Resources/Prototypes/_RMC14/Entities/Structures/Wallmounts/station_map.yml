@@ -1,0 +1,32 @@
+- type: entity
+  id: RMCStationMap
+  name: vessel map
+  description: A virtual map of the vessel, used for navigation.
+  suffix: Wall
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: StationMap
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/status_display.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: frame
+    - map: ["computerLayerScreen"]
+      state: map
+  - type: Icon
+    sprite: _RMC14/Structures/Machines/status_display.rsi
+    state: frame
+  - type: WallMount
+    arc: 360
+  - type: Clickable
+  - type: InteractionOutline
+  - type: ExtensionCableReceiver
+  - type: ActivatableUI
+    key: enum.StationMapUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationMapUiKey.Key:
+        type: StationMapBoundUserInterface
