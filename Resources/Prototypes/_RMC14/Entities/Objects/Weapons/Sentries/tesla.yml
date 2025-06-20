@@ -106,6 +106,7 @@
     setDamage:
       types:
         Blunt: 40
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCBaseTesla
