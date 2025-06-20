@@ -1,0 +1,60 @@
+﻿# Bases
+
+- type: entity
+  parent: MarkerBase
+  id: RMCMarkerSoundBase
+  abstract: true
+  name: sound marker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: sound
+
+- type: entity
+  parent: RMCMarkerSoundBase
+  id: RMCMarkerSoundAmbientBase
+  abstract: true
+  name: ambient sound marker
+  components:
+  - type: AmbientSound
+    enabled: true
+    volume: 0
+    range: 12
+  - type: Sprite
+    state: ambient
+
+- type: entity
+  parent: RMCMarkerSoundBase
+  id: RMCMarkerSoundSingleBase
+  abstract: true
+  name: non-loop sound marker
+  components:
+  - type: EmitSoundOnSpawn
+
+# Sound Markers
+# Currently these use TimedDespawn to remove themselves after playing their sound, but you have to manually change the despawn time to sync up with the sound length
+# which is utterly cancerous so i beg someone to make a component that does this automatically
+# you have my life whoever does this - cro
+# for now just make the timed despawn equal to the sound length + 0.1 seconds so it doesnt get cut off awkwardly - also cro
+
+- type: entity
+  parent: RMCMarkerSoundSingleBase
+  id: RMCMarkerSoundRoar
+  suffix: Xenonid Roar
+  components:
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_RMC14/Xeno/alien_roar1.ogg
+  - type: TimedDespawn
+    lifetime: 1.1
+
+# Ambient Markers
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundPump
+  suffix: Pump
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/_RMC14/Machines/fuel_pump_active.ogg
