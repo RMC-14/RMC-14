@@ -274,9 +274,6 @@
   id: RMCSmartGunCLF
   name: ML66B 'freedom' smart gun
   description: The actual firearm in the 4-piece ML66B Smartgun System. Essentially a heavy, mobile machinegun. This one has the CLF logo carved over the manufacturing stamp.
-  components:
-  - type: GunRequireEquipped
-    whitelist: { }
 
 - type: entity
   parent: RMCSmartGun

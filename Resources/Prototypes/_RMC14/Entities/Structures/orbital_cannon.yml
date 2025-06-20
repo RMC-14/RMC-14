@@ -33,6 +33,7 @@
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
     - RMCOrbitalCannonWarheadIncendiary
+    - RMCOrbitalCannonWarheadAegis
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
@@ -120,6 +121,33 @@
     explosion: RMCOrbitalCannonExplosionCluster
 
 - type: entity
+  parent: RMCOrbitalCannonWarheadBase
+  id: RMCOrbitalCannonWarheadAegis
+  description: "An experimental phoron-based AEGIS Orbital Warhead, straight from the R&D Division of AEGIS. Designed to be used against targets where a single orbital warhead is simply not enough."
+  name: AEGIS orbital warhead
+  components:
+  - type: WarpPoint
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: aegis_ob_2
+  - type: TacticalMapTracked
+  - type: XenoMapTracked
+  - type: MarineMapTracked
+  - type: Sprite
+    sprite: _RMC14/Structures/ob_warhead_aegis.rsi
+    state: ob_warhead_aegis
+  - type: OrbitalCannonWarhead
+    explosion: RMCOrbitalCannonExplosionAegis
+    isAegis: true
+    firstWarningRange: 60
+    secondWarningRange: 55
+    thirdWarningRange: 45
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualWarheadRightAegis
+    virtualLeft: RMCVirtualWarheadLeftAegis
+
+- type: entity
   id: RMCOrbitalCannonWarheadSpawner
   name: random orbital warhead
   description: "This is a random orbital warhead."
@@ -161,6 +189,36 @@
       max: 90
       delay: 0.6
       explosionEffect: RMCExplosionEffectClusterOB
+  - type: WarpPoint
+    location: 1 orbital bombardment
+
+- type: entity
+  parent: MarkerBase
+  id: RMCOrbitalCannonExplosionAegis
+  name: explosive Aegis OB explosion
+  suffix: FIRES AN OB!!!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: OrbitalCannonExplosion
+    steps:
+    - type: RMCOBXenoTunnel
+      total: 5000
+      slope: 1500
+      max: 200
+      delay: 1
+    - type: RMCOBXenoTunnel
+      total: 150000
+      slope: 10
+      max: 90
+      delay: 0.3
+    - type: RMCOBXenoTunnel
+      total: 150000
+      slope: 10
+      max: 90
+      delay: 0.3
+    - fire: RMCTileFireOBAegis
+      fireRange: 35
   - type: WarpPoint
     location: 1 orbital bombardment
 

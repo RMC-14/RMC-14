@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared.Maps;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -28,6 +29,7 @@ public sealed partial class XenoHighGallopSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoHighGallopComponent, XenoHighGallopActionEvent>(OnHighGallopAction);
@@ -87,8 +89,11 @@ public sealed partial class XenoHighGallopSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, ent))
                 continue;
 
-            _stun.TryParalyze(ent, xeno.Comp.StunDuration, true);
-            _slow.TrySlowdown(ent, xeno.Comp.SlowDuration);
+            if (_size.TryGetSize(ent, out var size) && size >= RMCSizes.Big)
+                continue;
+
+            _stun.TryParalyze(ent, _xeno.TryApplyXenoDebuffMultiplier(ent, xeno.Comp.StunDuration), true);
+            _slow.TrySlowdown(ent, _xeno.TryApplyXenoDebuffMultiplier(ent, xeno.Comp.SlowDuration));
         }
     }
 }

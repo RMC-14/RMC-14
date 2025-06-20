@@ -133,7 +133,7 @@
       - GasTank
       - Pen
       - RMCMacheteScabbard
-      #TODO Katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
 
 
@@ -167,7 +167,7 @@
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
       - RMCMacheteScabbard
-      #TODO Katana scabbard
+      - RMCScabbardKatana
       - RMCDetector
 
 - type: entity
@@ -463,6 +463,13 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
 
 - type: entity
+  parent: RMCCoatService
+  id: RMCCoatServiceFolded
+  components:
+  - type: Foldable
+    folded: true
+
+- type: entity
   parent: CMCoatOfficer
   id: RMCProvostCoat
   name: Provost Coat
@@ -577,3 +584,15 @@
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
+
+# priest robes
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingPriestRobes
+  name: priest robes
+  description: A long dress with a purple scarf, often worn by religious folk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi

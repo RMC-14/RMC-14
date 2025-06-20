@@ -22,7 +22,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
     }
 
-    protected bool TryGetTacticalMap(out Entity<TacticalMapComponent> map)
+    public bool TryGetTacticalMap(out Entity<TacticalMapComponent> map)
     {
         var query = EntityQueryEnumerator<TacticalMapComponent>();
         while (query.MoveNext(out var uid, out var mapComp))
@@ -74,5 +74,9 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
         _ui.TryOpenUi(computer.Owner, TacticalMapComputerUi.Key, user);
         UpdateMapData((computer, computer.Comp));
+    }
+
+    public virtual void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
+    {
     }
 }

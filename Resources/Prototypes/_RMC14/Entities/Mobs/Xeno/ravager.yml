@@ -127,6 +127,8 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: ravager
+  - type: FixedIdentity
+    name: cm-job-name-xeno-ravager
 
 - type: entity
   parent: RMCXenoRavagerBase
@@ -223,6 +225,8 @@
     healAmount: 75
     enragedHealAmount: 100
     paralyzeTime: 0
+    slowTime: 0
+    dazeTime: 4
     throwSpeed: 12
     damage:
       groups:

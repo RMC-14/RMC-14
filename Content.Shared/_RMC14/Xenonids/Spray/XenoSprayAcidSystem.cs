@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
@@ -36,7 +37,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
@@ -180,6 +181,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
 
                 var spawned = Spawn(active.Acid, acid.Coordinates);
                 var splatter = EnsureComp<XenoAcidSplatterComponent>(spawned);
+                _hive.SetSameHive(uid, spawned);
                 splatter.Xeno = uid;
                 Dirty(spawned, splatter);
 

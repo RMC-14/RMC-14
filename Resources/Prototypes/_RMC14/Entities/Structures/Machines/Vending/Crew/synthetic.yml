@@ -47,7 +47,7 @@
       entries:
       - id: RMCHardhatOrange
         name: orange hard hat
-      - id: ClothingHeadHatWelding
+      - id: RMCHelmetWelding
       # /obj/item/clothing/head/cmcap/flap
 #    - name: Suit
 #      choices: { CMSuit: 1 }
@@ -143,6 +143,16 @@
       - id: CMMaskSterile
 
 - type: entity
+  parent: ColMarTechCrewSynthetic
+  id: ColMarTechCrewSyntheticColony
+  name: ColMarTech Synthetic Equipment Rack
+  suffix: Colony Synth Access
+  components:
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSyntheticColony
+
+- type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSyntheticGear
   name: ColMarTech Synthetic Auxiliary Gear Rack
@@ -198,7 +208,8 @@
         points: 6
       - id: CMFirstAidO2KitFilled
         points: 6
-      # /obj/item/storage/firstaid/rad - 6 Points
+      - id: RMCRadiationAidKit
+        points: 6
     - name: Medical Supplies
       entries:
       - id: CMBurnKit1
@@ -306,7 +317,8 @@
     - name: Experimental Tools
       entries:
       # autocompressor - 15 Points
-      # breaching hammer - 15 Points
+      - id: RMCSynthBreachingHammer
+        points: 15
       - id: RMCDefibrillatorCompact
         points: 15
       - id: RMCVendorBundleCompactNailgunKit

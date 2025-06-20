@@ -1,0 +1,51 @@
+- type: entity
+  id: AegisBox
+  name: AEGIS Secure Crate
+  description: A secure storage crate for transportation of AEGIS equipment. It is locked and requires an AEGIS ID card to open.
+  components:
+    - type: WarpPoint
+    - type: PointLight
+      radius: 20
+      energy: 5.0
+      color: "#FFE4CEFF"
+      mask: /Textures/Effects/LightMasks/double_cone.png
+    - type: RotatingLight
+      speed: 90
+    - type: Sprite
+      sprite: _RMC14/Secure-Box.rsi
+      layers:
+        - state: aegis_crate
+          map: ["enum.AegisCrateVisualLayers.Base"]
+    - type: AegisCrate
+      openSound: /Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: aegiscrate
+    - type: TacticalMapTracked
+    - type: XenoMapTracked
+    - type: MarineMapTracked
+    - type: InteractionOutline
+    - type: Clickable
+    - type: Physics
+      bodyType: Static
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.49,-0.49,0.49,0.49"   # 1x1 tile, centered
+          density: 100
+          mask:
+            - FullTileMask
+          layer:
+            - WallLayer
+    - type: AccessReader
+      access: [["CMAccessAegis"]]
+    - type: Lock
+    - type: Appearance
+    - type: AnimationPlayer
+    - type: Corrodible
+      isCorrodible: False
+    - type: DestroyedByExplosionType
+      explosion: RMCOBXenoTunnel
