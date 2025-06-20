@@ -33,7 +33,6 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
@@ -111,13 +110,6 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         _sizeStun.TryGetSize(ent, out var size);
 
-        var pos = _transform.GetWorldPosition(ent);
-        var dir = pos - args.Epicenter.Position;
-        if (dir.IsLengthZero())
-            dir = _random.NextVector2();
-
-        dir = dir.Normalized(); // TODO RMC14 size-based throw ranges and speeds
-
         // Humanoid calcuations
         if (size == RMCSizes.Humanoid)
         {
@@ -145,7 +137,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(ent, BlindKey, ent.Comp.BlurTime, false);
 
             if (!HasComp<XenoNestedComponent>(ent))
-                _throwing.TryThrow(ent, dir, (float) severity);
+                _sizeStun.KnockBack(ent, args.Epicenter, knockBackSpeed: (float) severity);
 
             return;
         }
@@ -164,7 +156,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             else
                 _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3));
 
-            _throwing.TryThrow(ent, dir, 5);
+            _sizeStun.KnockBack(ent, args.Epicenter, knockBackSpeed: 5, ignoreSize: true);
         }
         else if (factor > 10)
         {
