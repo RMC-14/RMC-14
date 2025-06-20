@@ -23,7 +23,6 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-  - type: PlaytimeMedalHolder
   - type: Food
     requiresSpecialDigestion: true
   - type: SolutionContainerManager

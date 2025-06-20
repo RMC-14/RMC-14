@@ -16,7 +16,6 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
-  - type: PlaytimeMedalHolder
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist

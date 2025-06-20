@@ -71,7 +71,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
             return;
         }
 
-        if (ent.Comp.AllowedCategories.Contains(accessory.Category))
+        if (!ent.Comp.AllowedCategories.Contains(accessory.Category))
         {
             _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail-not-allowed"), args.User, args.User, PopupType.SmallCaution);
             return;
