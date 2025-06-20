@@ -210,9 +210,9 @@
   id: RMCMarkerSoundAlienRuin
   suffix: Alien Ruin
   components:
-  - type: RMCAmbienceRuin
+  - type: AmbientSound
     sound:
-      path: /Audio/Ambience/ambiruin.ogg
+      collection: RMCAmbienceRuin
 
 - type: entity
   parent: RMCMarkerSoundAmbientBase
