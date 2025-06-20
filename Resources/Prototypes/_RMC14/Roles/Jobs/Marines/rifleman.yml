@@ -30,6 +30,7 @@
       skills:
         RMCSkillEndurance: 1
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
