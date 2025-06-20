@@ -181,12 +181,57 @@
 
 - type: entity
   parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundGeneric
+  suffix: Generic Ambience
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceGeneric
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
   id: RMCMarkerSoundAlienRuin
   suffix: Alien Ruin
   components:
   - type: AmbientSound
     sound:
       collection: RMCAmbienceRuin
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundHoly
+  suffix: Holy
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceHoly
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundHymms
+  suffix: Hymms
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceHymms
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundDanger
+  suffix: Danger
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceDanger
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundCaves
+  suffix: Caves
+  components:
+  - type: AmbientSound
+    sound:
+      collection: RMCAmbienceCave
 
 - type: entity
   parent: RMCMarkerSoundAmbientBase
