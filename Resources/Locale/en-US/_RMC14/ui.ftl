@@ -92,9 +92,7 @@ rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
 
-rmc-tacmap-alert-area = Current Area: {$area}
-rmc-tacmap-alert-no-area = Unknown
-rmc-tacmap-alert-area-info = {$area} (Ceiling Level {$ceilingLevel}){$restrictions}
+rmc-area-info = {$area}{$restrictions}
 rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] All actions allowed
 rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] Mortar Placement, Lasing, Medevac
 rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] Supply Drops, Mortar Fire

@@ -123,19 +123,19 @@
   maxSeverity: 4
 
 - type: alert
-  id: MarineAreaAlert
+  id: AreaInfo
   icons:
-  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
-    state: maptable
-  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
-    state: maptable
-  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
-    state: maptable
-  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
-    state: maptable
-  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
-    state: maptable
-  name: Current Area
-  description: Shows your current area, ceiling level, and restrictions.
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof0
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof1
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof2
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof3
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof4
+  name: Area Info
+  description: Information of the area you are in.
   minSeverity: 0
   maxSeverity: 4
