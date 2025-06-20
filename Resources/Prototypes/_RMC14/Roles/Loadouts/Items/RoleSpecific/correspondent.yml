@@ -1,0 +1,6 @@
+- type: loadout
+  id: CorrespondentGunRMC
+  cost: 1
+  storage:
+    back:
+    - CC55Case
