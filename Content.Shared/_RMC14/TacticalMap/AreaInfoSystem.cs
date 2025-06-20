@@ -52,7 +52,9 @@ public sealed class AreaInfoSystem : EntitySystem
     private void OnGotUnequipped(Entity<GrantAreaInfoComponent> ent, ref GotUnequippedEvent args)
     {
         if (_timing.ApplyingState)
-            return;        if ((ent.Comp.Slots & args.SlotFlags) == 0)
+            return;
+
+        if ((ent.Comp.Slots & args.SlotFlags) == 0)
             return;
         if (!_inv.TryGetInventoryEntity<GrantAreaInfoComponent>(args.Equipee, out _))
             RemCompDeferred<AreaInfoComponent>(args.Equipee);
@@ -107,9 +109,11 @@ public sealed class AreaInfoSystem : EntitySystem
             severityToUse = hasHiveCoreProtection ? (short)6 : (short)4;
         }
         else if (!_area.CanCAS(coordinates))
+        {
             ceilingLevel = 3;
             severityToUse = hasPylonProtection ? (short)5 : (short)3;
-        }        else if (!_area.CanSupplyDrop(coordinates.ToMap(_entityManager, _transform)) || !_area.CanMortarFire(coordinates))
+        }
+        else if (!_area.CanSupplyDrop(coordinates.ToMap(_entityManager, _transform)) || !_area.CanMortarFire(coordinates))
         {
             ceilingLevel = 2;
             severityToUse = (short)2;
@@ -157,7 +161,9 @@ public sealed class AreaInfoSystem : EntitySystem
         if (_area.CanLase(coordinates))
             allowedActions.Add("Laser Designation");
         else
-            restrictedActions.Add("Laser Designation");        if (area.Value.Comp.Medevac)
+            restrictedActions.Add("Laser Designation");
+
+        if (area.Value.Comp.Medevac)
             allowedActions.Add("Casualty Evacuation");
         else
             restrictedActions.Add("Casualty Evacuation");
