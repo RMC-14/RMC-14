@@ -69,3 +69,11 @@
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.25
     sprintSpeedModifier: 0.25
+
+- type: entity
+  parent: CMFloorShallowWaterEntity
+  id: RMCRiverSorokyne
+  name: river
+  components:
+  - type: Sprite
+    sprite: _RMC14/Tiles/planet/sorokyne/sorokyne_water.rsi

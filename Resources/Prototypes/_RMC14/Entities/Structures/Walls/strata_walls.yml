@@ -75,3 +75,19 @@
   - type: IconSmooth
     key: walls
     base: strata_ice_dirty
+
+- type: entity
+  parent: RMCWallStrataIce
+  id: RMCWallStrataRock
+  name: rock wall
+  description: A rough wall of hardened rock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_rock.rsi
+    state: strata_rock
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_rock.rsi
+    state: strata_rock
+  - type: IconSmooth
+    key: walls
+    base: strata_rock
