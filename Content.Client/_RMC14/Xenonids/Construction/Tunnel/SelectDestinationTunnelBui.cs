@@ -595,6 +595,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
 
         _window = this.CreateWindow<SelectDestinationTunnelWindow>();
         _window.SelectButton.Disabled = true;
+        _window.SetBlipUpdateCallback(() => UpdateBlips());
 
         var wrapper = _window.TacticalMapWrapper;
         TabContainer.SetTabVisible(wrapper.CanvasTab, false);
