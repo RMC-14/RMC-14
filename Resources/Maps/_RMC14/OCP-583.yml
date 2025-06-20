@@ -7793,48 +7793,6 @@ entities:
         0,-3: RMCAreaOCP-583
         0,-2: RMCAreaOCP-583
         0,-1: RMCAreaOCP-583
-- proto: ActionToggleLight
-  entities:
-  - uid: 955
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 954
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 954
-  - uid: 1054
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 1053
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 1053
-  - uid: 1782
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 675
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 675
-  - uid: 2319
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 2318
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 2318
-  - uid: 2955
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 2954
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 2954
 - proto: ArmorHelmetPMCCorporate
   entities:
   - uid: 936
