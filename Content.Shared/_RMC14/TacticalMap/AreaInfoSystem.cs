@@ -18,7 +18,9 @@ public sealed class AreaInfoSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;    private readonly Queue<Entity<AreaInfoComponent>> _marineAlertCopyQueue = new();
+    [Dependency] private readonly IConfigurationManager _config = default!;
+
+    private readonly Queue<Entity<AreaInfoComponent>> _marineAlertCopyQueue = new();
 
     private TimeSpan _maxProcessTime;
 
@@ -28,6 +30,7 @@ public sealed class AreaInfoSystem : EntitySystem
         SubscribeLocalEvent<GrantAreaInfoComponent, GotUnequippedEvent>(OnGotUnequipped);
         SubscribeLocalEvent<AreaInfoComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<AreaInfoComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<AreaInfoComponent, MoveEvent>(OnMoveEvent);
 
         Subs.CVar(_config, RMCCVars.RMCMaxTacmapAlertProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
     }
@@ -66,6 +69,22 @@ public sealed class AreaInfoSystem : EntitySystem
     private void OnRemove(Entity<AreaInfoComponent> ent, ref ComponentRemove args)
     {
         _alerts.ClearAlert(ent, ent.Comp.Alert);
+    }
+
+    private void OnMoveEvent(Entity<AreaInfoComponent> ent, ref MoveEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        // For immediate responsiveness, especially for fast-moving entities like ghosts,
+        // update the alert when they move to a new area
+        var (areaName, ceilingLevel, restrictions) = GetAreaInfo(ent);
+        _alerts.ShowAlert(ent, ent.Comp.Alert,
+            severity: ceilingLevel,
+            dynamicMessage: Loc.GetString("rmc-area-info",
+                ("area", areaName),
+                ("ceilingLevel", ceilingLevel),
+                ("restrictions", restrictions)));
     }
 
     private (string areaName, short ceilingLevel, string restrictions) GetAreaInfo(EntityUid ent)
@@ -184,7 +203,6 @@ public sealed class AreaInfoSystem : EntitySystem
                 continue;
 
             _marineAlertCopyQueue.Enqueue((uid, alert));
-            alert.NextUpdateTime = time + alert.UpdateInterval;
-        }
+            alert.NextUpdateTime = time + alert.UpdateInterval;        }
     }
 }

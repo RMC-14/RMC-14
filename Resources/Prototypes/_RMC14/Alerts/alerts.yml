@@ -124,6 +124,7 @@
 
 - type: alert
   id: AreaInfo
+  category: AreaInfo
   icons:
   - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
     state: roof0
