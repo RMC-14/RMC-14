@@ -4,10 +4,10 @@
   - CMAccessCE
   - CMAccessEngineering
   - CMAccessCommand
-  - CMAccessCommand
   - CMAccessColonyEngineering
   - CMAccessMaint
   - CMAccessOT
+  - CMAccessDropship
 
 - type: accessGroup
   id: OT
