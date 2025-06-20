@@ -155,3 +155,28 @@
         - ReagentId: WeldingFuel
           Quantity: 12.5
         maxVol: 12.5 # TODO RMC14 5 when welders are fixed
+
+- type: entity
+  parent: RMCWelderBase
+  id: RMCWelderIndustrial
+  name: industrial blowtorch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/welder_industrial.rsi
+    layers:
+    - state: icon
+      map: ["enum.ToggleVisuals.Toggled"]
+    - state: welder_on
+      map: ["enum.ToggleVisuals.Layer"]
+      visible: false
+      shader: unshaded
+  - type: Item
+    sprite: _RMC14/Objects/Tools/welder_industrial.rsi
+  - type: RequiresEyeProtection
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 150
+        maxVol: 150 # TODO RMC14 60 when welders are fixed
