@@ -57,3 +57,8 @@
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_1.ogg
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_2.ogg
+
+- type: soundCollection
+  id: RMCAK4047Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ak4047.ogg
