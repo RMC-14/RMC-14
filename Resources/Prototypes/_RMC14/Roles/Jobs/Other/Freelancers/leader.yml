@@ -42,6 +42,7 @@
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: free_sl
     - type: RMCPointing
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

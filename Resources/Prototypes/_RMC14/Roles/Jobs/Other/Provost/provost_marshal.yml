@@ -41,6 +41,7 @@
     - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-marshal
+    - type: RMCTrackable
   hidden: true
 
 - type: randomHumanoidSettings
