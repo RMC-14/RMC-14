@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
@@ -33,6 +34,8 @@ public sealed class XenoDislocateSystem : EntitySystem
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoDislocateComponent, XenoDislocateActionEvent>(OnDislocateAction);
@@ -77,7 +80,8 @@ public sealed class XenoDislocateSystem : EntitySystem
             {
                 var origin = _transform.GetMapCoordinates(xeno);
                 _rmcMelee.DoLunge(xeno, targetId);
-                _sizeStun.KnockBack(targetId, origin, xeno.Comp.FlingRange, xeno.Comp.FlingRange, 10, true);
+                _obstacleSlamming.MakeImmune(targetId);
+                _sizeStun.KnockBack(targetId, origin, xeno.Comp.FlingRange, xeno.Comp.FlingRange, 10);
 
                 SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
             }

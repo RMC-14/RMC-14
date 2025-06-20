@@ -110,6 +110,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
         _sizeStun.TryGetSize(ent, out var size);
 
+        // TODO RMC14 size-based throw ranges and speeds
+
         // Humanoid calcuations
         if (size == RMCSizes.Humanoid)
         {
