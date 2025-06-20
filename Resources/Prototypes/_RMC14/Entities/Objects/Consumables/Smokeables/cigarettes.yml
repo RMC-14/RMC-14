@@ -2,7 +2,7 @@
   parent: CigPackBase
   id: CMCigarettePackLuckySlothsMini
   name: lucky sloths mini packet
-  description: These four-packs of Luckies come in every MRE. They're not as good as the Habana Reals that come in the LACN MREs, but at least they're free.
+  description: These four-packs of Luckies come in every MRE. They're not as good as the Embassy Crowns found in some TSE MREs, but at least they're free.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_4.rsi
