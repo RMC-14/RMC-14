@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Ball;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -224,6 +225,13 @@ public sealed class XenoSpitSystem : EntitySystem
         if (_hive.FromSameHive(spit.Owner, target) || HasComp<XenoComponent>(target))
         {
             QueueDel(spit);
+            return;
+        }
+
+        if (HasComp<SynthComponent>(target))
+        {
+            var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", target));
+            _popup.PopupEntity(immuneMsg, target, target, PopupType.SmallCaution);
             return;
         }
 
