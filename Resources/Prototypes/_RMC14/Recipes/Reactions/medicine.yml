@@ -191,7 +191,7 @@
     RMCHydrogen:
       amount: 1
   products:
-    RMCMethylphenidate: 3
+    RMCMethylphenidate: 2
 
 - type: reaction
   id: RMCCitalopram
@@ -201,7 +201,7 @@
     RMCCarbon:
       amount: 1
   products:
-    RMCCitalopram: 3
+    RMCCitalopram: 2
 
 - type: reaction
   id: RMCParoxetine
