@@ -80,3 +80,6 @@ rmc-dropship-fabricator-equipment = [bold]Equipment[/bold]
 rmc-dropship-fabricator-ammo = [bold]Ammo[/bold]
 rmc-dropship-fabricator-fabricate = Fabricate ({$cost})
 rmc-dropship-fabricator-busy = The dropship part fabricator is busy. Please wait for completion of previous operation.
+
+rmc-dropship-firemission-warning = A DROPSHIP FIRES TOWARDS THE {$direction}
+rmc-dropship-firemission-warning-above = A DROPSHIP FIRES RIGHT ONTOP OF YOU!
