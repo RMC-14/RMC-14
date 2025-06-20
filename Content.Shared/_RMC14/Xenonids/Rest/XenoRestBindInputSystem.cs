@@ -51,7 +51,7 @@ public sealed class XenoRestBindInputSystem : EntitySystem
         CommandBinds.Unregister<XenoRestBindInputSystem>();
     }
 
-    private bool TryFindActionByPrototype(EntityUid owner,
+    public bool TryFindActionByPrototype(EntityUid owner,
         string prototypeId,
         out EntityUid actionId,
         out BaseActionComponent comp)
