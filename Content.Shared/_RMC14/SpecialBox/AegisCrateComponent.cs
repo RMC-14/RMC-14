@@ -7,25 +7,11 @@ using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.AegisCrate;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class AegisCrateComponent : Component
 {
-    public delegate void StateChangedDelegate(EntityUid uid, AegisCrateComponent component);
-    public event StateChangedDelegate? StateChanged;
-
-    private AegisCrateState _state = AegisCrateState.Closed;
-
     [DataField, AutoNetworkedField]
-    public AegisCrateState State
-    {
-        get => _state;
-        set
-        {
-            if (_state == value) return;
-            _state = value;
-            StateChanged?.Invoke(Owner, this);
-        }
-    }
+    public AegisCrateState State { get; set; } = AegisCrateState.Closed;
 
     [NonSerialized]
     public EntityUid? StorageUid;
