@@ -18,8 +18,8 @@
   components:
   - type: AmbientSound
     enabled: true
-    volume: 0
-    range: 12
+    volume: 10
+    range: 50
   - type: Sprite
     state: ambient
 
@@ -240,4 +240,13 @@
   components:
   - type: AmbientSound
     sound:
-      path: /Audio/Ambience/maintambience.ogg
+      collection: RMCAmbienceMaintenance
+
+- type: entity
+  parent: RMCMarkerSoundAmbientBase
+  id: RMCMarkerSoundWar
+  suffix: War Ambience
+  components:
+  - type: AmbientSound
+    sound:
+      path: /Audio/_RMC14/Ambience/ambiwar.ogg

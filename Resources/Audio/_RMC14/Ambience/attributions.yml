@@ -60,3 +60,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station, mixed down to mono by github noctyrnal"
   source: "https://github.com/tgstation/tgstation/tree/ae9767664701396501af5dcef8e34c4b5add3d47/sound/ambience"
+
+- files: ["ambiwar.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
+  source: "https://pixabay.com/sound-effects/modern-war-129016/"

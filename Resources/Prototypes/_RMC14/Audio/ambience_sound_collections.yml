@@ -57,6 +57,7 @@
     - /Audio/_RMC14/Ambience/ambimaint3.ogg
     - /Audio/_RMC14/Ambience/ambimaint4.ogg
     - /Audio/_RMC14/Ambience/ambimaint5.ogg
+    - /Audio/_RMC14/Ambience/maintambience.ogg
 
 - type: soundCollection
   id: RMCAmbienceCave
