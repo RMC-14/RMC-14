@@ -29,134 +29,108 @@
   abstract: true
   name: non-loop sound marker
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
 
 # Sound Markers
-# Currently these use TimedDespawn to remove themselves after playing their sound, but you have to manually change the despawn time to sync up with the sound length
-# which is utterly cancerous so i beg someone to make a component that does this automatically
-# you have my life whoever does this - cro
-# for now just make the timed despawn equal to the sound length + 0.1 seconds so it doesnt get cut off awkwardly - also cro
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundRoar
   suffix: Xenonid Roar
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       collection: XenoRoar
-  - type: TimedDespawn
-    lifetime: 1.1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundDenyBuzz
   suffix: Deny Buzz
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Machines/buzz_two.ogg
-  - type: TimedDespawn
-    lifetime: 1.1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundShortBeep
   suffix: Short Beep
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Medical/reset_key_shortbeep.ogg
-  - type: TimedDespawn
-    lifetime: 1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundAnalogRelease
   suffix: Analog Release
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Medical/reset_key_release.ogg
-  - type: TimedDespawn
-    lifetime: 1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundMachinePowerUp
   suffix: Machine Power Up
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Medical/reset_key_powerup.ogg
-  - type: TimedDespawn
-    lifetime: 5.1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundMachineBootUp
   suffix: Machine Boot Up
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Medical/reset_key_boot_on.ogg
-  - type: TimedDespawn
-    lifetime: 1.1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundBlastdoor
   suffix: Blastdoor
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Machines/blastdoor.ogg
-  - type: TimedDespawn
-    lifetime: 1.5
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundCrateOpen
   suffix: Crate Open
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Machines/Techpod/techpod_open.ogg
-  - type: TimedDespawn
-    lifetime: 2.1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundCrateHit
   suffix: Crate Hit
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Machines/Techpod/techpod_hit.ogg
-  - type: TimedDespawn
-    lifetime: 1.1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundCrateLanding
   suffix: Crate Landing
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Machines/Techpod/techpod_drill.ogg
-  - type: TimedDespawn
-    lifetime: 4.1
 
 - type: entity
   parent: RMCMarkerSoundSingleBase
   id: RMCMarkerSoundMetalThud
   suffix: Metal Thud
   components:
-  - type: EmitSoundOnSpawn
+  - type: RMCEmitSoundOnSpawn
     sound:
       path: /Audio/_RMC14/Structures/metalhit.ogg
-  - type: TimedDespawn
-    lifetime: 1.1
 
 # Ambient Markers
 
