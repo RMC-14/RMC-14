@@ -41,6 +41,7 @@
         Heat: 0.5
   - type: DamageOnCollide
     damageDead: false
+    fire: true
     damage:
       types:
         Heat: 45
