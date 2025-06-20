@@ -1,0 +1,10 @@
+﻿- type: soundCollection
+  id: RMCAmbienceRuin
+  files:
+    - /Audio/Ambience/ambiruin.ogg
+    - /Audio/Ambience/ambiruin2.ogg
+    - /Audio/Ambience/ambiruin3.ogg
+    - /Audio/Ambience/ambiruin4.ogg
+    - /Audio/Ambience/ambiruin5.ogg
+    - /Audio/Ambience/ambiruin6.ogg
+    - /Audio/Ambience/ambiruin7.ogg
