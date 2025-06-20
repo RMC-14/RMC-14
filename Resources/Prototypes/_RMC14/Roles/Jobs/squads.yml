@@ -301,3 +301,27 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_soctl
+
+- type: entity
+  parent: SquadBase
+  id: SquadCLF
+  name: CLF
+  components:
+  - type: SquadTeam
+    color: "#3aeb34"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: Colony
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_spp
+    canSupplyDrop: false
+    group: CLF
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: clf_sl
