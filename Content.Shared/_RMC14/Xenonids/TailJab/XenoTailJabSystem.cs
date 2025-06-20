@@ -69,7 +69,7 @@ public sealed class XenoTailJabSystem : EntitySystem
         _rmcObstacleSlamming.ApplyBonuses(target, xeno.Comp.WallSlamStunTime, xeno.Comp.WallSlamSlowdownTime);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        _size.KnockBack(target, origin, xeno.Comp.ThrowRange, xeno.Comp.ThrowRange);
+        _size.KnockBack(target, origin, xeno.Comp.ThrowRange, xeno.Comp.ThrowRange); // throw slightly for wall slam behaviour
 
         var direction = _transform.GetWorldRotation(xeno).GetDir();
         var angle = direction.ToAngle() - Angle.FromDegrees(180);

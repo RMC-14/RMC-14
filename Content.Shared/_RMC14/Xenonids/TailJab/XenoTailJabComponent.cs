@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Xenonids.TailJab;
 public sealed partial class XenoTailJabComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public DamageSpecifier Damage;
+    public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
     public EntProtoId AttackEffect = "RMCEffectExtraSlash";

@@ -127,10 +127,10 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             _statusEffects.TryAddStatusEffect<FlashedComponent>(ent, FlashedKey, ent.Comp.BlindTime * bombArmorMult, true);
             _deafness.TryDeafen(ent, TimeSpan.FromSeconds(severity * 0.5), true);
 
-            var knockBackDistance = (float)Math.Clamp(severity / 5 / dir.Length(), 0.5, severity / 10);
+            var knockBackDistance = (float) Math.Clamp(severity / 5 / dir.Length(), 0.5, severity / 10);
 
             if (!HasComp<XenoNestedComponent>(ent))
-                _sizeStun.KnockBack(ent, args.Epicenter, knockBackDistance,knockBackDistance , knockBackSpeed: (float) severity);
+                _sizeStun.KnockBack(ent, args.Epicenter, knockBackDistance, knockBackDistance, knockBackSpeed: (float) severity);
 
             var knockdownValue = severity * 0.1;
             var knockoutValue = damage.Double() * 0.1;

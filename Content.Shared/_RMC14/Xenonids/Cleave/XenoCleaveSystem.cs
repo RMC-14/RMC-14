@@ -56,7 +56,7 @@ public sealed class XenoCleaveSystem : EntitySystem
 
             if (_net.IsServer)
             {
-                _sizeStun.KnockBack(args.Target, origin,flingRange, flingRange, 10, true);
+                _sizeStun.KnockBack(args.Target, origin, flingRange, flingRange, 10, true);
 
                 SpawnAttachedTo(xeno.Comp.FlingEffect, args.Target.ToCoordinates());
             }
