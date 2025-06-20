@@ -1,0 +1,13 @@
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: RMCSuitBioGeneral
+  name: bio suit
+  description: A suit that protects against biological contamination.
+  suffix: Generic, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit.rsi
+  - type: CMArmor
+    bio: 100 # CLOTHING_ARMOR_HARDCORE

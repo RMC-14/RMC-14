@@ -1,0 +1,19 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHoodBioGeneral
+  name: bio hood
+  description: A hood that protects the head and face from biological contaminants.
+  suffix: Generic, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/biohelmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/biohelmet.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: CMArmor
+    bio: 100 # CLOTHING_ARMOR_HARDCORE
