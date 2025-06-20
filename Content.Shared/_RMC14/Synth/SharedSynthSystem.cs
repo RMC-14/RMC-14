@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines;
+﻿using Content.Shared._RMC14.IdentityManagement;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Bed.Sleep;
@@ -59,6 +60,12 @@ public abstract class SharedSynthSystem : EntitySystem
 
         if (ent.Comp.StunResistance != null)
             _rmcStatusEffects.GiveStunResistance(ent.Owner, ent.Comp.StunResistance.Value);
+
+        if (TryComp<FixedIdentityComponent>(ent.Owner, out var fixedIdentity))
+        {
+            fixedIdentity.Name = ent.Comp.FixedIdentityReplacement;
+            Dirty(ent.Owner, fixedIdentity);
+        }
     }
 
     private void OnMeleeAttempted(Entity<SynthComponent> ent, ref AttackAttemptEvent args)
