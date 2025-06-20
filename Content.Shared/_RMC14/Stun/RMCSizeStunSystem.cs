@@ -181,9 +181,9 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// <summary>
     ///     Tries to knock back the target.
     /// </summary>
-    public void KnockBack(EntityUid target, EntityCoordinates? shotFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f)
+    public void KnockBack(EntityUid target, EntityCoordinates? shotFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f, bool ignoreSize = false)
     {
-        if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big)
+        if ((!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big) && !ignoreSize)
             return;
 
         if(shotFrom == null)
