@@ -23,7 +23,7 @@
         RMCSkillFirearms: 1
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
   hasIcon: false
 
 - type: startingGear
