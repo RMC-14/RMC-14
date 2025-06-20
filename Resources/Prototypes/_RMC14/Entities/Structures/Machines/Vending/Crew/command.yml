@@ -170,7 +170,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Mask
@@ -448,7 +448,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Huds
@@ -803,7 +803,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Hats
@@ -896,7 +896,7 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
     # ////////////////////////////////////
     # Chief Engineer
@@ -1014,7 +1014,7 @@
       - id: CMWebbingBrown
       - id: CMWebbing
       - id: CMWebbingHolster
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     # CE Deployment Gear
@@ -1282,6 +1282,7 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbing
+      - id: RMCWebbingDropPouch
     - name: Spare Equipment
       jobs:
       - CMCMO
@@ -1373,5 +1374,5 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
