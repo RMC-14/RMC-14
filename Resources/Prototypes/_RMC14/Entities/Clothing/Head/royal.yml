@@ -1,14 +1,9 @@
 # Royal Crown Marines hats
 - type: entity
-  parent: CMHeadBeret
+  parent: RMCHeadBeanie
   id: RMCHeadRoyalBeanie
   name: royal marine beanie
   description: A standard military beanie.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/beanie.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/beanie.rsi
 
 - type: entity
   parent: RMCHeadRoyalBeanie

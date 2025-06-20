@@ -96,7 +96,7 @@
     multiplier: 1.2
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: CMMagazineSMGMP5
   name: "MP5 magazine (9mm)"
   description: "A 9mm magazine for the MP5."
