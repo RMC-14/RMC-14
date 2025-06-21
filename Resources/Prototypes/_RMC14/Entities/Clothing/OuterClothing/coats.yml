@@ -468,6 +468,9 @@
   components:
   - type: Foldable
     folded: true
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
 
 - type: entity
   parent: CMCoatOfficer
