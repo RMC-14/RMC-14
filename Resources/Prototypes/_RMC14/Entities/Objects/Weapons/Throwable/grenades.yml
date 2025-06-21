@@ -315,6 +315,9 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: CMExplosionEffect
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
