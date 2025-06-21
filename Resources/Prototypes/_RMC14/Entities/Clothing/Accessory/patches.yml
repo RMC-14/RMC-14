@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BaseItem
+  parent: RMCBaseUniformAccessory
   id: RMCPatchBase
   name: patch
   description: An abstract patch.
@@ -9,9 +9,6 @@
     category: Patch
     limit: 4
     hiddenByJacketRolling: true
-  - type: Item
-    size: Tiny
-  - type: Appearance
 
 # FORECON
 - type: entity

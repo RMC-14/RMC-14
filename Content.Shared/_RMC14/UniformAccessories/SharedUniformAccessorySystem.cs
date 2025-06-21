@@ -16,6 +16,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -23,6 +24,12 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         SubscribeLocalEvent<UniformAccessoryHolderComponent, InteractUsingEvent>(OnHolderInteractUsing);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
+
+        Subs.BuiEvents<UniformAccessoryHolderComponent>(UniformAccessoriesUi.Key,
+            subs =>
+            {
+                subs.Event<UniformAccessoriesBuiMsg>(OnAccessoriesBuiMsg);
+            });
     }
 
     private void OnHolderMapInit(Entity<UniformAccessoryHolderComponent> ent, ref MapInitEvent args)
@@ -127,9 +134,37 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
                     _item.VisualsChanged(ent);
                     return;
                 }
+
+                // otherwise open the UI
+                _ui.OpenUi(ent.Owner, UniformAccessoriesUi.Key, user);
             },
             IconEntity = GetNetEntity(firstAccessory),
         });
+    }
+
+    private void OnAccessoriesBuiMsg(Entity<UniformAccessoryHolderComponent> ent, ref UniformAccessoriesBuiMsg args)
+    {
+        var user = args.Actor;
+        var toRemove = args.ToRemove;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
+            return;
+
+        if (_container.Remove(toRemove, container))
+        {
+            _hands.TryPickupAnyHand(user, toRemove);
+            _item.VisualsChanged(ent);
+        }
+
+        if (container.ContainedEntities.Count <= 1)
+        {
+            _ui.CloseUi(ent.Owner, UniformAccessoriesUi.Key);
+        }
+        else
+        {
+            var state = new UniformAccessoriesBuiState();
+            _ui.SetUiState(ent.Owner, UniformAccessoriesUi.Key, state);
+        }
     }
 
     public bool BelongsToUser(NetEntity user, EntityUid target)
