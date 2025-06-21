@@ -138,6 +138,41 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCWeaponRevolverMateba
+  id: RMCWeaponRevolverMatebaSpecial
+  name: Mateba autorevolver special
+  description: An old, heavily modified version of the Mateba Autorevolver. It sports a smooth wooden grip, and a much larger barrel to it's unmodified counterpart. It's clear that this weapon has been cared for over a long period of time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+  - type: AttachableHolder
+    slots:
+      rmc-bslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.215, 0.19
+      rmc-aslot-rail: -0.11, 0.22
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   id: RMCBaseSpeedLoaderMateba
   name: "Mateba speed loader (.454)" #Base
   parent: BaseItem

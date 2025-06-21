@@ -1269,11 +1269,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazinePistolD50WinterWyvernHI
+    - id: RMCMagazinePistolDeagleHI
       amount: 4
-    - id: RMCMagazinePistolD50WinterWyvernHIAP
+    - id: RMCMagazinePistolDeagleHIAP
       amount: 2
-    - id: RMCWeaponPistolCOD50WinterWyvern
+    - id: RMCWeaponPistolDeagleWinterWyvern
 
 - type: entity
   parent: CMBeltMarine

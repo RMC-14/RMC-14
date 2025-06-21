@@ -1,0 +1,304 @@
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolDeagle
+  name: desert eagle
+  description: The handcannon that needs no introduction, the Desert Eagle is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks.
+  components:
+  - type: Gun
+    shotsPerBurst: 2
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 5
+    scatterUnwielded: 5
+    baseFireRate: 1.43
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.2
+        maxScatterModifier: 5
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.75
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolDeagle
+        startingItem: RMCMagazinePistolDeagle
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.070
+      rmc-aslot-rail: 0.090, 0.125
+      rmc-aslot-underbarrel: 0.312, -0.25
+
+- type: entity
+  parent: RMCWeaponPistolDeagle
+  id: RMCWeaponPistolDeagleGold
+  name: golden desert eagle
+  description: A Desert Eagle anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 5
+    scatterUnwielded: 8
+    baseFireRate: 1.43
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.2
+        maxScatterModifier: 7
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle_gold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle_gold.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolDeagle
+          - RMCMagazinePistolDeagleHI
+          - RMCMagazinePistolDeagleHIAP
+        startingItem: RMCMagazinePistolDeagleHI
+
+- type: entity
+  parent: RMCWeaponPistolDeagleGold
+  id: RMCWeaponPistolDeagleWinterWyvern
+  name: winter wyvern desert eagle
+  description: A Desert Eagle hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle_winter.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle_winter.rsi
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolDeagle
+  name: desert eagle magazine (.50)
+  description: Seven rounds of powerful 50-caliber destruction.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolDeagle
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolDeagle
+    proto: RMCCartridgePistolDeagle
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/deagle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolDeagleHI
+  name: high impact desert eagle magazine (.50)
+  description: Seven rounds of devastatingly powerful 50-caliber destruction. The bullets are tipped with a synthesized osmium and lead alloy to stagger absolutely anything they hit. Point away from anything you value.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolDeagleHI
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolDeagleHI
+    proto: RMCCartridgePistolDeagleHI
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/deagle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#00CDEA"
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolDeagleHIAP
+  name: high impact armor-piercing desert eagle magazine (.50)
+  description: Seven rounds of devastatingly powerful 50-caliber destruction. Packs a devastating punch. The bullets are tipped with an osmium-tungsten carbide alloy to not only stagger but also shred through any target's armor. Issued in few numbers due to the massive production cost and worries about hull breaches. Point away from anything you value.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolDeagleHIAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolDeagleHIAP
+    proto: RMCCartridgePistolDeagleHIAP
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/deagle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#10AF7F"
+
+- type: entity
+  id: RMCCartridgePistolDeagle
+  name: cartridge (.50)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolDeagle
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolDeagle
+
+- type: entity
+  id: RMCCartridgePistolDeagleHI
+  name: cartridge (High Impact .50)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolDeagleHI
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolDeagleHI
+
+- type: entity
+  id: RMCCartridgePistolDeagleHIAP
+  name: cartridge (High Impact Armor Piercing .50)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolDeagleHIAP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolDeagleHIAP
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolDeagle
+  name: bullet (.50)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 85
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolDeagleHI
+  name: bullet (High Impact .50)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCStunOnHit
+    maxRange: 4.5
+    stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 70
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolDeagleHIAP
+  name: bullet (High Impact Armor Piercing .50)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCStunOnHit
+    maxRange: 4.5
+    stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 70
+
+- type: Tag
+  id: RMCMagazinePistolDeagle
+
+- type: Tag
+  id: RMCMagazinePistolDeagleHI
+
+- type: Tag
+  id: RMCMagazinePistolDeagleHIAP
+
+- type: Tag
+  id: RMCCartridgePistolDeagle
+
+- type: Tag
+  id: RMCCartridgePistolDeagleHI
+
+- type: Tag
+  id: RMCCartridgePistolDeagleHIAP
