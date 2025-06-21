@@ -118,6 +118,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: RMCNail7x45mm
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
