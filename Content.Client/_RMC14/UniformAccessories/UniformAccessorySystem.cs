@@ -28,7 +28,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         SubscribeLocalEvent<UniformAccessoryHolderComponent, AfterAutoHandleStateEvent>(OnHolderAfterState);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, EntInsertedIntoContainerMessage>(OnHolderInsertedContainer);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, EntRemovedFromContainerMessage>(OnHolderRemovedContainer);
-
+        SubscribeLocalEvent<UniformAccessoryHolderComponent, EquipmentVisualsUpdatedEvent>(OnHolderVisualsUpdated, after: [typeof(ClothingSystem)]);
     }
 
     private void OnHolderGetEquipmentVisuals(Entity<UniformAccessoryHolderComponent> ent, ref GetEquipmentVisualsEvent args)
@@ -44,10 +44,10 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         var index = 0;
         foreach (var accessory in container.ContainedEntities)
         {
-            var layer = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(ent.Owner)}";
-
             if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp))
                 continue;
+
+            var layer = GetKey(accessory, accessoryComp, index);
 
             if (accessoryComp.PlayerSprite is not { } sprite)
                 continue;
@@ -55,7 +55,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             if (clothingSprite != null)
             {
                 var clothingLayer = clothingSprite.LayerMapReserveBlank(layer);
-                clothingSprite.LayerSetVisible(clothingLayer, true);
+                clothingSprite.LayerSetVisible(clothingLayer, !accessoryComp.Hidden);
                 clothingSprite.LayerSetRSI(clothingLayer, sprite.RsiPath);
                 clothingSprite.LayerSetState(clothingLayer, sprite.RsiState);
             }
@@ -90,20 +90,73 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
     {
         var item = args.Entity;
 
+        if (!TryComp<UniformAccessoryComponent>(item, out var accessoryComp))
+            return;
+
         var index = 0;
         foreach (var accessory in args.Container.ContainedEntities)
         {
-            if (accessory != item)
+            if (accessory == item)
                 break;
 
             index++;
         }
 
-        var layer = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(item)}";
+        var layer = GetKey(item, accessoryComp, index);
 
         if (TryComp(ent.Owner, out SpriteComponent? clothingSprite) && clothingSprite.LayerMapTryGet(layer, out var clothingLayer))
             clothingSprite.LayerSetVisible(clothingLayer, false);
 
         _item.VisualsChanged(ent);
+    }
+
+    private void OnHolderVisualsUpdated(Entity<UniformAccessoryHolderComponent> ent, ref EquipmentVisualsUpdatedEvent args)
+    {
+        if (_rmcHumanoid.HidePlayerIdentities && HasComp<XenoComponent>(_player.LocalEntity))
+            return;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
+            return;
+
+        var key = string.Empty;
+        foreach (var accessory in container.ContainedEntities)
+        {
+            if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp))
+                return;
+
+            if (accessoryComp.LayerKey != null)
+                key = accessoryComp.LayerKey;
+        }
+
+        if (key == string.Empty)
+            return;
+
+        if (!args.RevealedLayers.Contains(key))
+            return;
+
+        if (!TryComp(args.Equipee, out SpriteComponent? sprite))
+            return;
+
+        if (!sprite.LayerMapTryGet(key, out var layer) ||
+            !sprite.TryGetLayer(layer, out var layerData))
+        {
+            return;
+        }
+
+        var data = layerData.ToPrototypeData();
+        sprite.RemoveLayer(layer);
+
+        layer = sprite.LayerMapReserveBlank(key);
+        sprite.LayerSetData(layer, data);
+    }
+
+    private string GetKey(EntityUid uid, UniformAccessoryComponent component, int index)
+    {
+        var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}";
+
+        if (component.LayerKey != null)
+            key = component.LayerKey;
+
+        return key;
     }
 }

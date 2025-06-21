@@ -24,4 +24,7 @@ public sealed partial class UniformAccessoryComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool HiddenByJacketRolling = false;
+
+    [DataField, AutoNetworkedField]
+    public string? LayerKey;
 }
