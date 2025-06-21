@@ -145,6 +145,7 @@
   parent: CMBulletBase
   id: RMCBulletRevolverZHNK72
   name: bullet (7.62mm)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

@@ -1,7 +1,6 @@
 ﻿- type: entity
   id: CMSurgeryStepBase
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMSurgeryStep
 

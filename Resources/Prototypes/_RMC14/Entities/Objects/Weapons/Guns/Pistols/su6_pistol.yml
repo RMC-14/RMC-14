@@ -105,6 +105,7 @@
   parent: CMBulletBase
   id: RMCBulletPistol45ACP
   name: bullet (.45 ACP)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

@@ -130,8 +130,7 @@
   abstract: true
   parent: RMCBaseBullet
   id: CMBulletBase
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
   - type: RMCProjectileDamageFalloff

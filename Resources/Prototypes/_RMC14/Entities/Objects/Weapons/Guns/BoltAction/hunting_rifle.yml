@@ -130,6 +130,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: RMCBulletRifleHunting
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

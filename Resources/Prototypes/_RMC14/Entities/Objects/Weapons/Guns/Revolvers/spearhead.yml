@@ -188,6 +188,7 @@
   parent: CMBulletBase
   id: RMCBulletRevolver357
   name: bullet (.357)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -207,6 +208,7 @@
   parent: CMBulletBase
   id: RMCBulletRevolver357Hollowpoint
   name: bullet (.357) Hollowpoint
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

@@ -1,6 +1,5 @@
 - type: entity
   id: RMCBaseTree
-  suffix: RMCBaseTree
   description: Yep, it's a tree.
   abstract: true
   components:
@@ -55,7 +54,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeSnow
-  suffix: RMCBaseTreeSnow
+  abstract: true
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treessnow.rsi
@@ -99,7 +98,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeLarge
-  suffix: RMCBaseTreeLarge
+  abstract: true
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treeslarge.rsi
@@ -117,7 +116,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeConifer
-  suffix: RMCBaseTreeConifer
+  abstract: true
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treesconifer.rsi
@@ -161,7 +160,6 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeAlien
-  suffix: RMCBaseTreeAlien
   abstract: true
   name: strange tree
   description: Some kind of bizarre alien tree. It oozes with a sickly yellow sap.

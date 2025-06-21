@@ -43,8 +43,7 @@
   parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   id: XenoSpitProjectile
   name: spit
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -66,8 +65,7 @@
 - type: entity
   parent: XenoSpitProjectile
   id: XenoChargedSpitProjectile
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -97,8 +95,7 @@
   id: XenoSlowingSpitProjectile
   parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: slowing spit
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -117,8 +114,7 @@
   id: XenoQueenNeuroSpitProjectile
   parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: neurotoxic spit
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -141,8 +137,7 @@
   id: XenoScatteredSpitProjectile
   parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: scattered spit
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -162,8 +157,7 @@
   id: XenoBoneChipsProjectile
   parent: XenoBaseProjectile
   name: bone chips
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Materials/shards.rsi
@@ -190,8 +184,7 @@
   parent: XenoBaseProjectile
   id: XenoBombardAcidProjectile
   name: glob of acid gas
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -241,8 +234,7 @@
   parent: XenoBaseProjectile
   id: XenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -294,8 +286,7 @@
 - type: entity
   parent: XenoSpitProjectile
   id: XenoAcidBallSpitProjectile
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -318,8 +309,7 @@
 - type: entity
   parent: XenoAcidBallSpitProjectile
   id: XenoSpitProjectilePraetorian
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -340,8 +330,7 @@
 - type: entity
   parent: XenoSpitProjectile
   id: XenoSpitProjectilePraetorianWarden
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -357,8 +346,7 @@
   id: XenoAcidBallProjectile
   name: acid ball
   description: A small, pulsating ball of gas.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Clickable
   - type: Physics
@@ -411,8 +399,7 @@
   parent: XenoBaseProjectile
   id: XenoOppressorTailHook
   name: tail hook
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Effects/beam.rsi

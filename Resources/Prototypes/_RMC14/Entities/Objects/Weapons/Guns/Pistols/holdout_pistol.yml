@@ -86,6 +86,7 @@
   parent: CMBulletBase
   id: CMBulletPistol22mm
   name: bullet (.22)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

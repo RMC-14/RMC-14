@@ -290,6 +290,7 @@
 - type: entity
   parent: RMCBulletRifle545x39mm
   id: RMCBulletRifle545x39mmAP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -301,6 +302,7 @@
 - type: entity
   parent: RMCBulletRifle545x39mm
   id: RMCBulletRifle545x39mmHEAP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

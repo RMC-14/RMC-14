@@ -117,6 +117,7 @@
   parent: CMBulletBase
   id: CMBulletPistolMK45
   name: high-powered pistol bullet (.45)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
