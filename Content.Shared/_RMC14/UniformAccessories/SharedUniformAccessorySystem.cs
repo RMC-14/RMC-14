@@ -72,7 +72,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
             }
         }
 
-        if (accessoryDictionary.TryGetValue(accessory.Category, out var amount) && accessory.Limit >= amount)
+        if (accessoryDictionary.TryGetValue(accessory.Category, out var amount) && accessory.Limit <= amount)
         {
             _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail-limit"), args.User, args.User, PopupType.SmallCaution);
             return;

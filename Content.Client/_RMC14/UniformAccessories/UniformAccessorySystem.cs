@@ -93,7 +93,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         var index = 0;
         foreach (var accessory in args.Container.ContainedEntities)
         {
-            if (accessory == item)
+            if (accessory != item)
                 break;
 
             index++;
