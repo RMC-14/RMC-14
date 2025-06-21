@@ -67,14 +67,14 @@
   - type: Appearance
   - type: AttachableHolder
     slots:
-      rmc-aslot-barrel:
+      rmc-bslot-barrel:
         startingAttachable: RMCAttachmentMatebaStandard
         whitelist:
           tags:
           - RMCAttachmentMatebaStandard
           - RMCAttachmentMatebaMarksman
           - RMCAttachmentMatebaSnubNose
-      rmc-bslot-barrel:
+      rmc-aslot-barrel:
        whitelist:
           tags:
           - RMCAttachmentRecoilCompensator
@@ -112,14 +112,14 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
   - type: AttachableHolder
     slots:
-      rmc-aslot-barrel:
+      rmc-bslot-barrel:
         startingAttachable: RMCAttachmentMatebaStandardGolden
         whitelist:
           tags:
           - RMCAttachmentMatebaStandardGolden
           - RMCAttachmentMatebaMarksmanGolden
           - RMCAttachmentMatebaSnubNoseGolden
-      rmc-bslot-barrel:
+      rmc-aslot-barrel:
         whitelist:
           tags:
           - RMCAttachmentRecoilCompensator
@@ -154,7 +154,7 @@
     accuracyMultiplier: 1.2
   - type: AttachableHolder
     slots:
-      rmc-bslot-barrel:
+      rmc-aslot-barrel:
         whitelist:
           tags:
           - RMCAttachmentRecoilCompensator
