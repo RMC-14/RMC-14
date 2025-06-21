@@ -55,6 +55,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeSnow
+  abstract: true
   suffix: RMCBaseTreeSnow
   components:
   - type: Sprite
@@ -99,6 +100,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeLarge
+  abstract: true
   suffix: RMCBaseTreeLarge
   components:
   - type: Sprite
@@ -117,6 +119,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeConifer
+  abstract: true
   suffix: RMCBaseTreeConifer
   components:
   - type: Sprite
