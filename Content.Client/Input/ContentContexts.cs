@@ -86,7 +86,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.Arcade2);
             human.AddFunction(ContentKeyFunctions.Arcade3);
 
-            // actions should be common (for ghosts, mobs, etc)
+            // actions should be common (for ghosts, mobs, etc.)
             common.AddFunction(ContentKeyFunctions.OpenActionsMenu);
 
             foreach (var boundKey in ContentKeyFunctions.GetHotbarBoundKeys())
@@ -150,6 +150,7 @@ namespace Content.Client.Input
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");
             xenonid.AddFunction(CMKeyFunctions.CMXenoWideSwing);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoRest);
         }
     }
 }

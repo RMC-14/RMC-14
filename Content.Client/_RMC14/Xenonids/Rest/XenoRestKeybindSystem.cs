@@ -21,7 +21,7 @@ public sealed class XenoRestKeybindSystem : EntitySystem
     {
         base.Initialize();
         CommandBinds.Builder
-            .Bind(CMKeyFunctions.RMCRest,
+            .Bind(CMKeyFunctions.RMCXenoRest,
                 InputCmdHandler.FromDelegate(_ =>
                 {
                     var timing = IoCManager.Resolve<IGameTiming>();
@@ -37,14 +37,14 @@ public sealed class XenoRestKeybindSystem : EntitySystem
                         return;
                     if (actionComp.Cooldown.HasValue && actionComp.Cooldown.Value.End > curTime)
                         return;
-                    var nextAllowed = curTime + TimeSpan.FromSeconds(1);
+                    var nextAllowed = curTime + TimeSpan.FromSeconds(0.5);
                     if (actionComp.Cooldown.HasValue && actionComp.Cooldown.Value.End > nextAllowed)
                         nextAllowed = actionComp.Cooldown.Value.End;
                     _pendingRestTrigger = true;
                     _pendingRestTriggerUntil = nextAllowed;
                     _actionsSystem.TriggerAction(actionId, actionComp);
                 },
-                handle: false))
+                handle: true))
             .Register<XenoRestKeybindSystem>();
     }
 

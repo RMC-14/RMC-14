@@ -90,6 +90,7 @@
   - type: MobMover
   - type: Emoting
   - type: Actions
+  - type: RMCXenoRest
   - type: Alerts
   - type: Appearance
   - type: DoAfter
