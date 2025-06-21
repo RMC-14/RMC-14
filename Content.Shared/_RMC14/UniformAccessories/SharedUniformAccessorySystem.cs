@@ -93,7 +93,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
             {
                 if (accessoryComp.User is { } acccessoryUser && !BelongsToUser(acccessoryUser, args.Equipee))
                 {
-                    _container.Remove(ent.Owner, container);
+                    _container.Remove(accessory, container);
                     return;
                 }
             }
