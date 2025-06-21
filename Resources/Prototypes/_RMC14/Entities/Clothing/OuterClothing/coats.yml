@@ -70,8 +70,7 @@
 
 - type: entity
   id: RMCAllowSuitStorageClothingJacket
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -99,8 +98,7 @@
 
 - type: entity
   id: RMCAllowSuitStorageClothingHazardVest
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: AllowSuitStorage
     whitelist:
