@@ -20,9 +20,6 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<UniformAccessoryHolderComponent, MapInitEvent>(OnHolderMapInit);
-        SubscribeLocalEvent<UniformAccessoryHolderComponent, AfterAutoHandleStateEvent>(OnHolderAfterState);
-        SubscribeLocalEvent<UniformAccessoryHolderComponent, EntInsertedIntoContainerMessage>(OnHolderInsertedContainer);
-        SubscribeLocalEvent<UniformAccessoryHolderComponent, EntRemovedFromContainerMessage>(OnHolderRemovedContainer);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, InteractUsingEvent>(OnHolderInteractUsing);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
@@ -39,21 +36,6 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         {
             SpawnInContainerOrDrop(startingEntId, ent.Owner, ent.Comp.ContainerId);
         }
-    }
-
-    private void OnHolderAfterState(Entity<UniformAccessoryHolderComponent> ent, ref AfterAutoHandleStateEvent args)
-    {
-        _item.VisualsChanged(ent);
-    }
-
-    private void OnHolderInsertedContainer(Entity<UniformAccessoryHolderComponent> ent, ref EntInsertedIntoContainerMessage args)
-    {
-        _item.VisualsChanged(ent);
-    }
-
-    private void OnHolderRemovedContainer(Entity<UniformAccessoryHolderComponent> ent, ref EntRemovedFromContainerMessage args)
-    {
-        _item.VisualsChanged(ent);
     }
 
     private void OnHolderInteractUsing(Entity<UniformAccessoryHolderComponent> ent, ref InteractUsingEvent args)
@@ -82,12 +64,15 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         foreach (var inserted in container.ContainedEntities)
         {
             if (TryComp<UniformAccessoryComponent>(inserted, out var insertedComp))
-                accessoryDictionary[insertedComp.Category] += 1;
+            {
+                if (accessoryDictionary.TryGetValue(insertedComp.Category, out var count))
+                    accessoryDictionary[insertedComp.Category] = count + 1;
+                else
+                    accessoryDictionary[insertedComp.Category] = 1;
+            }
         }
 
-        var limit = accessoryDictionary[accessory.Category];
-
-        if (limit >= accessory.Limit)
+        if (accessoryDictionary.TryGetValue(accessory.Category, out var amount) && accessory.Limit >= amount)
         {
             _popup.PopupClient(Loc.GetString("rmc-uniform-accessory-fail-limit"), args.User, args.User, PopupType.SmallCaution);
             return;
@@ -139,6 +124,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
                 {
                     _container.Remove(firstAccessory.Value, container);
                     _hands.TryPickupAnyHand(user, firstAccessory.Value);
+                    _item.VisualsChanged(ent);
                     return;
                 }
             },
