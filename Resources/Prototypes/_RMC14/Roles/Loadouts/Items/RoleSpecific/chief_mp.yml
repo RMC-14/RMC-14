@@ -1,0 +1,15 @@
+# CMP
+- type: loadout
+  id: CMPPeakedCapRMC
+  cost: 3 # same price as headwear
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobChiefMP
+      time: 252000 # 70 hrs
+  storage:
+    back:
+    - CMHeadCapPeakedCMP
+
+
