@@ -5,6 +5,8 @@
   - type: UniformAccessoryHolder
   - type: UserInterface
     interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
       enum.UniformAccessoriesUi.Key:
         type: UniformAccessoriesBuiMsg
 

@@ -76,7 +76,8 @@ public sealed class UniformAccessoryBui : BoundUserInterface
                 VerticalExpand = true,
             };
 
-            button.OnButtonDown += _ => SendPredictedMessage(new UniformAccessoriesBuiMsg(accessory));
+            var netEnt = _entityManager.GetNetEntity(accessory);
+            button.OnButtonDown += _ => SendPredictedMessage(new UniformAccessoriesBuiMsg(netEnt));
 
             button.AddChild(spriteView);
             _menu?.Accessories.AddChild(button);

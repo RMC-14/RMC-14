@@ -23,7 +23,7 @@
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/forecon_patch.rsi
-      state: helmet
+      state: patch
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/forecon_patch.rsi

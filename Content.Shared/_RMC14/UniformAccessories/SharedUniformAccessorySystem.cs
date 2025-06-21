@@ -145,7 +145,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
     private void OnAccessoriesBuiMsg(Entity<UniformAccessoryHolderComponent> ent, ref UniformAccessoriesBuiMsg args)
     {
         var user = args.Actor;
-        var toRemove = args.ToRemove;
+        var toRemove = GetEntity(args.ToRemove);
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
