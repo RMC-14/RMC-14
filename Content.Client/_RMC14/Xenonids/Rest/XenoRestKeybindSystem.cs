@@ -44,7 +44,7 @@ public sealed class XenoRestKeybindSystem : EntitySystem
                     _pendingRestTriggerUntil = nextAllowed;
                     _actionsSystem.TriggerAction(actionId, actionComp);
                 },
-                handle: true))
+                handle: true))//Stops input propagation causing TriggerAction to send multiple RaisePredictiveEvents. AKA de-sync issues.
             .Register<XenoRestKeybindSystem>();
     }
 
