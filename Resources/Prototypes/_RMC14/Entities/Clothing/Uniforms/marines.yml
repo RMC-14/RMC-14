@@ -373,7 +373,7 @@
   id: CMJumpsuitSurvivorMarine
   name: UNMC uniform
   description: Torn, Burned and blood stained. This uniform has seen much more than you could possibly imagine.
-  suffix: FORECON
+  suffix: FORECON, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/recon_marine.rsi
@@ -384,9 +384,14 @@
 - type: entity
   parent: CMJumpsuitSurvivorMarine
   id: RMCJumpsuitSurvivorMarineDropPouch
+  suffix: FORECON, Survivor, Webbing, Patch
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingPouchForecon
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    # TODO UNMC patch
+    - RMCPatchFORECON
 
 # High Command
 
