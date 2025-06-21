@@ -134,6 +134,9 @@
     - [ RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, RMCHydroApron ] # Botanist (TODO: Add Hatchet)
     - [ CMJumpsuitLiaisonBlack, RMCShoesLaceup, RMCJacketCorporateBlue, ClothingHeadHatBowlerHat ] # Bartender
     - [ CMJumpsuitTShirtGray, RMCShoesWeYaStompers, RMCOuterClothingExternalWebbing ] # Protagonist
+    rareItemCoefficent: 444
+    rareItems:
+      hi: [ 1, 4 ]
 
 - type: entity
   parent: MarkerBase
