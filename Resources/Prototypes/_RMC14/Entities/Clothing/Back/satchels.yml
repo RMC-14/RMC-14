@@ -102,6 +102,15 @@
 
 - type: entity
   parent: CMSatchelEngineer
+  id: CMSatchelEngineerMinerSurvivorFill
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchelEngineer
   id: CMSatchelEngineerSurvivorFill
   suffix: Survivor
   components:
@@ -290,6 +299,16 @@
       Snow: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Back/Chestrigs/tech/jungle-classic.rsi
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchelMarineTech
+  id: CMSatchelMarineTechSurvivorFill
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetPlasteel20
+    - id: CMSheetMetal20
 
 - type: entity
   parent: CMSatchel
