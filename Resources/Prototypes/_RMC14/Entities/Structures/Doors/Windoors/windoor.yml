@@ -1,6 +1,6 @@
 - type: entity
-  id: CMBaseWindoor
   parent: BaseStructure
+  id: CMBaseWindoor
   abstract: true
   placement:
     mode: SnapgridCenter
