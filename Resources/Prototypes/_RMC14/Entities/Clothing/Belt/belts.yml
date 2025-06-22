@@ -842,6 +842,17 @@
     - id: RMCWeaponRevolverSpearhead
 
 - type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCBeltHolsterRevolverZHNK72Fill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderZHNK72
+      amount: 6
+    - id: RMCWeaponRevolverZHNK72
+
+- type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
   name: M276 pattern M63 holster rig
@@ -1145,6 +1156,17 @@
     - id: RMCSpeedLoaderM44
       amount: 6
     - id: RMCWeaponRevolverM44
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCT73BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolT73
+      amount: 6
+    - id: RMCWeaponPistolT73
 
 - type: entity
   parent: CMBeltBaseStorage

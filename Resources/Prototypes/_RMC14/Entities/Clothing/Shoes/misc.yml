@@ -69,6 +69,7 @@
   - type: Clothing
     sprite: Clothing/Shoes/Specific/galoshes.rsi
 
+# Stompers
 - type: entity
   parent: RMCShoesLaceup
   id: RMCShoesWeYaStompers
@@ -79,3 +80,16 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Misc/stompers.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Misc/stompers.rsi
+
+# Sandals
+- type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesSandals
+  name: sandals
+  description: A pair of rather plain, wooden sandals.
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Misc/sandals.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Misc/sandals.rsi
