@@ -45,7 +45,7 @@
 
 - type: entity
   parent: RMCPouchExplosive
-  id: RMCPouchExplosiveFilledUPP
+  id: RMCPouchExplosiveFullFilledSPP
   components:
   - type: StorageFill
     contents:
