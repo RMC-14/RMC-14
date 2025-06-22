@@ -47,7 +47,7 @@
     back: RMCSatchelLightpack
     belt: CMBeltMarine
     pocket1: RMCPouchAutoinjectorFill
-    pocket2: RMCPouchExplosiveFilledUPP # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchExplosiveFullFilledSPP
     suitstorage: RMCWeaponRifleM54C2
   storage:
     storage:
@@ -71,4 +71,4 @@
     - CMMagazineRifleM54CAP
 
 
-# These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.
+# TODO RMC14:  These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.

@@ -48,7 +48,7 @@
     back: RMCSatchelLightpack
     belt:  RMCBeltMedicBagUPPFilled
     pocket1: RMCPouchMagazineLarge
-    pocket2: RMCPouchMedkitFillAdvanced # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMedkitFillAdvanced
     suitstorage: RMCWeaponSMGM63B2
   storage:
     outerClothing:
@@ -59,7 +59,7 @@
     - CMDefibrillator
     - CMAdvFirstAidKitFilled
     - CMRollerBed
-    - CMRollerBed # supposed to be surgical bed
+    - CMRollerBed # TODO RMC14: supposed to be surgical bed
     - CMSynthGraft
     - CMHealthAnalyzer
     - RMCBoxAttachment
@@ -70,4 +70,4 @@
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
 
-# These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.
+# TODO RMC14: alternates between weapons, same with leader.

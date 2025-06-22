@@ -29,7 +29,7 @@
         RMCSkillJtac: 1
         RMCSkillSmartGun: 1
         RMCSkillMeleeWeapons: 1
-        # they are supposed to have "specialist weapon 9" which is idk. They can use WS weapons in cm tho.
+        # TODO RMC14: they are supposed to have "specialist weapon 9" which is idk. They can use WS weapons in cm tho.
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-merc-heavy
@@ -49,18 +49,16 @@
     ears: RMCHeadsetDistressDukes
     back: RMCSatchelLightpack
     belt: RMCD50WinterWyvernBeltFilled
-    pocket1: RMCPouchReagentCanisterHeavy # supposed to be filled with oxy, the painkiller
+    pocket1: RMCPouchReagentCanisterHeavy # TODO RMC14 supposed to be filled with oxy, the painkiller
     pocket2: RMCPouchAutoinjectorFill
-    suitstorage: RMCSmartGunWhiteOut # supposed to be the ol painless
+    suitstorage: RMCSmartGunWhiteOut # TODO RMC14 supposed to be the ol painless
   storage:
     back:
     - CMPacketGrenadeFragOldFilled
-    - RMCPacketGrenadeIncendiaryFilled #supposed to be white phosphorus
+    - RMCPacketGrenadeIncendiaryFilled #TODO RMC14 supposed to be white phosphorus
     - RMCMagazineSmartGunirradiated
     - RMCMagazineSmartGunirradiated
     - RMCMagazineSmartGunirradiated
     - RMCMagazineSmartGunirradiated
     - RMCMagazineSmartGunirradiated
 
-
-# These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.

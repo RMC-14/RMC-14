@@ -49,7 +49,7 @@
     back: RMCSatchelLightpack
     belt:  CMBeltMarine
     pocket1: RMCPouchExplosiveFilledPlasticExplosives
-    pocket2: RMCPouchAutoinjectorFill # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchAutoinjectorFill
     suitstorage: RMCWeaponRifleM54C2
   storage:
     outerClothing:
@@ -65,9 +65,9 @@
     back:
     - RMCBoxAttachment
     - CMPacketGrenadeFragOldFilled
-    - RMCPacketGrenadeIncendiaryFilled # supposed to be white phosphorus
+    - RMCPacketGrenadeIncendiaryFilled # TODO RMC14: supposed to be white phosphorus
     - RMCPacketGrenadeSmokeFilled
     - RMCRangefinder
-    - RMCMotionDetector # supposed to be hacked version that shows every non merc
+    - RMCMotionDetector # TODO RMC14: supposed to be hacked version that shows every non merc
 
-# These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.
+# TODO RMC14: These guys are supposed to alternate between weapons per spawn. Leader alternates between M54 variants it seems, and sometimes M63?
