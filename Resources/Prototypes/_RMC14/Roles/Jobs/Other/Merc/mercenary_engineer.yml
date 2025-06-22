@@ -52,18 +52,25 @@
     suitstorage: WeaponShotgunM890
   storage:
     storage:
+    pocket1:
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
     outerClothing:
-    - CMShellShotgunBuckshot
-    - CMShellShotgunBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
     back:
     - RMCBoxAttachment
     - RMCExplosivePlastic
-    - CMPacketGrenadeFragFilled
-    - RMCPacketGrenadeSmokeFilled
-    - CMShellShotgunBuckshot
-    - CMShellShotgunBuckshot
-    - CMShellShotgunBuckshot
-    - CMShellShotgunBuckshot
+    - CMSheetMetal50
+    - CMSheetMetal50
+    - CMSheetPlasteel50
+    - RMCSentryMini
+    - RMCSentryMini
 
 
 # These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.
