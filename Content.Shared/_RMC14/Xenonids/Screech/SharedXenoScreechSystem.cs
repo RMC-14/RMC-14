@@ -61,7 +61,7 @@ public sealed class XenoScreechSystem : EntitySystem
         _closeMobs.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _closeMobs);
 
-        foreach (var receiver in _mobs)
+        foreach (var receiver in _closeMobs)
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
                 continue;
