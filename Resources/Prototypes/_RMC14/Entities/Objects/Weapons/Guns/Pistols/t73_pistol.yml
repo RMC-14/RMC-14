@@ -209,6 +209,7 @@
   parent: CMBulletBase
   id: RMCBulletPistolT73
   name: bullet (7.62x25mm)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -231,6 +232,7 @@
   parent: CMBulletBase
   id: RMCBulletPistolT74Impact
   name: bullet (7.62x25mm impact)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

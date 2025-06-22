@@ -2,8 +2,7 @@
   id: CMVendorBundleRiflemanApparel
   name: standard marine apparel
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
