@@ -1,14 +1,15 @@
+# M63B2
 - type: job
   parent: CMJobBase
-  id: RMCEliteMercMiner
-  name: Elite Medic Mercenary
+  id: RMCEliteMercMHeavy
+  name: Elite Heavy Mercenary
   description: rmc-ghost-role-information-pmc-description
-  playTimeTracker: RMCEliteMercMiner
-  startingGear: RMCEliteMercMiner
+  playTimeTracker: RMCEliteMercHeavy
+  startingGear: RMCEliteMercHeavy
   joinNotifyCrew: false
   accessGroups:
   - Colony
-  spawnMenuRoleName: Elite Mercenary Miner
+  spawnMenuRoleName: Elite Mercenary Heavy
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,49 +27,40 @@
         RMCSkillEndurance: 5
         RMCSkillVehicles: 1
         RMCSkillJtac: 1
+        RMCSkillSmartGun: 1
         RMCSkillMeleeWeapons: 1
+        # they are supposed to have "specialist weapon 9" which is idk. They can use WS weapons in cm tho.
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: rmc-job-prefix-merc-miner
+      prefix: rmc-job-prefix-merc-heavy
   hidden: true
 
 - type: startingGear
-  id: RMCEliteMercMiner
+  id: RMCEliteMercHeavy
   equipment:
     id: RMCIDCardMercenary
-    jumpsuit: RMCJumpsuitMercenaryMiner
-    outerClothing: RMCArmorMercenaryMiner
+    jumpsuit: RMCJumpsuitMercenaryHeavy
+    outerClothing: RMCArmorMercenaryHeavy
     gloves: RMCHandsVeteran
     eyes: CMGlassesM42ScoutSight
-    head: RMCArmorHelmetMercenaryMiner
+    head: RMCArmorHelmetMercenary
     shoes: RMCBootsPMCFilled
     mask: RMCMaskBalaclavaPMC
     ears: RMCHeadsetDistressDukes
     back: RMCSatchelLightpack
-    belt: CMBeltMarine
-    pocket1: RMCPouchAutoinjectorFill
-    pocket2: RMCPouchExplosiveFilledUPP # TODO RMC14: PMC re-sprite
-    suitstorage: RMCWeaponRifleM54C2
+    belt: RMCD50WinterWyvernBeltFilled
+    pocket1: RMCPouchReagentCanisterHeavy # supposed to be filled with oxy, the painkiller
+    pocket2: RMCPouchAutoinjectorFill
+    suitstorage: RMCSmartGunWhiteOut # supposed to be the ol painless
   storage:
-    storage:
-    outerClothing:
-    - CMMagazineRifleM54CAP
-    - CMMagazineRifleM54CAP
     back:
-    - RMCBoxAttachment
-    - RMCExplosivePlastic
-    - CMPacketGrenadeFragFilled
-    - RMCPacketGrenadeSmokeFilled
-    - CMMagazineRifleM54CAP
-    - CMMagazineRifleM54CAP
-    - CMMagazineRifleM54CAP
-    - CMMagazineRifleM54CAP
-    belt:
-    - CMMagazineRifleM54CAP
-    - CMMagazineRifleM54CAP
-    - CMMagazineRifleM54CAP
-    - CMMagazineRifleM54CAP
-    - CMMagazineRifleM54CAP
+    - CMPacketGrenadeFragOldFilled
+    - RMCPacketGrenadeIncendiaryFilled #supposed to be white phosphorus
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
 
 
 # These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.

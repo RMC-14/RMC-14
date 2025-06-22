@@ -574,6 +574,19 @@
 
 - type: entity
   parent: CMWebbingBlack
+  id: RMCWebbingMercEngineer # they have a weird ass 7 slot black webbing filled with injectors. Dunno about em exactly.
+  suffix: PMC, Engineer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTricordrazineAutoInjector
+    - id: CMKelotaneAutoInjector
+    - id: CMBicaridineAutoInjector
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+
+- type: entity
+  parent: CMWebbingBlack
   id: RMCWebbingPMCMedic
   suffix: PMC, Medic, Filled
   components:

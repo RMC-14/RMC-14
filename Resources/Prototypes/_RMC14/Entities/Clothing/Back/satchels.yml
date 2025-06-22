@@ -470,7 +470,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,18,1
+    - 0,0,20,1
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
 

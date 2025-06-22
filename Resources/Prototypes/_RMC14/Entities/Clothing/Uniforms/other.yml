@@ -119,7 +119,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
   - type: WebbingClothing
-    startingWebbing: RMCWebbingPMCEngineer
+    startingWebbing: RMCWebbingMercEngineer
 
 
 - type: entity

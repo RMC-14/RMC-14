@@ -1,15 +1,14 @@
-# M63B2
 - type: job
   parent: CMJobBase
-  id: RMCEliteMercMedic
-  name: Elite Medic Mercenary
+  id: RMCEliteMercMEngineer
+  name: Elite Engineer Mercenary
   description: rmc-ghost-role-information-pmc-description
-  playTimeTracker: RMCEliteMercMedic
-  startingGear: RMCEliteMercMedic
+  playTimeTracker: RMCEliteMercEngineer
+  startingGear: RMCEliteMercEngineer
   joinNotifyCrew: false
   accessGroups:
   - Colony
-  spawnMenuRoleName: Elite Mercenary Medic
+  spawnMenuRoleName: Elite Mercenary Engineer
   special:
   - !type:AddComponentSpecial
     components:
@@ -20,54 +19,51 @@
       skills:
         RMCSkillCqc: 2
         RMCSkillFirearms: 2
+        RMCSkillMedical: 1
         RMCSkillFireman: 2
-        RMCSkillMedical: 4
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 4
         RMCSkillEndurance: 5
-        RMCSkillSurgery: 2
+        RMCSkillVehicles: 1
+        RMCSkillPilot: 2
         RMCSkillJtac: 1
         RMCSkillMeleeWeapons: 1
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: rmc-job-prefix-merc-medic
+      prefix: rmc-job-prefix-merc-engineer
   hidden: true
 
 - type: startingGear
-  id: RMCEliteMercMedic
+  id: RMCEliteMercEngineer
   equipment:
     id: RMCIDCardMercenary
-    jumpsuit: RMCJumpsuitMercenaryMedic
+    jumpsuit: RMCJumpsuitMercenaryEngineer
     outerClothing: RMCArmorMercenaryEngineer
     gloves: RMCHandsVeteran
-    eyes: RMCGlassesM4SPRBattleSight
-    head: RMCArmorHelmetMercenarySupport
+    eyes: CMGlassesM42ScoutSight
+    head: RMCArmorHelmetMercenaryEngineer
     shoes: RMCBootsPMCFilled
     mask: RMCMaskBalaclavaPMC
     ears: RMCHeadsetDistressDukes
-    back: RMCSatchelLightpack
-    belt:  RMCBeltMedicBagUPPFilled
-    pocket1: RMCPouchMagazineLarge
-    pocket2: RMCPouchMedkitFillAdvanced # TODO RMC14: PMC re-sprite
-    suitstorage: RMCWeaponSMGM63B2
+    back: RMCSatchelLightpackWelder
+    belt: RMCMotionDetector
+    pocket1: RMCPouchShotgunLarge
+    pocket2: RMCPouchToolsSocMarineRaiderFill # TODO RMC14: PMC re-sprite
+    suitstorage: WeaponShotgunM890
   storage:
+    storage:
     outerClothing:
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
     back:
-    - CMDefibrillator
-    - CMDefibrillator
-    - CMAdvFirstAidKitFilled
-    - CMRollerBed
-    - CMRollerBed # supposed to be surgical bed
-    - CMSynthGraft
-    - CMHealthAnalyzer
     - RMCBoxAttachment
+    - RMCExplosivePlastic
+    - CMPacketGrenadeFragFilled
     - RMCPacketGrenadeSmokeFilled
-    pocket1:
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+
 
 # These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.

@@ -1,56 +1,32 @@
 {
   "version": 1,
-  "license": null,
-  "copyright": null,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/obj/items/clothing/belts.dmi, https://github.com/cmss13-devs/cmss13/blob/207f72c0f8ca3762632938b51fd1c41bca2c7747/icons/mob/humans/onmob/belt.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_lefthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_righthand_1.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": ""
+      "name": "icon"
     },
     {
-      "name": "upp_belt"
+      "name": "half"
     },
     {
-      "name": "\u002Bupp_belt_half"
+      "name": "full"
     },
     {
-      "name": "\u002Bupp_belt_full"
+      "name": "equipped-BELT",
+      "directions": 4
     },
     {
-      "name": "korovin_holster"
+      "name": "inhand-left",
+      "directions": 4
     },
     {
-      "name": "\u002Bkorovin_holster_half"
-    },
-    {
-      "name": "\u002Bkorovin_holster_full"
-    },
-    {
-      "name": "korovin_holster_g"
-    },
-    {
-      "name": "ivan_belt"
-    },
-    {
-      "name": "\u002Bivan_belt_half"
-    },
-    {
-      "name": "\u002Bivan_belt_full"
-    },
-    {
-      "name": "ivan_belt_g"
-    },
-    {
-      "name": "medicbag_u"
-    },
-    {
-      "name": "\u002Bmedicbag_u_half"
-    },
-    {
-      "name": "\u002Bmedicbag_u_full"
+      "name": "inhand-right",
+      "directions": 4
     }
   ]
 }

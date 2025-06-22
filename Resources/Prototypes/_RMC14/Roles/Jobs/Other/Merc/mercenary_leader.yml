@@ -1,15 +1,15 @@
 # M63B2
 - type: job
   parent: CMJobBase
-  id: RMCEliteMercMedic
-  name: Elite Medic Mercenary
+  id: RMCEliteMercLeader
+  name: Mercenary Warlord
   description: rmc-ghost-role-information-pmc-description
-  playTimeTracker: RMCEliteMercMedic
-  startingGear: RMCEliteMercMedic
+  playTimeTracker: RMCEliteMerLeader
+  startingGear: RMCEliteMercLeader
   joinNotifyCrew: false
   accessGroups:
   - Colony
-  spawnMenuRoleName: Elite Mercenary Medic
+  spawnMenuRoleName: Elite Mercenary Leader
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,24 +21,25 @@
         RMCSkillCqc: 2
         RMCSkillFirearms: 2
         RMCSkillFireman: 2
-        RMCSkillMedical: 4
+        RMCSkillMedical: 1
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
+        RMCSkillOverwatch: 1
         RMCSkillEndurance: 5
-        RMCSkillSurgery: 2
-        RMCSkillJtac: 1
+        RMCSkillPilot: 2
+        RMCSkillJtac: 4
         RMCSkillMeleeWeapons: 1
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: rmc-job-prefix-merc-medic
+      prefix: rmc-job-prefix-merc-leader
   hidden: true
 
 - type: startingGear
-  id: RMCEliteMercMedic
+  id: RMCEliteMercLeader
   equipment:
     id: RMCIDCardMercenary
     jumpsuit: RMCJumpsuitMercenaryMedic
-    outerClothing: RMCArmorMercenaryEngineer
+    outerClothing: RMCArmorMercenary
     gloves: RMCHandsVeteran
     eyes: RMCGlassesM4SPRBattleSight
     head: RMCArmorHelmetMercenarySupport
@@ -46,28 +47,27 @@
     mask: RMCMaskBalaclavaPMC
     ears: RMCHeadsetDistressDukes
     back: RMCSatchelLightpack
-    belt:  RMCBeltMedicBagUPPFilled
-    pocket1: RMCPouchMagazineLarge
-    pocket2: RMCPouchMedkitFillAdvanced # TODO RMC14: PMC re-sprite
-    suitstorage: RMCWeaponSMGM63B2
+    belt:  CMBeltMarine
+    pocket1: RMCPouchExplosiveFilledPlasticExplosives
+    pocket2: RMCPouchAutoinjectorFill # TODO RMC14: PMC re-sprite
+    suitstorage: RMCWeaponRifleM54C2
   storage:
     outerClothing:
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    belt:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
     back:
-    - CMDefibrillator
-    - CMDefibrillator
-    - CMAdvFirstAidKitFilled
-    - CMRollerBed
-    - CMRollerBed # supposed to be surgical bed
-    - CMSynthGraft
-    - CMHealthAnalyzer
     - RMCBoxAttachment
+    - CMPacketGrenadeFragOldFilled
+    - RMCPacketGrenadeIncendiaryFilled # supposed to be white phosphorus
     - RMCPacketGrenadeSmokeFilled
-    pocket1:
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
+    - RMCRangefinder
+    - RMCMotionDetector # supposed to be hacked version that shows every non merc
 
 # These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.
