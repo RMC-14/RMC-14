@@ -1,87 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added the M34 incinerator unit, flamer tank, G4-1 fueltank backpack,
-      mini flamethrower attachment, underbarrel extinguisher attachment, UT-Napthal,
-      and the fuel tank strap pouch.
-    type: Add
-  - message: Added the cluster OB warhead, which fires 225 small explosions in around
-      half a minute, bombarding an area repeatedly over its duration. It can be bought
-      with intel points, same as the other two.
-    type: Add
-  - message: Added Doc, the mouse in upper floor research.
-    type: Add
-  - message: Temporarily removed night vision film grain until it can be fixed.
-    type: Remove
-  - message: Fixed standing still in a fire not reigniting you.
-    type: Fix
-  - message: Fixed fire damage while standing on fire being half the intended amount.
-    type: Fix
-  - message: Fixed some vendors not fitting through doors.
-    type: Fix
-  - message: Fixed loading bullet boxes taking 5 seconds instead of 1.5 seconds.
-    type: Fix
-  - message: Fixed evac airlocks and lifeboat doors allowing larvas and parasites
-      through before evac starts.
-    type: Fix
-  - message: Fixed eating pills not being instant. Feeding others pills still takes
-      1 second
-    type: Fix
-  - message: Fixed defibrillators having a cooldown between uses.
-    type: Fix
-  - message: Fixed Crusher Charge, Defender Headbutt and Warrior Lunge being blocked
-      by corpses.
-    type: Fix
-  - message: Fixed Warrior Lunge being 3 times slower than intended.
-    type: Fix
-  - message: Fixed not being able to buckle dead xenos to roller beds.
-    type: Fix
-  - message: Fixed dropships lifting off and landing not stunning xenos that are aboard.
-    type: Fix
-  - message: Fixed SMG AP bullet box name being incorrect when bought from Requisitions.
-    type: Fix
-  - message: Fixed rechargers blocking bullets.
-    type: Fix
-  - message: Fixed the command tablet cabinet allowing mobs to be stored inside.
-    type: Fix
-  - message: Fixed rangefinders and laser designators having a cooldown to zooming
-      in and out.
-    type: Fix
-  - message: Fixed filled boots not looking filled before being interacted with.
-    type: Fix
-  - message: Fixed not being able to pick up paper bins.
-    type: Fix
-  - message: Fixed the Intelligence Officer vendor not getting a choice of shotgun
-      shell belt.
-    type: Fix
-  - message: Fixed Requisitions getting large document pouches instead of small ones.
-    type: Fix
-  - message: Fixed breaching shells fitting into the pump shotgun.
-    type: Fix
-  - message: Fixed window frames not being able to be hit with bullets when directly
-      clicked on.
-    type: Fix
-  - message: Fixed intel folders not having random colors.
-    type: Fix
-  - message: Fixed the M60 being too loud.
-    type: Fix
-  - message: Fixed being able to drop intel items while reading them.
-    type: Fix
-  - message: Fixed Provost headsets not letting you see job icons.
-    type: Fix
-  - message: Fixed the loader kit having breaching charges instead of plastic explosives.
-    type: Fix
-  - message: Fixed the XO and officer service jackets not having 10 armor.
-    type: Fix
-  - message: Fixed items shuffling when being taken out of a storage with multiple
-      rows.
-    type: Fix
-  - message: Fixed your overwatch UI glitching out when admins assign non squad roles
-      to squads.
-    type: Fix
-  id: 1378
-  time: '2025-02-22T19:48:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5699
 - author: Vermidia
   changes:
   - message: Made the Boiler sprite smaller.
@@ -5297,5 +5214,13 @@
   id: 1879
   time: '2025-06-22T05:29:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6711
+- author: Dygon
+  changes:
+  - message: Fixed Combat Technician Engineering skill being 1 level too low (2 >
+      3).
+    type: Tweak
+  id: 1880
+  time: '2025-06-22T06:02:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6754
 Name: RMC14
 Order: -1
