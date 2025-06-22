@@ -1,0 +1,64 @@
+- type: job
+  parent: CMJobBase
+  id: RMCEliteMercMiner
+  name: rmc-job-name-merc-miner
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCEliteMercMiner
+  startingGear: RMCEliteMercMiner
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: Elite Mercenary Miner
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Mercenary
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 5
+        RMCSkillVehicles: 1
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-merc-miner
+  hidden: true
+
+- type: startingGear
+  id: RMCEliteMercMiner
+  equipment:
+    id: RMCIDCardMercenary
+    jumpsuit: RMCJumpsuitMercenaryMiner
+    outerClothing: RMCArmorMercenaryMiner
+    gloves: RMCHandsVeteran
+    eyes: CMGlassesM42ScoutSight
+    head: RMCArmorHelmetMercenaryMiner
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclavaPMC
+    ears: RMCHeadsetDistressDukes
+    back: RMCSatchelLightpack
+    belt: RMCM276BeltFilled
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledUPP # TODO RMC14: PMC re-sprite
+    suitstorage: WeaponShotgunM890
+  storage:
+    back:
+    - RMCBoxAttachment
+    - RMCExplosivePlastic
+    - CMPacketGrenadeFragFilled
+    - RMCPacketGrenadeSmokeFilled
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+    - CMShellShotgunBuckshot
+
+
+# These guys are supposed to alternate between weapons per spawn. They can get a MK1, tac shotgun, or the weird ass black MK1 that PMCs get. Their things like belt and ammo change accordingly ofc. IDK why but they get "heavy beanbag slugs". Giving em Buckshot for now.

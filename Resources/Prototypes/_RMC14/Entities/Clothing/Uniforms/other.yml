@@ -121,6 +121,21 @@
   - type: WebbingClothing
     startingWebbing: RMCWebbingPMCEngineer
 
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMercenaryMedic # Medics wear literally the same suit as engineers. I am just gonna nname its id to medic for now so its easier to find
+  name: mercenary engineer fatigues
+  description: A blue suit with yellow accents, used by engineers. There is an unknown symbol is emblazed on the suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPMCEngineer # supposed to have surgical webbing. TODO
+
+
 # Other factions
 
 - type: entity

@@ -85,9 +85,9 @@
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMC
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskBalaclavaPMC
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    back: RMCSatchelLightpack
     belt: CMM77BeltFilled
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
@@ -168,9 +168,9 @@
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMC
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskBalaclavaPMC
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    back: RMCSatchelLightpack
     belt: CMM77BeltFilled
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
@@ -249,9 +249,9 @@
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMC
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskBalaclava
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    back: RMCSatchelLightpack
     belt: CMM77BeltFilled
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite

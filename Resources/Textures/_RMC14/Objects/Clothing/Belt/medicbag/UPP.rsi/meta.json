@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": ""
+    },
+    {
+      "name": "upp_belt"
+    },
+    {
+      "name": "\u002Bupp_belt_half"
+    },
+    {
+      "name": "\u002Bupp_belt_full"
+    },
+    {
+      "name": "korovin_holster"
+    },
+    {
+      "name": "\u002Bkorovin_holster_half"
+    },
+    {
+      "name": "\u002Bkorovin_holster_full"
+    },
+    {
+      "name": "korovin_holster_g"
+    },
+    {
+      "name": "ivan_belt"
+    },
+    {
+      "name": "\u002Bivan_belt_half"
+    },
+    {
+      "name": "\u002Bivan_belt_full"
+    },
+    {
+      "name": "ivan_belt_g"
+    },
+    {
+      "name": "medicbag_u"
+    },
+    {
+      "name": "\u002Bmedicbag_u_half"
+    },
+    {
+      "name": "\u002Bmedicbag_u_full"
+    }
+  ]
+}

@@ -1342,6 +1342,28 @@
 
 - type: entity
   parent: CMBeltMarine
+  id: RMCMK1BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CMK1
+      amount: 5
+
+- type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 7
+    - id: CMShellShotgunSlugs
+      amount: 7
+
+- type: entity
+  parent: CMBeltMarine
   id: RMCType71BeltFilled
   suffix: Filled
   components:

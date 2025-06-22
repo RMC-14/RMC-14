@@ -87,7 +87,7 @@
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMC
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskBalaclavaPMC
     eyes: RMCGlassesMedicalHUDGlasses
     back: RMCSatchelPMCMedic
     belt: RMCBeltMedicBagPMCFilled

@@ -18,7 +18,7 @@
 #    - Security
 
 - type: entity
-  parent: [ ClothingEyesBase , ShowMedicalIcons ]
+  parent: [ ClothingEyesBase ]
   id: CMGlassesM42ScoutSight
   name: M96 scout sight
   description: A headset and night vision sighting system for the M96 Scout Rifle. Allows highlighted imaging of surroundings.
