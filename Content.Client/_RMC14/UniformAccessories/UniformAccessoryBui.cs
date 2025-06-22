@@ -18,7 +18,6 @@ public sealed class UniformAccessoryBui : BoundUserInterface
 
     private readonly TransformSystem _transform;
     private readonly SharedContainerSystem _container;
-    private readonly IEntityManager _entityManager;
 
     private UniformAccessoryMenu? _menu;
 
@@ -28,7 +27,6 @@ public sealed class UniformAccessoryBui : BoundUserInterface
 
         _transform = EntMan.System<TransformSystem>();
         _container = EntMan.System<SharedContainerSystem>();
-        _entityManager = IoCManager.Resolve<EntityManager>();
     }
 
     protected override void Open()
@@ -67,7 +65,7 @@ public sealed class UniformAccessoryBui : BoundUserInterface
                 ToolTip = metaData.EntityName,
             };
 
-            var spriteView = new SpriteView(accessory, _entityManager)
+            var spriteView = new SpriteView(accessory, EntMan)
             {
                 OverrideDirection = Direction.South,
                 VerticalAlignment = Control.VAlignment.Center,
@@ -76,7 +74,7 @@ public sealed class UniformAccessoryBui : BoundUserInterface
                 VerticalExpand = true,
             };
 
-            var netEnt = _entityManager.GetNetEntity(accessory);
+            var netEnt = EntMan.GetNetEntity(accessory);
             button.OnButtonDown += _ => SendPredictedMessage(new UniformAccessoriesBuiMsg(netEnt));
 
             button.AddChild(spriteView);
