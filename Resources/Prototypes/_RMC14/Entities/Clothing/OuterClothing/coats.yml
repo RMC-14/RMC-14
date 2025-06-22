@@ -468,6 +468,8 @@
   components:
   - type: Foldable
     folded: true
+  - type: Clothing
+    equippedPrefix: jacket
 
 - type: entity
   parent: CMCoatOfficer
