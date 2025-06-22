@@ -1,5 +1,6 @@
 ﻿- type: entity
   id: FactionRoyalMarines
+  categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
   - type: FactionFrequencies

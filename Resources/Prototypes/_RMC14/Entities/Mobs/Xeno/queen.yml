@@ -266,6 +266,7 @@
 
 - type: entity
   id: XenoLeaderPheromoneRelay
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoPheromones
 
