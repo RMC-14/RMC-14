@@ -133,7 +133,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
   - type: WebbingClothing
-    startingWebbing: RMCWebbingPMCEngineer # supposed to have surgical webbing. TODO
+    startingWebbing: RMCWebbingPMCEngineer # TODO RMC14:supposed to have surgical webbing. TODO
 
 
 # Other factions
