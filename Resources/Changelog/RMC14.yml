@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Queen armor loss from being in green fire being too high (50% armor
-      retained -> 70%)
-    type: Fix
-  - message: Fixed Pierce not breaking window glass
-    type: Fix
-  - message: Fixed various abilities with a timer not showing toggled on on the action
-      bar
-    type: Fix
-  - message: Fixed crusher healing not enough while standing (0.4 -> 0.66)
-    type: Fix
-  - message: Added ravager, a T3 that evolves from lurker and focuses on empowering
-      from foes and dishing out damage.
-    type: Add
-  id: 1369
-  time: '2025-02-22T07:43:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5675
-- author: CyberTropic
-  changes:
-  - message: Changed signal flare color to be more white than green.
-    type: Tweak
-  id: 1370
-  time: '2025-02-22T07:44:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5688
 - author: Arcticular1
   changes:
   - message: New CO armor sprites + CO helmet sprites, general officer armor + helmet,
@@ -5310,5 +5285,23 @@
   id: 1871
   time: '2025-06-22T02:39:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6732
+- author: crazy1112345
+  changes:
+  - message: Fixed LACN mention in lucky strike mini pack description.
+    type: Fix
+  id: 1872
+  time: '2025-06-22T02:41:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6766
+- author: Dygon
+  changes:
+  - message: Improperly folding the bipod attachment now applies a weaker slowdown
+      effect.
+    type: Fix
+  - message: The bipod attachment now correctly applies it's scatter reduction effect
+      when toggled.
+    type: Fix
+  id: 1873
+  time: '2025-06-22T02:41:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6747
 Name: RMC14
 Order: -1
