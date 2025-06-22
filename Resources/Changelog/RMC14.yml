@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Aciders no longer generate over 400 acid passively. To compensate, slashing
-      at someone now generates bonus acid for 6 seconds, which stacks with passive
-      generation and works when the cap is hit.
-    type: Fix
-  id: 1373
-  time: '2025-02-22T07:48:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5676
 - author: Arcticular1
   changes:
   - message: Added the Commanding Officer's ML66B Cavalier smart gun with new sprites.
@@ -5300,5 +5291,14 @@
   id: 1875
   time: '2025-06-22T02:43:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6775
+- author: Whisper
+  changes:
+  - message: Decreased the minimum range required for mortars by 10 tiles in exchange
+      for the maximum range reduction of 10 tiles. You will be able to shoot it closer
+      but not as far by the same amount.
+    type: Tweak
+  id: 1876
+  time: '2025-06-22T05:23:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6793
 Name: RMC14
 Order: -1
