@@ -66,6 +66,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: Webbing
     components:
     - type: Storage
@@ -84,6 +85,7 @@
         - PillPacket
         - PillCanister
         - CMSurgicalCase
+        - RMCSyringeCase
     - type: RMCStorageEjectHand
       state: Open
     - type: ExplosionResistance
@@ -115,6 +117,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
@@ -134,6 +137,7 @@
         - PillPacket
         - PillCanister
         - CMSurgicalCase
+        - RMCSyringeCase
     - type: FixedItemSizeStorage
     - type: RMCStorageEjectHand
       state: Open
@@ -170,6 +174,7 @@
         - PillPacket
         - PillCanister
         - CMSurgicalCase
+        - RMCSyringeCase
     - type: FixedItemSizeStorage
     - type: RMCStorageEjectHand
       state: Open

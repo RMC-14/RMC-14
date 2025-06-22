@@ -315,6 +315,9 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: CMExplosionEffect
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
@@ -325,8 +328,7 @@
 
 - type: entity
   id: CMExplosionEffectGrenade
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Effects/grenade_explosion.rsi
@@ -344,8 +346,7 @@
 
 - type: entity
   id: CMExplosionEffectShrapnel1
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CollisionWake
   - type: Physics
@@ -372,8 +373,7 @@
 - type: entity
   parent: CMExplosionEffectShrapnel1
   id: CMExplosionEffectShrapnel2
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: shrapnel_bright2
