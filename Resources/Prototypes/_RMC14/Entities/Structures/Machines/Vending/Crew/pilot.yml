@@ -222,8 +222,8 @@
         amount: 20
       - id: CMMagazinePistolM1984
         amount: 20
-      #- id: CMMagazinePistolM1984AP # TODO RMC14 Pistol AP varieties
-      # amount: 14
+      - id: RMCMagazinePistolM1984AP 
+        amount: 14
       #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
       # amount: 14
       - id: CMMagazinePistolMK80
