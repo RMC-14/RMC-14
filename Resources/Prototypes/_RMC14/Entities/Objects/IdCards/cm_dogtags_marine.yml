@@ -46,8 +46,8 @@
     job: CMHospitalCorpsman
 
 - type: entity
-  parent: [ CMDogtagFireteamLeader, RMCIDCardStandardDogtagHidden ]
-  id: RMCDogtagFireteamLeaderHidden
+  parent: [ CMDogtagHospitalCorpsman, RMCIDCardStandardDogtagHidden ]
+  id: RMCDogtagHospitalCorpsmanHidden
   categories: [ HideSpawnMenu ]
 
 - type: entity
