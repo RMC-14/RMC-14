@@ -54,10 +54,10 @@ public sealed class XenoCleaveSystem : EntitySystem
             //From fling
             var origin = _transform.GetMapCoordinates(xeno);
 
+            _sizeStun.KnockBack(args.Target, origin, flingRange, flingRange, 10, true);
+
             if (_net.IsServer)
             {
-                _sizeStun.KnockBack(args.Target, origin, flingRange, flingRange, 10, true);
-
                 SpawnAttachedTo(xeno.Comp.FlingEffect, args.Target.ToCoordinates());
             }
         }

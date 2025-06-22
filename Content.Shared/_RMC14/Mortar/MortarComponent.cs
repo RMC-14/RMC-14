@@ -50,10 +50,10 @@ public sealed partial class MortarComponent : Component
     public int MaxDial = 10;
 
     [DataField, AutoNetworkedField]
-    public int MinimumRange = 25;
+    public int MinimumRange = 15;
 
     [DataField, AutoNetworkedField]
-    public int MaximumRange = 75;
+    public int MaximumRange = 65;
 
     [DataField, AutoNetworkedField]
     public string FixtureId = "mortar";
