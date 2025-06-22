@@ -156,6 +156,7 @@
 
 - type: entity
   id: FactionWeYa
+  categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
   - type: FactionFrequencies
