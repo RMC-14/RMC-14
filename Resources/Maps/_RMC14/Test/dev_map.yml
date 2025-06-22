@@ -3025,7 +3025,7 @@ entities:
     - type: Transform
       pos: -6.5,4.5
       parent: 2
-- proto: ClothingHeadHatWelding
+- proto: RMCHelmetWelding
   entities:
   - uid: 388
     components:

@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Ball;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -227,6 +228,13 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
         }
 
+        if (HasComp<SynthComponent>(target))
+        {
+            var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", target));
+            _popup.PopupEntity(immuneMsg, target, target, PopupType.SmallCaution);
+            return;
+        }
+
         if (spit.Comp.Slow > TimeSpan.Zero)
         {
             if (spit.Comp.SuperSlow)
@@ -287,7 +295,7 @@ public sealed class XenoSpitSystem : EntitySystem
         foreach (var (actionId, action) in _actions.GetActions(ent))
         {
             if (action.BaseEvent is XenoAcidBallActionEvent)
-                _actions.SetUseDelay(actionId, ent.Comp.Cooldown);
+                _actions.SetCooldown(actionId, ent.Comp.Cooldown);
         }
 
         if (!args.Handled)

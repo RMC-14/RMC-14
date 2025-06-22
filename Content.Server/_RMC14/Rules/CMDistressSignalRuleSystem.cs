@@ -407,6 +407,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
 
                 var spawnAsJob = job;
+                var selectRandomInsert = SelectedPlanetMap?.Comp.SelectRandomSurvivorInsert ?? false;
 
                 var playerId = _random.Pick(list);
                 if (!_player.TryGetSessionById(playerId, out var player))
@@ -415,7 +416,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     return null;
                 }
 
-                if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
+                // select an insert in order, reducing the slot of that insert
+                if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert) && !selectRandomInsert)
                 {
                     var insertSuccess = false;
 
@@ -454,6 +456,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     var (survJob, amount) = comp.SurvivorJobs[i];
                     if (survJob != job)
                         continue;
+
+                    if (selectRandomInsert) // select a random insert if there are any and if this map supports random inserts
+                    {
+                        if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var randomInsertList))
+                            spawnAsJob = _random.Pick(randomInsertList).Insert;
+                    }
 
                     if (amount == -1)
                         break;
@@ -871,8 +879,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            var faction = HasComp<RMCSurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
-            _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
     }

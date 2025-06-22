@@ -214,7 +214,21 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var friendlyWeeds = false;
         var entriesResin = 0;
         var entriesWeeds = 0;
-        foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
+
+        _intersecting.Clear();
+        _physics.GetContactingEntities((ent, physicsComponent), _intersecting);
+
+        if (TryComp(ent, out TransformComponent? transform) &&
+            transform.Anchored)
+        {
+            var anchoredQuery = _rmcMap.GetAnchoredEntitiesEnumerator(ent);
+            while (anchoredQuery.MoveNext(out var anchored))
+            {
+                _intersecting.Add(anchored);
+            }
+        }
+
+        foreach (var contacting in _intersecting)
         {
             if (_slowResinQuery.TryComp(contacting, out var slowResin))
             {
@@ -514,7 +528,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             foreach (var mobId in _toUpdate)
             {
-                _movementSpeed.RefreshMovementSpeedModifiers(mobId);
+                UpdateQueued(mobId);
             }
         }
         finally
@@ -596,5 +610,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public void UpdateQueued(EntityUid update)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(update);
     }
 }
