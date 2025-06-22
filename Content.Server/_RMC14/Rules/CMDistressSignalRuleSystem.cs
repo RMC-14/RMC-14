@@ -879,8 +879,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            var faction = HasComp<RMCSurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
-            _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
     }
