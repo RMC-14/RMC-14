@@ -10,7 +10,7 @@
     sprite: _RMC14/Areas/areas_strata.rsi
     state: strata
   - type: Area
-    powernet: ground
+    powerNet: ground
     buildSpecial: true
     minimapColor: "#6c6767d8"
 
