@@ -1,12 +1,24 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken/modified from cm-ss13 at https://github.com/cmss13-devs/cmss13/blob/635bd97af3836a09aa0f718f76383c5c7d5a8ace/icons/obj/items/weapons/guns/guns_by_faction/TWE/assault_rifles.dmi by RavenCaat",
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Taken from RMC14, from the contributer noctyrnal, at https://github.com/RMC-14/RMC-14/tree/ca136600652b97ae8ea05e84a6bee6cae495e487/Resources/Textures/_RMC14/Objects/Weapons/Guns/Rifles/l83a2.rsi. Taken by RavenCaat",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "bolt-open"
+    },
+    {
+      "name": "icon"
+    },
+	{
+      "name": "mag-0"
+    },
     {
       "name": "inhand-left",
       "directions": 4

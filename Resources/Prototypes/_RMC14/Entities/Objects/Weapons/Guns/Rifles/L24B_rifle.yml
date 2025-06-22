@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL24B
   name: L24B rifle
-  description: A rare sight, this rifle is seen most commonly in the hands of Three World Empire RMCs. This particular model was modified to facilitate RMC operations in tight quarters.
+  description: A rare sight, this rifle is seen most commonly in the hands of the Three Sun Empires Royal Marines Commando units. This particular model was modified to facilitate RMC operations in tight quarters.
   suffix: Filled
   components:
   - type: Sprite
@@ -32,28 +32,28 @@
     - SemiAuto
     - Burst
     - FullAuto
-    recoilUnwielded: 4
-    scatterWielded: 2
+    recoilWielded: 2
+    recoilUnwielded: 2
+    scatterWielded: 3
     scatterUnwielded: 10
-    baseFireRate: 3.3
+    baseFireRate: 2.75
     burstScatterMult: 1
     modifiers:
       Burst:
-        fireDelay: 0.1665
+        fireDelay: 0.225
         maxScatterModifier: 6
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 3
+        shotsToMaxScatter: 6
       FullAuto:
         fireDelay: 0
         maxScatterModifier: 6
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
-
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.25
-    accuracyMultiplierUnwielded: 0.65
+    accuracyMultiplier: 1.3
+    accuracyMultiplierUnwielded: 0.90
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
@@ -81,8 +81,8 @@
         whitelist:
           tags:
           - RMCM5Bayonet
-          random:
-          - RMCM5Bayonet
+        random:
+        - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:
           tags:
@@ -90,8 +90,8 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
-          random:
-           - RMCAttachmentS6ReflexSight
+        random:
+        - RMCAttachmentS6ReflexSight
       rmc-aslot-stock:
         locked: true
         startingAttachable: RMCAttachmentL24BStock
@@ -99,19 +99,17 @@
           tags:
           - RMCAttachmentL24BStock
       rmc-aslot-underbarrel:
+        locked: true
         startingAttachable: RMCAttachmentU7UnderbarrelShotgun
         whitelist:
           tags:
-          - RMCAttachmentAngledGrip
-          - RMCAttachmentFlashlightGrip
-          - RMCAttachmentVerticalGrip
           - RMCAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.906, 0.03125
       rmc-aslot-rail: -0.0175, 0.19
       rmc-aslot-stock: -0.469, 0.01
-      rmc-aslot-underbarrel: 0.345, -0.315
+      rmc-aslot-underbarrel: 0.31375, -0.315
 
 
 
