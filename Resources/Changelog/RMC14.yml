@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Binbagg
-  changes:
-  - message: Fixed larvas not starting with full plasma.
-    type: Fix
-  - message: Fixed larvas being able to evolve off weeds for the first 15 minutes
-      of a game.
-    type: Fix
-  id: 1368
-  time: '2025-02-21T13:08:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5671
 - author: Vermidia
   changes:
   - message: Fixed Queen armor loss from being in green fire being too high (50% armor
@@ -5313,5 +5303,12 @@
   id: 1870
   time: '2025-06-19T14:09:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6760
+- author: x5tink
+  changes:
+  - message: Added surgical case to the medilathe.
+    type: Add
+  id: 1871
+  time: '2025-06-22T02:39:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6732
 Name: RMC14
 Order: -1
