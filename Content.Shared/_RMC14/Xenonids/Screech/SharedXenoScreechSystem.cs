@@ -26,6 +26,7 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
+    private readonly HashSet<Entity<MobStateComponent>> _closeMobs = new();
     private readonly HashSet<Entity<XenoParasiteComponent>> _parasites = new();
 
     public override void Initialize()
@@ -57,10 +58,8 @@ public sealed class XenoScreechSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        _mobs.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _mobs);
-
-        HashSet<Entity<MobStateComponent>> closeTargets = _mobs.ToHashSet(); //Duplicate
+        _closeMobs.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _closeMobs);
 
         foreach (var receiver in _mobs)
         {
@@ -79,7 +78,7 @@ public sealed class XenoScreechSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
                 continue;
 
-            if (closeTargets.Contains(receiver))
+            if (_closeMobs.Contains(receiver))
                 continue;
 
             Stun(xeno, receiver, xeno.Comp.StunTime, true);
