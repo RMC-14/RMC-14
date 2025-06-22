@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: RMCEliteMercMEngineer
-  name: Elite Engineer Mercenary
+  name: Engineer Mercenary
   description: rmc-ghost-role-information-pmc-description
   playTimeTracker: RMCEliteMercEngineer
   startingGear: RMCEliteMercEngineer

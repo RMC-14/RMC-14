@@ -2,7 +2,7 @@
 - type: job
   parent: CMJobBase
   id: RMCEliteMercMHeavy
-  name: Elite Heavy Mercenary
+  name: Heavy Mercenary
   description: rmc-ghost-role-information-pmc-description
   playTimeTracker: RMCEliteMercHeavy
   startingGear: RMCEliteMercHeavy

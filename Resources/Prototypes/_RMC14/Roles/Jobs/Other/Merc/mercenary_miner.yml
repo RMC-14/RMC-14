@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: RMCEliteMercMiner
-  name: Elite Medic Mercenary
+  name: Miner Mercenary
   description: rmc-ghost-role-information-pmc-description
   playTimeTracker: RMCEliteMercMiner
   startingGear: RMCEliteMercMiner
