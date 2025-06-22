@@ -23,15 +23,15 @@
     - type: Skills
       skills:
         RMCSkillCqc: 1
-        RMCSkillMedical: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
+        RMCSkillMedical: 2
+        RMCSkillFirearms: 1
         RMCSkillFireman: 2
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
-        RMCSkillSmartGun: 1
-        RMCSkillEndurance: 3
-        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
       # TODO RMC14 add English, russian, Chinese and Japanese languages
     - type: MarineOrders
     - type: SquadArmorWearer
