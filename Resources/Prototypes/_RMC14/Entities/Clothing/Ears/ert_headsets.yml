@@ -1,18 +1,8 @@
 ﻿- type: entity
   parent: RMCHeadsetLiaison
-  id: RMCHeadsetDistressWeYaColony
-  suffix: WeYa, Colony
-  components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - CMEncryptionKeyWEYAColony
-
-- type: entity
-  parent: RMCHeadsetLiaison
   id: RMCHeadsetDistressICBLiaison
   name: ICB liaison headset
-  suffix: WeYa, Colony
+  suffix: ICB, Colony
   components:
   - type: ContainerFill
     containers:
