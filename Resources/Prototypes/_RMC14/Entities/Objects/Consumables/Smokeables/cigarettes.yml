@@ -194,6 +194,16 @@
     state: unlit-icon
 
 - type: entity
+  parent: Cigarette
+  id: RMCJoint
+  name: joint
+  description: A roll of dried plant matter wrapped in thin paper.
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cannabis/joint.rsi
+    state: unlit-icon
+
+- type: entity
   id: RMCCigaretteSpent
   parent: RMCCigarette
   suffix: spent
