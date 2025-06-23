@@ -484,12 +484,6 @@
     },
     {
       "name": "pmc_spawn"
-    },
-    {
-      "name": "item_crap"
-    },
-    {
-      "name": "item_good"
     }
   ]
 }

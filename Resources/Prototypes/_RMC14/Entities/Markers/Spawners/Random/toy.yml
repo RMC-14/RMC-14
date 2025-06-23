@@ -4,47 +4,47 @@
   name: random toy spawner
   description: This is a random toy.
   components:
-  - type: Sprite
-    layers:
-    - sprite: _RMC14/Markers/landmarks.rsi
-      state: ipool
-  - type: RandomSpawner
-    prototypes:
-	# /obj/item/storage/wallet,
-	# /obj/item/storage/photo_album,
-    - SnapPopBox
-    - RMCCrayonBox
-    - ClothingBeltChampion
-    - SoapDeluxe
-	# /obj/item/tool/pickaxe/silver,
-	# /obj/item/tool/pen/white,
-    - CMGrenadeSmoke
-    - FoodCornTrash
-	# /obj/item/poster,
-    - BikeHorn
-    - BeachBall
-    - BalloonCorgi
-	# /obj/item/toy/blink,
-    - FoamCrossbow
-    - RevolverCapGun
-	# /obj/item/toy/katana,\
-    - ToyDeathRipley
-    - ToyDurand
-    - ToyFireRipley
-    - ToyGygax
-    - ToyHonk
-    - ToyMarauder
-    - ToyMauler
-    - ToyOdysseus
-    - ToyPhazon
-    - ToyRipley
-    - ToySeraph
-	# /obj/item/toy/spinningtoy,\
-    - ToySword
-    - FoodAmbrosiaDeus
-    - FoodAmbrosiaVulgaris
-	# /obj/item/clothing/accessory/tie/horrible,\
-    - ClothingShoesSlippers
-	# /obj/item/clothing/shoes/slippers_worn,\
-    - ClothingHeadHatMagician
-    offset: 0
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Markers/landmarks.rsi
+          state: ipool
+    - type: RandomSpawner
+      prototypes:
+	    # /obj/item/storage/wallet,
+	    # /obj/item/storage/photo_album,
+        - SnapPopBox
+        - RMCCrayonBox
+        - ClothingBeltChampion
+        - SoapDeluxe
+	    # /obj/item/tool/pickaxe/silver,
+	    # /obj/item/tool/pen/white,
+        - CMGrenadeSmoke
+        - FoodCornTrash
+	    # /obj/item/poster,
+        - BikeHorn
+        - BeachBall
+        - BalloonCorgi
+	    # /obj/item/toy/blink,
+        - FoamCrossbow
+        - RevolverCapGun
+	    # /obj/item/toy/katana,\
+        - ToyDeathRipley
+        - ToyDurand
+        - ToyFireRipley
+        - ToyGygax
+        - ToyHonk
+        - ToyMarauder
+        - ToyMauler
+        - ToyOdysseus
+        - ToyPhazon
+        - ToyRipley
+        - ToySeraph
+	    # /obj/item/toy/spinningtoy,\
+        - ToySword
+        - FoodAmbrosiaDeus
+        - FoodAmbrosiaVulgaris
+	    # /obj/item/clothing/accessory/tie/horrible,\
+        - ClothingShoesSlippers
+	    # /obj/item/clothing/shoes/slippers_worn,\
+        - ClothingHeadHatMagician
+      offset: 0
