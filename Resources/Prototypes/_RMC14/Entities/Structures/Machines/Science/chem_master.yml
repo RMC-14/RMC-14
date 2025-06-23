@@ -62,6 +62,8 @@
     board: CMCircuitboardChemMaster
   - type: ContainerContainer
     containers:
+      beakerSlot: !type:ContainerSlot
+      outputSlot: !type:ContainerSlot
       machine_board: !type:Container
       machine_parts: !type:Container
   - type: ItemSlots

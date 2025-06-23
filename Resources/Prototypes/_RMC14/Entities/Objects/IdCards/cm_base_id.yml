@@ -185,6 +185,7 @@
 
 - type: entity
   id: FactionMarine
+  categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
   - type: FactionFrequencies
@@ -208,6 +209,7 @@
 
 - type: entity
   id: FactionSurvivor
+  categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
   - type: FactionFrequencies
@@ -216,6 +218,7 @@
 
 - type: entity
   id: FactionTSE
+  categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
   - type: FactionFrequencies

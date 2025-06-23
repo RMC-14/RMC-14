@@ -1,4 +1,4 @@
-﻿# Divide original costs by 37.5 each - except plastic which is 20
+# Divide original costs by 37.5 each - except plastic which is 20
 # For all non-stackable/sheet items, multiply original costs by 1.25 rounded down
 # Example: Syringe is 150 x 1.25 = 187 / 37.5 = 5 CMGlass
 - type: latheRecipe
@@ -113,6 +113,13 @@
   completetime: 4
   materials:
     RMCPlastic: 63 # 1250
+
+- type: latheRecipe
+  id: CMSurgicalCase
+  result: CMSurgicalCase
+  completetime: 4
+  materials:
+    RMCPlastic: 50 # 1000
 
 - type: latheRecipe
   id: RMCVialBox
