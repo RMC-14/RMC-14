@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL24B
   name: L24B rifle
-  description: A rare sight, this rifle is seen most commonly in the hands of the Three Sund Empires Royal Crown Marines units. This particular model was modified to facilitate RMC operations in tight quarters.
+  description: A rare sight, this rifle is seen most commonly in the hands of the Three Suns Empires Royal Crown Marines units. This particular model was modified to facilitate RMC operations in tight quarters.
   suffix: Filled
   components:
   - type: Sprite
