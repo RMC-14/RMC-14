@@ -119,7 +119,7 @@
   result: CMSurgicalCase
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 63 # 1250
 
 - type: latheRecipe
   id: RMCVialBox
