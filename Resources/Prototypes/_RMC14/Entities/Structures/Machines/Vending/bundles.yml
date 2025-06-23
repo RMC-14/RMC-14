@@ -65,6 +65,7 @@
     - CMBloodPackFull # TODO RMC14 O-
     - CMBloodPackFull # TODO RMC14 O-
     - RMCFlashlightPen
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -161,7 +162,7 @@
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
     - RMCSyringeCase
-      #TODO RMC Stethoscope
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -181,7 +182,7 @@
     - CMSynthGraft
     - RMCFlashlightPen
     - RMCSyringeCase
-      #TODO RMC Stethoscope
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
