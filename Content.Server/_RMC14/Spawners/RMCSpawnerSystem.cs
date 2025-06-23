@@ -22,6 +22,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
     [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
+    private readonly Dictionary<EntProtoId, List<Entity<ItemPoolSpawnerComponent>>> _itemPools = new();
     private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
 
     private int _maxCorpses;
@@ -85,6 +86,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
     public override void Update(float frameTime)
     {
         _spawners.Clear();
+        _itemPools.Clear();
         _corpseSpawners.Clear();
 
         var roundDuration = _gameTicker.RoundDuration();
@@ -121,30 +123,61 @@ public sealed class RMCSpawnerSystem : EntitySystem
             _spawners.GetOrNew(comp.Id).Add((uid, comp));
         }
 
-        if (_spawners.Count == 0)
-            return;
-
-        var players = _gameTicker.PlayersJoinedRoundNormally;
-        foreach (var spawners in _spawners.Values)
+        if (_spawners.Count > 0)
         {
-            _random.Shuffle(spawners);
-
-            var spawned = 0;
-            foreach (var spawner in spawners)
+            var players = _gameTicker.PlayersJoinedRoundNormally;
+            foreach (var spawners in _spawners.Values)
             {
-                var coordinates = _transform.ToMapCoordinates(spawner.Owner.ToCoordinates());
-                QueueDel(spawner);
+                _random.Shuffle(spawners);
 
-                var max = Math.Max(1, players / spawner.Comp.Ratio);
-                if (max <= spawned)
-                    continue;
-
-                foreach (var spawn in spawner.Comp.Prototypes)
+                var spawned = 0;
+                foreach (var spawner in spawners)
                 {
-                    Spawn(spawn, coordinates);
-                }
+                    var coordinates = _transform.ToMapCoordinates(spawner.Owner.ToCoordinates());
+                    QueueDel(spawner);
 
-                spawned++;
+                    var max = Math.Max(1, players / spawner.Comp.Ratio);
+                    if (max <= spawned)
+                        continue;
+
+                    foreach (var spawn in spawner.Comp.Prototypes)
+                    {
+                        Spawn(spawn, coordinates);
+                    }
+
+                    spawned++;
+                }
+            }
+        }
+
+        var itemPools = EntityQueryEnumerator<ItemPoolSpawnerComponent>();
+        while (itemPools.MoveNext(out var uid, out var comp))
+        {
+            _itemPools.GetOrNew(comp.Id).Add((uid, comp));
+        }
+
+        if (_itemPools.Count > 0)
+        {
+            foreach (var items in _itemPools.Values)
+            {
+                _random.Shuffle(items);
+
+                var spawned = 0;
+                foreach (var item in items)
+                {
+                    var coordinates = _transform.ToMapCoordinates(item.Owner.ToCoordinates());
+                    QueueDel(item);
+
+                    if (item.Comp.Quota <= spawned)
+                        continue;
+
+                    foreach (var spawn in item.Comp.Prototypes)
+                    {
+                        Spawn(spawn, coordinates);
+                    }
+
+                    spawned++;
+                }
             }
         }
     }
