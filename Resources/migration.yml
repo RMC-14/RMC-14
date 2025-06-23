@@ -1165,3 +1165,6 @@ DrinkWineBottleFull: RMCDrinkAlcoholPurpleWine
 DrinkVodkaBottleFull: RMCDrinkAlcoholVodka
 DrinkVermouthBottleFull: RMCDrinkAlcoholVermouth
 DrinkSakeBottleFull: RMCDrinkAlcoholSake
+
+# 2025-06-24
+ClothingNeckStethoscope: RMCStethoscope

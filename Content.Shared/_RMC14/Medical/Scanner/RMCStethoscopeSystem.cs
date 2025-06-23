@@ -1,5 +1,9 @@
+using System.Linq;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
@@ -14,32 +18,40 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCStethoscopeComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<RMCStethoscopeComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<RMCStethoscopeComponent, GetVerbsEvent<ExamineVerb>>(OnGetExamineVerbs);
+        SubscribeLocalEvent<RMCStethoscopeComponent, InteractUsingEvent>(OnStethoscopeTarget);
+        SubscribeLocalEvent<RMCStethoscopeComponent, GetVerbsEvent<ExamineVerb>>(OnStethoscopeVerbExamine);
     }
 
-    private void OnGetExamineVerbs(EntityUid uid, RMCStethoscopeComponent comp, GetVerbsEvent<ExamineVerb> args)
+    private void OnStethoscopeVerbExamine(EntityUid uid, RMCStethoscopeComponent comp, GetVerbsEvent<ExamineVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract)
+        if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(uid))
             return;
-        if (!IsInHandOrWornBy(args.User, uid))
-            return;
-        var scanResult = GetStethoscopeScanResult(args.User, args.Target);
-        _examine.AddDetailedExamineVerb(args, comp, scanResult,
-            Loc.GetString("stethoscope-verb-examine"),
+
+        var examineMarkup = GetStethoscopeResults(args.Target);
+
+        _examine.AddDetailedExamineVerb(args,
+            component,
+            examineMarkup,
+            Loc.GetString("rmc-stethoscope-verb-text"),
             "/Textures/Interface/VerbIcons/outfit.svg",
-            Loc.GetString("stethoscope-verb-examine-tooltip"));
+            Loc.GetString("rmc-stethoscope-verb-message"));
     }
 
-    private bool IsInHandOrWornBy(EntityUid user, EntityUid stethoscope)
+    private void OnStethoscopeTarget(EntityUid uid, RMCStethoscopeComponent comp, InteractUsingEvent args)
     {
-        // TODO: Implement logic to check if stethoscope is in user's hand or worn (neck slot)
-        // For now, always return true for demonstration
-        return true;
+        if (args.Handled)
+            return;
+        ShowStethoPopup(args.User, args.Target);
+        args.Handled = true;
     }
 
-    private FormattedMessage GetStethoscopeScanResult(EntityUid user, EntityUid target)
+    private void ShowStethoPopup(EntityUid user, EntityUid target)
+    {
+        var scanResult = GetStethoscopeResults(target);
+        _popup.PopupClient(scanResult.ToMarkup(), target, user);
+    }
+
+    private FormattedMessage GetStethoscopeResults(EntityUid target)
     {
         var totalHealth = GetTotalHealth(target);
         var msg = new FormattedMessage();
@@ -54,45 +66,22 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         return msg;
     }
 
-    private int GetTotalHealth(EntityUid target)
+    private int GetTotalHealth(EntityUid target)//AAAAAAAAAAAAA
     {
-        // TODO: Replace with actual health component logic
-        // For demonstration, return a placeholder value
-        // Example: if (TryComp<DamageableComponent>(target, out var damage)) { ... }
-        return 100; // Placeholder: always healthy
-    }
-
-    private void OnExamined(EntityUid uid, RMCStethoscopeComponent comp, ExaminedEvent args)
-    {
-        if (args.IsInDetailsRange)
+        // Try to get the damage and thresholds components
+        if (!TryComp<DamageableComponent>(target, out var damage) ||
+            !TryComp<MobThresholdsComponent>(target, out var thresholds))
         {
-            ShowScanMessageBox(args.Examiner, args.Examined);
+            // If missing, assume healthy
+            return 100;
         }
-    }
 
-    private void OnInteractUsing(EntityUid uid, RMCStethoscopeComponent comp, InteractUsingEvent args)
-    {
-        if (args.Handled)
-            return;
-        ShowScanPopup(args.User, args.Target);
-        args.Handled = true;
-    }
-
-    private void ShowScanMessageBox(EntityUid user, EntityUid target)
-    {
-        var scanResult = GetStethoscopeScanResult(user, target);
-        _examine.AddDetailedExamineVerb(
-            new GetVerbsEvent<ExamineVerb>(target, user, true, true),
-            null!, // component is not needed for direct message box
-            scanResult,
-            Loc.GetString("stethoscope-verb-examine"),
-            "/Textures/Interface/VerbIcons/outfit.svg",
-            Loc.GetString("stethoscope-verb-examine-tooltip"));
-    }
-
-    private void ShowScanPopup(EntityUid user, EntityUid target)
-    {
-        var scanResult = GetStethoscopeScanResult(user, target);
-        _popup.PopupClient(scanResult.ToMarkup(), target, user);
+        // Calculate total damage
+        var totalDamage = damage.Damage.Total;
+        // Find the highest threshold
+        var maxThreshold = thresholds.Thresholds.Count > 0 ? (float)thresholds.Thresholds.Keys.Max() : 100f;
+        // Clamp and invert to get a health percentage
+        var healthPercent = 100 - (int)MathF.Min((float)totalDamage / maxThreshold * 100, 100);
+        return healthPercent;
     }
 }
