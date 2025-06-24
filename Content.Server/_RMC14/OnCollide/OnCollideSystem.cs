@@ -1,4 +1,5 @@
 using Content.Server.Chat.Systems;
+using Content.Server._RMC14.Emote;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat.Prototypes;
@@ -8,7 +9,7 @@ namespace Content.Server._RMC14.OnCollide;
 
 public sealed class OnCollideSystem : SharedOnCollideSystem
 {
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly RMCEmoteSystem _rmcEmotes = default!;
 
     protected override void DoEmote(Entity<DamageOnCollideComponent> ent, EntityUid other)
     {
@@ -23,6 +24,6 @@ public sealed class OnCollideSystem : SharedOnCollideSystem
         else if (HasComp<XenoComponent>(other))
             return;
 
-        _chat.TryEmoteWithChat(other, emote);
+        _rmcEmotes.TryEmoteWithChat(other, emote);
     }
 }
