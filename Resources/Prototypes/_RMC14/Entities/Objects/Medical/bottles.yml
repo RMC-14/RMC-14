@@ -196,6 +196,7 @@
 - type: entity
   parent: CMBottleFilled
   id: RMCBottleAntiZed
+  suffix: DO NOT MAP
   name: "'Pathogen' cure bottle"
   description: The bottle has a biohazard symbol on the front, and has a label, designating its use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".
   components:

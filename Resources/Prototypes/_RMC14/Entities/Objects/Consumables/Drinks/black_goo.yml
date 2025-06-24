@@ -36,7 +36,7 @@
 - type: entity
   parent: RMCBlackGooGlass
   id: RMCBlackGooGlassFull
-  suffix: full
+  suffix: DO NOT MAP, full
   components:
   - type: SolutionContainerManager
     solutions:
@@ -49,7 +49,7 @@
 - type: entity
   parent: RMCBlackGooGlass
   id: RMCBlackGooGlassAntiZedFull
-  suffix: AntiZed, full
+  suffix: DO NOT MAP, AntiZed, full
   name: even stranger bottle
   description: A bottle of blue labeled CURE...
   components:

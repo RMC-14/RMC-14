@@ -183,7 +183,7 @@
 - type: entity
   parent: CMPill
   id: RMCPillAntiZed
-  suffix: AntiZed
+  suffix: DO NOT MAP, AntiZed
   components:
   - type: SolutionContainerManager
     solutions:
