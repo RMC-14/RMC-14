@@ -18,6 +18,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
     [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
+
     private TimeSpan _bronzeTime;
     private TimeSpan _silverTime;
     private TimeSpan _goldTime;
@@ -47,7 +48,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         {
             return;
         }
-        
+
         if (job.Medals is not { } medals)
             return;
             
