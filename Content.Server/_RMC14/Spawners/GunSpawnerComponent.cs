@@ -20,7 +20,7 @@ public sealed partial class GunSpawnerComponent : Component
     public float ChanceToSpawn = 1.0f;
 
     [DataField]
-    public Dictionary<EntProtoId, List<EntProtoId>> Prototypes { get; set; } = new();
+    public List<(EntProtoId Gun, EntProtoId Ammo)> Prototypes { get; set; } = new();
 
     [DataField]
     public bool DeleteAfterSpawn = true;

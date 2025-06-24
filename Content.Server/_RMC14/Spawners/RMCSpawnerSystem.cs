@@ -79,9 +79,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         if (ent.Comp.Prototypes.Count <= 0)
             return;
 
-        var randomEntry = _random.Pick(ent.Comp.Prototypes);
-        var gunID = randomEntry.Key;
-        var ammoID = _random.Pick(randomEntry.Value); // Pick a random magazine type from the list
+        var (gunID, ammoID) = _random.Pick(ent.Comp.Prototypes);
 
         var entitesToSpawn = new Dictionary<EntProtoId, int>()
         {
