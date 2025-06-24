@@ -37,6 +37,7 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.NightVision;
 
 namespace Content.Server.Zombies;
 
@@ -201,6 +202,11 @@ public sealed partial class ZombieSystem
 
         Dirty(target, melee);
 
+        // RMC14 - Give them night vision
+        var nightvisComp = EnsureComp<NightVisionComponent>(target);
+
+        Dirty(target, nightvisComp);
+
         //The zombie gets the assigned damage weaknesses and strengths
         _damageable.SetDamageModifierSetId(target, "Zombie");
 
@@ -231,7 +237,7 @@ public sealed partial class ZombieSystem
         _mobState.ChangeMobState(target, MobState.Alive);
 
         _faction.ClearFactions(target, dirty: false);
-        _faction.AddFaction(target, "Zombie");
+        _faction.AddFaction(target, "RMCDumb"); // RMC14
 
         //gives it the funny "Zombie ___" name.
         _nameMod.RefreshNameModifiers(target);
