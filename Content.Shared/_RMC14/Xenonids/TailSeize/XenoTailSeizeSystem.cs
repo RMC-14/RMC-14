@@ -64,6 +64,7 @@ public sealed class XenoTailSeizeSystem : EntitySystem
 
         if (!_hook.TryHookTarget((args.Shooter.Value, hookComp), args.Target))
             return;
+
         _pulling.TryStopAllPullsFromAndOn(args.Target);
 
         var origin = _transform.GetMoverCoordinates(args.Shooter.Value);
@@ -74,7 +75,7 @@ public sealed class XenoTailSeizeSystem : EntitySystem
 
         var knockBackDistance = -Math.Max(dis - 2, 0.5f); //Lands right in front
         _obstacleSlamming.MakeImmune(args.Target);
-        _size.KnockBack(args.Shooter.Value, mapCoords, knockBackDistance, knockBackDistance, 10);
+        _size.KnockBack(args.Target, mapCoords, knockBackDistance, knockBackDistance, 10);
         EnsureComp<VictimTailSeizedComponent>(args.Target);
     }
 
