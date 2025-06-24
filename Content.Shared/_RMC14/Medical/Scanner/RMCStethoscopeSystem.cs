@@ -30,10 +30,10 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         var examineMarkup = GetStethoscopeResults(args.Target);
 
         _examine.AddDetailedExamineVerb(args,
-            component,
+            comp,
             examineMarkup,
             Loc.GetString("rmc-stethoscope-verb-text"),
-            "/Textures/Interface/VerbIcons/outfit.svg",
+            "/Textures/_RMC14/Objects/Medical/stethoscope.rsi/icon.png",
             Loc.GetString("rmc-stethoscope-verb-message"));
     }
 
@@ -48,40 +48,53 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     private void ShowStethoPopup(EntityUid user, EntityUid target)
     {
         var scanResult = GetStethoscopeResults(target);
-        _popup.PopupClient(scanResult.ToMarkup(), target, user);
+        var message = scanResult.ToMarkup();
+        _popup.PopupClient(message, target, user);
     }
 
     private FormattedMessage GetStethoscopeResults(EntityUid target)
     {
-        var totalHealth = GetTotalHealth(target);
+        var totalHealth = GetPercentHealth(target);
         var msg = new FormattedMessage();
-        if (totalHealth >= 90)
-            msg.AddMarkupOrThrow("[color=green]The patient appears to be in excellent health.[/color]");
-        else if (totalHealth >= 60)
-            msg.AddMarkupOrThrow("[color=yellow]The patient has some minor injuries.[/color]");
-        else if (totalHealth >= 30)
-            msg.AddMarkupOrThrow("[color=orange]The patient is in poor condition.[/color]");
-        else
-            msg.AddMarkupOrThrow("[color=red]The patient is in critical condition![/color]");
+        if (totalHealth == null)
+        {
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-nothing"));
+        }
+        else if (totalHealth >= 85.0f)
+        {
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-normal"));
+        }
+        else if (totalHealth >= 62.5f)
+        {
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy"));
+        }
+        else if (totalHealth >= 25.0f)
+        {
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-hyper"));
+        }
+        else if (totalHealth >= 1.0f)
+        {
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-irregular"));
+        }
+        else if (totalHealth >= 0.0f)
+        {
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-dead"));
+        }
         return msg;
     }
 
-    private int GetTotalHealth(EntityUid target)//AAAAAAAAAAAAA
+    private float? GetPercentHealth(EntityUid target)
     {
-        // Try to get the damage and thresholds components
         if (!TryComp<DamageableComponent>(target, out var damage) ||
             !TryComp<MobThresholdsComponent>(target, out var thresholds))
         {
-            // If missing, assume healthy
-            return 100;
+            return null;
         }
-
-        // Calculate total damage
-        var totalDamage = damage.Damage.Total;
-        // Find the highest threshold
+        var totalDamage = damage.Damage.GetTotal().Float();
         var maxThreshold = thresholds.Thresholds.Count > 0 ? (float)thresholds.Thresholds.Keys.Max() : 100f;
-        // Clamp and invert to get a health percentage
-        var healthPercent = 100 - (int)MathF.Min((float)totalDamage / maxThreshold * 100, 100);
+        var healthPercent = 100.0f - MathF.Min(totalDamage / maxThreshold * 100.0f, 100.0f);
+        if (healthPercent > 100.0f)
+            healthPercent = 100.0f;
         return healthPercent;
     }
 }
