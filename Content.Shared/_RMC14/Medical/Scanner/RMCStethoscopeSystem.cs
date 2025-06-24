@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -14,6 +15,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     public override void Initialize()
     {
@@ -22,13 +24,19 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         SubscribeLocalEvent<RMCStethoscopeComponent, GetVerbsEvent<ExamineVerb>>(OnStethoscopeVerbExamine);
     }
 
-    private void OnStethoscopeVerbExamine(EntityUid uid, RMCStethoscopeComponent comp, GetVerbsEvent<ExamineVerb> args)
+    private void OnStethoscopeTarget(EntityUid uid, RMCStethoscopeComponent comp, ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+            return;
+        ShowStethoPopup(args.User, args.Target);
+        args.Handled = true;
+    }
+
+    private void OnStethoscopeVerbExamine(EntityUid uid, RMCStethoscopeComponent comp, ref GetVerbsEvent<ExamineVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(uid))
             return;
-
         var examineMarkup = GetStethoscopeResults(args.Target);
-
         _examine.AddDetailedExamineVerb(args,
             comp,
             examineMarkup,
@@ -37,28 +45,28 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             Loc.GetString("rmc-stethoscope-verb-message"));
     }
 
-    private void OnStethoscopeTarget(EntityUid uid, RMCStethoscopeComponent comp, InteractUsingEvent args)
-    {
-        if (args.Handled)
-            return;
-        ShowStethoPopup(args.User, args.Target);
-        args.Handled = true;
-    }
-
     private void ShowStethoPopup(EntityUid user, EntityUid target)
     {
-        var scanResult = GetStethoscopeResults(target);
-        var message = scanResult.ToMarkup();
-        _popup.PopupClient(message, target, user);
+        var scanResult = GetStethoscopeResults(target, user);
+        var popupMessage = Loc.GetString("rmc-stethoscope-verb-use", ("target", Name(target)), ("user", Name(user)));
+        _popup.PopupClient(popupMessage, target, user);
+        _popup.PopupEntity(scanResult.ToString(), target, user);
     }
 
-    private FormattedMessage GetStethoscopeResults(EntityUid target)
+    private FormattedMessage GetStethoscopeResults(EntityUid target, EntityUid? user = null)
     {
-        var totalHealth = GetPercentHealth(target);
         var msg = new FormattedMessage();
+        if (user != null && !_skills.HasSkill(user.Value, "Medical", 2))
+        {
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-unskilled"));
+            return msg;
+        }
+        var totalHealth = GetPercentHealth(target);
+        var possessivePronoun = Loc.GetString("zzzz-possessive-pronoun", ("ent", target));
+        var subjectPronoun = Loc.GetString("zzzz-subject-pronoun", ("ent", target));
         if (totalHealth == null)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-nothing"));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-nothing", (possessivePronoun, possessivePronoun)));
         }
         else if (totalHealth >= 85.0f)
         {
@@ -66,7 +74,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         }
         else if (totalHealth >= 62.5f)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy"));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy", (subjectPronoun, subjectPronoun)));
         }
         else if (totalHealth >= 25.0f)
         {
@@ -74,7 +82,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         }
         else if (totalHealth >= 1.0f)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-irregular"));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-irregular", (subjectPronoun, subjectPronoun)));
         }
         else if (totalHealth >= 0.0f)
         {
