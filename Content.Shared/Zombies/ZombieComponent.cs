@@ -110,7 +110,7 @@ public sealed partial class ZombieComponent : Component
     /// A multiplier applied to <see cref="PassiveHealing"/> when the entity is in critical condition.
     /// </summary>
     [DataField("passiveHealingCritMultiplier")]
-    public float PassiveHealingCritMultiplier = 5f; // RMC14
+    public float PassiveHealingCritMultiplier = 1.5f; // RMC14
 
     /// <summary>
     /// Healing given when a zombie bites a living being.
