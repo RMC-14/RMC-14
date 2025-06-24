@@ -10,7 +10,7 @@
         maxVol: 100
   - type: Drink
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/black_goo.rsi
+    sprite: _RMC14/Objects/Medical/black_goo.rsi
     layers:
       - state: icon-0
       - map: ["enum.SolutionContainerLayers.Fill"]
@@ -45,3 +45,33 @@
         reagents:
         - ReagentId: RMCBlackGoo
           Quantity: 100
+
+- type: entity
+  parent: RMCBlackGooGlass
+  id: RMCBlackGooGlassAntiZedFull
+  suffix: AntiZed, full
+  name: even stranger bottle
+  description: A bottle of blue labeled CURE...
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCAntiZed
+          Quantity: 100
+
+- type: entity
+  parent: RMCBeakerSmallLabelled
+  id: RMCBeakerSmallLabelledAntiZedFull
+  suffix: AntiZed, full
+  name: "'Pathogen' cure bottle"
+  description: The bottle has a biohazard symbol on the front, and has a label, designating its use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCAntiZed
+          Quantity: 30
