@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: RMCMedalBase
   name: medal
@@ -155,6 +155,26 @@
   name: amethyst service medal
   description: A mythical amethyst medal awarded for a marine's service within the UNMC; such medals are hand-given by UNMC High Command directly to a marine. It signifies the unreasonable amount of time a marine has spent in the line of duty.
 
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalPrismatic
+  name: prismatic medal
+  description: A mythical prismatic medal, only able to be handed out by High Command due to especially special circumstances.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/prismatic.rsi
+    state: icon
+  - type: PlaytimeMedal
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/prismatic.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalPrismatic
+  id: RMCMedalPrismaticService
+  name: prismatic service medal
+  description: A legendary prismatic medal awarded for a marine's service within the UNMC, Whom this is awarded may be a god walking amongst mere mortals. It signifies the nigh on impossible amount of time a marine has spent in the line of duty.
+
 # Civilian Ribbons 
 
 - type: entity
@@ -296,7 +316,28 @@
   id: RMCMedalRibbonAmethystService
   name: amethyst award ribbon
   description: A mythical amethyst ribbon awarded to civilians for going far above and beyond in UNMC-sponsored events. Such awards require unreasonable amounts of time and dedication to the organization to achieve.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalRibbonPrismatic
+  name: Prismatic ribbon
+  description: An prismatic ribbon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/prismatic_ribbon.rsi
+    state: icon
+  - type: PlaytimeMedal
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/prismatic_ribbon.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalRibbonPrismatic
+  id: RMCMedalRibbonPrismaticService
+  name: prismatic award ribbon
+  description: A legendary prismatic ribbon awarded to civilians, Whom may be a god walking amongst mere mortals. Such awards require a nigh on impossible amount of time and dedication to the organization to achieve.
   
+   
   # Liaison Medals
 - type: entity
   parent: RMCMedalBase
@@ -377,5 +418,6 @@
   id: RMCMedalPlatinumNametagService
   name: executive specialist name badge
   description: An engraved gold-and-black badge, containing the wearer's name, rank, and department. The highest rank most executives can reach within their lifetimes, it signifies ones influence, skill, and importance to the Weston-Yamada Corporation.
+
 
 
