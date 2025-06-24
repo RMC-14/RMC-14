@@ -32,6 +32,7 @@
         RMCSkillJtac: 3
         RMCSkillLeadership: 2
         RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
       # TODO RMC14 add English, russian, Chinese and Japanese languages
     - type: MarineOrders
     - type: SquadArmorWearer
