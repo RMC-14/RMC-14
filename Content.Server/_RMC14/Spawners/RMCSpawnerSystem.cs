@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Server.GameTicking;
 using Content.Server.Humanoid.Systems;
 using Content.Shared._RMC14.CCVar;
@@ -5,6 +6,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -34,6 +36,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
+        SubscribeLocalEvent<GunSpawnerComponent, MapInitEvent>(OnGunSpawnMapInit);
         SubscribeLocalEvent<RandomTimedDespawnComponent, MapInitEvent>(OnTimedDespawnMapInit);
 
         Subs.CVar(_config, RMCCVars.RMCSpawnerMaxCorpses, v => _maxCorpses = v, true);
@@ -68,13 +71,47 @@ public sealed class RMCSpawnerSystem : EntitySystem
         }
     }
 
+    private void OnGunSpawnMapInit(Entity<GunSpawnerComponent> ent, ref MapInitEvent args)
+    {
+        if (!_random.Prob(ent.Comp.ChanceToSpawn))
+            return;
+
+        if (ent.Comp.Prototypes.Count <= 0)
+            return;
+
+        var randomEntry = _random.Pick(ent.Comp.Prototypes);
+        var gunID = randomEntry.Key;
+        var ammoID = _random.Pick(randomEntry.Value); // Pick a random magazine type from the list
+
+        var entitesToSpawn = new Dictionary<EntProtoId, int>()
+        {
+            [gunID] = 1,
+            [ammoID] = _random.Next(ent.Comp.MinMagazines, ent.Comp.MaxMagazines)
+        };
+
+        foreach ((var protoID, var amount) in entitesToSpawn)
+        {
+            for (var i = 0; i < amount; i++) // spawn in the amount of entities
+            {
+                var offset = ent.Comp.Offset;
+                var xOffset = _random.NextFloat(-offset, offset);
+                var yOffset = _random.NextFloat(-offset, offset); // Offset it randomly
+                var coordinates = _transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Offset(new Vector2(xOffset, yOffset));
+
+                Spawn(protoID, coordinates);
+            }
+        }
+
+        if (ent.Comp.DeleteAfterSpawn)
+            QueueDel(ent.Owner);
+    }
     private void OnTimedDespawnMapInit(Entity<RandomTimedDespawnComponent> ent, ref MapInitEvent args)
     {
         var time = ent.Comp.Min;
         if (ent.Comp.Max > TimeSpan.Zero)
             time = _random.Next(ent.Comp.Min, ent.Comp.Max + TimeSpan.FromSeconds(1));
 
-        EnsureComp<TimedDespawnComponent>(ent).Lifetime = (float) time.TotalSeconds;
+        EnsureComp<TimedDespawnComponent>(ent).Lifetime = (float)time.TotalSeconds;
     }
 
     public void StartDespawnOnLanding(Entity<TimedDespawnOnLandingComponent> landing)
