@@ -1696,6 +1696,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMap = planet;
     }
 
+    public void SetCustomOperationName(string customname)
+    {
+        OperationName = customname;
+    }
+
     private void StartPlanetVote()
     {
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
@@ -1779,6 +1784,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private string GetRandomOperationName()
     {
+        if (OperationName != null)
+            return OperationName;
+
         var name = string.Empty;
         if (_operationNames.Count > 0)
             name += $"{_random.Pick(_operationNames)} ";
