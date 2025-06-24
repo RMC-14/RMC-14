@@ -37,7 +37,8 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
-using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.NightVision; // RMC14
+using Content.Shared._RMC14.Marines.Orders; // RMC14
 
 namespace Content.Server.Zombies;
 
@@ -111,6 +112,7 @@ public sealed partial class ZombieSystem
         RemComp<ReproductivePartnerComponent>(target);
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
+        RemComp<MarineOrdersComponent>(target); // RMC14
 
         //funny voice - RMC14, Different accent
         var accentType = "RMCZombie";
