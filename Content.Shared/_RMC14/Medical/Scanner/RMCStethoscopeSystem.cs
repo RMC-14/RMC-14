@@ -60,7 +60,6 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     {
         if (args.Handled)
             return;
-        // args.Target is the entity being scanned
         ShowStethoPopup(args.User, args.Target);
         args.Handled = true;
     }
@@ -70,7 +69,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         var scanResult = GetStethoscopeResults(target, user);
         var popupMessage = Loc.GetString("rmc-stethoscope-verb-use", ("target", Name(target)), ("user", Name(user)));
         _popup.PopupClient(popupMessage, target, user);
-        _popup.PopupEntity(scanResult.ToString(), target, user);
+        _examine.SendExamineTooltip(user, target, scanResult, false, true);
     }
 
     private FormattedMessage GetStethoscopeResults(EntityUid target, EntityUid? user = null)
