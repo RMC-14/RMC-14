@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
@@ -20,29 +21,48 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCStethoscopeComponent, InteractUsingEvent>(OnStethoscopeTarget);
-        SubscribeLocalEvent<RMCStethoscopeComponent, GetVerbsEvent<ExamineVerb>>(OnStethoscopeVerbExamine);
+        SubscribeLocalEvent<RMCStethoscopeComponent, InteractUsingEvent>(OnStethoscopeUsed);
+        SubscribeLocalEvent< GetVerbsEvent<ExamineVerb> >(OnGlobalStethoscopeExamineVerb, after: new[] { typeof(SharedPopupSystem) });
     }
 
-    private void OnStethoscopeTarget(EntityUid uid, RMCStethoscopeComponent comp, ref InteractUsingEvent args)
+    // Add the stethoscope examine verb if the user is holding the stethoscope
+    private void OnGlobalStethoscopeExamineVerb(ref GetVerbsEvent<ExamineVerb> args)
     {
-        if (args.Handled)
+        if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(args.Target))
             return;
-        ShowStethoPopup(args.User, args.Target);
-        args.Handled = true;
-    }
-
-    private void OnStethoscopeVerbExamine(EntityUid uid, RMCStethoscopeComponent comp, ref GetVerbsEvent<ExamineVerb> args)
-    {
-        if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(uid))
+        // Check if the user is holding a stethoscope
+        if (!IsHoldingStethoscope(args.User, out var stethoscope))
             return;
-        var examineMarkup = GetStethoscopeResults(args.Target);
+        var examineMarkup = GetStethoscopeResults(args.Target, args.User);
         _examine.AddDetailedExamineVerb(args,
-            comp,
+            Comp<RMCStethoscopeComponent>(stethoscope),
             examineMarkup,
             Loc.GetString("rmc-stethoscope-verb-text"),
             "/Textures/_RMC14/Objects/Medical/stethoscope.rsi/icon.png",
             Loc.GetString("rmc-stethoscope-verb-message"));
+    }
+
+    private bool IsHoldingStethoscope(EntityUid user, out EntityUid stethoscope)
+    {
+        stethoscope = EntityUid.Invalid;
+        if (!TryComp<HandsComponent>(user, out var hands))
+            return false;
+        var held = hands.ActiveHandEntity;
+        if (held != null && HasComp<RMCStethoscopeComponent>(held.Value))
+        {
+            stethoscope = held.Value;
+            return true;
+        }
+        return false;
+    }
+
+    private void OnStethoscopeUsed(EntityUid stethoscope, RMCStethoscopeComponent comp, ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+            return;
+        // args.Target is the entity being scanned
+        ShowStethoPopup(args.User, args.Target);
+        args.Handled = true;
     }
 
     private void ShowStethoPopup(EntityUid user, EntityUid target)
@@ -62,11 +82,9 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             return msg;
         }
         var totalHealth = GetPercentHealth(target);
-        var possessivePronoun = Loc.GetString("zzzz-possessive-pronoun", ("ent", target));
-        var subjectPronoun = Loc.GetString("zzzz-subject-pronoun", ("ent", target));
         if (totalHealth == null)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-nothing", (possessivePronoun, possessivePronoun)));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-nothing"));
         }
         else if (totalHealth >= 85.0f)
         {
@@ -74,7 +92,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         }
         else if (totalHealth >= 62.5f)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy", (subjectPronoun, subjectPronoun)));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy"));
         }
         else if (totalHealth >= 25.0f)
         {
@@ -82,7 +100,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         }
         else if (totalHealth >= 1.0f)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-irregular", (subjectPronoun, subjectPronoun)));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-irregular"));
         }
         else if (totalHealth >= 0.0f)
         {
