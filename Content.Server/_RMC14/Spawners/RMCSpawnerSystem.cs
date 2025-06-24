@@ -97,7 +97,6 @@ public sealed class RMCSpawnerSystem : EntitySystem
                 var xOffset = _random.NextFloat(-offset, offset);
                 var yOffset = _random.NextFloat(-offset, offset); // Offset it randomly
                 var coordinates = _transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Offset(new Vector2(xOffset, yOffset));
-
                 Spawn(protoID, coordinates);
             }
         }
@@ -105,6 +104,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         if (ent.Comp.DeleteAfterSpawn)
             QueueDel(ent.Owner);
     }
+
     private void OnTimedDespawnMapInit(Entity<RandomTimedDespawnComponent> ent, ref MapInitEvent args)
     {
         var time = ent.Comp.Min;
