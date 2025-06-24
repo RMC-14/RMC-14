@@ -60,18 +60,3 @@
         reagents:
         - ReagentId: RMCAntiZed
           Quantity: 100
-
-- type: entity
-  parent: RMCBeakerSmallLabelled
-  id: RMCBeakerSmallLabelledAntiZedFull
-  suffix: AntiZed, full
-  name: "'Pathogen' cure bottle"
-  description: The bottle has a biohazard symbol on the front, and has a label, designating its use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".
-  components:
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 30
-        reagents:
-        - ReagentId: RMCAntiZed
-          Quantity: 30

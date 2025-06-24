@@ -701,7 +701,7 @@
 # Zombie Cure
 
 - type: reagent
-  parent: [ CMReagent, Ambuzol ]
+  parent: [ CMReagent, AmbuzolPlus ]
   id: RMCAntiZed
   name: reagent-name-rmcantized
   desc: reagent-desc-rmcantized
@@ -712,6 +712,7 @@
     Medicine:
       effects:
         - !type:CureZombieInfection
+          innoculate: true
           conditions:
             - !type:ReagentThreshold
-              min: 10
+              min: 5

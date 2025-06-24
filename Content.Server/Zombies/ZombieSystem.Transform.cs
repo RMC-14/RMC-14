@@ -39,6 +39,7 @@ using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 using Content.Shared._RMC14.NightVision; // RMC14
 using Content.Shared._RMC14.Marines.Orders; // RMC14
+using Content.Shared._RMC14.Weapons.Ranged.Whitelist; // RMC14
 
 namespace Content.Server.Zombies;
 
@@ -113,6 +114,8 @@ public sealed partial class ZombieSystem
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
         RemComp<MarineOrdersComponent>(target); // RMC14
+        RemComp<ScoutWhitelistComponent>(target); // RMC14
+        RemComp<SniperWhitelistComponent>(target); // RMC14
 
         //funny voice - RMC14, Different accent
         var accentType = "RMCZombie";
