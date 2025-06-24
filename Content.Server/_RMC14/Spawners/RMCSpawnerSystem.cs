@@ -73,9 +73,6 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
     private void OnGunSpawnMapInit(Entity<GunSpawnerComponent> ent, ref MapInitEvent args)
     {
-        if (!_random.Prob(ent.Comp.ChanceToSpawn))
-            return;
-
         if (ent.Comp.Prototypes.Count <= 0)
             return;
 
@@ -87,15 +84,18 @@ public sealed class RMCSpawnerSystem : EntitySystem
             [ammoID] = _random.Next(ent.Comp.MinMagazines, ent.Comp.MaxMagazines)
         };
 
-        foreach ((var protoID, var amount) in entitesToSpawn)
+        if (_random.Prob(ent.Comp.ChanceToSpawn))
         {
-            for (var i = 0; i < amount; i++) // spawn in the amount of entities
+            foreach ((var protoID, var amount) in entitesToSpawn)
             {
-                var offset = ent.Comp.Offset;
-                var xOffset = _random.NextFloat(-offset, offset);
-                var yOffset = _random.NextFloat(-offset, offset); // Offset it randomly
-                var coordinates = _transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Offset(new Vector2(xOffset, yOffset));
-                Spawn(protoID, coordinates);
+                for (var i = 0; i < amount; i++) // spawn in the amount of entities
+                {
+                    var offset = ent.Comp.Offset;
+                    var xOffset = _random.NextFloat(-offset, offset);
+                    var yOffset = _random.NextFloat(-offset, offset); // Offset it randomly
+                    var coordinates = _transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Offset(new Vector2(xOffset, yOffset));
+                    Spawn(protoID, coordinates);
+                }
             }
         }
 
