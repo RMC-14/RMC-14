@@ -1,4 +1,4 @@
-﻿using Content.Server.Hands.Systems;
+using Content.Server.Hands.Systems;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Ribbon;
@@ -22,19 +22,26 @@ public sealed class PlaytimeMedalSystem : EntitySystem
     private static readonly EntProtoId SilverMedal = "RMCMedalSilverService";
     private static readonly EntProtoId GoldMedal = "RMCMedalGoldService";
     private static readonly EntProtoId PlatinumMedal = "RMCMedalPlatinumService";
+    private static readonly EntProtoId RubyMedal = "RMCMedalRubyService";
     private static readonly EntProtoId EmeraldMedal = "RMCMedalEmeraldService";
+    private static readonly EntProtoId AmethystMedal = "RMCMedalAmethystService";
 
+    private static readonly EntProtoId BronzeRibbon = "RMCMedalRibbonBronzeService";
     private static readonly EntProtoId WhiteRibbon = "RMCMedalRibbonWhiteService";
     private static readonly EntProtoId YellowRibbon = "RMCMedalRibbonYellowService";
-    private static readonly EntProtoId RedRibbon = "RMCMedalRibbonRedService";
     private static readonly EntProtoId BlueRibbon = "RMCMedalRibbonBlueService";
+    private static readonly EntProtoId RedRibbon = "RMCMedalRibbonRedService";
     private static readonly EntProtoId EmeraldRibbon = "RMCMedalRibbonEmeraldService";
+    private static readonly EntProtoId AmethystRibbon = "RMCMedalRibbonAmethystService";
+
 
     private TimeSpan _bronzeTime;
     private TimeSpan _silverTime;
     private TimeSpan _goldTime;
     private TimeSpan _platinumTime;
+    private TimeSpan _rubyTime;
     private TimeSpan _emeraldTime;
+    private TimeSpan _amethystTime;
 
     public override void Initialize()
     {
@@ -45,7 +52,9 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _silverTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _goldTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _platinumTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeRubyMedalTimeHours, v => _rubyTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeEmeraldMedalTimeHours, v => _emeraldTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeAmethystMedalTimeHours, v => _amethystTime = TimeSpan.FromHours(v), true);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -63,21 +72,29 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         EntProtoId? medalId = null;
         if (HasComp<RMCRibbonComponent>(ev.Mob))
         {
-            if (time >= _emeraldTime)
+            if (time >= _amethystTime)
+                medalId = AmethystRibbon;
+            else if (time >= _emeraldTime)
                 medalId = EmeraldRibbon;
+            else if (time >= _rubyTime)
+                medalId = RedRibbon;
             else if (time >= _platinumTime)
                 medalId = BlueRibbon;
             else if (time >= _goldTime)
-                medalId = RedRibbon;
-            else if (time >= _silverTime)
                 medalId = YellowRibbon;
-            else if (time >= _bronzeTime)
+            else if (time >= _silverTime)
                 medalId = WhiteRibbon;
+            else if (time >= _bronzeTime)
+                medalId = BronzeRibbon;
         }
         else
         {
-            if (time >= _emeraldTime)
+            if (time >= _amethystTime)
+                medalId = AmethystMedal;
+            else if (time >= _emeraldTime)
                 medalId = EmeraldMedal;
+            else if (time >= _rubyTime)
+                medalId = RubyMedal;
             else if (time >= _platinumTime)
                 medalId = PlatinumMedal;
             else if (time >= _goldTime)
