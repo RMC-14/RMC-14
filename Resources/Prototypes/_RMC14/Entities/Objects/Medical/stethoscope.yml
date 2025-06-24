@@ -7,10 +7,10 @@
   - type: Item
     size: Small
   - type: Sprite
-    sprite: Resources/Textures/_RMC14/Objects/Medical/stethoscope.rsi
+    sprite: /Textures/_RMC14/Objects/Medical/stethoscope.rsi
     state: icon
   - type: Clothing
-    sprite: Resources/Textures/_RMC14/Objects/Medical/stethoscope.rsi
+    sprite: /Textures/_RMC14/Objects/Medical/stethoscope.rsi
     quickEquip: true
     slots:
     - neck
