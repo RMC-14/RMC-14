@@ -21,6 +21,7 @@ using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Zombies;
+using Content.Shared._RMC14.Atmos; // RMC14
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -41,6 +42,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
+        [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!; // RMC14
 
         public const SlotFlags ProtectiveSlots =
             SlotFlags.FEET |
@@ -146,6 +148,10 @@ namespace Content.Server.Zombies
                 var multiplier = _mobState.IsCritical(uid, mobState)
                     ? comp.PassiveHealingCritMultiplier
                     : 1f;
+
+                // RMC14 - Stop healing if on fire
+                if (_rmcFlammable.IsOnFire(uid))
+                    return;
 
                 // Gradual healing for living zombies.
                 _damageable.TryChangeDamage(uid, comp.PassiveHealing * multiplier, true, false, damage);
@@ -264,6 +270,10 @@ namespace Content.Server.Zombies
                 }
                 else if (mobState.CurrentState == MobState.Alive) //heals when zombies bite live entities
                 {
+                    // RMC14 - Stop healing if on fire
+                    if (_rmcFlammable.IsOnFire(uid))
+                        return;
+
                     _damageable.TryChangeDamage(uid, component.HealingOnBite, true, false);
                 }
             }
