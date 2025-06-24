@@ -112,8 +112,8 @@ public sealed partial class ZombieSystem
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
 
-        //funny voice
-        var accentType = "zombie";
+        //funny voice - RMC14, Different accent
+        var accentType = "RMCZombie";
         if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
             accentType = accent.Accent;
 
