@@ -25,6 +25,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
     private static readonly EntProtoId RubyMedal = "RMCMedalRubyService";
     private static readonly EntProtoId EmeraldMedal = "RMCMedalEmeraldService";
     private static readonly EntProtoId AmethystMedal = "RMCMedalAmethystService";
+    private static readonly EntProtoId PrismaticMedal = "RMCMedalPrismaticService";
 
     private static readonly EntProtoId BronzeRibbon = "RMCMedalRibbonBronzeService";
     private static readonly EntProtoId WhiteRibbon = "RMCMedalRibbonWhiteService";
@@ -33,6 +34,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
     private static readonly EntProtoId RedRibbon = "RMCMedalRibbonRedService";
     private static readonly EntProtoId EmeraldRibbon = "RMCMedalRibbonEmeraldService";
     private static readonly EntProtoId AmethystRibbon = "RMCMedalRibbonAmethystService";
+    private static readonly EntProtoId PrismaticRibbon = "RMCMedalRibbonPrismaticService";
 
 
     private TimeSpan _bronzeTime;
@@ -42,6 +44,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
     private TimeSpan _rubyTime;
     private TimeSpan _emeraldTime;
     private TimeSpan _amethystTime;
+    private TimeSpan _prismaticTime;
 
     public override void Initialize()
     {
@@ -55,6 +58,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCPlaytimeRubyMedalTimeHours, v => _rubyTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeEmeraldMedalTimeHours, v => _emeraldTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeAmethystMedalTimeHours, v => _amethystTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimePrismaticMedalTimeHours, v => _prismaticTime = TimeSpan.FromHours(v), true);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -72,7 +76,9 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         EntProtoId? medalId = null;
         if (HasComp<RMCRibbonComponent>(ev.Mob))
         {
-            if (time >= _amethystTime)
+            if (time >= _prismaticTime)
+                medalId = PrismaticRibbon;
+            else if(time >= _amethystTime)
                 medalId = AmethystRibbon;
             else if (time >= _emeraldTime)
                 medalId = EmeraldRibbon;
@@ -89,7 +95,9 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         }
         else
         {
-            if (time >= _amethystTime)
+            if (time >= _prismaticTime)
+                medalId = PrismaticMedal;
+            else if (time >= _amethystTime)
                 medalId = AmethystMedal;
             else if (time >= _emeraldTime)
                 medalId = EmeraldMedal;
