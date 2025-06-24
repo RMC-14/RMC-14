@@ -208,9 +208,7 @@ public sealed partial class ZombieSystem
         Dirty(target, melee);
 
         // RMC14 - Give them night vision
-        var nightvisComp = EnsureComp<NightVisionComponent>(target);
-
-        Dirty(target, nightvisComp);
+        EnsureComp<NightVisionComponent>(target);
 
         //The zombie gets the assigned damage weaknesses and strengths
         _damageable.SetDamageModifierSetId(target, "Zombie");
