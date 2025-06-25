@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed sentinel scatter spit cooldown being too low (6 -> 7 seconds)
-    type: Fix
-  - message: Fixed sentinel paralyzing slash delay and stun amount. The delay is back
-      to 4 seconds (up from 3) and the stun is now 4 seconds (down from 5). Also it
-      now makes people jitter when it successfully hits.
-    type: Fix
-  id: 1386
-  time: '2025-02-28T03:06:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5759
-- author: Vermidia
-  changes:
   - message: Fixed mortars having infinite range. They now have a min range of 25,
       and max range of 75. Req also now starts with a kit for the mortar, which comes
       with mortar operator pamplets.
@@ -5222,5 +5211,13 @@
   id: 1887
   time: '2025-06-25T04:19:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6734
+- author: noctyrnal
+  changes:
+  - message: Added "Vessel Map" Monitors, which will display a zoomable map of the
+      ship with names.
+    type: Add
+  id: 1888
+  time: '2025-06-25T04:21:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6791
 Name: RMC14
 Order: -1
