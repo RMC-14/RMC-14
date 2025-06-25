@@ -98,10 +98,10 @@
     - WeaponRifleM16: RMCMagazineRifleM16
     - WeaponRifleM16: RMCMagazineRifleM16
     - WeaponRifleM16: RMCMagazineRifleM16
-    - WeaponRifleMAR40: RMCMagazineRifleMAR40 # TODO 2 MAR30 and 2 MAR40
     - WeaponRifleMAR40: RMCMagazineRifleMAR40
     - WeaponRifleMAR40: RMCMagazineRifleMAR40
-    - WeaponRifleMAR40: RMCMagazineRifleMAR40
+    - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
+    - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
     - WeaponRifleAR10: RMCMagazineRifleAR10
     # TODO /obj/item/weapon/gun/rifle/l42a/abr40
     - RMCWeaponRifleSSG45NoLockStripped: RMCMagazineRifleSSG45
