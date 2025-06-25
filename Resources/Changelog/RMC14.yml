@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Buttons to MP jacket, CO bomber jacket, and formal service jacket.
-    type: Add
-  - message: jackets not having the correct armor.
-    type: Fix
-  - message: CO berets not having camo.
-    type: Fix
-  id: 1390
-  time: '2025-03-01T11:04:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5760
-- author: Vermidia
-  changes:
-  - message: Fixed there being no delays between PB shots. There is now a 1.1 second
-      interval between when you PB anything, before you can PB again. Shots will just
-      register as normal shots until the delay is over.
-    type: Fix
-  - message: Fixed PBing not putting a gun on melee cooldown. Meleeing also puts a
-      gun on PB cooldown.
-    type: Fix
-  id: 1391
-  time: '2025-03-01T11:05:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5757
 - author: Vermidia
   changes:
   - message: Fixed m81 riot not accepting smoke nades.
@@ -5212,5 +5189,19 @@
   id: 1891
   time: '2025-06-25T04:28:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6745
+- author: t0wnshark
+  changes:
+  - message: Added black insulated gloves.
+    type: Add
+  id: 1892
+  time: '2025-06-25T04:29:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6706
+- author: noctyrnal
+  changes:
+  - message: The AEGIS OB for the Admin AEGIS event has received new sprites.
+    type: Tweak
+  id: 1893
+  time: '2025-06-25T04:30:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6703
 Name: RMC14
 Order: -1
