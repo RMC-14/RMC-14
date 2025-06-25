@@ -13,15 +13,18 @@ public sealed partial class LabelTextDialog : DefaultWindow
     private Vector2i _position;
     private bool _isEdit;
     private bool _needsFocus = false;
+
     public LabelTextDialog()
     {
         RobustXamlLoader.Load(this);
         SetupEventHandlers();
     }
+
     public LabelTextDialog(Vector2i position, string existingText = "") : this()
     {
         Initialize(position, existingText);
     }
+
     private void Initialize(Vector2i position, string existingText = "")
     {
         _position = position;
@@ -33,11 +36,13 @@ public sealed partial class LabelTextDialog : DefaultWindow
         TextEdit.CanKeyboardFocus = true;
         _needsFocus = true;
     }
+
     protected override void Opened()
     {
         base.Opened();
         _needsFocus = true;
     }
+
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
@@ -55,6 +60,7 @@ public sealed partial class LabelTextDialog : DefaultWindow
             _needsFocus = false;
         }
     }
+
     private void SetupEventHandlers()
     {
         OkButton.OnPressed += _ => HandleConfirm();
@@ -62,17 +68,20 @@ public sealed partial class LabelTextDialog : DefaultWindow
         DeleteButton.OnPressed += _ => HandleDelete();
         TextEdit.OnTextEntered += _ => HandleConfirm();
     }
+
     private void HandleConfirm()
     {
         string text = TextEdit.Text?.Trim() ?? string.Empty;
         OnLabelConfirmed?.Invoke(text);
         Close();
     }
+
     private void HandleDelete()
     {
         OnLabelDeleted?.Invoke();
         Close();
     }
+    
     public static void Show(Vector2i position, string existingText = "",
         Action<string>? onConfirmed = null, Action? onDeleted = null)
     {
