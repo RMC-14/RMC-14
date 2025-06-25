@@ -1297,7 +1297,7 @@
     - name: Uniform
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMHelmet: 1 }
+      choices: { CMUniform: 1 }
       entries:
       - id: CMJumpsuitBO
       - id: RMCJumpsuitASOBlack
@@ -1307,18 +1307,24 @@
     - name: Outer Wear
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMHelmet: 1 }
+      choices: { CMSuit: 1 }
       entries:
       - id: CMCoatASO
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
-    - name: Standard Equipment
+    - name: Gloves
+      jobs: 
+      - CMAuxiliarySupportOfficer
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
+    - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMHeadsetSeniorCommand
     - name: Bag
       jobs:
