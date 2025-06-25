@@ -1,7 +1,7 @@
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  name: MAR-40 battle rifle
   id: WeaponRifleMAR40
+  name: MAR-40 battle rifle
   description: A cheap, reliable assault rifle chambered in 7.62x39mm. Commonly found in the hands of criminals or mercenaries, or in the hands of the SPP or CLF.
   suffix: Filled
   components:
@@ -15,6 +15,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/mar40.rsi
   - type: Gun
+    burstCooldown: 0.1665
     shotsPerBurst: 4
     selectedMode: FullAuto
     availableModes:
@@ -36,7 +37,6 @@
     burstScatterMult: 3
     modifiers:
       Burst:
-        fireDelay: 0.1665
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
@@ -167,6 +167,34 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineMar50LMG
+  name: MAR drum magazine (7.62x39mm)
+  description: A 7.62x39mm drum magazine for the MAR-50 LMG.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineMar50LMG
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleMAR40
+    proto: RMCCartridgeRifleMAR40
+    capacity: 100
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar50.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+#  - type: RefillableByBulletBox No Bullet Box yet
+#    bulletType: RMCBoxBulletsRifle
 
 - type: entity
   parent: CMBaseCartridgeRifle
