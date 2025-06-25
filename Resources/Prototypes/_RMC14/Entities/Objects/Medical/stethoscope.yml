@@ -15,3 +15,4 @@
     slots:
     - neck
   - type: RMCStethoscope
+    sound: /Audio/Items/Medical/stethoscope.ogg

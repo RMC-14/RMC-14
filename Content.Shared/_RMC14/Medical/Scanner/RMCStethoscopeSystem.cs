@@ -5,9 +5,11 @@ using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.Scanner;
@@ -17,21 +19,34 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly InventorySystem _inventorySystem = default!;
+
+    private static readonly EntProtoId<SkillDefinitionComponent> MedicalSkill = "RMCSkillMedical";
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCStethoscopeComponent, InteractUsingEvent>(OnStethoscopeUsed);
-        SubscribeLocalEvent< GetVerbsEvent<ExamineVerb> >(OnGlobalStethoscopeExamineVerb, after: new[] { typeof(SharedPopupSystem) });
+        SubscribeLocalEvent<GetVerbsEvent<ExamineVerb>>(OnGlobalStethoscopeExamineVerb, after: new[] { typeof(SharedPopupSystem) });
+        SubscribeLocalEvent<RMCStethoscopeComponent, AfterInteractEvent>(OnStethoAfterInteract);
     }
 
-    // Add the stethoscope examine verb if the user is holding the stethoscope
-    private void OnGlobalStethoscopeExamineVerb(ref GetVerbsEvent<ExamineVerb> args)
+    private void OnStethoAfterInteract(EntityUid uid, RMCStethoscopeComponent comp, ref AfterInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+        if (!HasStethoscope(args.User, out _))
+            return;
+        if (args.Target == null)
+            return;
+        ShowStethoPopup(args.User, args.Target.Value);
+        args.Handled = true;
+    }
+
+    private void OnGlobalStethoscopeExamineVerb(GetVerbsEvent<ExamineVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(args.Target))
             return;
-        // Check if the user is holding a stethoscope
-        if (!IsHoldingStethoscope(args.User, out var stethoscope))
+        if (!HasStethoscope(args.User, out var stethoscope))
             return;
         var examineMarkup = GetStethoscopeResults(args.Target, args.User);
         _examine.AddDetailedExamineVerb(args,
@@ -42,7 +57,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             Loc.GetString("rmc-stethoscope-verb-message"));
     }
 
-    private bool IsHoldingStethoscope(EntityUid user, out EntityUid stethoscope)
+    private bool HasStethoscope(EntityUid user, out EntityUid stethoscope)
     {
         stethoscope = EntityUid.Invalid;
         if (!TryComp<HandsComponent>(user, out var hands))
@@ -53,45 +68,41 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             stethoscope = held.Value;
             return true;
         }
+        if (_inventorySystem.TryGetSlotEntity(user, "neck", out var neckEntity) && HasComp<RMCStethoscopeComponent>(neckEntity.Value))
+        {
+            stethoscope = neckEntity.Value;
+            return true;
+        }
         return false;
-    }
-
-    private void OnStethoscopeUsed(EntityUid stethoscope, RMCStethoscopeComponent comp, ref InteractUsingEvent args)
-    {
-        if (args.Handled)
-            return;
-        ShowStethoPopup(args.User, args.Target);
-        args.Handled = true;
     }
 
     private void ShowStethoPopup(EntityUid user, EntityUid target)
     {
         var scanResult = GetStethoscopeResults(target, user);
-        var popupMessage = Loc.GetString("rmc-stethoscope-verb-use", ("target", Name(target)), ("user", Name(user)));
-        _popup.PopupClient(popupMessage, target, user);
-        _examine.SendExamineTooltip(user, target, scanResult, false, true);
+        var popupText = scanResult.ToString();
+        _popup.PopupClient(Loc.GetString("rmc-stethoscope-verb-use", ("target", Name(target)), ("user", Name(user))) + "\n" + popupText, target, user);
     }
 
     private FormattedMessage GetStethoscopeResults(EntityUid target, EntityUid? user = null)
     {
+        var totalHealth = GetPercentHealth(target);
         var msg = new FormattedMessage();
-        if (user != null && !_skills.HasSkill(user.Value, "Medical", 2))
+        if (user != null && !_skills.HasSkill(user.Value, MedicalSkill, 2))
         {
             msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-unskilled"));
             return msg;
         }
-        var totalHealth = GetPercentHealth(target);
         if (totalHealth == null)
         {
             msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-nothing"));
         }
         else if (totalHealth >= 85.0f)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-normal"));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-normal", ("target", target)));
         }
         else if (totalHealth >= 62.5f)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy"));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy", ("target", target)));
         }
         else if (totalHealth >= 25.0f)
         {
@@ -99,7 +110,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         }
         else if (totalHealth >= 1.0f)
         {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-irregular"));
+            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-irregular", ("target", target)));
         }
         else if (totalHealth >= 0.0f)
         {
