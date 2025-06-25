@@ -10,9 +10,10 @@
   - ColonistEngi
   joinNotifyCrew: false
   startingGear: RMCGearForeconBase
-  hasIcon: false
+  hasIcon: true
   greeting: rmc-job-greeting-forecon
   playTimeTracker: RMCSurvivorForecon
+  spawnMenuRoleName: FORECON Survivor (Base)
   hidden: true
 
 - type: startingGear
@@ -36,10 +37,11 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # TODO durag and grey beanie
+    randomOutfits: # TODO durag
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
+    - [ RMCHeadBeanie ]
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]

@@ -29,10 +29,13 @@ public static class Identity
         var whitelistSystem = ent.System<EntityWhitelistSystem>();
         if (viewer != null &&
             ent.TryGetComponent(uid, out FixedIdentityComponent? fixedIdentity) &&
-            fixedIdentity.Name is { } name &&
+            fixedIdentity.Name is { } nameId &&
             whitelistSystem.IsWhitelistPass(fixedIdentity.Whitelist, viewer.Value))
         {
-            return name;
+            var name = Loc.GetString(nameId);
+            var ev = new RMCGetFixedIdentityEvent(name);
+            ent.EventBus.RaiseLocalEvent(uid, ref ev);
+            return ev.Name;
         }
 
         if (!ent.TryGetComponent<IdentityComponent>(uid, out var identity))

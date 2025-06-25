@@ -12,6 +12,10 @@
     group: CMJobsMedical
     time: 3600 # 1 hours
   ranks:
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotDropship
+      time: 630000 # 175 hours
     RMCRankStaffSergeant:
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
@@ -19,7 +23,7 @@
     RMCRankSergeant:
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
-      time: 36000 # 10 hours
+      time: 90000 # 25 hours
     RMCRankCorporal: []
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"

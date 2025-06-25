@@ -21,3 +21,5 @@
     accent: dwarf
   - type: Speech
     speechSounds: Bass
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-dwarf

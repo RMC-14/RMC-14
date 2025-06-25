@@ -41,6 +41,7 @@
         Heat: 0.5
   - type: DamageOnCollide
     damageDead: false
+    fire: true
     damage:
       types:
         Heat: 45
@@ -124,6 +125,33 @@
           Two: { state: white_2 }
           Three: { state: white_3 }
           Four: { state: white_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireOBAegis
+  components:
+  - type: Sprite
+    color: "#ffffff"
+    layers:
+    - map: [ "base" ]
+      state: purple_4
+  - type: PointLight
+    color: "#faeffa"
+  - type: RMCIgniteOnCollide
+    intensity: 80
+    duration: 70
+  - type: TileFire
+    id: RMCTileFireOBAegis
+    extinguishInstantly: false
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: purple_1 }
+          Two: { state: purple_2 }
+          Three: { state: purple_3 }
+          Four: { state: purple_4 }
+
 
 - type: entity
   parent: RMCTileFire

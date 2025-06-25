@@ -78,6 +78,7 @@ rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
 cm-xeno-paralyzing-slash-expire = We have waited too long, your slash will no longer apply neurotoxin!
 cm-xeno-paralyzing-slash-hit = We add neurotoxin into your attack, {$target} is about to fall over paralyzed!
+cm-xeno-paralyzing-slash-immune = {$target} shrugs off the neurotoxin!
 
 # Crippling Strike
 cm-xeno-crippling-strike-activate = Our next slash will apply neurotoxin!
@@ -370,3 +371,6 @@ rmc-xeno-eviscerate-windup = {$xeno} begins digging in for a massive strike!
 
 rmc-xeno-eviscerate-windup-small-self = We begin digging in for a strike!
 rmc-xeno-eviscerate-windup-small = {$xeno} begins digging in for a strike!
+
+# Fling
+rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!

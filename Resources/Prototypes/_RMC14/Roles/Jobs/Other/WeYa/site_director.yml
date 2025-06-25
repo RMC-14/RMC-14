@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Site Director
   special:
   - !type:AddComponentSpecial
     components:
@@ -48,6 +49,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCDirector
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCSiteDirector
+  name: weya pmc director spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCDirector
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCDirector
@@ -60,6 +72,10 @@
     job: RMCPMCDirector
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobExecutiveOfficer
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear

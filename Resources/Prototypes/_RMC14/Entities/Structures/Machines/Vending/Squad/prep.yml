@@ -1,5 +1,4 @@
 # SQUAD PREPARATION
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechGuns
@@ -84,7 +83,6 @@
       - id: CMPackFlare
         amount: 10
         recommended: true
-
 
 - type: entity
   parent: ColMarTechBase
@@ -201,7 +199,7 @@
         amount: 15
     - name: Pouches
       entries:
-      - id: RMCPouchBayonet
+      - id: RMCPouchBayonetFill
         name: Bayonet Sheath (Full)
         amount: 15
       - id: RMCPouchFirstAidSplintsGauzeOintment
@@ -292,6 +290,13 @@
       - id: RMCVisorSquad
         amount: 15
 
+- type: entity
+  parent: ColMarTechSurplus
+  id: RMCColMarTechSurplusPVE
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/squad_prep.rsi
 
 - type: entity
   parent: ColMarTechBase
@@ -358,7 +363,6 @@
       - id: RMCHornetShellM74AGMS
         amount: 4
 
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechUtilities
@@ -401,7 +405,6 @@
         amount: 1
     - name: Flare and light
       entries:
-#      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
       - id: RMCBoxFlashlights
@@ -438,6 +441,13 @@
       - id: RMCMagazineSMGNailgun
         amount: 2
 
+- type: entity
+  parent: ColMarTechUtilities
+  id: RMCColMarTechUtilitiesPVE
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
 
 - type: entity
   parent: ColMarTechBase

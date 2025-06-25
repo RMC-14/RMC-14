@@ -75,7 +75,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
-        if (!_rmcActions.TryUseAction(args.Performer, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;

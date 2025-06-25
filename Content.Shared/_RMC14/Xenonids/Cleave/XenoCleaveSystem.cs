@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Throwing;
@@ -21,6 +22,7 @@ public sealed class XenoCleaveSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoCleaveComponent, XenoCleaveActionEvent>(OnCleaveAction);
@@ -46,6 +48,10 @@ public sealed class XenoCleaveSystem : EntitySystem
         if (args.Flings)
         {
             var flingRange = buffed ? xeno.Comp.FlingDistanceBuffed : xeno.Comp.FlingDistance;
+
+            if (_sizeStun.TryGetSize(args.Target, out var size) && size >= RMCSizes.Big)
+                flingRange *= 0.1f; //Big Xenos get flung less
+
             _rmcPulling.TryStopAllPullsFromAndOn(args.Target);
 
             //From fling
@@ -54,17 +60,18 @@ public sealed class XenoCleaveSystem : EntitySystem
             var diff = target.Position - origin.Position;
             diff = diff.Normalized() * flingRange;
 
+            _throwing.TryThrow(args.Target, diff, 10);
+
             if (_net.IsServer)
             {
-                _throwing.TryThrow(args.Target, diff, 10);
-
                 SpawnAttachedTo(xeno.Comp.FlingEffect, args.Target.ToCoordinates());
             }
         }
         else
         {
             var rootTime = buffed ? xeno.Comp.RootTimeBuffed : xeno.Comp.RootTime;
-            _slow.TryRoot(args.Target, rootTime);
+
+            _slow.TryRoot(args.Target, _xeno.TryApplyXenoDebuffMultiplier(args.Target, rootTime));
 
             if (_net.IsServer)
             {

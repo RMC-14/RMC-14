@@ -28,6 +28,7 @@
   - type: Construction
     graph: CMGirder
     node: wall
+  - type: XenoCrusherChargable
 
 - type: entity
   parent: CMWallMetal
@@ -358,6 +359,7 @@
     base: jungle_veg
 
 # Elevator
+
 - type: entity
   parent: CMBaseWallInvincible
   id: RMCWallElevator
@@ -388,6 +390,223 @@
     state: wall_broke
   - type: Occluder
     enabled: false
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallElevatorNoConnect1
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_1
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_1
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorNoConnect2
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_2
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_2
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorNoConnect3
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_3
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_3
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorNoConnect4
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_4
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_4
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorNoConnect5
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_5
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_5
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorNoConnect6
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_6
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_6
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorNoConnect7
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_7
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_7
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorNoConnect8
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_8
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator_single.rsi
+    state: elevator_8
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorButtonArrivals
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_button_arrivals
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_button_arrivals
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorButtonDorm
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_button_dorm
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_button_dorm
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorButtonFreight
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_button_freight
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_button_freight
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorButtonResearch
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_button_research
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_button_research
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorArrivals
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_arrivals
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_arrivals
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorDorm
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_dorm
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_dorm
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorFreight
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_freight
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_freight
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorResearch
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_freight
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_freight
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorGear
+  name: elevator wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_gear
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_gear
+
+- type: entity
+  parent: RMCWallElevatorNoConnect1
+  id: RMCWallElevatorGearAnimated
+  name: elevator wall
+  suffix: animated
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_gear_animated
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/elevator.rsi
+    state: wall_gear_animated
 
 # Containment
 
