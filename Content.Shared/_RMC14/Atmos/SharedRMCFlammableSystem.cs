@@ -670,11 +670,10 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void TryIgnite(Entity<RMCIgniteOnCollideComponent> ent, EntityUid other, bool checkIgnited)
     {
+        EnsureComp<SteppingOnFireComponent>(other);
         var flammableEnt = new Entity<FlammableComponent?>(other, null);
         if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
             return;
-
-        EnsureComp<SteppingOnFireComponent>(other);
 
         var wasOnFire = IsOnFire(flammableEnt);
         if (checkIgnited && wasOnFire)
@@ -761,7 +760,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             Dirty(uid, stepping);
 
             var isStepping = false;
-            foreach (var contact in _physics.GetContactingEntities(uid))
+            foreach (var contact in _physics.GetContactingEntities(uid, approximate: true))
             {
                 if (!_igniteOnCollideQuery.TryComp(contact, out var ignite) ||
                     ignite.TileDamage is not { } tile)
