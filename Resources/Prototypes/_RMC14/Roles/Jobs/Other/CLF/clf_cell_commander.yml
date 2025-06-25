@@ -28,6 +28,7 @@
         RMCSkillJtac: 4
         RMCSkillSmartGun: 1
         RMCSkillExecution: 1
+    - type: MarineOrders
     - type: NpcFactionMember
       factions:
       - CLF
