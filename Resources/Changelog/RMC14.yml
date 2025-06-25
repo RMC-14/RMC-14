@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed map nightmare inserts not clearing all previous objects.
-    type: Fix
-  - message: Added map nightmare insert variants. Shiva LZ2 South Caves can now spawn
-      as default, built up, or destroyed.
-    type: Add
-  id: 1382
-  time: '2025-02-27T05:17:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5724
-- author: Vermidia
-  changes:
-  - message: Fixed boiler neuro tailstab not injecting enough neurotoxin (16 -> 20)
-    type: Fix
-  id: 1383
-  time: '2025-02-27T05:49:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5737
 - author: Arcticular1
   changes:
   - message: Commanding Officer Essentials Kit to CO vendor.
@@ -5220,5 +5203,23 @@
   id: 1883
   time: '2025-06-25T04:04:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6690
+- author: t0wnshark
+  changes:
+  - message: You can now roll the sleeves of the synthetic support jumpsuit and take
+      the jacket off.
+    type: Add
+  id: 1884
+  time: '2025-06-25T04:07:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6705
+- author: t0wnshark
+  changes:
+  - message: Added green and blue surgical webbings. These hold the same items as
+      a surgical tray but can be equipped as a webbing.
+    type: Add
+  - message: Added surgical webbings to synthetic gear vendor.
+    type: Add
+  id: 1885
+  time: '2025-06-25T04:06:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6672
 Name: RMC14
 Order: -1
