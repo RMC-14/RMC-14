@@ -16,7 +16,6 @@ rmc-stethoscope-dead = You can't hear anything at all, they must have kicked the
 
 rmc-stethoscope-verb-text = Stethoscope
 rmc-stethoscope-verb-message = Listen using the stethoscope.
-rmc-stethoscope-verb-use = You place the stethoscope against {$target}'s chest and listen attentively.
 
 # Temporary until real organs are implemented. Delete when fully implemented.
 rmc-stethoscope-normal = You hear [color=green]normal heart beating patterns[/color] and [color=green]normal respiration sounds[/color] as well, {POSS-PRONOUN($target)} heart and lungs are [color=green]healthy[/color], probably.

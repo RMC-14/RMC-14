@@ -46,7 +46,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     {
         var scanResult = GetStethoscopeResults(target, user);
         var popupText = scanResult.ToString();
-        _popup.PopupClient(Loc.GetString("rmc-stethoscope-verb-use", ("target", Name(target)), ("user", Name(user))) + "\n" + popupText, target, user);
+        _popup.PopupClient(popupText, user, user);
     }
 
     private void OnGlobalStethoscopeExamineVerb(GetVerbsEvent<ExamineVerb> args)
