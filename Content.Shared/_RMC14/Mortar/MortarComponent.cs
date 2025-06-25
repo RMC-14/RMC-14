@@ -53,7 +53,7 @@ public sealed partial class MortarComponent : Component
     public int MinimumRange = 15;
 
     [DataField, AutoNetworkedField]
-    public int MaximumRange = 65;
+    public int MaximumRange = 64;
 
     [DataField, AutoNetworkedField]
     public string FixtureId = "mortar";
