@@ -42,6 +42,13 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         args.Handled = true;
     }
 
+    private void ShowStethoPopup(EntityUid user, EntityUid target)
+    {
+        var scanResult = GetStethoscopeResults(target, user);
+        var popupText = scanResult.ToString();
+        _popup.PopupClient(Loc.GetString("rmc-stethoscope-verb-use", ("target", Name(target)), ("user", Name(user))) + "\n" + popupText, target, user);
+    }
+
     private void OnGlobalStethoscopeExamineVerb(GetVerbsEvent<ExamineVerb> args)
     {
         if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(args.Target))
@@ -76,13 +83,6 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         return false;
     }
 
-    private void ShowStethoPopup(EntityUid user, EntityUid target)
-    {
-        var scanResult = GetStethoscopeResults(target, user);
-        var popupText = scanResult.ToString();
-        _popup.PopupClient(Loc.GetString("rmc-stethoscope-verb-use", ("target", Name(target)), ("user", Name(user))) + "\n" + popupText, target, user);
-    }
-
     private FormattedMessage GetStethoscopeResults(EntityUid target, EntityUid? user = null)
     {
         var totalHealth = GetPercentHealth(target);
@@ -96,7 +96,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         {
             msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-nothing"));
         }
-        else if (totalHealth >= 85.0f)
+        else if (totalHealth >= 87.5f)
         {
             msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-normal", ("target", target)));
         }
@@ -104,7 +104,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         {
             msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy", ("target", target)));
         }
-        else if (totalHealth >= 25.0f)
+        else if (totalHealth >= 37.5f)
         {
             msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-hyper"));
         }
