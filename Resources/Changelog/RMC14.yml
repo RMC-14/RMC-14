@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: DoguhanOzgurAkca
-  changes:
-  - message: OB protection from Kutjevo caves and reactors
-    type: Tweak
-  - message: area names in kutjevo caves being mixed up.
-    type: Tweak
-  id: 1388
-  time: '2025-03-01T11:01:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5753
-- author: Vermidia
-  changes:
-  - message: Fixed knockback from ammo stuns and neurotoxin forced movement being
-      too slow
-    type: Fix
-  - message: Fixed knockback from ammo stuns not applying in certain cases.
-    type: Fix
-  id: 1389
-  time: '2025-03-01T11:02:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5767
 - author: Arcticular1
   changes:
   - message: Buttons to MP jacket, CO bomber jacket, and formal service jacket.
@@ -5212,5 +5193,24 @@
   id: 1889
   time: '2025-06-25T04:26:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6740
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the MAR-30 battle carbine, a carbine of the MAR-40 rifle. Security
+      survivors have a chance to spawn with this weapon.
+    type: Add
+  - message: Fixed MAR-40 burst firerate being too slow
+    type: Fix
+  - message: Fixed burst cooldown for MAR-40 being 0
+    type: Fix
+  id: 1890
+  time: '2025-06-25T04:28:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6743
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the industrial welder to survivor gear.
+    type: Add
+  id: 1891
+  time: '2025-06-25T04:28:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6745
 Name: RMC14
 Order: -1
