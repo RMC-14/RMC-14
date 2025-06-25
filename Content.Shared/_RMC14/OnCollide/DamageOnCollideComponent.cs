@@ -41,7 +41,10 @@ public sealed partial class DamageOnCollideComponent : Component
     public ProtoId<EmotePrototype>? XenoEmote = "Hiss";
 
     [DataField]
-    public bool Acidic = true;
+    public bool Acidic = false;
+
+    [DataField]
+    public bool Fire = false;
 
     [DataField]
     public CollisionGroup Collision = CollisionGroup.FullTileLayer;

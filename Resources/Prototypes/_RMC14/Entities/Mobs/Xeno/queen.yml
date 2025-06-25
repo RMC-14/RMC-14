@@ -255,6 +255,7 @@
   - type: XenoToggleChargingStop
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
+  - type: RMCImmuneToFireTileDamage
   - type: RMCTrackable
 
 - type: entity
@@ -267,6 +268,7 @@
 
 - type: entity
   id: XenoLeaderPheromoneRelay
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoPheromones
 

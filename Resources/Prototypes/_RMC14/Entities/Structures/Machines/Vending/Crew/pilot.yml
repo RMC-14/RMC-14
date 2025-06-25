@@ -21,10 +21,14 @@
     - name: Standard Equipment
       takeAll: CMEquipment
       entries:
-      - id: CMHandsInsulated
       - id: CMArmorHelmetM30
       - id: CMSatchel
       - id: CMMRE
+    - name: Gloves
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Armour
       choices: { CMArmour: 1 }
       entries:
@@ -222,8 +226,8 @@
         amount: 20
       - id: CMMagazinePistolM1984
         amount: 20
-      #- id: CMMagazinePistolM1984AP # TODO RMC14 Pistol AP varieties
-      # amount: 14
+      - id: RMCMagazinePistolM1984AP 
+        amount: 14
       #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
       # amount: 14
       - id: CMMagazinePistolMK80

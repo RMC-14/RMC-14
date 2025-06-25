@@ -29,6 +29,9 @@
     solution: drink
   - type: DrainableSolution
     solution: drink
+  - type: Tag
+    tags:
+    - RMCAlcohol
 
 - type: entity
   parent: RMCDrinkAlcoholBase
@@ -301,3 +304,6 @@
         reagents:
         - ReagentId: Whiskey
           Quantity: 100
+
+- type: Tag
+  id: RMCAlcohol
