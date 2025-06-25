@@ -4,6 +4,7 @@ using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
@@ -98,15 +99,15 @@ public sealed partial class NeurotoxinComponent : Component
     public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public Dictionary<string, float> Hallucinations = new()
+    public Dictionary<NeuroHallucinations, float> Hallucinations = new()
     {
-        {"AlienAttack", 0.05f},
-        {"OB", 0.05f},
-        {"Screech", 0.06f},
-        {"CAS", 0.08f},
-        {"Mortar", 0.18f},
-        {"Giggle", 0.27f},
-        {"Sounds", 0.31f}
+        {NeuroHallucinations.AlienAttack, 0.05f},
+        {NeuroHallucinations.OB, 0.05f},
+        {NeuroHallucinations.Screech, 0.06f},
+        {NeuroHallucinations.CAS, 0.08f},
+        {NeuroHallucinations.Mortar, 0.18f},
+        {NeuroHallucinations.Giggle, 0.27f},
+        {NeuroHallucinations.Sounds, 0.31f}
     };
 
     [DataField]
@@ -151,4 +152,16 @@ public sealed partial class NeurotoxinComponent : Component
     [DataField]
     public EntProtoId<OrbitalCannonWarheadComponent>[] WarheadTypes =
     ["RMCOrbitalCannonWarheadExplosive", "RMCOrbitalCannonWarheadIncendiary", "RMCOrbitalCannonWarheadCluster"];
+}
+
+[Serializable, NetSerializable]
+public enum NeuroHallucinations
+{
+    AlienAttack,
+    OB,
+    Screech,
+    CAS,
+    Mortar,
+    Giggle,
+    Sounds
 }

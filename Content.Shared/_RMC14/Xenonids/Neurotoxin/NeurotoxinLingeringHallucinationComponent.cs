@@ -13,7 +13,7 @@ public sealed partial class NeurotoxinLingeringHallucinationComponent : Componen
     /// Stores Haullucination type, stage, next trigger, and position if nessassary
     /// </summary>
     [DataField]
-    public List<(string, int, TimeSpan, EntityCoordinates?)> Hallucinations = new();
+    public List<(NeuroHallucinations, int, TimeSpan, EntityCoordinates?)> Hallucinations = new();
 
     [DataField]
     public SoundSpecifier BoneBreak = new SoundPathSpecifier("/Audio/_RMC14/Weapons/alien_knockdown.ogg"); //TODO RMC14 Bonebreak sound

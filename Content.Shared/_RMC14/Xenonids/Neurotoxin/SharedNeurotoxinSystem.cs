@@ -232,8 +232,8 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 continue;
             }
 
-            List<(string, int, TimeSpan, EntityCoordinates?)> toRemove = new();
-            List<(string, int, TimeSpan, EntityCoordinates?)> toAdd = new();
+            List<(NeuroHallucinations, int, TimeSpan, EntityCoordinates?)> toRemove = new();
+            List<(NeuroHallucinations, int, TimeSpan, EntityCoordinates?)> toAdd = new();
 
             foreach (var entry in hallu.Hallucinations)
             {
@@ -375,13 +375,13 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         //Note event times are hardcoded for now since thers alot of them
         switch (hallucination)
         {
-            case "AlienAttack":
+            case NeuroHallucinations.AlienAttack:
                 _audio.PlayStatic(neurotoxin.Pounce, victim, victim.ToCoordinates());
                 _stun.TryParalyze(victim, neurotoxin.PounceDownTime, true);
                 var lingering = EnsureComp<NeurotoxinLingeringHallucinationComponent>(victim);
-                lingering.Hallucinations.Add(("AlienAttack", 0, _timing.CurTime + TimeSpan.FromSeconds(1), null));
+                lingering.Hallucinations.Add((NeuroHallucinations.AlienAttack, 0, _timing.CurTime + TimeSpan.FromSeconds(1), null));
                 break;
-            case "OB":
+            case NeuroHallucinations.OB:
                 //Little extra to confuse the player
                 //TODO RMC14 replace if it gets a locId
                 if (_player.TryGetSessionByEntity(victim, out var session))
@@ -403,31 +403,31 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 }
                 _audio.PlayGlobal(neurotoxin.OBAlert, victim);
                 lingering = EnsureComp<NeurotoxinLingeringHallucinationComponent>(victim);
-                lingering.Hallucinations.Add(("OB", 0, _timing.CurTime + TimeSpan.FromSeconds(2), null));
+                lingering.Hallucinations.Add((NeuroHallucinations.OB, 0, _timing.CurTime + TimeSpan.FromSeconds(2), null));
                 break;
-            case "Screech":
+            case NeuroHallucinations.Screech:
                 _audio.PlayStatic(neurotoxin.Screech, victim, HallucinationSoundOffset(victim, 3));
                 _stun.TryParalyze(victim, neurotoxin.ScreechDownTime, true);
                 break;
-            case "CAS":
+            case NeuroHallucinations.CAS:
                 var position = HallucinationSoundOffset(victim, 7);
                 _audio.PlayStatic(neurotoxin.FiremissionStart, victim, position);
                 lingering = EnsureComp<NeurotoxinLingeringHallucinationComponent>(victim);
-                lingering.Hallucinations.Add(("CAS", 0, _timing.CurTime + TimeSpan.FromSeconds(3.5), position));
+                lingering.Hallucinations.Add((NeuroHallucinations.CAS, 0, _timing.CurTime + TimeSpan.FromSeconds(3.5), position));
                 break;
-            case "Giggle":
+            case NeuroHallucinations.Giggle:
                 var ev = new NeurotoxinEmoteEvent() { Emote = neurotoxin.GiggleId };
                 RaiseLocalEvent(victim, ev);
                 //TODO RMC14 hallucination status - more in depth than neuro
                 _statusEffects.TryAddStatusEffect<SeeingRainbowsComponent>(victim, "SeeingRainbows", neurotoxin.RainbowDuration, true);
                 break;
-            case "Mortar":
+            case NeuroHallucinations.Mortar:
                 position = HallucinationSoundOffset(victim, 7);
                 FakeWarning(position, victim, "rmc-mortar-shell-impact-warning", "rmc-mortar-shell-impact-warning-above");
                 lingering = EnsureComp<NeurotoxinLingeringHallucinationComponent>(victim);
-                lingering.Hallucinations.Add(("Mortar", 0, _timing.CurTime + TimeSpan.FromSeconds(1), position));
+                lingering.Hallucinations.Add((NeuroHallucinations.Mortar, 0, _timing.CurTime + TimeSpan.FromSeconds(1), position));
                 break;
-            case "Sounds":
+            case NeuroHallucinations.Sounds:
                 var sound = _random.Pick(neurotoxin.HallucinationRandomSounds);
                 //Random offset to make it spookier if it's real or not
                 _audio.PlayStatic(sound, victim, HallucinationSoundOffset(victim, 7));
@@ -436,11 +436,11 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     }
 
     //Returns true if the hallucination is done.
-    private (string, int, TimeSpan, EntityCoordinates?)? ProcessHallucination(EntityUid victim, NeurotoxinLingeringHallucinationComponent lingering, (string, int, TimeSpan, EntityCoordinates?) hallucination)
+    private (NeuroHallucinations, int, TimeSpan, EntityCoordinates?)? ProcessHallucination(EntityUid victim, NeurotoxinLingeringHallucinationComponent lingering, (NeuroHallucinations, int, TimeSpan, EntityCoordinates?) hallucination)
     {
         switch (hallucination.Item1)
         {
-            case "AlienAttack":
+            case NeuroHallucinations.AlienAttack:
                 if (hallucination.Item2 == 0)
                 {
                     _audio.PlayStatic(lingering.XenoClaw, victim, victim.ToCoordinates());
@@ -465,11 +465,11 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 }
                 break;
 
-            case "OB":
+            case NeuroHallucinations.OB:
                 _audio.PlayStatic(lingering.OBTravel, victim, HallucinationSoundOffset(victim, 7));
                 break;
 
-            case "CAS": //Very long unfortunately
+            case NeuroHallucinations.CAS: //Very long unfortunately
                 if (hallucination.Item2 == 0)
                 {
                     FakeWarning(hallucination.Item4 ?? victim.ToCoordinates(), victim, "rmc-dropship-firemission-warning", "rmc-dropship-firemission-warning-above");
@@ -564,7 +564,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 }
                 break;
 
-            case "Mortar":
+            case NeuroHallucinations.Mortar:
                 _audio.PlayStatic(lingering.MortarTravel, victim, hallucination.Item4 ?? victim.ToCoordinates());
                 break;
         }
