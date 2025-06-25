@@ -9,7 +9,7 @@
   - UNMC
   - SPP
   - WeYa
-  - Survivor
+  - Civilian
   - CLF
   - TSE
 
@@ -20,7 +20,7 @@
   - RMCXeno
   - SPP
   - WeYa
-  - Survivor
+  - Civilian
   - CLF
   - TSE
 
@@ -40,7 +40,7 @@
   - RMCXeno
 
 - type: npcFaction
-  id: Survivor
+  id: Civilian
   hostile:
   - RMCXeno
 
