@@ -1,6 +1,6 @@
 - type: entity
   parent: RMCBaseWeaponLMG
-  id: RMCGSh_rotary_machinegun
+  id: RMCWeaponMachinegunGsh
   name: GSh-7.62 rotary machinegun
   description: A gas-operated rotary machine gun used by UPP Weapon Specialists. Its enormous volume of fire and ammunition capacity allows the suppression of large concentrations of enemy forces.
   components:
@@ -60,9 +60,6 @@
   - type: RMCNameItemOnVend
     item: PrimaryGun
 
-
-
-
 - type: entity
   parent: RMCMagazineLMGBase
   id: RMCAmmoDrum
@@ -88,8 +85,6 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
 
-
-
 - type: entity
   parent: RMCCartridgeRifleAR10
   id: RMCCartridgeGSh
@@ -103,7 +98,6 @@
     - RMCCartridgeGSh
   - type: CartridgeAmmo
     proto: RMCBulletGSh
-
 
 - type: entity
   parent: RMCBaseBullet
@@ -126,7 +120,6 @@
     thresholds:
     - range: 12
       falloff: 10
-
 
 - type: Tag
   id: RMCGSh_rotary_machinegun
