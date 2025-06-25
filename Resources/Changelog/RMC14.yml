@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed m81 riot not accepting smoke nades.
-    type: Fix
-  id: 1392
-  time: '2025-03-01T11:08:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5764
 - author: Tyzemol
   changes:
   - message: Xeno pheromone UI no longer spawns in screen corners when watching other
@@ -5203,5 +5196,16 @@
   id: 1893
   time: '2025-06-25T04:30:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6703
+- author: noctyrnal
+  changes:
+  - message: Changed CLF loadouts to use unique armor.
+    type: Tweak
+  - message: CLF Soldiers now spawn with a P90 instead of an M63.
+    type: Tweak
+  - message: You can now reload the MAR-50 Drum magazine with MAR Magazines.
+    type: Fix
+  id: 1894
+  time: '2025-06-25T04:32:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6781
 Name: RMC14
 Order: -1
