@@ -69,7 +69,7 @@ public sealed partial class OrbitalCannonComponent : Component
     public TimeSpan? LastFireAt;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FireCooldown = TimeSpan.FromSeconds(500);
+    public TimeSpan FireCooldown = TimeSpan.FromSeconds(10);
 }
 
 [DataRecord]

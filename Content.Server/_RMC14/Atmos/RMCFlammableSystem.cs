@@ -1,4 +1,4 @@
-﻿using Content.Server.Atmos.EntitySystems;
+using Content.Server.Atmos.EntitySystems;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared.Atmos.Components;
 
@@ -28,6 +28,8 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
         if (!Resolve(flammable, ref flammable.Comp, false))
             return false;
 
+        var hadBypassComponent = HasComp<RMCFireBypassActiveComponent>(flammable);
+
         var stacks = flammable.Comp.FireStacks + duration;
         if (maxStacks != null && stacks > maxStacks)
             stacks = maxStacks.Value;
@@ -35,6 +37,11 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
         _flammable.SetFireStacks(flammable, stacks, flammable, true);
         if (!flammable.Comp.OnFire)
             return false;
+
+        if (hadBypassComponent)
+        {
+            EnsureComp<RMCFireBypassActiveComponent>(flammable);
+        }
 
         flammable.Comp.Intensity = intensity;
         flammable.Comp.Duration = duration;
