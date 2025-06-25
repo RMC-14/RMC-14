@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed mortars having infinite range. They now have a min range of 25,
-      and max range of 75. Req also now starts with a kit for the mortar, which comes
-      with mortar operator pamplets.
-    type: Fix
-  - message: Fixed Incindiary mortar shells exploding on impact. They only create
-      fire now.
-    type: Fix
-  - message: Mortar Shells are now cheaper to buy from req, you can no longer get
-      them from ASRS random crates.
-    type: Fix
-  id: 1387
-  time: '2025-03-01T11:00:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5735
 - author: DoguhanOzgurAkca
   changes:
   - message: OB protection from Kutjevo caves and reactors
@@ -5219,5 +5204,13 @@
   id: 1888
   time: '2025-06-25T04:21:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6791
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Staff Officers spawning with a regular cap instead of an officer
+      cap.
+    type: Fix
+  id: 1889
+  time: '2025-06-25T04:26:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6740
 Name: RMC14
 Order: -1
