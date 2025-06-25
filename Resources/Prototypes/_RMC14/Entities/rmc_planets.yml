@@ -61,6 +61,29 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+    survivorJobs:
+    - RMCSurvivorCommandingOfficer: 1
+    - CMSurvivor: -1
+    - CMSurvivorCorporate: 2
+    - CMSurvivorDoctor: 3
+    - CMSurvivorEngineer: 4
+    - CMSurvivorSecurity: 2
+    survivorJobInserts:
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorCommanderNewVaradero: 1
+      CMSurvivor:
+      - CMSurvivorBeachBum: -1
+      - CMSurvivorMiner: -1
+      - CMSurvivorPriest: 1
+      CMSurvivorCorporate:
+      - CMSurvivorICB: 2
+      CMSurvivorDoctor:
+      - CMSurvivorMedicalTechnician: 3
+      CMSurvivorEngineer:
+      - CMSurvivorTechnician: 2
+      - CMSurvivorCargoTechnician: 2
+      CMSurvivorSecurity:
+      - CMSurvivorUNPeacekeeper: 2
 
 - type: entity
   id: RMCPlanetKutjevo
@@ -79,6 +102,7 @@
     map: /Maps/_RMC14/chances.yml
     camouflage: Classic
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
+    selectRandomSurvivorInsert: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - RMCSurvivorForeconBase: 7

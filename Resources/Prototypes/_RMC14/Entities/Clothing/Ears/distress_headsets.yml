@@ -23,7 +23,7 @@
 
 # For CLF
 - type: entity
-  parent: RMCHeadsetColonyIcons
+  parent: [RMCHeadsetIconsCLF, CMHeadsetColony]
   id: RMCHeadsetDistressCLF
   name: CLF headset
   description: A special headset used by small groups of trained operatives. Or terrorists.
@@ -40,17 +40,30 @@
       key_slots:
       - RMCEncryptionKeyBureau
 
+# For CMB and ICB survivors.
+- type: entity
+  parent: RMCHeadsetIconsCMB
+  id: RMCHeadsetDistressBureauDamaged
+  name: damaged bureau earpiece
+  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyBureauDamaged
+
 # For WeYa civilians
 - type: entity
   parent: RMCHeadsetIconsWeYa
   id: RMCHeadsetDistressWeYa
   name: WeYa corporate headset
   description: A headset commonly worn by WeYa corporate personnel.
+  suffix: WeYa, Colony
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyWEYA
+      - CMEncryptionKeyWEYAColony
 
 # For WeYa PMC
 - type: entity
@@ -126,6 +139,19 @@
     channels:
     - MarineForecon
 
+#for UNMC personnel
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetMarineDistress
+  name: UNMC headset
+  description: A standard issue UNMC headset. This one is used by marines on colonial protection duties, and only comes equipped with civilian channels.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: GrantMarineIcons
+
 # For MARSOC
 - type: entity
   parent: RMCHeadsetIcons
@@ -140,3 +166,4 @@
   - type: GrantMarineIcons
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
+
