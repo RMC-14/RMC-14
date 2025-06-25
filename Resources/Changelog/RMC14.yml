@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Commanding Officer Essentials Kit to CO vendor.
-    type: Add
-  id: 1384
-  time: '2025-02-27T05:50:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5736
 - author: Ian321
   changes:
   - message: The marksman M44 speedloader box can now be refilled.
@@ -5221,5 +5214,12 @@
   id: 1885
   time: '2025-06-25T04:06:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6672
+- author: x5tink
+  changes:
+  - message: Pills are now created with the correct colour selected
+    type: Fix
+  id: 1886
+  time: '2025-06-25T04:11:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6721
 Name: RMC14
 Order: -1
