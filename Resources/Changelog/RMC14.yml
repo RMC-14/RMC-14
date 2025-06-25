@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Added missing plates, toolboxes, motion detectors, M16 ammo boxes, bipods,
-      couches, clothing, shotgun shell loading rig, plasteel, crayons, kitchen items,
-      and the powerloader operator card to Fiorina.
-    type: Add
-  id: 1380
-  time: '2025-02-27T05:02:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5727
 - author: Tunguso4ka
   changes:
   - message: Solaris Caves north of Mining now have rock walls that disappear 40 minutes
@@ -5222,5 +5213,12 @@
   id: 1881
   time: '2025-06-25T04:01:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6694
+- author: crazy1112345
+  changes:
+  - message: Fixed faction assignment for fax responders and CLF roles.
+    type: Fix
+  id: 1882
+  time: '2025-06-25T04:03:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6541
 Name: RMC14
 Order: -1
