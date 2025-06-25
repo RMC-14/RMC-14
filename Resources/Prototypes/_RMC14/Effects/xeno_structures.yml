@@ -1,4 +1,17 @@
 ﻿- type: entity
+  id: XenoConstructionGhost
+  name: construction ghost
+  description: A preview of what will be built.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    drawdepth: Overlays
+    color: "#30FF3080"
+    noRot: true
+
+- type: entity
   id: RMCBaseEffectXenoStructure
   categories: [ HideSpawnMenu ]
   components:
