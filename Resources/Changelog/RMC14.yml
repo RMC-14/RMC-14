@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: The marksman M44 speedloader box can now be refilled.
-    type: Fix
-  id: 1385
-  time: '2025-02-28T03:03:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5734
 - author: Vermidia
   changes:
   - message: Fixed sentinel scatter spit cooldown being too low (6 -> 7 seconds)
@@ -5221,5 +5214,13 @@
   id: 1886
   time: '2025-06-25T04:11:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6721
+- author: Dygon
+  changes:
+  - message: Fixed the success chance on high tackle streaks being too high, and the
+      tackle chance on low tackle streaks being too low.
+    type: Fix
+  id: 1887
+  time: '2025-06-25T04:19:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6734
 Name: RMC14
 Order: -1
