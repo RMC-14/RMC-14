@@ -79,6 +79,8 @@
       entries:
       - id: CMHandsInsulated
         points: 3
+      - id: CMHandsBlackInsulated
+        points: 3
       - id: CMSheetMetal10
         name: metal x10
         points: 5

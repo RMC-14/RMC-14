@@ -475,6 +475,12 @@
   id: RMCAreaSavannahPumpPortQuarter
   name: Port Quarter Pump
 
+- type: entity
+  parent:
+  - RMCAreaSavannahEngineering
+  id: RMCAreaSavannahSynthetic
+  name: Synthetic Storage
+
 # OTHER
 
 - type: entity
