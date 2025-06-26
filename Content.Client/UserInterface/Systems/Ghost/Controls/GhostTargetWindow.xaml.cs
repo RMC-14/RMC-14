@@ -36,10 +36,22 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         private sealed class WarpGroup
         {
-            public required LocId Title;
+            /// <summary> RMC14: This is the title of the group. Is a table of contents for the title of the collapsible. </summary>
+            /// <remarks>
+            /// Type is not LocID for working with squad entities, but I will PERSONALLY CURSE YOU if you don't use a localization key when it's possible.
+            /// </remarks>
+            public required string Title;
+
+            /// <summary> RMC14: List of warp targets in the group. </summary>
             public List<(string displayName, NetEntity Entity, bool IsWarpPoint, string? DisplayJob)> Warps = new();
-            public Color HeaderColor = Color.FromHex("#696969");
+
+            /// <summary> RMC14: Color of the header of the collapsible. </summary>
+            public Color HeaderColor = Color.FromHex("#696969"); // #696969
+
+            /// <summary> RMC14: Whether the collapsible is expanded by default. </summary>
             public bool IsExpandedByDefault = true;
+
+            /// <summary> RMC14: List of subgroups in the group. </summary>
             public List<WarpGroup>? Subgroups;
         }
 
@@ -59,19 +71,40 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             GhostnadoButton.OnPressed += _ => OnGhostnadoClicked?.Invoke();
         }
 
+        /// <summary>
+        /// RMC14: This method is responsible for populating groups and subgroups with warp targets.
+        /// If you want to add new groups or subgroups you only need to change this method.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// <para>To add a new group:</para>
+        /// 1. Create a new WarpGroup instance (e.g., var myGroup = new WarpGroup { Title = "my-loc-id" };).
+        /// 2. Add logic to populate myGroup.Warps with entries.
+        /// 3. Add the new group to the _warpGroups list (e.g., _warpGroups.Add(myGroup);).
+        /// </para>
+        /// <para>
+        /// <para>To add a new subgroup to an existing group:</para>
+        /// 1. Find the parent group (e.g., var parentGroup = _warpGroups.Find(g => g.Title == "rmc-ghost-target-window-group-marines");).
+        /// 2. Check if parentGroup.Subgroups is null and initialize it if needed.
+        /// 3. Create the subgroup WarpGroup instance.
+        /// 4. Add logic to populate the subgroup's Warps.
+        /// 5. Add the subgroup to the parent's list (parentGroup.Subgroups.Add(mySubgroup);).
+        /// </para>
+        /// </remarks>
         public void UpdateWarps(IEnumerable<GhostWarp> warps)
         {
             _warpGroups.Clear();
             var mobState = _entityManager.System<MobStateSystem>();
+            var squadSystem = _entityManager.System<SquadSystem>();
 
             // Creating groups
-            var marines = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-marines"), HeaderColor = Color.FromHex("#1c70b0") };
-            var xenos = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-xenos"), HeaderColor = Color.FromHex("#472f4f") };
-            var survivors = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-survivors"), HeaderColor = Color.FromHex("#4e9120") };
-            var others = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-others") };
-            var deads = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-deads"), IsExpandedByDefault = false };
-            var ghosts = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-ghosts"), IsExpandedByDefault = false };
-            var warpPoints = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-warp-points"), IsExpandedByDefault = false };
+            var marines = new WarpGroup { Title = "rmc-ghost-target-window-group-marines", HeaderColor = Color.FromHex("#1c70b0") }; // #1c70b0
+            var xenos = new WarpGroup { Title = "rmc-ghost-target-window-group-xenos", HeaderColor = Color.FromHex("#472f4f") }; // #472f4f
+            var survivors = new WarpGroup { Title = "rmc-ghost-target-window-group-survivors", HeaderColor = Color.FromHex("#4e9120") }; // #4e9120
+            var others = new WarpGroup { Title = "rmc-ghost-target-window-group-others" };
+            var deads = new WarpGroup { Title = "rmc-ghost-target-window-group-deads", IsExpandedByDefault = false };
+            var ghosts = new WarpGroup { Title = "rmc-ghost-target-window-group-ghosts", IsExpandedByDefault = false };
+            var warpPoints = new WarpGroup { Title = "rmc-ghost-target-window-group-warp-points", IsExpandedByDefault = false };
 
             foreach (var warp in warps)
             {
@@ -94,23 +127,22 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                     }
                     else if (_entityManager.HasComponent<MarineComponent>(entity) && !_entityManager.HasComponent<RMCSurvivorComponent>(entity))
                     {
-                        if (_entityManager.TryGetComponent<SquadMemberComponent>(entity, out var squadMember) &&
-                            squadMember.Squad is { } squad)
+                        if (squadSystem.TryGetMemberSquad(entity, out var squad))
                         {
                             if (marines.Subgroups == null)
                                 marines.Subgroups = new List<WarpGroup>();
 
-                            var squadName = _entityManager.GetComponent<MetaDataComponent>(squad).EntityName;
+                            var squadName = _entityManager.GetComponent<MetaDataComponent>(squad.Owner).EntityName;
                             var squadGroup = marines.Subgroups.Find(g =>
-                                Loc.GetString(g.Title) == squadName);
+                                g.Title == squadName);
 
                             if (squadGroup == null)
                             {
-                                // Создаем новую подгруппу для отряда
+                                // RMC14: Create a new subgroup for the squad
                                 squadGroup = new WarpGroup
                                 {
-                                    Title = new LocId(squadName),
-                                    HeaderColor = _entityManager.GetComponent<SquadTeamComponent>(squad).Color,
+                                    Title = squadName,
+                                    HeaderColor = AdjustLightness(squad.Comp.Color, -0.1f), // darken the colors, they are too bright
                                     IsExpandedByDefault = true
                                 };
                                 marines.Subgroups.Add(squadGroup);
@@ -123,13 +155,12 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                             if (marines.Subgroups == null)
                                 marines.Subgroups = new List<WarpGroup>();
 
-                            var othersGroup = marines.Subgroups.Find(g =>
-                                Loc.GetString(g.Title) == "rmc-ghost-target-window-group-others");
+                            var othersGroup = marines.Subgroups.Find(g => g.Title == "rmc-ghost-target-window-group-others");
 
                             if (othersGroup == null)
                             {
-                                // Создаем подгруппу "Остальные"
-                                othersGroup = new WarpGroup { Title = new LocId("rmc-ghost-target-window-group-others") };
+                                // RMC14: Create a subgroup "Others"
+                                othersGroup = new WarpGroup { Title = "rmc-ghost-target-window-group-others" };
                                 marines.Subgroups.Add(othersGroup);
                             }
 
@@ -151,15 +182,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                 }
             }
 
-            // Sorting inside groups
-            marines.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
-            xenos.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
-            others.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
-            survivors.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
-            deads.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
-            warpPoints.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
-            ghosts.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
-
             // Adding groups in order of priority
             _warpGroups.Add(marines);
             _warpGroups.Add(xenos);
@@ -168,14 +190,46 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             _warpGroups.Add(deads);
             _warpGroups.Add(warpPoints);
             _warpGroups.Add(ghosts);
+
+            // Sorting ALL groups and subgroups
+            foreach (var group in _warpGroups)
+            {
+                group.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
+
+                if (group.Subgroups != null)
+                {
+                    // We sort subgroups by localized name, "rmc-ghost-target-window-group-others" is always the last one
+                    group.Subgroups.Sort((a, b) =>
+                    {
+                        const string othersKey = "rmc-ghost-target-window-group-others";
+                        if (a.Title == othersKey && b.Title != othersKey)
+                            return 1;
+                        if (b.Title == othersKey && a.Title != othersKey)
+                            return -1;
+                        var aLoc = Loc.GetString(a.Title);
+                        var bLoc = Loc.GetString(b.Title);
+                        return string.Compare(aLoc, bLoc, StringComparison.CurrentCulture);
+                    });
+                    foreach (var subgroup in group.Subgroups)
+                    {
+                        subgroup.Warps.Sort((a, b) => string.Compare(a.displayName, b.displayName, StringComparison.CurrentCulture));
+                    }
+                }
+            }
         }
 
+        /// <summary>
+        /// RMC14: Populates the window with the current warp groups and their content.
+        /// </summary>
         public void Populate()
         {
             ContentContainer.DisposeAllChildren();
             AddContent();
         }
 
+        /// <summary>
+        /// RMC14: Adds all group content (including subgroups) to the main content container.
+        /// </summary>
         private void AddContent()
         {
             var spriteSystem = _entityManager.System<SpriteSystem>();
@@ -184,31 +238,75 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
             foreach (var group in _warpGroups)
             {
-                if (group.Warps.Count == 0)
+                if (group.Warps.Count == 0 && (group.Subgroups == null || group.Subgroups.Count == 0))
                     continue;
-
-                var heading = CreateHeading(group, spriteSystem);
-                var body = new CollapsibleBody { HorizontalExpand = true, Margin = new Thickness(0, 3, 0, 0) };
-                var groupContainer = CreateGroupContainer(body);
-
-                foreach (var (name, warpTarget, isWarpPoint, job) in group.Warps)
-                {
-                    var button = CreateWarpButton(name, warpTarget, isWarpPoint, job, spriteSystem, mobThreshold, mobState, group, ButtonIsVisible);
-                    groupContainer.AddChild(button);
-                }
-
-                body.AddChild(groupContainer);
-                var collapsible = CreateCollapsible(heading, body, group);
-
-                ContentContainer.AddChild(collapsible);
-                _collapsibleGroups[collapsible] = group;
+                AddGroupContent(group, ContentContainer, spriteSystem, mobThreshold, mobState, false);
             }
         }
 
-
-        private CollapsibleHeading CreateHeading(WarpGroup group, SpriteSystem spriteSystem)
+        /// <summary>
+        /// RMC14: Recursively adds collapsible UI elements for a group and its subgroups.
+        /// </summary>
+        private void AddGroupContent(WarpGroup group, Container parent, SpriteSystem spriteSystem, MobThresholdSystem mobThreshold, MobStateSystem mobState, bool isSubgroup)
         {
-            var heading = new CollapsibleHeading($"{Loc.GetString(group.Title)} — ({group.Warps.Count})");
+            var heading = CreateHeading(group, spriteSystem, CountAllWarps(group));
+            var body = new CollapsibleBody { HorizontalExpand = true, Margin = new Thickness(0, 3, 0, 0) };
+
+            // Container for buttons
+            if (group.Warps.Count > 0)
+            {
+                var buttonGrid = CreateGroupContainer(body);
+                foreach (var (name, warpTarget, isWarpPoint, job) in group.Warps)
+                {
+                    var button = CreateWarpButton(name, warpTarget, isWarpPoint, job, spriteSystem, mobThreshold, mobState, group, ButtonIsVisible);
+                    buttonGrid.AddChild(button);
+                }
+                body.AddChild(buttonGrid);
+            }
+
+            // Container for subgroups
+            if (group.Subgroups != null && group.Subgroups.Count > 0)
+            {
+                var subgroupsBox = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    HorizontalExpand = true,
+                    VerticalExpand = false
+                };
+                foreach (var subgroup in group.Subgroups)
+                {
+                    AddGroupContent(subgroup, subgroupsBox, spriteSystem, mobThreshold, mobState, true);
+                }
+                body.AddChild(subgroupsBox);
+            }
+
+            var collapsible = CreateCollapsible(heading, body, group);
+            if (isSubgroup)
+                collapsible.Margin = new Thickness(10, 0, 0, 4);
+            parent.AddChild(collapsible);
+            _collapsibleGroups[collapsible] = group;
+        }
+
+        /// <summary>
+        /// RMC14: Recursively counts all warp targets (buttons) in a group and its subgroups.
+        /// </summary>
+        private int CountAllWarps(WarpGroup group)
+        {
+            int count = group.Warps.Count;
+            if (group.Subgroups != null)
+            {
+                foreach (var subgroup in group.Subgroups)
+                    count += CountAllWarps(subgroup);
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// RMC14: Creates a collapsible heading with a colored background and hover effect.
+        /// </summary>
+        private CollapsibleHeading CreateHeading(WarpGroup group, SpriteSystem spriteSystem, int totalCount)
+        {
+            var heading = new CollapsibleHeading($"{Loc.GetString(group.Title)} — ({totalCount})");
             heading.StyleBoxOverride = new StyleBoxTexture
             {
                 Texture = spriteSystem.Frame0(new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/Nano/rounded_button.svg.96dpi.png"))),
@@ -228,13 +326,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             {
                 if (heading.StyleBoxOverride is StyleBoxTexture styleBox)
                 {
-                    var c = styleBox.Modulate;
-                    styleBox.Modulate = new Color(
-                        Math.Min(c.R + 0.1f, 1.0f),
-                        Math.Min(c.G + 0.1f, 1.0f),
-                        Math.Min(c.B + 0.1f, 1.0f),
-                        c.A
-                    );
+                    styleBox.Modulate = AdjustLightness(styleBox.Modulate, 0.1f);
                 }
             };
 
@@ -247,6 +339,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             return heading;
         }
 
+        /// <summary>
+        /// RMC14: Creates a group container (GridContainer) for a collapsible body and sets up resizing logic.
+        /// </summary>
         private GridContainer CreateGroupContainer(CollapsibleBody body)
         {
             var groupContainer = new GridContainer
@@ -262,6 +357,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             return groupContainer;
         }
 
+        /// <summary>
+        /// RMC14: Creates a unique button name based on base name and job, avoiding duplicates.
+        /// </summary>
         private string GenerateUniqueButtonName(string baseName, string? job)
         {
             var name = job != null ? $"{baseName} {job}" : baseName;
@@ -284,13 +382,16 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
         }
 
         /// <summary>
-        /// RMC14: Truncate text to a maximum length.
+        /// RMC14: Truncates the given text to a maximum length, adding ellipsis if needed.
         /// </summary>
         private string TruncateText(string text, int maxLength)
         {
             return text.Length > maxLength ? text.Substring(0, maxLength) + "..." : text;
         }
 
+        /// <summary>
+        /// RMC14: Creates a warp button for a given target, including icons and tooltip.
+        /// </summary>
         private Button CreateWarpButton(string name, NetEntity warpTarget, bool isWarpPoint, string? job,
             SpriteSystem spriteSystem, MobThresholdSystem mobThreshold, MobStateSystem mobState,
             WarpGroup group, Func<Button, bool> isVisibleCheck)
@@ -350,13 +451,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             {
                 if (button.StyleBoxOverride is StyleBoxTexture styleBox)
                 {
-                    var c = styleBox.Modulate;
-                    styleBox.Modulate = new Color(
-                        Math.Min(c.R + 0.1f, 1.0f),
-                        Math.Min(c.G + 0.1f, 1.0f),
-                        Math.Min(c.B + 0.1f, 1.0f),
-                        c.A
-                    );
+                    styleBox.Modulate = AdjustLightness(styleBox.Modulate, 0.1f);
                 }
             };
 
@@ -390,6 +485,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             return button;
         }
 
+        /// <summary>
+        /// RMC14: Adds health, tactical, and other icons to the button container for a warp target.
+        /// </summary>
         private void AddIconsToButtonContainer(BoxContainer buttonContainer, NetEntity warpTarget, SpriteSystem spriteSystem,
             MobThresholdSystem mobThreshold, MobStateSystem mobState, ref float? healthPercent)
         {
@@ -464,6 +562,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             }
         }
 
+        /// <summary>
+        /// RMC14: Adds a ghost follower counter to the button container if the entity has followers.
+        /// </summary>
         private void AddGhostCounter(BoxContainer buttonContainer, NetEntity warpTarget)
         {
             var followerSystem = _entityManager.System<FollowerSystem>();
@@ -504,6 +605,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             }
         }
 
+        /// <summary>
+        /// RMC14: Generates a tooltip string for a warp target, including name, job/caste, and health.
+        /// </summary>
         private string GetTooltip(NetEntity warpTarget, string name, string? job, MobStateSystem mobState, float? healthPercent)
         {
             var entity = _entityManager.GetEntity(warpTarget);
@@ -523,6 +627,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             return tooltipText;
         }
 
+        /// <summary>
+        /// RMC14: Creates a collapsible UI element for a group with a heading and body.
+        /// </summary>
         private Collapsible CreateCollapsible(CollapsibleHeading heading, CollapsibleBody body, WarpGroup group)
         {
             var collapsible = new Collapsible(heading, body)
@@ -537,6 +644,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             return collapsible;
         }
 
+        /// <summary>
+        /// RMC14: Determines if a button should be visible based on the current search text.
+        /// </summary>
         private bool ButtonIsVisible(Button button)
         {
             if (string.IsNullOrEmpty(_searchText))
@@ -546,47 +656,105 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                    (button.Name != null && button.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase));
         }
 
+        /// <summary>
+        /// RMC14: Updates the visibility of all buttons based on the current search text.
+        /// </summary>
         private void UpdateVisibleButtons()
         {
-            foreach (var collapsible in ContentContainer.Children.OfType<Collapsible>())
-            {
-                var body = collapsible.GetChild(1) as CollapsibleBody;
-                if (body?.ChildCount != 1)
-                    continue;
-
-                var groupContainer = body.GetChild(0) as GridContainer;
-                if (groupContainer == null)
-                    continue;
-
-                foreach (var button in groupContainer.Children.OfType<Button>())
-                {
-                    button.Visible = ButtonIsVisible(button);
-                }
-            }
+            UpdateVisibleButtonsRecursive(ContentContainer);
         }
 
-        private void UpdateVisibleCollapsibles()
+        /// <summary>
+        /// RMC14: Recursively updates the visibility of buttons in the given container based on the search text.
+        /// </summary>
+        private void UpdateVisibleButtonsRecursive(Container container)
         {
-            foreach (var child in ContentContainer.Children)
+            foreach (var child in container.Children)
             {
                 if (child is Collapsible collapsible)
                 {
                     var body = collapsible.GetChild(1) as CollapsibleBody;
-                    var container = body?.GetChild(0) as GridContainer;
-                    var hasVisibleButtons = container?.Children.OfType<Button>().Any(b => ButtonIsVisible(b)) ?? false;
+                    if (body == null)
+                        continue;
 
-                    collapsible.Visible = hasVisibleButtons;
-
-                    if (_collapsibleGroups.TryGetValue(collapsible, out var group))
+                    // RMC14: Update buttons in all GridContainer inside body
+                    foreach (var bodyChild in body.Children)
                     {
-                        collapsible.BodyVisible = string.IsNullOrEmpty(_searchText)
-                            ? group.IsExpandedByDefault
-                            : hasVisibleButtons;
+                        if (bodyChild is GridContainer groupContainer)
+                        {
+                            foreach (var button in groupContainer.Children.OfType<Button>())
+                            {
+                                button.Visible = ButtonIsVisible(button);
+                            }
+                        }
+                        // RMC14: Recursively traverse BoxContainer with subgroups
+                        else if (bodyChild is BoxContainer subgroupsBox)
+                        {
+                            UpdateVisibleButtonsRecursive(subgroupsBox);
+                        }
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// RMC14: Updates the visibility of all collapsible groups based on the current search text.
+        /// </summary>
+        private void UpdateVisibleCollapsibles()
+        {
+            UpdateVisibleCollapsibles(ContentContainer);
+        }
+
+        /// <summary>
+        /// RMC14: Recursively updates the visibility of collapsible groups in the given container.
+        /// </summary>
+        private bool UpdateVisibleCollapsibles(Container container)
+        {
+            bool anyVisible = false;
+
+            foreach (var child in container.Children)
+            {
+                if (child is Collapsible collapsible)
+                {
+                    var body = collapsible.GetChild(1) as CollapsibleBody;
+                    if (body == null)
+                        continue;
+
+                    // First child — GridContainer with buttons
+                    bool hasVisibleButton = false;
+                    bool hasVisibleSubgroup = false;
+
+                    foreach (var bodyChild in body.Children)
+                    {
+                        if (bodyChild is GridContainer buttonGrid)
+                        {
+                            if (buttonGrid.Children.OfType<Button>().Any(ButtonIsVisible))
+                                hasVisibleButton = true;
+                        }
+                        else if (bodyChild is BoxContainer subgroupsBox)
+                        {
+                            if (UpdateVisibleCollapsibles(subgroupsBox))
+                                hasVisibleSubgroup = true;
+                        }
+                    }
+
+                    bool visible = hasVisibleButton || hasVisibleSubgroup;
+                    collapsible.Visible = visible;
+                    collapsible.BodyVisible = string.IsNullOrEmpty(_searchText)
+                        ? _collapsibleGroups.TryGetValue(collapsible, out var group) && group.IsExpandedByDefault
+                        : visible;
+
+                    if (visible)
+                        anyVisible = true;
+                }
+            }
+
+            return anyVisible;
+        }
+
+        /// <summary>
+        /// RMC14: Handles the event when the search text changes, updating button and group visibility.
+        /// </summary>
         private void OnSearchTextChanged(LineEdit.LineEditEventArgs args)
         {
             _searchText = args.Text;
@@ -595,6 +763,20 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             UpdateVisibleCollapsibles();
             // Reset scroll bar so they can see the relevant results.
             GhostScroll.SetScrollValue(Vector2.Zero);
+        }
+
+        /// <summary>
+        /// RMC14: Adjusts the brightness of a color by a given percent.
+        /// Positive percent lightens the color, negative percent darkens it.
+        /// </summary>
+        private static Color AdjustLightness(Color color, float percent)
+        {
+            var hsv = Color.ToHsv(color);
+            if (percent > 0)
+                hsv.Z = Math.Min(hsv.Z * (1f + percent), 1f);
+            else
+                hsv.Z *= (1f + percent);
+            return Color.FromHsv(hsv);
         }
     }
 }

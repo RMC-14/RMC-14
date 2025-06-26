@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Cryostorage;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Orders;
@@ -57,6 +58,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
     private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";
@@ -414,6 +416,8 @@ public sealed class SquadSystem : EntitySystem
             return true;
 
         var squadEnt = Spawn(id);
+        _rmcPvs.AddForceSend(squadEnt); // The client must always know about the squads in order to be able to work with them.
+        //It looks very strange, but this is the result of the lack of a separate prototype for the squads.
         if (!TryComp(squadEnt, out SquadTeamComponent? squadComp))
         {
             Log.Error($"Squad entity prototype {id} had {nameof(SquadTeamComponent)}, but none found on entity {ToPrettyString(squadEnt)}");

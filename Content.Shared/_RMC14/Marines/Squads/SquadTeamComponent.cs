@@ -8,51 +8,51 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
-[RegisterComponent, NetworkedComponent]
-[Access(typeof(SquadSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SquadSystem), Other = AccessPermissions.Read)]
 [EntityCategory("Squads")]
 public sealed partial class SquadTeamComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool RoundStart;
 
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public Color Color;
 
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public ProtoId<RadioChannelPrototype>? Radio;
 
-    [DataField(required: true)]
+    [DataField(required: true), AutoNetworkedField]
     public SpriteSpecifier Background;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? MinimapBackground;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<AccessLevelPrototype>[] AccessLevels = Array.Empty<ProtoId<AccessLevelPrototype>>();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Members = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<JobPrototype>, int> Roles = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<JobPrototype>, int> MaxRoles = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool CanSupplyDrop = true;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<SquadArmorLayers> BlacklistedSquadArmor = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     [Access(typeof(SquadLeaderTrackerSystem))]
     public FireteamData Fireteams = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public string Group = "UNMC";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad_leader_a");
 }

@@ -1,4 +1,4 @@
-<DefaultWindow xmlns="https://spacestation14.io" Title="{Loc 'ghost-target-window-title'}" MinSize="450 450" SetSize="450 450">
+<DefaultWindow xmlns="https://spacestation14.io" Title="{Loc 'ghost-target-window-title'}" MinSize="500 450" SetSize="500 500"> <!-- RMC14 MinSize and SetSize changed -->
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="0.4">
         <Button Name="GhostnadoButton" Text="{Loc 'ghost-target-window-warp-to-most-followed'}" HorizontalAlignment="Center" Margin="0 4" /> <!-- RMC14 Text changed -->
         <LineEdit Name="SearchBar" PlaceHolder="{Loc 'rmc-ghost-target-window-search-placeholde'}" HorizontalExpand="True" Margin="0 4" />
