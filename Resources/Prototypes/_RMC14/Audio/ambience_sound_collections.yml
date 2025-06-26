@@ -1,0 +1,68 @@
+﻿- type: soundCollection
+  id: RMCAmbienceGeneric
+  files:
+    - /Audio/_RMC14/Ambience/ambigen1.ogg
+    - /Audio/_RMC14/Ambience/ambigen2.ogg
+    - /Audio/_RMC14/Ambience/ambigen3.ogg
+    - /Audio/_RMC14/Ambience/ambigen4.ogg
+    - /Audio/_RMC14/Ambience/ambigen5.ogg
+    - /Audio/_RMC14/Ambience/ambigen6.ogg
+    - /Audio/_RMC14/Ambience/ambigen7.ogg
+    - /Audio/_RMC14/Ambience/ambigen8.ogg
+    - /Audio/_RMC14/Ambience/ambigen9.ogg
+    - /Audio/_RMC14/Ambience/ambigen10.ogg
+    - /Audio/_RMC14/Ambience/ambigen11.ogg
+    - /Audio/_RMC14/Ambience/ambigen12.ogg
+    - /Audio/_RMC14/Ambience/ambigen13.ogg
+    - /Audio/_RMC14/Ambience/ambigen14.ogg
+    - /Audio/_RMC14/Ambience/ambigen15.ogg
+
+- type: soundCollection
+  id: RMCAmbienceRuin
+  files:
+    - /Audio/_RMC14/Ambience/ambiruin.ogg
+    - /Audio/_RMC14/Ambience/ambiruin2.ogg
+    - /Audio/_RMC14/Ambience/ambiruin3.ogg
+    - /Audio/_RMC14/Ambience/ambiruin4.ogg
+    - /Audio/_RMC14/Ambience/ambiruin5.ogg
+    - /Audio/_RMC14/Ambience/ambiruin6.ogg
+    - /Audio/_RMC14/Ambience/ambiruin7.ogg
+
+- type: soundCollection
+  id: RMCAmbienceHymms
+  files:
+    - /Audio/_RMC14/Ambience/ambicha1.ogg
+    - /Audio/_RMC14/Ambience/ambicha2.ogg
+    - /Audio/_RMC14/Ambience/ambicha3.ogg
+    - /Audio/_RMC14/Ambience/ambicha4.ogg
+
+- type: soundCollection
+  id: RMCAmbienceHoly
+  files:
+    - /Audio/_RMC14/Ambience/ambiholy.ogg
+    - /Audio/_RMC14/Ambience/ambiholy2.ogg
+    - /Audio/_RMC14/Ambience/ambiholy3.ogg
+
+- type: soundCollection
+  id: RMCAmbienceDanger
+  files:
+    - /Audio/_RMC14/Ambience/ambidanger.ogg
+    - /Audio/_RMC14/Ambience/ambidange2.ogg
+
+- type: soundCollection
+  id: RMCAmbienceMaintenance
+  files:
+    - /Audio/_RMC14/Ambience/ambimaint1.ogg
+    - /Audio/_RMC14/Ambience/ambimaint2.ogg
+    - /Audio/_RMC14/Ambience/ambimaint3.ogg
+    - /Audio/_RMC14/Ambience/ambimaint4.ogg
+    - /Audio/_RMC14/Ambience/ambimaint5.ogg
+    - /Audio/_RMC14/Ambience/maintambience.ogg
+
+- type: soundCollection
+  id: RMCAmbienceCave
+  files:
+    - /Audio/_RMC14/Ambience/ambilava1.ogg
+    - /Audio/_RMC14/Ambience/ambilava2.ogg
+    - /Audio/_RMC14/Ambience/ambilava3.ogg
+    - /Audio/_RMC14/Ambience/ambimine.ogg

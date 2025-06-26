@@ -26,6 +26,7 @@
       entries:
       - id: CMHandsBlackMarine
       - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
