@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weapons.Melee.Events;
@@ -83,10 +84,6 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         return relativeDiff is 0 or 1 or 7;
     }
 }
-
-[ByRefEvent]
-[Serializable, NetSerializable]
-public record struct MeleeAttackAttemptEvent(NetEntity Target, AttackEvent Attack, NetCoordinates Coordinates , List<NetEntity> PotentialTargets,NetEntity? Weapon = null);
 
 [ByRefEvent]
 [Serializable, NetSerializable]

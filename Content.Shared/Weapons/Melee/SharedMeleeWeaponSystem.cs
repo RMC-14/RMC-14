@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
-using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
@@ -51,6 +51,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private   readonly SharedPhysicsSystem     _physics         = default!;
     [Dependency] private   readonly IPrototypeManager       _protoManager    = default!;
     [Dependency] private   readonly StaminaSystem           _stamina         = default!;
+    [Dependency] private   readonly SharedRMCMeleeWeaponSystem _rmcMelee     = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -372,29 +373,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 if (weaponUid == target)
                     return false;
 
-                // RMC14
-                if (target != null)
-                {
-                    var targetPosition = TransformSystem.GetMoverCoordinates(target.Value).Position;
-                    var userPosition = TransformSystem.GetMoverCoordinates(user).Position;
-                    var entities = GetNetEntityList(ArcRayCast(userPosition,
-                            (targetPosition - userPosition).ToWorldAngle(),
-                            0,
-                            1.5f,
-                            TransformSystem.GetMapId(user),
-                            user)
-                        .ToList());
-
-                    var meleeEv = new MeleeAttackAttemptEvent(GetNetEntity(target.Value),
-                        attack,
-                        light.Coordinates,
-                        entities,
-                        light.Weapon);
-                    RaiseLocalEvent(user, ref meleeEv);
-
-                    attack = meleeEv.Attack;
-                }
-
                 break;
             case DisarmAttackEvent disarm:
                 if (disarm.Target != null && !TryGetEntity(disarm.Target, out target))
@@ -405,35 +383,17 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
                 if (!Blocker.CanAttack(user, target, (weaponUid, weapon), true))
                     return false;
-
-                // RMC14
-                if (target != null)
-                {
-                    var targetPosition = TransformSystem.GetMoverCoordinates(target.Value).Position;
-                    var userPosition = TransformSystem.GetMoverCoordinates(user).Position;
-                    var entities = GetNetEntityList(ArcRayCast(userPosition,
-                            (targetPosition -
-                             userPosition).ToWorldAngle(),
-                            0,
-                            1.5f,
-                            TransformSystem.GetMapId(user),
-                            user)
-                        .ToList());
-
-                    var meleeEv = new MeleeAttackAttemptEvent(GetNetEntity(target.Value),
-                        attack,
-                        disarm.Coordinates,
-                        entities);
-                    RaiseLocalEvent(user, ref meleeEv);
-
-                    attack = meleeEv.Attack;
-                }
                 break;
             default:
                 if (!Blocker.CanAttack(user, weapon: (weaponUid, weapon)))
                     return false;
                 break;
         }
+
+        // RMC14
+        if (target != null &&
+            _rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack))
+            attack = newAttack;
 
         // Windup time checked elsewhere.
         var fireRate = TimeSpan.FromSeconds(1f / GetAttackRate(weaponUid, user, weapon));
@@ -766,7 +726,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         return true;
     }
 
-    protected HashSet<EntityUid> ArcRayCast(Vector2 position, Angle angle, Angle arcWidth, float range, MapId mapId, EntityUid ignore)
+    public HashSet<EntityUid> ArcRayCast(Vector2 position, Angle angle, Angle arcWidth, float range, MapId mapId, EntityUid ignore)
     {
         // TODO: This is pretty sucky.
         var widthRad = arcWidth;
