@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: M79 gun cases are are now available at squad vendors and requisitions.
-    type: Add
-  - message: Several new grenades have been added to squad vendors and requisitions.
-    type: Add
-  id: 1395
-  time: '2025-03-01T13:03:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5666
-- author: Dygon
-  changes:
   - message: The engineering skill now speeds up how fast you deconstruct and repair
       objects.
     type: Fix
@@ -5210,5 +5201,12 @@
   id: 1896
   time: '2025-06-25T09:48:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6800
+- author: Vermidia
+  changes:
+  - message: Fixed close Queen scream stacking with far queen scream effects.
+    type: Fix
+  id: 1897
+  time: '2025-06-26T11:06:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6707
 Name: RMC14
 Order: -1
