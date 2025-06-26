@@ -819,11 +819,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!_container.TryGetContainingContainer((item, null), out var container))
             return false;
 
-        static bool IsUser(SharedCMInventorySystem system, EntityUid user)
-        {
-            return system.HasComp<InventoryComponent>(user) || system.HasComp<HandsComponent>(user);
-        }
-
         if (IsUser(this, container.Owner))
         {
             user = container.Owner;
@@ -842,5 +837,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         user = container.Owner;
         return true;
+
+        static bool IsUser(SharedCMInventorySystem system, EntityUid user)
+        {
+            return system.HasComp<InventoryComponent>(user) || system.HasComp<HandsComponent>(user);
+        }
     }
 }

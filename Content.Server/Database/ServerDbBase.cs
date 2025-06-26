@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Shared._RMC14.NamedItems;
@@ -1980,27 +1981,33 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return (random.Message, random.LastSeenUserName);
         }
 
-        public async Task<(string? Marine, string? Xeno)> GetRandomShoutout()
+        public async Task<(RoundEndShoutout? Marine, RoundEndShoutout? Xeno)> GetRandomShoutout()
         {
             // TODO RMC14 the random row is evaluated outside the DB, if we have that many patrons I guess we have better problems!
             await using var db = await GetDb();
-            var marineNames = await db.DbContext.RMCPatronRoundEndMarineShoutouts
+            var marines = await db.DbContext.RMCPatronRoundEndMarineShoutouts
                 .Include(p => p.Patron)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
-                .Select(p => p.Name)
                 .ToListAsync();
 
-            var xenoNames = await db.DbContext.RMCPatronRoundEndXenoShoutouts
+            var xenos = await db.DbContext.RMCPatronRoundEndXenoShoutouts
                 .Include(p => p.Patron)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
-                .Select(p => p.Name)
                 .ToListAsync();
 
-            var marineName = marineNames.Count == 0 ? null : marineNames[Random.Shared.Next(marineNames.Count)];
-            var xenoName = xenoNames.Count == 0 ? null : xenoNames[Random.Shared.Next(xenoNames.Count)];
-            return (marineName, xenoName);
+            var marine = marines.Count == 0 ? null : marines[Random.Shared.Next(marines.Count)];
+            RoundEndShoutout? marineShoutout = marine == null
+                ? null
+                : new RoundEndShoutout(marine.Patron.Player.LastSeenUserName, marine.Name);
+
+            var xeno = xenos.Count == 0 ? null : xenos[Random.Shared.Next(xenos.Count)];
+            RoundEndShoutout? xenoShoutout = xeno == null
+                ? null
+                : new RoundEndShoutout(xeno.Patron.Player.LastSeenUserName, xeno.Name);
+
+            return (marineShoutout, xenoShoutout);
         }
 
         public async Task<List<string>> GetExcludedRoleTimers(Guid player, CancellationToken cancel)
