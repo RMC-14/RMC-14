@@ -7,7 +7,7 @@
       chemicals:
         maxVol: 250
         reagents:
-        - ReagentId: Romerol
+        - ReagentId: RMCBlackGoo
           Quantity: 250
 
 # Colonist
