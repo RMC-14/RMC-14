@@ -4,8 +4,8 @@ meta:
   engineVersion: 251.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/24/2025 15:00:13
-  entityCount: 5566
+  time: 06/26/2025 13:38:38
+  entityCount: 5682
 maps:
 - 1
 grids:
@@ -99,8 +99,18 @@ tilemap:
   96: CMFloorSteelSterileGreenSide5
   94: CMFloorSteelSterileGreenSide6
   95: CMFloorSteelSterileGreenSide7
+  130: CMFloorStrata1
+  129: CMFloorStrata3
   51: CMFloorWhiteSterile
   79: CMPlanetCorsatSquare
+  138: CMShuttleTileRasputin10
+  136: CMShuttleTileRasputin11
+  134: CMShuttleTileRasputin3
+  131: CMShuttleTileRasputin4
+  132: CMShuttleTileRasputin5
+  135: CMShuttleTileRasputin6
+  137: CMShuttleTileRasputin7
+  133: CMShuttleTileRasputin8
   120: Plating
   52: RMCFloorHybrisaBeigeCarpetDeco
   99: RMCFloorHybrisaBeigeCheck
@@ -124,6 +134,7 @@ tilemap:
   110: RMCFloorHybrisaGrey
   13: RMCFloorHybrisaRedCarpetDeco
   41: RMCFloorHybrisaRedMetal
+  139: RMCFloorHybrisaRedMetalCuppaJoe
   114: RMCFloorHybrisaWhite
   11: RMCFloorHybrisaWood
   119: RMCFloorHybrisaWoodBlack
@@ -196,7 +207,7 @@ entities:
           version: 6
         1,-1:
           ind: 1,-1
-          tiles: BAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAA
+          tiles: BAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAgQAAAAAAgQAAAAAAgQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAggAAAAAAggAAAAAAggAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACQAAAAAAgwAAAAAAhAAAAAAAhQAAAAAACQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACQAAAAAAhgAAAAAACQAAAAAAhgAAAAAACQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACQAAAAAAhgAAAAAACQAAAAAAhgAAAAAACQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAggAAAAAAggAAAAAAhgAAAAAACQAAAAAAhgAAAAAAggAAAAAAggAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAggAAAAAAggAAAAAAhwAAAAAAiAAAAAAAiQAAAAAAggAAAAAAggAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACQAAAAAACQAAAAAAhgAAAAAACQAAAAAACQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACQAAAAAACQAAAAAAhgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACQAAAAAACQAAAAAAhgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAhgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAgwAAAAAAigAAAAAAhQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAABAAAAAAABwAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABAAAAAAABAAAAAAA
           version: 6
         1,-2:
           ind: 1,-2
@@ -272,7 +283,7 @@ entities:
           version: 6
         2,4:
           ind: 2,4
-          tiles: AgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAA
+          tiles: AgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAACwAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAiwAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAA
           version: 6
         -1,3:
           ind: -1,3
@@ -7937,48 +7948,6 @@ entities:
         31,68: RMCAreaOCP-583
     - type: BecomesStation
       id: OCP-583
-- proto: ActionToggleLight
-  entities:
-  - uid: 955
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 954
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 954
-  - uid: 1054
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 1053
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 1053
-  - uid: 1782
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 675
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 675
-  - uid: 2319
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 2318
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 2318
-  - uid: 2955
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 2954
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 2954
 - proto: ArmorHelmetPMCCorporate
   entities:
   - uid: 936
@@ -8544,6 +8513,64 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -5.5,11.5
+      parent: 23
+- proto: CMAirlockShuttle
+  entities:
+  - uid: 124
+    components:
+    - type: MetaData
+      name: We-Ya-LWI Hauler HR-685
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 24.5,-14.5
+      parent: 23
+  - uid: 5587
+    components:
+    - type: MetaData
+      name: We-Ya-LWI Hauler HR-685
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 20.5,-10.5
+      parent: 23
+  - uid: 5588
+    components:
+    - type: MetaData
+      name: We-Ya-LWI Hauler HR-685
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 20.5,-9.5
+      parent: 23
+  - uid: 5591
+    components:
+    - type: MetaData
+      name: We-Ya-LWI Hauler HR-685
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 26.5,-9.5
+      parent: 23
+  - uid: 5592
+    components:
+    - type: MetaData
+      name: We-Ya-LWI Hauler HR-685
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 26.5,-10.5
+      parent: 23
+  - uid: 5648
+    components:
+    - type: MetaData
+      name: We-Ya-LWI Hauler HR-685
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 22.5,-14.5
+      parent: 23
+  - uid: 5649
+    components:
+    - type: MetaData
+      name: We-Ya-LWI Hauler HR-685
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 23.5,-14.5
       parent: 23
 - proto: CMApcHighCapacity
   entities:
@@ -10824,6 +10851,23 @@ entities:
     - type: Transform
       pos: 54.5,-1.5
       parent: 23
+- proto: CMComputerDropshipCamerasAlamo
+  entities:
+  - uid: 5650
+    components:
+    - type: Transform
+      pos: 22.5,-3.5
+      parent: 23
+- proto: CMComputerDropshipWeapons
+  entities:
+  - uid: 5651
+    components:
+    - type: Transform
+      pos: 24.5,-3.5
+      parent: 23
+    missingComponents:
+    - ActivatableUI
+    - DropshipTerminalWeapons
 - proto: CMCrematorium
   entities:
   - uid: 1535
@@ -13497,6 +13541,54 @@ entities:
     - type: Transform
       pos: 32.5,65.5
       parent: 23
+  - uid: 5633
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 21.5,-8.5
+      parent: 23
+  - uid: 5634
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 25.5,-8.5
+      parent: 23
+  - uid: 5661
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 22.5,-4.5
+      parent: 23
+  - uid: 5662
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 24.5,-4.5
+      parent: 23
+  - uid: 5677
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 25.5,-12.5
+      parent: 23
+  - uid: 5678
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 21.5,-12.5
+      parent: 23
+  - uid: 5679
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 22.5,-16.5
+      parent: 23
+  - uid: 5680
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 24.5,-16.5
+      parent: 23
 - proto: CMLightFixtureSmall
   entities:
   - uid: 893
@@ -13749,6 +13841,12 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 31.5,11.5
+      parent: 23
+  - uid: 5682
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,-6.5
       parent: 23
 - proto: CMLinenBinFilled
   entities:
@@ -14396,42 +14494,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 37.5,-19.5
       parent: 23
-  - uid: 124
-    components:
-    - type: Transform
-      pos: 38.5,-17.5
-      parent: 23
-  - uid: 125
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 37.5,-18.5
-      parent: 23
-  - uid: 138
-    components:
-    - type: Transform
-      pos: 43.5,-17.5
-      parent: 23
-  - uid: 139
-    components:
-    - type: Transform
-      pos: 41.5,-17.5
-      parent: 23
-  - uid: 140
-    components:
-    - type: Transform
-      pos: 39.5,-17.5
-      parent: 23
-  - uid: 142
-    components:
-    - type: Transform
-      pos: 40.5,-17.5
-      parent: 23
-  - uid: 147
-    components:
-    - type: Transform
-      pos: 42.5,-17.5
-      parent: 23
   - uid: 366
     components:
     - type: Transform
@@ -14936,12 +14998,35 @@ entities:
     - type: Transform
       pos: 60.5,70.5
       parent: 23
-- proto: CMPlatformCorner
-  entities:
-  - uid: 137
+  - uid: 5567
     components:
     - type: Transform
-      pos: 46.5,-17.5
+      rot: 3.141592653589793 rad
+      pos: 23.5,-16.5
+      parent: 23
+  - uid: 5569
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 22.5,-16.5
+      parent: 23
+  - uid: 5580
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 24.5,-16.5
+      parent: 23
+  - uid: 5657
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 22.5,-16.5
+      parent: 23
+  - uid: 5659
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 24.5,-16.5
       parent: 23
 - proto: CMPosterArt1
   entities:
@@ -16080,6 +16165,20 @@ entities:
     components:
     - type: Transform
       pos: 35.5,69.5
+      parent: 23
+- proto: CMSeatPilot
+  entities:
+  - uid: 5666
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 24.5,-4.5
+      parent: 23
+  - uid: 5668
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 22.5,-4.5
       parent: 23
 - proto: CMSemioticAirtraffictower
   entities:
@@ -18844,12 +18943,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 47.5,-15.5
       parent: 23
-  - uid: 135
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 47.5,-16.5
-      parent: 23
   - uid: 136
     components:
     - type: Transform
@@ -18873,6 +18966,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 34.5,-7.5
+      parent: 23
+  - uid: 193
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 47.5,-16.5
       parent: 23
   - uid: 204
     components:
@@ -30589,6 +30688,11 @@ entities:
     - type: Transform
       pos: 15.5,-19.5
       parent: 23
+  - uid: 5665
+    components:
+    - type: Transform
+      pos: 25.5,-8.5
+      parent: 23
 - proto: RMCBarrelGreen
   entities:
   - uid: 184
@@ -30609,6 +30713,12 @@ entities:
     components:
     - type: Transform
       pos: 56.5,1.5
+      parent: 23
+  - uid: 5674
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 25.5,-11.5
       parent: 23
 - proto: RMCBarrelWhite
   entities:
@@ -30631,6 +30741,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 24.5,18.5
+      parent: 23
+  - uid: 5667
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 21.5,-13.5
       parent: 23
 - proto: RMCBedPsych
   entities:
@@ -31122,12 +31238,22 @@ entities:
     - type: Transform
       pos: 35.5,-8.5
       parent: 23
+  - uid: 5655
+    components:
+    - type: Transform
+      pos: 21.5,-7.5
+      parent: 23
 - proto: RMCContainerShortBlueRight
   entities:
   - uid: 172
     components:
     - type: Transform
       pos: 36.5,-8.5
+      parent: 23
+  - uid: 5632
+    components:
+    - type: Transform
+      pos: 22.5,-7.5
       parent: 23
 - proto: RMCContainerTartarusLeft
   entities:
@@ -31141,6 +31267,11 @@ entities:
     - type: Transform
       pos: -3.5,3.5
       parent: 23
+  - uid: 5658
+    components:
+    - type: Transform
+      pos: 24.5,-6.5
+      parent: 23
 - proto: RMCContainerTartarusRight
   entities:
   - uid: 178
@@ -31152,6 +31283,11 @@ entities:
     components:
     - type: Transform
       pos: -2.5,3.5
+      parent: 23
+  - uid: 5585
+    components:
+    - type: Transform
+      pos: 25.5,-6.5
       parent: 23
 - proto: RMCContainerWeYaBlackLeft
   entities:
@@ -31189,6 +31325,11 @@ entities:
     - type: Transform
       pos: -3.5,-19.5
       parent: 23
+  - uid: 5653
+    components:
+    - type: Transform
+      pos: 21.5,-6.5
+      parent: 23
 - proto: RMCContainerWeYaGreyRight
   entities:
   - uid: 195
@@ -31201,6 +31342,11 @@ entities:
     - type: Transform
       pos: -2.5,-19.5
       parent: 23
+  - uid: 5652
+    components:
+    - type: Transform
+      pos: 22.5,-6.5
+      parent: 23
 - proto: RMCContainerWeYaLightGreyLeft
   entities:
   - uid: 179
@@ -31208,8 +31354,18 @@ entities:
     - type: Transform
       pos: 40.5,-8.5
       parent: 23
+  - uid: 5654
+    components:
+    - type: Transform
+      pos: 24.5,-7.5
+      parent: 23
 - proto: RMCContainerWeYaLightGreyRight
   entities:
+  - uid: 139
+    components:
+    - type: Transform
+      pos: 25.5,-7.5
+      parent: 23
   - uid: 180
     components:
     - type: Transform
@@ -31222,12 +31378,22 @@ entities:
     - type: Transform
       pos: -3.5,-16.5
       parent: 23
+  - uid: 5670
+    components:
+    - type: Transform
+      pos: 21.5,-8.5
+      parent: 23
 - proto: RMCContainerWeYaWhiteRight
   entities:
   - uid: 5313
     components:
     - type: Transform
       pos: -2.5,-16.5
+      parent: 23
+  - uid: 5663
+    components:
+    - type: Transform
+      pos: 22.5,-8.5
       parent: 23
 - proto: RMCCouchEnd
   entities:
@@ -31399,12 +31565,6 @@ entities:
       parent: 23
 - proto: RMCCouchMid
   entities:
-  - uid: 34
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 15.5,-3.5
-      parent: 23
   - uid: 35
     components:
     - type: Transform
@@ -31435,6 +31595,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,6.5
       parent: 23
+  - uid: 5681
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 15.5,-3.5
+      parent: 23
 - proto: RMCCrateBase
   entities:
   - uid: 118
@@ -31451,6 +31617,11 @@ entities:
     components:
     - type: Transform
       pos: 46.5,-13.5
+      parent: 23
+  - uid: 5672
+    components:
+    - type: Transform
+      pos: 21.5,-11.5
       parent: 23
 - proto: RMCCrateLarge
   entities:
@@ -31469,6 +31640,11 @@ entities:
     - type: Transform
       pos: 46.5,-14.5
       parent: 23
+  - uid: 5669
+    components:
+    - type: Transform
+      pos: 25.5,-12.5
+      parent: 23
 - proto: RMCCrateSecureHydro
   entities:
   - uid: 162
@@ -31482,6 +31658,11 @@ entities:
     components:
     - type: Transform
       pos: 49.5,-17.5
+      parent: 23
+  - uid: 5676
+    components:
+    - type: Transform
+      pos: 23.5,-12.5
       parent: 23
 - proto: RMCCrateSuppliesCrayons
   entities:
@@ -32486,66 +32667,26 @@ entities:
     - type: Transform
       pos: 7.567507,11.457357
       parent: 23
-    - type: HandheldLight
-      toggleActionEntity: 1782
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1782
   - uid: 954
     components:
     - type: Transform
       pos: -8.482105,13.699383
       parent: 23
-    - type: HandheldLight
-      toggleActionEntity: 955
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 955
   - uid: 1053
     components:
     - type: Transform
       pos: -8.075958,6.660919
       parent: 23
-    - type: HandheldLight
-      toggleActionEntity: 1054
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1054
   - uid: 2318
     components:
     - type: Transform
       pos: 30.550941,33.581482
       parent: 23
-    - type: HandheldLight
-      toggleActionEntity: 2319
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 2319
   - uid: 2954
     components:
     - type: Transform
       pos: 54.44752,30.741512
       parent: 23
-    - type: HandheldLight
-      toggleActionEntity: 2955
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 2955
 - proto: RMCLightFixtureBlueDouble
   entities:
   - uid: 3104
@@ -33528,6 +33669,19 @@ entities:
     - type: Transform
       pos: 64.5,14.5
       parent: 23
+- proto: RMCPlatformHybrisaThreeCornerSmall
+  entities:
+  - uid: 5656
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 24.5,-17.5
+      parent: 23
+  - uid: 5660
+    components:
+    - type: Transform
+      pos: 22.5,-17.5
+      parent: 23
 - proto: RMCPlatformKutjevoSM
   entities:
   - uid: 2035
@@ -34456,6 +34610,11 @@ entities:
     - type: Transform
       pos: 48.5,64.5
       parent: 23
+  - uid: 5664
+    components:
+    - type: Transform
+      pos: 25.5,-13.5
+      parent: 23
 - proto: RMCSecureCaseDouble
   entities:
   - uid: 365
@@ -34492,6 +34651,11 @@ entities:
     components:
     - type: Transform
       pos: 13.5,-10.5
+      parent: 23
+  - uid: 5673
+    components:
+    - type: Transform
+      pos: 24.5,-8.5
       parent: 23
 - proto: RMCSecureCaseMedicalSmall
   entities:
@@ -34534,6 +34698,11 @@ entities:
     - type: Transform
       pos: 38.5,19.5
       parent: 23
+  - uid: 5671
+    components:
+    - type: Transform
+      pos: 21.5,-12.5
+      parent: 23
 - proto: RMCSecureCaseStrapped
   entities:
   - uid: 4036
@@ -34550,6 +34719,11 @@ entities:
     components:
     - type: Transform
       pos: 14.5,-20.5
+      parent: 23
+  - uid: 5675
+    components:
+    - type: Transform
+      pos: 23.5,-11.5
       parent: 23
 - proto: RMCSecurityCameraConsole
   entities:
@@ -34617,27 +34791,11 @@ entities:
       parent: 23
     - type: RMCPodDoor
       id: 400
-  - uid: 191
+  - uid: 197
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 34.5,-16.5
-      parent: 23
-    - type: RMCPodDoor
-      id: 400
-  - uid: 192
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,-17.5
-      parent: 23
-    - type: RMCPodDoor
-      id: 400
-  - uid: 193
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,-18.5
       parent: 23
     - type: RMCPodDoor
       id: 400
@@ -34781,6 +34939,22 @@ entities:
     components:
     - type: Transform
       pos: 15.5,15.5
+      parent: 23
+    - type: RMCPodDoor
+      id: 400
+  - uid: 5597
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,-17.5
+      parent: 23
+    - type: RMCPodDoor
+      id: 400
+  - uid: 5601
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,-18.5
       parent: 23
     - type: RMCPodDoor
       id: 400
@@ -34935,6 +35109,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: 15.5,49.5
       parent: 23
+- proto: RMCSpawnerERTShuttleWeYa
+  entities:
+  - uid: 955
+    components:
+    - type: Transform
+      pos: 5.5,-8.5
+      parent: 23
 - proto: RMCSpawnerRandomFolder
   entities:
   - uid: 1138
@@ -35057,18 +35238,6 @@ entities:
       parent: 23
 - proto: RMCStairs
   entities:
-  - uid: 197
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 44.5,-17.5
-      parent: 23
-  - uid: 198
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 45.5,-17.5
-      parent: 23
   - uid: 473
     components:
     - type: Transform
@@ -35444,11 +35613,6 @@ entities:
       parent: 23
 - proto: RMCTankReagentFuel
   entities:
-  - uid: 174
-    components:
-    - type: Transform
-      pos: 47.5,-17.5
-      parent: 23
   - uid: 513
     components:
     - type: Transform
@@ -40383,6 +40547,518 @@ entities:
     components:
     - type: Transform
       pos: 65.08766,50.71132
+      parent: 23
+- proto: RMCWeyaConsole1
+  entities:
+  - uid: 5572
+    components:
+    - type: Transform
+      pos: 23.5,-3.5
+      parent: 23
+- proto: RMCWeyaEngine16
+  entities:
+  - uid: 5613
+    components:
+    - type: Transform
+      pos: 27.5,-14.5
+      parent: 23
+  - uid: 5623
+    components:
+    - type: Transform
+      pos: 18.5,-14.5
+      parent: 23
+  - uid: 5631
+    components:
+    - type: Transform
+      pos: 27.5,-7.5
+      parent: 23
+  - uid: 5642
+    components:
+    - type: Transform
+      pos: 18.5,-7.5
+      parent: 23
+- proto: RMCWeyaEngine17
+  entities:
+  - uid: 5612
+    components:
+    - type: Transform
+      pos: 28.5,-14.5
+      parent: 23
+  - uid: 5622
+    components:
+    - type: Transform
+      pos: 19.5,-14.5
+      parent: 23
+  - uid: 5630
+    components:
+    - type: Transform
+      pos: 28.5,-7.5
+      parent: 23
+  - uid: 5641
+    components:
+    - type: Transform
+      pos: 19.5,-7.5
+      parent: 23
+- proto: RMCWeyaEngine22
+  entities:
+  - uid: 5621
+    components:
+    - type: Transform
+      pos: 18.5,-13.5
+      parent: 23
+  - uid: 5637
+    components:
+    - type: Transform
+      pos: 18.5,-6.5
+      parent: 23
+- proto: RMCWeyaEngine23
+  entities:
+  - uid: 5620
+    components:
+    - type: Transform
+      pos: 19.5,-13.5
+      parent: 23
+  - uid: 5626
+    components:
+    - type: Transform
+      pos: 28.5,-6.5
+      parent: 23
+  - uid: 5638
+    components:
+    - type: Transform
+      pos: 19.5,-6.5
+      parent: 23
+- proto: RMCWeyaEngine26
+  entities:
+  - uid: 5609
+    components:
+    - type: Transform
+      pos: 27.5,-13.5
+      parent: 23
+  - uid: 5627
+    components:
+    - type: Transform
+      pos: 27.5,-6.5
+      parent: 23
+- proto: RMCWeyaEngine27
+  entities:
+  - uid: 5610
+    components:
+    - type: Transform
+      pos: 28.5,-13.5
+      parent: 23
+- proto: RMCWeyaEngine28
+  entities:
+  - uid: 5619
+    components:
+    - type: Transform
+      pos: 18.5,-12.5
+      parent: 23
+  - uid: 5636
+    components:
+    - type: Transform
+      pos: 18.5,-5.5
+      parent: 23
+- proto: RMCWeyaEngine29
+  entities:
+  - uid: 5618
+    components:
+    - type: Transform
+      pos: 19.5,-12.5
+      parent: 23
+  - uid: 5635
+    components:
+    - type: Transform
+      pos: 19.5,-5.5
+      parent: 23
+- proto: RMCWeyaEngine32
+  entities:
+  - uid: 5595
+    components:
+    - type: Transform
+      pos: 27.5,-12.5
+      parent: 23
+  - uid: 5624
+    components:
+    - type: Transform
+      pos: 27.5,-5.5
+      parent: 23
+- proto: RMCWeyaEngine33
+  entities:
+  - uid: 5611
+    components:
+    - type: Transform
+      pos: 28.5,-12.5
+      parent: 23
+  - uid: 5625
+    components:
+    - type: Transform
+      pos: 28.5,-5.5
+      parent: 23
+- proto: RMCWeyaEngine40
+  entities:
+  - uid: 5615
+    components:
+    - type: Transform
+      pos: 27.5,-11.5
+      parent: 23
+  - uid: 5616
+    components:
+    - type: Transform
+      pos: 18.5,-11.5
+      parent: 23
+  - uid: 5628
+    components:
+    - type: Transform
+      pos: 27.5,-4.5
+      parent: 23
+  - uid: 5639
+    components:
+    - type: Transform
+      pos: 18.5,-4.5
+      parent: 23
+- proto: RMCWeyaEngine41
+  entities:
+  - uid: 5614
+    components:
+    - type: Transform
+      pos: 28.5,-11.5
+      parent: 23
+  - uid: 5617
+    components:
+    - type: Transform
+      pos: 19.5,-11.5
+      parent: 23
+  - uid: 5629
+    components:
+    - type: Transform
+      pos: 28.5,-4.5
+      parent: 23
+  - uid: 5640
+    components:
+    - type: Transform
+      pos: 19.5,-4.5
+      parent: 23
+- proto: RMCWeyaEngineLeft1
+  entities:
+  - uid: 5603
+    components:
+    - type: Transform
+      pos: 26.5,-15.5
+      parent: 23
+- proto: RMCWeyaEngineRight1
+  entities:
+  - uid: 5604
+    components:
+    - type: Transform
+      pos: 20.5,-15.5
+      parent: 23
+- proto: RMCWeyaFront100
+  entities:
+  - uid: 5584
+    components:
+    - type: Transform
+      pos: 21.5,-1.5
+      parent: 23
+- proto: RMCWeyaFront101
+  entities:
+  - uid: 5571
+    components:
+    - type: Transform
+      pos: 22.5,-1.5
+      parent: 23
+  - uid: 5573
+    components:
+    - type: Transform
+      pos: 23.5,-1.5
+      parent: 23
+  - uid: 5586
+    components:
+    - type: Transform
+      pos: 24.5,-1.5
+      parent: 23
+- proto: RMCWeyaFront102
+  entities:
+  - uid: 5589
+    components:
+    - type: Transform
+      pos: 25.5,-1.5
+      parent: 23
+- proto: RMCWeyaTaildropshipvent3
+  entities:
+  - uid: 5577
+    components:
+    - type: Transform
+      pos: 20.5,-4.5
+      parent: 23
+- proto: RMCWeyaTaildropshipvent4
+  entities:
+  - uid: 5600
+    components:
+    - type: Transform
+      pos: 26.5,-4.5
+      parent: 23
+- proto: RMCWeyaTailLeft1
+  entities:
+  - uid: 5568
+    components:
+    - type: Transform
+      pos: 19.5,-17.5
+      parent: 23
+- proto: RMCWeyaTailLeft2
+  entities:
+  - uid: 5647
+    components:
+    - type: Transform
+      pos: 20.5,-17.5
+      parent: 23
+- proto: RMCWeyaTailLeft3
+  entities:
+  - uid: 2319
+    components:
+    - type: Transform
+      pos: 21.5,-17.5
+      parent: 23
+- proto: RMCWeyaTailRight4
+  entities:
+  - uid: 2955
+    components:
+    - type: Transform
+      pos: 25.5,-17.5
+      parent: 23
+- proto: RMCWeyaTailRight5
+  entities:
+  - uid: 5607
+    components:
+    - type: Transform
+      pos: 26.5,-17.5
+      parent: 23
+- proto: RMCWeyaTailRight6
+  entities:
+  - uid: 5608
+    components:
+    - type: Transform
+      pos: 27.5,-17.5
+      parent: 23
+- proto: RMCWeyaWallStandard18=
+  entities:
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 20.5,-8.5
+      parent: 23
+  - uid: 137
+    components:
+    - type: Transform
+      pos: 20.5,-11.5
+      parent: 23
+  - uid: 140
+    components:
+    - type: Transform
+      pos: 21.5,-4.5
+      parent: 23
+  - uid: 174
+    components:
+    - type: Transform
+      pos: 21.5,-3.5
+      parent: 23
+  - uid: 191
+    components:
+    - type: Transform
+      pos: 20.5,-7.5
+      parent: 23
+  - uid: 5599
+    components:
+    - type: Transform
+      pos: 21.5,-15.5
+      parent: 23
+- proto: RMCWeyaWallStandard19
+  entities:
+  - uid: 5574
+    components:
+    - type: Transform
+      pos: 25.5,-4.5
+      parent: 23
+  - uid: 5578
+    components:
+    - type: Transform
+      pos: 25.5,-3.5
+      parent: 23
+  - uid: 5581
+    components:
+    - type: Transform
+      pos: 26.5,-8.5
+      parent: 23
+  - uid: 5582
+    components:
+    - type: Transform
+      pos: 25.5,-15.5
+      parent: 23
+  - uid: 5590
+    components:
+    - type: Transform
+      pos: 26.5,-11.5
+      parent: 23
+  - uid: 5593
+    components:
+    - type: Transform
+      pos: 26.5,-7.5
+      parent: 23
+- proto: RMCWeyaWallStandard24
+  entities:
+  - uid: 135
+    components:
+    - type: Transform
+      pos: 20.5,-13.5
+      parent: 23
+  - uid: 192
+    components:
+    - type: Transform
+      pos: 20.5,-6.5
+      parent: 23
+- proto: RMCWeyaWallStandard25
+  entities:
+  - uid: 5575
+    components:
+    - type: Transform
+      pos: 26.5,-13.5
+      parent: 23
+  - uid: 5598
+    components:
+    - type: Transform
+      pos: 26.5,-6.5
+      parent: 23
+- proto: RMCWeyaWallStandard30
+  entities:
+  - uid: 138
+    components:
+    - type: Transform
+      pos: 20.5,-12.5
+      parent: 23
+  - uid: 5646
+    components:
+    - type: Transform
+      pos: 20.5,-5.5
+      parent: 23
+- proto: RMCWeyaWallStandard31
+  entities:
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 26.5,-5.5
+      parent: 23
+  - uid: 5576
+    components:
+    - type: Transform
+      pos: 26.5,-12.5
+      parent: 23
+- proto: RMCWeyaWallStandard47
+  entities:
+  - uid: 5596
+    components:
+    - type: Transform
+      pos: 21.5,-14.5
+      parent: 23
+- proto: RMCWeyaWallStandard48
+  entities:
+  - uid: 5594
+    components:
+    - type: Transform
+      pos: 25.5,-14.5
+      parent: 23
+- proto: RMCWeyaWallStandard7
+  entities:
+  - uid: 142
+    components:
+    - type: Transform
+      pos: 21.5,-16.5
+      parent: 23
+- proto: RMCWeyaWallStandard79
+  entities:
+  - uid: 125
+    components:
+    - type: MetaData
+      name: We-Ya-LWI Hauler HR-685
+    - type: Transform
+      pos: 23.5,-5.5
+      parent: 23
+- proto: RMCWeyaWallStandard8
+  entities:
+  - uid: 198
+    components:
+    - type: Transform
+      pos: 25.5,-16.5
+      parent: 23
+- proto: RMCWeyaWallStandard81
+  entities:
+  - uid: 5583
+    components:
+    - type: Transform
+      pos: 21.5,-5.5
+      parent: 23
+  - uid: 5602
+    components:
+    - type: Transform
+      pos: 22.5,-5.5
+      parent: 23
+  - uid: 5605
+    components:
+    - type: Transform
+      pos: 25.5,-5.5
+      parent: 23
+  - uid: 5606
+    components:
+    - type: Transform
+      pos: 24.5,-5.5
+      parent: 23
+- proto: RMCWeyaWallStandard95
+  entities:
+  - uid: 5643
+    components:
+    - type: Transform
+      pos: 21.5,-2.5
+      parent: 23
+- proto: RMCWeyaWallStandard99
+  entities:
+  - uid: 5570
+    components:
+    - type: Transform
+      pos: 25.5,-2.5
+      parent: 23
+- proto: RMCWeyaWallStandardwyleftengine
+  entities:
+  - uid: 1054
+    components:
+    - type: Transform
+      pos: 20.5,-14.5
+      parent: 23
+- proto: RMCWeyaWallStandardwyrightengine
+  entities:
+  - uid: 1782
+    components:
+    - type: Transform
+      pos: 26.5,-14.5
+      parent: 23
+- proto: RMCWeyaWindow96
+  entities:
+  - uid: 5579
+    components:
+    - type: Transform
+      pos: 22.5,-2.5
+      parent: 23
+- proto: RMCWeyaWindow97
+  entities:
+  - uid: 5644
+    components:
+    - type: Transform
+      pos: 23.5,-2.5
+      parent: 23
+- proto: RMCWeyaWindow98
+  entities:
+  - uid: 5645
+    components:
+    - type: Transform
+      pos: 24.5,-2.5
       parent: 23
 - proto: RMCWindowCorsatResearchHull
   entities:
