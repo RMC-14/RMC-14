@@ -39,7 +39,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
   greeting: rmc-job-greeting-survivor
@@ -106,7 +106,7 @@
     - [ CMPackFlare ]
     - [ WeaponNailgun ]
     - [ RMCFireAxe ]
-    - [ CMWelder ] # TODO RMC14 industrial welder
+    - [ RMCWelderIndustrial ]
     - [ CMAdvFirstAidKitFilled ]
     randomWeapon:
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
