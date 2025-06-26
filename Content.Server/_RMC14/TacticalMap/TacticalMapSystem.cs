@@ -82,7 +82,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<TacticalMapComponent, MapInitEvent>(OnTacticalMapMapInit);
 
         SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnUserMapInit);
-        SubscribeLocalEvent<TacticalMapUserComponent, OpenTacMapAlertEvent>(OnUserOpenAlert);
 
         SubscribeLocalEvent<TacticalMapComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<TacticalMapComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeUIOpen);
@@ -181,22 +180,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             ent.Comp.Map = map;
 
         Dirty(ent);
-    }
-
-    protected override void OnUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
-    {
-        base.OnUserOpenAction(ent, ref args);
-
-        if (TryGetTacticalMap(out var map))
-            UpdateUserData(ent, map);
-    }
-
-    private void OnUserOpenAlert(Entity<TacticalMapUserComponent> ent, ref OpenTacMapAlertEvent args)
-    {
-        if (TryGetTacticalMap(out var map))
-            UpdateUserData(ent, map);
-
-        _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
     }
 
     private void OnComputerMapInit(Entity<TacticalMapComputerComponent> ent, ref MapInitEvent args)
