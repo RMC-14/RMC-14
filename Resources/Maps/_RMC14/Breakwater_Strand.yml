@@ -10555,22 +10555,8 @@ entities:
     components:
     - type: Transform
       parent: 3875
-    - type: HandheldLight
-      toggleActionEntity: 3879
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3879
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: InsideEntityStorage
 - proto: CMArmorRiot
   entities:
@@ -43238,22 +43224,8 @@ entities:
       desc: A modified variant of the M4R armor, stripped of additional riot plating for civilian officer use. A 'CLF' badge is sewn into the chestplate.
     - type: Transform
       parent: 3889
-    - type: HandheldLight
-      toggleActionEntity: 3891
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3891
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: InsideEntityStorage
 - proto: RMCAshtray
   entities:
@@ -51566,77 +51538,21 @@ entities:
     - type: Transform
       pos: 26.26703,53.73057
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 4424
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 4424
-    - type: ActionsContainer
   - uid: 4425
     components:
     - type: Transform
       pos: 26.626406,53.63682
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 4426
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 4426
-    - type: ActionsContainer
   - uid: 4427
     components:
     - type: Transform
       pos: 26.26703,53.402447
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 4428
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 4428
-    - type: ActionsContainer
   - uid: 4429
     components:
     - type: Transform
       pos: 26.64203,53.308697
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 4430
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 4430
-    - type: ActionsContainer
 - proto: RMCHardhatBlue
   entities:
   - uid: 3522
@@ -51649,20 +51565,6 @@ entities:
     - type: Transform
       pos: -12.547005,49.772797
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 3524
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3524
-    - type: ActionsContainer
   - uid: 3528
     components:
     - type: Transform
