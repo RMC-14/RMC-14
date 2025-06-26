@@ -89,7 +89,7 @@ namespace Content.IntegrationTests.Tests
             "Almayer",
             "RMCAdminFax",
             "GoldenArrowLarge",
-            "OCP-583",
+            "Breakwater_Strand",
         };
 
         /// <summary>
