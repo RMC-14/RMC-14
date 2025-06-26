@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The engineering skill now speeds up how fast you deconstruct and repair
-      objects.
-    type: Fix
-  id: 1396
-  time: '2025-03-01T13:10:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5717
 - author: Vermidia
   changes:
   - message: Fixed warrior, lurker, and runner not healing slightly faster while resting.
@@ -5208,5 +5200,23 @@
   id: 1897
   time: '2025-06-26T11:06:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6707
+- author: Arykh
+  changes:
+  - message: Cryoxadone and Clonexadone can now heal CloneLoss(Genetic).
+    type: Tweak
+  - message: Inaprovaline and Leporazine's overdose now knocks patients unconscious
+      instead of a stun and knockdown.
+    type: Tweak
+  - message: Fixed Cryoxadone healing too much Brute and Airloss, and not enough Genetic
+      damage.
+    type: Fix
+  - message: Fixed Clonexadone healing too much Burn and Toxin, and not healing Genetic.
+    type: Fix
+  - message: Fixed SpaceDrugs and Psilocybin not making you see psychedelic colors
+      because it was too weak.
+    type: Fix
+  id: 1898
+  time: '2025-06-26T11:37:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6723
 Name: RMC14
 Order: -1
