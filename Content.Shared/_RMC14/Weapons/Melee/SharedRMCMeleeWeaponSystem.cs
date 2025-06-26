@@ -228,7 +228,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     /// <param name="user">The entity doing the attack</param>
     /// <param name="attack">The <see cref="AttackEvent"/></param>
     /// <param name="newAttack">The new <see cref="AttackEvent"/></param>
-    /// <returns>True if the attack event has been modified and remains valid.</returns>
+    /// <returns>True if the attack hasn't been modified, or if it is modified and still valid</returns>
     public bool AttemptOverrideAttack(EntityUid target, Entity<MeleeWeaponComponent> weapon, EntityUid user, AttackEvent attack, out AttackEvent newAttack)
     {
         var targetPosition = _transform.GetMoverCoordinates(target).Position;
@@ -245,21 +245,30 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         var meleeEv = new MeleeAttackAttemptEvent(GetNetEntity(target),
             attack,
             attack.Coordinates,
-            entities);
+            entities,
+            GetNetEntity(weapon));
         RaiseLocalEvent(user, ref meleeEv);
 
         newAttack = meleeEv.Attack;
 
         // The attack hasn't been modified.
         if (attack == newAttack)
-            return false;
+            return true;
 
         // The new target is the weapon being used for the attack.
-        if (GetEntity(meleeEv.Weapon) == target)
+        if (meleeEv.Weapon == meleeEv.Target)
             return false;
 
-        // The new target is unable to be attacked.
-        if (!_blocker.CanAttack(user, GetEntity(meleeEv.Target), weapon, true))
+        var disarm = false;
+        switch (newAttack)
+        {
+            case DisarmAttackEvent:
+                disarm = true ;
+                break;
+        }
+
+        // The new target is unable to be attacked by the user.
+        if (!_blocker.CanAttack(user, GetEntity(meleeEv.Target), weapon, disarm))
             return false;
 
         return true;

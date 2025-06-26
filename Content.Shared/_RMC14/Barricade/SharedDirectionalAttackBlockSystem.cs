@@ -49,11 +49,11 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
             switch (args.Attack)
             {
                 case LightAttackEvent light:
-                    args.Attack = new LightAttackEvent(potentialTarget, light.Weapon, light.Coordinates);
+                    args.Attack = new LightAttackEvent(potentialTarget, args.Weapon, light.Coordinates);
                     break;
                 // A disarm attempt is turned into a light attack on the blocking entity.
                 case DisarmAttackEvent disarm:
-                    args.Attack = new LightAttackEvent(potentialTarget, GetNetEntity(ent), disarm.Coordinates);
+                    args.Attack = new LightAttackEvent(potentialTarget, args.Weapon, disarm.Coordinates);
                     break;
             }
             break;
