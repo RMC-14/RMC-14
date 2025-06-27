@@ -891,6 +891,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
+        if (!CanPlaceXenoStructure(xeno, target, out var popupType))
+        {
+            popupType += "-structure";
+            _popup.PopupClient(Loc.GetString(popupType), xeno, xeno, PopupType.SmallCaution);
+            return false;
+        }
+
         var ev = new XenoConstructionRangeEvent(xeno.Comp.BuildRange);
         RaiseLocalEvent(xeno, ref ev);
         if (ev.Range > 0 &&
