@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -59,6 +60,9 @@ public abstract class SharedOnCollideSystem : EntitySystem
             return;
 
         if (_hive.FromSameHive(ent.Owner, other))
+            return;
+
+        if (ent.Comp.Fire && HasComp<RMCImmuneToFireTileDamageComponent>(other))
             return;
 
         if (HasComp<UncloakOnHitComponent>(ent.Owner))

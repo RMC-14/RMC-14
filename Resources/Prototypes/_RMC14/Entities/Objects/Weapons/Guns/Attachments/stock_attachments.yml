@@ -871,7 +871,6 @@
     - RMCAttachmentStock
     - RMCAttachmentSSG45Stock
 
-
 - type: entity
   parent: RMCAttachableBase
   id: RMCAttachmentL83A2Stock
@@ -887,6 +886,33 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentL83A2Stock
+
+- type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentAK4047StockCollapsible
+  name: AK-4047 folding stock
+  description: The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: ak4047_stock
+  - type: AttachableToggleable
+    active: true
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: ak4047_stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: ak4047_stock-on
+    actionName: Toggle AK-4047 Folding Stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentAK4047StockCollapsible
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
@@ -968,3 +994,6 @@
 
 - type: Tag
   id: RMCAttachmentL83A2Stock
+
+- type: Tag
+  id: RMCAttachmentAK4047StockCollapsible
