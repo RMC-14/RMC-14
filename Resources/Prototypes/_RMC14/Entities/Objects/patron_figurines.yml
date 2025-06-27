@@ -1518,3 +1518,14 @@
     state: jade_fiend_eria
   - type: PatronFigurine
     id: 6dd43972-aaf1-4035-aca1-444bf808b4f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAshWinter
+  name: Ash Winter figurine
+  description: "Most Devious Silly Lizard."
+  components:
+  - type: Sprite
+    state: ash_winter
+  - type: PatronFigurine
+    id: 4a6ca145-871a-4aeb-8302-9e8b5e3495e0
