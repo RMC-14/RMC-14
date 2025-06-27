@@ -42,13 +42,6 @@
     - Cigar
 
 - type: loadout
-  id: JointRMC
-  cost: 2
-  storage:
-    back:
-    - RMCJoint
-
-- type: loadout
   id: ZippoRMC
   cost: 1
   storage:
