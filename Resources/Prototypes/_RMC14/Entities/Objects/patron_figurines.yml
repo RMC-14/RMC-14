@@ -1529,3 +1529,14 @@
     state: ash_winter
   - type: PatronFigurine
     id: 4a6ca145-871a-4aeb-8302-9e8b5e3495e0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLoreWulbrenEra
+  name: Lore 'Wulbren' Era figurine
+  description: "The best Pilot in the Almayer! - And the best rifleman.."
+  components:
+  - type: Sprite
+    state: lore_wulbren_era
+  - type: PatronFigurine
+    id: 38395431-1f3b-4d4b-8140-0ab9b026b16b
