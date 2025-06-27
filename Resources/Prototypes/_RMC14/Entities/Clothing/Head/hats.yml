@@ -342,7 +342,7 @@
 
 - type: entity
   parent: CMHeadCap
-  id: CMHeadCapPeakedCMP
+  id: RMCHeadCapPeakedCMP
   name: chief mp peaked cap
   description: A peaked cap given to experienced CMP. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
   components:
