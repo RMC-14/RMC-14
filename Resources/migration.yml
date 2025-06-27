@@ -1169,3 +1169,7 @@ DrinkSakeBottleFull: RMCDrinkAlcoholSake
 # 2025-06-12
 DrinkMelonLiquorBottleFull: RMCDrinkAlcoholMelonLiquor
 DrinkBlueCuracaoBottleFull: RMCDrinkAlcoholBlueCuracao
+
+# 2025-06-15
+ClothingOuterBioGeneral: RMCSuitBioGeneral
+ClothingHeadHatHoodBioGeneral: RMCHoodBioGeneral

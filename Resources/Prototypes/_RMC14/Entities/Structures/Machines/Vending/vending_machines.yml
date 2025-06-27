@@ -166,6 +166,14 @@
     RMCFoodSnackCHUNK: 6
     RMCFoodSnackBarcaridine: 6
 
+- type: entity
+  parent: CMVendorSnack
+  id: RMCVendorSnackSPP
+  name: Surplus Ration Vendor
+  description: A vending machine full of surplus rations, viewed as the luxury of ready-avaliable SPP rations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/spp_snack.rsi
 
 # Cola
 - type: entity
@@ -215,6 +223,15 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/drink.rsi
     offset: 0, 0.5
 
+- type: entity
+  parent: CMVendorCola
+  id: RMCVendorColaSPP
+  name: Xuanshi Drinks
+  description: A drinks vendors from a long forgotten branch of the SPP, selling rationed water mixed with thrice diluted 5% flavourments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/spp_cola.rsi
+
 # Cigarettes
 - type: entity
   parent: CMVendor
@@ -236,6 +253,14 @@
     RMCLighter: 25
     RMCZippo: 10
 
+- type: entity
+  parent: CMVendorCigs
+  id: RMCVendorCigsSPP
+  name: Komandir Cigarettes Vendor
+  description: A state-owned cigarette vendor. Its drab colour was chosen to discourage purchases, but its existence is an admittance to the necessity for such machines to exist in the first place.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/spp_cigs.rsi
 
 # Security
 - type: entity

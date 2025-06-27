@@ -19,12 +19,13 @@
         RMCSkillLeadership: 1
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetPriest
+    - type: MarineOrders
     - type: RMCSurvivor
     - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
 
