@@ -21,6 +21,5 @@ rmc-loadout-group-synthetic-glasses = Synthetic Glasses
 rmc-loadout-group-synthetic-shoes = Synthetic Shoes
 rmc-loadout-group-synthetic-headwear = Synthetic Headwear
 rmc-loadout-group-synthetic-suits = Synthetic Outerwear
-rmc-loadout-group-role-specific-cmp = Chief MP Headwear
 
 loadout-group-points-insufficient = You have insufficient points!
