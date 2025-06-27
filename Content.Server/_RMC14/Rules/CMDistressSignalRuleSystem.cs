@@ -1793,7 +1793,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             return OperationName;
         }
-        ReloadPrototypes();
 
         var name = string.Empty;
         if (_operationNames.Count > 0)
