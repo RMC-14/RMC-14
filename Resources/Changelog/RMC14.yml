@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed healer drone's tailstab damage being too high, and melee being
-      slightly too low.
-    type: Fix
-  id: 1399
-  time: '2025-03-01T13:17:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5755
-- author: Dygon
-  changes:
-  - message: Fixed Parasite roles being able to be taken before 15 minutes have passed
-      in the round.
-    type: Fix
-  - message: Fixed Parasites and lesser drones not being muted for 3 minutes when
-      they spawn.
-    type: Fix
-  id: 1400
-  time: '2025-03-01T13:22:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5722
 - author: UnicornOnLSD
   changes:
   - message: Warning cones now fit on your head
@@ -5216,5 +5197,19 @@
   id: 1900
   time: '2025-06-27T05:40:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6724
+- author: noctyrnal
+  changes:
+  - message: Xenonid tunnels have received new sprites.
+    type: Tweak
+  id: 1901
+  time: '2025-06-27T05:41:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6812
+- author: t0wnshark
+  changes:
+  - message: fixed typo in the names of flower vases
+    type: Fix
+  id: 1902
+  time: '2025-06-27T05:42:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6804
 Name: RMC14
 Order: -1
