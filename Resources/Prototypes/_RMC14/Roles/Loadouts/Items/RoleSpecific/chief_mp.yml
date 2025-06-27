@@ -10,6 +10,5 @@
       time: 252000 # 70 hrs
   storage:
     back:
-    - CMHeadCapPeakedCMP
-
+    - RMCHeadCapPeakedCMP
 
