@@ -26,6 +26,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: MarineOrders
     - type: NpcFactionMember
       factions:
       - CLF
