@@ -108,3 +108,23 @@
   parent: CMFloorSteelPlanetYellowBase
   id: CMFloorSteelPlanetWhiteYellowCorner3
   sprite: /Textures/_RMC14/Tiles/floors/whiteyellowcorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: RMCFloorSteelPlanetLoadingArea0
+  sprite: /Textures/_RMC14/Tiles/floors/loadingarea_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: RMCFloorSteelPlanetLoadingArea1
+  sprite: /Textures/_RMC14/Tiles/floors/loadingarea_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: RMCFloorSteelPlanetLoadingArea2
+  sprite: /Textures/_RMC14/Tiles/floors/loadingarea_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: RMCFloorSteelPlanetLoadingArea3
+  sprite: /Textures/_RMC14/Tiles/floors/loadingarea_3.png
