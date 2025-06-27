@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed lunge and blitz persisting after stun (and death) in some cases.
-    type: Fix
-  id: 1408
-  time: '2025-03-02T01:56:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5709
 - author: Alekshhh
   changes:
   - message: Updated the sprites for fast and sticky resin.
@@ -5208,5 +5201,12 @@
   id: 1909
   time: '2025-06-27T05:59:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6762
+- author: noctyrnal
+  changes:
+  - message: You can now hide your dogtags.
+    type: Add
+  id: 1910
+  time: '2025-06-27T06:08:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6773
 Name: RMC14
 Order: -1
