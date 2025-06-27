@@ -117,7 +117,12 @@ public sealed class LinkAccountSystem : EntitySystem
             _metaData.SetEntityName(ent, name);
 
         if (ent.Comp.Description is { } description)
+        {
+            if (TryComp(ent, out MetaDataComponent? metaData))
+                description = $"{metaData.EntityDescription}\n\n{description}";
+
             _metaData.SetEntityDescription(ent, description);
+        }
     }
 
     private async void ReloadPatrons()
