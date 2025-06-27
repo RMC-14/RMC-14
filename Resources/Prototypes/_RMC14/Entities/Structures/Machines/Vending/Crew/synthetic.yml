@@ -36,6 +36,8 @@
       - id: CMWebbingPouch
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: CMWebbingSurgicalBlue
+      - id: CMWebbingSurgicalGreen
     - name: Shoes
       choices: { RMCShoes: 1 }
       entries:
@@ -63,6 +65,8 @@
       choices: { CMGloves: 1 }
       entries:
       - id: CMHandsInsulated
+        recommended: true
+      - id: CMHandsBlackInsulated
         recommended: true
       - id: CMHandsBlackMarine
       - id: CMHandsLatex
