@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: Warning cones now fit on your head
-    type: Add
-  id: 1401
-  time: '2025-03-01T13:27:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5728
 - author: Vermidia
   changes:
   - message: Fixed xenos not getting double non-hivecore evo points before 15 minutes.
@@ -5211,5 +5204,12 @@
   id: 1902
   time: '2025-06-27T05:42:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6804
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed UNMC turrets not targeting CLF
+    type: Fix
+  id: 1903
+  time: '2025-06-27T05:51:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6837
 Name: RMC14
 Order: -1
