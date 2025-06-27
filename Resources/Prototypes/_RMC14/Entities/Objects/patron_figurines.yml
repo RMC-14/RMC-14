@@ -1507,3 +1507,14 @@
     state: neza
   - type: PatronFigurine
     id: 33ee0269-f61d-467c-916b-139146ce2a54
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJadeFiendEria
+  name: Jade 'Fiend' Eria figurine
+  description: "You can see a broken receiver sticking out, it emits incomprehensible gibberish when squeezed. The figurine's jaw looks slightly melted off, as if someone held it above a candle."
+  components:
+  - type: Sprite
+    state: jade_fiend_eria
+  - type: PatronFigurine
+    id: 6dd43972-aaf1-4035-aca1-444bf808b4f3
