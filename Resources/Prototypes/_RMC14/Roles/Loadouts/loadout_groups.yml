@@ -339,7 +339,7 @@
 # Chief MP
 - type: loadoutGroup
   id: ChiefMPRoleSpecificRMC
-  name: rmc-loadout-group-cmp-hat
+  name: rmc-loadout-group-role-specific-cmp
   minLimit: 0
   maxLimit: 1
   loadouts:
