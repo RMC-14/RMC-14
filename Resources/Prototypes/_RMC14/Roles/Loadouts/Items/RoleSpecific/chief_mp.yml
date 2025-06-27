@@ -1,7 +1,7 @@
 # CMP
 - type: loadout
   id: CMPPeakedCapRMC
-  cost: 3 # same price as headwear
+  cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
