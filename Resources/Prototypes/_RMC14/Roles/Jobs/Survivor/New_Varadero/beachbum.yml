@@ -73,7 +73,7 @@
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
-      state: survr
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorBeachBum

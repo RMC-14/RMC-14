@@ -155,7 +155,7 @@
   - type: Stack
     stackType: PlasmaOre
   - type: Sprite
-    state: plasma
+    state: phoron
   - type: Material
   - type: PointLight
     radius: 1.2
