@@ -43,3 +43,8 @@
   parent: CMFloorSteelPlanetDarkGreyBase
   id: CMFloorSteelPlanetVault7
   sprite: /Textures/_RMC14/Tiles/floors/vault_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: RMCFloorSteelPlanetDark
+  sprite: /Textures/_RMC14/Tiles/floors/dark.png
