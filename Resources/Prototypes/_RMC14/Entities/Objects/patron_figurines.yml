@@ -1540,3 +1540,14 @@
     state: lore_wulbren_era
   - type: PatronFigurine
     id: 38395431-1f3b-4d4b-8140-0ab9b026b16b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLydiaSanitater
+  name: Lydia Sanitater figurine
+  description: "Stand still or I can not save you."
+  components:
+  - type: Sprite
+    state: lydia_sanitater
+  - type: PatronFigurine
+    id: 293b6e13-2d65-449c-a334-93e7b624bd86
