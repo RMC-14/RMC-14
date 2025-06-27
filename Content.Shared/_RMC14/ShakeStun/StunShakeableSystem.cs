@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Correspondant;
 using Content.Shared._RMC14.Stamina;
 using Content.Shared._RMC14.Standing;
 using Content.Shared._RMC14.Tackle;
@@ -47,6 +48,12 @@ public sealed class StunShakeableSystem : EntitySystem
             !HasComp<TackledRecentlyByComponent>(target) &&
             (rest == null || !rest.Resting))
         {
+            return;
+        }
+
+        if (TryComp<CorrespondentComponent>(user, out var comp))
+        {
+            RaiseLocalEvent(user, new CorrespondentShookEvent(args.User));
             return;
         }
 
