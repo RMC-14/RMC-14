@@ -1,34 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: All t1 xenos can now evolve into Queen
-    type: Add
-  id: 1405
-  time: '2025-03-01T13:37:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5704
-- author: Vermidia
-  changes:
-  - message: Fixed Vanguard pierce being a straight line, and no longer goes over
-      cades.
-    type: Fix
-  id: 1406
-  time: '2025-03-01T13:38:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5725
-- author: noctyrnal
-  changes:
-  - message: Added Keffiyehs, Smocks and Neckerchiefs.
-    type: Add
-  - message: Added Multiple new Goggles and Glasses.
-    type: Add
-  - message: Added Most Helmet Garbs.
-    type: Add
-  - message: Pride Pins and Welding Goggle can now be put onto your helmets.
-    type: Tweak
-  id: 1407
-  time: '2025-03-02T00:56:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5744
-- author: Vermidia
-  changes:
   - message: Fixed lunge and blitz persisting after stun (and death) in some cases.
     type: Fix
   id: 1408
@@ -5213,5 +5185,28 @@
   id: 1906
   time: '2025-06-27T05:54:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6840
+- author: Shromply
+  changes:
+  - message: Added the smokables loadout category.
+    type: Add
+  id: 1907
+  time: '2025-06-27T06:00:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6825
+- author: noctyrnal
+  changes:
+  - message: Added the AK-4047 Assault Rifle for SPP colonists.
+    type: Add
+  - message: Added all the missing Cargo Containers.
+    type: Add
+  id: 1908
+  time: '2025-06-27T06:01:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6794
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed biosuits not having 100 biohazard protection
+    type: Fix
+  id: 1909
+  time: '2025-06-27T05:59:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6762
 Name: RMC14
 Order: -1
