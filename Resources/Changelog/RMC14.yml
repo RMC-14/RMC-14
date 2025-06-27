@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Alekshhh
-  changes:
-  - message: Updated the sprites for fast and sticky resin.
-    type: Tweak
-  id: 1409
-  time: '2025-03-02T05:37:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5774
 - author: Vermidia
   changes:
   - message: Fixed warding giving twice as much crit health as it should have
@@ -5208,5 +5201,12 @@
   id: 1910
   time: '2025-06-27T06:08:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6773
+- author: J C Denton
+  changes:
+  - message: Fixed some Asphalt tiles being pryable.
+    type: Fix
+  id: 1911
+  time: '2025-06-27T06:09:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6809
 Name: RMC14
 Order: -1
