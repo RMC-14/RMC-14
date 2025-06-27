@@ -256,6 +256,25 @@
   - CanteenRMC
   - MetalFlaskRMC
 
+# Smokables
+- type: loadoutGroup
+  id: SmokablesRMC
+  name: rmc-loadout-group-smokables
+  minLimit: 0
+  maxLimit: 11
+  loadouts:
+  - LuckySlothsPackRMC
+  - WeYaGoldPackRMC
+  - ExecutiveSelectPackRMC
+  - TarbackTubeRMC
+  - TarbacksCaseRMC
+  - PremiumCigarRMC
+  - JointRMC
+  - ZippoRMC
+  - ZippoExecRMC
+  - ZippoGoldRMC
+  - MatchboxRMC
+
 # Food (sweets)
 - type: loadoutGroup
   id: FoodSweetsRMC
