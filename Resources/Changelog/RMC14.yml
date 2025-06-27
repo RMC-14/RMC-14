@@ -1,26 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed warrior, lurker, and runner not healing slightly faster while resting.
-    type: Fix
-  id: 1397
-  time: '2025-03-01T13:18:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5748
-- author: Vermidia
-  changes:
-  - message: Added Oppressor praetorian strain, which focuses and pulling in and pushing
-      away foes.
-    type: Add
-  - message: Fixed warrior punch and fling having a lower range than most melee moves
-      (1 > 1.5)
-    type: Fix
-  - message: Fixed spray acid/flamers not going through doors
-    type: Fix
-  id: 1398
-  time: '2025-03-01T13:17:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5561
-- author: Vermidia
-  changes:
   - message: Fixed healer drone's tailstab damage being too high, and melee being
       slightly too low.
     type: Fix
@@ -5218,5 +5198,23 @@
   id: 1898
   time: '2025-06-26T11:37:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6723
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added more soul to LV-624 Lazarus Landing
+    type: Tweak
+  - message: Added various new item/loot spawners for mapping and admins.
+    type: Add
+  id: 1899
+  time: '2025-06-27T05:39:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6823
+- author: Vermidia
+  changes:
+  - message: Fixed Neurotoxin not blinding
+    type: Fix
+  - message: Fixed Neurotoxin not causing hallucinations
+    type: Fix
+  id: 1900
+  time: '2025-06-27T05:40:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6724
 Name: RMC14
 Order: -1
