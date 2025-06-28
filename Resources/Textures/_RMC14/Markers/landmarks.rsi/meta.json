@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP PMC spawn sound and ambient by github noctynral",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP PMC spawn sound and ambient by github noctynral. Surv, surv_wy, surv_spp (renamed), surv_clf done by Syndro101 from cmss13 at https://github.com/Syndro101/CMSS13/blob/ca54b58093770e220c716ace2297633bf36e3407/icons/landmarks.dmi. Surv_tse (renamed) done by Zenith from cmss13 at https://github.com/cmss13-devs/cmss13/blob/41b3798435ee57263bb67fa694ea944d6698c062/icons/landmarks.dmi.",
   "size": {
     "x": 32,
     "y": 32
@@ -490,6 +490,21 @@
     },
     {
       "name": "ambient"
+    },
+    {
+      "name": "surv"
+    },
+    {
+      "name": "surv_wy"
+    },
+    {
+      "name": "surv_spp"
+    },
+    {
+      "name": "surv_clf"
+    },
+    {
+      "name": "surv_tse"
     }
   ]
 }
