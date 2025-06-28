@@ -111,6 +111,6 @@
     job: CMMarineRaiderLeader
 
 - type: entity
-  parent: [ RMCDogtagMarineRaiderLeader, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagMarineRaiderLeader ]
   id: RMCDogtagMarineRaiderLeaderHidden
   categories: [ HideSpawnMenu ]
