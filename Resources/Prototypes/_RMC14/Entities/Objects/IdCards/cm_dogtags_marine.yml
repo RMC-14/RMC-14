@@ -7,7 +7,7 @@
     job: CMRifleman
 
 - type: entity
-  parent: [ CMDogtagRifleman, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagRifleman ]
   id: RMCDogtagRiflemanHidden
   categories: [ HideSpawnMenu ]
 
@@ -20,7 +20,7 @@
     job: CMCombatTech
 
 - type: entity
-  parent: [ CMDogtagCombatTech, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagCombatTech ]
   id: RMCDogtagCombatTechHidden
   categories: [ HideSpawnMenu ]
 
@@ -33,7 +33,7 @@
     job: CMFireteamLeader
 
 - type: entity
-  parent: [ CMDogtagFireteamLeader, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagFireteamLeader ]
   id: RMCDogtagFireteamLeaderHidden
   categories: [ HideSpawnMenu ]
 
@@ -46,7 +46,7 @@
     job: CMHospitalCorpsman
 
 - type: entity
-  parent: [ CMDogtagHospitalCorpsman, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagHospitalCorpsman ]
   id: RMCDogtagHospitalCorpsmanHidden
   categories: [ HideSpawnMenu ]
 
@@ -59,7 +59,7 @@
     job: CMSmartGunOperator
 
 - type: entity
-  parent: [ CMDogtagSmartGunOperator, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagSmartGunOperator ]
   id: RMCDogtagSmartGunOperatorHidden
   categories: [ HideSpawnMenu ]
 
@@ -72,7 +72,7 @@
     job: CMSquadLeader
 
 - type: entity
-  parent: [ CMDogtagSquadLeader, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagSquadLeader ]
   id: RMCDogtagSquadLeaderHidden
   categories: [ HideSpawnMenu ]
 
@@ -85,6 +85,6 @@
     job: CMWeaponsSpecialist
 
 - type: entity
-  parent: [ CMDogtagWeaponsSpecialist, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagWeaponsSpecialist ]
   id: RMCDogtagWeaponsSpecialistHidden
   categories: [ HideSpawnMenu ]
