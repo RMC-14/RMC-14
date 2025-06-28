@@ -13,7 +13,7 @@ public sealed partial class XenoFlingComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 3.5f; // 4 tiles from start
+    public float Range = 4;
 
     [DataField, AutoNetworkedField]
     public float EnragedRange = 0f;

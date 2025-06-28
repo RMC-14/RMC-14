@@ -17,10 +17,8 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -103,7 +101,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnSizeStunMapInit(Entity<RMCStunOnHitComponent> projectile, ref MapInitEvent args)
     {
-        projectile.Comp.ShotFrom = _transform.GetMoverCoordinates(projectile.Owner);
+        projectile.Comp.ShotFrom = _transform.GetMapCoordinates(projectile.Owner);
         Dirty(projectile);
     }
 
@@ -181,26 +179,25 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// <summary>
     ///     Tries to knock back the target.
     /// </summary>
-    public void KnockBack(EntityUid target, EntityCoordinates? shotFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f)
+    public void KnockBack(EntityUid target, MapCoordinates? knockedBackFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f, bool ignoreSize = false)
     {
-        if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big)
+        if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big && !ignoreSize)
             return;
 
-        if(shotFrom == null)
+        if(knockedBackFrom == null)
             return;
 
         //TODO Camera Shake
         _physics.SetLinearVelocity(target, Vector2.Zero);
         _physics.SetAngularVelocity(target, 0f);
 
-        var vec = _transform.GetMoverCoordinates(target).Position - shotFrom.Value.Position;
+        var vec = _transform.GetMoverCoordinates(target).Position - knockedBackFrom.Value.Position;
         if (vec.Length() != 0)
         {
             _rmcPulling.TryStopPullsOn(target);
             var knockBackPower = _random.NextFloat(knockBackPowerMin, knockBackPowerMax);
             var direction = vec.Normalized() * knockBackPower;
-            _throwing.TryThrow(target, direction, knockBackSpeed, animated: false, playSound: false, doSpin: false);
-            // RMC-14 TODO Thrown into obstacle mechanics
+            _throwing.TryThrow(target, direction, knockBackSpeed, animated: false, playSound: false, compensateFriction: true);
         }
     }
 

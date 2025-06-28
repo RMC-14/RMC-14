@@ -200,7 +200,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                     _rmcPulling.TryStopPullsOn(uid);
                     _physics.SetLinearVelocity(uid, Vector2.Zero);
                     _physics.SetAngularVelocity(uid, 0f);
-                    _throwing.TryThrow(uid, _random.NextAngle().ToVec().Normalized() / 10, 10, animated: false, playSound: false, doSpin: false);
+                    _throwing.TryThrow(uid, _random.NextAngle().ToVec().Normalized() / 10, 10, animated: false, playSound: false, doSpin: false, compensateFriction: true);
                 }
                 _popup.PopupEntity(Loc.GetString("rmc-stumble-others", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.SmallCaution);
                 _popup.PopupEntity(Loc.GetString("rmc-stumble"), uid, uid, PopupType.MediumCaution);

@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -8,7 +8,6 @@ using Content.Shared.Effects;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -25,7 +24,6 @@ public sealed class XenoTailSweepSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -33,6 +31,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _hit = new();
 
@@ -78,17 +77,14 @@ public sealed class XenoTailSweepSystem : EntitySystem
 
             _rmcPulling.TryStopAllPullsFromAndOn(mob);
 
-            var marineCoords = _transform.GetMapCoordinates(mob);
-            var diff = marineCoords.Position - origin.Position;
-            diff = diff.Normalized() * xeno.Comp.Range;
-
             if (xeno.Comp.Damage is { } damage)
                 _damageable.TryChangeDamage(mob, _xeno.TryApplyXenoSlashDamageMultiplier(mob, damage), origin: xeno, tool: xeno);
 
             var filter = Filter.Pvs(mob, entityManager: EntityManager);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { mob }, filter);
 
-            _throwing.TryThrow(mob, diff, 5);
+            _obstacleSlamming.MakeImmune(mob);
+            _size.KnockBack(mob, origin, xeno.Comp.KnockBackDistance, xeno.Comp.KnockBackDistance);
             if (!_size.TryGetSize(mob, out var size) || size < RMCSizes.Big)
                 _stun.TryParalyze(mob, _xeno.TryApplyXenoDebuffMultiplier(mob, xeno.Comp.ParalyzeTime), true);
 

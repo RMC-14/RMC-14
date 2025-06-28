@@ -1,6 +1,8 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Abduct;
 using Content.Shared._RMC14.Xenonids.Tail_Lash;
@@ -11,7 +13,6 @@ using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -25,7 +26,6 @@ public sealed class XenoDislocateSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
@@ -33,6 +33,9 @@ public sealed class XenoDislocateSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoDislocateComponent, XenoDislocateActionEvent>(OnDislocateAction);
@@ -76,14 +79,9 @@ public sealed class XenoDislocateSystem : EntitySystem
             if (_net.IsServer)
             {
                 var origin = _transform.GetMapCoordinates(xeno);
-                var target = _transform.GetMapCoordinates(targetId);
-                var diff = target.Position - origin.Position;
-                diff = diff.Normalized() * xeno.Comp.FlingRange;
-
                 _rmcMelee.DoLunge(xeno, targetId);
-
-                _throwing.TryThrow(targetId, diff, 10);
-
+                _obstacleSlamming.MakeImmune(targetId);
+                _sizeStun.KnockBack(targetId, origin, xeno.Comp.FlingRange, xeno.Comp.FlingRange, 10);
 
                 SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
             }
