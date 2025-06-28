@@ -38,11 +38,3 @@
 - type: Tag
   id: RMCBoxAttachment
 
-# TODO RMC14: how this works, at least from my understanding and tests, is that it pulls attachments from this list and populates the box randomly. I ain't doing that for now, but good luck to however does it.
-#	var/list/common = list(/obj/item/attachable/suppressor, /obj/item/attachable/bayonet, /obj/item/attachable/flashlight)
-#	var/list/attachment_1 = list(/obj/item/attachable/reddot, /obj/item/attachable/burstfire_assembly, /obj/item/attachable/lasersight,
-#								/obj/item/attachable/extended_barrel,/obj/item/attachable/verticalgrip, /obj/item/attachable/angledgrip,
-#								/obj/item/attachable/gyro, /obj/item/attachable/bipod)
-#	var/list/attachment_2 = list(/obj/item/attachable/stock/smg, /obj/item/attachable/stock/shotgun, /obj/item/attachable/stock/rifle, /obj/item/attachable/magnetic_harness,
-#								/obj/item/attachable/heavy_barrel, /obj/item/attachable/scope,
-#								/obj/item/attachable/scope/mini)
