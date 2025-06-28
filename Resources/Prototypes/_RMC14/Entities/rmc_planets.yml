@@ -139,6 +139,6 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/sorokyne.yml
-    camouflage: Snow
+    camouflage: Jungle
     minPlayers: 130
     announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
