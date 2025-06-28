@@ -111,7 +111,7 @@
 - type: entity
   parent: CMBeltMedicBag
   id: RMCBeltMedicBagSPP
-  name: Type 41 pattern medical bag
+  name: type 41 pattern medical bag
   description: The Type 41 load rig is the standard load-bearing equipment of the SPP military. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
   components:
   - type: Sprite
