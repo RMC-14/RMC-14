@@ -57,9 +57,12 @@ public sealed class PlanetMapLoadTest
             await PoolManager.WaitUntil(server, () => ticker.RunLevel == GameRunLevel.PreRoundLobby);
         }
 
+        await server.WaitIdleAsync();
+
+        var config = server.ResolveDependency<IConfigurationManager>();
         await server.WaitPost(() =>
         {
-            server.ResolveDependency<IConfigurationManager>().SetCVar(CCVars.GameLobbyEnabled, false);
+            config.SetCVar(CCVars.GameLobbyEnabled, false);
         });
 
         await pair.CleanReturnAsync();
