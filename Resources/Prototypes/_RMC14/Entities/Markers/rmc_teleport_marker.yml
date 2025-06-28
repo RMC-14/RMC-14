@@ -37,7 +37,7 @@
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     layers:
-    - state: trigger
+    - state: projector
   - type: Physics
     bodyType: Static
   - type: Fixtures

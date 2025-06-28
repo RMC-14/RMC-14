@@ -1,0 +1,25 @@
+﻿- type: entity
+  id: RMCAtmosTree
+  name: huge tree
+  description: What an enormous tree!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-1.5,1.5,0"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos_tree.rsi
+    state: tree
+    offset: -0.2, 1.2
+  - type: SpriteFade

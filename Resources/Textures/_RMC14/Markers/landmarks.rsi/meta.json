@@ -490,6 +490,18 @@
     },
     {
       "name": "ambient"
+    },
+    {
+      "name": "surv"
+    },
+    {
+      "name": "surv_clf"
+    },
+    {
+      "name": "surv_spp"
+    },
+    {
+      "name": "surv_wy"
     }
   ]
 }

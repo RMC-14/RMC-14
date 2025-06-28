@@ -13,6 +13,7 @@
       path: /Audio/_RMC14/Handling/toolbox_pickup.ogg
 
 - type: entity
+  name: emergency toolbox
   parent: [RMCToolboxBase, ToolboxEmergency]
   id: RMCToolboxEmergency
   components:
@@ -24,7 +25,6 @@
   suffix: RMC14
 
 - type: entity
-  name: emergency toolbox
   parent: [RMCToolboxEmergency, ToolboxEmergencyFilled]
   id: RMCToolboxEmergencyFilled
   components:

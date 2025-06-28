@@ -1,0 +1,45 @@
+# Lore Holidays
+
+- type: customHoliday
+  id: RMCUNMCFoundingDay # RMC14 Release
+  name: UNMC Founding Day
+  beginDay: 9
+  beginMonth: June
+  description: An archaic holiday originating from the founding of the United Nations Marine Corps.
+
+- type: customHoliday
+  id: RMCFallenMemorialDay # Canon Rounds
+  name: Fallen Memorial Day
+  beginDay: 28
+  beginMonth: October
+  description: A day of rememberance for all those who fell in the many operations of the UNMC.
+
+- type: customHoliday
+  id: RMCFleetDay # Lore
+  name: Fleet Day
+  beginDay: 6
+  beginMonth: May
+  description: A day of celebration in which the UNMC showcase their fleet in the Sol System.
+
+# Major Holidays
+
+- type: customHoliday
+  id: RMCChristmas
+  name: Christmas
+  beginDay: 25
+  beginMonth: December
+  description: The day in which Executive Specialist Santa flies over the colonies with his 'Sleigh' dropship to give paid time off to good workers.
+
+- type: customHoliday
+  id: RMCHalloween
+  name: Halloween
+  beginDay: 31
+  beginMonth: October
+  description: Ahh! Scary!
+
+- type: customHoliday
+  id: RMCNewYears
+  name: New Years
+  beginDay: 1
+  beginMonth: January
+  description: The first day of a new year. New opportunities await!

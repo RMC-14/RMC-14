@@ -26,3 +26,12 @@
   - type: Icon
     sprite: _RMC14/Structures/Power/cables.rsi
     state: cable_4
+
+- type: entity
+  parent: CableTerminal
+  id: RMCCableTerminal
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/cable_terminal.rsi
+    state: term

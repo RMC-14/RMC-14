@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseItem
+  id: RMCNukeDisk
+  name: nuclear authentication disk
+  description: Better keep this safe.
+  components:
+  - type: NukeDisk
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/disks.rsi
+    state: nucleardisk

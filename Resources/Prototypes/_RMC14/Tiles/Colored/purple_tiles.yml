@@ -68,3 +68,13 @@
   parent: CMFloorSteelPlanetPurpleBase
   id: CMFloorSteelPlanetPurpleFull
   sprite: /Textures/_RMC14/Tiles/floors/purplefull.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple6
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurpleCorner2
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurplecorner_2.png

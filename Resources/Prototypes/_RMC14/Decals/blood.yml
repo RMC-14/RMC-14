@@ -8,6 +8,55 @@
 
 - type: decal
   parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor1
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor1
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor2
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor2
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor3
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor3
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor4
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor4
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor5
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor5
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor6
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor6
+
+- type: decal
+  parent: RMCDecalBloodBase
+  id: RMCDecalBloodFloor7
+  sprite:
+    sprite: _RMC14/Decals/blood_floor.rsi
+    state: mfloor7
+
+- type: decal
+  parent: RMCDecalBloodBase
   id: RMCDecalBloodTrail1
   sprite:
     sprite: _RMC14/Decals/blood.rsi

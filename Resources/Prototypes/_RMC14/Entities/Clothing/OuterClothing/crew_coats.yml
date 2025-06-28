@@ -140,3 +140,9 @@
     sprite: Clothing/OuterClothing/Misc/apronbotanist.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/apronbotanist.rsi
+
+- type: entity
+  parent: RMCMedicalApron
+  id: RMCChefApron
+  name: A classic chef's apron
+  description: A basic, dull, white chef's apron.
