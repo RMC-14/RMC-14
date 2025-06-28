@@ -354,6 +354,14 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+# Chief MP
+- type: loadoutGroup
+  id: ChiefMPRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - CMPPeakedCapRMC
 # Synthetic
 - type: loadoutGroup
   id: SynthUniformRMC
