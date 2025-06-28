@@ -1,7 +1,7 @@
 # M63B2
 - type: job
   parent: CMJobBase
-  id: RMCEliteMercMHeavy
+  id: RMCEliteMercHeavy
   name: Heavy Mercenary
   description: rmc-ghost-role-information-pmc-description
   playTimeTracker: RMCEliteMercHeavy
