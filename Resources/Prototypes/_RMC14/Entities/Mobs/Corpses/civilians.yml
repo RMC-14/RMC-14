@@ -151,12 +151,14 @@
 - type: startingGear
   id: RMCGearCorpseSecurity
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
-    back: CMBackpackSecurity
+    jumpsuit: RMCJumpsuitCivilianSecurity
+    back: CMSatchelSecurity
+    head: RMCArmorHelmetSecurity
+    outerClothing: RMCArmorSecurity
     shoes: RMCShoesJackboots
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
-    id: CMIDCardColonist
+    id: CMIDCardColonistSecurity
     ears: CMHeadsetColony
     belt: CMBeltSecurityMPFilled
   storage:
@@ -192,22 +194,45 @@
   id: RMCCorpseLiaison
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseLiaison ]
+    prototypes:
+    - RMCGearCorpseLiaison
+    - RMCGearCorpseLiaisonBlue
+    - RMCGearCorpseLiaisonBrown
+    - RMCGearCorpseLiaisonWhite
   - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonField
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCArmorVest
     back: CMSatchel
     shoes: RMCShoesLaceup
     eyes: RMCGlassesAviators
     id: CMIDCardLiaisonColony
     ears: RMCHeadsetDistressWeYa
-#    belt: /obj/item/storage/belt/gun/m4a3/mod88
+    belt: CMM77BeltFilled
   storage:
     back:
     - RMCRadioHandheldColonyOff
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonBlue
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBlue
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonBrown
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonBrown
+
+- type: startingGear
+  parent: RMCGearCorpseLiaison
+  id: RMCGearCorpseLiaisonWhite
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonCorporateFormal
 
 # Prison Guard
 - type: randomHumanoidSettings
@@ -362,7 +387,7 @@
     shoes: RMCBootsPMCFilled
     mask: RMCMaskBalaclava
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressWeYaColony
+    ears: RMCHeadsetDistressWeYa
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchToolsFill
   storage:
@@ -386,7 +411,7 @@
 - type: startingGear
   id: RMCGearCorpseWeYaManager # TODO RMC14 manager jacket, jumpsuit and hat, lockable satchel
   equipment:
-    ears: RMCHeadsetDistressWeYaColony
+    ears: RMCHeadsetDistressWeYa
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateBlack
