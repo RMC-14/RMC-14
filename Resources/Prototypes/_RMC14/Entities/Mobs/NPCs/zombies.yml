@@ -135,7 +135,7 @@
   id: RMCZombifiedWeYaPMC
   components:
   - type: Loadout
-    prototypes: [ RMCCorpseWeYaPMCStandard ]
+    prototypes: [ RMCGearCorpseWeYaPMCStandard ]
 
 - type: entity
   parent: RMCSpawnZombifiedColonist
