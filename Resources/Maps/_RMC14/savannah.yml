@@ -4,8 +4,8 @@ meta:
   engineVersion: 251.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/24/2025 20:45:55
-  entityCount: 11462
+  time: 06/26/2025 13:35:35
+  entityCount: 11498
 maps:
 - 1
 grids:
@@ -219,7 +219,7 @@ entities:
           version: 6
         -1,0:
           ind: -1,0
-          tiles: AQAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAACwAAAAAACwAAAAAAOgAAAAAABAAAAAAABAAAAAAABAAAAAAABAAAAAAAPAAAAAAAAQAAAAAABQAAAAAANwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAALgAAAAAAfwAAAAAAfwAAAAAAfwAAAAAADAAAAAAABAAAAAAABAAAAAAABAAAAAAABAAAAAAASAAAAAAAfwAAAAAAPAAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAaAAAAAAALQAAAAAALgAAAAAACwAAAAAACwAAAAAAKwAAAAAALQAAAAAALQAAAAAALQAAAAAALQAAAAAAfwAAAAAARQAAAAAAOAAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAAfwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAADwAAAAAADwAAAAAAfwAAAAAAAQAAAAAASQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAGAAAAAAAfwAAAAAAaQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAagAAAAAADwAAAAAADwAAAAAAfwAAAAAAfwAAAAAADQAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAEQAAAAAAfwAAAAAAagAAAAAAbQAAAAAAbQAAAAAAbQAAAAAAcQAAAAAADwAAAAAADwAAAAAADwAAAAAAfwAAAAAADQAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAEQAAAAAAfwAAAAAAawAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAADwAAAAAADwAAAAAADwAAAAAAAQAAAAAADQAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAEQAAAAAAfwAAAAAAawAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAADwAAAAAADwAAAAAADwAAAAAAfwAAAAAASgAAAAAAEgAAAAAAEgAAAAAAEgAAAAAAEgAAAAAAEAAAAAAAfwAAAAAAbAAAAAAAWAAAAAAAWAAAAAAAfgAAAAAAEwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAEwAAAAAAEwAAAAAAbAAAAAAAFwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAARAAAAAAARwAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAARAAAAAAAOgAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAA
+          tiles: AQAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAACwAAAAAACwAAAAAAOgAAAAAABAAAAAAABAAAAAAABAAAAAAABAAAAAAAPAAAAAAAAQAAAAAABQAAAAAANwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAALgAAAAAAfwAAAAAAfwAAAAAAfwAAAAAADAAAAAAABAAAAAAABAAAAAAABAAAAAAABAAAAAAASAAAAAAAfwAAAAAAPAAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAaAAAAAAALQAAAAAALgAAAAAACwAAAAAACwAAAAAAKwAAAAAALQAAAAAALQAAAAAALQAAAAAALQAAAAAAfwAAAAAARQAAAAAAOAAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAAfwAAAAAALQAAAAAALQAAAAAALQAAAAAALQAAAAAALgAAAAAACwAAAAAAKwAAAAAALQAAAAAALQAAAAAALQAAAAAALgAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAADwAAAAAADwAAAAAAfwAAAAAAAQAAAAAASQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAGAAAAAAAfwAAAAAAaQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAagAAAAAADwAAAAAADwAAAAAAfwAAAAAAfwAAAAAADQAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAEQAAAAAAfwAAAAAAagAAAAAAbQAAAAAAbQAAAAAAbQAAAAAAcQAAAAAADwAAAAAADwAAAAAADwAAAAAAfwAAAAAADQAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAEQAAAAAAfwAAAAAAawAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAADwAAAAAADwAAAAAADwAAAAAAAQAAAAAADQAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAKgAAAAAAEQAAAAAAfwAAAAAAawAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAADwAAAAAADwAAAAAADwAAAAAAfwAAAAAASgAAAAAAEgAAAAAAEgAAAAAAEgAAAAAAEgAAAAAAEAAAAAAAfwAAAAAAbAAAAAAAWAAAAAAAWAAAAAAAfgAAAAAAEwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAEwAAAAAAEwAAAAAAbAAAAAAAFwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAANwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAARAAAAAAARwAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAAOAAAAAAARAAAAAAAOgAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAA
           version: 6
         0,-1:
           ind: 0,-1
@@ -251,7 +251,7 @@ entities:
           version: 6
         -2,-2:
           ind: -2,-2
-          tiles: KAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAAFwAAAAAACwAAAAAAFwAAAAAAFwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAACwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAACwAAAAAACwAAAAAAJwAAAAAAKQAAAAAACAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAACwAAAAAAJwAAAAAACwAAAAAACwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAagAAAAAAbQAAAAAAbwAAAAAAaQAAAAAAaQAAAAAAfwAAAAAACwAAAAAACwAAAAAAJwAAAAAAKQAAAAAABgAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAawAAAAAAaQAAAAAAFgAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACAAAAAAAJwAAAAAACwAAAAAACwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAawAAAAAAaQAAAAAAFgAAAAAAaQAAAAAAaQAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAJwAAAAAAKQAAAAAAKAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAawAAAAAAaQAAAAAAFgAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAJwAAAAAAKQAAAAAACwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAbAAAAAAAFwAAAAAAcAAAAAAAaQAAAAAAaQAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAJwAAAAAAKQAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAPwAAAAAAKAAAAAAAKAAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAKAAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAKAAAAAAAWgEAAAAAWgEAAAAAWgEAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAACwAAAAAAfwAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAAJgAAAAAACwAAAAAACwAAAAAACwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAJwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAADwAAAAAADwAAAAAAagAAAAAAbQAAAAAAbwAAAAAAWgEAAAAAAQAAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAADwAAAAAADwAAAAAAawAAAAAACwAAAAAAcAAAAAAAWgEAAAAAAQAAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAA
+          tiles: KAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACAAAAAAACAAAAAAACAAAAAAACwAAAAAACwAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAAFwAAAAAACwAAAAAAFwAAAAAAFwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAACwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAACwAAAAAACwAAAAAAJwAAAAAAKQAAAAAACAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAACwAAAAAAJwAAAAAACwAAAAAACwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAagAAAAAAbQAAAAAAbwAAAAAAaQAAAAAAaQAAAAAAfwAAAAAACwAAAAAACwAAAAAAJwAAAAAAKQAAAAAABgAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAawAAAAAAaQAAAAAAFgAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACAAAAAAAJwAAAAAACwAAAAAACwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAawAAAAAAaQAAAAAAFgAAAAAAaQAAAAAAaQAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAJwAAAAAAKQAAAAAAKAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAawAAAAAAaQAAAAAAFgAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAJwAAAAAAKQAAAAAACwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAbAAAAAAAFwAAAAAAcAAAAAAAaQAAAAAAaQAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAJwAAAAAAKQAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAPwAAAAAAKAAAAAAAKAAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAKAAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAKAAAAAAAKAAAAAAAWgEAAAAAWgEAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAACwAAAAAAfwAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAAJgAAAAAACwAAAAAACwAAAAAACwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAJwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAADwAAAAAADwAAAAAAagAAAAAAbQAAAAAAbwAAAAAAWgEAAAAAAQAAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAADwAAAAAADwAAAAAAawAAAAAACwAAAAAAcAAAAAAAWgEAAAAAAQAAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAA
           version: 6
         -2,-1:
           ind: -2,-1
@@ -259,7 +259,7 @@ entities:
           version: 6
         -2,0:
           ind: -2,0
-          tiles: WgEAAAAALAAAAAAADwAAAAAADwAAAAAADwAAAAAADwAAAAAALwAAAAAAWgEAAAAADwAAAAAADwAAAAAAWgEAAAAAWgEAAAAAJwAAAAAAWgEAAAAACwAAAAAAAQAAAAAAWgEAAAAALAAAAAAADwAAAAAADwAAAAAADwAAAAAADwAAAAAALwAAAAAACwAAAAAADwAAAAAADwAAAAAAWgEAAAAAAQAAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAWgEAAAAAMwAAAAAANAAAAAAANAAAAAAANAAAAAAANAAAAAAANQAAAAAAWgEAAAAADwAAAAAADwAAAAAAWgEAAAAAAQAAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAJwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAANgAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAACwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAACwAAAAAAfwAAAAAAPQAAAAAACAAAAAAACAAAAAAAJgAAAAAACwAAAAAACwAAAAAAPQAAAAAAfwAAAAAALQAAAAAALgAAAAAAKwAAAAAALgAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAALwAAAAAALAAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAogAAAAAApQAAAAAApQAAAAAApwAAAAAACwAAAAAACwAAAAAAogAAAAAAfwAAAAAAfwAAAAAALwAAAAAALAAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAowAAAAAApgAAAAAApgAAAAAAqAAAAAAACwAAAAAACwAAAAAAowAAAAAAfwAAAAAAAQAAAAAALwAAAAAALAAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAfwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAMwAAAAAANAAAAAAANQAAAAAALAAAAAAAfwAAAAAAkgAAAAAAkgAAAAAAfwAAAAAADwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAACwAAAAAACwAAAAAACwAAAAAAKwAAAAAALQAAAAAALgAAAAAALAAAAAAAfwAAAAAAkgAAAAAAkgAAAAAADwAAAAAADwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAqQAAAAAApAAAAAAApAAAAAAAfwAAAAAAAQAAAAAALwAAAAAALAAAAAAAfwAAAAAAkgAAAAAAkgAAAAAAfwAAAAAADwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAogAAAAAApQAAAAAApQAAAAAAfwAAAAAAAQAAAAAALwAAAAAALAAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAApAAAAAAApAAAAAAApAAAAAAApAAAAAAAqgAAAAAApQAAAAAApQAAAAAAfwAAAAAAfwAAAAAALwAAAAAAMwAAAAAANAAAAAAANAAAAAAANAAAAAAANAAAAAAANwAAAAAApQAAAAAApQAAAAAApQAAAAAApQAAAAAApQAAAAAApQAAAAAApQAAAAAAfwAAAAAAAQAAAAAALwAAAAAAKwAAAAAALQAAAAAALQAAAAAALQAAAAAALQAAAAAAOAAAAAAA
+          tiles: WgEAAAAALAAAAAAADwAAAAAADwAAAAAADwAAAAAADwAAAAAALwAAAAAAWgEAAAAADwAAAAAADwAAAAAAWgEAAAAAWgEAAAAAJwAAAAAAWgEAAAAACwAAAAAAAQAAAAAAWgEAAAAALAAAAAAADwAAAAAADwAAAAAADwAAAAAADwAAAAAALwAAAAAACwAAAAAADwAAAAAADwAAAAAAWgEAAAAAAQAAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAWgEAAAAAMwAAAAAANAAAAAAANAAAAAAANAAAAAAANAAAAAAANQAAAAAAWgEAAAAADwAAAAAADwAAAAAAWgEAAAAAAQAAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAJwAAAAAAWgEAAAAACwAAAAAAfwAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAAKAAAAAAANgAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAACwAAAAAACwAAAAAAWgEAAAAAWgEAAAAACwAAAAAAWgEAAAAACwAAAAAAfwAAAAAACwAAAAAAfwAAAAAAPQAAAAAACAAAAAAACAAAAAAAJgAAAAAACwAAAAAACwAAAAAAPQAAAAAAfwAAAAAALQAAAAAALgAAAAAAKwAAAAAALgAAAAAACwAAAAAACwAAAAAACwAAAAAAKwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAACwAAAAAACwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAALwAAAAAALAAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAogAAAAAApQAAAAAApQAAAAAApwAAAAAACwAAAAAACwAAAAAAogAAAAAAfwAAAAAAfwAAAAAALwAAAAAALAAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAAowAAAAAApgAAAAAApgAAAAAAqAAAAAAACwAAAAAACwAAAAAAowAAAAAAfwAAAAAAAQAAAAAALwAAAAAALAAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAfwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAMwAAAAAANAAAAAAANQAAAAAALAAAAAAAfwAAAAAAkgAAAAAAkgAAAAAAfwAAAAAADwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAACwAAAAAACwAAAAAACwAAAAAAKwAAAAAALQAAAAAALgAAAAAALAAAAAAAfwAAAAAAkgAAAAAAkgAAAAAADwAAAAAADwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAqQAAAAAApAAAAAAApAAAAAAAfwAAAAAAAQAAAAAALwAAAAAALAAAAAAAfwAAAAAAkgAAAAAAkgAAAAAAfwAAAAAADwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAogAAAAAApQAAAAAApQAAAAAAfwAAAAAAAQAAAAAALwAAAAAALAAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAfwAAAAAApAAAAAAApAAAAAAApAAAAAAApAAAAAAAqgAAAAAApQAAAAAApQAAAAAAfwAAAAAAfwAAAAAALwAAAAAAMwAAAAAANAAAAAAANAAAAAAANAAAAAAANAAAAAAANwAAAAAApQAAAAAApQAAAAAApQAAAAAApQAAAAAApQAAAAAApQAAAAAApQAAAAAAfwAAAAAAAQAAAAAALwAAAAAAKwAAAAAALQAAAAAALQAAAAAALQAAAAAALQAAAAAAOAAAAAAA
           version: 6
         -3,-1:
           ind: -3,-1
@@ -343,7 +343,7 @@ entities:
           version: 6
         5,-2:
           ind: 5,-2
-          tiles: CwAAAAAACwAAAAAAUAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAACwAAAAAACwAAAAAAAQAAAAAARAAAAAAACwAAAAAAUAAAAAAAfwAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAfwAAAAAAfwAAAAAACwAAAAAACwAAAAAAAQAAAAAAPAAAAAAAfwAAAAAAVQAAAAAAWgEAAAAAUAAAAAAAWgEAAAAAUwAAAAAAWgEAAAAAAQAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAPAAAAAAAfwAAAAAAUwAAAAAAWgEAAAAAWgEAAAAATQAAAAAAWgEAAAAAoQAAAAAATgAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAEwAAAAAAPAAAAAAAfwAAAAAAAQAAAAAAAQAAAAAATgAAAAAATgAAAAAAAQAAAAAAUAAAAAAAAQAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAEwAAAAAAPAAAAAAAfwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAAQAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAgwAAAAAAWgEAAAAAYwAAAAAAFAAAAAAASgAAAAAAWgEAAAAADQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAACwAAAAAACwAAAAAADQAAAAAAWgEAAAAADQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAgwAAAAAAWgEAAAAAYgAAAAAACwAAAAAAFAAAAAAAWgEAAAAADQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAgwAAAAAAWgEAAAAAEQAAAAAACwAAAAAACwAAAAAACwAAAAAADQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAWgEAAAAAWgEAAAAAEQAAAAAACwAAAAAACwAAAAAACwAAAAAADQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAASAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAWgEAAAAAAQAAAAAAEQAAAAAACwAAAAAAZQAAAAAAWgEAAAAADQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAfwAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAWgEAAAAAAQAAAAAAEQAAAAAACwAAAAAADQAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAAwAAAAAAWgEAAAAAfwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAAQAAAAAAEQAAAAAACwAAAAAAFAAAAAAAWgEAAAAAEgAAAAAAEgAAAAAAEgAAAAAAEgAAAAAAfwAAAAAAWgEAAAAAfwAAAAAAfwAAAAAAWgEAAAAAEAAAAAAAEgAAAAAAEgAAAAAAYwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAAWgEAAAAAfwAAAAAAfwAAAAAAWgEAAAAAEQAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAA
+          tiles: CwAAAAAACwAAAAAAUAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAfwAAAAAACwAAAAAACwAAAAAAAQAAAAAARAAAAAAACwAAAAAAUAAAAAAAfwAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAAQAAAAAAfwAAAAAAfwAAAAAACwAAAAAACwAAAAAAAQAAAAAAPAAAAAAAfwAAAAAAVQAAAAAAWgEAAAAAUAAAAAAAWgEAAAAAUwAAAAAAWgEAAAAAAQAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAPAAAAAAAfwAAAAAAUwAAAAAAWgEAAAAAWgEAAAAATQAAAAAAWgEAAAAAoQAAAAAATgAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAEwAAAAAAPAAAAAAAfwAAAAAAAQAAAAAAAQAAAAAATgAAAAAATgAAAAAAAQAAAAAAUAAAAAAAAQAAAAAAWgEAAAAAAQAAAAAAAQAAAAAAfwAAAAAAAQAAAAAAEwAAAAAAEwAAAAAAPAAAAAAAfwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAAQAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAgwAAAAAAWgEAAAAAYwAAAAAAFAAAAAAASgAAAAAAWgEAAAAADQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAACwAAAAAACwAAAAAADQAAAAAAWgEAAAAADQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAgwAAAAAAWgEAAAAAYgAAAAAACwAAAAAAFAAAAAAAWgEAAAAADQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAgwAAAAAAWgEAAAAAEQAAAAAACwAAAAAACwAAAAAACwAAAAAADQAAAAAAfwAAAAAAfwAAAAAAfwAAAAAAPAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAWgEAAAAAWgEAAAAAEQAAAAAACwAAAAAACwAAAAAACwAAAAAADQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAASAAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAWgEAAAAAAQAAAAAAEwAAAAAACwAAAAAAZQAAAAAAWgEAAAAADQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAfwAAAAAAWgEAAAAAgwAAAAAAAQAAAAAAAQAAAAAAgwAAAAAAWgEAAAAAAQAAAAAAEwAAAAAACwAAAAAADQAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAAwAAAAAAWgEAAAAAfwAAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAWgEAAAAAAQAAAAAAEwAAAAAACwAAAAAAFAAAAAAAWgEAAAAAEgAAAAAAEgAAAAAAEgAAAAAAEgAAAAAAfwAAAAAAWgEAAAAAfwAAAAAAfwAAAAAAWgEAAAAAEAAAAAAAEgAAAAAAEgAAAAAAYwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAfwAAAAAAWgEAAAAAfwAAAAAAfwAAAAAAWgEAAAAAEQAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAA
           version: 6
         6,-2:
           ind: 6,-2
@@ -4073,10 +4073,10 @@ entities:
         -53,-16: RMCAreaSavannahBrigPrison
         -53,-17: RMCAreaSavannahBrigPrison
         -53,-18: RMCAreaSavannahBrigPrison
-        -49,-18: RMCAreaSavannahBrigPrison
-        -49,-19: RMCAreaSavannahBrigPrison
-        -49,-20: RMCAreaSavannahBrigPrison
-        -49,-21: RMCAreaSavannahBrigPrison
+        -49,-18: RMCAreaSavannahBrigWarden
+        -49,-19: RMCAreaSavannahBrigWarden
+        -49,-20: RMCAreaSavannahBrigWarden
+        -49,-21: RMCAreaSavannahBrigWarden
         -50,-18: RMCAreaSavannahBrigPrison
         -50,-19: RMCAreaSavannahBrigPrison
         -50,-20: RMCAreaSavannahBrigPrison
@@ -7257,16 +7257,16 @@ entities:
         -47,-24: RMCAreaSavannahMaintsPortBow
         -47,-23: RMCAreaSavannahMaintsPortBow
         -48,-22: RMCAreaSavannahMaintsPortBow
-        -48,-21: RMCAreaSavannahMaintsPortBow
-        -48,-20: RMCAreaSavannahMaintsPortBow
-        -48,-19: RMCAreaSavannahMaintsPortBow
-        -48,-18: RMCAreaSavannahMaintsPortBow
+        -48,-21: RMCAreaSavannahBrigWarden
+        -48,-20: RMCAreaSavannahBrigWarden
+        -48,-19: RMCAreaSavannahBrigWarden
+        -48,-18: RMCAreaSavannahBrigWarden
         -47,-22: RMCAreaSavannahMaintsPortBow
-        -47,-21: RMCAreaSavannahMaintsPortBow
-        -47,-20: RMCAreaSavannahMaintsPortBow
-        -47,-19: RMCAreaSavannahMaintsPortBow
-        -47,-18: RMCAreaSavannahMaintsPortBow
-        -46,-18: RMCAreaSavannahMaintsPortBow
+        -47,-21: RMCAreaSavannahBrigWarden
+        -47,-20: RMCAreaSavannahBrigWarden
+        -47,-19: RMCAreaSavannahBrigWarden
+        -47,-18: RMCAreaSavannahBrigWarden
+        -46,-18: RMCAreaSavannahBrigWarden
         -53,-25: RMCAreaSavannahMaintsPortBow
         -53,-24: RMCAreaSavannahMaintsPortBow
         -53,-23: RMCAreaSavannahMaintsPortBow
@@ -7919,7 +7919,7 @@ entities:
         33,12: RMCAreaSavannahMedicalPreparation
         33,13: RMCAreaSavannahMedicalPreparation
         34,6: RMCAreaSavannahMedical
-        34,7: RMCAreaSavannahMedicalPreparation
+        34,7: RMCAreaSavannahMedical
         34,8: RMCAreaSavannahMedicalPreparation
         34,9: RMCAreaSavannahMedicalPreparation
         34,10: RMCAreaSavannahMedicalPreparation
@@ -7927,7 +7927,7 @@ entities:
         34,12: RMCAreaSavannahMedicalPreparation
         34,13: RMCAreaSavannahMedicalPreparation
         35,6: RMCAreaSavannahMedical
-        35,7: RMCAreaSavannahMedicalPreparation
+        35,7: RMCAreaSavannahMedical
         35,8: RMCAreaSavannahMedicalPreparation
         35,9: RMCAreaSavannahMedicalPreparation
         35,10: RMCAreaSavannahMedicalPreparation
@@ -7946,7 +7946,7 @@ entities:
         37,12: RMCAreaSavannahMedicalPreparation
         37,11: RMCAreaSavannahMedicalPreparation
         37,10: RMCAreaSavannahMedicalPreparation
-        37,9: RMCAreaSavannahMedical
+        37,9: RMCAreaSavannahMedicalPreparation
         37,8: RMCAreaSavannahMedicalPreparation
         25,6: RMCAreaSavannahMedical
         25,5: RMCAreaSavannahMedical
@@ -8055,34 +8055,34 @@ entities:
         36,3: RMCAreaSavannahMedical
         36,4: RMCAreaSavannahMedical
         36,5: RMCAreaSavannahMedical
-        37,3: RMCAreaSavannahMedical
-        37,4: RMCAreaSavannahMedical
-        37,5: RMCAreaSavannahMedical
-        38,3: RMCAreaSavannahMedical
-        38,4: RMCAreaSavannahMedical
-        38,5: RMCAreaSavannahMedical
-        39,3: RMCAreaSavannahMedical
-        39,4: RMCAreaSavannahMedical
-        39,5: RMCAreaSavannahMedical
+        37,3: RMCAreaSavannahMedicalSurgery
+        37,4: RMCAreaSavannahMedicalSurgery
+        37,5: RMCAreaSavannahMedicalSurgery
+        38,3: RMCAreaSavannahMedicalSurgery
+        38,4: RMCAreaSavannahMedicalSurgery
+        38,5: RMCAreaSavannahMedicalSurgery
+        39,3: RMCAreaSavannahMedicalSurgery
+        39,4: RMCAreaSavannahMedicalSurgery
+        39,5: RMCAreaSavannahMedicalSurgery
         40,3: RMCAreaSavannahMedicalSurgery
         40,4: RMCAreaSavannahMedicalSurgery
         40,5: RMCAreaSavannahMedicalSurgery
-        37,6: RMCAreaSavannahMedical
-        37,7: RMCAreaSavannahMedicalPreparation
-        38,6: RMCAreaSavannahMedical
-        38,7: RMCAreaSavannahMedicalPreparation
-        39,6: RMCAreaSavannahMedical
-        39,7: RMCAreaSavannahMedicalPreparation
+        37,6: RMCAreaSavannahMedicalSurgery
+        37,7: RMCAreaSavannahMedicalSurgery
+        38,6: RMCAreaSavannahMedicalSurgery
+        38,7: RMCAreaSavannahMedicalSurgery
+        39,6: RMCAreaSavannahMedicalSurgery
+        39,7: RMCAreaSavannahMedicalSurgery
         40,6: RMCAreaSavannahMedicalSurgery
         40,7: RMCAreaSavannahMedicalSurgery
         38,8: RMCAreaSavannahMedicalPreparation
-        38,9: RMCAreaSavannahMedical
+        38,9: RMCAreaSavannahMedicalPreparation
         38,10: RMCAreaSavannahMedicalPreparation
         39,8: RMCAreaSavannahMedicalPreparation
-        39,9: RMCAreaSavannahMedical
+        39,9: RMCAreaSavannahMedicalPreparation
         39,10: RMCAreaSavannahMedicalPreparation
         40,8: RMCAreaSavannahMedicalPreparation
-        40,9: RMCAreaSavannahMedical
+        40,9: RMCAreaSavannahMedicalPreparation
         40,10: RMCAreaSavannahMedicalPreparation
         36,-1: RMCAreaSavannahMedical
         36,-2: RMCAreaSavannahMedical
@@ -8149,36 +8149,36 @@ entities:
         40,11: RMCAreaSavannahMedicalPreparation
         41,13: RMCAreaSavannahMedicalPreparation
         41,12: RMCAreaSavannahMedicalPreparation
-        41,11: RMCAreaSavannahMedical
+        41,11: RMCAreaSavannahMedicalPreparation
         42,13: RMCAreaSavannahMedicalPreparation
         42,12: RMCAreaSavannahMedicalPreparation
-        42,11: RMCAreaSavannahMedical
+        42,11: RMCAreaSavannahMedicalPreparation
         43,13: RMCAreaSavannahMedicalPreparation
         43,12: RMCAreaSavannahMedicalPreparation
-        43,11: RMCAreaSavannahMedical
-        44,13: RMCAreaSavannahMedical
-        44,12: RMCAreaSavannahMedical
+        43,11: RMCAreaSavannahMedicalPreparation
+        44,13: RMCAreaSavannahMedicalPreparation
+        44,12: RMCAreaSavannahMedicalPreparation
         44,11: RMCAreaSavannahMedicalPreparation
-        45,13: RMCAreaSavannahMedical
-        45,12: RMCAreaSavannahMedical
-        45,11: RMCAreaSavannahMedical
-        41,10: RMCAreaSavannahMedical
-        41,9: RMCAreaSavannahMedical
+        45,13: RMCAreaSavannahMedicalPreparation
+        45,12: RMCAreaSavannahMedicalPreparation
+        45,11: RMCAreaSavannahMedicalPreparation
+        41,10: RMCAreaSavannahMedicalPreparation
+        41,9: RMCAreaSavannahMedicalPreparation
         41,8: RMCAreaSavannahMedicalPreparation
         41,7: RMCAreaSavannahMedicalSurgery
-        42,10: RMCAreaSavannahMedical
-        42,9: RMCAreaSavannahMedical
+        42,10: RMCAreaSavannahMedicalPreparation
+        42,9: RMCAreaSavannahMedicalPreparation
         42,8: RMCAreaSavannahMedicalPreparation
         42,7: RMCAreaSavannahMedicalSurgery
-        43,10: RMCAreaSavannahMedical
-        43,9: RMCAreaSavannahMedical
+        43,10: RMCAreaSavannahMedicalPreparation
+        43,9: RMCAreaSavannahMedicalPreparation
         43,8: RMCAreaSavannahMedicalPreparation
         43,7: RMCAreaSavannahMedicalSurgery
         44,10: RMCAreaSavannahMedicalPreparation
         44,9: RMCAreaSavannahMedicalPreparation
         44,8: RMCAreaSavannahMedicalPreparation
         44,7: RMCAreaSavannahMedicalSurgery
-        45,10: RMCAreaSavannahMedical
+        45,10: RMCAreaSavannahMedicalPreparation
         45,9: RMCAreaSavannahMedicalPreparation
         45,8: RMCAreaSavannahMedicalPreparation
         45,7: RMCAreaSavannahMedicalSurgery
@@ -8187,20 +8187,20 @@ entities:
         46,5: RMCAreaSavannahMedicalSurgery
         46,4: RMCAreaSavannahMedicalSurgery
         46,-5: RMCAreaSavannahMedicalSurgery
-        47,7: RMCAreaSavannahMedical
-        47,6: RMCAreaSavannahMedical
-        47,5: RMCAreaSavannahMedical
-        47,4: RMCAreaSavannahMedical
+        47,7: RMCAreaSavannahMedicalSurgery
+        47,6: RMCAreaSavannahMedicalSurgery
+        47,5: RMCAreaSavannahMedicalSurgery
+        47,4: RMCAreaSavannahMedicalSurgery
         46,-4: RMCAreaSavannahMedicalSurgery
-        48,7: RMCAreaSavannahMedical
-        48,6: RMCAreaSavannahMedical
-        48,5: RMCAreaSavannahMedical
-        48,4: RMCAreaSavannahMedical
+        48,7: RMCAreaSavannahMedicalSurgery
+        48,6: RMCAreaSavannahMedicalSurgery
+        48,5: RMCAreaSavannahMedicalSurgery
+        48,4: RMCAreaSavannahMedicalSurgery
         46,-3: RMCAreaSavannahMedicalSurgery
-        49,7: RMCAreaSavannahMedical
-        49,6: RMCAreaSavannahMedical
-        49,5: RMCAreaSavannahMedical
-        49,4: RMCAreaSavannahMedical
+        49,7: RMCAreaSavannahMedicalSurgery
+        49,6: RMCAreaSavannahMedicalSurgery
+        49,5: RMCAreaSavannahMedicalSurgery
+        49,4: RMCAreaSavannahMedicalSurgery
         46,-2: RMCAreaSavannahMedicalSurgery
         45,6: RMCAreaSavannahMedicalSurgery
         45,5: RMCAreaSavannahMedicalSurgery
@@ -8223,17 +8223,17 @@ entities:
         41,4: RMCAreaSavannahMedicalSurgery
         41,3: RMCAreaSavannahMedicalSurgery
         40,2: RMCAreaSavannahMedicalSurgery
-        40,1: RMCAreaSavannahMedical
-        40,0: RMCAreaSavannahMedical
+        40,1: RMCAreaSavannahMedicalSurgery
+        40,0: RMCAreaSavannahMedicalSurgery
         41,2: RMCAreaSavannahMedicalSurgery
-        41,1: RMCAreaSavannahMedical
-        41,0: RMCAreaSavannahMedical
+        41,1: RMCAreaSavannahMedicalSurgery
+        41,0: RMCAreaSavannahMedicalSurgery
         42,2: RMCAreaSavannahMedicalSurgery
-        42,1: RMCAreaSavannahMedical
-        42,0: RMCAreaSavannahMedical
+        42,1: RMCAreaSavannahMedicalSurgery
+        42,0: RMCAreaSavannahMedicalSurgery
         43,2: RMCAreaSavannahMedicalSurgery
-        43,1: RMCAreaSavannahMedical
-        43,0: RMCAreaSavannahMedical
+        43,1: RMCAreaSavannahMedicalSurgery
+        43,0: RMCAreaSavannahMedicalSurgery
         47,-3: RMCAreaSavannahMedicalSurgery
         47,-4: RMCAreaSavannahMedicalSurgery
         47,-5: RMCAreaSavannahMedicalSurgery
@@ -8261,10 +8261,10 @@ entities:
         48,-4: RMCAreaSavannahMedicalSurgery
         48,-5: RMCAreaSavannahMedicalSurgery
         49,-2: RMCAreaSavannahMedicalSurgery
-        44,0: RMCAreaSavannahMedical
+        44,0: RMCAreaSavannahMedicalSurgery
         44,-1: RMCAreaSavannahMedicalSurgery
-        45,1: RMCAreaSavannahMedical
-        45,0: RMCAreaSavannahMedical
+        45,1: RMCAreaSavannahMedicalSurgery
+        45,0: RMCAreaSavannahMedicalSurgery
         45,-1: RMCAreaSavannahMedicalSurgery
         48,-6: RMCAreaSavannahMedicalSurgery
         44,3: RMCAreaSavannahMedicalSurgery
@@ -8273,48 +8273,48 @@ entities:
         46,2: RMCAreaSavannahMedicalSurgery
         46,3: RMCAreaSavannahMedicalSurgery
         49,-3: RMCAreaSavannahMedicalSurgery
-        47,3: RMCAreaSavannahMedical
-        46,0: RMCAreaSavannahMedical
+        47,3: RMCAreaSavannahMedicalSurgery
+        46,0: RMCAreaSavannahMedicalSurgery
         46,-1: RMCAreaSavannahMedicalSurgery
-        46,1: RMCAreaSavannahMedical
-        48,0: RMCAreaSavannahMedical
+        46,1: RMCAreaSavannahMedicalSurgery
+        48,0: RMCAreaSavannahMedicalSurgery
         49,-4: RMCAreaSavannahMedicalSurgery
-        47,0: RMCAreaSavannahMedical
+        47,0: RMCAreaSavannahMedicalSurgery
         47,-1: RMCAreaSavannahMedicalSurgery
-        48,3: RMCAreaSavannahMedical
-        48,1: RMCAreaSavannahMedical
-        48,2: RMCAreaSavannahMedical
+        48,3: RMCAreaSavannahMedicalSurgery
+        48,1: RMCAreaSavannahMedicalSurgery
+        48,2: RMCAreaSavannahMedicalSurgery
         49,-5: RMCAreaSavannahMedicalSurgery
-        49,0: RMCAreaSavannahMedical
-        49,1: RMCAreaSavannahMedical
-        49,2: RMCAreaSavannahMedical
-        49,3: RMCAreaSavannahMedical
+        49,0: RMCAreaSavannahMedicalSurgery
+        49,1: RMCAreaSavannahMedicalSurgery
+        49,2: RMCAreaSavannahMedicalSurgery
+        49,3: RMCAreaSavannahMedicalSurgery
         48,-1: RMCAreaSavannahMedicalSurgery
         49,-6: RMCAreaSavannahMedicalSurgery
-        44,1: RMCAreaSavannahMedical
+        44,1: RMCAreaSavannahMedicalSurgery
         44,-6: RMCAreaSavannahMedicalSurgery
         45,-2: RMCAreaSavannahMedicalSurgery
         44,2: RMCAreaSavannahMedicalSurgery
         44,-5: RMCAreaSavannahMedicalSurgery
         45,-3: RMCAreaSavannahMedicalSurgery
-        47,2: RMCAreaSavannahMedical
+        47,2: RMCAreaSavannahMedicalSurgery
         44,-4: RMCAreaSavannahMedicalSurgery
         45,-4: RMCAreaSavannahMedicalSurgery
-        47,1: RMCAreaSavannahMedical
+        47,1: RMCAreaSavannahMedicalSurgery
         44,-3: RMCAreaSavannahMedicalSurgery
         45,-5: RMCAreaSavannahMedicalSurgery
         49,-1: RMCAreaSavannahMedicalSurgery
         44,-2: RMCAreaSavannahMedicalSurgery
         45,-6: RMCAreaSavannahMedicalSurgery
-        37,2: RMCAreaSavannahMedical
-        37,1: RMCAreaSavannahMedical
-        37,0: RMCAreaSavannahMedical
-        38,2: RMCAreaSavannahMedical
-        38,1: RMCAreaSavannahMedical
-        38,0: RMCAreaSavannahMedical
-        39,2: RMCAreaSavannahMedical
-        39,1: RMCAreaSavannahMedical
-        39,0: RMCAreaSavannahMedical
+        37,2: RMCAreaSavannahMedicalSurgery
+        37,1: RMCAreaSavannahMedicalSurgery
+        37,0: RMCAreaSavannahMedicalSurgery
+        38,2: RMCAreaSavannahMedicalSurgery
+        38,1: RMCAreaSavannahMedicalSurgery
+        38,0: RMCAreaSavannahMedicalSurgery
+        39,2: RMCAreaSavannahMedicalSurgery
+        39,1: RMCAreaSavannahMedicalSurgery
+        39,0: RMCAreaSavannahMedicalSurgery
         -32,-12: RMCAreaSavannahCIC
         -32,-13: RMCAreaSavannahCIC
         -32,-14: RMCAreaSavannahCIC
@@ -8387,9 +8387,9 @@ entities:
         -24,-17: RMCAreaSavannahOfficerBunks
         -24,-18: RMCAreaSavannahOfficerBunks
         -24,-19: RMCAreaSavannahOfficerBunks
-        -46,-19: RMCAreaSavannahPilotBunks
-        -46,-20: RMCAreaSavannahPilotBunks
-        -46,-21: RMCAreaSavannahPilotBunks
+        -46,-19: RMCAreaSavannahBrigWarden
+        -46,-20: RMCAreaSavannahBrigWarden
+        -46,-21: RMCAreaSavannahBrigWarden
         -46,-22: RMCAreaSavannahPilotBunks
         -46,-23: RMCAreaSavannahPilotBunks
         -46,-24: RMCAreaSavannahPilotBunks
@@ -9389,7 +9389,7 @@ entities:
         43,19: RMCAreaSavannahMedicalResearch
         43,18: RMCAreaSavannahMedicalResearch
         43,17: RMCAreaSavannahMedicalResearch
-        43,16: RMCAreaSavannahMedicalResearch
+        43,16: RMCAreaSavannahMedicalPreparation
         44,32: RMCAreaSavannahStarboardPointDefense
         44,31: RMCAreaSavannahStarboardPointDefense
         44,30: RMCAreaSavannahStarboardPointDefense
@@ -9406,7 +9406,7 @@ entities:
         44,19: RMCAreaSavannahMedicalResearch
         44,18: RMCAreaSavannahMedicalResearch
         44,17: RMCAreaSavannahMedicalResearch
-        44,16: RMCAreaSavannahMedicalResearch
+        44,16: RMCAreaSavannahMedicalPreparation
         45,32: RMCAreaSavannahStarboardPointDefense
         45,31: RMCAreaSavannahStarboardPointDefense
         45,30: RMCAreaSavannahStarboardPointDefense
@@ -9423,7 +9423,7 @@ entities:
         45,19: RMCAreaSavannahMedicalResearch
         45,18: RMCAreaSavannahMedicalResearch
         45,17: RMCAreaSavannahMedicalResearch
-        45,16: RMCAreaSavannahMedicalResearch
+        45,16: RMCAreaSavannahMedicalPreparation
         46,32: RMCAreaSavannahStarboardPointDefense
         46,31: RMCAreaSavannahStarboardPointDefense
         46,30: RMCAreaSavannahStarboardPointDefense
@@ -9440,7 +9440,7 @@ entities:
         46,19: RMCAreaSavannahMedicalResearch
         46,18: RMCAreaSavannahMedicalResearch
         46,17: RMCAreaSavannahMedicalResearch
-        46,16: RMCAreaSavannahMedicalResearch
+        46,16: RMCAreaSavannahMedicalPreparation
         47,32: RMCAreaSavannahStarboardPointDefense
         47,31: RMCAreaSavannahStarboardPointDefense
         47,30: RMCAreaSavannahStarboardPointDefense
@@ -9457,7 +9457,7 @@ entities:
         47,19: RMCAreaSavannahMedicalResearch
         47,18: RMCAreaSavannahMedicalResearch
         47,17: RMCAreaSavannahMedicalResearch
-        47,16: RMCAreaSavannahMedicalResearch
+        47,16: RMCAreaSavannahMedicalPreparation
         48,32: RMCAreaSavannahStarboardPointDefense
         48,31: RMCAreaSavannahStarboardPointDefense
         48,30: RMCAreaSavannahStarboardPointDefense
@@ -9474,7 +9474,7 @@ entities:
         48,19: RMCAreaSavannahMedicalResearch
         48,18: RMCAreaSavannahMedicalResearch
         48,17: RMCAreaSavannahMedicalResearch
-        48,16: RMCAreaSavannahMedicalResearch
+        48,16: RMCAreaSavannahMedicalPreparation
         49,32: RMCAreaSavannahStarboardPointDefense
         49,31: RMCAreaSavannahStarboardPointDefense
         49,30: RMCAreaSavannahStarboardPointDefense
@@ -9491,7 +9491,7 @@ entities:
         49,19: RMCAreaSavannahMedicalResearch
         49,18: RMCAreaSavannahMedicalResearch
         49,17: RMCAreaSavannahMedicalResearch
-        49,16: RMCAreaSavannahMedicalResearch
+        49,16: RMCAreaSavannahMedicalPreparation
         50,32: RMCAreaSavannahStarboardPointDefense
         50,31: RMCAreaSavannahStarboardPointDefense
         50,30: RMCAreaSavannahStarboardPointDefense
@@ -10760,38 +10760,38 @@ entities:
         50,15: RMCAreaSavannahMedicalResearch
         50,14: RMCAreaSavannahMaintsStarboardQuarter
         50,13: RMCAreaSavannahMaintsStarboardQuarter
-        49,15: RMCAreaSavannahMedicalResearch
-        49,14: RMCAreaSavannahMedical
-        49,13: RMCAreaSavannahMedical
-        49,12: RMCAreaSavannahMedical
-        49,11: RMCAreaSavannahMedical
-        49,10: RMCAreaSavannahMedical
+        49,15: RMCAreaSavannahMedicalPreparation
+        49,14: RMCAreaSavannahMedicalPreparation
+        49,13: RMCAreaSavannahMedicalPreparation
+        49,12: RMCAreaSavannahMedicalPreparation
+        49,11: RMCAreaSavannahMedicalPreparation
+        49,10: RMCAreaSavannahMedicalPreparation
         49,9: RMCAreaSavannahMedical
         49,8: RMCAreaSavannahMedical
-        48,15: RMCAreaSavannahMedicalResearch
-        48,14: RMCAreaSavannahMedical
-        48,13: RMCAreaSavannahMedical
-        48,12: RMCAreaSavannahMedical
-        48,11: RMCAreaSavannahMedical
-        48,10: RMCAreaSavannahMedical
-        48,9: RMCAreaSavannahMedical
-        48,8: RMCAreaSavannahMedical
-        47,15: RMCAreaSavannahMedical
-        47,14: RMCAreaSavannahMedical
-        47,10: RMCAreaSavannahMedical
-        47,13: RMCAreaSavannahMedical
-        47,12: RMCAreaSavannahMedical
-        47,11: RMCAreaSavannahMedical
-        47,8: RMCAreaSavannahMedical
-        47,9: RMCAreaSavannahMedical
-        46,15: RMCAreaSavannahMedical
-        46,14: RMCAreaSavannahMedical
-        46,10: RMCAreaSavannahMedical
-        46,13: RMCAreaSavannahMedical
-        46,12: RMCAreaSavannahMedical
-        46,11: RMCAreaSavannahMedical
-        46,9: RMCAreaSavannahMedical
-        46,8: RMCAreaSavannahMedical
+        48,15: RMCAreaSavannahMedicalPreparation
+        48,14: RMCAreaSavannahMedicalPreparation
+        48,13: RMCAreaSavannahMedicalPreparation
+        48,12: RMCAreaSavannahMedicalPreparation
+        48,11: RMCAreaSavannahMedicalPreparation
+        48,10: RMCAreaSavannahMedicalPreparation
+        48,9: RMCAreaSavannahMedicalPreparation
+        48,8: RMCAreaSavannahMedicalPreparation
+        47,15: RMCAreaSavannahMedicalPreparation
+        47,14: RMCAreaSavannahMedicalPreparation
+        47,10: RMCAreaSavannahMedicalPreparation
+        47,13: RMCAreaSavannahMedicalPreparation
+        47,12: RMCAreaSavannahMedicalPreparation
+        47,11: RMCAreaSavannahMedicalPreparation
+        47,8: RMCAreaSavannahMedicalPreparation
+        47,9: RMCAreaSavannahMedicalPreparation
+        46,15: RMCAreaSavannahMedicalPreparation
+        46,14: RMCAreaSavannahMedicalPreparation
+        46,10: RMCAreaSavannahMedicalPreparation
+        46,13: RMCAreaSavannahMedicalPreparation
+        46,12: RMCAreaSavannahMedicalPreparation
+        46,11: RMCAreaSavannahMedicalPreparation
+        46,9: RMCAreaSavannahMedicalPreparation
+        46,8: RMCAreaSavannahMedicalPreparation
         39,-30: RMCAreaSavannahMaintsPortBeam
         39,-31: RMCAreaSavannahMaintsPortBeam
         39,-32: RMCAreaSavannahMaintsPortBeam
@@ -10892,11 +10892,11 @@ entities:
         42,15: RMCAreaSavannahMedicalResearch
         42,14: RMCAreaSavannahMedicalPreparation
         43,14: RMCAreaSavannahMedicalPreparation
-        43,15: RMCAreaSavannahMedicalResearch
-        44,15: RMCAreaSavannahMedical
-        44,14: RMCAreaSavannahMedical
-        45,14: RMCAreaSavannahMedical
-        45,15: RMCAreaSavannahMedical
+        43,15: RMCAreaSavannahMedicalPreparation
+        44,15: RMCAreaSavannahMedicalPreparation
+        44,14: RMCAreaSavannahMedicalPreparation
+        45,14: RMCAreaSavannahMedicalPreparation
+        45,15: RMCAreaSavannahMedicalPreparation
         39,11: RMCAreaSavannahMedicalPreparation
         39,12: RMCAreaSavannahMedicalPreparation
         38,11: RMCAreaSavannahMedicalPreparation
@@ -14965,7 +14965,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -21292.246
+      secondsUntilStateChange: -23342.86
       state: Opening
   - uid: 5659
     components:
@@ -15337,7 +15337,7 @@ entities:
       pos: 40.5,-0.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -335.05627
+      secondsUntilStateChange: -2385.669
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -16104,6 +16104,11 @@ entities:
       rot: 3.141592653589793 rad
       pos: 80.5,-10.5
       parent: 1
+  - uid: 694
+    components:
+    - type: Transform
+      pos: 21.5,-4.5
+      parent: 1
   - uid: 705
     components:
     - type: Transform
@@ -16154,8 +16159,8 @@ entities:
   - uid: 797
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 49.5,-35.5
+      rot: -1.5707963267948966 rad
+      pos: -38.5,-29.5
       parent: 1
   - uid: 867
     components:
@@ -16299,6 +16304,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 67.5,-40.5
       parent: 1
+  - uid: 6361
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 45.5,-34.5
+      parent: 1
   - uid: 6667
     components:
     - type: Transform
@@ -16322,23 +16333,11 @@ entities:
       rot: 3.141592653589793 rad
       pos: 71.5,20.5
       parent: 1
-  - uid: 8527
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -45.5,-25.5
-      parent: 1
   - uid: 8529
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -22.5,-12.5
-      parent: 1
-  - uid: 8576
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -40.5,-31.5
       parent: 1
   - uid: 8958
     components:
@@ -16398,10 +16397,29 @@ entities:
     - type: Transform
       pos: 68.5,-4.5
       parent: 1
-  - uid: 16454
+  - uid: 9608
     components:
     - type: Transform
-      pos: 21.5,-5.5
+      rot: -1.5707963267948966 rad
+      pos: -50.5,-13.5
+      parent: 1
+  - uid: 9632
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -45.5,-26.5
+      parent: 1
+  - uid: 9641
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 29.5,19.5
+      parent: 1
+  - uid: 9642
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 79.5,25.5
       parent: 1
 - proto: CMASRSConsole
   entities:
@@ -16426,6 +16444,11 @@ entities:
     components:
     - type: Transform
       pos: 2.5,13.5
+      parent: 1
+  - uid: 6691
+    components:
+    - type: Transform
+      pos: 25.5,-41.5
       parent: 1
   - uid: 6851
     components:
@@ -16491,6 +16514,11 @@ entities:
     - type: Transform
       pos: -46.5,-17.5
       parent: 1
+  - uid: 4270
+    components:
+    - type: Transform
+      pos: -58.5,-12.5
+      parent: 1
   - uid: 5031
     components:
     - type: Transform
@@ -16521,26 +16549,6 @@ entities:
     - type: Transform
       pos: -69.5,-2.5
       parent: 1
-  - uid: 6698
-    components:
-    - type: Transform
-      pos: -52.5,-13.5
-      parent: 1
-  - uid: 6699
-    components:
-    - type: Transform
-      pos: -55.5,-13.5
-      parent: 1
-  - uid: 6700
-    components:
-    - type: Transform
-      pos: -58.5,-13.5
-      parent: 1
-  - uid: 6701
-    components:
-    - type: Transform
-      pos: -61.5,-13.5
-      parent: 1
   - uid: 7235
     components:
     - type: Transform
@@ -16565,6 +16573,21 @@ entities:
     components:
     - type: Transform
       pos: -47.5,-3.5
+      parent: 1
+  - uid: 9624
+    components:
+    - type: Transform
+      pos: -52.5,-12.5
+      parent: 1
+  - uid: 9625
+    components:
+    - type: Transform
+      pos: -55.5,-12.5
+      parent: 1
+  - uid: 9626
+    components:
+    - type: Transform
+      pos: -61.5,-12.5
       parent: 1
   - uid: 16519
     components:
@@ -16665,6 +16688,28 @@ entities:
     components:
     - type: Transform
       pos: -47.5,-3.5
+      parent: 1
+- proto: CMBedsheetOrangeFull
+  entities:
+  - uid: 9619
+    components:
+    - type: Transform
+      pos: -52.5,-12.5
+      parent: 1
+  - uid: 9620
+    components:
+    - type: Transform
+      pos: -61.5,-12.5
+      parent: 1
+  - uid: 9621
+    components:
+    - type: Transform
+      pos: -58.5,-12.5
+      parent: 1
+  - uid: 9622
+    components:
+    - type: Transform
+      pos: -55.5,-12.5
       parent: 1
 - proto: CMBedsheetRed
   entities:
@@ -19188,11 +19233,6 @@ entities:
     - type: Transform
       pos: -23.5,5.5
       parent: 1
-  - uid: 5286
-    components:
-    - type: Transform
-      pos: -24.5,5.5
-      parent: 1
   - uid: 5287
     components:
     - type: Transform
@@ -20207,11 +20247,6 @@ entities:
     components:
     - type: Transform
       pos: -5.5,-20.5
-      parent: 1
-  - uid: 8159
-    components:
-    - type: Transform
-      pos: -24.5,-20.5
       parent: 1
   - uid: 8198
     components:
@@ -24533,6 +24568,11 @@ entities:
     - type: Transform
       pos: -65.5,-16.5
       parent: 1
+  - uid: 9635
+    components:
+    - type: Transform
+      pos: -52.5,5.5
+      parent: 1
 - proto: CMDispenserSoda
   entities:
   - uid: 3930
@@ -25468,6 +25508,14 @@ entities:
     - type: Transform
       pos: -37.5,-7.5
       parent: 1
+  - uid: 1985
+    components:
+    - type: MetaData
+      name: Savannah Medical
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 31.5,5.5
+      parent: 1
   - uid: 6633
     components:
     - type: MetaData
@@ -25483,14 +25531,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 60.5,3.5
-      parent: 1
-  - uid: 6800
-    components:
-    - type: MetaData
-      name: Savannah Engineering
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 89.5,-15.5
       parent: 1
   - uid: 17289
     components:
@@ -26924,12 +26964,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 64.5,-15.5
       parent: 1
-  - uid: 1306
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 39.5,12.5
-      parent: 1
   - uid: 1312
     components:
     - type: Transform
@@ -27646,6 +27680,12 @@ entities:
     components:
     - type: Transform
       pos: -48.5,-15.5
+      parent: 1
+  - uid: 4876
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -24.5,-30.5
       parent: 1
   - uid: 4912
     components:
@@ -28901,12 +28941,6 @@ entities:
     - type: Transform
       pos: -30.5,-31.5
       parent: 1
-  - uid: 8351
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -24.5,-30.5
-      parent: 1
   - uid: 8352
     components:
     - type: Transform
@@ -30047,6 +30081,23 @@ entities:
       rot: 3.141592653589793 rad
       pos: 60.5,26.5
       parent: 1
+  - uid: 4858
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -58.5,-11.5
+      parent: 1
+  - uid: 4866
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -52.5,-11.5
+      parent: 1
+  - uid: 4885
+    components:
+    - type: Transform
+      pos: 92.5,-35.5
+      parent: 1
   - uid: 5307
     components:
     - type: Transform
@@ -30125,14 +30176,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 88.5,-28.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 6186
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 91.5,-27.5
       parent: 1
     - type: Fixtures
       fixtures: {}
@@ -30223,38 +30266,12 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-  - uid: 6359
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -55.5,-12.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 6360
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -52.5,-12.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 6361
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -58.5,-12.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 6362
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -61.5,-12.5
+      rot: 3.141592653589793 rad
+      pos: 63.5,-40.5
       parent: 1
-    - type: Fixtures
-      fixtures: {}
   - uid: 6386
     components:
     - type: Transform
@@ -30448,11 +30465,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 50.5,-40.5
       parent: 1
-  - uid: 7923
-    components:
-    - type: Transform
-      pos: 54.5,-41.5
-      parent: 1
   - uid: 7932
     components:
     - type: Transform
@@ -30513,12 +30525,6 @@ entities:
     components:
     - type: Transform
       pos: 98.5,-35.5
-      parent: 1
-  - uid: 8051
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 93.5,-34.5
       parent: 1
   - uid: 8052
     components:
@@ -30769,6 +30775,47 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 71.5,-38.5
       parent: 1
+  - uid: 9631
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -61.5,-11.5
+      parent: 1
+  - uid: 9634
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -55.5,-11.5
+      parent: 1
+  - uid: 9636
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 53.5,-40.5
+      parent: 1
+  - uid: 9637
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 57.5,-40.5
+      parent: 1
+  - uid: 9638
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 93.5,-28.5
+      parent: 1
+  - uid: 9639
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 91.5,-29.5
+      parent: 1
+  - uid: 9640
+    components:
+    - type: Transform
+      pos: 95.5,-31.5
+      parent: 1
   - uid: 14272
     components:
     - type: Transform
@@ -30907,6 +30954,16 @@ entities:
     components:
     - type: Transform
       pos: 39.5,-15.5
+      parent: 1
+  - uid: 9613
+    components:
+    - type: Transform
+      pos: 31.5,-28.5
+      parent: 1
+  - uid: 9615
+    components:
+    - type: Transform
+      pos: 31.5,-29.5
       parent: 1
 - proto: CMLockerCE
   entities:
@@ -31604,6 +31661,11 @@ entities:
     components:
     - type: Transform
       pos: 1.5,2.5
+      parent: 1
+  - uid: 9643
+    components:
+    - type: Transform
+      pos: 31.5,-13
       parent: 1
 - proto: CMPaperBin20
   entities:
@@ -33429,6 +33491,11 @@ entities:
     - type: Transform
       pos: -39.5,-25.5
       parent: 1
+  - uid: 8427
+    components:
+    - type: Transform
+      pos: -24.5,-31.5
+      parent: 1
   - uid: 8474
     components:
     - type: Transform
@@ -33498,11 +33565,6 @@ entities:
     components:
     - type: Transform
       pos: -29.5,-31.5
-      parent: 1
-  - uid: 8855
-    components:
-    - type: Transform
-      pos: -24.5,-31.5
       parent: 1
   - uid: 9166
     components:
@@ -36796,11 +36858,6 @@ entities:
     - type: Transform
       pos: -20.5,-26.5
       parent: 1
-  - uid: 9098
-    components:
-    - type: Transform
-      pos: 46.5,-19.5
-      parent: 1
   - uid: 9489
     components:
     - type: Transform
@@ -36840,6 +36897,17 @@ entities:
     components:
     - type: Transform
       pos: 41.5,-32.5
+      parent: 1
+  - uid: 9607
+    components:
+    - type: Transform
+      pos: 46.5,-19.5
+      parent: 1
+  - uid: 9612
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,-29.5
       parent: 1
   - uid: 11167
     components:
@@ -41311,12 +41379,6 @@ entities:
     - type: Transform
       pos: -11.5,-22.5
       parent: 1
-  - uid: 1985
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 82.5,-14.5
-      parent: 1
   - uid: 1986
     components:
     - type: Transform
@@ -43600,11 +43662,6 @@ entities:
     - type: Transform
       pos: -60.5,-11.5
       parent: 1
-  - uid: 4866
-    components:
-    - type: Transform
-      pos: -60.5,-12.5
-      parent: 1
   - uid: 4867
     components:
     - type: Transform
@@ -43628,7 +43685,8 @@ entities:
   - uid: 4871
     components:
     - type: Transform
-      pos: -57.5,-12.5
+      rot: 1.5707963267948966 rad
+      pos: 83.5,-15.5
       parent: 1
   - uid: 4872
     components:
@@ -43649,11 +43707,6 @@ entities:
     components:
     - type: Transform
       pos: -54.5,-11.5
-      parent: 1
-  - uid: 4876
-    components:
-    - type: Transform
-      pos: -54.5,-12.5
       parent: 1
   - uid: 4877
     components:
@@ -46238,6 +46291,12 @@ entities:
     - type: Transform
       pos: 26.5,26.5
       parent: 1
+  - uid: 9614
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 82.5,-15.5
+      parent: 1
   - uid: 11148
     components:
     - type: Transform
@@ -48171,11 +48230,6 @@ entities:
     - type: Transform
       pos: -48.5,5.5
       parent: 1
-  - uid: 4772
-    components:
-    - type: Transform
-      pos: -46.5,5.5
-      parent: 1
   - uid: 4773
     components:
     - type: Transform
@@ -48516,11 +48570,6 @@ entities:
     - type: Transform
       pos: -63.5,-13.5
       parent: 1
-  - uid: 4858
-    components:
-    - type: Transform
-      pos: -63.5,-12.5
-      parent: 1
   - uid: 4859
     components:
     - type: Transform
@@ -48550,11 +48599,6 @@ entities:
     components:
     - type: Transform
       pos: -51.5,-13.5
-      parent: 1
-  - uid: 4885
-    components:
-    - type: Transform
-      pos: -51.5,-12.5
       parent: 1
   - uid: 4886
     components:
@@ -49248,12 +49292,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 33.5,-31.5
-      parent: 1
-  - uid: 7223
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 30.5,-32.5
       parent: 1
   - uid: 7239
     components:
@@ -50334,11 +50372,6 @@ entities:
     components:
     - type: Transform
       pos: 49.5,6.5
-      parent: 1
-  - uid: 4270
-    components:
-    - type: Transform
-      pos: 40.5,12.5
       parent: 1
   - uid: 4274
     components:
@@ -54299,6 +54332,28 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 120.5,7.5
       parent: 1
+- proto: CMWardrobeOrange
+  entities:
+  - uid: 3560
+    components:
+    - type: Transform
+      pos: -58.5,-13.5
+      parent: 1
+  - uid: 3561
+    components:
+    - type: Transform
+      pos: -55.5,-13.5
+      parent: 1
+  - uid: 3564
+    components:
+    - type: Transform
+      pos: -52.5,-13.5
+      parent: 1
+  - uid: 9623
+    components:
+    - type: Transform
+      pos: -61.5,-13.5
+      parent: 1
 - proto: CMWindoor
   entities:
   - uid: 15768
@@ -54347,7 +54402,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -21533.312
+      secondsUntilStateChange: -23583.926
       state: Opening
   - uid: 4068
     components:
@@ -55020,6 +55075,21 @@ entities:
     - type: Transform
       pos: -16.5,-6.5
       parent: 1
+  - uid: 6700
+    components:
+    - type: Transform
+      pos: -60.5,-12.5
+      parent: 1
+  - uid: 6701
+    components:
+    - type: Transform
+      pos: -57.5,-12.5
+      parent: 1
+  - uid: 6800
+    components:
+    - type: Transform
+      pos: -54.5,-12.5
+      parent: 1
   - uid: 6953
     components:
     - type: Transform
@@ -55034,6 +55104,16 @@ entities:
     components:
     - type: Transform
       pos: -54.5,-21.5
+      parent: 1
+  - uid: 7923
+    components:
+    - type: Transform
+      pos: -63.5,-12.5
+      parent: 1
+  - uid: 8051
+    components:
+    - type: Transform
+      pos: -51.5,-12.5
       parent: 1
   - uid: 8530
     components:
@@ -56737,15 +56817,35 @@ entities:
       parent: 1
 - proto: ColMarTechSeniorOfficerEquipment
   entities:
+  - uid: 6699
+    components:
+    - type: Transform
+      pos: 82.5,-14.5
+      parent: 1
+  - uid: 7223
+    components:
+    - type: Transform
+      pos: -46.5,5.5
+      parent: 1
   - uid: 8151
     components:
     - type: Transform
       pos: -72.5,-4.5
       parent: 1
+  - uid: 8159
+    components:
+    - type: Transform
+      pos: 30.5,-32.5
+      parent: 1
   - uid: 8287
     components:
     - type: Transform
       pos: -21.5,-12.5
+      parent: 1
+  - uid: 8351
+    components:
+    - type: Transform
+      pos: 40.5,12.5
       parent: 1
 - proto: ColMarTechSGEquipment
   entities:
@@ -70559,6 +70659,11 @@ entities:
     - type: Transform
       pos: -17.5,-12.5
       parent: 1
+  - uid: 8576
+    components:
+    - type: Transform
+      pos: -28.5,-12.5
+      parent: 1
   - uid: 16548
     components:
     - type: Transform
@@ -70881,11 +70986,6 @@ entities:
     components:
     - type: Transform
       pos: -33.5,-27.5
-      parent: 1
-  - uid: 8859
-    components:
-    - type: Transform
-      pos: -25.5,-31.5
       parent: 1
   - uid: 8860
     components:
@@ -71864,6 +71964,13 @@ entities:
     - type: Transform
       pos: 26.594196,-3.7200704
       parent: 1
+- proto: RMCBoxPizzaMeat
+  entities:
+  - uid: 9611
+    components:
+    - type: Transform
+      pos: 34.5,-29.5
+      parent: 1
 - proto: RMCBoxSyringe
   entities:
   - uid: 7020
@@ -72302,6 +72409,12 @@ entities:
       parent: 1
 - proto: RMCComputerIntel
   entities:
+  - uid: 8527
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -36.5,-31.5
+      parent: 1
   - uid: 8570
     components:
     - type: Transform
@@ -77618,11 +77731,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -38.5,-29.5
       parent: 1
-  - uid: 8427
-    components:
-    - type: Transform
-      pos: -38.5,-29.5
-      parent: 1
   - uid: 8551
     components:
     - type: Transform
@@ -77799,12 +77907,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 55.5,15.5
-      parent: 1
-  - uid: 6691
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -38.5,-28.5
       parent: 1
   - uid: 7858
     components:
@@ -78142,6 +78244,18 @@ entities:
       id: savannah_command_shutters
     - type: Fixtures
       fixtures: {}
+  - uid: 6698
+    components:
+    - type: MetaData
+      name: Kitchen Shutters
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46,-20.5
+      parent: 1
+    - type: RMCDoorButton
+      id: savannah_kitchen
+    - type: Fixtures
+      fixtures: {}
   - uid: 7705
     components:
     - type: MetaData
@@ -78173,6 +78287,28 @@ entities:
       parent: 1
     - type: RMCDoorButton
       id: savannah_requi_doors
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9627
+    components:
+    - type: MetaData
+      name: Cell Windows
+    - type: Transform
+      pos: -50.5,-15
+      parent: 1
+    - type: RMCDoorButton
+      id: savannah_cells
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9628
+    components:
+    - type: MetaData
+      name: Corridor Shutters
+    - type: Transform
+      pos: -50.5,-15.5
+      parent: 1
+    - type: RMCDoorButton
+      id: savannah_prison
     - type: Fixtures
       fixtures: {}
   - uid: 14286
@@ -78295,6 +78431,8 @@ entities:
     - type: Transform
       pos: -50.5,-14.5
       parent: 1
+    - type: RotaryPhone
+      category: Military Police
     - type: Fixtures
       fixtures: {}
   - uid: 1040
@@ -78305,7 +78443,7 @@ entities:
       pos: -28.898758,0.67014444
       parent: 1
     - type: RotaryPhone
-      category: Command
+      category: Savannah
     - type: Fixtures
       fixtures: {}
   - uid: 3569
@@ -78333,12 +78471,12 @@ entities:
   - uid: 6869
     components:
     - type: MetaData
-      name: Chief Military Officer Office
+      name: Chief Military Police Office
     - type: Transform
       pos: -70.5,-8.5
       parent: 1
     - type: RotaryPhone
-      category: Savannah
+      category: Military Police
     - type: Fixtures
       fixtures: {}
   - uid: 7388
@@ -78415,7 +78553,7 @@ entities:
       pos: -61.5,0.5
       parent: 1
     - type: RotaryPhone
-      category: Savannah
+      category: Military Police
     - type: Fixtures
       fixtures: {}
   - uid: 7495
@@ -78426,7 +78564,7 @@ entities:
       pos: -51.5,-17.5
       parent: 1
     - type: RotaryPhone
-      category: Savannah
+      category: Military Police
     - type: Fixtures
       fixtures: {}
   - uid: 7590
@@ -78471,6 +78609,43 @@ entities:
       parent: 1
     - type: RotaryPhone
       category: Command
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9618
+    components:
+    - type: MetaData
+      name: Intelligence Office
+    - type: Transform
+      pos: -35.5,-27.5
+      parent: 1
+    - type: RotaryPhone
+      category: Savannah
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCRotaryPhoneWallmount
+  entities:
+  - uid: 9616
+    components:
+    - type: MetaData
+      name: Kitchen
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 45,-22.5
+      parent: 1
+    - type: RotaryPhone
+      category: Requisition
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9617
+    components:
+    - type: MetaData
+      name: Requisition
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 31,-15.5
+      parent: 1
+    - type: RotaryPhone
+      category: Requisition
     - type: Fixtures
       fixtures: {}
 - proto: RMCSecureCaseDouble
@@ -78766,6 +78941,62 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 3.5,-34.5
       parent: 1
+  - uid: 4772
+    components:
+    - type: Transform
+      pos: -59.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_cells
+  - uid: 5286
+    components:
+    - type: Transform
+      pos: -52.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_cells
+  - uid: 6186
+    components:
+    - type: Transform
+      pos: -53.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_cells
+  - uid: 6359
+    components:
+    - type: Transform
+      pos: -55.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_cells
+  - uid: 6360
+    components:
+    - type: Transform
+      pos: -58.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_cells
+  - uid: 9629
+    components:
+    - type: Transform
+      pos: -62.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_cells
+  - uid: 9630
+    components:
+    - type: Transform
+      pos: -61.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_cells
+  - uid: 9633
+    components:
+    - type: Transform
+      pos: -56.5,-14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_cells
 - proto: RMCShutterAlmayerOpen
   entities:
   - uid: 212
@@ -78845,11 +79076,6 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: savannah_chemistry
-  - uid: 694
-    components:
-    - type: Transform
-      pos: 49.5,-19.5
-      parent: 1
   - uid: 709
     components:
     - type: Transform
@@ -78951,21 +79177,6 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: savannah_pilot_shutters
-  - uid: 3560
-    components:
-    - type: Transform
-      pos: 48.5,-19.5
-      parent: 1
-  - uid: 3561
-    components:
-    - type: Transform
-      pos: 47.5,-19.5
-      parent: 1
-  - uid: 3564
-    components:
-    - type: Transform
-      pos: 46.5,-19.5
-      parent: 1
   - uid: 4492
     components:
     - type: Transform
@@ -79037,6 +79248,34 @@ entities:
       parent: 1
     - type: RMCPodDoor
       id: savannah_prison
+  - uid: 8855
+    components:
+    - type: Transform
+      pos: 46.5,-19.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_kitchen
+  - uid: 8859
+    components:
+    - type: Transform
+      pos: 47.5,-19.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_kitchen
+  - uid: 9098
+    components:
+    - type: Transform
+      pos: 48.5,-19.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_kitchen
+  - uid: 9609
+    components:
+    - type: Transform
+      pos: 49.5,-19.5
+      parent: 1
+    - type: RMCPodDoor
+      id: savannah_kitchen
   - uid: 12435
     components:
     - type: Transform
@@ -79172,6 +79411,11 @@ entities:
     components:
     - type: Transform
       pos: -33.5,-7.5
+      parent: 1
+  - uid: 1306
+    components:
+    - type: Transform
+      pos: -57.5,-7.5
       parent: 1
   - uid: 1391
     components:
@@ -81063,6 +81307,13 @@ entities:
     components:
     - type: Transform
       pos: 80.5,11.5
+      parent: 1
+- proto: RMCWestonYamadaCup
+  entities:
+  - uid: 9610
+    components:
+    - type: Transform
+      pos: -9.5,10.5
       parent: 1
 - proto: RockGuitarInstrument
   entities:

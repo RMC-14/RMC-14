@@ -241,6 +241,7 @@
       - id: CMBeltMedicBag
       - id: CMBeltMedical
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch

@@ -18,3 +18,8 @@
   components:
   - type: ItemIFF
     faction: FactionSPP
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCIDSPP ]
+  id: RMCIDSPPHidden
+  categories: [ HideSpawnMenu ]

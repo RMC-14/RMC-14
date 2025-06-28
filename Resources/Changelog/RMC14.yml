@@ -1,144 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed warrior, lurker, and runner not healing slightly faster while resting.
-    type: Fix
-  id: 1397
-  time: '2025-03-01T13:18:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5748
-- author: Vermidia
-  changes:
-  - message: Added Oppressor praetorian strain, which focuses and pulling in and pushing
-      away foes.
-    type: Add
-  - message: Fixed warrior punch and fling having a lower range than most melee moves
-      (1 > 1.5)
-    type: Fix
-  - message: Fixed spray acid/flamers not going through doors
-    type: Fix
-  id: 1398
-  time: '2025-03-01T13:17:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5561
-- author: Vermidia
-  changes:
-  - message: Fixed healer drone's tailstab damage being too high, and melee being
-      slightly too low.
-    type: Fix
-  id: 1399
-  time: '2025-03-01T13:17:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5755
-- author: Dygon
-  changes:
-  - message: Fixed Parasite roles being able to be taken before 15 minutes have passed
-      in the round.
-    type: Fix
-  - message: Fixed Parasites and lesser drones not being muted for 3 minutes when
-      they spawn.
-    type: Fix
-  id: 1400
-  time: '2025-03-01T13:22:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5722
-- author: UnicornOnLSD
-  changes:
-  - message: Warning cones now fit on your head
-    type: Add
-  id: 1401
-  time: '2025-03-01T13:27:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5728
-- author: Vermidia
-  changes:
-  - message: Fixed xenos not getting double non-hivecore evo points before 15 minutes.
-    type: Fix
-  id: 1402
-  time: '2025-03-01T13:28:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5708
-- author: to4no_fix
-  changes:
-  - message: Hijack now automatically calls General Quarters
-    type: Add
-  id: 1403
-  time: '2025-03-01T13:33:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5754
-- author: Kickguy223
-  changes:
-  - message: Fixed being able to drop and walk away from a piece of intel you're reading
-    type: Fix
-  id: 1404
-  time: '2025-03-01T13:35:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5707
-- author: Vermidia
-  changes:
-  - message: All t1 xenos can now evolve into Queen
-    type: Add
-  id: 1405
-  time: '2025-03-01T13:37:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5704
-- author: Vermidia
-  changes:
-  - message: Fixed Vanguard pierce being a straight line, and no longer goes over
-      cades.
-    type: Fix
-  id: 1406
-  time: '2025-03-01T13:38:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5725
-- author: noctyrnal
-  changes:
-  - message: Added Keffiyehs, Smocks and Neckerchiefs.
-    type: Add
-  - message: Added Multiple new Goggles and Glasses.
-    type: Add
-  - message: Added Most Helmet Garbs.
-    type: Add
-  - message: Pride Pins and Welding Goggle can now be put onto your helmets.
-    type: Tweak
-  id: 1407
-  time: '2025-03-02T00:56:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5744
-- author: Vermidia
-  changes:
-  - message: Fixed lunge and blitz persisting after stun (and death) in some cases.
-    type: Fix
-  id: 1408
-  time: '2025-03-02T01:56:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5709
-- author: Alekshhh
-  changes:
-  - message: Updated the sprites for fast and sticky resin.
-    type: Tweak
-  id: 1409
-  time: '2025-03-02T05:37:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5774
-- author: Vermidia
-  changes:
-  - message: Fixed warding giving twice as much crit health as it should have
-    type: Fix
-  - message: Fixed warding not slowing bleedout off weeds, and not healing crit xenos
-      slightly on weeds
-    type: Fix
-  - message: Fixed xenos bleeding out while on fire (they only take the fire damage,
-      not bleedout damage)
-    type: Fix
-  - message: Added critical grace for xenos. When under crit grace xenos can move
-      around when they would have crit. Non-lesser warding pheros add a second or
-      two of the critical grace.
-    type: Add
-  - message: Fixed lesser drones having no damage overlays
-    type: Fix
-  - message: Fixed warding not persisting in crit on weeds even when there's no producers
-    type: Fix
-  - message: Fixed frenzy being a flat 10% melee damage multiplier. It's now +2 damage
-      per level, and properly adds to tailstab damage.
-    type: Fix
-  id: 1410
-  time: '2025-03-02T05:39:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5747
-- author: Whisper
-  changes:
-  - message: Dogtags can no longer be melted by acid.
-    type: Tweak
-  id: 1411
-  time: '2025-03-02T05:42:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5712
 - author: J C Denton
   changes:
   - message: CO's secure box containing Honor Guard kits for CIC armory.
@@ -5218,5 +5078,119 @@
   id: 1898
   time: '2025-06-26T11:37:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6723
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added more soul to LV-624 Lazarus Landing
+    type: Tweak
+  - message: Added various new item/loot spawners for mapping and admins.
+    type: Add
+  id: 1899
+  time: '2025-06-27T05:39:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6823
+- author: Vermidia
+  changes:
+  - message: Fixed Neurotoxin not blinding
+    type: Fix
+  - message: Fixed Neurotoxin not causing hallucinations
+    type: Fix
+  id: 1900
+  time: '2025-06-27T05:40:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6724
+- author: noctyrnal
+  changes:
+  - message: Xenonid tunnels have received new sprites.
+    type: Tweak
+  id: 1901
+  time: '2025-06-27T05:41:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6812
+- author: t0wnshark
+  changes:
+  - message: fixed typo in the names of flower vases
+    type: Fix
+  id: 1902
+  time: '2025-06-27T05:42:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6804
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed UNMC turrets not targeting CLF
+    type: Fix
+  id: 1903
+  time: '2025-06-27T05:51:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6837
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed some roles that have leadership skill not having marine orders.
+    type: Fix
+  id: 1904
+  time: '2025-06-27T05:54:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6838
+- author: Shromply
+  changes:
+  - message: Added the M13 belt holster to the SL, FTL, WS, dropship crew, surplus
+      clothing racks, and requisition vendors.
+    type: Add
+  id: 1905
+  time: '2025-06-27T05:55:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6831
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xenos that hibernate when the queen launches the hijack shuttle
+      not being able to instantly become a burrowed larva
+    type: Fix
+  id: 1906
+  time: '2025-06-27T05:54:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6840
+- author: Shromply
+  changes:
+  - message: Added the smokables loadout category.
+    type: Add
+  id: 1907
+  time: '2025-06-27T06:00:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6825
+- author: noctyrnal
+  changes:
+  - message: Added the AK-4047 Assault Rifle for SPP colonists.
+    type: Add
+  - message: Added all the missing Cargo Containers.
+    type: Add
+  id: 1908
+  time: '2025-06-27T06:01:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6794
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed biosuits not having 100 biohazard protection
+    type: Fix
+  id: 1909
+  time: '2025-06-27T05:59:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6762
+- author: noctyrnal
+  changes:
+  - message: You can now hide your dogtags.
+    type: Add
+  id: 1910
+  time: '2025-06-27T06:08:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6773
+- author: J C Denton
+  changes:
+  - message: Fixed some Asphalt tiles being pryable.
+    type: Fix
+  id: 1911
+  time: '2025-06-27T06:09:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6809
+- author: x5tink
+  changes:
+  - message: Pill0 intergration  test bugfix
+    type: Fix
+  id: 1912
+  time: '2025-06-28T01:30:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6850
+- author: Dygon
+  changes:
+  - message: Fixed Warriors being able to tackle targets that are stunned by their
+      own lunge effect.
+    type: Fix
+  id: 1913
+  time: '2025-06-28T02:50:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6715
 Name: RMC14
 Order: -1
