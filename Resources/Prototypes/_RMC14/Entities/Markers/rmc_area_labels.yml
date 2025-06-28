@@ -7,3 +7,53 @@
   - type: Sprite
     state: blue
   - type: AreaLabel # RMC14
+  - type: NavMapBeacon
+    color: "#66D966"
+
+- type: entity
+  parent: RMCMarkerAreaLabel
+  id: RMCMarkerAreaLabelRed
+  suffix: Tactical Map Area Label, Red Text
+  components:
+  - type: NavMapBeacon
+    color: "#f54242"
+
+- type: entity
+  parent: RMCMarkerAreaLabel
+  id: RMCMarkerAreaLabelBlue
+  suffix: Tactical Map Area Label, Blue Text
+  components:
+  - type: NavMapBeacon
+    color: "#4287f5"
+
+- type: entity
+  parent: RMCMarkerAreaLabel
+  id: RMCMarkerAreaLabelGreen
+  suffix: Tactical Map Area Label, Green Text
+  components:
+  - type: NavMapBeacon
+    color: "#42f548"
+
+- type: entity
+  parent: RMCMarkerAreaLabel
+  id: RMCMarkerAreaLabelCyan
+  suffix: Tactical Map Area Label, Cyan Text
+  components:
+  - type: NavMapBeacon
+    color: "#42d7f5"
+
+- type: entity
+  parent: RMCMarkerAreaLabel
+  id: RMCMarkerAreaLabelPurple
+  suffix: Tactical Map Area Label, Purple Text
+  components:
+  - type: NavMapBeacon
+    color: "#a142f5"
+
+- type: entity
+  parent: RMCMarkerAreaLabel
+  id: RMCMarkerAreaLabelOrange
+  suffix: Tactical Map Area Label, Orange Text
+  components:
+  - type: NavMapBeacon
+    color: "#f0a23c"
