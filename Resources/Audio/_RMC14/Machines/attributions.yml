@@ -107,3 +107,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/17e3399a76ce7d6bf66706ff6dfbe15252328fd9/sound/machines/bonk.ogg"
+
+- files: [ "fax.ogg" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/cef82304df8e147afd4f66a1f475e69827fd1f07/sound/machines/fax.ogg"
