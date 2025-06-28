@@ -78,6 +78,7 @@ rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
 cm-xeno-paralyzing-slash-expire = We have waited too long, your slash will no longer apply neurotoxin!
 cm-xeno-paralyzing-slash-hit = We add neurotoxin into your attack, {$target} is about to fall over paralyzed!
+cm-xeno-paralyzing-slash-immune = {$target} shrugs off the neurotoxin!
 
 # Crippling Strike
 cm-xeno-crippling-strike-activate = Our next slash will apply neurotoxin!

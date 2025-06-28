@@ -73,22 +73,8 @@ public sealed class JoinXenoSystem : EntitySystem
             return;
 
         var user = args.Performer;
-
-        if (!TryComp<GhostComponent>(user, out var ghostComp))
+        if (!CanJoinXeno(user))
             return;
-
-        // If the game has been going on longer than the death ignore time, then check how long since the ghost has died
-        if (_gameTicker.RoundDuration() > _burrowedLarvaDeathIgnoreTime)
-        {
-            var timeSinceDeath = _timing.CurTime.Subtract(ghostComp.TimeOfDeath);
-
-            if (timeSinceDeath < _burrowedLarvaDeathTime)
-            {
-                var msg = Loc.GetString("rmc-xeno-ui-burrowed-need-time", ("seconds", _burrowedLarvaDeathTime.TotalSeconds - (int)timeSinceDeath.TotalSeconds));
-                _popup.PopupEntity(msg, user, user, PopupType.MediumCaution);
-                return;
-            }
-        }
 
         var options = new List<DialogOption>();
         var hives = EntityQueryEnumerator<HiveComponent>();
@@ -101,6 +87,30 @@ public sealed class JoinXenoSystem : EntitySystem
         }
 
         _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Xenonids");
+    }
+
+    public bool CanJoinXeno(EntityUid user)
+    {
+        if (!TryComp<GhostComponent>(user, out var ghostComp))
+            return false;
+
+        if (!HasComp<JoinXenoCooldownIgnoreComponent>(user))
+            return true;
+
+        // If the game has been going on longer than the death ignore time, then check how long since the ghost has died
+        if (_gameTicker.RoundDuration() > _burrowedLarvaDeathIgnoreTime)
+        {
+            var timeSinceDeath = _timing.CurTime.Subtract(ghostComp.TimeOfDeath);
+
+            if (timeSinceDeath < _burrowedLarvaDeathTime)
+            {
+                var msg = Loc.GetString("rmc-xeno-ui-burrowed-need-time", ("seconds", _burrowedLarvaDeathTime.TotalSeconds - (int)timeSinceDeath.TotalSeconds));
+                _popup.PopupEntity(msg, user, user, PopupType.MediumCaution);
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private void OnJoinXenoBurrowedLarva(Entity<JoinXenoComponent> ent, ref JoinXenoBurrowedLarvaEvent args)

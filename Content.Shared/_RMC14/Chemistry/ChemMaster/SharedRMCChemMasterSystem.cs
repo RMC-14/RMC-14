@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.IconLabel;
@@ -266,13 +266,21 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (args.Amount < FixedPoint2.Zero)
             return;
 
-        if (!TryGetBeaker(ent, out var beaker, out _, out var beakerSolution))
-            return;
-
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
         var removed = buffer.Value.Comp.Solution.RemoveReagent(args.Reagent, args.Amount);
+        if (ent.Comp.BufferTransferMode == RMCChemMasterBufferMode.ToDisposal)
+        {
+            _solution.UpdateChemicals(buffer.Value);
+            Dirty(ent);
+            RefreshUIs(ent);
+            return;
+        }
+
+        if (!TryGetBeaker(ent, out _, out _, out var beakerSolution))
+            return;
+
         if (_solution.TryAddReagent(beakerSolution, args.Reagent, removed, out var accepted))
             removed -= accepted;
 
@@ -378,7 +386,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 }
 
                 var pillComp = EnsureComp<PillComponent>(pill);
-                pillComp.PillType = ent.Comp.SelectedType;
+                pillComp.PillType = ent.Comp.SelectedType - 1;
                 Dirty(pill, pillComp);
 
                 if (label != null)
