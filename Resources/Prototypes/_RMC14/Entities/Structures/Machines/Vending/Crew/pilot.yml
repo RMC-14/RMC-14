@@ -52,6 +52,7 @@
         recommended: true
       - id: RMCBeltHolsterSMGPouch
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       - id: RMCM276ShotgunShellLoadingRig
@@ -226,7 +227,7 @@
         amount: 20
       - id: CMMagazinePistolM1984
         amount: 20
-      - id: RMCMagazinePistolM1984AP 
+      - id: RMCMagazinePistolM1984AP
         amount: 14
       #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
       # amount: 14
