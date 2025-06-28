@@ -100,9 +100,9 @@
     outerClothing: RMCArmorSPPHeavySpecialist
     gloves: RMCHandsVeteranSPP
     shoes: RMCBootsSPPFilled
-    suitstorage: RMCWeaponLMGM60 # TODO RMC14 : Replace with PKP
+    suitstorage: RMCWeaponLMGQYJ72
     id: RMCIDSPP
-    belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
+    belt: RMCT73BeltFilled
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchExplosiveFilledC4SPP

@@ -307,6 +307,8 @@
         points: 5
       - id: CMHandsInsulated
         points: 3
+      - id: CMHandsBlackInsulated
+        points: 3
       - id: RMCPouchMacheteFilled
         points: 5
       - id: RMCBackpackRTO
@@ -395,6 +397,7 @@
       - id: CMCoatDressBluesGeneral
       - id: CMCoatXOFormal
       - id: RMCMarineUniformDressSenior
+      - id: CMHandsWhite
       - id: RMCShoesLaceup
     - name: Dress Headwear
       entries:
@@ -910,13 +913,11 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMHeadsetCE
       - id: CMBootsBlack
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
-
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -925,6 +926,13 @@
       - id: CMJumpsuitChiefEngineer
         recommended: true
       - id: CMJumpsuitBO
+    - name: Gloves
+      jobs:
+      - CMChiefEngineer
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Helmet
       jobs:
       - CMChiefEngineer
@@ -1071,11 +1079,17 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMJumpsuitQM
       - id: CMHeadsetQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
+    - name: Gloves
+      jobs: 
+      - CMQuartermaster
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
@@ -1299,10 +1313,16 @@
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMJumpsuitBO
       - id: CMHeadsetSeniorCommand
       - id: CMCoatASO
+    - name: Gloves
+      jobs: 
+      - CMAuxiliarySupportOfficer
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Bag
       jobs:
       - CMAuxiliarySupportOfficer

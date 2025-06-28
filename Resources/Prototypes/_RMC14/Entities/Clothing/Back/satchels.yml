@@ -83,6 +83,15 @@
     isCorrodible: false
 
 - type: entity
+  parent: RMCBackpackScout
+  id: RMCBackpackSPPCommando
+  name: V86 thermal cloak
+  description: A thermo-optic camouflage cloak commonly used by SPP commando units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/scout_cloak.rsi
+
+- type: entity
   parent: CMSatchel
   id: CMSatchelEngineer
   name: industrial satchel
@@ -90,6 +99,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/engineer.rsi
+
+- type: entity
+  parent: CMSatchelEngineer
+  id: CMSatchelEngineerMinerSurvivorFill
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
 
 - type: entity
   parent: CMSatchelEngineer
@@ -281,6 +299,16 @@
       Snow: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Back/Chestrigs/tech/jungle-classic.rsi
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchelMarineTech
+  id: CMSatchelMarineTechSurvivorFill
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetPlasteel20
+    - id: CMSheetMetal20
 
 - type: entity
   parent: CMSatchel

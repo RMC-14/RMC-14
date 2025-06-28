@@ -122,6 +122,7 @@
   parent: CMBulletBase
   id: RMCBulletPistolHI50AE
   name: bullet (HI50AE)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -177,6 +178,7 @@
   parent: CMBulletBase
   id: RMCBulletPistolHIAP50AE
   name: bullet (HIAP50AE)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
