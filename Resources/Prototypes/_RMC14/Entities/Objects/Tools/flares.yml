@@ -377,7 +377,6 @@
     energy: 7.0
 
 - type: entity
-  parent: BaseItem
   id: RMCAirFlare
   name: air flare
   components:
@@ -390,7 +389,6 @@
     lifetime: 300
 
 - type: entity
-  parent: BaseItem
   id: RMCAirFlareCAS
   name: air signal flare
   components:
