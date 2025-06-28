@@ -19,8 +19,7 @@ public abstract class SharedXenoWatchSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, XenoWatchActionEvent>(OnXenoWatchAction);
         SubscribeLocalEvent<XenoWatchingComponent, MoveInputEvent>(OnXenoMoveInput);
 
-        Subs.BuiEvents<XenoComponent>(XenoWatchUIKey.Key,
-            subs =>
+        Subs.BuiEvents<XenoComponent>(XenoWatchUIKey.Key, subs =>
             {
                 subs.Event<XenoWatchBuiMsg>(OnXenoWatchBui);
             });
