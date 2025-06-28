@@ -8,3 +8,6 @@ reagent-desc-rmclexorin = Lexorin is an extremely dangerous compound that damage
 
 reagent-name-rmcmindbreakertoxin = Mindbreaker Toxin
 reagent-desc-rmcmindbreakertoxin = A powerful hallucinogenic compound that is illegal under marine law. Causes extreme hallucinations and is very addictive. Formerly known as LSD.
+
+reagent-name-rmcblackgoo = Black Goo
+reagent-desc-rmcblackgoo = A strange substance of unknown origin. . .

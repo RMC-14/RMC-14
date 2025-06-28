@@ -37,6 +37,9 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.NightVision; // RMC14
+using Content.Shared._RMC14.Marines.Orders; // RMC14
+using Content.Shared._RMC14.Weapons.Ranged.Whitelist; // RMC14
 
 namespace Content.Server.Zombies;
 
@@ -110,9 +113,12 @@ public sealed partial class ZombieSystem
         RemComp<ReproductivePartnerComponent>(target);
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
+        RemComp<MarineOrdersComponent>(target); // RMC14
+        RemComp<ScoutWhitelistComponent>(target); // RMC14
+        RemComp<SniperWhitelistComponent>(target); // RMC14
 
-        //funny voice
-        var accentType = "zombie";
+        //funny voice - RMC14, Different accent
+        var accentType = "RMCZombie";
         if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
             accentType = accent.Accent;
 
@@ -201,6 +207,9 @@ public sealed partial class ZombieSystem
 
         Dirty(target, melee);
 
+        // RMC14 - Give them night vision
+        EnsureComp<NightVisionComponent>(target);
+
         //The zombie gets the assigned damage weaknesses and strengths
         _damageable.SetDamageModifierSetId(target, "Zombie");
 
@@ -231,7 +240,7 @@ public sealed partial class ZombieSystem
         _mobState.ChangeMobState(target, MobState.Alive);
 
         _faction.ClearFactions(target, dirty: false);
-        _faction.AddFaction(target, "Zombie");
+        _faction.AddFaction(target, "RMCDumb"); // RMC14
 
         //gives it the funny "Zombie ___" name.
         _nameMod.RefreshNameModifiers(target);
