@@ -122,7 +122,7 @@
     startingWebbing: RMCWebbingMercEngineer
 - type: entity
   parent: RMCMarineUniformBase
-  id: RMCJumpsuitMercenaryMedic # Medics wear literally the same suit as engineers. I am just gonna nname its id to medic for now so its easier to find
+  id: RMCJumpsuitMercenaryMedic # Medics wear literally the same suit as engineers. I am just gonna name its id to medic for now so its easier to find
   name: mercenary engineer fatigues
   description: A blue suit with yellow accents, used by engineers. There is an unknown symbol is emblazed on the suit.
   components:
