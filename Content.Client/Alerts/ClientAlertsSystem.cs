@@ -100,4 +100,9 @@ public sealed class ClientAlertsSystem : AlertsSystem
     {
         RaisePredictiveEvent(new ClickAlertEvent(alertType));
     }
+
+    public void AlertClickedAlt(ProtoId<AlertPrototype> alertType)
+    {
+        RaisePredictiveEvent(new ClickAlertAltEvent(alertType));
+    }
 }

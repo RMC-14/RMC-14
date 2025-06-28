@@ -256,6 +256,7 @@
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
   - type: RMCImmuneToFireTileDamage
+  - type: RMCTrackable
 
 - type: entity
   parent: RMCXenoQueenBase
