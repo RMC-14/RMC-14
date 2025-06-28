@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Dogtags can no longer be melted by acid.
-    type: Tweak
-  id: 1411
-  time: '2025-03-02T05:42:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5712
 - author: J C Denton
   changes:
   - message: CO's secure box containing Honor Guard kits for CIC armory.
@@ -5191,5 +5184,13 @@
   id: 1912
   time: '2025-06-28T01:30:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6850
+- author: Dygon
+  changes:
+  - message: Fixed Warriors being able to tackle targets that are stunned by their
+      own lunge effect.
+    type: Fix
+  id: 1913
+  time: '2025-06-28T02:50:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6715
 Name: RMC14
 Order: -1
