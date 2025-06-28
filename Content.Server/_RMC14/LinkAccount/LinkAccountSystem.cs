@@ -21,6 +21,7 @@ public sealed class LinkAccountSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -37,6 +38,8 @@ public sealed class LinkAccountSystem : EntitySystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend, after: [typeof(CMDistressSignalRuleSystem)]);
 
         SubscribeLocalEvent<GhostColorComponent, PlayerAttachedEvent>(OnGhostColorPlayerAttached);
+
+        SubscribeLocalEvent<PatronCustomNameComponent, MapInitEvent>(OnPatronCustomNameMapInit);
 
         Subs.CVar(_config, RMCCVars.RMCPatronLobbyMessageTimeSeconds, v => _timeBetweenLobbyMessages = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCPatronLobbyMessageInitialDelaySeconds, v => _lobbyMessageInitialDelay = TimeSpan.FromSeconds(v), true);
@@ -90,7 +93,7 @@ public sealed class LinkAccountSystem : EntitySystem
     private void OnGhostColorPlayerAttached(Entity<GhostColorComponent> ent, ref PlayerAttachedEvent args)
     {
         if (!TryComp(ent, out ActorComponent? actor) ||
-            _linkAccount.GetPatron(actor.PlayerSession.UserId) is not { } patron ||
+            _linkAccount.GetConnectedPatron(actor.PlayerSession.UserId) is not { } patron ||
             patron.Tier is not { GhostColor: true } ||
             patron.GhostColor is not { } color)
         {
@@ -100,6 +103,26 @@ public sealed class LinkAccountSystem : EntitySystem
 
         ent.Comp.Color = color;
         Dirty(ent);
+    }
+
+    private void OnPatronCustomNameMapInit(Entity<PatronCustomNameComponent> ent, ref MapInitEvent args)
+    {
+        if (!_linkAccount.TryGetPatron(ent.Comp.User, out var patron))
+            return;
+
+        if (ent.Comp.Tier is { } tier && patron.Tier != tier)
+            return;
+
+        if (ent.Comp.Name is { } name)
+            _metaData.SetEntityName(ent, name);
+
+        if (ent.Comp.Description is { } description)
+        {
+            if (TryComp(ent, out MetaDataComponent? metaData))
+                description = $"{metaData.EntityDescription}\n\n{description}";
+
+            _metaData.SetEntityDescription(ent, description);
+        }
     }
 
     private async void ReloadPatrons()

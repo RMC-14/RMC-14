@@ -15,6 +15,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
     - type: Skills
       skills:
         RMCSkillConstruction: 2

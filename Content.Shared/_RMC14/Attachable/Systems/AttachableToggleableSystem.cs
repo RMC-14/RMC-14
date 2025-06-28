@@ -295,9 +295,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if ((attachable.Comp.NeedHand || attachable.Comp.BreakOnDrop) && attachable.Comp.Active)
         {
             Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
-
-            if (attachable.Comp.SlowOnBreak)
-                BreakSlow(args.Args.User);
         }
 
         var removeEv = new RemoveAttachableActionsEvent(args.Args.User);
@@ -322,9 +319,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
 
         Toggle(attachable, args.User);
-
-        if (attachable.Comp.SlowOnBreak)
-            BreakSlow(args.User);
     }
 
     private void OnDropped(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<DroppedEvent> args)
@@ -336,15 +330,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
             return;
 
         Toggle(attachable, args.Args.User);
-
-        if (attachable.Comp.SlowOnBreak)
-            BreakSlow(args.Args.User);
-    }
-
-    private void BreakSlow(EntityUid user)
-    {
-        _slow.TrySlowdown(user, TimeSpan.FromSeconds(4));
-        _slow.TrySuperSlowdown(user, TimeSpan.FromSeconds(2));
     }
 
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)
@@ -363,8 +348,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
             }
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
-            if (toggleableComponent.SlowOnBreak)
-                BreakSlow(user);
         }
     }
 
@@ -392,8 +375,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
             }
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
-            if (toggleableComponent.SlowOnBreak)
-                BreakSlow(user);
         }
     }
 
@@ -431,8 +412,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
             }
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
-            if (toggleableComponent.SlowOnBreak)
-                BreakSlow(user);
         }
     }
 #endregion

@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared.Interaction;
@@ -11,6 +12,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -50,6 +52,7 @@ public sealed class XenoLungeSystem : EntitySystem
         SubscribeLocalEvent<XenoLungeComponent, XenoLungeActionEvent>(OnXenoLungeAction);
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
         SubscribeLocalEvent<XenoLungeComponent, LandEvent>(OnXenoLungeLand);
+        SubscribeLocalEvent<XenoLungeComponent, MeleeAttackAttemptEvent>(OnAttackAttempt);
 
         SubscribeLocalEvent<RMCLungeProtectionComponent, XenoLungeHitAttempt>(OnXenoLungeHitAttempt);
 
@@ -166,6 +169,7 @@ public sealed class XenoLungeSystem : EntitySystem
 
             var stunned = EnsureComp<XenoLungeStunnedComponent>(targetId);
             stunned.ExpireAt = _timing.CurTime + stunTime;
+            stunned.Stunner = GetNetEntity(xeno);
             Dirty(targetId, stunned);
         }
 
@@ -199,6 +203,20 @@ public sealed class XenoLungeSystem : EntitySystem
             return;
 
         args.Cancelled = _leap.AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration,ent.Comp.BlockSound, args.Lunging, _transform.ToCoordinates(lunging.Origin.Value), ent.Comp.FullProtection);
+    }
+
+    private void OnAttackAttempt(Entity<XenoLungeComponent> ent, ref MeleeAttackAttemptEvent args)
+    {
+        var netAttacker = GetNetEntity(ent);
+        if(!TryComp(GetEntity(args.Target), out XenoLungeStunnedComponent? stunned) || netAttacker != stunned.Stunner)
+            return;
+
+        switch (args.Attack)
+        {
+            case DisarmAttackEvent disarm:
+                args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
+                break;
+        }
     }
 
     public override void Update(float frameTime)

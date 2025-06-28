@@ -59,6 +59,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
@@ -879,8 +880,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            var faction = HasComp<RMCSurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
-            _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
     }
@@ -977,7 +976,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (TryComp(xeno, out ActorComponent? actor))
                 {
                     var session = actor.PlayerSession;
-
                     Entity<MindComponent> mind;
 
                     if (_mind.TryGetMind(session, out var mindId, out var mindComp))
@@ -986,11 +984,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         mind = _mind.CreateMind(session.UserId);
 
                     var ghost = _ghost.SpawnGhost((mind.Owner, mind.Comp), xeno);
+                    if (ghost != null)
+                        EnsureComp<JoinXenoCooldownIgnoreComponent>(ghost.Value);
 
                     var origin = _transform.GetMoverCoordinates(xeno);
-
                     _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
                 }
+
                 QueueDel(xeno);
             }
             else
