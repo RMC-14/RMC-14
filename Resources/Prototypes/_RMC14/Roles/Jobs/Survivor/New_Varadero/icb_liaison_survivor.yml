@@ -4,7 +4,7 @@
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorICB
-  spawnMenuRoleName: Interstellar Commerce Buero Liaison (NV Survivor)
+  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
   ranks:
     RMCRankICBCorporateLiaison: []
   startingGear: RMCGearSurvivorICB
@@ -24,7 +24,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: JobPrefix

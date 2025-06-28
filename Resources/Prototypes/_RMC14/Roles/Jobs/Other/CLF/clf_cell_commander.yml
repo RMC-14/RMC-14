@@ -33,6 +33,12 @@
       - CLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-cell-commander
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: clf_cellcom
+    - type: RMCPointing
+    - type: MarineOrders
   hidden: true
 
 - type: entity
@@ -59,6 +65,7 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadCLF
 
 - type: startingGear
   id: RMCGearCLFCellCommander
