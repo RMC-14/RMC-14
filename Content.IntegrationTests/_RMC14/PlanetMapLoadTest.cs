@@ -3,6 +3,8 @@ using Content.Server._RMC14.Rules;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared.CCVar;
+using Robust.Shared.Configuration;
 
 namespace Content.IntegrationTests._RMC14;
 
@@ -18,7 +20,6 @@ public sealed class PlanetMapLoadTest
             DummyTicker = false,
             Connected = true,
             InLobby = true,
-
         });
 
         var server = pair.Server;
@@ -55,6 +56,14 @@ public sealed class PlanetMapLoadTest
             await pair.WaitCommand("golobby");
             await PoolManager.WaitUntil(server, () => ticker.RunLevel == GameRunLevel.PreRoundLobby);
         }
+
+        await server.WaitIdleAsync();
+
+        var config = server.ResolveDependency<IConfigurationManager>();
+        await server.WaitPost(() =>
+        {
+            config.SetCVar(CCVars.GameLobbyEnabled, false);
+        });
 
         await pair.CleanReturnAsync();
     }
