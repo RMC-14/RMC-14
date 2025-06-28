@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.IconLabel;
@@ -386,7 +386,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 }
 
                 var pillComp = EnsureComp<PillComponent>(pill);
-                pillComp.PillType = ent.Comp.SelectedType;
+                pillComp.PillType = ent.Comp.SelectedType - 1;
                 Dirty(pill, pillComp);
 
                 if (label != null)

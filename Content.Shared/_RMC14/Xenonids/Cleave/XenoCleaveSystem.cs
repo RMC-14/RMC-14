@@ -60,10 +60,10 @@ public sealed class XenoCleaveSystem : EntitySystem
             var diff = target.Position - origin.Position;
             diff = diff.Normalized() * flingRange;
 
+            _throwing.TryThrow(args.Target, diff, 10);
+
             if (_net.IsServer)
             {
-                _throwing.TryThrow(args.Target, diff, 10);
-
                 SpawnAttachedTo(xeno.Comp.FlingEffect, args.Target.ToCoordinates());
             }
         }

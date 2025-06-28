@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
@@ -50,6 +51,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private   readonly SharedPhysicsSystem     _physics         = default!;
     [Dependency] private   readonly IPrototypeManager       _protoManager    = default!;
     [Dependency] private   readonly StaminaSystem           _stamina         = default!;
+    [Dependency] private   readonly SharedRMCMeleeWeaponSystem _rmcMelee     = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -388,6 +390,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                 break;
         }
 
+        // RMC14
+        if (target != null &&
+            _rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack))
+            attack = newAttack;
+
         // Windup time checked elsewhere.
         var fireRate = TimeSpan.FromSeconds(1f / GetAttackRate(weaponUid, user, weapon));
         var swings = 0;
@@ -719,7 +726,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         return true;
     }
 
-    protected HashSet<EntityUid> ArcRayCast(Vector2 position, Angle angle, Angle arcWidth, float range, MapId mapId, EntityUid ignore)
+    public HashSet<EntityUid> ArcRayCast(Vector2 position, Angle angle, Angle arcWidth, float range, MapId mapId, EntityUid ignore)
     {
         // TODO: This is pretty sucky.
         var widthRad = arcWidth;
