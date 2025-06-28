@@ -9,6 +9,7 @@
   description: Create barbed wire to decorate your barricades.
   icon: { sprite: _RMC14/Objects/barbed_wire.rsi, state: barbed_wire }
   objectType: Item
+  rmcPrototype: RMCBarbedWireBuild
 
 - type: construction
   parent: RMC
