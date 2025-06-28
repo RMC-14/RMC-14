@@ -100,17 +100,12 @@
   name: Order Construction
   description: Starts construction of an important hive structure.
   components:
-  - type: WorldTargetAction
+  - type: InstantAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: morph_resin
     event: !type:XenoOrderConstructionActionEvent
-    deselectOnMiss: false
-    range: 20
-  - type: XenoConstructionAction
-    checkStructureSelected: false
-    checkWeeds: false
   - type: RMCDazeableAction
 
 - type: entity
