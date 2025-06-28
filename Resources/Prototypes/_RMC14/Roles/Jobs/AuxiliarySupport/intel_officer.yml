@@ -8,6 +8,12 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 18000 # 5 hour
+  - !type:RoleTimeRequirement
+    role: CMJobFireteamLeader
+    time: 18000 # 5 hours
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
