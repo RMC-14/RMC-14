@@ -92,7 +92,6 @@
   id: CMPamphletPowerloader
   name: powerloader instructional pamphlet
   description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to a Work Loader'.
-  suffix: NOT IMPLEMENTED
   components:
     - type: Sprite
       state: pamphlet_powerloader
