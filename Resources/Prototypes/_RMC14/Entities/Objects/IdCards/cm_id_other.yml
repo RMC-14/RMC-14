@@ -155,6 +155,18 @@
     - RMCWeYa
 
 - type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardMercenary
+  name: Mercenary holo-badge
+  components:
+  - type: ItemIFF
+    faction: FactionMerc
+  - type: Access
+    groups:
+    - Colony
+    - Mercenary
+
+- type: entity
   id: FactionWeYa
   categories: [ HideSpawnMenu ]
   components:
@@ -163,6 +175,15 @@
     channels:
     - Colony
     - WEYA
+
+- type: entity
+  id: FactionMerc
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+    - Mercenary
 
 - type: entity
   parent: CMIDCardLanyard

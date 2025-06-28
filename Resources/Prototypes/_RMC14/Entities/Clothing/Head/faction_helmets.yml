@@ -121,7 +121,7 @@
 - type: entity
   parent: RMCArmorHelmetMercenary
   id: RMCArmorHelmetMercenarySupport
-  name: mercenary Z7 support helmet
+  name: mercenary Z7 support helmet # They ain't called engineer/support helmets in CM13. They all have the Z7 name and thats it. This is better tho
   description: A sturdy helmet worn by an unknown mercenary group.
   components:
   - type: Sprite

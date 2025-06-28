@@ -91,6 +91,24 @@
 
 - type: entity
   parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterHeavy # supposed to be an oxycodone pouch
+  suffix: GC
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjector15
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterGC
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
   id: RMCPouchReagentCanisterTricordrazineRevival
   suffix: Tricordrazine - Revival
   components:

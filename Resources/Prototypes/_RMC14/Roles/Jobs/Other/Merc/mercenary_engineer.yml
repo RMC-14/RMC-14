@@ -1,0 +1,76 @@
+- type: job
+  parent: CMJobBase
+  id: RMCEliteMercEngineer
+  name: Engineer Mercenary
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCEliteMercEngineer
+  startingGear: RMCEliteMercEngineer
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Elite Mercenary Engineer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Mercenary
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 1
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 4
+        RMCSkillEndurance: 5
+        RMCSkillVehicles: 1
+        RMCSkillPilot: 2
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-merc-engineer
+  hidden: true
+
+- type: startingGear
+  id: RMCEliteMercEngineer
+  equipment:
+    id: RMCIDCardMercenary
+    jumpsuit: RMCJumpsuitMercenaryEngineer
+    outerClothing: RMCArmorMercenaryEngineer
+    gloves: RMCHandsVeteran
+    eyes: CMGlassesM42ScoutSight
+    head: RMCArmorHelmetMercenaryEngineer
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclavaPMC
+    ears: RMCHeadsetDistressDukes
+    back: RMCSatchelLightpackWelder
+    belt: RMCMotionDetector
+    pocket1: RMCPouchShotgunLarge
+    pocket2: RMCPouchToolsSocMarineRaiderFill
+    suitstorage: WeaponShotgunM890
+  storage:
+    storage:
+    pocket1:
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    outerClothing:
+    - CMShellShotgunIncendiaryBuckshot
+    - CMShellShotgunIncendiaryBuckshot
+    back:
+    - RMCBoxAttachment
+    - RMCExplosivePlastic
+    - CMSheetMetal50
+    - CMSheetMetal50
+    - CMSheetPlasteel50
+    - RMCSentryMini
+    - RMCSentryMini
+
+
+#  TODO RMC14: These guys are supposed to alternate between weapons per spawn. Engineer alternates between custom shotgun, weird riot shotgun, and the m890 shotgun it seems.
