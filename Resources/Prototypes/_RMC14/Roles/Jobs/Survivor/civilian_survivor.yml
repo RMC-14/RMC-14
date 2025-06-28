@@ -39,21 +39,26 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
   greeting: rmc-job-greeting-survivor
   hasIcon: false
 
 - type: startingGear
-  id: RMCGearSurvivor
+  id: RMCGearSurvivorBase
   equipment:
-    # jumpsuit: CMJumpsuitColonist See RMCSurvivorPresetCivilianOutfits
     back: RMCSatchelCivilianFill
-    # shoes: RMCShoesBlack
     id: CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivor
+  equipment:
+    # jumpsuit: CMJumpsuitColonist See RMCSurvivorPresetCivilianOutfits
+    # shoes: RMCShoesBlack
     pocket2: RMCPouchGeneral
 
 - type: startingGear
@@ -101,7 +106,7 @@
     - [ CMPackFlare ]
     - [ WeaponNailgun ]
     - [ RMCFireAxe ]
-    - [ CMWelder ] # TODO RMC14 industrial welder
+    - [ RMCWelderIndustrial ]
     - [ CMAdvFirstAidKitFilled ]
     randomWeapon:
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]

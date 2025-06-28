@@ -432,7 +432,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/outdated_synth.rsi
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitSynthetic
   name: UNMC Support Uniform
   description: A simple uniform made for Synthetic crewmembers

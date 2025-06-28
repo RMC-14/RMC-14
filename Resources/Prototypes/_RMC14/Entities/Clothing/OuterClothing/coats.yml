@@ -70,8 +70,7 @@
 
 - type: entity
   id: RMCAllowSuitStorageClothingJacket
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -99,8 +98,7 @@
 
 - type: entity
   id: RMCAllowSuitStorageClothingHazardVest
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -463,6 +461,15 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
 
 - type: entity
+  parent: RMCCoatService
+  id: RMCCoatServiceFolded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: jacket
+
+- type: entity
   parent: CMCoatOfficer
   id: RMCProvostCoat
   name: Provost Coat
@@ -577,3 +584,15 @@
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
+
+# priest robes
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingPriestRobes
+  name: priest robes
+  description: A long dress with a purple scarf, often worn by religious folk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
