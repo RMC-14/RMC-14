@@ -150,7 +150,9 @@ public sealed class RMCConstructionSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnDamage = false,
-            MovementThreshold = 0.5f
+            MovementThreshold = 0.5f,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            CancelDuplicate = true
         };
 
         _doAfter.TryStartDoAfter(doAfter);
