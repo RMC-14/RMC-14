@@ -2,7 +2,7 @@
 
 namespace Content.Shared._RMC14.RMCCustomHoliday;
 
-[Prototype("customHoliday")]
+[Prototype]
 public sealed class CustomHolidayPrototype : IPrototype
 {
     [IdDataField] public string ID { get; private set; } = default!;
