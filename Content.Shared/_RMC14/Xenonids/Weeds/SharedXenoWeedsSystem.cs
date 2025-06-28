@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
@@ -615,7 +616,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             foreach (var entity in entities)
             {
-                if (!HasComp<ClimbableComponent>(entity) ||
+                if (!HasComp<ClimbableComponent>(entity) && !HasComp<RMCReactorPoweredLightComponent>(entity) ||
                     HasComp<BarricadeComponent>(entity))
                     continue;
 
