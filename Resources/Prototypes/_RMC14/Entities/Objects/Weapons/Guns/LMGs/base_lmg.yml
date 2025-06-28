@@ -74,7 +74,7 @@
       state: all
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: RMCMagazineLMGBase
   abstract: true
   components:

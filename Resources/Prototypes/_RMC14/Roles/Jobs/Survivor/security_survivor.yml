@@ -34,7 +34,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
 
@@ -78,7 +78,7 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-#    - [ CMBeltMarineMP5, WeaponSMGMP5 ] # TODO RMC14 mar30
+    - [ RMCBeltMarineMAR, RMCWeaponRifleMAR30 ]
     - [ CMBeltMarineMP5, WeaponSMGMP5 ]
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
     - [ CMBeltMarineM16, WeaponRifleM16 ]
