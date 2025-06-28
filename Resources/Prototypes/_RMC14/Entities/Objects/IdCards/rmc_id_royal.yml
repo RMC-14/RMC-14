@@ -16,6 +16,6 @@
     faction: FactionRoyalMarines
 
 - type: entity
-  parent: [ RMCIDRoyalMarines, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, RMCIDRoyalMarines ]
   id: RMCIDRoyalMarinesHidden
   categories: [ HideSpawnMenu ]

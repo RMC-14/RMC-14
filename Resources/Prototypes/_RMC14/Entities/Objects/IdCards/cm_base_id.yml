@@ -8,6 +8,7 @@
   components:
   - type: Item
     size: Tiny
+    heldPrefix: null
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/dogtags.rsi
     layers:
