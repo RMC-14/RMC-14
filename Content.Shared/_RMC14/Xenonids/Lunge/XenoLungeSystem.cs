@@ -1,9 +1,8 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
@@ -12,6 +11,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -50,6 +50,7 @@ public sealed class XenoLungeSystem : EntitySystem
         SubscribeLocalEvent<XenoLungeComponent, XenoLungeActionEvent>(OnXenoLungeAction);
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
         SubscribeLocalEvent<XenoLungeComponent, LandEvent>(OnXenoLungeLand);
+        SubscribeLocalEvent<XenoLungeComponent, MeleeAttackAttemptEvent>(OnAttackAttempt);
 
         SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
     }
@@ -154,6 +155,7 @@ public sealed class XenoLungeSystem : EntitySystem
 
             var stunned = EnsureComp<XenoLungeStunnedComponent>(targetId);
             stunned.ExpireAt = _timing.CurTime + stunTime;
+            stunned.Stunner = GetNetEntity(xeno);
             Dirty(targetId, stunned);
         }
 
@@ -175,6 +177,20 @@ public sealed class XenoLungeSystem : EntitySystem
         foreach (var effect in ent.Comp.Effects)
         {
             _statusEffects.TryRemoveStatusEffect(ent, effect);
+        }
+    }
+
+    private void OnAttackAttempt(Entity<XenoLungeComponent> ent, ref MeleeAttackAttemptEvent args)
+    {
+        var netAttacker = GetNetEntity(ent);
+        if(!TryComp(GetEntity(args.Target), out XenoLungeStunnedComponent? stunned) || netAttacker != stunned.Stunner)
+            return;
+
+        switch (args.Attack)
+        {
+            case DisarmAttackEvent disarm:
+                args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
+                break;
         }
     }
 
