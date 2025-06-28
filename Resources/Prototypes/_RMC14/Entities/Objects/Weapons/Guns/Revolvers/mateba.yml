@@ -96,6 +96,13 @@
       Snow: _RMC14/Objects/Weapons/Guns/Pistols/mateba/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Pistols/mateba/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Pistols/mateba/urban.rsi
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
 
 - type: entity
   parent: RMCWeaponRevolverMateba

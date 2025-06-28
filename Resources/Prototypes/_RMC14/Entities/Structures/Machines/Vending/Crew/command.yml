@@ -133,7 +133,7 @@
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
       - id: RMCBeltHolsterSMGPouch
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
     - name: Pouches
@@ -473,7 +473,7 @@
         name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
       - id: CMBeltUtilityCombat
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { CMPouch: 2 }
@@ -755,7 +755,7 @@
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
     - name: Eyewear
       jobs:
       - CMExecutiveOfficer
