@@ -209,9 +209,9 @@
 
 - type: reagent
   id: RMCPlatinum
-  name: platinum
+  name: reagent-name-rmc-platinum
   group: Elements
-  desc: A precious metal with a silvery-white appearance, known for its resistance to corrosion and high melting point.
+  desc: reagent-desc-rmc-platinum
   physicalDesc: reagent-physical-desc-reasonably-metallic
   flavor: metallic
   color: "#edf5ff"
