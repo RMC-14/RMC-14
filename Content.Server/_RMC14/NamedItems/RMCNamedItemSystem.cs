@@ -38,7 +38,7 @@ public sealed class RMCNamedItemSystem : SharedRMCNamedItemSystem
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
-        if (_linkAccount.GetPatron(ev.Player)?.Tier is not { NamedItems: true })
+        if (_linkAccount.GetConnectedPatron(ev.Player)?.Tier is not { NamedItems: true })
             return;
 
         var user = EnsureComp<RMCUserNamedItemsComponent>(ev.Mob);

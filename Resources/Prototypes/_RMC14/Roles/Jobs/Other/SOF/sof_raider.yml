@@ -102,3 +102,8 @@
   components:
   - type: PresetIdCard
     job: CMMarineRaider
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagMarineRaider ]
+  id: RMCDogtagMarineRaiderHidden
+  categories: [ HideSpawnMenu ]

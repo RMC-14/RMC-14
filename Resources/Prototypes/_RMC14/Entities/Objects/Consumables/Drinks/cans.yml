@@ -27,6 +27,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - RMCCannedDrink
 
 - type: entity
   parent: CMDrinkCanBase
@@ -655,3 +658,6 @@
         - ReagentId: Water
           Quantity: 25
         maxVol: 50
+
+- type: Tag
+  id: RMCCannedDrink

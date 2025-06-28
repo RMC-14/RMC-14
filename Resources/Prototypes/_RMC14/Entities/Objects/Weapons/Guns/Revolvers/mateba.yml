@@ -312,6 +312,7 @@
   parent: CMBulletBase #Base bullet
   id: RMCBulletMateba
   name: bullet (.454)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -326,6 +327,7 @@
   parent: CMBulletBase
   id: RMCBulletMatebaHighImpact #High impact
   name: bullet (.454) High Impact
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -343,6 +345,7 @@
   parent: CMBulletBase
   id: RMCBulletMatebaHighImpactArmorPiercing #HIAP
   name: bullet (.454) HIAP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -360,6 +363,7 @@
   parent: CMBulletBase
   id: RMCBulletMatebaHighExplosive #Explosive
   name: bullet (.454) HIAP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
