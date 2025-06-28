@@ -344,8 +344,6 @@
   maxLimit: 1
   loadouts:
   - CMPPeakedCapRMC
-
-
 # Synthetic
 - type: loadoutGroup
   id: SynthUniformRMC
