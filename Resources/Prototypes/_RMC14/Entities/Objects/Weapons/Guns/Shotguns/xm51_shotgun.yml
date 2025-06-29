@@ -18,7 +18,7 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: Gun
-    shotsPerBurst: 1
+    shotsPerBurst: 2
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -85,6 +85,7 @@
     tags:
     - RMCWeaponShotgun
     - RMCWeaponShotgunXM51
+    - RMCXM51StockBurst
   - type: GunDamageMultipliers
     multipliers:
       Turf: 30
