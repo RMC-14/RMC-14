@@ -14,9 +14,9 @@
    parent: CMClosetBioVirology
    components:
    - type: StorageFill
-     contents: []
-##       - id: ClothingOuterBioVirology
-##       - id: ClothingHeadHatHoodBioVirology
+     contents:
+       - id: RMCSuitBioGeneral # TODO Virology Biosuit
+       - id: RMCHoodBioGeneral
 
  - type: entity
    id: CMClosetBioSecurityFilled
@@ -24,9 +24,9 @@
    parent: CMClosetBioSecurity
    components:
    - type: StorageFill
-     contents: []
-##       - id: ClothingOuterBioSecurity
-##       - id: ClothingHeadHatHoodBioSecurity
+     contents:
+       - id: RMCSuitBioGeneral # TODO Security Biosuit
+       - id: RMCHoodBioGeneral
 
  - type: entity
    id: CMClosetBioJanitorFilled
@@ -34,9 +34,9 @@
    parent: CMClosetBioJanitor
    components:
    - type: StorageFill
-     contents: []
-##       - id: ClothingOuterBioJanitor
-##       - id: ClothingHeadHatHoodBioJanitor
+     contents:
+       - id: RMCSuitBioGeneral # TODO Janitor Biosuit
+       - id: RMCHoodBioGeneral
 
  - type: entity
    id: CMClosetBioScientistFilled
@@ -44,6 +44,6 @@
    parent: CMClosetBioScientist
    components:
    - type: StorageFill
-     contents: []
-##       - id: ClothingOuterBioScientist
-##       - id: ClothingHeadHatHoodBioScientist
+     contents:
+       - id: RMCSuitBioGeneral # TODO Scientist Biosuit
+       - id: RMCHoodBioGeneral
