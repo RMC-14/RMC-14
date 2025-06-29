@@ -11,7 +11,7 @@
   - type: Gun
     shotsPerBurst: 1
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_tactical_1.ogg
+      collection: RMCTacticalShotgunShoot
   - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:
