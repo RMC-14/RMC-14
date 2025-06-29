@@ -74,3 +74,8 @@ CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
 cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
 CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
 cm-job-prefix-survivor-icb = ICB
+
+# Sorokyne Strata Survs
+
+rmc-job-name-survivor-infrastructure-engineer = SPP - Ministry of Industry - Infrastructure Engineer
+CMJobSurvivorInfrastructureEngineer = Commander
