@@ -33,7 +33,7 @@
   - type: DeletedByWeedKiller
   - type: Flammable
     fireSpread: false
-    MaximumFireStacks: 1
+    maximumFireStacks: 0.5
     damage:
       types:
         Heat: 3.8
