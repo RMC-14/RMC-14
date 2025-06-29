@@ -7,6 +7,15 @@
   - type: Sprite
     sprite: _RMC14/Structures/Props/biomass_turbine.rsi
     state: biomass_turbine
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-1.5,0.5,1.5"
+        density: 190
+        layer:
+        - MobMask
 
 - type: entity
   parent: RMCPropBase
