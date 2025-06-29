@@ -105,6 +105,12 @@
   - type: Tag
     tags:
     - XenoWeedTile
+  - type: Flammable
+    fireSpread: false
+    MaximumFireStacks: 1
+    damage:
+      types:
+        Heat: 1
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
