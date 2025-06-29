@@ -82,3 +82,6 @@ CMJobSurvivorInfrastructureEngineer = Infrastructure Engineer
 
 rmc-job-name-survivor-reactor-technician = SPP - Ministry of Energy - Reactor Technician
 CMJobSurvivorReactorTechnician = Reactor Technician
+
+rmc-job-name-survivor-armed-police-officer = SPP - People's Armed Police Officer
+CMJobSurvivorArmedPoliceOfficer = People's Armed Police Officer

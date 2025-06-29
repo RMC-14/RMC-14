@@ -67,6 +67,15 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
 
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPPaP
+  name: PaP service uniform
+  description: A pair of blue-grey slacks coupled with a blue shirt, featuring venlar armor inserts at critical areas to protect from blades and low caliber ballistics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi
+
 # Civilians
 - type: entity
   parent: RMCMarineUniformBase

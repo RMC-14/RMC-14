@@ -23,3 +23,14 @@
   parent: [ RMCIDCardStandardDogtagHidden, RMCIDSPP ]
   id: RMCIDSPPHidden
   categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMIDCardLanyard
+  id: RMCIDCardPaP
+  name: PaP identification holo-badge
+  description: A standard-issue holo-badge for personnel within the UPP's People's Armed Police. It displays the officer's rank and affiliation.
+  components:
+  - type: PresetIdCard
+    job: CMSurvivor
+  - type: ItemIFF
+    faction: FactionSurvivor

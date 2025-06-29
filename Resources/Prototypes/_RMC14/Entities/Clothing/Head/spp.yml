@@ -92,6 +92,17 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/peaked.rsi
 
 - type: entity
+  parent: CMHeadCapSPPPeaked
+  id: CMHeadCapSPPPeakedPolice
+  name: UL3 PaP peaked cap
+  description: Standard issue peaked cap of the People's Armed Police.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_police.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_police.rsi
+
+- type: entity
   parent: CMHeadCapSPP
   id: CMHeadCapSPPUshanka
   name: SPP UL8 ushanka

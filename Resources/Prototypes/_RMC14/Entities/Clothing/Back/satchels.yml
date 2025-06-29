@@ -26,6 +26,13 @@
 
 - type: entity
   parent: CMSatchel
+  id: RMCSatchelBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/black.rsi
+
+- type: entity
+  parent: CMSatchel
   id: CMBackpackSniper
   name: M3 sniper's waist-rig
   description: A specially-designed rig attached to the waist with a pocket, designed for marksmen.
