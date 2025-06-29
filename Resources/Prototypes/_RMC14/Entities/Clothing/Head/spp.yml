@@ -60,6 +60,17 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/civ.rsi
 
 - type: entity
+  parent: CMHeadCapSPPCivilian
+  id: RMCHeadCapSPPCivilianPlantWorker
+  name: white worker cap
+  description: A simple white fabric cap, commonly worn by various UPP workers to keep hair contained and maintain cleanliness. Lightweight and practical, but not very durable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/white_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/white_cap.rsi
+
+- type: entity
   parent: CMHeadCapSPP
   id: CMHeadCapSPPBeret
   name: UL3 SPP beret

@@ -37,6 +37,12 @@
     sprite: _RMC14/Objects/Clothing/Mask/spp_gasmask.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/spp_gasmask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
 
 - type: Tag
   id: GasMask

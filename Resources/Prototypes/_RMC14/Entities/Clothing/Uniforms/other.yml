@@ -193,6 +193,17 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/green_utility.rsi
 
 - type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianWhiteAlt
+  name: white jumpsuit
+  description: A white jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/white_jumpsuit_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/white_jumpsuit_alt.rsi
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitRedShorts
   name: red shorts

@@ -78,4 +78,7 @@ cm-job-prefix-survivor-icb = ICB
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = SPP - Ministry of Industry - Infrastructure Engineer
-CMJobSurvivorInfrastructureEngineer = Commander
+CMJobSurvivorInfrastructureEngineer = Infrastructure Engineer
+
+rmc-job-name-survivor-reactor-technician = SPP - Ministry of Energy - Reactor Technician
+CMJobSurvivorReactorTechnician = Reactor Technician
