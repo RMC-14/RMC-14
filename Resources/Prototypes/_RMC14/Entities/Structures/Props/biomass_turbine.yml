@@ -27,6 +27,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Props/biomass_turbine.rsi
     state: support_struts_r
+  - type: Physics
+    canCollide: false
 
 - type: entity
   parent: RMCPropTurbineStrutsRight
@@ -44,3 +46,5 @@
   - type: Sprite
     sprite: _RMC14/Structures/Props/biomass_turbine.rsi
     state: biomass_turbine_border
+  - type: Physics
+    canCollide: false
