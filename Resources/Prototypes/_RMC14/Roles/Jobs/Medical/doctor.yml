@@ -5,8 +5,8 @@
   description: cm-job-description-doctor
   playTimeTracker: CMJobDoctor
   requirements:
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsMedical
+  - !type:RoleTimeRequirement
+    role: CMJobNurse
     time: 18000 # 5 hours
   ranks:
     RMCRankSecondLT: []
