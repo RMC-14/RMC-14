@@ -841,6 +841,7 @@
       takeAll: CMStandard
       entries:
       - id: CMArmorM3WO
+      - id: RMCArmorVestMP # TODO: Possible custom variant
       - id: CMArmorHelmetM10ChiefMP
       - id: CMHeadBeretCMP
     - name: Handgun Case
@@ -1084,10 +1085,10 @@
       - id: CMSatchel
       - id: RMCQuartermasterJacket
     - name: Gloves
-      jobs: 
+      jobs:
       - CMQuartermaster
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Headgear
@@ -1317,10 +1318,10 @@
       - id: CMHeadsetSeniorCommand
       - id: CMCoatASO
     - name: Gloves
-      jobs: 
+      jobs:
       - CMAuxiliarySupportOfficer
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Bag
