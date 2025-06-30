@@ -65,8 +65,6 @@
         Brute: 48
   - type: Tackle
     chance: 0.45
-    stunMin: 2
-    stunMax: 5
   - type: Fixtures
     fixtures:
       fix1:

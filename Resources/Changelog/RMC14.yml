@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: CO's secure box containing Honor Guard kits for CIC armory.
-    type: Add
-  id: 1412
-  time: '2025-03-02T05:48:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5692
 - author: blueDev2
   changes:
   - message: Added Hive Cluster, a hive limited structure that spreads hive weeds
@@ -5192,5 +5185,13 @@
   id: 1913
   time: '2025-06-28T02:50:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6715
+- author: Dygon
+  changes:
+  - message: Fix lurker and praetorian tackles applying a stun that was up to twice
+      as long as intended.
+    type: Fix
+  id: 1914
+  time: '2025-06-30T07:46:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6870
 Name: RMC14
 Order: -1
