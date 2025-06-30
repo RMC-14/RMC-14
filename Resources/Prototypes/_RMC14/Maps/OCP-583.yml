@@ -1,6 +1,6 @@
 ﻿- type: gameMap
   id: OCP-583
-  mapName: OCP-583
+  mapName: "OCP-583"
   mapPath: /Maps/_RMC14/OCP-583.yml
   minPlayers: 10
   maxRandomOffset: 0
