@@ -160,6 +160,7 @@
 - type: entity
   parent: RMCHeadsetIconsSPP
   id: RMCHeadsetDistressSPP
+  name: SPP colony headset
   components:
   - type: ContainerFill
     containers:
@@ -183,6 +184,8 @@
 - type: entity
   parent: RMCHeadsetDistressSPP
   id: RMCHeadsetDistressHalcyon
+  name: halycon corporate headset
+  description: A headset commonly worn by Halycon Dynamics corporate personnel.
   components:
   - type: ContainerFill
     containers:

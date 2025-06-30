@@ -41,7 +41,7 @@
     back: CMSatchel # TODO RMC14 - Lockable
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteran
-    ears: RMCHeadsetDistressSPP
+    ears: RMCHeadsetDistressHalcyon
     neck: RMCNeckTieBlack
 
 - type: entity

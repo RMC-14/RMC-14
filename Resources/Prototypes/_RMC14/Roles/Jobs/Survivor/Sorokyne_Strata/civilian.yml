@@ -5,7 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSoroCivilian
   startingGear: RMCGearSurvivorSoroCivilian
-  spawnMenuRoleName: Civialin (Sorokyne Survivor)
+  spawnMenuRoleName: Civilian (Sorokyne Survivor)
   special:
   - !type:AddComponentSpecial
     components:
