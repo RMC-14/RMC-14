@@ -37,7 +37,7 @@
     outerClothing: RMCLabcoatVirology
     shoes: RMCShoesGreen
     back: RMCSatchelVirologyFill
-    id: CMIDCardColonist
+    id: RMCIDCardColonistScientist
     pocket2: RMCPouchMedicalFill
     mask: CMMaskSterile
 
