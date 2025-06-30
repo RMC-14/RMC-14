@@ -4,8 +4,8 @@ meta:
   engineVersion: 251.0.2
   forkId: ""
   forkVersion: ""
-  time: 06/30/2025 20:05:08
-  entityCount: 20613
+  time: 06/30/2025 20:18:00
+  entityCount: 20618
 maps:
 - 1
 grids:
@@ -3022,7 +3022,7 @@ entities:
       pos: 28.5,-186.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4082.112
+      secondsUntilStateChange: -4830.196
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -12805,7 +12805,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4194.3958056
     - type: Door
-      secondsUntilStateChange: -11328.851
+      secondsUntilStateChange: -12076.935
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -12821,7 +12821,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4194.3958056
     - type: Door
-      secondsUntilStateChange: -11328.851
+      secondsUntilStateChange: -12076.935
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -13369,7 +13369,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 11892.4547742
     - type: Door
-      secondsUntilStateChange: -3716.479
+      secondsUntilStateChange: -4464.563
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -13392,7 +13392,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 11892.4547742
     - type: Door
-      secondsUntilStateChange: -3716.479
+      secondsUntilStateChange: -4464.563
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -37551,6 +37551,13 @@ entities:
     components:
     - type: Transform
       pos: 104.5,-76.5
+      parent: 1
+- proto: CMVendorBooze
+  entities:
+  - uid: 20618
+    components:
+    - type: Transform
+      pos: 78.5,-61.5
       parent: 1
 - proto: CMVendorCigs
   entities:
@@ -112485,5 +112492,27 @@ entities:
     components:
     - type: Transform
       pos: 95.5,-135.5
+      parent: 1
+- proto: SpaceVillainArcade
+  entities:
+  - uid: 20614
+    components:
+    - type: Transform
+      pos: 89.5,-53.5
+      parent: 1
+  - uid: 20615
+    components:
+    - type: Transform
+      pos: 90.5,-53.5
+      parent: 1
+  - uid: 20616
+    components:
+    - type: Transform
+      pos: 91.5,-53.5
+      parent: 1
+  - uid: 20617
+    components:
+    - type: Transform
+      pos: 92.5,-53.5
       parent: 1
 ...
