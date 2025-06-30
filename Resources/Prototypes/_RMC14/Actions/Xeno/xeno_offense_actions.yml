@@ -733,8 +733,6 @@
     id: ActionXenoBombard
     ids:
     - ActionXenoAcidShroud
-    activeIds:
-    - ActionXenoSprayAcidBoiler
     cooldown: 30
     onPerform: false
   - type: ActionBlockIfResting
