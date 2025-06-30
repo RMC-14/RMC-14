@@ -31,6 +31,9 @@
 - type: startingGear
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorMoHDoctor
+  equipment:
+    mask: RMCMaskGasSPP
+    head: RMCHeadCapSPPCivilianPlantWorker
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -49,12 +52,9 @@
 - type: playTimeTracker
   id: CMJobSurvivorMoHDoctor
   isHumanoid: true
-  equipment:
-    mask: RMCMaskGasSPP
-    head: RMCHeadCapSPPCivilianPlantWorker
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetMoHDoctor
   name: ministry of health doctor preset
   components:
