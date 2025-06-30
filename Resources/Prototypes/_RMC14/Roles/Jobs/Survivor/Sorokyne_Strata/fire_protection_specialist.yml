@@ -44,6 +44,7 @@
   storage:
     back:
     - RMCAttachmentUnderbarrelExtinguisher
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase

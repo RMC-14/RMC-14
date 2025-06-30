@@ -43,6 +43,7 @@
     gloves: CMHandsInsulated
     mask: RMCMaskGasSPP
     ears: RMCHeadsetDistressSPP
+    pocket2: RMCWelderIndustrial
   storage:
     back:
     - CMSheetMetal20

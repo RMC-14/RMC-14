@@ -40,8 +40,12 @@
     OuterClothing: RMCOuterClothingExternalWebbingBrown
     shoes: RMCBootsSPP
     pocket1: RMCPouchToolsFill
+    pocket2: RMCPouchToolsFill
     gloves: RMCHandsVeteran
     ears: RMCHeadsetDistressSPP
+  storage:
+    back:
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase

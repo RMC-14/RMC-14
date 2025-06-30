@@ -60,6 +60,9 @@
     id: RMCIDSPP
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidSPPArmyFill
+  storage:
+    back:
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase

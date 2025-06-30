@@ -38,6 +38,9 @@
     mask: RMCMaskGasSPP
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
+  storage:
+    back:
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -63,6 +66,13 @@
   name: ministry of health doctor preset
   components:
   - type: SurvivorPreset
+    randomGearOther:
+    -
+      - [ RMCPouchFirstAidSplintsGauzeOintment ]
+      - [ RMCPouchMedicalFill ]
+      - [ RMCPouchFirstAidInjectors ]
+      - [ RMCPouchFirstResponderFill ]
+      - [ RMCPouchMedkitFillAdvanced ]
     randomStartingGear:
       back:
       - CMSatchel

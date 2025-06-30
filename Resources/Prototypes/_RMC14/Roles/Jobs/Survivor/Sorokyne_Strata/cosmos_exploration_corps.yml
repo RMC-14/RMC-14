@@ -37,6 +37,10 @@
     jumpsuit: RMCJumpsuitCivilianScientist
     outerClothing: RMCLabcoatBrown
     mask: RMCMaskGasSPP
+    pocket2: RMCPouchMedicalFill
+  storage:
+    back:
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase

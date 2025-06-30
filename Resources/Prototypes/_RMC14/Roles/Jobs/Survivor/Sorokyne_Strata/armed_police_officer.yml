@@ -56,9 +56,13 @@
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
     mask: RMCMaskGasSPP
+    pocket2: RMCPouchMagazine
     id: RMCIDCardPaP
     back: RMCSatchelBlack
     ears: RMCHeadsetSPPPaP
+  storage:
+    back:
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase

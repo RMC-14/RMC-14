@@ -43,6 +43,10 @@
     gloves: RMCHandsVeteran
     ears: RMCHeadsetDistressHalcyon
     neck: RMCNeckTieBlack
+    pocket2: RMCPouchDocument
+  storage:
+    back:
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
