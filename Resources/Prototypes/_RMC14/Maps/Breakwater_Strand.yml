@@ -6,7 +6,7 @@
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    OCP-583:
+    Breakwater_Strand:
       stationProto: NanotrasenCentralCommand
       components:
       - type: StationNameSetup
