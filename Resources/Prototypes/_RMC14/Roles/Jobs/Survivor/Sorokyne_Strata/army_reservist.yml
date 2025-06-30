@@ -47,7 +47,7 @@
       prefix: rmc-job-prefix-army-reservist
 
 - type: startingGear
-  parent: RMCGearSurvivorSecurity
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorArmyReservist
   equipment:
     suitstorage: RMCWeaponRifleAK4047

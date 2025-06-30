@@ -30,7 +30,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorScientist
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorCECResearcher
   equipment:
     gloves: RMCHandsVeteran

@@ -30,7 +30,7 @@
       prefix: rmc-job-prefix-fire-protection-specialist
 
 - type: startingGear
-  parent: RMCGearSurvivor
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorFireProtectionSpecialist
   equipment:
     jumpsuit: RMCJumpsuitCivilianBrown

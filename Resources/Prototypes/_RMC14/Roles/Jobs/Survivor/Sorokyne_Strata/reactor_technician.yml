@@ -33,7 +33,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorEngineer
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorReactorTechnician
   equipment:
     jumpsuit: RMCJumpsuitNormCivilianWhiteAlt

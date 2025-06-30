@@ -33,7 +33,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorEngineer
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorInfrastructureEngineer
   equipment:
     back: CMSatchelEngineer

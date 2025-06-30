@@ -45,7 +45,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorSecurity
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorArmedPoliceOfficer
   equipment:
     head: CMHeadCapSPPPeakedPolice
