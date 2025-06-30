@@ -26,6 +26,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - SPP
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
@@ -36,6 +37,7 @@
   equipment:
     mask: RMCMaskGasSPP
     head: RMCHeadCapSPPCivilianPlantWorker
+    ears: RMCHeadsetDistressSPP
 
 - type: entity
   parent: CMSpawnPointJobBase

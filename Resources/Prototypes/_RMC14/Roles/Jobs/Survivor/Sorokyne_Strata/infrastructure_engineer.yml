@@ -27,6 +27,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - SPP
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
@@ -41,6 +42,7 @@
     outerClothing: RMCHazardVest
     gloves: CMHandsInsulated
     mask: RMCMaskGasSPP
+    ears: RMCHeadsetDistressSPP
   storage:
     back:
     - CMSheetMetal20

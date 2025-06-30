@@ -4,6 +4,8 @@
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHalcyonDynamicsLiaison
+  ranks:
+    RMCRankWeYaExecutive: []
   startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
   accessGroups:
   - ColonistCorporate
@@ -17,8 +19,6 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHalcyonDynamicsLiaison
     - type: RMCSurvivor
@@ -26,6 +26,8 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - Halcyon
+      - SPP
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
@@ -34,14 +36,13 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorHalcyonDynamicsLiaison
   equipment:
-    mask: RMCMaskGasSPP
-    head: RMCHardhatWhiteAlt
-    jumpsuit: RMCJumpsuitSPPCiv5
-    back: CMSatchelEngineer
-    OuterClothing: RMCOuterClothingExternalWebbingBrown
+    id: RMCIDCardHalcyon
+    jumpsuit: CMJumpsuitLiaisonBrown
+    back: CMSatchel # TODO RMC14 - Lockable
     shoes: RMCBootsSPP
-    pocket1: RMCPouchToolsFill
     gloves: RMCHandsVeteran
+    ears: RMCHeadsetDistressSPP
+    neck: RMCNeckTieBlack
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -65,3 +66,8 @@
   parent: RMCSurvivorPresetCivilian
   id: RMCGearSurvivorPresetHalcyonDynamicsLiaison
   name: halcyon dynamics liaison preset
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCCoatBureauTrenchCoatBrown ]
+    - [ RMCCoatBureauTrenchCoatGrey

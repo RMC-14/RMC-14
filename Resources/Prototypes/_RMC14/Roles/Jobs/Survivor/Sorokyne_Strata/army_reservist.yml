@@ -37,7 +37,8 @@
     - type: RMCSurvivor
     - type: RMCRibbon
     - type: MotionDetectorTracked
-    - type: NpcFactionMember
+    - type: NpcFactio
+      - SPPnMember
       factions:
       - Civilian
     - type: IntelRescueSurvivorObjective

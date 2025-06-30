@@ -39,6 +39,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - SPP
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage

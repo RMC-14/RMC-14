@@ -24,6 +24,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - SPP
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
@@ -40,6 +41,7 @@
     shoes: RMCBootsSPP
     pocket1: RMCPouchToolsFill
     gloves: RMCHandsVeteran
+    ears: RMCHeadsetDistressSPP
 
 - type: entity
   parent: CMSpawnPointJobBase

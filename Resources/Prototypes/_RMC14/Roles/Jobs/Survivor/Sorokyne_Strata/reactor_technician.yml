@@ -27,6 +27,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - SPP
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
@@ -36,6 +37,7 @@
   id: RMCGearSurvivorReactorTechnician
   equipment:
     jumpsuit: RMCJumpsuitNormCivilianWhiteAlt
+    ears: RMCHeadsetDistressSPP
 
 - type: entity
   parent: CMSpawnPointJobBase

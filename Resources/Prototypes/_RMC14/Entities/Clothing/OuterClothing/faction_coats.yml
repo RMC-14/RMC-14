@@ -1,5 +1,27 @@
 # Bureau
 
+- type: entity
+  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
+  id: RMCCoatBureauTrenchCoatBrown
+  name: brown trench-coat
+  description: A worn, brown, old style trench-coat. When a bum sees a cop coming, he don't stick around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_brown.rsi
+
+- type: entity
+  parent: RMCCoatBureauTrenchCoatBrown
+  id: RMCCoatBureauTrenchCoatGrey
+  name: grey trench-coat
+  description: A worn, grey, old style trench-coat. When a bum sees a cop coming, he don't stick around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_grey.rsi
+
 # Bureau Deputy
 - type: entity
   parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
