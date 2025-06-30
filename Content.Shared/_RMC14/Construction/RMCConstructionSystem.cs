@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Construction.Prototypes;
+using System.Linq;
+using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.Construction.Prototypes;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Ladder;
@@ -9,8 +11,10 @@ using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -41,6 +45,9 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventorySystem = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -65,11 +72,144 @@ public sealed class RMCConstructionSystem : EntitySystem
         SubscribeLocalEvent<RMCDropshipBlockedComponent, AnchorAttemptEvent>(OnAnchorAttempt);
         SubscribeLocalEvent<RMCDropshipBlockedComponent, UserAnchoredEvent>(OnUserAnchored);
 
+        if (_net.IsServer)
+        {
+            SubscribeNetworkEvent<RMCConstructionGhostBuildMessage>(OnGhostBuildMessage);
+        }
+
         Subs.BuiEvents<RMCConstructionItemComponent>(RMCConstructionUiKey.Key,
             subs =>
             {
                 subs.Event<RMCConstructionBuiMsg>(OnConstructionBuiMsg);
             });
+    }
+
+    private void OnGhostBuildMessage(RMCConstructionGhostBuildMessage msg, EntitySessionEventArgs args)
+    {
+        var user = args.SenderSession.AttachedEntity;
+        if (user == null)
+            return;
+
+        var buildCoords = GetCoordinates(msg.Coordinates);
+
+        var constructionItem = FindValidConstructionItem(user.Value, msg.Prototype);
+        if (constructionItem == null)
+        {
+            _popup.PopupEntity("You don't have the required materials.", user.Value, user.Value, PopupType.SmallCaution);
+            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostId);
+            RaiseNetworkEvent(failMsg, args.SenderSession);
+            return;
+        }
+
+        if (!EntityManager.TryGetComponent<RMCConstructionItemComponent>(constructionItem.Value, out var constructionComp))
+        {
+            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostId);
+            RaiseNetworkEvent(failMsg, args.SenderSession);
+            return;
+        }
+
+        if (!ValidateGhostBuild(user.Value, constructionItem.Value, msg.Prototype, buildCoords, msg.Direction))
+        {
+            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostId);
+            RaiseNetworkEvent(failMsg, args.SenderSession);
+            return;
+        }
+
+        var entity = (constructionItem.Value, constructionComp);
+        var success = BuildAtLocation(entity, user.Value, msg.Prototype, msg.Amount, buildCoords, msg.Direction, msg.GhostId);
+
+        if (!success)
+        {
+            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostId);
+            RaiseNetworkEvent(failMsg, args.SenderSession);
+        }
+    }
+
+    private EntityUid? FindValidConstructionItem(EntityUid user, ProtoId<RMCConstructionPrototype> protoId)
+    {
+        if (!_prototype.TryIndex<RMCConstructionPrototype>(protoId, out var proto))
+            return null;
+
+        foreach (var hand in _hands.EnumerateHands(user))
+        {
+            if (hand.HeldEntity == null)
+                continue;
+
+            if (IsValidConstructionItemForPrototype(hand.HeldEntity.Value, proto))
+                return hand.HeldEntity.Value;
+        }
+
+        if (_inventorySystem.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
+        {
+            while (containerSlotEnumerator.MoveNext(out var containerSlot))
+            {
+                if (!containerSlot.ContainedEntity.HasValue)
+                    continue;
+
+                if (IsValidConstructionItemForPrototype(containerSlot.ContainedEntity.Value, proto))
+                    return containerSlot.ContainedEntity.Value;
+            }
+        }
+
+        return null;
+    }
+
+    private bool IsValidConstructionItemForPrototype(EntityUid item, RMCConstructionPrototype proto)
+    {
+        if (!TryComp<RMCConstructionItemComponent>(item, out var constructionComp))
+            return false;
+
+        if (constructionComp.Buildable == null)
+            return true;
+
+        if (!constructionComp.Buildable.Contains(proto.ID))
+            return false;
+
+        if (proto.MaterialCost != null && TryComp<StackComponent>(item, out var stack))
+        {
+            return stack.Count >= proto.MaterialCost;
+        }
+
+        return true;
+    }
+
+    private bool ValidateGhostBuild(EntityUid user, EntityUid constructionItem, ProtoId<RMCConstructionPrototype> protoId, EntityCoordinates coordinates, Direction direction)
+    {
+        if (!_prototype.TryIndex<RMCConstructionPrototype>(protoId, out var proto))
+            return false;
+
+        if (!CanConstruct(user))
+            return false;
+
+        var userCoords = EntityManager.GetComponent<TransformComponent>(user).Coordinates;
+        var userTile = userCoords.ToVector2i(EntityManager, _mapManager, _transform);
+        var buildTile = coordinates.ToVector2i(EntityManager, _mapManager, _transform);
+
+        if (userTile != buildTile)
+            return false;
+
+        if (proto.Skill is { } skill && !_skills.HasSkill(user, skill, proto.RequiredSkillLevel))
+            return false;
+
+        if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out _, direction: direction, collision: proto.RestrictedCollisionGroup))
+            return false;
+
+        if (proto.RestrictedTags is { } tags && _rmcMap.TileHasAnyTag(coordinates, tags))
+            return false;
+
+        var attempt = new RMCConstructionAttemptEvent(coordinates, proto.Name);
+        RaiseLocalEvent(ref attempt);
+        if (attempt.Cancelled)
+            return false;
+
+        if (proto.MaterialCost is { } materialCost && TryComp<StackComponent>(constructionItem, out var stack))
+        {
+            var cost = materialCost;
+            if (stack.Count < cost)
+                return false;
+        }
+
+        return true;
     }
 
     public void OnUseInHand(Entity<RMCConstructionItemComponent> ent, ref UseInHandEvent args)
@@ -86,15 +226,12 @@ public sealed class RMCConstructionSystem : EntitySystem
         Build(ent, args.Actor, args.Build, args.Amount);
     }
 
-    public bool Build(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount)
+    public bool BuildAtLocation(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount, EntityCoordinates coordinates, Direction direction, int? ghostId = null)
     {
         if (_net.IsClient)
             return false;
 
         if (!_prototype.TryIndex<RMCConstructionPrototype>(protoID, out var proto))
-            return false;
-
-        if (!TryComp(user, out TransformComponent? transform))
             return false;
 
         if (proto.Skill is { } skill && !_skills.HasSkill(user, skill, proto.RequiredSkillLevel))
@@ -104,12 +241,9 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        var direction = transform.LocalRotation.GetCardinalDir();
-        var coordinates = transform.Coordinates;
-
         if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
         {
-            _popup.PopupEntity(popup, ent, user, PopupType.SmallCaution);
+            _popup.PopupEntity(popup ?? $"Cannot build {proto.Name} here.", ent, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -139,7 +273,8 @@ public sealed class RMCConstructionSystem : EntitySystem
             proto,
             amount,
             GetNetCoordinates(coordinates),
-            direction
+            direction,
+            ghostId
         );
 
         var skillMultiplier = _skills.HasSkill(user, proto.DelaySkill, 2) ? 1 : 2;
@@ -153,9 +288,23 @@ public sealed class RMCConstructionSystem : EntitySystem
             MovementThreshold = 0.5f
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        var started = _doAfter.TryStartDoAfter(doAfter);
+        if (!started)
+            return false;
+
         UpdateStackAmountUI(ent);
         return true;
+    }
+
+    public bool Build(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount, int? ghostId = null)
+    {
+        if (!TryComp(user, out TransformComponent? transform))
+            return false;
+
+        var direction = transform.LocalRotation.GetCardinalDir();
+        var coordinates = transform.Coordinates;
+
+        return BuildAtLocation(ent, user, protoID, amount, coordinates, direction, ghostId);
     }
 
     private void OnConstructionPreventCollide(Entity<RMCConstructionPreventCollideComponent> ent, ref PreventCollideEvent args)
@@ -238,6 +387,12 @@ public sealed class RMCConstructionSystem : EntitySystem
             // Removes collision with the construction until you leave
             if (!HasComp<BarricadeComponent>(built))
                 MakeConstructionImmuneToCollision(built, args.User);
+        }
+
+        if (args.GhostId != null)
+        {
+            var ackMsg = new RMCAckStructureConstructionMessage(args.GhostId.Value);
+            RaiseNetworkEvent(ackMsg);
         }
     }
 
@@ -377,7 +532,10 @@ public sealed class RMCConstructionSystem : EntitySystem
             return true;
 
         if (!coordinates.TryGetTileRef(out var turf))
+        {
+            popup = $"Cannot build {prototypeName} here.";
             return false;
+        }
 
         if (HasComp<DropshipComponent>(gridId))
         {

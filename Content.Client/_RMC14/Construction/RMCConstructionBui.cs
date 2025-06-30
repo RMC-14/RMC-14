@@ -1,4 +1,5 @@
-﻿using Content.Client._RMC14.UserInterface;
+using System.Linq;
+using Content.Client._RMC14.UserInterface;
 using Content.Client.Message;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Construction.Prototypes;
@@ -17,9 +18,11 @@ public sealed class RMCConstructionBui : BoundUserInterface
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     [ViewVariables]
     private RMCConstructionWindow? _window;
+    private RMCConstructionGhostSystem? _ghostSystem;
 
     public RMCConstructionBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -29,8 +32,10 @@ public sealed class RMCConstructionBui : BoundUserInterface
     {
         base.Open();
 
+        _ghostSystem = _entityManager.System<RMCConstructionGhostSystem>();
         _window = this.CreateWindow<RMCConstructionWindow>();
         _window.Title = $"Construction using the {EntMan.GetComponent<MetaDataComponent>(Owner).EntityName}";
+        _window.ClearGhostsPressed += OnClearGhostsPressed;
 
         if (!EntMan.TryGetComponent(Owner, out RMCConstructionItemComponent? constructionItem))
             return;
@@ -41,12 +46,26 @@ public sealed class RMCConstructionBui : BoundUserInterface
         Refresh(entries);
     }
 
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (_window != null)
+        {
+            _window.ClearGhostsPressed -= OnClearGhostsPressed;
+        }
+    }
+
     protected override void UpdateState(BoundUserInterfaceState state)
     {
         base.UpdateState(state);
 
         if (State is RMCConstructionBuiState s)
             RefreshStackAmount();
+    }
+
+    private void OnClearGhostsPressed()
+    {
+        _ghostSystem?.ClearAllGhosts();
     }
 
     private void AddEntry(ProtoId<RMCConstructionPrototype> prototypeId)
@@ -94,7 +113,7 @@ public sealed class RMCConstructionBui : BoundUserInterface
 
                 button.OnPressed += _ =>
                 {
-                    SendPredictedMessage(new RMCConstructionBuiMsg(build, stack));
+                    StartGhostPlacement(build);
                 };
 
                 control.Button.SetWidth = 250;
@@ -104,10 +123,21 @@ public sealed class RMCConstructionBui : BoundUserInterface
 
         control.Button.OnPressed += _ =>
         {
-            SendPredictedMessage(new RMCConstructionBuiMsg(build, build.Amount));
+            StartGhostPlacement(build);
         };
 
         _window?.ConstructionContainer.AddChild(control);
+    }
+
+    private void StartGhostPlacement(RMCConstructionPrototype prototype)
+    {
+        if (_ghostSystem == null)
+        {
+            return;
+        }
+
+        _ghostSystem.StartPlacement(prototype, Owner);
+        Close();
     }
 
     private void AddListButton(RMCConstructionPrototype build)
@@ -127,11 +157,26 @@ public sealed class RMCConstructionBui : BoundUserInterface
         _window?.ConstructionContainer.AddChild(control);
     }
 
+    public void Refresh(HashSet<ProtoId<RMCConstructionPrototype>> entries)
+    {
+        if (_window == null)
+            return;
+
+        _window.ConstructionContainer.Children.Clear();
+        RefreshStackAmount();
+
+        foreach (var entry in entries)
+        {
+            AddEntry(entry);
+        }
+    }
+
     public void Refresh(ProtoId<RMCConstructionPrototype>[] entries)
     {
         if (_window == null)
             return;
 
+        _window.ConstructionContainer.Children.Clear();
         RefreshStackAmount();
 
         foreach (var entry in entries)
