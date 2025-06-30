@@ -40,6 +40,8 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: rmc-job-prefix-army-reservist
 
 - type: startingGear
   parent: RMCGearSurvivorBase

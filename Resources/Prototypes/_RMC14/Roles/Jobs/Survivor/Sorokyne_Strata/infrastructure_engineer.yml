@@ -39,6 +39,7 @@
     outerClothing: RMCHazardVest
     gloves: CMHandsInsulated
     mask: RMCMaskGasSPP
+    ears: CMHeadsetColony
     id: CMIDCardColonist
   storage:
     back:
