@@ -144,8 +144,8 @@
   - type: CMArmor
     melee: 15 # CLOTHING_ARMOR_MEDIUMLOW
     bullet: 15 # CLOTHING_ARMOR_MEDIUM
-    energy: 15 # CLOTHING_ARMOR_MEDIUMLOW
-    rad: 20 # CLOTHING_ARMOR_MEDIUM
+    #energy: 15 # CLOTHING_ARMOR_MEDIUMLOW
+    #rad: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
   - type: Storage
     grid:

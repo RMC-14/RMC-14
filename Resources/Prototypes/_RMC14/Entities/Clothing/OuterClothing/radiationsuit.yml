@@ -10,7 +10,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/radiation_suit.rsi
   - type: CMArmor
     bio: 30
-    rad: 50
+    #rad: 50
   - type: ClothingSpeedModifier
     walkModifier: .5
     sprintModifier: .5

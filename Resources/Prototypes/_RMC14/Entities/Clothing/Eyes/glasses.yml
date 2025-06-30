@@ -208,8 +208,6 @@
   - type: ComponentToggler
     components:
     - type: SolutionScanner
-      damageContainers:
-      - Biological
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
