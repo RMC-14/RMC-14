@@ -20,5 +20,5 @@ public sealed partial class XenoToggleSpitComponent : Component
     public EntProtoId NeuroProto = "XenoQueenNeuroSpitProjectile";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId AcidProto = "XenoChargedSpitProjectile";
+    public EntProtoId AcidProto = "XenoChargedSpitProjectileQueen";
 }

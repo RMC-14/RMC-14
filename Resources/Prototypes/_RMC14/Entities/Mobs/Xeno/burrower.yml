@@ -61,7 +61,7 @@
   - type: XenoStomp
     selfEffect: CMEffectSelfStomp
     shortRange: 0
-    range: 4
+    range: 3
     plasmaCost: 100
     paralyzeTime: 2
     slowBigInsteadOfStun: true
