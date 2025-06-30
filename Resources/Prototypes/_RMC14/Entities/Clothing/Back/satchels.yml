@@ -510,6 +510,17 @@
     - id: CMPackFlare
 
 - type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_black.rsi
+
+- type: entity
+  parent: [ RMCSatchelLightpack5Slot, RMCSatchelLightpackBlack ]
+  id: RMCSatchelLightpackBlack5Slot
+
+- type: entity
   parent: RMCSatchelWelder
   id: RMCSatchelLightpackWelder
   name: lightweight technician welderpack

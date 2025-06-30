@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorReactorTechnician
   startingGear: RMCGearSurvivorReactorTechnician
+  accessGroups:
+  - ColonistEngi
   spawnMenuRoleName: Reactor Technician (Sorokyne Survivor)
   special:
   - !type:AddComponentSpecial
@@ -33,7 +35,7 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorReactorTechnician
   equipment:
-    jumpsuit: RMCJumpsuitCivilianWhiteAlt
+    jumpsuit: RMCJumpsuitNormCivilianWhiteAlt
 
 - type: entity
   parent: CMSpawnPointJobBase

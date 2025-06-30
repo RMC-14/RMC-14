@@ -194,7 +194,40 @@
 
 - type: entity
   parent: RMCJumpsuitCivilian
-  id: RMCJumpsuitCivilianWhiteAlt
+  id: RMCJumpsuitCivilianBlue
+  name: blue utility uniform
+  description: A blue utility uniform with teal suspenders and rugged pants.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_utility.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianRed
+  name: red utility uniform
+  description: A grey utility uniform with red suspenders and blue jeans, the sign of a veteran laborer, or someone not paid by the hour.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/red_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/red_utility.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianYellow
+  name: yellow utility uniform
+  description: A grey utility uniform with yellow suspenders, made for shipside crew.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_utility.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianWhiteAlt
   name: white jumpsuit
   description: A white jumpsuit.
   components:
@@ -202,6 +235,61 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/white_jumpsuit_alt.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/white_jumpsuit_alt.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianBrown
+  name: brown jumpsuit
+  description: A brown jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianLightBrown
+  name: light brown jumpsuit
+  description: A light brown jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/lightbrown_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/lightbrown_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianGrey
+  name: grey jumpsuit
+  description: A grey jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/grey_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/grey_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianYellow
+  name: yellow jumpsuit
+  description: A yellow jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianBlue
+  name: blue jumpsuit
+  description: A blue jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_jumpsuit.rsi
 
 - type: entity
   parent: RMCMarineUniformBase

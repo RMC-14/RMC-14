@@ -93,6 +93,15 @@ rmc-job-prefix-army-reservist = 202/ARMY
 rmc-job-name-survivor-moh-doctor = SPP - Ministry of Health - Doctor
 CMJobSurvivorMoHDoctor = Doctor
 
+rmc-job-name-survivor-soro-civilian = SPP - Civilian
+CMJobSurvivorSoroCivilian = Civilian
+
 rmc-job-name-survivor-fire-protection-specialist = SPP - Ministry of Public Safety - Fire Protection Specialist
 CMJobSurvivorFireProtectionSpecialist = Fire Protection Specialist
 rmc-job-prefix-fire-protection-specialist = FPPB
+
+rmc-job-name-survivor-soro-miner = SPP - Jutou Combine - Miner
+CMJobSurvivorSoroMiner = Miner
+
+rmc-job-name-survivor-halcyon-dynamics-liaison = SPP - Halcyon Dynamics - Corporate Liaison
+CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison

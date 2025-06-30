@@ -53,3 +53,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_brown.rsi
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_black.rsi

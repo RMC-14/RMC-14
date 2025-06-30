@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorMoHDoctor
   startingGear: RMCGearSurvivorMoHDoctor
+  accessGroups:
+  - ColonistMedical
   spawnMenuRoleName: MoH Doctor (Sorokyne Survivor)
   special:
   - !type:AddComponentSpecial

@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorInfrastructureEngineer
   startingGear: RMCGearSurvivorInfrastructureEngineer
+  accessGroups:
+  - ColonistEngi
   spawnMenuRoleName: Infrastructure Engineer (Sorokyne Survivor)
   special:
   - !type:AddComponentSpecial
