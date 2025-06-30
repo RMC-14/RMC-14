@@ -88,3 +88,6 @@ CMJobSurvivorArmedPoliceOfficer = People's Armed Police Officer
 
 rmc-job-name-survivor-army-reservist = SPP - Ministry of Defense - Army Reservist
 CMJobSurvivorArmyReservist = Army Reservist
+
+rmc-job-name-survivor-moh-doctor = SPP - Ministry of Health - Doctor
+CMJobSurvivorMoHDoctor = Doctor
