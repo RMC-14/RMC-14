@@ -56,9 +56,9 @@
   description: "A reinforced, heat-resistant helmet issued to SPP emergency responders. Its durable composite shell provides protection against falling debris and extreme heat, while the attached fire-resistant shroud shields the wearer’s neck and shoulders. A red star is emblazoned on the front, marking its service within the socialist's progressive peoples."
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/SPP/helmet.rsi
+    sprite: _RMC14/Objects/Clothing/Head/SPP/fire_helmet.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/SPP/helmet.rsi
+    sprite: _RMC14/Objects/Clothing/Head/SPP/fire_helmet.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
 
