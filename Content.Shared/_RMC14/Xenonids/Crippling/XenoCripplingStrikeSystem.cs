@@ -31,6 +31,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         SubscribeLocalEvent<XenoCripplingStrikeComponent, XenoCripplingStrikeActionEvent>(OnXenoCripplingStrikeAction);
 
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeHitEvent>(OnXenoCripplingStrikeHit);
+        SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeAttackAttemptEvent>(OnActiveCripplingStrikeMeleeAttempt);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, RefreshMovementSpeedModifiersEvent>(OnActiveCripplingRefreshSpeed);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, ComponentRemove>(OnActiveCripplingRemove);
 
@@ -100,6 +101,8 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             xeno.Comp.NextSlashBuffed = false;
             break;
         }
+
+        RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
     }
 
     private void OnActiveCripplingRefreshSpeed(Entity<XenoActiveCripplingStrikeComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -120,6 +123,17 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
     {
         args.Damage *= victim.Comp.DamageMult;
         RemCompDeferred<VictimCripplingStrikeDamageComponent>(victim);
+    }
+
+    private void OnActiveCripplingStrikeMeleeAttempt(Entity<XenoActiveCripplingStrikeComponent> ent, ref MeleeAttackAttemptEvent args)
+    {
+        var netAttacker = GetNetEntity(ent);
+        switch (args.Attack)
+        {
+            case DisarmAttackEvent disarm:
+                args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
+                break;
+        }
     }
 
     public override void Update(float frameTime)
