@@ -135,3 +135,17 @@
     containers:
       key_slots:
       - RMCEncryptionKeySPPMedic
+
+- type: entity
+  parent: RMCHeadsetIconsSPP
+  id: RMCHeadsetSPPPaP
+  name: SPP PaP headset
+  description: A special headset used by the People's Armed Police of the SPP.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
+  - type: Sprite
+    state: sec_headset

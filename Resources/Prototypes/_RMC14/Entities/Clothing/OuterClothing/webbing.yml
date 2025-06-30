@@ -46,3 +46,10 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingBrown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/external_webbing_brown.rsi

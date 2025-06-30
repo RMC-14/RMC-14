@@ -27,6 +27,23 @@
     tags:
     - GasMask
 
+- type: entity
+  parent: CMMaskGas
+  id: RMCMaskGasSPP
+  name: ShMB/4 gasmask
+  description: The standard issue gasmask utilized by the SPP Vanguard Collective and many SPP civilian organizations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/spp_gasmask.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/spp_gasmask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+
 - type: Tag
   id: GasMask
 

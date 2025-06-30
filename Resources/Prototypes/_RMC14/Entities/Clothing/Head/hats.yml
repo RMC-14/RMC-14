@@ -580,3 +580,22 @@
     sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
+
+# Radiation Suit
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadRadiationHood
+  name: radiation hood
+  description: "A hood with radiation protective properties. Label: Made with lead, do not eat insulation"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/radiation_hood.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/radiation_hood.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout

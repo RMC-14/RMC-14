@@ -81,6 +81,13 @@
 
 - type: entity
   parent: RMCPouchSurvival
+  id: RMCPouchSurvivalBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+
+- type: entity
+  parent: RMCPouchSurvival
   id: RMCPouchSurvivalFill
   suffix: Filled
   components:
@@ -93,6 +100,13 @@
     - id: RMCRadioHandheldColony
     - id: RMCM5Bayonet
       # 5 splints
+
+- type: entity
+  parent: [ RMCPouchSurvivalBlack, RMCPouchSurvivalFill ]
+  id: RMCPouchSurvivalBlackFilled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
 
 
 # Survival Synth Pouch

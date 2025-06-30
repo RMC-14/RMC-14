@@ -1,3 +1,25 @@
+# Colony
+
+- type: rank
+  id: RMCRankSPPMlts
+  name: Militsioner
+  prefix: Milit.
+  paygrade: MLTS
+
+- type: rank
+  id: RMCRankSPPSMlts
+  name: Starshiy Militsioner
+  prefix: St. Mlts.
+  paygrade: SMLTS
+
+- type: rank
+  id: RMCRankSPPStrsh
+  name: Starshina
+  prefix: Strsh.
+  paygrade: STRSH
+
+# Military
+
 - type: rank
   id: RMCRankSPPRyadovoy
   name: Ryadovoy

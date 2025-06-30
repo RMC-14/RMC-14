@@ -1,0 +1,66 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorReactorTechnician
+  name: rmc-job-name-survivor-reactor-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorReactorTechnician
+  startingGear: RMCGearSurvivorReactorTechnician
+  spawnMenuRoleName: Reactor Technician (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetReactorTechnician
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorReactorTechnician
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianWhiteAlt
+    id: CMIDCardColonist
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorReactorTechnician
+  name: reactor technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorReactorTechnician
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetReactorTechnician
+  name: reactor technician preset
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, CMSatchel, RMCShoesWhite, RMCMaskGasSPP ]
+    - [ RMCLabcoatShort, CMSatchel, RMCShoesLaceupBrown, RMCMaskGasSPP ]
+    - [ RMCHeadRadiationHood, RMCSuitRadiation, CMSatchel, RMCShoesLaceupBrown, RMCMaskGasSPP ]
