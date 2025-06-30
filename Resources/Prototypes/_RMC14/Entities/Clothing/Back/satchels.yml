@@ -480,6 +480,15 @@
 
 - type: entity
   parent: RMCSatchelLightpack
+  id: RMCSatchelLightpack5Slot
+  suffix: 5 Slot
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 15
+
+- type: entity
+  parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFilledRoyal
   suffix: Filled, Royal
   components:

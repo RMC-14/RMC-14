@@ -85,3 +85,6 @@ CMJobSurvivorReactorTechnician = Reactor Technician
 
 rmc-job-name-survivor-armed-police-officer = SPP - People's Armed Police Officer
 CMJobSurvivorArmedPoliceOfficer = People's Armed Police Officer
+
+rmc-job-name-survivor-army-reservist = SPP - Ministry of Defense - Army Reservist
+CMJobSurvivorArmyReservist = Army Reservist

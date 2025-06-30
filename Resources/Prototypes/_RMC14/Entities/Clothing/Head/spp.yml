@@ -36,6 +36,19 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/heavy.rsi
 
+- type: entity
+  parent: ArmorHelmetSPP
+  id: RMCArmorHelmetSPPArmy
+  name: 6B82 combat helmet
+  description: An older version of the UPP Army's 6B92 combat helmet, still worn by certain units on planets the SPP deems less important
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/army_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/army_helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # SPP hats
 - type: entity
   parent: CMHeadCap
@@ -79,6 +92,17 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi
+
+- type: entity
+  parent: CMHeadCapSPPBeret
+  id: RMCHeadCapSPPBeretArmy
+  name: SPP reservist beret
+  description: A well-made beret worn by reservists of the SPP armed forces. It signifies their continued commitment to the cause, even while not on active duty, and serves as a symbol of unity and service.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/army_beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/army_beret.rsi
 
 - type: entity
   parent: CMHeadCapSPP

@@ -1503,3 +1503,26 @@
 
 - type: Tag
   id: RMCBeltMedical
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltSPPBrown
+  name: 6B80 pattern ammo rig
+  description: The 6B80 is an outdated but reliable ammo rig, formerly standard for the SPP Army. Its modular belt holds various munitions, still used by SPP security forces and reserves for its rugged design.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/spp_brown.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltSPPBrown
+  id: RMCBeltSPPBrownHalfFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleAK4047
+      amount: 2

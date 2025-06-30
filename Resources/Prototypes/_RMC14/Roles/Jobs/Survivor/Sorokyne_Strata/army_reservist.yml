@@ -1,9 +1,9 @@
 - type: job
   parent: CMSurvivor
-  id: CMJobSurvivorArmedPoliceOfficer
-  name: rmc-job-name-survivor-armed-police-officer
+  id: CMJobSurvivorArmyReservist
+  name: rmc-job-name-survivor-army-reservist
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorArmedPoliceOfficer
+  playTimeTracker: CMJobSurvivorArmyReservist
   ranks:
     RMCRankSPPStrsh:
     - !type:RoleTimeRequirement
@@ -14,8 +14,8 @@
       role: CMJobSurvivorSecurity
       time: 252000 # 70 hours
     RMCRankSPPMlts: []
-  startingGear: RMCGearSurvivorArmedPoliceOfficer
-  spawnMenuRoleName: People's Armed Police Officer (Sorokyne Survivor)
+  startingGear: RMCGearSurvivorArmyReservist
+  spawnMenuRoleName: Army Reservist (Sorokyne Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,12 +26,12 @@
         RMCSkillConstruction: 1
         RMCSkillMedical: 1
         RMCSkillEndurance: 2
-        RMCSkillCqc: 2
+        RMCSkillCqc: 1
         RMCSkillFirearms: 1
-        RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 2
+        RMCSkillJtac: 1
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetArmedPoliceOfficer
+      preset: RMCGearSurvivorPresetArmyReservist
     - type: RMCSurvivor
     - type: RMCRibbon
     - type: MotionDetectorTracked
@@ -43,23 +43,22 @@
 
 - type: startingGear
   parent: RMCGearSurvivorBase
-  id: RMCGearSurvivorArmedPoliceOfficer
+  id: RMCGearSurvivorArmyReservist
   equipment:
-    head: CMHeadCapSPPPeakedPolice
-    eyes: CMGlassesSecurity
-    jumpsuit: RMCJumpsuitSPPPaP
-    belt: RMCBeltHolsterPistolSPP
-    outerClothing: RMCCoatPaP
-    gloves: RMCHandsVeteran
-    shoes: CMBootsBlackFilled
-    mask: RMCMaskGasSPP
+    suitstorage: RMCWeaponRifleAK4047
     id: RMCIDCardPaP
-    back: RMCSatchelBlack
-    ears: RMCHeadsetSPPPaP
+    jumpsuit: RMCJumpsuitSPPArmy
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsVeteran
+    belt: RMCBeltSPPBrownHalfFill
+    back: RMCSatchelLightpack5Slot
+    ears: RMCHeadsetSPP
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidSPPArmyFill
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorArmedPoliceOfficer
+  id: RMCSpawnPointSurvivorArmyReservist
   name: people's armed police officer spawn point
   components:
   - type: SpawnPoint
@@ -72,10 +71,25 @@
       state: survivor
 
 - type: playTimeTracker
-  id: CMJobSurvivorArmedPoliceOfficer
+  id: CMJobSurvivorArmyReservist
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetSecurity
-  id: RMCGearSurvivorPresetArmedPoliceOfficer
+  id: RMCGearSurvivorPresetArmyReservist
   name: people's armed police officer preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ RMCGrenadeMolotov ]
+    - [ CMPackFlare ]
+    - [ WeaponNailgun ]
+    - [ RMCFireAxe ]
+    - [ RMCWelderIndustrial ]
+    - [ CMAdvFirstAidKitFilled ]
+    randomOutfits:
+    - [ RMCArmorHelmetSPPArmy, RMCArmorSPPArmy, RMCMaskBalaclava]
+    - [ RMCArmorHelmetSPPArmy, RMCOuterClothingExternalWebbingBrown, RMCMaskBalaclava]
+    - [ RMCArmorHelmetSPPArmy, RMCMaskGasSPP]
+    - [ RMCHeadCapSPPBeretArmy, RMCMaskGasSPP]
+

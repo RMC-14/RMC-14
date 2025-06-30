@@ -39,6 +39,7 @@
     outerClothing: RMCHazardVest
     gloves: CMHandsInsulated
     mask: RMCMaskGasSPP
+    id: CMIDCardColonist
   storage:
     back:
     - CMSheetMetal20
