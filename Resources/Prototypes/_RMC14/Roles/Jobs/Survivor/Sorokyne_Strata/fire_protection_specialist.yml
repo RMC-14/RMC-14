@@ -32,12 +32,10 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorFireProtectionSpecialist
   equipment:
-    id: RMCIDCardPaP
     jumpsuit: RMCJumpsuitCivilianBrown
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteranSPP
     back: RMCSatchelLightpack
-    ears: CMHeadsetColony
     head: RMCArmorHelmetSPPFirefighter
     outerClothing: RMCArmorSPPFirefighter
     mask: RMCMaskGasSPP

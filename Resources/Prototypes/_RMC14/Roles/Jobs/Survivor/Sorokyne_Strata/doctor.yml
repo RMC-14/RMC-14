@@ -31,17 +31,6 @@
 - type: startingGear
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorMoHDoctor
-  equipment:
-    suitstorage: RMCWeaponRifleAK4047
-    id: RMCIDCardPaP
-    jumpsuit: RMCJumpsuitSPPArmy
-    shoes: CMBootsBlackFilled
-    gloves: RMCHandsVeteran
-    belt: RMCBeltSPPBrownHalfFill
-    back: RMCSatchelLightpack5Slot
-    ears: CMHeadsetColony
-    pocket1: RMCPouchSurvivalBlackFilled
-    pocket2: RMCPouchFirstAidSPPArmyFill
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -60,15 +49,36 @@
 - type: playTimeTracker
   id: CMJobSurvivorMoHDoctor
   isHumanoid: true
+  equipment:
+    mask: RMCMaskGasSPP
+    head: RMCHeadCapSPPCivilianPlantWorker
 
 - type: entity
-  parent: RMCSurvivorPresetEngineer
+  parent: RMCSurvivorPresetCivilian
   id: RMCGearSurvivorPresetMoHDoctor
   name: ministry of health doctor preset
   components:
   - type: SurvivorPreset
-    randomOutfits:
-    - [ RMCJumpsuitCivilian ]
-    - [ RMCJumpsuitCivilianBrown ]
+    randomStartingGear:
+      back:
+      - CMSatchel
+      - RMCSatchelBlack
+      - RMCSatchelBlue
+      neck:
+      - RMCNeckTieBlack
+      - RMCNeckTie
+      - RMCNeckTieGreen
+      - RMCNeckTiePurple
+      - RMCNeckTieRed
+      shoes:
+      - RMCShoesLaceup
+      - RMCShoesLaceupBrown
+      outerClothing:
+      - RMCLabcoatLong
+      - RMCLabcoat
+      jumpsuit:
+      - CMJumpsuitLiaisonBrown
+      - CMJumpsuitLiaisonBlue
+      - CMJumpsuitLiaisonBlack
 
 

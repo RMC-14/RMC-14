@@ -34,8 +34,6 @@
   id: RMCGearSurvivorReactorTechnician
   equipment:
     jumpsuit: RMCJumpsuitCivilianWhiteAlt
-    ears: CMHeadsetColony
-    id: CMIDCardColonist
 
 - type: entity
   parent: CMSpawnPointJobBase

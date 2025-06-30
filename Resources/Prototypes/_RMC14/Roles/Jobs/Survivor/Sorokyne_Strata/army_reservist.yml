@@ -48,13 +48,13 @@
   id: RMCGearSurvivorArmyReservist
   equipment:
     suitstorage: RMCWeaponRifleAK4047
-    id: RMCIDCardPaP
     jumpsuit: RMCJumpsuitSPPArmy
     shoes: CMBootsBlackFilled
     gloves: RMCHandsVeteran
     belt: RMCBeltSPPBrownHalfFill
     back: RMCSatchelLightpack5Slot
     ears: RMCHeadsetSPP
+    id: RMCIDSPP
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidSPPArmyFill
 

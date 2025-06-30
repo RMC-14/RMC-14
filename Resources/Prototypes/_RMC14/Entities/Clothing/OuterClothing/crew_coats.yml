@@ -121,9 +121,23 @@
 
 - type: entity
   parent: RMCLabcoat
+  id: RMCLabcoatLong
+  suffix: Long
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/long.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/long.rsi
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoatLong]
+  id: RMCLabcoatLongOpened
+  name: labcoat
+
+- type: entity
+  parent: RMCLabcoat
   id: RMCLabcoatShort
   suffix: Short
-  name: labcoat
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/short.rsi
@@ -133,6 +147,21 @@
 - type: entity
   parent: [RMCBaseJacketButtonableOpened, RMCLabcoatShort]
   id: RMCLabcoatShortOpened
+  name: labcoat
+
+- type: entity
+  parent: RMCLabcoat
+  id: RMCLabcoatBrown
+  suffix: Brown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/brown.rsi
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoatBrown]
+  id: RMCLabcoatBrownOpened
   name: labcoat
 
 - type: entity
