@@ -30,7 +30,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
+  parent: RMCGearSurvivor
   id: RMCGearSurvivorSoroCivilian
   equipment:
     mask: RMCMaskGasSPP

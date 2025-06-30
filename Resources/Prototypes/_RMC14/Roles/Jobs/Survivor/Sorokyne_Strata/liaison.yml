@@ -33,7 +33,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
+  parent: RMCGearSurvivorCorporate
   id: RMCGearSurvivorHalcyonDynamicsLiaison
   equipment:
     id: RMCIDCardHalcyon
