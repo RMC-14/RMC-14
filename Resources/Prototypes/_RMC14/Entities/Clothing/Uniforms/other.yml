@@ -313,6 +313,28 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/chaplain_uniform.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianVirologist
+  name: virologist's uniform
+  description: It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/virologists_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/virologists_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianScientist
+  name: scientist's utility jumpsuit
+  description: It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer as a scientist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/scientist_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/scientist_jumpsuit.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase

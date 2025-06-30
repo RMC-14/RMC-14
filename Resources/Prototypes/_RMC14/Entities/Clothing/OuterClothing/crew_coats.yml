@@ -165,6 +165,23 @@
   name: labcoat
 
 - type: entity
+  parent: RMCLabcoat
+  id: RMCLabcoatVirology
+  suffix: Virology
+  name: Virologist labcoat
+  description: A suit that protects against minor chemical spills. Offers slightly more protection against biohazards than the standard model. Has a green stripe on the shoulder.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/virologist.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/virologist.rsi
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoatVirology]
+  id: RMCLabcoatVirologyOpened
+  name: labcoat
+
+- type: entity
   parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
   id: RMCMedicalApron
   name: medical apron
