@@ -89,14 +89,7 @@
       components:
       - Marine
   - type: ProjectileMaxRange
-    max: 4
-
-  - type: entity
-    parent: XenoChargedSpitProjectile
-    id: XenoChargedSpitProjectileQueen
-    components:
-    - type: ProjectileMaxRange
-      max: 5
+    max: 5
 
 - type: entity
   id: XenoSlowingSpitProjectile
@@ -331,7 +324,7 @@
   - type: RMCProjectileAccuracy
     accuracy: 160
   - type: ProjectileMaxRange
-    max: 6
+    max: 7
 
 - type: entity
   parent: XenoSpitProjectile
