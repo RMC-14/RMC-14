@@ -20,6 +20,6 @@
     faction: FactionSPP
 
 - type: entity
-  parent: [ RMCIDSPP, RMCIDCardStandardDogtagHidden ]
+  parent: [ RMCIDCardStandardDogtagHidden, RMCIDSPP ]
   id: RMCIDSPPHidden
   categories: [ HideSpawnMenu ]
