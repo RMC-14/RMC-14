@@ -341,10 +341,17 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: xeno_spit
     event: !type:XenoSpitActionEvent
-    useDelay: 2
+    useDelay: 2.5
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoSpitPraetorian
+  parent: ActionXenoSpit
+  components:
+  - type: EntityWorldTargetAction
+    useDelay: 2
 
 - type: entity
   parent: CMGuidebookActionXenoBase
