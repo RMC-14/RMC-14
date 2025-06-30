@@ -410,8 +410,11 @@
   - type: WorldTargetAction
     useDelay: 10
   - type: ActionSharedCooldown
+    id: ActionXenoSprayAcidBoiler
     ids:
     - ActionXenoAcidShroud
+    activeIds:
+    - ActionXenoBombard
 
 - type: entity
   parent: ActionXenoSprayAcid
@@ -730,6 +733,8 @@
     id: ActionXenoBombard
     ids:
     - ActionXenoAcidShroud
+    activeIds:
+    - ActionXenoSprayAcidBoiler
     cooldown: 30
     onPerform: false
   - type: ActionBlockIfResting

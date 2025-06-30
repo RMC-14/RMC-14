@@ -85,10 +85,14 @@ public sealed class RMCActionsSystem : EntitySystem
                 continue;
 
             // Same ID or primary ID found in subset of other action's ids
-            if (!((shared.Id != null && shared.Id == action.Comp.Id) ||
-                (action.Comp.Id != null && shared.Ids.Contains(action.Comp.Id.Value))))
+            if (!(shared.Id != null && shared.Id == action.Comp.Id ||
+                action.Comp.Id != null && shared.Ids.Contains(action.Comp.Id.Value)))
             {
-                continue;
+                if (!(shared.Id != null && shared.Id == action.Comp.Id ||
+                    action.Comp.Id != null && shared.ActiveIds.Contains(action.Comp.Id.Value)))
+                {
+                    continue;
+                }
             }
 
             comp.Enabled = newStatus;
