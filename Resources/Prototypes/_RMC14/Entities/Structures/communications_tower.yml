@@ -175,7 +175,7 @@
         - MobLayer
   - type: Sprite
     sprite: _RMC14/Structures/communications_tower_alt.rsi
-    offset: 0.5, 1.5
+    offset: 0, 1
     state: comm_tower_destroyed
   - type: Appearance
   - type: InteractedBlacklist
