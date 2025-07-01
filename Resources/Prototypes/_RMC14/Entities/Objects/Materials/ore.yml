@@ -1,0 +1,282 @@
+# TODO RMC14 - Implement missing chemicals then make these ores extactable.
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCOreBase
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/ore.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Materials/ore.rsi
+    size: Normal
+  - type: Tag
+    tags:
+    - Ore
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 20
+        mask:
+          - ItemMask
+        restitution: 0.3
+        friction: 0.2
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCCoal
+  name: carbonaceous rock
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: Coal
+  - type: Sprite
+    state: coal
+  - type: Material
+  - type: SolutionContainerManager
+    solutions:
+      coal:
+        reagents:
+        - ReagentId: RMCCarbon
+          Quantity: 8.4
+        - ReagentId: Ammonia # TODO RMC14
+          Quantity: 0.8
+        - ReagentId: RMCHydrogen
+          Quantity: 0.5
+        - ReagentId: RMCSulfur
+          Quantity: 0.2
+        - ReagentId: RMCMercury
+          Quantity: 0.1
+  - type: Item
+    heldPrefix: coal
+
+- type: entity
+  parent: RMCCoal
+  id: RMCCoal1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCDiamondOre
+  name: diamonds
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: DiamondOre
+  - type: Sprite
+    state: diamond
+  - type: Material
+  - type: SolutionContainerManager
+    solutions:
+      diamondore:
+        reagents:
+        - ReagentId: Carbon
+          Quantity: 20
+  - type: Item
+    heldPrefix: diamonds
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCGoldOre
+  name: native gold ore
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: GoldOre
+  - type: Sprite
+    state: gold
+  - type: Material
+  - type: SolutionContainerManager
+    solutions:
+      goldore:
+        reagents:
+        - ReagentId: Gold
+          Quantity: 10
+  - type: Item
+    heldPrefix: gold
+
+- type: entity
+  parent: RMCGoldOre
+  id: RMCGoldOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: RMCDiamondOre
+  id: RMCDiamondOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCIronOre
+  name: hematite
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: IronOre
+  - type: Sprite
+    state: iron
+  - type: Material
+  - type: SolutionContainerManager
+    solutions:
+      ironore:
+        reagents:
+        - ReagentId: Iron
+          Quantity: 10
+  - type: Item
+    heldPrefix: iron
+
+- type: entity
+  parent: RMCIronOre
+  id: RMCIronOre1
+  suffix: Single
+  components:
+    - type: Stack
+      count: 1
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCPlasmaOre
+  name: phoron crystals
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: PlasmaOre
+  - type: Sprite
+    state: phoron
+  - type: Material
+  - type: PointLight
+    radius: 1.2
+    energy: 0.6
+    castShadows: false
+    color: "#e592e7"
+  - type: SolutionContainerManager
+    solutions:
+      plasmaore:
+        reagents:
+        - ReagentId: RMCPhoron
+          Quantity: 10
+  - type: Item
+    heldPrefix: plasma
+
+- type: entity
+  parent: RMCPlasmaOre
+  id: RMCPlasmaOre1
+  suffix: Single
+  components:
+    - type: Stack
+      count: 1
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCPlatinumOre
+  name: raw platinum
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: PlatinumOre
+  - type: Sprite
+    state: platinum
+  - type: Material
+  - type: SolutionContainerManager
+    solutions:
+      platinumore:
+        reagents:
+        - ReagentId: RMCPlatinum
+          Quantity: 10
+  - type: Item
+    heldPrefix: silver
+
+- type: entity
+  parent: RMCPlatinumOre
+  id: RMCPlatinumOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: reagent
+  id: RMCPlatinum
+  name: reagent-name-rmc-platinum
+  group: Elements
+  desc: reagent-desc-rmc-platinum
+  physicalDesc: reagent-physical-desc-reasonably-metallic
+  flavor: metallic
+  color: "#edf5ff"
+  boilingPoint: 3825.0
+  meltingPoint: 1768.0
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCSilverOre
+  name: native silver ore
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: SilverOre
+  - type: Sprite
+    state: silver
+  - type: Material
+  - type: SolutionContainerManager
+    solutions:
+      silverore:
+        reagents:
+        - ReagentId: Silver
+          Quantity: 10
+  - type: Item
+    heldPrefix: silver
+
+- type: entity
+  parent: RMCSilverOre
+  id: RMCSilverOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: RMCOreBase
+  id: RMCUraniumOre
+  name: pitchblende
+  description: An ore containing Uranium. Just looking at it makes your head feel fuzzy... it's slightly luminescent.
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: UraniumOre
+  - type: Sprite
+    state: uranium
+  - type: Material
+  - type: PointLight
+    radius: 1.2
+    energy: 0.8
+    castShadows: false
+    color: "#9be792"
+  - type: SolutionContainerManager
+    solutions:
+      uraniumore:
+        reagents:
+        - ReagentId: Uranium
+          Quantity: 10
+        canReact: false
+  - type: Item
+    heldPrefix: uranium
+
+- type: entity
+  parent: RMCUraniumOre
+  id: RMCUraniumOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
