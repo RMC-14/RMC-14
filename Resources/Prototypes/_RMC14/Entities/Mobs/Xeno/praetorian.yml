@@ -132,7 +132,6 @@
         Heat: 5
     acid: XenoAcidSprayAcidStacks
     plasmaCost: 80
-    doAfter: 0.5
   - type: XenoLeap
     plasmaCost: 40
     delay: 0
