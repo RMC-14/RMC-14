@@ -1,0 +1,55 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPlanetDarkGreyBase
+  name: tiles-cm-default-dark-grey
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: CMFloorSteelPlanetVault0
+  sprite: /Textures/_RMC14/Tiles/floors/vault_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: CMFloorSteelPlanetVault1
+  sprite: /Textures/_RMC14/Tiles/floors/vault_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: CMFloorSteelPlanetVault2
+  sprite: /Textures/_RMC14/Tiles/floors/vault_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: CMFloorSteelPlanetVault3
+  sprite: /Textures/_RMC14/Tiles/floors/vault_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: CMFloorSteelPlanetVault4
+  sprite: /Textures/_RMC14/Tiles/floors/vault_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: CMFloorSteelPlanetVault5
+  sprite: /Textures/_RMC14/Tiles/floors/vault_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: CMFloorSteelPlanetVault6
+  sprite: /Textures/_RMC14/Tiles/floors/vault_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: CMFloorSteelPlanetVault7
+  sprite: /Textures/_RMC14/Tiles/floors/vault_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: RMCFloorSteelPlanetDark
+  sprite: /Textures/_RMC14/Tiles/floors/dark.png
+
+- type: tile
+  parent: CMFloorSteelPlanetDarkGreyBase
+  id: RMCFloorSteelPlanetRockVault
+  sprite: /Textures/_RMC14/Tiles/floors/rockvault.png
