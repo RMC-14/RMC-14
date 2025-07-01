@@ -1788,7 +1788,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private string GetRandomOperationName()
     {
-
         if (_usingCustomOperationName && OperationName != null)
         {
             _usingCustomOperationName = false;
