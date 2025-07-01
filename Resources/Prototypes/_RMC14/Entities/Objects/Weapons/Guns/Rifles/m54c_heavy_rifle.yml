@@ -82,7 +82,6 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentBipod
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
