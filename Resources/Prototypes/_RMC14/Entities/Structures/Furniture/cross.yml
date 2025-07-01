@@ -14,3 +14,4 @@
     sprite: _RMC14/Structures/Furniture/cross.rsi
     state: cross1
   - type: Appearance
+  - type: Clickable

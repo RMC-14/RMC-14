@@ -174,7 +174,7 @@
         mask:
         - MobLayer
   - type: Sprite
-    sprite: _RMC14/Structures/communications_tower.rsi
+    sprite: _RMC14/Structures/communications_tower_alt.rsi
     offset: 0.5, 1.5
     state: comm_tower_destroyed
   - type: Appearance
