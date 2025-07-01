@@ -5,6 +5,7 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Clickable
   - type: Transform
     anchored: true
   - type: Physics
