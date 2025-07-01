@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Skarletto
-  changes:
-  - message: Removed the ability to drag and drop containers into the chem master
-    type: Remove
-  id: 1414
-  time: '2025-03-02T06:22:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5587
 - author: Ian321
   changes:
   - message: Improvements to the pill making process.
@@ -5193,5 +5186,14 @@
   id: 1915
   time: '2025-07-01T01:26:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6855
+- author: J C Denton
+  changes:
+  - message: 'Fiorina updated. Including, but not limited to: Medilathe, Armory equipment,
+      Atmos props, Computers, Random weapon spawners, Cases and Barrels, Powerloader
+      pamphlets, HEFA Knights holy texts.'
+    type: Tweak
+  id: 1916
+  time: '2025-07-01T04:14:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6853
 Name: RMC14
 Order: -1
