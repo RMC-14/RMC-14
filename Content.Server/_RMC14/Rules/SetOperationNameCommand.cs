@@ -12,7 +12,6 @@ namespace Content.Server._RMC14.Rules;
 [ToolshedCommand, AdminCommand(AdminFlags.Round)]
 public sealed class SetOperationNameCommand : ToolshedCommand
 {
-
     [CommandImplementation]
     public void Run(IInvocationContext ctx, string customname)
     {
