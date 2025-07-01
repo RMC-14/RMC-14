@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e77c994c8b3fcf97b13886de7c56c6b407108598/icons/obj/structures/machinery/comm_tower3.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e77c994c8b3fcf97b13886de7c56c6b407108598/icons/obj/structures/machinery/comm_tower3.dmi,https://github.com/cmss13-devs/cmss13/blob/e77c994c8b3fcf97b13886de7c56c6b407108598/icons/obj/structures/machinery/comm_tower.dmi",
   "size": {
     "x": 64,
     "y": 128
@@ -71,6 +71,12 @@
           0.2
         ]
       ]
+    },
+    {
+      "name": "comm_tower_off"
+    },
+    {
+      "name": "comm_tower_destroyed"
     }
   ]
 }
