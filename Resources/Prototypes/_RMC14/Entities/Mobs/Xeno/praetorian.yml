@@ -94,7 +94,6 @@
     barricadeDamage:
       types:
         Heat: 5
-    doAfter: 0.5
     range: 7
   - type: TacticalMapIcon
     icon:
