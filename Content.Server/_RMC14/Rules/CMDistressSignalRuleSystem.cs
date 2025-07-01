@@ -178,6 +178,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private float _hijackShipWeight;
     private int _hijackMinBurrowed;
     private int _xenosMinimum;
+    private bool _usingCustomOperationName;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -1698,6 +1699,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMap = planet;
     }
 
+    public void SetCustomOperationName(string customname)
+    {
+        OperationName = customname;
+        _usingCustomOperationName = true;
+    }
+
     private void StartPlanetVote()
     {
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
@@ -1781,6 +1788,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private string GetRandomOperationName()
     {
+        if (_usingCustomOperationName && OperationName != null)
+        {
+            _usingCustomOperationName = false;
+
+            return OperationName;
+        }
+
         var name = string.Empty;
         if (_operationNames.Count > 0)
             name += $"{_random.Pick(_operationNames)} ";

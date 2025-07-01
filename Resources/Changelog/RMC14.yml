@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: CO's secure box containing Honor Guard kits for CIC armory.
-    type: Add
-  id: 1412
-  time: '2025-03-02T05:48:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5692
-- author: blueDev2
-  changes:
-  - message: Added Hive Cluster, a hive limited structure that spreads hive weeds
-      around it.
-    type: Add
-  - message: Added Eggmorpher, a hive limited structure that requires hive weeds and
-      passively creates parasites.
-    type: Add
-  - message: Added Recover Node, a hive limited structure that requires hive weeds
-      and heals a single nearby Xeno.
-    type: Add
-  - message: Xeno eggs must now be planted on Hive Weeds.
-    type: Tweak
-  - message: Marines (Talls) must now be nested on weed walls from hive weeds or on
-      resin walls with hive weeds under them.
-    type: Tweak
-  id: 1413
-  time: '2025-03-02T05:57:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4978
-- author: Skarletto
-  changes:
-  - message: Removed the ability to drag and drop containers into the chem master
-    type: Remove
-  id: 1414
-  time: '2025-03-02T06:22:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5587
 - author: Ian321
   changes:
   - message: Improvements to the pill making process.
@@ -5192,5 +5159,41 @@
   id: 1913
   time: '2025-06-28T02:50:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6715
+- author: Dygon
+  changes:
+  - message: Fix lurker and praetorian tackles applying a stun that was up to twice
+      as long as intended.
+    type: Fix
+  id: 1914
+  time: '2025-06-30T07:46:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6870
+- author: noctyrnal
+  changes:
+  - message: Added Calendars. These display the current date, and any in-universe
+      holidays that occur on the current date.
+    type: Add
+  - message: Added the Improvised Flamethrower. A replacement for the M34 Incinerator
+      on most planet maps, it cannot take any attachments but a rail flashlight and
+      cannot transfer fuel to the M34 and vice versa.
+    type: Add
+  - message: LV has received a large update.
+    type: Tweak
+  - message: Updated the sprites for hydroponic tools, portable generators, computer
+      frames, ores and the nuke disk.
+    type: Tweak
+  - message: Updated the survivor spawn icon.
+    type: Tweak
+  id: 1915
+  time: '2025-07-01T01:26:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6855
+- author: J C Denton
+  changes:
+  - message: 'Fiorina updated. Including, but not limited to: Medilathe, Armory equipment,
+      Atmos props, Computers, Random weapon spawners, Cases and Barrels, Powerloader
+      pamphlets, HEFA Knights holy texts.'
+    type: Tweak
+  id: 1916
+  time: '2025-07-01T04:14:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6853
 Name: RMC14
 Order: -1
