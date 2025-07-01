@@ -19,6 +19,6 @@ public sealed class PillSystem : EntitySystem
         if (!sprite.TryGetLayer(0, out var layer))
             return;
 
-        layer.SetState($"pill{component.PillType}");
+        layer.SetState($"pill{component.PillType + 1}");
     }
 }
