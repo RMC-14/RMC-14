@@ -648,7 +648,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         var ev = new XenoFruitConsumeDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.ConsumeDelay, ev, fruit, user)
+        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.ConsumeDelay, ev, fruit, user, fruit)
         {
             NeedHand = true,
             BreakOnMove = true,
@@ -696,7 +696,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
             return false;
         }
-        else if(!_hive.FromSameHive(user, target))
+        else if (!_hive.FromSameHive(user, target))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-wrong-hive", ("target", target)), user, user, PopupType.SmallCaution);
             return false;
@@ -722,7 +722,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         var fruitFeedSpeed = TryComp<XenoFruitPlanterComponent>(user, out var planter) ? planter.FruitFeedingMultiplier : 1;
 
         var ev = new XenoFruitConsumeDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.ConsumeDelay * fruitFeedSpeed, ev, fruit, target)
+        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.ConsumeDelay * fruitFeedSpeed, ev, fruit, target, fruit)
         {
             NeedHand = true,
             BreakOnMove = true,
