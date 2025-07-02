@@ -47,4 +47,10 @@ public sealed partial class XenoResinSurgeComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan FruitCooldownDivisor = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId SurgeWallEffect = "XenoSurgeResinWall";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId SurgeDoorEffect = "XenoSurgeResinDoor";
 }

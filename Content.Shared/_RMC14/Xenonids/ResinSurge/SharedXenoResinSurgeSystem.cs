@@ -10,6 +10,7 @@ using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
@@ -143,6 +144,13 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
 
                 _xenoReinforce.Reinforce(entity, xeno.Comp.ReinforceAmount, xeno.Comp.ReinforceDuration);
+                if (_net.IsServer)
+                {
+                    if (HasComp<DoorComponent>(entity))
+                        SpawnAttachedTo(xeno.Comp.SurgeDoorEffect, entity.ToCoordinates());
+                    else
+                        SpawnAttachedTo(xeno.Comp.SurgeWallEffect, entity.ToCoordinates());
+                }
                 return;
             }
 
