@@ -727,6 +727,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         {
             NeedHand = true,
             BreakOnMove = true,
+            BreakOnHandChange = true,
             RequireCanInteract = true
         };
 
