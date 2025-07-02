@@ -67,13 +67,14 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         }
     }
 
-    private void ReduceSurgeCooldown(Entity<XenoResinSurgeComponent> xeno, TimeSpan? cooldown = null)
+
+    private void ReduceSurgeCooldown(Entity<XenoResinSurgeComponent> xeno, double? cooldownMult = null)
     {
         foreach (var action in _actions.GetActions(xeno))
         {
             if (TryComp(action.Id, out XenoResinSurgeActionComponent? actionComp))
             {
-                _actions.SetCooldown(action.Id, cooldown ?? actionComp.FailCooldown);
+                _actions.SetCooldown(action.Id, actionComp.SuccessCooldown * (cooldownMult ?? actionComp.FailCooldownMult));
                 break;
             }
         }
@@ -159,6 +160,10 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 }
 
                 _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-fruit", ("target", entity)), xeno, xeno);
+                args.Handled = false;
+                var cooldownTimeMult = (fruit.GrowTime.TotalSeconds - (fruit.GrowTime / xeno.Comp.FruitCooldownDivisor)) * 0.1;
+                ReduceSurgeCooldown(xeno, cooldownTimeMult);
+
                 return;
             }
 
