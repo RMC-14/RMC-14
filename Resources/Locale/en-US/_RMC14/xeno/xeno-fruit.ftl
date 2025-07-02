@@ -62,7 +62,7 @@ rmc-xeno-fruit-feed-success-target = {CAPITALIZE(THE($user))} fed us {THE($fruit
 rmc-xeno-fruit-feed-success-others = {CAPITALIZE(THE($user))} fed {THE($target)} {THE($fruit)}.
 
 # Fruit removed
-rmc-xeno-fruit-destroyed = We sense one of our fruit has been destroyed!
+rmc-xeno-fruit-destroyed = We sense one of our fruits has been destroyed!
 rmc-xeno-fruit-consumed = One of our resin fruits has been consumed.
 rmc-xeno-fruit-picked = One of our resin fruits has been picked.
 

@@ -652,7 +652,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         {
             NeedHand = true,
             BreakOnMove = true,
-            RequireCanInteract = true
+            RequireCanInteract = true,
+            TargetEffect = "RMCEffectHealBusy"
         };
 
         var popupSelf = Loc.GetString("rmc-xeno-fruit-eat-fail-self", ("fruit", fruit));
