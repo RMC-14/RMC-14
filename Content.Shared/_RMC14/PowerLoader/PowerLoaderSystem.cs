@@ -228,6 +228,18 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnUserGrab(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
     {
+        if (!TryComp(ent, out StrapComponent? strap))
+            return;
+
+        var grab = new PowerLoaderGrabEvent(ent, args.Target, strap.BuckledEntities);
+        RaiseLocalEvent(args.Target, ref grab);
+
+        if (grab.ToGrab != null)
+        {
+            PickUp(ent, grab.ToGrab.Value);
+            return;
+        }
+
         if (!CanPickupPopup(ent, args.Target, out var delay))
             return;
 
