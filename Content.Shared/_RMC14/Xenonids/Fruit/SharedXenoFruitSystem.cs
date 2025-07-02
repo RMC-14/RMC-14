@@ -791,7 +791,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         _popup.PopupClient(Loc.GetString(fruit.Comp.Popup), target, target, PopupType.Medium);
 
         // If neither the user nor the target were the planter, inform the planter as well
-        if (args.User != fruit.Comp.Planter)
+        if (args.User != fruit.Comp.Planter && args.Target != fruit.Comp.Planter)
             GardenerFruitActionMessage(fruit, "rmc-xeno-fruit-consumed");
 
         SetFruitState(fruit, XenoFruitState.Eaten);
