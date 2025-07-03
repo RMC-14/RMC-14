@@ -328,9 +328,15 @@
         amount: 3
     - name: Extended Ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 2
       - id: CMMagazineSMGM63Ext
         amount: 2
       - id: CMMagazineRifleM54CExt
+        amount: 2
+      - id: RMCMagazinePistolM13Ext
+        amount: 2
+      - id: RMCMagazinePistolM13Drum
         amount: 2
     - name: Special Ammunition
       entries:
@@ -403,7 +409,7 @@
         amount: 5
       - id: CMMultitool
         amount: 1
-      - id: CMWelder
+      - id: CMWelderSmall
         amount: 1
     - name: Flare and light
       entries:
@@ -477,18 +483,20 @@
         amount: 3
       - id: RMCAttachmentSuppressor
         amount: 3
+      # - id: RMCAttachmentShotgunChoke
+      #   amount: 2
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 2
       - id: RMCAttachmentMagneticHarness
-        amount: 5
+        amount: 4
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
       - id: RMCAttachmentS5RedDotSight
-        amount: 4
+        amount: 3
       - id: RMCAttachmentS6ReflexSight
-        amount: 4
+        amount: 3
       - id: RMCAttachmentS84xTelescopicScope
         amount: 2
     - name: Underbarrel
