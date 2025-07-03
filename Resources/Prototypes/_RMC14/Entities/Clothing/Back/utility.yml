@@ -1,0 +1,17 @@
+- type: entity
+  parent: Clothing
+  id: RMCBackpackParachute
+  name: parachute
+  description: A surprisingly small yet bulky pack with just enough safety straps to make RnD pass health and safety. The label says the pack comes with two parachutes - main and reserve, but you doubt the pack can fit even one.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/parachute.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Huge
+  - type: Clothing
+    slots:
+    - back
+  - type: ClothingIgnoreBlockBackpack
+  - type: GrantParaDroppable
