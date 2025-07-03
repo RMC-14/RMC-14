@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed sentient paras being puttable in egg morphers
-    type: Fix
-  - message: Fixed para AI not going into eggmorphers
-    type: Fix
-  - message: Fixed para AI incorrectly trying to leap on nested people, they will
-      manual infect instead.
-    type: Fix
-  id: 1422
-  time: '2025-03-02T22:48:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5789
 - author: Ian321
   changes:
   - message: Role icons for foxtrot are now visible.
@@ -5084,5 +5072,12 @@
   id: 1923
   time: '2025-07-03T02:27:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6808
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed being able to point while unconscious
+    type: Fix
+  id: 1924
+  time: '2025-07-03T09:10:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6859
 Name: RMC14
 Order: -1
