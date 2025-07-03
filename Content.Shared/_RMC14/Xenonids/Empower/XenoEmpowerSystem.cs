@@ -1,8 +1,8 @@
 using Content.Shared._RMC14.Aura;
-using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Shields;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -17,7 +17,6 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -43,8 +42,8 @@ public sealed class XenoEmpowerSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damagable = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     public override void Initialize()
@@ -204,11 +203,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
         _stun.TryParalyze(args.Hit, xeno.Comp.StunDuration, true);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(args.Hit);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.FlingDistance;
-
-        _throwing.TryThrow(args.Hit, diff, 10);
+        _sizeStun.KnockBack(args.Hit, origin, xeno.Comp.FlingDistance, xeno.Comp.FlingDistance, 10, true);
     }
 
     public override void Update(float frameTime)
