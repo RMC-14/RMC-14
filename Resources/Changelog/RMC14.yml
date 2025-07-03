@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: 5 new Nightmare Inserts added to Solaris Ridge.
-    type: Add
-  id: 1420
-  time: '2025-03-02T19:14:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5778
 - author: DrSmugleaf
   changes:
   - message: Fixed the tactical map show area labels setting not saving.
@@ -5083,5 +5076,12 @@
   id: 1921
   time: '2025-07-03T02:22:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6876
+- author: Dygon
+  changes:
+  - message: Green fire now reduces the armor of fortified defenders and the queen.
+    type: Fix
+  id: 1922
+  time: '2025-07-03T02:26:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6841
 Name: RMC14
 Order: -1
