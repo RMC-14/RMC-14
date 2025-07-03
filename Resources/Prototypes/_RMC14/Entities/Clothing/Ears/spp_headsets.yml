@@ -184,8 +184,8 @@
 - type: entity
   parent: RMCHeadsetDistressSPP
   id: RMCHeadsetDistressHalcyon
-  name: halycon corporate headset
-  description: A headset commonly worn by Halycon Dynamics corporate personnel.
+  name: halcyon corporate headset
+  description: A headset commonly worn by Halcyon Dynamics corporate personnel.
   components:
   - type: ContainerFill
     containers:
