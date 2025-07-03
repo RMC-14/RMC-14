@@ -19,6 +19,8 @@ using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Content.Shared.Pointing;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -66,6 +68,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
         SubscribeLocalEvent<RMCUnconsciousComponent, ComponentStartup>(OnUnconsciousStart);
         SubscribeLocalEvent<RMCUnconsciousComponent, ComponentShutdown>(OnUnconsciousEnd);
         SubscribeLocalEvent<RMCUnconsciousComponent, StatusEffectEndedEvent>(OnUnconsciousUpdate);
+        SubscribeLocalEvent<RMCUnconsciousComponent, PointAttemptEvent>(OnUnconsciousPointAttempt);
 
         SubscribeLocalEvent<RMCKnockOutOnCollideComponent, ProjectileHitEvent>(OnKnockOutCollideProjectileHit);
         SubscribeLocalEvent<RMCKnockOutOnCollideComponent, ThrowDoHitEvent>(OnKnockOutCollideThrowHit);
@@ -343,6 +346,15 @@ public sealed class RMCSizeStunSystem : EntitySystem
         EnsureComp<MutedComponent>(ent);
         EnsureComp<DeafComponent>(ent);
     }
+
+    private void OnUnconsciousPointAttempt(Entity<RMCUnconsciousComponent> ent, ref PointAttemptEvent args)
+    {
+        if (!_status.HasStatusEffect(ent, KnockedOut))
+            return;
+
+        args.Cancel();
+    }
+
     private void OnKnockOutCollideProjectileHit(Entity<RMCKnockOutOnCollideComponent> ent, ref ProjectileHitEvent args)
     {
         TryKnockOut(args.Target, ent.Comp.ParalyzeTime);
