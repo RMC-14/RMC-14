@@ -74,7 +74,6 @@ public abstract class SharedPumpActionSystem : EntitySystem
     {
         if (TryComp<GunComponent>(ent.Owner, out var gun) && gun.BurstActivated)
         {
-            _popup.PopupClient($"BurstActivated: {gun.BurstActivated}", user, user);
             return true;
         }
 
