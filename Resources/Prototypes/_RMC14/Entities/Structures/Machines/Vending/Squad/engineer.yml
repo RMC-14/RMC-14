@@ -35,7 +35,7 @@
       entries:
     #- id: CMAirlockCircuitBoard
     #  points: 2
-      - id: CMAPCCircuitBoard
+      - id: CMAPCElectronics
         points: 2
       - id: CMEntrenchingTool
         points: 2
