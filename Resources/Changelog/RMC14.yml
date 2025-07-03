@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Role icons for foxtrot are now visible.
-    type: Fix
-  id: 1423
-  time: '2025-03-02T22:48:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5791
 - author: DrSmugleaf
   changes:
   - message: Fixed radio messages not being deleted by admin erase.
@@ -5079,5 +5072,13 @@
   id: 1924
   time: '2025-07-03T09:10:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6859
+- author: Dygon
+  changes:
+  - message: Lurker tackles now convert into a light attack when Crippling Strike
+      is active.
+    type: Fix
+  id: 1925
+  time: '2025-07-03T09:11:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6871
 Name: RMC14
 Order: -1
