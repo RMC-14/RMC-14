@@ -10,6 +10,7 @@
     anchored: true
   - type: Physics
     bodyType: Static
+    canCollide: False
   - type: Sprite
     sprite: _RMC14/Structures/glowshroom.rsi
     layers:
