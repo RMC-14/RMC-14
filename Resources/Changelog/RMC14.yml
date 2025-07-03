@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Improvements to the pill making process.
-    type: Tweak
-  id: 1415
-  time: '2025-03-02T06:22:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5758
 - author: chaussettes1999
   changes:
   - message: Added 3 new suitskirt options in the Corporate Liaison vendor.
@@ -5195,5 +5188,13 @@
   id: 1916
   time: '2025-07-01T04:14:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6853
+- author: Dygon
+  changes:
+  - message: Fixed Queen Acid Spit and Spitter Charged Spit range being 1 tile too
+      long (6 > 5).
+    type: Fix
+  id: 1917
+  time: '2025-07-03T02:18:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6873
 Name: RMC14
 Order: -1
