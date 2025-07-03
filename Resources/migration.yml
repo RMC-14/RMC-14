@@ -1181,3 +1181,9 @@ ClosetL3SecurityFilled: CMClosetBioSecurityFilled
 ClosetL3JanitorFilled: CMClosetBioJanitorFilled
 ClosetL3ScienceFilled: CMClosetBioScientistFilled
 ClosetL3: CMClosetBio
+
+# 2025-07-03
+ClosetL3Virology: CMClosetBioVirology
+ClosetL3Security: CMClosetBioSecurity
+ClosetL3Janitor: CMClosetBioJanitor
+ClosetL3Science: CMClosetBioScientist
