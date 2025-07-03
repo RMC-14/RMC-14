@@ -65,6 +65,9 @@ public sealed class PlanetMapLoadTest
             config.SetCVar(CCVars.GameLobbyEnabled, false);
         });
 
+        await pair.WaitCommand("forcepreset TestPreset");
+        await PoolManager.WaitUntil(server, () => ticker.RunLevel != GameRunLevel.PreRoundLobby);
+
         await pair.CleanReturnAsync();
     }
 }
