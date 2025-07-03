@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the tactical map show area labels setting not saving.
-    type: Fix
-  - message: Fixed Oppressor Praetorian abduct not having a max cap of targets. It
-      can now hit a maximum of 10 marines at once.
-    type: Fix
-  id: 1421
-  time: '2025-03-02T21:23:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5788
 - author: Vermidia
   changes:
   - message: Fixed sentient paras being puttable in egg morphers
@@ -5083,5 +5073,16 @@
   id: 1922
   time: '2025-07-03T02:26:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6841
+- author: Dygon
+  changes:
+  - message: Fix some knockback effects knocking you back too far.
+    type: Fix
+  - message: Fix the Defender's Tail sweep, Valkyrie's Dislocate, Warrior's Punch
+      and Oppressor's Tail Seize abilities slamming you into obstacles while they
+      shouldn't.
+    type: Fix
+  id: 1923
+  time: '2025-07-03T02:27:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6808
 Name: RMC14
 Order: -1
