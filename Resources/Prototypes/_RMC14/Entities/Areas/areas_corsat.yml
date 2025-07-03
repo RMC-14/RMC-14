@@ -4,13 +4,21 @@
   name: CORSAT
   suffix: CORSAT Area
   components:
-  - type: Sprite
-    sprite: _RMC14/Areas/areas_corsat.rsi
-    state: corsat_hull
-  - type: Area
-    buildSpecial: true
-    powerNet: ground
-    minimapColor: '#C19504E7'
+    - type: Sprite
+      sprite: _RMC14/Areas/areas_corsat.rsi
+      state: corsat_hull
+    - type: Area
+      buildSpecial: true
+      CAS: true
+      fulton: true
+      mortarPlacement: true
+      mortarFire: true
+      lasing: true
+      medevac: true
+      OB: true
+      supplyDrop: true
+      weatherEnabled: true
+      minimapColor: "#6C6767D8"
 
 - type: entity
   parent: RMCAreaCorsat
@@ -35,6 +43,16 @@
   components:
     - type: Sprite
       state: corsat_hull
+    - type: Area
+      CAS: false
+      fulton: false
+      lasing: false
+      mortarPlacement: false
+      mortarFire: false
+      medevac: false
+      OB: false
+      supplyDrop: false
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsat
@@ -59,6 +77,8 @@
   components:
     - type: Sprite
       state: sigma_hangar
+    - type: Area
+      linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaCorsatSigmaHangar
@@ -83,6 +103,16 @@
   components:
     - type: Sprite
       state: railcart
+    - type: Area
+      CAS: false
+      fulton: false
+      lasing: false
+      mortarPlacement: false
+      mortarFire: false
+      medevac: false
+      OB: false
+      supplyDrop: false
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsatSigmaHangarMonorail
@@ -91,6 +121,17 @@
   components:
     - type: Sprite
       state: railcart
+    - type: Area
+      CAS: false
+      fulton: false
+      lasing: false
+      mortarPlacement: false
+      mortarFire: false
+      medevac: false
+      OB: false
+      supplyDrop: false
+      weatherEnabled: false
+      noTunnel: true
 
 - type: entity
   parent: RMCAreaCorsatSigmaHangar
@@ -243,6 +284,16 @@
   components:
     - type: Sprite
       state: secondary_core
+    - type: Area
+      CAS: true
+      fulton: true
+      mortarPlacement: false
+      mortarFire: true
+      lasing: false
+      medevac: false
+      OB: true
+      supplyDrop: true
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsatSigmaSoutheast
@@ -251,6 +302,16 @@
   components:
     - type: Sprite
       state: corsat_telecomms
+    - type: Area
+      CAS: true
+      fulton: true
+      mortarPlacement: false
+      mortarFire: true
+      lasing: false
+      medevac: false
+      OB: true
+      supplyDrop: true
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsatSigmaSoutheast
@@ -259,6 +320,16 @@
   components:
     - type: Sprite
       state: sigma_data_lab
+    - type: Area
+      CAS: true
+      fulton: true
+      mortarPlacement: false
+      mortarFire: true
+      lasing: false
+      medevac: false
+      OB: true
+      supplyDrop: true
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsatSigmaSoutheast
@@ -300,6 +371,16 @@
     - type: Sprite
       sprite: _RMC14/Areas/areas.rsi
       state: shuttle
+    - type: Area
+      CAS: true
+      fulton: true
+      mortarPlacement: false
+      mortarFire: true
+      lasing: false
+      medevac: false
+      OB: true
+      supplyDrop: true
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsatSigmaSouth
@@ -388,6 +469,8 @@
   components:
     - type: Sprite
       state: gamma_hangar
+    - type: Area
+      linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaCorsatGammaHangar
@@ -412,6 +495,16 @@
   components:
     - type: Sprite
       state: railcart
+    - type: Area
+      CAS: false
+      fulton: false
+      lasing: false
+      mortarPlacement: false
+      mortarFire: false
+      medevac: false
+      OB: false
+      supplyDrop: false
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsatGammaHangar
@@ -765,6 +858,16 @@
     - type: Sprite
       sprite: _RMC14/Areas/areas.rsi
       state: shuttle
+    - type: Area
+      CAS: false
+      fulton: false
+      lasing: false
+      mortarPlacement: false
+      mortarFire: false
+      medevac: false
+      OB: false
+      supplyDrop: false
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsatGamma
@@ -773,6 +876,16 @@
   components:
     - type: Sprite
       state: gamma_airlock_north
+    - type: Area
+      CAS: true
+      fulton: true
+      mortarPlacement: true
+      mortarFire: true
+      lasing: true
+      medevac: true
+      OB: true
+      supplyDrop: true
+      weatherEnabled: true
 
 - type: entity
   parent: RMCAreaCorsatGammaAirlockNorth
@@ -805,6 +918,16 @@
   components:
     - type: Sprite
       state: gamma_control
+    - type: Area
+      CAS: true
+      fulton: true
+      mortarPlacement: true
+      mortarFire: true
+      lasing: true
+      medevac: true
+      OB: true
+      supplyDrop: true
+      weatherEnabled: true
 
 - type: entity
   parent: RMCAreaCorsatGamma
@@ -813,6 +936,16 @@
   components:
     - type: Sprite
       state: gamma_biodome
+    - type: Area
+      CAS: true
+      fulton: true
+      mortarPlacement: true
+      mortarFire: true
+      lasing: true
+      medevac: true
+      OB: true
+      supplyDrop: true
+      weatherEnabled: true
 
 - type: entity
   parent: RMCAreaCorsatGammaBiodome
@@ -845,6 +978,16 @@
   components:
     - type: Sprite
       state: corsat_hull
+    - type: Area
+      CAS: true
+      fulton: true
+      mortarPlacement: true
+      mortarFire: true
+      lasing: true
+      medevac: true
+      OB: true
+      supplyDrop: true
+      weatherEnabled: true
 
 - type: entity
   parent: RMCAreaCorsatTheta
@@ -925,6 +1068,16 @@
   components:
     - type: Sprite
       state: corsat_hull
+    - type: Area
+      CAS: false
+      fulton: false
+      lasing: false
+      mortarPlacement: false
+      mortarFire: false
+      medevac: false
+      OB: false
+      supplyDrop: false
+      weatherEnabled: false
 
 - type: entity
   parent: RMCAreaCorsatOmega
@@ -1061,3 +1214,14 @@
   components:
     - type: Sprite
       state: corsat_hull
+    - type: Area
+      CAS: false
+      fulton: false
+      lasing: false
+      mortarPlacement: false
+      mortarFire: false
+      medevac: false
+      OB: false
+      supplyDrop: false
+      weatherEnabled: false
+      noTunnel: true
