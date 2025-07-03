@@ -101,6 +101,9 @@
     canPry: false # TODO RMC14
   - type: XenoCrusherChargable
     instantDestroy: true
+  - type: DestroyedByExplosionType
+    threshold: 75
+    explosion: RMC
 
 - type: entity
   parent: RMCPodDoor
