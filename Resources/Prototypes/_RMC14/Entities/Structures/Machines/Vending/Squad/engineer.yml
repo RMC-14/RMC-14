@@ -88,6 +88,8 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 6
+      - id: CMMagazineRifleM4SPRExt
+        points: 6
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -331,8 +333,6 @@
     sections:
     - name: Equipment
       entries:
-      - id: CMHandsInsulated
-        amount: 2
       - id: CMBeltUtility
         name: utility tool belt
         amount: 4

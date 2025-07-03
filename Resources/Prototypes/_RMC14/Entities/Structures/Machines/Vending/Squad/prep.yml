@@ -346,10 +346,8 @@
       #  amount: 2
       - id: RMCSpeedLoader44Marksman
         amount: 2
-      - id: RMCMagazinePistolM13Ext
-        amount: 6
-      - id: RMCMagazinePistolM13Drum
-        amount: 6
+      - id: RMCMagazinePistolM1984AP
+        amount: 2
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80
