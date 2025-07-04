@@ -19,7 +19,7 @@
     - RMCSeat
 
 - type: entity
-  parent: ChairFolding
+  parent: [ CMSeatBase, BaseDeployFoldable ]
   id: CMChair
   name: chair
   description: A rectangular metallic frame sitting on four legs with a back panel. Designed to fit the sitting position, more or less comfortably.
@@ -32,6 +32,8 @@
     - state: chair_folded
       map: ["foldedLayer"]
       visible: false
+  - type: Item
+    size: Huge
   - type: MeleeWeapon
     damage:
       types:
@@ -46,6 +48,7 @@
   - type: Construction
     graph: CMSeat
     node: chair
+  - type: DamageExaminable
 
 - type: entity
   parent: CMChair
