@@ -46,6 +46,9 @@
   - type: Construction
     graph: CMSeat
     node: chair
+  - type: RMCStaminaDamageOnHit
+    requiresWield: true
+    damage: 17
 
 - type: entity
   parent: CMChair
