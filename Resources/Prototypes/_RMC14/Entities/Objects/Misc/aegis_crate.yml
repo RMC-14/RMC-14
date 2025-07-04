@@ -13,7 +13,7 @@
     - type: RotatingLight
       speed: 90
     - type: Sprite
-      sprite: _RMC14/Secure-Box.rsi
+      sprite: _RMC14/Objects/secure_box.rsi
       noRot: true
       layers:
         - state: aegis_crate
