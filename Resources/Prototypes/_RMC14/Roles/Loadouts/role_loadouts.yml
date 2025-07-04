@@ -21,6 +21,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMDropshipCrewChief
@@ -41,6 +42,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMPilotDropship
@@ -61,6 +63,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMPilotGunship
@@ -81,6 +84,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMIntelOfficer
@@ -101,6 +105,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Command
 - type: roleLoadout
@@ -124,6 +129,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMExecutiveOfficer
@@ -144,6 +150,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMStaffOfficer
@@ -164,6 +171,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Engineering
 - type: roleLoadout
@@ -185,6 +193,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMMaintTech
@@ -205,6 +214,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMOrdnanceTech
@@ -225,6 +235,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Squad Roles
 - type: roleLoadout
@@ -246,6 +257,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMFireteamLeader
@@ -266,6 +278,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMHospitalCorpsman
@@ -286,6 +299,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMRifleman
@@ -306,6 +320,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMSmartGunOperator
@@ -326,6 +341,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMSquadLeader
@@ -346,6 +362,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMWeaponsSpecialist
@@ -366,6 +383,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Medical
 - type: roleLoadout
@@ -387,6 +405,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMDoctor
@@ -407,6 +426,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMNurse
@@ -427,6 +447,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMResearcher
@@ -447,6 +468,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Military Police
 - type: roleLoadout
@@ -457,6 +479,7 @@
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
+  - ChiefMPRoleSpecificRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - RecreationalRMC
@@ -468,6 +491,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMMilitaryPolice
@@ -488,6 +512,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMMilitaryWarden
@@ -508,6 +533,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Other
 - type: roleLoadout
@@ -529,6 +555,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMLiaison
@@ -549,6 +576,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMMessTech
@@ -569,6 +597,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMSeniorEnlistedAdvisor
@@ -589,6 +618,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobRMCJobSynthetic
@@ -605,6 +635,7 @@
   - RecreationalRMC
   - PlushiesRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Requsitions
 - type: roleLoadout
@@ -626,6 +657,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMQuartermaster
@@ -646,3 +678,4 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC

@@ -10,6 +10,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -64,7 +65,9 @@ public abstract class SharedSynthSystem : EntitySystem
         if (ent.Comp.StunResistance != null)
             _rmcStatusEffects.GiveStunResistance(ent.Owner, ent.Comp.StunResistance.Value);
 
-        _mobThreshold.SetMobStateThreshold(ent.Owner, ent.Comp.CritThreshold, MobState.Critical);
+        if (TryComp<MobThresholdsComponent>(ent.Owner, out var thresholds))
+            _mobThreshold.SetMobStateThreshold(ent.Owner, ent.Comp.CritThreshold, MobState.Critical, thresholds);
+
         RemCompDeferred<SlowOnDamageComponent>(ent.Owner);
     }
 
