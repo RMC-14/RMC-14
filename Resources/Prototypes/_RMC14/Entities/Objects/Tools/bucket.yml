@@ -144,7 +144,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Specific/Chemistry/reagent_jug/jug.rsi
-
     layers:
     - state: reagentjug
     - map: [ "enum.SolutionContainerLayers.Fill" ]
@@ -154,7 +153,7 @@
       map: ["enum.OpenableVisuals.Layer"]
       visible: false
   - type: Item
-    sprite: _RMC14/Objects/Misc/reagentjug.rsi
+    sprite: _RMC14/Objects/Specific/Chemistry/reagent_jug/jug.rsi
     size: Normal
   - type: SolutionContainerVisuals
     maxFillLevels: 5
