@@ -7,4 +7,7 @@ public sealed partial class RMCStaminaDamageOnHitComponent : Component
 {
     [DataField]
     public double Damage;
+
+    [DataField]
+    public bool RequiresWield = false;
 }
