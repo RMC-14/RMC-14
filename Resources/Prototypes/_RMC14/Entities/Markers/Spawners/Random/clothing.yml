@@ -25,9 +25,9 @@
     prototypes:
     - RMCWeldingGogglesSuperior
     - RMCGlassesJensen
-    - # TODO RMC14 refurbished meson scanner
-    - # TODO RMC14 RMCGlassesReagentHUDGlasses
-    - # TODO RMC14 SensorMate HUD
+    #- TODO RMC14 refurbished meson scanner
+    #- TODO RMC14 RMCGlassesReagentHUDGlasses
+    #- TODO RMC14 SensorMate HUD
     - RMCGlassesHUDSecurity
 
 - type: entity

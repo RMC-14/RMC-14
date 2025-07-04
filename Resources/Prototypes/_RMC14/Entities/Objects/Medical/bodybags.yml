@@ -198,8 +198,12 @@
     state: reactivetarp_closed
   - type: RMCPassiveStealth
     toggleable: true
-    minOpacity: 0.05
-    delay: 1.5
+    minOpacity: 0.30
+    delay: 15
+    uncloakdelay: 3
+    whitelist:
+      components:
+      - Marine
   - type: EntityStorageVisuals
     stateDoorOpen: reactivetarp_open
 
@@ -237,6 +241,7 @@
     toggleable: true
     minOpacity: 0.05
     delay: 1.5
+    uncloakdelay: 1.5
     whitelist:
       components:
       - ScoutWhitelist
