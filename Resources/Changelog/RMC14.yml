@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed helmet accessories not fitting inside patrol caps.
-    type: Fix
-  id: 1425
-  time: '2025-03-06T05:05:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5806
 - author: DummeHytteOst
   changes:
   - message: fixed taking damage stopping prying.
@@ -5080,5 +5073,16 @@
   id: 1926
   time: '2025-07-04T22:59:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6898
+- author: noctyrnal
+  changes:
+  - message: Solaris has received a large update.
+    type: Add
+  - message: Xenonids can no longer inspect calendars.
+    type: Tweak
+  - message: Space cleaner now uses the correct sprite.
+    type: Fix
+  id: 1927
+  time: '2025-07-04T23:18:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6900
 Name: RMC14
 Order: -1
