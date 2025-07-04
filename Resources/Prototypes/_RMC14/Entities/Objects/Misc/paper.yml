@@ -151,7 +151,7 @@
 - type: entity
   parent: CMPaper
   id: CMPaperAegisInfoFax
-  name: almayer emergency storage note2
+  name: High Command Transmission
   components:
     - type: Paper
       stampState: paper_stamp-marine
