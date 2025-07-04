@@ -41,6 +41,7 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: mst
+    - type: RMCAllowSuitStorage
 
 - type: startingGear
   id: CMGearMessTech
