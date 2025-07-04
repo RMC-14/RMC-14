@@ -37,14 +37,14 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 8
+        Blunt: 1
     soundHit:
-      collection: MetalThud
+      path: /Audio/_RMC14/Items/metal_chair_clang.ogg
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 5
+        Blunt: 10
   - type: Construction
     graph: CMSeat
     node: chair
