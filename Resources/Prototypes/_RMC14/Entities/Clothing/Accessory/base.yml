@@ -8,7 +8,7 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
       enum.UniformAccessoriesUi.Key:
-        type: UniformAccessoriesBuiMsg
+        type: UniformAccessoryBui
 
 - type: entity
   abstract: true
