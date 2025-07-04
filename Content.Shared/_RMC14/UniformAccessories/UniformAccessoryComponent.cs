@@ -27,4 +27,7 @@ public sealed partial class UniformAccessoryComponent : Component
 
     [DataField, AutoNetworkedField]
     public string? LayerKey;
+
+    [DataField, AutoNetworkedField]
+    public bool HasIconSprite = false;
 }

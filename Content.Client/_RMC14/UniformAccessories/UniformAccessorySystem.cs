@@ -52,7 +52,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             if (accessoryComp.PlayerSprite is not { } sprite)
                 continue;
 
-            if (clothingSprite != null)
+            if (clothingSprite != null && ent.Comp.HasIconSprite)
             {
                 var clothingLayer = clothingSprite.LayerMapReserveBlank(layer);
                 clothingSprite.LayerSetVisible(clothingLayer, !accessoryComp.Hidden);

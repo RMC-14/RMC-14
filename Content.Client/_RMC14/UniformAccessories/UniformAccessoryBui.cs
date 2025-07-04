@@ -48,9 +48,6 @@ public sealed class UniformAccessoryBui : BoundUserInterface
         if (!EntMan.TryGetComponent(Owner, out UniformAccessoryHolderComponent? holderComponent))
             return;
 
-        if (!EntMan.TryGetComponent(Owner, out MetaDataComponent? metaData))
-            return;
-
         if (!_container.TryGetContainer(Owner, holderComponent.ContainerId, out var container))
             return;
 
@@ -58,6 +55,9 @@ public sealed class UniformAccessoryBui : BoundUserInterface
 
         foreach (var accessory in container.ContainedEntities)
         {
+            if (!EntMan.TryGetComponent(accessory, out MetaDataComponent? metaData))
+                continue;
+
             var button = new RadialMenuTextureButton
             {
                 StyleClasses = { "RadialMenuButton" },
@@ -65,14 +65,15 @@ public sealed class UniformAccessoryBui : BoundUserInterface
                 ToolTip = metaData.EntityName,
             };
 
-            var spriteView = new SpriteView(accessory, EntMan)
+            var spriteView = new SpriteView
             {
                 OverrideDirection = Direction.South,
-                VerticalAlignment = Control.VAlignment.Center,
-                HorizontalAlignment = Control.HAlignment.Center,
-                SetSize = new Vector2(2f, 2f),
-                VerticalExpand = true,
+                Scale = new Vector2(2f, 2f),
+                MaxSize = new Vector2(112, 112),
+                Stretch = SpriteView.StretchMode.Fill,
             };
+
+            spriteView.SetEntity(accessory);
 
             var netEnt = EntMan.GetNetEntity(accessory);
             button.OnButtonDown += _ => SendPredictedMessage(new UniformAccessoriesBuiMsg(netEnt));

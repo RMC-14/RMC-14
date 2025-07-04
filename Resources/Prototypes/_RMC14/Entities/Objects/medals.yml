@@ -11,6 +11,7 @@
     category: Medal
     limit: 2
     layerKey: "enum.MedalVisualLayers.Base"
+    hasIconSprite: true
 
 # Marine medals
 
