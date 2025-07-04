@@ -1,5 +1,6 @@
 ﻿- type: entity
   id: FactionSPP
+  categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
   - type: FactionFrequencies
@@ -17,3 +18,8 @@
   components:
   - type: ItemIFF
     faction: FactionSPP
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCIDSPP ]
+  id: RMCIDSPPHidden
+  categories: [ HideSpawnMenu ]

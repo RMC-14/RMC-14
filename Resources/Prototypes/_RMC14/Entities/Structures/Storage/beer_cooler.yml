@@ -1,0 +1,88 @@
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseBagOpenClose ]
+  id: RMCBeerCoolerBase
+  name: freezer crate
+  description: A cozy cooler for your beer and other beverages.
+  suffix: Empty
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,3
+    maxItemSize: Normal
+    whitelist:
+      tags:
+        - RMCAlcohol
+        - RMCCannedDrink
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/beer_cooler.rsi
+    noRot: true
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCBeerCoolerBase
+  id: RMCBeerCooler
+  components:
+  - type: Sprite
+    state: beer_cooler
+    layers:
+    - state: beer_cooler
+    - state: beer_cooler-open
+      map: ["openLayer"]
+
+- type: entity
+  parent: RMCBeerCooler
+  id: RMCBeerCoolerFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDrinkCanBeerLite
+      prob: 0.5
+    - id: CMDrinkCanBeerLite
+      prob: 0.5
+    - id: CMDrinkCanBeerLite
+      prob: 0.4
+    - id: CMDrinkCanBeerLite
+      prob: 0.4
+    - id: CMDrinkCanAle
+      prob: 0.3
+    - id: CMDrinkCanAle
+      prob: 0.3
+    - id: CMDrinkCanTonic
+      prob: 0.1
+    - id: CMDrinkCanTonic
+      prob: 0.1
+    - id: RMCDrinkAlcoholVodka
+      prob: 0.01
+    - id: RMCDrinkAlcoholWhiskey
+      prob: 0.01
+    - id: RMCDrinkAlcoholRum
+      prob: 0.01

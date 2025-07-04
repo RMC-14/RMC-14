@@ -114,3 +114,4 @@
 - type: entity
   parent: SprayBottleSpaceCleaner
   id: RMCSprayBottleSpaceCleaner # TODO RMC14
+  suffix: RMC
