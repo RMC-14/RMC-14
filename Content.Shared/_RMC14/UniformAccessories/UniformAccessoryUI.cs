@@ -9,9 +9,15 @@ public enum UniformAccessoriesUi
 }
 
 [Serializable, NetSerializable]
-public sealed class UniformAccessoriesBuiMsg(NetEntity toRemove) : BoundUserInterfaceMessage
+public sealed class UniformAccessoriesBuiMsg : BoundUserInterfaceMessage
 {
-    public readonly NetEntity ToRemove = toRemove;
+    [DataField]
+    public readonly NetEntity ToRemove;
+
+    public UniformAccessoriesBuiMsg(NetEntity toRemove)
+    {
+        ToRemove = toRemove;
+    }
 }
 
 [Serializable, NetSerializable]
