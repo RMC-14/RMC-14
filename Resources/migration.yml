@@ -1181,3 +1181,7 @@ ClosetL3SecurityFilled: CMClosetBioSecurityFilled
 ClosetL3JanitorFilled: CMClosetBioJanitorFilled
 ClosetL3ScienceFilled: CMClosetBioScientistFilled
 ClosetL3: CMClosetBio
+
+# 2025-07-04
+SprayBottleSpaceCleaner: RMCSprayBottleSpaceCleaner
+WallGold: RMCWallGold
