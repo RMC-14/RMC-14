@@ -66,6 +66,7 @@
       damage:
         types:
           Blunt: 35
+    - type: RMCAllowSuitStorage
     - type: Synth
       generation: rmc-species-synth-generation-second
       welderDamageToRepair:
@@ -102,7 +103,6 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
-      - type: RMCAllowSuitStorage
   hidden: true
 
 - type: startingGear
