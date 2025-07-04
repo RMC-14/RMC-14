@@ -355,9 +355,9 @@
       - CigPack
       - RMCPenlight
       - Flare
+      - CMMiniTank
       #      - # TODO RMC14 reagent analyzer
       #      - # TODO RMC14 plant analyzer
-      #      - # TODO RMC14 minitank
       components:
       - Hypospray
       - Defibrillator

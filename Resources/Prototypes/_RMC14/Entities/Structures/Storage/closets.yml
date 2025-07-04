@@ -210,7 +210,7 @@
   parent: CMClosetBaseUnanchored
   id: RMCClosetGoldenArrowGear
   name: personal locker
-  description: An immobile storag unit.
+  description: An immobile storage unit.
   components:
   - type: EntityTableContainerFill
     containers:
