@@ -35,6 +35,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPrimary
     - type: SniperWhitelist
+    - type: SpotterWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-weapons-specialist-sniper
   hidden: true
