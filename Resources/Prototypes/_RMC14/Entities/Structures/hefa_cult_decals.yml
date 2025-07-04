@@ -3,6 +3,7 @@
   name: strange paint marks
   description: You think you can make out the iconography of a HEFA grenade.
   abstract: true
+  suffix: Floor
   placement:
     mode: SnapgridCenter
   components:
@@ -15,13 +16,12 @@
     sprite: _RMC14/Structures/hefa_decals.rsi
     drawdepth: FloorTiles
     noRot: false
-  - type: Icon
-    sprite: _RMC14/Structures/hefa_decals.rsi
 
 - type: entity
   parent: RMCHefaDecalBase
   id: RMCHefaDecalWallBase
   abstract: true
+  suffix: Wall
   components:
   - type: Sprite
     drawdepth: WallTops
@@ -70,41 +70,40 @@
   - type: Sprite
     sprite: _RMC14/Structures/hefa_decals_96.rsi
     state: summon_circle_alt
-    offset: 1,1
 
 # Wall
 
 - type: entity
   parent: RMCHefaDecalWallBase
-  id: RMCHefaDecal1
+  id: RMCHefaDecalWall1
   components:
   - type: Sprite
     state: 1
 
 - type: entity
   parent: RMCHefaDecalWallBase
-  id: RMCHefaDecal2
+  id: RMCHefaDecalWall2
   components:
   - type: Sprite
     state: 2
 
 - type: entity
   parent: RMCHefaDecalWallBase
-  id: RMCHefaDecal3
+  id: RMCHefaDecalWall3
   components:
   - type: Sprite
     state: 3
 
 - type: entity
   parent: RMCHefaDecalWallBase
-  id: RMCHefaDecal4
+  id: RMCHefaDecalWall4
   components:
   - type: Sprite
     state: 4
 
 - type: entity
   parent: RMCHefaDecalWallBase
-  id: RMCHefaDecalBee
+  id: RMCHefaDecalWallBee
   components:
   - type: Sprite
     state: bee

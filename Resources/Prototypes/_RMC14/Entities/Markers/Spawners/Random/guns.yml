@@ -292,7 +292,7 @@
     - CMWeaponLauncherM79: RMCSpawnerRandomGrenadePackets
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialLow
   suffix: Low Chance
   components:
@@ -304,7 +304,7 @@
     chanceToSpawn: 0.2
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialMed
   suffix: Medium Chance
   components:
@@ -316,7 +316,7 @@
     chanceToSpawn: 0.5
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialHigh
   suffix: High Chance
   components:
