@@ -37,6 +37,7 @@
     - type: MarineOrders
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-director
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: entity
