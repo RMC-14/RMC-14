@@ -5,6 +5,7 @@ using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared.ParaDrop;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Shared.Utility;
@@ -201,6 +202,10 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             _ => SendPredictedMessage(new DropshipTerminalWeaponsNightVisionMsg(false)));
         var cancel = ButtonAction("cancel", _ => SendPredictedMessage(new DropshipTerminalWeaponsCancelMsg(first)));
         var weapon = Button("weapon", StrikeWeapon);
+        var paraDropTarget = ButtonAction("lock",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(true)));
+        var paraDropUnTarget = ButtonAction("clear",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsParaDropTargetSelectMsg(false)));
 
         screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-main-screen-text");
         screen.ScreenLabel.VerticalAlignment = VAlignment.Stretch;
@@ -364,7 +369,13 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 );
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
-                screen.RightRow.SetData(one: previous, five: next);
+                break;
+            }
+            case Paradrop:
+            {
+                screen.BottomRow.SetData(exit);
+                screen.LeftRow.SetData(one: paraDropTarget, two: paraDropUnTarget);
+                screen.TopRow.SetData(equip);
                 break;
             }
             default:
@@ -416,13 +427,18 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 var utilityMount = utilityContainer.ContainedEntities[0];
                 if (EntMan.HasComponent<MedevacComponent>(utilityMount))
                 {
-                    text = "Medeva";
+                    text = "Medevac";
                     msg = new DropshipTerminalWeaponsChooseMedevacMsg(first);
                 }
                 else if (EntMan.HasComponent<RMCFultonComponent>(utilityMount))
                 {
                     text = "Fulton";
                     msg = new DropshipTerminalWeaponsChooseFultonMsg(first);
+                }
+                else if (EntMan.HasComponent<RMCParaDropComponent>(utilityMount))
+                {
+                    text = "PDS";
+                    msg = new DropshipTerminalWeaponsChooseParaDropMsg(first);
                 }
                 else
                 {

@@ -40,6 +40,7 @@ rmc-dropship-weapons-cams = CAMS
 rmc-dropship-weapons-cancel = CANCEL
 rmc-dropship-weapons-exit = EXIT
 rmc-dropship-weapons-lock = LOCK
+rmc-dropship-weapons-clear = CLEAR
 
 rmc-dropship-weapons-offset-calibration = Camera
   Offset
