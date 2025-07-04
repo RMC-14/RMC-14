@@ -18,7 +18,7 @@
       OB: true
       supplyDrop: true
       weatherEnabled: true
-      minimapColor: "#6C6767D8"
+      minimapColor: '#6C6767D8'
 
 - type: entity
   parent: RMCAreaCorsat
@@ -79,6 +79,7 @@
       state: sigma_hangar
     - type: Area
       linkedLz: dropship_lz2
+      minimapColor: '#ebe5e5e3'
 
 - type: entity
   parent: RMCAreaCorsatSigmaHangar
@@ -294,6 +295,7 @@
       OB: true
       supplyDrop: true
       weatherEnabled: false
+      minimapColor: '#c19504e7'
 
 - type: entity
   parent: RMCAreaCorsatSigmaSoutheast
@@ -362,6 +364,8 @@
   components:
     - type: Sprite
       state: sigma_complex
+    - type: Area
+      minimapColor: '#812da2ee'
 
 - type: entity
   parent: RMCAreaCorsatSigmaSouthComplex
@@ -389,6 +393,8 @@
   components:
     - type: Sprite
       state: robotics
+    - type: Area
+      minimapColor: '#c19504e7'
 
 - type: entity
   parent: RMCAreaCorsatSigmaSouth
@@ -397,6 +403,8 @@
   components:
     - type: Sprite
       state: sigma_engineering
+    - type: Area
+      minimapColor: '#c19504e7'
 
 - type: entity
   parent: RMCAreaCorsatSigmaSouth
@@ -405,6 +413,8 @@
   components:
     - type: Sprite
       state: sigma_security
+    - type: Area
+      minimapColor: '#a22d2dee'
 
 - type: entity
   parent: RMCAreaCorsatSigmaSouth
@@ -471,6 +481,7 @@
       state: gamma_hangar
     - type: Area
       linkedLz: dropship_lz1
+      minimapColor: '#ebe5e5e3'
 
 - type: entity
   parent: RMCAreaCorsatGammaHangar
@@ -681,6 +692,8 @@
   components:
     - type: Sprite
       state: corsat_medbay
+    - type: Area
+      minimapColor: '#3dbf75ee'
 
 - type: entity
   parent: RMCAreaCorsatGammaMedbay
@@ -753,6 +766,8 @@
   components:
     - type: Sprite
       state: corsat_administration
+    - type: Area
+      minimapColor: '#2d3fa2ee'
 
 - type: entity
   parent: RMCAreaCorsatGamma
@@ -761,6 +776,8 @@
   components:
     - type: Sprite
       state: gamma_security
+    - type: Area
+      minimapColor: '#a22d2dee'
 
 - type: entity
   parent: RMCAreaCorsatGammaSecurity
@@ -817,6 +834,8 @@
   components:
     - type: Sprite
       state: gamma_engineering
+    - type: Area
+      minimapColor: '#c19504e7'
 
 - type: entity
   parent: RMCAreaCorsatGammaEngineering
@@ -849,6 +868,8 @@
   components:
     - type: Sprite
       state: sigma_complex_remote
+    - type: Area
+      minimapColor: '#812da2ee'
 
 - type: entity
   parent: RMCAreaCorsatGammaSigmaremote
@@ -954,6 +975,8 @@
   components:
     - type: Sprite
       state: gamma_complex
+    - type: Area
+      minimapColor: '#812da2ee'
 
 - type: entity
   parent: RMCAreaCorsatGammaBiodome
@@ -962,6 +985,8 @@
   components:
     - type: Sprite
       state: gamma_virology
+    - type: Area
+      minimapColor: '#812da2ee'
 
 - type: entity
   parent: RMCAreaCorsatGammaBiodome
@@ -970,6 +995,8 @@
   components:
     - type: Sprite
       state: gamma_toxin
+    - type: Area
+      minimapColor: '#812da2ee'
 
 - type: entity
   parent: RMCAreaCorsat
@@ -1004,6 +1031,8 @@
   components:
     - type: Sprite
       state: theta_complex
+    - type: Area
+      minimapColor: '#812da2ee'
 
 - type: entity
   parent: RMCAreaCorsatThetaBiodome
@@ -1012,6 +1041,8 @@
   components:
     - type: Sprite
       state: theta_hydro_east
+    - type: Area
+      minimapColor: '#812da2ee'
 
 - type: entity
   parent: RMCAreaCorsatThetaBiodome
@@ -1134,6 +1165,8 @@
   components:
     - type: Sprite
       state: omega_complex
+    - type: Area
+      minimapColor: '#812da2ee'
 
 - type: entity
   parent: RMCAreaCorsatOmega
@@ -1150,6 +1183,8 @@
   components:
     - type: Sprite
       state: omega_security
+    - type: Area
+      minimapColor: '#a22d2dee'
 
 - type: entity
   parent: RMCAreaCorsatOmega
@@ -1158,6 +1193,8 @@
   components:
     - type: Sprite
       state: omega_checkpoint
+    - type: Area
+      minimapColor: '#a22d2dee'
 
 - type: entity
   parent: RMCAreaCorsatOmega
