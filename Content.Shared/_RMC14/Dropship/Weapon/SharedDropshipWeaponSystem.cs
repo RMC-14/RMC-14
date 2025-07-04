@@ -794,9 +794,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         // Can't drop underground
         if (!CasDebug &&
-            !_area.CanCAS(coordinates) ||
-            !_area.CanFulton(coordinates) ||
-            !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)))
+            (!_area.CanCAS(coordinates) ||
+             !_area.CanFulton(coordinates) ||
+             !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates))))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-cas");
             _popup.PopupCursor(msg, args.Actor);
@@ -811,6 +811,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             {
                 // TODO Only open the bottom doors instead of all doors
                 if (!TryComp(child, out DoorComponent? door) ||
+                    door.Location != DoorLocation.Aft ||
                     !TryComp(child, out DoorBoltComponent? doorBolt) ||
                     door.State == DoorState.Open)
                     continue;

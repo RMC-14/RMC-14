@@ -85,3 +85,12 @@ rmc-dropship-fabricator-busy = The dropship part fabricator is busy. Please wait
 
 rmc-dropship-firemission-warning = A DROPSHIP FIRES TOWARDS THE {$direction}
 rmc-dropship-firemission-warning-above = A DROPSHIP FIRES RIGHT ONTOP OF YOU!
+
+rmc-dropship-paradrop-target-screen-text = HPU-1 Paradrop Deployment System
+    {$hasTarget}
+
+rmc-dropship-paradrop-target-screen-target-none = No locked target found.
+    Paradropping not available.
+
+rmc-dropship-paradrop-target-screen-target-targeting = Locked to {$dropTarget}.
+    Paradropping available.

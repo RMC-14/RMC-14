@@ -373,6 +373,27 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             }
             case Paradrop:
             {
+                string? targetId = null;
+                if (terminal.Target != null &&
+                     _system.TryGetGridDropship(Owner, out var dropship) &&
+                     EntMan.TryGetComponent(dropship, out ActiveParaDropComponent? activeParaDrop) &&
+                    _weaponSystem.TryGetNetEntity(activeParaDrop.DropTarget, out var netTarget)
+                    )
+                {
+                    foreach (var potentialTarget in terminal.Targets)
+                    {
+                        if (potentialTarget.Id != netTarget)
+                            continue;
+
+                        targetId = potentialTarget.Name;
+                        break;
+                    }
+                }
+
+                screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-paradrop-target-screen-text",
+                    ("hasTarget", targetId == null
+                    ? Loc.GetString("rmc-dropship-paradrop-target-screen-target-none")
+                    : Loc.GetString("rmc-dropship-paradrop-target-screen-target-targeting",("dropTarget", targetId))));
                 screen.BottomRow.SetData(exit);
                 screen.LeftRow.SetData(one: paraDropTarget, two: paraDropUnTarget);
                 screen.TopRow.SetData(equip);

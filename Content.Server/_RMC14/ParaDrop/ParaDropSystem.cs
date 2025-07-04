@@ -21,13 +21,12 @@ public sealed partial class ParaDropSystem: SharedParaDropSystem
         var enumerator = Transform(ent).ChildEnumerator;
         while (enumerator.MoveNext(out var child))
         {
-            if (!HasComp<DockingComponent>(child)) //TODO Only lock the back doors
+            if (!TryComp(child, out DoorBoltComponent? bolt) ||
+                !TryComp(child, out DoorComponent? door) ||
+                door.Location != DoorLocation.Aft)
                 continue;
 
-            if (!TryComp(child, out DoorBoltComponent? bolt))
-                return;
-
-            _door.TrySetBoltDown((child, bolt), false);
+            _dropship.UnlockDoor(child);
             _dropship.LockDoor(child);
         }
     }
