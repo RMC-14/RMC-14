@@ -117,9 +117,13 @@
     labelTextLocId: rmc-bicaridine-container-label-text
 
 - type: entity
-  parent: [ CMPillCanister, RMCPillCanisterBicaridineNoSkill ]
+  parent: RMCPillCanisterBicaridineNoSkill
   id: CMPillCanisterBicaridine
   suffix: Bicaridine, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: CMPillCanister
@@ -190,9 +194,13 @@
     labelTextLocId: rmc-inaprovaline-container-label-text
 
 - type: entity
-  parent: [ CMPillCanister, RMCPillCanisterInaprovalineNoSkill ]
+  parent: RMCPillCanisterInaprovalineNoSkill
   id: CMPillCanisterInaprovaline
   suffix: Inaprovaline, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: RMCPillCanisterNoSkill
@@ -218,9 +226,13 @@
     labelTextLocId: rmc-kelotane-container-label-text
 
 - type: entity
-  parent: [ CMPillCanister, RMCPillCanisterKelotaneNoSkill ]
+  parent: CMPillCanister
   id: CMPillCanisterKelotane
   suffix: Kelotane, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: CMPillCanister
