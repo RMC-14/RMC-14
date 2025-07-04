@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed radio messages not being deleted by admin erase.
-    type: Fix
-  - message: Fixed admin erase chat message deletion causing your client to briefly
-      lag.
-    type: Fix
-  id: 1424
-  time: '2025-03-03T00:19:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5794
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed helmet accessories not fitting inside patrol caps.
@@ -5080,5 +5070,15 @@
   id: 1925
   time: '2025-07-03T09:11:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6871
+- author: J C Denton
+  changes:
+  - message: Fixed Shiva's Snowball north LZ shutter buttons not working.
+    type: Fix
+  - message: Fixed many Shiva's Snowball buckshot spawners using generic ones instead
+      of colony-specific.
+    type: Fix
+  id: 1926
+  time: '2025-07-04T22:59:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6898
 Name: RMC14
 Order: -1
