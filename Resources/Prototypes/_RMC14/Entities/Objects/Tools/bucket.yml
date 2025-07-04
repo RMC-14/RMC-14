@@ -143,7 +143,8 @@
   description: A large jug made of non-reactive plastic, capable of carrying large amounts of diverse chemicals to wherever they are needed. Holds 500 units.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Specific/Chemistry/reagent_jug/jug.rsi
+    sprite: _RMC14/Objects/Medical/reagentjug.rsi
+    
     layers:
     - state: reagentjug
     - map: [ "enum.SolutionContainerLayers.Fill" ]
@@ -153,7 +154,7 @@
       map: ["enum.OpenableVisuals.Layer"]
       visible: false
   - type: Item
-    sprite: _RMC14/Objects/Specific/Chemistry/reagent_jug/jug.rsi
+    sprite: _RMC14/Objects/Medical/reagentjug.rsi
     size: Normal
   - type: SolutionContainerVisuals
     maxFillLevels: 5
