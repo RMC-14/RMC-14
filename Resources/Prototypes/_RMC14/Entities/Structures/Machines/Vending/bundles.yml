@@ -2,8 +2,7 @@
   id: CMVendorBundleRiflemanApparel
   name: standard marine apparel
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -20,14 +19,13 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleFireteamLeaderApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a M12 helmet, a headset, insulated gloves and combat boots.
+  description: Contains a marine jumpsuit, a M12 helmet, a headset, and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
     - JumpsuitMarine
-    - CMHandsInsulated
     - CMBootsBlackFilled
 
 - type: entity
@@ -70,13 +68,12 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianApparel
   name: standard marine apparel
-  description: Contains a marine jumpsuit, a headset, insulated gloves and combat boots.
+  description: Contains a marine jumpsuit, a headset, and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquadComTech
     - CMJumpsuitMarineEngineer
-    - CMHandsInsulated
     - CMBootsBlackFilled
 
 - type: entity

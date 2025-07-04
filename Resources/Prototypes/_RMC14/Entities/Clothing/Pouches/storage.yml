@@ -257,6 +257,16 @@
     - id: CMMagazineSMGMP5
       amount: 4
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineType64
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGType64
+      amount: 4
+
 # Pistol Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine

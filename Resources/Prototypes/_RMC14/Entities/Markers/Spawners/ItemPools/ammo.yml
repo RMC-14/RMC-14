@@ -1,0 +1,28 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCItemPoolBase
+  name: survivor ammo pool
+  suffix: Base
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: ipool_surv_ammo
+  - type: ItemPoolSpawner
+    quota: 3
+
+- type: entity
+  parent: RMCItemPoolBase
+  id: RMCItemPoolBuckshot
+  name: survivor ammo pool
+  suffix: Buckshot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: ipool_bubshot
+  - type: ItemPoolSpawner
+    id: RMCItemPoolBuckshot
+    prototypes:
+    - RMCBoxShotgunBuckshot
