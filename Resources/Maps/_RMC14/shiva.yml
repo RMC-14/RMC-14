@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 251.0.1
+  engineVersion: 251.0.2
   forkId: ""
   forkVersion: ""
-  time: 05/30/2025 12:35:26
+  time: 07/03/2025 17:09:47
   entityCount: 17197
 maps:
 - 1
@@ -100,29 +100,29 @@ tilemap:
   20: FloorSteel
   883: Plating
   76: PlatingDamaged
-  654: RCMPlanetIce0
-  655: RCMPlanetIce1
-  656: RCMPlanetIce2
-  657: RCMPlanetIceComposite
-  715: RCMPlanetSnow1
-  716: RCMPlanetSnow2
-  717: RCMPlanetSnow3
-  718: RCMPlanetSnow4
-  721: RCMPlanetTallGrass
-  69: RCMPlanetTallGrassCompositeEast
-  16: RCMPlanetTallGrassCompositeSouth
-  18: RCMPlanetTallGrassCompositeSouthEast
-  17: RCMPlanetTallGrassCompositeSouthWest
-  15: RCMPlanetTallGrassCompositeWest
-  730: RCMPlanetTallGrassSnowEast
-  26: RCMPlanetTallGrassSnowNorth
-  13: RCMPlanetTallGrassSnowNorthEast
-  14: RCMPlanetTallGrassSnowNorthWest
-  734: RCMPlanetTallGrassSnowSouth
-  735: RCMPlanetTallGrassSnowSouthEast
-  27: RCMPlanetTallGrassSnowSouthWest
-  41: RCMPlanetTallGrassSnowWest
   92: RMCFloorCement8
+  654: RMCPlanetIce0
+  655: RMCPlanetIce1
+  656: RMCPlanetIce2
+  657: RMCPlanetIceComposite
+  715: RMCPlanetSnow1
+  716: RMCPlanetSnow2
+  717: RMCPlanetSnow3
+  718: RMCPlanetSnow4
+  721: RMCPlanetTallGrass
+  69: RMCPlanetTallGrassCompositeEast
+  16: RMCPlanetTallGrassCompositeSouth
+  18: RMCPlanetTallGrassCompositeSouthEast
+  17: RMCPlanetTallGrassCompositeSouthWest
+  15: RMCPlanetTallGrassCompositeWest
+  730: RMCPlanetTallGrassSnowEast
+  26: RMCPlanetTallGrassSnowNorth
+  13: RMCPlanetTallGrassSnowNorthEast
+  14: RMCPlanetTallGrassSnowNorthWest
+  734: RMCPlanetTallGrassSnowSouth
+  735: RMCPlanetTallGrassSnowSouthEast
+  27: RMCPlanetTallGrassSnowSouthWest
+  41: RMCPlanetTallGrassSnowWest
 entities:
 - proto: ""
   entities:
@@ -107071,7 +107071,7 @@ entities:
   - uid: 13396
     components:
     - type: Transform
-      pos: 6.5,147.75
+      pos: 6.5,147.5
       parent: 1
   - uid: 13397
     components:
@@ -107081,7 +107081,7 @@ entities:
   - uid: 13398
     components:
     - type: Transform
-      pos: 166.6875,151.375
+      pos: 166.6099,151.34616
       parent: 1
   - uid: 13399
     components:
@@ -116855,8 +116855,6 @@ entities:
       fixtures: {}
   - uid: 14922
     components:
-    - type: MetaData
-      name: button
     - type: Transform
       pos: 11.5,135.5
       parent: 1
@@ -118526,6 +118524,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 12.5,124.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15194
     components:
     - type: MetaData
@@ -118534,6 +118534,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 12.5,125.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15195
     components:
     - type: MetaData
@@ -118542,6 +118544,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 12.5,126.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15196
     components:
     - type: MetaData
@@ -118550,6 +118554,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 12.5,127.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15197
     components:
     - type: MetaData
@@ -118558,6 +118564,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.5,128.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15198
     components:
     - type: MetaData
@@ -118566,6 +118574,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.5,127.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15199
     components:
     - type: MetaData
@@ -118574,6 +118584,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.5,126.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15200
     components:
     - type: MetaData
@@ -118582,6 +118594,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.5,125.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15201
     components:
     - type: MetaData
@@ -118590,6 +118604,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.5,124.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15202
     components:
     - type: MetaData
@@ -118598,6 +118614,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.5,139.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15203
     components:
     - type: MetaData
@@ -118606,6 +118624,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.5,138.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15204
     components:
     - type: MetaData
@@ -118614,6 +118634,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 10.5,137.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15205
     components:
     - type: MetaData
@@ -118622,6 +118644,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,134.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15206
     components:
     - type: MetaData
@@ -118630,6 +118654,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,133.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15207
     components:
     - type: MetaData
@@ -118638,6 +118664,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 8.5,132.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15208
     components:
     - type: MetaData
@@ -118736,6 +118764,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 12.5,146.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15218
     components:
     - type: MetaData
@@ -118744,6 +118774,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 12.5,145.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15219
     components:
     - type: MetaData
@@ -118752,6 +118784,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 12.5,144.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15220
     components:
     - type: MetaData
@@ -118760,6 +118794,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 12.5,143.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15221
     components:
     - type: MetaData
@@ -118768,6 +118804,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 12.5,142.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15222
     components:
     - type: MetaData
@@ -118776,6 +118814,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 10.5,142.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15223
     components:
     - type: MetaData
@@ -118784,6 +118824,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 10.5,143.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15224
     components:
     - type: MetaData
@@ -118792,6 +118834,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 10.5,144.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15225
     components:
     - type: MetaData
@@ -118800,6 +118844,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 10.5,145.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15226
     components:
     - type: MetaData
@@ -118808,6 +118854,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 10.5,146.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
   - uid: 15227
     components:
     - type: Transform
@@ -118917,6 +118965,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 12.5,128.5
       parent: 1
+    - type: RMCPodDoor
+      id: nlz_shutters
 - proto: RMCSmallFloodlight
   entities:
   - uid: 15245
@@ -124129,688 +124179,688 @@ entities:
       pos: 212.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16211
     components:
     - type: Transform
       pos: 212.5,121.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16212
     components:
     - type: Transform
       pos: 213.5,122.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16213
     components:
     - type: Transform
       pos: 211.5,122.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16214
     components:
     - type: Transform
       pos: 214.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16300
       isSource: False
+      source: 16300
   - uid: 16215
     components:
     - type: Transform
       pos: 214.5,121.5
       parent: 1
     - type: XenoWeeds
-      source: 16300
       isSource: False
+      source: 16300
   - uid: 16216
     components:
     - type: Transform
       pos: 215.5,122.5
       parent: 1
     - type: XenoWeeds
-      source: 16300
       isSource: False
+      source: 16300
   - uid: 16217
     components:
     - type: Transform
       pos: 210.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16218
     components:
     - type: Transform
       pos: 210.5,121.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16219
     components:
     - type: Transform
       pos: 209.5,122.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16220
     components:
     - type: Transform
       pos: 210.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16221
     components:
     - type: Transform
       pos: 211.5,124.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16222
     components:
     - type: Transform
       pos: 209.5,124.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16223
     components:
     - type: Transform
       pos: 214.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16224
     components:
     - type: Transform
       pos: 215.5,124.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16225
     components:
     - type: Transform
       pos: 213.5,124.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16226
     components:
     - type: Transform
       pos: 212.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16297
       isSource: False
+      source: 16297
   - uid: 16227
     components:
     - type: Transform
       pos: 216.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16296
       isSource: False
+      source: 16296
   - uid: 16228
     components:
     - type: Transform
       pos: 213.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16229
     components:
     - type: Transform
       pos: 213.5,121.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16230
     components:
     - type: Transform
       pos: 214.5,126.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16231
     components:
     - type: Transform
       pos: 215.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16232
     components:
     - type: Transform
       pos: 213.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16233
     components:
     - type: Transform
       pos: 211.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16234
     components:
     - type: Transform
       pos: 212.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16235
     components:
     - type: Transform
       pos: 211.5,121.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16236
     components:
     - type: Transform
       pos: 215.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16300
       isSource: False
+      source: 16300
   - uid: 16237
     components:
     - type: Transform
       pos: 215.5,121.5
       parent: 1
     - type: XenoWeeds
-      source: 16300
       isSource: False
+      source: 16300
   - uid: 16238
     components:
     - type: Transform
       pos: 209.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16239
     components:
     - type: Transform
       pos: 208.5,124.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16240
     components:
     - type: Transform
       pos: 216.5,126.5
       parent: 1
     - type: XenoWeeds
-      source: 16296
       isSource: False
+      source: 16296
   - uid: 16241
     components:
     - type: Transform
       pos: 217.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16296
       isSource: False
+      source: 16296
   - uid: 16242
     components:
     - type: Transform
       pos: 211.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16243
     components:
     - type: Transform
       pos: 210.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16244
     components:
     - type: Transform
       pos: 209.5,121.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16245
     components:
     - type: Transform
       pos: 212.5,126.5
       parent: 1
     - type: XenoWeeds
-      source: 16297
       isSource: False
+      source: 16297
   - uid: 16246
     components:
     - type: Transform
       pos: 214.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16300
       isSource: False
+      source: 16300
   - uid: 16247
     components:
     - type: Transform
       pos: 208.5,122.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16248
     components:
     - type: Transform
       pos: 215.5,126.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16249
     components:
     - type: Transform
       pos: 212.5,127.5
       parent: 1
     - type: XenoWeeds
-      source: 16297
       isSource: False
+      source: 16297
   - uid: 16250
     components:
     - type: Transform
       pos: 213.5,126.5
       parent: 1
     - type: XenoWeeds
-      source: 16297
       isSource: False
+      source: 16297
   - uid: 16251
     components:
     - type: Transform
       pos: 211.5,126.5
       parent: 1
     - type: XenoWeeds
-      source: 16297
       isSource: False
+      source: 16297
   - uid: 16252
     components:
     - type: Transform
       pos: 212.5,119.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16253
     components:
     - type: Transform
       pos: 213.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16254
     components:
     - type: Transform
       pos: 211.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16255
     components:
     - type: Transform
       pos: 215.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16300
       isSource: False
+      source: 16300
   - uid: 16256
     components:
     - type: Transform
       pos: 216.5,127.5
       parent: 1
     - type: XenoWeeds
-      source: 16296
       isSource: False
+      source: 16296
   - uid: 16257
     components:
     - type: Transform
       pos: 217.5,126.5
       parent: 1
     - type: XenoWeeds
-      source: 16296
       isSource: False
+      source: 16296
   - uid: 16258
     components:
     - type: Transform
       pos: 208.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16259
     components:
     - type: Transform
       pos: 207.5,124.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16260
     components:
     - type: Transform
       pos: 210.5,119.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16261
     components:
     - type: Transform
       pos: 209.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16262
     components:
     - type: Transform
       pos: 214.5,127.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16263
     components:
     - type: Transform
       pos: 207.5,122.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16264
     components:
     - type: Transform
       pos: 207.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16265
     components:
     - type: Transform
       pos: 206.5,124.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16266
     components:
     - type: Transform
       pos: 212.5,118.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16267
     components:
     - type: Transform
       pos: 213.5,119.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16268
     components:
     - type: Transform
       pos: 211.5,119.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16269
     components:
     - type: Transform
       pos: 215.5,127.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16270
     components:
     - type: Transform
       pos: 210.5,118.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16271
     components:
     - type: Transform
       pos: 209.5,119.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16272
     components:
     - type: Transform
       pos: 213.5,127.5
       parent: 1
     - type: XenoWeeds
-      source: 16297
       isSource: False
+      source: 16297
   - uid: 16273
     components:
     - type: Transform
       pos: 206.5,122.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16274
     components:
     - type: Transform
       pos: 217.5,127.5
       parent: 1
     - type: XenoWeeds
-      source: 16296
       isSource: False
+      source: 16296
   - uid: 16275
     components:
     - type: Transform
       pos: 214.5,128.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16276
     components:
     - type: Transform
       pos: 216.5,128.5
       parent: 1
     - type: XenoWeeds
-      source: 16296
       isSource: False
+      source: 16296
   - uid: 16277
     components:
     - type: Transform
       pos: 212.5,128.5
       parent: 1
     - type: XenoWeeds
-      source: 16297
       isSource: False
+      source: 16297
   - uid: 16278
     components:
     - type: Transform
       pos: 206.5,123.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16279
     components:
     - type: Transform
       pos: 209.5,118.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16280
     components:
     - type: Transform
       pos: 208.5,119.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16281
     components:
     - type: Transform
       pos: 206.5,125.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16282
     components:
     - type: Transform
       pos: 215.5,128.5
       parent: 1
     - type: XenoWeeds
-      source: 16299
       isSource: False
+      source: 16299
   - uid: 16283
     components:
     - type: Transform
       pos: 211.5,118.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16284
     components:
     - type: Transform
       pos: 213.5,128.5
       parent: 1
     - type: XenoWeeds
-      source: 16297
       isSource: False
+      source: 16297
   - uid: 16285
     components:
     - type: Transform
       pos: 213.5,118.5
       parent: 1
     - type: XenoWeeds
-      source: 16301
       isSource: False
+      source: 16301
   - uid: 16286
     components:
     - type: Transform
       pos: 206.5,121.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16287
     components:
     - type: Transform
       pos: 217.5,128.5
       parent: 1
     - type: XenoWeeds
-      source: 16296
       isSource: False
+      source: 16296
   - uid: 16288
     components:
     - type: Transform
       pos: 208.5,118.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16289
     components:
     - type: Transform
       pos: 206.5,126.5
       parent: 1
     - type: XenoWeeds
-      source: 16298
       isSource: False
+      source: 16298
   - uid: 16290
     components:
     - type: Transform
       pos: 207.5,119.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16291
     components:
     - type: Transform
       pos: 206.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16292
     components:
     - type: Transform
       pos: 207.5,120.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16293
     components:
     - type: Transform
       pos: 207.5,118.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16294
     components:
     - type: Transform
       pos: 206.5,119.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
   - uid: 16295
     components:
     - type: Transform
       pos: 206.5,118.5
       parent: 1
     - type: XenoWeeds
-      source: 16302
       isSource: False
+      source: 16302
 - proto: XenoHiveWeedsSource
   entities:
   - uid: 16296
@@ -125013,4920 +125063,4920 @@ entities:
       pos: 198.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16310
     components:
     - type: Transform
       pos: 198.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16311
     components:
     - type: Transform
       pos: 199.5,47.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16312
     components:
     - type: Transform
       pos: 205.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16313
     components:
     - type: Transform
       pos: 205.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16314
     components:
     - type: Transform
       pos: 206.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16315
     components:
     - type: Transform
       pos: 204.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16316
     components:
     - type: Transform
       pos: 177.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16317
     components:
     - type: Transform
       pos: 177.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16318
     components:
     - type: Transform
       pos: 178.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16319
     components:
     - type: Transform
       pos: 176.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16320
     components:
     - type: Transform
       pos: 208.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16321
     components:
     - type: Transform
       pos: 208.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16322
     components:
     - type: Transform
       pos: 209.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16323
     components:
     - type: Transform
       pos: 207.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16324
     components:
     - type: Transform
       pos: 181.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16325
     components:
     - type: Transform
       pos: 181.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16326
     components:
     - type: Transform
       pos: 182.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16327
     components:
     - type: Transform
       pos: 180.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16328
     components:
     - type: Transform
       pos: 210.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16329
     components:
     - type: Transform
       pos: 210.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16330
     components:
     - type: Transform
       pos: 211.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16331
     components:
     - type: Transform
       pos: 200.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16932
       isSource: False
+      source: 16932
   - uid: 16332
     components:
     - type: Transform
       pos: 201.5,49.5
       parent: 1
     - type: XenoWeeds
-      source: 16932
       isSource: False
+      source: 16932
   - uid: 16333
     components:
     - type: Transform
       pos: 199.5,49.5
       parent: 1
     - type: XenoWeeds
-      source: 16932
       isSource: False
+      source: 16932
   - uid: 16334
     components:
     - type: Transform
       pos: 200.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16335
     components:
     - type: Transform
       pos: 201.5,47.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16336
     components:
     - type: Transform
       pos: 216.5,35.5
       parent: 1
     - type: XenoWeeds
-      source: 16933
       isSource: False
+      source: 16933
   - uid: 16337
     components:
     - type: Transform
       pos: 216.5,33.5
       parent: 1
     - type: XenoWeeds
-      source: 16933
       isSource: False
+      source: 16933
   - uid: 16338
     components:
     - type: Transform
       pos: 217.5,34.5
       parent: 1
     - type: XenoWeeds
-      source: 16933
       isSource: False
+      source: 16933
   - uid: 16339
     components:
     - type: Transform
       pos: 215.5,34.5
       parent: 1
     - type: XenoWeeds
-      source: 16933
       isSource: False
+      source: 16933
   - uid: 16340
     components:
     - type: Transform
       pos: 179.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16341
     components:
     - type: Transform
       pos: 179.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16342
     components:
     - type: Transform
       pos: 180.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16343
     components:
     - type: Transform
       pos: 216.5,31.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16344
     components:
     - type: Transform
       pos: 217.5,32.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16345
     components:
     - type: Transform
       pos: 215.5,32.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16346
     components:
     - type: Transform
       pos: 179.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16953
       isSource: False
+      source: 16953
   - uid: 16347
     components:
     - type: Transform
       pos: 178.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16953
       isSource: False
+      source: 16953
   - uid: 16348
     components:
     - type: Transform
       pos: 202.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16349
     components:
     - type: Transform
       pos: 202.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16350
     components:
     - type: Transform
       pos: 203.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16351
     components:
     - type: Transform
       pos: 201.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16352
     components:
     - type: Transform
       pos: 200.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16353
     components:
     - type: Transform
       pos: 200.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16354
     components:
     - type: Transform
       pos: 199.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16355
     components:
     - type: Transform
       pos: 214.5,39.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16356
     components:
     - type: Transform
       pos: 214.5,37.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16357
     components:
     - type: Transform
       pos: 215.5,38.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16358
     components:
     - type: Transform
       pos: 213.5,38.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16359
     components:
     - type: Transform
       pos: 212.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16360
     components:
     - type: Transform
       pos: 212.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16361
     components:
     - type: Transform
       pos: 213.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16362
     components:
     - type: Transform
       pos: 211.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16363
     components:
     - type: Transform
       pos: 214.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16364
     components:
     - type: Transform
       pos: 214.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16365
     components:
     - type: Transform
       pos: 215.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16366
     components:
     - type: Transform
       pos: 212.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16367
     components:
     - type: Transform
       pos: 213.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16368
     components:
     - type: Transform
       pos: 214.5,35.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16369
     components:
     - type: Transform
       pos: 215.5,36.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16370
     components:
     - type: Transform
       pos: 213.5,36.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16371
     components:
     - type: Transform
       pos: 202.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16372
     components:
     - type: Transform
       pos: 203.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16373
     components:
     - type: Transform
       pos: 201.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16374
     components:
     - type: Transform
       pos: 206.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16375
     components:
     - type: Transform
       pos: 206.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16376
     components:
     - type: Transform
       pos: 205.5,47.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16377
     components:
     - type: Transform
       pos: 216.5,37.5
       parent: 1
     - type: XenoWeeds
-      source: 16938
       isSource: False
+      source: 16938
   - uid: 16378
     components:
     - type: Transform
       pos: 217.5,36.5
       parent: 1
     - type: XenoWeeds
-      source: 16938
       isSource: False
+      source: 16938
   - uid: 16379
     components:
     - type: Transform
       pos: 204.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16380
     components:
     - type: Transform
       pos: 204.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16381
     components:
     - type: Transform
       pos: 203.5,47.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16382
     components:
     - type: Transform
       pos: 177.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16383
     components:
     - type: Transform
       pos: 176.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16384
     components:
     - type: Transform
       pos: 214.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16385
     components:
     - type: Transform
       pos: 215.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16386
     components:
     - type: Transform
       pos: 200.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16387
     components:
     - type: Transform
       pos: 199.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16388
     components:
     - type: Transform
       pos: 205.5,49.5
       parent: 1
     - type: XenoWeeds
-      source: 16926
       isSource: False
+      source: 16926
   - uid: 16389
     components:
     - type: Transform
       pos: 217.5,38.5
       parent: 1
     - type: XenoWeeds
-      source: 16939
       isSource: False
+      source: 16939
   - uid: 16390
     components:
     - type: Transform
       pos: 214.5,33.5
       parent: 1
     - type: XenoWeeds
-      source: 16936
       isSource: False
+      source: 16936
   - uid: 16391
     components:
     - type: Transform
       pos: 213.5,34.5
       parent: 1
     - type: XenoWeeds
-      source: 16936
       isSource: False
+      source: 16936
   - uid: 16392
     components:
     - type: Transform
       pos: 207.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16393
     components:
     - type: Transform
       pos: 207.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16394
     components:
     - type: Transform
       pos: 208.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16395
     components:
     - type: Transform
       pos: 206.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16396
     components:
     - type: Transform
       pos: 208.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16397
     components:
     - type: Transform
       pos: 209.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16398
     components:
     - type: Transform
       pos: 207.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16399
     components:
     - type: Transform
       pos: 210.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16958
       isSource: False
+      source: 16958
   - uid: 16400
     components:
     - type: Transform
       pos: 205.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16401
     components:
     - type: Transform
       pos: 204.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16402
     components:
     - type: Transform
       pos: 181.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16403
     components:
     - type: Transform
       pos: 182.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16404
     components:
     - type: Transform
       pos: 214.5,31.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16405
     components:
     - type: Transform
       pos: 213.5,32.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16406
     components:
     - type: Transform
       pos: 203.5,49.5
       parent: 1
     - type: XenoWeeds
-      source: 16928
       isSource: False
+      source: 16928
   - uid: 16407
     components:
     - type: Transform
       pos: 207.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16408
     components:
     - type: Transform
       pos: 208.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16409
     components:
     - type: Transform
       pos: 183.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16410
     components:
     - type: Transform
       pos: 183.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16411
     components:
     - type: Transform
       pos: 184.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16412
     components:
     - type: Transform
       pos: 183.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16413
     components:
     - type: Transform
       pos: 184.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16414
     components:
     - type: Transform
       pos: 211.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16415
     components:
     - type: Transform
       pos: 209.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16416
     components:
     - type: Transform
       pos: 212.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16417
     components:
     - type: Transform
       pos: 213.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16418
     components:
     - type: Transform
       pos: 211.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16419
     components:
     - type: Transform
       pos: 215.5,37.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16420
     components:
     - type: Transform
       pos: 206.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16421
     components:
     - type: Transform
       pos: 205.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16422
     components:
     - type: Transform
       pos: 182.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16423
     components:
     - type: Transform
       pos: 180.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16424
     components:
     - type: Transform
       pos: 203.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16425
     components:
     - type: Transform
       pos: 203.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16426
     components:
     - type: Transform
       pos: 202.5,47.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16427
     components:
     - type: Transform
       pos: 208.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16428
     components:
     - type: Transform
       pos: 206.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16429
     components:
     - type: Transform
       pos: 199.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16430
     components:
     - type: Transform
       pos: 199.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16431
     components:
     - type: Transform
       pos: 181.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16432
     components:
     - type: Transform
       pos: 182.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16433
     components:
     - type: Transform
       pos: 180.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16434
     components:
     - type: Transform
       pos: 217.5,37.5
       parent: 1
     - type: XenoWeeds
-      source: 16938
       isSource: False
+      source: 16938
   - uid: 16435
     components:
     - type: Transform
       pos: 217.5,35.5
       parent: 1
     - type: XenoWeeds
-      source: 16938
       isSource: False
+      source: 16938
   - uid: 16436
     components:
     - type: Transform
       pos: 213.5,37.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16437
     components:
     - type: Transform
       pos: 202.5,49.5
       parent: 1
     - type: XenoWeeds
-      source: 16928
       isSource: False
+      source: 16928
   - uid: 16438
     components:
     - type: Transform
       pos: 215.5,35.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16439
     components:
     - type: Transform
       pos: 217.5,33.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16440
     components:
     - type: Transform
       pos: 217.5,31.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16441
     components:
     - type: Transform
       pos: 207.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16442
     components:
     - type: Transform
       pos: 215.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16443
     components:
     - type: Transform
       pos: 213.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16444
     components:
     - type: Transform
       pos: 203.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16445
     components:
     - type: Transform
       pos: 201.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16446
     components:
     - type: Transform
       pos: 181.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16447
     components:
     - type: Transform
       pos: 182.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16448
     components:
     - type: Transform
       pos: 180.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16449
     components:
     - type: Transform
       pos: 201.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16450
     components:
     - type: Transform
       pos: 201.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16451
     components:
     - type: Transform
       pos: 204.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16452
     components:
     - type: Transform
       pos: 204.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16453
     components:
     - type: Transform
       pos: 213.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16454
     components:
     - type: Transform
       pos: 207.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16455
     components:
     - type: Transform
       pos: 208.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16456
     components:
     - type: Transform
       pos: 206.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16457
     components:
     - type: Transform
       pos: 205.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16926
       isSource: False
+      source: 16926
   - uid: 16458
     components:
     - type: Transform
       pos: 215.5,33.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16459
     components:
     - type: Transform
       pos: 215.5,31.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16460
     components:
     - type: Transform
       pos: 178.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16953
       isSource: False
+      source: 16953
   - uid: 16461
     components:
     - type: Transform
       pos: 178.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16953
       isSource: False
+      source: 16953
   - uid: 16462
     components:
     - type: Transform
       pos: 203.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16463
     components:
     - type: Transform
       pos: 184.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16464
     components:
     - type: Transform
       pos: 176.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16465
     components:
     - type: Transform
       pos: 176.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16466
     components:
     - type: Transform
       pos: 175.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16467
     components:
     - type: Transform
       pos: 176.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16468
     components:
     - type: Transform
       pos: 175.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16469
     components:
     - type: Transform
       pos: 199.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16470
     components:
     - type: Transform
       pos: 201.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16471
     components:
     - type: Transform
       pos: 214.5,40.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16472
     components:
     - type: Transform
       pos: 213.5,39.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16473
     components:
     - type: Transform
       pos: 208.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16474
     components:
     - type: Transform
       pos: 209.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16475
     components:
     - type: Transform
       pos: 207.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16476
     components:
     - type: Transform
       pos: 212.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16477
     components:
     - type: Transform
       pos: 211.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16478
     components:
     - type: Transform
       pos: 206.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16479
     components:
     - type: Transform
       pos: 210.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16958
       isSource: False
+      source: 16958
   - uid: 16480
     components:
     - type: Transform
       pos: 207.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16481
     components:
     - type: Transform
       pos: 206.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16482
     components:
     - type: Transform
       pos: 205.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16483
     components:
     - type: Transform
       pos: 204.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16484
     components:
     - type: Transform
       pos: 215.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16485
     components:
     - type: Transform
       pos: 216.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16486
     components:
     - type: Transform
       pos: 179.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16487
     components:
     - type: Transform
       pos: 178.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16488
     components:
     - type: Transform
       pos: 213.5,35.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16489
     components:
     - type: Transform
       pos: 198.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16490
     components:
     - type: Transform
       pos: 177.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16491
     components:
     - type: Transform
       pos: 213.5,33.5
       parent: 1
     - type: XenoWeeds
-      source: 16936
       isSource: False
+      source: 16936
   - uid: 16492
     components:
     - type: Transform
       pos: 212.5,34.5
       parent: 1
     - type: XenoWeeds
-      source: 16936
       isSource: False
+      source: 16936
   - uid: 16493
     components:
     - type: Transform
       pos: 203.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16494
     components:
     - type: Transform
       pos: 184.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16495
     components:
     - type: Transform
       pos: 185.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16496
     components:
     - type: Transform
       pos: 214.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16497
     components:
     - type: Transform
       pos: 200.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16498
     components:
     - type: Transform
       pos: 201.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16499
     components:
     - type: Transform
       pos: 199.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16500
     components:
     - type: Transform
       pos: 215.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16501
     components:
     - type: Transform
       pos: 216.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16502
     components:
     - type: Transform
       pos: 204.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16503
     components:
     - type: Transform
       pos: 206.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16504
     components:
     - type: Transform
       pos: 202.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16505
     components:
     - type: Transform
       pos: 177.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16506
     components:
     - type: Transform
       pos: 214.5,30.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16507
     components:
     - type: Transform
       pos: 213.5,31.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16508
     components:
     - type: Transform
       pos: 208.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16509
     components:
     - type: Transform
       pos: 214.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16510
     components:
     - type: Transform
       pos: 212.5,32.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16511
     components:
     - type: Transform
       pos: 208.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16512
     components:
     - type: Transform
       pos: 209.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16513
     components:
     - type: Transform
       pos: 212.5,38.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16514
     components:
     - type: Transform
       pos: 198.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16515
     components:
     - type: Transform
       pos: 200.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16516
     components:
     - type: Transform
       pos: 183.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16517
     components:
     - type: Transform
       pos: 179.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16953
       isSource: False
+      source: 16953
   - uid: 16518
     components:
     - type: Transform
       pos: 202.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16519
     components:
     - type: Transform
       pos: 183.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16520
     components:
     - type: Transform
       pos: 184.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16521
     components:
     - type: Transform
       pos: 209.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16522
     components:
     - type: Transform
       pos: 205.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16523
     components:
     - type: Transform
       pos: 185.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16524
     components:
     - type: Transform
       pos: 210.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16525
     components:
     - type: Transform
       pos: 216.5,30.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16526
     components:
     - type: Transform
       pos: 209.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16527
     components:
     - type: Transform
       pos: 198.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16528
     components:
     - type: Transform
       pos: 212.5,36.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16529
     components:
     - type: Transform
       pos: 183.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16530
     components:
     - type: Transform
       pos: 184.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16531
     components:
     - type: Transform
       pos: 182.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16532
     components:
     - type: Transform
       pos: 207.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16533
     components:
     - type: Transform
       pos: 206.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16534
     components:
     - type: Transform
       pos: 208.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16535
     components:
     - type: Transform
       pos: 209.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16536
     components:
     - type: Transform
       pos: 175.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16537
     components:
     - type: Transform
       pos: 175.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16538
     components:
     - type: Transform
       pos: 174.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16539
     components:
     - type: Transform
       pos: 215.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16540
     components:
     - type: Transform
       pos: 216.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16541
     components:
     - type: Transform
       pos: 181.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16542
     components:
     - type: Transform
       pos: 182.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16543
     components:
     - type: Transform
       pos: 180.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16544
     components:
     - type: Transform
       pos: 202.5,48.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16545
     components:
     - type: Transform
       pos: 215.5,30.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16546
     components:
     - type: Transform
       pos: 204.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16547
     components:
     - type: Transform
       pos: 205.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16548
     components:
     - type: Transform
       pos: 203.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16549
     components:
     - type: Transform
       pos: 209.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16550
     components:
     - type: Transform
       pos: 198.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16551
     components:
     - type: Transform
       pos: 212.5,35.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16552
     components:
     - type: Transform
       pos: 216.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16553
     components:
     - type: Transform
       pos: 217.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16554
     components:
     - type: Transform
       pos: 212.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16555
     components:
     - type: Transform
       pos: 213.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16556
     components:
     - type: Transform
       pos: 211.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16557
     components:
     - type: Transform
       pos: 212.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16558
     components:
     - type: Transform
       pos: 213.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16559
     components:
     - type: Transform
       pos: 211.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16560
     components:
     - type: Transform
       pos: 185.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16561
     components:
     - type: Transform
       pos: 183.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16562
     components:
     - type: Transform
       pos: 184.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16563
     components:
     - type: Transform
       pos: 176.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16564
     components:
     - type: Transform
       pos: 175.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16565
     components:
     - type: Transform
       pos: 208.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16566
     components:
     - type: Transform
       pos: 209.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16567
     components:
     - type: Transform
       pos: 178.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16953
       isSource: False
+      source: 16953
   - uid: 16568
     components:
     - type: Transform
       pos: 212.5,37.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16569
     components:
     - type: Transform
       pos: 211.5,36.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16570
     components:
     - type: Transform
       pos: 214.5,29.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16571
     components:
     - type: Transform
       pos: 213.5,30.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16572
     components:
     - type: Transform
       pos: 206.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16573
     components:
     - type: Transform
       pos: 214.5,41.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16574
     components:
     - type: Transform
       pos: 213.5,40.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16575
     components:
     - type: Transform
       pos: 214.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16576
     components:
     - type: Transform
       pos: 215.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16577
     components:
     - type: Transform
       pos: 208.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16578
     components:
     - type: Transform
       pos: 209.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16579
     components:
     - type: Transform
       pos: 200.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16580
     components:
     - type: Transform
       pos: 201.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16581
     components:
     - type: Transform
       pos: 199.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16582
     components:
     - type: Transform
       pos: 212.5,39.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16583
     components:
     - type: Transform
       pos: 211.5,38.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16584
     components:
     - type: Transform
       pos: 210.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16585
     components:
     - type: Transform
       pos: 209.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16586
     components:
     - type: Transform
       pos: 212.5,33.5
       parent: 1
     - type: XenoWeeds
-      source: 16936
       isSource: False
+      source: 16936
   - uid: 16587
     components:
     - type: Transform
       pos: 211.5,34.5
       parent: 1
     - type: XenoWeeds
-      source: 16936
       isSource: False
+      source: 16936
   - uid: 16588
     components:
     - type: Transform
       pos: 180.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16589
     components:
     - type: Transform
       pos: 179.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16590
     components:
     - type: Transform
       pos: 178.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16591
     components:
     - type: Transform
       pos: 199.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16592
     components:
     - type: Transform
       pos: 198.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16593
     components:
     - type: Transform
       pos: 197.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16594
     components:
     - type: Transform
       pos: 198.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16595
     components:
     - type: Transform
       pos: 197.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16596
     components:
     - type: Transform
       pos: 177.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16597
     components:
     - type: Transform
       pos: 214.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16598
     components:
     - type: Transform
       pos: 174.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16599
     components:
     - type: Transform
       pos: 181.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16600
     components:
     - type: Transform
       pos: 206.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16601
     components:
     - type: Transform
       pos: 207.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16602
     components:
     - type: Transform
       pos: 185.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16603
     components:
     - type: Transform
       pos: 185.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16604
     components:
     - type: Transform
       pos: 186.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16605
     components:
     - type: Transform
       pos: 207.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16606
     components:
     - type: Transform
       pos: 202.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16607
     components:
     - type: Transform
       pos: 203.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16608
     components:
     - type: Transform
       pos: 206.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16609
     components:
     - type: Transform
       pos: 206.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16610
     components:
     - type: Transform
       pos: 205.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16611
     components:
     - type: Transform
       pos: 217.5,30.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16612
     components:
     - type: Transform
       pos: 204.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16613
     components:
     - type: Transform
       pos: 205.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16614
     components:
     - type: Transform
       pos: 204.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16615
     components:
     - type: Transform
       pos: 210.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16958
       isSource: False
+      source: 16958
   - uid: 16616
     components:
     - type: Transform
       pos: 202.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16617
     components:
     - type: Transform
       pos: 212.5,31.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16618
     components:
     - type: Transform
       pos: 205.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16619
     components:
     - type: Transform
       pos: 216.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16620
     components:
     - type: Transform
       pos: 217.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16621
     components:
     - type: Transform
       pos: 211.5,32.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16622
     components:
     - type: Transform
       pos: 176.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16623
     components:
     - type: Transform
       pos: 210.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16624
     components:
     - type: Transform
       pos: 205.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16625
     components:
     - type: Transform
       pos: 186.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16626
     components:
     - type: Transform
       pos: 203.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16627
     components:
     - type: Transform
       pos: 200.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16628
     components:
     - type: Transform
       pos: 201.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16629
     components:
     - type: Transform
       pos: 198.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16630
     components:
     - type: Transform
       pos: 197.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16631
     components:
     - type: Transform
       pos: 177.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16632
     components:
     - type: Transform
       pos: 210.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16633
     components:
     - type: Transform
       pos: 208.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16634
     components:
     - type: Transform
       pos: 207.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16635
     components:
     - type: Transform
       pos: 216.5,29.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16636
     components:
     - type: Transform
       pos: 202.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16637
     components:
     - type: Transform
       pos: 179.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16953
       isSource: False
+      source: 16953
   - uid: 16638
     components:
     - type: Transform
       pos: 209.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16639
     components:
     - type: Transform
       pos: 210.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16640
     components:
     - type: Transform
       pos: 210.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16641
     components:
     - type: Transform
       pos: 211.5,7.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16642
     components:
     - type: Transform
       pos: 199.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16643
     components:
     - type: Transform
       pos: 198.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16644
     components:
     - type: Transform
       pos: 203.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16645
     components:
     - type: Transform
       pos: 197.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16646
     components:
     - type: Transform
       pos: 217.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16647
     components:
     - type: Transform
       pos: 217.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16648
     components:
     - type: Transform
       pos: 218.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16649
     components:
     - type: Transform
       pos: 216.5,28.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16650
     components:
     - type: Transform
       pos: 217.5,29.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16651
     components:
     - type: Transform
       pos: 215.5,29.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16652
     components:
     - type: Transform
       pos: 213.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16653
     components:
     - type: Transform
       pos: 200.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16654
     components:
     - type: Transform
       pos: 201.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16655
     components:
     - type: Transform
       pos: 210.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16656
     components:
     - type: Transform
       pos: 211.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16657
     components:
     - type: Transform
       pos: 180.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16658
     components:
     - type: Transform
       pos: 211.5,35.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16659
     components:
     - type: Transform
       pos: 209.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16660
     components:
     - type: Transform
       pos: 211.5,33.5
       parent: 1
     - type: XenoWeeds
-      source: 16936
       isSource: False
+      source: 16936
   - uid: 16661
     components:
     - type: Transform
       pos: 201.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16662
     components:
     - type: Transform
       pos: 202.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16663
     components:
     - type: Transform
       pos: 183.5,143.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16664
     components:
     - type: Transform
       pos: 184.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16665
     components:
     - type: Transform
       pos: 182.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16666
     components:
     - type: Transform
       pos: 174.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16667
     components:
     - type: Transform
       pos: 206.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16668
     components:
     - type: Transform
       pos: 207.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16669
     components:
     - type: Transform
       pos: 206.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16670
     components:
     - type: Transform
       pos: 213.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16671
     components:
     - type: Transform
       pos: 200.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16672
     components:
     - type: Transform
       pos: 199.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16673
     components:
     - type: Transform
       pos: 209.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16674
     components:
     - type: Transform
       pos: 185.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16675
     components:
     - type: Transform
       pos: 186.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16676
     components:
     - type: Transform
       pos: 213.5,29.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16677
     components:
     - type: Transform
       pos: 212.5,30.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16678
     components:
     - type: Transform
       pos: 210.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16958
       isSource: False
+      source: 16958
   - uid: 16679
     components:
     - type: Transform
       pos: 211.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16958
       isSource: False
+      source: 16958
   - uid: 16680
     components:
     - type: Transform
       pos: 208.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16681
     components:
     - type: Transform
       pos: 211.5,31.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16682
     components:
     - type: Transform
       pos: 205.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16683
     components:
     - type: Transform
       pos: 204.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16684
     components:
     - type: Transform
       pos: 180.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16685
     components:
     - type: Transform
       pos: 216.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16686
     components:
     - type: Transform
       pos: 217.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16687
     components:
     - type: Transform
       pos: 215.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16688
     components:
     - type: Transform
       pos: 206.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16689
     components:
     - type: Transform
       pos: 205.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16690
     components:
     - type: Transform
       pos: 208.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16691
     components:
     - type: Transform
       pos: 209.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16692
     components:
     - type: Transform
       pos: 198.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16693
     components:
     - type: Transform
       pos: 197.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16694
     components:
     - type: Transform
       pos: 176.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16695
     components:
     - type: Transform
       pos: 175.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16696
     components:
     - type: Transform
       pos: 177.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16697
     components:
     - type: Transform
       pos: 178.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16698
     components:
     - type: Transform
       pos: 176.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16699
     components:
     - type: Transform
       pos: 212.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16700
     components:
     - type: Transform
       pos: 182.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16701
     components:
     - type: Transform
       pos: 207.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16702
     components:
     - type: Transform
       pos: 213.5,41.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16703
     components:
     - type: Transform
       pos: 212.5,40.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16704
     components:
     - type: Transform
       pos: 197.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16705
     components:
     - type: Transform
       pos: 196.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16706
     components:
     - type: Transform
       pos: 214.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16707
     components:
     - type: Transform
       pos: 215.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16708
     components:
     - type: Transform
       pos: 214.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16709
     components:
     - type: Transform
       pos: 212.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16710
     components:
     - type: Transform
       pos: 207.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16711
     components:
     - type: Transform
       pos: 208.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16712
     components:
     - type: Transform
       pos: 202.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16713
     components:
     - type: Transform
       pos: 203.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16714
     components:
     - type: Transform
       pos: 201.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16715
     components:
     - type: Transform
       pos: 216.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16716
     components:
     - type: Transform
       pos: 175.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16717
     components:
     - type: Transform
       pos: 207.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16718
     components:
     - type: Transform
       pos: 208.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16719
     components:
     - type: Transform
       pos: 181.5,143.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16720
     components:
     - type: Transform
       pos: 208.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16721
     components:
     - type: Transform
       pos: 183.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16722
     components:
     - type: Transform
       pos: 184.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16723
     components:
     - type: Transform
       pos: 211.5,37.5
       parent: 1
     - type: XenoWeeds
-      source: 16937
       isSource: False
+      source: 16937
   - uid: 16724
     components:
     - type: Transform
       pos: 197.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16725
     components:
     - type: Transform
       pos: 196.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16726
     components:
     - type: Transform
       pos: 205.5,150.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16727
     components:
     - type: Transform
       pos: 174.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16728
     components:
     - type: Transform
       pos: 211.5,39.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16729
     components:
     - type: Transform
       pos: 205.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16730
     components:
     - type: Transform
       pos: 186.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16731
     components:
     - type: Transform
       pos: 187.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16732
     components:
     - type: Transform
       pos: 173.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16733
     components:
     - type: Transform
       pos: 204.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16734
     components:
     - type: Transform
       pos: 203.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16735
     components:
     - type: Transform
       pos: 179.5,143.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16736
     components:
     - type: Transform
       pos: 178.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16737
     components:
     - type: Transform
       pos: 205.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16738
     components:
     - type: Transform
       pos: 204.5,149.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16739
     components:
     - type: Transform
       pos: 181.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16740
     components:
     - type: Transform
       pos: 210.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16741
     components:
     - type: Transform
       pos: 174.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16742
     components:
     - type: Transform
       pos: 202.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16743
     components:
     - type: Transform
       pos: 185.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16744
     components:
     - type: Transform
       pos: 186.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16745
     components:
     - type: Transform
       pos: 179.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16953
       isSource: False
+      source: 16953
   - uid: 16746
     components:
     - type: Transform
       pos: 177.5,143.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16747
     components:
     - type: Transform
       pos: 205.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16748
     components:
     - type: Transform
       pos: 206.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16749
     components:
     - type: Transform
       pos: 204.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16750
     components:
     - type: Transform
       pos: 187.5,137.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16751
     components:
     - type: Transform
       pos: 214.5,28.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16752
     components:
     - type: Transform
       pos: 173.5,139.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16753
     components:
     - type: Transform
       pos: 214.5,42.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16754
     components:
     - type: Transform
       pos: 206.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16755
     components:
     - type: Transform
       pos: 198.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16756
     components:
     - type: Transform
       pos: 204.5,151.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16757
     components:
     - type: Transform
       pos: 211.5,9.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16758
     components:
     - type: Transform
       pos: 182.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16759
     components:
     - type: Transform
       pos: 208.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16760
     components:
     - type: Transform
       pos: 209.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16761
     components:
     - type: Transform
       pos: 207.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16762
     components:
     - type: Transform
       pos: 185.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16763
     components:
     - type: Transform
       pos: 186.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16764
     components:
     - type: Transform
       pos: 203.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16765
     components:
     - type: Transform
       pos: 198.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16766
     components:
     - type: Transform
       pos: 197.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16767
     components:
     - type: Transform
       pos: 184.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16768
     components:
     - type: Transform
       pos: 196.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16769
     components:
     - type: Transform
       pos: 195.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16770
     components:
     - type: Transform
       pos: 187.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16771
     components:
     - type: Transform
       pos: 187.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16772
     components:
     - type: Transform
       pos: 211.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16773
     components:
     - type: Transform
       pos: 211.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16774
     components:
     - type: Transform
       pos: 205.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16775
     components:
     - type: Transform
       pos: 204.5,148.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16776
     components:
     - type: Transform
       pos: 175.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16777
     components:
     - type: Transform
       pos: 213.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16961
       isSource: False
+      source: 16961
   - uid: 16778
     components:
     - type: Transform
       pos: 197.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16779
     components:
     - type: Transform
       pos: 196.5,6.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16780
     components:
     - type: Transform
       pos: 217.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16781
     components:
     - type: Transform
       pos: 186.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16782
     components:
     - type: Transform
       pos: 187.5,140.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16783
     components:
     - type: Transform
       pos: 178.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16784
     components:
     - type: Transform
       pos: 174.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16785
     components:
     - type: Transform
       pos: 196.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16786
     components:
     - type: Transform
       pos: 204.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16787
     components:
     - type: Transform
       pos: 173.5,138.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16788
     components:
     - type: Transform
       pos: 216.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16789
     components:
     - type: Transform
       pos: 212.5,41.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16790
     components:
     - type: Transform
       pos: 211.5,40.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16791
     components:
     - type: Transform
       pos: 174.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16792
     components:
     - type: Transform
       pos: 173.5,136.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16793
     components:
     - type: Transform
       pos: 215.5,28.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16794
     components:
     - type: Transform
       pos: 217.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16795
     components:
     - type: Transform
       pos: 218.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16796
     components:
     - type: Transform
       pos: 199.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16797
     components:
     - type: Transform
       pos: 196.5,8.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16798
     components:
     - type: Transform
       pos: 203.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16943
       isSource: False
+      source: 16943
   - uid: 16799
     components:
     - type: Transform
       pos: 211.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16800
     components:
     - type: Transform
       pos: 203.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16801
     components:
     - type: Transform
       pos: 202.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16802
     components:
     - type: Transform
       pos: 185.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16803
     components:
     - type: Transform
       pos: 205.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16804
     components:
     - type: Transform
       pos: 204.5,152.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16805
     components:
     - type: Transform
       pos: 178.5,143.5
       parent: 1
     - type: XenoWeeds
-      source: 16954
       isSource: False
+      source: 16954
   - uid: 16806
     components:
     - type: Transform
       pos: 206.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16807
     components:
     - type: Transform
       pos: 207.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16808
     components:
     - type: Transform
       pos: 208.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16809
     components:
     - type: Transform
       pos: 176.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16810
     components:
     - type: Transform
       pos: 175.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16811
     components:
     - type: Transform
       pos: 215.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16812
     components:
     - type: Transform
       pos: 216.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16813
     components:
     - type: Transform
       pos: 182.5,143.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16814
     components:
     - type: Transform
       pos: 209.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16960
       isSource: False
+      source: 16960
   - uid: 16815
     components:
     - type: Transform
       pos: 180.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16952
       isSource: False
+      source: 16952
   - uid: 16816
     components:
     - type: Transform
       pos: 206.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16817
     components:
     - type: Transform
       pos: 209.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16818
     components:
     - type: Transform
       pos: 198.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16819
     components:
     - type: Transform
       pos: 204.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16946
       isSource: False
+      source: 16946
   - uid: 16820
     components:
     - type: Transform
       pos: 210.5,39.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16821
     components:
     - type: Transform
       pos: 206.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16945
       isSource: False
+      source: 16945
   - uid: 16822
     components:
     - type: Transform
       pos: 197.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16823
     components:
     - type: Transform
       pos: 211.5,10.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16824
     components:
     - type: Transform
       pos: 201.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16825
     components:
     - type: Transform
       pos: 213.5,42.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16826
     components:
     - type: Transform
       pos: 201.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16827
     components:
     - type: Transform
       pos: 209.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16828
     components:
     - type: Transform
       pos: 211.5,30.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16829
     components:
     - type: Transform
       pos: 211.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16958
       isSource: False
+      source: 16958
   - uid: 16830
     components:
     - type: Transform
       pos: 201.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16931
       isSource: False
+      source: 16931
   - uid: 16831
     components:
     - type: Transform
       pos: 209.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16832
     components:
     - type: Transform
       pos: 180.5,143.5
       parent: 1
     - type: XenoWeeds
-      source: 16951
       isSource: False
+      source: 16951
   - uid: 16833
     components:
     - type: Transform
       pos: 213.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16962
       isSource: False
+      source: 16962
   - uid: 16834
     components:
     - type: Transform
       pos: 210.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16835
     components:
     - type: Transform
       pos: 205.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16836
     components:
     - type: Transform
       pos: 212.5,29.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16837
     components:
     - type: Transform
       pos: 207.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16838
     components:
     - type: Transform
       pos: 213.5,28.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16839
     components:
     - type: Transform
       pos: 217.5,28.5
       parent: 1
     - type: XenoWeeds
-      source: 16934
       isSource: False
+      source: 16934
   - uid: 16840
     components:
     - type: Transform
       pos: 215.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16841
     components:
     - type: Transform
       pos: 206.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16842
     components:
     - type: Transform
       pos: 207.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16843
     components:
     - type: Transform
       pos: 200.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16844
     components:
     - type: Transform
       pos: 186.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16845
     components:
     - type: Transform
       pos: 187.5,141.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16846
     components:
     - type: Transform
       pos: 204.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16847
     components:
     - type: Transform
       pos: 196.5,5.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16848
     components:
     - type: Transform
       pos: 185.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16849
     components:
     - type: Transform
       pos: 197.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16850
     components:
     - type: Transform
       pos: 208.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16851
     components:
     - type: Transform
       pos: 209.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16852
     components:
     - type: Transform
       pos: 216.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16853
     components:
     - type: Transform
       pos: 217.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16854
     components:
     - type: Transform
       pos: 195.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16855
     components:
     - type: Transform
       pos: 194.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16856
     components:
     - type: Transform
       pos: 175.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16857
     components:
     - type: Transform
       pos: 174.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16858
     components:
     - type: Transform
       pos: 200.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16859
     components:
     - type: Transform
       pos: 212.5,42.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16860
     components:
     - type: Transform
       pos: 211.5,41.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16861
     components:
     - type: Transform
       pos: 174.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16955
       isSource: False
+      source: 16955
   - uid: 16862
     components:
     - type: Transform
       pos: 196.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16863
     components:
     - type: Transform
       pos: 217.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16864
     components:
     - type: Transform
       pos: 218.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16865
     components:
     - type: Transform
       pos: 210.5,40.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16866
     components:
     - type: Transform
       pos: 206.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16959
       isSource: False
+      source: 16959
   - uid: 16867
     components:
     - type: Transform
       pos: 209.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16868
     components:
     - type: Transform
       pos: 210.5,45.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16869
     components:
     - type: Transform
       pos: 210.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16870
     components:
     - type: Transform
       pos: 211.5,11.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16871
     components:
     - type: Transform
       pos: 186.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16872
     components:
     - type: Transform
       pos: 187.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16873
     components:
     - type: Transform
       pos: 211.5,29.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16874
     components:
     - type: Transform
       pos: 196.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16875
     components:
     - type: Transform
       pos: 173.5,135.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16876
     components:
     - type: Transform
       pos: 218.5,147.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16877
     components:
     - type: Transform
       pos: 202.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16925
       isSource: False
+      source: 16925
   - uid: 16878
     components:
     - type: Transform
       pos: 212.5,28.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16879
     components:
     - type: Transform
       pos: 207.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16880
     components:
     - type: Transform
       pos: 216.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16881
     components:
     - type: Transform
       pos: 204.5,153.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16882
     components:
     - type: Transform
       pos: 205.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16883
     components:
     - type: Transform
       pos: 209.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16884
     components:
     - type: Transform
       pos: 210.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16885
     components:
     - type: Transform
       pos: 199.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16944
       isSource: False
+      source: 16944
   - uid: 16886
     components:
     - type: Transform
       pos: 206.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16887
     components:
     - type: Transform
       pos: 197.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16941
       isSource: False
+      source: 16941
   - uid: 16888
     components:
     - type: Transform
       pos: 217.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16963
       isSource: False
+      source: 16963
   - uid: 16889
     components:
     - type: Transform
       pos: 218.5,146.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16890
     components:
     - type: Transform
       pos: 186.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16891
     components:
     - type: Transform
       pos: 205.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16892
     components:
     - type: Transform
       pos: 204.5,154.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16893
     components:
     - type: Transform
       pos: 217.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16894
     components:
     - type: Transform
       pos: 196.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
   - uid: 16895
     components:
     - type: Transform
       pos: 187.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16896
     components:
     - type: Transform
       pos: 211.5,12.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16897
     components:
     - type: Transform
       pos: 174.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16898
     components:
     - type: Transform
       pos: 209.5,47.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16899
     components:
     - type: Transform
       pos: 210.5,46.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16900
     components:
     - type: Transform
       pos: 187.5,142.5
       parent: 1
     - type: XenoWeeds
-      source: 16950
       isSource: False
+      source: 16950
   - uid: 16901
     components:
     - type: Transform
       pos: 211.5,42.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16902
     components:
     - type: Transform
       pos: 210.5,41.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16903
     components:
     - type: Transform
       pos: 211.5,28.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16904
     components:
     - type: Transform
       pos: 210.5,29.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16905
     components:
     - type: Transform
       pos: 210.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16906
     components:
     - type: Transform
       pos: 173.5,134.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16907
     components:
     - type: Transform
       pos: 194.5,44.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16908
     components:
     - type: Transform
       pos: 209.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16909
     components:
     - type: Transform
       pos: 210.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16910
     components:
     - type: Transform
       pos: 211.5,4.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16911
     components:
     - type: Transform
       pos: 195.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16912
     components:
     - type: Transform
       pos: 210.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16913
     components:
     - type: Transform
       pos: 210.5,47.5
       parent: 1
     - type: XenoWeeds
-      source: 16927
       isSource: False
+      source: 16927
   - uid: 16914
     components:
     - type: Transform
       pos: 173.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16956
       isSource: False
+      source: 16956
   - uid: 16915
     components:
     - type: Transform
       pos: 210.5,42.5
       parent: 1
     - type: XenoWeeds
-      source: 16940
       isSource: False
+      source: 16940
   - uid: 16916
     components:
     - type: Transform
       pos: 187.5,133.5
       parent: 1
     - type: XenoWeeds
-      source: 16949
       isSource: False
+      source: 16949
   - uid: 16917
     components:
     - type: Transform
       pos: 211.5,3.5
       parent: 1
     - type: XenoWeeds
-      source: 16948
       isSource: False
+      source: 16948
   - uid: 16918
     components:
     - type: Transform
       pos: 218.5,145.5
       parent: 1
     - type: XenoWeeds
-      source: 16964
       isSource: False
+      source: 16964
   - uid: 16919
     components:
     - type: Transform
       pos: 210.5,28.5
       parent: 1
     - type: XenoWeeds
-      source: 16935
       isSource: False
+      source: 16935
   - uid: 16920
     components:
     - type: Transform
       pos: 204.5,155.5
       parent: 1
     - type: XenoWeeds
-      source: 16957
       isSource: False
+      source: 16957
   - uid: 16921
     components:
     - type: Transform
       pos: 211.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16947
       isSource: False
+      source: 16947
   - uid: 16922
     components:
     - type: Transform
       pos: 194.5,43.5
       parent: 1
     - type: XenoWeeds
-      source: 16930
       isSource: False
+      source: 16930
   - uid: 16923
     components:
     - type: Transform
       pos: 196.5,13.5
       parent: 1
     - type: XenoWeeds
-      source: 16942
       isSource: False
+      source: 16942
 - proto: XenoWeedsSource
   entities:
   - uid: 16924
