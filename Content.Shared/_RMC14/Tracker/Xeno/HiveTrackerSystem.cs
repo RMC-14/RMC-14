@@ -216,6 +216,9 @@ public sealed class HiveTrackerSystem : EntitySystem
             var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent>();
             while (trackableQuery.MoveNext(out var trackableUid, out _))
             {
+                if(tracker.Mode == new ProtoId<TrackerModePrototype>())
+                    break;
+
                 _prototypeManager.TryIndex(tracker.Mode, out var trackerMode);
 
                 if (trackerMode?.Component == null)

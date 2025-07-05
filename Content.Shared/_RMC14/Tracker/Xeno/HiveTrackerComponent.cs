@@ -12,7 +12,7 @@ public sealed partial class HiveTrackerComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan UpdateAt;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
 
     [DataField(required: true), AutoNetworkedField]
