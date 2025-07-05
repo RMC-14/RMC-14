@@ -15,9 +15,6 @@ public sealed partial class HiveTrackerComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
 
-    [DataField(required: true), AutoNetworkedField]
-    public ProtoId<TrackerModePrototype> DefaultMode;
-
     [DataField, AutoNetworkedField]
     public HashSet<ProtoId<TrackerModePrototype>> TrackerModes = new();
 

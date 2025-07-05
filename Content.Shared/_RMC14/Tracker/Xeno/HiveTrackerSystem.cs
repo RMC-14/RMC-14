@@ -31,7 +31,6 @@ public sealed class HiveTrackerSystem : EntitySystem
     public override void Initialize()
     {
         // TODO RMC14 resin tracker, hive leader tracker
-        SubscribeLocalEvent<HiveTrackerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HiveTrackerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerClickedAlertEvent>(OnClickedAlert);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerAltClickedAlertEvent>(OnAltClickedAlert);
@@ -39,12 +38,6 @@ public sealed class HiveTrackerSystem : EntitySystem
         SubscribeLocalEvent<HiveTrackerComponent, LeaderTrackerSelectTargetEvent>(OnHiveTrackerSelectTarget);
 
         SubscribeLocalEvent<RMCTrackableComponent, RequestTrackableNameEvent>(OnRequestTrackableName);
-    }
-
-    private void OnMapInit(Entity<HiveTrackerComponent> ent, ref MapInitEvent args)
-    {
-        SetMode(ent, ent.Comp.DefaultMode);
-        Dirty(ent);
     }
 
     private void OnRemove(Entity<HiveTrackerComponent> ent, ref ComponentRemove args)

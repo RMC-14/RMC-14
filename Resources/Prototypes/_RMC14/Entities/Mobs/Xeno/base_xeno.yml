@@ -315,7 +315,7 @@
     - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
-    defaultMode: Queen
+    mode: Queen
     trackerModes:
     - Queen
     - HiveLeader
