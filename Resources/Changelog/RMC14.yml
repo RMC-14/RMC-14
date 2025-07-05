@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed some solaris inserts.
-    type: Fix
-  id: 1432
-  time: '2025-03-09T23:26:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5798
 - author: OmerF-afk
   changes:
   - message: Added M10 White Medic Helmet to Corpsman vendors
@@ -5092,5 +5085,12 @@
   id: 1933
   time: '2025-07-05T06:27:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6771
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed being able to use LOOC while unconscious from parasites or explosions.
+    type: Fix
+  id: 1934
+  time: '2025-07-05T06:28:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6899
 Name: RMC14
 Order: -1
