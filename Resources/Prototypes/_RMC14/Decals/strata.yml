@@ -1,0 +1,177 @@
+- type: decal
+  abstract: true
+  parent: CMDecalBase
+  id: RMCDecalStrataBase
+  tags: ["station", "markings"]
+
+# Grime
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeA1
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime1_1
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeA2
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime1_2
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeA3
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime1_3
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeA4
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime1_4
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeB1
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime2_1
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeB2
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime2_2
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeB3
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime2_3
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeB4
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime2_4
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeC1
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime3_1
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeC2
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime3_2
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeC3
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime3_3
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeC4
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime3_4
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeD1
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime4_1
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeD2
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime4_2
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeD3
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime4_3
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataGrimeD4
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: grime4_4
+
+# Mud
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataMud1
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: soro_mud_1
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataMud2
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: soro_mud_2
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataMud3
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: soro_mud_3
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataMud4
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: soro_mud_4
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataMud5
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: soro_mud_5
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataMud6
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: soro_mud_6
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataMud7
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: soro_mud_7
+
+- type: decal
+  parent: RMCDecalStrataBase
+  id: RMCDecalStrataMud8
+  sprite:
+    sprite: _RMC14/Decals/strata.rsi
+    state: soro_mud_8

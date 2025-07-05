@@ -211,6 +211,7 @@
   id: RMCClosetGoldenArrowGear
   name: personal locker
   description: An immobile storag unit.
+  suffix: Golden Arrow
   components:
   - type: EntityTableContainerFill
     containers:
