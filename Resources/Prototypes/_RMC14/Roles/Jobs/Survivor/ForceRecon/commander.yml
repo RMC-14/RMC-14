@@ -57,6 +57,7 @@
         - RMCSquadFORECON
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
+    - type: SpotterWhitelist
   hidden: true
 
 - type: startingGear

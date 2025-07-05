@@ -94,7 +94,7 @@
     - RMCPowerCellHigh
     - CMEntrenchingTool
     - CMLightReplacer
-#    - CMAPCElectronics # TODO RMC14 uncomment when power
+    - CMAPCElectronics
     - RMCNailgunTactical
 
 - type: entity

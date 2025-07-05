@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.Input;
 
 namespace Content.Client._RMC14.Weapons.Ranged;
@@ -27,7 +28,7 @@ public sealed class PumpActionSystem : SharedPumpActionSystem
 
         base.OnAttemptShoot(ent, ref args);
 
-        if (!ent.Comp.Pumped)
+        if (!ent.Comp.Pumped && TryComp<GunComponent>(ent.Owner, out var gun) && !gun.BurstActivated)
         {
             var message = _input.TryGetKeyBinding(CMKeyFunctions.CMUniqueAction, out var bind)
                 ? Loc.GetString(ent.Comp.PopupKey, ("key", bind.GetKeyString()))
