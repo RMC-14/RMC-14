@@ -129,7 +129,7 @@
       amount: 3
 
 - type: entity
-  parent: RMCArmorSPP
+  parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
   id: RMCArmorSPPArmy
   name: 6B80 personal body armor
   description: An older SPP personal armor system that's since been replaced by the SPP Army Standard 6B90 body armor. It is still used by certain SPP Army units that the SPP doesn't expect to see much combat.
@@ -211,7 +211,7 @@
     explosionArmor: 10
 
 - type: entity
-  parent: CMArmorM3VLBallistics
+  parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
   id: RMCArmorSPPFirefighter
   name: T-20 fire response coat
   description: A rugged, no-frills fire-resistant overcoat issued to UPP industrial and emergency crews. Based on the PyroTex LT design but using cheaper, domestically produced materials, it offers basic protection against heat and debris at the cost of weight and comfort.
