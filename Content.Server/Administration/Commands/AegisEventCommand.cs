@@ -2,6 +2,7 @@ using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Xenonids;
+using Content.Server._RMC14.Spawners;
 using Content.Shared._RMC14.AegisEvent;
 using Content.Shared._RMC14.Requisitions.Components;
 using Robust.Shared.Map;
@@ -41,5 +42,30 @@ public sealed class AegisEventCommand : IConsoleCommand
         entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(pamphletItem);
 
         shell.WriteLine("Aegis event announced to marines and xenos, and items sent through ASRS.");
+    }
+}
+
+[AdminCommand(AdminFlags.Moderator)]
+public sealed class AegisSpawnCommand : IConsoleCommand
+{
+    public string Command => "aegisspawn";
+    public string Description => "Activates AEGIS crate spawners for spawning at round start.";
+    public string Help => $"Usage: {Command}";
+
+    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    {
+        var systemManager = IoCManager.Resolve<IEntitySystemManager>();
+        var spawnerSystem = systemManager.GetEntitySystem<RMCSpawnerSystem>();
+        
+        var activatedCount = spawnerSystem.ActivateAegisSpawners();
+
+        if (activatedCount > 0)
+        {
+            shell.WriteLine($"Activated {activatedCount} AEGIS spawner(s). Crates will spawn at round start.");
+        }
+        else
+        {
+            shell.WriteLine("No AEGIS spawners found on the current map.");
+        }
     }
 }

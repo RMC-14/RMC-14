@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Events;
 using Content.Server.Humanoid.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -26,6 +27,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
     private readonly Dictionary<EntProtoId, List<Entity<ItemPoolSpawnerComponent>>> _itemPools = new();
     private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
+    private readonly List<Entity<AegisSpawnerComponent>> _aegisSpawners = new();
 
     private int _maxCorpses;
     private int _corpsesSpawned;
@@ -35,6 +37,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         SubscribeLocalEvent<DropshipLaunchedFromWarshipEvent>(OnDropshipLaunchedFromWarship);
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
 
         SubscribeLocalEvent<GunSpawnerComponent, MapInitEvent>(OnGunSpawnMapInit);
         SubscribeLocalEvent<RandomTimedDespawnComponent, MapInitEvent>(OnTimedDespawnMapInit);
@@ -45,6 +48,42 @@ public sealed class RMCSpawnerSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _corpsesSpawned = 0;
+    }
+
+    private void OnRoundStarting(RoundStartingEvent ev)
+    {
+        // Spawn AEGIS crates from all active spawners and then reset their IsActive flag
+        var aegisQuery = EntityQueryEnumerator<AegisSpawnerComponent>();
+        var spawnedCount = 0;
+
+        while (aegisQuery.MoveNext(out var uid, out var spawner))
+        {
+            if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
+                continue;
+
+            // Only spawn if the spawner is active (activated by aegisspawn command)
+            if (!spawner.IsActive)
+                continue;
+
+            var coordinates = _transform.GetMoverCoordinates(uid);
+            Spawn(spawner.Spawn, coordinates);
+
+            if (spawner.DeleteAfterSpawn)
+                QueueDel(uid);
+            else
+            {
+                // Reset the IsActive flag so the spawner won't spawn again next round
+                spawner.IsActive = false;
+                Dirty(uid, spawner);
+            }
+            
+            spawnedCount++;
+        }
+
+        if (spawnedCount > 0)
+        {
+            Log.Info($"Spawned {spawnedCount} AEGIS crates at round start");
+        }
     }
 
     private void OnDropshipLaunchedFromWarship(ref DropshipLaunchedFromWarshipEvent ev)
@@ -118,11 +157,62 @@ public sealed class RMCSpawnerSystem : EntitySystem
         RemCompDeferred<TimedDespawnOnLandingComponent>(landing);
     }
 
+    public int SpawnAegisCrates()
+    {
+        var aegisQuery = EntityQueryEnumerator<AegisSpawnerComponent>();
+        var spawnedCount = 0;
+
+        while (aegisQuery.MoveNext(out var uid, out var spawner))
+        {
+            if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
+                continue;
+
+            // Only spawn if the spawner is active
+            if (!spawner.IsActive)
+                continue;
+
+            var coordinates = _transform.GetMoverCoordinates(uid);
+            Spawn(spawner.Spawn, coordinates);
+        
+            if (spawner.DeleteAfterSpawn)
+                QueueDel(uid);
+            else
+            {
+                // Reset the IsActive flag after spawning
+                spawner.IsActive = false;
+                Dirty(uid, spawner);
+            }
+
+            spawnedCount++;
+        }
+
+        return spawnedCount;
+    }
+
+    public int ActivateAegisSpawners()
+    {
+        var aegisQuery = EntityQueryEnumerator<AegisSpawnerComponent>();
+        var activatedCount = 0;
+
+        while (aegisQuery.MoveNext(out var uid, out var spawner))
+        {
+            if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
+                continue;
+
+            spawner.IsActive = true;
+            Dirty(uid, spawner);
+            activatedCount++;
+        }
+
+        return activatedCount;
+    }
+
     public override void Update(float frameTime)
     {
         _spawners.Clear();
         _itemPools.Clear();
         _corpseSpawners.Clear();
+        _aegisSpawners.Clear();
 
         var roundDuration = _gameTicker.RoundDuration();
         var timedQuery = EntityQueryEnumerator<TimedDespawnOnLandingComponent>();
