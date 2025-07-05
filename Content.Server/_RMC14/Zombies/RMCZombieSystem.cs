@@ -28,6 +28,31 @@ public sealed partial class RMCZombieSystem : EntitySystem
         EnsureComp<NightVisionComponent>(target);
         _faction.AddFaction(target, "RMCDumb");
 
+        if (TryComp<ZombieComponent>(target, out var zombieComponent))
+        {
+            zombieComponent.PassiveHealing = new()
+            {
+                DamageDict = new ()
+                {
+                    { "Blunt", -10 },
+                    { "Slash", -10 },
+                    { "Piercing", -10 },
+                    { "Shock", -2 }
+                }
+            };
+            zombieComponent.HealingOnBite = new()
+            {
+                DamageDict = new ()
+                {
+                    { "Blunt", -20 },
+                    { "Slash", -20 },
+                    { "Piercing", -20 }
+                }
+            };
+            zombieComponent.PassiveHealingCritMultiplier = 1.5f;
+            zombieComponent.ZombieMovementSpeedDebuff = 0.80f;
+        };
+
         var accentType = "RMCZombie";
         if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
             accentType = accent.Accent;

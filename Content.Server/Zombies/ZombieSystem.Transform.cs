@@ -112,7 +112,7 @@ public sealed partial class ZombieSystem
         RemComp<ComplexInteractionComponent>(target);
 
         //funny voice
-        var accentType = "Zombie";
+        var accentType = "zombie";
         if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
             accentType = accent.Accent;
 
@@ -231,6 +231,7 @@ public sealed partial class ZombieSystem
         _mobState.ChangeMobState(target, MobState.Alive);
 
         _faction.ClearFactions(target, dirty: false);
+        _faction.AddFaction(target, "Zombie");
 
         //gives it the funny "Zombie ___" name.
         _nameMod.RefreshNameModifiers(target);

@@ -7,5 +7,5 @@
 public sealed partial class ZombieAccentOverrideComponent : Component
 {
     [DataField("accent")]
-    public string Accent = "RMCZombie"; // RMC14
+    public string Accent = "zombie";
 }
