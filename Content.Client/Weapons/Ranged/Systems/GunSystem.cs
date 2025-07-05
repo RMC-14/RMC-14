@@ -98,7 +98,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
     private void OnUpdateClientAmmo(EntityUid uid, AmmoCounterComponent ammoComp, ref UpdateClientAmmoEvent args)
     {
-        UpdateAmmoCount(uid, ammoComp);
+        UpdateAmmoCount(uid, ammoComp, args.AritifialIncrease); //RMC14
     }
 
     private void OnMuzzleFlash(MuzzleFlashEvent args)
