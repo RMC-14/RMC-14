@@ -36,6 +36,7 @@
   parent: BaseStructureDynamic
   id: RMCBarrelBase
   name: barrel
+  categories: [ HideSpawnMenu ]
   description: A storage barrel.
   components:
   - type: Sprite

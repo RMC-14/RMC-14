@@ -59,3 +59,4 @@
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetUNPeacekeeper
   name: un peacekeeper colonist preset
+  categories: [ HideSpawnMenu ]

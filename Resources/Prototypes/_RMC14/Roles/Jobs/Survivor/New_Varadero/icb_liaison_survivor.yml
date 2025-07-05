@@ -62,3 +62,4 @@
   parent: RMCSurvivorPresetCorporate
   id: RMCGearSurvivorPresetICB
   name: icb colonist preset
+  categories: [ HideSpawnMenu ]

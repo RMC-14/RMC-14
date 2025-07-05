@@ -73,6 +73,7 @@
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetSecurity
   name: security colonist preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     primaryWeapons:

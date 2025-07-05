@@ -54,4 +54,5 @@
 - type: entity
   parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetMedicalTechnician
-  name: medical technician colonist preset # TODO RMC14 random research notes
+  name: medical technician colonist preset
+  categories: [ HideSpawnMenu ]  # TODO RMC14 random research notes
