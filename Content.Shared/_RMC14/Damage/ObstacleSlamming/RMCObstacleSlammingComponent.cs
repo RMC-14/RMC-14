@@ -29,7 +29,7 @@ public sealed partial class RMCObstacleSlammingComponent : Component
     public float ThrowSpeedCoefficient = 0.2f;
 
     [DataField, AutoNetworkedField]
-    public float KnockbackPower = 1;
+    public float KnockbackPower = 0.3f;
 
     [DataField, AutoNetworkedField]
     public float KnockBackSpeed = 3;
