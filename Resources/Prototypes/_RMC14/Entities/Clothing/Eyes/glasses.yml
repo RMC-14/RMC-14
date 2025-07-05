@@ -218,6 +218,49 @@
   # - type: ItemToggleDeactivateUnskilled
 
 - type: entity
+  parent: [ClothingEyesBase, BaseToggleClothing]
+  id: RMCGlassesReagentHUDGlasses
+  name: reagent scanner HUD goggles
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/reagenthud.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/reagenthud.rsi
+  - type: ItemToggle
+    activated: true
+    soundActivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+    soundDeactivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+  - type: ToggleClothing
+    action: RMCActionToggleMedhud
+  - type: ComponentToggler
+    components:
+    - type: SolutionScanner
+  - type: RMCItemToggleClothingVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: Appearance
+  - type: ItemToggleRequiresSkill
+    skills:
+      RMCSkillMedical: 1
+  - type: ItemToggleDeactivateUnskilled
+    skills:
+      RMCSkillMedical: 1
+    popup: rmc-skills-hud-toggle
+
+- type: entity
   parent: ClothingEyesBase
   id: RMCGlassesMarineRpg # TODO make this actually prescription
   name: marine RPG glasses
@@ -584,6 +627,16 @@
     slots:
     - MASK
     - EYES
+
+- type: entity
+  parent: RMCHipsterGlasses
+  id: RMCHippieGlasses
+  name: rounded prescription glasses
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hippie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hippie.rsi
 
 - type: entity
   parent: ClothingEyesBase

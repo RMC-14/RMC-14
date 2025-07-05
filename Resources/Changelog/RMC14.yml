@@ -1,64 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: M5 camera gear now functions as a camera for the overwatch console.
-    type: Fix
-  id: 1427
-  time: '2025-03-06T05:06:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5815
-- author: Vermidia
-  changes:
-  - message: Fixed recovery nodes not having a doafter on healing.
-    type: Fix
-  id: 1428
-  time: '2025-03-06T05:06:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5814
-- author: Vermidia
-  changes:
-  - message: Fixed scout high impact and shotgun slugs and buckshot slowing big xenos.
-    type: Fix
-  id: 1429
-  time: '2025-03-06T05:07:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5818
-- author: SG6732
-  changes:
-  - message: Added new spritework for the B8 Smart-Scope. Now with 6 animation frames!
-    type: Add
-  id: 1430
-  time: '2025-03-08T20:33:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5288
-- author: J C Denton
-  changes:
-  - message: Fixed DCC having incorrect time requirement for rank up.
-    type: Fix
-  id: 1431
-  time: '2025-03-08T20:42:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5777
-- author: CyberTropic
-  changes:
-  - message: Fixed some solaris inserts.
-    type: Fix
-  id: 1432
-  time: '2025-03-09T23:26:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5798
-- author: OmerF-afk
-  changes:
-  - message: Added M10 White Medic Helmet to Corpsman vendors
-    type: Add
-  id: 1433
-  time: '2025-03-12T02:14:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5823
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You now get a special job icon and title when using a loader or mortar
-      operator pamphlet.
-    type: Add
-  - message: Fixed roles other than riflemen being able to use the loader or mortar
-      operator pamphlet.
-    type: Fix
-  id: 1434
-  time: '2025-03-12T02:26:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5874
 - author: Vermidia
   changes:
   - message: Fixed fruits not having a spent state. Gardener UI for choosing fruits
@@ -5084,5 +5024,75 @@
   id: 1928
   time: '2025-07-05T00:28:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6896
+- author: Binbagg
+  changes:
+  - message: Headbutt ability now will activate 0.5 tiles further away.
+    type: Tweak
+  id: 1929
+  time: '2025-07-05T03:59:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6916
+- author: noctyrnal
+  changes:
+  - message: The XM51 can now do a two shot burst when the stock is attached.
+    type: Add
+  id: 1930
+  time: '2025-07-05T04:04:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6864
+- author: J C Denton
+  changes:
+  - message: Fixed SOs having XO-level access, they now have less doors to open.
+    type: Fix
+  - message: Fixed IOs having Pilot access and Cockpit with Nav. computer having one,
+      both now have Dropship access.
+    type: Fix
+  - message: Fixed Chief Engineer not having Dropship access.
+    type: Tweak
+  id: 1931
+  time: '2025-07-05T04:19:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6670
+- author: Arykh
+  changes:
+  - message: Fixed autolathe's starting glass being too high.
+    type: Fix
+  - message: Fixed various lathe recipe costs being incorrect, specially the medilathe's
+      recipes with half of them being cheaper than intended.
+    type: Fix
+  id: 1932
+  time: '2025-07-05T06:13:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6749
+- author: Tunguso4ka
+  changes:
+  - message: New distress signal map Sorokyne Strata added.
+    type: Add
+  id: 1933
+  time: '2025-07-05T06:27:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6771
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed being able to use LOOC while unconscious from parasites or explosions.
+    type: Fix
+  id: 1934
+  time: '2025-07-05T06:28:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6899
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed FORECON not being able to use spotter equipment
+    type: Fix
+  id: 1935
+  time: '2025-07-05T06:30:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6907
+- author: Tunguso4ka
+  changes:
+  - message: Added M4SPR Extended, M1984 AP, M13 Extended, M13 Drum magazines to squad
+      vendors
+    type: Add
+  - message: Added welding googles to squad vendors.
+    type: Add
+  - message: Fixed the squad vendor having too many magnetic harness, S5 RedDot and
+      S6 Reflex attachments.
+    type: Fix
+  id: 1936
+  time: '2025-07-05T06:51:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6897
 Name: RMC14
 Order: -1
