@@ -33,6 +33,7 @@
         RMCSkillEngineer: 2
         RMCSkillLeadership: 1
         RMCSkillFirearms: 1
+    - type: RMCAllowSuitStorage
 
 - type: playTimeTracker
   id: RMCJobWeYaGoonLead

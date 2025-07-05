@@ -26,6 +26,7 @@
         RMCSkillFirearms: 0
         RMCSkillEndurance: 0
         RMCSkillVehicles: 1
+    - type: RMCAllowSuitStorage
 
 - type: playTimeTracker
   id: RMCJobWeYaLawyerSupervisor
