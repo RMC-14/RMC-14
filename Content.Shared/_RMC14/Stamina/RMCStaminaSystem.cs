@@ -54,9 +54,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
     private void OnStaminaRejuvenate(Entity<RMCStaminaComponent> ent, ref RejuvenateEvent args)
     {
-        var healAmount = ent.Comp.Max - ent.Comp.Current;
-
-        DoStaminaDamage((ent, ent.Comp), healAmount, false);
+        DoStaminaDamage((ent, ent.Comp), -ent.Comp.Max, false);
     }
 
     public override void Update(float frameTime)

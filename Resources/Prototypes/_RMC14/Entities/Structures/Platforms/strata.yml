@@ -1,0 +1,142 @@
+# Sorokyne Strata
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformStrata
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: strata_metalplatform
+  - type: Construction
+    graph: RMCPlatformStrataDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformStrataBroken
+  components:
+  - type: Sprite
+    state: strata_metalplatform_broken
+  - type: Construction
+    graph: RMCPlatformStrataDestructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformStrata
+  id: RMCPlatformStrataStair
+  components:
+  - type: Sprite
+    state: strata_metalplatform_stair
+
+- type: entity
+  parent: RMCPlatformStrata
+  id: RMCPlatformStrataStairAlt
+  components:
+  - type: Sprite
+    state: strata_metalplatform_stair_alt
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: strata_metalplatform_deco
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformStrataTwo
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: strata_metalplatform2
+  - type: Construction
+    graph: RMCPlatformStrata2Destructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformStrata2Broken
+  components:
+  - type: Sprite
+    state: strata_metalplatform2_broken
+  - type: Construction
+    graph: RMCPlatformStrata2Destructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataTwoCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: strata_metalplatform_deco2
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformStrataThree
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: strata_metalplatform3
+  - type: Construction
+    graph: RMCPlatformStrata3Destructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformStrata3Broken
+  components:
+  - type: Sprite
+    state: strata_metalplatform3_broken
+  - type: Construction
+    graph: RMCPlatformStrata3Destructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataThreeCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: strata_metalplatform_deco3
+
+# Sorokyne Rock
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformStrataRock
+  name: ice rock edge
+  description: A solid chunk of desolate rocks and ice. Looks like you could climb it with some difficulty.
+  components:
+  - type: Sprite
+    state: strata_rock_platform
+  - type: Construction
+    graph: RMCPlatformStrataRockDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformStrataRockBroken
+  name: destroyed ice rock edge
+  description: A solid chunk of desolate rocks and ice. Looks like you could climb it with some difficulty. It has been destroyed.
+  components:
+  - type: Sprite
+    state: strata_rock_platform_broken
+  - type: Construction
+    graph: RMCPlatformStrataRockDestructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataRockCornerSmall
+  name: ice rock corner
+  description: A solid chunk of desolate rocks and ice.
+  components:
+  - type: Sprite
+    state: strata_rock_platform_deco

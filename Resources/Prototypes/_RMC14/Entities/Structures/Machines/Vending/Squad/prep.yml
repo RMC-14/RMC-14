@@ -184,6 +184,8 @@
         amount: 15
       - id: RMCBeltHolsterPistol
         amount: 15
+      - id: RMCBeltHolsterM13
+        amount: 15
       - id: RMCBeltHolsterRevolver
         amount: 15
       - id: RMCBeltHolsterSMG

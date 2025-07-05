@@ -69,8 +69,7 @@
 
 - type: entity
   id: RMCAllowSuitStorageClothingJacket
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -98,8 +97,7 @@
 
 - type: entity
   id: RMCAllowSuitStorageClothingHazardVest
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -467,6 +465,8 @@
   components:
   - type: Foldable
     folded: true
+  - type: Clothing
+    equippedPrefix: jacket
 
 - type: entity
   parent: CMCoatOfficer

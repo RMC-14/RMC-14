@@ -342,6 +342,17 @@
 
 - type: entity
   parent: CMHeadCap
+  id: RMCHeadCapPeakedCMP
+  name: chief mp peaked cap
+  description: A peaked cap given to experienced CMP. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
+
+- type: entity
+  parent: CMHeadCap
   id: CMHeadCapCMO
   name: chief medical officer's peaked cap
   description: A peaked cap given to high-ranking medical officers. Looks just a touch silly.

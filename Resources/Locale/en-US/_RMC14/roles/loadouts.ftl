@@ -9,6 +9,7 @@ rmc-loadout-group-recreational = Recreational
 rmc-loadout-group-weapons = Weapons
 rmc-loadout-group-canned-drinks = Canned Drinks
 rmc-loadout-group-flasks = Flasks
+rmc-loadout-group-smokables = Smokables
 rmc-loadout-group-foods-sweets = Food (sweets)
 rmc-loadout-group-foods-packaged = Food (packaged)
 rmc-loadout-group-foods-healthy = Food (healthy)
