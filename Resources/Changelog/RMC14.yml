@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed recovery nodes not having a doafter on healing.
-    type: Fix
-  id: 1428
-  time: '2025-03-06T05:06:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5814
-- author: Vermidia
-  changes:
   - message: Fixed scout high impact and shotgun slugs and buckshot slowing big xenos.
     type: Fix
   id: 1429
@@ -5084,5 +5077,12 @@
   id: 1929
   time: '2025-07-05T03:59:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6916
+- author: noctyrnal
+  changes:
+  - message: The XM51 can now do a two shot burst when the stock is attached.
+    type: Add
+  id: 1930
+  time: '2025-07-05T04:04:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6864
 Name: RMC14
 Order: -1
