@@ -1507,3 +1507,47 @@
     state: neza
   - type: PatronFigurine
     id: 33ee0269-f61d-467c-916b-139146ce2a54
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJadeFiendEria
+  name: Jade 'Fiend' Eria figurine
+  description: "You can see a broken receiver sticking out, it emits incomprehensible gibberish when squeezed. The figurine's jaw looks slightly melted off, as if someone held it above a candle."
+  components:
+  - type: Sprite
+    state: jade_fiend_eria
+  - type: PatronFigurine
+    id: 6dd43972-aaf1-4035-aca1-444bf808b4f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAshWinter
+  name: Ash Winter figurine
+  description: "Most Devious Silly Lizard."
+  components:
+  - type: Sprite
+    state: ash_winter
+  - type: PatronFigurine
+    id: 4a6ca145-871a-4aeb-8302-9e8b5e3495e0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLoreWulbrenEra
+  name: Lore 'Wulbren' Era figurine
+  description: "The best Pilot in the Almayer! - And the best rifleman.."
+  components:
+  - type: Sprite
+    state: lore_wulbren_era
+  - type: PatronFigurine
+    id: 38395431-1f3b-4d4b-8140-0ab9b026b16b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLydiaSanitater
+  name: Lydia Sanitater figurine
+  description: "Stand still or I can not save you."
+  components:
+  - type: Sprite
+    state: lydia_sanitater
+  - type: PatronFigurine
+    id: 293b6e13-2d65-449c-a334-93e7b624bd86
