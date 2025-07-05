@@ -1174,6 +1174,9 @@ DrinkBlueCuracaoBottleFull: RMCDrinkAlcoholBlueCuracao
 ClothingOuterBioGeneral: RMCSuitBioGeneral
 ClothingHeadHatHoodBioGeneral: RMCHoodBioGeneral
 
+# 2025-06-24
+ClothingNeckStethoscope: RMCStethoscope
+
 # 2025-06-30
 ClosetL3Filled: CMClosetBioFilled
 ClosetL3VirologyFilled: CMClosetBioVirologyFilled
