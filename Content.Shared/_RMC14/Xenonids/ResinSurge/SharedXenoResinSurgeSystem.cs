@@ -10,6 +10,7 @@ using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
@@ -67,13 +68,14 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         }
     }
 
-    private void ReduceSurgeCooldown(Entity<XenoResinSurgeComponent> xeno, TimeSpan? cooldown = null)
+
+    private void ReduceSurgeCooldown(Entity<XenoResinSurgeComponent> xeno, double? cooldownMult = null)
     {
         foreach (var action in _actions.GetActions(xeno))
         {
             if (TryComp(action.Id, out XenoResinSurgeActionComponent? actionComp))
             {
-                _actions.SetCooldown(action.Id, cooldown ?? actionComp.FailCooldown);
+                _actions.SetCooldown(action.Id, actionComp.SuccessCooldown * (cooldownMult ?? actionComp.FailCooldownMult));
                 break;
             }
         }
@@ -142,6 +144,13 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
 
                 _xenoReinforce.Reinforce(entity, xeno.Comp.ReinforceAmount, xeno.Comp.ReinforceDuration);
+                if (_net.IsServer)
+                {
+                    if (HasComp<DoorComponent>(entity))
+                        SpawnAttachedTo(xeno.Comp.SurgeDoorEffect, entity.ToCoordinates());
+                    else
+                        SpawnAttachedTo(xeno.Comp.SurgeWallEffect, entity.ToCoordinates());
+                }
                 return;
             }
 
@@ -159,6 +168,10 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 }
 
                 _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-fruit", ("target", entity)), xeno, xeno);
+                args.Handled = false;
+                var cooldownTimeMult = (fruit.GrowTime.TotalSeconds - (fruit.GrowTime / xeno.Comp.FruitCooldownDivisor)) * 0.1;
+                ReduceSurgeCooldown(xeno, cooldownTimeMult);
+
                 return;
             }
 

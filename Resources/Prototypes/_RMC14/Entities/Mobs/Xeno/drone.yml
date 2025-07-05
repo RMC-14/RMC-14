@@ -203,6 +203,8 @@
     - XenoFruitSpore
     - XenoFruitUnstable
     maxFruitAllowed: 6
+    fruitPickingMultiplier: 0.5
+    fruitFeedingMultiplier: 0.5
   - type: XenoResinSurge
   - type: XenoHidden
 

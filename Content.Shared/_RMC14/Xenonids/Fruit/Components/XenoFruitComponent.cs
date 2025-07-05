@@ -47,11 +47,11 @@ public sealed partial class XenoFruitComponent : Component
 
     // Fruit harvest do-after delay
     [DataField, AutoNetworkedField]
-    public TimeSpan HarvestDelay = TimeSpan.FromSeconds(1.5f);
+    public TimeSpan HarvestDelay = TimeSpan.FromSeconds(2);
 
     // Fruit consumption do-after delay
     [DataField, AutoNetworkedField]
-    public TimeSpan ConsumeDelay = TimeSpan.FromSeconds(5);
+    public TimeSpan ConsumeDelay = TimeSpan.FromSeconds(2);
 
     // Can this fruit be consumed at full health?
     [DataField, AutoNetworkedField]

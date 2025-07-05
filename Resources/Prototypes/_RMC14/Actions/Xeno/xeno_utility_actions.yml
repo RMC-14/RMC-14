@@ -54,7 +54,7 @@
   id: ActionXenoResinSurge
   parent: ActionXenoBase
   name: Resin Surge (75)
-  description: Speeds up fruit growth by 5 seconds when used on fruit, creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. Targeting anything else creates a 3x3 patch of weak sticky resin after a small doafter.
+  description: Instantly grows a fruit when used (cooldown will be proprotial to growth time), creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. Targeting anything else creates a 3x3 patch of weak sticky resin after a small doafter.
   components:
   - type: EntityWorldTargetAction
     itemIconStyle: NoItem

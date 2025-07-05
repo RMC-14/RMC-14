@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Examine;
 using Content.Shared.Maps;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
@@ -78,6 +79,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<XenoWeedsComponent, MapInitEvent>(OnWeedsMapInit);
         SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
         SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
+        SubscribeLocalEvent<XenoWeedsComponent, ExaminedEvent>(OnWeedsExamined);
 
         SubscribeLocalEvent<XenoWallWeedsComponent, ComponentRemove>(OnWallWeedsRemove);
         SubscribeLocalEvent<XenoWallWeedsComponent, EntityTerminatingEvent>(OnWallWeedsRemove);
@@ -102,6 +104,21 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<ReplaceWeedSourceOnWeedingComponent, AfterEntityWeedingEvent>(OnWeedOver);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
+    }
+
+    private void OnWeedsExamined(Entity<XenoWeedsComponent> weeds, ref ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        if (weeds.Comp.FruitGrowthMultiplier == 1.0f)
+            return;
+
+        using (args.PushGroup(nameof(XenoWeedsComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-xeno-fruit-weed-boost", ("percent", (int)(weeds.Comp.FruitGrowthMultiplier * 100))));
+        }
+
     }
 
     private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCBaseEffectXenoStructure
   categories: [ HideSpawnMenu ]
   components:
@@ -115,3 +115,32 @@
     layers:
     - state: alert_greyscale
       color: "#A800FF7F"
+
+#Surge
+- type: entity
+  parent: RMCBaseEffect
+  id: XenoSurgeResinWall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 15
+  - type: Sprite
+    sprite: /Textures/_RMC14/Structures/Xenos/xeno_surge_glow.rsi
+    noRot: true
+    drawdepth: Effects
+    layers:
+      - state: surge-wall
+        shader: unshaded
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: XenoSurgeResinWall
+  id: XenoSurgeResinDoor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+      - state: surge-door
+        shader: unshaded
