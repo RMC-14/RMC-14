@@ -31,6 +31,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         SubscribeLocalEvent<XenoCripplingStrikeComponent, XenoCripplingStrikeActionEvent>(OnXenoCripplingStrikeAction);
 
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeHitEvent>(OnXenoCripplingStrikeHit);
+        SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeAttackAttemptEvent>(OnActiveCripplingStrikeMeleeAttempt);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, RefreshMovementSpeedModifiersEvent>(OnActiveCripplingRefreshSpeed);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, ComponentRemove>(OnActiveCripplingRemove);
 
@@ -58,6 +59,8 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         active.DeactivateText = xeno.Comp.DeactivateText;
         active.ExpireText = xeno.Comp.ExpireText;
         active.Speed = xeno.Comp.Speed;
+        active.RemoveOnHit = xeno.Comp.RemoveOnHit;
+        active.PreventTackle = xeno.Comp.PreventTackle;
 
         Dirty(xeno, active);
 
@@ -100,6 +103,9 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             xeno.Comp.NextSlashBuffed = false;
             break;
         }
+
+        if (xeno.Comp.RemoveOnHit)
+            RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
     }
 
     private void OnActiveCripplingRefreshSpeed(Entity<XenoActiveCripplingStrikeComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -120,6 +126,20 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
     {
         args.Damage *= victim.Comp.DamageMult;
         RemCompDeferred<VictimCripplingStrikeDamageComponent>(victim);
+    }
+
+    private void OnActiveCripplingStrikeMeleeAttempt(Entity<XenoActiveCripplingStrikeComponent> ent, ref MeleeAttackAttemptEvent args)
+    {
+        if (!ent.Comp.PreventTackle)
+            return;
+
+        var netAttacker = GetNetEntity(ent);
+        switch (args.Attack)
+        {
+            case DisarmAttackEvent disarm:
+                args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
+                break;
+        }
     }
 
     public override void Update(float frameTime)
