@@ -442,7 +442,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
             // This part is shitty because there might be a wall that just... doesn't exactly go with this logic. Hope it works.
             if (HasComp<TagComponent>(entity) &&
                 _tags.HasTag(entity, "Wall") &&
-                !HasComp<DestructibleComponent>(entity))
+                !HasComp<DamageableComponent>(entity))
             {
                 return true;
             }
