@@ -19,7 +19,7 @@
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/greenriver_new_bridge.yml"
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/green_river_new_bridge.yml"
       probability: 0.1
 
 - type: entity
@@ -30,7 +30,7 @@
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/purpleriver_new_bridge.yml"
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/purple_river_new_bridge.yml"
       probability: 0.1
 
 - type: entity
@@ -41,7 +41,7 @@
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/cavein_engineering.yml"
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/cave_in_engineering.yml"
       probability: 0.1
 
 # Sprinkles
@@ -64,5 +64,5 @@
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Trijent/shipgone_northlz.yml"
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/ship_gone.yml"
       probability: 0.15
