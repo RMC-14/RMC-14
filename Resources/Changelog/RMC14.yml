@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: '"Find Parasite" action does not show standard UI and shows a warning
-      popup if the user cannot take a ghost role'
-    type: Tweak
-  id: 1437
-  time: '2025-03-12T08:28:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5866
 - author: Dygon
   changes:
   - message: Raffle durations aren't twice as long as intended anymore.
@@ -5074,5 +5066,13 @@
   id: 1938
   time: '2025-07-05T11:14:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6830
+- author: Dygon
+  changes:
+  - message: Fixed floor resin, resin structures, and resin constructs not taking
+      fire damage over time.
+    type: Fix
+  id: 1939
+  time: '2025-07-05T11:16:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6862
 Name: RMC14
 Order: -1
