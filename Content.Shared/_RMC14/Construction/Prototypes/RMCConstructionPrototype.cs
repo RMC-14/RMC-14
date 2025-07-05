@@ -89,4 +89,7 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     /// </summary>
     [DataField]
     public HashSet<int>? StackAmounts;
+    
+    [DataField]
+    public HashSet<ProtoId<RMCConstructionPrototype>>? Buildable { get; set; }
 }

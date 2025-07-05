@@ -250,3 +250,19 @@
     state: bulb0
   conditions:
     - !type:TileNotBlocked
+
+- type: entity
+  id: rmcconstructionghost
+  name: construction ghost
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawDepth: 7
+    color: "#30FF3080"
+  - type: RMCConstructionGhost
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
