@@ -438,4 +438,8 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> HidePlayerIdentities =
         CVarDef.Create("rmc.hide_player_identities", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCChatSquadColorMode =
+        CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
 }
