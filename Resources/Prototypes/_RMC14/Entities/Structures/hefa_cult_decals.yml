@@ -10,6 +10,7 @@
   - type: Clickable
   - type: Physics
     bodyType: Static
+    canCollide: False
   - type: Transform
     anchored: true
   - type: Sprite
