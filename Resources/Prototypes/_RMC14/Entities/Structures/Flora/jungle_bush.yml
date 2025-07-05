@@ -6,7 +6,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Flora/bush.rsi
-    offset: -0.25, 0.5
+    offset: 0.1, 0.35
     drawdepth: Overdoors
     state: bush1
   - type: SpriteFade
