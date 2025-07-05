@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CCVar;
+﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -14,11 +15,13 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.CrashLand;
 
 public sealed class CrashLandSystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -60,6 +63,12 @@ public sealed class CrashLandSystem : EntitySystem
         if (!_crashLandEnabled || !_crashLandableQuery.HasComp(args.OtherEntity))
             return;
 
+        var ev = new AttemptCrashLandEvent(args.OtherEntity);
+        RaiseLocalEvent(ent, ref ev);
+
+        if (ev.Cancelled)
+            return;
+
         TryCrashLand(args.OtherEntity, true);
     }
 
@@ -72,6 +81,47 @@ public sealed class CrashLandSystem : EntitySystem
             return;
 
         QueueDel(args.OtherEntity);
+    }
+
+    public bool IsLandableTile(Entity<MapGridComponent> grid, TileRef tileRef)
+    {
+        var tile = tileRef.GridIndices;
+        var location = _mapSystem.GridTileToLocal(grid, grid, tile);
+
+        if (tileRef.GetContentTileDefinition().ID == ContentTileDefinition.SpaceID)
+            return false;
+
+        // no air-blocked areas.
+        if (tileRef.IsSpace() ||
+            _turf.IsTileBlocked(tileRef, CollisionGroup.MobMask))
+        {
+            return false;
+        }
+
+        if (!_area.CanCAS(location) ||
+            !_area.CanFulton(location) ||
+            !_area.CanSupplyDrop(_transform.ToMapCoordinates(location)))
+            return false;
+
+        // don't spawn inside of solid objects
+        var physQuery = GetEntityQuery<PhysicsComponent>();
+        var valid = true;
+
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid.Comp, tile);
+        while (anchored.MoveNext(out var ent))
+        {
+            if (!physQuery.TryGetComponent(ent, out var body))
+                continue;
+            if (body.BodyType != BodyType.Static ||
+                !body.Hard ||
+                (body.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
+                continue;
+
+            valid = false;
+            break;
+        }
+
+        return valid;
     }
 
     public bool TryGetCrashLandLocation(out EntityCoordinates location)
@@ -91,36 +141,10 @@ public sealed class CrashLandSystem : EntitySystem
                 var randomX = _random.Next(-200, 200);
                 var randomY = _random.Next(-200, 200);
                 var tile = new Vector2i(randomX, randomY);
-                if (!_mapSystem.TryGetTileRef(grid, gridComp, tile, out var tileRef) ||
-                    tileRef.GetContentTileDefinition().ID == ContentTileDefinition.SpaceID)
+                if (!_mapSystem.TryGetTileRef(grid, gridComp, tile, out var tileRef))
                     continue;
 
-                // no air-blocked areas.
-                if (tileRef.IsSpace() ||
-                    _turf.IsTileBlocked(tileRef, CollisionGroup.MobMask))
-                {
-                    continue;
-                }
-
-                // don't spawn inside of solid objects
-                var physQuery = GetEntityQuery<PhysicsComponent>();
-                var valid = true;
-
-                var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, gridComp, tile);
-                while (anchored.MoveNext(out var ent))
-                {
-                    if (!physQuery.TryGetComponent(ent, out var body))
-                        continue;
-                    if (body.BodyType != BodyType.Static ||
-                        !body.Hard ||
-                        (body.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
-                        continue;
-
-                    valid = false;
-                    break;
-                }
-
-                if (!valid)
+                if (!IsLandableTile((grid, gridComp), tileRef))
                     continue;
 
                 location = _mapSystem.GridTileToLocal(grid, gridComp, tile);
@@ -139,6 +163,11 @@ public sealed class CrashLandSystem : EntitySystem
         if (!TryGetCrashLandLocation(out var location))
             return;
 
+        TryCrashLand(crashLandable, doDamage, location);
+    }
+
+    public void TryCrashLand(EntityUid crashLandable, bool doDamage, EntityCoordinates location)
+    {
         if (doDamage)
         {
             var damage = new DamageSpecifier
@@ -154,4 +183,21 @@ public sealed class CrashLandSystem : EntitySystem
 
         _transform.SetMapCoordinates(crashLandable, _transform.ToMapCoordinates(location));
     }
+}
+
+[ByRefEvent]
+public record struct AttemptCrashLandEvent(EntityUid Crashing, bool Cancelled = false);
+
+[Serializable, NetSerializable]
+public abstract class FallAnimationEventArgs : EntityEventArgs
+{
+    public NetEntity Entity;
+    public NetCoordinates Coordinates;
+    public float FallDuration;
+}
+
+[Serializable, NetSerializable]
+public abstract class CrashAnimationMsg : FallAnimationEventArgs
+{
+
 }
