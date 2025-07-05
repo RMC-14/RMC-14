@@ -1,5 +1,7 @@
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hook;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.ActionBlocker;
@@ -23,10 +25,11 @@ public sealed class XenoTailSeizeSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RMCPullingSystem _pulling = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
 
     public override void Initialize()
     {
@@ -61,16 +64,18 @@ public sealed class XenoTailSeizeSystem : EntitySystem
 
         if (!_hook.TryHookTarget((args.Shooter.Value, hookComp), args.Target))
             return;
+
         _pulling.TryStopAllPullsFromAndOn(args.Target);
 
         var origin = _transform.GetMoverCoordinates(args.Shooter.Value);
+        var mapCoords = _transform.GetMapCoordinates(args.Shooter.Value);
         var target = _transform.GetMoverCoordinates(args.Target);
-        var diff = origin.Position - target.Position;
         if (!origin.TryDistance(EntityManager, target, out var dis))
             return;
-        diff = diff.Normalized() * Math.Max(dis - 2, 0.5f); // Lands right in front
 
-        _throwing.TryThrow(args.Target, diff, 10, user: args.Shooter);
+        var knockBackDistance = -Math.Max(dis - 2, 0.5f); //Lands right in front
+        _obstacleSlamming.MakeImmune(args.Target);
+        _size.KnockBack(args.Target, mapCoords, knockBackDistance, knockBackDistance, 10);
         EnsureComp<VictimTailSeizedComponent>(args.Target);
     }
 
