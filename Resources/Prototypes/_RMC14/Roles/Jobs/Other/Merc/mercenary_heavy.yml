@@ -1,0 +1,64 @@
+# M63B2
+- type: job
+  parent: CMJobBase
+  id: RMCEliteMercHeavy
+  name: Heavy Mercenary
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCEliteMercHeavy
+  startingGear: RMCEliteMercHeavy
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Elite Mercenary Heavy
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Mercenary
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 1
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 5
+        RMCSkillVehicles: 1
+        RMCSkillJtac: 1
+        RMCSkillSmartGun: 1
+        RMCSkillMeleeWeapons: 1
+        # TODO RMC14: they are supposed to have "specialist weapon 9" which is idk. They can use WS weapons in cm tho.
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-merc-heavy
+  hidden: true
+
+- type: startingGear
+  id: RMCEliteMercHeavy
+  equipment:
+    id: RMCIDCardMercenary
+    jumpsuit: RMCJumpsuitMercenaryHeavy
+    outerClothing: RMCArmorMercenaryHeavy
+    gloves: RMCHandsVeteran
+    eyes: CMGlassesM42ScoutSight
+    head: RMCArmorHelmetMercenary
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclavaPMC
+    ears: RMCHeadsetDistressDukes
+    back: RMCSatchelLightpack
+    belt: RMCD50WinterWyvernBeltFilled
+    pocket1: RMCPouchReagentCanisterHeavy # TODO RMC14 supposed to be filled with oxy, the painkiller
+    pocket2: RMCPouchAutoinjectorFill
+    suitstorage: RMCSmartGunWhiteOut # TODO RMC14 supposed to be the ol painless
+  storage:
+    back:
+    - CMPacketGrenadeFragOldFilled
+    - RMCPacketGrenadeIncendiaryFilled #TODO RMC14 supposed to be white phosphorus
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+

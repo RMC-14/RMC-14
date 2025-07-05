@@ -500,6 +500,9 @@
   name: lightweight combat pack
   description: A small, lightweight pack for expeditions and short-range operations.
   components:
+  - type: Storage
+    grid:
+    - 0,0,20,1
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
 

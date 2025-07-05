@@ -1,0 +1,73 @@
+# M63B2
+- type: job
+  parent: CMJobBase
+  id: RMCEliteMercMedic
+  name: Medic Mercenary
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCEliteMercMedic
+  startingGear: RMCEliteMercMedic
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Elite Mercenary Medic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Mercenary
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillMedical: 4
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 5
+        RMCSkillSurgery: 2
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-merc-medic
+  hidden: true
+
+- type: startingGear
+  id: RMCEliteMercMedic
+  equipment:
+    id: RMCIDCardMercenary
+    jumpsuit: RMCJumpsuitMercenaryMedic
+    outerClothing: RMCArmorMercenaryEngineer
+    gloves: RMCHandsVeteran
+    eyes: RMCGlassesM4SPRBattleSight
+    head: RMCArmorHelmetMercenarySupport
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclavaPMC
+    ears: RMCHeadsetDistressDukes
+    back: RMCSatchelLightpack
+    belt:  RMCBeltMedicBagUPPFilled
+    pocket1: RMCPouchMagazineLarge
+    pocket2: RMCPouchMedkitFillAdvanced
+    suitstorage: RMCWeaponSMGM63B2
+  storage:
+    outerClothing:
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    back:
+    - CMDefibrillator
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMRollerBed
+    - CMRollerBed # TODO RMC14: supposed to be surgical bed
+    - CMSynthGraft
+    - CMHealthAnalyzer
+    - RMCBoxAttachment
+    - RMCPacketGrenadeSmokeFilled
+    pocket1:
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+
+# TODO RMC14: alternates between weapons, same with leader.
