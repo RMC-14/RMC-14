@@ -1,0 +1,98 @@
+- type: entity
+  parent: BaseFlag
+  id: RMCBannerBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/banners.rsi
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerCLF
+  name: CLF flag
+  description: A flag of the Colony Liberation Front. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: clfflag
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerCLFWorn
+  name: worn CLF flag
+  description: A very worn flag of the Colony Liberation Front. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: clfflag_worn
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerCM
+  name: UNMC flag
+  description: A flag of the United Nations Marine Corps. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: unmcflag
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerCMWorn
+  name: worn UNMC flag
+  description: A very worn flag of the United Nations Marine Corps. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: unmcflag_worn
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerSPP
+  name: SPP flag
+  description: A flag of the Socialist Progressive Peoples. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: sppflag
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerSPPWorn
+  name: worn SPP flag
+  description: A very worn flag of the Socialist Progressive Peoples. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: sppflag_worn
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerTSE
+  name: TSE flag
+  description: A flag of the Three Suns Empire. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: tseflag
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerTSEWorn
+  name: worn TSE flag
+  description: A very worn flag of the Three Suns Empire. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: tseflag_worn
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerUN
+  name: UN flag
+  description: A flag of the United Nations. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: unflag
+
+- type: entity
+  parent: RMCBannerBase
+  id: RMCBannerUNWorn
+  name: worn UN flag
+  description: A very worn flag of the United Nations. Inspires patriotism, fear, or revulsion depending on the viewer's political leanings.
+  components:
+  - type: Sprite
+    state: unflag_worn
+
