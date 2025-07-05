@@ -12,7 +12,7 @@
     bundle:
     - ArmorHelmetM10
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -26,7 +26,7 @@
     bundle:
     - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsInsulated
     - CMBootsBlackFilled
 
@@ -39,7 +39,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquadCorpsman
-    - CMJumpsuitMarineMedic
+    - RMCJumpsuitMarineMedicPatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -75,7 +75,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquadComTech
-    - CMJumpsuitMarineEngineer
+    - RMCJumpsuitMarineEngineerPatch
     - CMHandsInsulated
     - CMBootsBlackFilled
 
@@ -110,7 +110,7 @@
     bundle:
     - CMArmorHelmetM11 # TODO RMC14 M4
     - CMVendorHeadsetSquadLeader
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -123,7 +123,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
