@@ -1,0 +1,331 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 251.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 07/05/2025 15:52:33
+  entityCount: 6
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  4: CMFloorSteelPrisonDarkYellow3
+  1: CMFloorSteelPrisonPlate
+  3: CMFloorSteelPrisonPlateCaution2
+  2: CMFloorSteelPrisonPlateCaution3
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+        0,1:
+          ind: 0,1
+          tiles: AQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: Dirt
+          decals:
+            28: 1,2
+            29: 7,6
+            30: 0,6
+            31: 8,9
+            32: 0,15
+            33: 5,16
+            34: 9,17
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaWarningSouth
+          decals:
+            1: 0,0
+            2: 1,0
+            3: 2,0
+            4: 3,0
+            5: 4,0
+            6: 5,0
+            7: 6,0
+            8: 7,0
+            9: 8,0
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaWarningWest
+          decals:
+            10: 9,0
+            11: 9,1
+            12: 9,2
+            13: 9,3
+            14: 9,4
+            15: 9,5
+            16: 9,6
+            17: 9,7
+            18: 9,8
+            19: 9,9
+            20: 9,10
+            21: 9,11
+            22: 9,12
+            23: 9,13
+            24: 9,14
+            25: 9,15
+            26: 9,16
+            27: 9,17
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        1,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        9,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        8,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        7,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        6,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        5,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        4,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        3,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        2,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        1,17: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,0: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,1: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,2: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,3: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,4: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,5: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,6: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,7: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,8: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,9: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,10: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,11: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,12: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,13: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,14: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,15: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,16: RMCAreaDesertDamInteriorDamInteriorHanger
+        0,17: RMCAreaDesertDamInteriorDamInteriorHanger
+- proto: RMCBarrelBlue
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 9.5,12.5
+      parent: 1
+- proto: RMCCrateLarge
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+- proto: RMCGeneratorFusionCell
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 9.287142,13.452295
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 9.758572,13.695152
+      parent: 1
+- proto: RMCSecureCaseSmall
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 8.5,7.5
+      parent: 1
+...
