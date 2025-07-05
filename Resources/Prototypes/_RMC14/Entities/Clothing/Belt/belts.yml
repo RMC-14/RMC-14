@@ -355,7 +355,7 @@
       - CigPack
       - RMCPenlight
       - Flare
-      - CMMiniTank
+      #      - # TODO Finish implementation of CMMiniTank and add a tag for it
       #      - # TODO RMC14 reagent analyzer
       #      - # TODO RMC14 plant analyzer
       components:
