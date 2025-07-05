@@ -41,7 +41,7 @@ public sealed class PingWaypointOverlay : Overlay
     // grouping consts
     private const float GroupingDistance = 150f;
     private const float GroupingDistanceSquared = GroupingDistance * GroupingDistance;
-    private const float MinGroupingViewDistance = 20f;
+    private const float MinGroupingViewDistance = 50f;
     private const float MinGroupingViewDistanceSquared = MinGroupingViewDistance * MinGroupingViewDistance;
 
     // screen size

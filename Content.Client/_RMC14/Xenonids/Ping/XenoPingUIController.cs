@@ -210,7 +210,6 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         if (_menu == null)
             return;
 
-        _menu.Dispose();
         _menu = null;
         _targetCoordinates = null;
     }
