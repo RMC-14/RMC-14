@@ -195,15 +195,7 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
 
         var netCoords = _entityManager.GetNetCoordinates(_targetCoordinates.Value);
         var message = new XenoPingRequestEvent(pingType, netCoords);
-
-        try
-        {
-            _entityManager.RaisePredictiveEvent(message);
-        }
-        catch (System.Exception ex)
-        {
-            Log.Error(ex);
-        }
+        _entityManager.RaisePredictiveEvent(message);
 
         CloseMenu();
     }
