@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Raffle durations aren't twice as long as intended anymore.
-    type: Fix
-  id: 1438
-  time: '2025-03-12T08:34:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5797
 - author: Vermidia
   changes:
   - message: Fixed infected hosts losing tacklestacks and not consistently being able
@@ -5074,5 +5067,12 @@
   id: 1939
   time: '2025-07-05T11:16:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6862
+- author: Dygon
+  changes:
+  - message: Fixed Boilers being able to acid spray during the Bombard action's DoAfter.
+    type: Fix
+  id: 1940
+  time: '2025-07-05T11:39:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6872
 Name: RMC14
 Order: -1
