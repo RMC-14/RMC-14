@@ -1,18 +1,17 @@
 ﻿using Content.Server.Hands.Systems;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Medal;
-using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Ribbon;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.UniformAccessories;
 
 namespace Content.Server._RMC14.Medal;
 
-public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
+public sealed class PlaytimeMedalSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
@@ -87,10 +86,8 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
         var medal = SpawnAtPosition(medalId, ev.Mob.ToCoordinates());
         _hands.TryPickupAnyHand(ev.Mob, medal, false);
 
-        EnsureComp<PlaytimeMedalUserComponent>(ev.Mob);
-
-        var medalComp = EnsureComp<PlaytimeMedalComponent>(medal);
-        medalComp.User = ev.Mob;
+        var medalComp = EnsureComp<UniformAccessoryComponent>(medal);
+        medalComp.User = GetNetEntity(ev.Mob);
         Dirty(medal, medalComp);
     }
 }

@@ -1,7 +1,7 @@
 #Base Jacket
 - type: entity
   abstract: true
-  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket ]
+  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseJacket
   components:
   - type: Storage
@@ -16,7 +16,6 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
-  - type: PlaytimeMedalHolder
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist
