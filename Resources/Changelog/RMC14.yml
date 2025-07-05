@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: fixed taking damage stopping prying.
-    type: Fix
-  id: 1426
-  time: '2025-03-06T05:07:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5825
 - author: Dygon
   changes:
   - message: M5 camera gear now functions as a camera for the overwatch console.
@@ -5084,5 +5077,12 @@
   id: 1927
   time: '2025-07-04T23:18:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6900
+- author: noctyrnal
+  changes:
+  - message: Squad Leaders now start with the requisition channel by default.
+    type: Add
+  id: 1928
+  time: '2025-07-05T00:28:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6896
 Name: RMC14
 Order: -1
