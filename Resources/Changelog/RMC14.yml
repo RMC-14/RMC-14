@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed DCC having incorrect time requirement for rank up.
-    type: Fix
-  id: 1431
-  time: '2025-03-08T20:42:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5777
 - author: CyberTropic
   changes:
   - message: Fixed some solaris inserts.
@@ -5092,5 +5085,12 @@
   id: 1932
   time: '2025-07-05T06:13:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6749
+- author: Tunguso4ka
+  changes:
+  - message: New distress signal map Sorokyne Strata added.
+    type: Add
+  id: 1933
+  time: '2025-07-05T06:27:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6771
 Name: RMC14
 Order: -1
