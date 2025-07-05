@@ -1,40 +1,45 @@
 using System.Numerics;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Slow;
+using Content.Shared.Damage;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Systems;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.ParaDrop;
 
 public abstract partial class SharedParaDropSystem : EntitySystem
 {
-    [Dependency] private readonly CrashLandSystem _crashLand = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly CrashLandSystem _crashLand = default!;
+    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-
-    protected static readonly Vector2 ParachuteEffectOffset = new (0, 0.75f);
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly int CrashScatter = 4;
 
@@ -44,6 +49,15 @@ public abstract partial class SharedParaDropSystem : EntitySystem
 
         SubscribeLocalEvent<GrantParaDroppableComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantParaDroppableComponent, GotUnequippedEvent>(OnGotUnEquipped);
+
+        SubscribeLocalEvent<ParaDroppingComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ParaDroppingComponent, ComponentShutdown>(OnComponentShutdown);
+        SubscribeLocalEvent<ParaDroppingComponent, RMCIgniteAttemptEvent>(OnIgniteAttempt);
+        SubscribeLocalEvent<ParaDroppingComponent, GettingAttackedAttemptEvent>(OnGettingAttacked);
+        SubscribeLocalEvent<ParaDroppingComponent, AttemptMobCollideEvent>(OnAttemptMobCollide);
+        SubscribeLocalEvent<ParaDroppingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
+        SubscribeLocalEvent<ParaDroppingComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
+        SubscribeLocalEvent<ParaDroppingComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
     }
 
     private void OnGotEquipped(Entity<GrantParaDroppableComponent> ent, ref GotEquippedEvent args)
@@ -82,6 +96,70 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         AttemptParaDrop((dropShip, paraDrop), args.Crashing);
     }
 
+    private void OnMapInit(Entity<ParaDroppingComponent> ent, ref MapInitEvent args)
+    {
+        if (!TryComp(ent, out PhysicsComponent? physics) || !TryComp(ent, out FixturesComponent? fixtures))
+            return;
+
+        foreach (var fixture in fixtures.Fixtures)
+        {
+            ent.Comp.OriginalLayers.TryAdd(fixture.Key, fixture.Value.CollisionLayer);
+            ent.Comp.OriginalMasks.TryAdd(fixture.Key, fixture.Value.CollisionMask);
+
+            _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, (int) CollisionGroup.None);
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, (int) CollisionGroup.None);
+        }
+
+        Dirty(ent);
+    }
+
+    private void OnComponentShutdown(Entity<ParaDroppingComponent> ent, ref ComponentShutdown args)
+    {
+        if (!TryComp(ent, out PhysicsComponent? physics) || !TryComp(ent, out FixturesComponent? fixtures))
+            return;
+
+        foreach (var fixture in fixtures.Fixtures)
+        {
+            if (!ent.Comp.OriginalLayers.TryGetValue(fixture.Key, out var originalLayer) ||
+                !ent.Comp.OriginalMasks.TryGetValue(fixture.Key, out var originalMask))
+                continue;
+
+            _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, originalLayer);
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, originalMask);
+        }
+    }
+
+    private void OnIgniteAttempt(Entity<ParaDroppingComponent> ent, ref RMCIgniteAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnAttemptMobCollide(Entity<ParaDroppingComponent> ent, ref AttemptMobCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnAttemptMobTargetCollide(Entity<ParaDroppingComponent> ent, ref AttemptMobTargetCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnGettingAttacked(Entity<ParaDroppingComponent> ent, ref GettingAttackedAttemptEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnThrowPushbackAttempt(Entity<ParaDroppingComponent> ent, ref ThrowPushbackAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnBeforeDamageChanged(Entity<ParaDroppingComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+
     /// <summary>
     ///     Try to do a paradrop, if the dropShip has no <see cref="ActiveParaDropComponent"/> the drop location will be random.
     /// </summary>
@@ -90,6 +168,9 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     private void AttemptParaDrop(Entity<ActiveParaDropComponent?> dropShip, EntityUid dropping)
     {
         if (_net.IsClient)
+            return;
+
+        if (HasComp<ParaDroppingComponent>(dropping))
             return;
 
         EntityUid? dropTarget = null;
@@ -137,34 +218,24 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             return false;
         }
 
-        // This is to prevent ghost parachutes
-        if (paraDroppable.LastParaDrop != null && paraDroppable.LastParaDrop.Value + paraDroppable.ParaDropCooldown > _timing.CurTime)
-            return false;
-
         paraDroppable.LastParaDrop = _timing.CurTime;
         Dirty(dropping, paraDroppable);
 
-        _slow.TryRoot(dropping, TimeSpan.FromSeconds(paraDroppable.DropDuration));
+        _slow.TryRoot(dropping, TimeSpan.FromSeconds(paraDroppable.DropDuration + 0.1));
+        _rmcPulling.TryStopAllPullsFromAndOn(dropping);
         if (TryComp(dropping, out PhysicsComponent? physics))
-        {
             _physics.SetLinearVelocity(dropping, Vector2.Zero, body: physics);
-        }
 
         // Paradrop near the target location.
         if (TryGetParaDropLocation(dropCoordinates, paraDroppable.DropScatter, out var adjustedCoordinates))
             dropCoordinates = adjustedCoordinates;
 
+        var droppingComp = EnsureComp<ParaDroppingComponent>(dropping);
+        droppingComp.RemainingTime = paraDroppable.DropDuration;
+        Dirty(dropping, droppingComp);
+
         _transform.SetMapCoordinates(dropping, _transform.ToMapCoordinates(dropCoordinates));
         _audio.PlayPvs(paraDroppable.DropSound, dropping);
-
-        var ev = new ParaDropAnimationMessage
-        {
-            Entity = GetNetEntity(dropping),
-            Coordinates = GetNetCoordinates(dropCoordinates),
-            FallDuration = paraDroppable.DropDuration,
-            ParachuteSprite = paraDroppable.ParachuteSprite,
-        };
-        RaiseNetworkEvent(ev);
 
         return true;
     }
@@ -207,19 +278,13 @@ public abstract partial class SharedParaDropSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<ActiveParaDropComponent, DropshipComponent>();
+        var dropshipQuery = EntityQueryEnumerator<ActiveParaDropComponent, DropshipComponent>();
 
-        while (query.MoveNext(out var uid, out var paraDrop, out var dropship))
+        while (dropshipQuery.MoveNext(out var uid, out var paraDrop, out var dropship))
         {
             // Stop targeting when the target disappears, or when the dropships starts it's landing procedures.
             if (dropship.State == FTLState.Arriving || !HasComp<DropshipTargetComponent>(paraDrop.DropTarget))
                 RemCompDeferred<ActiveParaDropComponent>(uid);
         }
     }
-}
-
-[Serializable, NetSerializable]
-public sealed class ParaDropAnimationMessage : FallAnimationEventArgs
-{
-    public SpriteSpecifier ParachuteSprite = new SpriteSpecifier.Rsi(new ResPath("Objects/Tools/fulton_balloon.rsi"), "fulton_balloon");
 }

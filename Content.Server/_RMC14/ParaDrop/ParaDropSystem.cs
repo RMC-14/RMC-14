@@ -1,6 +1,5 @@
 using Content.Server._RMC14.Dropship;
 using Content.Server.Doors.Systems;
-using Content.Server.Shuttles.Components;
 using Content.Shared.Doors.Components;
 using Content.Shared.ParaDrop;
 
@@ -28,6 +27,18 @@ public sealed partial class ParaDropSystem: SharedParaDropSystem
 
             _dropship.UnlockDoor(child);
             _dropship.LockDoor(child);
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        var paraDroppingQuery = EntityQueryEnumerator<ParaDroppingComponent>();
+
+        while (paraDroppingQuery.MoveNext(out var uid, out var paraDropping))
+        {
+            paraDropping.RemainingTime -= frameTime;
+            if (paraDropping.RemainingTime < 0)
+                RemComp<ParaDroppingComponent>(uid);
         }
     }
 }

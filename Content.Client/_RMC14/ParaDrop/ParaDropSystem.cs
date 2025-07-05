@@ -2,48 +2,19 @@ using System.Numerics;
 using Content.Shared.ParaDrop;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Spawners;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.ParaDrop;
 
 public sealed partial class ParaDropSystem : SharedParaDropSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeNetworkEvent<ParaDropAnimationMessage>(OnParaDropMessage);
-    }
-
-    private void OnParaDropMessage(ParaDropAnimationMessage ev)
-    {
-        if (!TryGetEntity(ev.Entity, out var entity))
-            return;
-
-        var coordinates = GetCoordinates(ev.Coordinates);
-
-        if (!TryComp<SpriteComponent>(entity, out var entSprite))
-            return;
-
-        var animationEnt = Spawn(null, coordinates);
-        var sprite = AddComp<SpriteComponent>(animationEnt);
-
-        sprite.NoRotation = true;
-        var effectLayer = sprite.AddLayer(ev.ParachuteSprite);
-        sprite.LayerSetOffset(effectLayer, ParachuteEffectOffset);
-
-        var despawn = AddComp<TimedDespawnComponent>(animationEnt);
-        despawn.Lifetime = ev.FallDuration;
-
-        _animPlayer.Stop(animationEnt, "parachute-animation");
-        _animPlayer.Play(animationEnt, ReturnFallAnimation(ev.FallDuration), "parachute-animation");
-
-        _animPlayer.Stop(entity.Value, "dropping-animation");
-        _animPlayer.Play(entity.Value, ReturnFallAnimation(ev.FallDuration), "dropping-animation");
-    }
-
-    public Animation ReturnFallAnimation(float fallDuration)
+    public Animation ReturnFallAnimation(float fallDuration, float fallHeight)
     {
         return new Animation
         {
@@ -56,11 +27,49 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
                     Property = nameof(SpriteComponent.Offset),
                     KeyFrames =
                     {
-                        new AnimationTrackProperty.KeyFrame(new Vector2(0f, 7), 0f),
+                        new AnimationTrackProperty.KeyFrame(new Vector2(0f, fallHeight), 0f),
                         new AnimationTrackProperty.KeyFrame(new Vector2(0f, 0f), fallDuration),
                     },
                 },
             },
         };
+    }
+
+    private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier)
+    {
+        var animationEnt = Spawn(null, coordinates);
+        var sprite = AddComp<SpriteComponent>(animationEnt);
+
+        sprite.NoRotation = true;
+        var effectLayer = sprite.AddLayer(paraDroppable.ParachuteSprite);
+        sprite.LayerSetOffset(effectLayer, paraDroppable.ParachuteOffset);
+
+        var despawn = AddComp<TimedDespawnComponent>(animationEnt);
+        despawn.Lifetime = fallDuration;
+
+        _animPlayer.Play(animationEnt, ReturnFallAnimation(fallDuration, paraDroppable.FallHeight * multiplier), "parachute-animation");
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<ParaDroppableComponent, ParaDroppingComponent>();
+        while (query.MoveNext(out var uid, out var paraDroppable, out _))
+        {
+            if (!_animPlayer.HasRunningAnimation(uid, "dropping-animation") && paraDroppable.LastParaDrop != null)
+            {
+                var duration = TimeSpan.FromSeconds(paraDroppable.DropDuration);
+                var timeRemaining =  duration - (_timing.CurTime - paraDroppable.LastParaDrop.Value);
+                var multiplier = (float) timeRemaining.Ticks / duration.Ticks;
+
+                if (timeRemaining < TimeSpan.FromSeconds(paraDroppable.DropDuration))
+                {
+                    SpawnParachute(multiplier * paraDroppable.DropDuration, _transform.GetMoverCoordinates(uid), paraDroppable, multiplier);
+                    if (!_animPlayer.HasRunningAnimation(uid, "dropping-animation"))
+                        _animPlayer.Play(uid, ReturnFallAnimation( multiplier * paraDroppable.DropDuration,  paraDroppable.FallHeight *  multiplier ), "dropping-animation");
+                }
+            }
+        }
     }
 }
