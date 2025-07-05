@@ -10,6 +10,43 @@
     limit: 4
     hiddenByJacketRolling: true
 
+# UN
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchUnitedNations
+  name: United Nations patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the United Nations, an economic and political giant in both the Sol system and throughout the offworld colonies, the military might of the UN is unparalleled..
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/un_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/un_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/un_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchUNMC
+  name: UNMC patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the United Nations Marine Corps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/unmc_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/unmc_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/unmc_patch.rsi
+      state: helmet
+
 # FORECON
 - type: entity
   parent: RMCPatchBase
@@ -28,3 +65,45 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/forecon_patch.rsi
       state: helmet
+
+# WEYA
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchWeYa
+  name: Weston-Yamada patch
+  description: A fire-resistant white shoulder patch featuring the Weston-Yamada logo. A symbol of loyalty to the corporation, or perhaps ironic mockery, depending on your viewpoint.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchWeYa
+  id: RMCPatchWeYaBlack
+  description: A fire-resistant black shoulder patch featuring the Weston-Yamada logo. A symbol of loyalty to the corporation, or perhaps ironic mockery, depending on your viewpoint.
+  suffix: Black
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch_black.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch_black.rsi
+      state: patch
+
+- type: entity
+  parent: RMCPatchWeYaBlack
+  id: RMCPatchWeYaBlackSquare
+  suffix: Black, Square
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch_square.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch_square.rsi
+      state: patch
