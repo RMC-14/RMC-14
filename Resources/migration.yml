@@ -1185,3 +1185,7 @@ FireAxeCabinet: RMCFireAxeCabinet
 FireAxeCabinetOpen: RMCFireAxeCabinetFilled
 FireAxeCabinetFilled: RMCFireAxeCabinetFilled
 FireAxeCabinetFilledOpen: RMCFireAxeCabinetFilled
+
+# 2025-07-04
+SprayBottleSpaceCleaner: RMCSprayBottleSpaceCleaner
+WallGold: RMCWallGold

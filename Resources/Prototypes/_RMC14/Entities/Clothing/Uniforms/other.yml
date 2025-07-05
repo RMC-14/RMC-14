@@ -214,6 +214,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/chaplain_uniform.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitOrange
+  name: orange jumpsuit
+  description: "It's standardised prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/orange.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase
