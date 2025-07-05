@@ -107,6 +107,9 @@
       types:
         Blunt: 0
     throwRange: 2
+  - type: ParaDroppable
+    dropScatter: 4
+    parachuteOffset: 0.0,0.5
 
 - type: entity
   parent: RMCCrateBase

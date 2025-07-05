@@ -12,7 +12,7 @@ public sealed partial class ParaDroppableComponent : Component
     public float DropDuration = 3.5f;
 
     [DataField, AutoNetworkedField]
-    public int DropScatter = 4;
+    public int DropScatter = 7;
 
     [DataField, AutoNetworkedField]
     public float FallHeight = 7;

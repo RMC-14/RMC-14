@@ -769,9 +769,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsParaDropSelect(Entity<DropshipTerminalWeaponsComponent> ent, ref DropShipTerminalWeaponsParaDropTargetSelectMsg args)
     {
-        if (_net.IsClient)
-            return;
-
         if (ent.Comp.Target == null)
         {
             RefreshWeaponsUI(ent);
@@ -787,6 +784,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             (!TryComp(dropship, out FTLComponent? ftl) ||
              ftl.State != FTLState.Travelling))
         {
+            var msg = Loc.GetString("rmc-dropship-paradrop-lock-target-not-flying");
+            _popup.PopupCursor(msg, args.Actor);
             return;
         }
 

@@ -284,7 +284,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         {
             // Stop targeting when the target disappears, or when the dropships starts it's landing procedures.
             if (dropship.State == FTLState.Arriving || !HasComp<DropshipTargetComponent>(paraDrop.DropTarget))
-                RemCompDeferred<ActiveParaDropComponent>(uid);
+                RemComp<ActiveParaDropComponent>(uid);
         }
     }
 }

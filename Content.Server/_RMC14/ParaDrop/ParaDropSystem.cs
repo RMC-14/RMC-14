@@ -1,5 +1,4 @@
 using Content.Server._RMC14.Dropship;
-using Content.Server.Doors.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.ParaDrop;
 
@@ -8,7 +7,7 @@ namespace Content.Server._RMC14.ParaDrop;
 public sealed partial class ParaDropSystem: SharedParaDropSystem
 {
     [Dependency] private readonly DropshipSystem _dropship = default!;
-    [Dependency] private readonly DoorSystem _door = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -32,6 +31,8 @@ public sealed partial class ParaDropSystem: SharedParaDropSystem
 
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
         var paraDroppingQuery = EntityQueryEnumerator<ParaDroppingComponent>();
 
         while (paraDroppingQuery.MoveNext(out var uid, out var paraDropping))

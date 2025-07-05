@@ -369,6 +369,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 );
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
+                screen.RightRow.SetData(one: previous, five: next);
                 break;
             }
             case Paradrop:
@@ -395,7 +396,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     ? Loc.GetString("rmc-dropship-paradrop-target-screen-target-none")
                     : Loc.GetString("rmc-dropship-paradrop-target-screen-target-targeting",("dropTarget", targetId))));
                 screen.BottomRow.SetData(exit);
-                screen.LeftRow.SetData(one: paraDropTarget, two: paraDropUnTarget);
+                screen.LeftRow.SetData(targetId == null ? paraDropTarget : paraDropUnTarget);
                 screen.TopRow.SetData(equip);
                 break;
             }

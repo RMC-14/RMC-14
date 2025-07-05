@@ -28,7 +28,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
                     KeyFrames =
                     {
                         new AnimationTrackProperty.KeyFrame(new Vector2(0f, fallHeight), 0f),
-                        new AnimationTrackProperty.KeyFrame(new Vector2(0f, 0f), fallDuration),
+                        new AnimationTrackProperty.KeyFrame(new Vector2(0f, 0), fallDuration),
                     },
                 },
             },
@@ -63,13 +63,20 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
                 var timeRemaining =  duration - (_timing.CurTime - paraDroppable.LastParaDrop.Value);
                 var multiplier = (float) timeRemaining.Ticks / duration.Ticks;
 
-                if (timeRemaining < TimeSpan.FromSeconds(paraDroppable.DropDuration))
+                if (timeRemaining < TimeSpan.FromSeconds(paraDroppable.DropDuration) && timeRemaining > TimeSpan.Zero && multiplier is > 0 and < 1)
                 {
                     SpawnParachute(multiplier * paraDroppable.DropDuration, _transform.GetMoverCoordinates(uid), paraDroppable, multiplier);
-                    if (!_animPlayer.HasRunningAnimation(uid, "dropping-animation"))
-                        _animPlayer.Play(uid, ReturnFallAnimation( multiplier * paraDroppable.DropDuration,  paraDroppable.FallHeight *  multiplier ), "dropping-animation");
+                    _animPlayer.Play(uid, ReturnFallAnimation( multiplier * paraDroppable.DropDuration,  paraDroppable.FallHeight *  multiplier), "dropping-animation");
                 }
             }
+
+            if (_timing.IsFirstTimePredicted)
+                continue;
+
+            // This is so the animation's current location gets updated during the drop.
+            var oldPos = _transform.GetWorldPosition(uid);
+            var newPos = oldPos with { Y = oldPos.Y + 0.0001f };
+            _transform.SetWorldPosition(uid, newPos);
         }
     }
 }
