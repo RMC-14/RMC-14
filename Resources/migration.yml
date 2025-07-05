@@ -1185,3 +1185,7 @@ ClosetL3: CMClosetBio
 # 2025-07-04
 SprayBottleSpaceCleaner: RMCSprayBottleSpaceCleaner
 WallGold: RMCWallGold
+ClosetL3Virology: CMClosetBioVirology
+ClosetL3Security: CMClosetBioSecurity
+ClosetL3Janitor: CMClosetBioJanitor
+ClosetL3Science: CMClosetBioScientist
