@@ -3,6 +3,8 @@
   id: RMCHeadsetMarine
   components:
   - type: GrantSquadLeaderTracker
+  - type: GrantTacMapAlert
+
 
 # Alpha
 - type: entity
