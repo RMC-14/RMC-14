@@ -8,7 +8,14 @@
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/doublebarrel.rsi
   - type: Gun
     shotsPerBurst: 2
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_heavy.ogg
   - type: ShootUseDelay
+  - type: BreechLoaded
+    openSound:
+      path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg
+    closeSound:
+      path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg
   - type: BallisticAmmoProvider
     cycleable: true
     whitelist:
