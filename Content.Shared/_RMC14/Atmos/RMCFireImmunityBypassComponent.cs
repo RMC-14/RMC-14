@@ -1,3 +1,5 @@
+using Robust.Shared.GameStates;
+
 namespace Content.Shared._RMC14.Atmos;
 
 /// <summary>
@@ -5,5 +7,5 @@ namespace Content.Shared._RMC14.Atmos;
 /// This should be added to fire entities (like certain tile fires) to make them
 /// able to damage entities that normally have fire immunity.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCFireImmunityBypassComponent : Component;

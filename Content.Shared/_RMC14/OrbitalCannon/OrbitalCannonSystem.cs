@@ -13,6 +13,7 @@ using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
+using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Ghost;
@@ -177,31 +178,36 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (TileHasIndestructibleWalls(coordinates))
         {
             var found = false;
-            var adjacentOffsets = new Vector2i[]
+
+            for (var x = -1; x <= 1; x++)
             {
-                new(-1, -1), new(0, -1), new(1, -1),  // Top row
-                new(-1,  0),             new(1,  0),  // Middle row (excluding center)
-                new(-1,  1), new(0,  1), new(1,  1)   // Bottom row
-            };
-
-            foreach (var offset in adjacentOffsets)
-            {
-                var testMapCoordinates = args.Coordinates.Offset(offset);
-                if (!_rmcMap.TryGetTileDef(testMapCoordinates, out var tile) ||
-                    tile.ID == ContentTileDefinition.SpaceID)
-                    continue;
-
-                var testCoordinates = _transform.ToCoordinates(testMapCoordinates);
-                if (!_area.CanOrbitalBombard(testCoordinates, out var roofed))
-                    continue;
-
-                if (!TileHasIndestructibleWalls(testCoordinates))
+                for (var y = -1; y <= 1; y++)
                 {
-                    coordinates = testCoordinates;
-                    Log.Info($"Orbital bombardment impact redirected due to indestructible wall at impact site");
-                    found = true;
-                    break;
+                    // Skip the center position (original impact location)
+                    if (x == 0 && y == 0)
+                        continue;
+
+                    var offset = new Vector2i(x, y);
+                    var testMapCoordinates = args.Coordinates.Offset(offset);
+                    if (!_rmcMap.TryGetTileDef(testMapCoordinates, out var tile) ||
+                        tile.ID == ContentTileDefinition.SpaceID)
+                        continue;
+
+                    var testCoordinates = _transform.ToCoordinates(testMapCoordinates);
+                    if (!_area.CanOrbitalBombard(testCoordinates, out var roofed))
+                        continue;
+
+                    if (!TileHasIndestructibleWalls(testCoordinates))
+                    {
+                        coordinates = testCoordinates;
+                        Log.Info($"Orbital bombardment impact redirected due to indestructible wall at impact site");
+                        found = true;
+                        break;
+                    }
                 }
+
+                if (found)
+                    break;
             }
 
             if (!found)
@@ -436,7 +442,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
             // This part is shitty because there might be a wall that just... doesn't exactly go with this logic. Hope it works.
             if (HasComp<TagComponent>(entity) &&
                 _tags.HasTag(entity, "Wall") &&
-                !EntityManager.HasComponent(entity, EntityManager.ComponentFactory.GetRegistration("Destructible")))
+                !HasComp<DestructibleComponent>(entity))
             {
                 return true;
             }

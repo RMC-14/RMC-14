@@ -495,7 +495,9 @@ namespace Content.Server.Atmos.EntitySystems
 
                     var ev = new GetFireProtectionEvent();
                     // let the thing on fire handle it
-                    RaiseLocalEvent(uid, ref ev);                    // and whatever it's wearing
+                    RaiseLocalEvent(uid, ref ev);
+                    // and whatever it's wearing
+                    // and whatever it's wearing
                     if (_inventoryQuery.TryComp(uid, out var inv))
                         _inventory.RelayEvent((uid, inv), ref ev);
 
@@ -510,17 +512,17 @@ namespace Content.Server.Atmos.EntitySystems
                     }
 
                     if (_steppingOnFireQuery.HasComp(uid))
-                        damage *= 2;// Check fire immunity for DOT damage
-                    bool shouldDealDamage = true;
-                    var hasImmunity = TryComp<RMCImmuneToFireTileDamageComponent>(uid, out var immunity);
-                    var hasBypassComponent = HasComp<RMCFireBypassActiveComponent>(uid);
-                    if (hasImmunity)
+                        damage *= 2;
+                    // Check fire immunity for DOT damage
+                    if (TryComp<RMCImmuneToFireTileDamageComponent>(uid, out var immunity))
                     {
                         // If entity has fire immunity, only deal damage if they have the bypass component
-                        shouldDealDamage = hasBypassComponent;
+                        if (HasComp<RMCFireBypassActiveComponent>(uid) && damage != null)
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
                     }
-                    if (shouldDealDamage)
+                    else
                     {
+                        // No immunity, deal damage normally
                         if (damage != null)
                             _damageableSystem.TryChangeDamage(uid, damage, true, false);
                     }

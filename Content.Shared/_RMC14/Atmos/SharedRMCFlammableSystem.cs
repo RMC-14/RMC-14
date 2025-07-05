@@ -111,7 +111,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SubscribeLocalEvent<SteppingOnFireComponent, ComponentRemove>(OnSteppingOnFireRemoved);
 
         SubscribeLocalEvent<CanBeFirePattedComponent, InteractHandEvent>(OnCanBeFirePattedInteractHand, before: [typeof(InteractionPopupSystem)]);
-        
+
         SubscribeLocalEvent<FlammableComponent, RMCIgniteEvent>(OnFlammableIgnite);
         SubscribeLocalEvent<FlammableComponent, RMCExtinguishedEvent>(OnFlammableExtinguished);
 
@@ -120,25 +120,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteOnProjectileHit(Entity<IgniteOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
     {
-        // Check for complete ignition immunity first
-        if (TryComp<RMCImmuneToIgnitionComponent>(args.Target, out var ignitionImmunity))
-        {
-            // If entity has complete ignition immunity, check if this fire can bypass it
-            if (ignitionImmunity.BypassWhitelist == null)
-            {
-                // Complete immunity - no fires can ignite this entity
-                return;
-            }
-            else
-            {
-                // Check if this fire is on the bypass whitelist
-                if (!_entityWhitelist.IsWhitelistPass(ignitionImmunity.BypassWhitelist, ent))
-                {
-                    // Fire is not on bypass whitelist, cannot ignite
-                    return;
-                }
-            }
-        }
+        if (!CanBeIgnited(args.Target, ent))
+            return;
 
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.Duration, false);
     }
@@ -308,25 +291,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteDamageCollide(Entity<RMCIgniteOnCollideComponent> ent, ref DamageCollideEvent args)
     {
-        // Check for complete ignition immunity first
-        if (TryComp<RMCImmuneToIgnitionComponent>(args.Target, out var ignitionImmunity))
-        {
-            // If entity has complete ignition immunity, check if this fire can bypass it
-            if (ignitionImmunity.BypassWhitelist == null)
-            {
-                // Complete immunity - no fires can ignite this entity
-                return;
-            }
-            else
-            {
-                // Check if this fire is on the bypass whitelist
-                if (!_entityWhitelist.IsWhitelistPass(ignitionImmunity.BypassWhitelist, ent))
-                {
-                    // Fire is not on bypass whitelist, cannot ignite
-                    return;
-                }
-            }
-        }
+        if (!CanBeIgnited(args.Target, ent))
+            return;
 
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks);
     }
@@ -720,25 +686,10 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         var wasOnFire = IsOnFire(flammableEnt);
         if (checkIgnited && wasOnFire)
-            return;        // Check for complete ignition immunity first
-        if (TryComp<RMCImmuneToIgnitionComponent>(other, out var ignitionImmunity))
-        {
-            // If entity has complete ignition immunity, check if this fire can bypass it
-            if (ignitionImmunity.BypassWhitelist == null)
-            {
-                // Complete immunity - no fires can ignite this entity
-                return;
-            }
-            else
-            {
-                // Check if this fire is on the bypass whitelist
-                if (!_entityWhitelist.IsWhitelistPass(ignitionImmunity.BypassWhitelist, ent))
-                {
-                    // Fire is not on bypass whitelist, cannot ignite
-                    return;
-                }
-            }
-        }
+            return;
+
+        if (!CanBeIgnited(other, ent))
+            return;
 
         // Check RMCImmuneToFireTileDamageComponent for ignition immunity
         if (TryComp<RMCImmuneToFireTileDamageComponent>(other, out var fireImmunity) && fireImmunity.BypassWhitelist != null)
@@ -801,25 +752,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         }
 
         // Check for ignition immunity before igniting
-        bool canIgnite = true;
-        if (TryComp<RMCImmuneToIgnitionComponent>(uid, out var ignitionImmunity))
-        {
-            // If entity has complete ignition immunity, check if this fire can bypass it
-            if (ignitionImmunity.BypassWhitelist == null)
-            {
-                // Complete immunity - no fires can ignite this entity
-                canIgnite = false;
-            }
-            else
-            {
-                // Check if this fire is on the bypass whitelist
-                if (!_entityWhitelist.IsWhitelistPass(ignitionImmunity.BypassWhitelist, fireEntity))
-                {
-                    // Fire is not on bypass whitelist, cannot ignite
-                    canIgnite = false;
-                }
-            }
-        }
+        bool canIgnite = CanBeIgnited(uid, fireEntity);
 
         if (canIgnite)
             Ignite(uid, ignite.Intensity, ignite.Duration, ignite.MaxStacks);
@@ -968,5 +901,36 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         // No bypass mechanisms apply, immunity blocks the damage
         return false;
+    }
+
+    /// <summary>
+    /// Checks if an entity can be ignited by a specific fire source, considering immunity components.
+    /// </summary>
+    /// <param name="target">The entity that might be ignited</param>
+    /// <param name="fireSource">The fire source attempting to ignite the target</param>
+    /// <returns>True if the target can be ignited, false if immunity blocks it</returns>
+    private bool CanBeIgnited(EntityUid target, EntityUid fireSource)
+    {
+        // Check for complete ignition immunity first
+        if (TryComp<RMCImmuneToIgnitionComponent>(target, out var ignitionImmunity))
+        {
+            // If entity has complete ignition immunity, check if this fire can bypass it
+            if (ignitionImmunity.BypassWhitelist == null)
+            {
+                // Complete immunity - no fires can ignite this entity
+                return false;
+            }
+            else
+            {
+                // Check if this fire is on the bypass whitelist
+                if (!_entityWhitelist.IsWhitelistPass(ignitionImmunity.BypassWhitelist, fireSource))
+                {
+                    // Fire is not on bypass whitelist, cannot ignite
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
