@@ -187,6 +187,16 @@
       path: /Audio/Voice/Moth/moth_chitter.ogg
 
 - type: entity
+  parent: RMCPlushieNyx
+  id: RMCPlushieMotivationalMoth
+  name: motivational marine moth
+  description: A soft, fluffy little marine companion for those who just need a little motivation to make it across the finish line. You can do it, yesyes! It chitters happily when squeezed!
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    state: plushie_wawa
+
+- type: entity
   parent: CMPlushieBase
   id: RMCPlushieXippy
   name: xippy
