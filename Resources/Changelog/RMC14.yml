@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed scout high impact and shotgun slugs and buckshot slowing big xenos.
-    type: Fix
-  id: 1429
-  time: '2025-03-06T05:07:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5818
 - author: SG6732
   changes:
   - message: Added new spritework for the B8 Smart-Scope. Now with 6 animation frames!
@@ -5084,5 +5077,17 @@
   id: 1930
   time: '2025-07-05T04:04:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6864
+- author: J C Denton
+  changes:
+  - message: Fixed SOs having XO-level access, they now have less doors to open.
+    type: Fix
+  - message: Fixed IOs having Pilot access and Cockpit with Nav. computer having one,
+      both now have Dropship access.
+    type: Fix
+  - message: Fixed Chief Engineer not having Dropship access.
+    type: Tweak
+  id: 1931
+  time: '2025-07-05T04:19:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6670
 Name: RMC14
 Order: -1
