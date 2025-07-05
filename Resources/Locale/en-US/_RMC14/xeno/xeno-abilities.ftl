@@ -68,6 +68,7 @@ cm-xeno-leap-cancelled = We cancel our leap!
 
 # Plant weeds
 cm-xeno-weeds-source-already-here = There is already a resin node here!
+rmc-xeno-weeds-blocked = We can't do that here.
 
 # Corrosive acid
 cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
