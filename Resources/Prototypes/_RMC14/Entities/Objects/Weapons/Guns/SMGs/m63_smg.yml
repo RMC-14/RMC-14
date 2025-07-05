@@ -86,6 +86,7 @@
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
+          - RMCAttachmentExtinguisher
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
