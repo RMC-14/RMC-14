@@ -1,34 +1,6 @@
 ﻿Entries:
 - author: blueDev2
   changes:
-  - message: Hive Structures now announce that they are built over hivemind.
-    type: Add
-  - message: Placing a hive structure marker indicates how many more structures of
-      that type can be built.
-    type: Add
-  - message: Damaged Weed producing structures can be repaired with plasma and also
-      restore weeds on repair
-    type: Add
-  - message: Hive Structures must be targeted to be hit by bullets.
-    type: Fix
-  - message: Hive Structures auto-break on hijack.
-    type: Fix
-  - message: Hive Structures take more damage from melee.
-    type: Fix
-  - message: Hive weeds can now take over semi-weedable tiles
-    type: Fix
-  - message: An active hivecore is required to build any other hive structure
-    type: Fix
-  - message: Hivecore rebuild cooldown is now enforced
-    type: Fix
-  - message: Add indicator on top of hive structure nodes to better distinguish them
-      from built hive structures.
-    type: Tweak
-  id: 1436
-  time: '2025-03-12T05:53:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5803
-- author: blueDev2
-  changes:
   - message: '"Find Parasite" action does not show standard UI and shows a warning
       popup if the user cannot take a ghost role'
     type: Tweak
@@ -5094,5 +5066,13 @@
   id: 1937
   time: '2025-07-05T11:11:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6878
+- author: Arykh
+  changes:
+  - message: Added the stethoscope! Anyone can use it, but only those with medical
+      skill 2 or higher can use it properly.
+    type: Add
+  id: 1938
+  time: '2025-07-05T11:14:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6830
 Name: RMC14
 Order: -1
