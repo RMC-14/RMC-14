@@ -147,9 +147,6 @@
     #energy: 15 # CLOTHING_ARMOR_MEDIUMLOW
     #rad: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
-  - type: Storage
-    grid:
-    - 0,0,5,1 # 2 slots
 
 # SPP coats
 - type: entity
