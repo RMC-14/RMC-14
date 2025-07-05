@@ -46,7 +46,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         Refresh();
 
-        Window.Wrapper.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Wrapper.Canvas.Lines));
+        Window.Wrapper.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Wrapper.Canvas.Lines, Window.Wrapper.Canvas.TacticalLabels));
     }
 
     public void Refresh()
@@ -57,6 +57,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
         Window.Wrapper.SetLineLimit(lineLimit);
         UpdateBlips();
+        UpdateLabels();
 
         if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
         {
@@ -99,5 +100,25 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         }
 
         Window.Wrapper.UpdateBlips(blips);
+    }
+
+    private void UpdateLabels()
+    {
+        if (Window == null)
+            return;
+
+        var labels = EntMan.GetComponentOrNull<TacticalMapLabelsComponent>(Owner);
+        if (labels != null)
+        {
+            Window.Wrapper.Map.UpdateTacticalLabels(labels.MarineLabels);
+            if (!_refreshed)
+                Window.Wrapper.Canvas.UpdateTacticalLabels(labels.MarineLabels);
+        }
+        else
+        {
+            Window.Wrapper.Map.UpdateTacticalLabels(new Dictionary<Vector2i, string>());
+            if (!_refreshed)
+                Window.Wrapper.Canvas.UpdateTacticalLabels(new Dictionary<Vector2i, string>());
+        }
     }
 }
