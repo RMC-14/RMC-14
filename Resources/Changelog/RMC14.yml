@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: M5 camera gear now functions as a camera for the overwatch console.
-    type: Fix
-  id: 1427
-  time: '2025-03-06T05:06:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5815
 - author: Vermidia
   changes:
   - message: Fixed recovery nodes not having a doafter on healing.
@@ -5084,5 +5077,12 @@
   id: 1928
   time: '2025-07-05T00:28:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6896
+- author: Binbagg
+  changes:
+  - message: Headbutt ability now will activate 0.5 tiles further away.
+    type: Tweak
+  id: 1929
+  time: '2025-07-05T03:59:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6916
 Name: RMC14
 Order: -1
