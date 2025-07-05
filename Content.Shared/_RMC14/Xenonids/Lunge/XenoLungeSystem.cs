@@ -88,7 +88,7 @@ public sealed class XenoLungeSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno, 0.5f);
-        _throwing.TryThrow(xeno, diff, 30, animated: false);
+        _throwing.TryThrow(xeno, diff, 30, animated: false, compensateFriction: true);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
             return;

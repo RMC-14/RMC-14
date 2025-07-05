@@ -376,12 +376,12 @@ public sealed class XenoLeapSystem : EntitySystem
         if (_size.TryGetSize(leaper, out var size) && size >= RMCSizes.Big && !HasComp<BarbedComponent>(blocker))
             return false;
 
-        var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
+        var blockerCoordinates = _transform.GetMapCoordinates(blocker, Transform(blocker));
 
         if (size < RMCSizes.Big)
             _stun.TryParalyze(leaper, stunDuration, true);
 
-        _size.KnockBack(leaper, blockerCoordinates.Coords, ignoreSize: true);
+        _size.KnockBack(leaper, blockerCoordinates, ignoreSize: true);
         _audio.PlayPredicted(blockSound, leaper, leaper);
 
         var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("object", Identity.Name(blocker, EntityManager, leaper)));

@@ -59,10 +59,10 @@ cm-chatsan-word-flares = flares
 cm-chatsan-replacement-flares = glow sticks
 
 cm-chatsan-word-synth = synth
-cm-chatsan-replacement-synth = fake hosts
+cm-chatsan-replacement-synth = fake host
 
 cm-chatsan-word-synthetic = synthetic
-cm-chatsan-replacement-synthetic = fake hosts
+cm-chatsan-replacement-synthetic = fake host
 
 cm-chatsan-word-synths = synths
 cm-chatsan-replacement-synths = fake hosts

@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Xenonids.Tumble;
 public sealed partial class XenoTumbleComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float Range = 1.333f;
+    public float Range = 1;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoTailSwipe");
@@ -25,7 +25,7 @@ public sealed partial class XenoTumbleComponent : Component
     public float ImpactRange = 1;
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier Damage;
+    public DamageSpecifier Damage = new ();
 
     [DataField, AutoNetworkedField]
     public int ArmorPiercing = 100;
