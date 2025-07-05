@@ -36,7 +36,7 @@
   id: RMCJobWeYaGoon
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressPMC
+    ears: RMCHeadsetDistressGoon
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate
     gloves: RMCHandsVeteranPMC

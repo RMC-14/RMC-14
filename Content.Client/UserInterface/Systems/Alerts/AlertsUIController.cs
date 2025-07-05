@@ -32,14 +32,22 @@ public sealed class AlertsUIController : UIController, IOnStateEntered<GameplayS
     {
         var widget = UI;
         if (widget != null)
+        {
             widget.AlertPressed -= OnAlertPressed;
+            widget.AlertAltPressed += OnAlertAltPressed;
+        }
+
     }
 
     private void OnScreenLoad()
     {
         var widget = UI;
         if (widget != null)
+        {
             widget.AlertPressed += OnAlertPressed;
+            widget.AlertAltPressed += OnAlertAltPressed;
+        }
+
 
         SyncAlerts();
     }
@@ -47,6 +55,11 @@ public sealed class AlertsUIController : UIController, IOnStateEntered<GameplayS
     private void OnAlertPressed(object? sender, ProtoId<AlertPrototype> e)
     {
         _alertsSystem?.AlertClicked(e);
+    }
+
+    private void OnAlertAltPressed(object? sender, ProtoId<AlertPrototype> e)
+    {
+        _alertsSystem?.AlertClickedAlt(e);
     }
 
     private void SystemOnClearAlerts(object? sender, EventArgs e)
