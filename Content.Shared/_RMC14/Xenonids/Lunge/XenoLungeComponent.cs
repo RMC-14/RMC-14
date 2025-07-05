@@ -1,6 +1,6 @@
 using System.Numerics;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Xenonids.Lunge;
 
@@ -19,4 +19,7 @@ public sealed partial class XenoLungeComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Target;
+
+    [DataField, AutoNetworkedField]
+    public MapCoordinates? Origin;
 }

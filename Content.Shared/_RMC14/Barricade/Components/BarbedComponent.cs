@@ -18,6 +18,9 @@ public sealed partial class BarbedComponent : Component
     [DataField, AutoNetworkedField]
     public bool IsBarbed;
 
+    [DataField, AutoNetworkedField]
+    public int MaxHealthIncrease = 50;
+
     [DataField]
     public EntProtoId Spawn = "BarbedWire1";
 
@@ -61,7 +64,13 @@ public enum BarbedWireVisuals : byte
 }
 
 [Serializable, NetSerializable]
-public sealed partial class BarbedDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class BarbedDoAfterEvent : SimpleDoAfterEvent
+{
+
+}
 
 [Serializable, NetSerializable]
-public sealed partial class CutBarbedDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class CutBarbedDoAfterEvent : SimpleDoAfterEvent
+{
+
+}
