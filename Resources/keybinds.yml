@@ -636,3 +636,7 @@ binds:
   type: State
   key: R
   mod1: Shift
+- function: CMXenoPing
+  type: State
+  key: N
+  mod1: Shift
