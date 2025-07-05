@@ -1,14 +1,9 @@
 ﻿- type: entity
+  parent: RMCPropBase
   id: RMCDrill
   name: mining drill
   description: An old mining drill, seemingly used for mining. And possibly drilling.
-  placement:
-    mode: SnapgridCenter
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -22,5 +17,3 @@
     sprite: _RMC14/Structures/drill.rsi
     state: drill
     offset: 0, 1
-  - type: Clickable
-  - type: DeleteOnExplosion

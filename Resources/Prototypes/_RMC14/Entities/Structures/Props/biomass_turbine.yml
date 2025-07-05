@@ -1,0 +1,50 @@
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropTurbine
+  name: power turbine
+  description: A gigantic turbine that runs on god knows what. It could probably be turned on by someone with the correct know-how.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/biomass_turbine.rsi
+    state: biomass_turbine
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-1.5,0.5,1.5"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropTurbineStrutsRight
+  name: power turbine struts
+  suffix: Right
+  description: Pipes, or maybe support struts that lead into, or perhaps support that big ol' turbine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/biomass_turbine.rsi
+    state: support_struts_r
+  - type: Physics
+    canCollide: false
+
+- type: entity
+  parent: RMCPropTurbineStrutsRight
+  id: RMCPropTurbineStrutsLeft
+  suffix: Left
+  components:
+  - type: Sprite
+    state: support_struts_l
+
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropTurbineStrutsBorder
+  name: power turbine warning stripes
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/biomass_turbine.rsi
+    state: biomass_turbine_border
+  - type: Physics
+    canCollide: false
