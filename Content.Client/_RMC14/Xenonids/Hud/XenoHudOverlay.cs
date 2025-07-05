@@ -28,6 +28,7 @@ using Robust.Shared.Utility;
 using Content.Shared._RMC14.Xenonids.Finesse;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Synth;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -137,7 +138,10 @@ public sealed class XenoHudOverlay : Overlay
         }
 
         if (isXeno || isAdminGhost)
+        {
             DrawInfectedIcon(in args, scaleMatrix, rotationMatrix);
+            DrawSynthIcon(in args, scaleMatrix, rotationMatrix);
+        }
 
         handle.UseShader(null);
         handle.SetTransform(Matrix3x2.Identity);
@@ -452,6 +456,43 @@ public sealed class XenoHudOverlay : Overlay
 
             var level = Math.Min(comp.CurrentStage, comp.InfectedIcons.Length - 1);
             var icon = comp.InfectedIcons[level];
+            var texture = _sprite.GetFrame(icon, _timing.CurTime);
+
+            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
+            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
+
+            var position = new Vector2(xOffset, yOffset);
+            handle.DrawTexture(texture, position);
+        }
+    }
+
+    private void DrawSynthIcon(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
+    {
+        var handle = args.WorldHandle;
+        var synth = _entity.AllEntityQueryEnumerator<SynthComponent, SpriteComponent, TransformComponent>();
+        while (synth.MoveNext(out var uid, out var comp, out var sprite, out var xform))
+        {
+            if (xform.MapID != args.MapId)
+                continue;
+
+            if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            if (_invisQuery.HasComp(uid))
+                continue;
+
+            var bounds = sprite.Bounds;
+            var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+
+            if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
+                continue;
+
+            var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+            var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
+            handle.SetTransform(matrix);
+
+            var icon = new Rsi(_rsiPath, $"fake_tall");
             var texture = _sprite.GetFrame(icon, _timing.CurTime);
 
             var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;

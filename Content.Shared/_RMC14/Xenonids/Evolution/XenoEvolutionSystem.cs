@@ -178,7 +178,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var ev = new XenoEvolutionDoAfterEvent(args.Choice);
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno);
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno)
+        {
+            BreakOnRest = false,
+        };
 
         if (xeno.Comp.EvolutionDelay > TimeSpan.Zero)
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);

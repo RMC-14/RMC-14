@@ -30,6 +30,8 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: RMCStorageEjectHand
+      state: Open
     - type: StoreAfterFailedInteract
   - type: ExplosionResistance
     damageCoefficient: 0
@@ -64,6 +66,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: Webbing
     components:
     - type: Storage
@@ -82,6 +85,9 @@
         - PillPacket
         - PillCanister
         - CMSurgicalCase
+        - RMCSyringeCase
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -111,6 +117,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+      - RMCSyringeCase
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_black.rsi
@@ -130,7 +137,10 @@
         - PillPacket
         - PillCanister
         - CMSurgicalCase
+        - RMCSyringeCase
     - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -164,7 +174,10 @@
         - PillPacket
         - PillCanister
         - CMSurgicalCase
+        - RMCSyringeCase
     - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -280,6 +293,84 @@
         tags:
         - CMFirstAidKit
         - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingClipOnPouch
+  name: clip-on pouch
+  description: A clip on synth-leather pouch designed to house a small collection of items for ML66A weapon operators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/ml66a_pouch.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    blacklist:
+      components:
+      - Bible
+      tags:
+      - CMFirstAidKit
+      - RMCBoxStorage
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/ml66a_pouch.rsi
+      state: equipped
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      blacklist:
+        components:
+        - Bible
+        tags:
+        - CMFirstAidKit
+        - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingGrenade
+  name: clip-on grenade band
+  description: A sturdy mess of synth-leather band designed to store a few grenades for ML66A weapon operators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/grenade_pouch.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    whitelist:
+      tags:
+      - Grenade
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/grenade_pouch.rsi
+      state: equipped
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      whitelist:
+        tags:
+        - Grenade
+    - type: RMCStorageEjectHand
+      state: Open
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
@@ -304,6 +395,7 @@
       - Multitool
       - PowerCell
       - RMCNailgunCompact
+      - RMCNailgunTactical
       components:
       - Welder
       - PowerCell
@@ -330,6 +422,7 @@
         - Multitool
         - PowerCell
         - RMCNailgunCompact
+        - RMCNailgunTactical
         components:
         - Welder
         - PowerCell
@@ -506,6 +599,16 @@
     - id: RMCPowerCellSmartgun
 
 - type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingBuckshot
+  suffix: Buckshot, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
+
+- type: entity
   parent: CMWebbingPouch
   id: CMWebbingPouchRoyal
   suffix: Filled, Royal
@@ -515,3 +618,127 @@
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalBeret
       - id: CMMRE # TODO RMC14 TSE ORP ration
+
+- type: entity
+  parent: CMWebbingPouch
+  id: RMCWebbingPouchForecon
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMMarineFlask
+      # - id: RMCFacepaint # TODO FACEPAINT
+      - id: CMMRE
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingSurgicalGreen
+  name: surgical webbing vest
+  description: A robust webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
+  suffix: Medical, Filled
+  components: 
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
+    state: webbing
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
+      state: equipped
+    components:
+    - type: Storage 
+      maxItemSize: Small
+      grid:
+      - 0,0,13,3 # 14 slots
+      whitelist:
+        tags:
+        - CMTraumaKit
+        - CMSurgicalLine
+        - CMSynthGraft
+        components:
+        - CMSurgeryTool
+    - type: FixedItemSizeStorage
+  - type: Storage 
+    maxItemSize: Small
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - CMTraumaKit
+      - CMSurgicalLine
+      - CMSynthGraft
+      components:
+      - CMSurgeryTool
+  - type: FixedItemSizeStorage
+  - type: StorageFill
+    contents:
+#     - PICT System
+      - id: CMScalpel
+      - id: CMHemostat
+      - id: CMRetractor
+      - id: CMTraumaKit10
+      - id: CMCautery
+      - id: CMCircularSaw
+      - id: CMSurgicalDrill
+      - id: CMBoneGel
+      - id: CMBonesetter
+#     - FixOVein
+#     - Nanopaste
+      - id: CMSurgicalLine
+      - id: CMSynthGraft
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingSurgicalBlue
+  name: surgical webbing vest
+  description: A robust blue webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
+  suffix: Medical, Filled
+  components: 
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
+    state: webbing
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
+      state: equipped
+    components:
+    - type: Storage 
+      maxItemSize: Small
+      grid:
+      - 0,0,13,3 # 14 slots
+      whitelist:
+        tags:
+        - CMTraumaKit
+        - CMSurgicalLine
+        - CMSynthGraft
+        components:
+        - CMSurgeryTool
+    - type: FixedItemSizeStorage
+  - type: Storage 
+    maxItemSize: Small
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - CMTraumaKit
+      - CMSurgicalLine
+      - CMSynthGraft
+      components:
+      - CMSurgeryTool
+  - type: FixedItemSizeStorage
+  - type: StorageFill
+    contents:
+#     - PICT System
+      - id: CMScalpel
+      - id: CMHemostat
+      - id: CMRetractor
+      - id: CMTraumaKit10
+      - id: CMCautery
+      - id: CMCircularSaw
+      - id: CMSurgicalDrill
+      - id: CMBoneGel
+      - id: CMBonesetter
+#     - FixOVein
+#     - Nanopaste
+      - id: CMSurgicalLine
+      - id: CMSynthGraft
+

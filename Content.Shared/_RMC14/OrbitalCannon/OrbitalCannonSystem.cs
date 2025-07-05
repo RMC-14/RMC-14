@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
@@ -48,6 +49,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -447,6 +449,14 @@ public sealed class OrbitalCannonSystem : EntitySystem
         firing.WarheadName = Name(warhead);
         firing.Squad = squad;
         firing.StartedAt = time;
+
+        if (TryComp(warhead, out OrbitalCannonWarheadComponent? warheadComp))
+        {
+            firing.FirstWarningRange = warheadComp.FirstWarningRange;
+            firing.SecondWarningRange = warheadComp.SecondWarningRange;
+            firing.ThirdWarningRange = warheadComp.ThirdWarningRange;
+        }
+
         Dirty(cannon, firing);
 
         _popup.PopupCursor("Orbital bombardment launched!", user);
@@ -518,21 +528,37 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
                 _audio.PlayPvs(cannon.TravelSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(75));
 
-                _mortar.PopupWarning(planetCoordinates, 30, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
+                _mortar.PopupWarning(planetCoordinates, firing.FirstWarningRange, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
             }
 
             if (!firing.WarnedOne && time > firing.StartedAt + firing.WarnOneDelay)
             {
                 firing.WarnedOne = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, 25, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
+                _mortar.PopupWarning(planetCoordinates, firing.SecondWarningRange, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
             }
 
             if (!firing.WarnedTwo && time > firing.StartedAt + firing.WarnTwoDelay)
             {
                 firing.WarnedTwo = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, 15, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+                _mortar.PopupWarning(planetCoordinates, firing.ThirdWarningRange, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
+            }
+
+            if (!firing.AegisBoomed && time > firing.StartedAt + firing.AegisBoomDelay)
+            {
+                firing.AegisBoomed = true;
+                Dirty(uid, firing);
+
+                if (CannonHasWarhead((uid, cannon), out var foundWarhead) &&
+                    TryComp(foundWarhead, out OrbitalCannonWarheadComponent? foundWarheadComp) &&
+                    foundWarheadComp.IsAegis)
+                {
+                    var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
+                    var sound = _audio.PlayPvs(cannon.AegisBoomSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(300));
+                    if (sound != null)
+                        _rmcPvs.AddGlobalOverride(sound.Value.Entity);
+                }
             }
 
             if (!firing.Impacted && time > firing.StartedAt + firing.ImpactDelay)

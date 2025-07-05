@@ -13,7 +13,7 @@
     fiberColor: fibers-brown
 
 - type: entity
-  parent: CMHandsBlackMarine
+  parent: ClothingHandsBase
   id: CMHandsLatex
   name: latex gloves
   description: A pair of latex gloves.

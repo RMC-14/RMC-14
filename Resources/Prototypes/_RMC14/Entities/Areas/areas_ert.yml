@@ -34,3 +34,37 @@
   - type: Area
     powerNet: faxexterior
     avoidBioscan: true
+
+# Shuttles
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaShuttleNS #Not Sulaco
+  name: Shuttle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaShuttleNS
+  id: RMCAreaShuttleERT
+  name: ERT Shuttle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: lifeboat

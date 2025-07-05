@@ -1,9 +1,10 @@
 - type: entity
   abstract: true
-  parent: ClothingUniformBase
+  parent: Clothing
   id: RMCUniformBase
   components:
   - type: Clothing
+    slots: [innerclothing]
     equipSound:
       path: /Audio/_RMC14/Handling/clothing_on.ogg
     unequipSound:
@@ -23,6 +24,15 @@
     - ClothMade
     - WhitelistChameleon
   - type: PlaytimeMedalHolder
+  - type: Food
+    requiresSpecialDigestion: true
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 30
 
 - type: entity
   abstract: true

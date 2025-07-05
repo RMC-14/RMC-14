@@ -5,56 +5,54 @@
   components:
   - type: Sprite
     layers:
-      - state: red
-      - sprite: _RMC14/Structures/Wallmounts/posters.rsi
-        state: random_anything
+    - state: red
+    - sprite: _RMC14/Structures/Wallmounts/posters.rsi
+      state: random_anything
   - type: RandomSpawner
     offset: 0
     prototypes:
-      - CMPosterBroken
-      - CMPosterTheFuture
-      - CMPosterUnicorn
-      - CMPosterRocker1
-      - CMPosterPresident
-      - CMPosterBeth
-      - CMPosterArt1
-      - CMPostEat
-      - CMPosterArious
-      - CMPosterSilicon2
-      - CMPosterElectro
-      - CMPosterSilicon
-      - CMPosterMissJanuary
-      - CMPosterF100
-      - CMPosterRememberIo
-      - CMPosterPulseRifle
-      - CMPosterMissJuly
-      - CMPosterMissApril
-      - CMPosterSuspicious
-      - CMPosterTheo
-      - CMPosterGroves
-      - CMPosterBobda
-      - CMPosterArt2
-      - CMPosterArt3
-      - CMPosterRocker2
-      - CMPosterJoan
-      - CMPosterSafetyGuidance
-      - CMPosterSafetyGoggles1
-      - CMPosterMissFebruary
-      - CMPosterProperLifting
-      - CMPosterSafetyGoggles2
-      - CMPosterMrUniverse1
-      - CMPosterMrUniverse2
-      - CMPosterMrUniverse3
-      - CMPosterWalkman
-      - CMPosterTAB
-      - CMPosterBepis
-      - CMPosterMTV
-      - CMPosterJimmy
-      - CMPosterVoteNo
-      - CMPosterFallingFalcons
+    - CMPosterBroken
+    - CMPosterTheFuture
+    - CMPosterUnicorn
+    - CMPosterRocker1
+    - CMPosterPresident
+    - CMPosterBeth
+    - CMPosterArt1
+    - CMPostEat
+    - CMPosterArious
+    - CMPosterSilicon2
+    - CMPosterElectro
+    - CMPosterSilicon
+    - CMPosterMissJanuary
+    - CMPosterF100
+    - CMPosterRememberIo
+    - CMPosterPulseRifle
+    - CMPosterMissJuly
+    - CMPosterMissApril
+    - CMPosterSuspicious
+    - CMPosterTheo
+    - CMPosterGroves
+    - CMPosterBobda
+    - CMPosterArt2
+    - CMPosterArt3
+    - CMPosterRocker2
+    - CMPosterJoan
+    - CMPosterSafetyGuidance
+    - CMPosterSafetyGoggles1
+    - CMPosterMissFebruary
+    - CMPosterProperLifting
+    - CMPosterSafetyGoggles2
+    - CMPosterMrUniverse1
+    - CMPosterMrUniverse2
+    - CMPosterMrUniverse3
+    - RMCPosterCassettePlayer
+    - CMPosterTAB
+    - CMPosterBepis
+    - CMPosterMTV
+    - CMPosterJimmy
+    - CMPosterVoteNo
+    - CMPosterFallingFalcons
     chance: 0.95
     rarePrototypes:
-      - PosterBroken
+    - PosterBroken
     rareChance: 0.05
-
-

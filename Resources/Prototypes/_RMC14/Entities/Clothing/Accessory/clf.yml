@@ -1,0 +1,8 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: RMCCLFArmband # TODO make this a uniform accessory when those are made
+  name: CLF armband
+  description: A crudely sewn armband. It's dyed in the colors of the Colonial Liberation Front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi

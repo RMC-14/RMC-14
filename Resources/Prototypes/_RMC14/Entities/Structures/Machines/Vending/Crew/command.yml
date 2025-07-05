@@ -181,8 +181,8 @@
       - id: RMCMaskRebreather
     - name: Other Supplies
       entries:
-      # - id: CMHelmetVisorMedical
-      #   points: 5
+      - id: RMCVisorWelding
+        points: 5
       - id: RMCAttachmentMagneticHarness
         points: 12
       - id: RMCBackpackRTO
@@ -290,7 +290,7 @@
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
       - id: RMCAttachmentMiniFlamethrower
-        points: 15 
+        points: 15
       - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
@@ -303,7 +303,11 @@
         points: 15
     - name: Other Supplies
       entries:
+      - id: RMCVisorWelding
+        points: 5
       - id: CMHandsInsulated
+        points: 3
+      - id: CMHandsBlackInsulated
         points: 3
       - id: RMCPouchMacheteFilled
         points: 5
@@ -327,7 +331,10 @@
         points: 5
       - id: RMCFlashlight
         points: 1
-       #TODO Synthetic Reset Key
+      - id: RMCFlashlight
+        points: 1
+      - id: RMCSynthResetKey
+        points: 10
 
 # Commanding Officer #
 
@@ -381,12 +388,20 @@
       - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
       - id: RMCHeadCapFlippable # TODO: Check this is the service variant. If so, parent and rename.
+      - id: CMHeadCapPeakedService
     - name: Service Extras
       entries:
       - id: CMCoatCOBomber
-    # - name: Dress  # TODO: Check if this is locked to Council Members; this seems weird for a CO to be able to wear
-    #   entries:
-    # - name: Dress Headwear
+    - name: Dress
+      entries:
+      - id: CMCoatDressBluesGeneral
+      - id: CMCoatXOFormal
+      - id: RMCMarineUniformDressSenior
+      - id: CMHandsWhite
+      - id: RMCShoesLaceup
+    - name: Dress Headwear
+      entries:
+      - id: CMHeadDressBluesOfficer
     # - name: Dress Extras
 
 # Equipment Vend
@@ -426,7 +441,7 @@
       entries:
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
-      - id: CMHandsInsulated
+      - id: RMCHandsDeluxeMarine
       - id: CMBootsBlackFilled
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -435,7 +450,6 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-    #- id: CMTacticalWaistcoat # TODO Port Waistcoat
       - id: CMWebbingPouch
       - id: CMWebbing
       - id: CMWebbingHolster
@@ -516,6 +530,11 @@
       entries:
       - id: RMCD50WinterWyvernBeltFilled
       - id: RMCMatebaBeltFilled
+    - name: Ceremonial Weapon
+      choices: { CMCeremonial: 1 }
+      entries:
+      - id: RMCScabbardCeremonialFilled
+        name: Commander's Ceremonial Sabre
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
@@ -526,7 +545,7 @@
         recommended: true
       - id: CMMagazineRifleM54CExt
         points: 20
-      - id: CMMagazineRifleM54CAP # When MK1 is ported; replace first two mags with MK1 variants and uncomment this.
+      - id: CMMagazineRifleM54CAP
         points: 20
       - id: RMCMagazineSmartGun
         points: 20
@@ -550,9 +569,8 @@
         points: 20
     - name: Special Ammunition
       entries:
-      - id: RMCMagazineRifleM54CIncendiary
-        points: 65
-      #- id: M54C Rubber Magazine
+      - id: RMCMagazineRifleM54CRubber
+        points: 10
       - id: RMCBoxShotgunBeanbag
         points: 10
     - name: Explosives
@@ -562,6 +580,7 @@
       - id: CMPacketGrenadeFragFilled
         points: 15
       #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      #- id: CMPacketGrenadesG2Filled (x3) # TODO RMC14 Port Electroshock (G2) Grenades
     - name: Rail Attachments
       entries:
       - id: RMCAttachmentS5RedDotSight
@@ -570,10 +589,15 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    - name: Helmet Visors # TODO RMC14 Port Helmet Visors
+    - name: Helmet Visors
       entries:
       - id: RMCVisorNightVision
         points: 10
+        recommended: true
+      - id: RMCVisorWelding
+        points: 5
+      - id: RMCVisorMedicalAdvanced
+        points: 5
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight
@@ -605,6 +629,7 @@
   id: RMCVendorBundleXOFormal
   name: formal uniform
   description: Contains a peaked cap, formal uniform and jacket.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
@@ -620,6 +645,7 @@
   id: RMCVendorBundleXOShotgun
   name: M890 tactical shotgun
   description: Contains the M890 tactical shotgun and various shells.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
@@ -635,6 +661,7 @@
   id: RMCVendorBundleMilitaryPoliceApparelCMP
   name: Essential Police Set
   description: Contains security HUD-glasses and a filled security belt.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
@@ -886,13 +913,11 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMHeadsetCE
       - id: CMBootsBlack
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
-     
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -901,6 +926,13 @@
       - id: CMJumpsuitChiefEngineer
         recommended: true
       - id: CMJumpsuitBO
+    - name: Gloves
+      jobs:
+      - CMChiefEngineer
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Helmet
       jobs:
       - CMChiefEngineer
@@ -939,7 +971,7 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
-       
+
     - name: Pouches
       jobs:
       - CMChiefEngineer
@@ -1037,7 +1069,8 @@
       entries:
       - id: CMHeadsetEngineer
         amount: 15
-      # TODO 15 Synthetic Reset Key
+      - id: RMCSynthResetKey
+        amount: 15
     # ////////////////////////////////////
     # Quartermaster
     # ////////////////////////////////////
@@ -1046,11 +1079,17 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMJumpsuitQM
       - id: CMHeadsetQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
+    - name: Gloves
+      jobs: 
+      - CMQuartermaster
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
@@ -1122,7 +1161,7 @@
       - CMCMO
       takeAll: CMMedicalSet
       entries:
-      - id: CMVendorBundleCrewMedicalEssentialsNurse
+      - id: RMCVendorBundleCrewMedicalEssentialsDoctor
     - name: Standard Equipment
       jobs:
       - CMCMO
@@ -1257,14 +1296,14 @@
         recommended: true
       - id: CMWebbing
     - name: Spare Equipment
-      jobs: 
+      jobs:
       - CMCMO
       entries:
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
         amount: 15
-        
+
 
     # ////////////////////////////////////
     # Auxiliary Support Officer
@@ -1274,10 +1313,16 @@
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMJumpsuitBO
       - id: CMHeadsetSeniorCommand
       - id: CMCoatASO
+    - name: Gloves
+      jobs: 
+      - CMAuxiliarySupportOfficer
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Bag
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1312,7 +1357,7 @@
       - id: CMHeadCapPeakedService
         recommended: true
       - id: CMHeadBeretTan
-        recommended: true  
+        recommended: true
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer

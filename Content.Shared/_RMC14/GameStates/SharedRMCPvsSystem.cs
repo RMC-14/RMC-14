@@ -8,6 +8,10 @@ public abstract class SharedRMCPvsSystem : EntitySystem
     {
     }
 
+    public virtual void RemoveGlobalOverride(EntityUid ent)
+    {
+    }
+
     public virtual void AddForceSend(EntityUid ent)
     {
     }

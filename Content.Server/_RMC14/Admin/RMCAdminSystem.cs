@@ -69,13 +69,20 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
     private void OnSpawnAsJobDialog(SpawnAsJobDialogEvent ev)
     {
         if (GetEntity(ev.User) is not { Valid: true } user ||
-            !_adminManager.IsAdmin(user))
+            GetEntity(ev.Target) is not { Valid: true } target)
         {
             return;
         }
 
-        if (GetEntity(ev.Target) is not { Valid: true } target ||
-            !TryComp(target, out ActorComponent? actor) ||
+        SpawnAsJob(user, target, ev.JobId);
+    }
+
+    public void SpawnAsJob(EntityUid user, EntityUid target, ProtoId<JobPrototype> job)
+    {
+        if (!_adminManager.IsAdmin(user))
+            return;
+
+        if (!TryComp(target, out ActorComponent? actor) ||
             !_transform.TryGetMapOrGridCoordinates(target, out var coords))
         {
             _popup.PopupEntity(Loc.GetString("admin-player-spawn-failed"), user, user);
@@ -89,10 +96,10 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
         var newMind = _mind.CreateMind(player.UserId, profile.Name);
         _mind.SetUserId(newMind, player.UserId);
         _playTimeTracking.PlayerRolesChanged(player);
-        var mobUid = _stationSpawning.SpawnPlayerCharacterOnStation(stationUid, ev.JobId, profile);
+        var mobUid = _stationSpawning.SpawnPlayerCharacterOnStation(stationUid, job, profile);
 
         _mind.TransferTo(newMind, mobUid);
-        _role.MindAddJobRole(newMind, jobPrototype: ev.JobId);
+        _role.MindAddJobRole(newMind, jobPrototype: job);
 
         var jobName = _job.MindTryGetJobName(newMind);
         _admin.UpdatePlayerList(player);
@@ -105,7 +112,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
             var spawnEv = new PlayerSpawnCompleteEvent(
                 mobUid.Value,
                 player,
-                ev.JobId,
+                job,
                 true,
                 true,
                 0,

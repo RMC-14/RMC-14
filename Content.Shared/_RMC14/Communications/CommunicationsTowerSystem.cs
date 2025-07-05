@@ -147,7 +147,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         if (ent.Comp.State == CommunicationsTowerState.Broken)
             return;
 
-        if (_gunIFF.TryGetUserFaction(args.User, out var faction) &&
+        if (_gunIFF.TryGetFaction(args.User, out var faction) &&
             _prototypes.TryIndex(faction, out var factionProto) &&
             factionProto.TryGetComponent(out FactionFrequenciesComponent? frequencies, _compFactory))
         {

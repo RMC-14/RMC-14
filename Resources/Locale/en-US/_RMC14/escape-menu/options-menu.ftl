@@ -15,6 +15,6 @@ ui-options-function-rmc-pick-up-dropped-items = Pick up dropped items
 ui-options-function-rmc-interact-with-other-hand = Interact with other hand
 ui-options-function-rmc-rest = Rest
 
-ui-options-header-rmc-xeno = Xeno
+ui-options-header-rmc-xeno = Xenonid
 
-ui-options-function-cm-xeno-wide-swing = Xeno wide swing
+ui-options-function-cm-xeno-wide-swing = Xenonid thrust attack

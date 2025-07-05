@@ -107,6 +107,34 @@
     - accuracyAddMult: -0.05
 
 - type: entity
+  parent: RMCAttachmentMagneticHarness
+  id: RMCAttachmentTwoPointSling # PVE
+  name: two-point sling
+  description: A traditional strip of toughened nylon fabric with clips on either end for attaching to suitable mounting points on most longarms in the UN armed forces arsenals.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
+    state: pve-sling
+  - type: AttachableMagnetic
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: 0.05
+      recoilFlat: -4
+      scatterFlat: -10
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/snow-urban.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/classic-desert-jungle.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/rifle_sling/snow-urban.rsi
+
+
+- type: entity
   parent: RMCRailAttachmentBase
   id: RMCAttachmentS5RedDotSight # reddot
   name: S5 red-dot sight
@@ -460,6 +488,25 @@
     actionDesc: Lets you see further.
 
 - type: entity
+  parent: RMCM96SIntegratedScope
+  id: RMCType88IntegratedScope
+  name: Type 88 integrated scope
+  description: This isn't supposed to come off the gun. How did you get it?
+  components:
+  - type: Sprite
+    state: type88_scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCType88IntegratedScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: type88_scope
+    actionName: Look through the Type 88's Integrated Scope
+    actionDesc: Lets you see further.
+
+- type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
@@ -553,6 +600,9 @@
 
 - type: Tag
   id: RMCXM43E1IntegratedScope
+
+- type: Tag
+  id: RMCType88IntegratedScope
 
 - type: Tag
   id: RMCAttachmentXS-9

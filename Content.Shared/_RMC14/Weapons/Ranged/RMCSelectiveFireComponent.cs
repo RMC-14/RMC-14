@@ -69,6 +69,12 @@ public sealed partial class RMCSelectiveFireComponent : Component
     public float BaseFireRate = 1.429f;
 
     /// <summary>
+    /// This is the multiplier by of the base fire rate during burst mode. Sets the GunComponent.BurstFireRate.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float BurstFireRateMultiplier = 2.0f;
+
+    /// <summary>
     /// This is the multiplier applied to the additional scatter added by a SelectiveFireModifierSet with UseBurstScatterMult set to true.
     /// Conversion from 13 guns: burst_scatter_mult
     /// </summary>

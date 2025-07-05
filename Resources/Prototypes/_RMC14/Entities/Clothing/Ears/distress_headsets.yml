@@ -10,9 +10,27 @@
       key_slots:
       - CMEncryptionKeyColony
 
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetColonyIcons
+  name: colony headset
+  description: A standard headset used by colonists.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
+# For CLF
+- type: entity
+  parent: [RMCHeadsetIconsCLF, CMHeadsetColony]
+  id: RMCHeadsetDistressCLF
+  name: CLF headset
+  description: A special headset used by small groups of trained operatives. Or terrorists.
+
 # For Bureau Marshals
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIconsCMB
   id: RMCHeadsetDistressBureau
   name: bureau earpiece
   description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
@@ -22,21 +40,34 @@
       key_slots:
       - RMCEncryptionKeyBureau
 
-# For WeYa civilians
+# For CMB and ICB survivors.
 - type: entity
-  parent: CMHeadset
-  id: RMCHeadsetDistressWeYa
-  name: WeYa corporate headset
-  description: A headset commonly worn by WeYa corporate personnel.
+  parent: RMCHeadsetIconsCMB
+  id: RMCHeadsetDistressBureauDamaged
+  name: damaged bureau earpiece
+  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyWEYA
+      - RMCEncryptionKeyBureauDamaged
+
+# For WeYa civilians
+- type: entity
+  parent: RMCHeadsetIconsWeYa
+  id: RMCHeadsetDistressWeYa
+  name: WeYa corporate headset
+  description: A headset commonly worn by WeYa corporate personnel.
+  suffix: WeYa, Colony
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYAColony
 
 # For WeYa PMC
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIconsWeYa
   id: RMCHeadsetDistressPMC
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -46,7 +77,6 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
-  - type: GrantMarineIcons
   - type: GrantSquadLeaderTracker
   - type: GrantTacMapAlert
 
@@ -60,7 +90,7 @@
     radioTextIncrease: 2
 
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIconsWeYa
   id: RMCHeadsetDistressPMCDirector
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -71,14 +101,13 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
-  - type: GrantMarineIcons
   - type: GrantTacMapAlert
   - type: RMCHeadset
     radioTextIncrease: 3
 
 # For Duke's Dozen/Freelancer
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressDukes
   name: Duke's Dozen headset
   description: A special headset used by small groups of trained operatives. Or terrorists.
@@ -87,3 +116,54 @@
     containers:
       key_slots:
       - RMCEncryptionKeyDukes
+  - type: GrantMarineIcons
+
+- type: entity
+  parent: RMCHeadsetDistressDukes
+  id: RMCHeadsetDistressDukesLeader
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetForecon
+  name: Force Recon headset
+  description: A headset given to FORECON marines.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyFORECON
+  - type: RMCHeadset
+    channels:
+    - MarineForecon
+
+#for UNMC personnel
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetMarineDistress
+  name: UNMC headset
+  description: A standard issue UNMC headset. This one is used by marines on colonial protection duties, and only comes equipped with civilian channels.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+  - type: GrantMarineIcons
+
+# For MARSOC
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetMARSOC
+  name: UNMC SOF headset
+  description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeySOF
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+

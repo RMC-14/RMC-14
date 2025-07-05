@@ -1,6 +1,6 @@
 - type: entity
-  name: bible
-  description: Apply to head repeatedly.
+  name: Holy Bible
+  description: A book containing the sacred texts of that one popular guy you heard a lot about.
   parent: BaseStorageItem
   id: RMCBible
   components:
@@ -31,3 +31,25 @@
   - type: Tag
     tags:
     - Book
+
+- type: entity
+  parent: RMCBible
+  id: RMCBibleHEFA
+  name: Holy texts of the High Explosive Fragmenting Anti-personnel hand grenade.
+  description: Praised be thee, reverend Clearsmire who has brought us into the light of the shrapnel! Sworn to the holy service of the HEFA lord are we, and while few, we are the voices of the silent many! Printed in the RESS.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/books.rsi
+    state: tome_hefa
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 HEFA nades
+    whitelist:
+      tags:
+      - RMCGrenadeHEFA
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3

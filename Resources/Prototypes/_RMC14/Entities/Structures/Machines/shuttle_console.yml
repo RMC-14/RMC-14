@@ -22,7 +22,7 @@
   - type: ActivatableUI
     key: enum.DropshipNavigationUiKey.Key
   - type: AccessReader
-    access: [ [ "CMAccessPilot" ] ]
+    access: [ [ "CMAccessDropship" ] ]
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
@@ -30,6 +30,17 @@
         type: DropshipNavigationBui
       enum.DropshipHijackerUiKey.Key:
         type: DropshipHijackerBui
+
+- type: entity
+  parent: CMComputerDropshipNavigation
+  id: CMComputerDropshipNavigationERT
+  name: transport shuttle
+  description: A transport shuttle flight computer.
+  components:
+  - type: Sprite
+    state: syndishuttle
+  - type: DropshipNavigationComputer
+    hijackable: false
 
 - type: entity
   parent: CMComputerDropship

@@ -1,5 +1,4 @@
 # SQUAD PREPARATION
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechGuns
@@ -84,7 +83,6 @@
       - id: CMPackFlare
         amount: 10
         recommended: true
-
 
 - type: entity
   parent: ColMarTechBase
@@ -186,6 +184,8 @@
         amount: 15
       - id: RMCBeltHolsterPistol
         amount: 15
+      - id: RMCBeltHolsterM13
+        amount: 15
       - id: RMCBeltHolsterRevolver
         amount: 15
       - id: RMCBeltHolsterSMG
@@ -201,7 +201,7 @@
         amount: 15
     - name: Pouches
       entries:
-      - id: RMCPouchBayonet
+      - id: RMCPouchBayonetFill
         name: Bayonet Sheath (Full)
         amount: 15
       - id: RMCPouchFirstAidSplintsGauzeOintment
@@ -285,12 +285,20 @@
       - id: RMCM5CameraGear
         amount: 10
     - name: Optics
-      entries: [ ]
-#      - id: Advanced Medical Optic (CORPSMAN ONLY)
-#        amount: 4
-#      - id: Squad Optic
-#        amount: 15
+      entries:
+      - id: RMCVisorMedicalAdvanced
+        name: advanced medical optic (CORPSMAN ONLY)
+        amount: 4
+      - id: RMCVisorSquad
+        amount: 15
 
+- type: entity
+  parent: ColMarTechSurplus
+  id: RMCColMarTechSurplusPVE
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/squad_prep.rsi
 
 - type: entity
   parent: ColMarTechBase
@@ -320,9 +328,15 @@
         amount: 3
     - name: Extended Ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 2
       - id: CMMagazineSMGM63Ext
         amount: 2
       - id: CMMagazineRifleM54CExt
+        amount: 2
+      - id: RMCMagazinePistolM13Ext
+        amount: 2
+      - id: RMCMagazinePistolM13Drum
         amount: 2
     - name: Special Ammunition
       entries:
@@ -332,10 +346,8 @@
       #  amount: 2
       - id: RMCSpeedLoader44Marksman
         amount: 2
-      - id: RMCMagazinePistolM13Ext
-        amount: 6
-      - id: RMCMagazinePistolM13Drum
-        amount: 6
+      - id: RMCMagazinePistolM1984AP
+        amount: 2
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80
@@ -356,7 +368,6 @@
         amount: 4
       - id: RMCHornetShellM74AGMS
         amount: 4
-
 
 - type: entity
   parent: ColMarTechBase
@@ -396,15 +407,14 @@
         amount: 5
       - id: CMMultitool
         amount: 1
-      - id: CMWelder
+      - id: CMWelderSmall
         amount: 1
     - name: Flare and light
       entries:
-#      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: RMCBoxFlashlights
-#      #  amount: 1
+      - id: RMCBoxFlashlights
+        amount: 1
       - id: RMCBoxPackFlare
         amount: 1
       - id: CMPackFlare
@@ -437,6 +447,13 @@
       - id: RMCMagazineSMGNailgun
         amount: 2
 
+- type: entity
+  parent: ColMarTechUtilities
+  id: RMCColMarTechUtilitiesPVE
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
 
 - type: entity
   parent: ColMarTechBase
@@ -464,18 +481,20 @@
         amount: 3
       - id: RMCAttachmentSuppressor
         amount: 3
+      # - id: RMCAttachmentShotgunChoke
+      #   amount: 2
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 2
       - id: RMCAttachmentMagneticHarness
-        amount: 5
+        amount: 4
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
       - id: RMCAttachmentS5RedDotSight
-        amount: 4
+        amount: 3
       - id: RMCAttachmentS6ReflexSight
-        amount: 4
+        amount: 3
       - id: RMCAttachmentS84xTelescopicScope
         amount: 2
     - name: Underbarrel
