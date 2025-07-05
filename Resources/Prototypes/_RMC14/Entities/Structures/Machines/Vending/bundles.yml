@@ -26,7 +26,6 @@
     - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
     - RMCJumpsuitMarinePatch
-    - CMHandsInsulated
     - CMBootsBlackFilled
 
 - type: entity
@@ -75,10 +74,10 @@
     bundle:
     - CMVendorHeadsetSquadComTech
     - RMCJumpsuitMarineEngineerPatch
-    - CMHandsInsulated
     - CMBootsBlackFilled
 
 - type: entity
+  parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianEssentials
   name: essential engineer set
   description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
