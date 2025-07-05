@@ -34,7 +34,8 @@ public sealed class AegisEventCommand : IConsoleCommand
         var message = string.Join(" ", args);
 
         // Announce to both marines and xenos
-        AegisSharedAnnouncement.AnnounceToBoth(systemManager, message);        // Send fax to Marine High Command
+        AegisSharedAnnouncement.AnnounceToBoth(systemManager, message);
+        // Send fax to Marine High Command
         SendAegisFax(systemManager, entityManager, message);
 
         // Spawn and send the Aegis ID card
@@ -52,25 +53,21 @@ public sealed class AegisEventCommand : IConsoleCommand
     {
         var faxSystem = systemManager.GetEntitySystem<FaxSystem>();
 
-        // Query all fax machines to find Marine High Command
         var faxQuery = entityManager.EntityQueryEnumerator<FaxMachineComponent>();
         while (faxQuery.MoveNext(out var faxEnt, out var faxComp))
         {
-            // Target the Marine High Command fax specifically
             if (faxComp.FaxName == "CIC")
             {
-                // Create the Aegis paper entity and get its content
                 var aegisPaper = entityManager.SpawnEntity("CMPaperAegisInfoFax", MapCoordinates.Nullspace);
 
                 if (entityManager.TryGetComponent<PaperComponent>(aegisPaper, out var paperComp) &&
                     entityManager.TryGetComponent<MetaDataComponent>(aegisPaper, out var metaComp))
                 {
-                    // Create printout using the paper entity's data
                     var printout = new FaxPrintout(
                         paperComp.Content,
                         metaComp.EntityName,
                         null, // No label
-                        "CMPaperAegisInfoFax", // Use the specific Aegis fax paper prototype
+                        "CMPaperAegisInfoFax", 
                         paperComp.StampState,
                         paperComp.StampedBy
                     );
@@ -78,9 +75,8 @@ public sealed class AegisEventCommand : IConsoleCommand
                     faxSystem.Receive(faxEnt, printout, null, faxComp);
                 }
 
-                // Clean up the temporary entity
                 entityManager.DeleteEntity(aegisPaper);
-                break; // Only send to the first Marine High Command fax found
+                break; 
             }
         }
     }
