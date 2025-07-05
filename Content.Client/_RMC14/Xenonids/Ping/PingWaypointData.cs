@@ -1,0 +1,34 @@
+using System.Numerics;
+using Robust.Shared.Map;
+
+public class PingWaypointData
+{
+    public EntityUid EntityUid { get; }
+    public string PingType { get; }
+    public EntityUid Creator { get; }
+    public Vector2 WorldPosition { get; set; }
+    public EntityCoordinates OriginalCoordinates { get; }
+    public MapId MapId { get; }
+    public Color Color { get; set; }
+    public Robust.Client.Graphics.Texture? Texture { get; set; }
+    public TimeSpan DeleteAt { get; set; }
+    public bool EntityIsLoaded { get; set; }
+    public int GroupCount { get; set; } = 1; 
+
+    public bool IsValid => Texture != null && EntityIsLoaded;
+
+    public PingWaypointData(EntityUid entityUid, string pingType, EntityUid creator, Vector2 worldPosition,
+        EntityCoordinates originalCoordinates, MapId mapId, Color color, Robust.Client.Graphics.Texture? texture, TimeSpan deleteAt)
+    {
+        EntityUid = entityUid;
+        PingType = pingType;
+        Creator = creator;
+        WorldPosition = worldPosition;
+        OriginalCoordinates = originalCoordinates;
+        MapId = mapId;
+        Color = color;
+        Texture = texture;
+        DeleteAt = deleteAt;
+        EntityIsLoaded = false;
+    }
+}

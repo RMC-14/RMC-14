@@ -1,0 +1,299 @@
+- type: entity
+  parent: RMCBaseEffect
+  id: XenoPingBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: XenoPingEntity
+  - type: Sprite
+    sprite: _RMC14/Markers/xeno_markers.rsi
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: AnimationPlayer
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: PointLight
+    enabled: true
+    radius: 2
+    energy: 1
+  - type: XenoFriendly
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingMove
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: rally
+    color: "#00FF00"
+  - type: PointLight
+    color: "#00FF00"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingDefend
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: defend
+    color: "#0080FF"
+  - type: PointLight
+    color: "#0080FF"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingAttack
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: attack
+    color: "#FF0000"
+  - type: PointLight
+    color: "#FF0000"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingRegroup
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: rally
+    color: "#FFFF00"
+  - type: PointLight
+    color: "#FFFF00"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingDanger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: danger
+    color: "#FF8000"
+  - type: PointLight
+    color: "#FF8000"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingHold
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: hold
+    color: "#8000FF"
+  - type: PointLight
+    color: "#8000FF"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingAmbush
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: ambush
+    color: "#800080"
+  - type: PointLight
+    color: "#800080"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingFortify
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: fortify
+    color: "#808080"
+  - type: PointLight
+    color: "#808080"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingWeed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: weed
+    color: "#008000"
+  - type: PointLight
+    color: "#008000"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingNest
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: nest
+    color: "#8B4513"
+  - type: PointLight
+    color: "#8B4513"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingHosts
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: hosts
+    color: "#FF69B4"
+  - type: PointLight
+    color: "#FF69B4"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingAide
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: aide
+    color: "#00FFFF"
+  - type: PointLight
+    color: "#00FFFF"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingHiveCore
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    state: core
+    color: "#FF00FF"
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: PointLight
+    color: "#FF00FF"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingHiveCluster
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
+    state: hive_cluster_idle
+    color: "#8B008B"
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: PointLight
+    color: "#8B008B"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingHivePylon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    state: pylon
+    color: "#9932CC"
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: PointLight
+    color: "#9932CC"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingEggMorpher
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    state: eggmorph
+    color: "#FF6347"
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: PointLight
+    color: "#FF6347"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingRecoveryNode
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    state: recovery
+    color: "#32CD32"
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: PointLight
+    color: "#32CD32"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingTunnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_tunnel.rsi
+    state: hole
+    color: "#8B4513"
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: PointLight
+    color: "#8B4513"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingResinWall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: fortify
+    color: "#696969"
+  - type: PointLight
+    color: "#696969"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingResinDoor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: fortify
+    color: "#A0522D"
+  - type: PointLight
+    color: "#A0522D"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingResinHole
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
+    state: trap
+    color: "#8B0000"
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: PointLight
+    color: "#8B0000"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingFruit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_fruit.rsi
+    state: fruit_lesser
+    color: "#32CD32"
+    drawdepth: Effects
+    scale: 1.5, 1.5
+  - type: PointLight
+    color: "#32CD32"
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingGeneral
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: no_direction
+    color: "#FFFFFF"
+  - type: PointLight
+    color: "#FFFFFF"
