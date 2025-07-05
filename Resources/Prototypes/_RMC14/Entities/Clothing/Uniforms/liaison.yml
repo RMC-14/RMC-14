@@ -176,6 +176,17 @@
 
 - type: entity
   parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitLiaisonOrange
+  name: orange outfit
+  description: A pair of black pants paired with a very We-Ya orange shirt. A popular look with those in the corporate world that conduct the majority of their business from Weston Yamada offices.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi
+
+- type: entity
+  parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitLiaisonGreenWorkwear
   name: green workwear
   description: A pair of brown canvas workpants paired with a green workshirt. An common pairing among blue-collar workers.
