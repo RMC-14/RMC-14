@@ -224,6 +224,56 @@
     isCorrodible: true
 
 - type: entity
+  id: RMCTelecomMappingComputer
+  parent: RMCTelecomBusMainframe
+  name: CMPS II computer
+  description: The Common Mapping Production System version II allows for sensory input from satellites and ship systems to derive planetary maps in a standardized fashion for all UNMC pilots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - state: techweb
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  id: RMCTelecomMissionPlanningSystem
+  parent: RMCTelecomBusMainframe
+  name: MPS IV computer
+  description: The Mission Planning System IV (MPS IV), an enhancement in mission planning and charting for dropship pilots across the UNMC. Fully capable of customizing their flight paths and loadouts to suit their combat needs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    layers:
+    - state: mps_off
+    - state: mps
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
   id: RMCTelecomServerRack
   parent: RMCTelecomBusMainframe
   name: server rack

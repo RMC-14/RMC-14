@@ -23,6 +23,7 @@
 - type: entity
   parent: RMCCurtainBase
   id: RMCCurtainGreen
+  suffix: Green
   components:
   - type: Sprite
     snapCardinals: true
@@ -30,6 +31,14 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCCurtainGreen
+  id: RMCCurtainBlack
+  suffix: Black
+  components:
+  - type: Sprite
+    color: "#222222"
 
 - type: entity
   parent: RMCCurtainBase

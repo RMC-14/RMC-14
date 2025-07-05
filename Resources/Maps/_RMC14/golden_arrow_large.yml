@@ -22196,21 +22196,13 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: FireAxeCabinetOpen
+- proto: RMCFireAxeCabinetFilled
   entities:
   - uid: 4048
     components:
     - type: Transform
       pos: 22.5,92.5
       parent: 2
-    - type: Openable
-      opened: False
-    - type: ContainerContainer
-      containers:
-        ItemCabinet: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: 4049
 - proto: FoodBoxDonkpocket
   entities:
   - uid: 818
@@ -26926,14 +26918,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCFireAxe
-  entities:
-  - uid: 4049
-    components:
-    - type: Transform
-      parent: 4048
-    - type: Physics
-      canCollide: False
 - proto: RMCFlashlight
   entities:
   - uid: 1847

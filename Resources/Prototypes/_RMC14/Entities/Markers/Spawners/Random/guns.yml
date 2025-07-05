@@ -292,7 +292,7 @@
     - CMWeaponLauncherM79: RMCSpawnerRandomGrenadePackets
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialLow
   suffix: Low Chance
   components:
@@ -304,7 +304,7 @@
     chanceToSpawn: 0.2
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialMed
   suffix: Medium Chance
   components:
@@ -316,7 +316,7 @@
     chanceToSpawn: 0.5
 
 - type: entity
-  parent: RMCSpawnerRandomGunBase
+  parent: RMCSpawnerRandomGunSpecial
   id: RMCSpawnerRandomGunSpecialHigh
   suffix: High Chance
   components:
@@ -326,6 +326,47 @@
     - state: loot_special_80
   - type: GunSpawner
     chanceToSpawn: 0.8
+
+# Attachments
+
+- type: entity
+  parent: RMCSpawnerRandomGunBase
+  id: RMCSpawnerRandomAttachment
+  name: random attachment
+  description: This is a random attachment
+  suffix: Guaranteed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_attachment
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - RMCAttachmentRailFlashlight
+    - RMCAttachmentRailFlashlight
+    - RMCAttachmentRailFlashlight
+    - RMCAttachmentS5RedDotSight
+    - RMCAttachmentS5RedDotSight
+    - RMCAttachmentS5RedDotSight
+    - RMCAttachmentExtendedBarrel
+    - RMCAttachmentExtendedBarrel
+    - RMCAttachmentExtendedBarrel
+    - RMCAttachmentMagneticHarness
+    - RMCAttachmentMagneticHarness
+    - RMCAttachmentMagneticHarness
+    - RMCAttachmentFlashlightGrip
+    - RMCAttachmentFlashlightGrip
+    - RMCAttachmentSuppressor
+    - RMCAttachmentSuppressor
+    - RMCAttachmentBurstFireAssembly
+    - RMCAttachmentBurstFireAssembly
+    - RMCAttachmentRecoilCompensator
+    - RMCAttachmentRecoilCompensator
+    - RMCAttachmentB8SmartScope
+    - RMCAttachmentBarrelCharger
+    - RMCAttachmentS42xTelescopicMiniscope
 
 # This exists so we can spawn in a random shotgun shell box for shotguns
 - type: entity
