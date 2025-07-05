@@ -249,7 +249,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: headbutt
     event: !type:XenoHeadbuttActionEvent
-    range: 3
+    range: 3.5
     useDelay: 6
     deselectOnMiss: false
   - type: XenoOffensiveAction
