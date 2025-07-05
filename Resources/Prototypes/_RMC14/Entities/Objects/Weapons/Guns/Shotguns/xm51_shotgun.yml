@@ -18,7 +18,8 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: Gun
-    shotsPerBurst: 1
+    burstCooldown: 0.625
+    shotsPerBurst: 2
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -34,6 +35,7 @@
     scatterWielded: 10
     scatterUnwielded: 30
     baseFireRate: 0.625
+    burstFireRateMultiplier: 15
   - type: RMCExtraProjectilesDamageMods
     damageMultiplier:  0.18
   - type: RMCWeaponAccuracy
@@ -85,6 +87,7 @@
     tags:
     - RMCWeaponShotgun
     - RMCWeaponShotgunXM51
+    - RMCXM51StockBurst
   - type: GunDamageMultipliers
     multipliers:
       Turf: 30
