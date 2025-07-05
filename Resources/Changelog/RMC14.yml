@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed fruits not having a spent state. Gardener UI for choosing fruits
-      now also shows them in their full grown state.
-    type: Fix
-  id: 1435
-  time: '2025-03-12T05:51:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5822
 - author: blueDev2
   changes:
   - message: Hive Structures now announce that they are built over hivemind.
@@ -5094,5 +5086,13 @@
   id: 1936
   time: '2025-07-05T06:51:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6897
+- author: Dygon
+  changes:
+  - message: Fixed Lesser Drones being able to plant weed nodes out of range of other
+      nodes.
+    type: Fix
+  id: 1937
+  time: '2025-07-05T11:11:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6878
 Name: RMC14
 Order: -1
