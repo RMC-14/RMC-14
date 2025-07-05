@@ -19,13 +19,59 @@
     - RMCSeat
 
 - type: entity
-  parent: CMSeatBase
+  parent: [ CMSeatBase, ChairFolding ]
   id: CMChair
+  name: chair
+  description: A rectangular metallic frame sitting on four legs with a back panel. Designed to fit the sitting position, more or less comfortably.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/folding_chair.rsi
+    layers:
+    - state: chair
+      map: ["unfoldedLayer"]
+    - state: chair_folded
+      map: ["foldedLayer"]
+      visible: false
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 1
+    soundHit:
+      path: /Audio/_RMC14/Items/metal_chair_clang.ogg
+  - type: Wieldable
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Blunt: 10
+  - type: Construction
+    graph: CMSeat
+    node: chair
+  - type: RMCStaminaDamageOnHit
+    requiresWield: true
+    damage: 17
+
+- type: entity
+  parent: CMChair
+  id: CMChairFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: False
+
+- type: entity
+  parent: CMSeatBase
+  id: CMChairNonFold
+  abstract: true
   name: chair
   description: A rectangular metallic frame sitting on four legs with a back panel. Designed to fit the sitting position, more or less comfortably.
   components:
   - type: Transform
     anchored: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/chairs.rsi
+    state: chair
   - type: Physics
     bodyType: Static
   - type: Construction
@@ -33,14 +79,15 @@
     node: chair
 
 - type: entity
-  parent: CMChair
+  parent: CMChairNonFold
   id: CMChairAlt
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Furniture/chairs.rsi
     state: chair_alt
 
 - type: entity
-  parent: CMChair
+  parent: CMChairNonFold
   id: RMCStool
   name: stool
   description: Apply butt.
