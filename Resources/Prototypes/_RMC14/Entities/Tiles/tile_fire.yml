@@ -143,6 +143,7 @@
   - type: TileFire
     id: RMCTileFireOBAegis
     extinguishInstantly: false
+  - type: RMCFireImmunityBypass  # This component allows it to bypass fire immunity
   - type: GenericVisualizer
     visuals:
       enum.TileFireLayers.Base:

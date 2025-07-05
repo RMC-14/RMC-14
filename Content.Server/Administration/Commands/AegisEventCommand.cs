@@ -7,6 +7,10 @@ using Content.Shared._RMC14.Requisitions.Components;
 using Robust.Shared.Map;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Maths;
+using Content.Server.Fax;
+using Content.Shared.Fax.Components;
+using Content.Shared.Paper;
+using Robust.Shared.Localization;
 
 namespace Content.Server.Administration.Commands;
 
@@ -31,6 +35,8 @@ public sealed class AegisEventCommand : IConsoleCommand
 
         // Announce to both marines and xenos
         AegisSharedAnnouncement.AnnounceToBoth(systemManager, message);
+        // Send fax to Marine High Command
+        SendAegisFax(systemManager, entityManager, message);
 
         // Spawn and send the Aegis ID card
         var idItem = entityManager.SpawnEntity("RMCIDCardAegis", MapCoordinates.Nullspace);
@@ -40,6 +46,38 @@ public sealed class AegisEventCommand : IConsoleCommand
         var pamphletItem = entityManager.SpawnEntity("CMPamphletPowerloader", MapCoordinates.Nullspace);
         entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(pamphletItem);
 
-        shell.WriteLine("Aegis event announced to marines and xenos, and items sent through ASRS.");
+        shell.WriteLine("Aegis event announced to marines and xenos, fax sent to Marine High Command, and items sent through ASRS.");
+    }
+
+    private void SendAegisFax(IEntitySystemManager systemManager, IEntityManager entityManager, string message)
+    {
+        var faxSystem = systemManager.GetEntitySystem<FaxSystem>();
+
+        var faxQuery = entityManager.EntityQueryEnumerator<FaxMachineComponent>();
+        while (faxQuery.MoveNext(out var faxEnt, out var faxComp))
+        {
+            if (faxComp.FaxName == "CIC")
+            {
+                var aegisPaper = entityManager.SpawnEntity("CMPaperAegisInfoFax", MapCoordinates.Nullspace);
+
+                if (entityManager.TryGetComponent<PaperComponent>(aegisPaper, out var paperComp) &&
+                    entityManager.TryGetComponent<MetaDataComponent>(aegisPaper, out var metaComp))
+                {
+                    var printout = new FaxPrintout(
+                        paperComp.Content,
+                        metaComp.EntityName,
+                        null, // No label
+                        "CMPaperAegisInfoFax", 
+                        paperComp.StampState,
+                        paperComp.StampedBy
+                    );
+
+                    faxSystem.Receive(faxEnt, printout, null, faxComp);
+                }
+
+                entityManager.DeleteEntity(aegisPaper);
+                break; 
+            }
+        }
     }
 }
