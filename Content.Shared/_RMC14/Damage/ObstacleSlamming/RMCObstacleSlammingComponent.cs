@@ -13,9 +13,6 @@ namespace Content.Shared._RMC14.Damage.ObstacleSlamming;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCObstacleSlammingComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public float MinimumSpeed = 4.5f;
-
     /// <summary>
     /// MOB_SIZE_COEFF in CM
     /// </summary>
