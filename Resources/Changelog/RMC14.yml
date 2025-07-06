@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Ported Draconic Wings for reptilians.
-    type: Add
-  id: 1447
-  time: '2025-03-12T09:50:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5804
 - author: DummeHytteOst
   changes:
   - message: Added holstered visuals for sidearm pouch.
@@ -5088,5 +5081,12 @@
   id: 1948
   time: '2025-07-06T01:14:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6854
+- author: x5tink
+  changes:
+  - message: Added drop pouch to medical vendors
+    type: Add
+  id: 1949
+  time: '2025-07-06T01:43:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6767
 Name: RMC14
 Order: -1
