@@ -94,6 +94,7 @@
     - CMSurvivorDoctor
     - CMSurvivorEngineer
     - CMSurvivorSecurity
+    - CMSurvivorScientist
     - CMSurvivorCorporate
     - RMCSurvivorCommandingOfficer
     # Chance's Claim
@@ -113,6 +114,17 @@
     - CMSurvivorUNPeacekeeper
     - CMSurvivorICB
     - RMCSurvivorCommanderNewVaradero
+    # Sorokyne Strata
+    - CMJobSurvivorInfrastructureEngineer
+    - CMJobSurvivorReactorTechnician
+    - CMJobSurvivorArmedPoliceOfficer
+    - CMJobSurvivorArmyReservist
+    - CMJobSurvivorMoHDoctor
+    - CMJobSurvivorCECResearcher
+    - CMJobSurvivorSoroCivilian
+    - CMJobSurvivorFireProtectionSpecialist
+    - CMJobSurvivorSoroMiner
+    - CMJobSurvivorHalcyonDynamicsLiaison
 
 - type: entity
   id: CMJobsSurvivorCivilian
@@ -125,6 +137,9 @@
     - CMSurvivor
     - CMSurvivorBeachBum
     - CMSurvivorMiner
+    - CMJobSurvivorSoroCivilian
+    - CMJobSurvivorSoroMiner
+    - CMJobSurvivorFireProtectionSpecialist
 
 - type: entity
   id: CMJobsSurvivorEngineer
@@ -137,6 +152,8 @@
     - CMSurvivorEngineer
     - CMSurvivorTechnician
     - CMSurvivorCargoTechnician
+    - CMJobSurvivorReactorTechnician
+    - CMJobSurvivorInfrastructureEngineer
 
 - type: entity
   id: CMJobsSurvivorMedical
@@ -148,6 +165,7 @@
     jobs:
     - CMSurvivorDoctor
     - CMSurvivorMedicalTechnician
+    - CMJobSurvivorMoHDoctor
 
 - type: entity
   id: CMJobsSurvivorCorporate
@@ -159,6 +177,7 @@
     jobs:
     - CMSurvivorCorporate
     - CMSurvivorICB
+    - CMJobSurvivorHalcyonDynamicsLiaison
 
 - type: entity
   id: CMJobsSurvivorSecurity
@@ -170,6 +189,19 @@
     jobs:
     - CMSurvivorSecurity
     - CMSurvivorUNPeacekeeper
+    - CMJobSurvivorArmedPoliceOfficer
+    - CMJobSurvivorArmyReservist
+
+- type: entity
+  id: CMJobsSurvivorScientist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-security-scientist-roles
+    color: White
+    jobs:
+    - CMSurvivorScientist
+    - CMJobSurvivorCECResearcher
 
 - type: entity
   id: CMJobsSurvivorCommander

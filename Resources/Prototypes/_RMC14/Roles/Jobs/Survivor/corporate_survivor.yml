@@ -63,12 +63,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorCorporate
@@ -77,7 +75,8 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetCorporate
-  name: corporate colonist preset # TODO RMC14 random research notes
+  name: corporate colonist preset
+  categories: [ HideSpawnMenu ]   # TODO RMC14 random research notes
 
 - type: entity
   parent: MarkerBase

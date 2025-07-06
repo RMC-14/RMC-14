@@ -244,7 +244,7 @@
 - type: entity
   parent: RMCPlankWood
   id: RMCPlankWood2
-  suffix: Single
+  suffix: 2
   components:
   - type: Stack
     count: 2

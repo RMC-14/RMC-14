@@ -205,7 +205,7 @@
         recommended: true
       - id: CMWebbingHolster
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:

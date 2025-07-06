@@ -42,12 +42,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorMedicalTechnician
@@ -56,4 +54,5 @@
 - type: entity
   parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetMedicalTechnician
-  name: medical technician colonist preset # TODO RMC14 random research notes
+  name: medical technician colonist preset
+  categories: [ HideSpawnMenu ]  # TODO RMC14 random research notes
