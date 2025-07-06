@@ -89,6 +89,10 @@
     },
     {
       "name": "ai_interface_chair"
+    },
+    {
+      "name": "wheelchair",
+      "directions": 4
     }
   ]
 }
