@@ -50,15 +50,15 @@ public sealed class CMHealthIconsSystem : EntitySystem
             return icons;
         }
 
-        if (perishable == null || perishable.Stage <= 1)
-            icon = DeadDefib;
-        else if (perishable.Stage == 2)
-            icon = DeadClose;
-        else if (perishable.Stage == 3)
-            icon = DeadAlmost;
-
         if (_mobState.IsDead(damageable))
         {
+            if (perishable == null || perishable.Stage <= 1)
+                icon = DeadDefib;
+            else if (perishable.Stage == 2)
+                icon = DeadClose;
+            else if (perishable.Stage == 3)
+                icon = DeadAlmost;
+
             if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
                 icon = DeadDNR;
         }
