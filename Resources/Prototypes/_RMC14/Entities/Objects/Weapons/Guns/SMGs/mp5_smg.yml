@@ -85,6 +85,7 @@
           - RMCAttachmentLaserSight
           - RMCAttachmentBipod
           - RMCAttachmentM203GrenadeLauncher
+          - RMCAttachmentExtinguisher
         random:
         - RMCAttachmentM203GrenadeLauncher
   - type: AttachableHolderVisuals
