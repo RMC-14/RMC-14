@@ -76,7 +76,7 @@ public abstract class SharedRankSystem : EntitySystem
     }
 
     /// <summary>
-    /// Gets the rank name of a given mob.
+    ///     Gets the rank name of a given mob.
     /// </summary>
     public string? GetRankString(EntityUid uid, bool isShort = false, bool hasPaygrade = false)
     {
