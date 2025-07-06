@@ -117,7 +117,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoOrderConstructionActionEvent>(OnXenoOrderConstructionAction);
         SubscribeLocalEvent<XenoConstructionComponent, XenoOrderConstructionDoAfterEvent>(OnXenoOrderConstructionDoAfter);
-        SubscribeLocalEvent<XenoConstructionComponent, XenoConstructionAddPlasmaDoAfterEvent>(OnHiveConstructionNodeAddPlasmaDoAfter);
+        SubscribeLocalEvent<XenoConstructionComponent, XenoCanAddPlasmaToConstructComponent>(OnHiveConstructionNodeAddPlasmaDoAfter);
 
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
         SubscribeLocalEvent<XenoConstructionActionComponent, ValidateActionWorldTargetEvent>(OnSecreteActionValidateTarget);
@@ -501,7 +501,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _announce.AnnounceSameHive(xeno.Owner, msg, needsQueen: true);
     }
 
-    private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
+    private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoCanAddPlasmaToConstructComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
@@ -513,7 +513,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (!InRangePopup(args.User, transform.Coordinates, xeno.Comp.OrderConstructionRange.Float()))
+        if (!InRangePopup(args.User, transform.Coordinates, xeno.Comp.Range.Float()))
             return;
 
         var plasmaLeft = node.PlasmaCost - node.PlasmaStored;
