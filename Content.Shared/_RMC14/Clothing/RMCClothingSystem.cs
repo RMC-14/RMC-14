@@ -120,8 +120,7 @@ public sealed class RMCClothingSystem : EntitySystem
     {
         if (type.Prefix == ent.Comp.ActivatedPrefix) // already activated
         {
-            ent.Comp.HideAccessories = false;
-            SetPrefix(ent, null);
+            SetPrefix(ent, null, false);
         }
         else
         {
@@ -136,17 +135,17 @@ public sealed class RMCClothingSystem : EntitySystem
                 return;
             }
 
-            ent.Comp.HideAccessories = type.HideAccessories;
-            SetPrefix(ent, type.Prefix);
-            _item.VisualsChanged(ent.Owner);
+            SetPrefix(ent, type.Prefix, type.HideAccessories);
         }
     }
 
-    public void SetPrefix(Entity<RMCClothingFoldableComponent> ent, string? prefix)
+    public void SetPrefix(Entity<RMCClothingFoldableComponent> ent, string? prefix, bool hideAccessories)
     {
         ent.Comp.ActivatedPrefix = prefix;
+        ent.Comp.HideAccessories = hideAccessories;
         Dirty(ent);
 
         _clothing.SetEquippedPrefix(ent.Owner, ent.Comp.ActivatedPrefix);
+        _item.VisualsChanged(ent.Owner);
     }
 }
