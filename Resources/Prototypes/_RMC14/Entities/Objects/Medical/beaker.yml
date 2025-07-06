@@ -358,6 +358,29 @@
 
 - type: entity
   parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterGC
+  suffix: GC
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 94
+        - ReagentId: CMBicaridine
+          Quantity: 94
+        - ReagentId: CMTricordrazine
+          Quantity: 94
+        - ReagentId: CMMeralyne
+          Quantity: 94
+        - ReagentId: CMDermaline
+          Quantity: 94
+        - ReagentId: CMDexalinPlus
+          Quantity: 10
+
+- type: entity
+  parent: RMCPressurizedCanister
   id: RMCPressurizedCanisterTricordrazineRevival
   suffix: Tricordrazine - Revival
   components:

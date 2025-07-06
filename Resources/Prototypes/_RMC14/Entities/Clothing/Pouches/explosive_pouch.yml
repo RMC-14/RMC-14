@@ -45,6 +45,15 @@
 
 - type: entity
   parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFullFilledSPP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFragOld  # TODO Type 6 Sharpnel grenade
+      amount: 6
+
+- type: entity
+  parent: RMCPouchExplosive
   id: RMCPouchExplosiveFilledC4SPP
   components:
   - type: StorageFill

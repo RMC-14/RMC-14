@@ -240,6 +240,7 @@
   name: mercenary modified K12 ceramic plated armor
   description: A set of grey, heavy ceramic armor with dark blue highlights. It has been modified with extra ceramic plates placed in its storage pouch, and seems intended to support an extremely heavy weapon.
   components:
+  - type: SmartGunArmor
   - type: CMArmor
     melee: 50 # CLOTHING_ARMOR_ULTRAHIGH
     bullet: 55 # CLOTHING_ARMOR_ULTRAHIGHPLUS

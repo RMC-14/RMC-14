@@ -83,7 +83,7 @@
   equipment:
     id: RMCIDCardPMC
     head: ArmorHelmetPMCEngineer
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskBalaclavaPMC
     ears: RMCHeadsetDistressPMC
     jumpsuit: RMCJumpsuitMercenaryEngineer
     outerClothing: RMCArmorM4PMCEngineer

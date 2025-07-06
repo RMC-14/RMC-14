@@ -1,0 +1,73 @@
+# M63B2
+- type: job
+  parent: CMJobBase
+  id: RMCEliteMercLeader
+  name: Mercenary Warlord
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCEliteMerLeader
+  startingGear: RMCEliteMercLeader
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  spawnMenuRoleName: Elite Mercenary Leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Mercenary
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillOverwatch: 1
+        RMCSkillEndurance: 5
+        RMCSkillPilot: 2
+        RMCSkillJtac: 4
+        RMCSkillMeleeWeapons: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-merc-leader
+  hidden: true
+
+- type: startingGear
+  id: RMCEliteMercLeader
+  equipment:
+    id: RMCIDCardMercenary
+    jumpsuit: RMCJumpsuitMercenaryMedic
+    outerClothing: RMCArmorMercenary
+    gloves: RMCHandsVeteran
+    eyes: RMCGlassesM4SPRBattleSight
+    head: RMCArmorHelmetMercenarySupport
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclavaPMC
+    ears: RMCHeadsetDistressDukes
+    back: RMCSatchelLightpack
+    belt:  CMBeltMarine
+    pocket1: RMCPouchExplosiveFilledPlasticExplosives
+    pocket2: RMCPouchAutoinjectorFill
+    suitstorage: RMCWeaponRifleM54C2
+  storage:
+    outerClothing:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    belt:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    back:
+    - RMCBoxAttachment
+    - CMPacketGrenadeFragOldFilled
+    - RMCPacketGrenadeIncendiaryFilled # TODO RMC14: supposed to be white phosphorus
+    - RMCPacketGrenadeSmokeFilled
+    - RMCRangefinder
+    - RMCMotionDetector # TODO RMC14: supposed to be hacked version that shows every non merc
+
+# TODO RMC14: These guys are supposed to alternate between weapons per spawn. Leader alternates between M54 variants it seems, and sometimes M63?
