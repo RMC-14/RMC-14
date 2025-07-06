@@ -146,7 +146,7 @@ public sealed class RMCClothingSystem : EntitySystem
         ent.Comp.ActivatedPrefix = prefix;
         Dirty(ent);
 
-        _uniformAccessories.SetAccessoriesHidden(ent.Owner, hideAccessories);
         _clothing.SetEquippedPrefix(ent.Owner, ent.Comp.ActivatedPrefix);
+        _uniformAccessories.SetAccessoriesHidden(ent.Owner, hideAccessories);
     }
 }
