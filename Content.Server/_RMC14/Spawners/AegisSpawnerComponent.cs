@@ -12,10 +12,4 @@ public sealed partial class AegisSpawnerComponent : Component
 
     [DataField]
     public bool DeleteAfterSpawn = true;
-
-    /// <summary>
-    /// Whether this spawner is activated and will spawn during round start
-    /// </summary>
-    [DataField]
-    public bool IsActive = false;
 }
