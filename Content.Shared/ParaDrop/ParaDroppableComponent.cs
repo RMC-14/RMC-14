@@ -14,7 +14,7 @@ public sealed partial class ParaDroppableComponent : Component
     public int DropScatter = 7;
 
     [DataField, AutoNetworkedField]
-    public float FallHeight = 12;
+    public float FallHeight = 20;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier DropSound = new SoundPathSpecifier("/Audio/_RMC14/Items/fulton.ogg");
