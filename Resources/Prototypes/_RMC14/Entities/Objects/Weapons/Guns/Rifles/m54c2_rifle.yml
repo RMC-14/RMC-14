@@ -78,6 +78,7 @@
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentB8SmartScope
       rmc-aslot-stock:
         startingAttachable: RMCAttachmentM54C2StockCollapsible
         whitelist:
