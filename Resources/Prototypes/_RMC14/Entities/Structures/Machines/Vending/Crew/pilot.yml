@@ -34,6 +34,7 @@
       entries:
       - id: CMArmorM3VLFlakVest
       - id: CMArmorM3VLBallistics
+      - id: RMCOuterClothingExternalWebbing
     - name: Personal Sidearm
       choices: { CMSidearm: 1 }
       entries:
