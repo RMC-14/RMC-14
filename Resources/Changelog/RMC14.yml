@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added external webbing that fits on the armor slot. It can fit 2 items
-      and allows suit storage. You can find it in requisitions.
-    type: Add
-  id: 1457
-  time: '2025-03-15T07:25:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5885
 - author: Arcticular1
   changes:
   - message: Added QM jacket to QM's vendor.
@@ -5095,5 +5087,12 @@
   id: 1957
   time: '2025-07-06T01:58:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6768
+- author: VictorJob
+  changes:
+  - message: Resprited the extended barrel, barrel charger, and laser sight,
+    type: Tweak
+  id: 1958
+  time: '2025-07-06T02:00:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6780
 Name: RMC14
 Order: -1
