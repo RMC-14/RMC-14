@@ -4,7 +4,9 @@ namespace Content.Shared._RMC14.TacticalMap;
 
 public sealed class TacMapXenoAlertSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;    public override void Initialize()
+    [Dependency] private readonly AlertsSystem _alerts = default!;
+
+    public override void Initialize()
     {
         SubscribeLocalEvent<TacMapXenoAlertComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<TacMapXenoAlertComponent, ComponentRemove>(OnRemove);
