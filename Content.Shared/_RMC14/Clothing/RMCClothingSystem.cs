@@ -120,6 +120,7 @@ public sealed class RMCClothingSystem : EntitySystem
     {
         if (type.Prefix == ent.Comp.ActivatedPrefix) // already activated
         {
+            ent.Comp.HideAccessories = false;
             SetPrefix(ent, null);
         }
         else
