@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
@@ -67,13 +68,15 @@ public sealed class WheelchairSystem : EntitySystem
         
         if (HasComp<ActionsContainerComponent>(ent))
         {
-            var query = EntityQueryEnumerator<InstantActionComponent>();
-            while (query.MoveNext(out var actionEnt, out var action))
+            if (TryComp<ActionsComponent>(buckle, out var actions))
             {
-                if (action.Event is RingBellActionEvent)
+                foreach (var actionId in actions.Actions.ToArray())
                 {
-                    _actions.RemoveAction(buckle, actionEnt);
-                    break;
+                    if (TryComp<InstantActionComponent>(actionId, out var action) && action.Event is RingBellActionEvent)
+                    {
+                        _actions.RemoveAction(buckle, actionId);
+                        QueueDel(actionId);
+                    }
                 }
             }
         }

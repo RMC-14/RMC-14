@@ -54,7 +54,6 @@
     blacklist:
       components:
       - Xeno
-    unbuckleOnMove: false
   - type: Destructible
     thresholds:
     - trigger:

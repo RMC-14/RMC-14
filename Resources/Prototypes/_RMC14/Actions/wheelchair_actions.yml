@@ -6,7 +6,7 @@
   - type: InstantAction
     itemIconStyle: BigAction
     icon:
-      sprite: Objects/Fun/bikehorn.rsi
-      state: icon
+      sprite: Objects/Misc/desk_bell.rsi
+      state: normal
     event: !type:RingBellActionEvent
     useDelay: 0
