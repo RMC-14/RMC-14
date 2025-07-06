@@ -170,7 +170,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Mask
@@ -306,6 +306,8 @@
       - id: RMCVisorWelding
         points: 5
       - id: CMHandsInsulated
+        points: 3
+      - id: CMHandsBlackInsulated
         points: 3
       - id: RMCPouchMacheteFilled
         points: 5
@@ -448,7 +450,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Huds
@@ -803,7 +805,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Hats
@@ -896,7 +898,7 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
     # ////////////////////////////////////
     # Chief Engineer
@@ -911,13 +913,11 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMHeadsetCE
       - id: CMBootsBlack
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
-
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -926,6 +926,13 @@
       - id: CMJumpsuitChiefEngineer
         recommended: true
       - id: CMJumpsuitBO
+    - name: Gloves
+      jobs:
+      - CMChiefEngineer
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Helmet
       jobs:
       - CMChiefEngineer
@@ -1014,7 +1021,7 @@
       - id: CMWebbingBrown
       - id: CMWebbing
       - id: CMWebbingHolster
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     # CE Deployment Gear
@@ -1072,11 +1079,17 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
       - id: CMJumpsuitQM
       - id: CMHeadsetQM
       - id: CMSatchel
       - id: RMCQuartermasterJacket
+    - name: Gloves
+      jobs: 
+      - CMQuartermaster
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Headgear
       jobs:
       - CMQuartermaster
@@ -1282,6 +1295,7 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbing
+      - id: RMCWebbingDropPouch
     - name: Spare Equipment
       jobs:
       - CMCMO
@@ -1295,15 +1309,38 @@
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
-    - name: Standard Equipment
+    - name: Uniform
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMUniform: 1 }
+      entries:
+      - id: CMJumpsuitBO
+      - id: RMCJumpsuitASOBlack
+      - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOBlackAlt
+      - id: RMCJumpsuitASOOperations
+    - name: Outer Wear
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMSuit: 1 }
+      entries:
+      - id: CMCoatASO
+      - id: RMCCoatASOBlack
+      - id: RMCCoatASOWhite
+      - id: RMCCoatASOBlackAlt
+    - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
-      - id: CMHandsInsulated
-      - id: CMJumpsuitBO
       - id: CMHeadsetSeniorCommand
-      - id: CMCoatASO
+    - name: Gloves
+      jobs: 
+      - CMAuxiliarySupportOfficer
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Bag
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1373,5 +1410,5 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster

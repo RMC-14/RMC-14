@@ -8,11 +8,12 @@
   components:
   - type: Item
     size: Tiny
+    heldPrefix: null
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/dogtags.rsi
     layers:
-        - state: dogtag
-          map: ["enum.DogtagVisuals.Taken"]
+    - state: dogtag
+      map: ["enum.DogtagVisuals.Taken"]
   - type: Clothing
     slots:
     - idcard
@@ -25,15 +26,49 @@
     faction: FactionMarine
   - type: TakeableTags
   - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-dogtag-verb-show
+    foldVerbText: rmc-dogtag-verb-hide
+  - type: FoldableClothing
+    foldedEquippedPrefix: hidden
+    foldedHeldPrefix: hidden
   - type: GenericVisualizer
     visuals:
       enum.DogtagVisuals.Taken:
         enum.DogtagVisuals.Taken:
           True: { state: "dogtag_taken" }
           False: { state: "dogtag" }
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Corrodible
     isCorrodible: false
   - type: RMCUnstrippable
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDCardStandardDogtagHidden
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: hidden
+  - type: Item
+    heldPrefix: hidden
+  - type: Sprite
+    layers:
+    - state: dogtag
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: dogtag
+      map: ["foldedLayer"]
+      visible: true
 
 - type: entity
   parent: BaseItem

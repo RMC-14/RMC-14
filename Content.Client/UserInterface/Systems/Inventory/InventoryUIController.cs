@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Numerics;
-using Content.Client._RMC14.Medal;
+using Content.Client._RMC14.UniformAccessories;
 using Content.Client._RMC14.Webbing;
 using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
@@ -29,7 +29,7 @@ using static Content.Client.Inventory.ClientInventorySystem;
 namespace Content.Client.UserInterface.Systems.Inventory;
 
 public sealed class InventoryUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>,
-    IOnSystemChanged<ClientInventorySystem>, IOnSystemChanged<HandsSystem>, IOnSystemChanged<WebbingSystem>, IOnSystemChanged<PlaytimeMedalSystem>
+    IOnSystemChanged<ClientInventorySystem>, IOnSystemChanged<HandsSystem>, IOnSystemChanged<WebbingSystem>, IOnSystemChanged<UniformAccessorySystem>
 {
     [Dependency] private readonly IEntityManager _entities = default!;
 
@@ -510,12 +510,12 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         system.PlayerWebbingUpdated -= InventoryUpdated;
     }
 
-    public void OnSystemLoaded(PlaytimeMedalSystem system)
+    public void OnSystemLoaded(UniformAccessorySystem system)
     {
         system.PlayerMedalUpdated += InventoryUpdated;
     }
 
-    public void OnSystemUnloaded(PlaytimeMedalSystem system)
+    public void OnSystemUnloaded(UniformAccessorySystem system)
     {
         system.PlayerMedalUpdated -= InventoryUpdated;
     }

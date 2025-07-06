@@ -255,6 +255,7 @@
   - type: XenoToggleChargingStop
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
+  - type: RMCImmuneToFireTileDamage
 
 - type: entity
   parent: RMCXenoQueenBase
@@ -303,7 +304,7 @@
     color: "#a800a8"
     sprite: _RMC14/Effects/xeno_eye.rsi
     layers:
-    - state: hologram
+    - state: hudeye1
   - type: Eye
     drawFov: false
   - type: QueenEye

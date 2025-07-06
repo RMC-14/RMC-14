@@ -197,7 +197,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, args.UseOnSemiWeedable, true))
             return;
 
-        if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false))
+        if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, args.LimitDistance))
             return;
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
@@ -958,6 +958,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-need-weeds"), target, xeno);
+            return false;
+        }
+
+        if (!CanPlaceXenoStructure(xeno, target, out var popupType))
+        {
+            popupType += "-structure";
+            _popup.PopupClient(Loc.GetString(popupType), xeno, xeno, PopupType.SmallCaution);
             return false;
         }
 

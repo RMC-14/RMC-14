@@ -22,6 +22,9 @@ CMJobSurvivorMiner = Miner Colonist
 cm-job-name-surivor-priest = Priest Colonist
 CMJobSurvivorPriest = Priest Colonist
 
+cm-job-name-survivor-scientist = Scientist Colonist
+CMSurvivorScientist = Scientist Colonist
+
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
@@ -74,3 +77,37 @@ CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
 cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
 CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
 cm-job-prefix-survivor-icb = ICB
+
+# Sorokyne Strata Survs
+
+rmc-job-name-survivor-infrastructure-engineer = SPP - Ministry of Industry - Infrastructure Engineer
+CMJobSurvivorInfrastructureEngineer = Infrastructure Engineer
+
+rmc-job-name-survivor-reactor-technician = SPP - Ministry of Energy - Reactor Technician
+CMJobSurvivorReactorTechnician = Reactor Technician
+
+rmc-job-name-survivor-armed-police-officer = SPP - People's Armed Police Officer
+CMJobSurvivorArmedPoliceOfficer = People's Armed Police Officer
+
+rmc-job-name-survivor-army-reservist = SPP - Ministry of Defense - Army Reservist
+CMJobSurvivorArmyReservist = Army Reservist
+rmc-job-prefix-army-reservist = 202/ARMY
+
+rmc-job-name-survivor-moh-doctor = SPP - Ministry of Health - Doctor
+CMJobSurvivorMoHDoctor = Doctor
+
+rmc-job-name-survivor-cec-researcher = SPP - Cosmos Exploration Corps Researcher
+CMJobSurvivorCECResearcher = Cosmos Exploration Corps Researcher
+
+rmc-job-name-survivor-soro-civilian = SPP - Civilian
+CMJobSurvivorSoroCivilian = Civilian
+
+rmc-job-name-survivor-fire-protection-specialist = SPP - Ministry of Public Safety - Fire Protection Specialist
+CMJobSurvivorFireProtectionSpecialist = Fire Protection Specialist
+rmc-job-prefix-fire-protection-specialist = FPPB
+
+rmc-job-name-survivor-soro-miner = SPP - Jutou Combine - Miner
+CMJobSurvivorSoroMiner = Miner
+
+rmc-job-name-survivor-halcyon-dynamics-liaison = SPP - Halcyon Dynamics - Corporate Liaison
+CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison

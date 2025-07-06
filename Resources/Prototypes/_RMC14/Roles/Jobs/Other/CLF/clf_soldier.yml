@@ -12,6 +12,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -24,9 +27,6 @@
         RMCSkillVehicles: 1
         RMCSkillEndurance: 1
         RMCSkillJtac: 1
-    - type: NpcFactionMember
-      factions:
-      - CLF
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-soldier
   hidden: true
@@ -55,16 +55,17 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadCLF
 
 - type: startingGear
   id: RMCGearCLFSoldier
   equipment:
-    head: RMCArmorHelmetSecurity
+    head: RMCHeadMilitiaHood
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
-    outerClothing: RMCArmorVestNone
+    outerClothing: RMCCoatMilitiaVest
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSoldier
@@ -73,8 +74,8 @@
     pocket1: RMCFlashlight
     pocket2: RMCPouchFirstAidInjectors
   inhand:
-  - WeaponSMGM63 # TODO RMC14
-  - CMMagazineSMGM63 # TODO RMC14
+  - RMCWeaponSMGP90
+  - RMCMagazineSMGP90
 
 - type: playTimeTracker
   id: CMJobCLFSoldier

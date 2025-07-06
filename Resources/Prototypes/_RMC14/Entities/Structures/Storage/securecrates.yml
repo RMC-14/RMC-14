@@ -77,6 +77,55 @@
 
 - type: entity
   parent: RMCCrateOpenableBase
+  id: RMCOreBox
+  name: ore box
+  description: A heavy box used for storing ore.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/orebox.rsi
+    state: orebox0
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/orebox.rsi
+    state: orebox0
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.29"
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance
+  - type: ContainerContainer
+    containers:
+      paper_label: !type:ContainerSlot
+  - type: ItemSlots
+  - type: XenoToggleChargingDamage
+    stageLoss: 1
+    destroy: true
+
+- type: entity
+  parent: RMCCrateOpenableBase
   id: RMCSecureCase
   name: storage case
   description: A black storage case.

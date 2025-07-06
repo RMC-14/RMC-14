@@ -100,7 +100,7 @@
         amount: 2
       - id: CMWebbing
         amount: 5
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
         amount: 2
       - id: CMWebbingHolster
         amount: 2
@@ -137,6 +137,8 @@
       - id: CMBeltMarine
         amount: 15
       - id: RMCBeltHolsterPistol
+        amount: 10
+      - id: RMCBeltHolsterM13
         amount: 10
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
