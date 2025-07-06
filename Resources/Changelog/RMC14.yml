@@ -1,78 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed infected hosts losing tacklestacks and not consistently being able
-      to keep them tackled down.
-    type: Fix
-  - message: Fixed tacklestacks getting removed if you would get knocked down while
-      already knocked down.
-    type: Fix
-  id: 1439
-  time: '2025-03-12T08:35:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5807
-- author: Arcticular1
-  changes:
-  - message: Brown gloves/boots + formal CO attire to CO's clothing vendor.
-    type: Add
-  id: 1440
-  time: '2025-03-12T08:46:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5733
-- author: Tobi-nator
-  changes:
-  - message: Added new ML66A Smartgun sounds
-    type: Tweak
-  id: 1441
-  time: '2025-03-12T08:50:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5843
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed helmet garbs not being 1 point in loadouts.
-    type: Fix
-  - message: Added M5 integrated gas mask, rain cover, netting, and gun oil to the
-      surplus squad prep vendors.
-    type: Add
-  id: 1442
-  time: '2025-03-12T08:51:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5820
-- author: OmerF-afk
-  changes:
-  - message: Added numerous additions to Trijent Dam, focusing on the CMB armory,
-      paper bins, and missing guns.
-    type: Add
-  - message: Added new CMB clothing, armor, helmet, and visor.
-    type: Add
-  - message: "Added four faction cups\u2014UN, UNMC, CLF, and SPP."
-    type: Add
-  - message: "Added three new planet-only guns\u2014FN P90, CMB Spearhead, and HG\
-      \ 3712."
-    type: Add
-  id: 1443
-  time: '2025-03-12T09:03:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5785
-- author: DummeHytteOst
-  changes:
-  - message: Added snow and desert camo variants to the general pistol holster.
-    type: Add
-  - message: Added holstered pistol visual to the general pistol holster.
-    type: Add
-  id: 1444
-  time: '2025-03-12T09:23:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5821
-- author: Vermidia
-  changes:
-  - message: Fixed some tables dropping too many rods when destroyed by ravager's
-      assault ability.
-    type: Fix
-  id: 1445
-  time: '2025-03-12T09:22:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5808
-- author: Vermidia
-  changes:
-  - message: Fixed the D50 winter wyvern's stats
-    type: Fix
-  id: 1446
-  time: '2025-03-12T09:33:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5813
 - author: Tunguso4ka
   changes:
   - message: Ported Draconic Wings for reptilians.
@@ -5074,5 +5000,93 @@
   id: 1940
   time: '2025-07-05T11:39:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6872
+- author: x5tink
+  changes:
+  - message: The ChemMaster eject and clear button is now only Eject Beaker button.
+    type: Tweak
+  - message: The ChemMaster buffer side, all reagents button can now send everything
+      to disposals.
+    type: Fix
+  id: 1941
+  time: '2025-07-06T00:59:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6753
+- author: Dygon
+  changes:
+  - message: IMP ammo racks can now store empty and full sandbags.
+    type: Tweak
+  - message: IO headsets now have access to the requisitions channel.
+    type: Tweak
+  - message: 'Underbarrel extinguishers now also fit on the following weapons: M54CE2,
+      M63, MOU53, MP5, XM51.'
+    type: Tweak
+  id: 1942
+  time: '2025-07-06T01:01:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6877
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added new gunshot sounds for the M890 tactical shotgun, FN P90 SMG, and
+      the M357 rival double-barreled shotgun
+    type: Add
+  id: 1943
+  time: '2025-07-06T01:00:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6867
+- author: Vermidia
+  changes:
+  - message: Fixed resin surge not instant growing fruits. It now gives a cooldown
+      depending on the fruits base growth time.
+    type: Fix
+  - message: Fixed base fruit harvest and consume times. Gardener drones now feed
+      and harvest fruits faster than other xenos.
+    type: Fix
+  - message: Fixed fruits and hardy weeds not showing their effects on examine.
+    type: Fix
+  - message: Fixed spore fruit's effect lasting 30s too short (60 > 90)
+    type: Fix
+  - message: Fixed feeding fruit doafter not having a medical doafter effect.
+    type: Fix
+  - message: Fixed resin fruit in hand eat doafter not canceling if you switch hands.
+    type: Fix
+  - message: Fixed not being able to eat multiple planted fruits at once.
+    type: Fix
+  - message: Fixed reinforced resin not having a visual.
+    type: Fix
+  id: 1944
+  time: '2025-07-06T01:03:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6887
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added uniform accessories, such as patches. United nations patches were
+      added to the squad prep surplus clothing vendors, and squad uniforms will come
+      equipped with a UNMC patch. Sprites by noctyrnal.
+    type: Add
+  id: 1945
+  time: '2025-07-06T01:10:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6914
+- author: noctyrnal
+  changes:
+  - message: Added lore examines! You can inspect items more closely to see lore info
+      about them.
+    type: Add
+  id: 1946
+  time: '2025-07-06T01:12:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6915
+- author: Dygon
+  changes:
+  - message: You can unload unchambered warheads and fuel from the orbital cannon.
+    type: Fix
+  id: 1947
+  time: '2025-07-06T01:13:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6889
+- author: Dygon
+  changes:
+  - message: Resin structures can no longer be placed on tiles that are already occupied
+      by another structure.
+    type: Fix
+  - message: Weed nodes can no longer be planted on tiles occupied by certain objects,
+      including tables, window frames and floodlights.
+    type: Fix
+  id: 1948
+  time: '2025-07-06T01:14:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6854
 Name: RMC14
 Order: -1
