@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Added numerous additions to Trijent Dam, focusing on the CMB armory,
-      paper bins, and missing guns.
-    type: Add
-  - message: Added new CMB clothing, armor, helmet, and visor.
-    type: Add
-  - message: "Added four faction cups\u2014UN, UNMC, CLF, and SPP."
-    type: Add
-  - message: "Added three new planet-only guns\u2014FN P90, CMB Spearhead, and HG\
-      \ 3712."
-    type: Add
-  id: 1443
-  time: '2025-03-12T09:03:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5785
 - author: DummeHytteOst
   changes:
   - message: Added snow and desert camo variants to the general pistol holster.
@@ -5092,5 +5077,14 @@
   id: 1944
   time: '2025-07-06T01:03:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6887
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added uniform accessories, such as patches. United nations patches were
+      added to the squad prep surplus clothing vendors, and squad uniforms will come
+      equipped with a UNMC patch. Sprites by noctyrnal.
+    type: Add
+  id: 1945
+  time: '2025-07-06T01:10:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6914
 Name: RMC14
 Order: -1
