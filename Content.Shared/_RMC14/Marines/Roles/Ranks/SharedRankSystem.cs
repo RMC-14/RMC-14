@@ -103,7 +103,7 @@ public abstract class SharedRankSystem : EntitySystem
             return genderPrefix;
         }
 
-        if (hasPaygrade && rank.Paygrade is not null)
+        if (hasPaygrade && rank.Paygrade != null)
             return $"({Loc.GetString(rank.Paygrade)}) {Loc.GetString(rank.Name)}";
 
         return rank.Name;
