@@ -100,6 +100,8 @@
   name: M44 combat revolver case
   description:
   components:
+  - type: Item
+    size: Small
   - type: Storage
     maxItemSize: Huge
     grid:
@@ -115,6 +117,37 @@
     - id: RMCWeaponRevolverM44
     - id: RMCSpeedLoader44Marksman
       amount: 6
+
+# Custom M44 combat revolver
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM44Custom
+  name: Custom M44 combat revolver case
+  description: A case containing a loaded custom M44 combat revolver and two speedloaders for it.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+      tags:
+      - RMCWeaponRevolverM44
+      - RMCSpeedLoaderM44
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponRevolverM44Custom
+      - id: RMCSpeedLoaderM44
+        amount: 2
 
 # M1984 service pistol
 - type: entity
@@ -137,7 +170,36 @@
     - id: RMCAttachmentRailFlashlight
     - id: CMWeaponPistolM1984
     - id: CMMagazinePistolM1984
-      amount: 6
+      amount:
+
+# Custom M1984 service pistol
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM1984Custom
+  name: Custom M1984 service pistol case
+  description: A case containing a loaded custom M1984 service pistol and two magazines for it.
+  components:
+   - type: Sprite
+     noRot: false
+     sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+     layers:
+     - state: closed
+   - type: Icon
+     sprite: _RMC14/Objects/Storage/D18case.rsi
+     state: closed
+   - type: Storage
+     maxItemSize: Huge
+     grid:
+     - 0,0,5,1
+     whitelist:
+      tags:
+      - CMWeaponPistolM1984
+      - CMMagazinePistolM1984
+   - type: StorageFill
+     contents:
+     - id: CMWeaponPistolM1984Custom
+     - id: CMMagazinePistolM1984
+       amount: 2
 
 # RSh9 Assault Revolver
 - type: entity
@@ -244,7 +306,7 @@
       amount: 2
     - id: RMCBeltXM51
   - type: RemoveOnlyStorage
-    whitelist: 
+    whitelist:
       tags:
       - RMCAttachmentXM51Stock
       - RMCWeaponShotgunXM51
