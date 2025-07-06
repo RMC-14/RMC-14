@@ -224,12 +224,12 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         skyFalling.TargetCoordinates = location;
         Dirty(crashLandable, skyFalling);
 
-        Blocker.UpdateCanMove(crashLandable);
-
         var crashLanding = EnsureComp<CrashLandingComponent>(crashLandable);
         crashLanding.DoDamage = doDamage;
         crashLanding.RemainingTime = crashLandable.Comp.CrashDuration;
         Dirty(crashLandable, crashLanding);
+
+        Blocker.UpdateCanMove(crashLandable);
 
         crashLandable.Comp.LastCrash = _timing.CurTime;
         Dirty(crashLandable);
