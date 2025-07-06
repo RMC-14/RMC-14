@@ -769,6 +769,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsParaDropSelect(Entity<DropshipTerminalWeaponsComponent> ent, ref DropShipTerminalWeaponsParaDropTargetSelectMsg args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         if (ent.Comp.Target == null)
         {
             RefreshWeaponsUI(ent);
@@ -780,26 +783,30 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
 
         // Only select a target while travelling
-        if (!CasDebug &&
-            (!TryComp(dropship, out FTLComponent? ftl) ||
-             ftl.State != FTLState.Travelling))
+        if (!CasDebug)
         {
-            var msg = Loc.GetString("rmc-dropship-paradrop-lock-target-not-flying");
-            _popup.PopupCursor(msg, args.Actor);
-            return;
+            if (!TryComp(dropship, out FTLComponent? ftl) ||
+                ftl.State != FTLState.Travelling)
+            {
+                var msg = Loc.GetString("rmc-dropship-paradrop-lock-target-not-flying");
+                _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+                return;
+            }
         }
 
         var coordinates = _transform.GetMoverCoordinates(ent.Comp.Target.Value);
 
         // Can't drop underground
-        if (!CasDebug &&
-            (!_area.CanCAS(coordinates) ||
-             !_area.CanFulton(coordinates) ||
-             !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates))))
+        if (!CasDebug)
         {
-            var msg = Loc.GetString("rmc-laser-designator-not-cas");
-            _popup.PopupCursor(msg, args.Actor);
-            return;
+            if(!_area.CanCAS(coordinates) ||
+               !_area.CanFulton(coordinates) ||
+               !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)))
+            {
+                var msg = Loc.GetString("rmc-laser-designator-not-cas");
+                _popup.PopupCursor(msg, args.Actor);
+                return;
+            }
         }
 
         // Open the doors so people can jump out

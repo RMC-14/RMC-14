@@ -396,6 +396,7 @@ public sealed partial class ShuttleSystem
         var shuttleCenter = grid.LocalAABB.Center;
 
         // RMC14
+        Dirty(entity.Owner, entity.Comp1);
         var beforeFTL = new BeforeFTLStartedEvent(uid);
         RaiseLocalEvent(uid, ref beforeFTL);
 
