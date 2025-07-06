@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Binbagg
-  changes:
-  - message: Added more missing map loot to Solaris and Varadero.
-    type: Add
-  id: 1459
-  time: '2025-03-15T07:27:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5878
 - author: UnicornOnLSD
   changes:
   - message: New variants of the M5 gas mask are now available in loadouts !
@@ -5084,5 +5077,13 @@
   id: 1959
   time: '2025-07-06T02:09:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6932
+- author: SharkSnake98
+  changes:
+  - message: Added OCP-583, a WeYa station intended for ERT spawns, admin events,
+      and PvE.
+    type: Add
+  id: 1960
+  time: '2025-07-06T02:45:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6792
 Name: RMC14
 Order: -1
