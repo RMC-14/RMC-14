@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed the D50 winter wyvern's stats
-    type: Fix
-  id: 1446
-  time: '2025-03-12T09:33:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5813
 - author: Tunguso4ka
   changes:
   - message: Ported Draconic Wings for reptilians.
@@ -5084,5 +5077,16 @@
   id: 1947
   time: '2025-07-06T01:13:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6889
+- author: Dygon
+  changes:
+  - message: Resin structures can no longer be placed on tiles that are already occupied
+      by another structure.
+    type: Fix
+  - message: Weed nodes can no longer be planted on tiles occupied by certain objects,
+      including tables, window frames and floodlights.
+    type: Fix
+  id: 1948
+  time: '2025-07-06T01:14:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6854
 Name: RMC14
 Order: -1
