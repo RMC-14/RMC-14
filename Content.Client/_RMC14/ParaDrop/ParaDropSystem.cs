@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client._RMC14.Sprite;
+using Content.Shared._RMC14.Sprite;
 using Content.Shared.ParaDrop;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -67,6 +68,8 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         var despawn = AddComp<TimedDespawnComponent>(animationEnt);
         despawn.Lifetime = fallDuration;
 
+        AddComp<RMCUpdateClientLocationComponent>(animationEnt);
+
         _animPlayer.Play(animationEnt, ReturnFallAnimation(fallDuration, paraDroppable.FallHeight * multiplier), ParachuteAnimationKey);
     }
 
@@ -79,9 +82,6 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         {
             if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null)
                 PlayFallAnimation(uid, paraDroppable.DropDuration, paraDroppable.LastParaDrop.Value, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
-
-            if (_timing.IsFirstTimePredicted)
-                continue;
 
             // This is so the animation's current location gets updated during the drop.
             _rmcSprite.UpdatePosition(uid);

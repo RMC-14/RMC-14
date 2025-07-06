@@ -27,7 +27,6 @@
   name: crash land on touch barrier
   components:
   - type: CrashLandOnTouch
-  - type: ParaDropOnTouch
 
 - type: entity
   parent: RMCBarrierBase

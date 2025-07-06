@@ -51,6 +51,12 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
             sprite.Color = color.Color;
         }
 
+        var location = EntityQueryEnumerator<RMCUpdateClientLocationComponent>();
+        while (location.MoveNext(out var uid, out _))
+        {
+            UpdatePosition(uid);
+        }
+
         if (_player.LocalEntity is not { } player)
             return;
 

@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Maps;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Configuration;
@@ -59,6 +60,21 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         if (!_crashLandEnabled || !HasComp<FTLMapComponent>(args.Transform.ParentUid))
             return;
 
+        if (args.OldParent == null)
+            return;
+
+        // Try to crash any entities being pulled.
+        if (TryComp(crashLandable, out PullerComponent? puller) &&
+            puller.Pulling != null &&
+            _crashLandableQuery.TryComp(puller.Pulling.Value, out var pullingCrashLandable) &&
+            ShouldCrash(puller.Pulling.Value, args.OldParent.Value))
+        {
+            TryCrashLand((puller.Pulling.Value, pullingCrashLandable), true);
+        }
+
+        if (!ShouldCrash(crashLandable, args.OldParent.Value))
+            return;
+
         TryCrashLand(crashLandable, true);
     }
 
@@ -85,6 +101,17 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return;
 
         QueueDel(args.OtherEntity);
+    }
+
+    private bool ShouldCrash(EntityUid crashing, EntityUid oldParent)
+    {
+        var ev = new AttemptCrashLandEvent(crashing);
+        RaiseLocalEvent(oldParent, ref ev);
+
+        if (ev.Cancelled)
+            return false;
+
+        return true;
     }
 
     public bool IsLandableTile(Entity<MapGridComponent> grid, TileRef tileRef)

@@ -24,9 +24,6 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
             if (!_animPlayer.HasRunningAnimation(uid, CrashingAnimationKey) && crashLandable.LastCrash != null)
                 _paraDrop.PlayFallAnimation(uid, crashLandable.CrashDuration, crashLandable.LastCrash.Value, crashLandable.FallHeight, CrashingAnimationKey);
 
-            if (_timing.IsFirstTimePredicted)
-                continue;
-
             // This is so the animation's current location gets updated during the drop.
             _rmcSprite.UpdatePosition(uid);
         }

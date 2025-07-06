@@ -41,11 +41,12 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private static readonly int CrashScatter = 4;
+    private const int CrashScatter = 7;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<ParaDropOnTouchComponent, AttemptCrashLandEvent>(OnAttemptCrashLand);
+        SubscribeLocalEvent<CrashLandOnTouchComponent, AttemptCrashLandEvent>(OnAttemptCrashLand);
+        SubscribeLocalEvent<MapGridComponent, AttemptCrashLandEvent>(OnAttemptCrashLand);
 
         SubscribeLocalEvent<GrantParaDroppableComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantParaDroppableComponent, GotUnequippedEvent>(OnGotUnEquipped);
@@ -82,7 +83,21 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         RemComp<ParaDroppableComponent>(args.Equipee);
     }
 
-    private void OnAttemptCrashLand(Entity<ParaDropOnTouchComponent> ent, ref AttemptCrashLandEvent args)
+    private void OnAttemptCrashLand(Entity<CrashLandOnTouchComponent> ent, ref AttemptCrashLandEvent args)
+    {
+        if (!_dropship.TryGetGridDropship(ent, out var dropShip))
+            return;
+
+        if (!TryComp(dropShip, out ActiveParaDropComponent? paraDrop) &&
+            !HasComp<ParaDroppableComponent>(args.Crashing))
+            return;
+
+        args.Cancelled = true;
+
+        AttemptParaDrop((dropShip, paraDrop), args.Crashing);
+    }
+
+    private void OnAttemptCrashLand(Entity<MapGridComponent> ent, ref AttemptCrashLandEvent args)
     {
         if (!_dropship.TryGetGridDropship(ent, out var dropShip))
             return;
