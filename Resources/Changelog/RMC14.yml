@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: New variants of the M5 gas mask are now available in loadouts !
-    type: Add
-  id: 1460
-  time: '2025-03-15T07:32:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5839
 - author: noctyrnal
   changes:
   - message: Added two cursed plushies .. oh no.
@@ -5085,5 +5078,12 @@
   id: 1960
   time: '2025-07-06T02:45:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6792
+- author: CyberTropic
+  changes:
+  - message: Added CORSAT
+    type: Add
+  id: 1961
+  time: '2025-07-06T07:33:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6909
 Name: RMC14
 Order: -1
