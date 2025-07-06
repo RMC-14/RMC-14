@@ -44,7 +44,7 @@
     - type: TacticalMapIcon
       icon: 
         sprite: _RMC14/Interface_map_blips.rsi
-        state: synth
+        state: forecon_synth
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
       whitelist: 
@@ -119,6 +119,7 @@
   inhand:
     - RMCMotionDetector
     - CMFirstAidKitFilled
+    
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointForeconSynth
@@ -128,3 +129,7 @@
     job_id: RMCSurvivorForeconSynth
   - type: Sprite
     state: syn_spawn
+    
+- type: playTimeTracker
+  id: RMCJobSurvivorSynthForecon
+  isHumanoid: true
