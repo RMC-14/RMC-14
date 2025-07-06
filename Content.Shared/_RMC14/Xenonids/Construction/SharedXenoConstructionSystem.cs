@@ -648,7 +648,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var ev = new XenoConstructionAddPlasmaDoAfterEvent();
-        var delay = xeno.OrderConstructionAddPlasmaDelay;
+        var delay = xeno.AddPlasmaDelay;
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, user, node)
         {
             BreakOnMove = true
