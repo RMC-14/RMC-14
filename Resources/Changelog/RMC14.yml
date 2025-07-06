@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Added MARSOC HEAP for rifles.
-    type: Add
-  - message: Added XM38 and XM40 Death squad weaponry.
-    type: Add
-  - message: Added missing firedelay on custombuilt shotgun.
-    type: Add
-  id: 1449
-  time: '2025-03-13T19:24:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5879
 - author: DummeHytteOst
   changes:
   - message: Fixed healer appearing twice in the drone evolution menu.
@@ -5088,5 +5077,14 @@
   id: 1950
   time: '2025-07-06T01:45:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6788
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the default mode (the only one we have right now) for the underbarrel
+      flamer attachment being stronger than intended. Intensity 20 > 10, duration
+      24 > 10.
+    type: Fix
+  id: 1951
+  time: '2025-07-06T01:50:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6936
 Name: RMC14
 Order: -1
