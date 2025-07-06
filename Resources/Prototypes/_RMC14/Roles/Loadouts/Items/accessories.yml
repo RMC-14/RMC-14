@@ -1,0 +1,7 @@
+# Helmet Garbs
+- type: loadout
+  id: UNPatchRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPatchUnitedNations

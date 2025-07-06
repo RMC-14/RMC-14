@@ -18,15 +18,15 @@
   description: A fire-resistant shoulder patch, worn by the men and women of the United Nations, an economic and political giant in both the Sol system and throughout the offworld colonies, the military might of the UN is unparalleled..
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/un_patch.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/un_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch.rsi
       state: patch
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/un_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/un_patch.rsi
       state: helmet
 
 - type: entity
@@ -36,16 +36,187 @@
   description: A fire-resistant shoulder patch, worn by the men and women of the United Nations Marine Corps.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/unmc_patch.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/unmc_patch.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/unmc_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/unmc_patch.rsi
       state: patch
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/unmc_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/unmc_patch.rsi
       state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchFallingFalcons
+  name: UNMC Falling Falcons patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the Falling Falcons, the 2nd battalion of the 4th brigade of the UNMC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_alt.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsLarge
+  suffix: Large
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_large.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_large.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_patch_large.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsAlpha
+  suffix: Alpha
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsBravo
+  suffix: Bravo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_bravo_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_bravo_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_bravo_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsCharlie
+  suffix: Charlie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_charlie_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_charlie_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_charlie_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsDelta
+  suffix: Delta
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_delta_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_delta_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_delta_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsEcho
+  suffix: Echo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_echo_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_echo_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_echo_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsFoxtrot
+  suffix: Foxtrot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_foxtrot_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_foxtrot_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_foxtrot_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchFallingFalcons
+  id: RMCPatchFallingFalconsSquad
+  suffix: Squad, DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_squad_patch.rsi
+    state: icon
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: RMCPatchFallingFalconsAlpha
+      SquadBravo: RMCPatchFallingFalconsBravo
+      SquadCharlie: RMCPatchFallingFalconsCharlie
+      SquadDelta: RMCPatchFallingFalconsDelta
+      SquadEcho: RMCPatchFallingFalconsEcho
+      SquadFoxtrot: RMCPatchFallingFalconsFoxtrot
 
 # FORECON
 - type: entity
@@ -55,15 +226,34 @@
   description: A fire-resistant shoulder patch, worn by the men and women of the UNS Hanyut, UNMC FORECON.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/forecon_patch.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/forecon_patch.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/forecon_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/forecon_patch.rsi
       state: patch
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/forecon_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/forecon_patch.rsi
+      state: helmet
+
+# SOLAR DEVILS
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSolarDevils
+  name: UNMC Solar Devils patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the 3rd Battalion 'Solar Devils', part of the UNMC 2nd Division, 1st Regiment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
       state: helmet
 
 # WEYA
@@ -74,11 +264,11 @@
   description: A fire-resistant white shoulder patch featuring the Weston-Yamada logo. A symbol of loyalty to the corporation, or perhaps ironic mockery, depending on your viewpoint.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch.rsi
       state: patch
 
 - type: entity
@@ -88,11 +278,11 @@
   suffix: Black
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch_black.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_black.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch_black.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_black.rsi
       state: patch
 
 - type: entity
@@ -101,9 +291,9 @@
   suffix: Black, Square
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch_square.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_square.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/weya_patch_square.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_square.rsi
       state: patch
