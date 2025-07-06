@@ -331,6 +331,45 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi
+      
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatASOBlack
+  name: auxiliary support officer black jacket
+  description: A black jacket worn by officers that want to look stylish while looking at paperwork.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black.rsi
+  - type: CMArmor
+    melee: 10
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatASOWhite
+  name: auxiliary support officer white jacket
+  description: A white jacket worn by officers that want to look stylish while looking at paperwork.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white.rsi
+  - type: CMArmor
+    melee: 10
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatASOBlackAlt
+  name: auxiliary support officer alternative black coat
+  description: A black coat perfect for sorting papers in colder weather.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black_alt.rsi
+  - type: CMArmor
+    melee: 10
 
 # Commanding Officer
 - type: entity
