@@ -70,7 +70,7 @@
   parent: RMCWheelchairBase
   id: RMCWheelchair
   name: wheelchair
-  description: A wheelchair that allows mobility while keeping your hands free.
+  description: Helps those with injuries related to immobility to move freely
   components:
   - type: Wheelchair
     speedMultiplier: 0.75
@@ -79,8 +79,12 @@
   parent: RMCWheelchairBase
   id: RMCWheelchairBell
   name: wheelchair with bell
-  description: A wheelchair that allows mobility while keeping your hands free. Has a bell attached.
+  description: Helps those with injuries related to immobility to move freely. Has a bell attached.
   components:
   - type: Wheelchair
     speedMultiplier: 0.75
+  - type: ContainerContainer
+    containers:
+      rmc-vehicle-pilot: !type:ContainerSlot
+      actions: !type:Container
   - type: ActionsContainer
