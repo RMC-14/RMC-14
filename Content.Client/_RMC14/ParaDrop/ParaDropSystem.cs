@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Sprite;
 using Content.Shared.ParaDrop;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Shared.Animations;
 using Robust.Shared.Map;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
@@ -19,6 +20,15 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
 
     private const string ParachuteAnimationKey = "parachute-animation";
     private const string DroppingAnimationKey = "dropping-animation";
+    private const string SkyFallingAnimationKey = "sky-falling-animation";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<SkyFallingComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<SkyFallingComponent, ComponentRemove>(OnComponentRemove);
+    }
 
     public Animation ReturnFallAnimation(float fallDuration, float fallHeight)
     {
@@ -41,6 +51,38 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         };
     }
 
+    private Animation GetFallingDisappearingAnimation(float duration, Vector2 originalScale, Vector2 endScale)
+    {
+        return new Animation
+        {
+            Length = TimeSpan.FromSeconds(duration),
+            AnimationTracks =
+            {
+                new AnimationTrackComponentProperty
+                {
+                    ComponentType = typeof(SpriteComponent),
+                    Property = nameof(SpriteComponent.Scale),
+                    KeyFrames =
+                    {
+                        new AnimationTrackProperty.KeyFrame(originalScale, 0.0f),
+                        new AnimationTrackProperty.KeyFrame(endScale, duration),
+                    },
+                    InterpolationMode = AnimationInterpolationMode.Cubic
+                },
+                new AnimationTrackComponentProperty
+                {
+                    ComponentType = typeof(SpriteComponent),
+                    Property = nameof(SpriteComponent.Offset),
+                    KeyFrames =
+                    {
+                        new AnimationTrackProperty.KeyFrame(new Vector2(0f, 0), 0f),
+                        new AnimationTrackProperty.KeyFrame(new Vector2(0f, -2), duration),
+                    },
+                },
+            }
+        };
+    }
+
     public void PlayFallAnimation(EntityUid fallingUid, float fallDuration, TimeSpan fallStartTime, float fallHeight, string animationKey, ParaDroppableComponent? paraDroppable = null)
     {
         var duration = TimeSpan.FromSeconds(fallDuration);
@@ -54,6 +96,36 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
             if (paraDroppable != null)
                 SpawnParachute(multiplier * paraDroppable.DropDuration, _transform.GetMoverCoordinates(fallingUid), paraDroppable, multiplier);
         }
+    }
+
+    private void OnComponentInit(Entity<SkyFallingComponent> ent, ref ComponentInit args)
+    {
+        if (!TryComp<SpriteComponent>(ent, out var sprite) ||
+            TerminatingOrDeleted(ent))
+        {
+            return;
+        }
+
+        ent.Comp.OriginalScale = sprite.Scale;
+
+        if (!TryComp<AnimationPlayerComponent>(ent, out var player))
+            return;
+
+        if (_animPlayer.HasRunningAnimation(player, SkyFallingAnimationKey))
+            return;
+
+        _animPlayer.Play((ent, player), GetFallingDisappearingAnimation(ent.Comp.RemainingTime, ent.Comp.OriginalScale, ent.Comp.AnimationScale), SkyFallingAnimationKey);
+    }
+
+    private void OnComponentRemove(Entity<SkyFallingComponent> ent, ref ComponentRemove args)
+    {
+        if (!TryComp<SpriteComponent>(ent, out var sprite) ||
+            TerminatingOrDeleted(ent))
+        {
+            return;
+        }
+
+        sprite.Scale = ent.Comp.OriginalScale;
     }
 
     private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier)
@@ -80,8 +152,11 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         var query = EntityQueryEnumerator<ParaDroppableComponent, ParaDroppingComponent>();
         while (query.MoveNext(out var uid, out var paraDroppable, out _))
         {
-            if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null)
-                PlayFallAnimation(uid, paraDroppable.DropDuration, paraDroppable.LastParaDrop.Value, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
+            if (!HasComp<SkyFallingComponent>(uid))
+            {
+                if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null)
+                    PlayFallAnimation(uid, paraDroppable.DropDuration, paraDroppable.LastParaDrop.Value, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
+            }
 
             // This is so the animation's current location gets updated during the drop.
             _rmcSprite.UpdatePosition(uid);

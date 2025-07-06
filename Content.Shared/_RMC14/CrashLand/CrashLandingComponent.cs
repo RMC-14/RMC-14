@@ -7,4 +7,7 @@ public sealed partial class CrashLandingComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float RemainingTime = 1f;
+
+    [DataField, AutoNetworkedField]
+    public bool DoDamage;
 }

@@ -2,10 +2,13 @@
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Maps;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.ParaDrop;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Configuration;
@@ -25,8 +28,9 @@ namespace Content.Shared._RMC14.CrashLand;
 public abstract partial class SharedCrashLandSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] protected readonly DamageableSystem Damageable = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -35,8 +39,8 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
 
-    private static readonly ProtoId<DamageTypePrototype> CrashLandDamageType = "Blunt";
-    private const int CrashLandDamageAmount = 10000;
+    protected static readonly ProtoId<DamageTypePrototype> CrashLandDamageType = "Blunt";
+    protected const int CrashLandDamageAmount = 10000;
 
     private bool _crashLandEnabled;
 
@@ -51,6 +55,8 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         SubscribeLocalEvent<CrashLandOnTouchComponent, StartCollideEvent>(OnCrashLandOnTouchStartCollide);
 
         SubscribeLocalEvent<DeleteCrashLandableOnTouchComponent, StartCollideEvent>(OnDeleteCrashLandableOnTouchStartCollide);
+
+        SubscribeLocalEvent<CrashLandingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
 
         Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
     }
@@ -101,6 +107,11 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return;
 
         QueueDel(args.OtherEntity);
+    }
+
+    private void OnUpdateCanMove(Entity<CrashLandingComponent> ent, ref UpdateCanMoveEvent args)
+    {
+        args.Cancel();
     }
 
     private bool ShouldCrash(EntityUid crashing, EntityUid oldParent)
@@ -200,23 +211,23 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
     public void TryCrashLand(Entity<CrashLandableComponent?> crashLandable, bool doDamage, EntityCoordinates location)
     {
+        if (_net.IsClient)
+            return;
+
         if (!Resolve(crashLandable, ref crashLandable.Comp, false))
             return;
 
-        if (doDamage)
-        {
-            var damage = new DamageSpecifier
-            {
-                DamageDict =
-                {
-                    [CrashLandDamageType] = CrashLandDamageAmount,
-                },
-            };
+        if (HasComp<CrashLandingComponent>(crashLandable))
+            return;
 
-            _damageable.TryChangeDamage(crashLandable, damage);
-        }
+        var skyFalling = EnsureComp<SkyFallingComponent>(crashLandable);
+        skyFalling.TargetCoordinates = location;
+        Dirty(crashLandable, skyFalling);
+
+        Blocker.UpdateCanMove(crashLandable);
 
         var crashLanding = EnsureComp<CrashLandingComponent>(crashLandable);
+        crashLanding.DoDamage = doDamage;
         crashLanding.RemainingTime = crashLandable.Comp.CrashDuration;
         Dirty(crashLandable, crashLanding);
 
@@ -224,7 +235,6 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         Dirty(crashLandable);
 
         _rmcPulling.TryStopAllPullsFromAndOn(crashLandable);
-        _transform.SetMapCoordinates(crashLandable, _transform.ToMapCoordinates(location));
     }
 }
 

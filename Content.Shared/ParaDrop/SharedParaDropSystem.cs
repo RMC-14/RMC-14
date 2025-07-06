@@ -5,10 +5,11 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.Slow;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -29,6 +30,7 @@ namespace Content.Shared.ParaDrop;
 public abstract partial class SharedParaDropSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
     [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -37,7 +39,6 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -59,6 +60,9 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         SubscribeLocalEvent<ParaDroppingComponent, AttemptMobTargetCollideEvent>(OnAttemptMobTargetCollide);
         SubscribeLocalEvent<ParaDroppingComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
         SubscribeLocalEvent<ParaDroppingComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
+        SubscribeLocalEvent<ParaDroppingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
+
+        SubscribeLocalEvent<SkyFallingComponent, ComponentShutdown>(OnComponentShutdown);
     }
 
     private void OnGotEquipped(Entity<GrantParaDroppableComponent> ent, ref GotEquippedEvent args)
@@ -144,6 +148,17 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         }
     }
 
+    private void OnComponentShutdown(Entity<SkyFallingComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp.TargetCoordinates == null)
+            return;
+
+        _transform.SetMapCoordinates(ent, _transform.ToMapCoordinates(ent.Comp.TargetCoordinates.Value));
+
+        if (TryComp(ent, out ParaDroppableComponent? paraDroppable))
+            _audio.PlayPvs(paraDroppable.DropSound, ent);
+    }
+
     private void OnIgniteAttempt(Entity<ParaDroppingComponent> ent, ref RMCIgniteAttemptEvent args)
     {
         args.Cancel();
@@ -174,6 +189,10 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    private void OnUpdateCanMove(Entity<ParaDroppingComponent> ent, ref UpdateCanMoveEvent args)
+    {
+        args.Cancel();
+    }
 
     /// <summary>
     ///     Try to do a paradrop, if the dropShip has no <see cref="ActiveParaDropComponent"/> the drop location will be random.
@@ -236,7 +255,6 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         paraDroppable.LastParaDrop = _timing.CurTime;
         Dirty(dropping, paraDroppable);
 
-        _slow.TryRoot(dropping, TimeSpan.FromSeconds(paraDroppable.DropDuration + 0.1));
         _rmcPulling.TryStopAllPullsFromAndOn(dropping);
         if (TryComp(dropping, out PhysicsComponent? physics))
             _physics.SetLinearVelocity(dropping, Vector2.Zero, body: physics);
@@ -245,12 +263,15 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         if (TryGetParaDropLocation(dropCoordinates, paraDroppable.DropScatter, out var adjustedCoordinates))
             dropCoordinates = adjustedCoordinates;
 
+        var skyFalling = EnsureComp<SkyFallingComponent>(dropping);
+        skyFalling.TargetCoordinates = dropCoordinates;
+        Dirty(dropping, skyFalling);
+
+        Blocker.UpdateCanMove(dropping);
+
         var droppingComp = EnsureComp<ParaDroppingComponent>(dropping);
         droppingComp.RemainingTime = paraDroppable.DropDuration;
         Dirty(dropping, droppingComp);
-
-        _transform.SetMapCoordinates(dropping, _transform.ToMapCoordinates(dropCoordinates));
-        _audio.PlayPvs(paraDroppable.DropSound, dropping);
 
         return true;
     }

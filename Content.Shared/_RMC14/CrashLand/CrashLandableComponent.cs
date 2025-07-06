@@ -8,10 +8,10 @@ namespace Content.Shared._RMC14.CrashLand;
 public sealed partial class CrashLandableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float CrashDuration = 1.25f;
+    public float CrashDuration = 3f;
 
     [DataField, AutoNetworkedField]
-    public float FallHeight = 8f;
+    public float FallHeight = 16f;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier CrashSound = new SoundPathSpecifier("/Audio/Weapons/punch1.ogg");

@@ -9,13 +9,13 @@ namespace Content.Shared.ParaDrop;
 public sealed partial class ParaDroppableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float DropDuration = 3.5f;
+    public float DropDuration = 5f;
 
     [DataField, AutoNetworkedField]
     public int DropScatter = 7;
 
     [DataField, AutoNetworkedField]
-    public float FallHeight = 7;
+    public float FallHeight = 12;
 
     [DataField, AutoNetworkedField]
     public Vector2 ParachuteOffset = new(0, 0.75f);
