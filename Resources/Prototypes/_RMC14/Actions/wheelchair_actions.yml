@@ -9,4 +9,4 @@
       sprite: Objects/Fun/bikehorn.rsi
       state: icon
     event: !type:RingBellActionEvent
-    useDelay: 3
+    useDelay: 0
