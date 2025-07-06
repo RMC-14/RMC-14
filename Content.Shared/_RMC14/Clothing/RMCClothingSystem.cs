@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -16,10 +17,11 @@ public sealed class RMCClothingSystem : EntitySystem
     [Dependency] private readonly ClothingSystem _clothing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly SharedUniformAccessorySystem _uniformAccessories = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly SharedItemSystem _item = default!;
 
     private EntityQuery<ClothingLimitComponent> _clothingLimitQuery;
 
@@ -142,10 +144,9 @@ public sealed class RMCClothingSystem : EntitySystem
     public void SetPrefix(Entity<RMCClothingFoldableComponent> ent, string? prefix, bool hideAccessories)
     {
         ent.Comp.ActivatedPrefix = prefix;
-        ent.Comp.HideAccessories = hideAccessories;
         Dirty(ent);
 
+        _uniformAccessories.SetAccessoriesHidden(ent.Owner, hideAccessories);
         _clothing.SetEquippedPrefix(ent.Owner, ent.Comp.ActivatedPrefix);
-        _item.VisualsChanged(ent.Owner);
     }
 }

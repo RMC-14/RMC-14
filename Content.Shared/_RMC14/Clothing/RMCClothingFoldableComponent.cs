@@ -12,9 +12,6 @@ public sealed partial class RMCClothingFoldableComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<FoldableType> Types = new();
-
-    [DataField, AutoNetworkedField]
-    public bool HideAccessories = false;
 }
 
 /// <summary>
