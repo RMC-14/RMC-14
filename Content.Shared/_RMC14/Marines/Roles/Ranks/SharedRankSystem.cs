@@ -82,7 +82,7 @@ public abstract class SharedRankSystem : EntitySystem
     {
         var rank = GetRank(uid);
 
-        if (rank is null)
+        if (rank == null)
             return null;
 
         if (isShort)
