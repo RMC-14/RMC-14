@@ -22,7 +22,6 @@
   - type: Tag
     tags:
     - DoorBumpOpener
-    - FootstepSound
   - type: Physics
     bodyType: KinematicController
   - type: Clickable
