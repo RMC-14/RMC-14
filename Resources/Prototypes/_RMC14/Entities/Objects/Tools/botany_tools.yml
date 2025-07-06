@@ -1,0 +1,36 @@
+- type: entity
+  parent: HydroponicsToolMiniHoe
+  id: RMCToolMiniHoe
+  name: mini hoe
+  description: It's used for removing weeds or scratching your back.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Hydroponics/mini_hoe.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Tools/Hydroponics/mini_hoe.rsi
+
+- type: entity
+  parent: HydroponicsToolSpade
+  id: RMCToolSpade
+  name: spade
+  description: A small tool for digging and moving dirt.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Hydroponics/spade.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Tools/Hydroponics/spade.rsi
+
+- type: entity
+  parent: HydroponicsToolHatchet
+  id: RMCToolHatchet
+  name: hatchet
+  description: A sharp hand hatchet, commonly used to cut things apart, be it timber or other objects. Often found in the hands of woodsmen, scouts, and looters.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Hydroponics/hatchet.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Tools/Hydroponics/hatchet.rsi
+

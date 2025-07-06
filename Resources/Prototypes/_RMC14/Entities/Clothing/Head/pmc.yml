@@ -62,6 +62,7 @@
         shader: unshaded
   - type: Corrodible
     isCorrodible: false
+  - type: RMCEarProtection
 
 - type: entity
   parent: ArmorHelmetPMC
@@ -94,6 +95,14 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi
+
+- type: entity
+  parent: ArmorHelmetPMCRiot
+  id: ArmorHelmetPMCRiotShield
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRC6RiotShield
 
 - type: entity
   parent: ArmorHelmetPMC

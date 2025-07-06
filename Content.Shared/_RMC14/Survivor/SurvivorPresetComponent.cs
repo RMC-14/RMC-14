@@ -8,6 +8,12 @@ namespace Content.Shared._RMC14.Survivor;
 public sealed partial class SurvivorPresetComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public Dictionary<string, List<EntProtoId>> RandomStartingGear = new();
+
+    [DataField, AutoNetworkedField]
+    public List<List<EntProtoId>> RandomOutfits = new();
+
+    [DataField, AutoNetworkedField]
     public List<List<EntProtoId>> RandomGear = new();
 
     [DataField, AutoNetworkedField]

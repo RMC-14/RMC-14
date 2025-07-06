@@ -2,11 +2,13 @@
   id: RMCRankCMBDeputy
   name: CMB Deputy
   prefix: Dep.
+  paygrade: CMBD
 
 - type: rank
   id: RMCRankCMBMarshal
   name: CMB Marshal
   prefix: Marshal
+  paygrade: CMBM
 
 - type: rank
   id: RMCRankCMBInvestigativeSynthetic
@@ -47,8 +49,10 @@
   id: RMCRankICBCorporateLiaison
   name: Interstellar Commerce Bureau Corporate Liaison
   prefix: Exec.
+  paygrade: ICCL
 
 - type: rank
   id: RMCRankIHROObserver
   name: Interstellar Human Rights Observer
   prefix: "Obsv."
+  paygrade: ISRO

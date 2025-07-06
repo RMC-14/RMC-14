@@ -82,9 +82,9 @@
           - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.81, 0.032
-      rmc-aslot-rail: 0.05, 0.185
-      rmc-aslot-underbarrel: 0.4, -0.23
+      rmc-aslot-barrel: 0.8125, 0.0625
+      rmc-aslot-rail: 0.0625, 0.275
+      rmc-aslot-underbarrel: 0.375, -0.1875
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: Tag

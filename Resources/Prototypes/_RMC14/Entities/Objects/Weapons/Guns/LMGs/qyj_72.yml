@@ -1,0 +1,166 @@
+- type: entity
+  parent: RMCBaseWeaponLMG
+  name: QYJ-72 General Purpose Machine Gun
+  id: RMCWeaponLMGQYJ72
+  description: The QYJ-72 is the standard GPMG of the Socialists Progressive Peoples, chambered in 7.62x54mmR, it fires a hard-hitting cartridge with a high rate of fire. With an extremely large box at 250 rounds, the QJY-72 is designed with suppressing fire and accuracy by volume of fire at its forefront.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/qyj_72/qyj_72_inhands.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/qyj_72/qyj_72_icon.rsi
+    - state: bolt-open
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/qyj_72/qyj_72_icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/qyj_72/qyj_72_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: cover-closed
+      sprite: _RMC14/Objects/Weapons/Guns/LMGs/qyj_72/qyj_72_icon.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/qyj_72/qyj_72_inhands.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponLMGQYJ72
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    shotsPerBurst: 6
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m60.ogg
+      params:
+        volume: -4
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 0
+    recoilUnwielded: 0
+    scatterWielded: 1
+    scatterUnwielded: 1
+    baseFireRate: 3
+    burstScatterMult: 3
+    modifiers:
+      Burst:
+        fireDelay: 0.35
+        maxScatterModifier: 10
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0.01
+        maxScatterModifier: 3
+        shotsToMaxScatter: 6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineLMGQYJ72
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineLMGQYJ72
+  - type: GunDamageModifier
+    multiplier: 1
+  # - type: UniqueAction
+  # - type: BreechLoaded
+  #   needOpenClose: false
+  # - type: Appearance
+  # - type: GenericVisualizer
+  #   visuals:
+  #     enum.BreechVisuals.Open:
+  #       enum.BreechVisuals.Open:
+  #         True: { state: cover-open }
+  #         False: { state: cover-closed }
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentBipod
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.418, -0.283
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: RMCMagneticItem
+
+- type: entity
+  parent: RMCMagazineLMGBase
+  id: RMCMagazineLMGQYJ72
+  name: "QYJ-72 Ammo Box (7.62x54mmR)"
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineLMG
+    - RMCMagazineLMGQYJ72
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeLMGQYJ72
+    proto: RMCCartridgeLMGQYJ72
+    capacity: 250
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/qyj_72.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: RMCCartridgeRifleAR10
+  id: RMCCartridgeLMGQYJ72
+  name: cartridge (7.62x54mmR)
+  description: A 7.62x54mmR cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeLMGQYJ72
+  - type: CartridgeAmmo
+    proto: RMCBulletLMGQYJ72
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletLMGQYJ72
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 14
+      falloff: 10
+
+- type: Tag
+  id: RMCWeaponLMGQYJ72
+
+- type: Tag
+  id: RMCMagazineLMGQYJ72
+
+- type: Tag
+  id: RMCCartridgeLMGQYJ72

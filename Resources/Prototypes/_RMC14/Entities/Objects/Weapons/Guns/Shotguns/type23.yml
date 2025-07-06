@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: Type 23 riot shotgun
   id: RMCWeaponShotgunType23
@@ -63,7 +63,6 @@
           tags:
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentFlamer
           - RMCAttachmentExtinguisher
           - RMCAttachmentBurstFireAssembly #TODO RMC14 Needs to be able to shoot 3 shells at once when this is on /similar to custombuilt etc...
   - type: AttachableHolderVisuals

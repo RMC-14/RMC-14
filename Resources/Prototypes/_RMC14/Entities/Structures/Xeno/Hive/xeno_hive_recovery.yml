@@ -26,6 +26,12 @@
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: DoAfter
+  - type: XenoStructureMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: recovery_node
 
 - type: entity
   id: HiveRecoveryNodeXenoConstructionNode

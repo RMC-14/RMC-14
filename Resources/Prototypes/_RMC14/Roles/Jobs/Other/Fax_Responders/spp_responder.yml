@@ -1,0 +1,70 @@
+- type: job
+  parent: CMJobBase
+  id: CMSPPResponder
+  name: rmc-job-name-spp-responder
+  description: rmc-job-description-spp-responder
+  playTimeTracker: CMJobSPPResponder
+  ranks:
+    RMCRankSPPStarshiyLeytenant: []
+  startingGear: RMCGearSPPResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+  hasIcon: false
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSPPResponder
+  equipment:
+    jumpsuit: CMJumpsuitSPPOfficer
+    outerClothing: RMCCoatSPP
+    shoes: RMCBootsSPP
+    head: CMHeadCapSPPUshanka
+    id: RMCIDCardSPPResponder
+    ears: RMCHeadsetSPPCommand
+    back: CMSatchel
+    belt: CMClipboard
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardSPPResponder
+  name: SPP Communications Officer ID card
+  description: A ID card issued to the lower ranking officers of the Socialist Progressive Peoples military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: PresetIdCard
+    job: CMSPPResponder
+
+- type: playTimeTracker
+  id: CMJobSPPResponder
+
+

@@ -1,0 +1,169 @@
+- type: entity
+  parent: CMSatchel
+  id: RMCSmartpackBase
+  abstract: true
+  name: S-V42 backpack
+  description: A joint project between the UNMC and Weston-Yamada. It is said to be top-class engineering and state of the art technology with a built in shoulder-lamp.
+  components:
+  - type: Item
+    heldPrefix: off
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+    - sprite: _RMC14/Objects/Clothing/Back/Smartpacks/smartpack_overlay.rsi
+      state: icon_lamp-off
+    - sprite: _RMC14/Objects/Clothing/Back/Smartpacks/smartpack_overlay.rsi
+      state: icon_lamp-on
+      visible: false
+      map: [ "light" ]
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK
+      - sprite: _RMC14/Objects/Clothing/Back/Smartpacks/smartpack_overlay.rsi
+        state: lamp-off
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+    clothingVisuals:
+      back:
+      - sprite: _RMC14/Objects/Clothing/Back/Smartpacks/smartpack_overlay.rsi
+        state: lamp-on
+  - type: RMCSuitLight
+  - type: PointLight
+    enabled: false
+    radius: 5
+    offset: 0,-0.85
+    rotation: 90
+    softness: 5
+    autoRot: true
+    netsync: false
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+  - type: PointLightRotation
+    rotation: 90
+  - type: HandheldLight
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+    turnOffSound:
+      path: /Audio/_RMC14/Machines/suitlight_off.ogg
+    turnOnSound:
+      path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 600 #lights drain 3/s but recharge of 2 makes this 1/s. Therefore 600 is 10 minutes of light.
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCSmartpackBase
+  id: RMCSmartpackA1Base
+  abstract: true
+  name: S-V42A1 backpack
+  description: A revised joint project between the UNMC and Weston-Yamada. It is said to be top-class engineering and state of the art technology with a built in shoulder-lamp.
+
+# V42
+
+- type: entity
+  parent: RMCSmartpackBase
+  id: RMCSmartpack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42/smartpack.rsi
+
+- type: entity
+  parent: RMCSmartpackBase
+  id: RMCSmartpackBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42/smartpack_black.rsi
+
+- type: entity
+  parent: RMCSmartpackBase
+  id: RMCSmartpackGreen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42/smartpack_green.rsi
+
+- type: entity
+  parent: RMCSmartpackBase
+  id: RMCSmartpackTan
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42/smartpack_tan.rsi
+
+- type: entity
+  parent: RMCSmartpackBase
+  id: RMCSmartpackWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42/smartpack_white.rsi
+
+# V42A1
+
+- type: entity
+  parent: RMCSmartpackA1Base
+  id: RMCSmartpackA1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42A1/smartpack.rsi
+
+- type: entity
+  parent: RMCSmartpackA1Base
+  id: RMCSmartpackA1Black
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42A1/smartpack_black.rsi
+
+- type: entity
+  parent: RMCSmartpackA1Base
+  id: RMCSmartpackA1Green
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42A1/smartpack_green.rsi
+
+- type: entity
+  parent: RMCSmartpackA1Base
+  id: RMCSmartpackA1Tan
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42A1/smartpack_tan.rsi
+
+- type: entity
+  parent: RMCSmartpackA1Base
+  id: RMCSmartpackA1White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42A1/smartpack_white.rsi

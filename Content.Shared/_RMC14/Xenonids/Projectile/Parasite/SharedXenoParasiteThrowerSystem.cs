@@ -15,7 +15,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -26,11 +26,6 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangeParasiteReserveMessage>(OnParasiteReserveChange);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoReserveParasiteActionEvent>(OnSetReserve);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
-
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoRestEvent>(OnVisualsRest);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, KnockedDownEvent>(OnVisualsKnockedDown);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
     }
 
     private void OnParasiteThrowerExamine(Entity<XenoParasiteThrowerComponent> thrower, ref ExaminedEvent args)
@@ -100,38 +95,5 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         };
 
         args.Verbs.Add(parasiteVerb);
-    }
-
-    protected virtual void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        Appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, args.NewMobState != MobState.Alive);
-    }
-
-    private void OnVisualsRest(Entity<XenoParasiteThrowerComponent> xeno, ref XenoRestEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        Appearance.SetData(xeno, ParasiteOverlayVisuals.Resting, args.Resting);
-    }
-
-    private void OnVisualsKnockedDown(Entity<XenoParasiteThrowerComponent> xeno, ref KnockedDownEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        Appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, true);
-    }
-
-    private void OnVisualsStatusEffectEnded(Entity<XenoParasiteThrowerComponent> xeno, ref StatusEffectEndedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if(args.Key == "KnockedDown")
-            Appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, false);
     }
 }

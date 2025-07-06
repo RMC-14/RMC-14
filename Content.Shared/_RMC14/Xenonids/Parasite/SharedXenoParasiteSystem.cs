@@ -1,6 +1,8 @@
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
@@ -67,6 +69,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafen = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     public override void Initialize()
     {
@@ -275,10 +279,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
     {
-        if (_status.HasStatusEffect(victim, "Muted", null) && _status.HasStatusEffect(victim, "TemporaryBlindness", null))
+        if (_status.HasStatusEffect(victim, "Unconscious", null))
         {
-            _status.TryRemoveStatusEffect(victim, "Muted");
-            _status.TryRemoveStatusEffect(victim, "TemporaryBlindness");
+            _status.TryRemoveStatusEffect(victim, "Unconscious");
         }
         _standing.Stand(victim);
     }
@@ -328,6 +331,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         var ev = new AttachParasiteDoAfterEvent();
         var delay = parasite.Comp.ManualAttachDelay;
+
+        if (parasite.Owner == user)
+            delay = parasite.Comp.SelfAttachDelay;
 
         if (HasComp<TrapParasiteComponent>(parasite))
             delay = TimeSpan.Zero;
@@ -432,8 +438,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         infectable.BeingInfected = true;
         Dirty(victim, infectable);
 
-        _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
-        _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
+        _size.TryKnockOut(victim, parasite.Comp.ParalyzeTime, true);
         RefreshIncubationMultipliers(victim);
 
         _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
@@ -674,9 +679,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return;
 
         //TODO Minor limb damage and causes pain
-        _stun.TryParalyze(victim, knockdownTime, false);
-        _status.TryAddStatusEffect(victim, "Muted", knockdownTime, true, "Muted");
-        _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
+        _size.TryKnockOut(victim, knockdownTime, true);
         _jitter.DoJitter(victim, jitterTime, false);
         _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
 

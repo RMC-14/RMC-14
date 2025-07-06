@@ -23,12 +23,13 @@
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Current version" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="PvE" Text="A separate player vs AI gamemode on a second server with campaigns ran by the community." />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Whiskey Outpost gamemode" Text="A different PvP gamemode with infinite waves of xenos fighting against a team of marines." />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Flamethrowers" Text="Werfs flammen" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Intelligence officer" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Orbital bombardment" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Engineering skill" Text="Allows you to repair and hack more advanced constructs" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno strains" Text="Variations of a xeno caste with different stats and abilities" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Praetorian" Text="Tier 3 xeno" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Mortars" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Scout Kit" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Dropship modifications" />
@@ -46,6 +47,11 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Charger Crusher strain" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Berserker Ravager strain" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Tesla ComTech deployable" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Praetorian" Text="Tier 3 xeno" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Weather" Text="Depends on the planet map: rain on LV, sandstorms on Solaris, etc." />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Eggsac Carrier strain" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Vampire Lurker strain" />
@@ -84,36 +90,30 @@
                 </BoxContainer>
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="PvE" Text="A separate player vs AI gamemode on a second server with campaigns ran by the community." />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Synthetics" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="ARES" Text="Shipside AI with its own room that you need an access ticket to get into." />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Emergency response teams" Text="Factions that randomly spawn, are called to the Almayer through a distress signal sent by CIC, or spawned by admins. Each has their own objectives" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Whiskey Outpost gamemode" Text="A different PvP gamemode with infinite waves of xenos fighting against a team of marines." />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Fractures and internal bleeding" Text="Fractures are caused to a body part through physical damage. Internal bleeding is also caused by physical damage but also by moving with unsplinted fractures." />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Organ damage" Text="Caused by physical damage to unarmored parts, moving with unsplinted fractures, and overdoses." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Charger Crusher strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Trapper Boiler strain" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Berserker Ravager strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Hedgehog Ravager strain" />
                 </BoxContainer>
                 <BoxContainer Name="ThirdVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Future versions" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More lobby art and music" Text="We are always looking for people to contribute more lobby art and music!" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Sorokyne Strata planet map" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Fractures and internal bleeding" Text="Fractures are caused to a body part through physical damage. Internal bleeding is also caused by physical damage but also by moving with unsplinted fractures." />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Organ damage" Text="Caused by physical damage to unarmored parts, moving with unsplinted fractures, and overdoses." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Clone damage and cryo cells" Text="Clone damage is rarely caused by some chemicals, cryo cells treats this kind of damage." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Autodoc and body scanners" Text="Automatically but very inefficiently treats marines in the medbay." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Vehicles, the tank and the ARC" Text="Driveable vehicles such as the colony van, which can be repaired. The tank unlocks at 200 players for the marines." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Mounted Weapons" Text="Mounted heavy machine guns are placeable machine guns with a high ammo count, usually placed behind barricades" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's Pyrotechnician Kit" Text="Flamethrower with special kinds of fuel." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Fire missions" Text="A second way for dropships to attack, where instead of shooting directly at a flare or laser they move in a direction away from it and shoot their weapons to each side. This method of attack takes camera offset into account and is much more effective at clearing an area." />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Tesla ComTech deployable" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Plasma and flamethrower sentries" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke and King endgame" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="ARES" Text="Shipside AI with its own room that you need an access ticket to get into." />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Synthetics" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Ordnance Technician" Text="Shipside role in charge of making custom grenades, claymores, mortar shells, and rockets" />
                 </BoxContainer>

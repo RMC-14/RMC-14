@@ -1,0 +1,14 @@
+- type: entity
+  parent: BaseItem
+  id: RMCParasiteProp
+  name: "????"
+  description: It has some sort of a tube at the end of its tail. What the hell is this thing?
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite:  _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+    state: impregnated

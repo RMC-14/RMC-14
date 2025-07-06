@@ -1,0 +1,130 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCSentryPremade
+  name: turret
+  description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
+  components:
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Item
+    size: Normal
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Actions
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      sentry:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 20
+        layer:
+        - MidImpassable
+        - BulletImpassable
+        mask:
+        - MidImpassable
+        - BulletImpassable
+        hard: false
+  - type: CollisionWake
+    enabled: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "sentry" ]
+      state: normal_uac_sentry_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: normal_uac_sentry_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: normal_uac_sentry_handheld }
+          Off: { state: normal_uac_sentry_noammo }
+          On: { state: normal_uac_sentry_on }
+  - type: CombatMode
+    toggleMouseRotator: false
+  - type: Gun
+    fireRate: 2.5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+  - type: MagazineAmmoProvider
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+  - type: HTN
+    rootTask:
+      task: RMCSentryCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        6.0
+      AggroVisionRadius: !type:Single
+        6.0
+  - type: MouseRotator
+    angleTolerance: 5
+    rotationSpeed: 180
+    simple4DirMode: false
+  - type: NoRotateOnInteract
+  - type: NoRotateOnMove
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: UserInterface
+    interfaces:
+      enum.SentryUiKey.Key:
+        type: SentryUpgradeBui
+  - type: HealthExaminable
+    locPrefix: sentry
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+  - type: ShortExamine
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCRepairable
+  - type: RMCNameItemOnVend
+    item: Sentry
+  - type: RequireProjectileTarget
+  - type: RMCWeaponAccuracy

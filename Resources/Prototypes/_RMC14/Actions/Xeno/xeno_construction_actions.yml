@@ -35,6 +35,14 @@
   - type: RMCDazeableAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoChooseResinStructure
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: place_resin
+
+- type: entity
   id: ActionXenoSecreteStructure
   parent: ActionXenoBase
   name: Secrete Resin
@@ -55,6 +63,14 @@
     checkWeeds: true
     canUpgrade: true
   - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoSecreteResin
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: secrete_resin
 
 - type: entity
   id: ActionXenoCoerceResin
@@ -98,6 +114,16 @@
   - type: RMCDazeableAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoOrderConstruction
+  name: Order Construction
+  description: Starts construction of an important hive structure.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: morph_resin
+
+- type: entity
   id: ActionXenoResinHole
   parent: ActionXenoBase
   name: Plant Resin Hole (200)
@@ -111,6 +137,14 @@
     event: !type:XenoPlaceResinHoleActionEvent
     useDelay: 1
   - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPlantResinHole
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: place_trap
 
 # For gardener drone
 - type: entity
@@ -182,6 +216,14 @@
       state: build_tunnel
     useDelay: 300
 
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDigTunnel
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: build_tunnel
+
 # For lesser drone
 - type: entity
   id: ActionLesserDronePlantWeeds
@@ -197,6 +239,14 @@
     event: !type:XenoPlantWeedsActionEvent
       limitDistance: true
     useDelay: 1
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPlantWeeds
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: plant_weeds
 
 - type: entity
   parent: ActionXenoBase

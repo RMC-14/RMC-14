@@ -11,6 +11,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -33,8 +34,10 @@ public sealed class XenoHeadbiteSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private static readonly ProtoId<DamageTypePrototype> LethalDamageType = "Asphyxiation";
+    private static readonly ProtoId<StatusEffectPrototype> Unconsciousness = "Unconscious";
 
     public override void Initialize()
     {
@@ -115,7 +118,7 @@ public sealed class XenoHeadbiteSystem : EntitySystem
 
     private bool CanHeadbite(EntityUid xeno, EntityUid target)
     {
-        if (!_mobState.IsCritical(target))
+        if (!_mobState.IsCritical(target) && !_status.HasStatusEffect(target, "Unconscious"))
         {
             var failMsg = Loc.GetString("rmc-xeno-headbite-warning");
             _popup.PopupClient(failMsg, xeno, xeno, PopupType.SmallCaution);

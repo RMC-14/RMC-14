@@ -1,9 +1,11 @@
 ﻿using Content.Server._RMC14.Rules;
+using Content.Server.Administration.Logs;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.GhostColor;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -15,9 +17,11 @@ namespace Content.Server._RMC14.LinkAccount;
 
 public sealed class LinkAccountSystem : EntitySystem
 {
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -34,6 +38,8 @@ public sealed class LinkAccountSystem : EntitySystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend, after: [typeof(CMDistressSignalRuleSystem)]);
 
         SubscribeLocalEvent<GhostColorComponent, PlayerAttachedEvent>(OnGhostColorPlayerAttached);
+
+        SubscribeLocalEvent<PatronCustomNameComponent, MapInitEvent>(OnPatronCustomNameMapInit);
 
         Subs.CVar(_config, RMCCVars.RMCPatronLobbyMessageTimeSeconds, v => _timeBetweenLobbyMessages = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCPatronLobbyMessageInitialDelaySeconds, v => _lobbyMessageInitialDelay = TimeSpan.FromSeconds(v), true);
@@ -87,7 +93,7 @@ public sealed class LinkAccountSystem : EntitySystem
     private void OnGhostColorPlayerAttached(Entity<GhostColorComponent> ent, ref PlayerAttachedEvent args)
     {
         if (!TryComp(ent, out ActorComponent? actor) ||
-            _linkAccount.GetPatron(actor.PlayerSession.UserId) is not { } patron ||
+            _linkAccount.GetConnectedPatron(actor.PlayerSession.UserId) is not { } patron ||
             patron.Tier is not { GhostColor: true } ||
             patron.GhostColor is not { } color)
         {
@@ -97,6 +103,26 @@ public sealed class LinkAccountSystem : EntitySystem
 
         ent.Comp.Color = color;
         Dirty(ent);
+    }
+
+    private void OnPatronCustomNameMapInit(Entity<PatronCustomNameComponent> ent, ref MapInitEvent args)
+    {
+        if (!_linkAccount.TryGetPatron(ent.Comp.User, out var patron))
+            return;
+
+        if (ent.Comp.Tier is { } tier && patron.Tier != tier)
+            return;
+
+        if (ent.Comp.Name is { } name)
+            _metaData.SetEntityName(ent, name);
+
+        if (ent.Comp.Description is { } description)
+        {
+            if (TryComp(ent, out MetaDataComponent? metaData))
+                description = $"{metaData.EntityDescription}\n\n{description}";
+
+            _metaData.SetEntityDescription(ent, description);
+        }
     }
 
     private async void ReloadPatrons()
@@ -157,7 +183,10 @@ public sealed class LinkAccountSystem : EntitySystem
         _nextLobbyMessageTime = time + _timeBetweenLobbyMessages;
 
         if (_nextLobbyMessage is { } message)
+        {
+            _adminLog.Add(LogType.RMCLobbyMessage, $"Displaying lobby message from {message.User:user}: {message.Message:message}");
             RaiseNetworkEvent(new SharedRMCDisplayLobbyMessageEvent(message.Message, message.User));
+        }
 
         GetRandomLobbyMessage();
     }

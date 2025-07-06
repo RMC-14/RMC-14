@@ -7,6 +7,7 @@
   solids:
     FoodDoughSlice: 1 # one third of a standard bread dough recipe
 
+
 #Bagels
 - type: microwaveMealRecipe
   id: RecipeBagel
@@ -48,7 +49,7 @@
     FoodBreadBun: 1
     OrganHumanAppendix: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeBaconBurger
   name: bacon burger recipe
   result: FoodBurgerBacon
@@ -79,7 +80,7 @@
     FoodBreadBun: 1
     FoodMeatBear: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeBigBiteBurger
   name: big bite burger recipe
   result: FoodBurgerBig
@@ -215,7 +216,7 @@
     FoodMeatFish: 1
     FoodCheeseSlice: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #added to metamorph recipes
   id: RecipeFiveBurger
   name: five alarm burger recipe
   result: FoodBurgerFive
@@ -246,7 +247,7 @@
     FoodBreadBun: 1
     FoodMeatHuman: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeJellyBurger
   name: jelly burger recipe
   result: FoodBurgerJelly
@@ -254,9 +255,10 @@
   group: Savory
   solids:
     FoodBreadBun: 1
-    FoodJellyAmanita: 1
+  reagents:
+    RMCCherryJelly: 5
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #added to metamorph recipes
   id: RecipeBurgerMcguffin
   name: McGuffin recipe
   result: FoodBurgerMcguffin
@@ -289,7 +291,7 @@
     FoodBreadBun: 1
     ClothingMaskMime: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #added to metamorph recipes
   id: RecipePlainBurger
   name: plain burger recipe
   result: FoodBurgerPlain
@@ -341,7 +343,7 @@
     FoodBreadBun: 1
     ClothingHeadHatWizard: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeSuperBiteBurger
   name: super bite burger recipe
   result: FoodBurgerSuper
@@ -349,6 +351,7 @@
   group: Savory
   reagents:
     TableSalt: 5
+    Blackpepper: 5
     Egg: 12
   solids:
     FoodBreadBun: 1
@@ -574,7 +577,7 @@
     FoodGarlic: 1
     FoodButterSlice: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeJellyToast
   name: jelly toast recipe
   result: FoodBreadJellySlice
@@ -582,7 +585,8 @@
   group: Breads
   solids:
     FoodBreadPlainSlice: 1
-    FoodJellyAmanita: 1 #replace with jelly
+  reagents:
+    RMCCherryJelly: 5
 
 - type: microwaveMealRecipe
   id: RecipeMoldyBreadSlice
@@ -614,11 +618,35 @@
   solids:
     FoodOnionSlice: 1
 
+#Eggs
+
+- type: microwaveMealRecipe
+  id: RecipeOmelette
+  name: omelette recipe
+  result: FoodMealOmelette
+  time: 10
+  group: Eggs
+  solids:
+    FoodCheeseSlice: 1
+  reagents:
+    Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeFriedEgg
+  name: fried egg recipe
+  result: FoodMealFriedegg
+  time: 10
+  group: Eggs
+  reagents:
+    Egg: 6
+    TableSalt: 1
+    Blackpepper: 1
+
 #Pizzas TODO: contruction graph based pizza
 - type: microwaveMealRecipe
   id: RecipeMargheritaPizza
   name: margherita pizza recipe
-  result: FoodPizzaMargherita
+  result: RMCFoodPizzaMargheritaFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
@@ -629,7 +657,7 @@
 - type: microwaveMealRecipe
   id: RecipeMushroomPizza
   name: mushroom pizza recipe
-  result: FoodPizzaMushroom
+  result: RMCFoodPizzaMushroomFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
@@ -639,7 +667,7 @@
 - type: microwaveMealRecipe
   id: RecipeMeatPizza
   name: meat pizza recipe
-  result: FoodPizzaMeat
+  result: RMCFoodPizzaMeatFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
@@ -664,7 +692,7 @@
 - type: microwaveMealRecipe
   id: RecipeHawaiianPizza
   name: Hawaiian pizza recipe
-  result: FoodPizzaPineapple
+  result: RMCFoodPizzaHawaiianFull #Changed for RMC
   time: 30
   group: Pizza
   solids:
@@ -1243,19 +1271,18 @@
     FoodSnackChocolateBar: 3
     FoodPlateTin: 1
 
-- type: microwaveMealRecipe
+- type: microwaveMealRecipe #Changed for RMC
   id: RecipeGappleTart
   name: golden apple streusel tart recipe
   result: FoodTartGapple
   time: 15
   group: Pie
   reagents:
-    Gold: 10
     Sugar: 5
     Milk: 5
   solids:
     FoodDoughPie: 1
-    FoodApple: 2 #in absence of the real gapple i'm substituting one apple with 10u gold (one ingot)
+    RMCFoodGoldenApple: 2
     FoodPlateTin: 1
 
 - type: microwaveMealRecipe
@@ -1869,12 +1896,11 @@
   result: FoodMealQueso
   time: 15
   group: Soup
-  #todo Add blackpepper
-  #reagents:
-    #blackpepper: 5
   solids:
     FoodChiliPepper: 1
     FoodCheeseSlice: 2
+  reagents:
+    Blackpepper: 5
 
 - type: microwaveMealRecipe
   id: RecipeRibs
@@ -2359,3 +2385,37 @@
     FoodCheeseSlice: 1
     FoodButterSlice: 1
 
+
+- type: microwaveMealRecipe
+  id: RecipeCannoli
+  name: cannoli recipe
+  result: FoodBakedCannoli
+  time: 10
+  group: Dessert
+  solids:
+    FoodDoughFlat: 1
+    FoodSnackChocolateBar: 1
+  reagents:
+    Cream: 5
+
+- type: microwaveMealRecipe
+  id: RecipeCornedBeef
+  name: corned beef and cabbage recipe
+  result: FoodMealCornedbeef
+  time: 15
+  group: Savory
+  solids:
+    FoodMeat: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipePretzel
+  name: poppy pretzel recipe
+  result: FoodBakedPretzel
+  group: Breads
+  time: 10
+  solids:
+    FoodDoughRope: 1
+    PoppySeeds: 1
+  reagents:
+    SodaWater: 5

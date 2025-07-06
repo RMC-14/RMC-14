@@ -125,9 +125,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
                 if (!TryComp<EntityActiveInvisibleComponent>(uid, out var invis))
                     continue;
 
-                if (time < stealthComp.Delay)
+                if (time < stealthComp.UnCloakDelay)
                 {
-                    invis.Opacity = (float) (stealthComp.MinOpacity + (time / stealthComp.Delay) * (stealthComp.MaxOpacity - stealthComp.MinOpacity) ); // Linear function from MinOpacity to 1
+                    invis.Opacity = (float) (stealthComp.MinOpacity + (time / stealthComp.UnCloakDelay) * (stealthComp.MaxOpacity - stealthComp.MinOpacity) ); // Linear function from MinOpacity to 1
                     Dirty(uid, invis);
                     continue;
                 }
