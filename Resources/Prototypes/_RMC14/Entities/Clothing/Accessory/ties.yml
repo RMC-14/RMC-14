@@ -17,10 +17,11 @@
   description: A neosilk clip-on tie.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Neck/Accessory/blue.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/blue.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Neck/Accessory/blue.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/blue.rsi
       state: tie
 
 - type: entity
@@ -29,10 +30,11 @@
   name: black tie
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Neck/Accessory/black.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/black.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Neck/Accessory/black.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/black.rsi
       state: tie
 
 - type: entity
@@ -41,10 +43,11 @@
   name: gold tie
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Neck/Accessory/gold.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/gold.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Neck/Accessory/gold.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/gold.rsi
       state: tie
 
 - type: entity
@@ -53,10 +56,11 @@
   name: green tie
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Neck/Accessory/green.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/green.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Neck/Accessory/green.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/green.rsi
       state: tie
 
 - type: entity
@@ -65,10 +69,11 @@
   name: purple tie
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Neck/Accessory/purple.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/purple.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Neck/Accessory/purple.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/purple.rsi
       state: tie
 
 - type: entity
@@ -77,10 +82,11 @@
   name: red tie
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Neck/Accessory/red.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/red.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Neck/Accessory/red.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/red.rsi
       state: tie
 
 - type: entity
@@ -89,8 +95,9 @@
   name: horrible tie
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Neck/Accessory/horrible.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/horrible.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Neck/Accessory/horrible.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/horrible.rsi
       state: tie
