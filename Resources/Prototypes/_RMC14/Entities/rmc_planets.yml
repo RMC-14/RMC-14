@@ -144,3 +144,20 @@
     camouflage: Jungle
     minPlayers: 130
     announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    survivorJobInserts:
+      CMSurvivor:
+      - CMJobSurvivorSoroCivilian: -1
+      - CMJobSurvivorSoroMiner: -1
+      - CMJobSurvivorFireProtectionSpecialist: 1
+      CMSurvivorCorporate:
+      - CMJobSurvivorHalcyonDynamicsLiaison: 2
+      CMSurvivorDoctor:
+      - CMJobSurvivorMoHDoctor: 3
+      CMSurvivorEngineer:
+      - CMJobSurvivorInfrastructureEngineer: 2
+      - CMJobSurvivorReactorTechnician: 2
+      CMSurvivorSecurity:
+      - CMJobSurvivorArmedPoliceOfficer: 2
+      - CMJobSurvivorArmyReservist: 2
+      CMSurvivorScientist:
+      - CMJobSurvivorCECResearcher: 2

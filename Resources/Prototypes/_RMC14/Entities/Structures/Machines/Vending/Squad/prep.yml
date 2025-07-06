@@ -124,7 +124,7 @@
         amount: 1
       - id: CMWebbing
         amount: 2
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
         amount: 1
       - id: CMWebbingHolster
         amount: 1
@@ -274,11 +274,22 @@
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15
-#      - id: Marine Flair
+#      - id: TODO UNMC Flair
 #        amount: 15
-#      - id: Falling Falcons Shoulder Patch
+#      - id: TODO Falling Falcons patch
 #        amount: 15
-#      - id: Marine Shoulder Patch
+#      - id: TODO Falling falcons UN patch (alternate)
+#        amount: 15
+#      - id: UNMC large chest patch TODO
+#        amount: 15
+      - id: RMCPatchUNMC
+        name: UNMC shoulder patch
+        amount: 15
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
+        amount: 15
+#      - id: RMCPatchUnitedNationsSquare TODO
+#        name: United Nations flag shoulder patch
 #        amount: 15
       - id: BedrollFolded
         amount: 20
