@@ -1,4 +1,4 @@
-﻿# Marines
+# Marines
 - type: entity
   id: RMCJumpsuitMarinePatchBase
   abstract: true
@@ -35,7 +35,7 @@
   suffix: Filled, Royal
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingPouchRoyal
+    startingWebbing: RMCWebbingDropPouchRoyal
 
 # Formal
 - type: entity
