@@ -57,6 +57,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
     - type: RMCAllowSuitStorage
+    - type: SpotterWhitelist
   hidden: true
 
 - type: startingGear

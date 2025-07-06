@@ -22,6 +22,10 @@
     sprite: _RMC14/Structures/Wallmounts/calendar.rsi
     drawdepth: WallMountedItems
   - type: RMCCalendar
+  - type: BlockExamine
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCCalendarBase

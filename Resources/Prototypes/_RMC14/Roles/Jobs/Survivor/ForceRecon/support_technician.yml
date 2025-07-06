@@ -47,6 +47,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon-support-tech
     - type: RMCAllowSuitStorage
+    - type: SpotterWhitelist
   hidden: true
 
 - type: playTimeTracker

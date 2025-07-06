@@ -114,6 +114,8 @@
     unrootOnMelee: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
+    removeOnHit: true
+    preventTackle: true
   - type: XenoTailStab
     tailDamage:
       groups:

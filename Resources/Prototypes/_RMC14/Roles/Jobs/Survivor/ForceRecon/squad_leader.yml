@@ -49,6 +49,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconSquadLead
     - type: RMCAllowSuitStorage
+    - type: SpotterWhitelist
   hidden: true
 
 - type: playTimeTracker

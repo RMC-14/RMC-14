@@ -85,5 +85,5 @@
     powerLoad: 0
     needsPower: false
   - type: AccessReader
-    access: [["CMAccessPilot"]]
+    access: [["CMAccessDropship"]]
   - type: BlockTileFire

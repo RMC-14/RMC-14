@@ -42,6 +42,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon-marksman
     - type: RMCAllowSuitStorage
+    - type: SpotterWhitelist
   hidden: true
 
 - type: playTimeTracker

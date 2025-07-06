@@ -24,7 +24,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - MarineMain
+  - SO
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
