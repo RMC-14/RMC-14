@@ -305,6 +305,9 @@ public abstract partial class SharedParaDropSystem : EntitySystem
                 viableTiles.Add(tileRef);
             }
 
+            if (viableTiles.Count == 0)
+                return false;
+
             var random = _random.Next(0, viableTiles.Count);
             adjustedLocation = _mapSystem.GridTileToLocal(grid, gridComp, viableTiles[random].GridIndices);
             return true;

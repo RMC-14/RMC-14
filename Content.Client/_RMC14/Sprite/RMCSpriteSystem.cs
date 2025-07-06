@@ -1,7 +1,9 @@
-﻿using Content.Shared._RMC14.Mobs;
+﻿using Content.Shared._RMC14.CrashLand;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids.Hide;
 using Content.Shared.Ghost;
+using Content.Shared.ParaDrop;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 
@@ -36,6 +38,10 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
         return depth;
     }
 
+    /// <summary>
+    ///     This is so the animating entity's current location gets updated during the drop, there is probably a better way to do this.
+    /// </summary>
+    /// <param name="uid">The entity to update the location of.</param>
     public void UpdatePosition(EntityUid uid)
     {
         var oldPos = _transform.GetWorldPosition(uid);
@@ -66,7 +72,9 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
         if (TryComp(player, out XenoHideComponent? hide) && hide.Hiding)
             return;
 
-        if (TryComp(player, out SpriteComponent? playerSprite))
+        if (TryComp(player, out SpriteComponent? playerSprite) &&
+            !HasComp<ParaDroppingComponent>(player) &&
+            !HasComp<CrashLandingComponent>(player))
             playerSprite.DrawDepth = (int) Shared.DrawDepth.DrawDepth.BelowMobs;
     }
 }

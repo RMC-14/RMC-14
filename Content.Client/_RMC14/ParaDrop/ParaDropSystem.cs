@@ -18,7 +18,6 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
 
-    private const string ParachuteAnimationKey = "parachute-animation";
     private const string DroppingAnimationKey = "dropping-animation";
     private const string SkyFallingAnimationKey = "sky-falling-animation";
 
@@ -76,7 +75,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
                     KeyFrames =
                     {
                         new AnimationTrackProperty.KeyFrame(new Vector2(0f, 0), 0f),
-                        new AnimationTrackProperty.KeyFrame(new Vector2(0f, -2), duration),
+                        new AnimationTrackProperty.KeyFrame(new Vector2(0f, -1), duration),
                     },
                 },
             }
@@ -130,19 +129,13 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
 
     private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier)
     {
-        var animationEnt = Spawn(null, coordinates);
-        var sprite = AddComp<SpriteComponent>(animationEnt);
-
-        sprite.NoRotation = true;
-        var effectLayer = sprite.AddLayer(paraDroppable.ParachuteSprite);
-        sprite.LayerSetOffset(effectLayer, paraDroppable.ParachuteOffset);
-
-        var despawn = AddComp<TimedDespawnComponent>(animationEnt);
+        var animationEnt = Spawn(paraDroppable.ParachutePrototype, coordinates);
+        var despawn = EnsureComp<TimedDespawnComponent>(animationEnt);
         despawn.Lifetime = fallDuration;
 
         AddComp<RMCUpdateClientLocationComponent>(animationEnt);
 
-        _animPlayer.Play(animationEnt, ReturnFallAnimation(fallDuration, paraDroppable.FallHeight * multiplier), ParachuteAnimationKey);
+        _animPlayer.Play(animationEnt, ReturnFallAnimation(fallDuration, paraDroppable.FallHeight * multiplier), DroppingAnimationKey);
     }
 
     public override void Update(float frameTime)
@@ -156,10 +149,9 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
             {
                 if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null)
                     PlayFallAnimation(uid, paraDroppable.DropDuration, paraDroppable.LastParaDrop.Value, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
-            }
 
-            // This is so the animation's current location gets updated during the drop.
-            _rmcSprite.UpdatePosition(uid);
+                _rmcSprite.UpdatePosition(uid);
+            }
         }
     }
 }
