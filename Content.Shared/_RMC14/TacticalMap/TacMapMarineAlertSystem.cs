@@ -38,7 +38,9 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
             return;
         if (!_inv.TryGetInventoryEntity<GrantTacMapAlertComponent>(args.Equipee, out _))
             RemCompDeferred<TacMapMarineAlertComponent>(args.Equipee);
-    }    private void OnMapInit(Entity<TacMapMarineAlertComponent> ent, ref MapInitEvent args)
+    }
+
+    private void OnMapInit(Entity<TacMapMarineAlertComponent> ent, ref MapInitEvent args)
     {
         _alerts.ShowAlert(ent, ent.Comp.Alert);
     }
