@@ -3,6 +3,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.StatusIcon;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -54,6 +55,18 @@ public sealed partial class SynthComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId FixedIdentityReplacement = "cm-chatsan-replacement-synth";
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, ProtoId<HealthIconPrototype>> HealthIconOverrides = new()
+    {
+        ["Healthy"] = "RMCHealthIconHealthySynth",
+        ["DeadDefib"] = "RMCHealthIconDeadSynth",
+        ["DeadClose"] = "RMCHealthIconDeadSynth",
+        ["DeadAlmost"] = "RMCHealthIconDeadSynth",
+        ["DeadDNR"] = "RMCHealthIconDeadDNRSynth",
+        ["Dead"] = "RMCHealthIconDeadSynth",
+        ["HCDead"] = "RMCHealthIconDeadSynth",
+    };
 
     /// <summary>
     /// New brain organ to add when the synth is created.
