@@ -211,7 +211,7 @@
   id: RMCClosetGoldenArrowGear
   name: personal locker
   description: An immobile storag unit.
-  suffix: Golden Arrow
+  suffix: PvE, Sun Riders
   components:
   - type: EntityTableContainerFill
     containers:
