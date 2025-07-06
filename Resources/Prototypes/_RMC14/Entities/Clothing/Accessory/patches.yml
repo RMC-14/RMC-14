@@ -469,7 +469,7 @@
 
 - type: entity
   parent: RMCPatchBase
-  id: RMCPatchTSEMarines
+  id: RMCPatchTSE
   name: Three Suns Empire patch
   description: A fire-resistant shoulder patch, worn by the men and women loyal to the Three Suns Empire, An older style symbol of the TSE.
   components:
@@ -490,7 +490,7 @@
   parent: RMCPatchBase
   id: RMCPatchCLF
   name: CLF patch
-  description: A circular, fire-resistant patch with a white border. The design features three white stars and a tricolor background: green, black, and red, symbolizing the Colonial Liberation Front's fight for independence and unity. This patch is worn by CLF fighters as a badge of defiance against corporate and governmental oppression, representing their struggle for a free and self-determined colonial future. Though feared and reviled by some, it remains a powerful symbol of resistance and revolution.
+  description: "A circular, fire-resistant patch with a white border. The design features three white stars and a tricolor background: green, black, and red, symbolizing the Colonial Liberation Front's fight for independence and unity. This patch is worn by CLF fighters as a badge of defiance against corporate and governmental oppression, representing their struggle for a free and self-determined colonial future. Though feared and reviled by some, it remains a powerful symbol of resistance and revolution."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/CLF/clf_patch.rsi
@@ -512,15 +512,15 @@
   description: "A fire-resistant circular patch featuring a white skull on a vertically split black and blue background. Worn by a skilled mercenary of the Freelancers, a well-equipped group for hire across the outer colonies, known for their professionalism and neutrality. This patch is a personal memento from the wearer’s time with the group, representing a life spent navigating the dangerous world of mercenary contracts."
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/merc_patch.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/merc_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch.rsi
       state: patch
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/merc_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch.rsi
       state: helmet
 
 - type: entity
@@ -528,15 +528,15 @@
   id: RMCPatchFreelancerAlt
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/merc_patch_alt.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch_alt.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/merc_patch_alt.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch_alt.rsi
       state: patch
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/merc_patch_alt.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/merc_patch_alt.rsi
       state: helmet
 
 - type: entity
@@ -546,13 +546,13 @@
   description: A circular patch featuring a red cross on a white background with a bold red outline. Universally recognized as a symbol of aid and neutrality, it is worn by medics across the colonies. Whether a sign of true medical expertise, a keepsake, or merely a decoration, its presence offers a glimmer of hope in dire times.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/medic_patch.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/medic_patch.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/medic_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/medic_patch.rsi
       state: patch
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/medic_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/medic_patch.rsi
       state: helmet
