@@ -305,3 +305,161 @@
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_square.rsi
       state: patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchWeYaFury161
+  name: Weston-Yamada Fury '161' patch
+  description: A fire-resistant shoulder patch. Was worn by workers and then later prisoners on the Fiorina 'Fury' 161 facility, a rare relic, after the facility went dark in 2079.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_fury.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_fury.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/WeYa/weya_patch_fury.rsi
+      state: helmet
+
+# SPP
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSPP
+  name: SPP patch
+  description: An old fire-resistant shoulder patch, worn by the men and women of the Socialists Progressive Peoples Armed Vanguard.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSPPVDV
+  name: SPP Airborne Reconnaissance patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the 173rd Airborne Reconnaissance Platoon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSPPNaval
+  name: SPP Naval Infantry patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the SPP Naval Infantry.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchSPP
+  id: RMCPatchSPPAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_patch_alt.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchSPPVDV
+  id: RMCPatchSPPVDVAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_vdv_patch_alt.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchSPPNaval
+  id: RMCPatchSPPNavalAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch_alt.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch_alt.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/SPP/spp_naval_patch_alt.rsi
+      state: helmet
+
+# TSE
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchTSEMarines
+  name: TSE Royal Crown Marines patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the royal crown marines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/crown_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/crown_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/crown_patch.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchTSEMarines
+  name: Three Suns Empire patch
+  description: A fire-resistant shoulder patch, worn by the men and women loyal to the Three Suns Empire, An older style symbol of the TSE.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
+      state: helmet
