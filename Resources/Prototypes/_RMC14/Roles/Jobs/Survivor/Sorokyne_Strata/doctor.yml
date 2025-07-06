@@ -30,6 +30,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorDoctor
 
 - type: startingGear
   parent: RMCGearSurvivorBase

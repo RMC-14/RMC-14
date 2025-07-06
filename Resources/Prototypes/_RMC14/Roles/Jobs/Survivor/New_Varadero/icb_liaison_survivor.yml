@@ -29,6 +29,7 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-icb
+  useLoadoutOfJob: CMSurvivorCorporate
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate

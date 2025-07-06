@@ -18,6 +18,7 @@
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: Army Reservist (Sorokyne Survivor)
+  useLoadoutOfJob: CMSurvivorSecurity
   special:
   - !type:AddComponentSpecial
     components:
