@@ -543,7 +543,7 @@
   parent: RMCPatchBase
   id: RMCPatchMedic
   name: Field Medic patch
-  description: A circular patch featuring a red cross on a white background with a bold red outline. Universally recognized as a symbol of aid and neutrality, it is worn by medics across the colonies. Whether a sign of true medical expertise, a keepsake, or merely a decoration, its presence offers a glimmer of hope in dire times.
+  description: A circular patch featuring a blue cross on a white background with a bold blue outline. Universally recognized as a symbol of aid and neutrality, it is worn by medics across the colonies. Whether a sign of true medical expertise, a keepsake, or merely a decoration, its presence offers a glimmer of hope in dire times.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/medic_patch.rsi
