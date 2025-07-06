@@ -695,10 +695,6 @@
   - type: CMItemSlots
     startingItem: RMCMagazineRifleAK4047
     count: 10
-    slot:
-      whitelist:
-        tags:
-        - RMCMagazineRifleAK4047
 
 # -- SMG BOXES --
 

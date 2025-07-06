@@ -76,23 +76,6 @@
   iconColor: "#7b8246"
   objectType: Item
 
-# AK4047
-
-- type: construction
-  parent: RMC
-  name: Magazine Box (AK-4047 Reg)
-  id: RMCBoxMagazineRifleAK4047
-  graph: RMCBoxMagazine
-  startNode: start
-  targetNode: RMCBoxMagazineRifleM54CEmpty
-  category: construction-category-cm-box-magazine
-  description: A magazine box that can contain regular AK4047 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
-  iconColor: "#515237"
-  objectType: Item
-
 # M63
 - type: construction
   parent: RMC
