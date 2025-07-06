@@ -117,7 +117,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoOrderConstructionActionEvent>(OnXenoOrderConstructionAction);
         SubscribeLocalEvent<XenoConstructionComponent, XenoOrderConstructionDoAfterEvent>(OnXenoOrderConstructionDoAfter);
-        SubscribeLocalEvent<XenoConstructionComponent, XenoCanAddPlasmaToConstructComponent>(OnHiveConstructionNodeAddPlasmaDoAfter);
+        SubscribeLocalEvent<XenoCanAddPlasmaToConstructComponent, XenoConstructionAddPlasmaDoAfterEvent>(OnHiveConstructionNodeAddPlasmaDoAfter);
 
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
         SubscribeLocalEvent<XenoConstructionActionComponent, ValidateActionWorldTargetEvent>(OnSecreteActionValidateTarget);
@@ -1160,7 +1160,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         popupType = null;
         if (_transform.GetGrid(coords) is not { } gridId ||
-    !TryComp(gridId, out MapGridComponent? grid))
+            !TryComp(gridId, out MapGridComponent? grid))
         {
             popupType = "rmc-xeno-construction-no-map";
             return false;
