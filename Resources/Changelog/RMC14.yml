@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added many missing entities to Kutjevo.
-    type: Add
-  - message: Added Kutjevo clothing.
-    type: Add
-  id: 1454
-  time: '2025-03-15T07:19:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5881
 - author: Vermidia
   changes:
   - message: Fixed burrowers map icon being t1 colored.
@@ -5093,5 +5084,16 @@
   id: 1954
   time: '2025-07-06T01:54:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6801
+- author: Dygon
+  changes:
+  - message: A dropship flyby can now be canceled, reducing the flight duration to
+      10 seconds.
+    type: Tweak
+  - message: Launching a dropship does not automatically close the navigation computer
+      UI anymore.
+    type: Tweak
+  id: 1955
+  time: '2025-07-06T01:56:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6787
 Name: RMC14
 Order: -1
