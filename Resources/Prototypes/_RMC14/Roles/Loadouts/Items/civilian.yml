@@ -2,22 +2,19 @@
 - type: loadout
   id: PatchWeYaRMC
   cost: 1
-  storage:
-    back:
+  inhand:
     - RMCPatchWeYa
 
 - type: loadout
   id: PatchWeYaRMCSquare
   cost: 1
-  storage:
-    back:
+  inhand:
     - RMCPatchWeYaBlackSquare
 
 - type: loadout
   id: PatchWeYaRMCBlack
   cost: 1
-  storage:
-    back:
+  inhand:
     - RMCPatchWeYaBlack
 
 # Shoes
