@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Added QM jacket to QM's vendor.
-    type: Add
-  - message: Added spare researcher and medical headsets to CMO's vendor.
-    type: Add
-  - message: Added mini flamethrower, RTO pack, motion detector, fultons and space
-      cleaner, and medical storage rig to XO's vendor.
-    type: Add
-  - message: Added tactical nailgun, construction belt, general storage belt and toolbelt
-      to CE's vendor.
-    type: Add
-  - message: Added tan beret to ASO's vendor.
-    type: Add
-  id: 1458
-  time: '2025-03-15T07:24:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5763
 - author: Binbagg
   changes:
   - message: Added more missing map loot to Solaris and Varadero.
@@ -5094,5 +5077,12 @@
   id: 1958
   time: '2025-07-06T02:00:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6780
+- author: Tunguso4ka
+  changes:
+  - message: Added Nightmare Inserts to Trijent Dam.
+    type: Add
+  id: 1959
+  time: '2025-07-06T02:09:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6932
 Name: RMC14
 Order: -1
