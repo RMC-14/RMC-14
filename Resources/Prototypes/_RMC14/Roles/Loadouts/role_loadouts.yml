@@ -733,22 +733,6 @@
   - CivilianOnlyRMC
 
 - type: roleLoadout
-  id: JobCMSurvivorEngineer
-  points: 7
-  groups:
-  - EyewearRMC
-  - MasksRMC
-  - PaperworkRMC
-  - RecreationalRMC
-  - CannedDrinksRMC
-  - FoodSweetsRMC
-  - FoodPackagedRMC
-  - FoodHealthyRMC
-  - RMCLoadoutGroupPins
-  - SmokablesRMC
-  - CivilianOnlyRMC
-
-- type: roleLoadout
   id: JobCMSurvivorScientist
   points: 7
   groups:

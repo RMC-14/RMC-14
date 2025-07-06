@@ -415,8 +415,8 @@
   - ShoesGreenRMC
   - ShoesPurpleRMC
   - ShoesRedRMC
-  - ShoeWhiteRMC
-  - ShoeYellowRMC
+  - ShoesWhiteRMC
+  - ShoesYellowRMC
 
 - type: loadoutGroup
   id: SynthHeadwearRMC
