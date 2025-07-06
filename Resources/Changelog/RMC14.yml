@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: 'Ported admin-only spawn corporate weapons for exterminators and PMCs:
-      M63B2, M54C2, ML79A, HEAP for M63 SMGs, B12 blast grenade.'
-    type: Add
-  - message: Added missing eye glow for M5X PMC helmet.
-    type: Add
-  id: 1451
-  time: '2025-03-15T07:17:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5887
-- author: Vermidia
-  changes:
-  - message: Fixed hive core weeds not spreading far enough, and cluster/pylon weeds
-      spreading too far (by 1 tile each).
-    type: Fix
-  - message: Fixed hive cluster not having CAS and Mortar protection
-    type: Fix
-  id: 1453
-  time: '2025-03-15T07:21:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5865
 - author: CyberTropic
   changes:
   - message: Added many missing entities to Kutjevo.
@@ -5094,5 +5074,24 @@
   id: 1952
   time: '2025-07-06T01:51:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6910
+- author: noctyrnal
+  changes:
+  - message: Fixed Hybrisa windows not becoming frames when destroyed.
+    type: Fix
+  - message: Fixed Hybrisa hull windows being corrodible.
+    type: Fix
+  id: 1953
+  time: '2025-07-06T01:53:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6933
+- author: Dygon
+  changes:
+  - message: 'Dropship parts and ammo can now be recycled at the fabricator, this
+      returns 80% of their point value. Ammo that is partially used refunds less points
+      based on how much ammo is left, 70% of ammo left means you only get: 0.8 * 0.7
+      = 56% of the original point cost refunded instead of 80%.'
+    type: Add
+  id: 1954
+  time: '2025-07-06T01:54:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6801
 Name: RMC14
 Order: -1
