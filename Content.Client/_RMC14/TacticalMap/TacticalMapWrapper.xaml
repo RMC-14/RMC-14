@@ -8,11 +8,11 @@
             <BoxContainer Name="MapTab" Access="Public" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
                 <!-- main controls -->
                 <BoxContainer Orientation="Horizontal" Margin="2" HorizontalExpand="True">
-                    <Button Name="LabelsButton" Access="Public" Text="Labels" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="60" />
-                    <Button Name="FollowPlayerButton" Access="Public" Text="Centre" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="50" />
-                    <Button Name="ResetViewButton" Access="Public" Text="Reset" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="50" />
+                    <Button Name="LabelsButton" Access="Public" Text="{Loc ui-tactical-map-labels-button}" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="60" />
+                    <Button Name="FollowPlayerButton" Access="Public" Text="{Loc ui-tactical-map-centre-button}" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="50" />
+                    <Button Name="ResetViewButton" Access="Public" Text="{Loc ui-tactical-map-reset-button}" StyleClasses="OpenBoth" Margin="0 0 2 0" MinWidth="50" />
                     <Control HorizontalExpand="True" />
-                    <Button Name="SettingsToggleButton" Access="Public" Text="▶" StyleClasses="OpenBoth" MinWidth="25" />
+                    <Button Name="SettingsToggleButton" Access="Public" Text="{Loc ui-tactical-map-settings-toggle-collapsed}" StyleClasses="OpenBoth" MinWidth="25" />
                 </BoxContainer>
 
                 <!-- settings -->
@@ -32,27 +32,27 @@
 
                 <!-- primary -->
                 <BoxContainer Orientation="Horizontal" Margin="2">
-                    <Button Name="UpdateCanvasButton" Access="Public" Text="Update" StyleClasses="OpenBoth"
+                    <Button Name="UpdateCanvasButton" Access="Public" Text="{Loc ui-tactical-map-update-button}" StyleClasses="OpenBoth"
                             HorizontalExpand="True" Margin="0 0 2 0" MinHeight="28" />
-                    <Button Name="ClearCanvasButton" Access="Public" Text="Clear" StyleClasses="OpenBoth"
+                    <Button Name="ClearCanvasButton" Access="Public" Text="{Loc ui-tactical-map-clear-button}" StyleClasses="OpenBoth"
                             HorizontalExpand="True" Margin="0 0 2 0" MinHeight="28" />
-                    <Button Name="UndoButton" Access="Public" Text="Undo" StyleClasses="OpenBoth"
+                    <Button Name="UndoButton" Access="Public" Text="{Loc ui-tactical-map-undo-button}" StyleClasses="OpenBoth"
                             HorizontalExpand="True" MinHeight="28" />
                 </BoxContainer>
 
                 <!-- tools -->
                 <BoxContainer Orientation="Horizontal" Margin="2 2 2 0">
-                    <Button Name="StraightLineButton" Access="Public" Text="Lines" StyleClasses="OpenBoth"
+                    <Button Name="StraightLineButton" Access="Public" Text="{Loc ui-tactical-map-lines-button}" StyleClasses="OpenBoth"
                             HorizontalExpand="True" Margin="0 0 2 0" />
-                    <Button Name="LabelEditButton" Access="Public" Text="Labels" StyleClasses="OpenBoth"
+                    <Button Name="LabelEditButton" Access="Public" Text="{Loc ui-tactical-map-labels-button}" StyleClasses="OpenBoth"
                             HorizontalExpand="True" Margin="0 0 2 0" />
-                    <Button Name="LabelsButtonCanvas" Access="Public" Text="Labels" StyleClasses="OpenBoth"
+                    <Button Name="LabelsButtonCanvas" Access="Public" Text="{Loc ui-tactical-map-labels-button}" StyleClasses="OpenBoth"
                             HorizontalExpand="True" Margin="0 0 2 0" />
                     <OptionButton Name="ColorsButton" Access="Public" StyleClasses="OpenBoth"
                                   HorizontalExpand="True" Margin="0 0 2 0" />
-                    <Button Name="FollowPlayerButtonCanvas" Access="Public" Text="Centre" StyleClasses="OpenBoth"
+                    <Button Name="FollowPlayerButtonCanvas" Access="Public" Text="{Loc ui-tactical-map-centre-button}" StyleClasses="OpenBoth"
                             HorizontalExpand="True" Margin="0 0 2 0" />
-                    <Button Name="ResetViewButtonCanvas" Access="Public" Text="Reset" StyleClasses="OpenBoth"
+                    <Button Name="ResetViewButtonCanvas" Access="Public" Text="{Loc ui-tactical-map-reset-button}" StyleClasses="OpenBoth"
                             HorizontalExpand="True" />
                 </BoxContainer>
 

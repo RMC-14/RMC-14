@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Localization;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -17,7 +18,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         base.Open();
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
 
-        TabContainer.SetTabTitle(Window.Wrapper.MapTab, "Map");
+        TabContainer.SetTabTitle(Window.Wrapper.MapTab, Loc.GetString("ui-tactical-map-tab-map"));
         TabContainer.SetTabVisible(Window.Wrapper.MapTab, true);
 
         if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user) &&
@@ -67,7 +68,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
         if (user?.CanDraw ?? false)
         {
-            TabContainer.SetTabTitle(Window.Wrapper.CanvasTab, "Canvas");
+            TabContainer.SetTabTitle(Window.Wrapper.CanvasTab, Loc.GetString("ui-tactical-map-tab-canvas"));
             TabContainer.SetTabVisible(Window.Wrapper.CanvasTab, true);
         }
         else
