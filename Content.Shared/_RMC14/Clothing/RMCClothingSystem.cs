@@ -2,6 +2,7 @@ using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Item;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -18,6 +19,7 @@ public sealed class RMCClothingSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
 
     private EntityQuery<ClothingLimitComponent> _clothingLimitQuery;
 
@@ -133,7 +135,9 @@ public sealed class RMCClothingSystem : EntitySystem
                 return;
             }
 
+            ent.Comp.HideAccessories = type.HideAccessories;
             SetPrefix(ent, type.Prefix);
+            _item.VisualsChanged(ent.Owner);
         }
     }
 

@@ -12,6 +12,9 @@ public sealed partial class RMCClothingFoldableComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<FoldableType> Types = new();
+
+    [DataField, AutoNetworkedField]
+    public bool HideAccessories = false;
 }
 
 /// <summary>
@@ -20,4 +23,4 @@ public sealed partial class RMCClothingFoldableComponent : Component
 /// </summary>
 [DataRecord]
 [Serializable, NetSerializable]
-public readonly record struct FoldableType(string Prefix, LocId Name, int Priority, string? BlacklistedPrefix, LocId? BlacklistPopup);
+public readonly record struct FoldableType(string Prefix, LocId Name, int Priority, string? BlacklistedPrefix, LocId? BlacklistPopup, bool HideAccessories = false);

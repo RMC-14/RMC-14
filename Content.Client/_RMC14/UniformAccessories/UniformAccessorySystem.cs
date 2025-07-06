@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Clothing;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids;
@@ -37,6 +38,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             return;
 
         var clothingSprite = CompOrNull<SpriteComponent>(ent);
+        var clothingFoldable = CompOrNull<RMCClothingFoldableComponent>(ent);
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
@@ -50,6 +52,9 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             var layer = GetKey(accessory, accessoryComp, index);
 
             if (accessoryComp.PlayerSprite is not { } sprite)
+                continue;
+
+            if (clothingFoldable != null && clothingFoldable.HideAccessories && accessoryComp.HiddenByJacketRolling)
                 continue;
 
             if (clothingSprite != null && accessoryComp.HasIconSprite)
@@ -152,7 +157,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
     private string GetKey(EntityUid uid, UniformAccessoryComponent component, int index)
     {
-        var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}";
+        var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}_{uid.Id}";
 
         if (component.LayerKey != null)
             key = component.LayerKey;
