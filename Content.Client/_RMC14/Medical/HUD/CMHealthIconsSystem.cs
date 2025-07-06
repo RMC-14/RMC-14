@@ -41,7 +41,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
         // TODO RMC14 don't use perishable
         if (HasComp<CMDefibrillatorBlockedComponent>(damageable)
             || TryComp(damageable, out PerishableComponent? perishable)
-            && perishable.Stage <= 4)
+            && perishable.Stage >= 4)
         {
             icon = Dead;
             if (iconsComp.Icons.TryGetValue(icon, out var deadIcon))

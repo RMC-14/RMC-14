@@ -383,3 +383,4 @@
     whitelist:
       components:
       - Xeno
+  - type: RMCHealthIcons

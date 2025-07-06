@@ -87,7 +87,7 @@ public sealed partial class SynthComponent : Component
     public TimeSpan SelfRepairTime = TimeSpan.FromSeconds(30);
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 CritThreshold = FixedPoint2.New(200);
+    public FixedPoint2 CritThreshold = FixedPoint2.New(199);
 
     /// <summary>
     /// The tool quality needed to repair the synth brute damage.
