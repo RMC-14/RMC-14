@@ -170,7 +170,7 @@
     - id: RMCAttachmentRailFlashlight
     - id: CMWeaponPistolM1984
     - id: CMMagazinePistolM1984
-      amount: 6
+      amount:
 
 # Custom M1984 service pistol
 - type: entity
