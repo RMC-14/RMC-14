@@ -101,4 +101,3 @@ rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glow
 
 rmc-xeno-construction-no-map-structure = The ground isn't solid.
 rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!
-rmc-xeno-construction-blocked-structure = We can't make this here.
