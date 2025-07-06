@@ -661,7 +661,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         var user = args.User;
         var plasmaLeft = xenoStructure.Comp.PlasmaCost - xenoStructure.Comp.StoredPlasma;
-        if (!TryComp(user, out XenoConstructionComponent? xeno) ||
+        if (!TryComp(user, out XenoCanAddPlasmaToConstructComponent? xeno) ||
             plasmaLeft < FixedPoint2.Zero ||
             !TryComp(xenoStructure, out TransformComponent? xenoStructureTransform) ||
             !TryComp(user, out XenoPlasmaComponent? plasma) ||
@@ -677,7 +677,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (!InRangePopup(user, xenoStructureTransform.Coordinates, xeno.OrderConstructionRange.Float()))
+        if (!InRangePopup(user, xenoStructureTransform.Coordinates, xeno.Range.Float()))
             return;
 
         if (plasma.Plasma < 1)
