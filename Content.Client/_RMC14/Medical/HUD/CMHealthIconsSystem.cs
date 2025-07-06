@@ -23,6 +23,13 @@ public sealed class CMHealthIconsSystem : EntitySystem
     private const string Dead = "Dead";
     private const string HCDead = "HCDead";
 
+    private static readonly ProtoId<HealthIconPrototype> BaseDeadIcon = "CMHealthIconDead";
+
+    public StatusIconData GetDeadIcon()
+    {
+        return _prototype.Index<HealthIconPrototype>(BaseDeadIcon);
+    }
+
     public IReadOnlyList<StatusIconData> GetIcons(Entity<DamageableComponent> damageable)
     {
         var icons = new List<StatusIconData>();
