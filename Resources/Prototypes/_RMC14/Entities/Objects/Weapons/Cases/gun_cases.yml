@@ -141,13 +141,13 @@
       - 0,0,5,1
       whitelist:
       tags:
-       - RMCWeaponRevolverM44
-       - RMCSpeedLoaderM44
-       - type: StorageFill
-         contents:
-         - id: RMCWeaponRevolverM44Custom
-         - id: RMCSpeedLoaderM44
-           amount: 2
+      - RMCWeaponRevolverM44
+      - RMCSpeedLoaderM44
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponRevolverM44Custom
+      - id: RMCSpeedLoaderM44
+        amount: 2
 
 # M1984 service pistol
 - type: entity
