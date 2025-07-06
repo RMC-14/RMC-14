@@ -1174,6 +1174,12 @@ DrinkBlueCuracaoBottleFull: RMCDrinkAlcoholBlueCuracao
 ClothingOuterBioGeneral: RMCSuitBioGeneral
 ClothingHeadHatHoodBioGeneral: RMCHoodBioGeneral
 
+# 2025-06-18
+CMWebbingPouch: RMCWebbingDropPouch 
+
+# 2025-06-24
+ClothingNeckStethoscope: RMCStethoscope
+
 # 2025-06-30
 ClosetL3Filled: CMClosetBioFilled
 ClosetL3VirologyFilled: CMClosetBioVirologyFilled
@@ -1181,3 +1187,15 @@ ClosetL3SecurityFilled: CMClosetBioSecurityFilled
 ClosetL3JanitorFilled: CMClosetBioJanitorFilled
 ClosetL3ScienceFilled: CMClosetBioScientistFilled
 ClosetL3: CMClosetBio
+FireAxeCabinet: RMCFireAxeCabinet
+FireAxeCabinetOpen: RMCFireAxeCabinetFilled
+FireAxeCabinetFilled: RMCFireAxeCabinetFilled
+FireAxeCabinetFilledOpen: RMCFireAxeCabinetFilled
+
+# 2025-07-04
+SprayBottleSpaceCleaner: RMCSprayBottleSpaceCleaner
+WallGold: RMCWallGold
+ClosetL3Virology: CMClosetBioVirology
+ClosetL3Security: CMClosetBioSecurity
+ClosetL3Janitor: CMClosetBioJanitor
+ClosetL3Science: CMClosetBioScientist

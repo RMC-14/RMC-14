@@ -83,3 +83,4 @@
   parent: RMCSurvivorPresetCivilian
   id: RMCGearSurvivorPresetBeachBum
   name: beach bum colonist preset
+  categories: [ HideSpawnMenu ]

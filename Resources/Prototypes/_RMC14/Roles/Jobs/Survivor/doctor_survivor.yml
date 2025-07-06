@@ -64,6 +64,7 @@
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetDoctor
   name: doctor colonist preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomGearOther:
