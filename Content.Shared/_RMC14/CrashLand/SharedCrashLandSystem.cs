@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -16,10 +17,11 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.CrashLand;
 
-public sealed class CrashLandSystem : EntitySystem
+public abstract partial class SharedCrashLandSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -27,6 +29,8 @@ public sealed class CrashLandSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
 
@@ -60,7 +64,7 @@ public sealed class CrashLandSystem : EntitySystem
 
     private void OnCrashLandOnTouchStartCollide(Entity<CrashLandOnTouchComponent> ent, ref StartCollideEvent args)
     {
-        if (!_crashLandEnabled || !_crashLandableQuery.HasComp(args.OtherEntity))
+        if (!_crashLandEnabled || !_crashLandableQuery.TryGetComponent(args.OtherEntity, out var crashLandable))
             return;
 
         var ev = new AttemptCrashLandEvent(args.OtherEntity);
@@ -69,7 +73,7 @@ public sealed class CrashLandSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        TryCrashLand(args.OtherEntity, true);
+        TryCrashLand((args.OtherEntity, crashLandable), true);
     }
 
     private void OnDeleteCrashLandableOnTouchStartCollide(Entity<DeleteCrashLandableOnTouchComponent> ent, ref StartCollideEvent args)
@@ -112,6 +116,7 @@ public sealed class CrashLandSystem : EntitySystem
         {
             if (!physQuery.TryGetComponent(ent, out var body))
                 continue;
+
             if (body.BodyType != BodyType.Static ||
                 !body.Hard ||
                 (body.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
@@ -155,7 +160,7 @@ public sealed class CrashLandSystem : EntitySystem
         return false;
     }
 
-    public void TryCrashLand(EntityUid crashLandable, bool doDamage)
+    public void TryCrashLand(Entity<CrashLandableComponent> crashLandable, bool doDamage)
     {
         if (_net.IsClient)
             return;
@@ -163,11 +168,14 @@ public sealed class CrashLandSystem : EntitySystem
         if (!TryGetCrashLandLocation(out var location))
             return;
 
-        TryCrashLand(crashLandable, doDamage, location);
+        TryCrashLand(crashLandable.Owner, doDamage, location);
     }
 
-    public void TryCrashLand(EntityUid crashLandable, bool doDamage, EntityCoordinates location)
+    public void TryCrashLand(Entity<CrashLandableComponent?> crashLandable, bool doDamage, EntityCoordinates location)
     {
+        if (!Resolve(crashLandable, ref crashLandable.Comp, false))
+            return;
+
         if (doDamage)
         {
             var damage = new DamageSpecifier
@@ -181,6 +189,14 @@ public sealed class CrashLandSystem : EntitySystem
             _damageable.TryChangeDamage(crashLandable, damage);
         }
 
+        var crashLanding = EnsureComp<CrashLandingComponent>(crashLandable);
+        crashLanding.RemainingTime = crashLandable.Comp.CrashDuration;
+        Dirty(crashLandable, crashLanding);
+
+        crashLandable.Comp.LastCrash = _timing.CurTime;
+        Dirty(crashLandable);
+
+        _rmcPulling.TryStopAllPullsFromAndOn(crashLandable);
         _transform.SetMapCoordinates(crashLandable, _transform.ToMapCoordinates(location));
     }
 }

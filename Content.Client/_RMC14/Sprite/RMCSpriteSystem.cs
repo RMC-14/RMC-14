@@ -10,6 +10,7 @@ namespace Content.Client._RMC14.Sprite;
 public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -33,6 +34,13 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
 
         comp.DrawDepth = (int) depth;
         return depth;
+    }
+
+    public void UpdatePosition(EntityUid uid)
+    {
+        var oldPos = _transform.GetWorldPosition(uid);
+        var newPos = oldPos with { Y = oldPos.Y + 0.0001f };
+        _transform.SetWorldPosition(uid, newPos);
     }
 
     public override void Update(float frameTime)

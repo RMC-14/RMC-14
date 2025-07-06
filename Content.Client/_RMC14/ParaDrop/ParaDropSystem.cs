@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._RMC14.Sprite;
 using Content.Shared.ParaDrop;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -13,6 +14,10 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
     [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
+
+    private const string ParachuteAnimationKey = "parachute-animation";
+    private const string DroppingAnimationKey = "dropping-animation";
 
     public Animation ReturnFallAnimation(float fallDuration, float fallHeight)
     {
@@ -35,6 +40,21 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         };
     }
 
+    public void PlayFallAnimation(EntityUid fallingUid, float fallDuration, TimeSpan fallStartTime, float fallHeight, string animationKey, ParaDroppableComponent? paraDroppable = null)
+    {
+        var duration = TimeSpan.FromSeconds(fallDuration);
+        var timeRemaining =  duration - (_timing.CurTime - fallStartTime);
+        var multiplier = (float) timeRemaining.Ticks / duration.Ticks;
+
+        if (timeRemaining < TimeSpan.FromSeconds(fallDuration) && timeRemaining > TimeSpan.Zero &&
+            multiplier is > 0 and < 1)
+        {
+            _animPlayer.Play(fallingUid, ReturnFallAnimation( multiplier * fallDuration,  fallHeight *  multiplier), animationKey);
+            if (paraDroppable != null)
+                SpawnParachute(multiplier * paraDroppable.DropDuration, _transform.GetMoverCoordinates(fallingUid), paraDroppable, multiplier);
+        }
+    }
+
     private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier)
     {
         var animationEnt = Spawn(null, coordinates);
@@ -47,7 +67,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         var despawn = AddComp<TimedDespawnComponent>(animationEnt);
         despawn.Lifetime = fallDuration;
 
-        _animPlayer.Play(animationEnt, ReturnFallAnimation(fallDuration, paraDroppable.FallHeight * multiplier), "parachute-animation");
+        _animPlayer.Play(animationEnt, ReturnFallAnimation(fallDuration, paraDroppable.FallHeight * multiplier), ParachuteAnimationKey);
     }
 
     public override void Update(float frameTime)
@@ -57,26 +77,14 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         var query = EntityQueryEnumerator<ParaDroppableComponent, ParaDroppingComponent>();
         while (query.MoveNext(out var uid, out var paraDroppable, out _))
         {
-            if (!_animPlayer.HasRunningAnimation(uid, "dropping-animation") && paraDroppable.LastParaDrop != null)
-            {
-                var duration = TimeSpan.FromSeconds(paraDroppable.DropDuration);
-                var timeRemaining =  duration - (_timing.CurTime - paraDroppable.LastParaDrop.Value);
-                var multiplier = (float) timeRemaining.Ticks / duration.Ticks;
-
-                if (timeRemaining < TimeSpan.FromSeconds(paraDroppable.DropDuration) && timeRemaining > TimeSpan.Zero && multiplier is > 0 and < 1)
-                {
-                    SpawnParachute(multiplier * paraDroppable.DropDuration, _transform.GetMoverCoordinates(uid), paraDroppable, multiplier);
-                    _animPlayer.Play(uid, ReturnFallAnimation( multiplier * paraDroppable.DropDuration,  paraDroppable.FallHeight *  multiplier), "dropping-animation");
-                }
-            }
+            if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null)
+                PlayFallAnimation(uid, paraDroppable.DropDuration, paraDroppable.LastParaDrop.Value, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
 
             if (_timing.IsFirstTimePredicted)
                 continue;
 
             // This is so the animation's current location gets updated during the drop.
-            var oldPos = _transform.GetWorldPosition(uid);
-            var newPos = oldPos with { Y = oldPos.Y + 0.0001f };
-            _transform.SetWorldPosition(uid, newPos);
+            _rmcSprite.UpdatePosition(uid);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Content.Shared.ParaDrop;
 public abstract partial class SharedParaDropSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly CrashLandSystem _crashLand = default!;
+    [Dependency] private readonly SharedCrashLandSystem _crashLand = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
