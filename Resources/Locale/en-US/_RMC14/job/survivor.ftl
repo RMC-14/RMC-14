@@ -1,4 +1,6 @@
-﻿cm-job-name-survivor = Civilian Colonist
+﻿# generic survs
+
+cm-job-name-survivor = Civilian Colonist
 cm-job-description-survivor = You are a survivor of the attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
 CMJobSurvivor = Civilian Colonist
 
@@ -14,6 +16,15 @@ CMJobSurvivorSecurity = Security Colonist
 cm-job-name-survivor-corporate = Corporate Colonist
 CMJobSurvivorCorporate = Corporate Colonist
 
+cm-job-name-survivor-miner = Miner Colonist
+CMJobSurvivorMiner = Miner Colonist
+
+cm-job-name-surivor-priest = Priest Colonist
+CMJobSurvivorPriest = Priest Colonist
+
+cm-job-name-survivor-scientist = Scientist Colonist
+CMSurvivorScientist = Scientist Colonist
+
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
@@ -21,6 +32,8 @@ rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You 
   You are NOT aware of the marines or their intentions.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+# FORECON survs
 
 rmc-job-greeting-forecon = You are UNMC Force Reconnaissance (FORECON) marine from the UNS Hanyut, stranded on this planet after your team was wiped out while investigating the distress signal. With your pilot dead along with the majority of your unit, you and your team have been running and gunning to survive... but with supplies low and food running out maybe your only means of survival is to move west to the crashed dropship to salvage anything useful.
 
@@ -40,3 +53,61 @@ rmc-job-name-forecon-sniper = Sniper
 rmc-job-name-forecon-marksman = Marksman
 rmc-job-name-forecon-support-tech = Support Technician
 rmc-job-name-forecon-commander = Commander
+
+# New Varadero Survs
+
+rmc-job-name-survivor-commander-new-varadero = Commander
+CMJobSurvivorCommanderNewVaradero = Commander
+
+cm-job-name-surivor-beach-bum = Beach Bum
+CMJobSurvivorBeachBum = Beach Bum
+
+cm-job-name-survivor-cargo-technician = New Varadero Cargo Technician
+CMJobSurvivorCargoTechnician = New Varadero Cargo Technician
+
+cm-job-name-survivor-medical-technician = New Varadero Medical Technician
+CMJobSurvivorMedicalTechnician = New Varadero Medical Technician
+
+cm-job-name-survivor-technician = New Varadero Engineering Technician
+CMJobSurvivorTechnician = New Varadero Engineering Technician
+
+cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
+CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
+
+cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
+CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
+cm-job-prefix-survivor-icb = ICB
+
+# Sorokyne Strata Survs
+
+rmc-job-name-survivor-infrastructure-engineer = SPP - Ministry of Industry - Infrastructure Engineer
+CMJobSurvivorInfrastructureEngineer = Infrastructure Engineer
+
+rmc-job-name-survivor-reactor-technician = SPP - Ministry of Energy - Reactor Technician
+CMJobSurvivorReactorTechnician = Reactor Technician
+
+rmc-job-name-survivor-armed-police-officer = SPP - People's Armed Police Officer
+CMJobSurvivorArmedPoliceOfficer = People's Armed Police Officer
+
+rmc-job-name-survivor-army-reservist = SPP - Ministry of Defense - Army Reservist
+CMJobSurvivorArmyReservist = Army Reservist
+rmc-job-prefix-army-reservist = 202/ARMY
+
+rmc-job-name-survivor-moh-doctor = SPP - Ministry of Health - Doctor
+CMJobSurvivorMoHDoctor = Doctor
+
+rmc-job-name-survivor-cec-researcher = SPP - Cosmos Exploration Corps Researcher
+CMJobSurvivorCECResearcher = Cosmos Exploration Corps Researcher
+
+rmc-job-name-survivor-soro-civilian = SPP - Civilian
+CMJobSurvivorSoroCivilian = Civilian
+
+rmc-job-name-survivor-fire-protection-specialist = SPP - Ministry of Public Safety - Fire Protection Specialist
+CMJobSurvivorFireProtectionSpecialist = Fire Protection Specialist
+rmc-job-prefix-fire-protection-specialist = FPPB
+
+rmc-job-name-survivor-soro-miner = SPP - Jutou Combine - Miner
+CMJobSurvivorSoroMiner = Miner
+
+rmc-job-name-survivor-halcyon-dynamics-liaison = SPP - Halcyon Dynamics - Corporate Liaison
+CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison

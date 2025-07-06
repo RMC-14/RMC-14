@@ -136,6 +136,15 @@
   id: RMCBootsSPPFilled
   suffix: Filled
 
+- type: entity
+  parent: CMBootsBlack
+  id: RMCBootsSPPBlack
+  name: military combat boots
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCBootsSPPBlack] # TODO RMC14 SPP Bayonet
+  id: RMCBootsSPPBlackFilled
+  suffix: Filled
 
 # PMC
 - type: entity

@@ -1,7 +1,7 @@
 #Base Jacket
 - type: entity
   abstract: true
-  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket ]
+  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseJacket
   components:
   - type: Storage
@@ -16,7 +16,6 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
-  - type: PlaytimeMedalHolder
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist
@@ -70,8 +69,7 @@
 
 - type: entity
   id: RMCAllowSuitStorageClothingJacket
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -99,8 +97,7 @@
 
 - type: entity
   id: RMCAllowSuitStorageClothingHazardVest
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: AllowSuitStorage
     whitelist:
@@ -370,10 +367,53 @@
     foldedEquippedPrefix: jacket
 
 - type: entity
-  parent: CMCoatCOBomber
+  parent: RMCBaseJacket
   id: RMCCoatBomber
   name: brown bomber jacket
   description: A well-worn leather bomber jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatBomberRed
+  name: red bomber jacket
+  description: A well-worn leather bomber jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_red.rsi
+
+- type: entity
+  parent: RMCCoatBomberRed
+  id: RMCCoatBomberGrey
+  name: grey bomber jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_grey.rsi
+
+- type: entity
+  parent: RMCCoatBomberRed
+  id: RMCCoatBomberKhaki
+  name: khaki bomber jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
 
 - type: entity
   parent: CMCoatCO
@@ -461,6 +501,15 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
+
+- type: entity
+  parent: RMCCoatService
+  id: RMCCoatServiceFolded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: jacket
 
 - type: entity
   parent: CMCoatOfficer
@@ -577,3 +626,28 @@
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
+
+# priest robes
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingPriestRobes
+  name: priest robes
+  description: A long dress with a purple scarf, often worn by religious folk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
+
+# Hybrisa
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatHoboBrown
+  name: dark brown worn polyester jacket
+  description: An old worn brown polyester jacket, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi

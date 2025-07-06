@@ -79,7 +79,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
         amount: 4
 
 - type: entity

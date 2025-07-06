@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Fabricator;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Map;
@@ -98,6 +99,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
         SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
         SubscribeLocalEvent<DropshipEnginePointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+
+        SubscribeLocalEvent<DropshipFabricatorPrintableComponent, PowerLoaderInteractEvent>(OnDropshipPartPowerLoaderInteract);
 
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, KnockedDownEvent>(OnActivePilotStunned);
@@ -228,6 +231,18 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnUserGrab(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
     {
+        if (!TryComp(ent, out StrapComponent? strap))
+            return;
+
+        var grab = new PowerLoaderGrabEvent(ent, args.Target, strap.BuckledEntities);
+        RaiseLocalEvent(args.Target, ref grab);
+
+        if (grab.ToGrab != null)
+        {
+            PickUp(ent, grab.ToGrab.Value);
+            return;
+        }
+
         if (!CanPickupPopup(ent, args.Target, out var delay))
             return;
 
@@ -519,6 +534,33 @@ public sealed class PowerLoaderSystem : EntitySystem
     {
         if (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead)
             OnActivePilotStunned(ent, ref args);
+    }
+
+    private void OnDropshipPartPowerLoaderInteract(Entity<DropshipFabricatorPrintableComponent> ent, ref PowerLoaderInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp(args.Target, out DropshipFabricatorComponent? fabricator) ||
+            !HasComp<DropshipFabricatorPointsComponent>(fabricator.Account))
+            return;
+
+        args.Handled = true;
+
+        var delayMultiplier = 1f;
+        if (TryComp(args.PowerLoader, out MovementRelayTargetComponent? relay))
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, ent.Comp.RecycleSkill);
+
+        var delay = ent.Comp.Delay * delayMultiplier;
+        var ev = new DropshipFabricatoreRecycleDoafterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, args.PowerLoader, delay, ev, args.Target, args.Target, args.Used)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.PowerLoader, out var loader))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private bool CanAttachPopup(

@@ -12,6 +12,26 @@
   sprite: /Textures/_RMC14/Tiles/floors/plating.png
 
 - type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingDamage1
+  sprite: /Textures/_RMC14/Tiles/floors/platingdmg1.png
+
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingDamage2
+  sprite: /Textures/_RMC14/Tiles/floors/platingdmg2.png
+
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingDamage3
+  sprite: /Textures/_RMC14/Tiles/floors/platingdmg3.png
+
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingScorched
+  sprite: /Textures/_RMC14/Tiles/floors/panelscorched.png
+
+- type: tile
   parent: CMFloorStripedBase
   id: CMFloorStriped0
   sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_0.png

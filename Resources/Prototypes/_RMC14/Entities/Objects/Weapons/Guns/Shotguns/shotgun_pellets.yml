@@ -2,8 +2,7 @@
   abstract: true
   parent: CMBulletBase
   id: CMPelletShotgunBase
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi

@@ -358,6 +358,19 @@
     key: walls
     base: jungle_veg
 
+- type: entity
+  parent: CMWallJungle
+  id: RMCWallJungleStrata
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_jungle.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_jungle.rsi
+    state: strata_jungle0
+  - type: IconSmooth
+    key: walls
+    base: strata_jungle
+
 # Elevator
 
 - type: entity
