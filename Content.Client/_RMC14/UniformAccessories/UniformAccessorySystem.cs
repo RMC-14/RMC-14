@@ -54,8 +54,9 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             if (accessoryComp.PlayerSprite is not { } sprite)
                 continue;
 
+            var hideAccessory = false;
             if (clothingFoldable != null && clothingFoldable.HideAccessories && accessoryComp.HiddenByJacketRolling)
-                continue;
+                hideAccessory = true;
 
             if (clothingSprite != null && accessoryComp.HasIconSprite)
             {
@@ -72,7 +73,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             {
                 RsiPath = sprite.RsiPath.ToString(),
                 State = sprite.RsiState,
-                Visible = !accessoryComp.Hidden
+                Visible = !hideAccessory
             }));
 
             index++;
