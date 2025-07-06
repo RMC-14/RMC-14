@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Brown gloves/boots + formal CO attire to CO's clothing vendor.
-    type: Add
-  id: 1440
-  time: '2025-03-12T08:46:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5733
-- author: Tobi-nator
-  changes:
-  - message: Added new ML66A Smartgun sounds
-    type: Tweak
-  id: 1441
-  time: '2025-03-12T08:50:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5843
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed helmet garbs not being 1 point in loadouts.
@@ -5073,5 +5059,25 @@
   id: 1941
   time: '2025-07-06T00:59:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6753
+- author: Dygon
+  changes:
+  - message: IMP ammo racks can now store empty and full sandbags.
+    type: Tweak
+  - message: IO headsets now have access to the requisitions channel.
+    type: Tweak
+  - message: 'Underbarrel extinguishers now also fit on the following weapons: M54CE2,
+      M63, MOU53, MP5, XM51.'
+    type: Tweak
+  id: 1942
+  time: '2025-07-06T01:01:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6877
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added new gunshot sounds for the M890 tactical shotgun, FN P90 SMG, and
+      the M357 rival double-barreled shotgun
+    type: Add
+  id: 1943
+  time: '2025-07-06T01:00:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6867
 Name: RMC14
 Order: -1
