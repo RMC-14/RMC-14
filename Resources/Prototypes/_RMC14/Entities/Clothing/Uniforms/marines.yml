@@ -131,6 +131,15 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
 
+# Sun Riders
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitSunRiders
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RMCPatchSolarDevils ]
+
 # Supply
 
 # Quartermaster / RO
