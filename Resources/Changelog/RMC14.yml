@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed infected hosts losing tacklestacks and not consistently being able
-      to keep them tackled down.
-    type: Fix
-  - message: Fixed tacklestacks getting removed if you would get knocked down while
-      already knocked down.
-    type: Fix
-  id: 1439
-  time: '2025-03-12T08:35:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5807
 - author: Arcticular1
   changes:
   - message: Brown gloves/boots + formal CO attire to CO's clothing vendor.
@@ -5074,5 +5063,15 @@
   id: 1940
   time: '2025-07-05T11:39:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6872
+- author: x5tink
+  changes:
+  - message: The ChemMaster eject and clear button is now only Eject Beaker button.
+    type: Tweak
+  - message: The ChemMaster buffer side, all reagents button can now send everything
+      to disposals.
+    type: Fix
+  id: 1941
+  time: '2025-07-06T00:59:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6753
 Name: RMC14
 Order: -1
