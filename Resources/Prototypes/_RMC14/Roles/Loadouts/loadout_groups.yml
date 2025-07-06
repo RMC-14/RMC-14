@@ -187,25 +187,6 @@
   - FolderYellowRMC
   # TODO Notepad
 
-# Plushies
-- type: loadoutGroup
-  id: PlushiesRMC
-  name: rmc-loadout-group-plushies
-  minLimit: 0
-  maxLimit: 7
-  loadouts:
-  - PlushieFarwaRMC
-  - PlushieBarricadeRMC
-  - PlushieBeeRMC
-  - PlushieSharkGreyRMC
-  - PlushieSharkBlueRMC
-  - PlushieSharkPinkRMC
-  - PlushieMothRMC
-  - PlushieRockRMC
-  - PlushieTherapyRMC
-  - PlushieGnarpGnarpRMC
-  - PlushieGnarpGnarpAltRMC
-
 # Weapons
 - type: loadoutGroup
   id: RecreationalRMC
@@ -509,3 +490,39 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+
+# Civilian
+- type: loadoutGroup
+  id: CivilianOnlyRMC
+  name: rmc-loadout-group-civilian
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - PatchWeYaRMC
+  - PatchWeYaRMCSquare
+  - PatchWeYaRMCBlack
+  # Alternate weya patch TODO
+  # TSE patch TODO
+  # CLF patch TODO
+  # TODO cowboy hat
+  # white cowboy hat TODO
+  # headband TODO
+  # BiMex tactical shades TODO
+  - ShoesBlackRMC
+  - ShoesBrownRMC
+  - ShoesBlueRMC
+  - ShoesGreenRMC
+  - ShoesYellowRMC
+  - ShoesRedRMC
+  - ShoesPurpleRMC
+  - PlushieFarwaRMC
+  - PlushieBarricadeRMC
+  - PlushieBeeRMC
+  - PlushieSharkGreyRMC
+  - PlushieSharkBlueRMC
+  - PlushieSharkPinkRMC
+  - PlushieMothRMC
+  - PlushieRockRMC
+  - PlushieTherapyRMC
+  - PlushieGnarpGnarpRMC
+  - PlushieGnarpGnarpAltRMC
