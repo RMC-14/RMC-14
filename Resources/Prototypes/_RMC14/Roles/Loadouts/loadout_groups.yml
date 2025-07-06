@@ -409,14 +409,14 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - BootsBlackRMC
-  - ShoesBlackRMC
-  - ShoesBrownRMC
-  - ShoesGreenRMC
-  - ShoesPurpleRMC
-  - ShoesRedRMC
-  - ShoeWhiteRMC
-  - ShoeYellowRMC
+  - BootsBlackRMCSynth
+  - ShoesBlackRMCSynth
+  - ShoesBrownRMCSynth
+  - ShoesGreenRMCSynth
+  - ShoesPurpleRMCSynth
+  - ShoesRedRMCSynth
+  - ShoeWhiteRMCSynth
+  - ShoeYellowRMCSynth
 
 - type: loadoutGroup
   id: SynthHeadwearRMC
