@@ -73,7 +73,6 @@
     head: RMCArmorHelmetMercenaryMiner
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
-    neck: RMCCLFArmband
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled # TODO RMC14

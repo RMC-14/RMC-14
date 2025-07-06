@@ -64,7 +64,6 @@
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
-    neck: RMCCLFArmband
     outerClothing: RMCCoatMilitiaVest
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
