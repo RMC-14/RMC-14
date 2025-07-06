@@ -87,7 +87,7 @@ public abstract class SharedRankSystem : EntitySystem
 
         if (isShort)
         {
-            if (rank.FemalePrefix is null || rank.MalePrefix is null)
+            if (rank.FemalePrefix == null || rank.MalePrefix == null)
                 return rank.Prefix;
 
             if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoidAppearance))
