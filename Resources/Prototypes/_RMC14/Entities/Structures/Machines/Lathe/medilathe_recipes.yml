@@ -1,137 +1,139 @@
 # Divide original costs by 37.5 each - except plastic which is 20
+# For all non-stackable/sheet items, multiply original costs by 1.25 rounded down
+# Example: Syringe is 150 x 1.25 = 187 / 37.5 = 5 CMGlass
 - type: latheRecipe
   id: CMSyringe
   result: CMSyringe
   completetime: 4
   materials:
-    CMGlass: 4 # 150
+    CMGlass: 5 # 187
 
 - type: latheRecipe
   id: RMCDropper
   result: RMCDropper
   completetime: 4
   materials:
-    RMCPlastic: 8 # 150
+    RMCPlastic: 9 # 187
 
 - type: latheRecipe
   id: CMHypospray
   result: CMHyposprayWithVial
   completetime: 4
   materials:
-    RMCPlastic: 63 # 1250
-    CMGlass: 7 # 250
+    RMCPlastic: 78 # 1562
+    CMGlass: 8 # 312
 
 - type: latheRecipe
   id: CMBloodPack
   result: CMBloodPack
   completetime: 4
   materials:
-    RMCPlastic: 25 # 500
+    RMCPlastic: 31 # 625
 
 - type: latheRecipe
   id: RMCBeakerHighCapacity
   result: RMCBeakerHighCapacity
   completetime: 4
   materials:
-    CMGlass: 267 # 10000
+    CMGlass: 333 # 12500
 
 - type: latheRecipe
   id: CMBonesetter
   result: CMBonesetter
   completetime: 4
   materials:
-    RMCPlastic: 375 # 7500
+    RMCPlastic: 469 # 9375
 
 - type: latheRecipe
   id: CMStasisBag
   result: CMStasisBagFolded
   completetime: 4
   materials:
-    RMCPlastic: 375 # 7500
+    RMCPlastic: 469 # 9375
 
 - type: latheRecipe
   id: CMRollerBed
   result: CMRollerBedSpawnFolded
   completetime: 4
   materials:
-    RMCPlastic: 250 # 5000
+    RMCPlastic: 313 # 6250
 
 - type: latheRecipe
   id: CMPillCanister
   result: CMPillCanister
   completetime: 4
   materials:
-    RMCPlastic: 25 # 500
+    RMCPlastic: 31 # 625
 
 - type: latheRecipe
   id: CMFirstAidKit
   result: CMFirstAidKit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 125 # 2500
 
 - type: latheRecipe
   id: CMBurnAidKit
   result: CMBurnAidKit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 125 # 2500
 
 - type: latheRecipe
   id: CMToxinAidKit
   result: CMToxinAidKit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 125 # 2500
 
 - type: latheRecipe
   id: CMAdvFirstAidKit
   result: CMAdvFirstAidKit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 125 # 2500
 
 - type: latheRecipe
   id: CMFirstAidO2Kit
   result: CMFirstAidO2Kit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 125 # 2500
 
 - type: latheRecipe
   id: RMCRadiationAidKit
   result: RMCRadiationAidKit
   completetime: 4
   materials:
-    RMCPlastic: 100 # 2000
+    RMCPlastic: 125 # 2500
 
 - type: latheRecipe
   id: RMCSyringeCase
   result: RMCSyringeCase
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 63 # 1250
 
 - type: latheRecipe
   id: CMSurgicalCase
   result: CMSurgicalCase
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 63 # 1250
 
 - type: latheRecipe
   id: RMCVialBox
   result: RMCVialBox
   completetime: 4
   materials:
-    RMCPlastic: 100 # 2000
+    RMCPlastic: 125 # 2500
 
 - type: latheRecipe
   id: RMCSurgicalTrayEmpty
   result: RMCSurgicalTrayEmpty
   completetime: 4
   materials:
-    RMCPlastic: 150 # 3000
+    RMCPlastic: 188 # 3750
 
 - type: latheRecipe
   id: RMCPouchReagentCanister

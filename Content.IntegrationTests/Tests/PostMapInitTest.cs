@@ -90,7 +90,7 @@ namespace Content.IntegrationTests.Tests
             "RMCAdminFax",
             "GoldenArrowLarge",
             "OCP-583",
-            "Breakwater_Strand",
+            "Breakwater_Strand"
         };
 
         /// <summary>
