@@ -149,6 +149,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
@@ -163,6 +164,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/hefa_armband.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Armbands/hefa_armband.rsi
@@ -177,6 +179,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/red_armband.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Armbands/red_armband.rsi
@@ -196,6 +199,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/rnd_armband.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Armbands/rnd_armband.rsi
@@ -209,6 +213,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/hydro_armband.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Armbands/hydro_armband.rsi
@@ -222,6 +227,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/med_armband.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Armbands/med_armband.rsi
@@ -235,7 +241,22 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/med_green_armband.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Accessory/Armbands/med_green_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCEngiArmband
+  name: engineering armband
+  description: An armband, worn by the crew to display which department they're assigned to. This one is orange with a reflective strip!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/engi_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/engi_armband.rsi
       state: armband
