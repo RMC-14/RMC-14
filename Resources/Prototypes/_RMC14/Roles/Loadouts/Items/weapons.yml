@@ -9,7 +9,8 @@
 - type: loadout
   id: CustomM1984RMC
   cost: 4
-  inhand:
+  storage:
+    back:
     - RMCGunCasePistolM1984Custom
 
 - type: loadout
