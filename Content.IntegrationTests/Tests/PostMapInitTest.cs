@@ -88,7 +88,8 @@ namespace Content.IntegrationTests.Tests
             "Savannah",
             "Almayer",
             "RMCAdminFax",
-            "GoldenArrow",
+            "GoldenArrowLarge",
+            "OCP-583",
         };
 
         /// <summary>

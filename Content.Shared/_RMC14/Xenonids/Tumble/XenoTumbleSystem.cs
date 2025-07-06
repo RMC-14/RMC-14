@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
@@ -24,6 +25,7 @@ public sealed class XenoTumbleSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -79,7 +81,7 @@ public sealed class XenoTumbleSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, 30, animated: false);
+        _throwing.TryThrow(xeno, diff, 30, animated: false, compensateFriction: true);
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
     }
 
@@ -113,10 +115,7 @@ public sealed class XenoTumbleSystem : EntitySystem
             _stun.TryParalyze(args.Target, xeno.Comp.StunTime, true);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(args.Target);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.ImpactRange;
-        _throwing.TryThrow(args.Target, diff, 10);
+        _sizeStun.KnockBack(args.Target, origin, xeno.Comp.ImpactRange, xeno.Comp.ImpactRange, 10);
 
         _damageable.TryChangeDamage(
             args.Target,

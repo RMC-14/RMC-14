@@ -24,7 +24,6 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -76,9 +75,6 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
 
         var speed = body.LinearVelocity.Length();
 
-        if (speed < ent.Comp.MinimumSpeed)
-            return;
-
         if (ent.Comp.LastHit != null && _timing.CurTime - ent.Comp.LastHit.Value < ent.Comp.DamageCooldown)
             return;
 
@@ -106,8 +102,7 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         var vec = _transform.GetMoverCoordinates(user).Position - _transform.GetMoverCoordinates(obstacle).Position;
         if (vec.Length() != 0)
         {
-            var direction = vec.Normalized() * ent.Comp.KnockbackPower;
-            _throwing.TryThrow(user, direction, ent.Comp.KnockBackSpeed, animated: true, playSound: false, doSpin: false);
+            _size.KnockBack(user, _transform.GetMapCoordinates(obstacle), ent.Comp.KnockbackPower, ent.Comp.KnockbackPower, knockBackSpeed: ent.Comp.KnockBackSpeed);
         }
 
         if (_timing.IsFirstTimePredicted)
