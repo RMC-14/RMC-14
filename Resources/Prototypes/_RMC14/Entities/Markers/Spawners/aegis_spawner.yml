@@ -5,9 +5,9 @@
   name: AEGIS spawner
   components:
   - type: Sprite
-    sprite: Markers/spawner.rsi
+    sprite: _RMC14/Markers/landmarks.rsi
     layers:
-    - state: red
+    - state: x
     - sprite: _RMC14/Objects/secure_box.rsi
       state: aegis_crate
   - type: AegisSpawner  

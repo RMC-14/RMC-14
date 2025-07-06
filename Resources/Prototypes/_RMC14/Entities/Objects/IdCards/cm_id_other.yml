@@ -285,3 +285,4 @@
   - type: Access
     groups:
       - CMAccessAegis
+  - type: AegisTrackable
