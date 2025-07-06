@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed using melee not delaying being able to pull someone.
-    type: Fix
-  id: 1456
-  time: '2025-03-15T07:22:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5880
-- author: Dutch-VanDerLinde
-  changes:
   - message: Added external webbing that fits on the armor slot. It can fit 2 items
       and allows suit storage. You can find it in requisitions.
     type: Add
@@ -5095,5 +5088,12 @@
   id: 1956
   time: '2025-07-06T01:57:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6912
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Colonists will now be an alerted when a new xeno caste unlocks
+    type: Add
+  id: 1957
+  time: '2025-07-06T01:58:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6768
 Name: RMC14
 Order: -1
