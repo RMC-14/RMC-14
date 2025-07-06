@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Added holstered visuals for sidearm pouch.
-    type: Add
-  id: 1448
-  time: '2025-03-12T09:51:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5826
 - author: OmerF-afk
   changes:
   - message: Added MARSOC HEAP for rifles.
@@ -5088,5 +5081,12 @@
   id: 1949
   time: '2025-07-06T01:43:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6767
+- author: Arykh
+  changes:
+  - message: Xenonids can now bind a key to their rest action. (Shift+R by default)
+    type: Tweak
+  id: 1950
+  time: '2025-07-06T01:45:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6788
 Name: RMC14
 Order: -1
