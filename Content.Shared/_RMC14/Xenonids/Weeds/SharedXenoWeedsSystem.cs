@@ -1,6 +1,8 @@
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
@@ -8,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
@@ -628,6 +631,19 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 xeno,
                 PopupType.SmallCaution);
             return false;
+        }
+
+        var entities = _mapSystem.GetAnchoredEntities(grid, coordinates.ToVector2i(EntityManager, _map, _transform));
+        {
+            foreach (var entity in entities)
+            {
+                if (!HasComp<ClimbableComponent>(entity) && !HasComp<RMCReactorPoweredLightComponent>(entity) ||
+                    HasComp<BarricadeComponent>(entity))
+                    continue;
+
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), xeno, xeno, PopupType.SmallCaution);
+                return false;
+            }
         }
 
         return true;
