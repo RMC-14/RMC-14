@@ -6,7 +6,8 @@ using Robust.Shared.Timing;
 namespace Content.Shared._RMC14.TacticalMap;
 
 public sealed class TacMapMarineAlertSystem : EntitySystem
-{    [Dependency] private readonly AlertsSystem _alerts = default!;
+{
+    [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly InventorySystem _inv = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
