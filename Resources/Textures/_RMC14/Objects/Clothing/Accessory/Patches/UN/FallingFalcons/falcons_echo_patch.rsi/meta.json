@@ -8,6 +8,14 @@
   },
   "states": [
     {
+      "name": "patch",
+      "directions": 4
+    },
+    {
+      "name": "helmet",
+      "directions": 4
+    },
+    {
       "name": "icon"
     }
   ]

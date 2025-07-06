@@ -209,6 +209,14 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_squad_patch.rsi
     state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/FallingFalcons/falcons_alpha_patch.rsi
+      state: helmet
   - type: RMCMapToSquad
     map:
       SquadAlpha: RMCPatchFallingFalconsAlpha

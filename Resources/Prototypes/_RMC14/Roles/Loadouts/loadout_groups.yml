@@ -177,6 +177,7 @@
   maxLimit: 10
   loadouts:
   - UNPatchRMC
+  - UNMCSquadPatchRMC
 
 # Paperwork
 - type: loadoutGroup

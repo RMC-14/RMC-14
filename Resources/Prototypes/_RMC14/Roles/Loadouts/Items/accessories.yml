@@ -5,3 +5,10 @@
   storage:
     back:
     - RMCPatchUnitedNations
+
+- type: loadout
+  id: UNMCSquadPatchRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPatchFallingFalconsSquad
