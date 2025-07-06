@@ -11,7 +11,7 @@
     bundle:
     - ArmorHelmetM10
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -25,7 +25,7 @@
     bundle:
     - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -37,7 +37,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquadCorpsman
-    - CMJumpsuitMarineMedic
+    - RMCJumpsuitMarineMedicPatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -63,6 +63,7 @@
     - CMBloodPackFull # TODO RMC14 O-
     - CMBloodPackFull # TODO RMC14 O-
     - RMCFlashlightPen
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -73,7 +74,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquadComTech
-    - CMJumpsuitMarineEngineer
+    - RMCJumpsuitMarineEngineerPatch
     - CMBootsBlackFilled
 
 - type: entity
@@ -94,7 +95,7 @@
     - RMCPowerCellHigh
     - CMEntrenchingTool
     - CMLightReplacer
-#    - CMAPCElectronics # TODO RMC14 uncomment when power
+    - CMAPCElectronics
     - RMCNailgunTactical
 
 - type: entity
@@ -107,7 +108,7 @@
     bundle:
     - CMArmorHelmetM11 # TODO RMC14 M4
     - CMVendorHeadsetSquadLeader
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -120,7 +121,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -158,7 +159,7 @@
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
     - RMCSyringeCase
-      #TODO RMC Stethoscope
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -178,7 +179,7 @@
     - CMSynthGraft
     - RMCFlashlightPen
     - RMCSyringeCase
-      #TODO RMC Stethoscope
+    - RMCStethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

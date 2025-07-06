@@ -46,6 +46,16 @@
 
 - type: entity
   parent: CMIDCardLanyard
+  id: RMCIDCardColonistScientist
+  name: researcher colonist ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivorScientist
+  - type: ItemIFF
+    faction: FactionSurvivor
+
+- type: entity
+  parent: CMIDCardLanyard
   id: CMIDCardColonistSecurity
   name: security colonist ID card
   components:

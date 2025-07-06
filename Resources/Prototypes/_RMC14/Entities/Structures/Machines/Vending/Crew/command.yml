@@ -170,7 +170,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Mask
@@ -450,7 +450,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Huds
@@ -805,7 +805,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Hats
@@ -898,7 +898,7 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
     # ////////////////////////////////////
     # Chief Engineer
@@ -1021,7 +1021,7 @@
       - id: CMWebbingBrown
       - id: CMWebbing
       - id: CMWebbingHolster
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     # CE Deployment Gear
@@ -1295,6 +1295,7 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbing
+      - id: RMCWebbingDropPouch
     - name: Spare Equipment
       jobs:
       - CMCMO
@@ -1308,14 +1309,31 @@
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
-    - name: Standard Equipment
+    - name: Uniform
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMUniform: 1 }
+      entries:
+      - id: CMJumpsuitBO
+      - id: RMCJumpsuitASOBlack
+      - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOBlackAlt
+      - id: RMCJumpsuitASOOperations
+    - name: Outer Wear
+      jobs:
+      - CMAuxiliarySupportOfficer
+      choices: { CMSuit: 1 }
+      entries:
+      - id: CMCoatASO
+      - id: RMCCoatASOBlack
+      - id: RMCCoatASOWhite
+      - id: RMCCoatASOBlackAlt
+    - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
       entries:
-      - id: CMJumpsuitBO
       - id: CMHeadsetSeniorCommand
-      - id: CMCoatASO
     - name: Gloves
       jobs: 
       - CMAuxiliarySupportOfficer
@@ -1392,5 +1410,5 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster

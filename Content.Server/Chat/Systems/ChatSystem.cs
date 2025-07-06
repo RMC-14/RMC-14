@@ -14,6 +14,7 @@ using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
@@ -648,6 +649,9 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // If crit player LOOC is disabled, don't send the message at all.
         if (!_critLoocEnabled && _mobStateSystem.IsCritical(source))
+            return;
+
+        if (HasComp<RMCUnconsciousComponent>(source)) // RMC14
             return;
 
         var wrappedMessage = Loc.GetString("chat-manager-entity-looc-wrap-message",

@@ -22,7 +22,7 @@
   - type: ActivatableUI
     key: enum.DropshipNavigationUiKey.Key
   - type: AccessReader
-    access: [ [ "CMAccessPilot" ] ]
+    access: [ [ "CMAccessDropship" ] ]
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
