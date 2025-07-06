@@ -24,51 +24,44 @@
 - type: loadout
   id: ShoesBlackRMC
   cost: 1
-  storage:
-    back:
-    - RMCShoesBlack
+  equipment:
+    shoes: RMCShoesBlack
 
 - type: loadout
   id: ShoesBrownRMC
   cost: 1
-  storage:
-    back:
-    - RMCShoesBrown
+  equipment:
+    shoes: RMCShoesBrown
 
 - type: loadout
   id: ShoesBlueRMC
   cost: 1
-  storage:
-    back:
-    - RMCShoesBlue
+  equipment:
+    shoes: RMCShoesBlue
 
 - type: loadout
   id: ShoesGreenRMC
   cost: 1
-  storage:
-    back:
-    - RMCShoesGreen
+  equipment:
+    shoes: RMCShoesGreen
 
 - type: loadout
   id: ShoesYellowRMC
   cost: 1
-  storage:
-    back:
-    - RMCShoesYellow
+  equipment:
+    shoes: RMCShoesYellow
 
 - type: loadout
   id: ShoesRedRMC
   cost: 1
-  storage:
-    back:
-    - RMCShoesRed
+  equipment:
+    shoes: RMCShoesRed
 
 - type: loadout
   id: ShoesPurpleRMC
   cost: 1
-  storage:
-    back:
-    - RMCShoesPurple
+  equipment:
+    shoes: RMCShoesPurple
 
 # Plushies
 - type: loadout
