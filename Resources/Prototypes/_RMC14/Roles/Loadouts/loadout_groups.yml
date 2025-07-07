@@ -113,6 +113,7 @@
   - NeckerchiefBlackRMC
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefWhiteRMC
 
 # Headwear
 - type: loadoutGroup
@@ -255,6 +256,24 @@
   - CanteenRMC
   - MetalFlaskRMC
 
+# Smokables
+- type: loadoutGroup
+  id: SmokablesRMC
+  name: rmc-loadout-group-smokables
+  minLimit: 0
+  maxLimit: 11
+  loadouts:
+  - LuckySlothsPackRMC
+  - WeYaGoldPackRMC
+  - ExecutiveSelectPackRMC
+  - TarbackTubeRMC
+  - TarbacksCaseRMC
+  - PremiumCigarRMC
+  - ZippoRMC
+  - ZippoExecRMC
+  - ZippoGoldRMC
+  - MatchboxRMC
+
 # Food (sweets)
 - type: loadoutGroup
   id: FoodSweetsRMC
@@ -335,6 +354,14 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+# Chief MP
+- type: loadoutGroup
+  id: ChiefMPRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - CMPPeakedCapRMC
 # Synthetic
 - type: loadoutGroup
   id: SynthUniformRMC
@@ -481,3 +508,4 @@
   - NeckerchiefBlackRMC
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefWhiteRMC

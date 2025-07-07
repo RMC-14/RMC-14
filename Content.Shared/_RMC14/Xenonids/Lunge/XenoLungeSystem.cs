@@ -1,8 +1,8 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
@@ -11,6 +11,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -36,6 +37,7 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -48,6 +50,7 @@ public sealed class XenoLungeSystem : EntitySystem
         SubscribeLocalEvent<XenoLungeComponent, XenoLungeActionEvent>(OnXenoLungeAction);
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
         SubscribeLocalEvent<XenoLungeComponent, LandEvent>(OnXenoLungeLand);
+        SubscribeLocalEvent<XenoLungeComponent, MeleeAttackAttemptEvent>(OnAttackAttempt);
 
         SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
     }
@@ -80,7 +83,7 @@ public sealed class XenoLungeSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, 30, animated: false);
+        _throwing.TryThrow(xeno, diff, 30, animated: false, compensateFriction: true);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
             return;
@@ -141,15 +144,18 @@ public sealed class XenoLungeSystem : EntitySystem
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge != null)
             xeno.Comp.Charge = null;
 
-        if (_hive.FromSameHive(xeno.Owner, targetId))
+        if (!_xeno.CanAbilityAttackTarget(xeno, targetId) || (_size.TryGetSize(targetId, out var size) && size >= RMCSizes.Big) ||
+            (TryComp<XenoComponent>(targetId, out var xenoComp) && xenoComp.Tier >= 2)) //Fails if big or tier 2 or more
             return true;
 
         if (_net.IsServer)
         {
-            _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
+            var stunTime = _xeno.TryApplyXenoDebuffMultiplier(targetId, xeno.Comp.StunTime);
+            _stun.TryParalyze(targetId, stunTime, true);
 
             var stunned = EnsureComp<XenoLungeStunnedComponent>(targetId);
-            stunned.ExpireAt = _timing.CurTime + xeno.Comp.StunTime;
+            stunned.ExpireAt = _timing.CurTime + stunTime;
+            stunned.Stunner = GetNetEntity(xeno);
             Dirty(targetId, stunned);
         }
 
@@ -171,6 +177,20 @@ public sealed class XenoLungeSystem : EntitySystem
         foreach (var effect in ent.Comp.Effects)
         {
             _statusEffects.TryRemoveStatusEffect(ent, effect);
+        }
+    }
+
+    private void OnAttackAttempt(Entity<XenoLungeComponent> ent, ref MeleeAttackAttemptEvent args)
+    {
+        var netAttacker = GetNetEntity(ent);
+        if(!TryComp(GetEntity(args.Target), out XenoLungeStunnedComponent? stunned) || netAttacker != stunned.Stunner)
+            return;
+
+        switch (args.Attack)
+        {
+            case DisarmAttackEvent disarm:
+                args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
+                break;
         }
     }
 

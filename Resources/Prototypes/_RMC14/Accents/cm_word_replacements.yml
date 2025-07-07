@@ -144,7 +144,9 @@
     cm-chatsan-word-smart-gunner: cm-chatsan-replacement-smart-gunner
     cm-chatsan-word-smartgunner: cm-chatsan-replacement-smartgunner
     cm-chatsan-word-sentry: cm-chatsan-replacement-sentry
+    cm-chatsan-word-turret: cm-chatsan-replacement-sentry
     cm-chatsan-word-sentries: cm-chatsan-replacement-sentries
+    cm-chatsan-word-turrets: cm-chatsan-replacement-sentries
     cm-chatsan-word-shotgun: cm-chatsan-replacement-shotgun
     cm-chatsan-word-squad: cm-chatsan-replacement-squad
     cm-chatsan-word-squads: cm-chatsan-replacement-squads
@@ -159,4 +161,102 @@
     cm-chatsan-word-survivors: cm-chatsan-replacement-survivors
     cm-chatsan-word-surv: cm-chatsan-replacement-surv
     cm-chatsan-word-survs: cm-chatsan-replacement-survs
+    cm-chatsan-word-bro: cm-chatsan-replacement-bro
+    cm-chatsan-word-bruh: cm-chatsan-replacement-bruh
+    cm-chatsan-word-bvro: cm-chatsan-replacement-bvro
+    cm-chatsan-word-xro: cm-chatsan-replacement-xro
+    cm-chatsan-word-naur: cm-chatsan-replacement-naur
+    cm-chatsan-word-dancer: cm-chatsan-replacement-dancer
+    cm-chatsan-word-larba: cm-chatsan-replacement-larba
+    cm-chatsan-word-toob: cm-chatsan-replacement-toob
+    cm-chatsan-word-toober: cm-chatsan-replacement-toober
+    cm-chatsan-word-cooked: cm-chatsan-replacement-cooked
+    cm-chatsan-word-xooked: cm-chatsan-replacement-xooked
+    cm-chatsan-word-xibidi: cm-chatsan-replacement-xibidi
+    cm-chatsan-word-mcxonald: cm-chatsan-replacement-mcxonald
+    cm-chatsan-word-mcxonalds: cm-chatsan-replacement-mcxonalds
+    cm-chatsan-word-slop: cm-chatsan-replacement-slop
+    cm-chatsan-word-spam: cm-chatsan-replacement-spam
+    cm-chatsan-word-god: cm-chatsan-replacement-god
+    cm-chatsan-word-xod: cm-chatsan-replacement-xod
+    cm-chatsan-word-jesus: cm-chatsan-replacement-jesus
+    cm-chatsan-word-xesus: cm-chatsan-replacement-xesus
+    cm-chatsan-word-christ: cm-chatsan-replacement-christ
+    cm-chatsan-word-jesus-christ: cm-chatsan-replacement-christ
+    cm-chatsan-word-froot: cm-chatsan-replacement-froot
+    cm-chatsan-word-yung: cm-chatsan-replacement-yung
+    cm-chatsan-word-croosh: cm-chatsan-replacement-croosh
+    cm-chatsan-word-croosher: cm-chatsan-replacement-croosher
+    cm-chatsan-word-bald: cm-chatsan-replacement-bald
+    cm-chatsan-word-woyer: cm-chatsan-replacement-woyer
+    cm-chatsan-word-sigma: cm-chatsan-replacement-sigma
+    cm-chatsan-word-xigma: cm-chatsan-replacement-xigma
+    cm-chatsan-word-para: cm-chatsan-replacement-parasite
+    cm-chatsan-word-parasite: cm-chatsan-replacement-parasite
+    cm-chatsan-word-paras: cm-chatsan-replacement-parasites
+    cm-chatsan-word-parasites: cm-chatsan-replacement-parasites
+    cm-chatsan-word-baricade: cm-chatsan-replacement-baricades
+    cm-chatsan-word-cade: cm-chatsan-replacement-baricades
+    cm-chatsan-word-baricades: cm-chatsan-replacement-baricades
+    cm-chatsan-word-cades: cm-chatsan-replacement-baricades
+    cm-chatsan-word-barbed: cm-chatsan-replacement-barbed
+    cm-chatsan-word-barbs: cm-chatsan-replacement-barbed-wires
+    cm-chatsan-word-barbed-wire: cm-chatsan-replacement-barbed-wires
+    cm-chatsan-word-barbed-wires: cm-chatsan-replacement-barbed-wires
+    cm-chatsan-word-medal: cm-chatsan-replacement-medal
+    cm-chatsan-word-fob: cm-chatsan-replacement-fob
+    cm-chatsan-word-rifle: cm-chatsan-replacement-rifle
+    cm-chatsan-word-gun: cm-chatsan-replacement-rifle
+    cm-chatsan-word-rifles: cm-chatsan-replacement-rifles
+    cm-chatsan-word-guns: cm-chatsan-replacement-rifles
+    cm-chatsan-word-pistol: cm-chatsan-replacement-pistol
+    cm-chatsan-word-pistols: cm-chatsan-replacement-pistols
+    cm-chatsan-word-revolver: cm-chatsan-replacement-revolver
+    cm-chatsan-word-knife: cm-chatsan-replacement-knife
+    cm-chatsan-word-knives: cm-chatsan-replacement-knives
+    cm-chatsan-word-armor: cm-chatsan-replacement-armor
+    cm-chatsan-word-armorless: cm-chatsan-replacement-armorless
+    cm-chatsan-word-helmet: cm-chatsan-replacement-helmet
+    cm-chatsan-word-medkit: cm-chatsan-replacement-medkit
+    cm-chatsan-word-medkits: cm-chatsan-replacement-medkits
+    cm-chatsan-word-injector: cm-chatsan-replacement-injector
+    cm-chatsan-word-autoinjector: cm-chatsan-replacement-injector
+    cm-chatsan-word-injectors: cm-chatsan-replacement-injectors
+    cm-chatsan-word-autoinjectors: cm-chatsan-replacement-injectors
+    cm-chatsan-word-bandage: cm-chatsan-replacement-bandage
+    cm-chatsan-word-bandages: cm-chatsan-replacement-bandages
+    cm-chatsan-word-baton: cm-chatsan-replacement-baton
+    cm-chatsan-word-batons: cm-chatsan-replacement-batons
+    cm-chatsan-word-flashbang: cm-chatsan-replacement-flashbang
+    cm-chatsan-word-prisoner: cm-chatsan-replacement-prisoner
+    cm-chatsan-word-battery: cm-chatsan-replacement-battery
+    cm-chatsan-word-console: cm-chatsan-replacement-console
+    cm-chatsan-word-radio: cm-chatsan-replacement-console
+    cm-chatsan-word-computer: cm-chatsan-replacement-console
+    cm-chatsan-word-terminal: cm-chatsan-replacement-console
+    cm-chatsan-word-tablet: cm-chatsan-replacement-console
+    cm-chatsan-word-generator: cm-chatsan-replacement-generator
+    cm-chatsan-word-generators: cm-chatsan-replacement-generators
+    cm-chatsan-word-disk: cm-chatsan-replacement-disk
+    cm-chatsan-word-disc: cm-chatsan-replacement-disk
+    cm-chatsan-word-canteen: cm-chatsan-replacement-canteen
+    cm-chatsan-word-canteens: cm-chatsan-replacement-canteens
+    cm-chatsan-word-flashlight: cm-chatsan-replacement-flashlight
+    cm-chatsan-word-flashlights: cm-chatsan-replacement-flashlights
+    cm-chatsan-word-window: cm-chatsan-replacement-window
+    cm-chatsan-word-windows: cm-chatsan-replacement-windows
+    cm-chatsan-word-light-bulb: cm-chatsan-replacement-light-bulb
+    cm-chatsan-word-lightbulb: cm-chatsan-replacement-light-bulb
+    cm-chatsan-word-light-bulbs: cm-chatsan-replacement-light-bulbs
+    cm-chatsan-word-lightbulbs: cm-chatsan-replacement-light-bulbs
+    cm-chatsan-word-case: cm-chatsan-replacement-case
+    cm-chatsan-word-crate: cm-chatsan-replacement-case
+    cm-chatsan-word-cases: cm-chatsan-replacement-cases
+    cm-chatsan-word-crates: cm-chatsan-replacement-cases
+    cm-chatsan-word-gunshot: cm-chatsan-replacement-gunshot
+    cm-chatsan-word-gunshots: cm-chatsan-replacement-gunshots
+    cm-chatsan-word-paper: cm-chatsan-replacement-paper
+    cm-chatsan-word-folder: cm-chatsan-replacement-folder
+    cm-chatsan-word-papers: cm-chatsan-replacement-papers
+    cm-chatsan-word-folders: cm-chatsan-replacement-folders
 

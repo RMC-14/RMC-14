@@ -9,7 +9,15 @@
     group: CMJobsDropshipPilot
     time: 18000 # 5 hours
   ranks:
-    RMCRankSecondLT: []
+    RMCRankSecondLT:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotGunship
+      time: 252000 # 70 hours
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotGunship
+      time: 90000 # 25 hours
+    RMCRankWarrantOfficer: []
   startingGear: CMGearPilotGunship
   icon: "CMJobIconPilotGunship"
   joinNotifyCrew: false

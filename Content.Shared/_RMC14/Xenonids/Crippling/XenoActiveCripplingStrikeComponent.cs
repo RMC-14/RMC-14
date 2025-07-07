@@ -30,4 +30,10 @@ public sealed partial class XenoActiveCripplingStrikeComponent : Component
 
     [DataField, AutoNetworkedField]
     public float? Speed;
+
+    [DataField, AutoNetworkedField]
+    public bool RemoveOnHit;
+
+    [DataField, AutoNetworkedField]
+    public bool PreventTackle;
 }

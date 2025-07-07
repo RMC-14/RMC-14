@@ -206,11 +206,11 @@ namespace Content.Server.Pointing.EntitySystems
             string selfMessage;
             string viewerMessage;
             string? viewerPointedAtMessage = null;
-            var playerName = Identity.Entity(player, EntityManager);
+            var playerName = Identity.Name(player, EntityManager, player);
 
             if (Exists(pointed))
             {
-                var pointedName = Identity.Entity(pointed, EntityManager);
+                var pointedName = Identity.Name(pointed, EntityManager, player);
 
                 selfMessage = player == pointed
                     ? Loc.GetString("pointing-system-point-at-self")

@@ -1,15 +1,14 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
-using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Damage;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Slow;
-using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Aura;
-using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Crippling;
 
@@ -32,6 +31,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         SubscribeLocalEvent<XenoCripplingStrikeComponent, XenoCripplingStrikeActionEvent>(OnXenoCripplingStrikeAction);
 
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeHitEvent>(OnXenoCripplingStrikeHit);
+        SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeAttackAttemptEvent>(OnActiveCripplingStrikeMeleeAttempt);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, RefreshMovementSpeedModifiersEvent>(OnActiveCripplingRefreshSpeed);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, ComponentRemove>(OnActiveCripplingRemove);
 
@@ -43,7 +43,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -59,6 +59,8 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         active.DeactivateText = xeno.Comp.DeactivateText;
         active.ExpireText = xeno.Comp.ExpireText;
         active.Speed = xeno.Comp.Speed;
+        active.RemoveOnHit = xeno.Comp.RemoveOnHit;
+        active.PreventTackle = xeno.Comp.PreventTackle;
 
         Dirty(xeno, active);
 
@@ -91,7 +93,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
             Dirty(entity, victim);
 
-            _slow.TrySlowdown(entity, xeno.Comp.SlowDuration, ignoreDurationModifier: true);
+            _slow.TrySlowdown(entity, _xeno.TryApplyXenoDebuffMultiplier(entity, xeno.Comp.SlowDuration), ignoreDurationModifier: true);
 
             var message = Loc.GetString(xeno.Comp.HitText, ("target", entity));
 
@@ -101,6 +103,9 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             xeno.Comp.NextSlashBuffed = false;
             break;
         }
+
+        if (xeno.Comp.RemoveOnHit)
+            RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
     }
 
     private void OnActiveCripplingRefreshSpeed(Entity<XenoActiveCripplingStrikeComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -121,6 +126,20 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
     {
         args.Damage *= victim.Comp.DamageMult;
         RemCompDeferred<VictimCripplingStrikeDamageComponent>(victim);
+    }
+
+    private void OnActiveCripplingStrikeMeleeAttempt(Entity<XenoActiveCripplingStrikeComponent> ent, ref MeleeAttackAttemptEvent args)
+    {
+        if (!ent.Comp.PreventTackle)
+            return;
+
+        var netAttacker = GetNetEntity(ent);
+        switch (args.Attack)
+        {
+            case DisarmAttackEvent disarm:
+                args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
+                break;
+        }
     }
 
     public override void Update(float frameTime)

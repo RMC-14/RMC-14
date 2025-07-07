@@ -15,7 +15,7 @@
     RMCRankFirstLT:
     - !type:RoleTimeRequirement
       role: CMJobCMO
-      time: 36000 # 10 hours
+      time: 252000 # 70 hours
     RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearCMO

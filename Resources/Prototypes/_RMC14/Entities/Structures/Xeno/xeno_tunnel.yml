@@ -10,6 +10,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_tunnel.rsi
     state: hole
+    noRot: true
   - type: InteractionOutline
   - type: Clickable
   - type: RMCNightVisionVisible
@@ -24,6 +25,10 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: xenotunnel
+  - type: TacticalMapAlwaysVisible
+    visibleToXenos: true
+    visibleAsXenoStructure: true
+    visibleToMarines: false
   - type: UserInterface
     interfaces:
       enum.SelectDestinationTunnelUI.Key:
@@ -31,6 +36,7 @@
       enum.NameTunnelUI.Key:
         type: NameTunnelBui
   - type: DeletedByWeedKiller
+  - type: XenoFriendly
 
 - type: entity
   parent: XenoTunnel
