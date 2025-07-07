@@ -72,9 +72,6 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
-    private EntityQuery<RMCFireProjectileComponent> _fireProjectileQuery;
-
-    private EntityQuery<RMCFireProjectileImmuneComponent> _fireProjectileImmuneQuery;
     public override void Initialize()
     {
         _barricadeQuery = GetEntityQuery<BarricadeComponent>();
