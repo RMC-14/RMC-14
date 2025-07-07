@@ -79,7 +79,6 @@
     bypassTierCount: true
     unlockAt: 0
     hudOffset: -0.1,0
-  - type: RMCFireProjectileImmune
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
