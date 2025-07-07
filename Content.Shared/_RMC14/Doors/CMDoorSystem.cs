@@ -43,6 +43,8 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
 
         SubscribeLocalEvent<RMCPodDoorComponent, BeforePryEvent>(OnPodDoorBeforePry);
+
+        SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -121,9 +123,17 @@ public sealed class CMDoorSystem : EntitySystem
         if (_rmcPower.IsPowered(ent))
             args.Cancelled = true;
 
-        if (HasComp<XenoComponent>(args.User))
+        if (HasComp<XenoComponent>(args.User) && _net.IsServer)
         {
             _audioSystem.PlayPredicted(ent.Comp.XenoPodlockUseSound, ent.Owner, args.User);
+        }
+    }
+
+    private void OnPodDoorGetPryTimeModifier(Entity<RMCPodDoorComponent> ent, ref GetPryTimeModifierEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User))
+        {
+            args.PryTimeModifier *= ent.Comp.XenoPodlockPryMultiplier;
         }
     }
 

@@ -15,4 +15,10 @@ public sealed partial class RMCPodDoorComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier XenoPodlockUseSound = new SoundPathSpecifier("/Audio/Machines/airlock_creaking.ogg");
+
+    /// <summary>
+    /// The doafter time multiplier for when a xeno is prying a podlock
+    /// </summary>
+    [DataField]
+    public float XenoPodlockPryMultiplier = 4.0f;
 }
