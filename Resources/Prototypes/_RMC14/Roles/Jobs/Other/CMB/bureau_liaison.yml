@@ -20,6 +20,8 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-icb
+    - type: RMCGhostWarpGroupMember
+      group: RMCCMB
   hasIcon: false
   hidden: true
 

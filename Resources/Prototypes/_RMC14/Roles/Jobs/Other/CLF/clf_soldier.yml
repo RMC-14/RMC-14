@@ -26,6 +26,8 @@
         RMCSkillJtac: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-soldier
+    - type: RMCGhostWarpGroupMember
+      group: RMCCLF
   hidden: true
 
 - type: entity

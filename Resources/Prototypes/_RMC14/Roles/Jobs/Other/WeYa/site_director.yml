@@ -35,6 +35,8 @@
         RMCSkillExecution: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-director
+    - type: RMCGhostWarpGroupMember
+      group: RMCPMC
   hidden: true
 
 - type: entity

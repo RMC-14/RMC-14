@@ -37,6 +37,8 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-team-leader
+    - type: RMCGhostWarpGroupMember
+      group: RMCProvost
   hidden: true
 
 - type: entity

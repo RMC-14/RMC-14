@@ -41,6 +41,8 @@
     - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-marshal
+    - type: RMCGhostWarpGroupMember
+      group: RMCProvost
   hidden: true
 
 - type: randomHumanoidSettings

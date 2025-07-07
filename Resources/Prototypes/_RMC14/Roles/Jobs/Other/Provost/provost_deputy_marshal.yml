@@ -41,6 +41,8 @@
     - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-deputy-marshal
+    - type: RMCGhostWarpGroupMember
+      group: RMCProvost
   hidden: true
 
 - type: entity

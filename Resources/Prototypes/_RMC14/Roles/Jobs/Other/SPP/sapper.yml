@@ -29,6 +29,8 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-engineer
+    - type: RMCGhostWarpGroupMember
+      group: RMCSPP
   hidden: true
 
 - type: entity

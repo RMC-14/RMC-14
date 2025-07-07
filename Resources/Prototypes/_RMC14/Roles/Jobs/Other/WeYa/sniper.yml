@@ -35,6 +35,8 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-sniper
+    - type: RMCGhostWarpGroupMember
+      group: RMCPMC
   hidden: true
 
 - type: entity

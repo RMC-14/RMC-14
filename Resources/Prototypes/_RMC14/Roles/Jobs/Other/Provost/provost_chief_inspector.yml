@@ -24,6 +24,8 @@
         RMCSkillPolice: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-chief
+    - type: RMCGhostWarpGroupMember
+      group: RMCProvost
   hidden: true
 
 - type: entity

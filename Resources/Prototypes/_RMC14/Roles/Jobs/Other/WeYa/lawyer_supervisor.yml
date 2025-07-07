@@ -25,6 +25,8 @@
         RMCSkillFirearms: 0
         RMCSkillEndurance: 0
         RMCSkillVehicles: 1
+    - type: RMCGhostWarpGroupMember
+      group: RMCWeYa
 
 - type: playTimeTracker
   id: RMCJobWeYaLawyerSupervisor

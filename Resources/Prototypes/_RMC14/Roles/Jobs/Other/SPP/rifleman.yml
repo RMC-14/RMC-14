@@ -23,6 +23,8 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-rifleman
+    - type: RMCGhostWarpGroupMember
+      group: RMCSPP
   hidden: true
 
 - type: entity

@@ -30,6 +30,8 @@
         RMCSkillExecution: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-cell-commander
+    - type: RMCGhostWarpGroupMember
+      group: RMCCLF
   hidden: true
 
 - type: entity

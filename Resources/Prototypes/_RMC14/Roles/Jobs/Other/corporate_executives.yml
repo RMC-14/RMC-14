@@ -20,6 +20,8 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-corp-exec-supervisor
+    - type: RMCGhostWarpGroupMember
+      group: RMCWeYa
   hasIcon: false
   hidden: true
 
@@ -89,6 +91,8 @@
         RMCSkillFireman: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-corp-exec-specialist
+    - type: RMCGhostWarpGroupMember
+      group: RMCWeYa
   hasIcon: false
   hidden: true
 

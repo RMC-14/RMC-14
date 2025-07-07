@@ -38,6 +38,8 @@
     - type: RMCPointing
     - type: MarineOrders
     - type: RMCAllowSuitStorage
+    - type: RMCGhostWarpGroupMember
+      group: RMCCMB
   hidden: true
 
 - type: entity

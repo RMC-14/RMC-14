@@ -34,6 +34,8 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-deputy
     - type: RMCAllowSuitStorage
+    - type: RMCGhostWarpGroupMember
+      group: RMCCMB
   hidden: true
 
 - type: entity

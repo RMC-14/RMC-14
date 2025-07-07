@@ -42,6 +42,8 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-leader
+    - type: RMCGhostWarpGroupMember
+      group: RMCSPP
   hidden: true
 
 - type: entity

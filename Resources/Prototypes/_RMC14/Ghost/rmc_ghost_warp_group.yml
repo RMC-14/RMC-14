@@ -1,0 +1,48 @@
+- type: rmcGhostWarpGroup
+  id: RMCSurvivors
+  name: rmc-ghost-warp-group-survivors
+  color: "#4e9120"
+  isExpandedByDefault: true
+
+- type: rmcGhostWarpGroup
+  id: RMCWeYa
+  name: rmc-ghost-warp-group-we-ya
+  color: "#d6a920"
+  isExpandedByDefault: true
+  subgroups: [RMCPMC]
+
+- type: rmcGhostWarpGroup
+  id: RMCPMC
+  name: rmc-ghost-warp-group-pmc
+  color: "#d6a920"
+  isExpandedByDefault: true
+
+- type: rmcGhostWarpGroup
+  id: RMCSPP
+  name: rmc-ghost-warp-group-spp
+  color: "#c72418"
+  isExpandedByDefault: true
+
+- type: rmcGhostWarpGroup
+  id: RMCCLF
+  name: rmc-ghost-warp-group-clf
+  color: "#206e0d"
+  isExpandedByDefault: true
+
+- type: rmcGhostWarpGroup
+  id: RMCTSE
+  name: rmc-ghost-warp-group-tse
+  color: "#bf2441"
+  isExpandedByDefault: true
+
+- type: rmcGhostWarpGroup
+  id: RMCProvost
+  name: rmc-ghost-warp-group-provost
+  color: "#5c0616"
+  isExpandedByDefault: true
+
+- type: rmcGhostWarpGroup
+  id: RMCCMB
+  name: rmc-ghost-warp-group-cmb
+  color: "#2631ad"
+  isExpandedByDefault: true

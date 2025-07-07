@@ -42,6 +42,8 @@
       - Survivor
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: RMCGhostWarpGroupMember
+      group: RMCSurvivors
   greeting: rmc-job-greeting-survivor
   hasIcon: false
 

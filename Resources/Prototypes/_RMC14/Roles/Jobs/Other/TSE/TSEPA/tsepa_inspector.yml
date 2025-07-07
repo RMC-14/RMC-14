@@ -35,6 +35,8 @@
     - type: CommandAccent
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-inspector
+    - type: RMCGhostWarpGroupMember
+      group: RMCTSE
   hidden: true
 
 - type: startingGear
