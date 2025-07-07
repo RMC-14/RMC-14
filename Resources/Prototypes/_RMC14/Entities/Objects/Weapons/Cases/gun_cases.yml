@@ -140,9 +140,9 @@
       grid:
       - 0,0,5,1
       whitelist:
-      tags:
-      - RMCWeaponRevolverM44
-      - RMCSpeedLoaderM44
+       tags:
+       - RMCWeaponRevolverM44
+       - RMCSpeedLoaderM44
     - type: StorageFill
       contents:
       - id: RMCWeaponRevolverM44Custom
@@ -170,7 +170,7 @@
     - id: RMCAttachmentRailFlashlight
     - id: CMWeaponPistolM1984
     - id: CMMagazinePistolM1984
-      amount:
+      amount: 6
 
 # Custom M1984 service pistol
 - type: entity
@@ -193,8 +193,8 @@
      - 0,0,5,1
      whitelist:
       tags:
-      - CMWeaponPistolM1984
-      - CMMagazinePistolM1984
+       - CMWeaponPistolM1984
+       - CMMagazinePistolM1984
    - type: StorageFill
      contents:
      - id: CMWeaponPistolM1984Custom
