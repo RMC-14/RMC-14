@@ -433,10 +433,6 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void DoDamage(Entity<DamageOverTimeComponent> damageEnt, EntityUid target, DamageSpecifier damage, bool ignoreResistances = false, bool acidic = false)
     {
-        //if (_fireProjectileImmuneQuery.HasComp(target)){ //&& _fireProjectileQuery.HasComp(damageEnt)){
-        //    _damageable.TryChangeDamage(target, damage * 0, ignoreResistances);
-        //    return;
-        //} //fireprojectile and target fireprojectile immune below line damage * 0 ...
         var damageBase = damage;
 
         if (acidic)
