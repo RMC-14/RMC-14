@@ -222,18 +222,21 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             options.Add(new DialogOption(Name(uid), new MarineControlComputerMedalMarineEvent(netActor, GetNetEntity(uid))));
         }
 
-        // Add gibbed marines
-        if (TryComp<MarineControlComputerComponent>(computer, out var comp))
+        // Add gibbed marines regardless of the entity itself, will always be added
+        var allGibbed = new Dictionary<string, GibbedMarineInfo>();
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var _, out var comp))  // all components must be synchronized with each other, but this is just in case
         {
             foreach (var (playerId, info) in comp.GibbedMarines)
             {
                 if (info.LastPlayerId == null)
-                {
                     continue;
-                }
-
-                options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, playerId)));
+                allGibbed[playerId] = info;
             }
+        }
+        foreach (var (playerId, info) in allGibbed)
+        {
+            options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, playerId)));
         }
 
         _dialog.OpenOptions(computer, actor, Loc.GetString("rmc-medal-recipient"), options, Loc.GetString("rmc-medal-recipient-prompt"));
