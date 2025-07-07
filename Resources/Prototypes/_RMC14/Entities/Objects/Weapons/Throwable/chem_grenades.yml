@@ -193,7 +193,6 @@
   - type: Sprite
     sprite: _RMC14/Effects/transparent_smoke.rsi
     state: smoke2
-    color: "#ffffff5e"
   - type: TimedDespawn
     lifetime: 10
   - type: DeleteOnExplosion
