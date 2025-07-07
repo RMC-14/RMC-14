@@ -226,7 +226,7 @@
     labelTextLocId: rmc-kelotane-container-label-text
 
 - type: entity
-  parent: CMPillCanister
+  parent: RMCPillCanisterKelotaneNoSkill
   id: CMPillCanisterKelotane
   suffix: Kelotane, 16
   components:
