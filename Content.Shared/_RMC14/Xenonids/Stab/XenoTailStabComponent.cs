@@ -15,7 +15,7 @@ public sealed partial class XenoTailStabComponent : Component
     public EntProtoId TailAnimationId = "WeaponArcThrust";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId HitAnimationId = "RMCEffectExtraSlash";
+    public EntProtoId HitAnimationId = "RMCEffectTailHit";
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 TailRange = 2;
