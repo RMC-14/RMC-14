@@ -297,6 +297,12 @@ public sealed partial class DoorComponent : Component
 
     [DataField(customTypeSerializer: typeof(ConstantSerializer<DrawDepthTag>))]
     public int ClosedDrawDepth = (int) DrawDepth.DrawDepth.Doors;
+
+    /// <summary>
+    /// What sound to play when a xeno is prying the door (RMC14)
+    /// </summary>
+    [DataField]
+    public SoundSpecifier XenoPrySound = new SoundPathSpecifier("/Audio/Machines/airlock_creaking.ogg");
 }
 
 [Serializable, NetSerializable]
@@ -327,4 +333,12 @@ public enum DoorVisualLayers : byte
     BaseUnlit,
     BaseBolted,
     BaseEmergencyAccess,
+}
+
+[ByRefEvent] /// RMC14
+public record struct DoorPryEvent(EntityUid User)
+{
+    public readonly EntityUid User = User;
+
+    public bool Cancelled;
 }
