@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added two cursed plushies .. oh no.
-    type: Add
-  id: 1461
-  time: '2025-03-15T07:31:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5873
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added snow, jungle, desert and black variants of underwear
-    type: Add
-  id: 1462
-  time: '2025-03-15T07:33:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4221
-- author: Tyzemol
-  changes:
-  - message: Runners should no longer see entities pop into existence when going too
-      fast
-    type: Fix
-  id: 1463
-  time: '2025-03-15T10:55:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5893
 - author: DrSmugleaf
   changes:
   - message: Added mess technician role, the cook of the ship. This includes the fridges
@@ -5085,5 +5063,27 @@
   id: 1961
   time: '2025-07-06T07:33:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6909
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fix some xeno castes not being able to add plasma to hive structures
+    type: Fix
+  id: 1962
+  time: '2025-07-07T00:19:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6944
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed hive clusters and hive pylons taking too long to repair. They now
+      take 4 seconds to repair, and only start reweeding after 15 seconds has passed.
+    type: Fix
+  id: 1963
+  time: '2025-07-07T00:18:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6943
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed baton slugs permanently blinding xenos sometimes
+    type: Fix
+  id: 1964
+  time: '2025-07-07T00:17:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6942
 Name: RMC14
 Order: -1
