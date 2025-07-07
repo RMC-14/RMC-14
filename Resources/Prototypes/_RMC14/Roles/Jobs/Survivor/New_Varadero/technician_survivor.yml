@@ -57,3 +57,4 @@
   parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetTechnician
   name: technician colonist preset
+  categories: [ HideSpawnMenu ]

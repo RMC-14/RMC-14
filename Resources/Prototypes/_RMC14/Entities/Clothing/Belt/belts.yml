@@ -765,6 +765,17 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolSPPT73
+  suffix: Filled, Type 73
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolT73
+      amount: 5
+    - id: RMCWeaponPistolT73
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterRevolver
   name: M276 pattern general revolver holster rig
