@@ -103,15 +103,17 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (ent.Comp.Status != OrbitalCannonStatus.Unloaded)
+            return;
+
         if (_container.TryGetContainer(ent, ent.Comp.FuelContainer, out var fuel) &&
             fuel.ContainedEntities.Count > 0)
         {
             args.ToGrab = fuel.ContainedEntities[^1];
             args.Handled = true;
         }
-
-        if (_container.TryGetContainer(ent, ent.Comp.WarheadContainer, out var warhead) &&
-            warhead.ContainedEntities.Count > 0)
+        else if (_container.TryGetContainer(ent, ent.Comp.WarheadContainer, out var warhead) &&
+                 warhead.ContainedEntities.Count > 0)
         {
             args.ToGrab = warhead.ContainedEntities[^1];
             args.Handled = true;
