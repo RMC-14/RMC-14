@@ -16,7 +16,6 @@
     - RMCGuideRoleRavager
   - type: GhostRole
     name: cm-job-name-xeno-ravager
-  - type: RMCFireProjectileImmune
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
   - type: MobState
