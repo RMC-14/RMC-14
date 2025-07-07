@@ -266,7 +266,7 @@ public sealed class SmokeSystem : EntitySystem
         {
             var noBloodStreamSolution = solution.Clone();
             var amount = FixedPoint2.Min(noBloodStreamSolution.Volume, component.TransferRate);
-            var finalSolution = cloneSolution.SplitSolution(amount);
+            var finalSolution = noBloodStreamSolution.SplitSolution(amount);
 
             foreach (var reagentQuantity in finalSolution.Contents.ToArray())
             {
