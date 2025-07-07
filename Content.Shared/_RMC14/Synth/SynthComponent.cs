@@ -2,6 +2,7 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -51,6 +52,9 @@ public sealed partial class SynthComponent : Component
     [DataField, AutoNetworkedField]
     public LocId Generation = "rmc-species-synth-generation-third";
 
+    [DataField, AutoNetworkedField]
+    public LocId FixedIdentityReplacement = "cm-chatsan-replacement-synth";
+
     /// <summary>
     /// New brain organ to add when the synth is created.
     /// </summary>
@@ -68,6 +72,9 @@ public sealed partial class SynthComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan SelfRepairTime = TimeSpan.FromSeconds(30);
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 CritThreshold = FixedPoint2.New(200);
 
     /// <summary>
     /// The tool quality needed to repair the synth brute damage.

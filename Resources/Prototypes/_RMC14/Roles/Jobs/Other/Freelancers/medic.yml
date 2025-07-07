@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: Freelancer Medic
   special:
   - !type:AddComponentSpecial
     components:
@@ -66,6 +67,10 @@
     job: CMFreelancerMedic
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadFreelancer
 
@@ -81,6 +86,10 @@
     job: CMFreelancerMedic
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadFreelancer
 

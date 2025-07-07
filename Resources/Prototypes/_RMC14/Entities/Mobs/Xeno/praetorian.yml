@@ -33,7 +33,7 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidNormal
-    - ActionXenoSpit
+    - ActionXenoSpitPraetorian
     - ActionXenoDash
     - ActionXenoAcidBall
     - ActionXenoSprayAcidPraetorian
@@ -65,8 +65,6 @@
         Brute: 48
   - type: Tackle
     chance: 0.45
-    stunMin: 2
-    stunMax: 5
   - type: Fixtures
     fixtures:
       fix1:
@@ -96,7 +94,6 @@
     barricadeDamage:
       types:
         Heat: 5
-    doAfter: 0.5
     range: 7
   - type: TacticalMapIcon
     icon:
@@ -118,6 +115,8 @@
         - XenoHeavy
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
+  - type: FixedIdentity
+    name: cm-job-name-xeno-praetorian
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -132,7 +131,6 @@
         Heat: 5
     acid: XenoAcidSprayAcidStacks
     plasmaCost: 80
-    doAfter: 0.5
   - type: XenoLeap
     plasmaCost: 40
     delay: 0
@@ -217,7 +215,6 @@
     - type: RMCSlowdown
     - type: RMCSuperSlowdown
     - type: RMCRooted
-    - type: RMCDazed
   - type: XenoHighGallop
   - type: XenoHidden
 

@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Leader
   special:
   - !type:AddComponentSpecial
     components:
@@ -55,6 +56,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCLeader
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCLeader
+  name: weya pmc squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCLeader
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCLeader
@@ -67,6 +79,10 @@
     job: RMCPMCLeader
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 

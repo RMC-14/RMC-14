@@ -12,6 +12,7 @@
   accessGroups:
   - Colonist
   - CombatTech
+  spawnMenuRoleName: SPP Sapper
   special:
   - !type:AddComponentSpecial
     components:
@@ -65,6 +66,10 @@
     job: RMCSPPEngineer
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 

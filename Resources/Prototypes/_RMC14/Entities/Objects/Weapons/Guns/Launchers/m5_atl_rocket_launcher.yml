@@ -205,11 +205,8 @@
     intensitySlope: 5
     totalIntensity: 35
     maxTileBreak: 0
-  - type: StunOnCollide
-    # This only works for AP rockets because it's supposed to have a hardcoded 6 second stun.
-    # Almost every other stun in the future should use some kind of configurable and resistable system instead.
-    stunAmount: 6
-    knockdownAmount: 6
+  - type: RMCKnockOutOnCollide # Hardcoded 6 second stun, different from explosions.
+    paralyzeTime: 6
   - type: IgnorePredictionHide
   - type: RMCProjectileAccuracy
     accuracy: 125

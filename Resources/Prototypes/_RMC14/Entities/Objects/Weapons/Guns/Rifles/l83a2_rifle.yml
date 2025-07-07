@@ -60,6 +60,7 @@
         whitelist:
           tags:
           - RMCMagazineRifleL83A2
+          - RMCMagazineRifleL83A2AP
   - type: GunDamageModifier
     multiplier: 1.3
   - type: AttachableHolder
@@ -176,6 +177,7 @@
   - type: Tag
     tags:
     - CMMagazineRifle
+    - RMCMagazineRifleL83A2
     - RMCMagazineRifleL83A2AP
   - type: BallisticAmmoProvider
     whitelist:
@@ -209,6 +211,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: BulletRifle556x45mmAP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

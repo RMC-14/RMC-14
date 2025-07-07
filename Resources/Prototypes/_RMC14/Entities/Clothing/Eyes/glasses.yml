@@ -182,6 +182,85 @@
     popup: rmc-skills-hud-toggle
 
 - type: entity
+  parent: [ClothingEyesHudMedical, BaseToggleClothing]
+  id: RMCGlassesHUDSecurity
+  name: PatrolMate HUD
+  description: A heads-up display that scans the humans in view and provides accurate data about their ID status and security records.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/securityhud.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/securityhud.rsi
+  - type: ItemToggle
+    activated: true
+    soundActivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+    soundDeactivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+  - type: ToggleClothing
+    action: RMCActionToggleSechud
+  # - type: ComponentToggler TODO RMC14 - SECHUD functionaility
+  - type: RMCItemToggleClothingVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: Appearance
+  # - type: ItemToggleRequiresSkill
+  # - type: ItemToggleDeactivateUnskilled
+
+- type: entity
+  parent: [ClothingEyesBase, BaseToggleClothing]
+  id: RMCGlassesReagentHUDGlasses
+  name: reagent scanner HUD goggles
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/reagenthud.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/reagenthud.rsi
+  - type: ItemToggle
+    activated: true
+    soundActivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+    soundDeactivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+  - type: ToggleClothing
+    action: RMCActionToggleMedhud
+  - type: ComponentToggler
+    components:
+    - type: SolutionScanner
+  - type: RMCItemToggleClothingVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: Appearance
+  - type: ItemToggleRequiresSkill
+    skills:
+      RMCSkillMedical: 1
+  - type: ItemToggleDeactivateUnskilled
+    skills:
+      RMCSkillMedical: 1
+    popup: rmc-skills-hud-toggle
+
+- type: entity
   parent: ClothingEyesBase
   id: RMCGlassesMarineRpg # TODO make this actually prescription
   name: marine RPG glasses
@@ -550,9 +629,19 @@
     - EYES
 
 - type: entity
+  parent: RMCHipsterGlasses
+  id: RMCHippieGlasses
+  name: rounded prescription glasses
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hippie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hippie.rsi
+
+- type: entity
   parent: ClothingEyesBase
   id: RMCWeldingGoggles
-  name: welding goggles
+  name: welding goggles # TODO RMC14 impairs vision when on
   description: Protects the eyes from welders, approved by the mad scientist association.
   components:
   - type: Sprite
@@ -591,6 +680,17 @@
   id: RMCWeldingGoggle
 
 - type: entity
+  parent: RMCWeldingGoggles
+  id: RMCWeldingGogglesSuperior # TODO RMC14 less vision impairment then regular goggles
+  name: superior welding goggles
+  description: Welding goggles made from more expensive materials, strangely smells like potatoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles_superior.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles_superior.rsi
+
+- type: entity
   parent: ClothingEyesBase
   id: RMCGogglesKutjevo
   name: kutjevo goggles
@@ -602,6 +702,22 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/kutjevo_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/kutjevo_goggles.rsi
+    slots:
+    - MASK
+    - EYES
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGlassesJensen
+  name: augmented shades
+  description: Polarized bioneural eyewear, designed to augment your vision. Why don't you try getting a job?
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/jensen_shades.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/jensen_shades.rsi
     slots:
     - MASK
     - EYES
