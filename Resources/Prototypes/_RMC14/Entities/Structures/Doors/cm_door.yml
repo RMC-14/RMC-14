@@ -164,6 +164,7 @@
     percentageDamage: 0.25
   - type: XenoCrusherChargable
     instantDestroy: true
+  - type: RMCDoor
 
 - type: entity
   abstract: true

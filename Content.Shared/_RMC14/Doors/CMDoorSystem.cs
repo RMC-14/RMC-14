@@ -46,7 +46,7 @@ public sealed class CMDoorSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPodDoorComponent, GetPryTimeModifierEvent>(OnPodDoorGetPryTimeModifier);
 
-        SubscribeLocalEvent<DoorComponent, DoorPryEvent>(OnDoorPry);
+        SubscribeLocalEvent<RMCDoorComponent, RMCDoorPryEvent>(OnDoorPry);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -127,7 +127,7 @@ public sealed class CMDoorSystem : EntitySystem
 
     }
 
-    private void OnDoorPry(Entity<RMCDoorComponent> ent, ref DoorPryEvent args)
+    private void OnDoorPry(Entity<RMCDoorComponent> ent, ref RMCDoorPryEvent args)
     {
         if (args.Cancelled)
         {

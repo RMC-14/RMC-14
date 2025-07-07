@@ -171,7 +171,7 @@ public sealed class PryingSystem : EntitySystem
             _adminLog.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user)} is prying {ToPrettyString(target)}");
         }
 
-        var doorpry = new DoorPryEvent(user); // RMC14
+        var doorpry = new RMCDoorPryEvent(user); // RMC14
         RaiseLocalEvent(target, ref doorpry); // RMC14
 
         return _doAfterSystem.TryStartDoAfter(doAfterArgs, out id);

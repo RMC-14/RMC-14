@@ -26,7 +26,7 @@ public sealed partial class RMCDoorComponent : Component
 }
 
 [ByRefEvent]
-public record struct DoorPryEvent(EntityUid User)
+public record struct RMCDoorPryEvent(EntityUid User)
 {
     public readonly EntityUid User = User;
 
