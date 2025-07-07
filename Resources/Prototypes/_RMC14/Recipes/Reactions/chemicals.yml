@@ -67,11 +67,11 @@
   impact: High
   reactants:
     RMCPhosphorus:
-      amount: 1
+      amount: 0.5
     RMCPotassium:
-      amount: 1
+      amount: 0.5
     RMCSugar:
-      amount: 1
+      amount: 0.5
   effects:
     - !type:AreaReactionEffect
       duration: 10
