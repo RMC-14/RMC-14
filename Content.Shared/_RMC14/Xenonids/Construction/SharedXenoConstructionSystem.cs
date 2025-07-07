@@ -760,13 +760,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var (ent, comp) = weedsStructure;
 
         var spreaderComp = EnsureComp<XenoWeedsSpreadingComponent>(ent);
-        spreaderComp.SpreadAt = _timing.CurTime;
+        var spreadTime = _timing.CurTime + spreaderComp.RepairedSpreadDelay;
+
+        spreaderComp.SpreadAt = spreadTime;
         Dirty(ent, spreaderComp);
 
         foreach (var weed in comp.Spread)
         {
             spreaderComp = EnsureComp<XenoWeedsSpreadingComponent>(weed);
-            spreaderComp.SpreadAt = _timing.CurTime;
+            spreaderComp.SpreadAt = spreadTime;
             Dirty(weed, spreaderComp);
         }
     }
