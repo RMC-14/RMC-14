@@ -38,7 +38,7 @@
     id: HiveClusterXeno
   - type: RepairableXenoStructure
     plasmaCost: 300
-    repairLength: 15
+    repairLength: 4
   - type: XenoStructureMapTracked
   - type: TacticalMapTracked
   - type: TacticalMapIcon

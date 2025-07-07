@@ -47,6 +47,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Sorokyne Strata" Text="Planet map, ported by Tunguso4ka and Noctyrn" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Charger Crusher strain" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Berserker Ravager strain" />
@@ -105,7 +106,6 @@
                 <BoxContainer Name="ThirdVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Future versions" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More lobby art and music" Text="We are always looking for people to contribute more lobby art and music!" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Sorokyne Strata planet map" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Clone damage and cryo cells" Text="Clone damage is rarely caused by some chemicals, cryo cells treats this kind of damage." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Autodoc and body scanners" Text="Automatically but very inefficiently treats marines in the medbay." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Vehicles, the tank and the ARC" Text="Driveable vehicles such as the colony van, which can be repaired. The tank unlocks at 200 players for the marines." />
