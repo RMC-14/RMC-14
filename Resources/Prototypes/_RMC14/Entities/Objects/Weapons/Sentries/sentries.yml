@@ -494,7 +494,7 @@
       state: plasma_uac_flamer_handheld
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    state: Plasma uac_flamer_handheld
+    state: plasma_uac_flamer_handheld
   - type: Appearance
   - type: GenericVisualizer
     visuals:
