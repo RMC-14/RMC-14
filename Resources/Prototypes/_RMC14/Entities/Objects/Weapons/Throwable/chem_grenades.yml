@@ -1,0 +1,111 @@
+- type: entity
+  parent: [GrenadeBase, ModularGrenade]
+  id: RMCCustomGrenade
+  name: custom grenade
+  description: A custom chemical grenade with an M40 casing. This one is made to fit into underslung grenade launchers, but can also be thrown by hand.
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/custom_grenade.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: IgnorePredictionHide
+  - type: Clothing
+    slots:
+    - suitStorage
+  - type: Destructible
+    thresholds: []
+  - type: ChangeItemSizeOnTimerTrigger
+  - type: CancelUseWithCloak
+  - type: CMVocalizeTrigger
+  - type: Ammo # TODO being able to lock the grenade
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          start: { state: unfinished }
+          caseWithTrigger: { state: no-payload }
+          caseWithPayload: { state: no-trigger }
+          grenade: { state: icon }
+      enum.Trigger.TriggerVisuals.VisualState:
+        enum.ConstructionVisuals.Layer:
+          Primed: { state: primed }
+          # Unprimed: <Use state determined by enum.ConstructionVisuals.Layer>
+  - type: Construction
+    graph: RMCCustomGrenadeGraph
+    node: start
+
+- type: entity
+  parent: RMCCustomGrenade
+  id: RMCGrenadeCustomMetalFoam
+  name: metal-foam grenade
+  description: Used for emergency sealing of air breaches.
+  components:
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeMetalFoam
+  - type: ContainerFill
+    containers:
+      payload:
+      - RMCChemicalPayloadMetalFoam
+      payloadTrigger:
+      - TimerTrigger
+  - type: Construction
+    graph: RMCCustomGrenadeGraph
+    node: grenade
+
+- type: entity
+  parent: ChemicalPayload
+  id: RMCChemicalPayloadMetalFoam
+  name: metal foam payload
+  description: A chemical payload. Has space to store two beakers.
+  components:
+  - type: ChemicalPayload
+    beakerSlotA: &slotDef
+      whitelist:
+        components:
+        - FitsInDispenser
+      swap: false
+      startingItem: RMCBeakerMetalFoamAluminum
+    beakerSlotB: &slotDef
+      startingItem: RMCBeakerMetalFoamingAgent
+  - type: ContainerContainer
+    containers:
+      BeakerSlotA: !type:ContainerSlot
+      BeakerSlotB: !type:ContainerSlot
+  - type: StaticPrice
+    price: 60
+
+- type: entity
+  parent: CMBeaker
+  id: RMCBeakerMetalFoamAluminum
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        reagents:
+          - ReagentId: RMCAluminum
+            Quantity: 30
+
+- type: entity
+  parent: CMBeaker
+  id: RMCBeakerMetalFoamingAgent
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        reagents:
+          - ReagentId: FoamingAgent
+            Quantity: 10
+          - ReagentId: PolytrinicAcid
+            Quantity: 10
+
+- type: Tag
+  id: RMCGrenadeMetalFoam
