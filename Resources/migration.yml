@@ -1199,3 +1199,6 @@ ClosetL3Virology: CMClosetBioVirology
 ClosetL3Security: CMClosetBioSecurity
 ClosetL3Janitor: CMClosetBioJanitor
 ClosetL3Science: CMClosetBioScientist
+
+# 2025-07-06
+RMCWindowCorsatResearchHull: RMCWindowCorsatHullResearch
