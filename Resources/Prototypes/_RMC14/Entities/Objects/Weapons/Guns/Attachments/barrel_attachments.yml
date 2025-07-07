@@ -112,7 +112,7 @@
 - type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentShotgunChoke # choke
-  name: Shotgun Choke
+  name: shotgun choke
   description: "A threaded choke that can be inserted into the M42A2 Shotgun.
     Improves accuracy, velocity, tightens spread, and increases the cyclic rate of most shotguns.
     In exchange, projectile damage and force is reduced. Also increases recoil. Not recommended for slugs."
@@ -127,7 +127,7 @@
   - type: GrantProjectileStunRemove
   - type: AttachableWeaponRangedMods
     modifiers:
-    - fireDelayFlat: -0.5
+    - fireDelayFlat: -1
     - scatterFlat: -5
     - accuracyAddMult: 0.25
       damageFalloffAddMult: -0.3

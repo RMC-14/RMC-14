@@ -190,7 +190,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
                 continue;
 
-            args.Args.Spread += modSet.ScatterFlat;
+            args.Args.Spread += Angle.FromDegrees(modSet.ScatterFlat);
         }
     }
 }
