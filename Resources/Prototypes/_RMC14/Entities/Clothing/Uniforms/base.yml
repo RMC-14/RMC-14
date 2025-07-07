@@ -57,6 +57,7 @@
     - name: rmc-jacket-verb
       prefix: jacket
       priority: 0
+      hideAccessories: true
     - name: rmc-sleeves-verb
       prefix: sleeves
       priority: 1
