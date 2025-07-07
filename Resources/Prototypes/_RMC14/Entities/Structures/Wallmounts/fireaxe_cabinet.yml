@@ -3,6 +3,9 @@
   parent: FireAxeCabinet
   id: RMCFireAxeCabinet
   suffix: RMC
+  components:
+  - type: AccessReader
+    access: []
 
 - type: entity
   parent: RMCFireAxeCabinet
