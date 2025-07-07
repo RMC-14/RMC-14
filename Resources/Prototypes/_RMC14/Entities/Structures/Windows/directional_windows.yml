@@ -113,6 +113,22 @@
     state: twindow
 
 - type: entity
+  id: RMCWindowTintedDirectionalBlue
+  parent: CMWindowTintedDirectional
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#969696"
+
+- type: entity
+  id: RMCWindowDirectionalBlue
+  parent: CMWindowDirectional
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#969696"
+
+- type: entity
   id: CMWindowUltraDirectional
   parent: CMWindowDirectional
   name: ultra-reinforced window
