@@ -1,5 +1,5 @@
 - type: entity
-  parent: [GrenadeBase, ModularGrenade]
+  parent: ModularGrenade
   id: RMCCustomGrenade
   name: custom grenade
   description: A custom chemical grenade with an M40 casing. This one is made to fit into underslung grenade launchers, but can also be thrown by hand.
@@ -24,8 +24,8 @@
       enum.ConstructionVisuals.Key:
         enum.ConstructionVisuals.Layer:
           start: { state: unfinished }
-          caseWithTrigger: { state: no-payload }
-          caseWithPayload: { state: no-trigger }
+          caseWithTrigger: { state: unfinished }
+          caseWithPayload: { state: unfinished }
           grenade: { state: icon }
       enum.Trigger.TriggerVisuals.VisualState:
         enum.ConstructionVisuals.Layer:
@@ -34,12 +34,17 @@
   - type: Construction
     graph: RMCCustomGrenadeGraph
     node: start
+  - type: ContainerContainer
+    containers:
+      payload: !type:Container
+      payloadTrigger: !type:Container
 
 - type: entity
   parent: RMCCustomGrenade
   id: RMCGrenadeCustomMetalFoam
   name: metal-foam grenade
   description: Used for emergency sealing of air breaches.
+  suffix: Full
   components:
   - type: Tag
     tags:
@@ -63,19 +68,16 @@
   name: metal foam payload
   description: A chemical payload. Has space to store two beakers.
   components:
-  - type: ChemicalPayload
-    beakerSlotA: &slotDef
-      whitelist:
-        components:
-        - FitsInDispenser
-      swap: false
-      startingItem: RMCBeakerMetalFoamAluminum
-    beakerSlotB: &slotDef
-      startingItem: RMCBeakerMetalFoamingAgent
   - type: ContainerContainer
     containers:
       BeakerSlotA: !type:ContainerSlot
       BeakerSlotB: !type:ContainerSlot
+  - type: ContainerFill
+    containers:
+      BeakerSlotA:
+      - RMCBeakerMetalFoamAluminum
+      BeakerSlotB:
+      - RMCBeakerMetalFoamingAgent
 
 - type: entity
   parent: CMBeaker

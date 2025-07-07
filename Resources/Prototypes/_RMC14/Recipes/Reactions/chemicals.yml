@@ -31,11 +31,11 @@
   priority: 10
   reactants:
     RMCAluminum:
-      amount: 3
+      amount: 0.6
     FoamingAgent:
-      amount: 1
+      amount: 0.2
     PolytrinicAcid:
-      amount: 1
+      amount: 0.2
   effects:
     - !type:AreaReactionEffect
       duration: 10
@@ -49,11 +49,11 @@
   priority: 10
   reactants:
     RMCIron:
-      amount: 3
+      amount: 0.6
     FoamingAgent:
-      amount: 1
+      amount: 0.2
     PolytrinicAcid:
-      amount: 1
+      amount: 0.2
   effects:
     - !type:AreaReactionEffect
       duration: 10

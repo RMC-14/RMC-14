@@ -1209,3 +1209,4 @@ RMCWindowCorsatResearchHull: RMCWindowCorsatHullResearch
 # 2025-07-07
 FoamedIronMetal: RMCFoamedIronMetal
 FoamedAluminiumMetal: RMCFoamedAluminiumMetal
+TimerTrigger: RMCTimerTrigger

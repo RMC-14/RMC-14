@@ -58,6 +58,9 @@
   id: RMCMetalFoamWall
   coefficients:
     Brute: 2 # Takes twice as much brute damage
+    Blunt: 2
+    Slash: 2
+    Piercing: 2
     # Shock: 50 TODO fire should deal 50 times the normal damage
     # Cold: 50
     # Heat: 50
