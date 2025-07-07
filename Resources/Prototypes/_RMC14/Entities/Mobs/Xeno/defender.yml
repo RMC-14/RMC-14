@@ -68,6 +68,12 @@
     tailDamage:
       groups:
         Brute: 36
+    soundHit:
+        collection: Punch
+        params:
+          variation: 0.15
+    hitAnimationId: RMCEffectSlam
+
   - type: Tackle
     max: 4
   - type: Fixtures
