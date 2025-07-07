@@ -3,10 +3,12 @@
   id: RMCCustomGrenade
   name: custom grenade
   description: A custom chemical grenade with an M40 casing. This one is made to fit into underslung grenade launchers, but can also be thrown by hand.
-  suffix: Empty
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/custom_grenade.rsi
+    layers:
+    - state: unfinished
+      map: [ "enum.ConstructionVisuals.Layer" ]
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: IgnorePredictionHide
@@ -39,6 +41,7 @@
       payload: !type:Container
       payloadTrigger: !type:Container
 
+# Metal Foam Grenade
 - type: entity
   parent: RMCCustomGrenade
   id: RMCGrenadeCustomMetalFoam
@@ -57,7 +60,7 @@
       payload:
       - RMCChemicalPayloadMetalFoam
       payloadTrigger:
-      - TimerTrigger
+      - RMCTimerTrigger
   - type: Construction
     graph: RMCCustomGrenadeGraph
     node: grenade

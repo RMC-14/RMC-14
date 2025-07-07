@@ -14,7 +14,7 @@
       delayOptions: [3, 5, 10]
       initialBeepDelay: 0
       beepSound:
-        path: /Audio/_RMC14/Explosion/armbomb.ogg"
+        path: /Audio/_RMC14/Explosion/armbomb.ogg
         params:
           volume: -5
       doPopup: false
