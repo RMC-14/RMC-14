@@ -475,7 +475,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
         Dirty(cannon, firing);
 
         _popup.PopupCursor("Orbital bombardment launched!", user);
-        
+
         var logMessage = $"{ToPrettyString(user)} launched orbital bombardment at {fireCoordinates} for squad {ToPrettyString(squad)}, misfuel: {misfuel}, final coords: {adjustedCoords}";
         _adminLog.Add(LogType.RMCOrbitalBombardment, $"{logMessage}");
 
