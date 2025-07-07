@@ -255,6 +255,8 @@
         - ReagentId: RMCNapalmUT
           Quantity: 40
   - type: RMCFlamerAmmoProvider
+    maxIntensity: 10
+    maxDuration: 10
   - type: RMCFlamerTank
   - type: AttachableToggleable
     userOnly: true

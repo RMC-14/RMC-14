@@ -47,7 +47,7 @@
   equipment:
     jumpsuit: RMCScrubsLightBlue
     neck: RMCNurseArmband
-    shoes: ClothingShoesColorWhite
+    shoes: RMCShoesWhite
     id: CMIDCardNurse
 
 - type: startingGear

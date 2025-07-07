@@ -11,6 +11,9 @@ public sealed partial class XenoWeedsSpreadingComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan SpreadDelay = TimeSpan.FromSeconds(3);
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan RepairedSpreadDelay = TimeSpan.FromSeconds(15);
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan SpreadAt;
 }
