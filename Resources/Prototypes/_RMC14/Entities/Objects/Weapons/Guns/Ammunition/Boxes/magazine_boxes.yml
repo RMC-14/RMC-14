@@ -660,7 +660,7 @@
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleAK4047
+    node: RMCBoxMagazineRifleAK4047Empty
   - type: Sprite
     layers:
     - state: rifle_box
