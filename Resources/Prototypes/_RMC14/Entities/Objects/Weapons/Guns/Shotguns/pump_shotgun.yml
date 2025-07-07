@@ -14,8 +14,8 @@
   - type: Gun
     shotsPerBurst: 1
   - type: ShootUseDelay
-  - type: RMCSelectiveFire
   - type: ProjectileStunRemove
+  - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     recoilWielded: 2
