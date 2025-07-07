@@ -8,6 +8,10 @@ using Content.Shared._RMC14.Requisitions.Components;
 using Robust.Shared.Map;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Maths;
+using Content.Server.Fax;
+using Content.Shared.Fax.Components;
+using Content.Shared.Paper;
+using Robust.Shared.Localization;
 using Content.Server.GameTicking.Events;
 
 namespace Content.Server.Administration.Commands;
@@ -33,6 +37,8 @@ public sealed class AegisEventCommand : IConsoleCommand
 
         // Announce to both marines and xenos
         AegisSharedAnnouncement.AnnounceToBoth(systemManager, message);
+        // Send fax to Marine High Command
+        SendAegisFax(systemManager, entityManager, message);
 
         // Spawn and send the Aegis ID card
         var idItem = entityManager.SpawnEntity("RMCIDCardAegis", MapCoordinates.Nullspace);
@@ -42,7 +48,111 @@ public sealed class AegisEventCommand : IConsoleCommand
         var pamphletItem = entityManager.SpawnEntity("CMPamphletPowerloader", MapCoordinates.Nullspace);
         entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(pamphletItem);
 
-        shell.WriteLine("Aegis event announced to marines and xenos, and items sent through ASRS.");
+        shell.WriteLine("Aegis event announced to marines and xenos, fax sent to CiC, and items sent through ASRS.");
+    }
+
+    private void SendAegisFax(IEntitySystemManager systemManager, IEntityManager entityManager, string message)
+    {
+        var faxSystem = systemManager.GetEntitySystem<FaxSystem>();
+
+        var faxQuery = entityManager.EntityQueryEnumerator<FaxMachineComponent>();
+        while (faxQuery.MoveNext(out var faxEnt, out var faxComp))
+        {
+            if (faxComp.FaxName == "CIC")
+            {
+                var aegisPaper = entityManager.SpawnEntity("CMPaperAegisInfoFax", MapCoordinates.Nullspace);
+
+                if (entityManager.TryGetComponent<PaperComponent>(aegisPaper, out var paperComp) &&
+                    entityManager.TryGetComponent<MetaDataComponent>(aegisPaper, out var metaComp))
+                {
+                    var printout = new FaxPrintout(
+                        paperComp.Content,
+                        metaComp.EntityName,
+                        null, // No label
+                        "CMPaperAegisInfoFax", 
+                        paperComp.StampState,
+                        paperComp.StampedBy
+                    );
+
+                    faxSystem.Receive(faxEnt, printout, null, faxComp);
+                }
+
+                entityManager.DeleteEntity(aegisPaper);
+                break; 
+            }
+        }
+    }
+}
+
+[AdminCommand(AdminFlags.Moderator)]
+public sealed class AegisSpawnCommand : IConsoleCommand
+{
+    public string Command => "aegisspawn";
+    public string Description => "Activates AEGIS crate spawners for this round (persists until round ends).";
+    public string Help => $"Usage: {Command}";
+
+    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    {
+        var systemManager = IoCManager.Resolve<IEntitySystemManager>();
+        var aegisSystem = systemManager.GetEntitySystem<AegisSpawnerSystem>();
+
+        if (aegisSystem.AreAegisSpawnersScheduled())
+        {
+            shell.WriteLine("AEGIS spawners are already activated for this round.");
+            return;
+        }
+
+        aegisSystem.SetAegisSpawnersForThisRound();
+        shell.WriteLine("AEGIS spawners activated for this round. They will spawn when detected on the map.");
+    }
+}
+
+[AdminCommand(AdminFlags.Moderator)]
+public sealed class AegisStatusCommand : IConsoleCommand
+{
+    public string Command => "aegisstatus";
+    public string Description => "Shows the current status of AEGIS spawner flags.";
+    public string Help => $"Usage: {Command}";
+
+    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    {
+        var systemManager = IoCManager.Resolve<IEntitySystemManager>();
+        var aegisSystem = systemManager.GetEntitySystem<AegisSpawnerSystem>();
+
+        var isScheduled = aegisSystem.AreAegisSpawnersScheduled();
+        var haveSpawned = aegisSystem.HaveAegisCratesSpawned();
+
+        shell.WriteLine($"AEGIS spawners activated: {isScheduled}");
+        shell.WriteLine($"AEGIS crates spawned this round: {haveSpawned}");
+
+        // Count spawners on map
+        var entityManager = IoCManager.Resolve<IEntityManager>();
+        var spawnerCount = 0;
+        var aegisQuery = entityManager.EntityQueryEnumerator<AegisSpawnerComponent>();
+        while (aegisQuery.MoveNext(out var uid, out var spawner))
+        {
+            if (!entityManager.Deleted(uid))
+                spawnerCount++;
+        }
+
+        shell.WriteLine($"AEGIS spawners on map: {spawnerCount}");
+    }
+}
+
+[AdminCommand(AdminFlags.Moderator)]
+public sealed class AegisResetCommand : IConsoleCommand
+{
+    public string Command => "aegisreset";
+    public string Description => "Resets AEGIS spawner flags (for debugging/testing purposes).";
+    public string Help => $"Usage: {Command}";
+
+    public void Execute(IConsoleShell shell, string argStr, string[] args)
+    {
+        var systemManager = IoCManager.Resolve<IEntitySystemManager>();
+        var aegisSystem = systemManager.GetEntitySystem<AegisSpawnerSystem>();
+
+        aegisSystem.ResetAegisSpawners();
+        shell.WriteLine("AEGIS spawner flags have been reset.");
     }
 }
 

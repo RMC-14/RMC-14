@@ -114,6 +114,8 @@
     unrootOnMelee: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
+    removeOnHit: true
+    preventTackle: true
   - type: XenoTailStab
     tailDamage:
       groups:
@@ -162,7 +164,6 @@
         Brute: 40
   - type: XenoTailJab
     attackEffect: RMCEffectTailHit
-    throwRange: 0.5
     damage:
       groups:
         Brute: 50

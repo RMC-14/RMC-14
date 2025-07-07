@@ -30,4 +30,10 @@ public sealed partial class XenoFruitPlanterComponent : Component
     // List of fruit planted by planter
     [DataField, AutoNetworkedField]
     public List<EntityUid> PlantedFruit = new();
+
+    [DataField, AutoNetworkedField]
+    public float FruitPickingMultiplier = 1;
+
+    [DataField, AutoNetworkedField]
+    public float FruitFeedingMultiplier = 1;
 }

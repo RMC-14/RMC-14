@@ -9,7 +9,7 @@
 - type: startingGear
   id: RMCGearCorpsePrisoner
   equipment:
-    jumpsuit: ClothingUniformJumpsuitColorOrange # TODO RMC14 colored uniform
+    jumpsuit: RMCJumpsuitOrange
     back: CMSatchel
     shoes: RMCShoesOrange
     id: CMIDCardColonist
