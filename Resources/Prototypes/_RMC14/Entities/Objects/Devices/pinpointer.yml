@@ -1,6 +1,6 @@
 - type: entity
-  name: RMC pinpointer
-  description: A rugged military-grade tracking device. While typically far more capable, this one has been configured to lock onto certain signals. Keep upright to retain accuracy.
+  name: RMCPinpointer
+  description: A rugged military-grade tracking device. Changes colors based on the distance from the target. Keep upright to retain accuracy.
   parent: BaseItem
   id: RMCPinpointerBase
   abstract: true
@@ -9,7 +9,7 @@
     noRot: True
   - type: Sprite
     noRot: True
-    sprite: Objects/Devices/pinpointer.rsi
+    sprite: _RMC14/Objects/Devices/pinpointer.rsi
     layers:
     - state: pinpointer
       map: ["enum.PinpointerLayers.Base"]
@@ -18,19 +18,22 @@
       shader: unshaded
       visible: false
   - type: Icon
-    sprite: Objects/Devices/pinpointer.rsi
+    sprite: _RMC14/Objects/Devices/pinpointer.rsi
     state: pinpointer
   - type: Item
-    sprite: Objects/Devices/pinpointer.rsi
+    sprite: _RMC14/Objects/Devices/pinpointer.rsi
     size: Small
   - type: Pinpointer
+    closeDistance: 10
+    mediumDistance: 100
+    reachedDistance: 2
   - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.PinpointerVisuals.IsActive:
         enum.PinpointerLayers.Screen:
           True: { visible: True }
-          False: { visible: False }
+          False: { visible: False } 
       enum.PinpointerVisuals.TargetDistance:
         enum.PinpointerLayers.Screen:
           Unknown: { state: pinonnull }
@@ -41,8 +44,7 @@
   - type: AnimationPlayer
 
 - type: entity
-  name: AEGIS ID pinpointer
-  description: A specialized tracking device configured to locate important objects. Essential for recovery operations.
+  name: Pinpointer
   id: RMCPinpointerAegisID
   parent: RMCPinpointerBase
   components:

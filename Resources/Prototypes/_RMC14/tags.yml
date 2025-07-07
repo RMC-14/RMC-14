@@ -114,3 +114,6 @@
 
 - type: Tag
   id: RMCAirburstGrenade
+
+- type: Tag
+  id: RMCPinpointer
