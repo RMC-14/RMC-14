@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Prying;
+using Content.Shared._RMC14.Doors;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -132,7 +133,6 @@ public sealed class PryingSystem : EntitySystem
 
             canev = new BeforePryEvent(user, false, false, false);
         }
-
         RaiseLocalEvent(target, ref canev);
 
         message = canev.Message;
@@ -161,6 +161,10 @@ public sealed class PryingSystem : EntitySystem
         {
             _adminLog.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user)} is prying {ToPrettyString(target)}");
         }
+
+        var podlockpry = new PodlockPryEvent(user); // RMC14
+        RaiseLocalEvent(target, ref podlockpry); // RMC14
+
         return _doAfterSystem.TryStartDoAfter(doAfterArgs, out id);
     }
 

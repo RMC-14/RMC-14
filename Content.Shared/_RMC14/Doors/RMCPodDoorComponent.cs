@@ -4,7 +4,6 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Doors;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(CMDoorSystem))]
 public sealed partial class RMCPodDoorComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -21,4 +20,12 @@ public sealed partial class RMCPodDoorComponent : Component
     /// </summary>
     [DataField]
     public float XenoPodlockPryMultiplier = 4.0f;
+}
+
+[ByRefEvent]
+public record struct PodlockPryEvent(EntityUid User)
+{
+    public readonly EntityUid User = User;
+
+    public bool Cancelled;
 }
