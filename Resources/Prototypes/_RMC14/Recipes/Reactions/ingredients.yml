@@ -44,7 +44,7 @@
     BlueCuracao: 2
 
 - type: reaction
-  id: Vodka
+  id: RMCVodka
   reactants:
     Enzyme:
       amount: 1
