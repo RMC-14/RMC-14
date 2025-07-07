@@ -28,7 +28,7 @@ public sealed class ProjectileStunRemoveSystem : EntitySystem
                 EnsureComp<ProjectileStunRemoveComponent>(args.Holder);
                 break;
             case AttachableAlteredType.Detached:
-                RemComp<ProjectileStunRemoveComponent>(ent);
+                RemComp<ProjectileStunRemoveComponent>(args.Holder);
                 break;
         }
     }
