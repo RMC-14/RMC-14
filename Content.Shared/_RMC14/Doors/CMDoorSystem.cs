@@ -8,11 +8,13 @@ using Content.Shared.Doors.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
+using Content.Shared.Prying.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Doors;
 
@@ -25,6 +27,7 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
@@ -117,6 +120,11 @@ public sealed class CMDoorSystem : EntitySystem
 
         if (_rmcPower.IsPowered(ent))
             args.Cancelled = true;
+
+        if (HasComp<XenoComponent>(args.User))
+        {
+            _audioSystem.PlayPredicted(ent.Comp.XenoPodlockUseSound, ent.Owner, args.User);
+        }
     }
 
     private AnchoredEntitiesEnumerator? GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)
