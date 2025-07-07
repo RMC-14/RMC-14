@@ -1317,6 +1317,7 @@
       - id: CMJumpsuitBO
       - id: RMCJumpsuitASOBlack
       - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOFormalAlt
       - id: RMCJumpsuitASOBlackAlt
       - id: RMCJumpsuitASOOperations
     - name: Outer Wear
@@ -1328,6 +1329,7 @@
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
+      - id: RMCCoatASOWhiteAlt
     - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
