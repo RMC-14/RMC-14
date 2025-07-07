@@ -15,6 +15,7 @@
     shotsPerBurst: 1
   - type: ShootUseDelay
   - type: RMCSelectiveFire
+  - type: ProjectileStunRemove
     baseFireModes:
     - SemiAuto
     recoilWielded: 2
@@ -45,6 +46,7 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentShotgunChoke
           - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:
