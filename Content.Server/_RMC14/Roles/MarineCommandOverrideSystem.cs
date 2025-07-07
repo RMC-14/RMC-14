@@ -19,6 +19,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
+using Content.Shared.Medical.Cryogenics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -99,7 +100,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (_rankSystem.HasInvalidRank(uid, "RMCRankPrivate")) // the player has an invalid rank. the privates are not ready yet...
                 continue;
 
-            if (HasComp<CryostorageContainedComponent>(uid))  // the player is in cryostorage
+            if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideCryoPodComponent>(uid))  // the player is in cryostorage or cryopod
                 continue;
 
             if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out JobPrototype? jobProto))
@@ -129,7 +130,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     /// The selection process filters candidates by their authority level, living status, valid ID, readiness
     /// and prioritizes them by:
     /// 1. Highest rank according to the marine rank hierarchy.
-    /// 2. Highest squad according to the marine squad hierarchy. We additionally check whether this is a staff officer and if yes then we choose the most experienced in time otherwise random.
+    /// 2. Highest squad according to the marine squad hierarchy. We additionally check that if all the selected suitable entities are not in squads (for example, staff officers), then we select the most experienced ones according to the played time for the roles or randomly
     /// 3. If multiple candidates are still tied, we choose the most experienced one in time, otherwise random.
     /// If no valid candidates are found, an appropriate ARES announcement is made.
     /// </summary>
@@ -139,6 +140,8 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     private void CommanderSelection()
     {
         var ares = _ares.EnsureARES();
+
+        // In fact, List contains only entities with the maximum (the same among themselves) non-zero authority level (MarineAuthorityLevel)
         List<EntityUid> candidates = [];
 
         var query = EntityQueryEnumerator<MarineComponent, OriginalRoleComponent, MobStateComponent, MindContainerComponent>();
@@ -149,7 +152,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (_rankSystem.HasInvalidRank(uid, "RMCRankPrivate")) // the player has an invalid rank. the privates are not ready yet...
                 continue;
 
-            if (HasComp<CryostorageContainedComponent>(uid)) // the player is in cryostorage
+            if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideCryoPodComponent>(uid))  // the player is in cryostorage or cryopod
                 continue;
 
             if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out JobPrototype? jobProto))
@@ -187,8 +190,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         {
             _commander = candidates[0];
         }
-
-        if (candidates.Count > 1)
+        else if (candidates.Count > 1)
         {
             var highestRankCandidates = _rankSystem.GetEntitiesWithHighestRank(candidates, "RMCMarineRankHierarchy");
 
@@ -206,23 +208,15 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             {
                 var highestSquadCandidates = _squadSystem.GetEntitiesWithHighestSquad(highestRankCandidates, "RMCMarineSquadHierarchy");
 
-                if (highestSquadCandidates == null) // All entities have invalid squad or an empty dataset was passed
+                if (highestSquadCandidates == null) // All entities have invalid squad (for example, staff officers) or an empty dataset was passed
                 {
-                    if (HasStaffOfficer(highestRankCandidates))
-                        _commander = PickMostExperiencedEntityOrRandom(highestRankCandidates);
-                    else
-                    {
-                        _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
-                        return;
-                    }
+                    _commander = PickMostExperiencedEntityOrRandom(highestRankCandidates);
                 }
-
-                if (highestSquadCandidates != null && highestSquadCandidates.Count == 1)
+                else if (highestSquadCandidates.Count == 1)
                 {
                     _commander = highestSquadCandidates[0];
                 }
-
-                if (highestSquadCandidates != null && highestSquadCandidates.Count > 1)
+                else if (highestSquadCandidates.Count > 1)
                 {
                     _commander = PickMostExperiencedEntityOrRandom(highestSquadCandidates); // We choose among all entities with the same highest level of authority, squad and rank
                 }
@@ -360,20 +354,6 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         Dirty(idCard, accessComp);
 
         return true;
-    }
-
-    private bool HasStaffOfficer(List<EntityUid> entities)
-    {
-        foreach (var entity in entities)
-        {
-            if (!_entMan.TryGetComponent(entity, out OriginalRoleComponent? roleComp) && roleComp == null)
-                continue;
-
-            if (roleComp.Job == "CMStaffOfficer")
-                return true;
-        }
-
-        return false;
     }
 
     /// <summary>
