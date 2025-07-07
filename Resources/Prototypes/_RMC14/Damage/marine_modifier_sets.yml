@@ -57,7 +57,6 @@
 - type: damageModifierSet
   id: RMCMetalFoamWall
   coefficients:
-    Brute: 2 # Takes twice as much melee damage
     Blunt: 2
     Slash: 2
     # TODO fire should deal 50 times the normal damage

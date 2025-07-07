@@ -66,9 +66,10 @@
     node: grenade
   - type: DeleteOnTrigger
   - type: SoundOnTrigger
-    sound: /Audio/Effects/Chemistry/bubbles.ogg
-    params:
-        variation: 0.2
+    sound:
+        path: /Audio/Effects/Chemistry/bubbles.ogg
+        params:
+            variation: 0.2
 
 - type: entity
   parent: ChemicalPayload
@@ -137,9 +138,10 @@
       payloadTrigger:
       - RMCTimerTrigger
   - type: SoundOnTrigger
-    sound: /Audio/Effects/smoke.ogg
-    params:
-        variation: 0.2
+    sound:
+        path: /Audio/Effects/smoke.ogg
+        params:
+            variation: 0.2
 
 - type: entity
   parent: RMCChemicalPayloadMetalFoam
