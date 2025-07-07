@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/44057b443bd9f4351f165c7f3d0a3c002274cfd6/icons/obj/items/clothing/glasses.dmi, https://github.com/cmss13-devs/cmss13/blob/44057b443bd9f4351f165c7f3d0a3c002274cfd6/icons/mob/humans/onmob/eyes.dmi, https://github.com/cmss13-devs/cmss13/blob/44057b443bd9f4351f165c7f3d0a3c002274cfd6/icons/mob/humans/onmob/items_righthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/44057b443bd9f4351f165c7f3d0a3c002274cfd6/icons/mob/humans/onmob/items_lefthand_0.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon-on"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "on-equipped-EYES",
+      "directions": 4
+    },
+    {
+      "name": "equipped-EYES",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "helmet",
+      "directions": 4
+    },
+    {
+      "name": "helmet-down",
+      "directions": 4
+    }
+  ]
+}

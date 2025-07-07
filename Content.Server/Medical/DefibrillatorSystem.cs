@@ -6,8 +6,6 @@ using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Server.Popups;
 using Content.Server.PowerCell;
-using Content.Shared.Traits.Assorted;
-using Content.Server.Traits.Assorted;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared.Damage;
@@ -21,6 +19,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Timing;
+using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
@@ -184,6 +183,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             BreakOnHandChange = false,
             DuplicateCondition = DuplicateConditions.SameEvent,
             TargetEffect = "RMCEffectHealBusy",
+            MovementThreshold = 0.5f,
         });
     }
 

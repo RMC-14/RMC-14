@@ -53,7 +53,6 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly DestructibleSystem _destructible = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -189,16 +188,15 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 DuplicateCondition = DuplicateConditions.SameEvent
             };
             _doAfter.TryStartDoAfter(doAfterArgs);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-filling-gas"), resinHole, args.User, PopupType.Small);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-filling-gas"), resinHole, args.User);
             return;
         }
-        else if (TryComp<AcidTrapComponent>(args.User, out var ourAcid) && (resinHole.Comp.TrapPrototype == null
-            || (IsAcidPrototype(resinHole.Comp.TrapPrototype, out var level) && ourAcid.TrapLevel > level)))
+
+        if (TryComp<AcidTrapComponent>(args.User, out var ourAcid) &&
+            (resinHole.Comp.TrapPrototype == null || (IsAcidPrototype(resinHole.Comp.TrapPrototype, out var level) && ourAcid.TrapLevel > level)))
         {
             if (!_xenoPlasma.HasPlasmaPopup(args.User, ourAcid.Cost, false))
-            {
                 return;
-            }
 
             var ev = new XenoPlaceFluidInHoleDoAfterEvent();
             var doAfterArgs = new DoAfterArgs(EntityManager, args.User, resinHole.Comp.AddFluidDelay, ev, resinHole)
@@ -208,15 +206,16 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 DuplicateCondition = DuplicateConditions.SameEvent
             };
             _doAfter.TryStartDoAfter(doAfterArgs);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-filling-acid"), resinHole, args.User, PopupType.Small);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-filling-acid"), resinHole, args.User);
             return;
         }
-        else if (resinHole.Comp.TrapPrototype == null || resinHole.Comp.TrapPrototype != XenoResinHoleComponent.ParasitePrototype)
+
+        if (resinHole.Comp.TrapPrototype == null || resinHole.Comp.TrapPrototype != XenoResinHoleComponent.ParasitePrototype)
         {
-            if (HasComp<AcidTrapComponent>(args.User))
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-good-acid"), resinHole, args.User, PopupType.SmallCaution);
-            else
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-no-acid"), resinHole, args.User, PopupType.SmallCaution);
+            var msg = HasComp<AcidTrapComponent>(args.User)
+                ? Loc.GetString("rmc-xeno-construction-resin-hole-good-acid")
+                : Loc.GetString("rmc-xeno-construction-resin-hole-no-acid");
+            _popup.PopupEntity(msg, resinHole, args.User, PopupType.SmallCaution);
             return;
         }
 
@@ -228,6 +227,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
             QueueDel(para);
             return;
         }
+
         SetTrapType(resinHole, null);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
         args.Handled = true;
@@ -322,9 +322,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnXenoResinHoleStepTriggerAttempt(Entity<XenoResinHoleComponent> resinHole, ref StepTriggerAttemptEvent args)
     {
-        var (ent, comp) = resinHole;
-
-        if (comp.TrapPrototype is null)
+        if (resinHole.Comp.TrapPrototype is null)
             return;
 
         if (_hive.FromSameHive(args.Tripper, resinHole.Owner))
@@ -333,9 +331,9 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
         }
 
-        if (comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
+        if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
         {
-            if (!_interaction.InRangeUnobstructed(args.Source, args.Tripper, comp.ParasiteActivationRange))
+            if (!_interaction.InRangeUnobstructed(args.Source, args.Tripper, resinHole.Comp.ParasiteActivationRange))
             {
                 args.Continue = false;
                 return;
@@ -346,9 +344,10 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 && !HasComp<VictimInfectedComponent>(args.Tripper);
             return;
         }
-        else if (_mobState.IsDead(args.Tripper) ||
-                 _standing.IsDown(args.Tripper) ||
-                 !_interaction.InRangeUnobstructed(args.Source, args.Tripper, 1.5f))
+
+        if (_mobState.IsDead(args.Tripper) ||
+            _standing.IsDown(args.Tripper) ||
+            !_interaction.InRangeUnobstructed(args.Source, args.Tripper, 1.5f))
         {
             var inRange = EnsureComp<InResinHoleRangeComponent>(args.Tripper);
             if (!inRange.HoleList.Contains(resinHole))
@@ -379,17 +378,17 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private bool CanPlaceResinHole(EntityUid user, EntityCoordinates coords)
     {
-        var canPlaceStructure = _xenoConstruct.CanPlaceXenoStructure(user, coords, out var popupType, true);
+        var canPlaceStructure = _xenoConstruct.CanPlaceXenoStructure(user, coords, out var popupType);
 
         if (!canPlaceStructure)
         {
-            popupType = popupType + "-resin-hole";
+            popupType += "-resin-hole";
             _popup.PopupEntity(Loc.GetString(popupType), user, user, PopupType.SmallCaution);
             return false;
         }
 
         if (_transform.GetGrid(coords) is not { } gridId ||
-    !TryComp(gridId, out MapGridComponent? grid))
+            !TryComp(gridId, out MapGridComponent? grid))
         {
             var msg = Loc.GetString("rmc-xeno-construction-no-map-resin-hole");
             _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
@@ -400,12 +399,12 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         foreach (var entity in neighborAnchoredEntities)
         {
-            if (HasComp<XenoResinHoleComponent>(entity))
-            {
-                var msg = Loc.GetString("rmc-xeno-construction-similar-too-close-resin-hole");
-                _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
-                return false;
-            }
+            if (!HasComp<XenoResinHoleComponent>(entity))
+                continue;
+
+            var msg = Loc.GetString("rmc-xeno-construction-similar-too-close-resin-hole");
+            _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
+            return false;
         }
 
         foreach (var body in _lookup.GetEntitiesInRange<MobStateComponent>(coords, 0.5f))
@@ -437,16 +436,16 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
     {
         var (ent, comp) = resinHole;
 
-        if (comp.TrapPrototype is not EntProtoId trapEntityProto)
+        if (comp.TrapPrototype is not { } trapEntityProto)
             return false;
 
         if (IsAcidPrototype(trapEntityProto, out _))
         {
             var chain = _onCollide.SpawnChain();
             //Try to make a 3x3 grid - simple is best
-            for (float i = -1f; i < 2; i += 1f)
+            for (var i = -1f; i < 2; i += 1f)
             {
-                for (float j = -1f; j < 2; j += 1f)
+                for (var j = -1f; j < 2; j += 1f)
                 {
                     var coords = _transform.GetMoverCoordinates(resinHole).Offset(new Vector2(i, j));
 
@@ -470,7 +469,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 EnsureComp<TrapParasiteComponent>(trapEntity);
         }
 
-        string msg = "rmc-xeno-construction-resin-hole-activate";
+        var msg = "rmc-xeno-construction-resin-hole-activate";
 
         var ev = new XenoResinHoleActivationEvent(msg);
 
@@ -489,29 +488,31 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private string GetTrapExamineMessage(Entity<XenoResinHoleComponent> resinHole)
     {
-        var msgID = "";
+        var msgId = "";
         if (resinHole.Comp.TrapPrototype == null)
-            msgID = "rmc-xeno-construction-resin-hole-empty";
+        {
+            msgId = "rmc-xeno-construction-resin-hole-empty";
+        }
         else
         {
             switch (resinHole.Comp.TrapPrototype)
             {
                 case XenoResinHoleComponent.AcidGasPrototype:
                 case XenoResinHoleComponent.NeuroGasPrototype:
-                    msgID = "rmc-xeno-construction-resin-hole-gas";
+                    msgId = "rmc-xeno-construction-resin-hole-gas";
                     break;
                 case XenoResinHoleComponent.WeakAcidPrototype:
                 case XenoResinHoleComponent.AcidPrototype:
                 case XenoResinHoleComponent.StrongAcidPrototype:
-                    msgID = "rmc-xeno-construction-resin-hole-acid";
+                    msgId = "rmc-xeno-construction-resin-hole-acid";
                     break;
                 case XenoResinHoleComponent.ParasitePrototype:
-                    msgID = "rmc-xeno-construction-resin-hole-parasite";
+                    msgId = "rmc-xeno-construction-resin-hole-parasite";
                     break;
             }
         }
 
-        return Loc.GetString(msgID);
+        return Loc.GetString(msgId);
     }
 
     private bool IsAcidPrototype(string proto, out int level)
@@ -594,25 +595,16 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         var holeCoordinates = _transform.GetMapCoordinates(resinHole);
         var offsetCoordinates = holeCoordinates;
 
-        for (int i = 0; i < 4; i++)
+        for (var i = 0; i < 4; i++)
         {
-            switch (i)
+            offsetCoordinates = i switch
             {
-                case 0:
-                    offsetCoordinates = holeCoordinates.Offset(1, 0);
-                    break;
-                case 1:
-                    offsetCoordinates = holeCoordinates.Offset(-1, 0);
-                    break;
-                case 2:
-                    offsetCoordinates = holeCoordinates.Offset(0, 1);
-                    break;
-                case 3:
-                    offsetCoordinates = holeCoordinates.Offset(0, -1);
-                    break;
-                default:
-                    break;
-            }
+                0 => holeCoordinates.Offset(1, 0),
+                1 => holeCoordinates.Offset(-1, 0),
+                2 => holeCoordinates.Offset(0, 1),
+                3 => holeCoordinates.Offset(0, -1),
+                _ => offsetCoordinates
+            };
 
             //Trigger Range is preserved by the ContactingEntities check in the parent function, this just checks vision
             if (_interaction.InRangeUnobstructed(offsetCoordinates, ent, 1.5f))

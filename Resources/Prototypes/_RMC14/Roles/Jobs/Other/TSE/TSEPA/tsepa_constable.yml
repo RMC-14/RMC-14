@@ -1,0 +1,72 @@
+# TSEPA Constable
+- type: job
+  parent: CMJobBase
+  id: RMCTSEPAConstable
+  name: rmc-job-name-tsepa-constable
+  description: rmc-job-description-tsepa-Ccnstable
+  playTimeTracker: RMCJobTSEPAConstable
+  ranks:
+    RMCRankTSEPAConstable: []
+  startingGear: RMCGearTSEPAConstable
+  icon: "RMCJobIconTSEPAConstable"
+  joinNotifyCrew: false
+  accessGroups:
+  - ColonistTSEPA
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0
+        RMCSkillFireman: 2
+    - type: NpcFactionMember
+      factions:
+      - TSE
+    - type: JobPrefix
+      prefix: rmc-job-prefix-tsepa-constable
+  hidden: true
+
+- type: startingGear
+  id: RMCGearTSEPAConstable
+  equipment:
+    head: RMCHeadCapTSEPA
+    ears: RMCHeadsetTSEPA
+    jumpsuit: RMCJumpsuitTSEPA
+    outerClothing: RMCCoatTSEPAHighVisVest
+    gloves: RMCHandsVeteran
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardTSEPA
+    belt: RMCM1984BeltFilled
+    back: RMCSatchelTSEPA
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointTSEPAConstable
+  name: tsepa constable spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCTSEPAConstable
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_light_armor.rsi
+      state: icon
+
+- type: playTimeTracker
+  id: RMCJobTSEPAConstable
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconTSEPAConstable
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: tse_paconstable

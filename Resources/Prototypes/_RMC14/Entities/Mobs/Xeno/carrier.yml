@@ -100,11 +100,16 @@
     prefix: carrier
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-carrier
 
 - type: entity
   parent: RMCXenoCarrierBase
   id: CMXenoCarrier
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCarrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
     layers:
@@ -160,6 +165,9 @@
   id: RMCXenoCarrierEggsac
   suffix: Eggsac
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleEggsac
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/eggsac_carrier.rsi
     layers:
@@ -197,7 +205,6 @@
     - ActionXenoGenerateEggs
     - ActionXenoRetrieveEgg
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-eggsac-name
     description: rmc-xeno-eggsac-description
@@ -212,4 +219,5 @@
     distance: 2.5
   - type: XenoGenerateEggs
   - type: XenoEggSustainer
+  - type: XenoHidden
 

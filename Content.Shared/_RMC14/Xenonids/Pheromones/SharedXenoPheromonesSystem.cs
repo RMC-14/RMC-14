@@ -168,7 +168,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (_rmcFlammable.IsOnFire(warding.Owner))
             return;
 
-        if (!TryComp<XenoRegenComponent>(warding, out var xeno) || (!xeno.HealOffWeeds && !_weeds.IsOnWeeds(warding.Owner)))
+        if (!TryComp<XenoRegenComponent>(warding, out var xeno) || (!xeno.HealOffWeeds && !_weeds.IsOnFriendlyWeeds(warding.Owner)))
         {
             var damageReduct = _rmcDamageable.DistributeHealing(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.25);
             args.Damage -= damageReduct;
@@ -272,7 +272,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (newWardMult > warding.Multiplier)
             return false;
 
-        if ((TryComp<XenoRegenComponent>(ent, out var xeno) && xeno.HealOffWeeds) || !_weeds.IsOnWeeds(ent))
+        if ((TryComp<XenoRegenComponent>(ent, out var xeno) && xeno.HealOffWeeds) || !_weeds.IsOnFriendlyWeeds(ent))
             return false;
 
         return true;
@@ -382,6 +382,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
                             continue;
 
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Recovery)
+                            continue;
+
                         oldRecovery.Remove(receiver);
                         var recovery = EnsureComp<XenoRecoveryPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref recovery.Multiplier, pheromones.PheromonesMultiplier);
@@ -394,6 +397,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
                             continue;
 
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Warding)
+                            continue;
+
                         oldWarding.Remove(receiver);
                         var warding = EnsureComp<XenoWardingPheromonesComponent>(receiver);
                         AssignMaxMultiplier(ref warding.Multiplier, pheromones.PheromonesMultiplier);
@@ -404,6 +410,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                     foreach (var receiver in active.Receivers)
                     {
                         if (Deleted(receiver) || _mobState.IsDead(receiver))
+                            continue;
+
+                        if (receiver.Comp.IgnorePheromones == XenoPheromones.Frenzy)
                             continue;
 
                         oldFrenzy.Remove(receiver);
@@ -463,6 +472,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
             var (_, _, pheromones, xform) = Pheromones[index];
             receivers.Receivers.Clear();
+            // TODO RMC14 make this use a component that gets added when alive, removed when dead, and respects ignored pheromones
             Lookup.GetEntitiesInRange(xform.Coordinates, pheromones.PheromonesRange, receivers.Receivers);
         }
     }

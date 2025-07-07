@@ -1,0 +1,189 @@
+# M54C Mk2
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackM54CEmpty
+  name: M54C gun rack
+  suffix: M54C, Empty
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC comissioned racks with fixed slots which only fit M54C rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_2: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_3: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_4: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_5: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m54c_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M54C
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      item_2:
+        name: M54C
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      item_3:
+        name: M54C
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      item_4:
+        name: M54C
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      item_5:
+        name: M54C
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+
+- type: entity
+  parent: RMCGunRackM54CEmpty
+  id: RMCGunRackM54CFilled
+  suffix: M54C, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - WeaponRifleM54C
+      item_2:
+      - WeaponRifleM54C
+      item_3:
+      - WeaponRifleM54C
+      item_4:
+      - WeaponRifleM54C
+      item_5:
+      - WeaponRifleM54C
+
+# M54C Mk 1
+
+- type: entity
+  parent: RMCGunRackM54CEmpty
+  id: RMCGunRackM54CMk1Empty
+  name: M54C Mk1 gun rack
+  suffix: M54C Mk1, Empty
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC comissioned racks with fixed slots which only fit M54C Mk1 rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/m54c_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: M54C Mk1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+      item_2:
+        name: M54C Mk1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+      item_3:
+        name: M54C Mk1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+      item_4:
+        name: M54C Mk1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+      item_5:
+        name: M54C Mk1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK1
+
+- type: entity
+  parent: RMCGunRackM54CMk1Empty
+  id: RMCGunRackM54CMk1Filled
+  suffix: M54C Mk1, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - WeaponRifleM54CMK1
+      item_2:
+      - WeaponRifleM54CMK1
+      item_3:
+      - WeaponRifleM54CMK1
+      item_4:
+      - WeaponRifleM54CMK1
+      item_5:
+      - WeaponRifleM54CMK1

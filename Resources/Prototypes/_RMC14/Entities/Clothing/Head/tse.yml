@@ -1,0 +1,41 @@
+- type: entity
+  parent: CMHeadCapMP
+  id: RMCHeadCapTSEPA
+  name: tsepa cap
+  description: A cap for TSEPA constables. Wots all this then?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretTSE
+  name: tse beret
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tse_beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tse_beret.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretTSEPA
+  name: tsepa beret
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_beret.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPA
+  id: RMCHeadCapTSEPAPeaked
+  name: peaked tsepa cap
+  description: A peaked cap for TSEPA inspectors. Wots all this then?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked.rsi

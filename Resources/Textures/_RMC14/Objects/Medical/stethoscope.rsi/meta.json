@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1574b8777d8b8237a588f99fb23ce5edb2b443fc/icons/obj/items/clothing/accessory/misc.dmi, https://github.com/cmss13-devs/cmss13/blob/09583166e0082a417aef46dbb280675fa93a81e8/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/09583166e0082a417aef46dbb280675fa93a81e8/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/7b4244612942e910b40148d4b54d38748f114a84/icons/mob/humans/onmob/clothing/accessory/misc.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "equipped-NECK",
+      "directions": 4
+    }
+  ]
+}

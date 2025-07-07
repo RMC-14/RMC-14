@@ -17,12 +17,21 @@ public sealed partial class WorldTargetActionComponent : BaseTargetActionCompone
     [DataField("event")]
     [NonSerialized]
     public WorldTargetActionEvent? Event;
+
+    // RMC14
+    [DataField]
+    public bool Rotate = true;
 }
 
 [Serializable, NetSerializable]
 public sealed class WorldTargetActionComponentState : BaseActionComponentState
 {
+    // RMC14
+    public bool Rotate;
+
     public WorldTargetActionComponentState(WorldTargetActionComponent component, IEntityManager entManager) : base(component, entManager)
     {
+        // RMC14
+        Rotate = component.Rotate;
     }
 }

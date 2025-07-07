@@ -16,13 +16,13 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public List<EntProtoId> SquadIds = new() { "SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta" };
 
     [DataField]
-    public List<EntProtoId> ExtraSquadIds = new() { "SquadIntel" };
+    public List<EntProtoId> ExtraSquadIds = new() { "SquadIntel", "SquadFORECON" };
 
     [DataField]
     public Dictionary<EntProtoId, EntityUid> Squads = new();
 
     [DataField]
-    public EntityUid XenoMap;
+    public EntityUid? XenoMap;
 
     [DataField]
     public EntProtoId HiveId = "CMXenoHive";
@@ -108,8 +108,18 @@ public sealed partial class CMDistressSignalRuleComponent : Component
         ("CMSurvivorDoctor", 3),
         ("CMSurvivorSecurity", 2),
         ("CMSurvivorCorporate", 2),
+        ("CMSurvivorScientist", 2),
         ("CMSurvivor", -1),
     };
+
+    [DataField]
+    public List<ProtoId<JobPrototype>> IgnoreMaximumSurvivorJobs = new() { "RMCSurvivorCommandingOfficer" };
+
+    [DataField]
+    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Insert, int Amount)>>? SurvivorJobInserts;
+
+    [DataField]
+    public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
 
     [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
@@ -164,4 +174,31 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public LocId? CustomRoundEndMessage;
+
+    [DataField]
+    public bool SpawnPlanet = true;
+
+    [DataField]
+    public bool SpawnSurvivors = true;
+
+    [DataField]
+    public bool SpawnXenos = true;
+
+    [DataField]
+    public bool DoJobSlotScaling = true;
+
+    [DataField]
+    public bool AutoEnd = true;
+
+    [DataField]
+    public bool StartARESAnnouncements = true;
+
+    [DataField]
+    public bool Bioscan = true;
+
+    [DataField]
+    public bool SetHunger = true;
+
+    [DataField]
+    public bool RequireXenoPlayers = true;
 }

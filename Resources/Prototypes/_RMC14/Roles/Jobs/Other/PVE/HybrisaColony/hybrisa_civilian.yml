@@ -1,0 +1,54 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCPVEHybrisaCivilian
+  name: rmc-job-name-hybrisa-civilian
+  description: rmc-job-description-hybrisa-civilian
+  playTimeTracker: RMCJobPVEHybrisaCivilian
+  ranks:
+    RMCRankCivilian: []
+  startingGear: RMCGearPVEHybrisaCivilian
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-nobody
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+  hasIcon: false
+
+- type: startingGear
+  id: RMCGearPVEHybrisaCivilian
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: CMSatchel
+    shoes: RMCShoesBlack
+    id: CMIDCardColonist
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPVEHybrisaCivilian
+  name: hybrisa civilian spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPVEHybrisaCivilian
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Objects/CMIDs/lanyard.rsi
+      state: lanyard
+
+- type: playTimeTracker
+  id: RMCJobPVEHybrisaCivilian
+  isHumanoid: true
+

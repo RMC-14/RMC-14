@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -21,16 +20,28 @@ public sealed partial class XenoStompComponent : Component
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(0.4);
 
     [DataField, AutoNetworkedField]
+    public bool ParalyzeUnderOnly = false;
+
+    [DataField, AutoNetworkedField]
     public bool Slows = true;
 
     [DataField, AutoNetworkedField]
     public TimeSpan SlowTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
+    public bool SlowBigInsteadOfStun = false;
+
+    [DataField, AutoNetworkedField]
+    public bool DebuffsHurtXenosMore = true;
+
+    [DataField, AutoNetworkedField]
     public float ShortRange = 0.5f;
 
     [DataField, AutoNetworkedField]
     public float Range = 2.82f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan Delay = TimeSpan.Zero;
 
     [DataField, AutoNetworkedField]
     public EntProtoId? SelfEffect;

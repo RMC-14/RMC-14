@@ -78,6 +78,14 @@
 
 - type: entity
   parent: RMCDrinkAlcoholVodkaChess
+  id: RMCDrinkAlcoholVodkaChessWhiteBishop
+  name: white bishop bottle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/white_bishop_vodka.rsi
+
+- type: entity
+  parent: RMCDrinkAlcoholVodkaChess
   id: RMCDrinkAlcoholVodkaChessWhiteQueen
   name: white queen bottle
   components:

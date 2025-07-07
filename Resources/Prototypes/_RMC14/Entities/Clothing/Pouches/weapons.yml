@@ -48,6 +48,12 @@
       state: m1984
       map: [ "m1984_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m13
+      map: [ "m13_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m44r
+      map: [ "m44r_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: mk80
       map: [ "mk80_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -90,6 +96,8 @@
     - mateba_fill
     - b92fs_fill
     - mk45_fill
+    - m13_fill
+    - m44r_fill
     mapLayers:
       holstered:
         whitelist:
@@ -123,6 +131,14 @@
         whitelist:
           tags:
           - RMCMK45
+      m13_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolM13
+      m44r_fill:
+        whitelist:
+          tags:
+          - RMCWeaponRevolverM44
   - type: Storage
     maxItemSize: Normal
   - type: CMHolster

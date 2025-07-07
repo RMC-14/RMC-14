@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: RMCBaseWeaponGrenadeLauncher
@@ -21,6 +21,7 @@
     recoilWielded: 2
   - type: ShootAtFixedPoint
     shootArcProj: true
+    maxFixedRange: 7
   - type: OnShootTriggerAmmoTimer
     delay: 1
     beepInterval: 2

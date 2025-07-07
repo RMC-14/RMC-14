@@ -34,7 +34,7 @@
 
 # MP Armor vest - No slowdown, no general protection
 - type: entity
-  parent: [ClothingOuterBase, RMCAllowSuitStorageClothingArmorMP, BaseStorageItem]
+  parent: [ClothingOuterBase, RMCAllowSuitStorageClothingArmorMP, BaseStorageItem, RMCBaseUniformAccessoryItemOuterClothing]
   id: RMCArmorVestMP
   name: MP armor vest
   description: A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommend for direct combat or for deployment use against hostiles.
@@ -58,7 +58,6 @@
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
-  - type: PlaytimeMedalHolder
   - type: StoreAfterFailedInteract
   - type: Storage
     maxItemSize: Small

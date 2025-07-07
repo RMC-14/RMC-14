@@ -27,6 +27,7 @@ using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage;
+using Content.Shared.GameTicking;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -99,7 +100,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged, before: [typeof(SharedHeadsetSystem)]);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
 
-        SubscribeLocalEvent<AssignSquadComponent, MapInitEvent>(OnAssignSquadMapInit);
+        SubscribeLocalEvent<AssignSquadComponent, PlayerSpawnCompleteEvent>(OnAssignSquadPlayerSpawnComplete);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -262,7 +263,7 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
-    private void OnAssignSquadMapInit(Entity<AssignSquadComponent> ent, ref MapInitEvent args)
+    private void OnAssignSquadPlayerSpawnComplete(Entity<AssignSquadComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
         var query = EntityQueryEnumerator<SquadTeamComponent>();
         while (query.MoveNext(out var uid, out var comp))
@@ -270,37 +271,38 @@ public sealed class SquadSystem : EntitySystem
             if (!_entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, uid))
                 continue;
 
-            AssignSquad(ent, (uid, comp), null);
+            AssignSquad(ent, (uid, comp), args.JobId);
         }
     }
 
-    private void SearchForMappedItems(Entity<SquadMemberComponent> ent, EntityUid squad)
+    private void SearchForMappedItems(Entity<SquadMemberComponent> user, EntityUid squad)
     {
-        var user = ent.Owner;
+        if (!_inventory.TryGetContainerSlotEnumerator(user.Owner, out var slots, SlotFlags.All))
+            return;
 
-        if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
+        while (slots.MoveNext(out var slot))
         {
-            while (slots.MoveNext(out var slot))
+            if (slot.ContainedEntity is not { } slotEntity)
+                continue;
+
+            if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
             {
-                if (slot.ContainedEntity != null)
+                MapToSquad((slotEntity, mapToSquad), user, squad);
+            }
+            else if (TryComp<StorageComponent>(slotEntity, out var storage))
+            {
+                foreach (var contained in storage.Container.ContainedEntities)
                 {
-                    var slotEntity = slot.ContainedEntity.Value;
+                    if (!_mapToSquadQuery.TryComp(contained, out var mapToSquadStorage))
+                        continue;
 
-                    if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
-                    {
-                        MapToSquad((slotEntity, mapToSquad), user, squad);
-                    }
-                    else if (TryComp<StorageComponent>(slotEntity, out var storage))
-                    {
-                        foreach (var contained in storage.Container.ContainedEntities)
-                        {
-                            if (!_mapToSquadQuery.TryComp(contained, out var mapToSquadStorage))
-                                continue;
-
-                            MapToSquad((contained, mapToSquadStorage), user, squad);
-                        }
-                    }
+                    MapToSquad((contained, mapToSquadStorage), user, squad);
                 }
+            }
+            else if (TryComp(slotEntity, out EncryptionKeyHolderComponent? holder))
+            {
+                _encryptionKey.UpdateChannels(slotEntity, holder);
+                break;
             }
         }
     }

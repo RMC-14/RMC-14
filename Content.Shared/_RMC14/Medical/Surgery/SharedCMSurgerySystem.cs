@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
-using Content.Shared._RMC14.Medical.Surgery.Effects.Complete;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Body.Part;
@@ -16,7 +15,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Medical.Surgery;
 
@@ -32,7 +30,6 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();

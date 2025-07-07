@@ -1,6 +1,7 @@
+using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
-using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Empower;
@@ -15,8 +16,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.ScissorCut;
 
@@ -46,10 +45,10 @@ public sealed class XenoScissorCutSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
-        bool slows = HasComp<XenoSuperEmpoweredComponent>(xeno);
+        var slows = HasComp<XenoSuperEmpoweredComponent>(xeno);
         args.Handled = true;
 
         if (_transform.GetGrid(args.Target) is not { } gridId ||

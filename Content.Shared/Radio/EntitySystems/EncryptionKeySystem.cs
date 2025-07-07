@@ -86,6 +86,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         }
 
         RaiseLocalEvent(uid, new EncryptionChannelsChangedEvent(component));
+        Dirty(uid, component);
     }
 
     private void OnContainerModified(EntityUid uid, EncryptionKeyHolderComponent component, ContainerModifiedMessage args)

@@ -66,6 +66,7 @@
       params:
         volume: -4
   - type: HealthExaminable
+    examineShowEmpty: false
     examinableTypes:
     - Blunt
     - Slash
@@ -81,7 +82,7 @@
   - type: Climbing
   - type: Insulated
   - type: Input
-    context: "human"
+    context: "xenonid"
   - type: Clickable
   - type: InteractionOutline
   - type: InputMover
@@ -187,6 +188,7 @@
         - BulletImpassable
   - type: Xeno
   - type: XenoRegen
+  - type: XenoStateVisuals
   - type: UserInterface
     interfaces:
       enum.XenoEvolutionUIKey.Key:
@@ -251,6 +253,9 @@
     - Muted
     - Dazed
     - Blinded
+    - Unconscious
+    - TemporaryBlindness
+    - Deaf
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
@@ -279,6 +284,7 @@
       components:
       - Xeno
       - Infectable
+      - Synth
   - type: BlockPullingDead
   - type: XenoFriendly
   - type: Undisposable
@@ -292,7 +298,7 @@
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: DisableConstruction
-  - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
+  - type: XenoAnnounceDeath
     message: cm-xeno-death
     color: "#459A62"
   - type: ExplosionResistance
@@ -338,8 +344,8 @@
   - type: BlockIdExamine
   - type: NoStunOnExit
   - type: RMCSpeciesSlowdownModifier
-    slowMultiplier: 0.87
-    superSlowMultiplier: 0.75
+    slowModifier: 0.75
+    superSlowModifier: 1.5
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor
@@ -360,6 +366,12 @@
   - type: RMCObstacleSlamCauserImmune
   - type: RMCMobCollisionMass
   - type: XenoRankNames
+  - type: Blindable
+  - type: FixedIdentity
+    name: cm-xeno-name
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
   abstract: true
@@ -400,6 +412,10 @@
       params:
         variation: 0.1
         volume: -5
+  - type: MeleeDamageMultiplier # 1.5x Damage against other xenos
+    whitelist:
+      components:
+      - Xeno
   - type: Tackle
   - type: XenoClaws
 
@@ -438,6 +454,7 @@
     tags:
     - DoorBumpOpener
   - type: Hands
+    examineShowEmpty: false
   - type: GiveHands
     hands:
     - name: Right Hand
@@ -452,6 +469,8 @@
   - type: FirePatter
     stacks: -5
   - type: RMCHandEmotes
+  - type: XenoToggleChargingKnockback
+  - type: XenoCanAddPlasmaToConstruct
 
 - type: entity
   abstract: true
