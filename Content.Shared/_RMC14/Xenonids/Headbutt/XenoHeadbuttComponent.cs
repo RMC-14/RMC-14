@@ -18,7 +18,7 @@ public sealed partial class XenoHeadbuttComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 3;
+    public float Range = 3.5f;
 
     [DataField, AutoNetworkedField]
     public float ThrowForce = 1;

@@ -82,7 +82,7 @@
       - id: CMWebbingBlack
       - id: CMWebbingHolster
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
 
 - type: entity
   parent: ColMarTechBase

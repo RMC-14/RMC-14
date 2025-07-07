@@ -46,6 +46,7 @@
       preset: RMCSurvivorPresetForeconSupportTech
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon-support-tech
+    - type: SpotterWhitelist
   hidden: true
 
 - type: playTimeTracker

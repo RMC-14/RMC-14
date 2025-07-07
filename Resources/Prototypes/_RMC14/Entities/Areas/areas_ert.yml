@@ -9,13 +9,13 @@
     powerNet: ert
     avoidBioscan: true
 
-# Fax Base
+# Fax Responder Outpost
 
 - type: entity
   parent: RMCAreaERT
   id: RMCAreaERTFax
   name: Sector Comms Relay
-  suffix: Fax Base, Interior
+  suffix: Fax Responder Outpost, Interior
   components:
   - type: Sprite
     state: green
@@ -27,7 +27,7 @@
   parent: RMCAreaERT
   id: RMCAreaERTFaxExterior
   name: Sector Comms Relay
-  suffix: Fax Base, Exterior
+  suffix: Fax Responder Outpost, Exterior
   components:
   - type: Sprite
     state: red

@@ -1,5 +1,27 @@
 # Bureau
 
+- type: entity
+  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
+  id: RMCCoatBureauTrenchCoatBrown
+  name: brown trench-coat
+  description: A worn, brown, old style trench-coat. When a bum sees a cop coming, he don't stick around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_brown.rsi
+
+- type: entity
+  parent: RMCCoatBureauTrenchCoatBrown
+  id: RMCCoatBureauTrenchCoatGrey
+  name: grey trench-coat
+  description: A worn, grey, old style trench-coat. When a bum sees a cop coming, he don't stick around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_grey.rsi
+
 # Bureau Deputy
 - type: entity
   parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
@@ -97,3 +119,16 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_vest.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_vest.rsi
+
+# SPP PaP
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatPaP
+  name: PaP uniform jacket
+  description: A People's Armed Police service jacket featuring small dispersed para-aramid inserts providing the barest of defensive functionality, and a Personal Light Unit rig.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
