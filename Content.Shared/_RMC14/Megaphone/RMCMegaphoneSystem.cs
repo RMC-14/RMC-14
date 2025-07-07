@@ -22,7 +22,7 @@ public sealed class RMCMegaphoneSystem : EntitySystem
         args.Handled = true;
 
         var ev = new MegaphoneInputEvent(GetNetEntity(args.User));
-        _dialog.OpenInput(args.User, "Enter a message for the megaphone:", ev, largeInput: false, characterLimit: 150);
+        _dialog.OpenInput(args.User, Loc.GetString("rmc-megaphone-ui-text"), ev, largeInput: false, characterLimit: 150);
     }
 
     private void OnExamined(Entity<RMCMegaphoneComponent> ent, ref ExaminedEvent args)
