@@ -17,9 +17,9 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Content.Shared.Pointing;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
@@ -68,6 +68,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
         SubscribeLocalEvent<RMCUnconsciousComponent, ComponentStartup>(OnUnconsciousStart);
         SubscribeLocalEvent<RMCUnconsciousComponent, ComponentShutdown>(OnUnconsciousEnd);
         SubscribeLocalEvent<RMCUnconsciousComponent, StatusEffectEndedEvent>(OnUnconsciousUpdate);
+        SubscribeLocalEvent<RMCUnconsciousComponent, PointAttemptEvent>(OnUnconsciousPointAttempt);
 
         SubscribeLocalEvent<RMCKnockOutOnCollideComponent, ProjectileHitEvent>(OnKnockOutCollideProjectileHit);
         SubscribeLocalEvent<RMCKnockOutOnCollideComponent, ThrowDoHitEvent>(OnKnockOutCollideThrowHit);
@@ -103,7 +104,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnSizeStunMapInit(Entity<RMCStunOnHitComponent> projectile, ref MapInitEvent args)
     {
-        projectile.Comp.ShotFrom = _transform.GetMoverCoordinates(projectile.Owner);
+        projectile.Comp.ShotFrom = _transform.GetMapCoordinates(projectile.Owner);
         Dirty(projectile);
     }
 
@@ -117,20 +118,6 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (distance > bullet.Comp.MaxRange || _stand.IsDown(args.Target))
             return;
 
-
-        // Multiply daze duration based on the size of the target
-        var dazeMultiplier = 1.0;
-        if(TryComp(args.Target, out RMCSizeComponent? targetSize))
-        {
-            if (targetSize.Size >= RMCSizes.Big)
-                dazeMultiplier = DazedMultiplierBigXeno;
-            else if (targetSize.Size <= RMCSizes.SmallXeno && IsXenoSized((args.Target, targetSize)))
-                dazeMultiplier = DazedMultiplierSmallXeno;
-        }
-
-        //Try to daze before the big size check, because big xenos can still be dazed.
-        _dazed.TryDaze(args.Target, bullet.Comp.DazeTime * dazeMultiplier);
-
         if (!TryComp<RMCSizeComponent>(args.Target, out var size))
             return;
 
@@ -138,6 +125,16 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
         if (_net.IsClient)
             return;
+
+        // Multiply daze duration based on the size of the target
+        var dazeMultiplier = 1.0;
+        if (size.Size >= RMCSizes.Big)
+            dazeMultiplier = DazedMultiplierBigXeno;
+        else if (size.Size <= RMCSizes.SmallXeno && IsXenoSized((args.Target, size)))
+            dazeMultiplier = DazedMultiplierSmallXeno;
+
+        //Try to daze before the big size check, because big xenos can still be dazed.
+        _dazed.TryDaze(args.Target, bullet.Comp.DazeTime * dazeMultiplier);
 
         //Stun part
         if (IsXenoSized((args.Target, size)))
@@ -181,26 +178,25 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// <summary>
     ///     Tries to knock back the target.
     /// </summary>
-    public void KnockBack(EntityUid target, EntityCoordinates? shotFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f)
+    public void KnockBack(EntityUid target, MapCoordinates? knockedBackFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f, bool ignoreSize = false)
     {
-        if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big)
+        if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big && !ignoreSize)
             return;
 
-        if(shotFrom == null)
+        if(knockedBackFrom == null)
             return;
 
         //TODO Camera Shake
         _physics.SetLinearVelocity(target, Vector2.Zero);
         _physics.SetAngularVelocity(target, 0f);
 
-        var vec = _transform.GetMoverCoordinates(target).Position - shotFrom.Value.Position;
+        var vec = _transform.GetMoverCoordinates(target).Position - knockedBackFrom.Value.Position;
         if (vec.Length() != 0)
         {
             _rmcPulling.TryStopPullsOn(target);
             var knockBackPower = _random.NextFloat(knockBackPowerMin, knockBackPowerMax);
             var direction = vec.Normalized() * knockBackPower;
-            _throwing.TryThrow(target, direction, knockBackSpeed, animated: false, playSound: false, doSpin: false);
-            // RMC-14 TODO Thrown into obstacle mechanics
+            _throwing.TryThrow(target, direction, knockBackSpeed, animated: false, playSound: false, compensateFriction: true);
         }
     }
 
@@ -346,6 +342,15 @@ public sealed class RMCSizeStunSystem : EntitySystem
         EnsureComp<MutedComponent>(ent);
         EnsureComp<DeafComponent>(ent);
     }
+
+    private void OnUnconsciousPointAttempt(Entity<RMCUnconsciousComponent> ent, ref PointAttemptEvent args)
+    {
+        if (!_status.HasStatusEffect(ent, KnockedOut))
+            return;
+
+        args.Cancel();
+    }
+
     private void OnKnockOutCollideProjectileHit(Entity<RMCKnockOutOnCollideComponent> ent, ref ProjectileHitEvent args)
     {
         TryKnockOut(args.Target, ent.Comp.ParalyzeTime);

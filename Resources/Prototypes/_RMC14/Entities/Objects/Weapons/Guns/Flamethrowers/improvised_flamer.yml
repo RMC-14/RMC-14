@@ -1,0 +1,139 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  id: RMCWeaponFlamerImprovised
+  name: improvised flamethrower
+  description: A custom made incinerator, made from repurposed welding and piping equipment strapped onto a butchered m16.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
+    state: base
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: lit
+      map: ["enum.RMCIgniterVisuals.Ignited"]
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/improvised.rsi
+    slots:
+    - suitStorage
+    - Back
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 0.333
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: ShootUseDelay
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankFlamerImprovised
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerImprovised
+  - type: Wieldable
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
+  - type: GunRequiresWield
+  - type: RMCFlamerAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM16Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM16Stock
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.05, 0.092
+      rmc-aslot-stock: -0.5, 0.06
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
+  - type: RMCIgniter
+  - type: RMCAmmoEject
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFlamerVisualLayers.Strip:
+        enum.RMCFlamerVisualLayers.Strip:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCIgniterVisuals.Ignited:
+        enum.RMCIgniterVisuals.Ignited:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorInprovised
+
+- type: entity
+  parent: BaseItem
+  id: RMCTankFlamerImprovised
+  name: improvised flamer tank
+  description: A repurposed tank from heavy welding equipment, holding a flammable mix similar to napalm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
+    state: flametank_improvised
+    layers:
+    - state: flametank_improvised
+  - type: Item
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 100
+  - type: RMCFlamerTank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
+    targetWhitelist:
+      tags:
+      - RMCTankReagent
+      - RMCBackpackFlamer
+  - type: RefillableSolution
+    solution: rmc_flamer_tank
+  - type: DetailedExaminableSolution
+    solution: rmc_flamer_tank
+  - type: NoMixingReagents
+  - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
+  - type: Tag
+    tags:
+    - RMCTankFlamerImprovised
+
+- type: Tag
+  id: RMCWeaponIncineratorInprovised
+
+- type: Tag
+  id: RMCTankFlamerImprovised

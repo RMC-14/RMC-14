@@ -122,6 +122,16 @@
 
 - type: entity
   parent: ActionMarineBase
+  id: RMCActionToggleSechud
+  name: Toggle Security HUD
+  description: Toggle the optical matrix of the security HUD.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ActionMarineBase
   id: RMCActionToggleWeldingGoggles
   name: Toggle the welding goggles
   description: Change the positions of the welding goggles on your forehead.
