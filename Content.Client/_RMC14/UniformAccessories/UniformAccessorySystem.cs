@@ -52,6 +52,9 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             if (accessoryComp.PlayerSprite is not { } sprite)
                 continue;
 
+            if (ent.Comp.HideAccessories && accessoryComp.HiddenByJacketRolling)
+                continue;
+
             if (clothingSprite != null && accessoryComp.HasIconSprite)
             {
                 var clothingLayer = clothingSprite.LayerMapReserveBlank(layer);
@@ -152,7 +155,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
     private string GetKey(EntityUid uid, UniformAccessoryComponent component, int index)
     {
-        var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}";
+        var key = $"enum.{nameof(UniformAccessoryLayer)}.{UniformAccessoryLayer.Base}{index}_{Name(uid)}_{uid.Id}";
 
         if (component.LayerKey != null)
             key = component.LayerKey;
