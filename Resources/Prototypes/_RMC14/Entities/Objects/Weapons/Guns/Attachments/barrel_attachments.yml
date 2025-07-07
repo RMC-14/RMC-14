@@ -124,6 +124,7 @@
     - RMCAttachmentBarrel
     - RMCAttachmentShotgunChoke
   - type: AttachableVisuals
+  - type: GrantProjectileStunRemoveComponent
   - type: AttachableWeaponRangedMods
     modifiers:
     - fireDelayFlat: -0.5
@@ -137,7 +138,6 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
-  - type: ProjectileStunRemove
 
 
 - type: entity
