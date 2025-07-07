@@ -87,3 +87,9 @@
   name: PMC Site Director
   prefix: Director
   paygrade: PMC-DIR
+
+- type: rank
+  id: RMCRankPMCSynthetic
+  name: PMC Support Synthetic
+  prefix: Syn.
+  paygrade: PMC-SY
