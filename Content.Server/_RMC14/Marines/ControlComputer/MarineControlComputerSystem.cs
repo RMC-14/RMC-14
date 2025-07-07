@@ -14,14 +14,14 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         SubscribeLocalEvent<MarineComponent, BeingGibbedEvent>(OnMarineGibbed);
     }
 
-    private void OnMarineGibbed(EntityUid uid, MarineComponent component, ref BeingGibbedEvent ev)
+    private void OnMarineGibbed(Entity<MarineComponent> ent, ref BeingGibbedEvent ev)
     {
-        if (HasComp<RMCSurvivorComponent>(uid))
+        if (HasComp<RMCSurvivorComponent>(ent))
         {
             return;
         }
-        // The entity being gibbed is the one that raised the event (uid)
-        if (!TryComp(uid, out CommendationReceiverComponent? receiver) ||
+        // The entity being gibbed is the one that raised the event (ent)
+        if (!TryComp(ent, out CommendationReceiverComponent? receiver) ||
             receiver.LastPlayerId == null)
         {
             return;
@@ -32,7 +32,7 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         {
             var info = new GibbedMarineInfo
             {
-                Name = Name(uid),
+                Name = Name(ent),
                 LastPlayerId = receiver.LastPlayerId
             };
 
