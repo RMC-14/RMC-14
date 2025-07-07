@@ -52,6 +52,9 @@ public sealed partial class SynthComponent : Component
     [DataField, AutoNetworkedField]
     public LocId Generation = "rmc-species-synth-generation-third";
 
+    [DataField, AutoNetworkedField]
+    public LocId FixedIdentityReplacement = "cm-chatsan-replacement-synth";
+
     /// <summary>
     /// New brain organ to add when the synth is created.
     /// </summary>

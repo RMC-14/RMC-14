@@ -40,6 +40,7 @@
       preset: RMCSurvivorPresetForeconNoPistol
     - type: JobPrefix
       prefix: cm-job-prefix-gun-operator
+    - type: SpotterWhitelist
   hidden: true
 
 - type: playTimeTracker
