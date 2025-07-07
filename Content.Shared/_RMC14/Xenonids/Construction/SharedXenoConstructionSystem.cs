@@ -117,7 +117,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoOrderConstructionActionEvent>(OnXenoOrderConstructionAction);
         SubscribeLocalEvent<XenoConstructionComponent, XenoOrderConstructionDoAfterEvent>(OnXenoOrderConstructionDoAfter);
-        SubscribeLocalEvent<XenoConstructionComponent, XenoConstructionAddPlasmaDoAfterEvent>(OnHiveConstructionNodeAddPlasmaDoAfter);
+        SubscribeLocalEvent<XenoCanAddPlasmaToConstructComponent, XenoConstructionAddPlasmaDoAfterEvent>(OnHiveConstructionNodeAddPlasmaDoAfter);
 
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
         SubscribeLocalEvent<XenoConstructionActionComponent, ValidateActionWorldTargetEvent>(OnSecreteActionValidateTarget);
@@ -501,7 +501,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _announce.AnnounceSameHive(xeno.Owner, msg, needsQueen: true);
     }
 
-    private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
+    private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoCanAddPlasmaToConstructComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
@@ -513,7 +513,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (!InRangePopup(args.User, transform.Coordinates, xeno.Comp.OrderConstructionRange.Float()))
+        if (!InRangePopup(args.User, transform.Coordinates, xeno.Comp.Range.Float()))
             return;
 
         var plasmaLeft = node.PlasmaCost - node.PlasmaStored;
@@ -629,7 +629,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         var user = args.User;
         var plasmaLeft = node.Comp.PlasmaCost - node.Comp.PlasmaStored;
-        if (!TryComp(user, out XenoConstructionComponent? xeno) ||
+        if (!TryComp(user, out XenoCanAddPlasmaToConstructComponent? xeno) ||
             plasmaLeft < FixedPoint2.Zero ||
             !TryComp(node, out TransformComponent? nodeTransform) ||
             !TryComp(user, out XenoPlasmaComponent? plasma))
@@ -637,7 +637,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (!InRangePopup(user, nodeTransform.Coordinates, xeno.OrderConstructionRange.Float()))
+        if (!InRangePopup(user, nodeTransform.Coordinates, xeno.Range.Float()))
             return;
 
         var subtract = FixedPoint2.Min(plasma.Plasma, plasmaLeft);
@@ -648,7 +648,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var ev = new XenoConstructionAddPlasmaDoAfterEvent();
-        var delay = xeno.OrderConstructionAddPlasmaDelay;
+        var delay = xeno.AddPlasmaDelay;
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, user, node)
         {
             BreakOnMove = true
@@ -1162,7 +1162,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         popupType = null;
         if (_transform.GetGrid(coords) is not { } gridId ||
-    !TryComp(gridId, out MapGridComponent? grid))
+            !TryComp(gridId, out MapGridComponent? grid))
         {
             popupType = "rmc-xeno-construction-no-map";
             return false;
