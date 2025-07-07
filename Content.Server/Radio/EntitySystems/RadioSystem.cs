@@ -104,16 +104,17 @@ public sealed class RadioSystem : EntitySystem
 
         if (TryComp(messageSource, out JobPrefixComponent? prefix))
         {
+            var prefixText = (prefix.AdditionalPrefix != null ? $"{Loc.GetString(prefix.AdditionalPrefix.Value)} " : "") + Loc.GetString(prefix.Prefix);
             if (TryComp(messageSource, out SquadMemberComponent? member) &&
                 TryComp(member.Squad, out SquadTeamComponent? team) &&
                 team.Radio != null &&
                 team.Radio != channel.ID)
             {
-                name = $"({Name(member.Squad.Value)} {Loc.GetString(prefix.Prefix)}) {name}";
+                name = $"({Name(member.Squad.Value)} {prefixText}) {name}";
             }
             else
             {
-                name = $"({Loc.GetString(prefix.Prefix)}) {name}";
+                name = $"({prefixText}) {name}";
             }
         }
 
@@ -192,7 +193,9 @@ public sealed class RadioSystem : EntitySystem
             RaiseLocalEvent(receiver, ref ev);
         }
 
-        if (canSend && !HasComp<XenoComponent>(messageSource))
+        if (canSend &&
+            !HasComp<XenoComponent>(messageSource) &&
+            HasComp<RMCHeadsetComponent>(radioSource))
         {
             var filter = Filter.Pvs(messageSource).RemoveWhereAttachedEntity(HasComp<XenoComponent>);
             _audio.PlayEntity(_radioSound, filter, messageSource, false); // RMC14

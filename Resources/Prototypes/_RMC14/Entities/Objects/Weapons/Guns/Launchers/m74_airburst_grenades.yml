@@ -146,6 +146,7 @@
       path: /Audio/Effects/gen_hit.ogg
   - type: ClusterLimitHits
     limit: 0
+    ignoreFirstHit: true
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: ContainerContainer
@@ -312,7 +313,7 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnProjectileHit
-    stacks: 2
+    intensity: 2
 
 - type: entity
   parent: RMCBaseBullet

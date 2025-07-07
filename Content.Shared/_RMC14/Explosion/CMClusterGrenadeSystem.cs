@@ -26,7 +26,10 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
         foreach (var spawned in args.Spawned)
         {
             var projectile = EnsureComp<ProjectileLimitHitsComponent>(spawned);
-            projectile.IgnoredEntities = args.HitEntities;
+
+            if (ent.Comp.IgnoreFirstHit)
+                projectile.IgnoredEntities = args.HitEntities;
+
             projectile.Limit = ent.Comp.Limit;
             projectile.OriginEntity = args.OriginEntity;
             Dirty(spawned, projectile);
@@ -44,7 +47,7 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
             return;
         }
 
-        limit.HitBy.Add(new Hit(GetNetEntity(ent.Owner), _timing.CurTime + limit.Expire));
+        limit.HitBy.Add(new Hit(GetNetEntity(ent.Comp.OriginEntity), _timing.CurTime + limit.Expire));
         Dirty(args.Target, limit);
     }
 

@@ -1,3 +1,5 @@
+using Content.Client._RMC14.Sprite;
+using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -21,6 +23,7 @@ namespace Content.Client._RMC14.Xenonids;
 public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
 
     private EntityQuery<XenoAnimateMovementComponent> _animateQuery;
 
@@ -47,20 +50,18 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 
     private void OnXenoGetDrawDepth(Entity<XenoComponent> ent, ref GetDrawDepthEvent args)
     {
-        if (_mobState.IsDead(ent))
-        {
-            if (args.DrawDepth > DrawDepth.DeadMobs)
-            {
-                args.DrawDepth = DrawDepth.DeadMobs;
-            }
-        }
+        if (!_mobState.IsDead(ent))
+            return;
+
+        if (args.DrawDepth > DrawDepth.DeadMobs)
+            args.DrawDepth = DrawDepth.DeadMobs;
     }
 
     protected override void OnAppearanceChange(EntityUid uid, XenoComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
         UpdateSprite((uid, sprite, null, args.Component, null, null));
-        UpdateDrawDepth((uid, sprite));
+        _rmcSprite.UpdateDrawDepth(uid);
     }
 
     public void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent?, ThrownItemComponent?, XenoLeapingComponent?, KnockedDownComponent?> entity)
@@ -175,17 +176,6 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         sprite.LayerSetState(oviLayer, oviState);
         sprite.LayerSetVisible(oviLayer, true);
         sprite.LayerSetVisible(layer, false);
-    }
-
-    public void UpdateDrawDepth(Entity<SpriteComponent?> xeno)
-    {
-        if (!Resolve(xeno, ref xeno.Comp))
-            return;
-
-        var ev = new GetDrawDepthEvent(DrawDepth.Mobs);
-        RaiseLocalEvent(xeno, ref ev);
-
-        xeno.Comp.DrawDepth = (int) ev.DrawDepth;
     }
 
     private bool IsThrown(Entity<XenoLeapingComponent?, ThrownItemComponent?, ActiveXenoToggleChargingComponent?> xeno)

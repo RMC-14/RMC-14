@@ -30,7 +30,7 @@ rmc-xeno-vanguard-description = You trade your spit, acid ball, acid spray, corr
 rmc-xeno-vanguard-popup = Fearless you are born, fearless you serve, fearless you die. This one will become my Vanguard.
 
 rmc-xeno-valkyrie-name = Valkyrie
-rmc-xeno-valkyrie-description = You trade your tail stab, spit, acid ball, acid spray, corrosive acid, and some speed to gain some armor and frontline support abilities.
+rmc-xeno-valkyrie-description = You trade your tail stab, spit, acid ball, acid spray, and some speed to gain some armor and frontline support abilities.
    You gain the ability to:
    - Break the strongest of walls and other reinforced structures with your slash attack, and emit strong pheromones.
    - Extinguish friend or capture alike with your tail, or knock away explosives and down enemies with your High Gallop.
@@ -44,6 +44,7 @@ rmc-xeno-gardener-description = You trade your choice of resin secretions, corro
   You gain the ability to:
   - Plant up to six potent resin fruits for your sisters at the cost of a bit of your health for each fruit you shape.
   - Plant hardier weeds.
+  - Pick and feed others fruits 2x as fast.
   Your Resin Surge allows you to:
   - Create patches of sticky resin.
   - Temporarily reinforce structures with your plasma.

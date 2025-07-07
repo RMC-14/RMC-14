@@ -54,6 +54,53 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      # TODO darksight instead of night vision
+      - type: NightVision
+        innate: true
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      - type: RMCLeapProtection
+        inherentStunDuration: 3
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
+      - type: RMCSuicide
+        damage: { }
   hidden: true
 
 - type: startingGear
@@ -64,22 +111,21 @@
 - type: startingGear
   id: RMCGearSyntheticEquipped
   equipment:
-    jumpsuit: RMCJumpsuitSynthetic
     gloves: CMHandsInsulated
     shoes: RMCShoesWhite
     id: RMCIDCardSynth
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
 
-#- type: entity
-#  parent: CMSpawnPointJobBase
-#  id: RMCSpawnPointSynth
-#  name: synthetic spawn point
-#  components:
-#  - type: SpawnPoint
-#    job_id: RMCJobSynthetic
-#  - type: Sprite
-#    state: syn_spawn
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSynth
+  name: synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCJobSynthetic
+  - type: Sprite
+    state: syn_spawn
 
 - type: playTimeTracker
   id: RMCJobSynthetic

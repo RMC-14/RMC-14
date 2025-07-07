@@ -224,7 +224,7 @@
     - Helmet
     - Goggles
     - Armor
-    radio: RoyalMarine
+    radio: TSE
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_twe
@@ -260,13 +260,68 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadFORECON
+  name: Recon
+  components:
+  - type: SquadTeam
+    color: "#32CD32"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: MarineForecon
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_forecon
+    canSupplyDrop: false
+    group: FORECON
+  - type: Tag
+    tags:
+    - RMCSquadFORECON
+
+- type: Tag
+  id: RMCSquadFORECON
+
+- type: entity
+  parent: SquadBase
   id: SquadSOF
   name: SOF
   components:
   - type: SquadTeam
     color: "#400000"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
     radio: null
     accessLevels: []
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_sof
+    group: SOF
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_soctl
+
+- type: entity
+  parent: SquadBase
+  id: SquadCLF
+  name: CLF
+  components:
+  - type: SquadTeam
+    color: "#3aeb34"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: Colony
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_spp
+    canSupplyDrop: false
+    group: CLF
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: clf_sl

@@ -21,13 +21,13 @@ public sealed partial class XenoRageComponent : Component
     public int ArmorPerRage = 3;
 
     [DataField, AutoNetworkedField]
-    public float SpeedBuffPerRage = 0.05f;
+    public float SpeedBuffPerRage = 0.028f;
 
     [DataField, AutoNetworkedField]
     public float AttackSpeedPerRage = 0.28f;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan RageDecayTime = TimeSpan.FromSeconds(0.5);
+    public TimeSpan RageDecayTime = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public TimeSpan RageLockDuration = TimeSpan.FromSeconds(10);
@@ -37,6 +37,9 @@ public sealed partial class XenoRageComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan RageHealTime = TimeSpan.FromSeconds(0.05);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan LastHit;
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 HealAmount = 45; // Equal to the slash damage of the xeno

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
@@ -12,6 +13,7 @@ using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
@@ -65,6 +67,8 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destruct = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
 
@@ -248,7 +252,7 @@ public sealed class XenoChargeSystem : EntitySystem
         var perpendicular = _random.Prob(0.5f) ? perpendiculars.First : perpendiculars.Second;
         var diff = perpendicular.ToVec().Normalized();
 
-        _throwing.TryThrow(ent, diff, 10);
+        _throwing.TryThrow(ent, diff, compensateFriction: true);
         IncrementStages(args.Charger, -1);
 
         if (_net.IsServer)
@@ -328,15 +332,10 @@ public sealed class XenoChargeSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnXenoChargeHit(Entity<XenoChargeComponent> xeno, ref ThrowDoHitEvent args)
+    private void StopCrusherCharge(Entity<XenoChargeComponent> xeno)
     {
-        // TODO RMC14 lag compensation
-        var targetId = args.Target;
-        if (_mobState.IsDead(targetId))
-            return;
-
         if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
-            _thrownItemQuery.TryGetComponent(xeno, out var thrown))
+_thrownItemQuery.TryGetComponent(xeno, out var thrown))
         {
             _thrownItem.LandComponent(xeno, thrown, physics, true);
             _thrownItem.StopThrow(xeno, thrown);
@@ -348,28 +347,80 @@ public sealed class XenoChargeSystem : EntitySystem
             _xenoAnimations.PlayLungeAnimationEvent(xeno, charge);
         }
 
-        if (!_xeno.CanAbilityAttackTarget(xeno, targetId, true))
+    }
+
+    private void OnXenoChargeHit(Entity<XenoChargeComponent> xeno, ref ThrowDoHitEvent args)
+    {
+        // TODO RMC14 lag compensation
+        // TODO RMC14 allow charge to continue if pass is true
+        var targetId = args.Target;
+        if (_mobState.IsDead(targetId))
             return;
+
+        StopCrusherCharge(xeno);
+
+        XenoCrusherChargableComponent? crush = null;
+        var pass = false;
+
+        if (!_xeno.CanAbilityAttackTarget(xeno, targetId) && !TryComp(targetId, out crush))
+        {
+            return;
+        }
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, origin: xeno, tool: xeno);
+        var structDamage = xeno.Comp.Damage;
+
+        if (crush != null)
+        {
+            if (crush.SetDamage != null)
+                structDamage = crush.SetDamage;
+
+            if(crush.InstantDestroy)
+            {
+                if (_net.IsClient && pass)
+                    _transform.DetachEntity(targetId, Transform(targetId));
+                else if (_net.IsServer)
+                    _destruct.DestroyEntity(targetId);
+                return;
+            }
+
+        }
+
+        var damage = _damageable.TryChangeDamage(targetId, _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage), origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { targetId }, filter);
         }
 
+        if (crush != null && crush.DestroyDamage != null)
+        {
+            if (TryComp<DamageableComponent>(targetId, out var damageable))
+            {
+                if (damage != null && crush.PassOnDestroy &&
+                    crush.DestroyDamage > FixedPoint2.Zero && damageable.TotalDamage >= crush.DestroyDamage)
+                {
+                    pass = true;
+
+                    if (_net.IsClient)
+                        _transform.DetachEntity(targetId, Transform(targetId));
+                }
+            }
+        }
+
+        var range = xeno.Comp.Range;
+
+        if (crush != null && crush.ThrowRange != null)
+            range = crush.ThrowRange.Value;
+
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(targetId);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.Range;
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
-        _throwing.TryThrow(targetId, diff, 10);
+        _sizeStun.KnockBack(targetId, origin, 2, 2, knockBackSpeed: 10);
     }
 
     private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
@@ -388,7 +439,7 @@ public sealed class XenoChargeSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
+        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false, compensateFriction: true);
     }
 
     private void OnXenoChargeStop(Entity<XenoChargeComponent> xeno, ref StopThrowEvent args)

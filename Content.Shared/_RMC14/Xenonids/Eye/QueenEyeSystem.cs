@@ -206,11 +206,7 @@ public sealed class QueenEyeSystem : EntitySystem
 
     private bool RemoveQueenEye(Entity<QueenEyeActionComponent> ent)
     {
-        if (!TryComp(ent, out EyeComponent? eye))
-            return false;
-
-        var target = eye.Target;
-        if (!HasComp<QueenEyeComponent>(target))
+        if (ent.Comp.Eye == null)
             return false;
 
         _eye.SetTarget(ent, null);
@@ -220,8 +216,8 @@ public sealed class QueenEyeSystem : EntitySystem
         ent.Comp.Eye = null;
         Dirty(ent);
 
-        if (_net.IsServer)
-            QueueDel(target);
+        if (_net.IsServer && HasComp<QueenEyeComponent>(ent.Comp.Eye))
+            QueueDel(ent.Comp.Eye);
 
         RemComp<RelayInputMoverComponent>(ent);
 

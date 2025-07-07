@@ -81,6 +81,13 @@
 
 - type: entity
   parent: RMCPouchSurvival
+  id: RMCPouchSurvivalBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+
+- type: entity
+  parent: RMCPouchSurvival
   id: RMCPouchSurvivalFill
   suffix: Filled
   components:
@@ -93,6 +100,13 @@
     - id: RMCRadioHandheldColony
     - id: RMCM5Bayonet
       # 5 splints
+
+- type: entity
+  parent: [ RMCPouchSurvivalBlack, RMCPouchSurvivalFill ]
+  id: RMCPouchSurvivalBlackFilled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
 
 
 # Survival Synth Pouch
@@ -197,6 +211,17 @@
       tags:
       - Sidearm
 
+#Filled Command Pouch
+- type: entity
+  parent: RMCPouchCommand
+  id: RMCPouchCommandFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+
 
 # Magazine Pouch
 - type: entity
@@ -244,6 +269,16 @@
   - type: StorageFill
     contents:
     - id: CMMagazineSMGMP5
+      amount: 4
+
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineType64
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGType64
       amount: 4
 
 # Pistol Magazine Pouch
@@ -295,6 +330,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/medium_shotshells.rsi
+    layers:
+    - state: icon
+    - state: half
+      visible: false
+    - state: full
+      visible: false
   - type: Storage
     grid:
     - 0,0,9,1 #5 slots
@@ -311,7 +352,20 @@
     tags:
     - Pouch
     - RMCPouchShotgunShells
-
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 # Large Shotgun Shell Pouch
 - type: entity
@@ -333,6 +387,20 @@
     items:
       tags:
       - RMCShellShotgun
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 - type: entity
   parent: RMCPouchShotgunLarge

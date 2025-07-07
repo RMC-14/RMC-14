@@ -10,6 +10,9 @@
   name: Spitter
   description: A gross, oozing alien of some kind.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSpitter
   - type: GhostRole
     name: cm-job-name-xeno-spitter
   - type: Sprite
@@ -106,3 +109,5 @@
   - type: AcidTrap
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-spitter

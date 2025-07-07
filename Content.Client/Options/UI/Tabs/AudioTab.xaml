@@ -7,6 +7,10 @@
             <Label Text="{Loc 'cm-ui-rmc14'}"
                    FontColorOverride="{x:Static s:StyleNano.NanoGold}"
                    StyleClasses="LabelKeyText"/>
+            <BoxContainer Orientation="Vertical" Margin="0 3 0 0">
+                <ui:OptionSlider Name="SliderVolumeCassettes" Title="{Loc 'rmc-ui-options-cassettes-volume'}" />
+                <ui:OptionSlider Name="SliderVolumeHijackSong" Title="{Loc 'rmc-ui-options-hijack-song-volume'}" />
+            </BoxContainer>
             <Label Text="{Loc 'ui-options-volume-label'}"
                    StyleClasses="LabelKeyText"/>
             <BoxContainer Orientation="Vertical" Margin="0 3 0 0">

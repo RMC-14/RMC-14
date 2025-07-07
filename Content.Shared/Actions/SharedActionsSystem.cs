@@ -1164,7 +1164,7 @@ public abstract class SharedActionsSystem : EntitySystem
     /// <summary>
     ///     Checks if the action has a cooldown and if it's still active
     /// </summary>
-    protected bool IsCooldownActive(BaseActionComponent action, TimeSpan? curTime = null)
+    public bool IsCooldownActive(BaseActionComponent action, TimeSpan? curTime = null)
     {
         curTime ??= GameTiming.CurTime;
         // TODO: Check for charge recovery timer

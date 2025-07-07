@@ -164,7 +164,8 @@ public sealed class XenoEggSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno)
         {
             BreakOnMove = true,
-            MovementThreshold = 0.001f
+            MovementThreshold = 0.001f,
+            BreakOnRest = !hasOvipositor,
         };
 
         if (_doAfter.TryStartDoAfter(doAfterArgs))

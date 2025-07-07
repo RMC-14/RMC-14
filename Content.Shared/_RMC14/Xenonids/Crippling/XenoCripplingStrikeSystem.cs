@@ -1,15 +1,14 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
-using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Damage;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Slow;
-using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Aura;
-using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Crippling;
 
@@ -32,6 +31,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         SubscribeLocalEvent<XenoCripplingStrikeComponent, XenoCripplingStrikeActionEvent>(OnXenoCripplingStrikeAction);
 
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeHitEvent>(OnXenoCripplingStrikeHit);
+        SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeAttackAttemptEvent>(OnActiveCripplingStrikeMeleeAttempt);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, RefreshMovementSpeedModifiersEvent>(OnActiveCripplingRefreshSpeed);
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, ComponentRemove>(OnActiveCripplingRemove);
 
@@ -43,7 +43,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -52,11 +52,15 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         _rmcMelee.MeleeResetInit((xeno.Owner, reset));
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
+        active.NextSlashBuffed = true;
         active.SlowDuration = xeno.Comp.SlowDuration;
         active.DamageMult = xeno.Comp.DamageMult;
         active.HitText = xeno.Comp.HitText;
+        active.DeactivateText = xeno.Comp.DeactivateText;
         active.ExpireText = xeno.Comp.ExpireText;
         active.Speed = xeno.Comp.Speed;
+        active.RemoveOnHit = xeno.Comp.RemoveOnHit;
+        active.PreventTackle = xeno.Comp.PreventTackle;
 
         Dirty(xeno, active);
 
@@ -69,6 +73,9 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
     private void OnXenoCripplingStrikeHit(Entity<XenoActiveCripplingStrikeComponent> xeno, ref MeleeHitEvent args)
     {
+        if (!xeno.Comp.NextSlashBuffed)
+            return;
+
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
@@ -86,16 +93,19 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
             Dirty(entity, victim);
 
-            _slow.TrySlowdown(entity, xeno.Comp.SlowDuration, ignoreDurationModifier: true);
+            _slow.TrySlowdown(entity, _xeno.TryApplyXenoDebuffMultiplier(entity, xeno.Comp.SlowDuration), ignoreDurationModifier: true);
 
             var message = Loc.GetString(xeno.Comp.HitText, ("target", entity));
 
             if (_net.IsServer)
                 _popup.PopupEntity(message, entity, xeno);
 
-            RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
+            xeno.Comp.NextSlashBuffed = false;
             break;
         }
+
+        if (xeno.Comp.RemoveOnHit)
+            RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
     }
 
     private void OnActiveCripplingRefreshSpeed(Entity<XenoActiveCripplingStrikeComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -118,6 +128,20 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         RemCompDeferred<VictimCripplingStrikeDamageComponent>(victim);
     }
 
+    private void OnActiveCripplingStrikeMeleeAttempt(Entity<XenoActiveCripplingStrikeComponent> ent, ref MeleeAttackAttemptEvent args)
+    {
+        if (!ent.Comp.PreventTackle)
+            return;
+
+        var netAttacker = GetNetEntity(ent);
+        switch (args.Attack)
+        {
+            case DisarmAttackEvent disarm:
+                args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
+                break;
+        }
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -134,7 +158,13 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             if (time < active.ExpireAt)
                 continue;
 
-            _popup.PopupEntity(Loc.GetString(active.ExpireText), uid, uid, PopupType.SmallCaution);
+            if (active.NextSlashBuffed)
+                _popup.PopupEntity(Loc.GetString(active.ExpireText), uid, uid, PopupType.SmallCaution);
+            // the deactivate text is supposed to show up together with the expire text
+            // but in ss14 popups overlap making it unreadable so else if will have to do...
+            else if (active.DeactivateText is { } deactivateText)
+                _popup.PopupEntity(Loc.GetString(deactivateText), uid, uid, PopupType.MediumCaution);
+
             RemCompDeferred<XenoActiveCripplingStrikeComponent>(uid);
         }
     }

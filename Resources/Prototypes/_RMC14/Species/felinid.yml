@@ -8,34 +8,39 @@
   sprites: MobFelinidSprites
   markingLimits: MobFelinidMarkingLimits
   dollPrototype: MobFelinidDummy
-  skinColoration: HumanToned
+  skinColoration: Hues
 
 - type: speciesBaseSprites
   id: MobFelinidSprites
   sprites:
-    Head: MobHumanHead
+    Head: MobFelinidHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
-    Chest: MobHumanTorso
+    Chest: MobFelinidTorso
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Underwear: MobHumanoidAnyMarking
     Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
     Eyes: MobHumanoidEyes
-    LArm: MobHumanLArm
-    RArm: MobHumanRArm
-    LHand: MobHumanLHand
-    RHand: MobHumanRHand
-    LLeg: MobHumanLLeg
-    RLeg: MobHumanRLeg
-    LFoot: MobHumanLFoot
-    RFoot: MobHumanRFoot
+    LArm: MobFelinidLArm
+    RArm: MobFelinidRArm
+    LHand: MobFelinidLHand
+    RHand: MobFelinidRHand
+    LLeg: MobFelinidLLeg
+    RLeg: MobFelinidRLeg
+    LFoot: MobFelinidLFoot
+    RFoot: MobFelinidRFoot
 
 - type: markingPoints
   id: MobFelinidMarkingLimits
   points:
     Head:
+      points: 2
+      required: false
+    Snout:
       points: 1
       required: false
     Hair:
@@ -52,6 +57,9 @@
       points: 1
       required: true
       defaultMarkings: [ FelinidEarsBasic ]
+    HeadSide:
+      points: 1
+      required: false
     Chest:
       points: 1
       required: false
@@ -69,3 +77,87 @@
     Arms:
       points: 2
       required: false
+
+- type: humanoidBaseSprite
+  id: MobFelinidHead
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobFelinidHeadMale
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobFelinidHeadFemale
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobFelinidTorso
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobFelinidTorsoMale
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobFelinidTorsoFemale
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobFelinidLLeg
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobFelinidLHand
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobFelinidLArm
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobFelinidLFoot
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobFelinidRLeg
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobFelinidRHand
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobFelinidRArm
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobFelinidRFoot
+  baseSprite:
+    sprite: _RMC14/Mobs/Felinids/parts.rsi
+    state: r_foot

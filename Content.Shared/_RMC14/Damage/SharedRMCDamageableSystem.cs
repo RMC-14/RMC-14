@@ -4,8 +4,11 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.ForTheHive;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Armor;
@@ -50,6 +53,8 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -149,7 +154,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     private void OnDamageMobStateMapInit(Entity<DamageMobStateComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.DamageAt = _timing.CurTime + ent.Comp.Cooldown;
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(ent.Comp.DamageAt));
     }
 
     private void OnDamageOverTimeStartCollide(Entity<DamageOverTimeComponent> ent, ref StartCollideEvent args)
@@ -412,6 +417,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         if (!damage.Comp.AffectsDead && _mobState.IsDead(target))
             return false;
 
+        if (!damage.Comp.AffectsCrit && _mobState.IsCritical(target))
+            return false;
+
         if (!damage.Comp.AffectsInfectedNested &&
             _xenoNestedQuery.HasComp(target) &&
             _victimInfectedQuery.HasComp(target))
@@ -422,27 +430,49 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return true;
     }
 
-    private void DoDamage(Entity<DamageOverTimeComponent> damageEnt, EntityUid target, DamageSpecifier damage, bool ignoreResistances = false)
+    private void DoDamage(Entity<DamageOverTimeComponent> damageEnt, EntityUid target, DamageSpecifier damage, bool ignoreResistances = false, bool acidic = false)
     {
+        var damageBase = damage;
+
+        if (acidic)
+            damageBase = _xeno.TryApplyXenoAcidDamageMultiplier(target, damageBase);
+
         if (damageEnt.Comp.Multipliers is { } multipliers)
         {
             foreach (var multiplier in multipliers)
             {
                 if (_entityWhitelist.IsWhitelistPass(multiplier.Whitelist, target))
                 {
-                    _damageable.TryChangeDamage(target, damage * multiplier.Multiplier, ignoreResistances);
+                    _damageable.TryChangeDamage(target, damageBase * multiplier.Multiplier, ignoreResistances);
                     return;
                 }
             }
         }
 
-        _damageable.TryChangeDamage(target, damage, ignoreResistances);
+        _damageable.TryChangeDamage(target, damageBase, ignoreResistances);
     }
 
     public virtual bool TryGetDestroyedAt(EntityUid destructible, [NotNullWhen(true)] out FixedPoint2? destroyed)
     {
         // TODO RMC14
         destroyed = default;
+        return false;
+    }
+
+    public bool HasAnyDamage(Entity<DamageableComponent?> damageable, DamageSpecifier damage)
+    {
+        if (!_damageableQuery.Resolve(damageable, ref damageable.Comp, false))
+            return false;
+
+        foreach (var (type, _) in damage.DamageDict)
+        {
+            if (damageable.Comp.Damage.DamageDict.TryGetValue(type, out var healValue) &&
+                healValue > FixedPoint2.Zero)
+            {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -456,7 +486,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 continue;
 
             comp.DamageAt = time + comp.Cooldown;
-            Dirty(uid, comp);
+            DirtyField(uid, comp, nameof(comp.DamageAt));
 
             if (!_mobStateQuery.TryComp(uid, out var state) ||
                 !_damageableQuery.TryComp(uid, out var damageable))
@@ -467,6 +497,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             switch (state.CurrentState)
             {
                 case MobState.Alive:
+                    if (!HasAnyDamage((uid, damageable), comp.NonDeadDamage))
+                        break;
+
                     _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
                     break;
                 case MobState.Critical:
@@ -558,6 +591,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 if (!damage.AffectsDead && _mobState.IsDead(user))
                     continue;
 
+                if (!damage.AffectsCrit && _mobState.IsCritical(user))
+                    continue;
+
                 if (!damage.AffectsInfectedNested &&
                     _xenoNestedQuery.HasComp(user) &&
                     _victimInfectedQuery.HasComp(user))
@@ -568,13 +604,16 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 if (!_entityWhitelist.IsWhitelistPassOrNull(damage.Whitelist, user))
                     continue;
 
+                if (_hive.FromSameHive(contact, user))
+                    continue;
+
                 userDamage.NextDamageAt = time + userDamage.DamageEvery;
 
                 if (damage.Damage != null)
                     DoDamage((contact, damage), user, damage.Damage);
 
                 if (damage.ArmorPiercingDamage != null)
-                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true);
+                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true, acidic: damage.Acidic);
 
                 if (damage.Emotes is { Count: > 0 } emotes)
                 {

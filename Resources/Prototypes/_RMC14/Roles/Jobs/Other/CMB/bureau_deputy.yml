@@ -33,6 +33,7 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-deputy
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: entity
@@ -58,6 +59,10 @@
     job: CMBureauDeputy
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear

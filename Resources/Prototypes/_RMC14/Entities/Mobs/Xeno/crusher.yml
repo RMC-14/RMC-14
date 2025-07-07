@@ -11,6 +11,9 @@
   name: Crusher
   description: A huge alien with an enormous armored crest.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCrusher
   - type: GhostRole
     name: cm-job-name-xeno-crusher
   - type: Sprite
@@ -89,6 +92,9 @@
         components:
         - XenoHeavy
   - type: XenoBrutalize
+    damage:
+      types:
+        Blunt: 16
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
@@ -102,6 +108,8 @@
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
   - type: TantrumSpeedBuff
+  - type: FixedIdentity
+    name: cm-job-name-xeno-crusher
 
 - type: entity
   parent: CMXenoCrusherBase
@@ -141,9 +149,7 @@
       780: Critical
       880: Dead
   - type: Xeno
-    role: CMXenoCrusher
     ignorePheromones: Frenzy
-    hidden: true
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
@@ -184,9 +190,10 @@
     slowTime: 8
   - type: XenoStomp # TODO RMC14 screen shake?
     plasmaCost: 25
-    paralyzeTime: 0
+    paralyzeUnderOnly: true
     range: 3.95
     damage:
       types:
         Blunt: 75
   - type: XenoToggleCharging
+  - type: XenoHidden

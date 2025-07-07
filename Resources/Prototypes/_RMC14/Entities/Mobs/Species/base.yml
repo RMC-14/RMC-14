@@ -67,6 +67,7 @@
     - Dazed
     - Blinded
     - Deaf
+    - Unconscious
   - type: Blindable
   - type: Tag
     tags:
@@ -160,6 +161,7 @@
     max: 719 # TODO RMC14 this should be per part and smaller
   - type: Perishable
     rotAfter: 300
+    ignoreTemperature: true
   - type: AtmosExposed
   - type: Temperature
     heatDamageThreshold: 325
@@ -368,3 +370,16 @@
       8: 8
   - type: XenoToggleChargingKnockback
   - type: XenoToggleChargingParalyze
+  - type: RMCMobStateDrawDepth
+    drawDepths:
+      Dead: DeadMobs
+  - type: IVDripTarget
+  - type: FixedIdentity
+    name: rmc-host
+    whitelist:
+      components:
+      - Xeno
+  - type: HiddenAppearance
+    whitelist:
+      components:
+      - Xeno

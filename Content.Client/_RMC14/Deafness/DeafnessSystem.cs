@@ -50,12 +50,21 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
         var curTime = _timing.CurTime;
 
         var query = EntityQueryEnumerator<DeafComponent>();
-        while (query.MoveNext(out var uid, out _))
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (player != uid)
                 continue;
 
-            if (!_statusEffects.TryGetTime(player, DeafKey, out var time))
+            (TimeSpan, TimeSpan)? time = null;
+            (TimeSpan, TimeSpan)? time2 = null;
+
+            if (!_statusEffects.TryGetTime(player, DeafKey, out time) && !_statusEffects.TryGetTime(player, "Unconscious", out time2))
+                continue;
+
+            if (time2 != null && (time == null || time.Value.Item2 < time2.Value.Item2))
+                time = time2.Value;
+
+            if (time == null)
                 continue;
 
             var statusTime = time.Value;
@@ -69,10 +78,16 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
             var fadeOutDuration = Math.Clamp(lastsFor * 0.35f, 0.2f, 2f);
             var fadeInDuration = Math.Clamp(lastsFor * 0.15f, 0.1f, 1f);
 
-            if (timeDone <= 2f) // Fade out during two seconds of deafness
+            if (timeDone <= 2f && !comp.DidFadeOut) // Fade out during two seconds of deafness
             {
                 var fadeOut = 1f - timeDone / fadeOutDuration;
                 volume = fadeOut * _originalVolume;
+
+                if (volume <= 0.1f) // this is so audio doesn't clip out if a status effect refreshes
+                {
+                    volume = 0f;
+                    comp.DidFadeOut = true;
+                }
             }
             else if (timeLeft <= 1f) // Fade in during last second of deafness
             {

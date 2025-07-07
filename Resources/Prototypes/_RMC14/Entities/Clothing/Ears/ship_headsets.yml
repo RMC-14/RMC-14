@@ -26,6 +26,7 @@
       enum.RMCRadioFilterUI.Key:
         type: RMCRadioFilterBui
   - type: HeadsetMultiBroadcast
+  - type: RMCHeadset
 
 - type: entity
   parent: RMCHeadsetIconsUNMC

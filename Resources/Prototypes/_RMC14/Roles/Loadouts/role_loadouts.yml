@@ -12,6 +12,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -20,6 +21,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMDropshipCrewChief
@@ -31,6 +33,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -39,6 +42,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMPilotDropship
@@ -50,6 +54,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -58,6 +63,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMPilotGunship
@@ -69,6 +75,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -77,6 +84,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMIntelOfficer
@@ -88,6 +96,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -96,6 +105,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Command
 - type: roleLoadout
@@ -110,6 +120,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -118,6 +129,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMExecutiveOfficer
@@ -129,6 +141,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -137,6 +150,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMStaffOfficer
@@ -148,6 +162,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -156,6 +171,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Engineering
 - type: roleLoadout
@@ -168,6 +184,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -176,6 +193,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMMaintTech
@@ -187,6 +205,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -195,6 +214,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMOrdnanceTech
@@ -206,6 +226,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -214,6 +235,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Squad Roles
 - type: roleLoadout
@@ -226,6 +248,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -234,6 +257,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMFireteamLeader
@@ -245,6 +269,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -253,6 +278,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMHospitalCorpsman
@@ -264,6 +290,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -272,6 +299,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMRifleman
@@ -283,6 +311,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -291,6 +320,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMSmartGunOperator
@@ -302,6 +332,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -310,6 +341,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMSquadLeader
@@ -321,6 +353,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -329,6 +362,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMWeaponsSpecialist
@@ -340,6 +374,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -348,6 +383,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Medical
 - type: roleLoadout
@@ -360,6 +396,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -368,6 +405,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMDoctor
@@ -379,6 +417,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -387,6 +426,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMNurse
@@ -398,6 +438,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -406,6 +447,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMResearcher
@@ -417,6 +459,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -425,6 +468,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Military Police
 - type: roleLoadout
@@ -435,8 +479,10 @@
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
+  - ChiefMPRoleSpecificRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -445,6 +491,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMMilitaryPolice
@@ -456,6 +503,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -464,6 +512,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMMilitaryWarden
@@ -475,6 +524,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -483,6 +533,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Other
 - type: roleLoadout
@@ -495,6 +546,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -503,6 +555,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMLiaison
@@ -514,6 +567,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -522,6 +576,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMMessTech
@@ -533,6 +588,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -541,6 +597,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMSeniorEnlistedAdvisor
@@ -552,6 +609,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -560,25 +618,24 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
-  id: JobRMCSynthetic
+  id: JobRMCJobSynthetic
   points: 7
   groups:
-  - MarineBackpack
-  - HeadwearRMC
-  - EyewearRMC
-  - MasksRMC
+  - SynthBackpackRMC
+  - SynthHeadwearRMC
+  - SynthGlassesRMC
+  - SynthMasksRMC
   - HelmetGarbsRMC
+  - SynthUniformRMC
+  - SynthSuitsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
-  - WeaponsRMC
-  - CannedDrinksRMC
-  - FlasksRMC
-  - FoodSweetsRMC
-  - FoodPackagedRMC
-  - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 # Requsitions
 - type: roleLoadout
@@ -591,6 +648,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -599,6 +657,7 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC
 
 - type: roleLoadout
   id: JobCMQuartermaster
@@ -610,6 +669,7 @@
   - MasksRMC
   - HelmetGarbsRMC
   - PaperworkRMC
+  - RecreationalRMC
   - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
@@ -618,3 +678,4 @@
   - FoodPackagedRMC
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
+  - SmokablesRMC

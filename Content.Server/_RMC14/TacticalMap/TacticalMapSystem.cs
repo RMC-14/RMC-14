@@ -58,7 +58,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private readonly HashSet<Entity<TacticalMapTrackedComponent>> _toInit = new();
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
     private readonly List<TacticalMapLine> _emptyLines = new();
-
     private TimeSpan _announceCooldown;
     private TimeSpan _mapUpdateEvery;
 
@@ -196,6 +195,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         if (TryGetTacticalMap(out var map))
             UpdateUserData(ent, map);
+
         _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
     }
 
@@ -401,9 +401,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (LifeStage(tracked) < EntityLifeStage.MapInitialized)
             return;
 
-        if (EnsureComp<ActiveTacticalMapTrackedComponent>(tracked, out var active))
-            return;
-
+        var active = EnsureComp<ActiveTacticalMapTrackedComponent>(tracked);
         var activeEnt = new Entity<ActiveTacticalMapTrackedComponent>(tracked, active);
         UpdateIcon(activeEnt);
         UpdateRotting(activeEnt);
@@ -548,13 +546,33 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
     }
 
-    private void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
+    public override void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
     {
         var lines = EnsureComp<TacticalMapLinesComponent>(user);
         if (user.Comp.Xenos)
         {
             user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
             user.Comp.XenoStructureBlips = user.Comp.LiveUpdate ? map.XenoStructureBlips : map.LastUpdateXenoStructureBlips;
+
+            var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
+            while (alwaysVisible.MoveNext(out var uid, out var comp))
+            {
+                if (!comp.VisibleToXenos)
+                    continue;
+
+                if (user.Comp.XenoBlips.ContainsKey(uid.Id) || user.Comp.XenoStructureBlips.ContainsKey(uid.Id))
+                    continue;
+
+                var blip = FindBlipInMap(uid.Id, map);
+                if (blip == null)
+                    continue;
+
+                if (comp.VisibleAsXenoStructure)
+                    user.Comp.XenoStructureBlips[uid.Id] = blip.Value;
+                else
+                    user.Comp.XenoBlips[uid.Id] = blip.Value;
+            }
+
             lines.XenoLines = map.XenoLines;
             lines.MarineLines = _emptyLines;
         }
@@ -562,12 +580,39 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (user.Comp.Marines)
         {
             user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips;
+
+            var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
+            while (alwaysVisible.MoveNext(out var uid, out var comp))
+            {
+                if (!comp.VisibleToMarines)
+                    continue;
+
+                if (user.Comp.MarineBlips.ContainsKey(uid.Id))
+                    continue;
+
+                var blip = FindBlipInMap(uid.Id, map);
+                if (blip != null)
+                    user.Comp.MarineBlips[uid.Id] = blip.Value;
+            }
+
             lines.MarineLines = map.MarineLines;
             lines.XenoLines = _emptyLines;
         }
 
         Dirty(user);
         Dirty(user, lines);
+    }
+
+    private TacticalMapBlip? FindBlipInMap(int entityId, TacticalMapComponent map)
+    {
+        if (map.MarineBlips.TryGetValue(entityId, out var marineBlip))
+            return marineBlip;
+        if (map.XenoStructureBlips.TryGetValue(entityId, out var structureBlip))
+            return structureBlip;
+        if (map.XenoBlips.TryGetValue(entityId, out var xenoBlip))
+            return xenoBlip;
+
+        return null;
     }
 
     private void UpdateCanvas(List<TacticalMapLine> lines, bool marine, bool xeno, EntityUid user, SoundSpecifier? sound = null)

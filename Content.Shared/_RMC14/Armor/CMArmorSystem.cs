@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
@@ -60,6 +61,8 @@ public sealed class CMArmorSystem : EntitySystem
         SubscribeLocalEvent<CMArmorComponent, InventoryRelayedEvent<GetExplosionResistanceEvent>>(OnGetExplosionResistanceRelayed);
         SubscribeLocalEvent<CMArmorComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
         SubscribeLocalEvent<CMArmorComponent, GotEquippedEvent>(OnGotEquipped);
+        SubscribeLocalEvent<CMArmorComponent, GetVerbsEvent<ExamineVerb>>(OnArmorVerbExamine);
+        SubscribeLocalEvent<CMArmorComponent, ExaminedEvent>(OnArmorExamined);
 
         SubscribeLocalEvent<CMHardArmorComponent, InventoryRelayedEvent<HitBySlowingSpitEvent>>(OnArmorHitBySlowingSpit);
         SubscribeLocalEvent<CMHardArmorComponent, InventoryRelayedEvent<CMSurgeryCanPerformStepEvent>>(OnArmorCanPerformStep);
@@ -86,7 +89,6 @@ public sealed class CMArmorSystem : EntitySystem
 
         SubscribeLocalEvent<RMCAllowSuitStorageUserWhitelistComponent, GotEquippedEvent>(OnAllowSuitStorageUserWhitelistGotEquipped);
         SubscribeLocalEvent<RMCAllowSuitStorageUserWhitelistComponent, GotUnequippedEvent>(OnAllowSuitStorageUserWhitelistGotUnequipped);
-        SubscribeLocalEvent<CMArmorComponent, GetVerbsEvent<ExamineVerb>>(OnArmorVerbExamine);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -208,6 +210,51 @@ public sealed class CMArmorSystem : EntitySystem
     private void OnGotEquipped(Entity<CMArmorComponent> armored, ref GotEquippedEvent args)
     {
         EnsureComp<CMArmorUserComponent>(args.Equipee);
+    }
+
+    private void OnArmorVerbExamine(EntityUid uid, CMArmorComponent component, GetVerbsEvent<ExamineVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(uid))
+            return;
+
+        var examineMarkup = GetArmorExamine(component);
+
+        _examine.AddDetailedExamineVerb(args, component, examineMarkup,
+            Loc.GetString("armor-examinable-verb-text"), "/Textures/Interface/Actions/actions_fakemindshield.rsi/icon-on.png",
+            Loc.GetString("armor-examinable-verb-message"));
+    }
+
+    private void OnArmorExamined(Entity<CMArmorComponent> ent, ref ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examined))
+            return;
+
+        using (args.PushGroup(nameof(CMArmorSystem), -10))
+        {
+            var armorRatings = new[]
+            {
+                ("rmc-examine-armor-xeno", ent.Comp.XenoArmor),
+                ("rmc-examine-armor-xeno-frontal", ent.Comp.FrontalArmor),
+                ("rmc-examine-armor-xeno-side", ent.Comp.SideArmor),
+                ("rmc-examine-armor-xeno-explosion", ent.Comp.ExplosionArmor),
+            };
+
+            var examine = new StringBuilder();
+            foreach (var (locId, value) in armorRatings)
+            {
+                if (value == 0)
+                    continue;
+
+                examine.AppendLine(Loc.GetString(locId, ("armor", value)));
+            }
+
+            if (examine.Length == 0)
+                return;
+
+            // Last 1 is for sandboxing, see https://github.com/space-wizards/RobustToolbox/pull/5955
+            examine.Insert(0, $"{Loc.GetString("rmc-examine-armor-xeno-header", ("xeno", ent))}\n", 1);
+            args.AddMarkup(examine.ToString());
+        }
     }
 
     private void OnArmorHitBySlowingSpit(Entity<CMHardArmorComponent> ent, ref InventoryRelayedEvent<HitBySlowingSpitEvent> args)
@@ -484,18 +531,6 @@ public sealed class CMArmorSystem : EntitySystem
         EntityManager.AddComponents(ent, allowed);
     }
 
-    private void OnArmorVerbExamine(EntityUid uid, CMArmorComponent component, GetVerbsEvent<ExamineVerb> args)
-    {
-        if (!args.CanInteract || !args.CanAccess || HasComp<XenoComponent>(uid))
-            return;
-
-        var examineMarkup = GetArmorExamine(component);
-
-        _examine.AddDetailedExamineVerb(args, component, examineMarkup,
-            Loc.GetString("armor-examinable-verb-text"), "/Textures/Interface/Actions/actions_fakemindshield.rsi/icon-on.png",
-            Loc.GetString("armor-examinable-verb-message"));
-    }
-
     private FormattedMessage GetArmorExamine(CMArmorComponent armorComponent)
     {
         var msg = new FormattedMessage();
@@ -503,28 +538,26 @@ public sealed class CMArmorSystem : EntitySystem
 
         // You can add any new armor types here, and they should show up
         // Maybe add what body part is protects in the future? "It has the following protection for your torso:"
-        var armorRatings = new (string, int)[]
+        var armorRatings = new[]
         {
             (Loc.GetString("rmc-armor-melee"), armorComponent.Melee),
             (Loc.GetString("rmc-armor-bullet"), armorComponent.Bullet),
             (Loc.GetString("rmc-armor-bio"), armorComponent.Bio),
-            (Loc.GetString("rmc-armor-explosion-armor"), armorComponent.ExplosionArmor)
+            (Loc.GetString("rmc-armor-explosion-armor"), armorComponent.ExplosionArmor),
         };
 
         foreach (var (text, value) in armorRatings)
         {
-            if (value != 0)
-            {
-                msg.PushNewline();
-                msg.AddMarkupOrThrow(Loc.GetString(
-                    $"rmc-examine-armor",
-                    ("text", text),
-                    ("value", value)
-                ));
-
-            }
+            if (value == 0)
+                continue;
+            msg.PushNewline();
+            msg.AddMarkupOrThrow(Loc.GetString(
+                "rmc-examine-armor",
+                ("text", text),
+                ("value", value)
+            ));
         }
+
         return msg;
     }
-
 }

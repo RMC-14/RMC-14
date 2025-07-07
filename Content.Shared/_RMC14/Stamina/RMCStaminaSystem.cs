@@ -1,6 +1,4 @@
 using Content.Shared._RMC14.BlurredVision;
-using Content.Shared._RMC14.Deafness;
-using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Administration.Logs;
@@ -12,9 +10,9 @@ using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
-using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -29,13 +27,12 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
     [Dependency] private readonly RMCDazedSystem _daze = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly TemporarySpeedModifiersSystem _temporarySpeed = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     public override void Initialize()
     {
@@ -58,9 +55,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
     private void OnStaminaRejuvenate(Entity<RMCStaminaComponent> ent, ref RejuvenateEvent args)
     {
-        var healAmount = ent.Comp.Max - ent.Comp.Current;
-
-        DoStaminaDamage((ent, ent.Comp), healAmount, false);
+        DoStaminaDamage((ent, ent.Comp), -ent.Comp.Max, false);
     }
 
     public override void Update(float frameTime)
@@ -127,10 +122,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
         if (newLevel >= 4)
         {
-            _deafness.TryDeafen(ent, ent.Comp.EffectTime, true, ignoreProtection: true);
-            _stun.TryParalyze(ent, ent.Comp.EffectTime, true);
-            _status.TryAddStatusEffect(ent, "Muted", ent.Comp.EffectTime, true, "Muted");
-            _status.TryAddStatusEffect(ent, "TemporaryBlindness", ent.Comp.EffectTime, true, "TemporaryBlindness");
+            _sizeStun.TryKnockOut(ent, ent.Comp.EffectTime, true);
         }
 
         var oldLevel = ent.Comp.Level;
@@ -158,6 +150,9 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     //Same as stamina code minus eveents
     private void OnStaminaOnHit(Entity<RMCStaminaDamageOnHitComponent> ent, ref MeleeHitEvent args)
     {
+        if (ent.Comp.RequiresWield && TryComp<WieldableComponent>(ent.Owner, out var wieldable) && !wieldable.Wielded)
+            return;
+
         if (!args.IsHit ||
             !args.HitEntities.Any() ||
             ent.Comp.Damage <= 0f)
@@ -198,10 +193,10 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
     private void OnCollide(Entity<RMCStaminaDamageOnCollideComponent> ent, EntityUid target)
     {
-        if (!TryComp<RMCStaminaComponent>(ent, out var stam))
+        if (!TryComp<RMCStaminaComponent>(target, out var stam))
             return;
 
-        DoStaminaDamage((ent, stam), ent.Comp.Damage, true);
+        DoStaminaDamage((target, stam), ent.Comp.Damage, true);
     }
 
     private void SetStaminaAlert(Entity<RMCStaminaComponent> ent)

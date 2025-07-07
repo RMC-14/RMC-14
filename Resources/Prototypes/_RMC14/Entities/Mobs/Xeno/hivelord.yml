@@ -92,11 +92,16 @@
       state: hivelord
   - type: XenoInhands
     prefix: hivelord
+  - type: FixedIdentity
+    name: cm-job-name-xeno-hivelord
 
 - type: entity
   parent: CMXenoHivelordBase
   id: CMXenoHivelord
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleHivelord
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Hivelord/hivelord.rsi
   - type: Xeno
@@ -163,7 +168,6 @@
     - ActionXenoTransferPlasmaHivelord
     - ActionXenoResinWalker
     - ActionXenoDevolve
-    hidden: true
   - type: XenoConstruction
     buildDelay: 1
     canBuild:
@@ -190,5 +194,6 @@
     name: rmc-xeno-resin-whisperer-name
     description: rmc-xeno-resin-whisperer-description
     popup: rmc-xeno-resin-whisperer-popup
+  - type: XenoHidden
 
 

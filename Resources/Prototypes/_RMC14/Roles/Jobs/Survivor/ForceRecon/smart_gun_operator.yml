@@ -1,0 +1,65 @@
+- type: job
+  parent: RMCSurvivorForeconBase
+  id: RMCSurvivorForeconSmartgunOperator
+  name: cm-job-name-smart-gun-operator
+  playTimeTracker: RMCJobSurvivorSmartgunOperatorForecon
+  startingGear: RMCGearForeconSmartgunOperator
+  icon: "CMJobIconSmartGunOperator"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSmartGunOperator
+    time: 3600 # 1 hour
+  spawnMenuRoleName: FORECON Smart Gun Operator (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 0
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillSmartGun: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 0
+        RMCSkillVehicles: 0
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: smartgunner
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetForeconNoPistol
+    - type: JobPrefix
+      prefix: cm-job-prefix-gun-operator
+    - type: SpotterWhitelist
+  hidden: true
+
+- type: playTimeTracker
+  id: RMCJobSurvivorSmartgunOperatorForecon
+  isHumanoid: true
+
+- type: startingGear
+  parent: RMCGearForeconBase
+  id: RMCGearForeconSmartgunOperator
+  equipment:
+    belt: RMCBeltSmartGunOperatorPistolForeconFilled
+    back: RMCSatchelMarineForeconSurvivorSmartgunOperatorFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointForeconSmartGunOperator
+  name: forecon smart gun operator spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorForeconSmartgunOperator
+  - type: Sprite
+    state: smartgunner_spawn

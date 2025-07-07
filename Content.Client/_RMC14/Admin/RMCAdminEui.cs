@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Prototypes;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
@@ -79,8 +80,11 @@ public sealed class RMCAdminEui : BaseEui
             if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
                 continue;
 
-            if (entity.TryGetComponent(out XenoStrainComponent? strain, _compFactory))
+            if (entity.HasComponent<XenoStrainComponent>(_compFactory) ||
+                entity.HasComponent<XenoHiddenComponent>(_compFactory))
+            {
                 continue;
+            }
 
             if (!tiers.TryGetValue(xeno.Tier, out var xenos))
             {

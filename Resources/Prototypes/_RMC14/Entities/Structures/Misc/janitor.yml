@@ -18,6 +18,7 @@
             tags:
               - Mop
           priority: 9 # Higher than bucket slot
+          startingItem: CMMop
         wetfloorsign_slot4:
           name: janitorial-trolley-slot-component-slot-name-sign
           whitelist:
@@ -60,6 +61,7 @@
             tags:
               - Bucket
           priority: 4 # Higher than trash bag slot
+          startingItem: RMCBucketJanitorial
         trashbag_slot:
           name: janitorial-trolley-slot-component-slot-name-trashbag
           whitelist:
@@ -161,3 +163,48 @@
         wetfloorsign_slot1: !type:ContainerSlot {}
         lightreplacer_slot: !type:ContainerSlot {}
         spraybottle_slot:  !type:ContainerSlot {}
+
+- type: entity
+  parent: [BaseStructureDynamic, StructureWheeled]
+  id: RMCJanitorialCartWreck
+  name: old janicart
+  description: Doesn't look like it'll do much cleaning any more.
+  components:
+    - type: Sprite
+      noRot: true
+      sprite: _RMC14/Objects/Misc/Janitorial/cart_wreck.rsi
+      state: cart
+    - type: Rotatable
+    - type: InteractionOutline
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeCircle
+            radius: 0.3
+          density: 250
+          layer:
+          - MobLayer
+          mask:
+          - MobMask
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 400
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 200
+          behaviors:
+            - !type:EmptyAllContainersBehaviour
+            - !type:DoActsBehavior
+              acts: ["Destruction"]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+    - type: Appearance

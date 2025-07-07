@@ -249,6 +249,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarva =
         CVarDef.Create("rmc.late_joins_per_burrowed_larva", 7f, CVar.SERVER | CVar.SERVERONLY);
 
+    public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTime =
+        CVarDef.Create("rmc.late_joins_burrowed_larva_death_time", 2.5f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTimeIgnoreBeforeMinutes =
+        CVarDef.Create("rmc.late_joins_burrowed_larva_death_time_ignore_before_minutes", 2.5f, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCPlaytimeBronzeMedalTimeHours =
         CVarDef.Create("rmc.playtime_bronze_medal_time_hours", 10, CVar.REPLICATED | CVar.SERVER);
 
@@ -423,4 +429,13 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCDistressXenosMinimum =
         CVarDef.Create("rmc.distress_xenos_minimum", 4, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> VolumeGainCassettes =
+        CVarDef.Create("rmc.volume_gain_cassettes", 0.5f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> VolumeGainHijackSong =
+        CVarDef.Create("rmc.volume_gain_hijack_song", 0.5f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> HidePlayerIdentities =
+        CVarDef.Create("rmc.hide_player_identities", true, CVar.REPLICATED | CVar.SERVER);
 }

@@ -1,0 +1,26 @@
+<Document>
+  #Praetorian, Tier 3
+
+  <GuideEntityEmbed Entity="CMXenoPraetorian"/>
+
+  ##Playing as a Praetorian
+
+  Base Praetorian is similar to an upgraded Spitter, specializing in consistent ranged attacks and having a dash ability. They can sync up multiple abilities to deal bursts of damage from around corners such as Acid Spit and Acid Ball.
+
+  Its passive grants acid-based attacks a stack of acid to targets. Once they reach 5 stacks they will take additional burn damage and sizzle. These stacks can be easily reached by stacking multiple abilities on the same target.
+
+  Recommended to play around corners and quickly disperse burst attacks. Use your range to your advantage to pressure the hosts.
+
+  ##Abilities:
+  - [bold][color=green]PASSIVE[/color][/bold]: Acid attacks apply a stack of acid to target. If 5 stacks are reached on a single target then they will take additional burn damage.
+  - [bold][color=green]PASSIVE[/color][/bold]: Acid spits grant shield upon hit.
+  - [bold]Acid Spit[/bold]: Glob acid to deal damage to any targets and grants shield upon hit.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSpit"/>
+  - [bold]Dash[/bold]: Dash a short distance.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoDash"/>
+  - [bold]Spray Acid[/bold]: Sprays acid along the ground in a line, covering any barricades and dealing damage to hosts, additionally applying a stack of acid to them.
+  - Will also extinguish any sisters if they are on fire.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSprayAcid"/>
+  - [bold]Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCorrosiveAcid"/>
+</Document>

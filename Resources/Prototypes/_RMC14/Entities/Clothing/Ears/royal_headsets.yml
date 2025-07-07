@@ -25,6 +25,7 @@
     channels:
     - MarineCommand
     - MarineCommon
+    - RoyalMarine
     defaultChannel: RoyalMarine
   - type: Sprite
     state: sl_key
