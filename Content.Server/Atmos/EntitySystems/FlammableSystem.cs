@@ -26,6 +26,7 @@ using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Server.Audio;
+using Robust.Shared.Log;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -147,7 +148,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             _fixture.TryCreateFixture(uid, component.FlammableCollisionShape, component.FlammableFixtureID, hard: false,
-                collisionMask: (int) CollisionGroup.FullTileLayer, body: body);
+                collisionMask: (int)CollisionGroup.FullTileLayer, body: body);
         }
 
         private void OnInteractUsing(EntityUid uid, FlammableComponent flammable, InteractUsingEvent args)
@@ -397,7 +398,7 @@ namespace Content.Server.Atmos.EntitySystems
             if (args.DamageDelta.DamageDict.TryGetValue("Heat", out FixedPoint2 value))
             {
                 // Make sure the value is greater than the threshold
-                if(value <= component.Threshold)
+                if (value <= component.Threshold)
                     return;
 
                 // Ignite that sucker
@@ -496,19 +497,35 @@ namespace Content.Server.Atmos.EntitySystems
                     // let the thing on fire handle it
                     RaiseLocalEvent(uid, ref ev);
                     // and whatever it's wearing
+                    // and whatever it's wearing
                     if (_inventoryQuery.TryComp(uid, out var inv))
                         _inventory.RelayEvent((uid, inv), ref ev);
 
                     DamageSpecifier? damage;
                     if (HasComp<XenoComponent>(uid))
+                    {
                         damage = flammable.Intensity * (flammable.FireStacks / flammable.Duration * 0.2 + 0.8) * ev.Multiplier * flammable.Damage / 2;
+                    }
                     else
+                    {
                         damage = flammable.Intensity / 5f * flammable.Damage;
+                    }
 
                     if (_steppingOnFireQuery.HasComp(uid))
                         damage *= 2;
-
-                    _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                    // Check fire immunity for DOT damage
+                    if (TryComp<RMCImmuneToFireTileDamageComponent>(uid, out var immunity))
+                    {
+                        // If entity has fire immunity, only deal damage if they have the bypass component
+                        if (HasComp<RMCFireBypassActiveComponent>(uid) && damage != null)
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                    }
+                    else
+                    {
+                        // No immunity, deal damage normally
+                        if (damage != null)
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                    }
 
                     AdjustFireStacks(uid, flammable.Resisting ? flammable.ResistStacks : -0.25f, flammable, flammable.OnFire);
                 }
