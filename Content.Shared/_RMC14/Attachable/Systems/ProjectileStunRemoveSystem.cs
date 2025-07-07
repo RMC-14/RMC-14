@@ -25,10 +25,10 @@ public sealed class ProjectileStunRemoveSystem : EntitySystem
         switch (args.Alteration)
         {
             case AttachableAlteredType.Attached:
-                EnsureComp<ProjectileStunRemoveComponent>(ent);
+                EnsureComp<ProjectileStunRemoveComponent>(args.Holder);
                 break;
             case AttachableAlteredType.Detached:
-                RemComp<ProjectileStunRemoveComponent>(ent);
+                RemComp<ProjectileStunRemoveComponent>(args.Holder);
                 break;
         }
     }
