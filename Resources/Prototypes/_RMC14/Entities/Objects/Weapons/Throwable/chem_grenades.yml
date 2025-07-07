@@ -47,7 +47,7 @@
   id: RMCGrenadeCustomMetalFoam
   name: metal-foam grenade
   description: Used for emergency sealing of air breaches.
-  suffix: Full
+  suffix: RMC
   components:
   - type: Tag
     tags:
@@ -64,12 +64,18 @@
   - type: Construction
     graph: RMCCustomGrenadeGraph
     node: grenade
+  - type: DeleteOnTrigger
+  - type: SoundOnTrigger
+    sound: /Audio/Effects/Chemistry/bubbles.ogg
+    params:
+        variation: 0.2
 
 - type: entity
   parent: ChemicalPayload
   id: RMCChemicalPayloadMetalFoam
-  name: metal foam payload
+  name: metal-foam payload
   description: A chemical payload. Has space to store two beakers.
+  suffix: RMC
   components:
   - type: ContainerContainer
     containers:
