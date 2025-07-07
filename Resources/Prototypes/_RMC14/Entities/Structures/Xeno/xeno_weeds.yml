@@ -123,7 +123,7 @@
         scaleByQuantity: true
         damage:
           types:
-            Heat: 1
+            Heat: 4
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
