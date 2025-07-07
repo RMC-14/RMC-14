@@ -19,7 +19,9 @@ public sealed partial class RMCDoorComponent : Component
     /// What sound to play when a xeno is prying the door
     /// </summary>
     [DataField]
-    public SoundSpecifier XenoPrySound = new SoundPathSpecifier("/Audio/Machines/airlock_creaking.ogg");
+    public SoundSpecifier XenoPrySound = new SoundCollectionSpecifier("RMCXenoPry");
+    [DataField]
+    public SoundSpecifier XenoPodDoorPrySound = new SoundPathSpecifier("/Audio/Machines/airlock_creaking.ogg");
 
     [DataField, AutoNetworkedField]
     public EntityUid? SoundEntity;

@@ -135,7 +135,14 @@ public sealed class CMDoorSystem : EntitySystem
         }
         if (HasComp<XenoComponent>(args.User) && _net.IsServer && !args.Cancelled)
         {
-            ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPrySound, ent.Owner, ent.Owner)?.Entity;
+            if (HasComp<RMCPodDoorComponent>(ent.Owner))
+            {
+                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPodDoorPrySound, ent.Owner, ent.Owner)?.Entity;
+            }
+            else
+            {
+                ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPrySound, ent.Owner, ent.Owner)?.Entity;
+            }
         }
     }
 
