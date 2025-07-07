@@ -33,6 +33,9 @@ public sealed class IntelDetectorSystem : EntitySystem
 
     public override void Initialize()
     {
+        _detectorQuery = GetEntityQuery<IntelDetectorComponent>();
+        _storageQuery = GetEntityQuery<StorageComponent>();
+
         SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
 
