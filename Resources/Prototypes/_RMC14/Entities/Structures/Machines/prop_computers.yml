@@ -82,8 +82,24 @@
 
 - type: entity
   parent: RMCPropComputerBase
+  id: RMCSecurityRecordsConsoleAlt
+  name: security records
+  components:
+  - type: Sprite
+    state: security
+
+- type: entity
+  parent: RMCPropComputerBase
   id: RMCIdentificationComputer
   name: identification computer
   components:
   - type: Sprite
     state: engineering_terminal
+    
+- type: entity
+  parent: RMCPropComputerBase
+  id: RMCStationAlertComputer
+  name: station alert computer
+  components:
+  - type: Sprite
+    state: atmos

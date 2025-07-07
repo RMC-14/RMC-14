@@ -262,7 +262,7 @@ internal sealed partial class ChatManager : IChatManager
             colorOverride = prefs.AdminOOCColor;
         }
         if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
-            _linkAccount.GetPatron(player)?.Tier != null)
+            _linkAccount.GetConnectedPatron(player)?.Tier != null)
         {
             var color = _linkAccount.GetPatronOOCHexColor(player.Channel.UserId);
             wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", $"{color}"),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));

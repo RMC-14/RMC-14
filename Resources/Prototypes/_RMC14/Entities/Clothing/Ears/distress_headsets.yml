@@ -23,7 +23,7 @@
 
 # For CLF
 - type: entity
-  parent: RMCHeadsetColonyIcons
+  parent: [RMCHeadsetIconsCLF, CMHeadsetColony]
   id: RMCHeadsetDistressCLF
   name: CLF headset
   description: A special headset used by small groups of trained operatives. Or terrorists.
@@ -58,11 +58,12 @@
   id: RMCHeadsetDistressWeYa
   name: WeYa corporate headset
   description: A headset commonly worn by WeYa corporate personnel.
+  suffix: WeYa, Colony
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyWEYA
+      - CMEncryptionKeyWEYAColony
 
 # For WeYa PMC
 - type: entity

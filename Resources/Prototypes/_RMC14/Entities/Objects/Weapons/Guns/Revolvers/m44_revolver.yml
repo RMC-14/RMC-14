@@ -165,6 +165,7 @@
   parent: CMBulletBase
   id: CMBulletRevolver44
   name: bullet (.44)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -179,6 +180,7 @@
   parent: CMBulletBase
   id: RMCBulletRevolver44Marksman
   name: bullet (.44 Marksman)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

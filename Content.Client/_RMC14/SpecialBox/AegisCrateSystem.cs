@@ -4,6 +4,7 @@ using Robust.Client.Audio;
 using Robust.Client.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
 using Robust.Shared.Timing;
 using System;
 
@@ -19,10 +20,9 @@ public sealed class AegisCrateSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<AegisCrateComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<AegisCrateComponent, ComponentStartup>(SetVisuals);
+        SubscribeLocalEvent<AegisCrateComponent, AfterAutoHandleStateEvent>(OnStateChanged);
         SubscribeLocalEvent<AegisCrateComponent, AnimationCompletedEvent>(OnAnimationCompleted);
-        // Add subscription for state changes
-        SubscribeLocalEvent<AegisCrateComponent, ComponentAdd>(OnComponentAdd);
 
         _openingAnimation = new Animation
         {
@@ -42,32 +42,38 @@ public sealed class AegisCrateSystem : EntitySystem
         };
     }
 
-    private void OnInit(EntityUid uid, AegisCrateComponent component, ComponentInit args)
+    private void SetVisuals<T>(Entity<AegisCrateComponent> ent, ref T args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite))
+        if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        sprite.LayerSetState(AegisCrateVisualLayers.Base, "aegis_crate");
-    }
+        var state = ent.Comp.State;
 
-    private void OnComponentAdd(EntityUid uid, AegisCrateComponent component, ComponentAdd args)
-    {
-        // Watch for state changes
-        component.StateChanged += OnStateChanged;
-    }
-
-    private void OnStateChanged(EntityUid uid, AegisCrateComponent comp)
-    {
-        if (comp.State == AegisCrateState.Opening && comp.OpenSound != null)
+        switch (state)
         {
-            _audio.PlayPvs(comp.OpenSound, uid, AudioParams.Default);
-            var animPlayer = EntityManager.System<AnimationPlayerSystem>();
-            if (!animPlayer.HasRunningAnimation(uid, AnimationKey))
-            {
-                animPlayer.Play(uid, _openingAnimation!, AnimationKey);
-            }
-        }
+            case AegisCrateState.Closed:
+                sprite.LayerSetState(AegisCrateVisualLayers.Base, "aegis_crate");
+                break;
 
+            case AegisCrateState.Opening:
+                sprite.LayerSetState(AegisCrateVisualLayers.Base, "aegis_crate_opening");                // Play opening sound and animation
+                if (ent.Comp.OpenSound != null)
+                    _audio.PlayPvs(ent.Comp.OpenSound, ent, AudioParams.Default);
+
+                var animPlayer = EntityManager.System<AnimationPlayerSystem>();
+                if (!animPlayer.HasRunningAnimation(ent, AnimationKey))
+                    animPlayer.Play(ent, _openingAnimation!, AnimationKey);
+                break;
+
+            case AegisCrateState.Open:
+                sprite.LayerSetState(AegisCrateVisualLayers.Base, "aegis_crate_open");
+                break;
+        }
+    }
+
+    private void OnStateChanged(Entity<AegisCrateComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        SetVisuals(ent, ref args);
     }
 
     private void OnAnimationCompleted(EntityUid uid, AegisCrateComponent comp, AnimationCompletedEvent args)
@@ -75,13 +81,13 @@ public sealed class AegisCrateSystem : EntitySystem
         if (args.Key != AnimationKey)
             return;
 
-        if (comp.State == AegisCrateState.Opening)
+        // The server will handle state transitions, we just need to update final sprite state
+        if (!TryComp<SpriteComponent>(uid, out var sprite))
+            return;
+
+        if (comp.State == AegisCrateState.Open)
         {
-            comp.State = AegisCrateState.Open;
-            if (TryComp<SpriteComponent>(uid, out var sprite))
-            {
-                sprite.LayerSetState(AegisCrateVisualLayers.Base, "aegis_crate_open");
-            }
+            sprite.LayerSetState(AegisCrateVisualLayers.Base, "aegis_crate_open");
         }
     }
 }

@@ -48,6 +48,7 @@
       prefix: cm-job-prefix-squad-leader
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconSquadLead
+    - type: SpotterWhitelist
   hidden: true
 
 - type: playTimeTracker
