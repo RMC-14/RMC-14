@@ -54,8 +54,6 @@ public sealed class XenoDevourSystem : EntitySystem
         _devouredQuery = GetEntityQuery<DevouredComponent>();
         _xenoDevourQuery = GetEntityQuery<XenoDevourComponent>();
 
-        SubscribeLocalEvent<RMCActionUseAttemptEvent>(OnDevouredActionUseAttempt);
-
         SubscribeLocalEvent<DevourableComponent, CanDropDraggedEvent>(OnDevourableCanDropDragged);
         SubscribeLocalEvent<DevourableComponent, DragDropDraggedEvent>(OnDevourableDragDropDragged);
         SubscribeLocalEvent<DevourableComponent, BeforeRangedInteractEvent>(OnDevourableBeforeRangedInteract);
@@ -74,6 +72,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevouredComponent, IsUnequippingAttemptEvent>(OnDevouredIsUnequippingAttempt);
         SubscribeLocalEvent<DevouredComponent, AttackAttemptEvent>(OnDevouredAttackAttempt);
         SubscribeLocalEvent<DevouredComponent, ShotAttemptedEvent>(OnDevouredShotAttempted);
+        SubscribeLocalEvent<DevouredComponent, RMCActionUseAttemptEvent>(OnDevouredActionUseAttempt);
 
         SubscribeLocalEvent<XenoDevourComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
         SubscribeLocalEvent<XenoDevourComponent, ActivateInWorldEvent>(OnXenoActivate);
@@ -87,19 +86,6 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeDamageEvent>(OnUsableWhileDevouredGetMeleeDamage);
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeAttackRateEvent>(OnUsableWhileDevouredGetMeleeAttackRate);
         SubscribeLocalEvent<UsableWhileDevouredComponent, CMGetArmorPiercingEvent>(OnUsableWhileDevouredGetArmorPiercing);
-    }
-
-    private void OnDevouredActionUseAttempt(ref RMCActionUseAttemptEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        var user = args.User;
-        if (HasComp<DevouredComponent>(user))
-        {
-            args.Cancelled = true;
-            _popup.PopupClient(Loc.GetString("comp-climbable-cant-interact"), user, user, PopupType.SmallCaution);
-        }
     }
 
     private void OnDevourableShouldHandle(Entity<DevourableComponent> ent, ref ShouldHandleVirtualItemInteractEvent args)
@@ -213,6 +199,19 @@ public sealed class XenoDevourSystem : EntitySystem
     {
         if (!HasComp<GunUsableWhileDevouredComponent>(args.Used))
             args.Cancel();
+    }
+
+    private void OnDevouredActionUseAttempt(Entity<DevouredComponent> ent, ref RMCActionUseAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var user = args.User;
+        if (ent.Owner != user)
+            return;
+
+        args.Cancelled = true;
+        _popup.PopupClient(Loc.GetString("comp-climbable-cant-interact"), user, user, PopupType.SmallCaution);
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
