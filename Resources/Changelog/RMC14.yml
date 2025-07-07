@@ -1,161 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: New variants of the M5 gas mask are now available in loadouts !
-    type: Add
-  id: 1460
-  time: '2025-03-15T07:32:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5839
-- author: noctyrnal
-  changes:
-  - message: Added two cursed plushies .. oh no.
-    type: Add
-  id: 1461
-  time: '2025-03-15T07:31:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5873
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added snow, jungle, desert and black variants of underwear
-    type: Add
-  id: 1462
-  time: '2025-03-15T07:33:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4221
-- author: Tyzemol
-  changes:
-  - message: Runners should no longer see entities pop into existence when going too
-      fast
-    type: Fix
-  id: 1463
-  time: '2025-03-15T10:55:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5893
-- author: DrSmugleaf
-  changes:
-  - message: Added mess technician role, the cook of the ship. This includes the fridges
-      with ingredients in the kitchen.
-    type: Add
-  - message: Added soda fountain energy mechanics, for easier drink mixing.
-    type: Add
-  - message: Added popping out the tactical map and overwatch windows to separate
-      windows that you can drag outside the SS14 game window.
-    type: Add
-  - message: Added a person's role and squad to their radio messages. The squad is
-      omitted if they are talking in their squad's radio.
-    type: Add
-  - message: Added area name and SL distance columns to overwatch.
-    type: Add
-  - message: Added multi channel radio broadcast. Typing multiple channels such as
-      :abcd will transmit the same message to alpha, bravo, charlie, and delta radio.
-      This has a cooldown depending on the type of headset.
-    type: Add
-  - message: Added 8-slot high-capacity power cell boxes.
-    type: Add
-  - message: The live tactical map view for CIC and xenos while the Queen is in ovi
-      now refreshes twice as often, every 0.5 seconds.
-    type: Tweak
-  - message: Renamed Marine High Command channel to HighCom, Requisitions to Req,
-      Engineering to Engi, Medical to MedSci.
-    type: Tweak
-  - message: Added the command report created sound to changing tech tree tiers with
-      intel points.
-    type: Tweak
-  - message: Updated the roadmap.
-    type: Tweak
-  - message: Fixed OBs not gibbing.
-    type: Fix
-  - message: Fixed the overwatch marine list not being sorted by role.
-    type: Fix
-  - message: Fixed mime M5-ATL where the rocket launcher looks like it fails to shoot
-      if attempting to shoot too quickly after wielding. This also fixes the wield
-      delay indicator being buggy.
-    type: Fix
-  - message: Fixed flamers being able to be fired through walls.
-    type: Fix
-  - message: Fixed tile fire hitbox being too large (0.45 > 0.35).
-    type: Fix
-  - message: Fixed Oppressor Praetorian abduct tile hitbox being too large (0.5 >
-      0.4).
-    type: Fix
-  - message: Fixed being able to place Burrower tunnels on the Almayer.
-    type: Fix
-  - message: Fixed burrower-placed tunnels not being destroyed by weed killer, this
-      does not affect preplaced ones on the map.
-    type: Fix
-  - message: Fixed hive structures not being destroyed by weed killer.
-    type: Fix
-  - message: Fixed star shells blowing out your eyes and eardrums.
-    type: Fix
-  - message: Fixed thirst slowing you down.
-    type: Fix
-  - message: Fixed Chance's Claim Hydro North area name on the tactical map.
-    type: Fix
-  - message: Fixed some items spawning outside of closets instead of inside them.
-    type: Fix
-  - message: Fixed linen bins drawing under some objects.
-    type: Fix
-  - message: Fixed the grenade satchel UI being wide as hell instead of two rows.
-    type: Fix
-  - message: Fixed labels over two characters not showing the first two characters
-      on pill bottles.
-    type: Fix
-  - message: Fixed the M63 single slot belt being normal instead of large.
-    type: Fix
-  - message: Fixed cut fences not having an interaction outline.
-    type: Fix
-  - message: Fixed hull windows lying to you and showing damage visuals.
-    type: Fix
-  - message: Fixed being able to break out of perma brig by punching the reinforced
-      window with your bare hands.
-    type: Fix
-  - message: Fixed sentry collision boxes not being a circle and sometimes making
-      you get stuck when they turn.
-    type: Fix
-  - message: Fixed conveyors looking as if they block bullets, and hydroponics trays
-      blocking bullets when shot over.
-    type: Fix
-  - message: Fixed window frames not dropping 2 metal when destroyed.
-    type: Fix
-  - message: Fixed the M96S sniper specialist weapon not starting with a regular magazine
-      loaded.
-    type: Fix
-  - message: Fixed Intelligence Officer sidearms starting loaded in their vendor.
-    type: Fix
-  - message: Fixed being able to turn on a motion detector while its on the ground.
-    type: Fix
-  - message: Fixed some cases of being able to point-blank through walls.
-    type: Fix
-  - message: Fixed invoices outside of crates not being counted when sent back on
-      the Req elevator.
-    type: Fix
-  - message: Fixed syringes and pills fitting as helmet accessories.
-    type: Fix
-  - message: Fixed overwatch console height not being shrinkable.
-    type: Fix
-  - message: Fixed white crates not being weldable.
-    type: Fix
-  - message: Fixed primary landing zone buttons appearing with a delay on the groundside
-      operations console.
-    type: Fix
-  - message: Fixed a bug where the overwatch UI would flicker and become unusable
-      until reconnect.
-    type: Fix
-  - message: Fixed weeds spreading under a Queen in ovi not giving her regen.
-    type: Fix
-  - message: Fixed open shutters overlaying over tables.
-    type: Fix
-  - message: Fixed the vintage D50 winter wyvern having a 1.05x damage multiplier
-      instead of 1.4x.
-    type: Fix
-  - message: Fixed rolling pin not working when flattening food.
-    type: Fix
-  - message: Fixed slicing burgers making many phantom burgers.
-    type: Fix
-  - message: Fixed the drink glass only holding 30 units instead of 50.
-    type: Fix
-  - message: Fixed carpotoxin from raw fish dealing too much damage.
-    type: Fix
-  id: 1464
-  time: '2025-03-15T10:57:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5892
 - author: CyberTropic
   changes:
   - message: 'Atmospherics update: added atmospherics props!'
@@ -5085,5 +4928,43 @@
   id: 1960
   time: '2025-07-06T02:45:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6792
+- author: CyberTropic
+  changes:
+  - message: Added CORSAT
+    type: Add
+  id: 1961
+  time: '2025-07-06T07:33:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6909
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fix some xeno castes not being able to add plasma to hive structures
+    type: Fix
+  id: 1962
+  time: '2025-07-07T00:19:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6944
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed hive clusters and hive pylons taking too long to repair. They now
+      take 4 seconds to repair, and only start reweeding after 15 seconds has passed.
+    type: Fix
+  id: 1963
+  time: '2025-07-07T00:18:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6943
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed baton slugs permanently blinding xenos sometimes
+    type: Fix
+  id: 1964
+  time: '2025-07-07T00:17:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6942
+- author: noctyrnal
+  changes:
+  - message: Added Coffee mugs.
+    type: Add
+  - message: Sorokyne has recieved an update, fixing alot of issues.
+    type: Add
+  id: 1965
+  time: '2025-07-07T00:22:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6929
 Name: RMC14
 Order: -1

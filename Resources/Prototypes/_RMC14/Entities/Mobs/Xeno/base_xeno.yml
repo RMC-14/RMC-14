@@ -470,6 +470,7 @@
     stacks: -5
   - type: RMCHandEmotes
   - type: XenoToggleChargingKnockback
+  - type: XenoCanAddPlasmaToConstruct
 
 - type: entity
   abstract: true
