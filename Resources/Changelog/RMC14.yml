@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: 'Atmospherics update: added atmospherics props!'
-    type: Add
-  - message: Shrank washing machine hitbox.
-    type: Fix
-  id: 1465
-  time: '2025-03-15T19:21:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5904
 - author: Dutch-VanDerLinde
   changes:
   - message: Helmets can now fit 4 accessories instead of just 2.
@@ -4966,5 +4957,20 @@
   id: 1965
   time: '2025-07-07T00:22:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6929
+- author: DoguhanOzgurAkca
+  changes:
+  - message: The Aegis fax that is meant to be sent to CIC is now a set paper that
+      you can spawn. I am trying to get it to be auto-faxed to CIC as well.
+    type: Add
+  - message: Made it so that AEGIS fire system supports immunity bypassing fires.
+    type: Add
+  - message: Fixed the animation of AEGIS crates being all on client side and the
+      crate looking closed if you reset your client.
+    type: Fix
+  - message: Changed the announcements of factions regarding event briefly.
+    type: Tweak
+  id: 1966
+  time: '2025-07-07T12:29:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6798
 Name: RMC14
 Order: -1
