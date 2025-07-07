@@ -588,6 +588,7 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
+
     # AK4047
     - to: RMCBoxMagazineRifleAK4047Empty
       steps:
