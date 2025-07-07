@@ -127,11 +127,15 @@ public sealed class CMDoorSystem : EntitySystem
 
     }
 
-    private void OnDoorPry(Entity<DoorComponent> ent, ref DoorPryEvent args)
+    private void OnDoorPry(Entity<RMCDoorComponent> ent, ref DoorPryEvent args)
     {
+        if (args.Cancelled)
+        {
+            _audioSystem.Stop(ent.Comp.SoundEntity);
+        }
         if (HasComp<XenoComponent>(args.User) && _net.IsServer && !args.Cancelled)
         {
-            _audioSystem.PlayPvs(ent.Comp.XenoPrySound, ent);
+            ent.Comp.SoundEntity = _audioSystem.PlayPredicted(ent.Comp.XenoPrySound, ent.Owner, ent.Owner)?.Entity;
         }
     }
 
