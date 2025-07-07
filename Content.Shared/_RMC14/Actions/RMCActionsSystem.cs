@@ -164,8 +164,8 @@ public sealed class RMCActionsSystem : EntitySystem
     public bool CanUseActionPopup(EntityUid user, EntityUid action, EntityUid? target = null)
     {
         var ev = new RMCActionUseAttemptEvent(user, target);
-        RaiseLocalEvent(user, ref ev);
         RaiseLocalEvent(action, ref ev);
+        RaiseLocalEvent(user, ref ev);
 
         return !ev.Cancelled;
     }
