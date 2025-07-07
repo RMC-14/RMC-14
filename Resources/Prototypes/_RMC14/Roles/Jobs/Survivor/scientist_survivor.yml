@@ -72,7 +72,7 @@
     -
       - [ RMCMotionDetector ]
       - [ RMCGrenadeCustomMetalFoam ]
-      # TODO anti weed grenade
+      - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
 
 - type: entity

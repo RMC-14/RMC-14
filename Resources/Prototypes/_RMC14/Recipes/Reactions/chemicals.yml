@@ -60,3 +60,21 @@
       prototypeId: RMCIronMetalFoamEffect
       sound:
         path: /Audio/Effects/extinguish.ogg
+
+- type: reaction
+  id: RMCSmoke
+  priority: 10
+  impact: High
+  reactants:
+    RMCPhosphorus:
+      amount: 1
+    RMCPotassium:
+      amount: 1
+    RMCSugar:
+      amount: 1
+  effects:
+    - !type:AreaReactionEffect
+      duration: 10
+      prototypeId: RMCSmokeChemical
+      sound:
+        path: /Audio/Effects/smoke.ogg

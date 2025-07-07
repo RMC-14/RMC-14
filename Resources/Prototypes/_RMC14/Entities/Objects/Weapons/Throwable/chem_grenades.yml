@@ -116,5 +116,89 @@
           - ReagentId: PolytrinicAcid
             Quantity: 10
 
+# Weedkiller
+- type: entity
+  parent: RMCGrenadeCustomMetalFoam
+  id: RMCGrenadeCustomWeedkiller
+  name: weedkiller grenade
+  description: Used for purging large areas of invasive plant species. Contents under pressure. Do not directly inhale contents.
+  suffix: RMC
+  components:
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeWeedkiller
+  - type: ContainerFill
+    containers:
+      payload:
+      - RMCChemicalPayloadWeedkiller
+      payloadTrigger:
+      - RMCTimerTrigger
+
+- type: entity
+  parent: RMCChemicalPayloadMetalFoam
+  id: RMCChemicalPayloadWeedkiller
+  name: weedkiller payload
+  components:
+  - type: ContainerFill
+    containers:
+      BeakerSlotA:
+      - RMCBeakerWeedkillerPlantBGone
+      BeakerSlotB:
+      - RMCBeakerWeedkillerPhosphorus
+
+- type: entity
+  parent: CMBeaker
+  id: RMCBeakerWeedkillerPlantBGone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        reagents:
+          - ReagentId: PlantBGone
+            Quantity: 25
+          - ReagentId: RMCPotassium
+            Quantity: 25
+
+- type: entity
+  parent: CMBeaker
+  id: RMCBeakerWeedkillerPhosphorus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        reagents:
+          - ReagentId: RMCSugar
+            Quantity: 25
+          - ReagentId: RMCPhosphorus
+            Quantity: 25
+
+# Other
+- type: entity
+  parent: BaseFoam
+  id: RMCSmokeChemical
+  name: smoke
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/grenade_smoke.rsi
+    state: chemsmoke
+  - type: TimedDespawn
+    lifetime: 10
+  - type: DeleteOnExplosion
+  - type: Appearance
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: Tag
+  id: RMCGrenadeWeedkiller
+
 - type: Tag
   id: RMCGrenadeMetalFoam
