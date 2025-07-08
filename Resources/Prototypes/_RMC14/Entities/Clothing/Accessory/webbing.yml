@@ -94,6 +94,19 @@
     - type: StoreAfterFailedInteract
 
 - type: entity
+  parent: CMWebbing
+  id: RMCWebbingBlackSmall
+  name: black webbing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
+    state: webbing
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
+      state: equipped
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingBlack
   name: black webbing vest
@@ -635,7 +648,7 @@
   name: surgical webbing vest
   description: A robust webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
     state: webbing
@@ -644,7 +657,7 @@
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
       state: equipped
     components:
-    - type: Storage 
+    - type: Storage
       maxItemSize: Small
       grid:
       - 0,0,13,3 # 14 slots
@@ -656,7 +669,7 @@
         components:
         - CMSurgeryTool
     - type: FixedItemSizeStorage
-  - type: Storage 
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,3 # 14 slots
@@ -691,7 +704,7 @@
   name: surgical webbing vest
   description: A robust blue webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
     state: webbing
@@ -700,7 +713,7 @@
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
       state: equipped
     components:
-    - type: Storage 
+    - type: Storage
       maxItemSize: Small
       grid:
       - 0,0,13,3 # 14 slots
@@ -712,7 +725,7 @@
         components:
         - CMSurgeryTool
     - type: FixedItemSizeStorage
-  - type: Storage 
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,3 # 14 slots
