@@ -1213,3 +1213,5 @@ BaseBallBat: RMCBaseballBat
 HydroponicsToolSpade: RMCToolSpade
 HydroponicsToolMiniHoe: RMCToolMiniHoe
 HydroponicsToolHatchet: RMCToolHatchet
+ClothingEyesGlassesSunglasses: RMCSunglasses
+CableTerminal: RMCCableTerminal
