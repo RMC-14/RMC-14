@@ -32,6 +32,7 @@ using Robust.Shared.Timing;
 using Content.Shared.Roles;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Rules;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -58,7 +59,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedIdCardSystem _idCard = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
-    [Dependency] private readonly SharedMarineSystem _marine = default!;
+    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -124,6 +125,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnMapInit(Entity<CMAutomatedVendorComponent> ent, ref MapInitEvent args)
     {
+        var transform = Transform(ent.Owner);
         _entries.Clear();
         _boxEntries.Clear();
         foreach (var section in ent.Comp.Sections)
@@ -139,6 +141,24 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
                 entry.Multiplier = entry.Amount;
                 entry.Max = entry.Amount;
+
+                // Scale the vendors if it's a colony vendor
+                if (_rmcPlanet.IsOnPlanet(transform))
+                {
+                    if (entry.Amount is not { } originalAmount)
+                        continue;
+
+                    if (ent.Comp.RandomUnstockAmount is { } randomUnstock)
+                    {
+                        if (randomUnstock == -1)
+                            entry.Amount = _random.Next(1, originalAmount);
+                        else
+                            entry.Amount = _random.Next(1, randomUnstock);
+                    }
+
+                    if (ent.Comp.RandomEmptyChance is { } emptyChance && _random.Prob(emptyChance))
+                        entry.Amount = 0;
+                }
             }
         }
 
@@ -339,7 +359,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 if (!_job.MindHasJobWithId(mindId, job.Id))
                     validJob = false;
                 else
+                {
                     validJob = true;
+                    break;
+                }
             }
         }
 

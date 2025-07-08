@@ -1,0 +1,6 @@
+- type: entity
+  id: RMCHeadXeno
+  name: "xenonid head"
+  parent: BaseHead
+  categories:
+  - HideSpawnMenu

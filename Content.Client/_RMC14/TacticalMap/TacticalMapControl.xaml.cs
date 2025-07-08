@@ -34,11 +34,42 @@ public sealed partial class TacticalMapControl : TextureRect
     public bool DrawAreaLabels { get; set; } = true;
     public Color Color;
 
+    public Action<Vector2i>? OnBlipClicked;
+    public Action<Vector2i, string>? OnBlipRightClicked;
+
+    private readonly Label? _tunnelInfoLabel;
+    private readonly Vector2[] _reusableLineVectors = new Vector2[6];
+
+    private const float MapScale = 3f;
+    private const float BaseBlipSize = 14f;
+    private const float ClickTolerance = 8f;
+    private const float BlipEdgeRatio = 0.7f;
+    private const float CloseBlipThreshold = 2.2f;
+    private const float CloseBlipSafety = 0.8f;
+    private const int DashLength = 6;
+    private const int GapLength = 3;
+    private const int ArrowLength = 15;
+    private const int ArrowWidth = 8;
+    private const float MinDragDistance = 10f;
+    private const float LabelYOffset = 6f;
+
     public TacticalMapControl()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         _font = new VectorFont(_resourceCache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), 10);
+
+        _tunnelInfoLabel = new Label
+        {
+            Visible = false,
+            StyleClasses = { "LabelHeading" },
+            FontColorOverride = Color.Black,
+            Margin = new Thickness(8, 8),
+            HorizontalAlignment = HAlignment.Center,
+            VerticalAlignment = VAlignment.Center,
+        };
+
+        AddChild(_tunnelInfoLabel);
     }
 
     public void UpdateTexture(Entity<AreaGridComponent> grid)
@@ -54,9 +85,7 @@ public sealed partial class TacticalMapControl : TextureRect
             max = Vector2i.ComponentMax(max, position);
         }
 
-        var width = max.X - _min.X;
-        var height = max.Y - _min.Y;
-        if (width <= 0 || height <= 0)
+        if (max.X - _min.X <= 0 || max.Y - _min.Y <= 0)
             return;
 
         _delta = max - _min;
@@ -81,6 +110,43 @@ public sealed partial class TacticalMapControl : TextureRect
         return new Vector2i(pos.X - _min.X, _delta.Y - (pos.Y - _min.Y));
     }
 
+    public Vector2 IndicesToPosition(Vector2i indices)
+    {
+        return GetDrawPosition(indices) * MapScale;
+    }
+
+    public Vector2i PositionToIndices(Vector2 screenPosition)
+    {
+        var relativePos = screenPosition / MapScale;
+        return new Vector2i(
+            (int)relativePos.X + _min.X,
+            _delta.Y - (int)relativePos.Y + _min.Y
+        );
+    }
+
+    private TacticalMapBlip? GetBlipAtPosition(Vector2 controlPosition)
+    {
+        if (_blips == null || Texture == null)
+            return null;
+
+        var draw = GetDrawDimensions(Texture);
+        var screenPosition = controlPosition * UIScale;
+        var clickTolerance = ClickTolerance * UIScale;
+
+        foreach (var blip in _blips)
+        {
+            var blipRect = UIBox2.FromDimensions(
+                IndicesToPosition(blip.Indices) * UIScale + new Vector2(draw.Left, draw.Top) - new Vector2(clickTolerance, clickTolerance),
+                new Vector2(BaseBlipSize * UIScale + clickTolerance * 2, BaseBlipSize * UIScale + clickTolerance * 2)
+            );
+
+            if (blipRect.Contains(screenPosition))
+                return blip;
+        }
+
+        return null;
+    }
+
     protected override void Draw(DrawingHandleScreen handle)
     {
         base.Draw(handle);
@@ -99,8 +165,10 @@ public sealed partial class TacticalMapControl : TextureRect
         {
             foreach (var blip in _blips)
             {
-                var position = IndicesToPosition(blip.Indices);
-                var rect = UIBox2.FromDimensions(position, new Vector2(14, 14));
+                var position = IndicesToPosition(blip.Indices) * UIScale + offset;
+                var scaledBlipSize = BaseBlipSize * UIScale;
+                var rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
+
                 handle.DrawTextureRect(blip.Background != null ? system.Frame0(blip.Background) : background, rect, blip.Color);
                 handle.DrawTextureRect(system.Frame0(blip.Image), rect);
 
@@ -122,10 +190,10 @@ public sealed partial class TacticalMapControl : TextureRect
         var lineVectors = new Vector2[6];
         foreach (var line in Lines)
         {
-            var start = (line.Start + offset) * UIScale;
-            var end = (line.End + offset) * UIScale;
+            var start = new Vector2(line.Start.X, line.Start.Y) * UIScale + offset;
+            var end = new Vector2(line.End.X, line.End.Y) * UIScale + offset;
             var diff = end - start;
-            var box = Box2.CenteredAround(start + diff / 2, new Vector2(5, (int) diff.Length()));
+            var box = Box2.CenteredAround(start + diff / 2, new Vector2(5, (int)diff.Length()));
             var boxRotated = new Box2Rotated(box, diff.ToWorldAngle(), start + diff / 2);
             lineVectors[0] = boxRotated.BottomLeft;
             lineVectors[1] = boxRotated.BottomRight;
@@ -140,10 +208,10 @@ public sealed partial class TacticalMapControl : TextureRect
         {
             foreach (var (indices, label) in _labels)
             {
-                var position = IndicesToPosition(indices);
+                var position = IndicesToPosition(indices) * UIScale + offset;
 
                 // Center vertically
-                position = position with { Y = position.Y - 6 };
+                position = position with { Y = position.Y - LabelYOffset * UIScale };
 
                 // Get text size
                 var drawn = handle.DrawString(_font, position, label, Color.Transparent);
@@ -152,18 +220,30 @@ public sealed partial class TacticalMapControl : TextureRect
                 position -= drawn / 2;
 
                 // Add 4 and 2 to give the background a margin around the text
-                drawn = drawn with { X = drawn.X + 4, Y = drawn.Y + _font.GetLineHeight(1) + 2 };
+                drawn = drawn with { X = drawn.X + 4 * UIScale, Y = drawn.Y + _font.GetLineHeight(UIScale) + 2 * UIScale };
 
                 // Remove 2 for background margin
-                handle.DrawRect(UIBox2.FromDimensions(position - new Vector2(2, 0), drawn), Color.Black.WithAlpha(0.85f));
+                handle.DrawRect(UIBox2.FromDimensions(position - new Vector2(2 * UIScale, 0), drawn), Color.Black.WithAlpha(0.85f));
                 handle.DrawString(_font, position, label, Color.White);
             }
         }
     }
 
-    private Vector2 IndicesToPosition(Vector2i indices)
+    public void AddDirectionalLine(Vector2i fromIndices, Vector2i toIndices, Color color, bool removeExisting = true)
     {
-        return GetDrawPosition(indices) * 3 * UIScale;
+        if (removeExisting)
+            Lines.RemoveAll(line => line.Color == color);
+
+        Lines.Add(new TacticalMapLine(
+            ConvertIndicesToLineCoordinates(fromIndices),
+            ConvertIndicesToLineCoordinates(toIndices),
+            color
+        ));
+    }
+
+    public void RemoveLinesByColor(Color color)
+    {
+        Lines.RemoveAll(line => line.Color.R == color.R && line.Color.G == color.G && line.Color.B == color.B);
     }
 
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
@@ -172,9 +252,43 @@ public sealed partial class TacticalMapControl : TextureRect
 
         if (args.Function == EngineKeyFunctions.UIClick)
         {
-            _dragging = true;
-            _lastDrag = args.RelativePosition.Floored();
+            var clickedBlip = GetBlipAtPosition(args.RelativePosition);
+
+            if (clickedBlip != null)
+            {
+                OnBlipClicked?.Invoke(clickedBlip.Value.Indices);
+                args.Handle();
+                return;
+            }
+
+            HideTunnelInfo();
+
+            if (Drawing)
+            {
+                _dragging = true;
+                _lastDrag = args.RelativePosition.Floored();
+            }
         }
+        else if (args.Function == EngineKeyFunctions.UIRightClick)
+        {
+            var clickedBlip = GetBlipAtPosition(args.RelativePosition);
+
+            if (clickedBlip != null && OnBlipRightClicked != null)
+            {
+                OnBlipRightClicked.Invoke(clickedBlip.Value.Indices, "");
+                args.Handle();
+            }
+            else
+            {
+                HideTunnelInfo();
+            }
+        }
+    }
+
+    public Vector2i ConvertIndicesToLineCoordinates(Vector2i indices)
+    {
+        var scaled = GetDrawPosition(indices) * MapScale;
+        return new Vector2i((int)scaled.X, (int)scaled.Y);
     }
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
@@ -206,18 +320,306 @@ public sealed partial class TacticalMapControl : TextureRect
         if (diff == Vector2i.Zero)
             return;
 
-        if (diff.Length < 10)
+        if (diff.Length < MinDragDistance)
             return;
 
         if (Texture == null)
             return;
 
-        Lines.Add(new TacticalMapLine(_lastDrag.Value, relative, Color));
+        var draw = GetDrawDimensions(Texture);
+        var controlOffset = new Vector2(draw.Left, draw.Top) / UIScale;
+
+        var textureStartF = new Vector2(_lastDrag.Value.X, _lastDrag.Value.Y) - controlOffset;
+        var textureEndF = new Vector2(relative.X, relative.Y) - controlOffset;
+
+        var textureStart = new Vector2i((int)textureStartF.X, (int)textureStartF.Y);
+        var textureEnd = new Vector2i((int)textureEndF.X, (int)textureEndF.Y);
+
+        Lines.Add(new TacticalMapLine(textureStart, textureEnd, Color));
         while (LineLimit >= 0 && Lines.Count > LineLimit)
         {
             Lines.RemoveAt(0);
         }
 
         _lastDrag = relative;
+    }
+
+    public void AddTunnelPath(List<Vector2i> waypoints, Color pathColor, bool removeExisting = true)
+    {
+        if (removeExisting)
+            RemoveLinesByColor(pathColor);
+
+        if (waypoints.Count < 2)
+            return;
+
+        for (int i = 0; i < waypoints.Count - 1; i++)
+        {
+            Lines.Add(new TacticalMapLine(
+                ConvertIndicesToLineCoordinates(waypoints[i]),
+                ConvertIndicesToLineCoordinates(waypoints[i + 1]),
+                pathColor
+            ));
+        }
+    }
+
+    private Vector2i GetClosestEdgePoint(Vector2i fromIndices, Vector2i toIndices, bool getFromPoint)
+    {
+        var fromUI = ConvertIndicesToLineCoordinates(fromIndices);
+        var toUI = ConvertIndicesToLineCoordinates(toIndices);
+        var sourcePoint = getFromPoint ? fromUI : toUI;
+        var targetPoint = getFromPoint ? toUI : fromUI;
+        var direction = targetPoint - sourcePoint;
+        var distance = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+
+        if (distance == 0)
+            return sourcePoint;
+
+        var edgeOffset = (int)(BaseBlipSize * BlipEdgeRatio);
+        if (distance < edgeOffset * CloseBlipThreshold)
+            edgeOffset = (int)(edgeOffset * (distance / (edgeOffset * CloseBlipThreshold)) * CloseBlipSafety);
+
+        return new Vector2i(
+            sourcePoint.X + (int)(direction.X / distance * edgeOffset),
+            sourcePoint.Y + (int)(direction.Y / distance * edgeOffset)
+        );
+    }
+
+    private Vector2i GetEdgePoint(Vector2i fromIndices, Vector2i toIndices, bool getFromPoint)
+    {
+        var fromUI = ConvertIndicesToLineCoordinates(fromIndices);
+        var toUI = ConvertIndicesToLineCoordinates(toIndices);
+        var sourcePoint = getFromPoint ? fromUI : toUI;
+        var targetPoint = getFromPoint ? toUI : fromUI;
+        var direction = targetPoint - sourcePoint;
+        var distance = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+
+        if (distance == 0)
+            return sourcePoint;
+
+        const float scaledBlipSize = BaseBlipSize * MapScale;
+        var edgeOffset = (int)(scaledBlipSize * 0.4f);
+
+        var minOffset = (int)(scaledBlipSize * 0.2f);
+
+        if (distance < scaledBlipSize * 1.5f)
+        {
+            edgeOffset = Math.Max(minOffset, (int)(distance * 0.3f));
+        }
+
+        return new Vector2i(
+            sourcePoint.X + (int)(direction.X / distance * edgeOffset),
+            sourcePoint.Y + (int)(direction.Y / distance * edgeOffset)
+        );
+    }
+
+    public void AddDashedTunnelPathClosest(List<Vector2i> waypoints, Color pathColor, bool removeExisting = true)
+    {
+        if (removeExisting)
+            RemoveLinesByColor(pathColor);
+
+        if (waypoints.Count < 2)
+            return;
+
+        if (waypoints.Count == 2)
+        {
+            var startPos = ConvertIndicesToLineCoordinates(waypoints[0]);
+            var endPos = ConvertIndicesToLineCoordinates(waypoints[1]);
+            var distance = Math.Sqrt(Math.Pow(endPos.X - startPos.X, 2) + Math.Pow(endPos.Y - startPos.Y, 2));
+            var scaledBlipSize = BaseBlipSize * MapScale;
+
+            if (distance < scaledBlipSize * 1.2f)
+                return;
+        }
+
+        for (int i = 0; i < waypoints.Count - 1; i++)
+        {
+            var fromPoint = GetClosestEdgePoint(waypoints[i], waypoints[i + 1], true);
+            var toPoint = GetClosestEdgePoint(waypoints[i], waypoints[i + 1], false);
+
+            if (i == waypoints.Count - 2)
+            {
+                var direction = toPoint - fromPoint;
+                var lineLength = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+
+                if (lineLength > 0)
+                {
+                    var scaledBlipSize = BaseBlipSize * MapScale;
+                    var arrowStartOffset = (int)(scaledBlipSize * 0.45f + ArrowLength);
+
+                    if (lineLength > arrowStartOffset)
+                    {
+                        toPoint = new Vector2i(
+                            toPoint.X - (int)(direction.X / lineLength * arrowStartOffset),
+                            toPoint.Y - (int)(direction.Y / lineLength * arrowStartOffset)
+                        );
+                    }
+                }
+            }
+
+            AddDashedSegment(fromPoint, toPoint, pathColor);
+        }
+
+        if (waypoints.Count >= 2)
+        {
+            AddSimpleArrowHead(
+                ConvertIndicesToLineCoordinates(waypoints[^2]),
+                ConvertIndicesToLineCoordinates(waypoints[^1]),
+                pathColor
+            );
+        }
+    }
+
+    public void AddDashedTunnelPath(List<Vector2i> waypoints, Color pathColor, bool removeExisting = true)
+    {
+        if (removeExisting)
+            RemoveLinesByColor(pathColor);
+
+        if (waypoints.Count < 2)
+            return;
+
+        if (waypoints.Count == 2)
+        {
+            var startPos = ConvertIndicesToLineCoordinates(waypoints[0]);
+            var endPos = ConvertIndicesToLineCoordinates(waypoints[1]);
+            var distance = Math.Sqrt(Math.Pow(endPos.X - startPos.X, 2) + Math.Pow(endPos.Y - startPos.Y, 2));
+            var scaledBlipSize = BaseBlipSize * MapScale;
+
+            if (distance < scaledBlipSize * 1.2f)
+                return;
+        }
+
+        for (var i = 0; i < waypoints.Count - 1; i++)
+        {
+            var start = waypoints[i];
+            var end = waypoints[i + 1];
+
+            var fromPoint = GetEdgePoint(start, end, true);
+            var toPoint = GetEdgePoint(start, end, false);
+
+            if (i == waypoints.Count - 2)
+            {
+                var direction = toPoint - fromPoint;
+                var lineLength = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+
+                if (lineLength > 0)
+                {
+                    var scaledBlipSize = BaseBlipSize * MapScale;
+                    var arrowStartOffset = (int)(scaledBlipSize * 0.45f + ArrowLength);
+
+                    if (lineLength > arrowStartOffset)
+                    {
+                        toPoint = new Vector2i(
+                            toPoint.X - (int)(direction.X / lineLength * arrowStartOffset),
+                            toPoint.Y - (int)(direction.Y / lineLength * arrowStartOffset)
+                        );
+                    }
+                }
+            }
+
+            AddDashedSegment(fromPoint, toPoint, pathColor);
+        }
+
+        if (waypoints.Count >= 2)
+        {
+            AddSimpleArrowHead(
+                ConvertIndicesToLineCoordinates(waypoints[^2]),
+                ConvertIndicesToLineCoordinates(waypoints[^1]),
+                pathColor
+            );
+        }
+    }
+
+    private void AddDashedSegment(Vector2i fromUI, Vector2i toUI, Color color)
+    {
+        var direction = toUI - fromUI;
+        var totalLength = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+
+        if (totalLength < 1)
+            return;
+
+        for (double distance = 0; distance < totalLength; distance += DashLength + GapLength)
+        {
+            Lines.Add(new TacticalMapLine(
+                new Vector2i(
+                    fromUI.X + (int)(direction.X / totalLength * distance),
+                    fromUI.Y + (int)(direction.Y / totalLength * distance)
+                ),
+                new Vector2i(
+                    fromUI.X + (int)(direction.X / totalLength * Math.Min(distance + DashLength, totalLength)),
+                    fromUI.Y + (int)(direction.Y / totalLength * Math.Min(distance + DashLength, totalLength))
+                ),
+                color
+            ));
+        }
+    }
+
+    private void AddSimpleArrowHead(Vector2i start, Vector2i end, Color color)
+    {
+        var direction = end - start;
+        var length = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+
+        if (length < 10)
+            return;
+
+        var scaledBlipSize = BaseBlipSize * MapScale;
+        var blipEdgeOffset = (int)(scaledBlipSize * 0.45f);
+
+        var arrowTip = new Vector2i(
+            end.X - (int)(direction.X / length * blipEdgeOffset),
+            end.Y - (int)(direction.Y / length * blipEdgeOffset)
+        );
+
+        var arrowBase = new Vector2i(
+            arrowTip.X - (int)(direction.X / length * ArrowLength),
+            arrowTip.Y - (int)(direction.Y / length * ArrowLength)
+        );
+
+        var perpX = -direction.Y / length;
+        var perpY = direction.X / length;
+
+        var leftWing = new Vector2i(
+            arrowBase.X + (int)(perpX * ArrowWidth),
+            arrowBase.Y + (int)(perpY * ArrowWidth)
+        );
+
+        var rightWing = new Vector2i(
+            arrowBase.X - (int)(perpX * ArrowWidth),
+            arrowBase.Y - (int)(perpY * ArrowWidth)
+        );
+
+        Lines.Add(new TacticalMapLine(arrowTip, leftWing, color));
+        Lines.Add(new TacticalMapLine(arrowTip, rightWing, color));
+        Lines.Add(new TacticalMapLine(leftWing, rightWing, color));
+    }
+
+    public void AddTunnelPathWithArrow(List<Vector2i> waypoints, Color pathColor, bool removeExisting = true)
+    {
+        AddTunnelPath(waypoints, pathColor, removeExisting);
+
+        if (waypoints.Count >= 2)
+        {
+            AddSimpleArrowHead(
+                ConvertIndicesToLineCoordinates(waypoints[^2]),
+                ConvertIndicesToLineCoordinates(waypoints[^1]),
+                pathColor
+            );
+        }
+    }
+
+    public void ShowTunnelInfo(Vector2i indices, string tunnelName, Vector2 screenPosition)
+    {
+        if (_tunnelInfoLabel == null)
+            return;
+
+        _tunnelInfoLabel.Text = tunnelName;
+        _tunnelInfoLabel.Visible = true;
+
+        LayoutContainer.SetPosition(_tunnelInfoLabel, screenPosition + new Vector2(-(_tunnelInfoLabel.DesiredSize.X / 2), -45));
+    }
+
+    public void HideTunnelInfo()
+    {
+        if (_tunnelInfoLabel != null)
+            _tunnelInfoLabel.Visible = false;
     }
 }

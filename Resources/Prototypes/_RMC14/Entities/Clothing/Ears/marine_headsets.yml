@@ -3,6 +3,8 @@
   id: RMCHeadsetMarine
   components:
   - type: GrantSquadLeaderTracker
+  - type: GrantTacMapAlert
+
 
 # Alpha
 - type: entity
@@ -434,3 +436,18 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
+
+# PVE
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetGoldenArrow
+  name: sun riders radio headset
+  description: This is used by the UNMC Sun Riders Platoon.
+  components:
+  - type: Sprite
+    state: delta_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySunRiders

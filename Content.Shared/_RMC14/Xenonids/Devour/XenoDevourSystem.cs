@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
@@ -10,6 +11,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -52,6 +54,8 @@ public sealed class XenoDevourSystem : EntitySystem
         _devouredQuery = GetEntityQuery<DevouredComponent>();
         _xenoDevourQuery = GetEntityQuery<XenoDevourComponent>();
 
+        SubscribeLocalEvent<ActionBlockIfDevouredComponent, RMCActionUseAttemptEvent>(OnDevouredActionUseAttempt);
+
         SubscribeLocalEvent<DevourableComponent, CanDropDraggedEvent>(OnDevourableCanDropDragged);
         SubscribeLocalEvent<DevourableComponent, DragDropDraggedEvent>(OnDevourableDragDropDragged);
         SubscribeLocalEvent<DevourableComponent, BeforeRangedInteractEvent>(OnDevourableBeforeRangedInteract);
@@ -83,6 +87,19 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeDamageEvent>(OnUsableWhileDevouredGetMeleeDamage);
         SubscribeLocalEvent<UsableWhileDevouredComponent, GetMeleeAttackRateEvent>(OnUsableWhileDevouredGetMeleeAttackRate);
         SubscribeLocalEvent<UsableWhileDevouredComponent, CMGetArmorPiercingEvent>(OnUsableWhileDevouredGetArmorPiercing);
+    }
+
+    private void OnDevouredActionUseAttempt(Entity<ActionBlockIfDevouredComponent> ent, ref RMCActionUseAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var user = args.User;
+        if (HasComp<DevouredComponent>(user))
+        {
+            args.Cancelled = true;
+            _popup.PopupClient(Loc.GetString("comp-climbable-cant-interact"), user, user, PopupType.SmallCaution);
+        }
     }
 
     private void OnDevourableShouldHandle(Entity<DevourableComponent> ent, ref ShouldHandleVirtualItemInteractEvent args)
@@ -244,10 +261,11 @@ public sealed class XenoDevourSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
+        var targetName = Identity.Name(xeno, EntityManager, xeno);
         var container = _container.EnsureContainer<ContainerSlot>(xeno, xeno.Comp.DevourContainerId);
         if (!_container.Insert(target, container))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed", ("target", target)), xeno, xeno, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed", ("target", targetName)), xeno, xeno, PopupType.SmallCaution);
             return;
         }
 
@@ -255,7 +273,7 @@ public sealed class XenoDevourSystem : EntitySystem
         devoured.WarnAt = _timing.CurTime + xeno.Comp.WarnAfter;
         devoured.RegurgitateAt = _timing.CurTime + xeno.Comp.RegurgitateAfter;
 
-        _popup.PopupClient(Loc.GetString("cm-xeno-devour-self", ("target", target)), xeno, xeno, PopupType.Medium);
+        _popup.PopupClient(Loc.GetString("cm-xeno-devour-self", ("target", targetName)), xeno, xeno, PopupType.Medium);
         _popup.PopupEntity(Loc.GetString("cm-xeno-devour-target", ("user", xeno.Owner)), xeno, target, PopupType.MediumCaution);
 
         var others = Filter.PvsExcept(xeno).RemovePlayerByAttachedEntity(target);
@@ -264,7 +282,7 @@ public sealed class XenoDevourSystem : EntitySystem
             if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", xeno.Owner), ("target", target)), xeno, recipient, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", xeno.Owner), ("target", targetName)), xeno, recipient, PopupType.MediumCaution);
         }
 
         var ev = new XenoDevouredEvent(target, xeno.Owner);
@@ -423,7 +441,8 @@ public sealed class XenoDevourSystem : EntitySystem
             ForceVisible = true,
         };
 
-        _popup.PopupClient(Loc.GetString("cm-xeno-devour-start-self", ("target", target)), target, xeno);
+        var targetName = Identity.Name(target, EntityManager, xeno);
+        _popup.PopupClient(Loc.GetString("cm-xeno-devour-start-self", ("target", targetName)), target, xeno);
 
         _popup.PopupEntity(Loc.GetString("cm-xeno-devour-start-target", ("user", xeno)), xeno, target, PopupType.MediumCaution);
 
@@ -433,7 +452,7 @@ public sealed class XenoDevourSystem : EntitySystem
             if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-start-observer", ("user", xeno), ("target", target)), target, recipient, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-start-observer", ("user", xeno), ("target", targetName)), target, recipient, PopupType.SmallCaution);
         }
 
         _doAfter.TryStartDoAfter(doAfter);

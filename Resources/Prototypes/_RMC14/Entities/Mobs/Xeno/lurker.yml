@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -57,6 +57,7 @@
     - CMXenoRavager
   - type: XenoMeleeSlow
     requiresKnockDown: true
+    higherOnXenos: true
   - type: XenoClaws
     clawType: Sharp
   - type: MeleeWeapon
@@ -65,8 +66,6 @@
       groups:
         Brute: 35
   - type: Tackle
-    stunMin: 2
-    stunMax: 6
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5
@@ -92,6 +91,10 @@
       state: lurker
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-lurker
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent:
@@ -113,6 +116,8 @@
     unrootOnMelee: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
+    removeOnHit: true
+    preventTackle: true
   - type: XenoTailStab
     tailDamage:
       groups:
@@ -161,7 +166,6 @@
         Brute: 40
   - type: XenoTailJab
     attackEffect: RMCEffectTailHit
-    throwRange: 0.5
     damage:
       groups:
         Brute: 50

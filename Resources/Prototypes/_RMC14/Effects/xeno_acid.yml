@@ -42,7 +42,7 @@
         hard: false
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,0.49"
+          bounds: "-0.35,-0.35,0.35,0.35"
         mask:
         - FullTileLayer
         layer:
@@ -55,6 +55,7 @@
   - type: TimedDespawn
     lifetime: 0.6
   - type: DamageOnCollide
+    acidic: true
     acidComboDuration: 40
     acidComboDamage:
       types:
@@ -69,6 +70,7 @@
     whitelist:
       components:
       - Marine
+      - Xeno
   - type: UncloakOnHit
   - type: ExtinguishFire
   - type: IgnorePredictionHit

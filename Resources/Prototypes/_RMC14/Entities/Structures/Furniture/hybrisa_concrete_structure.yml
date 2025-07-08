@@ -1,0 +1,43 @@
+- type: entity
+  parent: BaseStructure
+  id: RMCConcreteStatue
+  name: concrete statue
+  description: A decorative statue with the Weston-Yamada 'Wings' adorned on it, A corporate brutalist piece of art.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/concrete_structure.rsi
+    offset: 0,0.5
+    state: concretesculpture
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.25,0.5,0.75"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  parent: RMCConcreteStatue
+  id: RMCConcreteStatueOffset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0.5,0.9
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0,0.25,1,1.25"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer

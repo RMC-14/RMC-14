@@ -92,6 +92,9 @@
         components:
         - XenoHeavy
   - type: XenoBrutalize
+    damage:
+      types:
+        Blunt: 16
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
@@ -105,6 +108,10 @@
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
   - type: TantrumSpeedBuff
+  - type: FixedIdentity
+    name: cm-job-name-xeno-crusher
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
 
 - type: entity
   parent: CMXenoCrusherBase
@@ -185,7 +192,7 @@
     slowTime: 8
   - type: XenoStomp # TODO RMC14 screen shake?
     plasmaCost: 25
-    paralyzeTime: 0
+    paralyzeUnderOnly: true
     range: 3.95
     damage:
       types:

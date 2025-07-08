@@ -176,6 +176,90 @@
       "name": "floor"
     },
     {
+      "name": "floor_edge_1"
+    },
+    {
+      "name": "floor_edge_2"
+    },
+    {
+      "name": "floor_edge_3"
+    },
+    {
+      "name": "floor_edge_4"
+    },
+    {
+      "name": "floor_edge_5"
+    },
+    {
+      "name": "floor_edge_6"
+    },
+    {
+      "name": "floor_edge_7"
+    },
+    {
+      "name": "floor_edge_8"
+    },
+    {
+      "name": "floor_edge_s_1"
+    },
+    {
+      "name": "floor_edge_s_2"
+    },
+    {
+      "name": "floor_edge_s_3"
+    },
+    {
+      "name": "floor_edge_s_4"
+    },
+    {
+      "name": "floor_edge_s_5"
+    },
+    {
+      "name": "floor_edge_s_6"
+    },
+    {
+      "name": "floor_edge_s_7"
+    },
+    {
+      "name": "floor_edge_s_8"
+    },
+    {
+      "name": "floor_edge_sc_1"
+    },
+    {
+      "name": "floor_edge_sc_2"
+    },
+    {
+      "name": "floor_edge_sc_3"
+    },
+    {
+      "name": "floor_edge_sc_4"
+    },
+    {
+      "name": "floor_edge_s2_1"
+    },
+    {
+      "name": "floor_edge_s2_2"
+    },
+    {
+      "name": "floor_edge_s2_3"
+    },
+    {
+      "name": "floor_edge_s2_4"
+    },
+    {
+      "name": "floor_edge_s3_1"
+    },
+    {
+      "name": "floor_edge_s3_2"
+    },
+    {
+      "name": "floor_edge_s3_3"
+    },
+    {
+      "name": "floor_edge_s3_4"
+    },
+    {
       "name": "outerhull"
     },
     {

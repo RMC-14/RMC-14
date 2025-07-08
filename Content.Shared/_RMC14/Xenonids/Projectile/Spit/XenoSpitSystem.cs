@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Ball;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -197,7 +198,7 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_rmcActions.TryUseAction(xeno, args.Action))
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = true;
@@ -221,9 +222,16 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
 
         var target = args.Target;
-        if (_hive.FromSameHive(spit.Owner, target))
+        if (_hive.FromSameHive(spit.Owner, target) || HasComp<XenoComponent>(target))
         {
             QueueDel(spit);
+            return;
+        }
+
+        if (HasComp<SynthComponent>(target))
+        {
+            var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", target));
+            _popup.PopupEntity(immuneMsg, target, target, PopupType.SmallCaution);
             return;
         }
 
@@ -254,7 +262,6 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
         var ev = new XenoAcidBallDoAfterEvent(GetNetCoordinates(args.Target));
         var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
@@ -285,15 +292,16 @@ public sealed class XenoSpitSystem : EntitySystem
             distance
         );
 
+        foreach (var (actionId, action) in _actions.GetActions(ent))
+        {
+            if (action.BaseEvent is XenoAcidBallActionEvent)
+                _actions.SetCooldown(actionId, ent.Comp.Cooldown);
+        }
+
         if (!args.Handled)
             return;
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-acid-ball-shoot-self"), ent, ent);
-        foreach (var (actionId, action) in _actions.GetActions(ent))
-        {
-            if (action.BaseEvent is XenoAcidBallActionEvent)
-                _actions.StartUseDelay(actionId);
-        }
     }
 
     private void OnApplyAcidStacksProjectileHit(Entity<ApplyAcidStacksComponent> ent, ref ProjectileHitEvent args)

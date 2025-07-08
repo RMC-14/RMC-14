@@ -50,7 +50,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-      #    RMCBeltHolsterFlareGun #TODO: Make this
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtility
       - id: RMCBeltUtilityGeneral
@@ -127,6 +127,8 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
+      - id: CMMagazineRifleM4SPRExt
+        points: 10
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -137,6 +139,10 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
       #- id: M44 Heavy Speedloader
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -163,7 +169,7 @@
         points: 15
       - id: CMWebbingBlack
         points: 15
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
         points: 15
       - id: CMWebbingHolster
         points: 15
@@ -177,8 +183,8 @@
         points: 15
       - id: RMCPouchFuelTank
         points: 5
-    #- id: CMWeldingGoggles
-    #  points: 5
+      - id: RMCWeldingGoggles
+        points: 5
     #- id: CMSlingPouch
     #  points: 15
       - id: RMCPouchGeneralLarge
