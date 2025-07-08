@@ -73,17 +73,17 @@
       - [ RMCPouchFirstAidInjectors ]
       - [ RMCPouchFirstResponderFill ]
       - [ RMCPouchMedkitFillAdvanced ]
+    -
+      - [ RMCTieBlack ] # TODO RMC14 - System for random uniform accessories like randomStartingGear
+      - [ RMCTie ]
+      - [ RMCTieGreen ]
+      - [ RMCTiePurple ]
+      - [ RMCTieRed ]
     randomStartingGear:
       back:
       - CMSatchel
       - RMCSatchelBlack
       - RMCSatchelBlue
-      neck:
-      - RMCNeckTieBlack
-      - RMCNeckTie
-      - RMCNeckTieGreen
-      - RMCNeckTiePurple
-      - RMCNeckTieRed
       shoes:
       - RMCShoesLaceup
       - RMCShoesLaceupBrown

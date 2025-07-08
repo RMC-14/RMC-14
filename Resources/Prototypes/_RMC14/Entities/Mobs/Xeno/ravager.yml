@@ -129,6 +129,8 @@
       state: ravager
   - type: FixedIdentity
     name: cm-job-name-xeno-ravager
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
 
 - type: entity
   parent: RMCXenoRavagerBase
