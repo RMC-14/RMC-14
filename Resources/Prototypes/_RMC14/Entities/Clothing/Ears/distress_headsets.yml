@@ -131,6 +131,7 @@
   id: RMCHeadsetForecon
   name: Force Recon headset
   description: A headset given to FORECON marines.
+  suffix: Survivor
   components:
   - type: ContainerFill
     containers:
