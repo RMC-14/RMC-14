@@ -91,6 +91,7 @@
   - type: Emoting
   - type: Actions
   - type: Alerts
+  - type: AreaInfo
   - type: Appearance
   - type: DoAfter
   - type: Examiner
