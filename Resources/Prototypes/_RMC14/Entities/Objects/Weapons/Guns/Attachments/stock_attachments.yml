@@ -932,7 +932,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-Resources/Prototypes/_RMC14/Entities/Objects/Materials    - RMCAttachmentAK4047StockCollapsible
+    - RMCAttachmentAK4047StockCollapsible
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
