@@ -116,8 +116,12 @@ public abstract class RMCHandsSystem : EntitySystem
 
         args.Verbs.Add(switchStorageVerb);
 
-        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+        if (!_container.TryGetContainingContainer((ent, null), out var containing) ||
+            containing.Owner != user ||
+            !_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+        {
             return;
+        }
 
         AlternativeVerb unequipVerb = new()
         {
