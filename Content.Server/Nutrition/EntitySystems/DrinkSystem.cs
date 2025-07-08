@@ -5,6 +5,7 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics;
 using Content.Server.Inventory;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry;
@@ -14,7 +15,6 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -83,7 +83,7 @@ public sealed class DrinkSystem : SharedDrinkSystem
         var total = 0f;
         foreach (var quantity in solution.Contents)
         {
-            var reagent = _proto.Index<ReagentPrototype>(quantity.Reagent.Prototype);
+            var reagent = _proto.IndexReagent<ReagentPrototype>(quantity.Reagent.Prototype);
             if (reagent.Metabolisms == null)
                 continue;
 

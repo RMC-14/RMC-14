@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
@@ -101,7 +102,7 @@ namespace Content.Shared.Chemistry.Components
             foreach (var (reagent, quantity) in Contents)
             {
                 _heatCapacity += (float) quantity *
-                                    protoMan.Index<ReagentPrototype>(reagent.Prototype).SpecificHeat;
+                                    protoMan.IndexReagent<ReagentPrototype>(reagent.Prototype).SpecificHeat;
             }
 
             _heatCapacityUpdateCounter = 0;
@@ -827,7 +828,7 @@ namespace Content.Shared.Chemistry.Components
 
                 runningTotalQuantity += quantity;
 
-                if (!protoMan.TryIndex(reagent.Prototype, out ReagentPrototype? proto))
+                if (!protoMan.TryIndexReagent(reagent.Prototype, out ReagentPrototype? proto))
                 {
                     continue;
                 }
@@ -870,7 +871,7 @@ namespace Content.Shared.Chemistry.Components
 
                 runningTotalQuantity += quantity;
 
-                if (!protoMan.TryIndex(reagent.Prototype, out ReagentPrototype? proto))
+                if (!protoMan.TryIndexReagent(reagent.Prototype, out ReagentPrototype? proto))
                 {
                     continue;
                 }
@@ -923,7 +924,7 @@ namespace Content.Shared.Chemistry.Components
             var dict = new Dictionary<ReagentPrototype, FixedPoint2>(Contents.Count);
             foreach (var (reagent, quantity) in Contents)
             {
-                var proto = protoMan.Index<ReagentPrototype>(reagent.Prototype);
+                var proto = protoMan.IndexReagent<ReagentPrototype>(reagent.Prototype);
                 dict[proto] = quantity + dict.GetValueOrDefault(proto);
             }
             return dict;

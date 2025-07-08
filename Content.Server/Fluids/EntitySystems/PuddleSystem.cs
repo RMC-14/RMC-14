@@ -1,9 +1,8 @@
-using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Chemistry.TileReactions;
-using Content.Server.DoAfter;
 using Content.Server.Fluids.Components;
 using Content.Server.Spreader;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -378,7 +377,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
                 var interpolateValue = quantity.Float() / solution.Volume.Float();
                 color = Color.InterpolateBetween(color,
-                    _prototypeManager.Index<ReagentPrototype>(standout).SubstanceColor, interpolateValue);
+                    _prototypeManager.IndexReagent<ReagentPrototype>(standout).SubstanceColor, interpolateValue);
             }
         }
 
@@ -401,7 +400,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
 
         foreach (var (reagent, quantity) in solution.Contents)
         {
-            var reagentProto = _prototypeManager.Index<ReagentPrototype>(reagent.Prototype);
+            var reagentProto = _prototypeManager.IndexReagent<ReagentPrototype>(reagent.Prototype);
 
             if (!reagentProto.Slippery)
                 continue;
@@ -449,7 +448,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         var maxViscosity = 0f;
         foreach (var (reagent, _) in solution.Contents)
         {
-            var reagentProto = _prototypeManager.Index<ReagentPrototype>(reagent.Prototype);
+            var reagentProto = _prototypeManager.IndexReagent<ReagentPrototype>(reagent.Prototype);
             maxViscosity = Math.Max(maxViscosity, reagentProto.Viscosity);
         }
 
@@ -732,7 +731,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         for (var i = solution.Contents.Count - 1; i >= 0; i--)
         {
             var (reagent, quantity) = solution.Contents[i];
-            var proto = _prototypeManager.Index<ReagentPrototype>(reagent.Prototype);
+            var proto = _prototypeManager.IndexReagent<ReagentPrototype>(reagent.Prototype);
             var removed = proto.ReactionTile(tileRef, quantity, EntityManager, reagent.Data);
             if (removed <= FixedPoint2.Zero)
                 continue;

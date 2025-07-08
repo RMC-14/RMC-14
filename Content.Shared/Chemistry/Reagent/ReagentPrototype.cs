@@ -6,8 +6,8 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
-using Content.Shared.EntityEffects;
 using Content.Shared.Database;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Nutrition;
 using Robust.Shared.Audio;
@@ -22,7 +22,8 @@ namespace Content.Shared.Chemistry.Reagent
 {
     [Prototype]
     [DataDefinition]
-    public sealed partial class ReagentPrototype : IPrototype, IInheritingPrototype, ICMSpecific
+    [Virtual]
+    public partial class ReagentPrototype : IPrototype, IInheritingPrototype, ICMSpecific
     {
         [ViewVariables]
         [IdDataField]

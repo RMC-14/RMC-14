@@ -1,4 +1,5 @@
 using Content.Client.Items.Systems;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
@@ -75,7 +76,7 @@ public sealed class SolutionContainerVisualsSystem : VisualizerSystem<SolutionCo
                         out var baseOverride,
                         args.Component))
                 {
-                    _prototype.TryIndex<ReagentPrototype>(baseOverride, out var reagentProto);
+                    _prototype.TryIndexReagent<ReagentPrototype>(baseOverride, out var reagentProto);
 
                     if (reagentProto?.MetamorphicSprite is { } sprite)
                     {

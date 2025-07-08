@@ -4,7 +4,7 @@ using Content.Shared.FixedPoint;
 
 namespace Content.Shared.Chemistry.Reagent;
 
-public sealed partial class ReagentPrototype
+public partial class ReagentPrototype
 {
     [DataField]
     public bool Unknown;

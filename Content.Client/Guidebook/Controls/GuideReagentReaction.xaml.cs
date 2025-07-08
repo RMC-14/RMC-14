@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Client.Message;
 using Content.Client.UserInterface.ControlExtensions;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Atmos.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
@@ -156,7 +157,7 @@ public sealed partial class GuideReagentReaction : BoxContainer, ISearchableCont
         foreach (var (product, amount) in reagents.OrderByDescending(p => p.Value))
         {
             msg.AddMarkupOrThrow(Loc.GetString("guidebook-reagent-recipes-reagent-display",
-                ("reagent", protoMan.Index<ReagentPrototype>(product).LocalizedName), ("ratio", amount)));
+                ("reagent", protoMan.IndexReagent<ReagentPrototype>(product).LocalizedName), ("ratio", amount)));
             i++;
             if (i < reagentCount)
                 msg.PushNewline();

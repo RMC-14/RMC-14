@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityEffects;
@@ -50,7 +51,7 @@ namespace Content.Server.EntityEffects.Effects
                     var prototypeMan = IoCManager.Resolve<IPrototypeManager>();
                     foreach (var quant in reagentArgs.Source.Contents.ToArray())
                     {
-                        var proto = prototypeMan.Index<ReagentPrototype>(quant.Reagent.Prototype);
+                        var proto = prototypeMan.IndexReagent<ReagentPrototype>(quant.Reagent.Prototype);
                         if (proto.Metabolisms != null && proto.Metabolisms.ContainsKey(Group))
                         {
                             if (amount < 0)
@@ -69,7 +70,7 @@ namespace Content.Server.EntityEffects.Effects
 
         protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         {
-            if (Reagent is not null && prototype.TryIndex(Reagent, out ReagentPrototype? reagentProto))
+            if (Reagent is not null && prototype.TryIndexReagent(Reagent, out ReagentPrototype? reagentProto))
             {
                 return Loc.GetString("reagent-effect-guidebook-adjust-reagent-reagent",
                     ("chance", Probability),

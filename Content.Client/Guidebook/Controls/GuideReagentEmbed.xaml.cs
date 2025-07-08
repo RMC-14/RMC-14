@@ -4,6 +4,7 @@ using Content.Client.Chemistry.EntitySystems;
 using Content.Client.Guidebook.Richtext;
 using Content.Client.Message;
 using Content.Client.UserInterface.ControlExtensions;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
@@ -39,7 +40,7 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
 
     public GuideReagentEmbed(string reagent) : this()
     {
-        GenerateControl(_prototype.Index<ReagentPrototype>(reagent));
+        GenerateControl(_prototype.IndexReagent<ReagentPrototype>(reagent));
     }
 
     public GuideReagentEmbed(ReagentPrototype reagent) : this()
@@ -66,7 +67,7 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
             return false;
         }
 
-        if (!_prototype.TryIndex<ReagentPrototype>(id, out var reagent))
+        if (!_prototype.TryIndexReagent<ReagentPrototype>(id, out var reagent))
         {
             Logger.Error($"Specified reagent prototype \"{id}\" is not a valid reagent prototype");
             return false;

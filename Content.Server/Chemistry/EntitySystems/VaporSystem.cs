@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Chemistry.Components;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -124,7 +125,7 @@ namespace Content.Server.Chemistry.EntitySystems
                 foreach (var reagentQuantity in contents.Contents.ToArray())
                 {
                     if (reagentQuantity.Quantity == FixedPoint2.Zero) continue;
-                    var reagent = _protoManager.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+                    var reagent = _protoManager.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
 
                     var reaction =
                         reagent.ReactionTile(tile, (reagentQuantity.Quantity / vapor.TransferAmount) * 0.25f, EntityManager, reagentQuantity.Reagent.Data);

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
@@ -28,7 +29,7 @@ public sealed class ReactiveSystem : EntitySystem
     public void ReactionEntity(EntityUid uid, ReactionMethod method, ReagentQuantity reagentQuantity, Solution? source)
     {
         // We throw if the reagent specified doesn't exist.
-        var proto = _prototypeManager.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+        var proto = _prototypeManager.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
         ReactionEntity(uid, method, proto, reagentQuantity, source);
     }
 
