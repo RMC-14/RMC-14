@@ -24,8 +24,8 @@
     sprite: _RMC14/Objects/Devices/pinpointer.rsi
     size: Small
   - type: Pinpointer
-    closeDistance: 10
-    mediumDistance: 100
+    closeDistance: 30
+    mediumDistance: 80
     reachedDistance: 2
   - type: Appearance
   - type: GenericVisualizer
