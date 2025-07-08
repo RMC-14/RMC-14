@@ -12,7 +12,7 @@ using DrawDepthTag = Robust.Shared.GameObjects.DrawDepth;
 
 namespace Content.Shared._RMC14.Doors;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCDoorComponent : Component
 {
     /// <summary>
