@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Fixed Trijent Dam not loading.
-    type: Fix
-  id: 1472
-  time: '2025-03-17T05:30:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5927
 - author: Arcticular1
   changes:
   - message: Fixed marine operations uniform not having camouflage specific sprites.
@@ -4972,5 +4965,16 @@
   id: 1972
   time: '2025-07-08T01:57:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6769
+- author: noctyrnal
+  changes:
+  - message: Added more patches and armbands. You can find these in your loadout and
+      prep vendors, along with requsitions.
+    type: Add
+  - message: Ties and armbands are now treated as accessories instead of clothing
+      - You clip these onto your uniforms instead of wearing them in your neck slot.
+    type: Tweak
+  id: 1973
+  time: '2025-07-08T02:04:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6947
 Name: RMC14
 Order: -1
