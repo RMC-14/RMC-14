@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: mmails
-  changes:
-  - message: Added missing ranks from 13! These are only able to be given by admins
-      right now
-    type: Add
-  id: 1468
-  time: '2025-03-15T19:25:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5896
 - author: DrSmugleaf
   changes:
   - message: Fixed all hive weed checks being broken, such as planting eggs and nesting.
@@ -4969,5 +4961,12 @@
   id: 1968
   time: '2025-07-08T01:19:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6952
+- author: FeelFlows
+  changes:
+  - message: Added intel spawners to CORSAT.
+    type: Add
+  id: 1969
+  time: '2025-07-08T01:23:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6946
 Name: RMC14
 Order: -1
