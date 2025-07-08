@@ -3,11 +3,11 @@
   id: RMCPMCSynthSmartpackFilled
   components:
   - type: StorageFill
-  contents:
-  - id: CMRollerBed
-  - id: CMPortableSurgicalBed
-  - id: CMFireExtinguisherPortable
-  - id: CMDefibrillator
-  # TODO RMC14 portable crew monitor
-  - id: RMCSynthResetKey
-  - id: RMCNailgunCompact
+    contents:
+    - id: CMRollerBed
+    - id: CMPortableSurgicalBed
+    - id: CMFireExtinguisherPortable
+    - id: CMDefibrillator
+    # TODO RMC14 portable crew monitor
+    - id: RMCSynthResetKey
+    - id: RMCNailgunCompact
