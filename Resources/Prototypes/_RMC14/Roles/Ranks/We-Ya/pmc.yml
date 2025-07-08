@@ -91,5 +91,5 @@
 - type: rank
   id: RMCRankPMCSynthetic
   name: PMC Support Synthetic
-  prefix: Syn.
-  paygrade: PMC-SY
+  prefix: SYN.
+  paygrade: PMC-SYN

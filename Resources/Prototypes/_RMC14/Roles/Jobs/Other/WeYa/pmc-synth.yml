@@ -110,7 +110,7 @@
   id: RMCJobGearPMCSynthetic
   equipment: 
     id: RMCIDCardSynth
-    back: RMCSmartpackA1White
+    back: RMCPMCSynthSmartpackFilled
     jumpsuit: RMCJumpsuitVeteranPMCSynth
     shoes: RMCBootsPMCFilled
     ears: RMCHeadsetDistressPMCLeader
@@ -123,14 +123,6 @@
     pocket2:  RMCPouchConstructionFillHighGrade # TODO RMC14 port the fancy construction pouch from CM
     # TODO RMC14 maintenance jack
   storage:
-    back:
-    - CMRollerBed
-    - CMPortableSurgicalBed
-    - CMFireExtinguisherPortable
-    - CMDefibrillator
-    # -    # TODO RMC14 portable crew monitor
-    - RMCSynthResetKey
-    - RMCNailgunCompact
     outerClothing: 
     - RMCMagazineSMGNailgun
     - RMCMagazineSMGNailgun
