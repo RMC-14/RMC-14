@@ -305,3 +305,88 @@
     bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/prefab_greebles.rsi
+  - type: Appearance
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble1
+  components:
+  - type: Sprite
+    state: antenna1
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble2
+  components:
+  - type: Sprite
+    state: antenna2
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble3
+  components:
+  - type: Sprite
+    state: flagpole
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble4
+  components:
+  - type: Sprite
+    state: smokestack
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble5
+  components:
+  - type: Sprite
+    state: solarpanel1
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble6
+  components:
+  - type: Sprite
+    state: solarpanel2
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble7
+  components:
+  - type: Sprite
+    state: vent1
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble8
+  components:
+  - type: Sprite
+    state: vent2
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble9
+  components:
+  - type: Sprite
+    state: vent3
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble10
+  components:
+  - type: Sprite
+    state: vent4
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble11
+  components:
+  - type: Sprite
+    state: vent5
+
+- type: entity
+  parent: RMCPrefabGreebleBase
+  id: RMCPrefabGreeble12
+  components:
+  - type: Sprite
+    state: windsock

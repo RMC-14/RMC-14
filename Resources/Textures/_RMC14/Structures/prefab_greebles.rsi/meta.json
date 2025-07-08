@@ -83,6 +83,9 @@
     },
     {
       "name": "antenna2"
+    },
+    {
+      "name": "smokestack"
     }
   ]
 }
