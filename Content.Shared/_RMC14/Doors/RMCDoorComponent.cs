@@ -20,6 +20,7 @@ public sealed partial class RMCDoorComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier XenoPrySound = new SoundCollectionSpecifier("RMCXenoPry");
+    
     [DataField]
     public SoundSpecifier XenoPodDoorPrySound = new SoundPathSpecifier("/Audio/Machines/airlock_creaking.ogg");
 
