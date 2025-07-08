@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/stock.dmi, all m42a2 wooden stock camo types edited by SG6732",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "smg-brace-on"
+    },
+    {
+      "name": "smg-brace"
+    },
+    {
+      "name": "smgstockcol"
+    },
+    {
+      "name": "smgstockcol-on"
+    },
+    {
+      "name": "smgstock"
+    },
+    {
+      "name": "ou_stock"
+    },
+    {
+      "name": "stock"
+    },
+    {
+      "name": "s_stock"
+    },
+    {
+      "name": "d_stock"
+    },
+    {
+      "name": "c_stock"
+    },
+    {
+      "name": "u_stock"
+    },
+    {
+      "name": "abr40stock"
+    },
+    {
+      "name": "abr40stock_tac"
+    },
+    {
+      "name": "l42stock"
+    },
+    {
+      "name": "nsg23_stock"
+    },
+    {
+      "name": "m54-folding-on"
+    },
+    {
+      "name": "m54-folding"
+    },
+    {
+      "name": "riflestock"
+    },
+    {
+      "name": "m79-stock"
+    },
+    {
+      "name": "r4t-stock"
+    },
+    {
+      "name": "s_r4t-stock"
+    },
+    {
+      "name": "u_r4t-stock"
+    },
+    {
+      "name": "d_r4t-stock"
+    },
+    {
+      "name": "c_r4t-stock"
+    },
+    {
+      "name": "smg-brace_a-on"
+    },
+    {
+      "name": "smg-brace_a"
+    },
+    {
+      "name": "smgstockcol_a"
+    },
+    {
+      "name": "smgstockcol_a-on"
+    },
+    {
+      "name": "smgstock_a"
+    },
+    {
+      "name": "abr40stock_a"
+    },
+    {
+      "name": "abr40stock_tac_a"
+    },
+    {
+      "name": "l42stock_a"
+    },
+    {
+      "name": "m54-folding_a-on"
+    },
+    {
+      "name": "m54-folding_a"
+    },
+    {
+      "name": "riflestock_a"
+    },
+    {
+      "name": "m79-stock_a"
+    },
+    {
+      "name": "44stock-on"
+    },
+    {
+      "name": "44stock"
+    },
+    {
+      "name": "ar10_stock"
+    },
+    {
+      "name": "m16-stock"
+    },
+    {
+      "name": "m16-folding-on"
+    },
+    {
+      "name": "m16-folding"
+    },
+    {
+      "name": "boomslang-stock"
+    },
+    {
+      "name": "d_boomslang-stock"
+    },
+    {
+      "name": "s_boomslang-stock"
+    },
+    {
+      "name": "c_boomslang-stock"
+    },
+    {
+      "name": "u_boomslang-stock"
+    },
+    {
+      "name": "m54markstock"
+    },
+    {
+      "name": "huntingstock"
+    },
+    {
+      "name": "slavicstock"
+    },
+    {
+      "name": "type23_stock"
+    },
+    {
+      "name": "twobore_stock"
+    },
+    {
+      "name": "hg3712_stock"
+    },
+      {
+          "name": "hg3717_stock"
+      },
+      {
+          "name": "M3717Stock"
+      },
+    {
+      "name": "db-stock"
+    },
+    {
+      "name": "44stock_old"
+    },
+    {
+      "name": "tactical_stock"
+    },
+    {
+      "name": "tactical_stock_a"
+    },
+    {
+      "name": "m44r_stock"
+    },
+    {
+      "name": "m77_stock"
+    },
+    {
+      "name": "m77_stock_a"
+    },
+    {
+      "name": "vulture_stock"
+    },
+    {
+      "name": "d_vulture_stock"
+    },
+    {
+      "name": "s_vulture_stock"
+    },
+    {
+      "name": "c_vulture_stock"
+    },
+    {
+      "name": "u_vulture_stock"
+    },
+    {
+      "name": "uppmg_stock"
+    },
+    {
+      "name": "hjra_breech"
+    },
+    {
+      "name": "type71_stock"
+    },
+    {
+      "name": "m60_stock"
+    },
+    {
+      "name": "xm51_stock"
+    },
+    {
+      "name": "s_xm51_stock"
+    },
+    {
+      "name": "d_xm51_stock"
+    },
+    {
+      "name": "c_xm51_stock"
+    },
+    {
+      "name": "u_xm51_stock"
+    },
+    {
+      "name": "tactical_stock_221"
+    }
+  ]
+}
