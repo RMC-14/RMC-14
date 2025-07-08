@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Fixed marine operations uniform not having camouflage specific sprites.
-    type: Fix
-  id: 1473
-  time: '2025-03-21T05:54:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5942
 - author: CyberTropic
   changes:
   - message: Cash stacks use stack sprites.
@@ -4976,5 +4969,12 @@
   id: 1973
   time: '2025-07-08T02:04:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6947
+- author: Ian321
+  changes:
+  - message: Xenos can now be dissected.
+    type: Add
+  id: 1974
+  time: '2025-07-08T03:19:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5869
 Name: RMC14
 Order: -1
