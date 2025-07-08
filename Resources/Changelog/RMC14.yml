@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Added boonie hats to the loadout options for 2 points, a normal version
-      and a tan version, includes camo for specific maps.
-    type: Add
-  - message: Adjusted headwear price in the loadout menu (3>2).
-    type: Fix
-  id: 1467
-  time: '2025-03-15T19:22:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5898
 - author: mmails
   changes:
   - message: Added missing ranks from 13! These are only able to be given by admins
@@ -4972,5 +4962,12 @@
   id: 1967
   time: '2025-07-08T01:12:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6958
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed deafness not hiding radio messages.
+    type: Fix
+  id: 1968
+  time: '2025-07-08T01:19:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6952
 Name: RMC14
 Order: -1
