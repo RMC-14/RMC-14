@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Warrior lunge not pulling if pull is on cooldown.
-    type: Fix
-  - message: Fixed racks being improperly placed in some places.
-    type: Fix
-  id: 1471
-  time: '2025-03-15T21:46:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5909
 - author: OmerF-afk
   changes:
   - message: Fixed Trijent Dam not loading.
@@ -4963,5 +4954,23 @@
   id: 1971
   time: '2025-07-08T01:37:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6953
+- author: Dygon
+  changes:
+  - message: The flare gun is now available in the prep room and at requisitions.
+      Its built-in scope allows you to launch flares much farther than you could throw
+      them by hand. Flare guns can also be used to illuminate an area or mark a CAS
+      target by firing flares into the sky, without leaving one on the ground. However,
+      flares launched into the air are dimmer and burn for a shorter duration.
+    type: Add
+  - message: The Mateba and Winter Wyvern can now be fired into the sky if you have
+      level 3 leadership, this will shake the screen of any nearby marines.
+    type: Tweak
+  - message: Signal flares now show their CAS designator when examined.
+    type: Tweak
+  - message: Starshell ashes won't clip inside walls anymore.
+    type: Fix
+  id: 1972
+  time: '2025-07-08T01:57:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6769
 Name: RMC14
 Order: -1
