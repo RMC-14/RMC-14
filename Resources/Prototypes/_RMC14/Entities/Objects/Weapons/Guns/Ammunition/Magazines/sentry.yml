@@ -74,11 +74,10 @@
     layers:
     - state: flametank
       map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
     - state: flametank_strip
       color: "#EE6515"
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
 
 - type: entity
   parent: BaseMagazineRifle
@@ -102,11 +101,10 @@
     layers:
     - state: flametank
       map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
     - state: flametank_strip
       color: "#00b8ff"
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
   
 - type: entity
   parent: BaseMagazineRifle
@@ -130,11 +128,10 @@
     layers:
     - state: flametank
       map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
     - state: flametank_strip
       color: "#832828"
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
 # "00b8ff" (blue fire napalm x), for mini it should be "EE6515" (normal ut fuel), for plasma do "832828" (phosporus color since thats the smoke)
 - type: Tag
   id: RMCMagazineSentry
