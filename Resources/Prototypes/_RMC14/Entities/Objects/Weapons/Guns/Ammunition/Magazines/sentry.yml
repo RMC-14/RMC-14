@@ -60,7 +60,7 @@
   components:
   - type: Tag
     tags:
-    - RMCMagazineSentryShotgun
+    - RMCMagazineSentryFire
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -75,6 +75,7 @@
     - state: flametank
       map: [ "enum.GunVisualLayers.Base" ]
     - state: flametank_strip
+      map: ["enum.GunVisualLayers.Mag"]
       color: "#EE6515"
 
 - type: entity
@@ -85,7 +86,7 @@
   components:
   - type: Tag
     tags:
-    - RMCMagazineSentryShotgun
+    - RMCMagazineSentryFireBlue
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -100,6 +101,7 @@
     - state: flametank
       map: [ "enum.GunVisualLayers.Base" ]
     - state: flametank_strip
+      map: ["enum.GunVisualLayers.Mag"]
       color: "#00b8ff"
   
 - type: entity
@@ -110,7 +112,7 @@
   components:
   - type: Tag
     tags:
-    - RMCMagazineSentryShotgun
+    - RMCMagazineSentryFireSmoke
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -125,6 +127,7 @@
     - state: flametank
       map: [ "enum.GunVisualLayers.Base" ]
     - state: flametank_strip
+      map: ["enum.GunVisualLayers.Mag"]
       color: "#832828"
 # "00b8ff" (blue fire napalm x), for mini it should be "EE6515" (normal ut fuel), for plasma do "832828" (phosporus color since thats the smoke)
 - type: Tag
