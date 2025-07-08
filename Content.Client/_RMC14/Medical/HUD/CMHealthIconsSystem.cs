@@ -15,14 +15,6 @@ public sealed class CMHealthIconsSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private const string Healthy = "Healthy";
-    private const string DeadDefib = "DeadDefib";
-    private const string DeadClose = "DeadClose";
-    private const string DeadAlmost = "DeadAlmost";
-    private const string DeadDNR = "DeadDNR";
-    private const string Dead = "Dead";
-    private const string HCDead = "HCDead";
-
     private static readonly ProtoId<HealthIconPrototype> BaseDeadIcon = "CMHealthIconDead";
 
     public StatusIconData GetDeadIcon()
@@ -33,7 +25,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
     public IReadOnlyList<StatusIconData> GetIcons(Entity<DamageableComponent> damageable)
     {
         var icons = new List<StatusIconData>();
-        var icon = Healthy;
+        var icon = RMCHealthIconTypes.Healthy;
 
         if (!TryComp<RMCHealthIconsComponent>(damageable, out var iconsComp))
             return icons;
@@ -43,7 +35,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
             || TryComp(damageable, out PerishableComponent? perishable)
             && perishable.Stage >= 4)
         {
-            icon = Dead;
+            icon = RMCHealthIconTypes.Dead;
             if (iconsComp.Icons.TryGetValue(icon, out var deadIcon))
                 icons.Add(_prototype.Index(deadIcon));
 
@@ -53,14 +45,14 @@ public sealed class CMHealthIconsSystem : EntitySystem
         if (_mobState.IsDead(damageable))
         {
             if (perishable == null || perishable.Stage <= 1)
-                icon = DeadDefib;
+                icon = RMCHealthIconTypes.DeadDefib;
             else if (perishable.Stage == 2)
-                icon = DeadClose;
+                icon = RMCHealthIconTypes.DeadClose;
             else if (perishable.Stage == 3)
-                icon = DeadAlmost;
+                icon = RMCHealthIconTypes.DeadAlmost;
 
             if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
-                icon = DeadDNR;
+                icon = RMCHealthIconTypes.DeadDNR;
         }
 
         if (iconsComp.Icons.TryGetValue(icon, out var iconToUse))

@@ -1,4 +1,5 @@
-﻿using Content.Shared.Body.Organ;
+﻿using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -57,15 +58,15 @@ public sealed partial class SynthComponent : Component
     public LocId FixedIdentityReplacement = "cm-chatsan-replacement-synth";
 
     [DataField, AutoNetworkedField]
-    public Dictionary<string, ProtoId<HealthIconPrototype>> HealthIconOverrides = new()
+    public Dictionary<RMCHealthIconTypes, ProtoId<HealthIconPrototype>> HealthIconOverrides = new()
     {
-        ["Healthy"] = "RMCHealthIconHealthySynth",
-        ["DeadDefib"] = "RMCHealthIconDeadSynth",
-        ["DeadClose"] = "RMCHealthIconDeadSynth",
-        ["DeadAlmost"] = "RMCHealthIconDeadSynth",
-        ["DeadDNR"] = "RMCHealthIconDeadDNRSynth",
-        ["Dead"] = "RMCHealthIconDeadSynth",
-        ["HCDead"] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.Healthy] = "RMCHealthIconHealthySynth",
+        [RMCHealthIconTypes.DeadDefib] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadClose] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadAlmost] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.DeadDNR] = "RMCHealthIconDeadDNRSynth",
+        [RMCHealthIconTypes.Dead] = "RMCHealthIconDeadSynth",
+        [RMCHealthIconTypes.HCDead] = "RMCHealthIconDeadSynth",
     };
 
     /// <summary>
