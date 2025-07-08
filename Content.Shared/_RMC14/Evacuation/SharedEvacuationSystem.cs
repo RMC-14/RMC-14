@@ -351,10 +351,11 @@ public abstract class SharedEvacuationSystem : EntitySystem
             }
         }
 
+        _audio.PlayPredicted(ent.Comp.WarmupSound, ent, user);
+
         if (ent.Comp.Mode == EvacuationComputerMode.Crashed)
             return;
 
-        _audio.PlayPredicted(ent.Comp.WarmupSound, ent, user);
         ent.Comp.Mode = EvacuationComputerMode.Travelling;
         Dirty(ent);
 
