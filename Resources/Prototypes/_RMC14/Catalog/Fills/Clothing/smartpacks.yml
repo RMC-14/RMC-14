@@ -4,8 +4,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMRollerBed
-    - id: CMPortableSurgicalBed
+    - id: CMRollerBedSpawnFolded
+    - id: CMPortableSurgicalBedSpawnFolded
     - id: CMFireExtinguisherPortable
     - id: CMDefibrillator
     # TODO RMC14 portable crew monitor
