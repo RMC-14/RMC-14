@@ -1,12 +1,16 @@
 using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
+using Content.Shared._RMC14.Xenonids.Rotate;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
@@ -41,14 +45,17 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly INetManager _net = default!;
-
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly XenoRotateSystem _rotate = default!;
+    [Dependency] private readonly RMCDazedSystem _daze = default!;
+    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
-    private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
+    private const int AttackMask = (int)(CollisionGroup.MobMask | CollisionGroup.Opaque);
 
     protected Box2Rotated LastTailAttack;
     private int _tailStabMaxTargets;
@@ -190,10 +197,25 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     if (change?.GetTotal() > FixedPoint2.Zero)
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
 
+                    if (_net.IsServer)
+                    {
+                        SpawnAttachedTo(stab.Comp.HitAnimationId, hit.ToCoordinates());
+
+                        if (_size.TryGetSize(stab, out var size))
+                        {
+                            if (size >= RMCSizes.Big)
+                                _daze.TryDaze(hit, stab.Comp.BigDazeTime, true);
+                            else if (size == RMCSizes.Xeno)
+                                _daze.TryDaze(hit, stab.Comp.DazeTime, true);
+                        }
+                    }
+
+                    _cameraShake.ShakeCamera(hit, 2, 1);
+
                     if (stab.Comp.InjectNeuro)
                     {
                         if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) || HasComp<XenoComponent>(hit))
-                           continue;
+                            continue;
 
                         if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
                         {
@@ -256,9 +278,18 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
         DoLunge((stab, stab, transform), localPos, "WeaponArcThrust");
 
-        var sound = actualResults.Count > 0 ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
         if (_net.IsServer)
+        {
+            if (actualResults.Count > 0 && _net.IsServer)
+            {
+                var direction = _transform.GetWorldRotation(stab).GetDir();
+                var angle = direction.ToAngle() - Angle.FromDegrees(180);
+                _rotate.RotateXeno(stab, angle.GetDir());
+            }
+
+            var sound = actualResults.Count > 0 ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
             _audio.PlayPvs(sound, stab);
+        }
 
         var attackEv = new MeleeAttackEvent(stab);
         RaiseLocalEvent(stab, ref attackEv);
