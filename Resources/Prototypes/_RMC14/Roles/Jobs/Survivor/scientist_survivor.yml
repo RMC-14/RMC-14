@@ -47,7 +47,7 @@
   name: survivor scientist spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMSurvivorScientist
   - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
