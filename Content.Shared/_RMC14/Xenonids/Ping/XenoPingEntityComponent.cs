@@ -1,6 +1,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Ping;
 
@@ -24,4 +25,7 @@ public sealed partial class XenoPingEntityComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityCoordinates? LastKnownCoordinates;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 WorldPosition;
 }

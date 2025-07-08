@@ -15,6 +15,7 @@ using Robust.Shared.Prototypes;
 using System.Collections.Generic;
 using Robust.Shared.Player;
 using Robust.Shared.Audio;
+using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Ping;
 
@@ -70,6 +71,37 @@ public abstract class SharedXenoPingSystem : EntitySystem
         var query = EntityQueryEnumerator<XenoPingEntityComponent>();
         while (query.MoveNext(out var uid, out var ping))
         {
+            if (ping.AttachedTarget.HasValue)
+            {
+                if (Exists(ping.AttachedTarget.Value))
+                {
+                    var targetXform = Transform(ping.AttachedTarget.Value);
+                    var targetCoordinates = targetXform.Coordinates;
+                    var targetWorldPos = _transform.GetWorldPosition(ping.AttachedTarget.Value);
+                    var currentWorldPos = _transform.GetWorldPosition(uid);
+
+                    var distanceMoved = Vector2.Distance(targetWorldPos, currentWorldPos);
+
+                    if (distanceMoved > 0.001f)
+                    {
+                        ping.LastKnownCoordinates = targetCoordinates;
+                        ping.WorldPosition = targetWorldPos;
+                        _transform.SetCoordinates(uid, targetCoordinates);
+                        Dirty(uid, ping);
+                    }
+                }
+                else
+                {
+                    if (ping.LastKnownCoordinates.HasValue)
+                    {
+                        _transform.SetCoordinates(uid, ping.LastKnownCoordinates.Value);
+                    }
+
+                    ping.AttachedTarget = null;
+                    Dirty(uid, ping);
+                }
+            }
+
             if (currentTime >= ping.DeleteAt)
             {
                 toDelete.Add(uid);
@@ -175,7 +207,6 @@ public abstract class SharedXenoPingSystem : EntitySystem
         var pingsToRemove = creatorPings.Count - maxPings + 1;
         for (var i = 0; i < pingsToRemove && i < creatorPings.Count; i++)
         {
-            Log.Debug($"[PingLimits] Removing old ping {ToPrettyString(creatorPings[i].Uid)} from {ToPrettyString(creator)}");
             QueueDel(creatorPings[i].Uid);
         }
     }
@@ -209,6 +240,11 @@ public abstract class SharedXenoPingSystem : EntitySystem
         if (targetEntity != null)
         {
             pingComp.LastKnownCoordinates = coordinates;
+            pingComp.WorldPosition = _transform.GetWorldPosition(targetEntity.Value);
+        }
+        else
+        {
+            pingComp.WorldPosition = _transform.ToMapCoordinates(coordinates).Position;
         }
 
         Dirty(ping, pingComp);

@@ -53,6 +53,9 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         var isHiveLeader = EntityManager.HasComponent<HiveLeaderComponent>(creator);
         var shouldCreateWaypoint = isQueen || isHiveLeader;
 
+        if (!shouldCreateWaypoint)
+            return;
+
         var color = GetColorFromPrototype(ent.Comp.PingType);
         if (TryComp<SpriteComponent>(ent.Owner, out var sprite))
         {
@@ -60,20 +63,9 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             sprite.Visible = true;
         }
 
-        if (!shouldCreateWaypoint)
-        {
-            return;
-        }
-
         var xform = Transform(ent.Owner);
-        var worldPos = _transform.GetWorldPosition(ent.Owner, _xformQuery);
         var originalCoords = xform.Coordinates;
         var mapId = xform.MapID;
-
-        if (ent.Comp.AttachedTarget.HasValue && Exists(ent.Comp.AttachedTarget.Value))
-        {
-            worldPos = _transform.GetWorldPosition(ent.Comp.AttachedTarget.Value);
-        }
 
         Robust.Client.Graphics.Texture? texture = null;
         if (sprite != null && sprite.BaseRSI != null && sprite[0].RsiState.IsValid)
@@ -84,11 +76,13 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             }
         }
 
+        var isTilePing = !ent.Comp.AttachedTarget.HasValue;
+
         var waypointData = new PingWaypointData(
             ent.Owner,
             ent.Comp.PingType,
             ent.Comp.Creator,
-            worldPos,
+            ent.Comp.WorldPosition,
             originalCoords,
             mapId,
             color,
@@ -97,7 +91,9 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         )
         {
             AttachedTarget = ent.Comp.AttachedTarget,
-            IsTargetValid = ent.Comp.AttachedTarget.HasValue && Exists(ent.Comp.AttachedTarget.Value)
+            IsTargetValid = ent.Comp.AttachedTarget.HasValue,
+            IsTilePing = isTilePing,
+            HasStoredPosition = true
         };
 
         _pingWaypoints[ent.Owner] = waypointData;
@@ -139,47 +135,37 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         if (player == null)
             return;
 
-        var playerPos = _transform.GetWorldPosition(player.Value);
+        var loadedPings = new HashSet<EntityUid>();
 
-        var query = EntityQueryEnumerator<XenoPingEntityComponent, SpriteComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var ping, out var sprite, out var xform))
+        var query = EntityQueryEnumerator<XenoPingEntityComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var ping, out var xform))
         {
-            var pingPos = _transform.GetWorldPosition(uid, _xformQuery);
+            loadedPings.Add(uid);
 
-            if (_pingWaypoints.TryGetValue(uid, out var waypointData))
+            if (!_pingWaypoints.TryGetValue(uid, out var waypointData))
+                continue;
+
+            waypointData.EntityIsLoaded = true;
+
+            if (waypointData.IsTilePing)
             {
-                if (ping.AttachedTarget.HasValue && Exists(ping.AttachedTarget.Value))
+                if (!waypointData.HasStoredPosition)
                 {
-                    var targetPos = _transform.GetWorldPosition(ping.AttachedTarget.Value);
-                    waypointData.WorldPosition = targetPos;
-                    waypointData.IsTargetValid = true;
-
-                    var targetXform = Transform(ping.AttachedTarget.Value);
-                    ping.LastKnownCoordinates = targetXform.Coordinates;
-
-                    _transform.SetWorldPosition(uid, targetPos);
+                    waypointData.WorldPosition = ping.WorldPosition;
+                    waypointData.OriginalCoordinates = xform.Coordinates;
+                    waypointData.HasStoredPosition = true;
                 }
-                else if (ping.AttachedTarget.HasValue && !Exists(ping.AttachedTarget.Value))
-                {
-                    waypointData.IsTargetValid = false;
-                    if (ping.LastKnownCoordinates.HasValue)
-                    {
-                        var lastWorldPos = _transform.ToMapCoordinates(ping.LastKnownCoordinates.Value);
-                        waypointData.WorldPosition = lastWorldPos.Position;
+            }
+            else
+            {
+                waypointData.WorldPosition = ping.WorldPosition;
+            }
 
-                        _transform.SetCoordinates(uid, ping.LastKnownCoordinates.Value);
-                    }
-                }
-                else
-                {
-                    if (pingPos != Vector2.Zero || waypointData.WorldPosition == Vector2.Zero)
-                    {
-                        waypointData.WorldPosition = pingPos;
-                    }
-                }
+            waypointData.AttachedTarget = ping.AttachedTarget;
+            waypointData.IsTargetValid = ping.AttachedTarget.HasValue;
 
-                waypointData.EntityIsLoaded = true;
-
+            if (TryComp<SpriteComponent>(uid, out var sprite))
+            {
                 if (sprite.Color != Color.White && sprite.Color != waypointData.Color)
                 {
                     waypointData.Color = sprite.Color;
@@ -195,16 +181,25 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             }
         }
 
-        var loadedEntities = new HashSet<EntityUid>();
-        var queryCheck = EntityQueryEnumerator<XenoPingEntityComponent>();
-        while (queryCheck.MoveNext(out var uid, out _))
+        foreach (var (uid, waypointData) in _pingWaypoints.ToList())
         {
-            loadedEntities.Add(uid);
-        }
+            if (loadedPings.Contains(uid))
+                continue;
 
-        foreach (var (uid, data) in _pingWaypoints)
-        {
-            data.EntityIsLoaded = loadedEntities.Contains(uid);
+            waypointData.EntityIsLoaded = false;
+
+            if (!EntityManager.EntityExists(uid))
+            {
+                _pingWaypoints.Remove(uid);
+                continue;
+            }
+
+            if (TryComp<XenoPingEntityComponent>(uid, out var pingComp))
+            {
+                waypointData.AttachedTarget = pingComp.AttachedTarget;
+                waypointData.WorldPosition = pingComp.WorldPosition;
+                waypointData.IsTargetValid = pingComp.AttachedTarget.HasValue;
+            }
         }
     }
 
