@@ -146,7 +146,7 @@
         amount: 2
       - id: RMCBeltHolsterRevolver
         amount: 5
-       - id: RMCBeltHolsterFlareGun
+      - id: RMCBeltHolsterFlareGun
         amount: 2
       #- id: M276 M40 Grenade Rig
       #  amount: 2
