@@ -1,6 +1,8 @@
 using Robust.Shared.Serialization;
 
+// ReSharper disable CheckNamespace
 namespace Content.Shared.Doors.Components;
+// ReSharper restore CheckNamespace
 
 /// <summary>
 ///     This is an extension of the upstream DoorComponent.

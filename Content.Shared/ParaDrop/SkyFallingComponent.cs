@@ -17,7 +17,7 @@ public sealed partial class SkyFallingComponent : Component
     ///     The original scale of the entity so it can be restored
     /// </summary>
     [DataField]
-    public Vector2 OriginalScale = Vector2.Zero;
+    public Vector2 OriginalScale;
 
     /// <summary>
     ///     Scale that the animation should bring entities to.

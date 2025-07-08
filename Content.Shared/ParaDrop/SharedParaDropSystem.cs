@@ -267,11 +267,11 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         skyFalling.TargetCoordinates = dropCoordinates;
         Dirty(dropping, skyFalling);
 
-        Blocker.UpdateCanMove(dropping);
-
         var droppingComp = EnsureComp<ParaDroppingComponent>(dropping);
         droppingComp.RemainingTime = paraDroppable.DropDuration;
         Dirty(dropping, droppingComp);
+
+        Blocker.UpdateCanMove(dropping);
 
         return true;
     }

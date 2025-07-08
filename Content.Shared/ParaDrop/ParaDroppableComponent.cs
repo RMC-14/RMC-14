@@ -8,13 +8,13 @@ namespace Content.Shared.ParaDrop;
 public sealed partial class ParaDroppableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float DropDuration = 5f;
+    public float DropDuration = 4f;
 
     [DataField, AutoNetworkedField]
     public int DropScatter = 7;
 
     [DataField, AutoNetworkedField]
-    public float FallHeight = 20;
+    public float FallHeight = 16;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier DropSound = new SoundPathSpecifier("/Audio/_RMC14/Items/fulton.ogg");

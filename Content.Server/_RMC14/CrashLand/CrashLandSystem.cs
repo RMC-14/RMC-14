@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared.Damage;
+using Content.Shared.ParaDrop;
 using Robust.Server.Audio;
 
 namespace Content.Server._RMC14.CrashLand;
@@ -7,6 +8,21 @@ namespace Content.Server._RMC14.CrashLand;
 public sealed class CrashLandSystem : SharedCrashLandSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+
+    private void ApplyFallingDamage(EntityUid uid)
+    {
+        var damage = new DamageSpecifier
+        {
+            DamageDict =
+            {
+                [CrashLandDamageType] = CrashLandDamageAmount,
+            },
+        };
+
+        Damageable.TryChangeDamage(uid, damage);
+
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -15,23 +31,17 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
 
         while (crashLandingQuery.MoveNext(out var uid, out var crashLandable, out var crashLanding))
         {
-            crashLanding.RemainingTime -= frameTime;
-            Dirty(uid, crashLanding);
+            if (!HasComp<SkyFallingComponent>(uid))
+            {
+                crashLanding.RemainingTime -= frameTime;
+                Dirty(uid, crashLanding);
+            }
+
             if (!(crashLanding.RemainingTime <= 0))
                 continue;
 
             if (crashLanding.DoDamage)
-            {
-                var damage = new DamageSpecifier
-                {
-                    DamageDict =
-                    {
-                        [CrashLandDamageType] = CrashLandDamageAmount,
-                    },
-                };
-
-                Damageable.TryChangeDamage(uid, damage);
-            }
+                ApplyFallingDamage(uid);
 
             _audio.PlayPvs(crashLandable.CrashSound, uid);
             RemComp<CrashLandingComponent>(uid);

@@ -18,12 +18,12 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
     {
         base.Update(frameTime);
         var query = EntityQueryEnumerator<CrashLandableComponent, CrashLandingComponent>();
-        while (query.MoveNext(out var uid, out var crashLandable, out _))
+        while (query.MoveNext(out var uid, out var crashLandable, out var crashLanding))
         {
             if (!HasComp<SkyFallingComponent>(uid))
             {
                 if (!_animPlayer.HasRunningAnimation(uid, CrashingAnimationKey) && crashLandable.LastCrash != null)
-                    _paraDrop.PlayFallAnimation(uid, crashLandable.CrashDuration, crashLandable.LastCrash.Value, crashLandable.FallHeight, CrashingAnimationKey);
+                    _paraDrop.PlayFallAnimation(uid, crashLandable.CrashDuration, crashLanding.RemainingTime, crashLandable.FallHeight, CrashingAnimationKey);
 
                 _rmcSprite.UpdatePosition(uid);
             }

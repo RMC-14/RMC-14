@@ -7,14 +7,12 @@ using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
 using Robust.Shared.Map;
 using Robust.Shared.Spawners;
-using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.ParaDrop;
 
 public sealed partial class ParaDropSystem : SharedParaDropSystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animPlayer = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
 
@@ -82,18 +80,17 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         };
     }
 
-    public void PlayFallAnimation(EntityUid fallingUid, float fallDuration, TimeSpan fallStartTime, float fallHeight, string animationKey, ParaDroppableComponent? paraDroppable = null)
+    public void PlayFallAnimation(EntityUid fallingUid, float fallDuration, float timeRemaining, float fallHeight, string animationKey, ParaDroppableComponent? paraDroppable = null)
     {
-        var duration = TimeSpan.FromSeconds(fallDuration);
-        var timeRemaining =  duration - (_timing.CurTime - fallStartTime);
-        var multiplier = (float) timeRemaining.Ticks / duration.Ticks;
+        var multiplier = timeRemaining / fallDuration;
+        var adjustedDuration = fallDuration * multiplier;
+        var adjustedHeight = fallHeight * multiplier;
 
-        if (timeRemaining < TimeSpan.FromSeconds(fallDuration) && timeRemaining > TimeSpan.Zero &&
-            multiplier is > 0 and < 1)
+        if (timeRemaining > 0 && multiplier is > 0 and < 1)
         {
-            _animPlayer.Play(fallingUid, ReturnFallAnimation( multiplier * fallDuration,  fallHeight *  multiplier), animationKey);
+            _animPlayer.Play(fallingUid, ReturnFallAnimation(adjustedDuration,  adjustedHeight), animationKey);
             if (paraDroppable != null)
-                SpawnParachute(multiplier * paraDroppable.DropDuration, _transform.GetMoverCoordinates(fallingUid), paraDroppable, multiplier);
+                SpawnParachute(adjustedDuration, _transform.GetMoverCoordinates(fallingUid), paraDroppable, multiplier);
         }
     }
 
@@ -143,12 +140,12 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<ParaDroppableComponent, ParaDroppingComponent>();
-        while (query.MoveNext(out var uid, out var paraDroppable, out _))
+        while (query.MoveNext(out var uid, out var paraDroppable, out var paraDropping))
         {
             if (!HasComp<SkyFallingComponent>(uid))
             {
                 if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null)
-                    PlayFallAnimation(uid, paraDroppable.DropDuration, paraDroppable.LastParaDrop.Value, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
+                    PlayFallAnimation(uid, paraDroppable.DropDuration, paraDropping.RemainingTime, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
 
                 _rmcSprite.UpdatePosition(uid);
             }
