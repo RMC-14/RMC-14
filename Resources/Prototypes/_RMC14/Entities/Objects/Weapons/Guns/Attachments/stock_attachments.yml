@@ -848,6 +848,21 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
+  id: RMCAttachmentM3717Stock
+  name: M3717 stock
+  description: The non-detachable stock of a M37-17 pump shotgun.
+  components:
+  - type: Sprite
+    state: M3717Stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM3717Stock
+
+- type: entity
+  parent: RMCStockAttachmentBase
   id: RMCAttachmentHuntingStock
   name: Basira-Armstrong stock
   description: The non-detachable stock of a Basira-Armstrong hunting rifle
@@ -866,7 +881,6 @@
   id: RMCAttachmentSSG45Stock
   name: SSG45 solid stock
   description: Intergrated into the SSG45. You shouldn't have this.
-  components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
     state: ssg45_stock
@@ -918,11 +932,13 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentAK4047StockCollapsible
+Resources/Prototypes/_RMC14/Entities/Objects/Materials    - RMCAttachmentAK4047StockCollapsible
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
 
+- type: Tag
+  id: RMCAttachmentM3717Stock
 - type: Tag
   id: RMCAttachmentStock
 
