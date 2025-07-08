@@ -105,6 +105,8 @@
     value: 0.1
   - type: FixedIdentity
     name: cm-job-name-xeno-defender
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoDefenderBase
@@ -177,4 +179,3 @@
         Blunt: 37.5
   - type: XenoSoak
   - type: XenoHidden
-
