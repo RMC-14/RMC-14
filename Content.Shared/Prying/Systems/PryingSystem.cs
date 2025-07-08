@@ -135,12 +135,6 @@ public sealed class PryingSystem : EntitySystem
             canev = new BeforePryEvent(user, false, false, false);
         }
 
-        // RMC14 - Disable xenos being able to pry closed doors
-        if (HasComp<XenoComponent>(user) && TryComp(target, out DoorComponent? door) && door.State != DoorState.Closed)
-        {
-            message = null;
-            return false;
-        }
 
         RaiseLocalEvent(target, ref canev);
 
