@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: mmails
-  changes:
-  - message: Adds the ranks for the Three Suns Empire Policing Authority, a surv spawn
-      on Hybrisa
-    type: Add
-  id: 1470
-  time: '2025-03-15T21:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5905
 - author: DrSmugleaf
   changes:
   - message: Fixed Warrior lunge not pulling if pull is on cooldown.
@@ -4963,5 +4955,13 @@
   id: 1970
   time: '2025-07-08T01:35:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6805
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Tail stabs will now temporarily blind marines for 1 to 3 seconds depending
+      on the xeno's size. New effects have also been added for tail stabs.
+    type: Add
+  id: 1971
+  time: '2025-07-08T01:37:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6953
 Name: RMC14
 Order: -1
