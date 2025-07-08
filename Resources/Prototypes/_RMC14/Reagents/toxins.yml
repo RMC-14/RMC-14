@@ -69,6 +69,7 @@
   desc: reagent-desc-rmcmindbreakertoxin
   color: "#B31008"
   unknown: true
+  toxin: true
   metabolisms:
     Poison:
       metabolismRate: 0.05

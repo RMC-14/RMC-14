@@ -13,8 +13,14 @@ public partial class ReagentPrototype
     public FixedPoint2? Overdose;
 
     [DataField]
+    public FixedPoint2? CriticalOverdose;
+
+    [DataField]
     public FixedPoint2 Intensity;
 
     [DataField]
     public FixedPoint2 Duration;
+
+    [DataField]
+    public bool Toxin;
 }

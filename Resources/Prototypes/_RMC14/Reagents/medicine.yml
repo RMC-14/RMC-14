@@ -6,59 +6,13 @@
   desc: reagent-desc-cmdylovene
   color: "#3fc92a"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s 0.13u?
-        damage:
-        - Toxin: -1
-        - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
-      - !type:GenericStatusEffect # TODO -5 hallucination/s
-        key: SeeingRainbows
-        component: SeeingRainbows
-        time: 5
-        type: Remove
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCMindbreakerToxin
-          min: 1
-        reagent: RMCMindbreakerToxin
-        amount: -2.5
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCSpaceDrugs
-          min: 1
-        reagent: RMCSpaceDrugs
-        amount: -2.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30 #TODO 0.5 eye damage/s
-        damage:
-          groups:
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 0.5
-            Burn: 0.5
-            Toxin: 1.5
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 5
-        refresh: true
-        type: Add
+      - !type:Antitoxic #TODO removes 0.125u toxin/s 0.13u?
+        potency: 2
 
 # TODO RMC14 other effects
 - type: reagent
@@ -143,28 +97,13 @@
   desc: reagent-desc-cmbicaridine
   color: "#ed4847"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Brute: -0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Burn: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Burn: 2.5
-            Toxin: 1
+      - !type:Neogenetic
+        potency: 2
 
 # TODO RMC14 other effects (remove toxic reagents)
 - type: reagent
@@ -206,25 +145,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Burn: -0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Burn: 0.75
-            Toxin: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Burn: 3.75
-            Toxin: 3.75
+      - !type:Anticorrosive
+        potency: 3
 
 # TODO RMC14 other effects
 - type: reagent
@@ -238,31 +160,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Airloss: -1
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCLexorin
-          min: 0.5
-        reagent: RMCLexorin
-        amount: -1
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 1
-            Toxin: 2
+      - !type:Oxygenating
+        potency: 4
 
 # TODO RMC14 other effects
 - type: reagent
@@ -276,30 +175,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:RemoveDamage
-        group: Airloss
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCLexorin
-          min: 0.5
-        reagent: RMCLexorin
-        amount: -1.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Toxin: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Brute: 1.5
-            Toxin: 3
+      - !type:Oxygenating
+        potency: 6
 
 # TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
@@ -402,29 +279,13 @@
   desc: reagent-desc-cmkelotane
   color: "#f5e123"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Burn: -0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        damage:
-          groups:
-            Brute: 0.5
-            Toxin: 0.5
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 2.5
-            Toxin: 2.5
+      - !type:Anticorrosive
+        potency: 2
 
 # TODO RMC14 other effects
 - type: reagent
@@ -523,24 +384,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange
-        damage:
-        - Brute: -0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 15
-        damage:
-          groups:
-            Burn: 0.75
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        damage:
-          groups:
-            Burn: 3.75
-            Toxin: 1.5
+      - !type:Neogenetic
+        potency: 3
 
 # TODO RMC14 other effects
 # TODO RMC14 progressive eye healing

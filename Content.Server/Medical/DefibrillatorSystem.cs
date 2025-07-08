@@ -248,7 +248,7 @@ public sealed class DefibrillatorSystem : EntitySystem
                 {
                     foreach (var (group, amount) in component.CMZapDamage)
                     {
-                        heal = _rmcDamageable.DistributeHealing(target, group, amount, heal);
+                        heal = _rmcDamageable.DistributeDamage(target, group, amount, heal);
                     }
                 }
 
