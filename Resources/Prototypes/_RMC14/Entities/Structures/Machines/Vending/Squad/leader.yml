@@ -103,8 +103,8 @@
         points: 7
       - id: RMCPouchToolsFill
         points: 5
-    #- id: CMWeldingGoggles
-    #  points: 5
+      - id: RMCWeldingGoggles
+        points: 5
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
@@ -159,6 +159,8 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 6
+      - id: CMMagazineRifleM4SPRExt
+        points: 6
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -169,8 +171,18 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
+      # - id: RMCMagazinePistolM1984HP
+      #   points: 3
+      - id: RMCMagazinePistolM1984AP
+        points: 3
       - id: CMMagazinePistolMK80
         points: 3
       - id: RMCMagazinePistolSU6
@@ -245,7 +257,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
@@ -279,7 +291,7 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }

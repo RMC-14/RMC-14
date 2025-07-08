@@ -38,6 +38,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
+  - type: GrantAreaInfo
   - type: GrantTacMapAlert
 
 - type: entity

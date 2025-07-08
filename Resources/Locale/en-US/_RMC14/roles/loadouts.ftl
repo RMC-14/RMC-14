@@ -3,6 +3,7 @@ rmc-loadout-group-eyewear = Eyewear
 rmc-loadout-group-masks = Masks and scarves
 rmc-loadout-group-headwear = Headwear
 rmc-loadout-group-helmet-garbs = Helmet accessories
+rmc-loadout-group-accessories = Clothing accessories
 rmc-loadout-group-paperwork = Paperwork
 rmc-loadout-group-plushies = Plushies
 rmc-loadout-group-recreational = Recreational

@@ -15,6 +15,7 @@ using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -23,6 +24,7 @@ using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.GameTicking;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction.Events;
@@ -30,6 +32,7 @@ using Content.Shared.Item;
 using Content.Shared.Light.Components;
 using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
@@ -95,8 +98,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, ExaminedEvent>(OnFlareSignalExamined);
         SubscribeLocalEvent<FlareSignalComponent, DroppedEvent>(OnFlareSignalDropped);
         SubscribeLocalEvent<FlareSignalComponent, ThrownEvent>(OnFlareSignalThrown);
+        SubscribeLocalEvent<FlareSignalComponent, GrenadeContentThrownEvent>(OnFlareSignalGrenadeContentThrown);
         SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
         SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
+
+        SubscribeLocalEvent<ActiveFlareSignalComponent, ExaminedEvent>(OnActiveFlareExamined);
 
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, MapInitEvent>(OnTerminalMapInit);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIOpenedEvent>(OnTerminalBUIOpened);
@@ -222,6 +228,34 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (IsFlareLit(ent))
             args.Cancel();
+    }
+
+    private void OnFlareSignalGrenadeContentThrown(Entity<FlareSignalComponent> ent, ref GrenadeContentThrownEvent args)
+    {
+        if (!TryComp(args.Source, out ProjectileComponent? projectile))
+            return;
+
+        var id = ComputeNextId();
+        var abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
+        if (projectile.Shooter != null)
+            abbreviation = GetUserAbbreviation(projectile.Shooter.Value, id);
+
+        if (projectile.Weapon != null)
+        {
+            if (TryComp(projectile.Weapon, out RMCAirShotComponent? airShot))
+            {
+                airShot.LastFlareId = abbreviation;
+                Dirty(projectile.Weapon.Value, airShot);
+            }
+        }
+
+        MakeDropshipTarget(ent, abbreviation);
+    }
+
+    private void OnActiveFlareExamined(Entity<ActiveFlareSignalComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.Abbreviation is { } id)
+            args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine-id", ("id", id)));
     }
 
     private void OnTerminalMapInit(Entity<DropshipTerminalWeaponsComponent> ent, ref MapInitEvent args)
@@ -973,6 +1007,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return true;
 
         if (!IsFlareLit(ent))
+            return false;
+
+        if (ent.Comp.Abbreviation == null)
             return false;
 
         var target = new DropshipTargetComponent { Abbreviation = ent.Comp.Abbreviation };

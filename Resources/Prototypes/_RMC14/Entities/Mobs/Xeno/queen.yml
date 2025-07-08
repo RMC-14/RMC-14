@@ -3,6 +3,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoMobCollision
   id: RMCXenoQueenBase
@@ -246,6 +247,14 @@
   - type: XenoOmitNumber
   - type: RMCFireArmorDebuffModifier
     debuffModifier: 1.4
+  - type: RMCImmuneToIgnition
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass  # Only fires with this component can ignite the queen
+  - type: RMCImmuneToFireTileDamage
+    bypassWhitelist:
+      components:
+      - RMCFireImmunityBypass  # Only fires with this component can bypass immunity
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
   - type: QueenEyeAction
@@ -255,7 +264,8 @@
   - type: XenoToggleChargingStop
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
-  - type: RMCImmuneToFireTileDamage
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartTQ
 
 - type: entity
   parent: RMCXenoQueenBase
@@ -304,7 +314,7 @@
     color: "#a800a8"
     sprite: _RMC14/Effects/xeno_eye.rsi
     layers:
-    - state: hologram
+    - state: hudeye1
   - type: Eye
     drawFov: false
   - type: QueenEye

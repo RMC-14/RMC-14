@@ -22,6 +22,9 @@ CMJobSurvivorMiner = Miner Colonist
 cm-job-name-surivor-priest = Priest Colonist
 CMJobSurvivorPriest = Priest Colonist
 
+cm-job-name-survivor-scientist = Scientist Colonist
+CMSurvivorScientist = Scientist Colonist
+
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
@@ -74,3 +77,41 @@ CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
 cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
 CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
 cm-job-prefix-survivor-icb = ICB
+
+cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
+RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
+
+
+# Sorokyne Strata Survs
+
+rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
+CMJobSurvivorInfrastructureEngineer = Infrastructure Engineer
+
+rmc-job-name-survivor-reactor-technician = Tekhnik Reaktora
+CMJobSurvivorReactorTechnician = Reactor Technician
+
+rmc-job-name-survivor-armed-police-officer = Narodnyy Vooruzhennyy Politsioner
+CMJobSurvivorArmedPoliceOfficer = People's Armed Police Officer
+
+rmc-job-name-survivor-army-reservist = Armiyskiy Rezervist
+CMJobSurvivorArmyReservist = Army Reservist
+rmc-job-prefix-army-reservist = 202/ARMY
+
+rmc-job-name-survivor-moh-doctor = Doktor Ministerstva Zdravookhraneniya
+CMJobSurvivorMoHDoctor = Doctor
+
+rmc-job-name-survivor-cec-researcher = Issledovatel' Korpusa Kosmicheskoy Eksploratsii
+CMJobSurvivorCECResearcher = Cosmos Exploration Corps Researcher
+
+rmc-job-name-survivor-soro-civilian = Grazhdanin
+CMJobSurvivorSoroCivilian = Civilian
+
+rmc-job-name-survivor-fire-protection-specialist = Spetsialist Po Pozharnoy Bezopasnosti
+CMJobSurvivorFireProtectionSpecialist = Fire Protection Specialist
+rmc-job-prefix-fire-protection-specialist = FPPB
+
+rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
+CMJobSurvivorSoroMiner = Miner
+
+rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
+CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison

@@ -12,3 +12,4 @@
     priority: -9
     itemIconStyle: NoItem
     event: !type:GhillieSuitPreparePositionActionEvent
+  - type: ActionBlockIfDevoured

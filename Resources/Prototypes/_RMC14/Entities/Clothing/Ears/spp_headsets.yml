@@ -38,6 +38,15 @@
   color: "#9b0612"
   longRange: true
 
+- type: radioChannel
+  id: Halcyon
+  name: chat-radio-halcyon
+  keycode: "#"
+  frequency: 2125
+  color: "#F46D29"
+  longRange: true
+  tower: true
+
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeySPP
@@ -89,6 +98,18 @@
     defaultChannel: SPP
 
 - type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyHalcyon
+  name: Halcyon radio encryption key
+  components:
+  - type: Sprite
+    state: upp_key
+  - type: EncryptionKey
+    channels:
+    - Halcyon
+    defaultChannel: Halcyon
+
+- type: entity
   abstract: true
   parent: RMCHeadsetIconsSPP
   id: RMCHeadsetSPPAbstract
@@ -135,3 +156,39 @@
     containers:
       key_slots:
       - RMCEncryptionKeySPPMedic
+
+- type: entity
+  parent: RMCHeadsetIconsSPP
+  id: RMCHeadsetDistressSPP
+  name: SPP colony headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetDistressSPP
+  id: RMCHeadsetSPPPaP
+  name: SPP PaP headset
+  description: A special headset used by the People's Armed Police of the SPP.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
+  - type: Sprite
+    state: sec_headset
+
+- type: entity
+  parent: RMCHeadsetDistressSPP
+  id: RMCHeadsetDistressHalcyon
+  name: halcyon corporate headset
+  description: A headset commonly worn by Halcyon Dynamics corporate personnel.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+      - RMCEncryptionKeyHalcyon
