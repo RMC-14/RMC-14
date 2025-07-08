@@ -169,6 +169,16 @@
   - PrescriptionRMC
   - TrimmedWireRMC
 
+# Accessories
+- type: loadoutGroup
+  id: AccessoriesRMC
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 10
+  loadouts:
+  - UNMCSquadPatchRMC
+  - SquadArmbandRMC
+
 # Paperwork
 - type: loadoutGroup
   id: PaperworkRMC

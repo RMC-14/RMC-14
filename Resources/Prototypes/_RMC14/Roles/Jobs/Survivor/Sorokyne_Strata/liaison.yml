@@ -38,12 +38,11 @@
   id: RMCGearSurvivorHalcyonDynamicsLiaison
   equipment:
     id: RMCIDCardHalcyon
-    jumpsuit: CMJumpsuitLiaisonBrown
+    jumpsuit: RMCJumpsuitLiaisonBrownTie
     back: CMSatchel # TODO RMC14 - Lockable
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteran
     ears: RMCHeadsetDistressHalcyon
-    neck: RMCNeckTieBlack
     pocket2: RMCPouchDocument
   storage:
     back:
