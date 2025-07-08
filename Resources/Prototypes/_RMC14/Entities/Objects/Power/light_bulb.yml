@@ -22,7 +22,7 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Blunt: 5
+        Blunt: 1.25
   - type: Destructible
     thresholds:
     - trigger:

@@ -1,10 +1,11 @@
-- type: entity
+﻿- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: RMCXenoCarrierBase
   name: Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
@@ -99,6 +100,8 @@
     prefix: carrier
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: FixedIdentity
+    name: cm-job-name-xeno-carrier
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT2
 
@@ -106,6 +109,9 @@
   parent: RMCXenoCarrierBase
   id: CMXenoCarrier
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCarrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
     layers:
@@ -161,6 +167,9 @@
   id: RMCXenoCarrierEggsac
   suffix: Eggsac
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleEggsac
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/eggsac_carrier.rsi
     layers:
@@ -198,7 +207,6 @@
     - ActionXenoGenerateEggs
     - ActionXenoRetrieveEgg
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-eggsac-name
     description: rmc-xeno-eggsac-description
@@ -213,3 +221,5 @@
     distance: 2.5
   - type: XenoGenerateEggs
   - type: XenoEggSustainer
+  - type: XenoHidden
+

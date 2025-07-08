@@ -11,6 +11,8 @@
     - Burst
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50.ogg
+  - type: Corrodible
+    isCorrodible: false
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -70,6 +72,13 @@
       rmc-aslot-barrel: 0.75, 0.070
       rmc-aslot-rail: 0.090, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -113,6 +122,7 @@
   parent: CMBulletBase
   id: RMCBulletPistolHI50AE
   name: bullet (HI50AE)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -168,6 +178,7 @@
   parent: CMBulletBase
   id: RMCBulletPistolHIAP50AE
   name: bullet (HIAP50AE)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

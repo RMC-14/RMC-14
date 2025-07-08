@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.Database;
@@ -37,6 +38,8 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         SubscribeLocalEvent<EvacuationEnabledEvent>(OnRefreshComputers);
         SubscribeLocalEvent<EvacuationDisabledEvent>(OnRefreshComputers);
         SubscribeLocalEvent<EvacuationProgressEvent>(OnRefreshComputers);
+        SubscribeLocalEvent<DropshipHijackStartEvent>(OnRefreshComputers);
+        SubscribeLocalEvent<RMCAlertLevelChangedEvent>(OnRefreshComputers);
 
         SubscribeLocalEvent<MarineControlComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeUIOpen);
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMarineEvent>(OnComputerMedalMarine);
@@ -98,7 +101,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
 
         var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name);
-        _dialog.OpenInput(ent, actor.Value, "What should the medal citation read?", ev, true);
+        _dialog.OpenInput(ent, actor.Value, "What should the medal citation read?", ev, true, _commendation.CharacterLimit);
     }
 
     private void OnComputerMedalMessage(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMessageEvent args)
@@ -212,6 +215,9 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void RefreshComputers()
     {
+        if (_net.IsClient)
+            return;
+
         var canEvacuate = _alertLevel.IsRedOrDeltaAlert() || _evacuation.IsEvacuationEnabled();
         var evacuationEnabled = _evacuation.IsEvacuationEnabled();
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();

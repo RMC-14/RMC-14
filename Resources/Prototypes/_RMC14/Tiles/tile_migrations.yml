@@ -1,0 +1,106 @@
+# RMC Tile Migration
+
+# 2025-06-25
+- type: tileAlias
+  id: RCMPlanetIce0
+  target: RMCPlanetIce0
+
+- type: tileAlias
+  id: RCMPlanetIceComposite
+  target: RMCPlanetIceComposite
+
+- type: tileAlias
+  id: RCMPlanetIce1
+  target: RMCPlanetIce1
+
+- type: tileAlias
+  id: RCMPlanetIce2
+  target: RMCPlanetIce2
+
+- type: tileAlias
+  id: RCMPlanetSnow0
+  target: RMCPlanetSnow0
+
+- type: tileAlias
+  id: RCMPlanetSnow1
+  target: RMCPlanetSnow1
+
+- type: tileAlias
+  id: RCMPlanetSnow2
+  target: RMCPlanetSnow2
+
+- type: tileAlias
+  id: RCMPlanetSnow3
+  target: RMCPlanetSnow3
+
+- type: tileAlias
+  id: RCMPlanetSnow4
+  target: RMCPlanetSnow4
+
+- type: tileAlias
+  id: RCMPlanetTallGrass
+  target: RMCPlanetTallGrass
+
+- type: tileAlias
+  id: RCMPlanetTallGrassSnowNorth
+  target: RMCPlanetTallGrassSnowNorth
+
+- type: tileAlias
+  id: RCMPlanetTallGrassSnowEast
+  target: RMCPlanetTallGrassSnowEast
+
+- type: tileAlias
+  id: RCMPlanetTallGrassSnowSouth
+  target: RMCPlanetTallGrassSnowSouth
+
+- type: tileAlias
+  id: RCMPlanetTallGrassSnowWest
+  target: RMCPlanetTallGrassSnowWest
+
+- type: tileAlias
+  id: RCMPlanetTallGrassSnowNorthEast
+  target: RMCPlanetTallGrassSnowNorthEast
+
+- type: tileAlias
+  id: RCMPlanetTallGrassSnowNorthWest
+  target: RMCPlanetTallGrassSnowNorthWest
+
+- type: tileAlias
+  id: RCMPlanetTallGrassSnowSouthEast
+  target: RMCPlanetTallGrassSnowSouthEast
+
+- type: tileAlias
+  id: RCMPlanetTallGrassSnowSouthWest
+  target: RMCPlanetTallGrassSnowSouthWest
+
+- type: tileAlias
+  id: RCMPlanetTallGrassCompositeNorth
+  target: RMCPlanetTallGrassCompositeNorth
+
+- type: tileAlias
+  id: RCMPlanetTallGrassCompositeEast
+  target: RMCPlanetTallGrassCompositeEast
+
+- type: tileAlias
+  id: RCMPlanetTallGrassCompositeSouth
+  target: RMCPlanetTallGrassCompositeSouth
+
+- type: tileAlias
+  id: RCMPlanetTallGrassCompositeWest
+  target: RMCPlanetTallGrassCompositeWest
+
+- type: tileAlias
+  id: RCMPlanetTallGrassCompositeNorthEast
+  target: RMCPlanetTallGrassCompositeNorthEast
+
+- type: tileAlias
+  id: RCMPlanetTallGrassCompositeNorthWest
+  target: RMCPlanetTallGrassCompositeNorthWest
+
+- type: tileAlias
+  id: RCMPlanetTallGrassCompositeSouthEast
+  target: RMCPlanetTallGrassCompositeSouthEast
+
+- type: tileAlias
+  id: RCMPlanetTallGrassCompositeSouthWest
+  target: RMCPlanetTallGrassCompositeSouthWest

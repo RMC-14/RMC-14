@@ -1,0 +1,50 @@
+﻿<Document>
+
+  # Microwave Recipes
+
+  ## Pizza Pies
+  <GuideMicrowaveGroupEmbed Group="Pizza"/>
+
+  ## Savory Cooking
+  <GuideMicrowaveGroupEmbed Group="Savory"/>
+
+  ## Breads
+  <GuideMicrowaveGroupEmbed Group="Breads"/>
+
+  ## Breakfast Foods
+  <GuideMicrowaveGroupEmbed Group="Breakfast"/>
+
+  ## Moth Foods
+  <GuideMicrowaveGroupEmbed Group="Moth"/>
+
+  ## Pastas & Noodles
+  <GuideMicrowaveGroupEmbed Group="Pasta"/>
+
+  ## Pastries & Desserts
+  <GuideMicrowaveGroupEmbed Group="Dessert"/>
+
+  ## Soups & Stews
+  <GuideMicrowaveGroupEmbed Group="Soup"/>
+
+  ## Pies & Tarts
+  <GuideMicrowaveGroupEmbed Group="Pie"/>
+
+  ## Bars & Cookies
+  <GuideMicrowaveGroupEmbed Group="BarsAndCookies"/>
+
+  ## Cakes
+  <GuideMicrowaveGroupEmbed Group="Cake"/>
+
+  ## Salads
+  <GuideMicrowaveGroupEmbed Group="Salad"/>
+
+  ## Medicinal
+  <GuideMicrowaveGroupEmbed Group="Medicinal"/>
+
+  ## Other
+  <GuideMicrowaveGroupEmbed Group="Other"/>
+
+  ## Secret
+  <GuideMicrowaveGroupEmbed Group="Secret"/>
+
+</Document>

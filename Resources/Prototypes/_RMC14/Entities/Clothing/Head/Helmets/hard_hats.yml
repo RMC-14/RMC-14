@@ -110,3 +110,13 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white.rsi
 # TODO heat protection...for some reason
+
+- type: entity
+  parent: RMCHardHat
+  id: RMCHardhatWhiteAlt
+  name: "Chǎnyè Combine mining helmet"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white_alt.rsi

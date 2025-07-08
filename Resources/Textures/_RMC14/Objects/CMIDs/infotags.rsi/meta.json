@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Originally taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a2d5ca6e69725341f0fa261a4a3f89c737e843b3/icons/obj/items/card.dmi and https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_lefthand_0.dmi and https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_righthand_0.dmi, made by Vermidia",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "dogtag_0"
+    },
+    {
+      "name": "dogtag_1"
+    },
+    {
+      "name": "dogtag_2"
+    },
+    {
+      "name": "dogtag_3"
+    },
+    {
+      "name": "dogtag_4"
+    },
+    {
+      "name": "dogtag_5"
+    },
+    {
+      "name": "dogtag_6"
+    },
+    {
+      "name": "dogtag_7"
+    },
+    {
+      "name": "dogtag_8"
+    },
+    {
+      "name": "inhand-left"
+    },
+    {
+      "name": "inhand-right"
+    },
+    {
+      "name": "dogtag_24"
+    },
+    {
+      "name": "dogtag_9"
+    },
+    {
+      "name": "dogtag_10"
+    },
+    {
+      "name": "dogtag_11"
+    },
+    {
+      "name": "dogtag_12"
+    },
+    {
+      "name": "dogtag_13"
+    },
+    {
+      "name": "dogtag_14"
+    },
+    {
+      "name": "dogtag_15"
+    },
+    {
+      "name": "dogtag_16"
+    },
+    {
+      "name": "dogtag_17"
+    },
+    {
+      "name": "dogtag_18"
+    },
+    {
+      "name": "dogtag_19"
+    },
+    {
+      "name": "dogtag_20"
+    },
+    {
+      "name": "dogtag_21"
+    },
+    {
+      "name": "dogtag_22"
+    },
+    {
+      "name": "dogtag_23"
+    }
+  ]
+}

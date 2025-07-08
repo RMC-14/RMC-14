@@ -3,6 +3,8 @@
   id: RMCHeadsetMarine
   components:
   - type: GrantSquadLeaderTracker
+  - type: GrantTacMapAlert
+
 
 # Alpha
 - type: entity
@@ -31,7 +33,7 @@
       - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -46,7 +48,7 @@
       - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -103,7 +105,7 @@
       - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -118,7 +120,7 @@
       - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -175,7 +177,7 @@
       - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -190,7 +192,7 @@
       - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -247,7 +249,7 @@
       - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -262,7 +264,7 @@
       - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -319,7 +321,7 @@
       - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -334,7 +336,7 @@
       - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -391,7 +393,7 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -406,7 +408,7 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -434,3 +436,18 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
+
+# PVE
+
+- type: entity
+  parent: RMCHeadsetMarine
+  id: RMCHeadsetGoldenArrow
+  name: sun riders radio headset
+  description: This is used by the UNMC Sun Riders Platoon.
+  components:
+  - type: Sprite
+    state: delta_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySunRiders

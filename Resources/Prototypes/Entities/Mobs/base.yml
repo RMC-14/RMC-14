@@ -8,7 +8,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Mobs
-  - type: MobCollision
+#  - type: MobCollision # RMC14
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -31,6 +31,7 @@
   - type: MobMover
   - type: Actions
   - type: Alerts
+  - type: AreaInfo
   - type: Appearance
   - type: RotationVisuals
     defaultRotation: 0
@@ -84,7 +85,6 @@
         sound:
           collection: MeatLaserImpact
   - type: RadiationReceiver
-  - type: Stamina
   - type: MobState
   - type: MobThresholds
     thresholds:

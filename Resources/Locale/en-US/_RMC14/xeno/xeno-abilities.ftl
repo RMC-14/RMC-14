@@ -1,4 +1,4 @@
-﻿# Plasma
+# Plasma
 cm-xeno-not-enough-plasma = We don't have enough plasma!
 
 # Energy
@@ -21,7 +21,7 @@ rmc-xeno-acid-increase-user = You feel your acid reserves increase!
 cm-xeno-choose-resin-structure = Choose Resin Structure
 cm-xeno-order-construction = Build Structure
 cm-xeno-too-close-to-other-node = This is too close to {THE($target)}!
-cm-xeno-requires-more-plasma = {THE($construction)} requires {$plasma} more plasma.
+cm-xeno-requires-more-plasma = {CAPITALIZE(THE($construction))} requires {$plasma} more plasma.
 cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
@@ -68,6 +68,7 @@ cm-xeno-leap-cancelled = We cancel our leap!
 
 # Plant weeds
 cm-xeno-weeds-source-already-here = There is already a resin node here!
+rmc-xeno-weeds-blocked = We can't do that here.
 
 # Corrosive acid
 cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
@@ -76,13 +77,14 @@ rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
-cm-xeno-paralyzing-slash-expire = You have waited too long, your slash will no longer apply neurotoxin!
-cm-xeno-paralyzing-slash-hit = You add neurotoxin into your attack, {$target} is about to fall over paralyzed!
+cm-xeno-paralyzing-slash-expire = We have waited too long, your slash will no longer apply neurotoxin!
+cm-xeno-paralyzing-slash-hit = We add neurotoxin into your attack, {$target} is about to fall over paralyzed!
+cm-xeno-paralyzing-slash-immune = {$target} shrugs off the neurotoxin!
 
 # Crippling Strike
 cm-xeno-crippling-strike-activate = Our next slash will apply neurotoxin!
-cm-xeno-crippling-strike-expire = You have waited too long, your slash will no longer apply neurotoxin!
-cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing the unknown!
+cm-xeno-crippling-strike-expire = We have waited too long, your slash will no longer apply neurotoxin!
+cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing {THE($target)}!
 
 # Pheromones
 rmc-xeno-pheromones-help =
@@ -140,6 +142,7 @@ cm-xeno-charge-spit-expire = Our spits are back to normal.
 
 # Turn Invisible
 cm-xeno-invisibility-expire = We feel our invisibility end!
+rmc-xeno-invisibility-expire-bump = We bumped into someone and lost our invisibility!
 
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
@@ -201,7 +204,7 @@ rmc-xeno-heal-sisters = We must target one of our sisters!
 rmc-xeno-resin-surge-shield-self = We surge the resin around {THE($target)}, making it temporarily nigh unbreakable!
 rmc-xeno-resin-surge-shield-others = {CAPITALIZE(THE($xeno))} surges the resin around {THE($target)}, making it temporarily nigh unbreakable!
 rmc-xeno-resin-surge-shield-fail = We haplessly try to surge resin around {THE($target)}, but it's already reinforced. It'll take a moment for us to recover.
-rmc-xeno-resin-surge-fruit = We surge the resin around {THE($target)}, speeding its growth somewhat!
+rmc-xeno-resin-surge-fruit = We pour all energy into {THE($target)}'s growth, bringing it to swift maturity!
 rmc-xeno-resin-surge-fruit-fail = {CAPITALIZE(THE($target))} is already mature. The resin surge does nothing.
 rmc-xeno-resin-surge-wall-self = We surge the resin, creating an unstable wall!
 rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, creating an unstable wall!
@@ -260,8 +263,8 @@ rmc-xeno-apply-salve-target-full-health-failure = {$target_xeno} is already at f
 rmc-xeno-apply-salve-self = We regurgitate our vital fluids and some plasma to create a regenerative resin salve and apply it to {$target_xeno}'s wounds. We feel weakened...
 rmc-xeno-apply-salve-target = {$healer_xeno} covers our wounds with a regenerative resin salve. We feel reinvigorated!
 
-# Sacrafical Heal
-rmc-xeno-sacrifice-heal-will-respawn = We have gained enough energy! We will be reborn when we sacrifice ourself!
+# Sacrificial Heal
+rmc-xeno-sacrifice-heal-will-respawn = We have transferred enough health! We will be reborn when we sacrifice ourself!
 
 rmc-xeno-sacrifice-heal-target-not-xeno-failure = The target cannot be healed!
 rmc-xeno-sacrifice-heal-target-self-failure = We can't heal ourself!
@@ -273,6 +276,7 @@ rmc-xeno-sacrifice-heal-target-full-health-failure = {$target_xeno} is already a
 
 rmc-xeno-sacrifice-heal-target-announcement = {$healer_xeno} sacrifices itself to heal {$target_xeno}!
 rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge of regenerative resin salve, covering {$target_xeno} in it!
+rmc-xeno-sacrifice-heal-announce = ;OUR SISTER WILL NOT DIE!!!
 
 # Dodge
 rmc-xeno-dodge-self = We can now weave through our enemies!
@@ -333,6 +337,14 @@ rmc-xeno-abduct-more = Our tail catches and stuns {$targets} targets!
 # Tail Lash
 rmc-xeno-tail-lash-no-room = We don't have any room to do our tail lash!
 
+# Headbite
+rmc-xeno-headbite-others = {$xeno} grabs {$target}'s head aggressively.
+rmc-xeno-headbite-self = We grab {$target}'s head aggressively.
+rmc-xeno-headbite-warning-larva = We should not harm this host! It has a sister inside.
+rmc-xeno-headbite-warning = We can only headbite an unconscious, adjacent target!
+rmc-xeno-headbite-hit-self = We pierce {$target}'s head with our inner jaw!
+rmc-xeno-headbite-hit-others = {$xeno} pierces {$target}'s head with its inner jaw!
+
 # Produce Eggs
 rmc-xeno-produce-eggs-no-plasma = We don't have enough plasma to support forming eggs.
 rmc-xeno-produce-eggs-new-egg = We generate an egg. Now holding: {$cur_eggs} / {$max_eggs}.
@@ -341,3 +353,25 @@ rmc-xeno-produce-eggs-start = We start forming eggs.
 # Eggsac Passive
 rmc-xeno-sustain-egg-decaying = We can only sustain {$max} eggs off hive weeds! Our oldest egg is decaying rapidly.
 rmc-xeno-sustain-death = {CAPITALIZE(THE($xeno))} throes as its eggsac bursts into a mess of acid!
+
+# Apprehend
+rmc-xeno-apprehend-activate = Our next slash will slow!
+rmc-xeno-apprehend-deactivate = We feel our speed wane!
+rmc-xeno-apprehend-expire = We have waited too long, our slash will no longer slow enemies!
+
+# Rage
+rmc-xeno-rage-lock = We feel a euphoric rush as we reach max rage! We are LOCKED at max Rage!
+rmc-xeno-rage-expire = Our adrenal glands spasm. We cannot gain any rage for {$cooldown} seconds.
+rmc-xeno-rage-examine = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} has {$amount}/{$max} rage stacks.
+
+# Eviscerate
+rmc-xeno-eviscerate-fail = We can't do eviscerate with 0 rage stacks!
+
+rmc-xeno-eviscerate-windup-self = We begin digging in for a massive strike!
+rmc-xeno-eviscerate-windup = {$xeno} begins digging in for a massive strike!
+
+rmc-xeno-eviscerate-windup-small-self = We begin digging in for a strike!
+rmc-xeno-eviscerate-windup-small = {$xeno} begins digging in for a strike!
+
+# Fling
+rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!

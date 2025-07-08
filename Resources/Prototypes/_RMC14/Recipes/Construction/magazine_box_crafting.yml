@@ -308,6 +308,52 @@
   iconColor: "#727e90"
   objectType: Item
 
+# M13
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 Reg)
+  id: RMCBoxMagazinePistolM13Empty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13Empty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular M13 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#7c4c1b"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 Ext)
+  id: RMCBoxMagazinePistolM13ExtEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13ExtEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain extended M13 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#7c4c1b"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 Drum)
+  id: RMCBoxMagazinePistolM13DrumEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13DrumEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain drum M13 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#7c4c1b"
+  objectType: Item
+
 # Nailgun
 - type: construction
   parent: RMC
@@ -543,6 +589,13 @@
         amount: 1
         doAfter: 0.25
 
+    # AK4047
+    - to: RMCBoxMagazineRifleAK4047Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M63
     - to: RMCBoxMagazineSMGM63Empty
       steps:
@@ -589,6 +642,24 @@
         amount: 1
         doAfter: 0.25
 
+    # M13 Auto Pistol
+    - to: RMCBoxMagazinePistolM13Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazinePistolM13ExtEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazinePistolM13DrumEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
     # M16
     - to: RMCBoxMagazineRifleM16Empty
       steps:
@@ -734,6 +805,10 @@
   - node: RMCBoxBulletsRifleAPEmpty
     entity: RMCBoxBulletsRifleAPEmpty
 
+  #AK4047
+  - node: RMCBoxMagazineRifleAK4047Empty
+    entity: RMCBoxMagazineRifleAK4047Empty
+
   # M63
   - node: RMCBoxMagazineSMGM63Empty
     entity: RMCBoxMagazineSMGM63Empty
@@ -753,6 +828,14 @@
     entity: RMCBoxMagazineRifleM4SPRAPEmpty
   - node: RMCBoxMagazineRifleM4SPRExtEmpty
     entity: RMCBoxMagazineRifleM4SPRExtEmpty
+
+  # M13
+  - node: RMCBoxMagazinePistolM13Empty
+    entity: RMCBoxMagazinePistolM13Empty
+  - node: RMCBoxMagazinePistolM13ExtEmpty
+    entity: RMCBoxMagazinePistolM13ExtEmpty
+  - node: RMCBoxMagazinePistolM13DrumEmpty
+    entity: RMCBoxMagazinePistolM13DrumEmpty
 
   # M16
   - node: RMCBoxMagazineRifleM16Empty

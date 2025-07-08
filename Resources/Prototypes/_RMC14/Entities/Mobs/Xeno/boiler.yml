@@ -5,10 +5,14 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoBoiler
   name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleBoiler
   - type: GhostRole
     name: cm-job-name-xeno-boiler
   - type: Sprite
@@ -149,3 +153,8 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
+  - type: FixedIdentity
+    name: cm-job-name-xeno-boiler

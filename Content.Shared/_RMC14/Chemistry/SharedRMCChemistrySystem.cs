@@ -230,7 +230,6 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         }
 
         _solution.SplitSolution(solutionEnt.Value, args.Amount);
-        Log.Info(solutionEnt.Value.Comp.Solution.Volume.ToString());
         DispenserUpdated(ent);
     }
 
@@ -239,7 +238,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         if (!_itemSlots.TryGetSlot(ent, ent.Comp.ContainerSlotId, out var slot))
             return;
 
-        _itemSlots.TryEjectToHands(ent, slot, args.Actor);
+        _itemSlots.TryEjectToHands(ent, slot, args.Actor, true);
         Dirty(ent);
     }
 

@@ -1,18 +1,17 @@
 using Content.Shared._RMC14.Attachable;
+using Robust.Client.UserInterface;
 
 namespace Content.Client._RMC14.Attachable.Ui;
 
-public sealed class AttachmentStripBui : BoundUserInterface
+public sealed class AttachmentStripBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private AttachableHolderStripMenu? _menu;
-
-    public AttachmentStripBui(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
 
     protected override void Open()
     {
         base.Open();
 
-        _menu = new AttachableHolderStripMenu(this);
+        _menu = this.CreateWindow<AttachableHolderStripMenu>();
 
         var metaQuery = EntMan.GetEntityQuery<MetaDataComponent>();
         if (metaQuery.TryGetComponent(Owner, out var metadata))
@@ -28,18 +27,6 @@ public sealed class AttachmentStripBui : BoundUserInterface
         if (state is not AttachableHolderStripUserInterfaceState msg)
             return;
 
-        if (_menu == null)
-            return;
-
-        _menu.UpdateMenu(msg.AttachableSlots);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (!disposing)
-            return;
-
-        _menu?.Dispose();
+        _menu?.UpdateMenu(msg.AttachableSlots, slotId => SendMessage(new AttachableHolderDetachMessage(slotId)));
     }
 }

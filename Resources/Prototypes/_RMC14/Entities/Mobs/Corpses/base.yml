@@ -1,7 +1,7 @@
 - type: randomHumanoidSettings
+  parent: RMCEventHumanoid
   id: RMCCorpse
   components:
-  - type: RandomHumanoidAppearance
   - type: Damageable
     damage:
       types:

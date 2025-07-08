@@ -19,6 +19,8 @@
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#1d2cbf"
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-skrell
 
 - type: entity
   parent: BaseSpeciesDummy

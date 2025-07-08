@@ -1,0 +1,7 @@
+﻿<controls:RMCCameraButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Camera"
+    StyleClasses="OpenBoth" ToggleMode="True" TextAlign="Left">
+    <RichTextLabel Name="Label" Access="Public" RectClipContent="True"
+                   HorizontalAlignment="Left" />
+</controls:RMCCameraButton>

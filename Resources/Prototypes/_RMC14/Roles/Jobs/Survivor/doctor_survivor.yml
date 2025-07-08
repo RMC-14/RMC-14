@@ -23,18 +23,20 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetDoctor
     - type: RMCSurvivor
+    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
 
 - type: startingGear
   id: RMCGearSurvivorDoctor
   equipment:
     mask: CMMaskSterile
     ears: CMHeadsetColony
-    jumpsuit: CMJumpsuitLiaison
+    jumpsuit: CMJumpsuitLiaisonBlue
     outerClothing: RMCLabcoat
     gloves: CMHandsLatex
     shoes: RMCShoesLaceup
@@ -49,12 +51,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorDoctor
@@ -63,7 +63,8 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetDoctor
-  name: doctor survivor preset
+  name: doctor colonist preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomGearOther:
@@ -78,3 +79,21 @@
       - [ CMFirstAidKitFilledRobust ]
       - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
       - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorDoctor
+  name: doctor colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorDoctor
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorDoctor
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorDoctor

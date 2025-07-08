@@ -198,6 +198,24 @@
   - type: Tag
     tags:
     - Sheet
+  - type: RMCConstructionItem
+    buildable:
+    # - RMCSandalsBuild
+    - RMCFloorTileWoodBuild
+    - RMCCampfireBuild
+    # wooden chair
+    - RMCWoodenBarricadeBuild
+    - RMCWoodenCrateBuild
+    # wooden door
+    # coffin
+    # baseball bat
+    # wooden cross
+    # wooden pole
+    # fishing pole
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: RMCPlankWood
@@ -222,3 +240,11 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  parent: RMCPlankWood
+  id: RMCPlankWood2
+  suffix: 2
+  components:
+  - type: Stack
+    count: 2

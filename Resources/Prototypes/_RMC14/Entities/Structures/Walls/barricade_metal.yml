@@ -62,6 +62,16 @@
     interfaces:
       enum.RMCConstructionUpgradeUiKey.Key:
         type: RMCConstructionUpgradeBui
+  - type: XenoToggleChargingDamage
+    stop: true
+    sound: /Audio/_RMC14/Structures/metalhit.ogg
+    damage:
+      types:
+        Blunt: 22
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 150
 
 - type: entity
   parent: RMCBarricadeUpgradeBase
@@ -546,3 +556,4 @@
       - Xeno
   - type: UseDelay
     delay: 0.3
+  - type: Climbable

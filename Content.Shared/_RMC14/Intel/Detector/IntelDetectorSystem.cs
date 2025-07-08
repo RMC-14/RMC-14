@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.MotionDetector;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
@@ -119,7 +120,7 @@ public sealed class IntelDetectorSystem : EntitySystem
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                detector.Blips.Add(_transform.GetMapCoordinates(tracked));
+                detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), false));
             }
 
             if (detector.Blips.Count == 0)

@@ -1,7 +1,7 @@
 - type: emoteSounds
   id: RMCUnisexFeroxi
   sounds:
-    Gnashes:
+    Gnash:
       collection: FeroxiGnashes
 
 - type: emoteSounds

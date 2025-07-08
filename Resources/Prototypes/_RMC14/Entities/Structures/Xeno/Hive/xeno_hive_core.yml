@@ -41,7 +41,7 @@
         acts: ["Destruction"]
   - type: RepairableXenoStructure
     plasmaCost: 1000
-    repairLength: 15
+    repairLength: 4
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:
@@ -74,7 +74,7 @@
   - type: EvolutionBonus
   - type: WarpPoint
     location: hive core
-  - type: XenoMapTracked
+  - type: XenoStructureMapTracked
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
@@ -142,7 +142,7 @@
         acts: ["Destruction"]
   - type: RepairableXenoStructure
     plasmaCost: 1000
-    repairLength: 15
+    repairLength: 4
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:

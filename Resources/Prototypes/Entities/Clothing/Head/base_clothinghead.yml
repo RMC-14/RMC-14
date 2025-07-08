@@ -10,7 +10,7 @@
     state: icon
   - type: Item
     size: Small
-    storedRotation: -90
+    storedRotation: 0 # RMC14
   - type: Food
     requiresSpecialDigestion: true
   - type: SolutionContainerManager
@@ -181,7 +181,7 @@
 - type: entity
   abstract: true
   # No parent since it isn't an item
-  # must parent both this and the desired helmet base when using 
+  # must parent both this and the desired helmet base when using
   id: ClothingHeadSuitWithLightBase
   name: base hardsuit helmet with light
   categories: [ HideSpawnMenu ]

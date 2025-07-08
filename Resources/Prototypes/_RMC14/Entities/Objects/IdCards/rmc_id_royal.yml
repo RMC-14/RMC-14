@@ -1,0 +1,21 @@
+﻿- type: entity
+  id: FactionRoyalMarines
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - RoyalMarine
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDRoyalMarines
+  name: royal marine dogtags
+  components:
+  - type: ItemIFF
+    faction: FactionRoyalMarines
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCIDRoyalMarines ]
+  id: RMCIDRoyalMarinesHidden
+  categories: [ HideSpawnMenu ]

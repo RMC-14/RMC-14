@@ -16,7 +16,7 @@ quick_lottery = true
 generator_enabled = false
 
 [movement]
-mob_pushing = false # TODO RMC14
+mob_pushing = true
 
 [net]
 tickrate = 15

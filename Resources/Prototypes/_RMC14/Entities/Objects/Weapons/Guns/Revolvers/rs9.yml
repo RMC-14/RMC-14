@@ -120,6 +120,7 @@
   parent: CMBulletBase
   id: RMCBulletRsh9
   name: bullet (9x39)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

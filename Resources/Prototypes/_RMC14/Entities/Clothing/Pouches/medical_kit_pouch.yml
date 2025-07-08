@@ -24,7 +24,7 @@
         - CMBloodPack
         # - TODO RMC14 splint
         - CMAutoInjector
-        # - TODO RMC14 syringe case
+        - RMCSyringeCase
         - CMSurgicalCase
         - CMFireExtinguisherPortable
         - CMRollerItem
@@ -57,7 +57,7 @@
       - CMBloodPack
       #      - TODO RMC14 splint
       - CMAutoInjector
-      #      - TODO RMC14 syringe case
+      - RMCSyringeCase
       - CMSurgicalCase
       - CMFireExtinguisherPortable
       - CMRollerItem
@@ -136,3 +136,18 @@
     - id: CMBloodPackFull
     - id: CMBloodPackFull
     # TODO RMC14: splint nano
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+    #    - id: CMSplints5 # TODO RMC14
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    #    - id: CMOxycodoneAutoInjector # TODO RMC14
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    - id: CMHealthAnalyzer

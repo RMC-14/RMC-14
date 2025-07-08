@@ -180,6 +180,7 @@
 - type: entity
   parent: CMAirlock
   id: CMAirlockLiaisonLocked
+  name: Corporate Liaison's Quarters
   suffix: Liaison, Locked
   components:
   - type: AccessReader

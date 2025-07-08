@@ -16,4 +16,28 @@ public sealed partial class XenoCripplingStrikeComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan SlowDuration = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    public Color? AuraColor;
+
+    [DataField, AutoNetworkedField]
+    public LocId ActivateText = "cm-xeno-crippling-strike-activate";
+
+    [DataField, AutoNetworkedField]
+    public LocId HitText = "cm-xeno-crippling-strike-hit";
+
+    [DataField, AutoNetworkedField]
+    public LocId? DeactivateText;
+
+    [DataField, AutoNetworkedField]
+    public LocId ExpireText = "cm-xeno-crippling-strike-expire";
+
+    [DataField, AutoNetworkedField]
+    public float? Speed;
+
+    [DataField, AutoNetworkedField]
+    public bool RemoveOnHit;
+
+    [DataField, AutoNetworkedField]
+    public bool PreventTackle;
 }

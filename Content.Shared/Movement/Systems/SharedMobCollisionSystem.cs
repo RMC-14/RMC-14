@@ -1,4 +1,9 @@
 using System.Numerics;
+using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.CCVar;
 using Content.Shared.Movement.Components;
 using Robust.Shared;
@@ -48,6 +53,15 @@ public abstract class SharedMobCollisionSystem : EntitySystem
 
     private float _massDiffCap;
 
+    // RMC14
+    [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
+
+    private EntityQuery<RMCMobCollisionMassComponent> _rmcMobCollisionMassQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
+
+    private float _penCapSubtract;
+    private bool _bigXenosCancelMovement;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -70,6 +84,12 @@ public abstract class SharedMobCollisionSystem : EntitySystem
         SubscribeLocalEvent<MobCollisionComponent, RefreshMovementSpeedModifiersEvent>(OnMoveModifier);
 
         UpdatesBefore.Add(typeof(SharedPhysicsSystem));
+
+        // RMC14
+        _rmcMobCollisionMassQuery = GetEntityQuery<RMCMobCollisionMassComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
+        Subs.CVar(CfgManager, RMCCVars.RMCMovementPenCapSubtract, v => _penCapSubtract = v, true);
+        Subs.CVar(CfgManager, RMCCVars.RMCMovementBigXenosCancelMovement, v => _bigXenosCancelMovement = v, true);
     }
 
     private void UpdatePushCap()
@@ -225,6 +245,11 @@ public abstract class SharedMobCollisionSystem : EntitySystem
         var contactCount = 0;
         var ourMass = physics.FixturesMass;
         var speedMod = 1f;
+        var cancellableDirection = Vector2.Zero;
+        var userIsXeno = _xenoQuery.HasComp(entity);
+        var userSize = RMCSizes.Small;
+        if (userIsXeno)
+            _rmcSizeStun.TryGetSize(entity, out userSize);
 
         while (contacts.MoveNext(out var contact))
         {
@@ -249,7 +274,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
                 continue;
             }
 
-            var targetEv = new AttemptMobTargetCollideEvent();
+            var targetEv = new AttemptMobTargetCollideEvent(entity);
             RaiseLocalEvent(other, ref targetEv);
 
             if (targetEv.Cancelled)
@@ -268,7 +293,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
             // Clamp so we don't get a heap of penetration depth and suddenly lurch other mobs.
             // This is also so we don't have to trigger the speed-cap above.
             // Maybe we just do speedcap and dump this? Though it's less configurable and the cap is just there for cheaters.
-            var penDepth = Math.Clamp(0.7f - diff.Length(), 0f, _penCap);
+            var penDepth = Math.Clamp(_penCapSubtract - diff.Length(), 0f, _penCap);
 
             // Sum the strengths so we get pushes back the same amount (impulse-wise, ignoring prediction).
             var mobMovement = penDepth * diff.Normalized() * (entity.Comp1.Strength + otherComp.Strength);
@@ -276,14 +301,19 @@ public abstract class SharedMobCollisionSystem : EntitySystem
             // Big mob push smaller mob, needs fine-tuning and potentially another co-efficient.
             if (_massDiffCap > 0f)
             {
+                var mass = otherPhysics.FixturesMass;
+                if (_rmcMobCollisionMassQuery.TryComp(other, out var otherCollision))
+                    mass = otherCollision.Mass;
+
                 var modifier = Math.Clamp(
-                    otherPhysics.FixturesMass / ourMass,
+                    mass / ourMass,
                     1f / _massDiffCap,
                     _massDiffCap);
 
                 mobMovement *= modifier;
 
                 var speedReduction = 1f - entity.Comp1.MinimumSpeedModifier;
+                speedReduction /= _penCap / penDepth;
                 var speedModifier = Math.Clamp(
                     1f - speedReduction * modifier,
                     entity.Comp1.MinimumSpeedModifier, 1f);
@@ -294,12 +324,25 @@ public abstract class SharedMobCollisionSystem : EntitySystem
             // Need the push strength proportional to penetration depth.
             direction += mobMovement;
             contactCount++;
+
+            if (_bigXenosCancelMovement &&
+                userIsXeno &&
+                userSize >= RMCSizes.Big &&
+                _xenoQuery.HasComp(other) &&
+                _rmcSizeStun.TryGetSize(other, out var otherSize) &&
+                otherSize < RMCSizes.Big)
+            {
+                cancellableDirection += mobMovement;
+            }
         }
 
         if (direction == Vector2.Zero)
         {
             return contactCount > 0;
         }
+
+        if (cancellableDirection != Vector2.Zero)
+            direction -= cancellableDirection;
 
         direction *= frameTime;
         RaiseCollisionEvent(entity.Owner, direction, speedMod);
@@ -332,7 +375,7 @@ public record struct AttemptMobCollideEvent
 /// Raised on the other entity when attempting mob collisions.
 /// </summary>
 [ByRefEvent]
-public record struct AttemptMobTargetCollideEvent
+public record struct AttemptMobTargetCollideEvent(EntityUid Entity)
 {
     public bool Cancelled;
 }

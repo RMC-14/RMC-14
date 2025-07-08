@@ -1,8 +1,10 @@
+﻿using Content.Shared.Physics;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Egg;
 
@@ -117,6 +119,24 @@ public sealed partial class XenoEggComponent : Component
     public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 
     public SoundSpecifier OpenSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_egg_move.ogg");
+
+    [DataField, AutoNetworkedField]
+    public string GrowingLayerFixture = "fix1";
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup GrowingLayer = CollisionGroup.BulletImpassable;
+
+    [DataField, AutoNetworkedField]
+    public string GrowingMaskFixture = "xeno_egg";
+
+    [DataField, AutoNetworkedField]
+    public IPhysShape GrowingMaskShape = new PhysShapeCircle(1.5f);
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup GrowingMask = CollisionGroup.MobLayer;
+
+    [DataField, AutoNetworkedField]
+    public bool GrownFixtures;
 }
 
 [Serializable, NetSerializable]

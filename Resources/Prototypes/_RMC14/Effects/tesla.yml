@@ -1,0 +1,14 @@
+- type: entity
+  name: electric beam
+  id: EffectTeslaBeam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.3
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/beam.rsi
+    state: electric
+  - type: Beam
+  - type: Tag
+    tags:
+    - HideContextMenu

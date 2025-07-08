@@ -5,16 +5,20 @@ using Content.Shared.Coordinates;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
+using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Map;
 
 public sealed class RMCMapSystem : EntitySystem
 {
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -40,6 +44,32 @@ public sealed class RMCMapSystem : EntitySystem
     public override void Initialize()
     {
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
+
+        SubscribeLocalEvent<RMCDeleteAnchoredOnInitComponent, MapInitEvent>(OnDestroyAnchoredOnInit);
+    }
+
+    private void OnDestroyAnchoredOnInit(Entity<RMCDeleteAnchoredOnInitComponent> ent, ref MapInitEvent args)
+    {
+        if (!ent.Comp.Enabled)
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        var anchored = GetAnchoredEntitiesEnumerator(ent);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (uid == ent.Owner)
+                continue;
+
+            if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
+                continue;
+
+            if (_entityWhitelist.IsWhitelistFailOrNull(ent.Comp.Whitelist, uid))
+                continue;
+
+            QueueDel(uid);
+        }
     }
 
     public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(EntityUid ent, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)

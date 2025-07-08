@@ -1,0 +1,42 @@
+<Document>
+  #Carrier, Tier 2
+
+  <GuideEntityEmbed Entity="CMXenoCarrier"/>
+
+  ##Playing as a Carrier
+
+  Your ability to store 16 parasites and 8 eggs makes you adept at managing the hive and its captures, you can also stay around the frontline with your pheromones and directly infect any hosts getting dragged in by other sisters, or stay on the backline by placing resin traps hidden under items and filled with parasites to catch unsuspecting victims.
+
+  Carriers also have the best tackle out of any Xenonid caste which makes them good at keeping down hosts to then infect them with a parasite.
+
+  Remember, to boost your parasite production, plot down Egg Morphers on hive weeds and collect parasites from them. Don't forget to ask the Queen since they are limited!
+
+  <GuideEntityEmbed Entity="HiveEggMorpherXeno"/>
+  <GuideEntityEmbed Entity="XenoHiveWeeds"/>
+
+  ##Parasites
+
+  Parasites will die if not inside an egg or carried a carrier. If a parasite is on the floor or held by another non carrier sister, it will die after some time unless sentient. Parasites will climb into opened eggs or resin holes automatically if standing above one.
+
+  <Box>
+    <GuideEntityEmbed Entity="XenoEgg"/>
+    <GuideEntityEmbed Entity="CMXenoParasite"/>
+    <GuideEntityEmbed Entity="XenoResinHole"/>
+  </Box>
+
+  \n
+
+  ##Abilities:
+  - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependent on caste and does not stack with pheromones of the same type.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones"/>
+  - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantWeeds"/>
+  - [bold]Plant Resin Hole[/bold]: Places a hole on weeds which can then be filled by clicking on it with a parasite, it can also be hidden under debris such as wooden planks or metal sheets.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantResinHole"/>
+  - [bold]Throw Parasite[/bold]: If your hand is empty this will retrieve a parasite from your storage which is the main use, if you already have a parasite then it will throw one.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoThrowParasite"/>
+  - [bold]Retrieve Egg[/bold]: Retrieves a egg once the ability is used.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoRetrieveEgg"/>
+  - [bold]Set Parasite Reserve[/bold]: Sets a reserve on how many parasites you do not want to become controlled by other players. This helps when you are low on parasites, and don't want those last few to jump out of your storage when you need them.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSetParasiteReserve"/>
+</Document>

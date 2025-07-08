@@ -139,6 +139,7 @@
   - type: RMCStoppingPower
   - type: AimedShotEffect
     extraHits: 0.8
+
 - type: Tag
   id: RMCXM43E1AntiMaterielRifle
 

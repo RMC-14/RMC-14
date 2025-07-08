@@ -47,7 +47,7 @@ public sealed class XenoBrutalizeSystem : EntitySystem
             return;
 
         int currHits = 0;
-        var damage = args.BaseDamage * xeno.Comp.AOEDamageMult;
+        var damage = xeno.Comp.Damage;
 
         foreach (var extra in _entityLookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(mainTarget.Value), xeno.Comp.Range))
         {
@@ -59,7 +59,7 @@ public sealed class XenoBrutalizeSystem : EntitySystem
 
             currHits++;
 
-            var myDamage = _damageable.TryChangeDamage(extra, damage, origin: xeno, tool: xeno);
+            var myDamage = _damageable.TryChangeDamage(extra, _xeno.TryApplyXenoSlashDamageMultiplier(extra, damage), origin: xeno, tool: xeno);
             if (myDamage?.GetTotal() > FixedPoint2.Zero)
             {
                 var filter = Filter.Pvs(extra, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

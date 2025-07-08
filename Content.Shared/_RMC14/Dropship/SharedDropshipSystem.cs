@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -11,10 +12,13 @@ using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Shuttles.Components;
+using Content.Shared.Shuttles.Systems;
 using Content.Shared.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship;
 
@@ -29,6 +33,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private TimeSpan _dropshipInitialDelay;
     private TimeSpan _hijackInitialDelay;
@@ -58,6 +63,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             subs =>
             {
                 subs.Event<DropshipNavigationLaunchMsg>(OnDropshipNavigationLaunchMsg);
+                subs.Event<DropshipNavigationCancelMsg>(OnDropshipNavigationCancelMsg);
             });
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipHijackerUiKey.Key,
@@ -175,7 +181,8 @@ public abstract class SharedDropshipSystem : EntitySystem
             _popup.PopupEntity("There are no dropship destinations near you!", user, user, PopupType.MediumCaution);
             return;
         }
-        else if (closestDestination.Value.Comp1.Ship != null)
+
+        if (closestDestination.Value.Comp1.Ship != null)
         {
             _popup.PopupEntity("There's already a dropship coming here!", user, user, PopupType.MediumCaution);
             return;
@@ -188,15 +195,21 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
-        var dropships = EntityQueryEnumerator<DropshipComponent>();
-        while (dropships.MoveNext(out var uid, out var dropship))
+        var dropships = EntityQueryEnumerator<DropshipComponent, TransformComponent>();
+        while (dropships.MoveNext(out var uid, out var dropship, out var xform))
         {
             if (dropship.Crashed || IsInFTL(uid))
+                continue;
+
+            if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
                 continue;
 
             var computerQuery = EntityQueryEnumerator<DropshipNavigationComputerComponent>();
             while (computerQuery.MoveNext(out var computerId, out var computer))
             {
+                if (!computer.Hijackable)
+                    continue;
+
                 if (Transform(computerId).GridUid == uid &&
                     FlyTo((computerId, computer), closestDestination.Value, user))
                 {
@@ -264,7 +277,6 @@ public abstract class SharedDropshipSystem : EntitySystem
         ref DropshipNavigationLaunchMsg args)
     {
         var user = args.Actor;
-        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, user);
 
         if (!TryGetEntity(args.Target, out var destination))
         {
@@ -280,6 +292,22 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         FlyTo(ent, destination.Value, user);
+    }
+
+    private void OnDropshipNavigationCancelMsg(Entity<DropshipNavigationComputerComponent> ent,
+        ref DropshipNavigationCancelMsg args)
+    {
+        var grid = _transform.GetGrid((ent.Owner, Transform(ent.Owner)));
+        if (!TryComp(grid, out FTLComponent? ftl) || !TryComp(grid, out DropshipComponent? dropship))
+            return;
+
+        if (dropship.Destination != dropship.DepartureLocation ||
+            _timing.CurTime + dropship.CancelFlightTime >= ftl.StateTime.End)
+            return;
+
+        ftl.StateTime.End = _timing.CurTime + dropship.CancelFlightTime;
+        Dirty(grid.Value, dropship);
+        RefreshUI();
     }
 
     private void OnHijackerDestinationChosenMsg(Entity<DropshipNavigationComputerComponent> ent,
@@ -483,5 +511,13 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         contained = container.ContainedEntities[0];
         return true;
+    }
+
+    public bool IsInFlight(Entity<DropshipComponent?> dropship)
+    {
+        if (!Resolve(dropship, ref dropship.Comp, false))
+            return false;
+
+        return dropship.Comp.State == FTLState.Travelling || dropship.Comp.State == FTLState.Arriving;
     }
 }

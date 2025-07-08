@@ -1,0 +1,5 @@
+﻿<controls:RMCChemMasterAllReagentsButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master">
+
+</controls:RMCChemMasterAllReagentsButton>

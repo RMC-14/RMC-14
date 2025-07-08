@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.Shuttles;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
@@ -393,6 +394,10 @@ public sealed partial class ShuttleSystem
         var ftlMap = EnsureFTLMap();
         var body = _physicsQuery.GetComponent(entity);
         var shuttleCenter = grid.LocalAABB.Center;
+
+        // RMC14
+        var beforeFTL = new BeforeFTLStartedEvent(uid);
+        RaiseLocalEvent(uid, ref beforeFTL);
 
         // Leave audio at the old spot
         // Just so we don't clip

@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Dropship;
+﻿using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -55,6 +55,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -97,6 +98,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, MapInitEvent>(OnXenoAttachedMapInit);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, ComponentRemove>(OnXenoAttachedRemove);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
+        SubscribeLocalEvent<XenoAttachedOvipositorComponent, XenoConstructionRangeEvent>(OnXenoConstructionRange);
 
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
@@ -162,7 +164,8 @@ public sealed class XenoEggSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno)
         {
             BreakOnMove = true,
-            MovementThreshold = 0.001f
+            MovementThreshold = 0.001f,
+            BreakOnRest = !hasOvipositor,
         };
 
         if (_doAfter.TryStartDoAfter(doAfterArgs))
@@ -210,6 +213,11 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoMobStateChanged(Entity<XenoAttachedOvipositorComponent> ent, ref MobStateChangedEvent args)
     {
         DetachOvipositor(ent);
+    }
+
+    private void OnXenoConstructionRange(Entity<XenoAttachedOvipositorComponent> ent, ref XenoConstructionRangeEvent args)
+    {
+        args.Range = 0;
     }
 
     private void OnXenoEggAfterState(Entity<XenoEggComponent> egg, ref AfterAutoHandleStateEvent args)
@@ -536,6 +544,44 @@ public sealed class XenoEggSystem : EntitySystem
             RemCompDeferred<XenoFriendlyComponent>(egg);
 
         UpdateEggSprite(egg);
+
+        switch (state)
+        {
+            case XenoEggState.Item:
+            {
+                if (!egg.Comp.GrownFixtures)
+                    break;
+
+                egg.Comp.GrownFixtures = false;
+                Dirty(egg);
+
+                if (_fixture.GetFixtureOrNull(egg, egg.Comp.GrowingLayerFixture) is { } fixture)
+                    _physics.SetCollisionLayer(egg, egg.Comp.GrowingLayerFixture, fixture, 0);
+
+                _fixture.DestroyFixture(egg, egg.Comp.GrowingMaskFixture);
+                break;
+            }
+            case XenoEggState.Growing:
+            case XenoEggState.Grown:
+            case XenoEggState.Opening:
+            case XenoEggState.Opened:
+            case XenoEggState.Fragile:
+            case XenoEggState.Sustained:
+            {
+                if (egg.Comp.GrownFixtures)
+                    break;
+
+                egg.Comp.GrownFixtures = true;
+                Dirty(egg);
+
+                _fixture.TryCreateFixture(egg, egg.Comp.GrowingMaskShape, egg.Comp.GrowingMaskFixture, hard: false, collisionMask: (int) egg.Comp.GrowingMask);
+
+                if (_fixture.GetFixtureOrNull(egg, egg.Comp.GrowingLayerFixture) is { } fixture)
+                    _physics.SetCollisionLayer(egg, egg.Comp.GrowingLayerFixture, fixture, (int) egg.Comp.GrowingLayer);
+
+                break;
+            }
+        }
     }
 
     private void SetEggSprite(Entity<XenoEggComponent> egg, string sprite)

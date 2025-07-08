@@ -1,0 +1,229 @@
+- type: entity
+  parent: BaseItem
+  abstract: true
+  id: RMCBaseTesla
+  components:
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Item
+    size: Normal
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Actions
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      sentry:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 20
+        layer:
+        - MidImpassable
+        - BulletImpassable
+        mask:
+        - MidImpassable
+        - BulletImpassable
+        hard: false
+  - type: CollisionWake
+    enabled: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "sentry" ]
+      state: normal_tesla_coil_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
+    state: normal_tesla_coil_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: normal_tesla_coil_handheld }
+          Off: { state: normal_tesla_coil }
+          On: { state: normal_tesla_coil_on }
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: UserInterface
+    interfaces:
+      enum.SentryUiKey.Key:
+        type: SentryUpgradeBui
+  - type: HealthExaminable
+    locPrefix: sentry
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+  - type: ShortExamine
+  - type: Sentry
+    upgrades:
+    - RMCTeslaMicro
+    - RMCTeslaOverclocked
+    startingMagazine: null
+    containerSlotId: ""
+    magazineTag: null
+    maxDeviation: 180
+  - type: RMCTeslaCoil
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCRepairable
+  - type: RMCNameItemOnVend
+    item: Sentry
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 40
+  - type: RequireProjectileTarget
+
+- type: entity
+  parent: RMCBaseTesla
+  id: RMCTesla
+  name: UN 21S tesla coil
+  description: A perfected way of producing high-voltage, low-current and high-frequency electricity. Minor modifications allow it to only hit hostile targets with a devastating shock.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
+    state: normal_tesla_coil_handheld
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: UserIFF
+    faction: FactionMarine
+
+- type: entity
+  parent: RMCTesla
+  id: RMCTeslaMicro
+  name: UN 25S micro tesla coil
+  description: A perfected way of producing high-voltage, low-current and high-frequency electricity. Minor modifications allow it to only hit hostile targets with a devastating shock. This one is smaller and more lightweight.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "sentry" ]
+      state: micro_tesla_coil_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
+    state: micro_tesla_coil_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: micro_tesla_coil_handheld }
+          Off: { state: micro_tesla_coil }
+          On: { state: micro_tesla_coil_on }
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      sentry:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 20
+        layer:
+        - BulletImpassable
+        hard: false
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: UserIFF
+    faction: FactionMarine
+  - type: Sentry
+    deployDelay: 0.75
+    undeployDelay: 0.75
+    upgrades: null
+  - type: RMCTeslaCoil
+    dazeDuration: 0
+    fireDelay: 1
+
+- type: entity
+  parent: RMCTesla
+  id: RMCTeslaOverclocked
+  name: UN 21S overclocked tesla coil
+  description: A perfected way of producing high-voltage, low-current and high-frequency electricity. Minor modifications allow it to only hit hostile targets with a devastating shock. This one is significantly overclocked, providing a lot more voltage at the cost of speed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "sentry" ]
+      state: stun_tesla_coil_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
+    state: stun_tesla_coil_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: stun_tesla_coil_handheld }
+          Off: { state: stun_tesla_coil }
+          On: { state: stun_tesla_coil_on }
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: UserIFF
+    faction: FactionMarine
+  - type: Sentry
+    upgrades: null
+  - type: RMCTeslaCoil
+    fireDelay: 3
+    stunDuration: 2
+    slowDuration: 0
+    dazeDuration: 15
