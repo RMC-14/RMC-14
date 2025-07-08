@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Helmets can now fit 4 accessories instead of just 2.
-    type: Tweak
-  id: 1466
-  time: '2025-03-15T19:23:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5900
-- author: DummeHytteOst
-  changes:
-  - message: Added boonie hats to the loadout options for 2 points, a normal version
-      and a tan version, includes camo for specific maps.
-    type: Add
-  - message: Adjusted headwear price in the loadout menu (3>2).
-    type: Fix
-  id: 1467
-  time: '2025-03-15T19:22:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5898
-- author: mmails
-  changes:
-  - message: Added missing ranks from 13! These are only able to be given by admins
-      right now
-    type: Add
-  id: 1468
-  time: '2025-03-15T19:25:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5896
 - author: DrSmugleaf
   changes:
   - message: Fixed all hive weed checks being broken, such as planting eggs and nesting.
@@ -4972,5 +4947,26 @@
   id: 1966
   time: '2025-07-07T12:29:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6798
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed being able to use actions while being devoured by a xeno.
+    type: Fix
+  id: 1967
+  time: '2025-07-08T01:12:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6958
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed deafness not hiding radio messages.
+    type: Fix
+  id: 1968
+  time: '2025-07-08T01:19:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6952
+- author: FeelFlows
+  changes:
+  - message: Added intel spawners to CORSAT.
+    type: Add
+  id: 1969
+  time: '2025-07-08T01:23:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6946
 Name: RMC14
 Order: -1

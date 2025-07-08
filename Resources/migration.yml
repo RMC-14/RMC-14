@@ -1207,6 +1207,7 @@ DrinkHotCoffee: RMCCoffeeCupFilled
 RMCWindowCorsatResearchHull: RMCWindowCorsatHullResearch
 
 # 2025-07-07
+ClothingEyesGlassesChemical: RMCGlassesReagentHUDGlasses
 FoamedIronMetal: RMCFoamedIronMetal
 FoamedAluminiumMetal: RMCFoamedAluminiumMetal
 TimerTrigger: RMCTimerTrigger

@@ -11,3 +11,4 @@
     event: !type:ThermalCloakTurnInvisibleActionEvent
     useDelay: 0.5
     itemIconStyle: NoItem
+  - type: ActionBlockIfDevoured

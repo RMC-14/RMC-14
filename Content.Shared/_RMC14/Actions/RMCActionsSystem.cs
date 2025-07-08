@@ -165,6 +165,7 @@ public sealed class RMCActionsSystem : EntitySystem
     {
         var ev = new RMCActionUseAttemptEvent(user, target);
         RaiseLocalEvent(action, ref ev);
+
         return !ev.Cancelled;
     }
 
