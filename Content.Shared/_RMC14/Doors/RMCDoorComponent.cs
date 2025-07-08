@@ -8,7 +8,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Timing;
-using DrawDepthTag = Robust.Shared.GameObjects.DrawDepth;
 
 namespace Content.Shared._RMC14.Doors;
 
