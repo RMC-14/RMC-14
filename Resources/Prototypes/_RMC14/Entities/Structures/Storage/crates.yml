@@ -110,6 +110,7 @@
   - type: CrashLandable
   - type: ParaDroppable
     dropScatter: 4
+  - type: AnimationPlayer
 
 - type: entity
   parent: RMCCrateBase

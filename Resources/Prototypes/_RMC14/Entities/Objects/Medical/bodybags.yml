@@ -104,6 +104,8 @@
       - CMRollerItem
   - type: Foldable
     fitIntoEntityStorage: true
+  - type: CrashLandable
+  - type: AnimationPlayer
 
 - type: entity
   parent: CMBodyBag

@@ -81,7 +81,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         if (!ShouldCrash(crashLandable, args.OldParent.Value))
             return;
 
-        TryCrashLand(crashLandable, true);
+        TryCrashLand(crashLandable.Owner, true);
     }
 
     private void OnCrashLandOnTouchStartCollide(Entity<CrashLandOnTouchComponent> ent, ref StartCollideEvent args)
@@ -123,6 +123,19 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public void ApplyFallingDamage(EntityUid uid)
+    {
+        var damage = new DamageSpecifier
+        {
+            DamageDict =
+            {
+                [CrashLandDamageType] = CrashLandDamageAmount,
+            },
+        };
+
+        Damageable.TryChangeDamage(uid, damage);
     }
 
     public bool IsLandableTile(Entity<MapGridComponent> grid, TileRef tileRef)
@@ -198,7 +211,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         return false;
     }
 
-    public void TryCrashLand(Entity<CrashLandableComponent> crashLandable, bool doDamage)
+    public void TryCrashLand(Entity<CrashLandableComponent?> crashLandable, bool doDamage)
     {
         if (_net.IsClient)
             return;
@@ -235,11 +248,20 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         Dirty(crashLandable);
 
         _rmcPulling.TryStopAllPullsFromAndOn(crashLandable);
+
+        var ev = new CrashLandStartedEvent();
+        RaiseLocalEvent(crashLandable, ref ev);
     }
 }
 
 [ByRefEvent]
 public record struct AttemptCrashLandEvent(EntityUid Crashing, bool Cancelled = false);
+
+[ByRefEvent]
+public record struct CrashLandStartedEvent;
+
+[ByRefEvent]
+public record struct CrashLandedEvent(bool ShouldDamage);
 
 [Serializable, NetSerializable]
 public abstract class FallAnimationEventArgs : EntityEventArgs

@@ -4,7 +4,7 @@ using Content.Shared._RMC14.CrashLand;
 using Content.Shared.ParaDrop;
 using Robust.Client.GameObjects;
 
-namespace Content.Client.CrashLand;
+namespace Content.Client._RMC14.CrashLand;
 
 public sealed class CrashLandSystem : SharedCrashLandSystem
 {

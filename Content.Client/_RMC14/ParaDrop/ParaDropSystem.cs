@@ -121,6 +121,9 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
             return;
         }
 
+        if (TryComp(ent, out AnimationPlayerComponent? animation))
+            _animPlayer.Stop((ent, animation),SkyFallingAnimationKey);
+
         sprite.Scale = ent.Comp.OriginalScale;
     }
 
