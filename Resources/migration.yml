@@ -1206,3 +1206,8 @@ DrinkHotCoffee: RMCCoffeeCupFilled
 # 2025-07-06
 RMCWindowCorsatResearchHull: RMCWindowCorsatHullResearch
 ClothingEyesGlassesChemical: RMCGlassesReagentHUDGlasses
+
+# 2025-07-08
+RMCGlassesBiMexYellow: RMCGlassesTriMaxYellow
+RMCGlassesBiMexBronze: RMCGlassesTriMaxBronze
+RMCGlassesBiMexBlack: RMCGlassesTriMaxBlack
