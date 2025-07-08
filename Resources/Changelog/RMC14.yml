@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Helmets can now fit 4 accessories instead of just 2.
-    type: Tweak
-  id: 1466
-  time: '2025-03-15T19:23:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5900
 - author: DummeHytteOst
   changes:
   - message: Added boonie hats to the loadout options for 2 points, a normal version
@@ -4972,5 +4965,12 @@
   id: 1966
   time: '2025-07-07T12:29:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6798
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed being able to use actions while being devoured by a xeno.
+    type: Fix
+  id: 1967
+  time: '2025-07-08T01:12:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6958
 Name: RMC14
 Order: -1
