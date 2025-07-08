@@ -164,6 +164,15 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_brown.rsi
 
 - type: entity
+  parent: CMJumpsuitLiaisonBrown
+  id: RMCJumpsuitLiaisonBrownTie
+  categories: [HideSpawnMenu]
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCTieBlack
+
+- type: entity
   parent: CMJumpsuitLiaison
   id: CMJumpsuitLiaisonBlue
   name: blue suit pants
