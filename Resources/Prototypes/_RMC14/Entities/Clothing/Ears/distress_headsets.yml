@@ -15,6 +15,7 @@
   id: RMCHeadsetColonyIcons
   name: colony headset
   description: A standard headset used by colonists.
+  suffix: With HUD Icons
   components:
   - type: ContainerFill
     containers:
@@ -134,10 +135,10 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyFORECON
+      - CMEncryptionKeyColony
   - type: RMCHeadset
     channels:
-    - MarineForecon
+    - MarineSOF
 
 #for UNMC personnel
 - type: entity
