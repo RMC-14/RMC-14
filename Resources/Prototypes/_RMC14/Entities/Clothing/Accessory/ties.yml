@@ -1,0 +1,103 @@
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCTieBase
+  name: tie
+  description: An abstract tie.
+  components:
+  - type: UniformAccessory
+    category: Tie
+    limit: 1
+    hiddenByJacketRolling: false
+
+- type: entity
+  parent: RMCTieBase
+  id: RMCTie
+  name: blue tie
+  description: A neosilk clip-on tie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/blue.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/blue.rsi
+      state: tie
+
+- type: entity
+  parent: RMCTie
+  id: RMCTieBlack
+  name: black tie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/black.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/black.rsi
+      state: tie
+
+- type: entity
+  parent: RMCTie
+  id: RMCTieGold
+  name: gold tie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/gold.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/gold.rsi
+      state: tie
+
+- type: entity
+  parent: RMCTie
+  id: RMCTieGreen
+  name: green tie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/green.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/green.rsi
+      state: tie
+
+- type: entity
+  parent: RMCTie
+  id: RMCTiePurple
+  name: purple tie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/purple.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/purple.rsi
+      state: tie
+
+- type: entity
+  parent: RMCTie
+  id: RMCTieRed
+  name: red tie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/red.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/red.rsi
+      state: tie
+
+- type: entity
+  parent: RMCTie
+  id: RMCTieHorrible
+  name: horrible tie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ties/horrible.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ties/horrible.rsi
+      state: tie
