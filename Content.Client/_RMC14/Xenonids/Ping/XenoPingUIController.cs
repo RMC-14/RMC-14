@@ -5,6 +5,8 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Ping;
 using Robust.Client.Input;
 using Robust.Client.Player;
+using Robust.Client.State;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
@@ -12,6 +14,7 @@ using Robust.Shared.Utility;
 using System.Collections.Generic;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Client.UserInterface.CustomControls;
 
 namespace Content.Client._RMC14.Xenonids.Ping;
 
@@ -22,9 +25,12 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly IStateManager _stateManager = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     private ColoredSimpleRadialMenu? _menu;
     private EntityCoordinates? _targetCoordinates;
+    private EntityUid? _targetEntity;
 
     private static readonly Color MenuBackgroundColor = Color.FromHex("#8000FF").WithAlpha(0.1f);
     private static readonly Color MenuHoverBackgroundColor = Color.FromHex("#8000FF").WithAlpha(0.5f);
@@ -64,6 +70,7 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
             return;
         }
 
+        _targetEntity = GetEntityUnderCursor(player);
         _targetCoordinates = GetTargetCoordinates(player);
 
         var models = ConvertToPingButtons(player);
@@ -80,6 +87,61 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
 
         _menu.Open();
         _menu.OpenOverMouseScreenPosition();
+    }
+
+    private EntityUid? GetEntityUnderCursor(EntityUid player)
+    {
+        var currentState = _stateManager.CurrentState;
+        if (currentState is not GameplayStateBase screen)
+            return null;
+
+        EntityUid? entityToClick = null;
+
+        if (_uiManager.CurrentlyHovered is IViewportControl vp && _inputManager.MouseScreenPosition.IsValid)
+        {
+            var mousePosWorld = vp.PixelToMap(_inputManager.MouseScreenPosition.Position);
+            entityToClick = screen.GetClickedEntity(mousePosWorld);
+        }
+
+        if (entityToClick != null &&
+            _entityManager.HasComponent<XenoComponent>(entityToClick.Value))
+        {
+            return entityToClick;
+        }
+
+        return null;
+    }
+
+    private EntityCoordinates GetTargetCoordinates(EntityUid player)
+    {
+        var transformSystem = _entityManager.System<SharedTransformSystem>();
+
+        if (_targetEntity != null)
+        {
+            return transformSystem.GetMoverCoordinates(_targetEntity.Value);
+        }
+        else
+        {
+            var mouseCoords = _inputManager.MouseScreenPosition;
+            var mapCoords = _eyeManager.PixelToMap(mouseCoords.Position);
+
+            if (mapCoords.MapId == MapId.Nullspace)
+            {
+                return transformSystem.GetMoverCoordinates(player);
+            }
+            else if (_mapManager.TryFindGridAt(mapCoords, out var gridUid, out _))
+            {
+                return new EntityCoordinates(gridUid, transformSystem.ToCoordinates(gridUid, mapCoords).Position);
+            }
+            else if (_mapManager.MapExists(mapCoords.MapId))
+            {
+                return new EntityCoordinates(_mapManager.GetMapEntityId(mapCoords.MapId), mapCoords.Position);
+            }
+            else
+            {
+                return transformSystem.GetMoverCoordinates(player);
+            }
+        }
     }
 
     private IEnumerable<RadialMenuOption> ConvertToPingButtons(EntityUid player)
@@ -141,23 +203,20 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         var markerState = GetMarkerStateForPingType(pingType);
         var sprite = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), markerState);
 
-        return new ColoredRadialMenuActionOption<string>(HandlePingSelection, pingType)
+        var tooltip = $"{pingInfo.Name}\n{pingInfo.Description}";
+        if (_targetEntity != null)
         {
-            ToolTip = $"{pingInfo.Name}\n{pingInfo.Description}",
-            BackgroundColor = MenuBackgroundColor,
-            HoverBackgroundColor = MenuHoverBackgroundColor,
-            Sprite = sprite,
-            SpriteColor = pingInfo.Color
-        };
-    }
-
-    private ColoredRadialMenuActionOption<string> CreateConstructionPingOption(string pingType, (string Name, Color Color, string Description) pingInfo)
-    {
-        var sprite = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "no_direction");
+            var targetName = _entityManager.GetComponent<MetaDataComponent>(_targetEntity.Value).EntityName ?? "Unknown";
+            tooltip += $"\nTarget: {targetName}";
+        }
+        else
+        {
+            tooltip += "\nLocation-based ping";
+        }
 
         return new ColoredRadialMenuActionOption<string>(HandlePingSelection, pingType)
         {
-            ToolTip = $"PING: {pingInfo.Name}\n{pingInfo.Description}",
+            ToolTip = tooltip,
             BackgroundColor = MenuBackgroundColor,
             HoverBackgroundColor = MenuHoverBackgroundColor,
             Sprite = sprite,
@@ -194,7 +253,8 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         }
 
         var netCoords = _entityManager.GetNetCoordinates(_targetCoordinates.Value);
-        var message = new XenoPingRequestEvent(pingType, netCoords);
+        var netTargetEntity = _targetEntity.HasValue ? _entityManager.GetNetEntity(_targetEntity.Value) : (NetEntity?)null;
+        var message = new XenoPingRequestEvent(pingType, netCoords, netTargetEntity);
         _entityManager.RaisePredictiveEvent(message);
 
         CloseMenu();
@@ -212,34 +272,6 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
 
         _menu = null;
         _targetCoordinates = null;
-    }
-
-    private EntityCoordinates GetTargetCoordinates(EntityUid player)
-    {
-        var mouseCoords = _inputManager.MouseScreenPosition;
-        var mapCoords = _eyeManager.PixelToMap(mouseCoords.Position);
-
-        var transform = _entityManager.System<SharedTransformSystem>();
-
-        if (mapCoords.MapId == MapId.Nullspace)
-        {
-            var playerCoords = transform.GetMoverCoordinates(player);
-            return playerCoords;
-        }
-
-        if (_mapManager.TryFindGridAt(mapCoords, out var gridUid, out _))
-        {
-            var gridCoords = new EntityCoordinates(gridUid, transform.ToCoordinates(gridUid, mapCoords).Position);
-            return gridCoords;
-        }
-
-        if (_mapManager.MapExists(mapCoords.MapId))
-        {
-            var mapEntityCoords = new EntityCoordinates(_mapManager.GetMapEntityId(mapCoords.MapId), mapCoords.Position);
-            return mapEntityCoords;
-        }
-
-        var fallbackCoords = transform.GetMoverCoordinates(player);
-        return fallbackCoords;
+        _targetEntity = null;
     }
 }

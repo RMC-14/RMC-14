@@ -6,6 +6,9 @@ using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Map;
+using Robust.Shared.GameObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -67,8 +70,12 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         var originalCoords = xform.Coordinates;
         var mapId = xform.MapID;
 
-        Robust.Client.Graphics.Texture? texture = null;
+        if (ent.Comp.AttachedTarget.HasValue && Exists(ent.Comp.AttachedTarget.Value))
+        {
+            worldPos = _transform.GetWorldPosition(ent.Comp.AttachedTarget.Value);
+        }
 
+        Robust.Client.Graphics.Texture? texture = null;
         if (sprite != null && sprite.BaseRSI != null && sprite[0].RsiState.IsValid)
         {
             if (sprite.BaseRSI.TryGetState(sprite[0].RsiState.Name, out var state))
@@ -77,7 +84,6 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             }
         }
 
-        // store for offscreen rendering
         var waypointData = new PingWaypointData(
             ent.Owner,
             ent.Comp.PingType,
@@ -88,7 +94,11 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             color,
             texture,
             ent.Comp.DeleteAt
-        );
+        )
+        {
+            AttachedTarget = ent.Comp.AttachedTarget,
+            IsTargetValid = ent.Comp.AttachedTarget.HasValue && Exists(ent.Comp.AttachedTarget.Value)
+        };
 
         _pingWaypoints[ent.Owner] = waypointData;
     }
@@ -109,9 +119,9 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
                 var spriteComp = (SpriteComponent)spriteData.Component;
                 return spriteComp.Color;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                Log.Error($"An error occurred while retrieving the color: {ex.Message}"); 
+                Log.Error($"An error occurred while retrieving the color: {ex.Message}");
             }
         }
 
@@ -138,10 +148,36 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
 
             if (_pingWaypoints.TryGetValue(uid, out var waypointData))
             {
-                if (pingPos != Vector2.Zero || waypointData.WorldPosition == Vector2.Zero)
+                if (ping.AttachedTarget.HasValue && Exists(ping.AttachedTarget.Value))
                 {
-                    waypointData.WorldPosition = pingPos;
+                    var targetPos = _transform.GetWorldPosition(ping.AttachedTarget.Value);
+                    waypointData.WorldPosition = targetPos;
+                    waypointData.IsTargetValid = true;
+
+                    var targetXform = Transform(ping.AttachedTarget.Value);
+                    ping.LastKnownCoordinates = targetXform.Coordinates;
+
+                    _transform.SetWorldPosition(uid, targetPos);
                 }
+                else if (ping.AttachedTarget.HasValue && !Exists(ping.AttachedTarget.Value))
+                {
+                    waypointData.IsTargetValid = false;
+                    if (ping.LastKnownCoordinates.HasValue)
+                    {
+                        var lastWorldPos = _transform.ToMapCoordinates(ping.LastKnownCoordinates.Value);
+                        waypointData.WorldPosition = lastWorldPos.Position;
+
+                        _transform.SetCoordinates(uid, ping.LastKnownCoordinates.Value);
+                    }
+                }
+                else
+                {
+                    if (pingPos != Vector2.Zero || waypointData.WorldPosition == Vector2.Zero)
+                    {
+                        waypointData.WorldPosition = pingPos;
+                    }
+                }
+
                 waypointData.EntityIsLoaded = true;
 
                 if (sprite.Color != Color.White && sprite.Color != waypointData.Color)

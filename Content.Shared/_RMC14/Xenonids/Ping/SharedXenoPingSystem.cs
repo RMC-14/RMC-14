@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Word;
 using Content.Shared.Chat;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
@@ -14,7 +15,6 @@ using Robust.Shared.Prototypes;
 using System.Collections.Generic;
 using Robust.Shared.Player;
 using Robust.Shared.Audio;
-using Content.Shared._RMC14.Xenonids.Word;
 
 namespace Content.Shared._RMC14.Xenonids.Ping;
 
@@ -104,10 +104,19 @@ public abstract class SharedXenoPingSystem : EntitySystem
         if (!coordinates.IsValid(EntityManager) || !_mapManager.MapExists(coordinates.GetMapId(EntityManager)))
             return;
 
-        CreatePing(ent.Owner, args.PingType, coordinates);
+        EntityUid? targetEntity = null;
+        if (args.TargetEntity.HasValue)
+        {
+            if (TryGetEntity(args.TargetEntity.Value, out var entityUid))
+            {
+                targetEntity = entityUid;
+            }
+        }
+
+        CreatePing(ent.Owner, args.PingType, coordinates, targetEntity);
     }
 
-    protected void CreatePing(EntityUid creator, string pingType, EntityCoordinates coordinates)
+    protected void CreatePing(EntityUid creator, string pingType, EntityCoordinates coordinates, EntityUid? targetEntity = null)
     {
         if (_net.IsClient)
             return;
@@ -130,15 +139,15 @@ public abstract class SharedXenoPingSystem : EntitySystem
 
         if (isQueen)
         {
-            CreateQueenWaypoint(creator, pingType, coordinates, hive.Value);
+            CreateQueenWaypoint(creator, pingType, coordinates, hive.Value, targetEntity);
         }
         else if (isHiveLeader)
         {
-            CreateHiveLeaderWaypoint(creator, pingType, coordinates, hive.Value);
+            CreateHiveLeaderWaypoint(creator, pingType, coordinates, hive.Value, targetEntity);
         }
         else
         {
-            CreateNormalPing(creator, pingType, coordinates, hive.Value);
+            CreateNormalPing(creator, pingType, coordinates, hive.Value, targetEntity);
         }
     }
 
@@ -163,7 +172,6 @@ public abstract class SharedXenoPingSystem : EntitySystem
 
         creatorPings.Sort((a, b) => a.CreatedAt.CompareTo(b.CreatedAt));
 
-        // remove oldest ping if at limit
         var pingsToRemove = creatorPings.Count - maxPings + 1;
         for (var i = 0; i < pingsToRemove && i < creatorPings.Count; i++)
         {
@@ -172,23 +180,23 @@ public abstract class SharedXenoPingSystem : EntitySystem
         }
     }
 
-    private void CreateQueenWaypoint(EntityUid creator, string pingType, EntityCoordinates coordinates, Entity<HiveComponent> hive)
+    private void CreateQueenWaypoint(EntityUid creator, string pingType, EntityCoordinates coordinates, Entity<HiveComponent> hive, EntityUid? targetEntity = null)
     {
-        CreatePingWithRole(creator, pingType, coordinates, hive, TimeSpan.FromSeconds(40), Color.FromHex("#FFD700"), PopupType.Large);
+        CreatePingWithRole(creator, pingType, coordinates, hive, TimeSpan.FromSeconds(40), Color.FromHex("#FFD700"), PopupType.Large, targetEntity);
     }
 
-    private void CreateHiveLeaderWaypoint(EntityUid creator, string pingType, EntityCoordinates coordinates, Entity<HiveComponent> hive)
+    private void CreateHiveLeaderWaypoint(EntityUid creator, string pingType, EntityCoordinates coordinates, Entity<HiveComponent> hive, EntityUid? targetEntity = null)
     {
-        CreatePingWithRole(creator, pingType, coordinates, hive, TimeSpan.FromSeconds(25), Color.FromHex("#FF4500"), PopupType.Large);
+        CreatePingWithRole(creator, pingType, coordinates, hive, TimeSpan.FromSeconds(25), Color.FromHex("#FF4500"), PopupType.Large, targetEntity);
     }
 
-    private void CreateNormalPing(EntityUid creator, string pingType, EntityCoordinates coordinates, Entity<HiveComponent> hive)
+    private void CreateNormalPing(EntityUid creator, string pingType, EntityCoordinates coordinates, Entity<HiveComponent> hive, EntityUid? targetEntity = null)
     {
         if (_net.IsClient) return;
-        CreatePingWithRole(creator, pingType, coordinates, hive, TimeSpan.FromSeconds(8), null, PopupType.Medium);
+        CreatePingWithRole(creator, pingType, coordinates, hive, TimeSpan.FromSeconds(8), null, PopupType.Medium, targetEntity);
     }
 
-    private void CreatePingWithRole(EntityUid creator, string pingType, EntityCoordinates coordinates, Entity<HiveComponent> hive, TimeSpan lifetime, Color? chatColor, PopupType popupType)
+    private void CreatePingWithRole(EntityUid creator, string pingType, EntityCoordinates coordinates, Entity<HiveComponent> hive, TimeSpan lifetime, Color? chatColor, PopupType popupType, EntityUid? targetEntity = null)
     {
         var ping = Spawn(GetPingEntityId(pingType), coordinates);
         var pingComp = EnsureComp<XenoPingEntityComponent>(ping);
@@ -196,11 +204,26 @@ public abstract class SharedXenoPingSystem : EntitySystem
         pingComp.Creator = creator;
         pingComp.Lifetime = lifetime;
         pingComp.DeleteAt = _timing.CurTime + lifetime;
+        pingComp.AttachedTarget = targetEntity;
+
+        if (targetEntity != null)
+        {
+            pingComp.LastKnownCoordinates = coordinates;
+        }
+
         Dirty(ping, pingComp);
 
         var locationName = _areas.TryGetArea(coordinates, out _, out var areaProto) ? areaProto.Name : "Unknown Area";
         var creatorName = Name(creator);
-        var hivemindMessage = $";{GetPingMessage(pingType)} {locationName}";
+
+        var targetMessage = "";
+        if (targetEntity != null && Exists(targetEntity.Value))
+        {
+            var targetName = Name(targetEntity.Value);
+            targetMessage = $" on {targetName}";
+        }
+
+        var hivemindMessage = $";{GetPingMessage(pingType)} {locationName}{targetMessage}";
 
         if (_chatSystem.TryProccessRadioMessage(creator, hivemindMessage, out var processedMessage, out _))
         {
@@ -213,7 +236,7 @@ public abstract class SharedXenoPingSystem : EntitySystem
         while (xenoQuery.MoveNext(out var xenoUid, out _, out var member))
         {
             if (member.Hive == hive.Owner)
-                _popup.PopupCoordinates($"{creatorName}: {GetPingName(pingType)}", coordinates, xenoUid, popupType);
+                _popup.PopupCoordinates($"{creatorName}: {GetPingName(pingType)}{targetMessage}", coordinates, xenoUid, popupType);
         }
     }
 

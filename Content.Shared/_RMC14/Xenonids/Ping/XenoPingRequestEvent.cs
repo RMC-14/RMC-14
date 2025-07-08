@@ -8,10 +8,12 @@ public sealed class XenoPingRequestEvent : EntityEventArgs
 {
     public string PingType { get; }
     public NetCoordinates Coordinates { get; }
+    public NetEntity? TargetEntity { get; }
 
-    public XenoPingRequestEvent(string pingType, NetCoordinates coordinates)
+    public XenoPingRequestEvent(string pingType, NetCoordinates coordinates, NetEntity? targetEntity = null)
     {
         PingType = pingType;
         Coordinates = coordinates;
+        TargetEntity = targetEntity;
     }
 }

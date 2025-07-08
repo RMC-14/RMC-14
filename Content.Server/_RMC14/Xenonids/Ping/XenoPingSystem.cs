@@ -20,6 +20,16 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         }
 
         var coordinates = GetCoordinates(msg.Coordinates);
-        CreatePing(player, msg.PingType, coordinates);
+
+        EntityUid? targetEntity = null;
+        if (msg.TargetEntity.HasValue)
+        {
+            if (TryGetEntity(msg.TargetEntity.Value, out var entityUid))
+            {
+                targetEntity = entityUid;
+            }
+        }
+
+        CreatePing(player, msg.PingType, coordinates, targetEntity);
     }
 }
