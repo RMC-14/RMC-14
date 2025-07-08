@@ -17,6 +17,30 @@
   inhand:
     - RMCPatchWeYaBlack
 
+- type: loadout
+  id: PatchWeYaRMCBlack
+  cost: 1
+  inhand:
+    - RMCPatchWeYaFury161
+
+- type: loadout
+  id: PatchTSERMC
+  cost: 1
+  inhand:
+    - RMCPatchTSE
+
+- type: loadout
+  id: PatchCECRMC
+  cost: 1
+  inhand:
+    - RMCPatchSPPCEC
+
+- type: loadout
+  id: PatchCLFRMC
+  cost: 1
+  inhand:
+    - RMCPatchCLF
+
 # Shoes
 - type: loadout
   id: ShoesBlackRMC

@@ -511,9 +511,10 @@
   - PatchWeYaRMC
   - PatchWeYaRMCSquare
   - PatchWeYaRMCBlack
-  # Alternate weya patch TODO
-  # TSE patch TODO
-  # CLF patch TODO
+  - PatchWeYaRMCFury161
+  - PatchTSERMC
+  - PatchCECRMC
+  - PatchCLFRMC
   # TODO cowboy hat
   # white cowboy hat TODO
   # headband TODO
