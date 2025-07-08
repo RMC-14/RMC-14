@@ -4,7 +4,7 @@
   name: acidic heart
   description: Acidic heart removed from a xenonid. It spews droplets of acid every so often.
   components:
-  - type: Heart
+  - type: XenoHeart
   - type: Corrodible
     isCorrodible: false
   - type: Organ

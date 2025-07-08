@@ -2,7 +2,6 @@
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
-using Content.Shared._RMC14.Body.Components;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
@@ -14,6 +13,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Prototypes;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -24,6 +24,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -153,18 +154,22 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
     private void OnStepXenoHeartComplete(Entity<RMCSurgeryStepXenoHeartEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         if (!TryComp<RMCSurgeryXenoHeartComponent>(args.Body, out var heart))
             return;
 
         if (!TryComp(args.Body, out TransformComponent? xform))
             return;
 
-        foreach (var entity in _body.GetBodyOrganEntityComps<HeartComponent>(args.Body))
+        foreach (var entity in _body.GetBodyOrganEntityComps<XenoHeartComponent>(args.Body))
         {
             QueueDel(entity.Owner);
         }
+
         SpawnAtPosition(heart.Item, xform.Coordinates);
-        RemComp<RMCSurgeryXenoHeartComponent>(args.Body);
+        RemCompDeferred<RMCSurgeryXenoHeartComponent>(args.Body);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
