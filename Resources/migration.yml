@@ -1175,7 +1175,7 @@ ClothingOuterBioGeneral: RMCSuitBioGeneral
 ClothingHeadHatHoodBioGeneral: RMCHoodBioGeneral
 
 # 2025-06-18
-CMWebbingPouch: RMCWebbingDropPouch 
+CMWebbingPouch: RMCWebbingDropPouch
 
 # 2025-06-24
 ClothingNeckStethoscope: RMCStethoscope
@@ -1205,3 +1205,11 @@ DrinkHotCoffee: RMCCoffeeCupFilled
 
 # 2025-07-06
 RMCWindowCorsatResearchHull: RMCWindowCorsatHullResearch
+
+# 2025-07-08
+PortableGeneratorPacman: RMCPortableGenerator
+PortableGeneratorSuperPacman: RMCPortableGenerator2
+BaseBallBat: RMCBaseballBat
+HydroponicsToolSpade: RMCToolSpade
+HydroponicsToolMiniHoe: RMCToolMiniHoe
+HydroponicsToolHatchet: RMCToolHatchet
