@@ -114,20 +114,6 @@ tilemap:
   716: RMCPlanetSnow2
   717: RMCPlanetSnow3
   718: RMCPlanetSnow4
-  721: RMCPlanetTallGrass
-  69: RMCPlanetTallGrassCompositeEast
-  16: RMCPlanetTallGrassCompositeSouth
-  18: RMCPlanetTallGrassCompositeSouthEast
-  17: RMCPlanetTallGrassCompositeSouthWest
-  15: RMCPlanetTallGrassCompositeWest
-  730: RMCPlanetTallGrassSnowEast
-  26: RMCPlanetTallGrassSnowNorth
-  13: RMCPlanetTallGrassSnowNorthEast
-  14: RMCPlanetTallGrassSnowNorthWest
-  734: RMCPlanetTallGrassSnowSouth
-  735: RMCPlanetTallGrassSnowSouthEast
-  27: RMCPlanetTallGrassSnowSouthWest
-  41: RMCPlanetTallGrassSnowWest
 entities:
 - proto: ""
   entities:
