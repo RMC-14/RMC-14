@@ -204,3 +204,37 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonGreenWorkwear
+  id: RMCJumpsuitLiaisonKhakiWorkwear
+  name: khaki workwear
+  description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/khaki_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/khaki_workwear.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonGreenWorkwear
+  id: RMCJumpsuitLiaisonPinkWorkwear
+  name: pink workwear
+  description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pink_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pink_workwear.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonGreyWorkwear
+  name: grey workwear
+  description: A pair of black slacks and a short-sleeve grey workshirt. Standard uniform for Weston-Yamada employees working in colony operations and administration.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/grey_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/grey_workwear.rsi
+

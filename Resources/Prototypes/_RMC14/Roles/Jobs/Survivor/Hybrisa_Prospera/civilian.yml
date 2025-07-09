@@ -15,8 +15,6 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaCivilian
     - type: RMCSurvivor
@@ -31,9 +29,6 @@
 - type: startingGear
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorHybrisaCivilian
-  equipment:
-    head: RMCHeadCapSPPCivilianPlantWorker
-    ears: RMCHeadsetDistressSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -58,54 +53,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomStartingGear:
-      back:
-      - CMSatchel
-      - RMCSatchelBlack
-      - RMCSatchelBlue
-      - CMSatchelEngineer
-      - CMBackpack
-      - CMBackpackEngineer
-      - RMCSatchelLightpack5Slot
-      - RMCSatchelLightpackBlack5Slot
-      outerClothing:
-      - RMCOuterClothingExternalWebbing
-      - RMCOuterClothingExternalWebbingBrown
-      - RMCOuterClothingExternalWebbingBlack
-      - RMCVestTan
-      - RMCCoatBomberRed
-      - RMCCoatBomberGrey
-      - RMCCoatBomberKhaki
-      - RMCCoatHoboBrown
-      jumpsuit:
-      - RMCJumpsuitNormCivilianBlue
-      - RMCJumpsuitNormCivilianBrown
-      - RMCJumpsuitNormCivilianLightBrown
-      - RMCJumpsuitNormCivilianGrey
-      - RMCJumpsuitNormCivilianYellow
-      - CMJumpsuitLiaisonBlue
-      - CMJumpsuitLiaisonBrown
-      - RMCJumpsuitLiaisonOrange
-      - CMJumpsuitSPPCiv1
-      - CMJumpsuitSPPCiv2
-      - CMJumpsuitSPPCiv3
-      - CMJumpsuitSPPCiv4
-      - RMCJumpsuitCivilianGreen
-      - RMCJumpsuitCivilianBlue
-      - RMCJumpsuitCivilianBrown
-      - RMCJumpsuitCivilian
-      - RMCJumpsuitCivilianRed
-      - RMCJumpsuitCivilianYellow
-      shoes:
-      - RMCShoesLaceupBrown
-      - RMCShoesLaceup
-      - RMCShoesBrown
-      - RMCShoesGreen
-      - RMCShoesRed
-      - RMCShoesBlue
-      - RMCShoesJackboots
-      - RMCBootsSPPBlackFilled
-      - RMCBootsSPPFilled
-    randomGearOther:
-    -
-      - [ CMSheetMetal20, RMCMaskGasSPP ]
+    randomOutfits:
+    - [ RMCHeadCapGrey, RMCCoatHoboBlue, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesBlack, CMBackpack]
+    - [ RMCCoatHoboBrown, RMCJumpsuitLiaisonPinkWorkwear, RMCShoesBrown, CMBackpackEngineer]
+    - [ RMCCoatHoboGreen, RMCJumpsuitLiaisonGreyWorkwear, RMCShoesGreen, RMCSatchelNorm]
+    - [ RMCCoatHoboBrown, RMCJumpsuitLiaisonGreenWorkwear, RMCShoesBrown, CMSatchelEngineer]
+    - [ RMCCoatHoboDarkBlue, RMCJumpsuitLiaisonGreyWorkwear, RMCShoesBlack, RMCSatchelNorm]
+    - [ RMCCoatHoboRed, RMCJumpsuitLiaisonGreyWorkwear, RMCShoesBlack, RMCSatchelNorm]
+    - [ RMCHeadCapGrey, RMCCoatBomber, RMCJumpsuitLiaisonPinkWorkwear, RMCShoesBrown, CMSatchelEngineer]
+    - [ RMCCoatBomber, RMCJumpsuitLiaisonPinkWorkwear, RMCShoesBrown, CMSatchelEngineer]
+    - [ RMCCoatHoboBlue, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesBlack, CMBackpack]
+    - [ RMCHeadCapGrey, RMCCoatHoboBlue, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesBlack, CMBackpack]

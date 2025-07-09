@@ -599,3 +599,32 @@
     - HeadTop
     - HeadSide
     - Snout
+
+# Civilian
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapGrey
+  name: grey cap
+  description: It's a baseball hat in a tasteful grey color.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Soft/greysoft.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Soft/greysoft.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapFerret
+  name: ferret heavy industries trucker hat
+  description: It's a baseball hat in a tasteful grey color.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Soft/greysoft.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Soft/greysoft.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
