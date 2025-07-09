@@ -42,6 +42,7 @@
       - RMCMacheteScabbard
       - RMCScabbardKatana
       #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
+      - RMCM82FHolster
       - RMCSmartPistolHolster
       - RMCSMGHolster
       - RMCSMGPouchHolster

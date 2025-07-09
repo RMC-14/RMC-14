@@ -1,0 +1,262 @@
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCArmbandBase
+  name: armband
+  description: An abstract armband.
+  components:
+  - type: UniformAccessory
+    category: Armband
+    limit: 2
+    hiddenByJacketRolling: false
+
+# Marine
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCAlphaArmband
+  name: alpha armband
+  description: An armband in squad colors, worn for ease of idenfication.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/alpha_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/alpha_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCAlphaArmband
+  id: RMCBravoArmband
+  name: bravo armband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/bravo_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/bravo_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCAlphaArmband
+  id: RMCCharlieArmband
+  name: charlie armband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/charlie_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/charlie_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCAlphaArmband
+  id: RMCDeltaArmband
+  name: delta armband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/delta_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/delta_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCAlphaArmband
+  id: RMCEchoArmband
+  name: echo armband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/echo_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/echo_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCAlphaArmband
+  id: RMCFoxtrotArmband
+  name: foxtrot armband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/foxtrot_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/foxtrot_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCAlphaArmband
+  id: RMCSquadArmband
+  name: squad armband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/squad_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/squad_armband.rsi
+      state: armband
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: RMCAlphaArmband
+      SquadBravo: RMCBravoArmband
+      SquadCharlie: RMCCharlieArmband
+      SquadDelta: RMCDeltaArmband
+      SquadEcho: RMCEchoArmband
+      SquadFoxtrot: RMCFoxtrotArmband
+
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCMPArmband
+  name: MP armband
+  description: An armband worn by UNMC Military Police officers on military installations. It is usually also worn by those from the provost office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/mp_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/mp_armband.rsi
+      state: armband
+
+# Nurse
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCNurseArmband
+  name: nurse armband
+  description: An armband, worn by the rookie nurses to display they are still not doctors. This one is dark red.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/nurse_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/nurse_armband.rsi
+      state: armband
+
+# CLF
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCCLFArmband
+  name: CLF armband
+  description: A crudely sewn armband. It's dyed in the colors of the Colonial Liberation Front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
+      state: armband
+
+# HEFA
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCHEFAArmband
+  name: HEFA Order milita armband
+  description: Sworn to the shrapnel and the shards therein. So sayeth her command when the first detonation occured.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/hefa_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/hefa_armband.rsi
+      state: armband
+
+# Misc
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCRedArmband
+  name: red armband
+  description: A fancy red armband!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/red_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/red_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCHEFAArmband
+  id: RMCCargoArmband
+  name: cargo armband
+  description: An armband, worn by the crew to display which department they're assigned to. This one is brown.
+
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCScienceArmband
+  name: science armband
+  description: An armband, worn by the crew to display which department they're assigned to. This one is purple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/rnd_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/rnd_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCHydroArmband
+  name: hydroponics armband
+  description: An armband, worn by the crew to display which department they're assigned to. This one is green and blue.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/hydro_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/hydro_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCMedArmband
+  name: medical armband
+  description: An armband, worn by the crew to display which department they're assigned to. This one is white.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/med_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/med_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCMedEMTArmband
+  name: EMT armband
+  description: An armband, worn by the crew to display which department they're assigned to. This one is white and green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/med_green_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/med_green_armband.rsi
+      state: armband
+
+- type: entity
+  parent: RMCArmbandBase
+  id: RMCEngiArmband
+  name: engineering armband
+  description: An armband, worn by the crew to display which department they're assigned to. This one is orange with a reflective strip!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/engi_armband.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Armbands/engi_armband.rsi
+      state: armband

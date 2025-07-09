@@ -75,7 +75,7 @@
   - type: Flammable
     damage:
       types:
-        Heat: 0
+        Heat: 1
   - type: Fixtures
     fixtures:
       fix1:
@@ -129,6 +129,8 @@
       state: ravager
   - type: FixedIdentity
     name: cm-job-name-xeno-ravager
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
 
 - type: entity
   parent: RMCXenoRavagerBase

@@ -41,7 +41,7 @@
         acts: ["Destruction"]
   - type: RepairableXenoStructure
     plasmaCost: 1000
-    repairLength: 15
+    repairLength: 4
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:
@@ -142,7 +142,7 @@
         acts: ["Destruction"]
   - type: RepairableXenoStructure
     plasmaCost: 1000
-    repairLength: 15
+    repairLength: 4
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:

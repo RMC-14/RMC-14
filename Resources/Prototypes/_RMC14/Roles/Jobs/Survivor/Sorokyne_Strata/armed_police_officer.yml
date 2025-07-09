@@ -51,11 +51,9 @@
     head: CMHeadCapSPPPeakedPolice
     eyes: CMGlassesSecurity
     jumpsuit: RMCJumpsuitSPPPaP
-    belt: RMCBeltHolsterPistolSPP
     outerClothing: RMCCoatPaP
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
-    mask: RMCMaskGasSPP
     pocket2: RMCPouchMagazine
     id: RMCIDCardPaP
     back: RMCSatchelBlack
@@ -63,6 +61,7 @@
   storage:
     back:
     - CMSheetMetal20
+    - RMCMaskGasSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -71,12 +70,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorArmedPoliceOfficer
@@ -86,3 +83,4 @@
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetArmedPoliceOfficer
   name: people's armed police officer preset
+  categories: [ HideSpawnMenu ]

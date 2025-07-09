@@ -91,6 +91,7 @@
   - type: Emoting
   - type: Actions
   - type: Alerts
+  - type: AreaInfo
   - type: Appearance
   - type: DoAfter
   - type: Examiner
@@ -186,11 +187,16 @@
         density: 0
         layer:
         - BulletImpassable
+  - type: CMSurgeryTarget
+  - type: Body
+    prototype: Xenonid
   - type: Xeno
   - type: XenoRegen
   - type: XenoStateVisuals
   - type: UserInterface
     interfaces:
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
       enum.XenoEvolutionUIKey.Key:
         type: XenoEvolutionBui
       enum.XenoDevolveUIKey.Key:
@@ -470,6 +476,7 @@
     stacks: -5
   - type: RMCHandEmotes
   - type: XenoToggleChargingKnockback
+  - type: XenoCanAddPlasmaToConstruct
 
 - type: entity
   abstract: true
