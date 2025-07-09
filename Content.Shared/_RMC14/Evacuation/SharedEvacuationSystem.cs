@@ -351,10 +351,11 @@ public abstract class SharedEvacuationSystem : EntitySystem
             }
         }
 
+        _audio.PlayPredicted(ent.Comp.WarmupSound, ent, user);
+
         if (ent.Comp.Mode == EvacuationComputerMode.Crashed)
             return;
 
-        _audio.PlayPredicted(ent.Comp.WarmupSound, ent, user);
         ent.Comp.Mode = EvacuationComputerMode.Travelling;
         Dirty(ent);
 
@@ -677,9 +678,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
                         if (_doorQuery.TryComp(uid, out var door))
                         {
                             var evacuationDoor = EnsureComp<EvacuationDoorComponent>(uid);
-                            evacuationDoor.Locked = true;
+                            evacuationDoor.Locked = false;
                             Dirty(uid, evacuationDoor);
-                            _door.TryClose(uid, door);
+                            _door.TryOpen(uid, door);
                         }
                     }
                 }

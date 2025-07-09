@@ -35,12 +35,12 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorMoHDoctor
   equipment:
-    mask: RMCMaskGasSPP
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
   storage:
     back:
     - CMSheetMetal20
+    - RMCMaskGasSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -49,12 +49,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorMoHDoctor
@@ -64,6 +62,7 @@
   parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetMoHDoctor
   name: ministry of health doctor preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomGearOther:
