@@ -121,19 +121,11 @@
     primaryWeaponChance: 0.6
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
-  id: RMCSurvivorPresetCivilianOutfits
-  name: civilian colonist preset with random outfits
+  id: RMCSurvivorPresetCivilianRareItem
+  name: civilian colonist preset with rare item
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # todo different backpacks
-    - [ CMJumpsuitColonist, RMCShoesBlack ] # Default
-    - [ RMCJumpsuitCivilianJanitor, RMCShoesGaloshes, RMCHipsterGlasses, RMCHandsPurple, ClothingHeadHatPurplesoft, RMCHazardVest ] # Janitor
-    - [ RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, RMCHydroApron ] # Botanist (TODO: Add Hatchet)
-    - [ CMJumpsuitLiaisonBlack, RMCShoesLaceup, RMCJacketCorporateBlue, ClothingHeadHatBowlerHat ] # Bartender
-    - [ CMJumpsuitTShirtGray, RMCShoesWeYaStompers, RMCOuterClothingExternalWebbing ] # Protagonist
-    rareItemCoefficent: 444
     rareItems:
       RMCMotionDetectorCompact: [ 1, 4 ] # 2%
       RMCDefibrillatorCompact: [ 5, 8 ] # 2%
@@ -148,6 +140,21 @@
       RMCAttachmentFlashlightGrip: [ 195, 254 ] # 30%
       CMSheetMetal30: [ 255, 324 ] # 35%
       RMCBinocularsCiv: [ 325, 444 ] # 45%
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
+  id: RMCSurvivorPresetCivilianOutfits
+  name: civilian colonist preset with random outfits
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits: # todo different backpacks
+    - [ CMJumpsuitColonist, RMCShoesBlack ] # Default
+    - [ RMCJumpsuitCivilianJanitor, RMCShoesGaloshes, RMCHipsterGlasses, RMCHandsPurple, ClothingHeadHatPurplesoft, RMCHazardVest ] # Janitor
+    - [ RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, RMCHydroApron ] # Botanist (TODO: Add Hatchet)
+    - [ CMJumpsuitLiaisonBlack, RMCShoesLaceup, RMCJacketCorporateBlue, ClothingHeadHatBowlerHat ] # Bartender
+    - [ CMJumpsuitTShirtGray, RMCShoesWeYaStompers, RMCOuterClothingExternalWebbing ] # Protagonist
+    rareItemCoefficent: 444
 
 - type: entity
   parent: MarkerBase
