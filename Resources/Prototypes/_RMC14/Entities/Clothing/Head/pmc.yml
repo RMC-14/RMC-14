@@ -173,6 +173,8 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: ArmorHelmetPMCCorporate
