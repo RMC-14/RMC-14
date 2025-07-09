@@ -848,9 +848,9 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentM3717Stock
-  name: M3717 stock
-  description: The non-detachable stock of a M37-17 pump shotgun.
+  id: RMCAttachmentM3714stock
+  name: M3714 stock
+  description: The non-detachable stock of a M37-14 pump shotgun.
   components:
   - type: Sprite
     state: M3717Stock
@@ -859,7 +859,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM3717Stock
+    - RMCAttachmentM3714stock
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -939,7 +939,8 @@
   id: RMCAttachmentHG3712Stock
 
 - type: Tag
-  id: RMCAttachmentM3717Stock
+  id: RMCAttachmentM3714Stock
+
 - type: Tag
   id: RMCAttachmentStock
 
