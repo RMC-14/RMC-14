@@ -301,6 +301,7 @@
   components:
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/prefab_greebles.rsi
     drawdepth: Overdoors

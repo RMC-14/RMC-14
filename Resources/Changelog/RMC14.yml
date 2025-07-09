@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Changed tackling effects to make them different than slashing normally
-      for xenos.
-    type: Tweak
-  id: 1479
-  time: '2025-03-25T02:19:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5994
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You will now take damage when you are thrown into a wall.
-    type: Add
-  id: 1480
-  time: '2025-03-25T02:20:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5993
 - author: CyberTropic
   changes:
   - message: Remove WY logo from Fruit Beer.
@@ -4980,5 +4965,34 @@
   id: 1979
   time: '2025-07-09T00:27:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6975
+- author: J C Denton
+  changes:
+  - message: Added Flare Gun and Belt spawns to New Varadero, Sorokyne Strata and
+      Fiorina.
+    type: Add
+  id: 1980
+  time: '2025-07-09T00:29:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6965
+- author: Dygon
+  changes:
+  - message: Dropship fabricators can now print the "HPU-1 paradrop deployment system",
+      installing this module in a dropship allows it to open it's doors mid-flight
+      after selecting a viable paradrop target. Players that walk out of a dropship
+      that is mid-flight while a target is selected will land near it.
+    type: Add
+  - message: Throwing a crate out of the dropship will now make it land near the location
+      targeted by the pilot.
+    type: Add
+  - message: Requisitions vendors now stock parachutes, having a parachute equipped
+      will prevent you from falling to your death if you walk off a dropship mid-flight.
+      If no target is selected by the pilot when you fall out you will paradrop to
+      a random location.
+    type: Add
+  - message: When falling out of the dropship you can't land at underground areas
+      anymore.
+    type: Fix
+  id: 1981
+  time: '2025-07-09T00:37:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6901
 Name: RMC14
 Order: -1

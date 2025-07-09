@@ -107,7 +107,7 @@
   - type: EncryptionKey
     channels:
     - MarineHighCommand
-    - MarineForecon
+    - MarineSOF
     defaultChannel: MarineHighCommand
   - type: Sprite
     state: cap_key
