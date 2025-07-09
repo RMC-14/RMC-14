@@ -40,7 +40,6 @@
     back: RMCSatchelLightpack
     head: RMCArmorHelmetSPPFirefighter
     outerClothing: RMCArmorSPPFirefighter
-    mask: RMCMaskGasSPP
     ears: RMCHeadsetDistressSPP
   storage:
     back:

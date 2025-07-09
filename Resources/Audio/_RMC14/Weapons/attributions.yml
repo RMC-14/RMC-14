@@ -62,3 +62,18 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/91cf6ebdfb47c650faf7ac72fdfff8cd6fc636a0/sound/weapons/dropship_sonic_boom.ogg"
+
+- files: ["genhit1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/91cf6ebdfb47c650faf7ac72fdfff8cd6fc636a0/sound/weapons/genhit1.ogg"
+
+- files: ["genhit2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/91cf6ebdfb47c650faf7ac72fdfff8cd6fc636a0/sound/weapons/genhit2.ogg"
+
+- files: ["genhit3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/91cf6ebdfb47c650faf7ac72fdfff8cd6fc636a0/sound/weapons/genhit3.ogg"

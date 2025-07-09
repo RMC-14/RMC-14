@@ -34,7 +34,6 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorSoroCivilian
   equipment:
-    mask: RMCMaskGasSPP
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
 
@@ -110,3 +109,6 @@
       - RMCShoesJackboots
       - RMCBootsSPPBlackFilled
       - RMCBootsSPPFilled
+    randomGearOther:
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]
