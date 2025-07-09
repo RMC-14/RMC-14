@@ -2,8 +2,9 @@ using Content.Shared._RMC14.Stun;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Attachable.Components;
+
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class ProjectileStunAdjustComponent: Component
+public sealed partial class ProjectileStunAdjustComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float StunDurationAdjustment = 1;
