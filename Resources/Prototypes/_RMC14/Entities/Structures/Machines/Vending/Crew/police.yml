@@ -78,6 +78,7 @@
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
 
 # WARDEN
 - type: entity

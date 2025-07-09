@@ -298,6 +298,7 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
     - name: Mask

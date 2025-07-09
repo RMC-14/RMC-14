@@ -214,9 +214,9 @@
       - id: CMVendorBundleCombatTechnicianApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-    - name: Gloves 
+    - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Helmet
@@ -297,6 +297,7 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
       - id: RMCToolWebbingSmallFilled

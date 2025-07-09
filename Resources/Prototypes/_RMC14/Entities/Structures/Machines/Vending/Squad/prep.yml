@@ -124,6 +124,8 @@
         amount: 1
       - id: CMWebbing
         amount: 2
+      - id: RMCWebbingBlackSmall
+        amount: 2
       - id: RMCWebbingDropPouch
         amount: 1
       - id: CMWebbingHolster

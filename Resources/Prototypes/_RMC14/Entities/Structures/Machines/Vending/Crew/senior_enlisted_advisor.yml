@@ -82,6 +82,7 @@
       - id: CMWebbingBlack
       - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
 
 - type: entity

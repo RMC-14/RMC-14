@@ -464,6 +464,7 @@
         recommended: true
       - id: RMCWebbingDropPouch
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
     - name: Huds
       choices: { CMHud: 1 }
@@ -949,6 +950,8 @@
         recommended: true
       - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
