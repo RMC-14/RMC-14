@@ -69,7 +69,7 @@
         - RMCAttachmentFlashlightGrip
       rmc-aslot-stock:
         locked: true
-        startingAttachable: RMCAttachmentM3714Stock
+        startingAttachable: RMCAttachmentM3714stock
         whitelist:
           tags:
           - RMCAttachmentM3714stock
