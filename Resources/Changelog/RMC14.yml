@@ -1,48 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Fixed marine operations uniform not having camouflage specific sprites.
-    type: Fix
-  id: 1473
-  time: '2025-03-21T05:54:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5942
-- author: CyberTropic
-  changes:
-  - message: Cash stacks use stack sprites.
-    type: Fix
-  id: 1474
-  time: '2025-03-21T05:51:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5950
-- author: Djvarik
-  changes:
-  - message: The ground wires on Shiva's no longer block movement.
-    type: Fix
-  id: 1475
-  time: '2025-03-21T05:54:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5936
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed M15 grenades not fitting in the m79 and grenadier spec launcher.
-    type: Fix
-  - message: Fixed airburst grenades not fitting in the U1 UGL.
-    type: Fix
-  id: 1476
-  time: '2025-03-21T20:03:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5966
-- author: DrSmugleaf
-  changes:
-  - message: Added 58 more random Avali names.
-    type: Add
-  id: 1477
-  time: '2025-03-21T20:39:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5974
-- author: mmails
-  changes:
-  - message: Moves mess tech from planned to complete in the roadmap
-    type: Fix
-  id: 1478
-  time: '2025-03-21T20:40:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5920
 - author: Dutch-VanDerLinde
   changes:
   - message: Changed tackling effects to make them different than slashing normally
@@ -4976,5 +4932,53 @@
   id: 1973
   time: '2025-07-08T02:04:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6947
+- author: Ian321
+  changes:
+  - message: Xenos can now be dissected.
+    type: Add
+  id: 1974
+  time: '2025-07-08T03:19:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5869
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed FORECON having almayer comms
+    type: Fix
+  - message: Renamed FORECON radio channel to 'SOF'
+    type: Fix
+  id: 1975
+  time: '2025-07-09T00:23:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6971
+- author: noctyrnal
+  changes:
+  - message: Shiva has received a large update. It should be more inline with parity
+      now.
+    type: Add
+  - message: You can now destroy soil nets and planter boxes.
+    type: Add
+  id: 1976
+  time: '2025-07-09T00:24:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6972
+- author: noctyrnal
+  changes:
+  - message: Adjusted the colour of the Squad HUD Icons.
+    type: Tweak
+  id: 1977
+  time: '2025-07-09T00:24:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6974
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed escape pods not exploding when it's launched over the maximum occupancy,
+      and not reopening the door.
+    type: Fix
+  id: 1978
+  time: '2025-07-09T00:26:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6967
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added squad markings for gloves.
+    type: Add
+  id: 1979
+  time: '2025-07-09T00:27:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6975
 Name: RMC14
 Order: -1
