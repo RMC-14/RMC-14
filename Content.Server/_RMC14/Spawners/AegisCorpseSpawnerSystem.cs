@@ -64,7 +64,7 @@ public sealed class AegisCorpseSpawnerSystem : EntitySystem
 
                 // Use RandomHumanoidSystem to spawn the corpse properly, just like RMCSpawnerSystem does
                 // This spawns one random humanoid based on the RandomHumanoidSettingsPrototype
-                var corpse = _randomHumanoid.SpawnRandomHumanoid("RMCCorpseScientistAegis", coordinates, MetaData(selectedSpawner.Uid).EntityName);
+                var corpse = _randomHumanoid.SpawnRandomHumanoid(selectedSpawner.Component.Spawn, coordinates, MetaData(selectedSpawner.Uid).EntityName);
                 EnsureComp<IntelRecoverCorpseObjectiveComponent>(corpse);
 
                 if (selectedSpawner.Component.DeleteAfterSpawn)
