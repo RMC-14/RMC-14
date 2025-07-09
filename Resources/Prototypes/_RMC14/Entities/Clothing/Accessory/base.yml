@@ -32,6 +32,7 @@
   components:
   - type: UniformAccessoryHolder
     allowedCategories:
+    - Tie
     - Patch
     - Medal
     - Armband

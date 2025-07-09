@@ -31,11 +31,15 @@
 # Royal
 - type: entity
   parent: JumpsuitMarine
-  id: JumpsuitMarineRoyal # TODO RMC14 sprite
+  id: RMCJumpsuitMarineRoyal # TODO RMC14 sprite
   suffix: Filled, Royal
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingDropPouchRoyal
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
 
 # Formal
 - type: entity
@@ -126,6 +130,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
+
+# Sun Riders
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitSunRiders
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RMCPatchSolarDevils ]
 
 # Supply
 
@@ -298,7 +311,7 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
-    
+
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOBlackAlt
@@ -310,7 +323,7 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
-    
+
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOOperations
