@@ -115,7 +115,11 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
         if (shouldShowGhost)
         {
-            if (_currentGhost == null || _currentGhostStructure != buildChoice)
+            var actualPrototype = GetActualBuildPrototype(player.Value, buildChoice!);
+
+            if (_currentGhost == null ||
+                _currentGhostStructure != buildChoice ||
+                GetActualBuildPrototype(player.Value, _currentGhostStructure ?? "") != actualPrototype)
             {
                 ClearGhost();
                 CreateGhost(player.Value, buildChoice!);
@@ -165,12 +169,38 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
     {
         var playerCoords = EntityManager.GetComponent<TransformComponent>(player).Coordinates;
         var ghost = EntityManager.SpawnEntity("XenoConstructionGhost", playerCoords);
+        var actualPrototype = GetActualBuildPrototype(player, structurePrototype);
 
-        ConfigureGhostSprite(ghost, structurePrototype);
+        ConfigureGhostSprite(ghost, actualPrototype);
 
         _currentGhost = ghost;
-        _currentGhostStructure = structurePrototype;
+        _currentGhostStructure = structurePrototype; // Keep original for comparison
         _lastPosition = EntityCoordinates.Invalid;
+    }
+
+    private string GetActualBuildPrototype(EntityUid player, string originalPrototype)
+    {
+        if (EntityManager.HasComponent<QueenBuildingBoostComponent>(player))
+        {
+            var queenVariant = GetQueenVariant(originalPrototype);
+            if (_prototypeManager.HasIndex(queenVariant))
+            {
+                return queenVariant;
+            }
+        }
+
+        return originalPrototype;
+    }
+
+    private string GetQueenVariant(string originalId)
+    {
+        return originalId switch
+        {
+            "WallXenoResin" => "WallXenoResinQueen",
+            "WallXenoMembrane" => "WallXenoMembraneQueen",
+            "DoorXenoResin" => "DoorXenoResinQueen",
+            _ => originalId
+        };
     }
 
     private void ConfigureGhostSprite(EntityUid ghost, string structurePrototype)
@@ -350,12 +380,17 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             }
         }
 
-        if (checkStructureSelected &&
-            buildChoice != null &&
-            _xenoConstruction.GetStructurePlasmaCost(buildChoice.Value) is { } cost &&
-            (!TryComp(xeno.Owner, out XenoPlasmaComponent? plasma) || plasma.Plasma < cost))
+        if (checkStructureSelected && buildChoice != null)
         {
-            return false;
+            var hasBoost = EntityManager.HasComponent<QueenBuildingBoostComponent>(xeno.Owner);
+            if (!hasBoost)
+            {
+                if (_xenoConstruction.GetStructurePlasmaCost(buildChoice.Value) is { } cost &&
+                    (!TryComp(xeno.Owner, out XenoPlasmaComponent? plasma) || plasma.Plasma < cost))
+                {
+                    return false;
+                }
+            }
         }
 
         if (checkStructureSelected &&

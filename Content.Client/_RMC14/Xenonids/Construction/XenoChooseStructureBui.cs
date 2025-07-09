@@ -36,6 +36,8 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
 
         if (EntMan.TryGetComponent(Owner, out XenoConstructionComponent? xeno))
         {
+            var hasBoost = EntMan.HasComponent<QueenBuildingBoostComponent>(Owner);
+
             foreach (var structureId in xeno.CanBuild)
             {
                 if (!_prototype.TryIndex(structureId, out var structure))
@@ -44,11 +46,26 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
                 var control = new XenoChoiceControl();
                 control.Button.ToggleMode = true;
 
-                var name = structure.Name;
-                if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)
-                    name += $" ({cost} plasma)";
+                var displayId = structureId;
+                var displayName = structure.Name;
 
-                control.Set(name, _sprite.Frame0(structure));
+                if (hasBoost)
+                {
+                    var queenVariant = GetQueenVariant(structureId);
+                    if (_prototype.TryIndex(queenVariant, out var queenStructure) && queenVariant != structureId)
+                    {
+                        displayId = queenVariant;
+                        displayName = queenStructure.Name;
+                    }
+                    displayName += " (0 plasma)";
+                }
+                else
+                {
+                    if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)
+                        displayName += $" ({cost} plasma)";
+                }
+
+                control.Set(displayName, _sprite.Frame0(_prototype.Index(displayId)));
                 control.Button.OnPressed += _ =>
                 {
                     SendPredictedMessage(new XenoChooseStructureBuiMsg(structureId));
@@ -61,6 +78,17 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
         }
 
         Refresh();
+    }
+
+    private EntProtoId GetQueenVariant(EntProtoId originalId)
+    {
+        return originalId.Id switch
+        {
+            "WallXenoResin" => "WallXenoResinQueen",
+            "WallXenoMembrane" => "WallXenoMembraneQueen",
+            "DoorXenoResin" => "DoorXenoResinQueen",
+            _ => originalId
+        };
     }
 
     private void UpdateButtonStates(EntProtoId selectedId)
