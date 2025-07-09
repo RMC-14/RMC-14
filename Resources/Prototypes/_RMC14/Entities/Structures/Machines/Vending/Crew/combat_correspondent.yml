@@ -20,7 +20,6 @@
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
         name: Essential Reporter's Set
-        mandatory: true
       - id: CMSatchel
         name: Leather Satchel
       - id: RMCCameraBroadcasting
