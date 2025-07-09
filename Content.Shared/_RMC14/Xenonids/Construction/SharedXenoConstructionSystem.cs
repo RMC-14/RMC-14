@@ -930,7 +930,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var indices = _mapSystem.TileIndicesFor(gridId, grid, coordinates);
         for (var i = 0; i < 4; i++)
         {
-            var dir = (AtmosDirection) (1 << i);
+            var dir = (AtmosDirection)(1 << i);
             var pos = indices.Offset(dir);
             var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, pos);
             while (anchored.MoveNext(out var uid))
@@ -1246,7 +1246,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return false;
             }
 
-            if (choiceProto.ID == XenoHiveCoreNodeId && _hive.GetHive(xeno.Owner) is {} hive && hive.Comp.NewCoreAt > _timing.CurTime)
+            if (choiceProto.ID == XenoHiveCoreNodeId && _hive.GetHive(xeno.Owner) is { } hive && hive.Comp.NewCoreAt > _timing.CurTime)
             {
                 if (_net.IsServer)
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
@@ -1295,7 +1295,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var supported = false;
         for (var i = 0; i < 4; i++)
         {
-            var dir = (AtmosDirection) (1 << i);
+            var dir = (AtmosDirection)(1 << i);
             var pos = tile.Offset(dir);
             var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, pos);
             while (anchored.MoveNext(out var uid))
@@ -1408,5 +1408,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public void GiveQueenBoost(EntityUid queen, float speedMultiplier, float remoteRange)
+    {
+        var boost = EnsureComp<QueenBuildingBoostComponent>(queen);
+        boost.BuildSpeedMultiplier = speedMultiplier;
+        boost.RemoteUpgradeRange = remoteRange;
+        Dirty(queen, boost);
+    }
+
+    public void RemoveQueenBoost(EntityUid queen)
+    {
+        RemCompDeferred<QueenBuildingBoostComponent>(queen);
     }
 }

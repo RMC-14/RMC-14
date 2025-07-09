@@ -1998,10 +1998,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void GiveQueenBoost(EntityUid queen)
     {
-        var boost = EnsureComp<QueenBuildingBoostComponent>(queen);
-        boost.BuildSpeedMultiplier = _queenBoostSpeedMultiplier;
-        boost.RemoteUpgradeRange = _queenBoostRemoteRange;
-        Dirty(queen, boost);
+        var xenoConstruction = EntityManager.System<SharedXenoConstructionSystem>();
+        xenoConstruction.GiveQueenBoost(queen, _queenBoostSpeedMultiplier, _queenBoostRemoteRange);
+
+        _adminLog.Add(LogType.RMCXenoSpawn, $"Queen {ToPrettyString(queen):queen} received building boost");
     }
 
     private void OnXenoComponentInit(Entity<XenoComponent> ent, ref ComponentInit args)
@@ -2032,10 +2032,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void RemoveQueenBuildingBoosts()
     {
+        var xenoConstruction = EntityManager.System<SharedXenoConstructionSystem>();
         var queens = EntityQueryEnumerator<QueenBuildingBoostComponent, XenoEvolutionGranterComponent>();
         while (queens.MoveNext(out var queen, out var boost, out _))
         {
-            RemCompDeferred<QueenBuildingBoostComponent>(queen);
+            xenoConstruction.RemoveQueenBoost(queen);
         }
     }
 
