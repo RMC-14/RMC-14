@@ -69,7 +69,7 @@ public sealed class SurvivorSystem : EntitySystem
             var gear = _random.Pick(comp.RandomWeapon);
             foreach (var item in gear)
             {
-                Equip(mob, item);
+                Equip(mob, item, tryEquip: false);
             }
         }
 
@@ -98,24 +98,28 @@ public sealed class SurvivorSystem : EntitySystem
         }
     }
 
-    private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false, string? slotName = null)
+    private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false, bool tryEquip = true, string? slotName = null)
     {
         if (_net.IsClient)
             return;
 
         var coordinates = _transform.GetMoverCoordinates(mob);
         var spawn = Spawn(toSpawn, coordinates);
-        var slots = _inventory.GetSlotEnumerator(mob);
-        while (slots.MoveNext(out var slot))
+
+        if (tryEquip)
         {
-            if (slotName != null && slot.ID != slotName)
-                continue;
+            var slots = _inventory.GetSlotEnumerator(mob);
+            while (slots.MoveNext(out var slot))
+            {
+                if (slotName != null && slot.ID != slotName)
+                    continue;
 
-            if (slot.ContainedEntity != null)
-                continue;
+                if (slot.ContainedEntity != null)
+                    continue;
 
-            if (_inventory.TryEquip(mob, spawn, slot.ID, true))
-                return;
+                if (_inventory.TryEquip(mob, spawn, slot.ID, true))
+                    return;
+            }
         }
 
         if (tryStorage && TryInsertItemInStorage(mob, spawn))
