@@ -151,6 +151,7 @@ namespace Content.Client.Input
             var xenonid = contexts.New("xenonid", "human");
             xenonid.AddFunction(CMKeyFunctions.CMXenoWideSwing);
             xenonid.AddFunction(CMKeyFunctions.CMXenoPing);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoRest);
         }
     }
 }

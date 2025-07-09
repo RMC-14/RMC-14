@@ -7,6 +7,12 @@
   - "RMCAdminFax"
   - "AdminPDA"
   - "AdminHypo"
+  - "RMCPlushieAlec"
+  - "RMCPlushieNyx"
+  - "RMCPlushieXippy"
+  - "RMCPlushieProvost"
+  - "RMCPlushieCrow"
+  - "RMCPlushieMotivationalMoth"
 
 - id: "AllowApprovedDeniedStamps" # These two stamps specifically are not a problem and should be left untouched.
   type: "Whitelist"

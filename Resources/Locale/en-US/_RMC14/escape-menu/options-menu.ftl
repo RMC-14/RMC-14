@@ -16,6 +16,6 @@ ui-options-function-rmc-interact-with-other-hand = Interact with other hand
 ui-options-function-rmc-rest = Rest
 
 ui-options-header-rmc-xeno = Xenonid
-
-ui-options-function-cm-xeno-wide-swing = Xenonid thrust attack
 ui-options-function-cm-xeno-ping = Xeno Ping
+ui-options-function-rmc-xeno-rest = Xenonid Rest
+ui-options-function-cm-xeno-wide-swing = Xenonid thrust attack

@@ -1,0 +1,101 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorArmyReservist
+  name: rmc-job-name-survivor-army-reservist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorArmyReservist
+  ranks:
+    RMCRankSPPStrsh:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 630000 # 175 hours
+    RMCRankSPPSMlts:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
+    RMCRankSPPMlts: []
+  startingGear: RMCGearSurvivorArmyReservist
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: Army Reservist (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillJtac: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetArmyReservist
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: rmc-job-prefix-army-reservist
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorArmyReservist
+  equipment:
+    suitstorage: RMCWeaponRifleAK4047
+    jumpsuit: RMCJumpsuitSPPArmy
+    shoes: CMBootsBlackFilled
+    gloves: RMCHandsVeteran
+    belt: RMCBeltSPPBrownHalfFill
+    back: RMCSatchelLightpack5Slot
+    ears: RMCHeadsetSPP
+    id: RMCIDSPP
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidSPPArmyFill
+  storage:
+    back:
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorArmyReservist
+  name: army reservist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMJobSurvivorArmyReservist
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorArmyReservist
+  isHumanoid: true
+
+- type: entity
+  id: RMCGearSurvivorPresetArmyReservist
+  name: people's armed police officer preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ RMCGrenadeMolotov ]
+    - [ CMPackFlare ]
+    - [ WeaponNailgun ]
+    - [ RMCFireAxe ]
+    - [ RMCWelderIndustrial ]
+    - [ CMAdvFirstAidKitFilled ]
+    randomOutfits:
+    - [ RMCArmorHelmetSPPArmy, RMCArmorSPPArmy, RMCMaskBalaclava]
+    - [ RMCArmorHelmetSPPArmy, RMCOuterClothingExternalWebbingBrown, RMCMaskBalaclava]
+    - [ RMCArmorHelmetSPPArmy, RMCMaskGasSPP]
+    - [ RMCHeadCapSPPBeretArmy, RMCMaskGasSPP]
+

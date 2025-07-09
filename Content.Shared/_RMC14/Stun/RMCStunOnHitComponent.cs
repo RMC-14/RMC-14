@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Stun;
 public sealed partial class RMCStunOnHitComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityCoordinates? ShotFrom;
+    public MapCoordinates? ShotFrom;
 
     [DataField, AutoNetworkedField]
     public float MaxRange = 2.5f;
