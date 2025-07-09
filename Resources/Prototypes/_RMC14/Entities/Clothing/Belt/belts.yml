@@ -492,7 +492,6 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - RMCMagazineSmartGun
-      # TODO: flare gun
       - Flare
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
@@ -1509,11 +1508,73 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
-- type: Tag
-  id: RMCNailgunHolster
+- type: entity
+  parent: RMCBeltBaseStorageNoVisuals
+  id: RMCM82FHolster
+  name: M276 pattern M82F flare gun holster rig
+  description: he M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the M82F flare gun and can additionally store up to 16 flares.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m82f
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: -0.03625, -0.08
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
+      state: icon-front
+      map: [ "holstered" ]
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
+      state: half
+      map: [ "openLayer" ]
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
+      state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,17,3 # 18 slots
+    whitelist:
+      tags:
+      - RMCFlareGun
+      - RMCFlare
+      - RMCFlareCAS
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - RMCFlareGun
+    - popup: rmc-storage-limit-max-loaders
+      count: 16
+      whitelist:
+        tags:
+        - RMCFlare
+        - RMCFlareCAS
+  - type: CMHolster
+    whitelist:
+      tags:
+      - RMCFlareGun
 
-- type: Tag
-  id: RMCBeltMedical
+- type: entity
+  parent: RMCM82FHolster
+  id: RMCM82FHolsterFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolM82F
+      amount: 1
+    - id: CMFlare
+      amount: 16
 
 - type: entity
   parent: CMBeltMarine
@@ -1537,3 +1598,12 @@
     contents:
     - id: RMCMagazineRifleAK4047
       amount: 2
+
+- type: Tag
+  id: RMCNailgunHolster
+
+- type: Tag
+  id: RMCBeltMedical
+
+- type: Tag
+  id: RMCM82FHolster

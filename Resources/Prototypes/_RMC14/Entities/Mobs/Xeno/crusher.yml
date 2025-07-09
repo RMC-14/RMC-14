@@ -110,6 +110,8 @@
   - type: TantrumSpeedBuff
   - type: FixedIdentity
     name: cm-job-name-xeno-crusher
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
 
 - type: entity
   parent: CMXenoCrusherBase
