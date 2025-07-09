@@ -135,7 +135,19 @@
     - [ CMJumpsuitTShirtGray, RMCShoesWeYaStompers, RMCOuterClothingExternalWebbing ] # Protagonist
     rareItemCoefficent: 444
     rareItems:
-      hi: [ 1, 4 ] # 2%
+      RMCMotionDetectorCompact: [ 1, 4 ] # 2%
+      RMCDefibrillatorCompact: [ 5, 8 ] # 2%
+      RMCTankFlamerImprovised: [ 9, 16 ] # 4%
+      CMPacketGrenadeHighExplosiveFilled: [ 17, 26 ] # 5%
+      CMTraumaKit10: [ 27, 38 ] # 6% TODO upgraded trauma kit
+      CMBurnKit10: [ 39, 54 ] # 8% TODO upgraded ointment
+      RMCAttachmentSuppressor: [ 55, 74 ] # 10% TODO Attachments box
+      RMCPouchFirstAidERTFill: [ 75, 104 ] # 15%
+      CMPacketGrenadeFragOldFilled: [ 105, 144 ] # 20%
+      RMCPowerCellHyper: [ 145, 194 ] # 25%
+      RMCAttachmentFlashlightGrip: [ 195, 254 ] # 30%
+      CMSheetMetal30: [ 255, 324 ] # 35%
+      RMCBinocularsCiv: [ 325, 444 ] # 45%
 
 - type: entity
   parent: MarkerBase
