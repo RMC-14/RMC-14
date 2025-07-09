@@ -81,6 +81,7 @@ public abstract class SharedRankSystem : EntitySystem
     public string? GetRankString(EntityUid uid, bool isShort = false, bool hasPaygrade = false)
     {
         var rank = GetRank(uid);
+
         if (rank == null)
             return null;
 
@@ -96,19 +97,16 @@ public abstract class SharedRankSystem : EntitySystem
             {
                 Gender.Female => rank.FemalePrefix,
                 Gender.Male => rank.MalePrefix,
-                Gender.Epicene or Gender.Neuter or _ => rank.Prefix
+                _ => rank.Prefix,
             };
 
             return genderPrefix;
         }
-        else if (hasPaygrade && rank.Paygrade != null)
-        {
-            return "(" + rank.Paygrade + ")" + " " + rank.Name;
-        }
-        else
-        {
-            return rank.Name;
-        }
+
+        if (hasPaygrade && rank.Paygrade != null)
+            return $"({Loc.GetString(rank.Paygrade)}) {Loc.GetString(rank.Name)}";
+
+        return rank.Name;
     }
 
     /// <summary>
