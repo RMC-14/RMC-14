@@ -853,7 +853,7 @@
   description: The non-detachable stock of a M37-14 pump shotgun.
   components:
   - type: Sprite
-    state: M3717Stock
+    state: M3714Stock
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
