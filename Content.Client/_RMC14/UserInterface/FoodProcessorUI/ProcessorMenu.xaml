@@ -4,7 +4,7 @@
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:style="clr-namespace:Content.Client.Stylesheets"
     Title="{Loc 'processor-menu-title'}"
-    MinWidth="512"
+    MinWidth="312"
     MinSize="512 256">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal"  >
@@ -32,7 +32,7 @@
             </PanelContainer>
             <BoxContainer
                 Orientation="Vertical"
-                MinWidth="170"
+                MinWidth="60"
                 Margin="10 10"
                 VerticalExpand="True"
                 HorizontalExpand="True">
@@ -51,37 +51,32 @@
                                 Modulate="#FFFFFF"
                                 VAlign="Center" />
                             <BoxContainer  Orientation="Vertical">
-                                <Button
-                                    Name="InstantCookButton"
-                                    Access="Public"
-                                    Text="{Loc 'processor-menu-instant-button'}"
-                                    StyleClasses="OpenLeft"
-                                    ToggleMode="True"
-                                    Margin="0 0 2 0"
-                                    TextAlign="Center" />
                                 <GridContainer
                                     Name="CookTimeButtonVbox"
                                     HSeparationOverride="1"
                                     VSeparationOverride="1"
                                     HorizontalExpand="True"
                                     Columns="3"
-                                    Margin="0"
+                                    Margin="0 50 0 0"
                                     Access="Public">
                                     <!-- Cook time buttons are added here by code -->
                                 </GridContainer>
                                 <BoxContainer
                                     Orientation="Vertical"
                                     Align="Center"
-                                    SizeFlagsStretchRatio="3">
+                                    SizeFlagsStretchRatio="2">
+                                    <Label Text="{Loc processor-menu-confirmation-text}" HorizontalAlignment="Center"/>
                                     <Control MinSize="0 15" />
                                     <Button
                                         Name="StartButton"
                                         Access="Public"
+                                        Margin="0 10 0 0"
                                         Text="{Loc 'processor-menu-start-button'}"
                                         StyleClasses="ButtonColorGreen"
                                         TextAlign="Center" />
                                     <Button
                                         Name="EjectButton"
+                                        Margin="0 30 0 0"
                                         Access="Public"
                                         Text="{Loc 'processor-menu-eject-all-text'}"
                                         ToolTip="{Loc 'processor-menu-eject-all-tooltip'}"
