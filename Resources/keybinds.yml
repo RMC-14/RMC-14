@@ -636,7 +636,8 @@ binds:
   mod1: Shift
 - function: CMXenoPing
   type: State
-  key: N
+  key: F
+  mod1: Shift
 - function: RMCXenoRest
   type: State
   key: R
