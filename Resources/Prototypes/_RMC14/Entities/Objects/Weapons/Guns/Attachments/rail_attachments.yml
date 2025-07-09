@@ -336,6 +336,28 @@
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentFP9000Scope # mini
+  name: FP9000 2x telescopic mini-scope
+  description: Scope for the FN FP9000 SMG. Fixed at a modest 2x zoom.
+  components:
+  - type: Sprite
+    state: miniscope_fp9000
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentS42xTelescopicMiniscope
+  - type: AttachableVisuals
+  - type: AttachableToggleable
+    breakOnMove: false
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: miniscope_fp9000
+    actionName: Look through the FP9000 2x telescopic mini-scope
+    actionDesc: Fixed at a modest 2x zoom.
+  - type: AttachableToggleableSimpleActivate
+
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
   id: RMCAttachmentHuntingScope
   name: 2x hunting mini-scope
   description: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
@@ -619,3 +641,6 @@
 
 - type: Tag
   id: RMCAttachmentHuntingScope
+
+- type: Tag
+  id: RMCAttachmentFP9000Scope
