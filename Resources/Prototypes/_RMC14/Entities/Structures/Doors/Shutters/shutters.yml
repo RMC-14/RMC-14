@@ -73,7 +73,6 @@
     activeLoad: 20
     channel: Environment
   - type: RMCOpenOnAlertLevel
-  - type: RMCDoor
 
 - type: entity
   parent: RMCShutterBaseIndestructible
