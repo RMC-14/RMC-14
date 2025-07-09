@@ -93,3 +93,15 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Misc/sandals.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Misc/sandals.rsi
+
+# Snow
+- type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesSnow
+  name: snow boots
+  description: When your feet are as cold as your heart
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
