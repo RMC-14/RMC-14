@@ -247,6 +247,15 @@
       # TODO RMC14 m60 mag
   - type: FixedItemSizeStorage
 
+- type: entity
+  parent: RMCPouchMagazine
+  id: RMCPouchMagazineFilledMP5
+  suffix: Filled, MP5
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGMP5
+      amount: 3
 
 # Large Magazine Pouch
 - type: entity
@@ -367,6 +376,20 @@
           - RMCShellShotgun
           - RMCCartridge458SOCOM
 
+- type: entity
+  parent: RMCPouchShotgun
+  id: RMCPouchShotgunFilledConstable
+  suffix: Filled, Constable
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunSlugs
+      amount: 2
+    - id: CMShellShotgunBuckshot
+      amount: 1
+    - id: CMShellShotgunBeanbag
+      amount: 1
+
 # Large Shotgun Shell Pouch
 - type: entity
   parent: RMCPouchShotgun
@@ -405,6 +428,7 @@
 - type: entity
   parent: RMCPouchShotgunLarge
   id: RMCPouchShotgunLargeBeanbag
+  suffix: Filled, Beanbag
   components:
   - type: StorageFill
     contents:
@@ -414,6 +438,7 @@
 - type: entity
   parent: RMCPouchShotgunLarge
   id: RMCPouchShotgunLargeSlugs
+  suffix: Filled, Slugs
   components:
   - type: StorageFill
     contents:

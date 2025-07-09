@@ -93,3 +93,15 @@
   - RMCAccessTSEPA
   - RMCAccessTSEPABrig
   - RMCAccessTSEPAInspector
+
+- type: accessGroup
+  id: ColonistTSEPAConstable
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+  - CMAccessColonyCommand
+  - RMCAccessTSEPA

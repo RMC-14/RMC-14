@@ -238,3 +238,14 @@
     contents:
     - id: RMCMagazineRifleMAR40
       amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterPistolTSEFilledL54
+  suffix: TSE, Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolL54
+      amount: 6
+    - id: RMCWeaponPistolL54
