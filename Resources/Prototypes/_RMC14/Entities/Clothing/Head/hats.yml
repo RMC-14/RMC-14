@@ -581,6 +581,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
 
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieTSE
+  name: royal marine beanie
+  description: A standard military beanie.
+  suffix: TSE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tse.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tse.rsi
+
 # Radiation Suit
 
 - type: entity
@@ -619,12 +631,21 @@
   parent: RMCHeadCapGrey
   id: RMCHeadCapFerret
   name: ferret heavy industries trucker hat
-  description: It's a baseball hat in a tasteful grey color.
+  description: It's a trucker hat. They're becoming collector items since Ferret went under in 2080.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Soft/greysoft.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
   - type: Clothing
-    sprite: Clothing/Head/Soft/greysoft.rsi
-  - type: ItemCamouflage
-    camouflageVariations: {}
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ferret_cap.rsi
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapTruckerRed
+  name: red trucker hat
+  description: It's a red trucker hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
 
