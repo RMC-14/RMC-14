@@ -16,7 +16,8 @@
     RMCRankTSEPAConstable: []
   startingGear: RMCGearSurvivorHybrisaTSEPAConstable
   accessGroups:
-  - ColonistTSEPAConstable
+  - ColonistAllAccessNoArmory
+  - ColonistTSEPA
   spawnMenuRoleName: TSEPA Constable (Hybrisa Survivor)
   icon: "RMCJobIconTSEPAConstable"
   hasIcon: true
