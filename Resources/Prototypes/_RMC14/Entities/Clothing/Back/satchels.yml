@@ -530,6 +530,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
+  - type: Storage
+    grid:
+    - 0,0,20,1 # 21
 
 - type: entity
   parent: RMCSatchelLightpack

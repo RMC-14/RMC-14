@@ -58,8 +58,8 @@
   - type: SurvivorPreset
     primaryWeapons: [ ]
     randomOutfits:
-    - [ RMCHeadCapWestonYamadaDark, CMArmorM4PMCCorporate, RMCJumpsuitVeteranPMCHybrisa ]
-    - [ RMCArmorHelmetPMCCorporateHybrisa, CMArmorM4PMCCorporate, RMCJumpsuitVeteranPMCHybrisa ]
+    - [ RMCHeadCapWestonYamadaDark, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
+    - [ RMCArmorHelmetPMCCorporateHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
     - [ RMCArmorHelmetPMCCorporateLeadHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisaLead ]
     randomGearOther:
     -
