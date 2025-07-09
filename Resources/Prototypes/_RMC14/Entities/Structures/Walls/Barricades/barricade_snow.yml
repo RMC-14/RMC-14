@@ -32,7 +32,7 @@
   - type: InteractionOutline
   - type: NailgunRepairable
     # cm13 max_health%: 1
-    repairSnow: 75
+#    repairSnow: 75
   - type: DamageVisuals
     thresholds: [4, 8, 12]
     damageDivisor: 19

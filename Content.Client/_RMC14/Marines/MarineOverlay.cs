@@ -1,10 +1,12 @@
 using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
+using Content.Shared.ParaDrop;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -39,6 +41,8 @@ public sealed class MarineOverlay : Overlay
     private readonly EntityQuery<FireteamMemberComponent> _fireteamMemberQuery;
     private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
     private readonly EntityQuery<ShowMarineIconsComponent> _marineIconsQuery;
+    private readonly EntityQuery<ParaDroppingComponent> _paraDroppingQuery;
+    private readonly EntityQuery<CrashLandingComponent> _crashLandingQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -57,6 +61,8 @@ public sealed class MarineOverlay : Overlay
         _fireteamMemberQuery = _entity.GetEntityQuery<FireteamMemberComponent>();
         _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
         _marineIconsQuery = _entity.GetEntityQuery<ShowMarineIconsComponent>();
+        _paraDroppingQuery = _entity.GetEntityQuery<ParaDroppingComponent>();
+        _crashLandingQuery = _entity.GetEntityQuery<CrashLandingComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("shaded").Instance();
     }
@@ -126,6 +132,14 @@ public sealed class MarineOverlay : Overlay
                 var texture = _sprite.Frame0(icon.Icon);
                 var yOffset = 0.1f + (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter;
                 var xOffset = 0.1f + (bounds.Width + sprite.Offset.X) / 2f - (float)texture.Width / EyeManager.PixelsPerMeter;
+
+                //RMC14
+                if (_crashLandingQuery.HasComp(uid) || _paraDroppingQuery.HasComp(uid))
+                {
+                    yOffset = 0.1f + sprite.Offset.Y;
+                    xOffset = 0.1f + sprite.Offset.X;
+                }
+
                 var position = new Vector2(xOffset, yOffset);
                 if (icon.Icon != null && icon.Background != null)
                 {
