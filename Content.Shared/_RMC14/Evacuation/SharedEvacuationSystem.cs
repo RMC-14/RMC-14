@@ -16,7 +16,9 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
 using Content.Shared.UserInterface;
@@ -26,6 +28,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -47,6 +50,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
     [Dependency] private readonly SharedHyperSleepChamberSystem _hyperSleep = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
@@ -655,12 +659,31 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var query = EntityQueryEnumerator<DetonatingEvacuationComputerComponent>();
         while (query.MoveNext(out var uid, out var detonating))
         {
+            if (Transform(uid).GridUid is not { } grid)
+                continue;
+
+            if (!TryComp(grid, out MapGridComponent? gridComp))
+                continue;
+
             if (!detonating.Detonated && time >= detonating.DetonateAt)
             {
                 detonating.Detonated = true;
                 Dirty(uid, detonating);
 
-                _rmcExplosion.TriggerExplosive(uid, delete: false);
+                var enumerator = _mapSystem.GetAllTilesEnumerator(grid, gridComp);
+                while (enumerator.MoveNext(out var tile))
+                {
+                    // Find an available tile that isn't blocked
+                    if (!_mapSystem.TryGetTileRef(grid, gridComp, tile.Value.GridIndices, out var tileRef))
+                        continue;
+
+                    if (tileRef.IsSpace() || _turf.IsTileBlocked(tileRef, CollisionGroup.Impassable))
+                        continue;
+
+                    var mapCoords = _mapSystem.GridTileToWorld(uid, gridComp, tile.Value.GridIndices);
+                    _rmcExplosion.QueueExplosion(mapCoords, "RMC", 100, 25, 90, uid);
+                    break;
+                }
             }
 
             if (!detonating.Ejected && time >= detonating.EjectAt)
@@ -668,20 +691,18 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 detonating.Ejected = true;
                 Dirty(uid, detonating);
 
-                if (Transform(uid).GridUid is { } grid)
-                {
-                    var children = Transform(grid).ChildEnumerator;
-                    while (children.MoveNext(out var child))
-                    {
-                        _hyperSleep.EjectChamber(child);
+                var children = Transform(grid).ChildEnumerator;
 
-                        if (_doorQuery.TryComp(uid, out var door))
-                        {
-                            var evacuationDoor = EnsureComp<EvacuationDoorComponent>(uid);
-                            evacuationDoor.Locked = false;
-                            Dirty(uid, evacuationDoor);
-                            _door.TryOpen(uid, door);
-                        }
+                while (children.MoveNext(out var child))
+                {
+                    _hyperSleep.EjectChamber(child);
+
+                    if (_doorQuery.TryComp(child, out var door))
+                    {
+                        var evacuationDoor = EnsureComp<EvacuationDoorComponent>(child);
+                        evacuationDoor.Locked = false;
+                        Dirty(child, evacuationDoor);
+                        _door.TryOpen(child, door);
                     }
                 }
             }
