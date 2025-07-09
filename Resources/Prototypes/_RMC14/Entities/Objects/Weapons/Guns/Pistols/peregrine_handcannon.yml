@@ -1,8 +1,8 @@
 - type: entity
   parent: CMWeaponPistolBase
-  id: RMCWeaponPistolDeagle
-  name: desert eagle
-  description: The handcannon that needs no introduction, the Desert Eagle is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks.
+  id: RMCWeaponPistolHandcannon
+  name: peregrine handcannon
+  description: The handcannon that needs no introduction, the Peregrine Handcannon is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks.
   components:
   - type: Gun
     shotsPerBurst: 2
@@ -27,9 +27,9 @@
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 6
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon.rsi
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.75
@@ -44,8 +44,8 @@
         priority: 2
         whitelist:
           tags:
-          - RMCMagazinePistolDeagle
-        startingItem: RMCMagazinePistolDeagle
+          - RMCMagazinePistolHandcannon
+        startingItem: RMCMagazinePistolHandcannon
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -71,10 +71,10 @@
       rmc-aslot-underbarrel: 0.312, -0.25
 
 - type: entity
-  parent: RMCWeaponPistolDeagle
-  id: RMCWeaponPistolDeagleGold
-  name: golden desert eagle
-  description: A Desert Eagle anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it.
+  parent: RMCWeaponPistolHandcannon
+  id: RMCWeaponPistolHandcannonGold
+  name: golden peregrine handcannon
+  description: A Peregrine Handcannon anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it.
   components:
   - type: Corrodible
     isCorrodible: false
@@ -94,9 +94,9 @@
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 6
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle_gold.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_gold.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle_gold.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_gold.rsi
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -106,41 +106,41 @@
         priority: 2
         whitelist:
           tags:
-          - RMCMagazinePistolDeagle
-          - RMCMagazinePistolDeagleHI
-          - RMCMagazinePistolDeagleHIAP
-        startingItem: RMCMagazinePistolDeagleHI
+          - RMCMagazinePistolHandcannon
+          - RMCMagazinePistolHandcannonHI
+          - RMCMagazinePistolHandcannonHIAP
+        startingItem: RMCMagazinePistolHandcannonHI
 
 - type: entity
-  parent: RMCWeaponPistolDeagleGold
-  id: RMCWeaponPistolDeagleWinterWyvern
-  name: winter wyvern desert eagle
-  description: A Desert Eagle hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
+  parent: RMCWeaponPistolHandcannonGold
+  id: RMCWeaponPistolHandcannonWinterWyvern
+  name: winter wyvern handcannon
+  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle_winter.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deagle_winter.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
 
 - type: entity
   parent: CMBaseMagazinePistol
-  id: RMCMagazinePistolDeagle
-  name: desert eagle magazine (.50)
+  id: RMCMagazinePistolHandcannon
+  name: peregrine handcannon magazine (.50)
   description: Seven rounds of powerful 50-caliber destruction.
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - RMCMagazinePistolDeagle
+    - RMCMagazinePistolHandcannon
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgePistolDeagle
-    proto: RMCCartridgePistolDeagle
+      - RMCCartridgePistolHandcannon
+    proto: RMCCartridgePistolHandcannon
     capacity: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/deagle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/handcannon.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -149,23 +149,23 @@
 
 - type: entity
   parent: CMBaseMagazinePistol
-  id: RMCMagazinePistolDeagleHI
-  name: high impact desert eagle magazine (.50)
+  id: RMCMagazinePistolHandcannonHI
+  name: high impact peregrine handcannon magazine (.50)
   description: Seven rounds of devastatingly powerful 50-caliber destruction. The bullets are tipped with a synthesized osmium and lead alloy to stagger absolutely anything they hit. Point away from anything you value.
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - RMCMagazinePistolDeagleHI
+    - RMCMagazinePistolHandcannonHI
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgePistolDeagleHI
-    proto: RMCCartridgePistolDeagleHI
+      - RMCCartridgePistolHandcannonHI
+    proto: RMCCartridgePistolHandcannonHI
     capacity: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/deagle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/handcannon.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -176,23 +176,23 @@
 
 - type: entity
   parent: CMBaseMagazinePistol
-  id: RMCMagazinePistolDeagleHIAP
-  name: high impact armor-piercing desert eagle magazine (.50)
+  id: RMCMagazinePistolHandcannonHIAP
+  name: high impact armor-piercing peregrine handcannon magazine (.50)
   description: Seven rounds of devastatingly powerful 50-caliber destruction. Packs a devastating punch. The bullets are tipped with an osmium-tungsten carbide alloy to not only stagger but also shred through any target's armor. Issued in few numbers due to the massive production cost and worries about hull breaches. Point away from anything you value.
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - RMCMagazinePistolDeagleHIAP
+    - RMCMagazinePistolHandcannonHIAP
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgePistolDeagleHIAP
-    proto: RMCCartridgePistolDeagleHIAP
+      - RMCCartridgePistolHandcannonHIAP
+    proto: RMCCartridgePistolHandcannonHIAP
     capacity: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/deagle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/handcannon.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -202,44 +202,44 @@
       color: "#429C60"
 
 - type: entity
-  id: RMCCartridgePistolDeagle
+  id: RMCCartridgePistolHandcannon
   name: cartridge (.50)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgePistolDeagle
+    - RMCCartridgePistolHandcannon
   - type: CartridgeAmmo
-    proto: RMCBulletPistolDeagle
+    proto: RMCBulletPistolHandcannon
 
 - type: entity
-  id: RMCCartridgePistolDeagleHI
+  id: RMCCartridgePistolHandcannonHI
   name: cartridge (High Impact .50)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgePistolDeagleHI
+    - RMCCartridgePistolHandcannonHI
   - type: CartridgeAmmo
-    proto: RMCBulletPistolDeagleHI
+    proto: RMCBulletPistolHandcannonHI
 
 - type: entity
-  id: RMCCartridgePistolDeagleHIAP
+  id: RMCCartridgePistolHandcannonHIAP
   name: cartridge (High Impact Armor Piercing .50)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgePistolDeagleHIAP
+    - RMCCartridgePistolHandcannonHIAP
   - type: CartridgeAmmo
-    proto: RMCBulletPistolDeagleHIAP
+    proto: RMCBulletPistolHandcannonHIAP
 
 - type: entity
   parent: CMBulletBase
-  id: RMCBulletPistolDeagle
+  id: RMCBulletPistolHandcannon
   name: bullet (.50)
   components:
   - type: Projectile
@@ -253,7 +253,7 @@
 
 - type: entity
   parent: CMBulletBase
-  id: RMCBulletPistolDeagleHI
+  id: RMCBulletPistolHandcannonHI
   name: bullet (High Impact .50)
   components:
   - type: Projectile
@@ -270,7 +270,7 @@
 
 - type: entity
   parent: CMBulletBase
-  id: RMCBulletPistolDeagleHIAP
+  id: RMCBulletPistolHandcannonHIAP
   name: bullet (High Impact Armor Piercing .50)
   components:
   - type: Projectile
@@ -286,19 +286,19 @@
     accuracy: 70
 
 - type: Tag
-  id: RMCMagazinePistolDeagle
+  id: RMCMagazinePistolHandcannon
 
 - type: Tag
-  id: RMCMagazinePistolDeagleHI
+  id: RMCMagazinePistolHandcannonHI
 
 - type: Tag
-  id: RMCMagazinePistolDeagleHIAP
+  id: RMCMagazinePistolHandcannonHIAP
 
 - type: Tag
-  id: RMCCartridgePistolDeagle
+  id: RMCCartridgePistolHandcannon
 
 - type: Tag
-  id: RMCCartridgePistolDeagleHI
+  id: RMCCartridgePistolHandcannonHI
 
 - type: Tag
-  id: RMCCartridgePistolDeagleHIAP
+  id: RMCCartridgePistolHandcannonHIAP
