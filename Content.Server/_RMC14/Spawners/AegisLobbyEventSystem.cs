@@ -10,6 +10,8 @@ using Content.Shared.GameTicking;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 using Content.Server.GameTicking;
+using Robust.Shared.Random;
+using Robust.Shared.Spawners;
 
 namespace Content.Server._RMC14.Spawners;
 
@@ -20,6 +22,8 @@ public sealed class AegisLobbyEventSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private TimeSpan? _scheduledEventTime = null;
     private string _scheduledMessage = string.Empty;
@@ -70,7 +74,7 @@ public sealed class AegisLobbyEventSystem : EntitySystem
     {
         _scheduledMessage = message;
         _eventExecuted = false;
-        
+
         // Check if we're currently in a round vs in lobby
         if (_gameTicker.RunLevel == GameRunLevel.InRound)
         {
@@ -79,7 +83,7 @@ public sealed class AegisLobbyEventSystem : EntitySystem
             _scheduledEventTime = null; // Cancel scheduling
             return;
         }
-        
+
         // We're in lobby, schedule for next round start + 1 minute
         // Use a marker value that indicates scheduling is pending (not executed yet)
         _scheduledEventTime = TimeSpan.FromSeconds(-1); // Will be set to actual time when round starts
@@ -129,15 +133,36 @@ public sealed class AegisLobbyEventSystem : EntitySystem
         // Send fax to Marine High Command
         SendAegisLobbyFax(systemManager, entityManager, _scheduledMessage);
 
-        // Spawn and send the Aegis ID card
-        var idItem = entityManager.SpawnEntity("RMCIDCardAegis", MapCoordinates.Nullspace);
-        entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(idItem);
+        // Find and spawn at a random AEGIS spawner location, just like AegisSpawnerSystem does
+        var aegisSpawners = new List<(EntityUid Uid, AegisSpawnerComponent Component)>();
 
-        // Spawn and send the Powerloader pamphlet
-        var pamphletItem = entityManager.SpawnEntity("CMPamphletPowerloader", MapCoordinates.Nullspace);
-        entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(pamphletItem);
+        // Collect all valid AEGIS spawners
+        var aegisQuery = EntityQueryEnumerator<AegisSpawnerComponent>();
+        while (aegisQuery.MoveNext(out var uid, out var spawner))
+        {
+            if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
+                continue;
 
-        Log.Info("AEGIS lobby event executed: announcements sent, fax delivered, AEGIS ID card and pamphlet sent through ASRS");
+            aegisSpawners.Add((uid, spawner));
+        }
+
+        // Spawn the AEGIS lobby crate at a random spawner location
+        if (aegisSpawners.Count > 0)
+        {
+            var selectedSpawner = _random.Pick(aegisSpawners);
+            var coordinates = _transform.GetMoverCoordinates(selectedSpawner.Uid);
+            var aegisCrate = entityManager.SpawnEntity("RMCCrateAegisLobby", coordinates);
+            entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(aegisCrate);
+
+            Log.Info($"AEGIS lobby event executed: announcements sent, fax delivered, and AEGIS intelligence crate spawned at {_transform.GetWorldPosition(selectedSpawner.Uid)} (selected 1 out of {aegisSpawners.Count} spawners)");
+        }
+        else
+        {
+            // Fallback to nullspace if no spawners found (shouldn't happen in normal gameplay)
+            var aegisCrate = entityManager.SpawnEntity("RMCCrateAegisLobby", MapCoordinates.Nullspace);
+            entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(aegisCrate);
+            Log.Warning("AEGIS lobby event executed but no AEGIS spawners found on map - crate spawned via ASRS delivery as fallback");
+        }
     }
 
     private void SendAegisLobbyFax(IEntitySystemManager systemManager, IEntityManager entityManager, string message)
@@ -149,7 +174,7 @@ public sealed class AegisLobbyEventSystem : EntitySystem
         {
             if (faxComp.FaxName == "CIC")
             {
-                var aegisPaper = entityManager.SpawnEntity("CMPaperAegisInfoFax", MapCoordinates.Nullspace);
+                var aegisPaper = entityManager.SpawnEntity("CMPaperAegisLobbyInfoFax", MapCoordinates.Nullspace);
 
                 if (entityManager.TryGetComponent<PaperComponent>(aegisPaper, out var paperComp) &&
                     entityManager.TryGetComponent<MetaDataComponent>(aegisPaper, out var metaComp))
@@ -158,7 +183,7 @@ public sealed class AegisLobbyEventSystem : EntitySystem
                         paperComp.Content,
                         metaComp.EntityName,
                         null, // No label
-                        "CMPaperAegisInfoFax",
+                        "CMPaperAegisLobbyInfoFax",
                         paperComp.StampState,
                         paperComp.StampedBy
                     );
