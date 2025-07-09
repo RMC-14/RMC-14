@@ -1,3 +1,4 @@
+# Large general pouch
 - type: entity
   parent: RMCPouchGeneralLarge
   id: RMCPouchGeneralLargeBureauObserverFill
@@ -20,6 +21,7 @@
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
 
+# Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
   id: RMCPouchMagazineFilledMP5
@@ -31,9 +33,20 @@
       amount: 3
 
 - type: entity
+  parent: RMCPouchMagazine
+  id: RMCPouchMagazineFilledP90
+  suffix: Filled, P90
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGP90
+      amount: 3
+
+# Large Magazine Pouch
+- type: entity
   parent: RMCPouchMagazineLarge
   id: RMCPouchMagazineLargeMP5
-  suffix: Filled
+  suffix: Filled, MP5
   components:
   - type: StorageFill
     contents:
@@ -43,7 +56,7 @@
 - type: entity
   parent: RMCPouchMagazineLarge
   id: RMCPouchMagazineType64
-  suffix: Filled
+  suffix: Filled, Type 64
   components:
   - type: StorageFill
     contents:
@@ -53,12 +66,14 @@
 - type: entity
   parent: RMCPouchMagazinePistol
   id: RMCPouchMagazinePistolFilledMateba
+  suffix: Filled, Mateba High Impact
   components:
   - type: StorageFill
     contents:
     - id: RMCSpeedLoaderMatebaHIAP
       amount: 4
 
+# Shotgun Pouch
 - type: entity
   parent: RMCPouchShotgun
   id: RMCPouchShotgunFilledConstable
@@ -73,6 +88,7 @@
     - id: CMShellShotgunBeanbag
       amount: 1
 
+# Large Shotgun Pouch
 - type: entity
   parent: RMCPouchShotgunLarge
   id: RMCPouchShotgunLargeBeanbag
@@ -93,6 +109,7 @@
     - id: CMShellShotgunSlugs
       amount: 7
 
+# Flare Pouch
 - type: entity
   parent: RMCPouchFlare
   id: RMCPouchFlareFilled
@@ -101,6 +118,7 @@
   - type: CMItemSlots
     startingItem: CMFlare
 
+# Electronics Pouch
 - type: entity
   parent: RMCPouchElectronics
   id: RMCPouchElectronicsFill
@@ -113,6 +131,7 @@
     - id: RMCPowerCellHigh
       amount: 3
 
+# Tools Pouch
 - type: entity
   parent: RMCPouchTools
   id: RMCPouchToolsFill
@@ -155,6 +174,7 @@
     - id: RMCExplosivePlastic
       amount: 2
 
+# Smartgun Pouch
 - type: entity
   parent: RMCPouchDrumPMC
   id: RMCPouchDrumPMCFill
@@ -165,6 +185,7 @@
     - id: RMCMagazineSmartGunirradiated
       amount: 3
 
+# Survival pouch
 - type: entity
   parent: RMCPouchSurvival
   id: RMCPouchSurvivalFill

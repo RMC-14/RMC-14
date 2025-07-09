@@ -88,6 +88,14 @@
     job: CMSurvivorCorporate
 
 - type: entity
+  parent: CMIDCardLiaisonColony
+  id: RMCIDCardWeYaCorporateSecurity
+  name: we-ya corporate security ID card
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorHybrisaCorporateSecurity
+
+- type: entity
   parent: CMIDCardLiaison
   id: RMCIDCardExecutiveCorporateSpecialist
   name: executive corporate specialist ID card
