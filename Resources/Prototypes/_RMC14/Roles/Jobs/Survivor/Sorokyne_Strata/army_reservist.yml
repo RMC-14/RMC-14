@@ -67,10 +67,10 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorArmyReservist
-  name: people's armed police officer spawn point
+  name: army reservist spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMJobSurvivorArmyReservist
   - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
