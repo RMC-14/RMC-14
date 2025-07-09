@@ -9,6 +9,8 @@
   - ColonistAllAccessNoArmory
   - ColonistCorporate
   spawnMenuRoleName: We-Ya Corporate Security (Hybrisa Survivor)
+  icon: "RMCJobIconPMCGoonStandard"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:

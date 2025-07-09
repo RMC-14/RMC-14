@@ -50,7 +50,7 @@ public sealed class SurvivorSystem : EntitySystem
             var gear = _random.Pick(comp.RandomOutfits);
             foreach (var item in gear)
             {
-                Equip(mob, item, false);
+                Equip(mob, item);
             }
         }
 
@@ -114,30 +114,35 @@ public sealed class SurvivorSystem : EntitySystem
             if (slot.ContainedEntity != null)
                 continue;
 
-            if (tryStorage)
-            {
-                var backs = _inventory.GetSlotEnumerator(mob, SlotFlags.BACK);
-                while (backs.MoveNext(out var back))
-                {
-                    if (back.ContainedEntity is not { } backpack ||
-                        !TryComp(backpack, out StorageComponent? storage))
-                    {
-                        continue;
-                    }
-
-                    if (_storage.Insert(backpack, spawn, out _, storageComp: storage))
-                        return;
-                }
-            }
-
             if (_inventory.TryEquip(mob, spawn, slot.ID, true))
                 return;
         }
+
+        if (tryStorage && TryInsertItemInStorage(mob, spawn))
+            return;
 
         if (tryInHand && _hands.TryPickupAnyHand(mob, spawn))
             return;
 
         Log.Warning($"Couldn't equip {ToPrettyString(spawn)} on {ToPrettyString(mob)}");
         QueueDel(spawn);
+    }
+
+    public bool TryInsertItemInStorage(EntityUid mob, EntityUid toInsert)
+    {
+        var slots = _inventory.GetSlotEnumerator(mob, SlotFlags.BACK | SlotFlags.OUTERCLOTHING);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is not { } storageItem ||
+                !TryComp(storageItem, out StorageComponent? storage))
+            {
+                continue;
+            }
+
+            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage))
+                return true;
+        }
+
+        return false;
     }
 }
