@@ -78,7 +78,7 @@ public sealed class SurvivorSystem : EntitySystem
             var gear = _random.Pick(comp.RandomGear);
             foreach (var item in gear)
             {
-                Equip(mob, item, tryInHand: true);
+                Equip(mob, item, tryInHand: true, tryEquip: false);
             }
         }
 
@@ -92,7 +92,7 @@ public sealed class SurvivorSystem : EntitySystem
                 var gear = _random.Pick(other);
                 foreach (var item in gear)
                 {
-                    Equip(mob, item);
+                    Equip(mob, item, tryEquip: comp.TryEquipRandomOtherGear);
                 }
             }
         }

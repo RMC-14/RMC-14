@@ -46,6 +46,7 @@
     back: RMCSatchelLightpackSurvivorFill
     ears: RMCHeadsetDistressWeYa
     gloves: RMCHandsVeteran
+    belt: RMCBeltSecurityWeYaFilled
 
 - type: playTimeTracker
   id: RMCJobSurvivorHybrisaCorporateSecurity
@@ -58,11 +59,10 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    primaryWeapons: [ ]
+    primaryWeapons:
+    - [ RMCWeaponSMGP90, RMCPouchMagazineFilledP90 ]
+    primaryWeaponChance: 1
     randomOutfits:
     - [ RMCHeadCapWestonYamadaDark, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
     - [ RMCArmorHelmetPMCCorporateHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
     - [ RMCArmorHelmetPMCCorporateLeadHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisaLead ]
-    randomGearOther:
-    -
-      - [ RMCWeaponSMGP90, RMCPouchMagazineFilledP90, RMCBeltSecurityWeYaFilled ]
