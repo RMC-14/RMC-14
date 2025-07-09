@@ -1,8 +1,9 @@
 ﻿- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCWeaponRifleSSG45NoLock
   name: SSG-45 Assault Rifle
-  id: WeaponRifleSSG45
   description: Developed by Weston-Yamada as a modern successor to the aging M5 platform, the SpezialSturmGewehr is engineered for precision mid-to-long range combat. Chambered in 7x62mm caseless rounds, it offers superior stopping power and ammunition efficiency compared to the M54C MK2, while maintaining comparable performance in close-quarters engagements. Weston-Yamada’s PMC forces found the UNMC’s M54C increasingly ill-suited to their operational demands, particularly in extended-range missions where precision and firepower were paramount. This dissatisfaction prompted Weston-Yamada’s R&D division to design the SSG, tailoring it to meet the specific needs of their operatives.
+  suffix: No ID Lock
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_inhands.rsi
@@ -56,7 +57,6 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.5
     accuracyMultiplierUnwielded: 0.75
-  - type: GunIDLock
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -119,6 +119,62 @@
   - type: Tag
     tags:
     - RMCWeaponRifleSSG45
+
+- type: entity
+  parent: RMCWeaponRifleSSG45NoLock
+  id: WeaponRifleSSG45
+  suffix: Has ID Lock
+  components:
+  - type: GunIDLock
+
+- type: entity
+  parent: RMCWeaponRifleSSG45NoLock
+  id: RMCWeaponRifleSSG45NoLockStripped
+  suffix: No ID Lock, Stripped
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentSSG45Stock
+        whitelist:
+          tags:
+          - RMCAttachmentSSG45Stock
+      rmc-aslot-underbarrel:
+        startingAttachable: null
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+
+- type: entity
+  parent: RMCWeaponRifleSSG45NoLockStripped
+  id: RMCWeaponRifleSSG45Stripped
+  suffix: Has ID Lock, Stripped
+  components:
+  - type: GunIDLock
 
 - type: entity
   parent: CMMagazineRifleBase

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
@@ -67,6 +68,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruct = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private readonly ProtoId<DamageTypePrototype> _blunt = "Blunt";
 
@@ -250,7 +252,7 @@ public sealed class XenoChargeSystem : EntitySystem
         var perpendicular = _random.Prob(0.5f) ? perpendiculars.First : perpendiculars.Second;
         var diff = perpendicular.ToVec().Normalized();
 
-        _throwing.TryThrow(ent, diff, 10);
+        _throwing.TryThrow(ent, diff, compensateFriction: true);
         IncrementStages(args.Charger, -1);
 
         if (_net.IsServer)
@@ -416,12 +418,9 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(targetId);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * range;
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
-        _throwing.TryThrow(targetId, diff, 10);
+        _sizeStun.KnockBack(targetId, origin, 2, 2, knockBackSpeed: 10);
     }
 
     private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
@@ -440,7 +439,7 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
+        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false, compensateFriction: true);
     }
 
     private void OnXenoChargeStop(Entity<XenoChargeComponent> xeno, ref StopThrowEvent args)

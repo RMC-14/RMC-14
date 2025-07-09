@@ -1,0 +1,10 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaOCP-583
+  name: OCP-583
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_OCP-583.rsi
+    state: OCP-583
+  - type: Area
+    powerNet: OCP-583

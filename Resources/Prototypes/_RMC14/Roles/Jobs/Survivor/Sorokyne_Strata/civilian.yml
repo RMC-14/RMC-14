@@ -1,0 +1,112 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorSoroCivilian
+  name: rmc-job-name-survivor-soro-civilian
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSoroCivilian
+  startingGear: RMCGearSurvivorSoroCivilian
+  spawnMenuRoleName: Civilian (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetSoroCivilian
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorSoroCivilian
+  equipment:
+    head: RMCHeadCapSPPCivilianPlantWorker
+    ears: RMCHeadsetDistressSPP
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSoroCivilian
+  name: sorokyne civilian spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorSoroCivilian
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetSoroCivilian
+  name: sorokyne civilian preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomStartingGear:
+      back:
+      - CMSatchel
+      - RMCSatchelBlack
+      - RMCSatchelBlue
+      - CMSatchelEngineer
+      - CMBackpack
+      - CMBackpackEngineer
+      - RMCSatchelLightpack5Slot
+      - RMCSatchelLightpackBlack5Slot
+      outerClothing:
+      - RMCOuterClothingExternalWebbing
+      - RMCOuterClothingExternalWebbingBrown
+      - RMCOuterClothingExternalWebbingBlack
+      - RMCVestTan
+      - RMCCoatBomberRed
+      - RMCCoatBomberGrey
+      - RMCCoatBomberKhaki
+      - RMCCoatHoboBrown
+      jumpsuit:
+      - RMCJumpsuitNormCivilianBlue
+      - RMCJumpsuitNormCivilianBrown
+      - RMCJumpsuitNormCivilianLightBrown
+      - RMCJumpsuitNormCivilianGrey
+      - RMCJumpsuitNormCivilianYellow
+      - CMJumpsuitLiaisonBlue
+      - CMJumpsuitLiaisonBrown
+      - RMCJumpsuitLiaisonOrange
+      - CMJumpsuitSPPCiv1
+      - CMJumpsuitSPPCiv2
+      - CMJumpsuitSPPCiv3
+      - CMJumpsuitSPPCiv4
+      - RMCJumpsuitCivilianGreen
+      - RMCJumpsuitCivilianBlue
+      - RMCJumpsuitCivilianBrown
+      - RMCJumpsuitCivilian
+      - RMCJumpsuitCivilianRed
+      - RMCJumpsuitCivilianYellow
+      shoes:
+      - RMCShoesLaceupBrown
+      - RMCShoesLaceup
+      - RMCShoesBrown
+      - RMCShoesGreen
+      - RMCShoesRed
+      - RMCShoesBlue
+      - RMCShoesJackboots
+      - RMCBootsSPPBlackFilled
+      - RMCBootsSPPFilled
+    randomGearOther:
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]

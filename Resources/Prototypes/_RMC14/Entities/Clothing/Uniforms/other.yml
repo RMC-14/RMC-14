@@ -193,6 +193,105 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/green_utility.rsi
 
 - type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianBlue
+  name: blue utility uniform
+  description: A blue utility uniform with teal suspenders and rugged pants.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_utility.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianRed
+  name: red utility uniform
+  description: A grey utility uniform with red suspenders and blue jeans, the sign of a veteran laborer, or someone not paid by the hour.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/red_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/red_utility.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianYellow
+  name: yellow utility uniform
+  description: A grey utility uniform with yellow suspenders, made for shipside crew.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_utility.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianWhiteAlt
+  name: white jumpsuit
+  description: A white jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/white_jumpsuit_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/white_jumpsuit_alt.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianBrown
+  name: brown jumpsuit
+  description: A brown jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/brown_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianLightBrown
+  name: light brown jumpsuit
+  description: A light brown jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/lightbrown_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/lightbrown_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianGrey
+  name: grey jumpsuit
+  description: A grey jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/grey_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/grey_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianYellow
+  name: yellow jumpsuit
+  description: A yellow jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitNormCivilianBlue
+  name: blue jumpsuit
+  description: A blue jumpsuit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_jumpsuit.rsi
+
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitRedShorts
   name: red shorts
@@ -213,6 +312,39 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/chaplain_uniform.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/chaplain_uniform.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianVirologist
+  name: virologist's uniform
+  description: It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/virologists_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/virologists_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitCivilianScientist
+  name: scientist's utility jumpsuit
+  description: It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer as a scientist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/scientist_jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/scientist_jumpsuit.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitOrange
+  name: orange jumpsuit
+  description: "It's standardised prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/orange.rsi
 
 # Kutjevo
 - type: entity
@@ -294,6 +426,10 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/clf.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCCLFArmband
+    - RMCPatchCLF
 
 # TODO RMC14 - Should be surgical webbing instead
 - type: entity

@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Dodge;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
@@ -77,6 +78,13 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
                 HasComp<VictimBeingParalyzedComponent>(entity) ||
                 HasComp<XenoComponent>(entity))
             {
+                continue;
+            }
+
+            if (HasComp<SynthComponent>(entity))
+            {
+                var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", entity));
+                _popup.PopupEntity(immuneMsg, entity, entity, PopupType.SmallCaution);
                 continue;
             }
 

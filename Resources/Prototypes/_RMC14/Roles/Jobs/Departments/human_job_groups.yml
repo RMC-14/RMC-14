@@ -1,7 +1,6 @@
 ﻿- type: entity
   id: CMDepartmentsHuman
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: DepartmentGroup
     name: role-timer-human-roles
@@ -19,8 +18,7 @@
 
 - type: entity
   id: CMJobsMedical
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-medical-roles
@@ -34,8 +32,7 @@
 
 - type: entity
   id: CMJobsEngineering
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-engineering-roles
@@ -48,8 +45,7 @@
 
 - type: entity
   id: CMJobsDropship
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-dropship-roles
@@ -61,8 +57,7 @@
 
 - type: entity
   id: CMJobsDropshipPilot
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-dropship-pilot-roles
@@ -73,8 +68,7 @@
 
 - type: entity
   id: RMCJobsCorporate
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-corporate-roles
@@ -88,8 +82,7 @@
 
 - type: entity
   id: RMCJobsSurvivor
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-survivor-roles
@@ -101,6 +94,7 @@
     - CMSurvivorDoctor
     - CMSurvivorEngineer
     - CMSurvivorSecurity
+    - CMSurvivorScientist
     - CMSurvivorCorporate
     - RMCSurvivorCommandingOfficer
     # Chance's Claim
@@ -120,11 +114,21 @@
     - CMSurvivorUNPeacekeeper
     - CMSurvivorICB
     - RMCSurvivorCommanderNewVaradero
+    # Sorokyne Strata
+    - CMJobSurvivorInfrastructureEngineer
+    - CMJobSurvivorReactorTechnician
+    - CMJobSurvivorArmedPoliceOfficer
+    - CMJobSurvivorArmyReservist
+    - CMJobSurvivorMoHDoctor
+    - CMJobSurvivorCECResearcher
+    - CMJobSurvivorSoroCivilian
+    - CMJobSurvivorFireProtectionSpecialist
+    - CMJobSurvivorSoroMiner
+    - CMJobSurvivorHalcyonDynamicsLiaison
 
 - type: entity
   id: CMJobsSurvivorCivilian
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-civilian-survivor-roles
@@ -133,11 +137,13 @@
     - CMSurvivor
     - CMSurvivorBeachBum
     - CMSurvivorMiner
+    - CMJobSurvivorSoroCivilian
+    - CMJobSurvivorSoroMiner
+    - CMJobSurvivorFireProtectionSpecialist
 
 - type: entity
   id: CMJobsSurvivorEngineer
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-engineer-survivor-roles
@@ -146,11 +152,12 @@
     - CMSurvivorEngineer
     - CMSurvivorTechnician
     - CMSurvivorCargoTechnician
+    - CMJobSurvivorReactorTechnician
+    - CMJobSurvivorInfrastructureEngineer
 
 - type: entity
   id: CMJobsSurvivorMedical
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-medical-survivor-roles
@@ -158,11 +165,11 @@
     jobs:
     - CMSurvivorDoctor
     - CMSurvivorMedicalTechnician
+    - CMJobSurvivorMoHDoctor
 
 - type: entity
   id: CMJobsSurvivorCorporate
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-corporate-survivor-roles
@@ -170,11 +177,11 @@
     jobs:
     - CMSurvivorCorporate
     - CMSurvivorICB
+    - CMJobSurvivorHalcyonDynamicsLiaison
 
 - type: entity
   id: CMJobsSurvivorSecurity
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-security-survivor-roles
@@ -182,11 +189,23 @@
     jobs:
     - CMSurvivorSecurity
     - CMSurvivorUNPeacekeeper
+    - CMJobSurvivorArmedPoliceOfficer
+    - CMJobSurvivorArmyReservist
+
+- type: entity
+  id: CMJobsSurvivorScientist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-security-scientist-roles
+    color: White
+    jobs:
+    - CMSurvivorScientist
+    - CMJobSurvivorCECResearcher
 
 - type: entity
   id: CMJobsSurvivorCommander
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-commander-survivor-roles

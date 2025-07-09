@@ -39,7 +39,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
   greeting: rmc-job-greeting-survivor
@@ -72,15 +72,14 @@
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSurvivor
   name: survivor spawn point
+  suffix: Job Spawn, Main
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
   parent: CMGuidebookRole
@@ -106,7 +105,7 @@
     - [ CMPackFlare ]
     - [ WeaponNailgun ]
     - [ RMCFireAxe ]
-    - [ CMWelder ] # TODO RMC14 industrial welder
+    - [ RMCWelderIndustrial ]
     - [ CMAdvFirstAidKitFilled ]
     randomWeapon:
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]

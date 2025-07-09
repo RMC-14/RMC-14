@@ -82,8 +82,10 @@ public sealed class TackleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (tracker.Count < tackle.Min ||
-            tracker.Count < _random.Next(tackle.Min, tackle.Max + 1))
+        var random = _random.NextFloat(0, 1);
+
+        if ((tracker.Count < tackle.Min || tackle.Chance < random) &&
+            tracker.Count < tackle.Max)
         {
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tried to tackle {ToPrettyString(target)}.");
 
