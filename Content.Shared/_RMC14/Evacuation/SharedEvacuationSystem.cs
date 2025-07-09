@@ -50,7 +50,6 @@ public abstract class SharedEvacuationSystem : EntitySystem
     [Dependency] private readonly SharedHyperSleepChamberSystem _hyperSleep = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
@@ -665,25 +664,15 @@ public abstract class SharedEvacuationSystem : EntitySystem
             if (!TryComp(grid, out MapGridComponent? gridComp))
                 continue;
 
+            var gridTransform = Transform(grid);
+
             if (!detonating.Detonated && time >= detonating.DetonateAt)
             {
                 detonating.Detonated = true;
                 Dirty(uid, detonating);
 
-                var enumerator = _mapSystem.GetAllTilesEnumerator(grid, gridComp);
-                while (enumerator.MoveNext(out var tile))
-                {
-                    // Find an available tile that isn't blocked
-                    if (!_mapSystem.TryGetTileRef(grid, gridComp, tile.Value.GridIndices, out var tileRef))
-                        continue;
-
-                    if (tileRef.IsSpace() || _turf.IsTileBlocked(tileRef, CollisionGroup.Impassable))
-                        continue;
-
-                    var mapCoords = _mapSystem.GridTileToWorld(uid, gridComp, tile.Value.GridIndices);
-                    _rmcExplosion.QueueExplosion(mapCoords, "RMC", 100, 25, 90, uid);
-                    break;
-                }
+                var coordinates = _transform.ToMapCoordinates(gridTransform.Coordinates);
+                _rmcExplosion.QueueExplosion(coordinates, "RMC", 200, 100, 25, uid, canCreateVacuum: false);
             }
 
             if (!detonating.Ejected && time >= detonating.EjectAt)
@@ -691,7 +680,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 detonating.Ejected = true;
                 Dirty(uid, detonating);
 
-                var children = Transform(grid).ChildEnumerator;
+                var children = gridTransform.ChildEnumerator;
 
                 while (children.MoveNext(out var child))
                 {
