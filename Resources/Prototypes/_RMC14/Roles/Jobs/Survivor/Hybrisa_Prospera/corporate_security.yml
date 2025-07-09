@@ -30,7 +30,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - TSE
+      - WeYa
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
