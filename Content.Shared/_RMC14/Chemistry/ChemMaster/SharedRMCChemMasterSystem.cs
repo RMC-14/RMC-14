@@ -226,8 +226,8 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         var removed = beakerSolution.Comp.Solution.RemoveReagent(args.Reagent, args.Amount);
 
-        if (_solution.TryAddReagent(buffer.Value, args.Reagent, removed, out var accepted))
-            removed -= accepted;
+        _solution.TryAddReagent(buffer.Value, args.Reagent, removed, out var accepted);
+        removed -= accepted;
 
         if (removed > FixedPoint2.Zero)
             _solution.TryAddReagent(beakerSolution, args.Reagent, removed);
@@ -282,8 +282,8 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (!TryGetBeaker(ent, out _, out _, out var beakerSolution))
             return;
 
-        if (_solution.TryAddReagent(beakerSolution, args.Reagent, removed, out var accepted))
-            removed -= accepted;
+        _solution.TryAddReagent(beakerSolution, args.Reagent, removed, out var accepted);
+        removed -= accepted;
 
         if (removed > FixedPoint2.Zero)
             _solution.TryAddReagent(buffer.Value, args.Reagent, removed);
