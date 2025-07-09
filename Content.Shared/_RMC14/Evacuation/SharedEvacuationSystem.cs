@@ -691,7 +691,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                         var evacuationDoor = EnsureComp<EvacuationDoorComponent>(child);
                         evacuationDoor.Locked = false;
                         Dirty(child, evacuationDoor);
-                        _door.TryOpen(child, door);
+                        _door.TryOpenAndBolt(child, door);
                     }
                 }
             }
