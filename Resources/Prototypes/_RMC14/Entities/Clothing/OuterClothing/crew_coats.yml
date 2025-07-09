@@ -182,6 +182,24 @@
   name: labcoat
 
 - type: entity
+  parent: RMCLabcoat
+  id: RMCLabcoatScience
+  name: researcher's labcoat
+  description: A high-quality labcoat, seemingly worn by scholars and researchers alike. It has a distinct leathery feel to it, and goads you towards adventure.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/sciencecoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/sciencecoat.rsi
+  - type: CMArmor
+    bio: 20
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoatScience]
+  id: RMCLabcoatScienceOpened
+  name: researcher's labcoat
+
+- type: entity
   parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
   id: RMCMedicalApron
   name: medical apron

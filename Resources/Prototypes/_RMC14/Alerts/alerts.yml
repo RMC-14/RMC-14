@@ -123,6 +123,29 @@
   maxSeverity: 4
 
 - type: alert
+  id: AreaInfo
+  category: AreaInfo
+  icons:
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof0
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof1
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof2
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof3
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof4
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof3b
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roof4b
+  name: Area Info
+  description: Information of the area you are in.
+  minSeverity: 0
+  maxSeverity: 6
+  
+- type: alert
   id: RMCUnconscious
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/status.rsi
