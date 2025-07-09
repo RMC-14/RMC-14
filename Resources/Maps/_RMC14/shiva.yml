@@ -114,6 +114,10 @@ tilemap:
   716: RMCPlanetSnow2
   717: RMCPlanetSnow3
   718: RMCPlanetSnow4
+  721: CMPlanetMattedGrass
+  730: RMCPlanetIceComposite
+  734: RMCPlanetIceComposite
+  735: RMCPlanetIceComposite
 entities:
 - proto: ""
   entities:
