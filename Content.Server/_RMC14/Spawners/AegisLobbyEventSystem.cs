@@ -37,7 +37,6 @@ public sealed class AegisLobbyEventSystem : EntitySystem
 
     private void OnRoundStarting(RoundStartingEvent ev)
     {
-        // If we have a scheduled event (marked with negative value), set the execution time for 1 minute from now
         if (_scheduledEventTime != null && _scheduledEventTime.Value < TimeSpan.Zero)
         {
             _scheduledEventTime = _timing.CurTime + TimeSpan.FromMinutes(1);
@@ -87,7 +86,6 @@ public sealed class AegisLobbyEventSystem : EntitySystem
         // We're in lobby, schedule for next round start + 1 minute
         // Use a marker value that indicates scheduling is pending (not executed yet)
         _scheduledEventTime = TimeSpan.FromSeconds(-1); // Will be set to actual time when round starts
-        Log.Info($"AEGIS event scheduled for 1 minute after next round start with message: {message}");
     }
 
     /// <summary>
@@ -158,7 +156,6 @@ public sealed class AegisLobbyEventSystem : EntitySystem
         }
         else
         {
-            // Fallback to nullspace if no spawners found (shouldn't happen in normal gameplay)
             var aegisCrate = entityManager.SpawnEntity("RMCCrateAegisLobby", MapCoordinates.Nullspace);
             entityManager.EnsureComponent<RequisitionsCustomDeliveryComponent>(aegisCrate);
             Log.Warning("AEGIS lobby event executed but no AEGIS spawners found on map - crate spawned via ASRS delivery as fallback");

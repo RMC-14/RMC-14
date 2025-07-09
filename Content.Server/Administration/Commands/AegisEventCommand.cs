@@ -83,7 +83,7 @@ public sealed class AegisEventCommand : IConsoleCommand
 public sealed class AegisSpawnCommand : IConsoleCommand
 {
     public string Command => "aegis:lobby";
-    public string Description => "Schedules the AEGIS event for the next round. Announcements, fax, and ASRS delivery will happen automatically after round start.";
+    public string Description => "Schedules the AEGIS event for the next round. Announcements, fax, and ASRS delivery will happen automatically 1 minute after round starts.";
     public string Help => $"Usage: {Command} [optional message]";
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
