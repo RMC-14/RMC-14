@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/36ad51ae00f2d9b0fa750b2006e08a41ccf79f42/icons/obj/items/organs.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "heart_t1"
+        },
+        {
+            "name": "heart_t2"
+        },
+        {
+            "name": "heart_t3"
+        }
+    ]
+}

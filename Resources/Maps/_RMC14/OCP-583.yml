@@ -41471,7 +41471,7 @@ entities:
     - type: Transform
       pos: 24.5,-2.5
       parent: 23
-- proto: RMCWindowCorsatResearchHull
+- proto: RMCWindowCorsatHullResearch
   entities:
   - uid: 1908
     components:

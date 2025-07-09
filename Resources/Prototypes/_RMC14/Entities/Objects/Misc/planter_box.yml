@@ -17,6 +17,21 @@
     drawdepth: FloorTiles
     state: planter_box
   - type: Appearance
+  - type: Damageable
+    damageModifierSet: null
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: RMCPlanterBox
@@ -26,3 +41,4 @@
   components:
   - type: Sprite
     state: soil_grid
+  - type: SpriteFade

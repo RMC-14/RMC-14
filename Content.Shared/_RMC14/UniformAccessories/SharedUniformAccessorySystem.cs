@@ -171,4 +171,15 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
     {
         return user == GetNetEntity(target);
     }
+
+    public void SetAccessoriesHidden(EntityUid accessoryHolder, bool hideAccessories)
+    {
+        if (!TryComp<UniformAccessoryHolderComponent>(accessoryHolder, out var comp))
+            return;
+
+        comp.HideAccessories = hideAccessories;
+        Dirty(accessoryHolder, comp);
+
+        _item.VisualsChanged(accessoryHolder);
+    }
 }
