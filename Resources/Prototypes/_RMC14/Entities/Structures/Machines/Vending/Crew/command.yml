@@ -580,9 +580,9 @@
         points: 15
       - id: RMCSpeedLoaderMatebaHIAP
         points: 20
-      - id: RMCMagazinePistolDeagleHI
+      - id: RMCMagazinePistolHandcannonHI
         points: 15
-      - id: RMCMagazinePistolDeagleHIAP
+      - id: RMCMagazinePistolHandcannonHIAP
         points: 20
     - name: Shotgun Ammunition
       entries:
