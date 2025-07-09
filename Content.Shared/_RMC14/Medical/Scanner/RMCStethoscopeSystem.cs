@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -9,6 +10,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -20,8 +22,10 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> MedicalSkill = "RMCSkillMedical";
+    private static readonly string[] AccessorySlots = ["jumpsuit", "outerClothing"];
 
     public override void Initialize()
     {
@@ -67,18 +71,31 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     private bool HasStethoscope(EntityUid user, out EntityUid stethoscope)
     {
         stethoscope = EntityUid.Invalid;
-        if (!TryComp<HandsComponent>(user, out var hands))
-            return false;
-        var held = hands.ActiveHandEntity;
-        if (held != null && HasComp<RMCStethoscopeComponent>(held.Value))
+        if (TryComp<HandsComponent>(user, out var hands))
         {
-            stethoscope = held.Value;
-            return true;
+            var held = hands.ActiveHandEntity;
+            if (held != null && HasComp<RMCStethoscopeComponent>(held.Value))
+            {
+                stethoscope = held.Value;
+                return true;
+            }
         }
-        if (_inventorySystem.TryGetSlotEntity(user, "neck", out var neckEntity) && HasComp<RMCStethoscopeComponent>(neckEntity.Value))
+        foreach (var slot in AccessorySlots)
         {
-            stethoscope = neckEntity.Value;
-            return true;
+            if (!_inventorySystem.TryGetSlotEntity(user, slot, out var slotEntity))
+                continue;
+            if (!EntityManager.TryGetComponent(slotEntity.Value, out UniformAccessoryHolderComponent? holder))
+                continue;
+            var containerId = holder.ContainerId;
+            if (!_containerSystem.TryGetContainer(slotEntity.Value, containerId, out var container))
+                continue;
+            foreach (var accessory in container.ContainedEntities)
+            {
+                if (!HasComp<RMCStethoscopeComponent>(accessory))
+                    continue;
+                stethoscope = accessory;
+                return true;
+            }
         }
         return false;
     }
