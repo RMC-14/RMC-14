@@ -672,7 +672,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 Dirty(uid, detonating);
 
                 var coordinates = _transform.ToMapCoordinates(gridTransform.Coordinates);
-                _rmcExplosion.QueueExplosion(coordinates, "RMC", 200, 100, 25, uid, canCreateVacuum: false);
+                _rmcExplosion.QueueExplosion(coordinates, "RMC", 40, 5, 25, uid, canCreateVacuum: false);
             }
 
             if (!detonating.Ejected && time >= detonating.EjectAt)
