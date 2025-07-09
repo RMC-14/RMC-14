@@ -240,7 +240,7 @@
       amount: 5
 
 - type: entity
-  parent: CMBeltMarine
+  parent: RMCBeltHolsterPistolTSE
   id: RMCBeltHolsterPistolTSEFilledL54
   suffix: TSE, Filled, L54
   components:

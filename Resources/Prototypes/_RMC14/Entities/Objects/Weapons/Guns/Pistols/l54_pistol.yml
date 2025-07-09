@@ -9,9 +9,9 @@
     - Sidearm
     - RMCWeaponPistolL54
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/t73.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/t73.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54.rsi
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.20
   - type: MeleeWeapon
@@ -26,7 +26,7 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
-    scatterUnwielded: 5
+    scatterUnwielded: 10
     baseFireRate: 10
     burstScatterMult: 6
   - type: ItemSlots
@@ -67,7 +67,7 @@
 
 - type: entity
   parent: RMCWeaponPistolT73
-  id: RMCWeaponPistolT73Empty
+  id: RMCWeaponPistolL54Empty
   suffix: Empty
   components:
   - type: ItemSlots
