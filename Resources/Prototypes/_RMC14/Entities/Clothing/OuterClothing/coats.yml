@@ -745,6 +745,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_red.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatWaistcoat
+  name: waistcoat
+  description: For some classy, murderous fun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/waistcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/waistcoat.rsi
+
 # Snow
 
 - type: entity

@@ -238,3 +238,15 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/grey_workwear.rsi
 
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonStowaway
+  name: dirty suit
+  description: A stiff, stylish tan suit commonly worn by businessmen from the Weston-Yamada corporation. Expertly crafted to make you look like a prick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
+
+

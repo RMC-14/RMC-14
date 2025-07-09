@@ -86,6 +86,9 @@ RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
 rmc-job-name-survivor-hybrisa-civilian = Civilian
 CMJobSurvivorHybrisaCivilian = Civilian
 
+rmc-job-name-survivor-office-worker = Civilian - Office Worker
+CMJobSurvivorHybrisaOfficeWorker = Civilian - Office Worker
+
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
