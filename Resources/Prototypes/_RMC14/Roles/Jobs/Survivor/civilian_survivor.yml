@@ -135,7 +135,7 @@
     - [ CMJumpsuitTShirtGray, RMCShoesWeYaStompers, RMCOuterClothingExternalWebbing ] # Protagonist
     rareItemCoefficent: 444
     rareItems:
-      hi: [ 1, 4 ]
+      hi: [ 1, 4 ] # 2%
 
 - type: entity
   parent: MarkerBase
