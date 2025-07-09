@@ -126,8 +126,8 @@
         amount: 2
       - id: RMCBackpackRTO
         amount: 2
-      #- id: Parachute
-      #  amount: 20
+      - id: RMCParachute
+        amount: 20
       - id: RMCSatchelGrenadeSpec
         amount: 2
     - name: Belts

@@ -379,6 +379,7 @@
 - type: entity
   id: RMCAirFlare
   name: air flare
+  categories: [ HideSpawnMenu ]
   components:
   - type: PointLight
     enabled: true
@@ -391,6 +392,7 @@
 - type: entity
   id: RMCAirFlareCAS
   name: air signal flare
+  categories: [ HideSpawnMenu ]
   components:
   - type: PointLight
     enabled: true
