@@ -93,4 +93,5 @@
         key: Unconscious
         component: RMCUnconscious
         type: Add
-        time: 20
+        time: 10
+        refresh: false

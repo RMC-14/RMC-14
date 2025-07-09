@@ -1,0 +1,76 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorInfrastructureEngineer
+  name: rmc-job-name-survivor-infrastructure-engineer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorInfrastructureEngineer
+  startingGear: RMCGearSurvivorInfrastructureEngineer
+  accessGroups:
+  - ColonistEngi
+  spawnMenuRoleName: Infrastructure Engineer (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetInfrastructureEngineer
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorInfrastructureEngineer
+  equipment:
+    back: CMSatchelEngineer
+    shoes: CMBootsBrownFilled
+    head: RMCHardhatOrange
+    outerClothing: RMCHazardVest
+    gloves: CMHandsInsulated
+    ears: RMCHeadsetDistressSPP
+    pocket2: RMCWelderIndustrial
+  storage:
+    back:
+    - CMSheetMetal20
+    - RMCMaskGasSPP
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorInfrastructureEngineer
+  name: survivor infrastructure engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorInfrastructureEngineer
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetInfrastructureEngineer
+  name: infrastructure engineer preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCJumpsuitCivilian ]
+    - [ RMCJumpsuitCivilianBrown ]

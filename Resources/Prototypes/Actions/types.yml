@@ -41,6 +41,7 @@
     icon: { sprite: Objects/Tools/flashlight.rsi, state: flashlight }
     iconOn: { sprite: Objects/Tools/flashlight.rsi, state: flashlight-on }
     event: !type:ToggleActionEvent
+  - type: ActionBlockIfDevoured # RMC14
 
 - type: entity
   id: ActionOpenStorageImplant
@@ -348,7 +349,7 @@
   name: Toggle Paramedic Siren
   description: Toggles the paramedic siren on and off.
   components:
-  - type: InstantAction 
+  - type: InstantAction
     icon:
       sprite: Clothing/OuterClothing/Hardsuits/paramed.rsi
       state: icon-siren

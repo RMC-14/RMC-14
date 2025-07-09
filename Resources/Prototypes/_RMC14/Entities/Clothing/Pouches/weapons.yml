@@ -63,7 +63,7 @@
       state: cmateba
       map: [ "mateba_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: b92fs 
+      state: b92fs
       map: [ "b92fs_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
@@ -85,7 +85,6 @@
           tags:
           - Sidearm #Pistols
           - RMCRevolver
-#          - FlareGun
   - type: ItemMapper
     spriteLayers:
     - holstered

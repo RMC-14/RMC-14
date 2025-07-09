@@ -85,8 +85,8 @@ public sealed class RMCActionsSystem : EntitySystem
                 continue;
 
             // Same ID or primary ID found in subset of other action's ids
-            if (!((shared.Id != null && shared.Id == action.Comp.Id) ||
-                (action.Comp.Id != null && shared.Ids.Contains(action.Comp.Id.Value))))
+            if (!(shared.Id != null && shared.Id == action.Comp.Id || action.Comp.Id != null &&
+                  (shared.Ids.Contains(action.Comp.Id.Value) || shared.ActiveIds.Contains(action.Comp.Id.Value))))
             {
                 continue;
             }
@@ -165,6 +165,7 @@ public sealed class RMCActionsSystem : EntitySystem
     {
         var ev = new RMCActionUseAttemptEvent(user, target);
         RaiseLocalEvent(action, ref ev);
+
         return !ev.Cancelled;
     }
 

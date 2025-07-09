@@ -1,7 +1,6 @@
 - type: entity
   id: ActionXenoBase
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: InstantAction
     backgroundOn:

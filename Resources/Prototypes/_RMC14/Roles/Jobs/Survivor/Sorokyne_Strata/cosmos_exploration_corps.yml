@@ -1,0 +1,82 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorCECResearcher
+  name: rmc-job-name-survivor-cec-researcher
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorCECResearcher
+  startingGear: RMCGearSurvivorCECResearcher
+  accessGroups:
+  - ColonistMedical
+  spawnMenuRoleName: CEC Researcher (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCECResearcher
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorCECResearcher
+  equipment:
+    gloves: RMCHandsVeteran
+    jumpsuit: RMCJumpsuitCivilianScientist
+    outerClothing: RMCLabcoatBrown
+    mask: RMCMaskGasSPP
+    pocket2: RMCPouchMedicalFill
+  storage:
+    back:
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCECResearcher
+  name: cosmos exploration corps researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorCECResearcher
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetScientist
+  id: RMCGearSurvivorPresetCECResearcher
+  name: cosmos exploration corps researcher preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomStartingGear:
+      back:
+      - CMSatchel
+      - RMCSatchelBlack
+      - RMCSatchelBlue
+      eyes:
+      - RMCGlassesMarineRpg
+      - RMCHippieGlasses
+      - RMCHipsterGlasses
+      shoes:
+      - RMCShoesLaceup
+      - RMCShoesLaceupBrown
+      - RMCBootsSPP
+
+

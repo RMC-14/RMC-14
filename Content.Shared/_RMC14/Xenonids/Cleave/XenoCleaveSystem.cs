@@ -4,10 +4,8 @@ using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Cleave;
 
@@ -18,7 +16,6 @@ public sealed class XenoCleaveSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
@@ -56,14 +53,11 @@ public sealed class XenoCleaveSystem : EntitySystem
 
             //From fling
             var origin = _transform.GetMapCoordinates(xeno);
-            var target = _transform.GetMapCoordinates(args.Target);
-            var diff = target.Position - origin.Position;
-            diff = diff.Normalized() * flingRange;
+
+            _sizeStun.KnockBack(args.Target, origin, flingRange, flingRange, 10, true);
 
             if (_net.IsServer)
             {
-                _throwing.TryThrow(args.Target, diff, 10);
-
                 SpawnAttachedTo(xeno.Comp.FlingEffect, args.Target.ToCoordinates());
             }
         }

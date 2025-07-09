@@ -1165,3 +1165,54 @@ DrinkWineBottleFull: RMCDrinkAlcoholPurpleWine
 DrinkVodkaBottleFull: RMCDrinkAlcoholVodka
 DrinkVermouthBottleFull: RMCDrinkAlcoholVermouth
 DrinkSakeBottleFull: RMCDrinkAlcoholSake
+
+# 2025-06-12
+DrinkMelonLiquorBottleFull: RMCDrinkAlcoholMelonLiquor
+DrinkBlueCuracaoBottleFull: RMCDrinkAlcoholBlueCuracao
+
+# 2025-06-15
+ClothingOuterBioGeneral: RMCSuitBioGeneral
+ClothingHeadHatHoodBioGeneral: RMCHoodBioGeneral
+
+# 2025-06-18
+CMWebbingPouch: RMCWebbingDropPouch
+
+# 2025-06-24
+ClothingNeckStethoscope: RMCStethoscope
+
+# 2025-06-30
+ClosetL3Filled: CMClosetBioFilled
+ClosetL3VirologyFilled: CMClosetBioVirologyFilled
+ClosetL3SecurityFilled: CMClosetBioSecurityFilled
+ClosetL3JanitorFilled: CMClosetBioJanitorFilled
+ClosetL3ScienceFilled: CMClosetBioScientistFilled
+ClosetL3: CMClosetBio
+FireAxeCabinet: RMCFireAxeCabinet
+FireAxeCabinetOpen: RMCFireAxeCabinetFilled
+FireAxeCabinetFilled: RMCFireAxeCabinetFilled
+FireAxeCabinetFilledOpen: RMCFireAxeCabinetFilled
+
+# 2025-07-04
+SprayBottleSpaceCleaner: RMCSprayBottleSpaceCleaner
+WallGold: RMCWallGold
+ClosetL3Virology: CMClosetBioVirology
+ClosetL3Security: CMClosetBioSecurity
+ClosetL3Janitor: CMClosetBioJanitor
+ClosetL3Science: CMClosetBioScientist
+
+# 2025-07-05
+DrinkHotCoffee: RMCCoffeeCupFilled
+
+# 2025-07-06
+RMCWindowCorsatResearchHull: RMCWindowCorsatHullResearch
+
+# 2025-07-08
+PortableGeneratorPacman: RMCPortableGenerator
+PortableGeneratorSuperPacman: RMCPortableGenerator2
+BaseBallBat: RMCBaseballBat
+HydroponicsToolSpade: RMCToolSpade
+HydroponicsToolMiniHoe: RMCToolMiniHoe
+HydroponicsToolHatchet: RMCToolHatchet
+ClothingEyesGlassesSunglasses: RMCSunglasses
+CableTerminal: RMCCableTerminal
+ClothingEyesGlassesChemical: RMCGlassesReagentHUDGlasses

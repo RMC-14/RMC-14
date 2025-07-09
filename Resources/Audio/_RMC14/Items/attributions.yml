@@ -7,3 +7,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/60b198fcf9cb01b0dd65f9078a73a7b276179c8a/sound/effects/barbed_wire_movement.ogg"
+
+- files: ["metal_chair_clang.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/60b198fcf9cb01b0dd65f9078a73a7b276179c8a/sound/weapons/metal_chair_clang.ogg"

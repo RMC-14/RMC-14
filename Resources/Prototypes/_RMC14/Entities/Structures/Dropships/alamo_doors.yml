@@ -78,6 +78,7 @@
     openingSpriteState: pilot_door_opening
     openSpriteState: pilot_door_open
     closedSpriteState: pilot_door_closed
+    location: Cockpit
   - type: Airlock
     denySpriteState: pilot_door_deny
     powered: true
@@ -85,5 +86,29 @@
     powerLoad: 0
     needsPower: false
   - type: AccessReader
-    access: [["CMAccessPilot"]]
+    access: [["CMAccessDropship"]]
   - type: BlockTileFire
+
+- type: entity
+  parent: CMAlamoDoor
+  id: CMAlamoDoorAft
+  suffix: Aft
+  components:
+  - type: Door
+    location: Aft
+
+- type: entity
+  parent: CMAlamoDoor
+  id: CMAlamoDoorPort
+  suffix: Port
+  components:
+  - type: Door
+    location: Port
+
+- type: entity
+  parent: CMAlamoDoor
+  id: CMAlamoDoorStarboard
+  suffix: StarBoard
+  components:
+  - type: Door
+    location: Starboard

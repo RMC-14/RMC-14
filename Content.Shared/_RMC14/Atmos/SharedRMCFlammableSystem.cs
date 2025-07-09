@@ -1,10 +1,10 @@
-﻿using Content.Shared._RMC14.Armor;
+﻿using System.Linq;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
-using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Alert;
@@ -29,6 +29,7 @@ using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -63,6 +64,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     [Dependency] private readonly CMArmorSystem _armor = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
 
     private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
@@ -118,6 +120,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteOnProjectileHit(Entity<IgniteOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
     {
+        if (!CanBeIgnited(args.Target, ent))
+            return;
+
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.Duration, false);
     }
 
@@ -286,6 +291,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteDamageCollide(Entity<RMCIgniteOnCollideComponent> ent, ref DamageCollideEvent args)
     {
+        if (!CanBeIgnited(args.Target, ent))
+            return;
+
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks);
     }
 
@@ -339,6 +347,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private void OnFlammableExtinguished(Entity<FlammableComponent> ent, ref RMCExtinguishedEvent args)
     {
         RemCompDeferred<OnFireComponent>(ent);
+        RemCompDeferred<RMCFireBypassActiveComponent>(ent);
     }
 
     public void UpdateFireAlert(EntityUid ent)
@@ -480,7 +489,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        ent.Comp.DiagonalRange = (int) Math.Floor((double)ent.Comp.Range / 2);
+        ent.Comp.DiagonalRange = (int)Math.Floor((double)ent.Comp.Range / 2);
         Dirty(ent);
 
         var initialShot = !ent.Comp.InitialSpread;
@@ -514,7 +523,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         foreach (var ignitionTarget in targets)
         {
-            if(CheckViableTile(ent, ignitionTarget))
+            if (CheckViableTile(ent, ignitionTarget))
                 SpawnFireChain(ent.Comp.Spawn, chain, ignitionTarget, intensity, duration);
         }
     }
@@ -534,7 +543,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     /// <returns>Returns a list of potential targets for a fire to be spawned on</returns>
     private HashSet<EntityCoordinates> AddTarget(Entity<DirectionalTileFireOnTriggerComponent> ent, EntityCoordinates target, bool initialShot)
     {
-        var  targets = new HashSet<EntityCoordinates> { target };
+        var targets = new HashSet<EntityCoordinates> { target };
 
         var width = ent.Comp.Width;
         var widthExtension = ent.Comp.Width + 1;
@@ -549,7 +558,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             //Logic to get the targets if the entity is facing an ordinal direction
             if ((int)degrees % 90 != 0)
             {
-                while ( widthExtension> 0 && ent.Comp.DiagonalRange > 0)
+                while (widthExtension > 0 && ent.Comp.DiagonalRange > 0)
                 {
                     centerTarget = ChangeTarget(centerTarget, ent.Comp.Direction);
                     leftTarget = ChangeTarget(leftTarget, Angle.FromDegrees(degrees - degrees % 90).GetDir());
@@ -563,7 +572,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 }
             }
             //Logic to get the targets when an entity is facing a cardinal direction
-            else if (!initialShot )
+            else if (!initialShot)
             {
                 leftTarget = ChangeTarget(leftTarget, Angle.FromDegrees(degrees - 90).GetDir());
                 rightTarget = ChangeTarget(rightTarget, Angle.FromDegrees(degrees + 90).GetDir());
@@ -670,21 +679,101 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void TryIgnite(Entity<RMCIgniteOnCollideComponent> ent, EntityUid other, bool checkIgnited)
     {
+        EnsureComp<SteppingOnFireComponent>(other);
         var flammableEnt = new Entity<FlammableComponent?>(other, null);
         if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
             return;
-
-        EnsureComp<SteppingOnFireComponent>(other);
 
         var wasOnFire = IsOnFire(flammableEnt);
         if (checkIgnited && wasOnFire)
             return;
 
+        if (!CanBeIgnited(other, ent))
+            return;
+
+        // Check RMCImmuneToFireTileDamageComponent for ignition immunity
+        if (TryComp<RMCImmuneToFireTileDamageComponent>(other, out var fireImmunity) && fireImmunity.BypassWhitelist != null)
+        {
+            // Check if this fire is on the bypass whitelist
+            if (!_entityWhitelist.IsWhitelistPass(fireImmunity.BypassWhitelist, ent))
+            {
+                // Fire is not on bypass whitelist, cannot ignite
+                return;
+            }
+        }
+
         if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
             return;
 
-        if (!wasOnFire && IsOnFire(flammableEnt) && !HasComp<RMCImmuneToFireTileDamageComponent>(ent))
+        // If this fire can bypass immunity, mark the target as having bypass-active fire
+        if (!CanFireBypassImmunity(ent, other))
+        {
+            // If the fire can't bypass immunity, ensure the bypass component is removed
+            RemCompDeferred<RMCFireBypassActiveComponent>(other);
+        }
+        else
+        {
+            // If the fire can bypass immunity, add the bypass component
+            EnsureComp<RMCFireBypassActiveComponent>(other);
+        }
+
+        if (!wasOnFire && IsOnFire(flammableEnt) && CanFireBypassImmunity(ent, other))
             _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
+    }
+
+    private void ApplyTileEffect(Entity<SteppingOnFireComponent> ent, RMCIgniteOnCollideComponent ignite, EntityUid fireEntity)
+    {
+        if (ignite.TileDamage is not { } tile)
+            return;
+
+        var stepping = ent.Comp;
+        var uid = ent.Owner;
+
+        if (ignite.ArmorMultiplier < stepping.ArmorMultiplier &&
+            _entityWhitelist.IsWhitelistPassOrNull(ignite.ArmorWhitelist, uid))
+        {
+            stepping.ArmorMultiplier = ignite.ArmorMultiplier;
+            if (TryComp<RMCFireArmorDebuffModifierComponent>(uid, out var mod))
+                stepping.ArmorMultiplier *= mod.DebuffModifier;
+            _armor.UpdateArmorValue((uid, null));
+        }
+
+        var coords = _transform.GetMoverCoordinates(uid);
+        if (stepping.LastPosition is { } last &&
+            last.TryDistance(EntityManager, _transform, coords, out var distance))
+        {
+            stepping.Distance += distance;
+            if (stepping.Distance >= 1)
+            {
+                stepping.Distance = 0;
+                if (CanFireBypassImmunity(fireEntity, uid))
+                    _damageable.TryChangeDamage(uid, tile * ignite.Intensity);
+            }
+        }
+
+        // Check for ignition immunity before igniting
+        bool canIgnite = CanBeIgnited(uid, fireEntity);
+
+        if (canIgnite)
+            Ignite(uid, ignite.Intensity, ignite.Duration, ignite.MaxStacks);
+
+        // If this fire can bypass immunity, mark the target as having bypass-active fire
+        if (canIgnite)
+        {
+            if (!CanFireBypassImmunity(fireEntity, uid))
+            {
+                // If the fire can't bypass immunity, ensure the bypass component is removed
+                RemCompDeferred<RMCFireBypassActiveComponent>(uid);
+            }
+            else
+            {
+                // If the fire can bypass immunity, add the bypass component
+                EnsureComp<RMCFireBypassActiveComponent>(uid);
+            }
+        }
+
+        stepping.LastPosition = coords;
+        Dirty(ent);
     }
 
     public override void Update(float frameTime)
@@ -695,7 +784,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         var applyQuery = EntityQueryEnumerator<RMCIgniteOnCollideComponent>();
         while (applyQuery.MoveNext(out var uid, out var apply))
         {
-            foreach (var contact in _physics.GetEntitiesIntersectingBody(uid, (int) apply.Collision))
+            foreach (var contact in _physics.GetEntitiesIntersectingBody(uid, (int)apply.Collision))
             {
                 TryIgnite((uid, apply), contact, true);
             }
@@ -740,7 +829,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             extinguish.Extinguished = true;
             Dirty(uid, extinguish);
 
-            var intersecting = _physics.GetEntitiesIntersectingBody(uid, (int) extinguish.Collision);
+            var intersecting = _physics.GetEntitiesIntersectingBody(uid, (int)extinguish.Collision);
             foreach (var entIntersecting in intersecting)
             {
                 if (!_flammableQuery.TryComp(entIntersecting, out var flammable))
@@ -761,45 +850,87 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             Dirty(uid, stepping);
 
             var isStepping = false;
-            foreach (var contact in _physics.GetContactingEntities(uid))
+            foreach (var contact in _physics.GetContactingEntities(uid, approximate: true))
             {
-                if (!_igniteOnCollideQuery.TryComp(contact, out var ignite) ||
-                    ignite.TileDamage is not { } tile)
-                {
+                if (!_igniteOnCollideQuery.TryComp(contact, out var ignite))
                     continue;
-                }
 
-                if (ignite.ArmorMultiplier < stepping.ArmorMultiplier &&
-                    _entityWhitelist.IsWhitelistPassOrNull(ignite.ArmorWhitelist, uid))
-                {
-                    stepping.ArmorMultiplier = ignite.ArmorMultiplier;
-                    if (TryComp<RMCFireArmorDebuffModifierComponent>(uid, out var mod))
-                        stepping.ArmorMultiplier *= mod.DebuffModifier;
-                    _armor.UpdateArmorValue((uid, null));
-                }
-
+                ApplyTileEffect((uid, stepping), ignite, contact);
                 isStepping = true;
-                var coords = _transform.GetMoverCoordinates(uid);
-                if (stepping.LastPosition is { } last &&
-                    last.TryDistance(EntityManager, _transform, coords, out var distance))
-                {
-                    stepping.Distance += distance;
-                    if (stepping.Distance >= 1)
-                    {
-                        stepping.Distance = 0;
-                        if(!HasComp<RMCImmuneToFireTileDamageComponent>(uid))
-                            _damageable.TryChangeDamage(uid, tile * ignite.Intensity);
-                    }
-                }
-
-                Ignite(uid, ignite.Intensity, ignite.Duration, ignite.MaxStacks);
-
-                stepping.LastPosition = coords;
                 break;
+            }
+
+            // Entities with a static body type do not have any contacts with tile fires, so we do another standing on fire check.
+            if (!isStepping)
+            {
+                var nearbyEntities = _entityLookup.GetEntitiesInRange<RMCIgniteOnCollideComponent>(Transform(uid).Coordinates, 0.35f);
+                if (nearbyEntities.Count != 0)
+                {
+                    var nearbyEntity = nearbyEntities.First();
+                    ApplyTileEffect((uid, stepping), nearbyEntity.Comp, nearbyEntity.Owner);
+                    isStepping = true;
+                }
             }
 
             if (!isStepping)
                 RemCompDeferred<SteppingOnFireComponent>(uid);
         }
+    }
+
+    /// <summary>
+    /// Checks if a fire entity can deal damage to an entity that has fire immunity.
+    /// </summary>
+    /// <param name="fireEntity">The fire entity (like a tile fire) that might deal damage</param>
+    /// <param name="targetEntity">The entity that might have fire immunity</param>
+    /// <returns>True if damage should be dealt, false if it should be blocked by immunity</returns>
+    private bool CanFireBypassImmunity(EntityUid fireEntity, EntityUid targetEntity)
+    {
+        // If the target doesn't have fire immunity, fire always works
+        if (!TryComp<RMCImmuneToFireTileDamageComponent>(targetEntity, out var immunity))
+            return true;
+
+        // If the fire has a bypass component, it can always bypass immunity
+        if (HasComp<RMCFireImmunityBypassComponent>(fireEntity))
+            return true;
+
+        // If immunity has a bypass whitelist, check if this fire is on it
+        if (immunity.BypassWhitelist != null)
+        {
+            return _entityWhitelist.IsWhitelistPass(immunity.BypassWhitelist, fireEntity);
+        }
+
+        // No bypass mechanisms apply, immunity blocks the damage
+        return false;
+    }
+
+    /// <summary>
+    /// Checks if an entity can be ignited by a specific fire source, considering immunity components.
+    /// </summary>
+    /// <param name="target">The entity that might be ignited</param>
+    /// <param name="fireSource">The fire source attempting to ignite the target</param>
+    /// <returns>True if the target can be ignited, false if immunity blocks it</returns>
+    private bool CanBeIgnited(EntityUid target, EntityUid fireSource)
+    {
+        // Check for complete ignition immunity first
+        if (TryComp<RMCImmuneToIgnitionComponent>(target, out var ignitionImmunity))
+        {
+            // If entity has complete ignition immunity, check if this fire can bypass it
+            if (ignitionImmunity.BypassWhitelist == null)
+            {
+                // Complete immunity - no fires can ignite this entity
+                return false;
+            }
+            else
+            {
+                // Check if this fire is on the bypass whitelist
+                if (!_entityWhitelist.IsWhitelistPass(ignitionImmunity.BypassWhitelist, fireSource))
+                {
+                    // Fire is not on bypass whitelist, cannot ignite
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

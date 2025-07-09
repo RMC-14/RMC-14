@@ -193,8 +193,6 @@ entities:
       linearDamping: 0.05
       fixedRotation: False
       bodyType: Dynamic
-    - type: Fixtures
-      fixtures: {}
     - type: OccluderTree
     - type: SpreaderGrid
     - type: GridPathfinding
@@ -223,6 +221,8 @@ entities:
         - 0
         - 0
         - 0
+    - type: BecomesStation
+      id: AdminFax
     - type: DecalGrid
       chunkCollection:
         version: 2

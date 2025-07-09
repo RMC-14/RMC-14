@@ -58,7 +58,6 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/vehicles.rsi
     offset: 0.5, 0.5
-    noRot: true
   - type: DeleteOnExplosion
   - type: Damageable
     damageContainer: Inorganic
