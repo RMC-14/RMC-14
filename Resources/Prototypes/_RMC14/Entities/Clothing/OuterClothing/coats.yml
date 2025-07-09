@@ -460,9 +460,9 @@
   name: black bomber jacket
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_black.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_black.rsi
 
 - type: entity
   parent: CMCoatCO

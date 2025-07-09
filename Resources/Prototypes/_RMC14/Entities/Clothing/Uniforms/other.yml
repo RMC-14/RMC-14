@@ -353,9 +353,9 @@
   description: A stylish brown vest and shorts - uniforms like this are often worn by clerks and shop stewards
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/steward.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/steward.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
 
 # Kutjevo
 - type: entity
