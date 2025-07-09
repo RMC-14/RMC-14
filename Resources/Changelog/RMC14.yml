@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added 58 more random Avali names.
-    type: Add
-  id: 1477
-  time: '2025-03-21T20:39:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5974
 - author: mmails
   changes:
   - message: Moves mess tech from planned to complete in the roadmap
@@ -4979,5 +4972,13 @@
   id: 1977
   time: '2025-07-09T00:24:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6974
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed escape pods not exploding when it's launched over the maximum occupancy,
+      and not reopening the door.
+    type: Fix
+  id: 1978
+  time: '2025-07-09T00:26:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6967
 Name: RMC14
 Order: -1
