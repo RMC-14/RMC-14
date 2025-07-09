@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: mmails
-  changes:
-  - message: Moves mess tech from planned to complete in the roadmap
-    type: Fix
-  id: 1478
-  time: '2025-03-21T20:40:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5920
 - author: Dutch-VanDerLinde
   changes:
   - message: Changed tackling effects to make them different than slashing normally
@@ -4980,5 +4973,12 @@
   id: 1978
   time: '2025-07-09T00:26:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6967
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added squad markings for gloves.
+    type: Add
+  id: 1979
+  time: '2025-07-09T00:27:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6975
 Name: RMC14
 Order: -1
