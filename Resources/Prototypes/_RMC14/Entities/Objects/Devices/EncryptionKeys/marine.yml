@@ -129,7 +129,7 @@
     - MarineJTAC
     - MarineIntel
     - MarineCommon
-    defaultChannel: MarineForecon
+    defaultChannel: MarineSOF
   - type: Sprite
     state: sl_key
 

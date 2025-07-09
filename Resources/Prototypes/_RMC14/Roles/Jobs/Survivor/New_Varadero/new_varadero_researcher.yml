@@ -1,0 +1,34 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: RMCSurvivorNewVaraderoResearcher
+  name: cm-job-name-survivor-new-varadero-researcher
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorNewVaraderoResearcher
+  startingGear: RMCGearSurvivorNewVaraderoResearcher
+  accessGroups:
+  - ColonistMedical
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorNewVaraderoResearcher
+  equipment:
+    jumpsuit: CMJumpsuitResearch
+    outerClothing: RMCLabcoatScience
+    shoes: RMCShoesLaceup
+    back: RMCSatchelChemistryFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorNewVaraderoResearcher
+  name: survivor new varadero researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorNewVaraderoResearcher
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: RMCJobSurvivorNewVaraderoResearcher
+  isHumanoid: true
