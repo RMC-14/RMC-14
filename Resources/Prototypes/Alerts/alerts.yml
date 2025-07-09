@@ -29,6 +29,7 @@
     - category: Thirst
     - alertType: Magboots
     - alertType: Pacified
+    - alertType: AreaInfo
 
 - type: entity
   id: AlertSpriteView
