@@ -2,8 +2,7 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Attachable.Components;
 
-[RegisterComponent] [NetworkedComponent] [AutoGenerateComponentState]
-
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class GrantProjectileStunAdjustComponent : Component
 {
     [DataField, AutoNetworkedField]
