@@ -130148,31 +130148,16 @@ entities:
     - type: Transform
       pos: 206.5,49.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
   - uid: 16927
     components:
     - type: Transform
       pos: 206.5,47.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16928
     components:
     - type: Transform
       pos: 204.5,49.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
   - uid: 16929
     components:
     - type: Transform
@@ -130183,14 +130168,6 @@ entities:
     - type: Transform
       pos: 198.5,47.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16931
     components:
     - type: Transform
@@ -130201,48 +130178,26 @@ entities:
     - type: Transform
       pos: 200.5,49.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
   - uid: 16933
     components:
     - type: Transform
       pos: 216.5,34.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
   - uid: 16934
     components:
     - type: Transform
       pos: 216.5,32.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16935
     components:
     - type: Transform
       pos: 214.5,32.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
   - uid: 16936
     components:
     - type: Transform
       pos: 214.5,34.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
   - uid: 16937
     components:
     - type: Transform
@@ -130253,47 +130208,21 @@ entities:
     - type: Transform
       pos: 216.5,36.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
   - uid: 16939
     components:
     - type: Transform
       pos: 216.5,38.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
   - uid: 16940
     components:
     - type: Transform
       pos: 214.5,38.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16941
     components:
     - type: Transform
       pos: 200.5,7.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16942
     components:
     - type: Transform
@@ -130309,20 +130238,11 @@ entities:
     - type: Transform
       pos: 202.5,7.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16945
     components:
     - type: Transform
       pos: 205.5,7.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
   - uid: 16946
     components:
     - type: Transform
@@ -130338,34 +130258,16 @@ entities:
     - type: Transform
       pos: 207.5,7.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
   - uid: 16949
     components:
     - type: Transform
       pos: 183.5,137.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16950
     components:
     - type: Transform
       pos: 183.5,139.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16951
     components:
     - type: Transform
@@ -130376,17 +130278,11 @@ entities:
     - type: Transform
       pos: 181.5,137.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
   - uid: 16953
     components:
     - type: Transform
       pos: 179.5,137.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
   - uid: 16954
     components:
     - type: Transform
@@ -130397,34 +130293,16 @@ entities:
     - type: Transform
       pos: 177.5,139.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16956
     components:
     - type: Transform
       pos: 177.5,137.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16957
     components:
     - type: Transform
       pos: 208.5,151.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
   - uid: 16958
     components:
     - type: Transform
@@ -130435,12 +130313,6 @@ entities:
     - type: Transform
       pos: 208.5,149.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16960
     components:
     - type: Transform
@@ -130461,27 +130333,11 @@ entities:
     - type: Transform
       pos: 214.5,151.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16964
     components:
     - type: Transform
       pos: 214.5,149.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
   - uid: 16965
     components:
     - type: Transform
