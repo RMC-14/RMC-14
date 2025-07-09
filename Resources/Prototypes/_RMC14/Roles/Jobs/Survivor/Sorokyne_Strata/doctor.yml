@@ -35,12 +35,12 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorMoHDoctor
   equipment:
-    mask: RMCMaskGasSPP
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
   storage:
     back:
     - CMSheetMetal20
+    - RMCMaskGasSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
