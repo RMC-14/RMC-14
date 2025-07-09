@@ -69,7 +69,7 @@
         - RMCAttachmentFlashlightGrip
       rmc-aslot-stock:
         locked: true
-        startingAttachable: RMCAttachmentM3717Stock
+        startingAttachable: RMCAttachmentM3714Stock
         whitelist:
           tags:
           - RMCAttachmentM3714stock
@@ -81,8 +81,8 @@
       rmc-aslot-underbarrel: 0.32, -0.31
   - type: Tag
     tags:
-    - RMCWeaponShotgunM3717
+    - RMCWeaponShotgunM3714
     - RMCWeaponShotgun
 
 - type: Tag
-  id: RMCWeaponShotgunM3717
+  id: RMCWeaponShotgunM3714
