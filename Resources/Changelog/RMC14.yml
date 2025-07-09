@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Cash stacks use stack sprites.
-    type: Fix
-  id: 1474
-  time: '2025-03-21T05:51:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5950
-- author: Djvarik
-  changes:
-  - message: The ground wires on Shiva's no longer block movement.
-    type: Fix
-  id: 1475
-  time: '2025-03-21T05:54:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5936
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed M15 grenades not fitting in the m79 and grenadier spec launcher.
-    type: Fix
-  - message: Fixed airburst grenades not fitting in the U1 UGL.
-    type: Fix
-  id: 1476
-  time: '2025-03-21T20:03:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5966
 - author: DrSmugleaf
   changes:
   - message: Added 58 more random Avali names.
@@ -4976,5 +4953,31 @@
   id: 1974
   time: '2025-07-08T03:19:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5869
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed FORECON having almayer comms
+    type: Fix
+  - message: Renamed FORECON radio channel to 'SOF'
+    type: Fix
+  id: 1975
+  time: '2025-07-09T00:23:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6971
+- author: noctyrnal
+  changes:
+  - message: Shiva has received a large update. It should be more inline with parity
+      now.
+    type: Add
+  - message: You can now destroy soil nets and planter boxes.
+    type: Add
+  id: 1976
+  time: '2025-07-09T00:24:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6972
+- author: noctyrnal
+  changes:
+  - message: Adjusted the colour of the Squad HUD Icons.
+    type: Tweak
+  id: 1977
+  time: '2025-07-09T00:24:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6974
 Name: RMC14
 Order: -1
