@@ -1,7 +1,7 @@
 - type: entity
-  parent: CMWeaponPistolBase
+  parent: CMWeaponPistolM1984
   id: RMCWeaponPistolL54
-  name: L54 service pistol
+  name: L54 service pistol # TSE service pistol - same stats as the M1984
   description: Standard issue semi-automatic service pistol of the TSEPA. Chambered in 9mm, it is comparable to the popular M1984 pistol utilized by the UNMC.
   components:
   - type: Tag
@@ -12,23 +12,9 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54.rsi
-  - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.20
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 5
   - type: Gun
-    availableModes:
-    - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mk80.ogg
-  - type: RMCSelectiveFire
-    baseFireModes:
-    - SemiAuto
-    scatterUnwielded: 10
-    baseFireRate: 10
-    burstScatterMult: 6
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -40,30 +26,6 @@
           tags:
           - RMCMagazinePistolL54
         startingItem: RMCMagazinePistolL54
-  - type: AttachableHolder
-    slots:
-      rmc-aslot-barrel:
-        whitelist:
-          tags:
-          - RMCAttachmentSuppressor
-          - RMCAttachmentExtendedBarrel
-          - RMCAttachmentRecoilCompensator
-      rmc-aslot-rail:
-        whitelist:
-          tags:
-          - RMCAttachmentRailFlashlight
-          - RMCAttachmentS5RedDotSight
-          - RMCAttachmentS6ReflexSight
-      rmc-aslot-underbarrel:
-        whitelist:
-          tags:
-          - RMCAttachmentLaserSight
-          - RMCAttachmentBurstFireAssembly
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 0.71, 0.095
-      rmc-aslot-rail: -0.065, 0.125
-      rmc-aslot-underbarrel: 0.312, -0.25
 
 - type: entity
   parent: RMCWeaponPistolT73

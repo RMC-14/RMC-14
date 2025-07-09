@@ -19,6 +19,7 @@
   - ColonistTSEPAConstable
   spawnMenuRoleName: TSEPA Constable (Hybrisa Survivor)
   icon: "RMCJobIconTSEPAConstable"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
