@@ -1,11 +1,11 @@
 - type: job
   parent: CMSurvivor
-  id: CMJobSurvivorSoroCivilian
-  name: rmc-job-name-survivor-soro-civilian
+  id: CMJobSurvivorHybrisaCivilian
+  name: rmc-job-name-survivor-hybrisa-civilian
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorSoroCivilian
-  startingGear: RMCGearSurvivorSoroCivilian
-  spawnMenuRoleName: Civilian (Sorokyne Survivor)
+  playTimeTracker: CMJobSurvivorHybrisaCivilian
+  startingGear: RMCGearSurvivorHybrisaCivilian
+  spawnMenuRoleName: Civilian (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -18,28 +18,27 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetSoroCivilian
+      preset: RMCGearSurvivorPresetHybrisaCivilian
     - type: RMCSurvivor
     - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - SPP
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
 
 - type: startingGear
   parent: RMCGearSurvivorBase
-  id: RMCGearSurvivorSoroCivilian
+  id: RMCGearSurvivorHybrisaCivilian
   equipment:
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorSoroCivilian
-  name: sorokyne civilian spawn point
+  id: RMCSpawnPointSurvivorHybrisaCivilian
+  name: hybrisa civilian spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -49,13 +48,13 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorSoroCivilian
+  id: CMJobSurvivorHybrisaCivilian
   isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian
-  id: RMCGearSurvivorPresetSoroCivilian
-  name: sorokyne civilian preset
+  id: RMCGearSurvivorPresetHybrisaCivilian
+  name: hybrisa civilian preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset

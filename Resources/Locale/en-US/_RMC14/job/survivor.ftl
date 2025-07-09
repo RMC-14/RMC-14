@@ -81,6 +81,10 @@ cm-job-prefix-survivor-icb = ICB
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
 
+# Hybrisa Prospera Survs
+
+rmc-job-name-survivor-hybrisa-civilian = Civilian
+CMJobSurvivorHybrisaCivilian = Civilian
 
 # Sorokyne Strata Survs
 
