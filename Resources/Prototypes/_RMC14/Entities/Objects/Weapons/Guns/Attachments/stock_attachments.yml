@@ -859,7 +859,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM3714stock
+    - RMCAttachmentM3714Stock
 
 - type: entity
   parent: RMCStockAttachmentBase
