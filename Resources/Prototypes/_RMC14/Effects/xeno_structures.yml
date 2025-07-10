@@ -27,6 +27,9 @@
   - type: TimedDespawn
     lifetime: 5.0
   - type: Tag
+    tags:
+    - HideContextMenu
+  - type: XenoConstructionAnimation
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
