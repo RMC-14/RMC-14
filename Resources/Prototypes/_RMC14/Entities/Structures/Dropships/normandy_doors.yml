@@ -7,6 +7,30 @@
     sprite: _RMC14/Structures/Dropships/normandy.rsi
 
 - type: entity
+  parent: CMAlamoDoorAft
+  id: CMNormandyDoorAft
+  suffix: Aft
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+
+- type: entity
+  parent: CMAlamoDoorPort
+  id: CMNormandyDoorPort
+  suffix: Port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+
+- type: entity
+  parent: CMAlamoDoorStarboard
+  id: CMNormandyDoorStarboard
+  suffix: Starboard
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+
+- type: entity
   parent: CMAlamoCockpit
   id: CMNormandyCockpit
   suffix: Normandy

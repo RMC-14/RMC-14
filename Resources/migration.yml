@@ -1205,4 +1205,14 @@ DrinkHotCoffee: RMCCoffeeCupFilled
 
 # 2025-07-06
 RMCWindowCorsatResearchHull: RMCWindowCorsatHullResearch
+
+# 2025-07-08
+PortableGeneratorPacman: RMCPortableGenerator
+PortableGeneratorSuperPacman: RMCPortableGenerator2
+BaseBallBat: RMCBaseballBat
+HydroponicsToolSpade: RMCToolSpade
+HydroponicsToolMiniHoe: RMCToolMiniHoe
+HydroponicsToolHatchet: RMCToolHatchet
+ClothingEyesGlassesSunglasses: RMCSunglasses
+CableTerminal: RMCCableTerminal
 ClothingEyesGlassesChemical: RMCGlassesReagentHUDGlasses

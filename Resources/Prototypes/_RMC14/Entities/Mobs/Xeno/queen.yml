@@ -264,6 +264,8 @@
   - type: XenoToggleChargingStop
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartTQ
 
 - type: entity
   parent: RMCXenoQueenBase
