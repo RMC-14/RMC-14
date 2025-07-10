@@ -25,10 +25,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.FixedPoint;
-using Content.Shared.Hands;
 using Robust.Server.Audio;
-using Robust.Shared.Log;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -334,7 +331,7 @@ namespace Content.Server.Atmos.EntitySystems
 
                 if (flammable.OnFire)
                 {
-                    var ev = new RMCIgniteEvent();
+                    var ev = new IgnitedEvent();
                     RaiseLocalEvent(uid, ref ev);
                 }
                 else

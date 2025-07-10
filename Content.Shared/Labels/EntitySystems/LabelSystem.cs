@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Examine;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.Labels.Components;
@@ -14,6 +15,9 @@ public sealed partial class LabelSystem : EntitySystem
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+
+    // RMC14
+    [Dependency] private readonly CMExamineSystem _rmcExamine = default!;
 
     public const string ContainerName = "paper_label";
 
@@ -62,6 +66,10 @@ public sealed partial class LabelSystem : EntitySystem
 
     private void OnExamine(Entity<LabelComponent> ent, ref ExaminedEvent args)
     {
+        // RMC14
+        if (!_rmcExamine.CanExamine(ent.Owner, args.Examiner))
+            return;
+
         if (!ent.Comp.Examinable)
             return;
 

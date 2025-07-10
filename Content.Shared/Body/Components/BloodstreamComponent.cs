@@ -209,4 +209,8 @@ public sealed partial class BloodstreamComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<AlertPrototype> BleedingAlert = "Bleed";
+
+    // RMC14
+    [DataField, AutoNetworkedField]
+    public bool SpillChemicals;
 }

@@ -50,3 +50,4 @@ planet_map_vote = false
 # random_characters = true
 random_species_weights = ""
 ssd_sleep_time = 3600
+id_job_length = 50

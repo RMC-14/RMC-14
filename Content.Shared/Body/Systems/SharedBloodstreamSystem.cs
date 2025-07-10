@@ -1,3 +1,6 @@
+using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Medical.Stasis;
+using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
@@ -39,6 +42,10 @@ public abstract class SharedBloodstreamSystem : EntitySystem
     [Dependency] private readonly SharedDrunkSystem _drunkSystem = default!;
     [Dependency] private readonly SharedStutteringSystem _stutteringSystem = default!;
 
+    // RMC14
+    [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -67,6 +74,9 @@ public abstract class SharedBloodstreamSystem : EntitySystem
 
             bloodstream.NextUpdate += bloodstream.AdjustedUpdateInterval;
             DirtyField(uid, bloodstream, nameof(BloodstreamComponent.NextUpdate)); // needs to be dirtied on the client so it can be rerolled during prediction
+
+            if (!_cmStasisBag.CanBodyMetabolize(uid))
+                continue;
 
             if (!SolutionContainer.ResolveSolution(uid, bloodstream.BloodSolutionName, ref bloodstream.BloodSolution, out var bloodSolution))
                 continue;
@@ -113,10 +123,17 @@ public abstract class SharedBloodstreamSystem : EntitySystem
             else if (!_mobStateSystem.IsDead(uid))
             {
                 // If they're healthy, we'll try and heal some bloodloss instead.
-                _damageableSystem.TryChangeDamage(
-                    uid,
-                    bloodstream.BloodlossHealDamage * bloodPercentage,
-                    ignoreResistances: true, interruptsDoAfters: false);
+                // RMC14, to call change damage less often
+                if (_rmcDamageable.HasAnyDamage(uid, bloodstream.BloodlossHealDamage))
+                {
+                    _damageableSystem.TryChangeDamage(
+                        uid,
+                        bloodstream.BloodlossHealDamage * bloodPercentage,
+                        ignoreResistances: true,
+                        interruptsDoAfters: false
+                    );
+                }
+                // RMC14
 
                 // Remove the drunk effect when healthy. Should only remove the amount of drunk and stutter added by low blood level
                 _drunkSystem.TryRemoveDrunkenessTime(uid, bloodstream.StatusTime.TotalSeconds);
@@ -192,6 +209,11 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         // But the changes to the bloodstream have also been dirtied,
         // so we prevent applying them twice.
         if (_timing.ApplyingState)
+            return;
+
+        var ev = new CMBleedEvent(args);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Handled)
             return;
 
         if (args.DamageDelta is null || !args.DamageIncreased)
@@ -392,7 +414,8 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         if (tempSolution.Volume > ent.Comp.BleedPuddleThreshold)
         {
             // Pass some of the chemstream into the spilled blood.
-            if (SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.ChemicalSolutionName, ref ent.Comp.ChemicalSolution))
+            if (ent.Comp.SpillChemicals && // RMC14
+                SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.ChemicalSolutionName, ref ent.Comp.ChemicalSolution))
             {
                 var temp = SolutionContainer.SplitSolution(ent.Comp.ChemicalSolution.Value, tempSolution.Volume / 10);
                 tempSolution.AddSolution(temp, _prototypeManager);

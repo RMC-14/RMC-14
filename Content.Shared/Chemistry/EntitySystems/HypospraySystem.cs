@@ -1,28 +1,20 @@
+using Content.Shared._RMC14.Chemistry;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Body.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using System.Linq;
-using Content.Server.Body.Components;
-using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Hypospray.Events;
 using Content.Shared.Database;
-using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Forensics;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Server.Audio;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
@@ -36,7 +28,7 @@ public sealed class HypospraySystem : EntitySystem
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     // RMC14
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly RMCSharedHypospraySystem _rmcHypospray = default!;
 
     public override void Initialize()
     {
@@ -46,15 +38,12 @@ public sealed class HypospraySystem : EntitySystem
         SubscribeLocalEvent<HyposprayComponent, MeleeHitEvent>(OnAttack);
         SubscribeLocalEvent<HyposprayComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<HyposprayComponent, GetVerbsEvent<AlternativeVerb>>(AddToggleModeVerb);
-
-        // RMC14
-        SubscribeLocalEvent<HyposprayComponent, HyposprayDoAfterEvent>(OnHyposprayDoAfter);
     }
 
     #region Ref events
     private void OnUseInHand(Entity<HyposprayComponent> entity, ref UseInHandEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Handled)
             return;
 
         args.Handled = TryDoInject(entity, args.User, args.User);
@@ -92,8 +81,11 @@ public sealed class HypospraySystem : EntitySystem
         return TryDoInject(entity, target, user);
     }
 
-    public bool TryDoInject(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user)
+    public bool TryDoInject(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user, bool doAfter = true)
     {
+        if (doAfter)
+            return _rmcHypospray.DoAfter(entity, target, user);
+
         var (uid, component) = entity;
 
         if (!EligibleEntity(target, component))
@@ -108,7 +100,7 @@ public sealed class HypospraySystem : EntitySystem
         string? msgFormat = null;
 
         // Self event
-        var selfEvent = new SelfBeforeHyposprayInjectsEvent(user, ent, target);
+        var selfEvent = new SelfBeforeHyposprayInjectsEvent(user, entity.Owner, target);
         RaiseLocalEvent(user, selfEvent);
 
         if (selfEvent.Cancelled)
@@ -123,7 +115,7 @@ public sealed class HypospraySystem : EntitySystem
             return false;
 
         // Target event
-        var targetEvent = new TargetBeforeHyposprayInjectsEvent(user, ent, target);
+        var targetEvent = new TargetBeforeHyposprayInjectsEvent(user, entity.Owner, target);
         RaiseLocalEvent(target, targetEvent);
 
         if (targetEvent.Cancelled)
@@ -170,7 +162,7 @@ public sealed class HypospraySystem : EntitySystem
 
         // Medipens and such use this system and don't have a delay, requiring extra checks
         // BeginDelay function returns if item is already on delay
-        if (TryComp(ent, out UseDelayComponent? delayComp))
+        if (delayComp != null)
             _useDelay.TryResetDelay((uid, delayComp));
 
         // Get transfer amount. May be smaller than component.TransferAmount if not enough room
@@ -186,7 +178,7 @@ public sealed class HypospraySystem : EntitySystem
         var removedSolution = _solutionContainers.SplitSolution(hypoSpraySoln.Value, realTransferAmount);
 
         if (!targetSolution.CanAddSolution(removedSolution))
-            return;
+            return true;
         _reactiveSystem.DoEntityReaction(target, removedSolution, ReactionMethod.Injection);
         _solutionContainers.TryAddSolution(targetSoln.Value, removedSolution);
 
@@ -194,68 +186,7 @@ public sealed class HypospraySystem : EntitySystem
         RaiseLocalEvent(target, ref ev);
 
         // same LogType as syringes...
-        _adminLogger.Add(LogType.ForceFeed, $"{ToPrettyString(user):user} injected {EntityManager.ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {EntityManager.ToPrettyString(uid):using}");
-    }
-
-    private bool TryUseHypospray(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user)
-    {
-        // if target is ineligible but is a container, try to draw from the container if allowed
-        if (!EligibleEntity(target, EntityManager, entity)
-            && _solutionContainers.TryGetDrawableSolution(target, out var drawableSolution, out _) && entity.Comp.CanContainerDraw)
-        {
-            return TryDraw(entity, target, drawableSolution.Value, user);
-        }
-
-        return TryDoInject(entity, target, user);
-    }
-
-    private void OnUseInHand(Entity<HyposprayComponent> entity, ref UseInHandEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = TryDoInject(entity, args.User, args.User);
-    }
-
-    public void OnAfterInteract(Entity<HyposprayComponent> entity, ref AfterInteractEvent args)
-    {
-        if (args.Handled || !args.CanReach || args.Target == null)
-            return;
-
-        args.Handled = TryUseHypospray(entity, args.Target.Value, args.User);
-    }
-
-    public void OnAttack(Entity<HyposprayComponent> entity, ref MeleeHitEvent args)
-    {
-        if (!args.HitEntities.Any())
-            return;
-
-        TryDoInject(entity, args.HitEntities.First(), args.User);
-    }
-
-    public bool TryDoInject(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user)
-    {
-        var (uid, component) = entity;
-
-        if (!EligibleEntity(target, EntityManager, component))
-            return false;
-
-        if (TryComp(uid, out UseDelayComponent? delayComp))
-        {
-            if (_useDelay.IsDelayed((uid, delayComp)))
-                return false;
-        }
-
-        var attemptEv = new AttemptHyposprayUseEvent(user, target, TimeSpan.Zero);
-        RaiseLocalEvent(entity, ref attemptEv);
-        var doAfter = new HyposprayDoAfterEvent();
-        var args = new DoAfterArgs(EntityManager, user, attemptEv.DoAfter, doAfter, entity, target, entity)
-        {
-            BreakOnMove = true,
-            BreakOnHandChange = true,
-            NeedHand = true
-        };
-        _doAfter.TryStartDoAfter(args);
+        _adminLogger.Add(LogType.ForceFeed, $"{ToPrettyString(user):user} injected {ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {ToPrettyString(uid):using}");
 
         return true;
     }
@@ -294,7 +225,7 @@ public sealed class HypospraySystem : EntitySystem
         return true;
     }
 
-    private bool EligibleEntity(EntityUid entity, HyposprayComponent component)
+    public bool EligibleEntity(EntityUid entity, HyposprayComponent component)
     {
         // TODO: Does checking for BodyComponent make sense as a "can be hypospray'd" tag?
         // In SS13 the hypospray ONLY works on mobs, NOT beakers or anything else.
