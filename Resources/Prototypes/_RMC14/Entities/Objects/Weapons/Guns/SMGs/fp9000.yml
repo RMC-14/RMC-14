@@ -132,7 +132,7 @@
         maxScatterModifier: 2
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 4
+        shotsToMaxScatter: 20
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.35
     accuracyMultiplierUnwielded: 0.75
