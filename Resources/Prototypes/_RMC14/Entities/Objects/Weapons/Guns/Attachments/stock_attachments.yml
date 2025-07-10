@@ -848,7 +848,7 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentM3714stock
+  id: RMCAttachmentM3714Stock
   name: M3714 stock
   description: The non-detachable stock of a M37-14 pump shotgun.
   components:
