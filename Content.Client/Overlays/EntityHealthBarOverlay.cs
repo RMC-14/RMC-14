@@ -1,11 +1,13 @@
 using System.Numerics;
 using Content.Client.StatusIcon;
 using Content.Client.UserInterface.Systems;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.ParaDrop;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
@@ -30,6 +32,9 @@ public sealed class EntityHealthBarOverlay : Overlay
     private readonly StatusIconSystem _statusIconSystem;
     private readonly ProgressColorSystem _progressColor;
 
+    private readonly EntityQuery<CrashLandingComponent> _crashLandingQuery;
+    private readonly EntityQuery<ParaDroppingComponent> _paraDroppingQuery;
+
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
     public HashSet<string> DamageContainers = new();
@@ -44,6 +49,8 @@ public sealed class EntityHealthBarOverlay : Overlay
         _mobThresholdSystem = _entManager.System<MobThresholdSystem>();
         _statusIconSystem = _entManager.System<StatusIconSystem>();
         _progressColor = _entManager.System<ProgressColorSystem>();
+        _crashLandingQuery = _entManager.GetEntityQuery<CrashLandingComponent>();
+        _paraDroppingQuery = _entManager.GetEntityQuery<ParaDroppingComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -99,6 +106,15 @@ public sealed class EntityHealthBarOverlay : Overlay
 
             var position = new Vector2(-widthOfMob / EyeManager.PixelsPerMeter / 2, yOffset / EyeManager.PixelsPerMeter);
             var color = GetProgressColor(deathProgress.ratio, deathProgress.inCrit);
+
+            //RMC14
+            if (_crashLandingQuery.HasComp(uid) || _paraDroppingQuery.HasComp(uid))
+            {
+                yOffset = 0.4f + spriteComponent.Offset.Y;
+                widthOfMob = spriteComponent.Offset.X;
+
+                position = new Vector2( widthOfMob, yOffset);
+            }
 
             // Hardcoded width of the progress bar because it doesn't match the texture.
             const float startX = 8f;

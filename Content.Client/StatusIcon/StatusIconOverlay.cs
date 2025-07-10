@@ -6,6 +6,8 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Numerics;
+using Content.Shared._RMC14.CrashLand;
+using Content.Shared.ParaDrop;
 
 namespace Content.Client.StatusIcon;
 
@@ -96,6 +98,11 @@ public sealed class StatusIconOverlay : Overlay
                     yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) (accOffsetL - proto.Offset) / EyeManager.PixelsPerMeter;
                     xOffset = -(bounds.Width + sprite.Offset.X) / 2f;
 
+                    if (_entity.HasComponent<CrashLandingComponent>(uid) ||
+                        _entity.HasComponent<ParaDroppingComponent>(uid))
+                    {
+                        yOffset = 0.25f + sprite.Offset.Y;
+                    }
                 }
                 else
                 {
@@ -106,9 +113,14 @@ public sealed class StatusIconOverlay : Overlay
                         accOffsetR += texture.Height;
                         countR++;
                     }
+
                     yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) (accOffsetR - proto.Offset) / EyeManager.PixelsPerMeter;
                     xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter;
-
+                    if (_entity.HasComponent<CrashLandingComponent>(uid) ||
+                        _entity.HasComponent<ParaDroppingComponent>(uid))
+                    {
+                        yOffset = 0.25f + sprite.Offset.Y;
+                    }
                 }
 
                 if (proto.IsShaded)
