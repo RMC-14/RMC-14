@@ -251,6 +251,8 @@
         crate: RMCCrateMortarShellIncendiary
       - cost: 1000
         crate: RMCCrateMortarShellFlare
+      - cost: 1500
+        crate: RMCCrateMortarShellMixed
 #    - name: Operations
 #      entries: []
 #    - name: Reagent tanks
