@@ -32,6 +32,16 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/black.rsi
 
 - type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackFillSurvivorConstable
+  suffix: Survivor, Constable
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCHandcuffs
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelBlue
   components:
@@ -529,6 +539,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
+  - type: Storage
+    grid:
+    - 0,0,20,1 # 21
 
 - type: entity
   parent: RMCSatchelLightpack
