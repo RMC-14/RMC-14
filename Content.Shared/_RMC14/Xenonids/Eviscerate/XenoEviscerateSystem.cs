@@ -61,6 +61,7 @@ public sealed class XenoEviscerateSystem : EntitySystem
         {
             BreakOnMove = true,
             Hidden = true,
+            RootEntity =  true
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
