@@ -499,6 +499,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
 
+        // TODO RMC14 stop collision for mobs until they move off
         if (_net.IsServer)
         {
             var structureToSpawn = args.StructureId;
