@@ -4,15 +4,15 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Content.Shared.Kitchen.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
-using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
+using Content.Shared.Kitchen.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
@@ -128,7 +128,7 @@ public sealed class SharpSystem : EntitySystem
         if (hasBody)
             popupType = PopupType.LargeCaution;
 
-        _popupSystem.PopupEntity(Loc.GetString("butcherable-knife-butchered-success", ("target", args.Args.Target.Value), ("knife", uid)),
+        _popupSystem.PopupEntity(Loc.GetString("butcherable-knife-butchered-success", ("target", args.Args.Target.Value), ("knife", Identity.Entity(uid, EntityManager))),
             popupEnt, args.Args.User, popupType);
 
         if (hasBody)
@@ -139,9 +139,9 @@ public sealed class SharpSystem : EntitySystem
         args.Handled = true;
 
         _adminLogger.Add(LogType.Gib,
-            $"{EntityManager.ToPrettyString(args.User):user} " +
-            $"has butchered {EntityManager.ToPrettyString(args.Target):target} " +
-            $"with {EntityManager.ToPrettyString(args.Used):knife}");
+            $"{ToPrettyString(args.User):user} " +
+            $"has butchered {ToPrettyString(args.Target):target} " +
+            $"with {ToPrettyString(args.Used):knife}");
     }
 
     private void OnGetInteractionVerbs(EntityUid uid, ButcherableComponent component, GetVerbsEvent<InteractionVerb> args)
@@ -156,10 +156,10 @@ public sealed class SharpSystem : EntitySystem
         var disabled = false;
         string? message = null;
 
-        // if the user has hands
-        // and the item they're holding doesn't have the SharpComponent
+        // if the held item doesn't have SharpComponent
+        // and the user doesn't have SharpComponent
         // disable the verb
-        if (!TryComp<SharpComponent>(args.Using, out var usingSharpComp) && args.Hands != null)
+        if (!TryComp<SharpComponent>(args.Using, out var usingSharpComp) && userSharpComp == null)
         {
             disabled = true;
             message = Loc.GetString("butcherable-need-knife",

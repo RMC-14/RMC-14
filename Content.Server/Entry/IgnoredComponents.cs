@@ -20,6 +20,8 @@ namespace Content.Server.Entry
             "LightFade",
             "HolidayRsiSwap",
             "OptionsVisualizer",
+            "MultipartMachineGhost"
+            "OptionsVisualizer",
             "IconSmoothRandom",
             "RotationDrawDepth",
         };

@@ -1,3 +1,4 @@
+using Content.Shared.DisplacementMap;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -100,6 +101,12 @@ public sealed partial class HumanoidAppearanceComponent : Component, IRMCHumanoi
 
     [DataField]
     public ProtoId<MarkingPrototype>? UndergarmentBottom { get; set; } = new ProtoId<MarkingPrototype>("UndergarmentBottomBoxers");
+
+    /// <summary>
+    ///     The displacement maps that will be applied to specific layers of the humanoid.
+    /// </summary>
+    [DataField]
+    public Dictionary<HumanoidVisualLayers, DisplacementData> MarkingsDisplacement = new();
 }
 
 [DataDefinition]
