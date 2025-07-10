@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
@@ -32,6 +33,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
 
         // TODO RMC14 don't use perishable
         if (HasComp<CMDefibrillatorBlockedComponent>(damageable)
+            || HasComp<VictimBurstComponent>(damageable)
             || TryComp(damageable, out PerishableComponent? perishable)
             && perishable.Stage >= 4)
         {
