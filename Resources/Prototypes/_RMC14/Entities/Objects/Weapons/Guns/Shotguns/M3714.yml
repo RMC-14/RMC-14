@@ -72,7 +72,7 @@
         startingAttachable: RMCAttachmentM3714Stock
         whitelist:
           tags:
-          - RMCAttachmentM3714stock
+          - RMCAttachmentM3714Stock
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.78, .02
