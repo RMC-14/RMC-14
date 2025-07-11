@@ -76,6 +76,7 @@ public sealed class FaxSystem : EntitySystem
         SubscribeLocalEvent<FaxMachineComponent, AfterActivatableUIOpenEvent>(OnToggleInterface);
         SubscribeLocalEvent<FaxMachineComponent, FaxFileMessage>(OnFileButtonPressed);
         SubscribeLocalEvent<FaxMachineComponent, FaxCopyMessage>(OnCopyButtonPressed);
+        SubscribeLocalEvent<FaxMachineComponent, FaxCopyMultipleMessage>(OnCopyMultipleButtonPressed);
         SubscribeLocalEvent<FaxMachineComponent, FaxSendMessage>(OnSendButtonPressed);
         SubscribeLocalEvent<FaxMachineComponent, FaxRefreshMessage>(OnRefreshButtonPressed);
         SubscribeLocalEvent<FaxMachineComponent, FaxDestinationMessage>(OnDestinationSelected);
@@ -327,6 +328,14 @@ public sealed class FaxSystem : EntitySystem
             Copy(uid, component, args);
     }
 
+    private void OnCopyMultipleButtonPressed(EntityUid uid, FaxMachineComponent component, FaxCopyMultipleMessage args)
+    {
+        if (HasComp<MobStateComponent>(component.PaperSlot.Item))
+            _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
+        else
+            CopyMultiple(uid, component, args);
+    }
+
     private void OnSendButtonPressed(EntityUid uid, FaxMachineComponent component, FaxSendMessage args)
     {
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
@@ -490,6 +499,57 @@ public sealed class FaxSystem : EntitySystem
     }
 
     /// <summary>
+    ///     Copies the paper in the fax multiple times. A timeout is set after copying,
+    ///     which is shared by the send button.
+    /// </summary>
+    public void CopyMultiple(EntityUid uid, FaxMachineComponent? component, FaxCopyMultipleMessage args)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        if (component.SendTimeoutRemaining > 0)
+            return;
+
+        var sendEntity = component.PaperSlot.Item;
+        if (sendEntity == null)
+            return;
+
+        if (!TryComp(sendEntity, out MetaDataComponent? metadata) ||
+            !TryComp<PaperComponent>(sendEntity, out var paper))
+            return;
+
+        TryComp<LabelComponent>(sendEntity, out var labelComponent);
+        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
+
+        // TODO: See comment in 'Send()' about not being able to copy whole entities
+        var printout = new FaxPrintout(paper.Content,
+                                       nameMod?.BaseName ?? metadata.EntityName,
+                                       labelComponent?.CurrentLabel,
+                                       metadata.EntityPrototype?.ID ?? component.PrintPaperId,
+                                       paper.StampState,
+                                       paper.StampedBy,
+                                       paper.EditingDisabled);
+
+        // Add the specified number of copies to the queue
+        for (int i = 0; i < args.Copies; i++)
+        {
+            component.PrintingQueue.Enqueue(printout);
+        }
+        component.SendTimeoutRemaining += component.SendTimeout;
+
+        // Don't play component.SendSound - it clashes with the printing sound, which
+        // will start immediately.
+
+        UpdateUserInterface(uid, component);
+
+        _adminLogger.Add(LogType.Action,
+            LogImpact.Low,
+            $"{ToPrettyString(args.Actor):actor} " +
+            $"added copy x{args.Copies} job to \"{component.FaxName}\" {ToPrettyString(uid):tool} " +
+            $"of {ToPrettyString(sendEntity):subject}: {printout.Content}");
+    }
+
+    /// <summary>
     ///     Sends message to addressee if paper is set and a known fax is selected
     ///     A timeout is set after sending, which is shared by the copy button.
     /// </summary>
@@ -576,7 +636,7 @@ public sealed class FaxSystem : EntitySystem
         _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Printing);
 
         if (component.NotifyAdmins)
-            NotifyAdmins(faxName, component.FaxName );
+            NotifyAdmins(faxName, component.FaxName);
 
         component.PrintingQueue.Enqueue(printout);
     }

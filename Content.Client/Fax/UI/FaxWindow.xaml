@@ -39,5 +39,25 @@
             <Button Name="RefreshButton"
                     Text="{Loc 'fax-machine-ui-refresh-button'}" />
         </BoxContainer>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <Label Text="{Loc 'fax-machine-ui-copy-options'}" />
+            <Control MinWidth="4" />
+            <Button Name="Copy2Button"
+                    Text="2"
+                    HorizontalExpand="False"
+                    Disabled="True" />
+            <Button Name="Copy3Button"
+                    Text="3"
+                    HorizontalExpand="False"
+                    Disabled="True" />
+            <Button Name="Copy5Button"
+                    Text="5"
+                    HorizontalExpand="False"
+                    Disabled="True" />
+            <Button Name="Copy10Button"
+                    Text="10"
+                    HorizontalExpand="False"
+                    Disabled="True" />
+        </BoxContainer>
     </BoxContainer>
 </DefaultWindow>

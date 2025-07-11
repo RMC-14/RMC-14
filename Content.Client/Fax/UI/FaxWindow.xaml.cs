@@ -13,6 +13,7 @@ public sealed partial class FaxWindow : DefaultWindow
     public event Action? FileButtonPressed;
     public event Action? PaperButtonPressed;
     public event Action? CopyButtonPressed;
+    public event Action<int>? CopyMultipleButtonPressed;
     public event Action? SendButtonPressed;
     public event Action? RefreshButtonPressed;
     public event Action<string>? PeerSelected;
@@ -25,18 +26,26 @@ public sealed partial class FaxWindow : DefaultWindow
 
         PaperButtonPressed += OnPaperButtonPressed;
 
-        FileButton.OnPressed += _ => FileButtonPressed?.Invoke(); 
-        PaperButton.OnPressed += _ => PaperButtonPressed?.Invoke(); 
+        FileButton.OnPressed += _ => FileButtonPressed?.Invoke();
+        PaperButton.OnPressed += _ => PaperButtonPressed?.Invoke();
         CopyButton.OnPressed += _ => CopyButtonPressed?.Invoke();
+        Copy2Button.OnPressed += _ => CopyMultipleButtonPressed?.Invoke(2);
+        Copy3Button.OnPressed += _ => CopyMultipleButtonPressed?.Invoke(3);
+        Copy5Button.OnPressed += _ => CopyMultipleButtonPressed?.Invoke(5);
+        Copy10Button.OnPressed += _ => CopyMultipleButtonPressed?.Invoke(10);
         SendButton.OnPressed += _ => SendButtonPressed?.Invoke();
         RefreshButton.OnPressed += _ => RefreshButtonPressed?.Invoke();
         PeerSelector.OnItemSelected += args =>
-            PeerSelected?.Invoke((string) args.Button.GetItemMetadata(args.Id)!);
+            PeerSelected?.Invoke((string)args.Button.GetItemMetadata(args.Id)!);
     }
 
     public void UpdateState(FaxUiState state)
     {
         CopyButton.Disabled = !state.CanCopy;
+        Copy2Button.Disabled = !state.CanCopy;
+        Copy3Button.Disabled = !state.CanCopy;
+        Copy5Button.Disabled = !state.CanCopy;
+        Copy10Button.Disabled = !state.CanCopy;
         SendButton.Disabled = !state.CanSend;
         FromLabel.Text = state.DeviceName;
 
@@ -94,7 +103,7 @@ public sealed partial class FaxWindow : DefaultWindow
     {
         OfficePaper = !OfficePaper;
 
-        if(OfficePaper)
+        if (OfficePaper)
             PaperButton.Text = Loc.GetString("fax-machine-ui-paper-button-office");
         else
             PaperButton.Text = Loc.GetString("fax-machine-ui-paper-button-normal");

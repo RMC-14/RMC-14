@@ -14,6 +14,7 @@ fax-machine-ui-file-button = Print File
 fax-machine-ui-paper-button-normal = Normal Paper
 fax-machine-ui-paper-button-office = Office Paper
 fax-machine-ui-copy-button = Copy
+fax-machine-ui-copy-options = Copy:
 fax-machine-ui-send-button = Send
 fax-machine-ui-refresh-button = Refresh
 fax-machine-ui-no-peers = No Peers

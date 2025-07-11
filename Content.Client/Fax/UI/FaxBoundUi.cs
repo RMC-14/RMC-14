@@ -28,6 +28,7 @@ public sealed class FaxBoundUi : BoundUserInterface
         _window = this.CreateWindow<FaxWindow>();
         _window.FileButtonPressed += OnFileButtonPressed;
         _window.CopyButtonPressed += OnCopyButtonPressed;
+        _window.CopyMultipleButtonPressed += OnCopyMultipleButtonPressed;
         _window.SendButtonPressed += OnSendButtonPressed;
         _window.RefreshButtonPressed += OnRefreshButtonPressed;
         _window.PeerSelected += OnPeerSelected;
@@ -80,6 +81,11 @@ public sealed class FaxBoundUi : BoundUserInterface
     private void OnCopyButtonPressed()
     {
         SendMessage(new FaxCopyMessage());
+    }
+
+    private void OnCopyMultipleButtonPressed(int copies)
+    {
+        SendMessage(new FaxCopyMultipleMessage(copies));
     }
 
     private void OnRefreshButtonPressed()
