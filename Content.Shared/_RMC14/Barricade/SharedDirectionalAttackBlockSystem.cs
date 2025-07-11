@@ -30,15 +30,17 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
             if (!IsAttackBlocked(ent, target))
                 continue;
 
+            var newCoordinates = GetNetCoordinates(_transform.GetMoverCoordinates(GetEntity(potentialTarget)));
+
             // The attack has been blocked, swap the attack target to the blocking entity.
             switch (args.Attack)
             {
                 case LightAttackEvent light:
-                    args.Attack = new LightAttackEvent(potentialTarget, args.Weapon, light.Coordinates);
+                    args.Attack = new LightAttackEvent(potentialTarget, args.Weapon, newCoordinates);
                     break;
                 // A disarm attempt is turned into a light attack on the blocking entity.
                 case DisarmAttackEvent disarm:
-                    args.Attack = new LightAttackEvent(potentialTarget, args.Weapon, disarm.Coordinates);
+                    args.Attack = new LightAttackEvent(potentialTarget, args.Weapon, newCoordinates);
                     break;
             }
             break;

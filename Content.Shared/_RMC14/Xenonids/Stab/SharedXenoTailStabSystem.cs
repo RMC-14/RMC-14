@@ -99,7 +99,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
         RaiseLocalEvent(stab, ref eve);
         damage += eve.Damage;
-        if (args.Entity == null)
+        if (args.Entity == null || TerminatingOrDeleted(args.Entity))
         {
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
             RaiseLocalEvent(stab, missEvent);
@@ -110,7 +110,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     _actions.SetCooldown(action.Id, actionComp.MissCooldown);
             }
         }
-        else if (!TerminatingOrDeleted(args.Entity.Value))
+        else
         {
             args.Handled = true;
 
@@ -231,7 +231,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            if (args.Entity != null && !TerminatingOrDeleted(args.Entity) && _net.IsServer)
+            if (args.Entity != null && !TerminatingOrDeleted(args.Entity))
             {
                 var direction = _transform.GetWorldRotation(stab).GetDir();
                 var angle = direction.ToAngle() - Angle.FromDegrees(180);

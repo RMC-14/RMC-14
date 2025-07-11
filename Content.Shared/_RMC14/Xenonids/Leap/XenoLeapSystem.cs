@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Barricade.Components;
@@ -71,10 +72,12 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalBlock = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
+    private EntityQuery<FixturesComponent> _fixturesQuery;
 
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
@@ -150,6 +153,8 @@ public sealed class XenoLeapSystem : EntitySystem
         leaping.HitEffect = xeno.Comp.HitEffect;
         leaping.TargetJitterTime = xeno.Comp.TargetJitterTime;
         leaping.TargetCameraShakeStrength = xeno.Comp.TargetCameraShakeStrength;
+        leaping.IgnoredCollisionGroupLarge = xeno.Comp.IgnoredCollisionGroupLarge;
+        leaping.IgnoredCollisionGroupSmall = xeno.Comp.IgnoredCollisionGroupSmall;
 
         if (xeno.Comp.PlasmaCost > FixedPoint2.Zero &&
             !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
@@ -179,6 +184,16 @@ public sealed class XenoLeapSystem : EntitySystem
         _obstacleSlamming.MakeImmune(xeno, 0.5f);
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
         _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
+
+        if (TryComp(xeno, out FixturesComponent? fixtures))
+        {
+            var collisionGroup = (int)leaping.IgnoredCollisionGroupSmall;
+            if (_size.TryGetSize(xeno, out var size) && size > RMCSizes.SmallXeno)
+                collisionGroup = (int)leaping.IgnoredCollisionGroupLarge;
+
+            var fixture = fixtures.Fixtures.First();
+            _physics.SetCollisionMask(xeno, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ collisionGroup);
+        }
 
         //Handle close-range or same-tile leaps
         foreach (var ent in _physics.GetContactingEntities(xeno.Owner, physics))
@@ -444,17 +459,21 @@ public sealed class XenoLeapSystem : EntitySystem
             return true;
         }
 
-        xeno.Comp.KnockedDown = true;
-        Dirty(xeno);
-
         var leapEv = new XenoLeapHitAttempt(xeno.Owner);
         RaiseLocalEvent(target, ref leapEv);
 
         if (leapEv.Cancelled)
+        {
+            xeno.Comp.KnockedDown = true;
+            Dirty(xeno);
             return true;
+        }
 
         if (!HasComp<MobStateComponent>(target) || _mobState.IsIncapacitated(target))
             return false;
+
+        xeno.Comp.KnockedDown = true;
+        Dirty(xeno);
 
         if (_physicsQuery.TryGetComponent(xeno, out var physics))
         {
@@ -511,6 +530,16 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             _physics.SetLinearVelocity(leaping, Vector2.Zero, body: physics);
             _physics.SetBodyStatus(leaping, physics, BodyStatus.OnGround);
+        }
+
+        if (_fixturesQuery.TryGetComponent(leaping, out var fixtures))
+        {
+            var collisionGroup = (int)leaping.Comp.IgnoredCollisionGroupSmall;
+            if (_size.TryGetSize(leaping, out var size) && size > RMCSizes.SmallXeno)
+                collisionGroup = (int)leaping.Comp.IgnoredCollisionGroupLarge;
+
+            var fixture = fixtures.Fixtures.First();
+            _physics.SetCollisionMask(leaping, fixture.Key, fixture.Value, fixture.Value.CollisionMask | collisionGroup);
         }
 
         RemCompDeferred<XenoLeapingComponent>(leaping);
