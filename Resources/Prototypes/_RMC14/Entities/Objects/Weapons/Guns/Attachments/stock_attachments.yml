@@ -1064,5 +1064,6 @@
 - type: Tag
   id: RMCAttachmentL24BStock
 
+- type: Tag
   id: RMCAttachmentAK4047StockCollapsible
 
