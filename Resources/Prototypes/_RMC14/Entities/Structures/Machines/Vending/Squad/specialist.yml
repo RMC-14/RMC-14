@@ -209,7 +209,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -240,7 +240,7 @@
         recommended: true
       - id: CMWebbingBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }

@@ -93,6 +93,8 @@
     value: 0.2
   - type: FixedIdentity
     name: cm-job-name-xeno-lurker
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent:
@@ -164,7 +166,6 @@
         Brute: 40
   - type: XenoTailJab
     attackEffect: RMCEffectTailHit
-    throwRange: 0.5
     damage:
       groups:
         Brute: 50

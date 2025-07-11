@@ -20,7 +20,7 @@
 
 # Scrubs
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [ RMCMarineUniformBase, RMCJumpsuitMarinePatchBase ]
   id: CMScrubsBlue
   name: blue medical scrubs
   description: They're made of a special fiber that provides minor protection against biohazards. These are in blue.
@@ -45,7 +45,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
-    
+
 - type: entity
   parent: CMScrubsBlue
   id: CMScrubsOrange
@@ -63,6 +63,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/lightblue.rsi
+
+- type: entity
+  parent: RMCScrubsLightBlue
+  id: RMCScrubsLightBlueArmband
+  suffix: Armband
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCNurseArmband
 
 - type: entity
   parent: CMScrubsBlue

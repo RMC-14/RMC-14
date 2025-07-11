@@ -50,7 +50,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-      #    RMCBeltHolsterFlareGun #TODO: Make this
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtility
       - id: RMCBeltUtilityGeneral
@@ -169,7 +169,7 @@
         points: 15
       - id: CMWebbingBlack
         points: 15
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
         points: 15
       - id: CMWebbingHolster
         points: 15

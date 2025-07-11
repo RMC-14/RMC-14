@@ -117,6 +117,8 @@
     value: 0.7
   - type: FixedIdentity
     name: cm-job-name-xeno-praetorian
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
 
 - type: entity
   parent: CMXenoPraetorianBase
