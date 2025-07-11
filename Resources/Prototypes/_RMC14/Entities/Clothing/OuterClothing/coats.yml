@@ -572,7 +572,7 @@
   description: A green windbreaker.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker.rsi
     layers:
     - state: icon
       map: [ "unfoldedLayer" ]
@@ -586,7 +586,19 @@
     unfoldVerbText: rmc-button-up-verb
     foldVerbText: rmc-unbutton-verb
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerFirstResponder
+  name: first responder windbreaker
+  description: A brown windbreaker with reflective strips commonly worn by first responders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
+

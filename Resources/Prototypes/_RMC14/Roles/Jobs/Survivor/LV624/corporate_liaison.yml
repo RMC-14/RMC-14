@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorCorporate
   id: CMSurvivorLV624CorporateLiaison
-  name: cm-job-name-survivor-lv624-corporate-liaison
+  name: rmc-job-name-survivor-lv624-corporate-liaison
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624CorporateLiaison
   spawnMenuRoleName: Corporate Liaison (LV624 Survivor)
@@ -28,14 +28,12 @@
       - WeYa
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-    - type: JobPrefix
-      prefix: cm-job-prefix-survivor-LV624CorporateLiaison
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate
   id: RMCGearSurvivorLV624CorporateLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonBlack # TODO RMC colony administrator jumpsuit
+    jumpsuit: CMJumpsuitLiaisonField # parity jumpsuit has Wey-Yu logo, so using liaison one
     eyes: RMCSunglasses
 
 - type: entity

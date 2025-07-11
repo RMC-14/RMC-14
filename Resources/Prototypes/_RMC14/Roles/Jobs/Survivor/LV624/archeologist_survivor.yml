@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorDoctor
   id: CMSurvivorLV624Archeologist
-  name: cm-job-name-survivor-lv624-archeologist
+  name: rmc-job-name-survivor-lv624-archeologist
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624Archeologist
   startingGear: RMCGearSurvivorLV624Archeologist
@@ -34,7 +34,7 @@
   id: RMCGearSurvivorLV624Archeologist
   equipment:
     head: RMCBoonie
-    jumpsuit: CMJumpsuitColonist # TODO RMC blue workwear
+    jumpsuit: RMCJumpsuitBlueWorkwear
     outerClothing: CMUtilityVest
     eyes: RMCGlassesAviators
   inhand:

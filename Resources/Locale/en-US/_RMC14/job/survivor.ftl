@@ -40,3 +40,13 @@ rmc-job-name-forecon-sniper = Sniper
 rmc-job-name-forecon-marksman = Marksman
 rmc-job-name-forecon-support-tech = Support Technician
 rmc-job-name-forecon-commander = Commander
+
+# LV-624 survs
+
+rmc-job-name-survivor-lv624-archeologist = LV-624 Archeologist
+rmc-job-name-survivor-lv624-cargo-technician = LV-624 Cargo Technician
+rmc-job-name-survivor-lv624-cmb-deputy = CMB Deputy
+rmc-job-name-survivor-lv624-corporate-liaison = LV-624 Corporate Liaison
+rmc-job-name-survivor-lv624-security-guard = We-Ya Security Guard
+rmc-job-name-survivor-lv624-medical-technician = LV-624 Emergency Medical Technician
+rmc-job-name-survivor-lv624-engineer = LV-624 Engineer

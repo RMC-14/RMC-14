@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorDoctor
   id: CMSurvivorLV624MedicalTechnician
-  name: cm-job-name-survivor-lv624-medical-technician
+  name: rmc-job-name-survivor-lv624-medical-technician
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624MedicalTechnician
   startingGear: RMCGearSurvivorLV624MedicalTechnician
@@ -32,9 +32,9 @@
   parent: RMCGearSurvivorDoctor
   id: RMCGearSurvivorLV624MedicalTechnician
   equipment:
-    head: RMCHeadCapFlippable # TODO RMC blue cap
-    jumpsuit: CMJumpsuitColonist # TODO RMC blue workwear
-    outerClothing: RMCJacketCorporateBlack # TODO RMC first reponder jacket
+    head: RMCHeadBlueSoftCap
+    jumpsuit: RMCJumpsuitBlueWorkwear
+    outerClothing: RMCJacketWindbreakerFirstResponder
     eyes: RMCGlassesMedicalHUDGlasses
 
 - type: entity

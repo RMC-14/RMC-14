@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorDoctor
   id: CMSurvivorLV624CargoTechnician
-  name: cm-job-name-survivor-lv624-cargo-technician
+  name: rmc-job-name-survivor-lv624-cargo-technician
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624CargoTechnician
   startingGear: RMCGearSurvivorLV624CargoTechnician
@@ -31,9 +31,9 @@
 - type: startingGear
   id: RMCGearSurvivorLV624CargoTechnician
   equipment:
-    jumpsuit: CMJumpsuitColonist # TODO RMC kahki workwear
+    jumpsuit: RMCJumpsuitKhakiWorkwearJacketless
     back: CMSatchelEngineerSurvivorFill
-    head: RMCHeadCapFlippable #TODO RMC yellow cap
+    head: RMCHeadYellowSoftCap
     shoes: RMCShoesJackboots
     id: CMIDCardColonistEngineer
     ears: CMHeadsetColony

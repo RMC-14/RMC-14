@@ -370,6 +370,44 @@
       Classic: _RMC14/Objects/Clothing/Head/Hats/flapcap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/flapcap/urban.rsi
 
+# soft caps
+
+- type: entity
+  parent: CMHeadCapMP
+  id: RMCHeadBlueSoftCap
+  name: blue cap
+  description: It's a baseball hat in a tasteless blue color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/blue_cap.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/blue_cap.rsi
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+
+- type: entity
+  parent: RMCHeadBlueSoftCap
+  id: RMCHeadYellowSoftCap
+  name: yellow cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/yellow_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/yellow_cap.rsi
+
 # surgical caps
 - type: entity
   parent: CMHeadCap
