@@ -894,7 +894,6 @@
     - RMCAttachmentL83A2Stock
 
 
-
 - type: entity
   parent: RMCAttachableBase
   id: RMCAttachmentL24Stock
