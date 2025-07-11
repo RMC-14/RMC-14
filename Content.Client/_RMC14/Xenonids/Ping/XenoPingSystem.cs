@@ -18,7 +18,6 @@ namespace Content.Client._RMC14.Xenonids.Ping;
 public sealed class XenoPingSystem : SharedXenoPingSystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -117,7 +116,7 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             }
             catch (Exception ex)
             {
-                Log.Error($"An error occurred while retrieving the color: {ex.Message}");
+                Log.Error($"Error retrieving ping color: {ex.Message}");
             }
         }
 
@@ -145,42 +144,57 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             if (!_pingWaypoints.TryGetValue(uid, out var waypointData))
                 continue;
 
-            waypointData.EntityIsLoaded = true;
+            UpdateWaypointFromPing(waypointData, ping, xform, uid);
+        }
 
-            if (waypointData.IsTilePing)
-            {
-                if (!waypointData.HasStoredPosition)
-                {
-                    waypointData.WorldPosition = ping.WorldPosition;
-                    waypointData.OriginalCoordinates = xform.Coordinates;
-                    waypointData.HasStoredPosition = true;
-                }
-            }
-            else
+        CleanupUnloadedWaypoints(loadedPings);
+    }
+
+    private void UpdateWaypointFromPing(PingWaypointData waypointData, XenoPingEntityComponent ping, TransformComponent xform, EntityUid uid)
+    {
+        waypointData.EntityIsLoaded = true;
+
+        if (waypointData.IsTilePing)
+        {
+            if (!waypointData.HasStoredPosition)
             {
                 waypointData.WorldPosition = ping.WorldPosition;
+                waypointData.OriginalCoordinates = xform.Coordinates;
+                waypointData.HasStoredPosition = true;
+            }
+        }
+        else
+        {
+            waypointData.WorldPosition = ping.WorldPosition;
+        }
+
+        waypointData.AttachedTarget = ping.AttachedTarget;
+        waypointData.IsTargetValid = ping.AttachedTarget.HasValue;
+
+        UpdateWaypointTexture(waypointData, uid);
+    }
+
+    private void UpdateWaypointTexture(PingWaypointData waypointData, EntityUid uid)
+    {
+        if (TryComp<SpriteComponent>(uid, out var sprite))
+        {
+            if (sprite.Color != Color.White && sprite.Color != waypointData.Color)
+            {
+                waypointData.Color = sprite.Color;
             }
 
-            waypointData.AttachedTarget = ping.AttachedTarget;
-            waypointData.IsTargetValid = ping.AttachedTarget.HasValue;
-
-            if (TryComp<SpriteComponent>(uid, out var sprite))
+            if (waypointData.Texture == null && sprite.BaseRSI != null && sprite[0].RsiState.IsValid)
             {
-                if (sprite.Color != Color.White && sprite.Color != waypointData.Color)
+                if (sprite.BaseRSI.TryGetState(sprite[0].RsiState.Name, out var state))
                 {
-                    waypointData.Color = sprite.Color;
-                }
-
-                if (waypointData.Texture == null && sprite.BaseRSI != null && sprite[0].RsiState.IsValid)
-                {
-                    if (sprite.BaseRSI.TryGetState(sprite[0].RsiState.Name, out var state))
-                    {
-                        waypointData.Texture = state.Frame0;
-                    }
+                    waypointData.Texture = state.Frame0;
                 }
             }
         }
+    }
 
+    private void CleanupUnloadedWaypoints(HashSet<EntityUid> loadedPings)
+    {
         foreach (var (uid, waypointData) in _pingWaypoints.ToList())
         {
             if (loadedPings.Contains(uid))
