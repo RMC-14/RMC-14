@@ -49,25 +49,46 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
 
     private void OnPingEntityInit(Entity<XenoPingEntityComponent> ent, ref ComponentInit args)
     {
-        if (!ShouldShowPing(ent.Comp.Creator))
-            return;
-
-        var creator = ent.Comp.Creator;
-        var isQueen = EntityManager.HasComponent<XenoEvolutionGranterComponent>(creator);
-        var isHiveLeader = EntityManager.HasComponent<HiveLeaderComponent>(creator);
-        var shouldCreateWaypoint = isQueen || isHiveLeader;
-
-        if (!shouldCreateWaypoint)
-            return;
-
-        var color = GetColorFromEntity(ent.Owner);
         if (TryComp<SpriteComponent>(ent.Owner, out var sprite))
+            sprite.Visible = false;
+
+        ProcessPingVisibility(ent.Owner);
+    }
+
+    private void ProcessPingVisibility(EntityUid pingUid)
+    {
+        if (!Exists(pingUid) || !TryComp<XenoPingEntityComponent>(pingUid, out var pingComp))
+            return;
+
+        if (pingComp.Creator == EntityUid.Invalid)
         {
-            sprite.Color = color;
-            sprite.Visible = true;
+            Timer.Spawn(TimeSpan.FromMilliseconds(50), () => ProcessPingVisibility(pingUid));
+            return;
         }
 
-        var xform = Transform(ent.Owner);
+        if (!ShouldShowPing(pingComp.Creator))
+        {
+            return;
+        }
+
+        if (TryComp<SpriteComponent>(pingUid, out var spriteComp))
+            spriteComp.Visible = true;
+
+        var creator = pingComp.Creator;
+        var isQueen = EntityManager.HasComponent<XenoEvolutionGranterComponent>(creator);
+        var isHiveLeader = EntityManager.HasComponent<HiveLeaderComponent>(creator);
+
+        if (isQueen || isHiveLeader)
+            CreateWaypoint(pingUid, pingComp);
+    }
+
+    private void CreateWaypoint(EntityUid pingUid, XenoPingEntityComponent pingComp)
+    {
+        var color = GetColorFromEntity(pingUid);
+        if (TryComp<SpriteComponent>(pingUid, out var sprite))
+            sprite.Color = color;
+
+        var xform = Transform(pingUid);
         var originalCoords = xform.Coordinates;
         var mapId = xform.MapID;
 
@@ -75,41 +96,34 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         if (sprite != null && sprite.BaseRSI != null && sprite[0].RsiState.IsValid)
         {
             if (sprite.BaseRSI.TryGetState(sprite[0].RsiState.Name, out var state))
-            {
                 texture = state.Frame0;
-            }
         }
 
-        var isTilePing = !ent.Comp.AttachedTarget.HasValue;
-
         var waypointData = new PingWaypointData(
-            ent.Owner,
-            ent.Comp.PingType,
-            ent.Comp.Creator,
-            ent.Comp.WorldPosition,
+            pingUid,
+            pingComp.PingType,
+            pingComp.Creator,
+            pingComp.WorldPosition,
             originalCoords,
             mapId,
             color,
             texture,
-            ent.Comp.DeleteAt
+            pingComp.DeleteAt
         )
         {
-            AttachedTarget = ent.Comp.AttachedTarget,
-            IsTargetValid = ent.Comp.AttachedTarget.HasValue,
-            IsTilePing = isTilePing,
+            AttachedTarget = pingComp.AttachedTarget,
+            IsTargetValid = pingComp.AttachedTarget.HasValue,
+            IsTilePing = !pingComp.AttachedTarget.HasValue,
             HasStoredPosition = true
         };
 
-        _pingWaypoints[ent.Owner] = waypointData;
+        _pingWaypoints[pingUid] = waypointData;
     }
 
     private Color GetColorFromEntity(EntityUid pingEntity)
     {
         if (TryComp<SpriteComponent>(pingEntity, out var sprite))
-        {
             return sprite.Color;
-        }
-
         return Color.White;
     }
 
@@ -170,19 +184,12 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
     private void UpdateWaypointFromPing(PingWaypointData waypointData, XenoPingEntityComponent ping, TransformComponent xform, EntityUid uid)
     {
         waypointData.EntityIsLoaded = true;
+        waypointData.WorldPosition = ping.WorldPosition;
 
-        if (waypointData.IsTilePing)
+        if (waypointData.IsTilePing && !waypointData.HasStoredPosition)
         {
-            if (!waypointData.HasStoredPosition)
-            {
-                waypointData.WorldPosition = ping.WorldPosition;
-                waypointData.OriginalCoordinates = xform.Coordinates;
-                waypointData.HasStoredPosition = true;
-            }
-        }
-        else
-        {
-            waypointData.WorldPosition = ping.WorldPosition;
+            waypointData.OriginalCoordinates = xform.Coordinates;
+            waypointData.HasStoredPosition = true;
         }
 
         waypointData.AttachedTarget = ping.AttachedTarget;
@@ -196,16 +203,12 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         if (TryComp<SpriteComponent>(uid, out var sprite))
         {
             if (sprite.Color != Color.White && sprite.Color != waypointData.Color)
-            {
                 waypointData.Color = sprite.Color;
-            }
 
             if (waypointData.Texture == null && sprite.BaseRSI != null && sprite[0].RsiState.IsValid)
             {
                 if (sprite.BaseRSI.TryGetState(sprite[0].RsiState.Name, out var state))
-                {
                     waypointData.Texture = state.Frame0;
-                }
             }
         }
     }
@@ -248,15 +251,11 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         foreach (var (uid, data) in _pingWaypoints)
         {
             if (currentTime >= data.DeleteAt || !ShouldShowPing(data.Creator))
-            {
                 toRemove.Add(uid);
-            }
         }
 
         foreach (var uid in toRemove)
-        {
             _pingWaypoints.Remove(uid);
-        }
     }
 
     public IReadOnlyDictionary<EntityUid, PingWaypointData> GetPingWaypoints() => _pingWaypoints;
