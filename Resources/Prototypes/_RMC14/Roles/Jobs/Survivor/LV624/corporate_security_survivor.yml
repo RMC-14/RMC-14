@@ -39,7 +39,7 @@
     head: ArmorHelmetPMC # TODO RMC black PMC hat
     jumpsuit: RMCJumsuitWhiteService
     outerClothing: RMCArmorVestWeYa
-    ears: RMCHeadsetDistressWeYaColony
+    ears: RMCHeadsetDistressWeYa
 
 - type: entity
   parent: CMSpawnPointJobBase

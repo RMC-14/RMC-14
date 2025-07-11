@@ -35,6 +35,7 @@
   equipment:
     head: RMCHardhatOrange
     outerClothing: RMCHazardVest
+# TODO RMCDispatcher Uniform
 
 - type: entity
   parent: CMSpawnPointJobBase

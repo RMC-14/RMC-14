@@ -33,7 +33,7 @@
   id: RMCGearSurvivorLV624Goon
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressWeYaColony
+    ears: RMCHeadsetDistressWeYa
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate
     gloves: RMCHandsVeteran

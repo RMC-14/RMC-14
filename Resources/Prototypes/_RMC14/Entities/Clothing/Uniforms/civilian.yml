@@ -1,3 +1,4 @@
+
 #workwears
 - type: entity
   parent: [RMCUniformBase, RMCAlternateFoldableUniformBase]
@@ -6,7 +7,7 @@
   description: A pair of brown canvas workpants paired with a dark blue workshirt. A common pairing among blue-collar workers.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Civilians/blue_workwear.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_workwear.rsi
   - type: Appearance
 
 - type: entity
@@ -16,7 +17,7 @@
   description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Civilians/khaki_workwear.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/khaki_workwear.rsi
 
 # jacketless workwears for certain survs
 - type: entity

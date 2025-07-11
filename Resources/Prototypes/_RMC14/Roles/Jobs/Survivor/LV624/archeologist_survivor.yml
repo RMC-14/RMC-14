@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivorDoctor
+  parent: CMSurvivorScientist
   id: CMSurvivorLV624Archeologist
   name: rmc-job-name-survivor-lv624-archeologist
   description: cm-job-description-survivor
@@ -30,12 +30,13 @@
       preset: RMCGearSurvivorPresetLV624Archeologist
 
 - type: startingGear
-  parent: RMCGearSurvivorDoctor
+  parent: RMCGearSurvivorScientist
   id: RMCGearSurvivorLV624Archeologist
   equipment:
     head: RMCBoonie
     jumpsuit: RMCJumpsuitBlueWorkwear
     outerClothing: CMUtilityVest
+    shoes: RMCShoesLaceupBrown
     eyes: RMCGlassesAviators
   inhand:
     - RMCShovel
@@ -59,6 +60,6 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetDoctor
+  parent: RMCSurvivorPresetScientist
   id: RMCGearSurvivorPresetLV624Archeologist
   name: lv624 archeologist colonist preset # TODO RMC14 random research notes
