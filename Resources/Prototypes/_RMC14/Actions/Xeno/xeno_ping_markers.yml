@@ -25,15 +25,13 @@
   - type: Sprite
     state: rally
     color: "#00FF00"
-
-- type: entity
-  parent: XenoPingBase
-  id: XenoPingDefend
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: defend
-    color: "#0080FF"
+  - type: XenoPingData
+    name: Move
+    description: Direct sisters to move to this location
+    chatMessage: Move to
+    popupMessage: Move Here!
+    priority: 100
+    categories: [ tactical ]
 
 - type: entity
   parent: XenoPingBase
@@ -43,6 +41,29 @@
   - type: Sprite
     state: attack
     color: "#FF0000"
+  - type: XenoPingData
+    name: Attack
+    description: Target this location for attack
+    chatMessage: Attack
+    popupMessage: Attack Here!
+    priority: 95
+    categories: [ tactical, offensive ]
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingDefend
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: defend
+    color: "#0080FF"
+  - type: XenoPingData
+    name: Defend
+    description: Mark this position for defense
+    chatMessage: Defend
+    popupMessage: Defend This Position!
+    priority: 90
+    categories: [ tactical, defensive ]
 
 - type: entity
   parent: XenoPingBase
@@ -52,6 +73,13 @@
   - type: Sprite
     state: rally
     color: "#FFFF00"
+  - type: XenoPingData
+    name: Regroup
+    description: Rally sisters at this position
+    chatMessage: Regroup at
+    popupMessage: Regroup Here!
+    priority: 85
+    categories: [ tactical ]
 
 - type: entity
   parent: XenoPingBase
@@ -61,51 +89,13 @@
   - type: Sprite
     state: danger
     color: "#FF8000"
-
-- type: entity
-  parent: XenoPingBase
-  id: XenoPingHold
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: hold
-    color: "#8000FF"
-
-- type: entity
-  parent: XenoPingBase
-  id: XenoPingAmbush
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: ambush
-    color: "#800080"
-
-- type: entity
-  parent: XenoPingBase
-  id: XenoPingFortify
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: fortify
-    color: "#808080"
-
-- type: entity
-  parent: XenoPingBase
-  id: XenoPingWeed
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: weed
-    color: "#008000"
-
-- type: entity
-  parent: XenoPingBase
-  id: XenoPingNest
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    state: nest
-    color: "#8B4513"
+  - type: XenoPingData
+    name: Danger
+    description: Warning! Dangerous area
+    chatMessage: Danger at
+    popupMessage: Danger!
+    priority: 99
+    categories: [ warning ]
 
 - type: entity
   parent: XenoPingBase
@@ -115,6 +105,45 @@
   - type: Sprite
     state: hosts
     color: "#FF69B4"
+  - type: XenoPingData
+    name: Hosts
+    description: Potential hosts detected
+    chatMessage: Hosts at
+    popupMessage: Hosts Detected!
+    priority: 88
+    categories: [ hunting ]
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingHold
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: hold
+    color: "#8000FF"
+  - type: XenoPingData
+    name: Hold
+    description: Hold this position
+    chatMessage: Hold
+    popupMessage: Hold Position!
+    priority: 80
+    categories: [ tactical, defensive ]
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingAmbush
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: ambush
+    color: "#800080"
+  - type: XenoPingData
+    name: Ambush
+    description: Set up ambush here
+    chatMessage: Ambush at
+    popupMessage: Ambush Here!
+    priority: 75
+    categories: [ tactical, stealth ]
 
 - type: entity
   parent: XenoPingBase
@@ -124,7 +153,64 @@
   - type: Sprite
     state: aide
     color: "#00FFFF"
+  - type: XenoPingData
+    name: Aide
+    description: Need assistance here
+    chatMessage: Help at
+    popupMessage: Need Assistance!
+    priority: 70
+    categories: [ support ]
 
+# Construction Pings
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingFortify
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: fortify
+    color: "#808080"
+  - type: XenoPingData
+    name: Fortify
+    description: Build defenses here
+    chatMessage: Fortify
+    popupMessage: Fortify This Area!
+    priority: 70
+    categories: [ construction, defensive ]
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingNest
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: nest
+    color: "#8B4513"
+  - type: XenoPingData
+    name: Nest
+    description: Build nest structures here
+    chatMessage: Nest at
+    popupMessage: Build Nest Here!
+    priority: 65
+    categories: [ construction ]
+
+- type: entity
+  parent: XenoPingBase
+  id: XenoPingWeed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: weed
+    color: "#008000"
+  - type: XenoPingData
+    name: Weed
+    description: Spread weeds in this area
+    chatMessage: Weed
+    popupMessage: Spread Weeds Here!
+    priority: 60
+    categories: [ construction, expansion ]
+
+# Advanced Construction Pings
 - type: entity
   parent: XenoPingBase
   id: XenoPingHiveCore
@@ -136,6 +222,14 @@
     color: "#FF00FF"
     drawdepth: Effects
     scale: 1.5, 1.5
+  - type: XenoPingData
+    name: Hive Core
+    description: Main hive structure location
+    chatMessage: Build hive core at
+    popupMessage: Hive Core Here!
+    priority: 100
+    isConstruction: true
+    categories: [ construction, hive ]
 
 - type: entity
   parent: XenoPingBase
@@ -148,6 +242,14 @@
     color: "#8B008B"
     drawdepth: Effects
     scale: 1.5, 1.5
+  - type: XenoPingData
+    name: Hive Cluster
+    description: Hive cluster that spreads weeds
+    chatMessage: Build hive cluster at
+    popupMessage: Hive Cluster Here!
+    priority: 90
+    isConstruction: true
+    categories: [ construction, hive ]
 
 - type: entity
   parent: XenoPingBase
@@ -160,6 +262,14 @@
     color: "#9932CC"
     drawdepth: Effects
     scale: 1.5, 1.5
+  - type: XenoPingData
+    name: Hive Pylon
+    description: Hive pylon structure
+    chatMessage: Build hive pylon at
+    popupMessage: Hive Pylon Here!
+    priority: 85
+    isConstruction: true
+    categories: [ construction, hive ]
 
 - type: entity
   parent: XenoPingBase
@@ -172,6 +282,14 @@
     color: "#FF6347"
     drawdepth: Effects
     scale: 1.5, 1.5
+  - type: XenoPingData
+    name: Egg Morpher
+    description: Egg morpher structure location
+    chatMessage: Build egg morpher at
+    popupMessage: Egg Morpher Here!
+    priority: 80
+    isConstruction: true
+    categories: [ construction, breeding ]
 
 - type: entity
   parent: XenoPingBase
@@ -184,6 +302,14 @@
     color: "#32CD32"
     drawdepth: Effects
     scale: 1.5, 1.5
+  - type: XenoPingData
+    name: Recovery Node
+    description: Recovery node for healing
+    chatMessage: Build recovery node at
+    popupMessage: Recovery Node Here!
+    priority: 75
+    isConstruction: true
+    categories: [ construction, support ]
 
 - type: entity
   parent: XenoPingBase
@@ -196,6 +322,14 @@
     color: "#8B4513"
     drawdepth: Effects
     scale: 1.5, 1.5
+  - type: XenoPingData
+    name: Tunnel
+    description: Tunnel entrance location
+    chatMessage: Build tunnel at
+    popupMessage: Tunnel Here!
+    priority: 70
+    isConstruction: true
+    categories: [ construction, mobility ]
 
 - type: entity
   parent: XenoPingBase
@@ -205,6 +339,14 @@
   - type: Sprite
     state: fortify
     color: "#696969"
+  - type: XenoPingData
+    name: Resin Wall
+    description: Resin wall construction
+    chatMessage: Build resin wall at
+    popupMessage: Resin Wall Here!
+    priority: 60
+    isConstruction: true
+    categories: [ construction, defensive ]
 
 - type: entity
   parent: XenoPingBase
@@ -214,6 +356,14 @@
   - type: Sprite
     state: fortify
     color: "#A0522D"
+  - type: XenoPingData
+    name: Resin Door
+    description: Resin door construction
+    chatMessage: Build resin door at
+    popupMessage: Resin Door Here!
+    priority: 55
+    isConstruction: true
+    categories: [ construction, defensive ]
 
 - type: entity
   parent: XenoPingBase
@@ -226,6 +376,14 @@
     color: "#8B0000"
     drawdepth: Effects
     scale: 1.5, 1.5
+  - type: XenoPingData
+    name: Resin Hole
+    description: Resin trap hole location
+    chatMessage: Build resin hole at
+    popupMessage: Resin Hole Here!
+    priority: 50
+    isConstruction: true
+    categories: [ construction, trap ]
 
 - type: entity
   parent: XenoPingBase
@@ -238,6 +396,14 @@
     color: "#32CD32"
     drawdepth: Effects
     scale: 1.5, 1.5
+  - type: XenoPingData
+    name: Fruit
+    description: Resin fruit location
+    chatMessage: Build fruit at
+    popupMessage: Fruit Here!
+    priority: 45
+    isConstruction: true
+    categories: [ construction, support ]
 
 - type: entity
   parent: XenoPingBase
@@ -247,3 +413,10 @@
   - type: Sprite
     state: no_direction
     color: "#FFFFFF"
+  - type: XenoPingData
+    name: General
+    description: General purpose marker
+    chatMessage: Look at
+    popupMessage: Follow Orders!
+    priority: 50
+    categories: [ general ]

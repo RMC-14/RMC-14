@@ -1,6 +1,8 @@
 using Content.Shared._RMC14.Xenonids.Ping;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -47,6 +49,9 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
 
     private void OnPingEntityInit(Entity<XenoPingEntityComponent> ent, ref ComponentInit args)
     {
+        if (!ShouldShowPing(ent.Comp.Creator))
+            return;
+
         var creator = ent.Comp.Creator;
         var isQueen = EntityManager.HasComponent<XenoEvolutionGranterComponent>(creator);
         var isHiveLeader = EntityManager.HasComponent<HiveLeaderComponent>(creator);
@@ -55,7 +60,7 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         if (!shouldCreateWaypoint)
             return;
 
-        var color = GetColorFromPrototype(ent.Comp.PingType);
+        var color = GetColorFromEntity(ent.Owner);
         if (TryComp<SpriteComponent>(ent.Owner, out var sprite))
         {
             sprite.Color = color;
@@ -98,26 +103,11 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         _pingWaypoints[ent.Owner] = waypointData;
     }
 
-    private Color GetColorFromPrototype(string pingType)
+    private Color GetColorFromEntity(EntityUid pingEntity)
     {
-        var entityId = GetPingEntityId(pingType);
-
-        if (!_prototypeManager.TryIndex<EntityPrototype>(entityId, out var prototype))
+        if (TryComp<SpriteComponent>(pingEntity, out var sprite))
         {
-            return Color.White;
-        }
-
-        if (prototype.Components.TryGetValue("Sprite", out var spriteData))
-        {
-            try
-            {
-                var spriteComp = (SpriteComponent)spriteData.Component;
-                return spriteComp.Color;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"Error retrieving ping color: {ex.Message}");
-            }
+            return sprite.Color;
         }
 
         return Color.White;
@@ -139,6 +129,9 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         var query = EntityQueryEnumerator<XenoPingEntityComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var ping, out var xform))
         {
+            if (!ShouldShowPing(ping.Creator))
+                continue;
+
             loadedPings.Add(uid);
 
             if (!_pingWaypoints.TryGetValue(uid, out var waypointData))
@@ -148,6 +141,30 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         }
 
         CleanupUnloadedWaypoints(loadedPings);
+    }
+
+    private bool ShouldShowPing(EntityUid pingCreator)
+    {
+        var player = _playerManager.LocalEntity;
+        if (player == null)
+            return false;
+
+        if (!HasComp<XenoComponent>(player))
+            return false;
+
+        if (!HasComp<HiveMemberComponent>(player))
+            return false;
+
+        if (!HasComp<HiveMemberComponent>(pingCreator))
+            return false;
+
+        var playerHive = _hive.GetHive(player.Value);
+        var creatorHive = _hive.GetHive(pingCreator);
+
+        if (playerHive == null || creatorHive == null)
+            return false;
+
+        return playerHive.Value.Owner == creatorHive.Value.Owner;
     }
 
     private void UpdateWaypointFromPing(PingWaypointData waypointData, XenoPingEntityComponent ping, TransformComponent xform, EntityUid uid)
@@ -200,6 +217,12 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             if (loadedPings.Contains(uid))
                 continue;
 
+            if (!ShouldShowPing(waypointData.Creator))
+            {
+                _pingWaypoints.Remove(uid);
+                continue;
+            }
+
             waypointData.EntityIsLoaded = false;
 
             if (!EntityManager.EntityExists(uid))
@@ -224,7 +247,7 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
 
         foreach (var (uid, data) in _pingWaypoints)
         {
-            if (currentTime >= data.DeleteAt)
+            if (currentTime >= data.DeleteAt || !ShouldShowPing(data.Creator))
             {
                 toRemove.Add(uid);
             }
@@ -240,27 +263,59 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
 
     public Dictionary<string, (string Name, Color Color, string Description)> GetAvailablePingTypesWithColors()
     {
-        var basePings = SharedXenoPingSystem.GetAvailablePingTypes();
+        var basePings = GetAvailablePingTypes();
         var result = new Dictionary<string, (string Name, Color Color, string Description)>();
 
-        foreach (var (pingType, (name, description)) in basePings)
+        foreach (var (entityId, (name, description)) in basePings)
         {
-            var color = GetColorFromPrototype(pingType);
-            result[pingType] = (name, color, description);
+            var color = GetColorFromEntityPrototype(entityId);
+            result[entityId] = (name, color, description);
         }
 
         return result;
     }
 
+    private Color GetColorFromEntityPrototype(string entityId)
+    {
+        if (_prototypeManager.TryIndex<EntityPrototype>(entityId, out var entityProto) &&
+            entityProto.Components.TryGetValue("Sprite", out var spriteComponent))
+        {
+            try
+            {
+                var spriteComp = (SpriteComponent)spriteComponent.Component;
+                return spriteComp.Color;
+            }
+            catch
+            {
+            }
+        }
+
+        return Color.White;
+    }
+
     public Dictionary<string, (string Name, Color Color, string Description)> GetAvailableConstructionPingTypesWithColors()
     {
-        var basePings = SharedXenoPingSystem.GetAvailableConstructionPingTypes();
+        var basePings = GetAvailableConstructionPingTypes();
         var result = new Dictionary<string, (string Name, Color Color, string Description)>();
 
-        foreach (var (pingType, (name, description)) in basePings)
+        foreach (var (entityId, (name, description)) in basePings)
         {
-            var color = GetColorFromPrototype(pingType);
-            result[pingType] = (name, color, description);
+            var color = GetColorFromEntityPrototype(entityId);
+            result[entityId] = (name, color, description);
+        }
+
+        return result;
+    }
+
+    public Dictionary<string, (string Name, Color Color, string Description)> GetPingsByCategoryWithColors(string category)
+    {
+        var basePings = GetPingsByCategory(category);
+        var result = new Dictionary<string, (string Name, Color Color, string Description)>();
+
+        foreach (var (entityId, (name, description)) in basePings)
+        {
+            var color = GetColorFromEntityPrototype(entityId);
+            result[entityId] = (name, color, description);
         }
 
         return result;

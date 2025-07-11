@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Xenonids;
@@ -17,7 +18,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Audio;
 using System;
 using System.Linq;
-using System.Numerics;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Ping;
 
@@ -27,13 +28,15 @@ public abstract class SharedXenoPingSystem : EntitySystem
     [Dependency] private readonly SharedCMChatSystem _cmChat = default!;
     [Dependency] private readonly SharedChatSystem _chatSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private const double MinPingDelaySeconds = 2.0;
     private const int NormalXenoPingLimit = 3;
@@ -47,23 +50,6 @@ public abstract class SharedXenoPingSystem : EntitySystem
     private EntityQuery<XenoComponent> _xenoQuery;
 
     private readonly Dictionary<EntityUid, TimeSpan> _lastPingTimes = new();
-
-    private static readonly Dictionary<string, string> PingTypeToEntity = new()
-    {
-        ["XenoPingMove"] = "XenoPingMove",
-        ["XenoPingDefend"] = "XenoPingDefend",
-        ["XenoPingAttack"] = "XenoPingAttack",
-        ["XenoPingRegroup"] = "XenoPingRegroup",
-        ["XenoPingDanger"] = "XenoPingDanger",
-        ["XenoPingHold"] = "XenoPingHold",
-        ["XenoPingAmbush"] = "XenoPingAmbush",
-        ["XenoPingFortify"] = "XenoPingFortify",
-        ["XenoPingWeed"] = "XenoPingWeed",
-        ["XenoPingNest"] = "XenoPingNest",
-        ["XenoPingHosts"] = "XenoPingHosts",
-        ["XenoPingAide"] = "XenoPingAide",
-        ["XenoPingGeneral"] = "XenoPingGeneral"
-    };
 
     public override void Initialize()
     {
@@ -205,7 +191,7 @@ public abstract class SharedXenoPingSystem : EntitySystem
         return coordinates.IsValid(EntityManager) && _mapManager.MapExists(coordinates.GetMapId(EntityManager));
     }
 
-    private EntityUid? ResolveTargetEntity(NetEntity? targetNetEntity)
+    protected EntityUid? ResolveTargetEntity(NetEntity? targetNetEntity)
     {
         if (!targetNetEntity.HasValue)
             return null;
@@ -213,7 +199,7 @@ public abstract class SharedXenoPingSystem : EntitySystem
         return TryGetEntity(targetNetEntity.Value, out var entityUid) ? entityUid : null;
     }
 
-    protected void CreatePing(EntityUid creator, string pingType, EntityCoordinates coordinates, EntityUid? targetEntity = null)
+    protected void CreatePing(EntityUid creator, string pingEntityId, EntityCoordinates coordinates, EntityUid? targetEntity = null)
     {
         if (_net.IsClient)
             return;
@@ -221,9 +207,22 @@ public abstract class SharedXenoPingSystem : EntitySystem
         if (!ValidateXenoCreator(creator, out var hive))
             return;
 
+        if (!_prototypeManager.TryIndex<EntityPrototype>(pingEntityId, out var entityProto))
+        {
+            _popup.PopupEntity("Invalid ping type.", creator, creator, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!entityProto.Components.TryGetValue("XenoPingData", out var pingDataComponent))
+        {
+            _popup.PopupEntity("Invalid ping configuration.", creator, creator, PopupType.SmallCaution);
+            return;
+        }
+
+        var pingData = (XenoPingDataComponent)pingDataComponent.Component;
         var creatorRole = DetermineCreatorRole(creator);
         EnforcePingLimits(creator, creatorRole);
-        CreatePingBasedOnRole(creator, pingType, coordinates, hive, targetEntity, creatorRole);
+        CreatePingBasedOnRole(creator, pingEntityId, pingData, coordinates, hive, targetEntity, creatorRole);
     }
 
     private bool ValidateXenoCreator(EntityUid creator, out Entity<HiveComponent> hive)
@@ -255,17 +254,17 @@ public abstract class SharedXenoPingSystem : EntitySystem
         return CreatorRole.Normal;
     }
 
-    private void CreatePingBasedOnRole(EntityUid creator, string pingType, EntityCoordinates coordinates,
-        Entity<HiveComponent> hive, EntityUid? targetEntity, CreatorRole role)
+    private void CreatePingBasedOnRole(EntityUid creator, string pingEntityId, XenoPingDataComponent pingData,
+        EntityCoordinates coordinates, Entity<HiveComponent> hive, EntityUid? targetEntity, CreatorRole role)
     {
-        var (lifetime, color, popupType) = role switch
+        var (lifetime, roleColor, popupType) = role switch
         {
             CreatorRole.Queen => (TimeSpan.FromSeconds(QueenPingLifetimeSeconds), Color.FromHex("#FFD700"), PopupType.Large),
             CreatorRole.HiveLeader => (TimeSpan.FromSeconds(HiveLeaderPingLifetimeSeconds), Color.FromHex("#FF4500"), PopupType.Large),
             _ => (TimeSpan.FromSeconds(NormalPingLifetimeSeconds), (Color?)null, PopupType.Medium)
         };
 
-        CreatePingWithRole(creator, pingType, coordinates, hive, lifetime, color, popupType, targetEntity);
+        CreatePingWithRole(creator, pingEntityId, pingData, coordinates, hive, lifetime, roleColor, popupType, targetEntity);
     }
 
     private void EnforcePingLimits(EntityUid creator, CreatorRole role)
@@ -309,25 +308,27 @@ public abstract class SharedXenoPingSystem : EntitySystem
         }
     }
 
-    private void CreatePingWithRole(EntityUid creator, string pingType, EntityCoordinates coordinates,
-        Entity<HiveComponent> hive, TimeSpan lifetime, Color? chatColor, PopupType popupType, EntityUid? targetEntity = null)
+    private void CreatePingWithRole(EntityUid creator, string pingEntityId, XenoPingDataComponent pingData,
+        EntityCoordinates coordinates, Entity<HiveComponent> hive, TimeSpan lifetime, Color? chatColor,
+        PopupType popupType, EntityUid? targetEntity = null)
     {
-        var ping = CreatePingEntity(creator, pingType, coordinates, lifetime, targetEntity);
+        var ping = CreatePingEntity(creator, pingEntityId, coordinates, lifetime, targetEntity);
         var locationName = GetLocationName(coordinates);
         var creatorName = Name(creator);
         var targetMessage = GetTargetMessage(targetEntity);
 
-        SendHivemindMessage(creator, pingType, locationName, targetMessage, creatorName, chatColor, hive);
-        ShowPopupToHiveMembers(creator, pingType, targetMessage, coordinates, hive, popupType);
+        SendHivemindMessage(creator, pingData, locationName, targetMessage, creatorName, chatColor, hive);
+        ShowPopupToHiveMembers(creator, pingData, targetMessage, coordinates, hive, popupType);
+        PlayPingSound(pingData, ping, hive);
     }
 
-    private EntityUid CreatePingEntity(EntityUid creator, string pingType, EntityCoordinates coordinates,
+    private EntityUid CreatePingEntity(EntityUid creator, string pingEntityId, EntityCoordinates coordinates,
         TimeSpan lifetime, EntityUid? targetEntity)
     {
-        var ping = Spawn(GetPingEntityId(pingType), coordinates);
+        var ping = Spawn(pingEntityId, coordinates);
         var pingComp = EnsureComp<XenoPingEntityComponent>(ping);
 
-        pingComp.PingType = pingType;
+        pingComp.PingType = pingEntityId;
         pingComp.Creator = creator;
         pingComp.Lifetime = lifetime;
         pingComp.DeleteAt = _timing.CurTime + lifetime;
@@ -361,10 +362,10 @@ public abstract class SharedXenoPingSystem : EntitySystem
         return string.Empty;
     }
 
-    private void SendHivemindMessage(EntityUid creator, string pingType, string locationName,
+    private void SendHivemindMessage(EntityUid creator, XenoPingDataComponent pingData, string locationName,
         string targetMessage, string creatorName, Color? chatColor, Entity<HiveComponent> hive)
     {
-        var hivemindMessage = $";{GetPingMessage(pingType)} {locationName}{targetMessage}";
+        var hivemindMessage = $";{pingData.ChatMessage} {locationName}{targetMessage}";
 
         if (_chatSystem.TryProccessRadioMessage(creator, hivemindMessage, out var processedMessage, out _))
         {
@@ -374,11 +375,11 @@ public abstract class SharedXenoPingSystem : EntitySystem
         }
     }
 
-    private void ShowPopupToHiveMembers(EntityUid creator, string pingType, string targetMessage,
+    private void ShowPopupToHiveMembers(EntityUid creator, XenoPingDataComponent pingData, string targetMessage,
         EntityCoordinates coordinates, Entity<HiveComponent> hive, PopupType popupType)
     {
         var creatorName = Name(creator);
-        var message = $"{creatorName}: {GetPingName(pingType)}{targetMessage}";
+        var message = $"{creatorName}: {pingData.PopupMessage}{targetMessage}";
 
         var xenoEnum = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
         while (xenoEnum.MoveNext(out var xenoUid, out _, out var member))
@@ -390,90 +391,107 @@ public abstract class SharedXenoPingSystem : EntitySystem
         }
     }
 
-    protected string GetPingEntityId(string pingType)
+    private void PlayPingSound(XenoPingDataComponent pingData, EntityUid pingEntity, Entity<HiveComponent> hive)
     {
-        return PingTypeToEntity.GetValueOrDefault(pingType, "XenoPingGeneral");
+        if (pingData.Sound == null)
+            return;
+
+        var coordinates = Transform(pingEntity).Coordinates;
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _hive.IsMember(e, hive.Owner));
+        _audio.PlayStatic(pingData.Sound, filter, coordinates, true, AudioParams.Default.WithVolume(-2f));
     }
 
-    protected string GetPingMessage(string pingType)
+    public Dictionary<string, (string Name, string Description)> GetAvailablePingTypes()
     {
-        return pingType switch
+        var result = new Dictionary<string, (string Name, string Description)>();
+
+        foreach (var prototype in _prototypeManager.EnumeratePrototypes<EntityPrototype>())
         {
-            "XenoPingMove" => "Move to",
-            "XenoPingDefend" => "Defend",
-            "XenoPingAttack" => "Attack",
-            "XenoPingRegroup" => "Regroup at",
-            "XenoPingDanger" => "Danger at",
-            "XenoPingHold" => "Hold",
-            "XenoPingAmbush" => "Ambush at",
-            "XenoPingFortify" => "Fortify",
-            "XenoPingWeed" => "Weed",
-            "XenoPingNest" => "Nest at",
-            "XenoPingHosts" => "Hosts at",
-            "XenoPingAide" => "Help at",
-            "XenoPingGeneral" => "Look at",
-            _ => "Look at"
-        };
+            if (!prototype.Components.TryGetValue("XenoPingData", out var pingDataComponent))
+                continue;
+
+            var pingData = (XenoPingDataComponent)pingDataComponent.Component;
+            if (!pingData.IsConstruction)
+            {
+                result[prototype.ID] = (pingData.Name, pingData.Description);
+            }
+        }
+
+        return result
+            .OrderByDescending(x => GetPingDataFromEntityId(x.Key)?.Priority ?? 0)
+            .ToDictionary(x => x.Key, x => x.Value);
     }
 
-    protected string GetPingName(string pingType)
+    public Dictionary<string, (string Name, string Description)> GetAvailableConstructionPingTypes()
     {
-        return pingType switch
+        var result = new Dictionary<string, (string Name, string Description)>();
+
+        foreach (var prototype in _prototypeManager.EnumeratePrototypes<EntityPrototype>())
         {
-            "XenoPingMove" => "Move Here!",
-            "XenoPingDefend" => "Defend This Position!",
-            "XenoPingAttack" => "Attack Here!",
-            "XenoPingRegroup" => "Regroup Here!",
-            "XenoPingDanger" => "Danger!",
-            "XenoPingHold" => "Hold Position!",
-            "XenoPingAmbush" => "Ambush Here!",
-            "XenoPingFortify" => "Fortify This Area!",
-            "XenoPingWeed" => "Spread Weeds Here!",
-            "XenoPingNest" => "Build Nest Here!",
-            "XenoPingHosts" => "Hosts Detected!",
-            "XenoPingAide" => "Need Assistance!",
-            "XenoPingGeneral" => "Follow Orders!",
-            _ => "Follow Orders!"
-        };
+            if (!prototype.Components.TryGetValue("XenoPingData", out var pingDataComponent))
+                continue;
+
+            var pingData = (XenoPingDataComponent)pingDataComponent.Component;
+            if (pingData.IsConstruction)
+            {
+                result[prototype.ID] = (pingData.Name, pingData.Description);
+            }
+        }
+
+        return result
+            .OrderByDescending(x => GetPingDataFromEntityId(x.Key)?.Priority ?? 0)
+            .ToDictionary(x => x.Key, x => x.Value);
     }
 
-    public static Dictionary<string, (string Name, string Description)> GetAvailablePingTypes()
+    public Dictionary<string, (string Name, string Description)> GetPingsByCategory(string category)
     {
-        return new Dictionary<string, (string Name, string Description)>
+        var result = new Dictionary<string, (string Name, string Description)>();
+
+        foreach (var prototype in _prototypeManager.EnumeratePrototypes<EntityPrototype>())
         {
-            ["XenoPingMove"] = ("Move", "Direct sisters to move to this location"),
-            ["XenoPingDefend"] = ("Defend", "Mark this position for defense"),
-            ["XenoPingAttack"] = ("Attack", "Target this location for attack"),
-            ["XenoPingRegroup"] = ("Regroup", "Rally sisters at this position"),
-            ["XenoPingDanger"] = ("Danger", "Warning! Dangerous area"),
-            ["XenoPingHold"] = ("Hold", "Hold this position"),
-            ["XenoPingAmbush"] = ("Ambush", "Set up ambush here"),
-            ["XenoPingFortify"] = ("Fortify", "Build defenses here"),
-            ["XenoPingWeed"] = ("Weed", "Spread weeds in this area"),
-            ["XenoPingNest"] = ("Nest", "Build nest structures here"),
-            ["XenoPingHosts"] = ("Hosts", "Potential hosts detected"),
-            ["XenoPingAide"] = ("Aide", "Need assistance here"),
-            ["XenoPingGeneral"] = ("General", "General purpose marker")
-        };
+            if (!prototype.Components.TryGetValue("XenoPingData", out var pingDataComponent))
+                continue;
+
+            var pingData = (XenoPingDataComponent)pingDataComponent.Component;
+            if (pingData.Categories.Contains(category))
+            {
+                result[prototype.ID] = (pingData.Name, pingData.Description);
+            }
+        }
+
+        return result
+            .OrderByDescending(x => GetPingDataFromEntityId(x.Key)?.Priority ?? 0)
+            .ToDictionary(x => x.Key, x => x.Value);
     }
 
-
-    // WIP
-    public static Dictionary<string, (string Name, string Description)> GetAvailableConstructionPingTypes()
+    public IEnumerable<string> GetAvailableCategories()
     {
-        return new Dictionary<string, (string Name, string Description)>
+        var categories = new HashSet<string>();
+
+        foreach (var prototype in _prototypeManager.EnumeratePrototypes<EntityPrototype>())
         {
-            // ["XenoPingHiveCore"] = ("Hive Core", "Main hive structure location"),
-            // ["XenoPingHiveCluster"] = ("Hive Cluster", "Hive cluster that spreads weeds"),
-            // ["XenoPingHivePylon"] = ("Hive Pylon", "Hive pylon structure"),
-            // ["XenoPingEggMorpher"] = ("Egg Morpher", "Egg morpher structure location"),
-            // ["XenoPingRecoveryNode"] = ("Recovery Node", "Recovery node for healing"),
-            // ["XenoPingTunnel"] = ("Tunnel", "Tunnel entrance location"),
-            // ["XenoPingResinWall"] = ("Resin Wall", "Resin wall construction"),
-            // ["XenoPingResinDoor"] = ("Resin Door", "Resin door construction"),
-            // ["XenoPingResinHole"] = ("Resin Hole", "Resin trap hole location"),
-            // ["XenoPingFruit"] = ("Fruit", "Resin fruit location")
-        };
+            if (!prototype.Components.TryGetValue("XenoPingData", out var pingDataComponent))
+                continue;
+
+            var pingData = (XenoPingDataComponent)pingDataComponent.Component;
+            foreach (var category in pingData.Categories)
+            {
+                categories.Add(category);
+            }
+        }
+
+        return categories.OrderBy(x => x);
+    }
+
+    private XenoPingDataComponent? GetPingDataFromEntityId(string entityId)
+    {
+        if (!_prototypeManager.TryIndex<EntityPrototype>(entityId, out var prototype))
+            return null;
+
+        if (!prototype.Components.TryGetValue("XenoPingData", out var pingDataComponent))
+            return null;
+
+        return (XenoPingDataComponent)pingDataComponent.Component;
     }
 
     private enum CreatorRole
