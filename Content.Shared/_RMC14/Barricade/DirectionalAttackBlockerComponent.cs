@@ -9,8 +9,5 @@ public sealed partial class DirectionalAttackBlockerComponent : Component
     public float MinimumBlockChance = 0.3f;
 
     [DataField, AutoNetworkedField]
-    public float BlockRoll;
-
-    [DataField, AutoNetworkedField]
     public int MaxHealth;
 }

@@ -190,8 +190,6 @@ public abstract class SharedBarbedSystem : EntitySystem
             return;
 
         _damageableSystem.TryChangeDamage(args.Leaper, ent.Comp.ThornsDamage, origin: ent, tool: ent);
-        _popupSystem.PopupClient(Loc.GetString("barbed-wire-damage"), ent, args.Leaper, PopupType.SmallCaution);
-        args.Cancelled = true;
     }
 
     protected void UpdateBarricade(Entity<BarbedComponent> barbed)

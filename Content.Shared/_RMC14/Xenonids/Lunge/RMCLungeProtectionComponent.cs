@@ -13,7 +13,7 @@ public sealed partial class RMCLungeProtectionComponent : Component
     public TimeSpan StunDuration = TimeSpan.FromSeconds(3);
 
     /// <summary>
-    ///     The sound to make when a leap is blocked.
+    ///     The sound to make when a lunge is blocked.
     /// </summary>
     [DataField]
     public SoundSpecifier BlockSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/bonk.ogg")
@@ -22,7 +22,7 @@ public sealed partial class RMCLungeProtectionComponent : Component
     };
 
     /// <summary>
-    ///     If this is true the entity is protected from leaps from all directions.
+    ///     If this is true the entity is protected from lunge from all directions.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool FullProtection = true;

@@ -11,7 +11,7 @@ public sealed partial class RMCLeapProtectionComponent : Component
     ///     How long the leaping entity should be stunned for when blocked.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan StunDuration = TimeSpan.FromSeconds(0);
+    public TimeSpan StunDuration = TimeSpan.FromSeconds(3);
 
     /// <summary>
     ///     The sound to make when a leap is blocked.

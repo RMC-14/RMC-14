@@ -1,16 +1,16 @@
+using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Map;
-using Robust.Shared.Random;
-using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Barricade;
 
 public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
 {
-    [Dependency] protected readonly IRobustRandom Random = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -26,24 +26,9 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
                 break;
 
             var target = GetEntity(potentialTarget);
-            if (!TryComp(target, out DirectionalAttackBlockerComponent? blocker) || !Transform(target).Anchored)
+
+            if (!IsAttackBlocked(ent, target))
                 continue;
-
-            if (!IsFacingTarget(ent, target))
-                continue;
-
-            if (TryComp(target, out DamageableComponent? damageable))
-            {
-                var blockChance = Math.Max(blocker.MinimumBlockChance, (blocker.MaxHealth - (float) damageable.TotalDamage) / blocker.MaxHealth);
-
-                // Calculate a new block chance for the barricade, the event should only be handled server side because of randomness.
-                if (blockChance <= blocker.BlockRoll)
-                {
-                    var ev = new FailedBlockAttemptEvent();
-                    RaiseLocalEvent(target, ref ev);
-                    continue;
-                }
-            }
 
             // The attack has been blocked, swap the attack target to the blocking entity.
             switch (args.Attack)
@@ -58,6 +43,31 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
             }
             break;
         }
+    }
+
+    /// <summary>
+    ///     Check if the attack is blocked by the target.
+    /// </summary>
+    /// <param name="attacker">The entity doing the attack</param>
+    /// <param name="target">The target of the attack</param>
+    /// <returns>True if the attack is blocked</returns>
+    public bool IsAttackBlocked(EntityUid attacker, EntityUid target)
+    {
+        if (!TryComp(target, out DirectionalAttackBlockerComponent? blocker) || !Transform(target).Anchored)
+            return false;
+
+        if (!IsFacingTarget(attacker, target))
+            return false;
+
+        if (TryComp(target, out DamageableComponent? damageable))
+        {
+            var blockChance = Math.Max(blocker.MinimumBlockChance, (blocker.MaxHealth - (float) damageable.TotalDamage) / blocker.MaxHealth);
+            var blockRoll = new Xoroshiro64S(_timing.CurTick.Value).NextFloat(0, 1);
+
+            if (blockChance < blockRoll)
+                return false;
+        }
+        return true;
     }
 
     /// <summary>
@@ -84,7 +94,3 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         return relativeDiff is 0 or 1 or 7;
     }
 }
-
-[ByRefEvent]
-[Serializable, NetSerializable]
-public record struct FailedBlockAttemptEvent;
