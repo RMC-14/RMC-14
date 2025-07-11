@@ -1,11 +1,16 @@
+# Base surv as its used by multiple maps, but some maps have minor differences. + parity.
+# Base marshal, this file, should be used on LV624, Trijent, and Solaris.
+
 - type: job
   parent: CMSurvivorSecurity
-  id: CMSurvivorLV624CMBDeputy
-  name: rmc-job-name-survivor-lv624-cmb-deputy
+  id: CMSurvivorCMBDeputy
+  name: rmc-job-name-survivor-cmb-deputy
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624CMBDeputy
-  startingGear: RMCGearSurvivorLV624CMBDeputy
-  spawnMenuRoleName: CMB Deputy (LV624 Survivor)
+  playTimeTracker: CMJobSurvivorCMBDeputy
+  ranks:
+    RMCRankCMBDeputy: []
+  startingGear: RMCGearSurvivorCMBDeputy
+  spawnMenuRoleName: CMB Deputy (Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -30,22 +35,23 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetLV624CMBDeputy
+      preset: RMCGearSurvivorPresetCMBDeputy
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
-  id: RMCGearSurvivorLV624CMBDeputy
+  id: RMCGearSurvivorCMBDeputy
   equipment:
     head: RMCHeadCapBureau
     id: RMCIDCardDeputySurvivor
     jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauDeputy
     ears: RMCHeadsetDistressBureau
+    pocket2: RMCPouchMagazineLarge
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorLV624CMBDeputy
-  name: survivor lv624 cmb deputy spawn point
+  id: RMCSpawnPointSurvivorCMBDeputy
+  name: survivor cmb deputy spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -57,10 +63,10 @@
       state: survivor
 
 - type: playTimeTracker
-  id: CMJobSurvivorLV624CMBDeputy
+  id: CMJobSurvivorCMBDeputy
   isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
-  id: RMCGearSurvivorPresetLV624CMBDeputy
-  name: lv624 cmb deputy colonist preset
+  id: RMCGearSurvivorPresetCMBDeputy
+  name: cmb deputy colonist preset

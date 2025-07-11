@@ -25,6 +25,12 @@ CMJobSurvivorPriest = Priest Colonist
 cm-job-name-survivor-scientist = Scientist Colonist
 CMSurvivorScientist = Scientist Colonist
 
+rmc-job-name-survivor-cmb-deputy = CMB Deputy
+CMSurvivorCMBDeputy = CMB Deputy
+
+cm-job-name-survivor-goon = We-Ya Corporate Security
+CMSurvivorGoon = We-Ya Corporate Security
+
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
@@ -56,13 +62,23 @@ rmc-job-name-forecon-commander = Commander
 
 # LV-624 survs
 
-rmc-job-name-survivor-lv624-archeologist = LV-624 Archeologist
-rmc-job-name-survivor-lv624-cargo-technician = LV-624 Cargo Technician
-rmc-job-name-survivor-lv624-cmb-deputy = CMB Deputy
+rmc-job-name-survivor-lv624-archeologist = Archeologist
+CMSurvivorLV624Archeologist = Archeologist
+
+rmc-job-name-survivor-lv624-cargo-technician = Cargo Technician
+CMSurvivorLV624CargoTechnician = Cargo Technician
+
 rmc-job-name-survivor-lv624-corporate-liaison = LV-624 Corporate Liaison
+CMSurvivorLV624CorporateLiaison = LV-624 Corportate Liaison
+
 rmc-job-name-survivor-lv624-security-guard = We-Ya Security Guard
-rmc-job-name-survivor-lv624-medical-technician = LV-624 Emergency Medical Technician
-rmc-job-name-survivor-lv624-engineer = LV-624 Engineer
+CMSurvivorLV624SecurityGuard = We-Ya Security Guard
+
+rmc-job-name-survivor-lv624-medical-technician = Emergency Medical Technician
+CMSurvivorLV624MedicalTechnician = Emergency Medical Technician
+
+rmc-job-name-survivor-lv624-engineer = Engineer
+CMSurvivorLV624Engineer = Engineer
 
 # New Varadero Survs
 

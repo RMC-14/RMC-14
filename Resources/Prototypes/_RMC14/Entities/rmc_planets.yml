@@ -18,8 +18,8 @@
       - CMSurvivorLV624Engineer: 2
       - CMSurvivorLV624CargoTechnician: 2
       CMSurvivorSecurity:
-      - CMSurvivorLV624Goon: 2
-      - CMSurvivorLV624CMBDeputy: 2
+      - CMSurvivorGoon: 2
+      - CMSurvivorCMBDeputy: 2
       - CMSurvivorLV624SecurityGuard: 2
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
