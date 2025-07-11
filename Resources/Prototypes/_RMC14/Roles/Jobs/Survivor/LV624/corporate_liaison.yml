@@ -25,7 +25,7 @@
     - type: NpcFactionMember
       factions:
       - WeYa
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
 

@@ -25,7 +25,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
       - Bureau
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage

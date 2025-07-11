@@ -26,7 +26,7 @@
     - type: NpcFactionMember
       factions:
       - Bureau
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
@@ -37,7 +37,7 @@
   id: RMCGearSurvivorLV624CMBDeputy
   equipment:
     head: RMCHeadCapBureau
-    id: RMCIDCardDeputy
+    id: RMCIDCardDeputySurvivor
     jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauDeputy
     ears: RMCHeadsetDistressBureau

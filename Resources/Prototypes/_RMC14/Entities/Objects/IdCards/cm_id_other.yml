@@ -158,7 +158,7 @@
 # for survs
 - type: entity
   parent: CMIDCardSilver
-  id: RMCIDCardDeputy
+  id: RMCIDCardDeputySurvivor
   name: bureau deputy silver badge
   description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
   components:
