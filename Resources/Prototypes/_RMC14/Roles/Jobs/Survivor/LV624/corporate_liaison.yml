@@ -24,8 +24,8 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
       - WeYa
+      - Survivor
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
 
