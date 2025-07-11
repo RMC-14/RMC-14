@@ -59,10 +59,14 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         if (!IsFacingTarget(attacker, target))
             return false;
 
+        var tick = _timing.CurTick.Value;
+        var iD = GetNetEntity(attacker).Id;
+        var seed = ((long)tick << 32) | (uint)iD;
+
         if (TryComp(target, out DamageableComponent? damageable))
         {
             var blockChance = Math.Max(blocker.MinimumBlockChance, (blocker.MaxHealth - (float) damageable.TotalDamage) / blocker.MaxHealth);
-            var blockRoll = new Xoroshiro64S(_timing.CurTick.Value).NextFloat(0, 1);
+            var blockRoll = new Xoroshiro64S(seed).NextFloat(0, 1);
 
             if (blockChance < blockRoll)
                 return false;
