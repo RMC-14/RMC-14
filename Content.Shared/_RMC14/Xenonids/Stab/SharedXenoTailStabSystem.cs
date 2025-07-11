@@ -155,25 +155,25 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 if (change?.GetTotal() > FixedPoint2.Zero)
                     _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
 
-                    if (_net.IsServer)
-                    {
-                        SpawnAttachedTo(stab.Comp.HitAnimationId, hit.ToCoordinates());
+                if (_net.IsServer)
+                {
+                    SpawnAttachedTo(stab.Comp.HitAnimationId, hit.ToCoordinates());
 
-                        if (_size.TryGetSize(stab, out var size))
-                        {
-                            if (size >= RMCSizes.Big)
-                                _daze.TryDaze(hit, stab.Comp.BigDazeTime, true);
-                            else if (size == RMCSizes.Xeno)
-                                _daze.TryDaze(hit, stab.Comp.DazeTime, true);
-                        }
+                    if (_size.TryGetSize(stab, out var size))
+                    {
+                        if (size >= RMCSizes.Big)
+                            _daze.TryDaze(hit, stab.Comp.BigDazeTime, true);
+                        else if (size == RMCSizes.Xeno)
+                            _daze.TryDaze(hit, stab.Comp.DazeTime, true);
                     }
+                }
 
-                    _cameraShake.ShakeCamera(hit, 2, 1);
+                _cameraShake.ShakeCamera(hit, 2, 1);
 
-                    if (stab.Comp.InjectNeuro &&
-                        TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) &&
-                        HasComp<XenoComponent>(hit))
-                    {
+                if (stab.Comp.InjectNeuro &&
+                    TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) &&
+                    HasComp<XenoComponent>(hit))
+                {
 
 
                     if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
@@ -228,14 +228,6 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 }
             }
         }
-
-        var matrix = Vector2.Transform(targetCoords.Position, _transform.GetInvWorldMatrix(transform));
-        var localPos = transform.LocalRotation.RotateVec(matrix);
-
-        var length = localPos.Length();
-        localPos *= stab.Comp.TailRange.Float() / length;
-
-        DoLunge((stab, stab, transform), localPos, "WeaponArcThrust");
 
         if (_net.IsServer)
         {
