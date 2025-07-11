@@ -15,10 +15,6 @@
   - type: Tag
     tags:
     - HideContextMenu
-  - type: PointLight
-    enabled: true
-    radius: 2
-    energy: 1
   - type: XenoFriendly
 
 - type: entity
@@ -29,8 +25,6 @@
   - type: Sprite
     state: rally
     color: "#00FF00"
-  - type: PointLight
-    color: "#00FF00"
 
 - type: entity
   parent: XenoPingBase
@@ -39,8 +33,6 @@
   components:
   - type: Sprite
     state: defend
-    color: "#0080FF"
-  - type: PointLight
     color: "#0080FF"
 
 - type: entity
@@ -51,8 +43,6 @@
   - type: Sprite
     state: attack
     color: "#FF0000"
-  - type: PointLight
-    color: "#FF0000"
 
 - type: entity
   parent: XenoPingBase
@@ -61,8 +51,6 @@
   components:
   - type: Sprite
     state: rally
-    color: "#FFFF00"
-  - type: PointLight
     color: "#FFFF00"
 
 - type: entity
@@ -73,8 +61,6 @@
   - type: Sprite
     state: danger
     color: "#FF8000"
-  - type: PointLight
-    color: "#FF8000"
 
 - type: entity
   parent: XenoPingBase
@@ -83,8 +69,6 @@
   components:
   - type: Sprite
     state: hold
-    color: "#8000FF"
-  - type: PointLight
     color: "#8000FF"
 
 - type: entity
@@ -95,8 +79,6 @@
   - type: Sprite
     state: ambush
     color: "#800080"
-  - type: PointLight
-    color: "#800080"
 
 - type: entity
   parent: XenoPingBase
@@ -105,8 +87,6 @@
   components:
   - type: Sprite
     state: fortify
-    color: "#808080"
-  - type: PointLight
     color: "#808080"
 
 - type: entity
@@ -117,8 +97,6 @@
   - type: Sprite
     state: weed
     color: "#008000"
-  - type: PointLight
-    color: "#008000"
 
 - type: entity
   parent: XenoPingBase
@@ -127,8 +105,6 @@
   components:
   - type: Sprite
     state: nest
-    color: "#8B4513"
-  - type: PointLight
     color: "#8B4513"
 
 - type: entity
@@ -139,8 +115,6 @@
   - type: Sprite
     state: hosts
     color: "#FF69B4"
-  - type: PointLight
-    color: "#FF69B4"
 
 - type: entity
   parent: XenoPingBase
@@ -149,8 +123,6 @@
   components:
   - type: Sprite
     state: aide
-    color: "#00FFFF"
-  - type: PointLight
     color: "#00FFFF"
 
 - type: entity
@@ -164,8 +136,6 @@
     color: "#FF00FF"
     drawdepth: Effects
     scale: 1.5, 1.5
-  - type: PointLight
-    color: "#FF00FF"
 
 - type: entity
   parent: XenoPingBase
@@ -178,8 +148,6 @@
     color: "#8B008B"
     drawdepth: Effects
     scale: 1.5, 1.5
-  - type: PointLight
-    color: "#8B008B"
 
 - type: entity
   parent: XenoPingBase
@@ -192,8 +160,6 @@
     color: "#9932CC"
     drawdepth: Effects
     scale: 1.5, 1.5
-  - type: PointLight
-    color: "#9932CC"
 
 - type: entity
   parent: XenoPingBase
@@ -206,8 +172,6 @@
     color: "#FF6347"
     drawdepth: Effects
     scale: 1.5, 1.5
-  - type: PointLight
-    color: "#FF6347"
 
 - type: entity
   parent: XenoPingBase
@@ -220,8 +184,6 @@
     color: "#32CD32"
     drawdepth: Effects
     scale: 1.5, 1.5
-  - type: PointLight
-    color: "#32CD32"
 
 - type: entity
   parent: XenoPingBase
@@ -234,8 +196,6 @@
     color: "#8B4513"
     drawdepth: Effects
     scale: 1.5, 1.5
-  - type: PointLight
-    color: "#8B4513"
 
 - type: entity
   parent: XenoPingBase
@@ -245,8 +205,6 @@
   - type: Sprite
     state: fortify
     color: "#696969"
-  - type: PointLight
-    color: "#696969"
 
 - type: entity
   parent: XenoPingBase
@@ -255,8 +213,6 @@
   components:
   - type: Sprite
     state: fortify
-    color: "#A0522D"
-  - type: PointLight
     color: "#A0522D"
 
 - type: entity
@@ -270,8 +226,6 @@
     color: "#8B0000"
     drawdepth: Effects
     scale: 1.5, 1.5
-  - type: PointLight
-    color: "#8B0000"
 
 - type: entity
   parent: XenoPingBase
@@ -284,8 +238,6 @@
     color: "#32CD32"
     drawdepth: Effects
     scale: 1.5, 1.5
-  - type: PointLight
-    color: "#32CD32"
 
 - type: entity
   parent: XenoPingBase
@@ -294,6 +246,4 @@
   components:
   - type: Sprite
     state: no_direction
-    color: "#FFFFFF"
-  - type: PointLight
     color: "#FFFFFF"
