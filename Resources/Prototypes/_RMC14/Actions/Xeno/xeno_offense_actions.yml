@@ -110,7 +110,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tail_attack
     event: !type:XenoTailStabEvent
-    range: 15
+    range: 2
     useDelay: 10
     checkCanAccess: false
   - type: XenoTailStabAction
