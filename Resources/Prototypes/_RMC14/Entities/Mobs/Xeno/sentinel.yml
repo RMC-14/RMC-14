@@ -93,3 +93,5 @@
     value: 0.1
   - type: FixedIdentity
     name: cm-job-name-xeno-sentinel
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1

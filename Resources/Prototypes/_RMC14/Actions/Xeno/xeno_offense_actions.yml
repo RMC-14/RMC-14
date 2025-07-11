@@ -417,8 +417,11 @@
   - type: WorldTargetAction
     useDelay: 10
   - type: ActionSharedCooldown
+    id: ActionXenoSprayAcidBoiler
     ids:
     - ActionXenoAcidShroud
+    activeIds:
+    - ActionXenoBombard
 
 - type: entity
   parent: ActionXenoSprayAcid

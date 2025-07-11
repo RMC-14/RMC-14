@@ -65,6 +65,7 @@
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetEngineer
   name: engineer colonist preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomGearOther:

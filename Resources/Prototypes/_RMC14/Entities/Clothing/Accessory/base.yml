@@ -1,0 +1,71 @@
+- type: entity
+  abstract: true
+  id: RMCBaseUniformAccessoryItemBase
+  components:
+  - type: UniformAccessoryHolder
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
+
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessoryItemBase
+  id: RMCBaseUniformAccessoryItemOuterClothing
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - Patch
+    - Medal
+    - Armband
+    - Rank
+    - Decor
+    - Poncho
+    - Mask
+
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessoryItemBase
+  id: RMCBaseUniformAccessoryItemJumpsuit
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - Tie
+    - Patch
+    - Medal
+    - Armband
+    - Rank
+    - Decor
+    - Poncho
+    - Mask
+
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessoryItemBase
+  id: RMCBaseUniformAccessoryItemGloves
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - WristL
+    - WristR
+
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessoryItemBase
+  id: RMCBaseUniformAccessoryItemHelmet
+  components:
+  - type: UniformAccessoryHolder
+    allowedCategories:
+    - Helmet
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCBaseUniformAccessory
+  components:
+  - type: UniformAccessory
+  - type: Item
+    size: Tiny
+  - type: Appearance

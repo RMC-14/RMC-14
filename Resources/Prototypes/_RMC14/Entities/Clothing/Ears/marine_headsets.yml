@@ -9,6 +9,8 @@
     - FireteamLeader
     - SeniorEnlistedAdvisor
     - PrimaryLandingZone
+  - type: GrantTacMapAlert
+
 
 # Alpha
 - type: entity

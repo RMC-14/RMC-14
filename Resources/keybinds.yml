@@ -586,8 +586,6 @@ binds:
   key: MouseRight
   canFocus: true
 
-
-
 # RMC14
 - function: RMCActivateAttachableRail
   type: State
@@ -633,6 +631,10 @@ binds:
   type: State
   key: C
 - function: RMCRest
+  type: State
+  key: R
+  mod1: Shift
+- function: RMCXenoRest
   type: State
   key: R
   mod1: Shift

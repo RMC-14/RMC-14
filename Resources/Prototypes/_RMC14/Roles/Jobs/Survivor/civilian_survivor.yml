@@ -72,6 +72,7 @@
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSurvivor
   name: survivor spawn point
+  suffix: Job Spawn, Main
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
