@@ -99,12 +99,12 @@
     outerClothing: RMCArmorSPPSupport
     gloves: RMCHandsVeteranSPP
     shoes: RMCBootsSPPFilled
-    suitstorage: WeaponSMGMP5 # TODO RMC14 : Replace with Bizon SMG
+    suitstorage: RMCWeaponSMGType64
     id: RMCIDSPP
     belt: CMBeltMedicBagFilled
     back: RMCSatchelSPPMedic
     pocket1: RMCPouchMedkitFillSPP
-    pocket2: RMCPouchMagazineLargeMP5
+    pocket2: RMCPouchMagazineType64
 
 - type: playTimeTracker
   id: CMJobSPPMedic

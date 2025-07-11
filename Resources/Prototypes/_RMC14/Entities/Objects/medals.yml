@@ -7,7 +7,11 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/bronze.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
+    category: Medal
+    limit: 2
+    layerKey: "enum.MedalVisualLayers.Base"
+    hasIconSprite: true
 
 # Marine medals
 
@@ -20,7 +24,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/bronze.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/bronze.rsi
       state: equipped
@@ -40,7 +44,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/silver.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/silver.rsi
       state: equipped
@@ -60,7 +64,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/gold.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/gold.rsi
       state: equipped
@@ -80,7 +84,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/platinum.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/platinum.rsi
       state: equipped
@@ -90,8 +94,8 @@
   id: RMCMedalPlatinumService
   name: platinum service medal
   description: The highest service medal that can be awarded to a marine; such medals are hand-given by UNMC Generals to a marine. It signifies the sheer amount of time a marine has spent in the line of duty.
-  
-# Civilian Ribbons 
+
+# Civilian Ribbons
 
 - type: entity
   parent: RMCMedalBase
@@ -102,7 +106,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/white_ribbon.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/white_ribbon.rsi
       state: equipped
@@ -112,7 +116,7 @@
   id: RMCMedalRibbonWhiteService
   name: white award ribbon
   description: A white ribbon awarded to civilians for participation in a UNMC-sponsored event. It is a very common award, and is typically the first award a civilian would receive.
-  
+
 - type: entity
   parent: RMCMedalBase
   id: RMCMedalRibbonYellow
@@ -122,7 +126,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/yellow_ribbon.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/yellow_ribbon.rsi
       state: equipped
@@ -132,7 +136,7 @@
   id: RMCMedalRibbonYellowService
   name: yellow award ribbon
   description: A bright yellow ribbon awarded to civilians for placing third in a UNMC-sponsored event. It is a somewhat common award, signifying their dedication and support for the organization.
-  
+
 - type: entity
   parent: RMCMedalBase
   id: RMCMedalRibbonRed
@@ -142,7 +146,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/red_ribbon.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/red_ribbon.rsi
       state: equipped
@@ -152,7 +156,7 @@
   id: RMCMedalRibbonRedService
   name: red award ribbon
   description: A vibrant red ribbon awarded to civilians for placing second in a UNMC-sponsored event. It is a rare award, signifying their dedication and support for the organization.
-  
+
 - type: entity
   parent: RMCMedalBase
   id: RMCMedalRibbonBlue
@@ -162,7 +166,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/blue_ribbon.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/blue_ribbon.rsi
       state: equipped

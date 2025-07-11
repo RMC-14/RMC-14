@@ -32,7 +32,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
 
     private void OnMapInit(Entity<RMCStoppingPowerComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.ShotFrom = _transform.GetMoverCoordinates(ent);
+        ent.Comp.ShotFrom = _transform.GetMapCoordinates(ent);
         Dirty(ent);
     }
 
@@ -108,9 +108,9 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
             _cameraRecoil.KickCamera(target, new Vector2(stoppingPower - 2, stoppingPower - 1));
 
             // Don't knock back if knocked down.
-            if(!HasComp<KnockedDownComponent>(target) && !_mobState.IsDead(target))
+            if(!HasComp<KnockedDownComponent>(target) && !_mobState.IsDead(target) && ent.Comp.ShotFrom != null)
             {
-                _sizeStun.KnockBack(target, ent.Comp.ShotFrom);
+                _sizeStun.KnockBack(target, ent.Comp.ShotFrom.Value);
 
                 SendMessage(target, Loc.GetString("rmc-xeno-knocked-back"), PopupType.SmallCaution);
             }

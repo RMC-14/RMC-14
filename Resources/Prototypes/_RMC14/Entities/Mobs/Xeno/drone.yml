@@ -98,6 +98,8 @@
     value: 0.1
   - type: FixedIdentity
     name: cm-job-name-xeno-drone
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoDroneBase
@@ -203,6 +205,8 @@
     - XenoFruitSpore
     - XenoFruitUnstable
     maxFruitAllowed: 6
+    fruitPickingMultiplier: 0.5
+    fruitFeedingMultiplier: 0.5
   - type: XenoResinSurge
   - type: XenoHidden
 

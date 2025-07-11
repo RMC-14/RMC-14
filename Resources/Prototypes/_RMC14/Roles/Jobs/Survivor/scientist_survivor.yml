@@ -1,0 +1,82 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorScientist
+  name: cm-job-name-survivor-scientist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorScientist
+  startingGear: RMCGearSurvivorScientist
+  accessGroups:
+  - ColonistMedical
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetScientist
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  id: RMCGearSurvivorScientist
+  equipment:
+    ears: CMHeadsetColony
+    eyes: RMCGlassesReagentHUDGlasses
+    gloves: CMHandsLatex
+    jumpsuit: RMCJumpsuitCivilianVirologist
+    outerClothing: RMCLabcoatVirology
+    shoes: RMCShoesGreen
+    back: RMCSatchelVirologyFill
+    id: RMCIDCardColonistScientist
+    pocket2: RMCPouchMedicalFill
+    mask: CMMaskSterile
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorScientist
+  name: survivor scientist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorScientist
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorScientist
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetScientist
+  name: scientist colonist preset # TODO RMC14 random research notes
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorScientist
+  name: scientist colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorScientist
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorScientist
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorScientist

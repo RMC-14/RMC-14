@@ -18,8 +18,10 @@
     back:
     - RMCAdminAccessConfigurator
     - HandheldHealthAnalyzerUnpowered
+    - CMHealthAnalyzer
     - DoorRemoteAll
     - AdminHypo
     - MeleeDebug200
     - ToolDebug
     - RMCTabletCO
+    - RMCWelderAdmin

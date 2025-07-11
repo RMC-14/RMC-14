@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/effects/blood.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mfloor1"
+    },
+    {
+      "name": "mfloor2"
+    },
+    {
+      "name": "mfloor3"
+    },
+    {
+      "name": "mfloor4"
+    },
+    {
+      "name": "mfloor5"
+    },
+    {
+      "name": "mfloor6"
+    },
+    {
+      "name": "mfloor7"
+    },
+    {
+      "name": "xfloor1"
+    },
+    {
+      "name": "xfloor2"
+    },
+    {
+      "name": "xfloor3"
+    },
+    {
+      "name": "xfloor4"
+    },
+    {
+      "name": "xfloor5"
+    },
+    {
+      "name": "xfloor6"
+    },
+    {
+      "name": "xfloor7"
+    }
+  ]
+}

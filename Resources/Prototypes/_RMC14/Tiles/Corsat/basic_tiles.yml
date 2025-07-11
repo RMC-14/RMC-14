@@ -83,3 +83,20 @@
   parent: CMFloorCorsatBasicBase
   id: CMFloorCorsatBasicWhiteBlueFull
   sprite: /Textures/_RMC14/Tiles/corsat/whitebluefull.png
+  
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingCorsat
+  isSubfloor: true
+  sprite: /Textures/_RMC14/Tiles/corsat/plating.png
+  
+- type: tile
+  parent: CMTileBase
+  id: RMCFloorCorsatTcomms
+  sprite: /Textures/_RMC14/Tiles/corsat/tcomms.png
+  
+- type: tile
+  parent: CMTileBase
+  id: RMCFloorCorsatTeleporterStatic
+  sprite: /Textures/_RMC14/Tiles/corsat/corsat_teleporter_static.png
+  

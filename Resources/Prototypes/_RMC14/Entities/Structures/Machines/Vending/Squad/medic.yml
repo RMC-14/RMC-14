@@ -23,10 +23,10 @@
       entries:
       - id: CMBurnKit10
         points: 2
-#        recommended: true
+        recommended: true
       - id: CMTraumaKit10
         points: 2
-#        recommended: true
+        recommended: true
     #    CMMedicalSplints: 1P
 #        recommended: true
       - id: CMBloodPackFull # TODO RMC14 O-
@@ -36,7 +36,7 @@
       entries:
       - id: CMAdvFirstAidKitFilled
         points: 12
-#        recommended: true
+        recommended: true
       - id: CMFirstAidKitFilled
         points: 5
       - id: CMBurnAidKitFilled
@@ -115,6 +115,8 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 6
+      - id: CMMagazineRifleM4SPRExt
+        points: 6
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -125,8 +127,18 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
+      # - id: RMCMagazinePistolM1984HP
+      #   points: 3
+      - id: RMCMagazinePistolM1984AP
+        points: 3
       - id: CMMagazinePistolMK80
         points: 3
       - id: RMCMagazinePistolSU6
@@ -150,7 +162,8 @@
         points: 8
       - id: RMCBackpackRTO
         points: 15
-    #    CMWeldingGoggles: 3P
+      - id: RMCWeldingGoggles
+        points: 3
     - name: Utilities
       entries:
       - id: CMFireExtinguisherPortable
@@ -285,7 +298,7 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }

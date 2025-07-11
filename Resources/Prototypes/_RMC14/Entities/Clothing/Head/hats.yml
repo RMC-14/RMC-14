@@ -342,6 +342,17 @@
 
 - type: entity
   parent: CMHeadCap
+  id: RMCHeadCapPeakedCMP
+  name: chief mp peaked cap
+  description: A peaked cap given to experienced CMP. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_cmp.rsi
+
+- type: entity
+  parent: CMHeadCap
   id: CMHeadCapCMO
   name: chief medical officer's peaked cap
   description: A peaked cap given to high-ranking medical officers. Looks just a touch silly.
@@ -583,3 +594,46 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+
+# beanies
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeanie
+  name: beanie
+  description: A standard military beanie, often worn by non-combat military personnel and support crews, though it is not uncommon to see combat personnel who no longer care about self-preservation wearing one of these as well. Popular due to being comfortable and snug.
+  suffix: Black, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/beanie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/beanie.rsi
+
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieTan
+  suffix: Tan, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
+
+# Radiation Suit
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadRadiationHood
+  name: radiation hood
+  description: "A hood with radiation protective properties. Label: Made with lead, do not eat insulation"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/radiation_hood.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/radiation_hood.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout

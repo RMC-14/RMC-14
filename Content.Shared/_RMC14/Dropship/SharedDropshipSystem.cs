@@ -12,11 +12,13 @@ using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship;
 
@@ -31,6 +33,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private TimeSpan _dropshipInitialDelay;
     private TimeSpan _hijackInitialDelay;
@@ -60,6 +63,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             subs =>
             {
                 subs.Event<DropshipNavigationLaunchMsg>(OnDropshipNavigationLaunchMsg);
+                subs.Event<DropshipNavigationCancelMsg>(OnDropshipNavigationCancelMsg);
             });
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipHijackerUiKey.Key,
@@ -273,7 +277,6 @@ public abstract class SharedDropshipSystem : EntitySystem
         ref DropshipNavigationLaunchMsg args)
     {
         var user = args.Actor;
-        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, user);
 
         if (!TryGetEntity(args.Target, out var destination))
         {
@@ -289,6 +292,22 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         FlyTo(ent, destination.Value, user);
+    }
+
+    private void OnDropshipNavigationCancelMsg(Entity<DropshipNavigationComputerComponent> ent,
+        ref DropshipNavigationCancelMsg args)
+    {
+        var grid = _transform.GetGrid((ent.Owner, Transform(ent.Owner)));
+        if (!TryComp(grid, out FTLComponent? ftl) || !TryComp(grid, out DropshipComponent? dropship))
+            return;
+
+        if (dropship.Destination != dropship.DepartureLocation ||
+            _timing.CurTime + dropship.CancelFlightTime >= ftl.StateTime.End)
+            return;
+
+        ftl.StateTime.End = _timing.CurTime + dropship.CancelFlightTime;
+        Dirty(grid.Value, dropship);
+        RefreshUI();
     }
 
     private void OnHijackerDestinationChosenMsg(Entity<DropshipNavigationComputerComponent> ent,

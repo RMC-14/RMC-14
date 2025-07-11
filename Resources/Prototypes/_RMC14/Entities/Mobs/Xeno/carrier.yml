@@ -102,6 +102,8 @@
     value: 0.2
   - type: FixedIdentity
     name: cm-job-name-xeno-carrier
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent: RMCXenoCarrierBase
