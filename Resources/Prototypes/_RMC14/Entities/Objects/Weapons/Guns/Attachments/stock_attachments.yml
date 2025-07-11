@@ -912,7 +912,6 @@
     - RMCAttachmentL24Stock
 
 
-
 - type: entity
   parent: RMCAttachableBase
   id: RMCAttachmentL24BStock
