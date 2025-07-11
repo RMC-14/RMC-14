@@ -104,7 +104,7 @@
   name: Tail Stab
   description: Launches an attack towards a given direction. The cooldown is faster if you miss.
   components:
-  - type: WorldTargetAction
+  - type: EntityWorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
