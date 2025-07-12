@@ -59,6 +59,7 @@
         mask:
         - SmallMobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - SmallMobLayer
   - type: Flammable

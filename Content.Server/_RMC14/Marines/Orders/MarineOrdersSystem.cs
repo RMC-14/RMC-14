@@ -35,9 +35,9 @@ public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
 
     private void OnOrdersShutdown(Entity<MarineOrdersComponent> ent, ref ComponentShutdown ev)
     {
-        _actions.RemoveAction(ent, ent.Comp.FocusActionEntity);
-        _actions.RemoveAction(ent, ent.Comp.HoldActionEntity);
-        _actions.RemoveAction(ent, ent.Comp.MoveActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.FocusActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.HoldActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.MoveActionEntity);
     }
 
     protected override void OnAction(Entity<MarineOrdersComponent> ent, ref MoveActionEvent ev)

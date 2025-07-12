@@ -177,6 +177,7 @@
         density: 185
         mask:
         - MobMask
+        - BarricadeImpassable
         - BarbedBarricade
         layer:
         - MobLayer

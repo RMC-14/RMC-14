@@ -145,11 +145,11 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         var tile = tileRef.GridIndices;
         var location = _mapSystem.GridTileToLocal(grid, grid, tile);
 
-        if (tileRef.GetContentTileDefinition().ID == ContentTileDefinition.SpaceID)
+        if (_turf.GetContentTileDefinition(tileRef).ID == ContentTileDefinition.SpaceID)
             return false;
 
         // no air-blocked areas.
-        if (tileRef.IsSpace() ||
+        if (_turf.IsSpace(tileRef) ||
             _turf.IsTileBlocked(tileRef, CollisionGroup.MobMask))
         {
             return false;

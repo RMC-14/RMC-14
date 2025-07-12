@@ -103,30 +103,31 @@ public sealed class AreaInfoSystem : EntitySystem
         bool hasPylonProtection = IsProtectedByRoofing(coordinates, r => r.Comp.CanOrbitalBombard && !r.Comp.CanCAS && r.Comp.Range < 10);
 
         // Determine ceiling level based on effective protection (including roofing entities)
+        // Note: severityToUse is offset by +1 because roofnull is at index 0 (for "no area" case)
         if (!_area.CanOrbitalBombard(coordinates, out var roofed))
         {
             ceilingLevel = 4;
-            severityToUse = hasHiveCoreProtection ? (short)6 : (short)4;
+            severityToUse = hasHiveCoreProtection ? (short)7 : (short)5;
         }
         else if (!_area.CanCAS(coordinates))
         {
             ceilingLevel = 3;
-            severityToUse = hasPylonProtection ? (short)5 : (short)3;
+            severityToUse = hasPylonProtection ? (short)6 : (short)4;
         }
         else if (!_area.CanSupplyDrop(coordinates.ToMap(_entityManager, _transform)) || !_area.CanMortarFire(coordinates))
         {
             ceilingLevel = 2;
-            severityToUse = (short)2;
+            severityToUse = (short)3;
         }
         else if (!_area.CanMortarPlacement(coordinates) || !_area.CanLase(coordinates) || !area.Value.Comp.Medevac)
         {
             ceilingLevel = 1;
-            severityToUse = (short)1;
+            severityToUse = (short)2;
         }
         else
         {
             ceilingLevel = 0;
-            severityToUse = (short)0;
+            severityToUse = (short)1;
         }
 
         // Build the restrictions string with clean formatting
