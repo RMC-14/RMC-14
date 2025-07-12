@@ -1562,3 +1562,14 @@
     state: vince_dog_petrov
   - type: PatronFigurine
     id: 1384bdbc-8f0a-4613-8ae1-097d8a9c21fb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKallKallovski
+  name: Kall Kallovski figurine
+  description: "Delta leads the way."
+  components:
+  - type: Sprite
+    state: kall_kallovski
+  - type: PatronFigurine
+    id: 794217c7-0b1c-40d4-b254-0cb58ea69566
