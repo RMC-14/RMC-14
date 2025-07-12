@@ -247,8 +247,8 @@ namespace Content.Client.Chat.UI
 
             if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
             {
-                if (entityManager.TryGetComponent<RMCSpeechBubbleSpecificStyleComponent>(senderUid, out var specificStyleComponent) && specificStyleComponent.SpeechStyleClass != null)
-                    speechStyleClass = specificStyleComponent.SpeechStyleClass;
+                if (message.SpeechStyleClass != null)
+                    speechStyleClass = message.SpeechStyleClass;
                 else if (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid))
                     speechStyleClass = "commanderSpeech";
             }
