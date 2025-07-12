@@ -1457,7 +1457,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKuafuSpeedDemonLightweaver
   name: Kuafu 'Speed Demon' Lightweaver figurine
-  #description: ""
+  description: "Seems like she knows everyone around."
   components:
   - type: Sprite
     state: kuafu_speed_demon_lightweaver
