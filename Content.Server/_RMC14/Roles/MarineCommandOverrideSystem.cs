@@ -21,6 +21,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.Medical.Cryogenics;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -173,7 +174,10 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
                 return;
             }
 
-            if (mind?.UserId == null || mind?.Session == null) // the player has retired from the round
+            if (mind?.UserId == null) // the player has retired from the entity
+                continue;
+
+            if (!TryComp<ActorComponent>(uid, out var actor) || actor.PlayerSession == null) // the player has retired from the round
                 continue;
 
             if (mobState.CurrentState == MobState.Dead)
@@ -377,10 +381,13 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (roleComp.Job == null || !_prototypes.TryIndex<JobPrototype>(roleComp.Job.Value, out var job))
                 continue;
 
-            if (!_entMan.TryGetComponent(entity, out MindComponent? mindComp) || mindComp == null || mindComp.Session == null)
+            if (!_entMan.TryGetComponent(entity, out MindComponent? mindComp) || mindComp == null)
                 continue;
 
-            if (_playtimeManager.TryGetTrackerTime(mindComp.Session, job.PlayTimeTracker, out var roleTime))
+            if (!TryComp<ActorComponent>(entity, out var actor) || actor.PlayerSession == null)
+                continue;
+
+            if (_playtimeManager.TryGetTrackerTime(actor.PlayerSession, job.PlayTimeTracker, out var roleTime))
             {
                 candidates.Add((entity, roleTime.Value));
             }
