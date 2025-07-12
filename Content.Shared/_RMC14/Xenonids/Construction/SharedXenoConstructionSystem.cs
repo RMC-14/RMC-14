@@ -120,7 +120,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoCanAddPlasmaToConstructComponent, XenoConstructionAddPlasmaDoAfterEvent>(OnHiveConstructionNodeAddPlasmaDoAfter);
 
         SubscribeLocalEvent<XenoChooseConstructionActionComponent, XenoConstructionChosenEvent>(OnActionConstructionChosen);
-        SubscribeLocalEvent<XenoConstructionActionComponent, ValidateActionWorldTargetEvent>(OnSecreteActionValidateTarget);
+        SubscribeLocalEvent<XenoConstructionActionComponent, ActionValidateEvent>(OnSecreteActionValidateTarget);
 
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, ActivateInWorldEvent>(OnHiveConstructionNodeActivated);
@@ -589,20 +589,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
     {
-        if (_actions.TryGetActionData(xeno, out var action) &&
+        if (_actions.GetAction(xeno.Owner) is { } action &&
             _prototype.HasIndex(args.Choice))
         {
-            action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
-            Dirty(xeno, action);
+            _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.EntityPrototype(args.Choice));
         }
     }
 
-    private void OnSecreteActionValidateTarget(Entity<XenoConstructionActionComponent> ent, ref ValidateActionWorldTargetEvent args)
+    private void OnSecreteActionValidateTarget(Entity<XenoConstructionActionComponent> ent, ref ActionValidateEvent args)
     {
+        if (args.Invalid)
+            return;
+
         if (!TryComp(args.User, out XenoConstructionComponent? construction))
             return;
 
-        var snapped = args.Target.SnapToGrid(EntityManager, _map);
+        if (GetCoordinates(args.Input.EntityCoordinatesTarget) is not { } target)
+            return;
+
+        var snapped = target.SnapToGrid(EntityManager, _map);
 
         var adjustEv = new XenoSecreteStructureAdjustFields(snapped);
         RaiseLocalEvent(args.User, ref adjustEv);
@@ -615,8 +620,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (!CanSecreteOnTilePopup((args.User, construction), construction.BuildChoice, args.Target, ent.Comp.CheckStructureSelected, ent.Comp.CheckWeeds))
-            args.Cancelled = true;
+        if (!CanSecreteOnTilePopup((args.User, construction), construction.BuildChoice, target, ent.Comp.CheckStructureSelected, ent.Comp.CheckWeeds))
+            args.Invalid = true;
     }
 
     private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
@@ -845,9 +850,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private bool TileSolidAndNotBlocked(EntityCoordinates target)
     {
-        return target.GetTileRef(EntityManager, _map) is { } tile &&
-               !tile.IsSpace() &&
-               tile.GetContentTileDefinition().Sturdy &&
+        return _turf.GetTileRef(target) is { } tile &&
+               !_turf.IsSpace(tile) &&
+               _turf.GetContentTileDefinition(tile).Sturdy &&
                !_turf.IsTileBlocked(tile, Impassable) &&
                !_xenoNest.HasAdjacentNestFacing(target);
     }

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
@@ -16,6 +17,7 @@ namespace Content.Shared._RMC14.Medical.Scanner;
 
 public sealed class RMCStethoscopeSystem : EntitySystem
 {
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -69,17 +71,22 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         stethoscope = EntityUid.Invalid;
         if (!TryComp<HandsComponent>(user, out var hands))
             return false;
-        var held = hands.ActiveHandEntity;
-        if (held != null && HasComp<RMCStethoscopeComponent>(held.Value))
+        var heldId = hands.ActiveHandId;
+        if (heldId != null &&
+            _hands.TryGetHeldItem(user, heldId, out var held) &&
+            HasComp<RMCStethoscopeComponent>(held))
         {
             stethoscope = held.Value;
             return true;
         }
-        if (_inventorySystem.TryGetSlotEntity(user, "neck", out var neckEntity) && HasComp<RMCStethoscopeComponent>(neckEntity.Value))
+
+        if (_inventorySystem.TryGetSlotEntity(user, "neck", out var neckEntity) &&
+            HasComp<RMCStethoscopeComponent>(neckEntity.Value))
         {
             stethoscope = neckEntity.Value;
             return true;
         }
+
         return false;
     }
 

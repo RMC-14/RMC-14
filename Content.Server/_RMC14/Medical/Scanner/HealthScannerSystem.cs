@@ -1,11 +1,11 @@
-﻿using Content.Server.Body.Components;
-using Content.Server.DoAfter;
+﻿using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Server.Storage.Components;
 using Content.Server.Temperature.Components;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Scanner;
+using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;

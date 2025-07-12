@@ -165,8 +165,8 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
             foreach (var action in _actions.GetActions(stab))
             {
-                if (TryComp(action.Id, out XenoTailStabActionComponent? actionComp))
-                    _actions.SetCooldown(action.Id, actionComp.MissCooldown);
+                if (TryComp(action, out XenoTailStabActionComponent? actionComp))
+                    _actions.SetCooldown(action.AsNullable(), actionComp.MissCooldown);
             }
         }
         else

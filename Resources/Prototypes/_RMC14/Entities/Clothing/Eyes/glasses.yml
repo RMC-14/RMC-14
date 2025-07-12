@@ -127,8 +127,8 @@
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: icon-on}
           False: {state: icon}
 
@@ -168,8 +168,8 @@
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: icon-on}
           False: {state: icon}
   - type: Appearance
@@ -209,8 +209,8 @@
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: icon-on}
           False: {state: icon}
   - type: Appearance
@@ -247,8 +247,8 @@
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: icon-on}
           False: {state: icon}
   - type: Appearance
@@ -658,8 +658,8 @@
   - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: {state: icon-on}
           False: {state: icon}
   - type: Appearance
