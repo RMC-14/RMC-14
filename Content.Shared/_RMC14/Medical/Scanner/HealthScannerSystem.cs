@@ -1,36 +1,36 @@
-﻿using Content.Server.DoAfter;
-using Content.Server.Popups;
-using Content.Server.Storage.Components;
-using Content.Server.Temperature.Components;
+using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Medical.Scanner;
-using Content.Shared.Body.Components;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared._RMC14.Temperature;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Timing;
-using Robust.Server.Audio;
-using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
-namespace Content.Server._RMC14.Medical.Scanner;
+namespace Content.Shared._RMC14.Medical.Scanner;
 
 public sealed class HealthScannerSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
@@ -60,7 +60,7 @@ public sealed class HealthScannerSystem : EntitySystem
         if (delay > TimeSpan.Zero)
         {
             var name = Loc.GetString("zzzz-the", ("ent", target));
-            _popup.PopupEntity($"You start fumbling around with {name}...", target, args.User);
+            _popup.PopupClient($"You start fumbling around with {name}...", target, args.User);
         }
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -96,7 +96,7 @@ public sealed class HealthScannerSystem : EntitySystem
         scanner.Comp.Target = target;
         Dirty(scanner);
 
-        _audio.PlayPvs(scanner.Comp.Sound, scanner);
+        _audio.PlayPredicted(scanner.Comp.Sound, scanner, args.User);
         _ui.OpenUi(scanner.Owner, HealthScannerUIKey.Key, args.User);
 
         UpdateUI(scanner);
@@ -108,7 +108,8 @@ public sealed class HealthScannerSystem : EntitySystem
     /// <returns></returns>
     private bool CanUseHealthScannerPopup(Entity<HealthScannerComponent> scanner, EntityUid user, ref EntityUid target)
     {
-        if (HasComp<HealthScannableContainerComponent>(target) && TryComp(target, out EntityStorageComponent? entityStorage))
+        SharedEntityStorageComponent? entityStorage = null;
+        if (HasComp<HealthScannableContainerComponent>(target) && _entityStorage.ResolveStorage(target, ref entityStorage))
         {
             foreach (var entity in entityStorage.Contents.ContainedEntities)
             {
@@ -126,7 +127,7 @@ public sealed class HealthScannerSystem : EntitySystem
             !HasComp<MobStateComponent>(target) ||
             !HasComp<MobThresholdsComponent>(target))
         {
-            _popup.PopupEntity("You can't analyze that!", target, user);
+            _popup.PopupClient("You can't analyze that!", target, user);
             return false;
         }
 
@@ -141,7 +142,7 @@ public sealed class HealthScannerSystem : EntitySystem
         if (ev.Cancelled)
         {
             if (ev.Popup != null)
-                _popup.PopupEntity(ev.Popup, target, user);
+                _popup.PopupClient(ev.Popup, target, user);
 
             return false;
         }
@@ -168,20 +169,16 @@ public sealed class HealthScannerSystem : EntitySystem
 
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;
-        Solution? chemicals = null;
-        if (TryComp(target, out BloodstreamComponent? bloodstream))
+        if (_rmcBloodstream.TryGetBloodSolution(target, out var bloodstream))
         {
-            if (_solution.TryGetSolution(target, bloodstream.BloodSolutionName, out _, out var bloodSolution))
-            {
-                blood = bloodSolution.Volume;
-                maxBlood = bloodSolution.MaxVolume;
-            }
-
-            _solution.TryGetSolution(target, bloodstream.ChemicalSolutionName, out _, out chemicals);
+            blood = bloodstream.Volume;
+            maxBlood = bloodstream.MaxVolume;
         }
 
-        var temperature = CompOrNull<TemperatureComponent>(target)?.CurrentTemperature;
-        var bleeding = bloodstream is { BleedAmount: > 0 };
+        _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
+        _rmcTemperature.TryGetCurrentTemperature(target, out var temperature);
+
+        var bleeding = _rmcBloodstream.IsBleeding(target);
         var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, chemicals, bleeding);
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
@@ -189,6 +186,9 @@ public sealed class HealthScannerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+            return;
+
         var time = _timing.CurTime;
         var scanners = EntityQueryEnumerator<HealthScannerComponent>();
         while (scanners.MoveNext(out var uid, out var active))

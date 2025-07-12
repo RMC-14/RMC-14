@@ -3,12 +3,16 @@ using Content.Server.Botany.Components;
 using Content.Server.Hands.Systems;
 using Content.Server.Kitchen.Components;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
 using Content.Shared.Botany;
 using Content.Shared.Burial.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
@@ -886,7 +890,7 @@ public sealed class PlantHolderSystem : EntitySystem
             var amt = FixedPoint2.New(1);
             foreach (var entry in _solutionContainerSystem.RemoveEachReagent(component.SoilSolution.Value, amt))
             {
-                var reagentProto = _prototype.Index<ReagentPrototype>(entry.Reagent.Prototype);
+                var reagentProto = _prototype.IndexReagent<ReagentPrototype>(entry.Reagent.Prototype);
                 reagentProto.ReactionPlant(uid, entry, solution);
             }
         }

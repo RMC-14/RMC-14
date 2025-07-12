@@ -7,6 +7,7 @@
   flavor: bitter
   color: "#60A584"
   unknown: true
+  toxin: true
   metabolisms:
     Narcotic:
       metabolismRate: 0.1

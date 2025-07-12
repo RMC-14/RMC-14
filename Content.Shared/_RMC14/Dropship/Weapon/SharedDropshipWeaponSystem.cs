@@ -1223,7 +1223,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var query = EntityQueryEnumerator<ActiveLaserDesignatorComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var active, out var xform))
         {
-            if (!_transform.InRange(xform.Coordinates, active.Origin, 0.1f))
+            if (!_transform.InRange(xform.Coordinates, active.Origin, active.BreakRange))
                 RemCompDeferred<ActiveLaserDesignatorComponent>(uid);
         }
     }

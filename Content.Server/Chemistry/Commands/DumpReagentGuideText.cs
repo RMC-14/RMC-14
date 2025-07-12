@@ -1,4 +1,5 @@
 ﻿using Content.Server.Administration;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Administration;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Console;
@@ -21,7 +22,7 @@ public sealed class DumpReagentGuideText : LocalizedEntityCommands
             return;
         }
 
-        if (!_prototype.TryIndex<ReagentPrototype>(args[0], out var reagent))
+        if (!_prototype.TryIndexReagent<ReagentPrototype>(args[0], out var reagent))
         {
             shell.WriteError(Loc.GetString($"shell-argument-must-be-prototype",
                 ("index", args[0]),

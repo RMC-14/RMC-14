@@ -17,4 +17,16 @@ public sealed class RMCTemperatureSystem : SharedRMCTemperatureSystem
     {
         _temperature.ForceChangeTemperature(entity, temperature);
     }
+
+    public override bool TryGetCurrentTemperature(EntityUid uid, out float temperature)
+    {
+        if (!TryComp(uid, out TemperatureComponent? temperatureComp))
+        {
+            temperature = 0;
+            return true;
+        }
+
+        temperature = temperatureComp.CurrentTemperature;
+        return false;
+    }
 }

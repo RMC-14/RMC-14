@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Chemistry.Components;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -137,7 +138,7 @@ namespace Content.Server.Chemistry.EntitySystems
                             if (reagentQuantity.Quantity == FixedPoint2.Zero)
                                 continue;
 
-                            var reagent = _protoManager.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+                            var reagent = _protoManager.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
 
                             // Limit the reaction amount to a minimum value to ensure no floating point funnies.
                             // Ex: A solution with a low percentage transfer amount will slowly approach 0.01... and never get deleted

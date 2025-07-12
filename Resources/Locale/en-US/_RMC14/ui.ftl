@@ -38,7 +38,7 @@ rmc-ui-audio-emotes-skrell = Play emotes for skrells
 
 cm-ui-roadmap = Roadmap
 
-rmc-ui-link-discord-account = Link Discord Account
+rmc-ui-link-discord-account = Link Discord
 rmc-ui-link-discord-account-text = Click the button below to copy your code.
   Then go to the #account-linking channel to link your accounts.
 rmc-ui-link-discord-account-copy = Copy code

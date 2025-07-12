@@ -515,4 +515,7 @@ public enum LogType
     RMCLobbyMessage = RMCMarineAnnounce + 33,
     RMCChemMaster = RMCMarineAnnounce + 34,
     RMCCharacterDescription = RMCMarineAnnounce + 35,
+    RMCXenoNest = RMCMarineAnnounce + 36,
+    RMCVend = RMCMarineAnnounce + 37,
+    RMCRoundEnd = RMCMarineAnnounce + 38,
 }

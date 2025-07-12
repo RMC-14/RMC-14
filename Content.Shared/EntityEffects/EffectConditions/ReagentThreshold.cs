@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
@@ -46,7 +47,7 @@ public sealed partial class ReagentThreshold : EntityEffectCondition
     {
         ReagentPrototype? reagentProto = null;
         if (Reagent is not null)
-            prototype.TryIndex(Reagent, out reagentProto);
+            prototype.TryIndexReagent(Reagent, out reagentProto);
 
         return Loc.GetString("reagent-effect-condition-guidebook-reagent-threshold",
             ("reagent", reagentProto?.LocalizedName ?? Loc.GetString("reagent-effect-condition-guidebook-this-reagent")),

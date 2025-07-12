@@ -812,4 +812,35 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         return (filled, slots.Comp.Slots.Count);
     }
+
+    public bool TryGetUserHoldingOrStoringItem(EntityUid item, out EntityUid user)
+    {
+        user = default;
+        if (!_container.TryGetContainingContainer((item, null), out var container))
+            return false;
+
+        if (IsUser(this, container.Owner))
+        {
+            user = container.Owner;
+            return true;
+        }
+
+        if (!TryComp(container.Owner, out StorageComponent? storage) ||
+            storage.Container != container ||
+            !_container.TryGetContainingContainer((container.Owner, null), out container))
+        {
+            return false;
+        }
+
+        if (!IsUser(this, container.Owner))
+            return false;
+
+        user = container.Owner;
+        return true;
+
+        static bool IsUser(SharedCMInventorySystem system, EntityUid user)
+        {
+            return system.HasComp<InventoryComponent>(user) || system.HasComp<HandsComponent>(user);
+        }
+    }
 }

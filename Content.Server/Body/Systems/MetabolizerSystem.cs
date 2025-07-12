@@ -1,6 +1,5 @@
 using Content.Server.Body.Components;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Events;
@@ -147,7 +146,7 @@ namespace Content.Server.Body.Systems
             int reagents = 0;
             foreach (var (reagent, quantity) in list)
             {
-                if (!_prototypeManager.TryIndex<ReagentPrototype>(reagent.Prototype, out var proto))
+                if (!_prototypeManager.TryIndexReagent<ReagentPrototype>(reagent.Prototype, out var proto))
                     continue;
 
                 var mostToRemove = FixedPoint2.Zero;

@@ -70,8 +70,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     private void OnXenoTailStab(Entity<XenoTailStabComponent> stab, ref XenoTailStabEvent args)
     {
         if (!_actionBlocker.CanAttack(stab) ||
-            !TryComp(stab, out TransformComponent? transform) ||
-            args.Coords == null)
+            !TryComp(stab, out TransformComponent? transform))
         {
             return;
         }
@@ -80,7 +79,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         if (userCoords.MapId == MapId.Nullspace)
             return;
 
-        var targetCoords = _transform.ToMapCoordinates(args.Coords.Value);
+        var targetCoords = _transform.ToMapCoordinates(args.Target);
         if (userCoords.MapId != targetCoords.MapId)
             return;
 
@@ -146,7 +145,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
                 var filter = Filter.Pvs(transform.Coordinates, entityMan: EntityManager).RemoveWhereAttachedEntity(o => o == stab.Owner);
 
-                var attackedEv = new AttackedEvent(stab, stab, args.Coords.Value);
+                var attackedEv = new AttackedEvent(stab, stab, args.Target);
                 RaiseLocalEvent(hit, attackedEv);
 
                 var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);

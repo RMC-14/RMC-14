@@ -1,12 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Numerics;
 using Content.Client.DisplacementMap;
 using Content.Client.Inventory;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.DisplacementMap;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -14,7 +12,6 @@ using Content.Shared.Item;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
-using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 using Robust.Shared.Utility;
 using static Robust.Client.GameObjects.SpriteComponent;
@@ -205,7 +202,15 @@ public sealed class ClientClothingSystem : ClothingSystem
         // may eventually bloat the player with lots of invisible layers.
         foreach (var layer in revealedLayers)
         {
-            _sprite.RemoveLayer(entity.AsNullable(), layer);
+            // RMC14
+            try
+            {
+                _sprite.RemoveLayer(entity.AsNullable(), layer);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error removing layer:\n{e}");
+            }
         }
         revealedLayers.Clear();
     }
@@ -304,6 +309,7 @@ public sealed class ClientClothingSystem : ClothingSystem
                 index++;
                 // note that every insertion requires reshuffling & remapping all the existing layers.
                 _sprite.AddBlankLayer((equipee, sprite), index);
+                _sprite.LayerMapRemove((equipee, sprite), key); // RMC14
                 _sprite.LayerMapSet((equipee, sprite), key, index);
 
                 if (layerData.Color != null)

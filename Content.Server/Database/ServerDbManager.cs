@@ -4,6 +4,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -365,7 +366,7 @@ namespace Content.Server.Database
 
         Task<(string Message, string User)?> GetRandomLobbyMessage();
 
-        Task<(string? Marine, string? Xeno)> GetRandomShoutout();
+        Task<(RoundEndShoutout? Marine, RoundEndShoutout? Xeno)> GetRandomShoutout();
 
         Task<List<string>> GetExcludedRoleTimers(Guid player, CancellationToken cancel);
 
@@ -1185,7 +1186,7 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetRandomLobbyMessage());
         }
 
-        public Task<(string? Marine, string? Xeno)> GetRandomShoutout()
+        public Task<(RoundEndShoutout? Marine, RoundEndShoutout? Xeno)> GetRandomShoutout()
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetRandomShoutout());

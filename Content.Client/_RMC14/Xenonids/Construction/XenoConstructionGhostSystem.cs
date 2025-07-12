@@ -472,9 +472,9 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
     private bool TileSolidAndNotBlocked(EntityCoordinates target)
     {
-        return target.GetTileRef(EntityManager, _mapManager) is { } tile &&
-               !tile.IsSpace() &&
-               tile.GetContentTileDefinition().Sturdy &&
+        return _turf.GetTileRef(target) is { } tile &&
+               !_turf.IsSpace(tile) &&
+               _turf.GetContentTileDefinition(tile).Sturdy &&
                !_turf.IsTileBlocked(tile, Impassable) &&
                !_xenoNest.HasAdjacentNestFacing(target);
     }

@@ -8,7 +8,9 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Ghost;
@@ -40,6 +42,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Nest;
 public sealed class XenoNestSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGhostSystem _ghost = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -199,11 +202,19 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void OnNestSurfaceDoAfter(Entity<XenoNestSurfaceComponent> ent, ref XenoNestDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Target is not { } victim)
             return;
 
-        if (args.Target is not { } victim ||
-            !CanNestPopup(args.User, victim, ent, out var direction, allDirs: args.AllDirs))
+        if (args.Cancelled)
+        {
+            _adminLog.Add(LogType.RMCXenoNest, $"{ToPrettyString(args.User):user} stopped nesting {ToPrettyString(victim):victim} to surface {ToPrettyString(ent):surface}");
+            return;
+        }
+
+        if (args.Handled)
+            return;
+
+        if (!CanNestPopup(args.User, victim, ent, out var direction, allDirs: args.AllDirs))
         {
             return;
         }
@@ -265,6 +276,8 @@ public sealed class XenoNestSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("cm-xeno-nest-securing-observer", ("user", args.User), ("target", victim)), args.User, recipient);
             }
         }
+
+        _adminLog.Add(LogType.RMCXenoNest, $"{ToPrettyString(args.User):user} nested {ToPrettyString(victim):victim} to surface {ToPrettyString(ent):surface}");
     }
 
     #region DragDrop
@@ -376,6 +389,7 @@ public sealed class XenoNestSystem : EntitySystem
             }
         }
 
+        _adminLog.Add(LogType.RMCXenoNest, $"{ToPrettyString(user):user} started nesting {ToPrettyString(victim):victim} to surface {ToPrettyString(surface):surface}");
         return true;
     }
 
