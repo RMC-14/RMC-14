@@ -1573,3 +1573,14 @@
     state: kall_kallovski
   - type: PatronFigurine
     id: 794217c7-0b1c-40d4-b254-0cb58ea69566
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAtlasWolfySnowlight
+  name: Atlas 'Wolfy' Snowlight figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: atlas_wolfy_snowlight
+  - type: PatronFigurine
+    id: 6ca6e4f7-0951-4298-bbf2-f4de50fb025b
