@@ -6,5 +6,5 @@ namespace Content.Shared._RMC14.GhostAppearance;
 public sealed partial class RMCGhostAppearanceComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid? MindId;
+    public EntityUid? SourceEntity;
 }
