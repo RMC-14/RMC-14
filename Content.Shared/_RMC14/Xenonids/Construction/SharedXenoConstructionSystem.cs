@@ -718,7 +718,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var hasBoost = _queenBoostQuery.HasComp(args.User);
             var displayChoice = hasBoost ? GetQueenVariant(args.Choice) : args.Choice;
-            _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.EntityPrototype(displayChoice);
+            _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.EntityPrototype(displayChoice));
         }
     }
 
