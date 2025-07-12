@@ -282,11 +282,12 @@ public sealed class MindSystem : SharedMindSystem
 
         Dirty(mindId, mind);
 
-        if (mind.Session != null)
+        if (mind.UserId != null &&
+            _players.TryGetSessionById(mind.UserId.Value, out var session))
         {
             foreach (var role in mind.MindRoles)
             {
-                _pvsOverride.RemoveSessionOverride(role, mind.Session);
+                _pvsOverride.RemoveSessionOverride(role, session);
             }
         }
 
@@ -331,12 +332,12 @@ public sealed class MindSystem : SharedMindSystem
         if (_players.GetPlayerData(userId.Value).ContentData() is { } data)
             data.Mind = mindId;
 
-        if (_players.TryGetSessionById(userId.Value, out var session))
+        if (_players.TryGetSessionById(userId.Value, out session))
         {
             _pvsOverride.AddSessionOverride(mindId, session);
             foreach (var role in mind.MindRoles)
             {
-                _pvsOverride.AddSessionOverride(role, ret);
+                _pvsOverride.AddSessionOverride(role, session);
             }
 
             _players.SetAttachedEntity(session, mind.CurrentEntity);

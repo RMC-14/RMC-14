@@ -14,7 +14,6 @@ using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.Physics;
 using Robust.Client.Player;
 using Robust.Client.State;
 using Robust.Shared.Animations;
@@ -41,10 +40,8 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SpriteSystem _sprite = default!;
 
     // RMC14
-    [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
     [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
 
     public static readonly EntProtoId HitscanProto = "HitscanEffect";
 
@@ -353,12 +350,12 @@ public sealed partial class GunSystem : SharedGunSystem
     public override void ShootProjectile(EntityUid uid,
         Vector2 direction,
         Vector2 gunVelocity,
-        EntityUid gunUid,
+        EntityUid? gunUid,
         EntityUid? user = null,
         float speed = 20)
     {
         EnsureComp<PredictedProjectileClientComponent>(uid);
-        _physics.UpdateIsPredicted(uid);
+        Physics.UpdateIsPredicted(uid);
         base.ShootProjectile(uid, direction, gunVelocity, gunUid, user, speed);
     }
 }

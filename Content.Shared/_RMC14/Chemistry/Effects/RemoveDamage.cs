@@ -4,7 +4,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._RMC14.Chemistry.Effects;
+namespace Content.Shared._RMC14.Chemistry.Effects;
 
 public sealed partial class RemoveDamage : EntityEffect
 {

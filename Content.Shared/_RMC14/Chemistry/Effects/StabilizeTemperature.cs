@@ -1,9 +1,8 @@
-﻿using Content.Server.Temperature.Components;
-using Content.Server.Temperature.Systems;
+﻿using Content.Shared._RMC14.Temperature;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._RMC14.Chemistry.Effects;
+namespace Content.Shared._RMC14.Chemistry.Effects;
 
 public sealed partial class StabilizeTemperature : EntityEffect
 {
@@ -20,10 +19,8 @@ public sealed partial class StabilizeTemperature : EntityEffect
 
     public override void Effect(EntityEffectBaseArgs args)
     {
-        if (!args.EntityManager.TryGetComponent(args.TargetEntity, out TemperatureComponent? comp))
-            return;
-
-        var current = comp.CurrentTemperature;
+        var sys = args.EntityManager.EntitySysManager.GetEntitySystem<SharedRMCTemperatureSystem>();
+        var current = sys.GetTemperature(args.TargetEntity);
         if (Math.Abs(current - Stable) < 0.01)
             return;
 
@@ -31,11 +28,10 @@ public sealed partial class StabilizeTemperature : EntityEffect
         if (args is EntityEffectReagentArgs reagentArgs)
             change *= reagentArgs.Scale.Float();
 
-        var sys = args.EntityManager.EntitySysManager.GetEntitySystem<TemperatureSystem>();
         var temp = current > Stable
             ? Math.Max(Stable, current - change)
             : Math.Min(Stable, current + change);
 
-        sys.ForceChangeTemperature(args.TargetEntity, temp, comp);
+        sys.ForceChangeTemperature(args.TargetEntity, temp);
     }
 }

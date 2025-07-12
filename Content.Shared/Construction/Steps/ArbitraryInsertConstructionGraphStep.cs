@@ -5,7 +5,8 @@ namespace Content.Shared.Construction.Steps
 {
     public abstract partial class ArbitraryInsertConstructionGraphStep : EntityInsertConstructionGraphStep
     {
-        [DataField] public LocId Name { get; private set; } = string.Empty;
+        // RMC14 until localized
+        [DataField] public string Name { get; private set; } = string.Empty;
 
         [DataField] public SpriteSpecifier? Icon { get; private set; }
 

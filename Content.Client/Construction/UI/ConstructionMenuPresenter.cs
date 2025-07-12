@@ -212,7 +212,7 @@ namespace Content.Client.Construction.UI
                 var protoView = new EntityPrototypeView()
                 {
                     Scale = new Vector2(1.2f),
-                    Modulate = recipe.IconColor
+                    Modulate = recipe.Prototype.IconColor,
                 };
                 protoView.SetPrototype(recipe.TargetPrototype);
 

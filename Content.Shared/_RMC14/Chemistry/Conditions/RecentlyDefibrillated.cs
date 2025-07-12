@@ -2,7 +2,7 @@
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._RMC14.Chemistry.Conditions;
+namespace Content.Shared._RMC14.Chemistry.Conditions;
 
 public sealed partial class RecentlyDefibrillated : EntityEffectCondition
 {

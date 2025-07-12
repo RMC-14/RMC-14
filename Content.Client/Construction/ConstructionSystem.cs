@@ -129,8 +129,8 @@ namespace Content.Client.Construction
                     if (!PrototypeManager.TryIndex(entityId, out var proto))
                         continue;
 
-                    var name = recipe.SetName.HasValue ? Loc.GetString(recipe.SetName) : proto.Name;
-                    var desc = recipe.SetDescription.HasValue ? Loc.GetString(recipe.SetDescription) : proto.Description;
+                    var name = recipe.SetName != null ? Loc.GetString(recipe.SetName) : proto.Name;
+                    var desc = recipe.SetDescription != null ? Loc.GetString(recipe.SetDescription) : proto.Description;
 
                     recipe.Name = name;
                     recipe.Description = desc;

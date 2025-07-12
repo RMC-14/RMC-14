@@ -119,7 +119,7 @@ namespace Content.Shared.StatusEffect
 
             if (HasComp<T>(uid))
             {
-                status.ActiveEffects[key].RelevantComponent = _componentFactory.GetComponentName<T>();
+                status.ActiveEffects[key].RelevantComponent = Factory.GetComponentName<T>();
                 return true;
             }
 

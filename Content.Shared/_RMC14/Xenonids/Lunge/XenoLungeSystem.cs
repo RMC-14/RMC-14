@@ -35,7 +35,6 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
@@ -101,7 +100,7 @@ public sealed class XenoLungeSystem : EntitySystem
 
     private void OnXenoLungeHit(Entity<XenoLungeComponent> xeno, ref ThrowDoHitEvent args)
     {
-        if (!_mob.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
+        if (!_mobState.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
         {
             xeno.Comp.Charge = null;
             xeno.Comp.Target = null;

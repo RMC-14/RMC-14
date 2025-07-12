@@ -105,5 +105,5 @@ public sealed partial class RMCHumanoidAppearance : IRMCHumanoidAppearance
     ///     The displacement maps that will be applied to specific layers of the humanoid.
     /// </summary>
     [DataField]
-    public Dictionary<HumanoidVisualLayers, DisplacementData> MarkingsDisplacement = new();
+    public Dictionary<HumanoidVisualLayers, DisplacementData> MarkingsDisplacement { get; set; } = new();
 }

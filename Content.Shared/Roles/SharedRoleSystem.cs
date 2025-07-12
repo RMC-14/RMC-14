@@ -28,7 +28,8 @@ public abstract class SharedRoleSystem : EntitySystem
     [Dependency] private   readonly SharedAudioSystem _audio = default!;
 
     // RMC14
-    [Dependency] private   readonly SharedMindSystem _minds = default!;
+    [Dependency] private readonly SharedMindSystem _minds = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
 
     private JobRequirementOverridePrototype? _requirementOverride;
 
@@ -195,8 +196,8 @@ public abstract class SharedRoleSystem : EntitySystem
                 $"{name} added to {ToPrettyString(mindId)}");
         }
 
-        if (mind.Session != null)
-            _rmcPvs.AddSessionOverride(mindRoleId, mind.Session);
+        if (mind.OriginalOwnerUserId is { } session)
+            _rmcPvs.AddSessionOverride(mindRoleId, session);
     }
 
     /// <summary>

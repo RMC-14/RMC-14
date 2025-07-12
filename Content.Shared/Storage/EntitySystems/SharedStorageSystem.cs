@@ -1,6 +1,7 @@
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.ActionBlocker;
@@ -18,35 +19,31 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
-using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Lock;
 using Content.Shared.Materials;
 using Content.Shared.Popups;
+using Content.Shared.Rounding;
 using Content.Shared.Stacks;
 using Content.Shared.Storage.Components;
-using Content.Shared.Tag;
-using Content.Shared.Timing;
 using Content.Shared.Storage.Events;
+using Content.Shared.Tag;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.Rounding;
-using Robust.Shared.Collections;
-using Robust.Shared.Map.Enumerators;
-using Content.Shared._RMC14.Hands;
 
 namespace Content.Shared.Storage.EntitySystems;
 
@@ -1374,7 +1371,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (storageEnt.Comp.StoredItems.TryGetValue(itemEnt.Owner, out var existing))
         {
-            AddOccupied(itemEnt, existing, _ignored);
+            AddOccupied(storageEnt, itemEnt, existing, _ignored);
         }
 
         // This uses a faster path than the typical codepaths
@@ -1385,7 +1382,7 @@ public abstract class SharedStorageSystem : EntitySystem
         // means we can skip getting the item's rotated shape at all if the tile is occupied.
         // This mostly makes heavy checks (e.g. area insert) much, much faster.
         var fastPath = false;
-        var itemShape = ItemSystem.GetItemShape(itemEnt);
+        var itemShape = ItemSystem.GetItemShape(storageEnt, itemEnt);
         var fastAngles = itemShape.Count == 1;
 
         if (itemShape.Count == 1 && itemShape[0].Contains(Vector2i.Zero))
@@ -1455,7 +1452,7 @@ public abstract class SharedStorageSystem : EntitySystem
                         }
 
                         _itemShape.Clear();
-                        ItemSystem.GetAdjustedItemShape(_itemShape, itemEnt, angle, position);
+                        ItemSystem.GetAdjustedItemShape(_itemShape, itemEnt, angle, position, storageEnt);
 
                         if (ItemFitsInGridLocation(storageEnt.Comp.OccupiedGrid, _itemShape, _ignored))
                         {
@@ -1627,7 +1624,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (storageEnt.Comp.StoredItems.TryGetValue(itemEnt.Owner, out var existing))
         {
-            AddOccupied(itemEnt, existing, _ignored);
+            AddOccupied(storageEnt, itemEnt, existing, _ignored);
         }
 
         return ItemFitsInGridLocation(storageEnt.Comp.OccupiedGrid, itemShape, _ignored);
@@ -1684,14 +1681,14 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void AddOccupiedEntity(Entity<StorageComponent> storageEnt, Entity<ItemComponent?> itemEnt, ItemStorageLocation location)
     {
-        AddOccupied(itemEnt, location, storageEnt.Comp.OccupiedGrid);
+        AddOccupied((storageEnt, storageEnt), itemEnt, location, storageEnt.Comp.OccupiedGrid);
 
         Dirty(storageEnt);
     }
 
-    private void AddOccupied(Entity<ItemComponent?> itemEnt, ItemStorageLocation location, Dictionary<Vector2i, ulong> occupied)
+    private void AddOccupied(Entity<StorageComponent?> storageEnt, Entity<ItemComponent?> itemEnt, ItemStorageLocation location, Dictionary<Vector2i, ulong> occupied)
     {
-        var adjustedShape = ItemSystem.GetAdjustedItemShape((itemEnt.Owner, itemEnt.Comp), location);
+        var adjustedShape = ItemSystem.GetAdjustedItemShape(storageEnt, (itemEnt.Owner, itemEnt.Comp), location);
         AddOccupied(adjustedShape, occupied);
     }
 
@@ -1768,7 +1765,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void RemoveOccupiedEntity(Entity<StorageComponent> storageEnt, Entity<ItemComponent?> itemEnt, ItemStorageLocation location)
     {
-        var adjustedShape = ItemSystem.GetAdjustedItemShape((itemEnt.Owner, itemEnt.Comp), location);
+        var adjustedShape = ItemSystem.GetAdjustedItemShape((storageEnt, storageEnt), (itemEnt.Owner, itemEnt.Comp), location);
 
         RemoveOccupied(adjustedShape, storageEnt.Comp.OccupiedGrid);
 

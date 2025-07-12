@@ -343,17 +343,15 @@ namespace Content.Server.Construction
 
                 var lastStackAmount = 0;
 
-                foreach (var hand in _handsSystem.EnumerateHands(user))
+                foreach (var held in _handsSystem.EnumerateHeld(user))
                 {
-                    if (hand.HeldEntity == null) // Find any valid construction item
-                        continue;
-
-                    if (TryComp<RMCConstructionItemComponent>(hand.HeldEntity, out var constructionItemComp))
+                    // Find any valid construction item
+                    if (TryComp<RMCConstructionItemComponent>(held, out var constructionItemComp))
                     {
                         if (constructionItemComp.Buildable is { } buildable && !buildable.Contains(rmcProto))
                             continue;
 
-                        if (TryComp<StackComponent>(hand.HeldEntity, out var stack))
+                        if (TryComp<StackComponent>(held, out var stack))
                         {
                             if (lastStackAmount > stack.Count)
                                 continue; // Choose the stack with the biggest amount
@@ -361,7 +359,7 @@ namespace Content.Server.Construction
                             lastStackAmount = stack.Count;
                         }
 
-                        constructionItem = (hand.HeldEntity.Value, constructionItemComp);
+                        constructionItem = (held, constructionItemComp);
                         break;
                     }
                 }

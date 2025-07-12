@@ -238,7 +238,7 @@ namespace Content.Server.Pointing.EntitySystems
 
                     // Target the pointing at the item's holder
                     pointed = containingInventory.Value;
-                    pointedName = Identity.Entity(pointed, EntityManager);
+                    pointedName = Identity.Name(pointed, EntityManager, player);
                     var pointingAtOwnItem = player == pointed;
 
                     if (pointingAtOwnItem)

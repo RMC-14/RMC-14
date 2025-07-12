@@ -71,6 +71,7 @@ public sealed class RMCHumanoidAppearanceSystem : EntitySystem
             HideLayersOnEquip = new(fakeLook.HideLayersOnEquip),
             UndergarmentTop = fakeLook.UndergarmentTop,
             UndergarmentBottom = fakeLook.UndergarmentBottom,
+            MarkingsDisplacement = new(fakeLook.MarkingsDisplacement),
         };
 
         Dirty(ev.Mob, hidden);

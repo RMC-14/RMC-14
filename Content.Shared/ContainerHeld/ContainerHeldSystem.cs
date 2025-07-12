@@ -1,9 +1,8 @@
-using Robust.Shared.Containers;
-
 using Content.Shared.Item;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Toggleable;
+using Robust.Shared.Containers;
 
 namespace Content.Shared.ContainerHeld;
 
@@ -29,6 +28,7 @@ public sealed class ContainerHeldSystem : EntitySystem
         {
             return;
         }
+
         if (_storage.GetCumulativeItemAreas(uid) >= comp.Threshold)
         {
             _item.SetHeldPrefix(uid, "full", component: item);

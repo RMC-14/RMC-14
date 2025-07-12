@@ -77,7 +77,6 @@
     useDelay: 1
     icon: { sprite: Objects/Tools/flashlight.rsi, state: flashlight }
     iconOn: { sprite: Objects/Tools/flashlight.rsi, state: flashlight-on }
-    event: !type:ToggleActionEvent
   - type: ActionBlockIfDevoured # RMC14
 
 - type: entity

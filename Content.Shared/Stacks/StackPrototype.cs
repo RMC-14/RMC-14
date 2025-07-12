@@ -10,12 +10,13 @@ public sealed partial class StackPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
+    // RMC14 until localized
     /// <summary>
     ///     Human-readable name for this stack type e.g. "Steel"
     /// </summary>
     /// <remarks>This is a localization string ID.</remarks>
     [DataField]
-    public LocId Name { get; private set; } = string.Empty;
+    public string Name { get; private set; } = string.Empty;
 
     /// <summary>
     ///     An icon that will be used to represent this stack type.
