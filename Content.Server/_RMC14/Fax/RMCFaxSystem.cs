@@ -12,10 +12,7 @@ using Content.Shared.Database;
 
 namespace Content.Server._RMC14.Fax;
 
-/// <summary>
-/// RMC-specific fax system that handles faxecuting mobs when they're in fax machines.
-/// This system extends the base fax functionality with RMC-specific behavior.
-/// </summary>
+
 public sealed class RMCFaxSystem : EntitySystem
 {
     [Dependency] private readonly RMCFaxecuteSystem _faxecute = default!;
@@ -26,17 +23,11 @@ public sealed class RMCFaxSystem : EntitySystem
     {
         base.Initialize();
         
-        // Only subscribe to RMC-specific events to avoid conflicts with base FaxSystem
         SubscribeLocalEvent<FaxMachineComponent, RMCFaxCopyMultipleMessage>(OnCopyMultipleButtonPressed);
         
-        // TODO: For mob faxecuting, we need a different approach that doesn't conflict with base system
-        // For now, we'll handle this through modification of the base system
+
     }
 
-    /// <summary>
-    /// Checks if there's a mob in the fax machine and handles faxecuting if so.
-    /// Returns true if a mob was found and faxecuted, false otherwise.
-    /// </summary>
     public bool TryFaxecuteMob(EntityUid uid, FaxMachineComponent component)
     {
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
@@ -57,13 +48,8 @@ public sealed class RMCFaxSystem : EntitySystem
         {
             CopyMultiple(uid, component, args);
         }
-        // Note: This is RMC-specific functionality, so base system doesn't handle this message type
     }
 
-    /// <summary>
-    /// RMC-specific implementation: Copies the paper in the fax multiple times.
-    /// A timeout is set after copying, which is shared by the send button.
-    /// </summary>
     private void CopyMultiple(EntityUid uid, FaxMachineComponent component, RMCFaxCopyMultipleMessage args)
     {
         if (component.SendTimeoutRemaining > 0)
@@ -89,17 +75,12 @@ public sealed class RMCFaxSystem : EntitySystem
                                        paper.StampedBy,
                                        paper.EditingDisabled);
 
-        // Add the specified number of copies to the queue
         for (int i = 0; i < args.Copies; i++)
         {
             component.PrintingQueue.Enqueue(printout);
         }
         component.SendTimeoutRemaining += component.SendTimeout;
 
-        // Don't play component.SendSound - it clashes with the printing sound, which
-        // will start immediately.
-
-        // Update UI using reflection to access private method
         var updateMethod = typeof(FaxSystem).GetMethod("UpdateUserInterface", 
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         updateMethod?.Invoke(_faxSystem, new object[] { uid, component });
