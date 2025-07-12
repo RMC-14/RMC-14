@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Requisitions can now vendor packets of M74 grenades.
-    type: Add
-  id: 1483
-  time: '2025-03-25T06:49:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5954
 - author: Tyzemol
   changes:
   - message: Freezer crates will now actually keep things inside fresh.
@@ -4995,5 +4988,26 @@
   id: 1983
   time: '2025-07-12T04:44:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6966
+- author: Dygon
+  changes:
+  - message: Applying barbed wire to a barricade now increases it's max health by
+      50.
+    type: Tweak
+  - message: Attempting to attack or tackle over a barricade from the front now has
+      a chance to make you attack the barricade instead. The chance of this occurring
+      ranges from 100% to 30%, depending on the barricade's current health.
+    type: Tweak
+  - message: Trying to leap or pounce over a barbed barricade will now stun you.
+    type: Tweak
+  - message: All leaps now ignore barricades without barbed wire.
+    type: Tweak
+  - message: Tail Stab is now a targeted action and requires you to click on your
+      target.
+    type: Tweak
+  - message: The grenadier armor's leap protection no longer blocks ravagers and praetorians.
+    type: Fix
+  id: 1984
+  time: '2025-07-12T04:52:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6699
 Name: RMC14
 Order: -1
