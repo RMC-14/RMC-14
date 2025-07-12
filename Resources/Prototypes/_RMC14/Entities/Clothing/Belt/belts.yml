@@ -1292,11 +1292,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazinePistolD50WinterWyvernHI
+    - id: RMCMagazinePistolHandcannon
       amount: 4
-    - id: RMCMagazinePistolD50WinterWyvernHIAP
+    - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
-    - id: RMCWeaponPistolCOD50WinterWyvern
+    - id: RMCWeaponPistolHandcannonWinterWyvern
 
 - type: entity
   parent: CMBeltMarine
