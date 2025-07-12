@@ -47,6 +47,18 @@
         recommended: true
       - id: CMHeadCapPeakedService
         recommended: true
+    - name: Patches
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Personal Sidearm
       choices: { CMWeapon: 1 }
       entries:
@@ -133,7 +145,7 @@
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
       - id: RMCBeltHolsterSMGPouch
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
     - name: Pouches
@@ -428,7 +440,7 @@
     - name: Commanding Officer Essentials Kit
       takeAll: CMBundle
       entries:
-      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map
+      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Paper Map
     - name: Bags
       choices: { CMBag: 1 }
       entries:
@@ -473,7 +485,7 @@
         name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
       - id: CMBeltUtilityCombat
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { CMPouch: 2 }
@@ -500,6 +512,19 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+    - name: Miscellaneous
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
+
 
 # Weapon Vend
 - type: entity
@@ -555,9 +580,9 @@
         points: 15
       - id: RMCSpeedLoaderMatebaHIAP
         points: 20
-      - id: RMCMagazinePistolD50WinterWyvernHI
+      - id: RMCMagazinePistolHandcannonHI
         points: 15
-      - id: RMCMagazinePistolD50WinterWyvernHIAP
+      - id: RMCMagazinePistolHandcannonHIAP
         points: 20
     - name: Shotgun Ammunition
       entries:
@@ -755,7 +780,7 @@
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolsterFilled
     - name: Eyewear
       jobs:
       - CMExecutiveOfficer
@@ -767,10 +792,20 @@
       - id: RMCSunglassesBig
         recommended: true
       - id: RMCGlassesAviators
-    # - name: Patches # TODO RMC14 Make Patches
-    #   entries:
-    #   - id: CMUNMCPatch
-    #   - id: CMFallingFalconsPatch
+    - name: Patches
+      jobs:
+      - CMExecutiveOfficer
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMExecutiveOfficer
@@ -866,6 +901,20 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+    - name: Patches
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMChiefMP
@@ -971,7 +1020,20 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
-
+    - name: Patches
+      jobs:
+      - CMChiefEngineer
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMChiefEngineer
@@ -1084,10 +1146,10 @@
       - id: CMSatchel
       - id: RMCQuartermasterJacket
     - name: Gloves
-      jobs: 
+      jobs:
       - CMQuartermaster
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Headgear
@@ -1122,6 +1184,20 @@
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
+    - name: Patches
+      jobs:
+      - CMQuartermaster
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMQuartermaster
@@ -1251,6 +1327,20 @@
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
+    - name: Patches
+      jobs:
+      - CMCMO
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMCMO
@@ -1304,8 +1394,6 @@
         amount: 15
       - id: CMHeadsetResearcher
         amount: 15
-
-
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
@@ -1337,10 +1425,10 @@
       entries:
       - id: CMHeadsetSeniorCommand
     - name: Gloves
-      jobs: 
+      jobs:
       - CMAuxiliarySupportOfficer
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Bag
@@ -1385,6 +1473,20 @@
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
+    - name: Patches
+      jobs:
+      - CMAuxiliarySupportOfficer
+      entries:
+      - id: RMCPatchFallingFalcons
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+      - id: RMCPatchUNMC
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
     - name: Pouches
       jobs:
       - CMAuxiliarySupportOfficer

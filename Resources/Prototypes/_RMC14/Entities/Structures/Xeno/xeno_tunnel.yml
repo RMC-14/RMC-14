@@ -37,6 +37,7 @@
         type: NameTunnelBui
   - type: DeletedByWeedKiller
   - type: XenoFriendly
+  - type: RMCTrackable
 
 - type: entity
   parent: XenoTunnel

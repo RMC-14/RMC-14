@@ -6,10 +6,12 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -68,7 +70,11 @@ namespace Content.Server.Database
                 profiles[profile.Slot] = ConvertProfiles(profile);
             }
 
-            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor));
+            var constructionFavorites = new List<ProtoId<ConstructionPrototype>>(prefs.ConstructionFavorites.Count);
+            foreach (var favorite in prefs.ConstructionFavorites)
+                constructionFavorites.Add(new ProtoId<ConstructionPrototype>(favorite));
+
+            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), constructionFavorites);
         }
 
         public async Task SaveSelectedCharacterIndexAsync(NetUserId userId, int index)
@@ -151,7 +157,8 @@ namespace Content.Server.Database
             {
                 UserId = userId.UserId,
                 SelectedCharacterSlot = 0,
-                AdminOOCColor = Color.Red.ToHex()
+                AdminOOCColor = Color.Red.ToHex(),
+                ConstructionFavorites = [],
             };
 
             prefs.Profiles.Add(profile);
@@ -160,7 +167,7 @@ namespace Content.Server.Database
 
             await db.DbContext.SaveChangesAsync();
 
-            return new PlayerPreferences(new[] {new KeyValuePair<int, ICharacterProfile>(0, defaultProfile)}, 0, Color.FromHex(prefs.AdminOOCColor));
+            return new PlayerPreferences(new[] { new KeyValuePair<int, ICharacterProfile>(0, defaultProfile) }, 0, Color.FromHex(prefs.AdminOOCColor), []);
         }
 
         public async Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot)
@@ -184,6 +191,19 @@ namespace Content.Server.Database
 
             await db.DbContext.SaveChangesAsync();
 
+        }
+
+        public async Task SaveConstructionFavoritesAsync(NetUserId userId, List<ProtoId<ConstructionPrototype>> constructionFavorites)
+        {
+            await using var db = await GetDb();
+            var prefs = await db.DbContext.Preference.SingleAsync(p => p.UserId == userId.UserId);
+
+            var favorites = new List<string>(constructionFavorites.Count);
+            foreach (var favorite in constructionFavorites)
+                favorites.Add(favorite.Id);
+            prefs.ConstructionFavorites = favorites;
+
+            await db.DbContext.SaveChangesAsync();
         }
 
         private static async Task SetSelectedCharacterSlotAsync(NetUserId userId, int newSlot, ServerDbContext db)
@@ -1980,27 +2000,33 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return (random.Message, random.LastSeenUserName);
         }
 
-        public async Task<(string? Marine, string? Xeno)> GetRandomShoutout()
+        public async Task<(RoundEndShoutout? Marine, RoundEndShoutout? Xeno)> GetRandomShoutout()
         {
             // TODO RMC14 the random row is evaluated outside the DB, if we have that many patrons I guess we have better problems!
             await using var db = await GetDb();
-            var marineNames = await db.DbContext.RMCPatronRoundEndMarineShoutouts
+            var marines = await db.DbContext.RMCPatronRoundEndMarineShoutouts
                 .Include(p => p.Patron)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
-                .Select(p => p.Name)
                 .ToListAsync();
 
-            var xenoNames = await db.DbContext.RMCPatronRoundEndXenoShoutouts
+            var xenos = await db.DbContext.RMCPatronRoundEndXenoShoutouts
                 .Include(p => p.Patron)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
-                .Select(p => p.Name)
                 .ToListAsync();
 
-            var marineName = marineNames.Count == 0 ? null : marineNames[Random.Shared.Next(marineNames.Count)];
-            var xenoName = xenoNames.Count == 0 ? null : xenoNames[Random.Shared.Next(xenoNames.Count)];
-            return (marineName, xenoName);
+            var marine = marines.Count == 0 ? null : marines[Random.Shared.Next(marines.Count)];
+            RoundEndShoutout? marineShoutout = marine == null
+                ? null
+                : new RoundEndShoutout(marine.Patron.Player.LastSeenUserName, marine.Name);
+
+            var xeno = xenos.Count == 0 ? null : xenos[Random.Shared.Next(xenos.Count)];
+            RoundEndShoutout? xenoShoutout = xeno == null
+                ? null
+                : new RoundEndShoutout(xeno.Patron.Player.LastSeenUserName, xeno.Name);
+
+            return (marineShoutout, xenoShoutout);
         }
 
         public async Task<List<string>> GetExcludedRoleTimers(Guid player, CancellationToken cancel)

@@ -60,6 +60,7 @@ tags = "lang:en,region:am_n_e,rp:med"
 
 [ic]
 flavor_text = true
+id_job_length = 50
 
 [infolinks]
 #appeal = "https://appeal.rouny-ss14.com"
