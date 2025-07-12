@@ -5,7 +5,6 @@ using Content.Shared.Mind;
 using Content.Shared.Players;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.GhostAppearance;
@@ -72,5 +71,4 @@ public abstract class SharedDeadGhostVisualsSystem : EntitySystem
 
         return false;
     }
-
 }
