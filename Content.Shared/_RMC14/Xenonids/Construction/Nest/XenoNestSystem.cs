@@ -45,7 +45,6 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGhostSystem _ghost = default!;
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly OccluderSystem _occluder = default!;
@@ -487,7 +486,7 @@ public sealed class XenoNestSystem : EntitySystem
         string? response = null;
         foreach (var dir in directions)
         {
-            if (nestCoords.Offset(dir.ToVec()).GetTileRef(EntityManager, _map) is not { } tile ||
+            if (_turf.GetTileRef(nestCoords.Offset(dir.ToVec())) is not { } tile ||
                 _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
             {
                 response ??= Loc.GetString("cm-xeno-nest-failed-cant-there");
@@ -541,7 +540,7 @@ public sealed class XenoNestSystem : EntitySystem
 
             var underNestCooords = nestCoords.Offset(dir.ToVec());
 
-            if (_transform.GetGrid(underNestCooords) is not EntityUid gridEntity ||
+            if (_transform.GetGrid(underNestCooords) is not { } gridEntity ||
                 !TryComp<MapGridComponent>(gridEntity, out var gridComp))
             {
                 return false;

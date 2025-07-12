@@ -266,6 +266,9 @@
     whitelist:
       tags:
       - RMCAmmoBox
+      components:
+      - EmptySandbag
+      - FullSandbag
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null

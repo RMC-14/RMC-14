@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Pulling;
@@ -39,6 +40,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
@@ -101,16 +103,15 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnXenoPheromonesChosenBui(Entity<XenoPheromonesComponent> xeno, ref XenoPheromonesChosenBuiMsg args)
     {
-        if (!Enum.IsDefined(typeof(XenoPheromones), args.Pheromones) ||
+        if (!Enum.IsDefined(args.Pheromones) ||
             !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PheromonesPlasmaCost))
         {
             return;
         }
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoPheromonesActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoPheromonesActionEvent)
-                _actions.SetToggled(actionId, true);
+            _actions.SetToggled(action.AsNullable(), true);
         }
 
         var popup = Loc.GetString("cm-xeno-pheromones-start", ("pheromones", args.Pheromones.ToString()));
@@ -222,10 +223,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (!Resolve(xeno, ref xeno.Comp, false))
             return;
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoPheromonesActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoPheromonesActionEvent)
-                _actions.SetToggled(actionId, false);
+            _actions.SetToggled(action.AsNullable(), false);
         }
 
         if (!HasComp<XenoActivePheromonesComponent>(xeno))

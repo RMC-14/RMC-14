@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Chat.Prototypes;

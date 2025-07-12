@@ -13,6 +13,7 @@
   parent: RMCBaseMapIcon
   id: RMCLesserMapIcon
   name: Lesser
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -23,6 +24,7 @@
   parent: RMCBaseMapIcon
   id: RMCParasiteMapIcon
   name: Parasite
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -33,6 +35,7 @@
   parent: RMCBaseMapIcon
   id: RMCLarvaMapIcon
   name: Larva
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -44,6 +47,7 @@
   parent: RMCBaseMapIcon
   id: RMCDroneMapIcon
   name: Drone
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -54,6 +58,7 @@
   parent: RMCBaseMapIcon
   id: RMCHivelordMapIcon
   name: Hivelord
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -64,6 +69,7 @@
   parent: RMCBaseMapIcon
   id: RMCBurrowerMapIcon
   name: Burrower
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -74,17 +80,19 @@
   parent: RMCBaseMapIcon
   id: RMCCarrierMapIcon
   name: Carrier
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
     - state: background_xeno
     - state: carrier
-  
+
 # Defender Castes
 - type: entity
   parent: RMCBaseMapIcon
   id: RMCDefenderMapIcon
   name: Defender
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -95,6 +103,7 @@
   parent: RMCBaseMapIcon
   id: RMCWarriorMapIcon
   name: Warrior
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -105,6 +114,7 @@
   parent: RMCBaseMapIcon
   id: RMCCrusherMapIcon
   name: Crusher
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -115,6 +125,7 @@
   parent: RMCBaseMapIcon
   id: RMCSentinelMapIcon
   name: Sentinel
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -125,6 +136,7 @@
   parent: RMCBaseMapIcon
   id: RMCSpitterMapIcon
   name: Spitter
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -135,17 +147,19 @@
   parent: RMCBaseMapIcon
   id: RMCBoilerMapIcon
   name: Boiler
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
     - state: background_xeno
     - state: boiler
-  
+
 # Runner Castes
 - type: entity
   parent: RMCBaseMapIcon
   id: RMCRunnerMapIcon
   name: Runner
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -156,6 +170,7 @@
   parent: RMCBaseMapIcon
   id: RMCLurkerMapIcon
   name: Lurker
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -166,18 +181,20 @@
   parent: RMCBaseMapIcon
   id: RMCRavagerMapIcon
   name: Ravager
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
     - state: background_xeno
     - state: ravager
-  
+
 # Special Castes
 
 - type: entity
   parent: RMCBaseMapIcon
   id: RMCPraetorianMapIcon
   name: Praetorian
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -188,6 +205,7 @@
   parent: RMCBaseMapIcon
   id: RMCQueenMapIcon
   name: Queen
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -198,6 +216,7 @@
   parent: RMCBaseMapIcon
   id: RMCLeaderMapIcon
   name: Leader Crown
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     layers:
@@ -211,6 +230,7 @@
   parent: RMCBaseMapIcon
   id: RMCHiveCoreMapIcon
   name: Hive core
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: core
@@ -219,6 +239,7 @@
   parent: RMCBaseMapIcon
   id: RMCMorpherMapIcon
   name: Egg morpher
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: morpher
@@ -227,6 +248,7 @@
   parent: RMCBaseMapIcon
   id: RMCClusterMapIcon
   name: Hive cluster
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: cluster
@@ -235,6 +257,7 @@
   parent: RMCBaseMapIcon
   id: RMCTunnelMapIcon
   name: Tunnel
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: xenotunnel
@@ -243,6 +266,7 @@
   parent: RMCBaseMapIcon
   id: RMCRecovNodeMapIcon
   name: Recovery node
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: recovery_node

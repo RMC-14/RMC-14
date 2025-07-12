@@ -27,6 +27,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
 using Content.Shared.Wall;
@@ -289,7 +290,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (TryComp(ent, out AccessReaderComponent? accessReader))
         {
             var access = ent.Comp.Hacked ? new List<ProtoId<AccessLevelPrototype>>() : ent.Comp.Access;
-            _accessReader.SetAccesses(ent, accessReader,access);
+            _accessReader.SetAccesses((ent, accessReader), access);
         }
     }
 

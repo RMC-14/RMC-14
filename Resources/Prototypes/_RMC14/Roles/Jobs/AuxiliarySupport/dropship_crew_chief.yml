@@ -14,7 +14,7 @@
   ranks:
     RMCRankChiefWarrantOfficer:
     - !type:RoleTimeRequirement
-      role: CMJobPilotDropship
+      role: CMJobDropshipCrewChief
       time: 630000 # 175 hours
     RMCRankStaffSergeant:
     - !type:RoleTimeRequirement

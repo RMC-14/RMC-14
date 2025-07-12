@@ -635,7 +635,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         if (userEnt is { } user && Resolve(user, ref user.Comp) && _hands.IsHolding(user, item))
         {
-            if (!_hands.CanDrop(user, item, user.Comp))
+            if (!_hands.CanDrop(user, item))
                 return false;
         }
 

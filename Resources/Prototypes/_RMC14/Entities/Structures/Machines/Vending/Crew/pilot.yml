@@ -52,8 +52,9 @@
         recommended: true
       - id: RMCBeltHolsterSMGPouch
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { CMPouches: 2 }
@@ -86,7 +87,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Glasses
@@ -216,8 +217,8 @@
         amount: 4
       - id: RMCWeaponPistolM13
         amount: 4
-    #- id: CMWeaponM82F # TODO RMC14 Flare Gun
-    #  amount: 4
+      - id: RMCWeaponPistolM82F
+        amount: 4
     - name: Sidearm Ammunition
       entries:
       - id: CMMagazinePistolM77AP
@@ -226,7 +227,7 @@
         amount: 20
       - id: CMMagazinePistolM1984
         amount: 20
-      - id: RMCMagazinePistolM1984AP 
+      - id: RMCMagazinePistolM1984AP
         amount: 14
       #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
       # amount: 14

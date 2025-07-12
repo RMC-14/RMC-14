@@ -1,9 +1,9 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
-using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
-using Content.Server.EntityEffects.Effects;
+using Content.Shared.EntityEffects.Effects;
 using Content.Server.Spreader;
+using Content.Shared.Body.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -288,7 +288,7 @@ public sealed class SmokeSystem : EntitySystem
         if (blockIngestion)
             return;
 
-        if (_blood.TryAddToChemicals(entity, transferSolution, bloodstream))
+        if (_blood.TryAddToChemicals((entity, bloodstream), transferSolution))
         {
             // Log solution addition by smoke
             _logger.Add(LogType.ForceFeed, LogImpact.Medium, $"{ToPrettyString(entity):target} ingested smoke {SharedSolutionContainerSystem.ToPrettyString(transferSolution)}");

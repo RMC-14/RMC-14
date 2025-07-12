@@ -1,0 +1,221 @@
+- type: entity
+  parent: BaseItem
+  id: RMCDisk
+  abstract: true
+  name: disk
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/disks.rsi
+
+- type: entity
+  parent: RMCDisk
+  id: RMCNukeDisk
+  name: nuclear authentication disk
+  description: Better keep this safe.
+  components:
+  - type: NukeDisk
+  - type: Sprite
+    state: nucleardisk
+
+# Data Disk
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDiskData1
+  name: disk
+  suffix: Data, 1
+  components:
+  - type: Sprite
+    state: datadisk0
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDiskData2
+  name: disk
+  suffix: Data, 2
+  components:
+  - type: Sprite
+    state: datadisk1
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDiskData3
+  name: disk
+  suffix: Data, 3
+  components:
+  - type: Sprite
+    state: datadisk2
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDiskData4
+  name: disk
+  suffix: Data, 4
+  components:
+  - type: Sprite
+    state: datadisk3
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDiskData5
+  name: disk
+  suffix: Data, 5
+  components:
+  - type: Sprite
+    state: datadisk4
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDiskData6
+  name: disk
+  suffix: Data, 6
+  components:
+  - type: Sprite
+    state: datadisk5
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDiskData7
+  name: disk
+  suffix: Data, 7
+  components:
+  - type: Sprite
+    state: datadisk6
+
+# Regular Disk
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk1
+  name: disk
+  suffix: 1
+  components:
+  - type: Sprite
+    state: disk_1
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk2
+  name: disk
+  suffix: 2
+  components:
+  - type: Sprite
+    state: disk_2
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk3
+  name: disk
+  suffix: 3
+  components:
+  - type: Sprite
+    state: disk_3
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk4
+  name: disk
+  suffix: 4
+  components:
+  - type: Sprite
+    state: disk_4
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk5
+  name: disk
+  suffix: 5
+  components:
+  - type: Sprite
+    state: disk_5
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk6
+  name: disk
+  suffix: 6
+  components:
+  - type: Sprite
+    state: disk_6
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk7
+  name: disk
+  suffix: 7
+  components:
+  - type: Sprite
+    state: disk_7
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk8
+  name: disk
+  suffix: 8
+  components:
+  - type: Sprite
+    state: disk_8
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk9
+  name: disk
+  suffix: 9
+  components:
+  - type: Sprite
+    state: disk_9
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk10
+  name: disk
+  suffix: 10
+  components:
+  - type: Sprite
+    state: disk_10
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk11
+  name: disk
+  suffix: 11
+  components:
+  - type: Sprite
+    state: disk_11
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk12
+  name: disk
+  suffix: 12
+  components:
+  - type: Sprite
+    state: disk_12
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk13
+  name: disk
+  suffix: 13
+  components:
+  - type: Sprite
+    state: disk_13
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk14
+  name: disk
+  suffix: 14
+  components:
+  - type: Sprite
+    state: disk_14
+
+- type: entity
+  parent: RMCDisk
+  id: RMCDisk15
+  name: disk
+  suffix: 15
+  components:
+  - type: Sprite
+    state: disk_15

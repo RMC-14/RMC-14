@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.SmartFridge;
 using Content.Shared._RMC14.IconLabel;
@@ -33,7 +33,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedLabelSystem _label = default!;
+    [Dependency] private readonly LabelSystem _label = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCIconLabelSystem _rmcIconLabel = default!;
@@ -206,10 +206,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         _itemSlots.TryEjectToHands(ent, slot, args.Actor, true);
 
-        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
-            return;
-
-        _solution.RemoveAllSolution(buffer.Value);
         Dirty(ent);
     }
 
@@ -303,6 +299,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out var buffer))
             return;
 
+        if (ent.Comp.BufferTransferMode == RMCChemMasterBufferMode.ToDisposal)
+        {
+            _solution.RemoveAllSolution(buffer.Value);
+        }
+
         _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, buffer.Value.Comp.Solution.Volume);
         Dirty(ent);
         RefreshUIs(ent);
@@ -388,7 +389,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 }
 
                 var pillComp = EnsureComp<PillComponent>(pill);
-                pillComp.PillType = ent.Comp.SelectedType;
+                pillComp.PillType = ent.Comp.SelectedType - 1;
                 Dirty(pill, pillComp);
 
                 if (label != null)

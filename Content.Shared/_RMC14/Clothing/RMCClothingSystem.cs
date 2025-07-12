@@ -1,7 +1,9 @@
+using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Item;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -15,6 +17,8 @@ public sealed class RMCClothingSystem : EntitySystem
     [Dependency] private readonly ClothingSystem _clothing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly SharedUniformAccessorySystem _uniformAccessories = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -118,7 +122,7 @@ public sealed class RMCClothingSystem : EntitySystem
     {
         if (type.Prefix == ent.Comp.ActivatedPrefix) // already activated
         {
-            SetPrefix(ent, null);
+            SetPrefix(ent, null, false);
         }
         else
         {
@@ -133,15 +137,16 @@ public sealed class RMCClothingSystem : EntitySystem
                 return;
             }
 
-            SetPrefix(ent, type.Prefix);
+            SetPrefix(ent, type.Prefix, type.HideAccessories);
         }
     }
 
-    public void SetPrefix(Entity<RMCClothingFoldableComponent> ent, string? prefix)
+    public void SetPrefix(Entity<RMCClothingFoldableComponent> ent, string? prefix, bool hideAccessories)
     {
         ent.Comp.ActivatedPrefix = prefix;
         Dirty(ent);
 
         _clothing.SetEquippedPrefix(ent.Owner, ent.Comp.ActivatedPrefix);
+        _uniformAccessories.SetAccessoriesHidden(ent.Owner, hideAccessories);
     }
 }

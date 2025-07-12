@@ -58,11 +58,11 @@ public sealed class SkillsSystem : EntitySystem
 
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
         SubscribeLocalEvent<RequiresSkillComponent, ActivatableUIOpenAttemptEvent>(OnRequiresSkillActivatableUIOpenAttempt);
-        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(HypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnMeleeRequiresSkillAttemptMelee);
         SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnMeleeRequiresSkillThrowAttempt);
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(HypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<ItemToggleRequiresSkillComponent, ItemToggleActivateAttemptEvent>(OnItemToggleRequiresSkill);
         SubscribeLocalEvent<ItemToggleDeactivateUnskilledComponent, GotEquippedEvent>(OnItemToggleDeactivateUnskilled);

@@ -97,6 +97,9 @@ public sealed class MotionDetectorSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        if (!ent.Comp.CanToggleRange)
+            return;
+
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
