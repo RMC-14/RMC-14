@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -28,6 +29,15 @@ public sealed partial class XenoConstructionComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<EntProtoId> CanOrderConstruction = new();
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? OrderConstructionChoice;
+
+    [DataField, AutoNetworkedField]
+    public bool OrderConstructionTargeting;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? ConfirmOrderConstructionAction;
 
     [DataField, AutoNetworkedField]
     public EntityCoordinates? OrderingConstructionAt;

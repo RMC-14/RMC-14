@@ -58,6 +58,7 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: cmp
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearChiefMP

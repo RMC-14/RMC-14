@@ -644,6 +644,10 @@
         amount: 12
       - id: FoodCondimentBottleVinegar
         amount: 12
+      - id: ReagentContainerCornmeal
+        amount: 12
+      - id: ReagentContainerMayo
+        amount: 12
 
 # PVE
 

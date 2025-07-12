@@ -139,11 +139,11 @@
 
 # Marine Special Forces
 - type: radioChannel
-  id: MarineForecon
-  name: chat-radio-forecon
+  id: MarineSOF
+  name: chat-radio-marine-sof
   keycode: "k"
   frequency: 1724
-  color: "#32CD32"
+  color: "#400000"
   longRange: true
   tower: true
 

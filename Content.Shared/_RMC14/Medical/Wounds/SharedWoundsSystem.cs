@@ -146,7 +146,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         args.Handled = true;
         if (damage != FixedPoint2.Zero)
         {
-            var total = _rmcDamageable.DistributeHealing((target, damageable), treater.Comp.Group, damage);
+            var total = _rmcDamageable.DistributeDamage((target, damageable), treater.Comp.Group, damage);
             _damageable.TryChangeDamage(target, total, true, damageable: damageable, origin: user, tool: args.Used);
         }
 
