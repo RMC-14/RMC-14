@@ -1584,3 +1584,14 @@
     state: atlas_wolfy_snowlight
   - type: PatronFigurine
     id: 6ca6e4f7-0951-4298-bbf2-f4de50fb025b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCaineRuffRuffalo
+  name: Caine 'Ruff' Ruffalo figurine
+  description: "Ruff as a Ruffalo. Always Ruffs. Is always Rough as a Ruff."
+  components:
+  - type: Sprite
+    state: caine_ruff_ruffalo
+  - type: PatronFigurine
+    id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7
