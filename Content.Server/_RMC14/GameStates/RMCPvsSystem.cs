@@ -13,6 +13,11 @@ public sealed class RMCPvsSystem : SharedRMCPvsSystem
         _pvsOverride.AddGlobalOverride(ent);
     }
 
+    public override void RemoveGlobalOverride(EntityUid ent)
+    {
+        _pvsOverride.RemoveGlobalOverride(ent);
+    }
+
     public override void AddForceSend(EntityUid ent)
     {
         _pvsOverride.AddForceSend(ent);

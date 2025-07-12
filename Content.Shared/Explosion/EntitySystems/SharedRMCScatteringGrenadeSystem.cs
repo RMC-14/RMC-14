@@ -73,4 +73,4 @@ public record struct ScatterGrenadeContentsEvent(int TotalCount, int ThrownCount
 ///     Raised when a the content of a scattering grenade is being thrown.
 /// </summary>
 [ByRefEvent]
-public record struct GrenadeContentThrownEvent();
+public record struct GrenadeContentThrownEvent(EntityUid Source);

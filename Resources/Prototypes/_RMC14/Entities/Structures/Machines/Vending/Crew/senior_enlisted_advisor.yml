@@ -26,6 +26,7 @@
       entries:
       - id: CMHandsBlackMarine
       - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -81,7 +82,7 @@
       - id: CMWebbingBlack
       - id: CMWebbingHolster
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
 
 - type: entity
   parent: ColMarTechBase

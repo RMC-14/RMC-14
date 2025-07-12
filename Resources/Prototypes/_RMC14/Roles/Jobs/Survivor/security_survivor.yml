@@ -5,6 +5,10 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
+    RMCRankCivilianSeniorOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
     RMCRankCivilianOfficer: []
   startingGear: RMCGearSurvivorSecurity
   accessGroups:
@@ -26,10 +30,13 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSecurity
     - type: RMCSurvivor
+    - type: RMCRibbon
     - type: MotionDetectorTracked
-    - type: UserIFF
-      faction: FactionSurvivor
+    - type: NpcFactionMember
+      factions:
+      - Civilian
     - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
 
 - type: startingGear
   id: RMCGearSurvivorSecurity
@@ -53,12 +60,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorSecurity
@@ -67,11 +72,30 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetSecurity
-  name: security survivor preset
+  name: security colonist preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     primaryWeapons:
-#    - [ CMBeltMarineMP5, WeaponSMGMP5 ] # TODO RMC14 mar30
+    - [ RMCBeltMarineMAR, RMCWeaponRifleMAR30 ]
     - [ CMBeltMarineMP5, WeaponSMGMP5 ]
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
     - [ CMBeltMarineM16, WeaponRifleM16 ]
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorSecurity
+  name: security colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorSecurity
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorSecurity
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorSecurity

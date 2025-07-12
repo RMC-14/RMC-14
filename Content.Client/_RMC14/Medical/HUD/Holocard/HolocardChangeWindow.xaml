@@ -1,6 +1,8 @@
 <DefaultWindow SetSize="250 300" Margin="4 0" xmlns="https://spacestation14.io">
     <BoxContainer Orientation="Vertical">
-        <LineEdit Name="SearchBar" PlaceHolder="{Loc 'ui-holocard-change-searchbar-placeholder'}" HorizontalExpand="True"  Margin ="0 4"/>
-        <ItemList Name="HolocardStateList" SelectMode="Single" VerticalExpand="True"  Margin ="0 4"/>
+        <LineEdit Name="SearchBar" PlaceHolder="{Loc 'ui-holocard-change-searchbar-placeholder'}"
+                  HorizontalExpand="True"  Margin ="0 4"/>
+        <ItemList Name="HolocardStateList" Access="Public" SelectMode="Single"
+                  VerticalExpand="True"  Margin ="0 4"/>
     </BoxContainer>
 </DefaultWindow>

@@ -14,6 +14,56 @@
       drink:
         maxVol: 100
   - type: CraftsIntoMolotov
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    maxTransferAmount: 5
+  - type: MixableSolution
+    solution: drink
+  - type: Spillable
+    solution: drink
+  - type: FitsInDispenser
+    solution: drink
+  - type: DrawableSolution
+    solution: drink
+  - type: RefillableSolution
+    solution: drink
+  - type: DrainableSolution
+    solution: drink
+  - type: Tag
+    tags:
+    - RMCAlcohol
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholGrenadine
+  name: briar rose grenadine syrup
+  description: Sweet and tangy, a bar syrup used to add color or flavor to drinks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/grenadine.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Grenadine
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholTequila
+  name: caccavo guaranteed quality tequila
+  description: Made from premium petroleum distillates, pure thalidomide and other fine quality ingredients!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/tequila.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Tequila
+          Quantity: 100
 
 - type: entity
   parent: RMCDrinkAlcoholBase
@@ -60,7 +110,7 @@
       drink:
         maxVol: 50
         reagents:
-        - ReagentId: Whiskey # TODO RMC14
+        - ReagentId: RMCSpecialBlendWhiskey
           Quantity: 50
 
 - type: entity
@@ -108,7 +158,23 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: Whiskey # TODO RMC14
+        - ReagentId: CoffeeLiqueur
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholVermouth
+  name: goldeneye vermouth
+  description: Sweet, sweet dryness~
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/vermouth.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Vermouth
           Quantity: 100
 
 - type: entity
@@ -124,7 +190,23 @@
       drink:
         maxVol: 100
         reagents:
-        - ReagentId: Whiskey # TODO RMC14
+        - ReagentId: MelonLiquor
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholBlueCuracao
+  name: miss blue curacao
+  description: A fruity, exceptionally azure drink. Does not allow the imbiber to use the fifth magic.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/blue_curacao.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: BlueCuracao
           Quantity: 100
 
 - type: entity
@@ -222,3 +304,6 @@
         reagents:
         - ReagentId: Whiskey
           Quantity: 100
+
+- type: Tag
+  id: RMCAlcohol

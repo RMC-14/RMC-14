@@ -55,9 +55,12 @@
     solution: bucket
   - type: ExaminableSolution
     solution: bucket
+  - type: FitsInDispenser
+    solution: bucket
   - type: Tag
     tags:
-      - Bucket
+    - Bucket
+    - ChemDispensable
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 50
@@ -81,7 +84,7 @@
       visible: false
   - type: Item
     sprite: _RMC14/Objects/Misc/Janitorial/bucket.rsi
-    size: Large
+    size: Normal
   - type: SolutionContainerVisuals
     fillBaseName: mopbucket-
   - type: SolutionContainerManager
@@ -91,7 +94,7 @@
 
 - type: entity
   parent: RMCBucket
-  id: CMBucketJani
+  id: RMCBucketJanitorial
   name: janitorial bucket
   description: It's a large bucket that fits in a janitorial cart. Holds 500 units.
   components:
@@ -103,10 +106,32 @@
       state: janibucket-1
       visible: false
   - type: Item
-    size: Large
+    sprite: _RMC14/Objects/Misc/Janitorial/bucket.rsi
+    size: Normal
   - type: SolutionContainerVisuals
     fillBaseName: janibucket-
   - type: SolutionContainerManager
     solutions:
       bucket:
         maxVol: 500
+  - type: FitsInDispenser
+    solution: bucket
+  - type: SolutionTransfer
+    transferAmount: 100
+    minTransferAmount: 5
+    maxTransferAmount: 500
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 20
+    - 25
+    - 30
+    - 40
+    - 60
+    - 80
+    - 100
+    - 120
+    - 240
+    - 300
+    - 500

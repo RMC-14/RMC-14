@@ -1,4 +1,12 @@
-﻿roles-antag-syndicate-agent-name = Syndicate agent
+﻿roles-antag-generic-solo-antagonist-name = Solo Antagonist
+
+roles-antag-generic-free-agent-name = Free Agent
+
+roles-antag-generic-team-antagonist-name = Team Antagonist
+
+roles-antag-generic-silicon-antagonist-name = Silicon Antagonist
+
+roles-antag-syndicate-agent-name = Syndicate agent
 roles-antag-syndicate-agent-objective = Complete your objectives without being caught.
 
 roles-antag-syndicate-agent-sleeper-name = Syndicate sleeper agent
@@ -19,7 +27,7 @@ roles-antag-suspicion-suspect-objective = Kill the innocents.
 roles-antag-nuclear-operative-commander-name = Nuclear operative commander
 roles-antag-nuclear-operative-commander-objective = Lead your team to the destruction of the station.
 
-roles-antag-nuclear-operative-agent-name = Nuclear operative agent
+roles-antag-nuclear-operative-agent-name = Nuclear operative corpsman
 roles-antag-nuclear-operative-agent-objective = Like default operative, the team's treatment will have priority.
 
 roles-antag-nuclear-operative-name = Nuclear operative

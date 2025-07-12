@@ -66,7 +66,10 @@ public sealed partial class XenoBurrowComponent : Component
     /// How long the entities in unburrow stun range will be stunned for
     /// </summary>
     [DataField]
-    public TimeSpan UnburrowStunLength = TimeSpan.FromSeconds(4);
+    public TimeSpan UnburrowStunLength = TimeSpan.FromSeconds(3);
+
+    [DataField]
+    public TimeSpan MinimumTunnelTime = TimeSpan.FromSeconds(1);
 
     [DataField]
     public SoundSpecifier BurrowDownSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/burrowing_b.ogg");

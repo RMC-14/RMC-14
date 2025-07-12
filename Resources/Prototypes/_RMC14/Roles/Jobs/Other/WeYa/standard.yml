@@ -1,0 +1,288 @@
+# M63B2
+- type: job
+  parent: CMJobBase
+  id: RMCPMCStandardM63B2
+  name: rmc-job-name-pmc-standard
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobPMCStandardM63B2
+  ranks:
+    RMCRankWeYaOperator: []
+  startingGear: RMCJobPMCStandardM63B2
+  icon: RMCJobIconPMCStandard
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Operator (M63B2)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 3
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 5
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-standard
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCStandardM63B2
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, M63B2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCStandardM63B2
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCStandardM63B2
+  name: weya pmc operator spawn point
+  suffix: M63B2
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardM63B2
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCStandardM63B2
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-standard
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCStandardM63B2
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
+
+- type: startingGear
+  id: RMCJobPMCStandardM63B2
+  equipment:
+    id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMC
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMC
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetDistressPMC
+    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    belt: CMM77BeltFilled
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    suitstorage: RMCWeaponSMGM63B2
+  storage:
+    back:
+    - RMCGrenadeBlastM12
+    - RMCExplosivePlastic
+    - CMStunbaton
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    pocket2:
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+
+# SSG-45
+
+- type: job
+  parent: RMCPMCStandardM63B2
+  id: RMCPMCStandardSSG45
+  playTimeTracker: RMCJobPMCStandardSSG45
+  startingGear: RMCJobPMCStandardSSG45
+  spawnMenuRoleName: WEYA PMC Operator (SSG-45)
+
+- type: entity
+  id: RMCRandomHumanoidPMCStandardSSG45
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, SSG45
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCStandardSSG45
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCStandardSSG45
+  name: weya pmc operator spawn point
+  suffix: SSG45
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardSSG45
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCStandardSSG45
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-standard
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCStandardSSG45
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
+
+- type: startingGear
+  id: RMCJobPMCStandardSSG45
+  equipment:
+    id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMC
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMC
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetDistressPMC
+    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    belt: CMM77BeltFilled
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    suitstorage: WeaponRifleSSG45
+  storage:
+    back:
+    - RMCGrenadeBlastM12
+    - RMCExplosivePlastic
+    - CMStunbaton
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMagazineRifleSSG45Extended
+    - RMCMagazineRifleSSG45Extended
+    pocket2:
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+
+# M54C2
+- type: job
+  parent: RMCPMCStandardM63B2
+  id: RMCPMCStandardM54C2
+  playTimeTracker: RMCJobPMCStandardM54C2
+  startingGear: RMCJobPMCStandardM54C2
+  spawnMenuRoleName: WEYA PMC Operator (M54C2)
+
+- type: entity
+  id: RMCRandomHumanoidPMCStandardM54C2
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, M54C2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCStandardM54C2
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCPMCStandardM54C2
+  name: weya pmc operator spawn point
+  suffix: M54C2
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardM54C2
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCStandardM54C2
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-standard
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCStandardM54C2
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
+
+- type: startingGear
+  id: RMCJobPMCStandardM54C2
+  equipment:
+    id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMC
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMC
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetDistressPMC
+    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    belt: CMM77BeltFilled
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    suitstorage: RMCWeaponRifleM54C2
+  storage:
+    back:
+    - RMCGrenadeBlastM12
+    - RMCExplosivePlastic
+    - CMStunbaton
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    pocket2:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardM63B2
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardM54C2
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardSSG45
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCStandard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_gun

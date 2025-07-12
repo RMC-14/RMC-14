@@ -6,3 +6,6 @@
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingHEFA
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCHEFAArmband

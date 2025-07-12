@@ -1,20 +1,24 @@
+using System.Numerics;
 using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.EntitySystems;
 using Content.Server.Fluids.Components;
 using Content.Server.Gravity;
 using Content.Server.Popups;
+using Content.Shared.CCVar;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared._RMC14.Throwing;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Interaction;
 using Content.Shared.Timing;
 using Content.Shared.Vapor;
-using Content.Shared.Chemistry.EntitySystems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
-using System.Numerics;
-using Robust.Shared.Map;
 
 namespace Content.Server.Fluids.EntitySystems;
 
@@ -30,6 +34,9 @@ public sealed class SpraySystem : EntitySystem
     [Dependency] private readonly VaporSystem _vapor = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+
+    private float _gridImpulseMultiplier;
 
     public override void Initialize()
     {
@@ -37,6 +44,7 @@ public sealed class SpraySystem : EntitySystem
 
         SubscribeLocalEvent<SprayComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<SprayComponent, UserActivateInWorldEvent>(OnActivateInWorld);
+        Subs.CVar(_cfg, CCVars.GridImpulseMultiplier, UpdateGridMassMultiplier, true);
     }
 
     private void OnActivateInWorld(Entity<SprayComponent> entity, ref UserActivateInWorldEvent args)
@@ -51,6 +59,11 @@ public sealed class SpraySystem : EntitySystem
         Spray(entity, args.User, targetMapPos);
     }
 
+    private void UpdateGridMassMultiplier(float value)
+    {
+        _gridImpulseMultiplier = value;
+    }
+
     private void OnAfterInteract(Entity<SprayComponent> entity, ref AfterInteractEvent args)
     {
         if (args.Handled)
@@ -60,10 +73,10 @@ public sealed class SpraySystem : EntitySystem
 
         var clickPos = _transform.ToMapCoordinates(args.ClickLocation);
 
-        Spray(entity, args.User, clickPos);
+        Spray(entity, args.User, clickPos, args.Target == args.User);
     }
 
-    public void Spray(Entity<SprayComponent> entity, EntityUid user, MapCoordinates mapcoord)
+    public void Spray(Entity<SprayComponent> entity, EntityUid user, MapCoordinates mapcoord, bool hitUser = false)
     {
         if (!_solutionContainer.TryGetSolution(entity.Owner, SprayComponent.SolutionName, out var soln, out var solution))
             return;
@@ -132,6 +145,9 @@ public sealed class SpraySystem : EntitySystem
             // Spawn the vapor cloud onto the grid/map the user is present on. Offset the start position based on how far the target destination is.
             var vaporPos = userMapPos.Offset(distance < 1 ? quarter : threeQuarters);
             var vapor = Spawn(entity.Comp.SprayedPrototype, vaporPos);
+            if (hitUser)
+                EnsureComp<ThrownHitUserComponent>(vapor);
+
             var vaporXform = xformQuery.GetComponent(vapor);
 
             _transform.SetWorldRotation(vaporXform, rotation);
@@ -156,7 +172,21 @@ public sealed class SpraySystem : EntitySystem
             if (TryComp<PhysicsComponent>(user, out var body))
             {
                 if (_gravity.IsWeightless(user, body))
-                    _physics.ApplyLinearImpulse(user, -impulseDirection.Normalized() * entity.Comp.PushbackAmount, body: body);
+                {
+                    // push back the player
+                    _physics.ApplyLinearImpulse(user, -impulseDirection * entity.Comp.PushbackAmount, body: body);
+                }
+                else
+                {
+                    // push back the grid the player is standing on
+                    var userTransform = Transform(user);
+                    if (userTransform.GridUid == userTransform.ParentUid)
+                    {
+                        // apply both linear and angular momentum depending on the player position
+                        // multiply by a cvar because grid mass is currently extremely small compared to all other masses
+                        _physics.ApplyLinearImpulse(userTransform.GridUid.Value, -impulseDirection * _gridImpulseMultiplier * entity.Comp.PushbackAmount, userTransform.LocalPosition);
+                    }
+                }
             }
         }
 

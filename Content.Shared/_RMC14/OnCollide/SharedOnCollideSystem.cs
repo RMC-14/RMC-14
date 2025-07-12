@@ -1,8 +1,13 @@
-﻿using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
@@ -20,6 +25,10 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly ThermalCloakSystem _cloak = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private EntityQuery<CollideChainComponent> _collideChainQuery;
     private EntityQuery<DamageOnCollideComponent> _damageOnCollideQuery;
@@ -50,7 +59,13 @@ public abstract class SharedOnCollideSystem : EntitySystem
         if (!ent.Comp.DamageDead && _mobState.IsDead(other))
             return;
 
-        if(HasComp<UncloakOnHitComponent>(ent.Owner))
+        if (_hive.FromSameHive(ent.Owner, other))
+            return;
+
+        if (ent.Comp.Fire && HasComp<RMCImmuneToFireTileDamageComponent>(other))
+            return;
+
+        if (HasComp<UncloakOnHitComponent>(ent.Owner))
             _cloak.TrySetInvisibility(other, false, true);
 
         ent.Comp.Damaged.Add(other);
@@ -59,18 +74,24 @@ public abstract class SharedOnCollideSystem : EntitySystem
         var didEmote = false;
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
-            _damageable.TryChangeDamage(other, ent.Comp.Damage, ent.Comp.IgnoreResistances);
+            var damage = ent.Comp.Damage;
+            if (ent.Comp.Acidic)
+                damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
+            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
             DoEmote(ent, other);
             didEmote = true;
         }
         else
         {
-            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage, ent.Comp.IgnoreResistances);
+            var damage = ent.Comp.ChainDamage;
+            if (ent.Comp.Acidic)
+                damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
+            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
         }
 
         _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
 
-        if (ent.Comp.Paralyze > TimeSpan.Zero)
+        if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
         {
             _stun.TryParalyze(other, ent.Comp.Paralyze, true);
 

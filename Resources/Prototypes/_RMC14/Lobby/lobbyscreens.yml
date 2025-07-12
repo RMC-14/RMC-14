@@ -25,7 +25,7 @@
 - type: lobbyBackground
   id: Battered
   background: /Textures/_RMC14/Lobby/Battered.png
- 
+
 - type: lobbyBackground
   id: FriendlySkies
   background: /Textures/_RMC14/Lobby/Fly_the_Friendly_Skies.png
@@ -49,3 +49,7 @@
 - type: lobbyBackground
   id: FocusFire
   background: /Textures/_RMC14/Lobby/Focus_Fire.png
+
+- type: lobbyBackground
+  id: Evac
+  background: /Textures/_RMC14/Lobby/Evac.png

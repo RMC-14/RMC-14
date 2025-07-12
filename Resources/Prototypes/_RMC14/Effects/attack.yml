@@ -22,11 +22,28 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
-    lifetime: 1
+    lifetime: 0.5
   - type: Sprite
     sprite: _RMC14/Effects/attacks.rsi
     noRot: true
     state: grab
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _RMC14/Effects/attacks.rsi
+    noRot: true
+    state: headbite
     drawdepth: Effects
   - type: EffectVisuals
   - type: Tag

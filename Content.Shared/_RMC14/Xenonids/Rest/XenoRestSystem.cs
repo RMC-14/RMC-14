@@ -17,6 +17,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
 
@@ -52,6 +53,8 @@ public sealed class XenoRestSystem : EntitySystem
         SubscribeLocalEvent<XenoRestingComponent, XenoGutAttemptEvent>(OnXenoRestingGutAttempt);
         SubscribeLocalEvent<XenoRestingComponent, XenoScreechAttemptEvent>(OnXenoRestingScreechAttempt);
         SubscribeLocalEvent<XenoRestingComponent, EvasionRefreshModifiersEvent>(OnXenoRestingEvasionRefresh);
+        SubscribeLocalEvent<XenoRestingComponent, AttemptMobCollideEvent>(OnXenoRestingMobCollide);
+        SubscribeLocalEvent<XenoRestingComponent, AttemptMobTargetCollideEvent>(OnXenoRestingMobTargetCollide);
 
         SubscribeLocalEvent<ActionBlockIfRestingComponent, RMCActionUseAttemptEvent>(OnXenoRestingActionUseAttempt);
     }
@@ -91,13 +94,13 @@ public sealed class XenoRestSystem : EntitySystem
         {
             RemComp<XenoRestingComponent>(xeno);
             _appearance.SetData(xeno, XenoVisualLayers.Base, XenoRestState.NotResting);
-            _actions.SetToggled(args.Action, false);
+            _actions.SetToggled(args.Action.AsNullable(), false);
         }
         else
         {
             AddComp<XenoRestingComponent>(xeno);
             _appearance.SetData(xeno, XenoVisualLayers.Base, XenoRestState.Resting);
-            _actions.SetToggled(args.Action, true);
+            _actions.SetToggled(args.Action.AsNullable(), true);
         }
 
         _actionBlocker.UpdateCanMove(xeno);
@@ -195,5 +198,20 @@ public sealed class XenoRestSystem : EntitySystem
             return;
 
         args.Evasion += (int) EvasionModifiers.Rest;
+    }
+
+    private void OnXenoRestingMobCollide(Entity<XenoRestingComponent> ent, ref AttemptMobCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnXenoRestingMobTargetCollide(Entity<XenoRestingComponent> ent, ref AttemptMobTargetCollideEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    public bool IsResting(Entity<XenoRestingComponent?> ent)
+    {
+        return Resolve(ent, ref ent.Comp, false);
     }
 }

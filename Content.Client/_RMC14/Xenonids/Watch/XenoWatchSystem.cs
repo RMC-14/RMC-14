@@ -2,4 +2,4 @@
 
 namespace Content.Client._RMC14.Xenonids.Watch;
 
-public sealed class XenoWatchSystem : SharedWatchXenoSystem;
+public sealed class XenoWatchSystem : SharedXenoWatchSystem;

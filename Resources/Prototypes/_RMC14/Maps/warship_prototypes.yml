@@ -6,7 +6,7 @@
   - BaseStationCargo
   - BaseStationJobsSpawning
   - BaseStationRecords
-  - BaseStationShuttles
+  # - BaseStationShuttles # spawns trade stations, ruins, and asteroids, and also errors because the station has no physics
   - BaseStationCentcomm
   - BaseStationEvacuation
   - BaseStationAlertLevels

@@ -1,9 +1,8 @@
-﻿- type: entity
+- type: entity
   id: ActionXenoBase
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
-  - type: InstantAction
+  - type: Action
     backgroundOn:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: template_active_big

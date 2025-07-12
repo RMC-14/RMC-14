@@ -5,26 +5,17 @@ using Robust.Client.UserInterface;
 namespace Content.Client._RMC14.Xenonids.Projectiles.Parasite;
 
 [UsedImplicitly]
-public sealed class ReserveParasitesBoundUserInterface : BoundUserInterface
+public sealed class ReserveParasitesBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    private IEntityManager _entManager;
-    private EntityUid _owner;
-
     [ViewVariables]
     private ReserveParasitesWindow? _window;
-
-    public ReserveParasitesBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-        _owner = owner;
-        _entManager = IoCManager.Resolve<IEntityManager>();
-    }
 
     protected override void Open()
     {
         base.Open();
-        _window = this.CreateWindow<ReserveParasitesWindow>();
 
-        if (_entManager.TryGetComponent<XenoParasiteThrowerComponent>(_owner, out var paras))
+        _window = this.CreateWindow<ReserveParasitesWindow>();
+        if (EntMan.TryGetComponent<XenoParasiteThrowerComponent>(Owner, out var paras))
             _window.SetReserveShown(paras.ReservedParasites);
 
         _window.ApplyButton.OnPressed += _ =>
@@ -32,16 +23,6 @@ public sealed class ReserveParasitesBoundUserInterface : BoundUserInterface
             SendMessage(new XenoChangeParasiteReserveMessage(_window.ReserveBar.Value));
             _window.Close();
         };
-
-
-        _window.OpenCentered();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (!disposing) return;
-        _window?.Dispose();
     }
 
     public void ChangeReserve(int newReserve)

@@ -1,0 +1,47 @@
+﻿- type: entity
+  parent: DrinkBaseCup
+  id: RMCPintGlass
+  name: pint glass
+  description: A proper geezer's pint glass. Rarely seen without a frothy head of beer.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+  - type: Drink
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/pint_glass.rsi
+    layers:
+      - state: icon-0
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: icon-3
+        visible: false
+  - type: Item
+    size: Small
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: icon-
+  - type: Destructible
+    thresholds: [] # TODO RMC14 destroy on explosion unless inside a container
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCPintGlass
+  id: RMCPintGlassFull
+  suffix: full
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Beer
+          Quantity: 100

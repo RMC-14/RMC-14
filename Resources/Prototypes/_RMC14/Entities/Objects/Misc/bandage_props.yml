@@ -1,0 +1,58 @@
+- type: entity
+  parent: BaseItem
+  id: RMCDirtBandageProp
+  name: dirty bandages
+  description: Some used gauze.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Misc/bandage_props.rsi
+      state: band_1
+
+- type: entity
+  parent: RMCDirtBandageProp
+  id: RMCDirtBandageProp2
+  components:
+    - type: Sprite
+      state: band_2
+
+- type: entity
+  parent: RMCDirtBandageProp
+  id: RMCDirtBandageProp3
+  components:
+    - type: Sprite
+      state: band_3
+
+- type: entity
+  parent: RMCDirtBandageProp
+  id: RMCDirtBandageProp4
+  components:
+    - type: Sprite
+      state: band_4
+
+- type: entity
+  parent: RMCDirtBandageProp
+  id: RMCDirtBandageProp5
+  components:
+    - type: Sprite
+      state: band_5
+
+- type: entity
+  parent: RMCDirtBandageProp
+  id: RMCDirtBandageProp6
+  components:
+    - type: Sprite
+      state: band_6
+
+- type: entity
+  parent: RMCDirtBandageProp
+  id: RMCDirtBandageProp7
+  components:
+    - type: Sprite
+      state: band_7
+
+- type: entity
+  parent: RMCDirtBandageProp
+  id: RMCDirtBandageProp8
+  components:
+    - type: Sprite
+      state: band_8

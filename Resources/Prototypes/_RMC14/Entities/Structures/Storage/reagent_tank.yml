@@ -23,8 +23,9 @@
         density: 155
         mask:
         - MachineMask
+        - HighImpassable
         layer:
-        - MobMask
+        - HighImpassable
         - BulletImpassable
   - type: Destructible
     thresholds:
@@ -53,6 +54,11 @@
     tags:
     - RMCTankReagent
     - Structure
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 0
+    throwRange: 2
 
 - type: entity
   parent: RMCTankReagentEmpty

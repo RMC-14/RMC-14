@@ -5,12 +5,10 @@ using Content.Shared._RMC14.Projectiles.StoppingPower;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffect;
-using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Projectiles.Aimed;
 
@@ -79,7 +77,7 @@ public sealed class AimedProjectileSystem : EntitySystem
         // Apply firestacks
         if (TryComp(ent, out IgniteOnProjectileHitComponent? ignite))
         {
-            ignite.Stacks += aimedEffect.FireStacksOnHit;
+            ignite.Duration += aimedEffect.FireStacksOnHit;
         }
     }
 

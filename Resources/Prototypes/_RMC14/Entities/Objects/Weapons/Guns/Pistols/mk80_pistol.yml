@@ -119,6 +119,7 @@
   parent: CMBulletBase
   id: RCMBulletPistol9mmSquashHead
   name: bullet (9mm Squash-Head)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

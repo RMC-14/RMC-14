@@ -1,0 +1,63 @@
+- type: entity
+  parent: CMAutolathe
+  id: CMArmylathe
+  name: armylathe
+  description: The armylathe is a specialized UNMC autolathe meant for printing parts to construct various ordnance, such as grenade casings and mortar shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/armylathe.rsi
+    layers:
+    - state: armylathe
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: armylathe_u
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: armylathe_t
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Lathe
+    idleState: armylathe
+    runningState: armylathe_n
+    producingSound: /Audio/_RMC14/Machines/print.ogg
+    staticPacks:
+    - RMCRecipesArmyLathe
+  - type: MaterialStorage
+    storage:
+      CMSteel: 1500
+      RMCPlastic: 1000
+    whitelist:
+      components:
+      - FloorTile
+      tags:
+      - Metal
+      - RMCGlass
+      - RMCTablePartMetal
+      - RMCRackParts
+      - RMCTablePartMetalReinforced
+      - RodMetal1
+      - Plastic
+  - type: Machine
+    board: RMCArmylatheMachineCircuitboard
+
+- type: entity
+  parent: CMArmylathe
+  id: RMCArmylatheEmpty
+  suffix: Empty
+  components:
+  - type: MaterialStorage
+    storage: {}
+
+- type: latheRecipePack
+  id: RMCRecipesArmyLathe
+  recipes:
+  - RMCM40GrenadeCasing
+  - RMCM15GrenadeCasing
+  - RMCM20MineCasing
+  - RMCC4PlasticCasing
+  - RMC84mmRocketTube
+  - RMC84mmRocketWarhead
+  - RMC80mmMortarShell
+  - RMC80mmMortarWarhead
+  - RMC80mmMortarCameraWarhead
+  - RMCCustomM34A1FuelTankCase
+  - RMCCustomM34A1SmokeTankCase
+  - RMCCustomM34TFuelTankCase

@@ -1,6 +1,5 @@
 ﻿using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -18,6 +17,9 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextScanAt;
+
+    [DataField, AutoNetworkedField]
+    public bool CanToggleRange = true;
 
     [DataField, AutoNetworkedField]
     public bool Short;
@@ -38,7 +40,7 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
     public TimeSpan MoveTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public List<MapCoordinates> Blips { get; set; } = new();
+    public List<Blip> Blips { get; set; } = new();
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastScan { get; set; }

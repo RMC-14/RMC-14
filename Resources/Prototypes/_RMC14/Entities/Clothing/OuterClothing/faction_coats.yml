@@ -1,5 +1,27 @@
 # Bureau
 
+- type: entity
+  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
+  id: RMCCoatBureauTrenchCoatBrown
+  name: brown trench-coat
+  description: A worn, brown, old style trench-coat. When a bum sees a cop coming, he don't stick around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_brown.rsi
+
+- type: entity
+  parent: RMCCoatBureauTrenchCoatBrown
+  id: RMCCoatBureauTrenchCoatGrey
+  name: grey trench-coat
+  description: A worn, grey, old style trench-coat. When a bum sees a cop coming, he don't stick around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/trench_grey.rsi
+
 # Bureau Deputy
 - type: entity
   parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
@@ -51,3 +73,62 @@
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+
+# TSEPA
+
+- type: entity
+  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
+  id: RMCCoatTSEPA
+  name: TSEPA jacket
+  description: A black polyester jacket with a silver Sakura emblem of the TSEPA pinned to it. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/jacket.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 10
+    explosionArmor: 10
+
+- type: entity
+  parent: RMCCoatTSEPA
+  id: RMCCoatTSEPAHighVis
+  name: TSEPA high-vis jacket
+  description: A green and white striped (high-visibility) polyester vest commonly used by TSEPA personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_jacket.rsi
+
+- type: entity
+  parent: RMCCoatTSEPA
+  id: RMCCoatTSEPAHighVisVest
+  name: TSEPA high-vis vest
+  description: A green and white striped (high-visibility) polyester vest commonly used by TSEPA personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/highvis_vest.rsi
+
+# SPP PaP
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatPaP
+  name: PaP uniform jacket
+  description: A People's Armed Police service jacket featuring small dispersed para-aramid inserts providing the barest of defensive functionality, and a Personal Light Unit rig.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi

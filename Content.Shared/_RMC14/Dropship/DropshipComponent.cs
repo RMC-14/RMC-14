@@ -1,3 +1,4 @@
+using Content.Shared.Shuttles.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -10,7 +11,13 @@ namespace Content.Shared._RMC14.Dropship;
 public sealed partial class DropshipComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public FTLState State;
+
+    [DataField, AutoNetworkedField]
     public EntityUid? Destination;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? DepartureLocation;
 
     [DataField, AutoNetworkedField]
     public bool Crashed;
@@ -25,12 +32,15 @@ public sealed partial class DropshipComponent : Component
     public SoundSpecifier GeneralQuartersSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/GQfullcall.ogg");
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier UnidentifledlifesignsSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/unidentified_lifesigns.ogg");
+
+    [DataField, AutoNetworkedField]
     public bool Locked;
 
     [DataField, AutoNetworkedField]
     public TimeSpan LockCooldown = TimeSpan.FromSeconds(1);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastLocked;
 
     [DataField, AutoNetworkedField]
@@ -39,7 +49,7 @@ public sealed partial class DropshipComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan? RechargeTime;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? HijackLandAt;
 
     [DataField, AutoNetworkedField]
@@ -74,4 +84,7 @@ public sealed partial class DropshipComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan ExplodeTime = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan CancelFlightTime = TimeSpan.FromSeconds(10);
 }

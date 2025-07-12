@@ -72,6 +72,12 @@
         crate: RMCCrateMagazineNapthalUT
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFire
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFireBlue
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFireSmoke
     - name: Attachments
       entries:
       - cost: 3000
@@ -283,8 +289,6 @@
 #      entries: []
     - name: Weapons
       entries:
-      - cost: 10000
-        crate: RMCCrateSmartGunSet
       - cost: 4000
         crate: RMCCrateM54CE2
       - cost: 3000

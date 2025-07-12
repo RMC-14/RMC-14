@@ -1,0 +1,128 @@
+# Corporate Technician
+- type: job
+  parent: CMJobBase
+  id: RMCPMCEngineer
+  name: rmc-job-name-pmc-engineer
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobPMCEngineer
+  ranks:
+    RMCRankWeYaCorporateTechnician: []
+  startingGear: RMCJobPMCEngineer
+  icon: RMCJobIconPMCEngineer
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Engineer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 4
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 2
+        RMCSkillCqc: 1
+        RMCSkillPowerLoader: 2
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-engineer
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCEngineer
+  name: weya pmc ghost role engineer
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCEngineer
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCEngineer
+  name: weya pmc engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCEngineer
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCEngineer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-engineer
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCEngineer
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
+
+- type: startingGear
+  id: RMCJobPMCEngineer
+  equipment:
+    id: RMCIDCardPMC
+    head: ArmorHelmetPMCEngineer
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitMercenaryEngineer
+    outerClothing: RMCArmorM4PMCEngineer
+    belt: CMBeltMarine
+    gloves: RMCHandsVeteranPMC
+    shoes: RMCBootsPMCFilled
+    suitstorage: WeaponRifleSSG45
+    back: RMCBackpackWelderPMC
+    pocket1: RMCPouchToolsSocFill
+    pocket2: RMCPouchConstructionFillFull
+  storage:
+    belt:
+    - RMCMagazineRifleSSG45Extended
+    - RMCMagazineRifleSSG45Extended
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    outerClothing:
+    - RMCExplosiveBreachingCharge
+    - MetalFoamGrenade # TODO RMC14: This is upstream version
+    back:
+    - RMCSentryMiniWeYa
+    - RMCSentryMiniWeYa
+    - CMSheetMetal50
+    - CMSandbagEmpty50
+    - CMSheetPlasteel50
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    pocket1:
+    - CMWelder
+    - CMEntrenchingTool
+    - CMLightReplacer
+
+- type: playTimeTracker
+  id: RMCJobPMCEngineer
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCEngineer
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_ct

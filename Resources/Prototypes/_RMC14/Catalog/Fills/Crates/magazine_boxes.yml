@@ -1,4 +1,4 @@
-# m54c
+﻿# m54c
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineRifleM54C
@@ -235,6 +235,36 @@
 
 - type: entity
   parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFire
+  name: UN 42-FM sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFire
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFireBlue
+  name: UN 55-FA sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFireBlue
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryFireSmoke
+  name: UN 60-FP sentry flamer ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryFireSmoke
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineBreaching
   name: XM51 Ammo (2x mags) (1x small breaching shell box)
   components:
@@ -244,3 +274,31 @@
       amount: 2
     - id: RMCBoxShotgunBreaching
       amount: 1
+
+#M13 auto pistol
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM13
+  name: Magazine box (M13, 22x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM13
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM13Ext
+  name: Magazine box (M13, 14x extended mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM13Ext
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM13Drum
+  name: Magazine box (M13, 12x drum mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM13Drum

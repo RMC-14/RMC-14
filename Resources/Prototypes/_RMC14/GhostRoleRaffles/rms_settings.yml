@@ -1,0 +1,8 @@
+# for parasites - intended so they need to use the dang menu because hiding the ghost role is impossible and breaks otherwise
+- type: ghostRoleRaffleSettings
+  id: parasiteTimeRequirement
+  settings:
+    initialDuration: 600
+    joinExtendsDurationBy: 0
+    maxDuration: 910
+    roundTimeRequirement: 900 #seconds
