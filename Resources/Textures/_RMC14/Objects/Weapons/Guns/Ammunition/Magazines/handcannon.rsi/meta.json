@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ddb6ea647ea7047a97e4ce96c4fa8d945c15d39d/icons/obj/items/weapons/guns/ammo_by_faction/colony/pistols.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "mag-1"
+    },
+    {
+      "name": "ammo_band"
+    }
+  ]
+}

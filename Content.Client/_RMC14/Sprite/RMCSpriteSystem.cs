@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CrashLand;
+﻿using System.Numerics;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids.Hide;
@@ -6,6 +7,7 @@ using Content.Shared.Ghost;
 using Content.Shared.ParaDrop;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
+using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Sprite;
 
@@ -39,12 +41,22 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
     }
 
     /// <summary>
-    ///     This is so the animating entity's current location gets updated during the drop, there is probably a better way to do this.
+    ///     This is so the animating entity's current location gets updated during the animation, there is probably a better way to do this.
     /// </summary>
     /// <param name="uid">The entity to update the location of.</param>
     public void UpdatePosition(EntityUid uid)
     {
         var oldPos = _transform.GetWorldPosition(uid);
+
+        // Reset the sprite offset when the entity is in NullSpace
+        if (Transform(uid).MapID == MapId.Nullspace)
+        {
+            if (TryComp(uid, out SpriteComponent? sprite))
+                sprite.Offset = new Vector2();
+
+            return;
+        }
+
         var newPos = oldPos with { Y = oldPos.Y + 0.0001f };
         _transform.SetWorldPosition(uid, newPos);
     }

@@ -95,4 +95,5 @@ rmc-dropship-paradrop-target-screen-target-none = No locked target found.
 rmc-dropship-paradrop-target-screen-target-targeting = Locked to {$dropTarget}.
     Paradropping available.
 
+rmc-dropship-paradrop-lock-no-target = No target selected.
 rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop module while in flight.
