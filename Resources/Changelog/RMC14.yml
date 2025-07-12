@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: L9gie
-  changes:
-  - message: 'Added 3 new lobby screens: Cornered, Eyes Up, and Focus Fire'
-    type: Add
-  id: 1499
-  time: '2025-03-28T04:59:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5916
 - author: stranthbackup
   changes:
   - message: Fixed the crematorium and morgue having a maximum capacity of 1. They
@@ -5028,5 +5021,12 @@
   id: 1999
   time: '2025-07-12T05:27:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6562
+- author: Vixting
+  changes:
+  - message: tunnel blips not displaying
+    type: Fix
+  id: 2000
+  time: '2025-07-12T05:29:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6688
 Name: RMC14
 Order: -1
