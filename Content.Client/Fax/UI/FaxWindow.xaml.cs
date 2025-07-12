@@ -103,7 +103,7 @@ public sealed partial class FaxWindow : DefaultWindow
     {
         OfficePaper = !OfficePaper;
 
-        if (OfficePaper)
+        if(OfficePaper)
             PaperButton.Text = Loc.GetString("fax-machine-ui-paper-button-office");
         else
             PaperButton.Text = Loc.GetString("fax-machine-ui-paper-button-normal");
