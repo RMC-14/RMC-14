@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed acid taking 4.5x as long as it should be to melt most things. Walls
-      melting lasted 1.5x as long as they should have.
-    type: Fix
-  - message: Fixed acid on barricades lasting 5 seconds too long.
-    type: Fix
-  id: 1498
-  time: '2025-03-28T04:59:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5943
 - author: L9gie
   changes:
   - message: 'Added 3 new lobby screens: Cornered, Eyes Up, and Focus Fire'
@@ -5022,5 +5012,21 @@
   id: 1998
   time: '2025-07-12T05:22:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6827
+- author: to4no_fix
+  changes:
+  - message: 'Added a megaphone that greatly increases the volume of your text in
+      speech bubbles and also makes a special sound when used! Believe, you can''t
+      help but notice a megaphone user. The Megaphone has been added to the Commanding
+      Officer Essentials Kit, the CO and Quartermaster closets, and can be found in
+      the following locations on Almayer: Center of the Hangar; Medbay Reception;
+      Center of Briefroom; CIC; CMO Room. The megaphone will also be added to planetary
+      maps in the future.'
+    type: Add
+  - message: Fixed a bug related to the fact that in speech bubbles without names
+      the text of the squad leader was not enlarged.
+    type: Fix
+  id: 1999
+  time: '2025-07-12T05:27:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6562
 Name: RMC14
 Order: -1
