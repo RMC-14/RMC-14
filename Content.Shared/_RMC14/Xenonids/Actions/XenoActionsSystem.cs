@@ -8,15 +8,18 @@ public sealed class XenoActionsSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoOffensiveActionComponent, ValidateActionEntityTargetEvent>(OnValidateActionEntityTarget);
+        SubscribeLocalEvent<XenoOffensiveActionComponent, ActionValidateEvent>(OnValidateActionEntityTarget);
     }
 
-    private void OnValidateActionEntityTarget(Entity<XenoOffensiveActionComponent> ent, ref ValidateActionEntityTargetEvent args)
+    private void OnValidateActionEntityTarget(Entity<XenoOffensiveActionComponent> ent, ref ActionValidateEvent args)
     {
-        if (args.Cancelled)
+        if (args.Invalid)
             return;
 
-        if (!_xeno.CanAbilityAttackTarget(args.User, args.Target))
-            args.Cancelled = true;
+        if (GetEntity(args.Input.EntityTarget) is not { } target)
+            return;
+
+        if (!_xeno.CanAbilityAttackTarget(args.User, target))
+            args.Invalid = true;
     }
 }

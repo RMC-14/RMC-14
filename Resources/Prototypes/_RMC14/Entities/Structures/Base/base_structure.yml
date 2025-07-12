@@ -183,6 +183,7 @@
   - type: Tag
     tags:
     - SpreaderIgnore
+    - Wall
   - type: XenoToggleChargingDamage
     stop: true
     damage:

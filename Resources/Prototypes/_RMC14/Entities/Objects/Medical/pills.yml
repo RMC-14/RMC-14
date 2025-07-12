@@ -179,3 +179,22 @@
     skilledExamine: rmc-pill-contents-russianred
 
 # TODO RMC14 peridaxon, tramadol
+
+- type: entity
+  parent: CMPill
+  id: RMCPillAntiZed
+  suffix: DO NOT MAP, AntiZed
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: RMCAntiZed
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill16
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-antized

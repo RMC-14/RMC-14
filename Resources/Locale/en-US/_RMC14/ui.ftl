@@ -38,7 +38,7 @@ rmc-ui-audio-emotes-skrell = Play emotes for skrells
 
 cm-ui-roadmap = Roadmap
 
-rmc-ui-link-discord-account = Link Discord Account
+rmc-ui-link-discord-account = Link Discord
 rmc-ui-link-discord-account-text = Click the button below to copy your code.
   Then go to the #account-linking channel to link your accounts.
 rmc-ui-link-discord-account-copy = Copy code
@@ -100,5 +100,6 @@ rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] CAS
 rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] OB
 rmc-tacmap-alert-allowed-actions = [color=green]✓[/color] {$actions}
 rmc-tacmap-alert-restricted-actions = [color=red]✗[/color] {$actions}
+rmc-tacmap-alert-no-area = Unknown area
 
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites

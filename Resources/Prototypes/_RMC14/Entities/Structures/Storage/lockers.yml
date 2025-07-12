@@ -222,6 +222,9 @@
     sprite: _RMC14/Structures/Storage/Lockers/qm.rsi
   - type: AccessReader
     access: [["CMAccessQM"]]
+  - type: StorageFill
+    contents:
+      - id: RMCMegaphone
 
 - type: entity
   parent: CMLockerBase

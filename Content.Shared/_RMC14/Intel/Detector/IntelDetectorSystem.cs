@@ -21,6 +21,7 @@ public sealed class IntelDetectorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedCMInventorySystem _rmcInventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -187,7 +188,9 @@ public sealed class IntelDetectorSystem : EntitySystem
 
             if (detector.Blips.Count == 0)
             {
-                _audio.PlayPvs(detector.ScanEmptySound, uid);
+                if (_rmcInventory.TryGetUserHoldingOrStoringItem(uid, out var user))
+                    _audio.PlayEntity(detector.ScanEmptySound, user, uid);
+
                 continue;
             }
 
