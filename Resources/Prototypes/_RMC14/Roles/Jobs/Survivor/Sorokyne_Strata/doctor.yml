@@ -32,7 +32,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorMoHDoctor
   equipment:
     head: RMCHeadCapSPPCivilianPlantWorker
@@ -78,6 +78,8 @@
       - [ RMCTieGreen ]
       - [ RMCTiePurple ]
       - [ RMCTieRed ]
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]
     randomStartingGear:
       back:
       - CMSatchel

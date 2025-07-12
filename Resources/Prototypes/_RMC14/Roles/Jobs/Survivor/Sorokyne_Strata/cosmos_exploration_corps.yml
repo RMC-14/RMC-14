@@ -30,7 +30,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorCECResearcher
   equipment:
     gloves: RMCHandsVeteran
@@ -38,9 +38,6 @@
     outerClothing: RMCLabcoatBrown
     mask: RMCMaskGasSPP
     pocket2: RMCPouchMedicalFill
-  storage:
-    back:
-    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -78,5 +75,6 @@
       - RMCShoesLaceup
       - RMCShoesLaceupBrown
       - RMCBootsSPP
-
-
+    randomGearOther:
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]
