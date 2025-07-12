@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Roles;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Bed.Cryostorage;
+using Content.Shared.Dataset;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
@@ -40,6 +41,11 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     [Dependency] private readonly SquadSystem _squadSystem = default!;
 
 
+    private static readonly ProtoId<JobPrototype> ExecutiveOfficerJob = "CMExecutiveOfficer";
+    private static readonly ProtoId<RankPrototype> PrivateRank = "RMCRankPrivate";
+    private static readonly ProtoId<DatasetPrototype> MarineRankHierarchy = "RMCMarineRankHierarchy";
+    private static readonly ProtoId<DatasetPrototype> MarineSquadHierarchy = "RMCMarineSquadHierarchy";
+    private static readonly ProtoId<AccessGroupPrototype> MarineMainAccess = "MarineMain";
     private EntityUid _commander = default;
     private int _seniorAuthorityLevel;
     private bool _accessesAdded = false;
@@ -52,7 +58,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarted);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
 
-        _seniorAuthorityLevel = _prototypes.Index(new ProtoId<JobPrototype>("CMExecutiveOfficer")).MarineAuthorityLevel;
+        _seniorAuthorityLevel = _prototypes.Index(ExecutiveOfficerJob).MarineAuthorityLevel;
     }
 
     private void OnRoundStarted(RoundStartingEvent ev)
@@ -97,7 +103,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         var query = EntityQueryEnumerator<MarineComponent, OriginalRoleComponent, MobStateComponent, MindContainerComponent>();
         while (query.MoveNext(out var uid, out var _, out var originalRole, out var _, out var _))
         {
-            if (_rankSystem.HasInvalidRank(uid, "RMCRankPrivate")) // the player has an invalid rank. the privates are not ready yet...
+            if (_rankSystem.HasInvalidRank(uid, PrivateRank)) // the player has an invalid rank. the privates are not ready yet...
                 continue;
 
             if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideCryoPodComponent>(uid))  // the player is in cryostorage or cryopod
@@ -149,7 +155,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         {
             var mind = CompOrNull<MindComponent>(mindContainer.Mind);
 
-            if (_rankSystem.HasInvalidRank(uid, "RMCRankPrivate")) // the player has an invalid rank. the privates are not ready yet...
+            if (_rankSystem.HasInvalidRank(uid, PrivateRank)) // the player has an invalid rank. the privates are not ready yet...
                 continue;
 
             if (HasComp<CryostorageContainedComponent>(uid) || HasComp<InsideCryoPodComponent>(uid))  // the player is in cryostorage or cryopod
@@ -192,7 +198,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         }
         else if (candidates.Count > 1)
         {
-            var highestRankCandidates = _rankSystem.GetEntitiesWithHighestRank(candidates, "RMCMarineRankHierarchy");
+            var highestRankCandidates = _rankSystem.GetEntitiesWithHighestRank(candidates, MarineRankHierarchy);
 
             if (highestRankCandidates == null) // All entities have invalid rank (in this case it is impossible) or an empty dataset was passed
             {
@@ -206,7 +212,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             }
             else // If there are multiple candidates with the same highest rank, continue with them
             {
-                var highestSquadCandidates = _squadSystem.GetEntitiesWithHighestSquad(highestRankCandidates, "RMCMarineSquadHierarchy");
+                var highestSquadCandidates = _squadSystem.GetEntitiesWithHighestSquad(highestRankCandidates, MarineSquadHierarchy);
 
                 if (highestSquadCandidates == null) // All entities have invalid squad (for example, staff officers) or an empty dataset was passed
                 {
@@ -224,7 +230,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         }
 
         if (HasValidIdTag(_commander, out var finalIdTag) && finalIdTag != null)
-            TryAddRequiredAccess(finalIdTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { new ProtoId<AccessGroupPrototype>("MarineMain") });
+            TryAddRequiredAccess(finalIdTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { MarineMainAccess });
 
         TryComp<OriginalRoleComponent>(_commander, out var roleComp);
         string jobName = string.Empty;
@@ -388,7 +394,4 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
         return _random.Pick(topCandidates);
     }
-
-
-
 }
