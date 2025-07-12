@@ -1606,3 +1606,15 @@
     state: seth_grimm
   - type: PatronFigurine
     id: 909c243e-6fb8-42ed-a477-d48571fccff2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAnneTaylor
+  name: Anne Taylor figurine
+  description: "If you see her piloting the Alamo and it still looks normal, something is horribly wrong."
+  components:
+  - type: Sprite
+    state: anne_taylor
+  - type: PatronFigurine
+    id: 6ea17ea3-7420-4466-8a0c-7341a2089c2c
+
