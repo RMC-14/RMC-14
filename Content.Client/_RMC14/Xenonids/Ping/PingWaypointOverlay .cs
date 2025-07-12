@@ -3,6 +3,8 @@ using Content.Client.Resources;
 using Content.Shared._RMC14.Xenonids.Ping;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -27,6 +29,7 @@ public sealed class PingWaypointOverlay : Overlay
 
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
+    private readonly SharedXenoHiveSystem _hive;
     private readonly ShaderInstance _shader;
     private readonly Font _font;
 
@@ -81,6 +84,7 @@ public sealed class PingWaypointOverlay : Overlay
 
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
+        _hive = _entity.System<SharedXenoHiveSystem>();
         _shader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
         _font = _resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 9);
 
@@ -104,7 +108,8 @@ public sealed class PingWaypointOverlay : Overlay
 
         CleanExpiredEntities(waypoints);
 
-        var groupedWaypoints = GroupWaypoints(waypoints, playerPos);
+        var filteredWaypoints = FilterWaypointsByHive(waypoints, player.Value);
+        var groupedWaypoints = GroupWaypoints(filteredWaypoints, playerPos);
 
         CalculateAndResolvePositions(groupedWaypoints, playerPos, screenSize);
 
@@ -115,6 +120,33 @@ public sealed class PingWaypointOverlay : Overlay
 
         handle.UseShader(null);
         _workingPositions.Clear();
+    }
+
+    private List<PingWaypointData> FilterWaypointsByHive(IReadOnlyDictionary<EntityUid, PingWaypointData> waypoints, EntityUid player)
+    {
+        var result = new List<PingWaypointData>();
+
+        if (!_entity.HasComponent<XenoComponent>(player) || !_entity.HasComponent<HiveMemberComponent>(player))
+            return result;
+
+        var playerHive = _hive.GetHive(player);
+        if (playerHive == null)
+            return result;
+
+        foreach (var waypoint in waypoints.Values)
+        {
+            if (!_entity.HasComponent<HiveMemberComponent>(waypoint.Creator))
+                continue;
+
+            var creatorHive = _hive.GetHive(waypoint.Creator);
+            if (creatorHive == null)
+                continue;
+
+            if (playerHive.Value.Owner == creatorHive.Value.Owner)
+                result.Add(waypoint);
+        }
+
+        return result;
     }
 
     private void CalculateAndResolvePositions(List<PingWaypointData> waypoints, Vector2 playerPos, Vector2 screenSize)
@@ -307,30 +339,30 @@ public sealed class PingWaypointOverlay : Overlay
         }
     }
 
-    private List<PingWaypointData> GroupWaypoints(IReadOnlyDictionary<EntityUid, PingWaypointData> waypoints, Vector2 playerPos)
+    private List<PingWaypointData> GroupWaypoints(List<PingWaypointData> waypoints, Vector2 playerPos)
     {
         var result = new List<PingWaypointData>();
         var processed = new HashSet<EntityUid>();
 
-        foreach (var (uid, waypoint) in waypoints)
+        foreach (var waypoint in waypoints)
         {
-            if (processed.Contains(uid)) continue;
+            if (processed.Contains(waypoint.EntityUid)) continue;
 
             var playerDistanceSquared = Vector2.DistanceSquared(waypoint.WorldPosition, playerPos);
             if (playerDistanceSquared < MinGroupingViewDistanceSquared)
             {
                 result.Add(waypoint);
-                processed.Add(uid);
+                processed.Add(waypoint.EntityUid);
                 continue;
             }
 
             // all nearby waypoints from the same creator with the same ping type
             var group = new List<PingWaypointData> { waypoint };
-            processed.Add(uid);
+            processed.Add(waypoint.EntityUid);
 
-            foreach (var (otherUid, otherWaypoint) in waypoints)
+            foreach (var otherWaypoint in waypoints)
             {
-                if (processed.Contains(otherUid)) continue;
+                if (processed.Contains(otherWaypoint.EntityUid)) continue;
                 if (otherWaypoint.Creator != waypoint.Creator) continue;
                 if (otherWaypoint.PingType != waypoint.PingType) continue;
 
@@ -338,7 +370,7 @@ public sealed class PingWaypointOverlay : Overlay
                 if (distanceSquared <= GroupingDistanceSquared)
                 {
                     group.Add(otherWaypoint);
-                    processed.Add(otherUid);
+                    processed.Add(otherWaypoint.EntityUid);
                 }
             }
 
@@ -350,6 +382,7 @@ public sealed class PingWaypointOverlay : Overlay
 
     private PingWaypointData CreateGroupedWaypoint(List<PingWaypointData> group)
     {
+
         // weighted center based on recency
         var totalWeight = 0f;
         var weightedCenter = Vector2.Zero;
@@ -521,6 +554,7 @@ public sealed class PingWaypointOverlay : Overlay
 
     private Vector2 CalculateLabelOffset(Vector2 waypointPos, float textWidth)
     {
+
         // which edge the waypoint is closest to
         var distToLeft = waypointPos.X - _screenBounds.Left;
         var distToRight = _screenBounds.Right - waypointPos.X;
@@ -650,19 +684,18 @@ public sealed class PingWaypointOverlay : Overlay
                 candidates.Add(new Vector2(x, bounds.Top));
         }
 
-        // return closest valid intersection
         return candidates.Count > 0
             ? candidates.OrderBy(p => Vector2.Distance(p, center + direction * 1000f)).First()
-            : center + direction * 100f; // fallback
+            : center + direction * 100f;
     }
 
     private int GetWaypointPriority(PingWaypointData waypoint)
     {
         if (_entity.HasComponent<XenoEvolutionGranterComponent>(waypoint.Creator))
-            return 0; // queens have highest priority
+            return 0;
         if (_entity.HasComponent<HiveLeaderComponent>(waypoint.Creator))
-            return 1; // hive leaders second
-        return 2; // xenos lowest
+            return 1;
+        return 2;
     }
 
     private float GetWaypointRadius(PingWaypointData waypoint)

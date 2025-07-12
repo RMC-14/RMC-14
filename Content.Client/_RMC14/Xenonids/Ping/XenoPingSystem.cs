@@ -35,6 +35,7 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
 
         SubscribeLocalEvent<XenoPingEntityComponent, ComponentInit>(OnPingEntityInit);
         SubscribeLocalEvent<XenoPingEntityComponent, ComponentShutdown>(OnPingEntityShutdown);
+        SubscribeLocalEvent<XenoPingEntityComponent, AfterAutoHandleStateEvent>(OnAfterHandleState);
 
         _overlayManager.AddOverlay(new PingWaypointOverlay());
     }
@@ -52,6 +53,11 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         if (TryComp<SpriteComponent>(ent.Owner, out var sprite))
             sprite.Visible = false;
 
+        Timer.Spawn(TimeSpan.FromMilliseconds(100), () => ProcessPingVisibility(ent.Owner));
+    }
+
+    private void OnAfterHandleState(Entity<XenoPingEntityComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
         ProcessPingVisibility(ent.Owner);
     }
 
@@ -66,13 +72,19 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
             return;
         }
 
-        if (!ShouldShowPing(pingComp.Creator))
+        if (!Exists(pingComp.Creator))
         {
+            Timer.Spawn(TimeSpan.FromMilliseconds(50), () => ProcessPingVisibility(pingUid));
             return;
         }
 
+        var shouldShow = ShouldShowPing(pingComp.Creator);
+
         if (TryComp<SpriteComponent>(pingUid, out var spriteComp))
-            spriteComp.Visible = true;
+            spriteComp.Visible = shouldShow;
+
+        if (!shouldShow)
+            return;
 
         var creator = pingComp.Creator;
         var isQueen = EntityManager.HasComponent<XenoEvolutionGranterComponent>(creator);
