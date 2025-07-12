@@ -1,29 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed bipod not breaking on drop.
-    type: Fix
-  - message: Fixed bipod not slowing you down if toggled by anything but the action.
-      Manually undeploying the bipod with the action still won't slow you down.
-    type: Fix
-  - message: Fixed bipod being instant deployable on non-anchored barricades.
-    type: Fix
-  id: 1489
-  time: '2025-03-28T04:31:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5941
-- author: blueDev2
-  changes:
-  - message: Hivecores' broken via Hijack no longer cause cooldown
-    type: Fix
-  - message: Repairing a weed producing hive structure properly cause reweeding
-    type: Fix
-  - message: Hive pylon duplication no longer occurs
-    type: Fix
-  id: 1490
-  time: '2025-03-28T04:33:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5955
-- author: Vermidia
-  changes:
   - message: Added Gnarp Gnarp plushies
     type: Add
   id: 1491
@@ -5017,5 +4994,25 @@
   id: 1989
   time: '2025-07-12T05:08:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6629
+- author: Dygon
+  changes:
+  - message: Most headsets now have additional tracking options, accessible via the
+      Squad Tracker menu.
+    type: Add
+  - message: The honor guard kit now contains the honor guard radio headset.
+    type: Add
+  - message: Xenonids can now choose to track the queen, a hive leader or a tunnel
+      by right clicking their hive tracker.
+    type: Add
+  id: 1990
+  time: '2025-07-12T05:12:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6300
+- author: Vermidia
+  changes:
+  - message: Fixed berserker rav having 40 extra crit health.
+    type: Fix
+  id: 1991
+  time: '2025-07-12T05:13:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6994
 Name: RMC14
 Order: -1
