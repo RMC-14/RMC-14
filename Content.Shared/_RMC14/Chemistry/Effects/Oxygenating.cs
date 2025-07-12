@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Body;
+using Content.Shared._RMC14.Damage;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -30,14 +31,10 @@ public sealed partial class Oxygenating : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var damage = new DamageSpecifier();
-
-        if (ActualPotency >= 3)
-            damage.DamageDict[AirlossGroup] = -99999f;
-        else
-            damage.DamageDict[AirlossGroup] = -potency;
-
-        damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
+        var cmDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
+        var amount = ActualPotency >= 3 ? 99999 : potency;
+        var healing = cmDamageable.DistributeHealing(args.TargetEntity, AirlossGroup, amount);
+        damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
         bloodstream.RemoveBloodstreamChemical(args.TargetEntity, Lexorin, potency);
