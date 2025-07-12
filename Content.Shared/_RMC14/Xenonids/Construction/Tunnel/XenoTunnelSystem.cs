@@ -117,6 +117,22 @@ public sealed class XenoTunnelSystem : EntitySystem
             {
                 subs.Event<NameTunnelMessage>(OnNameTunnel);
             });
+
+        Subs.BuiEvents<XenoTunnelComponent>(SelectDestinationTunnelUI.Key, subs =>
+        {
+            subs.Event<BoundUIOpenedEvent>(OnTunnelUIOpened);
+            subs.Event<BoundUIClosedEvent>(OnTunnelUIClosed);
+        });
+    }
+
+    private void OnTunnelUIOpened(Entity<XenoTunnelComponent> tunnel, ref BoundUIOpenedEvent args)
+    {
+        EnsureComp<TunnelUIUserComponent>(args.Actor);
+    }
+
+    private void OnTunnelUIClosed(Entity<XenoTunnelComponent> tunnel, ref BoundUIClosedEvent args)
+    {
+        RemCompDeferred<TunnelUIUserComponent>(args.Actor);
     }
 
     private void OnExamine(Entity<XenoTunnelComponent> xenoTunnel, ref ExaminedEvent args)
