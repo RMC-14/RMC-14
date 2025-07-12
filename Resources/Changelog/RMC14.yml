@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Vanguard shield starting to decay when taking 5 or less damage.
-    type: Fix
-  id: 1493
-  time: '2025-03-28T04:41:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5988
-- author: VictorJob
-  changes:
-  - message: Changed nailgun sprites.
-    type: Tweak
-  id: 1494
-  time: '2025-03-28T04:47:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5979
 - author: DummeHytteOst
   changes:
   - message: Fixed tail stab range being 0.5 tiles too short (2 > 2.5).
@@ -5015,5 +5001,21 @@
   id: 1993
   time: '2025-07-12T05:15:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6985
+- author: FarmWizard
+  changes:
+  - message: Added the Shotgun Choke attachment.
+    type: Add
+  id: 1994
+  time: '2025-07-12T05:19:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6960
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added new health icons for synths
+    type: Add
+  - message: Fixed suicided marines appearing as revivable on the health hud
+    type: Fix
+  id: 1995
+  time: '2025-07-12T05:19:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6950
 Name: RMC14
 Order: -1
