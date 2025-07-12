@@ -1618,3 +1618,13 @@
   - type: PatronFigurine
     id: 6ea17ea3-7420-4466-8a0c-7341a2089c2c
 
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronYeoSakuraBunnia
+  name: Yeo 'Sakura' Bunnia figurine
+  description: "This bunny seems familiar. Maybe they’re working around the medical department? Maybe even around the Staff office perhaps. Who knows! This bunny sure loves to provide overwatch for the marines and even providing medical care for them too."
+  components:
+  - type: Sprite
+    state: yeo_sakura_bunnia
+  - type: PatronFigurine
+    id: 0fd18026-6b96-438d-b812-1c0434b32331
