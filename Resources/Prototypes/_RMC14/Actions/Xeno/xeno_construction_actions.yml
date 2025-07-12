@@ -111,6 +111,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: morph_resin
+  - type: InstantAction
     event: !type:XenoOrderConstructionActionEvent
   - type: RMCDazeableAction
 
