@@ -93,6 +93,8 @@
     value: 0.2
   - type: FixedIdentity
     name: cm-job-name-xeno-lurker
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent:

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Weapons.Common;
@@ -305,7 +306,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var targetSolution = sourceSolutionEnt.Comp.Solution;
         foreach (var content in targetSolution.Contents)
         {
-            if (_prototypes.TryIndex(content.Reagent.Prototype, out ReagentPrototype? reagent) &&
+            if (_prototypes.TryIndexReagent(content.Reagent.Prototype, out ReagentPrototype? reagent) &&
                 reagent.Intensity <= FixedPoint2.Zero)
             {
                 _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-potent-enough"), source, user);
@@ -370,7 +371,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 {
                     comp.Tiles.Remove(tile);
                     var fire = Spawn(comp.Spawn, tile.Coordinates);
-                    if (_prototypes.TryIndex(comp.Reagent, out var reagent))
+                    if (_prototypes.TryIndexReagent(comp.Reagent, out var reagent))
                     {
                         var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity.Int());
                         var duration = Math.Min(comp.MaxDuration, reagent.Duration.Int());

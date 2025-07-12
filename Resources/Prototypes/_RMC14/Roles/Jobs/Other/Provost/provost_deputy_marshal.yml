@@ -42,6 +42,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-deputy-marshal
     - type: RMCAllowSuitStorage
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

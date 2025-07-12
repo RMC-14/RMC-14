@@ -25,6 +25,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-chief
     - type: RMCAllowSuitStorage
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

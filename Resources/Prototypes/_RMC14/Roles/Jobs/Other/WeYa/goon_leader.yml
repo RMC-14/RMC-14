@@ -34,6 +34,7 @@
         RMCSkillLeadership: 1
         RMCSkillFirearms: 1
     - type: RMCAllowSuitStorage
+    - type: RMCTrackable
 
 - type: playTimeTracker
   id: RMCJobWeYaGoonLead
@@ -42,7 +43,7 @@
   id: RMCJobWeYaGoonLead
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressPMCLeader
+    ears: RMCHeadsetDistressGoonLeader
     jumpsuit: RMCJumpsuitVeteranPMCCorporateLead
     outerClothing: CMArmorM4PMCCorporateLead
     gloves: RMCHandsVeteranPMC
