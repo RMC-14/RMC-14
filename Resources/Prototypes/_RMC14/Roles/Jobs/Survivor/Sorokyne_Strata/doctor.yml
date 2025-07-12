@@ -37,10 +37,6 @@
   equipment:
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
-  storage:
-    back:
-    - CMSheetMetal20
-    - RMCMaskGasSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
