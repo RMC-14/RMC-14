@@ -28,29 +28,4 @@ public sealed partial class ParaDropSystem: SharedParaDropSystem
             _dropship.LockDoor(child);
         }
     }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var paraDroppingQuery = EntityQueryEnumerator<ParaDroppingComponent>();
-
-        while (paraDroppingQuery.MoveNext(out var uid, out var paraDropping))
-        {
-            paraDropping.RemainingTime -= frameTime;
-            Dirty(uid, paraDropping);
-            if (paraDropping.RemainingTime <= 0)
-                RemComp<ParaDroppingComponent>(uid);
-
-            Blocker.UpdateCanMove(uid);
-        }
-
-        var skyFallingQuery = EntityQueryEnumerator<SkyFallingComponent>();
-        while (skyFallingQuery.MoveNext(out var uid, out var skyFalling))
-        {
-            skyFalling.RemainingTime -= frameTime;
-            if (skyFalling.RemainingTime <= 0)
-                RemComp<SkyFallingComponent>(uid);
-        }
-    }
 }
