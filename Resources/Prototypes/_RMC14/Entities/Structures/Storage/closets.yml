@@ -212,7 +212,7 @@
   parent: CMClosetBaseUnanchored
   id: RMCClosetGoldenArrowGear
   name: personal locker
-  description: An immobile storag unit.
+  description: An immobile storage unit.
   suffix: PvE, Sun Riders
   components:
   - type: EntityTableContainerFill

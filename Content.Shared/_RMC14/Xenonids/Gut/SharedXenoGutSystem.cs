@@ -1,8 +1,9 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
-using Content.Shared.DoAfter;
-using Content.Shared.Body.Systems;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
+using Content.Shared.DoAfter;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
@@ -10,11 +11,12 @@ namespace Content.Shared._RMC14.Xenonids.Gut;
 
 public sealed class SharedXenoGutSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBodySystem _bodySystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
@@ -80,10 +82,9 @@ public sealed class SharedXenoGutSystem : EntitySystem
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
         }
 
-        foreach (var (actionId, actionComp) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoGutActionEvent>(xeno))
         {
-            if (actionComp.BaseEvent is XenoGutActionEvent)
-                _actions.SetIfBiggerCooldown(actionId, xeno.Comp.Cooldown);
+            _actions.SetIfBiggerCooldown(action.AsNullable(), xeno.Comp.Cooldown);
         }
     }
 }

@@ -3,15 +3,16 @@
   id: RMCActionOpenTacticalMap
   name: Open Tactical Map
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
+  - type: InstantAction
     event: !type:OpenTacticalMapActionEvent
 
 - type: entity
   parent: RMCActionOpenTacticalMap
   id: RMCActionOpenTacticalMapMarine
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Structures/Machines/map_table.rsi
       state: maptable
@@ -20,7 +21,7 @@
   parent: RMCActionOpenTacticalMap
   id: RMCActionOpenTacticalMapXeno
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: xeno_tacmap
@@ -29,7 +30,7 @@
   parent: RMCActionOpenTacticalMap
   id: RMCActionOpenTacticalMapGhost
   components:
-  - type: InstantAction
+  - type: Action
     icon:
       sprite: _RMC14/Structures/Machines/map_table.rsi
       state: maptable

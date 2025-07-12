@@ -61,6 +61,12 @@
           0.5
         ]
       ]
+    },
+    {
+      "name": "paradrop_system_deployed"
+    },
+    {
+      "name": "paradrop_system"
     }
   ]
 }

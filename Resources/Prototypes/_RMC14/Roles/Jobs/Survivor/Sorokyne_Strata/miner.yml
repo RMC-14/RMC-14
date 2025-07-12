@@ -33,7 +33,6 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorSoroMiner
   equipment:
-    mask: RMCMaskGasSPP
     head: RMCHardhatWhiteAlt
     jumpsuit: RMCJumpsuitSPPCiv5
     back: CMSatchelEngineer
@@ -45,6 +44,7 @@
   storage:
     back:
     - CMSheetMetal20
+    - RMCMaskGasSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -53,12 +53,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorSoroMiner
@@ -68,3 +66,4 @@
   parent: RMCSurvivorPresetCivilian
   id: RMCGearSurvivorPresetSoroMiner
   name: sorokyne miner preset
+  categories: [ HideSpawnMenu ]

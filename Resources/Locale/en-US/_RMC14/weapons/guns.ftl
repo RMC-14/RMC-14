@@ -56,3 +56,12 @@ rmc-assisted-reload-start-target = {$reloader} begins reloading your {$weapon} w
 rmc-gun-stacks-hit-single = Bullseye!
 rmc-gun-stacks-hit-multiple = Bullseye! {$hits} hits in a row!
 rmc-gun-stacks-reset = The {$weapon} beeps as it loses its targeting data, and returns to normal firing procedures.
+
+rmc-gun-shoot-air-self = YOU FIRE YOUR { CAPITALIZE($weapon) } INTO THE AIR!
+rmc-gun-shoot-air-other = { CAPITALIZE(THE($user)) } FIRES { CAPITALIZE(THE($weapon)) } INTO THE AIR!
+rmc-gun-shoot-air-blocked = The roof above you is too dense.
+
+rmc-flare-gun-examine = The last signal flare fired has the designation: [color=#ad3b98][bold]{$id}[/bold][/color]
+
+expendable-light-starshell-ash-empty-name = extinguished star shell ash
+expendable-light-starshell-ash-empty-desc = Burnt out remains of a star shell
