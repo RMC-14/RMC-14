@@ -267,6 +267,7 @@
     name: cm-job-name-xeno-queen
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartTQ
+  - type: RMCTrackable
 
 - type: entity
   parent: RMCXenoQueenBase

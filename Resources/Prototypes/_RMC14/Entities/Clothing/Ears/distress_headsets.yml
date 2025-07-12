@@ -78,8 +78,15 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
-  - type: GrantSquadLeaderTracker
   - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderPmc
+    trackerModes:
+    - SupervisorWeYaExecutive
+    - SupervisorWeYaSpecialist
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
 
 - type: entity
   parent: RMCHeadsetDistressPMC
@@ -105,6 +112,68 @@
   - type: GrantTacMapAlert
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: DirectorPmc
+    trackerModes:
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
+
+# For WeYa lawyers
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetDistressGoon
+  name: We-Ya headset
+  description: A special headset used by corporate personnel.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderGoon
+    trackerModes:
+    - SupervisorWeYaExecutive
+    - SupervisorWeYaSpecialist
+    - SupervisorWeYa
+    - CorporateLiaison
+    - LawyerWeYa
+    - LeaderGoon
+
+- type: entity
+  parent: RMCHeadsetDistressGoon
+  id: RMCHeadsetDistressGoonLeader
+  suffix: Leader
+  description:
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetDistressLawyerWeYa
+  name: We-Ya headset
+  description: A special headset used by corporate personnel.
+  suffix: Director
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: RMCHeadset
+    radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderGoon
+    trackerModes:
+    - SupervisorWeYa
+    - LawyerWeYa
+    - LeaderGoon
 
 # For Duke's Dozen/Freelancer
 - type: entity
@@ -118,6 +187,10 @@
       key_slots:
       - RMCEncryptionKeyDukes
   - type: GrantMarineIcons
+  - type: GrantSquadLeaderTracker
+    defaultMode: FreelancerLeader
+    trackerModes:
+    - FreelancerLeader
 
 - type: entity
   parent: RMCHeadsetDistressDukes
@@ -143,6 +216,11 @@
   - type: RMCHeadset
     channels:
     - MarineSOF
+  - type: GrantSquadLeaderTracker
+    defaultMode: FORECONCommandingOfficer
+    trackerModes:
+    - FORECONCommandingOfficer
+    - SquadLeader
 
 #for UNMC personnel
 - type: entity
@@ -171,4 +249,6 @@
   - type: GrantMarineIcons
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
-
+    defaultMode: MARSOCLeader
+    trackerModes:
+    - MARSOCLeader

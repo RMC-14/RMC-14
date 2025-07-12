@@ -31,6 +31,7 @@
       - TSE
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-senior-constable
+    - type: RMCTrackable
   hidden: true
 
 - type: startingGear
