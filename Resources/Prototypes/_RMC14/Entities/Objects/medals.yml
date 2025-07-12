@@ -164,7 +164,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/prismatic.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/prismatic.rsi
       state: equipped
@@ -326,7 +326,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/prismatic_ribbon.rsi
     state: icon
-  - type: PlaytimeMedal
+  - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/prismatic_ribbon.rsi
       state: equipped
