@@ -157,6 +157,11 @@
   - type: Item
     sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
     size: Large
+  - type: RMCLoreExaminable
+    content: "Standard issue to commanding officers of the United Nations Marine Corps, the ceremonial sabre is more than a relic, it’s a rite. Forged from composite alloy and polished to a mirror gleam, each sabre is engraved with the Marine’s name and unit upon promotion to command.
+              While primarily used in formal ceremonies and change-of-command rituals, the blade is combat-capable, a silent reminder that in the UNMC, even tradition draws blood when necessary.
+              Veteran officers are known to carry their sabres into battle, not for the weapon’s edge, but for what it represents: unwavering leadership in the unforgiving cold dark void of space. The sabre’s design dates back to the Old Earth naval traditions, carried forward into the stars with grim pride.
+              Some say that if you die with it in your hand, your name is forever etched deeper into UNMC history."
   - type: Tag
     tags:
     - RMCCeremonialSword
