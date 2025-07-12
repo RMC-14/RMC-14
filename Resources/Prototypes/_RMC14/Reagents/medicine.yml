@@ -22,6 +22,7 @@
   desc: reagent-desc-cmethylredoxrazine
   color: "#605048"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -53,6 +54,7 @@
   desc: reagent-desc-cmarithrazine
   color: "#3c8529"
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Medicine:
       metabolismRate: 0.03
@@ -133,6 +135,7 @@
   desc: reagent-desc-cmdermaline
   color: "#e2972e"
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -147,6 +150,7 @@
   desc: reagent-desc-cmdexalin
   color: "#1f28a7"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -161,6 +165,7 @@
   desc: reagent-desc-cmdexalinplus
   color: "#5887D5"
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -177,6 +182,7 @@
   desc: reagent-desc-cmepinephrine
   color: "#6bd43c"
   overdose: 10.5
+  criticalOverdose: 20
   worksOnTheDead: true
   metabolisms:
     Medicine:
@@ -221,6 +227,7 @@
   desc: reagent-desc-cminaprovaline
   color: "#fe33cb"
   overdose: 60
+  criticalOverdose: 100
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -279,6 +286,7 @@
   desc: reagent-desc-cmleporazine
   color: "#a03919"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -335,6 +343,7 @@
   desc: reagent-desc-cmmeralyne
   color: "#b40000"
   overdose: 15
+  criticalOverdose: 25
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -352,6 +361,7 @@
   desc: reagent-desc-cmimidazoline
   color: "#C8A5DC"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -403,6 +413,7 @@
   desc: reagent-desc-rmcrussianred
   color: "#ce2727"
   overdose: 20
+  criticalOverdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.5
