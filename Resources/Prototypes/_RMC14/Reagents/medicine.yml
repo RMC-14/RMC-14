@@ -499,7 +499,7 @@
         probability: 0.05
       - !type:GenericStatusEffect
         key: SeeingRainbows
-        component: SeeingRainbows
+        component: SeeingRainbowsStatusEffect
         type: Add
         time: 1.5 #TODO max 30
         refresh: false

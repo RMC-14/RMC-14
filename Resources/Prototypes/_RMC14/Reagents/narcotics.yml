@@ -18,7 +18,7 @@
         probability: 0.05
       - !type:GenericStatusEffect
         key: SeeingRainbows
-        component: SeeingRainbows
+        component: SeeingRainbowsStatusEffect
         type: Add
         time: 10 #0.5/s is too slow
         refresh: true #10s cap
@@ -52,7 +52,7 @@
         probability: 0.05
       - !type:GenericStatusEffect
         key: SeeingRainbows
-        component: SeeingRainbows
+        component: SeeingRainbowsStatusEffect
         type: Add
         time: 15 #0.75/s is too slow
         refresh: true #15s cap
