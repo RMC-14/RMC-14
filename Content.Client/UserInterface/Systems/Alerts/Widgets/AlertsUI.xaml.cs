@@ -151,6 +151,7 @@ public sealed partial class AlertsUI : UIWidget
         {
             Cooldown = cooldown,
             DynamicMessage = dynamicMessage,
+            EnableAllKeybinds = true,
         };
         alertControl.OnPressed += AlertControlPressed;
         return alertControl;
