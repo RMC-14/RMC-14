@@ -36,7 +36,6 @@
     gloves: RMCHandsVeteran
     jumpsuit: RMCJumpsuitCivilianScientist
     outerClothing: RMCLabcoatBrown
-    mask: RMCMaskGasSPP
     pocket2: RMCPouchMedicalFill
 
 - type: entity
