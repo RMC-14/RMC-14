@@ -27,13 +27,13 @@ public abstract class SharedDeadGhostVisualsSystem : EntitySystem
         if (!TryComp<ActorComponent>(ent.Owner, out var actor))
             return;
 
+        if (!_netConfigManager.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
+            return;
+
         if (args.Player.GetMind() is not { } mindId)
             return;
 
         if (!TryComp<MindComponent>(mindId, out var mind))
-            return;
-
-        if (!_netConfigManager.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
             return;
 
         var ownedEntity = mind.OwnedEntity;
