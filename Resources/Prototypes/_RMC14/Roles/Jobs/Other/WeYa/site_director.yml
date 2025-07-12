@@ -17,6 +17,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCTrackable
     - type: NpcFactionMember
       factions:
       - WeYa
@@ -34,6 +35,7 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 4
         RMCSkillExecution: 1
+    - type: MarineOrders
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-director
   hidden: true

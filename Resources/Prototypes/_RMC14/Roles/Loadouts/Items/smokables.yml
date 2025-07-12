@@ -1,0 +1,78 @@
+# Smokables
+- type: loadout
+  id: LuckySlothsPackRMC
+  cost: 1
+  storage:
+    back:
+    - RMCCigarettePackLuckySloths
+
+- type: loadout
+  id: WeYaGoldPackRMC
+  cost: 1
+  storage:
+    back:
+    - RMCCigarettePackWeYaGold
+
+- type: loadout
+  id: ExecutiveSelectPackRMC
+  cost: 1
+  storage:
+    back:
+    - RMCCigarettePackExecutiveSelect
+
+- type: loadout
+  id: TarbackTubeRMC
+  cost: 2
+  storage:
+    back:
+    - RMCTarbackTube
+
+- type: loadout
+  id: TarbacksCaseRMC
+  cost: 6
+  storage:
+    back:
+    - RMCTarbackCase
+
+- type: loadout
+  id: PremiumCigarRMC
+  cost: 2
+  storage:
+    back:
+    - Cigar
+
+- type: loadout
+  id: ZippoRMC
+  cost: 1
+  storage:
+    back:
+    - RMCZippo
+
+- type: loadout
+  id: ZippoExecRMC
+  cost: 3
+  storage:
+    back:
+    - RMCZippoExec
+
+- type: loadout
+  id: ZippoGoldRMC
+  cost: 3
+  storage:
+    back:
+    - RMCZippoGold
+
+- type: loadout
+  id: CheapLighterRMC
+  cost: 1
+  storage:
+    back:
+    - RMCLighter
+
+- type: loadout
+  id: MatchboxRMC
+  cost: 1
+  storage:
+    back:
+    - RMCMatchboxFull
+

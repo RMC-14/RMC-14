@@ -228,3 +228,13 @@
     contents:
     - id: RMCMagazineRifleM16
       amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltMarineMAR
+  suffix: Filled, MAR30/40
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 5

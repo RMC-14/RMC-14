@@ -1,5 +1,18 @@
 - type: entity
   parent: CMHandsBlackMarine
+  id: RMCHandsBlack
+  name: black gloves
+  description: A simple pair of black gloves.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/black.rsi
+  - type: Fiber
+    fiberColor: fibers-black
+
+- type: entity
+  parent: CMHandsBlackMarine
   id: CMHandsInsulated
   name: marine insulated gloves
   description: These gloves will protect the wearer from electric shocks.
@@ -73,3 +86,18 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/purple.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/purple.rsi
+
+- type: entity 
+  parent: CMHandsInsulated
+  id: CMHandsBlackInsulated
+  name: black insulated gloves
+  description: These gloves will protect the wearer from electric shocks. Now in black.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated_black.rsi
+  - type: Insulated
+  - type: Fiber
+    fiberMaterial: fibers-insulative
+    fiberColor: fibers-black

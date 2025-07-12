@@ -36,6 +36,11 @@
   id: RMCHeadsetTSEAbstract
   components:
   - type: GrantSquadLeaderTracker
+    defaultMode: InspectorTSEPA
+    trackerModes:
+    - InspectorTSEPA
+    - SeniorConstableTSEPA
+  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetTSEAbstract

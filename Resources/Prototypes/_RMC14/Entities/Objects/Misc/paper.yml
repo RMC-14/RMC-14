@@ -149,6 +149,55 @@
       Next time you're around Chinook I'll buy you a beer ok?"
 
 - type: entity
+  parent: CMPaper
+  id: CMPaperAegisInfoFax
+  name: High Command Transmission
+  components:
+    - type: Paper
+      stampState: paper_stamp-marine
+      stampedBy:
+        - stampedColor: '#4E806AFF'
+          stampedName: stamp-component-stamped-name-cm-marine
+      content: |
+        [color=#383838]█[/color][color=#ffffff]░░[/color][color=#8c0000]█ [color=#383838]█▄[/color] █ [/color][head=3]United Nations Marine Corps[/head]
+        [color=#8c0000]▀▄▄[color=#383838]▀[/color] █[/color] [color=#383838]▀█[/color] [color=#AAAAAA]Marine High Command| [italic]UNS Oberon[/color][/italic]   [color=#dfc189]✯  ✯[/color]
+
+        [color=#383838]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+        [color=#8c0000]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color]
+
+        [head=2][color=goldenrod]High Command Transmission[/color][/head]
+
+        [bold]To:[/bold] [italic]UNS Almayer Command Staff[/italic]
+        [bold]From:[/bold] [bold]The Office of General Carvain [/bold]| [bolditalic][color=#cb0000]UNS Oberon[/color][/bolditalic]
+        [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        Almayer Command,
+        Your mission today is of great importance. As relayed via your announcement frequency, the UNS Amast, which was transporting a phoron-based experimental weapon of Aegis Armaments manufacture, suddenly and unexpectedly landed in your operational area. Any attempts to hail the Amast, or the colony, has been met with radio silence. Second company, you are the closest marines able to respond to this situation, and so we call on you.
+
+        We require you to recover the experimental weapon from the suspected landing site of the Amast at all costs. Should this weapon fall into enemy hands, it could result in a catastrophe unlike any other. We have instructed your ARES instance to create a encrypted key that will allow you to unlock the secure crate the weapon is transported in, which will arrive via your ASRS shortly.
+
+        Due to the extreme weight of the weapon, it requires a power assisted loading exosuit to be moved. You will need to utilize the key to unlock the crate in order to move the weapon, as it is far to heavy for a common power loader. We have also instructed your ASRS to supply you with a power loading manual for use with any one of your marines.
+
+        The crate the weapon resides in is extremely durable, and should stand up to anything you throw at it short of a orbital bombardment. Ensure the weapon is either used, or remains in one piece, do not let it be destroyed.
+
+        Once the cargo is recovered, you are permitted to utilize the experimental weapon at will for the purposes of data collection on its effectiveness for Aegis. To this end, a software update has been remotely installed to your orbital bombardment cannon console to allow for use of the experimental weapon, with the cannon as its delivery method.
+
+        You are to use extreme caution should you choose to utilize this weapon, it is far more powerful than any other armament used on the Almayer prior. A secondary transport ship better equipped to handle such a weapon will arrive shortly after your operation commences, if use of the weapon is not needed.
+
+        Good luck Falling Falcons, we are counting on you. Semper Fi, and god bless the UN.
+
+        Signed,
+        [color=#dfc189][bolditalic]General Alexander Carvain [color=black]|[/color] [color=#cb0000]UNS Oberon[/color][/bolditalic][/color]
+        [color=#134975]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
+        [color=#AAAAAA][italic][bullet]This document supersedes any and all prior oral or written agreements or understandings concerning the subject matter contained in this document.
+        [bullet]By reading this document, you acknowledge that you have read and understood its contents, which require your military obligation to maintain absolute adherence to the UNMC Code of Military Conduct.
+        [bullet]You understand that any breach may result in severe disciplinary action, including but not limited to a Court Martial.
+        [bullet]All orders or directives set forth within this document must be followed and carried out to the best of the recipients ability.
+        [bullet]Failure to follow directives contained in this document will result in but not limited to charges brought against you.
+        [bullet]This document shall be binding upon the above mentioned and their respective heirs, administrators, personal representatives, executors, successors and assigns.
+        [bullet]Authenticity of this document and its contents is verified by means of an appropriately affixed stamp.
+        [color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
   parent: CMBasePaper
   id: RMCPaperRequisitionInvoice
   name: requisition invoice

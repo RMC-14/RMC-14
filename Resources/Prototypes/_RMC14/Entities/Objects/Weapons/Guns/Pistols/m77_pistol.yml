@@ -127,6 +127,7 @@
   parent: CMBulletBase
   id: CMBulletPistolM77AP
   name: bullet (9mm AP)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
