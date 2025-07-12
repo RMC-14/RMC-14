@@ -4,8 +4,8 @@ meta:
   engineVersion: 251.0.2
   forkId: ""
   forkVersion: ""
-  time: 07/08/2025 21:53:45
-  entityCount: 17327
+  time: 07/09/2025 11:08:28
+  entityCount: 17326
 maps:
 - 1
 grids:
@@ -114,10 +114,6 @@ tilemap:
   716: RMCPlanetSnow2
   717: RMCPlanetSnow3
   718: RMCPlanetSnow4
-  721: CMPlanetMattedGrass
-  730: RMCPlanetIceComposite
-  734: RMCPlanetIceComposite
-  735: RMCPlanetIceComposite
 entities:
 - proto: ""
   entities:
@@ -189,7 +185,7 @@ entities:
           version: 6
         2,1:
           ind: 2,1
-          tiles: kQIAAAABkQIAAAAFkQIAAAAAkQIAAAAHkQIAAAABkAIAAAACjwIAAAAGcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAkQIAAAAHkQIAAAACkQIAAAAAkQIAAAAGkQIAAAAGjwIAAAAEjwIAAAAAcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAkQIAAAAFkQIAAAABkQIAAAABcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAkQIAAAAHkQIAAAAHzAIAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAkQIAAAAEkQIAAAAAzAIAAAAC2gIAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAkQIAAAABkQIAAAACzQIAAAAE2gIAAAAA0QIAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAA1QEAAAAA1QEAAAAA1QEAAAAA1QEAAAAAkQIAAAABkQIAAAADzQIAAAAF3wIAAAAA3gIAAAAA3gIAAAAAcwMAAAAAcwMAAAAAzgIAAAAHzgIAAAAHywIAAAAHkQIAAAAHkQIAAAAGkQIAAAAHkQIAAAAEkQIAAAAHkQIAAAADkQIAAAAFzAIAAAAEzAIAAAAEywIAAAAHzAIAAAAAcwMAAAAAzAIAAAAGzgIAAAAGzQIAAAABywIAAAABkQIAAAAFkQIAAAAAkQIAAAAGkQIAAAAAkQIAAAACkQIAAAAHkQIAAAAAkQIAAAACkQIAAAAHywIAAAABzAIAAAAEcwMAAAAAzAIAAAAAzQIAAAACywIAAAADywIAAAAHkQIAAAAHkQIAAAAFkQIAAAAFkQIAAAADkQIAAAAAkQIAAAABkQIAAAAHkQIAAAABkQIAAAAAkQIAAAAGzAIAAAAHcwMAAAAAzAIAAAAEzAIAAAAAzAIAAAAAkQIAAAAGywIAAAAFkQIAAAACkQIAAAAEkQIAAAAHkQIAAAAHywIAAAAGkQIAAAAGywIAAAAHywIAAAADkQIAAAAEywIAAAAFcwMAAAAAywIAAAAGywIAAAAEywIAAAAHkQIAAAAFywIAAAADkQIAAAADkQIAAAAAkQIAAAAEkQIAAAABywIAAAADywIAAAAHywIAAAAEkQIAAAACkQIAAAAFkQIAAAAGcwMAAAAAywIAAAAEywIAAAAGkQIAAAAEywIAAAADkQIAAAAAkQIAAAAEkQIAAAADkQIAAAAEkQIAAAAFkQIAAAAGkQIAAAABkQIAAAACkQIAAAAHkQIAAAAGkQIAAAACcwMAAAAAkQIAAAADkQIAAAAHywIAAAAFkQIAAAADkQIAAAAAkQIAAAACkQIAAAAAkQIAAAAGywIAAAABkQIAAAAFkQIAAAAGkQIAAAAFkQIAAAAAkQIAAAAHkQIAAAAFcwMAAAAAkQIAAAAEkQIAAAACkQIAAAAEkQIAAAABkQIAAAABkQIAAAACkQIAAAAAkQIAAAACzAIAAAAFkQIAAAABkQIAAAADkQIAAAAGkQIAAAAFkQIAAAAHkQIAAAAGcwMAAAAAkQIAAAAAkQIAAAAHkQIAAAAHkQIAAAADkQIAAAAEkQIAAAACkQIAAAAAywIAAAADywIAAAAHkQIAAAAGkQIAAAAGkQIAAAADkQIAAAAGkQIAAAAGkQIAAAAEcwMAAAAAkQIAAAAHkQIAAAABkQIAAAADkQIAAAAFkQIAAAAAkQIAAAAEkQIAAAAAkQIAAAAHywIAAAAD
+          tiles: kQIAAAABkQIAAAAFkQIAAAAAkQIAAAAHkQIAAAABkAIAAAACjwIAAAAGcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAkQIAAAAHkQIAAAACkQIAAAAAkQIAAAAGkQIAAAAGjwIAAAAEjwIAAAAAcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAkQIAAAAFkQIAAAABkQIAAAABcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAkQIAAAAHkQIAAAAHzAIAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAXAAAAAAAkQIAAAAEkQIAAAAAzAIAAAACkQIAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAXAAAAAAAXAAAAAAAXAAAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAkQIAAAABkQIAAAACzQIAAAAEkQIAAAAAMgAAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAAcwMAAAAA1QEAAAAA1QEAAAAA1QEAAAAA1QEAAAAAkQIAAAABkQIAAAADzQIAAAAFkQIAAAAAkQIAAAAAkQIAAAAAcwMAAAAAcwMAAAAAzgIAAAAHzgIAAAAHywIAAAAHkQIAAAAHkQIAAAAGkQIAAAAHkQIAAAAEkQIAAAAHkQIAAAADkQIAAAAFzAIAAAAEzAIAAAAEywIAAAAHzAIAAAAAcwMAAAAAzAIAAAAGzgIAAAAGzQIAAAABywIAAAABkQIAAAAFkQIAAAAAkQIAAAAGkQIAAAAAkQIAAAACkQIAAAAHkQIAAAAAkQIAAAACkQIAAAAHywIAAAABzAIAAAAEcwMAAAAAzAIAAAAAzQIAAAACywIAAAADywIAAAAHkQIAAAAHkQIAAAAFkQIAAAAFkQIAAAADkQIAAAAAkQIAAAABkQIAAAAHkQIAAAABkQIAAAAAkQIAAAAGzAIAAAAHcwMAAAAAzAIAAAAEzAIAAAAAzAIAAAAAkQIAAAAGywIAAAAFkQIAAAACkQIAAAAEkQIAAAAHkQIAAAAHywIAAAAGkQIAAAAGywIAAAAHywIAAAADkQIAAAAEywIAAAAFcwMAAAAAywIAAAAGywIAAAAEywIAAAAHkQIAAAAFywIAAAADkQIAAAADkQIAAAAAkQIAAAAEkQIAAAABywIAAAADywIAAAAHywIAAAAEkQIAAAACkQIAAAAFkQIAAAAGcwMAAAAAywIAAAAEywIAAAAGkQIAAAAEywIAAAADkQIAAAAAkQIAAAAEkQIAAAADkQIAAAAEkQIAAAAFkQIAAAAGkQIAAAABkQIAAAACkQIAAAAHkQIAAAAGkQIAAAACcwMAAAAAkQIAAAADkQIAAAAHywIAAAAFkQIAAAADkQIAAAAAkQIAAAACkQIAAAAAkQIAAAAGywIAAAABkQIAAAAFkQIAAAAGkQIAAAAFkQIAAAAAkQIAAAAHkQIAAAAFcwMAAAAAkQIAAAAEkQIAAAACkQIAAAAEkQIAAAABkQIAAAABkQIAAAACkQIAAAAAkQIAAAACzAIAAAAFkQIAAAABkQIAAAADkQIAAAAGkQIAAAAFkQIAAAAHkQIAAAAGcwMAAAAAkQIAAAAAkQIAAAAHkQIAAAAHkQIAAAADkQIAAAAEkQIAAAACkQIAAAAAywIAAAADywIAAAAHkQIAAAAGkQIAAAAGkQIAAAADkQIAAAAGkQIAAAAGkQIAAAAEcwMAAAAAkQIAAAAHkQIAAAABkQIAAAADkQIAAAAFkQIAAAAAkQIAAAAEkQIAAAAAkQIAAAAHywIAAAAD
           version: 6
         2,2:
           ind: 2,2
@@ -111390,8 +111386,6 @@ entities:
     - type: Transform
       pos: 210.5,47.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16784
@@ -111399,8 +111393,6 @@ entities:
     - type: Transform
       pos: 213.46663,47.74812
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16794
@@ -111408,8 +111400,6 @@ entities:
     - type: Transform
       pos: 58.5,81.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCIceSlabTray2
@@ -111419,8 +111409,6 @@ entities:
     - type: Transform
       pos: 214.47359,47.74812
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16789
@@ -111428,8 +111416,6 @@ entities:
     - type: Transform
       pos: 60.5,81.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16790
@@ -111437,8 +111423,6 @@ entities:
     - type: Transform
       pos: 59.5,81.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCIceSlabTray3
@@ -111448,8 +111432,6 @@ entities:
     - type: Transform
       pos: 211.5,47.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16781
@@ -111457,8 +111439,6 @@ entities:
     - type: Transform
       pos: 215.48053,47.741173
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16782
@@ -111466,8 +111446,6 @@ entities:
     - type: Transform
       pos: 209.48053,47.727283
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCIceSlabTray4
@@ -111477,8 +111455,6 @@ entities:
     - type: Transform
       pos: 65.5,79.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16793
@@ -111486,8 +111462,6 @@ entities:
     - type: Transform
       pos: 59.5,79.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCIceSlabTray5
@@ -111497,8 +111471,6 @@ entities:
     - type: Transform
       pos: 66.5,79.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16788
@@ -111506,8 +111478,6 @@ entities:
     - type: Transform
       pos: 67.5,81.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCIceSlabTray6
@@ -111517,8 +111487,6 @@ entities:
     - type: Transform
       pos: 213.5,47.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16776
@@ -111526,8 +111494,6 @@ entities:
     - type: Transform
       pos: 215.5,47.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16777
@@ -111535,8 +111501,6 @@ entities:
     - type: Transform
       pos: 214.5,47.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16778
@@ -111544,8 +111508,6 @@ entities:
     - type: Transform
       pos: 209.5,47.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16785
@@ -111553,8 +111515,6 @@ entities:
     - type: Transform
       pos: 211.50136,47.72034
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCIceSlabTray7
@@ -111564,8 +111524,6 @@ entities:
     - type: Transform
       pos: 210.50136,47.727283
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16791
@@ -111573,8 +111531,6 @@ entities:
     - type: Transform
       pos: 58.5,79.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16792
@@ -111582,8 +111538,6 @@ entities:
     - type: Transform
       pos: 60.5,79.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16795
@@ -111591,8 +111545,6 @@ entities:
     - type: Transform
       pos: 67.5,79.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16796
@@ -111600,8 +111552,6 @@ entities:
     - type: Transform
       pos: 66.5,81.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16797
@@ -111609,8 +111559,6 @@ entities:
     - type: Transform
       pos: 65.5,81.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCInflatableWall
@@ -112103,14 +112051,6 @@ entities:
     - type: Transform
       pos: 176.31894,39.856533
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 15986
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 15986
   - uid: 13823
     components:
     - type: Transform
@@ -119806,8 +119746,6 @@ entities:
     - type: Transform
       pos: 135.5,70.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17309
@@ -119815,8 +119753,6 @@ entities:
     - type: Transform
       pos: 68.5,149.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17536
@@ -119824,8 +119760,6 @@ entities:
     - type: Transform
       pos: 64.5,75.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble10
@@ -119835,8 +119769,6 @@ entities:
     - type: Transform
       pos: 163.6443,32.123726
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 16723
@@ -119844,8 +119776,6 @@ entities:
     - type: Transform
       pos: 128.3951,122.82518
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17252
@@ -119853,8 +119783,6 @@ entities:
     - type: Transform
       pos: 50.396267,132.91235
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17457
@@ -119862,8 +119790,6 @@ entities:
     - type: Transform
       pos: 57.38348,95.793274
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17467
@@ -119871,8 +119797,6 @@ entities:
     - type: Transform
       pos: 52.58633,83.58758
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17468
@@ -119880,8 +119804,6 @@ entities:
     - type: Transform
       pos: 53.40714,83.58758
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17472
@@ -119889,8 +119811,6 @@ entities:
     - type: Transform
       pos: 52.597202,84.190956
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17473
@@ -119898,8 +119818,6 @@ entities:
     - type: Transform
       pos: 53.412575,84.190956
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble11
@@ -119909,8 +119827,6 @@ entities:
     - type: Transform
       pos: 167.0193,31.832058
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17251
@@ -119918,8 +119834,6 @@ entities:
     - type: Transform
       pos: 49.49349,132.9054
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17298
@@ -119927,8 +119841,6 @@ entities:
     - type: Transform
       pos: 55.032207,142.87422
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17329
@@ -119936,8 +119848,6 @@ entities:
     - type: Transform
       pos: 88.00377,150.7899
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17375
@@ -119945,8 +119855,6 @@ entities:
     - type: Transform
       pos: 68.01114,117.783905
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17469
@@ -119954,8 +119862,6 @@ entities:
     - type: Transform
       pos: 65.5044,91.87112
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17470
@@ -119963,8 +119869,6 @@ entities:
     - type: Transform
       pos: 66.49916,91.84665
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17471
@@ -119972,8 +119876,6 @@ entities:
     - type: Transform
       pos: 67.50207,91.86296
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble12
@@ -119983,8 +119885,6 @@ entities:
     - type: Transform
       pos: 166.68597,32.477894
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17242
@@ -119993,8 +119893,6 @@ entities:
       anchored: True
       pos: 46.5,144.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17250
@@ -120002,8 +119900,6 @@ entities:
     - type: Transform
       pos: 45.714996,134.42029
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17308
@@ -120011,8 +119907,6 @@ entities:
     - type: Transform
       pos: 71.5,151.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17334
@@ -120020,8 +119914,6 @@ entities:
     - type: Transform
       pos: 84.5,145.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17464
@@ -120029,8 +119921,6 @@ entities:
     - type: Transform
       pos: 64.67565,92.49487
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17504
@@ -120038,8 +119928,6 @@ entities:
     - type: Transform
       pos: 80.5,102.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17512
@@ -120047,8 +119935,6 @@ entities:
     - type: Transform
       pos: 81.76296,89.548256
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17531
@@ -120056,8 +119942,6 @@ entities:
     - type: Transform
       pos: 81.5,78.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble2
@@ -120067,8 +119951,6 @@ entities:
     - type: Transform
       pos: 124.5,122.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17310
@@ -120076,8 +119958,6 @@ entities:
     - type: Transform
       pos: 68.5,150.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17311
@@ -120085,8 +119965,6 @@ entities:
     - type: Transform
       pos: 69.5,150.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17312
@@ -120094,8 +119972,6 @@ entities:
     - type: Transform
       pos: 69.5,149.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17465
@@ -120103,8 +119979,6 @@ entities:
     - type: Transform
       pos: 65.403404,92.53972
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17466
@@ -120112,8 +119986,6 @@ entities:
     - type: Transform
       pos: 60.5,87.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17485
@@ -120121,8 +119993,6 @@ entities:
     - type: Transform
       pos: 71.5,92.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17532
@@ -120130,8 +120000,6 @@ entities:
     - type: Transform
       pos: 79.5,78.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17567
@@ -120139,8 +120007,6 @@ entities:
     - type: Transform
       pos: 11.5,53.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17568
@@ -120148,8 +120014,6 @@ entities:
     - type: Transform
       pos: 11.5,52.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17569
@@ -120157,8 +120021,6 @@ entities:
     - type: Transform
       pos: 15.5,59.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble3
@@ -120168,8 +120030,6 @@ entities:
     - type: Transform
       pos: 67.76051,149.68196
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17478
@@ -120177,8 +120037,6 @@ entities:
     - type: Transform
       pos: 68.5,86.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17479
@@ -120186,8 +120044,6 @@ entities:
     - type: Transform
       pos: 66.5,86.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble4
@@ -120198,8 +120054,6 @@ entities:
       anchored: True
       pos: 43.5,151.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17235
@@ -120208,8 +120062,6 @@ entities:
       anchored: True
       pos: 44.5,151.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17236
@@ -120218,8 +120070,6 @@ entities:
       anchored: True
       pos: 44.5,150.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17237
@@ -120228,8 +120078,6 @@ entities:
       anchored: True
       pos: 43.5,150.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17503
@@ -120237,8 +120085,6 @@ entities:
     - type: Transform
       pos: 79.5,101.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble5
@@ -120248,8 +120094,6 @@ entities:
     - type: Transform
       pos: 73.5,93.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble6
@@ -120259,8 +120103,6 @@ entities:
     - type: Transform
       pos: 78.582695,93.24391
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17507
@@ -120268,8 +120110,6 @@ entities:
     - type: Transform
       pos: 80.40913,93.249344
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17508
@@ -120277,8 +120117,6 @@ entities:
     - type: Transform
       pos: 78.577255,89.25005
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17509
@@ -120286,8 +120124,6 @@ entities:
     - type: Transform
       pos: 80.507286,89.25005
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17510
@@ -120295,8 +120131,6 @@ entities:
     - type: Transform
       pos: 79.51797,89.24461
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17511
@@ -120304,8 +120138,6 @@ entities:
     - type: Transform
       pos: 79.50166,93.24996
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17519
@@ -120313,8 +120145,6 @@ entities:
     - type: Transform
       pos: 78.57647,83.24195
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17520
@@ -120322,8 +120152,6 @@ entities:
     - type: Transform
       pos: 80.406044,83.24195
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17521
@@ -120331,8 +120159,6 @@ entities:
     - type: Transform
       pos: 79.49826,83.24195
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble7
@@ -120342,8 +120168,6 @@ entities:
     - type: Transform
       pos: 55.5122,95.793274
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17505
@@ -120351,8 +120175,6 @@ entities:
     - type: Transform
       pos: 75.45325,99.93861
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble8
@@ -120362,8 +120184,6 @@ entities:
     - type: Transform
       pos: 58.5,143.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17307
@@ -120371,8 +120191,6 @@ entities:
     - type: Transform
       pos: 70.5,151.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17313
@@ -120380,8 +120198,6 @@ entities:
     - type: Transform
       pos: 66.5,149.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17314
@@ -120389,8 +120205,6 @@ entities:
     - type: Transform
       pos: 66.5,150.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17315
@@ -120398,8 +120212,6 @@ entities:
     - type: Transform
       pos: 67.5,150.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17328
@@ -120407,8 +120219,6 @@ entities:
     - type: Transform
       pos: 81.5,151.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabGreeble9
@@ -120419,8 +120229,6 @@ entities:
       anchored: True
       pos: 47.5,144.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 17335
@@ -120428,8 +120236,6 @@ entities:
     - type: Transform
       pos: 85.5,145.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: RMCPrefabOrangeBase
@@ -130031,1041 +129837,897 @@ entities:
       rot: 3.141592653589793 rad
       pos: 185.5,130.5
       parent: 1
-  - uid: 16257
+  - uid: 15986
     components:
     - type: Transform
       pos: 196.5,44.5
       parent: 1
-  - uid: 16258
+  - uid: 16257
     components:
     - type: Transform
       pos: 201.5,44.5
       parent: 1
-  - uid: 16259
+  - uid: 16258
     components:
     - type: Transform
       pos: 206.5,44.5
       parent: 1
-  - uid: 16260
+  - uid: 16259
     components:
     - type: Transform
       pos: 213.5,45.5
       parent: 1
-  - uid: 16261
+  - uid: 16260
     components:
     - type: Transform
       pos: 213.5,41.5
       parent: 1
-  - uid: 16262
+  - uid: 16261
     components:
     - type: Transform
       pos: 208.5,41.5
       parent: 1
-  - uid: 16263
+  - uid: 16262
     components:
     - type: Transform
       pos: 211.5,36.5
       parent: 1
-  - uid: 16268
+  - uid: 16263
     components:
     - type: Transform
       pos: 210.5,122.5
       parent: 1
-  - uid: 16269
+  - uid: 16268
     components:
     - type: Transform
       pos: 212.5,122.5
       parent: 1
-  - uid: 16270
+  - uid: 16269
     components:
     - type: Transform
       pos: 214.5,122.5
       parent: 1
-  - uid: 16271
+  - uid: 16270
     components:
     - type: Transform
       pos: 214.5,124.5
       parent: 1
-  - uid: 16272
+  - uid: 16271
     components:
     - type: Transform
       pos: 210.5,124.5
       parent: 1
-  - uid: 16273
+  - uid: 16272
     components:
     - type: Transform
       pos: 212.5,124.5
       parent: 1
-  - uid: 16274
+  - uid: 16273
     components:
     - type: Transform
       pos: 216.5,124.5
       parent: 1
-  - uid: 16283
+  - uid: 16274
     components:
     - type: Transform
       pos: 208.5,145.5
       parent: 1
-  - uid: 16290
+  - uid: 16283
     components:
     - type: Transform
       pos: 187.5,9.5
       parent: 1
-  - uid: 16291
+  - uid: 16290
     components:
     - type: Transform
       pos: 188.5,23.5
       parent: 1
-  - uid: 16292
+  - uid: 16291
     components:
     - type: Transform
       pos: 181.5,19.5
       parent: 1
-  - uid: 16293
+  - uid: 16292
     components:
     - type: Transform
       pos: 179.5,24.5
       parent: 1
-  - uid: 16294
+  - uid: 16293
     components:
     - type: Transform
       pos: 173.5,15.5
       parent: 1
-  - uid: 16749
+  - uid: 16294
     components:
     - type: Transform
       pos: 171.5,157.5
       parent: 1
-  - uid: 16773
+  - uid: 16749
     components:
     - type: Transform
       pos: 215.5,145.5
       parent: 1
-  - uid: 16924
+  - uid: 16773
     components:
     - type: Transform
       pos: 188.5,48.5
       parent: 1
-  - uid: 16925
+  - uid: 16798
     components:
     - type: Transform
       pos: 204.5,47.5
       parent: 1
-  - uid: 16926
+  - uid: 16799
     components:
     - type: Transform
       pos: 206.5,49.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-  - uid: 16927
+  - uid: 16800
     components:
     - type: Transform
       pos: 206.5,47.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16928
+  - uid: 16801
     components:
     - type: Transform
       pos: 204.5,49.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-  - uid: 16929
+  - uid: 16802
     components:
     - type: Transform
       pos: 198.5,49.5
       parent: 1
-  - uid: 16930
+  - uid: 16803
     components:
     - type: Transform
       pos: 198.5,47.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16931
+  - uid: 16804
     components:
     - type: Transform
       pos: 200.5,47.5
       parent: 1
-  - uid: 16932
+  - uid: 16805
     components:
     - type: Transform
       pos: 200.5,49.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-  - uid: 16933
+  - uid: 16806
     components:
     - type: Transform
       pos: 216.5,34.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-  - uid: 16934
+  - uid: 16807
     components:
     - type: Transform
       pos: 216.5,32.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16935
+  - uid: 16808
     components:
     - type: Transform
       pos: 214.5,32.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-  - uid: 16936
+  - uid: 16809
     components:
     - type: Transform
       pos: 214.5,34.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-  - uid: 16937
+  - uid: 16810
     components:
     - type: Transform
       pos: 214.5,36.5
       parent: 1
-  - uid: 16938
+  - uid: 16811
     components:
     - type: Transform
       pos: 216.5,36.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16939
+  - uid: 16812
     components:
     - type: Transform
       pos: 216.5,38.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-  - uid: 16940
+  - uid: 16813
     components:
     - type: Transform
       pos: 214.5,38.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16941
+  - uid: 16814
     components:
     - type: Transform
       pos: 200.5,7.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16942
+  - uid: 16815
     components:
     - type: Transform
       pos: 200.5,9.5
       parent: 1
-  - uid: 16943
+  - uid: 16816
     components:
     - type: Transform
       pos: 202.5,9.5
       parent: 1
-  - uid: 16944
+  - uid: 16817
     components:
     - type: Transform
       pos: 202.5,7.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16945
+  - uid: 16818
     components:
     - type: Transform
       pos: 205.5,7.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-  - uid: 16946
+  - uid: 16819
     components:
     - type: Transform
       pos: 205.5,9.5
       parent: 1
-  - uid: 16947
+  - uid: 16820
     components:
     - type: Transform
       pos: 207.5,9.5
       parent: 1
-  - uid: 16948
+  - uid: 16821
     components:
     - type: Transform
       pos: 207.5,7.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16949
+  - uid: 16822
     components:
     - type: Transform
       pos: 183.5,137.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16950
+  - uid: 16823
     components:
     - type: Transform
       pos: 183.5,139.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16951
+  - uid: 16824
     components:
     - type: Transform
       pos: 181.5,139.5
       parent: 1
-  - uid: 16952
+  - uid: 16825
     components:
     - type: Transform
       pos: 181.5,137.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-  - uid: 16953
+  - uid: 16826
     components:
     - type: Transform
       pos: 179.5,137.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-  - uid: 16954
+  - uid: 16827
     components:
     - type: Transform
       pos: 179.5,139.5
       parent: 1
-  - uid: 16955
+  - uid: 16828
     components:
     - type: Transform
       pos: 177.5,139.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16956
+  - uid: 16829
     components:
     - type: Transform
       pos: 177.5,137.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16957
+  - uid: 16830
     components:
     - type: Transform
       pos: 208.5,151.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-  - uid: 16958
+  - uid: 16831
     components:
     - type: Transform
       pos: 210.5,151.5
       parent: 1
-  - uid: 16959
+  - uid: 16832
     components:
     - type: Transform
       pos: 208.5,149.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16960
+  - uid: 16833
     components:
     - type: Transform
       pos: 210.5,149.5
       parent: 1
-  - uid: 16961
+  - uid: 16834
     components:
     - type: Transform
       pos: 212.5,149.5
       parent: 1
-  - uid: 16962
+  - uid: 16835
     components:
     - type: Transform
       pos: 212.5,151.5
       parent: 1
-  - uid: 16963
+  - uid: 16836
     components:
     - type: Transform
       pos: 214.5,151.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16964
+  - uid: 16837
     components:
     - type: Transform
       pos: 214.5,149.5
       parent: 1
-    - type: XenoWeeds
-      spread:
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-      - invalid
-  - uid: 16965
+  - uid: 16838
     components:
     - type: Transform
       pos: 152.5,157.5
       parent: 1
-  - uid: 16966
+  - uid: 16839
     components:
     - type: Transform
       pos: 158.5,156.5
       parent: 1
-  - uid: 16967
+  - uid: 16840
     components:
     - type: Transform
       pos: 164.5,157.5
       parent: 1
-  - uid: 16968
+  - uid: 16841
     components:
     - type: Transform
       pos: 159.5,153.5
       parent: 1
-  - uid: 16969
+  - uid: 16842
     components:
     - type: Transform
       pos: 160.5,148.5
       parent: 1
-  - uid: 16970
+  - uid: 16843
     components:
     - type: Transform
       pos: 160.5,144.5
       parent: 1
-  - uid: 16971
+  - uid: 16844
     components:
     - type: Transform
       pos: 165.5,148.5
       parent: 1
-  - uid: 16972
+  - uid: 16845
     components:
     - type: Transform
       pos: 168.5,153.5
       parent: 1
-  - uid: 16973
+  - uid: 16846
     components:
     - type: Transform
       pos: 173.5,153.5
       parent: 1
-  - uid: 16974
+  - uid: 16847
     components:
     - type: Transform
       pos: 169.5,148.5
       parent: 1
-  - uid: 16975
+  - uid: 16848
     components:
     - type: Transform
       pos: 173.5,149.5
       parent: 1
-  - uid: 16976
+  - uid: 16849
     components:
     - type: Transform
       pos: 174.5,145.5
       parent: 1
-  - uid: 16977
+  - uid: 16850
     components:
     - type: Transform
       pos: 180.5,143.5
       parent: 1
-  - uid: 16978
+  - uid: 16851
     components:
     - type: Transform
       pos: 189.5,138.5
       parent: 1
-  - uid: 16979
+  - uid: 16852
     components:
     - type: Transform
       pos: 170.5,141.5
       parent: 1
-  - uid: 16980
+  - uid: 16853
     components:
     - type: Transform
       pos: 170.5,136.5
       parent: 1
-  - uid: 16981
+  - uid: 16854
     components:
     - type: Transform
       pos: 171.5,129.5
       parent: 1
-  - uid: 16982
+  - uid: 16855
     components:
     - type: Transform
       pos: 182.5,127.5
       parent: 1
-  - uid: 16983
+  - uid: 16856
     components:
     - type: Transform
       pos: 191.5,124.5
       parent: 1
-  - uid: 16984
+  - uid: 16857
     components:
     - type: Transform
       pos: 184.5,121.5
       parent: 1
-  - uid: 16985
+  - uid: 16858
     components:
     - type: Transform
       pos: 180.5,121.5
       parent: 1
-  - uid: 16986
+  - uid: 16859
     components:
     - type: Transform
       pos: 197.5,117.5
       parent: 1
-  - uid: 16987
+  - uid: 16860
     components:
     - type: Transform
       pos: 202.5,116.5
       parent: 1
-  - uid: 16988
+  - uid: 16861
     components:
     - type: Transform
       pos: 206.5,118.5
       parent: 1
-  - uid: 16989
+  - uid: 16862
     components:
     - type: Transform
       pos: 199.5,124.5
       parent: 1
-  - uid: 16990
+  - uid: 16863
     components:
     - type: Transform
       pos: 199.5,123.5
       parent: 1
-  - uid: 16991
+  - uid: 16864
     components:
     - type: Transform
       pos: 205.5,131.5
       parent: 1
-  - uid: 16992
+  - uid: 16865
     components:
     - type: Transform
       pos: 199.5,131.5
       parent: 1
-  - uid: 16993
+  - uid: 16866
     components:
     - type: Transform
       pos: 200.5,137.5
       parent: 1
-  - uid: 16994
+  - uid: 16867
     components:
     - type: Transform
       pos: 205.5,137.5
       parent: 1
-  - uid: 16995
+  - uid: 16868
     components:
     - type: Transform
       pos: 201.5,141.5
       parent: 1
-  - uid: 16996
+  - uid: 16869
     components:
     - type: Transform
       pos: 213.5,142.5
       parent: 1
-  - uid: 16997
+  - uid: 16870
     components:
     - type: Transform
       pos: 208.5,156.5
       parent: 1
-  - uid: 16998
+  - uid: 16871
     components:
     - type: Transform
       pos: 215.5,156.5
       parent: 1
-  - uid: 16999
+  - uid: 16872
     components:
     - type: Transform
       pos: 201.5,156.5
       parent: 1
-  - uid: 17000
+  - uid: 16873
     components:
     - type: Transform
       pos: 196.5,157.5
       parent: 1
-  - uid: 17001
+  - uid: 16874
     components:
     - type: Transform
       pos: 199.5,153.5
       parent: 1
-  - uid: 17002
+  - uid: 16875
     components:
     - type: Transform
       pos: 195.5,153.5
       parent: 1
-  - uid: 17003
+  - uid: 16876
     components:
     - type: Transform
       pos: 195.5,148.5
       parent: 1
-  - uid: 17004
+  - uid: 16877
     components:
     - type: Transform
       pos: 199.5,148.5
       parent: 1
-  - uid: 17005
+  - uid: 16878
     components:
     - type: Transform
       pos: 190.5,153.5
       parent: 1
-  - uid: 17006
+  - uid: 16879
     components:
     - type: Transform
       pos: 188.5,153.5
       parent: 1
-  - uid: 17007
+  - uid: 16880
     components:
     - type: Transform
       pos: 190.5,149.5
       parent: 1
-  - uid: 17008
+  - uid: 16881
     components:
     - type: Transform
       pos: 188.5,149.5
       parent: 1
-  - uid: 17009
+  - uid: 16882
     components:
     - type: Transform
       pos: 179.5,153.5
       parent: 1
-  - uid: 17010
+  - uid: 16883
     components:
     - type: Transform
       pos: 177.5,156.5
       parent: 1
-  - uid: 17011
+  - uid: 16884
     components:
     - type: Transform
       pos: 178.5,149.5
       parent: 1
-  - uid: 17012
+  - uid: 16885
     components:
     - type: Transform
       pos: 206.5,110.5
       parent: 1
-  - uid: 17013
+  - uid: 16886
     components:
     - type: Transform
       pos: 210.5,110.5
       parent: 1
-  - uid: 17014
+  - uid: 16887
     components:
     - type: Transform
       pos: 213.5,114.5
       parent: 1
-  - uid: 17015
+  - uid: 16888
     components:
     - type: Transform
       pos: 211.5,119.5
       parent: 1
-  - uid: 17016
+  - uid: 16889
     components:
     - type: Transform
       pos: 213.5,128.5
       parent: 1
-  - uid: 17017
+  - uid: 16890
     components:
     - type: Transform
       pos: 216.5,132.5
       parent: 1
-  - uid: 17018
+  - uid: 16891
     components:
     - type: Transform
       pos: 212.5,137.5
       parent: 1
-  - uid: 17019
+  - uid: 16892
     components:
     - type: Transform
       pos: 183.5,149.5
       parent: 1
-  - uid: 17020
+  - uid: 16893
     components:
     - type: Transform
       pos: 197.5,90.5
       parent: 1
-  - uid: 17021
+  - uid: 16894
     components:
     - type: Transform
       pos: 176.5,59.5
       parent: 1
-  - uid: 17022
+  - uid: 16895
     components:
     - type: Transform
       pos: 167.5,59.5
       parent: 1
-  - uid: 17023
+  - uid: 16896
     components:
     - type: Transform
       pos: 173.5,56.5
       parent: 1
-  - uid: 17024
+  - uid: 16897
     components:
     - type: Transform
       pos: 173.5,52.5
       parent: 1
-  - uid: 17025
+  - uid: 16898
     components:
     - type: Transform
       pos: 179.5,51.5
       parent: 1
-  - uid: 17026
+  - uid: 16899
     components:
     - type: Transform
       pos: 181.5,47.5
       parent: 1
-  - uid: 17027
+  - uid: 16900
     components:
     - type: Transform
       pos: 167.5,51.5
       parent: 1
-  - uid: 17028
+  - uid: 16901
     components:
     - type: Transform
       pos: 186.5,45.5
       parent: 1
-  - uid: 17029
+  - uid: 16902
     components:
     - type: Transform
       pos: 172.5,49.5
       parent: 1
-  - uid: 17030
+  - uid: 16903
     components:
     - type: Transform
       pos: 172.5,45.5
       parent: 1
-  - uid: 17031
+  - uid: 16904
     components:
     - type: Transform
       pos: 167.5,46.5
       parent: 1
-  - uid: 17032
+  - uid: 16905
     components:
     - type: Transform
       pos: 162.5,46.5
       parent: 1
-  - uid: 17033
+  - uid: 16906
     components:
     - type: Transform
       pos: 155.5,46.5
       parent: 1
-  - uid: 17034
+  - uid: 16907
     components:
     - type: Transform
       pos: 155.5,41.5
       parent: 1
-  - uid: 17035
+  - uid: 16908
     components:
     - type: Transform
       pos: 155.5,36.5
       parent: 1
-  - uid: 17036
+  - uid: 16909
     components:
     - type: Transform
       pos: 149.5,42.5
       parent: 1
-  - uid: 17037
+  - uid: 16910
     components:
     - type: Transform
       pos: 149.5,46.5
       parent: 1
-  - uid: 17038
+  - uid: 16911
     components:
     - type: Transform
       pos: 163.5,36.5
       parent: 1
-  - uid: 17039
+  - uid: 16912
     components:
     - type: Transform
       pos: 172.5,36.5
       parent: 1
-  - uid: 17040
+  - uid: 16913
     components:
     - type: Transform
       pos: 172.5,40.5
       parent: 1
-  - uid: 17041
+  - uid: 16914
     components:
     - type: Transform
       pos: 176.5,40.5
       parent: 1
-  - uid: 17042
+  - uid: 16915
     components:
     - type: Transform
       pos: 176.5,36.5
       parent: 1
-  - uid: 17043
+  - uid: 16916
     components:
     - type: Transform
       pos: 182.5,36.5
       parent: 1
-  - uid: 17044
+  - uid: 16917
     components:
     - type: Transform
       pos: 182.5,40.5
       parent: 1
-  - uid: 17045
+  - uid: 16918
     components:
     - type: Transform
       pos: 180.5,30.5
       parent: 1
-  - uid: 17046
+  - uid: 16919
     components:
     - type: Transform
       pos: 174.5,30.5
       parent: 1
-  - uid: 17047
+  - uid: 16920
     components:
     - type: Transform
       pos: 188.5,40.5
       parent: 1
-  - uid: 17048
+  - uid: 16921
     components:
     - type: Transform
       pos: 188.5,36.5
       parent: 1
-  - uid: 17049
+  - uid: 16922
     components:
     - type: Transform
       pos: 189.5,33.5
       parent: 1
-  - uid: 17050
+  - uid: 16923
     components:
     - type: Transform
       pos: 193.5,30.5
       parent: 1
-  - uid: 17051
+  - uid: 16924
     components:
     - type: Transform
       pos: 191.5,43.5
       parent: 1
-  - uid: 17052
+  - uid: 16925
     components:
     - type: Transform
       pos: 201.5,38.5
       parent: 1
-  - uid: 17053
+  - uid: 16926
     components:
     - type: Transform
       pos: 206.5,36.5
       parent: 1
-  - uid: 17054
+  - uid: 16927
     components:
     - type: Transform
       pos: 199.5,32.5
       parent: 1
-  - uid: 17055
+  - uid: 16928
     components:
     - type: Transform
       pos: 207.5,32.5
       parent: 1
-  - uid: 17056
+  - uid: 16929
     components:
     - type: Transform
       pos: 204.5,28.5
       parent: 1
-  - uid: 17057
+  - uid: 16930
     components:
     - type: Transform
       pos: 208.5,28.5
       parent: 1
-  - uid: 17058
+  - uid: 16931
     components:
     - type: Transform
       pos: 202.5,23.5
       parent: 1
-  - uid: 17059
+  - uid: 16932
     components:
     - type: Transform
       pos: 197.5,26.5
       parent: 1
-  - uid: 17060
+  - uid: 16933
     components:
     - type: Transform
       pos: 209.5,22.5
       parent: 1
-  - uid: 17061
+  - uid: 16934
     components:
     - type: Transform
       pos: 215.5,21.5
       parent: 1
-  - uid: 17062
+  - uid: 16935
     components:
     - type: Transform
       pos: 214.5,15.5
       parent: 1
-  - uid: 17063
+  - uid: 16936
     components:
     - type: Transform
       pos: 214.5,9.5
       parent: 1
-  - uid: 17064
+  - uid: 16937
     components:
     - type: Transform
       pos: 205.5,15.5
       parent: 1
-  - uid: 17065
+  - uid: 16938
     components:
     - type: Transform
       pos: 202.5,15.5
       parent: 1
-  - uid: 17066
+  - uid: 16939
     components:
     - type: Transform
       pos: 195.5,16.5
       parent: 1
-  - uid: 17067
+  - uid: 16940
     components:
     - type: Transform
       pos: 195.5,9.5
       parent: 1
-  - uid: 17068
+  - uid: 16941
     components:
     - type: Transform
       pos: 182.5,9.5
       parent: 1
-  - uid: 17069
+  - uid: 16942
     components:
     - type: Transform
       pos: 179.5,13.5
       parent: 1
-  - uid: 17070
+  - uid: 16943
     components:
     - type: Transform
       pos: 169.5,12.5
       parent: 1
-  - uid: 17071
+  - uid: 16944
     components:
     - type: Transform
       pos: 167.5,7.5
       parent: 1
-  - uid: 17072
+  - uid: 16945
     components:
     - type: Transform
       pos: 165.5,17.5
       parent: 1
-  - uid: 17073
+  - uid: 16946
     components:
     - type: Transform
       pos: 170.5,20.5
       parent: 1
-  - uid: 17074
+  - uid: 16947
     components:
     - type: Transform
       pos: 161.5,16.5
       parent: 1
-  - uid: 17075
+  - uid: 16948
     components:
     - type: Transform
       pos: 158.5,17.5
       parent: 1
-  - uid: 17076
+  - uid: 16949
     components:
     - type: Transform
       pos: 154.5,14.5
       parent: 1
-  - uid: 17077
+  - uid: 16950
     components:
     - type: Transform
       pos: 158.5,10.5
       parent: 1
-  - uid: 17078
+  - uid: 16951
     components:
     - type: Transform
       pos: 154.5,8.5
       parent: 1
-  - uid: 17079
+  - uid: 16952
     components:
     - type: Transform
       pos: 149.5,15.5
       parent: 1
-  - uid: 17080
+  - uid: 16953
     components:
     - type: Transform
       pos: 148.5,9.5
