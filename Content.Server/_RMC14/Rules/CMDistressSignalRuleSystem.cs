@@ -47,7 +47,6 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Spawners;
-using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -100,6 +99,7 @@ namespace Content.Server._RMC14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
@@ -130,7 +130,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RMCStationJobsSystem _rmcStationJobs = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
-    [Dependency] private readonly PlayTimeTrackingSystem _playTimeTracking = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
@@ -495,7 +494,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 _roles.MindAddJobRole(mind.Value, jobPrototype: spawnAsJob);
 
-                _playTimeTracking.PlayerRolesChanged(player);
+                _playTime.PlayerRolesChanged(player);
 
                 var spawnEv = new PlayerSpawnCompleteEvent(
                     survivorMob,
@@ -1284,12 +1283,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         continue;
 
                     _thermalCloak.SetInvisibility((cloakId, cloak), lastMarine, false, true);
-                    if (TryComp<InstantActionComponent>(cloak.Action, out var action))
-                    {
-                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
-                        action.UseDelay = TimeSpan.FromHours(2);
-                        Dirty(cloak.Action.Value, action);
-                    }
+                    _actions.SetCooldown(cloak.Action, Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2));
+                    _actions.SetUseDelay(cloak.Action, TimeSpan.FromHours(2));
                 }
 
                 var ghillies = EntityQueryEnumerator<GhillieSuitComponent>();
@@ -1299,12 +1294,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         continue;
 
                     _ghillieSuit.ToggleInvisibility((ghillieId, ghillie), lastMarine, false);
-                    if (TryComp<InstantActionComponent>(ghillie.Action, out var action))
-                    {
-                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
-                        action.UseDelay = TimeSpan.FromHours(2);
-                        Dirty(ghillie.Action.Value, action);
-                    }
+                    _actions.SetCooldown(ghillie.Action, Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2));
+                    _actions.SetUseDelay(ghillie.Action, TimeSpan.FromHours(2));
                 }
             }
 
@@ -1313,11 +1304,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 distress.QueenDiedCheck = null;
                 continue;
             }
-            else
-            {
-                distress.QueenDiedCheck ??= Timing.CurTime + distress.QueenDiedDelay;
-            }
 
+            distress.QueenDiedCheck ??= Timing.CurTime + distress.QueenDiedDelay;
             if (distress.QueenDiedCheck == null)
                 continue;
 

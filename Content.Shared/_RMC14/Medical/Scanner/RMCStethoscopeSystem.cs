@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
@@ -18,6 +19,7 @@ namespace Content.Shared._RMC14.Medical.Scanner;
 
 public sealed class RMCStethoscopeSystem : EntitySystem
 {
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -97,6 +99,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
                 return true;
             }
         }
+
         return false;
     }
 

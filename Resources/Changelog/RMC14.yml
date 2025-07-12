@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Remove WY logo from Fruit Beer.
-    type: Fix
-  id: 1481
-  time: '2025-03-25T02:22:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5978
-- author: DummeHytteOst
-  changes:
-  - message: Increased hivecore and pylon roof range to cover the intended amount
-      of total area.
-    type: Tweak
-  id: 1482
-  time: '2025-03-25T02:23:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5984
 - author: Ian321
   changes:
   - message: Requisitions can now vendor packets of M74 grenades.
@@ -4994,5 +4979,21 @@
   id: 1981
   time: '2025-07-09T00:37:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6901
+- author: DoguhanOzgurAkca
+  changes:
+  - message: Added new icon to area alert for unknown areas, by SigmaTheDragon.
+    type: Add
+  - message: Fixes xeno alert ordering.
+    type: Fix
+  id: 1982
+  time: '2025-07-12T04:42:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6996
+- author: J C Denton
+  changes:
+  - message: More lore descriptions ported.
+    type: Add
+  id: 1983
+  time: '2025-07-12T04:44:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6966
 Name: RMC14
 Order: -1
