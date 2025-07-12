@@ -5,7 +5,6 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
 using Content.Server.Tools;
-using Content.Server._RMC14.Fax;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
@@ -50,6 +49,7 @@ public sealed class FaxSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly FaxecuteSystem _faxecute = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
 
     private static readonly ProtoId<ToolQualityPrototype> ScrewingQuality = "Screwing";
@@ -323,26 +323,18 @@ public sealed class FaxSystem : EntitySystem
 
     private void OnCopyButtonPressed(EntityUid uid, FaxMachineComponent component, FaxCopyMessage args)
     {
-        // Check for RMC-specific mob faxecuting behavior first
-        if (EntityManager.TrySystem(out Content.Server._RMC14.Fax.RMCFaxSystem? rmcFaxSystem) && 
-            rmcFaxSystem.TryFaxecuteMob(uid, component))
-        {
-            return; // Mob was faxecuted, don't do normal copy behavior
-        }
-        
-        Copy(uid, component, args);
+        if (HasComp<MobStateComponent>(component.PaperSlot.Item))
+            _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
+        else
+            Copy(uid, component, args);
     }
 
     private void OnSendButtonPressed(EntityUid uid, FaxMachineComponent component, FaxSendMessage args)
     {
-        // Check for RMC-specific mob faxecuting behavior first
-        if (EntityManager.TrySystem(out Content.Server._RMC14.Fax.RMCFaxSystem? rmcFaxSystem) && 
-            rmcFaxSystem.TryFaxecuteMob(uid, component))
-        {
-            return; // Mob was faxecuted, don't do normal send behavior
-        }
-        
-        Send(uid, component, args);
+        if (HasComp<MobStateComponent>(component.PaperSlot.Item))
+            _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
+        else
+            Send(uid, component, args);
     }
 
     private void OnRefreshButtonPressed(EntityUid uid, FaxMachineComponent component, FaxRefreshMessage args)
@@ -586,7 +578,7 @@ public sealed class FaxSystem : EntitySystem
         _appearanceSystem.SetData(uid, FaxMachineVisuals.VisualState, FaxMachineVisualState.Printing);
 
         if (component.NotifyAdmins)
-            NotifyAdmins(faxName, component.FaxName);
+            NotifyAdmins(faxName, component.FaxName );
 
         component.PrintingQueue.Enqueue(printout);
     }
