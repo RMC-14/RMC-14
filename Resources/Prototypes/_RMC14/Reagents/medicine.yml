@@ -677,3 +677,22 @@
         emote: Laugh #TODO twitches, drools, moans.
         showInChat: true
         probability: 0.05
+
+# Zombie Cure
+
+- type: reagent
+  parent: [ CMReagent, AmbuzolPlus ]
+  id: RMCAntiZed
+  name: reagent-name-rmcantized
+  desc: reagent-desc-rmcantized
+  physicalDesc: reagent-physical-desc-crisp
+  flavor: medicine
+  color: "#5FB0C7"
+  metabolisms:
+    Medicine:
+      effects:
+        - !type:CureZombieInfection
+          innoculate: true
+          conditions:
+            - !type:ReagentThreshold
+              min: 5

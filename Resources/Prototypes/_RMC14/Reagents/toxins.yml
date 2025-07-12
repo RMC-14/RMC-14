@@ -95,3 +95,21 @@
         type: Add
         time: 10
         refresh: false
+
+- type: reagent
+  parent: [ CMReagent, Romerol ]
+  id: RMCBlackGoo
+  name: reagent-name-rmcblackgoo
+  desc: reagent-desc-rmcblackgoo
+  physicalDesc: reagent-physical-desc-unidentifiable
+  flavor: bitter
+  color: "#0a0b0d"
+  worksOnTheDead: true
+  unknown: true
+  metabolisms:
+    Medicine:
+      effects:
+        - !type:CauseZombieInfection
+          conditions:
+            - !type:ReagentThreshold
+              min: 5
