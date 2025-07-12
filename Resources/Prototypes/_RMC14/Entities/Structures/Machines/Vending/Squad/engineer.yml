@@ -22,10 +22,10 @@
     - name: Handheld Defense
       takeOne: CMHandheldDefense
       entries:
+      - id: RMCTesla
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
       - id: RMCSentry
-      - id: RMCTesla
     - name: Handheld Defense Upgrade
       choices: { CMHandheldDefenseUpgrade: 1 }
       entries:
@@ -35,8 +35,8 @@
       entries:
     #- id: CMAirlockCircuitBoard
     #  points: 2
-    #- id: CMAPCCircuitBoard
-    #  points: 2
+      - id: CMAPCElectronics
+        points: 2
       - id: CMEntrenchingTool
         points: 2
       - id: RMCPowerCellHigh
@@ -88,6 +88,8 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 6
+      - id: CMMagazineRifleM4SPRExt
+        points: 6
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -98,8 +100,18 @@
         points: 6
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #   points: 6
       - id: RMCSpeedLoader44Marksman
         points: 6
+      # - id: RMCMagazinePistolM1984HP
+      #   points: 3
+      - id: RMCMagazinePistolM1984AP
+        points: 3
       - id: CMMagazinePistolMK80
         points: 3
       - id: RMCMagazinePistolSU6
@@ -152,6 +164,8 @@
         points: 8
       - id: RMCWhistle
         points: 3
+      - id: RMCSynthResetKey
+        points: 10
     - name: Binoculars
       entries:
       - id: RMCBinoculars
@@ -241,7 +255,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
@@ -283,7 +297,7 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
@@ -324,7 +338,7 @@
         amount: 4
       - id: RMCCableCoil
         amount: 4
-      - id: ClothingEyesGlassesMeson # TODO RMC14 welding goggles
+      - id: RMCWeldingGoggles
         amount: 2
       - id: RMCEngineerKit
         amount: 2
@@ -344,3 +358,11 @@
         amount: 4
       - id: CMWelderSmall
         amount: 2
+      - id: CMLightReplacer
+        amount: 4
+    # - name: Utility
+    #   entries:
+    #   - id: Sentry Gun Network Laptop
+    #     amount: 4
+    #   - id: Sentry Gun Network Encryption KEy
+    #     amount: 4

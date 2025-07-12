@@ -74,7 +74,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCApcComponent, ActivatableUIOpenAttemptEvent>(OnApcActivatableUIOpenAttempt);
         SubscribeLocalEvent<RMCApcComponent, ExaminedEvent>(OnApcExamined);
 
-        SubscribeLocalEvent<RMCPowerReceiverComponent, MapInitEvent>(OnReceiverUpdate);
+        SubscribeLocalEvent<RMCPowerReceiverComponent, MapInitEvent>(OnReceiverMapInit);
         SubscribeLocalEvent<RMCPowerReceiverComponent, EntParentChangedMessage>(OnReceiverUpdate);
         SubscribeLocalEvent<RMCPowerReceiverComponent, ComponentRemove>(OnReceiverRemove);
         SubscribeLocalEvent<RMCPowerReceiverComponent, EntityTerminatingEvent>(OnReceiverRemove);
@@ -312,6 +312,11 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             if (markup != null)
                 args.PushMarkup(markup);
         }
+    }
+
+    protected virtual void OnReceiverMapInit(Entity<RMCPowerReceiverComponent> ent, ref MapInitEvent args)
+    {
+        OnReceiverUpdate(ent, ref args);
     }
 
     private void OnReceiverUpdate<T>(Entity<RMCPowerReceiverComponent> ent, ref T args)
@@ -832,7 +837,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                 {
                     if (xform.MapID == map)
                     {
-                        _appearance.SetData(uid, ToggleableLightVisuals.Enabled, powered);
+                        _appearance.SetData(uid, ToggleableVisuals.Enabled, powered);
                         _pointLight.SetEnabled(uid, powered);
                     }
                 }

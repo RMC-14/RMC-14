@@ -15,6 +15,7 @@
   id: RMCHeadsetColonyIcons
   name: colony headset
   description: A standard headset used by colonists.
+  suffix: With HUD Icons
   components:
   - type: ContainerFill
     containers:
@@ -128,16 +129,20 @@
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetForecon
-  name: Force Recon headset
-  description: A headset given to FORECON marines.
+  name: UNMC SOF headset
+  description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
+  suffix: Survivor
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: soc_headset
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyFORECON
+      - CMEncryptionKeyColony
   - type: RMCHeadset
     channels:
-    - MarineForecon
+    - MarineSOF
 
 #for UNMC personnel
 - type: entity

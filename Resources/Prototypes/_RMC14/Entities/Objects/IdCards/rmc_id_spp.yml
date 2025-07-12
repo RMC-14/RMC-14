@@ -12,8 +12,15 @@
     - SPPCCT
 
 - type: entity
+  id: FactionHalcyon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+
+- type: entity
   parent: CMIDCardStandardDogtag
   id: RMCIDSPP
+  name: SPP dog tag
   description: A soldier dog tag.
   components:
   - type: ItemIFF
@@ -23,3 +30,32 @@
   parent: [ RMCIDCardStandardDogtagHidden, RMCIDSPP ]
   id: RMCIDSPPHidden
   categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: CMIDCardLanyard
+  id: RMCIDCardPaP
+  name: PaP identification holo-badge
+  description: A standard-issue holo-badge for personnel within the UPP's People's Armed Police. It displays the officer's rank and affiliation.
+  components:
+  - type: PresetIdCard
+    job: CMSurvivor
+  - type: ItemIFF
+    faction: FactionSurvivor
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardHalcyon
+  name: corporate holo-badge
+  description: A corporate holo-badge. It's a unique Corporate orange and black.
+  components:
+  - type: ItemIFF
+    faction: FactionHalcyon
+  - type: Access
+    groups:
+    - Colony
+    - RMCWeYa # TODO RMC14 - Halcyon access
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/halcyon.rsi
+    state: halcyon
+  - type: Clothing
+    sprite: _RMC14/Objects/CMIDs/halcyon.rsi

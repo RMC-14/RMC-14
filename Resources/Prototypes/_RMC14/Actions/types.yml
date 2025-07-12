@@ -3,21 +3,23 @@
   parent: ActionToggleWagging
   id: ActionToggleVulpkaninWagging
   components:
-    - type: InstantAction
-      icon: { sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
-      iconOn: { sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
-      itemIconStyle: NoItem
-      useDelay: 1 # Prevents Emote Spam
-      event: !type:ToggleActionEvent
+  - type: Action
+    icon: { sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
+    iconOn: { sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
+    itemIconStyle: NoItem
+    useDelay: 1 # Prevents Emote Spam
+  - type: InstantAction
+    event: !type:ToggleActionEvent
 
 # Felinid Tail Wagging
 - type: entity
   parent: ActionToggleWagging
   id: ActionToggleFelinidWagging
   components:
-    - type: InstantAction
-      icon: { sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi, state: tail_wag_icon }
-      iconOn: { sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi, state: tail_wag_icon }
-      itemIconStyle: NoItem
-      useDelay: 1 # Prevents Emote Spam
-      event: !type:ToggleActionEvent
+  - type: Action
+    icon: { sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi, state: tail_wag_icon }
+    iconOn: { sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi, state: tail_wag_icon }
+    itemIconStyle: NoItem
+    useDelay: 1 # Prevents Emote Spam
+  - type: InstantAction
+    event: !type:ToggleActionEvent

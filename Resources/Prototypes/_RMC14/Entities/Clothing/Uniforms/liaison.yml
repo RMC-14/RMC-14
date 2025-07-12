@@ -164,6 +164,15 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_brown.rsi
 
 - type: entity
+  parent: CMJumpsuitLiaisonBrown
+  id: RMCJumpsuitLiaisonBrownTie
+  categories: [HideSpawnMenu]
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCTieBlack
+
+- type: entity
   parent: CMJumpsuitLiaison
   id: CMJumpsuitLiaisonBlue
   name: blue suit pants
@@ -173,6 +182,17 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_blue.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_blue.rsi
+
+- type: entity
+  parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitLiaisonOrange
+  name: orange outfit
+  description: A pair of black pants paired with a very We-Ya orange shirt. A popular look with those in the corporate world that conduct the majority of their business from Weston Yamada offices.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/orange.rsi
 
 - type: entity
   parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]

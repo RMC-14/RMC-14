@@ -50,8 +50,8 @@
         amount: 25
       - id: RMCWeaponPistolM13Empty
         amount: 25
-      #- id: WeaponFlareM82F
-      #  amount: 10
+      - id: RMCWeaponPistolM82F
+        amount: 10
     - name: Sidearm ammunition
       entries:
       - id: CMMagazinePistolM77AP
@@ -124,7 +124,7 @@
         amount: 1
       - id: CMWebbing
         amount: 2
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
         amount: 1
       - id: CMWebbingHolster
         amount: 1
@@ -192,8 +192,8 @@
         amount: 15
       - id: RMCBeltHolsterSMGPouch
         amount: 10
-#      - id: M276 Pattern M82F Holster Rig
-#        amount: 5
+      - id: RMCM82FHolster
+        amount: 5
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 15
@@ -274,12 +274,25 @@
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15
-#      - id: Marine Flair
+#      - id: TODO UNMC Flair
 #        amount: 15
-#      - id: Falling Falcons Shoulder Patch
-#        amount: 15
-#      - id: Marine Shoulder Patch
-#        amount: 15
+      - id: RMCPatchFallingFalcons
+        amount: 15
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+        amount: 15
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+        amount: 15
+      - id: RMCPatchUNMC
+        name: UNMC shoulder patch
+        amount: 15
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
+        amount: 15
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+        amount: 15
       - id: BedrollFolded
         amount: 20
       - id: RMCM5CameraGear
@@ -328,9 +341,15 @@
         amount: 3
     - name: Extended Ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 2
       - id: CMMagazineSMGM63Ext
         amount: 2
       - id: CMMagazineRifleM54CExt
+        amount: 2
+      - id: RMCMagazinePistolM13Ext
+        amount: 2
+      - id: RMCMagazinePistolM13Drum
         amount: 2
     - name: Special Ammunition
       entries:
@@ -340,10 +359,8 @@
       #  amount: 2
       - id: RMCSpeedLoader44Marksman
         amount: 2
-      - id: RMCMagazinePistolM13Ext
-        amount: 6
-      - id: RMCMagazinePistolM13Drum
-        amount: 6
+      - id: RMCMagazinePistolM1984AP
+        amount: 2
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80
@@ -403,7 +420,7 @@
         amount: 5
       - id: CMMultitool
         amount: 1
-      - id: CMWelder
+      - id: CMWelderSmall
         amount: 1
     - name: Flare and light
       entries:
@@ -477,18 +494,20 @@
         amount: 3
       - id: RMCAttachmentSuppressor
         amount: 3
+      # - id: RMCAttachmentShotgunChoke
+      #   amount: 2
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope
         amount: 2
       - id: RMCAttachmentMagneticHarness
-        amount: 5
+        amount: 4
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
       - id: RMCAttachmentS5RedDotSight
-        amount: 4
+        amount: 3
       - id: RMCAttachmentS6ReflexSight
-        amount: 4
+        amount: 3
       - id: RMCAttachmentS84xTelescopicScope
         amount: 2
     - name: Underbarrel

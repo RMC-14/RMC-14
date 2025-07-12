@@ -1,20 +1,21 @@
-using Content.Shared.Coordinates;
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared.Actions;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Stunnable;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Xenonids.Sweep;
-using Robust.Shared.Audio.Systems;
-using Content.Shared._RMC14.Shields;
-using Content.Shared.Interaction;
-using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Xenonids.Blitz;
 
@@ -33,6 +34,7 @@ public sealed class XenoBlitzSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -65,16 +67,13 @@ public sealed class XenoBlitzSystem : EntitySystem
             if (!TryComp<XenoPlasmaComponent>(xeno, out var plasma) || !_plasma.HasPlasma((xeno.Owner, plasma), xeno.Comp.PlasmaCost))
                 return;
             xeno.Comp.Dashed = true;
-            _actions.SetUseDelay(args.Action, xeno.Comp.BaseUseDelay);
+            _actions.SetUseDelay(args.Action.Owner, xeno.Comp.BaseUseDelay);
             xeno.Comp.FirstPartActivatedAt = _timing.CurTime;
             //Don't handle - let the leap go through
             // TODO RMC14 Find a way for this to work without also changing toggle on move selection
-            foreach (var (actionId, action) in _actions.GetActions(xeno))
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoLeapActionEvent>(xeno))
             {
-                if (action.BaseEvent is XenoLeapActionEvent)
-                {
-                    _actions.SetToggled(actionId, true);
-                }
+                _actions.SetToggled((action, action), true);
             }
         }
 
@@ -130,10 +129,9 @@ public sealed class XenoBlitzSystem : EntitySystem
         if (hits >= xeno.Comp.HitsToRecharge)
             _vanguard.RegenShield(xeno);
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoLeapActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoLeapActionEvent)
-                _actions.SetToggled(actionId, false);
+            _actions.SetToggled((action, action), false);
         }
 
         Dirty(xeno);
@@ -143,13 +141,10 @@ public sealed class XenoBlitzSystem : EntitySystem
     {
         EntityUid? bliz = null;
 
-        foreach (var (id, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoLeapActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoLeapActionEvent)
-            {
-                bliz = id;
-                break;
-            }
+            bliz = action;
+            break;
         }
 
         if (bliz == null)

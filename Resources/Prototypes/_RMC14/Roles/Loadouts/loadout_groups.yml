@@ -61,9 +61,9 @@
   - GogglesM1A1RMC
   - PersonalShadesRMC
   - SunglassesRMC # TODO prescription sunglasses
-  - GlassesBiMexYellowRMC
-  - GlassesBiMexBronzeRMC
-  - GlassesBiMexBlackRMC
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
   - GogglesRedRMC
   - GogglesBlueRMC
   - GogglesPurpleRMC
@@ -168,6 +168,16 @@
   - RosaryRMC
   - PrescriptionRMC
   - TrimmedWireRMC
+
+# Accessories
+- type: loadoutGroup
+  id: AccessoriesRMC
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 10
+  loadouts:
+  - UNMCSquadPatchRMC
+  - SquadArmbandRMC
 
 # Paperwork
 - type: loadoutGroup
@@ -410,9 +420,9 @@
   - GogglesM1A1RMC
   - PersonalShadesRMC
   - SunglassesRMC # TODO prescription sunglasses
-  - GlassesBiMexYellowRMC
-  - GlassesBiMexBronzeRMC
-  - GlassesBiMexBlackRMC
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
   - GogglesRedRMC
   - GogglesBlueRMC
   - GogglesPurpleRMC
