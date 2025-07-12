@@ -38,7 +38,7 @@ public abstract class SharedDeadGhostVisualsSystem : EntitySystem
         if (HasComp<GhostComponent>(ownedEntity)) // incase they ghosted
             ownedEntity = originalOwnedEntity;
 
-        ent.Comp.SourceEntity = ownedEntity;
+        ent.Comp.SourceEntity = GetNetEntity(ownedEntity);
         Dirty(ent);
 
         if (ownedEntity == null)
@@ -62,7 +62,7 @@ public abstract class SharedDeadGhostVisualsSystem : EntitySystem
 
     private bool GetSrcComp<T>(RMCGhostAppearanceComponent comp, [NotNullWhen(true)] out T? src) where T : Component, new()
     {
-        if (TryComp(comp.SourceEntity, out src))
+        if (TryComp(GetEntity(comp.SourceEntity), out src))
             return true;
 
         return false;

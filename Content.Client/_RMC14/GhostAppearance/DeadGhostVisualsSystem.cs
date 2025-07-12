@@ -1,5 +1,7 @@
 ﻿using Content.Client.Smoking;
 using Content.Shared._RMC14.GhostAppearance;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Damage;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Prototypes;
@@ -9,6 +11,7 @@ namespace Content.Client._RMC14.GhostAppearance;
 public sealed class DeadGhostVisualsSystem : SharedDeadGhostVisualsSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private EntityQuery<AppearanceComponent> _appearanceQuery;
@@ -40,10 +43,29 @@ public sealed class DeadGhostVisualsSystem : SharedDeadGhostVisualsSystem
         base.Update(frameTime);
 
         var entities = EntityQueryEnumerator<RMCGhostAppearanceComponent, SpriteComponent>();
-        while (entities.MoveNext(out _, out var sprite))
+        while (entities.MoveNext(out var ent, out var ghost, out var sprite))
         {
             sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
             sprite.PostShader.SetParameter("visibility", _opacity);
+
+            if (GetEntity(ghost.SourceEntity) is { } source && !ghost.Updated)
+            {
+                _sprite.CopySprite(source, ent);
+
+                if (HasComp<XenoComponent>(source)) // update xeno visuals
+                {
+                    if (sprite is { BaseRSI: { } rsi } && _sprite.LayerMapTryGet(ent, XenoVisualLayers.Base, out var layer, false))
+                    {
+                        if (rsi.TryGetState("alive", out _))
+                            _sprite.LayerSetRsiState(ent, layer, "alive");
+
+                        if (_sprite.LayerMapTryGet(ent, RMCDamageVisualLayers.Base, out var damageLayer, false))
+                            _sprite.LayerSetVisible(ent, damageLayer, false); // set damage visuals invisible
+                    }
+                }
+
+                ghost.Updated = true;
+            }
         }
     }
 }
