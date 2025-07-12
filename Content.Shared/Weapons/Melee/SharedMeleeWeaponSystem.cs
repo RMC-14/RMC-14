@@ -890,7 +890,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(target.Value, ref cmDisarmEvent);
         if (cmDisarmEvent.Handled)
         {
-            _audio.PlayPvs(combatMode.DisarmSuccessSound, target.Value, AudioParams.Default.WithVariation(0.025f).WithVolume(5f));
+            if (_netMan.IsClient)
+                _meleeSound.PlaySwingSound(user, meleeUid, component);
             return true;
         }
 
