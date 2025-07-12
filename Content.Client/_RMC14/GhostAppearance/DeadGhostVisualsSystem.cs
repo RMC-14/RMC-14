@@ -40,7 +40,7 @@ public sealed class DeadGhostVisualsSystem : SharedDeadGhostVisualsSystem
         base.Update(frameTime);
 
         var entities = EntityQueryEnumerator<RMCGhostAppearanceComponent, SpriteComponent>();
-        while (entities.MoveNext(out var ghostAppearance, out var sprite))
+        while (entities.MoveNext(out _, out var sprite))
         {
             sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
             sprite.PostShader.SetParameter("visibility", _opacity);
