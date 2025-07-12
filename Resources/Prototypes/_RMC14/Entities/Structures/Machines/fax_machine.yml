@@ -7,6 +7,11 @@
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
+  - type: RMCLoreExaminable
+    content: "The fax machine, although of archaic origin, is surprisingly apt to the modern spacefaring nations of today.
+              It utilizes the preexisting groundbreaking interstellar phone system to transmit documents as audio signals, which can then be decoded into the original document at the receiving fax machine.
+              Weston-Yamada has patented the technology, resulting in other models of fax machines being far slower, and far less common.
+              Security concerns have been raised as to the security of using the telephone system for sensitive documents, but Weston-Yamada has promised their infrastructure is extremely secure."
   - type: Sprite
     sprite: _RMC14/Structures/Machines/fax_machine.rsi
     drawdepth: SmallObjects
