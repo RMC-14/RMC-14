@@ -11,6 +11,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.ParaDrop;
 using Content.Shared.Physics;
 using Content.Shared.Shuttles.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -28,6 +29,7 @@ namespace Content.Shared._RMC14.CrashLand;
 public abstract partial class SharedCrashLandSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
@@ -143,11 +145,11 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
         var tile = tileRef.GridIndices;
         var location = _mapSystem.GridTileToLocal(grid, grid, tile);
 
-        if (tileRef.GetContentTileDefinition().ID == ContentTileDefinition.SpaceID)
+        if (_turf.GetContentTileDefinition(tileRef).ID == ContentTileDefinition.SpaceID)
             return false;
 
         // no air-blocked areas.
-        if (tileRef.IsSpace() ||
+        if (_turf.IsSpace(tileRef) ||
             _turf.IsTileBlocked(tileRef, CollisionGroup.MobMask))
         {
             return false;
@@ -251,6 +253,33 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 
         var ev = new CrashLandStartedEvent();
         RaiseLocalEvent(crashLandable, ref ev);
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        var crashLandingQuery = EntityQueryEnumerator<CrashLandableComponent, CrashLandingComponent>();
+        while (crashLandingQuery.MoveNext(out var uid, out var crashLandable, out var crashLanding))
+        {
+            if (HasComp<SkyFallingComponent>(uid))
+                continue;
+
+            crashLanding.RemainingTime -= frameTime;
+            if (!(crashLanding.RemainingTime <= 0))
+                continue;
+
+            if (crashLanding.DoDamage)
+                ApplyFallingDamage(uid);
+
+            var ev = new CrashLandedEvent(crashLanding.DoDamage);
+            RaiseLocalEvent(uid, ref ev);
+
+            _audio.PlayPvs(crashLandable.CrashSound, uid);
+            RemComp<CrashLandingComponent>(uid);
+            Blocker.UpdateCanMove(uid);
+        }
     }
 }
 

@@ -137,7 +137,7 @@
     contents:
       - id: PortableGeneratorPacmanMachineCircuitboard # TODO RMC14 use cm prototype
         amount: 2
-      - id: CapacitorStockPart # TODO RMC14 use cm prototype
+      - id: MicroManipulatorStockPart # TODO RMC14 use cm prototype
         amount: 2
 
 - type: entity
@@ -149,7 +149,7 @@
     contents:
       - id: PortableGeneratorSuperPacmanMachineCircuitboard # TODO RMC14 use cm prototype
         amount: 2
-      - id: CapacitorStockPart # TODO RMC14 use cm prototype
+      - id: MicroManipulatorStockPart # TODO RMC14 use cm prototype
         amount: 4
 
 - type: entity

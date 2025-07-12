@@ -35,25 +35,25 @@
     - RMCHipsterGlasses
 
 - type: loadout
-  id: GlassesBiMexYellowRMC
+  id: GlassesTriMaxYellowRMC
   cost: 2
   storage:
     back:
-    - RMCGlassesBiMexYellow
+    - RMCGlassesTriMaxYellowFake
 
 - type: loadout
-  id: GlassesBiMexBronzeRMC
+  id: GlassesTriMaxBronzeRMC
   cost: 2
   storage:
     back:
-    - RMCGlassesBiMexBronze
+    - RMCGlassesTriMaxBronzeFake
 
 - type: loadout
-  id: GlassesBiMexBlackRMC
+  id: GlassesTriMaxBlackRMC
   cost: 2
   storage:
     back:
-    - RMCGlassesBiMexBlack
+    - RMCGlassesTriMaxBlackFake
 
 - type: loadout
   id: GogglesRMC
@@ -151,7 +151,7 @@
   cost: 2
   storage:
     back:
-    - RMCSunglassesBig
+    - RMCSunglassesBigFake
 
 - type: loadout
   id: SunglassesRMC

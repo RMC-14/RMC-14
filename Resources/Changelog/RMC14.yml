@@ -1,35 +1,6 @@
 ﻿Entries:
 - author: CyberTropic
   changes:
-  - message: Remove WY logo from Fruit Beer.
-    type: Fix
-  id: 1481
-  time: '2025-03-25T02:22:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5978
-- author: DummeHytteOst
-  changes:
-  - message: Increased hivecore and pylon roof range to cover the intended amount
-      of total area.
-    type: Tweak
-  id: 1482
-  time: '2025-03-25T02:23:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5984
-- author: Ian321
-  changes:
-  - message: Requisitions can now vendor packets of M74 grenades.
-    type: Add
-  id: 1483
-  time: '2025-03-25T06:49:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5954
-- author: Tyzemol
-  changes:
-  - message: Freezer crates will now actually keep things inside fresh.
-    type: Fix
-  id: 1484
-  time: '2025-03-28T03:15:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5971
-- author: CyberTropic
-  changes:
   - message: Fixed map insert pass through.
     type: Fix
   id: 1485
@@ -4994,5 +4965,50 @@
   id: 1981
   time: '2025-07-09T00:37:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6901
+- author: DoguhanOzgurAkca
+  changes:
+  - message: Added new icon to area alert for unknown areas, by SigmaTheDragon.
+    type: Add
+  - message: Fixes xeno alert ordering.
+    type: Fix
+  id: 1982
+  time: '2025-07-12T04:42:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6996
+- author: J C Denton
+  changes:
+  - message: More lore descriptions ported.
+    type: Add
+  id: 1983
+  time: '2025-07-12T04:44:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6966
+- author: Dygon
+  changes:
+  - message: Applying barbed wire to a barricade now increases it's max health by
+      50.
+    type: Tweak
+  - message: Attempting to attack or tackle over a barricade from the front now has
+      a chance to make you attack the barricade instead. The chance of this occurring
+      ranges from 100% to 30%, depending on the barricade's current health.
+    type: Tweak
+  - message: Trying to leap or pounce over a barbed barricade will now stun you.
+    type: Tweak
+  - message: All leaps now ignore barricades without barbed wire.
+    type: Tweak
+  - message: Tail Stab is now a targeted action and requires you to click on your
+      target.
+    type: Tweak
+  - message: The grenadier armor's leap protection no longer blocks ravagers and praetorians.
+    type: Fix
+  id: 1984
+  time: '2025-07-12T04:52:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6699
+- author: Dygon
+  changes:
+  - message: Warrior's Lunge, Dancer's Impale and Dancer's Tail Trip now have a 1.5-second
+      cooldown if used on an invalid target.
+    type: Tweak
+  id: 1985
+  time: '2025-07-12T04:55:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6891
 Name: RMC14
 Order: -1
