@@ -1595,3 +1595,14 @@
     state: caine_ruff_ruffalo
   - type: PatronFigurine
     id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSethGrimm
+  name: Seth Grimm figurine
+  description: "You can be a Queen or a parasite, but everyone dances with the Grim Reaper."
+  components:
+  - type: Sprite
+    state: seth_grimm
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2
