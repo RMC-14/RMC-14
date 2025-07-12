@@ -26,6 +26,16 @@
 
 - type: entity
   parent: CMSatchel
+  id: CMSatchelFillColonySynthetic
+  suffix: Survivor
+  components: 
+  - type: StorageFill
+    contents: 
+    - id: CMDefibrillator
+
+
+- type: entity
+  parent: CMSatchel
   id: RMCSatchelBlack
   components:
   - type: Sprite

@@ -56,12 +56,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorHalcyonDynamicsLiaison
@@ -71,6 +69,7 @@
   parent: RMCSurvivorPresetCivilian
   id: RMCGearSurvivorPresetHalcyonDynamicsLiaison
   name: halcyon dynamics liaison preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomOutfits:

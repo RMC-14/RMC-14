@@ -65,7 +65,7 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetPriest
   name: priest colonist preset
   categories: [ HideSpawnMenu ]

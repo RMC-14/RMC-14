@@ -30,22 +30,22 @@
     eyes: RMCHipsterGlasses
 
 - type: loadout
-  id: GlassesBiMexYellowRMC
+  id: GlassesTriMaxYellowRMC
   cost: 2
   equipment:
-    eyes: RMCGlassesBiMexYellow
+    eyes: RMCGlassesTriMaxYellowFake
 
 - type: loadout
-  id: GlassesBiMexBronzeRMC
+  id: GlassesTriMaxBronzeRMC
   cost: 2
   equipment:
-    eyes: RMCGlassesBiMexBronze
+    eyes: RMCGlassesTriMaxBronzeFake
 
 - type: loadout
-  id: GlassesBiMexBlackRMC
+  id: GlassesTriMaxBlackRMC
   cost: 2
   equipment:
-    eyes: RMCGlassesBiMexBlack
+    eyes: RMCGlassesTriMaxBlackFake
 
 - type: loadout
   id: GogglesRMC
@@ -129,7 +129,7 @@
   id: PersonalShadesRMC
   cost: 2
   equipment:
-    eyes: RMCSunglassesBig
+    eyes: RMCSunglassesBigFake
 
 - type: loadout
   id: SunglassesRMC

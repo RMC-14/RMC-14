@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Rules;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause, AutoGenerateComponentState]
 public sealed partial class CMDistressSignalRuleComponent : Component
 {
     [DataField]
@@ -201,4 +201,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public bool RequireXenoPlayers = true;
+
+    [DataField, AutoNetworkedField]
+    public bool QueenBoostRemoved;
 }

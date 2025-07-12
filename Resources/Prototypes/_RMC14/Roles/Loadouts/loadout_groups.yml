@@ -61,9 +61,9 @@
   - GogglesM1A1RMC
   - PersonalShadesRMC
   - SunglassesRMC # TODO prescription sunglasses
-  - GlassesBiMexYellowRMC
-  - GlassesBiMexBronzeRMC
-  - GlassesBiMexBlackRMC
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
   - GogglesRedRMC
   - GogglesBlueRMC
   - GogglesPurpleRMC
@@ -369,9 +369,12 @@
   - ScrubsGreyRMC
   - ServiceUniformRMC
   - ServiceUniformXORMC
+  - MarineUniformRMC
+  - CorpsmanUniformRMC
   - ComTechUniformRMC
   - EngineerUniformRMC
   - MPUniformRMC
+  - JumpsuitOperationsRMC
   - DCCJumpsuitRMC
   - TShirtWhiteRMC
   - TShirtGrayRMC
@@ -401,9 +404,9 @@
   - GogglesM1A1RMC
   - PersonalShadesRMC
   - SunglassesRMC # TODO prescription sunglasses
-  - GlassesBiMexYellowRMC
-  - GlassesBiMexBronzeRMC
-  - GlassesBiMexBlackRMC
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
   - GogglesRedRMC
   - GogglesBlueRMC
   - GogglesPurpleRMC
@@ -443,7 +446,13 @@
   - BeretEngineerRMC
   - CapMPRMC
   - CapQuartermasterRMC
+  - HeadCapCargoRMC
   - ArmorHelmetM10RMC
+  - HardHatRMC
+  - HardHatOrangeRMC
+  - HardHatWhiteRMC
+  - HardHatBlueRMC
+  - HeadCapOfficerRMC
 
 - type: loadoutGroup
   id: SynthSuitsRMC
@@ -464,6 +473,23 @@
   - CorporateBlackJacketRMC
   - CorporateBrownJacketRMC
   - CorporateBlueJacketRMC
+  - JacketWindbreakerRMC
+  
+- type: loadoutGroup
+  id: SynthUniformAccessoriesRMC
+  name: rmc-loadout-group-synthetic-accessories
+  minLimit: 0
+  maxLimit: 3
+  loadouts:
+  - ScienceArmbandRMC
+  - EngiArmbandRMC
+  - MedArmbandRMC
+  - TieRMC
+  - TieGreenRMC
+  - TieBlackRMC
+  - TieGoldRMC
+  - TieRedRMC
+  - TiePurpleRMC
 
 - type: loadoutGroup
   id: SynthBackpackRMC

@@ -55,7 +55,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         args.Handled = true;
 
-        _action.SetUseDelay(args.Action, TimeSpan.Zero);
+        _action.SetUseDelay((args.Action, args.Action), TimeSpan.Zero);
 
         // If none of the entities on the selected, in-range tile are parasites, try to pull out a
         // parasite OR try to throw a held parasite
@@ -94,11 +94,10 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             }
         }
 
-        if (_hands.GetActiveItem((xeno, null)) is EntityUid heldEntity &&
+        if (_hands.GetActiveItem((xeno, null)) is { } heldEntity &&
             HasComp<XenoParasiteComponent>(heldEntity))
         {
-
-            _hands.TryDrop(xeno);
+            _hands.TryDrop(xeno.Owner);
             var coords = _transform.GetMoverCoordinates(xeno);
             // If throw distance would be more than 4, fix it to be exactly 4
             if (coords.TryDistance(EntityManager, target, out var dis) && dis > xeno.Comp.ParasiteThrowDistance)
@@ -119,7 +118,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
                 _parasite.GoActive((heldEntity, ai));
             }
 
-            _action.SetUseDelay(args.Action, xeno.Comp.ThrownParasiteCooldown);
+            _action.SetUseDelay((args.Action, args.Action), xeno.Comp.ThrownParasiteCooldown);
 
             return;
         }
@@ -130,7 +129,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             return;
         }
 
-        if (!_hands.TryGetEmptyHand(xeno, out var _))
+        if (!_hands.TryGetEmptyHand(xeno.Owner, out _))
             return;
 
         if (HasComp<OnFireComponent>(xeno))
@@ -206,8 +205,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
     private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, float chance = 1.0f)
     {
-        XenoComponent? xenComp = null;
-        TryComp(xeno, out xenComp);
+        TryComp(xeno, out XenoComponent? _);
 
         if (chance != 1.0 && xeno.Comp.CurParasites > 0)
             _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-carrier-death", ("xeno", xeno)), xeno, PopupType.MediumCaution);
@@ -267,7 +265,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (overlayNumbers > parasiteNumber)
         {
             var visibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, true);
-            for (int i = 0; i < overlayNumbers - parasiteNumber; i++)
+            for (var i = 0; i < overlayNumbers - parasiteNumber; i++)
             {
                 var index = _random.PickAndTake(visibleIndexes);
                 xeno.Comp.VisiblePositions[index] = false;
@@ -276,7 +274,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         else
         {
             var invisibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, false);
-            for (int i = 0; i < parasiteNumber - overlayNumbers; i++)
+            for (var i = 0; i < parasiteNumber - overlayNumbers; i++)
             {
                 var index = _random.PickAndTake(invisibleIndexes);
                 xeno.Comp.VisiblePositions[index] = true;

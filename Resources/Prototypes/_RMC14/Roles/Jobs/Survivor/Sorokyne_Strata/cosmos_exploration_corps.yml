@@ -50,12 +50,10 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorCECResearcher
@@ -65,6 +63,7 @@
   parent: RMCSurvivorPresetScientist
   id: RMCGearSurvivorPresetCECResearcher
   name: cosmos exploration corps researcher preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomStartingGear:

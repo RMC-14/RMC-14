@@ -31,7 +31,7 @@
   useLoadoutOfJob: CMSurvivor
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorSoroCivilian
   equipment:
     head: RMCHeadCapSPPCivilianPlantWorker
@@ -44,21 +44,20 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: playTimeTracker
   id: CMJobSurvivorSoroCivilian
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetSoroCivilian
   name: sorokyne civilian preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomStartingGear:
