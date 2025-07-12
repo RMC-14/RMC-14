@@ -1551,3 +1551,14 @@
     state: lydia_sanitater
   - type: PatronFigurine
     id: 293b6e13-2d65-449c-a334-93e7b624bd86
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVinceDogPetrov
+  name: Vince 'Dog' Petrov figurine
+  description: "A figurine of a prime woofrine. Even though he's pocket sized, he still has that dog in him."
+  components:
+  - type: Sprite
+    state: vince_dog_petrov
+  - type: PatronFigurine
+    id: 1384bdbc-8f0a-4613-8ae1-097d8a9c21fb
