@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Damage;
+﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Strain;
@@ -24,6 +25,7 @@ public sealed class XenoAidSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
@@ -154,10 +156,9 @@ public sealed class XenoAidSystem : EntitySystem
 
     private void ActivateCooldown(EntityUid user)
     {
-        foreach (var (actionId, action) in _actions.GetActions(user))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoAidActionEvent>(user))
         {
-            if (action.BaseEvent is XenoAidActionEvent)
-                _actions.StartUseDelay(actionId);
+            _actions.StartUseDelay((action, action));
         }
     }
 }

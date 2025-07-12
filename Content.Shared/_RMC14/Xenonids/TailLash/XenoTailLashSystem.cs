@@ -1,7 +1,8 @@
+using System.Numerics;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
-using Content.Shared._RMC14.Xenonids.Abduct;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Sweep;
 using Content.Shared._RMC14.Xenonids.TailLash;
@@ -12,18 +13,15 @@ using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
-using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
-using System;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Tail_Lash;
 
 public sealed class XenoTailLashSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -34,12 +32,11 @@ public sealed class XenoTailLashSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly RMCPullingSystem _pulling = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly RMCPullingSystem _pulling = default!;
 
     public override void Initialize()
     {
@@ -147,10 +144,9 @@ public sealed class XenoTailLashSystem : EntitySystem
 
     private void DoCooldown(Entity<XenoTailLashComponent> xeno)
     {
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var (actionId, action) in _rmcActions.GetActionsWithEvent<XenoTailLashActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoTailLashActionEvent)
-                _actions.SetCooldown(actionId, xeno.Comp.Cooldown);
+            _actions.SetCooldown(actionId, xeno.Comp.Cooldown);
         }
     }
 }

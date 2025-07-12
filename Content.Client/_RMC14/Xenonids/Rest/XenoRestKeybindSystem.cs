@@ -1,9 +1,10 @@
 using Content.Client.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Rest;
-using Robust.Shared.Input.Binding;
 using Robust.Client.Player;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Rest;
@@ -12,6 +13,7 @@ public sealed class XenoRestKeybindSystem : EntitySystem
 {
     [Dependency] private readonly ActionsSystem _actionsSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -24,15 +26,16 @@ public sealed class XenoRestKeybindSystem : EntitySystem
                     var ent = _playerManager.LocalEntity;
                     if (ent == null || !ent.Value.IsValid() || !HasComp<XenoComponent>(ent.Value))
                         return;
-                    foreach (var (actionId, actionComp) in _actionsSystem.GetActions(ent.Value))
+
+                    foreach (var (actionId, actionComp) in _rmcActions.GetActionsWithEvent<XenoRestActionEvent>(ent.Value))
                     {
                         if (actionComp is not { Enabled: true } || actionComp.AttachedEntity != ent.Value)
                             continue;
+
                         if (actionComp.Cooldown.HasValue && actionComp.Cooldown.Value.End > _timing.CurTime)
                             continue;
-                        if (actionComp.BaseEvent is not XenoRestActionEvent)
-                            continue;
-                        _actionsSystem.TriggerAction(actionId, actionComp);
+
+                        _actionsSystem.TriggerAction((actionId, actionComp));
                         break;
                     }
                 },

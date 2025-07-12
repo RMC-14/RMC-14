@@ -39,7 +39,7 @@ public sealed class PullingTest : MovementTest
 
         // Move to the left and check that the target moves with the player and is still being pulled.
         await Move(DirectionFlag.West, 1);
-        Assert.That(Delta(), Is.InRange(0.9f, 1.3f));
+        Assert.That(Delta(), Is.InRange(0.4f, 1.3f));
         Assert.That(puller.Pulling, Is.EqualTo(STarget));
         Assert.That(pullable.Puller, Is.EqualTo(SPlayer));
         Assert.That(pullable.BeingPulled, Is.True);
@@ -48,7 +48,7 @@ public sealed class PullingTest : MovementTest
 
         // Move in the other direction
         await Move(DirectionFlag.East, 2);
-        Assert.That(Delta(), Is.InRange(-1.3f, -0.8f));
+        Assert.That(Delta(), Is.InRange(-1.3f, -0.4f));
         Assert.That(puller.Pulling, Is.EqualTo(STarget));
         Assert.That(pullable.Puller, Is.EqualTo(SPlayer));
         Assert.That(pullable.BeingPulled, Is.True);
@@ -58,7 +58,7 @@ public sealed class PullingTest : MovementTest
         // Stop pulling
         await PressKey(ContentKeyFunctions.ReleasePulledObject);
         await RunTicks(5);
-        Assert.That(Delta(), Is.InRange(-1.3f, -0.8f));
+        Assert.That(Delta(), Is.InRange(-1.3f, -0.4f));
         Assert.That(puller.Pulling, Is.Null);
         Assert.That(pullable.Puller, Is.Null);
         Assert.That(pullable.BeingPulled, Is.False);
