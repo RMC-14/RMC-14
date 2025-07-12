@@ -1,434 +1,437 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo edited by Sigma Draconis, freelancer icons provost team lead icon tse icons and pve icons by github noctynral. rmc_adjutant made by crazy1112345 (discord), based on staff_officer, hudsquad_nv_co modified by Dutch-VanDerLinde, hudsquad_spec_sniper taken from https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmil, marsoc sprites edited by github noctyrnal",
+  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo edited by Sigma Draconis, hudsquad_syn_forecon by Sigma Draconis, freelancer icons provost team lead icon tse icons and pve icons by github noctynral. rmc_adjutant made by crazy1112345 (discord), based on staff_officer, hudsquad_nv_co modified by Dutch-VanDerLinde, hudsquad_spec_sniper taken from https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmil, marsoc sprites edited by github noctyrnal",
   "size": {
     "x": 16,
     "y": 16
   },
-  "states": [
-    {
-      "name": "hudfocus"
-    },
-    {
-      "name": "hudhold"
-    },
-    {
-      "name": "hudmove"
-    },
-    {
-      "name": "hudsquad"
-    },
-    {
-      "name": "hudsquad_original"
-    },
-    {
-      "name": "hudmarinebordercommand"
-    },
-    {
-      "name": "hudsquad_rmp"
-    },
-    {
-      "name": "hudsquad_crmp"
-    },
-    {
-      "name": "hudsquad_cmp"
-    },
-    {
-      "name": "hudsquad_warden"
-    },
-    {
-      "name": "hudsquad_mp"
-    },
-    {
-      "name": "hudsquad_mortar"
-    },
-    {
-      "name": "hudsquad_load"
-    },
-    {
-      "name": "hudsquad_mpcadet"
-    },
-    {
-      "name": "hudsquad_general"
-    },
-    {
-      "name": "hudsquad_co"
-    },
-    {
-      "name": "hudsquad_nv_co"
-    },
-    {
-      "name": "hudsquad_xo"
-    },
-    {
-      "name": "auxiliary_support_officer"
-    },
-    {
-      "name": "hudsquad_syn"
-    },
-    {
-      "name": "staff_officer"
-    },
-    {
-      "name": "hudsquad_po"
-    },
-    {
-      "name": "hudsquad_dcc"
-    },
-    {
-      "name": "hudsquad_ce"
-    },
-    {
-      "name": "hudsquad_mt"
-    },
-    {
-      "name": "hudsquad_ot"
-    },
-    {
-      "name": "hudsquad_messtech"
-    },
-    {
-      "name": "hudsquad_cmo"
-    },
-    {
-      "name": "hudsquad_doctor"
-    },
-    {
-      "name": "hudsquad_researcher"
-    },
-    {
-      "name": "hudsquad_nurse"
-    },
-    {
-      "name": "hudsquad_ro"
-    },
-    {
-      "name": "hudsquad_ct"
-    },
-    {
-      "name": "senior_enlisted_advisor"
-    },
-    {
-      "name": "hudsquad_leader_a"
-    },
-    {
-      "name": "hudsquad_leader"
-    },
-    {
-      "name": "hudsquad_tl"
-    },
-    {
-      "name": "hudsquad_spec"
-    },
-    {
-      "name": "hudsquad_gun"
-    },
-    {
-      "name": "hudsquad_engi"
-    },
-    {
-      "name": "hudsquad_med"
-    },
-    {
-      "name": "hudsquad_tc"
-    },
-    {
-      "name": "hudsquad_ass"
-    },
-    {
-      "name": "hudsquad_FT1"
-    },
-    {
-      "name": "hudsquad_FT2"
-    },
-    {
-      "name": "hudsquad_FT3"
-    },
-    {
-      "name": "hudsquad_ftl"
-    },
-    {
-      "name": "hudsquad_hgsl"
-    },
-    {
-      "name": "hudsquad_vhg"
-    },
-    {
-      "name": "hudsquad_hg"
-    },
-    {
-      "name": "hudsquad_hgalt"
-    },
-    {
-      "name": "hudsquad_hgspec"
-    },
-    {
-      "name": "hudsquad_wo_co"
-    },
-    {
-      "name": "hudsquad_wo_xo"
-    },
-    {
-      "name": "hudsquad_wo_mcrew"
-    },
-    {
-      "name": "hudsquad_wo_ro"
-    },
-    {
-      "name": "hudsquad_wo_chemist"
-    },
-    {
-      "name": "hudsquad_wo_doctor"
-    },
-    {
-      "name": "hudsquad_wo_cmo"
-    },
-    {
-      "name": "hudsquad_pve"
-    },
-    {
-      "name": "hudsquad_pva"
-    },
-    {
-      "name": "hudsquad_pvi"
-    },
-    {
-      "name": "hudsquad_pvi2"
-    },
-    {
-      "name": "hudsquad_pvtml"
-    },
-    {
-      "name": "hudsquad_pvm"
-    },
-    {
-      "name": "hudsquad_tisio"
-    },
-    {
-      "name": "hudsquad_tissa"
-    },
-    {
-      "name": "hudsquad_io"
-    },
-    {
-      "name": "hudsquad_soccmd"
-    },
-    {
-      "name": "hudsquad_soctl_a"
-    },
-    {
-      "name": "hudsquad_soctl"
-    },
-    {
-      "name": "hudsquad_soc"
-    },
-    {
-      "name": "hudCLF"
-    },
-    {
-      "name": "hudUPP"
-    },
-    {
-      "name": "hudWE-YA"
-    },
-    {
-      "name": "hudRESS"
-    },
-    {
-      "name": "hudmutineer"
-    },
-    {
-        "name": "rmc_adjutant"
-    },
-    {
-      "name": "pmc_sd"
-    },
-    {
-      "name": "pmc_ld"
-    },
-    {
-      "name": "pmc_td"
-    },
-    {
-      "name": "pmc_syn"
-    },
-    {
-      "name": "pmc_ct"
-    },
-    {
-      "name": "pmc_md"
-    },
-    {
-      "name": "pmc_gun"
-    },
-    {
-      "name": "pmc_sg"
-    },
-    {
-      "name": "pmc_spec"
-    },
-    {
-      "name": "upp_med"
-    },
-    {
-      "name": "upp_sapper"
-    },
-    {
-      "name": "upp_spec"
-    },
-    {
-      "name": "upp_sl"
-    },
-    {
-      "name": "upp_sl_a"
-    },
-    {
-      "name": "upp_mp"
-    },
-    {
-      "name": "upp_lt"
-    },
-    {
-      "name": "upp_slt"
-    },
-    {
-      "name": "upp_xo"
-    },
-    {
-      "name": "upp_co"
-    },
-    {
-      "name": "upp_synth"
-    },
-    {
-      "name": "upp_com"
-    },
-    {
-      "name": "upp_commed"
-    },
-    {
-      "name": "upp_comsl"
-    },
-    {
-      "name": "upp_vc"
-    },
-    {
-      "name": "upp_doc"
-    },
-    {
-      "name": "upp_pvt"
-    },
-    {
-      "name": "clf_engi"
-    },
-    {
-      "name": "clf_med"
-    },
-    {
-      "name": "clf_spec"
-    },
-    {
-      "name": "clf_sl"
-    },
-    {
-      "name": "clf_sl_a"
-    },
-    {
-      "name": "clf_synth"
-    },
-    {
-      "name": "clf_cellcom"
-    },
-    {
-      "name": "clf_mil"
-    },
-    {
-      "name": "cmb_mar"
-    },
-    {
-      "name": "cmb_dep"
-    },
-    {
-      "name": "cmb_syn"
-    },
-    {
-      "name": "empty"
-    },
-    {
-      "name": "cmb_icc"
-    },
-    {
-      "name": "cmb_obs"
-    },
-    {
-      "name": "rmc_breacher"
-    },
-    {
-      "name": "rmc_marksman"
-    },
-    {
-      "name": "rmc_rifleman"
-    },
-    {
-      "name": "rmc_smart_gun_operator"
-    },
-    {
-      "name": "rmc_teamleader"
-    },
-    {
-      "name": "rmc_lieutenant"
-    },
-    {
-      "name": "rmc_commander"
-    },
-    {
-      "name": "hudsquad_vo"
-    },
-    {
-      "name": "free_rfn"
-    },
-    {
-      "name": "free_med"
-    },
-    {
-      "name": "free_sl"
-    },
-    {
-      "name": "hudsquad_pvl"
-    },
-    {
-      "name": "tse_paconstable"
-    },
-    {
-      "name": "tse_paseniorconstable"
-    },
-    {
-      "name": "tse_painspector"
-    },
-    {
-      "name": "tse_pasynth"
-    },
-    {
-      "name": "pve_dynaengi"
-    },
-    {
-      "name": "pve_novameddoc"
-    },
-    {
-      "name": "hudsquad_spec_demo"
-    },
-    {
-      "name": "hudsquad_spec_grenadier"
-    },
-    {
-      "name": "hudsquad_spec_sniper"
-    },
-    {
-      "name": "hudsquad_spec_anti_materiel_sniper"
-    },
-    {
-      "name": "hudsquad_rifleman"
-    }
-  ]
+    "states": [
+        {
+            "name": "hudfocus"
+        },
+        {
+            "name": "hudhold"
+        },
+        {
+            "name": "hudmove"
+        },
+        {
+            "name": "hudsquad"
+        },
+        {
+            "name": "hudsquad_original"
+        },
+        {
+            "name": "hudmarinebordercommand"
+        },
+        {
+            "name": "hudsquad_rmp"
+        },
+        {
+            "name": "hudsquad_crmp"
+        },
+        {
+            "name": "hudsquad_cmp"
+        },
+        {
+            "name": "hudsquad_warden"
+        },
+        {
+            "name": "hudsquad_mp"
+        },
+        {
+            "name": "hudsquad_mortar"
+        },
+        {
+            "name": "hudsquad_load"
+        },
+        {
+            "name": "hudsquad_mpcadet"
+        },
+        {
+            "name": "hudsquad_general"
+        },
+        {
+            "name": "hudsquad_co"
+        },
+        {
+            "name": "hudsquad_nv_co"
+        },
+        {
+            "name": "hudsquad_xo"
+        },
+        {
+            "name": "auxiliary_support_officer"
+        },
+        {
+            "name": "hudsquad_syn"
+        },
+        {
+            "name": "staff_officer"
+        },
+        {
+            "name": "hudsquad_po"
+        },
+        {
+            "name": "hudsquad_dcc"
+        },
+        {
+            "name": "hudsquad_ce"
+        },
+        {
+            "name": "hudsquad_mt"
+        },
+        {
+            "name": "hudsquad_ot"
+        },
+        {
+            "name": "hudsquad_messtech"
+        },
+        {
+            "name": "hudsquad_cmo"
+        },
+        {
+            "name": "hudsquad_doctor"
+        },
+        {
+            "name": "hudsquad_researcher"
+        },
+        {
+            "name": "hudsquad_nurse"
+        },
+        {
+            "name": "hudsquad_ro"
+        },
+        {
+            "name": "hudsquad_ct"
+        },
+        {
+            "name": "senior_enlisted_advisor"
+        },
+        {
+            "name": "hudsquad_leader_a"
+        },
+        {
+            "name": "hudsquad_leader"
+        },
+        {
+            "name": "hudsquad_tl"
+        },
+        {
+            "name": "hudsquad_spec"
+        },
+        {
+            "name": "hudsquad_gun"
+        },
+        {
+            "name": "hudsquad_engi"
+        },
+        {
+            "name": "hudsquad_med"
+        },
+        {
+            "name": "hudsquad_tc"
+        },
+        {
+            "name": "hudsquad_ass"
+        },
+        {
+            "name": "hudsquad_FT1"
+        },
+        {
+            "name": "hudsquad_FT2"
+        },
+        {
+            "name": "hudsquad_FT3"
+        },
+        {
+            "name": "hudsquad_ftl"
+        },
+        {
+            "name": "hudsquad_hgsl"
+        },
+        {
+            "name": "hudsquad_vhg"
+        },
+        {
+            "name": "hudsquad_hg"
+        },
+        {
+            "name": "hudsquad_hgalt"
+        },
+        {
+            "name": "hudsquad_hgspec"
+        },
+        {
+            "name": "hudsquad_wo_co"
+        },
+        {
+            "name": "hudsquad_wo_xo"
+        },
+        {
+            "name": "hudsquad_wo_mcrew"
+        },
+        {
+            "name": "hudsquad_wo_ro"
+        },
+        {
+            "name": "hudsquad_wo_chemist"
+        },
+        {
+            "name": "hudsquad_wo_doctor"
+        },
+        {
+            "name": "hudsquad_wo_cmo"
+        },
+        {
+            "name": "hudsquad_pve"
+        },
+        {
+            "name": "hudsquad_pva"
+        },
+        {
+            "name": "hudsquad_pvi"
+        },
+        {
+            "name": "hudsquad_pvi2"
+        },
+        {
+            "name": "hudsquad_pvtml"
+        },
+        {
+            "name": "hudsquad_pvm"
+        },
+        {
+            "name": "hudsquad_tisio"
+        },
+        {
+            "name": "hudsquad_tissa"
+        },
+        {
+            "name": "hudsquad_io"
+        },
+        {
+            "name": "hudsquad_soccmd"
+        },
+        {
+            "name": "hudsquad_soctl_a"
+        },
+        {
+            "name": "hudsquad_soctl"
+        },
+        {
+            "name": "hudsquad_soc"
+        },
+        {
+            "name": "hudCLF"
+        },
+        {
+            "name": "hudUPP"
+        },
+        {
+            "name": "hudWE-YA"
+        },
+        {
+            "name": "hudRESS"
+        },
+        {
+            "name": "hudmutineer"
+        },
+        {
+            "name": "rmc_adjutant"
+        },
+        {
+            "name": "pmc_sd"
+        },
+        {
+            "name": "pmc_ld"
+        },
+        {
+            "name": "pmc_td"
+        },
+        {
+            "name": "pmc_syn"
+        },
+        {
+            "name": "pmc_ct"
+        },
+        {
+            "name": "pmc_md"
+        },
+        {
+            "name": "pmc_gun"
+        },
+        {
+            "name": "pmc_sg"
+        },
+        {
+            "name": "pmc_spec"
+        },
+        {
+            "name": "upp_med"
+        },
+        {
+            "name": "upp_sapper"
+        },
+        {
+            "name": "upp_spec"
+        },
+        {
+            "name": "upp_sl"
+        },
+        {
+            "name": "upp_sl_a"
+        },
+        {
+            "name": "upp_mp"
+        },
+        {
+            "name": "upp_lt"
+        },
+        {
+            "name": "upp_slt"
+        },
+        {
+            "name": "upp_xo"
+        },
+        {
+            "name": "upp_co"
+        },
+        {
+            "name": "upp_synth"
+        },
+        {
+            "name": "upp_com"
+        },
+        {
+            "name": "upp_commed"
+        },
+        {
+            "name": "upp_comsl"
+        },
+        {
+            "name": "upp_vc"
+        },
+        {
+            "name": "upp_doc"
+        },
+        {
+            "name": "upp_pvt"
+        },
+        {
+            "name": "clf_engi"
+        },
+        {
+            "name": "clf_med"
+        },
+        {
+            "name": "clf_spec"
+        },
+        {
+            "name": "clf_sl"
+        },
+        {
+            "name": "clf_sl_a"
+        },
+        {
+            "name": "clf_synth"
+        },
+        {
+            "name": "clf_cellcom"
+        },
+        {
+            "name": "clf_mil"
+        },
+        {
+            "name": "cmb_mar"
+        },
+        {
+            "name": "cmb_dep"
+        },
+        {
+            "name": "cmb_syn"
+        },
+        {
+            "name": "empty"
+        },
+        {
+            "name": "cmb_icc"
+        },
+        {
+            "name": "cmb_obs"
+        },
+        {
+            "name": "rmc_breacher"
+        },
+        {
+            "name": "rmc_marksman"
+        },
+        {
+            "name": "rmc_rifleman"
+        },
+        {
+            "name": "rmc_smart_gun_operator"
+        },
+        {
+            "name": "rmc_teamleader"
+        },
+        {
+            "name": "rmc_lieutenant"
+        },
+        {
+            "name": "rmc_commander"
+        },
+        {
+            "name": "hudsquad_vo"
+        },
+        {
+            "name": "free_rfn"
+        },
+        {
+            "name": "free_med"
+        },
+        {
+            "name": "free_sl"
+        },
+        {
+            "name": "hudsquad_pvl"
+        },
+        {
+            "name": "tse_paconstable"
+        },
+        {
+            "name": "tse_paseniorconstable"
+        },
+        {
+            "name": "tse_painspector"
+        },
+        {
+            "name": "tse_pasynth"
+        },
+        {
+            "name": "pve_dynaengi"
+        },
+        {
+            "name": "pve_novameddoc"
+        },
+        {
+            "name": "hudsquad_spec_demo"
+        },
+        {
+            "name": "hudsquad_spec_grenadier"
+        },
+        {
+            "name": "hudsquad_spec_sniper"
+        },
+        {
+            "name": "hudsquad_spec_anti_materiel_sniper"
+        },
+        {
+            "name": "hudsquad_rifleman"
+        },
+        {
+            "name": "hudsquad_syn_forecon"
+        }
+    ]
 }

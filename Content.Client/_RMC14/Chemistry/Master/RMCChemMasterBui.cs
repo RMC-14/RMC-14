@@ -2,6 +2,7 @@
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Chemistry.Containers.EntitySystems;
 using Content.Shared._RMC14.Chemistry.ChemMaster;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Extensions;
 using Content.Shared._RMC14.IconLabel;
 using Content.Shared._RMC14.UserInterface;
@@ -415,7 +416,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
     private void UpdateReagentRow(RMCChemMasterReagentRow row, ReagentQuantity reagent, Action<FixedPoint2> onTransfer)
     {
         var name = reagent.Reagent.Prototype;
-        if (_prototype.TryIndex(name, out ReagentPrototype? reagentProto))
+        if (_prototype.TryIndexReagent(name, out ReagentPrototype? reagentProto))
             name = reagentProto.LocalizedName;
 
         row.ReagentLabel.Text = Loc.GetString("rmc-chem-master-reagent-amount", ("name", name), ("amount", reagent.Quantity));

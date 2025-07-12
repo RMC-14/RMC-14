@@ -331,7 +331,7 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi
-      
+
 - type: entity
   parent: RMCBaseJacket
   id: RMCCoatASOBlack
@@ -690,3 +690,16 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
+
+# Snow
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatSnow
+  name: snow suit
+  description: A standard snow suit. It can protect the wearer from extreme cold.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi

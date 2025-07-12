@@ -1,0 +1,28 @@
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCUtilityBase
+  name: utility accessory
+  description: An abstract utility accessory.
+  components:
+  - type: UniformAccessory
+    category: Utility
+    limit: 1
+    hiddenByJacketRolling: false
+
+- type: entity
+  parent: RMCUtilityBase
+  id: RMCStethoscope
+  name: stethoscope
+  description: An outdated, but still useful, medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/stethoscope.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medical/stethoscope.rsi
+      state: utility
+  - type: RMCStethoscope

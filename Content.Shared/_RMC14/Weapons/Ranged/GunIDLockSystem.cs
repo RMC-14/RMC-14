@@ -1,27 +1,22 @@
-using Robust.Shared.GameStates;
-using Robust.Shared.Audio.Systems;
-using Content.Shared.Hands;
-using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
+using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared.Actions;
+using Content.Shared.Atmos.Rotting;
+using Content.Shared.Examine;
+using Content.Shared.Hands;
+using Content.Shared.Interaction.Components;
+using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Examine;
-using Content.Shared.Popups;
-using Content.Shared.Interaction.Components;
-using Content.Shared._RMC14.Medical.Defibrillator;
-using Content.Shared.Atmos.Rotting;
-
-
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
-
 
 public sealed class GunIDLockSystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<GunIDLockComponent, GotEquippedHandEvent>(OnHold);
@@ -35,27 +30,24 @@ public sealed class GunIDLockSystem : EntitySystem
     private void OnHold(Entity<GunIDLockComponent> ent, ref GotEquippedHandEvent args)
     {
         CheckUserRevivability(ent);
+
         if (ent.Comp.User == EntityUid.Invalid)
-        {
             RegisterNewUser(ent, args.User);
-        }
     }
+
     private void OnGetActions(Entity<GunIDLockComponent> ent, ref GetItemActionsEvent args)
     {
         if (!args.InHands)
             return;
+
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionID);
-        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-        {
-            Dirty(ent.Comp.Action.Value, action);
-            _actions.UpdateAction(ent.Comp.Action, action);
-        }
-        Dirty(ent);
     }
+
     private void OnGunIDLockToggle(Entity<GunIDLockComponent> ent, ref ToggleActionEvent args)
     {
         if (args.Action != ent.Comp.Action)
             return;
+
         if (args.Performer != ent.Comp.User)
         {
             var popup = Loc.GetString("rmc-id-lock-unauthorized");
@@ -69,14 +61,7 @@ public sealed class GunIDLockSystem : EntitySystem
             var popup = Loc.GetString("rmc-id-lock-toggle-lock", ("action", Loc.GetString("rmc-id-lock-toggle-off")), ("gun", ent.Owner));
             _popup.PopupClient(popup, args.Performer, args.Performer, PopupType.Small);
             _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.Performer);
-            if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-            {
-                action.Icon = ent.Comp.UnlockedIcon;
-                Dirty(ent.Comp.Action.Value, action);
-                _actions.UpdateAction(ent.Comp.Action, action);
-            }
-            Dirty(ent);
-            return;
+            _actions.SetIcon(ent.Comp.Action.Value, ent.Comp.UnlockedIcon);
         }
         else
         {
@@ -84,15 +69,10 @@ public sealed class GunIDLockSystem : EntitySystem
             var popup = Loc.GetString("rmc-id-lock-toggle-lock", ("action", Loc.GetString("rmc-id-lock-toggle-on")), ("gun", ent.Owner));
             _popup.PopupClient(popup, args.Performer, args.Performer, PopupType.Small);
             _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.Performer);
-            if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-            {
-                action.Icon = ent.Comp.LockedIcon;
-                Dirty(ent.Comp.Action.Value, action);
-                _actions.UpdateAction(ent.Comp.Action, action);
-            }
-            Dirty(ent);
-            return;
+            _actions.SetIcon(ent.Comp.Action.Value, ent.Comp.LockedIcon);
         }
+
+        Dirty(ent);
     }
 
     private void OnShootAttempt(Entity<GunIDLockComponent> ent, ref AttemptShootEvent args)
@@ -120,59 +100,51 @@ public sealed class GunIDLockSystem : EntitySystem
         var popup = Loc.GetString("rmc-shoot-id-lock-unauthorized");
         _popup.PopupClient(popup, args.User, args.User, PopupType.SmallCaution);
     }
+
     private void OnExamine(Entity<GunIDLockComponent> ent, ref ExaminedEvent args)
     {
         CheckUserRevivability(ent);
-        if (ent.Comp.User == EntityUid.Invalid)
+
+        using (args.PushGroup(nameof(GunIDLockComponent)))
         {
-            using (args.PushGroup(nameof(GunIDLockComponent)))
+            if (ent.Comp.User == EntityUid.Invalid)
             {
                 args.PushMarkup(Loc.GetString("rmc-examine-text-id-lock-no-user"));
+                return;
             }
-            return;
-        }
 
-        if (ent.Comp.User == args.Examiner)
-        {
-            if (ent.Comp.Locked)
+            if (ent.Comp.User == args.Examiner)
             {
-                using (args.PushGroup(nameof(GunIDLockComponent)))
+                if (ent.Comp.Locked)
                 {
                     args.PushMarkup(Loc.GetString("rmc-examine-text-id-lock", ("color", Loc.GetString("rmc-id-lock-color-authorized")), ("name", ent.Comp.User)));
                 }
-            }
-            else
-            {
-                using (args.PushGroup(nameof(GunIDLockComponent)))
+                else
                 {
                     args.PushMarkup(Loc.GetString("rmc-examine-text-id-lock-unlocked", ("color", Loc.GetString("rmc-id-lock-color-authorized")), ("name", ent.Comp.User)));
                 }
             }
-        }
-        else
-        {
-            if (ent.Comp.Locked)
+            else
             {
-                using (args.PushGroup(nameof(GunIDLockComponent)))
+                if (ent.Comp.Locked)
                 {
                     args.PushMarkup(Loc.GetString("rmc-examine-text-id-lock", ("color", Loc.GetString("rmc-id-lock-color-unauthorized")), ("name", ent.Comp.User)));
                 }
-            }
-            else
-            {
-                using (args.PushGroup(nameof(GunIDLockComponent)))
+                else
                 {
                     args.PushMarkup(Loc.GetString("rmc-examine-text-id-lock-unlocked", ("color", Loc.GetString("rmc-id-lock-color-unauthorized")), ("name", ent.Comp.User)));
                 }
             }
         }
     }
+
     private void RegisterNewUser(Entity<GunIDLockComponent> ent, EntityUid user)
     {
         ent.Comp.User = user;
         var popup = Loc.GetString("rmc-id-lock-authorization", ("gun", ent.Owner));
         _popup.PopupClient(popup, user, PopupType.Medium);
     }
+
     private void RegisterNewUserCombat(Entity<GunIDLockComponent> ent, EntityUid user)
     {
         ent.Comp.User = user;

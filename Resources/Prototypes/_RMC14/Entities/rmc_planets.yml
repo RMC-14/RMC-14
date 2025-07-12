@@ -85,6 +85,8 @@
       - CMSurvivorCargoTechnician: 2
       CMSurvivorSecurity:
       - CMSurvivorUNPeacekeeper: 2
+      CMSurvivorScientist:
+      - RMCSurvivorNewVaraderoResearcher: 2
 
 - type: entity
   id: RMCPlanetKutjevo

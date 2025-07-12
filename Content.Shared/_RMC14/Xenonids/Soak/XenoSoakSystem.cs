@@ -1,9 +1,9 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Aura;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared.Actions;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
@@ -14,14 +14,16 @@ namespace Content.Shared._RMC14.Xenonids.Soak;
 
 public sealed class XenoSoakSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private readonly SharedAuraSystem _aura = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcdamage = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedAuraSystem _aura = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoSoakComponent, XenoSoakActionEvent>(OnXenoSoakAction);
@@ -58,13 +60,12 @@ public sealed class XenoSoakSystem : EntitySystem
         if (xeno.Comp.DamageAccumulated < xeno.Comp.DamageGoal)
             return;
 
-        var amount = -_rmcdamage.DistributeTypesTotal(xeno.Owner, xeno.Comp.Heal);
+        var amount = -_rmcDamageable.DistributeTypesTotal(xeno.Owner, xeno.Comp.Heal);
         _damage.TryChangeDamage(xeno, amount, origin: xeno, tool: xeno);
 
-        foreach (var (actionId, action) in _action.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoTailStabEvent>(xeno))
         {
-            if (action.BaseEvent is XenoTailStabEvent)
-                _action.ClearCooldown(actionId);
+            _action.ClearCooldown(action.AsNullable());
         }
 
         RemCompDeferred<XenoSoakingDamageComponent>(xeno);

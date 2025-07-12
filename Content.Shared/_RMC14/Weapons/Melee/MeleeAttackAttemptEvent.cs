@@ -14,4 +14,4 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 /// <param name="Weapon">The entity used to do the attack</param>
 [ByRefEvent]
 [Serializable, NetSerializable]
-public record struct MeleeAttackAttemptEvent(NetEntity Target, AttackEvent Attack, NetCoordinates Coordinates, List<NetEntity> PotentialTargets, NetEntity? Weapon = null);
+public record struct MeleeAttackAttemptEvent(NetEntity Target, AttackEvent Attack, NetCoordinates Coordinates, List<NetEntity> PotentialTargets, NetEntity Weapon);

@@ -1,4 +1,17 @@
 - type: entity
+  id: XenoConstructionGhost
+  name: construction ghost
+  description: A preview of what will be built.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    drawdepth: Overlays
+    color: "#30FF3080"
+    noRot: true
+
+- type: entity
   id: RMCBaseEffectXenoStructure
   categories: [ HideSpawnMenu ]
   components:
@@ -144,3 +157,23 @@
     layers:
       - state: surge-door
         shader: unshaded
+
+- type: entity
+  parent: WallXenoResinThick
+  id: WallXenoResinQueen
+  name: queen resin wall
+  description: A heavily reinforced wall of resin, built with the queen's enhanced abilities.
+  components:
+  - type: Sprite
+
+- type: entity
+  parent: WallXenoMembraneThick
+  id: WallXenoMembraneQueen
+  name: queen membrane wall
+  description: A heavily reinforced membrane wall, built with the queen's enhanced abilities.
+
+- type: entity
+  parent: DoorXenoResinThick
+  id: DoorXenoResinQueen
+  name: queen resin door
+  description: A heavily reinforced resin door, built with the queen's enhanced abilities.
