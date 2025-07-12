@@ -11,6 +11,7 @@ using Content.Client.UserInterface.Systems.Actions.Controls;
 using Content.Client.UserInterface.Systems.Actions.Widgets;
 using Content.Client.UserInterface.Systems.Actions.Windows;
 using Content.Client.UserInterface.Systems.Gameplay;
+using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
@@ -191,6 +192,10 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
         // stop targeting when needed
         if (ev.FoundTarget ? !target.Repeat : target.DeselectOnMiss)
             StopTargeting();
+
+        // RMC14
+        if (!ev.FoundTarget)
+            EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(EntityManager.GetNetEntity(actionId))); // RMC14
 
         return true;
     }

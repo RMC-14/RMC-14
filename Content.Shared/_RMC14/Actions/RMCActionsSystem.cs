@@ -2,6 +2,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Interaction;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Actions;
 
@@ -23,6 +24,8 @@ public sealed class RMCActionsSystem : EntitySystem
         SubscribeLocalEvent<ActionInRangeUnobstructedComponent, RMCActionUseAttemptEvent>(OnInRangeUnobstructedUseAttempt);
 
         SubscribeLocalEvent<ActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
+
+        SubscribeAllEvent<RMCMissedTargetActionEvent>(OnMissedTargetAction);
     }
 
     private void OnSharedCooldownPerformed(Entity<ActionSharedCooldownComponent> ent, ref ActionPerformedEvent args)
@@ -143,6 +146,16 @@ public sealed class RMCActionsSystem : EntitySystem
         _actions.SetIfBiggerCooldown(ent.Owner, ent.Comp.Cooldown);
     }
 
+    private void OnMissedTargetAction(RMCMissedTargetActionEvent args)
+    {
+        var action = GetEntity(args.Action);
+
+        if (!TryComp(action, out RMCCooldownOnMissComponent? cooldown))
+            return;
+
+        _actions.SetIfBiggerCooldown(action, cooldown.MissCooldown);
+    }
+
     private void OnInRangeUnobstructedUseAttempt(Entity<ActionInRangeUnobstructedComponent> ent, ref RMCActionUseAttemptEvent args)
     {
         if (args.Cancelled)
@@ -212,5 +225,15 @@ public sealed class RMCActionsSystem : EntitySystem
             if (_actions.GetEvent(action) is T)
                 yield return action;
         }
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCMissedTargetActionEvent : EntityEventArgs
+{
+    public readonly NetEntity Action;
+    public RMCMissedTargetActionEvent(NetEntity actionId)
+    {
+        Action = actionId;
     }
 }

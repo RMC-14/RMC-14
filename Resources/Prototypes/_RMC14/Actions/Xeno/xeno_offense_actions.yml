@@ -645,6 +645,7 @@
     event: !type:XenoLungeActionEvent
   - type: XenoOffensiveAction
   - type: RMCDazeableAction
+  - type: RMCCooldownOnMiss
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -926,6 +927,7 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 80
+  - type: RMCCooldownOnMiss
 
 - type: entity
   parent: ActionXenoBase
@@ -948,6 +950,7 @@
   - type: XenoActionPlasma
     cost: 30
   - type: ActionBlockIfResting
+  - type: RMCCooldownOnMiss
 
 - type: entity
   parent: ActionXenoBase
