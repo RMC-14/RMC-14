@@ -178,6 +178,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private int _hijackMinBurrowed;
     private int _xenosMinimum;
     private bool _usingCustomOperationName;
+    private bool _queenBuildingBoostEnabled;
+    private TimeSpan _queenBoostDuration;
+    private float _queenBoostSpeedMultiplier;
+    private float _queenBoostRemoteRange;
+
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -224,6 +229,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<XenoComponent, ComponentRemove>(OnCompRemove);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<XenoComponent, ComponentInit>(OnXenoComponentInit);
+        SubscribeLocalEvent<HiveMemberComponent, HiveChangedEvent>(OnHiveChanged);
 
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalance, v => _autoBalance = v, true);
@@ -243,10 +250,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCHijackShipWeight, v => _hijackShipWeight = v, true);
         Subs.CVar(_config, RMCCVars.RMCMinimumHijackBurrowed, v => _hijackMinBurrowed = v, true);
         Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
+        Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoost, v => _queenBuildingBoostEnabled = v, true);
+        Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostDurationMinutes, v => _queenBoostDuration = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostSpeedMultiplier, v => _queenBoostSpeedMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostRemoteRange, v => _queenBoostRemoteRange = v, true);
 
         ReloadPrototypes();
     }
-
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
     {
         if (ev.WasModified<EntityPrototype>())
@@ -1620,6 +1630,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         _scaling.TryStartScaling(component.MarineFaction);
 
         var announcementTime = time - component.StartTime;
+
+        if (_queenBuildingBoostEnabled &&
+            time - component.StartTime >= _queenBoostDuration &&
+            !component.QueenBoostRemoved)
+            {
+                component.QueenBoostRemoved = true;
+                RemoveQueenBuildingBoosts();
+            }
+
         if (!component.AresGreetingDone && announcementTime >= component.AresGreetingDelay)
         {
             component.AresGreetingDone = true;
@@ -1931,6 +1950,81 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             power.Load = 5;
             power.NeedsPower = true;
+        }
+    }
+
+    private void OnHiveChanged(Entity<HiveMemberComponent> ent, ref HiveChangedEvent args)
+    {
+        if (!_queenBuildingBoostEnabled)
+            return;
+
+        if (!HasComp<XenoEvolutionGranterComponent>(ent))
+            return;
+
+        if (args.Hive == null)
+            return;
+
+        var query = QueryActiveRules();
+        while (query.MoveNext(out var uid, out _, out var comp, out var gameRule))
+        {
+            if (!GameTicker.IsGameRuleAdded(uid, gameRule))
+                continue;
+
+            if (comp.QueenBoostRemoved)
+                return;
+
+            var withinBoostPeriod = comp.StartTime == null ||
+                                (Timing.CurTime - comp.StartTime < _queenBoostDuration);
+
+            if (withinBoostPeriod)
+            {
+                GiveQueenBoost(ent);
+            }
+            break;
+        }
+    }
+
+    private void GiveQueenBoost(EntityUid queen)
+    {
+        var xenoConstruction = EntityManager.System<SharedXenoConstructionSystem>();
+        xenoConstruction.GiveQueenBoost(queen, _queenBoostSpeedMultiplier, _queenBoostRemoteRange);
+
+        _adminLog.Add(LogType.RMCXenoSpawn, $"Queen {ToPrettyString(queen):queen} received building boost");
+    }
+
+    private void OnXenoComponentInit(Entity<XenoComponent> ent, ref ComponentInit args)
+    {
+        if (!_queenBuildingBoostEnabled)
+            return;
+
+        var query = QueryActiveRules();
+        while (query.MoveNext(out var uid, out _, out var comp, out var gameRule))
+        {
+            if (!GameTicker.IsGameRuleAdded(uid, gameRule))
+                continue;
+
+            if (!TryComp<MetaDataComponent>(ent.Owner, out var metaData) ||
+                metaData.EntityPrototype?.ID != comp.QueenEnt.Id)
+                continue;
+
+            var withinBoostPeriod = comp.StartTime == null ||
+                                (Timing.CurTime - comp.StartTime < _queenBoostDuration);
+
+            if (withinBoostPeriod)
+            {
+                GiveQueenBoost(ent.Owner);
+            }
+            break;
+        }
+    }
+
+    private void RemoveQueenBuildingBoosts()
+    {
+        var xenoConstruction = EntityManager.System<SharedXenoConstructionSystem>();
+        var queens = EntityQueryEnumerator<QueenBuildingBoostComponent, XenoEvolutionGranterComponent>();
+        while (queens.MoveNext(out var queen, out var boost, out _))
+        {
+            xenoConstruction.RemoveQueenBoost(queen);
         }
     }
 

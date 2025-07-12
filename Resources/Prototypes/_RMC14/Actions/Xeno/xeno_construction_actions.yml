@@ -111,14 +111,8 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: morph_resin
-  - type: TargetAction
-    deselectOnMiss: false
-    range: 20
-  - type: WorldTargetAction
+  - type: InstantAction
     event: !type:XenoOrderConstructionActionEvent
-  - type: XenoConstructionAction
-    checkStructureSelected: false
-    checkWeeds: false
   - type: RMCDazeableAction
 
 - type: entity
