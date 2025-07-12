@@ -1,5 +1,6 @@
 - type: alert
   id: HiveTracker
+  category: Tracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
     state: trackoff
@@ -87,6 +88,7 @@
 
 - type: alert
   id: MarineTacMapAlert
+  category: Tacmap
   icons:
   - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
     state: maptable
@@ -96,6 +98,7 @@
 
 - type: alert
   id: XenoTacMapAlert
+  category: Tacmap
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_map.rsi
     state: open_xeno_map
@@ -127,6 +130,8 @@
   category: AreaInfo
   icons:
   - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
+    state: roofnull
+  - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
     state: roof0
   - sprite: /Textures/_RMC14/Structures/Machines/ceiling.rsi
     state: roof1
@@ -143,7 +148,7 @@
   name: Area Info
   description: Information of the area you are in.
   minSeverity: 0
-  maxSeverity: 6
+  maxSeverity: 7
   
 - type: alert
   id: RMCUnconscious

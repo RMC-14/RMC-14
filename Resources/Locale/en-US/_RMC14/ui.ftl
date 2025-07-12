@@ -100,5 +100,6 @@ rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] CAS
 rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] OB
 rmc-tacmap-alert-allowed-actions = [color=green]✓[/color] {$actions}
 rmc-tacmap-alert-restricted-actions = [color=red]✗[/color] {$actions}
+rmc-tacmap-alert-no-area = Unknown area
 
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
