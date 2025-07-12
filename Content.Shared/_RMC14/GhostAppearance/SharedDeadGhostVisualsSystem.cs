@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.GhostAppearance;
 public abstract class SharedDeadGhostVisualsSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SerializationManager _serMan = default!;
+    [Dependency] private readonly ISerializationManager _serMan = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
 
     public override void Initialize()
@@ -24,13 +24,12 @@ public abstract class SharedDeadGhostVisualsSystem : EntitySystem
 
     private void OnPlayerAttached(Entity<RMCGhostAppearanceComponent> ent, ref PlayerAttachedEvent args)
     {
-        if (!TryComp<ActorComponent>(ent.Owner, out var actor))
+        var session = args.Player;
+
+        if (!_netConfigManager.GetClientCVar(session.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
             return;
 
-        if (!_netConfigManager.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
-            return;
-
-        if (args.Player.GetMind() is not { } mindId)
+        if (session.GetMind() is not { } mindId)
             return;
 
         if (!TryComp<MindComponent>(mindId, out var mind))
