@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Djvarik
-  changes:
-  - message: Car hitbox rotation in Hybrisa
-    type: Fix
-  id: 1488
-  time: '2025-03-28T04:26:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5976
 - author: Vermidia
   changes:
   - message: Fixed bipod not breaking on drop.
@@ -5017,5 +5010,12 @@
   id: 1988
   time: '2025-07-12T05:04:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6991
+- author: to4no_fix
+  changes:
+  - message: Fixed not being able to give gibbed marines medals.
+    type: Fix
+  id: 1989
+  time: '2025-07-12T05:08:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6629
 Name: RMC14
 Order: -1
