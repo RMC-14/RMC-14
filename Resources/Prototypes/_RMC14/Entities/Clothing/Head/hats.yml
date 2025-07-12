@@ -336,7 +336,12 @@
   description: A hat usually worn by ASOs in the UNMC. Provides no protection, but makes you look better when sorting papers.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsilayers:
+        state: icon
+        map: [ "unfoldedLayer" ]
+        state: icon_flipped
+        map: ["foldedLayer"]
+        visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
   - type: Appearance
