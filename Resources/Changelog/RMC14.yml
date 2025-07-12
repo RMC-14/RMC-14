@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tyzemol
-  changes:
-  - message: Freezer crates will now actually keep things inside fresh.
-    type: Fix
-  id: 1484
-  time: '2025-03-28T03:15:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5971
 - author: CyberTropic
   changes:
   - message: Fixed map insert pass through.
@@ -5009,5 +5002,13 @@
   id: 1984
   time: '2025-07-12T04:52:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6699
+- author: Dygon
+  changes:
+  - message: Warrior's Lunge, Dancer's Impale and Dancer's Tail Trip now have a 1.5-second
+      cooldown if used on an invalid target.
+    type: Tweak
+  id: 1985
+  time: '2025-07-12T04:55:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6891
 Name: RMC14
 Order: -1
