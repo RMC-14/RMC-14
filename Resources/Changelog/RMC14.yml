@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Added Gnarp Gnarp plushies
-    type: Add
-  id: 1491
-  time: '2025-03-28T04:35:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5938
-- author: noctyrnal
-  changes:
-  - message: Adjusted the colour of the M54CE2 HT Magazines
-    type: Tweak
-  id: 1492
-  time: '2025-03-28T04:40:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5996
-- author: Vermidia
-  changes:
   - message: Fixed Vanguard shield starting to decay when taking 5 or less damage.
     type: Fix
   id: 1493
@@ -5014,5 +5000,20 @@
   id: 1991
   time: '2025-07-12T05:13:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6994
+- author: noctyrnal
+  changes:
+  - message: Added peregrine handcannons! These can rarely be found in colonies, and
+      the CO can take the "Winter Wyvern" handcannon as a secondary
+    type: Add
+  id: 1992
+  time: '2025-07-12T05:14:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6982
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added random rare items that civilian survivors spawn with.
+    type: Add
+  id: 1993
+  time: '2025-07-12T05:15:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6985
 Name: RMC14
 Order: -1
