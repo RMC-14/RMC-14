@@ -366,7 +366,7 @@
 - type: entity
   parent: CMHeadCap
   id: RMCHeadCapPeakedASO
-  name: marine service peaked cap
+  name: ASO peaked cap
   description: A peaked cap. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
   components:
   - type: Sprite

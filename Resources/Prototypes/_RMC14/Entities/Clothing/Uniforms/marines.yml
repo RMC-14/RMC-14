@@ -291,7 +291,7 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOBlack
-  name: aso black uniform
+  name: auxiliary support officer black uniform
   description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black.
   components:
   - type: Sprite
@@ -303,7 +303,7 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOFormal
-  name: aso formal uniform
+  name: auxiliary support officer formal uniform
   description: A pearly white formal uniform used by Auxiliary Support Officers.
   components:
   - type: Sprite
@@ -315,7 +315,7 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOFormalAlt
-  name: aso alternative formal uniform
+  name: auxiliary support officer alternative formal uniform
   description: A pearly white formal uniform with black pants used by Auxiliary Support Officers.
   components:
   - type: Sprite
@@ -327,7 +327,7 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOBlackAlt
-  name: aso alternative black uniform
+  name: auxiliary support officer alternative black uniform
   description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black with green stripes.
   components:
   - type: Sprite
@@ -339,7 +339,7 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOOperations
-  name: aso operations uniform
+  name: auxiliary support officer operations uniform
   description: An operations uniform typically used by Auxiliary Support Officers. This one has a dark blue camo pattern.
   components:
   - type: Sprite
