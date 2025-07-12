@@ -1,10 +1,9 @@
 ﻿using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -24,6 +23,7 @@ public sealed class RMCSuicideSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -44,8 +44,11 @@ public sealed class RMCSuicideSystem : EntitySystem
         if (user != args.Target || args.Hands is not { } hands)
             return;
 
-        if (!HasComp<GunComponent>(hands.ActiveHandEntity))
+        if (!_hands.TryGetActiveItem(args.Target, out var active) ||
+            !HasComp<GunComponent>(active))
+        {
             return;
+        }
 
         args.Verbs.Add(new Verb
         {
@@ -98,8 +101,7 @@ public sealed class RMCSuicideSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!TryComp(user, out HandsComponent? hands) ||
-            hands.ActiveHandEntity is not { } held ||
+        if (_hands.GetActiveItem(user) is not { } held ||
             !TryComp(held, out GunComponent? gun))
         {
             _admin.Add(LogType.RMCSuicide, LogImpact.High, $"{ToPrettyString(user)} failed to suicide: no gun.");

@@ -36,3 +36,21 @@
 
 - type: alertCategory
   id: AreaInfo
+
+- type: alertCategory
+  id: Tracker
+
+- type: alertCategory
+  id: Tacmap
+
+- type: alertCategory
+  id: Sight
+
+- type: alertCategory
+  id: Armor
+
+- type: alertCategory
+  id: Plasma
+
+- type: alertCategory
+  id: Energy
