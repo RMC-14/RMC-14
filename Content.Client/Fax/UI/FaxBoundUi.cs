@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Content.Shared.Fax;
+using Content.Shared._RMC14.Fax;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -28,6 +29,7 @@ public sealed class FaxBoundUi : BoundUserInterface
         _window = this.CreateWindow<FaxWindow>();
         _window.FileButtonPressed += OnFileButtonPressed;
         _window.CopyButtonPressed += OnCopyButtonPressed;
+		// RMC14
         _window.CopyMultipleButtonPressed += OnCopyMultipleButtonPressed;
         _window.SendButtonPressed += OnSendButtonPressed;
         _window.RefreshButtonPressed += OnRefreshButtonPressed;
@@ -85,7 +87,7 @@ public sealed class FaxBoundUi : BoundUserInterface
 
     private void OnCopyMultipleButtonPressed(int copies)
     {
-        SendMessage(new FaxCopyMultipleMessage(copies));
+        SendMessage(new RMCFaxCopyMultipleMessage(copies));
     }
 
     private void OnRefreshButtonPressed()

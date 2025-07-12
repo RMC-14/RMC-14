@@ -26,13 +26,15 @@ public sealed partial class FaxWindow : DefaultWindow
 
         PaperButtonPressed += OnPaperButtonPressed;
 
+        CopyButton.OnPressed += _ => CopyButtonPressed?.Invoke();
+        // RMC14
         FileButton.OnPressed += _ => FileButtonPressed?.Invoke();
         PaperButton.OnPressed += _ => PaperButtonPressed?.Invoke();
-        CopyButton.OnPressed += _ => CopyButtonPressed?.Invoke();
         Copy2Button.OnPressed += _ => CopyMultipleButtonPressed?.Invoke(2);
         Copy3Button.OnPressed += _ => CopyMultipleButtonPressed?.Invoke(3);
         Copy5Button.OnPressed += _ => CopyMultipleButtonPressed?.Invoke(5);
         Copy10Button.OnPressed += _ => CopyMultipleButtonPressed?.Invoke(10);
+        // RMC14
         SendButton.OnPressed += _ => SendButtonPressed?.Invoke();
         RefreshButton.OnPressed += _ => RefreshButtonPressed?.Invoke();
         PeerSelector.OnItemSelected += args =>
@@ -42,10 +44,12 @@ public sealed partial class FaxWindow : DefaultWindow
     public void UpdateState(FaxUiState state)
     {
         CopyButton.Disabled = !state.CanCopy;
+        // RMC14
         Copy2Button.Disabled = !state.CanCopy;
         Copy3Button.Disabled = !state.CanCopy;
         Copy5Button.Disabled = !state.CanCopy;
         Copy10Button.Disabled = !state.CanCopy;
+        // RMC14
         SendButton.Disabled = !state.CanSend;
         FromLabel.Text = state.DeviceName;
 

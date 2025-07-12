@@ -61,17 +61,6 @@ public sealed class FaxCopyMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed class FaxCopyMultipleMessage : BoundUserInterfaceMessage
-{
-    public int Copies { get; }
-
-    public FaxCopyMultipleMessage(int copies)
-    {
-        Copies = copies;
-    }
-}
-
-[Serializable, NetSerializable]
 public sealed class FaxSendMessage : BoundUserInterfaceMessage
 {
 }
