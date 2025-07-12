@@ -816,12 +816,20 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMizunoKittyDrakonovisch
   name: Mizuno 'Kitty' Drakonovisch figurine
-  description: "The best kitty cat in the marine corps. Delta cat marine, loves headpats. Chases mice and lasers."
+  description: "Delta cat marine, loves headpats. Chases mice and lasers. There appears to be a placard saying meowrah meowrines."
   components:
   - type: Sprite
     state: mizuno_kitty_drakonovisch
   - type: PatronFigurine
     id: d6a58381-b2a8-4caf-a22a-fd76ca53b1ae
+  - type: EmitSoundOnUse
+    sound: #FelinidMeows
+      path: /Audio/_RMC14/Voice/Felinid/cat_meow1.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
