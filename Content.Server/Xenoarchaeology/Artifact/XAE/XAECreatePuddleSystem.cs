@@ -1,5 +1,6 @@
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Xenoarchaeology.Artifact.XAE.Components;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Xenoarchaeology.Artifact;
 using Content.Shared.Xenoarchaeology.Artifact.XAE;
@@ -49,7 +50,7 @@ public sealed class XAECreatePuddleSystem: BaseXAESystem<XAECreatePuddleComponen
             var reagentNames = new HashSet<string>();
             foreach (var chemProtoId in component.SelectedChemicals)
             {
-                var reagent = _prototypeManager.Index(chemProtoId);
+                var reagent = _prototypeManager.IndexReagent(chemProtoId);
                 reagentNames.Add(reagent.LocalizedName);
             }
 

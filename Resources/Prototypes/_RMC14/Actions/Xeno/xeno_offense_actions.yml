@@ -122,6 +122,7 @@
   - type: TargetAction
     range: 2
     checkCanAccess: false
+  - type: EntityTargetAction
   - type: WorldTargetAction
     event: !type:XenoTailStabEvent
   - type: XenoTailStabAction

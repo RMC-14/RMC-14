@@ -1,4 +1,4 @@
-﻿using Content.Server._RMC14.Body;
+﻿using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
@@ -9,7 +9,7 @@ using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
-namespace Content.Server._RMC14.Chemistry.Effects;
+namespace Content.Shared._RMC14.Chemistry.Effects;
 
 public sealed partial class Antitoxic : RMCChemicalEffect
 {
@@ -22,10 +22,10 @@ public sealed partial class Antitoxic : RMCChemicalEffect
     private static readonly ProtoId<StatusEffectPrototype> SeeingRainbows = "SeeingRainbows";
     private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
 
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return null;
-        throw new NotImplementedException();
+        var healing = PotencyPerSecond * 2;
+        return $"Heals {healing} toxin damage and removes 1.25 units of toxins from the bloodstream.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -37,7 +37,7 @@ public sealed partial class Antitoxic : RMCChemicalEffect
         healing = cmDamageable.DistributeHealing(args.TargetEntity, GeneticGroup, potency * 2f, healing);
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
 
-        var bloodstream = args.EntityManager.System<RMCBloodstreamSystem>();
+        var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
         bloodstream.RemoveBloodstreamToxins(args.TargetEntity, 1.25f);
 
         var status = args.EntityManager.System<StatusEffectsSystem>();

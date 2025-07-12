@@ -314,7 +314,6 @@ public abstract class AlertsSystem : EntitySystem
     private bool TryGetAlert(ProtoId<AlertPrototype> alertType, EntityUid? player, out AlertPrototype? alert)
     {
         alert = null;
-        var player = args.SenderSession.AttachedEntity;
         if (player is null || !HasComp<AlertsComponent>(player))
             return false;
 
@@ -322,7 +321,7 @@ public abstract class AlertsSystem : EntitySystem
         {
             Log.Debug("User {0} attempted to" +
                                    " click alert {1} which is not currently showing for them",
-                Comp<MetaDataComponent>(player.Value).EntityName, msg.Type);
+                Comp<MetaDataComponent>(player.Value).EntityName, alertType);
             return false;
         }
 
@@ -336,13 +335,18 @@ public abstract class AlertsSystem : EntitySystem
         {
             HandledAlert();
         }
-        
+
         return true;
     }
 
     protected virtual void HandledAlert()
     {
 
+    }
+
+    private void HandleClickAlert(ClickAlertEvent ev, EntitySessionEventArgs args)
+    {
+        TryGetAlert(ev.Type, args.SenderSession?.AttachedEntity, out _);
     }
 
     private void HandleClickAlertAlt(ClickAlertAltEvent msg, EntitySessionEventArgs args)

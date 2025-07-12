@@ -5,7 +5,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._RMC14.Chemistry.Effects;
+namespace Content.Shared._RMC14.Chemistry.Effects;
 
 public sealed partial class Anticorrosive : RMCChemicalEffect
 {
@@ -14,10 +14,13 @@ public sealed partial class Anticorrosive : RMCChemicalEffect
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
     private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
 
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return null;
-        throw new NotImplementedException();
+        var healing = PotencyPerSecond;
+        if (ActualPotency > 2)
+            healing += PotencyPerSecond * 0.5f;
+
+        return $"Heals {healing} burn damage.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

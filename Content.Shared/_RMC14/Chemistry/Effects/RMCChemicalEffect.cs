@@ -2,7 +2,7 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 
-namespace Content.Server._RMC14.Chemistry.Effects;
+namespace Content.Shared._RMC14.Chemistry.Effects;
 
 public abstract partial class RMCChemicalEffect : EntityEffect
 {
@@ -15,6 +15,8 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     /// </summary>
     public float ActualPotency => Potency * 0.5f;
 
+    public float PotencyPerSecond => ActualPotency * 0.5f;
+
     public override void Effect(EntityEffectBaseArgs args)
     {
         if (args is not EntityEffectReagentArgs { Reagent: { } reagent } reagentArgs)
@@ -24,7 +26,7 @@ public abstract partial class RMCChemicalEffect : EntityEffect
         var scale = reagentArgs.Scale;
         var quantity = reagentArgs.Quantity;
         /// Halved again since chemicals tick every second in SS14, not every 2
-        var scaledPotency = ActualPotency * scale * 0.5f;
+        var scaledPotency = PotencyPerSecond * scale;
         Tick(damageable, scaledPotency, reagentArgs);
 
         if (quantity >= reagent.Overdose)

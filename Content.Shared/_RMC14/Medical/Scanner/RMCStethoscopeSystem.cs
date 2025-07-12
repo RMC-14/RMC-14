@@ -4,7 +4,6 @@ using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
-using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -73,15 +72,13 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     private bool HasStethoscope(EntityUid user, out EntityUid stethoscope)
     {
         stethoscope = EntityUid.Invalid;
-        if (TryComp<HandsComponent>(user, out var hands))
+        if (_hands.TryGetActiveItem(user, out var held) &&
+            HasComp<RMCStethoscopeComponent>(held.Value))
         {
-            var held = hands.ActiveHandEntity;
-            if (held != null && HasComp<RMCStethoscopeComponent>(held.Value))
-            {
-                stethoscope = held.Value;
-                return true;
-            }
+            stethoscope = held.Value;
+            return true;
         }
+
         foreach (var slot in AccessorySlots)
         {
             if (!_inventorySystem.TryGetSlotEntity(user, slot, out var slotEntity))

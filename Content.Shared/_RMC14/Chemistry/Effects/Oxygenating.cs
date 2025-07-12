@@ -1,4 +1,4 @@
-﻿using Content.Server._RMC14.Body;
+﻿using Content.Shared._RMC14.Body;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -6,7 +6,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._RMC14.Chemistry.Effects;
+namespace Content.Shared._RMC14.Chemistry.Effects;
 
 public sealed partial class Oxygenating : RMCChemicalEffect
 {
@@ -17,10 +17,12 @@ public sealed partial class Oxygenating : RMCChemicalEffect
 
     private static readonly ProtoId<ReagentPrototype> Lexorin = "RMCLexorin";
 
-    protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
+    protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return null;
-        throw new NotImplementedException();
+        if (ActualPotency > 3)
+            return $"Heals all airloss damage and removes {PotencyPerSecond} Lexorin from the bloodstream.";
+        else
+            return $"Heals {PotencyPerSecond} airloss damage and removes {PotencyPerSecond} Lexorin from the bloodstream.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -34,7 +36,7 @@ public sealed partial class Oxygenating : RMCChemicalEffect
 
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
 
-        var bloodstream = args.EntityManager.System<RMCBloodstreamSystem>();
+        var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
         bloodstream.RemoveBloodstreamChemical(args.TargetEntity, Lexorin, potency);
     }
 

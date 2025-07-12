@@ -431,11 +431,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             if (TryComp<XenoChooseConstructionActionComponent>(actionId, out var chooseAction))
             {
-                if (_actions.TryGetActionData(actionId, out var action) &&
+                if (_actions.GetAction(actionId) is { } action &&
                     _prototype.TryIndex(structureId, out var structureProto))
                 {
-                    action.Icon = new SpriteSpecifier.EntityPrototype(structureId);
-                    Dirty(actionId, action);
+                    _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.EntityPrototype(structureId));
                 }
                 break;
             }
@@ -448,10 +447,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             if (TryComp<XenoChooseConstructionActionComponent>(actionId, out var chooseAction))
             {
-                if (_actions.TryGetActionData(actionId, out var action))
-                {
-                    Dirty(actionId, action);
-                }
+                if (_actions.GetAction(actionId) is { } action)
+                    Dirty(action);
+
                 break;
             }
         }
@@ -750,7 +748,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (hasBoost && _queenBoostQuery.TryComp(args.User, out var boost))
             {
-                var inRange = _transform.InRange(_transform.GetMoverCoordinates(args.User), args.Target, boost.RemoteUpgradeRange);
+                var inRange = _transform.InRange(_transform.GetMoverCoordinates(args.User), target, boost.RemoteUpgradeRange);
                 if (inRange)
                     return;
             }
@@ -761,14 +759,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (construction.OrderConstructionTargeting && construction.OrderConstructionChoice != null)
         {
             if (_queenEye.IsInQueenEye(args.User) &&
-                !_queenEye.CanSeeTarget(args.User, args.Target))
+                !_queenEye.CanSeeTarget(args.User, target))
             {
-                args.Cancelled = true;
+                args.Invalid = true;
                 return;
             }
 
-            if (!CanOrderConstructionPopup((args.User, construction), args.Target, construction.OrderConstructionChoice))
-                args.Cancelled = true;
+            if (!CanOrderConstructionPopup((args.User, construction), target, construction.OrderConstructionChoice))
+                args.Invalid = true;
             return;
         }
 

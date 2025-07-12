@@ -2,4 +2,4 @@
 
 namespace Content.Shared._RMC14.Xenonids.Stab;
 
-public sealed partial class XenoTailStabEvent : EntityWorldTargetActionEvent;
+public sealed partial class XenoTailStabEvent : WorldTargetActionEvent;
