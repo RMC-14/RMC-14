@@ -76,7 +76,7 @@
       effects: #TODO Hallucinations +2 max 40.
       - !type:GenericStatusEffect
         key: SeeingRainbows
-        component: SeeingRainbows
+        component: SeeingRainbowsStatusEffect
         type: Add
         time: 2 #TODO max 40
         refresh: false
