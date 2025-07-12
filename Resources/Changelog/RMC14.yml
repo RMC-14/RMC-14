@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Added MAR-50 LMG
-    type: Add
-  - message: Added Basira-Armstrong Hunting Rifle
-    type: Add
-  id: 1503
-  time: '2025-03-28T05:07:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5953
 - author: Tyzemol
   changes:
   - message: Fixed hive weed sources (hive cluster/core) not spreading weeds onto
@@ -5047,5 +5038,49 @@
   id: 2003
   time: '2025-07-12T05:47:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6684
+- author: DrSmugleaf
+  changes:
+  - message: Added cornmeal and mayonnaise to the mess tech vendor.
+    type: Add
+  - message: Added admin logs for automated vendors, round end shoutouts, and xeno
+      nesting.
+    type: Add
+  - message: Added system for custom chems and implemented Neogenetic, Anticorrosive,
+      Antitoxic and Oxygenating properties. This shouldn't change anything in-game
+      yet, if it does report it as a bug. Chemicals using the new system will display
+      their overdoses, critical overdoses, and effects in a new format on the guidebook.
+    type: Add
+  - message: Fixed short delay before showing all channels on some headset examines.
+    type: Fix
+  - message: Fixed active laser designators breaking too easily, when being moved
+      0.1 tiles instead of 0.5 tiles.
+    type: Fix
+  - message: Fixed short delay before showing the tacmap when using the action or
+      clicking the alert. Doing so when it is already open now also closes it.
+    type: Fix
+  - message: Fixed AEGIS access card being drawn under tables.
+    type: Fix
+  - message: Fixed short delay before the health scanner UI opens when using it.
+    type: Fix
+  - message: Fixed some items having duplicate Unequip and Put in hand verbs.
+    type: Fix
+  - message: Fixed transfer all button not refreshing the chem master UI.
+    type: Fix
+  - message: Fixed being able to duplicate chems with the chem master.
+    type: Fix
+  - message: Fixed some cases of equipment visuals causing your client to endlessly
+      lag and refresh the screen.
+    type: Fix
+  - message: The motion detector and intel detector empty scratch sound now only plays
+      for the user holding the item, not everyone around them.
+    type: Tweak
+  - message: Icon labels now align to the left.
+    type: Tweak
+  - message: Shortened the link discord account button label so the buttons stop getting
+      squished as much.
+    type: Tweak
+  id: 2004
+  time: '2025-07-12T06:55:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7001
 Name: RMC14
 Order: -1
