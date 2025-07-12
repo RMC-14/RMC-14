@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
@@ -718,7 +718,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var hasBoost = _queenBoostQuery.HasComp(args.User);
             var displayChoice = hasBoost ? GetQueenVariant(args.Choice) : args.Choice;
-            _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.EntityPrototype(displayChoice);
+            _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.EntityPrototype(displayChoice));
         }
     }
 
