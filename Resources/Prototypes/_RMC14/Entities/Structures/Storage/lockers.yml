@@ -43,9 +43,6 @@
     sprite: _RMC14/Structures/Storage/Lockers/commander.rsi
   - type: AccessReader
     access: [["CMAccessCO"]]
-  - type: StorageFill
-    contents:
-      - id: RMCMegaphone
 
 - type: entity
   parent: CMLockerBase
