@@ -314,44 +314,19 @@
   desc: reagent-desc-cmtricordrazine
   color: "#d87f2b"
   overdose: 30
+  criticalOverdose: 50
   metabolisms:
     Medicine:
       metabolismRate: 0.1
       effects:
-      - !type:EqualHealthChange #TODO removes 0.125u toxin/s?
-        damage:
-        - Brute: -0.25
-        - Burn: -0.25
-        - Toxin: -0.5
-        - Airloss: -0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 30 #TODO 0.25 eye damage/s
-        damage:
-          groups:
-            Brute: 0.25
-            Burn: 0.25
-            Toxin: 0.38
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        damage:
-          groups:
-            Brute: 1.5
-            Burn: 1.25
-            Toxin: 2.25
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Unconscious
-        component: RMCUnconscious
-        probability: 0.05
-        time: 10
-        type: Add
-        refresh: false
+      - !type:Neogenetic
+        potency: 1
+      - !type:Anticorrosive
+        potency: 1
+      - !type:Antitoxic
+        potency: 1
+      - !type:Oxygenating
+        potency: 1
 
 - type: reagent
   parent: [ CMReagentMedicine, CMBicaridine ]

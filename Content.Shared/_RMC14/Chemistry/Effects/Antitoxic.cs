@@ -25,7 +25,9 @@ public sealed partial class Antitoxic : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var healing = PotencyPerSecond * 2;
-        return $"Heals {healing} toxin damage and removes 1.25 units of toxins from the bloodstream.";
+        return $"Heals [color=green]{healing}[/color] toxin damage and removes [color=green]1.25[/color] units of toxic chemicals from the bloodstream.\n" +
+               $"Overdoses cause [color=red]{ActualPotency}[/color] toxin damage.\n" +
+               $"Critical overdoses cause [color=red]{ActualPotency}[/color] brute and burn damage, [color=red]{ActualPotency * 3}[/color] toxin damage, and cause [color=red]5[/color] seconds of unconsciousness with a [color=red]5%[/color] chance.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

@@ -29,10 +29,10 @@ public abstract partial class RMCChemicalEffect : EntityEffect
         var scaledPotency = PotencyPerSecond * scale;
         Tick(damageable, scaledPotency, reagentArgs);
 
-        if (quantity >= reagent.Overdose)
+        if (reagent.Overdose != null && quantity >= reagent.Overdose)
             TickOverdose(damageable, scaledPotency, reagentArgs);
 
-        if (quantity >= reagent.CriticalOverdose)
+        if (reagent.CriticalOverdose != null && quantity >= reagent.CriticalOverdose)
             TickCriticalOverdose(damageable, scaledPotency, reagentArgs);
     }
 
