@@ -21,6 +21,10 @@
       map: ["enum.PoweredLightLayers.Base"]
   - type: PointLight
     color: "#FFEFD2"
+    energy: 1
+    radius: 10
+    softness: 1
+    offset: "0, -0.5"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: tube-empty

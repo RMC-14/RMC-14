@@ -75,6 +75,10 @@
   components:
   - type: LightBulb
     color: "#FFEFD2"
+    lightEnergy: 6
+    lightRadius: 10
+    lightSoftness: 1
+    PowerUse: 25
 
 - type: entity
   parent: CMLightBulb
