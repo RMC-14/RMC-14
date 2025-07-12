@@ -1,5 +1,5 @@
 using Content.Server.Fax;
-using Content.Server.Administration.Logs;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Fax;
 using Content.Shared.Fax.Components;
 using Content.Shared._RMC14.Fax;
@@ -26,19 +26,25 @@ public sealed class RMCFaxSystem : EntitySystem
     {
         base.Initialize();
         
-        // Subscribe to fax copy and send events to handle RMC-specific logic
-        SubscribeLocalEvent<FaxMachineComponent, FaxCopyMessage>(OnCopyButtonPressed, before: new[] { typeof(FaxSystem) });
-        SubscribeLocalEvent<FaxMachineComponent, RMCFaxCopyMultipleMessage>(OnCopyMultipleButtonPressed, before: new[] { typeof(FaxSystem) });
-        SubscribeLocalEvent<FaxMachineComponent, FaxSendMessage>(OnSendButtonPressed, before: new[] { typeof(FaxSystem) });
+        // Only subscribe to RMC-specific events to avoid conflicts with base FaxSystem
+        SubscribeLocalEvent<FaxMachineComponent, RMCFaxCopyMultipleMessage>(OnCopyMultipleButtonPressed);
+        
+        // TODO: For mob faxecuting, we need a different approach that doesn't conflict with base system
+        // For now, we'll handle this through modification of the base system
     }
 
-    private void OnCopyButtonPressed(EntityUid uid, FaxMachineComponent component, FaxCopyMessage args)
+    /// <summary>
+    /// Checks if there's a mob in the fax machine and handles faxecuting if so.
+    /// Returns true if a mob was found and faxecuted, false otherwise.
+    /// </summary>
+    public bool TryFaxecuteMob(EntityUid uid, FaxMachineComponent component)
     {
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
         {
-            _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
-            args.Handled = true;
+            _faxecute.Faxecute(uid, component);
+            return true;
         }
+        return false;
     }
 
     private void OnCopyMultipleButtonPressed(EntityUid uid, FaxMachineComponent component, RMCFaxCopyMultipleMessage args)
@@ -46,13 +52,12 @@ public sealed class RMCFaxSystem : EntitySystem
         if (HasComp<MobStateComponent>(component.PaperSlot.Item))
         {
             _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
-            args.Handled = true;
         }
         else
         {
             CopyMultiple(uid, component, args);
-            args.Handled = true;
         }
+        // Note: This is RMC-specific functionality, so base system doesn't handle this message type
     }
 
     /// <summary>
@@ -105,12 +110,5 @@ public sealed class RMCFaxSystem : EntitySystem
             $"of {ToPrettyString(sendEntity):subject}: {printout.Content}");
     }
 
-    private void OnSendButtonPressed(EntityUid uid, FaxMachineComponent component, FaxSendMessage args)
-    {
-        if (HasComp<MobStateComponent>(component.PaperSlot.Item))
-        {
-            _faxecute.Faxecute(uid, component); // when button pressed it will hurt the mob.
-            args.Handled = true;
-        }
-    }
+
 }

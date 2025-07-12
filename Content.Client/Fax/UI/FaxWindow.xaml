@@ -82,6 +82,26 @@
                             HorizontalExpand="True"
                             Disabled="True" />
                     </BoxContainer>
+                    
+                    <!-- RMC14: Multiple Copy Buttons -->
+                    <BoxContainer Margin="0 4 0 0">
+                        <Button Name="Copy2Button"
+                            Text="Copy x2"
+                            HorizontalExpand="True"
+                            Disabled="True" />
+                        <Button Name="Copy3Button"
+                            Text="Copy x3"
+                            HorizontalExpand="True"
+                            Disabled="True" />
+                        <Button Name="Copy5Button"
+                            Text="Copy x5"
+                            HorizontalExpand="True"
+                            Disabled="True" />
+                        <Button Name="Copy10Button"
+                            Text="Copy x10"
+                            HorizontalExpand="True"
+                            Disabled="True" />
+                    </BoxContainer>
                 </BoxContainer>
             </BoxContainer>
 
