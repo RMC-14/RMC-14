@@ -412,6 +412,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (target != null &&
             _rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack))
             attack = newAttack;
+        else
+            return false;
 
         // Windup time checked elsewhere.
         var fireRate = TimeSpan.FromSeconds(1f / GetAttackRate(weaponUid, user, weapon));
