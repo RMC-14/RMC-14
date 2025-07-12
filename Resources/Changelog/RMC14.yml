@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed map insert pass through.
-    type: Fix
-  id: 1485
-  time: '2025-03-28T03:15:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5969
-- author: Vermidia
-  changes:
-  - message: Colony Corpses are now random species
-    type: Tweak
-  id: 1486
-  time: '2025-03-28T03:26:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5995
-- author: OmerF-afk
-  changes:
-  - message: Added multiple props for telecommunications and ARES AI Core
-    type: Add
-  id: 1487
-  time: '2025-03-28T03:29:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6001
 - author: Djvarik
   changes:
   - message: Car hitbox rotation in Hybrisa
@@ -5010,5 +4989,33 @@
   id: 1985
   time: '2025-07-12T04:55:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6891
+- author: Vixting
+  changes:
+  - message: Added ghost previews for resin structures & when ordering construction.
+    type: Add
+  - message: Queen can now order construction in queen eye mode.
+    type: Add
+  - message: Queen has thick resin, no plasma cost, remote thicken, reduced build
+      time for first 30 minutes of the round.
+    type: Add
+  id: 1986
+  time: '2025-07-12T05:03:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6839
+- author: Dygon
+  changes:
+  - message: Fixed Airburst grenade projectiles hitting corpses.
+    type: Fix
+  id: 1987
+  time: '2025-07-12T05:03:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6992
+- author: Dygon
+  changes:
+  - message: Fixed Oppressor's Tail Seize ability going over barricades.
+    type: Fix
+  - message: Fixed Oppressor's Abduct ability going through resin walls.
+    type: Fix
+  id: 1988
+  time: '2025-07-12T05:04:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6991
 Name: RMC14
 Order: -1
