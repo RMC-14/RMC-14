@@ -19,6 +19,7 @@ rmc-loadout-group-pins = Pins
 
 rmc-loadout-group-role-specific-ID = Commanding Officer (ID)
 rmc-loadout-group-synthetic-uniform = Synthetic Uniforms
+rmc-loadout-group-synthetic-accessories = Synthetic Uniform Accessories
 rmc-loadout-group-synthetic-glasses = Synthetic Glasses
 rmc-loadout-group-synthetic-shoes = Synthetic Shoes
 rmc-loadout-group-synthetic-headwear = Synthetic Headwear

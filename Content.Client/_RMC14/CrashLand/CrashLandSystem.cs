@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client._RMC14.ParaDrop;
 using Content.Client._RMC14.Sprite;
 using Content.Shared._RMC14.CrashLand;
@@ -13,6 +14,26 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
 
     private const string CrashingAnimationKey = "crashing-animation";
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<CrashLandingComponent, ComponentRemove>(OnRemove);
+    }
+
+    private void OnRemove(Entity<CrashLandingComponent> ent, ref ComponentRemove args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        if (TryComp(ent, out AnimationPlayerComponent? animation))
+            _animPlayer.Stop((ent, animation),CrashingAnimationKey);
+
+        if (!TryComp(ent, out SpriteComponent? sprite))
+            return;
+
+        sprite.Offset = new Vector2();
+    }
 
     public override void Update(float frameTime)
     {
