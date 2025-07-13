@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: N0lim
-  changes:
-  - message: Fixed Queen building speed being half the intended amount.
-    type: Fix
-  id: 1506
-  time: '2025-03-28T10:08:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5842
 - author: Vermidia
   changes:
   - message: Fixed resin traps being placeable under dead bodies
@@ -5080,5 +5073,13 @@
   id: 2006
   time: '2025-07-13T03:56:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7007
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the lightweight combat pack (the PMC one) having less storage space
+      than intended.
+    type: Fix
+  id: 2007
+  time: '2025-07-13T06:03:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7018
 Name: RMC14
 Order: -1
