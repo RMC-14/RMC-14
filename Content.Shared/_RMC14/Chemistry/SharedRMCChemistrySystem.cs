@@ -96,6 +96,17 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
                 args.PushText($"Total volume: {solution.Volume} / {solution.MaxVolume}.");
             }
+            if (EntityManager.TryGetComponent<RMCToggleableSolutionTransferComponent>(ent.Owner, out var transferComp))
+            {
+                var directionText = transferComp.Direction switch
+                {
+                    SolutionTransferDirection.Input => "Transfer mode: Drawing",
+                    SolutionTransferDirection.Output => "Transfer mode: Dispensing",
+                    _ => string.Empty,
+                };
+                if (!string.IsNullOrEmpty(directionText))
+                    args.PushText(directionText);
+            }
         }
     }
 
@@ -106,6 +117,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private void OnToggleableSolutionTransferMapInit(Entity<RMCToggleableSolutionTransferComponent> ent, ref MapInitEvent args)
     {
+        ent.Comp.Direction = SolutionTransferDirection.Input;
         RemCompDeferred<DrainableSolutionComponent>(ent);
         var refillable = EnsureComp<RefillableSolutionComponent>(ent);
         refillable.Solution = ent.Comp.Solution;
@@ -130,6 +142,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     RemCompDeferred<DrainableSolutionComponent>(ent);
                     var refillable = EnsureComp<RefillableSolutionComponent>(ent);
                     refillable.Solution = ent.Comp.Solution;
+                    ent.Comp.Direction = SolutionTransferDirection.Input;
                     Dirty(ent, refillable);
                     _popup.PopupClient("Now drawing", ent, user, PopupType.Medium);
                 }
@@ -138,6 +151,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     RemCompDeferred<RefillableSolutionComponent>(ent);
                     var drainable = EnsureComp<DrainableSolutionComponent>(ent);
                     drainable.Solution = ent.Comp.Solution;
+                    ent.Comp.Direction = SolutionTransferDirection.Output;
                     Dirty(ent, drainable);
                     _popup.PopupClient("Now dispensing", ent, user, PopupType.Medium);
                 }
