@@ -98,7 +98,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
         RaiseLocalEvent(stab, ref eve);
         damage += eve.Damage;
-        if (args.Entity == null || TerminatingOrDeleted(args.Entity))
+        if (args.Entity == null ||
+            TerminatingOrDeleted(args.Entity) ||
+            !_xeno.CanAbilityAttackTarget(stab,args.Entity.Value))
         {
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
             RaiseLocalEvent(stab, missEvent);
@@ -237,7 +239,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 _rotate.RotateXeno(stab, angle.GetDir());
             }
 
-            var sound = args.Entity != null && !TerminatingOrDeleted(args.Entity) ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
+            var sound = args.Entity != null && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
             _audio.PlayPvs(sound, stab);
         }
 
