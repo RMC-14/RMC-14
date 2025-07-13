@@ -226,16 +226,17 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         _audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
         var normalized = -delta.Normalized();
+        var originalCoordinates = fromCoordinates;
 
         // to prevent hitting yourself
-        fromCoordinates = fromCoordinates.Offset(normalized * 0.37f);
+        fromCoordinates = fromCoordinates.Offset(normalized * 0.3f);
 
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), flamer.Comp.Range);
         if (delta.Length() > flamer.Comp.Range)
             toCoordinates = fromCoordinates.Offset(normalized * range);
 
         var tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, out _, true);
-        if (tiles.Count == 0 || !_interaction.InRangeUnobstructed(flamer, tiles[0].Coordinates, 3))
+        if (tiles.Count == 0 || !_transform.InRange(originalCoordinates, _transform.ToCoordinates(tiles[0].Coordinates), 1.5f))
             return;
 
         ProtoId<ReagentPrototype>? reagent = null;
