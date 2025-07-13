@@ -226,7 +226,6 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         _audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
         var normalized = -delta.Normalized();
-        var originalCoordinates = fromCoordinates;
 
         // to prevent hitting yourself
         fromCoordinates = fromCoordinates.Offset(normalized * 0.23f);
