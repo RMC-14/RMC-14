@@ -4,7 +4,7 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="Overwatch Console"
     MinSize="1000 500"
-    SetSize="1000 700">
+    SetSize="1250 750">
     <Control Name="Wrapper" Access="Public" VerticalAlignment="Top">
         <PanelContainer Name="OverwatchViewContainer" Access="Public">
             <PanelContainer.PanelOverride>
