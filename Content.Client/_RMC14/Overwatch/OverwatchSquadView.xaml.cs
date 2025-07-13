@@ -31,12 +31,10 @@ public sealed partial class OverwatchSquadView : Control
     {
         RobustXamlLoader.Load(this);
 
-        // Set up tab button event handlers
         SquadMonitorButton.OnPressed += OnSquadMonitorPressed;
         SupplyDropButton.OnPressed += OnSupplyDropPressed;
         OrbitalBombardmentButton.OnPressed += OnOrbitalBombardmentPressed;
 
-        // Set default tab to Squad Monitor
         ShowTab("SquadMonitor");
 
         Longitude = UIExtensions.CreateDialSpinBox(buttons: false, minWidth: 100);
