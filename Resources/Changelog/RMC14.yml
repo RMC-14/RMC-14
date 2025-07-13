@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Tyzemol
-  changes:
-  - message: Fixed hive weed sources (hive cluster/core) not spreading weeds onto
-      semi-weedable tiles directly.
-    type: Fix
-  id: 1504
-  time: '2025-03-28T05:10:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5914
 - author: Whisper
   changes:
   - message: Intelligence Officers and Senior Enlisted Advisors can now take both
@@ -5082,5 +5074,12 @@
   id: 2004
   time: '2025-07-12T06:55:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7001
+- author: noctyrnal
+  changes:
+  - message: Light fixtures now have the correct colours.
+    type: Fix
+  id: 2005
+  time: '2025-07-13T03:54:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7010
 Name: RMC14
 Order: -1
