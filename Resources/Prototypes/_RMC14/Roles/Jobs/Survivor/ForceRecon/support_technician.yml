@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconSupportTech
   name: rmc-job-name-forecon-support-tech
-  playTimeTracker: RMCJobSurvivorSupportTechForecon
   startingGear: RMCGearForeconSupportTech
   icon: "CMJobIconCombatTech"
   requirements:
@@ -48,10 +47,6 @@
       prefix: rmc-job-prefix-forecon-support-tech
     - type: SpotterWhitelist
   hidden: true
-
-- type: playTimeTracker
-  id: RMCJobSurvivorSupportTechForecon
-  isHumanoid: true
 
 - type: startingGear
   parent: RMCGearForeconBase

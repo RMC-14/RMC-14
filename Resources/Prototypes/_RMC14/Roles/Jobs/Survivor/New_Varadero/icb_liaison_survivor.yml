@@ -3,7 +3,7 @@
   id: CMSurvivorICB
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorICB
+  playTimeTracker: CMJobSurvivorCorporate
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
   ranks:
     RMCRankICBCorporateLiaison: []
@@ -53,10 +53,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorICB
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCorporate

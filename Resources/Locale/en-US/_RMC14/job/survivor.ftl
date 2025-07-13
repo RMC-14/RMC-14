@@ -2,28 +2,33 @@
 
 cm-job-name-survivor = Civilian Colonist
 cm-job-description-survivor = You are a survivor of the attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
-CMJobSurvivor = Civilian Colonist
 
 cm-job-name-survivor-doctor = Doctor Colonist
-CMJobSurvivorDoctor = Doctor Colonist
 
 cm-job-name-survivor-engineer = Engineer Colonist
-CMJobSurvivorEngineer = Engineer Colonist
 
 cm-job-name-survivor-security = Security Colonist
-CMJobSurvivorSecurity = Security Colonist
 
 cm-job-name-survivor-corporate = Corporate Colonist
-CMJobSurvivorCorporate = Corporate Colonist
-
-cm-job-name-survivor-miner = Miner Colonist
-CMJobSurvivorMiner = Miner Colonist
-
-cm-job-name-surivor-priest = Priest Colonist
-CMJobSurvivorPriest = Priest Colonist
 
 cm-job-name-survivor-scientist = Scientist Colonist
-CMSurvivorScientist = Scientist Colonist
+
+rmc-job-name-survivor-co = Survivor Commander
+rmc-job-description-survivor-co = You are a Major of the UNMC.
+
+rmc-job-name-survivor-synth = Survivor Synthetic
+rmc-job-description-survivor-synth = You are a synthetic survivor of the attack on a corporate facility.
+
+# Playtime trackers
+CMJobSurvivor = Civilian Survivor
+CMJobSurvivorDoctor = Doctor Survivor
+CMJobSurvivorEngineer = Engineer Survivor
+CMJobSurvivorSecurity = Security Survivor
+CMJobSurvivorCorporate = Corporate Survivor
+CMJobSurvivorScientist = Scientist Survivor
+RMCJobSurvivorMilitary = Military Survivor
+RMCJobSurvivorCO = Survivor CO
+RMCJobSyntheticColony = Survivor Synthetic
 
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
@@ -32,6 +37,11 @@ rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You 
   You are NOT aware of the marines or their intentions.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+# Misc variants
+cm-job-name-survivor-miner = Miner Colonist
+
+cm-job-name-surivor-priest = Priest Colonist
 
 # FORECON survs
 
@@ -42,9 +52,6 @@ rmc-job-greeting-forecon = You are UNMC Force Reconnaissance (FORECON) marine fr
   You are NOT aware of the marines or their intentions.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
-
-rmc-job-name-survivor-co = Survivor Commander
-rmc-job-description-survivor-co = You are a Major of the UNMC.
 
 rmc-job-name-forecon = FORECON Survivor
 rmc-job-description-forecon = You are a stranded UNMC Forecon marine. Your ship, the UNS Hanyut, crashed and you are stranded on the planet. Do what it takes to survive!
@@ -58,61 +65,43 @@ rmc-job-name-forecon-commander = Commander
 # New Varadero Survs
 
 rmc-job-name-survivor-commander-new-varadero = Commander
-CMJobSurvivorCommanderNewVaradero = Commander
 
 cm-job-name-surivor-beach-bum = Beach Bum
-CMJobSurvivorBeachBum = Beach Bum
 
 cm-job-name-survivor-cargo-technician = New Varadero Cargo Technician
-CMJobSurvivorCargoTechnician = New Varadero Cargo Technician
 
 cm-job-name-survivor-medical-technician = New Varadero Medical Technician
-CMJobSurvivorMedicalTechnician = New Varadero Medical Technician
 
 cm-job-name-survivor-technician = New Varadero Engineering Technician
-CMJobSurvivorTechnician = New Varadero Engineering Technician
 
 cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
-CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
 
 cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
-CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
 cm-job-prefix-survivor-icb = ICB
 
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
-RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
 
 
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
-CMJobSurvivorInfrastructureEngineer = Infrastructure Engineer
 
 rmc-job-name-survivor-reactor-technician = Tekhnik Reaktora
-CMJobSurvivorReactorTechnician = Reactor Technician
 
 rmc-job-name-survivor-armed-police-officer = Narodnyy Vooruzhennyy Politsioner
-CMJobSurvivorArmedPoliceOfficer = People's Armed Police Officer
 
 rmc-job-name-survivor-army-reservist = Armiyskiy Rezervist
-CMJobSurvivorArmyReservist = Army Reservist
 rmc-job-prefix-army-reservist = 202/ARMY
 
 rmc-job-name-survivor-moh-doctor = Doktor Ministerstva Zdravookhraneniya
-CMJobSurvivorMoHDoctor = Doctor
 
 rmc-job-name-survivor-cec-researcher = Issledovatel' Korpusa Kosmicheskoy Eksploratsii
-CMJobSurvivorCECResearcher = Cosmos Exploration Corps Researcher
 
 rmc-job-name-survivor-soro-civilian = Grazhdanin
-CMJobSurvivorSoroCivilian = Civilian
 
 rmc-job-name-survivor-fire-protection-specialist = Spetsialist Po Pozharnoy Bezopasnosti
-CMJobSurvivorFireProtectionSpecialist = Fire Protection Specialist
 rmc-job-prefix-fire-protection-specialist = FPPB
 
 rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
-CMJobSurvivorSoroMiner = Miner
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
-CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison

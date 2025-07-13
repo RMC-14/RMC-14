@@ -12,4 +12,5 @@
 
 - type: playTimeTracker
   id: RMCJobSurvivorCO
+  name:
   isHumanoid: true

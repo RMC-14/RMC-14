@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconSquadLeader
   name: cm-job-name-squad-leader
-  playTimeTracker: RMCJobSurvivorSquadLeaderForecon
   ranks:
     RMCRankSecondLT: []
   icon: "CMJobIconSquadLeader"
@@ -50,10 +49,6 @@
       preset: RMCSurvivorPresetForeconSquadLead
     - type: SpotterWhitelist
   hidden: true
-
-- type: playTimeTracker
-  id: RMCJobSurvivorSquadLeaderForecon
-  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

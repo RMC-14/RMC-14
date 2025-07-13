@@ -3,7 +3,7 @@
   id: CMSurvivorCargoTechnician
   name: cm-job-name-survivor-cargo-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorCargoTechnician
+  playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorCargoTechnician
   spawnMenuRoleName: Cargo Technician (NV Survivor)
   special:
@@ -53,10 +53,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorCargoTechnician
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetEngineer

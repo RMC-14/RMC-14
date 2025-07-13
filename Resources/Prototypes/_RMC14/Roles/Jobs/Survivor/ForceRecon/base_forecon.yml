@@ -12,7 +12,7 @@
   startingGear: RMCGearForeconBase
   hasIcon: true
   greeting: rmc-job-greeting-forecon
-  playTimeTracker: RMCSurvivorForecon
+  playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: FORECON Survivor (Base)
   hidden: true
 
@@ -29,7 +29,8 @@
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
 
 - type: playTimeTracker
-  id: RMCSurvivorForecon
+  id: RMCJobSurvivorMilitary
+  isHumanoid: true
 
 - type: entity
   id: RMCSurvivorPresetForeconNoPrimary

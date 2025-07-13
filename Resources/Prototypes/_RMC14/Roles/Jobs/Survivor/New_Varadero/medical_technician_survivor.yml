@@ -3,7 +3,7 @@
   id: CMSurvivorMedicalTechnician
   name: cm-job-name-survivor-medical-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorMedicalTechnician
+  playTimeTracker: CMSurvivorDoctor
   startingGear: RMCGearSurvivorMedicalTechnician
   spawnMenuRoleName: Medical Technician (NV Survivor)
   special:
@@ -46,10 +46,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorMedicalTechnician
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetDoctor

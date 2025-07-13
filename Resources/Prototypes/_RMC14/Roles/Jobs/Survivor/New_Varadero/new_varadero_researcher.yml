@@ -3,7 +3,7 @@
   id: RMCSurvivorNewVaraderoResearcher
   name: cm-job-name-survivor-new-varadero-researcher
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorNewVaraderoResearcher
+  playTimeTracker: CMSurvivorDoctor
   startingGear: RMCGearSurvivorNewVaraderoResearcher
   accessGroups:
   - ColonistMedical
