@@ -440,7 +440,7 @@
     - name: Commanding Officer Essentials Kit
       takeAll: CMBundle
       entries:
-      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map
+      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Paper Map
     - name: Bags
       choices: { CMBag: 1 }
       entries:
@@ -580,9 +580,9 @@
         points: 15
       - id: RMCSpeedLoaderMatebaHIAP
         points: 20
-      - id: RMCMagazinePistolD50WinterWyvernHI
+      - id: RMCMagazinePistolHandcannonHI
         points: 15
-      - id: RMCMagazinePistolD50WinterWyvernHIAP
+      - id: RMCMagazinePistolHandcannonHIAP
         points: 20
     - name: Shotgun Ammunition
       entries:

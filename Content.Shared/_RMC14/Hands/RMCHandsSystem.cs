@@ -42,7 +42,7 @@ public abstract class RMCHandsSystem : EntitySystem
     {
         foreach (var hand in ent.Comp.Hands)
         {
-            _hands.AddHand(ent, hand.Name, hand.Location);
+            _hands.AddHand(ent.Owner, hand.Name, hand.Location);
         }
     }
 
@@ -75,9 +75,9 @@ public abstract class RMCHandsSystem : EntitySystem
         if (!TryComp(ent, out HandsComponent? handsComp))
             return;
 
-        foreach (var hand in handsComp.Hands.Values)
+        foreach (var hand in handsComp.Hands.Keys)
         {
-            _hands.TryDrop(ent, hand, checkActionBlocker: false, handsComp: handsComp);
+            _hands.TryDrop((ent, handsComp), hand, checkActionBlocker: false);
         }
     }
 
@@ -116,8 +116,12 @@ public abstract class RMCHandsSystem : EntitySystem
 
         args.Verbs.Add(switchStorageVerb);
 
-        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+        if (!_container.TryGetContainingContainer((ent, null), out var containing) ||
+            containing.Owner != user ||
+            !_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+        {
             return;
+        }
 
         AlternativeVerb unequipVerb = new()
         {
@@ -189,7 +193,7 @@ public abstract class RMCHandsSystem : EntitySystem
     public bool TryStorageEjectHand(EntityUid user, string handName)
     {
         if (!_hands.TryGetHand(user, handName, out var hand) ||
-            hand.HeldEntity is not { } held)
+            _hands.GetHeldItem(user, handName) is not { } held)
         {
             return false;
         }

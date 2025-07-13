@@ -1,4 +1,5 @@
 using Content.Server.Chemistry.Components;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.NameModifier.EntitySystems;
@@ -53,7 +54,7 @@ public sealed class TransformableContainerSystem : EntitySystem
 
         //Only reagents with spritePath property can change appearance of transformable containers!
         if (!string.IsNullOrWhiteSpace(reagentId?.Prototype)
-            && _prototypeManager.TryIndex(reagentId.Value.Prototype, out ReagentPrototype? proto))
+            && _prototypeManager.TryIndexReagent(reagentId.Value.Prototype, out ReagentPrototype? proto))
         {
             var metadata = MetaData(entity.Owner);
             _metadataSystem.SetEntityDescription(entity.Owner, proto.LocalizedDescription, metadata);

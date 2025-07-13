@@ -325,5 +325,29 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             if (dropship.State == FTLState.Arriving || !HasComp<DropshipTargetComponent>(paraDrop.DropTarget))
                 RemComp<ActiveParaDropComponent>(uid);
         }
+
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        var paraDroppingQuery = EntityQueryEnumerator<ParaDroppingComponent>();
+        while (paraDroppingQuery.MoveNext(out var uid, out var paraDropping))
+        {
+            if (HasComp<SkyFallingComponent>(uid))
+                continue;
+
+            paraDropping.RemainingTime -= frameTime;
+            if (paraDropping.RemainingTime <= 0)
+                RemComp<ParaDroppingComponent>(uid);
+
+            Blocker.UpdateCanMove(uid);
+        }
+
+        var skyFallingQuery = EntityQueryEnumerator<SkyFallingComponent>();
+        while (skyFallingQuery.MoveNext(out var uid, out var skyFalling))
+        {
+            skyFalling.RemainingTime -= frameTime;
+            if (skyFalling.RemainingTime <= 0)
+                RemComp<SkyFallingComponent>(uid);
+        }
     }
 }
