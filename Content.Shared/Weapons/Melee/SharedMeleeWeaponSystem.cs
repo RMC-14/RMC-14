@@ -409,11 +409,13 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         }
 
         // RMC14
-        if (target != null &&
-            _rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack))
-            attack = newAttack;
-        else
-            return false;
+        if (target != null)
+        {
+            if  (_rmcMelee.AttemptOverrideAttack(target.Value, (weaponUid, weapon), user, attack, out var newAttack))
+                attack = newAttack;
+            else
+                return false;
+        }
 
         // Windup time checked elsewhere.
         var fireRate = TimeSpan.FromSeconds(1f / GetAttackRate(weaponUid, user, weapon));
@@ -887,7 +889,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var cmDisarmEvent = new CMDisarmEvent(user);
         RaiseLocalEvent(target.Value, ref cmDisarmEvent);
         if (cmDisarmEvent.Handled)
+        {
+            if (_netMan.IsClient)
+                _meleeSound.PlaySwingSound(user, meleeUid, component);
             return true;
+        }
 
         EntityUid? inTargetHand = null;
 

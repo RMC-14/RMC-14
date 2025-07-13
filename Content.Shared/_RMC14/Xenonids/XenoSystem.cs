@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
@@ -420,7 +421,7 @@ public sealed partial class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool canAttackBarricades = false)
     {
         if (xeno == target)
             return false;
@@ -437,6 +438,9 @@ public sealed partial class XenoSystem : EntitySystem
 
         if (_xenoNestedQuery.HasComp(target))
             return false;
+
+        if (canAttackBarricades && HasComp<BarricadeComponent>(target))
+            return true;
 
         return HasComp<MarineComponent>(target) || HasComp<XenoComponent>(target);
     }

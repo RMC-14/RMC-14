@@ -883,14 +883,14 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (!entity.Comp.StoredItems.ContainsKey(args.Entity))
         {
-            if (!TryGetAvailableGridSpace((entity.Owner, entity.Comp), (args.Entity, null), out var location))
+            if (!CMInventoryExtensions.TryGetFirst(entity, args.Entity, out var location))
             {
                 ContainerSystem.Remove(args.Entity, args.Container, force: true);
                 return;
             }
 
-            entity.Comp.StoredItems[args.Entity] = location.Value;
-            AddOccupiedEntity(entity, args.Entity, location.Value);
+            entity.Comp.StoredItems[args.Entity] = location;
+            AddOccupiedEntity(entity, args.Entity, location);
         }
 
         UpdateAppearance((entity, entity.Comp, null));
