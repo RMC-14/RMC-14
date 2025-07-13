@@ -1,5 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Shared._RMC14.Sprite;
+using Content.Shared._RMC14.Item;
 using Robust.Client.GameObjects;
 using Robust.Client.Input;
 using Robust.Client.Player;
@@ -17,7 +18,7 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
     /*
     * If the player entity is obstructed under the specified components then it will drop the alpha for that entity
     * so the player is still visible.
-    * TODO RMC14: Sprite fading by layers
+    * Supports fading entire sprite or individual layers based on component configuration.
     */
 
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -53,7 +54,18 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
         if (MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating || !TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
+        // Restore original sprite alpha
         _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(component.OriginalAlpha));
+
+        // Restore original layer alphas
+        foreach (var (layerKey, originalAlpha) in component.OriginalLayerAlphas)
+        {
+            if (_sprite.LayerMapTryGet((uid, sprite), layerKey, out var layerIndex, false))
+            {
+                var layer = sprite[layerIndex];
+                _sprite.LayerSetColor((uid, sprite), layerIndex, layer.Color.WithAlpha(originalAlpha));
+            }
+        }
     }
 
     /// <summary>
@@ -83,6 +95,8 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                 {
                     if (ent == player || !_fadeQuery.HasComponent(ent) || !_spriteQuery.TryGetComponent(ent, out var sprite) || sprite.DrawDepth < playerSprite.DrawDepth)
                         continue;
+
+
 
                     if (excludeBB && _fixturesQuery.TryComp(ent, out var body))
                     {
@@ -116,11 +130,62 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                     var targetAlpha = fadeComponent.TargetAlpha;
                     var changeRate = fadeComponent.ChangeRate;
                     var change = changeRate * frameTime;
-                    var newColor = Math.Max(sprite.Color.A - change, targetAlpha);
 
-                    if (!sprite.Color.A.Equals(newColor))
+                    if (fadeComponent.FadeLayers.Count > 0)
                     {
-                        _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha(newColor));
+                        // Fade only specified layers
+                        foreach (var layerKey in fadeComponent.FadeLayers)
+                        {
+                            // Try to find the layer by string key first
+                            if (_sprite.LayerMapTryGet((ent, sprite), layerKey, out var layerIndex, false))
+                            {
+                                var layer = sprite[layerIndex];
+
+                                // Store original alpha if not already stored
+                                if (!fading.OriginalLayerAlphas.ContainsKey(layerKey))
+                                {
+                                    fading.OriginalLayerAlphas[layerKey] = layer.Color.A;
+                                }
+
+                                var newAlpha = Math.Max(layer.Color.A - change, targetAlpha);
+                                if (!layer.Color.A.Equals(newAlpha))
+                                {
+                                    _sprite.LayerSetColor((ent, sprite), layerIndex, layer.Color.WithAlpha(newAlpha));
+                                }
+                            }
+                            else
+                            {
+                                // Try to find the layer by enum key
+                                if (System.Enum.TryParse<ItemCamouflageLayers>(layerKey, out var enumKey))
+                                {
+                                    if (_sprite.LayerMapTryGet((ent, sprite), enumKey, out var enumLayerIndex, false))
+                                    {
+                                        var layer = sprite[enumLayerIndex];
+
+                                        // Store original alpha if not already stored
+                                        if (!fading.OriginalLayerAlphas.ContainsKey(layerKey))
+                                        {
+                                            fading.OriginalLayerAlphas[layerKey] = layer.Color.A;
+                                        }
+
+                                        var newAlpha = Math.Max(layer.Color.A - change, targetAlpha);
+                                        if (!layer.Color.A.Equals(newAlpha))
+                                        {
+                                            _sprite.LayerSetColor((ent, sprite), enumLayerIndex, layer.Color.WithAlpha(newAlpha));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Fade entire sprite (original behavior)
+                        var newColor = Math.Max(sprite.Color.A - change, targetAlpha);
+                        if (!sprite.Color.A.Equals(newColor))
+                        {
+                            _sprite.SetColor((ent, sprite), sprite.Color.WithAlpha(newColor));
+                        }
                     }
                 }
             }
@@ -147,15 +212,64 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
             var changeRate = fadeComponent.ChangeRate;
             var change = changeRate * frameTime;
 
-            var newColor = Math.Min(sprite.Color.A + change, comp.OriginalAlpha);
-
-            if (!newColor.Equals(sprite.Color.A))
+            if (fadeComponent.FadeLayers.Count > 0)
             {
-                _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(newColor));
+                // Restore individual layers
+                var allLayersRestored = true;
+
+                foreach (var (layerKey, originalAlpha) in comp.OriginalLayerAlphas)
+                {
+                    // Try to find the layer by string key first
+                    if (_sprite.LayerMapTryGet((uid, sprite), layerKey, out var layerIndex, true))
+                    {
+                        var layer = sprite[layerIndex];
+                        var newAlpha = Math.Min(layer.Color.A + change, originalAlpha);
+
+                        if (!newAlpha.Equals(layer.Color.A))
+                        {
+                            _sprite.LayerSetColor((uid, sprite), layerIndex, layer.Color.WithAlpha(newAlpha));
+                            allLayersRestored = false;
+                        }
+                    }
+                    else
+                    {
+                        // Try to find the layer by enum key
+                        if (System.Enum.TryParse<ItemCamouflageLayers>(layerKey, out var enumKey))
+                        {
+                            if (_sprite.LayerMapTryGet((uid, sprite), enumKey, out var enumLayerIndex, true))
+                            {
+                                var layer = sprite[enumLayerIndex];
+                                var newAlpha = Math.Min(layer.Color.A + change, originalAlpha);
+
+                                if (!newAlpha.Equals(layer.Color.A))
+                                {
+                                    _sprite.LayerSetColor((uid, sprite), enumLayerIndex, layer.Color.WithAlpha(newAlpha));
+                                    allLayersRestored = false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Remove component only when all layers are restored
+                if (allLayersRestored)
+                {
+                    RemCompDeferred<RMCFadingSpriteComponent>(uid);
+                }
             }
             else
             {
-                RemCompDeferred<RMCFadingSpriteComponent>(uid);
+                // Restore entire sprite (original behavior)
+                var newColor = Math.Min(sprite.Color.A + change, comp.OriginalAlpha);
+
+                if (!newColor.Equals(sprite.Color.A))
+                {
+                    _sprite.SetColor((uid, sprite), sprite.Color.WithAlpha(newColor));
+                }
+                else
+                {
+                    RemCompDeferred<RMCFadingSpriteComponent>(uid);
+                }
             }
         }
     }

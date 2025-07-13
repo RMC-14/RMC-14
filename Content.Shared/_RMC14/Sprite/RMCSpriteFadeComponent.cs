@@ -25,4 +25,10 @@ public sealed partial class RMCSpriteFadeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool ReactToMouse = true;
+
+    /// <summary>
+    /// List of layer keys to fade. If empty - fade entire sprite, if not empty - fade only specified layers
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<string> FadeLayers = new();
 }
