@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [RMCBaseSlideMagazineVisualsRevolver, RMCWeaponRevolverBase]
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverSpearhead
   name: CMB Spearhead autorevolver
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .357 Magnum rounds.

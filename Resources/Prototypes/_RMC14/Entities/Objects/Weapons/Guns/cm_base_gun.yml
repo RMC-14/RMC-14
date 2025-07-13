@@ -89,13 +89,3 @@
     layers:
     - state: base
       map: [ "enum.RMCMagazineVisuals.SlideOpen" ]
-  - type: RMCMagazineVisuals
-    containerId: ballistic-ammo
-
-- type: entity
-  abstract: true
-  parent: RMCBaseSlideMagazineVisualsBallistic
-  id: RMCBaseSlideMagazineVisualsRevolver
-  components:
-  - type: RMCMagazineVisuals
-    containerId: revolver-ammo
