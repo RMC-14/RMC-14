@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed resin traps being placeable under dead bodies
-    type: Fix
-  - message: Fixed dead infected hosts not being draggable if they're been infected
-      for awhile (stage 2 or higher)
-    type: Fix
-  id: 1507
-  time: '2025-03-29T01:55:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5989
 - author: texas1234567889
   changes:
   - message: Fixed Solaris having M42A2 shotguns instead of the HG37, MAR-40 instead
@@ -5081,5 +5071,16 @@
   id: 2007
   time: '2025-07-13T06:03:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7018
+- author: Dygon
+  changes:
+  - message: Flamethrower fire, acid sprays, and the Vanguard's Pierce action no longer
+      pass through resin walls.
+    type: Fix
+  - message: Flamethrowers now require slightly less range between the user and the
+      first spawned fire tile.
+    type: Tweak
+  id: 2008
+  time: '2025-07-13T08:17:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7016
 Name: RMC14
 Order: -1
