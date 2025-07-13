@@ -93,7 +93,10 @@
     layers:
     - state: standard_roof
       map: [ "enum.ItemCamouflageLayers.Layer" ]
-  - type: SpriteFade
+  - type: RMCSpriteFade
+    targetAlpha: 0.0
+    changeRate: 3.0
+    reactToMouse: false
   - type: ItemCamouflage
     colors:
       Jungle: "#9a9839"
