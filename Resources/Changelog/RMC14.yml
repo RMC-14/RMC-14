@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Intelligence Officers and Senior Enlisted Advisors can now take both
-      armor and cosmetic items separately, no longer blocking taking the other.
-    type: Tweak
-  id: 1505
-  time: '2025-03-28T07:23:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5960
 - author: N0lim
   changes:
   - message: Fixed Queen building speed being half the intended amount.
@@ -5081,5 +5073,12 @@
   id: 2005
   time: '2025-07-13T03:54:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7010
+- author: AverageNotDoingAnythingEnjoyer
+  changes:
+  - message: Fixed FORECON Sniper spawning with the rest of the squad.
+    type: Fix
+  id: 2006
+  time: '2025-07-13T03:56:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7007
 Name: RMC14
 Order: -1
