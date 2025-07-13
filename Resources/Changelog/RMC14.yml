@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: stranthbackup
-  changes:
-  - message: Fixed armors using the same value when resisting bullet and melee damage.
-      This makes the M3-VL and M3-EOD heavy armor better at resisting bullet damage
-      for example.
-    type: Fix
-  id: 1509
-  time: '2025-03-29T08:10:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5944
 - author: SigmaTheDragon
   changes:
   - message: Updated 4 flashlight grip sprites and 2 magnetic harness sprites.
@@ -5078,5 +5069,14 @@
   id: 2009
   time: '2025-07-13T09:05:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7015
+- author: OmerF-afk
+  changes:
+  - message: Added FN FP9000/FN FP9k/2 PMC and MP5A5
+    type: Add
+  - message: Fixed Mar-50's firerate Type23's missing buckshot HG3712's Typo on YML
+    type: Fix
+  id: 2010
+  time: '2025-07-13T09:11:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6983
 Name: RMC14
 Order: -1
