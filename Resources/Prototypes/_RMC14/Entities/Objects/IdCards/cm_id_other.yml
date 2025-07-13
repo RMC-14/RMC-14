@@ -299,6 +299,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/aegis.rsi
     state: keycard
+    drawdepth: SmallObjects
   - type: Item
     size: Tiny
   - type: Clothing

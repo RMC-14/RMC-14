@@ -1,6 +1,7 @@
 using System.Globalization;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client.Message;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Medical.HUD;
@@ -177,7 +178,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         {
             foreach (var reagent in uiState.Chemicals.Contents)
             {
-                if (!_prototype.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? prototype))
+                if (!_prototype.TryIndexReagent(reagent.Reagent.Prototype, out ReagentPrototype? prototype))
                     continue;
 
                 if (prototype.Unknown)

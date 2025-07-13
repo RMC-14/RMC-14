@@ -124,9 +124,7 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
-    - type: PhysicsMap
     - type: GridTree
-    - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
     - type: MapLight
@@ -112051,14 +112049,6 @@ entities:
     - type: Transform
       pos: 176.31894,39.856533
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: invalid
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - invalid
   - uid: 13823
     components:
     - type: Transform

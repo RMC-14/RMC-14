@@ -28,6 +28,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
 
@@ -99,7 +100,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                     if (!_map.TryGetTileRef(grid, grid, neighbor, out var tileRef) ||
                         tileRef.Tile.IsEmpty ||
-                        tileRef.Tile.IsSpace())
+                        _turf.IsSpace(tileRef))
                     {
                         blocked = true;
                         continue;
