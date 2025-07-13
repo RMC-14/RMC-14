@@ -1,6 +1,6 @@
 ﻿<controls:TacticalMapWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap"
-    Title="Map" MinSize="600 600">
+    Title="Map" SetSize="600 600">
     <controls:TacticalMapWrapper Name="Wrapper" Access="Public" />
 </controls:TacticalMapWindow>

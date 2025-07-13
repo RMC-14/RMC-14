@@ -16,7 +16,7 @@
     - RMCTesla
     # TODO JIMA planted flag
     - RMCSentry
-    # TODO flamer sentry
+    - RMCSentryFire
 
 - type: entity
   parent: RMCSpawnerRandomSentry

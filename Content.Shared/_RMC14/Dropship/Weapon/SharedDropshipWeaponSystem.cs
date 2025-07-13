@@ -808,6 +808,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (ent.Comp.Target == null)
         {
+            if (_net.IsClient)
+            {
+                var msg = Loc.GetString("rmc-dropship-paradrop-lock-no-target");
+                _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+            }
             RefreshWeaponsUI(ent);
             return;
         }
@@ -822,8 +827,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!TryComp(dropship, out FTLComponent? ftl) ||
                 ftl.State != FTLState.Travelling)
             {
-                var msg = Loc.GetString("rmc-dropship-paradrop-lock-target-not-flying");
-                _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+                if (_net.IsClient)
+                {
+                    var msg = Loc.GetString("rmc-dropship-paradrop-lock-target-not-flying");
+                    _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+                }
                 return;
             }
         }
@@ -837,8 +845,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                !_area.CanFulton(coordinates) ||
                !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)))
             {
-                var msg = Loc.GetString("rmc-laser-designator-not-cas");
-                _popup.PopupCursor(msg, args.Actor);
+                if (_net.IsClient)
+                {
+                    var msg = Loc.GetString("rmc-laser-designator-not-cas");
+                    _popup.PopupCursor(msg, args.Actor);
+                }
                 return;
             }
         }
@@ -849,7 +860,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             var enumerator = Transform(dropship).ChildEnumerator;
             while (enumerator.MoveNext(out var child))
             {
-                // TODO Only open the bottom doors instead of all doors
                 if (!TryComp(child, out DoorComponent? door) ||
                     door.Location != DoorLocation.Aft ||
                     !TryComp(child, out DoorBoltComponent? doorBolt) ||
@@ -1213,7 +1223,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var query = EntityQueryEnumerator<ActiveLaserDesignatorComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var active, out var xform))
         {
-            if (!_transform.InRange(xform.Coordinates, active.Origin, 0.1f))
+            if (!_transform.InRange(xform.Coordinates, active.Origin, active.BreakRange))
                 RemCompDeferred<ActiveLaserDesignatorComponent>(uid);
         }
     }

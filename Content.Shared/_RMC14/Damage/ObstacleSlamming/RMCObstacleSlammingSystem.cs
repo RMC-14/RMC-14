@@ -127,9 +127,10 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         args.Handled = true;
     }
 
-    public void MakeImmune(EntityUid uid)
+    public void MakeImmune(EntityUid uid, float immuneDuration = 2)
     {
         var comp = EnsureComp<RMCObstacleSlamImmuneComponent>(uid);
+        comp.ExpireIn = TimeSpan.FromSeconds(immuneDuration);
         comp.ExpireAt = _timing.CurTime + comp.ExpireIn;
         Dirty(uid, comp);
     }
