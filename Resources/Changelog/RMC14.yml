@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: texas1234567889
-  changes:
-  - message: Fixed Solaris having M42A2 shotguns instead of the HG37, MAR-40 instead
-      of MAR-50, AR10 instead of Basira, riot armor in marshals instead of CMB armor
-      and masks, and MK45s instead of CMB spearheads.
-    type: Fix
-  - message: Fixed Solaris missing baton slugs and RC6 helmets in mining, and a pair
-      of binoculars and a cigar in admin dorms.
-    type: Fix
-  id: 1508
-  time: '2025-03-29T08:03:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6007
 - author: stranthbackup
   changes:
   - message: Fixed armors using the same value when resisting bullet and melee damage.
@@ -5082,5 +5070,13 @@
   id: 2008
   time: '2025-07-13T08:17:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7016
+- author: Arykh
+  changes:
+  - message: Transfer directions on reagent tanks are now visible when you examine
+      them. No more guessing games.
+    type: Add
+  id: 2009
+  time: '2025-07-13T09:05:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7015
 Name: RMC14
 Order: -1
