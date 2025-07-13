@@ -1216,3 +1216,6 @@ HydroponicsToolHatchet: RMCToolHatchet
 ClothingEyesGlassesSunglasses: RMCSunglasses
 CableTerminal: RMCCableTerminal
 ClothingEyesGlassesChemical: RMCGlassesReagentHUDGlasses
+
+# 2025-07-12
+RMCSmartGun: RMCSmartGunUNMC
