@@ -100,7 +100,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         damage += eve.Damage;
         if (args.Entity == null ||
             TerminatingOrDeleted(args.Entity) ||
-            !_xeno.CanAbilityAttackTarget(stab,args.Entity.Value))
+            !_xeno.CanAbilityAttackTarget(stab,args.Entity.Value, true))
         {
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
             RaiseLocalEvent(stab, missEvent);
