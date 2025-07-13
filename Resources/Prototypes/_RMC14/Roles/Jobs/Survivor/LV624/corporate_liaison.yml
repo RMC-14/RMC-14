@@ -5,8 +5,6 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorLV624CorporateLiaison
   spawnMenuRoleName: Corporate Liaison (LV624 Survivor)
-  ranks:
-    RMCRankICBCorporateLiaison: []
   startingGear: RMCGearSurvivorLV624CorporateLiaison
   special:
   - !type:AddComponentSpecial
