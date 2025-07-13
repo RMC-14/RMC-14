@@ -100,8 +100,8 @@
   isHumanoid: true
 
 - type: entity
-  id: RMCSurvivorPresetCivilian
-  name: civilian colonist preset
+  id: RMCSurvivorPresetNoGun
+  name: no gun colonist preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
@@ -112,6 +112,14 @@
     - [ RMCFireAxe ]
     - [ RMCWelderIndustrial ]
     - [ CMAdvFirstAidKitFilled ]
+
+- type: entity
+  parent: RMCSurvivorPresetNoGun
+  id: RMCSurvivorPresetCivilian
+  name: civilian colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
     randomWeapon:
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
     - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
