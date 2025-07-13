@@ -1,5 +1,7 @@
 using System.Linq;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Magazine;
@@ -13,12 +15,18 @@ public sealed class RMCMagazineSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCMagazineVisualsComponent, ComponentInit>(OnMagazineInit);
+        SubscribeLocalEvent<RMCMagazineVisualsComponent, MapInitEvent>(OnMagazineInit);
+        SubscribeLocalEvent<RMCMagazineVisualsComponent, GunShotEvent>(OnMagazineGunShot);
         SubscribeLocalEvent<RMCMagazineVisualsComponent, EntInsertedIntoContainerMessage>(OnMagazineSlotInserted);
         SubscribeLocalEvent<RMCMagazineVisualsComponent, EntRemovedFromContainerMessage>(OnMagazineSlotRemoved);
     }
 
-    private void OnMagazineInit(Entity<RMCMagazineVisualsComponent> ent, ref ComponentInit args)
+    private void OnMagazineInit(Entity<RMCMagazineVisualsComponent> ent, ref MapInitEvent args)
+    {
+        UpdateMagazine(ent, ent.Comp.ContainerId);
+    }
+
+    private void OnMagazineGunShot(Entity<RMCMagazineVisualsComponent> ent, ref GunShotEvent args)
     {
         UpdateMagazine(ent, ent.Comp.ContainerId);
     }
@@ -41,25 +49,9 @@ public sealed class RMCMagazineSystem : EntitySystem
         if (ent.Comp.ContainerId != containerID)
             return;
 
-        if (TryComp<BallisticAmmoProviderComponent>(ent, out var ballisticProvider) && ballisticProvider.UnspawnedCount > 0)
-        {
-            _appearance.SetData(ent, RMCMagazineVisuals.SlideOpen, false, appearance);
-            return;
-        }
+        var ammoCountEvent = new GetAmmoCountEvent();
+        RaiseLocalEvent(ent, ref ammoCountEvent);
 
-        var ammoEnt = GetAmmoEntity(ent, containerID);
-        _appearance.SetData(ent, RMCMagazineVisuals.SlideOpen, ammoEnt == null, appearance);
-    }
-
-    public EntityUid? GetAmmoEntity(EntityUid uid, string containerID)
-    {
-        if (_container.TryGetContainer(uid, containerID, out var container)
-            && container.ContainedEntities.Count > 0
-            && container.ContainedEntities.FirstOrDefault() is { } containedEntity)
-        {
-            return containedEntity;
-        }
-
-        return null;
+        _appearance.SetData(ent, RMCMagazineVisuals.SlideOpen, ammoCountEvent.Count <= 0, appearance);
     }
 }
