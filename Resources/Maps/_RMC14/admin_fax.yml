@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/13/2025 11:57:13
-  entityCount: 2336
+  time: 07/13/2025 00:17:28
+  entityCount: 2334
 maps:
 - 1
 grids:
@@ -2805,12 +2805,6 @@ entities:
     - type: Transform
       pos: 15.185467,-26.979036
       parent: 2
-- proto: CMActionToggleScope
-  entities:
-  - uid: 1405
-    components:
-    - type: Transform
-      parent: 1404
 - proto: CMAirlock
   entities:
   - uid: 1784
@@ -9975,7 +9969,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -7041.4106
+      secondsUntilStateChange: -7049.374
       state: Opening
   - uid: 1278
     components:
@@ -10164,14 +10158,6 @@ entities:
     - type: Transform
       pos: 37.609024,-13.886522
       parent: 2
-    - type: Scope
-      scopingToggleActionEntity: 1405
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1405
 - proto: RMCBoxHandcuffs
   entities:
   - uid: 1173
@@ -15441,13 +15427,6 @@ entities:
     components:
     - type: Transform
       pos: 20.339493,-28.16487
-      parent: 2
-- proto: SpawnPointLatejoin
-  entities:
-  - uid: 2336
-    components:
-    - type: Transform
-      pos: 17.5,-21.5
       parent: 2
 - proto: WarpPoint
   entities:
