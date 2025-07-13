@@ -9054,16 +9054,6 @@ entities:
         -8,-33: RMCAreaGACommandDeck
         -8,-34: RMCAreaGACommandDeck
     - type: ImplicitRoof
-- proto: ActionToggleLight
-  entities:
-  - uid: 1367
-    components:
-    - type: Transform
-      parent: 1366
-  - uid: 1997
-    components:
-    - type: Transform
-      parent: 1996
 - proto: ArmorHelmetM10
   entities:
   - uid: 981
@@ -9078,18 +9068,6 @@ entities:
       parent: 2
     - type: CycleableVisor
       action: 1995
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1995
-    - type: ActionsContainer
 - proto: Basketball
   entities:
   - uid: 3068
@@ -22259,12 +22237,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCActionCycleVisor
-  entities:
-  - uid: 1995
-    components:
-    - type: Transform
-      parent: 1994
 - proto: RMCAIConsoleHERMES
   entities:
   - uid: 3982
@@ -31978,7 +31950,7 @@ entities:
   - uid: 850
     components:
     - type: MetaData
-      name: Seaction Sergeant Gear Locker
+      name: Section Sergeant Gear Locker
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 20.5,1.5
