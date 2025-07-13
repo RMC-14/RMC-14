@@ -243,7 +243,7 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
                 var pingData = GetPingDataFromEntityId(kvp.Key);
                 return pingData?.Priority ?? 0;
             })
-            .Take(4)
+            .Take(6)
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     }
 
@@ -254,8 +254,8 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         return new RadialMenuNestedLayerOption(actions, 100)
         {
             ToolTip = categoryName,
-            BackgroundColor = categoryColor.WithAlpha(0.1f),
-            HoverBackgroundColor = categoryColor.WithAlpha(0.5f),
+            BackgroundColor = MenuBackgroundColor,
+            HoverBackgroundColor = MenuHoverBackgroundColor,
             Sprite = categoryIcon
         };
     }

@@ -4,6 +4,7 @@ using Robust.Client.Input;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Robust.Client.GameObjects;
@@ -133,7 +134,8 @@ public partial class ColoredSimpleRadialMenu : RadialMenu
             var scale = new Vector2(3f, 3f);
             var texture = sprites.Frame0(model.Sprite);
 
-            if (model is ColoredRadialMenuActionOption<string> coloredOption)
+            // Check if this is a colored option using the interface
+            if (model is IColoredRadialMenuOption coloredOption)
             {
                 var textureRect = new TextureRect
                 {
@@ -152,12 +154,30 @@ public partial class ColoredSimpleRadialMenu : RadialMenu
             }
         }
 
-        if (model is RadialMenuActionOption actionOption)
+        if (model is ColoredRadialMenuActionOption coloredActionOption)
+        {
+            button.OnPressed += _ =>
+            {
+                coloredActionOption.Execute();
+                if (!haveNested)
+                    Close();
+            };
+        }
+        else if (model is RadialMenuActionOption actionOption)
         {
             button.OnPressed += _ =>
             {
                 actionOption.OnPressed?.Invoke();
-                if(!haveNested)
+                if (!haveNested)
+                    Close();
+            };
+        }
+        else if (model is IRadialMenuAction customAction)
+        {
+            button.OnPressed += _ =>
+            {
+                customAction.Execute();
+                if (!haveNested)
                     Close();
             };
         }
@@ -237,11 +257,46 @@ public partial class ColoredSimpleRadialMenu : RadialMenu
     }
 }
 
-public class ColoredRadialMenuActionOption<T> : RadialMenuActionOption<T>
+public interface IRadialMenuAction
+{
+    void Execute();
+}
+
+public interface IColoredRadialMenuOption
+{
+    Color SpriteColor { get; }
+}
+
+public class ColoredRadialMenuActionOption : RadialMenuOption, IRadialMenuAction, IColoredRadialMenuOption
 {
     public Color SpriteColor { get; init; } = Color.White;
+    public System.Action OnPressed { get; }
 
-    public ColoredRadialMenuActionOption(Action<T> onPressed, T data) : base(onPressed, data)
+    public ColoredRadialMenuActionOption(System.Action onPressed)
     {
+        OnPressed = onPressed;
+    }
+
+    public void Execute()
+    {
+        OnPressed?.Invoke();
+    }
+}
+
+public class ColoredRadialMenuActionOption<T> : RadialMenuOption, IRadialMenuAction, IColoredRadialMenuOption
+{
+    public Color SpriteColor { get; init; } = Color.White;
+    public System.Action<T> OnPressed { get; }
+    public T Data { get; }
+
+    public ColoredRadialMenuActionOption(System.Action<T> onPressed, T data)
+    {
+        OnPressed = onPressed;
+        Data = data;
+    }
+
+    public void Execute()
+    {
+        OnPressed?.Invoke(Data);
     }
 }
