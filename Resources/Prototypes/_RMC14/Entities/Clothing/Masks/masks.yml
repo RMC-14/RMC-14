@@ -303,14 +303,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh.rsi
   - type: FoldableClothing
-    foldedEquippedPrefix: up
-    foldedHeldPrefix: up
     foldedHideLayers: [ ]
-    unfoldedHideLayers:
-    - Hair
-    - HeadTop
-    - HeadSide
-    - Snout
 
 - type: entity
   parent: RMCMaskKeffiyeh
