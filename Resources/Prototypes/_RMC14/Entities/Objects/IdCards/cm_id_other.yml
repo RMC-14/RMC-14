@@ -307,3 +307,6 @@
   components:
   - type: IntelRescueSurvivorObjective
     value: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: bloody
