@@ -248,7 +248,8 @@
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:
