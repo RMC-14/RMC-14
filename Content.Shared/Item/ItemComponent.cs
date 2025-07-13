@@ -62,7 +62,7 @@ public sealed partial class ItemComponent : Component
     public Vector2i StoredOffset;
 
     // RMC14
-    [DataField("StoredRotation")]
+    [DataField("storedRotation")]
     private float _unusedStoredRotation;
 }
 
