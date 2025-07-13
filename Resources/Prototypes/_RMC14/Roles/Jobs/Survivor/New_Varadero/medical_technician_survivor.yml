@@ -3,7 +3,7 @@
   id: CMSurvivorMedicalTechnician
   name: cm-job-name-survivor-medical-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMSurvivorDoctor
+  playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorMedicalTechnician
   spawnMenuRoleName: Medical Technician (NV Survivor)
   special:

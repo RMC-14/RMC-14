@@ -70,6 +70,10 @@
   - type: RandomHumanoidSpawner
     settings: RMCSurvivorScientist
 
+- type: playTimeTracker
+  id: CMJobSurvivorScientist
+  isHumanoid: true
+
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
   id: RMCSurvivorScientist
