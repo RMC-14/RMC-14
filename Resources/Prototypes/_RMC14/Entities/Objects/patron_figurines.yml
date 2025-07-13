@@ -323,11 +323,11 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKateFleming
-  name: Kate 'Engie' Fleming figurine
-  description: "Smells like welding fuel."
+  name: Kate 'Gel' Fleming figurine
+  description: "A small, detailed miniature of a purple slime-person marine. There is a sticker on the bottom warning of health risks. Caution: This product may contain lead."
   components:
   - type: Sprite
-    state: kate_engie_fleming
+    state: kate_gel_fleming
   - type: PatronFigurine
     id: 355c1f67-83a4-4252-b288-b218a4f84fd5
 
