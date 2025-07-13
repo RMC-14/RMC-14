@@ -194,14 +194,14 @@ public sealed partial class OverwatchSquadView : Control
         base.FrameUpdate(args);
 
         CrateStatus.Text = HasCrate
-            ? "[color=green][bold]Crate Loaded[/bold][/color]"
-            : "[color=red][bold]No crate loaded[/bold][/color]";
+            ? " [color=green][bold]\\[ CRATE LOADED \\][/bold][/color]"
+            : " [color=red][bold]\\[ NO CRATE LOADED \\][/bold][/color]";
 
         var time = IoCManager.Resolve<IGameTiming>().CurTime;
         var supplyTimeLeft = NextLaunchAt - time;
         if (supplyTimeLeft > TimeSpan.Zero)
         {
-            CrateStatus.Text = $"[color=#D3B400][bold]Cooldown - {(int)supplyTimeLeft.TotalSeconds} seconds[/bold][/color]";
+            CrateStatus.Text = $" [color=#D3B400][bold]\\[ COOLDOWN - {(int)supplyTimeLeft.TotalSeconds} SECONDS \\][/bold][/color]";
             LaunchButton.Disabled = true;
         }
         else
@@ -212,14 +212,14 @@ public sealed partial class OverwatchSquadView : Control
         var orbitalTimeLeft = NextOrbitalAt - time;
         if (orbitalTimeLeft > TimeSpan.Zero)
         {
-            OrbitalStatus.Text = $"[color=#D3B400][bold]Cooldown - {(int)orbitalTimeLeft.TotalSeconds} seconds[/bold][/color]";
+            OrbitalStatus.Text = $" [color=#D3B400][bold]\\[ COOLDOWN - {(int)orbitalTimeLeft.TotalSeconds} SECONDS \\][/bold][/color]";
             OrbitalFireButton.Disabled = true;
         }
         else
         {
             OrbitalStatus.Text = HasOrbital
-                ? "[color=green][bold]Ready[/bold][/color]"
-                : "[color=red][bold]Not ready[/bold][/color]";
+                ? " [color=green][bold]\\[ READY \\][/bold][/color]"
+                : " [color=red][bold]\\[ NOT READY \\][/bold][/color]";
             OrbitalFireButton.Disabled = false;
         }
     }

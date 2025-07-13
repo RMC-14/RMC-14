@@ -218,7 +218,7 @@
                                     </BoxContainer>
                                     <BoxContainer Orientation="Vertical">
                                         <RichTextLabel Name="CrateStatus" Access="Public"
-                                                       Text="[color=red][bold]No crate loaded[/bold][/color]" />
+                                                       Text="[color=red][bold][ NO CRATE LOADED ][/bold][/color]" />
                                         <Label Text="STATUS" HorizontalAlignment="Center" />
                                     </BoxContainer>
                                 </BoxContainer>
