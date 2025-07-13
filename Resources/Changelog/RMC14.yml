@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SigmaTheDragon
-  changes:
-  - message: Updated 4 flashlight grip sprites and 2 magnetic harness sprites.
-    type: Tweak
-  id: 1510
-  time: '2025-03-29T08:11:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6008
 - author: Dygon
   changes:
   - message: Doafter bars now have the same opacity as the entity performing the action,
@@ -5078,5 +5071,13 @@
   id: 2010
   time: '2025-07-13T09:11:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6983
+- author: DrSmugleaf
+  changes:
+  - message: Treating wounds with surgical line or synthgraft now breaks when moving
+      0.5 tiles, instead of only 0.3.
+    type: Tweak
+  id: 2011
+  time: '2025-07-13T10:25:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7019
 Name: RMC14
 Order: -1
