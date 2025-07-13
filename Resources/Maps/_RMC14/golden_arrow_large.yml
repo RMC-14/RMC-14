@@ -9066,8 +9066,6 @@ entities:
     - type: Transform
       pos: 24.89389,9.788375
       parent: 2
-    - type: CycleableVisor
-      action: 1995
 - proto: Basketball
   entities:
   - uid: 3068
@@ -26886,14 +26884,6 @@ entities:
     - type: Transform
       pos: 24.526974,9.604916
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 1997
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1997
 - proto: RMCFlashlightPen
   entities:
   - uid: 1948
@@ -27577,14 +27567,6 @@ entities:
     - type: Transform
       pos: 36.81079,5.7377424
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 1367
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1367
   - uid: 1907
     components:
     - type: Transform
