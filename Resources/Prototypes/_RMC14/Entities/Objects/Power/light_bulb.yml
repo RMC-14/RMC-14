@@ -75,7 +75,7 @@
   components:
   - type: LightBulb
     color: "#FFEFD2"
-    lightEnergy: 6
+    lightEnergy: 1
     lightRadius: 10
     lightSoftness: 1
     PowerUse: 25
