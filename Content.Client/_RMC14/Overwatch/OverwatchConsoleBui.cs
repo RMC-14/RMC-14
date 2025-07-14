@@ -280,6 +280,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             foreach (var marine in marines)
             {
                 var roleName = "None";
+                string? rankName = null;
                 if (marine.Role != null)
                 {
                     if (_prototypes.TryIndex(marine.Role, out var job))
@@ -306,7 +307,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     roles[marine.Role.Value] = role;
                 }
 
-                var name = marine.Name;
+                if (marine.Rank != null)
+                {
+                    if (_prototypes.TryIndex(marine.Rank, out var rank))
+                        rankName = rank.Prefix;
+                }
+
+                var name = rankName != null ? $"{rankName} {marine.Name}" : marine.Name;
                 if (!squadRows.TryGetValue(marine.Id, out var row))
                 {
                     var watchButton = new Button
