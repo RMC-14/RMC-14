@@ -69,6 +69,44 @@
     - id: RMCWeaponPistolD18
     - id: RMCMagazinePistolD18
 
+- type: entity
+  parent: RMCD18Case
+  id: RMCHoldoutCase
+  name: "W62 'Whisper' storing case"
+  description: A small case containing a W62 Whisper, a .22 ratkiller made by Spearhead Armory. It was most likely brought by a marine from home, or taken from a colony without permission.
+  components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCWeaponPistolHoldout
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,2,1
+    whitelist:
+      tags:
+      - RMCWeaponPistolHoldout
+      - RMCMagazinePistolHoldout
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHoldout
+    - id: RMCMagazinePistolHoldout
+
+- type: entity
+  parent: RMCD18Case
+  id: RMCActionCase
+  name: "AC71 'Action' storing case"
+  description: A small case containing an AC71 Action, a holdout pistol by Spearhead Armory. It was most likely brought by a marine from home, or taken from a colony without permission.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCWeaponPistolAction
+      - RMCMagazinePistolAction
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolAction
+    - id: RMCMagazinePistolAction
 
 # M77
 - type: entity

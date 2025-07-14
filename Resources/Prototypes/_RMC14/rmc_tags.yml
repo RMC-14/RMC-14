@@ -5,9 +5,6 @@
   id: CMCartridgePistol9mm
 
 - type: Tag
-  id: CMCartridgePistol.22mm
-
-- type: Tag
   id: CMCartridgePistol9mmAP
 
 - type: Tag

@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCWeaponPistolHoldout
+    - id: RMCWeaponPistolAction
     - id: CMCrowbar
     - id: RMCBoxPizzaVegetable
     - id: RMCBoxPizzaMushroom

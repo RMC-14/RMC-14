@@ -1,12 +1,12 @@
 ﻿- type: entity
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolHoldout
-  name: holdout pistol
-  description: A tiny pistol meant for hiding in hard-to-reach areas. Best not ask where it came from.
+  name: "W62 'Whisper' pistol"
+  description: A small plinker in .22LR made by Spearhead. Designed for target shooting or quietly dealing with interplanetary vermin. Integrally suppressed and has tritium paint on the ironsights as standard.
   suffix: Filled
   components:
   - type: Item
-    size: Tiny
+    size: Small
   - type: RMCSelectiveFire
     scatterWielded: 10
     scatterUnwielded: 10
@@ -33,27 +33,39 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentSuppressorHoldout
         whitelist:
           tags:
-          - RMCAttachmentBarrelCharger
-          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorHoldout
       rmc-aslot-rail:
         whitelist:
           tags:
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS5RedDotSight
           - RMCAttachmentRailFlashlight
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.71, 0.095
       rmc-aslot-rail: -0.065, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
   - type: Tag
     tags:
-    - Holdout
+    - RMCWeaponPistolHoldout
+
+- type: entity
+  parent: RMCWeaponPistolHoldout
+  id: RMCWeaponPistolHoldoutCustom
+  name: "W62 'Whisper' custom pistol"
+  description: A small plinker in .22LR made by Spearhead. Designed for target shooting or quietly dealing with interplanetary vermin. This one is custom fitted with ivory grip plates and a bluesteel finish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/holdout_custom.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/holdout_custom.rsi
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -107,6 +119,11 @@
   - type: CartridgeAmmo
     proto: CMBulletPistol22mm
 
-
 - type: Tag
   id: RMCMagazinePistolHoldout
+
+- type: Tag
+  id: RMCWeaponPistolHoldout
+
+- type: Tag
+  id: CMCartridgePistol.22mm
