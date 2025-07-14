@@ -22,6 +22,7 @@
       map: [ "enum.ItemCamouflageLayers.Layer" ]
     - state: standard_roof
       map: [ "enum.ItemCamouflageLayers.Layer2", "standard_roof" ]
+  - type: InteractionTransparency
   - type: RMCSpriteFade
     targetAlpha: 0.0
     changeRate: 6.0
@@ -46,8 +47,12 @@
           bounds: "-1.5,-2.5,-1.4,1"
         density: 20000
         hard: true
+        mask:
+        - FullTileMask
         layer:
-        - Impassable
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
         - Opaque
       fix-2: # Right Wall
         shape:
@@ -55,8 +60,12 @@
           bounds: "0.4,-2.5,0.5,1"
         density: 20000
         hard: true
+        mask:
+        - FullTileMask
         layer:
-        - Impassable
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
         - Opaque
       fix-3: # Back Wall
         shape:
@@ -64,11 +73,28 @@
           bounds: "-1.5,0.4,0.5,1.5"
         density: 20000
         hard: true
+        mask:
+        - FullTileMask
         layer:
-        - Impassable
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
         - Opaque
   - type: CollisionWake
     enabled: false
+  - type: Damageable
+    maxHealth: 200
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 
 # Standard Tents
@@ -113,8 +139,12 @@
           bounds: "-1.5,-2.5,-1.4,1"
         density: 20000
         hard: true
+        mask:
+        - FullTileMask
         layer:
-        - Impassable
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
         - Opaque
       fix-2: # Lower Right Wall
         shape:
@@ -122,8 +152,12 @@
           bounds: "0.4,-2.5,0.5,-1.5"
         density: 20000
         hard: true
+        mask:
+        - FullTileMask
         layer:
-        - Impassable
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
         - Opaque
       fix-3: # Back Wall
         shape:
@@ -131,8 +165,12 @@
           bounds: "-1.5,0.4,2.5,1.5"
         density: 20000
         hard: true
+        mask:
+        - FullTileMask
         layer:
-        - Impassable
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
         - Opaque
       fix-4: # Upper Right Wall
         shape:
@@ -140,8 +178,12 @@
           bounds: "2.4,-1.5,2.5,1"
         density: 20000
         hard: true
+        mask:
+        - FullTileMask
         layer:
-        - Impassable
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
         - Opaque
       fix-5: # Front Wall
         shape:
@@ -149,6 +191,10 @@
           bounds: "0.4,-1.4,2.5,-1.5"
         density: 20000
         hard: true
+        mask:
+        - FullTileMask
         layer:
-        - Impassable
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
         - Opaque

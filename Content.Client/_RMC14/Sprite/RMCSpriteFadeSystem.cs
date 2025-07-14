@@ -10,6 +10,7 @@ using Robust.Client.UserInterface;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Physics;
+using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Sprite;
 
@@ -29,6 +30,7 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly IEyeManager _eyeManager = default!;
 
     private List<(MapCoordinates Point, bool ExcludeBoundingBox)> _points = new();
     private readonly HashSet<RMCFadingSpriteComponent> _comps = new();
@@ -91,7 +93,7 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
         {
             foreach (var (mapPos, excludeBB) in _points)
             {
-                foreach (var ent in state.GetClickableEntities(mapPos, excludeFaded: false))
+                foreach (var ent in state.GetClickableEntities(mapPos, _eyeManager.CurrentEye, excludeFaded: false, ignoreInteractionTransparency: true))
                 {
                     if (ent == player || !_fadeQuery.HasComponent(ent) || !_spriteQuery.TryGetComponent(ent, out var sprite) || sprite.DrawDepth < playerSprite.DrawDepth)
                         continue;
