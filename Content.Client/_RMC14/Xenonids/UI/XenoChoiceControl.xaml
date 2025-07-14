@@ -1,17 +1,33 @@
 ﻿<ui:XenoChoiceControl
-    xmlns="https://spacestation14.io"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.UI">
-    <BoxContainer Orientation="Horizontal">
-        <Button Name="Button" Access="Public"
-                HorizontalExpand="True" VerticalExpand="False"
-                StyleClasses="ButtonSquare" Margin="0">
-            <BoxContainer Orientation="Horizontal" Margin="0">
-                <TextureRect Name="Texture" Access="Public"
-                             HorizontalExpand="False" VerticalExpand="False"
-                             Margin="1"/>
-                <Control MinWidth="5"/>
-                <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
+     xmlns="https://spacestation14.io"
+     xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.UI"
+     xmlns:style="clr-namespace:Content.Client.Stylesheets">
+    <BoxContainer Orientation="Vertical" Margin="0 0 0 3">
+        <BoxContainer Orientation="Horizontal">
+            <BoxContainer MaxWidth="10" Name="LeaderBar" SetWidth="5" Access="Public" Visible="False">
+                <Button Name="LeaderBox" Access="Public"></Button>
             </BoxContainer>
-        </Button>
+            <Button Name="Button" Access="Public"
+                    HorizontalExpand="True" VerticalExpand="False"
+                    StyleClasses="ButtonSquare" Margin="0">
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left">
+                    <RichTextLabel Name="EvoPoints" Text="Evo: 234" Access="Public" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" Visible="False"/>
+                    <TextureRect Name="Texture" Access="Public"
+                                 HorizontalExpand="False" VerticalExpand="False"
+                                 Margin="1" VerticalAlignment="Center" />
+                    <TextureRect Name="LeaderStar" Access="Public"
+                                 HorizontalExpand="False" VerticalExpand="False" VerticalAlignment="Bottom"
+                                 Margin="-32 0 0 4" Visible="False"/>
+                    <Control MinWidth="5"/>
+                    <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
+                </BoxContainer>
+                <BoxContainer Access="Public" Name="QueenButtons" HorizontalAlignment="Right" Orientation="Vertical" Visible="False" Margin="0 5 0 0">
+                    <Button Access="Public" StyleClasses="ButtonSquare" Text="Heal" Name="HealButton"></Button>
+                    <Button Access="Public" StyleClasses="ButtonSquare" Text="Transfer Plasma" Name="PlasmaButton"></Button>
+                </BoxContainer>
+            </Button>
+        </BoxContainer>
+        <ProgressBar Access="Public" Visible="False" Name="Health" MinValue="0" MaxValue="1" SetHeight="5" Value="0.5"/>
+        <ProgressBar Access="Public" Visible="False" Name="Plasma" MinValue="0" MaxValue="1" SetHeight="5" Value="0.2"/>
     </BoxContainer>
 </ui:XenoChoiceControl>
