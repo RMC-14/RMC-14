@@ -732,6 +732,12 @@
   - node: RMCBoxMagazineRifleM16Empty
     entity: RMCBoxMagazineRifleM16Empty
 
+  # M1984
+  - node: RMCBoxMagazinePistolM1984Empty
+    entity: RMCBoxMagazinePistolM1984Empty
+  - node: RMCBoxMagazinePistolM1984APEmpty
+    entity: RMCBoxMagazinePistolM1984APEmpty
+
   # M4A4
   - node: RMCBoxMagazinePistolM4A4Empty
     entity: RMCBoxMagazinePistolM4A4Empty
