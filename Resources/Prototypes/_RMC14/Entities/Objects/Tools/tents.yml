@@ -93,9 +93,9 @@
       map: [ "enum.ItemCamouflageLayers.Layer" ]
     - state: extension_frame
     - state: extension_canvas
-      map: [ "enum.ItemCamouflageLayers.Layer3" ]
+      map: [ "enum.ItemCamouflageLayers.Layer2" ]
     - state: standard_roof
-      map: [ "enum.ItemCamouflageLayers.Layer2", "standard_roof" ]
+      map: [ "enum.ItemCamouflageLayers.Layer3", "standard_roof" ]
     - state: extension_roof
       map: [ "enum.ItemCamouflageLayers.Layer4", "extension_roof" ]
   - type: RMCSpriteFade

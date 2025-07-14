@@ -114,6 +114,11 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                         if (collided) continue;
                     }
 
+                    var fadeComponent = _fadeQuery.GetComponent(ent);
+                    // If reactToMouse == false and this is a mouse hover - skip fade
+                    if (excludeBB && fadeComponent.ReactToMouse == false)
+                        continue;
+
                     if (!_fadingQuery.TryComp(ent, out var fading))
                     {
                         fading = AddComp<RMCFadingSpriteComponent>(ent);
@@ -121,11 +126,6 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                     }
 
                     _comps.Add(fading);
-
-                    var fadeComponent = _fadeQuery.GetComponent(ent);
-                    // If reactToMouse == false and this is a mouse hover - skip fade
-                    if (excludeBB && fadeComponent.ReactToMouse == false)
-                        continue;
 
                     var targetAlpha = fadeComponent.TargetAlpha;
                     var changeRate = fadeComponent.ChangeRate;
