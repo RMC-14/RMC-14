@@ -111,7 +111,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolM4A4
+    - id: RMCBoxMagazinePiRMCBoxMagazinePistolM1984stolM4A4
 
 - type: entity
   parent: RMCCrateAmmo
@@ -120,7 +120,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolM4A4AP
+    - id: RMCBoxMagazinePistolM1984AP
 
 # m4a4
 - type: entity
