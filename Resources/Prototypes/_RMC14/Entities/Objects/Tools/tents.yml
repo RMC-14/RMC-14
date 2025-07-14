@@ -1,7 +1,7 @@
 ﻿- type: entity
   abstract: true
-  parent: BaseItem
-  id: RMCTentBodyBase
+  parent: BaseStructure
+  id: RMCTentBase
   name: UNMC field tent
   description: A standard UNMC Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
   placement:
@@ -9,7 +9,6 @@
     snap:
     - Wall
   components:
-  - type: Anchorable
   - type: Transform
     anchored: true
     noRot: true
@@ -22,13 +21,13 @@
     - state: standard_canvas
       map: [ "enum.ItemCamouflageLayers.Layer" ]
     - state: standard_roof
-      map: [ "enum.ItemCamouflageLayers.Layer2" ]
+      map: [ "enum.ItemCamouflageLayers.Layer2", "standard_roof" ]
   - type: RMCSpriteFade
     targetAlpha: 0.0
-    changeRate: 4.0
+    changeRate: 6.0
     reactToMouse: false
     fadeLayers:
-    - "Layer2"
+    - "standard_roof"
   - type: ItemCamouflage
     colors:
       Jungle: "#9a9839"
@@ -38,12 +37,7 @@
       Urban: "#acb8c7"
   - type: Corrodible
     isCorrodible: false
-  - type: Item
-    size: Large
   - type: Appearance
-  - type: Clickable
-  - type: Physics
-    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1: # Left Wall
@@ -76,67 +70,18 @@
   - type: CollisionWake
     enabled: false
 
-# DEPRECATED: Roof is now part of tent body as a layer
-# - type: entity
-#   abstract: true
-#   parent: BaseItem
-#   id: RMCTentRoofBase
-#   name: UNMC field tent
-#   description: A standard UNMC Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
-#   suffix: Roof
-#   placement:
-#     mode: SnapgridCenter
-#     snap:
-#     - Wall
-#   components:
-#   - type: Anchorable
-#   - type: Transform
-#     anchored: true
-#     noRot: true
-#   - type: Physics
-#     bodyType: Static
-#   - type: Clickable
-#   - type: Sprite
-#     sprite: _RMC14/Objects/tents.rsi
-#     drawdepth: Overdoors
-#     offset: 1,0
-#     layers:
-#     - state: standard_roof
-#       map: [ "enum.ItemCamouflageLayers.Layer" ]
-#   - type: RMCSpriteFade
-#     targetAlpha: 0.0
-#     changeRate: 3.0
-#     reactToMouse: false
-#   - type: ItemCamouflage
-#     colors:
-#       Jungle: "#9a9839"
-#       Desert: "#ffd2a6"
-#       Snow: "#ddcbc9"
-#       Classic: "#c7e7d9"
-#       Urban: "#acb8c7"
-#   - type: Corrodible
-#     isCorrodible: false
-#   - type: Appearance
 
 # Standard Tents
 - type: entity
-  parent: RMCTentBodyBase
-  id: RMCTentBodyStandard
+  parent: RMCTentBase
+  id: RMCTentUNMCStandard
   suffix: For Mapping Only
 
-# DEPRECATED: Roof is now part of tent body as a layer
-# - type: entity
-#   parent: RMCTentRoofBase
-#   id: RMCTentRoofStandard
-#   suffix: For Mapping Only (Roof)
-#   components:
-#   - type: Physics
-#     canCollide: false
 
 # Standard Extended
 - type: entity
-  parent: RMCTentBodyBase
-  id: RMCTentBodyExtended
+  parent: RMCTentBase
+  id: RMCTentUNMCExtended
   suffix: For Mapping Only
   name: UNMC extended field tent
   description: A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
@@ -146,20 +91,20 @@
     - state: standard_frame
     - state: standard_canvas
       map: [ "enum.ItemCamouflageLayers.Layer" ]
-    - state: standard_roof
-      map: [ "enum.ItemCamouflageLayers.Layer2" ]
     - state: extension_frame
     - state: extension_canvas
       map: [ "enum.ItemCamouflageLayers.Layer3" ]
+    - state: standard_roof
+      map: [ "enum.ItemCamouflageLayers.Layer2", "standard_roof" ]
     - state: extension_roof
-      map: [ "enum.ItemCamouflageLayers.Layer4" ]
+      map: [ "enum.ItemCamouflageLayers.Layer4", "extension_roof" ]
   - type: RMCSpriteFade
     targetAlpha: 0.0
-    changeRate: 4.0
+    changeRate: 6.0
     reactToMouse: false
     fadeLayers:
-    - "Layer2"
-    - "Layer4"
+    - "standard_roof"
+    - "extension_roof"
   - type: Fixtures
     fixtures:
       fix1: # Left Wall
@@ -207,21 +152,3 @@
         layer:
         - Impassable
         - Opaque
-
-# DEPRECATED: Roof is now part of tent body as a layer
-# - type: entity
-#   parent: RMCTentRoofBase
-#   id: RMCTentRoofExtended
-#   suffix: For Mapping Only (Roof)
-#   name: UNMC extended field tent
-#   description: A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
-#   components:
-#   - type: Sprite
-#     layers:
-#     - state: standard_roof
-#       map: [ "enum.ItemCamouflageLayers.Layer3" ]
-#     - state: extension_roof
-#       map: [ "enum.ItemCamouflageLayers.Layer4" ]
-#   - type: Physics
-#     canCollide: false
-
