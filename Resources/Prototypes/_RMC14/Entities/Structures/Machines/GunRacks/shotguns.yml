@@ -106,6 +106,6 @@
   - type: ContainerFill
     containers:
       item_1:
-      - WeaponShotgunM42A1
+      - RMCWeaponShotgunM42A1
       item_2:
-      - WeaponShotgunM42A1
+      - RMCWeaponShotgunM42A1
