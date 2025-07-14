@@ -23,14 +23,16 @@
     - type: Skills
       skills:
         RMCSkillCqc: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
+        RMCSkillMedical: 2
+        RMCSkillFirearms: 1
         RMCSkillFireman: 2
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
-        RMCSkillSmartGun: 1
-        RMCSkillEndurance: 3
-        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
       # TODO RMC14 add English, russian, Chinese and Japanese languages
     - type: MarineOrders
     - type: SquadArmorWearer
@@ -110,14 +112,17 @@
   equipment:
     head: RMCHeadBeretFreelancer
     eyes: RMCGlassesMedicalHUDGlasses
-    belt: CMBeltMarine
-    back: RMCSatchelLightpack
+    belt: RMCMAR50BeltFilled
+    suitstorage: RMCWeaponMar50LMG
+    back: RMCSatchelLightpackFreelancerLeader
     gloves: RMCHandsVeteran
     jumpsuit: RMCJumpsuitFreelancer
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
     ears: RMCHeadsetDistressDukesLeader
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchFlareFilled
 
 - type: playTimeTracker
   id: RMCJobFreelancerLeader
