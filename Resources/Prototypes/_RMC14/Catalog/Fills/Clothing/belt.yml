@@ -238,3 +238,14 @@
     contents:
     - id: RMCMagazineRifleMAR40
       amount: 5
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolHandcannonFilled
+  suffix: Filled, Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 6
+    - id: RMCWeaponPistolHandcannon

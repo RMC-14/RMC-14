@@ -35,7 +35,7 @@
     # TODO 3 KT-42 automag
     - CMWeaponPistolM1984: CMMagazinePistolM1984 # TODO M1911
     # TODO S&W revolver
-    # TODO desert eagle
+    - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     # TODO CZ-81 machine pistol
 
 - type: entity

@@ -186,7 +186,7 @@
     eyes: CMGlassesSecurity
     id: RMCIDCardDeputy
     ears: CMHeadsetColony
-#    belt: /obj/item/storage/belt/gun/m4a3/heavy
+    belt: RMCBeltHolsterPistolHandcannonFilled
 
 # Corporate Liaison
 - type: randomHumanoidSettings
