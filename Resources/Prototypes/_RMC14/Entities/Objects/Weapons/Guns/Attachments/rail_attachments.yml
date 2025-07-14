@@ -445,6 +445,13 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05
+    - conditions:
+        wieldedOnly: true
+        whitelist:
+          tags:
+          - RMCWeaponRifleM54CMK2
+      damageAddMult: -0.1
+      fireDelayFlat: 0.25
   - type: RMCLoreExaminable
     content: An experimental fire-control optic capable of linking into compatible IFF systems on certain weapons, designated the XAN/PVG-110 Smart Scope. Experimental technology developed by AEGIS, who have assured that all previously reported issues with false-negative IFF recognitions have been solved. Make sure to check the sight after every deployment, just in case.
 
