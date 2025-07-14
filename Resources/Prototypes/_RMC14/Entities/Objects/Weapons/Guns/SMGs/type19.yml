@@ -1,0 +1,196 @@
+﻿- type: entity
+  parent: CMBaseWeaponSMG
+  name: Type-19 Submachinegun
+  id: RMCWeaponSMGType19
+  description: An outdated, but reliable and powerful, submachinegun originating in the Socialist Progressive Peoples, it is still in limited service in the SPP but is most often used by paramilitary groups or corporate security forces. It is usually used with a 35 round stick magazine, or a 71 round drum.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/type19.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/type19.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/p90_shot.ogg # TODO SMG HEAVY Sound
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 0.1
+    recoilUnwielded: 1
+    scatterWielded: 10
+    scatterUnwielded: 16
+    baseFireRate: 6.666
+    burstScatterMult: 7
+    modifiers:
+      Burst:
+        fireDelay: 0.0980
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.75
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: WieldableSpeedModifiers
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSMGType19
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSMGType19
+          - RMCMagazineSMGType19Drum
+  - type: AttachableHolder
+    randomAttachmentChance: 0.1
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.8, 0.095
+      rmc-aslot-rail: -0.125, 0.15
+      rmc-aslot-underbarrel: 0.475, -0.19
+  - type: GunDamageModifier
+    multiplier: 1.2
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGType19
+  name: Type-19 stick magazine (7.62x25mm)
+  description: A stick magazine for the Type-19 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGType19
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge762x25mm
+    proto: RMCCartridge762x25mm
+    capacity: 35
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type19.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGType19Drum
+  name: Type-19 drum magazine (7.62x25mm)
+  description: A 7.62x25mm drum magazine for the Type-19 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGType19Drum
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge762x25mm
+    proto: RMCCartridge762x25mm
+    capacity: 71
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type19drum.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: RMCCartridge762x25mm
+  name: cartridge (7.62x25mm SMG)
+  description: A 7.62x25mm magazine for the Type19.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge762x25mm
+  - type: CartridgeAmmo
+    proto: RMCBullet762x25mm
+
+- type: entity
+  parent: Bullet10x20mm
+  id: RMCBullet762x25mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 20
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 10
+      falloff: 5
+  - type: CMArmorPiercing
+    amount: 20
+
+- type: Tag
+  id: RMCMagazineSMGType19
+
+- type: Tag
+  id: RMCMagazineSMGType19Drum
+
+- type: Tag
+  id: RMCCartridge762x25mm

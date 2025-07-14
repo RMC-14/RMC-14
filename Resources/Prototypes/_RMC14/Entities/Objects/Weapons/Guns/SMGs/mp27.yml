@@ -1,0 +1,195 @@
+﻿- type: entity
+  parent: CMBaseWeaponSMG
+  name: MP27 submachinegun
+  id: RMCWeaponSMGMP27
+  description: An archaic design going back almost a century, the MP27 was common in its day. Today it sees limited use as cheap computer-printed replicas or family heirlooms. An extremely ergonomic and lightweight design allows easy mass production and surpisingly good handling, but the cheap materials used hurt the weapon's scatter noticeably.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/mp27.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/mp27.rsi
+  - type: Gun
+    shotsPerBurst: 2
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/smg_light.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 0.1
+    recoilUnwielded: 1
+    scatterWielded: 15
+    scatterUnwielded: 16
+    baseFireRate: 6.66
+    burstScatterMult: 3.5
+    modifiers:
+      Burst:
+        fireDelay: 0.0999
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.9
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: WieldableSpeedModifiers
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSMGMP27
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSMGMP27
+          - RMCMagazineSMGMP27Extend
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.840, 0.03
+      rmc-aslot-rail: 0.1, 0.1
+      rmc-aslot-underbarrel: 0.59, -0.24
+  - type: GunDamageModifier
+    multiplier: 1
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGMP27
+  name: MP27 magazine (4.6x30mm)
+  description: A 4.6mm magazine for the MP27. Fires large, heavy bullets that have noticeable punch for an SMG but also have equally noticeable scatter and a loss of accuracy.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGMP27
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge46x30mm
+    proto: RMCCartridge46x30mm
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mp27.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineSMGMP27
+  id: RMCMagazineSMGMP27Extend
+  name: MP27 magazine extended (4.6x30mm)
+  description: A 4.6mm extended magazine for the MP27. Fires large, heavy bullets that have noticeable punch for an SMG but also have equally noticeable scatter and a loss of accuracy.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGMP27
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge46x30mm
+    proto: RMCCartridge46x30mm
+    capacity: 40
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mp27extend.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: RMCCartridge46x30mm
+  name: cartridge (46x30mm SMG)
+  description: A 4.6mm cartridge for the MP27 Submachinegun
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge46x30mm
+  - type: CartridgeAmmo
+    proto: RMCBullet57x28mm
+
+- type: entity
+  parent: Bullet10x20mm
+  id: RMCBullet46x30mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 5
+  - type: CMArmorPiercing
+    amount: 0
+
+- type: Tag
+  id: RMCMagazineSMGMP27
+
+- type: Tag
+  id: RMCMagazineSMGMP27Extend
+
+- type: Tag
+  id: RMCCartridge46x30mm

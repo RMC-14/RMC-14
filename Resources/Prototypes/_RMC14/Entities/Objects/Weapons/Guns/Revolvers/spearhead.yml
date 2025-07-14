@@ -75,6 +75,24 @@
 
 - type: entity
   parent: RMCWeaponRevolverSpearhead
+  id: RMCWeaponRevolverSpearheadCustom
+  name: Spearhead custom autorevolver
+  description: An automatic revolver chambered in .357, custom made of darker metal and with a wooden handle, clearly made for a person with taste in mind.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolverSpearheadCustom
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearheadblack.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearheadblack.rsi
+#RMC14 TODO Unique action REVOLVER TRICK for Double accuracy.
+
+
+- type: entity
+  parent: RMCWeaponRevolverSpearhead
   id: RMCWeaponRevolverSpearheadEmpty
   suffix: Empty
   components:
@@ -229,6 +247,9 @@
 
 - type: Tag
   id: RMCWeaponRevolverSpearhead
+
+- type: Tag
+  id: RMCWeaponRevolverSpearheadCustom
 
 - type: Tag
   id: RMCSpeedLoader357
