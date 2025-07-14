@@ -114,7 +114,7 @@
   id: RMCAttachmentShotgunChoke # choke
   name: shotgun choke
   description: "A threaded choke that can be inserted into the M42A2 Shotgun.
-    Improves accuracy, velocity, tightens spread, and increases the cyclic rate of most shotguns.
+    Improves accuracy, velocity, tightens spread, and increases the cyclic rate.
     In exchange, projectile damage and force is reduced. Also increases recoil. Not recommended for slugs."
   components:
   - type: Sprite
