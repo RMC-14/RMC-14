@@ -37,9 +37,9 @@
       - cost: 4000
         crate: RMCCrateBoxMagazineSMGM63AP
       - cost: 2000
-        crate: RMCCrateBoxMagazinePistolM1984
+        crate: RMCCrateBoxMagazinePistolM4A4
       - cost: 3000
-        crate: RMCCrateBoxMagazinePistolM1984AP
+        crate: RMCCrateBoxMagazinePistolM4A4AP
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000

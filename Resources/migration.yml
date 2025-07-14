@@ -1341,3 +1341,5 @@ RMCBoxMagazinePistolM1984AP: RMCBoxMagazinePistolM4A4AP
 CMWeaponLauncherM79: RMCWeaponLauncherM85A1
 RMCM79Case: RMCM85A1Case
 RMCAttachmentM79Stock: RMCAttachmentM85A1Stock
+RMCCrateBoxMagazinePistolM1984: RMCCrateBoxMagazinePistolM4A4
+RMCCrateBoxMagazinePistolM1984AP: RMCCrateBoxMagazinePistolM4A4AP
