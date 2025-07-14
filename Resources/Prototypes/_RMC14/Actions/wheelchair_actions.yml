@@ -1,0 +1,12 @@
+- type: entity
+  id: ActionWheelchairBell
+  name: Ring Bell
+  description: Ring the wheelchair bell
+  components:
+  - type: InstantAction
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Misc/desk_bell.rsi
+      state: normal
+    event: !type:RingBellActionEvent
+    useDelay: 0
