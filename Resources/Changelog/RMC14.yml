@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Doafter bars now have the same opacity as the entity performing the action,
-      except for some types of hostile doafters.
-    type: Tweak
-  id: 1511
-  time: '2025-03-29T08:16:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5992
 - author: Ramiris
   changes:
   - message: Added camouflage in-engine colouring.
@@ -5079,5 +5071,12 @@
   id: 2011
   time: '2025-07-13T10:25:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7019
+- author: noctyrnal
+  changes:
+  - message: Folded keffiyehs no longer hide your hair and your head top / side markings.
+    type: Fix
+  id: 2012
+  time: '2025-07-14T06:18:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7025
 Name: RMC14
 Order: -1
