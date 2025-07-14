@@ -194,6 +194,7 @@
   - type: Xeno
   - type: XenoRegen
   - type: XenoStateVisuals
+  - type: XenoPing
   - type: UserInterface
     interfaces:
       enum.CMSurgeryUIKey.Key:
@@ -223,6 +224,7 @@
         requireInputValidation: false
       enum.DialogUiKey.Key:
         type: DialogBui
+
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
