@@ -78,7 +78,7 @@
     pocket1: RMCPouchExplosiveFilledC4SPP
     pocket2: RMCPouchFirstAidERT
   inhand:
-  - RMCWeaponLauncherM5ATL  # TODO RMC14 - Make foldable variant that goes into the bag
+  - RMCWeaponLauncherDisposable
   - RMCEarmuffs
   storage:
     back:

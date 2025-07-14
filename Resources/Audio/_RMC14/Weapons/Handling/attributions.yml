@@ -17,3 +17,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/1a1c3dec3c4995936a25bea017d5ab41f2bf2e6b/sound/weapons/TargetOn.ogg"
+
+- files: ["component_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/df1d568bcc9ef92e8e5b8a49ee844977076a9ef0/sound/items/component_pickup.ogg"
