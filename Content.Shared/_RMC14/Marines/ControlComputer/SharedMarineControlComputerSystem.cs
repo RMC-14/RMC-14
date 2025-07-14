@@ -5,10 +5,12 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.Database;
+using Content.Shared.Dataset;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Marines.ControlComputer;
@@ -24,17 +26,14 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private static readonly string[] MedalNames =
-    [
-        "Distinguished conduct medal",
-        "Bronze heart medal",
-        "Medal of valor",
-        "Medal of exceptional heroism",
-    ];
+    private LocalizedDatasetPrototype _medalsDataset = default!;
 
     public override void Initialize()
     {
+        base.Initialize();
+        _medalsDataset = _prototype.Index<LocalizedDatasetPrototype>("RMCMarineMedals");
         SubscribeLocalEvent<EvacuationEnabledEvent>(OnRefreshComputers);
         SubscribeLocalEvent<EvacuationDisabledEvent>(OnRefreshComputers);
         SubscribeLocalEvent<EvacuationProgressEvent>(OnRefreshComputers);
@@ -68,15 +67,24 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void OnComputerMedalMarine(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMarineEvent args)
     {
-        if (!TryGetEntity(args.Actor, out var actor) ||
-            !TryGetEntity(args.Marine, out var marine))
-        {
+        if (!TryGetEntity(args.Actor, out var actor))
             return;
-        }
 
-        if (marine == actor)
+        // For not gibbed marines
+        if (args.Marine != null)
         {
-            _popup.PopupClient("You can't give yourself a medal!", actor, PopupType.MediumCaution);
+            if (!TryGetEntity(args.Marine, out var marine))
+                return;
+
+            if (marine == actor)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-medal-error-self-award"), actor, PopupType.MediumCaution);
+                return;
+            }
+        }
+        // For gibbed marines
+        else if (args.LastPlayerId == null)
+        {
             return;
         }
 
@@ -84,12 +92,12 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
 
         var options = new List<DialogOption>();
-        foreach (var name in MedalNames)
+        foreach (var name in _medalsDataset.Values)
         {
-            options.Add(new DialogOption(name, new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, name)));
+            options.Add(new DialogOption(Loc.GetString(name), new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, name, args.LastPlayerId)));
         }
 
-        _dialog.OpenOptions(ent, actor.Value, "Medal Type", options, "What type of medal do you want to award?");
+        _dialog.OpenOptions(ent, actor.Value, Loc.GetString("rmc-medal-type"), options, Loc.GetString("rmc-medal-type-prompt"));
     }
 
     private void OnComputerMedalName(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalNameEvent args)
@@ -100,28 +108,48 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (!TryGetEntity(args.Actor, out var actor))
             return;
 
-        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name);
-        _dialog.OpenInput(ent, actor.Value, "What should the medal citation read?", ev, true, _commendation.CharacterLimit);
+        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name, LastPlayerId: args.LastPlayerId);
+        _dialog.OpenInput(ent, actor.Value, Loc.GetString("rmc-medal-citation-prompt"), ev, true, _commendation.CharacterLimit);
     }
 
     private void OnComputerMedalMessage(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMessageEvent args)
     {
         if (!TryGetEntity(args.Actor, out var actor) ||
-            !TryGetEntity(args.Marine, out var marine) ||
             !HasComp<CommendationGiverComponent>(actor) ||
-            !TryComp(marine, out CommendationReceiverComponent? receiver) ||
-            receiver.LastPlayerId == null ||
             string.IsNullOrWhiteSpace(args.Message.Trim()))
         {
             return;
         }
 
-        _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal);
+        // For not gibbed marines
+        if (args.Marine != null)
+        {
+            if (!TryGetEntity(args.Marine, out var marine) ||
+                !TryComp(marine, out CommendationReceiverComponent? receiver) ||
+                receiver.LastPlayerId == null)
+            {
+                return;
+            }
+            _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal);
+        }
+        // For gibbed marines
+        else if (args.LastPlayerId != null)
+        {
+            if (TryComp<MarineControlComputerComponent>(ent, out var computer) &&
+                computer.GibbedMarines.TryGetValue(args.LastPlayerId, out var info))
+            {
+                _commendation.GiveCommendationByLastPlayerId(actor.Value, args.LastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
+            }
+        }
+        else
+        {
+            return;
+        }
 
         if (_net.IsClient)
             return;
 
-        _popup.PopupCursor("Medal awarded", actor.Value, PopupType.Large);
+        _popup.PopupCursor(Loc.GetString("rmc-medal-awarded"), actor.Value, PopupType.Large);
     }
 
     private void OnComputerAlert(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerAlertEvent args)
@@ -165,16 +193,17 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         if (!HasComp<CommendationGiverComponent>(actor))
         {
-            _popup.PopupClient("Only a Senior Officer can award medals!", actor, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-medal-error-officer-only"), actor, PopupType.MediumCaution);
             return;
         }
 
         if (_net.IsClient)
             return;
 
-        // TODO RMC14 gibbed marines
         var netActor = GetNetEntity(actor);
         var options = new List<DialogOption>();
+
+        // Add not gibbed marines
         var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
         while (receivers.MoveNext(out var uid, out var receiver, out _))
         {
@@ -193,7 +222,24 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             options.Add(new DialogOption(Name(uid), new MarineControlComputerMedalMarineEvent(netActor, GetNetEntity(uid))));
         }
 
-        _dialog.OpenOptions(computer, actor, "Medal Recipient", options, "Who do you want to award a medal to?");
+        // Add gibbed marines regardless of the entity itself, will always be added
+        var allGibbed = new Dictionary<string, GibbedMarineInfo>();
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var _, out var comp))  // all components must be synchronized with each other, but this is just in case
+        {
+            foreach (var (playerId, info) in comp.GibbedMarines)
+            {
+                if (info.LastPlayerId == null)
+                    continue;
+                allGibbed[playerId] = info;
+            }
+        }
+        foreach (var (playerId, info) in allGibbed)
+        {
+            options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, playerId)));
+        }
+
+        _dialog.OpenOptions(computer, actor, Loc.GetString("rmc-medal-recipient"), options, Loc.GetString("rmc-medal-recipient-prompt"));
     }
 
     private void OnToggleEvacuationMsg(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerToggleEvacuationMsg args)

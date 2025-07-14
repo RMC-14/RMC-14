@@ -40,7 +40,7 @@
   suffix: Spawner, Player
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
     state: icon
   - type: RandomHumanoidSpawner
     settings: RMCCLFSpecialist
@@ -68,7 +68,6 @@
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesM4SPRBattleSight
     jumpsuit: RMCJumpsuitCLFSoldier
-    neck: RMCCLFArmband
     outerClothing: RMCCoatMilitiaHauberk
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown

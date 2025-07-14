@@ -1,0 +1,119 @@
+- type: Tag
+  id: CMCartridge10x20mm
+
+- type: Tag
+  id: CMCartridgePistol9mm
+
+- type: Tag
+  id: CMCartridgePistol.22mm
+
+- type: Tag
+  id: CMCartridgePistol9mmAP
+
+- type: Tag
+  id: RMCCartridgeRevolver44
+
+- type: Tag
+  id: RCMCartridgePistol9mmSquashHead
+
+- type: Tag
+  id: RMCCartridge7x45mm
+
+- type: Tag
+  id: RMCCartridgePistol45ACP
+
+- type: Tag
+  id: CMBloodPack
+
+- type: Tag
+  id: CMGauze
+
+- type: Tag
+  id: CMOintment
+
+- type: Tag
+  id: CMFirstAidKit
+
+- type: Tag
+  id: CMSynthGraft
+
+- type: Tag
+  id: CMSurgicalLine
+
+- type: Tag
+  id: CMSurgicalCase
+
+- type: Tag
+  id: CMBurnKit
+
+- type: Tag
+  id: CMTraumaKit
+
+- type: Tag
+  id: Pouch
+
+- type: Tag
+  id: LauncherCompatibleGrenade
+
+- type: Tag
+  id: CMFlarePack
+
+- type: Tag
+  id: RMCSmartPistol
+
+- type: Tag
+  id: RMCMK80
+
+- type: Tag
+  id: RMCRocketAmmo84mm
+
+- type: Tag
+  id: RMCDropshipWeaponPoint
+
+- type: Tag
+  id: RMCDropshipUtilityPoint
+
+- type: Tag
+  id: WeaponSMGM63
+
+- type: Tag
+  id: RMCWeaponPistolM77
+
+- type: Tag
+  id: RMCWeaponRevolverM44
+
+- type: Tag
+  id: RMCGlass
+
+- type: Tag
+  id: Scabbard
+
+- type: Tag
+  id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCScalpel
+
+- type: Tag
+  id: RMCScrewdriver
+
+- type: Tag
+  id: ThrowingKnife
+
+- type: Tag
+  id: RMCCircuitboard
+
+- type: Tag
+  id: RMCEngineerKit
+
+- type: Tag
+  id: RMCXenoLarva
+
+- type: Tag
+  id: RipOffOnInfection
+
+- type: Tag
+  id: RMCAirburstGrenade
+
+- type: Tag
+  id: Bacon

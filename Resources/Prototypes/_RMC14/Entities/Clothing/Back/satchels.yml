@@ -26,6 +26,16 @@
 
 - type: entity
   parent: CMSatchel
+  id: CMSatchelFillColonySynthetic
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDefibrillator
+
+
+- type: entity
+  parent: CMSatchel
   id: RMCSatchelBlack
   components:
   - type: Sprite
@@ -163,6 +173,24 @@
 - type: entity
   parent: RMCSatchelVirology
   id: RMCSatchelVirologyFill
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelChemistry
+  name: chemist satchel
+  description: A sterile satchel with chemist colors.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/chemist.rsi
+
+- type: entity
+  parent: RMCSatchelChemistry
+  id: RMCSatchelChemistryFill
   suffix: Survivor
   components:
   - type: StorageFill
@@ -502,6 +530,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
+  - type: Storage
+    grid:
+    - 0,0,19,1 # 20
 
 - type: entity
   parent: RMCSatchelLightpack
