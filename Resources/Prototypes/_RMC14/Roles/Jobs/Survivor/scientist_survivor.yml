@@ -72,6 +72,7 @@
 
 - type: playTimeTracker
   id: CMJobSurvivorScientist
+  name: rmc-playtime-tracker-job-name-survivor-scientist
   isHumanoid: true
 
 - type: randomHumanoidSettings

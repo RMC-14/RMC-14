@@ -20,15 +20,15 @@ rmc-job-name-survivor-synth = Survivor Synthetic
 rmc-job-description-survivor-synth = You are a synthetic survivor of the attack on a corporate facility.
 
 # Playtime trackers
-CMJobSurvivor = Civilian Survivor
-CMJobSurvivorDoctor = Doctor Survivor
-CMJobSurvivorEngineer = Engineer Survivor
-CMJobSurvivorSecurity = Security Survivor
-CMJobSurvivorCorporate = Corporate Survivor
-CMJobSurvivorScientist = Scientist Survivor
-RMCJobSurvivorMilitary = Military Survivor
-RMCJobSurvivorCO = Survivor CO
-RMCJobSyntheticColony = Survivor Synthetic
+rmc-playtime-tracker-job-name-survivor = Civilian Survivor
+rmc-playtime-tracker-job-name-survivor-doctor = Doctor Survivor
+rmc-playtime-tracker-job-name-survivor-engineer = Engineer Survivor
+rmc-playtime-tracker-job-name-survivor-security = Security Survivor
+rmc-playtime-tracker-job-name-survivor-corporate = Corporate Survivor
+rmc-playtime-tracker-job-name-survivor-scientist = Scientist Survivor
+rmc-playtime-tracker-job-name-survivor-military = Military Survivor
+rmc-playtime-tracker-job-name-survivor-co = Survivor CO
+rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
 
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 

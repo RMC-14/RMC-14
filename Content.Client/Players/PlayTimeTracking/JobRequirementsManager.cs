@@ -173,13 +173,18 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
             if (job.PlayTimeTracker is not { } tracker)
                 continue;
 
+            if (!_prototypes.TryIndex<PlayTimeTrackerPrototype>(tracker, out var trackerProto))
+                continue;
+
             if (usedTrackers.Contains(tracker))
                 continue;
+
+            var name = trackerProto?.Name ?? job.Name;
 
             if (_roles.TryGetValue(tracker, out var playtime))
             {
                 usedTrackers.Add(tracker);
-                yield return new KeyValuePair<string, TimeSpan>(tracker, playtime);
+                yield return new KeyValuePair<string, TimeSpan>(name, playtime);
             }
         }
     }

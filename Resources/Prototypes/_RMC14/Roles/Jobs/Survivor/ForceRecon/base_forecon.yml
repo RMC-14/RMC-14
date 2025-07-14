@@ -30,6 +30,7 @@
 
 - type: playTimeTracker
   id: RMCJobSurvivorMilitary
+  name: rmc-playtime-tracker-job-name-survivor-military
   isHumanoid: true
 
 - type: entity
