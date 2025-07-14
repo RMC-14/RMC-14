@@ -846,6 +846,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private bool DoDisarm(EntityUid user, DisarmAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session)
     {
+        _meleeSound.PlaySwingSound(user, meleeUid, component);
+
         var target = GetEntity(ev.Target);
 
         if (Deleted(target) ||
@@ -889,11 +891,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         var cmDisarmEvent = new CMDisarmEvent(user);
         RaiseLocalEvent(target.Value, ref cmDisarmEvent);
         if (cmDisarmEvent.Handled)
-        {
-            if (_netMan.IsClient)
-                _meleeSound.PlaySwingSound(user, meleeUid, component);
             return true;
-        }
 
         EntityUid? inTargetHand = null;
 
