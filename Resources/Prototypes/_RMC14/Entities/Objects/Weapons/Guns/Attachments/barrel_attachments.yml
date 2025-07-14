@@ -141,8 +141,6 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
-
-
 - type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentSuppressor # suppressor

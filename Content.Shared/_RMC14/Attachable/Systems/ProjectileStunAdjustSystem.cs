@@ -12,6 +12,7 @@ public sealed class ProjectileStunAdjustSystem : EntitySystem
         SubscribeLocalEvent<ProjectileStunAdjustComponent, AmmoShotEvent>(ProjectileStunRemove);
         SubscribeLocalEvent<GrantProjectileStunAdjustComponent, AttachableAlteredEvent>(CheckProjectileStunRemove);
     }
+
     private void ProjectileStunRemove(Entity<ProjectileStunAdjustComponent> ent, ref AmmoShotEvent args)
     {
         foreach (var projectile in args.FiredProjectiles)
