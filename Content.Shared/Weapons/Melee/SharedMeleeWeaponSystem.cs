@@ -890,8 +890,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(target.Value, ref cmDisarmEvent);
         if (cmDisarmEvent.Handled)
         {
-            if (_netMan.IsClient)
-                _meleeSound.PlaySwingSound(user, meleeUid, component);
+            _meleeSound.PlaySwingSound(user, meleeUid, component);
             return true;
         }
 
