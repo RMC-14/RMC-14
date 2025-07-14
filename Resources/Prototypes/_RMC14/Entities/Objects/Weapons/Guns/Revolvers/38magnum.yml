@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: RMCWeaponRevolverBase
   id: RMCWeaponRevolver38Magnum
-  name: 38. Magnum revolver
+  name: .38 magnum revolver
   description: A lean .38 revolver. A timeless classic, from antiquity to the future. This specific model is known to be wildly inaccurate, yet extremely lethal.
   components:
   - type: Tag
