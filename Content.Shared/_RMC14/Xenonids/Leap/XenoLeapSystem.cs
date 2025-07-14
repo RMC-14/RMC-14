@@ -1,5 +1,10 @@
+using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.Barricade;
+using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.CameraShake;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -13,6 +18,7 @@ using Content.Shared.Effects;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Components;
@@ -24,7 +30,9 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -60,12 +68,16 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _obstacleSlamming = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalBlock = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
+    private EntityQuery<FixturesComponent> _fixturesQuery;
 
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        _fixturesQuery = GetEntityQuery<FixturesComponent>();
 
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
@@ -141,6 +153,8 @@ public sealed class XenoLeapSystem : EntitySystem
         leaping.HitEffect = xeno.Comp.HitEffect;
         leaping.TargetJitterTime = xeno.Comp.TargetJitterTime;
         leaping.TargetCameraShakeStrength = xeno.Comp.TargetCameraShakeStrength;
+        leaping.IgnoredCollisionGroupLarge = xeno.Comp.IgnoredCollisionGroupLarge;
+        leaping.IgnoredCollisionGroupSmall = xeno.Comp.IgnoredCollisionGroupSmall;
 
         if (xeno.Comp.PlasmaCost > FixedPoint2.Zero &&
             !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
@@ -167,8 +181,19 @@ public sealed class XenoLeapSystem : EntitySystem
         leaping.LeapSound = xeno.Comp.LeapSound;
         leaping.LeapEndTime = _timing.CurTime + TimeSpan.FromSeconds(direction.Length() / xeno.Comp.Strength);
 
+        _obstacleSlamming.MakeImmune(xeno, 0.5f);
         _physics.ApplyLinearImpulse(xeno, impulse, body: physics);
         _physics.SetBodyStatus(xeno, physics, BodyStatus.InAir);
+
+        if (TryComp(xeno, out FixturesComponent? fixtures))
+        {
+            var collisionGroup = (int)leaping.IgnoredCollisionGroupSmall;
+            if (_size.TryGetSize(xeno, out var size) && size > RMCSizes.SmallXeno)
+                collisionGroup = (int)leaping.IgnoredCollisionGroupLarge;
+
+            var fixture = fixtures.Fixtures.First();
+            _physics.SetCollisionMask(xeno, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ collisionGroup);
+        }
 
         //Handle close-range or same-tile leaps
         foreach (var ent in _physics.GetContactingEntities(xeno.Owner, physics))
@@ -233,7 +258,10 @@ public sealed class XenoLeapSystem : EntitySystem
         if(args.Cancelled)
             return;
 
-        args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp, args.Leaper);
+        if(!TryComp(args.Leaper, out XenoLeapingComponent? leaping))
+            return;
+
+        args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration, ent.Comp.BlockSound, args.Leaper, leaping.Origin, ent.Comp.FullProtection);
     }
 
     private void OnGotEquipped(Entity<RMCGrantLeapProtectionComponent> ent, ref GotEquippedEvent args)
@@ -352,29 +380,38 @@ public sealed class XenoLeapSystem : EntitySystem
         return true;
     }
 
-    private bool AttemptBlockLeap(EntityUid blocker, RMCLeapProtectionComponent leapProtection, EntityUid leaper)
+    public bool AttemptBlockLeap(EntityUid blocker, TimeSpan stunDuration, SoundSpecifier blockSound, EntityUid leaper, EntityCoordinates leapOrigin, bool omnidirectionalProtection = false)
     {
-        if(!TryComp(leaper, out XenoLeapingComponent? leaping))
+        if (!_directionalBlock.IsFacingTarget(blocker, leaper, leapOrigin) && !omnidirectionalProtection)
             return false;
 
-        var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
-        var diff = leaping.Origin.Position - blockerCoordinates.Coords.Position;
-        var dir = diff.Normalized().GetDir();
-        var blockerDirection = blockerCoordinates.worldRot.GetDir();
-        var relativeDiff = Math.Abs(dir - blockerDirection);
-
-        // Only block if the leap originates from a location that is at most one ordinal direction away from the direction the blocker is facing.
-        // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the North-West, North, or North-East of the blocker.
-        if(relativeDiff != 0 && relativeDiff != 1 && relativeDiff != 7)
+        if (HasComp<BarricadeComponent>(blocker) && (!TryComp(blocker, out BarbedComponent? barbed) || !barbed.IsBarbed))
             return false;
 
-        _stun.TryParalyze(leaper, leapProtection.StunDuration, true);
-        _size.KnockBack(leaper, _transform.GetMapCoordinates(blocker));
-        _audio.PlayPredicted(leapProtection.BlockSound, leaper, leaper);
+        if (_size.TryGetSize(leaper, out var size) && size >= RMCSizes.Big && !HasComp<BarbedComponent>(blocker))
+            return false;
 
-        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", leaper), ("object", blocker));
-        var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", leaper), ("object", blocker));
-        _popup.PopupPredicted(selfMessage, othersMessage, leaper, leaper, PopupType.MediumCaution);
+        var blockerCoordinates = _transform.GetMapCoordinates(blocker, Transform(blocker));
+
+        if (size < RMCSizes.Big)
+            _stun.TryParalyze(leaper, stunDuration, true);
+
+        _size.KnockBack(leaper, blockerCoordinates, ignoreSize: true);
+        _audio.PlayPredicted(blockSound, leaper, leaper);
+
+        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("object", Identity.Name(blocker, EntityManager, leaper)));
+
+        _popup.PopupClient(selfMessage, leaper, leaper, PopupType.MediumCaution);
+
+        var others = Filter.PvsExcept(leaper).Recipients;
+        foreach (var other in others)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", Identity.Name(leaper, EntityManager, otherEnt)), ("object", Identity.Name(blocker, EntityManager, otherEnt)));
+            _popup.PopupEntity(othersMessage, leaper, otherEnt, PopupType.MediumCaution);
+        }
 
         return true;
     }
@@ -399,9 +436,6 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
         }
 
-        if (!HasComp<MobStateComponent>(target) || _mobState.IsIncapacitated(target))
-            return false;
-
         if (_standing.IsDown(target))
             return false;
 
@@ -425,6 +459,19 @@ public sealed class XenoLeapSystem : EntitySystem
             return true;
         }
 
+        var leapEv = new XenoLeapHitAttempt(xeno.Owner);
+        RaiseLocalEvent(target, ref leapEv);
+
+        if (leapEv.Cancelled)
+        {
+            xeno.Comp.KnockedDown = true;
+            Dirty(xeno);
+            return true;
+        }
+
+        if (!HasComp<MobStateComponent>(target) || _mobState.IsIncapacitated(target))
+            return false;
+
         xeno.Comp.KnockedDown = true;
         Dirty(xeno);
 
@@ -435,12 +482,6 @@ public sealed class XenoLeapSystem : EntitySystem
             if (physics.Awake)
                 _broadphase.RegenerateContacts(xeno, physics);
         }
-
-        var leapEv = new XenoLeapHitAttempt(xeno.Owner);
-        RaiseLocalEvent(target, ref leapEv);
-
-        if (leapEv.Cancelled)
-            return true;
 
         if (!xeno.Comp.KnockdownRequiresInvisibility || HasComp<XenoActiveInvisibleComponent>(xeno))
         {
@@ -489,6 +530,16 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             _physics.SetLinearVelocity(leaping, Vector2.Zero, body: physics);
             _physics.SetBodyStatus(leaping, physics, BodyStatus.OnGround);
+        }
+
+        if (_fixturesQuery.TryGetComponent(leaping, out var fixtures))
+        {
+            var collisionGroup = (int)leaping.Comp.IgnoredCollisionGroupSmall;
+            if (_size.TryGetSize(leaping, out var size) && size > RMCSizes.SmallXeno)
+                collisionGroup = (int)leaping.Comp.IgnoredCollisionGroupLarge;
+
+            var fixture = fixtures.Fixtures.First();
+            _physics.SetCollisionMask(leaping, fixture.Key, fixture.Value, fixture.Value.CollisionMask | collisionGroup);
         }
 
         RemCompDeferred<XenoLeapingComponent>(leaping);

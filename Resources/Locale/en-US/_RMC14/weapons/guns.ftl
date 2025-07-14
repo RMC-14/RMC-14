@@ -62,3 +62,6 @@ rmc-gun-shoot-air-other = { CAPITALIZE(THE($user)) } FIRES { CAPITALIZE(THE($wea
 rmc-gun-shoot-air-blocked = The roof above you is too dense.
 
 rmc-flare-gun-examine = The last signal flare fired has the designation: [color=#ad3b98][bold]{$id}[/bold][/color]
+
+expendable-light-starshell-ash-empty-name = extinguished star shell ash
+expendable-light-starshell-ash-empty-desc = Burnt out remains of a star shell

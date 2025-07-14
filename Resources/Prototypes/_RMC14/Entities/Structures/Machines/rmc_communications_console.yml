@@ -236,12 +236,6 @@
     blacklist:
       components:
       - Xeno
-  - type: Explosive
-    explosionType: RMC
-    totalIntensity: 100
-    intensitySlope: 20
-    maxIntensity: 75
-    canCreateVacuum: false
 
 - type: entity
   parent: RMCEscapePodController

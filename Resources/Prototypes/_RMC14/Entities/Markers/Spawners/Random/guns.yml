@@ -229,7 +229,7 @@
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
     # TODO 2 UZI
-    # TODO 1 FP9000
+    - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
 
 - type: entity
   parent: RMCSpawnerRandomGunSMG
