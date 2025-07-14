@@ -1,0 +1,13 @@
+- type: entity
+  parent: RMCSmartpackA1White
+  id: RMCPMCSynthSmartpackFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMRollerBedSpawnFolded
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMFireExtinguisherPortable
+    - id: CMDefibrillator
+    # TODO RMC14 portable crew monitor
+    - id: RMCSynthResetKey
+    - id: RMCNailgunCompact
