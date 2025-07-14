@@ -1338,3 +1338,6 @@ RMCGunRackM42A2Filled: RMCGunRackM42A1Filled
 RMCArmoryLockerRedM1984: RMCArmoryLockerRedM4A4
 RMCBoxMagazinePistolM1984: RMCBoxMagazinePistolM4A4
 RMCBoxMagazinePistolM1984AP: RMCBoxMagazinePistolM4A4AP
+CMWeaponLauncherM79: RMCWeaponLauncherM85A1
+RMCM79Case: RMCM85A1Case
+RMCAttachmentM79Stock: RMCAttachmentM85A1Stock

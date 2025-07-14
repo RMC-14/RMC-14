@@ -616,16 +616,18 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentM79Stock
-  name: M79 hardened polykevlon stock
-  description: Helps to mitigate the recoil of launching a 40mm grenade. Fits only to the M79.
+  id: RMCAttachmentM85A1Stock
+  name: M85A1 hardened polykevlon stock
+  description: Helps to mitigate the recoil of launching a 40mm grenade. Fits only to the M85A1.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    state: m79-stock
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: m85a1-stock
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM79Stock
+    - RMCAttachmentM85A1Stock
   - type: AttachableVisuals
     suffix: ""
   - type: AttachableWieldDelayMods
@@ -1064,7 +1066,7 @@
   id: RMCAttachmentM16StockCollapsible
 
 - type: Tag
-  id: RMCAttachmentM79Stock
+  id: RMCAttachmentM85A1Stock
 
 - type: Tag
   id: RMCAttachmentM63Stock

@@ -420,12 +420,12 @@
       orGroup: ShellThree
 
 # Launchers
-# M79
+# M85A1
 - type: entity
   parent: RMCGunCaseBase
-  id: RMCM79Case
-  name: M79 grenade launcher case
-  description: A gun case containing the M79 grenade launcher. Comes with three different grenade packets
+  id: RMCM85A1Case
+  name: M85A1 grenade launcher case
+  description: A gun case containing the M85A1 grenade launcher. Comes with three different grenade packets
   components:
   - type: Storage
     maxItemSize: Ginormous
@@ -433,11 +433,11 @@
     - 0,0,7,1
     whitelist:
       tags:
-      - RMCWeaponLauncherM79
+      - RMCWeaponLauncherM85A1
       - RMCPacketGrenade
   - type: StorageFill
     contents:
-    - id: CMWeaponLauncherM79
+    - id: RMCWeaponLauncherM85A1
     - id: RMCPacketGrenadeM74AGMSStarShellFilled
     - id: RMCPacketGrenadeM74AGMSHornetFilled
     - id: RMCPacketGrenadeBatonSlugHIRRFilled
