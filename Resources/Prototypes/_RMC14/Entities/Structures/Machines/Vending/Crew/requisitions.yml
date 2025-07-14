@@ -554,6 +554,8 @@
         amount: 7
       - id: RMCAttachmentSuppressor
         amount: 7
+      - id: RMCAttachmentShotgunChoke
+        amount: 5
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope

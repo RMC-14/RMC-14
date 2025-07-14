@@ -231,6 +231,12 @@
     },
     {
       "name": "npz92_suppressor"
+    },
+    {
+      "name": "choke"
+    },
+    {
+      "name": "choke_a"
     }
   ]
 }
