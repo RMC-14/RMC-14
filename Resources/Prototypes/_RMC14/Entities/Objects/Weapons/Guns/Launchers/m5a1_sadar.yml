@@ -14,6 +14,7 @@
   - type: Item
     sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m8_datl.rsi
   - type: BallisticAmmoProvider
+    proto: RMCRocket84mmAntiArmor
     cycleable: false
   - type: RMCFoldableGun
     foldDelay: 2
