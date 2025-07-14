@@ -1,9 +1,10 @@
 ﻿# TODO RMC14 text labels on the bottom right
 - type: entity
   parent: PillCanister
-  id: CMPillCanister
+  id: RMCPillCanisterNoSkill
   name: pill bottle
   description: It's an airtight container for storing medication.
+  suffix: No Skill
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Chemistry/pill_canister.rsi
@@ -62,9 +63,6 @@
   - type: Tag
     tags:
     - PillCanister
-  - type: StorageSkillRequired
-    skills:
-      RMCSkillMedical: 2
   - type: IconLabel
     textColor: White
     storedOffset: 3, 12
@@ -87,10 +85,19 @@
     category: Pills
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterBicaridine
+  parent: RMCPillCanisterNoSkill
+  id: CMPillCanister
+  suffix: Skill Required
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterBicaridineNoSkill
   name: bicaridine pill bottle
-  suffix: Bicaridine, 16
+  suffix: Bicaridine, 16, No Skill
   components:
   - type: Item
     heldPrefix: 11
@@ -108,6 +115,15 @@
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-bicaridine-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterBicaridineNoSkill
+  id: CMPillCanisterBicaridine
+  suffix: Bicaridine, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: CMPillCanister
@@ -156,10 +172,9 @@
     labelTextLocId: rmc-dylovene-container-label-text
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterInaprovaline
-  name: inaprovaline pill bottle
-  suffix: Inaprovaline, 16
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterInaprovalineNoSkill
+  suffix: Inaprovaline, 16, No Skill
   components:
   - type: Item
     heldPrefix: 3
@@ -179,10 +194,19 @@
     labelTextLocId: rmc-inaprovaline-container-label-text
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterKelotane
+  parent: RMCPillCanisterInaprovalineNoSkill
+  id: CMPillCanisterInaprovaline
+  suffix: Inaprovaline, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterKelotaneNoSkill
   name: kelotane pill bottle
-  suffix: Kelotane, 16
+  suffix: Kelotane, 16, No Skill
   components:
   - type: Item
     heldPrefix: 2
@@ -200,6 +224,15 @@
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-kelotane-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterKelotaneNoSkill
+  id: CMPillCanisterKelotane
+  suffix: Kelotane, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: CMPillCanister

@@ -67,14 +67,14 @@
   - type: Appearance
   - type: AttachableHolder
     slots:
-      rmc-aslot-barrel:
+      rmc-bslot-barrel:
         startingAttachable: RMCAttachmentMatebaStandard
         whitelist:
           tags:
           - RMCAttachmentMatebaStandard
           - RMCAttachmentMatebaMarksman
           - RMCAttachmentMatebaSnubNose
-      rmc-bslot-barrel:
+      rmc-aslot-barrel:
        whitelist:
           tags:
           - RMCAttachmentRecoilCompensator
@@ -96,6 +96,13 @@
       Snow: _RMC14/Objects/Weapons/Guns/Pistols/mateba/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Pistols/mateba/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Pistols/mateba/urban.rsi
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
 
 - type: entity
   parent: RMCWeaponRevolverMateba
@@ -112,14 +119,49 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_gold.rsi
   - type: AttachableHolder
     slots:
-      rmc-aslot-barrel:
+      rmc-bslot-barrel:
         startingAttachable: RMCAttachmentMatebaStandardGolden
         whitelist:
           tags:
           - RMCAttachmentMatebaStandardGolden
           - RMCAttachmentMatebaMarksmanGolden
           - RMCAttachmentMatebaSnubNoseGolden
-      rmc-bslot-barrel:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.215, 0.19
+      rmc-aslot-rail: -0.11, 0.22
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCWeaponRevolverMateba
+  id: RMCWeaponRevolverMatebaSpecial
+  name: Mateba autorevolver special
+  description: An old, heavily modified version of the Mateba Autorevolver. It sports a smooth wooden grip, and a much larger barrel to it's unmodified counterpart. It's clear that this weapon has been cared for over a long period of time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba_special.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
         whitelist:
           tags:
           - RMCAttachmentRecoilCompensator

@@ -1,0 +1,16 @@
+# Accessories
+
+- type: loadout
+  id: UNMCSquadPatchRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPatchFallingFalconsSquad
+
+- type: loadout
+  id: SquadArmbandRMC
+  cost: 1
+  storage:
+    back:
+    - RMCSquadArmband
+

@@ -209,7 +209,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -240,7 +240,7 @@
         recommended: true
       - id: CMWebbingBlack
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
@@ -256,8 +256,18 @@
         points: 15
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
+      # - id: RMCMagazinePistolM1984HP
+      #   points: 5
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -274,7 +284,8 @@
         points: 15
       - id: RMCPouchFuelTank
         points: 5
-    #- id: CMWeldingGoggles
+      - id: RMCWeldingGoggles
+        points: 3
       - id: RMCPouchGeneralLarge
         points: 10
       - id: CMBeltUtilityCombat

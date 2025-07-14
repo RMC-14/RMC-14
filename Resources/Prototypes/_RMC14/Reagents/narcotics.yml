@@ -7,6 +7,7 @@
   flavor: bitter
   color: "#60A584"
   unknown: true
+  toxin: true
   metabolisms:
     Narcotic:
       metabolismRate: 0.1
@@ -15,9 +16,8 @@
         emote: Laugh #TODO twitches, drools, moans.
         showInChat: true
         probability: 0.05
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        component: SeeingRainbows
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 10 #0.5/s is too slow
         refresh: true #10s cap
@@ -49,9 +49,8 @@
         emote: Laugh #TODO twitches, drools, moans.
         showInChat: true
         probability: 0.05
-      - !type:GenericStatusEffect
-        key: SeeingRainbows
-        component: SeeingRainbows
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 15 #0.75/s is too slow
         refresh: true #15s cap
