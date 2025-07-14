@@ -19,6 +19,7 @@
   icon: "CMJobIconChiefEngineer"
   requireAdminNotify: true
   joinNotifyCrew: false
+  marineAuthorityLevel: 9
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE

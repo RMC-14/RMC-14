@@ -21,6 +21,7 @@
   startingGear: CMGearPilotDropship
   icon: "CMJobIconPilotDropship"
   joinNotifyCrew: false
+  marineAuthorityLevel: 8
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
