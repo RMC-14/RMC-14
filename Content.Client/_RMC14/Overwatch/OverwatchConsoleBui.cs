@@ -237,12 +237,12 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 if (EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch))
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, overwatch.CanOrbitalBombardment);
-                    monitor.MessageSquadContainer.Visible = overwatch.CanMessageSquad;
+                    monitor.MessageSquadButton.Visible = overwatch.CanMessageSquad;
                 }
                 else
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, false);
-                    monitor.MessageSquadContainer.Visible = false;
+                    monitor.MessageSquadButton.Visible = false;
                 }
 
                 _squadViews[squad.Id] = monitor;
@@ -280,6 +280,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             foreach (var marine in marines)
             {
                 var roleName = "None";
+                string? rankName = null;
                 if (marine.Role != null)
                 {
                     if (_prototypes.TryIndex(marine.Role, out var job))
@@ -306,7 +307,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     roles[marine.Role.Value] = role;
                 }
 
-                var name = marine.Name;
+                if (marine.Rank != null)
+                {
+                    if (_prototypes.TryIndex(marine.Rank, out var rank))
+                        rankName = rank.Prefix;
+                }
+
+                var name = rankName != null ? $"{rankName} {marine.Name}" : marine.Name;
                 if (!squadRows.TryGetValue(marine.Id, out var row))
                 {
                     var watchButton = new Button
@@ -487,10 +494,24 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
             rolesList.Sort((a, b) => a.Priority.CompareTo(b.Priority));
 
+            var i = 0;
+            BoxContainer? currentRowContainer = null;
+
             foreach (var (roleId, deployed, alive, all, displayName, _) in rolesList)
             {
                 if (!_prototypes.TryIndex(roleId, out JobPrototype? role))
                     continue;
+
+                if (i % 2 == 0)
+                {
+                    currentRowContainer = new BoxContainer
+                    {
+                        Orientation = LayoutOrientation.Horizontal,
+                        HorizontalExpand = true,
+                        SeparationOverride = 5
+                    };
+                    monitor.RolesContainer.AddChild(currentRowContainer);
+                }
 
                 string roleDeployed;
                 string roleAlive;
@@ -502,28 +523,28 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     {
                         roleDeployed = leader.Value.Name;
                         roleAlive = leader.Value.State == MobState.Dead
-                            ? $"[color={RedColor}]DEAD[/color]"
-                            : $"[color={GreenColor}]ALIVE[/color]";
+                            ? $"[bold][color={RedColor}]DEAD[/color][/bold]"
+                            : $"[bold][color={GreenColor}]ALIVE[/color][/bold]";
                     }
                     else if (all.TryFirstOrNull(out var first))
                     {
                         roleDeployed = first.Value.Name;
                         roleAlive = first.Value.State == MobState.Dead
-                            ? $"[color={RedColor}]DEAD[/color]"
-                            : $"[color={GreenColor}]ALIVE[/color]";
+                            ? $"[bold][color={RedColor}]DEAD[/color][/bold]"
+                            : $"[bold][color={GreenColor}]ALIVE[/color][/bold]";
                     }
                     else
                     {
-                        roleDeployed = $"[color={RedColor}]NONE[/color]";
-                        roleAlive = $"[color={RedColor}]N/A[/color]";
+                        roleDeployed = $"[bold][color={RedColor}]NONE[/color][/bold]";
+                        roleAlive = $"[bold][color={RedColor}]N/A[/color][/bold]";
                     }
                 }
                 else
                 {
-                    roleDeployed = $"{deployed.Count} DEPLOYED";
+                    roleDeployed = $"[bold]{deployed.Count} DEPLOYED[/bold]";
 
                     var aliveColor = alive.Count > 0 ? GreenColor : RedColor;
-                    roleAlive = $"[color={aliveColor}]{alive.Count} ALIVE[/color]";
+                    roleAlive = $"[bold][color={aliveColor}]{alive.Count} ALIVE[/color][/bold]";
                 }
 
                 var deployedLabel = new RichTextLabel();
@@ -533,19 +554,26 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 aliveLabel.SetMarkupPermissive(roleAlive);
 
                 var roleNamePanel = CreatePanel(thickness: new Thickness(0, 0, 0, 1));
+                var roleNameLabel = new RichTextLabel
+                {
+                    Margin = new Thickness(0, 3, 0, 3)
+                };
+                roleNameLabel.SetMarkupPermissive($"[bold]{role.OverwatchRoleName}[/bold]");
+
                 roleNamePanel.AddChild(new BoxContainer
                 {
                     Orientation = LayoutOrientation.Horizontal,
                     Children =
                     {
                         new Control { HorizontalExpand = true },
-                        new Label { Text = role.OverwatchRoleName },
+                        roleNameLabel,
                         new Control { HorizontalExpand = true },
                     },
                     Margin = margin,
                 });
 
                 var panel = CreatePanel();
+                panel.HorizontalExpand = true;
                 panel.AddChild(new BoxContainer
                 {
                     Orientation = LayoutOrientation.Vertical,
@@ -575,27 +603,37 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         },
                     },
                 });
-                monitor.RolesContainer.AddChild(panel);
+                i++;
+                currentRowContainer?.AddChild(panel);
             }
 
             var totalAliveColor = allAlive > 0 ? GreenColor : RedColor;
-            var totalAlive = $"[color={totalAliveColor}]{allAlive} ALIVE[/color]";
+            var totalAlive = $"[bold][color={totalAliveColor}]{allAlive} ALIVE[/color][/bold]";
             var totalAliveLabel = new RichTextLabel();
             totalAliveLabel.SetMarkupPermissive(totalAlive);
 
             var totalPanel = CreatePanel();
+            totalPanel.HorizontalExpand = true;
             var totalLivingPanel = CreatePanel(thickness: new Thickness(0, 0, 0, 1));
+
+            var totalLivingLabel = new RichTextLabel();
+            totalLivingLabel.SetMarkupPermissive("[bold]Total/Living[/bold]");
+
             totalLivingPanel.AddChild(new BoxContainer
             {
                 Orientation = LayoutOrientation.Horizontal,
                 Children =
                 {
                     new Control { HorizontalExpand = true },
-                    new Label { Text = "Total/Living" },
+                    totalLivingLabel,
                     new Control { HorizontalExpand = true },
                 },
                 Margin = margin,
             });
+
+            var totalCountLabel = new RichTextLabel();
+            totalCountLabel.SetMarkupPermissive($"[bold]{marines.Count} TOTAL[/bold]");
+
             totalPanel.AddChild(new BoxContainer
             {
                 Orientation = LayoutOrientation.Vertical,
@@ -609,7 +647,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         Children =
                         {
                             new Control { HorizontalExpand = true },
-                            new Label { Text = $"{marines.Count} TOTAL" },
+                            totalCountLabel,
                             new Control { HorizontalExpand = true },
                         },
                     },
