@@ -35,6 +35,7 @@
       - id: CMWebbingBlack
       - id: RMCWebbingDropPouch
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
       - id: CMWebbingSurgicalBlue
       - id: CMWebbingSurgicalGreen

@@ -87,8 +87,10 @@
       choices: { CMAccessory: 1 }
       entries:
       - id: CMWebbingBrown
+        recommended: true
       - id: CMWebbingBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

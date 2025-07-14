@@ -627,6 +627,7 @@
       - Flashlight
       - RMCExplosiveBreachingCharge
       - CMFireExtinguisherPortable
+      - RMCCircuitboard
       components:
       - Welder
       - ComputerBoard
