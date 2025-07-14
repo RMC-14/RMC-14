@@ -232,6 +232,7 @@
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
     - RMCWeaponSMGUZI: RMCMagazineSMGUZI
+    - RMCWeaponSMGUZI: RMCMagazineSMGUZI
     - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
 
 - type: entity
