@@ -68,10 +68,10 @@
           - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.81, 0.06
-      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-barrel: 0.81, 0.099
+      rmc-aslot-rail: -0.065, 0.15
       rmc-aslot-stock: -0.40625, 0.0613
-      rmc-aslot-underbarrel: 0.25, -0.31
+      rmc-aslot-underbarrel: 0.19, -0.34
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/jungle.rsi

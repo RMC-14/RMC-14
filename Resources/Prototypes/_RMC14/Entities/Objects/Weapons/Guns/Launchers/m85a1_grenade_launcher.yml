@@ -44,7 +44,7 @@
           - RMCAttachmentM85A1Stock
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-rail: 0, 0.093
+      rmc-aslot-rail: 0.25, 0.1557
       rmc-aslot-stock: -0.465, -0.0295
   - type: Tag
     tags:

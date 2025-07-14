@@ -55,8 +55,8 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.71, 0.095
-      rmc-aslot-rail: -0.065, 0.125
-      rmc-aslot-underbarrel: 0.312, -0.25
+      rmc-aslot-rail: -0.03, 0.18
+      rmc-aslot-underbarrel: 0.312, -0.285
 
 - type: entity
   parent: RMCWeaponPistolM4A4

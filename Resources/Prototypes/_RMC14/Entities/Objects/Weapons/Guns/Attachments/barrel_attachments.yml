@@ -223,7 +223,7 @@
   - type: Tag
     tags:
     - RMCAttachmentBarrel
-    - RMCAttachmentSuppressor
+    - RMCAttachmentSuppressorHoldout
   - type: AttachableVisuals
     prefix: ""
   - type: AttachableSilencer
@@ -345,6 +345,9 @@
 
 - type: Tag
   id: RMCAttachmentSuppressorNPZ92
+
+- type: Tag
+  id: RMCAttachmentSuppressorHoldout
 
 - type: Tag
   id: RMCAttachmentBarrelCharger
