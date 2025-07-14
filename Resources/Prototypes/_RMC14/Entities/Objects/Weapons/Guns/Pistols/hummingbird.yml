@@ -1,6 +1,6 @@
 - type: entity
-  parent: CMWeaponPistolBase
-  id: RMCWeaponPistolD18 # TODO Map in on LV-624
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
+  id: RMCWeaponPistolD18
   name: D18 Hummingbird
   description: The D18 Hummingbird Pistol was produced in the mid-2170s as a cheap and concealable firearm for CLF Sleeper Cell agents for assassinations and ambushes, and is able to be concealed in shoes and workboots.
   components:
@@ -81,9 +81,9 @@
 
 - type: Tag
   id: RMCMagazinePistolD18
-      
+
 - type: Tag # For stuff like the D18 and Holdout Pistol
   id: Holdout
-  
+
 - type: Tag
   id: RMCWeaponPistolD18

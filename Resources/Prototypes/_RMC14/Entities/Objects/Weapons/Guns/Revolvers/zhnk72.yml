@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: RMCWeaponRevolverBase
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverZHNK72
   name: ZHNK-72 revolver
   description: The ZHNK-72 is a SPP designed revolver. The ZHNK-72 is used by the UPP armed forces in a policing role as well as limited numbers in the hands of SNCOs.
