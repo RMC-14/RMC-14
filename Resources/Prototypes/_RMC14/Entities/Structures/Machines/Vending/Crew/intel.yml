@@ -127,9 +127,9 @@
       entries:
       - id: CMHeadsetIntel
       - id: CMMRE
-    - name: Gloves 
+    - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Armor
@@ -233,7 +233,7 @@
         amount: 4
       - id: WeaponSMGM63
         amount: 4
-      - id: WeaponShotgunM42A2
+      - id: RMCWeaponShotgunM42A1
         amount: 4
       - id: WeaponRifleM54C
         amount: 4

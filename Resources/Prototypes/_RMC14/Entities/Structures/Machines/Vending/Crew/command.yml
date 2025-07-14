@@ -1119,8 +1119,8 @@
       - CMChiefEngineer
       choices: { CMWeaponPrimary: 1 }
       entries:
-      - id: RMCM42A2ShotgunCase
-        name: M42A2 pump shotgun
+      - id: RMCM42A1ShotgunCase
+        name: M42A1 pump shotgun
       - id: RMCM54CMK2Case
         name: M54C assault rifle MK2
       - id: RMCCaseFlamer

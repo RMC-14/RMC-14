@@ -16,7 +16,7 @@
     sections:
     - name: Primary firearms
       entries:
-      - id: WeaponShotgunM42A2
+      - id: RMCWeaponShotgunM42A1
         amount: 30
       - id: WeaponSMGM63
         amount: 60
@@ -598,7 +598,7 @@
         amount: 10
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A1WoodenStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5

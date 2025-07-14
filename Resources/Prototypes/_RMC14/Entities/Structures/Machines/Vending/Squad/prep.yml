@@ -19,7 +19,7 @@
       entries:
       - id: WeaponRifleM4SPR
         amount: 10
-      - id: WeaponShotgunM42A2
+      - id: RMCWeaponShotgunM42A1
         amount: 15
       - id: WeaponSMGM63
         amount: 30
@@ -534,7 +534,7 @@
         amount: 3
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A1WoodenStock
         amount: 2
       - id: RMCAttachmentM63ArmBrace
         amount: 2

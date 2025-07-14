@@ -113,7 +113,7 @@
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentShotgunChoke # choke
   name: shotgun choke
-  description: "A threaded choke that can be inserted into the M42A2 Shotgun.
+  description: "A threaded choke that can be inserted into the a Shotgun.
     Improves accuracy, velocity, tightens spread, and increases the cyclic rate of most shotguns.
     In exchange, projectile damage and force is reduced. Also increases recoil. Not recommended for slugs."
   components:
@@ -141,6 +141,7 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
+
 - type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentSuppressor # suppressor

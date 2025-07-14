@@ -1330,3 +1330,8 @@ ClothingEyesGlassesChemical: RMCGlassesReagentHUDGlasses
 RMCGlassesBiMexYellow: RMCGlassesTriMaxYellow
 RMCGlassesBiMexBronze: RMCGlassesTriMaxBronze
 RMCGlassesBiMexBlack: RMCGlassesTriMaxBlack
+
+# 2025-07-14
+RMCM42A2ShotgunCase: RMCM42A1ShotgunCase
+RMCGunRackM42A2Empty: RMCGunRackM42A1Empty
+RMCGunRackM42A2Filled: RMCGunRackM42A1Filled

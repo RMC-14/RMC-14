@@ -40,6 +40,51 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
+  id: RMCAttachmentM42A1WoodenStock
+  name: M42A1 padded stock
+  description: A heavy padded stock with wooden accents, built for the M42A1 shotgun. Cumbersome to use, though assists with recoil and scatter reduction. You could probably cause some damage with this thing too.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m42a1_stocks/desert.rsi
+    state: m42_stock
+  - type: AttachableVisuals
+    suffix: "_a"
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM42A1WoodenStock
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+      - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.2
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 6
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m42a1_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m42a1_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m42a1_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m42a1_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m42a1_stocks/urban.rsi
+
+- type: entity
+  parent: RMCStockAttachmentBase
   id: RMCAttachmentM42A2WoodenStock
   name: M42A2 wooden stock
   description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
@@ -81,7 +126,6 @@
       Snow: s_stock
       Classic: c_stock
       Urban: u_stock
-
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -988,6 +1032,9 @@
 
 - type: Tag
   id: RMCAttachmentM42A2WoodenStock
+
+- type: Tag
+  id: RMCAttachmentM42A1WoodenStock
 
 - type: Tag
   id: RMCXM51StockBurst
