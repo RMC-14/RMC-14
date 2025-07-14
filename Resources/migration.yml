@@ -1335,3 +1335,6 @@ RMCGlassesBiMexBlack: RMCGlassesTriMaxBlack
 RMCM42A2ShotgunCase: RMCM42A1ShotgunCase
 RMCGunRackM42A2Empty: RMCGunRackM42A1Empty
 RMCGunRackM42A2Filled: RMCGunRackM42A1Filled
+RMCArmoryLockerRedM1984: RMCArmoryLockerRedM4A4
+RMCBoxMagazinePistolM1984: RMCBoxMagazinePistolM4A4
+RMCBoxMagazinePistolM1984AP: RMCBoxMagazinePistolM4A4AP

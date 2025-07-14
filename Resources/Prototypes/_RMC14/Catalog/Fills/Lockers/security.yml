@@ -100,12 +100,12 @@
 
 - type: entity
   parent: RMCLockerGunRed
-  id: RMCArmoryLockerRedM1984
-  suffix: Filled M1984
+  id: RMCArmoryLockerRedM4A4
+  suffix: Filled M4A4
   components:
   - type: StorageFill
     contents:
-    - id: RMCM1984BeltFilled
+    - id: RMCM4A4BeltFilled
       amount: 4
-    - id: RMCBoxMagazinePistolM1984
+    - id: RMCBoxMagazinePistolM4A4
       amount: 1

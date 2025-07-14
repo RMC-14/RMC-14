@@ -37,7 +37,7 @@
     - name: Personal Sidearm
       choices: { CMSidearm: 1 }
       entries:
-      - id: CMWeaponPistolM1984
+      - id: RMCWeaponPistolM4A4
       - id: RMCMK80
     - name: Belts
       choices: { CMBelt: 1 }
@@ -213,7 +213,7 @@
         amount: 4
       - id: RMCWeaponRevolverM44
         amount: 4
-      - id: CMWeaponPistolM1984
+      - id: RMCWeaponPistolM4A4
         amount: 4
       - id: RMCWeaponPistolM13
         amount: 4
@@ -225,9 +225,9 @@
         amount: 20
       - id: RMCSpeedLoaderM44
         amount: 20
-      - id: CMMagazinePistolM1984
+      - id: RMCMagazinePistolM4A4
         amount: 20
-      - id: RMCMagazinePistolM1984AP
+      - id: RMCMagazinePistolM4A4AP
         amount: 14
       #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
       # amount: 14

@@ -159,28 +159,28 @@
   iconColor: "#695d42"
   objectType: Item
 
-# M1984
+# M4A4
 - type: construction
   parent: RMC
-  name: Magazine Box (M1984 Reg)
-  id: RMCBoxMagazinePistolM1984
+  name: Magazine Box (M4A4 Reg)
+  id: RMCBoxMagazinePistolM4A4
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxMagazinePistolM1984Empty
+  targetNode: RMCBoxMagazinePistolM4A4Empty
   category: construction-category-cm-box-magazine
-  description: A magazine box that can contain regular M1984 mags.
+  description: A magazine box that can contain regular M4A4 mags.
   iconColor: "#b2976e"
   objectType: Item
 
 - type: construction
   parent: RMC
-  name: Magazine Box (M1984 AP)
-  id: RMCBoxMagazinePistolM1984AP
+  name: Magazine Box (M4A4 AP)
+  id: RMCBoxMagazinePistolM4A4AP
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxMagazinePistolM1984APEmpty
+  targetNode: RMCBoxMagazinePistolM4A4APEmpty
   category: construction-category-cm-box-magazine
-  description: A magazine box that can contain armor piercing M1984 mags.
+  description: A magazine box that can contain armor piercing M4A4 mags.
   iconColor: "#b2976e"
   objectType: Item
 
@@ -558,14 +558,14 @@
         amount: 1
         doAfter: 0.25
 
-    # M1984
-    - to: RMCBoxMagazinePistolM1984Empty
+    # M4A4
+    - to: RMCBoxMagazinePistolM4A4Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
 
-    - to: RMCBoxMagazinePistolM1984APEmpty
+    - to: RMCBoxMagazinePistolM4A4APEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -732,11 +732,11 @@
   - node: RMCBoxMagazineRifleM16Empty
     entity: RMCBoxMagazineRifleM16Empty
 
-  # M1984
-  - node: RMCBoxMagazinePistolM1984Empty
-    entity: RMCBoxMagazinePistolM1984Empty
-  - node: RMCBoxMagazinePistolM1984APEmpty
-    entity: RMCBoxMagazinePistolM1984APEmpty
+  # M4A4
+  - node: RMCBoxMagazinePistolM4A4Empty
+    entity: RMCBoxMagazinePistolM4A4Empty
+  - node: RMCBoxMagazinePistolM4A4APEmpty
+    entity: RMCBoxMagazinePistolM4A4APEmpty
 
   # M77AP
   - node: RMCBoxMagazinePistolM77APEmpty

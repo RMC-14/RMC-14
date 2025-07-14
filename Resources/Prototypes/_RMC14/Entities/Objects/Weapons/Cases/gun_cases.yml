@@ -154,11 +154,11 @@
     - id: RMCSpeedLoader44Marksman
       amount: 6
 
-# M1984 service pistol
+# M4A4 service pistol
 - type: entity
   parent: RMCGunCaseBase
-  id: RMCGunCasePistolM1984
-  name: M1984 service pistol case
+  id: RMCGunCasePistolM4A4
+  name: M4A4 service pistol case
   description:
   components:
   - type: Storage
@@ -167,14 +167,14 @@
     - 0,0,15,1
     whitelist:
       tags:
-      - CMWeaponPistolM1984
-      - CMMagazinePistolM1984
+      - RMCWeaponPistolM4A4
+      - RMCMagazinePistolM4A4
       - RMCAttachmentRailFlashlight
   - type: StorageFill
     contents:
     - id: RMCAttachmentRailFlashlight
-    - id: CMWeaponPistolM1984
-    - id: CMMagazinePistolM1984
+    - id: RMCWeaponPistolM4A4
+    - id: RMCMagazinePistolM4A4
       amount: 6
 
 # RSh9 Assault Revolver

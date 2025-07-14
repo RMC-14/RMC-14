@@ -40,8 +40,8 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCSpeedLoader44Marksman
-        points: 10 # TODO RMC14 M1984 HP magazine
-      - id: RMCMagazinePistolM1984AP
+        points: 10 # TODO RMC14 M4A4 HP magazine
+      - id: RMCMagazinePistolM4A4AP
         points: 5
       - id: CMMagazinePistolMK80
         points: 10
@@ -257,7 +257,7 @@
         amount: 4
       - id: RMCWeaponRevolverM44Empty
         amount: 4
-      - id: CMWeaponPistolM1984Empty
+      - id: RMCWeaponPistolM4A4Empty
         amount: 4
     - name: Sidearm Ammunition
       entries:
@@ -265,10 +265,10 @@
         amount: 20
       - id: RMCSpeedLoaderM44
         amount: 20
-      - id: CMMagazinePistolM1984
+      - id: RMCMagazinePistolM4A4
         amount: 20
-      - id: RMCMagazinePistolM1984AP
-        amount: 20 # TODO RMC14 M1984 HP magazine
+      - id: RMCMagazinePistolM4A4AP
+        amount: 20 # TODO RMC14 M4A4 HP magazine
       - id: CMMagazinePistolMK80
         amount: 20
     - name: Attachments

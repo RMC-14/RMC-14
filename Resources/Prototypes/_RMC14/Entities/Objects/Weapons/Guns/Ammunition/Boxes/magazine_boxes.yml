@@ -844,15 +844,15 @@
 
 # -- PISTOL BOXES --
 
-# M1984 REG
+# M4A4 REG
 - type: entity
   parent: RMCBoxMagazinePistolBase
-  id: RMCBoxMagazinePistolM1984Empty
-  name: magazine box (M1984 x 16)
+  id: RMCBoxMagazinePistolM4A4Empty
+  name: magazine box (M4A4 x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxMagazinePistolM1984Empty
+    node: RMCBoxMagazinePistolM4A4Empty
   - type: Sprite
     layers:
     - state: pistol_box
@@ -875,30 +875,30 @@
     slot:
       whitelist:
         tags:
-        - CMMagazinePistolM1984
+        - RMCMagazinePistolM4A4
 
 - type: entity
-  parent: RMCBoxMagazinePistolM1984Empty
-  id: RMCBoxMagazinePistolM1984
+  parent: RMCBoxMagazinePistolM4A4Empty
+  id: RMCBoxMagazinePistolM4A4
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: CMMagazinePistolM1984
+    startingItem: RMCMagazinePistolM4A4
     count: 16
     slot:
       whitelist:
         tags:
-        - CMMagazinePistolM1984
+        - RMCMagazinePistolM4A4
 
-# M1984 AP
+# M4A4 AP
 - type: entity
   parent: RMCBoxMagazinePistolBase
-  id: RMCBoxMagazinePistolM1984APEmpty
-  name: magazine box (AP M1984 x 16)
+  id: RMCBoxMagazinePistolM4A4APEmpty
+  name: magazine box (AP M4A4 x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxMagazinePistolM1984APEmpty
+    node: RMCBoxMagazinePistolM4A4APEmpty
   - type: Sprite
     layers:
     - state: pistol_box
@@ -921,15 +921,15 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolM1984AP
+        - RMCMagazinePistolM4A4AP
 
 - type: entity
-  parent: RMCBoxMagazinePistolM1984APEmpty
-  id: RMCBoxMagazinePistolM1984AP
+  parent: RMCBoxMagazinePistolM4A4APEmpty
+  id: RMCBoxMagazinePistolM4A4AP
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazinePistolM1984AP
+    startingItem: RMCMagazinePistolM4A4AP
 
 # MK80 REG
 - type: entity

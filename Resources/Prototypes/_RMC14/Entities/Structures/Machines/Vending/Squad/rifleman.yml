@@ -147,9 +147,9 @@
       #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
-      #- id: M1984 Hollow Point magazine
+      #- id: M4A4 Hollow Point magazine
       #  points: 5
-      - id: RMCMagazinePistolM1984AP
+      - id: RMCMagazinePistolM4A4AP
         points: 5
       - id: CMMagazinePistolMK80
         points: 5

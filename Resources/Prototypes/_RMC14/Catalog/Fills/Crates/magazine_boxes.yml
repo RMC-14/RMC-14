@@ -106,21 +106,21 @@
 # m1984
 - type: entity
   parent: RMCCrateAmmo
-  id: RMCCrateBoxMagazinePistolM1984
-  name: Magazine box (M1984, 16x regular mags)
+  id: RMCCrateBoxMagazinePistolM4A4
+  name: Magazine box (M4A4, 16x regular mags)
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolM1984
+    - id: RMCBoxMagazinePistolM4A4
 
 - type: entity
   parent: RMCCrateAmmo
-  id: RMCCrateBoxMagazinePistolM1984AP
-  name: Magazine box (M1984, 16x AP mags)
+  id: RMCCrateBoxMagazinePistolM4A4AP
+  name: Magazine box (M4A4, 16x AP mags)
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolM1984AP
+    - id: RMCBoxMagazinePistolM4A4AP
 
 # M77
 - type: entity
