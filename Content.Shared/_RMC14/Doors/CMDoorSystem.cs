@@ -87,8 +87,8 @@ public sealed class CMDoorSystem : EntitySystem
 
         if (!_accessReader.IsAllowed(user, button))
         {
-            // TODO RMC14 denied animation
             _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), button, user, PopupType.SmallCaution);
+            DoPodDoorButtonAnimation(button, button.Comp.DeniedState);
             return;
         }
 
@@ -130,8 +130,7 @@ public sealed class CMDoorSystem : EntitySystem
         var othersMsg = Loc.GetString("rmc-door-button-pressed-others", ("user", user), ("button", button));
         _popup.PopupPredicted(selfMsg, othersMsg, user, user);
 
-        if (_net.IsServer)
-            RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button)), Filter.PvsExcept(button));
+        DoPodDoorButtonAnimation(button, button.Comp.OnState);
 
         if (button.Comp.MarineAnnouncement != null)
         {
@@ -139,6 +138,14 @@ public sealed class CMDoorSystem : EntitySystem
             var author = Loc.GetString(button.Comp.MarineAnnouncementAuthor);
             _announce.AnnounceHighCommand(announceText, author);
         }
+    }
+
+    public void DoPodDoorButtonAnimation(EntityUid button, string animState)
+    {
+        if (_net.IsClient)
+            return;
+
+        RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button), animState), Filter.PvsExcept(button));
     }
 
     private void OnPodDoorBeforePry(Entity<RMCPodDoorComponent> ent, ref BeforePryEvent args)

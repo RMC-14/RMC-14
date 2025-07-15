@@ -23,6 +23,9 @@ public sealed partial class RMCDoorButtonComponent : Component
     public string OnState = "doorctrl1";
 
     [DataField, AutoNetworkedField]
+    public string DeniedState = "doorctrl-denied";
+
+    [DataField, AutoNetworkedField]
     public TimeSpan? MinimumRoundTimeToPress;
 
     [DataField, AutoNetworkedField]
