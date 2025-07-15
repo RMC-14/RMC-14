@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Systems;
@@ -5,6 +6,7 @@ using Content.Shared.Directions;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
@@ -25,6 +27,8 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _announce = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
@@ -61,10 +65,30 @@ public sealed class CMDoorSystem : EntitySystem
         if (HasComp<XenoComponent>(user))
             return;
 
+        if (!_rmcPower.IsPowered(button))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-machines-unpowered"), button, args.User, PopupType.SmallCaution);
+            return;
+        }
+
+        if (button.Comp.MinimumRoundTimeToPress is { } minimumTime && _gameTicker.RoundDuration() <= minimumTime)
+        {
+            var minutesLeft = (int)(minimumTime.TotalMinutes - _gameTicker.RoundDuration().TotalMinutes);
+            var timeMessage = Loc.GetString(button.Comp.NoTimeMessage, ("minutes", minutesLeft));
+            _popup.PopupClient(timeMessage, user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (button.Comp.Used && button.Comp.UseOnlyOnce)
+        {
+            _popup.PopupClient(Loc.GetString(button.Comp.AlreadyUsedMessage), button, user, PopupType.SmallCaution);
+            return;
+        }
+
         if (!_accessReader.IsAllowed(user, button))
         {
-            // TODO RMC14 denied animation
             _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), button, user, PopupType.SmallCaution);
+            DoPodDoorButtonAnimation(button, button.Comp.DeniedState);
             return;
         }
 
@@ -73,6 +97,9 @@ public sealed class CMDoorSystem : EntitySystem
             return;
 
         button.Comp.LastUse = time;
+        button.Comp.Used = true;
+        Dirty(button);
+
         var buttonName = button.Comp.Id ?? Name(button);
         var buttonTransform = Transform(button);
 
@@ -103,8 +130,22 @@ public sealed class CMDoorSystem : EntitySystem
         var othersMsg = Loc.GetString("rmc-door-button-pressed-others", ("user", user), ("button", button));
         _popup.PopupPredicted(selfMsg, othersMsg, user, user);
 
-        if (_net.IsServer)
-            RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button)), Filter.PvsExcept(button));
+        DoPodDoorButtonAnimation(button, button.Comp.OnState);
+
+        if (button.Comp.MarineAnnouncement != null)
+        {
+            var announceText = Loc.GetString(button.Comp.MarineAnnouncement);
+            var author = Loc.GetString(button.Comp.MarineAnnouncementAuthor);
+            _announce.AnnounceHighCommand(announceText, author);
+        }
+    }
+
+    public void DoPodDoorButtonAnimation(EntityUid button, string animState)
+    {
+        if (_net.IsClient)
+            return;
+
+        RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button), animState), Filter.PvsExcept(button));
     }
 
     private void OnPodDoorBeforePry(Entity<RMCPodDoorComponent> ent, ref BeforePryEvent args)

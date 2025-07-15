@@ -16,11 +16,26 @@
     layers:
     - state: doorctrl
       map: [ "enum.RMCPodDoorButtonLayers.Animation" ]
+    - state: doorctrl-p
+      visible: false
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
   - type: Clickable
   - type: InteractionOutline
   - type: WallMount
     arc: 360
   - type: RMCDoorButton
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: false }
+          False: { visible: true }
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 2
+    activeLoad: 4
+    channel: Environment
 
 - type: entity
   parent: RMCPodDoorButton
@@ -97,3 +112,14 @@
   components:
   - type: RMCDoorButton
     id: cl_quarter_windows
+
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonHybrisaCavesLockdown
+  name: Caves Lockdown
+  suffix: Hybrisa
+  components:
+  - type: RMCDoorButton
+    marineAnnouncement: rmc-machines-button-marine-announcement-weya
+    minimumRoundTimeToPress: 600 # 10 minutes
+    useOnlyOnce: true
