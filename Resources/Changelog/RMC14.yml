@@ -1,73 +1,4 @@
 ﻿Entries:
-- author: Tyzemol
-  changes:
-  - message: Fixed hive weed sources (hive cluster/core) not spreading weeds onto
-      semi-weedable tiles directly.
-    type: Fix
-  id: 1504
-  time: '2025-03-28T05:10:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5914
-- author: Whisper
-  changes:
-  - message: Intelligence Officers and Senior Enlisted Advisors can now take both
-      armor and cosmetic items separately, no longer blocking taking the other.
-    type: Tweak
-  id: 1505
-  time: '2025-03-28T07:23:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5960
-- author: N0lim
-  changes:
-  - message: Fixed Queen building speed being half the intended amount.
-    type: Fix
-  id: 1506
-  time: '2025-03-28T10:08:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5842
-- author: Vermidia
-  changes:
-  - message: Fixed resin traps being placeable under dead bodies
-    type: Fix
-  - message: Fixed dead infected hosts not being draggable if they're been infected
-      for awhile (stage 2 or higher)
-    type: Fix
-  id: 1507
-  time: '2025-03-29T01:55:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5989
-- author: texas1234567889
-  changes:
-  - message: Fixed Solaris having M42A2 shotguns instead of the HG37, MAR-40 instead
-      of MAR-50, AR10 instead of Basira, riot armor in marshals instead of CMB armor
-      and masks, and MK45s instead of CMB spearheads.
-    type: Fix
-  - message: Fixed Solaris missing baton slugs and RC6 helmets in mining, and a pair
-      of binoculars and a cigar in admin dorms.
-    type: Fix
-  id: 1508
-  time: '2025-03-29T08:03:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6007
-- author: stranthbackup
-  changes:
-  - message: Fixed armors using the same value when resisting bullet and melee damage.
-      This makes the M3-VL and M3-EOD heavy armor better at resisting bullet damage
-      for example.
-    type: Fix
-  id: 1509
-  time: '2025-03-29T08:10:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5944
-- author: SigmaTheDragon
-  changes:
-  - message: Updated 4 flashlight grip sprites and 2 magnetic harness sprites.
-    type: Tweak
-  id: 1510
-  time: '2025-03-29T08:11:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6008
-- author: Dygon
-  changes:
-  - message: Doafter bars now have the same opacity as the entity performing the action,
-      except for some types of hostile doafters.
-    type: Tweak
-  id: 1511
-  time: '2025-03-29T08:16:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5992
 - author: Ramiris
   changes:
   - message: Added camouflage in-engine colouring.
@@ -5082,5 +5013,70 @@
   id: 2004
   time: '2025-07-12T06:55:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7001
+- author: noctyrnal
+  changes:
+  - message: Light fixtures now have the correct colours.
+    type: Fix
+  id: 2005
+  time: '2025-07-13T03:54:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7010
+- author: AverageNotDoingAnythingEnjoyer
+  changes:
+  - message: Fixed FORECON Sniper spawning with the rest of the squad.
+    type: Fix
+  id: 2006
+  time: '2025-07-13T03:56:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7007
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the lightweight combat pack (the PMC one) having less storage space
+      than intended.
+    type: Fix
+  id: 2007
+  time: '2025-07-13T06:03:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7018
+- author: Dygon
+  changes:
+  - message: Flamethrower fire, acid sprays, and the Vanguard's Pierce action no longer
+      pass through resin walls.
+    type: Fix
+  - message: Flamethrowers now require slightly less range between the user and the
+      first spawned fire tile.
+    type: Tweak
+  id: 2008
+  time: '2025-07-13T08:17:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7016
+- author: Arykh
+  changes:
+  - message: Transfer directions on reagent tanks are now visible when you examine
+      them. No more guessing games.
+    type: Add
+  id: 2009
+  time: '2025-07-13T09:05:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7015
+- author: OmerF-afk
+  changes:
+  - message: Added FN FP9000/FN FP9k/2 PMC and MP5A5
+    type: Add
+  - message: Fixed Mar-50's firerate Type23's missing buckshot HG3712's Typo on YML
+    type: Fix
+  id: 2010
+  time: '2025-07-13T09:11:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6983
+- author: DrSmugleaf
+  changes:
+  - message: Treating wounds with surgical line or synthgraft now breaks when moving
+      0.5 tiles, instead of only 0.3.
+    type: Tweak
+  id: 2011
+  time: '2025-07-13T10:25:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7019
+- author: noctyrnal
+  changes:
+  - message: Folded keffiyehs no longer hide your hair and your head top / side markings.
+    type: Fix
+  id: 2012
+  time: '2025-07-14T06:18:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7025
 Name: RMC14
 Order: -1

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/13/2025 00:17:28
-  entityCount: 2334
+  time: 07/13/2025 12:08:55
+  entityCount: 2335
 maps:
 - 1
 grids:
@@ -9969,7 +9969,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -7049.374
+      secondsUntilStateChange: -7071.318
       state: Opening
   - uid: 1278
     components:
@@ -15427,6 +15427,13 @@ entities:
     components:
     - type: Transform
       pos: 20.339493,-28.16487
+      parent: 2
+- proto: SpawnPointLatejoin
+  entities:
+  - uid: 1405
+    components:
+    - type: Transform
+      pos: 17.5,-21.5
       parent: 2
 - proto: WarpPoint
   entities:
