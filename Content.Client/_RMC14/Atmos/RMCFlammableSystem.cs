@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Mobs;
+using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
@@ -20,20 +21,18 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCStopDropRollVisualsComponent, ResistFireAlertEvent>(OnResistFireAlert);
+        SubscribeLocalEvent<RMCStopDropRollVisualsNetworkEvent>(OnResist);
         SubscribeLocalEvent<RMCStopDropRollVisualsComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<RMCStopDropRollVisualsComponent, StatusEffectEndedEvent>(OnStatusEffectEnded);
+        SubscribeLocalEvent<RMCStopDropRollVisualsComponent, StoodEvent>(OnStood);
     }
 
-    private void OnResistFireAlert(Entity<RMCStopDropRollVisualsComponent> ent, ref ResistFireAlertEvent args)
+    private void OnResist(RMCStopDropRollVisualsNetworkEvent ev)
     {
-        if (!TryComp<FlammableComponent>(ent.Owner, out var flammable))
+        if (!TryGetEntity(ev.User, out var user) || !HasComp<RMCStopDropRollVisualsComponent>(user))
             return;
 
-        if (flammable.Resisting)
-            return;
-
-        if (_animation.HasRunningAnimation(ent.Owner, RollKey))
+        if (_animation.HasRunningAnimation(user.Value, RollKey))
             return;
 
         var rollAnimation = new Animation
@@ -78,7 +77,7 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
             }
         };
 
-        _animation.Play(ent.Owner, rollAnimation, RollKey);
+        _animation.Play(user.Value, rollAnimation, RollKey);
     }
 
     private void OnMobStateChanged(Entity<RMCStopDropRollVisualsComponent> ent, ref MobStateChangedEvent args)
@@ -94,6 +93,11 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
         if (args.Key != KnockdownedKey)
             return;
 
+        _animation.Stop(ent.Owner, RollKey);
+    }
+
+    private void OnStood(Entity<RMCStopDropRollVisualsComponent> ent, ref StoodEvent args)
+    {
         _animation.Stop(ent.Owner, RollKey);
     }
 }

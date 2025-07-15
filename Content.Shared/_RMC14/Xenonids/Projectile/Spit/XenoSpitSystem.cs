@@ -419,6 +419,7 @@ public sealed class XenoSpitSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-acid-resist"), player, player);
         _stun.TryParalyze(player.Owner, player.Comp.ResistDuration, true);
         RemCompDeferred<UserAcidedComponent>(player);
+        RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(player)), Filter.Pvs(player));
     }
 
     private void ApplyAcidStacks(EntityUid target, int amount, int max, DamageSpecifier? damage, EntityWhitelist? whitelist)
