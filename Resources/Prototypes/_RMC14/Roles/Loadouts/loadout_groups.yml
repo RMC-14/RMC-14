@@ -371,6 +371,7 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
+  - CMPenClicky
 
 # Chief MP
 - type: loadoutGroup
