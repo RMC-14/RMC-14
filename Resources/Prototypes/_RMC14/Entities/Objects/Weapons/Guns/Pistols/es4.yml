@@ -9,11 +9,11 @@
     - Sidearm
     - RMCWeaponPistolES4
   - type: Gun
-    recoilWielded: 1
-    recoilUnwielded: 3
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_es4.ogg
   - type: RMCSelectiveFire
+    recoilWielded: 1
+    recoilUnwielded: 3
     scatterWielded: 4
     scatterUnwielded: 4
     baseFireRate: 4
