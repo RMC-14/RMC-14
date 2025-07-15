@@ -23,7 +23,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetReactorTechnician
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
