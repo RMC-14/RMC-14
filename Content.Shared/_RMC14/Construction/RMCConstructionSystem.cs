@@ -11,7 +11,6 @@ using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
-using marine-construction-ghost-previews
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -131,13 +130,13 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (!_prototype.TryIndex<RMCConstructionPrototype>(protoId, out var proto))
             return null;
 
-        foreach (var hand in _hands.EnumerateHands(user))
+        foreach (var handId in _hands.EnumerateHands(user))
         {
-            if (hand.HeldEntity == null)
+            if (!_hands.TryGetHeldItem(user, handId, out var heldEntity))
                 continue;
 
-            if (IsValidConstructionItemForPrototype(hand.HeldEntity.Value, proto))
-                return hand.HeldEntity.Value;
+            if (IsValidConstructionItemForPrototype(heldEntity.Value, proto))
+                return heldEntity.Value;
         }
 
         if (_inventorySystem.TryGetContainerSlotEnumerator(user, out var containerSlotEnumerator))
@@ -151,7 +150,7 @@ public sealed class RMCConstructionSystem : EntitySystem
                     return containerSlot.ContainedEntity.Value;
             }
         }
-
+        
         return null;
     }
 
