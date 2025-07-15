@@ -1,14 +1,40 @@
 ﻿# Corporate Liaison
 - type: loadout
-  id: CMPenClicky
+  id: RMCWeYaClipboard
+  cost: 1
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobLiaison
+        time: 90000 # 25 hours
+  storage:
+    back:
+      - RMCWeYaClipboard
+
+- type: loadout
+  id: RMCWeYaThermos
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
       role: CMJobLiaison
-      time: 90000 # 25 hours
+      time: 252000 # 70 hours
   storage:
     back:
-    - CMPenClicky
+    - RMCWeYaThermos
+
+- type: loadout
+  id: RMCHeadCapWeYa
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 630000 # 175 hours
+  storage:
+    back:
+    - RMCHeadCapWeYa
 

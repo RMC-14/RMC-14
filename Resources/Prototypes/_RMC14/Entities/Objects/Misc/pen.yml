@@ -26,6 +26,12 @@
   id: CMPenClicky # TODO RMC14 make it clicky
   name: WEYA pen
   description: It's a WEYA brand extra clicky black ink pen.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: weya_pen
+  - type: Item
+    sprite: _RMC14/Objects/Misc/paper.rsi
 
 - type: entity
   parent: CMPen

@@ -198,3 +198,26 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-antized
+
+- type: entity
+  parent: CMPill
+  id: RMCPillCyanide
+  description: A cyanide pill. Don't swallow this!
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCCyanide
+          Quantity: 50
+  - type: Sprite
+    layers:
+    - state: pill16
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ReagentExaminationRequiresSkill
+    skills:
+      RMCSkillMedical: 0
+  - type: ExamineRequiresSkill
+    skills:
+      RMCSkillMedical: 0
