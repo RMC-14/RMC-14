@@ -21,6 +21,8 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Tools/Hydroponics/spade.rsi
+  - type: XenoTunnelFiller
+  - type: Shovel
 
 - type: entity
   parent: HydroponicsToolHatchet
