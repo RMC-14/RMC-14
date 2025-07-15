@@ -1,0 +1,77 @@
+- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: M37-17 pump shotgun
+  id: RMCWeaponShotgunM3717
+  description: A military version of the iconic HG 37-12, this design can fit one extra shell in each of its dual-tube internal magazines, and fires shells with increased velocity, resulting in more damage. Issued to select UNMC vessels and stations in the outer veil. # TODO RMC14 : A button on the side toggles the internal tubes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m3717/m3717_inhands.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m3717/m3717_icon.rsi
+      state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m3717_inhands.rsi
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_small.ogg
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 0.625
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunFlechette
+      - RMCShellShotgunIncendiaryBuckshot
+      - RMCShellShotgunIncendiary
+      - RMCShellShotgunBeanbag
+    capacity: 10
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.5
+  - type: PumpAction
+  - type: GunDamageModifier
+    multiplier: 1.15
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+        random:
+        - RMCAttachmentS5RedDotSight
+        - RMCAttachmentS6ReflexSight
+        - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+        random:
+        - RMCAttachmentFlashlightGrip
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunM3717
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunM3717

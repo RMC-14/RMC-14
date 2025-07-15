@@ -47,6 +47,7 @@
   id: RMCIDCardHalcyon
   name: corporate holo-badge
   description: A corporate holo-badge. It's a unique Corporate orange and black.
+  suffix: Halcyon
   components:
   - type: ItemIFF
     faction: FactionHalcyon

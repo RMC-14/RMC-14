@@ -1,45 +1,17 @@
-﻿- type: entity
+﻿# I beg if anyone has the time to remove RMCPropVehicle2Base and change how the vehicles in this file work so that they're like prop_vehicles.yml or prop_vehicles3.yml
+
+- type: entity
   abstract: true
+  parent: RMCPropVehicleBase
   id: RMCPropVehicle2Base
-  placement:
-    mode: SnapgridBorder
   components:
   - type: Transform
-    anchored: false
-  - type: Physics
-    bodyType: Static
-    fixedRotation: true
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.8,-0.9,0.8,0.9"
-        density: 190
-        layer:
-        - MobMask
+    noRot: false
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/vehicles2.rsi
+    offset: 0, 0
     noRot: true
     state: crane
-    offset: 0.5,0.5
-  - type: Clickable
-  - type: DeleteOnExplosion
-  - type: InteractionOutline
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 3000 #For Parity sake this value can just be removed since vehicles on 13 dev enviro just get destroyed by explosions
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: RequireProjectileTarget
-  - type: Corrodible #Tried as drone on 13 dev enviro unable to acid those fellas
-    isCorrodible: false
 
 #suffix: WeYa, Destroyed, Flipped
 - type: entity
