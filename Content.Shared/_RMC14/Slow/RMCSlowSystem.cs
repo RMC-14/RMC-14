@@ -7,6 +7,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Slow;
 
@@ -26,9 +27,13 @@ public sealed class RMCSlowSystem : EntitySystem
         SubscribeLocalEvent<RMCSuperSlowdownComponent, ComponentStartup>(OnAdded);
         SubscribeLocalEvent<RMCRootedComponent, ComponentStartup>(OnAdded);
 
-        SubscribeLocalEvent<RMCSlowdownComponent, ComponentRemove>(OnExpire);
-        SubscribeLocalEvent<RMCSuperSlowdownComponent, ComponentRemove>(OnExpire);
-        SubscribeLocalEvent<RMCRootedComponent, ComponentRemove>(OnExpire);
+        SubscribeLocalEvent<RMCSlowdownComponent, ComponentShutdown>(OnExpire);
+        SubscribeLocalEvent<RMCSuperSlowdownComponent, ComponentShutdown>(OnExpire);
+        SubscribeLocalEvent<RMCRootedComponent, ComponentShutdown>(OnExpire);
+
+        SubscribeLocalEvent<RMCSlowdownComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<RMCSuperSlowdownComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<RMCRootedComponent, ComponentRemove>(OnRemove);
 
         SubscribeLocalEvent<RMCSlowdownComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<RMCSuperSlowdownComponent, RejuvenateEvent>(OnRejuvenate);
@@ -107,10 +112,8 @@ public sealed class RMCSlowSystem : EntitySystem
             EnsureComp<XenoImmobileVisualsComponent>(ent);
     }
 
-    private void OnExpire<T>(Entity<T> ent, ref ComponentRemove args) where T : IComponent
+    private void OnExpire<T>(Entity<T> ent, ref ComponentShutdown args) where T : IComponent
     {
-        if (!TerminatingOrDeleted(ent))
-            _speed.RefreshMovementSpeedModifiers(ent);
         if (typeof(T) != typeof(RMCRootedComponent))
         {
             if (typeof(T) == typeof(RMCSlowdownComponent))
@@ -120,6 +123,12 @@ public sealed class RMCSlowSystem : EntitySystem
         }
         else
             MaybeRemoveStunVisuals(ent);
+    }
+
+    private void OnRemove<T>(Entity<T> ent, ref ComponentRemove args) where T : Component
+    {
+        if (!TerminatingOrDeleted(ent))
+            _speed.RefreshMovementSpeedModifiers(ent);
     }
 
     private void OnRejuvenate<T>(Entity<T> ent, ref RejuvenateEvent args) where T : IComponent
@@ -214,10 +223,10 @@ public sealed class RMCSlowSystem : EntitySystem
 
     private void OnModifierEffectEnd(Entity<RMCSpeciesSlowdownModifierComponent> ent, ref StatusEffectEndedEvent args)
     {
-        if (args.Key != "Stun" && args.Key != "KnockedDown")
+        if (!ent.Comp.StatusesToUpdateOn.Contains(args.Key))
             return;
 
-        if (args.Key == "Stun" && !HasComp<RMCRootedComponent>(ent))
+        if (args.Key != "KnockedDown" && !HasComp<RMCRootedComponent>(ent))
             RemCompDeferred<XenoImmobileVisualsComponent>(ent);
         else if ((args.Key == "KnockedDown" || !_standing.IsDown(ent)) && HasComp<StunnedComponent>(ent))
             EnsureComp<XenoImmobileVisualsComponent>(ent);

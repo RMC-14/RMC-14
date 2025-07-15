@@ -125,9 +125,13 @@
     - name: Standard Equipment
       takeAll: RMCIntelEquipment
       entries:
-      - id: CMHandsInsulated
       - id: CMHeadsetIntel
       - id: CMMRE
+    - name: Gloves 
+      choices: { CMHands: 1 }
+      entries: 
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Armor
       takeOne: CMArmor
       entries:
@@ -201,7 +205,7 @@
         recommended: true
       - id: CMWebbingHolster
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:

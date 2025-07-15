@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/closet.dmi, modified by github noctyrnal",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "extinguisher_closed"
+    },
+    {
+      "name": "extinguisher_empty"
+    },
+    {
+      "name": "extinguisher_full"
+    },
+    {
+      "name": "extinguisher_mini"
+    },
+    {
+      "name": "closed"
+    },
+    {
+      "name": "extinguisher"
+    },
+    {
+      "name": "extinguisher-mini"
+    },
+    {
+      "name": "frame"
+    },
+    {
+      "name": "open"
+    }
+  ]
+}

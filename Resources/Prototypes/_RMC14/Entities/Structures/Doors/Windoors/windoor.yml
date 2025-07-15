@@ -1,11 +1,29 @@
 - type: entity
-  parent: BaseWindoor
-  id: CMWindoor
-  name: glass door
-  description: A window, that is also a door. A windoor if you will.
+  parent: BaseStructure
+  id: CMBaseWindoor
+  abstract: true
+  placement:
+    mode: SnapgridCenter
   components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmash
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.36"
+        density: 1500
+        mask:
+        - TabletopMachineMask
+        layer:
+        - GlassAirlockLayer
   - type: Sprite
-    sprite: _RMC14/Structures/Doors/Windoors/windoor.rsi
+    sprite: Structures/Doors/Windoors/windoor.rsi
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
@@ -24,12 +42,87 @@
     - state: panel_open
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       visible: false
-  - type: Corrodible
-    timeToApply: 4
-    structure: true
+  - type: AnimationPlayer
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: ExtensionCableReceiver
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
+  - type: ExaminableDamage
+    messages: WindowMessages
+  - type: Destructible
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronics ]
+  - type: AccessReader
+    containerAccessProvider: null
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+  - type: Door
+    canCrush: false
+    openingAnimationTime: 0.9
+    closingAnimationTime: 0.9
+    openSound:
+      path: /Audio/Machines/windoor_open.ogg
+    closeSound:
+      path: /Audio/Machines/windoor_open.ogg
+    denySound:
+      path: /Audio/Machines/airlock_deny.ogg
+  - type: Airlock
+    openingSpriteState: open_unlit
+    closingSpriteState: closed_unlit
+    keepOpenIfClicked: true
+    openPanelVisible: true
+    denyAnimationTime: 0.4
+    animatePanel: false
+    openUnlitVisible: true
+    safety: false
+  - type: NavMapDoor
+  - type: DoorBolt
+  - type: WiresPanel
+  - type: Wires
+    boardName: wires-board-name-windoor
+    layoutId: Airlock
+  - type: UserInterface
+    interfaces:
+      enum.AiUi.Key:
+        type: StationAiBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ElectrifiedVisuals.ShowSparks:
+        enum.ElectrifiedLayers.Sparks:
+          True: { visible: True }
+          False: { visible: False }
+  - type: WiresVisuals
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+      - South
+  - type: Construction
+    graph: CMWindoor
+    node: windoor
+    containers:
+    - board
+  - type: PryUnpowered
+  - type: RMCDropshipBlocked
+
+- type: entity
+  parent: CMBaseWindoor
+  id: CMWindoor
+  name: glass door
+  description: A window, that is also a door. A windoor if you will.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Windoors/windoor.rsi
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Destructible
     thresholds:
     - trigger:
@@ -52,63 +145,30 @@
               mix: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Construction
-    graph: CMWindoor
-    node: windoor
-    containers:
-    - board
-  - type: Airlock
-    openingSpriteState: open_unlit
-    closingSpriteState: closed_unlit
-  - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
-  - type: RMCDropshipBlocked
-  - type: AccessReader
-    containerAccessProvider: null
+  - type: XenoCrusherChargable
 
 - type: entity
-  parent: BaseSecureWindoor
+  parent: CMWindoor
+  id: RMCWindoorSoro
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#98A3AB"
+
+- type: entity
+  parent: CMBaseWindoor
   id: CMWindoorSecure
   name: secure glass door
   description: A thick chunk of tempered glass on metal track. Probably more robust than you.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Windoors/secure.rsi
-    layers:
-    - state: closed
-      map: ["enum.DoorVisualLayers.Base"]
-    - state: closed_unlit
-      shader: unshaded
-      map: [ "enum.DoorVisualLayers.BaseUnlit" ]
-    - state: welded
-      map: [ "enum.WeldableLayers.BaseWelded" ]
-      visible: false
-    - state: bolted
-      shader: unshaded
-      map: [ "enum.DoorVisualLayers.BaseBolted" ]
-    - state: emergency
-      shader: unshaded
-      map: [ "enum.DoorVisualLayers.BaseEmergencyAccess" ]
-    - state: panel_open
-      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      visible: false
   - type: Construction
     graph: CMWindoor
     node: windoorSecure
     containers:
     - board
-  - type: Airlock
-    openingSpriteState: open_unlit
-    closingSpriteState: closed_unlit
-  - type: ApcPowerReceiver
-    powerLoad: 0
-    needsPower: false
-  - type: RMCDropshipBlocked
   - type: ImmuneToUnarmed
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
   - type: Destructible
     thresholds:
     - trigger:
@@ -131,5 +191,3 @@
               mix: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: AccessReader
-    containerAccessProvider: null

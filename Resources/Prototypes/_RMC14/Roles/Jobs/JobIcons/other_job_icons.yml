@@ -11,3 +11,10 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_syn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconReconSynthetic
+  icon: 
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_syn_forecon

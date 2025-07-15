@@ -12,8 +12,9 @@
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
-  - type: Xeno
-    hidden: true
+  - type: XenoHidden
+  - type: FixedIdentity
+    name: rmc-rouny
 
 - type: entity
   parent:
@@ -28,8 +29,9 @@
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
-  - type: Xeno
-    hidden: true
+  - type: XenoHidden
+  - type: FixedIdentity
+    name: rmc-wehny
 
 - type: entity
   parent:
@@ -84,7 +86,6 @@
     - ActionXenoThrowParasite
     - ActionXenoRetrieveEgg
     - ActionXenoParasiteReserve
-    hidden: true
     tier: 0
     hudOffset: -0.15,-0.03
     contributesToVictory: false
@@ -178,3 +179,6 @@
       whitelist:
         components:
         - XenoHeavy
+  - type: XenoHidden
+  - type: FixedIdentity
+    name: rmc-lesser-carrier

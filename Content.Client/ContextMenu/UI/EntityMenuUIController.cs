@@ -94,8 +94,8 @@ namespace Content.Client.ContextMenu.UI
             var entitySpriteStates = GroupEntities(entities);
             var orderedStates = entitySpriteStates.ToList();
             orderedStates.Sort((x, y) => string.Compare(
-                Identity.Name(x.First(), _entityManager),
-                Identity.Name(y.First(), _entityManager),
+                Identity.Name(x.First(), _entityManager, _playerManager.LocalEntity),
+                Identity.Name(y.First(), _entityManager, _playerManager.LocalEntity),
                 StringComparison.CurrentCulture));
             Elements.Clear();
             AddToUI(orderedStates);
@@ -306,7 +306,7 @@ namespace Content.Client.ContextMenu.UI
             // find the element associated with this entity
             if (!Elements.TryGetValue(entity, out var element))
             {
-                Logger.Error($"Attempted to remove unknown entity from the entity menu: {_entityManager.GetComponent<MetaDataComponent>(entity).EntityName} ({entity})");
+                Log.Error($"Attempted to remove unknown entity from the entity menu: {_entityManager.GetComponent<MetaDataComponent>(entity).EntityName} ({entity})");
                 return;
             }
 

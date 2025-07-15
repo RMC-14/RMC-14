@@ -23,14 +23,9 @@ public sealed class HungerSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
 
-    [ValidatePrototypeId<SatiationIconPrototype>]
-    private const string HungerIconOverfedId = "HungerIconOverfed";
-
-    [ValidatePrototypeId<SatiationIconPrototype>]
-    private const string HungerIconPeckishId = "HungerIconPeckish";
-
-    [ValidatePrototypeId<SatiationIconPrototype>]
-    private const string HungerIconStarvingId = "HungerIconStarving";
+    private static readonly ProtoId<SatiationIconPrototype> HungerIconOverfedId = "HungerIconOverfed";
+    private static readonly ProtoId<SatiationIconPrototype> HungerIconPeckishId = "HungerIconPeckish";
+    private static readonly ProtoId<SatiationIconPrototype> HungerIconStarvingId = "HungerIconStarving";
 
     public override void Initialize()
     {
@@ -134,6 +129,7 @@ public sealed class HungerSystem : EntitySystem
             return;
 
         component.CurrentThreshold = calculatedHungerThreshold;
+        DirtyField(uid, component, nameof(HungerComponent.CurrentThreshold));
         DoHungerThresholdEffects(uid, component);
     }
 
@@ -162,10 +158,12 @@ public sealed class HungerSystem : EntitySystem
         if (component.HungerThresholdDecayModifiers.TryGetValue(component.CurrentThreshold, out var modifier))
         {
             component.ActualDecayRate = component.BaseDecayRate * modifier;
+            DirtyField(uid, component, nameof(HungerComponent.ActualDecayRate));
             SetAuthoritativeHungerValue((uid, component), GetHunger(component));
         }
 
         component.LastThreshold = component.CurrentThreshold;
+        DirtyField(uid, component, nameof(HungerComponent.LastThreshold));
     }
 
     private void DoContinuousHungerEffects(EntityUid uid, HungerComponent? component = null)

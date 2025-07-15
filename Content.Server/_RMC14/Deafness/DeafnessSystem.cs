@@ -17,13 +17,15 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DeafComponent, RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
+        SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
         SubscribeLocalEvent<DeafComponent, ChatMessageOverrideInVoiceRangeEvent>(OnOverrideInVoiceRange);
     }
 
-    private void OnRadioReceiveAttempt(Entity<DeafComponent> ent, ref RadioReceiveAttemptEvent args)
+    private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent args)
     {
-        if (args.RadioReceiver != ent.Owner)
+        var user = Transform(args.RadioReceiver).ParentUid;
+
+        if (!HasComp<DeafComponent>(user))
             return;
 
         args.Cancelled = true;
@@ -35,6 +37,8 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
             || args.Channel == ChatChannel.Damage
             || args.Channel == ChatChannel.Visual
             || args.Channel == ChatChannel.Notifications
+            || args.Channel == ChatChannel.OOC
+            || args.Channel == ChatChannel.LOOC
         )
             return;
 

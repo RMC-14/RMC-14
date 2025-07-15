@@ -54,7 +54,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     /// </summary>
     private void OnFragmentIntoProjectiles(Entity<ProjectileGrenadeComponent> ent, ref FragmentIntoProjectilesEvent args)
     {
-        if (args.ShootCount == 0)
+        if (ent.Comp.DirectHit && args.ShootCount == 0)
         {
             _hitEntities.Clear();
             var directHit = DirectHit(ent, args.ContentUid, args.TotalCount);

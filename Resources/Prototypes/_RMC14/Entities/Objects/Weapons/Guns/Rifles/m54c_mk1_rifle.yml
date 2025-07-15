@@ -106,6 +106,26 @@
 
 - type: entity
   parent: WeaponRifleM54CMK1
+  id: WeaponRifleM54CMK1Unloaded
+  suffix: Unloaded
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CMK1
+          - CMMagazineRifleM54CMK1AP
+          - RMCMagazineRifleM54CMK1Incendiary
+          - RMCMagazineRifleM54CMK1HEAP
+        startingItem: null
+
+- type: entity
+  parent: WeaponRifleM54CMK1
   id: WeaponRifleM54CMK1AP
   components:
   - type: ItemSlots

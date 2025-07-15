@@ -14,6 +14,8 @@ public sealed class ClientRMCHandsSystem : RMCHandsSystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCInteractWithOtherHand,
                 InputCmdHandler.FromDelegate(session =>
@@ -24,10 +26,10 @@ public sealed class ClientRMCHandsSystem : RMCHandsSystem
                         if (!TryComp(ent, out HandsComponent? hands))
                             return;
 
-                        if (!_hands.EnumerateHands(ent, hands).Skip(1).TryFirstOrDefault(out var other))
+                        if (!_hands.EnumerateHands((ent, hands)).Skip(1).TryFirstOrDefault(out var other))
                             return;
 
-                        _hands.UIHandClick(hands, other.Name, false);
+                        _hands.UIHandClick((ent, hands), other, false);
                     }))
             .Register<ClientRMCHandsSystem>();
     }

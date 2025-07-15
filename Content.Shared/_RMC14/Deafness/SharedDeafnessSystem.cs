@@ -4,6 +4,7 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Deafness;
 
@@ -13,6 +14,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public ProtoId<StatusEffectPrototype> DeafKey = "Deaf";
 
@@ -73,8 +75,11 @@ public abstract class SharedDeafnessSystem : EntitySystem
 
     public void DoEarLossPopups(EntityUid uid, bool end)
     {
+        if (_net.IsClient)
+            return;
+
         var msg = Loc.GetString(end ? "rmc-deaf-end" : "rmc-deaf-start");
-        _popup.PopupPredicted(msg, uid, uid, PopupType.MediumCaution);
+        _popup.PopupEntity(msg, uid, uid, PopupType.MediumCaution);
     }
 
     public bool HasEarProtection(EntityUid uid)

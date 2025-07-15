@@ -47,4 +47,6 @@ public sealed partial class ProjectileGrenadeComponent
     [DataField]
     public bool InheritIFF;
 
+    [DataField]
+    public bool DirectHit;
 }

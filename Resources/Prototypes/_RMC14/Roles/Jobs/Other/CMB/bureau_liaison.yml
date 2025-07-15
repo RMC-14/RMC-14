@@ -15,11 +15,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
     - type: Skills
       skills:
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-icb
+    - type: RMCTrackable
   hasIcon: false
   hidden: true
 
@@ -46,6 +50,10 @@
     job: CMICBLiaison
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear

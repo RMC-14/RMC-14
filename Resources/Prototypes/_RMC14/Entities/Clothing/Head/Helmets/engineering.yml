@@ -1,0 +1,6 @@
+- type: entity
+  parent: ClothingHeadHatWelding
+  id: RMCHelmetWelding
+  suffix: RMC
+  name: welding helmet
+  description: A head-mounted face cover designed to protect the wearer completely from space-arc eye.
