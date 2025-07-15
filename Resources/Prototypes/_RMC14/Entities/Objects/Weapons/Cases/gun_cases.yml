@@ -69,7 +69,6 @@
     - id: RMCWeaponPistolD18
     - id: RMCMagazinePistolD18
 
-
 # M77
 - type: entity
   parent: RMCGunCaseBase
@@ -93,7 +92,7 @@
     - id: CMMagazinePistolM77AP
       amount: 6
 
-# M44 combat revolver
+# M44 marksman combat revolver
 - type: entity
   parent: RMCGunCaseBase
   id: RMCGunCasePistolM44Marksman
