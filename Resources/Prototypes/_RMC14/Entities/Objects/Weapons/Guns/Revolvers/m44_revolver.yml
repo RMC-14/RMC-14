@@ -19,6 +19,7 @@
       - RMCSpeedLoaderM44
       - RMCSpeedLoader44Marksman
       - RMCCartridgeRevolver44
+      - RMCCartridgeRevolver44Marksman
     proto: RMCCartridgeRevolver44
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
@@ -57,6 +58,14 @@
       rmc-aslot-rail: 0, 0.185
       rmc-aslot-stock: -0.59375, 0.09375
       rmc-aslot-underbarrel: 0.375, -0.155
+
+- type: entity
+  parent: RMCWeaponRevolverM44
+  id: RMCWeaponRevolverM44Marksman
+  suffix: Marksman
+  components:
+  - type: RevolverAmmoProvider
+    proto: RMCCartridgeRevolver44Marksman
 
 - type: entity
   parent: RMCWeaponRevolverM44

@@ -112,7 +112,7 @@
   - type: StorageFill
     contents:
     - id: RMCAttachmentRailFlashlight
-    - id: RMCWeaponRevolverM44
+    - id: RMCWeaponRevolverM44Marksman
     - id: RMCSpeedLoader44Marksman
       amount: 6
 
@@ -244,7 +244,7 @@
       amount: 2
     - id: RMCBeltXM51
   - type: RemoveOnlyStorage
-    whitelist: 
+    whitelist:
       tags:
       - RMCAttachmentXM51Stock
       - RMCWeaponShotgunXM51
