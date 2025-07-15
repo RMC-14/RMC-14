@@ -11,7 +11,7 @@
                 BackgroundColor="#1A1A1A" />
         </PanelContainer.PanelOverride>
         <BoxContainer Name="MembersContainer" Access="Public" Orientation="Vertical">
-            <PanelContainer HorizontalExpand="True" StyleClasses="FireteamHeader">
+            <PanelContainer HorizontalExpand="True">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat 
                         BorderColor="#3A3A3A" 
@@ -19,11 +19,11 @@
                         BackgroundColor="#252525" />
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Horizontal" Margin="4 2">
-                    <RichTextLabel Name="FireteamLabel" Access="Public" HorizontalExpand="True" StyleClasses="FireteamTitle" />
+                    <RichTextLabel Name="FireteamLabel" Access="Public" HorizontalExpand="True" />
                 </BoxContainer>
             </PanelContainer>
             <BoxContainer Name="LeaderContainer" Access="Public" Orientation="Horizontal" Margin="4 2">
-                <RichTextLabel Name="LeaderLabel" Access="Public" StyleClasses="LeaderText" />
+                <RichTextLabel Name="LeaderLabel" Access="Public" />
                 <Control HorizontalExpand="True" />
                 <Button Name="RemoveLeaderButton" Access="Public" Text="✕" StyleClasses="SmallSquareButton" />
             </BoxContainer>

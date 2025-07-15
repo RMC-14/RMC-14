@@ -21,9 +21,7 @@
                         BackgroundColor="#252525" />
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Vertical" Margin="4">
-                    <RichTextLabel Text="{Loc ui-supply-drop-console-name-bolded}" 
-                                 HorizontalAlignment="Center"
-                                 StyleClasses="FireteamTitle"/>
+                    <RichTextLabel Text="{Loc ui-supply-drop-console-name-bolded}" HorizontalAlignment="Center" />
                 </BoxContainer>
             </PanelContainer>
             <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
@@ -35,15 +33,13 @@
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Vertical" Margin="4">
                     <BoxContainer Name="TargetXContainer" Orientation="Horizontal" Margin="2">
-                        <Label Text="{Loc ui-supply-drop-console-longitude}" 
-                              MinWidth="100"
+                        <Label Text="{Loc ui-supply-drop-console-longitude}" MinWidth="100"
                               VerticalAlignment="Center"
                               StyleClasses="ColumnHeaderText"/>
                         <Control HorizontalExpand="True"/>
                     </BoxContainer>
                     <BoxContainer Name="TargetYContainer" Orientation="Horizontal" Margin="2">
-                        <Label Text="{Loc ui-supply-drop-console-latitude}" 
-                              MinWidth="100"
+                        <Label Text="{Loc ui-supply-drop-console-latitude}" MinWidth="100"
                               VerticalAlignment="Center"
                               StyleClasses="ColumnHeaderText"/>
                         <Control HorizontalExpand="True"/>
@@ -59,24 +55,14 @@
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Vertical" Margin="4">
                     <BoxContainer Orientation="Horizontal" Margin="2">
-                        <RichTextLabel Text="{Loc ui-supply-drop-pad-status}" 
-                                      StyleClasses="FireteamTitle"/>
+                        <RichTextLabel Text="{Loc ui-supply-drop-pad-status}" />
                         <Control HorizontalExpand="True"/>
-                        <Button Name="UpdateButton" 
-                               Access="Public" 
-                               Text="{Loc ui-supply-drop-console-update}"
-                               StyleClasses="OpenBoth"
-                               MinWidth="100"/>
+                        <Button Name="UpdateButton" Access="Public" Text="{Loc ui-supply-drop-console-update}"
+                               StyleClasses="OpenBoth" MinWidth="100"/>
                     </BoxContainer>
-                    <Label Name="CrateStatusLabel" 
-                          Access="Public"
-                          Margin="4 2"
-                          StyleClasses="MemberName"/>
-                    <Label Name="LaunchStatusLabel" 
-                          Access="Public" 
-                          Text="{Loc ui-supply-drop-console-ready}"
-                          Margin="4 2"
-                          StyleClasses="Good"/>
+                    <Label Name="CrateStatusLabel" Access="Public" Margin="4 2"/>
+                    <Label Name="LaunchStatusLabel" Access="Public" 
+                          Text="{Loc ui-supply-drop-console-ready}" Margin="4 2" StyleClasses="Good"/>
                 </BoxContainer>
             </PanelContainer>
             <PanelContainer HorizontalExpand="True">
@@ -90,18 +76,11 @@
                     <ProgressBar Name="CooldownBar" 
                                 Access="Public"
                                 MinHeight="20">
-                        <Label Name="CooldownLabel" 
-                              Access="Public" 
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center"
-                              StyleClasses="MemberName"/>
+                        <Label Name="CooldownLabel" Access="Public" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </ProgressBar>
-                    <Button Name="LaunchButton" 
-                          Access="Public" 
-                          Text="{Loc ui-supply-drop-console-launch}"
-                          StyleClasses="OpenBoth"
-                          Margin="0 8 0 0"
-                          MinHeight="30"/>
+                    <Button Name="LaunchButton" Access="Public" 
+                          Text="{Loc ui-supply-drop-console-launch}" StyleClasses="OpenBoth"
+                          Margin="0 8 0 0" MinHeight="30"/>
                 </BoxContainer>
             </PanelContainer>
         </BoxContainer>
