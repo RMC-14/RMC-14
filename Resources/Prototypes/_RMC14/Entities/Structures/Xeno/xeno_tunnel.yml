@@ -10,6 +10,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_tunnel.rsi
     state: hole
+    noRot: true
   - type: InteractionOutline
   - type: Clickable
   - type: RMCNightVisionVisible
@@ -36,6 +37,7 @@
         type: NameTunnelBui
   - type: DeletedByWeedKiller
   - type: XenoFriendly
+  - type: RMCTrackable
 
 - type: entity
   parent: XenoTunnel

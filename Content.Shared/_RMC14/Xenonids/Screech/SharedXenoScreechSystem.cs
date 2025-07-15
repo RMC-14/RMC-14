@@ -9,6 +9,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using System.Linq;
 
 namespace Content.Shared._RMC14.Xenonids.Screech;
 
@@ -25,6 +26,7 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
+    private readonly HashSet<Entity<MobStateComponent>> _closeMobs = new();
     private readonly HashSet<Entity<XenoParasiteComponent>> _parasites = new();
 
     public override void Initialize()
@@ -56,6 +58,18 @@ public sealed class XenoScreechSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
+        _closeMobs.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _closeMobs);
+
+        foreach (var receiver in _closeMobs)
+        {
+            if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
+                continue;
+
+            Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
+            Deafen(xeno, receiver, xeno.Comp.CloseDeafTime);
+        }
+
         _mobs.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _mobs);
 
@@ -64,20 +78,11 @@ public sealed class XenoScreechSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
                 continue;
 
-            Stun(xeno, receiver, xeno.Comp.StunTime, true);
-            Deafen(xeno, receiver, xeno.Comp.FarDeafTime);
-        }
-
-        _mobs.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _mobs);
-
-        foreach (var receiver in _mobs)
-        {
-            if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
+            if (_closeMobs.Contains(receiver))
                 continue;
 
-            Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
-            Deafen(xeno, receiver, xeno.Comp.CloseDeafTime);
+            Stun(xeno, receiver, xeno.Comp.StunTime, true);
+            Deafen(xeno, receiver, xeno.Comp.FarDeafTime);
         }
 
         _parasites.Clear();

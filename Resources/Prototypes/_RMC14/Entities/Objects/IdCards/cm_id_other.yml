@@ -46,6 +46,16 @@
 
 - type: entity
   parent: CMIDCardLanyard
+  id: RMCIDCardColonistScientist
+  name: researcher colonist ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivorScientist
+  - type: ItemIFF
+    faction: FactionSurvivor
+
+- type: entity
+  parent: CMIDCardLanyard
   id: CMIDCardColonistSecurity
   name: security colonist ID card
   components:
@@ -275,6 +285,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/aegis.rsi
     state: keycard
+    drawdepth: SmallObjects
   - type: Item
     size: Tiny
   - type: Clothing

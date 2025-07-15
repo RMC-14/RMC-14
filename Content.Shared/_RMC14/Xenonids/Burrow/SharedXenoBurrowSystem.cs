@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Pulling;
@@ -14,7 +15,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -50,6 +51,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
@@ -131,36 +133,25 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
 
         burrower.Comp.Active = args.burrowed;
         _actionBlocker.UpdateCanMove(burrower);
-        var actions = _action.GetActions(burrower);
 
-        //_appearance.SetData(burrower, XenoVisualLayers.Burrow, args.burrowed); unused
         if (args.burrowed)
         {
-            foreach (var action in actions)
+            foreach (var entity in _rmcActions.GetActionsWithEvent<XenoBurrowActionEvent>(burrower))
             {
-                var actComp = action.Comp;
-
-                if (actComp.BaseEvent is XenoBurrowActionEvent)
-                {
-                    continue;
-                }
-                actComp.Enabled = false;
-                Dirty(action.Id, actComp);
+                _action.SetEnabled((entity, entity), false);
             }
+
             _transform.AnchorEntity(burrower);
         }
         else
         {
-            foreach (var action in actions)
+            foreach (var action in _action.GetActions(burrower))
             {
-                var actComp = action.Comp;
-
-                actComp.Enabled = true;
-                Dirty(action.Id, actComp);
+                _action.SetEnabled((action, action), true);
             }
 
             _transform.Unanchor(burrower);
-            if (TryComp<PhysicsComponent>(burrower, out var body))
+            if (TryComp(burrower, out PhysicsComponent? body))
             {
                 _physics.TrySetBodyType(burrower, BodyType.KinematicController, body: body);
                 Dirty(burrower, body);
@@ -330,7 +321,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         if (TryComp(gridId, out MapGridComponent? grid))
         {
             var tile = _map.GetTileRef(gridId.Value, grid, coordinates);
-            if (tile.IsSpace())
+            if (_turf.IsSpace(tile))
             {
                 _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-failure-space"), ent, ent);
                 return false;
@@ -367,7 +358,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         if (TryComp(gridId, out MapGridComponent? grid))
         {
             var tile = _map.GetTileRef(gridId.Value, grid, target);
-            if (tile.IsSpace())
+            if (_turf.IsSpace(tile))
             {
                 _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-failure-space"), ent, ent);
                 return false;

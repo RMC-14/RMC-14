@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Content.Client.Actions;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Robust.Client.Player;
 using static Content.Client.Actions.ActionsSystem;
 
@@ -40,7 +40,7 @@ public sealed class XenoActionOrderSystem : EntitySystem
 
         _sortedEnt = player;
 
-        var actions = new List<Entity<BaseActionComponent>>();
+        var actions = new List<Entity<ActionComponent>>();
         foreach (var action in _actions.GetActions(player))
         {
             actions.Add(action);
