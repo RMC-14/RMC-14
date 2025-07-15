@@ -272,7 +272,7 @@ public sealed class SmokeSystem : EntitySystem
             {
                 if (reagentQuantity.Quantity == FixedPoint2.Zero)
                     continue;
-                var reagentProto = _prototype.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+                var reagentProto = _prototype.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
 
                 _reactive.ReactionEntity(entity, ReactionMethod.Touch, reagentProto, reagentQuantity, finalSolution);
             }
