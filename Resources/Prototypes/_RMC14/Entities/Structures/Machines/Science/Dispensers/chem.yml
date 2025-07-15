@@ -202,9 +202,12 @@
       - CMKelotane
       - CMDylovene
       - CMDexalin
+      - CMDexalinPlus
       - CMInaprovaline
       - CMEpinephrine
-      # TODO RMC-14 Peridaxon and tramadol
+      # TODO RMC-14 Peridaxon
+      # TODO RMC-14 Tramadol
+      # TODO RMC-14 Oxycodone
       - CMTricordrazine
 
 - type: entity
@@ -214,4 +217,3 @@
   components:
   - type: RMCChemicalDispenser
     network: RMCChemStorageGround
-
