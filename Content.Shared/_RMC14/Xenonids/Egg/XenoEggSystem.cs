@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Dropship;
+﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -69,6 +70,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -127,10 +129,9 @@ public sealed class XenoEggSystem : EntitySystem
         var query = EntityQueryEnumerator<XenoOvipositorCapableComponent>();
         while (query.MoveNext(out var uid, out _))
         {
-            foreach (var (actionId, action) in _actions.GetActions(uid))
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoGrowOvipositorActionEvent>(uid))
             {
-                if (action.BaseEvent is XenoGrowOvipositorActionEvent)
-                    _actions.ClearCooldown(actionId);
+                _actions.ClearCooldown(action.AsNullable());
             }
         }
     }

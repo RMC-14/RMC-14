@@ -229,8 +229,6 @@
         points: 6
       - id: CMMiniTank
         points: 6
-      - id: CMMiniTank
-        points: 6
       - id: CMBloodPackFull
         points: 5
       - id: CMPortableSurgicalBed

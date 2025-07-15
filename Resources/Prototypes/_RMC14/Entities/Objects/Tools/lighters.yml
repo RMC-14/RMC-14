@@ -11,6 +11,7 @@
     slots:
     - suitstorage
   - type: RMCLighter
+  - type: ItemTogglePointLight
 
 - type: entity
   name: zippo lighter
@@ -101,7 +102,7 @@
       map: ["flame"]
       visible: false
       shader: unshaded
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:
       left:
