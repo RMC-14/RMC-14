@@ -121,5 +121,5 @@
   components:
   - type: RMCDoorButton
     marineAnnouncement: rmc-machines-button-marine-announcement-weya
-    minimumRoundTimeToPress: 1500 # 25 minutes
+    minimumRoundTimeToPress: 600 # 10 minutes
     useOnlyOnce: true
