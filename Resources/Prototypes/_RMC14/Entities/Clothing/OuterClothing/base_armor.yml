@@ -42,6 +42,7 @@
       - RMCMacheteScabbard
       - RMCScabbardKatana
       #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
+      - RMCM82FHolster
       - RMCSmartPistolHolster
       - RMCSMGHolster
       - RMCSMGPouchHolster
@@ -247,7 +248,8 @@
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:

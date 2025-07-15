@@ -684,6 +684,63 @@
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentMP5AltStockCollapsible
+  name: MP5A5 folding stock
+  description: MP5A5 folding stock for Alternate MP5
+  components:
+  - type: Sprite
+    state: mp5_stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentMP5AltStockCollapsible
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: mp5_stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: mp5_stock-on
+    actionName: Toggle Submachinegun Folding Stock
+  - type: AttachableSizeMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      size: 1
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      walk: -0.024
+      sprint: -0.043
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.15
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 2
+
+- type: entity
+  parent: RMCStockAttachmentCollapsibleBase
   id: RMCAttachmentM63ArmBrace
   name: submachinegun arm brace
   description: A specialized stock for use on an M63 submachine gun. It makes one handing more accurate at the expense of burst amount. Wielding the weapon with this stock attached confers a major inaccuracy and recoil debuff.
@@ -1066,4 +1123,8 @@
 
 - type: Tag
   id: RMCAttachmentAK4047StockCollapsible
+
+
+- type: Tag
+  id: RMCAttachmentMP5AltStockCollapsible
 

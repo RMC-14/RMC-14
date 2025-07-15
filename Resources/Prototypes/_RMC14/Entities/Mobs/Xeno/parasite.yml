@@ -51,6 +51,7 @@
         mask:
         - SmallMobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - SmallMobLayer
   - type: XenoAnimateMovement

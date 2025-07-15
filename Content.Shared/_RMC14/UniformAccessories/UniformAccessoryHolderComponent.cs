@@ -16,4 +16,7 @@ public sealed partial class UniformAccessoryHolderComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<EntProtoId>? StartingAccessories;
+
+    [DataField, AutoNetworkedField]
+    public bool HideAccessories = false;
 }

@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseItem
+  id: RMCMegaphone
+  name: Megaphone
+  description: A device used to project your voice. Loudly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/megaphone.rsi
+    state: megaphone
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots:
+    - pocket
+  - type: RMCMegaphone
+  - type: UseDelay
+    delay: 2
