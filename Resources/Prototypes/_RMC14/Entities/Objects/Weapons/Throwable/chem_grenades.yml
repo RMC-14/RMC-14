@@ -1,0 +1,210 @@
+- type: entity
+  parent: ModularGrenade
+  id: RMCCustomGrenade
+  name: custom grenade
+  description: A custom chemical grenade with an M40 casing. This one is made to fit into underslung grenade launchers, but can also be thrown by hand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/custom_grenade.rsi
+    layers:
+    - state: unfinished
+      map: [ "enum.ConstructionVisuals.Layer" ]
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: IgnorePredictionHide
+  - type: Clothing
+    slots:
+    - suitStorage
+  - type: Destructible
+    thresholds: []
+  - type: ChangeItemSizeOnTimerTrigger
+  - type: CancelUseWithCloak
+  - type: CMVocalizeTrigger
+  - type: Ammo # TODO being able to lock the grenade
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          start: { state: unfinished }
+          caseWithTrigger: { state: unfinished }
+          caseWithPayload: { state: unfinished }
+          grenade: { state: icon }
+      enum.Trigger.TriggerVisuals.VisualState:
+        enum.ConstructionVisuals.Layer:
+          Primed: { state: primed }
+          # Unprimed: <Use state determined by enum.ConstructionVisuals.Layer>
+  - type: Construction
+    graph: RMCCustomGrenadeGraph
+    node: start
+  - type: ContainerContainer
+    containers:
+      payload: !type:Container
+      payloadTrigger: !type:Container
+
+# Metal Foam Grenade
+- type: entity
+  parent: RMCCustomGrenade
+  id: RMCGrenadeCustomMetalFoam
+  name: metal-foam grenade
+  description: Used for emergency sealing of air breaches.
+  suffix: RMC
+  components:
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeMetalFoam
+  - type: ContainerFill
+    containers:
+      payload:
+      - RMCChemicalPayloadMetalFoam
+      payloadTrigger:
+      - RMCTimerTrigger
+  - type: Construction
+    graph: RMCCustomGrenadeGraph
+    node: grenade
+  - type: DeleteOnTrigger
+  - type: SoundOnTrigger
+    sound:
+        path: /Audio/Effects/Chemistry/bubbles.ogg
+        params:
+            variation: 0.2
+
+- type: entity
+  parent: ChemicalPayload
+  id: RMCChemicalPayloadMetalFoam
+  name: metal-foam payload
+  description: A chemical payload. Has space to store two beakers.
+  suffix: RMC
+  components:
+  - type: ContainerContainer
+    containers:
+      BeakerSlotA: !type:ContainerSlot
+      BeakerSlotB: !type:ContainerSlot
+  - type: ContainerFill
+    containers:
+      BeakerSlotA:
+      - RMCBeakerMetalFoamAluminum
+      BeakerSlotB:
+      - RMCBeakerMetalFoamingAgent
+
+- type: entity
+  parent: CMBeaker
+  id: RMCBeakerMetalFoamAluminum
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        reagents:
+          - ReagentId: RMCAluminum
+            Quantity: 30
+
+- type: entity
+  parent: CMBeaker
+  id: RMCBeakerMetalFoamingAgent
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        reagents:
+          - ReagentId: FoamingAgent
+            Quantity: 10
+          - ReagentId: PolytrinicAcid
+            Quantity: 10
+
+# Weedkiller
+- type: entity
+  parent: RMCGrenadeCustomMetalFoam
+  id: RMCGrenadeCustomWeedkiller
+  name: weedkiller grenade
+  description: Used for purging large areas of invasive plant species. Contents under pressure. Do not directly inhale contents.
+  suffix: RMC
+  components:
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeWeedkiller
+  - type: ContainerFill
+    containers:
+      payload:
+      - RMCChemicalPayloadWeedkiller
+      payloadTrigger:
+      - RMCTimerTrigger
+  - type: SoundOnTrigger
+    sound:
+        path: /Audio/Effects/smoke.ogg
+        params:
+            variation: 0.2
+
+- type: entity
+  parent: RMCChemicalPayloadMetalFoam
+  id: RMCChemicalPayloadWeedkiller
+  name: weedkiller payload
+  components:
+  - type: ContainerFill
+    containers:
+      BeakerSlotA:
+      - RMCBeakerWeedkillerPlantBGone
+      BeakerSlotB:
+      - RMCBeakerWeedkillerPhosphorus
+
+- type: entity
+  parent: CMBeaker
+  id: RMCBeakerWeedkillerPlantBGone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        reagents:
+          - ReagentId: PlantBGone
+            Quantity: 25
+          - ReagentId: RMCPotassium
+            Quantity: 25
+
+- type: entity
+  parent: CMBeaker
+  id: RMCBeakerWeedkillerPhosphorus
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 60
+        reagents:
+          - ReagentId: RMCSugar
+            Quantity: 25
+          - ReagentId: RMCPhosphorus
+            Quantity: 25
+
+# Other
+- type: entity
+  parent: BaseFoam
+  id: RMCSmokeChemical
+  name: smoke
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/transparent_smoke.rsi
+    state: smoke2
+  - type: TimedDespawn
+    lifetime: 10
+  - type: DeleteOnExplosion
+  - type: Appearance
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: Tag
+  id: RMCGrenadeWeedkiller
+
+- type: Tag
+  id: RMCGrenadeMetalFoam

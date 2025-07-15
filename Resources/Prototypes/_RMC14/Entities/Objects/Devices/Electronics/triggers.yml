@@ -1,0 +1,22 @@
+- type: entity
+  parent: TimerTrigger
+  id: RMCTimerTrigger
+  name: timer
+  description: Used to time things. Works well with contraptions which has to count down. Tick tock.
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/timer.rsi
+    state: timer
+  - type: PayloadTrigger
+    components:
+    - type: OnUseTimerTrigger
+      delay: 3
+      delayOptions: [3, 5, 10]
+      initialBeepDelay: 0
+      beepInterval: 10
+      beepSound:
+        path: /Audio/_RMC14/Explosion/armbomb.ogg
+        params:
+          volume: -5
+      doPopup: false

@@ -1,8 +1,13 @@
 ﻿using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.MotionDetector;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
+using Content.Shared.Mobs;
+using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -19,16 +24,40 @@ public sealed class IntelDetectorSystem : EntitySystem
     [Dependency] private readonly SharedCMInventorySystem _rmcInventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+
+    private EntityQuery<IntelDetectorComponent> _detectorQuery;
+    private EntityQuery<StorageComponent> _storageQuery;
 
     private readonly HashSet<Entity<IntelDetectorTrackedComponent>> _tracked = new();
 
     public override void Initialize()
     {
+        _detectorQuery = GetEntityQuery<IntelDetectorComponent>();
+        _storageQuery = GetEntityQuery<StorageComponent>();
+
+        SubscribeLocalEvent<XenoParasiteInfectEvent>(OnXenoInfect);
+        SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
+
         SubscribeLocalEvent<IntelDetectorComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<IntelDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<IntelDetectorComponent, DroppedEvent>(OnDisable);
         SubscribeLocalEvent<IntelDetectorComponent, RMCDroppedEvent>(OnDisable);
         SubscribeLocalEvent<IntelDetectorComponent, ExaminedEvent>(OnExamined);
+    }
+
+    private void OnXenoInfect(XenoParasiteInfectEvent ev)
+    {
+        DisableDetectorsOnMob(ev.Target);
+    }
+
+    private void OnMobStateChanged(MobStateChangedEvent ev)
+    {
+        if (ev.NewMobState != MobState.Dead)
+            return;
+
+        DisableDetectorsOnMob(ev.Target);
     }
 
     private void OnUseInHand(Entity<IntelDetectorComponent> ent, ref UseInHandEvent args)
@@ -61,6 +90,39 @@ public sealed class IntelDetectorSystem : EntitySystem
         ent.Comp.Enabled = false;
         Dirty(ent);
         UpdateAppearance(ent);
+    }
+
+    private void DisableIntelDetectors(EntityUid ent)
+    {
+        if (_detectorQuery.TryComp(ent, out var detector))
+        {
+            detector.Enabled = false;
+            Dirty(ent, detector);
+            UpdateAppearance((ent, detector));
+        }
+
+        if (_storageQuery.TryComp(ent, out var storage))
+        {
+            foreach (var stored in storage.StoredItems.Keys)
+            {
+                DisableIntelDetectors(stored);
+            }
+        }
+    }
+
+    private void DisableDetectorsOnMob(EntityUid uid)
+    {
+        foreach (var held in _hands.EnumerateHeld(uid))
+        {
+            DisableIntelDetectors(held);
+        }
+
+        var slots = _inventory.GetSlotEnumerator(uid);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is { } contained)
+                DisableIntelDetectors(contained);
+        }
     }
 
     private void OnExamined(Entity<IntelDetectorComponent> ent, ref ExaminedEvent args)

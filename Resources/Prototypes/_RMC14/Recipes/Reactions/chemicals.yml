@@ -24,3 +24,57 @@
       amount: 1
   products:
     TableSalt: 2
+
+- type: reaction
+  id: RMCAluminiumMetalFoam
+  impact: High
+  priority: 10
+  reactants:
+    RMCAluminum:
+      amount: 0.6
+    FoamingAgent:
+      amount: 0.2
+    PolytrinicAcid:
+      amount: 0.2
+  effects:
+    - !type:AreaReactionEffect
+      duration: 10
+      prototypeId: RMCAluminiumMetalFoamEffect
+      sound:
+        path: /Audio/Effects/extinguish.ogg
+
+- type: reaction
+  id: RMCIronMetalFoam
+  impact: High
+  priority: 10
+  reactants:
+    RMCIron:
+      amount: 0.6
+    FoamingAgent:
+      amount: 0.2
+    PolytrinicAcid:
+      amount: 0.2
+  effects:
+    - !type:AreaReactionEffect
+      duration: 10
+      prototypeId: RMCIronMetalFoamEffect
+      sound:
+        path: /Audio/Effects/extinguish.ogg
+
+- type: reaction
+  id: RMCSmoke
+  priority: 10
+  impact: High
+  reactants:
+    RMCPhosphorus:
+      amount: 0.5
+    RMCPotassium:
+      amount: 0.5
+    RMCSugar:
+      amount: 0.5
+  effects:
+    - !type:AreaReactionEffect
+      duration: 10
+      prototypeId: RMCSmokeChemical
+      sound:
+        path: /Audio/Effects/smoke.ogg

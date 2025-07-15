@@ -77,3 +77,8 @@
     randomGearOther:
     -
       - [ CMSheetMetal20, RMCMaskGasSPP ]
+    -
+      - [ RMCMotionDetector ]
+      - [ RMCGrenadeCustomMetalFoam ]
+      - [ RMCGrenadeCustomWeedkiller ]
+      - [ RMCThermalTarpV2Folded ]
