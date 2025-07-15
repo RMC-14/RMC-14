@@ -72,8 +72,12 @@
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardLiaison
-  name: liaison ID card
+  name: corporate holo-badge
+  description: A corporate holo-badge. It's a unique Corporate orange and white.
+  suffix: WeYa
   components:
+  - type: Sprite
+    state: corporate_liaison
   - type: ItemIFF
     faction: FactionWeYa
   - type: PresetIdCard
