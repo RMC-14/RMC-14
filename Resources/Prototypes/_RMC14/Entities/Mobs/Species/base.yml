@@ -357,6 +357,7 @@
   - type: RMCDisarmable
   - type: StunOnExplosionReceived
   - type: DeafenWhileCrit
+  - type: RMCStopDropRollVisuals
   - type: XenoToggleChargingDamage
     damage:
       types:
