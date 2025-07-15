@@ -905,6 +905,21 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
+  id: RMCAttachmentM3714Stock
+  name: M3714 stock
+  description: The non-detachable stock of a M37-14 pump shotgun.
+  components:
+  - type: Sprite
+    state: M3714stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM3714Stock
+
+- type: entity
+  parent: RMCStockAttachmentBase
   id: RMCAttachmentHuntingStock
   name: Basira-Armstrong stock
   description: The non-detachable stock of a Basira-Armstrong hunting rifle
@@ -979,6 +994,9 @@
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
+
+- type: Tag
+  id: RMCAttachmentM3714Stock
 
 - type: Tag
   id: RMCAttachmentStock
