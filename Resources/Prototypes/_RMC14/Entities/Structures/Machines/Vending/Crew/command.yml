@@ -885,7 +885,7 @@
       entries:
       - id: RMCGunCaseRevolverRSh9
       - id: RMCGunCasePistolM77
-      - id: RMCGunCasePistolM44
+      - id: RMCGunCasePistolM44Marksman
       - id: RMCGunCasePistolM1984
     - name: Backpack
       jobs:

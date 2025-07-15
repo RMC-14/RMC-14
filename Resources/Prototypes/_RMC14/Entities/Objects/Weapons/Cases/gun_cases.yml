@@ -96,8 +96,8 @@
 # M44 combat revolver
 - type: entity
   parent: RMCGunCaseBase
-  id: RMCGunCasePistolM44
-  name: M44 combat revolver case
+  id: RMCGunCasePistolM44Marksman
+  name: M44 marksman combat revolver case
   description:
   components:
   - type: Storage
