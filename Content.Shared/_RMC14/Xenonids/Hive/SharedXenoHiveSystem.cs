@@ -72,17 +72,21 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         }
     }
 
-    private void OnGranterMobStateChanged(Entity<XenoEvolutionGranterComponent> ent, ref MobStateChangedEvent args)
+    protected virtual void OnGranterMobStateChanged(Entity<XenoEvolutionGranterComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (GetHive(ent.Owner) is {} hive)
-        {
-            hive.Comp.LastQueenDeath = _timing.CurTime;
-            hive.Comp.CurrentQueen = null;
-            Dirty(hive);
-        }
+        if (GetHive(ent.Owner) is not { } hive)
+            return;
+
+        hive.Comp.LastQueenDeath = _timing.CurTime;
+        hive.Comp.CurrentQueen = null;
+
+        Dirty(hive);
+
+        var ev = new QueenDeathEvent(hive.Owner);
+        RaiseLocalEvent(hive.Owner, ref ev);
     }
 
     private void OnMapInit(Entity<HiveComponent> ent, ref MapInitEvent args)
@@ -382,3 +386,15 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct HiveChangedEvent(Entity<HiveComponent>? Hive, EntityUid? OldHive);
+
+/// <summary>
+/// Raised when a hive's Queen has died.
+/// </summary>
+[ByRefEvent]
+public readonly record struct QueenDeathEvent(EntityUid Hive);
+
+/// <summary>
+/// Raised when a Hive Core has been destroyed.
+/// </summary>
+[ByRefEvent]
+public readonly record struct HiveCoreDestroyedEvent(EntityUid Hive);

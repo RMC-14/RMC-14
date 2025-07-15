@@ -1,5 +1,7 @@
-﻿rmc-no-queen-hivemind-chat = There is no Queen. You are alone.
+rmc-no-queen-hivemind-chat = There is no Queen. You are alone.
 rmc-new-queen = A new Queen has risen to lead the Hive! Rejoice!
+rmc-queen-cooldown-over = The Hive stirs with anticipation. A new Queen must now evolve to guide her children.
+rmc-core-cooldown-over = The Hive's connection with Queen Mother has stabilized. A new Hive Core can now be constructed.
 
 rmc-hive-supports-castes = The Hive can now support: {$castes}
 rmc-hive-supports-castes-human = You hear a distant screech and feel your insides freeze up...  something new is with you in this colony.
