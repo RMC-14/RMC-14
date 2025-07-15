@@ -1,5 +1,4 @@
-﻿using Content.Shared.Alert;
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -9,9 +8,6 @@ namespace Content.Shared._RMC14.Tracker.SquadLeader;
 [Access(typeof(SquadLeaderTrackerSystem))]
 public sealed partial class SquadLeaderTrackerComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public ProtoId<AlertPrototype> Alert = "SquadTracker";
-
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan UpdateAt;
 
@@ -22,5 +18,11 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     public FireteamData Fireteams = new();
 
     [DataField, AutoNetworkedField]
-    public SquadLeaderTrackerMode Mode = SquadLeaderTrackerMode.SquadLeader;
+    public ProtoId<TrackerModePrototype> Mode;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Target;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<ProtoId<TrackerModePrototype>> TrackerModes = new();
 }

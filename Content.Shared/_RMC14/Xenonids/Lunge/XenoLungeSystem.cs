@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
@@ -35,8 +36,8 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly XenoLeapSystem _leap = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -51,6 +52,8 @@ public sealed class XenoLungeSystem : EntitySystem
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
         SubscribeLocalEvent<XenoLungeComponent, LandEvent>(OnXenoLungeLand);
         SubscribeLocalEvent<XenoLungeComponent, MeleeAttackAttemptEvent>(OnAttackAttempt);
+
+        SubscribeLocalEvent<RMCLungeProtectionComponent, XenoLungeHitAttempt>(OnXenoLungeHitAttempt);
 
         SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
     }
@@ -80,9 +83,10 @@ public sealed class XenoLungeSystem : EntitySystem
 
         xeno.Comp.Charge = diff;
         xeno.Comp.Target = args.Target;
+        xeno.Comp.Origin = origin;
         Dirty(xeno);
 
-        _rmcObstacleSlamming.MakeImmune(xeno);
+        _rmcObstacleSlamming.MakeImmune(xeno, 0.5f);
         _throwing.TryThrow(xeno, diff, 30, animated: false, compensateFriction: true);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
@@ -101,7 +105,7 @@ public sealed class XenoLungeSystem : EntitySystem
 
     private void OnXenoLungeHit(Entity<XenoLungeComponent> xeno, ref ThrowDoHitEvent args)
     {
-        if (!_mob.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
+        if (!_mobState.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
         {
             xeno.Comp.Charge = null;
             xeno.Comp.Target = null;
@@ -134,6 +138,9 @@ public sealed class XenoLungeSystem : EntitySystem
         if (_mobState.IsDead(targetId))
             return false;
 
+        if (xeno.Comp.Charge == null)
+            return false;
+
         if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
             _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         {
@@ -143,6 +150,12 @@ public sealed class XenoLungeSystem : EntitySystem
 
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge != null)
             xeno.Comp.Charge = null;
+
+        var ev = new XenoLungeHitAttempt(xeno);
+        RaiseLocalEvent(targetId, ref ev);
+
+        if (ev.Cancelled)
+            return true;
 
         if (!_xeno.CanAbilityAttackTarget(xeno, targetId) || (_size.TryGetSize(targetId, out var size) && size >= RMCSizes.Big) ||
             (TryComp<XenoComponent>(targetId, out var xenoComp) && xenoComp.Tier >= 2)) //Fails if big or tier 2 or more
@@ -180,6 +193,17 @@ public sealed class XenoLungeSystem : EntitySystem
         }
     }
 
+    private void OnXenoLungeHitAttempt(Entity<RMCLungeProtectionComponent> ent, ref XenoLungeHitAttempt args)
+    {
+        if(args.Cancelled)
+            return;
+
+        if(!TryComp(args.Lunging, out XenoLungeComponent? lunging) || lunging.Origin == null)
+            return;
+
+        args.Cancelled = _leap.AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration,ent.Comp.BlockSound, args.Lunging, _transform.ToCoordinates(lunging.Origin.Value), ent.Comp.FullProtection);
+    }
+
     private void OnAttackAttempt(Entity<XenoLungeComponent> ent, ref MeleeAttackAttemptEvent args)
     {
         var netAttacker = GetNetEntity(ent);
@@ -207,3 +231,6 @@ public sealed class XenoLungeSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct XenoLungeHitAttempt(EntityUid Lunging, bool Cancelled = false);

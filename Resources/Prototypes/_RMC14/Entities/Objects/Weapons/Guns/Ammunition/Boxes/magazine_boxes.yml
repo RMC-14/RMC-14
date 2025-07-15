@@ -653,6 +653,49 @@
     startingItem: RMCMagazineRifleM16
     count: 12
 
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleAK4047Empty
+  name: magazine box (AK-4047 x 10)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleAK4047Empty
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#515237"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_54
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#515237"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleAK4047
+
+- type: entity
+  parent: RMCBoxMagazineRifleAK4047Empty
+  id: RMCBoxMagazineRifleAK4047
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleAK4047
+    count: 10
+
 # -- SMG BOXES --
 
 # M63 REG

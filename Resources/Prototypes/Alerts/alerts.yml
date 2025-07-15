@@ -4,11 +4,14 @@
   # If item is not in list it will go at the bottom (ties broken by alert type enum value)
   id: BaseAlertOrder
   order:
+    - category: AreaInfo
+    - category: Sight
+    - category: Tracker
     - category: Health
-    - category: XenoNightVision
-    - category: XenoPlasma
-    - category: XenoArmor
+    - category: Plasma
+    - category: Armor
     - category: Stamina
+    - category: Tacmap
     - alertType: SuitPower
     - category: Internals
     - alertType: Fire
@@ -22,13 +25,15 @@
     - alertType: Stun
     - alertType: Unconscious
     - category: Breathing # Vox gang not calling this oxygen
-    - category: Pressure
+    - category: Pressure  
     - alertType: Bleed
     - category: Temperature
     - category: Hunger
     - category: Thirst
     - alertType: Magboots
+    - alertType: Rooted
     - alertType: Pacified
+    - alertType: Stealthy
 
 - type: entity
   id: AlertSpriteView
@@ -138,6 +143,7 @@
     state: walking
   name: alerts-walking-name
   description: alerts-walking-desc
+  clientHandled: true
 
 - type: alert
   id: Stun
@@ -439,6 +445,19 @@
     state: icon
   name: alerts-pacified-name
   description: alerts-pacified-desc
+
+- type: alert
+  id: Stealthy
+  clickEvent: !type:ToggleThievingEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/stealthy.rsi
+    state: stealthy-off
+  - sprite: /Textures/Interface/Alerts/stealthy.rsi
+    state: stealthy-on
+  name: alerts-stealthy-name
+  description: alerts-stealthy-desc
+  minSeverity: 0
+  maxSeverity: 1
 
 - type: alert
   id: Adrenaline

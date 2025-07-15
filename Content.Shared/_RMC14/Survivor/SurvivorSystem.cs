@@ -96,6 +96,20 @@ public sealed class SurvivorSystem : EntitySystem
                 }
             }
         }
+
+        var rareItemNumber = _random.Next(1, comp.RareItemCoefficent);
+
+        if (comp.RareItems.Count > 0)
+        {
+            foreach (var (entity, chance) in comp.RareItems)
+            {
+                if (rareItemNumber >= chance.Item1 && rareItemNumber <= chance.Item2)
+                {
+                    Equip(mob, entity, tryInHand: true);
+                    break;
+                }
+            }
+        }
     }
 
     private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false, string? slotName = null)

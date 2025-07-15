@@ -623,7 +623,8 @@
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
   components:
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
   - type: PointLight
     enabled: false
