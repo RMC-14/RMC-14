@@ -8,6 +8,9 @@
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer Orientation="Vertical">
             <RichTextLabel Name="MaterialLabel" Access="Public" />
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Button Name="ClearGhostsButton" Access="Public" Text="Clear All Ghosts" HorizontalExpand="True" />
+            </BoxContainer>
             <BoxContainer Orientation="Vertical" Name="ConstructionContainer" Access="Public" />
         </BoxContainer>
     </ScrollContainer>
