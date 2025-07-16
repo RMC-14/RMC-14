@@ -649,3 +649,13 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
 
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapWeyamart
+  name: orange cap
+  description: It's a baseball style cap in the 'Weyamart' orange color, with the 'Weyamart' logo on the front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/weyamart_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/weyamart_cap.rsi

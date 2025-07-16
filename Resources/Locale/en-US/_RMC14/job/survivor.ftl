@@ -90,6 +90,9 @@ CMJobSurvivorHybrisaCivilian = Civilian
 rmc-job-name-survivor-office-worker = Civilian - Office Worker
 CMJobSurvivorHybrisaOfficeWorker = Civilian - Office Worker
 
+rmc-job-name-survivor-hybrisa-weyamart-employee = Civilian - Weymart Employee
+CMJobSurvivorHybrisaWeyamartEmployee = Civilian - Weymart Employee
+
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury

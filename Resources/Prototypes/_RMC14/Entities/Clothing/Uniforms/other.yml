@@ -357,6 +357,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitWeyamart
+  name: weyamart uniform
+  description: A pair of dark-grey slacks and an orange button-down shirt; a standard uniform for the Weston-Yamada branded supermarket 'Weyamart'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase
