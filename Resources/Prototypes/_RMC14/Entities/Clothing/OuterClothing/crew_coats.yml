@@ -82,6 +82,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/black.rsi
 
+- type: entity
+  parent: RMCHazardVest
+  id: RMCHazardVestGreen
+  name: green hazard vest
+  description: A green and white high-visibility vest used in work zones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/green.rsi
+
 # Labcoats + Medical Apron
 - type: entity
   parent: [RMCAllowSuitStorageClothingLabcoat, RMCBaseJacketButtonable]
@@ -226,3 +237,14 @@
   id: RMCChefApron
   name: A classic chef's apron
   description: A basic, dull, white chef's apron.
+
+- type: entity
+  parent: [ClothingOuterBase, RMCAllowSuitStorageClothingExternalWebbing]
+  id: RMCOuterEngineeringUtilityOversuit
+  name: Weston-Yamada engineer utility oversuit
+  description: A Weston-Yamada engineer utility uniform. Used as a general purpose utility oversuit by Weston-Yamada colony engineers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/weya_engineer_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/weya_engineer_jacket.rsi

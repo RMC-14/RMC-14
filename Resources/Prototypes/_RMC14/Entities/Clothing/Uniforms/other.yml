@@ -394,7 +394,7 @@
       - state: overlay-inhand-right
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitUNSecurity
   name: United Nations Security uniform
   description: Overalls made of kevlar cover a snazzy blue dress shirt. Often utilized by United Nations security personnel in riot control situations.
@@ -414,6 +414,28 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilianEngineerWorker
+  name: Weston-Yamada engineering utility uniform
+  description: A set of Weston-Yamada engineering utility workers uniform, a orange pair of work slacks and a grey polo-shirt with orange reflecting stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilianEngineerWorker
+  id: RMCJumpsuitCivilianEngineerWorkerAlt
+  description: A set of Weston-Yamada engineering utility workers uniform, a blue pair of work slacks and a grey polo-shirt with yellow reflecting stripes.
+  suffix: Alternative
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker_alt.rsi
 
 # CLF
 - type: entity
