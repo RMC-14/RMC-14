@@ -673,6 +673,17 @@
     - MASK
 
 - type: entity
+  parent: RMCGlassesAviators
+  id: RMCGlassesAviatorsSilver
+  description: A pair of silver tinted sunglasses. You can faintly hear 80's music playing while wearing these.
+  suffix: Silver
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
+
+- type: entity
   parent: ClothingEyesBase
   id: RMCHipsterGlasses
   name: prescription glasses
