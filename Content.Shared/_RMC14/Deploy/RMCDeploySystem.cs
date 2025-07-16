@@ -16,6 +16,8 @@ using Robust.Shared.GameObjects; // Для ActorComponent
 using Content.Shared.Mobs.Components; // Для MobStateComponent
 using Content.Shared.Buckle.Components; // Для StrapComponent
 using Content.Shared._RMC14.Rules; // Для RMCPlanetComponent и RMCPlanetSystem
+using Content.Shared._RMC14.Deploy; // Для ShowDeployAreaEvent и HideDeployAreaEvent
+using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Deploy;
 
@@ -66,6 +68,19 @@ public sealed class RMCDeploySystem : EntitySystem
             ExtraCheck = comp.SkipAreaOccupiedCheck ? null : () => !IsAreaOccupied(area, uid, user, comp)
         };
         _doAfter.TryStartDoAfter(doAfter);
+
+        // Отправляем событие для отображения зоны деплоя на клиенте
+        if (_netManager.IsServer)
+        {
+            var center = new System.Numerics.Vector2(area.Center.X, area.Center.Y); // Преобразование типов
+            var showEvent = new ShowDeployAreaEvent(
+                center,
+                area.Width,
+                area.Height,
+                Color.Blue // Цвет границы зоны
+            );
+            RaiseNetworkEvent(showEvent, user);
+        }
     }
 
     private void OnDoAfter(EntityUid uid, RMCDeployableComponent comp, RMCDeployDoAfterEvent ev)
@@ -74,7 +89,10 @@ public sealed class RMCDeploySystem : EntitySystem
             return;
 
         if (ev.Cancelled || ev.Handled)
+        {
+            RaiseNetworkEvent(new HideDeployAreaEvent(), ev.Args.User);
             return;
+        }
 
         ev.Handled = true;
 
