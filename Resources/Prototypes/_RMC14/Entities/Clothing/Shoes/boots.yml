@@ -119,7 +119,7 @@
 
 # Corporate
 - type: entity
-  parent: [RMCItemSlotM5Bayonet, CMBootsBlack]
+  parent: CMBootsBlack
   id: RMCBootsCorporate
   name: rugged boots
   description: These synth-leather boots seem high quality when first worn, but quickly detoriate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
@@ -201,6 +201,7 @@
   id: RMCBootsRoyal
   name: L10 pattern combat boots
   description: Standard issue combat boots for combat scenarios or combat situations. Used by the Three Sun Empire's Royal Crown Marines.
+  suffix: TSE, RCM
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/rmc.rsi

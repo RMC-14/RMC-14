@@ -1,0 +1,66 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorHybrisaCivilian
+  name: rmc-job-name-survivor-hybrisa-civilian
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaCivilian
+  startingGear: RMCGearSurvivorHybrisaCivilian
+  spawnMenuRoleName: Civilian (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaCivilian
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaCivilian
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaCivilian
+  name: hybrisa civilian spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaCivilian
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetHybrisaCivilian
+  name: hybrisa civilian preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCHeadCapGrey, RMCCoatHoboBlue, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesBlack, CMBackpack]
+    - [ RMCCoatHoboBrown, RMCJumpsuitLiaisonPinkWorkwear, RMCShoesBrown, CMBackpackEngineer]
+    - [ RMCCoatHoboGreen, RMCJumpsuitLiaisonGreyWorkwear, RMCShoesGreen, RMCSatchelNorm]
+    - [ RMCCoatHoboBrown, RMCJumpsuitLiaisonGreenWorkwear, RMCShoesBrown, CMSatchelEngineer]
+    - [ RMCCoatHoboDarkBlue, RMCJumpsuitLiaisonGreyWorkwear, RMCShoesBlack, RMCSatchelNorm]
+    - [ RMCCoatHoboRed, RMCJumpsuitLiaisonGreyWorkwear, RMCShoesBlack, RMCSatchelNorm]
+    - [ RMCHeadCapFerret, RMCCoatBomberGrey, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesBlack, RMCSatchelNorm]
+    - [ RMCCoatBomber, RMCJumpsuitLiaisonPinkWorkwear, RMCShoesBrown, CMSatchelEngineer]
+    - [ RMCHeadCapTruckerRed, RMCCoatBomberRed, RMCJumpsuitLiaisonGreyWorkwear, RMCShoesRed, RMCSatchelNorm]
+    - [ RMCHeadBeanieTSE, RMCCoatBomberBlack, RMCJumpsuitSteward, RMCBootsRoyal, CMBackpack]

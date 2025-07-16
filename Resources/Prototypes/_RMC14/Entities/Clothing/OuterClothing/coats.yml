@@ -455,6 +455,16 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
 
 - type: entity
+  parent: RMCCoatBomberRed
+  id: RMCCoatBomberBlack
+  name: black bomber jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_black.rsi
+
+- type: entity
   parent: CMCoatCO
   id: CMCoatCOFormalBlack
   name: commanding officer gray dress jacket
@@ -682,6 +692,28 @@
 
 - type: entity
   parent: RMCBaseJacket
+  id: RMCCoatHoboBlue
+  name: dark blue worn parka
+  description: An old worn blue Parka, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_blue.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatHoboGreen
+  name: dark green worn parka
+  description: An old worn green Parka, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_green.rsi
+
+- type: entity
+  parent: RMCBaseJacket
   id: RMCCoatHoboBrown
   name: dark brown worn polyester jacket
   description: An old worn brown polyester jacket, has seen better days...
@@ -690,6 +722,50 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatHoboDarkBlue
+  name: dark blue worn polyester jacket
+  description: An old worn blue polyester jacket, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_dark_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_dark_blue.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatHoboRed
+  name: dark red worn polyester jacket
+  description: An old worn blue polyester jacket, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_red.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatWaistcoat
+  name: waistcoat
+  description: For some classy, murderous fun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/waistcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/waistcoat.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatSanitation
+  name: sanitation utility uniform
+  description: A Sanitation utility uniform, used by the clean-up crews of the more prosperous colonies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
 
 # Snow
 

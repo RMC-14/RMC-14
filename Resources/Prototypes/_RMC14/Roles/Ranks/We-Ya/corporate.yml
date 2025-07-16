@@ -32,7 +32,7 @@
   id: RMCRankWeYaExecutiveSupervisor
   name: Executive Supervisor
   prefix: Exec. Spvsr.
-  paygrade: WYC6
+  paygrade: WEYAC6
 
 - type: rank
   id: RMCRankWeYaAssistantManager
