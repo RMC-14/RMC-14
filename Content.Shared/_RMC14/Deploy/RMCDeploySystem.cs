@@ -50,10 +50,33 @@ public sealed class RMCDeploySystem : EntitySystem
 
     private void TryStartDeploy(EntityUid uid, EntityUid user, RMCDeployableComponent comp)
     {
-        var userXform = _xform.GetWorldPosition(user);
-        var areaCenter = userXform;
+        // Получаем сетку и компонент сетки
+        var gridUid = _xform.GetGrid(user);
+        if (!TryComp<MapGridComponent>(gridUid, out var grid))
+            return;
+
+        // Получаем мировую позицию игрока
+        var userWorldPos = _xform.GetWorldPosition(user);
+        // Индексы тайла под игроком
+        var tileIndices = _map.WorldToTile(gridUid.Value, grid, userWorldPos);
+        // Центр этого тайла
+        var areaCenter = _map.TileCenterToVector(gridUid.Value, grid, tileIndices);
+
         var transform = new Robust.Shared.Physics.Transform(areaCenter, 0);
         var area = comp.DeployArea.ComputeAABB(transform, 0);
+
+        // Отправляем событие для отображения зоны деплоя на клиенте
+        if (_netManager.IsServer)
+        {
+            var center = new System.Numerics.Vector2(area.Center.X, area.Center.Y); // Преобразование типов
+            var showEvent = new ShowDeployAreaEvent(
+                center,
+                area.Width,
+                area.Height,
+                Color.Blue // Цвет границы зоны
+            );
+            RaiseNetworkEvent(showEvent, user);
+        }
 
         // Проверка занятости области (если не отключена)
         if (!comp.SkipAreaOccupiedCheck && IsAreaOccupied(area, uid, user, comp))
@@ -68,19 +91,6 @@ public sealed class RMCDeploySystem : EntitySystem
             ExtraCheck = comp.SkipAreaOccupiedCheck ? null : () => !IsAreaOccupied(area, uid, user, comp)
         };
         _doAfter.TryStartDoAfter(doAfter);
-
-        // Отправляем событие для отображения зоны деплоя на клиенте
-        if (_netManager.IsServer)
-        {
-            var center = new System.Numerics.Vector2(area.Center.X, area.Center.Y); // Преобразование типов
-            var showEvent = new ShowDeployAreaEvent(
-                center,
-                area.Width,
-                area.Height,
-                Color.Blue // Цвет границы зоны
-            );
-            RaiseNetworkEvent(showEvent, user);
-        }
     }
 
     private void OnDoAfter(EntityUid uid, RMCDeployableComponent comp, RMCDeployDoAfterEvent ev)
@@ -100,8 +110,20 @@ public sealed class RMCDeploySystem : EntitySystem
         if (!ev.Cancelled)
         {
             var user = ev.Args.User;
-            var userXform = _xform.GetWorldPosition(user);
-            var areaTransform = new Robust.Shared.Physics.Transform(userXform, 0);
+            // Получаем сетку и компонент сетки
+            var gridUid = _xform.GetGrid(user);
+            if (!TryComp<MapGridComponent>(gridUid, out var grid))
+                return;
+
+            // Получаем мировую позицию игрока
+            var userWorldPos = _xform.GetWorldPosition(user);
+            // Индексы тайла под игроком
+            var tileIndices = _map.WorldToTile(gridUid.Value, grid, userWorldPos);
+            // Центр этого тайла (для расчёта зоны)
+            var tileCenter = _map.TileCenterToVector(gridUid.Value, grid, tileIndices);
+
+            // Строим transform и зону относительно tileCenter
+            var areaTransform = new Robust.Shared.Physics.Transform(tileCenter, 0);
             var area = comp.DeployArea.ComputeAABB(areaTransform, 0);
             var areaCenter = area.Center;
 
@@ -113,7 +135,12 @@ public sealed class RMCDeploySystem : EntitySystem
                 _xform.SetWorldRotation(ent, Angle.FromDegrees(setup.Angle));
                 if (setup.AnchorToTileCenter)
                 {
-                    _xform.AnchorEntity((ent, Transform(ent)));
+                    var xform = Transform(ent);
+                    // Anchor only if not already anchored and entity supports anchoring
+                    if (!xform.Anchored)
+                    {
+                        _xform.AnchorEntity((ent, xform));
+                    }
                 }
             }
 
@@ -137,83 +164,49 @@ public sealed class RMCDeploySystem : EntitySystem
         // Проверяем, находится ли цель на поверхности планеты (как в RangefinderSystem)
         if (failIfNotSurface && !HasComp<RMCPlanetComponent>(gridUid) && user != null)
         {
-            _popup.PopupClient($"Цель не находится на поверхности планеты", ignore, user.Value, PopupType.SmallCaution);
+            _popup.PopupClient($"Зона развертывания должна находиться на поверхности планеты", ignore, user.Value, PopupType.SmallCaution);
             return true;
         }
 
-        // Проверяем каждый тайл в области
-        var minTile = _map.TileIndicesFor((gridUid.Value, grid), new EntityCoordinates(gridUid.Value, area.BottomLeft));
-        var maxTile = _map.TileIndicesFor((gridUid.Value, grid), new EntityCoordinates(gridUid.Value, area.TopRight));
-
-        for (var x = minTile.X; x <= maxTile.X; x++)
+        // Проверяем все сущности, реально пересекающиеся с областью
+        var entitiesInArea = _lookup.GetEntitiesIntersecting(mapId, area);
+        foreach (var ent in entitiesInArea)
         {
-            for (var y = minTile.Y; y <= maxTile.Y; y++)
+            if (ent == ignore || (user != null && ent == user))
+                continue;
+
+            // Проверяем физические объекты с коллизией (как в AnchorableSystem)
+            if (TryComp<PhysicsComponent>(ent, out var physics) && physics.CanCollide && physics.Hard)
             {
-                var tileIndices = new Vector2i(x, y);
-                var enumerator = _map.GetAnchoredEntitiesEnumerator(gridUid.Value, grid, tileIndices);
-
-                while (enumerator.MoveNext(out var ent))
-                {
-                    if (ent == ignore || (user != null && ent == user))
-                        continue;
-
-                    // Проверяем физические объекты с коллизией (как в AnchorableSystem)
-                    if (TryComp<PhysicsComponent>(ent, out var physics) &&
-                        physics.CanCollide &&
-                        physics.Hard)
-                    {
-                        var name = MetaData(ent.Value).EntityName;
-                        Logger.Info($"[Deploy] В тайле ({x},{y}) обнаружен физический объект: {ent} (имя: {name})");
-                        found = true;
-                        break;
-                    }
-
-                    // Проверяем структуры и другие блокирующие объекты (как в системах строительства)
-                    if (HasComp<StrapComponent>(ent) ||
-                        _tags.HasAnyTag(ent.Value, "Structure", "Airlock"))
-                    {
-                        var name = MetaData(ent.Value).EntityName;
-                        Logger.Info($"[Deploy] В тайле ({x},{y}) обнаружена структура: {ent} (имя: {name})");
-                        found = true;
-                        break;
-                    }
-
-                    // Проверяем мобов в зоне (если включено)
-                    if (HasComp<MobStateComponent>(ent))
-                    {
-                        var name = MetaData(ent.Value).EntityName;
-                        Logger.Info($"[Deploy] В тайле ({x},{y}) обнаружен игрок/моб: {ent} (имя: {name})");
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (found) break;
+                var name = MetaData(ent).EntityName;
+                Logger.Info($"[Deploy] В области обнаружен физический объект: {ent} (имя: {name})");
+                found = true;
+                break;
             }
-            if (found) break;
-        }
 
-        // Дополнительная проверка: ищем все сущности в области через EntityLookupSystem (как в RCDSystem)
-        if (checkMobs)
-        {
-            var entitiesInArea = _lookup.GetEntitiesIntersecting(mapId, area);
-            foreach (var ent in entitiesInArea)
+            // Проверяем структуры и другие блокирующие объекты (как в системах строительства)
+            if (HasComp<StrapComponent>(ent) || _tags.HasAnyTag(ent, "Structure", "Airlock"))
             {
-                if (ent == ignore || (user != null && ent == user))
-                    continue;
+                var name = MetaData(ent).EntityName;
+                Logger.Info($"[Deploy] В области обнаружена структура: {ent} (имя: {name})");
+                found = true;
+                break;
+            }
 
-                // Проверяем мобов (включая тех, кто может не быть закрепленными)
-                if (TryComp<PhysicsComponent>(ent, out var physics) && (physics.Hard || physics.CanCollide))
-                {
-                    var name = MetaData(ent).EntityName;
-                    Logger.Info($"[Deploy] Обнаружен физический объект: {ent} (имя: {name})");
-                    found = true;
-                    break;
-                }
+            // Проверяем мобов в зоне (если включено)
+            if (checkMobs && HasComp<MobStateComponent>(ent))
+            {
+                var name = MetaData(ent).EntityName;
+                Logger.Info($"[Deploy] В области обнаружен игрок/моб: {ent} (имя: {name})");
+                found = true;
+                break;
             }
         }
 
         // Проверяем заблокированные тайлы (как в системах строительства)
+        // Оставляем этот цикл, если нужна проверка на космос/блокировку тайлов
+        var minTile = _map.TileIndicesFor((gridUid.Value, grid), new EntityCoordinates(gridUid.Value, area.BottomLeft));
+        var maxTile = _map.TileIndicesFor((gridUid.Value, grid), new EntityCoordinates(gridUid.Value, area.TopRight - new Vector2(0.001f, 0.001f)));
         for (var x = minTile.X; x <= maxTile.X; x++)
         {
             for (var y = minTile.Y; y <= maxTile.Y; y++)
@@ -236,8 +229,6 @@ public sealed class RMCDeploySystem : EntitySystem
                     found = true;
                     break;
                 }
-
-
             }
             if (found) break;
         }
