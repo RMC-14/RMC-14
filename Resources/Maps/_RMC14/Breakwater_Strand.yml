@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/15/2025 15:25:58
-  entityCount: 7903
+  time: 07/16/2025 21:35:32
+  entityCount: 7904
 maps:
 - 1
 grids:
@@ -49085,7 +49085,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 8670.1246632
     - type: Door
-      secondsUntilStateChange: -8379.091
+      secondsUntilStateChange: -8394.793
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -49101,7 +49101,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 8670.1246632
     - type: Door
-      secondsUntilStateChange: -8379.091
+      secondsUntilStateChange: -8394.793
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -54603,6 +54603,13 @@ entities:
     components:
     - type: Transform
       pos: -27.5,42.5
+      parent: 2
+- proto: SpawnPointLatejoin
+  entities:
+  - uid: 7904
+    components:
+    - type: Transform
+      pos: 2.5,20.5
       parent: 2
 - proto: VendingMachineCondiments
   entities:
