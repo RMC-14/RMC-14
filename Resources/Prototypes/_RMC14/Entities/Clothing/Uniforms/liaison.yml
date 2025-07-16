@@ -266,3 +266,47 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pilot.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pilot.rsi
+    
+- type: entity
+  parent: RMCJumpsuitLiaisonGreenWorkwear
+  id: RMCJumpsuitLiaisonKhakiWorkwear
+  name: khaki workwear
+  description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/khaki_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/khaki_workwear.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonGreenWorkwear
+  id: RMCJumpsuitLiaisonPinkWorkwear
+  name: pink workwear
+  description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pink_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pink_workwear.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonGreyWorkwear
+  name: grey workwear
+  description: A pair of black slacks and a short-sleeve grey workshirt. Standard uniform for Weston-Yamada employees working in colony operations and administration.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/grey_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/grey_workwear.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonStowaway
+  name: dirty suit
+  description: A stiff, stylish tan suit commonly worn by businessmen from the Weston-Yamada corporation. Expertly crafted to make you look like a prick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi

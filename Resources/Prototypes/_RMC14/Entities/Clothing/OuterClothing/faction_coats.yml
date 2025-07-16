@@ -103,11 +103,10 @@
     foldedEquippedPrefix: jacket
 
 # TSEPA
-
 - type: entity
   parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
   id: RMCCoatTSEPA
-  name: TSEPA jacket
+  name: TSEPA police jacket
   description: A black polyester jacket with a silver Sakura emblem of the TSEPA pinned to it. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
   components:
   - type: Sprite
@@ -119,6 +118,17 @@
     bullet: 15
     bio: 10
     explosionArmor: 10
+
+- type: entity
+  parent: RMCCoatTSEPA
+  id: RMCCoatTSEPAFormal
+  name: TSEPA police formal jacket
+  description: A heavy woolen formal coat commonly used by TSEPA Constables. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/formal_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/formal_jacket.rsi
 
 - type: entity
   parent: RMCCoatTSEPA
@@ -134,7 +144,7 @@
 - type: entity
   parent: RMCCoatTSEPA
   id: RMCCoatTSEPAHighVisVest
-  name: TSEPA high-vis vest
+  name: TSEPA hazard vest
   description: A green and white striped (high-visibility) polyester vest commonly used by TSEPA personnel.
   components:
   - type: Sprite

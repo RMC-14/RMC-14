@@ -346,6 +346,50 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/orange.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitSteward
+  name: steward utilities
+  description: A stylish brown vest and shorts - uniforms like this are often worn by clerks and shop stewards
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitWeyamart
+  name: Weyamart uniform
+  description: A pair of dark-grey slacks and an orange button-down shirt; a standard uniform for the Weston-Yamada branded supermarket 'Weyamart'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitSanitation
+  name: Weston-Yamada RFF - sanitation uniform
+  description: A set of Weston-Yamada RFF - Sanitation fatigues, a green pair of work slacks and a grey polo-shirt with green reflecting stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitPizzaGalaxy
+  name: Pizza-Galaxy uniform
+  description: A pair of red slacks and a white button-down shirt with a large 'Pizza-Galaxy' logo on the back; a standard uniform for a Pizza-Galaxy employee. Pizza-Galaxy! To infinity and beyond!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase

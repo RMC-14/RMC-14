@@ -82,6 +82,23 @@ cm-job-prefix-survivor-icb = ICB
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
 
+# Hybrisa Prospera Survs
+
+rmc-job-name-survivor-hybrisa-civilian = Civilian
+CMJobSurvivorHybrisaCivilian = Civilian
+
+rmc-job-name-survivor-office-worker = Civilian - Office Worker
+CMJobSurvivorHybrisaOfficeWorker = Civilian - Office Worker
+
+rmc-job-name-survivor-hybrisa-weyamart-employee = Civilian - Weymart Employee
+CMJobSurvivorHybrisaWeyamartEmployee = Civilian - Weymart Employee
+
+rmc-job-name-survivor-material-reprocessing-technician = Civilian - Material Reprocessing Technician
+CMJobSurvivorHybrisaMaterialReprocessingTechnician = Civilian - Material Reprocessing Technician
+
+rmc-job-name-survivor-fire-protection-specialist-hybrisa = Civilian - Fire Protection Specialis
+CMJobSurvivorFireProtectionSpecialistHybrisa = Civilian - Fire Protection Specialis
+rmc-job-prefix-fire-protection-specialist-hybrisa = FPS
 
 # Sorokyne Strata Survs
 
