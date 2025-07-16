@@ -183,6 +183,7 @@
           tags:
           - RMCAttachmentM54CStockSolid
           - RMCAttachmentM54CStockCollapsible
+
 - type: entity
   parent: WeaponRifleM54C
   id: RMCWeaponRifleM54CFilled
@@ -209,13 +210,16 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
   - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
-# this is a evil way of doing camo fix but idk how else to do it and i am a evil person. - crazy1112345
+    camouflageVariations: { }
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsibleWhite
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
+
 
 - type: entity
   parent: CMMagazineRifleBase
