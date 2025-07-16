@@ -100,6 +100,12 @@ rmc-job-name-survivor-fire-protection-specialist-hybrisa = Civilian - Fire Prote
 CMJobSurvivorFireProtectionSpecialistHybrisa = Civilian - Fire Protection Specialis
 rmc-job-prefix-fire-protection-specialist-hybrisa = FPS
 
+rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
+
+rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
+rmc-job-name-survivor-construction-worker = Construction Worker
+rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
+
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
@@ -133,10 +139,3 @@ CMJobSurvivorSoroMiner = Miner
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison
-
-# Hybrisa Survs
-rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
-
-rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
-rmc-job-name-survivor-construction-worker = Construction Worker
-rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator

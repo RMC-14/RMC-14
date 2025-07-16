@@ -328,41 +328,6 @@
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
 
 - type: entity
-  parent: RMCHeadCapFlippable
-  id: RMCHeadCapTruckerRed
-  name: red trucker hat
-  description: It's a red trucker hat.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/red.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/red.rsi
-  - type: ItemCamouflage
-    camouflageVariations: {}
-
-- type: entity
-  parent: RMCHeadCapTruckerRed
-  id: RMCHeadCapTruckerBlue
-  name: blue trucker hat
-  description: It's a blue trucker hat.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/blue.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/blue.rsi
-
-- type: entity
-  parent: RMCHeadCapTruckerRed
-  id: RMCHeadCapTruckerFerret
-  name: Ferret Heavy Industries trucker hat
-  description: It's a trucker hat. They're becoming collector items since Ferret went under in 2123.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/ferret.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/ferret.rsi
-
-- type: entity
   parent: CMHeadCap
   id: CMHeadCapPeakedFormal
   name: marine peaked cap
@@ -634,7 +599,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Beanies/gray.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Beanies/gray.rsi
- 
+
 - type: entity
   parent: RMCHeadBeanie
   id: RMCHeadBeanieTSE
@@ -743,6 +708,18 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCHeadCapTruckerRed
+  id: RMCHeadCapTruckerBlue
+  name: blue trucker hat
+  description: It's a blue trucker hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/blue.rsi
 
 - type: entity
   parent: RMCHeadCapGrey
