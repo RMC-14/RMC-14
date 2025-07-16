@@ -136,3 +136,7 @@ CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison
 
 # Hybrisa Survs
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
+
+rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
+rmc-job-name-survivor-construction-worker = Construction Worker
+rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator

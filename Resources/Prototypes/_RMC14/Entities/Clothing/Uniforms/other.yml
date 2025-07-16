@@ -281,6 +281,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_jumpsuit.rsi
 
 - type: entity
+  parent: RMCJumpsuitNormCivilianYellow
+  id: RMCJumpsuitNormCivilianBlackWebbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingBlack
+
+- type: entity
   parent: RMCJumpsuitCivilian
   id: RMCJumpsuitNormCivilianBlue
   name: blue jumpsuit
@@ -438,7 +445,7 @@
       - state: overlay-inhand-right
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitUNSecurity
   name: United Nations Security uniform
   description: Overalls made of kevlar cover a snazzy blue dress shirt. Often utilized by United Nations security personnel in riot control situations.
@@ -458,6 +465,28 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilianEngineerWorker
+  name: Weston-Yamada engineering utility uniform
+  description: A set of Weston-Yamada engineering utility workers uniform, a orange pair of work slacks and a grey polo-shirt with orange reflecting stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilianEngineerWorker
+  id: RMCJumpsuitCivilianEngineerWorkerAlt
+  description: A set of Weston-Yamada engineering utility workers uniform, a blue pair of work slacks and a grey polo-shirt with yellow reflecting stripes.
+  suffix: Alternative
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker_alt.rsi
 
 # CLF
 - type: entity
@@ -483,3 +512,15 @@
   components:
   - type: WebbingClothing
     startingWebbing: CMWebbingBrown
+
+# Frontier
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilianFrontier
+  name: frontier jumpsuit
+  description: A cargo jumpsuit dressed down for full range of motion and state-of-the-art frontier temperature control. It's the best thing an engineer can wear in the Outer Veil.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi

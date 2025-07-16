@@ -308,3 +308,15 @@
     - id: RMCHandcuffs
       amount: 2
     - id: RMCGrenadeFlashBang
+
+- type: entity
+  parent: RMCBeltHolsterNailgun
+  id: RMCBeltHolsterNailgunFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGNailgun
+      amount: 2
+    - id: WeaponNailgun
+      amount: 1

@@ -249,6 +249,15 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
 
 - type: entity
   parent: RMCHeadCapFlippable
@@ -317,6 +326,41 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/cap_officer/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/cap_officer/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapTruckerRed
+  name: red trucker hat
+  description: It's a red trucker hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/red.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCHeadCapTruckerRed
+  id: RMCHeadCapTruckerBlue
+  name: blue trucker hat
+  description: It's a blue trucker hat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/blue.rsi
+
+- type: entity
+  parent: RMCHeadCapTruckerRed
+  id: RMCHeadCapTruckerFerret
+  name: Ferret Heavy Industries trucker hat
+  description: It's a trucker hat. They're becoming collector items since Ferret went under in 2123.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/ferret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/ferret.rsi
 
 - type: entity
   parent: CMHeadCap
@@ -581,6 +625,16 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Beanies/tan.rsi
 
+- type: entity
+  parent: RMCHeadBeanie
+  id: RMCHeadBeanieGray
+  suffix: Gray, RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/gray.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Beanies/gray.rsi
+ 
 - type: entity
   parent: RMCHeadBeanie
   id: RMCHeadBeanieTSE
