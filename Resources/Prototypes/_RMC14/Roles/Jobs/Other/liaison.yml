@@ -59,7 +59,7 @@
 - type: startingGear
   id: CMGearLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonBlack
+    jumpsuit: CMJumpsuitLiaisonIvy
     shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
