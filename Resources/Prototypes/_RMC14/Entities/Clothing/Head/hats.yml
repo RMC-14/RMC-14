@@ -624,6 +624,9 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
 
 - type: entity
   parent: RMCHeadDurag
