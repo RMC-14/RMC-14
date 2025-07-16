@@ -194,6 +194,30 @@
         startingItem: CMMagazineRifleM54C
 
 - type: entity
+  parent: RMCWeaponRifleM54CSemiStripped
+  id: RMCWeaponRifleM54CWhite
+  description: A M54C Mk2 with a Weston-Yamada logo imprinted on the reciever. Used primarily by Weston-Yamada's corporate security forces, and comes equipped with a drab corproate white paint job.
+  suffix: White, No UGL
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+# this is a evil way of doing camo fix but idk how else to do it and i am a evil person. - crazy1112345
+
+- type: entity
   parent: CMMagazineRifleBase
   id: CMMagazineRifleM54C
   name: "M54C magazine (10x24mm)"
