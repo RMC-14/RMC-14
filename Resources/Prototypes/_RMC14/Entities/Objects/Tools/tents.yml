@@ -198,3 +198,41 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+
+- type: entity
+  parent: BaseItem
+  id: RMCDeployTestTentBag
+  name: Тестовый мешок с тентом
+  description: Тестовый предмет для развертывания тента и двух столов.
+  components:
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/Equipment/plant_bag.rsi
+      state: icon
+    - type: RMCDeployable
+      deployTime: 10
+      deployArea:
+        !type:PhysShapeAabb
+        bounds: "0,1.0,2.0,5.0"
+      skipAreaOccupiedCheck: false
+      deploySetups:
+        - prototype: RMCTentUNMCStandard
+          offset: 0, 0
+          angle: 0
+        - prototype: CMTable
+          offset: -1, 0
+          angle: 0
+        - prototype: CMTable
+          offset: 0, 0
+          angle: 0
+        - prototype: RMCOverwatchConsole
+          offset: -1, 0
+          angle: 0
+        - prototype: RMCRotaryPhone
+          offset: 0, 0
+          angle: 0
+        - prototype: CMChair
+          offset: -1, -1
+          angle: 180
+        - prototype: CMChair
+          offset: 0, -1
+          angle: 180
