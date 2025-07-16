@@ -461,3 +461,15 @@
   components:
   - type: WebbingClothing
     startingWebbing: CMWebbingBrown
+
+# Frontier
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilianFrontier
+  name: frontier jumpsuit
+  description: A cargo jumpsuit dressed down for full range of motion and state-of-the-art frontier temperature control. It's the best thing an engineer can wear in the Outer Veil.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi
