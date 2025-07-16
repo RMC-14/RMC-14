@@ -599,3 +599,19 @@
     - HeadTop
     - HeadSide
     - Snout
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadWeYaPilotCap
+  name: Weston-Yamada Pilot cap
+  description: A dark peaked cap enscribed with the Weston-Yamada 'Wings' logo. A formal cap for qualified civillian Pilots, akin to old Earth formal Pilots-wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/weya_pilot_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/weya_pilot_cap.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 10
+    explosionArmor: 15

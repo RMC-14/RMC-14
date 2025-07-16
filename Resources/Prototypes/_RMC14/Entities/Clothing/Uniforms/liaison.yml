@@ -204,3 +204,65 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonExpensiveSuit
+  name: expensive suit
+  description: A luxurious designer suit, beyond the reach of the average person. It's an exclusive choice for high-level executives and the affluent elite.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitBrown
+  suffix: Brown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_two.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_two.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitJacket
+  suffix: Jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_three.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_three.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitBrownJacket
+  suffix: Jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_four.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_four.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitJacketOnly
+  suffix: Jacket Only
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_five.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_five.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonPilot
+  name: Weston-Yamada Pilot uniform
+  description: A pair of grey slacks and a white button-down shirt with a dark-grey tie and golden epaulettes signifying rank; a standard uniform for a commercial grade Weston-Yamada affiliated Pilot.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pilot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pilot.rsi

@@ -116,3 +116,6 @@ CMJobSurvivorSoroMiner = Miner
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison
+
+# Hybrisa Survs
+rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
