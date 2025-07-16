@@ -43,13 +43,13 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorHybrisaCivilian
+  id: CMJobSurvivorHybrisaOfficeWorker
   isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCGearSurvivorPresetHybrisaOfficeWorker
-  name: hybrisa worker preset
+  name: hybrisa office worker preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
@@ -59,4 +59,4 @@
     - [ RMCJacketCorporateBlue, CMJumpsuitLiaisonSuspenders, RMCShoesLaceup, RMCSatchelBlue]
     - [ RMCJacketCorporateBrown, CMJumpsuitLiaison, RMCShoesLaceupBrown, CMSatchel]
     - [ RMCJacketCorporateBrown, RMCJumsuitWhiteService, RMCShoesLaceup, CMSatchel]
-    - [ RMCJacketCorporateBlue, RMCJumpsuitLiaisonStowaway, RMCShoesLaceup, CMSatchel]
+    - [ RMCJacketCorporateBlue, CMJumpsuitLiaisonBlazer, RMCShoesLaceup, RMCSatchelBlue]
