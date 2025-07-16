@@ -26,6 +26,16 @@
 
 - type: entity
   parent: CMSatchel
+  id: CMSatchelFillColonySynthetic
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDefibrillator
+
+
+- type: entity
+  parent: CMSatchel
   id: RMCSatchelBlack
   components:
   - type: Sprite
@@ -541,7 +551,7 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
   - type: Storage
     grid:
-    - 0,0,20,1 # 21
+    - 0,0,19,1 # 20
 
 - type: entity
   parent: RMCSatchelLightpack

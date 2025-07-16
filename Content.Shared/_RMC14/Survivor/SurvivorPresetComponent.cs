@@ -29,5 +29,11 @@ public sealed partial class SurvivorPresetComponent : Component
     public bool TryEquipRandomOtherGear = true;
 
     [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId, (int, int)> RareItems = new();
+
+    [DataField, AutoNetworkedField]
+    public int RareItemCoefficent = 100;
+
+    [DataField, AutoNetworkedField]
     public float PrimaryWeaponChance = 0.6f;
 }

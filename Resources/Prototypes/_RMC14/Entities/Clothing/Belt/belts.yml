@@ -355,9 +355,9 @@
       - CigPack
       - RMCPenlight
       - Flare
+      #      - # TODO RMC14 minitank (needs full implementation and a tag to fit it in here, but the item exists as CMMiniTank)
       #      - # TODO RMC14 reagent analyzer
       #      - # TODO RMC14 plant analyzer
-      #      - # TODO RMC14 minitank
       components:
       - Hypospray
       - Defibrillator
@@ -1322,11 +1322,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazinePistolD50WinterWyvernHI
+    - id: RMCMagazinePistolHandcannon
       amount: 4
-    - id: RMCMagazinePistolD50WinterWyvernHIAP
+    - id: RMCMagazinePistolHandcannonHIAP
       amount: 2
-    - id: RMCWeaponPistolCOD50WinterWyvern
+    - id: RMCWeaponPistolHandcannonWinterWyvern
 
 - type: entity
   parent: CMBeltMarine

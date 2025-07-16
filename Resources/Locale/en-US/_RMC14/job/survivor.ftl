@@ -52,6 +52,7 @@ rmc-job-description-forecon = You are a stranded UNMC Forecon marine. Your ship,
 rmc-job-name-forecon-sniper = Sniper
 rmc-job-name-forecon-marksman = Marksman
 rmc-job-name-forecon-support-tech = Support Technician
+rmc-job-name-forecon-synth = Synthetic
 rmc-job-name-forecon-commander = Commander
 
 # New Varadero Survs

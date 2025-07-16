@@ -170,6 +170,7 @@ public sealed class RangefinderSystem : EntitySystem
             return;
 
         var active = EnsureComp<ActiveLaserDesignatorComponent>(rangefinder);
+        active.BreakRange = rangefinder.Comp.BreakRange;
         QueueDel(active.Target);
 
         var modeLaser = rangefinder.Comp.Mode == Designator

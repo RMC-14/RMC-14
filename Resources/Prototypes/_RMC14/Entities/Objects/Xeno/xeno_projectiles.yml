@@ -417,4 +417,16 @@
   - type: RMCProjectileAccuracy
     accuracy: 185
   - type: XenoHookOnHit
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        - XenoProjectileImpassable
+        - BarricadeImpassable
 
