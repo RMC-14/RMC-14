@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/15/2025 15:02:29
-  entityCount: 5728
+  time: 07/16/2025 21:27:28
+  entityCount: 5729
 maps:
 - 1
 grids:
@@ -41623,6 +41623,13 @@ entities:
     components:
     - type: Transform
       pos: 44.5,11.5
+      parent: 23
+- proto: SpawnPointLatejoin
+  entities:
+  - uid: 5729
+    components:
+    - type: Transform
+      pos: 14.5,1.5
       parent: 23
 - proto: UniformShortsRed
   entities:
