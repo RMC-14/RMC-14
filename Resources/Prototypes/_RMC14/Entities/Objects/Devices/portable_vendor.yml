@@ -88,6 +88,7 @@
     - name: Misc
       entries:
       - id: RMCHollowCane
+        name: hollow cane
         points: 15
     - name: Ammo
       entries:

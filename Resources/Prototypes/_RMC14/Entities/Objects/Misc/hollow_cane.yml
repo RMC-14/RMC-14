@@ -1,8 +1,9 @@
 ﻿- type: entity
   parent: Cane
   id: RMCHollowCane
-  name: hollow cane
-  suffix: Empty
+  name: fancy cane
+  description: An ebony cane with a fancy, seemingly-golden tip. Feels hollow to the touch.
+  suffix: Hollow
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/hollow_cane.rsi
