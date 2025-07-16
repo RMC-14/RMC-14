@@ -717,9 +717,9 @@
   description: It's a blue trucker hat.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/blue.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/blue_trucker_cap.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/Trucker/blue.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/blue_trucker_cap.rsi
 
 - type: entity
   parent: RMCHeadCapGrey
