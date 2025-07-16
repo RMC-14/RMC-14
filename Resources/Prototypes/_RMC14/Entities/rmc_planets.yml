@@ -6,6 +6,11 @@
     map: /Maps/_RMC14/lv624.yml
     camouflage: Jungle
     announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.5
+    - scenarioName: asset_protection
+      scenarioProbability: 0.5
 
 - type: entity
   id: RMCPlanetSolaris
@@ -15,6 +20,11 @@
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.5
+    - scenarioName: asset_protection
+      scenarioProbability: 0.5
 
 - type: entity
   id: RMCPlanetShiva
@@ -24,6 +34,11 @@
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.5
+    - scenarioName: asset_protection
+      scenarioProbability: 0.5
 
 - type: entity
   id: RMCPlanetFiorina
@@ -34,6 +49,11 @@
     camouflage: Classic
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.5
+    - scenarioName: asset_protection
+      scenarioProbability: 0.5
 
 - type: entity
   id: RMCPlanetTrijent
@@ -44,6 +64,11 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.5
+    - scenarioName: asset_protection
+      scenarioProbability: 0.5
 
 - type: entity
   id: RMCPlanetVaradero
@@ -126,6 +151,11 @@
       CMSurvivorEngineer: RMCSurvivorForeconBase
       CMSurvivorSecurity: RMCSurvivorForeconBase
       CMSurvivorScientist: RMCSurvivorForeconBase
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.5
+    - scenarioName: asset_protection
+      scenarioProbability: 0.5
 
 - type: entity
   id: RMCPlanetHybrisa
@@ -136,6 +166,11 @@
     camouflage: Urban
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     minPlayers: 130
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.5
+    - scenarioName: asset_protection
+      scenarioProbability: 0.5
 
 - type: entity
   id: RMCPlanetSorokyne
@@ -163,3 +198,8 @@
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
       - CMJobSurvivorCECResearcher: 2
+    nightmareScenarios:
+    - scenarioName: fallen_ship
+      scenarioProbability: 0.5
+    - scenarioName: asset_protection
+      scenarioProbability: 0.5

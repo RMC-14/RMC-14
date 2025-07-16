@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Server.Decals;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Decals;
 using Content.Shared.GameTicking;
 using Robust.Server.Physics;
@@ -33,6 +34,7 @@ public sealed class MapInsertSystem : EntitySystem
 
     private MapId? _map;
     private int _index;
+    private string currentMapActiveScenario = "";
 
     private readonly HashSet<EntityUid> _lookupEnts = new();
     private readonly HashSet<EntityUid> _immuneEnts = new();
@@ -46,6 +48,28 @@ public sealed class MapInsertSystem : EntitySystem
     {
         _map = null;
         _index = 0;
+    }
+
+    public string SelectMapScenario(List<RMCNightmareScenario> scenarioList)
+    {
+        if (scenarioList.Count <= 0)
+        {
+            return string.Empty;
+        }
+
+        var randomProbability = _random.NextFloat();
+        var cumulativeProbability = 0f;
+
+        foreach (var scenario in scenarioList)
+        {
+            cumulativeProbability += scenario.ScenarioProbability;
+            if (cumulativeProbability >= randomProbability)
+            {
+                return scenario.ScenarioName;
+            }
+        }
+
+        return string.Empty;
     }
 
     public void ProcessMapInsert(Entity<MapInsertComponent> ent, bool forceSpawn = false)
