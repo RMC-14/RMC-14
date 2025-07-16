@@ -379,6 +379,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitPizzaGalaxy
+  name: Pizza-Galaxy uniform
+  description: A pair of red slacks and a white button-down shirt with a large 'Pizza-Galaxy' logo on the back; a standard uniform for a Pizza-Galaxy employee. Pizza-Galaxy! To infinity and beyond!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase

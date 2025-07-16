@@ -694,3 +694,14 @@
   components:
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapPizzaGalaxy
+  name: Pizza-Galaxy red cap
+  description: It's a baseball style cap in a red color, with the 'Pizza-Galaxy' logo on the front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pizza_galaxy_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pizza_galaxy_cap.rsi

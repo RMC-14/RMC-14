@@ -42,6 +42,16 @@
     - id: RMCMagazineSMGP90
       amount: 3
 
+- type: entity
+  parent: RMCPouchMagazine
+  id: RMCPouchMagazineFilledKT42
+  suffix: Filled, KT42
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolKT42
+      amount: 3
+
 # Large Magazine Pouch
 - type: entity
   parent: RMCPouchMagazineLarge
@@ -74,6 +84,16 @@
       amount: 4
 
 # Shotgun Pouch
+- type: entity
+  parent: RMCPouchShotgun
+  id: RMCPouchShotgunFilledBuckshot
+  suffix: Filled, Buckshot
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 4
+
 - type: entity
   parent: RMCPouchShotgun
   id: RMCPouchShotgunFilledConstable
