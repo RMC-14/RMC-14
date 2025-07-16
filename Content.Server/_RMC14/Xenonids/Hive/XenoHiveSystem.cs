@@ -51,12 +51,14 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         public TimeSpan AnnounceAt;
         public AnnouncementType Type;
         public string MessageKey;
+        public List<EntProtoId>? Unlocks;
     }
 
     private enum AnnouncementType
     {
         QueenCanEvolve,
-        CoreBuildable
+        CoreBuildable,
+        EvolutionUnlock
     }
 
     public override void Initialize()
@@ -67,6 +69,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
         SubscribeLocalEvent<HiveComponent, QueenDeathEvent>(OnQueenDeath);
         SubscribeLocalEvent<HiveComponent, HiveCoreDestroyedEvent>(OnHiveCoreDestroyed);
+        SubscribeLocalEvent<HiveComponent, CasteUnlockScheduleAnnouncement>(OnUnlockScheduleEvent);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentShutdown>(OnBurrowedSurgeShutdown);
@@ -96,7 +99,20 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         ScheduleAnnouncement(ent.Owner, announceAt, AnnouncementType.CoreBuildable, "rmc-core-cooldown-over");
     }
 
-    private void ScheduleAnnouncement(EntityUid hiveId, TimeSpan announceAt, AnnouncementType type, string messageKey)
+    private void OnUnlockScheduleEvent(Entity<HiveComponent> ent, ref CasteUnlockScheduleAnnouncement ev)
+    {
+        var announceAt = _timing.CurTime + ev.UnlockAt - _gameTicker.RoundDuration();
+
+        ScheduleAnnouncement(
+            ent.Owner,
+            announceAt,
+            AnnouncementType.EvolutionUnlock,
+            "rmc-hive-supports-castes",
+            ev.Castes
+        );
+    }
+
+    private void ScheduleAnnouncement(EntityUid hiveId, TimeSpan announceAt, AnnouncementType type, string messageKey, List<EntProtoId>? unlocks = null)
     {
         if (!_pendingTimedAnnouncements.ContainsKey(hiveId))
             _pendingTimedAnnouncements[hiveId] = new List<TimedAnnouncement>();
@@ -105,7 +121,8 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         {
             AnnounceAt = announceAt,
             Type = type,
-            MessageKey = messageKey
+            MessageKey = messageKey,
+            Unlocks = unlocks
         });
     }
 
@@ -158,44 +175,6 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     {
         if (_gameTicker.RunLevel != GameRunLevel.InRound)
             return;
-
-        var roundTime = _gameTicker.RoundDuration();
-        var hives = EntityQueryEnumerator<HiveComponent>();
-        while (hives.MoveNext(out var hiveId, out var hive))
-        {
-            _announce.Clear();
-
-            for (var i = 0; i < hive.AnnouncementsLeft.Count; i++)
-            {
-                var left = hive.AnnouncementsLeft[i];
-                if (roundTime >= left)
-                {
-                    if (hive.Unlocks.TryGetValue(left, out var unlocks))
-                    {
-                        foreach (var unlock in unlocks)
-                        {
-                            hive.AnnouncedUnlocks.Add(unlock);
-
-                            if (_prototypes.TryIndex(unlock, out var prototype))
-                            {
-                                _announce.Add(prototype.Name);
-                            }
-                        }
-                    }
-
-                    hive.AnnouncementsLeft.RemoveAt(i);
-                    i--;
-                    Dirty(hiveId, hive);
-                }
-            }
-
-            if (_announce.Count == 0)
-                continue;
-
-            var popup = Loc.GetString("rmc-hive-supports-castes", ("castes", string.Join(", ", _announce)));
-            _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, popup, hive.AnnounceSound, PopupType.Large);
-            EvoScreech(hive);
-        }
 
         var time = _timing.CurTime;
         var toRemove = new List<EntityUid>();
@@ -251,8 +230,31 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         if (!_query.TryComp(hiveId, out var hive))
             return;
 
-        var message = Loc.GetString(announcement.MessageKey);
-        _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, message, hive.AnnounceSound, PopupType.Large);
+        switch (announcement.Type)
+        {
+            case AnnouncementType.EvolutionUnlock:
+                if (announcement.Unlocks != null)
+                {
+                    var names = new List<string>();
+                    foreach (var id in announcement.Unlocks)
+                    {
+                        if (_prototypes.TryIndex(id, out var proto))
+                            names.Add(proto.Name);
+                    }
+
+                    var msg = Loc.GetString(announcement.MessageKey, ("castes", string.Join(", ", names)));
+                    _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, msg, hive.AnnounceSound, PopupType.Large);
+                    EvoScreech(hive);
+                }
+                break;
+
+            case AnnouncementType.QueenCanEvolve:
+            case AnnouncementType.CoreBuildable:
+            default:
+                var message = Loc.GetString(announcement.MessageKey);
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, message, hive.AnnounceSound, PopupType.Large);
+                break;
+        }
 
         Dirty(hiveId, hive);
     }

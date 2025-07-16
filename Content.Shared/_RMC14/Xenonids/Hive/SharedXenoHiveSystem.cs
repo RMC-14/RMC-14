@@ -91,9 +91,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
     private void OnMapInit(Entity<HiveComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.AnnouncedUnlocks.Clear();
         ent.Comp.Unlocks.Clear();
-        ent.Comp.AnnouncementsLeft.Clear();
 
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
@@ -104,17 +102,14 @@ public abstract class SharedXenoHiveSystem : EntitySystem
                 continue;
 
             ent.Comp.Unlocks.GetOrNew(xeno.UnlockAt).Add(prototype.ID);
-
-            if (!ent.Comp.AnnouncementsLeft.Contains(xeno.UnlockAt))
-                ent.Comp.AnnouncementsLeft.Add(xeno.UnlockAt);
         }
 
-        foreach (var unlock in ent.Comp.Unlocks)
+        foreach (var (time, castes) in ent.Comp.Unlocks)
         {
-            unlock.Value.Sort();
+            castes.Sort();
+            var ev = new CasteUnlockScheduleAnnouncement(time, castes);
+            RaiseLocalEvent(ent.Owner, ref ev);
         }
-
-        ent.Comp.AnnouncementsLeft.Sort();
     }
 
     /// <summary>
@@ -398,3 +393,10 @@ public readonly record struct QueenDeathEvent(EntityUid Hive);
 /// </summary>
 [ByRefEvent]
 public readonly record struct HiveCoreDestroyedEvent(EntityUid Hive);
+
+/// <summary>
+/// Raised on a hive entity during map init to schedule a timed message
+/// for when new xeno castes become available during evolution.
+/// </summary>
+[ByRefEvent]
+public readonly record struct CasteUnlockScheduleAnnouncement(TimeSpan UnlockAt, List<EntProtoId> Castes);
