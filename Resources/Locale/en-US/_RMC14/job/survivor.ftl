@@ -96,6 +96,10 @@ CMJobSurvivorHybrisaWeyamartEmployee = Civilian - Weymart Employee
 rmc-job-name-survivor-material-reprocessing-technician = Civilian - Material Reprocessing Technician
 CMJobSurvivorHybrisaMaterialReprocessingTechnician = Civilian - Material Reprocessing Technician
 
+rmc-job-name-survivor-fire-protection-specialist-hybrisa = Civilian - Fire Protection Specialis
+CMJobSurvivorFireProtectionSpecialistHybrisa = Civilian - Fire Protection Specialis
+rmc-job-prefix-fire-protection-specialist-hybrisa = FPS
+
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
