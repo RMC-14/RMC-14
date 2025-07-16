@@ -22,6 +22,9 @@ CMJobSurvivorMiner = Miner Colonist
 cm-job-name-surivor-priest = Priest Colonist
 CMJobSurvivorPriest = Priest Colonist
 
+cm-job-name-survivor-trucker = Trucker Colonist
+CMJobSurvivorTrucker = Trucker Colonist
+
 cm-job-name-survivor-scientist = Scientist Colonist
 CMSurvivorScientist = Scientist Colonist
 
@@ -116,3 +119,32 @@ CMJobSurvivorSoroMiner = Miner
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison
+
+# Trijent survs
+
+rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
+CMSurvivorTrijentChaplain = Chaplain
+
+rmc-job-name-survivor-trijent-goon = Trijent Dam Security
+CMSurvivorTrijentGoon = Trijent Dam Security
+
+rmc-job-name-survivor-trijent-deputy = CMB Deputy
+CMSurvivorTrijentDeputy = CMB Deputy
+
+cm-job-name-survivor-trijent-doctor = Trijent Dam Doctor
+CMSurvivorTrijentDoctor = Trijent Dam Doctor
+
+cm-job-name-survivor-trijent-researcher = Trijent Dam Researcher
+CMSurvivorTrijentResearcher = Trijent Dam Researcher
+
+cm-job-name-survivor-trijent-trucker = Trijent Dam Heavy Vehicle Operator
+CMSurvivorTrijentTrucker = Trijent Dam Heavy Vehicle Operator
+
+cm-job-name-survivor-trijent-engi-hydro = Hydro Electric Engineer
+CMSurvivorTrijentEngiHydro = Hydro Electric Engineer
+
+cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
+CMSurvivorTrijentDamTech = Dam Maintenance Technician
+
+cm-job-name-survivor-trijent-corporate = Trijent Corperation Liaison
+CMSurvivorTrijentCorporate = Trijent Corperation Liaison

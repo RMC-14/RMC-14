@@ -145,6 +145,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_green.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretPurple
+  name: purple beret
+  description: A stylish, if purple, beret.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase
@@ -249,6 +260,42 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCTruckerCapBlue
+  name: blue trucker cap
+  description: It's a blue trucker cap.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCYellowCap
+  name: yellow cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Soft/yellowsoft.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Soft/yellowsoft.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: Clothing/Head/Soft/yellowsoft.rsi
+      Desert: Clothing/Head/Soft/yellowsoft.rsi
+      Snow: Clothing/Head/Soft/yellowsoft.rsi
+      Classic: Clothing/Head/Soft/yellowsoft.rsi
+      Urban: Clothing/Head/Soft/yellowsoft.rsi
 
 - type: entity
   parent: RMCHeadCapFlippable
@@ -599,3 +646,16 @@
     - HeadTop
     - HeadSide
     - Snout
+
+# Chaplain
+
+- type: entity
+  parent: ClothingHeadHatHoodNunHood
+  id: RMCHeadNunHood
+  name: nun hood
+  description: Maximum piety in this star system
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hoods/nun.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hoods/nun.rsi
