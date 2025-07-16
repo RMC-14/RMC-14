@@ -1,11 +1,11 @@
 - type: job
   parent: CMSurvivorEngineer
-  id: RMCSurvivorHybrisaEngineer
-  name: rmc-job-name-survivor-hybrisa-engineer
+  id: RMCSurvivorHybrisaConstructionWorker
+  name: rmc-job-name-survivor-construction-worker
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorHybrisaEngineer
-  startingGear: RMCGearSurvivorHybrisaEngineer
-  spawnMenuRoleName: Electrical Engineer (Hybrisa Survivor)
+  playTimeTracker: RMCJobSurvivorHybrisaConstructionWorker
+  startingGear: RMCGearSurvivorHybrisaConstructionWorker
+  spawnMenuRoleName: Construction Worker (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,31 +27,37 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetHybrisaEngineer
+      preset: RMCGearSurvivorPresetHybrisaConstructionWorker
 
 - type: startingGear
   parent: RMCGearSurvivorBase
-  id: RMCGearSurvivorHybrisaEngineer
+  id: RMCGearSurvivorHybrisaConstructionWorker
   equipment:
-    jumpsuit: RMCJumpsuitCivilianEngineerWorkerAlt
+    jumpsuit: RMCJumpsuitCivilianEngineerWorker
     pocket2: RMCPouchToolsFill
     back: CMSatchelEngineerMinerSurvivorFill
+    shoes: RMCShoesJackboots
   storage:
     back:
     - WeaponNailgun
+    - CMSheetMetal30
 
 - type: playTimeTracker
-  id: RMCJobSurvivorHybrisaEngineer
+  id: RMCJobSurvivorHybrisaConstructionWorker
   isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetEngineer
-  id: RMCGearSurvivorPresetHybrisaEngineer
+  id: RMCGearSurvivorPresetHybrisaConstructionWorker
   name: hybrisa engineer colonist preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ CMHandsInsulated, RMCShoesJackboots, RMCHardhatBlue, RMCHazardVestGreen, CMSheetPlasteel10 ]
-    - [ CMHandsInsulated, RMCShoesJackboots, RMCHardhatBlue, RMCHazardVestBlue, CMSheetPlasteel10 ]
-    - [ RMCHandsVeteranInsulated, CMBootsBlackFilled, RMCWeldingGoggles, RMCOuterEngineeringUtilityOversuitAlt, CMSheetPlasteel20 ]
+    - [ RMCHandsVeteranInsulated, RMCHardhatOrange, RMCHazardVest ]
+    - [ RMCHandsVeteranInsulated, RMCHardhatOrange, RMCHazardVest ]
+    - [ CMHandsInsulated, RMCWeldingGoggles, RMCOuterEngineeringUtilityOversuit ]
+    randomGearOther:
+    -
+      - [ CMBeltUtilityFilled ]
+      - [ RMCBeltHolsterNailgun ]

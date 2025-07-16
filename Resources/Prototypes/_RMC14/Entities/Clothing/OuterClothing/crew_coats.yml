@@ -248,3 +248,13 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/weya_engineer_jacket.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/weya_engineer_jacket.rsi
+
+- type: entity
+  parent: RMCOuterEngineeringUtilityOversuit
+  id: RMCOuterEngineeringUtilityOversuitAlt
+  suffix: Alternate
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/weya_engineer_jacket_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/weya_engineer_jacket_alt.rsi

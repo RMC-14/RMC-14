@@ -238,3 +238,15 @@
     contents:
     - id: RMCMagazineRifleMAR40
       amount: 5
+
+- type: entity
+  parent: RMCBeltHolsterNailgun
+  id: RMCBeltHolsterNailgunFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGNailgun
+      amount: 2
+    - id: WeaponNailgun
+      amount: 1
