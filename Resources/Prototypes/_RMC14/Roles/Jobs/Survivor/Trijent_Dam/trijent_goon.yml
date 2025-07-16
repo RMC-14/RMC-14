@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: RMCJobSurvivorTrijentGoon
   startingGear: RMCGearSurvivorTrijentGoon
+  hasIcon: true
   icon: RMCJobIconWeYaSec
   spawnMenuRoleName: Trijent Security Guard (Trijent Survivor)
   special:

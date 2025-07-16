@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: RMCJobSurvivorTrijentDeputy
   startingGear: RMCGearSurvivorTrijentDeputy
+  hasIcon: true
   icon: RMCJobIconBureauDeputy
   spawnMenuRoleName: Colonial Marshal Deputy (Trijent Survivor)
   special:
