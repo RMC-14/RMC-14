@@ -4,7 +4,7 @@
   name: cm-job-name-survivor-trijent-corporate
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorTrijentCorporate
-  spawnMenuRoleName: Trijent Corperation Liaison (Trijent Survivor)
+  spawnMenuRoleName: Trijent Corporation Liaison (Trijent Survivor)
   ranks:
     RMCRankWeYaExecutive: []
   startingGear: RMCGearSurvivorTrijentCorporate

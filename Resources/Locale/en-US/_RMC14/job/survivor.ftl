@@ -146,5 +146,5 @@ CMSurvivorTrijentEngiHydro = Hydro Electric Engineer
 cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 CMSurvivorTrijentDamTech = Dam Maintenance Technician
 
-cm-job-name-survivor-trijent-corporate = Trijent Corperation Liaison
-CMSurvivorTrijentCorporate = Trijent Corperation Liaison
+cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
+CMSurvivorTrijentCorporate = Trijent Corporation Liaison
