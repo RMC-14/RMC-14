@@ -204,3 +204,11 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonGreenWorkwear
+  id: RMCJumpsuitLiaisonGreenWorkwearBrownWebbing
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingBrown

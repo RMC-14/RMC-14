@@ -54,12 +54,12 @@
       - CMSatchelEngineer
       - RMCSatchelLightpack
     randomOutfits:
-    - [ RMCJumpsuitLiaisonGreenWorkwear, CMHandsBrown, RMCVestTan, RMCHeadBeanieTan ]
+    - [ RMCJumpsuitLiaisonGreenWorkwearBrownWebbing, CMHandsBrown, RMCVestTan, RMCHeadBeanieTan ]
     - [ CMJumpsuitColonist, RMCCoatBomberGrey, RMCHeadBeanieGray ]
     - [ RMCJumpsuitLiaisonGreenWorkwear, RMCHandsVeteranInsulated, RMCVestBrown, RMCHeadCapTruckerRed ]
-    - [ RMCJumpsuitCivilian, RMCCoatBomberGrey, RMCHeadCapTruckerBlue ] # RMCGlassesAviatorsSilver
-    - [ RMCJumpsuitCivilianFrontier, RMCHandsVeteranInsulated, RMCCoatBomber, RMCSunglassesBig, RMCCassettePlayer ]
-    - [ RMCJumpsuitNormCivilianYellow, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapTruckerFerret ] # RMCHandsCombat
+    - [ RMCJumpsuitCivilian, RMCCoatBomberGrey, RMCHeadCapTruckerBlue, RMCGlassesAviatorsSilver ]
+    - [ RMCJumpsuitCivilianFrontier, RMCHandsVeteranInsulated, RMCCoatBomberKhaki, RMCSunglassesBig, RMCCassettePlayer ]
+    - [ RMCJumpsuitNormCivilianBlackWebbing, RMCGlassesAviators, RMCCoatBomberGrey, RMCHeadCapTruckerFerret, RMCHandsCombat ]
     randomGearOther:
     -
       - [ CMSheetMetal20, CMBeltUtilityFilled ]

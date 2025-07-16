@@ -281,6 +281,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_jumpsuit.rsi
 
 - type: entity
+  parent: RMCJumpsuitNormCivilianYellow
+  id: RMCJumpsuitNormCivilianBlackWebbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingBlack
+
+- type: entity
   parent: RMCJumpsuitCivilian
   id: RMCJumpsuitNormCivilianBlue
   name: blue jumpsuit
