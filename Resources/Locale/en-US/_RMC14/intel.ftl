@@ -45,3 +45,16 @@ rmc-ui-intel-colony-status =
         [true] Online.
        *[false] Offline.
     }
+
+## Tech Control Console
+rmc-ui-tech-tier-header = [font size=14][bold]Tier: { $tier }[/bold][/font]
+rmc-ui-tech-points-value = Tech points: { $value }
+rmc-ui-tech-repurchasable = Repurchasable
+rmc-ui-tech-incremental-price = Incremental price: +{ $increase } per purchase
+rmc-ui-tech-purchase-button = Purchase
+
+rmc-ui-tech-information-header = [bold]Information[/bold]
+rmc-ui-tech-name-label = [color=#5B88B0]Name:[/color]
+rmc-ui-tech-description-label = [color=#5B88B0]Description:[/color]
+rmc-ui-tech-cost-label = [color=#5B88B0]Cost:[/color]
+rmc-ui-tech-statistics-label = [color=#5B88B0]Statistics:[/color]

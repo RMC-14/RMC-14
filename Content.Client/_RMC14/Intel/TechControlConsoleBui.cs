@@ -33,7 +33,9 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
         _window.Options.DisposeAllChildren();
         for (var i = console.Tree.Options.Count - 1; i >= 0; i--)
         {
-            _window.Options.AddChild(new RichTextLabel { Text = $"[font size=14][bold]Tier: {i}[/bold][/font]"});
+            _window.Options.AddChild(new RichTextLabel { 
+                Text = Loc.GetString("rmc-ui-tech-tier-header", ("tier", i)) 
+            });
             _window.Options.AddChild(new BlueHorizontalSeparator());
 
             var optionContainer = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
@@ -88,7 +90,7 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
         _optionWindow = this.CreateWindow<TechControlConsoleOptionWindow>();
         _optionWindow.OnClose += () => _optionWindow = null;
         _optionWindow.Title = option.Name;
-        _optionWindow.CurrentPointsLabel.Text = $"Tech points: {points.Double():F1}";
+        _optionWindow.CurrentPointsLabel.Text = Loc.GetString("rmc-ui-tech-points-value", ("value", points.Double():F1));
         _optionWindow.NameLabel.Text = option.Name;
         _optionWindow.DescriptionLabel.Text = option.Description;
         _optionWindow.CostLabel.Text = $"{option.CurrentCost}";
@@ -100,14 +102,19 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
         else
         {
             if (option.Repurchasable)
-                _optionWindow.Statistics.AddChild(new Label { Text = "Repurchasable"});
+                _optionWindow.Statistics.AddChild(new Label { 
+                    Text = Loc.GetString("rmc-ui-tech-repurchasable") 
+                });
 
             if (option.Increase != 0)
-                _optionWindow.Statistics.AddChild(new Label {Text = $"Incremental price: +{option.Increase} per purchase"});
+                _optionWindow.Statistics.AddChild(new Label {
+                    Text = Loc.GetString("rmc-ui-tech-incremental-price", ("increase", option.Increase)) 
+                });
         }
 
         var canPurchase = points >= option.CurrentCost && currentTier >= tier &&
                           (!option.Purchased || option.Repurchasable);
+        _optionWindow.PurchaseButton.Text = Loc.GetString("rmc-ui-tech-purchase-button");
         _optionWindow.PurchaseButton.OnPressed += _ =>
         {
             SendPredictedMessage(new TechPurchaseOptionBuiMsg(tier, optionIndex));
