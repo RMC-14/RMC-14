@@ -612,6 +612,29 @@
     - HeadSide
     - Snout
 
+# Durag
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadDurag
+  name: durag
+  description: An improvised head wrap made out of a standard issue neckerchief. Great for keeping the sweat out of your eyes and protecting your hair.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag.rsi
+
+- type: entity
+  parent: RMCHeadDurag
+  id: RMCHeadDuragBlack
+  description: An improvised head wrap made out of a black neckerchief. Great for keeping the sweat out of your eyes and protecting your hair.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/durag_black.rsi
+
 # Civilian
 
 - type: entity
@@ -659,3 +682,12 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/weyamart_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/weyamart_cap.rsi
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapPatrol
+  name: patrol cap
+  description: A casual cap issued as part of the non-combat uniform. While it only protects from the sun, it's much more comfortable than a helmet.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: {}

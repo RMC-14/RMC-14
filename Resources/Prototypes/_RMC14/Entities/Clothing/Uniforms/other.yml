@@ -360,13 +360,24 @@
 - type: entity
   parent: RMCJumpsuitCivilian
   id: RMCJumpsuitWeyamart
-  name: weyamart uniform
+  name: Weyamart uniform
   description: A pair of dark-grey slacks and an orange button-down shirt; a standard uniform for the Weston-Yamada branded supermarket 'Weyamart'.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitSanitation
+  name: Weston-Yamada RFF - sanitation uniform
+  description: A set of Weston-Yamada RFF - Sanitation fatigues, a green pair of work slacks and a grey polo-shirt with green reflecting stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
 
 # Kutjevo
 - type: entity

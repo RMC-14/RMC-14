@@ -54,8 +54,8 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,] # im not doing this 45 times someone just let me define rarity for outfits
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,] # this is as many as you get
+    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
+    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
     - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
     - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
     - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
