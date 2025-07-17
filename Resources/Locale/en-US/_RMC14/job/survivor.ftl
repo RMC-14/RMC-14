@@ -87,7 +87,7 @@ RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
 rmc-job-name-survivor-hybrisa-civilian = Civilian
 CMJobSurvivorHybrisaCivilian = Civilian
 
-rmc-job-name-survivor-office-worker = Civilian - Office Worker
+rmc-job-name-survivor-hybrisa-office-worker = Civilian - Office Worker
 CMJobSurvivorHybrisaOfficeWorker = Civilian - Office Worker
 
 rmc-job-name-survivor-hybrisa-weyamart-employee = Civilian - Weymart Employee
@@ -111,6 +111,9 @@ CMJobSurvivorHybrisaMedicalDoctor = Doctor
 
 rmc-job-name-survivor-emt-paramedic = EMT - Paramedic
 CMJobSurvivorHybrisaEMTParamedic = EMT - Paramedic
+
+rmc-job-name-survivor-xenoarchaeologist = Xenoarchaeologist
+CMJobSurvivorHybrisaXenoarchaeologist = Xenoarchaeologist
 
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
 
