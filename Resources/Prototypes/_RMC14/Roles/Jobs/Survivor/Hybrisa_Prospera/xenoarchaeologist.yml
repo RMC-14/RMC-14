@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivorDoctor
+  parent: CMSurvivorScientist
   id: RMCSurvivorHybrisaXenoarchaeologist
   name: rmc-job-name-survivor-xenoarchaeologist
   description: cm-job-description-survivor
@@ -58,3 +58,5 @@
   - type: SurvivorPreset
     randomOutfits:
     - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
+    - [ RMCSatchelLightpack, RMCJumpsuitCivilianScientist, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
+    - [ RMCSatchelLightpack, RMCJumpsuitCivilianScientist, RMCSuitBioWeYa, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCHoodBioWeYa, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCToolSpade, RMCFlashlightLantern ]

@@ -87,7 +87,7 @@ RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
 rmc-job-name-survivor-hybrisa-civilian = Civilian
 CMJobSurvivorHybrisaCivilian = Civilian
 
-rmc-job-name-survivor-office-worker = Civilian - Office Worker
+rmc-job-name-survivor-hybrisa-office-worker = Civilian - Office Worker
 CMJobSurvivorHybrisaOfficeWorker = Civilian - Office Worker
 
 rmc-job-name-survivor-hybrisa-weyamart-employee = Civilian - Weymart Employee
