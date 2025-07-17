@@ -12,7 +12,7 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
   - type: PresetIdCard
-    job: CMSurvivor
+    job: CMBureauDeputy
 
 - type: entity
   parent: RMCIDCardCMBDeputy
