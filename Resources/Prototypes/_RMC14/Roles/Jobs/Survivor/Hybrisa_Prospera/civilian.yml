@@ -27,7 +27,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCSurvivorGearBaseNoBackpack
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorHybrisaCivilian
 
 - type: entity
