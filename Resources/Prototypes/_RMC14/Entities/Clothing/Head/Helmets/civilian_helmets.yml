@@ -25,3 +25,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/tmcc_miner.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/tmcc_miner.rsi
+
+- type: entity
+  parent: RMCArmorHelmetFirefighter
+  id: RMCArmorHelmetParamedic
+  name: MT-SHIELD-X 525 helmet
+  description: TThe MT-SHIELD-X 525 (MedTech - Safety Helmet Integrated for Extreme Danger). A closed helmet designed to protect the wearer from hazardous environments, this specific model is designed to be effective in a variety of hazardous environments and protects the user from potential biohazards. This helmet was designed by Halcyon Systems, in collabaration with MedTech.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/paramedic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/paramedic.rsi
