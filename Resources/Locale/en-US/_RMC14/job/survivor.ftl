@@ -103,6 +103,9 @@ rmc-job-prefix-fire-protection-specialist-hybrisa = FPS
 rmc-job-name-survivor-grind-barista = Civilian - The Daily Grind Barista
 CMJobSurvivorHybrisaGrindBarista = Civilian - The Daily Grind Barista
 
+rmc-job-name-survivor-tmcc-miner = TMCC - Miner
+CMJobSurvivorHybrisaTMCCMiner = TMCC - Miner
+
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
 
 rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer

@@ -52,6 +52,16 @@
     - id: RMCMagazinePistolKT42
       amount: 3
 
+- type: entity
+  parent: RMCPouchMagazine
+  id: RMCPouchMagazineFilledMAR40Ext
+  suffix: Filled, MAR-40 Extended
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40Ext
+      amount: 3
+
 # Large Magazine Pouch
 - type: entity
   parent: RMCPouchMagazineLarge

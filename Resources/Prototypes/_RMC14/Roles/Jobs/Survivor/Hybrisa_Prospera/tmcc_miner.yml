@@ -1,0 +1,61 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorHybrisaTMCCMiner
+  name: rmc-job-name-survivor-tmcc-miner
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaTMCCMiner
+  startingGear: RMCGearSurvivorHybrisaTMCCMiner
+  spawnMenuRoleName: TMCC Miner (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaTMCCMiner
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaTMCCMiner
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaTMCCMiner
+  name: tmcc miner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaTMCCMiner
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetHybrisaTMCCMiner
+  name: tmcc miner preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPickaxe, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ RMCArmorHelmetTMCCMiner, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPickaxe, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMBackpackEngineer, RMCHazardVestTMCC, RMCShoesJackboots, RMCPickaxe, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ CMBackpackEngineer, RMCJumpsuitTMCC, RMCArmorTMCC, RMCArmorHelmetTMCCMiner, RMCShoesJackboots, RMCPickaxe, RMCPouchToolsFill, RMCHandsCombat, WeaponRifleMAR40, RMCPouchMagazineFilledMAR40Ext ]
+    - [ RMCSatchelLightpack, RMCPickaxe, RMCPouchToolsFill, RMCJumpsuitTMCC, RMCArmorTMCCAlt, RMCArmorHelmetTMCCMiner, RMCBootsRoyalFilled, RMCHandsVeteranRoyalMarine, RMCWeaponSMGP90, RMCPouchMagazineFilledP90 ]

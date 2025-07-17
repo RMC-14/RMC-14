@@ -408,6 +408,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitTMCC
+  name: tartarus-mining uniform
+  description: A set of Tartarus-Mining fatigues, a yellow pair of utility work slacks and a light-grey polo-shirt with red reflecting stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase
