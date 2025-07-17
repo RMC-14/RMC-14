@@ -60,5 +60,5 @@
   - type: SurvivorPreset
     rareItems:
       RMCExplosivePlastic:
-        55: 75 # 10%
-      rareItemCoefficent: 444
+        45: 50 # 10%
+    rareItemCoefficent: 50
