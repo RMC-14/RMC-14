@@ -220,7 +220,6 @@
           - RMCAttachmentM54CStockSolid
           - RMCAttachmentM54CStockCollapsible
 
-
 - type: entity
   parent: CMMagazineRifleBase
   id: CMMagazineRifleM54C
