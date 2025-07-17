@@ -708,7 +708,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/red_trucker_cap.rsi
-    camouflageVariations: {}
 
 - type: entity
   parent: RMCHeadCapTruckerRed
