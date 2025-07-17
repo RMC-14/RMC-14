@@ -47,7 +47,7 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetHybrisaCivilian
   name: hybrisa civilian preset
   categories: [ HideSpawnMenu ]

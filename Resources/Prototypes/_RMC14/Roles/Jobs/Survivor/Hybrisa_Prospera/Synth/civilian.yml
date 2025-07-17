@@ -1,21 +1,9 @@
 - type: job
-  parent: CMJobBase
-  id: RMCJobSyntheticColony
-  playTimeTracker: RMCJobSyntheticColony
-  name: rmc-job-name-synth-colony
-  description: rmc-job-description-synth-colony
-  ranks:
-    RMCRankSyntheticColonist: []
-  startingGear: RMCGearSyntheticColonist
-  icon: "RMCJobIconSynth"
-  requireAdminNotify: true
-  joinNotifyCrew: true
-  whitelisted: true
-  supervisors: cm-job-supervisors-colonists
-  accessGroups:
-  - Colonist
-  - Synth
-  roleWeight: 0.25
+  parent: RMCJobSyntheticColony
+  id: RMCSyntheticColonyHybrisaCivilian
+  playTimeTracker: RMCJobSyntheticColonyHybrisaCivilian
+  startingGear: RMCGearSyntheticColonistHybrisaCivilian
+  spawnMenuRoleName: Civilian Synth (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,7 +30,6 @@
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
-    - type: RMCRibbon
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
@@ -66,6 +53,8 @@
       damage:
         types:
           Blunt: 35
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaSynthCivilian
     - type: Synth
       generation: rmc-species-synth-generation-second
       welderDamageToRepair:
@@ -102,35 +91,35 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
-  hidden: true
-
-- type: startingGear
-  id: RMCGearSyntheticColonistBase
-  equipment:
-    id: RMCIDCardSynthColony
-    ears: CMHeadsetColony
-    belt: CMBeltUtilityFilled
-    pocket1: RMCPouchSurvivalSynthFill
-    pocket2: RMCPouchToolsFill
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
-  id: RMCGearSyntheticColonist
-  equipment:
-    jumpsuit: RMCJumpsuitSynthetic
-    gloves: CMHandsInsulated
-    shoes: CMBootsBlackFilled
-
-- type: entity
-  parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSynthColonist
-  name: synthetic colonist spawn point
-  components:
-  - type: SpawnPoint
-    job_id: RMCJobSyntheticColony
-  - type: Sprite
-    state: syn_spawn
+  id: RMCGearSyntheticColonistHybrisaCivilian
+  inhand:
+    - RMCFireAxe # todo maintenance jack
 
 - type: playTimeTracker
-  id: RMCJobSyntheticColony
+  id: RMCJobSyntheticColonyHybrisaCivilian
   isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetHybrisaSynthCivilian
+  name: survivor synth hybrisa civilian colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    # WeYa mart employee
+    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, CMSatchel, RMCShoesLaceup ]
+    # Sanitation
+    - [ RMCHazardVestGreen, CMHandsBrown, RMCJumpsuitSanitation, CMSatchelEngineer, CMBootsBrown ]
+    # Pizza Delivery
+    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCBoxPizzaGalaxyMystery, RMCShoesRed ]
+    # Fire Protection
+    - [ RMCHeadCapCargo, RMCJumpsuitCivilian, RMCHazardVestYellow, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher ]
+    # Daily Grind Barista
+    - [ RMCDailyGrindApron, RMCJumpsuitDailyGrind, RMCShoesLaceup, CMSatchel ]
+    # Landing Pad Attendant Synth
+    - [ RMCJumpsuitCivilianYellow, RMCHeadCapFlippable, RMCSatchelNorm, CMBootsBlackFilled, CMPackFlare, RMCHazardVest, RMCBinoculars, RMCBeltUtilityGeneral, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCEarmuffs ]
+    # Bartender
+    - [ RMCSatchelBlackBartenderSynthFill, CMHandsBlackMarine, RMCCigarette, CMBootsBlackFilled, RMCCoatWaistcoat, ClothingUniformJumpsuitDetectiveGrey, ClothingHeadHatBowlerHat ]
