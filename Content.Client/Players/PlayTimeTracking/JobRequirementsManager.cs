@@ -1,12 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Client.Lobby;
-using Content.Client._RMC14.PlayTimeTracking;
 using Content.Shared.CCVar;
+using Content.Shared.Localizations;
 using Content.Shared.Players;
 using Content.Shared.Players.JobWhitelist;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Robust.Client;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
@@ -25,7 +25,6 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RMCPlayTimeManager _rmcPlayTime = default!;
 
     private readonly Dictionary<string, TimeSpan> _roles = new();
     private readonly List<string> _roleBans = new();
@@ -45,7 +44,6 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         _net.RegisterNetMessage<MsgJobWhitelist>(RxJobWhitelist);
 
         _client.RunLevelChanged += ClientOnRunLevelChanged;
-        _rmcPlayTime.Updated += () => Updated?.Invoke();
     }
 
     private void ClientOnRunLevelChanged(object? sender, RunLevelChangedEventArgs e)
@@ -115,10 +113,6 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
     public bool CheckRoleRequirements(JobPrototype job, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
-        reason = null;
-        if (_rmcPlayTime.IsExcluded(job.ID))
-            return true;
-
         var reqs = _entManager.System<SharedRoleSystem>().GetJobRequirement(job);
         return CheckRoleRequirements(reqs, profile, out reason);
     }
@@ -163,28 +157,53 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         return _roles.TryGetValue("Overall", out var overallPlaytime) ? overallPlaytime : TimeSpan.Zero;
     }
 
+    /// <summary>
+    /// Fetches an IEnumerable of the playtimes this client has, each section being a string and a Timespan.
+    /// The string is either the PlaytimeTracker's name or a list of the jobs that use that tracker.
+    /// </summary>
+    /// <returns>An IEnumerable of the playtimes this client has.</returns>
     public IEnumerable<KeyValuePair<string, TimeSpan>> FetchPlaytimeByRoles()
     {
-        var usedTrackers = new HashSet<string>();
+        var jobSystem = _entManager.System<SharedJobSystem>();
+
+        var validTrackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>(); // For trackers that don't have a Job, like Overall
         var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>();
 
         foreach (var job in jobsToMap)
         {
-            if (job.PlayTimeTracker is not { } tracker)
+            if (job.PlayTimeTracker is not { } trackerProtoId)
                 continue;
 
-            if (!_prototypes.TryIndex<PlayTimeTrackerPrototype>(tracker, out var trackerProto))
+            validTrackers.Add(trackerProtoId);
+        }
+
+        foreach (var trackerProtoId in validTrackers)
+        {
+            var nameList = new List<string>();
+            var trackerProto = _prototypes.Index(trackerProtoId);
+
+            if (!trackerProto.ShowInStatsMenu)
                 continue;
 
-            if (usedTrackers.Contains(tracker))
-                continue;
+            var jobs = jobSystem.GetJobPrototypes(trackerProtoId);
 
-            var name = trackerProto?.Name ?? job.Name;
-
-            if (_roles.TryGetValue(tracker, out var playtime))
+            if (trackerProto.Name is not { } trackerName)
             {
-                usedTrackers.Add(tracker);
-                yield return new KeyValuePair<string, TimeSpan>(name, playtime);
+                foreach (var jobProtoId in jobs)
+                {
+                    var jobProto = _prototypes.Index(jobProtoId);
+                    nameList.Add(jobProto.LocalizedName);
+                }
+            }
+            else
+            {
+                nameList.Add(Loc.GetString(trackerName));
+            }
+
+            if (_roles.TryGetValue(trackerProtoId, out var playtime))
+            {
+                var names = ContentLocalizationManager.FormatList(nameList);
+                yield return new KeyValuePair<string, TimeSpan>(names, playtime);
             }
         }
     }

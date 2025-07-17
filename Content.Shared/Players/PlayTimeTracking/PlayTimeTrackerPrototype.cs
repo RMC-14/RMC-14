@@ -1,4 +1,3 @@
-using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Players.PlayTimeTracking;
@@ -14,15 +13,14 @@ public sealed partial class PlayTimeTrackerPrototype : IPrototype
 
     /// <summary>
     /// The localized name ID of this playtime tracker.
-    /// Only useful for jobs that share playtime trackers.
+    /// If this field is left null, it'll default to a list of every job that has this tracker.
     /// </summary>
     [DataField]
     public LocId? Name { get; private set; } = default!;
 
     /// <summary>
-    /// The ID of the department this job is apart of, if any.
-    /// Only useful for jobs that share playtime trackers.
+    /// Whether this tracker should appear in the playtime stats menu.
     /// </summary>
     [DataField]
-    public ProtoId<DepartmentPrototype>? Department { get; private set; } = default!;
+    public bool ShowInStatsMenu { get; private set; } = true;
 }
