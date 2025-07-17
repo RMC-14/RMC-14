@@ -32,7 +32,6 @@
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorHybrisaTMCCMiner
-  equipment:
   inhand:
     - RMCPickaxe
 
