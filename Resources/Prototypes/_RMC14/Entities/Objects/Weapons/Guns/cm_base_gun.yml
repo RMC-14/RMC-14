@@ -71,4 +71,4 @@
     soundAutoEject:
       path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
       params:
-        variation: 0.3
+        variation: 0.2

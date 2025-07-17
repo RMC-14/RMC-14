@@ -52,8 +52,6 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
-  - type: MagazineAmmoProvider
-    autoEject: true
   - type: RMCAmmoEject
   - type: Appearance
   - type: RMCNameItemOnVend
