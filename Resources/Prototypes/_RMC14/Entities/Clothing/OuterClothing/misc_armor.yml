@@ -13,3 +13,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC_alt.rsi
+
+- type: entity
+  parent: RMCBaseMarineArmor
+  id: RMCArmorParamedic
+  name: EMT - Paramedic utility fatigues
+  description: A set of EMT - Paramedic utility fatigues, this one is red.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi

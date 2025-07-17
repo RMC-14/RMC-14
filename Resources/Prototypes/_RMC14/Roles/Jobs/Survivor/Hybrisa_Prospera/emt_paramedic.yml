@@ -60,8 +60,4 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
-    - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
-    - [ CMScrubsGreen, RMCLabcoat ]
-    - [ CMScrubsGreen, RMCLabcoat ]
-    - [ RMCJumpsuitDoctor, RMCBeltMedicalDefibAnalyzerFilled, RMCHazardVestEMT ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT14 ]
