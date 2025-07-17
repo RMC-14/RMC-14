@@ -348,7 +348,7 @@
 
 - type: entity
   parent: RMCBoxPizzaGalaxy
-  id: RMCBoxPizzaMushroom
+  id: RMCBoxPizzaGalaxyMushroom
   suffix: Galaxy, Mushroom Special
   components:
   - type: StorageFill
