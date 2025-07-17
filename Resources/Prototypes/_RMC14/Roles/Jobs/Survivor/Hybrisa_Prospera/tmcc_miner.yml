@@ -30,9 +30,8 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCSurvivorGearBaseNoBackpack
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorHybrisaTMCCMiner
-  equipment:
   inhand:
     - RMCPickaxe
 

@@ -27,7 +27,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCSurvivorGearBaseNoBackpack
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorHybrisaOfficeWorker
 
 - type: entity
@@ -47,7 +47,7 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetHybrisaOfficeWorker
   name: hybrisa office worker preset
   categories: [ HideSpawnMenu ]
