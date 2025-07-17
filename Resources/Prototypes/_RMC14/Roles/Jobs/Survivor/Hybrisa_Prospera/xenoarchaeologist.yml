@@ -58,5 +58,7 @@
   - type: SurvivorPreset
     randomOutfits:
     - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
+    - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
+    - [ RMCSatchelLightpack, RMCJumpsuitCivilianScientist, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
     - [ RMCSatchelLightpack, RMCJumpsuitCivilianScientist, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
     - [ RMCSatchelLightpack, RMCJumpsuitCivilianScientist, RMCSuitBioWeYa, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCHoodBioWeYa, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCToolSpade, RMCFlashlightLantern ]
