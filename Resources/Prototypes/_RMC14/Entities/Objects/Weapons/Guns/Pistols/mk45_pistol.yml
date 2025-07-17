@@ -14,6 +14,9 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.2
     accuracyMultiplierUnwielded: 0.85
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_kt42.ogg
   - type: PumpAction
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg
@@ -25,9 +28,6 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45.rsi
-  - type: MagazineAmmoProvider
-    autoEject: false
-    soundAutoEject: null
   - type: ItemSlots
     slots:
       gun_magazine:

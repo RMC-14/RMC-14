@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseWeaponRifle
+  parent: RMCBaseWeaponRifleNoMagazineProvider
   name: XM88 Heavy Rifle
   id: WeaponRifleXM88
   description: An experimental man-portable anti-materiel rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
