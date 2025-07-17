@@ -3,7 +3,7 @@
   id: CMJobSurvivorFireProtectionSpecialistHybrisa
   name: rmc-job-name-survivor-fire-protection-specialist-hybrisa
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorFireProtectionSpecialist
+  playTimeTracker: CMJobSurvivorFireProtectionSpecialistHybrisa
   startingGear: RMCGearSurvivorFireProtectionSpecialist
   spawnMenuRoleName: Fire Protection Specialist (Sorokyne Survivor)
   special:
@@ -45,7 +45,7 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorFireProtectionSpecialist
+  id: CMJobSurvivorFireProtectionSpecialistHybrisa
   isHumanoid: true
 
 - type: entity
