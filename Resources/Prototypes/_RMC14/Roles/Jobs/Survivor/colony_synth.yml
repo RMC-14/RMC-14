@@ -1,9 +1,9 @@
 - type: job
   parent: CMJobBase
   id: RMCJobSyntheticColony
-  playTimeTracker: RMCJobSyntheticColony
   name: rmc-job-name-synth-colony
   description: rmc-job-description-synth-colony
+  playTimeTracker: RMCJobSyntheticColony
   ranks:
     RMCRankSyntheticColonist: []
   startingGear: RMCGearSyntheticColonist
