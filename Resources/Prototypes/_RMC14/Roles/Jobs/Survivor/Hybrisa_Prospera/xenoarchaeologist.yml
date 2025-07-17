@@ -32,9 +32,6 @@
 - type: startingGear
   parent: RMCSurvivorGearBaseNoBackpack
   id: RMCGearSurvivorHybrisaXenoarchaeologist
-  equipment:
-    shoes: RMCShoesWhite
-    back: CMSatchelMedical
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -60,4 +57,4 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]

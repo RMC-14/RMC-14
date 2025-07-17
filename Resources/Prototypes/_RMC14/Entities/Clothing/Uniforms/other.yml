@@ -365,7 +365,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitWeyamart
   name: Weyamart uniform
   description: A pair of dark-grey slacks and an orange button-down shirt; a standard uniform for the Weston-Yamada branded supermarket 'Weyamart'.
@@ -376,7 +376,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitSanitation
   name: Weston-Yamada RFF - sanitation uniform
   description: A set of Weston-Yamada RFF - Sanitation fatigues, a green pair of work slacks and a grey polo-shirt with green reflecting stripes.
@@ -387,7 +387,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitPizzaGalaxy
   name: Pizza-Galaxy uniform
   description: A pair of red slacks and a white button-down shirt with a large 'Pizza-Galaxy' logo on the back; a standard uniform for a Pizza-Galaxy employee. Pizza-Galaxy! To infinity and beyond!
@@ -398,7 +398,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitDailyGrind
   name: The Daily Grind uniform
   description: A pair of black slacks and a white short-sleeved button-down shirt; a standard uniform for a 'The Daily Grind' employee. Are you ready for the daily grind?
@@ -409,7 +409,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitTMCC
   name: tartarus-mining uniform
   description: A set of Tartarus-Mining fatigues, a yellow pair of utility work slacks and a light-grey polo-shirt with red reflecting stripes.
@@ -431,7 +431,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/doctor.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitEMT
   description: A set of EMT - Paramedic fatigues, this one is green.
   components:
@@ -441,7 +441,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
 
 - type: entity
-  parent: RMCJumpsuitEMT
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitEMTGreen
   name: EMT - Paramedic uniform
   description: A set of EMT - Paramedic fatigues, this one is red.
