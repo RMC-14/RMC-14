@@ -92,8 +92,8 @@
   description: A highly specified technical manual, may be of use to someone in the relevant field.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/books.rsi
-    state: book
+    sprite: _RMC14/Objects/Misc/Books/Other/book.rsi
+    state: icon
   - type: Item
     size: Tiny
   - type: IntelReadObjective

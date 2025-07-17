@@ -949,6 +949,12 @@
         recommended: true
       - id: RMCWebbingDropPouch
       - id: CMWebbingHolster
+    - name: Books
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////

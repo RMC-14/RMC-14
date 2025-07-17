@@ -83,6 +83,11 @@
       - id: CMWebbingHolster
       - id: CMWebbing
       - id: RMCWebbingDropPouch
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
+
 
 - type: entity
   parent: ColMarTechBase
