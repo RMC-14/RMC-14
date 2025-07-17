@@ -115,6 +115,9 @@ CMJobSurvivorHybrisaEMTParamedic = EMT - Paramedic
 rmc-job-name-survivor-xenoarchaeologist = Xenoarchaeologist
 CMJobSurvivorHybrisaXenoarchaeologist = Xenoarchaeologist
 
+rmc-job-name-survivor-xenobiologist = Xenobiologist
+CMJobSurvivorHybrisaXenobiologist = Xenobiologist
+
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
 
 rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
