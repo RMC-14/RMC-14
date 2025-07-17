@@ -60,6 +60,33 @@
       amount: 1
 
 - type: entity
+  parent: CMBeltMedicalFilled
+  id: RMCBeltMedicalDefibAnalyzerFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: CMBurnKit10
+      amount: 1
+    - id: CMTraumaKit10
+      amount: 1
+    - id: CMBaseDefibrillator
+      amount: 1
+    - id: CMHealthAnalyzer
+      amount: 1
+
+- type: entity
   parent: CMBeltMedicBag
   id: CMBeltMedicBagFilled
   suffix: Filled

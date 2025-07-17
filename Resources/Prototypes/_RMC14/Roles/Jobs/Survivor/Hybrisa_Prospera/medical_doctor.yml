@@ -60,4 +60,6 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPickaxe, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
+    - [ CMScrubsGreen, RMCLabcoat ]
+    - [ RMCJumpsuitDoctor, RMCBeltMedicalDefibAnalyzerFilled, RMCHazardVestEMT ]

@@ -419,6 +419,15 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitDoctor
+  name: medical doctor's uniform
+  description: They're made of a special fiber that provides minor protection against biohazards. They have a cross on the chest denoting that the wearer is trained medical personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/doctor.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase

@@ -115,6 +115,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/tmcc.rsi
 
+- type: entity
+  parent: RMCHazardVest
+  id: RMCHazardVestEMT
+  name: EMT - red hazard vest
+  description: A red and white EMT high-visibility hazard vest used in work zones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/emt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/emt.rsi
+
 # Labcoats + Medical Apron
 - type: entity
   parent: [RMCAllowSuitStorageClothingLabcoat, RMCBaseJacketButtonable]
