@@ -31,18 +31,6 @@
 - type: startingGear
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorFireProtectionSpecialistHybrisa
-  equipment:
-    jumpsuit: RMCJumpsuitCivilianBrown
-    shoes: RMCBootsSPP
-    gloves: RMCHandsVeteranSPP
-    back: RMCSatchelLightpack
-    head: RMCArmorHelmetSPPFirefighter
-    outerClothing: RMCArmorSPPFirefighter
-    ears: RMCHeadsetDistressSPP
-  storage:
-    back:
-    - RMCAttachmentUnderbarrelExtinguisher
-    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -68,7 +56,10 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCFireAxe ]
-    - [ CMFireExtinguisherPortable ]
+    - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
+    - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
+    - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
+    - [ RMCArmorHelmetFirefighter, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable]
+    - [ RMCArmorHelmetFirefighter, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable]
 
 

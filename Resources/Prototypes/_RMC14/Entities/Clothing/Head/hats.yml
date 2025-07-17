@@ -751,3 +751,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/pizza_galaxy_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/pizza_galaxy_cap.rsi
+
+- type: entity
+  parent: RMCHeadCapGrey
+  id: RMCHeadCapCargo
+  name: cargo cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap_old.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cargo_cap_old.rsi

@@ -11,3 +11,12 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit.rsi
   - type: CMArmor
     bio: 100 # CLOTHING_ARMOR_HARDCORE
+
+- type: entity
+  parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
+  id: RMCArmorFirefighter
+  name: PT-LT firesuit
+  description: The 'PyroTex LT' is an advanced, lightweight firesuit developed by 'Fujin'. It provides protection against fire and heat, while also offering a degree of protection from blunt force trauma.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/firefighter.rsi
