@@ -56,7 +56,7 @@ public sealed partial class PainComponent : Component
     [DataField, AutoNetworkedField]
     public FixedPoint2 AirlossPainMultiplier = FixedPoint2.Zero;
 
-    [DataField(required: true, serverOnly: true), AutoNetworkedField]
+    [DataField(required: true, serverOnly: true)]
     public List<EntityEffect> PainLevels = [];
 
     [DataField, AutoNetworkedField]
