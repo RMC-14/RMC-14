@@ -140,7 +140,7 @@
   - type: Storage
     maxItemSize: Large
     grid:
-    - 0,0,50,1 # 10 slots
+    - 0,0,19,1 # 10 slots
     whitelist:
       tags:
       - Crowbar
