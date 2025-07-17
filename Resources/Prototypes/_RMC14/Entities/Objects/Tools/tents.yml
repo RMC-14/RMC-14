@@ -213,11 +213,11 @@
       deployArea:
         !type:PhysShapeAabb
         bounds: "-0.4,0.6,1.4,4.4" # The non-perfect rectangle allows the tent to be placed close to the walls
-      skipAreaOccupiedCheck: false
+      areaBlockedCheck: true
       failIfNotSurface: false
       deploySetups:
         - prototype: RMCTentUNMCStandard
-          offset: 0, 0
+          offset: 0, 0 # spawn a tent in the center of the zone
           angle: 0
         - prototype: CMTable
           offset: -0.5, 0.5
@@ -225,7 +225,7 @@
         - prototype: CMTable
           offset: 0.5, 0.5
           angle: 0
-        - prototype: RMCOverwatchConsole
+        - prototype: RMCOverwatchConsoleRotating
           offset: -0.5, 0.5
           angle: 0
         - prototype: RMCRotaryPhone

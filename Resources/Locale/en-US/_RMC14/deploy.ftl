@@ -1,0 +1,3 @@
+rmc-deploy-popup-blocked = Deployment area is blocked!
+rmc-deploy-popup-surface = Deployment area must be on the planet's surface!
+rmc-deploy-popup-start = You begin deployment...

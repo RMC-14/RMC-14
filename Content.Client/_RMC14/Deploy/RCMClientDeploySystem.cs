@@ -6,31 +6,29 @@ using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Deploy;
 
-public sealed class DeployAreaSystem : EntitySystem
+public sealed class RCMClientlDeploySystem : EntitySystem
 {
-    private DeployAreaOverlay? _overlay;
+    private RMCDeployAreaOverlay? _overlay;
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeNetworkEvent<ShowDeployAreaEvent>(OnShowDeployArea);
-        SubscribeNetworkEvent<HideDeployAreaEvent>(OnHideDeployArea);
+        SubscribeNetworkEvent<RMCShowDeployAreaEvent>(OnShowDeployArea);
+        SubscribeNetworkEvent<RMCHideDeployAreaEvent>(OnHideDeployArea);
 
-        _overlay = new DeployAreaOverlay();
+        _overlay = new RMCDeployAreaOverlay();
         IoCManager.Resolve<IOverlayManager>().AddOverlay(_overlay);
     }
 
-    private void OnShowDeployArea(ShowDeployAreaEvent ev)
+    private void OnShowDeployArea(RMCShowDeployAreaEvent ev)
     {
         if (_overlay == null) return;
-        _overlay.Center = ev.Center;
-        _overlay.Width = ev.Width;
-        _overlay.Height = ev.Height;
+        _overlay.Box = ev.Box;
         _overlay.Color = ev.Color;
         _overlay.Visible = true;
     }
 
-    private void OnHideDeployArea(HideDeployAreaEvent ev)
+    private void OnHideDeployArea(RMCHideDeployAreaEvent ev)
     {
         if (_overlay == null) return;
         _overlay.Visible = false;
