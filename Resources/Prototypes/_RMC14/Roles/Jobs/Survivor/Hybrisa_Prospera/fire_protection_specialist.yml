@@ -1,10 +1,10 @@
 - type: job
   parent: CMSurvivor
-  id: RMCSurvivorFireProtectionSpecialistHybrisa
+  id: RMCSurvivorHybrisaFireProtectionSpecialist
   name: rmc-job-name-survivor-fire-protection-specialist-hybrisa
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorFireProtectionSpecialistHybrisa
-  startingGear: RMCGearSurvivorFireProtectionSpecialistHybrisa
+  playTimeTracker: CMJobSurvivorHybrisaFireProtectionSpecialist
+  startingGear: RMCGearSurvivorHybrisaFireProtectionSpecialist
   spawnMenuRoleName: Fire Protection Specialist (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
@@ -16,7 +16,7 @@
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetFireProtectionSpecialistHybrisa
+      preset: RMCGearSurvivorPresetHybrisaFireProtectionSpecialist
     - type: RMCSurvivor
     - type: RMCRibbon
     - type: MotionDetectorTracked
@@ -30,11 +30,11 @@
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
-  id: RMCGearSurvivorFireProtectionSpecialistHybrisa
+  id: RMCGearSurvivorHybrisaFireProtectionSpecialist
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorFireProtectionSpecialistHybrisa
+  id: RMCSpawnPointSurvivorHybrisaFireProtectionSpecialist
   name: hybrisa fire protection specialist spawn point
   components:
   - type: SpawnPoint
@@ -45,12 +45,12 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorFireProtectionSpecialistHybrisa
+  id: CMJobSurvivorHybrisaFireProtectionSpecialist
   isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian
-  id: RMCGearSurvivorPresetFireProtectionSpecialistHybrisa
+  id: RMCGearSurvivorPresetHybrisaFireProtectionSpecialist
   name: hybrisa fire protection specialist preset
   categories: [ HideSpawnMenu ]
   components:

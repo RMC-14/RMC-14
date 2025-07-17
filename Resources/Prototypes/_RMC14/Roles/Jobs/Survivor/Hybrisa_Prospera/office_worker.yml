@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivor
-  id: CMJobSurvivorHybrisaOfficeWorker
+  id: RMCSurvivorHybrisaOfficeWorker
   name: rmc-job-name-survivor-hybrisa-office-worker
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHybrisaOfficeWorker
