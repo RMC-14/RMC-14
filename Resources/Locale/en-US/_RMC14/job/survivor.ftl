@@ -112,8 +112,8 @@ CMJobSurvivorHybrisaMedicalDoctor = Doctor
 rmc-job-name-survivor-emt-paramedic = EMT - Paramedic
 CMJobSurvivorHybrisaEMTParamedic = EMT - Paramedic
 
-rmc-job-name-survivor-xenoarchaeologist = Civilian - The Daily Grind Barista
-CMJobSurvivorHybrisaXenoarchaeologist = Civilian - The Daily Grind Barista
+rmc-job-name-survivor-xenoarchaeologist = Xenoarchaeologist
+CMJobSurvivorHybrisaXenoarchaeologist = Xenoarchaeologist
 
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
 
