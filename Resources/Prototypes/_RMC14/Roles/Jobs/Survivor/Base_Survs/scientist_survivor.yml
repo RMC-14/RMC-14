@@ -38,6 +38,7 @@
     shoes: RMCShoesGreen
     back: RMCSatchelVirologyFill
     id: RMCIDCardColonistScientist
+    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchMedicalFill
     mask: CMMaskSterile
 

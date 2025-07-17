@@ -9,17 +9,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/pizza.rsi
 
-- type: entity
-  parent: RMCMarineUniformBase
-  id: RMCJumpsuitMarshal
-  name: marshal uniform
-  description: A pair of off-white slacks and a blue button-down shirt with a dark brown tie; the standard uniform of the Marshals.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/marshal.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/marshal.rsi
-
 # Correspondent
 - type: entity
   parent: RMCMarineUniformBase
