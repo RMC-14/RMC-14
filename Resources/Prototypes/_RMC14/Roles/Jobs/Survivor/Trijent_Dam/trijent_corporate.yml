@@ -5,8 +5,6 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorTrijentCorporate
   spawnMenuRoleName: Trijent Corporation Liaison (Trijent Survivor)
-  ranks:
-    RMCRankWeYaExecutive: []
   startingGear: RMCGearSurvivorTrijentCorporate
   special:
   - !type:AddComponentSpecial
