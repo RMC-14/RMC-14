@@ -61,3 +61,14 @@
   - type: Projectile
     soundHit:
       path: /Audio/_RMC14/Bullets/bullet_impact1.ogg
+
+- type: entity
+  abstract: true
+  id: RMCBaseWeaponGunMagazineProvider
+  components:
+  - type: MagazineAmmoProvider
+    autoEject: true
+    soundAutoEject:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+      params:
+        variation: 0.3
