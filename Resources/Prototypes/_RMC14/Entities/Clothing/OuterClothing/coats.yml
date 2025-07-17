@@ -678,6 +678,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCClothingNunRobes
+  name: nun robes
+  description: Maximum piety in this star system
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Misc/nunrobe.rsi
+
 # Hybrisa
 
 - type: entity
