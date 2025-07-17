@@ -30,7 +30,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCSurvivorGearBase
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorHybrisaEMTParamedic
   equipment:
     shoes: RMCShoesWhite

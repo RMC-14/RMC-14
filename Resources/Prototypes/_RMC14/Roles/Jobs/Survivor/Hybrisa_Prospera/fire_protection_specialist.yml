@@ -29,7 +29,7 @@
       prefix: rmc-job-prefix-fire-protection-specialist-hybrisa
 
 - type: startingGear
-  parent: RMCSurvivorGearBaseNoBackpack
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorFireProtectionSpecialistHybrisa
 
 - type: entity

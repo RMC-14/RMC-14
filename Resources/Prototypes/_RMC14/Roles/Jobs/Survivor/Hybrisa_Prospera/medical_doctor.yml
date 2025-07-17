@@ -29,7 +29,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  parent: RMCSurvivorGearBase
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorHybrisaMedicalDoctor
   equipment:
     gloves: CMHandsLatex
