@@ -4,7 +4,7 @@
   name: rmc-job-name-survivor-fire-protection-specialist-hybrisa
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorFireProtectionSpecialistHybrisa
-  startingGear: RMCGearSurvivorFireProtectionSpecialist
+  startingGear: RMCGearSurvivorFireProtectionSpecialistHybrisa
   spawnMenuRoleName: Fire Protection Specialist (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
@@ -16,7 +16,7 @@
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetFireProtectionSpecialist
+      preset: RMCGearSurvivorPresetFireProtectionSpecialistHybrisa
     - type: RMCSurvivor
     - type: RMCRibbon
     - type: MotionDetectorTracked
