@@ -3,7 +3,7 @@
   id: RMCSyntheticColonyHybrisaXenoarch
   playTimeTracker: RMCJobSyntheticColonyHybrisaXenoarch
   startingGear: RMCGearSyntheticColonistHybrisaXenoarch
-  spawnMenuRoleName: Xenoarch Synthetic (Hybrisa Survivor)
+  spawnMenuRoleName: Xenoarchaeologist Synthetic (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
