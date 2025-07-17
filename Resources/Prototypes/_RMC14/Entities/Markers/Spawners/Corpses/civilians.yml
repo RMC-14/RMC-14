@@ -57,7 +57,7 @@
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseDeputy
-  name: Corpse Spawner - Bureau Deputy
+  name: Corpse Spawner - CMB Deputy
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseDeputy
