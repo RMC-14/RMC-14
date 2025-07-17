@@ -212,7 +212,7 @@
   components:
   - type: WebbingClothing
     startingWebbing: CMWebbingBrown
- 
+
 - type: entity
   parent: CMJumpsuitLiaison
   id: RMCJumpsuitLiaisonExpensiveSuit
@@ -226,6 +226,14 @@
 
 - type: entity
   parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
   id: RMCJumpsuitLiaisonExpensiveSuitBrown
   suffix: Brown
   components:
@@ -233,6 +241,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_two.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_two.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuitBrown
+  id: RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
 
 - type: entity
   parent: RMCJumpsuitLiaisonExpensiveSuit
@@ -245,6 +261,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_three.rsi
 
 - type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuitJacket
+  id: RMCJumpsuitLiaisonExpensiveSuitJacketDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
+
+- type: entity
   parent: RMCJumpsuitLiaisonExpensiveSuit
   id: RMCJumpsuitLiaisonExpensiveSuitBrownJacket
   suffix: Jacket
@@ -253,6 +277,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_four.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_four.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuitBrownJacket
+  id: RMCJumpsuitLiaisonExpensiveSuitBrownJacketDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
 
 - type: entity
   parent: RMCJumpsuitLiaisonExpensiveSuit
@@ -265,6 +297,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_five.rsi
 
 - type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitJacketOnlyDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
+
+- type: entity
   parent: CMJumpsuitLiaison
   id: RMCJumpsuitLiaisonPilot
   name: Weston-Yamada Pilot uniform
@@ -274,7 +314,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pilot.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pilot.rsi
-    
+
 - type: entity
   parent: RMCJumpsuitLiaisonGreenWorkwear
   id: RMCJumpsuitLiaisonKhakiWorkwear

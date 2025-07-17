@@ -1,21 +1,9 @@
 - type: job
-  parent: CMJobBase
-  id: RMCJobSyntheticColony
-  name: rmc-job-name-synth-colony
-  description: rmc-job-description-synth-colony
-  playTimeTracker: RMCJobSyntheticColony
-  ranks:
-    RMCRankSyntheticColonist: []
-  startingGear: RMCGearSyntheticColonist
-  icon: "RMCJobIconSynth"
-  requireAdminNotify: true
-  joinNotifyCrew: true
-  whitelisted: true
-  supervisors: cm-job-supervisors-colonists
-  accessGroups:
-  - Colonist
-  - Synth
-  roleWeight: 0.25
+  parent: RMCJobSyntheticColony
+  id: RMCSyntheticColonyHybrisaExecBodyguard
+  playTimeTracker: RMCJobSyntheticColonyHybrisaExecBodyguard
+  startingGear: RMCGearSyntheticColonistHybrisaExecBodyguard
+  spawnMenuRoleName: Executive Bodyguard (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,7 +30,6 @@
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
-    - type: RMCRibbon
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
@@ -66,6 +53,8 @@
       damage:
         types:
           Blunt: 35
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaSynthExecBodyguard
     - type: Synth
       generation: rmc-species-synth-generation-second
       welderDamageToRepair:
@@ -102,35 +91,32 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
-  hidden: true
-
-- type: startingGear
-  id: RMCGearSyntheticColonistBase
-  equipment:
-    id: RMCIDCardSynthColony
-    ears: CMHeadsetColony
-    belt: CMBeltUtilityFilled
-    pocket1: RMCPouchSurvivalSynthFill
-    pocket2: RMCPouchToolsFill
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
-  id: RMCGearSyntheticColonist
+  id: RMCGearSyntheticColonistHybrisaExecBodyguard
   equipment:
-    jumpsuit: RMCJumpsuitSynthetic
-    gloves: CMHandsInsulated
-    shoes: CMBootsBlackFilled
-
-- type: entity
-  parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSynthColonist
-  name: synthetic colonist spawn point
-  components:
-  - type: SpawnPoint
-    job_id: RMCJobSyntheticColony
-  - type: Sprite
-    state: syn_spawn
+    outerClothing: RMCHazardVestBlack
+  inhand:
+    - RMCScabbardMacheteFilled
 
 - type: playTimeTracker
-  id: RMCJobSyntheticColony
+  id: RMCJobSyntheticColonyHybrisaExecBodyguard
   isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetHybrisaSynthExecBodyguard
+  name: survivor synth hybrisa executive bodyguard preset
+  categories: [ HideSpawnMenu ] # Todo random research notes, telebaton in backpack
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCJumpsuitLiaisonExpensiveSuitDropPouch, RMCSatchelBlack, RMCBootsCorporate ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch, RMCSatchelBlack, CMBootsBrownFilled ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacketDropPouch, CMSatchel, RMCBootsPMCFilled ] # todo lockable satchel
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrownJacketDropPouch, CMSatchel, RMCBootsCorporate ] # Todo lockable satchel
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacketOnlyDropPouch, RMCSatchelNorm, RMCBootsCorporate ]
+    randomStartingGear:
+      eyes:
+      - CMGlassesSecurity
+      - RMCGlassesSecurityBlue
