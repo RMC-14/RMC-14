@@ -2,83 +2,71 @@
 - type: loadout
   id: SquadBeretRMC
   cost: 2
-  storage:
-    back:
-    - RMCHeadBeretSquad
+  equipment:
+    head: RMCHeadBeretSquad
 
 - type: loadout
   id: GreenBeretRMC
   cost: 2
-  storage:
-    back:
-    - RMCHeadBeretGreen
+  equipment:
+    head: RMCHeadBeretGreen
 
 - type: loadout
   id: TanBeretRMC
   cost: 2
-  storage:
-    back:
-    - CMHeadBeretTan
+  equipment:
+    head: CMHeadBeretTan
 
 - type: loadout
   id: BoonieRMC
   cost: 2
-  storage:
-    back:
-    - RMCBoonie
+  equipment:
+    head: RMCBoonie
 
 - type: loadout
   id: BoonieTanRMC
   cost: 2
-  storage:
-    back:
-    - RMCBoonieTan
+  equipment:
+    head: RMCBoonieTan
 
 - type: loadout
   id: CapRMC
   cost: 2
-  storage:
-    back:
-    - RMCHeadCapFlippable
+  equipment:
+    head: RMCHeadCapFlippable
 
 - type: loadout
   id: BrownHeadbandRMC
   cost: 2
-  storage:
-    back:
-    - CMHeadBandBrown
+  equipment:
+    head: CMHeadBandBrown
 
 - type: loadout
   id: GreenHeadbandRMC
   cost: 2
-  storage:
-    back:
-    - CMHeadBandGreen
+  equipment:
+    head: CMHeadBandGreen
 
 - type: loadout
   id: GrayHeadbandRMC
   cost: 2
-  storage:
-    back:
-    - CMHeadBandGray
+  equipment:
+    head: CMHeadBandGray
 
 - type: loadout
   id: RedHeadbandRMC
   cost: 2
-  storage:
-    back:
-    - CMHeadBandRed
+  equipment:
+    head: CMHeadBandRed
 
 - type: loadout
   id: TanHeadbandRMC
   cost: 2
-  storage:
-    back:
-    - CMHeadBandTan
+  equipment:
+    head: CMHeadBandTan
 
 - type: loadout
   id: SquadHeadbandRMC
   cost: 2
-  storage:
-    back:
-    - RMCHeadBandSquad
+  equipment:
+    head: RMCHeadBandSquad

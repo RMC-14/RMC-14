@@ -27,6 +27,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetCargoTechnician
+  useLoadoutOfJob: CMSurvivorEngineer
 
 - type: startingGear
   id: RMCGearSurvivorCargoTechnician

@@ -58,4 +58,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// </summary>
     [DataField]
     public SoundSpecifier LatejoinArrivalSound { get; private set; } = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/sound_misc_boatswain.ogg");
+
+    [DataField]
+    public ProtoId<JobPrototype>? UseLoadoutOfJob;
 }
