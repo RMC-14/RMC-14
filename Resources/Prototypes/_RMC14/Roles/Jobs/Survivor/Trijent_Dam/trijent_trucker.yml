@@ -32,7 +32,7 @@
   parent: RMCGearSurvivorTrucker
   id: RMCGearSurvivorTrijentTrucker
   equipment:
-    head: RMCTruckerCapBlue
+   # head: RMCHeadCapTruckerBlue
     jumpsuit: RMCJumpsuitLiaisonGreenWorkwear
     outerClothing: RMCCoatBomberGrey
     # hand: Vehicle Wheels

@@ -261,23 +261,6 @@
       Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
 
-- type: entity
-  parent: RMCHeadCapFlippable
-  id: RMCTruckerCapBlue
-  name: blue trucker cap
-  description: It's a blue trucker cap.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
-      Desert: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
-      Snow: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
-      Classic: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
-      Urban: _RMC14/Objects/Clothing/Head/Hats/truckercap_bluesoft.rsi
 
 - type: entity
   parent: RMCHeadCapFlippable
