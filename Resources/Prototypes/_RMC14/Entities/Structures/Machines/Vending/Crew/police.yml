@@ -78,6 +78,10 @@
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
 
 # WARDEN
 - type: entity
@@ -151,3 +155,7 @@
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
