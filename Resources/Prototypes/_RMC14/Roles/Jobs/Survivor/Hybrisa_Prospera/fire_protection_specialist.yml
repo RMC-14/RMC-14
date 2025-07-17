@@ -5,7 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorFireProtectionSpecialistHybrisa
   startingGear: RMCGearSurvivorFireProtectionSpecialist
-  spawnMenuRoleName: Fire Protection Specialist (Sorokyne Survivor)
+  spawnMenuRoleName: Fire Protection Specialist (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
