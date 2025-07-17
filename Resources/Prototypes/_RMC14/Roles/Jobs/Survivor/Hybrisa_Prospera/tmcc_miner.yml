@@ -61,7 +61,14 @@
   - type: SurvivorPreset
     randomOutfits:
     - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ RMCArmorHelmetTMCCMiner, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ RMCArmorHelmetTMCCMiner, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
     - [ RMCArmorHelmetTMCCMiner, RMCJumpsuitTMCC, CMSatchelEngineer, RMCArmorTMCCAlt, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
     - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMBackpackEngineer, RMCHazardVestTMCC, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMBackpackEngineer, RMCHazardVestTMCC, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ RMCHardhatRedTMCC, RMCJumpsuitTMCC, CMBackpackEngineer, RMCHazardVestTMCC, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat ]
+    - [ CMBackpackEngineer, RMCJumpsuitTMCC, RMCArmorTMCC, RMCArmorHelmetTMCCMiner, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat, WeaponRifleMAR40, RMCPouchMagazineFilledMAR40Ext ]
     - [ CMBackpackEngineer, RMCJumpsuitTMCC, RMCArmorTMCC, RMCArmorHelmetTMCCMiner, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat, WeaponRifleMAR40, RMCPouchMagazineFilledMAR40Ext ]
     - [ RMCSatchelLightpack, RMCPouchToolsFill, RMCJumpsuitTMCC, RMCArmorTMCCAlt, RMCArmorHelmetTMCCMiner, RMCBootsRoyalFilled, RMCHandsVeteranRoyalMarine, RMCWeaponSMGP90, RMCPouchMagazineFilledP90 ]

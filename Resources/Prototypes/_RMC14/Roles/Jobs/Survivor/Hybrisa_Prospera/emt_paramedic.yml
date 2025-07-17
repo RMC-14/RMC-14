@@ -1,0 +1,67 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: RMCSurvivorHybrisaEMTParamedic
+  name: rmc-job-name-survivor-emt-paramedic
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaEMTParamedic
+  startingGear: RMCGearSurvivorHybrisaEMTParamedic
+  spawnMenuRoleName: EMT Paramedic (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaEMTParamedic
+    - type: RMCSurvivor
+    - type: RMCRibbon
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCSurvivorGearBase
+  id: RMCGearSurvivorHybrisaEMTParamedic
+  equipment:
+    shoes: RMCShoesWhite
+    back: CMSatchelMedical
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaEMTParamedic
+  name: emt paramedic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaEMTParamedic
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetHybrisaEMTParamedic
+  name: emt paramedic preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
+    - [ CMMaskSterile, CMHeadCapSurgBlue, CMScrubsBlue ]
+    - [ CMScrubsGreen, RMCLabcoat ]
+    - [ CMScrubsGreen, RMCLabcoat ]
+    - [ RMCJumpsuitDoctor, RMCBeltMedicalDefibAnalyzerFilled, RMCHazardVestEMT ]
