@@ -52,7 +52,7 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetHybrisaWeyamartEmployee
   name: hybrisa weyamart employee preset
   categories: [ HideSpawnMenu ]
@@ -61,4 +61,4 @@
     rareItems:
       RMCExplosivePlastic:
         45: 50 # 10%
-    rareItemCoefficient: 50
+    rareItemCoefficent: 50

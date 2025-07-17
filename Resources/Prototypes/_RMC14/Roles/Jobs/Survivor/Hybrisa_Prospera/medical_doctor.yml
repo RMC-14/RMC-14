@@ -53,7 +53,7 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetHybrisaMedicalDoctor
   name: medical doctor preset
   categories: [ HideSpawnMenu ]

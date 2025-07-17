@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMSurvivor
+  parent: CMSurvivorSecurity
   id: RMCSurvivorHybrisaTSEPAConstable
   name: rmc-job-name-tsepa-constable
   description: cm-job-description-survivor
