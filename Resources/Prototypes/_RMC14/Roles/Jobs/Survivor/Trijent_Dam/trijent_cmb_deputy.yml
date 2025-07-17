@@ -32,6 +32,13 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetTrijentDeputy
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_cmb
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
