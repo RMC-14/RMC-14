@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Client._RMC14.PlayTimeTracking;
 using Content.Shared.CCVar;
 using Content.Shared.Localizations;
 using Content.Shared.Players;
@@ -25,6 +26,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly RMCPlayTimeManager _rmcPlayTime = default!;
 
     private readonly Dictionary<string, TimeSpan> _roles = new();
     private readonly List<string> _roleBans = new();
@@ -44,6 +46,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         _net.RegisterNetMessage<MsgJobWhitelist>(RxJobWhitelist);
 
         _client.RunLevelChanged += ClientOnRunLevelChanged;
+        _rmcPlayTime.Updated += () => Updated?.Invoke();
     }
 
     private void ClientOnRunLevelChanged(object? sender, RunLevelChangedEventArgs e)
@@ -113,6 +116,10 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
     public bool CheckRoleRequirements(JobPrototype job, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
+        reason = null;
+        if (_rmcPlayTime.IsExcluded(job.ID))
+            return true;
+
         var reqs = _entManager.System<SharedRoleSystem>().GetJobRequirement(job);
         return CheckRoleRequirements(reqs, profile, out reason);
     }
