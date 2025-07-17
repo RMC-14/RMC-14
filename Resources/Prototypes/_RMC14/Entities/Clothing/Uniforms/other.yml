@@ -397,6 +397,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitDailyGrind
+  name: The Daily Grind uniform
+  description: A pair of black slacks and a white short-sleeved button-down shirt; a standard uniform for a 'The Daily Grind' employee. Are you ready for the daily grind?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase

@@ -92,7 +92,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/green.rsi
-  
+
 - type: entity
   parent: RMCHazardVest
   id: RMCHazardVestWeyamart
@@ -248,6 +248,17 @@
   id: RMCChefApron
   name: A classic chef's apron
   description: A basic, dull, white chef's apron.
+
+- type: entity
+  parent: RMCMedicalApron
+  id: RMCDailyGrindApron
+  name: red apron
+  description: A basic red apron.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/apron_daily_grind.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/apron_daily_grind.rsi
 
 - type: entity
   parent: [ClothingOuterBase, RMCAllowSuitStorageClothingExternalWebbing]
