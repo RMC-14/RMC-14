@@ -50,7 +50,7 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetScientist
   id: RMCGearSurvivorPresetHybrisaXenoarchaeologist
   name: xenoarchaeologist preset
   categories: [ HideSpawnMenu ]

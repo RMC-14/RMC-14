@@ -53,7 +53,7 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetHybrisaEMTParamedic
   name: emt paramedic preset
   categories: [ HideSpawnMenu ]
