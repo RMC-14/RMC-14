@@ -32,6 +32,8 @@
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorHybrisaXenoarchaeologist
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianScientist
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -50,15 +52,15 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetScientist
   id: RMCGearSurvivorPresetHybrisaXenoarchaeologist
   name: xenoarchaeologist preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
-    - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
-    - [ RMCSatchelLightpack, RMCJumpsuitCivilianScientist, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
-    - [ RMCSatchelLightpack, RMCJumpsuitCivilianScientist, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
-    - [ RMCSatchelLightpack, RMCJumpsuitCivilianScientist, RMCSuitBioWeYa, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCHoodBioWeYa, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCToolSpade, RMCFlashlightLantern ]
+    - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
+    - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
+    - [ RMCSatchelLightpack, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
+    - [ RMCSatchelLightpack, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
+    - [ RMCSatchelLightpack, RMCSuitBioWeYa, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCHoodBioWeYa, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCToolSpade, RMCFlashlightLantern ]
