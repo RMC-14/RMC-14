@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconRifleman
   name: cm-job-name-rifleman
-  playTimeTracker: RMCJobSurvivorRiflemanForecon
   icon: "RMCJobIconForeconRifleman"
   spawnMenuRoleName: FORECON Rifleman (Survivor)
   special:
@@ -36,10 +35,6 @@
       preset: RMCSurvivorPresetForecon
     - type: SpotterWhitelist
   hidden: true
-
-- type: playTimeTracker
-  id: RMCJobSurvivorRiflemanForecon
-  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
