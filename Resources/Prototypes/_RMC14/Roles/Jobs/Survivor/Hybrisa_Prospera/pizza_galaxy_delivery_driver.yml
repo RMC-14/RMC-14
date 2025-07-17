@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivor
-  id: CMJobSurvivorHybrisaPizzaGalaxy
+  id: RMCSurvivorHybrisaPizzaGalaxy
   name: rmc-job-name-survivor-pizza-galaxy
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHybrisaPizzaGalaxy

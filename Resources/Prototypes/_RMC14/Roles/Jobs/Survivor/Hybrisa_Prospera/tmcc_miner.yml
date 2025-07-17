@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivorMiner
-  id: CMJobSurvivorHybrisaTMCCMiner
+  id: RMCSurvivorHybrisaTMCCMiner
   name: rmc-job-name-survivor-tmcc-miner
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHybrisaTMCCMiner

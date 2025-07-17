@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivor
-  id: CMJobSurvivorHybrisaMaterialReprocessingTechnician
+  id: RMCSurvivorHybrisaMaterialReprocessingTechnician
   name: rmc-job-name-survivor-material-reprocessing-technician
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHybrisaMaterialReprocessingTechnician

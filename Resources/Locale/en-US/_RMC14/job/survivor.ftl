@@ -106,6 +106,9 @@ CMJobSurvivorHybrisaGrindBarista = Civilian - The Daily Grind Barista
 rmc-job-name-survivor-tmcc-miner = TMCC - Miner
 CMJobSurvivorHybrisaTMCCMiner = TMCC - Miner
 
+rmc-job-name-survivor-medical-doctor = Doctor
+CMJobSurvivorHybrisaMedicalDoctor = Doctor
+
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
 
 rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer

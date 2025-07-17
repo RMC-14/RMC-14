@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivor
-  id: CMJobSurvivorFireProtectionSpecialistHybrisa
+  id: RMCSurvivorFireProtectionSpecialistHybrisa
   name: rmc-job-name-survivor-fire-protection-specialist-hybrisa
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorFireProtectionSpecialistHybrisa
