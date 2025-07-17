@@ -94,20 +94,6 @@
   id: RMCJobSurvivorCommanderNewVaradero
   isHumanoid: true
 
-- type: entity
-  id: RMCSurvivorPresetNoGun
-  name: no gun colonist preset
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SurvivorPreset
-    randomGear:
-    - [ RMCGrenadeMolotov ]
-    - [ CMPackFlare ]
-    - [ WeaponNailgun ]
-    - [ RMCFireAxe ]
-    - [ CMWelder ] # TODO RMC14 industrial welder
-    - [ CMAdvFirstAidKitFilled ]
-
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconSurvivorCommanderNewVaradero
