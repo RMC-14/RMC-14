@@ -29,6 +29,11 @@
 - type: startingGear
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorHybrisaWeyamartEmployee
+  equipment:
+    head: RMCHeadCapWeyamart
+    jumpsuit: RMCJumpsuitWeyamart
+    outerClothing: RMCHazardVestWeyamart
+    shoes: RMCShoesLaceup
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -53,14 +58,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits:
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup,]
-    - [ RMCHeadCapWeyamart, RMCJumpsuitWeyamart, RMCHazardVestWeyamart, RMCShoesLaceup, RMCExplosivePlastic]
+    rareItems:
+      RMCExplosivePlastic:
+        55: 75 # 10%
+      rareItemCoefficient: 444
