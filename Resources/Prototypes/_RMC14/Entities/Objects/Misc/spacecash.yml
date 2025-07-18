@@ -22,14 +22,14 @@
     count: 1
     baseLayer: base
     layerStates:
-    - spacecash1
-    - spacecash10
-    - spacecash20
-    - spacecash50
-    - spacecash100
-    - spacecash200
-    - spacecash500
-    - spacecash1000
+    - spacecash
+    - spacecash_10
+    - spacecash_20
+    - spacecash_50
+    - spacecash_100
+    - spacecash_200
+    - spacecash_500
+    - spacecash_1000
   - type: PhysicalComposition
     materialComposition:
       Dollar: 1
@@ -57,8 +57,6 @@
 
 - type: Tag
   id: RMCSpaceCash
-
-# TODO RMC14 make different bills
 
 - type: entity
   parent: RMCSpaceCash1
