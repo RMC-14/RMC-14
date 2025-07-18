@@ -20,8 +20,6 @@
     sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
     heldPrefix: packet
     size: Tiny
-  - type: Extractable
-    grindableSolutionName: food
   - type: InjectableSolution
     solution: food
   - type: DrawableSolution

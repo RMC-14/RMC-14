@@ -98,8 +98,6 @@
   - type: FlavorProfile
     flavors:
       - bread
-  - type: Extractable
-    grindableSolutionName: food
   - type: InjectableSolution
     solution: food
   - type: DrawableSolution
