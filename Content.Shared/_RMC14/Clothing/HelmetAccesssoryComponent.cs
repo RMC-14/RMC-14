@@ -16,4 +16,7 @@ public sealed partial class HelmetAccessoryComponent : Component
     // todo add toggle sprites
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? ToggledRsi;
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? HatToggledRsi;
 }
