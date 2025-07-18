@@ -32,6 +32,8 @@
   - type: RMCLoreExaminable
     content: "The United Nations. The most prosperous nation in the universe. Through trials and tribulations, insurgencies and wars, the United Nations has united the people of earth, the people of the galaxy, all together under one banner. This banner.
               This is a nation worth dying for. You will triumph, you will fail, you will live, and you will die, but this flag will stand through it all. Glory to the United Nations."
+    factions:
+    - UNMC
 
 - type: entity
   parent: RMCFlagCarriableBase
