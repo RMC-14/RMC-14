@@ -1,0 +1,59 @@
+- type: entity
+  abstract: true
+  parent: DecalSpawnerBase
+  id: RMCDecalSpawnerBase
+  suffix: RMC14, Blood Splatters
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    radius: 0
+    randomRotation: true
+    cleanable: true
+    deleteSpawnerAfterSpawn: true
+
+- type: entity
+  parent: RMCDecalSpawnerBase
+  id: RMCDecalSpawnerBloodSplatters
+  name: blood spawner
+  suffix: RMC14
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalBloodFloor1
+    - RMCDecalBloodFloor2
+    - RMCDecalBloodFloor3
+    - RMCDecalBloodFloor4
+    - RMCDecalBloodFloor5
+    - RMCDecalBloodFloor6
+    - RMCDecalBloodFloor7
+    
+- type: entity
+  parent: RMCDecalSpawnerBase
+  id: RMCDecalSpawnerXenoSplatters
+  name: xeno blood spawner
+  suffix: RMC14
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalBloodXenonidSplatter1
+    - RMCDecalBloodXenonidSplatter2
+    - RMCDecalBloodXenonidSplatter3
+    - RMCDecalBloodXenonidSplatter4
+    - RMCDecalBloodXenonidSplatter5
+    - RMCDecalBloodXenonidSplatter6
+    
+- type: entity
+  parent: RMCDecalSpawnerBase
+  id: RMCDecalSpawnerOilSplatters
+  name: oil spawner
+  suffix: RMC14
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalOilFloor1
+    - RMCDecalOilFloor2
+    - RMCDecalOilFloor3
+    - RMCDecalOilFloor4
+    - RMCDecalOilFloor5
+    - RMCDecalOilFloor6
+    - RMCDecalOilFloor7
