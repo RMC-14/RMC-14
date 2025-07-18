@@ -372,7 +372,7 @@
     melee: 10
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatASOBlackAlt
   id: RMCCoatASOWhiteAlt
   name: auxiliary support officer white coat
   description: A white coat perfect for sorting papers in colder weather.
@@ -381,8 +381,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
-  - type: CMArmor
-    melee: 10
 
 # Commanding Officer
 - type: entity
