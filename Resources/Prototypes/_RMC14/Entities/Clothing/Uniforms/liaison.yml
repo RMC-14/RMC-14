@@ -204,3 +204,157 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/green_workwear.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonGreenWorkwear
+  id: RMCJumpsuitLiaisonGreenWorkwearBrownWebbing
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingBrown
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonExpensiveSuit
+  name: expensive suit
+  description: A luxurious designer suit, beyond the reach of the average person. It's an exclusive choice for high-level executives and the affluent elite.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitBrown
+  suffix: Brown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_two.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_two.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuitBrown
+  id: RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitJacket
+  suffix: Jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_three.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_three.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuitJacket
+  id: RMCJumpsuitLiaisonExpensiveSuitJacketDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitBrownJacket
+  suffix: Jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_four.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_four.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuitBrownJacket
+  id: RMCJumpsuitLiaisonExpensiveSuitBrownJacketDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitJacketOnly
+  suffix: Jacket Only
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_five.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/expensive_suit_five.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonExpensiveSuit
+  id: RMCJumpsuitLiaisonExpensiveSuitJacketOnlyDropPouch
+  categories: [HideSpawnMenu]
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouch
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonPilot
+  name: Weston-Yamada Pilot uniform
+  description: A pair of grey slacks and a white button-down shirt with a dark-grey tie and golden epaulettes signifying rank; a standard uniform for a commercial grade Weston-Yamada affiliated Pilot.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pilot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pilot.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonGreenWorkwear
+  id: RMCJumpsuitLiaisonKhakiWorkwear
+  name: khaki workwear
+  description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/khaki_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/khaki_workwear.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonGreenWorkwear
+  id: RMCJumpsuitLiaisonPinkWorkwear
+  name: pink workwear
+  description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pink_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/pink_workwear.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonGreyWorkwear
+  name: grey workwear
+  description: A pair of black slacks and a short-sleeve grey workshirt. Standard uniform for Weston-Yamada employees working in colony operations and administration.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/grey_workwear.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/grey_workwear.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonStowaway
+  name: dirty suit
+  description: A stiff, stylish tan suit commonly worn by businessmen from the Weston-Yamada corporation. Expertly crafted to make you look like a prick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi

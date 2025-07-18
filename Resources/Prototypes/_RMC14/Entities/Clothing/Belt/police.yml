@@ -42,38 +42,16 @@
     - 0,0,11,1 # 6 slots
 
 - type: entity
-  parent: CMBeltSecurityMP
-  id: CMBeltSecurityMPFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCWeaponTaser
-    - id: CMFlash
-    - id: CMStunbaton
-    - id: RMCHandcuffs
-#    - id: Pepperspray # TODO RMC14
-#    - id: ForensicScanner # TODO RMC14 cm clue scanner
+  parent: CMBeltSecurity
+  id: RMCBeltSecurityWeYa
+  name: M276-C corporate security rig
+  description: A Weston-Yamada adaptation of the M276 load-bearing equipment, designed for corporate security forces. This modular black rig features multiple pouches for carrying restraints, ammunition, and a mix of lethal and non-lethal equipment for maintaining order.
 
 - type: entity
   parent: CMBeltSecurityMP
   id: CMBeltSecuritySPP
   name: Type 43 military police rig
   description: The Type 43 is the standard load-bearing equipment of the SPP. It consists of a modular belt with various clips. This version is filled with an array of small pouches, meant to carry non-lethal equipment and restraints.
-
-- type: entity
-  parent: CMBeltSecuritySPP
-  id: CMBeltSecuritySPPFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCWeaponTaser
-    - id: CMFlash
-    - id: CMStunbaton
-    - id: RMCHandcuffs
-#    - id: Pepperspray # TODO RMC14
-#    - id: # TODO RMC14 SPP shrapnel revolver magazine
 
 - type: entity
   parent: CMBeltSecurityMP
@@ -85,19 +63,3 @@
     maxItemSize: Normal
     grid:
     - 0,0,15,1 # 8 slots
-
-- type: entity
-  parent: CMBeltSecurityMarshal
-  id: CMBeltSecurityMarshalFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCWeaponTaser
-    - id: CMFlash
-    - id: CMStunbaton
-#    - id: Pepperspray # TODO RMC14
-#    - id: ForensicScanner # TODO RMC14 cm clue scanner
-    - id: RMCHandcuffs
-      amount: 2
-#    - id: # TODO RMC14 FlashBang

@@ -32,7 +32,7 @@
 
 - type: entity
   abstract: true
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetIconsTSE
   id: RMCHeadsetTSEAbstract
   components:
   - type: GrantSquadLeaderTracker

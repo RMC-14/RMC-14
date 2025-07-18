@@ -8,7 +8,7 @@
   ranks:
     RMCRankWeYaOperator: []
   startingGear: RMCJobWeYaGoon
-  icon: CMJobIconLiaison
+  icon: "RMCJobIconPMCGoonStandard"
   joinNotifyCrew: false
   accessGroups:
   - Colony
@@ -92,3 +92,10 @@
       role: CMJobRifleman
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCGoonStandard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_goon_standard

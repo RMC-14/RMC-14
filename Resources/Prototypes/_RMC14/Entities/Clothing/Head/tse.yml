@@ -33,9 +33,32 @@
   parent: RMCHeadCapTSEPA
   id: RMCHeadCapTSEPAPeaked
   name: peaked tsepa cap
-  description: A peaked cap for TSEPA inspectors. Wots all this then?
+  description: A dark peaked cap enscribed with the powerful silver & red Sakura flower shaped emblem of the TSEPA. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  suffix: Silver and Red
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPAPeaked
+  id: RMCHeadCapTSEPAPeakedGoldSilver
+  description: A dark peaked cap enscribed with the powerful silver & gold Sakura flower shaped emblem of the TSEPA. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  suffix: Silver and Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked_rank_2.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked_rank_2.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPAPeaked
+  id: RMCHeadCapTSEPAPeakedGold
+  description: A dark peaked cap enscribed with the powerful red & gold Sakura flower shaped emblem of the TSEPA, more commonly used by higher ranking Constables & TSEPA personnel. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  suffix: Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked_rank_3.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked_rank_3.rsi

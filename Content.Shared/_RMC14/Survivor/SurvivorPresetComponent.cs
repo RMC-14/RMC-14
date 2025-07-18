@@ -26,6 +26,9 @@ public sealed partial class SurvivorPresetComponent : Component
     public List<List<List<EntProtoId>>> RandomGearOther = new();
 
     [DataField, AutoNetworkedField]
+    public bool TryEquipRandomOtherGear = true;
+
+    [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, (int, int)> RareItems = new();
 
     [DataField, AutoNetworkedField]

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/260b6980e0586586046ea3e4d4d92db44b4684af/icons/obj/items/clothing/glasses.dmi, https://github.com/cmss13-devs/cmss13/blob/260b6980e0586586046ea3e4d4d92db44b4684af/icons/mob/humans/onmob/eyes.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-EYES",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK",
+      "directions": 4
+    }
+  ]
+}

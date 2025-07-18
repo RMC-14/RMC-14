@@ -42,11 +42,30 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/black.rsi
 
 - type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackFillSurvivorConstable
+  suffix: Survivor, Constable
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCHandcuffs
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelBlue
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/blue.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelNorm
+  name: satchel
+  description: A trendy-looking satchel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/norm.rsi
 
 - type: entity
   parent: CMSatchel

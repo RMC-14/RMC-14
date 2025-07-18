@@ -2,7 +2,7 @@
   parent: ClothingEyesBase
   id: CMGlassesSecurity
   name: security HUD-glasses
-  description: Sunglasses wired up with the best nano-tech the Marines can muster out on the frontier. Displays information about any person you decree worthy of your gaze.
+  description: Sunglasses wired up with the best nano-tech the UNMC can muster out on the frontier. Displays information about any person you decree worthy of your gaze.
   components:
   - type: Item
     storedRotation: 0
@@ -16,6 +16,16 @@
 #  - type: GuideHelp # TODO RMC14
 #    guides:
 #    - Security
+
+- type: entity
+  parent: CMGlassesSecurity
+  id: RMCGlassesSecurityBlue
+  suffix: Blue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
 
 - type: entity
   parent: [ ClothingEyesBase , ShowMedicalIcons ]
@@ -661,6 +671,17 @@
     slots:
     - EYES
     - MASK
+
+- type: entity
+  parent: RMCGlassesAviators
+  id: RMCGlassesAviatorsSilver
+  description: A pair of silver tinted sunglasses. You can faintly hear 80's music playing while wearing these.
+  suffix: Silver
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators_silver.rsi
 
 - type: entity
   parent: ClothingEyesBase

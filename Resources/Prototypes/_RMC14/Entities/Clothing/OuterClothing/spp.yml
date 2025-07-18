@@ -206,12 +206,3 @@
     bullet: 10
     bio: 10
     explosionArmor: 10
-
-- type: entity
-  parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
-  id: RMCArmorSPPFirefighter
-  name: T-20 fire response coat
-  description: A rugged, no-frills fire-resistant overcoat issued to UPP industrial and emergency crews. Based on the PyroTex LT design but using cheaper, domestically produced materials, it offers basic protection against heat and debris at the cost of weight and comfort.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/firefighter.rsi

@@ -110,3 +110,4 @@
     randomGearOther:
     -
       - [ CMSheetMetal20, RMCMaskGasSPP ]
+    tryEquipRandomOtherGear: false

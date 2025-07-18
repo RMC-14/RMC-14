@@ -1,0 +1,32 @@
+- type: entity
+  parent: CMArmorM3VLBallistics
+  id: RMCArmorTMCC
+  name: Tartarus-Mining utility uniform
+  description: A set of standard issue Tartarus-Mining utility fatigues, a yellow pair of utility work slacks and a black collard heavy padded jacket, which protects against various environmental hazards.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC.rsi
+
+- type: entity
+  parent: RMCArmorTMCC
+  id: RMCArmorTMCCAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC_alt.rsi
+
+- type: entity
+  parent: RMCBaseMarineArmor
+  id: RMCArmorParamedic
+  name: EMT - Paramedic utility fatigues
+  description: A set of EMT - Paramedic utility fatigues, this one is red.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+
+- type: entity
+  parent: RMCArmorParamedic
+  id: RMCArmorParamedicGreen
+  description: A set of EMT - Paramedic utility fatigues, this one is green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi

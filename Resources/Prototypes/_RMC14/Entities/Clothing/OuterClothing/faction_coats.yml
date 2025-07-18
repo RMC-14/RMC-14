@@ -26,7 +26,7 @@
 - type: entity
   parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
   id: RMCCoatBureauDeputy
-  name: bureau deputy jacket
+  name: CMB deputy jacket
   description: A thick and stylish black leather jacket with a Marshal's Deputy badge pinned to it. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
   components:
   - type: Sprite
@@ -40,15 +40,37 @@
     explosionArmor: 10
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatBureauDeputy
   id: RMCCoatBureauMarshal
-  name: bureau marshal jacket
+  name: CMB marshal jacket
   description: A thick and stylish black leather jacket with a Marshal's badge pinned to it. The back is enscribed with the powerful letters of 'MARSHAL' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
+
+# Fur coats
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatExpensiveFur
+  name: expensive fur-lined trench-coat
+  description: A luxurious fur-lined, antique-styled trench coat that exudes classic noir elegance. This exquisite garment is far beyond the average person's budget, accessible only to high-level executives and elite military personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/FurCoat/fur_coat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/FurCoat/fur_coat.rsi
+
+- type: entity
+  parent: RMCCoatExpensiveFur
+  id: RMCCoatExpensiveFurAlt
+  suffix: Alternative
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/FurCoat/fur_coat_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/FurCoat/fur_coat_alt.rsi
 
 # High Command
 
@@ -81,11 +103,10 @@
     foldedEquippedPrefix: jacket
 
 # TSEPA
-
 - type: entity
   parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
   id: RMCCoatTSEPA
-  name: TSEPA jacket
+  name: TSEPA police jacket
   description: A black polyester jacket with a silver Sakura emblem of the TSEPA pinned to it. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
   components:
   - type: Sprite
@@ -97,6 +118,17 @@
     bullet: 15
     bio: 10
     explosionArmor: 10
+
+- type: entity
+  parent: RMCCoatTSEPA
+  id: RMCCoatTSEPAFormal
+  name: TSEPA police formal jacket
+  description: A heavy woolen formal coat commonly used by TSEPA Constables. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/formal_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/formal_jacket.rsi
 
 - type: entity
   parent: RMCCoatTSEPA
@@ -112,7 +144,7 @@
 - type: entity
   parent: RMCCoatTSEPA
   id: RMCCoatTSEPAHighVisVest
-  name: TSEPA high-vis vest
+  name: TSEPA hazard vest
   description: A green and white striped (high-visibility) polyester vest commonly used by TSEPA personnel.
   components:
   - type: Sprite
@@ -132,3 +164,15 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/pap.rsi
+
+# WeYa pilot
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatWeYaPilot
+  name: Weston-Yamada Pilot formal-jacket
+  description: A suit-style jacket with a fur lined collar and golden epaulettes signifying rank. Worn by Weston-Yamada qualified civillian Pilots, akin to old Earth formal Pilots-wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/weya_pilot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/weya_pilot.rsi
