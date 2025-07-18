@@ -36,6 +36,15 @@ public sealed class SurvivorSystem : EntitySystem
         if (!preset.TryGet(out var comp, _prototypes, _compFactory))
             return;
 
+        if (comp.RandomStartingGear.Count > 0)
+        {
+            foreach (var (slot, itemList) in comp.RandomStartingGear)
+            {
+                var randomItem = _random.Pick(itemList);
+                Equip(mob, randomItem, false, slotName: slot);
+            }
+        }
+
         if (comp.RandomOutfits.Count > 0)
         {
             var gear = _random.Pick(comp.RandomOutfits);
@@ -87,9 +96,23 @@ public sealed class SurvivorSystem : EntitySystem
                 }
             }
         }
+
+        var rareItemNumber = _random.Next(1, comp.RareItemCoefficent);
+
+        if (comp.RareItems.Count > 0)
+        {
+            foreach (var (entity, chance) in comp.RareItems)
+            {
+                if (rareItemNumber >= chance.Item1 && rareItemNumber <= chance.Item2)
+                {
+                    Equip(mob, entity, tryInHand: true);
+                    break;
+                }
+            }
+        }
     }
 
-    private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false)
+    private void Equip(EntityUid mob, EntProtoId toSpawn, bool tryStorage = true, bool tryInHand = false, string? slotName = null)
     {
         if (_net.IsClient)
             return;
@@ -99,6 +122,9 @@ public sealed class SurvivorSystem : EntitySystem
         var slots = _inventory.GetSlotEnumerator(mob);
         while (slots.MoveNext(out var slot))
         {
+            if (slotName != null && slot.ID != slotName)
+                continue;
+
             if (slot.ContainedEntity != null)
                 continue;
 

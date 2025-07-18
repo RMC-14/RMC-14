@@ -46,12 +46,17 @@
   hasIcon: false
 
 - type: startingGear
-  id: RMCGearSurvivorBase
+  id: RMCGearSurvivorBaseNoBackpack
   equipment:
-    back: RMCSatchelCivilianFill
     id: CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorBase
+  equipment:
+    back: RMCSatchelCivilianFill
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -72,6 +77,7 @@
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSurvivor
   name: survivor spawn point
+  suffix: Job Spawn, Main
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -94,8 +100,8 @@
   isHumanoid: true
 
 - type: entity
-  id: RMCSurvivorPresetCivilian
-  name: civilian colonist preset
+  id: RMCSurvivorPresetNoGun
+  name: no gun colonist preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
@@ -106,6 +112,14 @@
     - [ RMCFireAxe ]
     - [ RMCWelderIndustrial ]
     - [ CMAdvFirstAidKitFilled ]
+
+- type: entity
+  parent: RMCSurvivorPresetNoGun
+  id: RMCSurvivorPresetCivilian
+  name: civilian colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
     randomWeapon:
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
     - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
@@ -120,7 +134,42 @@
     primaryWeaponChance: 0.6
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetCivilianRareItem
+  name: civilian colonist preset with rare item
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    rareItems:
+      RMCMotionDetectorCompact:
+        1: 4 # 2%
+      RMCDefibrillatorCompact:
+        5: 8 # 2%
+      RMCTankFlamerImprovised:
+        9: 16 # 4%
+      CMPacketGrenadeHighExplosiveFilled:
+        17: 26 # 5%
+      CMTraumaKit10:
+        27: 38 # 6% TODO upgraded trauma kit
+      CMBurnKit10:
+        39: 54 # 8% TODO upgraded ointment
+      RMCAttachmentSuppressor:
+        55: 74 # 10% TODO Attachments box
+      RMCPouchFirstAidERTFill:
+        75: 104 # 15%
+      CMPacketGrenadeFragOldFilled:
+        105: 144 # 20%
+      RMCPowerCellHyper:
+        145: 194 # 25%
+      RMCAttachmentFlashlightGrip:
+        195: 254  # 30%
+      CMSheetMetal30:
+        255: 324 # 35%
+      RMCBinocularsCiv:
+        325: 444 # 45%
+    rareItemCoefficent: 444
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCSurvivorPresetCivilianOutfits
   name: civilian colonist preset with random outfits
   categories: [ HideSpawnMenu ]

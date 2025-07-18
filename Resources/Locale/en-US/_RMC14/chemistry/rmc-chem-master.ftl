@@ -1,4 +1,4 @@
-﻿rmc-chem-master-full-pill-bottles = Machine is fully loaded by pill bottles.
+rmc-chem-master-full-pill-bottles = Machine is fully loaded by pill bottles.
 
 rmc-chem-master-status = [bold]Status[/bold]
 rmc-chem-master-reagent-amount = {$name}, {$amount} units
@@ -19,7 +19,7 @@ rmc-chem-master-pill-bottle-eject = Eject
 rmc-chem-master-pill-bottle-window-title = Pill Bottle Color
 
 rmc-chem-master-beaker-title = [bold]Beaker[/bold]
-rmc-chem-master-beaker-eject = Eject and clear buffer
+rmc-chem-master-beaker-eject = Eject Beaker
 rmc-chem-master-beaker-empty = Beaker is empty.
 
 rmc-chem-master-buffer = [bold]Buffer[/bold]

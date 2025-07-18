@@ -26,6 +26,7 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly SharedRMCWarpSystem _rmcWarp = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     private EntityQuery<AreaGridComponent> _areaGridQuery;
     private EntityQuery<AreaLabelComponent> _areaLabelQuery;
@@ -331,7 +332,7 @@ public sealed class AreaSystem : EntitySystem
                     if (found)
                         continue;
 
-                    var tile = tileRef.GetContentTileDefinition(_tile);
+                    var tile = _turf.GetContentTileDefinition(tileRef);
                     if (tile.MinimapColor != default)
                     {
                         areaGrid.Colors[pos] = tile.MinimapColor;

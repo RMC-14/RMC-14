@@ -104,6 +104,8 @@
       - CMRollerItem
   - type: Foldable
     fitIntoEntityStorage: true
+  - type: CrashLandable
+  - type: AnimationPlayer
 
 - type: entity
   parent: CMBodyBag
@@ -174,6 +176,46 @@
     tags:
     - Trash
 
+- type: entity
+  parent: CMBodyBag
+  id: RMCThermalTarpV2
+  name: V2 reactive thermal tarp
+  description: A tarp carried by some USCM infantry. This updated tarp is capable of blending into its environment nearly flawlessly, given that it can properly collate data once deployed. The tarp is able to hide the wearer's heat signature.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
+    layers:
+    - state: reactivetarp_closed
+      map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
+    - state: reactivetarp_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: reactivetarp_open
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: _RMC14/Objects/Medical/bodybags.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
+    state: reactivetarp_closed
+  - type: RMCPassiveStealth
+    toggleable: true
+    minOpacity: 0.30
+    delay: 15
+    unCloakDelay: 3
+    whitelist:
+      components:
+      - Marine
+  - type: EntityStorageVisuals
+    stateDoorOpen: reactivetarp_open
+
+- type: entity
+  parent: RMCThermalTarpV2
+  id: RMCThermalTarpV2Folded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
 
 - type: entity
   parent: CMBodyBag
@@ -201,6 +243,7 @@
     toggleable: true
     minOpacity: 0.05
     delay: 1.5
+    unCloakDelay: 1.5
     whitelist:
       components:
       - ScoutWhitelist

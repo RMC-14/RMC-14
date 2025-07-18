@@ -9,15 +9,15 @@
   ranks:
     RMCRankWeYaExecutiveSpecialist:
     - !type:RoleTimeRequirement
-      role: CMJobLiaison
+      role: CMJobSurvivorCorporate
       time: 630000 # 175 hours
     RMCRankWeYaSeniorExecutive:
     - !type:RoleTimeRequirement
-      role: CMJobLiaison
+      role: CMJobSurvivorCorporate
       time: 252000 # 70 hours
     RMCRankWeYaExecutive:
     - !type:RoleTimeRequirement
-      role: CMJobLiaison
+      role: CMJobSurvivorCorporate
       time: 90000 # 25 hours
     RMCRankWeYaJuniorExecutive: []
   startingGear: RMCGearSurvivorCorporate
@@ -75,7 +75,8 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetCorporate
-  name: corporate colonist preset # TODO RMC14 random research notes
+  name: corporate colonist preset
+  categories: [ HideSpawnMenu ]   # TODO RMC14 random research notes
 
 - type: entity
   parent: MarkerBase

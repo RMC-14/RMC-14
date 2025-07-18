@@ -16,18 +16,18 @@
     sprite: _RMC14/Objects/Tools/welder.rsi
     layers:
     - state: icon
-      map: ["enum.ToggleVisuals.Toggled"]
+      map: ["enum.ToggleableVisuals.Enabled"]
     - state: welder_on
-      map: ["enum.ToggleVisuals.Layer"]
+      map: ["enum.ToggleableVisuals.Layer"]
       visible: false
       shader: unshaded
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Toggled:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Enabled:
           True: { visible: false }
           False: { visible: true }
-        enum.ToggleVisuals.Layer:
+        enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
   - type: Item
@@ -62,7 +62,7 @@
     components:
     - type: DisarmMalus
       malus: 0.6
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: on
     inhandVisuals:
       left:
@@ -165,9 +165,9 @@
     sprite: _RMC14/Objects/Tools/welder_industrial.rsi
     layers:
     - state: icon
-      map: ["enum.ToggleVisuals.Toggled"]
+      map: ["enum.ToggleableVisuals.Enabled"]
     - state: welder_on
-      map: ["enum.ToggleVisuals.Layer"]
+      map: ["enum.ToggleableVisuals.Layer"]
       visible: false
       shader: unshaded
   - type: Item
