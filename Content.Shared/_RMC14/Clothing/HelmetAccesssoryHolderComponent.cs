@@ -11,7 +11,7 @@ public sealed partial class HelmetAccessoryHolderComponent : Component
     public SlotFlags Slot = SlotFlags.HEAD;
 
     [DataField, AutoNetworkedField]
-    public bool IsHelmet = false;
+    public bool IsHat = true;
 }
 
 public enum HelmetAccessoryLayers
