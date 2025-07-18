@@ -6,9 +6,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/spacecash.rsi
-    state: spacecash1
     layers:
-    - state: spacecash1
+    - state: spacecash
       map: ["base"]
   - type: Item
     size: Tiny
