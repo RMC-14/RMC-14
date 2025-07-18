@@ -24,9 +24,9 @@
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/LV624/gym_alternate.yml"
+    - spawn: "/Maps/_RMC14/Inserts/LV624/corporate_dome.yml"
       probability: 1
-      scenario: asset_protection
+      nightmareScenario: asset_protection
     clearEntities: true
     clearDecals: true
     

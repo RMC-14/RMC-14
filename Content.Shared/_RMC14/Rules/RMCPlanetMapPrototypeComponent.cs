@@ -52,8 +52,8 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     public bool SelectRandomSurvivorInsert = true;
 
     /// <summary>
-    /// List of nightmare scenarios that can occur on this planet, which are used for conditionally spawning map inserts.
-    /// Each scenario has a name and probability of occurrence.
+    /// List of nightmare scenarios that can occur, which are used for conditionally spawning map inserts.
+    /// Only one scenario will be selected using cumulative probability.
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<RMCNightmareScenario>? NightmareScenarios;

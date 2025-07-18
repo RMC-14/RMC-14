@@ -90,18 +90,14 @@ public sealed class MapInsertSystem : EntitySystem
         Vector2 spawnOffset = default;
         foreach (var variation in ent.Comp.Variations)
         {
-            if (variation.NightmareScenario != null &&
-                variation.NightmareScenario != _distressSignal.ActiveNightmareScenario)
-            {
-                continue;
-            }
             cumulativeProbability += variation.Probability;
-            if (forceSpawn ||  cumulativeProbability >= randomProbability)
-            {
-                spawn = variation.Spawn;
-                spawnOffset = variation.Offset;
-                break;
-            }
+            if (!forceSpawn &&
+                ((variation.NightmareScenario != _distressSignal.ActiveNightmareScenario) ||
+                 cumulativeProbability < randomProbability))
+                continue;
+            spawn = variation.Spawn;
+            spawnOffset = variation.Offset;
+            break;
         }
 
         if (spawn == default)
