@@ -291,7 +291,7 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitASOBlack
-  name: aso black uniform
+  name: auxiliary support officer black uniform
   description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black.
   components:
   - type: Sprite
@@ -301,40 +301,43 @@
     foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitASOBlack
   id: RMCJumpsuitASOFormal
-  name: aso formal uniform
+  name: auxiliary support officer formal uniform
   description: A pearly white formal uniform used by Auxiliary Support Officers.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_formal.rsi
   - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitASOBlack
+  id: RMCJumpsuitASOFormalAlt
+  name: auxiliary support officer formal uniform
+  suffix: Alternative
+  description: A pearly white formal uniform with black pants used by Auxiliary Support Officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_formal_alt.rsi
+    
+- type: entity
+  parent: RMCJumpsuitASOBlack
   id: RMCJumpsuitASOBlackAlt
-  name: aso alternative black uniform
+  name: auxiliary support officer black uniform
+  suffix: Alternative
   description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black with green stripes.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_black_alt.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitASOBlack
   id: RMCJumpsuitASOOperations
-  name: aso operations uniform
+  name: auxiliary support officer operations uniform
   description: An operations uniform typically used by Auxiliary Support Officers. This one has a dark blue camo pattern.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_operations.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 # Officer
 - type: entity

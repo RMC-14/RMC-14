@@ -1405,6 +1405,7 @@
       - id: CMJumpsuitBO
       - id: RMCJumpsuitASOBlack
       - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOFormalAlt
       - id: RMCJumpsuitASOBlackAlt
       - id: RMCJumpsuitASOOperations
     - name: Outer Wear
@@ -1416,6 +1417,7 @@
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
+      - id: RMCCoatASOWhiteAlt
     - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1432,7 +1434,7 @@
     - name: Bag
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMHelmet: 1 }
+      choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineTech
       - id: CMSatchel
@@ -1455,15 +1457,14 @@
       - CMAuxiliarySupportOfficer
       choices: { CMHelmet: 1 }
       entries:
+      - id: RMCHeadCapASO
+      - id: RMCHeadCapPeakedASO
+      - id: RMCHeadBeretASO
       - id: RMCHeadBeret
-        recommended: true
       # TODO patrol and officer cap
       - id: RMCHeadCapFlippable
-        recommended: true
       - id: CMHeadCapPeakedService
-        recommended: true
       - id: CMHeadBeretTan
-        recommended: true
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer
