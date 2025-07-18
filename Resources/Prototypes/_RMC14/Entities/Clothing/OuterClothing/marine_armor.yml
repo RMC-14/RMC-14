@@ -679,7 +679,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM35
   name: M35 pyrotechnician armor
-  description: A custom set of M35 armor designed for use by Marine Pyrotechnicians.
+  description: A custom set of M35 armor designed for use by UNMC Pyrotechnicians.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
