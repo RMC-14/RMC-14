@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Server._RMC14.Rules;
 using Content.Server.Decals;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Rules;
@@ -31,10 +32,10 @@ public sealed class MapInsertSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
 
     private MapId? _map;
     private int _index;
-    private string currentMapActiveScenario = "";
 
     private readonly HashSet<EntityUid> _lookupEnts = new();
     private readonly HashSet<EntityUid> _immuneEnts = new();
@@ -89,6 +90,11 @@ public sealed class MapInsertSystem : EntitySystem
         Vector2 spawnOffset = default;
         foreach (var variation in ent.Comp.Variations)
         {
+            if (variation.NightmareScenario != null &&
+                variation.NightmareScenario != _distressSignal.ActiveNightmareScenario)
+            {
+                continue;
+            }
             cumulativeProbability += variation.Probability;
             if (forceSpawn ||  cumulativeProbability >= randomProbability)
             {

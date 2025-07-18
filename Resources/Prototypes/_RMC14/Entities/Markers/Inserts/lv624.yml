@@ -16,7 +16,6 @@
     clearEntities: true
     clearDecals: true
 
-
 - type: entity
   parent: RMCMapInsertBase
   id: RMCMapInsertLV624CorporateDome
@@ -27,9 +26,9 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/LV624/gym_alternate.yml"
       probability: 1
+      scenario: asset_protection
     clearEntities: true
     clearDecals: true
-    scenario: asset_protection
     
 - type: entity
   parent: RMCMapInsertBase

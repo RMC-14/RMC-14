@@ -122,9 +122,6 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
 
     [DataField]
-    public string ActiveNightmareScenario = string.Empty;
-
-    [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
 
     [DataField]
