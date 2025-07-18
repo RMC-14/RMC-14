@@ -2,6 +2,7 @@
   id: RMCFireProp
   name: fire
   description: That isn't going out any time soon.
+  suffix: Prop
   components:
   - type: Physics
     bodyType: Static
