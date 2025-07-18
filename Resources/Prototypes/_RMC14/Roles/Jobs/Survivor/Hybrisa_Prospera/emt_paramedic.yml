@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivorDoctor
-  id: RMCSurvivorHybrisaXenoarchParamedic
+  id: RMCSurvivorHybrisaEMTParamedic
   name: rmc-job-name-survivor-emt-paramedic
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHybrisaEMTParamedic
