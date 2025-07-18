@@ -10,7 +10,7 @@ public sealed partial class HelmetAccessoryHolderComponent : Component
     [DataField, AutoNetworkedField]
     public SlotFlags Slot = SlotFlags.HEAD;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool IsHelmet = false;
 }
 
