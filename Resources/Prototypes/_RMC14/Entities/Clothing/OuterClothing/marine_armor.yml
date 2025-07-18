@@ -694,6 +694,26 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/urban.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: FireProtection
+    reduction: 0.2
+  - type: FirewalkArmor
+    whitelist:
+      components:
+      - PyroWhitelist
+    addComponentsOnFirewalk:
+    - type: RMCImmuneToFireTileDamage
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
+    addComponentsOnEquip:
+    - type: RMCImmuneToIgnition
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
+    auraColor: "03FCC6"
 
 # m45
 - type: entity
