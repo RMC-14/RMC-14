@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
@@ -139,6 +139,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
 
+        SubscribeNetworkEvent<XenoOrderConstructionClickEvent>(OnXenoOrderConstructionClick);
+        SubscribeNetworkEvent<XenoOrderConstructionCancelEvent>(OnXenoOrderConstructionCancel);
+
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key,
             subs =>
             {
@@ -152,6 +155,51 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             });
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
+    }
+
+    private void OnXenoOrderConstructionClick(XenoOrderConstructionClickEvent ev, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { } user ||
+            !TryComp(user, out XenoConstructionComponent? construction))
+        {
+            return;
+        }
+
+        if (!construction.OrderConstructionTargeting || construction.OrderConstructionChoice != ev.StructureId)
+            return;
+
+        var target = GetCoordinates(ev.Target);
+
+        if (!CanOrderConstructionPopup((user, construction), target, ev.StructureId))
+            return;
+
+        var doAfterEvent = new XenoOrderConstructionDoAfterEvent(ev.StructureId, ev.Target);
+        var doAfter = new DoAfterArgs(EntityManager, user, construction.OrderConstructionDelay, doAfterEvent, user)
+        {
+            BreakOnMove = true,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            construction.OrderConstructionTargeting = false;
+            construction.OrderConstructionChoice = null;
+            if (construction.ConfirmOrderConstructionAction != null)
+            {
+                _actions.SetToggled(construction.ConfirmOrderConstructionAction, false);
+            }
+            Dirty(user, construction);
+        }
+    }
+
+    private void OnXenoOrderConstructionCancel(XenoOrderConstructionCancelEvent ev, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not { } user ||
+            !TryComp(user, out XenoConstructionComponent? construction))
+        {
+            return;
+        }
+
+        CancelOrderConstructionTargeting((user, construction));
     }
 
     private void OnXenoStructureDestruction(Entity<XenoAnnounceStructureDestructionComponent> ent, ref DestructionEventArgs args)
@@ -299,7 +347,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             {
                 _actions.SetToggled(xeno.Comp.ConfirmOrderConstructionAction, false);
             }
-            ResetSecreteResinAction(xeno);
         }
 
         Dirty(xeno);
@@ -313,11 +360,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoSecreteStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
     {
-        if (xeno.Comp.OrderConstructionTargeting && xeno.Comp.OrderConstructionChoice != null)
-        {
-            HandleOrderConstructionPlacement(xeno, ref args);
+        if (xeno.Comp.OrderConstructionTargeting)
             return;
-        }
+
         HandleSecreteResinPlacement(xeno, ref args);
     }
 
@@ -425,36 +470,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
     }
 
-    private void UpdateSecreteResinActionForOrderConstruction(Entity<XenoConstructionComponent> xeno, EntProtoId structureId)
-    {
-        foreach (var (actionId, _) in _actions.GetActions(xeno))
-        {
-            if (TryComp<XenoChooseConstructionActionComponent>(actionId, out var chooseAction))
-            {
-                if (_actions.GetAction(actionId) is { } action &&
-                    _prototype.TryIndex(structureId, out var structureProto))
-                {
-                    _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.EntityPrototype(structureId));
-                }
-                break;
-            }
-        }
-    }
-
-    private void ResetSecreteResinAction(Entity<XenoConstructionComponent> xeno)
-    {
-        foreach (var (actionId, _) in _actions.GetActions(xeno))
-        {
-            if (TryComp<XenoChooseConstructionActionComponent>(actionId, out var chooseAction))
-            {
-                if (_actions.GetAction(actionId) is { } action)
-                    Dirty(action);
-
-                break;
-            }
-        }
-    }
-
     public void CancelOrderConstructionTargeting(Entity<XenoConstructionComponent> xeno)
     {
         if (xeno.Comp.OrderConstructionTargeting)
@@ -465,7 +480,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             {
                 _actions.SetToggled(xeno.Comp.ConfirmOrderConstructionAction, false);
             }
-            ResetSecreteResinAction(xeno);
             Dirty(xeno);
         }
     }
@@ -496,7 +510,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         args.Handled = true;
-
+        
         // TODO RMC14 stop collision for mobs until they move off
         if (_net.IsServer)
         {
@@ -538,13 +552,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
         Dirty(xeno);
 
-        UpdateSecreteResinActionForOrderConstruction(xeno, args.StructureId);
-
         var ev = new XenoConstructionChosenEvent(args.StructureId, xeno.Owner);
         foreach (var (id, _) in _actions.GetActions(xeno))
         {
             RaiseLocalEvent(id, ref ev);
         }
+
+        _ui.CloseUi(xeno.Owner, XenoOrderConstructionUI.Key);
     }
 
     private void OnXenoOrderConstructionDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoOrderConstructionDoAfterEvent args)
@@ -554,12 +568,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
         var target = GetCoordinates(args.Coordinates);
-        if (!xeno.Comp.CanOrderConstruction.Contains(args.StructureId) ||
-            !CanOrderConstructionPopup(xeno, target, args.StructureId) ||
-            !TryComp(xeno, out XenoPlasmaComponent? plasma))
-        {
+
+        if (!xeno.Comp.CanOrderConstruction.Contains(args.StructureId))
             return;
-        }
+
+        if (!CanOrderConstructionPopup(xeno, target, args.StructureId))
+            return;
+
+        if (!TryComp(xeno, out XenoPlasmaComponent? plasma))
+            return;
 
         if (!_prototype.TryIndex(args.StructureId, out var prototype))
             return;
@@ -573,8 +590,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        args.Handled = true;
-
         if (_net.IsClient)
             return;
 
@@ -586,9 +601,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _adminLogs.Add(LogType.RMCXenoOrderConstruction, $"Xeno {ToPrettyString(xeno):xeno} ordered construction of {ToPrettyString(structure):structure} at {coordinates}");
 
         if (!_prototype.TryIndex(args.StructureId, out var structureProto))
-        {
             return;
-        }
 
         string msg;
         if (TryComp(structure, out HiveConstructionLimitedComponent? hiveLimitedComp) &&
@@ -605,9 +618,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var areaName = "Unknown";
         if (_area.TryGetArea(target, out _, out var areaProto))
-        {
             areaName = areaProto.Name;
-        }
 
         msg = Loc.GetString("rmc-xeno-order-construction-structure-designated", ("construct", structureProto.Name), ("area", areaName));
         _announce.AnnounceSameHive(xeno.Owner, msg, needsQueen: true);
@@ -711,6 +722,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
     {
+        if (!TryComp(args.User, out XenoConstructionComponent? construction))
+            return;
+
+        if (construction.OrderConstructionTargeting)
+            return;
+
         if (_actions.GetAction(xeno.Owner) is { } action &&
             _prototype.HasIndex(args.Choice))
         {
@@ -766,59 +783,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
 
             if (!CanOrderConstructionPopup((args.User, construction), target, construction.OrderConstructionChoice))
+            {
                 args.Invalid = true;
+            }
             return;
         }
 
         if (!CanSecreteOnTilePopup((args.User, construction), construction.BuildChoice, target, ent.Comp.CheckStructureSelected, ent.Comp.CheckWeeds))
+        {
             args.Invalid = true;
-    }
-
-    private void HandleOrderConstructionPlacement(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
-    {
-        if (_queenEye.IsInQueenEye(xeno.Owner) &&
-            !_queenEye.CanSeeTarget(xeno.Owner, args.Target))
-        {
-            return;
         }
-
-        if (!xeno.Comp.OrderConstructionChoice.HasValue)
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-select-structure"), args.Target, xeno.Owner);
-            return;
-        }
-
-        if (!CanOrderConstructionPopup(xeno, args.Target, xeno.Comp.OrderConstructionChoice.Value))
-            return;
-
-        if (!_prototype.TryIndex(xeno.Comp.OrderConstructionChoice.Value, out var prototype))
-            return;
-
-        if (prototype.TryGetComponent(out HiveConstructionNodeComponent? node, _compFactory) &&
-            !_xenoPlasma.HasPlasmaPopup(xeno.Owner, node.InitialPlasmaCost))
-        {
-            return;
-        }
-
-        var ev = new XenoOrderConstructionDoAfterEvent(xeno.Comp.OrderConstructionChoice.Value, GetNetCoordinates(args.Target));
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.OrderConstructionDelay, ev, xeno)
-        {
-            BreakOnMove = true,
-        };
-
-        if (_doAfter.TryStartDoAfter(doAfter))
-        {
-            xeno.Comp.OrderConstructionTargeting = false;
-            xeno.Comp.OrderConstructionChoice = null;
-            if (xeno.Comp.ConfirmOrderConstructionAction != null)
-            {
-                _actions.SetToggled(xeno.Comp.ConfirmOrderConstructionAction, false);
-            }
-            ResetSecreteResinAction(xeno);
-            Dirty(xeno);
-        }
-
-        args.Handled = true;
     }
 
     private void OnHiveConstructionNodeExamined(Entity<HiveConstructionNodeComponent> node, ref ExaminedEvent args)
@@ -883,9 +857,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         if (plasma.Plasma < 1)
-        {
             return;
-        }
 
         var ev = new XenoRepairStructureDoAfterEvent();
         var delay = xenoStructure.Comp.RepairLength;

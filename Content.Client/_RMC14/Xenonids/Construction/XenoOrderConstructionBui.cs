@@ -41,43 +41,19 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
                     continue;
 
                 var control = new XenoChoiceControl();
-                control.Button.ToggleMode = true;
+                control.Button.ToggleMode = false;
 
                 control.Set(structure.Name, _sprite.Frame0(structure));
 
                 control.Button.OnPressed += _ =>
                 {
                     SendPredictedMessage(new XenoOrderConstructionBuiMsg(structureId));
-                    UpdateButtonStates(structureId);
+                    Close();
                 };
 
                 _window.StructureContainer.AddChild(control);
                 _buttons.Add(structureId, control);
             }
-        }
-
-        Refresh();
-    }
-
-    private void UpdateButtonStates(EntProtoId selectedId)
-    {
-        foreach (var (structureId, control) in _buttons)
-        {
-            control.Button.Pressed = (structureId == selectedId);
-        }
-    }
-
-    public void Refresh()
-    {
-        foreach (var (_, control) in _buttons)
-        {
-            control.Button.Pressed = false;
-        }
-
-        if (EntMan.GetComponentOrNull<XenoConstructionComponent>(Owner)?.OrderConstructionChoice is { } choice &&
-            _buttons.TryGetValue(choice, out var button))
-        {
-            button.Button.Pressed = true;
         }
     }
 }

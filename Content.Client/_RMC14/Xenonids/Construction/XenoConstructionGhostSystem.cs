@@ -26,6 +26,8 @@ using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
+using Robust.Shared.Input;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -45,6 +47,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
     private SharedTransformSystem _transform = default!;
     private SharedMapSystem _mapSystem = default!;
@@ -76,6 +79,9 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        UpdatesOutsidePrediction = true;
+
         _transform = EntityManager.System<SharedTransformSystem>();
         _mapSystem = EntityManager.System<SharedMapSystem>();
         _xenoConstruction = EntityManager.System<SharedXenoConstructionSystem>();
@@ -95,6 +101,67 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
         _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
         _xenoTunnelQuery = GetEntityQuery<XenoTunnelComponent>();
+
+        CommandBinds.Builder
+            .Bind(EngineKeyFunctions.Use, new PointerInputCmdHandler(HandleUse, outsidePrediction: true))
+            .Bind(EngineKeyFunctions.UseSecondary, new PointerInputCmdHandler(HandleRightClick, outsidePrediction: true))
+            .Register<XenoConstructionGhostSystem>();
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        CommandBinds.Unregister<XenoConstructionGhostSystem>();
+    }
+
+    private bool HandleUse(in PointerInputCmdHandler.PointerInputCmdArgs args)
+    {
+        if (args.State != BoundKeyState.Down)
+            return false;
+
+        var player = _playerManager.LocalEntity;
+        if (player == null || !EntityManager.TryGetComponent<XenoConstructionComponent>(player.Value, out var construction))
+            return false;
+
+        if (construction.OrderConstructionTargeting && construction.OrderConstructionChoice != null)
+        {
+            var mouseScreenPos = _inputManager.MouseScreenPosition;
+            var coords = SnapToGrid(mouseScreenPos);
+
+            if (!coords.IsValid(EntityManager))
+                return false;
+
+            if (!IsValidConstructionLocation(player.Value, coords))
+                return false;
+
+            var netCoords = GetNetCoordinates(coords);
+            var clickEvent = new XenoOrderConstructionClickEvent(netCoords, construction.OrderConstructionChoice.Value);
+            RaiseNetworkEvent(clickEvent);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool HandleRightClick(in PointerInputCmdHandler.PointerInputCmdArgs args)
+    {
+        if (args.State != BoundKeyState.Down)
+            return false;
+
+        var player = _playerManager.LocalEntity;
+        if (player == null || !EntityManager.TryGetComponent<XenoConstructionComponent>(player.Value, out var construction))
+            return false;
+
+        if (construction.OrderConstructionTargeting)
+        {
+            ClearCurrentGhost();
+            var cancelEvent = new XenoOrderConstructionCancelEvent();
+            RaiseNetworkEvent(cancelEvent);
+            return true;
+        }
+
+        return false;
     }
 
     public override void FrameUpdate(float frameTime)
@@ -104,7 +171,7 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         var player = _playerManager.LocalEntity;
         if (player == null)
         {
-            ClearGhost();
+            ClearCurrentGhost();
             return;
         }
 
@@ -121,36 +188,35 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
                 _currentGhostStructure != buildChoice ||
                 GetActualBuildPrototype(player.Value, _currentGhostStructure ?? "") != actualPrototype)
             {
-                ClearGhost();
+                ClearCurrentGhost();
                 CreateGhost(player.Value, buildChoice!);
             }
             UpdateGhostPosition();
         }
         else
         {
-            ClearGhost();
+            ClearCurrentGhost();
         }
     }
 
     private (string? buildChoice, bool isActive) GetConstructionState(EntityUid player)
     {
+        if (EntityManager.TryGetComponent<XenoConstructionComponent>(player, out var construction))
+        {
+            if (construction.OrderConstructionTargeting && construction.OrderConstructionChoice != null)
+            {
+                return (construction.OrderConstructionChoice.Value.Id, true);
+            }
+        }
+
         var actionController = _uiManager.GetUIController<ActionUIController>();
         if (actionController.SelectingTargetFor is not { } selectedActionId)
             return (null, false);
 
-        if (EntityManager.TryGetComponent<XenoConstructionActionComponent>(selectedActionId, out var xenoAction))
+        if (EntityManager.TryGetComponent<XenoConstructionActionComponent>(selectedActionId, out var xenoAction) && construction != null)
         {
-            if (EntityManager.TryGetComponent<XenoConstructionComponent>(player, out var construction))
-            {
-                if (construction.OrderConstructionTargeting && construction.OrderConstructionChoice != null)
-                {
-                    var orderChoice = construction.OrderConstructionChoice;
-                    return (orderChoice?.ToString(), true);
-                }
-
-                var buildChoice = construction.BuildChoice?.ToString();
-                return (buildChoice, true);
-            }
+            var buildChoice = construction.BuildChoice?.Id;
+            return (buildChoice, true);
         }
 
         return (null, false);
@@ -616,14 +682,12 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
         return false;
     }
 
-    private void ClearGhost()
+    private void ClearCurrentGhost()
     {
         if (_currentGhost != null)
         {
             if (EntityManager.EntityExists(_currentGhost.Value))
-            {
                 EntityManager.QueueDeleteEntity(_currentGhost.Value);
-            }
         }
 
         _currentGhost = null;
