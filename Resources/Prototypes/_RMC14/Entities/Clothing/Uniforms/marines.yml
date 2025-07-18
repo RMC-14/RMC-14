@@ -316,6 +316,7 @@
   parent: RMCJumpsuitASOFormal
   id: RMCJumpsuitASOFormalAlt
   name: auxiliary support officer formal uniform
+  suffix: Alternative
   description: A pearly white formal uniform with black pants used by Auxiliary Support Officers.
   components:
   - type: Sprite
