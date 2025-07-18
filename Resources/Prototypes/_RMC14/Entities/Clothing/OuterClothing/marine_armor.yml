@@ -697,8 +697,8 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.001
     coolingCoefficient: 0.3
-  - type: FireProtection
-    reduction: 0.2
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
   - type: FirewalkArmor
     whitelist:
       components:
@@ -708,12 +708,7 @@
       bypassWhitelist:
         components:
         - RMCFireImmunityBypass
-    addComponentsOnEquip:
-    - type: RMCImmuneToIgnition
-      bypassWhitelist:
-        components:
-        - RMCFireImmunityBypass
-    auraColor: "03FCC6"
+    auraColor: "#03FCC6"
 
 # m45
 - type: entity

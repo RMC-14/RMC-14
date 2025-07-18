@@ -4,6 +4,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor.Firewalk;
@@ -15,14 +16,18 @@ public sealed class FirewalkSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly INetManager _net = default!;
+
+    private EntityQuery<FirewalkArmorComponent> _firewalkArmorQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _firewalkArmorQuery = GetEntityQuery<FirewalkArmorComponent>();
+
         SubscribeLocalEvent<FirewalkArmorComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<FirewalkArmorComponent, FirewalkActivateActionEvent>(OnFirewalkAction);
-        SubscribeLocalEvent<FirewalkArmorComponent, GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<FirewalkArmorComponent, GotUnequippedEvent>(OnUnequipped);
     }
 
@@ -53,17 +58,6 @@ public sealed class FirewalkSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnEquipped(Entity<FirewalkArmorComponent> ent, ref GotEquippedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (_inventory.InSlotWithFlags((ent, null, null), ent.Comp.Slots))
-            return;
-
-        EntityManager.AddComponents(args.Equipee, ent.Comp.AddComponentsOnEquip);
-    }
-
     private void OnUnequipped(Entity<FirewalkArmorComponent> ent, ref GotUnequippedEvent args)
     {
         if (_timing.ApplyingState)
@@ -74,13 +68,12 @@ public sealed class FirewalkSystem : EntitySystem
 
         var user = args.Equipee;
         DisableFirewalk(ent, user);
-        EntityManager.RemoveComponents(user, ent.Comp.AddComponentsOnEquip);
     }
 
     public void EnableFirewalk(Entity<FirewalkArmorComponent> ent, EntityUid user)
     {
         var activeFireWalker = EnsureComp<ActiveFirewalkerComponent>(user);
-        activeFireWalker.Suit = ent;
+        activeFireWalker.Suit = ent.Owner;
         activeFireWalker.EndAt = _timing.CurTime + ent.Comp.FirewalkTime;
         Dirty(user, activeFireWalker);
 
@@ -95,7 +88,9 @@ public sealed class FirewalkSystem : EntitySystem
         RemCompDeferred<AuraComponent>(user);
 
         EntityManager.RemoveComponents(user, ent.Comp.AddComponentsOnFirewalk);
-        _popup.PopupClient(Loc.GetString("rmc-firewalk-end"), user, user, PopupType.Medium);
+
+        if (_net.IsServer)
+            _popup.PopupClient(Loc.GetString("rmc-firewalk-end"), user, user, PopupType.Medium);
     }
 
     public Entity<FirewalkArmorComponent>? FindFirewalkArmor(EntityUid player)
@@ -119,8 +114,8 @@ public sealed class FirewalkSystem : EntitySystem
         var activeQuery = EntityQueryEnumerator<ActiveFirewalkerComponent>();
         while (activeQuery.MoveNext(out var uid, out var comp))
         {
-            if (comp.EndAt >= time && comp.Suit is { } suit)
-                DisableFirewalk(suit, uid);
+            if (comp.EndAt <= time && comp.Suit is { } suit && _firewalkArmorQuery.TryComp(suit, out var suitComp))
+                DisableFirewalk((suit, suitComp), uid);
         }
     }
 }

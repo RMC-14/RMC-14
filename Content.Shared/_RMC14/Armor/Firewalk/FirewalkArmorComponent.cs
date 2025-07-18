@@ -6,16 +6,14 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Armor.Firewalk;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(FirewalkSystem))]
 public sealed partial class FirewalkArmorComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityWhitelist Whitelist = new();
 
-    [DataField, AutoNetworkedField]
-    public ComponentRegistry AddComponentsOnFirewalk;
-
-    [DataField, AutoNetworkedField]
-    public ComponentRegistry AddComponentsOnEquip;
+    [DataField(required: true)]
+    public ComponentRegistry AddComponentsOnFirewalk = new();
 
     [DataField, AutoNetworkedField]
     public EntProtoId ActionId = "RMCActionFireShield";
@@ -30,5 +28,5 @@ public sealed partial class FirewalkArmorComponent : Component
     public TimeSpan FirewalkTime = TimeSpan.FromSeconds(6);
 
     [DataField, AutoNetworkedField]
-    public Color AuraColor;
+    public Color AuraColor = Color.Teal;
 }

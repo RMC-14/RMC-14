@@ -10,5 +10,5 @@ public sealed partial class ActiveFirewalkerComponent : Component
     public TimeSpan EndAt;
 
     [DataField, AutoNetworkedField]
-    public Entity<FirewalkArmorComponent>? Suit;
+    public EntityUid? Suit;
 }
