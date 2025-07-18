@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Map;
@@ -28,6 +29,8 @@ public sealed class RMCDeploySystem : EntitySystem
         SubscribeLocalEvent<RMCDeployableComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RMCDeployableComponent, RMCDeployDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<RMCDeployableComponent, DoAfterAttemptEvent<RMCDeployDoAfterEvent>>(OnDeployDoAfterAttempt);
+        // Track destruction of deployed entities
+        SubscribeLocalEvent<RMCDeployedEntityComponent, ComponentShutdown>(OnDeployedEntityShutdown);
     }
 
     private void OnUseInHand(Entity<RMCDeployableComponent> ent, ref UseInHandEvent args)
@@ -42,6 +45,9 @@ public sealed class RMCDeploySystem : EntitySystem
         // Get the grid and the grid component
         var gridUid = _xform.GetGrid(user);
         if (!TryComp<MapGridComponent>(gridUid, out var grid))
+            return;
+
+        if (comp.FailIfNotSurface && !CheckSurface(gridUid.Value, uid, user))
             return;
 
         // Get the player's world position
@@ -72,7 +78,7 @@ public sealed class RMCDeploySystem : EntitySystem
         {
             _popup.PopupClient(Loc.GetString("rmc-deploy-popup-start"), ent.Owner, user, PopupType.Small);
 
-            // Sending an event to display the deployment zone on the client
+            // Sending an event to display the deployment area on the client
             if (_netManager.IsServer)
             {
                 var showEvent = new RMCShowDeployAreaEvent(
@@ -117,8 +123,11 @@ public sealed class RMCDeploySystem : EntitySystem
         var area = ent.Comp.DeployArea.ComputeAABB(areaTransform, 0);
         var areaCenter = area.Center;
 
-        foreach (var setup in ent.Comp.DeploySetups)
+        foreach (var (setup, i) in ent.Comp.DeploySetups.Select((s, idx) => (s, idx)))
         {
+            if (ent.Comp.NonRedeployableSetups.Contains(i)) // Tracks indices of setups that should not be redeployed
+                continue;
+
             var spawnPos = areaCenter + setup.Offset;
             var spawned = EntityManager.SpawnEntity(setup.Prototype, new MapCoordinates(spawnPos, _xform.GetMapId(user)));
 
@@ -134,11 +143,24 @@ public sealed class RMCDeploySystem : EntitySystem
                     _xform.AnchorEntity((spawned, xform));
                 }
             }
+
+            // Add RMCDeployedEntityComponent for tracking
+            var childComp = EntityManager.EnsureComponent<RMCDeployedEntityComponent>(spawned);
+            childComp.OriginalEntity = ent.Owner;
+            childComp.SetupIndex = i;
+            Dirty(spawned, childComp);
+
+            // Если сетап одноразовый — сразу помечаем его как не подлежащий повторному разворачиванию
+            if (setup.NeverRedeployableSetup)
+            {
+                ent.Comp.NonRedeployableSetups.Add(i);
+                Dirty(ent.Owner, ent.Comp);
+            }
         }
 
         RaiseNetworkEvent(new RMCHideDeployAreaEvent(), ev.Args.User);
         // Delete the original entity after deployment
-        EntityManager.DeleteEntity(ent.Owner);
+        //EntityManager.DeleteEntity(ent.Owner);
     }
 
     private void OnDeployDoAfterAttempt(Entity<RMCDeployableComponent> ent, ref DoAfterAttemptEvent<RMCDeployDoAfterEvent> args)
@@ -166,14 +188,8 @@ public sealed class RMCDeploySystem : EntitySystem
         if (!HasComp<MapGridComponent>(gridUid))
             return false;
 
-        // Check if the deployable entity is on the planet's surface
-        if (failIfNotSurface && !HasComp<RMCPlanetComponent>(gridUid))
-        {
-            if (user != null)
-                _popup.PopupClient(Loc.GetString("rmc-deploy-popup-surface"), ignore, user.Value, PopupType.SmallCaution);
-
+        if (failIfNotSurface && gridUid.HasValue && !CheckSurface(gridUid.Value, ignore, user))
             return true;
-        }
 
         // Check all entities that actually intersect with the area
         var entitiesInArea = _lookup.GetEntitiesIntersecting(mapId, area);
@@ -205,6 +221,64 @@ public sealed class RMCDeploySystem : EntitySystem
         }
 
         return found;
+    }
+
+    private bool CheckSurface(EntityUid gridUid, EntityUid ignore, EntityUid? user)
+    {
+        if (!HasComp<RMCPlanetComponent>(gridUid))
+        {
+            if (user != null)
+                _popup.PopupClient(Loc.GetString("rmc-deploy-popup-surface"), ignore, user.Value, PopupType.SmallCaution);
+            return false;
+        }
+        return true;
+    }
+
+    // Called when a deployed child entity is being deleted or its component is removed
+    private void OnDeployedEntityShutdown(EntityUid uid, RMCDeployedEntityComponent comp, ComponentShutdown args)
+    {
+        // If already in shutdown, skip further processing
+        if (comp.InShutdown)
+            return;
+        comp.InShutdown = true;
+        Dirty(uid, comp);
+
+        // Try to get the original entity and mark the setup as destroyed
+        if (!EntityManager.EntityExists(comp.OriginalEntity))
+            return;
+
+        if (!EntityManager.TryGetComponent(comp.OriginalEntity, out RMCDeployableComponent? origComp))
+            return;
+
+        if (origComp is not null)
+        {
+            origComp.NonRedeployableSetups.Add(comp.SetupIndex);
+            Dirty(comp.OriginalEntity, origComp);
+
+            // Проверяем, был ли это ParentalSetup
+            var setup = origComp.DeploySetups[comp.SetupIndex];
+            if (setup.ParentalSetup)
+            {
+                // First, collect all entities to delete, then delete them outside the enumeration to avoid reentrancy and collection modification issues.
+                var toDelete = new List<EntityUid>();
+                var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
+                while (enumerator.MoveNext(out var entity, out var childComp))
+                {
+                    if (childComp.OriginalEntity != comp.OriginalEntity)
+                        continue;
+                    if (childComp.SetupIndex == comp.SetupIndex)
+                        continue;
+                    if (origComp.DeploySetups[childComp.SetupIndex].ReactiveSetup)
+                    {
+                        toDelete.Add(entity);
+                    }
+                }
+                foreach (var entity in toDelete)
+                {
+                    EntityManager.DeleteEntity(entity);
+                }
+            }
+        }
     }
 }
 

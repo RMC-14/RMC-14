@@ -217,23 +217,37 @@
       failIfNotSurface: false
       deploySetups:
         - prototype: RMCTentUNMCStandard
-          offset: 0, 0 # spawn a tent in the center of the zone
+          parentalSetup: true
+          reactiveSetup: true
+          offset: 0.2, 0 # spawn a tent in the center of the zone
           angle: 0
         - prototype: CMTable
+          parentalSetup: false
+          reactiveSetup: false
           offset: -0.5, 0.5
           angle: 0
         - prototype: CMTable
+          parentalSetup: false
+          reactiveSetup: false
           offset: 0.5, 0.5
           angle: 0
         - prototype: RMCOverwatchConsoleRotating
+          parentalSetup: false
+          reactiveSetup: true
           offset: -0.5, 0.5
           angle: 0
         - prototype: RMCRotaryPhone
+          parentalSetup: false
+          reactiveSetup: true
           offset: 0.5, 0.5
           angle: 0
         - prototype: CMChair
+          parentalSetup: false
+          reactiveSetup: false
           offset: -0.5, -0.5
           angle: 180
         - prototype: CMChair
+          parentalSetup: false
+          reactiveSetup: false
           offset: 0.5, -0.5
           angle: 180
