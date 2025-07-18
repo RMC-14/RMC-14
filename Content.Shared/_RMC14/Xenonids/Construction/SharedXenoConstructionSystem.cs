@@ -721,6 +721,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
     {
+        if (!TryComp(args.User, out XenoConstructionComponent? construction))
+            return;
+
+        if (construction.OrderConstructionTargeting)
+            return;
+
         if (_actions.GetAction(xeno.Owner) is { } action &&
             _prototype.HasIndex(args.Choice))
         {
