@@ -8,6 +8,9 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 7200 # 2 hours
   ranks:
     RMCRankCaptain: []
   weight: 5
