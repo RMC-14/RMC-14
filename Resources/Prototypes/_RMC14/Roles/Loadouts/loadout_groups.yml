@@ -134,6 +134,7 @@
   - RedHeadbandRMC
   - TanHeadbandRMC
   - SquadHeadbandRMC
+  - UNMCHeadsetRMC
 
 # Helmet Garbs
 - type: loadoutGroup
@@ -254,6 +255,7 @@
   - BodaPlyusRMC
   - AleIpaRMC
   - LiteBeerRMC
+  - SequoiaBeerRMC
   - ThirteenLokoRMC
 
 # Flasks
@@ -274,6 +276,12 @@
   maxLimit: 11
   loadouts:
   - LuckySlothsPackRMC
+  - ArcturianAcePackRMC
+  - LadyFingersPackRMC
+  - EmeraldGreensPackRMC
+  - ElectroGoldsPackRMC
+  - TurquoiseSolRedsPackRMC
+  - YellowSolRedsPackRMC
   - WeYaGoldPackRMC
   - ExecutiveSelectPackRMC
   - TarbackTubeRMC
@@ -493,7 +501,7 @@
   - CorporateBrownJacketRMC
   - CorporateBlueJacketRMC
   - JacketWindbreakerRMC
-  
+
 - type: loadoutGroup
   id: SynthUniformAccessoriesRMC
   name: rmc-loadout-group-synthetic-accessories

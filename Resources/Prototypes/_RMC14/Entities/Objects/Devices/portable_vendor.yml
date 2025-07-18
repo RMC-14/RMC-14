@@ -62,7 +62,7 @@
       entries:
       - id: DrinkSakeBottleFull
         points: 5
-      - id: CMDrinkCanAle # TODO RMC14 Aspen Beer
+      - id: RMCDrinkCanSequoiaBeer
         points: 5
       - id: DrinkGlass
         points: 1

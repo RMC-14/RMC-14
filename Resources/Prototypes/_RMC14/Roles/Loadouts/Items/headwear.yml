@@ -82,3 +82,10 @@
   storage:
     back:
     - RMCHeadBandSquad
+
+- type: loadout
+  id: UNMCHeadsetRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHeadUNMCHeadset
