@@ -176,7 +176,7 @@
     - 0,0,7,1
     whitelist:
       tags:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54CMK2
       - CMMagazineRifleM54C
   - type: StorageFill
     contents:
