@@ -78,7 +78,7 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
 
             var rsi = _itemToggle.IsActivated(item) && accessoryComp.ToggledRsi != null
                 ? accessoryComp.ToggledRsi
-                : accessoryComp.Rsi;
+                : (!ent.Comp.IsHelmet && accessoryComp.HatRsi != null ? accessoryComp.HatRsi : accessoryComp.Rsi);
 
             args.Layers.Add((layer, new PrototypeLayerData
             {
