@@ -258,6 +258,7 @@
   id: RMCBoxShotgunBuckshot8g
   name: box of buckshot shells
   description: A box filled with buckshot spread shotgun shells. 8 Gauge.
+  suffix: 8 Gauge
   components:
   - type: Storage
     whitelist:
@@ -302,9 +303,9 @@
       color: "#681a1a"
     - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#681a1a"
       map: [ "full" ]
     - state: smallshell_empty
@@ -331,9 +332,9 @@
       color: "#1e4c1e"
     - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#1e4c1e"
       map: [ "full" ]
     - state: smallshell_empty
@@ -360,9 +361,9 @@
       color: "#162f41"
     - state: shell_box_beanbag
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#162f41"
       map: [ "full" ]
     - state: smallshell_empty
@@ -389,9 +390,9 @@
       color: "#4b1c68"
     - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#4b1c68"
       map: [ "full" ]
     - state: smallshell_empty
@@ -418,9 +419,9 @@
       color: "#757575"
     - state: shell_box_incendiary
       color: "#ab4008"
-    - state: smallshell_ammo_full_12g_base
+    - state: smallshell_ammo_full_8g_base
       color: "#ffffff"
-    - state: smallshell_ammo_full_12g_color
+    - state: smallshell_ammo_full_8g_color
       color: "#ab4008"
       map: [ "full" ]
     - state: smallshell_empty
