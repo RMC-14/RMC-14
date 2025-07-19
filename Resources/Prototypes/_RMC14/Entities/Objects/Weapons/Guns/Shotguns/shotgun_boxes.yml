@@ -87,7 +87,7 @@
     layers:
     - state: smallshell_box
       color: "#578e75"
-    - state: shell_box_slugs
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -176,7 +176,7 @@
     layers:
     - state: smallshell_box
       color: "#6551a0"
-    - state: shell_box_flechette
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -236,7 +236,7 @@
     layers:
     - state: smallshell_box
       color: "#595959"
-    - state: shell_box_breaching
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -329,7 +329,7 @@
     layers:
     - state: smallshell_box
       color: "#1e4c1e"
-    - state: shell_box_slugs
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"
@@ -387,7 +387,7 @@
     layers:
     - state: smallshell_box
       color: "#4b1c68"
-    - state: shell_box_flechette
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: smallshell_ammo_full_12g_base
       color: "#ffffff"

@@ -182,7 +182,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers: # Shell boxes dont use markings
-    - state: shell_box
+    - state: rifle_box
       color: "#944444"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
@@ -191,7 +191,7 @@
       color: "#ff4444"
     - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: rifle_lid
       map: [ "lid" ]
       color: "#944444"
   - type: GenericVisualizer
@@ -1177,7 +1177,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: shell_box # Main box base sprite
+    - state: rifle_box # Main box base sprite
       color: "#944444"
     - state: shell_ammo_full_base # Default full ammo sprite
       map: [ "enum.CMItemSlotsLayers.Fill" ]
@@ -1186,7 +1186,7 @@
       color: "#944444"
     - state: shell_box_buckshot # Type Markings to place over Box
       color: "#e0d5c2"
-    - state: shell_lid # Lid to match with Box
+    - state: rifle_lid # Lid to match with Box
       map: [ "lid" ]
       color: "#944444"
   - type: CMItemSlots
@@ -1221,16 +1221,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: shell_box
+    - state: rifle_box
       color: "#578e75"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#578e75"
-    - state: shell_box_slugs
+    - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: rifle_lid
       map: [ "lid" ]
       color: "#578e75"
   - type: CMItemSlots
@@ -1265,16 +1265,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: shell_box
+    - state: rifle_box
       color: "#6551a0"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#6551a0"
-    - state: shell_box_flechette
+    - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: rifle_lid
       map: [ "lid" ]
       color: "#6551a0"
   - type: CMItemSlots
@@ -1308,16 +1308,16 @@
     node: RMCBoxShellsBreachingEmpty
   - type: Sprite
     layers:
-    - state: shell_box
+    - state: rifle_box
       color: "#595959"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#595959"
-    - state: shell_box_breaching
+    - state: shell_box_buckshot
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: rifle_lid
       map: [ "lid" ]
       color: "#595959"
   - type: CMItemSlots
@@ -1351,7 +1351,7 @@
   # node: RMCBoxShellsBeanbagEmpty
   - type: Sprite
     layers:
-    - state: shell_box
+    - state: rifle_box
       color: "#5786be"
     - state: shell_box_marking
       color: "#e0d5c2"
@@ -1362,7 +1362,7 @@
       color: "#5786be"
     - state: shell_box_beanbag
       color: "#e0d5c2"
-    - state: shell_lid
+    - state: rifle_lid
       map: [ "lid" ]
       color: "#5786be"
     - state: shell_lid_marking
@@ -1399,7 +1399,7 @@
     node: RMCBoxShellsIncendiaryEmpty
   - type: Sprite
     layers:
-    - state: shell_box
+    - state: rifle_box
       color: "#c6cdd3"
     - state: shell_box_marking
       color: "#ffcb26"
@@ -1410,7 +1410,7 @@
       color: "#ffcb26"
     - state: shell_box_incendiary
       color: "#b8533d"
-    - state: shell_lid
+    - state: rifle_lid
       map: [ "lid" ]
       color: "#c6cdd3"
     - state: shell_lid_marking
@@ -1447,7 +1447,7 @@
     node: RMCBoxShellsIncendiaryBuckshotEmpty
   - type: Sprite
     layers:
-    - state: shell_box
+    - state: rifle_box
       color: "#c6cdd3"
     - state: shell_box_marking
       color: "#e49331"
@@ -1458,7 +1458,7 @@
       color: "#e49331"
     - state: shell_box_incendiary
       color: "#b8533d"
-    - state: shell_lid
+    - state: rifle_lid
       map: [ "lid" ]
       color: "#c6cdd3"
     - state: shell_lid_marking

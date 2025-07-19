@@ -110,12 +110,6 @@
       "name": "shell"
     },
     {
-      "name": "shell_lid"
-    },
-    {
-      "name": "shell_box"
-    },
-    {
       "name": "shell_ammo_low_color"
     },
     {
@@ -141,15 +135,6 @@
     },
     {
       "name": "shell_box_buckshot"
-    },
-    {
-      "name": "shell_box_breaching"
-    },
-    {
-      "name": "shell_box_flechette"
-    },
-    {
-      "name": "shell_box_slugs"
     },
     {
       "name": "pistol"
