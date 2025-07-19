@@ -13,7 +13,9 @@
   - type: Tag
     tags: 
     - Watch
-
+  - type: Item
+    size: Normal
+    
 - type: entity
   abstract: true
   parent: [RMCBaseUniformAccessory, ClothingHandsBase]
@@ -29,7 +31,9 @@
   - type: Tag
     tags: 
     - Watch
-    
+  - type: Item
+    size: Normal
+
 - type: entity 
   parent: RMCWatchBaseL
   id: RMCWatchCheap
@@ -48,7 +52,7 @@
   - type: Tag
     tags: 
     - Watch
-    
+
 - type: entity 
   parent: RMCWatchBaseL
   id: RMCWatchBasic
