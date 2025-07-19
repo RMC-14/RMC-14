@@ -169,7 +169,11 @@
   - RosaryRMC
   - PrescriptionRMC
   - TrimmedWireRMC
-  - HelmetGarbChaplainPatchRMC
+  - ChaplainPatchRMC
+  - PeaceFlairRMC
+  - IoFlairRMC
+  - TerraTekFlairRMC
+  - UNMCFlairRMC
 
 # Accessories
 - type: loadoutGroup
