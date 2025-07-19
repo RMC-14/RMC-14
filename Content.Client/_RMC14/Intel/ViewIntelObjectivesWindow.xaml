@@ -4,34 +4,37 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="{Loc rmc-ui-intel-title}"
-    MinSize="600 550">
+    MinSize="620 570">
     <PanelContainer>
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat 
                 BorderColor="#3A3A3A" 
                 BorderThickness="1" 
-                BackgroundColor="#1A1A1A" />
+                BackgroundColor="#141414" />
         </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Vertical" Margin="4">
-            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+            <PanelContainer HorizontalExpand="True">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat 
-                        BorderColor="#3A3A3A" 
-                        BorderThickness="0 0 0 1" 
-                        BackgroundColor="#252525" />
+                        BackgroundColor="#252525"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="0 0 0 2" />
                 </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" Margin="4">
-                    <RichTextLabel Text="{Loc rmc-ui-intel-header}" HorizontalAlignment="Center" />
+                <BoxContainer Orientation="Vertical" Margin="6 4">
+                    <RichTextLabel 
+                        Text="{Loc rmc-ui-intel-header}" 
+                        HorizontalAlignment="Center"
+                        StyleClasses="LabelTitle" />
                 </BoxContainer>
             </PanelContainer>
-            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+            <PanelContainer HorizontalExpand="True">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat 
-                        BorderColor="#3A3A3A" 
-                        BorderThickness="1" 
-                        BackgroundColor="#252525" />
+                        BackgroundColor="#1F1F1F"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
                 </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" Margin="4">
+                <BoxContainer Orientation="Vertical" Margin="8">
                     <BoxContainer Orientation="Horizontal">
                         <RichTextLabel Text="{Loc rmc-ui-intel-tech-points}" />
                         <Control HorizontalExpand="True" />
@@ -45,69 +48,63 @@
                     </BoxContainer>
                 </BoxContainer>
             </PanelContainer>
-            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+            <PanelContainer HorizontalExpand="True">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat 
-                        BorderColor="#3A3A3A" 
-                        BorderThickness="1" 
-                        BackgroundColor="#252525" />
+                        BackgroundColor="#1F1F1F"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
                 </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" Margin="4">
+                <BoxContainer Orientation="Vertical" Margin="8">
                     <BoxContainer Orientation="Horizontal">
                         <RichTextLabel Text="{Loc rmc-ui-intel-objectives}" />
                         <Control HorizontalExpand="True" />
                         <Label Name="TotalPointsLabel" Access="Public" />
                     </BoxContainer>
                     <ui:BlueHorizontalSeparator />
-                    <BoxContainer Orientation="Horizontal">
-                        <RichTextLabel Text="{Loc rmc-ui-intel-documents}" MinWidth="200" />
-                        <Label Name="DocumentsLabel" Access="Public" />
-                    </BoxContainer>
-                    <BoxContainer Orientation="Horizontal" Visible="False"> <!-- TODO RMC14 -->
-                        <RichTextLabel Text="{Loc rmc-ui-intel-upload-data}" MinWidth="200" />
-                        <Label Name="UploadDataLabel" Access="Public" />
-                    </BoxContainer>
-                    <BoxContainer Orientation="Horizontal">
-                        <RichTextLabel Text="{Loc rmc-ui-intel-retrieve-items}" MinWidth="200" />
-                        <Label Name="RetrieveItemsLabel" Access="Public" />
-                    </BoxContainer>
-                    <!-- <BoxContainer Orientation="Horizontal"> -->
-                    <!--     <RichTextLabel Text="{Loc rmc-ui-intel-miscellaneous}" MinWidth="200" /> -->
-                    <!--     <Label Name="MiscellaneousLabel" Access="Public" /> -->
-                    <!-- </BoxContainer> -->
-                    <!-- <BoxContainer Orientation="Horizontal"> -->
-                    <!--     <RichTextLabel Text="{Loc rmc-ui-intel-analyze-chemicals}" MinWidth="200" /> -->
-                    <!--     <Label Name="AnalyzeChemicalsLabel" Access="Public" /> -->
-                    <!-- </BoxContainer> -->
-                    <BoxContainer Orientation="Horizontal">
-                        <RichTextLabel Text="{Loc rmc-ui-intel-rescue-survivors}" MinWidth="200" />
-                        <Label Name="RescueSurvivorsLabel" Access="Public" />
-                    </BoxContainer>
-                    <BoxContainer Orientation="Horizontal">
-                        <RichTextLabel Text="{Loc rmc-ui-intel-recover-corpses}" MinWidth="200" />
-                        <Label Name="RecoverCorpsesLabel" Access="Public" />
-                    </BoxContainer>
-                    <BoxContainer Orientation="Horizontal">
-                        <RichTextLabel Text="{Loc rmc-ui-intel-colony-comms}" MinWidth="200" />
-                        <Label Name="ColonyCommunicationsLabel" Access="Public" />
-                    </BoxContainer>
-                    <BoxContainer Orientation="Horizontal">
-                        <RichTextLabel Text="{Loc rmc-ui-intel-colony-power}" MinWidth="200" />
-                        <Label Name="ColonyPowerLabel" Access="Public" />
+                    <BoxContainer Orientation="Vertical" Margin="4 0" SeparationOverride="3">
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-documents}" MinWidth="220" />
+                            <Label Name="DocumentsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal" Visible="False">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-upload-data}" MinWidth="220" />
+                            <Label Name="UploadDataLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-retrieve-items}" MinWidth="220" />
+                            <Label Name="RetrieveItemsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-rescue-survivors}" MinWidth="220" />
+                            <Label Name="RescueSurvivorsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-recover-corpses}" MinWidth="220" />
+                            <Label Name="RecoverCorpsesLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-colony-comms}" MinWidth="220" />
+                            <Label Name="ColonyCommunicationsLabel" Access="Public" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <RichTextLabel Text="{Loc rmc-ui-intel-colony-power}" MinWidth="220" />
+                            <Label Name="ColonyPowerLabel" Access="Public" />
+                        </BoxContainer>
                     </BoxContainer>
                 </BoxContainer>
             </PanelContainer>
-            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat 
-                        BorderColor="#3A3A3A" 
-                        BorderThickness="1" 
-                        BackgroundColor="#252525" />
+                        BackgroundColor="#1F1F1F"
+                        BorderColor="#3A3A3A"
+                        BorderThickness="1" />
                 </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Vertical" Margin="4">
+                <BoxContainer Orientation="Vertical" Margin="8">
                     <RichTextLabel Text="{Loc rmc-ui-intel-clues}" />
                     <ui:BlueHorizontalSeparator />
-                    <TabContainer Name="CluesContainer" Access="Public" VerticalExpand="True" MinHeight="100" />
+                    <TabContainer Name="CluesContainer" Access="Public" VerticalExpand="True" />
                 </BoxContainer>
             </PanelContainer>
         </BoxContainer>

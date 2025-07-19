@@ -26,9 +26,9 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
             return;
 
         var tree = comp.Tree;
-        _window.CurrentPointsLabel.Text = Loc.GetString("rmc-ui-intel-points-value", ("value", tree.Points.Double():F1));
+        _window.CurrentPointsLabel.Text = Loc.GetString("rmc-ui-intel-points-value", ("value", tree.Points.Double().ToString("F1")));
         _window.CurrentTierLabel.Text = Loc.GetString("rmc-ui-intel-tier-value", ("value", tree.Tier));
-        _window.TotalPointsLabel.Text = Loc.GetString("rmc-ui-intel-total-credits", ("value", tree.TotalEarned.Double():F1));
+        _window.TotalPointsLabel.Text = Loc.GetString("rmc-ui-intel-total-credits", ("value", tree.TotalEarned.Double().ToString("F1")));
         _window.DocumentsLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.Documents.Current), ("total", tree.Documents.Total));
         // _window.UploadDataLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.UploadData.Current), ("total", tree.UploadData.Total));
         _window.RetrieveItemsLabel.Text = Loc.GetString("rmc-ui-intel-progress", ("current", tree.RetrieveItems.Current), ("total", tree.RetrieveItems.Total));
@@ -37,7 +37,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         _window.RescueSurvivorsLabel.Text = Loc.GetString("rmc-ui-intel-infinite-progress", ("current", tree.RescueSurvivors));
         _window.RecoverCorpsesLabel.Text = Loc.GetString("rmc-ui-intel-infinite-progress", ("current", tree.RecoverCorpses));
         _window.ColonyCommunicationsLabel.Text = Loc.GetString("rmc-ui-intel-status-online", ("online", tree.ColonyCommunications));
-        _window.ColonyPowerLabel.Text = Loc.GetString("rmc-ui-intel-status-online", ("online", tree.ColonyPower));
+        _window.ColonyPowerLabel.Text = Loc.GetString("rmc-ui-intel-colony-status", ("online", tree.ColonyPower));
 
         _window.CluesContainer.DisposeAllChildren();
         foreach (var (category, clues) in comp.Tree.Clues)
@@ -48,20 +48,25 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
                 VScrollEnabled = true,
             };
 
-            var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
-            scroll.AddChild(container);
+            var container = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                Margin = new Thickness(4),
+            };
+
             foreach (var (_, clue) in clues)
             {
                 container.AddChild(new Label
                 {
                     Text = clue,
-                    Margin = new Thickness(2),
+                    Margin = new Thickness(2, 1, 2, 1),
+                    StyleClasses = { "Label" }
                 });
             }
 
+            scroll.AddChild(container);
             _window.CluesContainer.AddChild(scroll);
             TabContainer.SetTabTitle(scroll, Loc.GetString(category));
-            TabContainer.SetTabVisible(scroll, true);
         }
     }
 }

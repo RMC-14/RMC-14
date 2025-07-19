@@ -10,7 +10,7 @@
                 BorderThickness="1" 
                 BackgroundColor="#1A1A1A" />
         </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Vertical" Margin="4">
+        <BoxContainer Orientation="Vertical" Margin="6">
             <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat 
@@ -24,26 +24,28 @@
                     <Label Name="CurrentPointsLabel" Access="Public" />
                 </BoxContainer>
             </PanelContainer>
-            <ui:BlueHorizontalSeparator />
-            <BoxContainer Orientation="Horizontal">
+            <ui:BlueHorizontalSeparator Margin="0 0 0 6"/>
+            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                 <RichTextLabel Text="{Loc rmc-ui-tech-name-label}" MinWidth="110" />
                 <Label Name="NameLabel" Access="Public" />
             </BoxContainer>
-            <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                 <RichTextLabel Text="{Loc rmc-ui-tech-description-label}" MinWidth="110" />
                 <Label Name="DescriptionLabel" Access="Public" />
             </BoxContainer>
-            <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                 <RichTextLabel Text="{Loc rmc-ui-tech-cost-label}" MinWidth="110" />
                 <Label Name="CostLabel" Access="Public" />
             </BoxContainer>
-            <BoxContainer Name="StatisticsContainer" Access="Public" Orientation="Horizontal">
+            <BoxContainer Name="StatisticsContainer" Access="Public" Orientation="Horizontal" Margin="0 6 0 0">
                 <RichTextLabel Text="{Loc rmc-ui-tech-statistics-label}" MinWidth="110" />
                 <BoxContainer Name="Statistics" Access="Public" Orientation="Vertical" />
             </BoxContainer>
-            <Button Name="PurchaseButton" Access="Public" 
-                    HorizontalExpand="True" StyleClasses="OpenBoth" 
-                    Margin="0 15 0 0" />
+            <Button Name="PurchaseButton"
+                    Access="Public"
+                    HorizontalExpand="True"
+                    Margin="0 15 0 0"
+                    StyleClasses="OpenBoth" />
         </BoxContainer>
     </PanelContainer>
 </controls:TechControlConsoleOptionWindow>

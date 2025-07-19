@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared.FixedPoint;
@@ -90,36 +90,45 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
         _optionWindow = this.CreateWindow<TechControlConsoleOptionWindow>();
         _optionWindow.OnClose += () => _optionWindow = null;
         _optionWindow.Title = option.Name;
-        _optionWindow.CurrentPointsLabel.Text = Loc.GetString("rmc-ui-tech-points-value", ("value", points.Double():F1));
+        _optionWindow.CurrentPointsLabel.Text = Loc.GetString("rmc-ui-tech-points-value", ("value", points.Double().ToString("F1")));
         _optionWindow.NameLabel.Text = option.Name;
         _optionWindow.DescriptionLabel.Text = option.Description;
         _optionWindow.CostLabel.Text = $"{option.CurrentCost}";
 
-        if (!option.Repurchasable && option.Increase == 0)
-        {
-            _optionWindow.StatisticsContainer.Visible = false;
-        }
-        else
-        {
-            if (option.Repurchasable)
-                _optionWindow.Statistics.AddChild(new Label { 
-                    Text = Loc.GetString("rmc-ui-tech-repurchasable") 
-                });
+        _optionWindow.Statistics.DisposeAllChildren();
+        var hasStats = false;
 
-            if (option.Increase != 0)
-                _optionWindow.Statistics.AddChild(new Label {
-                    Text = Loc.GetString("rmc-ui-tech-incremental-price", ("increase", option.Increase)) 
-                });
+        if (option.Repurchasable)
+        {
+            hasStats = true;
+            _optionWindow.Statistics.AddChild(new Label
+            {
+                Text = Loc.GetString("rmc-ui-tech-repurchasable")
+            });
         }
 
-        var canPurchase = points >= option.CurrentCost && currentTier >= tier &&
+        if (option.Increase != 0)
+        {
+            hasStats = true;
+            _optionWindow.Statistics.AddChild(new Label
+            {
+                Text = Loc.GetString("rmc-ui-tech-incremental-price", ("increase", option.Increase))
+            });
+        }
+
+        _optionWindow.StatisticsContainer.Visible = hasStats;
+
+        var canPurchase = points >= option.CurrentCost &&
+                          currentTier >= tier &&
                           (!option.Purchased || option.Repurchasable);
+
         _optionWindow.PurchaseButton.Text = Loc.GetString("rmc-ui-tech-purchase-button");
+        _optionWindow.PurchaseButton.Disabled = !canPurchase;
+
         _optionWindow.PurchaseButton.OnPressed += _ =>
         {
             SendPredictedMessage(new TechPurchaseOptionBuiMsg(tier, optionIndex));
             _optionWindow.Close();
         };
-        _optionWindow.PurchaseButton.Disabled = !canPurchase;
     }
 }
