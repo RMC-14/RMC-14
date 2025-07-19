@@ -1,0 +1,14 @@
+type: entity
+abstract: false
+id: RMCVehicleTestThing
+name: debug vehicle
+description: test
+components:
+- type: Vehicle
+- type: Clickable
+- type: Sprite
+  drawdepth: Mobs
+  noRot: true
+  sprite: _RMC14/Objects/power_loader.rsi
+  layers:
+  - state: powerloader
