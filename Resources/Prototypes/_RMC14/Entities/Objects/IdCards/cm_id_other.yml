@@ -275,6 +275,13 @@
   - type: PresetIdCard
     job: RMCJobSyntheticColony
 
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardFORECONSpotter
+  name: FORECON Spotter ID card
+  components:
+  - type: IdCard
+    jobTitle: rmc-job-name-forecon-spotter
 
 - type: entity
   id: RMCIDCardAegis

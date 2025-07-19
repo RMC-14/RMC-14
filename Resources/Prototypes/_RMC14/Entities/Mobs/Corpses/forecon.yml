@@ -12,7 +12,7 @@
     jumpsuit: RMCJumpsuitSurvivorMarineDropPouch
     back: CMSatchelMarine
     shoes: CMBootsBlackFilled
-    id: CMIDCardStandardDogtag
+    id: RMCIDCardFORECONSpotter
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
   storage:
