@@ -31,8 +31,8 @@
     visuals:
       enum.ToggleableVisuals.Enabled:
         enum.ToggleableVisuals.Layer:
-          True: { state: fire_extinguisher } # TODO RMC14
-          False: { state: fire_extinguisher }
+          True: { state: fire_extinguisher1 } # TODO RMC14
+          False: { state: fire_extinguisher0 }
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -68,8 +68,8 @@
     visuals:
       enum.ToggleableVisuals.Enabled:
         enum.ToggleableVisuals.Layer:
-          True: { state: minife0 } # TODO RMC14
-          False: { state: minife1 }
+          True: { state: minife1 } # TODO RMC14
+          False: { state: minife0 }
   - type: Tag
     tags:
     - CMFireExtinguisherPortable
