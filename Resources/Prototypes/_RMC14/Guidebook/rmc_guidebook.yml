@@ -208,6 +208,14 @@
   priority: 10
   name: "Who is in Command?"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCommandRoles.xml"
+  
+- type: guideEntry # made by Gabrote42
+  parent: RMC
+  id: RMCGuideMarineCommunications
+  priority: 11
+  name: "Marine Communications"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideMarineCommunications.xml"
+  
 
 # Xenonids
 - type: guideEntry
