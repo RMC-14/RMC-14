@@ -539,3 +539,19 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/unmc_flair.rsi
       state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbMovieTicket
+  name: movie ticket
+  description: A pair of red movie tickets. It reminds you of a time you could watch more then the same 5 or so VHS films the Almayer has.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/movie_ticket.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/movie_ticket.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/movie_ticket.rsi
+      state: helmet

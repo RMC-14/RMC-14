@@ -216,3 +216,10 @@
     back:
     - RMCHelmetGarbUNMCFlair
 
+- type: loadout
+  id: MovieTicketRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbMovieTicket
+
