@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -87,7 +88,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 foreach (var reagent in solution.Contents)
                 {
                     var name = reagent.Reagent.Prototype;
-                    if (_prototypes.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
+                    if (_prototypes.TryIndexReagent(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
                         name = reagentProto.LocalizedName;
 
                     args.PushText($"{reagent.Quantity.Float():F2} units of {name}");
@@ -95,6 +96,15 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
                 args.PushText($"Total volume: {solution.Volume} / {solution.MaxVolume}.");
             }
+            var transferComp = EntityManager.GetComponent<RMCToggleableSolutionTransferComponent>(ent.Owner);
+            var directionText = transferComp.Direction switch
+            {
+                SolutionTransferDirection.Input => "Transfer mode: Drawing",
+                SolutionTransferDirection.Output => "Transfer mode: Dispensing",
+                _ => string.Empty,
+            };
+            if (!string.IsNullOrEmpty(directionText))
+                args.PushText(directionText);
         }
     }
 
@@ -105,6 +115,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private void OnToggleableSolutionTransferMapInit(Entity<RMCToggleableSolutionTransferComponent> ent, ref MapInitEvent args)
     {
+        ent.Comp.Direction = SolutionTransferDirection.Input;
         RemCompDeferred<DrainableSolutionComponent>(ent);
         var refillable = EnsureComp<RefillableSolutionComponent>(ent);
         refillable.Solution = ent.Comp.Solution;
@@ -129,6 +140,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     RemCompDeferred<DrainableSolutionComponent>(ent);
                     var refillable = EnsureComp<RefillableSolutionComponent>(ent);
                     refillable.Solution = ent.Comp.Solution;
+                    ent.Comp.Direction = SolutionTransferDirection.Input;
                     Dirty(ent, refillable);
                     _popup.PopupClient("Now drawing", ent, user, PopupType.Medium);
                 }
@@ -137,6 +149,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     RemCompDeferred<RefillableSolutionComponent>(ent);
                     var drainable = EnsureComp<DrainableSolutionComponent>(ent);
                     drainable.Solution = ent.Comp.Solution;
+                    ent.Comp.Direction = SolutionTransferDirection.Output;
                     Dirty(ent, drainable);
                     _popup.PopupClient("Now dispensing", ent, user, PopupType.Medium);
                 }

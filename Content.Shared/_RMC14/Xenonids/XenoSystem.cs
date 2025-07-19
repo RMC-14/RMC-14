@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
@@ -22,6 +23,7 @@ using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
+using Content.Shared.Atmos;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
@@ -123,12 +125,12 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
         SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
         SubscribeLocalEvent<XenoComponent, HiveChangedEvent>(OnHiveChanged);
-        SubscribeLocalEvent<XenoComponent, RMCIgniteEvent>(OnXenoIgnite);
+        SubscribeLocalEvent<XenoComponent, IgnitedEvent>(OnXenoIgnite);
         SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
         SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
         SubscribeLocalEvent<XenoComponent, GetVisMaskEvent>(OnXenoGetVisMask);
         SubscribeLocalEvent<XenoComponent, CMDisarmEvent>(OnLeaderDisarmed,
-            before: [typeof(SharedHandsSystem), typeof(StaminaSystem)],
+            before: [typeof(SharedHandsSystem), typeof(SharedStaminaSystem)],
             after: [typeof(TackleSystem)]);
 
         SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
@@ -278,9 +280,9 @@ public sealed partial class XenoSystem : EntitySystem
         _nightVision.SetSeeThroughContainers(ent.Owner, args.Hive?.Comp.SeeThroughContainers ?? false);
     }
 
-    private void OnXenoIgnite(Entity<XenoComponent> ent, ref RMCIgniteEvent args)
+    private void OnXenoIgnite(Entity<XenoComponent> ent, ref IgnitedEvent args)
     {
-        foreach (var held in _hands.EnumerateHeld(ent).ToArray())
+        foreach (var held in _hands.EnumerateHeld(ent.Owner).ToArray())
         {
             if (!HasComp<XenoParasiteComponent>(held))
                 continue;
@@ -294,7 +296,7 @@ public sealed partial class XenoSystem : EntitySystem
             };
 
             _damageable.TryChangeDamage(held, damage, true);
-            _hands.TryDrop(ent, held);
+            _hands.TryDrop(ent.Owner, held);
         }
     }
 
@@ -419,7 +421,7 @@ public sealed partial class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool canAttackBarricades = false)
     {
         if (xeno == target)
             return false;
@@ -436,6 +438,9 @@ public sealed partial class XenoSystem : EntitySystem
 
         if (_xenoNestedQuery.HasComp(target))
             return false;
+
+        if (canAttackBarricades && HasComp<BarricadeComponent>(target))
+            return true;
 
         return HasComp<MarineComponent>(target) || HasComp<XenoComponent>(target);
     }

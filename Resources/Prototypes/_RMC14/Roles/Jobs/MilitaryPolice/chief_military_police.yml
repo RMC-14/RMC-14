@@ -18,7 +18,7 @@
     RMCRankFirstLT:
     - !type:RoleTimeRequirement
       role: CMJobChiefMP
-      time: 36000 # 10 hours
+      time: 252000 # 70 hours
     RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefMP
@@ -57,6 +57,7 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: cmp
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearChiefMP

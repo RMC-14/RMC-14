@@ -1,7 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Shared._RMC14.Xenonids.Announce;
-using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
@@ -25,12 +24,10 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
 
         if (needsQueen)
         {
-            if (Hive.GetHive(source) is Entity<HiveComponent> sourceHive)
+            if (Hive.GetHive(source) is { } sourceHive)
             {
                 if (!Hive.HasHiveQueen(sourceHive))
-                {
                     return;
-                }
             }
             else
             {
@@ -46,13 +43,13 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
         _chat.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrapped, source, false, true, null);
         _audio.PlayGlobal(sound, filter, true);
 
-        if (popup != null)
+        if (popup == null)
+            return;
+
+        foreach (var session in filter.Recipients)
         {
-            foreach (var session in filter.Recipients)
-            {
-                if (session.AttachedEntity is { } recipient)
-                    _popup.PopupEntity(message, recipient, recipient, popup.Value);
-            }
+            if (session.AttachedEntity is { } recipient)
+                _popup.PopupEntity(message, recipient, recipient, popup.Value);
         }
     }
 }

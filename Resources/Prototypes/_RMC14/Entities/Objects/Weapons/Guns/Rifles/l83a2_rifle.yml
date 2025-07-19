@@ -211,6 +211,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: BulletRifle556x45mmAP
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

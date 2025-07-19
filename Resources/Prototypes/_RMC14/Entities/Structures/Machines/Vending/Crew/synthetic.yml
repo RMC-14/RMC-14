@@ -33,9 +33,11 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
+      - id: CMWebbingSurgicalBlue
+      - id: CMWebbingSurgicalGreen
     - name: Shoes
       choices: { RMCShoes: 1 }
       entries:
@@ -63,6 +65,8 @@
       choices: { CMGloves: 1 }
       entries:
       - id: CMHandsInsulated
+        recommended: true
+      - id: CMHandsBlackInsulated
         recommended: true
       - id: CMHandsBlackMarine
       - id: CMHandsLatex
@@ -216,14 +220,12 @@
         points: 2
       - id: CMTraumaKit1
         points: 2
-      - id: RMCMedevacStretcher
+      - id: RMCMedevacStretcherFolded
         points: 6
       # /obj/item/stack/medical/splint - 1 Point
       - id: CMRollerBed
         points: 4
       - id: CMStasisBag
-        points: 6
-      - id: CMMiniTank
         points: 6
       - id: CMMiniTank
         points: 6
@@ -293,7 +295,7 @@
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
         points: 2
-      - id: ClothingNeckStethoscope
+      - id: RMCStethoscope
         points: 2
       - id: RMCFlashlightPen
         points: 2

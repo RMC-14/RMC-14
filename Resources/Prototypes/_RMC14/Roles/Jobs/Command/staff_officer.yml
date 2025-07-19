@@ -12,6 +12,10 @@
     group: CMDepartmentsHuman
     time: 54000 # 15 hours
   ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobStaffOfficer
+      time: 252000 # 70 hours
     RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearStaffOfficer
@@ -20,7 +24,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - MarineMain
+  - SO
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -61,7 +65,7 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
-    head: RMCHeadCapFlippable
+    head: CMHeadCapOfficer
     id: CMIDCardStaffOfficer
     ears: RMCHeadsetMarineCommand
     pocket1: RMCPouchGeneralLarge

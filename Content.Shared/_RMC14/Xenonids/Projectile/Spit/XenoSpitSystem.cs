@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Ball;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -134,7 +135,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSpitAction(Entity<XenoSpitComponent> xeno, ref XenoSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         var ev = new XenoGetSpitProjectileEvent(xeno.Comp.ProjectileId);
@@ -142,7 +143,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             ev.Id,
             xeno.Comp.Sound,
@@ -158,12 +159,12 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSlowingSpitAction(Entity<XenoSlowingSpitComponent> xeno, ref XenoSlowingSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             xeno.Comp.ProjectileId,
             xeno.Comp.Sound,
@@ -176,12 +177,12 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoScatteredSpitAction(Entity<XenoScatteredSpitComponent> xeno, ref XenoScatteredSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             xeno.Comp.ProjectileId,
             xeno.Comp.Sound,
@@ -224,6 +225,13 @@ public sealed class XenoSpitSystem : EntitySystem
         if (_hive.FromSameHive(spit.Owner, target) || HasComp<XenoComponent>(target))
         {
             QueueDel(spit);
+            return;
+        }
+
+        if (HasComp<SynthComponent>(target))
+        {
+            var immuneMsg = Loc.GetString("cm-xeno-paralyzing-slash-immune", ("target", target));
+            _popup.PopupEntity(immuneMsg, target, target, PopupType.SmallCaution);
             return;
         }
 
@@ -284,10 +292,9 @@ public sealed class XenoSpitSystem : EntitySystem
             distance
         );
 
-        foreach (var (actionId, action) in _actions.GetActions(ent))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoAcidBallActionEvent>(ent))
         {
-            if (action.BaseEvent is XenoAcidBallActionEvent)
-                _actions.SetCooldown(actionId, ent.Comp.Cooldown);
+            _actions.SetCooldown(action.AsNullable(), ent.Comp.Cooldown);
         }
 
         if (!args.Handled)

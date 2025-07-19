@@ -14,9 +14,12 @@ public sealed class RMCRadioSystem : EntitySystem
     [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+    private readonly HashSet<Entity<RMCHeadsetComponent, EncryptionKeyHolderComponent>> _toUpdate = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCHeadsetComponent, EncryptionChannelsChangedEvent>(OnHeadsetEncryptionChannelsChanged, before: [typeof(SharedHeadsetSystem)]);
+
         SubscribeLocalEvent<RMCRadioFilterComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
 
         SubscribeLocalEvent<HeadsetAutoSquadComponent, MapInitEvent>(OnHeadsetAutoSquadRefresh);
@@ -32,14 +35,7 @@ public sealed class RMCRadioSystem : EntitySystem
 
     private void OnHeadsetEncryptionChannelsChanged(Entity<RMCHeadsetComponent> ent, ref EncryptionChannelsChangedEvent args)
     {
-        // prevent adding channels and therefore ActiveRadioComponent before map initialized
-        if (LifeStage(ent) < EntityLifeStage.MapInitialized)
-            return;
-
-        foreach (var channel in ent.Comp.Channels)
-        {
-            args.Component.Channels.Add(channel);
-        }
+        _toUpdate.Add((ent, ent, args.Component));
     }
 
     private void OnGetAltVerbs(Entity<RMCRadioFilterComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -91,5 +87,31 @@ public sealed class RMCRadioSystem : EntitySystem
         }
 
         Dirty(ent);
+    }
+
+    public override void Update(float frameTime)
+    {
+        try
+        {
+            foreach (var ent in _toUpdate)
+            {
+                if (TerminatingOrDeleted(ent) ||
+                    !ent.Comp1.Running ||
+                    !ent.Comp2.Running)
+                {
+                    continue;
+                }
+
+                foreach (var channel in ent.Comp1.Channels)
+                {
+                    ent.Comp2.Channels.Add(channel);
+                    Dirty(ent, ent.Comp2);
+                }
+            }
+        }
+        finally
+        {
+            _toUpdate.Clear();
+        }
     }
 }

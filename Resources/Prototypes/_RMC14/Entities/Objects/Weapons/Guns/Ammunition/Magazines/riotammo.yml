@@ -209,6 +209,7 @@
   parent: CMBulletBase
   id: RMCBulletPistol9mmRubber
   name: rubber bullet (9mm)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

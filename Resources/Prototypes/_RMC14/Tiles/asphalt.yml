@@ -2,20 +2,20 @@
 
 # Asphalt
 - type: tile
-  parent: CMFloorSteel
+  parent: CMPlanetBase
   id: RMCFloorAsphaltTile
   name: tiles-rmc-asphalt
   sprite: /Textures/_RMC14/Tiles/asphalt/tile.png
 
 - type: tile
-  parent: CMFloorSteel
+  parent: CMPlanetBase
   id: RMCFloorAsphaltSunBleached
   name: tiles-rmc-asphalt
   sprite: /Textures/_RMC14/Tiles/asphalt/sunbleached_asphalt.png
 
 # Asphalt Tiles
 - type: tile
-  parent: CMFloorSteel
+  parent: CMPlanetBase
   id: RMCFloorAsphalt
   name: tiles-rmc-asphalt
   sprite: /Textures/_RMC14/Tiles/asphalt/asphalt.png
@@ -105,11 +105,11 @@
   id: RMCFloorAsphalt17
   sprite: /Textures/_RMC14/Tiles/asphalt/asphalt17.png
 
-# Cement 
+# Cement
 
 - type: tile
   abstract: true
-  parent: CMFloorSteel
+  parent: CMPlanetBase
   id: RMCFloorCementBase
   name: tiles-rmc-cement
 
