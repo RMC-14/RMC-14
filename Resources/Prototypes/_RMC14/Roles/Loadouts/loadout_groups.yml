@@ -178,6 +178,11 @@
   loadouts:
   - UNMCSquadPatchRMC
   - SquadArmbandRMC
+  - PonchoRMC
+  - PonchoJungleRMC
+  - PonchoDesertRMC
+  - PonchoUrbanRMC
+  - PonchoSnowRMC
 
 # Paperwork
 - type: loadoutGroup
@@ -545,3 +550,51 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+
+- type: loadoutGroup
+  id: WatchesBasicRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchRipleyRMC
+  - WatchDallasRMC
+
+- type: loadoutGroup
+  id: WatchesSynthRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchRipleyRMC
+  - WatchDallasRMC
+  - WatchBishopRMC
+
+- type: loadoutGroup
+  id: WatchesLiaisonRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchRipleyRMC
+  - WatchDallasRMC
+  - WatchBurkeRMC
+
+- type: loadoutGroup
+  id: WatchesCommandingOfficerRMC
+  name: rmc-loadout-group-watches
+  minLimit: 0
+  maxLimit: 1
+  loadouts: 
+  - WatchCheapRMC
+  - WatchBasicRMC
+  - WatchRipleyRMC
+  - WatchDallasRMC
+  - WatchBurkeRMC
+  - WatchBishopRMC

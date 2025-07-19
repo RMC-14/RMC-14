@@ -1,0 +1,64 @@
+- type: entity
+  parent: BaseStorageItem
+  id: RMCWatchCase
+  name: wristwatch case
+  suffix: Empty
+  description: A tough-wearing case to keep an expensive wristwatch safe when not being worn.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/pdt-case.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Storage
+    maxItemSize: Medium
+    grid:
+    - 0,0,1,1
+    whitelist: 
+      tags: 
+      - Watch
+
+- type: entity
+  parent: RMCWatchCase
+  id: RMCWatchCaseBasic
+  name: Seikaku Pulsemeter wristwatch storage case
+  components: 
+  - type: StorageFill
+    contents:
+    - id: RMCWatchBasic
+  
+- type: entity
+  parent: RMCWatchCase
+  id: RMCWatchCaseBishop
+  name: Seikaku 13B6-2000 wristwatch storage case
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWatchBishop
+  
+- type: entity
+  parent: RMCWatchCase
+  id: RMCWatchCaseRipley
+  name: Seikaku 13B6-3000 wristwatch storage case
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWatchRipley
+  
+- type: entity
+  parent: RMCWatchCase
+  id: RMCWatchCaseBurke
+  name: Seikaku H487-9098 wristwatch storage case
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWatchBurke
+  
+- type: entity
+  parent: RMCWatchCase
+  id: RMCWatchCaseDallas
+  name: Veniti E-338 wristwatch storage case
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWatchDallas

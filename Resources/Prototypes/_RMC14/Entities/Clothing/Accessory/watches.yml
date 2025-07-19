@@ -1,0 +1,119 @@
+- type: entity
+  abstract: true
+  parent: [RMCBaseUniformAccessory, ClothingHandsBase]
+  id: RMCWatchBaseL
+  name: watchL
+  description: An abstract watch.
+  components:
+  - type: UniformAccessory
+    category: WristL
+    limit: 1
+    hiddenByJacketRolling: false
+
+- type: entity
+  abstract: true
+  parent: [RMCBaseUniformAccessory, ClothingHandsBase]
+  id: RMCWatchBaseR
+  name: watchR
+  description: An abstract watch.
+  components:
+  - type: UniformAccessory
+    category: WristR
+    limit: 1
+    hiddenByJacketRolling: false
+    
+- type: entity 
+  parent: RMCWatchBaseL
+  id: RMCWatchCheap
+  name: cheap digital watch
+  description: A cheap 24-hour only digital wrist watch. It has a crappy red display, great for looking at in the dark!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/cheap.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Watches/pdt.rsi
+      state: watchL
+  - type: Clothing 
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/pdt.rsi
+    
+- type: entity 
+  parent: RMCWatchBaseL
+  id: RMCWatchBasic
+  name: Seikaku Pulsemeter wristwatch
+  description: Model S448-209A, a durable quartz-based wristwatch issued to most Marines who pass through basic training.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
+      state: watchL
+  - type: Clothing 
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
+    
+- type: entity 
+  parent: RMCWatchBaseL
+  id: RMCWatchBishop
+  name: Seikaku 13B6-2000 wristwatch
+  description: A fancy black-bodied wristwatch. Once set correctly, it always holds the right time. For the connoisseurs of precision.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/bishop.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
+      state: watchL
+  - type: Clothing 
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/black.rsi
+    
+- type: entity 
+  parent: RMCWatchBaseL
+  id: RMCWatchRipley
+  name: Seikaku 13B6-3000 wristwatch
+  description: With the pioneering design of analog quartz chronographs beating inside it, this asymetric wristwatch is perfect for anyone who can remain standing where others have all fallen.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/ripley.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
+      state: watchL
+  - type: Clothing 
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
+    
+- type: entity 
+  parent: RMCWatchBaseL
+  id: RMCWatchBurke
+  name: Seikaku H487-9098 wristwatch
+  description: A more upmarket wristwatch tailored towards junior executives & 'company guys' all across the galaxy. Flashy, but not horribly ostentatious.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
+      state: watchL
+  - type: Clothing 
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/silver.rsi
+
+- type: entity 
+  parent: RMCWatchBaseL
+  id: RMCWatchDallas
+  name: Veniti E-338 wristwatch
+  description: Advertised as being 'A new dawn of precision digital watches', the E-338 became a popular hit with members of the civil aerospace industry.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/fancy.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Watches/fancy.rsi
+      state: watchL
+  - type: Clothing 
+    sprite: _RMC14/Objects/Clothing/Accessory/Watches/fancy.rsi

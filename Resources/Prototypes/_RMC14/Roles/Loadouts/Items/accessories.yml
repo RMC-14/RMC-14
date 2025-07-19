@@ -14,3 +14,68 @@
     back:
     - RMCSquadArmband
 
+- type: loadout
+  id: WatchCheapRMC
+  storage:
+    back:
+    - RMCWatchCheap
+
+- type: loadout
+  id: WatchBasicRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobRifleman
+        time: 90000 # 25 hrs
+  storage:
+    back:
+    - RMCWatchCaseBasic
+
+- type: loadout
+  id: WatchRipleyRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobSurvivor
+        time: 36000 # 10 hrs
+  storage:
+    back:
+    - RMCWatchCaseRipley
+
+- type: loadout
+  id: WatchDallasRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobPilotDropship
+        time: 43200 # 12 hrs
+  storage:
+    back:
+    - RMCWatchCaseDallas
+
+- type: loadout
+  id: WatchBurkeRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobLiaison
+        time: 126000 # 35 hrs
+  storage:
+    back:
+    - RMCWatchCaseBurke
+
+- type: loadout
+  id: WatchBishopRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: RMCJobSynthetic
+        time: 126000 # 35 hrs
+  storage:
+    back:
+    - RMCWatchCaseBishop
