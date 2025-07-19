@@ -1,0 +1,32 @@
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseM54CMag
+  name: M54C magazine case (x20)
+  description: An ammunition case containing 20 M54C magazines.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMMagazineRifleM54C
+      amount: 20
+
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseM54CMagHalf
+  name: M54C magazine case (x10)
+  description: An ammunition case containing 10 M54C magazines.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMMagazineRifleM54C
+      amount: 10
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedMetal
+  name: metal sheets supply crate (x200)
+  description: A supply crate containing four fifty stacks of metal sheets.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: CMSheetMetal50
+      amount: 4

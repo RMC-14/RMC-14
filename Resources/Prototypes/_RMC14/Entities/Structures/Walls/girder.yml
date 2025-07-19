@@ -85,3 +85,16 @@
           collection: MetalBreak
   - type: StaticPrice
     price: 66
+
+- type: entity
+  parent: CMGirder
+  id: RMCGirderDisplaced # TODO RMC14 : Requires crowbarring to be used as a girder
+  name: displaced
+  suffix: Girder
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    state: displaced
+  - type: Icon
+    state: displaced

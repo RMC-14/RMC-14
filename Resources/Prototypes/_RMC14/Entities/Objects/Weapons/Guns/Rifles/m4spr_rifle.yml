@@ -180,6 +180,14 @@
     bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
+  parent: CMMagazineRifleM4SPRAP
+  id: RMCMagazineRifleM4SPRAPEmpty
+  suffix: AP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: CMMagazineRifleM4SPR
   id: CMMagazineRifleM4SPRExt
   name: "M4SPR extended magazine (10x24mm)"

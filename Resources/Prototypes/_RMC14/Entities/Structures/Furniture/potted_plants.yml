@@ -47,6 +47,7 @@
   abstract: true
   name: potted plant
   description: ""
+  suffix: RMC
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/potted_plants.rsi
