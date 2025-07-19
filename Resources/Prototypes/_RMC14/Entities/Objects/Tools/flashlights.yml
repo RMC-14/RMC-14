@@ -27,7 +27,8 @@
         minValue: 0.1
         maxValue: 2.0
         isLooped: true
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
   - type: Battery
     maxCharge: 600

@@ -76,6 +76,10 @@
         amount: 1
       - id: RMCWeYaWhiteVest
         amount: 1
+      - id: RMCWeYaFurCoat
+        amount: 1
+#      - id:RMCweYaFurCoat
+#        amount: 1
 #      - id: GreyBomberJacket
 #        amount: 1
 #      - id: RedBomberJacket
