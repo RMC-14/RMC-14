@@ -189,10 +189,6 @@
     containers:
       storagebase: !type:Container
         ents: [ ]
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
@@ -223,6 +219,10 @@
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: sql-armor
   - type: RMCStorageEjectHand
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
 
 - type: entity
   parent: RMCBaseMarineArmor

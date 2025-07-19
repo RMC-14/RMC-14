@@ -11,7 +11,7 @@
   - type: Item
     size: Normal
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
     grid:
     - 0,0,1,1
     whitelist: 

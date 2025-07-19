@@ -9,6 +9,7 @@
     category: WristL
     limit: 1
     hiddenByJacketRolling: false
+  - type: RMCClock
 
 - type: entity
   abstract: true
@@ -21,6 +22,10 @@
     category: WristR
     limit: 1
     hiddenByJacketRolling: false
+  - type: RMCClock
+  - type: Tag
+    tags: 
+    - Watch
     
 - type: entity 
   parent: RMCWatchBaseL
@@ -37,6 +42,9 @@
       state: watchL
   - type: Clothing 
     sprite: _RMC14/Objects/Clothing/Accessory/Watches/pdt.rsi
+  - type: Tag
+    tags: 
+    - Watch
     
 - type: entity 
   parent: RMCWatchBaseL
