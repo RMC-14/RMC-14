@@ -171,6 +171,48 @@
           High: { state: pistol_ammo_high, visible: true }
           Full: { state: pistol_ammo_full, visible: true }
 
+# Flamer Base
+
+- type: entity
+  abstract: true
+  parent: RMCBoxMagazineBase
+  id: RMCBoxFlamerTankBase
+  name: generic flamer tank box (? x ?)
+  description: A box of incinerator tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: flamer_box # "size"_box - Base Colour
+      color: "#3d3832"
+    - state: flamer_ammo_full_base # "size"_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: flamer_ammo_full_color # "size"_ammo_full_color - Type Colour
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#c18f1a"
+    - state: flamer_lid # "size"_lid - Base Colour
+      map: [ "lid" ]
+      color: "#3d3832"
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: flamer_ammo_full_base, visible: false }
+          Low: { state: flamer_ammo_low_base, visible: true }
+          Medium: { state: flamer_ammo_medium_base, visible: true }
+          High: { state: flamer_ammo_high_base, visible: true }
+          Full: { state: flamer_ammo_full_base, visible: true }
+        enum.CMItemSlotsLayers2.Fill: # Second fill state for fuel
+          Empty: { state: flamer_ammo_full_color, visible: false }
+          Low: { state: flamer_ammo_low_color, visible: true }
+          Medium: { state: flamer_ammo_medium_color, visible: true }
+          High: { state: flamer_ammo_high_color, visible: true }
+          Full: { state: flamer_ammo_full_color, visible: true }
+
 # Shells Base
 - type: entity
   abstract: true
@@ -1201,6 +1243,48 @@
       whitelist:
         tags:
         - RMCSpeedLoader44Marksman
+
+# -- MISC AMMO BOXES --
+
+- type: entity
+  parent: RMCBoxFlamerTankBase
+  id: RMCBoxFlamerTankEmpty
+  name: flamer tank box (UT-Napthal Fuel x 8)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxFlamerTankEmpty
+  - type: Sprite
+    layers:
+    - state: flamer_box
+      color: "#3d3832"
+    - state: flamer_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: flamer_ammo_full_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#c18f1a"
+    - state: flamer_lid
+      map: [ "lid" ]
+      color: "#3d3832"
+  - type: CMItemSlots
+    count: 8
+    slot:
+      whitelist:
+        components:
+        - RMCFlamerTank
+
+- type: entity
+  parent: RMCBoxFlamerTankEmpty
+  id: RMCBoxFlamerTank
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCTankFlamer
+    count: 8
+    slot:
+      whitelist:
+        components:
+        - RMCFlamerTank
 
 # -- SHELL BOXES --
 

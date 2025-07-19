@@ -281,7 +281,40 @@
       "name": "supply_box_powercell"
     },
     {
-      "name": "old"
+      "name": "fire"
+    },
+    {
+      "name": "flamer_box"
+    },
+    {
+      "name": "flamer_lid"
+    },
+    {
+      "name": "flamer_ammo_full_base"
+    },
+    {
+      "name": "flamer_ammo_full_color"
+    },
+    {
+      "name": "flamer_ammo_high_base"
+    },
+    {
+      "name": "flamer_ammo_high_color"
+    },
+    {
+      "name": "flamer_ammo_medium_base"
+    },
+    {
+      "name": "flamer_ammo_medium_color"
+    },
+    {
+      "name": "flamer_ammo_low_base"
+    },
+    {
+      "name": "flamer_ammo_low_color"
+    },
+    {
+      "name": "supply_box_powercell_colour"
     }
   ]
 }
