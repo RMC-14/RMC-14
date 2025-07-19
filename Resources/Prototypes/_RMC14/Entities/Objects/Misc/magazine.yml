@@ -1,0 +1,123 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCMagazineBootsN160
+  name: Boots! Issue No.160.
+  description: The only official UNMC magazine, the headline reads 'Corporate Liaison 'emotionally exhausted' from screwing so many people over.'
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/boots_magazine.rsi
+    state: icon-1
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Misc/boots_magazine.rsi
+    state: icon-1
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN07
+  name: Boots! Issue No.7.
+  description: The only official UNMC magazine, the headline reads 'The Future Soldier!'. On the cover is a piece of sturdy-looking armor, containing a safe-looking marine.
+  components:
+  - type: RMCLoreExaminable
+  content: A large portion of the magazine describes the B18 Defensive Armor, how it is designed to make the modern marine invincible and that it has recently finished trials, raising the expectations of the brass for this new piece of gear.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN45
+  name: Boots! Issue No.45.
+  description: The only official UNMC magazine, the headline reads 'Your sidearm and You!' with the subtitle 'Your best sleeping companion' right below it.
+  components:
+  - type: RMCLoreExaminable
+    content: The first part of the article explains basic sidearm maintenance and includes a small advertisement for a well-known gunsmith on Gateway Station. The second describes the best positions to sleep with your sidearm under the pillow in case of unexpected seditious activity.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN54
+  name: Boots! Issue No.54.
+  description: The only official UNMC magazine, the headline reads 'ARMAT strikes back against litigants in M41A-MK2 self cleaning case'.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN55
+  name: Boots! Issue No.55.
+  description: The only official UNMC magazine, the headline reads 'TEN tips to keep your UD4 cockpit both safer and more relaxing'.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN58
+  name: Boots! Issue No.58.
+  description: The only official USCM magazine, the headline reads 'Swift, Silent, Deadly:;Tientsin'.
+  components:
+  - type: RMCLoreExaminable
+    content: The article contained within describes the experience of the 1st FORECON Battalion veterans in the Tientsin campaign and the harsh jungle environment they had to go through when dealing with SPP and Local Guerrillas.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN70
+  name: Boots! Issue No.70.
+  description: The only official UNMC magazine, the headline reads “Marine 70, The Future of Warfare.” The article then goes on to detail the plans and implementation of Marine 70, a program designed to help modernize the UNMC for 2170.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN113
+  name: Boots! Issue No.113.
+  description: The only official UNMC magazine, the headline reads 'Mars, heavy fighting on the Red Frontier!'. The cover depicts a group of victorious marines on Mars, as well as a small Weston-Yamada advertisement.
+  components:
+  - type: RMCLoreExaminable
+    content: The article details the fierce urban combat the marines had to face against human colonists on Mars during the early days of its colonization. As Weston Yamada was expanding on the red frontier, they faced armed resistance from colonists who refused the corporate expansion. Weston Yamada PMCs with the help of nearby UNMC forces fought off the insurrectionists. The article also mentions a few accounts from tankers on the effectiveness of their new main battle tanks, and recent sightings of MARSOC operators in the AO. This conflict marked one of the first recorded uses of orbital bombardments in active combat by the UNMC, with the UNS Omaha involved.
+
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN117
+  name: Boots! Issue No.117.
+  description: The only official UNMC magazine, the headline reads 'STOP CANNING'. The short paragraph further explains the dangers of marines throwing CN-20 Nerve gas into bathrooms as a prank.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN120
+  name: Boots! Issue No.120.
+  description: The only official UNMC magazine, the headline reads 'Wallace Kelly Haar, 2136-2181'.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN125
+  name: Boots! Issue No.125.
+  description: The only official UNMC magazine, the headline reads 'Bravo Squad… not just for FOB duty!'. Despite the title the article primarily consists of photos of barricades and diagrams on arrangements for ammo boxes.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN131
+  name: Boots! Issue No.131.
+  description: The only official UNMC magazine, the headline reads 'NO HOTBOXING'. The following paragraph goes into detail about how the HSDP smoke grenades are not safe for long period inhalation exposure and how hypoxia is a poor way to get high.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN150
+  name: Boots! Issue No.150.
+  description: The only official UNMC magazine, the headline reads 'SPP Rations, The truth.' Its cover features a captured SPP MRE.
+  components:
+  - type: RMCLoreExaminable
+    content: A large portion of this issue explains SPP field rations aren't standardized and are produced at a local level. Because of this, captured and confiscated SPP rations have included some odd choices such as duck liver, century eggs, lutefisk, pickled pig snout, canned tripe, and dehydrated candied radish snacks.
+
+- type: entity
+  parent: RMCMagazineBootsN160
+  id: RMCMagazineBootsN189
+  name: Boots! Issue No.189.
+  description: The only official UNMC magazine, the headline reads 'Military Police Edition, those that help marines help themselves!'. As with every copy you have ever seen of Issue 189, someone has taken the time to deface it with crude language and unseemly drawings.
+
+- type: entity
+  parent: BaseItem
+  id: RMCMagazineWeYaOrrery
+  name: WeYa Orrery Issue No.65.
+  description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a rugged, colony embedded in a cliff face, with the headline 'Disaster at Danton'
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/boots_magazine.rsi
+    state: icon-2
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Misc/boots_magazine.rsi
+    state: icon-2
+  - type: RMCLoreExaminable
+    content: Half of this issue is taken up by rumors of a Senior Executive misfiling his Quarterly Profit Report for Danton's Perch with the PMC Dispatch Division. After it is a debate article between two Executives from Special Services, regarding the creation of a colony in the Mu Arae system. The debate is centered around the location of the colony; one Executive thinks the colony should be a sub-orbital gas harvester around a gas giant, while the other thinks it should be located on the gas giant's verdant moon. Halfway through the debate, both Executives appear to lose their composure, and start slinging insults. The rest of the article appears to be heavily censored after that point.

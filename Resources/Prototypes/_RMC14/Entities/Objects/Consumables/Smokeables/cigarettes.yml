@@ -267,7 +267,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/electro_golds.rsi
   - type: RMCLoreExaminable #TODO: Replace "premier station" with whatever the station gets named
-    content: "Popularized by Novaris workers during the construction of it's premier station, these cigarettes lit easily, burned evenly, and offered a straightforward, dependable smoke. The flat, dusty flavor and steady draw quickly made them a colonial staple. Kierlan later scaled production on frontier farming worlds and locked in exclusive trade deals with the UNMC."
+    content: "Popularized by Novaris workers during the construction of its premier station, these cigarettes lit easily, burned evenly, and offered a straightforward, dependable smoke. The flat, dusty flavor and steady draw quickly made them a colonial staple. Kierlan later scaled production on frontier farming worlds and locked in exclusive trade deals with the UNMC."
 
 - type: entity
   parent: RMCCigarettePackLuckySloths

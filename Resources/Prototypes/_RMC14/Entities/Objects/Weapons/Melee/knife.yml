@@ -212,7 +212,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 3
+        Blunt: 3
   - type: DamageOtherOnHit
     damage:
       types:
@@ -238,8 +238,6 @@
     activatedDamage:
       types:
         Slash: 15
-        Heat: 15
-        Structural: 20
   - type: ItemToggle
     soundActivate:
       path: /Audio/_RMC14/Weapons/flipblade.ogg

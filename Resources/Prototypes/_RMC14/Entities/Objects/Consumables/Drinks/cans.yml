@@ -361,6 +361,7 @@
     - 6-pack-5
     - 6-pack-6
   - type: Appearance
+  - type: DeleteOnContainerEmpty
 
 - type: entity
   parent: CMDrinkCanBase

@@ -222,9 +222,16 @@
   id: RecreationalRMC
   name: rmc-loadout-group-recreational
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 7
   loadouts:
   - CassettePlayerRMC
+  - MagazineBootsN54RMC
+  - MagazineBootsN55RMC
+  - MagazineBootsN117RMC
+  - MagazineBootsN150RMC
+  - MagazineBootsN160RMC
+  - MagazineWeYaOrreryRMC
+
 
 # Weapons
 - type: loadoutGroup
@@ -273,7 +280,7 @@
   id: SmokablesRMC
   name: rmc-loadout-group-smokables
   minLimit: 0
-  maxLimit: 11
+  maxLimit: 16
   loadouts:
   - LuckySlothsPackRMC
   - ArcturianAcePackRMC
@@ -291,6 +298,16 @@
   - ZippoExecRMC
   - ZippoGoldRMC
   - MatchboxRMC
+
+# Miscellaneous
+- type: loadoutGroup
+  id: MiscellaneousRMC
+  name: rmc-loadout-group-miscellaneous
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - StraightRazorRMC
+
 
 # Food (sweets)
 - type: loadoutGroup

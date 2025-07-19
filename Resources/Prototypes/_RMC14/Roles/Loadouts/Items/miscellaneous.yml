@@ -1,0 +1,9 @@
+﻿# Miscellaneous
+- type: loadout
+  id: StraightRazorRMC
+  cost: 2
+  storage:
+    back:
+    - RMCStraightRazor
+
+
