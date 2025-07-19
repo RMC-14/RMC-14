@@ -1353,14 +1353,12 @@
     layers:
     - state: rifle_box
       color: "#5786be"
-    - state: shell_box_marking
-      color: "#e0d5c2"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#5786be"
-    - state: shell_box_beanbag
+    - state: shell_box_buckshot
       color: "#e0d5c2"
     - state: rifle_lid
       map: [ "lid" ]
@@ -1401,15 +1399,15 @@
     layers:
     - state: rifle_box
       color: "#c6cdd3"
-    - state: shell_box_marking
-      color: "#ffcb26"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffcb26"
-    - state: shell_box_incendiary
+    - state: shell_box_buckshot
       color: "#b8533d"
+    - state: smallshell_box_marking
+      color: "#ffcb26"
     - state: rifle_lid
       map: [ "lid" ]
       color: "#c6cdd3"
@@ -1449,15 +1447,15 @@
     layers:
     - state: rifle_box
       color: "#c6cdd3"
-    - state: shell_box_marking
-      color: "#e49331"
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#e49331"
-    - state: shell_box_incendiary
+    - state: shell_box_buckshot
       color: "#b8533d"
+    - state: smallshell_box_marking
+      color: "#e49331"
     - state: rifle_lid
       map: [ "lid" ]
       color: "#c6cdd3"

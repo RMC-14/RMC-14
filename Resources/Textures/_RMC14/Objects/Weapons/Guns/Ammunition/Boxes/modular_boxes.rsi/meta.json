@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original Sprite by Aleksh, Modified by Ramiris",
+  "copyright": "Original Sprite by Aleksh, Modified by Ramiris and github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -179,16 +179,7 @@
       "name": "pistol_box_44"
     },
     {
-      "name": "shell_box_incendiary"
-    },
-    {
-      "name": "shell_box_marking"
-    },
-    {
       "name": "shell_lid_marking"
-    },
-    {
-      "name": "shell_box_beanbag"
     },
     {
       "name": "smallshell"
