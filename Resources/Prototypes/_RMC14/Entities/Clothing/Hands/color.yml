@@ -87,7 +87,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/purple.rsi
 
-- type: entity 
+- type: entity
   parent: CMHandsInsulated
   id: CMHandsBlackInsulated
   name: black insulated gloves
