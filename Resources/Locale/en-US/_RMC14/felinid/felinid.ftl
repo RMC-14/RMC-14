@@ -71,6 +71,9 @@ marking-FelinidFurMale-fur_mas = Color
 marking-FelinidFurFemale = Fur
 marking-FelinidFurMale-fur_fem = Color
 
-marking-FelindLeopard = Leopard tail
-marking-FelindLeopard-m_tail_leopard_primary = Primary
-marking-FelindLeopard-m_tail_leopard_tertiary = Spots
+marking-FelinidLeopard = Leopard tail
+marking-FelinidLeopard-m_tail_leopard_primary = Primary
+marking-FelinidLeopard-m_tail_leopard_tertiary = Spots
+
+marking-FelinidCatBig = Big Cat tail
+marking-FelinidCatBig-m_tail_catbig_primary = Primary
