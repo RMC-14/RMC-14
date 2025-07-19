@@ -52,11 +52,11 @@
         points: 5
     - name: Smokables
       entries:
-      - id: CigarGoldCase # TODO RMC14
+      - id: RMCCigarCase
         points: 5
       - id: CMCigarettePackLuckySlothsMini # TODO RMC14 WeYa cigarettes
         points: 5
-      - id: FlippoEngravedLighter # TODO RMC14
+      - id: RMCZippoGold
         points: 5
     - name: Drinkables
       entries:
