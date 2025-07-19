@@ -459,3 +459,19 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/trimmed_barb_wire.rsi
       state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbChaplainPatch
+  name: improper UNMC chaplain helmet patch
+  description: This patch is all that remains of the Chaplaincy of the UNS Almayer, along with the Chaplains themselves. Both no longer exist as a result of losses suffered during Operation Justice.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/chaplain_patch.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/chaplain_patch.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/chaplain_patch.rsi
+      state: helmet

@@ -180,3 +180,10 @@
   storage:
     back:
     - RMCHelmetGarbWire
+
+- type: loadout
+  id: HelmetGarbChaplainPatchRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbChaplainPatch

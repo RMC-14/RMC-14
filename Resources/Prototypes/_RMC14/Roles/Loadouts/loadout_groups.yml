@@ -169,6 +169,7 @@
   - RosaryRMC
   - PrescriptionRMC
   - TrimmedWireRMC
+  - HelmetGarbChaplainPatchRMC
 
 # Accessories
 - type: loadoutGroup
