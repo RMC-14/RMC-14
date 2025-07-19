@@ -1,0 +1,29 @@
+- type: loadout
+  id: PonchoRMC
+  storage:
+    back:
+    - RMCPoncho
+
+- type: loadout
+  id: PonchoJungleRMC
+  storage:
+    back:
+    - RMCPonchoJungle
+
+- type: loadout
+  id: PonchoDesertRMC
+  storage:
+    back:
+    - RMCPonchoDesert
+
+- type: loadout
+  id: PonchoUrbanRMC
+  storage:
+    back:
+    - RMCPonchoUrban
+
+- type: loadout
+  id: PonchoSnowRMC
+  storage:
+    back:
+    - RMCPonchoSnow

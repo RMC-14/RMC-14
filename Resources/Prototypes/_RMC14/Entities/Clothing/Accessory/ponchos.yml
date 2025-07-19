@@ -1,0 +1,84 @@
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCPonchoBase
+  name: poncho
+  description: An abstract poncho.
+  components:
+  - type: UniformAccessory
+    category: Poncho
+    limit: 1
+    hiddenByJacketRolling: false
+    layerKey: "enum.MedalVisualLayers.Base"
+  - type: Item
+    size: Normal
+
+- type: entity 
+  parent: RMCPonchoBase
+  id: RMCPoncho
+  name: UNMC poncho
+  description: The standard UNMC poncho has variations for every climate. Custom fitted to be attached to standard UNMC armor variants and worn over uniforms, it is comfortable, warming or cooling as needed, and well-fit. A marine couldn't ask for more. Affectionately referred to as a \"woobie\".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/classic.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/classic.rsi
+      state: poncho
+
+- type: entity 
+  parent: RMCPonchoBase
+  id: RMCPonchoUrban
+  name: UNMC urban poncho
+  description: The standard UNMC poncho has variations for every climate. Custom fitted to be attached to standard UNMC armor variants and worn over uniforms, it is comfortable, warming or cooling as needed, and well-fit. A marine couldn't ask for more. Affectionately referred to as a \"woobie\".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/urban.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/urban.rsi
+      state: poncho
+
+- type: entity 
+  parent: RMCPonchoBase
+  id: RMCPonchoJungle
+  name: UNMC jungle poncho
+  description: The standard UNMC poncho has variations for every climate. Custom fitted to be attached to standard UNMC armor variants and worn over uniforms, it is comfortable, warming or cooling as needed, and well-fit. A marine couldn't ask for more. Affectionately referred to as a \"woobie\".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/jungle.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/jungle.rsi
+      state: poncho
+      
+- type: entity 
+  parent: RMCPonchoBase
+  id: RMCPonchoDesert
+  name: UNMC desert poncho
+  description: The standard UNMC poncho has variations for every climate. Custom fitted to be attached to standard UNMC armor variants and worn over uniforms, it is comfortable, warming or cooling as needed, and well-fit. A marine couldn't ask for more. Affectionately referred to as a \"woobie\".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/desert.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/desert.rsi
+      state: poncho
+      
+- type: entity 
+  parent: RMCPonchoBase
+  id: RMCPonchoSnow
+  name: UNMC snow poncho
+  description: The standard UNMC poncho has variations for every climate. Custom fitted to be attached to standard UNMC armor variants and worn over uniforms, it is comfortable, warming or cooling as needed, and well-fit. A marine couldn't ask for more. Affectionately referred to as a \"woobie\".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/snow.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Ponchos/snow.rsi
+      state: poncho
