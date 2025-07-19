@@ -224,6 +224,18 @@
       "name": "supply_ammo_medium"
     },
     {
+      "name": "supply_ammo_small_high"
+    },
+    {
+      "name": "supply_ammo_small_full"
+    },
+    {
+      "name": "supply_ammo_small_low"
+    },
+    {
+      "name": "supply_ammo_small_medium"
+    },
+    {
       "name": "supply_lid_closed"
     },
     {
@@ -233,34 +245,37 @@
       "name": "supply_box"
     },
     {
-      "name": "supply_box_casflare"
+      "name": "supply_lid_small_closed"
+    },
+    {
+      "name": "supply_lid_small_open"
+    },
+    {
+      "name": "supply_lid_small_closed_marking"
+    },
+    {
+      "name": "supply_lid_small_open_marking"
+    },
+    {
+      "name": "supply_box_small"
+    },
+    {
+      "name": "supply_box_small_marking"
     },
     {
       "name": "supply_box_flashlight"
     },
     {
-      "name": "supply_box_food"
+      "name": "supply_box_flare"
     },
     {
-      "name": "supply_box_lightflare"
+      "name": "supply_box_flare_colour"
     },
     {
-      "name": "supply_box_logo_clf"
+      "name": "supply_box_small_food"
     },
     {
-      "name": "supply_box_logo_spp"
-    },
-    {
-      "name": "supply_box_logo_un"
-    },
-    {
-      "name": "supply_box_logo_unmc"
-    },
-    {
-      "name": "supply_box_logo_weya"
-    },
-    {
-      "name": "supply_box_nail"
+      "name": "supply_box_small_nail"
     },
     {
       "name": "supply_box_powercell"

@@ -233,7 +233,7 @@
     - state: supply_ammo_full # "size"_ammo_full - Contents Colour
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#e0d5c2"
-    - state: supply_box_logo_weya # "size"_box_marking - Type Colour
+    - state: supply_box_small_food # "size"_box_marking - Type Colour
     - state: supply_lid_closed # "size"_lid - Base Colour
       map: [ "lid" ]
       color: "#887b67"
@@ -253,6 +253,45 @@
           Medium: { state: supply_ammo_medium, visible: true }
           High: { state: supply_ammo_high, visible: true }
           Full: { state: supply_ammo_full, visible: true }
+
+- type: entity
+  abstract: true
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineSupplySmallBase
+  name: generic small supply box (? x ?)
+  description: A box of supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: supply_box_small # "size"_box - Base Colour
+      color: "#887b67"
+    - state: supply_ammo_full # "size"_ammo_full - Contents Colour
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#e0d5c2"
+    - state: supply_box_small_food # "size"_box_marking - Type Colour
+    - state: supply_lid_small_closed # "size"_lid - Base Colour
+      map: [ "lid" ]
+      color: "#887b67"
+    - state: rifle_lid_marking # "size"_lid_marking - Type Colour
+      map: [ "lid_marking" ]
+      color: "#8888ff"
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { state: supply_lid_small_open }
+          False: { state: supply_lid_small_closed }
+        lid_marking:
+          True: { state: supply_lid_small_open_marking }
+          False: { state: supply_lid_small_closed_marking }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: supply_ammo_small_full, visible: false }
+          Low: { state: supply_ammo_small_low, visible: true }
+          Medium: { state: supply_ammo_small_medium, visible: true }
+          High: { state: supply_ammo_small_high, visible: true }
+          Full: { state: supply_ammo_small_full, visible: true }
 
 # -- RIFLE BOXES --
 
@@ -1486,7 +1525,7 @@
 
 # Nailgun
 - type: entity
-  parent: RMCBoxMagazineSupplyBase
+  parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxMagazineSMGNailgunEmpty
   name: magazine box (Nailgun x 10)
   components:
@@ -1495,16 +1534,21 @@
     node: RMCBoxMagazineSMGNailgunEmpty
   - type: Sprite
     layers:
-    - state: supply_box
+    - state: supply_box_small
       color: "#709bff"
-    - state: supply_ammo_full
+    - state: supply_ammo_small_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#b2bdc4"
-    - state: supply_box_nail
-      color: "#e0d5c2"
-    - state: supply_lid_closed
+    - state: supply_box_small_nail
+      color: "#b2bdc4"
+    - state: supply_box_small_marking
+      color: "#ffe44a"
+    - state: supply_lid_small_closed
       map: [ "lid" ]
       color: "#709bff"
+    - state: supply_lid_small_closed_marking
+      map: [ "lid_marking" ]
+      color: "#ffe44a"
   - type: CMItemSlots
     count: 10
     slot:
