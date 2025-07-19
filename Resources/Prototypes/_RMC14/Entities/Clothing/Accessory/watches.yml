@@ -10,6 +10,9 @@
     limit: 1
     hiddenByJacketRolling: false
   - type: RMCClock
+  - type: Tag
+    tags: 
+    - Watch
 
 - type: entity
   abstract: true
