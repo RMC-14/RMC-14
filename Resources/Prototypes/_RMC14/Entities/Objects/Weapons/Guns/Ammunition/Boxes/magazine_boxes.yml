@@ -1530,7 +1530,7 @@
 # M13 auto pistol
 # M13 REG
 - type: entity
-  parent: RMCBoxMagazineSMGBase
+  parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM13Empty
   name: magazine box (M13 x 22)
   components:
@@ -1539,21 +1539,19 @@
     node: RMCBoxMagazinePistolM13Empty
   - type: Sprite
     layers:
-    - state: smg_box
+    - state: pistol_box
       color: "#727e90"
-    - state: rifle_ammo_full_mags_base
+    - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_mags_color
-      map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#727e90"
-    - state: pistol_box_11
+    - state: pistol_box_1984
       color: "#ffcb26"
-    - state: smg_box_marking
+    - state: pistol_box_marking
       color: "#7c4c1b"
-    - state: smg_lid
+    - state: pistol_lid
       map: [ "lid" ]
       color: "#727e90"
-    - state: smg_lid_marking
+    - state: pistol_lid_marking
       map: [ "lid_marking" ]
       color: "#7c4c1b"
   - type: CMItemSlots
@@ -1578,7 +1576,7 @@
 
 #M13 Extended
 - type: entity
-  parent: RMCBoxMagazineSMGBase
+  parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM13ExtEmpty
   name: magazine box (M13Ext x 14)
   components:
@@ -1587,23 +1585,21 @@
     node: RMCBoxMagazinePistolM13Empty
   - type: Sprite
     layers:
-    - state: smg_box
+    - state: pistol_box
       color: "#727e90"
-    - state: rifle_ammo_full_mags_base
+    - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_mags_color
-      map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#727e90"
-    - state: pistol_box_11
+    - state: pistol_box_1984
       color: "#ffcb26"
-    - state: smg_box_marking
-      color: "#df7126"
-    - state: smg_lid
+    - state: pistol_box_marking
+      color: "#ffcb26"
+    - state: pistol_lid
       map: [ "lid" ]
       color: "#727e90"
-    - state: smg_lid_marking
+    - state: pistol_lid_marking
       map: [ "lid_marking" ]
-      color: "#7c4c1b"
+      color: "#ffcb26"
   - type: CMItemSlots
     count: 14
     slot:
@@ -1626,7 +1622,7 @@
 
 #M13 Drum
 - type: entity
-  parent: RMCBoxMagazineSMGBase
+  parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM13DrumEmpty
   name: magazine box (M13Drum x 12)
   components:
@@ -1635,23 +1631,21 @@
     node: RMCBoxMagazinePistolM13DrumEmpty
   - type: Sprite
     layers:
-    - state: smg_box
+    - state: pistol_box
       color: "#727e90"
-    - state: rifle_ammo_full_mags_base
+    - state: pistol_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_mags_color
-      map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#727e90"
-    - state: pistol_box_11
-      color: "#ffcb26"
-    - state: smg_box_marking
-      color: "#fbf296"
-    - state: smg_lid
+    - state: pistol_box_1984
+      color: "#ffa126"
+    - state: pistol_box_marking
+      color: "#ffa126"
+    - state: pistol_lid
       map: [ "lid" ]
       color: "#727e90"
-    - state: smg_lid_marking
+    - state: pistol_lid_marking
       map: [ "lid_marking" ]
-      color: "#7c4c1b"
+      color: "#ffa126"
   - type: CMItemSlots
     count: 12
     slot:
