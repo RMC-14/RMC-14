@@ -18,7 +18,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaWeyamartEmployee
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:

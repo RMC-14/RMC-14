@@ -18,7 +18,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaMaterialReprocessingTechnician
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:

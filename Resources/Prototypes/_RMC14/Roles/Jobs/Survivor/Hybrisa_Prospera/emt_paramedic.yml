@@ -21,7 +21,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaEMTParamedic
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:

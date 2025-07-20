@@ -18,7 +18,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaPizzaGalaxy
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:

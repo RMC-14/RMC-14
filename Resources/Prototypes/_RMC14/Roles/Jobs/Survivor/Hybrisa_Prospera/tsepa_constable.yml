@@ -38,7 +38,6 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaConstable
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:

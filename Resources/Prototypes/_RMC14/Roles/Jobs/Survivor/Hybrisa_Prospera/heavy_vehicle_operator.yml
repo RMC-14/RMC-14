@@ -18,7 +18,6 @@
         RMCSkillConstruction: 2
         RMCSkillVehicles: 3
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:

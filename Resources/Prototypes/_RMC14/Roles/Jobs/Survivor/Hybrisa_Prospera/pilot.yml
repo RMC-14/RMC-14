@@ -28,7 +28,6 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaCommercialPilot
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
