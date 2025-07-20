@@ -297,3 +297,17 @@
   - type: Access
     groups:
       - CMAccessAegis
+  - type: AegisTrackable
+
+- type: entity
+  parent: RMCIDCardAegis
+  id: RMCIDCardAegisIntel
+  name: AEGIS Access Badge
+  suffix: Intel-giving
+  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates. It has some blood on it.
+  components:
+  - type: IntelRescueSurvivorObjective
+    value: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: bloody
