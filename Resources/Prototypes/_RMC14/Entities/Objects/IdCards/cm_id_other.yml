@@ -337,6 +337,8 @@
     groups:
       - CMAccessAegis
   - type: AegisTrackable
+  - type: Corrodible
+      isCorrodible: false
 
 - type: entity
   parent: RMCIDCardAegis
