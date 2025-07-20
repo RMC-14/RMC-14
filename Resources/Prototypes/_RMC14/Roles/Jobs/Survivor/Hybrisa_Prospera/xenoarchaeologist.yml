@@ -1,0 +1,65 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: RMCSurvivorHybrisaXenoarchaeologist
+  name: rmc-job-name-survivor-xenoarchaeologist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaXenoarchaeologist
+  startingGear: RMCGearSurvivorHybrisaXenoarchaeologist
+  spawnMenuRoleName: Xenoarchaeologist (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaXenoarchaeologist
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorHybrisaXenoarchaeologist
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianScientist
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaXenoarchaeologist
+  name: xenoarchaeologist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaXenoarchaeologist
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetScientist
+  id: RMCGearSurvivorPresetHybrisaXenoarchaeologist
+  name: xenoarchaeologist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
+    - [ CMSatchel, RMCLabcoatScience, RMCShoesBrown, RMCGlassesMarineRpg ]
+    - [ RMCSatchelLightpack, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
+    - [ RMCSatchelLightpack, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
+    - [ RMCSatchelLightpack, RMCSuitBioWeYa, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCHoodBioWeYa, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCToolSpade, RMCFlashlightLantern ]

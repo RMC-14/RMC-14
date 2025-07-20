@@ -100,6 +100,7 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Organ damage" Text="Caused by physical damage to unarmored parts, moving with unsplinted fractures, and overdoses." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Trapper Boiler strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Hedgehog Ravager strain" />
                 </BoxContainer>
@@ -114,7 +115,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Fire missions" Text="A second way for dropships to attack, where instead of shooting directly at a flare or laser they move in a direction away from it and shoot their weapons to each side. This method of attack takes camera offset into account and is much more effective at clearing an area." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Plasma and flamethrower sentries" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke and King endgame" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Ordnance Technician" Text="Shipside role in charge of making custom grenades, claymores, mortar shells, and rockets" />
                 </BoxContainer>
             </BoxContainer>

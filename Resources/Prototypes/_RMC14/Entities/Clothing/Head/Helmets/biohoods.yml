@@ -17,3 +17,27 @@
     - HeadSide
   - type: CMArmor
     bio: 100 # CLOTHING_ARMOR_HARDCORE
+
+- type: entity
+  parent: RMCHoodBioGeneral
+  id: RMCHoodBioWeYa
+  name: WeYa-TSS MK II - bio hood
+  description: The 'Weston-Yamada TerraScientia bio-suit MK II'. An advanced light-weight bio-suit developed in-house by Weston-Yamada. It's a hood that protects the head and face from biological contaminants, synthetic compliant. Offers no real protection.
+  suffix: Generic, WeYa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/biohelmet_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/biohelmet_weya.rsi
+
+- type: entity
+  parent: RMCHoodBioWeYa
+  id: RMCHoodBioWeYaAlt
+  name: WeYa-TSS MK I - bio hood
+  description: The 'Weston-Yamada TerraScientia bio-suit MK I'. An advanced light-weight bio-suit developed in-house by Weston-Yamada. It's a hood that protects the head and face from biological contaminants.
+  suffix: Generic, WeYa, Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/biohelmet_weya_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/biohelmet_weya_alt.rsi

@@ -4,6 +4,8 @@
   name: cm-job-name-survivor-scientist
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
+  ranks:
+    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorScientist
   accessGroups:
   - ColonistMedical
@@ -12,25 +14,28 @@
     components:
     - type: Skills
       skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
         RMCSkillFireman: 1
+        RMCSkillFirearms: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
         RMCSkillResearch: 1
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetScientist
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
 
 - type: startingGear
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorScientist
   equipment:
-    ears: CMHeadsetColony
     eyes: RMCGlassesReagentHUDGlasses
     gloves: CMHandsLatex
     jumpsuit: RMCJumpsuitCivilianVirologist
@@ -60,8 +65,16 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetScientist
-  name: scientist colonist preset # TODO RMC14 random research notes
+  name: scientist colonist preset # TODO RMC14 random research notes and vial
   categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGearOther:
+    -
+      - [ RMCMotionDetector ]
+      - [ RMCGrenadeCustomMetalFoam ]
+      - [ RMCGrenadeCustomWeedkiller ]
+      - [ RMCThermalTarpV2Folded ]
 
 - type: entity
   parent: MarkerBase
