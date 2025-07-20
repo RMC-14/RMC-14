@@ -19,7 +19,6 @@
         RMCSkillSurgery: 2
         RMCSkillResearch: 1
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
