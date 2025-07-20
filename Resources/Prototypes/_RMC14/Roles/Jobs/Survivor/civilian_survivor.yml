@@ -43,6 +43,7 @@
     - type: RMCAllowSuitStorage
   greeting: rmc-job-greeting-survivor
   hasIcon: false
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorBaseNoBackpack

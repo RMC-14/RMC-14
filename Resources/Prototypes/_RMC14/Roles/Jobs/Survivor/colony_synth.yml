@@ -102,6 +102,7 @@
       - type: RMCSuicide
         damage: { }
   hidden: true
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear
   id: RMCGearSyntheticColonist

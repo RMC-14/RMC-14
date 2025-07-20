@@ -26,6 +26,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor
 
 - type: startingGear
   id: RMCGearSurvivorMiner

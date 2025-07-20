@@ -39,6 +39,7 @@
         - RMCUndershirtClassicJungle
         - RMCUndershirtSportsJungle
         - RMCUndershirtStraplessJungle
+  useLoadoutOfJob: CMSurvivor
 
 - type: startingGear
   parent: RMCGearSurvivorBase

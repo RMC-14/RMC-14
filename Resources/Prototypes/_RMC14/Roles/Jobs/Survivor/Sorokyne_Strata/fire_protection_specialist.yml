@@ -27,6 +27,7 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: rmc-job-prefix-fire-protection-specialist
+  useLoadoutOfJob: CMSurvivor
 
 - type: startingGear
   parent: RMCGearSurvivorBase
