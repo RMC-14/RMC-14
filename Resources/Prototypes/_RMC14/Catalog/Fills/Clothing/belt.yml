@@ -191,6 +191,16 @@
 
 - type: entity
   parent: CMBeltMarine
+  id: RMCBeltMarineUZI
+  suffix: Filled, UZI
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGUZI
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
   id: CMBeltMarineMP5
   suffix: Filled, MP5
   components:
