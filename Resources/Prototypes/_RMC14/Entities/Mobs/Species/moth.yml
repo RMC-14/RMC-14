@@ -70,6 +70,7 @@
     - map: [ "outerClothing" ]
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.UniformAccessoryLayer.Base" ]
     - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]

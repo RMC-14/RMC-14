@@ -9,7 +9,7 @@
     category: Poncho
     limit: 1
     hiddenByJacketRolling: false
-    layerKey: "enum.MedalVisualLayers.Base"
+    layerKey: "enum.UniformAccessoryLayer.Base"
   - type: Item
     size: Normal
 

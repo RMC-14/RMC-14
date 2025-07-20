@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids;
@@ -106,7 +106,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
         var layer = GetKey(item, accessoryComp, index);
 
-        if (_sprite.LayerMapTryGet(ent.Owner, layer, out var clothingLayer, true))
+        if (_sprite.LayerMapTryGet(ent.Owner, layer, out var clothingLayer, false))
             _sprite.LayerSetVisible(ent.Owner, clothingLayer, false);
 
         _item.VisualsChanged(ent);
