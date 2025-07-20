@@ -32,7 +32,6 @@ rmc-gun-foldable-launcher-fold-finish-others = {$user} finishes folding the {$we
 rmc-gun-foldable-launcher-unfold-finish-self = You finish unfolding the {$weapon}.
 rmc-gun-foldable-launcher-unfold-finish-others = {$user} finishes unfolding the {$weapon}.
 
-rmc-gun-foldable-launcher-cannot-fire = The {$weapon} has already been fired - you can't fold it back up again!
 rmc-gun-foldable-launcher-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to fold the weapon.[/bold]
 rmc-gun-foldable-launcher-examine-unfold = [bold]Press your [color=cyan]in-hand activation[/color] keybind (Z by default) to unfold the weapon.[/bold]
 
