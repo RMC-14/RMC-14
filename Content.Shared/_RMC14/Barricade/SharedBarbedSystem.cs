@@ -62,6 +62,7 @@ public abstract class SharedBarbedSystem : EntitySystem
 
     private void OnInteractUsing(Entity<BarbedComponent> ent, ref InteractUsingEvent args)
     {
+        args.Handled = true;
         if (!ent.Comp.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
             var ev = new BarbedDoAfterEvent();
