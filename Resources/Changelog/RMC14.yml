@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed hive weeds having 5 hp instead of 15.
-    type: Fix
-  id: 1544
-  time: '2025-04-05T01:27:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6060
-- author: CyberTropic
-  changes:
-  - message: Fixed map inserts not spawning.
-    type: Fix
-  id: 1545
-  time: '2025-04-05T01:29:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6044
-- author: noctyrnal
-  changes:
-  - message: You can now destroy platforms.
-    type: Add
-  id: 1546
-  time: '2025-04-05T01:35:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6051
-- author: noctyrnal
-  changes:
-  - message: The Sniper's Ghillie, Helmet and Smock have received new sprites.
-    type: Tweak
-  - message: The M3 sniper's smock is now the M3 sniper's waist-rig
-    type: Tweak
-  - message: Added Urban camoflague to the Sniper's Ghillie.
-    type: Add
-  id: 1547
-  time: '2025-04-05T01:46:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6050
 - author: Vermidia
   changes:
   - message: Fixed boiler gas armor effecting damage being 1/2 as much as its supposed
@@ -4912,5 +4880,22 @@
   id: 2046
   time: '2025-07-20T20:33:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6980
+- author: Dygon
+  changes:
+  - message: Being buckled to something when you leave adropship that is in-flight
+      no longer prevents you from crash landing or paradropping.
+    type: Fix
+  id: 2047
+  time: '2025-07-20T21:41:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7107
+- author: crazy1112345
+  changes:
+  - message: Added LV-624 map survivors! This includes the Archeologist, Cargo Tech,
+      Corporate Liaison, Engineer, Emergency Medical Tech, CMB Deputy, We-Ya Corporate
+      Security, We-Ya Security Guard, and the Priest.
+    type: Add
+  id: 2048
+  time: '2025-07-20T21:07:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6708
 Name: RMC14
 Order: -1
