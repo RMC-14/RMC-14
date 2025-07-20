@@ -18,7 +18,7 @@
     - RMCPatchWeYaBlack
 
 - type: loadout
-  id: PatchWeYaRMCBlack
+  id: PatchWeYaRMCFury161
   cost: 1
   inhand:
     - RMCPatchWeYaFury161
