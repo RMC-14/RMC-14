@@ -75,7 +75,6 @@
     fireRate: 0.83
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
-    resetOnHandSelected: false
   - type: GunUserWhitelist
     whitelist:
       components:
