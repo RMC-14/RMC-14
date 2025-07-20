@@ -1,14 +1,11 @@
 - type: entity
   name: M79 grenade launcher
-  parent: [ RMCBaseWeaponGrenadeLauncher ]
+  parent: [ RMCBaseSlideMagazineVisualsBallistic, RMCBaseWeaponGrenadeLauncher ]
   id: CMWeaponLauncherM79
   description: The M79 grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
     slots:

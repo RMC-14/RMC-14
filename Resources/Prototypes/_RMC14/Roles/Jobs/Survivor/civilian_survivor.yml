@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: RMCJobRibbonBase
   id: CMSurvivor
   name: cm-job-name-survivor
   description: cm-job-description-survivor
@@ -35,7 +35,6 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilianOutfits
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -44,6 +43,7 @@
     - type: RMCAllowSuitStorage
   greeting: rmc-job-greeting-survivor
   hasIcon: false
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorBaseNoBackpack
@@ -125,10 +125,10 @@
     - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
     - [ RMCWeaponPistolMK45, RMCMagazinePistolMK45 ]
     - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]
-    # TODO RMC14 S&W .38 model 37 revolver
+    - [ RMCWeaponRevolver38Magnum, RMCSpeedLoader38 ]
     primaryWeapons:
     - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]
-    #    - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ] # TODO RMC14 uzi
+    - [ RMCBeltMarineUZI, RMCWeaponSMGUZI ]
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
     - [ CMBeltMarineAR10, WeaponRifleAR10 ]
     primaryWeaponChance: 0.6

@@ -119,7 +119,6 @@
 
 # Heaters
 - type: entity
-  parent: BaseStructureDynamic
   id: RMCRadiator
   name: radiator
   description: It's a radiator. It heats the room through convection with hot water.
@@ -127,6 +126,8 @@
   - type: Transform
   - type: Physics
     bodyType: static
+    canCollide: false
+  - type: Clickable
   - type: ItemToggle
     soundActivate: /Audio/_RMC14/Machines/click.ogg
     soundDeactivate: /Audio/_RMC14/Machines/click.ogg
@@ -136,17 +137,6 @@
     sprite: _RMC14/Structures/atmos.rsi
     state: radiator
     noRot: true
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.3
-        density: 155
-        mask:
-        - MachineMask
-        layer:
-        - MobMask
   - type: InteractionOutline
   - type: Damageable
     damageContainer: StructuralInorganic

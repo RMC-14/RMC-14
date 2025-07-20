@@ -72,8 +72,12 @@
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardLiaison
-  name: liaison ID card
+  name: corporate holo-badge
+  description: A corporate holo-badge. It's a unique Corporate orange and white.
+  suffix: WeYa
   components:
+  - type: Sprite
+    state: corporate_liaison
   - type: ItemIFF
     faction: FactionWeYa
   - type: PresetIdCard
@@ -132,24 +136,6 @@
     sprite: _RMC14/Objects/CMIDs/pizza.rsi
   - type: PresetIdCard
     job: CMPizzaDeliverer
-
-- type: entity
-  parent: CMIDCardGold
-  id: RMCIDCardMarshal
-  name: bureau marshal gold badge
-  description: A coveted gold badge signifying that the wearer is one of the few CMB Marshals patroling the outer rim. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
-  components:
-  - type: PresetIdCard
-    job: CMBureauMarshal
-
-- type: entity
-  parent: CMIDCardSilver
-  id: RMCIDCardDeputy
-  name: bureau deputy silver badge
-  description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
-  components:
-  - type: PresetIdCard
-    job: CMBureauDeputy
 
 - type: entity
   parent: CMIDCardSilver
@@ -275,6 +261,13 @@
   - type: PresetIdCard
     job: RMCJobSyntheticColony
 
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardFORECONSpotter
+  name: FORECON Spotter ID card
+  components:
+  - type: IdCard
+    jobTitle: rmc-job-name-forecon-spotter
 
 - type: entity
   id: RMCIDCardAegis
