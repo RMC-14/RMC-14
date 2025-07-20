@@ -13,6 +13,8 @@ using Robust.Shared.Containers;
 using Content.Shared.Item.ItemToggle.Components;
 using System.Numerics;
 using Content.Shared.Foldable;
+using Content.Shared.Examine;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Deploy;
 
@@ -28,6 +30,7 @@ public sealed class RMCDeploySystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly Tag.TagSystem _tags = default!;
     [Dependency] private readonly FoldableSystem _foldable = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
 
     public override void Initialize()
@@ -42,6 +45,8 @@ public sealed class RMCDeploySystem : EntitySystem
         // React to collapse attempt using a tool
         SubscribeLocalEvent<RMCDeployedEntityComponent, InteractUsingEvent>(OnParentalCollapseInteractUsing);
         SubscribeLocalEvent<RMCDeployedEntityComponent, RMCParentalCollapseDoAfterEvent>(OnParentalCollapseDoAfter);
+        SubscribeLocalEvent<RMCDeployableComponent, ExaminedEvent>(OnDeployableExamined);
+        SubscribeLocalEvent<RMCDeployedEntityComponent, ExaminedEvent>(OnDeployedExamined);
     }
 
     /// <summary>
@@ -364,25 +369,25 @@ public sealed class RMCDeploySystem : EntitySystem
     /// Called when a deployed child entity is being deleted or its component is removed.
     /// Handles cleanup and possible deletion of related entities.
     /// </summary>
-    private void OnDeployedEntityShutdown(EntityUid uid, RMCDeployedEntityComponent comp, ComponentShutdown args)
+    private void OnDeployedEntityShutdown(Entity<RMCDeployedEntityComponent> ent, ref ComponentShutdown args)
     {
         // If already in shutdown, skip further processing
-        if (comp.InShutdown)
+        if (ent.Comp.InShutdown)
             return;
-        comp.InShutdown = true;
-        Dirty(uid, comp);
+        ent.Comp.InShutdown = true;
+        Dirty(ent.Owner, ent.Comp);
 
         // Try to get the original entity
-        if (!EntityManager.EntityExists(comp.OriginalEntity))
+        if (!EntityManager.EntityExists(ent.Comp.OriginalEntity))
             return;
 
-        if (!EntityManager.TryGetComponent(comp.OriginalEntity, out RMCDeployableComponent? origComp))
+        if (!EntityManager.TryGetComponent(ent.Comp.OriginalEntity, out RMCDeployableComponent? origComp))
             return;
 
         if (origComp is not null)
         {
             // Check if this was a ReactiveParentalSetup
-            var setup = origComp.DeploySetups[comp.SetupIndex];
+            var setup = origComp.DeploySetups[ent.Comp.SetupIndex];
             if (setup.Mode == RMCDeploySetupMode.ReactiveParental)
             {
                 // First, collect all entities to delete, then delete them outside the enumeration to avoid reentrancy and collection modification issues.
@@ -390,9 +395,9 @@ public sealed class RMCDeploySystem : EntitySystem
                 var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
                 while (enumerator.MoveNext(out var entity, out var childComp))
                 {
-                    if (childComp.OriginalEntity != comp.OriginalEntity)
+                    if (childComp.OriginalEntity != ent.Comp.OriginalEntity)
                         continue;
-                    if (childComp.SetupIndex == comp.SetupIndex)
+                    if (childComp.SetupIndex == ent.Comp.SetupIndex)
                         continue;
                     var mode = origComp.DeploySetups[childComp.SetupIndex].Mode;
                     if (mode == RMCDeploySetupMode.ReactiveParental || mode == RMCDeploySetupMode.Reactive)
@@ -411,7 +416,7 @@ public sealed class RMCDeploySystem : EntitySystem
     /// <summary>
     /// Handles the attempt to collapse a deployed entity using a tool.
     /// </summary>
-    private void OnParentalCollapseInteractUsing(EntityUid uid, RMCDeployedEntityComponent comp, InteractUsingEvent args)
+    private void OnParentalCollapseInteractUsing(Entity<RMCDeployedEntityComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled)
             return;
@@ -419,9 +424,9 @@ public sealed class RMCDeploySystem : EntitySystem
         args.Handled = true;
 
         // Check if this entity is from a ReactiveParentalSetup
-        if (!EntityManager.TryGetComponent(comp.OriginalEntity, out RMCDeployableComponent? deployable))
+        if (!EntityManager.TryGetComponent(ent.Comp.OriginalEntity, out RMCDeployableComponent? deployable))
             return;
-        var setup = deployable.DeploySetups[comp.SetupIndex];
+        var setup = deployable.DeploySetups[ent.Comp.SetupIndex];
         if (setup.Mode != RMCDeploySetupMode.ReactiveParental)
             return;
 
@@ -439,7 +444,7 @@ public sealed class RMCDeploySystem : EntitySystem
         if (EntityManager.TryGetComponent(args.Used, out ItemToggleComponent? toggle) && !toggle.Activated)
             return;
 
-        var doAfter = new DoAfterArgs(_entMan, args.User, TimeSpan.FromSeconds(deployable.CollapseTime), new RMCParentalCollapseDoAfterEvent(), uid)
+        var doAfter = new DoAfterArgs(_entMan, args.User, TimeSpan.FromSeconds(deployable.CollapseTime), new RMCParentalCollapseDoAfterEvent(), ent.Owner)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -448,7 +453,7 @@ public sealed class RMCDeploySystem : EntitySystem
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
-            _popup.PopupClient("You start collapsing...", args.User, args.User, PopupType.Small);
+            _popup.PopupClient(Loc.GetString("rmc-deployable-collapse-start"), args.User, args.User, PopupType.Small);
 
     }
 
@@ -529,6 +534,34 @@ public sealed class RMCDeploySystem : EntitySystem
                 // Add to the storage container of the original entity
                 _container.Insert(childUid, origStorage);
             }
+        }
+    }
+
+    /// <summary>
+    /// Adds a usage hint to items with RMCDeployableComponent when examined.
+    /// </summary>
+    private void OnDeployableExamined(Entity<RMCDeployableComponent> ent, ref ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString("rmc-deployable-examine-hint"));
+    }
+
+    /// <summary>
+    /// Adds a collapse tool usage hint to deployed entities from ReactiveParental setups when examined.
+    /// </summary>
+    private void OnDeployedExamined(Entity<RMCDeployedEntityComponent> ent, ref ExaminedEvent args)
+    {
+        if (!EntityManager.TryGetComponent(ent.Comp.OriginalEntity, out RMCDeployableComponent? deployable))
+            return;
+        if (ent.Comp.SetupIndex >= deployable.DeploySetups.Count)
+            return;
+        var setup = deployable.DeploySetups[ent.Comp.SetupIndex];
+        if (setup.Mode != RMCDeploySetupMode.ReactiveParental)
+            return;
+        if (deployable.CollapseToolPrototype is { } toolProto &&
+            _prototypeManager.TryIndex<EntityPrototype>(toolProto, out var proto))
+        {
+            var toolName = proto.Name;
+            args.PushMarkup(Loc.GetString("rmc-deployed-collapse-hint", ("tool", toolName)));
         }
     }
 }

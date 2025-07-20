@@ -1,3 +1,6 @@
 rmc-deploy-popup-blocked = Deployment area is blocked!
 rmc-deploy-popup-surface = Deployment area must be on the planet's surface!
 rmc-deploy-popup-start = You begin deployment...
+rmc-deployable-examine-hint = Use in hand to deploy.
+rmc-deployed-collapse-hint = Use [color=yellow]{ $tool }[/color] to collapse.
+rmc-deployable-collapse-start = You start collapsing...
