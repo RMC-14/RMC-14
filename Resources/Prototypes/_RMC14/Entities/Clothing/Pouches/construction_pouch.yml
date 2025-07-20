@@ -44,3 +44,14 @@
     - id: CMSheetPlasteel50
     - id: CMSheetMetal50
     - id: CMSandbagEmpty50
+
+- type: entity
+  parent: RMCPouchConstruction
+  id: RMCPouchConstructionFillHighGrade
+  suffix: High grade full
+  components:
+  - type: StorageFill
+    contents: 
+    - id: CMSheetPlasteel50
+    - id: CMSheetMetal50
+    - id: BarbedWire20
