@@ -73,7 +73,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, StrappedEvent>(OnStrapped);
         SubscribeLocalEvent<PowerLoaderComponent, UnstrappedEvent>(OnUnstrapped);
         SubscribeLocalEvent<PowerLoaderComponent, PowerLoaderGrabDoAfterEvent>(OnGrabDoAfter);
-        SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity);
+        SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity, after: [typeof(SharedHandsSystem)]);
         SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnUserGrab);
         SubscribeLocalEvent<PowerLoaderComponent, DestructionEventArgs>(OnDestruction);
 
@@ -203,6 +203,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnGetUsedEntity(Entity<PowerLoaderComponent> ent, ref GetUsedEntityEvent args)
     {
+        args.Used = null;
         foreach (var buckled in GetBuckled(ent))
         {
             if (!TryComp(buckled, out HandsComponent? hands))
@@ -752,11 +753,18 @@ public sealed class PowerLoaderSystem : EntitySystem
         var virtualContainer = _container.EnsureContainer<Container>(loader, loader.Comp.VirtualContainerId);
         foreach (var buckled in GetBuckled(loader))
         {
+            foreach (var hand in _hands.EnumerateHeld(buckled).ToArray())
+            {
+                Del(hand);
+            }
+
             foreach (var virt in virtualContainer.ContainedEntities.ToArray())
             {
                 _virtualItem.DeleteInHandsMatching(buckled, virt);
                 _container.Remove(virt, virtualContainer);
-                QueueDel(virt);
+
+                if (_net.IsServer || IsClientSide(virt))
+                    Del(virt);
             }
         }
 
