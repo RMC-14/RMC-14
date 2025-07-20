@@ -1201,17 +1201,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSethXXiao
-  name: Seth 'X' Xiao figurine
-  description: "X marks the spot…right between the eyes."
-  components:
-  - type: Sprite
-    state: seth_x_xiao
-  - type: PatronFigurine
-    id: 909c243e-6fb8-42ed-a477-d48571fccff2
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronJunoKleptocatKaneko
   name: Juno 'Kleptocat' Kaneko figurine
   description: "The figure bears a striking appearance of a young male felinid. Could it be a thief? A scoundrel? A Cargonian? No, it's just your lovable Kleptocat and his \"legally\" acquired goods! Soaring high in the sky like the Gunship Pilot he was always meant to be. Proudly marking another tally on the hull of Normandy. Whether or not those tallies are enemy or Marines... you will never know."
