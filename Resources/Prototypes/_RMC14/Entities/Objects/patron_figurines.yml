@@ -323,11 +323,11 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKateFleming
-  name: Kate 'Engie' Fleming figurine
-  description: "Smells like welding fuel."
+  name: Kate 'Gel' Fleming figurine
+  description: "A small, detailed miniature of a purple slime-person marine. There is a sticker on the bottom warning of health risks. Caution: This product may contain lead."
   components:
   - type: Sprite
-    state: kate_engie_fleming
+    state: kate_gel_fleming
   - type: PatronFigurine
     id: 355c1f67-83a4-4252-b288-b218a4f84fd5
 
@@ -816,12 +816,20 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMizunoKittyDrakonovisch
   name: Mizuno 'Kitty' Drakonovisch figurine
-  description: "The best kitty cat in the marine corps. Delta cat marine, loves headpats. Chases mice and lasers."
+  description: "Delta cat marine, loves headpats. Chases mice and lasers. There appears to be a placard saying meowrah meowrines."
   components:
   - type: Sprite
     state: mizuno_kitty_drakonovisch
   - type: PatronFigurine
     id: d6a58381-b2a8-4caf-a22a-fd76ca53b1ae
+  - type: EmitSoundOnUse
+    sound: #FelinidMeows
+      path: /Audio/_RMC14/Voice/Felinid/cat_meow1.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -1193,17 +1201,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSethXXiao
-  name: Seth 'X' Xiao figurine
-  description: "X marks the spot…right between the eyes."
-  components:
-  - type: Sprite
-    state: seth_x_xiao
-  - type: PatronFigurine
-    id: 909c243e-6fb8-42ed-a477-d48571fccff2
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronJunoKleptocatKaneko
   name: Juno 'Kleptocat' Kaneko figurine
   description: "The figure bears a striking appearance of a young male felinid. Could it be a thief? A scoundrel? A Cargonian? No, it's just your lovable Kleptocat and his \"legally\" acquired goods! Soaring high in the sky like the Gunship Pilot he was always meant to be. Proudly marking another tally on the hull of Normandy. Whether or not those tallies are enemy or Marines... you will never know."
@@ -1457,7 +1454,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKuafuSpeedDemonLightweaver
   name: Kuafu 'Speed Demon' Lightweaver figurine
-  #description: ""
+  description: "Seems like she knows everyone around."
   components:
   - type: Sprite
     state: kuafu_speed_demon_lightweaver
@@ -1507,3 +1504,124 @@
     state: neza
   - type: PatronFigurine
     id: 33ee0269-f61d-467c-916b-139146ce2a54
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJadeFiendEria
+  name: Jade 'Fiend' Eria figurine
+  description: "You can see a broken receiver sticking out, it emits incomprehensible gibberish when squeezed. The figurine's jaw looks slightly melted off, as if someone held it above a candle."
+  components:
+  - type: Sprite
+    state: jade_fiend_eria
+  - type: PatronFigurine
+    id: 6dd43972-aaf1-4035-aca1-444bf808b4f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAshWinter
+  name: Ash Winter figurine
+  description: "Most Devious Silly Lizard."
+  components:
+  - type: Sprite
+    state: ash_winter
+  - type: PatronFigurine
+    id: 4a6ca145-871a-4aeb-8302-9e8b5e3495e0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLoreWulbrenEra
+  name: Lore 'Wulbren' Era figurine
+  description: "The best Pilot in the Almayer! - And the best rifleman.."
+  components:
+  - type: Sprite
+    state: lore_wulbren_era
+  - type: PatronFigurine
+    id: 38395431-1f3b-4d4b-8140-0ab9b026b16b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLydiaSanitater
+  name: Lydia Sanitater figurine
+  description: "Stand still or I can not save you."
+  components:
+  - type: Sprite
+    state: lydia_sanitater
+  - type: PatronFigurine
+    id: 293b6e13-2d65-449c-a334-93e7b624bd86
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVinceDogPetrov
+  name: Vince 'Dog' Petrov figurine
+  description: "A figurine of a prime woofrine. Even though he's pocket sized, he still has that dog in him."
+  components:
+  - type: Sprite
+    state: vince_dog_petrov
+  - type: PatronFigurine
+    id: 1384bdbc-8f0a-4613-8ae1-097d8a9c21fb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKallKallovski
+  name: Kall Kallovski figurine
+  description: "Delta leads the way."
+  components:
+  - type: Sprite
+    state: kall_kallovski
+  - type: PatronFigurine
+    id: 794217c7-0b1c-40d4-b254-0cb58ea69566
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAtlasWolfySnowlight
+  name: Atlas 'Wolfy' Snowlight figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: atlas_wolfy_snowlight
+  - type: PatronFigurine
+    id: 6ca6e4f7-0951-4298-bbf2-f4de50fb025b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCaineRuffRuffalo
+  name: Caine 'Ruff' Ruffalo figurine
+  description: "Ruff as a Ruffalo. Always Ruffs. Is always Rough as a Ruff."
+  components:
+  - type: Sprite
+    state: caine_ruff_ruffalo
+  - type: PatronFigurine
+    id: d4b8cf96-c8cd-4f23-9a52-744497ca6eb7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSethGrimm
+  name: Seth Grimm figurine
+  description: "You can be a Queen or a parasite, but everyone dances with the Grim Reaper."
+  components:
+  - type: Sprite
+    state: seth_grimm
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAnneTaylor
+  name: Anne Taylor figurine
+  description: "If you see her piloting the Alamo and it still looks normal, something is horribly wrong."
+  components:
+  - type: Sprite
+    state: anne_taylor
+  - type: PatronFigurine
+    id: 6ea17ea3-7420-4466-8a0c-7341a2089c2c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronYeoSakuraBunnia
+  name: Yeo 'Sakura' Bunnia figurine
+  description: "This bunny seems familiar. Maybe they’re working around the medical department? Maybe even around the Staff office perhaps. Who knows! This bunny sure loves to provide overwatch for the marines and even providing medical care for them too."
+  components:
+  - type: Sprite
+    state: yeo_sakura_bunnia
+  - type: PatronFigurine
+    id: 0fd18026-6b96-438d-b812-1c0434b32331
