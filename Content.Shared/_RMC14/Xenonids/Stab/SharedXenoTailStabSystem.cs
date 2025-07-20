@@ -1,10 +1,9 @@
 using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.CameraShake;
-using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.GasToggle;
-using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared._RMC14.Xenonids.Rotate;
 using Content.Shared.ActionBlocker;
@@ -16,17 +15,12 @@ using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -39,15 +33,14 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlock = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoRotateSystem _rotate = default!;
@@ -55,10 +48,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
-    private const int AttackMask = (int)(CollisionGroup.MobMask | CollisionGroup.Opaque);
-
     protected Box2Rotated LastTailAttack;
-    private int _tailStabMaxTargets;
 
     public override void Initialize()
     {
@@ -66,8 +56,6 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
         SubscribeLocalEvent<XenoTailStabComponent, XenoTailStabEvent>(OnXenoTailStab);
         SubscribeLocalEvent<XenoTailStabComponent, XenoGasToggleActionEvent>(OnXenoGasToggle);
-
-        Subs.CVar(_config, RMCCVars.RMCTailStabMaxTargets, v => _tailStabMaxTargets = v, true);
     }
 
     private void OnXenoGasToggle(Entity<XenoTailStabComponent> stab, ref XenoGasToggleActionEvent args)
@@ -104,190 +92,154 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
             Dirty(stab, melee);
         }
 
-        var tailRange = stab.Comp.TailRange.Float();
-        var box = new Box2(userCoords.Position.X - 0.10f, userCoords.Position.Y, userCoords.Position.X + 0.10f, userCoords.Position.Y + tailRange);
-
-        var matrix = Vector2.Transform(targetCoords.Position, _transform.GetInvWorldMatrix(transform));
-        var rotation = _transform.GetWorldRotation(stab).RotateVec(-matrix).ToWorldAngle();
-        var boxRotated = new Box2Rotated(box, rotation, userCoords.Position);
-        LastTailAttack = boxRotated;
-
-        // ray on the left side of the box
-        var leftRay = new CollisionRay(boxRotated.BottomLeft, (boxRotated.TopLeft - boxRotated.BottomLeft).Normalized(), AttackMask);
-
-        // ray on the right side of the box
-        var rightRay = new CollisionRay(boxRotated.BottomRight, (boxRotated.TopRight - boxRotated.BottomRight).Normalized(), AttackMask);
-
-        var hive = _hive.GetHive(stab.Owner);
-
-        bool Ignored(EntityUid uid)
-        {
-            if (uid == stab.Owner)
-                return true;
-
-            if (!HasComp<MobStateComponent>(uid))
-                return true;
-
-            return _hive.IsMember(uid, hive);
-        }
-
-        // dont open allocations ahead
-        // entity lookups dont work properly with Box2Rotated
-        // so we do one ray cast on each side instead since its narrow enough
-        // im sure you could calculate the ray bounds more efficiently
-        // but have you seen these allocations either way
-        var intersect = _physics.IntersectRayWithPredicate(transform.MapID, leftRay, tailRange, Ignored, false);
-        intersect = intersect.Concat(_physics.IntersectRayWithPredicate(transform.MapID, rightRay, tailRange, Ignored, false));
-        var results = intersect.Select(r => r.HitEntity).ToHashSet();
-
-        var actualResults = new List<EntityUid>();
-        var range = stab.Comp.TailRange.Float();
-        foreach (var result in results)
-        {
-            if (!_interaction.InRangeUnobstructed(stab.Owner, result, range: range))
-                continue;
-
-            actualResults.Add(result);
-            if (actualResults.Count >= _tailStabMaxTargets)
-                break;
-        }
-
         // TODO RMC14 sounds
         // TODO RMC14 lag compensation
         var damage = new DamageSpecifier(stab.Comp.TailDamage);
         var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
         RaiseLocalEvent(stab, ref eve);
         damage += eve.Damage;
-        if (actualResults.Count == 0)
+        if (args.Entity == null ||
+            TerminatingOrDeleted(args.Entity) ||
+            !_xeno.CanAbilityAttackTarget(stab,args.Entity.Value, true))
         {
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
             RaiseLocalEvent(stab, missEvent);
 
             foreach (var action in _actions.GetActions(stab))
             {
-                if (TryComp(action.Id, out XenoTailStabActionComponent? actionComp))
-                    _actions.SetCooldown(action.Id, actionComp.MissCooldown);
+                if (TryComp(action, out XenoTailStabActionComponent? actionComp))
+                    _actions.SetCooldown(action.AsNullable(), actionComp.MissCooldown);
             }
         }
         else
         {
             args.Handled = true;
 
-            var hitEvent = new MeleeHitEvent(actualResults, stab, stab, damage, null);
+            var hit = args.Entity.Value;
+            var hitEvent = new MeleeHitEvent(new List<EntityUid>{hit}, stab, stab, damage, null);
             RaiseLocalEvent(stab, hitEvent);
 
             if (!hitEvent.Handled)
             {
                 _interaction.DoContactInteraction(stab, stab);
+                _interaction.DoContactInteraction(stab, hit);
 
-                foreach (var hit in actualResults)
+                var targetPosition = _transform.GetMoverCoordinates(hit).Position;
+                var userPosition = _transform.GetMoverCoordinates(stab).Position;
+                var entities = GetNetEntityList(_melee.ArcRayCast(userPosition,
+                        (targetPosition -
+                         userPosition).ToWorldAngle(),
+                        0,
+                        stab.Comp.TailRange.Float(),
+                        _transform.GetMapId(stab.Owner),
+                        stab)
+                    .ToList());
+
+                foreach (var potentialTarget in entities)
                 {
-                    _interaction.DoContactInteraction(stab, hit);
+                    var target = GetEntity(potentialTarget);
+                    if (!_directionBlock.IsAttackBlocked(stab, target))
+                        continue;
+
+                    hit = target;
+                    break;
                 }
 
                 var filter = Filter.Pvs(transform.Coordinates, entityMan: EntityManager).RemoveWhereAttachedEntity(o => o == stab.Owner);
-                foreach (var hit in actualResults)
+
+                var attackedEv = new AttackedEvent(stab, stab, args.Target);
+                RaiseLocalEvent(hit, attackedEv);
+
+                var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
+                var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab);
+
+                if (change?.GetTotal() > FixedPoint2.Zero)
+                    _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
+
+                if (_net.IsServer)
                 {
-                    var attackedEv = new AttackedEvent(stab, stab, args.Target);
-                    RaiseLocalEvent(hit, attackedEv);
+                    SpawnAttachedTo(stab.Comp.HitAnimationId, hit.ToCoordinates());
 
-                    var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
-                    var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab);
-
-                    if (change?.GetTotal() > FixedPoint2.Zero)
-                        _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
-
-                    if (_net.IsServer)
+                    if (_size.TryGetSize(stab, out var size))
                     {
-                        SpawnAttachedTo(stab.Comp.HitAnimationId, hit.ToCoordinates());
+                        if (size >= RMCSizes.Big)
+                            _daze.TryDaze(hit, stab.Comp.BigDazeTime, true);
+                        else if (size == RMCSizes.Xeno)
+                            _daze.TryDaze(hit, stab.Comp.DazeTime, true);
+                    }
+                }
 
-                        if (_size.TryGetSize(stab, out var size))
-                        {
-                            if (size >= RMCSizes.Big)
-                                _daze.TryDaze(hit, stab.Comp.BigDazeTime, true);
-                            else if (size == RMCSizes.Xeno)
-                                _daze.TryDaze(hit, stab.Comp.DazeTime, true);
-                        }
+                _cameraShake.ShakeCamera(hit, 2, 1);
+
+                if (stab.Comp.InjectNeuro &&
+                    TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) &&
+                    HasComp<XenoComponent>(hit))
+                {
+
+
+                    if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
+                    {
+                        neuro.LastMessage = _timing.CurTime;
+                        neuro.LastAccentTime = _timing.CurTime;
+                        neuro.LastStumbleTime = _timing.CurTime;
+                    }
+                    neuro.NeurotoxinAmount += neuroTox.NeuroPerSecond;
+                    neuro.ToxinDamage = neuroTox.ToxinDamage;
+                    neuro.OxygenDamage = neuroTox.OxygenDamage;
+                    neuro.CoughDamage = neuroTox.CoughDamage;
+                }
+                else if (stab.Comp.Inject != null &&
+                    _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
+                {
+                    var total = FixedPoint2.Zero;
+                    foreach (var amount in stab.Comp.Inject.Values)
+                    {
+                        total += amount;
                     }
 
-                    _cameraShake.ShakeCamera(hit, 2, 1);
-
-                    if (stab.Comp.InjectNeuro)
+                    var available = solutionEnt.Value.Comp.Solution.AvailableVolume;
+                    if (available < total)
                     {
-                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) || HasComp<XenoComponent>(hit))
-                            continue;
-
-                        if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
-                        {
-                            neuro.LastMessage = _timing.CurTime;
-                            neuro.LastAccentTime = _timing.CurTime;
-                            neuro.LastStumbleTime = _timing.CurTime;
-                        }
-                        neuro.NeurotoxinAmount += neuroTox.NeuroPerSecond;
-                        neuro.ToxinDamage = neuroTox.ToxinDamage;
-                        neuro.OxygenDamage = neuroTox.OxygenDamage;
-                        neuro.CoughDamage = neuroTox.CoughDamage;
-                    }
-                    else if (stab.Comp.Inject != null &&
-                        _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
-                    {
-                        var total = FixedPoint2.Zero;
-                        foreach (var amount in stab.Comp.Inject.Values)
-                        {
-                            total += amount;
-                        }
-
-                        var available = solutionEnt.Value.Comp.Solution.AvailableVolume;
-                        if (available < total)
-                        {
-                            _solutionContainer.SplitSolution(solutionEnt.Value, total - available);
-                        }
-
-                        foreach (var (reagent, amount) in stab.Comp.Inject)
-                        {
-                            _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);
-                        }
+                        _solutionContainer.SplitSolution(solutionEnt.Value, total - available);
                     }
 
-                    var hitName = Identity.Name(hit, EntityManager, stab);
-                    var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hitName));
-                    if (_net.IsServer)
-                        _popup.PopupEntity(msg, stab, stab);
-
-                    msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", stab));
-                    _popup.PopupEntity(msg, stab, hit, PopupType.MediumCaution);
-
-                    var othersFilter = Filter.PvsExcept(stab).RemovePlayerByAttachedEntity(hit);
-                    foreach (var other in othersFilter.Recipients)
+                    foreach (var (reagent, amount) in stab.Comp.Inject)
                     {
-                        if (other.AttachedEntity is not { } otherEnt)
-                            continue;
-
-                        hitName = Identity.Name(hit, EntityManager, otherEnt);
-                        msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", stab), ("target", hitName));
-                        _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
+                        _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);
                     }
+                }
+
+                var hitName = Identity.Name(hit, EntityManager, stab);
+                var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hitName));
+                if (_net.IsServer)
+                    _popup.PopupEntity(msg, stab, stab);
+
+                msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", stab));
+                _popup.PopupEntity(msg, stab, hit, PopupType.MediumCaution);
+
+                var othersFilter = Filter.PvsExcept(stab).RemovePlayerByAttachedEntity(hit);
+                foreach (var other in othersFilter.Recipients)
+                {
+                    if (other.AttachedEntity is not { } otherEnt)
+                        continue;
+
+                    hitName = Identity.Name(hit, EntityManager, otherEnt);
+                    msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", stab), ("target", hitName));
+                    _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
                 }
             }
         }
 
-        var localPos = transform.LocalRotation.RotateVec(matrix);
-
-        var length = localPos.Length();
-        localPos *= tailRange / length;
-
-        DoLunge((stab, stab, transform), localPos, "WeaponArcThrust");
-
         if (_net.IsServer)
         {
-            if (actualResults.Count > 0 && _net.IsServer)
+            if (args.Entity != null && !TerminatingOrDeleted(args.Entity))
             {
                 var direction = _transform.GetWorldRotation(stab).GetDir();
                 var angle = direction.ToAngle() - Angle.FromDegrees(180);
                 _rotate.RotateXeno(stab, angle.GetDir());
             }
 
-            var sound = actualResults.Count > 0 ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
+            var sound = args.Entity != null && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
             _audio.PlayPvs(sound, stab);
         }
 

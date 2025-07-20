@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
@@ -52,6 +53,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
@@ -483,10 +485,9 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
-        foreach (var action in _actions.GetActions(ent))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleChargingActionEvent>(ent))
         {
-            if (action.Comp.BaseEvent is XenoToggleChargingActionEvent)
-                _actions.SetToggled(action.Id, true);
+            _actions.SetToggled((action, action), true);
         }
     }
 
@@ -494,10 +495,9 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
-        foreach (var action in _actions.GetActions(ent))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoToggleChargingActionEvent>(ent))
         {
-            if (action.Comp.BaseEvent is XenoToggleChargingActionEvent)
-                _actions.SetToggled(action.Id, false);
+            _actions.SetToggled((action, action), false);
         }
     }
 

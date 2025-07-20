@@ -440,7 +440,8 @@
   id: RMCEthanol
   name: reagent-name-ethanol
   desc: reagent-desc-ethanol
-  slippery: true
+  slipData:
+    requiredSlipSpeed: 3.5
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: alcohol
   color: "#404030"

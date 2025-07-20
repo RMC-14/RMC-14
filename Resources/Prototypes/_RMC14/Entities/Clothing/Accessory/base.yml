@@ -24,6 +24,7 @@
     - Decor
     - Poncho
     - Mask
+    - Utility
 
 - type: entity
   abstract: true
@@ -40,6 +41,7 @@
     - Decor
     - Poncho
     - Mask
+    - Utility
 
 - type: entity
   abstract: true
