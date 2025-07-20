@@ -414,6 +414,15 @@
 
 - type: entity
   parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeBuckshot
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBeanbag
+      amount: 7
+
+- type: entity
+  parent: RMCPouchShotgunLarge
   id: RMCPouchShotgunLargeBeanbag
   components:
   - type: StorageFill

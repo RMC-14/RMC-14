@@ -168,7 +168,7 @@
     - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
     # TODO 3 R4T rifle
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
-    # TODO m3717 pump shotgun
+    - RMCWeaponShotgunM3717: RMCSpawnerRandomShotgunBoxes
 
 - type: entity
   parent: RMCSpawnerRandomGunShotgun
