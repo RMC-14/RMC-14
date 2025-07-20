@@ -436,7 +436,7 @@
     - state: loot_sentry
   - type: RandomSpawner
     offset: 0
-    chance: 0
+    chance: 1
     prototypes:
     - RMCProjectileRocket84mm
     - RMCRocket84mmAntiArmor
