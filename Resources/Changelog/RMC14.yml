@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed parasites thrown by carriers slamming into walls
-    type: Fix
-  - message: Fixed defender headbutt slamming victims
-    type: Fix
-  - message: Fixed ravager assault slamming victims into themselves
-    type: Fix
-  id: 1532
-  time: '2025-03-30T22:12:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6038
 - author: DummeHytteOst
   changes:
   - message: Added groundside warning sound for inbound rockets, played when the green
@@ -4905,5 +4894,17 @@
   id: 2032
   time: '2025-07-20T09:28:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7063
+- author: noctyrnal
+  changes:
+  - message: Kutjevo has recieved a large update.
+    type: Add
+  - message: Added the M37-17, an improved HG that can hold 2 more shells and does
+      x1.15 damage. Can be found on select maps and in the hands of the CMB.
+    type: Add
+  - message: Fixed the liaison's ID card name, description and icon.
+    type: Fix
+  id: 2033
+  time: '2025-07-20T09:37:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7046
 Name: RMC14
 Order: -1
