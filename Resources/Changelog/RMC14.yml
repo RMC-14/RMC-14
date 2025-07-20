@@ -1,54 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed most marines not showing up on the live tactical map.
-    type: Fix
-  - message: Fixed marines and xenos taking camera recoil from projectiles.
-    type: Fix
-  - message: Fixed visual glitches sometimes when moving with a bipod deployed.
-    type: Fix
-  - message: Fixed some laser cannon fire values being incorrect, fixes duration not
-      being 5 seconds.
-    type: Fix
-  - message: Fixed plasteel rods refining into metal instead of plasteel.
-    type: Fix
-  - message: Fixed soda fountain not being unanchorable.
-    type: Fix
-  id: 1526
-  time: '2025-03-30T00:17:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6025
-- author: Vermidia
-  changes:
-  - message: Fixed laser fire looking like normal fire.
-    type: Fix
-  id: 1527
-  time: '2025-03-30T03:17:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6026
-- author: DrSmugleaf
-  changes:
-  - message: Fixed aimed shot and spotter designator causing the game to freeze and
-      crash. This re-enables both.
-    type: Fix
-  - message: Fixed not being able to pull ammo out of CAS weapons with the power loader.
-    type: Fix
-  - message: Fixed the tactical map not showing communication towers, sensor tower,
-      and Queen.
-    type: Fix
-  - message: Fixed the HIRR baton slug fitting into underbarrel grenade launcher attachments.
-    type: Fix
-  - message: Fixed ladders leaving behind ghosts of people climbing through them.
-    type: Fix
-  - message: Fixed the soda fountain not being able to be pulled and not starting
-      anchored.
-    type: Fix
-  - message: Fixed aimed shot and spotter designator laser drawing being hidden under
-      some things.
-    type: Fix
-  id: 1528
-  time: '2025-03-30T03:34:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6030
-- author: DrSmugleaf
-  changes:
   - message: Fixed tactical map blips not being shown.
     type: Fix
   id: 1529
@@ -4924,5 +4876,30 @@
   id: 2026
   time: '2025-07-20T09:22:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7071
+- author: CyberTropic
+  changes:
+  - message: Corporate dome map insert to LV.
+    type: Add
+  id: 2027
+  time: '2025-07-20T09:26:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7067
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Liaisons now spawn with the country club outfit instead of the black
+      suit pants.
+    type: Tweak
+  - message: Fixed WeYA PMC headsets having the incorrect sprite.
+    type: Fix
+  id: 2028
+  time: '2025-07-20T09:25:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7054
+- author: SharkSnake98
+  changes:
+  - message: Added some items, rooms, and cosmetic changes to the Admin fax rooms
+      and OCP-583.
+    type: Tweak
+  id: 2029
+  time: '2025-07-20T09:25:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7044
 Name: RMC14
 Order: -1
