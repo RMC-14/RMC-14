@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: to4no_fix
-  changes:
-  - message: Squad and hive leaders speech in chat bubbles is now bold and significantly
-      larger for better visibility.
-    type: Add
-  id: 1513
-  time: '2025-03-29T08:23:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5912
 - author: noctyrnal
   changes:
   - message: Hybrisa's Cave Lockdown no longer automatically despawns at 45 Minutes.
@@ -5076,5 +5068,12 @@
   id: 2013
   time: '2025-07-20T08:36:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7074
+- author: Arykh
+  changes:
+  - message: Crayons no longer contain upstream reagents.
+    type: Tweak
+  id: 2014
+  time: '2025-07-20T08:42:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7088
 Name: RMC14
 Order: -1
