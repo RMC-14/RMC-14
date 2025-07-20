@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: 'Added LV624 Inserts for: sand temple, nexus barricade, armory, gym.'
-    type: Add
-  id: 1524
-  time: '2025-03-29T19:54:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5981
-- author: to4no_fix
-  changes:
-  - message: Increase text size in radio for commander headsets slightly reduced (FTL
-      remained unchanged)
-    type: Tweak
-  id: 1525
-  time: '2025-03-30T00:14:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6024
 - author: DrSmugleaf
   changes:
   - message: Fixed most marines not showing up on the live tactical map.
@@ -4918,5 +4903,26 @@
   id: 2024
   time: '2025-07-20T09:15:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6399
+- author: yagwog
+  changes:
+  - message: Paper documents now support [form] tags for fillable text fields
+    type: Add
+  - message: Paper documents now support [signature] tags for player signatures
+    type: Add
+  - message: Multiple form fields and signatures can be used in a single document
+    type: Add
+  - message: Neatened up paperwindow.xaml.cs to make it easier to work with for aspiring
+      paperwork contributors
+    type: Fix
+  id: 2025
+  time: '2025-07-20T09:21:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7051
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed breaching charges not requiring 1 engineering skill.
+    type: Fix
+  id: 2026
+  time: '2025-07-20T09:22:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7071
 Name: RMC14
 Order: -1
