@@ -59,13 +59,7 @@
   - type: Crayon
     capacity: 30
   - type: SolutionContainerManager
-    solutions:
-      food:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 3
-        - ReagentId: MindbreakerToxin
-          Quantity: 2
+    solutions: {}#removes upstream reagents
 
 #red
 - type: entity
