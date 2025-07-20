@@ -261,8 +261,24 @@ public sealed class SmokeSystem : EntitySystem
         if (!Resolve(smokeUid, ref component))
             return;
 
+        // RMC14 allow smoke to react without a bloodstream
         if (!TryComp<BloodstreamComponent>(entity, out var bloodstream))
+        {
+            var noBloodStreamSolution = solution.Clone();
+            var amount = FixedPoint2.Min(noBloodStreamSolution.Volume, component.TransferRate);
+            var finalSolution = noBloodStreamSolution.SplitSolution(amount);
+
+            foreach (var reagentQuantity in finalSolution.Contents.ToArray())
+            {
+                if (reagentQuantity.Quantity == FixedPoint2.Zero)
+                    continue;
+                var reagentProto = _prototype.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+
+                _reactive.ReactionEntity(entity, ReactionMethod.Touch, reagentProto, reagentQuantity, finalSolution);
+            }
+
             return;
+        }
 
         if (!_solutionContainerSystem.ResolveSolution(entity, bloodstream.ChemicalSolutionName, ref bloodstream.ChemicalSolution, out var chemSolution) || chemSolution.AvailableVolume <= 0)
             return;

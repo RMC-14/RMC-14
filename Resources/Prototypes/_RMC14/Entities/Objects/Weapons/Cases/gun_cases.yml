@@ -163,6 +163,29 @@
       amount: 6
 
 # rifles
+# M54C
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRifleM54C
+  name: M54C assault rifle MK2 case
+  description: A gun case containing the M54C assault rifle MK2.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CMK2
+      - CMMagazineRifleM54C
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+
 # M54CE2
 - type: entity
   parent: RMCGunCaseBase
@@ -244,7 +267,7 @@
       amount: 2
     - id: RMCBeltXM51
   - type: RemoveOnlyStorage
-    whitelist: 
+    whitelist:
       tags:
       - RMCAttachmentXM51Stock
       - RMCWeaponShotgunXM51

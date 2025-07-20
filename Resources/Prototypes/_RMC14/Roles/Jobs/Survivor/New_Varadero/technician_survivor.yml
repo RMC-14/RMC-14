@@ -19,7 +19,6 @@
         RMCSkillPowerLoader: 2
         RMCSkillVehicles: 1
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -28,6 +27,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetTechnician
+  useLoadoutOfJob: CMSurvivorEngineer
 
 - type: startingGear
   parent: RMCGearSurvivorEngineer
