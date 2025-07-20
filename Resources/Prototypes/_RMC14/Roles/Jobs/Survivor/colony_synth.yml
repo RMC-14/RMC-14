@@ -105,14 +105,21 @@
   useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear
+  id: RMCGearSyntheticColonistBase
+  equipment:
+    id: RMCIDCardSynthColony
+    ears: CMHeadsetColony
+    belt: CMBeltUtilityFilled
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchToolsFill
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistBase
   id: RMCGearSyntheticColonist
   equipment:
     jumpsuit: RMCJumpsuitSynthetic
     gloves: CMHandsInsulated
-    shoes: RMCShoesWhite
-    id: RMCIDCardSynthColony
-    ears: CMHeadsetColony
-    belt: CMBeltUtilityFilled
+    shoes: CMBootsBlackFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
