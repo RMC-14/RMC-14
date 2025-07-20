@@ -22,13 +22,13 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetEngineer
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorEngineer

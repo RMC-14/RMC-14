@@ -20,7 +20,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetICB
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -29,6 +28,7 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-icb
+  useLoadoutOfJob: CMSurvivorCorporate
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate

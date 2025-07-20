@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/861d5b8c6f723409cc4410491252abfead4180f0/icons/obj/items/clothing/belts.dmi. Nailgun Sprites by VictorJob.",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/15d853a340792692e623bcd30f7d8cc058ad6343/icons/obj/items/clothing/belts/holstered_guns.dmi. Nailgun Sprites by VictorJob.",
   "size": {
     "x": 32,
     "y": 32
@@ -135,6 +135,9 @@
     },
     {
       "name": "nailgun_tac"
+    },
+    {
+      "name": "l54"
     }
   ]
 }

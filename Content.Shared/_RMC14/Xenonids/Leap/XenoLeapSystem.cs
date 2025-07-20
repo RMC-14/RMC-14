@@ -235,6 +235,9 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapingRemove(Entity<XenoLeapingComponent> ent, ref ComponentRemove args)
     {
+        var ev = new XenoLeapStoppedEvent();
+        RaiseLocalEvent(ent, ref ev);
+
         StopLeap(ent);
     }
 
@@ -538,8 +541,11 @@ public sealed class XenoLeapSystem : EntitySystem
             if (_size.TryGetSize(leaping, out var size) && size > RMCSizes.SmallXeno)
                 collisionGroup = (int)leaping.Comp.IgnoredCollisionGroupLarge;
 
-            var fixture = fixtures.Fixtures.First();
-            _physics.SetCollisionMask(leaping, fixture.Key, fixture.Value, fixture.Value.CollisionMask | collisionGroup);
+            if (size >= RMCSizes.SmallXeno)
+            {
+                var fixture = fixtures.Fixtures.First();
+                _physics.SetCollisionMask(leaping, fixture.Key, fixture.Value, fixture.Value.CollisionMask | collisionGroup);
+            }
         }
 
         RemCompDeferred<XenoLeapingComponent>(leaping);
@@ -575,3 +581,6 @@ public sealed class XenoLeapSystem : EntitySystem
 
 [ByRefEvent]
 public record struct XenoLeapHitAttempt(EntityUid Leaper, bool Cancelled = false);
+
+[ByRefEvent]
+public record struct XenoLeapStoppedEvent;

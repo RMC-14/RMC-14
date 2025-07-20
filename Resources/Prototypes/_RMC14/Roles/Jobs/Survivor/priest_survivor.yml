@@ -21,13 +21,13 @@
       preset: RMCGearSurvivorPresetPriest
     - type: MarineOrders
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor
 
 - type: startingGear
   parent: RMCGearSurvivorEquipped

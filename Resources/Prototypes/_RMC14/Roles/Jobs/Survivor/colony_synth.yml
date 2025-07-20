@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobRibbonBase
   id: RMCJobSyntheticColony
   name: rmc-job-name-synth-colony
   description: rmc-job-description-synth-colony
@@ -42,7 +42,6 @@
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
-    - type: RMCRibbon
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
@@ -103,16 +102,24 @@
       - type: RMCSuicide
         damage: { }
   hidden: true
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear
+  id: RMCGearSyntheticColonistBase
+  equipment:
+    id: RMCIDCardSynthColony
+    ears: CMHeadsetColony
+    belt: CMBeltUtilityFilled
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchToolsFill
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistBase
   id: RMCGearSyntheticColonist
   equipment:
     jumpsuit: RMCJumpsuitSynthetic
     gloves: CMHandsInsulated
-    shoes: RMCShoesWhite
-    id: RMCIDCardSynthColony
-    ears: CMHeadsetColony
-    belt: CMBeltUtilityFilled
+    shoes: CMBootsBlackFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

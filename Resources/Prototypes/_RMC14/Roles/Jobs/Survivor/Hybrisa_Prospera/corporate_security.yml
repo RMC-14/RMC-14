@@ -1,0 +1,67 @@
+﻿- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorHybrisaCorporateSecurity
+  name: rmc-job-name-pmc-corporate-goon
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorHybrisaCorporateSecurity
+  startingGear: RMCGearSurvivorHybrisaCorporateSecurity
+  accessGroups:
+  - ColonistAllAccessNoArmory
+  - ColonistCorporate
+  spawnMenuRoleName: We-Ya Corporate Security (Hybrisa Survivor)
+  icon: "RMCJobIconPMCGoonStandard"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaCorporateSecurity
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaCorporateSecurity
+  equipment:
+    shoes: RMCBootsCorporate
+    id: RMCIDCardWeYaCorporateSecurity
+    back: RMCSatchelLightpackSurvivorFill
+    ears: RMCHeadsetDistressWeYa
+    gloves: RMCHandsVeteran
+    belt: RMCBeltSecurityWeYaFilled
+
+- type: playTimeTracker
+  id: RMCJobSurvivorHybrisaCorporateSecurity
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCSurvivorPresetHybrisaCorporateSecurity
+  name: constable colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCWeaponSMGP90, RMCPouchMagazineFilledP90 ]
+    primaryWeaponChance: 1
+    randomOutfits:
+    - [ RMCHeadCapWestonYamadaDark, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
+    - [ RMCArmorHelmetPMCCorporateHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
+    - [ RMCArmorHelmetPMCCorporateLeadHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisaLead ]
