@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: stranthbackup
-  changes:
-  - message: M34 Incinerator Unit no longer has a cold flame. Now you can light your
-      smokes and paper with it!
-    type: Add
-  - message: Paper now turns to ashes.
-    type: Fix
-  id: 1517
-  time: '2025-03-29T08:28:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5959
-- author: to4no_fix
-  changes:
-  - message: Now all heads of department headsets, squad leaders, and officers significantly
-      increase the size of text in the radio, the headset of the fireteam leader also
-      increases the text, but slightly less.
-    type: Add
-  id: 1518
-  time: '2025-03-29T08:34:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5924
 - author: Tyzemol
   changes:
   - message: Fixed Hive core not being able to be destroyed and rebuilt without a
@@ -5071,5 +5052,22 @@
   id: 2017
   time: '2025-07-20T09:08:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7040
+- author: NotInButIn
+  changes:
+  - message: SL squad management menu and supply drop console have become prettier
+      UI!
+    type: Tweak
+  id: 2018
+  time: '2025-07-20T09:09:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7009
+- author: OmerF-afk
+  changes:
+  - message: Added multiple new weaponry for random loot spawners and surv base spawn
+    type: Add
+  - message: Black Spearhead revolver variant
+    type: Add
+  id: 2019
+  time: '2025-07-20T09:10:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7033
 Name: RMC14
 Order: -1
