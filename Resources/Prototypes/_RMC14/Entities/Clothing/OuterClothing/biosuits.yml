@@ -25,6 +25,9 @@
     bio: 15
     bullet: 10
     explosionArmor: 10
+  - type: FireProtection
+    reduction: 0.3
+   # TODO gas_transfer_coefficient = 0.90
 
 - type: entity
   parent: RMCArmorFirefighter
