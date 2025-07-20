@@ -555,10 +555,12 @@
   name: M203 grenade launcher
   description: An antique underbarrel grenade launcher. Adopted in 1969 for the M16, it was made obsolete centuries ago; how its ended up here is a mystery to you. Holds only one propriatary 40mm grenade, does not have modern IFF systems, it won't pass through your friends.
   components:
-  - type: Sprite # TODO: No IFF for this launcher
+  - type: Sprite
     layers:
       - state: grenade-m203
         map: [ "enum.BreechVisuals.Open" ]
+  - type: GunIFF
+    enabled: false
   - type: BallisticAmmoProvider
     capacity: 1
   - type: ShootAtFixedPoint

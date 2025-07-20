@@ -204,25 +204,6 @@
   - FolderYellowRMC
   # TODO Notepad
 
-# Plushies
-- type: loadoutGroup
-  id: PlushiesRMC
-  name: rmc-loadout-group-plushies
-  minLimit: 0
-  maxLimit: 7
-  loadouts:
-  - PlushieFarwaRMC
-  - PlushieBarricadeRMC
-  - PlushieBeeRMC
-  - PlushieSharkGreyRMC
-  - PlushieSharkBlueRMC
-  - PlushieSharkPinkRMC
-  - PlushieMothRMC
-  - PlushieRockRMC
-  - PlushieTherapyRMC
-  - PlushieGnarpGnarpRMC
-  - PlushieGnarpGnarpAltRMC
-
 # Recreational
 - type: loadoutGroup
   id: RecreationalRMC
@@ -257,7 +238,7 @@
   id: CannedDrinksRMC
   name: rmc-loadout-group-canned-drinks
   minLimit: 0
-  maxLimit: 15
+  maxLimit: 14
   loadouts:
   - BottledWaterRMC
   - GrapeJuiceRMC
@@ -290,7 +271,7 @@
   id: SmokablesRMC
   name: rmc-loadout-group-smokables
   minLimit: 0
-  maxLimit: 16
+  maxLimit: 11
   loadouts:
   - LuckySlothsPackRMC
   - ArcturianAcePackRMC
@@ -482,14 +463,14 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - BootsBlackRMC
-  - ShoesBlackRMC
-  - ShoesBrownRMC
-  - ShoesGreenRMC
-  - ShoesPurpleRMC
-  - ShoesRedRMC
-  - ShoeWhiteRMC
-  - ShoeYellowRMC
+  - BootsBlackRMCSynth
+  - ShoesBlackRMCSynth
+  - ShoesBrownRMCSynth
+  - ShoesGreenRMCSynth
+  - ShoesPurpleRMCSynth
+  - ShoesRedRMCSynth
+  - ShoeWhiteRMCSynth
+  - ShoeYellowRMCSynth
 
 - type: loadoutGroup
   id: SynthHeadwearRMC
@@ -586,3 +567,41 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+
+# Civilian
+- type: loadoutGroup
+  id: CivilianOnlyRMC
+  name: rmc-loadout-group-civilian
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - PatchWeYaRMC
+  - PatchWeYaRMCSquare
+  - PatchWeYaRMCBlack
+  - PatchWeYaRMCFury161
+  - PatchTSERMC
+  - PatchCECRMC
+  - PatchCLFRMC
+  # TODO Halcyon Dynamics patch
+  # TODO cowboy hat
+  # white cowboy hat TODO
+  # headband TODO
+  # BiMex tactical shades TODO
+  - ShoesBlackRMC
+  - ShoesBrownRMC
+  - ShoesBlueRMC
+  - ShoesGreenRMC
+  - ShoesYellowRMC
+  - ShoesRedRMC
+  - ShoesPurpleRMC
+  - PlushieFarwaRMC
+  - PlushieBarricadeRMC
+  - PlushieBeeRMC
+  - PlushieSharkGreyRMC
+  - PlushieSharkBlueRMC
+  - PlushieSharkPinkRMC
+  - PlushieMothRMC
+  - PlushieRockRMC
+  - PlushieTherapyRMC
+  - PlushieGnarpGnarpRMC
+  - PlushieGnarpGnarpAltRMC
