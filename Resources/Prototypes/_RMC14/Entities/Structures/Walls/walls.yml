@@ -20,8 +20,10 @@
         !type:DamageTrigger
         damage: 3000
       behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        - !type:ChangeConstructionNodeBehavior
+          node: girder
+        - !type:DoActsBehavior
+          acts: ["Breakage"]
   - type: IconSmooth
     key: walls
     base: metal
@@ -591,10 +593,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/elevator.rsi
-    state: wall_freight
+    state: wall_research
   - type: Icon
     sprite: _RMC14/Structures/Walls/elevator.rsi
-    state: wall_freight
+    state: wall_research
 
 - type: entity
   parent: RMCWallElevatorNoConnect1

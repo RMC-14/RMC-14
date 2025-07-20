@@ -1,8 +1,8 @@
 ﻿using System.Runtime.InteropServices;
-using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -82,7 +82,7 @@ public sealed class WoundsSystem : SharedWoundsSystem
                     {
                         var amount = -FixedPoint2.Min(-toHeal, wound.Damage - wound.Healed);
                         toHeal -= amount;
-                        _passiveDamage = _rmcDamageable.DistributeHealing(damageableEnt, group.Value, amount, _passiveDamage);
+                        _passiveDamage = _rmcDamageable.DistributeDamage(damageableEnt, group.Value, amount, _passiveDamage);
                     }
                 }
 

@@ -36,6 +36,32 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/heavy.rsi
 
+- type: entity
+  parent: ArmorHelmetSPP
+  id: RMCArmorHelmetSPPArmy
+  name: 6B82 combat helmet
+  description: An older version of the UPP Army's 6B92 combat helmet, still worn by certain units on planets the SPP deems less important
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/army_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/army_helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: ArmorHelmetSPP
+  id: RMCArmorHelmetSPPFirefighter
+  name: T-20 firefighter helmet
+  description: "A reinforced, heat-resistant helmet issued to SPP emergency responders. Its durable composite shell provides protection against falling debris and extreme heat, while the attached fire-resistant shroud shields the wearer’s neck and shoulders. A red star is emblazoned on the front, marking its service within the socialist's progressive peoples."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/fire_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/fire_helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # SPP hats
 - type: entity
   parent: CMHeadCap
@@ -60,6 +86,17 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/civ.rsi
 
 - type: entity
+  parent: CMHeadCapSPPCivilian
+  id: RMCHeadCapSPPCivilianPlantWorker
+  name: white worker cap
+  description: A simple white fabric cap, commonly worn by various UPP workers to keep hair contained and maintain cleanliness. Lightweight and practical, but not very durable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/white_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/white_cap.rsi
+
+- type: entity
   parent: CMHeadCapSPP
   id: CMHeadCapSPPBeret
   name: UL3 SPP beret
@@ -68,6 +105,17 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi
+
+- type: entity
+  parent: CMHeadCapSPPBeret
+  id: RMCHeadCapSPPBeretArmy
+  name: SPP reservist beret
+  description: A well-made beret worn by reservists of the SPP armed forces. It signifies their continued commitment to the cause, even while not on active duty, and serves as a symbol of unity and service.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/army_beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/army_beret.rsi
 
 - type: entity
   parent: CMHeadCapSPP
@@ -79,6 +127,17 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/peaked.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/peaked.rsi
+
+- type: entity
+  parent: CMHeadCapSPPPeaked
+  id: CMHeadCapSPPPeakedPolice
+  name: UL3 PaP peaked cap
+  description: Standard issue peaked cap of the People's Armed Police.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_police.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked_police.rsi
 
 - type: entity
   parent: CMHeadCapSPP

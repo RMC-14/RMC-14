@@ -1,4 +1,10 @@
-﻿# Marines
+# Marines
+- type: entity
+  id: RMCJumpsuitMarinePatchBase
+  abstract: true
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RMCPatchUNMC ]
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
@@ -18,13 +24,24 @@
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/standard/urban.rsi
 
 - type: entity
+  parent: [JumpsuitMarine, RMCJumpsuitMarinePatchBase]
+  id: RMCJumpsuitMarinePatch
+  suffix: Patch
+
+# Royal
+- type: entity
   parent: JumpsuitMarine
-  id: JumpsuitMarineRoyal # TODO RMC14 sprite
+  id: RMCJumpsuitMarineRoyal # TODO RMC14 sprite
   suffix: Filled, Royal
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingPouchRoyal
+    startingWebbing: RMCWebbingDropPouchRoyal
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
 
+# Formal
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitMarineFormal
@@ -50,6 +67,11 @@
       Classic: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/urban.rsi
 
+- type: entity
+  parent: [CMJumpsuitMarineEngineer, RMCJumpsuitMarinePatchBase]
+  id: RMCJumpsuitMarineEngineerPatch
+  suffix: Patch
+
 # Hospital Corpsman
 - type: entity
   parent: JumpsuitMarine
@@ -66,6 +88,11 @@
       Snow: _RMC14/Objects/Clothing/Uniforms/Marine/medic/snow.rsi
       Classic: _RMC14/Objects/Clothing/Uniforms/Marine/medic/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/medic/urban.rsi
+
+- type: entity
+  parent: [CMJumpsuitMarineMedic, RMCJumpsuitMarinePatchBase]
+  id: RMCJumpsuitMarineMedicPatch
+  suffix: Patch
 
 # RTO / FTL
 - type: entity
@@ -84,6 +111,11 @@
       Classic: _RMC14/Objects/Clothing/Uniforms/Marine/rto/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/rto/urban.rsi
 
+- type: entity
+  parent: [CMJumpsuitMarineRTO, RMCJumpsuitMarinePatchBase]
+  id: RMCJumpsuitMarineRTOPatch
+  suffix: Patch
+
 # Sniper
 - type: entity
   parent: JumpsuitMarine
@@ -98,6 +130,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
+
+# Sun Riders
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitSunRiders
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RMCPatchSolarDevils ]
 
 # Supply
 
@@ -245,6 +286,56 @@
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
 
+# ASO
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitASOBlack
+  name: aso black uniform
+  description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_black.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitASOFormal
+  name: aso formal uniform
+  description: A pearly white formal uniform used by Auxiliary Support Officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_formal.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitASOBlackAlt
+  name: aso alternative black uniform
+  description: A service uniform typycally used by Auxiliary Support Officers. This one is colored black with green stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_black_alt.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitASOOperations
+  name: aso operations uniform
+  description: An operations uniform typically used by Auxiliary Support Officers. This one has a dark blue camo pattern.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/ASO/aso_operations.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
 # Officer
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
@@ -373,7 +464,7 @@
   id: CMJumpsuitSurvivorMarine
   name: UNMC uniform
   description: Torn, Burned and blood stained. This uniform has seen much more than you could possibly imagine.
-  suffix: FORECON
+  suffix: FORECON, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/recon_marine.rsi
@@ -384,9 +475,14 @@
 - type: entity
   parent: CMJumpsuitSurvivorMarine
   id: RMCJumpsuitSurvivorMarineDropPouch
+  suffix: FORECON, Survivor, Webbing, Patch
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingPouchForecon
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchUNMC
+    - RMCPatchFORECON
 
 # High Command
 

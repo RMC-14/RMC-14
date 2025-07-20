@@ -129,3 +129,17 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  id: RMCFogSpawner15
+  parent: MarkerBase
+  name: fog blocker
+  suffix: 15 minutes
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: fog
+  - type: RandomSpawner # This is horrible if anyone knows something that just spawns something then tell me.
+    prototypes:
+    - RMCFogWall15
+    chance: 1

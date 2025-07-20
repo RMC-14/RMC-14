@@ -5,6 +5,7 @@ using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Light.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
@@ -22,9 +23,7 @@ public abstract partial class SharedGunSystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     // RMC14
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedRMCStackSystem _rmcStack = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     protected virtual void InitializeBallistic()
     {
@@ -121,6 +120,13 @@ public abstract partial class SharedGunSystem
         if (GetBallisticShots(component) >= component.Capacity)
             return false;
 
+        //RMC14
+        if (TryComp(ammo, out ExpendableLightComponent? light))
+        {
+            if (light.CurrentState != ExpendableLightState.BrandNew)
+                return false;
+        }
+
         TimeSpan insertDelayConverted;
 
         if (insertDelay > 0)
@@ -160,7 +166,7 @@ public abstract partial class SharedGunSystem
         }
 
         // RMC14
-        if (_container.TryGetContainingContainer((args.Target.Value, null), out var container) &&
+        if (Containers.TryGetContainingContainer((args.Target.Value, null), out var container) &&
             container.Owner != args.User &&
             HasComp<StorageComponent>(container.Owner))
         {
@@ -303,7 +309,7 @@ public abstract partial class SharedGunSystem
     {
         if (TryComp(used, out StackComponent? stack))
         {
-            var coordinates = _transform.GetMoverCoordinates(used);
+            var coordinates = TransformSystem.GetMoverCoordinates(used);
             var split = _rmcStack.Split((used, stack), 1, coordinates);
             if (split != null)
                 used = split.Value;

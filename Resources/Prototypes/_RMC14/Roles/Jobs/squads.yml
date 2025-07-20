@@ -152,6 +152,7 @@
     - Helmet
     - Goggles
     - Armor
+    - Gloves
     radio: SPP
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -176,6 +177,7 @@
     - Helmet
     - Goggles
     - Armor
+    - Gloves
     radio: WEYA
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -200,6 +202,7 @@
     - Helmet
     - Goggles
     - Armor
+    - Gloves
     radio: Colony
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -224,6 +227,7 @@
     - Helmet
     - Goggles
     - Armor
+    - Gloves
     radio: TSE
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -248,6 +252,7 @@
     - Helmet
     - Goggles
     - Armor
+    - Gloves
     radio: Provost
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -269,7 +274,8 @@
     - Helmet
     - Goggles
     - Armor
-    radio: MarineForecon
+    - Gloves
+    radio: MarineSOF
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_forecon
@@ -292,7 +298,7 @@
     background:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: empty
-    radio: null
+    radio: MarineSOF
     accessLevels: []
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -316,6 +322,7 @@
     - Helmet
     - Goggles
     - Armor
+    - Gloves
     radio: Colony
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi

@@ -146,7 +146,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         args.Handled = true;
         if (damage != FixedPoint2.Zero)
         {
-            var total = _rmcDamageable.DistributeHealing((target, damageable), treater.Comp.Group, damage);
+            var total = _rmcDamageable.DistributeDamage((target, damageable), treater.Comp.Group, damage);
             _damageable.TryChangeDamage(target, total, true, damageable: damageable, origin: user, tool: args.Used);
         }
 
@@ -381,6 +381,7 @@ public abstract class SharedWoundsSystem : EntitySystem
             CancelDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
             TargetEffect = "RMCEffectHealBusy",
+            MovementThreshold = 0.5f,
         };
         _doAfter.TryStartDoAfter(doAfter);
         _audio.PlayPredicted(treater.Comp.TreatBeginSound, user, user);

@@ -1,0 +1,75 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorFireProtectionSpecialist
+  name: rmc-job-name-survivor-fire-protection-specialist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorFireProtectionSpecialist
+  startingGear: RMCGearSurvivorFireProtectionSpecialist
+  spawnMenuRoleName: Fire Protection Specialist (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetFireProtectionSpecialist
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: rmc-job-prefix-fire-protection-specialist
+  useLoadoutOfJob: CMSurvivor
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorFireProtectionSpecialist
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianBrown
+    shoes: RMCBootsSPP
+    gloves: RMCHandsVeteranSPP
+    back: RMCSatchelLightpack
+    head: RMCArmorHelmetSPPFirefighter
+    outerClothing: RMCArmorSPPFirefighter
+    ears: RMCHeadsetDistressSPP
+  storage:
+    back:
+    - RMCAttachmentUnderbarrelExtinguisher
+    - CMSheetMetal20
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFireProtectionSpecialist
+  name: fire protection specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorFireProtectionSpecialist
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetFireProtectionSpecialist
+  name: fire protection specialist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCFireAxe ]
+    - [ CMFireExtinguisherPortable ]
+
+

@@ -2,7 +2,7 @@
   parent: CMAutolathe
   id: CMArmylathe
   name: armylathe
-  description: The armylathe is a specialized USCM autolathe meant for printing parts to construct various ordnance, such as grenade casings and mortar shells.
+  description: The armylathe is a specialized UNMC autolathe meant for printing parts to construct various ordnance, such as grenade casings and mortar shells.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/armylathe.rsi
@@ -22,8 +22,8 @@
     - RMCRecipesArmyLathe
   - type: MaterialStorage
     storage:
-      CMSteel: 800
-      RMCPlastic: 100
+      CMSteel: 1500
+      RMCPlastic: 1000
     whitelist:
       components:
       - FloorTile

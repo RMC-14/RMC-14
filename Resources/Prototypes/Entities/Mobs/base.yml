@@ -31,6 +31,7 @@
   - type: MobMover
   - type: Actions
   - type: Alerts
+  - type: AreaInfo
   - type: Appearance
   - type: RotationVisuals
     defaultRotation: 0
@@ -106,6 +107,8 @@
     - Shock
     - Cold
     - Caustic
+    - Asphyxiation
+    - Radiation
   - type: DamageOnHighSpeedImpact
     damage:
       types:

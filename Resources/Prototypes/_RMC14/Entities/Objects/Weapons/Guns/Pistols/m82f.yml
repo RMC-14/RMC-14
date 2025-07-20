@@ -1,0 +1,82 @@
+- type: entity
+  parent: [ BaseItem, RMCBaseSlideMagazineVisualsBallistic, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  id: RMCWeaponPistolM82F
+  name: M82-F flare gun
+  description: A flare gun issued to JTAC operators to use with flares. Comes with a miniscope. One shot, one... life saved?
+  components:
+  - type: AmmoCounter
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m82f.rsi
+  - type: Item
+    size: Normal
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m82f.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: Wieldable
+  - type: WieldDelay
+    baseDelay: 0.2
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 6
+  - type: Gun
+    projectileSpeed: 40
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound:
+      collection: CMShotgunLoad
+      params:
+        variation: 0.2
+  - type: RMCSelectiveFire
+    scatterWielded: 0
+    scatterUnwielded: 0
+    baseFireRate: 10
+    burstScatterMult: 0
+  - type: ShootAtFixedPoint
+    maxFixedRange: 15
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - Flare
+      - RMCFlare
+      - RMCFlareCAS
+    capacity: 1
+    proto: CMFlare
+    soundInsert:
+      collection: CMShotgunLoad
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: [ ]
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.95
+  - type: Appearance
+  - type: RMCNameItemOnVend
+    item: Sidearm
+  - type: GunPointBlank
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS42xTelescopicMiniscope
+        whitelist:
+          tags:
+          - RMCAttachmentS42xTelescopicMiniscope
+  - type: GunIFF
+    enabled: true
+  - type: GunIgnorePrediction
+  - type: RMCAirShot
+  - type: Tag
+    tags:
+    - RMCFlareGun
+    - Sidearm
+
+- type: Tag
+  id: RMCFlareGun

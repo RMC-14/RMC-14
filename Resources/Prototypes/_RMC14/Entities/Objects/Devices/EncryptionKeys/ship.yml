@@ -107,7 +107,6 @@
   - type: EncryptionKey
     channels:
     - MarineHighCommand
-    - MarineForecon
     defaultChannel: MarineHighCommand
   - type: Sprite
     state: cap_key
@@ -439,6 +438,7 @@
     - MarineCommand
     - MarineEngineer
     - MarineJTAC
+    - MarineRequisition
     - MarineMedical
     - MarineAlpha
     - MarineBravo

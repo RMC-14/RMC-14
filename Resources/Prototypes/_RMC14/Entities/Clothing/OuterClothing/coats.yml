@@ -1,7 +1,7 @@
 #Base Jacket
 - type: entity
   abstract: true
-  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket ]
+  parent: [ ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseJacket
   components:
   - type: Storage
@@ -16,7 +16,6 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
-  - type: PlaytimeMedalHolder
   - type: AllowSuitStorage
     whitelist: { }
   - type: RMCAllowSuitStorageUserWhitelist
@@ -333,6 +332,45 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi
 
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatASOBlack
+  name: auxiliary support officer black jacket
+  description: A black jacket worn by officers that want to look stylish while looking at paperwork.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black.rsi
+  - type: CMArmor
+    melee: 10
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatASOWhite
+  name: auxiliary support officer white jacket
+  description: A white jacket worn by officers that want to look stylish while looking at paperwork.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white.rsi
+  - type: CMArmor
+    melee: 10
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatASOBlackAlt
+  name: auxiliary support officer alternative black coat
+  description: A black coat perfect for sorting papers in colder weather.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black_alt.rsi
+  - type: CMArmor
+    melee: 10
+
 # Commanding Officer
 - type: entity
   parent: RMCBaseJacket
@@ -368,10 +406,53 @@
     foldedEquippedPrefix: jacket
 
 - type: entity
-  parent: CMCoatCOBomber
+  parent: RMCBaseJacket
   id: RMCCoatBomber
   name: brown bomber jacket
   description: A well-worn leather bomber jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatBomberRed
+  name: red bomber jacket
+  description: A well-worn leather bomber jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_red.rsi
+
+- type: entity
+  parent: RMCCoatBomberRed
+  id: RMCCoatBomberGrey
+  name: grey bomber jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_grey.rsi
+
+- type: entity
+  parent: RMCCoatBomberRed
+  id: RMCCoatBomberKhaki
+  name: khaki bomber jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
 
 - type: entity
   parent: CMCoatCO
@@ -596,3 +677,29 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chaplain_robes.rsi
+
+# Hybrisa
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatHoboBrown
+  name: dark brown worn polyester jacket
+  description: An old worn brown polyester jacket, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
+
+# Snow
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatSnow
+  name: snow suit
+  description: A standard snow suit. It can protect the wearer from extreme cold.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/snow.rsi
