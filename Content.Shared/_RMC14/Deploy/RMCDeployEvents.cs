@@ -25,3 +25,10 @@ public sealed partial class RMCDeployDoAfterEvent : DoAfterEvent
     }
     public override DoAfterEvent Clone() => new RMCDeployDoAfterEvent(Area);
 }
+
+
+[Serializable, NetSerializable]
+public sealed partial class RMCParentalCollapseDoAfterEvent : DoAfterEvent
+{
+    public override DoAfterEvent Clone() => new RMCParentalCollapseDoAfterEvent();
+}

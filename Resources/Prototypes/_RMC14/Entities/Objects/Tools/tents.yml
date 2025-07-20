@@ -209,45 +209,55 @@
       sprite: Objects/Specific/Hydroponics/Equipment/plant_bag.rsi
       state: icon
     - type: RMCDeployable
+      # As an example all fields are listed here even if their values match the default value
       deployTime: 10
+      collapseTime: 10
       deployArea:
         !type:PhysShapeAabb
         bounds: "-0.4,0.6,1.4,4.4" # The non-perfect rectangle allows the tent to be placed close to the walls
+      collapseToolPrototype: CMEntrenchingTool
       areaBlockedCheck: true
       failIfNotSurface: false
       deploySetups:
         - prototype: RMCTentUNMCStandard
-          parentalSetup: true
-          reactiveSetup: true
-          offset: 0.2, 0 # spawn a tent in the center of the zone
+          NeverRedeployableSetup: false
+          mode: ReactiveParental
+          anchor: true
+          offset: 0.2, 0
           angle: 0
         - prototype: CMTable
-          parentalSetup: false
-          reactiveSetup: false
+          NeverRedeployableSetup: false
+          mode: Default
+          anchor: true
           offset: -0.5, 0.5
           angle: 0
         - prototype: CMTable
-          parentalSetup: false
-          reactiveSetup: false
+          NeverRedeployableSetup: false
+          mode: Default
+          anchor: true
           offset: 0.5, 0.5
           angle: 0
         - prototype: RMCOverwatchConsoleRotating
-          parentalSetup: false
-          reactiveSetup: true
+          NeverRedeployableSetup: false
+          mode: Reactive
+          anchor: true
           offset: -0.5, 0.5
           angle: 0
         - prototype: RMCRotaryPhone
-          parentalSetup: false
-          reactiveSetup: true
+          NeverRedeployableSetup: false
+          mode: Reactive
+          anchor: true
           offset: 0.5, 0.5
           angle: 0
         - prototype: CMChair
-          parentalSetup: false
-          reactiveSetup: false
+          NeverRedeployableSetup: false
+          mode: Default
+          anchor: true
           offset: -0.5, -0.5
           angle: 180
         - prototype: CMChair
-          parentalSetup: false
-          reactiveSetup: false
+          NeverRedeployableSetup: false
+          mode: Default
+          anchor: true
           offset: 0.5, -0.5
           angle: 180

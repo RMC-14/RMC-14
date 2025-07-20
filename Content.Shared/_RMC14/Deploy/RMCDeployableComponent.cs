@@ -15,15 +15,26 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
     [DataField, AutoNetworkedField]
     public float DeployTime = 10f;
 
+    // Время ду афтера (секунды)
+    [DataField, AutoNetworkedField]
+    public float CollapseTime = 10f;
+
     // Фигура области развертывания. Началом координат для фигуры является центр ближайшего тайла, на котором стоит игрок.
     [DataField(required: true), AutoNetworkedField]
     public PhysShapeAabb DeployArea = new();
 
-    // Набор объектов для спавна
+    /// <summary>
+    /// Набор объектов для спавна
+    /// </summary>
+    /// <remarks>
+    /// В сущности первого по списку DeploySetups сетапе, помеченного как ReactiveParental (или вообще в первом в списке, если нет ни одного ReactiveParental) будет храниться сущность,
+    /// которая развернула все сетапы, до сворачивания или уничтожения.
+    /// Если ни один сетап не помечен как ReactiveParental, по умолчанию первый в списке DeploySetups будет считаться как ReactiveParental.
+    /// </remarks>
     [DataField(required: true), AutoNetworkedField]
     public List<RMCDeploySetup> DeploySetups = new();
 
-    // Пропускать ли проверку занятости области
+    // Проводить ли проверку блокировки области
     [DataField, AutoNetworkedField]
     public bool AreaBlockedCheck = false;
 
@@ -31,9 +42,10 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
     [DataField, AutoNetworkedField]
     public bool FailIfNotSurface = true;
 
-    // Tracks indices of setups whose entities were destroyed and should not be redeployed.  Not for YAML! Only for runtime use.
+    // ID прототипа инструмента, который используется для сворачивания. Не указывайте, если не хотите, чтобы была возможность сворачивать.
     [DataField, AutoNetworkedField]
-    public HashSet<int> NonRedeployableSetups = new();
+    public EntProtoId? CollapseToolPrototype;
+
 
     void ISerializationHooks.AfterDeserialization()
     {
@@ -42,7 +54,7 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
         int parentalIndex = -1;
         for (int i = 0; i < DeploySetups.Count; i++)
         {
-            if (DeploySetups[i].ParentalSetup)
+            if (DeploySetups[i].Mode == RMCDeploySetupMode.ReactiveParental)
             {
                 parentalIndex = i;
                 break;
@@ -50,20 +62,18 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
         }
         if (parentalIndex == -1)
         {
-            // Нет ни одного ParentalSetup — делаем первый
-            DeploySetups[0].ParentalSetup = true;
+            // Нет ни одного ReactiveParentalSetup — делаем первый
+            DeploySetups[0].Mode = RMCDeploySetupMode.ReactiveParental;
             DeploySetups[0].StorageOriginalEntity = true;
         }
         else
         {
-            // Первый ParentalSetup получает StorageOriginalEntity
+            // Первый ReactiveParentalSetup получает StorageOriginalEntity
             DeploySetups[parentalIndex].StorageOriginalEntity = true;
         }
-
-        if (NonRedeployableSetups.Count > 0) // YAML protection
-            NonRedeployableSetups = new();
     }
 }
+
 
 [Serializable, NetSerializable]
 [DataDefinition]
@@ -72,34 +82,13 @@ public sealed partial class RMCDeploySetup : ISerializationHooks
     // Прототип сущности для спавна
     [DataField(required: true)] public EntProtoId Prototype;
 
-    // Помечает сетап как условный "родитель" для всех сетапов, не помеченных как ParentalSetup =true.
-    // Необходимо для реализации свертывания а также реагирования на удаление сущностей из сетапов, помеченных как ParentalSetup =true (если включено).
-    // В сущности первого по списку DeploySetups сетапе, помеченного как ParentalSetup (или вообще в первом в списке, если нет ни одного ParentalSetup) будет храниться сущность,
-    // которая развернула все сетапы, до сворачивания или уничтожения.
-    // Если ни один сетап не помечен как ParentalSetup, по умолчанию первый в списке DeploySetups будет считаться как ParentalSetup.
+    /// <summary>
+    /// Мод сетапа, определяющий реакцию развернутой с помощью сетапа сущности на различные события
+    /// </summary>
     [DataField]
-    public bool ParentalSetup
-    {
-        get => _parentalSetup;
-        set
-        {
-            _parentalSetup = value;
-            if (value && !ReactiveSetup) // runtime protection (will also trigger if the deserialization of this field occurs later than the ReactiveSetup field)
-                ReactiveSetup = true;
-        }
-    }
-    private bool _parentalSetup = false;
+    public RMCDeploySetupMode Mode = RMCDeploySetupMode.Default;
 
-    // Если true, то сущность, развернуютая с помощью  этого сетапа, будет реагировать на удаление всех сущностей,
-    // развернутых из сетапов, помеченных как ParentalSetup и будет также уничтожена.
-    //
-    // Логика обязывает пометить  ParentalSetup также как ReactiveSetup. Если вы указали в yaml ParentalSetup как не ReactiveSetup, система все равно будет считать его таковым.
-    // Это позволит сворачивать, взаимодействуя с одной из таких сущностей, при этом все эти сущности будут реагиорвать на удаление друг-друга.
-    // Таким образом это преодотвращает ошибку, когда сущность, развернутая из ParentalSetup, и  хранящая в себе сущность, с помощью которой все сетапы были развернуты,
-    // была удалена, а остальным сущностям, развернутым из ParentalSetup, уже не во что сворачивать сетапы.
-    [DataField] public bool ReactiveSetup = true;
-
-    // If true, this setup will never be redeployed or collapsed
+    // If true, this setup will never be redeployed and collapsed
     [DataField] public bool NeverRedeployableSetup = false;
 
     // Служебный флаг для определение в сущности из какого сетапа будет хранится оригинальная сущность до сворачивания или уничтожения.
@@ -115,40 +104,34 @@ public sealed partial class RMCDeploySetup : ISerializationHooks
     // Закреплять ли по центру ближайшего тайла
     [DataField] public bool Anchor = true;
 
+
     void ISerializationHooks.AfterDeserialization()
     {
-        if (ParentalSetup && !ReactiveSetup) // YAML protection
-            ReactiveSetup = true;
-
         if (StorageOriginalEntity) // YAML protection
             StorageOriginalEntity = false;
 
     }
 }
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCDeploySystem), Other = AccessPermissions.Read)]
-public sealed partial class RMCDeployedEntityComponent : Component, ISerializationHooks
+
+[Serializable, NetSerializable]
+public enum RMCDeploySetupMode
 {
-    // The original entity that initiated the deploy
-    [DataField, AutoNetworkedField]
-    public EntityUid OriginalEntity;
+    /// <summary>
+    /// Сущность, развернутая с помощью  такого сетапа, не реагирует на удаление сущущностей, развернутых из ReactiveParental
+    /// и не могут быть как источником сворачивания, так и хранилищем оригинальной сущности.
+    /// </summary>
+    Default = 0,
 
-    // The index of the setup in DeploySetups that spawned this entity
-    [DataField, AutoNetworkedField]
-    public int SetupIndex;
+    /// <summary>
+    /// Сущность, развернутая с помощью  такого сетапа, будет реагировать на удаление всех сущностей,
+    /// развернутых из сетапов, помеченных как ReactiveParental и будет также удалена.
+    /// </summary>
+    Reactive = 1,
 
-    // Флаг для защиты от повторной обработки при удалении
-    [DataField, AutoNetworkedField]
-    public bool InShutdown = false;
-
-    void ISerializationHooks.AfterDeserialization()
-    {
-        if (OriginalEntity != EntityUid.Invalid || SetupIndex != 0 || InShutdown) // YAML protection
-        {
-            OriginalEntity = EntityUid.Invalid;
-            SetupIndex = 0;
-            InShutdown = false;
-        }
-    }
+    /// <summary>
+    /// Помечает сетап как один из условных "родителей" для всех сетапов, не помеченных как ReactiveParental.
+    /// Необходим для реализации свертывания а также реагирования на удаление сущностей из сетапов, помеченных как ReactiveParental.
+    /// </summary>
+    ReactiveParental = 2
 }
