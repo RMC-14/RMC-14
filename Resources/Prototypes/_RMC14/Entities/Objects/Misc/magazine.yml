@@ -19,7 +19,7 @@
   description: The only official UNMC magazine, the headline reads 'The Future Soldier!'. On the cover is a piece of sturdy-looking armor, containing a safe-looking marine.
   components:
   - type: RMCLoreExaminable
-  content: A large portion of the magazine describes the B18 Defensive Armor, how it is designed to make the modern marine invincible and that it has recently finished trials, raising the expectations of the brass for this new piece of gear.
+    content: A large portion of the magazine describes the B18 Defensive Armor, how it is designed to make the modern marine invincible and that it has recently finished trials, raising the expectations of the brass for this new piece of gear.
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -65,7 +65,6 @@
   components:
   - type: RMCLoreExaminable
     content: The article details the fierce urban combat the marines had to face against human colonists on Mars during the early days of its colonization. As Weston Yamada was expanding on the red frontier, they faced armed resistance from colonists who refused the corporate expansion. Weston Yamada PMCs with the help of nearby UNMC forces fought off the insurrectionists. The article also mentions a few accounts from tankers on the effectiveness of their new main battle tanks, and recent sightings of MARSOC operators in the AO. This conflict marked one of the first recorded uses of orbital bombardments in active combat by the UNMC, with the UNS Omaha involved.
-
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -139,3 +138,17 @@
   components:
   - type: RMCLoreExaminable
     content: This special issue covers a few the various projects being undertaken by the Weston-Yamada Corporation which have been cleared for a press release by the Stakeholders and the Division Director. Notable projects include the UY-21 Weston-Yamada Blending Unit (Which fixes the UY-20's tendency to explode under heat), a 'prototype portable heavy mining laser' designed to cut through rock like butter, and a Weston-Yamada MANPADS system (Designated the TYPHOON EK-403) designed for PMC usage. Halfway through the issue, the magazine offers a 'Buy one, get one free' coupon for a pack of Sequoia beer; it appears to have expired the day after the issue was published.
+
+- type: entity
+  parent: BaseItem
+  id: RMCMagazineDirtyMagazine
+  name: dirty magazine
+  description: Waaweeweewaa.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/posters.rsi
+    state: miss_april
+  - type: Item
+    size: Small
+    sprite: _RMC14/Structures/Wallmounts/posters.rsi
+    state: miss_april
