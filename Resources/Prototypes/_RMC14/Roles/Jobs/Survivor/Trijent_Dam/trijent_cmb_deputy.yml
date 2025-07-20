@@ -45,7 +45,7 @@
   id: RMCGearSurvivorTrijentDeputy
   equipment:
     head: RMCHeadCapBureau
-    jumpsuit: RMCJumpsuitMarshal
+    jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauDeputy
     ears: RMCHeadsetDistressBureauDamaged
     shoes: RMCBootsCorporate

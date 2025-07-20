@@ -34,7 +34,7 @@
   id: RMCGearSurvivorTrijentEngiHydro
   equipment:
     head: RMCHardHat
-    # jumpsuit: Khaki Workwear
+    jumpsuit: RMCJumpsuitLiaisonKhakiWorkwear
     outerClothing: RMCHazardVestBlack
 
 - type: entity

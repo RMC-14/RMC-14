@@ -37,7 +37,7 @@
   parent: RMCGearSurvivorSecurity
   id: RMCGearSurvivorTrijentGoon
   equipment:
-    head: RMCHeadCapFlippable # TODO: head: WeYa Cap (Added in another PR)
+    head: RMCHeadCapWestonYamadaDark
     jumpsuit: CMJumpsuitLiaisonBlueKutjevoGoon
     ears: RMCHeadsetDistressWeYa
     shoes: RMCBootsCorporate
@@ -48,7 +48,7 @@
   name: trijent goon spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMSurvivorTrijentGoon
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
