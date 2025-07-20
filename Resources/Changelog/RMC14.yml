@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: The M34 incinerator now has its correct wield slowdown.
-    type: Fix
-  id: 1557
-  time: '2025-04-05T19:19:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6084
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed intel officer ID job title just saying 'Intel', it will now display
@@ -4847,5 +4840,13 @@
   id: 2057
   time: '2025-07-20T23:29:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7121
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed medkits spawning inside of unskilled survivor's bags inside of
+      inhand.
+    type: Fix
+  id: 2058
+  time: '2025-07-20T23:42:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7122
 Name: RMC14
 Order: -1
