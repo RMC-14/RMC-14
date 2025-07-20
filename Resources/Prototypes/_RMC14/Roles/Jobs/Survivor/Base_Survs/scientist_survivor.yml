@@ -76,7 +76,7 @@
       - [ RMCGrenadeCustomMetalFoam ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
-
+     
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorScientist
