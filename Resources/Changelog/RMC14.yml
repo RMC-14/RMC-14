@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Hybrisa's Cave Lockdown no longer automatically despawns at 45 Minutes.
-    type: Tweak
-  - message: Added the Cave Lockdown button to Bio-Genomic Lab in Hybrisa.
-    type: Tweak
-  id: 1514
-  time: '2025-03-29T08:26:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6004
 - author: Dygon
   changes:
   - message: Sniper rifles can now be used to perform aimed shots, projectiles fired
@@ -5075,5 +5066,16 @@
   id: 2014
   time: '2025-07-20T08:42:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7088
+- author: Shromply
+  changes:
+  - message: Gave the Freelancers guns, ammo, and other gear.
+    type: Add
+  - message: Reworked the Freelancer's skills.
+    type: Add
+  - message: Changed the Freelancer Standard's rank from Mercendary to Mercenary.
+    type: Fix
+  id: 2015
+  time: '2025-07-20T08:55:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6820
 Name: RMC14
 Order: -1
