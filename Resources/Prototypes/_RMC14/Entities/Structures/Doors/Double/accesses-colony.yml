@@ -1,0 +1,50 @@
+# Command
+- type: entity
+  parent: CMDoubleDoorCommandGlass
+  id: CMDoubleDoorColonyCommandGlassLocked
+  suffix: Command, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Security access
+
+- type: entity
+  parent: CMDoubleDoorCommandSolid
+  id: CMDoubleDoorColonyCommandSolidLocked
+  suffix: Command, Colony, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Security access
+
+# Engi
+- type: entity
+  parent: CMDoubleDoorEngineerGlass
+  id: CMDoubleDoorColonyEngineerGlassLocked
+  suffix: Engineer, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"], ["CMAccessColonyEngineering"], ["CMAccessColonyLogistics"]] # TODO RMC14 WeYa Colonial
+
+- type: entity
+  parent: CMDoubleDoorEngineerSolid
+  id: CMDoubleDoorColonyEngineerSolidLocked
+  suffix: Engineer, Colony, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyCommand"], ["CMAccessColonyEngineering"], ["CMAccessColonyLogistics"]] # TODO RMC14 WeYa Colonial
+
+# Security
+- type: entity
+  parent: CMDoubleDoorSecurityGlass
+  id: CMDoubleDoorColonySecurityGlassLocked
+  suffix: Security, Colony, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Security access
+
+- type: entity
+  parent: CMDoubleDoorSecuritySolid
+  id: CMDoubleDoorColonySecuritySolidLocked
+  suffix: Security, Colony, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyBrig"], ["CMAccessColonyCommand"]] # TODO RMC14 add WeYa Security access
