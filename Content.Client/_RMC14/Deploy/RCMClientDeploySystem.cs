@@ -6,6 +6,9 @@ using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Deploy;
 
+/// <summary>
+/// Client-side system for handling deploy area overlays and related network events during deployment.
+/// </summary>
 public sealed class RCMClientlDeploySystem : EntitySystem
 {
     private RMCDeployAreaOverlay? _overlay;

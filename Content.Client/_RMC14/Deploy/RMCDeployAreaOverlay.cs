@@ -3,6 +3,9 @@ using Robust.Shared.Enums;
 
 namespace Content.Client._RMC14.Deploy;
 
+/// <summary>
+/// Overlay for displaying the deployable area highlight in world space during deployment.
+/// </summary>
 public sealed class RMCDeployAreaOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

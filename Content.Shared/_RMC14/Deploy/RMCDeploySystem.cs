@@ -33,16 +33,20 @@ public sealed class RMCDeploySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        // Reactions to attempts to deploy
         SubscribeLocalEvent<RMCDeployableComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RMCDeployableComponent, RMCDeployDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<RMCDeployableComponent, DoAfterAttemptEvent<RMCDeployDoAfterEvent>>(OnDeployDoAfterAttempt);
         // Track destruction of deployed entities
-        SubscribeLocalEvent<RMCSharedDeployedEntityComponent, ComponentShutdown>(OnDeployedEntityShutdown);
-        // Реакция на попытку сворачивания через инструмент
-        SubscribeLocalEvent<RMCSharedDeployedEntityComponent, InteractUsingEvent>(OnParentalCollapseInteractUsing);
-        SubscribeLocalEvent<RMCSharedDeployedEntityComponent, RMCParentalCollapseDoAfterEvent>(OnParentalCollapseDoAfter);
+        SubscribeLocalEvent<RMCDeployedEntityComponent, ComponentShutdown>(OnDeployedEntityShutdown);
+        // React to collapse attempt using a tool
+        SubscribeLocalEvent<RMCDeployedEntityComponent, InteractUsingEvent>(OnParentalCollapseInteractUsing);
+        SubscribeLocalEvent<RMCDeployedEntityComponent, RMCParentalCollapseDoAfterEvent>(OnParentalCollapseDoAfter);
     }
 
+    /// <summary>
+    /// Handles the use-in-hand event for deployable entities.
+    /// </summary>
     private void OnUseInHand(Entity<RMCDeployableComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
@@ -52,6 +56,9 @@ public sealed class RMCDeploySystem : EntitySystem
         TryStartDeploy(ent, args.User);
     }
 
+    /// <summary>
+    /// Attempts to start the deploy process for a deployable entity.
+    /// </summary>
     private void TryStartDeploy(Entity<RMCDeployableComponent> ent, EntityUid user)
     {
         var uid = ent.Owner;
@@ -105,6 +112,9 @@ public sealed class RMCDeploySystem : EntitySystem
 
     }
 
+    /// <summary>
+    /// Handles the completion of the deploy do-after event. Deploys setups if not cancelled.
+    /// </summary>
     private void OnDoAfter(Entity<RMCDeployableComponent> ent, ref RMCDeployDoAfterEvent ev)
     {
         if (_netManager.IsClient)
@@ -117,7 +127,6 @@ public sealed class RMCDeploySystem : EntitySystem
         }
 
         ev.Handled = true;
-
 
         var user = ev.Args.User;
         // Get the grid and the grid component
@@ -137,35 +146,35 @@ public sealed class RMCDeploySystem : EntitySystem
         var area = ent.Comp.DeployArea.ComputeAABB(areaTransform, 0);
         var areaCenter = area.Center;
 
-        // Выполняем развертывание
+        // Perform deployment
         DeploySetups(ent, areaCenter, user);
 
         RaiseNetworkEvent(new RMCHideDeployAreaEvent(), ev.Args.User);
     }
 
     /// <summary>
-    /// Развертывает сетапы с учетом возможного повторного развертывания существующих сущностей
+    /// Deploys setups, considering the possibility of redeploying existing entities.
     /// </summary>
     private void DeploySetups(Entity<RMCDeployableComponent> ent, Vector2 areaCenter, EntityUid user)
     {
-        // Убеждаемся, что у оригинальной сущности есть ContainerManagerComponent
+        // Ensure the original entity has a ContainerManagerComponent
         EntityManager.EnsureComponent<ContainerManagerComponent>(ent.Owner);
 
-        // Проверяем, есть ли в оригинальной сущности контейнер с ранее развернутыми сущностями
+        // Check if the original entity has a container with previously deployed entities
         if (_container.TryGetContainer(ent.Owner, "storage", out var originalStorage) && originalStorage.ContainedEntities.Count > 0)
         {
-            // Повторное развертывание - извлекаем существующие сущности
+            // Redeployment - extract existing entities
             RedeployExistingEntities(ent, areaCenter, originalStorage);
         }
         else
         {
-            // Первое развертывание - создаем все сетапы
+            // First deployment - create all setups
             DeployAllSetups(ent, areaCenter, user);
         }
     }
 
     /// <summary>
-    /// Повторно развертывает существующие сущности из контейнера
+    /// Redeploys existing entities from the container.
     /// </summary>
     private void RedeployExistingEntities(Entity<RMCDeployableComponent> ent, Vector2 areaCenter, BaseContainer originalStorage)
     {
@@ -174,7 +183,7 @@ public sealed class RMCDeploySystem : EntitySystem
         // Разворачиваем только те сущности, которые есть в контейнере
         foreach (var containedEntity in originalStorage.ContainedEntities.ToList())
         {
-            if (!TryComp<RMCSharedDeployedEntityComponent>(containedEntity, out var deployedComp))
+            if (!TryComp<RMCDeployedEntityComponent>(containedEntity, out var deployedComp))
                 continue;
 
             var setupIndex = deployedComp.SetupIndex;
@@ -183,19 +192,19 @@ public sealed class RMCDeploySystem : EntitySystem
 
             var setup = ent.Comp.DeploySetups[setupIndex];
 
-            // Пропускаем сетапы, помеченные как NeverRedeployableSetup (они бы сюда и так не попали, перестраховка)
+            // Skip setups marked as NeverRedeployableSetup (shouldn't get here, just in case)
             if (setup.NeverRedeployableSetup)
                 continue;
 
-            // Извлекаем сущность из контейнера
+            // Remove the entity from the container
             _container.Remove(containedEntity, originalStorage);
 
-            // Обновляем позицию и поворот
+            // Update position and rotation
             var spawnPos = areaCenter + setup.Offset;
             _xform.SetWorldPosition(containedEntity, spawnPos);
             _xform.SetWorldRotation(containedEntity, Angle.FromDegrees(setup.Angle));
 
-            // Разворачиваем сущность, если у неё есть FoldableComponent
+            // Unfold the entity if it has FoldableComponent
             if (TryComp<FoldableComponent>(containedEntity, out var foldableComp))
             {
                 _foldable.TrySetFolded(containedEntity, foldableComp, false);
@@ -213,22 +222,22 @@ public sealed class RMCDeploySystem : EntitySystem
             if (setup.StorageOriginalEntity && storageEntity == null)
                 storageEntity = containedEntity;
 
-            Logger.Info($"[Deploy] Повторно развернута существующая сущность {containedEntity} для сетапа {setupIndex}");
+            Logger.Info($"[Deploy] Redeployed existing entity {containedEntity} for setup {setupIndex}");
         }
 
-        // Помещаем оригинальную сущность в storage контейнер
+        // Place the original entity in the storage container
         if (storageEntity != null)
         {
             var container = _container.EnsureContainer<Container>(storageEntity.Value, "storage");
             if (!_container.Insert(ent.Owner, container))
             {
-                Logger.GetSawmill("entity").Error($"Не удалось поместить оригинальную сущность {ent.Owner} в контейнер 'storage' сущности {storageEntity.Value}");
+                Logger.GetSawmill("entity").Error($"Failed to place original entity {ent.Owner} in container 'storage' of entity {storageEntity.Value}");
             }
         }
     }
 
     /// <summary>
-    /// Развертывает все сетапы (первое развертывание)
+    /// Deploys all setups (first deployment).
     /// </summary>
     private void DeployAllSetups(Entity<RMCDeployableComponent> ent, Vector2 areaCenter, EntityUid user)
     {
@@ -251,8 +260,8 @@ public sealed class RMCDeploySystem : EntitySystem
                 }
             }
 
-            // Add RMCSharedDeployedEntityComponent for tracking
-            var childComp = EntityManager.EnsureComponent<RMCSharedDeployedEntityComponent>(spawned);
+            // Add RMCDeployedEntityComponent for tracking
+            var childComp = EntityManager.EnsureComponent<RMCDeployedEntityComponent>(spawned);
             childComp.OriginalEntity = ent.Owner;
             childComp.SetupIndex = i;
             Dirty(spawned, childComp);
@@ -260,24 +269,27 @@ public sealed class RMCDeploySystem : EntitySystem
             if (setup.StorageOriginalEntity && storageEntity == null)
                 storageEntity = spawned;
 
-            Logger.Info($"[Deploy] Создана новая сущность {spawned} для сетапа {i}");
+            Logger.Info($"[Deploy] Created new entity {spawned} for setup {i}");
         }
 
-        // Помещаем оригинальную сущность внутрь контейнера storageEntity, если он есть
+        // Place the original entity inside the storageEntity container, if it exists
         if (storageEntity != null)
         {
             var container = _container.EnsureContainer<Container>(storageEntity.Value, "storage");
             if (!_container.Insert(ent.Owner, container))
             {
-                Logger.GetSawmill("entity").Error($"Не удалось поместить оригинальную сущность {ent.Owner} в контейнер 'storage' сущности {storageEntity.Value}");
+                Logger.GetSawmill("entity").Error($"Failed to place original entity {ent.Owner} in container 'storage' of entity {storageEntity.Value}");
             }
         }
         else
         {
-            Logger.GetSawmill("entity").Error("Не найдена сущность с StorageOriginalEntity для помещения оригинала");
+            Logger.GetSawmill("entity").Error("Original entity with StorageOriginalEntity not found for placement");
         }
     }
 
+    /// <summary>
+    /// Handles the DoAfter attempt event for deployable entities, checking if the area is blocked.
+    /// </summary>
     private void OnDeployDoAfterAttempt(Entity<RMCDeployableComponent> ent, ref DoAfterAttemptEvent<RMCDeployDoAfterEvent> args)
     {
         var comp = ent.Comp;
@@ -291,6 +303,9 @@ public sealed class RMCDeploySystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Checks if the deployment area is blocked by any physical objects.
+    /// </summary>
     private bool IsAreaBlocked(Box2 area, EntityUid ignore, EntityUid? user = null, Entity<RMCDeployableComponent>? ent = null)
     {
         var deployable = ent?.Comp;
@@ -316,7 +331,7 @@ public sealed class RMCDeploySystem : EntitySystem
             if (TryComp<PhysicsComponent>(entId, out var physics) && (physics.CanCollide || physics.Hard))
             {
                 var name = MetaData(entId).EntityName;
-                Logger.Info($"[Deploy] В области обнаружен физический объект: {entId} (имя: {name})");
+                Logger.Info($"[Deploy] Physical object found in area: {entId} (name: {name})");
                 found = true;
                 break;
             }
@@ -330,6 +345,9 @@ public sealed class RMCDeploySystem : EntitySystem
         return found;
     }
 
+    /// <summary>
+    /// Checks if the deployment is allowed on the current surface (e.g., planet).
+    /// </summary>
     private bool CheckSurface(EntityUid gridUid, EntityUid ignore, EntityUid? user)
     {
         if (!HasComp<RMCPlanetComponent>(gridUid))
@@ -342,8 +360,11 @@ public sealed class RMCDeploySystem : EntitySystem
         return true;
     }
 
-    // Called when a deployed child entity is being deleted or its component is removed
-    private void OnDeployedEntityShutdown(EntityUid uid, RMCSharedDeployedEntityComponent comp, ComponentShutdown args)
+    /// <summary>
+    /// Called when a deployed child entity is being deleted or its component is removed.
+    /// Handles cleanup and possible deletion of related entities.
+    /// </summary>
+    private void OnDeployedEntityShutdown(EntityUid uid, RMCDeployedEntityComponent comp, ComponentShutdown args)
     {
         // If already in shutdown, skip further processing
         if (comp.InShutdown)
@@ -360,13 +381,13 @@ public sealed class RMCDeploySystem : EntitySystem
 
         if (origComp is not null)
         {
-            // Проверяем, был ли это ReactiveParentalSetup
+            // Check if this was a ReactiveParentalSetup
             var setup = origComp.DeploySetups[comp.SetupIndex];
             if (setup.Mode == RMCDeploySetupMode.ReactiveParental)
             {
                 // First, collect all entities to delete, then delete them outside the enumeration to avoid reentrancy and collection modification issues.
                 var toDelete = new List<EntityUid>();
-                var enumerator = EntityManager.EntityQueryEnumerator<RMCSharedDeployedEntityComponent>();
+                var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
                 while (enumerator.MoveNext(out var entity, out var childComp))
                 {
                     if (childComp.OriginalEntity != comp.OriginalEntity)
@@ -387,31 +408,34 @@ public sealed class RMCDeploySystem : EntitySystem
         }
     }
 
-    private void OnParentalCollapseInteractUsing(EntityUid uid, RMCSharedDeployedEntityComponent comp, InteractUsingEvent args)
+    /// <summary>
+    /// Handles the attempt to collapse a deployed entity using a tool.
+    /// </summary>
+    private void OnParentalCollapseInteractUsing(EntityUid uid, RMCDeployedEntityComponent comp, InteractUsingEvent args)
     {
         if (args.Handled)
             return;
 
         args.Handled = true;
 
-        // Проверяем, что эта сущность из ReactiveParentalSetup
+        // Check if this entity is from a ReactiveParentalSetup
         if (!EntityManager.TryGetComponent(comp.OriginalEntity, out RMCDeployableComponent? deployable))
             return;
         var setup = deployable.DeploySetups[comp.SetupIndex];
         if (setup.Mode != RMCDeploySetupMode.ReactiveParental)
             return;
 
-        // Проверяем, что у deployable указан CollapseToolPrototype
+        // Check if deployable has CollapseToolPrototype specified
         if (deployable.CollapseToolPrototype == null)
             return;
 
-        // Проверяем, что используемый предмет — нужный инструмент
+        // Check if the used item is the required tool
         if (!EntityManager.TryGetComponent(args.Used, out MetaDataComponent? usedMeta) ||
             usedMeta.EntityPrototype == null ||
             usedMeta.EntityPrototype.ID != deployable.CollapseToolPrototype.Value)
             return;
 
-        // Если у инструмента есть ItemToggleComponent — он должен быть развернут (например лопата)
+        // If the tool has ItemToggleComponent, it must be activated (e.g., shovel)
         if (EntityManager.TryGetComponent(args.Used, out ItemToggleComponent? toggle) && !toggle.Activated)
             return;
 
@@ -424,11 +448,15 @@ public sealed class RMCDeploySystem : EntitySystem
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
-            _popup.PopupClient("Вы начинаете сворачивание...", args.User, args.User, PopupType.Small);
+            _popup.PopupClient("You start collapsing...", args.User, args.User, PopupType.Small);
 
     }
 
-    private void OnParentalCollapseDoAfter(Entity<RMCSharedDeployedEntityComponent> ent, ref RMCParentalCollapseDoAfterEvent ev)
+    /// <summary>
+    /// Handles the completion of the collapse do-after event for a deployed entity.
+    /// Moves all child entities to the original entity's storage and restores the original entity.
+    /// </summary>
+    private void OnParentalCollapseDoAfter(Entity<RMCDeployedEntityComponent> ent, ref RMCParentalCollapseDoAfterEvent ev)
     {
         if (_netManager.IsClient)
             return;
@@ -445,27 +473,27 @@ public sealed class RMCDeploySystem : EntitySystem
         if (!EntityManager.TryGetComponent(comp.OriginalEntity, out RMCDeployableComponent? deployable))
             return;
 
-        // 1. Найти ReactiveParental, в чьём storage лежит оригинальная сущность
+        // 1. Find the ReactiveParental entity whose storage contains the original entity
         EntityUid? reactiveParentalWithOriginal = null;
-        var reactiveParentalEnumerator = EntityManager.EntityQueryEnumerator<RMCSharedDeployedEntityComponent>();
+        var reactiveParentalEnumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
         while (reactiveParentalEnumerator.MoveNext(out var reactiveParentalUid, out var reactiveParentalComp))
         {
             if (reactiveParentalComp.OriginalEntity != comp.OriginalEntity)
                 continue;
-            // Проверяем, что это ReactiveParentalSetup
+            // Check if this is a ReactiveParentalSetup
             if (!EntityManager.TryGetComponent(comp.OriginalEntity, out RMCDeployableComponent? origDeployable))
                 continue;
             var setup = origDeployable.DeploySetups[reactiveParentalComp.SetupIndex];
             if (setup.Mode != RMCDeploySetupMode.ReactiveParental)
                 continue;
-            // Проверяем storage
+            // Check storage
             if (_container.TryGetContainer(reactiveParentalUid, "storage", out var storage) && storage.Contains(comp.OriginalEntity))
             {
                 reactiveParentalWithOriginal = reactiveParentalUid;
                 break;
             }
         }
-        // Вытаскиваем оригинал только если нашли
+        // Extract the original entity only if found
         if (reactiveParentalWithOriginal != null)
         {
             if (_container.TryGetContainer(reactiveParentalWithOriginal.Value, "storage", out var storage) && storage.Contains(comp.OriginalEntity))
@@ -477,28 +505,28 @@ public sealed class RMCDeploySystem : EntitySystem
             }
 
 
-            // 2. Move all child deployed entities (кроме NeverRedeployableSetup) в storage контейнер оригинальной сущности
+            // 2. Move all child deployed entities (except NeverRedeployableSetup) to the storage container of the original entity
             var origStorage = _container.EnsureContainer<Container>(comp.OriginalEntity, "storage");
-            var enumerator = EntityManager.EntityQueryEnumerator<RMCSharedDeployedEntityComponent>();
+            var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
             while (enumerator.MoveNext(out var childUid, out var childComp))
             {
                 if (childComp.OriginalEntity != comp.OriginalEntity)
                     continue;
-                // Пропускаем сетапы, помеченные как NeverRedeployableSetup
+                // Skip setups marked as NeverRedeployableSetup
                 var childSetup = deployable.DeploySetups[childComp.SetupIndex];
                 if (childSetup.NeverRedeployableSetup)
                     continue;
-                // Не добавлять саму оригинальную сущность
+                // Do not add the original entity itself
                 if (childUid == comp.OriginalEntity)
                     continue;
 
-                // Сворачиваем сущность, если у неё есть FoldableComponent (без этого не попадет в контейнер лол)
+                // Fold the entity if it has FoldableComponent (otherwise it won't fit in the container)
                 if (TryComp<FoldableComponent>(childUid, out var foldableComp))
                 {
                     _foldable.TrySetFolded(childUid, foldableComp, true);
                 }
 
-                // Добавить в storage контейнер оригинальной сущности
+                // Add to the storage container of the original entity
                 _container.Insert(childUid, origStorage);
             }
         }

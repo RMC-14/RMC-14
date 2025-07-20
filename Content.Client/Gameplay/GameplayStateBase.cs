@@ -165,7 +165,7 @@ namespace Content.Client.Gameplay
                         var (spritePos, spriteRot) = transformSystem.GetWorldPositionRotation(entXform);
                         // RMC14: Get the sprite's BoundingBox
                         var spriteBox = spriteSystem.CalculateBounds((entity.Uid, sprite), spritePos, spriteRot, eye.Rotation);
-                        // RMC14: Проверяем, находится ли позиция игрока внутри BoundingBox
+                        // RMC14: Check if the player's position is inside the BoundingBox
                         if (spriteBox.Contains(transformSystem.GetMapCoordinates(playerXform).Position))
                         {
                             // RMC14: Skipping this object for this client

@@ -6,43 +6,56 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Deploy;
 
+/// <summary>
+/// Allows an entity to be deployed into multiple child entities (setups), supports area checks, redeployment, and collapsing back into the original entity.
+/// Used for deployable objects like tents, fortifications, etc. Handles all logic for area validation, tool requirements, and storage of the original entity during deployment.
+/// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(RMCDeploySystem), Other = AccessPermissions.Read)]
 public sealed partial class RMCDeployableComponent : Component, ISerializationHooks
 {
-
-    // Время ду афтера (секунды)
+    /// <summary>
+    /// DoAfter time (seconds)
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float DeployTime = 10f;
 
-    // Время ду афтера (секунды)
+    /// <summary>
+    /// DoAfter time (seconds)
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float CollapseTime = 10f;
 
-    // Фигура области развертывания. Началом координат для фигуры является центр ближайшего тайла, на котором стоит игрок.
+    /// <summary>
+    /// The shape of the deploy area. The origin for the shape is the center of the nearest tile under the player.
+    /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public PhysShapeAabb DeployArea = new();
 
     /// <summary>
-    /// Набор объектов для спавна
+    /// List of objects to spawn.
+    /// In the entity of the first DeploySetup in the list marked as ReactiveParental (or just the first in the list if there are no ReactiveParental),
+    /// the entity that deployed all setups will be stored until collapse or destruction.
+    /// If no setup is marked as ReactiveParental, by default the first in the list will be considered ReactiveParental.
     /// </summary>
-    /// <remarks>
-    /// В сущности первого по списку DeploySetups сетапе, помеченного как ReactiveParental (или вообще в первом в списке, если нет ни одного ReactiveParental) будет храниться сущность,
-    /// которая развернула все сетапы, до сворачивания или уничтожения.
-    /// Если ни один сетап не помечен как ReactiveParental, по умолчанию первый в списке DeploySetups будет считаться как ReactiveParental.
-    /// </remarks>
     [DataField(required: true), AutoNetworkedField]
     public List<RMCDeploySetup> DeploySetups = new();
 
-    // Проводить ли проверку блокировки области
+    /// <summary>
+    /// Whether to check if the area is blocked
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool AreaBlockedCheck = false;
 
-    // Проверять ли поверхность планеты и космос
+    /// <summary>
+    /// Whether to check the planet surface
+    /// </summary>
     [DataField, AutoNetworkedField]
     public bool FailIfNotSurface = true;
 
-    // ID прототипа инструмента, который используется для сворачивания. Не указывайте, если не хотите, чтобы была возможность сворачивать.
+    /// <summary>
+    /// The prototype ID of the tool used for collapsing. If not specified, collapsing will not be possible.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId? CollapseToolPrototype;
 
@@ -62,46 +75,57 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
         }
         if (parentalIndex == -1)
         {
-            // Нет ни одного ReactiveParentalSetup — делаем первый
+            // If there is no ReactiveParentalSetup, make the first one
             DeploySetups[0].Mode = RMCDeploySetupMode.ReactiveParental;
             DeploySetups[0].StorageOriginalEntity = true;
         }
         else
         {
-            // Первый ReactiveParentalSetup получает StorageOriginalEntity
+            // The first ReactiveParentalSetup gets StorageOriginalEntity
             DeploySetups[parentalIndex].StorageOriginalEntity = true;
         }
     }
 }
 
-
 [Serializable, NetSerializable]
 [DataDefinition]
 public sealed partial class RMCDeploySetup : ISerializationHooks
 {
-    // Прототип сущности для спавна
+    /// <summary>
+    /// The prototype of the entity to spawn
+    /// </summary>
     [DataField(required: true)] public EntProtoId Prototype;
 
     /// <summary>
-    /// Мод сетапа, определяющий реакцию развернутой с помощью сетапа сущности на различные события
+    /// The setup mode, determining the reaction of the deployed entity to various events
     /// </summary>
     [DataField]
     public RMCDeploySetupMode Mode = RMCDeploySetupMode.Default;
 
-    // If true, this setup will never be redeployed and collapsed
+    /// <summary>
+    /// If true, this setup will never be redeployed and collapsed
+    /// </summary>
     [DataField] public bool NeverRedeployableSetup = false;
 
-    // Служебный флаг для определение в сущности из какого сетапа будет хранится оригинальная сущность до сворачивания или уничтожения.
-    //  Not for YAML! Only for runtime use.
+    /// <summary>
+    /// Service flag for determining in which setup the original entity will be stored until collapse or destruction.
+    /// Not for YAML! Only for runtime use.
+    /// </summary>
     [DataField] public bool StorageOriginalEntity = false;
 
-    // Смещение относительно центра области развертывания
+    /// <summary>
+    /// Offset relative to the center of the deploy area
+    /// </summary>
     [DataField] public Vector2 Offset = Vector2.Zero;
 
-    // Угол поворота (градусы)
+    /// <summary>
+    /// Rotation angle (degrees)
+    /// </summary>
     [DataField] public float Angle = 0f;
 
-    // Закреплять ли по центру ближайшего тайла
+    /// <summary>
+    /// Whether to anchor at the center of the nearest tile
+    /// </summary>
     [DataField] public bool Anchor = true;
 
 
@@ -109,7 +133,6 @@ public sealed partial class RMCDeploySetup : ISerializationHooks
     {
         if (StorageOriginalEntity) // YAML protection
             StorageOriginalEntity = false;
-
     }
 }
 
@@ -118,20 +141,19 @@ public sealed partial class RMCDeploySetup : ISerializationHooks
 public enum RMCDeploySetupMode
 {
     /// <summary>
-    /// Сущность, развернутая с помощью  такого сетапа, не реагирует на удаление сущущностей, развернутых из ReactiveParental
-    /// и не могут быть как источником сворачивания, так и хранилищем оригинальной сущности.
+    /// Entities from Default setup do not react to deletion of entities deployed from ReactiveParental setups
+    /// and cannot be a source of collapse or a storage for the original entity.
     /// </summary>
     Default = 0,
 
     /// <summary>
-    /// Сущность, развернутая с помощью  такого сетапа, будет реагировать на удаление всех сущностей,
-    /// развернутых из сетапов, помеченных как ReactiveParental и будет также удалена.
+    /// Entities from this setup will react to deletion of all entities deployed from setups marked as ReactiveParental and will also be deleted.
     /// </summary>
     Reactive = 1,
 
     /// <summary>
-    /// Помечает сетап как один из условных "родителей" для всех сетапов, не помеченных как ReactiveParental.
-    /// Необходим для реализации свертывания а также реагирования на удаление сущностей из сетапов, помеченных как ReactiveParental.
+    /// Marks the setup as one of the conditional "parents" for all setups not marked as ReactiveParental.
+    /// Required for collapse logic and for reacting to deletion of entities from setups marked as ReactiveParental.
     /// </summary>
     ReactiveParental = 2
 }
