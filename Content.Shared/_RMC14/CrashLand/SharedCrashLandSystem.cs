@@ -276,7 +276,8 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             var ev = new CrashLandedEvent(crashLanding.DoDamage);
             RaiseLocalEvent(uid, ref ev);
 
-            _audio.PlayPredicted(crashLandable.CrashSound, uid, uid);
+            if (_net.IsServer)
+                _audio.PlayPvs(crashLandable.CrashSound, uid);
 
             RemComp<CrashLandingComponent>(uid);
             Blocker.UpdateCanMove(uid);
