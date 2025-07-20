@@ -49,13 +49,6 @@
     - RMCMagazineWeYaOrrery
 
 - type: loadout
-  id: MagazineWeYaOrreryRMC
-  cost: 1
-  storage:
-    back:
-    - RMCMagazineWeYaOrrery
-
-- type: loadout
   id: MagazineWeYaOrreryN184RMC
   cost: 1
   storage:
