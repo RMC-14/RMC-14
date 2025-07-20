@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -446,6 +447,9 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
 
         if (_size.TryGetSize(target, out var size) && size >= RMCSizes.Big)
+            return false;
+
+        if (HasComp<XenoWeedsComponent>(target))
             return false;
 
         return true;
