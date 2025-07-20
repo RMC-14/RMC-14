@@ -190,6 +190,12 @@
       storagebase: !type:Container
         ents: [ ]
   - type: FixedItemSizeStorage
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
   - type: IgnoreContentsSize
     items:
       tags:
