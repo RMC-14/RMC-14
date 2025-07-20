@@ -4882,12 +4882,6 @@
   url: https://github.com/RMC-14/RMC-14/pull/7115
 - author: DoguhanOzgurAkca
   changes:
-  - message: Added fun!
-    type: Add
-  - message: Removed fun!
-    type: Remove
-  - message: Changed fun!
-    type: Tweak
   - message: Accesibility options not showing up
     type: Fix
   id: 2053
