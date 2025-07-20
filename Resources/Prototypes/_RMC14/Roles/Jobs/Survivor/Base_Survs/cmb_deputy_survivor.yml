@@ -42,7 +42,7 @@
   equipment:
     head: RMCHeadCapBureau
     id: RMCIDCardDeputySurvivor
-    jumpsuit: RMCJumpsuitMarshal
+    jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauDeputy
     ears: RMCHeadsetDistressBureau
     pocket2: RMCPouchMagazineLarge
