@@ -25,6 +25,7 @@
   icon: "CMJobIconChiefMP"
   requireAdminNotify: true
   joinNotifyCrew: false
+  marineAuthorityLevel: 11
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP

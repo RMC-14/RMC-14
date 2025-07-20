@@ -197,49 +197,49 @@
 
 # Shoes
 - type: loadout
-  id: BootsBlackRMC
+  id: BootsBlackRMCSynth
   storage:
     back:
     - CMBootsBlack
 
 - type: loadout
-  id: ShoesBlackRMC
+  id: ShoesBlackRMCSynth
   storage:
     back:
     - RMCShoesBlack
 
 - type: loadout
-  id: ShoesBrownRMC
+  id: ShoesBrownRMCSynth
   storage:
     back:
     - RMCShoesBrown
 
 - type: loadout
-  id: ShoesRedRMC
+  id: ShoesRedRMCSynth
   storage:
     back:
     - RMCShoesRed
 
 - type: loadout
-  id: ShoesGreenRMC
+  id: ShoesGreenRMCSynth
   storage:
     back:
     - RMCShoesGreen
 
 - type: loadout
-  id: ShoesPurpleRMC
+  id: ShoesPurpleRMCSynth
   storage:
     back:
     - RMCShoesPurple
 
 - type: loadout
-  id: ShoeWhiteRMC
+  id: ShoeWhiteRMCSynth
   storage:
     back:
     - RMCShoesWhite
 
 - type: loadout
-  id: ShoeYellowRMC
+  id: ShoeYellowRMCSynth
   storage:
     back:
     - RMCShoesYellow

@@ -22,6 +22,7 @@
   dummyStartingGear: CMGearFireteamLeaderEquipped
   icon: "CMJobIconFireteamLeader"
   joinNotifyCrew: false
+  marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - FTL
