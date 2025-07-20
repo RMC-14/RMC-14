@@ -200,16 +200,6 @@
 
 - type: entity
   parent: RMCPouchMagazineLarge
-  id: RMCPouchMagazineType64
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCMagazineSMGType64
-      amount: 4
-
-- type: entity
-  parent: RMCPouchMagazineLarge
   id: RMCPouchMagazineLargeMAR40
   suffix: Filled, MAR40
   components:
