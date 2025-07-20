@@ -166,7 +166,7 @@
     - RMCM5Bayonet
     - RMCRadioHandheldColonyOff
 
-# Marshal Bureau Deputy
+# CMB Deputy
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCCorpseDeputy
@@ -184,9 +184,9 @@
     shoes: CMBootsBlackFilled
     head: RMCHeadCapBureau
     eyes: CMGlassesSecurity
-    id: RMCIDCardDeputy
+    id: RMCIDCardCMBDeputy
     ears: CMHeadsetColony
-#    belt: /obj/item/storage/belt/gun/m4a3/heavy
+    belt: RMCBeltHolsterPistolHandcannonFilled
 
 # Corporate Liaison
 - type: randomHumanoidSettings

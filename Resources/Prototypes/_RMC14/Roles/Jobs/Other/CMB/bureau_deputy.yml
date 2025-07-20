@@ -1,4 +1,4 @@
-# Bureau Deputy
+# CMB Deputy
 - type: job
   parent: CMJobBase
   id: CMBureauDeputy
@@ -80,7 +80,7 @@
     # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
     belt: CMBeltSecurityMarshalFilled
     shoes: RMCBootsPMCFilled
-    id: RMCIDCardDeputy
+    id: RMCIDCardCMBDeputy
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchMagazineLargeMP5
     suitstorage: WeaponSMGMP5
