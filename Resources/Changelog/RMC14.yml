@@ -1,25 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed comms towers not being shown in the tactical map, and hopefully
-      some of the marines too.
-    type: Fix
-  - message: Fixed laser designator working inside some buildings. Shoutout to Alec
-      for actually reporting this bug instead of posting unconstructive toxic feedback
-      making up shit about how the game should work. Rangefinder still works.
-    type: Fix
-  - message: Fixed rangefinder and laser designator dot being hidden by doors. Shoutout
-      for this one goes to truthe.
-    type: Fix
-  - message: Fixed uniforms not having 10 bullet armor.
-    type: Fix
-  - message: Fixed ladders leaving behind ghosts of other players.
-    type: Fix
-  id: 1535
-  time: '2025-03-31T01:32:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6045
-- author: DrSmugleaf
-  changes:
   - message: Fixed ladders not working.
     type: Fix
   - message: Fixed correspondent cameras sometimes not showing up on tvs.
@@ -4901,5 +4882,14 @@
   id: 2035
   time: '2025-07-20T09:39:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7080
+- author: noctyrnal
+  changes:
+  - message: Chances Claim has recieved a large update.
+    type: Add
+  - message: Walls will now turn into girders when destroyed, instead of dissapearing.
+    type: Add
+  id: 2036
+  time: '2025-07-20T09:41:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7077
 Name: RMC14
 Order: -1
