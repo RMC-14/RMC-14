@@ -496,8 +496,8 @@
         amount: 3
       - id: RMCAttachmentSuppressor
         amount: 3
-      # - id: RMCAttachmentShotgunChoke
-      #   amount: 2
+      - id: RMCAttachmentShotgunChoke
+        amount: 2
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope

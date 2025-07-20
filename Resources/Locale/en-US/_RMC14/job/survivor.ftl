@@ -52,6 +52,7 @@ rmc-job-description-forecon = You are a stranded UNMC Forecon marine. Your ship,
 rmc-job-name-forecon-sniper = Sniper
 rmc-job-name-forecon-marksman = Marksman
 rmc-job-name-forecon-support-tech = Support Technician
+rmc-job-name-forecon-synth = Synthetic
 rmc-job-name-forecon-commander = Commander
 
 # New Varadero Survs
@@ -81,6 +82,47 @@ cm-job-prefix-survivor-icb = ICB
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
 
+# Hybrisa Prospera Survs
+
+rmc-job-name-survivor-hybrisa-civilian = Civilian
+CMJobSurvivorHybrisaCivilian = Civilian
+
+rmc-job-name-survivor-hybrisa-office-worker = Civilian - Office Worker
+CMJobSurvivorHybrisaOfficeWorker = Civilian - Office Worker
+
+rmc-job-name-survivor-hybrisa-weyamart-employee = Civilian - Weymart Employee
+CMJobSurvivorHybrisaWeyamartEmployee = Civilian - Weymart Employee
+
+rmc-job-name-survivor-material-reprocessing-technician = Civilian - Material Reprocessing Technician
+CMJobSurvivorHybrisaMaterialReprocessingTechnician = Civilian - Material Reprocessing Technician
+
+rmc-job-name-survivor-fire-protection-specialist-hybrisa = Civilian - Fire Protection Specialist
+CMJobSurvivorFireProtectionSpecialistHybrisa = Civilian - Fire Protection Specialist
+rmc-job-prefix-fire-protection-specialist-hybrisa = FPS
+
+rmc-job-name-survivor-grind-barista = Civilian - The Daily Grind Barista
+CMJobSurvivorHybrisaGrindBarista = Civilian - The Daily Grind Barista
+
+rmc-job-name-survivor-tmcc-miner = TMCC - Miner
+CMJobSurvivorHybrisaTMCCMiner = TMCC - Miner
+
+rmc-job-name-survivor-medical-doctor = Doctor
+CMJobSurvivorHybrisaMedicalDoctor = Doctor
+
+rmc-job-name-survivor-emt-paramedic = EMT - Paramedic
+CMJobSurvivorHybrisaEMTParamedic = EMT - Paramedic
+
+rmc-job-name-survivor-xenoarchaeologist = Xenoarchaeologist
+CMJobSurvivorHybrisaXenoarchaeologist = Xenoarchaeologist
+
+rmc-job-name-survivor-xenobiologist = Xenobiologist
+CMJobSurvivorHybrisaXenobiologist = Xenobiologist
+
+rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
+
+rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
+rmc-job-name-survivor-construction-worker = Construction Worker
+rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
 # Sorokyne Strata Survs
 

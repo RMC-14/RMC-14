@@ -219,6 +219,8 @@
       color: "#1F951F"
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifleAP
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m54c-ap-magazine
 
 - type: entity
   parent: CMMagazineRifleM54C
@@ -273,6 +275,14 @@
       color: "#9C9A19"
 #  - type: RefillableByBulletBox
 #    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: RMCMagazineRifleM54CHEAP
+  id: RMCMagazineRifleM54CHEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
 
 - type: entity
   parent: CMMagazineRifleM54C

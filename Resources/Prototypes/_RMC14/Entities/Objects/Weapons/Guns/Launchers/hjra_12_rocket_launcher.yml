@@ -147,6 +147,8 @@
     state: hjra_incen
     suffix: false
   - type: IgnorePredictionHide
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-hjra-12-extreme-intensity-incendiary-rocket
 
 - type: entity
   parent: RMCProjectileRocket84mmAntiArmor

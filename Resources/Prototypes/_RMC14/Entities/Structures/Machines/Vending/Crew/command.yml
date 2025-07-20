@@ -440,7 +440,7 @@
     - name: Commanding Officer Essentials Kit
       takeAll: CMBundle
       entries:
-      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map
+      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Paper Map
     - name: Bags
       choices: { CMBag: 1 }
       entries:
@@ -581,9 +581,9 @@
         points: 15
       - id: RMCSpeedLoaderMatebaHIAP
         points: 20
-      - id: RMCMagazinePistolD50WinterWyvernHI
+      - id: RMCMagazinePistolHandcannonHI
         points: 15
-      - id: RMCMagazinePistolD50WinterWyvernHIAP
+      - id: RMCMagazinePistolHandcannonHIAP
         points: 20
     - name: Shotgun Ammunition
       entries:
@@ -1408,6 +1408,7 @@
       - id: CMJumpsuitBO
       - id: RMCJumpsuitASOBlack
       - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOFormalAlt
       - id: RMCJumpsuitASOBlackAlt
       - id: RMCJumpsuitASOOperations
     - name: Outer Wear
@@ -1419,6 +1420,7 @@
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
+      - id: RMCCoatASOWhiteAlt
     - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1435,7 +1437,7 @@
     - name: Bag
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMHelmet: 1 }
+      choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineTech
       - id: CMSatchel
@@ -1458,15 +1460,14 @@
       - CMAuxiliarySupportOfficer
       choices: { CMHelmet: 1 }
       entries:
+      - id: RMCHeadCapASO
+      - id: RMCHeadCapPeakedASO
+      - id: RMCHeadBeretASO
       - id: RMCHeadBeret
-        recommended: true
       # TODO patrol and officer cap
       - id: RMCHeadCapFlippable
-        recommended: true
       - id: CMHeadCapPeakedService
-        recommended: true
       - id: CMHeadBeretTan
-        recommended: true
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer
