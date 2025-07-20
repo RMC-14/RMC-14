@@ -22,7 +22,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMoHDoctor
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -30,17 +29,14 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorDoctor
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorMoHDoctor
   equipment:
     head: RMCHeadCapSPPCivilianPlantWorker
     ears: RMCHeadsetDistressSPP
-  storage:
-    back:
-    - CMSheetMetal20
-    - RMCMaskGasSPP
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -78,6 +74,8 @@
       - [ RMCTieGreen ]
       - [ RMCTiePurple ]
       - [ RMCTieRed ]
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]
     randomStartingGear:
       back:
       - CMSatchel

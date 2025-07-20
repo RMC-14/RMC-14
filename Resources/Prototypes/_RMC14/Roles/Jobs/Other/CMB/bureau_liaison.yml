@@ -23,6 +23,7 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-icb
+    - type: RMCTrackable
   hasIcon: false
   hidden: true
 

@@ -452,7 +452,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         RemCompDeferred<ParasiteAIComponent>(parasite);
         var ev = new XenoParasiteInfectEvent(victim, parasite.Owner);
-        RaiseLocalEvent(victim, ref ev, true);
+        RaiseLocalEvent(victim, ev, true);
 
         ParasiteLeapHit(parasite);
         return true;
@@ -900,5 +900,4 @@ public sealed partial class LarvaBurstDoAfterEvent : SimpleDoAfterEvent
 /// </summary>
 /// <param name="Target">The Entity who was infected</param>
 /// <param name="Parasite">The Parasite who infected the Target</param>
-[ByRefEvent]
 public record struct XenoParasiteInfectEvent(EntityUid Target, EntityUid Parasite);

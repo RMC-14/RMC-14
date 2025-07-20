@@ -55,6 +55,9 @@ public sealed partial class AreaComponent : Component
     [DataField, AutoNetworkedField]
     public bool HijackEvacuationArea;
 
+    [DataField, AutoNetworkedField]
+    public bool AlwaysPowered = false;
+
     // TODO RMC14 does this need to be a double?
     [DataField, AutoNetworkedField]
     public double HijackEvacuationWeight;

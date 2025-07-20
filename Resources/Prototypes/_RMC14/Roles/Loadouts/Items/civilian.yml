@@ -1,0 +1,163 @@
+# Patches
+- type: loadout
+  id: PatchWeYaRMC
+  cost: 1
+  inhand:
+    - RMCPatchWeYa
+
+- type: loadout
+  id: PatchWeYaRMCSquare
+  cost: 1
+  inhand:
+    - RMCPatchWeYaBlackSquare
+
+- type: loadout
+  id: PatchWeYaRMCBlack
+  cost: 1
+  inhand:
+    - RMCPatchWeYaBlack
+
+- type: loadout
+  id: PatchWeYaRMCFury161
+  cost: 1
+  inhand:
+    - RMCPatchWeYaFury161
+
+- type: loadout
+  id: PatchTSERMC
+  cost: 1
+  inhand:
+    - RMCPatchTSE
+
+- type: loadout
+  id: PatchCECRMC
+  cost: 1
+  inhand:
+    - RMCPatchSPPCEC
+
+- type: loadout
+  id: PatchCLFRMC
+  cost: 1
+  inhand:
+    - RMCPatchCLF
+
+# Shoes
+- type: loadout
+  id: ShoesBlackRMC
+  cost: 1
+  equipment:
+    shoes: RMCShoesBlack
+
+- type: loadout
+  id: ShoesBrownRMC
+  cost: 1
+  equipment:
+    shoes: RMCShoesBrown
+
+- type: loadout
+  id: ShoesBlueRMC
+  cost: 1
+  equipment:
+    shoes: RMCShoesBlue
+
+- type: loadout
+  id: ShoesGreenRMC
+  cost: 1
+  equipment:
+    shoes: RMCShoesGreen
+
+- type: loadout
+  id: ShoesYellowRMC
+  cost: 1
+  equipment:
+    shoes: RMCShoesYellow
+
+- type: loadout
+  id: ShoesRedRMC
+  cost: 1
+  equipment:
+    shoes: RMCShoesRed
+
+- type: loadout
+  id: ShoesPurpleRMC
+  cost: 1
+  equipment:
+    shoes: RMCShoesPurple
+
+# Plushies
+- type: loadout
+  id: PlushieFarwaRMC
+  cost: 2
+  storage:
+    back:
+    - CMPlushieFarwa
+
+- type: loadout
+  id: PlushieBarricadeRMC
+  cost: 2
+  storage:
+    back:
+    - CMPlushieBarricade
+
+- type: loadout
+  id: PlushieBeeRMC
+  cost: 2
+  storage:
+    back:
+    - CMPlushieBee
+
+- type: loadout
+  id: PlushieSharkGreyRMC
+  cost: 2
+  storage:
+    back:
+    - RMCPlushieSharkGrey
+
+- type: loadout
+  id: PlushieSharkBlueRMC
+  cost: 2
+  storage:
+    back:
+    - RMCPlushieSharkBlue
+
+- type: loadout
+  id: PlushieSharkPinkRMC
+  cost: 2
+  storage:
+    back:
+    - RMCPlushieSharkPink
+
+- type: loadout
+  id: PlushieMothRMC
+  cost: 2
+  storage:
+    back:
+    - RMCPlushieMoth
+
+- type: loadout
+  id: PlushieRockRMC
+  cost: 2
+  storage:
+    back:
+    - CMPlushieRock
+
+- type: loadout
+  id: PlushieTherapyRMC
+  cost: 2
+  storage:
+    back:
+    - CMPlushieTherapy
+
+- type: loadout
+  id: PlushieGnarpGnarpRMC
+  cost: 2
+  storage:
+    back:
+    - RMCPlushieGnarpGnarp
+
+- type: loadout
+  id: PlushieGnarpGnarpAltRMC
+  cost: 2
+  storage:
+    back:
+    - RMCPlushieGnarpGnarpAlt

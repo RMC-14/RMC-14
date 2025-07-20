@@ -10,13 +10,13 @@
     layers:
     - state: defib
     - state: defib_on
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
   - type: Item
@@ -135,11 +135,11 @@
     layers:
     - state: defib
     - state: defib_on
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
   - type: PowerCellDraw
     enabled: false
-    useRate: 500 # change to 1000 when defib power drawing is fixed
+    useRate: 1000
   - type: RMCPowerUsageDisplay
   - type: RequiresSkill
     skills:

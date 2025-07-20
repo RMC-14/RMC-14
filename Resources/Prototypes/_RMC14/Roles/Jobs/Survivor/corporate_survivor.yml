@@ -9,15 +9,15 @@
   ranks:
     RMCRankWeYaExecutiveSpecialist:
     - !type:RoleTimeRequirement
-      role: CMJobLiaison
+      role: CMJobSurvivorCorporate
       time: 630000 # 175 hours
     RMCRankWeYaSeniorExecutive:
     - !type:RoleTimeRequirement
-      role: CMJobLiaison
+      role: CMJobSurvivorCorporate
       time: 252000 # 70 hours
     RMCRankWeYaExecutive:
     - !type:RoleTimeRequirement
-      role: CMJobLiaison
+      role: CMJobSurvivorCorporate
       time: 90000 # 25 hours
     RMCRankWeYaJuniorExecutive: []
   startingGear: RMCGearSurvivorCorporate
@@ -35,7 +35,6 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -43,6 +42,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorCorporate

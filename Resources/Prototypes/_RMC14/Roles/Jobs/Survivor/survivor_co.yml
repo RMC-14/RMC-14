@@ -9,6 +9,7 @@
   supervisors: cm-job-supervisors-nobody
   whitelisted: true
   spawnMenuRoleName: Survivor CO (Base)
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: playTimeTracker
   id: RMCJobSurvivorCO

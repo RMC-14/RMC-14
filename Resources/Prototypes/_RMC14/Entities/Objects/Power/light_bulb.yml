@@ -13,6 +13,10 @@
       - map: [ enum.LightBulbVisualLayers.Base ]
         state: normal
   - type: LightBulb
+    bulb: Bulb
+    lightEnergy: 1.0
+    lightRadius: 6
+    lightSoftness: 1.1
   - type: Damageable
     damageContainer: Inorganic
   - type: DamageOnLand
@@ -67,13 +71,22 @@
   id: CMLightBulb
   name: light bulb
   description: A replacement light bulb.
+  suffix: Warm
   components:
   - type: LightBulb
-    bulb: Bulb
-    color: "#FFD1A3" # 4000K color temp
-    lightEnergy: 1.0
-    lightRadius: 6
-    lightSoftness: 1.1
+    color: "#FFEFD2"
+    lightEnergy: 1
+    lightRadius: 10
+    lightSoftness: 1
+    PowerUse: 25
+
+- type: entity
+  parent: CMLightBulb
+  id: RMCLightBulbBlue
+  suffix: Blue
+  components:
+  - type: LightBulb
+    color: "#D2E3EC"
 
 - type: entity
   parent: CMLightBulbBase

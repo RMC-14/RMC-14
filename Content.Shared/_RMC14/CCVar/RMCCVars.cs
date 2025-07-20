@@ -111,9 +111,6 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCCorrosiveAcidDamageTimeSeconds =
         CVarDef.Create("rmc.corrosive_acid_damage_time_seconds", 40, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<int> RMCTailStabMaxTargets =
-        CVarDef.Create("rmc.tail_stab_max_targets", 1, CVar.REPLICATED | CVar.SERVER);
-
     public static readonly CVarDef<int> RMCEvolutionPointsRequireOvipositorMinutes =
         CVarDef.Create("rmc.evolution_points_require_ovipositor_minutes", 5, CVar.REPLICATED | CVar.SERVER);
 
@@ -438,4 +435,16 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> HidePlayerIdentities =
         CVarDef.Create("rmc.hide_player_identities", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCQueenBuildingBoost =
+    CVarDef.Create("rmc.queen_building_boost", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCQueenBuildingBoostDurationMinutes =
+        CVarDef.Create("rmc.queen_building_boost_duration_minutes", 30, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCQueenBuildingBoostSpeedMultiplier =
+        CVarDef.Create("rmc.queen_building_boost_speed_multiplier", 0.65f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCQueenBuildingBoostRemoteRange =
+        CVarDef.Create("rmc.queen_building_boost_remote_range", 50f, CVar.REPLICATED | CVar.SERVER);
 }
