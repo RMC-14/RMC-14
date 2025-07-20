@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Sniper rifles can now be used to perform aimed shots, projectiles fired
-      with an aimed shot will have additional effects.
-    type: Add
-  - message: Sniper specialists' loadouts now include a spotter kit, which contains
-      the gear needed to transform any rifleman into a fully-fledged spotter.
-    type: Add
-  - message: Sniper specialists can now obtain the XM43E1 anti-materiel rifle from
-      their vendor. This rifle fires projectiles powerful enough to penetrate any
-      obstacle in its path.
-    type: Add
-  id: 1515
-  time: '2025-03-29T08:25:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5958
 - author: OmerF-afk
   changes:
   - message: Added multiple Weapons/Ammunition for SPP
@@ -5077,5 +5062,14 @@
   id: 2015
   time: '2025-07-20T08:55:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6820
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added new mag visuals for pistols, revolvers, and the M79.
+    type: Add
+  - message: Fixed the Beretta M92FS having errors.
+    type: Fix
+  id: 2016
+  time: '2025-07-20T08:59:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7024
 Name: RMC14
 Order: -1
