@@ -21,7 +21,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetBeachBum
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -40,6 +39,7 @@
         - RMCUndershirtClassicJungle
         - RMCUndershirtSportsJungle
         - RMCUndershirtStraplessJungle
+  useLoadoutOfJob: CMSurvivor
 
 - type: startingGear
   parent: RMCGearSurvivorBase

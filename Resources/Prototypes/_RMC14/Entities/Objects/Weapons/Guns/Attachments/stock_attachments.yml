@@ -511,6 +511,28 @@
     actionName: Toggle M54C Folding Stock
 
 - type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CStockCollapsibleWhite
+  suffix: White Camo
+  description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle. Painted in a lovely corporate white camo.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+    state: m54c-col
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      state: m54c-col
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      state: m54c-col-on
+    actionName: Toggle M54C Folding Stock
+
+- type: entity
   parent: RMCAttachableBase
   id: RMCAttachmentM16Stock
   name: M16 bump stock
@@ -905,6 +927,21 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
+  id: RMCAttachmentM3714Stock
+  name: M3714 stock
+  description: The non-detachable stock of a M37-14 pump shotgun.
+  components:
+  - type: Sprite
+    state: M3714stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM3714Stock
+
+- type: entity
+  parent: RMCStockAttachmentBase
   id: RMCAttachmentHuntingStock
   name: Basira-Armstrong stock
   description: The non-detachable stock of a Basira-Armstrong hunting rifle
@@ -979,6 +1016,9 @@
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
+
+- type: Tag
+  id: RMCAttachmentM3714Stock
 
 - type: Tag
   id: RMCAttachmentStock

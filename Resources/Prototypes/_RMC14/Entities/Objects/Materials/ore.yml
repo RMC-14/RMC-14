@@ -273,7 +273,7 @@
   - type: Item
     heldPrefix: uranium
   - type: RMCLoreExaminable
-    content: Colonies all over the Sector mine extensively for pitchblende - uranium ore. It finds use in outdated fission reactors, nuclear weapons, and more commonly armor-piercing munitions. A W-Y funded research team determined that radiation poisoning from using these munitions is 'negligible'.
+    content: rmc-lore-examinable-pitchblende
 
 - type: entity
   parent: RMCUraniumOre

@@ -11,3 +11,41 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit.rsi
   - type: CMArmor
     bio: 100 # CLOTHING_ARMOR_HARDCORE
+
+- type: entity
+  parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
+  id: RMCArmorFirefighter
+  name: PT-LT firesuit
+  description: The 'PyroTex LT' is an advanced, lightweight firesuit developed by 'Fujin'. It provides protection against fire and heat, while also offering a degree of protection from blunt force trauma.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/firefighter.rsi
+  - type: CMArmor
+    melee: 15
+    bio: 15
+    bullet: 10
+    explosionArmor: 10
+  - type: FireProtection
+    reduction: 0.3
+   # TODO gas_transfer_coefficient = 0.90
+
+- type: entity
+  parent: RMCArmorFirefighter
+  id: RMCArmorSPPFirefighter
+  name: T-20 fire response coat
+  description: A rugged, no-frills fire-resistant overcoat issued to SPP industrial and emergency crews. Based on the PyroTex LT design but using cheaper, domestically produced materials, it offers basic protection against heat and debris at the cost of weight and comfort.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/firefighter.rsi
+
+- type: entity
+  parent: RMCSuitBioGeneral
+  id: RMCSuitBioWeYa
+  name: WeYa-TSS MK I - bio suit
+  description: The 'Weston-Yamada TerraScientia bio-suit MK I'. An advanced light-weight bio-suit developed in-house by Weston-Yamada. It's a suit that protects against biological contamination.
+  suffix: Generic, WeYa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/biosuit_weya.rsi

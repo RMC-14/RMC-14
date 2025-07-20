@@ -680,13 +680,11 @@ cm-chatsan-word-light-bulbs = light bulbs
 cm-chatsan-word-lightbulbs = lightbulbs
 cm-chatsan-replacement-light-bulbs = glow orbs
 
-cm-chatsan-word-case = case
 cm-chatsan-word-crate = crate
-cm-chatsan-replacement-case = containment box
+cm-chatsan-replacement-crate = containment box
 
-cm-chatsan-word-cases = cases
 cm-chatsan-word-crates = crates
-cm-chatsan-replacement-cases = containment boxes
+cm-chatsan-replacement-crates = containment boxes
 
 cm-chatsan-word-gunshot = gunshot
 cm-chatsan-replacement-gunshot = spit burst

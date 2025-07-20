@@ -25,13 +25,19 @@ public sealed partial class OverwatchSquadView : Control
     public TimeSpan NextLaunchAt;
     public TimeSpan NextOrbitalAt;
 
+    private bool _squadInfoHidden;
+
     public OverwatchSquadView()
     {
         RobustXamlLoader.Load(this);
 
-        TabContainer.SetTabTitle(SquadMonitor, "Squad Monitor");
-        TabContainer.SetTabTitle(SupplyDrop, "Supply Drop");
-        TabContainer.SetTabTitle(OrbitalBombardment, "Orbital Bombardment");
+        // Set up tab button event handlers
+        SquadMonitorButton.OnPressed += OnSquadMonitorPressed;
+        SupplyDropButton.OnPressed += OnSupplyDropPressed;
+        OrbitalBombardmentButton.OnPressed += OnOrbitalBombardmentPressed;
+
+        // Set default tab to Squad Monitor
+        ShowTab("SquadMonitor");
 
         Longitude = UIExtensions.CreateDialSpinBox(buttons: false, minWidth: 100);
         LongitudeContainer.AddChild(Longitude);
@@ -86,6 +92,7 @@ public sealed partial class OverwatchSquadView : Control
         };
 
         StopOverwatchButton.OnPressed += OnStopOverwatchPressed;
+        HideSquadInfoButton.OnPressed += OnHideSquadInfoPressed;
         LaunchButton.Label.ModulateSelfOverride = Color.Black;
         SaveButton.Label.ModulateSelfOverride = Color.Black;
         OrbitalSaveButton.Label.ModulateSelfOverride = Color.Black;
@@ -94,6 +101,13 @@ public sealed partial class OverwatchSquadView : Control
     private void OnStopOverwatchPressed(ButtonEventArgs obj)
     {
         OnStop?.Invoke();
+    }
+
+    private void OnHideSquadInfoPressed(ButtonEventArgs obj)
+    {
+        _squadInfoHidden = !_squadInfoHidden;
+        ApplySquadInfoVisibilityState();
+        HideSquadInfoButton.Text = _squadInfoHidden ? "Show Squad Info" : "Hide Squad Info";
     }
 
     private void MakeAllVisible(Control control)
@@ -141,6 +155,7 @@ public sealed partial class OverwatchSquadView : Control
             showHidden)
         {
             MakeAllVisible();
+            ApplySquadInfoVisibilityState();
             return;
         }
 
@@ -187,21 +202,85 @@ public sealed partial class OverwatchSquadView : Control
 
             MakeViewVisible(i, true);
         }
+
+        ApplySquadInfoVisibilityState();
+    }
+
+    private void OnSquadMonitorPressed(ButtonEventArgs obj)
+    {
+        ShowTab("SquadMonitor");
+    }
+
+    private void OnSupplyDropPressed(ButtonEventArgs obj)
+    {
+        ShowTab("SupplyDrop");
+    }
+
+    private void OnOrbitalBombardmentPressed(ButtonEventArgs obj)
+    {
+        ShowTab("OrbitalBombardment");
+    }
+
+    private void ShowTab(string tabName)
+    {
+        // Hide all content panels
+        SquadMonitor.Visible = false;
+        SupplyDrop.Visible = false;
+        OrbitalBombardment.Visible = false;
+
+        // Reset all button styles to unselected state
+        SquadMonitorButton.ModulateSelfOverride = Color.FromHex("#202020");
+        SupplyDropButton.ModulateSelfOverride = Color.FromHex("#202020");
+        OrbitalBombardmentButton.ModulateSelfOverride = Color.FromHex("#202020");
+
+        // Show the selected panel and highlight the button
+        switch (tabName)
+        {
+            case "SquadMonitor":
+                SquadMonitor.Visible = true;
+                SquadMonitorButton.ModulateSelfOverride = Color.FromHex("#404040");
+                break;
+            case "SupplyDrop":
+                SupplyDrop.Visible = true;
+                SupplyDropButton.ModulateSelfOverride = Color.FromHex("#404040");
+                break;
+            case "OrbitalBombardment":
+                OrbitalBombardment.Visible = true;
+                OrbitalBombardmentButton.ModulateSelfOverride = Color.FromHex("#404040");
+                break;
+        }
+    }
+
+    public void ApplySquadInfoVisibilityState()
+    {
+        // Apply the current local toggle state
+        if (RolesContainer.ChildCount > 0)
+        {
+            // Hide/show all panels except the last one (Total/Living) based on current state
+            for (int i = 0; i < RolesContainer.ChildCount - 1; i++)
+            {
+                RolesContainer.GetChild(i).Visible = !_squadInfoHidden;
+            }
+
+            // Always keep the Total/Living panel visible (last panel)
+            if (RolesContainer.ChildCount > 0)
+            {
+                RolesContainer.GetChild(RolesContainer.ChildCount - 1).Visible = true;
+            }
+        }
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
 
-        CrateStatus.Text = HasCrate
-            ? "[color=green][bold]Crate Loaded[/bold][/color]"
-            : "[color=red][bold]No crate loaded[/bold][/color]";
+        CrateStatus.Text = Loc.GetString("rmc-overwatch-crate-status",("hasCrate", HasCrate));
 
         var time = IoCManager.Resolve<IGameTiming>().CurTime;
         var supplyTimeLeft = NextLaunchAt - time;
         if (supplyTimeLeft > TimeSpan.Zero)
         {
-            CrateStatus.Text = $"[color=#D3B400][bold]Cooldown - {(int)supplyTimeLeft.TotalSeconds} seconds[/bold][/color]";
+            CrateStatus.Text = Loc.GetString("rmc-overwatch-crate-cooldown",("SupplyTimeLeft", (int)supplyTimeLeft.TotalSeconds));
             LaunchButton.Disabled = true;
         }
         else
@@ -212,14 +291,12 @@ public sealed partial class OverwatchSquadView : Control
         var orbitalTimeLeft = NextOrbitalAt - time;
         if (orbitalTimeLeft > TimeSpan.Zero)
         {
-            OrbitalStatus.Text = $"[color=#D3B400][bold]Cooldown - {(int)orbitalTimeLeft.TotalSeconds} seconds[/bold][/color]";
+            OrbitalStatus.Text = Loc.GetString("rmc-overwatch-ob-cooldown",("OrbitalTimeLeft", (int)orbitalTimeLeft.TotalSeconds));
             OrbitalFireButton.Disabled = true;
         }
         else
         {
-            OrbitalStatus.Text = HasOrbital
-                ? "[color=green][bold]Ready[/bold][/color]"
-                : "[color=red][bold]Not ready[/bold][/color]";
+            OrbitalStatus.Text = Loc.GetString("rmc-overwatch-crate-status",("isReady", HasOrbital));
             OrbitalFireButton.Disabled = false;
         }
     }
