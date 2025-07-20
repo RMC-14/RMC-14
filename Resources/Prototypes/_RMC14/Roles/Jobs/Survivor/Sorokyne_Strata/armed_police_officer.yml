@@ -18,6 +18,7 @@
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: People's Armed Police Officer (Sorokyne Survivor)
+  useLoadoutOfJob: CMSurvivorSecurity
   special:
   - !type:AddComponentSpecial
     components:
@@ -35,7 +36,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetArmedPoliceOfficer
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:

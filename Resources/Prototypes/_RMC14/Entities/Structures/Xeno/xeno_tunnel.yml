@@ -53,6 +53,7 @@
   parent: XenoTunnelMaint
   id: XenoTunnelMaintNoXenoDesc
   description: An entrance to a maintenance tunnel. Pieces of debris keep you from getting a closer look.
+  suffix: No Xeno Desc
 
 - type: entity
   parent: XenoTunnelMaint
