@@ -545,6 +545,39 @@
 
 - type: entity
   parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFreelancerMedic
+  suffix: Filled, Freelancer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMRollerBedSpawnFolded
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFreelancerStandard
+  suffix: Filled, Freelancer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFreelancerLeader
+  suffix: Filled, Freelancer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: RMCRangefinder
+    - id: RMCExplosivePlastic
+    - id: RMCExplosivePlastic
+
+- type: entity
+  parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFilledRoyal
   suffix: Filled, Royal
   components:

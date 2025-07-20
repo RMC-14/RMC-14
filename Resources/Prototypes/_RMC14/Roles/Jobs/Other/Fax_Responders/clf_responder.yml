@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobRibbonBase
   id: CMCLFResponder
   name: rmc-job-name-clf-responder
   description: rmc-job-description-clf-responder
@@ -34,7 +34,6 @@
         RMCSkillVehicles: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-responder
-    - type: RMCRibbon
   hasIcon: false
   hidden: true
 

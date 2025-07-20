@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  parent: [ BaseItem, RMCBaseSlideMagazineVisualsBallistic, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: RMCWeaponPistolM82F
   name: M82-F flare gun
   description: A flare gun issued to JTAC operators to use with flares. Comes with a miniscope. One shot, one... life saved?
@@ -7,9 +7,6 @@
   - type: AmmoCounter
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m82f.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Item
     size: Normal
   - type: Clothing
@@ -31,6 +28,12 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound:
+      collection: CMShotgunLoad
+      params:
+        variation: 0.2
   - type: RMCSelectiveFire
     scatterWielded: 0
     scatterUnwielded: 0

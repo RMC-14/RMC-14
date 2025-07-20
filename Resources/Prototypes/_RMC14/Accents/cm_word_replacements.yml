@@ -249,10 +249,8 @@
     cm-chatsan-word-lightbulb: cm-chatsan-replacement-light-bulb
     cm-chatsan-word-light-bulbs: cm-chatsan-replacement-light-bulbs
     cm-chatsan-word-lightbulbs: cm-chatsan-replacement-light-bulbs
-    cm-chatsan-word-case: cm-chatsan-replacement-case
-    cm-chatsan-word-crate: cm-chatsan-replacement-case
-    cm-chatsan-word-cases: cm-chatsan-replacement-cases
-    cm-chatsan-word-crates: cm-chatsan-replacement-cases
+    cm-chatsan-word-crate: cm-chatsan-replacement-crate
+    cm-chatsan-word-crates: cm-chatsan-replacement-crates
     cm-chatsan-word-gunshot: cm-chatsan-replacement-gunshot
     cm-chatsan-word-gunshots: cm-chatsan-replacement-gunshots
     cm-chatsan-word-paper: cm-chatsan-replacement-paper

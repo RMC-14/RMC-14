@@ -1331,6 +1331,11 @@ RMCGlassesBiMexYellow: RMCGlassesTriMaxYellow
 RMCGlassesBiMexBronze: RMCGlassesTriMaxBronze
 RMCGlassesBiMexBlack: RMCGlassesTriMaxBlack
 
+# 2025-07-12
+FoamedIronMetal: RMCFoamedIronMetal
+FoamedAluminiumMetal: RMCFoamedAluminiumMetal
+TimerTrigger: RMCTimerTrigger
+
 # 2025-07-17
 RMCIDCardDeputy: RMCIDCardCMBDeputy
 RMCIDCardMarshal: RMCIDCardCMBMarshal
