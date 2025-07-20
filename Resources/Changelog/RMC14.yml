@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed ladders not working.
-    type: Fix
-  - message: Fixed correspondent cameras sometimes not showing up on tvs.
-    type: Fix
-  - message: Fixed the overwatch console freaking out when using any filters.
-    type: Fix
-  - message: Fixed tile fires not drawing over walls. Doors still hide them.
-    type: Fix
-  - message: Fixed signal flares sometimes dropping on your feet when thrown.
-    type: Fix
-  - message: Fixed Oppressor Praetorian abduct targets being bounced against each
-      other.
-    type: Fix
-  - message: Fixed set pose verb popping up after a short delay.
-    type: Fix
-  - message: Fixed soda fountains not fitting through doors.
-    type: Fix
-  - message: Fixed interact with other hand label in options being broken.
-    type: Fix
-  - message: Fixed rangefinders showing a switch to designator mode that does nothing
-      when used. Laser designators can still be switched normally.
-    type: Fix
-  id: 1536
-  time: '2025-03-31T04:38:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6048
 - author: CyberTropic
   changes:
   - message: Fixed extra intel spawning on map inserts.
@@ -4891,5 +4864,12 @@
   id: 2036
   time: '2025-07-20T09:41:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7077
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added civilian-only loadouts for the correspondant, liaison, and survivors.
+    type: Add
+  id: 2037
+  time: '2025-07-20T09:42:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6938
 Name: RMC14
 Order: -1
