@@ -24,7 +24,6 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetScientist
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
