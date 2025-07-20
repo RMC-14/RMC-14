@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCJobRibbonBase
+  parent: CMSurvivor
   id: RMCJobSyntheticColony
   name: rmc-job-name-synth-colony
   description: rmc-job-description-synth-colony

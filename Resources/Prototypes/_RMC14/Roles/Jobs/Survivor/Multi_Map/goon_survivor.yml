@@ -20,7 +20,6 @@
         RMCSkillFireman: 2
         RMCSkillVehicles: 1
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -41,7 +40,7 @@
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
-    suitstorage: RMCWeaponRifleM54CSemiStripped # TODO RMC14: Corporate re-sprite (white)
+    suitstorage: RMCWeaponRifleM54CWhite # TODO RMC14: Corporate semi-stripped (white)
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidPMCFill
   storage:

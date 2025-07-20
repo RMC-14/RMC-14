@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M54C assault rifle MK2
   id: WeaponRifleM54C
@@ -184,7 +184,6 @@
           - RMCAttachmentM54CStockSolid
           - RMCAttachmentM54CStockCollapsible
 
-
 - type: entity
   parent: WeaponRifleM54C
   id: RMCWeaponRifleM54CFilled
@@ -194,6 +193,32 @@
     slots:
       gun_magazine:
         startingItem: CMMagazineRifleM54C
+
+- type: entity
+  parent: RMCWeaponRifleM54CSemiStripped
+  id: RMCWeaponRifleM54CWhite
+  description: A M54C Mk2 with a Weston-Yamada logo imprinted on the reciever. Used primarily by Weston-Yamada's corporate security forces, and comes equipped with a drab corproate white paint job.
+  suffix: White, No UGL
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsibleWhite
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
 
 - type: entity
   parent: CMMagazineRifleBase
