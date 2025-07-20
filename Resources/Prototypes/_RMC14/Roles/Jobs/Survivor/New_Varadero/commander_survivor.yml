@@ -53,6 +53,7 @@
         state: background_shipside
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
   hidden: true
 
 - type: startingGear

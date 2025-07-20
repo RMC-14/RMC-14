@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M54C assault rifle MK2
   id: WeaponRifleM54C
@@ -329,6 +329,14 @@
       color: "#9C9A19"
 #  - type: RefillableByBulletBox
 #    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: RMCMagazineRifleM54CHEAP
+  id: RMCMagazineRifleM54CHEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
 
 - type: entity
   parent: CMMagazineRifleM54C

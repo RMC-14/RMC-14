@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMSurvivorSecurity
   name: cm-job-name-survivor-security
@@ -30,13 +30,13 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSecurity
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorSecurity

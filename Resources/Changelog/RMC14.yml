@@ -1,441 +1,4 @@
 ﻿Entries:
-- author: Ramiris
-  changes:
-  - message: Added camouflage in-engine colouring.
-    type: Add
-  - message: Changed M83 GL's Sprite
-    type: Tweak
-  id: 1512
-  time: '2025-03-29T08:18:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6005
-- author: to4no_fix
-  changes:
-  - message: Squad and hive leaders speech in chat bubbles is now bold and significantly
-      larger for better visibility.
-    type: Add
-  id: 1513
-  time: '2025-03-29T08:23:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5912
-- author: noctyrnal
-  changes:
-  - message: Hybrisa's Cave Lockdown no longer automatically despawns at 45 Minutes.
-    type: Tweak
-  - message: Added the Cave Lockdown button to Bio-Genomic Lab in Hybrisa.
-    type: Tweak
-  id: 1514
-  time: '2025-03-29T08:26:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6004
-- author: Dygon
-  changes:
-  - message: Sniper rifles can now be used to perform aimed shots, projectiles fired
-      with an aimed shot will have additional effects.
-    type: Add
-  - message: Sniper specialists' loadouts now include a spotter kit, which contains
-      the gear needed to transform any rifleman into a fully-fledged spotter.
-    type: Add
-  - message: Sniper specialists can now obtain the XM43E1 anti-materiel rifle from
-      their vendor. This rifle fires projectiles powerful enough to penetrate any
-      obstacle in its path.
-    type: Add
-  id: 1515
-  time: '2025-03-29T08:25:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5958
-- author: OmerF-afk
-  changes:
-  - message: Added multiple Weapons/Ammunition for SPP
-    type: Add
-  id: 1516
-  time: '2025-03-29T08:26:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6003
-- author: stranthbackup
-  changes:
-  - message: M34 Incinerator Unit no longer has a cold flame. Now you can light your
-      smokes and paper with it!
-    type: Add
-  - message: Paper now turns to ashes.
-    type: Fix
-  id: 1517
-  time: '2025-03-29T08:28:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5959
-- author: to4no_fix
-  changes:
-  - message: Now all heads of department headsets, squad leaders, and officers significantly
-      increase the size of text in the radio, the headset of the fireteam leader also
-      increases the text, but slightly less.
-    type: Add
-  id: 1518
-  time: '2025-03-29T08:34:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5924
-- author: Tyzemol
-  changes:
-  - message: Fixed Hive core not being able to be destroyed and rebuilt without a
-      cooldown in the first 20 minutes of the game.
-    type: Fix
-  id: 1519
-  time: '2025-03-29T08:38:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5921
-- author: Ian321
-  changes:
-  - message: Requisitions can now directly vend filled ammunition boxes.
-    type: Add
-  id: 1520
-  time: '2025-03-29T08:40:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5781
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added setting your character's pose. This can be updated in-round with
-      a right-click menu verb, useful for giving your character time-specific flavor
-      text.
-    type: Add
-  id: 1521
-  time: '2025-03-29T08:50:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4682
-- author: DrSmugleaf
-  changes:
-  - message: Added the LAU-444 guided missile launcher, a dropship weapon that launches
-      single-use rockets. This includes the Keeper, Widowmaker and Napalm rockets.
-    type: Add
-  - message: Added the LWU-6B laser cannon, a dropship weapon that sets file to 16
-      tiles in a 7x7 radius of where it shoots. This fire has a very short duration,
-      but a very strong intensity.
-    type: Add
-  - message: Added the fuel enhancer and cooling system, which reduce dropship travel
-      time by 25% and increases flyby time by 25%, and reduces and refuel time by
-      50%, respectively.
-    type: Add
-  - message: Added buildable televisions with a television circuit board. These televisions
-      let you see a live view of the correspondent's camera. These can be gotten from
-      the circuit board vendor located in first floor engineering.
-    type: Add
-  - message: Ported marines quickly dying when pulled while in crit by a xeno. This
-      deals around 20 damage per tile dragged, and instantly kills them if a xeno
-      attempts to devour them while in crit.
-    type: Add
-  - message: Added a dedicated ziptie box slot to Squad Leader B12 and M4 armor. The
-      ziptie box that they start with has been moved into it.
-    type: Add
-  - message: Added 25x HEFA and 25x AGM-I purchasable crates in Requisitions for 10000
-      dollars.
-    type: Add
-  - message: Added plantable UN and UNMC flags that can be carried into battle. They
-      are located in the top and bottom CIC armories.
-    type: Add
-  - message: Added interact with other hand keybind (default C). Held guns now also
-      eject their magazine when clicked with a free hand, instead of being moved to
-      the other hand.
-    type: Add
-  - message: Added Requisitions line sign.
-    type: Add
-  - message: Added a lot more items to the mess technician vendors, including garlic
-      seeds, onion seeds, onions, garlic, rice, twice the meat, twice the milk, mugs,
-      and kitchen tools.
-    type: Add
-  - message: Added Colten 'Ripcord' Bailey figurine.
-    type: Add
-  - message: Added Spike Light-Foot Fluff-Usta figurine.
-    type: Add
-  - message: Fixed Riflemen not starting with Endurance 1 and not being able to use
-      some pamphlets with others.
-    type: Fix
-  - message: Fixed the loader pamphlet not increasing endurance to a max of 2.
-    type: Fix
-  - message: Fixed some cases of sitting on a chair making the player be drawn under
-      some objects.
-    type: Fix
-  - message: Fixed xeno health regen being too fast and recovery not having enough
-      of an impact on it, for a total reduction of 25% to 50% overall.
-    type: Fix
-  - message: Fixed flechette spread being 2.5x higher than intended, buckshot spread
-      being 1.33x higher than intended, breaching spread being 2x higher than intended,
-      and incendiary buckshot spread being 1.33x higher than intended.
-    type: Fix
-  - message: Fixed MOU53 firerate being half the intended amount.
-    type: Fix
-  - message: Fixed vials not changing sprite between 15 and 20 units.
-    type: Fix
-  - message: Fixed OB fuel being covered up by racks.
-    type: Fix
-  - message: Fixed some crates not droppping 2 wooden planks when crowbared.
-    type: Fix
-  - message: Fixed gun cases not being able to be unfolded into 1 plastic.
-    type: Fix
-  - message: Fixed mortar backpacks having 6 slots instead of 12, and mortar belts
-      having 5 slots instead of 9.
-    type: Fix
-  - message: Fixed restart vote failed message showing for everyone on the server
-      instead of just the one that tried to start it.
-    type: Fix
-  - message: Fixed sprite offset items looking offset in your hand and inventory.
-    type: Fix
-  - message: Fixed tactical map canvas update cooldown not updating when the window
-      is popped out. Popping it out also temporarily hides the canvas color setting,
-      as using it while popped out crashes your game.
-    type: Fix
-  - message: Fixed not being able to craft wooden floors with wooden planks.
-    type: Fix
-  - message: Fixed HEDP and AGM-F 25x nades not coming inside a carriable box in Requisitions.
-    type: Fix
-  - message: Fixed the tool storage machine not having light replacers and having
-      incorrect amounts of other tools.
-    type: Fix
-  - message: Fixed Kutjevo having a lizard plushie that grinds into weh juice.
-    type: Fix
-  - message: Fixed larva and parasites not being stunned on dropships that take off
-      and not being buckleable to roller beds when dead.
-    type: Fix
-  - message: Fixed crowbars prying tiles not being instant.
-    type: Fix
-  - message: Fixed metal floor tiles, table parts, rack parts, and metal rods not
-      being able to be inserted into an autolathe to recycle them into metal.
-    type: Fix
-  - message: Fixed piloting skill 2 (Dropship/Gunship pilots and ASO) not reducing
-      dropship refuel time by 25% (120s > 90s).
-    type: Fix
-  - message: Fixed lathes not using the item's size for how long it takes to print.
-      It now takes 2 seconds for tiny and small items, 3 for medium, 4 for large,
-      and 5 for huge.
-    type: Fix
-  - message: Fixed lathes not having a max print cap of 6.
-    type: Fix
-  - message: Fixed being able to make saline.
-    type: Fix
-  - message: Fixed reinforced tables taking 4 metal to print instead of 5.
-    type: Fix
-  - message: Fixed being able to melee while burrowed as a burrower.
-    type: Fix
-  - message: Fixed Vanguard Praetorian Pierce not having a target cap. It can now
-      hit a maximum of 4 targets.
-    type: Fix
-  - message: Fixed CE, MT, and OT armor not having extra bio and explosion armor.
-    type: Fix
-  - message: Fixed being able to juggle pump shotguns to bypass their shared fire
-      delay. This doesn't affect the underbarrel shotgun or the MOU53.
-    type: Fix
-  - message: Fixed autolathes being unanchorable and moved.
-    type: Fix
-  - message: Fixed windows taking 4 seconds to deconstruct instead of being instant,
-      and missing 1 screwing step (Screwdriver, Wrench, Screwdriver).
-    type: Fix
-  - message: Fixed reinforced tables missing a welding step for deconstruction.
-    type: Fix
-  - message: Fixed tool sounds not playing for instant construction steps.
-    type: Fix
-  - message: Fixed the alpha overwatch console not being accessible with a table in
-      the way. The table has now been restored.
-    type: Fix
-  - message: Fixed broken fences blocking some abilities and flamers.
-    type: Fix
-  - message: Fixed pulling sometimes putting the pulled thing on top of your sprite.
-    type: Fix
-  - message: Fixed not being able to fit the M12 blast grenade into grenade launchers.
-    type: Fix
-  - message: Fixed being able to insert anything into an XM51 breaching scattergun
-      case.
-    type: Fix
-  - message: Fixed the seed extractor in the mess tech botany area being unpowered.
-    type: Fix
-  - message: Fixed the soda fountain being drawn under the table its on.
-    type: Fix
-  - message: High capacity beakers now start at 100u transfer and have more appropriate
-      quick settings. Vials also have more appropriate quick settings. Canteens start
-      at 60 unit transfer.
-    type: Tweak
-  - message: Fixed the grenadier spec getting the wrong kind of nades. They now get
-      2 AGM-F and 1 AGM-I instead of 2 more HEDP and 1 more HEFA, and 6 AGM-F and
-      3 AGM-I instead of 6 more HEDP and 3 HEFA. This also removes the specialist's
-      ability to buy more HEFA and HSDP grenades, with the new grenade types that
-      they can now buy.
-    type: Tweak
-  - message: Defibs now temporarily heal Genetic damage (from consuming radium) until
-      cryo pods are added.
-    type: Tweak
-  id: 1522
-  time: '2025-03-29T13:44:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6011
-- author: noctyrnal
-  changes:
-  - message: Added Containments Walls and Windows, along with the movable central
-      containment wall.
-    type: Add
-  id: 1523
-  time: '2025-03-29T19:53:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6013
-- author: CyberTropic
-  changes:
-  - message: 'Added LV624 Inserts for: sand temple, nexus barricade, armory, gym.'
-    type: Add
-  id: 1524
-  time: '2025-03-29T19:54:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5981
-- author: to4no_fix
-  changes:
-  - message: Increase text size in radio for commander headsets slightly reduced (FTL
-      remained unchanged)
-    type: Tweak
-  id: 1525
-  time: '2025-03-30T00:14:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6024
-- author: DrSmugleaf
-  changes:
-  - message: Fixed most marines not showing up on the live tactical map.
-    type: Fix
-  - message: Fixed marines and xenos taking camera recoil from projectiles.
-    type: Fix
-  - message: Fixed visual glitches sometimes when moving with a bipod deployed.
-    type: Fix
-  - message: Fixed some laser cannon fire values being incorrect, fixes duration not
-      being 5 seconds.
-    type: Fix
-  - message: Fixed plasteel rods refining into metal instead of plasteel.
-    type: Fix
-  - message: Fixed soda fountain not being unanchorable.
-    type: Fix
-  id: 1526
-  time: '2025-03-30T00:17:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6025
-- author: Vermidia
-  changes:
-  - message: Fixed laser fire looking like normal fire.
-    type: Fix
-  id: 1527
-  time: '2025-03-30T03:17:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6026
-- author: DrSmugleaf
-  changes:
-  - message: Fixed aimed shot and spotter designator causing the game to freeze and
-      crash. This re-enables both.
-    type: Fix
-  - message: Fixed not being able to pull ammo out of CAS weapons with the power loader.
-    type: Fix
-  - message: Fixed the tactical map not showing communication towers, sensor tower,
-      and Queen.
-    type: Fix
-  - message: Fixed the HIRR baton slug fitting into underbarrel grenade launcher attachments.
-    type: Fix
-  - message: Fixed ladders leaving behind ghosts of people climbing through them.
-    type: Fix
-  - message: Fixed the soda fountain not being able to be pulled and not starting
-      anchored.
-    type: Fix
-  - message: Fixed aimed shot and spotter designator laser drawing being hidden under
-      some things.
-    type: Fix
-  id: 1528
-  time: '2025-03-30T03:34:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6030
-- author: DrSmugleaf
-  changes:
-  - message: Fixed tactical map blips not being shown.
-    type: Fix
-  id: 1529
-  time: '2025-03-30T05:28:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6031
-- author: noctyrnal
-  changes:
-  - message: The AMR and its magazine have received new sprites.
-    type: Tweak
-  id: 1530
-  time: '2025-03-30T22:07:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6041
-- author: Dygon
-  changes:
-  - message: Crushers, aciders and praetorians now have correct armor values again.
-    type: Fix
-  - message: Xenonid abilities don't ignore armor anymore.
-    type: Fix
-  id: 1531
-  time: '2025-03-30T22:09:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6039
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed parasites thrown by carriers slamming into walls
-    type: Fix
-  - message: Fixed defender headbutt slamming victims
-    type: Fix
-  - message: Fixed ravager assault slamming victims into themselves
-    type: Fix
-  id: 1532
-  time: '2025-03-30T22:12:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6038
-- author: DummeHytteOst
-  changes:
-  - message: Added groundside warning sound for inbound rockets, played when the green
-      dot appears.
-    type: Add
-  id: 1533
-  time: '2025-03-30T22:23:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6034
-- author: Dygon
-  changes:
-  - message: The spotting and aimed shot action descriptions now explain how to use
-      them.
-    type: Add
-  - message: Fixed the sniper kit and the anti-materiel sniper kit not sharing the
-      same specialist limit.
-    type: Fix
-  id: 1534
-  time: '2025-03-30T22:28:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6035
-- author: DrSmugleaf
-  changes:
-  - message: Fixed comms towers not being shown in the tactical map, and hopefully
-      some of the marines too.
-    type: Fix
-  - message: Fixed laser designator working inside some buildings. Shoutout to Alec
-      for actually reporting this bug instead of posting unconstructive toxic feedback
-      making up shit about how the game should work. Rangefinder still works.
-    type: Fix
-  - message: Fixed rangefinder and laser designator dot being hidden by doors. Shoutout
-      for this one goes to truthe.
-    type: Fix
-  - message: Fixed uniforms not having 10 bullet armor.
-    type: Fix
-  - message: Fixed ladders leaving behind ghosts of other players.
-    type: Fix
-  id: 1535
-  time: '2025-03-31T01:32:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6045
-- author: DrSmugleaf
-  changes:
-  - message: Fixed ladders not working.
-    type: Fix
-  - message: Fixed correspondent cameras sometimes not showing up on tvs.
-    type: Fix
-  - message: Fixed the overwatch console freaking out when using any filters.
-    type: Fix
-  - message: Fixed tile fires not drawing over walls. Doors still hide them.
-    type: Fix
-  - message: Fixed signal flares sometimes dropping on your feet when thrown.
-    type: Fix
-  - message: Fixed Oppressor Praetorian abduct targets being bounced against each
-      other.
-    type: Fix
-  - message: Fixed set pose verb popping up after a short delay.
-    type: Fix
-  - message: Fixed soda fountains not fitting through doors.
-    type: Fix
-  - message: Fixed interact with other hand label in options being broken.
-    type: Fix
-  - message: Fixed rangefinders showing a switch to designator mode that does nothing
-      when used. Laser designators can still be switched normally.
-    type: Fix
-  id: 1536
-  time: '2025-03-31T04:38:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6048
-- author: CyberTropic
-  changes:
-  - message: Fixed extra intel spawning on map inserts.
-    type: Fix
-  id: 1537
-  time: '2025-03-31T04:32:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6043
-- author: Vermidia
-  changes:
-  - message: There is now an option to use non-trypophobia inducing sprites.
-    type: Add
-  id: 1538
-  time: '2025-04-04T23:25:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6068
 - author: noctyrnal
   changes:
   - message: Added the SSG45 Assault Rifle for We-Ya PMCs.
@@ -5078,5 +4641,252 @@
   id: 2012
   time: '2025-07-14T06:18:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7025
+- author: noctyrnal
+  changes:
+  - message: Xenonid emotes now have a cooldown.
+    type: Fix
+  id: 2013
+  time: '2025-07-20T08:36:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7074
+- author: Arykh
+  changes:
+  - message: Crayons no longer contain upstream reagents.
+    type: Tweak
+  id: 2014
+  time: '2025-07-20T08:42:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7088
+- author: Shromply
+  changes:
+  - message: Gave the Freelancers guns, ammo, and other gear.
+    type: Add
+  - message: Reworked the Freelancer's skills.
+    type: Add
+  - message: Changed the Freelancer Standard's rank from Mercendary to Mercenary.
+    type: Fix
+  id: 2015
+  time: '2025-07-20T08:55:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6820
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added new mag visuals for pistols, revolvers, and the M79.
+    type: Add
+  - message: Fixed the Beretta M92FS having errors.
+    type: Fix
+  id: 2016
+  time: '2025-07-20T08:59:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7024
+- author: Arykh
+  changes:
+  - message: Dexalin Plus has been added to the pressurized chemical dispenser!
+    type: Add
+  id: 2017
+  time: '2025-07-20T09:08:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7040
+- author: NotInButIn
+  changes:
+  - message: SL squad management menu and supply drop console have become prettier
+      UI!
+    type: Tweak
+  id: 2018
+  time: '2025-07-20T09:09:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7009
+- author: OmerF-afk
+  changes:
+  - message: Added multiple new weaponry for random loot spawners and surv base spawn
+    type: Add
+  - message: Black Spearhead revolver variant
+    type: Add
+  id: 2019
+  time: '2025-07-20T09:10:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7033
+- author: noctyrnal
+  changes:
+  - message: Glass sheets no longer let you place upstream glass tiles.
+    type: Fix
+  id: 2020
+  time: '2025-07-20T09:12:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7038
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the weedkiller grenade, metal foam grenade for scientist survivors.
+    type: Add
+  - message: Fixed motion detectors pinging the person holding it.
+    type: Fix
+  id: 2021
+  time: '2025-07-20T09:13:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6956
+- author: Dutch-VanDerLinde
+  changes:
+  - message: There is now a marine announcement when the Hybrisa caves lockdown is
+      lifted. You can no longer lift the lockdown until 25 minutes has passed.
+    type: Add
+  - message: Fixed pod door buttons not requiring power.
+    type: Fix
+  id: 2022
+  time: '2025-07-20T09:15:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7045
+- author: noctyrnal
+  changes:
+  - message: Adjusted the Overwatch Console's UI to be more inline with parity.
+    type: Tweak
+  - message: Added "Hide Squad Info" to the Overwatch Console, which collapses the
+      table displaying slots in a squad.
+    type: Add
+  id: 2023
+  time: '2025-07-20T09:14:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7022
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added a roll effect when resisting fire.
+    type: Add
+  id: 2024
+  time: '2025-07-20T09:15:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6399
+- author: yagwog
+  changes:
+  - message: Paper documents now support [form] tags for fillable text fields
+    type: Add
+  - message: Paper documents now support [signature] tags for player signatures
+    type: Add
+  - message: Multiple form fields and signatures can be used in a single document
+    type: Add
+  - message: Neatened up paperwindow.xaml.cs to make it easier to work with for aspiring
+      paperwork contributors
+    type: Fix
+  id: 2025
+  time: '2025-07-20T09:21:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7051
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed breaching charges not requiring 1 engineering skill.
+    type: Fix
+  id: 2026
+  time: '2025-07-20T09:22:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7071
+- author: CyberTropic
+  changes:
+  - message: Corporate dome map insert to LV.
+    type: Add
+  id: 2027
+  time: '2025-07-20T09:26:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7067
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Liaisons now spawn with the country club outfit instead of the black
+      suit pants.
+    type: Tweak
+  - message: Fixed WeYA PMC headsets having the incorrect sprite.
+    type: Fix
+  id: 2028
+  time: '2025-07-20T09:25:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7054
+- author: SharkSnake98
+  changes:
+  - message: Added some items, rooms, and cosmetic changes to the Admin fax rooms
+      and OCP-583.
+    type: Tweak
+  id: 2029
+  time: '2025-07-20T09:25:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7044
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added new reload sounds for the M16.
+    type: Add
+  - message: Added new gunshot sounds for the CMB Revolver and MK-45.
+    type: Add
+  - message: Fixed the XM88 having 2 bullet examine texts.
+    type: Fix
+  - message: Fixed the MK-45 not automatically ejecting empty mags
+    type: Fix
+  id: 2030
+  time: '2025-07-20T09:28:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7061
+- author: J C Denton
+  changes:
+  - message: Fixed Airlock assembly being non-corrodible.
+    type: Fix
+  id: 2031
+  time: '2025-07-20T09:29:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7065
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added CMB Deputy and marshal badge ID cards
+    type: Add
+  id: 2032
+  time: '2025-07-20T09:28:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7063
+- author: noctyrnal
+  changes:
+  - message: Kutjevo has recieved a large update.
+    type: Add
+  - message: Added the M37-17, an improved HG that can hold 2 more shells and does
+      x1.15 damage. Can be found on select maps and in the hands of the CMB.
+    type: Add
+  - message: Fixed the liaison's ID card name, description and icon.
+    type: Fix
+  id: 2033
+  time: '2025-07-20T09:37:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7046
+- author: noctyrnal
+  changes:
+  - message: The M5-ATL has received new sprites.
+    type: Add
+  id: 2034
+  time: '2025-07-20T09:39:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7023
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed space cash not having different sprites with larger stacks
+    type: Fix
+  id: 2035
+  time: '2025-07-20T09:39:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7080
+- author: noctyrnal
+  changes:
+  - message: Chances Claim has recieved a large update.
+    type: Add
+  - message: Walls will now turn into girders when destroyed, instead of dissapearing.
+    type: Add
+  id: 2036
+  time: '2025-07-20T09:41:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7077
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added civilian-only loadouts for the correspondant, liaison, and survivors.
+    type: Add
+  id: 2037
+  time: '2025-07-20T09:42:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6938
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the last charge on a defibrillator not being usable.
+    type: Fix
+  id: 2038
+  time: '2025-07-20T09:45:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7090
+- author: to4no_fix
+  changes:
+  - message: Added automatic appointment of acting Commander system. Now, 2 minutes
+      after the start of the round, ARES checks for the presence of CO and XO. If
+      no senior commanders are found, ARES notifies all marines and starts a timer
+      to select an acting Commander. A Marine can remove his ID during the selection
+      process if he does not want to be a Commander. After one minute, ARES selects
+      candidates from available Marines and appoints an acting Commander with the
+      highest authority and priority rank. The selected acting Commander will be announced  by
+      ARES, including his name and title. Also, if necessary, additional access will
+      be added to his ID. This system will help maintain the integrity of the operation
+      with a low amount of players online.
+    type: Add
+  - message: Command headset added to CIC Command Tablet cabinet.
+    type: Add
+  - message: The CIC Command Tablet cabinet can now store headsets in addition to
+      the tablet. The total capacity of the cabinet is 3 items.
+    type: Tweak
+  - message: Updated the information in the Chain of Command article in the guidebook
+      to clarify the seniority of Marines from squad leader down.
+    type: Tweak
+  id: 2039
+  time: '2025-07-20T10:35:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6290
 Name: RMC14
 Order: -1
