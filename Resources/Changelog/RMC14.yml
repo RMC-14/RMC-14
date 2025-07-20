@@ -1,84 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Fixed Nesart Onan Figurine not containing Ice Cream inside.
-    type: Fix
-  id: 1553
-  time: '2025-04-05T08:36:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6075
-- author: Vermidia
-  changes:
-  - message: Fixed larva being able to be ignited and take damage for 1 second after
-      bursting.
-    type: Fix
-  id: 1554
-  time: '2025-04-05T08:37:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6073
-- author: noctyrnal
-  changes:
-  - message: Changes Urban Camo.
-    type: Tweak
-  id: 1555
-  time: '2025-04-05T11:07:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6080
-- author: DrSmugleaf
-  changes:
-  - message: Added engineer, security, doctor, and corporate survivor jobs.
-    type: Add
-  - message: Added custom briefing in chat for survivor roles.
-    type: Add
-  - message: Added Fast-paws chip figurine.
-    type: Add
-  - message: Updated some survivor loadouts and changed their IDs to say Colonist
-      instead of Survivor for each role.
-    type: Tweak
-  - message: Survivor now requires 5 hours of combat technician instead of 5 hours
-      of engineering, and 5 hours of hospital corpsman instead of 5 hours of medical.
-    type: Tweak
-  - message: Fixed some marines not showing up on the tactical map, hopefully.
-    type: Fix
-  - message: Fixed liaison colony corpses having a Corporate Liaison id title instead
-      of Corporate Colonist.
-    type: Fix
-  - message: Fixed doctor's delight healing 7 times more than intended.
-    type: Fix
-  - message: (Already uploaded) Fixed laser designator and rangefinder dots getting
-      hidden under things like xenos and doors.
-    type: Fix
-  - message: Fixed cigar case fitting anything.
-    type: Fix
-  - message: Fixed carrots having oculine instead of imidazoline.
-    type: Fix
-  - message: Fixed the mess technician's seed extractor not being powered.
-    type: Fix
-  - message: Fixed ghosts being able to empty some autoinjectors.
-    type: Fix
-  - message: Fixed thin ice walls not being corrodible with xeno acid.
-    type: Fix
-  - message: Fixed the laser cannon not having its initial damage when it first hits
-      of 100 and fix its fire applying more than 5 stacks of fire. The fire DPS is
-      the same total but its easier to resist and pat for both marines and xenos.
-    type: Fix
-  - message: Fixed xeno spits being able to destroy unpowered streetlights before
-      they are turned on.
-    type: Fix
-  - message: Fixed corrosive tail stab not injecting neurotoxin if the target's bloodstream
-      is too full of chemicals.
-    type: Fix
-  - message: Fixed some planet fax machines being powered and being able to send faxes
-      to the Almayer. Faxes unanchored and then moved to the planet through a dropship
-      will still work normally.
-    type: Fix
-  - message: Fixed planetside booze-o-matics missing some bottles. They also no longer
-      scale with server population and late joins.
-    type: Fix
-  - message: Fixed colony public access being enough to open tool storage machines.
-      You now require colony engineering access. You can still hack them to remove
-      access requirements using a multitool if you have engineering skill 2.
-    type: Fix
-  id: 1556
-  time: '2025-04-05T11:14:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6078
 - author: Sigil
   changes:
   - message: The M34 incinerator now has its correct wield slowdown.
@@ -4889,16 +4809,43 @@
   url: https://github.com/RMC-14/RMC-14/pull/7115
 - author: DoguhanOzgurAkca
   changes:
-  - message: Added fun!
-    type: Add
-  - message: Removed fun!
-    type: Remove
-  - message: Changed fun!
-    type: Tweak
   - message: Accesibility options not showing up
     type: Fix
   id: 2053
   time: '2025-07-20T22:42:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7117
+- author: noctyrnal
+  changes:
+  - message: Fixed overwatch console UI crate status and orbital status not displaying
+      properly.
+    type: Fix
+  id: 2054
+  time: '2025-07-20T23:08:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7118
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Almayer starting unpowered (hopefully).
+    type: Fix
+  - message: Fixed some storages starting without some items or having strange shapes.
+    type: Fix
+  id: 2055
+  time: '2025-07-20T23:10:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7119
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Sorokyne Doctor survivor spawning with less gear than intended.
+    type: Fix
+  - message: Fixed a bag opening sound playing when survivor spawns.
+    type: Fix
+  id: 2056
+  time: '2025-07-20T23:21:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7120
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some xeno actions being permanently disabled at 0 charges.
+    type: Fix
+  id: 2057
+  time: '2025-07-20T23:29:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7121
 Name: RMC14
 Order: -1

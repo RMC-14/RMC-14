@@ -162,7 +162,7 @@ public sealed class SurvivorSystem : EntitySystem
             if (!_rmcStorage.CanInsertStoreSkill(storageItem, toInsert, mob, out _))
                 return false;
 
-            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage))
+            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage, playSound: false))
                 return true;
         }
 

@@ -36,7 +36,7 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorInfrastructureEngineer
   equipment:
-    back: CMSatchelEngineer
+    back: CMSatchelEngineerSurvivorFill
     shoes: CMBootsBrownFilled
     head: RMCHardhatOrange
     outerClothing: RMCHazardVest
@@ -45,7 +45,6 @@
     pocket2: RMCWelderIndustrial
   storage:
     back:
-    - CMSheetMetal20
     - RMCMaskGasSPP
 
 - type: entity

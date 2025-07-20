@@ -249,7 +249,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,9,1
+    - 0,0,13,1
     whitelist:
       tags:
       - RMCAttachmentXM51Stock
