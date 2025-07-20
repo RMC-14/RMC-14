@@ -26,6 +26,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
     private TimeSpan _rubyTime;
     private TimeSpan _emeraldTime;
     private TimeSpan _amethystTime;
+    private TimeSpan _prismaticTime;
 
     public override void Initialize()
     {
@@ -39,6 +40,7 @@ public sealed class PlaytimeMedalSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCPlaytimeRubyMedalTimeHours, v => _rubyTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeEmeraldMedalTimeHours, v => _emeraldTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeAmethystMedalTimeHours, v => _amethystTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimePrismaticMedalTimeHours, v => _prismaticTime = TimeSpan.FromHours(v), true);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -58,7 +60,9 @@ public sealed class PlaytimeMedalSystem : EntitySystem
             
         RMCPlaytimeMedalType? medalType = null;
 
-		if (time >= _amethystTime)
+        if (time >= _prismaticTime)
+            medalType = RMCPlaytimeMedalType.Prismatic;
+        else if (time >= _amethystTime)
             medalType = RMCPlaytimeMedalType.Amethyst;
         else if (time >= _rubyTime)
             medalType = RMCPlaytimeMedalType.Ruby;
@@ -77,13 +81,10 @@ public sealed class PlaytimeMedalSystem : EntitySystem
             return;
 
         if (!medals.TryGetValue(medalType.Value, out var medalId))
-
-        if (medalId == null)
             return;
 
         var medal = SpawnAtPosition(medalId, ev.Mob.ToCoordinates());
         _hands.TryPickupAnyHand(ev.Mob, medal, false);
-
         var medalComp = EnsureComp<UniformAccessoryComponent>(medal);
         medalComp.User = GetNetEntity(ev.Mob);
         Dirty(medal, medalComp);
