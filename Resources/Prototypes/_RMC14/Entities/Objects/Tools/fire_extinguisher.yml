@@ -25,7 +25,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/fire_extinguisher.rsi
     layers:
-    - state: fire_extinguisher
+    - state: fire_extinguisher0
       map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
