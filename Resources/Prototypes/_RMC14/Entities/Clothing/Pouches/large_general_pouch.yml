@@ -9,8 +9,6 @@
   - type: Storage
     grid:
     - 0,0,5,1 #6 slot
-  - type: Item
-    storedRotation: 0
 
 - type: entity
   parent: RMCPouchGeneralLarge

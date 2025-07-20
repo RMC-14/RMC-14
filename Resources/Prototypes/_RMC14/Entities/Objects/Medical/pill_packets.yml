@@ -9,7 +9,6 @@
     sprite: _RMC14/Objects/Medical/pill_packets.rsi
   - type: Item
     size: Small
-    storedRotation: 0
   - type: Storage # TODO RMC14 quick-eject
     maxItemSize: Small
     grid:

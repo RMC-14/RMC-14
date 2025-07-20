@@ -21,7 +21,6 @@
     state: generic_headset
   - type: Item
     size: Small
-    storedRotation: 0
   - type: ClothingLimit
     id: CMHeadset
   - type: RMCRadioFilter
