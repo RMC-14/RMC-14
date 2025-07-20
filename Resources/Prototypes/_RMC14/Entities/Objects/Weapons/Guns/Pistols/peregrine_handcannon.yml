@@ -1,0 +1,325 @@
+- type: entity
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
+  id: RMCWeaponPistolHandcannon
+  name: peregrine handcannon
+  description: The handcannon that needs no introduction, the Peregrine Handcannon is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks.
+  components:
+  - type: Gun
+    shotsPerBurst: 2
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 5
+    scatterUnwielded: 5
+    baseFireRate: 1.43
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.2
+        maxScatterModifier: 5
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.75
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolHandcannon
+        startingItem: RMCMagazinePistolHandcannon
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.070
+      rmc-aslot-rail: 0.090, 0.125
+      rmc-aslot-underbarrel: 0.312, -0.25
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannon
+
+- type: entity
+  parent: RMCWeaponPistolHandcannon
+  id: RMCWeaponPistolHandcannonGold
+  name: golden peregrine handcannon
+  description: A Peregrine Handcannon anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 5
+    scatterUnwielded: 8
+    baseFireRate: 1.43
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.2
+        maxScatterModifier: 7
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_gold.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_gold.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolHandcannon
+          - RMCMagazinePistolHandcannonHI
+          - RMCMagazinePistolHandcannonHIAP
+        startingItem: RMCMagazinePistolHandcannonHI
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonGold
+
+- type: entity
+  parent: RMCWeaponPistolHandcannonGold
+  id: RMCWeaponPistolHandcannonWinterWyvern
+  name: winter wyvern handcannon
+  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonWyvern
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolHandcannon
+  name: peregrine handcannon magazine (.50)
+  description: Seven rounds of powerful 50-caliber destruction.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolHandcannon
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolHandcannon
+    proto: RMCCartridgePistolHandcannon
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/handcannon.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolHandcannonHI
+  name: high impact peregrine handcannon magazine (.50)
+  description: Seven rounds of devastatingly powerful 50-caliber destruction. The bullets are tipped with a synthesized osmium and lead alloy to stagger absolutely anything they hit. Point away from anything you value.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolHandcannonHI
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolHandcannonHI
+    proto: RMCCartridgePistolHandcannonHI
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/handcannon.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#00CDEA"
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolHandcannonHIAP
+  name: high impact armor-piercing peregrine handcannon magazine (.50)
+  description: Seven rounds of devastatingly powerful 50-caliber destruction. Packs a devastating punch. The bullets are tipped with an osmium-tungsten carbide alloy to not only stagger but also shred through any target's armor. Issued in few numbers due to the massive production cost and worries about hull breaches. Point away from anything you value.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolHandcannonHIAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolHandcannonHIAP
+    proto: RMCCartridgePistolHandcannonHIAP
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/handcannon.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#429C60"
+
+- type: entity
+  id: RMCCartridgePistolHandcannon
+  name: cartridge (.50)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolHandcannon
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolHandcannon
+
+- type: entity
+  id: RMCCartridgePistolHandcannonHI
+  name: cartridge (High Impact .50)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolHandcannonHI
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolHandcannonHI
+
+- type: entity
+  id: RMCCartridgePistolHandcannonHIAP
+  name: cartridge (High Impact Armor Piercing .50)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolHandcannonHIAP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolHandcannonHIAP
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolHandcannon
+  name: bullet (.50)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 85
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolHandcannonHI
+  name: bullet (High Impact .50)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCStunOnHit
+    maxRange: 4.5
+    stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 70
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolHandcannonHIAP
+  name: bullet (High Impact Armor Piercing .50)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCStunOnHit
+    maxRange: 4.5
+    stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 70
+
+- type: Tag
+  id: RMCWeaponPistolHandcannon
+
+- type: Tag
+  id: RMCWeaponPistolHandcannonGold
+
+- type: Tag
+  id: RMCWeaponPistolHandcannonWyvern
+
+- type: Tag
+  id: RMCMagazinePistolHandcannon
+
+- type: Tag
+  id: RMCMagazinePistolHandcannonHI
+
+- type: Tag
+  id: RMCMagazinePistolHandcannonHIAP
+
+- type: Tag
+  id: RMCCartridgePistolHandcannon
+
+- type: Tag
+  id: RMCCartridgePistolHandcannonHI
+
+- type: Tag
+  id: RMCCartridgePistolHandcannonHIAP

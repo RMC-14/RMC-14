@@ -25,6 +25,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
 
         SubscribeLocalEvent<SkyFallingComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<SkyFallingComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<ParaDroppingComponent, ComponentRemove>(OnParaDroppingRemove);
     }
 
     public Animation ReturnFallAnimation(float fallDuration, float fallHeight)
@@ -80,20 +81,6 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         };
     }
 
-    public void PlayFallAnimation(EntityUid fallingUid, float fallDuration, float timeRemaining, float fallHeight, string animationKey, ParaDroppableComponent? paraDroppable = null)
-    {
-        var multiplier = timeRemaining / fallDuration;
-        var adjustedDuration = fallDuration * multiplier;
-        var adjustedHeight = fallHeight * multiplier;
-
-        if (timeRemaining > 0 && multiplier is > 0 and < 1)
-        {
-            _animPlayer.Play(fallingUid, ReturnFallAnimation(adjustedDuration,  adjustedHeight), animationKey);
-            if (paraDroppable != null)
-                SpawnParachute(adjustedDuration, _transform.GetMoverCoordinates(fallingUid), paraDroppable, multiplier);
-        }
-    }
-
     private void OnComponentInit(Entity<SkyFallingComponent> ent, ref ComponentInit args)
     {
         if (!TryComp<SpriteComponent>(ent, out var sprite) ||
@@ -127,6 +114,22 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         sprite.Scale = ent.Comp.OriginalScale;
     }
 
+    private void OnParaDroppingRemove(Entity<ParaDroppingComponent> ent, ref ComponentRemove args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        if (!TryComp(ent, out AnimationPlayerComponent? animation))
+            return;
+
+        _animPlayer.Stop((ent, animation),DroppingAnimationKey);
+
+        if (!TryComp(ent, out SpriteComponent? sprite))
+            return;
+
+        sprite.Offset = new Vector2();
+    }
+
     private void SpawnParachute(float fallDuration, EntityCoordinates coordinates, ParaDroppableComponent paraDroppable, float multiplier)
     {
         var animationEnt = Spawn(paraDroppable.ParachutePrototype, coordinates);
@@ -134,8 +137,24 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         despawn.Lifetime = fallDuration;
 
         AddComp<RMCUpdateClientLocationComponent>(animationEnt);
+        var paraDropping = EnsureComp<ParaDroppingComponent>(animationEnt);
+        paraDropping.RemainingTime = fallDuration;
 
         _animPlayer.Play(animationEnt, ReturnFallAnimation(fallDuration, paraDroppable.FallHeight * multiplier), DroppingAnimationKey);
+    }
+
+    public void PlayFallAnimation(EntityUid fallingUid, float fallDuration, float timeRemaining, float fallHeight, string animationKey, ParaDroppableComponent? paraDroppable = null)
+    {
+        var multiplier = timeRemaining / fallDuration;
+        var adjustedDuration = fallDuration * multiplier;
+        var adjustedHeight = fallHeight * multiplier;
+
+        if (timeRemaining > 0 && multiplier is > 0 and < 1)
+        {
+            _animPlayer.Play(fallingUid, ReturnFallAnimation(adjustedDuration,  adjustedHeight), animationKey);
+            if (paraDroppable != null)
+                SpawnParachute(adjustedDuration, _transform.GetMoverCoordinates(fallingUid), paraDroppable, multiplier);
+        }
     }
 
     public override void Update(float frameTime)
@@ -147,7 +166,7 @@ public sealed partial class ParaDropSystem : SharedParaDropSystem
         {
             if (!HasComp<SkyFallingComponent>(uid))
             {
-                if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null)
+                if (!_animPlayer.HasRunningAnimation(uid, DroppingAnimationKey) && paraDroppable.LastParaDrop != null && Transform(uid).MapID != MapId.Nullspace)
                     PlayFallAnimation(uid, paraDroppable.DropDuration, paraDropping.RemainingTime, paraDroppable.FallHeight, DroppingAnimationKey, paraDroppable);
 
                 _rmcSprite.UpdatePosition(uid);

@@ -1,6 +1,6 @@
 using Content.Shared._RMC14.Input;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Verbs;
 using Robust.Shared.Input.Binding;
 
@@ -8,9 +8,8 @@ namespace Content.Shared._RMC14.Weapons.Common;
 
 public sealed class UniqueActionSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -38,7 +37,7 @@ public sealed class UniqueActionSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
-        if (!_actionBlockerSystem.CanInteract(args.User, args.Target))
+        if (!_actionBlocker.CanInteract(args.User, args.Target))
             return;
 
         var user = args.User;
@@ -51,16 +50,15 @@ public sealed class UniqueActionSystem : EntitySystem
 
     private void TryUniqueAction(EntityUid userUid)
     {
-        if (!_entityManager.TryGetComponent(userUid, out HandsComponent? handsComponent) ||
-            handsComponent.ActiveHandEntity == null)
+        if (!_hands.TryGetActiveItem(userUid, out var held))
             return;
 
-        TryUniqueAction(userUid, handsComponent.ActiveHandEntity.Value);
+        TryUniqueAction(userUid, held.Value);
     }
 
     private void TryUniqueAction(EntityUid userUid, EntityUid targetUid)
     {
-        if (!_actionBlockerSystem.CanInteract(userUid, targetUid))
+        if (!_actionBlocker.CanInteract(userUid, targetUid))
             return;
 
         RaiseLocalEvent(targetUid, new UniqueActionEvent(userUid));

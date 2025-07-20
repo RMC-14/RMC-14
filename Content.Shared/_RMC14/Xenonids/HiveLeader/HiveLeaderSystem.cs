@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -126,6 +127,7 @@ public sealed class HiveLeaderSystem : EntitySystem
         if (EnsureComp<HiveLeaderComponent>(watching, out var leaderComp))
         {
             RemCompDeferred<HiveLeaderComponent>(watching);
+            RemComp<RMCTrackableComponent>(watching);
             ent.Comp.Leaders.Remove(watching);
 
             msg = $"You've demoted {Name(watching)} from Hive Leader.";
@@ -138,6 +140,8 @@ public sealed class HiveLeaderSystem : EntitySystem
             RaiseLocalEvent(watching, ref evn);
             return;
         }
+
+        EnsureComp<RMCTrackableComponent>(watching);
 
         leaderComp.Granter = ent;
         Dirty(watching, leaderComp);
@@ -289,6 +293,7 @@ public sealed class HiveLeaderSystem : EntitySystem
             return;
         }
 
+        EnsureComp<RMCTrackableComponent>(newXeno);
         var newLeader = EnsureComp<HiveLeaderComponent>(newXeno);
         newLeader.Granter = oldLeader.Granter;
         granter.Leaders.Remove(oldXeno);

@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -34,6 +34,7 @@ public sealed class XenoStompSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -76,10 +77,9 @@ public sealed class XenoStompSystem : EntitySystem
         args.Handled = true;
         if (args.Cancelled)
         {
-            foreach (var action in _actions.GetActions(xeno))
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoStompActionEvent>(xeno))
             {
-                if (action.Comp.BaseEvent is XenoStompActionEvent)
-                    _actions.ClearCooldown(action.Id);
+                _actions.ClearCooldown(action.AsNullable());
             }
 
             return;

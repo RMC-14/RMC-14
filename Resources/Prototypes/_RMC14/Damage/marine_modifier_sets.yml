@@ -53,3 +53,10 @@
 
 - type: damageModifierSet
   id: StructuralMarine
+
+- type: damageModifierSet
+  id: RMCMetalFoamWall
+  coefficients:
+    Blunt: 2
+    Slash: 2
+    # TODO fire should deal 50 times the normal damage

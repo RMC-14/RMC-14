@@ -72,8 +72,12 @@
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardLiaison
-  name: liaison ID card
+  name: corporate holo-badge
+  description: A corporate holo-badge. It's a unique Corporate orange and white.
+  suffix: WeYa
   components:
+  - type: Sprite
+    state: corporate_liaison
   - type: ItemIFF
     faction: FactionWeYa
   - type: PresetIdCard
@@ -289,6 +293,13 @@
   - type: PresetIdCard
     job: RMCJobSyntheticColony
 
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardFORECONSpotter
+  name: FORECON Spotter ID card
+  components:
+  - type: IdCard
+    jobTitle: rmc-job-name-forecon-spotter
 
 - type: entity
   id: RMCIDCardAegis
@@ -299,6 +310,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/aegis.rsi
     state: keycard
+    drawdepth: SmallObjects
   - type: Item
     size: Tiny
   - type: Clothing

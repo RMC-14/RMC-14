@@ -25,7 +25,8 @@
     explosionArmor: 0
   - type: CMHardArmor
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       head:

@@ -7,10 +7,10 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Physics;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
-using Robust.Client.Physics;
 using Robust.Client.Player;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
+using Robust.Shared.Physics.Systems;
 using static Robust.Shared.GameObjects.LookupFlags;
 
 namespace Content.Client._RMC14.Teleporter;
@@ -23,7 +23,7 @@ public sealed class RMCTeleporterViewerOverlay : Overlay
 
     private readonly SharedContainerSystem _container;
     private readonly EntityLookupSystem _entityLookup;
-    private readonly PhysicsSystem _physics;
+    private readonly SharedPhysicsSystem _physics;
     private readonly SharedRMCTeleporterSystem _teleporter;
     private readonly SharedTransformSystem _transform;
 
@@ -45,7 +45,7 @@ public sealed class RMCTeleporterViewerOverlay : Overlay
 
         _container = _entity.System<SharedContainerSystem>();
         _entityLookup = _entity.System<EntityLookupSystem>();
-        _physics = _entity.System<PhysicsSystem>();
+        _physics = _entity.System<SharedPhysicsSystem>();
         _teleporter = _entity.System<SharedRMCTeleporterSystem>();
         _transform = _entity.System<SharedTransformSystem>();
 

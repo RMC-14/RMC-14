@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
+using Content.Shared.Charges.Systems;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Network;
@@ -10,6 +11,7 @@ namespace Content.Shared._RMC14.Stun;
 
 public sealed class RMCDazedSystem : EntitySystem
 {
+    [Dependency] private readonly SharedChargesSystem _charges = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -36,7 +38,7 @@ public sealed class RMCDazedSystem : EntitySystem
             if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {
                 _actions.SetEnabled(actionId, false);
-                _actions.SetCharges(actionId, 0);
+                _charges.SetCharges(actionId, 0);
             }
         }
     }
@@ -48,7 +50,7 @@ public sealed class RMCDazedSystem : EntitySystem
             if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {
                 _actions.SetEnabled(actionId, true);
-                _actions.SetCharges(actionId, null);
+                _charges.ResetCharges(actionId);
             }
         }
 
