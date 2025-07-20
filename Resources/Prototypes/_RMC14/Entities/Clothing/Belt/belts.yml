@@ -1374,6 +1374,26 @@
       amount: 5
 
 - type: entity
+  parent: CMBeltMarine
+  id: RMCMAR40BeltFilled
+  suffix: Filled, MAR40
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCMAR50BeltFilled
+  suffix: Filled, MAR50
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineMar50LMG
+      amount: 5
+
+- type: entity
   parent: RMCBeltSmartGunOperatorPistol
   id: RMCBeltSmartGunOperatorPistolPMC
   name: WY-TM410 pattern smargunner sidearm rig
