@@ -202,6 +202,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public bool RequireXenoPlayers = true;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool QueenBoostRemoved;
+
+    [DataField]
+    public bool RecalculatedPower;
 }
