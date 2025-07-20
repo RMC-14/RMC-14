@@ -20,7 +20,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetCECResearcher
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -28,6 +27,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorScientist
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -77,3 +77,8 @@
     randomGearOther:
     -
       - [ CMSheetMetal20, RMCMaskGasSPP ]
+    -
+      - [ RMCMotionDetector ]
+      - [ RMCGrenadeCustomMetalFoam ]
+      - [ RMCGrenadeCustomWeedkiller ]
+      - [ RMCThermalTarpV2Folded ]

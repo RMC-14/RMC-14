@@ -57,3 +57,5 @@ rmc-job-prefix-weapons-specialist-anti-materiel-sniper = AMR
 
 rmc-job-name-weapons-specialist-scout = Scout Specialist
 rmc-job-prefix-weapons-specialist-scout = SCT
+
+rmc-job-name-forecon-spotter = Recon Spotter

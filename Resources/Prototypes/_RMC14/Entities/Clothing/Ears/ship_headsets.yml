@@ -1,3 +1,6 @@
+- type: Tag
+  id: RMCHeadset
+
 - type: entity
   parent: Clothing
   id: CMHeadset
@@ -26,6 +29,9 @@
       enum.RMCRadioFilterUI.Key:
         type: RMCRadioFilterBui
   - type: HeadsetMultiBroadcast
+  - type: Tag
+    tags:
+    - RMCHeadset
   - type: RMCHeadset
 
 - type: entity

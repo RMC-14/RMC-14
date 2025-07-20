@@ -34,8 +34,10 @@
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
     # TODO 3 KT-42 automag
     - CMWeaponPistolM1984: CMMagazinePistolM1984 # TODO M1911
-    # TODO S&W revolver
+    - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     # TODO desert eagle
+    # TODO S&W revolver
+    - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     # TODO CZ-81 machine pistol
 
 - type: entity
@@ -103,7 +105,7 @@
     - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
     - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
     - WeaponRifleAR10: RMCMagazineRifleAR10
-    # TODO /obj/item/weapon/gun/rifle/l42a/abr40
+    - RMCWeaponRifleABR40: RMCMagazineRifleABR40
     - RMCWeaponRifleSSG45NoLockStripped: RMCMagazineRifleSSG45
 
 - type: entity
@@ -166,7 +168,7 @@
     - RMCWeaponShotgunHG3712: RMCSpawnerRandomShotgunBoxes
     # TODO 3 R4T rifle
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
-    # TODO m3717 pump shotgun
+    - RMCWeaponShotgunM3717: RMCSpawnerRandomShotgunBoxes
 
 - type: entity
   parent: RMCSpawnerRandomGunShotgun
@@ -224,11 +226,15 @@
     - WeaponSMGMP5: CMMagazineSMGMP5
     - WeaponSMGMP5: CMMagazineSMGMP5
     - WeaponSMGMP5: CMMagazineSMGMP5
-    # TODO 4 mp27 SMG
-    # TODO 1 PPS43
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGMP27: RMCMagazineSMGMP27
+    - RMCWeaponSMGType19: RMCMagazineSMGType19
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
     - WeaponSMGMAC15: RMCMagazineSMGMAC15
-    # TODO 2 UZI
+    - RMCWeaponSMGUZI: RMCMagazineSMGUZI
+    - RMCWeaponSMGUZI: RMCMagazineSMGUZI
     - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
 
 - type: entity
