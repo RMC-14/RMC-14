@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Changes Urban Camo.
-    type: Tweak
-  id: 1555
-  time: '2025-04-05T11:07:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6080
 - author: DrSmugleaf
   changes:
   - message: Added engineer, security, doctor, and corporate survivor jobs.
@@ -4896,5 +4889,14 @@
   id: 2055
   time: '2025-07-20T23:10:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7119
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Sorokyne Doctor survivor spawning with less gear than intended.
+    type: Fix
+  - message: Fixed a bag opening sound playing when survivor spawns.
+    type: Fix
+  id: 2056
+  time: '2025-07-20T23:21:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7120
 Name: RMC14
 Order: -1
