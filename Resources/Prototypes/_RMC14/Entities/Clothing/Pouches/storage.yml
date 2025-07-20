@@ -328,24 +328,6 @@
     - id: CMShellShotgunBeanbag
       amount: 7
 
-- type: entity
-  parent: RMCPouchShotgunLarge
-  id: RMCPouchShotgunLargeBeanbag
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMShellShotgunBeanbag
-      amount: 7
-
-- type: entity
-  parent: RMCPouchShotgunLarge
-  id: RMCPouchShotgunLargeSlugs
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMShellShotgunSlugs
-      amount: 7
-
 # Large Documents Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
