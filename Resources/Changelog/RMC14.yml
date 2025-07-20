@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Spray acid now works more like spit and pierce and allows targeting past
-      max range (it clamps the spray max range)
-    type: Tweak
-  id: 1551
-  time: '2025-04-05T07:21:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6076
 - author: CyberTropic
   changes:
   - message: Added area based weather and lighting.
@@ -4894,5 +4886,13 @@
   id: 2051
   time: '2025-07-20T22:11:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7112
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed nurse and security colonist jobs causing the customization menu
+      to be unusable.
+    type: Fix
+  id: 2052
+  time: '2025-07-20T22:25:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7115
 Name: RMC14
 Order: -1
