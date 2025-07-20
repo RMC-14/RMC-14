@@ -118,6 +118,7 @@
     - state: buckshot_shell_1
   - type: Item
     size: Small
+    storedRotation: 0
   - type: CartridgeAmmo
     proto: CMPelletShotgunBuckshot
     deleteOnSpawn: true

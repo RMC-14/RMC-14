@@ -4,6 +4,9 @@
   id: WeaponShotgunM890
   description: A Weston-Yamada semi-automatic shotgun with a rapid fire rate and an attached Underslung Grenade Launcher. Holds 8 shotgun shells in the chamber.
   components:
+
+  - type: Item
+    storedRotation: 0
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
   - type: Clothing
