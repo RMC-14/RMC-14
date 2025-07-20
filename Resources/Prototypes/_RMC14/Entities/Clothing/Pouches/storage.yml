@@ -281,6 +281,16 @@
     - id: RMCMagazineSMGType64
       amount: 4
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargeMAR40
+  suffix: Filled, MAR40
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 4
+
 # Pistol Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
@@ -401,6 +411,15 @@
           tags:
           - RMCShellShotgun
           - RMCCartridge458SOCOM
+
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeBuckshot
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBeanbag
+      amount: 7
 
 - type: entity
   parent: RMCPouchShotgunLarge

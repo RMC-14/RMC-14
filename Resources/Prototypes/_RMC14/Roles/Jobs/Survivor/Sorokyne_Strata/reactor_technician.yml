@@ -23,7 +23,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetReactorTechnician
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -31,6 +30,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorEngineer
 
 - type: startingGear
   parent: RMCGearSurvivorBase

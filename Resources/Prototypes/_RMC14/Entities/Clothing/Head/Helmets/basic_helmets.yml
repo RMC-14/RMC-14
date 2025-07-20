@@ -86,7 +86,7 @@
       - Xeno
   - type: Appearance
   - type: HelmetAccessoryHolder
-
+    isHat: false
 - type: entity
   parent: RMCHelmetBase
   id: RMCMarineHelmetBase

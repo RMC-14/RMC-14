@@ -8,28 +8,28 @@
   },
   "states": [
     {
-      "name": "spacecash1"
+      "name": "spacecash"
     },
     {
-      "name": "spacecash10"
+      "name": "spacecash_10"
     },
     {
-      "name": "spacecash20"
+      "name": "spacecash_20"
     },
     {
-      "name": "spacecash50"
+      "name": "spacecash_50"
     },
     {
-      "name": "spacecash100"
+      "name": "spacecash_100"
     },
     {
-      "name": "spacecash200"
+      "name": "spacecash_200"
     },
     {
-      "name": "spacecash500"
+      "name": "spacecash_500"
     },
     {
-      "name": "spacecash1000"
+      "name": "spacecash_1000"
     }
   ]
 }
