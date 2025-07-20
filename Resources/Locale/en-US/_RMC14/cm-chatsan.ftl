@@ -59,10 +59,10 @@ cm-chatsan-word-flares = flares
 cm-chatsan-replacement-flares = glow sticks
 
 cm-chatsan-word-synth = synth
-cm-chatsan-replacement-synth = fake hosts
+cm-chatsan-replacement-synth = fake host
 
 cm-chatsan-word-synthetic = synthetic
-cm-chatsan-replacement-synthetic = fake hosts
+cm-chatsan-replacement-synthetic = fake host
 
 cm-chatsan-word-synths = synths
 cm-chatsan-replacement-synths = fake hosts
@@ -680,13 +680,11 @@ cm-chatsan-word-light-bulbs = light bulbs
 cm-chatsan-word-lightbulbs = lightbulbs
 cm-chatsan-replacement-light-bulbs = glow orbs
 
-cm-chatsan-word-case = case
 cm-chatsan-word-crate = crate
-cm-chatsan-replacement-case = containment box
+cm-chatsan-replacement-crate = containment box
 
-cm-chatsan-word-cases = cases
 cm-chatsan-word-crates = crates
-cm-chatsan-replacement-cases = containment boxes
+cm-chatsan-replacement-crates = containment boxes
 
 cm-chatsan-word-gunshot = gunshot
 cm-chatsan-replacement-gunshot = spit burst

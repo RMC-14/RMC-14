@@ -1,33 +1,22 @@
 ﻿using Content.Server.Hands.Systems;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Medal;
-using Content.Shared._RMC14.Survivor;
-using Content.Shared._RMC14.Ribbon;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.UniformAccessories;
+using Content.Shared._RMC14.Medal;
 
 namespace Content.Server._RMC14.Medal;
 
-public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
+public sealed class PlaytimeMedalSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-
-    private static readonly EntProtoId BronzeMedal = "RMCMedalBronzeService";
-    private static readonly EntProtoId SilverMedal = "RMCMedalSilverService";
-    private static readonly EntProtoId GoldMedal = "RMCMedalGoldService";
-    private static readonly EntProtoId PlatinumMedal = "RMCMedalPlatinumService";
-
-    private static readonly EntProtoId WhiteRibbon = "RMCMedalRibbonWhiteService";
-    private static readonly EntProtoId YellowRibbon = "RMCMedalRibbonYellowService";
-    private static readonly EntProtoId RedRibbon = "RMCMedalRibbonRedService";
-    private static readonly EntProtoId BlueRibbon = "RMCMedalRibbonBlueService";
 
     private TimeSpan _bronzeTime;
     private TimeSpan _silverTime;
@@ -37,6 +26,7 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
 
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _bronzeTime = TimeSpan.FromHours(v), true);
@@ -57,40 +47,31 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
             return;
         }
 
-        EntProtoId? medalId = null;
-        if (HasComp<RMCRibbonComponent>(ev.Mob))
-        {
-            if (time >= _platinumTime)
-                medalId = BlueRibbon;
-            else if (time >= _goldTime)
-                medalId = RedRibbon;
-            else if (time >= _silverTime)
-                medalId = YellowRibbon;
-            else if (time >= _bronzeTime)
-                medalId = WhiteRibbon;
-        }
-        else
-        {
-            if (time >= _platinumTime)
-                medalId = PlatinumMedal;
-            else if (time >= _goldTime)
-                medalId = GoldMedal;
-            else if (time >= _silverTime)
-                medalId = SilverMedal;
-            else if (time >= _bronzeTime)
-                medalId = BronzeMedal;
-        }
+        if (job.Medals is not { } medals)
+            return;
 
-        if (medalId == null)
+        RMCPlaytimeMedalType? medalType = null;
+
+        if (time >= _platinumTime)
+            medalType = RMCPlaytimeMedalType.Platinum;
+        else if (time >= _goldTime)
+            medalType = RMCPlaytimeMedalType.Gold;
+        else if (time >= _silverTime)
+            medalType = RMCPlaytimeMedalType.Silver;
+        else if (time >= _bronzeTime)
+            medalType = RMCPlaytimeMedalType.Bronze;
+
+        if (medalType == null)
+            return;
+
+        if (!medals.TryGetValue(medalType.Value, out var medalId))
             return;
 
         var medal = SpawnAtPosition(medalId, ev.Mob.ToCoordinates());
         _hands.TryPickupAnyHand(ev.Mob, medal, false);
 
-        EnsureComp<PlaytimeMedalUserComponent>(ev.Mob);
-
-        var medalComp = EnsureComp<PlaytimeMedalComponent>(medal);
-        medalComp.User = ev.Mob;
+        var medalComp = EnsureComp<UniformAccessoryComponent>(medal);
+        medalComp.User = GetNetEntity(ev.Mob);
         Dirty(medal, medalComp);
     }
 }

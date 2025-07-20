@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
@@ -15,7 +16,7 @@ namespace Content.Shared.Chemistry.Components
     /// </summary>
     [Serializable, NetSerializable]
     [DataDefinition]
-    public sealed partial class Solution : IEnumerable<ReagentQuantity>, ISerializationHooks
+    public sealed partial class Solution : IEnumerable<ReagentQuantity>, ISerializationHooks, IRobustCloneable<Solution>
     {
         // This is a list because it is actually faster to add and remove reagents from
         // a list than a dictionary, though contains-reagent checks are slightly slower,
@@ -101,7 +102,7 @@ namespace Content.Shared.Chemistry.Components
             foreach (var (reagent, quantity) in Contents)
             {
                 _heatCapacity += (float) quantity *
-                                    protoMan.Index<ReagentPrototype>(reagent.Prototype).SpecificHeat;
+                                    protoMan.IndexReagent<ReagentPrototype>(reagent.Prototype).SpecificHeat;
             }
 
             _heatCapacityUpdateCounter = 0;
@@ -174,6 +175,7 @@ namespace Content.Shared.Chemistry.Components
             Volume = solution.Volume;
             MaxVolume = solution.MaxVolume;
             Temperature = solution.Temperature;
+            CanReact = solution.CanReact;
             _heatCapacity = solution._heatCapacity;
             _heatCapacityDirty = solution._heatCapacityDirty;
             _heatCapacityUpdateCounter = solution._heatCapacityUpdateCounter;
@@ -827,7 +829,7 @@ namespace Content.Shared.Chemistry.Components
 
                 runningTotalQuantity += quantity;
 
-                if (!protoMan.TryIndex(reagent.Prototype, out ReagentPrototype? proto))
+                if (!protoMan.TryIndexReagent(reagent.Prototype, out ReagentPrototype? proto))
                 {
                     continue;
                 }
@@ -870,7 +872,7 @@ namespace Content.Shared.Chemistry.Components
 
                 runningTotalQuantity += quantity;
 
-                if (!protoMan.TryIndex(reagent.Prototype, out ReagentPrototype? proto))
+                if (!protoMan.TryIndexReagent(reagent.Prototype, out ReagentPrototype? proto))
                 {
                     continue;
                 }
@@ -923,7 +925,7 @@ namespace Content.Shared.Chemistry.Components
             var dict = new Dictionary<ReagentPrototype, FixedPoint2>(Contents.Count);
             foreach (var (reagent, quantity) in Contents)
             {
-                var proto = protoMan.Index<ReagentPrototype>(reagent.Prototype);
+                var proto = protoMan.IndexReagent<ReagentPrototype>(reagent.Prototype);
                 dict[proto] = quantity + dict.GetValueOrDefault(proto);
             }
             return dict;

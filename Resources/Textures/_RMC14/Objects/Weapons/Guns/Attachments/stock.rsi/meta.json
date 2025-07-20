@@ -170,6 +170,9 @@
       "name": "hg3717_stock"
     },
     {
+      "name": "M3714stock"
+    },
+    {
       "name": "db-stock"
     },
     {
@@ -234,6 +237,18 @@
     },
     {
       "name": "tactical_stock_221"
+    },
+    {
+      "name": "mp5_stock"
+    },
+    {
+      "name": "mp5_stock-on"
+    },
+    {
+      "name": "mp5_stock_a"
+    },
+    {
+      "name": "mp5_stock_a-on"
     }
   ]
 }

@@ -64,6 +64,7 @@
       state: body-overlay-2
       visible: false
     - map: [ "gloves" ]
+    - map: [ "enum.SquadArmorLayers.Gloves" ]
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "outerClothing" ]

@@ -41,6 +41,9 @@
   - type: Tag
     tags:
     - RMCExplosiveBreachingCharge
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 1
 
 - type: entity
   parent: RMCExplosiveBreachingCharge

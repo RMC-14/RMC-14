@@ -185,6 +185,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var ev = new DropshipHijackLandedEvent(map);
             RaiseLocalEvent(ref ev);
         }
+
+        ent.Comp.DepartureLocation = ent.Comp.Destination;
+        Dirty(ent);
     }
 
     private void OnFTLUpdated(Entity<DropshipComponent> ent, ref FTLUpdatedEvent args)
@@ -424,17 +427,23 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         var destinationName = string.Empty;
-        if (TryComp(grid, out DropshipComponent? dropship) &&
-            dropship.Destination is { } destinationUid)
+        var departureName = string.Empty;
+        if (TryComp(grid, out DropshipComponent? dropship))
         {
-            destinationName = Name(destinationUid);
-        }
-        else
-        {
-            Log.Error($"Found in-travel dropship {ToPrettyString(grid)} with invalid destination");
+            if (dropship.Destination is { } destinationUid)
+                destinationName = Name(destinationUid);
+            else
+            {
+                Log.Error($"Found in-travel dropship {ToPrettyString(grid)} with invalid destination");
+            }
+
+            if (dropship.DepartureLocation is { } departureUid)
+            {
+                departureName = Name(departureUid);
+            }
         }
 
-        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName);
+        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName);
         _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
     }
 

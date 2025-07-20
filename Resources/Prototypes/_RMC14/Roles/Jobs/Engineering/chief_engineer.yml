@@ -19,6 +19,7 @@
   icon: "CMJobIconChiefEngineer"
   requireAdminNotify: true
   joinNotifyCrew: false
+  marineAuthorityLevel: 9
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE
@@ -52,6 +53,7 @@
       background:
         sprite: _RMC14/Interface/map_blips.rsi
         state: background_command
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearChiefEngineer

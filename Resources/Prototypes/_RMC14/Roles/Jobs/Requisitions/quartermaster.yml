@@ -23,6 +23,7 @@
   icon: "CMJobIconQuartermaster"
   requireAdminNotify: true
   joinNotifyCrew: false
+  marineAuthorityLevel: 6
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM
@@ -51,6 +52,7 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: cargo
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearQuartermaster

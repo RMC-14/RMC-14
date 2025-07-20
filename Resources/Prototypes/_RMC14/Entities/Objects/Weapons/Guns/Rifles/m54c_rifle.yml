@@ -219,6 +219,8 @@
       color: "#1F951F"
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifleAP
+  - type: RMCLoreExaminable
+    content: Unlike standard HEAP magazines, these reserve bullets do not have depleted uranium tips. Instead, these rounds trade off some of their bullet package for a lighter weight, reducing damage but increasing penetration capabilities and muzzle velocity.
 
 - type: entity
   parent: CMMagazineRifleM54C
@@ -273,6 +275,14 @@
       color: "#9C9A19"
 #  - type: RefillableByBulletBox
 #    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: RMCMagazineRifleM54CHEAP
+  id: RMCMagazineRifleM54CHEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
 
 - type: entity
   parent: CMMagazineRifleM54C

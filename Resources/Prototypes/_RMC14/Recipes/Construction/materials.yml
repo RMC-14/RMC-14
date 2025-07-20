@@ -7,7 +7,6 @@
   targetNode: nodeBarbedWire
   category: construction-category-cm-materials
   description: Create barbed wire to decorate your barricades.
-  icon: { sprite: _RMC14/Objects/barbed_wire.rsi, state: barbed_wire }
   objectType: Item
 
 - type: construction
@@ -19,5 +18,4 @@
   startNode: start
   targetNode: SheetGlassReinforced
   category: construction-category-cm-materials
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
   objectType: Item

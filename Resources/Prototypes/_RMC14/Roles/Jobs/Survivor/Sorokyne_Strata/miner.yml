@@ -1,0 +1,68 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorSoroMiner
+  name: rmc-job-name-survivor-soro-miner
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSoroMiner
+  startingGear: RMCGearSurvivorSoroMiner
+  spawnMenuRoleName: Miner (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetSoroMiner
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorSoroMiner
+  equipment:
+    head: RMCHardhatWhiteAlt
+    jumpsuit: RMCJumpsuitSPPCiv5
+    back: CMSatchelEngineer
+    OuterClothing: RMCOuterClothingExternalWebbingBrown
+    shoes: RMCBootsSPP
+    pocket2: RMCPouchToolsFill
+    gloves: RMCHandsVeteran
+    ears: RMCHeadsetDistressSPP
+  storage:
+    back:
+    - CMSheetMetal20
+    - RMCMaskGasSPP
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSoroMiner
+  name: sorokyne miner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorSoroMiner
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetSoroMiner
+  name: sorokyne miner preset
+  categories: [ HideSpawnMenu ]

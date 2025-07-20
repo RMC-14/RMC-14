@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Chat;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
@@ -16,6 +17,7 @@ namespace Content.Client.Chat.UI
 {
     public abstract class SpeechBubble : Control
     {
+        [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IEyeManager _eyeManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] protected readonly IConfigurationManager ConfigManager = default!;
@@ -32,12 +34,12 @@ namespace Content.Client.Chat.UI
         /// <summary>
         ///     The total time a speech bubble stays on screen.
         /// </summary>
-        private const float TotalTime = 4;
+        private static readonly TimeSpan TotalTime = TimeSpan.FromSeconds(4);
 
         /// <summary>
         ///     The amount of time at the end of the bubble's life at which it starts fading.
         /// </summary>
-        private const float FadeTime = 0.25f;
+        private static readonly TimeSpan FadeTime = TimeSpan.FromSeconds(0.25f);
 
         /// <summary>
         ///     The distance in world space to offset the speech bubble from the center of the entity.
@@ -52,7 +54,10 @@ namespace Content.Client.Chat.UI
 
         private readonly EntityUid _senderEntity;
 
-        private float _timeLeft = TotalTime;
+        /// <summary>
+        /// The time at which this bubble will die.
+        /// </summary>
+        private TimeSpan _deathTime;
 
         public float VerticalOffset { get; set; }
         private float _verticalOffsetAchieved;
@@ -101,6 +106,7 @@ namespace Content.Client.Chat.UI
             bubble.Measure(Vector2Helpers.Infinity);
             ContentSize = bubble.DesiredSize;
             _verticalOffsetAchieved = -ContentSize.Y;
+            _deathTime = _timing.RealTime + TotalTime;
         }
 
         protected abstract Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor = null);
@@ -109,8 +115,8 @@ namespace Content.Client.Chat.UI
         {
             base.FrameUpdate(args);
 
-            _timeLeft -= args.DeltaSeconds;
-            if (_entityManager.Deleted(_senderEntity) || _timeLeft <= 0)
+            var timeLeft = (float)(_deathTime - _timing.RealTime).TotalSeconds;
+            if (_entityManager.Deleted(_senderEntity) || timeLeft <= 0)
             {
                 // Timer spawn to prevent concurrent modification exception.
                 Timer.Spawn(0, Die);
@@ -133,10 +139,10 @@ namespace Content.Client.Chat.UI
                 return;
             }
 
-            if (_timeLeft <= FadeTime)
+            if (timeLeft <= FadeTime.TotalSeconds)
             {
                 // Update alpha if we're fading.
-                Modulate = Color.White.WithAlpha(_timeLeft / FadeTime);
+                Modulate = Color.White.WithAlpha(timeLeft / (float)FadeTime.TotalSeconds);
             }
             else
             {
@@ -146,7 +152,7 @@ namespace Content.Client.Chat.UI
 
             var baseOffset = 0f;
 
-           if (_entityManager.TryGetComponent<SpeechComponent>(_senderEntity, out var speech))
+            if (_entityManager.TryGetComponent<SpeechComponent>(_senderEntity, out var speech))
                 baseOffset = speech.SpeechBubbleOffset;
 
             var offset = (-_eyeManager.CurrentEye.Rotation).ToWorldVec() * -(EntityVerticalOffset + baseOffset);
@@ -177,9 +183,9 @@ namespace Content.Client.Chat.UI
         /// </summary>
         public void FadeNow()
         {
-            if (_timeLeft > FadeTime)
+            if (_deathTime > _timing.RealTime)
             {
-                _timeLeft = FadeTime;
+                _deathTime = _timing.RealTime + FadeTime;
             }
         }
 
@@ -236,11 +242,23 @@ namespace Content.Client.Chat.UI
 
         protected override Control BuildBubble(ChatMessage message, string speechStyleClass, Color? fontColor = null)
         {
+            var entityManager = IoCManager.Resolve<IEntityManager>();
+            var senderUid = entityManager.GetEntity(message.SenderEntity);
+
+            if (speechStyleClass == "sayBox") //RMC14 we try to use a specific style
+            {
+                if (message.SpeechStyleClass != null)
+                    speechStyleClass = message.SpeechStyleClass;
+                else if (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid))
+                    speechStyleClass = "commanderSpeech";
+            }
+
             if (!ConfigManager.GetCVar(CCVars.ChatEnableFancyBubbles))
             {
                 var label = new RichTextLabel
                 {
-                    MaxWidth = SpeechMaxWidth
+                    MaxWidth = SpeechMaxWidth,
+                    StyleClasses = { "bubbleContent" }, //RMC14 The simplified bubble does not have any styles of its own and in order to apply styles to it we mark it in the same way as a regular bubble but it's a dummy, just a marker. damned.
                 };
 
                 label.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
@@ -271,16 +289,6 @@ namespace Content.Client.Chat.UI
             //We'll be honest. *Yes* this is hacky. Doing this in a cleaner way would require a bottom-up refactor of how saycode handles sending chat messages. -Myr
             bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor));
             bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
-
-            var entityManager = IoCManager.Resolve<IEntityManager>();
-            var senderUid = entityManager.GetEntity(message.SenderEntity);
-
-            //RMC14 If the speaker is a squad leader or a hive leader and speaks in normal speech, use the command style.
-            if (speechStyleClass == "sayBox" &&
-                (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid)))
-            {
-                speechStyleClass = "commanderSpeech";
-            }
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr
             var mainPanel = new PanelContainer
