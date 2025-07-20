@@ -361,7 +361,7 @@
 - type: entity
   parent: RMCBaseJacket
   id: RMCCoatASOBlackAlt
-  name: auxiliary support officer alternative black coat
+  name: auxiliary support officer black coat
   description: A black coat perfect for sorting papers in colder weather.
   components:
   - type: Sprite
@@ -370,6 +370,17 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black_alt.rsi
   - type: CMArmor
     melee: 10
+
+- type: entity
+  parent: RMCCoatASOBlackAlt
+  id: RMCCoatASOWhiteAlt
+  name: auxiliary support officer white coat
+  description: A white coat perfect for sorting papers in colder weather.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
 
 # Commanding Officer
 - type: entity
