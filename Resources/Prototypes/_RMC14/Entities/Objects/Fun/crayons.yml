@@ -59,7 +59,7 @@
   - type: Crayon
     capacity: 30
   - type: SolutionContainerManager
-    solutions: {}#removes upstream reagents
+    solutions: {} #removes upstream reagents
 
 #red
 - type: entity
