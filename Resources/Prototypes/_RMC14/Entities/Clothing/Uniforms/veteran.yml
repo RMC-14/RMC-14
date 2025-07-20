@@ -71,28 +71,37 @@
     foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitVeteranPMCCorporate
   id: RMCJumpsuitVeteranPMCKutjevo
-  name: We-Ya corporate security uniform
   description: An armored uniform worn by We-Ya corporate security members. This variant is more breathable for use in hot, dry environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/kutjevo.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: RMCJumpsuitVeteranPMCCorporateLead
   id: RMCJumpsuitVeteranPMCKutjevoLead
-  name: We-Ya corporate security uniform
   description: An armored uniform worn by We-Ya corporate security members. This variant is more breathable for use in hot, dry environments and has gold armbands denoting the team leader
+  suffix: Kutjevo
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/kutjevo_lead.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCCorporate
+  id: RMCJumpsuitVeteranPMCHybrisa
+  suffix: Hybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/hybrisa.rsi
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCCorporateLead
+  id: RMCJumpsuitVeteranPMCHybrisaLead
+  suffix: Hybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/hybrisa_lead.rsi
 
 - type: entity
   parent: RMCMarineUniformBase

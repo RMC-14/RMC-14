@@ -5,6 +5,7 @@ using Content.Shared.NPC.Systems;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
+using Content.Shared._RMC14.Xenonids.Parasite;
 
 namespace Content.Server.Zombies;
 
@@ -24,6 +25,7 @@ public sealed partial class RMCZombieSystem : EntitySystem
         RemComp<MarineOrdersComponent>(target);
         RemComp<ScoutWhitelistComponent>(target);
         RemComp<SniperWhitelistComponent>(target);
+        RemComp<InfectableComponent>(target);
 
         EnsureComp<NightVisionComponent>(target);
         _faction.AddFaction(target, "RMCDumb");

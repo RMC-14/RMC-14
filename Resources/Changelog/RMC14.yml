@@ -1,42 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added the SSG45 Assault Rifle for We-Ya PMCs.
-    type: Add
-  id: 1539
-  time: '2025-04-04T23:26:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6067
-- author: exincore
-  changes:
-  - message: (Already uploaded) Fixed Steelcrest Defender having 80 total frontal
-      armor when fortified instead of 60.
-    type: Fix
-  id: 1540
-  time: '2025-04-05T01:20:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6066
-- author: exincore
-  changes:
-  - message: Evacuation pumps now have sound effects.
-    type: Add
-  id: 1541
-  time: '2025-04-05T01:22:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6056
-- author: mmails
-  changes:
-  - message: SPP paygrades and final rank
-    type: Add
-  id: 1542
-  time: '2025-04-05T01:25:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5986
-- author: Djvarik
-  changes:
-  - message: XM43E1 Magazines now fit in magazine pouches and all other related storages.
-    type: Fix
-  - message: Potted plants can now only hold Tiny items.
-    type: Fix
-  id: 1543
-  time: '2025-04-05T01:26:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6062
 - author: DummeHytteOst
   changes:
   - message: Fixed hive weeds having 5 hp instead of 15.
@@ -4888,5 +4850,67 @@
   id: 2039
   time: '2025-07-20T10:35:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6290
+- author: Dygon
+  changes:
+  - message: Parasites will now collide with a door during their leap if the leap
+      didn't start underneath it.
+    type: Fix
+  - message: Parasites can't start a leap while underneath and airlock, they can still
+      start a leap while underneath a resin door.
+    type: Fix
+  - message: Thrown parasites will now collide with doors during the throw.
+    type: Fix
+  id: 2040
+  time: '2025-07-20T20:17:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7097
+- author: noctyrnal
+  changes:
+  - message: Fixed the draw depth of the 'ship security camera' console.
+    type: Fix
+  id: 2041
+  time: '2025-07-20T20:19:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7103
+- author: noctyrnal
+  changes:
+  - message: Resprites the security survivor's jumpsuit and helmet.
+    type: Tweak
+  - message: Replaces the colonist uniform with new sprites.
+    type: Tweak
+  id: 2042
+  time: '2025-07-20T20:26:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7094
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the M5A1 SLAW, which CLF specialists will appear with, aswell as
+      extremely rare planet loot.
+    type: Add
+  id: 2043
+  time: '2025-07-20T20:29:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7035
+- author: J C Denton
+  changes:
+  - message: Added Peregrine Handcannon spawns to Fiorina and Hybrisa.
+    type: Add
+  id: 2044
+  time: '2025-07-20T20:30:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7098
+- author: noctyrnal, Dutch_VanDerLinde
+  changes:
+  - message: Added Hybrisa Survivor Variants.
+    type: Add
+  id: 2045
+  time: '2025-07-20T20:32:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6984
+- author: DoguhanOzgurAkca
+  changes:
+  - message: New pinpointer for RMC.
+    type: Add
+  - message: A new version of AEGIS event run from the lobby.
+    type: Add
+  - message: Some texts related to AEGIS has been slightly changed.
+    type: Tweak
+  id: 2046
+  time: '2025-07-20T20:33:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6980
 Name: RMC14
 Order: -1
