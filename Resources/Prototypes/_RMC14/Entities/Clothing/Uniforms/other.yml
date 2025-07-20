@@ -377,21 +377,11 @@
   description: It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/security.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-left
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-right
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/security.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RMCSecurityArmband]
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
