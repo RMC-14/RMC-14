@@ -247,7 +247,7 @@
     - state: laser_cas
   - type: CMVendorBundle
     bundle:
+    - RMCBackpackRTO
     - RMCPackFlareCAS
     - RMCPackFlareCAS
     - RMCLaserDesignator
-    - RMCBackpackRTO
