@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: mmails
-  changes:
-  - message: SPP paygrades and final rank
-    type: Add
-  id: 1542
-  time: '2025-04-05T01:25:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5986
-- author: Djvarik
-  changes:
-  - message: XM43E1 Magazines now fit in magazine pouches and all other related storages.
-    type: Fix
-  - message: Potted plants can now only hold Tiny items.
-    type: Fix
-  id: 1543
-  time: '2025-04-05T01:26:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6062
 - author: DummeHytteOst
   changes:
   - message: Fixed hive weeds having 5 hp instead of 15.
@@ -4895,5 +4879,20 @@
   id: 2042
   time: '2025-07-20T20:26:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7094
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the M5A1 SLAW, which CLF specialists will appear with, aswell as
+      extremely rare planet loot.
+    type: Add
+  id: 2043
+  time: '2025-07-20T20:29:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7035
+- author: J C Denton
+  changes:
+  - message: Added Peregrine Handcannon spawns to Fiorina and Hybrisa.
+    type: Add
+  id: 2044
+  time: '2025-07-20T20:30:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7098
 Name: RMC14
 Order: -1
