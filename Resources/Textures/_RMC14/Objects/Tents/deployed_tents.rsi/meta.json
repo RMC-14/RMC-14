@@ -24,6 +24,22 @@
     },
     {
       "name": "extension_canvas"
+    },
+    {
+      "name": "cmd_standard_canvas"
+    },
+    {
+      "name": "med_standard_canvas"
+    },
+    {
+      "name": "med_standard_roof"
+    },
+    {
+      "name": "req_extension_roof"
+    }
+    ,
+    {
+      "name": "mess_extension_roof"
     }
   ]
 }

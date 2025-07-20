@@ -13,7 +13,7 @@
     anchored: true
     noRot: true
   - type: Sprite
-    sprite: _RMC14/Objects/tents.rsi
+    sprite: _RMC14/Objects/Tents/deployed_tents.rsi
     offset: 1,0
     drawdepth: OverMobs
     layers:
@@ -102,6 +102,44 @@
   parent: RMCTentBase
   id: RMCTentUNMCStandard
   suffix: For Mapping Only
+
+- type: entity
+  parent: RMCTentBase
+  id: RMCTentUNMCStandardCommand
+  suffix: For Mapping Only
+  name: USCM Command Tent
+  description: A standard USCM Command Tent. This one comes equipped with a self-powered Overwatch Console and a Telephone. Unfold in a suitable location to maximize usefulness. Staff Officer not included. ENTRANCE TO THE SOUTH.
+  components:
+  - type: Sprite
+    layers:
+    - state: standard_frame
+    - state: standard_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: standard_roof
+      map: [ "enum.ItemCamouflageLayers.Layer2", "standard_roof" ]
+    - state: cmd_standard_canvas
+
+- type: entity
+  parent: RMCTentBase
+  id: RMCTentUNMCStandardMedical
+  suffix: For Mapping Only
+  name: USCM Medical Tent
+  description: A standard USCM Medical Tent. This one comes equipped with advanced field surgery facilities. Unfold in a suitable location to maximize health gains. Surgical Tray not included. ENTRANCE TO THE SOUTH.
+  components:
+  - type: Sprite
+    layers:
+    - state: standard_frame
+    - state: standard_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: standard_roof
+      map: [ "enum.ItemCamouflageLayers.Layer2", "standard_roof" ]
+    - state: med_standard_canvas
+    - state: med_standard_roof
+      map: [ "med_standard_roof" ]
+  - type: RMCSpriteFade
+    fadeLayers:
+    - "standard_roof"
+    - "med_standard_roof"
 
 
 # Standard Extended
@@ -199,15 +237,19 @@
         - LowImpassable
         - Opaque
 
+
+
 - type: entity
   parent: BaseItem
-  id: RMCDeployTestTentBag
-  name: Тестовый мешок с тентом
-  description: Тестовый предмет для развертывания тента и двух столов.
+  id: RMCTentUNMCStandardCommandFolded
+  name: Folded USCM Command Tent
+  description: A standard USCM Command Tent. This one comes equipped with a self-powered Overwatch Console and a Telephone. Unfold in a suitable location to maximize usefulness. Staff Officer not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Sprite
-      sprite: Objects/Specific/Hydroponics/Equipment/plant_bag.rsi
-      state: icon
+      sprite: _RMC14/Objects/Tents/folded_tents.rsi
+      layers:
+        - state: base_tent
+        - state: cmd_base
     - type: RMCDeployable
       # As an example all fields are listed here even if their values match the default value
       deployTime: 10
@@ -219,7 +261,7 @@
       areaBlockedCheck: true
       failIfNotSurface: false
       deploySetups:
-        - prototype: RMCTentUNMCStandard
+        - prototype: RMCTentUNMCStandardCommand
           NeverRedeployableSetup: false
           mode: ReactiveParental
           anchor: true
@@ -261,3 +303,51 @@
           anchor: true
           offset: 0.5, -0.5
           angle: 180
+
+
+- type: entity
+  parent: BaseItem
+  id: RMCTentUNMCStandardMedicalFolded # TODO RMC14: Bonus to speed up operations and reduce pain
+  name: Folded USCM Command Tent
+  description: A standard USCM Command Tent. This one comes equipped with a self-powered Overwatch Console and a Telephone. Unfold in a suitable location to maximize usefulness. Staff Officer not included. ENTRANCE TO THE SOUTH.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Tents/folded_tents.rsi
+      layers:
+        - state: base_tent
+        - state: med_base
+    - type: RMCDeployable
+      # As an example all fields are listed here even if their values match the default value
+      deployTime: 10
+      collapseTime: 10
+      deployArea:
+        !type:PhysShapeAabb
+        bounds: "-0.4,0.6,1.4,4.4" # The non-perfect rectangle allows the tent to be placed close to the walls
+      collapseToolPrototype: CMEntrenchingTool
+      areaBlockedCheck: true
+      failIfNotSurface: false
+      deploySetups:
+        - prototype: RMCTentUNMCStandardMedical
+          NeverRedeployableSetup: false
+          mode: ReactiveParental
+          anchor: true
+          offset: 0.2, 0
+          angle: 0
+        - prototype: ColMarTechMarineMedical
+          NeverRedeployableSetup: false
+          mode: Reactive
+          anchor: true
+          offset: -0.5, 0.5
+          angle: 0
+        - prototype: CMIV
+          NeverRedeployableSetup: true
+          mode: Default
+          anchor: false
+          offset: 0.5, 0.5
+          angle: 0
+        - prototype: CMRollerBed
+          NeverRedeployableSetup: true
+          mode: Default
+          anchor: false
+          offset: 0.5, -0.5
+          angle: 0

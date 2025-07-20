@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Made by Ramiris",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base_tent"
+    },
+    {
+      "name": "big_tent"
+    },
+    {
+      "name": "cmd_base"
+    },
+    {
+      "name": "med_base"
+    },
+    {
+      "name": "mess_big"
+    },
+    {
+      "name": "req_big"
+    }
+  ]
+}
