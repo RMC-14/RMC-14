@@ -218,6 +218,16 @@
 
 - type: entity
   parent: CMBeltMarine
+  id: RMCBeltMarineUZI
+  suffix: Filled, UZI
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGUZI
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
   id: CMBeltMarineMP5
   suffix: Filled, MP5
   components:
@@ -347,3 +357,14 @@
       amount: 2
     - id: WeaponNailgun
       amount: 1
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolHandcannonFilled
+  suffix: Filled, Handcannon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 6
+    - id: RMCWeaponPistolHandcannon

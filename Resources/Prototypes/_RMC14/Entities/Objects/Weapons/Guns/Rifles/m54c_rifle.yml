@@ -277,6 +277,14 @@
 #    bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
+  parent: RMCMagazineRifleM54CHEAP
+  id: RMCMagazineRifleM54CHEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: CMMagazineRifleM54C
   id: CMMagazineRifleM54CExt
   name: "M54C extended magazine (10x24mm)"
