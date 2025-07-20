@@ -1,4 +1,4 @@
-# Bureau Marshal
+# CMB Marshal
 - type: job
   parent: CMJobBase
   id: CMBureauMarshal
@@ -83,7 +83,7 @@
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     belt: CMBeltSecurityMarshalFilled
     shoes: RMCBootsPMCFilled
-    id: RMCIDCardMarshal
+    id: RMCIDCardCMBMarshal
     pocket1: RMCPouchFirstAidERTFill
     pocket2: RMCPouchShotgunLargeBuckshot
     suitstorage: RMCWeaponShotgunM3717
