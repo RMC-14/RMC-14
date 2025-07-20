@@ -434,29 +434,11 @@
         - ReagentId: IceCream
           Quantity: 30
   - type: SolutionTransfer
-    transferAmount: 30
-    maxTransferAmount: 30
-    canChangeTransferAmount: true
+    transferAmount: 5
+    maxTransferAmount: 5
+    canChangeTransferAmount: false
     transferAmounts:
     - 5
-    - 10
-    - 15
-    - 25
-    - 30
-  - type: Damageable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:SpillBehavior { }
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: RMCFlask
 
 - type: entity
@@ -823,8 +805,8 @@
   - type: PatronFigurine
     id: d6a58381-b2a8-4caf-a22a-fd76ca53b1ae
   - type: EmitSoundOnUse
-    sound: #FelinidMeows
-      path: /Audio/_RMC14/Voice/Felinid/cat_meow1.ogg
+    sound:
+      collection: FelinidMeows
       params:
         volume: 5
         maxDistance: 1
@@ -1625,3 +1607,49 @@
     state: yeo_sakura_bunnia
   - type: PatronFigurine
     id: 0fd18026-6b96-438d-b812-1c0434b32331
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSoft-pawsLiona
+  name: Soft-paws Liona figurine
+  description: "Huh, seems like this squirrel action figure comes with its own miniature sentry gun as well."
+  components:
+  - type: Sprite
+    state: soft-paws_liona
+  - type: PatronFigurine
+    id: e216a101-4951-462a-98c4-2b7de17585cb
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/mouse_squeak.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronValerieHawkins
+  name: Valerie Hawkins figurine
+  description: "\"I am just here to relay orders from the shark.\""
+  components:
+  - type: Sprite
+    state: valerie_hawkins
+  - type: PatronFigurine
+    id: bb15fc57-32ca-40f6-aef6-b9bba1a3c69f
+  - type: Drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: CMSodaBobdaGrape
+          Quantity: 30
+  - type: SolutionTransfer
+    transferAmount: 5
+    maxTransferAmount: 5
+    canChangeTransferAmount: false
+    transferAmounts:
+    - 5
+  - type: RMCFlask
+ 

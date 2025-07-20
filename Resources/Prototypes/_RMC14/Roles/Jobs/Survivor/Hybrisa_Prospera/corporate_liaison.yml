@@ -1,0 +1,79 @@
+﻿- type: job
+  parent: CMSurvivorCorporate
+  id: RMCSurvivorHybrisaCorporateLiaison
+  name: cm-job-name-liaison
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorHybrisaCorporateLiaison
+  spawnMenuRoleName: Corporate Liaison (Hybrisa Survivor)
+  startingGear: RMCGearSurvivorHybrisaCorporateLiaison
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaCorporateLiaison
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorHybrisaCorporateLiaison
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    id: CMIDCardLiaisonColony
+    pocket2: RMCPouchDocument
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaCorporateLiaison
+  name: hybrisa corporate liaison survivor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorHybrisaCorporateLiaison
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: RMCJobSurvivorHybrisaCorporateLiaison
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCorporate
+  id: RMCSurvivorPresetHybrisaCorporateLiaison
+  name: hybrisa corporate liaison preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCJumpsuitLiaisonExpensiveSuit, RMCSunglassesBig ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrown, RMCSunglassesBig ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacket ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrownJacket ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacketOnly, RMCSunglasses ]
+    randomGearOther:
+    -
+      - [ CMSheetMetal20, RMCSpaceCash1000, CMPenClicky, CMClipboard ]
+    randomStartingGear:
+      back:
+      - CMSatchel # todo secure satchel
+      - RMCSatchelBlack
+      shoes:
+      - RMCShoesLaceup
+      - RMCShoesLaceupBrown
+      - RMCBootsCorporate
+      outerClothing:
+      - RMCCoatExpensiveFur
+      - RMCCoatExpensiveFurAlt

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCPlanetLV624
   name: LV-624
   components:
@@ -11,6 +11,23 @@
       scenarioProbability: 0.1
     - scenarioName: asset_protection
       scenarioProbability: 0.1
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivor: -1
+      - CMSurvivorPriest: 1
+      CMSurvivorCorporate:
+      - CMSurvivorLV624CorporateLiaison: 2
+      CMSurvivorDoctor:
+      - CMSurvivorLV624MedicalTechnician: 3
+      CMSurvivorEngineer:
+      - CMSurvivorLV624Engineer: 2
+      - CMSurvivorLV624CargoTechnician: 2
+      CMSurvivorSecurity:
+      - CMSurvivorGoon: 2
+      - CMSurvivorCMBDeputy: 2
+      - CMSurvivorLV624SecurityGuard: 2
+      CMSurvivorScientist:
+      - CMSurvivorLV624Archeologist: 2
 
 - type: entity
   id: RMCPlanetSolaris
@@ -141,6 +158,33 @@
     camouflage: Urban
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     minPlayers: 130
+    survivorJobInserts:
+      CMSurvivor:
+      - RMCSurvivorHybrisaCivilian: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
+      - RMCSurvivorHybrisaGrindBarista: 1
+      - RMCSurvivorHybrisaMaterialReprocessingTechnician: 1
+      - RMCSurvivorHybrisaOfficeWorker: 1
+      - RMCSurvivorHybrisaPizzaGalaxy: 1
+      - RMCSurvivorHybrisaWeyamartEmployee: 1
+      - RMCSurvivorHybrisaFireProtectionSpecialist: 1
+      CMSurvivorCorporate:
+      - RMCSurvivorHybrisaCorporateLiaison: 2
+      - RMCSurvivorHybrisaCommercialPilot: 2
+      CMSurvivorDoctor:
+      - RMCSurvivorHybrisaMedicalDoctor: 3
+      - RMCSurvivorHybrisaEMTParamedic: 3
+      CMSurvivorEngineer:
+      - RMCSurvivorHybrisaConstructionWorker: 2
+      - RMCSurvivorHybrisaEngineer: 2
+      - RMCSurvivorHybrisaHeavyVehicleOperator: 2
+      CMSurvivorSecurity:
+      - RMCSurvivorHybrisaCorporateSecurity: 2
+      - RMCSurvivorHybrisaTSEPAConstable: 2
+      CMSurvivorScientist:
+      - RMCSurvivorHybrisaXenoarchaeologist: 2
+      - RMCSurvivorHybrisaXenobiologist: 2
+
 
 - type: entity
   id: RMCPlanetSorokyne

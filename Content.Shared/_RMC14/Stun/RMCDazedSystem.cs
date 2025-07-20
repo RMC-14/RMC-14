@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
+using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
@@ -38,7 +39,9 @@ public sealed class RMCDazedSystem : EntitySystem
             if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {
                 _actions.SetEnabled(actionId, false);
-                _charges.SetCharges(actionId, 0);
+
+                if (HasComp<LimitedChargesComponent>(actionId))
+                    _charges.SetCharges(actionId, 0);
             }
         }
     }

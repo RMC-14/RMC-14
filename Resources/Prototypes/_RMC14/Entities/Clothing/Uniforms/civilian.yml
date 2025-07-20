@@ -1,0 +1,39 @@
+- type: entity
+  parent: RMCUniformBase
+  id: RMCJumpsuitDispatcherUniform
+  name: dispatchers uniform
+  description: A blue dress shirt and khakis with a small red security patch sewn on.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/dispatcher_uniform.rsi
+  - type: Appearance
+
+#workwears
+- type: entity
+  parent: [RMCUniformBase, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitBlueWorkwear
+  name: blue workwear
+  description: A pair of brown canvas workpants paired with a dark blue workshirt. A common pairing among blue-collar workers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_workwear.rsi
+  - type: Appearance
+
+- type: entity
+  parent: RMCJumpsuitBlueWorkwear
+  id: RMCJumpsuitKhakiWorkwear
+  name: khaki workwear
+  description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/khaki_workwear.rsi
+
+# jacketless workwears for certain survs
+- type: entity
+  parent: RMCJumpsuitKhakiWorkwear
+  id: RMCJumpsuitKhakiWorkwearJacketless
+  components:
+  - type: RMCClothingFoldable
+    activatedPrefix: jacket
+  - type: Clothing
+    equippedPrefix: jacket
