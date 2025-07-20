@@ -23,6 +23,12 @@
     user:
       components:
       - RMCAllowSuitStorage
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
 
 - type: entity
   abstract: True
@@ -361,7 +367,7 @@
 - type: entity
   parent: RMCBaseJacket
   id: RMCCoatASOBlackAlt
-  name: auxiliary support officer alternative black coat
+  name: auxiliary support officer black coat
   description: A black coat perfect for sorting papers in colder weather.
   components:
   - type: Sprite
@@ -370,6 +376,17 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black_alt.rsi
   - type: CMArmor
     melee: 10
+
+- type: entity
+  parent: RMCCoatASOBlackAlt
+  id: RMCCoatASOWhiteAlt
+  name: auxiliary support officer white coat
+  description: A white coat perfect for sorting papers in colder weather.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
 
 # Commanding Officer
 - type: entity
@@ -650,6 +667,19 @@
     melee: 10
   - type: Appearance
 
+# Normal utility vest
+- type: entity
+  parent: RMCBaseJacket
+  id: CMUtilityVest
+  name: utility vest
+  description: A leather utility vest, often used to hold tools.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Appearance
+
 - type: entity
   parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
   id: RMCJacketWindbreaker
@@ -657,7 +687,7 @@
   description: A green windbreaker.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker.rsi
     layers:
     - state: icon
       map: [ "unfoldedLayer" ]
@@ -671,10 +701,22 @@
     unfoldVerbText: rmc-button-up-verb
     foldVerbText: rmc-unbutton-verb
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerFirstResponder
+  name: first responder windbreaker
+  description: A brown windbreaker with reflective strips commonly worn by first responders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
+
 
 # priest robes
 - type: entity

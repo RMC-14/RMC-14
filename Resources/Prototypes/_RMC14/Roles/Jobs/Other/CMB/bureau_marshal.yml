@@ -79,7 +79,7 @@
     ears: RMCHeadsetDistressBureau
     back: CMSatchelSecurity
     gloves: RMCHandsVeteran
-    jumpsuit: RMCJumpsuitMarshal
+    jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
     belt: CMBeltSecurityMarshalFilled
     shoes: RMCBootsPMCFilled
