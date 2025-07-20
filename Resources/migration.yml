@@ -1336,6 +1336,9 @@ FoamedIronMetal: RMCFoamedIronMetal
 FoamedAluminiumMetal: RMCFoamedAluminiumMetal
 TimerTrigger: RMCTimerTrigger
 
+# 2025-07-19
+FlippoEngravedLighter: RMCZippoGold
+
 # 2025-07-17
 RMCIDCardDeputy: RMCIDCardCMBDeputy
 RMCIDCardMarshal: RMCIDCardCMBMarshal
