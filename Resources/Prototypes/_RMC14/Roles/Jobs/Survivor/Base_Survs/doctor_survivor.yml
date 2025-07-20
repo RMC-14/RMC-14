@@ -1,12 +1,12 @@
 - type: job
   parent: CMSurvivor
-  id: CMSurvivorScientist
-  name: cm-job-name-survivor-scientist
+  id: CMSurvivorDoctor
+  name: cm-job-name-survivor-doctor
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorScientist
+  playTimeTracker: CMJobSurvivorDoctor
   ranks:
     RMCRankCivilianDoctor: []
-  startingGear: RMCGearSurvivorScientist
+  startingGear: RMCGearSurvivorDoctor
   accessGroups:
   - ColonistMedical
   special:
@@ -20,9 +20,8 @@
         RMCSkillFirearms: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
-        RMCSkillResearch: 1
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetScientist
+      preset: RMCSurvivorPresetDoctor
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -30,66 +29,71 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorScientist # for inheritance
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorBase
-  id: RMCGearSurvivorScientist
+  id: RMCGearSurvivorDoctor
   equipment:
-    eyes: RMCGlassesReagentHUDGlasses
-    gloves: CMHandsLatex
-    jumpsuit: RMCJumpsuitCivilianVirologist
-    outerClothing: RMCLabcoatVirology
-    shoes: RMCShoesGreen
-    back: RMCSatchelVirologyFill
-    id: RMCIDCardColonistScientist
-    pocket2: RMCPouchMedicalFill
     mask: CMMaskSterile
+    ears: CMHeadsetColony
+    jumpsuit: CMJumpsuitLiaisonBlue
+    outerClothing: RMCLabcoat
+    gloves: CMHandsLatex
+    shoes: RMCShoesLaceup
+    back: CMSatchelMedical
+    id: CMIDCardColonistDoctor
+    pocket1: RMCPouchSurvivalFill
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorScientist
-  name: survivor scientist spawn point
+  id: RMCSpawnPointSurvivorDoctor
+  name: survivor doctor spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorScientist
+    job_id: CMSurvivor
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorScientist
+  id: CMJobSurvivorDoctor
   isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian
-  id: RMCSurvivorPresetScientist
-  name: scientist colonist preset # TODO RMC14 random research notes and vial
+  id: RMCSurvivorPresetDoctor
+  name: doctor colonist preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomGearOther:
     -
-      - [ RMCMotionDetector ]
-      - [ RMCGrenadeCustomMetalFoam ]
-      - [ RMCGrenadeCustomWeedkiller ]
-      - [ RMCThermalTarpV2Folded ]
+      - [ RMCPouchFirstAidSplintsGauzeOintment ]
+      - [ RMCPouchMedicalFill ]
+      - [ RMCPouchFirstAidInjectors ]
+      - [ RMCPouchFirstResponderFill ]
+      - [ RMCPouchMedkitFillAdvanced ]
+    -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
 
 - type: entity
   parent: MarkerBase
-  id: RMCRandomHumanoidSurvivorScientist
-  name: scientist colonist ghost role
+  id: RMCRandomHumanoidSurvivorDoctor
+  name: doctor colonist ghost role
   components:
   - type: Sprite
     layers:
     - state: red
   - type: RandomHumanoidSpawner
-    settings: RMCSurvivorScientist
+    settings: RMCSurvivorDoctor
 
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole
-  id: RMCSurvivorScientist
+  id: RMCSurvivorDoctor
   components:
   - type: RMCJobSpawner
-    job: CMSurvivorScientist
+    job: CMSurvivorDoctor
