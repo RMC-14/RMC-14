@@ -1,0 +1,71 @@
+# Base surv as its used by multiple maps, but some maps have minor differences. + parity.
+# Base marshal, this file, should be used on LV624, Trijent, and Solaris.
+
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorCMBDeputy
+  name: rmc-job-name-survivor-cmb-deputy
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorCMBDeputy
+  ranks:
+    RMCRankCMBDeputy: []
+  startingGear: RMCGearSurvivorCMBDeputy
+  spawnMenuRoleName: CMB Deputy (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCMBDeputy
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorCMBDeputy
+  equipment:
+    head: RMCHeadCapBureau
+    id: RMCIDCardDeputySurvivor
+    jumpsuit: RMCMarshalCMBUniform
+    outerClothing: RMCCoatBureauDeputy
+    ears: RMCHeadsetDistressBureau
+    pocket2: RMCPouchMagazineLarge
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCMBDeputy
+  name: survivor cmb deputy spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorCMBDeputy
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetCMBDeputy
+  name: cmb deputy colonist preset

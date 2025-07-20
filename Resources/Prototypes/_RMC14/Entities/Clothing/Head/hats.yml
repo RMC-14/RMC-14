@@ -145,6 +145,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_green.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretASO
+  name: ASO beret
+  description: A black beret worn by Auxiliary Support Officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/beret_aso.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/beret_aso.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase
@@ -328,6 +339,25 @@
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
 
 - type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapASO
+  name: UNMC ASO cap
+  description: A hat usually worn by ASOs in the UNMC. Provides no protection, but makes you look better when sorting papers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_aso.rsi
+
+- type: entity
   parent: CMHeadCap
   id: CMHeadCapPeakedFormal
   name: marine peaked cap
@@ -348,6 +378,17 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapPeakedASO
+  name: ASO peaked cap
+  description: A peaked cap. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_peaked_aso.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/cap_peaked_aso.rsi
 
 - type: entity
   parent: CMHeadCap
@@ -389,6 +430,44 @@
       Snow: _RMC14/Objects/Clothing/Head/Hats/flapcap/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Hats/flapcap/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Hats/flapcap/urban.rsi
+
+# soft caps
+
+- type: entity
+  parent: CMHeadCapMP
+  id: RMCHeadBlueSoftCap
+  name: blue cap
+  description: It's a baseball hat in a tasteless blue color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/blue_cap.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/blue_cap.rsi
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+
+- type: entity
+  parent: RMCHeadBlueSoftCap
+  id: RMCHeadYellowSoftCap
+  name: yellow cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/yellow_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/yellow_cap.rsi
 
 # surgical caps
 - type: entity
