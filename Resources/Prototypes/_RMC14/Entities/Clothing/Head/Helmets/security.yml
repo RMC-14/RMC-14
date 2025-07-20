@@ -40,3 +40,6 @@
     sprite: Clothing/Head/Helmets/security.rsi
   - type: Clothing
     sprite: Clothing/Head/Helmets/security.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 15
