@@ -10,7 +10,6 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Misc/boots_magazine.rsi
-    state: icon-1
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -117,7 +116,6 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Misc/boots_magazine.rsi
-    state: icon-2
   - type: RMCLoreExaminable
     content: "Half of this issue is taken up by rumors of a Senior Executive misfiling his Quarterly Profit Report for Danton's Perch with the PMC Dispatch Division. After it is a debate article between two Executives from Special Services, regarding the creation of a colony in the Mu Arae system. The debate is centered around the location of the colony: one Executive thinks the colony should be a sub-orbital gas harvester around a gas giant, while the other thinks it should be located on the gas giant's verdant moon. Halfway through the debate, both Executives appear to lose their composure, and start slinging insults. The rest of the article appears to be heavily censored after that point."
 
@@ -151,4 +149,3 @@
   - type: Item
     size: Small
     sprite: _RMC14/Structures/Wallmounts/posters.rsi
-    state: miss_april

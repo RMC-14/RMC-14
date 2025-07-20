@@ -382,7 +382,6 @@
           False: {state: icon}
   - type: Item
     sprite: _RMC14/Objects/Consumable/Drinks/beer_pack.rsi
-    state: icon
   - type: Tag
     tags:
      - SequoiaBeer
