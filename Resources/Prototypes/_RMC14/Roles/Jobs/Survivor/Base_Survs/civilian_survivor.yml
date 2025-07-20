@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: RMCJobRibbonBase
   id: CMSurvivor
   name: cm-job-name-survivor

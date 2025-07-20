@@ -1,0 +1,60 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorLV624MedicalTechnician
+  name: rmc-job-name-survivor-lv624-medical-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorLV624MedicalTechnician
+  startingGear: RMCGearSurvivorLV624MedicalTechnician
+  spawnMenuRoleName: Medical Technician (LV624 Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetLV624MedicalTechnician
+
+- type: startingGear
+  parent: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorLV624MedicalTechnician
+  equipment:
+    head: RMCHeadBlueSoftCap
+    jumpsuit: RMCJumpsuitBlueWorkwear
+    outerClothing: RMCJacketWindbreakerFirstResponder
+    eyes: RMCGlassesMedicalHUDGlasses
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624MedicalTechnician
+  name: survivor lv624 medical technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorLV624MedicalTechnician
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetDoctor
+  id: RMCGearSurvivorPresetLV624MedicalTechnician
+  name: lv624 medical technician colonist preset

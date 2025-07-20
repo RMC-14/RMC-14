@@ -199,7 +199,7 @@
 - type: startingGear
   id: RMCGearCorpseDeputy
   equipment:
-    jumpsuit: RMCJumpsuitMarshal
+    jumpsuit: RMCMarshalCMBUniform
     back: CMSatchelSecurity
     outerClothing: RMCCoatBureauDeputy
     shoes: CMBootsBlackFilled
