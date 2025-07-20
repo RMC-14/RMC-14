@@ -4894,5 +4894,23 @@
   id: 2044
   time: '2025-07-20T20:30:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7098
+- author: noctyrnal, Dutch_VanDerLinde
+  changes:
+  - message: Added Hybrisa Survivor Variants.
+    type: Add
+  id: 2045
+  time: '2025-07-20T20:32:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6984
+- author: DoguhanOzgurAkca
+  changes:
+  - message: New pinpointer for RMC.
+    type: Add
+  - message: A new version of AEGIS event run from the lobby.
+    type: Add
+  - message: Some texts related to AEGIS has been slightly changed.
+    type: Tweak
+  id: 2046
+  time: '2025-07-20T20:33:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6980
 Name: RMC14
 Order: -1
