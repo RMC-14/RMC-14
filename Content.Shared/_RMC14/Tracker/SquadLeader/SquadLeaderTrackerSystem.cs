@@ -294,7 +294,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         var netMember = GetNetEntity(marineId.Value);
         var job = _originalRoleQuery.CompOrNull(marineId.Value)?.Job;
-        var marine = new SquadLeaderTrackerMarine(netMember, job, Name(marineId.Value));
+        var marine = new SquadLeaderTrackerMarine(netMember, job, _rank.GetSpeakerRankName(marineId.Value) ?? Name(marineId.Value));
         ref var fireteam = ref ent.Comp.Fireteams.Fireteams[member.Fireteam];
         fireteam ??= new SquadLeaderTrackerFireteam();
 
@@ -400,7 +400,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     {
         var netMember = GetNetEntity(member);
         var job = _originalRoleQuery.CompOrNull(member)?.Job;
-        var marine = new SquadLeaderTrackerMarine(netMember, job, Name(member));
+        var marine = new SquadLeaderTrackerMarine(netMember, job, _rank.GetSpeakerRankName(member) ?? Name(member));
         if (_fireteamMemberQuery.TryComp(member, out var fireteamMember) &&
             fireteamMember.Fireteam >= 0 &&
             fireteamMember.Fireteam < fireteamData.Fireteams.Length)

@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMWeaponPistolBase
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolHoldout
   name: holdout pistol
   description: A tiny pistol meant for hiding in hard-to-reach areas. Best not ask where it came from.

@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Medal;
 using Content.Shared._RMC14.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -45,6 +46,9 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
 
     [DataField]
+    public readonly Dictionary<RMCPlaytimeMedalType, EntProtoId>? Medals;
+
+    [DataField]
     public float RoleWeight;
 
     [DataField]
@@ -65,4 +69,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// </summary>
     [DataField]
     public int MarineAuthorityLevel { get; private set; } = 0;
+
+    [DataField]
+    public ProtoId<JobPrototype>? UseLoadoutOfJob;
 }
