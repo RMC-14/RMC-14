@@ -2,7 +2,7 @@
   parent: RMCPrefilledSyringe
   id: RMCSyringeInaprovaline
   description: Contains inaprovaline - used to stabilize patients.
-  suffix: Inaprovaline RMC14
+  suffix: Inaprovaline, RMC14
   components:
   - type: Label
     currentLabel: reagent-name-cminaprovaline
@@ -18,7 +18,7 @@
   parent: RMCPrefilledSyringe
   id: RMCSyringeDylovene
   description: Contains anti-toxins.
-  suffix: Dylovene RMC14
+  suffix: Dylovene, RMC14
   components:
   - type: Label
     currentLabel: reagent-name-cmdylovene
@@ -34,7 +34,7 @@
   parent: RMCPrefilledSyringe
   id: RMCSyringeDrugs
   description: Contains aggressive drugs meant for torture.
-  suffix: Drugs? RMC14
+  suffix: Drugs, RMC14
   components:
   - type: Label
     currentLabel: drugs
