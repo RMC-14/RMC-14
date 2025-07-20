@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMWeaponPistolBase
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolHandcannon
   name: peregrine handcannon
   description: The handcannon that needs no introduction, the Peregrine Handcannon is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks.
@@ -69,6 +69,10 @@
       rmc-aslot-barrel: 0.75, 0.070
       rmc-aslot-rail: 0.090, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannon
 
 - type: entity
   parent: RMCWeaponPistolHandcannon
@@ -110,6 +114,10 @@
           - RMCMagazinePistolHandcannonHI
           - RMCMagazinePistolHandcannonHIAP
         startingItem: RMCMagazinePistolHandcannonHI
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonGold
 
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
@@ -121,6 +129,10 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonWyvern
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -284,6 +296,15 @@
     stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 70
+
+- type: Tag
+  id: RMCWeaponPistolHandcannon
+
+- type: Tag
+  id: RMCWeaponPistolHandcannonGold
+
+- type: Tag
+  id: RMCWeaponPistolHandcannonWyvern
 
 - type: Tag
   id: RMCMagazinePistolHandcannon
