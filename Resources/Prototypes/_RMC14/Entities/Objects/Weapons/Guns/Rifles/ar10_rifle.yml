@@ -106,6 +106,8 @@
       rmc-aslot-barrel: 0.75, 0.00
       rmc-aslot-rail: -0.23, 0.091
       rmc-aslot-underbarrel: 0.35, -0.3
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-ar10-assault-rifle
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -131,8 +133,6 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
-  - type: RMCLoreExaminable
-    content: The AR10 was initially manufactured by the Armalite corporation (bought by Weston-Yamada in 2002) in the 1950s. It was the first production rifle to incorporate many new and innovative features, such as a gas operated bolt and carrier system. Only 10,000 were ever produced, and the only national entities to use them were Portugal and Sudan. Since the end of the 20th century, these rifles - alongside the far more common M16 and AR15 - have floated around the less civillised areas of space, littering jungles and colony floors with their uncommon cased ammunition - a rarity since the introduction of pulse munitions. This rifle has the word \"Salazar\" engraved on its side.
 
 - type: entity
   parent: CMBaseCartridgeRifle
