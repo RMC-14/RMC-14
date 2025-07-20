@@ -5,14 +5,14 @@
   description: The M5A1 SLAW is a lightweight one-shot anti-armor weapon capable of engaging enemy vehicles at ranges up to 1,000m. Fully disposable, the rocket's launcher is discarded after firing. When stowed, the SADAR system consists of a watertight carbon-fiber composite blast tube, inside of which is an aluminum launch tube containing the missile. The weapon is fired by pushing a charge button on the trigger grip. It is sighted and fired from the shoulder.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m8_datl.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
     layers:
       - state: icon
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m8_datl.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
   - type: Item
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m8_datl.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
   - type: BallisticAmmoProvider
     proto: RMCRocket84mmAntiArmor
     cycleable: false
@@ -36,16 +36,16 @@
   suffix: Folded
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m8_datl.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
     state: icon-folded
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m8_datl.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
     equippedPrefix: folded
     quickEquip: false
     slots:
     - suitStorage
   - type: Item
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m8_datl.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
     heldPrefix: folded
     size: Normal
   - type: RMCFoldableGun
