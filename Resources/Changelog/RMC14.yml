@@ -1,183 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added setting your character's pose. This can be updated in-round with
-      a right-click menu verb, useful for giving your character time-specific flavor
-      text.
-    type: Add
-  id: 1521
-  time: '2025-03-29T08:50:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4682
-- author: DrSmugleaf
-  changes:
-  - message: Added the LAU-444 guided missile launcher, a dropship weapon that launches
-      single-use rockets. This includes the Keeper, Widowmaker and Napalm rockets.
-    type: Add
-  - message: Added the LWU-6B laser cannon, a dropship weapon that sets file to 16
-      tiles in a 7x7 radius of where it shoots. This fire has a very short duration,
-      but a very strong intensity.
-    type: Add
-  - message: Added the fuel enhancer and cooling system, which reduce dropship travel
-      time by 25% and increases flyby time by 25%, and reduces and refuel time by
-      50%, respectively.
-    type: Add
-  - message: Added buildable televisions with a television circuit board. These televisions
-      let you see a live view of the correspondent's camera. These can be gotten from
-      the circuit board vendor located in first floor engineering.
-    type: Add
-  - message: Ported marines quickly dying when pulled while in crit by a xeno. This
-      deals around 20 damage per tile dragged, and instantly kills them if a xeno
-      attempts to devour them while in crit.
-    type: Add
-  - message: Added a dedicated ziptie box slot to Squad Leader B12 and M4 armor. The
-      ziptie box that they start with has been moved into it.
-    type: Add
-  - message: Added 25x HEFA and 25x AGM-I purchasable crates in Requisitions for 10000
-      dollars.
-    type: Add
-  - message: Added plantable UN and UNMC flags that can be carried into battle. They
-      are located in the top and bottom CIC armories.
-    type: Add
-  - message: Added interact with other hand keybind (default C). Held guns now also
-      eject their magazine when clicked with a free hand, instead of being moved to
-      the other hand.
-    type: Add
-  - message: Added Requisitions line sign.
-    type: Add
-  - message: Added a lot more items to the mess technician vendors, including garlic
-      seeds, onion seeds, onions, garlic, rice, twice the meat, twice the milk, mugs,
-      and kitchen tools.
-    type: Add
-  - message: Added Colten 'Ripcord' Bailey figurine.
-    type: Add
-  - message: Added Spike Light-Foot Fluff-Usta figurine.
-    type: Add
-  - message: Fixed Riflemen not starting with Endurance 1 and not being able to use
-      some pamphlets with others.
-    type: Fix
-  - message: Fixed the loader pamphlet not increasing endurance to a max of 2.
-    type: Fix
-  - message: Fixed some cases of sitting on a chair making the player be drawn under
-      some objects.
-    type: Fix
-  - message: Fixed xeno health regen being too fast and recovery not having enough
-      of an impact on it, for a total reduction of 25% to 50% overall.
-    type: Fix
-  - message: Fixed flechette spread being 2.5x higher than intended, buckshot spread
-      being 1.33x higher than intended, breaching spread being 2x higher than intended,
-      and incendiary buckshot spread being 1.33x higher than intended.
-    type: Fix
-  - message: Fixed MOU53 firerate being half the intended amount.
-    type: Fix
-  - message: Fixed vials not changing sprite between 15 and 20 units.
-    type: Fix
-  - message: Fixed OB fuel being covered up by racks.
-    type: Fix
-  - message: Fixed some crates not droppping 2 wooden planks when crowbared.
-    type: Fix
-  - message: Fixed gun cases not being able to be unfolded into 1 plastic.
-    type: Fix
-  - message: Fixed mortar backpacks having 6 slots instead of 12, and mortar belts
-      having 5 slots instead of 9.
-    type: Fix
-  - message: Fixed restart vote failed message showing for everyone on the server
-      instead of just the one that tried to start it.
-    type: Fix
-  - message: Fixed sprite offset items looking offset in your hand and inventory.
-    type: Fix
-  - message: Fixed tactical map canvas update cooldown not updating when the window
-      is popped out. Popping it out also temporarily hides the canvas color setting,
-      as using it while popped out crashes your game.
-    type: Fix
-  - message: Fixed not being able to craft wooden floors with wooden planks.
-    type: Fix
-  - message: Fixed HEDP and AGM-F 25x nades not coming inside a carriable box in Requisitions.
-    type: Fix
-  - message: Fixed the tool storage machine not having light replacers and having
-      incorrect amounts of other tools.
-    type: Fix
-  - message: Fixed Kutjevo having a lizard plushie that grinds into weh juice.
-    type: Fix
-  - message: Fixed larva and parasites not being stunned on dropships that take off
-      and not being buckleable to roller beds when dead.
-    type: Fix
-  - message: Fixed crowbars prying tiles not being instant.
-    type: Fix
-  - message: Fixed metal floor tiles, table parts, rack parts, and metal rods not
-      being able to be inserted into an autolathe to recycle them into metal.
-    type: Fix
-  - message: Fixed piloting skill 2 (Dropship/Gunship pilots and ASO) not reducing
-      dropship refuel time by 25% (120s > 90s).
-    type: Fix
-  - message: Fixed lathes not using the item's size for how long it takes to print.
-      It now takes 2 seconds for tiny and small items, 3 for medium, 4 for large,
-      and 5 for huge.
-    type: Fix
-  - message: Fixed lathes not having a max print cap of 6.
-    type: Fix
-  - message: Fixed being able to make saline.
-    type: Fix
-  - message: Fixed reinforced tables taking 4 metal to print instead of 5.
-    type: Fix
-  - message: Fixed being able to melee while burrowed as a burrower.
-    type: Fix
-  - message: Fixed Vanguard Praetorian Pierce not having a target cap. It can now
-      hit a maximum of 4 targets.
-    type: Fix
-  - message: Fixed CE, MT, and OT armor not having extra bio and explosion armor.
-    type: Fix
-  - message: Fixed being able to juggle pump shotguns to bypass their shared fire
-      delay. This doesn't affect the underbarrel shotgun or the MOU53.
-    type: Fix
-  - message: Fixed autolathes being unanchorable and moved.
-    type: Fix
-  - message: Fixed windows taking 4 seconds to deconstruct instead of being instant,
-      and missing 1 screwing step (Screwdriver, Wrench, Screwdriver).
-    type: Fix
-  - message: Fixed reinforced tables missing a welding step for deconstruction.
-    type: Fix
-  - message: Fixed tool sounds not playing for instant construction steps.
-    type: Fix
-  - message: Fixed the alpha overwatch console not being accessible with a table in
-      the way. The table has now been restored.
-    type: Fix
-  - message: Fixed broken fences blocking some abilities and flamers.
-    type: Fix
-  - message: Fixed pulling sometimes putting the pulled thing on top of your sprite.
-    type: Fix
-  - message: Fixed not being able to fit the M12 blast grenade into grenade launchers.
-    type: Fix
-  - message: Fixed being able to insert anything into an XM51 breaching scattergun
-      case.
-    type: Fix
-  - message: Fixed the seed extractor in the mess tech botany area being unpowered.
-    type: Fix
-  - message: Fixed the soda fountain being drawn under the table its on.
-    type: Fix
-  - message: High capacity beakers now start at 100u transfer and have more appropriate
-      quick settings. Vials also have more appropriate quick settings. Canteens start
-      at 60 unit transfer.
-    type: Tweak
-  - message: Fixed the grenadier spec getting the wrong kind of nades. They now get
-      2 AGM-F and 1 AGM-I instead of 2 more HEDP and 1 more HEFA, and 6 AGM-F and
-      3 AGM-I instead of 6 more HEDP and 3 HEFA. This also removes the specialist's
-      ability to buy more HEFA and HSDP grenades, with the new grenade types that
-      they can now buy.
-    type: Tweak
-  - message: Defibs now temporarily heal Genetic damage (from consuming radium) until
-      cryo pods are added.
-    type: Tweak
-  id: 1522
-  time: '2025-03-29T13:44:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6011
-- author: noctyrnal
-  changes:
-  - message: Added Containments Walls and Windows, along with the movable central
-      containment wall.
-    type: Add
-  id: 1523
-  time: '2025-03-29T19:53:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6013
 - author: CyberTropic
   changes:
   - message: 'Added LV624 Inserts for: sand temple, nexus barricade, armory, gym.'
@@ -5070,5 +4891,32 @@
   id: 2021
   time: '2025-07-20T09:13:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6956
+- author: Dutch-VanDerLinde
+  changes:
+  - message: There is now a marine announcement when the Hybrisa caves lockdown is
+      lifted. You can no longer lift the lockdown until 25 minutes has passed.
+    type: Add
+  - message: Fixed pod door buttons not requiring power.
+    type: Fix
+  id: 2022
+  time: '2025-07-20T09:15:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7045
+- author: noctyrnal
+  changes:
+  - message: Adjusted the Overwatch Console's UI to be more inline with parity.
+    type: Tweak
+  - message: Added "Hide Squad Info" to the Overwatch Console, which collapses the
+      table displaying slots in a squad.
+    type: Add
+  id: 2023
+  time: '2025-07-20T09:14:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7022
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added a roll effect when resisting fire.
+    type: Add
+  id: 2024
+  time: '2025-07-20T09:15:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6399
 Name: RMC14
 Order: -1
