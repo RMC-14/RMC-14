@@ -31,6 +31,6 @@ rmc-hands-emotes-tailswipe-perform = Perform a tail swipe
 
 rmc-hands-emotes-get-closer = Get closer.
 
-patting-success-generic = You pat {$target} on the back.
-patting-success-generic-others = {$user} pats {$target} on the back.
-patting-success-generic-target = {$user} pats you on the back.
+rmc-patting-success-generic = You pat {$target} on the back.
+rmc-patting-success-generic-others = {$user} pats {$target} on the back.
+rmc-patting-success-generic-target = {$user} pats you on the back.
