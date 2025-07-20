@@ -25,3 +25,10 @@
     quickEquip: false
     slots:
     - suitstorage
+
+- type: entity
+  parent: CMSyringe
+  id: RMCPrefilledSyringe
+  components:
+  - type: Injector
+    toggleState: Inject
