@@ -1,52 +1,4 @@
 ﻿Entries:
-- author: Ramiris
-  changes:
-  - message: Added camouflage in-engine colouring.
-    type: Add
-  - message: Changed M83 GL's Sprite
-    type: Tweak
-  id: 1512
-  time: '2025-03-29T08:18:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6005
-- author: to4no_fix
-  changes:
-  - message: Squad and hive leaders speech in chat bubbles is now bold and significantly
-      larger for better visibility.
-    type: Add
-  id: 1513
-  time: '2025-03-29T08:23:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5912
-- author: noctyrnal
-  changes:
-  - message: Hybrisa's Cave Lockdown no longer automatically despawns at 45 Minutes.
-    type: Tweak
-  - message: Added the Cave Lockdown button to Bio-Genomic Lab in Hybrisa.
-    type: Tweak
-  id: 1514
-  time: '2025-03-29T08:26:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6004
-- author: Dygon
-  changes:
-  - message: Sniper rifles can now be used to perform aimed shots, projectiles fired
-      with an aimed shot will have additional effects.
-    type: Add
-  - message: Sniper specialists' loadouts now include a spotter kit, which contains
-      the gear needed to transform any rifleman into a fully-fledged spotter.
-    type: Add
-  - message: Sniper specialists can now obtain the XM43E1 anti-materiel rifle from
-      their vendor. This rifle fires projectiles powerful enough to penetrate any
-      obstacle in its path.
-    type: Add
-  id: 1515
-  time: '2025-03-29T08:25:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5958
-- author: OmerF-afk
-  changes:
-  - message: Added multiple Weapons/Ammunition for SPP
-    type: Add
-  id: 1516
-  time: '2025-03-29T08:26:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6003
 - author: stranthbackup
   changes:
   - message: M34 Incinerator Unit no longer has a cold flame. Now you can light your
@@ -5078,5 +5030,46 @@
   id: 2012
   time: '2025-07-14T06:18:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7025
+- author: noctyrnal
+  changes:
+  - message: Xenonid emotes now have a cooldown.
+    type: Fix
+  id: 2013
+  time: '2025-07-20T08:36:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7074
+- author: Arykh
+  changes:
+  - message: Crayons no longer contain upstream reagents.
+    type: Tweak
+  id: 2014
+  time: '2025-07-20T08:42:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7088
+- author: Shromply
+  changes:
+  - message: Gave the Freelancers guns, ammo, and other gear.
+    type: Add
+  - message: Reworked the Freelancer's skills.
+    type: Add
+  - message: Changed the Freelancer Standard's rank from Mercendary to Mercenary.
+    type: Fix
+  id: 2015
+  time: '2025-07-20T08:55:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6820
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added new mag visuals for pistols, revolvers, and the M79.
+    type: Add
+  - message: Fixed the Beretta M92FS having errors.
+    type: Fix
+  id: 2016
+  time: '2025-07-20T08:59:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7024
+- author: Arykh
+  changes:
+  - message: Dexalin Plus has been added to the pressurized chemical dispenser!
+    type: Add
+  id: 2017
+  time: '2025-07-20T09:08:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7040
 Name: RMC14
 Order: -1

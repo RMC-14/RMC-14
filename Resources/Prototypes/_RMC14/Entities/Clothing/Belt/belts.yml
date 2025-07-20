@@ -658,6 +658,15 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
       map: [ "mk45_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: deagle
+      map: [ "handcannon_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: g_deagle
+      map: [ "g_handcannon_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: c_deagle
+      map: [ "co_handcannon_fill" ]
     - state: icon-front
       map: [ "holstered" ]
     - state: half
@@ -710,6 +719,9 @@
     - b92fs_fill
     - mk45_fill
     - m13_fill
+    - handcannon_fill
+    - g_handcannon_fill
+    - co_handcannon_fill
     mapLayers:
       holstered:
         whitelist:
@@ -739,6 +751,18 @@
         whitelist:
           tags:
           - RMCWeaponPistolM13
+      handcannon_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolHandcannon
+      g_handcannon_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolHandcannonGold
+      co_handcannon_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolHandcannonWyvern
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle.rsi
@@ -1371,6 +1395,26 @@
   - type: StorageFill
     contents:
     - id: RMCMagazineRifleType71
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCMAR40BeltFilled
+  suffix: Filled, MAR40
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCMAR50BeltFilled
+  suffix: Filled, MAR50
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineMar50LMG
       amount: 5
 
 - type: entity

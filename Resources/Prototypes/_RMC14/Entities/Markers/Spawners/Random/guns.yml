@@ -36,6 +36,8 @@
     - CMWeaponPistolM1984: CMMagazinePistolM1984 # TODO M1911
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     # TODO desert eagle
+    # TODO S&W revolver
+    - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     # TODO CZ-81 machine pistol
 
 - type: entity
