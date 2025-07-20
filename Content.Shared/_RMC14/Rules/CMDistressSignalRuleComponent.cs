@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Rules;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class CMDistressSignalRuleComponent : Component
 {
     [DataField]
