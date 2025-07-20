@@ -438,7 +438,7 @@
     offset: 0
     chance: 1
     prototypes:
-    - RMCProjectileRocket84mm
+    - RMCRocket84mm
     - RMCRocket84mmAntiArmor
 
 - type: entity
