@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: exincore
   changes:
-  - message: (Already uploaded) Fixed Steelcrest Defender having 80 total frontal
-      armor when fortified instead of 60.
-    type: Fix
-  id: 1540
-  time: '2025-04-05T01:20:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6066
-- author: exincore
-  changes:
   - message: Evacuation pumps now have sound effects.
     type: Add
   id: 1541
@@ -4894,5 +4886,12 @@
   id: 2040
   time: '2025-07-20T20:17:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7097
+- author: noctyrnal
+  changes:
+  - message: Fixed the draw depth of the 'ship security camera' console.
+    type: Fix
+  id: 2041
+  time: '2025-07-20T20:19:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7103
 Name: RMC14
 Order: -1
