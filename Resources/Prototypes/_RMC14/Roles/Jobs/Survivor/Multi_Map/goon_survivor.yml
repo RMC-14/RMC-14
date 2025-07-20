@@ -3,7 +3,6 @@
   id: CMSurvivorGoon
   name: cm-job-name-survivor-goon
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorGoon
   startingGear: RMCGearSurvivorGoon
   spawnMenuRoleName: We-Ya Goon (Survivor)
   special:
@@ -63,7 +62,3 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorGoon
-  isHumanoid: true

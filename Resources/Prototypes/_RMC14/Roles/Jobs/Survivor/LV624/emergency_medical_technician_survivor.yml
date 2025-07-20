@@ -3,7 +3,6 @@
   id: CMSurvivorLV624MedicalTechnician
   name: rmc-job-name-survivor-lv624-medical-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624MedicalTechnician
   startingGear: RMCGearSurvivorLV624MedicalTechnician
   spawnMenuRoleName: Medical Technician (LV624 Survivor)
   special:
