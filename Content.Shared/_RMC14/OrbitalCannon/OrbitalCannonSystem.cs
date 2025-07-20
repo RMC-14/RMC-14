@@ -534,14 +534,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
             // Award intel points for specific warhead types
             if (warheadComp.IntelPointsAwarded > 0 && _net.IsServer)
             {
-                try
-                {
-                    _intel.AddPoints(warheadComp.IntelPointsAwarded);
-                }
-                catch
-                {
-                    // Silently handle any intel point award failures
-                }
+                _intel.AddPoints(warheadComp.IntelPointsAwarded);
             }
         }
 
