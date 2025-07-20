@@ -37,6 +37,7 @@
     - map: [ "belt" ]
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.UniformAccessoryLayer.Base" ]
     - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "back" ]
     - map: [ "id" ]

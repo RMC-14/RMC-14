@@ -271,6 +271,9 @@
       - id: RMCHelmetGarbRainCover
         name: M10 helmet rain cover
         amount: 10
+      - id: RMCPoncho
+        name: UNMC poncho
+        amount: 10
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15
