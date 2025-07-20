@@ -33,7 +33,7 @@
   useLoadoutOfJob: CMSurvivorEngineer
 
 - type: startingGear
-  parent: RMCGearSurvivorBaseNoBackpack
+  parent: RMCGearSurvivorBase
   id: RMCGearSurvivorReactorTechnician
   equipment:
     jumpsuit: RMCJumpsuitNormCivilianWhiteAlt
@@ -64,11 +64,6 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, CMSatchel, RMCShoesWhite ]
-    - [ RMCLabcoatShort, CMSatchel, RMCShoesLaceupBrown ]
-    - [ RMCHeadRadiationHood, RMCSuitRadiation, CMSatchel, RMCShoesLaceupBrown ]
-    randomGearOther:
-    -
-      - [ CMSheetMetal20 ]
-    -
-      - [ CMBeltUtilityFilled ]
+    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, RMCShoesWhite ]
+    - [ RMCLabcoatShort, RMCShoesLaceupBrown ]
+    - [ RMCHeadRadiationHood, RMCSuitRadiation, RMCShoesLaceupBrown ]
