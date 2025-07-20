@@ -68,6 +68,11 @@
     - Blinded
     - Deaf
     - Unconscious
+  - type: InteractionPopup
+    successChance: 1
+    interactSuccessString: patting-success-generic
+    interactSuccessSound: /Audio/Effects/weak_hit1.ogg
+    messagePerceivedByOthers: patting-success-generic-others
   - type: Blindable
   - type: Tag
     tags:

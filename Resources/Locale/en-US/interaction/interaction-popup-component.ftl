@@ -96,9 +96,9 @@ fence-rattle-success = *rattle*
 ## Hugging players
 
 # RMC14
-hugging-success-generic = You pat {$target} on the back.
-hugging-success-generic-others = {$user} pats {$target} on the back.
-hugging-success-generic-target = {$user} pats you on the back.
+hugging-success-generic = You hug {$target}.
+hugging-success-generic-others = {$user} hugs {$target}.
+hugging-success-generic-target = {$user} hugs you.
 # RMC14
 
 ## Other
