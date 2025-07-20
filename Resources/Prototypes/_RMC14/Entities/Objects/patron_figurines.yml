@@ -434,29 +434,11 @@
         - ReagentId: IceCream
           Quantity: 30
   - type: SolutionTransfer
-    transferAmount: 30
-    maxTransferAmount: 30
-    canChangeTransferAmount: true
+    transferAmount: 5
+    maxTransferAmount: 5
+    canChangeTransferAmount: false
     transferAmounts:
     - 5
-    - 10
-    - 15
-    - 25
-    - 30
-  - type: Damageable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-      - !type:SpillBehavior { }
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: RMCFlask
 
 - type: entity
@@ -1644,3 +1626,29 @@
         maxDistance: 1
   - type: UseDelay
     delay: 30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronValerieHawkins
+  name: Valerie Hawkins figurine
+  description: "\"I am just here to relay orders from the shark.\""
+  components:
+  - type: Sprite
+    state: valerie_hawkins
+  - type: PatronFigurine
+    id: bb15fc57-32ca-40f6-aef6-b9bba1a3c69f
+  - type: Drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: CMSodaBobdaGrape
+          Quantity: 30
+  - type: SolutionTransfer
+    transferAmount: 5
+    maxTransferAmount: 5
+    canChangeTransferAmount: false
+    transferAmounts:
+    - 5
+  - type: RMCFlask
