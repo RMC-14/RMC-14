@@ -664,6 +664,7 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: l54
       map: [ "l54_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: deagle
       map: [ "handcannon_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
