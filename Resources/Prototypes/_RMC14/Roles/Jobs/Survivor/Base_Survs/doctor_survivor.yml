@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMSurvivorDoctor
   name: cm-job-name-survivor-doctor

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCPlanetLV624
   name: LV-624
   components:
@@ -11,6 +11,23 @@
       scenarioProbability: 0.1
     - scenarioName: asset_protection
       scenarioProbability: 0.1
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivor: -1
+      - CMSurvivorPriest: 1
+      CMSurvivorCorporate:
+      - CMSurvivorLV624CorporateLiaison: 2
+      CMSurvivorDoctor:
+      - CMSurvivorLV624MedicalTechnician: 3
+      CMSurvivorEngineer:
+      - CMSurvivorLV624Engineer: 2
+      - CMSurvivorLV624CargoTechnician: 2
+      CMSurvivorSecurity:
+      - CMSurvivorGoon: 2
+      - CMSurvivorCMBDeputy: 2
+      - CMSurvivorLV624SecurityGuard: 2
+      CMSurvivorScientist:
+      - CMSurvivorLV624Archeologist: 2
 
 - type: entity
   id: RMCPlanetSolaris

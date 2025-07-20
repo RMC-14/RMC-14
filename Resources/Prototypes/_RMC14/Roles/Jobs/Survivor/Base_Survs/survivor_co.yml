@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: RMCSurvivorCommandingOfficer
   name: rmc-job-name-survivor-co

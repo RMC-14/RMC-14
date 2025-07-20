@@ -43,6 +43,7 @@
     shoes: RMCShoesGreen
     back: RMCSatchelVirologyFill
     id: RMCIDCardColonistScientist
+    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchMedicalFill
     mask: CMMaskSterile
 
@@ -71,7 +72,7 @@
       - [ RMCGrenadeCustomMetalFoam ]
       - [ RMCGrenadeCustomWeedkiller ]
       - [ RMCThermalTarpV2Folded ]
-
+     
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorScientist
