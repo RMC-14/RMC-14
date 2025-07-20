@@ -94,7 +94,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         var options = new List<DialogOption>();
         foreach (var name in _medalsDataset.Values)
         {
-            options.Add(new DialogOption(Loc.GetString(name), new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, name, args.LastPlayerId)));
+            options.Add(new DialogOption(Loc.GetString(name), new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, Loc.GetString(name), args.LastPlayerId)));
         }
 
         _dialog.OpenOptions(ent, actor.Value, Loc.GetString("rmc-medal-type"), options, Loc.GetString("rmc-medal-type-prompt"));
