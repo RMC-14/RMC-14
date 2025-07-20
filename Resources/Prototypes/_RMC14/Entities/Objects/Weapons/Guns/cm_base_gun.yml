@@ -64,6 +64,17 @@
 
 - type: entity
   abstract: true
+  id: RMCBaseWeaponGunMagazineProvider
+  components:
+  - type: MagazineAmmoProvider
+    autoEject: true
+    soundAutoEject:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+      params:
+        variation: 0.2
+
+- type: entity
+  abstract: true
   id: RMCBaseSlideMagazineVisuals
   components:
   - type: Sprite

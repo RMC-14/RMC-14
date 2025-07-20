@@ -29,7 +29,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_1.ogg
+      collection: RMCCMBSpearheadShoot
     soundEmpty:
       path: /Audio/_RMC14/Weapons/Guns/gun_cmb_click1.ogg
   - type: RMCSelectiveFire
