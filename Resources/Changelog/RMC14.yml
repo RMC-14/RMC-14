@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: exincore
-  changes:
-  - message: Evacuation pumps now have sound effects.
-    type: Add
-  id: 1541
-  time: '2025-04-05T01:22:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6056
 - author: mmails
   changes:
   - message: SPP paygrades and final rank
@@ -4893,5 +4886,14 @@
   id: 2041
   time: '2025-07-20T20:19:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7103
+- author: noctyrnal
+  changes:
+  - message: Resprites the security survivor's jumpsuit and helmet.
+    type: Tweak
+  - message: Replaces the colonist uniform with new sprites.
+    type: Tweak
+  id: 2042
+  time: '2025-07-20T20:26:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7094
 Name: RMC14
 Order: -1
