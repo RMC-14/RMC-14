@@ -157,7 +157,7 @@ public sealed class SurvivorSystem : EntitySystem
                 continue;
             }
 
-            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage))
+            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage, playSound: false))
                 return true;
         }
 
