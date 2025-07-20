@@ -36,7 +36,7 @@
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: RMCSurvivorPresetScientist
   id: RMCSurvivorPresetTrijentResearcher
   name: trijent researcher colonist preset # TODO RMC14 random research notes
   categories: [ HideSpawnMenu ]
