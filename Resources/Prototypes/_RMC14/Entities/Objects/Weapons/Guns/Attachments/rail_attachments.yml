@@ -157,7 +157,7 @@
         unwieldedOnly: true
       accuracyAddMult: 0.05
   - type: RMCLoreExaminable
-    content: An all-weather collimator sight, designated as the AN/PVQ-64 Dot Sight. Equipped with a sunshade to increase clarity in bright conditions and resist weathering. Compact and efficient, a marvel of military design, until you realize that this is actually just an off-the-shelf design that got a military designation slapped on.
+    content: rmc-lore-examinable-s5-red-dot-sight
 
 - type: entity
   parent: RMCRailAttachmentBase
@@ -183,7 +183,7 @@
         unwieldedOnly: true
       accuracyAddMult: 0.05
   - type: RMCLoreExaminable
-    content: A simple folding reflex sight designated as the AN/PVG-72 Reflex Sight, compatible with most rail systems. Bulky and built to last, it can link with military HUDs for limited point-of-aim calculations.
+    content: rmc-lore-examinable-s6-reflex-sight
 
 - type: entity
   abstract: true
@@ -262,7 +262,7 @@
         inactiveOnly: true
       accuracyAddMult: -0.05
   - type: RMCLoreExaminable
-    content: An intermediate-power Armat scope designated as the AN/PVQ-31 4x Optic. Fairly basic, but both durable and functional... enough. 780 meters is about as far as one can push the 10x24mm cartridge, really.
+    content: rmc-lore-examinable-s8-4x-telescopic-scope
 
 - type: entity
   parent: RMCAttachmentS84xTelescopicScope
@@ -333,7 +333,7 @@
         inactiveOnly: true
       accuracyAddMult: -0.05 #TODO: Add flare gun modifiers when it's implemented.
   - type: RMCLoreExaminable
-    content: A light-duty optic, designated as the AN/PVQ-45 2x Optic. Suited towards short to medium-range engagements. Users are advised to zero it often, as the first mass-production batch had a tendency to drift in one direction or another with sustained use.
+    content: rmc-lore-examinable-s4-2x-telescopic-mini-scope
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
@@ -446,7 +446,7 @@
         inactiveOnly: true
       accuracyAddMult: -0.05
   - type: RMCLoreExaminable
-    content: An experimental fire-control optic capable of linking into compatible IFF systems on certain weapons, designated the XAN/PVG-110 Smart Scope. Experimental technology developed by AEGIS, who have assured that all previously reported issues with false-negative IFF recognitions have been solved. Make sure to check the sight after every deployment, just in case.
+    content: rmc-lore-examinable-b8-smart-scope
 
 - type: entity
   parent: RMCAttachmentScopeBase

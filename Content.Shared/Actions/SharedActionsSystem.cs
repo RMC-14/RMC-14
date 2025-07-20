@@ -413,7 +413,10 @@ public abstract class SharedActionsSystem : EntitySystem
     {
         var (uid, comp) = ent;
         if (!target.IsValid() || Deleted(target))
+        {
+            EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(EntityManager.GetNetEntity(ent))); // RMC14
             return false;
+        }
 
         if (_whitelist.IsWhitelistFail(comp.Whitelist, target))
             return false;
@@ -430,11 +433,17 @@ public abstract class SharedActionsSystem : EntitySystem
         var targetAction = Comp<TargetActionComponent>(uid);
         // not using the ValidateBaseTarget logic since its raycast fails if the target is e.g. a wall
         if (targetAction.CheckCanAccess)
-            return _interaction.InRangeAndAccessible(user, target, range: targetAction.Range);
+        {
+            // RMC14
+            return _interaction.InRangeAndAccessible(user, target, range: targetAction.Range) ||
+                   // if not just checking pure range, let stored entities be targeted by actions
+                   // if it's out of range it probably isn't stored anyway...
+                   _interaction.CanAccessViaStorage(user, target);
+        }
 
-        // if not just checking pure range, let stored entities be targeted by actions
-        // if it's out of range it probably isn't stored anyway...
-        return _interaction.CanAccessViaStorage(user, target);
+        // RMC14 if CheckCanAccess is false the target should still be valid if it's not in a container.
+        // CanAccessViaStorage returns false if the target is not in a container.
+        return true;
     }
 
     public bool ValidateWorldTarget(EntityUid user, EntityCoordinates target, Entity<WorldTargetActionComponent> ent)

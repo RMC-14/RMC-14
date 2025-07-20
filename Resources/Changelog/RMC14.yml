@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added the SSG45 Assault Rifle for We-Ya PMCs.
-    type: Add
-  id: 1539
-  time: '2025-04-04T23:26:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6067
-- author: exincore
-  changes:
-  - message: (Already uploaded) Fixed Steelcrest Defender having 80 total frontal
-      armor when fortified instead of 60.
-    type: Fix
-  id: 1540
-  time: '2025-04-05T01:20:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6066
 - author: exincore
   changes:
   - message: Evacuation pumps now have sound effects.
@@ -4888,5 +4873,25 @@
   id: 2039
   time: '2025-07-20T10:35:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6290
+- author: Dygon
+  changes:
+  - message: Parasites will now collide with a door during their leap if the leap
+      didn't start underneath it.
+    type: Fix
+  - message: Parasites can't start a leap while underneath and airlock, they can still
+      start a leap while underneath a resin door.
+    type: Fix
+  - message: Thrown parasites will now collide with doors during the throw.
+    type: Fix
+  id: 2040
+  time: '2025-07-20T20:17:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7097
+- author: noctyrnal
+  changes:
+  - message: Fixed the draw depth of the 'ship security camera' console.
+    type: Fix
+  id: 2041
+  time: '2025-07-20T20:19:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7103
 Name: RMC14
 Order: -1

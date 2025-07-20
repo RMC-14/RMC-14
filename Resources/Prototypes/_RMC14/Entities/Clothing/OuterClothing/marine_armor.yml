@@ -175,7 +175,7 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/urban.rsi
   - type: RMCLoreExaminable
-    content: This configuration of the iconic armor was developed during the War between the SPP and USCM - Designed in response to a need for higher protection for ComTechs assigned as EODs during the conflict, this is the pinnacle of protection for your average marine. The shoulders and kneepads have both been expanded upon heavily, covering up the arteries on each limb. A special spall liner was developed for this suit, with the same technology being used in the M70 Flak Jacket being developed at the same time.
+    content: rmc-lore-examinable-m3-eod-pattern-heavy-armor
 
 - type: entity
   id: RMCArmorM3HeavyVariants
@@ -836,4 +836,4 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/io/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/io/urban.rsi
   - type: RMCLoreExaminable
-    content: AEGIS Perfection. The XM4 Soldier Awareness System mixes M4-style hard armor and a distributed series of motion sensors clipped onto the breastplate. When connected to any HUD optic, it replicates the effects of an M314 Motion Detector unit, increasing user situational awareness. It is currently undergoing field trials by intelligence operatives.
+    content: rmc-lore-examinable-armor-xm4-pattern-intel-armor
