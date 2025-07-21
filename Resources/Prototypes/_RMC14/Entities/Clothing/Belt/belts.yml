@@ -1346,7 +1346,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazinePistolHandcannon
+    - id: RMCMagazinePistolHandcannonHI
       amount: 4
     - id: RMCMagazinePistolHandcannonHIAP
       amount: 2

@@ -169,6 +169,10 @@
         points: 15
       - id: CMWebbingBlack
         points: 15
+      - id: RMCWebbingLegPouch
+        points: 15
+      - id: RMCWebbingLegPouchBlack
+        points: 15
       - id: RMCWebbingDropPouch
         points: 15
       - id: CMWebbingHolster

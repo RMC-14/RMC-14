@@ -287,8 +287,8 @@
 
 - type: entity
   parent:
-  - CMGrenadeBase
   - RMCM40DPTags
+  - CMGrenadeBase
   id: RMCGrenadeIncendiary
   name: M40 HIDP incendiary grenade
   description: The M40 HIDP is a small, but deceptively strong incendiary grenade designed to disrupt enemy mobility with long-lasting Type B napalm. It is set to detonate in 4 seconds.

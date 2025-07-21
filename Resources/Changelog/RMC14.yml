@@ -1,146 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed intel officer ID job title just saying 'Intel', it will now display
-      'Intelligence Officer' as intended.
-    type: Fix
-  id: 1558
-  time: '2025-04-05T19:24:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5913
-- author: Ian321
-  changes:
-  - message: Foxtrot Squad Leaders can now reliably be woken up.
-    type: Fix
-  id: 1559
-  time: '2025-04-07T05:33:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6102
-- author: DummeHytteOst
-  changes:
-  - message: Removed a fleshy bullet impact sound.
-    type: Fix
-  id: 1560
-  time: '2025-04-07T05:34:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6098
-- author: Vermidia
-  changes:
-  - message: Fixed fast and sticky resin deleting nodes when placed.
-    type: Fix
-  id: 1561
-  time: '2025-04-07T05:37:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6096
-- author: noctyrnal
-  changes:
-  - message: Added missing weather types.
-    type: Add
-  id: 1562
-  time: '2025-04-07T05:36:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6094
-- author: SG6732
-  changes:
-  - message: Added new M42A2 Pump Shotgun handle sprites + Wooden Stock attachment
-      sprites of all camo types.
-    type: Add
-  id: 1563
-  time: '2025-04-07T05:49:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5337
-- author: Vermidia
-  changes:
-  - message: Fixed rare cases where too many lines could be made lagging the server
-      to death.
-    type: Fix
-  id: 1564
-  time: '2025-04-12T05:05:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6114
-- author: exincore
-  changes:
-  - message: Hybrisa window shutters no longer obstruct vision while closed.
-    type: Fix
-  - message: The Basira-Armstrong bolt-action hunting rifle is no longer a double-barrel
-      shotgun and can no longer accept nor fire shotgun shells.
-    type: Fix
-  id: 1565
-  time: '2025-04-12T05:09:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6105
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added being able to click on a flamer in hand to eject its tank.
-    type: Add
-  id: 1566
-  time: '2025-04-12T05:30:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6122
-- author: AverageNotDoingAnythingEnjoyer
-  changes:
-  - message: Added a lot of missing props, med vendors, metal, and buttons to Chance's
-      Claim.
-    type: Add
-  - message: Fixed reactor control room pod doors in Chance's Claim being corrodible.
-    type: Fix
-  - message: Replaced some old placeholder guns in Chance's Claim with CMB revolvers
-      and basira-armstrong hunting rifles.
-    type: Tweak
-  id: 1567
-  time: '2025-04-12T05:34:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6120
-- author: AverageNotDoingAnythingEnjoyer
-  changes:
-  - message: Replaced some placeholder guns in Kutjevo Refinery with the intended
-      gun.
-    type: Tweak
-  id: 1568
-  time: '2025-04-12T05:35:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6133
-- author: J C Denton
-  changes:
-  - message: Remapped the admin fax machines area.
-    type: Tweak
-  id: 1569
-  time: '2025-04-12T05:42:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6123
-- author: DummeHytteOst
-  changes:
-  - message: Adjusted some stocks melee dmg to their intended values (10 > 5).
-    type: Fix
-  id: 1570
-  time: '2025-04-12T05:46:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6124
-- author: Ian321
-  changes:
-  - message: Fixed Intelligence Officers not having pilot access.
-    type: Fix
-  id: 1571
-  time: '2025-04-12T05:56:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6101
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You can now toggle helmet accessories by pressing E or using a verb on
-      it.
-    type: Add
-  id: 1572
-  time: '2025-04-12T05:57:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6117
-- author: Vermidia
-  changes:
-  - message: Fixed acider's exploding and healers sacrificing leaving behind bodies.
-    type: Fix
-  id: 1573
-  time: '2025-04-12T05:58:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6115
-- author: VictorJob
-  changes:
-  - message: adds unique animation for CAS Flare
-    type: Add
-  - message: change Flare's animation
-    type: Tweak
-  id: 1574
-  time: '2025-04-12T06:06:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6077
-- author: CyberTropic
-  changes:
-  - message: Added dynamic weather events.
-    type: Add
-  id: 1575
-  time: '2025-04-12T06:07:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6135
 - author: CyberTropic
   changes:
   - message: Added more LV624 inserts.
@@ -4848,5 +4706,159 @@
   id: 2058
   time: '2025-07-20T23:42:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7122
+- author: DrSmugleaf
+  changes:
+  - message: Fixed player-given medal names not displaying properly.
+    type: Fix
+  id: 2059
+  time: '2025-07-20T23:44:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7123
+- author: Dygon
+  changes:
+  - message: Weeds don't block leaps anymore.
+    type: Fix
+  id: 2060
+  time: '2025-07-21T00:11:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7124
+- author: Dygon
+  changes:
+  - message: HIDP grenade packets now contain HIDP grenades again.
+    type: Fix
+  id: 2061
+  time: '2025-07-21T01:39:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7126
+- author: DrSmugleaf
+  changes:
+  - message: Fixed burrowers not being able to burrow to location.
+    type: Fix
+  id: 2062
+  time: '2025-07-21T01:46:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7131
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xeno tailstab not having a range of 2.5 (2 > 2.5)
+    type: Fix
+  id: 2063
+  time: '2025-07-21T01:46:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7130
+- author: CyberTropic
+  changes:
+  - message: Added weather to sorokyne
+    type: Add
+  - message: Blocked ambient light indoors on sorokyne
+    type: Fix
+  id: 2064
+  time: '2025-07-21T09:33:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7135
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Survivor jobs now roll more randomly, instead of rolling in a specific
+      order every round.
+    type: Tweak
+  id: 2065
+  time: '2025-07-21T09:35:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7138
+- author: J C Denton
+  changes:
+  - message: Fixed all Marine roles having Dropship Access. Squad Leaders can still
+      access Dropship Controls.
+    type: Fix
+  - message: Lifeboat Consoles now require Dropship Access.
+    type: Tweak
+  - message: Marine Police now officially has Dropship Access.
+    type: Tweak
+  id: 2066
+  time: '2025-07-21T21:09:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7151
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed scientist survivor variants not having firearms skill.
+    type: Fix
+  id: 2067
+  time: '2025-07-21T21:15:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7162
+- author: J C Denton
+  changes:
+  - message: Lifeboat consoles now accept Command access too.
+    type: Tweak
+  id: 2068
+  time: '2025-07-21T21:23:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7171
+- author: noctyrnal
+  changes:
+  - message: Updated the Shiva tileset sprites.
+    type: Tweak
+  id: 2069
+  time: '2025-07-21T21:28:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7159
+- author: Tunguso4ka
+  changes:
+  - message: Fixed LZ1 buttons and LZ2 comm tower on Sorokyne Strata.
+    type: Fix
+  id: 2070
+  time: '2025-07-21T21:29:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7147
+- author: noctyrnal
+  changes:
+  - message: Fixed the UNMC cup's sprite.
+    type: Fix
+  id: 2071
+  time: '2025-07-21T21:34:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7170
+- author: SharkSnake98
+  changes:
+  - message: Added 4 new playtime medals, in the form of engraved metal name badges.
+    type: Add
+  - message: Replaced the CL's ribbon system with the new badges.
+    type: Tweak
+  id: 2072
+  time: '2025-07-21T21:37:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7165
+- author: noctyrnal
+  changes:
+  - message: Added the "UNMC lightweight expedition satchel", a visual alternative
+      to the current IO backpacks.
+    type: Add
+  - message: Added Leg Pouches, these come in black and camo, and serve as visual
+      alternatives to the 5 slot webbings.
+    type: Add
+  - message: SOs now have Black Insulated Gloves instead of Black Gloves in their
+      vendors.
+    type: Tweak
+  id: 2073
+  time: '2025-07-21T21:37:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7168
+- author: Dygon
+  changes:
+  - message: Barricades can be anchored and unanchored, and sandbags can be disassembled
+      again.
+    type: Fix
+  - message: You're now unable to drop or fall onto the Almayer.
+    type: Fix
+  - message: Parasites already under a resin door won't be blocked by it during their
+      leap.
+    type: Fix
+  id: 2074
+  time: '2025-07-21T21:39:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7167
+- author: x5tink
+  changes:
+  - message: Returned plushies to the people!
+    type: Fix
+  id: 2075
+  time: '2025-07-21T21:40:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7125
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some folding barricades having very high amounts of health.
+    type: Fix
+  - message: Fixed xenos not being able to damage sentries with spit by sprite clicking
+      them.
+    type: Fix
+  - message: Fixed not being able to go past page 4 in dropship targets UI.
+    type: Fix
+  id: 2076
+  time: '2025-07-21T22:37:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7173
 Name: RMC14
 Order: -1
