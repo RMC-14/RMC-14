@@ -261,6 +261,8 @@
       enum.LifeboatComputerUi.Key:
         type: LifeboatComputerBui
   - type: LifeboatComputer
+  - type: AccessReader
+    access: [ [ "CMAccessDropship" ] ] # also Senior access
   - type: ActivatableUIBlacklist
     blacklist:
       components:
