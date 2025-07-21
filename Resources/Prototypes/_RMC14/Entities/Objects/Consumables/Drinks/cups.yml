@@ -56,7 +56,7 @@
   components:
   - type: Sprite
     layers:
-      - sprite: _RMC14/Objects/Consumable/Drinks/sppcup.rsi
+      - sprite: _RMC14/Objects/Consumable/Drinks/unmccup.rsi.rsi
         state: base
       - map: ["enum.SolutionContainerLayers.Fill"]
         sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
