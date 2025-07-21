@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Foxtrot Squad Leaders can now reliably be woken up.
-    type: Fix
-  id: 1559
-  time: '2025-04-07T05:33:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6102
 - author: DummeHytteOst
   changes:
   - message: Removed a fleshy bullet impact sound.
@@ -4847,5 +4840,12 @@
   id: 2059
   time: '2025-07-20T23:44:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7123
+- author: Dygon
+  changes:
+  - message: Weeds don't block leaps anymore.
+    type: Fix
+  id: 2060
+  time: '2025-07-21T00:11:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7124
 Name: RMC14
 Order: -1
