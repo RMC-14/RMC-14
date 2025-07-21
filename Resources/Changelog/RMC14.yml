@@ -1,19 +1,6 @@
 ﻿Entries:
 - author: AverageNotDoingAnythingEnjoyer
   changes:
-  - message: Added a lot of missing props, med vendors, metal, and buttons to Chance's
-      Claim.
-    type: Add
-  - message: Fixed reactor control room pod doors in Chance's Claim being corrodible.
-    type: Fix
-  - message: Replaced some old placeholder guns in Chance's Claim with CMB revolvers
-      and basira-armstrong hunting rifles.
-    type: Tweak
-  id: 1567
-  time: '2025-04-12T05:34:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6120
-- author: AverageNotDoingAnythingEnjoyer
-  changes:
   - message: Replaced some placeholder guns in Kutjevo Refinery with the intended
       gun.
     type: Tweak
@@ -4850,5 +4837,12 @@
   id: 2067
   time: '2025-07-21T21:15:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7162
+- author: J C Denton
+  changes:
+  - message: Lifeboat consoles now accept Command access too.
+    type: Tweak
+  id: 2068
+  time: '2025-07-21T21:23:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7171
 Name: RMC14
 Order: -1
