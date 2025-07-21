@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Remapped the admin fax machines area.
-    type: Tweak
-  id: 1569
-  time: '2025-04-12T05:42:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6123
 - author: DummeHytteOst
   changes:
   - message: Adjusted some stocks melee dmg to their intended values (10 > 5).
@@ -4843,5 +4836,12 @@
   id: 2069
   time: '2025-07-21T21:28:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7159
+- author: Tunguso4ka
+  changes:
+  - message: Fixed LZ1 buttons and LZ2 comm tower on Sorokyne Strata.
+    type: Fix
+  id: 2070
+  time: '2025-07-21T21:29:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7147
 Name: RMC14
 Order: -1
