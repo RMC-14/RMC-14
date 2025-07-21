@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: AverageNotDoingAnythingEnjoyer
-  changes:
-  - message: Replaced some placeholder guns in Kutjevo Refinery with the intended
-      gun.
-    type: Tweak
-  id: 1568
-  time: '2025-04-12T05:35:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6133
 - author: J C Denton
   changes:
   - message: Remapped the admin fax machines area.
@@ -4844,5 +4836,12 @@
   id: 2068
   time: '2025-07-21T21:23:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7171
+- author: noctyrnal
+  changes:
+  - message: Updated the Shiva tileset sprites.
+    type: Tweak
+  id: 2069
+  time: '2025-07-21T21:28:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7159
 Name: RMC14
 Order: -1
