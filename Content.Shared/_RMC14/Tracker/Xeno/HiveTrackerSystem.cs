@@ -5,6 +5,8 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Alert;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -38,6 +40,7 @@ public sealed class HiveTrackerSystem : EntitySystem
         SubscribeLocalEvent<HiveTrackerComponent, LeaderTrackerSelectTargetEvent>(OnHiveTrackerSelectTarget);
 
         SubscribeLocalEvent<RMCTrackableComponent, RequestTrackableNameEvent>(OnRequestTrackableName);
+        SubscribeLocalEvent<RMCTrackableComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
     private void OnRemove(Entity<HiveTrackerComponent> ent, ref ComponentRemove args)
@@ -180,6 +183,17 @@ public sealed class HiveTrackerSystem : EntitySystem
         args.Handled = true;
     }
 
+    private void OnMobStateChanged(Entity<RMCTrackableComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (!HasComp<XenoComponent>(ent))
+            return;
+
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        RemCompDeferred<RMCTrackableComponent>(ent);
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -201,6 +215,12 @@ public sealed class HiveTrackerSystem : EntitySystem
             // If the tracker is tracking an entity, point towards the target.
             if (tracker.Target != null)
             {
+                if (!HasComp<RMCTrackableComponent>(tracker.Target.Value))
+                {
+                    SetTarget((uid, tracker), null);
+                    continue;
+                }
+
                 UpdateDirection((uid, tracker), _transform.GetMapCoordinates(tracker.Target.Value));
                 continue;
             }
