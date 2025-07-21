@@ -623,8 +623,8 @@ public sealed class SquadSystem : EntitySystem
                 }
 
                 RemComp<SquadLeaderComponent>(uid);
-                RemCompDeferred<RMCPointingComponent>(uid);
                 RemComp<RMCTrackableComponent>(uid);
+                RemCompDeferred<RMCPointingComponent>(uid);
             }
         }
 

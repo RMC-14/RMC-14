@@ -86,6 +86,9 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+        recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
@@ -174,7 +177,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessDropship" ]
+    - [ "CMAccessPilot" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor

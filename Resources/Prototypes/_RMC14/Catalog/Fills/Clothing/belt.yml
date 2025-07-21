@@ -80,7 +80,7 @@
       amount: 1
     - id: CMTraumaKit10
       amount: 1
-    - id: CMBaseDefibrillator
+    - id: CMDefibrillator
       amount: 1
     - id: CMHealthAnalyzer
       amount: 1

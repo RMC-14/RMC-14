@@ -76,7 +76,9 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbingHolster
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
 
@@ -150,5 +152,7 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbingHolster
       - id: CMWebbing

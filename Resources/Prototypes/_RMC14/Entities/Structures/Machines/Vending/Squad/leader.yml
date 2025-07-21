@@ -290,6 +290,8 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch

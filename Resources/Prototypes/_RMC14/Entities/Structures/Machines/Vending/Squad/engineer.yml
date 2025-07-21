@@ -22,7 +22,6 @@
     - name: Handheld Defense
       takeOne: CMHandheldDefense
       entries:
-      - id: RMCTesla
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
       - id: RMCSentry
@@ -298,6 +297,8 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch

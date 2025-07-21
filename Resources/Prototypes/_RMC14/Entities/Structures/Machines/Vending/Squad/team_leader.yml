@@ -225,6 +225,8 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbing

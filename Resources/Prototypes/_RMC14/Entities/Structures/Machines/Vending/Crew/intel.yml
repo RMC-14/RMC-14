@@ -149,6 +149,8 @@
         recommended: true
       - id: RMCSatchelMarineIntelChestrig
         recommended: true
+      - id: RMCSatchelMarineIntelSatchel
+        recommended: true
       - id: RMCBackpackRTO
     - name: Helmet
       choices: { CMHelmet: 1 }
@@ -203,6 +205,8 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
       - id: RMCWebbingBlackSmall

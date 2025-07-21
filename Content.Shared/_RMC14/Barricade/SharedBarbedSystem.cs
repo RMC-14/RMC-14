@@ -77,6 +77,7 @@ public abstract class SharedBarbedSystem : EntitySystem
 
             if (_doAfterSystem.TryStartDoAfter(barbDoAfter))
             {
+                args.Handled = true;
                 _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-wiring"), ent, args.User);
             }
 
@@ -85,6 +86,7 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         if (ent.Comp.IsBarbed && HasComp<BarbedWireComponent>(args.Used))
         {
+            args.Handled = true;
             _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-full"), ent, args.User);
             return;
         }
@@ -95,6 +97,7 @@ public abstract class SharedBarbedSystem : EntitySystem
         if (!_toolSystem.HasQuality(args.Used, ent.Comp.RemoveQuality, tool))
             return;
 
+        args.Handled = true;
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-begin"), ent, args.User);
         var cutDoAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.CutTime, new CutBarbedDoAfterEvent(), ent, used: args.Used)
         {
