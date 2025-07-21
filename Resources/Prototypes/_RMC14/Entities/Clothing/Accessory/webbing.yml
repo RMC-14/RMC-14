@@ -94,6 +94,42 @@
     - type: StoreAfterFailedInteract
 
 - type: entity
+  parent: CMWebbing
+  id: RMCWebbingLegPouch
+  name: leg pouch
+  description: A camo conforming leg pouch usually worn by hunters, military and people who dream of being military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
+    state: webbing
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
+      state: equipped
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Webbing/leg_pouch/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Webbing/leg_pouch/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Webbing/leg_pouch/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Webbing/leg_pouch/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Webbing/leg_pouch/urban.rsi
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingLegPouchBlack
+  name: black leg pouch
+  description: A black leg pouch usually worn by hunters, military and people who dream of being military.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/black.rsi
+    state: webbing
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/leg_pouch/black.rsi
+      state: equipped
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingBlack
   name: black webbing vest
@@ -635,7 +671,7 @@
   name: surgical webbing vest
   description: A robust webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
     state: webbing
@@ -644,7 +680,7 @@
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_green.rsi
       state: equipped
     components:
-    - type: Storage 
+    - type: Storage
       maxItemSize: Small
       grid:
       - 0,0,13,3 # 14 slots
@@ -656,7 +692,7 @@
         components:
         - CMSurgeryTool
     - type: FixedItemSizeStorage
-  - type: Storage 
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,3 # 14 slots
@@ -691,7 +727,7 @@
   name: surgical webbing vest
   description: A robust blue webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
     state: webbing
@@ -700,7 +736,7 @@
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
       state: equipped
     components:
-    - type: Storage 
+    - type: Storage
       maxItemSize: Small
       grid:
       - 0,0,13,3 # 14 slots
@@ -712,7 +748,7 @@
         components:
         - CMSurgeryTool
     - type: FixedItemSizeStorage
-  - type: Storage 
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,3 # 14 slots
