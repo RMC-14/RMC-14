@@ -38,16 +38,39 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
     private readonly List<string> _announce = [];
     private readonly EntProtoId _defaultHive = "CMXenoHive";
+    private readonly Dictionary<EntityUid, List<TimedAnnouncement>> _pendingTimedAnnouncements = new();
+
+    private EntityQuery<HiveComponent> _query;
 
     private TimeSpan _lateJoinsPerBurrowedLarvaEarlyThreshold;
     private float _lateJoinsPerBurrowedLarvaEarly;
     private float _lateJoinsPerBurrowedLarva;
 
+    private struct TimedAnnouncement
+    {
+        public TimeSpan AnnounceAt;
+        public AnnouncementType Type;
+        public string MessageKey;
+        public List<EntProtoId>? Unlocks;
+    }
+
+    private enum AnnouncementType
+    {
+        QueenCanEvolve,
+        CoreBuildable,
+        EvolutionUnlock
+    }
+
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
 
+        _query = GetEntityQuery<HiveComponent>();
+
+        SubscribeLocalEvent<HiveComponent, QueenDeathEvent>(OnQueenDeath);
+        SubscribeLocalEvent<HiveComponent, HiveCoreDestroyedEvent>(OnHiveCoreDestroyed);
+        SubscribeLocalEvent<HiveComponent, CasteUnlockScheduleAnnouncement>(OnUnlockScheduleEvent);
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentShutdown>(OnBurrowedSurgeShutdown);
 
@@ -57,6 +80,50 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarvaEarly, v => _lateJoinsPerBurrowedLarvaEarly = v, true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsPerBurrowedLarva, v => _lateJoinsPerBurrowedLarva = v, true);
+    }
+
+    private void OnQueenDeath(Entity<HiveComponent> ent, ref QueenDeathEvent ev)
+    {
+        if (!TryComp(ev.Hive, out HiveComponent? hive))
+            return;
+
+        var delay = hive.NewQueenCooldown;
+        var announceAt = _timing.CurTime + delay;
+
+        ScheduleAnnouncement(ev.Hive, announceAt, AnnouncementType.QueenCanEvolve, "rmc-queen-cooldown-over");
+    }
+
+    private void OnHiveCoreDestroyed(Entity<HiveComponent> ent, ref HiveCoreDestroyedEvent ev)
+    {
+        var announceAt = _timing.CurTime + ent.Comp.NewCoreCooldown;
+        ScheduleAnnouncement(ent.Owner, announceAt, AnnouncementType.CoreBuildable, "rmc-core-cooldown-over");
+    }
+
+    private void OnUnlockScheduleEvent(Entity<HiveComponent> ent, ref CasteUnlockScheduleAnnouncement ev)
+    {
+        var announceAt = _timing.CurTime + ev.UnlockAt - _gameTicker.RoundDuration();
+
+        ScheduleAnnouncement(
+            ent.Owner,
+            announceAt,
+            AnnouncementType.EvolutionUnlock,
+            "rmc-hive-supports-castes",
+            ev.Castes
+        );
+    }
+
+    private void ScheduleAnnouncement(EntityUid hiveId, TimeSpan announceAt, AnnouncementType type, string messageKey, List<EntProtoId>? unlocks = null)
+    {
+        if (!_pendingTimedAnnouncements.ContainsKey(hiveId))
+            _pendingTimedAnnouncements[hiveId] = new List<TimedAnnouncement>();
+
+        _pendingTimedAnnouncements[hiveId].Add(new TimedAnnouncement
+        {
+            AnnounceAt = announceAt,
+            Type = type,
+            MessageKey = messageKey,
+            Unlocks = unlocks
+        });
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -109,45 +176,28 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         if (_gameTicker.RunLevel != GameRunLevel.InRound)
             return;
 
-        var roundTime = _gameTicker.RoundDuration();
-        var hives = EntityQueryEnumerator<HiveComponent>();
-        while (hives.MoveNext(out var hiveId, out var hive))
+        var time = _timing.CurTime;
+        var toRemove = new List<EntityUid>();
+
+        foreach (var (hiveId, announcements) in _pendingTimedAnnouncements)
         {
-            _announce.Clear();
-
-            for (var i = 0; i < hive.AnnouncementsLeft.Count; i++)
+            for (var i = announcements.Count - 1; i >= 0; i--)
             {
-                var left = hive.AnnouncementsLeft[i];
-                if (roundTime >= left)
+                var a = announcements[i];
+                if (time >= a.AnnounceAt)
                 {
-                    if (hive.Unlocks.TryGetValue(left, out var unlocks))
-                    {
-                        foreach (var unlock in unlocks)
-                        {
-                            hive.AnnouncedUnlocks.Add(unlock);
-
-                            if (_prototypes.TryIndex(unlock, out var prototype))
-                            {
-                                _announce.Add(prototype.Name);
-                            }
-                        }
-                    }
-
-                    hive.AnnouncementsLeft.RemoveAt(i);
-                    i--;
-                    Dirty(hiveId, hive);
+                    SendTimedAnnouncement(hiveId, a);
+                    announcements.RemoveAt(i);
                 }
             }
 
-            if (_announce.Count == 0)
-                continue;
-
-            var popup = Loc.GetString("rmc-hive-supports-castes", ("castes", string.Join(", ", _announce)));
-            _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, popup, hive.AnnounceSound, PopupType.Large);
-            EvoScreech(hive);
+            if (announcements.Count == 0)
+                toRemove.Add(hiveId);
         }
 
-        var time = _timing.CurTime;
+        foreach (var hiveId in toRemove)
+            _pendingTimedAnnouncements.Remove(hiveId);
+
         var surge = EntityQueryEnumerator<HijackBurrowedSurgeComponent, HiveComponent>();
         while (surge.MoveNext(out var id, out var burrowed, out var hive))
         {
@@ -173,6 +223,40 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             burrowed.NextSurgeAt = time + burrowed.SurgeEvery;
 
         }
+    }
+
+    private void SendTimedAnnouncement(EntityUid hiveId, TimedAnnouncement announcement)
+    {
+        if (!_query.TryComp(hiveId, out var hive))
+            return;
+
+        switch (announcement.Type)
+        {
+            case AnnouncementType.EvolutionUnlock:
+                if (announcement.Unlocks != null)
+                {
+                    var names = new List<string>();
+                    foreach (var id in announcement.Unlocks)
+                    {
+                        if (_prototypes.TryIndex(id, out var proto))
+                            names.Add(proto.Name);
+                    }
+
+                    var msg = Loc.GetString(announcement.MessageKey, ("castes", string.Join(", ", names)));
+                    _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, msg, hive.AnnounceSound, PopupType.Large);
+                    EvoScreech(hive);
+                }
+                break;
+
+            case AnnouncementType.QueenCanEvolve:
+            case AnnouncementType.CoreBuildable:
+            default:
+                var message = Loc.GetString(announcement.MessageKey);
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, message, hive.AnnounceSound, PopupType.Large);
+                break;
+        }
+
+        Dirty(hiveId, hive);
     }
 
     /// <summary>

@@ -29,12 +29,6 @@ public sealed partial class HiveComponent : Component
     public Dictionary<TimeSpan, List<EntProtoId>> Unlocks = new();
 
     [DataField, AutoNetworkedField]
-    public HashSet<EntProtoId> AnnouncedUnlocks = new();
-
-    [DataField, AutoNetworkedField]
-    public List<TimeSpan> AnnouncementsLeft = [];
-
-    [DataField, AutoNetworkedField]
     public SoundSpecifier AnnounceSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_distantroar_3.ogg", AudioParams.Default.WithVolume(-6));
 
     [DataField, AutoNetworkedField]
