@@ -262,7 +262,7 @@
         type: LifeboatComputerBui
   - type: LifeboatComputer
   - type: AccessReader
-    access: [ [ "CMAccessDropship" ] ] # also Senior access
+    access: [ [ "CMAccessDropship" ], [ "CMAccessCommand" ] ] # replace Command with Senior access
   - type: ActivatableUIBlacklist
     blacklist:
       components:
