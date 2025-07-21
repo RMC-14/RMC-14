@@ -102,6 +102,8 @@
         amount: 5
       - id: RMCWebbingDropPouch
         amount: 2
+      - id: RMCWebbingDropPouchBlack
+        amount: 2
       - id: CMWebbingHolster
         amount: 2
       - id: CMWebbingKnivesFilled

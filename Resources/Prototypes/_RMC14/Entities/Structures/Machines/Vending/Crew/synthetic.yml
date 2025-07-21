@@ -34,6 +34,7 @@
         recommended: true
       - id: CMWebbingBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
       - id: CMWebbingSurgicalBlue

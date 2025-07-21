@@ -299,6 +299,7 @@
         recommended: true
       - id: CMWebbing
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
