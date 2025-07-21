@@ -176,7 +176,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessDropship" ]
+    - [ "CMAccessPilot" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
