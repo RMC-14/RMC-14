@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: CyberTropic
   changes:
-  - message: Added dynamic weather events.
-    type: Add
-  id: 1575
-  time: '2025-04-12T06:07:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6135
-- author: CyberTropic
-  changes:
   - message: Added more LV624 inserts.
     type: Add
   id: 1576
@@ -4855,5 +4848,17 @@
   id: 2075
   time: '2025-07-21T21:40:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7125
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some folding barricades having very high amounts of health.
+    type: Fix
+  - message: Fixed xenos not being able to damage sentries with spit by sprite clicking
+      them.
+    type: Fix
+  - message: Fixed not being able to go past page 4 in dropship targets UI.
+    type: Fix
+  id: 2076
+  time: '2025-07-21T22:37:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7173
 Name: RMC14
 Order: -1
