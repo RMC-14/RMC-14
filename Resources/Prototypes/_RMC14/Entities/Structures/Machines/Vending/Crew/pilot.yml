@@ -87,6 +87,8 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
