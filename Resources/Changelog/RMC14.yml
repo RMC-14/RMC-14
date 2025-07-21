@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: exincore
-  changes:
-  - message: Hybrisa window shutters no longer obstruct vision while closed.
-    type: Fix
-  - message: The Basira-Armstrong bolt-action hunting rifle is no longer a double-barrel
-      shotgun and can no longer accept nor fire shotgun shells.
-    type: Fix
-  id: 1565
-  time: '2025-04-12T05:09:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6105
 - author: Dutch-VanDerLinde
   changes:
   - message: Added being able to click on a flamer in hand to eject its tank.
@@ -4848,5 +4838,17 @@
   id: 2065
   time: '2025-07-21T09:35:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7138
+- author: J C Denton
+  changes:
+  - message: Fixed all Marine roles having Dropship Access. Squad Leaders can still
+      access Dropship Controls.
+    type: Fix
+  - message: Lifeboat Consoles now require Dropship Access.
+    type: Tweak
+  - message: Marine Police now officially has Dropship Access.
+    type: Tweak
+  id: 2066
+  time: '2025-07-21T21:09:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7151
 Name: RMC14
 Order: -1
