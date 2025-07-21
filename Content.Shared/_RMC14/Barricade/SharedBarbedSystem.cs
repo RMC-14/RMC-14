@@ -129,7 +129,7 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         barbed.Comp.IsBarbed = true;
         Dirty(barbed);
-        UpdateBarricade(barbed);
+        UpdateBarricade(barbed, true);
 
         _audio.PlayPredicted(barbed.Comp.BarbSound, barbed.Owner, args.User);
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-slot-insert-success"), barbed.Owner, args.User);
@@ -144,7 +144,7 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         barbed.Comp.IsBarbed = false;
         Dirty(barbed);
-        UpdateBarricade(barbed);
+        UpdateBarricade(barbed, true);
 
         _audio.PlayPredicted(barbed.Comp.CutSound, barbed.Owner, args.User);
         _popupSystem.PopupClient(Loc.GetString("barbed-wire-cutting-action-finish"), barbed.Owner, args.User);
@@ -182,7 +182,7 @@ public abstract class SharedBarbedSystem : EntitySystem
         newComp.IsBarbed = barbed.Comp.IsBarbed;
 
         Dirty(args.New, newComp);
-        UpdateBarricade((args.New, newComp));
+        UpdateBarricade((args.New, newComp), true);
     }
 
     private void OnXenoLeapHitAttempt(Entity<BarbedComponent> ent, ref XenoLeapHitAttempt args)
@@ -193,7 +193,7 @@ public abstract class SharedBarbedSystem : EntitySystem
         _damageableSystem.TryChangeDamage(args.Leaper, ent.Comp.ThornsDamage, origin: ent, tool: ent);
     }
 
-    protected void UpdateBarricade(Entity<BarbedComponent> barbed)
+    protected void UpdateBarricade(Entity<BarbedComponent> barbed, bool updateBarbed = false)
     {
         var open = TryComp(barbed, out DoorComponent? door) && door.State == DoorState.Open;
 
@@ -204,8 +204,11 @@ public abstract class SharedBarbedSystem : EntitySystem
             _ => BarbedWireVisuals.UnWired,
         };
 
-        var ev = new BarbedStateChangedEvent();
-        RaiseLocalEvent(barbed, ref ev);
+        if (updateBarbed)
+        {
+            var ev = new BarbedStateChangedEvent();
+            RaiseLocalEvent(barbed, ref ev);
+        }
 
         // Set fixtures
         if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
