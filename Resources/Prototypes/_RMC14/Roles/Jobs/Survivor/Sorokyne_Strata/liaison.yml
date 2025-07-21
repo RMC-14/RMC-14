@@ -1,11 +1,9 @@
 - type: job
-  parent: CMSurvivor
+  parent: CMSurvivorCorporate
   id: CMJobSurvivorHalcyonDynamicsLiaison
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorHalcyonDynamicsLiaison
-  ranks:
-    RMCRankWeYaExecutive: []
   startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
   accessGroups:
   - ColonistCorporate
