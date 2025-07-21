@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.UniformAccessories;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -32,6 +33,10 @@ public sealed class RMCClothingSystem : EntitySystem
         SubscribeLocalEvent<ClothingLimitComponent, BeingEquippedAttemptEvent>(OnClothingLimitBeingEquippedAttempt);
 
         SubscribeLocalEvent<ClothingRequireEquippedComponent, BeingEquippedAttemptEvent>(OnRequireEquippedBeingEquippedAttempt);
+
+        // this is for clothing with ClothingRequireEquipped, so they can drop when required clothing is unequipped
+        // ex: scout cloak should not stay on when they take off the armor required for it
+        SubscribeLocalEvent<InventoryComponent, DidUnequipEvent>(OnUnequipped);
 
         SubscribeLocalEvent<NoClothingSlowdownComponent, ComponentStartup>(OnNoClothingSlowUpdate);
         SubscribeLocalEvent<NoClothingSlowdownComponent, DidEquipEvent>(OnNoClothingSlowUpdate);
@@ -96,6 +101,11 @@ public sealed class RMCClothingSystem : EntitySystem
 
         args.Cancel();
         args.Reason = ent.Comp.DenyReason;
+    }
+
+    private void OnUnequipped(Entity<InventoryComponent> ent, ref DidUnequipEvent args)
+    {
+        // todo
     }
 
     private void AddFoldVerb(Entity<RMCClothingFoldableComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
