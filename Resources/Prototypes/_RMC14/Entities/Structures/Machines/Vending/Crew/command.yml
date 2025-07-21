@@ -30,7 +30,7 @@
       - id: CMJumpsuitOperations
         name: operations uniform
         recommended: true
-      - id: CMHandsBlackMarine
+      - id: CMHandsBlackInsulated
     - name: Jacket
       choices: { CMCoat: 1}
       entries:
