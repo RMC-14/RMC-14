@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed fast and sticky resin deleting nodes when placed.
-    type: Fix
-  id: 1561
-  time: '2025-04-07T05:37:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6096
-- author: noctyrnal
-  changes:
-  - message: Added missing weather types.
-    type: Add
-  id: 1562
-  time: '2025-04-07T05:36:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6094
 - author: SG6732
   changes:
   - message: Added new M42A2 Pump Shotgun handle sprites + Wooden Stock attachment
@@ -4847,5 +4833,19 @@
   id: 2061
   time: '2025-07-21T01:39:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7126
+- author: DrSmugleaf
+  changes:
+  - message: Fixed burrowers not being able to burrow to location.
+    type: Fix
+  id: 2062
+  time: '2025-07-21T01:46:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7131
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xeno tailstab not having a range of 2.5 (2 > 2.5)
+    type: Fix
+  id: 2063
+  time: '2025-07-21T01:46:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7130
 Name: RMC14
 Order: -1
