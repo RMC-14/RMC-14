@@ -8,9 +8,6 @@ namespace Content.Shared._RMC14.Medical.Unrevivable;
 public sealed partial class RMCRevivableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int Stage = 0;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan UnrevivableDelay = TimeSpan.FromMinutes(5);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
