@@ -146,6 +146,7 @@
       - PillCanister
       - CMSurgicalCase
       - RMCSyringeCase
+  - type: Webbing
     components:
     - type: Storage
       maxItemSize: Small
