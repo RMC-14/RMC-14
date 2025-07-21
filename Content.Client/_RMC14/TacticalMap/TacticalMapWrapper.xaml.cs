@@ -261,7 +261,7 @@ public sealed partial class TacticalMapWrapper : Control
             }
         };
 
-        SetLabelState(TacticalMapControl.LabelMode.Tactical);
+        SetLabelState(TacticalMapControl.LabelMode.Area);
     }
 
     private void SetupBlipSize()
