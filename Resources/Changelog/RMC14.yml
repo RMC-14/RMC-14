@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed rare cases where too many lines could be made lagging the server
-      to death.
-    type: Fix
-  id: 1564
-  time: '2025-04-12T05:05:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6114
 - author: exincore
   changes:
   - message: Hybrisa window shutters no longer obstruct vision while closed.
@@ -4848,5 +4840,13 @@
   id: 2064
   time: '2025-07-21T09:33:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7135
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Survivor jobs now roll more randomly, instead of rolling in a specific
+      order every round.
+    type: Tweak
+  id: 2065
+  time: '2025-07-21T09:35:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7138
 Name: RMC14
 Order: -1
