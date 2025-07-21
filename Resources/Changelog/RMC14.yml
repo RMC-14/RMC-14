@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Adjusted some stocks melee dmg to their intended values (10 > 5).
-    type: Fix
-  id: 1570
-  time: '2025-04-12T05:46:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6124
 - author: Ian321
   changes:
   - message: Fixed Intelligence Officers not having pilot access.
@@ -4843,5 +4836,12 @@
   id: 2070
   time: '2025-07-21T21:29:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7147
+- author: noctyrnal
+  changes:
+  - message: Fixed the UNMC cup's sprite.
+    type: Fix
+  id: 2071
+  time: '2025-07-21T21:34:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7170
 Name: RMC14
 Order: -1
