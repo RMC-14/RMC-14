@@ -82,4 +82,4 @@
   id: RMCJobIconProvostMarshal
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_pvtml
+    state: hudsquad_pvm
