@@ -184,7 +184,7 @@ cm-chatsan-replacement-engineer = tall builder
 cm-chatsan-word-comtech = comtech
 cm-chatsan-replacement-comtech = tall builder
 
-cm-chatsan-word-combat-technitian = combat technician
+cm-chatsan-word-combat-technician = combat technician
 cm-chatsan-replacement-combat-technician = tall builder
 
 cm-chatsan-word-corpsman = corpsman
@@ -550,11 +550,11 @@ cm-chatsan-word-paras = paras
 cm-chatsan-word-parasites = parasites
 cm-chatsan-replacement-parasites = children
 
-cm-chatsan-word-baricade = baricade
+cm-chatsan-word-barricade = barricade
 cm-chatsan-word-cade = cade
-cm-chatsan-word-baricades = baricades
+cm-chatsan-word-barricades = barricades
 cm-chatsan-word-cades = cades
-cm-chatsan-replacement-baricades = metal resin
+cm-chatsan-replacement-barricades = metal resin
 
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked
