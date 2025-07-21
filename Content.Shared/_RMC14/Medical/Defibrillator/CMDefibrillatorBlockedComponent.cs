@@ -13,5 +13,5 @@ public sealed partial class CMDefibrillatorBlockedComponent : Component
     public LocId Examine = "rmc-defib-suicide";
 
     [DataField, AutoNetworkedField]
-    public bool ShowOnExamine = true;
+    public bool ShowOnExamine = false;
 }

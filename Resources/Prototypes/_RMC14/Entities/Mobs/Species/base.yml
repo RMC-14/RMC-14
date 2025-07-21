@@ -112,6 +112,8 @@
     damage:
       types:
         Heat: 1
+  - type: RMCRevivable
+  - type: RMCMedicalExamine
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -159,9 +161,6 @@
   - type: ShortExamine
   - type: MaxDamage
     max: 719 # TODO RMC14 this should be per part and smaller
-  - type: Perishable
-    rotAfter: 300
-    ignoreTemperature: true
   - type: AtmosExposed
   - type: Temperature
     heatDamageThreshold: 325
