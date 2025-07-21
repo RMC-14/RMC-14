@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: SG6732
-  changes:
-  - message: Added new M42A2 Pump Shotgun handle sprites + Wooden Stock attachment
-      sprites of all camo types.
-    type: Add
-  id: 1563
-  time: '2025-04-07T05:49:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5337
 - author: Vermidia
   changes:
   - message: Fixed rare cases where too many lines could be made lagging the server
@@ -4847,5 +4839,14 @@
   id: 2063
   time: '2025-07-21T01:46:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7130
+- author: CyberTropic
+  changes:
+  - message: Added weather to sorokyne
+    type: Add
+  - message: Blocked ambient light indoors on sorokyne
+    type: Fix
+  id: 2064
+  time: '2025-07-21T09:33:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7135
 Name: RMC14
 Order: -1
