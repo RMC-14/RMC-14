@@ -1,0 +1,40 @@
+- type: entity
+  abstract: true
+  id: RMCVehicleTestThing
+  components:
+  - type: Vehicle
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/vehicles.rsi
+    layers:
+    - state: mizutani_black
+  - type: Corrodible
+    isCorrodible: false
+  - type: MobMover
+  - type: DoAfter
+
+
+- type: entity
+  parent: RMCVehicleTestThing
+  id: RMCVehicleChildThing
+  name: wawa car
+  description: test
+  components:
+  - type: VehicleEnter
+
+- type: entity
+  id: RMCVehicleExitArea
+  name: vehicle exit areas
+  description: The exit area of the vehicle
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/objects.rsi
+    layers:
+    - state: abed
+  - type: VehicleExit
+  - type: Vehicle
