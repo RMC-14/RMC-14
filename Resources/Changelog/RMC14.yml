@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: VictorJob
-  changes:
-  - message: adds unique animation for CAS Flare
-    type: Add
-  - message: change Flare's animation
-    type: Tweak
-  id: 1574
-  time: '2025-04-12T06:06:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6077
 - author: CyberTropic
   changes:
   - message: Added dynamic weather events.
@@ -4857,5 +4848,12 @@
   id: 2074
   time: '2025-07-21T21:39:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7167
+- author: x5tink
+  changes:
+  - message: Returned plushies to the people!
+    type: Fix
+  id: 2075
+  time: '2025-07-21T21:40:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7125
 Name: RMC14
 Order: -1
