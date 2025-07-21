@@ -26,7 +26,7 @@
       - id: CMMRE
     - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Armour
@@ -174,7 +174,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessDropship" ]
+    - [ "CMAccessPilot" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
