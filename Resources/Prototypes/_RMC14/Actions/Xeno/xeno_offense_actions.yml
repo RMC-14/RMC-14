@@ -120,7 +120,7 @@
       state: tail_attack
     useDelay: 10
   - type: TargetAction
-    range: 2
+    range: 2.5
     checkCanAccess: false
   - type: EntityTargetAction
   - type: WorldTargetAction

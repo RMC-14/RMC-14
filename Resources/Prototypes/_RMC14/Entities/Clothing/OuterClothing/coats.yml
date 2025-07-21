@@ -23,6 +23,12 @@
     user:
       components:
       - RMCAllowSuitStorage
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
 
 - type: entity
   abstract: True
@@ -361,7 +367,7 @@
 - type: entity
   parent: RMCBaseJacket
   id: RMCCoatASOBlackAlt
-  name: auxiliary support officer alternative black coat
+  name: auxiliary support officer black coat
   description: A black coat perfect for sorting papers in colder weather.
   components:
   - type: Sprite
@@ -370,6 +376,17 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/black_alt.rsi
   - type: CMArmor
     melee: 10
+
+- type: entity
+  parent: RMCCoatASOBlackAlt
+  id: RMCCoatASOWhiteAlt
+  name: auxiliary support officer white coat
+  description: A white coat perfect for sorting papers in colder weather.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
 
 # Commanding Officer
 - type: entity
@@ -453,6 +470,16 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_khaki.rsi
+
+- type: entity
+  parent: RMCCoatBomberRed
+  id: RMCCoatBomberBlack
+  name: black bomber jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/bomber_black.rsi
 
 - type: entity
   parent: CMCoatCO
@@ -640,6 +667,19 @@
     melee: 10
   - type: Appearance
 
+# Normal utility vest
+- type: entity
+  parent: RMCBaseJacket
+  id: CMUtilityVest
+  name: utility vest
+  description: A leather utility vest, often used to hold tools.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Synthetic/synth_utility.rsi
+  - type: Appearance
+
 - type: entity
   parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
   id: RMCJacketWindbreaker
@@ -647,7 +687,7 @@
   description: A green windbreaker.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker.rsi
     layers:
     - state: icon
       map: [ "unfoldedLayer" ]
@@ -661,10 +701,22 @@
     unfoldVerbText: rmc-button-up-verb
     foldVerbText: rmc-unbutton-verb
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerFirstResponder
+  name: first responder windbreaker
+  description: A brown windbreaker with reflective strips commonly worn by first responders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
+
 
 # priest robes
 - type: entity
@@ -682,6 +734,28 @@
 
 - type: entity
   parent: RMCBaseJacket
+  id: RMCCoatHoboBlue
+  name: dark blue worn parka
+  description: An old worn blue Parka, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_blue.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatHoboGreen
+  name: dark green worn parka
+  description: An old worn green Parka, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_green.rsi
+
+- type: entity
+  parent: RMCBaseJacket
   id: RMCCoatHoboBrown
   name: dark brown worn polyester jacket
   description: An old worn brown polyester jacket, has seen better days...
@@ -690,6 +764,50 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatHoboDarkBlue
+  name: dark blue worn polyester jacket
+  description: An old worn blue polyester jacket, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_dark_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_dark_blue.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatHoboRed
+  name: dark red worn polyester jacket
+  description: An old worn blue polyester jacket, has seen better days...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_red.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatWaistcoat
+  name: waistcoat
+  description: For some classy, murderous fun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/waistcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/waistcoat.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatSanitation
+  name: sanitation utility uniform
+  description: A Sanitation utility uniform, used by the clean-up crews of the more prosperous colonies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
 
 # Snow
 

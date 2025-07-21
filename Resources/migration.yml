@@ -1345,3 +1345,6 @@ FlippoEngravedLighter: RMCZippoGold
 # 2025-07-17
 RMCIDCardDeputy: RMCIDCardCMBDeputy
 RMCIDCardMarshal: RMCIDCardCMBMarshal
+
+# 2025-07-20
+RMCJumpsuitMarshal: RMCMarshalCMBUniform

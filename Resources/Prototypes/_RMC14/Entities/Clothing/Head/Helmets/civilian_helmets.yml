@@ -1,0 +1,43 @@
+- type: entity
+  parent: RMCHelmetBase
+  id: RMCArmorHelmetFirefighter
+  name: HS-SHIELD-X 500 helmet
+  description: The HS-SHIELD-X 500 (Halcyon Systems - Safety Helmet Integrated for Extreme Danger). A closed helmet designed to protect the wearer from hazardous environments, this specific model is designed to be effective in high heat environments and protect the user from smoke inhalation. It has a built in semi-closed breathing system. This helmet was designed by Halcyon Systems.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/firefighter.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/firefighter.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+  - type: CMArmor
+    melee: 30
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
+
+- type: entity
+  parent: RMCArmorHelmetFirefighter
+  id: RMCArmorHelmetTMCCMiner
+  name: HS-TM-SHIELD-X 550 helmet
+  description: The HS-TM-SHIELD-X 550 (Halcyon Systems - Tartarus Mining - Safety Helmet Integrated for Extreme Danger). A closed helmet designed to protect the wearer from hazardous environments, this specific model is designed to be effective in a variety of hazardous environments and protect the user from toxic fume inhalation. It has a built in semi-closed breathing system. This helmet was designed by Halcyon Systems, in collabaration with Tartarus-Mining.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/tmcc_miner.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/tmcc_miner.rsi
+
+- type: entity
+  parent: RMCArmorHelmetFirefighter
+  id: RMCArmorHelmetParamedic
+  name: MT-SHIELD-X 525 helmet
+  description: TThe MT-SHIELD-X 525 (MedTech - Safety Helmet Integrated for Extreme Danger). A closed helmet designed to protect the wearer from hazardous environments, this specific model is designed to be effective in a variety of hazardous environments and protects the user from potential biohazards. This helmet was designed by Halcyon Systems, in collabaration with MedTech.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/paramedic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/paramedic.rsi

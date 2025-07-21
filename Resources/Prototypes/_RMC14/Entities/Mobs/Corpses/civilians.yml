@@ -114,6 +114,27 @@
 #    # motion detector
 #    # good research notes
 
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseScientistAegis
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseScientistAegis ]
+
+- type: startingGear
+  id: RMCGearCorpseScientistAegis
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVirology
+    back: CMSatchelMedical
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsLatex
+    outerClothing: ClothingOuterCoatLab
+    id: RMCIDCardAegisIntel
+    ears: CMHeadsetColony
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
 # Miner
 - type: randomHumanoidSettings
   parent: RMCCorpse
@@ -178,7 +199,7 @@
 - type: startingGear
   id: RMCGearCorpseDeputy
   equipment:
-    jumpsuit: RMCJumpsuitMarshal
+    jumpsuit: RMCMarshalCMBUniform
     back: CMSatchelSecurity
     outerClothing: RMCCoatBureauDeputy
     shoes: CMBootsBlackFilled

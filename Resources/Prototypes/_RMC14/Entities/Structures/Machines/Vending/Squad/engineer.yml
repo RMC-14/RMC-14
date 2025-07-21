@@ -22,7 +22,6 @@
     - name: Handheld Defense
       takeOne: CMHandheldDefense
       entries:
-      - id: RMCTesla
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
       - id: RMCSentry

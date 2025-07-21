@@ -1,0 +1,64 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorLV624CargoTechnician
+  name: rmc-job-name-survivor-lv624-cargo-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorLV624CargoTechnician
+  startingGear: RMCGearSurvivorLV624CargoTechnician
+  spawnMenuRoleName: Cargo Technician (LV624 Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillEngineer: 2
+        RMCSkillVehicles: 3
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetLV624CargoTechnician
+
+- type: startingGear
+  id: RMCGearSurvivorLV624CargoTechnician
+  equipment:
+    jumpsuit: RMCJumpsuitKhakiWorkwearJacketless
+    back: CMSatchelEngineerSurvivorFill
+    head: RMCHeadYellowSoftCap
+    shoes: RMCShoesLaceup
+    id: CMIDCardColonistEngineer
+    ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchToolsFill
+# TODO RMC Meson Goggles
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624CargoTechnician
+  name: survivor lv624 archeologist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorLV624CargoTechnician
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetLV624CargoTechnician
+  name: lv624 cargo technician colonist preset # TODO RMC14 random research notes

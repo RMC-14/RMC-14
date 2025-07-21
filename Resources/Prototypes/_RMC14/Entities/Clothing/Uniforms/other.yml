@@ -9,17 +9,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/pizza.rsi
 
-- type: entity
-  parent: RMCMarineUniformBase
-  id: RMCJumpsuitMarshal
-  name: marshal uniform
-  description: A pair of off-white slacks and a blue button-down shirt with a dark brown tie; the standard uniform of the Marshals.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/marshal.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/marshal.rsi
-
 # Correspondent
 - type: entity
   parent: RMCMarineUniformBase
@@ -281,6 +270,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/yellow_jumpsuit.rsi
 
 - type: entity
+  parent: RMCJumpsuitNormCivilianYellow
+  id: RMCJumpsuitNormCivilianBlackWebbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingBlack
+
+- type: entity
   parent: RMCJumpsuitCivilian
   id: RMCJumpsuitNormCivilianBlue
   name: blue jumpsuit
@@ -346,6 +342,104 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/orange.rsi
 
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitSteward
+  name: steward utilities
+  description: A stylish brown vest and shorts - uniforms like this are often worn by clerks and shop stewards
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitWeyamart
+  name: Weyamart uniform
+  description: A pair of dark-grey slacks and an orange button-down shirt; a standard uniform for the Weston-Yamada branded supermarket 'Weyamart'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitSanitation
+  name: Weston-Yamada RFF - sanitation uniform
+  description: A set of Weston-Yamada RFF - Sanitation fatigues, a green pair of work slacks and a grey polo-shirt with green reflecting stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitPizzaGalaxy
+  name: Pizza-Galaxy uniform
+  description: A pair of red slacks and a white button-down shirt with a large 'Pizza-Galaxy' logo on the back; a standard uniform for a Pizza-Galaxy employee. Pizza-Galaxy! To infinity and beyond!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitDailyGrind
+  name: The Daily Grind uniform
+  description: A pair of black slacks and a white short-sleeved button-down shirt; a standard uniform for a 'The Daily Grind' employee. Are you ready for the daily grind?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitTMCC
+  name: tartarus-mining uniform
+  description: A set of Tartarus-Mining fatigues, a yellow pair of utility work slacks and a light-grey polo-shirt with red reflecting stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilian
+  id: RMCJumpsuitDoctor
+  name: medical doctor's uniform
+  description: They're made of a special fiber that provides minor protection against biohazards. They have a cross on the chest denoting that the wearer is trained medical personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/doctor.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/doctor.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitEMT
+  description: A set of EMT - Paramedic fatigues, this one is green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitEMTGreen
+  name: EMT - Paramedic uniform
+  description: A set of EMT - Paramedic fatigues, this one is red.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt_green.rsi
+
 # Kutjevo
 - type: entity
   parent: RMCMarineUniformBase
@@ -377,24 +471,14 @@
   description: It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection.
   components:
   - type: Sprite
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/security.rsi
   - type: Clothing
-    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-left
-      right:
-      - state: inhand-right
-        color: "#C12D30"
-        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
-      - state: overlay-inhand-right
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/security.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories: [ RMCSecurityArmband]
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitUNSecurity
   name: United Nations Security uniform
   description: Overalls made of kevlar cover a snazzy blue dress shirt. Often utilized by United Nations security personnel in riot control situations.
@@ -414,6 +498,28 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilianEngineerWorker
+  name: Weston-Yamada engineering utility uniform
+  description: A set of Weston-Yamada engineering utility workers uniform, a orange pair of work slacks and a grey polo-shirt with orange reflecting stripes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
+
+- type: entity
+  parent: RMCJumpsuitCivilianEngineerWorker
+  id: RMCJumpsuitCivilianEngineerWorkerAlt
+  description: A set of Weston-Yamada engineering utility workers uniform, a blue pair of work slacks and a grey polo-shirt with yellow reflecting stripes.
+  suffix: Alternative
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker_alt.rsi
 
 # CLF
 - type: entity
@@ -439,3 +545,15 @@
   components:
   - type: WebbingClothing
     startingWebbing: CMWebbingBrown
+
+# Frontier
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilianFrontier
+  name: frontier jumpsuit
+  description: A cargo jumpsuit dressed down for full range of motion and state-of-the-art frontier temperature control. It's the best thing an engineer can wear in the Outer Veil.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi

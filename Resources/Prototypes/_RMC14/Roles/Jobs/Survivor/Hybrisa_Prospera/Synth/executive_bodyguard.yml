@@ -1,0 +1,122 @@
+- type: job
+  parent: RMCJobSyntheticColony
+  id: RMCSyntheticColonyHybrisaExecBodyguard
+  playTimeTracker: RMCJobSyntheticColonyHybrisaExecBodyguard
+  startingGear: RMCGearSyntheticColonistHybrisaExecBodyguard
+  spawnMenuRoleName: Executive Bodyguard (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 1
+        RMCSkillIntel: 1
+        RMCSkillDomestics: 2
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: synth
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaSynthExecBodyguard
+    - type: Synth
+      generation: rmc-species-synth-generation-second
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      # TODO darksight instead of night vision
+      - type: NightVision
+        innate: true
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      - type: RMCLeapProtection
+        inherentStunDuration: 3
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
+      - type: RMCSuicide
+        damage: { }
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistBase
+  id: RMCGearSyntheticColonistHybrisaExecBodyguard
+  equipment:
+    outerClothing: RMCHazardVestBlack
+  inhand:
+    - RMCScabbardMacheteFilled
+
+- type: playTimeTracker
+  id: RMCJobSyntheticColonyHybrisaExecBodyguard
+  isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetHybrisaSynthExecBodyguard
+  name: survivor synth hybrisa executive bodyguard preset
+  categories: [ HideSpawnMenu ] # Todo random research notes, telebaton in backpack
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCJumpsuitLiaisonExpensiveSuitDropPouch, RMCSatchelBlack, RMCBootsCorporate ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrownDropPouch, RMCSatchelBlack, CMBootsBrownFilled ]
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacketDropPouch, CMSatchel, RMCBootsPMCFilled ] # todo lockable satchel
+    - [ RMCJumpsuitLiaisonExpensiveSuitBrownJacketDropPouch, CMSatchel, RMCBootsCorporate ] # Todo lockable satchel
+    - [ RMCJumpsuitLiaisonExpensiveSuitJacketOnlyDropPouch, RMCSatchelNorm, RMCBootsCorporate ]
+    randomStartingGear:
+      eyes:
+      - CMGlassesSecurity
+      - RMCGlassesSecurityBlue

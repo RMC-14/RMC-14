@@ -1,0 +1,64 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: RMCSurvivorHybrisaXenobiologist
+  name: rmc-job-name-survivor-xenobiologist
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaXenobiologist
+  startingGear: RMCGearSurvivorHybrisaXenobiologist
+  spawnMenuRoleName: Xenobiologist (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaXenobiologist
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorHybrisaXenobiologist
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaXenobiologist
+  name: xenobiologist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaXenobiologist
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetScientist
+  id: RMCGearSurvivorPresetHybrisaXenobiologist
+  name: xenobiologist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesReagentHUDGlasses, RMCShoesLaceup ]
+    - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesReagentHUDGlasses, RMCShoesLaceup ]
+    - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesMarineRpg, RMCShoesLaceup ]
+    - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesMarineRpg, RMCShoesLaceup ]
+    - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCHandsVeteranCBRN, RMCArmorVestCivilian, RMCGlassesReagentHUDGlasses, RMCShoesBrown, CMHeadBandTan, RMCWeaponFlamerImprovised ]
+
