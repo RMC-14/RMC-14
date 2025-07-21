@@ -76,7 +76,9 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbingHolster
       - id: CMWebbing
 
 # WARDEN
@@ -149,5 +151,7 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbingHolster
       - id: CMWebbing

@@ -26,7 +26,7 @@
       - id: CMMRE
     - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Armour
@@ -87,6 +87,8 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
