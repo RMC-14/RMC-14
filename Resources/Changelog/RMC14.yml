@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed acider's exploding and healers sacrificing leaving behind bodies.
-    type: Fix
-  id: 1573
-  time: '2025-04-12T05:58:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6115
 - author: VictorJob
   changes:
   - message: adds unique animation for CAS Flare
@@ -4851,5 +4844,18 @@
   id: 2073
   time: '2025-07-21T21:37:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7168
+- author: Dygon
+  changes:
+  - message: Barricades can be anchored and unanchored, and sandbags can be disassembled
+      again.
+    type: Fix
+  - message: You're now unable to drop or fall onto the Almayer.
+    type: Fix
+  - message: Parasites already under a resin door won't be blocked by it during their
+      leap.
+    type: Fix
+  id: 2074
+  time: '2025-07-21T21:39:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7167
 Name: RMC14
 Order: -1
