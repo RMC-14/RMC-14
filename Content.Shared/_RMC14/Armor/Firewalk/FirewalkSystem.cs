@@ -90,7 +90,7 @@ public sealed class FirewalkSystem : EntitySystem
         EntityManager.RemoveComponents(user, ent.Comp.AddComponentsOnFirewalk);
 
         if (_net.IsServer)
-            _popup.PopupClient(Loc.GetString("rmc-firewalk-end"), user, user, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString("rmc-firewalk-end"), user, user, PopupType.Medium);
     }
 
     public Entity<FirewalkArmorComponent>? FindFirewalkArmor(EntityUid player)
