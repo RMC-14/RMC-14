@@ -30,7 +30,7 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
 
         using (args.PushGroup(nameof(RMCMedicalExamineSystem), 1))
         {
-            args.PushMarkup(Loc.GetString(ent.Comp.DeadText));
+            args.PushMarkup(Loc.GetString(ent.Comp.DeadText, ("victim", ent.Owner)));
         }
     }
 

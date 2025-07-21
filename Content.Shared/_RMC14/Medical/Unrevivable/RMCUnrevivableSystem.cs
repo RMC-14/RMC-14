@@ -67,9 +67,7 @@ public sealed class RMCUnrevivableSystem : EntitySystem
         var start = ent.Comp.UnrevivableAt - ent.Comp.UnrevivableDelay;
 
         var progress = (now - start) / (end - start);
-        progress = Math.Clamp(progress, 0, 1);
-
-        return (int)(progress * maxStages);
+        return (int)(maxStages * progress);
     }
 
     public override void Update(float frameTime)
