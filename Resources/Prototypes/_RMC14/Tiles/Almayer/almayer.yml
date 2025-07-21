@@ -8,6 +8,7 @@
     collection: FootstepFloor
   itemDrop: CMTileItemSteel
   heatCapacity: 10000
+  friction: 1
 
 - type: tile
   parent: CMTileBase
