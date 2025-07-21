@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Removed a fleshy bullet impact sound.
-    type: Fix
-  id: 1560
-  time: '2025-04-07T05:34:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6098
 - author: Vermidia
   changes:
   - message: Fixed fast and sticky resin deleting nodes when placed.
@@ -4847,5 +4840,12 @@
   id: 2060
   time: '2025-07-21T00:11:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7124
+- author: Dygon
+  changes:
+  - message: HIDP grenade packets now contain HIDP grenades again.
+    type: Fix
+  id: 2061
+  time: '2025-07-21T01:39:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7126
 Name: RMC14
 Order: -1
