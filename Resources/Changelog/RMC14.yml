@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Fixed Intelligence Officers not having pilot access.
-    type: Fix
-  id: 1571
-  time: '2025-04-12T05:56:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6101
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You can now toggle helmet accessories by pressing E or using a verb on
-      it.
-    type: Add
-  id: 1572
-  time: '2025-04-12T05:57:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6117
 - author: Vermidia
   changes:
   - message: Fixed acider's exploding and healers sacrificing leaving behind bodies.
@@ -4843,5 +4828,28 @@
   id: 2071
   time: '2025-07-21T21:34:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7170
+- author: SharkSnake98
+  changes:
+  - message: Added 4 new playtime medals, in the form of engraved metal name badges.
+    type: Add
+  - message: Replaced the CL's ribbon system with the new badges.
+    type: Tweak
+  id: 2072
+  time: '2025-07-21T21:37:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7165
+- author: noctyrnal
+  changes:
+  - message: Added the "UNMC lightweight expedition satchel", a visual alternative
+      to the current IO backpacks.
+    type: Add
+  - message: Added Leg Pouches, these come in black and camo, and serve as visual
+      alternatives to the 5 slot webbings.
+    type: Add
+  - message: SOs now have Black Insulated Gloves instead of Black Gloves in their
+      vendors.
+    type: Tweak
+  id: 2073
+  time: '2025-07-21T21:37:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7168
 Name: RMC14
 Order: -1
