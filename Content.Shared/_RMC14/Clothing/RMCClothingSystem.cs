@@ -84,21 +84,8 @@ public sealed class RMCClothingSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        foreach (var held in _hands.EnumerateHeld(args.EquipTarget))
-        {
-            if (_whitelist.IsValid(ent.Comp.Whitelist, held))
-                return;
-        }
-
-        var slots = _inventory.GetSlotEnumerator(args.EquipTarget);
-        while (slots.MoveNext(out var slot))
-        {
-            if (slot.ContainedEntity is not { } contained)
-                continue;
-
-            if (_whitelist.IsValid(ent.Comp.Whitelist, contained))
-                return;
-        }
+        if (HasEquippedItemsWithinWhitelist(args.EquipTarget, ent.Comp.Whitelist))
+            return;
 
         args.Cancel();
         args.Reason = ent.Comp.DenyReason;
@@ -113,8 +100,34 @@ public sealed class RMCClothingSystem : EntitySystem
                 continue;
 
             if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.AutoUnequip && _whitelist.IsValid(requiresEquipped.Whitelist, ent.Owner))
+            {
+                if (HasEquippedItemsWithinWhitelist(args.User, requiresEquipped.Whitelist))
+                    continue;
+
                 _inventory.TryUnequip(args.User, slot.ID);
+            }
         }
+    }
+
+    private bool HasEquippedItemsWithinWhitelist(EntityUid uid, EntityWhitelist whitelist)
+    {
+        foreach (var held in _hands.EnumerateHeld(uid))
+        {
+            if (_whitelist.IsValid(whitelist, held))
+                return true;
+        }
+
+        var slots = _inventory.GetSlotEnumerator(uid);
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is not { } contained)
+                continue;
+
+            if (_whitelist.IsValid(whitelist, contained))
+                return true;
+        }
+
+        return false;
     }
 
     private void AddFoldVerb(Entity<RMCClothingFoldableComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)

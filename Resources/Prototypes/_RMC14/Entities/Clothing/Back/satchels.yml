@@ -102,6 +102,7 @@
     whitelist:
       tags:
       - RMCScoutArmor
+      - PlushieLizard
     denyReason: rmc-wear-scout-armor-required
   - type: ThermalCloak
     opacity: 0.03 # Put to 0.03 for testing
