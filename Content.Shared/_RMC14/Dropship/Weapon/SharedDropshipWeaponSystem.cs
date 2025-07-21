@@ -836,14 +836,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
         }
 
+        if (!IsValidTarget(ent.Comp.Target.Value))
+        {
+            RemovePvsActors(ent);
+            SetTarget(ent, null);
+            Dirty(ent);
+            return;
+        }
+
         var coordinates = _transform.GetMoverCoordinates(ent.Comp.Target.Value);
 
         // Can't drop underground
         if (!CasDebug)
         {
-            if(!_area.CanCAS(coordinates) ||
-               !_area.CanFulton(coordinates) ||
-               !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)))
+            if(!_area.CanCAS(coordinates))
             {
                 if (_net.IsClient)
                 {
