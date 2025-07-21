@@ -46,6 +46,7 @@
   blockAnchoring: true
   blockConstruction: true
   weedsSpreadable: false
+  friction: 1
 
 - type: tile
   parent: CMFloorSteel
