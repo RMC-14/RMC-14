@@ -463,7 +463,7 @@
 - type: entity
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbChaplainPatch
-  name: improper UNMC chaplain helmet patch
+  name: UNMC chaplain helmet patch
   description: This patch is all that remains of the Chaplaincy of the UNS Almayer, along with the Chaplains themselves. Both no longer exist as a result of losses suffered during Tychon Tackle.
   components:
   - type: Sprite
