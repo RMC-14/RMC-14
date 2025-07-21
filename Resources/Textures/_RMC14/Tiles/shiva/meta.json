@@ -34,44 +34,12 @@
       ]
     },
     {
-      "name": "multi_tiles",
-      "directions": 8
-    },
-    {
       "name": "snow_mat",
-      "directions": 4
-    },
-    {
-      "name": "bluefull",
-      "directions": 4
-    },
-    {
-      "name": "blue",
-      "directions": 8
-    },
-    {
-      "name": "bluecorners",
-      "directions": 4
-    },
-    {
-      "name": "greenfull",
-      "directions": 4
-    },
-    {
-      "name": "green",
-      "directions": 8
-    },
-    {
-      "name": "greencorners",
       "directions": 4
     },
     {
       "name": "redfull",
       "directions": 4
-    },
-    {
-      "name": "red",
-      "directions": 8
     },
     {
       "name": "redcorners",
@@ -87,18 +55,6 @@
     },
     {
       "name": "yellowcorners",
-      "directions": 4
-    },
-    {
-      "name": "purplefull",
-      "directions": 4
-    },
-    {
-      "name": "purple",
-      "directions": 8
-    },
-    {
-      "name": "purplecorners",
       "directions": 4
     },
     {
