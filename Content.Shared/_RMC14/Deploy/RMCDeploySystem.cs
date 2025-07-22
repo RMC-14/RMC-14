@@ -190,7 +190,7 @@ public sealed class RMCDeploySystem : EntitySystem
 
         EntityUid? storageEntity = null;
 
-        // Разворачиваем только те сущности, которые есть в контейнере
+        // We deploy only those entities that are in the container
         foreach (var containedEntity in originalStorage.ContainedEntities.ToList())
         {
             if (!TryComp<RMCDeployedEntityComponent>(containedEntity, out var deployedComp))
@@ -398,7 +398,6 @@ public sealed class RMCDeploySystem : EntitySystem
                 // First, collect all entities to delete, then delete them outside the enumeration to avoid reentrancy and collection modification issues.
                 var toDelete = new List<EntityUid>();
                 var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
-                int found = 0;
                 while (enumerator.MoveNext(out var entity, out var childComp))
                 {
                     if (childComp.OriginalEntity != ent.Comp.OriginalEntity)
@@ -407,10 +406,7 @@ public sealed class RMCDeploySystem : EntitySystem
                         continue;
                     var mode = origComp.DeploySetups[childComp.SetupIndex].Mode;
                     if (mode == RMCDeploySetupMode.ReactiveParental || mode == RMCDeploySetupMode.Reactive)
-                    {
                         toDelete.Add(entity);
-                    }
-                    found++;
                 }
                 foreach (var entity in toDelete)
                 {
