@@ -7,7 +7,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Timing;
-using Robust.Shared.Serialization;
 
 // ReSharper disable CheckNamespace
 namespace Content.Shared.Doors.Components;
