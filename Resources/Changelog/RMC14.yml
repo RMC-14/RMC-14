@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Flare packs can now directly transfer their content to a flare pouch.
-    type: Add
-  id: 1583
-  time: '2025-04-14T03:28:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6144
-- author: Dygon
-  changes:
-  - message: Weapon attachment damage now accounts for the user's melee skill level
-      and any other melee damage modifiers.
-    type: Fix
-  id: 1584
-  time: '2025-04-15T00:09:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6156
 - author: noctyrn
   changes:
   - message: Fixes weed wall overlays.
@@ -4862,5 +4847,24 @@
   id: 2083
   time: '2025-07-22T21:37:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7180
+- author: Dygon
+  changes:
+  - message: Immature Queens can't start a hijack from the Almayer anymore.
+    type: Tweak
+  - message: Queens can't start a second hijack from the Almayer after one already
+      happened.
+    type: Fix
+  id: 2084
+  time: '2025-07-22T21:52:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7207
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed flamer fuel contents not appearing
+    type: Fix
+  - message: Fixed reagent tanks dispense mode lagging when you examine it.
+    type: Fix
+  id: 2085
+  time: '2025-07-22T21:53:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7178
 Name: RMC14
 Order: -1
