@@ -204,6 +204,25 @@
   - FolderYellowRMC
   # TODO Notepad
 
+# Plushies
+- type: loadoutGroup
+  id: PlushiesRMC
+  name: rmc-loadout-group-plushies
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - PlushieFarwaRMC
+  - PlushieBarricadeRMC
+  - PlushieBeeRMC
+  - PlushieSharkGreyRMC
+  - PlushieSharkBlueRMC
+  - PlushieSharkPinkRMC
+  - PlushieMothRMC
+  - PlushieRockRMC
+  - PlushieTherapyRMC
+  - PlushieGnarpGnarpRMC
+  - PlushieGnarpGnarpAltRMC
+
 # Recreational
 - type: loadoutGroup
   id: RecreationalRMC

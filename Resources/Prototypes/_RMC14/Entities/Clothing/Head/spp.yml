@@ -40,7 +40,7 @@
   parent: ArmorHelmetSPP
   id: RMCArmorHelmetSPPArmy
   name: 6B82 combat helmet
-  description: An older version of the UPP Army's 6B92 combat helmet, still worn by certain units on planets the SPP deems less important
+  description: An older version of the SPP Army's 6B92 combat helmet, still worn by certain units on planets the SPP deems less important
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/army_helmet.rsi
@@ -89,7 +89,7 @@
   parent: CMHeadCapSPPCivilian
   id: RMCHeadCapSPPCivilianPlantWorker
   name: white worker cap
-  description: A simple white fabric cap, commonly worn by various UPP workers to keep hair contained and maintain cleanliness. Lightweight and practical, but not very durable.
+  description: A simple white fabric cap, commonly worn by various SPP workers to keep hair contained and maintain cleanliness. Lightweight and practical, but not very durable.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/white_cap.rsi

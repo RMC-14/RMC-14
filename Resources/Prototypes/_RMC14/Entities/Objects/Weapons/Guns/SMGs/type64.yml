@@ -91,7 +91,7 @@
     - RMCWeaponSMG
     - RMCWeaponSMGType64
   - type: RMCLoreExaminable
-    content: The Type 64 finds its way into the hands of more than just SPP soldiers, it has an active life with rebel groups, corporate security forces, mercenaries, less well-armed militaries, and just about everything or everyone in between.
+    content: rmc-lore-examinable-type-64-submachine-gun
 
 - type: entity
   parent: CMMagazineRifleBase

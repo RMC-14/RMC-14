@@ -20,7 +20,7 @@
 
 # Scrubs
 - type: entity
-  parent: [ RMCMarineUniformBase, RMCJumpsuitMarinePatchBase ]
+  parent: RMCMarineUniformBase
   id: CMScrubsBlue
   name: blue medical scrubs
   description: They're made of a special fiber that provides minor protection against biohazards. These are in blue.

@@ -25,6 +25,12 @@ CMJobSurvivorPriest = Priest Colonist
 cm-job-name-survivor-scientist = Scientist Colonist
 CMSurvivorScientist = Scientist Colonist
 
+rmc-job-name-survivor-cmb-deputy = CMB Deputy
+CMSurvivorCMBDeputy = CMB Deputy
+
+cm-job-name-survivor-goon = We-Ya Corporate Security
+CMSurvivorGoon = We-Ya Corporate Security
+
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
@@ -55,6 +61,26 @@ rmc-job-name-forecon-support-tech = Support Technician
 rmc-job-name-forecon-synth = Synthetic
 rmc-job-name-forecon-commander = Commander
 
+# LV-624 survs
+
+rmc-job-name-survivor-lv624-archeologist = Archeologist
+CMSurvivorLV624Archeologist = Archeologist
+
+rmc-job-name-survivor-lv624-cargo-technician = Cargo Technician
+CMSurvivorLV624CargoTechnician = Cargo Technician
+
+rmc-job-name-survivor-lv624-corporate-liaison = LV-624 Corporate Liaison
+CMSurvivorLV624CorporateLiaison = LV-624 Corportate Liaison
+
+rmc-job-name-survivor-lv624-security-guard = We-Ya Security Guard
+CMSurvivorLV624SecurityGuard = We-Ya Security Guard
+
+rmc-job-name-survivor-lv624-medical-technician = Emergency Medical Technician
+CMSurvivorLV624MedicalTechnician = Emergency Medical Technician
+
+rmc-job-name-survivor-lv624-engineer = Engineer
+CMSurvivorLV624Engineer = Engineer
+
 # New Varadero Survs
 
 rmc-job-name-survivor-commander-new-varadero = Commander
@@ -82,6 +108,47 @@ cm-job-prefix-survivor-icb = ICB
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
 
+# Hybrisa Prospera Survs
+
+rmc-job-name-survivor-hybrisa-civilian = Civilian
+CMJobSurvivorHybrisaCivilian = Civilian
+
+rmc-job-name-survivor-hybrisa-office-worker = Civilian - Office Worker
+CMJobSurvivorHybrisaOfficeWorker = Civilian - Office Worker
+
+rmc-job-name-survivor-hybrisa-weyamart-employee = Civilian - Weymart Employee
+CMJobSurvivorHybrisaWeyamartEmployee = Civilian - Weymart Employee
+
+rmc-job-name-survivor-material-reprocessing-technician = Civilian - Material Reprocessing Technician
+CMJobSurvivorHybrisaMaterialReprocessingTechnician = Civilian - Material Reprocessing Technician
+
+rmc-job-name-survivor-fire-protection-specialist-hybrisa = Civilian - Fire Protection Specialist
+CMJobSurvivorFireProtectionSpecialistHybrisa = Civilian - Fire Protection Specialist
+rmc-job-prefix-fire-protection-specialist-hybrisa = FPS
+
+rmc-job-name-survivor-grind-barista = Civilian - The Daily Grind Barista
+CMJobSurvivorHybrisaGrindBarista = Civilian - The Daily Grind Barista
+
+rmc-job-name-survivor-tmcc-miner = TMCC - Miner
+CMJobSurvivorHybrisaTMCCMiner = TMCC - Miner
+
+rmc-job-name-survivor-medical-doctor = Doctor
+CMJobSurvivorHybrisaMedicalDoctor = Doctor
+
+rmc-job-name-survivor-emt-paramedic = EMT - Paramedic
+CMJobSurvivorHybrisaEMTParamedic = EMT - Paramedic
+
+rmc-job-name-survivor-xenoarchaeologist = Xenoarchaeologist
+CMJobSurvivorHybrisaXenoarchaeologist = Xenoarchaeologist
+
+rmc-job-name-survivor-xenobiologist = Xenobiologist
+CMJobSurvivorHybrisaXenobiologist = Xenobiologist
+
+rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
+
+rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
+rmc-job-name-survivor-construction-worker = Construction Worker
+rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
 # Sorokyne Strata Survs
 

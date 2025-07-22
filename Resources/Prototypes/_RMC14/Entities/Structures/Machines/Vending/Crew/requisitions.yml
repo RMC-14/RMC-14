@@ -98,6 +98,10 @@
         amount: 2
       - id: CMWebbingBlack
         amount: 2
+      - id: RMCWebbingLegPouch
+        amount: 2
+      - id: RMCWebbingLegPouchBlack
+        amount: 2
       - id: CMWebbing
         amount: 5
       - id: RMCWebbingDropPouch
