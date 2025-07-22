@@ -92,6 +92,14 @@
     job: CMSurvivorCorporate
 
 - type: entity
+  parent: CMIDCardLiaisonColony
+  id: RMCIDCardWeYaCorporateSecurity
+  name: we-ya corporate security ID card
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorHybrisaCorporateSecurity
+
+- type: entity
   parent: CMIDCardLiaison
   id: RMCIDCardExecutiveCorporateSpecialist
   name: executive corporate specialist ID card
@@ -136,6 +144,45 @@
     sprite: _RMC14/Objects/CMIDs/pizza.rsi
   - type: PresetIdCard
     job: CMPizzaDeliverer
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardMarshal
+  name: bureau marshal gold badge
+  description: A coveted gold badge signifying that the wearer is one of the few CMB Marshals patroling the outer rim. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: PresetIdCard
+    job: CMBureauMarshal
+  - type: ItemIFF
+    faction: FactionMarine
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardDeputy
+  name: bureau deputy silver badge
+  description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: PresetIdCard
+    job: CMBureauDeputy
+  - type: ItemIFF
+    faction: FactionMarine
+
+# for survs
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardDeputySurvivor
+  name: bureau deputy silver badge
+  description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
+      state: icon
+    - type: Clothing
+      slots:
+      - idcard
+      sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
+    - type: ItemIFF
+      faction: FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -289,3 +336,19 @@
   - type: Access
     groups:
       - CMAccessAegis
+  - type: AegisTrackable
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCIDCardAegis
+  id: RMCIDCardAegisIntel
+  name: AEGIS Access Badge
+  suffix: Intel-giving
+  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates. It has some blood on it.
+  components:
+  - type: IntelRescueSurvivorObjective
+    value: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: bloody

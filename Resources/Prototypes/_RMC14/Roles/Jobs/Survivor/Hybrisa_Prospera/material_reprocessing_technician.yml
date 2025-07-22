@@ -1,0 +1,65 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorHybrisaMaterialReprocessingTechnician
+  name: rmc-job-name-survivor-material-reprocessing-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaMaterialReprocessingTechnician
+  startingGear: RMCGearSurvivorHybrisaMaterialReprocessingTechnician
+  spawnMenuRoleName: Civilian - Material Reprocessing Technician (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaMaterialReprocessingTechnician
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaMaterialReprocessingTechnician
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaMaterialReprocessingTechnician
+  name: hybrisa material reprocessing technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaMaterialReprocessingTechnician
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetHybrisaMaterialReprocessingTechnician
+  name: hybrisa material reprocessing technician preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCHeadCapPatrol, RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCHeadCapPatrol, RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCHeadCapPatrol, RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCMaskRebreather, RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCMaskRebreather, RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCMaskRebreather, RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown]
+    - [ RMCHeadDuragBlack, RMCMaskRebreather, RMCJumpsuitSanitation, CMSatchelEngineer, RMCCoatSanitation, CMHandsBrown, CMBootsBrown, RMCWeaponFlamerImprovised]
