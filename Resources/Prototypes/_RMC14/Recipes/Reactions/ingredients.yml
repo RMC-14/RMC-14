@@ -94,3 +94,16 @@
       amount: 1
   products:
     Wine: 2
+
+- type: reaction
+  id: RMCMilkshake
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    Milk:
+      amount: 1
+    IceCream:
+      amount: 1
+  products:
+    RMCMilkshake: 2
+

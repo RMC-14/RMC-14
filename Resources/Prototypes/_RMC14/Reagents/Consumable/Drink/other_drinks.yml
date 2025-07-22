@@ -1,0 +1,14 @@
+﻿- type: reagent
+  id: RMCMilkshake
+  parent: BaseDrink
+  name: reagent-name-rmc-milkshake
+  desc: reagent-desc-rmc-milkshake
+  physicalDesc: reagent-physical-desc-creamy
+  flavor: creamy
+  color: "#DFC6AF"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/milkshake.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
