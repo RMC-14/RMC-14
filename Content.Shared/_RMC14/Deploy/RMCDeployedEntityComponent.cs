@@ -8,6 +8,7 @@ namespace Content.Shared._RMC14.Deploy;
 /// Used for tracking, redeployment, and collapse logic of deployed entities (e.g., tent parts, fortification elements).
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(RMCDeploySystem), Other = AccessPermissions.Read)]
 public sealed partial class RMCDeployedEntityComponent : Component, ISerializationHooks
 {
     /// <summary>
