@@ -3,7 +3,7 @@
   id: CMJobSurvivorMoHDoctor
   name: rmc-job-name-survivor-moh-doctor
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorMoHDoctor
+  playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorMoHDoctor
   accessGroups:
   - ColonistMedical
@@ -49,10 +49,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorMoHDoctor
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetDoctor

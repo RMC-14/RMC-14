@@ -3,7 +3,7 @@
   id: RMCSurvivorNewVaraderoResearcher
   name: cm-job-name-survivor-new-varadero-researcher
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorNewVaraderoResearcher
+  playTimeTracker: CMJobSurvivorScientist
   startingGear: RMCGearSurvivorNewVaraderoResearcher
   spawnMenuRoleName: New Varadero Researcher (NV Survivor)
   accessGroups:
@@ -30,7 +30,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: RMCJobSurvivorNewVaraderoResearcher
-  isHumanoid: true

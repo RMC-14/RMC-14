@@ -3,7 +3,6 @@
   id: CMSurvivorLV624MedicalTechnician
   name: rmc-job-name-survivor-lv624-medical-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624MedicalTechnician
   startingGear: RMCGearSurvivorLV624MedicalTechnician
   spawnMenuRoleName: Medical Technician (LV624 Survivor)
   special:
@@ -49,10 +48,6 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorLV624MedicalTechnician
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetDoctor
