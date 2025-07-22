@@ -94,6 +94,7 @@
   parent: BaseSpeciesDummy
   id: MobFelinidDummy
   categories: [ HideSpawnMenu ]
+  components:
   - type: Sprite
     drawdepth: Mobs
     layers:
