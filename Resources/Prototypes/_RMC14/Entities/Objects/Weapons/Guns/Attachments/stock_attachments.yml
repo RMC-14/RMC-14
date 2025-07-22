@@ -40,9 +40,9 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentM42A2WoodenStock
-  name: M42A2 wooden stock
-  description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
+  id: RMCAttachmentM42A1WoodenStock
+  name: M42A1 wooden stock
+  description: A non-standard heavy wooden stock for the M42A1 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
   components:
   - type: Sprite
     state: d_stock
@@ -51,7 +51,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM42A2WoodenStock
+    - RMCAttachmentM42A1WoodenStock
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -82,6 +82,33 @@
       Classic: c_stock
       Urban: u_stock
 
+- type: entity
+  parent: RMCAttachmentM42A1WoodenStock
+  id: RMCAttachmentM42A2WoodenStock
+  name: M42A2 wooden stock
+  description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/desert.rsi
+    state: stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM42A2WoodenStock
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/urban.rsi
+    states:
+      Jungle: stock
+      Desert: stock
+      Snow: stock
+      Classic: stock
+      Urban: stock
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -1007,6 +1034,9 @@
 
 - type: Tag
   id: RMCAttachmentM890Stock
+
+- type: Tag
+  id: RMCAttachmentM42A1WoodenStock
 
 - type: Tag
   id: RMCAttachmentM42A2WoodenStock
