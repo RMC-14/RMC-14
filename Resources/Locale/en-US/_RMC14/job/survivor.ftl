@@ -218,3 +218,5 @@ CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
 # Chance's Colonists
 
+cm-job-name-survivor-chances-trucker= Weston-Yamada Heavy Vehicle Operator
+CMSurvivorChancesTrucker = Weston-Yamada Heavy Vehicle Operator

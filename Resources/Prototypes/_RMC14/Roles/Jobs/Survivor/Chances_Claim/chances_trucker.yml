@@ -1,10 +1,10 @@
 ﻿- type: job
-  parent: CMSurvivorTrucker
+  parent: CMJobBase
   id: CMSurvivorChancesTrucker
   name: cm-job-name-survivor-chances-trucker
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorChancesTrucker
-  startingGear: RMCGearSurvivorChancesTrucker
+  playTimeTracker: CMJobPVESurvivorChancesTrucker
+  startingGear: RMCGearPVESurvivorChancesTrucker
   spawnMenuRoleName: Weston-Yamada Heavy Vehicle Operator (Chances Colonist)
   special:
   - !type:AddComponentSpecial
@@ -25,11 +25,8 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-    - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetTrijentTrucker
 
 - type: startingGear
-  parent: RMCGearSurvivorTrucker
   id: RMCGearSurvivorTrijentTrucker
   equipment:
     head: RMCHeadCapTruckerBlue
@@ -39,22 +36,17 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorTrijentTrucker
-  name: trijent trucker spawn point
+  id: RMCSpawnPointSurvivorPVEChancesTrucker
+  name: chances trucker spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMJobPVESurvivorChancesTrucker
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorTrijentTrucker
+  id: CMJobPVESurvivorChancesTrucker
   isHumanoid: true
 
-- type: entity
-  parent: RMCSurvivorPresetTrucker
-  id: RMCGearSurvivorPresetTrijentTrucker
-  name: trijent trucker colonist preset
-  categories: [ HideSpawnMenu ]
