@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Roundstart larva now spawn inside dead colonists and need to burst out
-    type: Add
-  id: 1580
-  time: '2025-04-14T02:05:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6085
 - author: noctyrnal
   changes:
   - message: Changes the appearance of the We-Ya Whiteout Commandos. If you can see
@@ -4864,5 +4857,12 @@
   id: 2080
   time: '2025-07-22T21:30:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7200
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Sorokyne Strata survivors having the wrong ranks.
+    type: Fix
+  id: 2081
+  time: '2025-07-22T21:32:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7175
 Name: RMC14
 Order: -1
