@@ -551,6 +551,9 @@
 - type: entity
   parent: [RMCBaseJacketButtonableOpened, RMCCoatService]
   id: RMCCoatServiceFolded
+  name: marine service jacket
+  description: A service jacket typically worn by officers of the UNMC.
+  suffix: Unbuttoned
 
 - type: entity
   parent: CMCoatOfficer
