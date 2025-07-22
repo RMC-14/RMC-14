@@ -366,3 +366,15 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
+
+
+- type: entity
+  parent: RMCJumpsuitLiaisonKhakiWorkwear
+  id: RMCJumpsuitLiaisonBlueGreyAdmin
+  name: blue-grey administrative uniform
+  description: A pair of blue pants and a blue-grey shirt. A common look for colonial administration clerks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/bluegrey_admin.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/bluegrey_admin.rsi

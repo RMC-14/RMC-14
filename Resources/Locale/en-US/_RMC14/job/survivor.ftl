@@ -215,3 +215,6 @@ CMSurvivorTrijentDamTech = Dam Maintenance Technician
 
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
+
+# Chance's Colonists
+
