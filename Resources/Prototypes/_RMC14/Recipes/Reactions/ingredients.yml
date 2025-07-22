@@ -107,3 +107,16 @@
   products:
     RMCMilkshake: 2
 
+- type: reaction
+  id: CreateMeat
+  impact: Low
+  quantized: true
+  conserveEnergy: false
+  reactants:
+    CMClonexadone:
+      amount: 1
+    Blood:
+      amount: 5
+  effects:
+  - !type:CreateEntityReactionEffect
+    entity: FoodMeat
