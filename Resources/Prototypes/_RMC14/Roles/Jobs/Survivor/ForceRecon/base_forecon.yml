@@ -15,6 +15,11 @@
   playTimeTracker: RMCSurvivorForecon
   spawnMenuRoleName: FORECON Survivor (Base)
   useLoadoutOfJob: CMSurvivor
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
   hidden: true
 
 - type: startingGear
@@ -38,11 +43,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # TODO durag
+    randomOutfits:
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
     - [ RMCHeadBeanie ]
+    - [ RMCHeadDurag ]
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]

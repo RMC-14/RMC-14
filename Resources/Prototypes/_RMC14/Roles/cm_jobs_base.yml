@@ -66,3 +66,13 @@
     Silver: RMCMedalRibbonYellowService
     Gold: RMCMedalRibbonRedService
     Platinum: RMCMedalRibbonBlueService
+
+- type: job
+  abstract: true
+  parent: CMJobBase
+  id: RMCJobNametagBase
+  medals:
+    Bronze: RMCMedalBronzeNametagService
+    Silver: RMCMedalSilverNametagService
+    Gold: RMCMedalGoldNametagService
+    Platinum: RMCMedalPlatinumNametagService

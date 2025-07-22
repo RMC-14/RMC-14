@@ -695,7 +695,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsTargetsNext(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsTargetsNextMsg args)
     {
-        ent.Comp.TargetsPage = Math.Min(ent.Comp.Targets.Count % 5, ent.Comp.TargetsPage + 1);
+        ent.Comp.TargetsPage = Math.Min(ent.Comp.Targets.Count / 5, ent.Comp.TargetsPage + 1);
         Dirty(ent);
         RefreshWeaponsUI(ent);
     }
@@ -836,14 +836,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
         }
 
+        if (!IsValidTarget(ent.Comp.Target.Value))
+        {
+            RemovePvsActors(ent);
+            SetTarget(ent, null);
+            Dirty(ent);
+            return;
+        }
+
         var coordinates = _transform.GetMoverCoordinates(ent.Comp.Target.Value);
 
         // Can't drop underground
         if (!CasDebug)
         {
-            if(!_area.CanCAS(coordinates) ||
-               !_area.CanFulton(coordinates) ||
-               !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)))
+            if(!_area.CanCAS(coordinates))
             {
                 if (_net.IsClient)
                 {

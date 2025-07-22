@@ -1,0 +1,97 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorCorporate
+  name: cm-job-name-survivor-corporate
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorCorporate
+  icon: "CMJobIconLiaison"
+  hasIcon: true
+  ranks:
+    RMCRankWeYaExecutiveSpecialist:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 630000 # 175 hours
+    RMCRankWeYaSeniorExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 252000 # 70 hours
+    RMCRankWeYaExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorCorporate
+      time: 90000 # 25 hours
+    RMCRankWeYaJuniorExecutive: []
+  startingGear: RMCGearSurvivorCorporate
+  accessGroups:
+  - ColonistCorporate
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCorporate
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorCorporate
+  equipment:
+    ears: RMCHeadsetDistressWeYa
+    jumpsuit: CMJumpsuitLiaisonField
+    outerClothing: RMCArmorVest
+    shoes: RMCShoesLaceup
+    back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
+    id: CMIDCardLiaisonColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchDocument
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCorporate
+  name: survivor corporate spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorCorporate
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetCorporate
+  name: corporate colonist preset
+  categories: [ HideSpawnMenu ]   # TODO RMC14 random research notes
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorCorporate
+  name: corporate colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorCorporate
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorCorporate
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorCorporate

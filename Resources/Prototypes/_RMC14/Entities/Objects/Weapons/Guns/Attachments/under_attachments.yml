@@ -223,7 +223,7 @@
       accuracyAddMult: 0.05
       scatterFlat: -4
   - type: RMCLoreExaminable
-    content: A standard visible-band laser module designated as the AN/PEQ-42 Laser Sight. Can be mounted onto any firearm that has a lower rail large enough to accommodate it.
+    content: rmc-lore-examinable-laser-sight
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -289,7 +289,7 @@
   - type: Sprite
     state: flamer_nozzle
   - type: RMCLoreExaminable
-    content: The Experimental Volatile-Exothermic-Sphere-Generator clip-on nozzle attachment for the M34 incinerator unit was specifically designed to allow marines to launch fireballs into enemy foxholes and bunkers. Despite the gel and resin coating, the flaming ball of naptha tears apart due the drag caused by launching it through the air, leading marines to use the attachment as a makeshift firework launcher during shore leave.
+    content: rmc-lore-examinable-xm-vesg-1-flamer-nozzle
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]

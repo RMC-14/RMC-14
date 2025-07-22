@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Power;
 using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Logs;
@@ -149,6 +150,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
+    [Dependency] private readonly RMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
@@ -684,6 +686,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (comp.SpawnSurvivors)
             {
+                // Shuffle survivor jobs and ensure civilian survivor stays at the bottom, as civ survivor has infinite slots
+                comp.SurvivorJobs = comp.SurvivorJobs
+                    .Where(entry => entry.Job != comp.CivilianSurvivorJob)
+                    .OrderBy(_ => _random.Next())
+                    .Append(comp.SurvivorJobs.FirstOrDefault(entry => entry.Job == comp.CivilianSurvivorJob))
+                    .ToList();
+
                 var survivorCandidates = new Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]>();
                 foreach (var job in comp.SurvivorJobs)
                 {
@@ -1641,10 +1650,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (_queenBuildingBoostEnabled &&
             time - component.StartTime >= _queenBoostDuration &&
             !component.QueenBoostRemoved)
-            {
-                component.QueenBoostRemoved = true;
-                RemoveQueenBuildingBoosts();
-            }
+        {
+            component.QueenBoostRemoved = true;
+            RemoveQueenBuildingBoosts();
+        }
+
+        if (!component.RecalculatedPower)
+        {
+            component.RecalculatedPower = true;
+            _rmcPower.RecalculatePower();
+        }
 
         if (!component.AresGreetingDone && announcementTime >= component.AresGreetingDelay)
         {
