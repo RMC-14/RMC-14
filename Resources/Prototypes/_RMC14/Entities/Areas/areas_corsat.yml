@@ -27,6 +27,8 @@
   components:
     - type: Sprite
       state: corsat_telecomms
+    - type: Area
+      alwaysPowered: true
 
 - type: entity
   parent: RMCAreaCorsat
@@ -35,6 +37,8 @@
   components:
     - type: Sprite
       state: corsat_telecomms
+    - type: Area
+      alwaysPowered: true
 
 - type: entity
   parent: RMCAreaCorsat
@@ -53,6 +57,7 @@
       OB: false
       supplyDrop: false
       weatherEnabled: false
+      alwaysPowered: true
 
 - type: entity
   parent: RMCAreaCorsat
@@ -1262,3 +1267,4 @@
       supplyDrop: false
       weatherEnabled: false
       noTunnel: true
+      alwaysPowered: true

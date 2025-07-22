@@ -40,6 +40,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaFiorina
@@ -181,6 +182,8 @@
   components:
   - type: Sprite
     state: lz1
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
@@ -189,6 +192,8 @@
   components:
   - type: Sprite
     state: lz2
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaShuttleDrop1
