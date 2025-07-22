@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: RMCJobSurvivorNewVaraderoResearcher
   startingGear: RMCGearSurvivorNewVaraderoResearcher
+  spawnMenuRoleName: New Varadero Researcher (NV Survivor)
   accessGroups:
   - ColonistMedical
   useLoadoutOfJob: CMSurvivorScientist
