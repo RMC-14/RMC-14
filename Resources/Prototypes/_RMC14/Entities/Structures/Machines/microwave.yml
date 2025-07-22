@@ -32,3 +32,38 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: KitchenMicrowave
+  id: CMMicrowaveLocked
+  components:
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None
+  - type: ApcPowerReceiver
+    needsPower: false # intentionally!
+    powerLoad: 0
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/microwave.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    layers:
+    - state: mw0
+      map: ["enum.MicrowaveVisualizerLayers.Base"]
+    - state: mw_unlit
+      shader: unshaded
+      map: ["enum.MicrowaveVisualizerLayers.BaseUnlit"]
+    - state: mwbloody0
+      map: ["bloody"]
+      visible: false
+    - state: mwbloody1
+      shader: unshaded
+      map: ["bloodyunshaded"]
+      visible: false
+  - type: Machine
+    board: CMCircuitboardMicrowave
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

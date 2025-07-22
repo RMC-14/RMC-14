@@ -7,7 +7,6 @@ using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
-using Content.Shared.Buckle.Components;
 using Content.Shared._RMC14.Rules;
 using Robust.Shared.Containers;
 using Content.Shared.Item.ItemToggle.Components;
@@ -15,6 +14,7 @@ using System.Numerics;
 using Content.Shared.Foldable;
 using Content.Shared.Examine;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.GameStates;
 
 namespace Content.Shared._RMC14.Deploy;
 
@@ -28,9 +28,9 @@ public sealed class RMCDeploySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly Tag.TagSystem _tags = default!;
     [Dependency] private readonly FoldableSystem _foldable = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
 
 
     public override void Initialize()
@@ -40,8 +40,6 @@ public sealed class RMCDeploySystem : EntitySystem
         SubscribeLocalEvent<RMCDeployableComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RMCDeployableComponent, RMCDeployDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<RMCDeployableComponent, DoAfterAttemptEvent<RMCDeployDoAfterEvent>>(OnDeployDoAfterAttempt);
-        // Track destruction of deployed entities
-        SubscribeLocalEvent<RMCDeployedEntityComponent, ComponentShutdown>(OnDeployedEntityShutdown);
         // React to collapse attempt using a tool
         SubscribeLocalEvent<RMCDeployedEntityComponent, InteractUsingEvent>(OnParentalCollapseInteractUsing);
         SubscribeLocalEvent<RMCDeployedEntityComponent, RMCParentalCollapseDoAfterEvent>(OnParentalCollapseDoAfter);
@@ -162,6 +160,9 @@ public sealed class RMCDeploySystem : EntitySystem
     /// </summary>
     private void DeploySetups(Entity<RMCDeployableComponent> ent, Vector2 areaCenter, EntityUid user)
     {
+        if (_netManager.IsClient)
+            return;
+
         // Ensure the original entity has a ContainerManagerComponent
         EntityManager.EnsureComponent<ContainerManagerComponent>(ent.Owner);
 
@@ -183,6 +184,9 @@ public sealed class RMCDeploySystem : EntitySystem
     /// </summary>
     private void RedeployExistingEntities(Entity<RMCDeployableComponent> ent, Vector2 areaCenter, BaseContainer originalStorage)
     {
+        if (_netManager.IsClient)
+            return;
+
         EntityUid? storageEntity = null;
 
         // Разворачиваем только те сущности, которые есть в контейнере
@@ -227,7 +231,7 @@ public sealed class RMCDeploySystem : EntitySystem
             if (setup.StorageOriginalEntity && storageEntity == null)
                 storageEntity = containedEntity;
 
-            Logger.Info($"[Deploy] Redeployed existing entity {containedEntity} for setup {setupIndex}");
+            Logger.Error($"[Deploy] Redeployed existing entity {containedEntity} for setup {setupIndex}");
         }
 
         // Place the original entity in the storage container
@@ -246,12 +250,18 @@ public sealed class RMCDeploySystem : EntitySystem
     /// </summary>
     private void DeployAllSetups(Entity<RMCDeployableComponent> ent, Vector2 areaCenter, EntityUid user)
     {
+        if (_netManager.IsClient)
+            return;
+
         EntityUid? storageEntity = null;
 
         foreach (var (setup, i) in ent.Comp.DeploySetups.Select((s, idx) => (s, idx)))
         {
             var spawnPos = areaCenter + setup.Offset;
             var spawned = EntityManager.SpawnEntity(setup.Prototype, new MapCoordinates(spawnPos, _xform.GetMapId(user)));
+
+            // Добавляем в PVS override
+            _rmcPvs.AddGlobalOverride(spawned);
 
             _xform.SetWorldPosition(spawned, spawnPos);
             _xform.SetWorldRotation(spawned, Angle.FromDegrees(setup.Angle));
@@ -271,10 +281,18 @@ public sealed class RMCDeploySystem : EntitySystem
             childComp.SetupIndex = i;
             Dirty(spawned, childComp);
 
+            // Логируем Transform
+            if (EntityManager.TryGetComponent(spawned, out TransformComponent? xformLog))
+            {
+                Logger.Error($"[Deploy] Spawned entity={spawned} ParentUid={xformLog.ParentUid} ChildCount={xformLog.ChildCount}");
+            }
+
+            Logger.Error($"[Deploy] Spawned entity={spawned} setupIdx={i} orig={ent.Owner} mode={setup.Mode}");
+
             if (setup.StorageOriginalEntity && storageEntity == null)
                 storageEntity = spawned;
 
-            Logger.Info($"[Deploy] Created new entity {spawned} for setup {i}");
+            Logger.Error($"[Deploy] Created new entity {spawned} for setup {i}");
         }
 
         // Place the original entity inside the storageEntity container, if it exists
@@ -284,6 +302,11 @@ public sealed class RMCDeploySystem : EntitySystem
             if (!_container.Insert(ent.Owner, container))
             {
                 Logger.GetSawmill("entity").Error($"Failed to place original entity {ent.Owner} in container 'storage' of entity {storageEntity.Value}");
+            }
+            // Логируем Transform для исходной сущности после вставки в контейнер
+            if (EntityManager.TryGetComponent(ent.Owner, out TransformComponent? xformLog))
+            {
+                Logger.Error($"[Deploy] Inserted original entity={ent.Owner} ParentUid={xformLog.ParentUid} ChildCount={xformLog.ChildCount}");
             }
         }
         else
@@ -363,54 +386,6 @@ public sealed class RMCDeploySystem : EntitySystem
             return false;
         }
         return true;
-    }
-
-    /// <summary>
-    /// Called when a deployed child entity is being deleted or its component is removed.
-    /// Handles cleanup and possible deletion of related entities.
-    /// </summary>
-    private void OnDeployedEntityShutdown(Entity<RMCDeployedEntityComponent> ent, ref ComponentShutdown args)
-    {
-        // If already in shutdown, skip further processing
-        if (ent.Comp.InShutdown)
-            return;
-        ent.Comp.InShutdown = true;
-        Dirty(ent.Owner, ent.Comp);
-
-        // Try to get the original entity
-        if (!EntityManager.EntityExists(ent.Comp.OriginalEntity))
-            return;
-
-        if (!EntityManager.TryGetComponent(ent.Comp.OriginalEntity, out RMCDeployableComponent? origComp))
-            return;
-
-        if (origComp is not null)
-        {
-            // Check if this was a ReactiveParentalSetup
-            var setup = origComp.DeploySetups[ent.Comp.SetupIndex];
-            if (setup.Mode == RMCDeploySetupMode.ReactiveParental)
-            {
-                // First, collect all entities to delete, then delete them outside the enumeration to avoid reentrancy and collection modification issues.
-                var toDelete = new List<EntityUid>();
-                var enumerator = EntityManager.EntityQueryEnumerator<RMCDeployedEntityComponent>();
-                while (enumerator.MoveNext(out var entity, out var childComp))
-                {
-                    if (childComp.OriginalEntity != ent.Comp.OriginalEntity)
-                        continue;
-                    if (childComp.SetupIndex == ent.Comp.SetupIndex)
-                        continue;
-                    var mode = origComp.DeploySetups[childComp.SetupIndex].Mode;
-                    if (mode == RMCDeploySetupMode.ReactiveParental || mode == RMCDeploySetupMode.Reactive)
-                    {
-                        toDelete.Add(entity);
-                    }
-                }
-                foreach (var entity in toDelete)
-                {
-                    EntityManager.DeleteEntity(entity);
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -520,7 +495,10 @@ public sealed class RMCDeploySystem : EntitySystem
                 // Skip setups marked as NeverRedeployableSetup
                 var childSetup = deployable.DeploySetups[childComp.SetupIndex];
                 if (childSetup.NeverRedeployableSetup)
+                {
+                    Logger.Error($"[Deploy] NeverRedeployableSetup entity={childUid}  {Name(childUid)}");
                     continue;
+                }
                 // Do not add the original entity itself
                 if (childUid == comp.OriginalEntity)
                     continue;
