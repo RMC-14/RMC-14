@@ -248,6 +248,7 @@
   id: RMCHeadsetMARSOC
   name: UNMC SOF headset
   description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
+  suffix: ERT
   components:
   - type: ContainerFill
     containers:
