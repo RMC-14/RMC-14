@@ -1,65 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Resin Surge properly works on doors again.
-    type: Fix
-  id: 1578
-  time: '2025-04-14T01:40:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6146
-- author: Vermidia
-  changes:
-  - message: Fixed AMR normal shots having stopping power.
-    type: Fix
-  - message: Fixed AMR first shots doing stun/knockback.
-    type: Fix
-  id: 1579
-  time: '2025-04-14T02:01:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6145
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Roundstart larva now spawn inside dead colonists and need to burst out
-    type: Add
-  id: 1580
-  time: '2025-04-14T02:05:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6085
-- author: noctyrnal
-  changes:
-  - message: Changes the appearance of the We-Ya Whiteout Commandos. If you can see
-      these new sprites, you fucked up.
-    type: Tweak
-  id: 1581
-  time: '2025-04-14T02:06:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6111
-- author: Vermidia
-  changes:
-  - message: Fixed Parasites not having different rank titles. Larva also now have
-      different titles.
-    type: Fix
-  id: 1582
-  time: '2025-04-14T02:07:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6136
-- author: Dygon
-  changes:
-  - message: Flare packs can now directly transfer their content to a flare pouch.
-    type: Add
-  id: 1583
-  time: '2025-04-14T03:28:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6144
-- author: Dygon
-  changes:
-  - message: Weapon attachment damage now accounts for the user's melee skill level
-      and any other melee damage modifiers.
-    type: Fix
-  id: 1584
-  time: '2025-04-15T00:09:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6156
-- author: noctyrn
-  changes:
-  - message: Fixes weed wall overlays.
-    type: Tweak
-  id: 1585
-  time: '2025-04-15T00:10:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6157
 - author: Sigil
   changes:
   - message: Shootable attachments are now predicted.
@@ -4866,5 +4805,75 @@
   id: 2078
   time: '2025-07-22T21:28:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7205
+- author: OmerF-afk
+  changes:
+  - message: Fixed MP27 using the wrong bullet.
+    type: Fix
+  id: 2079
+  time: '2025-07-22T21:30:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7189
+- author: noctyrnal
+  changes:
+  - message: Fixed New Varadero plating friction.
+    type: Fix
+  id: 2080
+  time: '2025-07-22T21:30:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7200
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Sorokyne Strata survivors having the wrong ranks.
+    type: Fix
+  id: 2081
+  time: '2025-07-22T21:32:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7175
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed ghosts being able to ignore the burrowed larva cooldown.
+    type: Fix
+  id: 2082
+  time: '2025-07-22T21:36:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7176
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed unbuttoned service jackets not appearing unbuttoned.
+    type: Fix
+  id: 2083
+  time: '2025-07-22T21:37:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7180
+- author: Dygon
+  changes:
+  - message: Immature Queens can't start a hijack from the Almayer anymore.
+    type: Tweak
+  - message: Queens can't start a second hijack from the Almayer after one already
+      happened.
+    type: Fix
+  id: 2084
+  time: '2025-07-22T21:52:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7207
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed flamer fuel contents not appearing
+    type: Fix
+  - message: Fixed reagent tanks dispense mode lagging when you examine it.
+    type: Fix
+  id: 2085
+  time: '2025-07-22T21:53:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7178
+- author: DrSmugleaf
+  changes:
+  - message: Fixed multi row storages sometimes not preserving item order when taking
+      items out of them.
+    type: Fix
+  - message: Fixed being able to buckle to folded roller beds.
+    type: Fix
+  - message: Fixed overdoses not doing anything on updated medicines.
+    type: Fix
+  - message: Fixed PvE rounds having automatic commander promotions and burrowed larva.
+    type: Fix
+  - message: Fixed rounds on Chance's Claim not starting.
+    type: Fix
+  id: 2086
+  time: '2025-07-22T22:16:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7208
 Name: RMC14
 Order: -1
