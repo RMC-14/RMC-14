@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Resin Surge properly works on doors again.
-    type: Fix
-  id: 1578
-  time: '2025-04-14T01:40:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6146
-- author: Vermidia
-  changes:
-  - message: Fixed AMR normal shots having stopping power.
-    type: Fix
-  - message: Fixed AMR first shots doing stun/knockback.
-    type: Fix
-  id: 1579
-  time: '2025-04-14T02:01:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6145
 - author: Dutch-VanDerLinde
   changes:
   - message: Roundstart larva now spawn inside dead colonists and need to burst out
@@ -4866,5 +4850,19 @@
   id: 2078
   time: '2025-07-22T21:28:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7205
+- author: OmerF-afk
+  changes:
+  - message: Fixed MP27 using the wrong bullet.
+    type: Fix
+  id: 2079
+  time: '2025-07-22T21:30:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7189
+- author: noctyrnal
+  changes:
+  - message: Fixed New Varadero plating friction.
+    type: Fix
+  id: 2080
+  time: '2025-07-22T21:30:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7200
 Name: RMC14
 Order: -1
