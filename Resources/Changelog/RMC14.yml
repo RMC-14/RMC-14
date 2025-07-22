@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrn
-  changes:
-  - message: Fixes weed wall overlays.
-    type: Tweak
-  id: 1585
-  time: '2025-04-15T00:10:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6157
 - author: Sigil
   changes:
   - message: Shootable attachments are now predicted.
@@ -4866,5 +4859,21 @@
   id: 2085
   time: '2025-07-22T21:53:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7178
+- author: DrSmugleaf
+  changes:
+  - message: Fixed multi row storages sometimes not preserving item order when taking
+      items out of them.
+    type: Fix
+  - message: Fixed being able to buckle to folded roller beds.
+    type: Fix
+  - message: Fixed overdoses not doing anything on updated medicines.
+    type: Fix
+  - message: Fixed PvE rounds having automatic commander promotions and burrowed larva.
+    type: Fix
+  - message: Fixed rounds on Chance's Claim not starting.
+    type: Fix
+  id: 2086
+  time: '2025-07-22T22:16:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7208
 Name: RMC14
 Order: -1
