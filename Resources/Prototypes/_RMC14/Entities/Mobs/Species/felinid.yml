@@ -12,6 +12,72 @@
     - HeadTop
   - type: Sprite
     drawdepth: Mobs
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+    - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.LHand" ]
+    - map: [ "enum.HumanoidVisualLayers.RHand" ]
+    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "gloves" ]
+    - map: [ "enum.SquadArmorLayers.Gloves" ]
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "outerClothing" ]
+    - map: [ "enum.SquadArmorLayers.Armor" ]
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
+    - map: [ "eyes" ]
+    - map: [ "belt" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "back" ]
+    - map: [ "id" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "mask" ]
+    - map: [ "neck" ]
+    - map: [ "head" ]
+    - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+    - map: [ "enum.NewPlayerLayers.Layer" ]
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: Wagging
     action: ActionToggleFelinidWagging
   - type: Vocal
@@ -28,3 +94,71 @@
   parent: BaseSpeciesDummy
   id: MobFelinidDummy
   categories: [ HideSpawnMenu ]
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+    - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.LHand" ]
+    - map: [ "enum.HumanoidVisualLayers.RHand" ]
+    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "gloves" ]
+    - map: [ "enum.SquadArmorLayers.Gloves" ]
+    - map: [ "shoes" ]
+    - map: [ "ears" ]
+    - map: [ "outerClothing" ]
+    - map: [ "enum.SquadArmorLayers.Armor" ]
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
+    - map: [ "eyes" ]
+    - map: [ "belt" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "back" ]
+    - map: [ "id" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "mask" ]
+    - map: [ "neck" ]
+    - map: [ "head" ]
+    - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+    - map: [ "enum.NewPlayerLayers.Layer" ]
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false

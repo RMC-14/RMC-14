@@ -43,12 +43,12 @@
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
     - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
-    - map: [ "enum.HumanoidVisualLayers.HeadTop" ] # RMC14 re-arrange headtop slot
     - map: [ "enum.VisorVisualLayers.Base" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
@@ -359,6 +359,7 @@
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
     - map: [ "neck" ] # RMC14 re-arrange neck slot
@@ -366,7 +367,6 @@
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: [ "enum.MedalVisualLayers.Base" ]
-    - map: [ "enum.HumanoidVisualLayers.HeadTop" ] # RMC14 re-arrange headtop slot
   - type: Appearance
   - type: HumanoidAppearance
     species: Human
