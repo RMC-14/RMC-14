@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/23/2025 07:36:51
+  time: 07/23/2025 17:34:53
   entityCount: 2376
 maps:
 - 1
@@ -2788,6 +2788,37 @@ entities:
         38,-42: RMCAreaSpace
         39,-42: RMCAreaSpace
         39,-41: RMCAreaSpace
+        -2,-31: RMCAreaERTFax
+        -2,-32: RMCAreaERTFax
+        -2,-33: RMCAreaERTFax
+        -1,-31: RMCAreaERTFax
+        -1,-32: RMCAreaERTFax
+        -1,-33: RMCAreaERTFax
+        0,-31: RMCAreaERTFax
+        0,-32: RMCAreaERTFax
+        0,-33: RMCAreaERTFax
+        1,-32: RMCAreaERTFax
+        1,-33: RMCAreaERTFax
+        2,-31: RMCAreaERTFax
+        2,-32: RMCAreaERTFax
+        2,-33: RMCAreaERTFax
+        1,-31: RMCAreaERTFax
+        -1,-34: RMCAreaERTFax
+        -1,-35: RMCAreaERTFax
+        -1,-36: RMCAreaERTFax
+        -1,-37: RMCAreaERTFax
+        0,-34: RMCAreaERTFax
+        0,-35: RMCAreaERTFax
+        0,-36: RMCAreaERTFax
+        0,-37: RMCAreaERTFax
+        1,-34: RMCAreaERTFax
+        1,-35: RMCAreaERTFax
+        1,-36: RMCAreaERTFax
+        1,-37: RMCAreaERTFax
+        2,-34: RMCAreaERTFax
+        2,-35: RMCAreaERTFax
+        2,-36: RMCAreaERTFax
+        2,-37: RMCAreaERTFax
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridAtmosphere
@@ -10103,7 +10134,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -15814.49
+      secondsUntilStateChange: -15950.7295
       state: Opening
   - uid: 1278
     components:
