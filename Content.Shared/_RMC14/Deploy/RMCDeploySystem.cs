@@ -209,16 +209,14 @@ public sealed class RMCDeploySystem : EntitySystem
             // Remove the entity from the container
             _container.Remove(containedEntity, originalStorage);
 
+            // Unfold the entity if it has FoldableComponent using force method
+            if (TryComp<FoldableComponent>(containedEntity, out var foldableComp))
+                _foldable.SetFolded(containedEntity, foldableComp, false); // Use force method to bypass all safety checks
+
             // Update position and rotation
             var spawnPos = areaCenter + setup.Offset;
             _xform.SetWorldPosition(containedEntity, spawnPos);
             _xform.SetWorldRotation(containedEntity, Angle.FromDegrees(setup.Angle));
-
-            // Unfold the entity if it has FoldableComponent
-            if (TryComp<FoldableComponent>(containedEntity, out var foldableComp))
-            {
-                _foldable.TrySetFolded(containedEntity, foldableComp, false);
-            }
 
             if (setup.Anchor)
             {
@@ -257,6 +255,7 @@ public sealed class RMCDeploySystem : EntitySystem
         foreach (var (setup, i) in ent.Comp.DeploySetups.Select((s, idx) => (s, idx)))
         {
             var spawnPos = areaCenter + setup.Offset;
+            Logger.GetSawmill("entity").Debug($"RMCDeploySystem: Spawning entity {setup.Prototype} at position {spawnPos}");
             var spawned = EntityManager.SpawnEntity(setup.Prototype, new MapCoordinates(spawnPos, _xform.GetMapId(user)));
 
             _xform.SetWorldPosition(spawned, spawnPos);
@@ -276,6 +275,12 @@ public sealed class RMCDeploySystem : EntitySystem
             childComp.OriginalEntity = ent.Owner;
             childComp.SetupIndex = i;
             Dirty(spawned, childComp);
+
+            // Log if the spawned entity has FoldableComponent
+            if (TryComp<FoldableComponent>(spawned, out var foldableComp))
+            {
+                Logger.GetSawmill("entity").Debug($"RMCDeploySystem: Spawned entity {spawned} has FoldableComponent (IsFolded: {foldableComp.IsFolded})");
+            }
 
             if (setup.StorageOriginalEntity && storageEntity == null)
                 storageEntity = spawned;
@@ -574,7 +579,7 @@ public sealed class RMCDeploySystem : EntitySystem
 
                 // Fold the entity if it has FoldableComponent (otherwise it won't fit in the container)
                 if (TryComp<FoldableComponent>(childUid, out var foldableComp))
-                    _foldable.TrySetFolded(childUid, foldableComp, true);
+                    _foldable.SetFolded(childUid, foldableComp, true);
 
                 // Add to the storage container of the original entity
                 _container.Insert(childUid, origStorage);

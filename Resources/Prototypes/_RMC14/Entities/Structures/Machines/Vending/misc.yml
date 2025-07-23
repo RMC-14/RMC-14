@@ -3,8 +3,8 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechFOBSupplies
-  name: FOB supplies vendor
-  description: An automated weapon rack hooked up to a big storage of standard-issue weapons.
+  name: ColMarTech Automated Supply Vendor
+  description: An automated restockable storage vendor for use in organizing FOB supplies.
   components:
   - type: ApcPowerReceiver
     powerLoad: 0
