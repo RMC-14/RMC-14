@@ -1,7 +1,6 @@
 ﻿- type: entity
   parent: RMCAreaBase
   id: RMCAreaPVE
-  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_fiorina.rsi
@@ -31,6 +30,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaPVE
@@ -89,3 +89,4 @@
     OB: true
     supplyDrop: true
     minimapColor: '#EBE5E5E3'
+    weatherEnabled: false
