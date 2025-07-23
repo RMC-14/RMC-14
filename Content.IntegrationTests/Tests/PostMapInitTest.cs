@@ -90,6 +90,7 @@ namespace Content.IntegrationTests.Tests
             "RMCAdminFax",
             "GoldenArrowLarge",
             "OCP-583",
+            "ChancesRepaired"
         };
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";
