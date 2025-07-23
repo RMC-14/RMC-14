@@ -96,7 +96,6 @@
           offset: 0.5, -0.5
           angle: 180
 
-
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCStandardMedicalFolded # TODO RMC14: Bonus to speed up operations and reduce pain
@@ -119,10 +118,11 @@
         - prototype: RMCTentUNMCStandardMedical
           mode: ReactiveParental
           offset: 0.2, 0
-        - prototype: ColMarTechMarineMedical
+        - prototype: ColMarTechMarineMedicalPowered
           mode: Reactive
           offset: -0.5, 0.5
         - prototype: CMIV
+          mode: Reactive
           offset: 0.5, 0.5
         - prototype: CMRollerBed
           neverRedeployableSetup: true
@@ -193,10 +193,10 @@
         - prototype: RMCRotaryPhoneReqTent
           mode: Reactive
           offset: -1.5, 0.5
-        - prototype: CMASRSConsole
+        - prototype: CMASRSConsolePowered
           mode: Reactive
           offset: 0.5, 0.5
-        - prototype: ColMarTechGuns
+        - prototype: ColMarTechFOBSupplies
           mode: Reactive
           offset: 1.5, 0.5
         - prototype: CMRack
@@ -232,13 +232,13 @@
           offset: -1.5, 0.5
         - prototype: CMTable
           offset: -1.5, -0.5
-        - prototype: CMMicrowaveLocked
+        - prototype: CMMicrowaveLockedPowered
           mode: Reactive
           offset: -1.5, 0.5
         - prototype: RMCRotaryPhoneMessTent
           mode: Reactive
           offset: -1.5, -0.5
-        - prototype: CMVendorIngredientsLocked
+        - prototype: CMVendorIngredientsLockedPowered
           mode: Reactive
           offset: 0.5, 0.5
         - prototype: CMRack
@@ -254,7 +254,7 @@
         - prototype: RMCTankReagentWaterLocked
           mode: Reactive
           offset: 0.5, -1.5
-        - prototype: CMVendorCoffeeLocked
+        - prototype: CMVendorCoffeeLockedPowered
           mode: Reactive
           offset: 1.5, -1.5
         # TODO RMC14: Food processor

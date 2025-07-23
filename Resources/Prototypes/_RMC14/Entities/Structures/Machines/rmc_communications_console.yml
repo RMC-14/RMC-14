@@ -120,7 +120,7 @@
 - type: entity
   parent: RMCOverwatchConsoleRotating
   id: RMCOverwatchConsoleRotatingPowered
-  suffix: Rotating
+  suffix: Rotating, Powered
   components:
   - type: ApcPowerReceiver
     powerLoad: 0

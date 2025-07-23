@@ -134,8 +134,12 @@
 
 - type: entity
   parent: CMVendorCoffee
-  id: CMVendorCoffeeLocked
+  id: CMVendorCoffeeLockedPowered
+  suffix: Locked, Powered
   components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
   - type: Transform
     anchored: true
   - type: Anchorable
@@ -660,8 +664,12 @@
 
 - type: entity
   parent: CMVendorIngredients
-  id: CMVendorIngredientsLocked
+  id: CMVendorIngredientsLockedPowered
+  suffix: Locked, Powered
   components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!
   - type: Transform
     anchored: true
   - type: Anchorable

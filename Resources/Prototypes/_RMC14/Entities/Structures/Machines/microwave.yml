@@ -35,7 +35,8 @@
 
 - type: entity
   parent: CMMicrowave
-  id: CMMicrowaveLocked
+  id: CMMicrowaveLockedPowered
+  suffix: Locked, Powered
   components:
   - type: Transform
     anchored: true
