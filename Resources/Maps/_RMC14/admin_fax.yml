@@ -193,8 +193,6 @@ entities:
       linearDamping: 0.05
       fixedRotation: False
       bodyType: Dynamic
-    - type: Fixtures
-      fixtures: {}
     - type: OccluderTree
     - type: SpreaderGrid
     - type: GridPathfinding
@@ -2819,13 +2817,6 @@ entities:
         2,-35: RMCAreaERTFax
         2,-36: RMCAreaERTFax
         2,-37: RMCAreaERTFax
-    - type: Shuttle
-      dampingModifier: 0.25
-    - type: GridAtmosphere
-      version: 2
-      data:
-        chunkSize: 4
-    - type: GasTileOverlay
     - type: ImplicitRoof
 - proto: CigaretteSpent
   entities:
