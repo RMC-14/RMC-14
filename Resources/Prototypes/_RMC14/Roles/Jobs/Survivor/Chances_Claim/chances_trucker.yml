@@ -18,7 +18,6 @@
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -27,7 +26,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
-  id: RMCGearSurvivorTrijentTrucker
+  id: RMCGearSurvivorChancesTrucker
   equipment:
     head: RMCHeadCapTruckerBlue
     jumpsuit: RMCJumpsuitLiaisonGreenWorkwear
