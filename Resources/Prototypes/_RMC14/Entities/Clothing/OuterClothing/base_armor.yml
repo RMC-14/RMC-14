@@ -189,11 +189,13 @@
     containers:
       storagebase: !type:Container
         ents: [ ]
+  - type: FixedItemSizeStorage
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
-  - type: FixedItemSizeStorage
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
   - type: IgnoreContentsSize
     items:
       tags:
@@ -248,7 +250,8 @@
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-off
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       outerClothing:

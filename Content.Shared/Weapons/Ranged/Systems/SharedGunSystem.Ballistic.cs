@@ -5,6 +5,7 @@ using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Light.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
@@ -118,6 +119,13 @@ public abstract partial class SharedGunSystem
 
         if (GetBallisticShots(component) >= component.Capacity)
             return false;
+
+        //RMC14
+        if (TryComp(ammo, out ExpendableLightComponent? light))
+        {
+            if (light.CurrentState != ExpendableLightState.BrandNew)
+                return false;
+        }
 
         TimeSpan insertDelayConverted;
 

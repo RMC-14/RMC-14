@@ -36,6 +36,15 @@
 
 - type: entity
   parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledHEDP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+      amount: 6
+
+- type: entity
+  parent: RMCPouchExplosive
   id: RMCPouchExplosiveFilledSPP
   components:
   - type: StorageFill
