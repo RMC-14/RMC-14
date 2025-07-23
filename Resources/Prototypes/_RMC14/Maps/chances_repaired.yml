@@ -10,6 +10,6 @@
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'LV-522 - Chance's Claim'
+          mapNameTemplate: 'LV-522 - Chances Claim'
         - type: StationJobs
           availableJobs: {}
