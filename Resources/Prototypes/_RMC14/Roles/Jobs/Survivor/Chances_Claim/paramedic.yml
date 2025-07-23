@@ -38,8 +38,8 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorChancesMedic
-  name: chances medic spawn point
+  id: RMCSpawnPointSurvivorChancesParamedic
+  name: chances paramedic spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
