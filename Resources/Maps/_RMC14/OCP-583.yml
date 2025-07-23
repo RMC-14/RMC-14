@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/16/2025 21:27:28
-  entityCount: 5729
+  time: 07/23/2025 17:58:02
+  entityCount: 5728
 maps:
 - 1
 grids:
@@ -159,7 +159,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: Map Entity
+      name: Orbital Comms. Platform
     - type: Transform
     - type: Map
       mapPaused: True
@@ -169,7 +169,7 @@ entities:
   - uid: 23
     components:
     - type: MetaData
-      name: grid
+      name: OCP-583
     - type: Transform
       pos: -2.84375,19.703125
       parent: 1
