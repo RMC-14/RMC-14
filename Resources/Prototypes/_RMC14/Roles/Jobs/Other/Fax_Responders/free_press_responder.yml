@@ -45,9 +45,9 @@
     id: RMCIDCardFreePressResponder
     ears: CMHeadsetReporter
     eyes: RMCSunglasses
-    back: CMSatchel
+    back: CMSatchelFilledFaxResponder
     belt: CMClipboard
-    pocket1: RMCPouchGeneralLarge
+    pocket1: RMCStampFreePress
     pocket2: RMCPouchDocument
 
 - type: entity

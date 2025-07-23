@@ -40,14 +40,14 @@
   id: RMCGearWeYaResponder
   equipment:
     ears: RMCHeadsetDistressPMCDirector
-    back: CMSatchel
+    back: CMSatchelFilledFaxResponder
     belt: CMClipboard
     head: ArmorHelmetPMC
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateFormal
     shoes: RMCShoesLaceup
     id: RMCIDCardWeYaResponder
-    pocket1: RMCPouchGeneralLarge
+    pocket1: CMStampWeYa
     pocket2: RMCPouchDocument
 
 - type: entity

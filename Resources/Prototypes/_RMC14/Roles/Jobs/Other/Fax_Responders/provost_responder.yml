@@ -44,8 +44,8 @@
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
     belt: CMClipboard
-    back: CMSatchelSecurity
-    pocket1: RMCPouchDocument
+    back: CMSatchelSecurityFilledFaxResponder
+    pocket1: CMStampProvost
     pocket2: RMCPouchGeneralLarge
 
 - type: entity
