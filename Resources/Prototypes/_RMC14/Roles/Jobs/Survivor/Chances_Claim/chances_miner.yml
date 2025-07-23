@@ -45,7 +45,7 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorMiner
+  id: RMCSpawnPointSurvivorChancesMiner
   name: chances miner spawn point
   components:
   - type: SpawnPoint
