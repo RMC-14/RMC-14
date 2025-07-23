@@ -49,6 +49,8 @@ entities:
         nodes: []
     - type: BecomesStation
       id: StationNameHere
+    - type: MapLight
+    - type: Roof
     - type: MapAtmosphere
       space: False
       mixture:
