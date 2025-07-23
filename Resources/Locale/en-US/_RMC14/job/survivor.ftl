@@ -195,9 +195,6 @@ CMSurvivorTrijentChaplain = Chaplain
 rmc-job-name-survivor-trijent-goon = Trijent Dam Security
 CMSurvivorTrijentGoon = Trijent Dam Security
 
-rmc-job-name-survivor-trijent-deputy = CMB Deputy
-CMSurvivorTrijentDeputy = CMB Deputy
-
 cm-job-name-survivor-trijent-doctor = Trijent Dam Doctor
 CMSurvivorTrijentDoctor = Trijent Dam Doctor
 

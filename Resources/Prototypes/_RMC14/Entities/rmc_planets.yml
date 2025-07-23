@@ -88,7 +88,7 @@
       - CMSurvivorTrijentDamTech: 2
       CMSurvivorSecurity:
       - CMSurvivorTrijentGoon: 1
-      - CMSurvivorTrijentDeputy: 1
+      - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
 
