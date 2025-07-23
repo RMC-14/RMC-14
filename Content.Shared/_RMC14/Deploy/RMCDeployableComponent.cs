@@ -45,7 +45,7 @@ public sealed partial class RMCDeployableComponent : Component, ISerializationHo
     /// Whether to check if the area is blocked
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool AreaBlockedCheck = false;
+    public bool AreaBlockedCheck = true;
 
     /// <summary>
     /// Whether to check the planet surface
