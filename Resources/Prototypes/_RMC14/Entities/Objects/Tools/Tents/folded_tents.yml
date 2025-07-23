@@ -32,8 +32,8 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCStandardCommandFolded
-  name: folded USCM Command Tent
-  description: A standard USCM Command Tent. This one comes equipped with a self-powered Overwatch Console and a Telephone. Unfold in a suitable location to maximize usefulness. Staff Officer not included. ENTRANCE TO THE SOUTH.
+  name: folded UNMC Command Tent
+  description: A standard UNMC Command Tent. This one comes equipped with a self-powered Overwatch Console and a Telephone. Unfold in a suitable location to maximize usefulness. Staff Officer not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
       size: Huge
@@ -99,8 +99,8 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCStandardMedicalFolded # TODO RMC14: Bonus to speed up operations and reduce pain
-  name: folded USCM Medical Tent
-  description: A standard USCM Medical Tent. This one comes equipped with advanced field surgery facilities. Unfold in a suitable location to maximize health gains. Surgical Tray not included. ENTRANCE TO THE SOUTH.
+  name: folded UNMC Medical Tent
+  description: A standard UNMC Medical Tent. This one comes equipped with advanced field surgery facilities. Unfold in a suitable location to maximize health gains. Surgical Tray not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
       size: Huge
@@ -164,8 +164,8 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCExtendedReqFolded
-  name: folded USCM Requisitions Tent
-  description: A standard USCM Requisitions Tent. Now, you can enjoy req line anywhere you go! Unfold in a suitable location to maximize resource distribution. ASRS not included. ENTRANCE TO THE SOUTH.
+  name: folded UNMC Requisitions Tent
+  description: A standard UNMC Requisitions Tent. Now, you can enjoy req line anywhere you go! Unfold in a suitable location to maximize resource distribution. ASRS not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
       size: Huge
@@ -207,8 +207,8 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCExtendedMessFolded
-  name: folded USCM Mess Tent
-  description: A standard USCM Mess Tent. This one comes equipped with a kitchen and dining utilities. Unfold in a suitable location to maximize meal handouts ENTRANCE TO THE SOUTH.
+  name: folded UNMC Mess Tent
+  description: A standard UNMC Mess Tent. This one comes equipped with a kitchen and dining utilities. Unfold in a suitable location to maximize meal handouts ENTRANCE TO THE SOUTH.
   components:
     - type: Item
       size: Huge
