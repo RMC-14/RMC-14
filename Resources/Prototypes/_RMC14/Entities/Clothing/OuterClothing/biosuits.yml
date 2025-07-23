@@ -37,6 +37,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/firefighter.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/firefighter.rsi
 
 - type: entity
   parent: RMCSuitBioGeneral

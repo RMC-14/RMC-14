@@ -69,6 +69,11 @@
       - [ RMCPouchFirstResponderFill ]
       - [ RMCPouchMedkitFillAdvanced ]
     -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+    -
       - [ RMCTieBlack ] # TODO RMC14 - System for random uniform accessories like randomStartingGear
       - [ RMCTie ]
       - [ RMCTieGreen ]

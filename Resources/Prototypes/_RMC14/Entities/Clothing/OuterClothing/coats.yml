@@ -23,6 +23,12 @@
     user:
       components:
       - RMCAllowSuitStorage
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
 
 - type: entity
   abstract: True

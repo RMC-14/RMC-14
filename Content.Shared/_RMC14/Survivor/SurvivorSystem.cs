@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -18,6 +19,7 @@ public sealed class SurvivorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
@@ -157,7 +159,10 @@ public sealed class SurvivorSystem : EntitySystem
                 continue;
             }
 
-            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage))
+            if (!_rmcStorage.CanInsertStoreSkill(storageItem, toInsert, mob, out _))
+                return false;
+
+            if (_storage.Insert(storageItem, toInsert, out _, storageComp: storage, playSound: false))
                 return true;
         }
 

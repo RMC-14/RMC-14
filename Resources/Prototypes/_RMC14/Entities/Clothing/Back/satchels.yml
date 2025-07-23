@@ -332,6 +332,17 @@
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
 
 - type: entity
+  parent: CMSatchelMarineIntel
+  id: RMCSatchelMarineIntelSatchel
+  name: UNMC lightweight expedition satchel
+  description: A heavy-duty IMP based satchel, reinforced with kevlar so it doesn't rip. Can quickly be accessed with only one hand. Usually issued to UNMC intelligence officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/intel.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: CMSatchelMarineIntel # Reskin for FORECON
   id: RMCSatchelMarineLogisticsBig
   name: UNMC logistics IMP backpack
