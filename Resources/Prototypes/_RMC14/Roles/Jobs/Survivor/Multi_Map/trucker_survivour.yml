@@ -71,3 +71,10 @@
   - type: RandomHumanoidSpawner
     settings: CMJobSurvivorTrucker
 
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorTrucker
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorTrucker
+
