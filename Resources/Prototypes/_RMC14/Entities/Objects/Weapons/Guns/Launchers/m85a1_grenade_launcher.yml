@@ -1,13 +1,17 @@
 - type: entity
-  name: M79 grenade launcher
   parent: [ RMCBaseSlideMagazineVisualsBallistic, RMCBaseWeaponGrenadeLauncher ]
-  id: CMWeaponLauncherM79
-  description: The M79 grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher.
+  id: RMCWeaponLauncherM85A1
+  name: M85A1 grenade launcher
+  description: A heavy, low-angle, break-action 40mm grenade launcher. Archaic in core design, inferior to more modern semi automatic M92, M95 grenade launchers and M94 impact launcher, but doesn't require a magnetic armature or an advanced expertice to operate, not to mention near flawless reliability, extremely low cost and low weight due to mostly being made out of polymer materials.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_inhands.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_icon.rsi
+      state: base
+      map: [ "enum.RMCMagazineVisuals.SlideOpen" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_inhands.rsi
     slots:
     - Back
     - suitStorage
@@ -33,19 +37,12 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-      rmc-aslot-stock:
-        locked: true
-        startingAttachable: RMCAttachmentM79Stock
-        whitelist:
-          tags:
-          - RMCAttachmentM79Stock
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0, 0.093
-      rmc-aslot-stock: -0.56, 0.0
   - type: Tag
     tags:
-    - RMCWeaponLauncherM79
+    - RMCWeaponLauncherM85A1
 
 - type: Tag
-  id: RMCWeaponLauncherM79
+  id: RMCWeaponLauncherM85A1

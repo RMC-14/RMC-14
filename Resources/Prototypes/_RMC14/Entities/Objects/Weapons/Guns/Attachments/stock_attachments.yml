@@ -621,23 +621,6 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentM79Stock
-  name: M79 hardened polykevlon stock
-  description: Helps to mitigate the recoil of launching a 40mm grenade. Fits only to the M79.
-  components:
-  - type: Sprite
-    state: m79-stock
-  - type: Tag
-    tags:
-    - RMCAttachmentStock
-    - RMCAttachmentM79Stock
-  - type: AttachableVisuals
-    suffix: ""
-  - type: AttachableWieldDelayMods
-    modifiers: []
-
-- type: entity
-  parent: RMCStockAttachmentBase
   id: RMCAttachmentM63Stock
   name: submachinegun stock
   description: A rare AEGIS stock distributed in small numbers to UNMC forces. Compatible with the M63, this stock reduces recoil and scatter, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
@@ -1067,9 +1050,6 @@
 
 - type: Tag
   id: RMCAttachmentM16StockCollapsible
-
-- type: Tag
-  id: RMCAttachmentM79Stock
 
 - type: Tag
   id: RMCAttachmentM63Stock
