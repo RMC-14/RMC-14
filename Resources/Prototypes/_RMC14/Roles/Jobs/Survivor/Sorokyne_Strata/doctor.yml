@@ -4,6 +4,8 @@
   name: rmc-job-name-survivor-moh-doctor
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorMoHDoctor
+  ranks:
+    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorMoHDoctor
   accessGroups:
   - ColonistMedical
