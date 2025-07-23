@@ -7,7 +7,6 @@
   startingGear: RMCGearSurvivorChancesGoon
   spawnMenuRoleName: Chance's Claim Corporate Security (Chance's Colonist)
   hasIcon: true
-  icon: RMCJobIconWeYaSec
   special:
   - !type:AddComponentSpecial
     components:
@@ -55,13 +54,6 @@
 - type: playTimeTracker
   id: CMJobSurvivorGoon
   isHumanoid: true
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconWeYaSec
-  icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: weya_sec
 
 - type: entity
   parent: MarkerBase
