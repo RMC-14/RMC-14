@@ -1561,7 +1561,7 @@ public abstract class SharedStorageSystem : EntitySystem
         if (!gridBounds.Contains(position))
             return false;
 
-        var itemShape = ItemSystem.GetAdjustedItemShape(itemEnt, rotation, position);
+        var itemShape = ItemSystem.GetAdjustedItemShape(storageEnt, itemEnt, rotation, position);
 
         foreach (var box in itemShape)
         {
