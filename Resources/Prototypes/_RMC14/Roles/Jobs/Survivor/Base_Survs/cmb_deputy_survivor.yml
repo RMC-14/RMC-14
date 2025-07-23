@@ -11,6 +11,8 @@
     RMCRankCMBDeputy: []
   startingGear: RMCGearSurvivorCMBDeputy
   spawnMenuRoleName: CMB Deputy (Survivor)
+  icon: "RMCJobIconBureauDeputy"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -35,6 +37,13 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetCMBDeputy
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_cmb
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
@@ -44,7 +53,7 @@
     id: RMCIDCardDeputySurvivor
     jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauDeputy
-    ears: RMCHeadsetDistressBureau
+    ears: RMCHeadsetDistressBureauDamaged
     pocket2: RMCPouchMagazineLarge
 
 - type: entity
