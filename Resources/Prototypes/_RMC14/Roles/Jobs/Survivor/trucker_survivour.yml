@@ -69,5 +69,11 @@
     layers:
     - state: red
   - type: RandomHumanoidSpawner
-    settings: CMJobSurvivorTrucker
+    settings: CMSurvivorTrucker
 
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorTrucker
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorTrucker

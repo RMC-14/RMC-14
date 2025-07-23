@@ -54,7 +54,7 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorTrijentGoon
+  id: RMCJobSurvivorTrijentGoon
   isHumanoid: true
 
 - type: entity

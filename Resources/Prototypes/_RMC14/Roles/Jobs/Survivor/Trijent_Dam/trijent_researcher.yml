@@ -25,7 +25,7 @@
   name: survivor trijent researcher spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorTrijentResearcher
+    job_id: CMSurvivorTrijentResearcher
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
