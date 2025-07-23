@@ -56,7 +56,7 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobChancesSurvivorMiner
+  id: CMJobSurvivorChancesMiner
   isHumanoid: true
 
 - type: entity
