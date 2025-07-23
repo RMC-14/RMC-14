@@ -41624,13 +41624,6 @@ entities:
     - type: Transform
       pos: 44.5,11.5
       parent: 23
-- proto: SpawnPointLatejoin
-  entities:
-  - uid: 5729
-    components:
-    - type: Transform
-      pos: 14.5,1.5
-      parent: 23
 - proto: UniformShortsRed
   entities:
   - uid: 2147
