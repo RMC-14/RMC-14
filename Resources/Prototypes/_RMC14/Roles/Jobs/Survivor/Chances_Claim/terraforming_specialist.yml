@@ -53,7 +53,7 @@
       state: survivor
 
 - type: playTimeTracker
-  id: CMJobSurvivorChancesEnvironmentalResearcher
+  id: CMJobSurvivorChancesTerraformingSpecialist
   isHumanoid: true
 
 - type: entity
