@@ -47,8 +47,10 @@
     outerClothing: RMCJacketCorporateFormal
     shoes: RMCShoesLaceup
     id: RMCIDCardWeYaResponder
-    pocket1: CMStampWeYa
+    pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
+  inhand:
+    - CMStampWeYa
 
 - type: entity
   parent: CMIDCardGold

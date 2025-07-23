@@ -47,8 +47,10 @@
     eyes: RMCSunglasses
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
-    pocket1: RMCStampFreePress
+    pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
+  inhand:
+    - RMCStampFreePress
 
 - type: entity
   parent: CMIDCardSilver

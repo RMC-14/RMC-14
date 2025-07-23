@@ -45,8 +45,10 @@
     id: RMCIDCardProvostResponder
     belt: CMClipboard
     back: CMSatchelSecurityFilledFaxResponder
-    pocket1: CMStampProvost
+    pocket1: RMCPouchDocument
     pocket2: RMCPouchGeneralLarge
+  inhand:
+    - CMStampProvost
 
 - type: entity
   parent: CMIDCardGold

@@ -48,8 +48,10 @@
     ears: CMHeadsetColony
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
-    pocket1: RMCStampCLF
+    pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
+  inhand:
+    - RMCStampCLF
 
 - type: entity
   parent: CMIDCardSilver

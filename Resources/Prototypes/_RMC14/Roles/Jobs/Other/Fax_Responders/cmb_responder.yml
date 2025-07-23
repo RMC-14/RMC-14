@@ -46,8 +46,10 @@
     ears: RMCHeadsetDistressBureau
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
-    pocket1: CMStampCMB
+    pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
+  inhand:
+    - CMStampCMB
 
 - type: entity
   parent: CMIDCardSilver
