@@ -17,7 +17,7 @@
         RMCSkillFirearms: 1
         RMCSkillLeadership: 1
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetPriest
+      preset: RMCGearSurvivorPresetTrijentChaplain
     - type: MarineOrders
     - type: RMCSurvivor
     - type: RMCRibbon
@@ -56,6 +56,6 @@
 
 - type: entity
   parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
-  id: RMCGearSurvivorPresetPriest
-  name: priest colonist preset
+  id: RMCGearSurvivorPresetTrijentChaplain
+  name: trijent chaplain preset
   categories: [ HideSpawnMenu ]
