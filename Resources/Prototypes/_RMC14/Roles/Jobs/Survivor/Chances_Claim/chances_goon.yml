@@ -52,7 +52,7 @@
       state: survivor
 
 - type: playTimeTracker
-  id: CMJobSurvivorGoon
+  id: CMJobSurvivorChancesGoon
   isHumanoid: true
 
 - type: entity
