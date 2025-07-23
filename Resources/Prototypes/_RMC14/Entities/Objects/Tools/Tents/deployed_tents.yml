@@ -83,7 +83,8 @@
   - type: CollisionWake
     enabled: false
   - type: Damageable
-    maxHealth: 200
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: Destructible
     thresholds:
     - trigger:
