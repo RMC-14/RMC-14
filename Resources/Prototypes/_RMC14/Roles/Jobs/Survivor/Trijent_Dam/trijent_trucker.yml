@@ -18,7 +18,6 @@
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:

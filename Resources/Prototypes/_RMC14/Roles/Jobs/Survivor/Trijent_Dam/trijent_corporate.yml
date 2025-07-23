@@ -16,7 +16,6 @@
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
