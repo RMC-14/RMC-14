@@ -1,8 +1,7 @@
-using Content.Server.Abilities.Mime;
 using Content.Shared._RMC14.PropCalling;
 using Content.Shared._RMC14.PropCalling.Events;
 using Content.Shared.Actions;
-using Robust.Shared.Physics;
+using Content.Shared.Toggleable;
 
 namespace Content.Server._RMC14.PropCalling;
 public sealed class PropCallingSystem : SharedPropCallingSystem
@@ -17,35 +16,61 @@ public sealed class PropCallingSystem : SharedPropCallingSystem
         base.Initialize();
         _callersSignedUp.Clear();
 
-        SubscribeLocalEvent<PropCallingComponent, JoinOrLeaveCallingListEvent>(OnJoinOrLeaveCallingList);
+        SubscribeLocalEvent<PropCallingComponent, ToggleActionEvent>(OnJoinOrLeaveCallingList);
         SubscribeLocalEvent<PropCallerComponent, CallOverPropsEvent>(OnCallOverProps);
 
         SubscribeLocalEvent<PropCallingComponent, ComponentInit>(OnPropCallingComponentInit);
         SubscribeLocalEvent<PropCallerComponent, ComponentInit>(OnPropCallerComponentInit);
+
+        SubscribeLocalEvent<PropCallingComponent, ComponentShutdown>(OnPropCallingShutdown);
+        SubscribeLocalEvent<PropCallerComponent, ComponentShutdown>(OnPropCallerShutdown);
     }
 
-    public void OnPropCallingComponentInit(EntityUid uid, PropCallingComponent comp, ComponentInit args)
+    private void OnPropCallingComponentInit(EntityUid uid, PropCallingComponent comp, ComponentInit args)
     {
         _actions.AddAction(uid, ref comp.TogglePropCallingEntity, comp.TogglePropCalling, uid);
     }
 
-    public void OnPropCallerComponentInit(EntityUid uid, PropCallerComponent comp, ComponentInit args)
+    private void OnPropCallerComponentInit(EntityUid uid, PropCallerComponent comp, ComponentInit args)
     {
         _actions.AddAction(uid, ref comp.CallPropsEntity, comp.CallProps, uid);
     }
 
-    public void OnJoinOrLeaveCallingList(Entity<PropCallingComponent> ent, ref JoinOrLeaveCallingListEvent args)
+    private void OnPropCallingShutdown(EntityUid uid, PropCallingComponent comp, ComponentShutdown args)
     {
+        var ent = (uid, comp);
+
+        _actions.RemoveAction(uid, comp.TogglePropCallingEntity);
+
+        if (_callersSignedUp.Contains(ent))
+            _callersSignedUp.Remove(ent);
+    }
+
+    private void OnPropCallerShutdown(EntityUid uid, PropCallerComponent comp, ComponentShutdown args)
+    {
+        _actions.RemoveAction(uid, comp.CallPropsEntity);
+    }
+
+    private void OnJoinOrLeaveCallingList(Entity<PropCallingComponent> ent, ref ToggleActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
         if (!_callersSignedUp.TryGetValue(ent, out var listedEnt))
         {
             _callersSignedUp.Add(ent);
-            return;
+            _actions.SetToggled(ent.Comp.TogglePropCallingEntity, true);
+        }
+        else
+        {
+            _callersSignedUp.Remove(listedEnt);
+            _actions.SetToggled(listedEnt.Comp.TogglePropCallingEntity, false);
         }
 
-        _callersSignedUp.Remove(listedEnt);
+        args.Handled = true;
     }
 
-    public void OnCallOverProps(Entity<PropCallerComponent> ent, ref CallOverPropsEvent args)
+    private void OnCallOverProps(Entity<PropCallerComponent> ent, ref CallOverPropsEvent args)
     {
         var coordinates = _transform.GetMapCoordinates(ent.Owner);
 
