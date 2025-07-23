@@ -1,4 +1,5 @@
-﻿- type: entity
+﻿# Boots!
+- type: entity
   parent: BaseItem
   id: RMCMagazineBootsN160
   name: Boots! Issue No.160.
@@ -18,7 +19,7 @@
   description: The only official UNMC magazine, the headline reads 'The Future Soldier!'. On the cover is a piece of sturdy-looking armor, containing a safe-looking marine.
   components:
   - type: RMCLoreExaminable
-    content: A large portion of the magazine describes the B18 Defensive Armor, how it is designed to make the modern marine invincible and that it has recently finished trials, raising the expectations of the brass for this new piece of gear.
+    content: rmc-lore-examinable-boots-07
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -27,7 +28,7 @@
   description: The only official UNMC magazine, the headline reads 'Your sidearm and You!' with the subtitle 'Your best sleeping companion' right below it.
   components:
   - type: RMCLoreExaminable
-    content: The first part of the article explains basic sidearm maintenance and includes a small advertisement for a well-known gunsmith on Gateway Station. The second describes the best positions to sleep with your sidearm under the pillow in case of unexpected seditious activity.
+    content: rmc-lore-examinable-boots-45
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -48,7 +49,7 @@
   description: "The only official USCM magazine, the headline reads 'Swift, Silent, Deadly: Tientsin'."
   components:
   - type: RMCLoreExaminable
-    content: The article contained within describes the experience of the 1st FORECON Battalion veterans in the Tientsin campaign and the harsh jungle environment they had to go through when dealing with SPP and Local Guerrillas.
+    content: rmc-lore-examinable-boots-58
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -63,7 +64,7 @@
   description: The only official UNMC magazine, the headline reads 'Mars, heavy fighting on the Red Frontier!'. The cover depicts a group of victorious marines on Mars, as well as a small Weston-Yamada advertisement.
   components:
   - type: RMCLoreExaminable
-    content: The article details the fierce urban combat the marines had to face against human colonists on Mars during the early days of its colonization. As Weston Yamada was expanding on the red frontier, they faced armed resistance from colonists who refused the corporate expansion. Weston Yamada PMCs with the help of nearby UNMC forces fought off the insurrectionists. The article also mentions a few accounts from tankers on the effectiveness of their new main battle tanks, and recent sightings of MARSOC operators in the AO. This conflict marked one of the first recorded uses of orbital bombardments in active combat by the UNMC, with the UNS Omaha involved.
+    content: rmc-lore-examinable-boots-113
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -96,7 +97,7 @@
   description: The only official UNMC magazine, the headline reads 'SPP Rations, The truth.' Its cover features a captured SPP MRE.
   components:
   - type: RMCLoreExaminable
-    content: A large portion of this issue explains SPP field rations aren't standardized and are produced at a local level. Because of this, captured and confiscated SPP rations have included some odd choices such as duck liver, century eggs, lutefisk, pickled pig snout, canned tripe, and dehydrated candied radish snacks.
+    content: rmc-lore-examinable-boots-150
 
 - type: entity
   parent: RMCMagazineBootsN160
@@ -104,6 +105,7 @@
   name: Boots! Issue No.189.
   description: The only official UNMC magazine, the headline reads 'Military Police Edition, those that help marines help themselves!'. As with every copy you have ever seen of Issue 189, someone has taken the time to deface it with crude language and unseemly drawings.
 
+# WeYa Orrery
 - type: entity
   parent: BaseItem
   id: RMCMagazineWeYaOrrery
@@ -117,7 +119,7 @@
     size: Small
     sprite: _RMC14/Objects/Misc/boots_magazine.rsi
   - type: RMCLoreExaminable
-    content: "Half of this issue is taken up by rumors of a Senior Executive misfiling his Quarterly Profit Report for Danton's Perch with the PMC Dispatch Division. After it is a debate article between two Executives from Special Services, regarding the creation of a colony in the Mu Arae system. The debate is centered around the location of the colony: one Executive thinks the colony should be a sub-orbital gas harvester around a gas giant, while the other thinks it should be located on the gas giant's verdant moon. Halfway through the debate, both Executives appear to lose their composure, and start slinging insults. The rest of the article appears to be heavily censored after that point."
+    content: rmc-lore-examinable-orrery-65
 
 - type: entity
   parent: RMCMagazineWeYaOrrery
@@ -126,7 +128,7 @@
   description: A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a massive orbital shipyard constructing a ship, with the headline 'The Making of a Dreadnaught'
   components:
   - type: RMCLoreExaminable
-    content: The centrepiece of this issue is a story regarding the creation of a new vessel for the Navy, designed to be not only withstand all sorts of damage and attacks, but also contain enough firepower to destroy a city. The article explains that this is a joint project between the TSE and Weston-Yamada, and interviews the various WeYa and Imperial Engineers working on the ship. Although no confidential information is contained within, the repeated mention of railguns, triple point-defence lasers, and a suite of missile tubes gives you a good idea as to the strength of the vessel.
+    content: rmc-lore-examinable-orrery-175
 
 - type: entity
   parent: RMCMagazineWeYaOrrery
@@ -135,8 +137,9 @@
   description: "A WeYa owned magazine, covering workplace gossip and corporate news. The cover shows a scientist peering through a microscope, with the headline 'Special Edition: Cutting Edge'"
   components:
   - type: RMCLoreExaminable
-    content: This special issue covers a few the various projects being undertaken by the Weston-Yamada Corporation which have been cleared for a press release by the Stakeholders and the Division Director. Notable projects include the UY-21 Weston-Yamada Blending Unit (Which fixes the UY-20's tendency to explode under heat), a 'prototype portable heavy mining laser' designed to cut through rock like butter, and a Weston-Yamada MANPADS system (Designated the TYPHOON EK-403) designed for PMC usage. Halfway through the issue, the magazine offers a 'Buy one, get one free' coupon for a pack of Sequoia beer; it appears to have expired the day after the issue was published.
+    content: rmc-lore-examinable-orrery-184
 
+# Other
 - type: entity
   parent: BaseItem
   id: RMCMagazineDirtyMagazine
