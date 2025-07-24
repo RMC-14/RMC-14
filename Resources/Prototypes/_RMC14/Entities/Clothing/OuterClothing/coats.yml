@@ -777,7 +777,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/waistcoat.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
   id: RMCCoatSanitation
   name: sanitation utility uniform
   description: A Sanitation utility uniform, used by the clean-up crews of the more prosperous colonies.
@@ -786,6 +786,25 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/sanitation.rsi
+
+- type: entity
+  parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
+  id: RMCCoatParamedic
+  name: EMT - Paramedic utility fatigues
+  description: A set of EMT - Paramedic utility fatigues, this one is red.
+  components:
+  - type: Storage
+    grid: {} # no slots
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+
+- type: entity
+  parent: RMCCoatParamedic
+  id: RMCCoatParamedicGreen
+  description: A set of EMT - Paramedic utility fatigues, this one is green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
 
 # Snow
 
