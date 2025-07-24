@@ -793,9 +793,9 @@
   name: EMT - Paramedic utility fatigues
   description: A set of EMT - Paramedic utility fatigues, this one is red.
   components:
-  - type: Storage
-    grid: {} # no slots
   - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
 
 - type: entity
@@ -805,6 +805,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/EMT.rsi
 
 # Snow
 
