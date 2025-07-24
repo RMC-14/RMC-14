@@ -14,6 +14,7 @@ using System.Numerics;
 using Content.Shared.Foldable;
 using Content.Shared.Examine;
 using Robust.Shared.Prototypes;
+using Content.Shared.Destructible;
 
 namespace Content.Shared._RMC14.Deploy;
 
@@ -29,6 +30,7 @@ public sealed class RMCDeploySystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly FoldableSystem _foldable = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
 
 
     public override void Initialize()
@@ -415,7 +417,7 @@ public sealed class RMCDeploySystem : EntitySystem
                 }
                 foreach (var entity in toDelete)
                 {
-                    EntityManager.DeleteEntity(entity);
+                    _destructible.DestroyEntity(entity);
                 }
             }
         }
@@ -461,7 +463,7 @@ public sealed class RMCDeploySystem : EntitySystem
         }
         foreach (var entity in toDelete)
         {
-            EntityManager.DeleteEntity(entity);
+            _destructible.DestroyEntity(entity);
         }
     }
 
