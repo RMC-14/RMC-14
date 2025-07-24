@@ -130,7 +130,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _DeadchatEnabled = val;
         _chatManager.DispatchServerAnnouncement(
-            Loc.GetString(val ? "chat-manager-crit-looc-chat-enabled-message" : "chat-manager-crit-looc-chat-disabled-message")); // Change this
+            Loc.GetString(val ? "set-dchat-command-dchat-enabled" : "set-dchat-command-dchat-disabled"));
     }
 
     private void OnGameChange(GameRunLevelChangedEvent ev)
@@ -680,6 +680,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         var clients = GetDeadChatClients();
         var playerName = Name(source);
         string wrappedMessage;
+        if (!_adminManager.IsAdmin(player) && !_DeadchatEnabled) // RMC14 - Check the status of the "dchat.enabled" CCvar before continuing.
+            return;
         if (_adminManager.IsAdmin(player))
         {
             wrappedMessage = Loc.GetString("chat-manager-send-admin-dead-chat-wrap-message",
@@ -688,7 +690,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 ("message", FormattedMessage.EscapeText(message)));
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin dead chat from {player:Player}: {message}");
         }
-        else if (_DeadchatEnabled == true) // RMC14 - Check the status of the `dchat.enabled` cvar before continuing.
+        else
         {
             wrappedMessage = Loc.GetString("chat-manager-send-dead-chat-wrap-message",
                 ("deadChannelName", Loc.GetString("chat-manager-dead-channel-name")),
