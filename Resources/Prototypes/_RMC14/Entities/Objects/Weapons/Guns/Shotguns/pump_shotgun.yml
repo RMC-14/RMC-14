@@ -35,7 +35,7 @@
       - RMCShellShotgunBeanbag
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.15
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplierUnwielded: 0.5
   - type: PumpAction
   - type: AttachableHolder
     slots:
@@ -45,6 +45,7 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentShotgunChoke
           - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:

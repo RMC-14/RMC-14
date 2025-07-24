@@ -89,7 +89,7 @@
       components:
       - Marine
   - type: ProjectileMaxRange
-    max: 6
+    max: 5
 
 - type: entity
   id: XenoSlowingSpitProjectile
@@ -108,7 +108,7 @@
     deleteOnFriendlyXeno: true
   - type: DrainOnHit
   - type: ProjectileMaxRange
-    max: 6
+    max: 5
 
 - type: entity
   id: XenoQueenNeuroSpitProjectile
@@ -131,7 +131,6 @@
     max: 4
   - type: RMCProjectileAccuracy
     accuracy: 125
-
 
 - type: entity
   id: XenoScatteredSpitProjectile
@@ -418,4 +417,16 @@
   - type: RMCProjectileAccuracy
     accuracy: 185
   - type: XenoHookOnHit
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        - XenoProjectileImpassable
+        - BarricadeImpassable
 

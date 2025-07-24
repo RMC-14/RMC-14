@@ -26,6 +26,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: MarineOrders
     - type: NpcFactionMember
       factions:
       - CLF
@@ -39,7 +40,7 @@
   suffix: Spawner, Player
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
     state: icon
   - type: RandomHumanoidSpawner
     settings: RMCCLFSpecialist
@@ -57,17 +58,17 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadCLF
 
 - type: startingGear
   id: RMCGearCLFSpecialist
   equipment:
-    head: RMCArmorHelmetSecurity
+    head: RMCHeadMilitiaBucket
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesM4SPRBattleSight
     jumpsuit: RMCJumpsuitCLFSoldier
-    neck: RMCCLFArmband
-    outerClothing: RMCArmorVestNone
+    outerClothing: RMCCoatMilitiaHauberk
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSpecialist
@@ -77,7 +78,7 @@
     pocket1: RMCPouchExplosiveFilledC4SPP
     pocket2: RMCPouchFirstAidERT
   inhand:
-  - RMCWeaponLauncherM5ATL  # TODO RMC14 - Make foldable variant that goes into the bag
+  - RMCWeaponLauncherDisposable
   - RMCEarmuffs
   storage:
     back:

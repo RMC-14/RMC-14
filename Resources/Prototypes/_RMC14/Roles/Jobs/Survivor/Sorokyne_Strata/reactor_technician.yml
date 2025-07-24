@@ -1,0 +1,72 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorReactorTechnician
+  name: rmc-job-name-survivor-reactor-technician
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorReactorTechnician
+  startingGear: RMCGearSurvivorReactorTechnician
+  accessGroups:
+  - ColonistEngi
+  spawnMenuRoleName: Reactor Technician (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetReactorTechnician
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorEngineer
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorReactorTechnician
+  equipment:
+    jumpsuit: RMCJumpsuitNormCivilianWhiteAlt
+    ears: RMCHeadsetDistressSPP
+    pocket2: RMCWelderIndustrial
+  storage:
+    back:
+    - RMCMaskGasSPP
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorReactorTechnician
+  name: reactor technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorReactorTechnician
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetReactorTechnician
+  name: reactor technician preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, RMCShoesWhite ]
+    - [ RMCLabcoatShort, RMCShoesLaceupBrown ]
+    - [ RMCHeadRadiationHood, RMCSuitRadiation, RMCShoesLaceupBrown ]

@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: RMCWeaponRevolverBase
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverM44
   name: M44 combat revolver
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.

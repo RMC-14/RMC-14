@@ -61,9 +61,9 @@
   - GogglesM1A1RMC
   - PersonalShadesRMC
   - SunglassesRMC # TODO prescription sunglasses
-  - GlassesBiMexYellowRMC
-  - GlassesBiMexBronzeRMC
-  - GlassesBiMexBlackRMC
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
   - GogglesRedRMC
   - GogglesBlueRMC
   - GogglesPurpleRMC
@@ -169,6 +169,16 @@
   - PrescriptionRMC
   - TrimmedWireRMC
 
+# Accessories
+- type: loadoutGroup
+  id: AccessoriesRMC
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 10
+  loadouts:
+  - UNMCSquadPatchRMC
+  - SquadArmbandRMC
+
 # Paperwork
 - type: loadoutGroup
   id: PaperworkRMC
@@ -256,6 +266,24 @@
   - CanteenRMC
   - MetalFlaskRMC
 
+# Smokables
+- type: loadoutGroup
+  id: SmokablesRMC
+  name: rmc-loadout-group-smokables
+  minLimit: 0
+  maxLimit: 11
+  loadouts:
+  - LuckySlothsPackRMC
+  - WeYaGoldPackRMC
+  - ExecutiveSelectPackRMC
+  - TarbackTubeRMC
+  - TarbacksCaseRMC
+  - PremiumCigarRMC
+  - ZippoRMC
+  - ZippoExecRMC
+  - ZippoGoldRMC
+  - MatchboxRMC
+
 # Food (sweets)
 - type: loadoutGroup
   id: FoodSweetsRMC
@@ -336,6 +364,14 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+# Chief MP
+- type: loadoutGroup
+  id: ChiefMPRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - CMPPeakedCapRMC
 # Synthetic
 - type: loadoutGroup
   id: SynthUniformRMC
@@ -352,9 +388,12 @@
   - ScrubsGreyRMC
   - ServiceUniformRMC
   - ServiceUniformXORMC
+  - MarineUniformRMC
+  - CorpsmanUniformRMC
   - ComTechUniformRMC
   - EngineerUniformRMC
   - MPUniformRMC
+  - JumpsuitOperationsRMC
   - DCCJumpsuitRMC
   - TShirtWhiteRMC
   - TShirtGrayRMC
@@ -384,9 +423,9 @@
   - GogglesM1A1RMC
   - PersonalShadesRMC
   - SunglassesRMC # TODO prescription sunglasses
-  - GlassesBiMexYellowRMC
-  - GlassesBiMexBronzeRMC
-  - GlassesBiMexBlackRMC
+  - GlassesTriMaxYellowRMC
+  - GlassesTriMaxBronzeRMC
+  - GlassesTriMaxBlackRMC
   - GogglesRedRMC
   - GogglesBlueRMC
   - GogglesPurpleRMC
@@ -402,14 +441,14 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - BootsBlackRMC
-  - ShoesBlackRMC
-  - ShoesBrownRMC
-  - ShoesGreenRMC
-  - ShoesPurpleRMC
-  - ShoesRedRMC
-  - ShoeWhiteRMC
-  - ShoeYellowRMC
+  - BootsBlackRMCSynth
+  - ShoesBlackRMCSynth
+  - ShoesBrownRMCSynth
+  - ShoesGreenRMCSynth
+  - ShoesPurpleRMCSynth
+  - ShoesRedRMCSynth
+  - ShoeWhiteRMCSynth
+  - ShoeYellowRMCSynth
 
 - type: loadoutGroup
   id: SynthHeadwearRMC
@@ -426,7 +465,13 @@
   - BeretEngineerRMC
   - CapMPRMC
   - CapQuartermasterRMC
+  - HeadCapCargoRMC
   - ArmorHelmetM10RMC
+  - HardHatRMC
+  - HardHatOrangeRMC
+  - HardHatWhiteRMC
+  - HardHatBlueRMC
+  - HeadCapOfficerRMC
 
 - type: loadoutGroup
   id: SynthSuitsRMC
@@ -447,6 +492,23 @@
   - CorporateBlackJacketRMC
   - CorporateBrownJacketRMC
   - CorporateBlueJacketRMC
+  - JacketWindbreakerRMC
+  
+- type: loadoutGroup
+  id: SynthUniformAccessoriesRMC
+  name: rmc-loadout-group-synthetic-accessories
+  minLimit: 0
+  maxLimit: 3
+  loadouts:
+  - ScienceArmbandRMC
+  - EngiArmbandRMC
+  - MedArmbandRMC
+  - TieRMC
+  - TieGreenRMC
+  - TieBlackRMC
+  - TieGoldRMC
+  - TieRedRMC
+  - TiePurpleRMC
 
 - type: loadoutGroup
   id: SynthBackpackRMC
@@ -483,3 +545,41 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+
+# Civilian
+- type: loadoutGroup
+  id: CivilianOnlyRMC
+  name: rmc-loadout-group-civilian
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - PatchWeYaRMC
+  - PatchWeYaRMCSquare
+  - PatchWeYaRMCBlack
+  - PatchWeYaRMCFury161
+  - PatchTSERMC
+  - PatchCECRMC
+  - PatchCLFRMC
+  # TODO Halcyon Dynamics patch
+  # TODO cowboy hat
+  # white cowboy hat TODO
+  # headband TODO
+  # BiMex tactical shades TODO
+  - ShoesBlackRMC
+  - ShoesBrownRMC
+  - ShoesBlueRMC
+  - ShoesGreenRMC
+  - ShoesYellowRMC
+  - ShoesRedRMC
+  - ShoesPurpleRMC
+  - PlushieFarwaRMC
+  - PlushieBarricadeRMC
+  - PlushieBeeRMC
+  - PlushieSharkGreyRMC
+  - PlushieSharkBlueRMC
+  - PlushieSharkPinkRMC
+  - PlushieMothRMC
+  - PlushieRockRMC
+  - PlushieTherapyRMC
+  - PlushieGnarpGnarpRMC
+  - PlushieGnarpGnarpAltRMC

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/smoking/ashtray.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon-2"
+    },
+    {
+      "name": "icon-0"
+    },
+    {
+      "name": "icon-1"
+    },
+    {
+      "name": "icon-broken"
+    }
+  ]
+}

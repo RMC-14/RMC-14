@@ -171,7 +171,7 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentXM51Stock # TODO RMC14 burst
+  id: RMCAttachmentXM51Stock
   name: XM51 stock
   description: A specialized stock designed for XM51 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility.
   components:
@@ -199,6 +199,12 @@
         types:
           Blunt: 10
   - type: AttachableWeaponRangedMods
+    fireModeMods:
+    - conditions:
+        whitelist:
+          tags:
+          - RMCXM51StockBurst
+      extraFireModes: Burst
     modifiers:
     - conditions:
         wieldedOnly: true
@@ -505,6 +511,28 @@
     actionName: Toggle M54C Folding Stock
 
 - type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CStockCollapsibleWhite
+  suffix: White Camo
+  description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle. Painted in a lovely corporate white camo.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+    state: m54c-col
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      state: m54c-col
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      state: m54c-col-on
+    actionName: Toggle M54C Folding Stock
+
+- type: entity
   parent: RMCAttachableBase
   id: RMCAttachmentM16Stock
   name: M16 bump stock
@@ -638,6 +666,63 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: smgstockcol-on
+    actionName: Toggle Submachinegun Folding Stock
+  - type: AttachableSizeMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      size: 1
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      walk: -0.024
+      sprint: -0.043
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.15
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 2
+
+- type: entity
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentMP5AltStockCollapsible
+  name: MP5A5 folding stock
+  description: MP5A5 folding stock for Alternate MP5
+  components:
+  - type: Sprite
+    state: mp5_stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentMP5AltStockCollapsible
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: mp5_stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: mp5_stock-on
     actionName: Toggle Submachinegun Folding Stock
   - type: AttachableSizeMods
     modifiers:
@@ -871,7 +956,6 @@
     - RMCAttachmentStock
     - RMCAttachmentSSG45Stock
 
-
 - type: entity
   parent: RMCAttachableBase
   id: RMCAttachmentL83A2Stock
@@ -888,6 +972,33 @@
     - RMCAttachmentStock
     - RMCAttachmentL83A2Stock
 
+- type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentAK4047StockCollapsible
+  name: AK-4047 folding stock
+  description: The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: ak4047_stock
+  - type: AttachableToggleable
+    active: true
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: ak4047_stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: ak4047_stock-on
+    actionName: Toggle AK-4047 Folding Stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentAK4047StockCollapsible
+
 - type: Tag
   id: RMCAttachmentHG3712Stock
 
@@ -899,6 +1010,9 @@
 
 - type: Tag
   id: RMCAttachmentM42A2WoodenStock
+
+- type: Tag
+  id: RMCXM51StockBurst
 
 - type: Tag
   id: RMCAttachmentXM51Stock
@@ -968,3 +1082,9 @@
 
 - type: Tag
   id: RMCAttachmentL83A2Stock
+
+- type: Tag
+  id: RMCAttachmentAK4047StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentMP5AltStockCollapsible

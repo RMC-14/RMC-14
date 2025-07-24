@@ -1,0 +1,58 @@
+- type: entity
+  parent: BaseItem
+  id: RMCIceCrystal
+  name: ice crystal
+  description: It is a giant crystal of ice. The chemical process that keeps it frozen despite major seasonal temperature flux is what the United Nations Greater Argentinian science team is studying here on the Snowball.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/ice_crystal.rsi
+    state: icon_1
+
+- type: entity
+  parent: RMCIceCrystal
+  id: RMCIceCrystal2
+  components:
+  - type: Sprite
+    state: icon_2
+
+- type: entity
+  parent: RMCIceCrystal
+  id: RMCIceCrystal3
+  components:
+  - type: Sprite
+    state: icon_3
+
+- type: entity
+  parent: RMCIceCrystal
+  id: RMCIceCrystal4
+  components:
+  - type: Sprite
+    state: icon_4
+
+- type: entity
+  parent: RMCIceCrystal
+  id: RMCIceCrystal5
+  components:
+  - type: Sprite
+    state: icon_5
+
+- type: entity
+  parent: RMCIceCrystal
+  id: RMCIceCrystal6
+  components:
+  - type: Sprite
+    state: icon_6
+
+- type: entity
+  parent: RMCIceCrystal
+  id: RMCIceCrystal7
+  components:
+  - type: Sprite
+    state: icon_7
+
+- type: entity
+  parent: RMCIceCrystal
+  id: RMCIceCrystal8
+  components:
+  - type: Sprite
+    state: icon_8

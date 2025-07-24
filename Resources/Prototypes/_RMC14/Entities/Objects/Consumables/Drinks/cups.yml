@@ -1,0 +1,124 @@
+- type: reagent
+  id: RMCCoffee
+  parent: Coffee
+  color: "#704435"
+
+- type: entity
+  parent: DrinkBaseMug
+  id: RMCCoffeeCup
+  name: coffee mug
+  description: A rugged, military-grade mug featuring the UNMC insignia, built for endurance in any deployment—whether aboard a ship or in the field.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+  - type: Drink
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+    layers:
+      - state: icon-0
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: icon-3
+        visible: false
+  - type: Item
+    size: Small
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: Appearance
+  - type: Destructible
+    thresholds: [] # TODO RMC14 destroy on explosion unless inside a container
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCCoffeeCupFilled
+  suffix: Filled
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        drink:
+          maxVol: 20
+          reagents:
+          - ReagentId: RMCCoffee
+            Quantity: 20
+
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCMarineCorpsCup
+  name: UNMC cup
+  description: A rugged, military-grade mug featuring the UNMC insignia, built for endurance in any deployment—whether aboard a ship or in the field.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Consumable/Drinks/unmccup.rsi
+        state: base
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+        state: icon-3
+        visible: false
+
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCSocialistPPCup
+  name: SPP cup
+  description: A tough, crimson cup stamped with the SPP emblem—built like a real krepky muzhik, ready to serve comrades in toil and glory among the stars.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Consumable/Drinks/sppcup.rsi
+        state: base
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+        state: icon-3
+        visible: false
+
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCUnitedNationsCup
+  name: UN cup
+  description: A sleek, official UN cup, symbolizing unity, order, and authority across the stars. Crafted for those who uphold peace and progress.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Consumable/Drinks/uncup.rsi
+        state: base
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+        state: icon-3
+        visible: false
+
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCWestonYamadaCup
+  name: WEYA cup
+  description: A clean, stylish cup with the logo of the Weston-Yamada Corporation branded on the side. Used throughout the company hierarchy, from interns to division directors.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Consumable/Drinks/weyacup.rsi
+        state: base
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+        state: icon-3
+        visible: false
+
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCColonyLiberationFrontCup
+  name: CLF cup
+  description: A tough, well-worn cup marked with the CLF sigil born from the defiance sparked by the Slaughter of Xibou.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Consumable/Drinks/clfcup.rsi
+        state: base
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+        state: icon-3
+        visible: false

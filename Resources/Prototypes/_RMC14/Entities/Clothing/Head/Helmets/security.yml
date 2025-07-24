@@ -37,6 +37,9 @@
   description: Standard security gear. Protects the head from impacts.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/security.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/security.rsi
   - type: Clothing
-    sprite: Clothing/Head/Helmets/security.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/security.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 15

@@ -2,7 +2,7 @@
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: M890 riot shotgun
   id: RMCWeaponShotgunM890Riot
-  description: A unique corporate made semi-automatic riot shotgun with a rapid fire rate. Holds 8 Beanbag shells in the chamber. Specially made for crowd control during tough situations.
+  description: A Weston-Yamada semi-automatic riot shotgun with a rapid fire rate. Holds 8 Beanbag shells in the chamber. Specially made for crowd control during tough situations.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_riot.rsi
@@ -10,6 +10,8 @@
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_riot.rsi
   - type: Gun
     shotsPerBurst: 1
+    soundGunshot:
+      collection: RMCTacticalShotgunShoot
   - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:

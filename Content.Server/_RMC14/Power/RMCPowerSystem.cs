@@ -7,7 +7,6 @@ using Content.Shared._RMC14.Power;
 using Content.Shared.Examine;
 using Content.Shared.Power;
 using Content.Shared.PowerCell;
-using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -52,7 +51,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         _batteryQuery = GetEntityQuery<BatteryComponent>();
 
         SubscribeLocalEvent<RMCPowerReceiverComponent, PowerChangedEvent>(OnReceiverPowerChanged);
-        SubscribeLocalEvent<ApcPowerReceiverComponent, MapInitEvent>(ReceiverOnMapInit);
         SubscribeLocalEvent<RMCPowerUsageDisplayComponent, ExaminedEvent>(OnUsageDisplayEvent);
 
         Subs.CVar(_config, RMCCVars.RMCPowerUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
@@ -76,20 +74,23 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         ToUpdate.Add(ent);
     }
 
-    private void ReceiverOnMapInit(Entity<ApcPowerReceiverComponent> ent, ref MapInitEvent args)
+    protected override void OnReceiverMapInit(Entity<RMCPowerReceiverComponent> ent, ref MapInitEvent args)
     {
-        if (!ent.Comp.NeedsPower)
-        {
-            ent.Comp.Powered = true;
+        if (!TryComp(ent, out ApcPowerReceiverComponent? receiver))
+            return;
 
-            Dirty(ent, ent.Comp);
+        if (receiver.NeedsPower)
+            return;
 
-            var ev = new PowerChangedEvent(true, 0);
-            RaiseLocalEvent(ent, ref ev);
+        receiver.Powered = true;
 
-            if (_appearanceQuery.TryComp(ent, out var appearance))
-                _appearance.SetData(ent, PowerDeviceVisuals.Powered, true, appearance);
-        }
+        Dirty(ent, ent.Comp);
+
+        var ev = new PowerChangedEvent(true, 0);
+        RaiseLocalEvent(ent, ref ev);
+
+        if (_appearanceQuery.TryComp(ent, out var appearance))
+            _appearance.SetData(ent, PowerDeviceVisuals.Powered, true, appearance);
     }
 
     protected override void PowerUpdated(Entity<RMCAreaPowerComponent> area, RMCPowerChannel channel, bool on)

@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobRibbonBase
   id: CMCMBResponder
   name: rmc-job-name-cmb-responder
   description: rmc-job-description-cmb-responder
@@ -15,6 +15,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
     - type: Skills
       skills:
         RMCSkillConstruction: 2
@@ -29,7 +32,6 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
-    - type: RMCRibbon
   hasIcon: false
   hidden: true
 
