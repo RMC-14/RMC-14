@@ -117,22 +117,6 @@
 
 - type: entity
   parent: RMCHazardVest
-  id: RMCCoatTMCC
-  name: Tartarus-Mining utility uniform
-  description: A set of standard issue Tartarus-Mining utility fatigues, a yellow pair of utility work slacks and a black collard heavy padded jacket, which protects against various environmental hazards.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC.rsi
-
-- type: entity
-  parent: RMCCoatTMCC
-  id: RMCCoatTMCCAlt
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC_alt.rsi
-
-- type: entity
-  parent: RMCHazardVest
   id: RMCHazardVestEMT
   name: EMT - red hazard vest
   description: A red and white EMT high-visibility hazard vest used in work zones.
