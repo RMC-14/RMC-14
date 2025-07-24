@@ -37,7 +37,7 @@
     outerClothing: RMCLabcoatScience
     gloves: RMCHandsBlack
   inhand:
-  - GasAnalyzer
+  - RMCAtmosScanner
 
 - type: entity
   parent: CMSpawnPointJobBase
