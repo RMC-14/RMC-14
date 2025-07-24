@@ -19,7 +19,6 @@
       - Flashlight
       - CMMagazinePistol
       - RMCShellShotgun
-      - Taser
       components:
       - Handcuff
       - Flash
