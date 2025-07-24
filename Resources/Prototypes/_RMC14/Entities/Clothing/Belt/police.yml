@@ -19,6 +19,9 @@
       - Flashlight
       - CMMagazinePistol
       - RMCShellShotgun
+      - Donut
+      - RMCGrenadeFlashBang
+      - Radio
       components:
       - Handcuff
       - Flash
@@ -26,7 +29,7 @@
       - Stunbaton
       - ForensicScanner
       - MeleeWeapon
-      - Gun
+      - RMCLighter
   - type: FixedItemSizeStorage
 
 - type: entity
