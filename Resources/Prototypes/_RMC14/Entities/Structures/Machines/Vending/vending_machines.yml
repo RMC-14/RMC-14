@@ -290,6 +290,7 @@
     CMStunbaton: 4
     RMCFlashlight: 4
     CMBeltSecurityMP: 10
+    RMCBeltSecurityMPCombat: 4
     CMFlash: 5
     RMCBoxDonut: 12
     # Evidence box 6

@@ -53,6 +53,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltSecurityMPCombat
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -128,6 +129,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltSecurityMPCombat
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:

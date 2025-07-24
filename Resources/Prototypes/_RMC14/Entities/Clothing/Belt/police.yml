@@ -63,3 +63,66 @@
     maxItemSize: Normal
     grid:
     - 0,0,15,1 # 8 slots
+
+
+- type: entity
+  parent: CMBeltSecurityMP
+  id: RMCBeltSecurityMPCombat
+  name: M276 pattern combat military police rig
+  description: The M276 pattern combat military police rig is a special version of standard rig. It consists of a modular belt with various clips and pouches for tools along with a holster for a sidearm. Due to the bulk of the sidearm, it is unable to hold as many tools as its standard counterpart.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/combat_utility.rsi
+    layers:
+    - state: icon
+      color: "#707070"
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      offset: -0.3125, -0.09375
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/combat_utility.rsi
+      state: icon-front
+      color: "#707070"
+    - state: half
+      map: [ "openLayer" ]
+      color: "#707070"
+    - state: full
+      map: [ "closedLayer" ]
+      color: "#707070"
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/combat_utility.rsi
+  - type: Storage
+    whitelist:
+      tags:
+      - SecBeltEquip
+      - Taser
+      - Flashlight
+      - Taser
+      - CMMagazinePistol
+      - RMCShellShotgun
+      components:
+      - Handcuff
+      - Flash
+      - FlashOnTrigger
+      - Stunbaton
+      - ForensicScanner
+      - MeleeWeapon
+      - Gun
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      count: 2
+      whitelist:
+        tags:
+          - CMMagazinePistol
+          - RMCShellShotgun
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun

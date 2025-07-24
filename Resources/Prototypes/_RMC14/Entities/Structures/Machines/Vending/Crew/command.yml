@@ -909,6 +909,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
+      - id: RMCBeltSecurityMPCombat
     - name: Patches
       jobs:
       - CMChiefMP
