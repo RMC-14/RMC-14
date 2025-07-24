@@ -438,4 +438,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> HidePlayerIdentities =
         CVarDef.Create("rmc.hide_player_identities", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> DchatEnabled =
+        CVarDef.Create("dchat.enabled", true, CVar.NOTIFY | CVar.REPLICATED);
 }

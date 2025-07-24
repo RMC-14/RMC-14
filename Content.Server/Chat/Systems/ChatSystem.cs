@@ -78,6 +78,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     private bool _loocEnabled = true;
     private bool _deadLoocEnabled;
     private bool _critLoocEnabled;
+    private bool _DeadchatEnabled; // RMC14
     private readonly bool _adminLoocEnabled = true;
 
     public override void Initialize()
@@ -87,6 +88,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Subs.CVar(_configurationManager, CCVars.LoocEnabled, OnLoocEnabledChanged, true);
         Subs.CVar(_configurationManager, CCVars.DeadLoocEnabled, OnDeadLoocEnabledChanged, true);
         Subs.CVar(_configurationManager, CCVars.CritLoocEnabled, OnCritLoocEnabledChanged, true);
+        Subs.CVar(_configurationManager, RMCCVars.DchatEnabled, OnDeadChatEnabledChanged, true); // RMC14
 
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameChange);
     }
@@ -117,6 +119,16 @@ public sealed partial class ChatSystem : SharedChatSystem
         _critLoocEnabled = val;
         _chatManager.DispatchServerAnnouncement(
             Loc.GetString(val ? "chat-manager-crit-looc-chat-enabled-message" : "chat-manager-crit-looc-chat-disabled-message"));
+    }
+
+        private void OnDeadChatEnabledChanged(bool val)
+    {
+        if (_DeadchatEnabled == val)
+            return;
+
+        _DeadchatEnabled = val;
+        _chatManager.DispatchServerAnnouncement(
+            Loc.GetString(val ? "chat-manager-crit-looc-chat-enabled-message" : "chat-manager-crit-looc-chat-disabled-message")); // Change this
     }
 
     private void OnGameChange(GameRunLevelChangedEvent ev)
@@ -671,7 +683,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 ("message", FormattedMessage.EscapeText(message)));
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin dead chat from {player:Player}: {message}");
         }
-        else
+        else if (_DeadchatEnabled == true) // RMC14 - Check the status of the `dchat.enabled` cvar before continuing.
         {
             wrappedMessage = Loc.GetString("chat-manager-send-dead-chat-wrap-message",
                 ("deadChannelName", Loc.GetString("chat-manager-dead-channel-name")),
