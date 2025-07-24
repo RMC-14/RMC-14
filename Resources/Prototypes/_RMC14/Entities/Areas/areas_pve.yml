@@ -1,6 +1,7 @@
 ﻿- type: entity
   parent: RMCAreaBase
   id: RMCAreaPVE
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_fiorina.rsi
@@ -90,3 +91,11 @@
     supplyDrop: true
     minimapColor: '#EBE5E5E3'
     weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPVEIndoors
+  id: RMCAreaPVEShuttle
+  name: Shuttle
+  components:
+  - type: Area
+    alwaysPowered: true
