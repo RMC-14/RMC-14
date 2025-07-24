@@ -25,7 +25,6 @@
     equipSound:
       collection: storageRustle
     unequipSound:
-      collection: storageRustle
       collection: RMCEquipArmor
     quickEquip: false
     slots:
