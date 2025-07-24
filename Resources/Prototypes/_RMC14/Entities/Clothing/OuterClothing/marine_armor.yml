@@ -598,7 +598,7 @@
   - type: CMArmor
     melee: 15
     bullet: 30
-    bio: 15
+    bio: 5
     explosionArmor: 10
   - type: Storage
     grid:

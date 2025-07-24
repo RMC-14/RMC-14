@@ -6,6 +6,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/TMCC.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 10
+    bio: 15
+    explosionArmor: 10
 
 - type: entity
   parent: RMCArmorTMCC
