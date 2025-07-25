@@ -25,6 +25,8 @@
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
+    - type: CMVendorUser
+      points: 45
     - type: JobPrefix
       prefix: cm-job-prefix-correspondent # TODO RMC14 combat correspondent is CC
     - type: TacticalMapIcon

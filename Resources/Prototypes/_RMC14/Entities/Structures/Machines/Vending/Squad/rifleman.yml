@@ -165,6 +165,8 @@
       entries:
       - id: CMWebbing
         points: 10
+      - id: RMCWebbingBlackSmall
+        points: 10
       - id: CMWebbingBrown
         points: 15
       - id: CMWebbingBlack
