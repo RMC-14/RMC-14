@@ -37,6 +37,7 @@
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1

@@ -32,6 +32,7 @@
       skills:
         RMCSkillDomestics: 1
         RMCSkillConstruction: 3
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 3
         RMCSkillFirearms: 1
         RMCSkillFireman: 1

@@ -23,6 +23,7 @@
     - type: RMCUserBulkyArmorIncapable
     - type: Skills
       skills:
+        RMCSkillEndurance: 0
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: JobPrefix
