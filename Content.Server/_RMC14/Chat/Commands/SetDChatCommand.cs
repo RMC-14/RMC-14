@@ -35,7 +35,7 @@ public sealed class SetDchatCommand : IConsoleCommand
             return;
         }
 
-        cfg.SetCVar(RMCCVars.DchatEnabled, dchat);
+        cfg.SetCVar(RMCCVars.RMCDeadChatEnabled, dchat);
 
         shell.WriteLine(Loc.GetString(dchat ? "set-dchat-command-dchat-enabled" : "set-dchat-command-dchat-disabled"));
     }
