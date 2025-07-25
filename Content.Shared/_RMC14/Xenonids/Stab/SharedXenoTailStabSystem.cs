@@ -94,6 +94,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
         // TODO RMC14 sounds
         // TODO RMC14 lag compensation
+        var damaged = false;
         var damage = new DamageSpecifier(stab.Comp.TailDamage);
         var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
         RaiseLocalEvent(stab, ref eve);
@@ -154,7 +155,10 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab);
 
                 if (change?.GetTotal() > FixedPoint2.Zero)
+                {
+                    damaged = true;
                     _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
+                }
 
                 if (_net.IsServer)
                 {
@@ -241,7 +245,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 _rotate.RotateXeno(stab, angle.GetDir());
             }
 
-            var sound = args.Entity != null && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
+            var sound = args.Entity != null && damaged && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
             _audio.PlayPvs(sound, stab);
         }
 
