@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The IO vendor now vends a M54C AP magazine for points instead of a regular
-      one.
-    type: Fix
-  id: 1588
-  time: '2025-04-19T04:59:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6171
 - author: Vermidia
   changes:
   - message: Fixed being able to place sandbags in dropships
@@ -4884,5 +4876,13 @@
   id: 2088
   time: '2025-07-25T21:47:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7086
+- author: Whisper
+  changes:
+  - message: New SOP regarding dropships has been published. Check your SOP book for
+      details.
+    type: Add
+  id: 2089
+  time: '2025-07-25T22:49:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7246
 Name: RMC14
 Order: -1
