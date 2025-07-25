@@ -184,6 +184,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_blue.rsi
 
 - type: entity
+  parent: CMJumpsuitLiaisonBlue
+  id: CMJumpsuitLiaisonBlueKutjevoGoon
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYaBlack
+
+- type: entity
   parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitLiaisonOrange
   name: orange outfit
