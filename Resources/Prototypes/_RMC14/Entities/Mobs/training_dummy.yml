@@ -14,6 +14,7 @@
     - type: CanEnterCryostorage
     - type: Hunger
     - type: Infectable
+    - type: MindContainer
     - type: NewPlayerLabel
     - type: Perishable
     - type: SSDIndicator
