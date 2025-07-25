@@ -53,7 +53,11 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
     {
         if (_hive.GetHive(ent.Owner) is {} hive &&
             _gameTicker.RoundDuration() > hive.Comp.PreSetupCutoff)
+        {
             hive.Comp.NewCoreAt = _timing.CurTime + hive.Comp.NewCoreCooldown;
+            hive.Comp.AnnouncedHiveCoreCooldownOver = false;
+        }
+
     }
 
     private void OnXenoSpawnerUsed(Entity<XenoComponent> xeno, ref GhostRoleSpawnerUsedEvent args)
