@@ -22,7 +22,7 @@ public sealed class SetDchatCommand : IConsoleCommand
             return;
         }
 
-        var dchat = cfg.GetCVar(RMCCVars.DchatEnabled);
+        var dchat = cfg.GetCVar(RMCCVars.RMCDeadChatEnabled);
 
         if (args.Length == 0)
         {
