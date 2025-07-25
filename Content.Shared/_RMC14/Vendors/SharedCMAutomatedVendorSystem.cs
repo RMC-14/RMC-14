@@ -31,6 +31,8 @@ using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
 using Content.Shared.Wall;
+using Content.Shared.Destructible;
+using Content.Shared.Throwing;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -61,6 +63,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -77,6 +80,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
@@ -292,6 +296,52 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             var access = ent.Comp.Hacked ? new List<ProtoId<AccessLevelPrototype>>() : ent.Comp.Access;
             _accessReader.SetAccesses((ent, accessReader), access);
         }
+    }
+
+    private void OnVendorDestruction(Entity<CMAutomatedVendorComponent> vendor, ref DestructionEventArgs args)
+    {
+        if (vendor.Comp.EjectContentsOnDestruction)
+            EjectAllVendorContents(vendor.Owner, vendor.Comp);
+    }
+
+    private void EjectAllVendorContents(EntityUid uid, CMAutomatedVendorComponent component)
+    {
+        // Get all available items with their quantity
+        var inventory = GetAvailableInventoryWithAmounts(component);
+
+        foreach (var (itemId, amount) in inventory)
+        {
+            // Create items in quantity amount
+            for (int i = 0; i < amount; i++)
+            {
+                // Create item near the vendor
+                var coords = Transform(uid).Coordinates;
+                var spawnedItem = Spawn(itemId, coords);
+
+                // Throw in a random direction with a random force
+                var direction = new Vector2(_random.NextFloat(-1, 1), _random.NextFloat(-1, 1));
+                var throwForce = _random.NextFloat(1f, 7f);
+                _throwingSystem.TryThrow(spawnedItem, direction, throwForce);
+            }
+        }
+    }
+
+    private List<(EntProtoId Id, int Amount)> GetAvailableInventoryWithAmounts(CMAutomatedVendorComponent component)
+    {
+        var inventory = new List<(EntProtoId Id, int Amount)>();
+
+        foreach (var section in component.Sections)
+        {
+            foreach (var entry in section.Entries)
+            {
+                if (entry.Amount > 0)
+                {
+                    inventory.Add((entry.Id, entry.Amount.Value));
+                }
+            }
+        }
+
+        return inventory;
     }
 
     private void OnRecentlyGotEquipped<T>(Entity<RMCRecentlyVendedComponent> ent, ref T args)

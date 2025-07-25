@@ -1,9 +1,8 @@
 # TODO RMC14: It will be more useful when the mechanics of manual replenishment of vending machines will be implemented
-# TODO RMC14: destructibility, automatically extract contents before destruction
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechFOBSupplies
-  name: ColMarTech Automated Supply Vendor
+  name: ColMarTech Automated FOB Supplies Vendor
   description: An automated restockable storage vendor for use in organizing FOB supplies.
   components:
   - type: ApcPowerReceiver
@@ -12,6 +11,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor # intentionally without access
+    hackable: false
+    ejectContentsOnDestruction: true # Players should not be afraid that everything they put into vending machines for storage will disappear when the tent is destroyed
     sections:
     - name: Primary firearms
       entries:
@@ -89,7 +90,7 @@
         amount: 0
     - name: Building materials
       entries:
-      - id: RMCSheetCardboard
+      - id: RMCSheetCardboard1
         amount: 10
       - id: BarbedWire1
         amount: 0
