@@ -176,19 +176,8 @@ public sealed partial class PainSystem : EntitySystem
 
             pain.UpdateAt = time + pain.EffectUpdateRate;
 
-            var isModificatorsChanged = false;
-            foreach (var mod in pain.PainModificators)
-            {
-                if (time > mod.ExpireAt)
-                {
-                    pain.PainModificators.Remove(mod);
-                    isModificatorsChanged = true;
-                }
-            }
-
-            if (isModificatorsChanged)
-                DirtyField(uid, pain, nameof(PainComponent.PainModificators));
-
+            pain.PainModificators.RemoveAll(mod => time > mod.ExpireAt);
+            DirtyField(uid, pain, nameof(PainComponent.PainModificators));
             UpdateCurrentPainPercentage(uid, pain);
 
             var args = new EntityEffectBaseArgs(uid, EntityManager);
