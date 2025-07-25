@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
@@ -87,7 +88,7 @@ public sealed class XenoLungeSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno, 0.5f);
-        _throwing.TryThrow(xeno, diff, 30, animated: false, compensateFriction: true);
+        _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
             return;
@@ -178,6 +179,7 @@ public sealed class XenoLungeSystem : EntitySystem
             Dirty(xeno, melee);
         }
 
+        StopLunge(xeno);
         _pulling.TryStartPull(xeno, targetId);
         return true;
     }
@@ -216,6 +218,15 @@ public sealed class XenoLungeSystem : EntitySystem
                 args.Attack = new LightAttackEvent(disarm.Target, netAttacker, disarm.Coordinates);
                 break;
         }
+    }
+
+    private void StopLunge(EntityUid lunging)
+    {
+        if (!_physicsQuery.TryGetComponent(lunging, out var physics))
+            return;
+
+        _physics.SetLinearVelocity(lunging, Vector2.Zero, body: physics);
+        _physics.SetBodyStatus(lunging, physics, BodyStatus.OnGround);
     }
 
     public override void Update(float frameTime)
