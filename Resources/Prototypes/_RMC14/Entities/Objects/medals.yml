@@ -215,7 +215,7 @@
   parent: RMCMedalRibbonWhite
   id: RMCMedalRibbonWhiteService
   name: white award ribbon
-  description: A white ribbon awarded to civilians for participation in a UNMC-sponsored events. It is a somewhat common award, signifying their dedication and support for the organization.
+  description: A white ribbon awarded to civilians for participation in a UNMC-sponsored event. It is a somewhat common award, signifying their dedication and support for the organization.
   
 - type: entity
   parent: RMCMedalBase
