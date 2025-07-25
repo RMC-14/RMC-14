@@ -66,6 +66,15 @@
   - type: Sprite
     state: doc_spawn
 
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleDoctor
+  name: Doctor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: doctor
+
 - type: playTimeTracker
   id: CMJobDoctor
   isHumanoid: true
