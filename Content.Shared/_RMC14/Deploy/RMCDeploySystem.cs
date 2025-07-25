@@ -278,12 +278,6 @@ public sealed class RMCDeploySystem : EntitySystem
             childComp.SetupIndex = i;
             Dirty(spawned, childComp);
 
-            // Log if the spawned entity has FoldableComponent
-            if (TryComp<FoldableComponent>(spawned, out var foldableComp))
-            {
-                Logger.GetSawmill("entity").Debug($"RMCDeploySystem: Spawned entity {spawned} has FoldableComponent (IsFolded: {foldableComp.IsFolded})");
-            }
-
             if (setup.StorageOriginalEntity && storageEntity == null)
                 storageEntity = spawned;
         }
