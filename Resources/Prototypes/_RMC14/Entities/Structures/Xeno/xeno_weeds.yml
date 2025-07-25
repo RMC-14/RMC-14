@@ -196,6 +196,8 @@
     layers:
     - state: hive_weed0
   - type: HiveWeeds
+  - type: XenoWeedsSpreading
+    spreadDelay: 1.25
   - type: IconSmooth
     key: cm_xeno_weeds
     base: hive_weed
@@ -353,6 +355,8 @@
     fruitGrowthMultiplier: 0.8
     speedMultiplierOutsider: 0.508
     speedMultiplierOutsiderArmor: 0.6177
+  - type: XenoWeedsSpreading
+    spreadDelay: 3.125
   - type: Destructible
     thresholds:
     - trigger:
