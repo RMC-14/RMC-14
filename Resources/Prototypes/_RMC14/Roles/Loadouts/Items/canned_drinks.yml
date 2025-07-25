@@ -91,6 +91,13 @@
     - CMDrinkCanBeerLite
 
 - type: loadout
+  id: SequoiaBeerRMC
+  cost: 3
+  storage:
+    back:
+    - RMCDrinkCanSequoiaBeer
+
+- type: loadout
   id: ThirteenLokoRMC
   cost: 3
   storage:
