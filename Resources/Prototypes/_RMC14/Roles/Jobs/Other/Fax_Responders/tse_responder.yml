@@ -12,6 +12,7 @@
   supervisors: cm-job-supervisors-staff
   accessGroups:
   - ShipMasterAccess
+  - RMCWeYa
   special:
   - !type:AddComponentSpecial
     components:
@@ -43,7 +44,7 @@
     head: RMCHeadRoyalBeret
     id: RMCIDCardTSEResponder
     ears: RMCHeadsetRoyalMarine
-    eyes: RMCSunglasses
+    eyes: RMCGlassesMedicalHUDGlasses
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge

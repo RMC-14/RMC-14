@@ -12,6 +12,7 @@
   supervisors: cm-job-supervisors-staff
   accessGroups:
   - ShipMasterAccess
+  - RMCWeYa
   special:
   - !type:AddComponentSpecial
     components:
@@ -36,7 +37,7 @@
   id: RMCGearProvostResponder
   equipment:
     head: RMCHeadBeretProvost
-    eyes: CMGlassesSecurity
+    eyes: CMGlassesSecurity # TODO: replace with sec hud
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvost
     outerClothing: RMCProvostCommandJacket

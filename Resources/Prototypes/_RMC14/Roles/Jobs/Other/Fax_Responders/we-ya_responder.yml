@@ -12,6 +12,7 @@
   supervisors: cm-job-supervisors-staff
   accessGroups:
   - ShipMasterAccess
+  - RMCWeYa
   spawnMenuRoleName: WEYA Communications Executive
   special:
   - !type:AddComponentSpecial
@@ -40,6 +41,7 @@
   id: RMCGearWeYaResponder
   equipment:
     ears: RMCHeadsetDistressPMCDirector
+    eyes: RMCGlassesMedicalHUDGlasses
     back: CMSatchelFilledFaxResponder
     belt: CMClipboard
     head: ArmorHelmetPMC
