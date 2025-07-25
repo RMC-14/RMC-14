@@ -185,6 +185,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
             TargetEffect = "RMCEffectHealBusy",
             MovementThreshold = 0.5f,
+            RootEntity = true
         });
     }
 
