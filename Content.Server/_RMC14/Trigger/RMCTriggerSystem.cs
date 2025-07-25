@@ -15,6 +15,7 @@ public sealed class RMCTriggerSystem : EntitySystem
     {
         SubscribeLocalEvent<OnShootTriggerAmmoTimerComponent, AmmoShotEvent>(OnTriggerTimerAmmoShot);
         SubscribeLocalEvent<TriggerOnThrowEndComponent, StopThrowEvent>(OnThrownAmmoStops);
+        SubscribeLocalEvent<TriggerOnThrowEndComponent, TriggerEvent>(OnTrigger);
 
         SubscribeLocalEvent<TriggerOnFixedDistanceStopComponent, ProjectileFixedDistanceStopEvent>(OnTriggerOnFixedDistanceStop);
     }
@@ -49,6 +50,11 @@ public sealed class RMCTriggerSystem : EntitySystem
     {
         var active = EnsureComp<ActiveTriggerOnThrowEndComponent>(ent);
         active.TriggerAt = _timing.CurTime + ent.Comp.Delay;
+    }
+
+    private void OnTrigger(Entity<TriggerOnThrowEndComponent> ent, ref TriggerEvent args)
+    {
+        RemCompDeferred<TriggerOnThrowEndComponent>(ent);
     }
 
     public override void Update(float frameTime)
