@@ -195,7 +195,7 @@
   parent: RMCMedalRibbonBronze
   id: RMCMedalRibbonBronzeService
   name: bronze award ribbon
-  description: A bronze ribbon awarded to civilians for participation in a UNMC-sponsored events. It is a very common award, and is typically the first award a civilian would receive.
+  description: A bronze ribbon awarded to civilians for participation in a UNMC-sponsored event. It is a very common award, and is typically the first award a civilian would receive.
 
 - type: entity
   parent: RMCMedalBase
