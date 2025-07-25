@@ -35,6 +35,7 @@
     noTunnel: true
     unweedable: true
     weatherEnabled: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaStrata
@@ -956,6 +957,8 @@
   components:
   - type: Sprite
     state: marshwater
+  - type: Area
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaStrataInteriorCheckpoints

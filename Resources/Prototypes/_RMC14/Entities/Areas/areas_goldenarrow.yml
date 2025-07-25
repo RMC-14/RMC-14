@@ -180,3 +180,5 @@
   components:
   - type: Sprite
     state: oob
+  - type: Area
+    alwaysPowered: true
