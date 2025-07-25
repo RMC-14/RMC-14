@@ -74,9 +74,8 @@ public sealed partial class PainSystem : EntitySystem
     private void OnDamageChanged(EntityUid uid, PainComponent comp, ref DamageChangedEvent args)
     {
         var damageDict = args.Damageable.Damage.DamageDict;
-        UpdateCurrentPain(comp, damageDict);
-        UpdateCurrentPainPercentage(comp);
-        Dirty(uid, comp);
+        UpdateCurrentPain(uid, comp, damageDict);
+        UpdateCurrentPainPercentage(uid, comp);
     }
 
     public void TryChangePainLevelTo(EntityUid uid, int level, PainComponent? pain = null)
@@ -91,10 +90,12 @@ public sealed partial class PainSystem : EntitySystem
         pain.CurrentPainLevel += level.CompareTo(pain.CurrentPainLevel);
 
         _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
+        DirtyField(uid, pain, nameof(PainComponent.CurrentPainLevel));
     }
     public void AddPainModificator(EntityUid uid, TimeSpan duration, FixedPoint2 effectStrength, PainModificatorType type, PainComponent? pain = null)
     {
-        var mod = new PainModificator(duration, effectStrength, type);
+        var expireAt = _timing.CurTime + duration;
+        var mod = new PainModificator(expireAt, effectStrength, type);
         AddPainModificator(uid, mod, pain);
     }
 
@@ -104,22 +105,11 @@ public sealed partial class PainSystem : EntitySystem
             return;
 
         pain.PainModificators.Add(mod);
-        UpdateCurrentPainPercentage(pain);
-        Dirty(uid, pain);
-
-        Timer.Spawn(mod.Duration, () => RemovePainModificator(uid, mod, pain));
+        UpdateCurrentPainPercentage(uid, pain);
+        DirtyField(uid, pain, nameof(PainComponent.PainModificators));
     }
 
-    private void RemovePainModificator(EntityUid uid, PainModificator mod, PainComponent? pain = null)
-    {
-        if (!Resolve(uid, ref pain))
-            return;
-
-        pain.PainModificators.Remove(mod);
-        UpdateCurrentPainPercentage(pain);
-        Dirty(uid, pain);
-    }
-    private void UpdateCurrentPainPercentage(PainComponent comp)
+    private void UpdateCurrentPainPercentage(EntityUid uid, PainComponent comp)
     {
         var maxPainReductionModificatorStrength = FixedPoint2.Zero;
         var painIncrease = FixedPoint2.Zero;
@@ -135,9 +125,11 @@ public sealed partial class PainSystem : EntitySystem
         // Pain reduction effectiveness linear decreases as the pain goes up
         var newPainReduction = FixedPoint2.Max(0, -realCurrentPain * comp.PainReductionDecreaceRate + maxPainReductionModificatorStrength);
         comp.CurrentPainPercentage = FixedPoint2.Clamp(realCurrentPain - newPainReduction, 0, 100);
+
+        DirtyField(uid, comp, nameof(PainComponent.CurrentPainPercentage));
     }
 
-    private void UpdateCurrentPain(PainComponent comp, Dictionary<string, FixedPoint2> damageDict)
+    private void UpdateCurrentPain(EntityUid uid, PainComponent comp, Dictionary<string, FixedPoint2> damageDict)
     {
         var newCurrentPain = FixedPoint2.Zero;
         foreach (var (type, _) in damageDict)
@@ -164,22 +156,40 @@ public sealed partial class PainSystem : EntitySystem
         }
 
         comp.CurrentPain = newCurrentPain;
+
+        DirtyField(uid, comp, nameof(PainComponent.CurrentPain));
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<PainComponent>();
-        while (query.MoveNext(out var uid, out var pain))
+        var time = _timing.CurTime;
+        var painQuery = EntityQueryEnumerator<PainComponent>();
+        while (painQuery.MoveNext(out var uid, out var pain))
         {
             if (_mobState.IsDead(uid))
                 continue;
 
-            if (_timing.CurTime < pain.NextEffectUpdateTime)
+            if (time < pain.UpdateAt)
                 continue;
 
-            pain.NextEffectUpdateTime = _timing.CurTime + pain.EffectUpdateRate;
+            pain.UpdateAt = time + pain.EffectUpdateRate;
+
+            var isModificatorsChanged = false;
+            foreach (var mod in pain.PainModificators)
+            {
+                if (time > mod.ExpireAt)
+                {
+                    pain.PainModificators.Remove(mod);
+                    isModificatorsChanged = true;
+                }
+            }
+
+            if (isModificatorsChanged)
+                DirtyField(uid, pain, nameof(PainComponent.PainModificators));
+
+            UpdateCurrentPainPercentage(uid, pain);
 
             var args = new EntityEffectBaseArgs(uid, EntityManager);
             foreach (var effect in pain.PainLevels)

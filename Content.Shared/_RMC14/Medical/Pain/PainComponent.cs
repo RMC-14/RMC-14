@@ -36,7 +36,7 @@ public sealed partial class PainComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     [AutoPausedField]
-    public TimeSpan NextEffectUpdateTime = new(0);
+    public TimeSpan UpdateAt = new(0);
 
     [ViewVariables, Access(typeof(PainSystem)), AutoNetworkedField]
     public List<PainModificator> PainModificators = [];
@@ -66,13 +66,14 @@ public sealed partial class PainComponent : Component
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class PainModificator
 {
-    public TimeSpan Duration;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan ExpireAt;
     public FixedPoint2 EffectStrength;
     public PainModificatorType Type;
 
-    public PainModificator(TimeSpan duration, FixedPoint2 strength, PainModificatorType type)
+    public PainModificator(TimeSpan expireAt, FixedPoint2 strength, PainModificatorType type)
     {
-        Duration = duration;
+        ExpireAt = expireAt;
         EffectStrength = strength;
         Type = type;
     }
