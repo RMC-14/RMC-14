@@ -12574,7 +12574,7 @@ entities:
   - uid: 493
     components:
     - type: MetaData
-      name: USCM-HC Communications Office
+      name: UNMC-HC Communications Office
     - type: Transform
       pos: 3.001381,-16.039557
       parent: 2
