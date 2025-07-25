@@ -344,7 +344,7 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnProjectileHit
-    intensity: 2.5
+    intensity: 3
   - type: TriggerOnFixedDistanceStop
     delay: 0
   - type: IgnorePredictionHide
