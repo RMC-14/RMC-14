@@ -364,6 +364,17 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+# Corporate Liaison
+- type: loadoutGroup
+  id: LiaisonRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 3
+  loadouts:
+  - RMCWeYaClipboard
+  - RMCWeYaThermos
+  - RMCHeadCapWeYa
+
 # Chief MP
 - type: loadoutGroup
   id: ChiefMPRoleSpecificRMC
@@ -493,7 +504,7 @@
   - CorporateBrownJacketRMC
   - CorporateBlueJacketRMC
   - JacketWindbreakerRMC
-  
+
 - type: loadoutGroup
   id: SynthUniformAccessoriesRMC
   name: rmc-loadout-group-synthetic-accessories
