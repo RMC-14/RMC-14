@@ -1,6 +1,6 @@
 ﻿rmc-no-queen-hivemind-chat = There is no Queen. You are alone.
 rmc-new-queen = A new Queen has risen to lead the Hive! Rejoice!
-rmc-queen-death-cooldown-over = The Hive stirs in anticipation. A new Queen must now evolve to sustain her children!
+rmc-queen-death-cooldown-over = The Hive is ready for a new Queen to evolve. The hive can only survive for a limited time without a queen!
 rmc-hive-core-cooldown-over = The Hive has recovered from the destruction of its previous core. A new Hive Core can now be placed.
 
 rmc-hive-supports-castes = The Hive can now support: {$castes}
