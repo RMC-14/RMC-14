@@ -22,6 +22,9 @@ CMJobSurvivorMiner = Miner Colonist
 cm-job-name-surivor-priest = Priest Colonist
 CMJobSurvivorPriest = Priest Colonist
 
+cm-job-name-survivor-trucker = Trucker Colonist
+CMJobSurvivorTrucker = Trucker Colonist
+
 cm-job-name-survivor-scientist = Scientist Colonist
 CMSurvivorScientist = Scientist Colonist
 
@@ -180,3 +183,76 @@ CMJobSurvivorSoroMiner = Miner
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 CMJobSurvivorHalcyonDynamicsLiaison = Halcyon Dynamics Liaison
+
+# Trijent survs
+
+rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
+CMSurvivorTrijentChaplain = Chaplain
+
+rmc-job-name-survivor-trijent-goon = Trijent Dam Security
+CMSurvivorTrijentGoon = Trijent Dam Security
+
+cm-job-name-survivor-trijent-doctor = Trijent Dam Doctor
+CMSurvivorTrijentDoctor = Trijent Dam Doctor
+
+cm-job-name-survivor-trijent-researcher = Trijent Dam Researcher
+CMSurvivorTrijentResearcher = Trijent Dam Researcher
+
+cm-job-name-survivor-trijent-trucker = Trijent Dam Heavy Vehicle Operator
+CMSurvivorTrijentTrucker = Trijent Dam Heavy Vehicle Operator
+
+cm-job-name-survivor-trijent-engi-hydro = Hydro Electric Engineer
+CMSurvivorTrijentEngiHydro = Hydro Electric Engineer
+
+cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
+CMSurvivorTrijentDamTech = Dam Maintenance Technician
+
+cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
+CMSurvivorTrijentCorporate = Trijent Corporation Liaison
+
+# Chance's Colonists
+
+rmc-job-name-survivor-chances-trucker = Weston-Yamada Heavy Vehicle Operator
+rmc-job-description-survivor-chances-trucker = Operate heavy equipment in and around the colony.
+CMSurvivorChancesTrucker = Weston-Yamada Heavy Vehicle Operator
+
+rmc-job-name-survivor-chances-miner = Mining Surveyor
+CMSurvivorChancesMiner = Mining Surveyor
+
+rmc-job-name-survivor-chances-civilian = Catering Technician
+CMSurvivorChancesCivilian = Catering Technician
+
+rmc-job-name-survivor-administrative-clerk = Administrative Clerk
+CMSurvivorAdministrativeClerk = Administrative Clerk
+
+rmc-job-name-survivor-operations-supervisor = Operations Supervisor
+CMSurvivorOperationsSupervisor = Operations Supervisor
+
+cm-job-name-survivor-chances-medic = Chance's Claim Medic
+CMSurvivorChancesMedic = Chance's Claim Medic
+
+cm-job-name-survivor-chances-paramedic = Chance's Claim Paramedic
+CMSurvivorChancesParamedic = Chance's Claim Paramedic
+
+rmc-job-name-survivor-environmental-researcher = Environmental Researcher
+CMSurvivorChancesEnvironmentalResearcher= Environmental Researcher
+
+rmc-job-name-survivor-terraforming-specialist = Terraforming Specialist
+CMSurvivorChancesTerraformingSpecialist = Terraforming Specialist
+
+rmc-job-name-survivor-atmos-process-tech = Atmospheric Processing Reactor Technician
+CMSurvivorChancesAtmosProcessTech = Atmospheric Processing Reactor Technician
+
+rmc-job-name-survivor-vehicle-repairman = Vehicle Repairman
+CMSurvivorChancesVehicleRepairman = Vehicle Repairman
+
+rmc-job-name-survivor-colony-maint-tech = Colony Maintenance Technician
+CMSurvivorChancesColonyMaintTech = Colony Maintenance Technician
+
+rmc-job-name-survivor-cargo-tech = Warehouse Worker
+CMSurvivorChancesCargoTech = Warehouse Worker
+
+rmc-job-name-survivor-chances-goon = Chance's Claim Corporate Security
+CMSurvivorChancesGoon = Chance's Claim Corporate Security
+
+
