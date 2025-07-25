@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Plasma transfer's overlay now looks different.
-    type: Tweak
-  id: 1587
-  time: '2025-04-19T05:00:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6167
 - author: Dygon
   changes:
   - message: The IO vendor now vends a M54C AP magazine for points instead of a regular
@@ -4880,5 +4873,16 @@
   id: 2087
   time: '2025-07-25T21:46:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7233
+- author: noctyrnal
+  changes:
+  - message: Added the Flamer tank box, which holds 8 Napalm fuel tanks similar to
+      magazine boxes.
+    type: Add
+  - message: Resprites the ammunition boxes, magazine boxes, shell boxes, and supply
+      boxes.
+    type: Tweak
+  id: 2088
+  time: '2025-07-25T21:47:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7086
 Name: RMC14
 Order: -1
