@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Damage;
@@ -58,7 +59,10 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         if (!TryComp(target, out DirectionalAttackBlockerComponent? blocker) || !Transform(target).Anchored)
             return false;
 
-        if (!IsFacingTarget(attacker, target))
+        if (!blocker.BlockMarineAttacks && HasComp<MarineComponent>(attacker))
+            return false;
+
+        if (!IsFacingTarget(target, attacker))
             return false;
 
         var tick = _timing.CurTick.Value;
