@@ -125,7 +125,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         private void OnDeadChatEnabledChanged(bool val)
     {
-        if (_DeadchatEnabled == val)
+        if (_deadchatEnabled == val)
             return;
 
         _deadchatEnabled = val;
