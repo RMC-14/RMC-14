@@ -59,6 +59,9 @@ public sealed partial class DamageOnCollideComponent : Component
     public TimeSpan AcidComboParalyze;
 
     [DataField]
+    public int AcidComboResists;
+
+    [DataField]
     public TimeSpan Paralyze;
 
     [DataField]
