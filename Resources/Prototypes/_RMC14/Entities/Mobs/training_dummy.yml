@@ -11,6 +11,7 @@
     name: cm-chatsan-replacement-synthetic
   - type: RMCTrainingDummy
     removeComponents:
+    - type: CanEnterCryostorage
     - type: Hunger
     - type: Infectable
     - type: NewPlayerLabel
