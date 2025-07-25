@@ -235,7 +235,7 @@
   parent: RMCMedalRibbonYellow
   id: RMCMedalRibbonYellowService
   name: yellow award ribbon
-  description: A bright yellow ribbon awarded to civilians for participation in a UNMC-sponsored events. It is a rare award, signifying their dedication and support for the organization.
+  description: A bright yellow ribbon awarded to civilians for participation in a UNMC-sponsored event. It is a rare award, signifying their dedication and support for the organization.
 
 - type: entity
   parent: RMCMedalBase
