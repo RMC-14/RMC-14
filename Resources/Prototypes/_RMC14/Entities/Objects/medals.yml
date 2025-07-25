@@ -255,7 +255,7 @@
   parent: RMCMedalRibbonBlue
   id: RMCMedalRibbonBlueService
   name: blue award ribbon
-  description: A prestigious blue ribbon awarded to civilians for participation in a UNMC-sponsored events. Such awards require significant amounts of time and dedication to the organization to achieve.
+  description: A prestigious blue ribbon awarded to civilians for participation in a UNMC-sponsored event. Such awards require significant amounts of time and dedication to the organization to achieve.
 
 - type: entity
   parent: RMCMedalBase
