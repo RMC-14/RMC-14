@@ -28,7 +28,7 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: RMCConditionalMarkings
-      targetCategory: Undershirt
+      targetCategory: UndergarmentTop
       markings:
         Male:
         - RMCUndershirtNone

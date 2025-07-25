@@ -18,8 +18,6 @@
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobSlimeTorso
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
     Eyes: MobHumanoidAnyMarking # imp, eye customization
     LArm: MobSlimeLArm
     RArm: MobSlimeRArm
@@ -46,11 +44,11 @@
     Chest:
       points: 2
       required: false
-    Underwear:
+    UndergarmentBottom:
       points: 1
       required: true
       defaultMarkings: [ RMCUnderwearBoxersBlue ]
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: true
       defaultMarkings: [ RMCUndershirtStandard ]

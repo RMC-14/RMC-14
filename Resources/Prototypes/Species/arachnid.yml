@@ -22,8 +22,6 @@
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobArachnidTorso
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -67,14 +65,14 @@
     Chest:
       points: 2
       required: false
-    Underwear:
-      points: 1
-      required: true
-      defaultMarkings: [ RMCUnderwearBoxersBlue ]
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: true
       defaultMarkings: [ RMCUndershirtStandard ]
+    UndergarmentBottom:
+      points: 1
+      required: true
+      defaultMarkings: [ RMCUnderwearBoxersBlue ]
     Legs:
       points: 2
       required: false
