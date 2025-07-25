@@ -128,7 +128,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (_DeadchatEnabled == val)
             return;
 
-        _DeadchatEnabled = val;
+        _deadchatEnabled = val;
         _chatManager.DispatchServerAnnouncement(
             Loc.GetString(val ? "set-dchat-command-dchat-enabled" : "set-dchat-command-dchat-disabled"));
     }
