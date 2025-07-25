@@ -12,6 +12,9 @@
   - type: Clickable
   - type: Climbable
     delay: 0.25
+  - type: Tag
+    tags:
+    - Platform
 
 - type: entity
   abstract: true
@@ -574,7 +577,7 @@
   components:
   - type: Sprite
     state: stone_deco
-    
+
 - type: entity
   parent: CMPlatform
   id: RMCPlatformSandstone
@@ -608,7 +611,7 @@
   - type: Sprite
     state: stone_deco
     color: "#b29082"
-    
+
 - type: entity
   parent: CMPlatform
   id: RMCPlatformSandstoneStairRight
@@ -626,3 +629,6 @@
   - type: Sprite
     state: stone_stair_alt
     color: "#b29082"
+
+- type: Tag
+  id: Platform
