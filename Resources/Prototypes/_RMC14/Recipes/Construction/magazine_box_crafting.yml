@@ -285,6 +285,20 @@
   iconColor: "#7c4c1b"
   objectType: Item
 
+# M34 Incinerator
+
+- type: construction
+  parent: RMC
+  name: Flamer Tank Box (UT-Napthal Fuel)
+  id: RMCBoxFlamerTankEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxFlamerTankEmpty
+  category: construction-category-cm-box-magazine
+  description: A flamer tank box that can contain UT-Napthal fuel tanks.
+  iconColor: "#3d3832"
+  objectType: Item
+
 # Nailgun
 - type: construction
   parent: RMC
@@ -604,6 +618,13 @@
         amount: 1
         doAfter: 0.25
 
+    # M34 Incinerator
+    - to: RMCBoxFlamerTankEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # Nailgun
     - to: RMCBoxMagazineSMGNailgunEmpty
       steps:
@@ -763,6 +784,10 @@
   # XM88
   - node: RMCBoxBullets458Empty
     entity: RMCBoxBullets458Empty
+
+  # M34 Incinerator
+  - node: RMCBoxFlamerTankEmpty
+    entity: RMCBoxFlamerTankEmpty
 
   # Shotgun
   - node: RMCBoxShellsBuckshotEmpty

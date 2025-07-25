@@ -75,7 +75,7 @@
         points: 10
       - id: RMCGunCasePistolSmart
         points: 15
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 30
     - name: Armors
       entries:

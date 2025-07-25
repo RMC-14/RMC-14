@@ -135,6 +135,7 @@
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
+    RMCCoffeeCupFilled: 25 # ?
     DrinkHotCoffee: 25 # $1.5
     DrinkTeacup: 25 # $3
     DrinkHotCoco: 25 # $15
