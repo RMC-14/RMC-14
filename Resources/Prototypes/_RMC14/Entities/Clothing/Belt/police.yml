@@ -29,6 +29,7 @@
       - Stunbaton
       - ForensicScanner
       - MeleeWeapon
+      - Gun
       - RMCLighter
   - type: FixedItemSizeStorage
 
