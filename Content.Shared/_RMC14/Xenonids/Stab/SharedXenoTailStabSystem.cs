@@ -94,6 +94,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
         // TODO RMC14 sounds
         // TODO RMC14 lag compensation
+        var damaged = false;
         var damage = new DamageSpecifier(stab.Comp.TailDamage);
         var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
         RaiseLocalEvent(stab, ref eve);
@@ -154,7 +155,10 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab);
 
                 if (change?.GetTotal() > FixedPoint2.Zero)
+                {
+                    damaged = true;
                     _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
+                }
 
                 if (_net.IsServer)
                 {
@@ -171,41 +175,43 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
                 _cameraShake.ShakeCamera(hit, 2, 1);
 
-                if (stab.Comp.InjectNeuro &&
-                    TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox) &&
-                    HasComp<XenoComponent>(hit))
+                if (!HasComp<XenoComponent>(hit))
                 {
-
-
-                    if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
+                    if (stab.Comp.InjectNeuro &&
+                        TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox))
                     {
-                        neuro.LastMessage = _timing.CurTime;
-                        neuro.LastAccentTime = _timing.CurTime;
-                        neuro.LastStumbleTime = _timing.CurTime;
+
+
+                        if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
+                        {
+                            neuro.LastMessage = _timing.CurTime;
+                            neuro.LastAccentTime = _timing.CurTime;
+                            neuro.LastStumbleTime = _timing.CurTime;
+                        }
+                        neuro.NeurotoxinAmount += neuroTox.NeuroPerSecond;
+                        neuro.ToxinDamage = neuroTox.ToxinDamage;
+                        neuro.OxygenDamage = neuroTox.OxygenDamage;
+                        neuro.CoughDamage = neuroTox.CoughDamage;
                     }
-                    neuro.NeurotoxinAmount += neuroTox.NeuroPerSecond;
-                    neuro.ToxinDamage = neuroTox.ToxinDamage;
-                    neuro.OxygenDamage = neuroTox.OxygenDamage;
-                    neuro.CoughDamage = neuroTox.CoughDamage;
-                }
-                else if (stab.Comp.Inject != null &&
-                    _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
-                {
-                    var total = FixedPoint2.Zero;
-                    foreach (var amount in stab.Comp.Inject.Values)
+                    else if (stab.Comp.Inject != null &&
+                             _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
                     {
-                        total += amount;
-                    }
+                        var total = FixedPoint2.Zero;
+                        foreach (var amount in stab.Comp.Inject.Values)
+                        {
+                            total += amount;
+                        }
 
-                    var available = solutionEnt.Value.Comp.Solution.AvailableVolume;
-                    if (available < total)
-                    {
-                        _solutionContainer.SplitSolution(solutionEnt.Value, total - available);
-                    }
+                        var available = solutionEnt.Value.Comp.Solution.AvailableVolume;
+                        if (available < total)
+                        {
+                            _solutionContainer.SplitSolution(solutionEnt.Value, total - available);
+                        }
 
-                    foreach (var (reagent, amount) in stab.Comp.Inject)
-                    {
-                        _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);
+                        foreach (var (reagent, amount) in stab.Comp.Inject)
+                        {
+                            _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);
+                        }
                     }
                 }
 
@@ -239,7 +245,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 _rotate.RotateXeno(stab, angle.GetDir());
             }
 
-            var sound = args.Entity != null && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
+            var sound = args.Entity != null && damaged && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
             _audio.PlayPvs(sound, stab);
         }
 
