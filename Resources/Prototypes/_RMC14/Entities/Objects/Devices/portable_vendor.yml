@@ -54,15 +54,19 @@
       entries:
       - id: RMCCigarCase
         points: 5
-      - id: CMCigarettePackLuckySlothsMini # TODO RMC14 WeYa cigarettes
+      - id: RMCCigarettePackWeYaGold
+        points: 5
+      - id: RMCZippoExec
         points: 5
       - id: RMCZippoGold
         points: 5
     - name: Drinkables
       entries:
-      - id: DrinkSakeBottleFull
+      - id: RMCDrinkAlcoholSake
         points: 5
-      - id: CMDrinkCanAle # TODO RMC14 Aspen Beer
+      - id: CMDrinkCanAle
+        points: 5
+      - id: CMDrinkCanBeerLite
         points: 5
       - id: DrinkGlass
         points: 1
