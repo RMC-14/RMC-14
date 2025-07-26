@@ -969,6 +969,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaStrataInteriorCheckpoints
