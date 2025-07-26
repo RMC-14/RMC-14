@@ -83,14 +83,15 @@ public sealed partial class PainSystem : EntitySystem
         if (!Resolve(uid, ref pain))
             return;
 
-        if (pain.LastPainLevelUpdateTime + pain.EffectUpdateRate > _timing.CurTime)
+        if (pain.NextPainLevelUpdateTime > _timing.CurTime)
             return;
 
-        pain.LastPainLevelUpdateTime = _timing.CurTime;
+        pain.NextPainLevelUpdateTime = _timing.CurTime + pain.PainLevelUpdateRate;
         pain.CurrentPainLevel += level.CompareTo(pain.CurrentPainLevel);
 
         _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
         DirtyField(uid, pain, nameof(PainComponent.CurrentPainLevel));
+        DirtyField(uid, pain, nameof(PainComponent.NextPainLevelUpdateTime));
     }
     public void AddPainModificator(EntityUid uid, TimeSpan duration, FixedPoint2 effectStrength, PainModificatorType type, PainComponent? pain = null)
     {
@@ -171,23 +172,48 @@ public sealed partial class PainSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
-            if (time < pain.UpdateAt)
+            if (time < pain.NextEffectUpdateTime)
                 continue;
 
-            pain.UpdateAt = time + pain.EffectUpdateRate;
+            pain.NextEffectUpdateTime = time + pain.EffectUpdateRate;
 
             pain.PainModificators.RemoveAll(mod => time > mod.ExpireAt);
             DirtyField(uid, pain, nameof(PainComponent.PainModificators));
             UpdateCurrentPainPercentage(uid, pain);
 
-            /*var args = new EntityEffectBaseArgs(uid, EntityManager);
-            foreach (var effect in pain.PainLevels)
+            var painLevels = pain.PainLevels.OrderBy(level => level.Threshold).ToList(); // in case someone writes it in the wrong order
+            int expectedPainLevel = 0;
+
+            for (int i = 0; i < painLevels.Count(); i++)
+            {
+                if (painLevels[i].Threshold < pain.CurrentPainPercentage)
+                {
+                    expectedPainLevel = i;  // update index to current element
+                }
+                else
+                {
+                    break; // as list is sorted, no need to check further
+                }
+            }
+
+            TryChangePainLevelTo(uid, expectedPainLevel, pain);
+
+            if (!painLevels.Any())
+                continue;
+
+            var currentEffectList = painLevels[pain.CurrentPainLevel].LevelEffects;
+
+            if (!currentEffectList.Any())
+                continue;
+
+            var args = new EntityEffectBaseArgs(uid, EntityManager);
+            foreach (var effect in currentEffectList)
             {
                 if (!effect.ShouldApply(args, _random))
                     continue;
 
                 effect.Effect(args);
-            }*/
+            }
         }
     }
 }

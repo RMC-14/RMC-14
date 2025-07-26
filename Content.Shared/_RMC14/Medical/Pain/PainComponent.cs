@@ -25,18 +25,20 @@ public sealed partial class PainComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public int CurrentPainLevel = 0;
+
     [DataField, AutoNetworkedField]
     public TimeSpan PainLevelUpdateRate = TimeSpan.FromSeconds(2);
 
-    [ViewVariables, AutoNetworkedField]
-    public TimeSpan LastPainLevelUpdateTime = new(0);
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [AutoPausedField]
+    public TimeSpan NextPainLevelUpdateTime = new(0);
 
     [DataField, AutoNetworkedField]
     public TimeSpan EffectUpdateRate = TimeSpan.FromSeconds(1);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     [AutoPausedField]
-    public TimeSpan UpdateAt = new(0);
+    public TimeSpan NextEffectUpdateTime = new(0);
 
     [ViewVariables, Access(typeof(PainSystem)), AutoNetworkedField]
     public List<PainModificator> PainModificators = [];
@@ -79,12 +81,8 @@ public sealed partial class PainModificator
     }
 }
 
-[DataDefinition, Serializable, NetSerializable]
-public sealed partial class PainLevel
-{
-    FixedPoint2 Threshold;
-    List<EntityEffect> LevelEffects;
-}
+[DataRecord]
+public record struct PainLevel(FixedPoint2 Threshold, List<EntityEffect> LevelEffects);
 
 public enum PainModificatorType : byte
 {
