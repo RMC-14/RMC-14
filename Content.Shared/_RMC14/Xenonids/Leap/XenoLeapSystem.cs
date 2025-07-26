@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -449,7 +450,7 @@ public sealed class XenoLeapSystem : EntitySystem
         if (_size.TryGetSize(target, out var size) && size >= RMCSizes.Big)
             return false;
 
-        if (HasComp<XenoWeedsComponent>(target))
+        if (HasComp<XenoWeedsComponent>(target) || HasComp<XenoConstructComponent>(target))
             return false;
 
         return true;

@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivorDoctor
+  parent: CMSurvivorEngineer
   id: CMSurvivorLV624CargoTechnician
   name: rmc-job-name-survivor-lv624-cargo-technician
   description: cm-job-description-survivor

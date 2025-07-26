@@ -136,6 +136,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/army.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/army.rsi
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT

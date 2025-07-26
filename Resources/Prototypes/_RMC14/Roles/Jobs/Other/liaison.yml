@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: RMCJobRibbonBase
+  parent: RMCJobNametagBase
   id: CMLiaison
   name: cm-job-name-liaison
   description: cm-job-description-liaison
