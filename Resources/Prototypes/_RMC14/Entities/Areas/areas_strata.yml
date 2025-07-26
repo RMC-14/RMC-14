@@ -956,6 +956,19 @@
   components:
   - type: Sprite
     state: marshwater
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
 
 - type: entity
   parent: RMCAreaStrataInteriorCheckpoints
