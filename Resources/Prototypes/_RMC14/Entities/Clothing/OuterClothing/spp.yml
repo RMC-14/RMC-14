@@ -150,6 +150,8 @@
     #rad: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
     #internal: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # SPP coats
 - type: entity
