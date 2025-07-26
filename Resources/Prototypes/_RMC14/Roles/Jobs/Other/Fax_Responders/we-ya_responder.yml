@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobRibbonBase
   id: CMWeYaresponder
   name: rmc-job-name-weya-responder
   description: rmc-job-description-weya-responder
@@ -16,6 +16,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
     - type: Skills
       skills:
         RMCSkillConstruction: 2
@@ -30,7 +33,6 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
-    - type: RMCRibbon
   hasIcon: false
   hidden: true
 

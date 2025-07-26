@@ -25,7 +25,7 @@
         RMCSkillSurgery: 2
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: JobPrefix
       prefix: rmc-job-prefix-novamed-doctor
   hidden: true

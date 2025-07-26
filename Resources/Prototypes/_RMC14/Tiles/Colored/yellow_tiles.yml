@@ -48,3 +48,83 @@
   parent: CMFloorSteelPlanetYellowBase
   id: CMFloorSteelPlanetYellowFull
   sprite: /Textures/_RMC14/Tiles/floors/yellowfull.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellow0
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellow_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellow1
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellow_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellow2
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellow_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellow3
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellow_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellow4
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellow_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellow5
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellow_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellow6
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellow_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellow7
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellow_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellowCorner0
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellowcorner_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellowCorner1
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellowcorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellowCorner2
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellowcorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: CMFloorSteelPlanetWhiteYellowCorner3
+  sprite: /Textures/_RMC14/Tiles/floors/whiteyellowcorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: RMCFloorSteelPlanetLoadingArea0
+  sprite: /Textures/_RMC14/Tiles/floors/loadingarea_0.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: RMCFloorSteelPlanetLoadingArea1
+  sprite: /Textures/_RMC14/Tiles/floors/loadingarea_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: RMCFloorSteelPlanetLoadingArea2
+  sprite: /Textures/_RMC14/Tiles/floors/loadingarea_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetYellowBase
+  id: RMCFloorSteelPlanetLoadingArea3
+  sprite: /Textures/_RMC14/Tiles/floors/loadingarea_3.png

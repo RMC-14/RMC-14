@@ -19,7 +19,6 @@ namespace Content.Server._RMC14.Xenonids.Weeds;
 
 public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 {
-    [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
@@ -29,6 +28,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
 
@@ -53,6 +53,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
     }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -99,7 +100,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
 
                     if (!_map.TryGetTileRef(grid, grid, neighbor, out var tileRef) ||
                         tileRef.Tile.IsEmpty ||
-                        tileRef.Tile.IsSpace())
+                        _turf.IsSpace(tileRef))
                     {
                         blocked = true;
                         continue;
@@ -130,11 +131,11 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     continue;
                 }
 
-                var sourceLocal = _mapSystem.CoordinatesToTile(grid, gridComp, transform.Coordinates);
+                var sourceLocal = _map.CoordinatesToTile(grid, gridComp, transform.Coordinates);
                 var diff = Vector2.Abs(neighbor - sourceLocal);
                 if (diff.X >= weeds.Range || diff.Y >= weeds.Range)
                 {
-                    if (source != null && sourceWeeds != null && !sourceWeeds.HasHealed)
+                    if (sourceWeeds != null && !sourceWeeds.HasHealed)
                     {
                         sourceWeeds.HasHealed = true;
                         _damageable.TryChangeDamage(source, sourceWeeds.HealOnStopSpreading, true);
@@ -150,7 +151,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 if (weedsToReplace != null)
                     QueueDel(weedsToReplace.Value);
 
-                var coords = _mapSystem.GridTileToLocal(grid, grid, neighbor);
+                var coords = _map.GridTileToLocal(grid, grid, neighbor);
                 var neighborWeeds = Spawn(prototype, coords);
                 var neighborWeedsComp = EnsureComp<XenoWeedsComponent>(neighborWeeds);
 
@@ -168,11 +169,11 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 {
                     var dir = (AtmosDirection)(1 << i);
                     var pos = neighbor.Offset(dir);
-                    if (!_mapSystem.TryGetTileRef(grid, grid, pos, out var adjacent))
+                    if (!_map.TryGetTileRef(grid, grid, pos, out var adjacent))
                         continue;
 
                     _anchored.Clear();
-                    _mapSystem.GetAnchoredEntities(grid, adjacent.GridIndices, _anchored);
+                    _map.GetAnchoredEntities(grid, adjacent.GridIndices, _anchored);
                     foreach (var anchoredId in _anchored)
                     {
                         if (!_xenoWeedableQuery.TryComp(anchoredId, out var weedable) ||

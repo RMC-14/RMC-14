@@ -120,3 +120,5 @@
     value: 0.2
   - type: FixedIdentity
     name: cm-job-name-xeno-burrower
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2

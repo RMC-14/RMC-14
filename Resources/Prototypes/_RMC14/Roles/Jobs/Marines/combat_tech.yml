@@ -22,6 +22,7 @@
   dummyStartingGear: CMGearCombatTechEquipped
   icon: "CMJobIconCombatTech"
   joinNotifyCrew: false
+  marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - CombatTech
@@ -34,7 +35,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
+        RMCSkillEngineer: 3
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillJtac: 1

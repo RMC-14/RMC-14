@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Physics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -52,4 +53,10 @@ public sealed partial class XenoLeapComponent : Component
 
     [DataField, AutoNetworkedField]
     public int TargetCameraShakeStrength = 0;
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup IgnoredCollisionGroupLarge = CollisionGroup.BarricadeImpassable | CollisionGroup.MidImpassable;
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup IgnoredCollisionGroupSmall = CollisionGroup.BarricadeImpassable;
 }

@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Item;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Rules;
@@ -42,4 +43,29 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
+
+    /// <summary>
+    /// Instead of using the limits of the insert, this will select a random insert and use the base job's limit when true.
+    /// If it is false, it will use the job slots of the insert. See Chance's Claim.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool SelectRandomSurvivorInsert = true;
+
+    /// <summary>
+    /// List of nightmare scenarios that can occur, which are used for conditionally spawning map inserts.
+    /// Only one scenario will be selected using cumulative probability.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<RMCNightmareScenario>? NightmareScenarios;
+}
+
+[DataDefinition]
+[Serializable, NetSerializable]
+public sealed partial record RMCNightmareScenario
+{
+    [DataField(required: true)]
+    public string ScenarioName = string.Empty;
+
+    [DataField]
+    public float ScenarioProbability = 1.0f;
 }

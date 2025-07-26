@@ -1,0 +1,86 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorBeachBum
+  name: cm-job-name-surivor-beach-bum
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorBeachBum
+  startingGear: RMCGearSurvivorBeachBum
+  spawnMenuRoleName: Beach Bum (NV Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillVehicles: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 2
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetBeachBum
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: RMCConditionalMarkings
+      targetCategory: Undershirt
+      markings:
+        Male:
+        - RMCUndershirtNone
+        Female:
+        - RMCUndershirtClassic
+        - RMCUndershirtSports
+        - RMCUndershirtStrapless
+        - RMCUndershirtClassicJungle
+        - RMCUndershirtSportsJungle
+        - RMCUndershirtStraplessJungle
+  useLoadoutOfJob: CMSurvivor
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorBeachBum
+  equipment:
+    jumpsuit: RMCJumpsuitRedShorts
+    back: CMSatchelFillSurvivorBeachBum
+    head: RMCBoonie
+    mask: RMCCigarette
+    shoes: RMCShoesSandals
+    gloves: CMHandsBrown
+
+- type: entity
+  parent: CMSatchelFillSurvivor
+  id: CMSatchelFillSurvivorBeachBum
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCigarettePackWeYaGold
+    - id: RMCKitchenKnifeButcher
+    - id: CMDrinkCanBeerLite
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorBeachBum
+  name: survivor beach bum spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorBeachBum
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetBeachBum
+  name: beach bum colonist preset
+  categories: [ HideSpawnMenu ]

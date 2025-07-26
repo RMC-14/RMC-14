@@ -99,3 +99,25 @@
         - 2.0513795 # oxygen
         # 2.0513795   total
       temperature: 293.15
+
+- type: entity
+  parent: CMGasTankBase
+  id: RMCGasTankPhoron
+  name: phoron tank
+  description: "A tank of liquid phoron. WARNING: Phumes are extremely dangerous."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/phoron.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/phoron.rsi
+  - type: GasTank
+    outputPressure: 21.3
+    air:
+      volume: 5
+      moles:
+        - 0 #         oxygen
+        - 0 #         nitrogen
+        - 0 #         CO2
+        - 2.0513795 # plasma
+        # 2.0513795   total
+      temperature: 293.15

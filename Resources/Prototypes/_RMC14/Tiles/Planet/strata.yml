@@ -1,0 +1,67 @@
+# SOROKYNE STRATA
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetStrata
+  name: strata
+  sprite: /Textures/_RMC14/Tiles/planet/strata/floor.png
+  footstepSounds:
+    collection: FootstepHull
+  canDig: false
+
+- type: tile
+  parent: CMPlanetStrata
+  id: CMPlanetStrataMultiTiles
+  name: strata multi tiles
+  sprite: /Textures/_RMC14/Tiles/planet/strata/multi_tiles.png
+  variants: 6
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetMattedGrass
+  name: matted grass
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  footstepSounds:
+    collection: FootstepWood
+
+- type: tile
+  parent: CMPlanetMattedGrass
+  id: CMPlanetMattedGrass2
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_1.png
+  edgeSpritePriority: 0
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/planet/auto_strata_grass/single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/auto_strata_grass/single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/auto_strata_grass/single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/auto_strata_grass/single_edge.png
+    South: /Textures/_RMC14/Tiles/planet/auto_strata_grass/double_edge.png
+    East: /Textures/_RMC14/Tiles/planet/auto_strata_grass/double_edge.png
+    North: /Textures/_RMC14/Tiles/planet/auto_strata_grass/double_edge.png
+    West: /Textures/_RMC14/Tiles/planet/auto_strata_grass/double_edge.png
+
+- type: tile
+  parent: CMPlanetMattedGrass
+  id: CMPlanetMattedGrass3
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud.png
+
+- type: tile
+  parent: CMPlanetMattedGrass
+  id: CMPlanetMattedGrass4
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud_alt.png

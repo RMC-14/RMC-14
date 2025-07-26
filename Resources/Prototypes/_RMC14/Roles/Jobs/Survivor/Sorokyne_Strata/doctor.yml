@@ -1,0 +1,102 @@
+- type: job
+  parent: CMSurvivor
+  id: CMJobSurvivorMoHDoctor
+  name: rmc-job-name-survivor-moh-doctor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorMoHDoctor
+  ranks:
+    RMCRankCivilianDoctor: []
+  startingGear: RMCGearSurvivorMoHDoctor
+  accessGroups:
+  - ColonistMedical
+  spawnMenuRoleName: MoH Doctor (Sorokyne Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetMoHDoctor
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - SPP
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorDoctor
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorMoHDoctor
+  equipment:
+    head: RMCHeadCapSPPCivilianPlantWorker
+    ears: RMCHeadsetDistressSPP
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorMoHDoctor
+  name: ministry of health doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorMoHDoctor
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetDoctor
+  id: RMCGearSurvivorPresetMoHDoctor
+  name: ministry of health doctor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGearOther:
+    -
+      - [ RMCPouchFirstAidSplintsGauzeOintment ]
+      - [ RMCPouchMedicalFill ]
+      - [ RMCPouchFirstAidInjectors ]
+      - [ RMCPouchFirstResponderFill ]
+      - [ RMCPouchMedkitFillAdvanced ]
+    -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+    -
+      - [ RMCTieBlack ] # TODO RMC14 - System for random uniform accessories like randomStartingGear
+      - [ RMCTie ]
+      - [ RMCTieGreen ]
+      - [ RMCTiePurple ]
+      - [ RMCTieRed ]
+    -
+      - [ CMSheetMetal20, RMCMaskGasSPP ]
+    randomStartingGear:
+      back:
+      - CMSatchel
+      - RMCSatchelBlack
+      - RMCSatchelBlue
+      shoes:
+      - RMCShoesLaceup
+      - RMCShoesLaceupBrown
+      outerClothing:
+      - RMCLabcoatLong
+      - RMCLabcoat
+      jumpsuit:
+      - CMJumpsuitLiaisonBrown
+      - CMJumpsuitLiaisonBlue
+      - CMJumpsuitLiaisonBlack
+
+

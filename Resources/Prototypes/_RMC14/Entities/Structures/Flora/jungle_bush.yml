@@ -1,0 +1,26 @@
+# These should really use sprite colour instead of being manually coloured but sprite fade breaks down with sprite colour on an entity so we manually colour instead.
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushJungle1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/bush.rsi
+    offset: 0.1, 0.35
+    drawdepth: Overdoors
+    state: bush1
+  - type: SpriteFade
+
+- type: entity
+  parent: RMCBushJungle1
+  id: RMCBushJungle2
+  components:
+  - type: Sprite
+    state: bush2
+
+- type: entity
+  parent: RMCBushJungle1
+  id: RMCBushJungle3
+  components:
+  - type: Sprite
+    state: bush3
