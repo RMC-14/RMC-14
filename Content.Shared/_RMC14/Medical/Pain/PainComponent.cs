@@ -57,7 +57,7 @@ public sealed partial class PainComponent : Component
     public FixedPoint2 AirlossPainMultiplier = FixedPoint2.Zero;
 
     [DataField(required: true, serverOnly: true)]
-    public List<EntityEffect> PainLevels = [];
+    public List<PainLevel> PainLevels = [];
 
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> Alert = "Pain";
@@ -77,6 +77,13 @@ public sealed partial class PainModificator
         EffectStrength = strength;
         Type = type;
     }
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class PainLevel
+{
+    FixedPoint2 Threshold;
+    List<EntityEffect> LevelEffects;
 }
 
 public enum PainModificatorType : byte

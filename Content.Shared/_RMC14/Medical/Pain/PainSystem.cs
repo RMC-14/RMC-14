@@ -180,14 +180,14 @@ public sealed partial class PainSystem : EntitySystem
             DirtyField(uid, pain, nameof(PainComponent.PainModificators));
             UpdateCurrentPainPercentage(uid, pain);
 
-            var args = new EntityEffectBaseArgs(uid, EntityManager);
+            /*var args = new EntityEffectBaseArgs(uid, EntityManager);
             foreach (var effect in pain.PainLevels)
             {
                 if (!effect.ShouldApply(args, _random))
                     continue;
 
                 effect.Effect(args);
-            }
+            }*/
         }
     }
 }

@@ -97,220 +97,222 @@
       0: 1
   - type: Pain
     painLevels:
-    - !type:TryChangePainLevelTo
-      level: 0
-      conditions:
-      - !type:PainPercentage
-        min: 0
-        max: 20
-    - !type:TryChangePainLevelTo
-      level: 1
-      conditions:
-      - !type:PainPercentage
-        min: 20
-        max: 30
-    - !type:TryChangePainLevelTo
-      level: 2
-      conditions:
-      - !type:PainPercentage
-        min: 30
-        max: 40
-    - !type:TryChangePainLevelTo
-      level: 3
-      conditions:
-      - !type:PainPercentage
-        min: 40
-        max: 60
-    - !type:TryChangePainLevelTo
-      level: 4
-      conditions:
-      - !type:PainPercentage
-        min: 60
-        max: 75
-    - !type:TryChangePainLevelTo
-      level: 5
-      conditions:
-      - !type:PainPercentage
-        min: 75
-        max: 85
-    - !type:TryChangePainLevelTo
-      level: 6
-      conditions:
-      - !type:PainPercentage
-        min: 85
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.79
-      sprintSpeedModifier: 0.67
-      conditions:
-      - !type:PainLevel
-        level: 1
-    - !type:PopupMessage
-      type: Local
-      messages: [ "rmc-pain-mild-inner" ]
-      probability: 0.1
-      conditions:
-      - !type:PainLevel
-        level: 1
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.71
-      sprintSpeedModifier: 0.67
-      conditions:
-      - !type:PainLevel
-        level: 2
-    - !type:PopupMessage
-      type: Local
-      messages: [ "rmc-pain-discomforting-inner" ]
-      probability: 0.1
-      conditions:
-      - !type:PainLevel
-        level: 2
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.57
-      sprintSpeedModifier: 0.42
-      conditions:
-      - !type:PainLevel
-        level: 3
-    - !type:PopupMessage
-      type: Local
-      messages: [ "rmc-pain-moderate-inner" ]
-      probability: 0.1
-      conditions:
-      - !type:PainLevel
-        level: 3
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.5
-      sprintSpeedModifier: 0.35
-      conditions:
-      - !type:PainLevel
-        level: 4
-    - !type:TemporaryBlurryVision
-      blur: 2
-      time: 4
-      conditions:
-      - !type:PainLevel
-        level: 4
-    - !type:GenericStatusEffect
-      key: Stutter
-      component: StutteringAccent
-      time: 4
-      conditions:
-      - !type:PainLevel
-        level: 4
-    - !type:PopupMessage
-      type: Local
-      messages: [ "rmc-pain-distressing-inner" ]
-      probability: 0.1
-      conditions:
-      - !type:PainLevel
-        level: 4
-    - !type:Emote
-      emote: PainGrimace
-      showInChat: true
-      probability: 0.033
-      conditions:
-      - !type:PainLevel
-        level: 4
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.45
-      sprintSpeedModifier: 0.31
-      conditions:
-      - !type:PainLevel
-        level: 5
-    - !type:TemporaryBlurryVision
-        blur: 2
-        time: 4
-        conditions:
-        - !type:PainLevel
-          level: 5
-    - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
-        time: 4
-        conditions:
-        - !type:PainLevel
-          level: 5
-    - !type:GenericStatusEffect # substitution of do once in 13
-      key: PainKnockOut
-      component: PainKnockOut
-      probability: 0.01 # this is around 45% chance per minute 1-(1-0.01)^60
-      time: 6
-      conditions:
-      - !type:PainLevel
-        level: 5
-    - !type:HealthChange
-      damage:
-        types:
-          Asphyxiation: 0.1
-      conditions:
-      - !type:PainLevel
-        level: 5
-      - !type:HasStatusEffect
-        key: PainAsphyxationDisabled
-        reversed: true
-    - !type:PopupMessage
-      type: Local
-      messages: [ "rmc-pain-severe-inner" ]
-      probability: 0.1
-      conditions:
-      - !type:PainLevel
-        level: 5
-    - !type:Emote
-      emote: TroubleEyeOpen
-      showInChat: true
-      probability: 0.033
-      conditions:
-      - !type:PainLevel
-        level: 5
-    - !type:MovespeedModifier
-      walkSpeedModifier: 0.45
-      sprintSpeedModifier: 0.31
-      conditions:
-      - !type:PainLevel
-        level: 6
-    - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
-        time: 4
-        conditions:
-        - !type:PainLevel
-          level: 6
-    - !type:GenericStatusEffect
-        key: PainKnockOut
-        component: PainKnockOut
-        time: 4
-        conditions:
-        - !type:PainLevel
-          level: 6
-    - !type:TemporaryBlurryVision
-        blur: 2
-        time: 4
-        conditions:
-        - !type:PainLevel
-          level: 6
-    - !type:HealthChange
-      damage:
-        types:
-          Asphyxiation: 0.5
-      conditions:
-      - !type:PainLevel
-        level: 6
-      - !type:HasStatusEffect
-        key: PainAsphyxationDisabled
-        reversed: true
-    - !type:PopupMessage
-      type: Local
-      messages: [ "rmc-pain-horrible-inner" ]
-      probability: 0.1
-      conditions:
-      - !type:PainLevel
-        level: 6
-    - !type:Emote
-      emote: TroubleStanding
-      showInChat: true
-      probability: 0.033
-      conditions:
-      - !type:PainLevel
-        level: 6
+    - threshold: 0
+      levelEffects: []
+    # - !type:TryChangePainLevelTo
+    #   level: 0
+    #   conditions:
+    #   - !type:PainPercentage
+    #     min: 0
+    #     max: 20
+    # - !type:TryChangePainLevelTo
+    #   level: 1
+    #   conditions:
+    #   - !type:PainPercentage
+    #     min: 20
+    #     max: 30
+    # - !type:TryChangePainLevelTo
+    #   level: 2
+    #   conditions:
+    #   - !type:PainPercentage
+    #     min: 30
+    #     max: 40
+    # - !type:TryChangePainLevelTo
+    #   level: 3
+    #   conditions:
+    #   - !type:PainPercentage
+    #     min: 40
+    #     max: 60
+    # - !type:TryChangePainLevelTo
+    #   level: 4
+    #   conditions:
+    #   - !type:PainPercentage
+    #     min: 60
+    #     max: 75
+    # - !type:TryChangePainLevelTo
+    #   level: 5
+    #   conditions:
+    #   - !type:PainPercentage
+    #     min: 75
+    #     max: 85
+    # - !type:TryChangePainLevelTo
+    #   level: 6
+    #   conditions:
+    #   - !type:PainPercentage
+    #     min: 85
+    # - !type:MovespeedModifier
+    #   walkSpeedModifier: 0.79
+    #   sprintSpeedModifier: 0.67
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 1
+    # - !type:PopupMessage
+    #   type: Local
+    #   messages: [ "rmc-pain-mild-inner" ]
+    #   probability: 0.1
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 1
+    # - !type:MovespeedModifier
+    #   walkSpeedModifier: 0.71
+    #   sprintSpeedModifier: 0.67
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 2
+    # - !type:PopupMessage
+    #   type: Local
+    #   messages: [ "rmc-pain-discomforting-inner" ]
+    #   probability: 0.1
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 2
+    # - !type:MovespeedModifier
+    #   walkSpeedModifier: 0.57
+    #   sprintSpeedModifier: 0.42
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 3
+    # - !type:PopupMessage
+    #   type: Local
+    #   messages: [ "rmc-pain-moderate-inner" ]
+    #   probability: 0.1
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 3
+    # - !type:MovespeedModifier
+    #   walkSpeedModifier: 0.5
+    #   sprintSpeedModifier: 0.35
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 4
+    # - !type:TemporaryBlurryVision
+    #   blur: 2
+    #   time: 4
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 4
+    # - !type:GenericStatusEffect
+    #   key: Stutter
+    #   component: StutteringAccent
+    #   time: 4
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 4
+    # - !type:PopupMessage
+    #   type: Local
+    #   messages: [ "rmc-pain-distressing-inner" ]
+    #   probability: 0.1
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 4
+    # - !type:Emote
+    #   emote: PainGrimace
+    #   showInChat: true
+    #   probability: 0.033
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 4
+    # - !type:MovespeedModifier
+    #   walkSpeedModifier: 0.45
+    #   sprintSpeedModifier: 0.31
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 5
+    # - !type:TemporaryBlurryVision
+    #     blur: 2
+    #     time: 4
+    #     conditions:
+    #     - !type:PainLevel
+    #       level: 5
+    # - !type:GenericStatusEffect
+    #     key: Stutter
+    #     component: StutteringAccent
+    #     time: 4
+    #     conditions:
+    #     - !type:PainLevel
+    #       level: 5
+    # - !type:GenericStatusEffect # substitution of do once in 13
+    #   key: PainKnockOut
+    #   component: PainKnockOut
+    #   probability: 0.01 # this is around 45% chance per minute 1-(1-0.01)^60
+    #   time: 6
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 5
+    # - !type:HealthChange
+    #   damage:
+    #     types:
+    #       Asphyxiation: 0.1
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 5
+    #   - !type:HasStatusEffect
+    #     key: PainAsphyxationDisabled
+    #     reversed: true
+    # - !type:PopupMessage
+    #   type: Local
+    #   messages: [ "rmc-pain-severe-inner" ]
+    #   probability: 0.1
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 5
+    # - !type:Emote
+    #   emote: TroubleEyeOpen
+    #   showInChat: true
+    #   probability: 0.033
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 5
+    # - !type:MovespeedModifier
+    #   walkSpeedModifier: 0.45
+    #   sprintSpeedModifier: 0.31
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 6
+    # - !type:GenericStatusEffect
+    #     key: Stutter
+    #     component: StutteringAccent
+    #     time: 4
+    #     conditions:
+    #     - !type:PainLevel
+    #       level: 6
+    # - !type:GenericStatusEffect
+    #     key: PainKnockOut
+    #     component: PainKnockOut
+    #     time: 4
+    #     conditions:
+    #     - !type:PainLevel
+    #       level: 6
+    # - !type:TemporaryBlurryVision
+    #     blur: 2
+    #     time: 4
+    #     conditions:
+    #     - !type:PainLevel
+    #       level: 6
+    # - !type:HealthChange
+    #   damage:
+    #     types:
+    #       Asphyxiation: 0.5
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 6
+    #   - !type:HasStatusEffect
+    #     key: PainAsphyxationDisabled
+    #     reversed: true
+    # - !type:PopupMessage
+    #   type: Local
+    #   messages: [ "rmc-pain-horrible-inner" ]
+    #   probability: 0.1
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 6
+    # - !type:Emote
+    #   emote: TroubleStanding
+    #   showInChat: true
+    #   probability: 0.033
+    #   conditions:
+    #   - !type:PainLevel
+    #     level: 6
   - type: Body
     prototype: Human
     requiredLegs: 2
