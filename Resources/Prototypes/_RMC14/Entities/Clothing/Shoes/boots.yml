@@ -44,7 +44,12 @@
     - state: icon
     - state: filled
       map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
   - type: Clothing
+    unequipSound:
+      collection: RMCEquipArmor
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
   - type: ContainerContainer
     containers:
