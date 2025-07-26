@@ -281,7 +281,7 @@
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
     turnOffSound:
-      path: /Audio/_RMC14/Handling/click_2.ogg
+      path: /Audio/_RMC14/Handling/suitlight_crank.ogg
     turnOnSound:
       path: /Audio/_RMC14/Machines/suitlight_on.ogg
   - type: NoHandsInteractionBlocked
