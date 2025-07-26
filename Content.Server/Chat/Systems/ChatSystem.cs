@@ -80,7 +80,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     private bool _loocEnabled = true;
     private bool _deadLoocEnabled;
     private bool _critLoocEnabled;
-    private bool _deadchatEnabled; // RMC14
+    private bool _DeadchatEnabled; // RMC14
     private readonly bool _adminLoocEnabled = true;
 
     public override void Initialize()
@@ -125,10 +125,10 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         private void OnDeadChatEnabledChanged(bool val)
     {
-        if (_deadchatEnabled == val)
+        if (_DeadchatEnabled == val)
             return;
 
-        _deadchatEnabled = val;
+        _DeadchatEnabled = val;
         _chatManager.DispatchServerAnnouncement(
             Loc.GetString(val ? "set-dchat-command-dchat-enabled" : "set-dchat-command-dchat-disabled"));
     }
