@@ -1,16 +1,20 @@
-﻿using Content.Server.Shuttles.Events;
+﻿using System.Numerics;
+using Content.Server.Shuttles.Events;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Shuttles;
+using Content.Shared.Shuttles.Components;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Physics;
 
 namespace Content.Server._RMC14.Shuttles;
 
 public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -19,6 +23,8 @@ public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
 
         SubscribeLocalEvent<RMCSpawnEntityOnFTLStartComponent, BeforeFTLStartedEvent>(BeforeFTLStarted);
         SubscribeLocalEvent<RMCSpawnEntityOnFTLStartComponent, FTLStartedEvent>(OnSpawnEntityOnFTLStart);
+
+        SubscribeLocalEvent<FTLComponent, BeforeFTLFinishedEvent>(BeforeFTLFinished);
     }
 
     private void OnPlaySoundOnFTLStart(Entity<PlaySoundOnFTLStartComponent> ent, ref FTLStartedEvent args)
@@ -46,23 +52,53 @@ public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
     /// </summary>
     private void BeforeFTLStarted(Entity<RMCSpawnEntityOnFTLStartComponent> ent, ref BeforeFTLStartedEvent args)
     {
-        var uid = args.FTLEntity;
-        var grid = args.Grid;
-
-        if (!Resolve(uid, ref grid))
+        if (!TryComp(ent, out MapGridComponent? grid))
             return;
 
-        var enumerator = _mapSystem.GetAllTilesEnumerator(uid, grid);
+        var enumerator = _mapSystem.GetAllTilesEnumerator(ent, grid);
         while (enumerator.MoveNext(out var tile))
         {
-            if(!TryComp(uid, out MapGridComponent? mapGrid))
+            if(!TryComp(ent, out MapGridComponent? mapGrid))
                 return;
 
-            var mapCoords = _mapSystem.GridTileToWorld(uid, mapGrid, tile.Value.GridIndices);
+            var mapCoords = _mapSystem.GridTileToWorld(ent, mapGrid, tile.Value.GridIndices);
             ent.Comp.Coordinates.Add(mapCoords);
+        }
+    }
+
+    private void BeforeFTLFinished(Entity<FTLComponent> ent, ref BeforeFTLFinishedEvent args)
+    {
+        var test = Transform(ent.Comp.TargetCoordinates.EntityId).GridUid;
+        if (test == null)
+            return;
+
+        // Create a box that has the width and height of the FTLing grid.
+        var shuttleAABB = Comp<MapGridComponent>(ent).LocalAABB;
+        var targetLocalAABB = Box2.CenteredAround(ent.Comp.TargetCoordinates.Position, Vector2.Zero);
+        var height = (float)Math.Floor(shuttleAABB.Height / 2f);
+        var width = (float)Math.Floor(shuttleAABB.Width / 2f);
+        var expansionHeight = shuttleAABB.Height % 2 == 0 ? height - 1 : height;
+        var expansionWidth = shuttleAABB.Width % 2 == 0 ? width - 1 : width;
+        var newBox = new Box2(targetLocalAABB.Left - expansionWidth,
+            targetLocalAABB.Bottom - expansionHeight,
+            targetLocalAABB.Right + expansionWidth,
+            targetLocalAABB.Top + expansionHeight);
+
+        // Delete all tile fires before landing
+        var targetAABB = _transform.GetWorldMatrix(Transform(test.Value)).TransformBox(newBox);
+        var lookupEnts = new HashSet<EntityUid>();
+        _lookup.GetLocalEntitiesIntersecting(test.Value, targetAABB, lookupEnts, LookupFlags.Uncontained);
+
+        foreach (var entity in lookupEnts)
+        {
+            if (HasComp<TileFireComponent>(entity))
+                Del(entity);
         }
     }
 }
 
 [ByRefEvent]
-public record struct BeforeFTLStartedEvent(EntityUid FTLEntity, MapGridComponent? Grid = null);
+public record struct BeforeFTLStartedEvent;
+
+[ByRefEvent]
+public record struct BeforeFTLFinishedEvent;
