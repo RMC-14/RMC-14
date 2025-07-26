@@ -68,26 +68,28 @@ public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
 
     private void BeforeFTLFinished(Entity<FTLComponent> ent, ref BeforeFTLFinishedEvent args)
     {
-        var test = Transform(ent.Comp.TargetCoordinates.EntityId).GridUid;
-        if (test == null)
+        var mapGrid = Transform(ent.Comp.TargetCoordinates.EntityId).GridUid;
+        if (mapGrid == null)
             return;
 
         // Create a box that has the width and height of the FTLing grid.
         var shuttleAABB = Comp<MapGridComponent>(ent).LocalAABB;
+        var shuttleHeight = (float)Math.Floor(shuttleAABB.Height / 2f);
+        var shuttleWidth = (float)Math.Floor(shuttleAABB.Width / 2f);
+        var expansionHeight = shuttleAABB.Height % 2 == 0 ? shuttleHeight - 1 : shuttleHeight;
+        var expansionWidth = shuttleAABB.Width % 2 == 0 ? shuttleWidth - 1 : shuttleWidth;
+
+        // Center the box around the destination.
         var targetLocalAABB = Box2.CenteredAround(ent.Comp.TargetCoordinates.Position, Vector2.Zero);
-        var height = (float)Math.Floor(shuttleAABB.Height / 2f);
-        var width = (float)Math.Floor(shuttleAABB.Width / 2f);
-        var expansionHeight = shuttleAABB.Height % 2 == 0 ? height - 1 : height;
-        var expansionWidth = shuttleAABB.Width % 2 == 0 ? width - 1 : width;
-        var newBox = new Box2(targetLocalAABB.Left - expansionWidth,
+        var extinguishArea = new Box2(targetLocalAABB.Left - expansionWidth,
             targetLocalAABB.Bottom - expansionHeight,
             targetLocalAABB.Right + expansionWidth,
             targetLocalAABB.Top + expansionHeight);
 
-        // Delete all tile fires before landing
-        var targetAABB = _transform.GetWorldMatrix(Transform(test.Value)).TransformBox(newBox);
+        // Delete all tile fires inside the box before landing.
+        var targetAABB = _transform.GetWorldMatrix(Transform(mapGrid.Value)).TransformBox(extinguishArea);
         var lookupEnts = new HashSet<EntityUid>();
-        _lookup.GetLocalEntitiesIntersecting(test.Value, targetAABB, lookupEnts, LookupFlags.Uncontained);
+        _lookup.GetLocalEntitiesIntersecting(mapGrid.Value, targetAABB, lookupEnts, LookupFlags.Uncontained);
 
         foreach (var entity in lookupEnts)
         {
