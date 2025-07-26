@@ -25,6 +25,16 @@
     sprite: _RMC14/Structures/Walls/spp_grey_wall.rsi
 
 - type: entity
+  parent: RMCWallSPPReinforced
+  id: RMCWallSPPWhiteReinforced
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/spp_white_wall.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/spp_white_wall.rsi
+
+- type: entity
   parent: CMBaseWallInvincible
   id: RMCWallSPPHull
   name: ribbed hull walls
@@ -49,3 +59,13 @@
     sprite: _RMC14/Structures/Walls/spp_grey_wall.rsi
   - type: Icon
     sprite: _RMC14/Structures/Walls/spp_grey_wall.rsi
+
+- type: entity
+  parent: RMCWallSPPHull
+  id: RMCWallSPPWhiteHull
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/spp_white_wall.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/spp_white_wall.rsi
