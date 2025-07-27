@@ -47,7 +47,7 @@
   - type: Door
     crushDamage:
       types:
-        Blunt: 15
+        Blunt: 85
     openSound:
       path: /Audio/_RMC14/Machines/airlock.ogg
     closeSound:
