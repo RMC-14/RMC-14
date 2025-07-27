@@ -16,6 +16,7 @@
     additionalKeys:
     - windows
     - doors
+    base: metal
 
 - type: entity
   parent: CMWallReinforced
