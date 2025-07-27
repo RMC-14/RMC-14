@@ -5,7 +5,6 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorVaraderoICB
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
-  icon: "RMCJobIconICBLiaison"
   ranks:
     RMCRankICBCorporateLiaison: []
   startingGear: RMCGearSurvivorVaraderoICB
