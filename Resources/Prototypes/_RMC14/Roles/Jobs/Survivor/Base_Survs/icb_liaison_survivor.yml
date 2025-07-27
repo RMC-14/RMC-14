@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorICB
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (Survivor)
+  icon: "RMCJobIconICBLiaison"
   ranks:
     RMCRankICBCorporateLiaison: []
   startingGear: RMCGearSurvivorICB
