@@ -28,6 +28,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: metal
   - type: Construction
     graph: CMGirder
@@ -49,6 +50,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: wall
 
 - type: entity
@@ -66,6 +68,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: wall
 
 # Reinforced
@@ -97,6 +100,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: rwall
   - type: Construction
     graph: CMGirder
@@ -133,6 +137,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -150,6 +155,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: wall
 
 - type: entity
@@ -167,6 +173,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: wall
 
 - type: entity
@@ -184,6 +191,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: aiwall
 
 # Indestructible
@@ -204,6 +212,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -221,6 +230,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: wall
 
 - type: entity
@@ -238,6 +248,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: wall
 
 - type: entity
@@ -255,6 +266,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: aiwall
 
 # TODO RMC14 temp hull, breakable only after hijack
@@ -306,6 +318,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: cavewall
 
 # Cult
@@ -338,6 +351,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: cult
 
 # Wood
@@ -369,6 +383,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: wood
 
 # Jungle
@@ -390,6 +405,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: jungle_veg
 
 - type: entity
@@ -405,6 +421,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_jungle
 
 # Elevator
@@ -426,6 +443,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: wall
 
 - type: entity
@@ -816,6 +834,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: metal
 
 - type: entity
@@ -833,6 +852,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: metal
   - type: Tag
     tags:

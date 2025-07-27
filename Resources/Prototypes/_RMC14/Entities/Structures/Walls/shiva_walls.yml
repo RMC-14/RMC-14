@@ -17,6 +17,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_ice
 
 - type: entity
@@ -37,6 +38,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_fab_r
 
 - type: entity
@@ -55,6 +57,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_fab
 
 - type: entity
@@ -73,6 +76,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_fab_r
 
 - type: entity
@@ -91,6 +95,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_fab_oj
 
 - type: entity
@@ -109,6 +114,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_fab_blu
 
 - type: entity
@@ -127,6 +133,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_fab_pnk
 
 - type: entity
@@ -145,6 +152,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_fab_wht
 
 - type: entity
@@ -163,4 +171,5 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: shiva_fab_red

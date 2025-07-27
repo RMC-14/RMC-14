@@ -14,6 +14,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: dome
 
 - type: entity
@@ -32,6 +33,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: r_dome
 
 - type: entity
@@ -50,4 +52,5 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: r_dome

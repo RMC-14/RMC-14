@@ -14,6 +14,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_bare_outpost_
 
 - type: entity
@@ -32,6 +33,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_ribbed_outpost_
 
 - type: entity
@@ -50,6 +52,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_ribbed_outpost_
 
 - type: entity
@@ -68,6 +71,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_ice
 
 - type: entity
@@ -84,6 +88,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_ice_dirty
 
 - type: entity
@@ -102,4 +107,5 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_rock

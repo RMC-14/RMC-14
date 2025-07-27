@@ -12,7 +12,10 @@
     sprite: _RMC14/Structures/Walls/prison_wall.rsi
     state: metal
   - type: IconSmooth
-    base: metal
+    key: walls
+    additionalKeys:
+    - windows
+    - doors
 
 - type: entity
   parent: CMWallReinforced
@@ -26,7 +29,11 @@
   - type: Icon
     sprite: _RMC14/Structures/Walls/prison_rwall.rsi
     state: rwall
+  - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -41,7 +48,11 @@
   - type: Icon
     sprite: _RMC14/Structures/Walls/prison_rwall.rsi
     state: hwall
+  - type: IconSmooth
+    key: walls
     additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -56,5 +67,9 @@
   - type: Icon
     sprite: _RMC14/Structures/Walls/bone_resin.rsi
     state: bone_resin
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
     - windows
+    - doors
     base: bone_resin

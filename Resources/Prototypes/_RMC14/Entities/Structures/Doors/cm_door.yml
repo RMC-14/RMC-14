@@ -81,8 +81,6 @@
     key: walls
   - type: IconSmooth
     key: doors
-    additionalKeys:
-    - walls
     mode: NoSprite
   - type: PaintableAirlock
     group: Standard

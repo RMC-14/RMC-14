@@ -13,6 +13,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: hangar
 
 - type: entity
@@ -30,6 +31,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: bunker
 
 - type: entity
@@ -47,6 +49,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: chigusa
 
 - type: entity

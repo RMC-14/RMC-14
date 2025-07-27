@@ -16,6 +16,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: rock
 
 - type: entity
@@ -33,6 +34,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: rock_border
 
 - type: entity
@@ -61,6 +63,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: metal
 
 # Colony
@@ -81,6 +84,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_bare_outpost_
 
 - type: entity
@@ -99,6 +103,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_ribbed_outpost_
 
 - type: entity
@@ -118,6 +123,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: strata_ribbed_outpost_
 
 # Medical
@@ -229,6 +235,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: metal
 
 - type: entity
@@ -248,6 +255,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -267,6 +275,7 @@
     key: walls
     additionalKeys:
     - windows
+    - doors
     base: rwall
 
 # Research
