@@ -40,6 +40,9 @@ namespace Content.Client.Paper.UI
         // If paper limits the size in one or both axes, it'll affect whether
         // we're able to resize this UI or not. Default to everything enabled:
         private DragMode _allowedResizeModes = ~DragMode.None;
+        
+        // Store original margin to restore when switching modes
+        private Thickness _originalContentMargin;
 
         private readonly Type[] _allowedTags = new Type[] {
             typeof(BoldItalicTag),
@@ -50,7 +53,8 @@ namespace Content.Client.Paper.UI
             typeof(ItalicTag),
             typeof(MonoTag),
             typeof(FormTagHandler),
-            typeof(SignatureTagHandler)
+            typeof(SignatureTagHandler),
+            typeof(CheckTagHandler)
         };
 
         public event Action<string>? OnSaved;
@@ -180,9 +184,10 @@ namespace Content.Client.Paper.UI
                 _paperContentLineScale = visuals.ContentImageNumLines;
             }
 
-            PaperContent.Margin = new Thickness(
+            _originalContentMargin = new Thickness(
                     visuals.ContentMargin.Left, visuals.ContentMargin.Top,
                     visuals.ContentMargin.Right, visuals.ContentMargin.Bottom);
+            PaperContent.Margin = _originalContentMargin;
 
             if (visuals.MaxWritableArea != null)
             {
@@ -227,6 +232,11 @@ namespace Content.Client.Paper.UI
             if (WrittenTextLabel.TryGetStyleProperty<Font>("font", out var font))
             {
                 float fontLineHeight = font.GetLineHeight(1.0f);
+                
+                // Set the font line height in tag handlers so buttons match text height
+                FormTagHandler.FontLineHeight = fontLineHeight;
+                SignatureTagHandler.FontLineHeight = fontLineHeight;
+                CheckTagHandler.FontLineHeight = fontLineHeight;
 
                 // Position the background texture so font baseline aligns with texture lines
                 _paperContentTex.ExpandMarginTop = font.GetDescent(UIScale);
@@ -268,6 +278,9 @@ namespace Content.Client.Paper.UI
 
             if (isEditing)
             {
+                // Reset margin to original when editing (no tag buttons visible)
+                PaperContent.Margin = _originalContentMargin;
+                    
                 // Initialize the text input field with server content if it's currently empty
                 // This allows editing existing documents while preserving any text the user has already typed
                 var shouldCopy = Input.TextLength == 0 && state.Text.Length > 0;
@@ -284,17 +297,24 @@ namespace Content.Client.Paper.UI
                 return;
             }
 
-            // Reset form and signature counters before processing to ensure consistent indexing
+            // Reset form, signature, and check counters before processing to ensure consistent indexing
             // This is crucial because the tag handlers maintain state between renders
             FormTagHandler.SetFormText(state.Text);
             FormTagHandler.ResetFormCounter();
             SignatureTagHandler.ResetSignatureCounter();
+            CheckTagHandler.ResetCheckCounter();
 
             // Display text with markup processing (forms, signatures, colors, etc.)
             // The markup system converts [form] and [signature] tags into interactive buttons
             var fm = new FormattedMessage();
             fm.AddMarkupPermissive(state.Text);
             WrittenTextLabel.SetMessage(fm, _allowedTags, DefaultTextColor);
+            
+            // Add extra bottom margin based on tag count to prevent cutoff (only in read mode)
+            var tagCount = CountTags(state.Text);
+            var extraBottomMargin = tagCount * 3.0f; // 3 pixels per tag for extra height
+            PaperContent.Margin = new Thickness(_originalContentMargin.Left, _originalContentMargin.Top, 
+                _originalContentMargin.Right, _originalContentMargin.Bottom + extraBottomMargin);
 
             // Add stamps that have been applied to this paper
             // Clear existing stamps first, then add all current ones
@@ -442,6 +462,91 @@ namespace Content.Client.Paper.UI
         }
 
         /// <summary>
+        /// Gets the current text for tag handlers to access.
+        /// </summary>
+        /// <returns>Current raw text content</returns>
+        public string GetCurrentText()
+        {
+            return _currentRawText;
+        }
+
+        /// <summary>
+        /// Saves text content for tag handlers to use.
+        /// </summary>
+        /// <param name="text">Text to save</param>
+        public void SaveText(string text)
+        {
+            OnSaved?.Invoke(text);
+        }
+
+        /// <summary>
+        /// Opens a modal dialog allowing the user to select a check state.
+        /// </summary>
+        /// <param name="checkIndex">Zero-based index of which [check] tag to replace</param>
+        public void OpenCheckDialog(int checkIndex)
+        {
+            var popup = new Popup();
+            var vbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, Margin = new Thickness(10) };
+            var hbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+            
+            var blankBtn = new Button { Text = "☐ Blank", MinWidth = 80 };
+            var checkBtn = new Button { Text = "✔ Check", MinWidth = 80 };
+            var crossBtn = new Button { Text = "✖ Cross", MinWidth = 80 };
+            
+            blankBtn.OnPressed += _ => {
+                var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "☐");
+                OnSaved?.Invoke(newText);
+                popup.Close();
+            };
+            
+            checkBtn.OnPressed += _ => {
+                var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "✔");
+                OnSaved?.Invoke(newText);
+                popup.Close();
+            };
+            
+            crossBtn.OnPressed += _ => {
+                var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "✖");
+                OnSaved?.Invoke(newText);
+                popup.Close();
+            };
+            
+            hbox.AddChild(blankBtn);
+            hbox.AddChild(checkBtn);
+            hbox.AddChild(crossBtn);
+            vbox.AddChild(hbox);
+            popup.AddChild(vbox);
+            AddChild(popup);
+            popup.Open();
+        }
+        
+        /// <summary>
+        /// Replaces the nth occurrence of [check] tag with replacement symbol.
+        /// </summary>
+        private static string ReplaceNthCheckTag(string text, int index, string replacement)
+        {
+            const string checkTag = "[check]";
+            var currentIndex = 0;
+            var pos = 0;
+
+            while (pos < text.Length)
+            {
+                var foundPos = text.IndexOf(checkTag, pos);
+                if (foundPos == -1) break;
+
+                if (currentIndex == index)
+                {
+                    return text.Substring(0, foundPos) + replacement + text.Substring(foundPos + checkTag.Length);
+                }
+
+                currentIndex++;
+                pos = foundPos + checkTag.Length;
+            }
+
+            return text;
+        }
+
+        /// <summary>
         /// Replaces the nth occurrence of [form] tag with replacement text.
         /// Uses IndexOf for efficient searching rather than splitting the entire string.
         /// </summary>
@@ -511,6 +616,32 @@ namespace Content.Client.Paper.UI
 
             // Index not found, return original text unchanged
             return text;
+        }
+        
+        /// <summary>
+        /// Counts the total number of interactive tags that create taller buttons.
+        /// </summary>
+        private static int CountTags(string text)
+        {
+            var formCount = CountOccurrences(text, "[form]");
+            var signatureCount = CountOccurrences(text, "[signature]");
+            var checkCount = CountOccurrences(text, "[check]");
+            return formCount + signatureCount + checkCount;
+        }
+        
+        /// <summary>
+        /// Counts occurrences of a substring in text.
+        /// </summary>
+        private static int CountOccurrences(string text, string substring)
+        {
+            var count = 0;
+            var pos = 0;
+            while ((pos = text.IndexOf(substring, pos)) != -1)
+            {
+                count++;
+                pos += substring.Length;
+            }
+            return count;
         }
     }
 }
