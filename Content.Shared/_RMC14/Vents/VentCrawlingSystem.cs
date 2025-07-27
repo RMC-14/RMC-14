@@ -3,10 +3,12 @@ using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Jittering;
 using Content.Shared.Maps;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Tools.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -21,6 +23,7 @@ public sealed class VentCrawlingSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcmap = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<VentEntranceComponent, InteractHandEvent>(OnVentEntranceInteract);
@@ -53,7 +56,7 @@ public sealed class VentCrawlingSystem : EntitySystem
         ventComp = null;
         container = null;
 
-        if (!TryComp(vent, out ventComp))
+        if (!TryComp(vent, out ventComp) || !Transform(vent).Anchored)
             return false;
 
         container = _container.EnsureContainer<ContainerSlot>(vent, ventComp.ContainerId);
@@ -63,7 +66,7 @@ public sealed class VentCrawlingSystem : EntitySystem
 
     private void OnVentEntranceInteract(Entity<VentEntranceComponent> vent, ref InteractHandEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || (TryComp<WeldableComponent>(vent, out var weld) && weld.IsWelded))
             return;
 
         if (!TryComp<VentCrawlerComponent>(args.User, out var crawl) || !TryGetVent(vent, out var comp, out var container))
@@ -83,14 +86,16 @@ public sealed class VentCrawlingSystem : EntitySystem
         };
 
         _doafter.TryStartDoAfter(doafter);
+        _jitter.DoJitter(vent, crawl.VentEnterDelay, true);
     }
 
     private void OnVentEnterDoafter(Entity<VentEntranceComponent> vent, ref VentEnterDoafterEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Handled || args.Cancelled || (TryComp<WeldableComponent>(vent, out var weld) && weld.IsWelded))
             return;
 
-        if (!TryGetVent(vent, out var comp, out var container) || container.ContainedEntities.Count > comp.MaxEntities)
+        if (!TryGetVent(vent, out var comp, out var container) ||
+            (comp.MaxEntities != null && container.ContainedEntities.Count > comp.MaxEntities))
             return;
 
         args.Handled = true;
@@ -117,6 +122,10 @@ public sealed class VentCrawlingSystem : EntitySystem
     public bool AreVentsConnectedInDirection(EntityUid ventOne, EntityUid ventTwo, PipeDirection direction)
     {
         if (!TryComp<VentCrawlableComponent>(ventOne, out var vent1) || !TryComp<VentCrawlableComponent>(ventTwo, out var vent2))
+            return false;
+
+        //Share the same layer Id, just in case someone wants to make stacked vents
+        if (vent1.LayerId != vent2.LayerId)
             return false;
 
         //First vent doesn't contain direction at all
@@ -170,7 +179,8 @@ public sealed class VentCrawlingSystem : EntitySystem
                 if (!AreVentsConnectedInDirection(container.Owner, uid2, travellingDirection))
                     continue;
 
-                if (!TryGetVent(uid2, out var comp, out var container2) || container2.ContainedEntities.Count > comp.MaxEntities)
+                if (!TryGetVent(uid2, out var comp, out var container2) ||
+                    (comp.MaxEntities != null && container2.ContainedEntities.Count > comp.MaxEntities))
                     continue;
 
                 _container.Insert(uid, container2);
@@ -180,7 +190,7 @@ public sealed class VentCrawlingSystem : EntitySystem
                 break;
             }
 
-            if (travelled)
+            if (travelled || (TryComp<WeldableComponent>(uid, out var weld) && weld.IsWelded))
                 continue;
 
             if (HasComp<VentExitComponent>(container.Owner) &&
@@ -198,6 +208,7 @@ public sealed class VentCrawlingSystem : EntitySystem
                 };
 
                 _doafter.TryStartDoAfter(doafter);
+                _jitter.DoJitter(uid, crawler.VentExitDelay, true);
             }
         }
     }

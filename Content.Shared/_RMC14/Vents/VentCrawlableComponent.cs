@@ -10,7 +10,10 @@ public sealed partial class VentCrawlableComponent : Component
     public string ContainerId = "rmc_vent_container";
 
     [DataField, AutoNetworkedField]
-    public int MaxEntities = 1;
+    public string LayerId = "default_vent";
+
+    [DataField, AutoNetworkedField]
+    public int? MaxEntities;
 
     [DataField, AutoNetworkedField]
     public PipeDirection TravelDirection;
