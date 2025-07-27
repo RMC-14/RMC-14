@@ -1,14 +1,13 @@
 - type: job
-  parent: CMSurvivorICB
-  id: CMSurvivorVaraderoICB
+  parent: CMSurvivorCorporate
+  id: CMSurvivorICB
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorVaraderoICB
-  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
-  icon: "RMCJobIconICBLiaison"
+  playTimeTracker: CMJobSurvivorICB
+  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (Survivor)
   ranks:
     RMCRankICBCorporateLiaison: []
-  startingGear: RMCGearSurvivorVaraderoICB
+  startingGear: RMCGearSurvivorICB
   special:
   - !type:AddComponentSpecial
     components:
@@ -19,7 +18,7 @@
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetVaraderoICB
+      preset: RMCGearSurvivorPresetICB
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -32,17 +31,19 @@
   useLoadoutOfJob: CMSurvivorCorporate
 
 - type: startingGear
-  parent: RMCGearSurvivorICB
-  id: RMCGearSurvivorVaraderoICB
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorICB
   equipment:
-    jumpsuit: CMJumpsuitLiaisonBlack
-    eyes: RMCSunglasses
-  inhand:
-  - CMClipboard
+    ears: RMCHeadsetDistressBureauDamaged
+    jumpsuit: RMCJumpsuitLiaisonGreyWorkwear
+    head: RMCHardhatWhite
+    outerClothing: RMCHazardVestBlack
+    eyes: RMCGlassesAviators
+    gloves: CMHandsInsulated
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorVaraderoICB
+  id: RMCSpawnPointSurvivorICB
   name: survivor icb spawn point
   components:
   - type: SpawnPoint
@@ -53,11 +54,11 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorVaraderoICB
+  id: CMJobSurvivorICB
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetICB
-  id: RMCGearSurvivorPresetVaraderoICB
+  parent: RMCSurvivorPresetCorporate
+  id: RMCGearSurvivorPresetICB
   name: icb colonist preset
   categories: [ HideSpawnMenu ]
