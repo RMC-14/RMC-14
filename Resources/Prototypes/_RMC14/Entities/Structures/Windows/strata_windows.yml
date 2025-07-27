@@ -54,7 +54,6 @@
     key: windows
     additionalKeys:
     - doors
-    additionalKeys:
     base: strata_window
     mode: CardinalFlags
   - type: Repairable
