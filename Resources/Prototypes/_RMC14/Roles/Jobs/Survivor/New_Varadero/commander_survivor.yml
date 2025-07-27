@@ -4,6 +4,7 @@
   name: rmc-job-name-survivor-commander-new-varadero
   description: cm-job-description-commanding-officer
   playTimeTracker: RMCJobSurvivorCommanderNewVaradero
+  spawnMenuRoleName: Commander (NV Survivor)
   ranks:
     RMCRankLieutenantColonel: []
   startingGear: RMCGearSurvivorCommanderNewVaradero
