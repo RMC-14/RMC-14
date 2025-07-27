@@ -10,6 +10,8 @@
     state: solaris_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: solaris_frame
     mode: CardinalFlags
   - type: Construction
@@ -28,6 +30,8 @@
     state: solaris_rframe0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: solaris_rframe
     mode: CardinalFlags
   - type: Construction
@@ -48,6 +52,8 @@
     state: solaris_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: solaris_window
     mode: CardinalFlags
   - type: Repairable
@@ -100,6 +106,8 @@
     state: solaris_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: solaris_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -157,6 +165,8 @@
     state: solaris_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: solaris_rwindow
     mode: CardinalFlags
 

@@ -10,6 +10,8 @@
     state: strata_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -28,6 +30,8 @@
     state: strata_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -48,6 +52,8 @@
     state: strata_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
   - type: Repairable
@@ -100,6 +106,8 @@
     state: strata_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
   - type: Repairable
@@ -157,6 +165,8 @@
     state: strata_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
 
@@ -175,6 +185,8 @@
     state: strata_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -194,6 +206,8 @@
     state: strata_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
   - type: Destructible
@@ -243,6 +257,8 @@
     state: strata_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -262,6 +278,8 @@
     state: strata_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
   - type: Destructible
@@ -311,6 +329,8 @@
     state: strata_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -330,6 +350,8 @@
     state: strata_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
   - type: Destructible
@@ -379,6 +401,8 @@
     state: prison_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: prison_frame
     mode: CardinalFlags
   - type: Construction
@@ -398,6 +422,8 @@
     state: prison_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: prison_window
     mode: CardinalFlags
   - type: Destructible
@@ -445,6 +471,8 @@
     state: prison_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: prison_frame
     mode: CardinalFlags
   - type: Construction
@@ -464,6 +492,8 @@
     state: prison_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: prison_window
     mode: CardinalFlags
   - type: Destructible
@@ -511,6 +541,8 @@
     state: prison_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: prison_frame
     mode: CardinalFlags
   - type: Construction
@@ -530,6 +562,8 @@
     state: prison_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: prison_window
     mode: CardinalFlags
   - type: Destructible
@@ -579,6 +613,8 @@
     state: strata_frame0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -598,6 +634,8 @@
     state: strata_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
   - type: Destructible

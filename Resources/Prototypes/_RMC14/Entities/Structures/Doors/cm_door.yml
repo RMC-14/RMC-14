@@ -80,7 +80,7 @@
   - type: PlacementReplacement
     key: walls
   - type: IconSmooth
-    key: walls
+    key: doors
     mode: NoSprite
   - type: PaintableAirlock
     group: Standard

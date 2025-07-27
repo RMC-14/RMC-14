@@ -10,6 +10,8 @@
     state: padded_rframe0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: padded_rframe
     mode: CardinalFlags
   - type: Construction
@@ -30,6 +32,8 @@
     state: padded_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: padded_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -84,6 +88,8 @@
     state: paddedsec_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: paddedsec_rwindow
     mode: CardinalFlags
 
@@ -100,6 +106,8 @@
     state: paddedresearch_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: paddedresearch_rwindow
     mode: CardinalFlags
 
@@ -119,6 +127,8 @@
     state: padded_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: padded_rwindow
     mode: CardinalFlags
 
@@ -134,6 +144,8 @@
     state: paddedresearch_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: paddedresearch_rwindow
     mode: CardinalFlags
 
@@ -149,5 +161,7 @@
     state: paddedsec_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: paddedsec_rwindow
     mode: CardinalFlags

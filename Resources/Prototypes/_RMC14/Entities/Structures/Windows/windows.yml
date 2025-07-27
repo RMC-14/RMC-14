@@ -82,6 +82,8 @@
     state: alm_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: alm_rwindow
     mode: CardinalFlags
 
@@ -99,6 +101,8 @@
     state: alm_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: alm_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -157,6 +161,8 @@
     state: white_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: white_rwindow
     mode: CardinalFlags
 
@@ -174,6 +180,8 @@
     state: white_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: white_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -229,6 +237,8 @@
     state: col_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: col_window
     mode: CardinalFlags
   - type: Repairable
@@ -281,6 +291,8 @@
     state: col_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: col_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -339,6 +351,8 @@
     color: "#aba9a9"
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: col_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -394,6 +408,8 @@
     state: wood_window0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: wood_window
     mode: CardinalFlags
   - type: Repairable
@@ -446,6 +462,8 @@
     state: wood_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: wood_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -501,6 +519,8 @@
     state: ai_rwindow0
   - type: IconSmooth
     key: windows
+    additionalKeys:
+    - doors
     base: ai_rwindow
     mode: CardinalFlags
   - type: Repairable
