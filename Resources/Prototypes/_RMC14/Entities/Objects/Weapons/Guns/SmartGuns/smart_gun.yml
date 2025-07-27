@@ -168,9 +168,7 @@
   description: The actual firearm in the Smart Gun System. Essentially a heavy, mobile machinegun.
   components:
   - type: RMCLoreExaminable
-    content: "The ML66A smart gun system was designed to provide UNMC squads with the mobile heavy firepower and raw lead-spitting capacity proven necessary on the modern battlefield. It utilizes groundbreaking technologies originating from Aegis Armaments research and development to rapidly identify its targets in the field, and allows the user to target, or ignore, specific IFF frequencies on the fly.
-              UNMC models are hard-wired to the IFF frequencies used by marine forces, as to avoid friendly fire incidents, and streamline use for the smart gunner in the heat of battle. Additionally, it has several motion tracking sensors built into the gun and accompanying rig able to relay any motion it detects straight to the user's HUD, allowing for even faster target acquisition.
-              Although more advanced smart guns exist, the ML66A has proven to be the perfect balance of affordability and capability for a large scale military such as the UNMC. Research on the IFF technologies required for the smart gun took several decades to complete, an endeavor partially funded by the UN to ensure it was the first nation to get its hands on the promising new technology. Although, the TSE quickly secured its own variants for use with the Royal Crown Marines."
+    content: rmc-lore-examinable-smart-gun
     factions:
     - UNMC
 

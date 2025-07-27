@@ -23,11 +23,7 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: RMCLoreExaminable
-    content: "Developed in response to persistent complaints from Weston Yamada’s internal security and PMC divisions, the SSG45 is a direct result of field dissatisfaction with the UNMC-standard M54C Mk2.
-              While the M54C was lightweight and easy to mass-produce, it lacked the stopping power and durability required for the kind of off-grid, high-intensity operations typically assigned to WeYa corporate teams.
-              Several units began modifying their standard-issue rifles into custom variants, unofficially dubbed M54C/2s, to improve handling, penetration, and reliability. These field modifications drew enough attention that Weston Yamada’s R&D division launched a formal weapons program to design a purpose-built rifle based on actual combat feedback.
-              The result was the SSG45: a heavy-caliber, caseless assault rifle designed for harsh environments and close-quarters superiority. It features an integrated recoil mitigation system, hardened internal components, and support for smart optics and upgraded attachments. Though still technically in field testing, the SSG45 has seen wide adoption across multiple WeYa security teams operating in high-threat zones.
-              Reports suggest the rifle performs well in sustained engagements, with only minor overheating issues during prolonged automatic fire. The R&D team is already addressing these issues in ongoing iterations."
+    content: rmc-lore-examinable-ssg-45
   - type: Gun
     selectedMode: FullAuto
     availableModes:

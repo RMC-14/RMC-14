@@ -18,10 +18,7 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: RMCLoreExaminable
-    content: "The Aegis Armaments M54C Mk2 is the ubiquitous standard issue rifle in the UNMC, and the embodiment of a true space age rifle. The M54 platform was built off of decades of field experience fighting in the newly discovered and varied environments the greater universe had to offer. Withstanding the environments of earth was no longer enough; a true space age rifle had to withstand the extremes of space.
-              The platform dominated in UNMC trials thanks to its innovative design and caseless ammunition usage. The UNMC quickly ordered a large production run of M54C Mk1s to get field feedback before committing to a new standard issue rifle. While still effective, after extended use the flaws of the Mk1 were clear; a lack of modularity combined with bulky magazines contributed to an overall lackluster performance. Aegis, not wanting to lose the contract, swiftly came up with the Mk2.
-              The M54C Mk2 improves upon the Mk1 mainly in its attachment compatibility. While the Mk1 lacked a standardized attachment mounting system, the Mk2 supported nearly every standard attachment mounting system employed by the UNMC. Additionally, the larger bulky magazines of the Mk1 were exchanged for smaller and more ergonomic magazines, improving reload times and ammunition storage efficiency.
-              Because of its effectiveness within the marine corp, the M54C Mk2 has seen adoption by several PMC groups, and even some colonial riot response teams. Its modularity and easily replaceable parts make it extremely adaptable to any given organization's needs, as well as allowing the average soldier to perform even advanced maintenance."
+    content: rmc-lore-examinable-m54c-mk2
   - type: Gun
     selectedMode: FullAuto
     availableModes:
