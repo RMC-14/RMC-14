@@ -422,16 +422,16 @@ public sealed class PaperSystem : EntitySystem
     }
 
     /// <summary>
-    /// Removes any unfilled [form], [signature], and [check] tags from the paper text.
+    /// Removes any unfilled [form] and [signature] tags, and converts [check] tags to ☐.
     /// Called when the paper is stamped to finalize the document.
     /// </summary>
     /// <param name="text">The paper text to clean</param>
-    /// <returns>Text with unfilled tags removed</returns>
+    /// <returns>Text with unfilled tags cleaned</returns>
     private static string CleanUnfilledTags(string text)
     {
         return text.Replace("[form]", string.Empty)
                   .Replace("[signature]", string.Empty)
-                  .Replace("[check]", string.Empty);
+                  .Replace("[check]", "☐");
     }
 }
 
