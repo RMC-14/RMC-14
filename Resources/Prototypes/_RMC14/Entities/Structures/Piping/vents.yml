@@ -1,0 +1,85 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCVentBase
+  name: vent duct
+  description: Air travels through here.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Item
+    size: Large
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+  - type: Rotatable
+  - type: Sprite
+    sprite: Structures/Piping/Atmospherics/pipe.rsi
+    drawdepth: ThinPipe
+  - type: Appearance
+  - type: Physics
+    canCollide: false
+    bodyType: static
+  - type: VentCrawlable
+  - type: ContainerContainer
+
+# Direction 0 - south
+- type: entity
+  parent: RMCVentBase
+  id: RMCVentHalf
+  suffix: half
+  components:
+  - type: VentCrawlable
+    travelDirection: South
+  - type: Sprite
+    layers:
+    - state: pipeHalf
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+
+- type: entity
+  parent: RMCVentBase
+  id: RMCVentStraight
+  suffix: straight
+  components:
+  - type: VentCrawlable
+    travelDirection: Longitudinal
+  - type: Sprite
+    layers:
+    - state: pipeStraight
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+
+- type: entity
+  parent: RMCVentBase
+  id: RMCVentBend
+  suffix: bend
+  components:
+  - type: VentCrawlable
+    travelDirection: SWBend
+  - type: Sprite
+    layers:
+    - state: pipeBend
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+
+- type: entity
+  parent: RMCVentBase
+  id: RMCVentTJunction
+  suffix: TJunction
+  components:
+  - type: VentCrawlable
+    travelDirection: TSouth
+  - type: Sprite
+    layers:
+    - state: pipeTJunction
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+
+- type: entity
+  parent: RMCVentBase
+  id: RMCVentFourway
+  suffix: fourway
+  components:
+  - type: VentCrawlable
+    travelDirection: Fourway
+  - type: Sprite
+    layers:
+    - state: pipeFourway
+      map: [ "enum.PipeVisualLayers.Pipe" ]
