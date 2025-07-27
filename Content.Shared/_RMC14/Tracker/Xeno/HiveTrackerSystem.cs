@@ -1,7 +1,6 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Alert;
@@ -230,8 +229,8 @@ public sealed class HiveTrackerSystem : EntitySystem
             }
 
             // If the tracker is not tracking an entity, try to find a new target.
-            var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent>();
-            while (trackableQuery.MoveNext(out var trackableUid, out _))
+            var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, HiveMemberComponent>();
+            while (trackableQuery.MoveNext(out var trackableUid, out _, out var targetMember))
             {
                 if(tracker.Mode == new ProtoId<TrackerModePrototype>())
                     break;
@@ -241,7 +240,7 @@ public sealed class HiveTrackerSystem : EntitySystem
                 if (trackerMode?.Component == null)
                     break;
 
-                if (!TryComp(trackableUid, out HiveMemberComponent? targetMember) || member.Hive != targetMember.Hive)
+                if (member.Hive != targetMember.Hive)
                     continue;
 
                 var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
