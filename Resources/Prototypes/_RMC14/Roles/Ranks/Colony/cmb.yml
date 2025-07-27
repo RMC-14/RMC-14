@@ -48,7 +48,7 @@
 - type: rank
   id: RMCRankICBCorporateLiaison
   name: Interstellar Commerce Bureau Corporate Liaison
-  prefix: Exec.
+  prefix: ICB Rep.
   paygrade: ICCL
 
 - type: rank
