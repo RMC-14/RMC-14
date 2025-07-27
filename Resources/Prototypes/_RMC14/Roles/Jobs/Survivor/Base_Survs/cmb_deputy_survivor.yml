@@ -7,7 +7,6 @@
   name: rmc-job-name-survivor-cmb-deputy
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorCMBDeputy
-  spawnMenuRoleName: CMB Deputy (Survivor)
   ranks:
     RMCRankCMBDeputy: []
   startingGear: RMCGearSurvivorCMBDeputy
