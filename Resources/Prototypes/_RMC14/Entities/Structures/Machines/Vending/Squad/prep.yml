@@ -538,7 +538,7 @@
         amount: 3
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A1WoodenStock
         amount: 2
       - id: RMCAttachmentM63ArmBrace
         amount: 2
