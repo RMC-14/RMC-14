@@ -12,6 +12,8 @@
     state: dome
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: dome
 
 - type: entity
@@ -28,6 +30,8 @@
     state: r_dome
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: r_dome
 
 - type: entity
@@ -44,4 +48,6 @@
     state: h_dome
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: r_dome

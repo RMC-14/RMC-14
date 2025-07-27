@@ -11,7 +11,7 @@
     sprite: _RMC14/Structures/Windows/Frames/chigusa_frame.rsi
     state: chig_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
     base: chig_frame
     mode: CardinalFlags
   - type: Construction
@@ -31,7 +31,7 @@
     sprite: _RMC14/Structures/Windows/chigusa.rsi
     state: chig_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
     base: chig_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -86,7 +86,7 @@
     sprite: _RMC14/Structures/Windows/Frames/hangar_frame.rsi
     state: hngr_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
     base: hngr_frame
     mode: CardinalFlags
   - type: Construction
@@ -106,7 +106,7 @@
     sprite: _RMC14/Structures/Windows/hangar.rsi
     state: hngr_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
     base: hngr_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -161,7 +161,7 @@
     sprite: _RMC14/Structures/Windows/Frames/bunker_frame.rsi
     state: bnkr_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
     base: bnkr_frame
     mode: CardinalFlags
   - type: Construction
@@ -181,7 +181,7 @@
     sprite: _RMC14/Structures/Windows/bunker.rsi
     state: bnkr_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
     base: bnkr_rwindow
     mode: CardinalFlags
   - type: Repairable

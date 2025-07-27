@@ -13,6 +13,8 @@
     state: stone
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: stone
 
 - type: entity
@@ -30,6 +32,8 @@
     state: stone
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: stone
 
 - type: entity
@@ -47,6 +51,8 @@
     state: runedstone
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: runedstone
 
 - type: entity
