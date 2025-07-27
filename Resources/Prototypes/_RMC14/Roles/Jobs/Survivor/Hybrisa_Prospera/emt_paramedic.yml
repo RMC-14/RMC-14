@@ -1,0 +1,83 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: RMCSurvivorHybrisaEMTParamedic
+  name: rmc-job-name-survivor-emt-paramedic
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHybrisaEMTParamedic
+  startingGear: RMCGearSurvivorHybrisaEMTParamedic
+  spawnMenuRoleName: EMT Paramedic (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaEMTParamedic
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaEMTParamedic
+  equipment:
+    shoes: RMCShoesWhite
+    back: CMSatchelMedical
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorHybrisaEMTParamedic
+  name: emt paramedic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorHybrisaEMTParamedic
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetDoctor
+  id: RMCGearSurvivorPresetHybrisaEMTParamedic
+  name: emt paramedic preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCArmorParamedicGreen  , RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCArmorParamedicGreen  , RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCArmorParamedicGreen  , RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCArmorParamedicGreen  , RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCArmorParamedicGreen  , RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCArmorParamedicGreen  , RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCArmorParamedicGreen  , RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCArmorParamedicGreen  , RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
+    - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
+    - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
+    - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
+    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCArmorHelmetParamedic, RMCBeltMedicalDefibAnalyzerFilled, RMCHandsCombat, WeaponRifleMAR40, RMCPouchMagazineFilledMAR40Ext ]

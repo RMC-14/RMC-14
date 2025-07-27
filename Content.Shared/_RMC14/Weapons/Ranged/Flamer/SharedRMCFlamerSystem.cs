@@ -228,14 +228,14 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var normalized = -delta.Normalized();
 
         // to prevent hitting yourself
-        fromCoordinates = fromCoordinates.Offset(normalized * 0.37f);
+        fromCoordinates = fromCoordinates.Offset(normalized * 0.23f);
 
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), flamer.Comp.Range);
         if (delta.Length() > flamer.Comp.Range)
             toCoordinates = fromCoordinates.Offset(normalized * range);
 
-        var tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, out _);
-        if (tiles.Count == 0 || !_interaction.InRangeUnobstructed(flamer, tiles[0].Coordinates, 3))
+        var tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, out _, true);
+        if (tiles.Count == 0)
             return;
 
         ProtoId<ReagentPrototype>? reagent = null;

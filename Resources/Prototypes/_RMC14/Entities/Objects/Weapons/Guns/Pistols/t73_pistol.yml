@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMWeaponPistolBase
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolT73
   name: Type 73 pistol
   description: The Type 73 is the once-standard issue sidearm of the SPP. Replaced by the NP92 in SPP use, it remains popular with veteran SPP troops due to familiarity and extra power. Due to an extremely large amount being produced, they tend to end up in the hands of forces attempting to arm themselves on a budget. Users include the Socialist Progressive Peoples, Colonial Liberation Front, and just about any mercenary or pirate group out there.

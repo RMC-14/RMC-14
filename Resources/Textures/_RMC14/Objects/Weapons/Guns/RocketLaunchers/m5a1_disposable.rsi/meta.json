@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/15d853a340792692e623bcd30f7d8cc058ad6343/icons/mob/humans/onmob/inhands/weapons/guns/rocket_launchers_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/df1d568bcc9ef92e8e5b8a49ee844977076a9ef0/icons/mob/humans/onmob/clothing/suit_storage/guns_by_type/rocket_launchers.dmi, https://github.com/cmss13-devs/cmss13/blob/15d853a340792692e623bcd30f7d8cc058ad6343/icons/mob/humans/onmob/inhands/weapons/guns/rocket_launchers_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/df1d568bcc9ef92e8e5b8a49ee844977076a9ef0/icons/obj/items/weapons/guns/guns_by_faction/USCM/rocket_launchers.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-folded"
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "folded-equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "folded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "folded-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    }
+  ]
+}

@@ -43,7 +43,7 @@
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
     id: RMCIDCardTSEPA
-    belt: RMCM1984BeltFilled
+    belt: RMCBeltHolsterPistolTSEFilledL54
     back: RMCSatchelTSEPA
 
 - type: entity

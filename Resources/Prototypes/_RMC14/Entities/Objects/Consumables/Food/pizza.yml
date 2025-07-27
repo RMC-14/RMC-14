@@ -292,11 +292,28 @@
     tags:
     - BoxCardboard
 
+- type: entity
+  parent: RMCBoxPizza
+  id: RMCBoxPizzaGalaxy
+  suffix: Galaxy, Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/pizza_galaxy_box.rsi
+
 # Pizza Boxes
 - type: entity
   parent: RMCBoxPizza
   id: RMCBoxPizzaMargherita
   suffix: Margherita Deluxe
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMargheritaFull
+
+- type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyMargherita
+  suffix: Galaxy, Margherita Deluxe
   components:
   - type: StorageFill
     contents:
@@ -312,9 +329,27 @@
       - id: RMCFoodPizzaMeatFull
 
 - type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyMeat
+  suffix: Galaxy, Meatlover's Supreme
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMeatFull
+
+- type: entity
   parent: RMCBoxPizza
   id: RMCBoxPizzaMushroom
   suffix: Mushroom Special
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMushroomFull
+
+- type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyMushroom
+  suffix: Galaxy, Mushroom Special
   components:
   - type: StorageFill
     contents:
@@ -328,3 +363,45 @@
   - type: StorageFill
     contents:
       - id: RMCFoodPizzaVegetableFull
+
+- type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyVegetable
+  suffix: Galaxy, Gourmet Vegatable
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaVegetableFull
+
+- type: entity
+  parent: RMCBoxPizza
+  id: RMCBoxPizzaRandom # TODO RMC14 : Random ingredients on the pizza, instead of being a random pizza.
+  suffix: Mystery
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMargheritaFull
+        prob: 0.25
+      - id: RMCFoodPizzaVegetableFull
+        prob: 0.25
+      - id: RMCFoodPizzaMushroomFull
+        prob: 0.25
+      - id: RMCFoodPizzaVegetableFull
+        prob: 0.25
+
+- type: entity
+  parent: RMCBoxPizzaGalaxy
+  id: RMCBoxPizzaGalaxyMystery
+  suffix: Galaxy, Mystery
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCFoodPizzaMargheritaFull
+        prob: 0.25
+      - id: RMCFoodPizzaVegetableFull
+        prob: 0.25
+      - id: RMCFoodPizzaMushroomFull
+        prob: 0.25
+      - id: RMCFoodPizzaVegetableFull
+        prob: 0.25
+
