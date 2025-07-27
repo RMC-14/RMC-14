@@ -157,3 +157,8 @@
   id: Tunnel
   component: XenoTunnel
   alert: TunnelTracker
+
+- type: trackerMode
+  id: HiveCore
+  component: HiveCore
+  alert: HiveCoreTracker

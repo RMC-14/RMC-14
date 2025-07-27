@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Alert;
@@ -30,7 +31,7 @@ public sealed class HiveTrackerSystem : EntitySystem
 
     public override void Initialize()
     {
-        // TODO RMC14 resin tracker, hive leader tracker
+        // TODO RMC14 resin tracker
         SubscribeLocalEvent<HiveTrackerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerClickedAlertEvent>(OnClickedAlert);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerAltClickedAlertEvent>(OnAltClickedAlert);
@@ -58,11 +59,21 @@ public sealed class HiveTrackerSystem : EntitySystem
         if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
 
-        if (!TryComp(ent.Comp.Target, out HiveMemberComponent? targetHive) || targetHive.Hive != hive.Owner)
+        EntityUid? target = null;
+
+        // Watch the entity currently being tracked.
+        if (TryComp(ent.Comp.Target, out HiveMemberComponent? targetHive) && targetHive.Hive == hive.Owner)
+            target = ent.Comp.Target.Value;
+
+        // Watch the queen if the tracking target is not a xeno.
+        if (!HasComp<XenoComponent>(target))
+            target = hive.Comp.CurrentQueen;
+
+        if (target == null)
             return;
 
         args.Handled = true;
-        _xenoWatch.Watch(ent.Owner, ent.Comp.Target.Value);
+        _xenoWatch.Watch(ent.Owner, target.Value);
     }
 
     private void OnAltClickedAlert(Entity<HiveTrackerComponent> ent, ref HiveTrackerAltClickedAlertEvent args)

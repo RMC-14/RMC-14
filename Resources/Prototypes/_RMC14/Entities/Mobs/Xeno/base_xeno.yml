@@ -327,6 +327,7 @@
     - Queen
     - HiveLeader
     - Tunnel
+    - HiveCore
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
