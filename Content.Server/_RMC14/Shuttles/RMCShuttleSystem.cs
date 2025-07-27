@@ -80,18 +80,18 @@ public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
         var expansionWidth = shuttleAABB.Width % 2 == 0 ? shuttleWidth - 1 : shuttleWidth;
 
         // Center the box around the destination.
-        var targetLocalAABB = Box2.CenteredAround(ent.Comp.TargetCoordinates.Position, Vector2.Zero);
+        var targetLocalAABB = Box2.CenteredAround(ent.Comp.TargetCoordinates.Position, Vector2.One);
         var extinguishArea = new Box2(targetLocalAABB.Left - expansionWidth,
             targetLocalAABB.Bottom - expansionHeight,
             targetLocalAABB.Right + expansionWidth,
             targetLocalAABB.Top + expansionHeight);
+        var targetLocalAABBExpanded = _transform.GetWorldMatrix(Transform(mapGrid.Value)).TransformBox(extinguishArea);
 
         // Delete all tile fires inside the box.
-        var targetAABB = _transform.GetWorldMatrix(Transform(mapGrid.Value)).TransformBox(extinguishArea);
-        var lookupEnts = new HashSet<EntityUid>();
-        _lookup.GetLocalEntitiesIntersecting(mapGrid.Value, targetAABB, lookupEnts, LookupFlags.Uncontained);
+        var lookupEntities = new HashSet<EntityUid>();
+        _lookup.GetLocalEntitiesIntersecting(mapGrid.Value, targetLocalAABBExpanded, lookupEntities, LookupFlags.Uncontained);
 
-        foreach (var entity in lookupEnts)
+        foreach (var entity in lookupEntities)
         {
             if (HasComp<TileFireComponent>(entity))
                 Del(entity);
