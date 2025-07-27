@@ -86,7 +86,7 @@ public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
             targetLocalAABB.Right + expansionWidth,
             targetLocalAABB.Top + expansionHeight);
 
-        // Delete all tile fires inside the box before landing.
+        // Delete all tile fires inside the box.
         var targetAABB = _transform.GetWorldMatrix(Transform(mapGrid.Value)).TransformBox(extinguishArea);
         var lookupEnts = new HashSet<EntityUid>();
         _lookup.GetLocalEntitiesIntersecting(mapGrid.Value, targetAABB, lookupEnts, LookupFlags.Uncontained);
