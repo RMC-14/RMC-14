@@ -12,6 +12,9 @@
     sprite: _RMC14/Structures/Walls/solaris_wall.rsi
     state: solaris_interior
   - type: IconSmooth
+    key: walls
+    additionalKeys:
+    - windows
     base: solaris_interior
 
 - type: entity
@@ -41,7 +44,10 @@
   - type: Icon
     sprite: _RMC14/Structures/Walls/solaris_rwall.rsi
     state: solaris_interior_h
+  - type: IconSmooth
+    key: walls
     additionalKeys:
+    - windows
     base: solaris_interior_r
 
 - type: entity
@@ -56,6 +62,9 @@
   - type: Icon
     sprite: _RMC14/Structures/Walls/solaris_rock.rsi
     state: solaris_rock
+  - type: IconSmooth
+    key: walls
+    additionalKeys:
     - windows
     base: solaris_rock
 
