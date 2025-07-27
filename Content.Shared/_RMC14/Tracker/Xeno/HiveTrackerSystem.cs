@@ -1,12 +1,10 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Alert;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -60,16 +58,11 @@ public sealed class HiveTrackerSystem : EntitySystem
         if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
 
-        args.Handled = true;
-        // TODO: if queen gets stored on the hive entity just use that instead of searching for it
-        var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent, HiveMemberComponent, XenoComponent>();
-        while (granters.MoveNext(out var uid, out var granter, out var member, out var xeno))
-        {
-            if (member.Hive != hive.Owner)
-                continue;
+        if (!TryComp(ent.Comp.Target, out HiveMemberComponent? targetHive) || targetHive.Hive != hive.Owner)
+            return;
 
-            _xenoWatch.Watch(ent.Owner, (uid, member));
-        }
+        args.Handled = true;
+        _xenoWatch.Watch(ent.Owner, ent.Comp.Target.Value);
     }
 
     private void OnAltClickedAlert(Entity<HiveTrackerComponent> ent, ref HiveTrackerAltClickedAlertEvent args)

@@ -151,9 +151,9 @@
 - type: trackerMode
   id: HiveLeader
   component: HiveLeader
-  alert: HiveTracker
+  alert: LeaderTracker
 
 - type: trackerMode
   id: Tunnel
   component: XenoTunnel
-  alert: HiveTracker
+  alert: TunnelTracker
