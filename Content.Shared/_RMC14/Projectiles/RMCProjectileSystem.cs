@@ -160,7 +160,7 @@ public sealed class RMCProjectileSystem : EntitySystem
         if (!_examine.InRangeUnOccluded(_transform.ToMapCoordinates(projectile.Comp.ShotFrom.Value), _transform.ToMapCoordinates(targetCoords), distance, null))
             accuracy += (int) AccuracyModifiers.TargetOccluded;
 
-        if (!projectile.Comp.IgnoreFriendlyEvasion && IsProjectileTargetFriendly(projectile.Owner, args.OtherEntity))//
+        if (!projectile.Comp.IgnoreFriendlyEvasion && IsProjectileTargetFriendly(projectile.Owner, args.OtherEntity))
             accuracy -= evasionComponent.ModifiedEvasionFriendly;
 
         accuracy -= evasionComponent.ModifiedEvasion;
