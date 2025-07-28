@@ -137,6 +137,11 @@
     heldPrefix: produce
   - type: Produce
     seedId: mango
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceMango
+        Quantity: 10
   - type: Tag
     tags:
     - Fruit
