@@ -43,9 +43,6 @@ public sealed class HiveTrackerSystem : EntitySystem
 
     private void OnRemove(Entity<HiveTrackerComponent> ent, ref ComponentRemove args)
     {
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
-
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
@@ -148,10 +145,6 @@ public sealed class HiveTrackerSystem : EntitySystem
     private void UpdateDirection(Entity<HiveTrackerComponent> ent, MapCoordinates? coordinates = null)
     {
         _alerts.ClearAlertCategory(ent, HiveTrackerCategory);
-
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
-
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
@@ -207,9 +200,6 @@ public sealed class HiveTrackerSystem : EntitySystem
         var query = EntityQueryEnumerator<HiveTrackerComponent>();
         while (query.MoveNext(out var uid, out var tracker))
         {
-            if (!TryComp(uid, out HiveMemberComponent? member))
-                return;
-
             if (time < tracker.UpdateAt)
                 continue;
 
@@ -232,11 +222,10 @@ public sealed class HiveTrackerSystem : EntitySystem
             var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, HiveMemberComponent>();
             while (trackableQuery.MoveNext(out var trackableUid, out _, out var targetMember))
             {
-                if(tracker.Mode == new ProtoId<TrackerModePrototype>())
+                if (!TryComp(uid, out HiveMemberComponent? member))
                     break;
 
                 _prototypeManager.TryIndex(tracker.Mode, out var trackerMode);
-
                 if (trackerMode?.Component == null)
                     break;
 
