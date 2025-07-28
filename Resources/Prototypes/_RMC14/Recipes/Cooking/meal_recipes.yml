@@ -151,9 +151,22 @@
   result: RMCFoodOnigiri
   time: 5
   group: Savory
-  solids:
-    FoodRiceBoiled: 1
   reagents:
     TableSalt: 5
     Vinegar: 5
     Sugar: 5
+    Water: 5
+    Rice: 5
+
+- type: microwaveMealRecipe
+  id: RecipeCarbonara
+  name: carbonara recipe
+  result: RMCFoodCarbonara
+  time: 10
+  group: Pasta
+  solids:
+    FoodNoodlesBoiled: 1
+    FoodCheeseSlice: 1
+    FoodMeatBacon: 1
+  reagents:
+    Egg: 6

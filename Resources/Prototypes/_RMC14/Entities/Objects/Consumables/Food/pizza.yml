@@ -164,8 +164,7 @@
   - type: FlavorProfile
     flavors:
     - tomato
-    - eggplant
-    - corn
+    - vegetables
     - cheesy
     - oily
     - bread
@@ -178,8 +177,6 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 25
-        - ReagentId: JuiceCarrot
-          Quantity: 5
         - ReagentId: Vitamin
           Quantity: 5
 
@@ -194,8 +191,7 @@
   - type: FlavorProfile
     flavors:
     - tomato
-    - eggplant
-    - corn
+    - vegetables
     - cheesy
     - oily
     - bread
@@ -206,8 +202,6 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
-        - ReagentId: JuiceCarrot
-          Quantity: 1
         - ReagentId: Vitamin
           Quantity: 1
 

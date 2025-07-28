@@ -125,3 +125,27 @@
     - rice
     - sweet
     - salty
+
+- type: entity
+  name: carbonara
+  parent: FoodNoodlesBase
+  id: RMCFoodCarbonara
+  description: Bacon with pasta? YES PLEASE!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/misc.rsi
+    state: carbonara
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+  - type: FlavorProfile
+    flavors:
+    - pasta
+    - cheesy
+    - bacon
