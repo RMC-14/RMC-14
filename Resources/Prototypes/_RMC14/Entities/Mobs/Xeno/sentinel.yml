@@ -6,6 +6,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoSentinel
   name: Sentinel
   description: A slithery, spitting kind of alien.

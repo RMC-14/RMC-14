@@ -2,6 +2,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
+  - RMCXenoVentCrawler
   id: CMXenoLarva
   name: Larva
   components:

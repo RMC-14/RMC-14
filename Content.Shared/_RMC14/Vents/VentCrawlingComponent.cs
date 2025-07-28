@@ -7,4 +7,10 @@ public sealed partial class VentCrawlingComponent : Component
 {
     [DataField, AutoNetworkedField]
     public TimeSpan NextVentMoveTime;
+
+    [DataField, AutoNetworkedField]
+    public Direction? TravelDirection;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan NextVentCrawlSound;
 }

@@ -6,12 +6,15 @@ namespace Content.Shared._RMC14.Vents;
 public sealed partial class VentCrawlerComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan VentCrawlDelay = TimeSpan.FromSeconds(0.01);
+    public TimeSpan VentCrawlDelay = TimeSpan.FromMilliseconds(1);
 
     [DataField, AutoNetworkedField]
     public TimeSpan VentEnterDelay = TimeSpan.FromSeconds(4.5);
 
     [DataField, AutoNetworkedField]
     public TimeSpan VentExitDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan VentCrawlSoundDelay = TimeSpan.FromSeconds(2);
 
 }

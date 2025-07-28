@@ -12,17 +12,13 @@
     drawdepth: FloorTiles # TODO RMC14 draw over weeds, below traps
     sprite: _RMC14/Structures/Piping/Atmospherics/vent_pump.rsi
     layers:
-        - state: off
-          map: [ "enabled", "enum.SubfloorLayers.FirstLayer" ]
+    - state: pipeFourway
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+      visible: false
+    - state: on
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.VentPumpVisuals.State:
-        enabled:
-          Off: { state: off }
-          In: { state: in }
-          Out: { state: on }
-          Welded: { state: welded }
   - type: AmbientSound
     enabled: true
     volume: -12
@@ -42,6 +38,14 @@
   - type: ContainerContainer
   - type: Transform
     anchored: true
+  - type: NodeContainer
+    nodes:
+      pipe:
+        !type:PipeNode
+        nodeGroupID: Pipe
+        pipeDirection: Fourway
+  - type: PipeAppearance
+  - type: PipeColorVisuals
 
 
 - type: entity
@@ -55,23 +59,10 @@
   - type: Sprite
     drawdepth: FloorObjects
     sprite: _RMC14/Structures/Piping/Atmospherics/vent_scrubber.rsi
-    layers:
-      - state: off
-        map: [ "enabled", "enum.SubfloorLayers.FirstLayer" ]
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.ScrubberVisuals.State:
-        enabled:
-          Off: { state: off }
-          Scrub: { state: on }
-          Siphon: { state: in }
-          WideScrub: { state: on }
-          Welded: { state: welded }
   - type: AmbientSound
     enabled: true
     volume: -12
     range: 5
     sound:
       path: /Audio/Ambience/Objects/gas_vent.ogg
-  - type: Weldable

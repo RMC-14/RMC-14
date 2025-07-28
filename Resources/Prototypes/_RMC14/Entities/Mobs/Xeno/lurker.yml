@@ -6,6 +6,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: RMCXenoLurkerBase
   name: Lurker
   description: A beefy, fast alien with sharp claws.
