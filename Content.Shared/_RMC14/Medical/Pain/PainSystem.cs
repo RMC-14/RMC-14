@@ -91,7 +91,6 @@ public sealed partial class PainSystem : EntitySystem
 
         _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
         DirtyField(uid, pain, nameof(PainComponent.CurrentPainLevel));
-        DirtyField(uid, pain, nameof(PainComponent.NextPainLevelUpdateTime));
     }
     public void AddPainModificator(EntityUid uid, TimeSpan duration, FixedPoint2 effectStrength, PainModificatorType type, PainComponent? pain = null)
     {
@@ -107,7 +106,7 @@ public sealed partial class PainSystem : EntitySystem
 
         pain.PainModificators.Add(mod);
         UpdateCurrentPainPercentage(uid, pain);
-        DirtyField(uid, pain, nameof(PainComponent.PainModificators));
+        //DirtyField(uid, pain, nameof(PainComponent.PainModificators));
     }
 
     private void UpdateCurrentPainPercentage(EntityUid uid, PainComponent comp)
@@ -126,8 +125,6 @@ public sealed partial class PainSystem : EntitySystem
         // Pain reduction effectiveness linear decreases as the pain goes up
         var newPainReduction = FixedPoint2.Max(0, -realCurrentPain * comp.PainReductionDecreaceRate + maxPainReductionModificatorStrength);
         comp.CurrentPainPercentage = FixedPoint2.Clamp(realCurrentPain - newPainReduction, 0, 100);
-
-        DirtyField(uid, comp, nameof(PainComponent.CurrentPainPercentage));
     }
 
     private void UpdateCurrentPain(EntityUid uid, PainComponent comp, Dictionary<string, FixedPoint2> damageDict)
@@ -158,7 +155,7 @@ public sealed partial class PainSystem : EntitySystem
 
         comp.CurrentPain = newCurrentPain;
 
-        DirtyField(uid, comp, nameof(PainComponent.CurrentPain));
+        //DirtyField(uid, comp, nameof(PainComponent.CurrentPain));
     }
 
     public override void Update(float frameTime)
@@ -178,7 +175,6 @@ public sealed partial class PainSystem : EntitySystem
             pain.NextEffectUpdateTime = time + pain.EffectUpdateRate;
 
             pain.PainModificators.RemoveAll(mod => time > mod.ExpireAt);
-            DirtyField(uid, pain, nameof(PainComponent.PainModificators));
             UpdateCurrentPainPercentage(uid, pain);
 
             var painLevels = pain.PainLevels.OrderBy(level => level.Threshold).ToList(); // in case someone writes it in the wrong order
