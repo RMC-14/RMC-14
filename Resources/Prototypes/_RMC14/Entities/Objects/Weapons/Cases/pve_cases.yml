@@ -1,0 +1,24 @@
+# M42A2
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCPVECaseM42A2
+  name: M42A2 shotgun case
+  description: A gun case containing the M42A2 shotgun. It does come loaded, but you'll still have to find ammunition as you go.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,1,1
+    whitelist:
+      tags:
+      - RMCWeaponShotgunM42A2
+      - RMCHandful
+      - RMCAttachmentM42A2WoodenStock
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunM42A2
+    - id: RMCAttachmentM42A2WoodenStock
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
