@@ -53,7 +53,7 @@
       entries:
       - id: ArmorHelmetM10
         amount: 15
-      - id: CMArmorM3Medium
+      - id: RMCArmorM3MediumVariants
         name: Standard M3 Pattern Armor Set
         amount: 15
     - name: Backpack
@@ -62,7 +62,7 @@
         amount: 15
       - id: CMBackpackMarineTech
         amount: 15
-      - id: CMSatchel
+      - id: CMSatchelMarine
         amount: 15
       - id: RMCSatchelWelder
         amount: 15
@@ -83,6 +83,7 @@
       - id: RMCM82FHolster
         amount: 5
       - id: RMCBeltUtilityGeneral
+        amount: 5
     - name: Pouches
       entries:
       - id: RMCPouchFirstAid
