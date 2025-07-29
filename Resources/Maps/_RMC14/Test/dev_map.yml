@@ -6339,17 +6339,6 @@ entities:
     - type: Transform
       pos: 7.6382103,16.08618
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        absorbed:
-          temperature: 293.15
-          canReact: True
-          maxVol: 50
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Water
-            Quantity: 25
 - proto: PortableGeneratorSuperPacman
   entities:
   - uid: 1225
