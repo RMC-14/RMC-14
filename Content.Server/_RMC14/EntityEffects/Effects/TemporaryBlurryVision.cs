@@ -19,7 +19,8 @@ public sealed partial class TemporaryBlurryVision : EntityEffect
     {
         var time = Time;
 
-        if (args is EntityEffectReagentArgs reagentArgs) {
+        if (args is EntityEffectReagentArgs reagentArgs)
+        {
             time *= reagentArgs.Scale.Float();
         }
 
