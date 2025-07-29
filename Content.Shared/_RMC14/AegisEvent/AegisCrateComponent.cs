@@ -4,6 +4,8 @@ using Content.Shared._RMC14.Storage;
 using Content.Shared.Storage;
 using System;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
+using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.AegisCrate;
 
@@ -13,14 +15,17 @@ public sealed partial class AegisCrateComponent : Component
     [DataField, AutoNetworkedField]
     public AegisCrateState State { get; set; } = AegisCrateState.Closed;
 
-    [NonSerialized]
-    public EntityUid? StorageUid;
-
     [DataField("openSound")]
     public SoundSpecifier? OpenSound = new SoundPathSpecifier("/Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg");
 
     [DataField("closeSound")]
     public SoundSpecifier? CloseSound;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId OB = "RMCOrbitalCannonWarheadAegis";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? OpenAt;
 }
 
 public enum AegisCrateState
