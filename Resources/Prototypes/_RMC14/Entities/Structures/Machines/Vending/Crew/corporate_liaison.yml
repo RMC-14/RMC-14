@@ -34,8 +34,6 @@
         amount: 1
       - id: RMCJumpsuitLiaisonCharcoalSuitskirt
         amount: 1
-      # Grey Suit Pants
-      # Worn suit
       - id: CMJumpsuitLiaisonFormal
         amount: 1
       - id: CMJumpsuitLiaisonBlazer
@@ -54,8 +52,6 @@
         amount: 1
       - id: RMCJumpsuitLiaisonFieldSuitskirt
         amount: 1
-      # Simple white shirt, black pants
-      # Simple white shirt, blue pants
       - id: RMCJumpsuitBlackTailored
         amount: 1
       - id: RMCJumpsuitBurgundyTailored
@@ -96,7 +92,18 @@
         amount: 1
       - id: RMCJacketCorporateFormal
         amount: 1
-      # Suit jackets
+      - id: RMCFancySuitJacketBlack
+        amount: 1
+      - id: RMCFancySuitJacketBlue
+        amount: 1
+      - id: RMCFancySuitJacketPurp
+        amount: 1
+      - id: RMCFancySuitJacketRed
+        amount: 1
+      - id: RMCFancySuitJacketBrown
+        amount: 1
+      - id: RMCFancySuitJacketLightBrown
+        amount: 1
       - id: RMCWeYaBrownVest
         amount: 1
       - id: RMCWeYaBlueVest
@@ -121,8 +128,8 @@
         amount: 1
       - id: RMCCoatBomber
         amount: 1
-#      - id: BlackBomberJacket
-#        amount: 1
+      - id: RMCCoatBomberBlack
+        amount: 1
 #      - id: LiaisonsWinterCoat
 #        amount:
       - id: RMCCoatHoboBrown
@@ -152,6 +159,14 @@
     - name: Hats
       entries:
       - id: RMCHeadCapWestonYamadaDark
+        amount: 1
+      - id: RMCHeadCivilianTanBeret
+        amount: 1
+      - id: RMCHeadCivilianWhiteBeret
+        amount: 1
+      - id: RMCHeadCivilianBlackBeret
+        amount: 1
+      - id: RMCHeadCivilianBrownBeret
         amount: 1
       - id: RMCHeadFedoraTan
         amount: 1

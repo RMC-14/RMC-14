@@ -53,6 +53,7 @@
   - GlassesRPGRMC
   - GlassesRPGRMCOld
   - GlassesPrescriptionRMC
+  - HippieGlassesRMC
   - GogglesRMC
   - GogglesPrescriptionRMC
   - GogglesBlackRMC
@@ -71,6 +72,13 @@
   - GogglesPolarizedBlueRMC
   - GogglesPolarizedOrangeRMC
   - GogglesM1A1BlueRMC
+  - HippieGlassesBloodredRMC
+  - HippieGlassesGreenRMC
+  - HippieGlassesMidnightRMC
+  - HippieGlassesNightblueRMC
+  - HippieGlassesPinkRMC
+  - HippieGlassesSunriseRMC
+  - HippieGlassesSunsetRMC
 
 # Masks
 - type: loadoutGroup

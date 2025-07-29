@@ -140,3 +140,65 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi
+
+# fancy suit jackets
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCFancySuitJacketBlack
+  name: black fancy suit jacket
+  description: A snappy dress jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/black_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/black_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketBlue
+  name: blue fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/blue_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/blue_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketPurp
+  name: purple fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/purp_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/purp_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketRed
+  name: red fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/red_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/red_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketBrown
+  name: brown fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/brown_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/brown_fancy.rsi
+
+- type: entity
+  parent: RMCFancySuitJacketBlack
+  id: RMCFancySuitJacketLightBrown
+  name: light-brown fancy suit jacket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/lightbrown_fancy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/lightbrown_fancy.rsi
