@@ -885,3 +885,36 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/dark_cowboy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cowboy/dark_cowboy.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadFedoraBrown
+  name: brown fedora
+  description: A classic brown fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown_fedora.rsi
+
+- type: entity
+  parent: RMCHeadFedoraBrown
+  id: RMCHeadFedoraTan
+  name: tan fedora
+  description: A classic tan fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan_fedora.rsi
+
+- type: entity
+  parent: RMCHeadFedoraBrown
+  id: RMCHeadFedoraGrey
+  name: grey fedora
+  description: A classic grey fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi

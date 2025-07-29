@@ -585,6 +585,12 @@
     - MASK
     - EYES
 
+- type: entity
+  parent: RMCSunglasses
+  id: RMCPrescriptionSunglasses
+  name: prescription sunglasses
+  description: A mixture of coolness and the inherent nerdiness of a prescription. Somehow manages to conceal both.
+
 # Identical to upstream ones, sans the name and description
 - type: entity
   parent: ClothingEyesEyepatch
@@ -831,6 +837,22 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/jensen_shades.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/jensen_shades.rsi
+    slots:
+    - MASK
+    - EYES
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGlassesMonocle
+  name: monocle
+  description: Such a dapper eyepiece!
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/monocle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/monocle.rsi
     slots:
     - MASK
     - EYES
