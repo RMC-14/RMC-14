@@ -166,10 +166,10 @@ public sealed partial class PainSystem : EntitySystem
         var painQuery = EntityQueryEnumerator<PainComponent>();
         while (painQuery.MoveNext(out var uid, out var pain))
         {
-            if (_mobState.IsDead(uid))
+            if (time < pain.NextEffectUpdateTime)
                 continue;
 
-            if (time < pain.NextEffectUpdateTime)
+            if (_mobState.IsDead(uid))
                 continue;
 
             pain.NextEffectUpdateTime = time + pain.EffectUpdateRate;
