@@ -72,7 +72,6 @@
     offsets:
       rmc-aslot-barrel: 0.78, .02
       rmc-aslot-rail: -0.18, 0.125
-      rmc-aslot-stock: -0.52, -0.029
       rmc-aslot-underbarrel: 0.32, -0.31
   - type: Tag
     tags:
