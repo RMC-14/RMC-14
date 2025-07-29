@@ -8,3 +8,5 @@ public sealed partial class VentEnterDoafterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class VentExitDoafterEvent : SimpleDoAfterEvent;
+
+public sealed partial class VentEnterAttemptEvent : CancellableEntityEventArgs;

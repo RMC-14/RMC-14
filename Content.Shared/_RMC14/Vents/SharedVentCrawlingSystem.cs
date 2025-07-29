@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Map;
 using Content.Shared.Atmos;
 using Content.Shared.CCVar;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Jittering;
@@ -13,15 +12,13 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using Robust.Shared.Maths;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Directions;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.SubFloor;
 using Content.Shared.Eye;
+using Content.Shared.Destructible;
 
 namespace Content.Shared._RMC14.Vents;
-public sealed class VentCrawlingSystem : EntitySystem
+public abstract class SharedVentCrawlingSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -45,6 +42,8 @@ public sealed class VentCrawlingSystem : EntitySystem
 
         SubscribeLocalEvent<VentCrawlableComponent, MapInitEvent>(OnVentDuctInit);
         SubscribeLocalEvent<VentCrawlableComponent, MoveEvent>(OnVentDuctMove);
+        SubscribeLocalEvent<VentCrawlableComponent, DestructionEventArgs>(OnVentDuctDestroyed);
+        SubscribeLocalEvent<VentCrawlableComponent, AnchorStateChangedEvent>(OnVentAnchorChanged);
 
         SubscribeLocalEvent<VentCrawlingComponent, MoveInputEvent>(OnVentCrawlingInput);
 
@@ -76,7 +75,23 @@ public sealed class VentCrawlingSystem : EntitySystem
         Dirty(vent);
     }
 
-    private bool TryGetVent(EntityUid vent, [NotNullWhen(true)] out VentCrawlableComponent? ventComp, [NotNullWhen(true)] out ContainerSlot? container)
+    private void OnVentDuctDestroyed(Entity<VentCrawlableComponent> vent, ref DestructionEventArgs args)
+    {
+        if (!TryGetVent(vent, out var comp, out var container))
+            return;
+
+        _container.EmptyContainer(container, true);
+    }
+
+    private void OnVentAnchorChanged(Entity<VentCrawlableComponent> vent, ref AnchorStateChangedEvent args)
+    {
+        if (!TryGetVent(vent, out var comp, out var container))
+            return;
+
+        _container.EmptyContainer(container, true);
+    }
+
+    private bool TryGetVent(EntityUid vent, [NotNullWhen(true)] out VentCrawlableComponent? ventComp, [NotNullWhen(true)] out Container? container)
     {
         ventComp = null;
         container = null;
@@ -84,7 +99,8 @@ public sealed class VentCrawlingSystem : EntitySystem
         if (!TryComp(vent, out ventComp) || !Transform(vent).Anchored)
             return false;
 
-        container = _container.EnsureContainer<ContainerSlot>(vent, ventComp.ContainerId);
+        //TODO fix multiple ents not fitting into the same pipe
+        container = _container.EnsureContainer<Container>(vent, ventComp.ContainerId);
 
         return true;
     }
@@ -97,7 +113,14 @@ public sealed class VentCrawlingSystem : EntitySystem
         if (!TryComp<VentCrawlerComponent>(args.User, out var crawl) || !TryGetVent(vent, out var comp, out var container))
             return;
 
-        if (container.ContainedEntities.Count > comp.MaxEntities || _container.IsEntityInContainer(args.User))
+        if ((comp.MaxEntities != null && container.ContainedEntities.Count > comp.MaxEntities) || _container.IsEntityInContainer(args.User))
+            return;
+
+        var evn = new VentEnterAttemptEvent();
+
+        RaiseLocalEvent(args.User, evn);
+
+        if (evn.Cancelled)
             return;
 
         args.Handled = true;
@@ -122,6 +145,13 @@ public sealed class VentCrawlingSystem : EntitySystem
 
         if (!TryGetVent(vent, out var comp, out var container) ||
             (comp.MaxEntities != null && container.ContainedEntities.Count > comp.MaxEntities))
+            return;
+
+        var evn = new VentEnterAttemptEvent();
+
+        RaiseLocalEvent(args.User, evn);
+
+        if (evn.Cancelled)
             return;
 
         args.Handled = true;

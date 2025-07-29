@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Vents;
 
@@ -16,5 +17,8 @@ public sealed partial class VentCrawlerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan VentCrawlSoundDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public string VentCrawlIcon = "unknown";
 
 }

@@ -13,6 +13,7 @@
     sprite: _RMC14/Structures/Piping/Atmospherics/vent_pump.rsi
     layers:
     - state: pipeFourway
+      sprite: Structures/Piping/Atmospherics/pipe.rsi
       map: [ "enum.PipeVisualLayers.Pipe" ]
       visible: false
     - state: on

@@ -458,6 +458,7 @@
   id: RMCXenoVentCrawler
   components:
   - type: VentCrawler
+    ventCrawlIcon: unknown
   - type: RMCTrayCrawler
 
 - type: entity
