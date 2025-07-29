@@ -134,6 +134,10 @@
   - RedHeadbandRMC
   - TanHeadbandRMC
   - SquadHeadbandRMC
+  - HeadBeanieRMC
+  - HeadBeanieTanRMC
+  - HeadBeanieGreenRMC
+  - HeadBeanieGrayRMC
 
 # Helmet Garbs
 - type: loadoutGroup
@@ -493,7 +497,7 @@
   - CorporateBrownJacketRMC
   - CorporateBlueJacketRMC
   - JacketWindbreakerRMC
-  
+
 - type: loadoutGroup
   id: SynthUniformAccessoriesRMC
   name: rmc-loadout-group-synthetic-accessories
@@ -561,9 +565,9 @@
   - PatchCECRMC
   - PatchCLFRMC
   # TODO Halcyon Dynamics patch
-  # TODO cowboy hat
-  # white cowboy hat TODO
-  # headband TODO
+  - HeadCowboyHatLightRMC
+  - HeadCowboyHatDarkRMC
+  - HeadBandRebelRMC
   # BiMex tactical shades TODO
   - ShoesBlackRMC
   - ShoesBrownRMC

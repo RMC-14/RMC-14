@@ -227,3 +227,15 @@
     hatRsi:
       sprite: _RMC14/Objects/Clothing/Head/Hats/headband/intel.rsi
       state: hat
+
+# civilian
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadBandRebel
+  name: rebel headband
+  description: A headband made from a simple strip of cloth. The words "DOWN WITH TYRANTS" are emblazoned on the front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/rebel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/rebel.rsi
