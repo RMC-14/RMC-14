@@ -7,7 +7,6 @@
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
   ranks:
     RMCRankICBCorporateLiaison: []
-  startingGear: RMCGearSurvivorVaraderoICB
   special:
   - !type:AddComponentSpecial
     components:
@@ -54,9 +53,3 @@
 - type: playTimeTracker
   id: CMJobSurvivorVaraderoICB
   isHumanoid: true
-
-- type: entity
-  parent: RMCSurvivorPresetICB
-  id: RMCGearSurvivorPresetVaraderoICB
-  name: icb colonist preset
-  categories: [ HideSpawnMenu ]

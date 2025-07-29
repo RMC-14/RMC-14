@@ -8,7 +8,6 @@
   icon: "RMCJobIconICBLiaison"
   ranks:
     RMCRankICBCorporateLiaison: []
-  startingGear: RMCGearSurvivorICB
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,6 +23,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - WeYa
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
@@ -57,9 +57,3 @@
 - type: playTimeTracker
   id: CMJobSurvivorICB
   isHumanoid: true
-
-- type: entity
-  parent: RMCSurvivorPresetCorporate
-  id: RMCGearSurvivorPresetICB
-  name: icb colonist preset
-  categories: [ HideSpawnMenu ]
