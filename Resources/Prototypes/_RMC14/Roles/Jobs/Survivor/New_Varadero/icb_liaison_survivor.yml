@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorVaraderoICB
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
+  startingGear: RMCGearSurvivorVaraderoICB
   ranks:
     RMCRankICBCorporateLiaison: []
   special:
@@ -16,8 +17,6 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
-    - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetVaraderoICB
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
