@@ -415,7 +415,7 @@ public sealed class MobThresholdSystem : EntitySystem
 
             if (ev.CancelUpdate)
             {
-                _alerts.ShowAlert(target, ev.CurrentAlert, ev.Severity);
+                //_alerts.ShowAlert(target, ev.CurrentAlert, ev.Severity);
                 return;
             }
 
@@ -430,11 +430,11 @@ public sealed class MobThresholdSystem : EntitySystem
                         _alerts.GetMaxSeverity(currentAlert),
                         percentage.Value.Float()));
             }
-            _alerts.ShowAlert(target, currentAlert, severity, dynamicMessage: healthMessage);
+            //_alerts.ShowAlert(target, currentAlert, severity, dynamicMessage: healthMessage);
         }
         else
         {
-            _alerts.ShowAlert(target, currentAlert, dynamicMessage: healthMessage);
+            //_alerts.ShowAlert(target, currentAlert, dynamicMessage: healthMessage);
         }
     }
 
