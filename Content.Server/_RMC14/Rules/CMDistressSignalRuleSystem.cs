@@ -738,13 +738,22 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
 
                 var selectedSurvivors = 0;
-                for (var i = priorities - 1; i >= 0; i--)
+                for (var prio = priorities - 1; prio >= 0; prio--)
                 {
-                    while (selectedSurvivors < totalSurvivors)
+                    for (var i = 0; i < totalSurvivors + comp.IgnoreMaximumSurvivorJobs.Count; i++)
                     {
+                        if (selectedSurvivors < totalSurvivors)
+                            break;
+
+                        if (survivorCandidates.Count <= 0)
+                            break;
+
                         var (job, players) = _random.Pick(survivorCandidates);
-                        var list = players[i];
+                        var list = players[prio];
                         var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
+
+                        if (list.Count <= 0)
+                            continue;
 
                         if (SpawnSurvivor(job, list, out var stop) is { } id)
                         {
