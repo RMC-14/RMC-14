@@ -1,0 +1,7 @@
+- type: soundCollection
+  id: RMCDetectorSounds
+  files:
+    - /Audio/_RMC14/Effects/detector_ping_1.ogg
+    - /Audio/_RMC14/Effects/detector_ping_2.ogg
+    - /Audio/_RMC14/Effects/detector_ping_3.ogg
+    - /Audio/_RMC14/Effects/detector_ping_4.ogg

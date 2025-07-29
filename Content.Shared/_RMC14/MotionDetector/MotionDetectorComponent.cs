@@ -46,7 +46,7 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
     public TimeSpan ScanDuration { get; set; } = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? ScanSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/motion_detector.ogg");
+    public SoundSpecifier? ScanSound = new SoundCollectionSpecifier("RMCDetectorSounds");
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ScanEmptySound = new SoundPathSpecifier("/Audio/_RMC14/Effects/motion_detector_none.ogg");
