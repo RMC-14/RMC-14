@@ -60,7 +60,7 @@ rmc-attachable-examine-ranged-recoil = [color={$colour}]{$sign}{$recoil}[/color]
 rmc-attachable-examine-ranged-damage = [color={$colour}]{$sign}{$damage}[/color] ranged damage multiplier.
 rmc-attachable-examine-ranged-projectile-speed = [color={$colour}]{$sign}{$projectileSpeed}[/color] projectile speed.
 rmc-attachable-examine-ranged-damage-falloff = [color={$colour}]{$sign}{$falloff}[/color] falloff multiplier.
-rmc-attachable-examine-ranged-range = [color={$colour}]{$sign}{$falloff}[/color] range.
+rmc-attachable-examine-ranged-range = [color={$colour}]{$sign}{$falloff}[/color] projectile range.
 
 rmc-attachable-examine-melee-damage = [color={$colour}]{$sign}{$damage}[/color] melee damage.
 
