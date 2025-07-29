@@ -8,6 +8,7 @@
   icon: "RMCJobIconICBLiaison"
   ranks:
     RMCRankICBCorporateLiaison: []
+  startingGear: RMCGearSurvivorICB
   special:
   - !type:AddComponentSpecial
     components:
@@ -17,13 +18,10 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
-    - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetICB
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - WeYa
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
