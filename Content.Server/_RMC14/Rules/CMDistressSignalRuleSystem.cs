@@ -78,6 +78,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Preferences;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.StatusEffect;
 using Robust.Server.Audio;
@@ -686,19 +687,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (comp.SpawnSurvivors)
             {
-                // Shuffle survivor jobs and ensure civilian survivor stays at the bottom, as civ survivor has infinite slots
-                var compCopy = comp;
-                IEnumerable<(ProtoId<JobPrototype> Job, int Amount)> jobs = comp.SurvivorJobs
-                    .Where(entry => entry.Job != compCopy.CivilianSurvivorJob)
-                    .OrderBy(_ => _random.Next());
-
-                if (comp.SurvivorJobs.TryFirstOrNull(entry => entry.Job == compCopy.CivilianSurvivorJob, out var civJob))
-                {
-                    jobs = jobs.Append(civJob.Value);
-                }
-
-                comp.SurvivorJobs = jobs.ToList();
-
                 var survivorCandidates = new Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]>();
                 foreach (var job in comp.SurvivorJobs)
                 {
@@ -752,28 +740,24 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var selectedSurvivors = 0;
                 for (var i = priorities - 1; i >= 0; i--)
                 {
-                    foreach (var (job, players) in survivorCandidates)
+                    while (selectedSurvivors < totalSurvivors)
                     {
+                        var (job, players) = _random.Pick(survivorCandidates);
                         var list = players[i];
                         var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
-                        while (list.Count > 0 && (ignoreLimit || selectedSurvivors < totalSurvivors))
-                        {
-                            if (SpawnSurvivor(job, list, out var stop) is { } id)
-                            {
-                                foreach (var (_, otherPlayersLists) in survivorCandidates)
-                                {
-                                    foreach (var otherPlayers in otherPlayersLists)
-                                    {
-                                        otherPlayers.Remove(id);
-                                    }
-                                }
 
-                                if (!ignoreLimit)
-                                    selectedSurvivors++;
+                        if (SpawnSurvivor(job, list, out var stop) is { } id)
+                        {
+                            foreach (var (_, otherPlayersLists) in survivorCandidates)
+                            {
+                                foreach (var otherPlayers in otherPlayersLists)
+                                {
+                                    otherPlayers.Remove(id);
+                                }
                             }
 
-                            if (stop)
-                                break;
+                            if (!ignoreLimit)
+                                selectedSurvivors++;
                         }
                     }
                 }
