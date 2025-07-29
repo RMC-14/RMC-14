@@ -457,3 +457,47 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/jetblack_suit_fem.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/jetblack_suit_fem.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitBlackPantsUniform
+  name: simple white shirt with black pants
+  description: It's a very simple looking white shirt and black pants.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/black_pants_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/black_pants_uniform.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitBluePantsUniform
+  name: simple white shirt with blue pants
+  description: A classy shirt and tie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/blue_pants_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/blue_pants_uniform.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitWornSuit
+  name: worn suit
+  description: A washed out white shirt with a black tie and brown slacks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_brown.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitGreySuitPants
+  name: grey suit pants
+  description: A washed out white shirt with a red tie and black slacks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_grey.rsi

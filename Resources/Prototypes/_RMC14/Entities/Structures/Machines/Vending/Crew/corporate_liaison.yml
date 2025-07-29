@@ -28,6 +28,10 @@
         amount: 1
       - id: CMJumpsuitLiaisonCorporateFormal
         amount: 1
+      - id: RMCJumpsuitGreySuitPants
+        amount: 1
+      - id: RMCJumpsuitWornSuit
+        amount: 1
       - id: CMJumpsuitLiaison
         amount: 1
       - id: CMJumpsuitLiaisonCharcoal
@@ -51,6 +55,10 @@
       - id: CMJumpsuitLiaisonField
         amount: 1
       - id: RMCJumpsuitLiaisonFieldSuitskirt
+        amount: 1
+      - id: RMCJumpsuitBlackPantsUniform
+        amount: 1
+      - id: RMCJumpsuitBluePantsUniform
         amount: 1
       - id: RMCJumpsuitBlackTailored
         amount: 1
