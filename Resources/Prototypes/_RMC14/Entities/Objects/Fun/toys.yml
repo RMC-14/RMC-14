@@ -283,18 +283,3 @@
   components:
   - type: Sprite
     state: crow
-
-- type: entity
-  parent: CMPlushieBase
-  id: RMCPushieMango
-  name: mango plushie
-  description: MANGO MANGO MANGO
-  components:
-  - type: Sprite
-    state: mango_plush
-  - type: EmitSoundOnUse
-    sound:
-      path: /Audio/_RMC14/Items/Toys/MANGOS.ogg
-  - type: EmitSoundOnActivate
-    sound:
-      path: /Audio/_RMC14/Items/Toys/MANGOS.ogg
