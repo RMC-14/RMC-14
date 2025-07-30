@@ -184,3 +184,65 @@
         whitelist:
           tags:
           - RMCTankFlamer
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseMotionDetector
+  name: motion detectors case
+  description: A case containing four individual handheld motion detectors.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/md.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/md.rsi
+    layers:
+    - state: base
+    - state: ammo_1
+      map: [ ammo_1 ]
+      visible: false
+    - state: ammo_2
+      map: [ ammo_2 ]
+      visible: false
+    - state: ammo_3
+      map: [ ammo_3 ]
+      visible: false
+    - state: ammo_4
+      map: [ ammo_4 ]
+      visible: false
+    - state: lid_closed
+      map: [ lid ]
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCDetector
+  - type: StorageFill
+    contents:
+    - id: RMCMotionDetector
+    - id: RMCMotionDetector
+    - id: RMCMotionDetector
+    - id: RMCMotionDetector
+  - type: ItemMapper
+    mapLayers:
+      ammo_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCDetector
+      ammo_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCDetector
+      ammo_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCDetector
+      ammo_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCDetector
