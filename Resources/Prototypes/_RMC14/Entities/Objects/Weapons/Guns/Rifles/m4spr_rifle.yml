@@ -257,15 +257,15 @@
 - type: entity
   parent: CMMagazineRifleM4SPR
   id: RMCMagazineRifleM5SPRHVP
-  name: "M5SPR HV-Piercing magazine (10x24mm)" # TODO RMC14 - Make these penetrate targets
+  name: "M5SPR HV-Piercing magazine (10x24mm)"
   description: "A magazine of HV-Piercing 10x24mm rounds for use in the M5SPR battle rifle."
   components:
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleM4SPRA19
-    proto: RMCCartridgeRifleM4SPRA19
+      - RMCCartridgeRifleM5SPRHVP
+    proto: RMCCartridgeRifleM5SPRHVP
     capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
@@ -281,6 +281,46 @@
     - CMMagazineRifle
     - RMCMagazineRifleM5SPRHVP
 
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleM5SPRHVP
+  name: cartridge (HV-Piercing)
+  description: A high-velocity HV-Piercing cartridge. Fits in M5SPR custom magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleM5SPRHVP
+  - type: CartridgeAmmo
+    proto: BulletRifleM5SPRHVP
+
+- type: entity
+  parent: RMCBaseBullet
+  id: BulletRifleM5SPRHVP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 35
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 16
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+  - type: RMCPenetratingProjectile
+    rangeLossPerHit: 1
+
 - type: Tag
   id: CMMagazineRifleM4SPR
 
@@ -292,6 +332,9 @@
 
 - type: Tag
   id: RMCMagazineRifleM5SPRHVP
+
+- type: Tag
+  id: RMCCartridgeRifleM5SPRHVP
 
 - type: Tag
   id: RMCWeaponRifleM4SPR
