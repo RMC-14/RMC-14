@@ -73,6 +73,7 @@
       - Xeno
   - type: UncloakOnHit
   - type: ExtinguishFire
+  - type: IgnorePredictionHit
   - type: SprayExtinguishTileFire
 
 - type: entity
