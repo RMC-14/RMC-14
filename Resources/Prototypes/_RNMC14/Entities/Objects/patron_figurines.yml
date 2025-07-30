@@ -1,0 +1,12 @@
+# NOTE: These do not contain any user's characters. Any similarities to other characters are coincidental.
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RNMCFigurinePatronRifleman
+  name: Rifleman figurine
+  description: A generic rifleman with clothing you see on most riflemen.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/patron_figurines.rsi
+    state: Rifleman
+  - type: PatronFigurine
+    id: 76016009-20fb-4e88-ac6e-1fdefe800a37

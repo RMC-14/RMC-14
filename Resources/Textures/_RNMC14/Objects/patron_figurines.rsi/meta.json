@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Characters made by Merrokitsune. Each item worn has its respective license and copyright. Final figurine sprites made by Merrokitsune.",
+    "size": {
+      "x": 32,
+      "y": 34
+    },
+    "states": [
+    {
+      "name": "Rifleman"
+    }
+  ]
+}
