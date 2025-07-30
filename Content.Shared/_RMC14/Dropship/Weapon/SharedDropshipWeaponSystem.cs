@@ -37,6 +37,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -583,15 +584,33 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (ammo.Comp.Rounds < ammo.Comp.RoundsPerShot)
             return;
 
+        var ev = new DropshipWeaponShotEvent(ammo.Comp.TargetSpread,
+            ammo.Comp.BulletSpread,
+            ammo.Comp.TravelTime,
+            ammo.Comp.RoundsPerShot,
+            ammo.Comp.ShotsPerVolley,
+            ammo.Comp.Damage,
+            ammo.Comp.ArmorPiercing,
+            ammo.Comp.SoundTravelTime,
+            ammo.Comp.SoundCockpit,
+            ammo.Comp.SoundMarker,
+            ammo.Comp.SoundGround,
+            ammo.Comp.SoundImpact,
+            ammo.Comp.ImpactEffect,
+            ammo.Comp.Explosion,
+            ammo.Comp.Fire,
+            ammo.Comp.SoundEveryShots);
+        RaiseLocalEvent(dropship, ref ev);
+
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
         _appearance.SetData(ammo, DropshipAmmoVisuals.Fill, ammo.Comp.Rounds);
         Dirty(ammo);
 
-        _audio.PlayPvs(ammo.Comp.SoundCockpit, weapon.Value);
+        _audio.PlayPvs(ev.SoundCockpit, weapon.Value);
         weaponComp.NextFireAt = time + weaponComp.FireDelay;
         Dirty(weapon.Value, weaponComp);
 
-        var spread = ammo.Comp.TargetSpread;
+        var spread = ev.Spread;
         var targetCoords = coordinates;
         if (spread != 0)
             targetCoords = targetCoords.Offset(_random.NextVector2(-spread, spread + 1));
@@ -600,20 +619,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var inFlightComp = new AmmoInFlightComponent
         {
             Target = targetCoords,
-            MarkerAt = time + ammo.Comp.TravelTime,
-            ShotsLeft = ammo.Comp.RoundsPerShot,
-            ShotsPerVolley = ammo.Comp.ShotsPerVolley,
-            Damage = ammo.Comp.Damage,
-            ArmorPiercing = ammo.Comp.ArmorPiercing,
-            BulletSpread = ammo.Comp.BulletSpread,
-            SoundTravelTime = ammo.Comp.SoundTravelTime,
-            SoundMarker = ammo.Comp.SoundMarker,
-            SoundGround = ammo.Comp.SoundGround,
-            SoundImpact = ammo.Comp.SoundImpact,
-            ImpactEffect = ammo.Comp.ImpactEffect,
-            Explosion = ammo.Comp.Explosion,
-            Fire = ammo.Comp.Fire,
-            SoundEveryShots = ammo.Comp.SoundEveryShots,
+            MarkerAt = time + ev.TravelTime,
+            ShotsLeft = ev.RoundsPerShot,
+            ShotsPerVolley = ev.ShotsPerVolley,
+            Damage = ev.Damage,
+            ArmorPiercing = ev.ArmorPiercing,
+            BulletSpread = ev.BulletSpread,
+            SoundTravelTime = ev.SoundTravelTime,
+            SoundMarker = ev.SoundMarker,
+            SoundGround = ev.SoundGround,
+            SoundImpact = ev.SoundImpact,
+            ImpactEffect = ev.ImpactEffect,
+            Explosion = ev.Explosion,
+            Fire = ev.Fire,
+            SoundEveryShots = ev.SoundEveryShots,
         };
 
         AddComp(inFlight, inFlightComp, true);
@@ -1359,3 +1378,24 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         RefreshWeaponsUI(ent);
     }
 }
+
+/// <summary>
+///     Raised on a dropship when it shoots any of it's weapons.
+/// </summary>
+[ByRefEvent]
+public record struct DropshipWeaponShotEvent(float Spread,
+    int BulletSpread,
+    TimeSpan TravelTime,
+    int RoundsPerShot,
+    int ShotsPerVolley,
+    DamageSpecifier? Damage,
+    int ArmorPiercing,
+    TimeSpan SoundTravelTime,
+    SoundSpecifier? SoundCockpit,
+    SoundSpecifier? SoundMarker,
+    SoundSpecifier? SoundGround,
+    SoundSpecifier? SoundImpact,
+    EntProtoId? ImpactEffect,
+    RMCExplosion? Explosion,
+    RMCFire? Fire,
+    int SoundEveryShots);
