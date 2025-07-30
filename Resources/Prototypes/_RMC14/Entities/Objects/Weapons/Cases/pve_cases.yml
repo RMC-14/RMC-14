@@ -31,6 +31,8 @@
       components:
       - Xeno
 
+# Guns
+
 - type: entity
   parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseM42A2
@@ -52,7 +54,7 @@
       - RMCAttachmentM42A2WoodenStock
   - type: StorageFill
     contents:
-    - id: WeaponShotgunM42A2
+    - id: RMCWeaponShotgunM42A2Filled
     - id: RMCAttachmentM42A2WoodenStock
     - id: CMShellShotgunBuckshot
     - id: CMShellShotgunBuckshot
@@ -100,3 +102,85 @@
         whitelist:
           tags:
           - RMCWeaponRifleM5SPR
+
+# Misc
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseFlamerFuel
+  name: M34 fuel canister case
+  description: A heavy case containing six fuel canisters for the M34 incinerator unit.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/flamer_fuel.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/flamer_fuel.rsi
+    layers:
+    - state: base
+    - state: ammo_1
+      map: [ ammo_1 ]
+      visible: false
+    - state: ammo_2
+      map: [ ammo_2 ]
+      visible: false
+    - state: ammo_3
+      map: [ ammo_3 ]
+      visible: false
+    - state: ammo_4
+      map: [ ammo_4 ]
+      visible: false
+    - state: ammo_5
+      map: [ ammo_5 ]
+      visible: false
+    - state: ammo_6
+      map: [ ammo_6 ]
+      visible: false
+    - state: lid_closed
+      map: [ lid ]
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCTankFlamer
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+  - type: ItemMapper
+    mapLayers:
+      ammo_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCTankFlamer
