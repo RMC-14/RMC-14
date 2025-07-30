@@ -180,7 +180,7 @@ public sealed class XenoDevourSystem : EntitySystem
             return;
 
         if (!HasComp<UsableWhileDevouredComponent>(args.Target) && (!_container.TryGetContainingContainer(ent.Owner, out var container) ||
-            !HasComp<XenoDevourComponent>(container.Owner)))
+            !HasComp<XenoDevourComponent>(container.Owner) || args.Target != container.Owner))
         {
             args.Cancelled = true;
             return;
