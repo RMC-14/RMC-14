@@ -1001,6 +1001,9 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (slot.ContainedEntities.Count > 0)
             return;
 
+        var ev = new DropShipAttachmentInsertedEvent(contained);
+        RaiseLocalEvent(slot.Owner, ref ev);
+
         _container.Insert(contained, slot);
         SyncHands((user, user.Comp));
     }
@@ -1048,6 +1051,9 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (TryComp(contained, out DropshipUtilityComponent? utilityComp))
             utilityComp.AttachmentPoint = null;
 
+        var ev = new DropShipAttachmentDetachedEvent(contained);
+        RaiseLocalEvent(slot.Owner, ref ev);
+
         _container.Remove(contained, slot);
 
         PickUp((user, user.Comp), contained);
@@ -1085,3 +1091,9 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct DropShipAttachmentInsertedEvent(EntityUid Inserted);
+
+[ByRefEvent]
+public record struct DropShipAttachmentDetachedEvent(EntityUid Detached);

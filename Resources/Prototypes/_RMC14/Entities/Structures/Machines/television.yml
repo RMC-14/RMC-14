@@ -38,7 +38,8 @@
       enum.RMCCameraUiKey.Key:
         type: RMCCameraBui
   - type: RMCCameraComputer
-    id: RMCTelevision
+    protoIds:
+    - RMCTelevision
     title: rmc-television-title
   - type: Machine
     board: RMCCircuitboardTelevision
@@ -91,7 +92,8 @@
       enum.RMCCameraUiKey.Key:
         type: RMCCameraBui
   - type: RMCCameraComputer
-    id: RMCTelevision
+    protoIds:
+    - RMCTelevision
     title: rmc-television-title
   - type: Machine
     board: RMCCircuitboardTelevision

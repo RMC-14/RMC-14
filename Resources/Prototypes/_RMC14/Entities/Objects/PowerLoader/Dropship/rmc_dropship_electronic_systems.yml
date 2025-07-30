@@ -66,3 +66,6 @@
   - type: DropshipFabricatorPrintable
     category: Equipment
     cost: 50
+  - type: CameraSignalGranter
+    protoIds:
+    - RMCSurveillanceCameraLandingZone
