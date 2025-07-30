@@ -12,7 +12,7 @@
         - type: StationNameSetup
           mapNameTemplate: 'WEYA Haurchefant'
         - type: StationJobs
-          availableJobs: {}
+          availableJobs:
             # Command
             CMPMCForceCommandPVE: [1, 1]
 

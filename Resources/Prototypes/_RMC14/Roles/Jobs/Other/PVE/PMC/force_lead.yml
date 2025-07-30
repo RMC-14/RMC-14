@@ -12,6 +12,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  - SquadLeader
   spawnMenuRoleName: WEYA PMC Force Lead (PVE)
   special:
   - !type:AddComponentSpecial

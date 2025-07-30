@@ -20,7 +20,7 @@
   table: !type:AllSelector
     children:
     - id: ArmorHelmetPMCGunner
-    - id: RMCSmartGun
+    - id: RMCSmartGunPVE
     - id: RMCPowerCellSmartgun
     - id: CMArmorM4PMCSmartGunHarness
     - id: RMCBeltSmartGunOperatorPistolFilled

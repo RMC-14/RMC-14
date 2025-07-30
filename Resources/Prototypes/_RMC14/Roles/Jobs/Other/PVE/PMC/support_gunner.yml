@@ -12,6 +12,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  - SmartGunOperator
   spawnMenuRoleName: WEYA PMC Support Gunner (PVE)
   special:
   - !type:AddComponentSpecial
