@@ -15,7 +15,6 @@
       visible: false
     - state: lid_closed
       map: [ lid ]
-  - type: Icon
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
@@ -40,8 +39,6 @@
   name: M42A2 shotgun case
   description: A heavy case for storing an M42A2 pump-action shotgun, an Armat Battlefield Systems modern take on an all-time classic.
   components:
-  - type: Icon
-    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
   - type: Storage
@@ -74,8 +71,6 @@
   name: M5SPR battle rifle case
   description: A large case for storing an M5SPR, a modified UNMC battle rifle equipped with HV-P Rounds.
   components:
-  - type: Icon
-    sprite: _RMC14/Objects/Storage/PVE_Cases/rifle.rsi
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/rifle.rsi
   - type: Storage
@@ -112,8 +107,6 @@
   name: UN 571-C Sentry Gun case
   description: A gun case containing the UA 571-C sentry unit and a spare drum.
   components:
-  - type: Icon
-    sprite: _RMC14/Objects/Storage/PVE_Cases/sentry.rsi
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/sentry.rsi
   - type: Storage
@@ -143,8 +136,6 @@
   name: M34 fuel canister case
   description: A heavy case containing six fuel canisters for the M34 incinerator unit.
   components:
-  - type: Icon
-    sprite: _RMC14/Objects/Storage/PVE_Cases/flamer_fuel.rsi
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/flamer_fuel.rsi
     layers:
@@ -223,8 +214,6 @@
   name: motion detectors case
   description: A case containing four individual handheld motion detectors.
   components:
-  - type: Icon
-    sprite: _RMC14/Objects/Storage/PVE_Cases/md.rsi
   - type: Sprite
     sprite: _RMC14/Objects/Storage/PVE_Cases/md.rsi
     layers:

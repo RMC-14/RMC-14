@@ -43,7 +43,7 @@
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCPMCGunnerPVE
+    job_id: CMPMCGunnerPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: pmc_spawn
@@ -51,7 +51,7 @@
 - type: startingGear
   id: RMCJobPMCGunnerPVE
   equipment:
-    id: CMPMCGunnerPVE
+    id: RMCIDCardPMC
 
 - type: playTimeTracker
   id: CMJobPMCGunnerPVE
