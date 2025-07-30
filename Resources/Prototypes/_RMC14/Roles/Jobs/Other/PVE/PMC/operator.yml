@@ -3,7 +3,7 @@
   id: CMPMCOperatorPVE
   name: rmc-job-name-pmc-standard
   description: rmc-ghost-role-information-pmc-description
-  playTimeTracker: CMJobPMCOperatorPVE
+  playTimeTracker: CMJobPMCOperativePVE
   ranks:
     RMCRankWeYaOperator: []
   startingGear: RMCJobPMCOperatorPVE
@@ -40,7 +40,7 @@
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCPMCOperatorPVE
+    job_id: CMPMCOperatorPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: pmc_spawn

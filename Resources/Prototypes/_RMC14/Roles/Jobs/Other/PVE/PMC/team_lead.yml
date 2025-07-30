@@ -46,7 +46,7 @@
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCPMCTeamLeadPVE
+    job_id: CMPMCTeamLeadPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: pmc_spawn

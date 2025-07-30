@@ -51,7 +51,7 @@
 - type: startingGear
   id: RMCJobPMCGunnerPVE
   equipment:
-    id: RMCIDCardPMC
+    id: CMPMCGunnerPVE
 
 - type: playTimeTracker
   id: CMJobPMCGunnerPVE
