@@ -58,6 +58,7 @@
       skills:
         all:
           RMCSkillMedical: 2
+  - type: RMCStorageEjectHand
   - type: StoreAfterFailedInteract
 
 - type: entity
@@ -265,6 +266,9 @@
     whitelist:
       tags:
       - RMCAmmoBox
+      components:
+      - EmptySandbag
+      - FullSandbag
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null

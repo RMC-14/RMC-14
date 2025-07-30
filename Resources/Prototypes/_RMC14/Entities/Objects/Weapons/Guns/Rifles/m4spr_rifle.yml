@@ -82,6 +82,7 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 1.12, 0.0
@@ -177,6 +178,14 @@
     proto: CMCartridgeRifle10x24mmAP
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: CMMagazineRifleM4SPRAP
+  id: RMCMagazineRifleM4SPRAPEmpty
+  suffix: AP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
 
 - type: entity
   parent: CMMagazineRifleM4SPR

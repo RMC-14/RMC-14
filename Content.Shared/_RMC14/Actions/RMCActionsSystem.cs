@@ -1,12 +1,15 @@
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
-using Content.Shared.FixedPoint;
+using Content.Shared.Interaction;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Actions;
 
 public sealed class RMCActionsSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     private EntityQuery<ActionSharedCooldownComponent> _actionSharedCooldownQuery;
 
@@ -17,11 +20,12 @@ public sealed class RMCActionsSystem : EntitySystem
         SubscribeLocalEvent<ActionSharedCooldownComponent, ActionPerformedEvent>(OnSharedCooldownPerformed);
 
         SubscribeLocalEvent<ActionCooldownComponent, RMCActionUseEvent>(OnCooldownUse);
-        
-        SubscribeLocalEvent<InstantActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
-        SubscribeLocalEvent<EntityTargetActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
-        SubscribeLocalEvent<WorldTargetActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
-        SubscribeLocalEvent<EntityWorldTargetActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
+
+        SubscribeLocalEvent<ActionInRangeUnobstructedComponent, RMCActionUseAttemptEvent>(OnInRangeUnobstructedUseAttempt);
+
+        SubscribeLocalEvent<ActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
+
+        SubscribeAllEvent<RMCMissedTargetActionEvent>(OnMissedTargetAction);
     }
 
     private void OnSharedCooldownPerformed(Entity<ActionSharedCooldownComponent> ent, ref ActionPerformedEvent args)
@@ -50,7 +54,7 @@ public sealed class RMCActionsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Enable all events that have a shared cooldown with the provided action 
+    /// Enable all events that have a shared cooldown with the provided action
     /// </summary>
     public void EnableSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer)
     {
@@ -58,7 +62,7 @@ public sealed class RMCActionsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Disable all events that have a shared cooldown with the provided action 
+    /// Disable all events that have a shared cooldown with the provided action
     /// </summary>
     public void DisableSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer)
     {
@@ -66,7 +70,7 @@ public sealed class RMCActionsSystem : EntitySystem
     }
 
     /// <summary>
-    /// Sets the enabled status of all events that have a shared cooldown with the provided action 
+    /// Sets the enabled status of all events that have a shared cooldown with the provided action
     /// </summary>
     private void SetStatusOfSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer, bool newStatus)
     {
@@ -82,18 +86,17 @@ public sealed class RMCActionsSystem : EntitySystem
                 continue;
 
             // Same ID or primary ID found in subset of other action's ids
-            if (!((shared.Id != null && shared.Id == action.Comp.Id) ||
-                (action.Comp.Id != null && shared.Ids.Contains(action.Comp.Id.Value))))
+            if (!(shared.Id != null && shared.Id == action.Comp.Id || action.Comp.Id != null &&
+                  (shared.Ids.Contains(action.Comp.Id.Value) || shared.ActiveIds.Contains(action.Comp.Id.Value))))
             {
                 continue;
             }
 
-            comp.Enabled = newStatus;
-            Dirty(actionId, comp);
+            _actions.SetEnabled((actionId, comp), newStatus);
         }
     }
 
-    private void OnReducedUseDelayEvent<T>(EntityUid uid, T component, ActionReducedUseDelayEvent args) where T : BaseActionComponent
+    private void OnReducedUseDelayEvent(EntityUid uid, ActionComponent component, ActionReducedUseDelayEvent args)
     {
         if (!TryComp(uid, out ActionReducedUseDelayComponent? comp))
             return;
@@ -105,17 +108,14 @@ public sealed class RMCActionsSystem : EntitySystem
 
         if (TryComp(uid, out ActionSharedCooldownComponent? shared))
         {
-            if (comp.UseDelayBase == null)
-                comp.UseDelayBase = shared.Cooldown;
+            comp.UseDelayBase ??= shared.Cooldown;
 
             RefreshSharedUseDelay((uid, comp), shared);
             return;
         }
 
         // Should be fine to only set this once as the base use delay should remain constant
-        if (comp.UseDelayBase == null)
-            comp.UseDelayBase = component.UseDelay;
-
+        comp.UseDelayBase ??= component.UseDelay;
         RefreshUseDelay((uid, comp));
     }
 
@@ -143,28 +143,97 @@ public sealed class RMCActionsSystem : EntitySystem
 
     private void OnCooldownUse(Entity<ActionCooldownComponent> ent, ref RMCActionUseEvent args)
     {
-        _actions.SetIfBiggerCooldown(ent, ent.Comp.Cooldown);
+        _actions.SetIfBiggerCooldown(ent.Owner, ent.Comp.Cooldown);
     }
 
-    public bool CanUseActionPopup(EntityUid user, EntityUid action)
+    private void OnMissedTargetAction(RMCMissedTargetActionEvent args)
     {
-        var ev = new RMCActionUseAttemptEvent(user);
+        var action = GetEntity(args.Action);
+
+        if (!TryComp(action, out RMCCooldownOnMissComponent? cooldown))
+            return;
+
+        _actions.SetIfBiggerCooldown(action, cooldown.MissCooldown);
+    }
+
+    private void OnInRangeUnobstructedUseAttempt(Entity<ActionInRangeUnobstructedComponent> ent, ref RMCActionUseAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (args.Target is not { } target)
+            return;
+
+        if (!_interaction.InRangeUnobstructed(ent.Owner, target, ent.Comp.Range))
+            args.Cancelled = true;
+    }
+
+    public bool CanUseActionPopup(EntityUid user, EntityUid action, EntityUid? target = null)
+    {
+        var ev = new RMCActionUseAttemptEvent(user, target);
         RaiseLocalEvent(action, ref ev);
+
         return !ev.Cancelled;
     }
 
-    public void ActionUsed(EntityUid user, EntityUid action)
+    private void ActionUsed(EntityUid user, EntityUid action)
     {
         var ev = new RMCActionUseEvent(user);
         RaiseLocalEvent(action, ref ev);
     }
 
-    public bool TryUseAction(EntityUid user, EntityUid action)
+    public bool TryUseAction(EntityUid user, EntityUid action, EntityUid target)
     {
-        if (!CanUseActionPopup(user, action))
+        if (!CanUseActionPopup(user, action, target))
             return false;
 
         ActionUsed(user, action);
         return true;
+    }
+
+    public bool TryUseAction(InstantActionEvent action)
+    {
+        if (!CanUseActionPopup(action.Performer, action.Action))
+            return false;
+
+        ActionUsed(action.Performer, action.Action);
+        return true;
+    }
+
+    public bool TryUseAction(EntityTargetActionEvent action)
+    {
+        if (!CanUseActionPopup(action.Performer, action.Action, action.Target))
+            return false;
+
+        ActionUsed(action.Performer, action.Action);
+        return true;
+    }
+
+    public bool TryUseAction(WorldTargetActionEvent action)
+    {
+        if (!CanUseActionPopup(action.Performer, action.Action))
+            return false;
+
+        ActionUsed(action.Performer, action.Action);
+        return true;
+    }
+
+    public IEnumerable<Entity<ActionComponent>> GetActionsWithEvent<T>(EntityUid user) where T : BaseActionEvent
+    {
+        foreach (var action in _actions.GetActions(user))
+        {
+            if (_actions.GetEvent(action) is T)
+                yield return action;
+        }
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCMissedTargetActionEvent : EntityEventArgs
+{
+    public readonly NetEntity Action;
+    public RMCMissedTargetActionEvent(NetEntity actionId)
+    {
+        Action = actionId;
     }
 }

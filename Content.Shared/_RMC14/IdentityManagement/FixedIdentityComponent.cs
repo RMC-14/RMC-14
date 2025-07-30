@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.IdentityManagement;
 public sealed partial class FixedIdentityComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public string? Name;
+    public LocId? Name;
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist? Whitelist;

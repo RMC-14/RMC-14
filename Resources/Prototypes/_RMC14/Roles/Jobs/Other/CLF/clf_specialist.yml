@@ -1,0 +1,101 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCCLFSpecialist
+  name: rmc-clf-specialist
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: RMCJobCLFSpecialist
+  ranks:
+    RMCRankCLFRebel: [ ]
+  startingGear: RMCGearCLFSpecialist
+  icon: RMCJobIconCLFSpecialist
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillMedical: 1
+        RMCSkillCqc: 1
+        RMCSkillEngineer: 1
+        RMCSkillLeadership: 1
+        RMCSkillEndurance: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MarineOrders
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-specialist
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCLFSpecialist
+  name: clf ghost role specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCLFSpecialist
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCLFSpecialist
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-clf-specialist
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFSpecialist
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadCLF
+
+- type: startingGear
+  id: RMCGearCLFSpecialist
+  equipment:
+    head: RMCHeadMilitiaBucket
+    mask: RMCM5Bayonet # TODO RMC14
+    ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesM4SPRBattleSight
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitiaHauberk
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesBrown
+    id: RMCIDCardCLFSpecialist
+    belt: CMM77BeltFilled
+    back: RMCSatchelLightpack
+    suitstorage: RMCWeaponMar50LMG
+    pocket1: RMCPouchExplosiveFilledC4SPP
+    pocket2: RMCPouchFirstAidERT
+  inhand:
+  - RMCWeaponLauncherDisposable
+  - RMCEarmuffs
+  storage:
+    back:
+    - RMCFlashlight
+    - CMFirstAidKitFilled
+    - CMCrowbar
+    - CMMRE
+    - RMCRangefinder
+    - RMCGrenadeIED
+    - RMCGrenadeIED
+
+- type: playTimeTracker
+  id: RMCJobCLFSpecialist
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFSpecialist
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_spec

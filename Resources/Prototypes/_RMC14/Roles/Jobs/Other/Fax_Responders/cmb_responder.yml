@@ -1,0 +1,70 @@
+- type: job
+  parent: RMCJobRibbonBase
+  id: CMCMBResponder
+  name: rmc-job-name-cmb-responder
+  description: rmc-job-description-cmb-responder
+  playTimeTracker: CMJobCMBResponder
+  ranks:
+    RMCRankCMBDeputy: []
+  startingGear: RMCGearCMBResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+  hasIcon: false
+  hidden: true
+
+- type: startingGear
+  id: RMCGearCMBResponder
+  equipment:
+    jumpsuit: RMCSwatLeaderCMBUniform
+    outerClothing: RMCCoatBureauMarshal
+    shoes: RMCShoesLaceup
+    head: RMCHeadCapBureau
+    id: RMCIDCardCMBResponder
+    ears: RMCHeadsetDistressBureau
+    back: CMSatchel
+    belt: CMClipboard
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardCMBResponder
+  name: CMB Communications Officer ID card
+  description: Issued to the fax operators of CMB Regional Command. Represents a commitment to upholding the law.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: PresetIdCard
+    job: CMCMBResponder
+
+- type: playTimeTracker
+  id: CMJobCMBResponder
+
+

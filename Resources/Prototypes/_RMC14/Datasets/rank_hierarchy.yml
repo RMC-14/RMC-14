@@ -1,0 +1,21 @@
+- type: dataset
+  id: RMCMarineRankHierarchy
+  values:
+  - "RMCRankPrivate"
+  - "RMCRankPrivateFirstClass"
+  - "RMCRankLanceCorporal"
+  - "RMCRankCorporal"
+  - "RMCRankSergeant"
+  - "RMCRankStaffSergeant"
+  - "RMCRankGunnerySergeant"
+  - "RMCRankMasterSergeant"
+  - "RMCRankFirstSergeant"
+  - "RMCRankMasterGunnerySergeant"
+  - "RMCRankSecondLT"
+  - "RMCRankFirstLT"
+  - "RMCRankCaptain"
+  - "RMCRankMajor"
+  - "RMCRankLieutenantColonel"
+  - "RMCRankColonel"
+  - "RMCRankBrigadierGeneral"
+  - "RMCRankMajorGeneral"

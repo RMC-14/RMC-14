@@ -1,16 +1,9 @@
 - type: entity
-  name: M5-ATL
-  parent: [BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder]
-  id: RMCWeaponLauncherM5ATL
-  description: "The M5 Anti-Tank Launcher is a powerful anti-armor infantry weapon, commonly fielded by the UNMC. Used to take out light-tanks and enemy structures, the M5-ATL is a dangerous weapon with a variety of combat uses, depending on the loaded ammunition, and is capable of firing both shells and rocket-propelled grenades.\n\nThis one is missing its smart optics completely, and seems to be damaged, greatly limiting its range..."
+  parent: [BaseWeaponLauncher, CMBaseWeaponGun]
+  id: RMCBaseWeaponLauncher
+  abstract: true
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5spec.rsi
-    layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5spec.rsi
     quickEquip: true
     slots:
     - suitStorage
@@ -31,12 +24,8 @@
     proto: RMCRocket84mm
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Cock/m5_ammo.ogg
-  - type: GunUserWhitelist
-    whitelist:
-      components:
-      - DemoSpecWhitelist
   - type: Corrodible
-    isCorrodible: false
+    isCorrodible: true
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: Wieldable
@@ -57,6 +46,41 @@
   - type: WieldDelay
     baseDelay: 1.2
     preventFiring: true
+  - type: IgnorePredictionHide
+  - type: GunIgnorePrediction
+  - type: AssistedReloadWeapon
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
+
+- type: entity
+  parent: [RMCBaseWeaponLauncher, RMCBaseAttachableHolder]
+  name: M5-ATL
+  id: RMCWeaponLauncherM5ATL
+  description: "The M5 Anti-Tank Launcher is a powerful anti-armor infantry weapon, commonly fielded by the UNMC. Used to take out light-tanks and enemy structures, the M5-ATL is a dangerous weapon with a variety of combat uses, depending on the loaded ammunition, and is capable of firing both shells and rocket-propelled grenades.\n\nThis one is missing its smart optics completely, and seems to be damaged, greatly limiting its range..."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_inhands.rsi
+    layers:
+      - state: base
+        sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_icon.rsi
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_icon.rsi
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_inhands.rsi
+  - type: Gun
+    fireRate: 0.83
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - DemoSpecWhitelist
+  - type: Corrodible
+    isCorrodible: false
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
@@ -65,14 +89,7 @@
           - RMCAttachmentMagneticHarness
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-rail: -0.057, 0.162
-  - type: IgnorePredictionHide
-  - type: GunIgnorePrediction
-  - type: AssistedReloadWeapon
-  - type: WieldedCrosshair
-    rsi:
-      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
-      state: all
+      rmc-aslot-rail: 0.447, 0.122
 
 # 84mm HE
 - type: entity
@@ -205,11 +222,8 @@
     intensitySlope: 5
     totalIntensity: 35
     maxTileBreak: 0
-  - type: StunOnCollide
-    # This only works for AP rockets because it's supposed to have a hardcoded 6 second stun.
-    # Almost every other stun in the future should use some kind of configurable and resistable system instead.
-    stunAmount: 6
-    knockdownAmount: 6
+  - type: RMCKnockOutOnCollide # Hardcoded 6 second stun, different from explosions.
+    paralyzeTime: 6
   - type: IgnorePredictionHide
   - type: RMCProjectileAccuracy
     accuracy: 125

@@ -34,9 +34,9 @@
         amount: 4
       - id: CMBeltUtility
         amount: 4
-      - id: ClothingEyesGlassesMeson
+      - id: RMCWeldingGoggles
         amount: 4
-      - id: ClothingHeadHatWelding
+      - id: RMCHelmetWelding
         amount: 4
       - id: RMCEngineerKit
         amount: 2
@@ -163,7 +163,7 @@
       entries:
       - id: Igniter
         amount: 8
-      - id: TimerTrigger
+      - id: RMCTimerTrigger
         amount: 4
       - id: ProximitySensor
         amount: 4

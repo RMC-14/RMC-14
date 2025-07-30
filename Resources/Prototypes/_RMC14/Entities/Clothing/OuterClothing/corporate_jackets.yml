@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBaseJacket
   id: RMCJacketCorporateBlack
   name: black suit jacket
@@ -52,3 +52,80 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_ivy_jacket.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/corporate_ivy_jacket.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaBrownVest
+  name: WeYa brown vest
+  description: A brown puffer vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_brown_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_brown_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaBlueVest
+  name: WeYa blue vest
+  description: A blue puffer vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_blue_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_blue_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaRedVest
+  name: WeYa red vest
+  description: A red puffer vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_red_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_red_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaWhiteVest
+  name: WeYa white vest
+  description: A white puffer vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_white_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Corporate/weya_white_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCVestTan
+  name: tan vest
+  description: A casual tan vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tan_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tan_vest.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCWeYaFurCoat
+  name: WeYa fur coat
+  description: "An old, unmarked fur coat once issued to corporate liaisons stationed in harsh climates. It has clearly changed hands many times — the fabric is worn, it carries a distinct smell, and any manufacturer tags have long since faded. A faint corporate insignia remains, stitched above a yellowing label that simply reads: \"Dry clean only.\""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cl_fur_coat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cl_fur_coat.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCVestBrown
+  name: brown vest
+  description: A casual tan vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi

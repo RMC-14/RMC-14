@@ -11,7 +11,7 @@
     melee: 20
     bullet: 20
     bio: 20
-    explosionArmor: 15
+    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: medium
   - type: ClothingSpeedModifier
@@ -32,8 +32,7 @@
   id: RMCArmorM3MediumVariants
   name: M3 pattern marine armor
   description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/jungle.rsi
@@ -139,7 +138,6 @@
   - type: CMArmor
     melee: 25
     bio: 25
-    explosionArmor: 20
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/jungle.rsi
@@ -176,13 +174,14 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/urban.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m3-eod-pattern-heavy-armor
 
 - type: entity
   id: RMCArmorM3HeavyVariants
   name: M3-EOD pattern heavy armor
   description: A heavier version of the standard M3 pattern armor, the armor is primarily designed to withstand ballistic, explosive, and internal damage, with the drawback of increased bulk and thus reduced movement speed, alongside little additional protection from standard blunt force impacts and biological threats.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/jungle.rsi
@@ -335,7 +334,6 @@
   - type: CMArmor
     bullet: 30
     bio: 20
-    explosionArmor: 15
   - type: SmartGunArmor
   - type: Storage
     maxItemSize: Small
@@ -360,7 +358,6 @@
   - type: CMArmor
     bullet: 30
     bio: 20
-    explosionArmor: 15
   - type: SmartGunArmor
   - type: Storage
     maxItemSize: Small
@@ -384,6 +381,7 @@
     explosionArmor: 40
   - type: Corrodible
     isCorrodible: false
+  - type: RMCGrantLeapProtection
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/jungle.rsi
@@ -429,7 +427,7 @@
     melee: 15
     bullet: 15
     bio: 15
-    explosionArmor: 20
+    explosionArmor: 15
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier
@@ -443,8 +441,7 @@
   id: RMCArmorM3LightVariants
   name: M3-L pattern light armor
   description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices durability for more speed.
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/jungle.rsi
@@ -547,6 +544,8 @@
   name: press body armor
   description: Body armor used by war correspondents in battles and wars across the universe.
   components:
+  - type: RMCBulkyArmor
+    isBulky: false
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
   - type: ItemCamouflage # this is needed, otherwise it looks like M3MediumArmor
@@ -619,10 +618,10 @@
     camouflageVariations: { }
 
 - type: entity
-  parent: CMArmorM3Medium
+  parent: CMArmorM3Light
   id: CMArmorM3VLSynth
-  name: M3A1 Synthetic Utility Vest
-  description: This variant of the ubiquitous M3 pattern vest has been extensively modified, providing no protection in exchange for maximum mobility and added storage. Synthetic programming compliant.
+  name: M3A1 synthetic utility vest
+  description: This variant of the ubiquitous M3 pattern vest has been extensively modified to become superlight, providing zero protection in exchange for maximum mobility and added storage. Compliant will all synthetic armor regulations.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/jungle.rsi
@@ -736,6 +735,17 @@
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: snpr-armor
 
+- type: entity
+  parent: CMArmorM45
+  id: RMCArmorUDEPForecon
+  name: UDEP thermal poncho # TODO id lock
+  description: UDEP or the Ultra Diffusive Environmental Poncho is a camouflaged rain-cover worn to protect against the elements and chemical spills. It's commonly treated with an infrared absorbing coating, making a marine almost invisible in the rain. Favoured by UNMC specialists for its comfort and practicality.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/forecon.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 # Smart Gun
 - type: entity
   parent: [ RMCAllowSuitStorageClothingSmartgunner, CMArmorM3Medium ]
@@ -749,8 +759,6 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
-  - type: CMArmor
-    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier
@@ -779,7 +787,6 @@
     melee: 25
     bullet: 20
     bio: 15
-    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier
@@ -828,3 +835,5 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/io/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/io/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/io/urban.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-armor-xm4-pattern-intel-armor

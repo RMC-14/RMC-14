@@ -1,0 +1,20 @@
+<Document>
+  #Eggsac, Tier 2
+  <GuideEntityEmbed Entity="RMCXenoCarrierEggsac"/>
+  ##Playing as a Eggsac
+  You have given up your ability to store parasites. You can store 12 eggs, produce eggs with your eggsac, place 4 eggs off hive weeds that decay slower if you are near, and your pheromones have been strengthened.
+
+  Eggsac Carriers are specialised for egg production and can keep the hive supplied when queen isn't making eggs
+
+  Your planted eggs are also unique as they can now be placed on regular weeds, however, they will decay if you move away from them. You can use these to make egg traps that hosts may walk into or help Oppressors by placing eggs near where they are going to hook.
+
+  ##Abilities:
+  - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependent on caste and does not stack with pheromones of the same type.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones"/>
+  - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantWeeds"/>
+  - [bold]Retrieve Egg[/bold]: Retrieves a egg once the ability is used
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoRetrieveEgg"/>
+  - [bold]Generate Eggs[/bold]: Produces eggs over time with a passive plasma consumption
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoGenerateEggs"/>
+</Document>

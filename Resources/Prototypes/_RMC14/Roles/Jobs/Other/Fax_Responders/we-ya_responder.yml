@@ -1,0 +1,69 @@
+- type: job
+  parent: RMCJobRibbonBase
+  id: CMWeYaresponder
+  name: rmc-job-name-weya-responder
+  description: rmc-job-description-weya-responder
+  playTimeTracker: CMJobWeYaResponder
+  ranks:
+    RMCRankWeYaExecutiveSpecialist: []
+  startingGear: RMCGearWeYaResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: WEYA Communications Executive
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+  hasIcon: false
+  hidden: true
+
+- type: startingGear
+  id: RMCGearWeYaResponder
+  equipment:
+    ears: RMCHeadsetDistressPMCDirector
+    back: CMSatchel
+    belt: CMClipboard
+    head: ArmorHelmetPMC
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCJacketCorporateFormal
+    shoes: RMCShoesLaceup
+    id: RMCIDCardWeYaResponder
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardWeYaResponder
+  name: We-Ya Communications Executive ID card
+  description: A fancy, faux gold plated ID card. One of many given to Weston-Yamada's army of fax operators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: PresetIdCard
+    job: CMWeYaresponder
+
+- type: playTimeTracker
+  id: CMJobWeYaResponder

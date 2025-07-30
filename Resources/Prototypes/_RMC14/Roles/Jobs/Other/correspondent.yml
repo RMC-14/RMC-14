@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: RMCJobRibbonBase
   id: CMCorrespondent
   name: cm-job-name-correspondent
   description: cm-job-description-correspondent
@@ -16,16 +16,11 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCorrespondent
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: correspondent
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_civillian
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCUserBulkyArmorIncapable
     - type: Skills
       skills:
         RMCSkillFirearms: 0

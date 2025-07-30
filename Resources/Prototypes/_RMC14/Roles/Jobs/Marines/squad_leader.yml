@@ -32,14 +32,12 @@
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
+  marineAuthorityLevel: 2
   accessGroups:
   - SquadLeader
   overwatchSortPriority: -6
   overwatchShowName: true
   overwatchRoleName: Squad Leader
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: leader
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -73,6 +71,7 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: leader
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearSquadLeader

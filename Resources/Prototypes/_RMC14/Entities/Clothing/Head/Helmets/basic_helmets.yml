@@ -24,11 +24,12 @@
         - RMCFlask
         - CMScalpel
         - Figurine
+        - CassettePlayer
+        - CassetteTape
         tags:
-#       - TODO RMC14 cards
+        #       - TODO RMC14 cards
         - Slice
-#       - TODO RMC14 glasses (eyewear)
-#       - TODO RMC14 walkman and casettes
+        #       - TODO RMC14 glasses (eyewear)
         - Pen
         - Crayon
         - RMCHandful
@@ -62,13 +63,14 @@
       - Figurine
       - Matchbox
       - HelmetAccessory
+      - CassettePlayer
+      - CassetteTape
       tags:
       - CigPack
       - Cigarette
-#      - TODO RMC14 cards
+      #      - TODO RMC14 cards
       - Slice
-#      - TODO RMC14 glasses (eyewear)
-#      - TODO RMC14 walkman and casettes
+      #      - TODO RMC14 glasses (eyewear)
       - Pen
       - Crayon
       - RMCHandful
@@ -84,7 +86,7 @@
       - Xeno
   - type: Appearance
   - type: HelmetAccessoryHolder
-
+    isHat: false
 - type: entity
   parent: RMCHelmetBase
   id: RMCMarineHelmetBase
@@ -106,13 +108,22 @@
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: sql-helmet
   - type: CycleableVisor
+    offIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: sight_up
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
 
 - type: entity
   id: RMCFoldableHelmetBase
   abstract: true
   components:
   - type: Foldable
-    unfoldVerbText : "rmc-untuck"
+    unfoldVerbText: "rmc-untuck"
     foldVerbText: "rmc-tuck"
     canFoldInsideContainer: true
   - type: FoldableClothing
@@ -120,5 +131,5 @@
     - Hair
     - HeadTop
     - HeadSide
-    unfoldedHideLayers: []
+    unfoldedHideLayers: [ ]
   - type: HideLayerClothing

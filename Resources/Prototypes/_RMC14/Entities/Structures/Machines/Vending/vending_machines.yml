@@ -113,6 +113,7 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
+  - type: XenoCrusherChargable #TODO RMC14 tip over
 
 - type: vendingMachineInventory
   id: CMVendomat
@@ -165,6 +166,14 @@
     RMCFoodSnackCHUNK: 6
     RMCFoodSnackBarcaridine: 6
 
+- type: entity
+  parent: CMVendorSnack
+  id: RMCVendorSnackSPP
+  name: Surplus Ration Vendor
+  description: A vending machine full of surplus rations, viewed as the luxury of ready-avaliable SPP rations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/spp_snack.rsi
 
 # Cola
 - type: entity
@@ -204,6 +213,24 @@
     # NON BOBDA
     CMDrinkCanCola: 10
 
+- type: entity
+  parent: CMVendorCola
+  id: RMCVendorNutriCoDrink
+  name: NutriCo AutoDrink
+  description: A NutriCo AutoDrink dispenser, capable of making a variety of drinks to consume from a mixture of water and instant flavoring juice and caffeine additives.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/drink.rsi
+    offset: 0, 0.5
+
+- type: entity
+  parent: CMVendorCola
+  id: RMCVendorColaSPP
+  name: Xuanshi Drinks
+  description: A drinks vendors from a long forgotten branch of the SPP, selling rationed water mixed with thrice diluted 5% flavourments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/spp_cola.rsi
 
 # Cigarettes
 - type: entity
@@ -226,6 +253,14 @@
     RMCLighter: 25
     RMCZippo: 10
 
+- type: entity
+  parent: CMVendorCigs
+  id: RMCVendorCigsSPP
+  name: Komandir Cigarettes Vendor
+  description: A state-owned cigarette vendor. Its drab colour was chosen to discourage purchases, but its existence is an admittance to the necessity for such machines to exist in the first place.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/spp_cigs.rsi
 
 # Security
 - type: entity
@@ -323,7 +358,7 @@
     CMShellShotgunBeanbag: 20
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2
-    #MedkitRadiationFilled: 1 #firstaid rad 1
+    RMCRadiationAidKitFilled: 1
     # Crew Monitor
 
 
@@ -381,28 +416,31 @@
     EggplantSeeds: 3
     PotatoSeeds: 3
     SoybeanSeeds: 3
-    #SunflowerSeeds: 2
+    SunflowerSeeds: 2
     TomatoSeeds: 3
     WheatSeeds: 3
+    OatSeeds: 3
     AppleSeeds: 3
     PoppySeeds: 3
     SugarcaneSeeds: 3
-    #PeanutSeeds: 3
-    #WhitebeetSeeds: 3
+    PeanutSeeds: 3
+    WhiteBeetSeeds: 3
     WatermelonSeeds: 3
     LimeSeeds: 3
     LemonSeeds: 3
     OrangeSeeds: 3
-    # GrassSeeds: 3
+    PineappleSeeds: 3
+    GrassSeeds: 3
     CocoaSeeds: 3
-    # PlumpSeeds: 2
+    PlumpSeeds: 2
     CabbageSeeds: 3
     GrapeSeeds: 3
     PumpkinSeeds: 3
-    # CherrySeed: 3
+    CherrySeeds: 3
     RiceSeeds: 3
     GarlicSeeds: 3
     OnionSeeds: 3
+    OnionRedSeeds: 3
 
 
 # Dinnerware
@@ -523,7 +561,7 @@
     CMDrinkCanBoda: 30
 
 
-# Ingridients
+# Ingredients
 - type: entity
   parent: CMVendorDinnerware
   id: CMVendorIngredients
@@ -539,9 +577,13 @@
       entries:
       - id: FoodContainerEgg
         amount: 12
+      - id: FoodMeatChicken
+        amount: 24
       - id: FoodMeatFish
         amount: 12
       - id: FoodMeat
+        amount: 24
+      - id: FoodMeatBacon
         amount: 24
       - id: DrinkMilkCarton
         amount: 24
@@ -588,7 +630,8 @@
         amount: 12
       - id: FoodTomato
         amount: 12
-    # TODO RMC14 Whitebeet 12
+      - id: FoodWhiteBeet
+        amount: 12
       - id: FoodOnion
         amount: 12
       - id: FoodOnionRed
@@ -601,3 +644,17 @@
         amount: 12
       - id: FoodCondimentBottleVinegar
         amount: 12
+      - id: ReagentContainerCornmeal
+        amount: 12
+      - id: ReagentContainerMayo
+        amount: 12
+
+# PVE
+
+- type: entity
+  parent: CMVendorSec
+  id: RMCVendorSecTSEPA
+  suffix: TSEPA
+  components:
+  - type: AccessReader
+    access: [["RMCAccessTSEPA"]]

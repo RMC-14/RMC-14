@@ -16,13 +16,13 @@ public abstract class SharedCMChatSystem : EntitySystem
 
     private void OnMarineGetPrefix(Entity<MarineComponent> ent, ref ChatGetPrefixEvent args)
     {
-        if (args.Channel?.ID == SharedChatSystem.HivemindChannel)
+        if (args.Channel?.ID == SharedChatSystem.HivemindChannel.Id)
             args.Channel = null;
     }
 
     private void OnXenoGetPrefix(Entity<XenoComponent> ent, ref ChatGetPrefixEvent args)
     {
-        if (args.Channel?.ID != SharedChatSystem.HivemindChannel)
+        if (args.Channel?.ID != SharedChatSystem.HivemindChannel.Id)
             args.Channel = null;
     }
 

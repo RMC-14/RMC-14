@@ -1,0 +1,79 @@
+# Corporate Layer
+- type: job
+  parent: CMJobBase
+  id: RMCWeYaLawyer
+  name: rmc-job-title-corporate-executive-specialist
+  description: rmc-ghost-role-information-corporate-executive-specialist-description
+  playTimeTracker: RMCJobWeYaLawyer
+  ranks:
+    RMCRankWeYaLegalSpecialist: []
+  startingGear: RMCJobWeYaLawyer
+  icon: CMJobIconLiaison
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: WEYA Corporate Executive Specialist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 0
+        RMCSkillFirearms: 0
+        RMCSkillEndurance: 0
+        RMCSkillVehicles: 1
+    - type: RMCTrackable
+
+- type: playTimeTracker
+  id: RMCJobWeYaLawyer
+
+- type: startingGear
+  id: RMCJobWeYaLawyer
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressLawyerWeYa
+    jumpsuit: CMJumpsuitLiaisonBlue
+    # TODO RMC14 "neck: blue tie"
+    outerClothing: RMCJacketCorporateBlue
+    back: CMSatchel
+    shoes: RMCShoesLaceup
+    # TODO RMC14 "pocket1: tape recorder"
+    # TODO RMC14 "pocket2: blue notepad"
+  storage:
+    back:
+    - CMClipboard
+    - CMPenClicky
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidWeYaLawyer
+  name: weya corporate ghost role lawyer
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaLawyer
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCWeYaLawyer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-information-corporate-executive-specialist-name
+    description: rmc-ghost-role-information-corporate-executive-specialist-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCWeYaLawyer
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial

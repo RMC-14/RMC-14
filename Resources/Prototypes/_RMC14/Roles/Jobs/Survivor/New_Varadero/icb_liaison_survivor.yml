@@ -1,0 +1,65 @@
+- type: job
+  parent: CMSurvivorCorporate
+  id: CMSurvivorICB
+  name: cm-job-name-survivor-icb
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorICB
+  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
+  ranks:
+    RMCRankICBCorporateLiaison: []
+  startingGear: RMCGearSurvivorICB
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetICB
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-icb
+  useLoadoutOfJob: CMSurvivorCorporate
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorICB
+  equipment:
+    ears: RMCHeadsetDistressBureauDamaged
+    jumpsuit: CMJumpsuitLiaisonBlack
+    head: RMCHardhatWhite
+    outerClothing: RMCHazardVestBlack
+    eyes: RMCSunglasses
+  inhand:
+  - CMClipboard
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorICB
+  name: survivor icb spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorICB
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCorporate
+  id: RMCGearSurvivorPresetICB
+  name: icb colonist preset
+  categories: [ HideSpawnMenu ]

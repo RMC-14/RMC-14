@@ -37,6 +37,9 @@
   - CMAccessSpecPrep # weapons specialist
   - CMAccessSquadLeaderPrep # squad leader access
   - CMAccessMarineRifleman # this access is used for the basic vendor, which only the rifleman can use.
+  - RMCAccessTSEPAInspector # tsepa inspector
+  - RMCAccessTSEPABrig # tsepa brig / senior constables
+  - RMCAccessTSEPA # tsepa
 
 # all ship-side access that is not CO
 # SEA uses this.
@@ -78,8 +81,21 @@
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
 
+- type: accessGroup
+  id: SO
+  tags:
+  - CMAccessCommand
+  - CMAccessDropship
+  - CMAccessMedical
+
 # Corp access, probably not needed
 - type: accessGroup
   id: Corp
   tags:
   - CMAccessCorp
+
+# Synth access
+- type: accessGroup
+  id: Synth
+  tags:
+  - RMCAccessSynth

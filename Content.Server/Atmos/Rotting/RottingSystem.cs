@@ -1,8 +1,8 @@
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Body.Components;
 using Content.Server.Temperature.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Rotting;
+using Content.Shared.Body.Events;
 using Content.Shared.Damage;
 using Robust.Server.Containers;
 using Robust.Shared.Physics.Components;
@@ -43,6 +43,10 @@ public sealed class RottingSystem : SharedRottingSystem
     {
         if (args.Handled)
             return;
+
+        if (TryComp<PerishableComponent>(uid, out var perishable) && perishable.IgnoreTemperature)
+            return;
+
         args.Handled = component.CurrentTemperature < Atmospherics.T0C + 0.85f;
     }
 

@@ -1,0 +1,92 @@
+﻿- type: job
+  parent: RMCSurvivorForeconBase
+  id: RMCSurvivorForeconCommander
+  name: rmc-job-name-forecon-commander
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCommanderForecon
+  ranks:
+    RMCRankMajor: []
+  accessGroups:
+  - ColonistEngi
+  - ShipMasterAccess # TODO RMC14 here until we have the id console
+  startingGear: RMCGearForeconCommander
+  spawnMenuRoleName: FORECON Commander (Survivor)
+  supervisors: cm-job-supervisors-marine-high-command
+  roleWeight: 0.25
+  icon: "RMCJobIconForeconCommander"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillExecution: 1
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSmartGun: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon-co
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: co
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetForeconNoPistol
+    - type: SpotterWhitelist
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearForeconBase
+  id: RMCGearForeconCommander
+  equipment:
+    belt: RMCMatebaBeltForeconFilled
+    outerClothing: RMCJacketWindbreakerForeconFilled
+    back: RMCSatchelMarineForeconSurvivorCommanderFill
+    id: CMIDCardGold
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointForeconCommander
+  name: FORECON Commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorForeconCommander
+  - type: Sprite
+    state: co_spawn
+
+- type: playTimeTracker
+  id: RMCJobSurvivorCommanderForecon
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconForeconCommander
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_vo

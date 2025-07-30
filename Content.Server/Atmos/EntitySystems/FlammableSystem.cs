@@ -1,7 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
 using Content.Server.Damage.Components;
-using Content.Server.IgnitionSource;
 using Content.Server.Stunnable;
 using Content.Server.Temperature.Systems;
 using Content.Shared._RMC14.Atmos;
@@ -13,8 +12,8 @@ using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Database;
-using Content.Shared.IgnitionSource;
 using Content.Shared.FixedPoint;
+using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Physics;
@@ -30,6 +29,7 @@ using Robust.Server.Audio;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using IgniteOnCollideComponent = Content.Server.Atmos.Components.IgniteOnCollideComponent;
 
@@ -82,6 +82,7 @@ namespace Content.Server.Atmos.EntitySystems
             SubscribeLocalEvent<FlammableComponent, TileFireEvent>(OnTileFire);
             SubscribeLocalEvent<FlammableComponent, RejuvenateEvent>(OnRejuvenate);
             SubscribeLocalEvent<FlammableComponent, ResistFireAlertEvent>(OnResistFireAlert);
+            Subs.SubscribeWithRelay<FlammableComponent, ExtinguishEvent>(OnExtinguishEvent);
 
             SubscribeLocalEvent<IgniteOnCollideComponent, StartCollideEvent>(IgniteOnCollide);
             SubscribeLocalEvent<IgniteOnCollideComponent, LandEvent>(OnIgniteLand);
@@ -94,6 +95,14 @@ namespace Content.Server.Atmos.EntitySystems
 
             // RMC14
             _steppingOnFireQuery = GetEntityQuery<SteppingOnFireComponent>();
+        }
+
+        private void OnExtinguishEvent(Entity<FlammableComponent> ent, ref ExtinguishEvent args)
+        {
+            // You know I'm really not sure if having AdjustFireStacks *after* Extinguish,
+            // but I'm just moving this code, not questioning it.
+            Extinguish(ent, ent.Comp);
+            AdjustFireStacks(ent, args.FireStacksAdjustment, ent.Comp);
         }
 
         private void OnMeleeHit(EntityUid uid, IgniteOnMeleeHitComponent component, MeleeHitEvent args)
@@ -121,7 +130,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             var otherEnt = args.OtherEntity;
 
-            if (!EntityManager.TryGetComponent(otherEnt, out FlammableComponent? flammable))
+            if (!TryComp(otherEnt, out FlammableComponent? flammable))
                 return;
 
             //Only ignite when the colliding fixture is projectile or ignition.
@@ -148,7 +157,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             _fixture.TryCreateFixture(uid, component.FlammableCollisionShape, component.FlammableFixtureID, hard: false,
-                collisionMask: (int) CollisionGroup.FullTileLayer, body: body);
+                collisionMask: (int)CollisionGroup.FullTileLayer, body: body);
         }
 
         private void OnInteractUsing(EntityUid uid, FlammableComponent flammable, InteractUsingEvent args)
@@ -270,6 +279,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             Resist(ent, ent);
             _xenoSpit.Resist(ent.Owner);
+            RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(ent.Owner)), Filter.Pvs(ent.Owner));
             args.Handled = true;
         }
 
@@ -285,7 +295,7 @@ namespace Content.Server.Atmos.EntitySystems
             // This is intended so that matches & candles can re-use code for un-shaded layers on in-hand sprites.
             // However, this could cause conflicts if something is ACTUALLY both a toggleable light and flammable.
             // if that ever happens, then fire visuals will need to implement their own in-hand sprite management.
-            _appearance.SetData(uid, ToggleableLightVisuals.Enabled, flammable.OnFire, appearance);
+            _appearance.SetData(uid, ToggleableVisuals.Enabled, flammable.OnFire, appearance);
         }
 
         public void AdjustFireStacks(EntityUid uid, float relativeFireStacks, FlammableComponent? flammable = null, bool ignite = false)
@@ -323,7 +333,7 @@ namespace Content.Server.Atmos.EntitySystems
 
                 if (flammable.OnFire)
                 {
-                    var ev = new RMCIgniteEvent();
+                    var ev = new IgnitedEvent();
                     RaiseLocalEvent(uid, ref ev);
                 }
                 else
@@ -351,6 +361,9 @@ namespace Content.Server.Atmos.EntitySystems
 
             _ignitionSourceSystem.SetIgnited(uid, false);
 
+            var extinguished = new ExtinguishedEvent();
+            RaiseLocalEvent(uid, ref extinguished);
+
             UpdateAppearance(uid, flammable);
 
             var ev = new RMCExtinguishedEvent();
@@ -376,8 +389,8 @@ namespace Content.Server.Atmos.EntitySystems
                     _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on fire by {ToPrettyString(ignitionSource):actor}");
                 flammable.OnFire = true;
 
-                var ev = new RMCIgniteEvent();
-                RaiseLocalEvent(uid, ref ev);
+                var extinguished = new IgnitedEvent();
+                RaiseLocalEvent(uid, ref extinguished);
             }
 
             Dirty(uid, flammable);
@@ -398,7 +411,7 @@ namespace Content.Server.Atmos.EntitySystems
             if (args.DamageDelta.DamageDict.TryGetValue("Heat", out FixedPoint2 value))
             {
                 // Make sure the value is greater than the threshold
-                if(value <= component.Threshold)
+                if (value <= component.Threshold)
                     return;
 
                 // Ignite that sucker
@@ -425,7 +438,7 @@ namespace Content.Server.Atmos.EntitySystems
             _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
-            uid.SpawnTimer(2000, () =>
+            uid.SpawnTimer(1000, () =>
             {
                 flammable.Resisting = false;
                 Dirty(uid, flammable);
@@ -497,19 +510,35 @@ namespace Content.Server.Atmos.EntitySystems
                     // let the thing on fire handle it
                     RaiseLocalEvent(uid, ref ev);
                     // and whatever it's wearing
+                    // and whatever it's wearing
                     if (_inventoryQuery.TryComp(uid, out var inv))
                         _inventory.RelayEvent((uid, inv), ref ev);
 
                     DamageSpecifier? damage;
                     if (HasComp<XenoComponent>(uid))
+                    {
                         damage = flammable.Intensity * (flammable.FireStacks / flammable.Duration * 0.2 + 0.8) * ev.Multiplier * flammable.Damage / 2;
+                    }
                     else
+                    {
                         damage = flammable.Intensity / 5f * flammable.Damage;
+                    }
 
                     if (_steppingOnFireQuery.HasComp(uid))
                         damage *= 2;
-
-                    _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                    // Check fire immunity for DOT damage
+                    if (TryComp<RMCImmuneToFireTileDamageComponent>(uid, out var immunity))
+                    {
+                        // If entity has fire immunity, only deal damage if they have the bypass component
+                        if (HasComp<RMCFireBypassActiveComponent>(uid) && damage != null)
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                    }
+                    else
+                    {
+                        // No immunity, deal damage normally
+                        if (damage != null)
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                    }
 
                     AdjustFireStacks(uid, flammable.Resisting ? flammable.ResistStacks : -0.25f, flammable, flammable.OnFire);
                 }

@@ -41,6 +41,7 @@
         - HighImpassable
         - LowImpassable
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -115,11 +116,18 @@
     value: 0.1
   - type: MobCollision
     minimumSpeedModifier: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-runner
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoRunnerBase
   id: CMXenoRunner
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRunner
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -189,7 +197,6 @@
     - ActionXenoAcidAcider
     - ActionXenoForTheHive
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
@@ -252,6 +259,4 @@
       whitelist:
         components:
         - XenoHeavy
-
-
-
+  - type: XenoHidden

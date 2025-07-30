@@ -22,14 +22,12 @@
   dummyStartingGear: CMGearCombatTechEquipped
   icon: "CMJobIconCombatTech"
   joinNotifyCrew: false
+  marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - CombatTech
   overwatchSortPriority: -1
   overwatchRoleName: Combat Technicians
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: engi
   roleWeight: 1
   special:
   - !type:AddComponentSpecial

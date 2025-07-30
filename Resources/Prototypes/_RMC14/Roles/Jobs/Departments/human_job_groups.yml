@@ -1,7 +1,6 @@
 ﻿- type: entity
   id: CMDepartmentsHuman
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: DepartmentGroup
     name: role-timer-human-roles
@@ -19,8 +18,7 @@
 
 - type: entity
   id: CMJobsMedical
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-medical-roles
@@ -34,8 +32,7 @@
 
 - type: entity
   id: CMJobsEngineering
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-engineering-roles
@@ -48,8 +45,7 @@
 
 - type: entity
   id: CMJobsDropship
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: JobGroup
     name: role-timer-dropship-roles
@@ -58,3 +54,201 @@
     - CMDropshipCrewChief
     - CMPilotDropship
     - CMPilotGunship
+
+- type: entity
+  id: CMJobsDropshipPilot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-dropship-pilot-roles
+    color: "#C38312"
+    jobs:
+    - CMPilotDropship
+    - CMPilotGunship
+
+- type: entity
+  id: RMCJobsCorporate
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-corporate-roles
+    color: "#78ec0b"
+    jobs:
+    - CMLiaison
+    - CMSurvivorCorporate
+    - CMSurvivorICB
+
+# Survivor roles. At this time pointless, but will probably be used in the future.
+
+- type: entity
+  id: RMCJobsSurvivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-survivor-roles
+    color: "#00b7ff"
+    jobs:
+    # Base Survivors
+    - RMCJobSyntheticColony
+    - CMSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorScientist
+    - CMSurvivorCorporate
+    - RMCSurvivorCommandingOfficer
+    # Chance's Claim
+    - RMCSurvivorForeconCommander
+    - RMCSurvivorForeconSupportTech
+    - RMCSurvivorForeconSquadLeader
+    - RMCSurvivorForeconSniper
+    - RMCSurvivorForeconSmartgunOperator
+    - RMCSurvivorForeconMarksman
+    - RMCSurvivorForeconRifleman
+    # New Varadero
+    - CMSurvivorBeachBum
+    - CMSurvivorMiner
+    - CMSurvivorTechnician
+    - CMSurvivorCargoTechnician
+    - CMSurvivorMedicalTechnician
+    - CMSurvivorUNPeacekeeper
+    - CMSurvivorICB
+    - RMCSurvivorCommanderNewVaradero
+    # Sorokyne Strata
+    - CMJobSurvivorInfrastructureEngineer
+    - CMJobSurvivorReactorTechnician
+    - CMJobSurvivorArmedPoliceOfficer
+    - CMJobSurvivorArmyReservist
+    - CMJobSurvivorMoHDoctor
+    - CMJobSurvivorCECResearcher
+    - CMJobSurvivorSoroCivilian
+    - CMJobSurvivorFireProtectionSpecialist
+    - CMJobSurvivorSoroMiner
+    - CMJobSurvivorHalcyonDynamicsLiaison
+    # Hybrisa Prospera
+    - RMCSurvivorHybrisaCivilian
+    - RMCSurvivorHybrisaConstructionWorker
+    - RMCSurvivorHybrisaCorporateLiaison
+    - RMCSurvivorHybrisaCorporateSecurity
+    - RMCSurvivorHybrisaEngineer
+    - RMCSurvivorHybrisaEMTParamedic
+    - RMCSurvivorHybrisaFireProtectionSpecialist
+    - RMCSurvivorHybrisaGrindBarista
+    - RMCSurvivorHybrisaHeavyVehicleOperator
+    - RMCSurvivorHybrisaMaterialReprocessingTechnician
+    - RMCSurvivorHybrisaMedicalDoctor
+    - RMCSurvivorHybrisaOfficeWorker
+    - RMCSurvivorHybrisaCommercialPilot
+    - RMCSurvivorHybrisaPizzaGalaxy
+    - RMCSurvivorHybrisaTMCCMiner
+    - RMCSurvivorHybrisaTSEPAConstable
+    - RMCSurvivorHybrisaWeyamartEmployee
+    - RMCSurvivorHybrisaXenoarchaeologist
+    - RMCSurvivorHybrisaXenobiologist
+
+- type: entity
+  id: CMJobsSurvivorCivilian
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-civilian-survivor-roles
+    color: White
+    jobs:
+    - CMSurvivor
+    - CMSurvivorBeachBum
+    - CMSurvivorMiner
+    - CMJobSurvivorSoroCivilian
+    - CMJobSurvivorSoroMiner
+    - CMJobSurvivorFireProtectionSpecialist
+    - RMCSurvivorHybrisaCivilian
+    - RMCSurvivorHybrisaFireProtectionSpecialist
+    - RMCSurvivorHybrisaGrindBarista
+    - RMCSurvivorHybrisaMaterialReprocessingTechnician
+    - RMCSurvivorHybrisaOfficeWorker
+    - RMCSurvivorHybrisaPizzaGalaxy
+    - RMCSurvivorHybrisaTMCCMiner
+    - RMCSurvivorHybrisaWeyamartEmployee
+
+- type: entity
+  id: CMJobsSurvivorEngineer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-engineer-survivor-roles
+    color: "#A66300"
+    jobs:
+    - CMSurvivorEngineer
+    - CMSurvivorTechnician
+    - CMSurvivorCargoTechnician
+    - CMJobSurvivorReactorTechnician
+    - CMJobSurvivorInfrastructureEngineer
+    - RMCSurvivorHybrisaConstructionWorker
+    - RMCSurvivorHybrisaEngineer
+    - RMCSurvivorHybrisaHeavyVehicleOperator
+
+- type: entity
+  id: CMJobsSurvivorMedical
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-medical-survivor-roles
+    color: "#A66300"
+    jobs:
+    - CMSurvivorDoctor
+    - CMSurvivorMedicalTechnician
+    - CMJobSurvivorMoHDoctor
+    - RMCSurvivorHybrisaMedicalDoctor
+    - RMCSurvivorHybrisaEMTParamedic
+
+- type: entity
+  id: CMJobsSurvivorCorporate
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-corporate-survivor-roles
+    color: White
+    jobs:
+    - CMSurvivorCorporate
+    - CMSurvivorICB
+    - CMJobSurvivorHalcyonDynamicsLiaison
+    - RMCSurvivorHybrisaCorporateLiaison
+    - RMCSurvivorHybrisaCommercialPilot
+
+- type: entity
+  id: CMJobsSurvivorSecurity
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-security-survivor-roles
+    color: White
+    jobs:
+    - CMSurvivorSecurity
+    - CMSurvivorUNPeacekeeper
+    - CMJobSurvivorArmedPoliceOfficer
+    - CMJobSurvivorArmyReservist
+    - RMCSurvivorHybrisaCorporateSecurity
+    - RMCSurvivorHybrisaTSEPAConstable
+
+- type: entity
+  id: CMJobsSurvivorScientist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-security-scientist-roles
+    color: White
+    jobs:
+    - CMSurvivorScientist
+    - CMJobSurvivorCECResearcher
+    - RMCSurvivorHybrisaXenoarchaeologist
+    - RMCSurvivorHybrisaXenobiologist
+
+- type: entity
+  id: CMJobsSurvivorCommander
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-commander-survivor-roles
+    color: White
+    jobs:
+    - RMCSurvivorForeconCommander
+    - RMCSurvivorCommanderNewVaradero
