@@ -357,7 +357,7 @@ public sealed class XenoDevourSystem : EntitySystem
         if (attemptEv.Cancelled)
             return;
 
-        var targetName = Identity.Name(xeno, EntityManager, xeno);
+        var targetName = Identity.Entity(target, EntityManager, xeno);
         var container = _container.EnsureContainer<ContainerSlot>(xeno, xeno.Comp.DevourContainerId);
         if (!_container.Insert(target, container))
         {
@@ -379,7 +379,7 @@ public sealed class XenoDevourSystem : EntitySystem
             if (session.AttachedEntity is not { } recipient)
                 continue;
 
-            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", xeno.Owner), ("target", targetName)), xeno, recipient, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", Identity.Entity(xeno, EntityManager)), ("target", targetName)), xeno, recipient, PopupType.MediumCaution);
         }
 
         var ev = new XenoDevouredEvent(target, xeno.Owner);
@@ -436,15 +436,6 @@ public sealed class XenoDevourSystem : EntitySystem
             return;
 
         args.Handled = true;
-    }
-    private bool IsHeldByDevoured(EntityUid item)
-    {
-        return _container.TryGetContainingContainer((item, null), out var marine) &&
-               _devouredQuery.HasComp(marine.Owner) &&
-               _hands.IsHolding(marine.Owner, item) &&
-               _container.TryGetContainingContainer((marine.Owner, null), out var xeno) &&
-               _xenoDevourQuery.TryComp(xeno.Owner, out var devour) &&
-               xeno.ID == devour.DevourContainerId;
     }
 
     private bool CanDevour(EntityUid xeno, EntityUid victim, [NotNullWhen(true)] out XenoDevourComponent? devour, bool popup = false)
