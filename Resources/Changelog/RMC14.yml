@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed being able to place sandbags in dropships
-    type: Fix
-  id: 1589
-  time: '2025-04-18T06:00:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6175
-- author: Vermidia
-  changes:
   - message: Fixed burrow not taking at least 1 second to unburrow at a minimum.
     type: Fix
   - message: Fixed tremor cooldown being too high (45 > 30)
@@ -4884,5 +4877,13 @@
   id: 2089
   time: '2025-07-25T22:49:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7246
+- author: DummeHytteOst
+  changes:
+  - message: Fixed USCM being mentioned in a few places, and changed them correctly
+      to UNMC.
+    type: Fix
+  id: 2090
+  time: '2025-07-30T22:30:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7329
 Name: RMC14
 Order: -1
