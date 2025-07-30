@@ -5,6 +5,7 @@
   abstract: true
   name: base equipment case
   description: A gun case.
+  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -102,6 +103,37 @@
         whitelist:
           tags:
           - RMCWeaponRifleM5SPR
+
+# Sentry
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseSentry
+  name: UN 571-C Sentry Gun case
+  description: A gun case containing the UA 571-C sentry unit and a spare drum.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/sentry.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/sentry.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - RMCSentry
+      - RMCMagazineSentry
+  - type: StorageFill
+    contents:
+    - id: RMCSentry
+    - id: RMCMagazineSentry
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCSentry
 
 # Misc
 
