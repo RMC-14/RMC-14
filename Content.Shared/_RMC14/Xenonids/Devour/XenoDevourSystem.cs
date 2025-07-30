@@ -236,6 +236,9 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void OnDevouredMoveInput(Entity<DevouredComponent> devoured, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         DevouredHandleBreakout(devoured);
     }
 
