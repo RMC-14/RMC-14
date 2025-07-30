@@ -1,14 +1,48 @@
-# M42A2
+
 - type: entity
-  parent: RMCGunCaseBase
+  parent: RMCCaseBase
+  id: RMCBasePVEEquipmentCase
+  abstract: true
+  name: base equipment case
+  description: A loadout case.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
+    layers:
+    - state: base
+    - state: gun
+      map: [ gun ]
+      visible: false
+    - state: lid
+      map: [ lid ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+  - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseM42A2
   name: M42A2 shotgun case
   description: A gun case containing the M42A2 shotgun. It does come loaded, but you'll still have to find ammunition as you go.
   components:
   - type: Storage
-    maxItemSize: Huge
+    maxItemSize: Ginormous
     grid:
-    - 0,0,1,1
+    - 0,0,7,1
     whitelist:
       tags:
       - RMCWeaponShotgunM42A2
@@ -22,3 +56,9 @@
     - id: CMShellShotgunBuckshot
     - id: CMShellShotgunBuckshot
     - id: CMShellShotgunBuckshot
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponShotgunM42A2
