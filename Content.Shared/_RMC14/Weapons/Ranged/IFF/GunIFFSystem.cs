@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
@@ -12,6 +13,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.IFF;
 public sealed class GunIFFSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     private EntityQuery<UserIFFComponent> _userIFFQuery;
@@ -47,11 +49,8 @@ public sealed class GunIFFSystem : EntitySystem
         if (args.Faction != null)
             return;
 
-        foreach (var (_, hand) in ent.Comp.Hands)
+        foreach (var held in _hands.EnumerateHeld((ent, ent)))
         {
-            if (hand.HeldEntity is not { } held)
-                continue;
-
             RaiseLocalEvent(held, ref args);
             if (args.Faction != null)
                 break;

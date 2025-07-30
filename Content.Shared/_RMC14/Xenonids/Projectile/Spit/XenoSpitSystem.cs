@@ -135,7 +135,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSpitAction(Entity<XenoSpitComponent> xeno, ref XenoSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         var ev = new XenoGetSpitProjectileEvent(xeno.Comp.ProjectileId);
@@ -143,7 +143,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             ev.Id,
             xeno.Comp.Sound,
@@ -159,12 +159,12 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSlowingSpitAction(Entity<XenoSlowingSpitComponent> xeno, ref XenoSlowingSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             xeno.Comp.ProjectileId,
             xeno.Comp.Sound,
@@ -177,12 +177,12 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoScatteredSpitAction(Entity<XenoScatteredSpitComponent> xeno, ref XenoScatteredSpitActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             xeno.Comp.PlasmaCost,
             xeno.Comp.ProjectileId,
             xeno.Comp.Sound,
@@ -292,10 +292,9 @@ public sealed class XenoSpitSystem : EntitySystem
             distance
         );
 
-        foreach (var (actionId, action) in _actions.GetActions(ent))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoAcidBallActionEvent>(ent))
         {
-            if (action.BaseEvent is XenoAcidBallActionEvent)
-                _actions.SetCooldown(actionId, ent.Comp.Cooldown);
+            _actions.SetCooldown(action.AsNullable(), ent.Comp.Cooldown);
         }
 
         if (!args.Handled)

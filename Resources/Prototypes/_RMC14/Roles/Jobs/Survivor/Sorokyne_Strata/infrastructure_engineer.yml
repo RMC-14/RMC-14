@@ -23,7 +23,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetInfrastructureEngineer
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -31,12 +30,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorEngineer
 
 - type: startingGear
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorInfrastructureEngineer
   equipment:
-    back: CMSatchelEngineer
+    back: CMSatchelEngineerSurvivorFill
     shoes: CMBootsBrownFilled
     head: RMCHardhatOrange
     outerClothing: RMCHazardVest
@@ -45,7 +45,6 @@
     pocket2: RMCWelderIndustrial
   storage:
     back:
-    - CMSheetMetal20
     - RMCMaskGasSPP
 
 - type: entity

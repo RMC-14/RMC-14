@@ -3,6 +3,11 @@
   id: CMJobBase
   isCM: true
   canBeAntag: false
+  medals:
+    Bronze: RMCMedalBronzeService
+    Silver: RMCMedalSilverService
+    Gold: RMCMedalGoldService
+    Platinum: RMCMedalPlatinumService
 
 - type: job
   abstract: true
@@ -50,3 +55,24 @@
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: queen_spawn
+
+# Misc
+- type: job
+  abstract: true
+  parent: CMJobBase
+  id: RMCJobRibbonBase
+  medals:
+    Bronze: RMCMedalRibbonWhiteService
+    Silver: RMCMedalRibbonYellowService
+    Gold: RMCMedalRibbonRedService
+    Platinum: RMCMedalRibbonBlueService
+
+- type: job
+  abstract: true
+  parent: CMJobBase
+  id: RMCJobNametagBase
+  medals:
+    Bronze: RMCMedalBronzeNametagService
+    Silver: RMCMedalSilverNametagService
+    Gold: RMCMedalGoldNametagService
+    Platinum: RMCMedalPlatinumNametagService

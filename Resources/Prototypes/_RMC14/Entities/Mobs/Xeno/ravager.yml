@@ -86,6 +86,7 @@
         mask:
         - MobMask
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -185,7 +186,7 @@
     thresholds:
       0: Alive
       590: Critical
-      730: Dead
+      690: Dead
   - type: CMArmor
     xenoArmor: 30
     explosionArmor: 80

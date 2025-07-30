@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseWeaponRifle
+  parent: RMCBaseWeaponRifleNoMagazineProvider
   name: XM88 Heavy Rifle
   id: WeaponRifleXM88
   description: An experimental man-portable anti-materiel rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
@@ -103,6 +103,8 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
       ballistic-ammo: !type:Container
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-xm-88-heavy-rifle # Mention Favela Wars lore analogue here
 
 - type: entity
   parent: BulletRifle10x24mm

@@ -72,6 +72,8 @@
   - type: Clickable
   - type: InteractionOutline
   - type: RequireProjectileTarget
+  - type: Corrodible
+    isCorrodible: false
 
 # Vehicles
 
