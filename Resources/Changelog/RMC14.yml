@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed burrow not taking at least 1 second to unburrow at a minimum.
-    type: Fix
-  - message: Fixed tremor cooldown being too high (45 > 30)
-    type: Fix
-  - message: Fixed burrow stunning too long on unburrow (4>3 seconds)
-    type: Fix
-  id: 1590
-  time: '2025-04-19T05:49:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6181
 - author: CyberTropic
   changes:
   - message: Added Sunsets to round start, and Sunrises to Marine Major.
@@ -4885,5 +4874,12 @@
   id: 2090
   time: '2025-07-30T22:30:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7329
+- author: MoonlightHollow
+  changes:
+  - message: ASO now has Research access and skill
+    type: Add
+  id: 2091
+  time: '2025-07-30T22:33:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7262
 Name: RMC14
 Order: -1
