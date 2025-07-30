@@ -36,7 +36,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         // _window.AnalyzeChemicalsLabel.Text = Loc.GetString("rmc-ui-intel-infinite-progress", ("current", tree.AnalyzeChemicals));
         _window.RescueSurvivorsLabel.Text = Loc.GetString("rmc-ui-intel-infinite-progress", ("current", tree.RescueSurvivors));
         _window.RecoverCorpsesLabel.Text = Loc.GetString("rmc-ui-intel-infinite-progress", ("current", tree.RecoverCorpses));
-        _window.ColonyCommunicationsLabel.Text = Loc.GetString("rmc-ui-intel-status-online", ("online", tree.ColonyCommunications));
+        _window.ColonyCommunicationsLabel.Text = Loc.GetString("rmc-ui-intel-colony-status", ("online", tree.ColonyCommunications));
         _window.ColonyPowerLabel.Text = Loc.GetString("rmc-ui-intel-colony-status", ("online", tree.ColonyPower));
 
         _window.CluesContainer.DisposeAllChildren();
