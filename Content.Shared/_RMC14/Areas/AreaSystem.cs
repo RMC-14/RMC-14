@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.GameStates;
@@ -241,6 +241,22 @@ public sealed class AreaSystem : EntitySystem
             return false;
 
         return area.Value.Comp.Lasing;
+    }
+
+    public bool CanMedevac(EntityCoordinates coordinates)
+    {
+        if (!TryGetArea(coordinates, out var area, out _))
+            return false;
+
+        return area.Value.Comp.Medevac;
+    }
+
+    public bool CanParadrop(EntityCoordinates coordinates)
+    {
+        if (!TryGetArea(coordinates, out var area, out _))
+            return false;
+
+        return area.Value.Comp.Paradropping;
     }
 
     private bool IsRoofed(EntityCoordinates coordinates, Predicate<Entity<RoofingEntityComponent>> predicate)

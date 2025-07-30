@@ -119,7 +119,7 @@ public sealed class AreaInfoSystem : EntitySystem
             ceilingLevel = 2;
             severityToUse = (short)3;
         }
-        else if (!_area.CanMortarPlacement(coordinates) || !_area.CanLase(coordinates) || !area.Value.Comp.Medevac)
+        else if (!_area.CanMortarPlacement(coordinates) || !_area.CanLase(coordinates) || !_area.CanMedevac(coordinates) || !_area.CanParadrop(coordinates))
         {
             ceilingLevel = 1;
             severityToUse = (short)2;
@@ -168,6 +168,11 @@ public sealed class AreaInfoSystem : EntitySystem
             allowedActions.Add("Casualty Evacuation");
         else
             restrictedActions.Add("Casualty Evacuation");
+
+        if (area.Value.Comp.Paradropping)
+            allowedActions.Add("Paradropping");
+        else
+            restrictedActions.Add("Paradropping");
 
         // Add special restrictions
         if (area.Value.Comp.NoTunnel)
