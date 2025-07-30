@@ -1,6 +1,6 @@
 - type: gameMap
   id: Haurchefant
-  mapName: "Weya Haurchefant"
+  mapName: "UNCSS Haurchefant"
   mapPath: /Maps/_RMC14/weya_haurchefant.yml
   minPlayers: 0
   maxRandomOffset: 0
@@ -10,7 +10,7 @@
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'WEYA Haurchefant'
+          mapNameTemplate: 'UNCSS Haurchefant'
         - type: StationJobs
           availableJobs:
             # Command
