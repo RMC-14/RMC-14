@@ -4,25 +4,23 @@
   id: RMCBasePVEEquipmentCase
   abstract: true
   name: base equipment case
-  description: A loadout case.
+  description: A gun case.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
     layers:
     - state: base
     - state: gun
       map: [ gun ]
       visible: false
-    - state: lid
+    - state: lid_closed
       map: [ lid ]
   - type: Icon
-    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
         lid:
-          True: { visible: false }
-          False: { visible: true }
+          True: { state: lid_open }
+          False: { state: lid_closed }
   - type: Storage
     maxItemSize: Ginormous
     grid:
@@ -37,8 +35,12 @@
   parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseM42A2
   name: M42A2 shotgun case
-  description: A gun case containing the M42A2 shotgun. It does come loaded, but you'll still have to find ammunition as you go.
+  description: A heavy case for storing an M42A2 pump-action shotgun, an Armat Battlefield Systems modern take on an all-time classic.
   components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
   - type: Storage
     maxItemSize: Ginormous
     grid:
@@ -62,3 +64,39 @@
         whitelist:
           tags:
           - RMCWeaponShotgunM42A2
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseM5SPR
+  name: M5SPR battle rifle case
+  description: A large case for storing an M5SPR, a modified UNMC battle rifle equipped with HV-P Rounds.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/rifle.rsi
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/rifle.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM5SPR
+      - CMMagazineRifleM4SPR
+      - CMMagazineRifleM4SPRAP
+      - CMMagazineRifleM4SPRExt
+      - RMCMagazineRifleM5SPRHVP
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM5SPR
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponRifleM5SPR
