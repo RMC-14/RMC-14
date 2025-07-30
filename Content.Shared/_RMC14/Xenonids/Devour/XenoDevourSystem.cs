@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.CombatMode;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
@@ -65,9 +65,12 @@ public sealed class XenoDevourSystem : EntitySystem
         _devouredQuery = GetEntityQuery<DevouredComponent>();
         _xenoDevourQuery = GetEntityQuery<XenoDevourComponent>();
 
+        SubscribeLocalEvent<ActionBlockIfDevouredComponent, RMCActionUseAttemptEvent>(OnDevouredActionUseAttempt);
+
         SubscribeLocalEvent<DevourableComponent, CanDropDraggedEvent>(OnDevourableCanDropDragged);
         SubscribeLocalEvent<DevourableComponent, DragDropDraggedEvent>(OnDevourableDragDropDragged);
         SubscribeLocalEvent<DevourableComponent, BeforeRangedInteractEvent>(OnDevourableBeforeRangedInteract);
+        SubscribeLocalEvent<DevourableComponent, ShouldHandleVirtualItemInteractEvent>(OnDevourableShouldHandle);
 
         SubscribeLocalEvent<DevouredComponent, ComponentStartup>(OnDevouredStartup);
         SubscribeLocalEvent<DevouredComponent, ComponentRemove>(OnDevouredRemove);
@@ -80,9 +83,11 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevouredComponent, PickupAttemptEvent>(OnDevouredPickupAttempt);
         SubscribeLocalEvent<DevouredComponent, IsEquippingAttemptEvent>(OnDevouredIsEquippingAttempt);
         SubscribeLocalEvent<DevouredComponent, IsUnequippingAttemptEvent>(OnDevouredIsUnequippingAttempt);
-        SubscribeLocalEvent<DevouredComponent, AttackAttemptEvent>(OnDevouredAttackAttempt);
+        SubscribeLocalEvent<DevouredComponent, RMCCombatModeInteractOverrideUserEvent>(OnDevouredTryAttack);
         SubscribeLocalEvent<DevouredComponent, ShotAttemptedEvent>(OnDevouredShotAttempted);
         SubscribeLocalEvent<DevouredComponent, MoveInputEvent>(OnDevouredMoveInput);
+
+        SubscribeLocalEvent<UsableWhileDevouredComponent, MeleeHitEvent>(UsuableByDevouredMeleeHit);
 
         SubscribeLocalEvent<XenoDevourComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
         SubscribeLocalEvent<XenoDevourComponent, ActivateInWorldEvent>(OnXenoActivate);
@@ -92,6 +97,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<XenoDevourComponent, EntityTerminatingEvent>(OnXenoTerminating);
         SubscribeLocalEvent<XenoDevourComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
         SubscribeLocalEvent<XenoDevourComponent, RMCCombatModeInteractOverrideUserEvent>(OnXenoCombatModeInteract);
+        SubscribeLocalEvent<XenoDevourComponent, InteractUsingEvent>(OnXenoDevouredInteractWith);
     }
 
     private void OnDevouredActionUseAttempt(Entity<ActionBlockIfDevouredComponent> ent, ref RMCActionUseAttemptEvent args)
@@ -170,14 +176,25 @@ public sealed class XenoDevourSystem : EntitySystem
     }
     private void OnDevouredInteractionAttempt(Entity<DevouredComponent> ent, ref InteractionAttemptEvent args)
     {
-        if (args.Target == null)
+        if (args.Target == null || !_container.TryGetContainingContainer(ent.Owner, out var container) ||
+            !HasComp<XenoDevourComponent>(container.Owner))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+    }
+
+    private void OnXenoDevouredInteractWith(Entity<XenoDevourComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.DevourContainerId, out var container))
             return;
 
-        if (_container.TryGetContainingContainer((ent, null), out var container) && args.Target == container.Owner)
-            DevouredHandleBreakout(ent);
+        if (!container.Contains(args.User) || !TryComp<DevouredComponent>(args.User, out var devoured))
+            return;
 
-        if (!HasComp<UsableWhileDevouredComponent>(args.Target))
-            args.Cancelled = true;
+        args.Handled = true;
+        DevouredHandleBreakout((args.User, devoured));
     }
 
     private void OnDevouredAttempt<T>(Entity<DevouredComponent> devoured, ref T args) where T : CancellableEntityEventArgs
@@ -211,11 +228,6 @@ public sealed class XenoDevourSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnDevouredAttackAttempt(Entity<DevouredComponent> devoured, ref AttackAttemptEvent args)
-    {
-        args.Cancel();
-    }
-
     private void OnDevouredShotAttempted(Entity<DevouredComponent> devoured, ref ShotAttemptedEvent args)
     {
         if (!HasComp<GunUsableWhileDevouredComponent>(args.Used))
@@ -224,30 +236,34 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void OnDevouredMoveInput(Entity<DevouredComponent> devoured, ref MoveInputEvent args)
     {
-        if (!args.HasDirectionalMovement || !_timing.IsFirstTimePredicted)
-            return;
-
         DevouredHandleBreakout(devoured);
     }
 
-    private void OnDevouredAttack(Entity<DevouredComponent> devoured, ref AttackEvent args)
+    private void OnDevouredTryAttack(Entity<DevouredComponent> devoured, ref RMCCombatModeInteractOverrideUserEvent args)
     {
-        DevouredHandleBreakout(devoured);
+        args.Handled = true;
+        args.CanInteract = true;
+    }
+
+    private void UsuableByDevouredMeleeHit(Entity<UsableWhileDevouredComponent> weapon, ref MeleeHitEvent args)
+    {
+        if (!TryComp<DevouredComponent>(args.User, out var devoured))
+            return;
+
+        args.Handled = true;
+        DevouredHandleBreakout((args.User, devoured));
     }
 
     private void DevouredHandleBreakout(Entity<DevouredComponent> devoured)
     {
-        if (_timing.CurTime < devoured.Comp.NextDevouredAttackTimeAllowed)
+        if (!_timing.IsFirstTimePredicted || _timing.CurTime < devoured.Comp.NextDevouredAttackTimeAllowed)
             return;
 
         if (HasComp<StunnedComponent>(devoured) || !_mobState.IsAlive(devoured))
             return;
 
-        if (_net.IsServer)
-        {
-            devoured.Comp.NextDevouredAttackTimeAllowed = _timing.CurTime + devoured.Comp.TimeBetweenStruggles;
-            Dirty(devoured);
-        }
+        devoured.Comp.NextDevouredAttackTimeAllowed = _timing.CurTime + devoured.Comp.TimeBetweenStruggles;
+        Dirty(devoured);
 
         //Sanity Check
         if (!_container.TryGetContainingContainer((devoured, null), out var container) ||
@@ -266,6 +282,10 @@ public sealed class XenoDevourSystem : EntitySystem
         //Do all melee weapon logic with our stuff - note it does not take into account melee multipliers - it just uses the damage from the item directly
         var weaponDamage = _meleeWeapon.GetDamage(weapon.Value, devoured) * usuable.DamageMult;
 
+        //Reset attack cooldown so we don't like, go crazy
+        melee.NextAttack = devoured.Comp.NextDevouredAttackTimeAllowed;
+        Dirty(weapon.Value, melee);
+
         var damage = _damage.TryChangeDamage(container.Owner, weaponDamage, true, false, origin: devoured, tool: weapon);
 
         _audio.PlayPredicted(melee.HitSound, container.Owner.ToCoordinates(), devoured);
@@ -281,7 +301,8 @@ public sealed class XenoDevourSystem : EntitySystem
                     LogImpact.Medium,
                     $"{ToPrettyString(devoured):actor} attacked while devoured by {ToPrettyString(container.Owner):subject} with {weapon} and dealt {damage.GetTotal():damage} damage");
 
-        //TODO RMC14 Gib chance on very low health based on remaining health.
+        //TODO RMC14 Gib chance on very low health based on remaining health, maybe. It was removed but it's part of cap rework sooooo
+        //shrug
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
