@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Dropship.AttachmentPoint;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedDropshipSystem), typeof(DropshipElectronicSystemSystem))]
+[Access(typeof(SharedDropshipSystem), typeof(SharedDropshipElectronicSystemSystem))]
 public sealed partial class DropshipElectronicSystemPointComponent : Component
 {
     [DataField, AutoNetworkedField]

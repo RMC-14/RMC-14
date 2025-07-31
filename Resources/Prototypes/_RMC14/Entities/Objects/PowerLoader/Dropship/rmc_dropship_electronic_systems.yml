@@ -49,6 +49,7 @@
   - type: DropshipFabricatorPrintable
     category: Equipment
     cost: 50
+  - type: DropshipSpotlight
 
 - type: entity
   parent: RMCDropshipAttachmentElectronicSystem

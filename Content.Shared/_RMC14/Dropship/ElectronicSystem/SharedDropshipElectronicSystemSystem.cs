@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Dropship.ElectronicSystem;
 
-public sealed class DropshipElectronicSystemSystem : EntitySystem
+public abstract class SharedDropshipElectronicSystemSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
@@ -44,22 +44,28 @@ public sealed class DropshipElectronicSystemSystem : EntitySystem
         }
     }
 
-    private void OnDropShipAttachmentInserted(Entity<DropshipElectronicSystemPointComponent> ent, ref DropShipAttachmentInsertedEvent args)
+    protected virtual void OnDropShipAttachmentInserted(Entity<DropshipElectronicSystemPointComponent> ent, ref DropShipAttachmentInsertedEvent args)
     {
         if (!_dropship.TryGetGridDropship(ent, out var dropship))
             return;
 
-        if (TryComp(args.Inserted, out CameraSignalGranterComponent?  signalGranter))
+        if (TryComp(args.Inserted, out CameraSignalGranterComponent? signalGranter))
             ModifyCameraSignals((args.Inserted, signalGranter), dropship);
     }
 
-    private void OnDropShipAttachmentDetached(Entity<DropshipElectronicSystemPointComponent> ent, ref DropShipAttachmentDetachedEvent args)
+    protected virtual void OnDropShipAttachmentDetached(Entity<DropshipElectronicSystemPointComponent> ent, ref DropShipAttachmentDetachedEvent args)
     {
         if (!_dropship.TryGetGridDropship(ent, out var dropship))
             return;
 
         if (TryComp(args.Detached, out CameraSignalGranterComponent?  signalGranter))
             ModifyCameraSignals((args.Detached, signalGranter), dropship, true);
+
+        if (TryComp(args.Detached, out DropshipSpotlightComponent? spotlight))
+        {
+            spotlight.Enabled = false;
+            Dirty(args.Detached, spotlight);
+        }
     }
 
     private void ModifyCameraSignals(Entity<CameraSignalGranterComponent> ent, Entity<DropshipComponent> dropship, bool remove = false)

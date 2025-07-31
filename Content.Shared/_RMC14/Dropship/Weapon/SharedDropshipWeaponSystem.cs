@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.ElectronicSystem;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Explosion;
@@ -74,6 +75,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerloader = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -86,6 +88,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
+    private const string SpotlightState = "spotlights_";
 
     public bool CasDebug { get; private set; }
     private readonly HashSet<Entity<DamageableComponent>> _damageables = new();
@@ -130,6 +133,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsChooseMedevacMsg>(OnWeaponsChooseMedevacMsg);
                 subs.Event<DropshipTerminalWeaponsChooseFultonMsg>(OnWeaponsChooseFultonMsg);
                 subs.Event<DropshipTerminalWeaponsChooseParaDropMsg>(OnWeaponsChooseParaDropMsg);
+                subs.Event<DropshipTerminalWeaponsChooseSpotlightMsg>(OnWeaponsChooseSpotlightMsg);
                 subs.Event<DropshipTerminalWeaponsFireMsg>(OnWeaponsFireMsg);
                 subs.Event<DropshipTerminalWeaponsNightVisionMsg>(OnWeaponsNightVisionMsg);
                 subs.Event<DropshipTerminalWeaponsExitMsg>(OnWeaponsExitMsg);
@@ -146,6 +150,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsFultonNextMsg>(OnWeaponsFultonNext);
                 subs.Event<DropshipTerminalWeaponsFultonSelectMsg>(OnWeaponsFultonSelect);
                 subs.Event<DropShipTerminalWeaponsParaDropTargetSelectMsg>(OnWeaponsParaDropSelect);
+                subs.Event<DropShipTerminalWeaponsSpotlightToggleMsg>(OnWeaponsSpotlightSelect);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
@@ -492,6 +497,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnWeaponsChooseParaDropMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseParaDropMsg args)
     {
         SetScreenUtility<RMCParaDropComponent>(ent, args.First, Paradrop);
+    }
+
+    private void OnWeaponsChooseSpotlightMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseSpotlightMsg args)
+    {
+        SetScreenUtility<DropshipSpotlightComponent>(ent, args.First, Spotlight, args.Slot);
     }
 
     private void OnWeaponsFireMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMsg args)
@@ -906,6 +916,26 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         {
             RemComp<ActiveParaDropComponent>(dropship);
         }
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnWeaponsSpotlightSelect(Entity<DropshipTerminalWeaponsComponent> ent,
+        ref DropShipTerminalWeaponsSpotlightToggleMsg args)
+    {
+        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
+            dropship.Comp.AttachmentPoints.Count == 0)
+            return;
+
+        if (!TryComp(selectedSystem, out DropshipSpotlightComponent? spotlight))
+            return;
+
+        var systemPoint = Transform(selectedSystem.Value).ParentUid;
+        _pointLight.SetEnabled(systemPoint, args.On);
+        _appearance.SetData(systemPoint, DropshipUtilityVisuals.State, args.On ? SpotlightState + "on" : SpotlightState + "off" );
+        spotlight.Enabled = args.On;
+
+        Dirty(ent);
         RefreshWeaponsUI(ent);
     }
 
@@ -1340,7 +1370,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         AddComp(target, targetComp, true);
     }
 
-    private void SetScreenUtility<T>(Entity<DropshipTerminalWeaponsComponent> ent, bool first, DropshipTerminalWeaponsScreen state) where T : IComponent
+    private void SetScreenUtility<T>(Entity<DropshipTerminalWeaponsComponent> ent, bool first, DropshipTerminalWeaponsScreen state, NetEntity? selected = null) where T : IComponent
     {
         if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
             dropship.Comp.AttachmentPoints.Count == 0)
@@ -1349,8 +1379,23 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         var hasUtility = false;
+        var hasElectronicSystem = false;
         foreach (var point in dropship.Comp.AttachmentPoints)
         {
+            if (TryComp(point, out DropshipElectronicSystemPointComponent? electronicSystemComp) &&
+                _container.TryGetContainer(point, electronicSystemComp.ContainerId, out var electronicSystemContainer) &&
+                electronicSystemContainer.ContainedEntities.Count > 0)
+            {
+                foreach (var contained in electronicSystemContainer.ContainedEntities)
+                {
+                    if (!HasComp<T>(contained))
+                        continue;
+
+                    hasElectronicSystem = true;
+                    break;
+                }
+            }
+
             if (!TryComp(point, out DropshipUtilityPointComponent? utilityComp) ||
                 !_container.TryGetContainer(point, utilityComp.UtilitySlotId, out var container) ||
                 container.ContainedEntities.Count == 0)
@@ -1368,11 +1413,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
         }
 
-        if (!hasUtility)
+        if (!hasUtility && !hasElectronicSystem)
             return;
 
         ref var screen = ref first ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
         screen.State = state;
+        ent.Comp.SelectedSystem = selected;
 
         Dirty(ent);
         RefreshWeaponsUI(ent);
