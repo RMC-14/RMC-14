@@ -227,7 +227,8 @@ public sealed partial class XenoSystem : EntitySystem
 
     private void OnXenoMeleeAttackAttempt(Entity<XenoComponent> xeno, ref MeleeAttackAttemptEvent args)
     {
-        if (!TryComp<XenoNestComponent>(GetEntity(args.Target), out var nest) || nest.Nested == null)
+        if (!TryComp<XenoNestComponent>(GetEntity(args.Target), out var nest) || nest.Nested == null
+            || !_hive.FromSameHive(xeno.Owner, GetEntity(args.Target)))
             return;
 
         var attacker = GetNetEntity(xeno);
