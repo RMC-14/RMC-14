@@ -585,6 +585,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
         _appearance.SetData(ammo, DropshipAmmoVisuals.Fill, ammo.Comp.Rounds);
+        _powerloader.SyncAppearance(Transform(weapon.Value).ParentUid);
         Dirty(ammo);
 
         _audio.PlayPvs(ammo.Comp.SoundCockpit, weapon.Value);
