@@ -69,3 +69,16 @@
         amount: 7
   - type: Sprite
     state: syringe
+
+- type: entity
+  name: box of beakers
+  parent: RMCBoxCardboard
+  id: RMCBoxBeaker
+  description: It's just an ordinary box.
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMBeaker
+        amount: 7
+  - type: Sprite
+    state: beaker

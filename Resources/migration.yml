@@ -1353,3 +1353,8 @@ RMCJumpsuitMarshal: RMCMarshalCMBUniform
 RMCM79Case: RMCM85A1Case
 CMWeaponLauncherM79: RMCWeaponLauncherM85A1
 RMCCrateM79: RMCCrateM85A1
+
+# 2025-07-30
+BoxBeaker: RMCBoxBeaker
+BoxPillCanister: RMCBoxPillCanister
+BoxSyringe: RMCBoxSyringe
