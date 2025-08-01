@@ -180,7 +180,7 @@
   parent: CMBodyBag
   id: RMCThermalTarpV2
   name: V2 reactive thermal tarp
-  description: A tarp carried by some USCM infantry. This updated tarp is capable of blending into its environment nearly flawlessly, given that it can properly collate data once deployed. The tarp is able to hide the wearer's heat signature.
+  description: A tarp carried by some UNMC infantry. This updated tarp is capable of blending into its environment nearly flawlessly, given that it can properly collate data once deployed. The tarp is able to hide the wearer's heat signature.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/bodybags.rsi

@@ -29,7 +29,7 @@
   parent: RMCGearSurvivorCorporate
   id: RMCGearSurvivorLV624CorporateLiaison
   equipment:
-    jumpsuit: CMJumpsuitLiaisonField # parity jumpsuit has Wey-Yu logo, so using liaison one
+    jumpsuit: CMJumpsuitLiaisonField
     eyes: RMCSunglasses
 
 - type: entity

@@ -1,5 +1,6 @@
 using Content.Server.Zombies;
 using Content.Server.Speech.Components;
+using Content.Server.Ghost.Roles.Components;
 using Content.Shared.Zombies;
 using Content.Shared.NPC.Systems;
 using Content.Shared._RMC14.NightVision;
@@ -26,6 +27,8 @@ public sealed partial class RMCZombieSystem : EntitySystem
         RemComp<ScoutWhitelistComponent>(target);
         RemComp<SniperWhitelistComponent>(target);
         RemComp<InfectableComponent>(target);
+        RemComp<GhostRoleComponent>(target);
+        RemComp<GhostTakeoverAvailableComponent>(target);
 
         EnsureComp<NightVisionComponent>(target);
         _faction.AddFaction(target, "RMCDumb");

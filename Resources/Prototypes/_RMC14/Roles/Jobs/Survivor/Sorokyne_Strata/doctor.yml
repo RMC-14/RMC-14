@@ -4,6 +4,8 @@
   name: rmc-job-name-survivor-moh-doctor
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorDoctor
+  ranks:
+    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorMoHDoctor
   accessGroups:
   - ColonistMedical
@@ -64,6 +66,11 @@
       - [ RMCPouchFirstAidInjectors ]
       - [ RMCPouchFirstResponderFill ]
       - [ RMCPouchMedkitFillAdvanced ]
+    -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
     -
       - [ RMCTieBlack ] # TODO RMC14 - System for random uniform accessories like randomStartingGear
       - [ RMCTie ]

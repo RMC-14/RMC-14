@@ -174,7 +174,18 @@
   - type: ItemSlots
     slots:
       gun_magazine:
+        name: Magazine
         startingItem: CMMagazineRifleM54C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
   - type: AttachableHolder
     slots:
       rmc-aslot-stock:
@@ -192,7 +203,18 @@
   - type: ItemSlots
     slots:
       gun_magazine:
+        name: Magazine
         startingItem: CMMagazineRifleM54C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
 
 - type: entity
   parent: RMCWeaponRifleM54CSemiStripped

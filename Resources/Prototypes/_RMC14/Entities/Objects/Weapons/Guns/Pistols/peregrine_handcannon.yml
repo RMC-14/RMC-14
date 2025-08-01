@@ -133,6 +133,13 @@
     tags:
     - Sidearm
     - RMCWeaponPistolHandcannonWyvern
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
 
 - type: entity
   parent: CMBaseMagazinePistol
