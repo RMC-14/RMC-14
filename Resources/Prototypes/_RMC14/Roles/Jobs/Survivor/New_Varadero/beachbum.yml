@@ -61,7 +61,7 @@
     contents:
     - id: RMCCigarettePackWeYaGold
     - id: RMCKitchenKnifeButcher
-    - id: CMDrinkCanBeerLite
+    - id: RMCBeerPack
 
 - type: entity
   parent: CMSpawnPointJobBase
