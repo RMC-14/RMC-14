@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleSSG45NoLock
   name: SSG-45 Assault Rifle
-  description: Developed by Weston-Yamada as a modern successor to the aging M5 platform, the SpezialSturmGewehr is engineered for precision mid-to-long range combat. Chambered in 7x62mm caseless rounds, it offers superior stopping power and ammunition efficiency compared to the M54C MK2, while maintaining comparable performance in close-quarters engagements. Weston-Yamada’s PMC forces found the UNMC’s M54C increasingly ill-suited to their operational demands, particularly in extended-range missions where precision and firepower were paramount. This dissatisfaction prompted Weston-Yamada’s R&D division to design the SSG, tailoring it to meet the specific needs of their operatives.
+  description: A hard-hitting, prototype assault rifle typically found in the hands of Weston-Yamada’s PMC teams. Exclusively produced in corporate white.
   suffix: No ID Lock
   components:
   - type: Sprite
@@ -22,6 +22,8 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-ssg-45
   - type: Gun
     selectedMode: FullAuto
     availableModes:
