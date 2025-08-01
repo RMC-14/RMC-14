@@ -53,6 +53,6 @@
 
 - type: rank
   id: RMCRankIHROObserver
-  name: Interstellar Human Rights Observer
+  name: Interstellar Sapient Rights Observer
   prefix: "Obsv."
   paygrade: ISRO
