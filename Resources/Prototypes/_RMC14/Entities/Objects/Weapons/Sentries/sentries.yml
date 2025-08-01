@@ -83,6 +83,12 @@
     setDamage:
       types:
         Blunt: 40
+  - type: Tag
+    tags:
+    - RMCSentry
+
+- type: Tag
+  id: RMCSentry
 
 - type: entity
   parent: RMCSentry
