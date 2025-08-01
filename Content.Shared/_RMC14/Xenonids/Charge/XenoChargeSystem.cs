@@ -666,7 +666,6 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         if (_xenoToggleChargingQuery.TryComp(ent, out var charging))
             ent.Comp.Stage = Math.Min(charging.MaxStage, ent.Comp.Stage);
 
-        Log.Warning(ent.Comp.Stage.ToString());
         Dirty(ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }

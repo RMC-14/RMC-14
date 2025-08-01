@@ -73,6 +73,7 @@
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: security_cam
     layers: []
+    drawdepth: SmallObjects
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key

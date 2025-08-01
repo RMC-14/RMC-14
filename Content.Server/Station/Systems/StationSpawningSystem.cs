@@ -105,6 +105,21 @@ public sealed class StationSpawningSystem : SharedStationSpawningSystem
             }
         }
 
+        // RMC14 UseLoadoutOfJob
+        if (prototype?.UseLoadoutOfJob != null && _prototypeManager.TryIndex(prototype.UseLoadoutOfJob, out var usedPrototype, false))
+        {
+            var newJobLoadout = LoadoutSystem.GetJobPrototype(usedPrototype.ID);
+
+            if (_prototypeManager.TryIndex(newJobLoadout, out RoleLoadoutPrototype? newRoleProto))
+            {
+                if (profile != null && profile.Loadouts.TryGetValue(newJobLoadout, out var newLoadout))
+                {
+                    roleProto = newRoleProto;
+                    loadout = newLoadout;
+                }
+            }
+        }
+
         // If we're not spawning a humanoid, we're gonna exit early without doing all the humanoid stuff.
         if (prototype?.JobEntity != null)
         {

@@ -2,160 +2,137 @@
 - type: loadout
   id: AviatorsRMC
   cost: 2
-  storage:
-    back:
-    - RMCGlassesAviators
+  equipment:
+    eyes: RMCGlassesAviators
 
 - type: loadout
   id: EyepatchRMC
   cost: 2
-  storage:
-    back:
-    - RMCEyepatch
+  equipment:
+    eyes: RMCEyepatch
 
 - type: loadout
   id: GlassesRPGRMC
   cost: 2
-  storage:
-    back:
-    - RMCGlassesMarineRpg
+  equipment:
+    eyes: RMCGlassesMarineRpg
 
 - type: loadout
   id: GlassesRPGRMCOld
   cost: 2
-  storage:
-    back:
-    - RMCGlassesMarineRpgOld
+  equipment:
+    eyes: RMCGlassesMarineRpgOld
 
 - type: loadout
   id: GlassesPrescriptionRMC
   cost: 2
-  storage:
-    back:
-    - RMCHipsterGlasses
+  equipment:
+    eyes: RMCHipsterGlasses
 
 - type: loadout
   id: GlassesTriMaxYellowRMC
   cost: 2
-  storage:
-    back:
-    - RMCGlassesTriMaxYellowFake
+  equipment:
+    eyes: RMCGlassesTriMaxYellowFake
 
 - type: loadout
   id: GlassesTriMaxBronzeRMC
   cost: 2
-  storage:
-    back:
-    - RMCGlassesTriMaxBronzeFake
+  equipment:
+    eyes: RMCGlassesTriMaxBronzeFake
 
 - type: loadout
   id: GlassesTriMaxBlackRMC
   cost: 2
-  storage:
-    back:
-    - RMCGlassesTriMaxBlackFake
+  equipment:
+    eyes: RMCGlassesTriMaxBlackFake
 
 - type: loadout
   id: GogglesRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallistic
+  equipment:
+    eyes: RMCGogglesBallistic
 
 - type: loadout
   id: GogglesPrescriptionRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesPrescriptionBallistic
+  equipment:
+    eyes: RMCGogglesPrescriptionBallistic
 
 - type: loadout
   id: GogglesBlackRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticBlack
+  equipment:
+    eyes: RMCGogglesBallisticBlack
 
 - type: loadout
   id: GogglesOrangeRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticOrange
+  equipment:
+    eyes: RMCGogglesBallisticOrange
 
 - type: loadout
   id: GogglesRedRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticRed
+  equipment:
+    eyes: RMCGogglesBallisticRed
 
 - type: loadout
   id: GogglesBlueRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticBlue
+  equipment:
+    eyes: RMCGogglesBallisticBlue
 
 - type: loadout
   id: GogglesPurpleRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticPurple
+  equipment:
+    eyes: RMCGogglesBallisticPurple
 
 - type: loadout
   id: GogglesYellowRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticYellow
+  equipment:
+    eyes: RMCGogglesBallisticYellow
 
 - type: loadout
   id: GogglesAdvancedRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticSquad
+  equipment:
+    eyes: RMCGogglesBallisticSquad
 
 - type: loadout
   id: GogglesM1A1RMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesM1A1Ballistic
+  equipment:
+    eyes: RMCGogglesM1A1Ballistic
 
 - type: loadout
   id: GogglesPolarizedBlueRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticPolarizedBlue
+  equipment:
+    eyes: RMCGogglesBallisticPolarizedBlue
 
 - type: loadout
   id: GogglesPolarizedOrangeRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesBallisticPolarizedOrange
+  equipment:
+    eyes: RMCGogglesBallisticPolarizedOrange
 
 - type: loadout
   id: GogglesM1A1BlueRMC
   cost: 2
-  storage:
-    back:
-    - RMCGogglesM1A1BallisticBlue
+  equipment:
+    eyes: RMCGogglesM1A1BallisticBlue
 
 - type: loadout
   id: PersonalShadesRMC
   cost: 2
-  storage:
-    back:
-    - RMCSunglassesBigFake
+  equipment:
+    eyes: RMCSunglassesBigFake
 
 - type: loadout
   id: SunglassesRMC
   cost: 2
-  storage:
-    back:
-    - RMCSunglasses
+  equipment:
+    eyes: RMCSunglasses
