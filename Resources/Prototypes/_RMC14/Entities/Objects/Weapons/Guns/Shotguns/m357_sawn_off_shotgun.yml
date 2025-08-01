@@ -6,8 +6,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/dbsawnoff.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/dbsawnoff.rsi
   - type: Item
     size: Normal
   - type: GunDamageModifier
