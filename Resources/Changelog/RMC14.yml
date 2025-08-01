@@ -1,53 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: Shootable attachments are now predicted.
-    type: Fix
-  - message: The masterkey can be used for PBs.
-    type: Fix
-  id: 1586
-  time: '2025-04-15T00:26:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6097
-- author: Vermidia
-  changes:
-  - message: Plasma transfer's overlay now looks different.
-    type: Tweak
-  id: 1587
-  time: '2025-04-19T05:00:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6167
-- author: Dygon
-  changes:
-  - message: The IO vendor now vends a M54C AP magazine for points instead of a regular
-      one.
-    type: Fix
-  id: 1588
-  time: '2025-04-19T04:59:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6171
-- author: Vermidia
-  changes:
-  - message: Fixed being able to place sandbags in dropships
-    type: Fix
-  id: 1589
-  time: '2025-04-18T06:00:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6175
-- author: Vermidia
-  changes:
-  - message: Fixed burrow not taking at least 1 second to unburrow at a minimum.
-    type: Fix
-  - message: Fixed tremor cooldown being too high (45 > 30)
-    type: Fix
-  - message: Fixed burrow stunning too long on unburrow (4>3 seconds)
-    type: Fix
-  id: 1590
-  time: '2025-04-19T05:49:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6181
-- author: CyberTropic
-  changes:
-  - message: Added Sunsets to round start, and Sunrises to Marine Major.
-    type: Add
-  id: 1591
-  time: '2025-04-19T05:48:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6174
 - author: Arykh
   changes:
   - message: Fixed error sprite appearing when attaching paper to closets, lockers,
@@ -4875,5 +4826,61 @@
   id: 2086
   time: '2025-07-22T22:16:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7208
+- author: noctyrnal
+  changes:
+  - message: Replaced the M79 with the M85A1. Functionally the same, just new sprites
+      and lore.
+    type: Tweak
+  - message: Resprited the M42A2. The old sprites are now used for the colony-only
+      M42A1.
+    type: Tweak
+  - message: Resprited the Mini Flamer, along with renaming it to the "Underbarrel
+      Flamer" for consistency.
+    type: Tweak
+  id: 2087
+  time: '2025-07-25T21:46:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7233
+- author: noctyrnal
+  changes:
+  - message: Added the Flamer tank box, which holds 8 Napalm fuel tanks similar to
+      magazine boxes.
+    type: Add
+  - message: Resprites the ammunition boxes, magazine boxes, shell boxes, and supply
+      boxes.
+    type: Tweak
+  id: 2088
+  time: '2025-07-25T21:47:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7086
+- author: Whisper
+  changes:
+  - message: New SOP regarding dropships has been published. Check your SOP book for
+      details.
+    type: Add
+  id: 2089
+  time: '2025-07-25T22:49:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7246
+- author: DummeHytteOst
+  changes:
+  - message: Fixed USCM being mentioned in a few places, and changed them correctly
+      to UNMC.
+    type: Fix
+  id: 2090
+  time: '2025-07-30T22:30:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7329
+- author: MoonlightHollow
+  changes:
+  - message: ASO now has Research access and skill
+    type: Add
+  id: 2091
+  time: '2025-07-30T22:33:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7262
+- author: noctyrnal
+  changes:
+  - message: Added the 'UNCSS Haurchefant', a PMC shipmap for PVE, designed for slighter
+      smaller max pops than Sun Rider sessions.
+    type: Add
+  id: 2092
+  time: '2025-08-01T08:44:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7335
 Name: RMC14
 Order: -1
