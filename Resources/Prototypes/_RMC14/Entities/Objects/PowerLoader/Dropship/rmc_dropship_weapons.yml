@@ -97,4 +97,4 @@
     ammoAttachedSprite:
       sprite: _RMC14/Objects/dropship_attachments.rsi
       state: minirocket_pod_loaded
-    multipleAmmoStates: true
+    ammoSpriteThresholds: [5, 4, 3, 2, 1]

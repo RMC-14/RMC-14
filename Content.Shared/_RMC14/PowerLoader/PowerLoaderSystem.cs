@@ -905,12 +905,18 @@ public sealed class PowerLoaderSystem : EntitySystem
             {
                 rsi = weapon.AmmoAttachedSprite;
 
-                if (weapon.MultipleAmmoStates &&
-                    rsi != null &&
+                if (rsi != null &&
                     weapon.AmmoAttachedSprite != null &&
                     rounds != maxRounds)
                 {
-                    rsi = new SpriteSpecifier.Rsi(rsi.RsiPath, weapon.AmmoAttachedSprite.RsiState + "_" + rounds);
+                    foreach (var ammoCount in weapon.AmmoSpriteThresholds)
+                    {
+                        if (ammoCount > rounds)
+                            continue;
+
+                        rsi = new SpriteSpecifier.Rsi(rsi.RsiPath, weapon.AmmoAttachedSprite.RsiState + "_" + ammoCount);
+                        break;
+                    }
                 }
             }
             else if (rounds > 0)
