@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Chemistry.Reagent;
@@ -841,6 +841,27 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
                 if (!ev.Cancelled)
                     Extinguish((entIntersecting, flammable));
+            }
+        }
+
+        var tileExtinguishQuery = EntityQueryEnumerator<SprayExtinguishTileFireComponent>();
+        while (tileExtinguishQuery.MoveNext(out var uid, out var extinguishTile))
+        {
+            if (extinguishTile.Extinguished)
+                continue;
+
+            extinguishTile.Extinguished = true;
+            Dirty(uid, extinguishTile);
+
+            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(uid);
+
+            while (anchored.MoveNext(out var anchorUid))
+            {
+                if (!_tileFireQuery.TryComp(anchorUid, out var tileFire))
+                    continue;
+
+                tileFire.Duration -= extinguishTile.ExtinguishAmount * tileFire.SprayExtinguishMultiplier;
+                Dirty(anchorUid, tileFire);
             }
         }
 
