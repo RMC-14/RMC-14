@@ -4,8 +4,6 @@
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorCorporate
-  ranks:
-    RMCRankWeYaExecutive: []
   startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
   accessGroups:
   - ColonistCorporate
