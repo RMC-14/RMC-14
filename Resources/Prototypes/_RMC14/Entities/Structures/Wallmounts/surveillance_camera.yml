@@ -82,6 +82,25 @@
       enum.RMCCameraUiKey.Key:
         type: RMCCameraBui
   - type: RMCCameraComputer
-    id: RMCSurveillanceCameraAlmayer
+    protoIds:
+    - RMCSurveillanceCameraAlmayer
   - type: WallMount
     arc: 360
+
+- type: entity
+  parent: RMCSurveillanceCameraAlmayer
+  id: RMCMonitorCameraAlamo
+  description: It's used to monitor the dropship.
+  suffix: "Alamo"
+  components:
+  - type: RMCCamera
+    id: RMCSurveillanceCameraAlamo
+
+- type: entity
+  parent: RMCSurveillanceCameraAlmayer
+  id: RMCMonitorCameraNormandy
+  description: It's used to monitor the dropship.
+  suffix: "Normandy"
+  components:
+  - type: RMCCamera
+    id: RMCSurveillanceCameraNormandy

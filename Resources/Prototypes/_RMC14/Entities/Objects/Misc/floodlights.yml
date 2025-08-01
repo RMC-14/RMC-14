@@ -203,6 +203,9 @@
   - type: Corrodible
     isCorrodible: false
   - type: Appearance
+  - type: Eye
+  - type: RMCCamera
+    id: RMCSurveillanceCameraLandingZone
 
 # Engineer Ship Light
 
