@@ -322,10 +322,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
             _status.TryRemoveStatusEffect(target, status);
         }
 
-        //TODO convert to status effects maybe
-        RemCompDeferred<RMCSlowdownComponent>(target);
-        RemCompDeferred<RMCSuperSlowdownComponent>(target);
-        RemCompDeferred<RMCRootedComponent>(target);
+
+        EntityManager.RemoveComponents(target, args.ComponentsRemove);
 
         _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 

@@ -28,4 +28,7 @@ public sealed partial class XenoSacrificeHealActionEvent : EntityTargetActionEve
 
     [DataField]
     public ProtoId<StatusEffectPrototype>[] AilmentsRemove = ["KnockedDown", "Stun", "Dazed", "Unconscious"];
+
+    [DataField]
+    public ComponentRegistry ComponentsRemove;
 }
