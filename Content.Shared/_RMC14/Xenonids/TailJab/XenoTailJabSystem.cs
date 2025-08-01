@@ -13,6 +13,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
 
 namespace Content.Shared._RMC14.Xenonids.TailJab;
 
@@ -31,6 +32,9 @@ public sealed class XenoTailJabSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+
+    private const string WindowBonusDamageType = "Structural";
+    private const int WindowDamageBonus = 100;
 
     public override void Initialize()
     {
@@ -56,6 +60,9 @@ public sealed class XenoTailJabSystem : EntitySystem
         var ev = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
         RaiseLocalEvent(xeno, ref ev);
         damage += ev.Damage;
+
+        if (HasComp<DestroyOnXenoPierceScissorComponent>(target))
+            damage.DamageDict.TryAdd(WindowBonusDamageType, WindowDamageBonus);
 
         var damageTaken = _damage.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, damage), origin: xeno, tool: xeno);
         if (damageTaken?.GetTotal() > FixedPoint2.Zero)

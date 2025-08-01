@@ -19,7 +19,7 @@ public sealed class XenoActionsSystem : EntitySystem
         if (GetEntity(args.Input.EntityTarget) is not { } target)
             return;
 
-        if (!_xeno.CanAbilityAttackTarget(args.User, target))
+        if (!_xeno.CanAbilityAttackTarget(args.User, target, false, true))
             args.Invalid = true;
     }
 }

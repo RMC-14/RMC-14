@@ -20,6 +20,7 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
@@ -421,7 +422,7 @@ public sealed partial class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool canAttackBarricades = false)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool canAttackBarricades = false, bool canAttackWindows = false)
     {
         if (xeno == target)
             return false;
@@ -440,6 +441,9 @@ public sealed partial class XenoSystem : EntitySystem
             return false;
 
         if (canAttackBarricades && HasComp<BarricadeComponent>(target))
+            return true;
+
+        if (canAttackWindows && HasComp<DestroyOnXenoPierceScissorComponent>(target))
             return true;
 
         return HasComp<MarineComponent>(target) || HasComp<XenoComponent>(target);
