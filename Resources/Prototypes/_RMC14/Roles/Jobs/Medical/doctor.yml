@@ -1,13 +1,13 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: CMDoctor
   name: cm-job-name-doctor
   description: cm-job-description-doctor
   playTimeTracker: CMJobDoctor
   requirements:
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsMedical
-    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobNurse
+    time: 10800 # 3 hours
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearDoctor
