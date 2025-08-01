@@ -972,6 +972,8 @@
   name: AK-4047 folding stock
   description: The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
   components:
+  - type: AttachableVisuals
+    suffix: ""
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: Sprite
