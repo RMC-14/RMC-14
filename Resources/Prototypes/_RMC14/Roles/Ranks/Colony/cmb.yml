@@ -49,7 +49,7 @@
   id: RMCRankICBCorporateLiaison
   name: Interstellar Commerce Bureau Corporate Liaison
   prefix: ICB Rep.
-  paygrade: ICCL
+  paygrade: ICBL
 
 - type: rank
   id: RMCRankIHROObserver
