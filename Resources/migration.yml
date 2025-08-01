@@ -1353,3 +1353,10 @@ RMCJumpsuitMarshal: RMCMarshalCMBUniform
 RMCM79Case: RMCM85A1Case
 CMWeaponLauncherM79: RMCWeaponLauncherM85A1
 RMCCrateM79: RMCCrateM85A1
+
+# 2025-14-07
+RMCTentRoofBase: null
+RMCTentRoofStandard: null
+RMCTentRoofExtended: null
+RMCTentBodyStandard: RMCTentUNMCStandard
+RMCTentBodyExtended: RMCTentUNMCExtended
