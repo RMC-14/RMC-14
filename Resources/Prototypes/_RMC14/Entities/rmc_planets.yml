@@ -28,6 +28,19 @@
       - CMSurvivorLV624SecurityGuard: 2
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
+    survivorJobScenarios:
+      asset_protection:
+        CMSurvivorCorporate:
+        - CMSurvivorLV624CorporateDomeCL: 1
+        CMSurvivorDoctor:
+        - CMSurvivorLV624CorporateDomeMedic: 1
+        CMSurvivorEngineer:
+        - CMSurvivorLV624CorporateDomeEng: 1
+        CMSurvivorSecurity:
+        - CMSurvivorLV624CorporateDomeGoonLead: 1
+        - CMSurvivorLV624CorporateDomeGoon: 5
+    
+        
 
 - type: entity
   id: RMCPlanetSolaris

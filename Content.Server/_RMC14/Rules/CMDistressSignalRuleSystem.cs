@@ -361,6 +361,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return playerId;
             }
 
+            //Survivor Spawning
             var survivorSpawners = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
             var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
             while (spawnerQuery.MoveNext(out var spawnId, out var spawnComp))
@@ -391,7 +392,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 comp.SurvivorJobInserts = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobInserts);
                 comp.SurvivorJobOverrides = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobOverrides);
+                var activeScenarioSurvivors = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobScenarios);
+                if (activeScenarioSurvivors != null && ActiveNightmareScenario != null)
+                {
+                    activeScenarioSurvivors.TryGetValue(ActiveNightmareScenario, out comp.SurvivorJobScenarios);
+                }
             }
+
+
 
             var survivorSpawnersLeft = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
             foreach (var (job, jobSpawners) in survivorSpawners)
@@ -431,8 +439,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     return null;
                 }
 
+                // populate scenario jobs first
+                var scenarioSuccess = false;
+                if (comp.SurvivorJobScenarios != null &&
+                    comp.SurvivorJobScenarios.TryGetValue(job, out var scenarioJobsList))
+                {
+                    for (var i = 0; i < scenarioJobsList.Count; i++)
+                    {
+                        var (scenarioJob, amount) = scenarioJobsList[i];
+
+                        if (!IsAllowed(playerId, scenarioJob))
+                            continue; // check insert playtime requirements
+
+                        if (amount == -1)
+                        {
+                            spawnAsJob = scenarioJob;
+                            scenarioSuccess = true;
+                            break;
+                        }
+
+                        if (amount <= 0)
+                            continue;
+
+                        scenarioJobsList[i] = (scenarioJob, amount - 1);
+                        spawnAsJob = scenarioJob; // Override the original job with the insert
+                        scenarioSuccess = true;
+                        break;
+                    }
+                    //If there are no scenario jobs left, fall through to insert jobs
+                }
+
                 // select an insert in order, reducing the slot of that insert
-                if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert) && !selectRandomInsert)
+                if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert)
+                                                    && !selectRandomInsert && !scenarioSuccess)
                 {
                     var insertSuccess = false;
 
@@ -472,7 +511,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (survJob != job)
                         continue;
 
-                    if (selectRandomInsert) // select a random insert if there are any and if this map supports random inserts
+                    if (!scenarioSuccess && !selectRandomInsert) // select a random insert if there are any and if this map supports random inserts
                     {
                         if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var randomInsertList))
                             spawnAsJob = _random.Pick(randomInsertList).Insert;
