@@ -1,0 +1,62 @@
+- type: entity
+  parent: WeaponShotgunM42A2
+  name: M42A1 pump shotgun
+  id: WeaponShotgunM42A1
+  description: An Aegis Battlefield Armaments classic design, the M42A1 combines close-range firepower with long term reliability. Needs to be pumped.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/desert.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/desert.rsi
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentShotgunChoke
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM42A1WoodenStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.06
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-stock: -0.40625, 0.03125
+      rmc-aslot-underbarrel: 0.25, -0.31
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/urban.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunM42A1
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunM42A1

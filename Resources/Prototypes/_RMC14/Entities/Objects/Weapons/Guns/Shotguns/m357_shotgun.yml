@@ -32,7 +32,7 @@
     baseFireRate: 0.7
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.15
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplierUnwielded: 0.5
   - type: Construction
     graph: M357Sawn
     node: start

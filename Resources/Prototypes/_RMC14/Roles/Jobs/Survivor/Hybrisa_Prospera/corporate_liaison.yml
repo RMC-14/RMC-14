@@ -32,7 +32,7 @@
   equipment:
     ears: RMCHeadsetDistressWeYa
     id: CMIDCardLiaisonColony
-    pocket2: RMCPouchDocument
+    pocket2: CMClipboard # RMC14, replace with document pouch when fixed
 
 - type: entity
   parent: CMSpawnPointJobBase
