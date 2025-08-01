@@ -3,6 +3,7 @@
   id: RMCAdminObserver
   categories: [ HideSpawnMenu ]
   components:
+  - type: PropCaller
   - type: Loadout
     prototypes: [ RMCMobAghostGear ]
   - type: IntrinsicUI
