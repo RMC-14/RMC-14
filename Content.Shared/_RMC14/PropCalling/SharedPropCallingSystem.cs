@@ -1,5 +1,3 @@
-using Content.Shared._RMC14.PropCalling.Events;
-
 namespace Content.Shared._RMC14.PropCalling;
 
 public abstract class SharedPropCallingSystem : EntitySystem
