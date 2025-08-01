@@ -58,7 +58,7 @@ public sealed partial class DropshipAmmoComponent : Component
     public SoundSpecifier? SoundImpact;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId? ImpactEffect;
+    public List<EntProtoId> ImpactEffects = new ();
 
     [DataField, AutoNetworkedField]
     public string? AmmoType;
