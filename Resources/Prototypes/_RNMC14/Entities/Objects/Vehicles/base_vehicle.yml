@@ -63,6 +63,7 @@
         - MobLayer
   - type: MobCollision
   - type: RMCMobCollision
+  - type: NoRotateOnInteract
 
 - type: entity
   abstract: true
