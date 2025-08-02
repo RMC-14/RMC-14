@@ -86,8 +86,9 @@ public sealed partial class CCVars
     public static readonly CVarDef<bool> GatewayGeneratorEnabled =
         CVarDef.Create("gateway.generator_enabled", true);
 
+    // TODO RMC14 uses senior enlisted advisor / Xippy for tippy.
     public static readonly CVarDef<string> TippyEntity =
-        CVarDef.Create("tippy.entity", "Tippy", CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("tippy.entity", "RMCPlushieXippy", CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     The number of seconds that must pass for a single entity to be able to point at something again.
