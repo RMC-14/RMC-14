@@ -313,7 +313,7 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnProjectileHit
-    intensity: 2
+    duration: 2
   - type: Fixtures
     fixtures:
       projectile:
