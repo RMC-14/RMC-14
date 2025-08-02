@@ -232,6 +232,26 @@
 
 - type: entity
   parent: ActionXenoBase
+  id: ActionXenoRemotePlasmaTransfer
+  name: Remote Plasma Transfer (400) # TODO RMC14 proper plasma costs
+  description: Recovers plasma of the chosen xenoid
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: remote_plasma_transfer
+    event: !type:XenoRemoteTransferPlasmaActionEvent
+    useDelay: 12
+    checkCanAccess: false
+    range: -1
+  - type: XenoActionPlasma
+    cost: 400
+
+
+- type: entity
+  parent: ActionXenoBase
   id: ActionXenoApplySalve
   name: Apply Salve (200)
   description: Apply a salve to use some of your health to heal allied Xenos up to 100 health over 5 seconds. You can stack multiple salves.
