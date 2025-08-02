@@ -27,7 +27,6 @@ public sealed class RMCSpawnerSystem : EntitySystem
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
     private readonly Dictionary<EntProtoId, List<Entity<ItemPoolSpawnerComponent>>> _itemPools = new();
     private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
-    private readonly List<Entity<AegisSpawnerComponent>> _aegisSpawners = new();
 
     private int _maxCorpses;
     private int _corpsesSpawned;
@@ -125,7 +124,6 @@ public sealed class RMCSpawnerSystem : EntitySystem
         _spawners.Clear();
         _itemPools.Clear();
         _corpseSpawners.Clear();
-        _aegisSpawners.Clear();
 
         var roundDuration = _gameTicker.RoundDuration();
 

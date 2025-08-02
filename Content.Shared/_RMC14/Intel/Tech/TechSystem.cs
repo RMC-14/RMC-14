@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Dropship.Fabricator;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Requisitions;
@@ -21,12 +21,10 @@ public sealed class TechSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
-
-    private MapId? _purchasesMap;
+    [Dependency] private readonly SharedRequisitionsSystem _req = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<TechAnnounceEvent>(OnTechAnnounce);
         SubscribeLocalEvent<TechUnlockTierEvent>(OnTechUnlockTier);
         SubscribeLocalEvent<TechRequisitionsBudgetEvent>(OnTechRequisitionsBudget);
@@ -40,11 +38,6 @@ public sealed class TechSystem : EntitySystem
             {
                 subs.Event<TechPurchaseOptionBuiMsg>(OnPurchaseOptionMsg);
             });
-    }
-
-    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
-    {
-        _purchasesMap = null;
     }
 
     private void OnTechAnnounce(TechAnnounceEvent ev)
@@ -74,9 +67,7 @@ public sealed class TechSystem : EntitySystem
 
     private void OnTechWarhead(TechWarheadEvent ev)
     {
-        var map = EnsurePurchasesMap();
-        var warhead = Spawn(ev.Warhead, new MapCoordinates(Vector2.Zero, map));
-        EnsureComp<RequisitionsCustomDeliveryComponent>(warhead);
+        _req.CreateSpecialDelivery(ev.Warhead);
     }
 
     private void OnControlConsoleBeforeOpen(Entity<TechControlConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
@@ -127,15 +118,5 @@ public sealed class TechSystem : EntitySystem
         }
 
         _intel.UpdateTree(tree);
-    }
-
-    private MapId EnsurePurchasesMap()
-    {
-        if (_purchasesMap != null)
-            return _purchasesMap.Value;
-
-        _map.CreateMap(out var map);
-        _purchasesMap = map;
-        return map;
     }
 }
