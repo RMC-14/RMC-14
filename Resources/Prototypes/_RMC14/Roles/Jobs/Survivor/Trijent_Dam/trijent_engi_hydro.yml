@@ -1,0 +1,59 @@
+﻿- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorTrijentEngiHydro
+  name: cm-job-name-survivor-trijent-engi-hydro
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorTrijentEngiHydro
+  startingGear: RMCGearSurvivorTrijentEngiHydro
+  spawnMenuRoleName: Hydro Electric Engineer (Trijent Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetTrijentEngiHydro
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorTrijentEngiHydro
+  equipment:
+    head: RMCHardHat
+    jumpsuit: RMCJumpsuitLiaisonKhakiWorkwear
+    outerClothing: RMCHazardVestBlack
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrijentEngiHydro
+  name: survivor hydro electric engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorTrijentEngiHydro
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetTrijentEngiHydro
+  name: hydro electric engineer colonist preset
+  categories: [ HideSpawnMenu ]
