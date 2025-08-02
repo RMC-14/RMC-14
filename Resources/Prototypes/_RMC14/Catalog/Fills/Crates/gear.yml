@@ -51,3 +51,13 @@
     contents:
     - id: RMCFulton20
       amount: 4
+
+- type: entity
+  parent: RMCCrateSupply
+  id: RMCCrateGearParachute
+  name: parachute crate (x20)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCParachute
+      amount: 20
