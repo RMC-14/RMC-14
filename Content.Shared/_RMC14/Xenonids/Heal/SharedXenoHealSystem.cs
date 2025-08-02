@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -20,6 +21,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -50,6 +52,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoStrainSystem _xenoStrain = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -268,6 +271,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
             return;
         }
 
+
+        _flammable.Extinguish(target);
+
         FixedPoint2? targetCriticalThreshold = null;
         foreach (var threshold in targetThresholdsComp.Thresholds)
         {
@@ -309,6 +315,15 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var healAmount = remainingHealth * args.TransferProportion;
 
         Heal(target, healAmount);
+
+
+        foreach (var status in args.AilmentsRemove)
+        {
+            _status.TryRemoveStatusEffect(target, status);
+        }
+
+
+        EntityManager.RemoveComponents(target, args.ComponentsRemove);
 
         _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 
