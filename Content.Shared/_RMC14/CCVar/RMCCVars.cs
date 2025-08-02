@@ -450,4 +450,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCAutomaticCommanderPromotion =
         CVarDef.Create("rmc.automatic_commander_promotion", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDeadChatEnabled =
+        CVarDef.Create("rmc.dead_chat_enabled", true, CVar.SERVER | CVar.NOTIFY | CVar.REPLICATED);
 }
