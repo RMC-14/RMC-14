@@ -38,30 +38,52 @@
   - 1.0
   - 1.0
   - 1.0
+  edgeSpritePriority: 0
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_single_edge_se.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_single_edge_ne.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_single_edge_nw.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_single_edge_sw.png
+    South: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_s.png
+    East: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_e.png
+    North: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_n.png
+    West: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_w.png
   footstepSounds:
-    collection: FootstepWood
+    collection: FootstepAsteroid
 
 - type: tile
   parent: CMPlanetMattedGrass
   id: CMPlanetMattedGrass2
   sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_1.png
-  edgeSpritePriority: 0
+  edgeSpritePriority: 1
   edgeSprites:
-    SouthEast: /Textures/_RMC14/Tiles/planet/auto_strata_grass/single_edge.png
-    NorthEast: /Textures/_RMC14/Tiles/planet/auto_strata_grass/single_edge.png
-    NorthWest: /Textures/_RMC14/Tiles/planet/auto_strata_grass/single_edge.png
-    SouthWest: /Textures/_RMC14/Tiles/planet/auto_strata_grass/single_edge.png
-    South: /Textures/_RMC14/Tiles/planet/auto_strata_grass/double_edge.png
-    East: /Textures/_RMC14/Tiles/planet/auto_strata_grass/double_edge.png
-    North: /Textures/_RMC14/Tiles/planet/auto_strata_grass/double_edge.png
-    West: /Textures/_RMC14/Tiles/planet/auto_strata_grass/double_edge.png
+    SouthEast: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_single_edge_se.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_single_edge_ne.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_single_edge_nw.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_single_edge_sw.png
+    South: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_s.png
+    East: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_e.png
+    North: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_n.png
+    West: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_double_edge_w.png
 
 - type: tile
-  parent: CMPlanetMattedGrass
+  parent: CMPlanetBase
   id: CMPlanetMattedGrass3
   sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  footstepSounds:
+    collection: FootstepAsteroid
 
 - type: tile
-  parent: CMPlanetMattedGrass
+  parent: CMPlanetMattedGrass3
   id: CMPlanetMattedGrass4
   sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud_alt.png
