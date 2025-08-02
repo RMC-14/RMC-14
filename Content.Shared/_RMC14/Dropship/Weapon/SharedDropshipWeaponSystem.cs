@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Explosion.Implosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
@@ -78,6 +79,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -612,6 +614,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundImpact = ammo.Comp.SoundImpact,
             ImpactEffect = ammo.Comp.ImpactEffect,
             Explosion = ammo.Comp.Explosion,
+            Implosion = ammo.Comp.Implosion,
             Fire = ammo.Comp.Fire,
             SoundEveryShots = ammo.Comp.SoundEveryShots,
         };
@@ -1156,6 +1159,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     }
                 }
 
+                if (flight.Implosion != null)
+                {
+                    _rmcImplosion.Implode(flight.Implosion, target);
+                }
+
                 if (flight.Explosion != null)
                 {
                     _rmcExplosion.QueueExplosion(target,
@@ -1200,6 +1208,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     }
                     else
                     {
+                        _rmcFlammable.SpawnFireLines(flight.Fire.Type,
+                            flight.Target,
+                            flight.Fire.CardinalRange,
+                            flight.Fire.OrdinalRange,
+                            flight.Fire.Intensity,
+                            flight.Fire.Duration);
+
                         for (var x = -flight.Fire.Range; x <= flight.Fire.Range; x++)
                         {
                             for (var y = -flight.Fire.Range; y <= flight.Fire.Range; y++)
