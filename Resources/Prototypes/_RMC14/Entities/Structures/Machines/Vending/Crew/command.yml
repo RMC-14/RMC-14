@@ -600,6 +600,8 @@
         points: 20
     - name: Special Ammunition
       entries:
+      - id: RMCMagazineRifleM54CIncendiary
+        points: 65
       - id: RMCMagazineRifleM54CRubber
         points: 10
       - id: RMCBoxShotgunBeanbag

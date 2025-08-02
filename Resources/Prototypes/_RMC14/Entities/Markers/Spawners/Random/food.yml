@@ -1,0 +1,90 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCDrinkSpawner
+  name: Random Drink Spawner
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Objects/Consumable/Drinks/random.rsi
+          state: icon
+    - type: RandomSpawner
+      prototypes:
+        - RMCCoffeeCupFilled
+        - CMDrinkCanCola
+        - CMDrinkCanMountainWind
+        - CMDrinkCanThirteenLoko
+        - CMDrinkCanDrGibb
+        - CMDrinkCanStarkist
+        - CMDrinkCanSpaceUp
+        - CMDrinkCanLemonLime
+        - CMDrinkCanIcedTea
+        - CMDrinkCanGrape
+        - CMDrinkCanTonic
+        - CMDrinkCanSoda
+        - CMDrinkCanBoda
+        - CMDrinkCanBodaPlyus
+        - CMDrinkCanFruitBeer
+        - CMDrinkCanBeerLite
+        - CMDrinkCanAle
+        - CMDrinkCanBobdaClassic
+        - CMDrinkCanBobdaCherry
+        - CMDrinkCanBobdaLime
+        - CMDrinkCanBobdaGrape
+        - CMDrinkCanBobdaBlue
+        - CMDrinkCanBobdaPeach
+        - CMDrinkCanBobdaCranberry
+        - CMDrinkCanBobdaVanilla
+        - CMDrinkCanBobdaPineapple
+        - CMDrinkCanBobdaDiet
+        - CMDrinkCanBobdaClassicDiet
+        - CMDrinkCanBobdaCherryDiet
+        - CMDrinkCanBobdaLimeDiet
+        - CMDrinkCanBobdaGrapeDiet
+        - CMDrinkCanBobdaBlueDiet
+        - CMDrinkCanBobdaPeachDiet
+        - CMDrinkCanBobdaCranberryDiet
+        - CMDrinkCanBobdaVanillaDiet
+        - CMDrinkCanBobdaPineappleDiet
+        - RMCDrinkCoffee
+        - RMCDrinkCoffeeGrind
+        - CMDrinkWEYAWaterBottle30
+      offset: 0
+
+- type: entity
+  parent: MarkerBase
+  id: RMCFoodSpawner
+  name: Random Food Spawner
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Objects/Consumable/Food/random.rsi
+          state: icon
+    - type: RandomSpawner
+      prototypes:
+        - CMMarineProteinBar
+        - RMCFoodDonut
+        - RMCFoodDonutFrosted
+        - CMFortuneCookie
+        - RMCFoodPizzaMargheritaFull
+        - RMCFoodPizzaMargheritaSlice
+        - RMCFoodPizzaMeatFull
+        - RMCFoodPizzaMeatSlice
+        - RMCFoodPizzaMushroomFull
+        - RMCFoodPizzaMushroomSlice
+        - RMCFoodPizzaVegetableFull
+        - RMCFoodPizzaVegetableSlice
+        - RMCFoodPizzaHawaiianFull
+        - RMCFoodPizzaHawaiianSlice
+        - RMCFoodSnackBarcaridine
+        - RMCFoodSnackBoonie
+        - RMCFoodSnackCHUNK
+        - RMCFoodSnackHUNK
+        - RMCFoodSnackKeplarCrisps
+        - RMCFoodSnackKeplarFlamehotCrisps
+        - RMCFoodSnackChipsPepper
+        - RMCFoodSnackCheeseburgerPackaged
+        - RMCFoodSnackBurritoPackaged
+        - RMCFoodSnackBurrito
+        - RMCFoodSnackHotdogPackaged
+        - RMCFoodSnackEATBar
+      offset: 0
