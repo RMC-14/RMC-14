@@ -57,6 +57,7 @@
   - type: DamageOnCollide
     acidic: true
     acidComboDuration: 40
+    acidComboResists: 2
     acidComboDamage:
       types:
         Heat: 3
