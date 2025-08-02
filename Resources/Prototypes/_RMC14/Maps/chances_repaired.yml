@@ -1,0 +1,15 @@
+﻿- type: gameMap
+  id: ChancesRepaired
+  mapName: "ChancesRepaired"
+  mapPath: /Maps/_RMC14/chances_repaired.yml
+  minPlayers: 10
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    ChancesRepaired:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'LV-522 - Chances Claim'
+        - type: StationJobs
+          availableJobs: {}
