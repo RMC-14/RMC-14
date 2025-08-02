@@ -602,7 +602,7 @@
     explosionArmor: 10
   - type: Storage
     grid:
-    - 0,0,1,1 # 2 slots
+    - 0,0,1,1 # 1 slots
   - type: RMCBulkyArmor
     isBulky: false
   - type: ItemCamouflage
