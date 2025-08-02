@@ -272,6 +272,7 @@ public abstract class SharedBloodstreamSystem : EntitySystem
     /// </summary>
     private void OnHealthBeingExamined(Entity<BloodstreamComponent> ent, ref HealthBeingExaminedEvent args)
     {
+        return; // RMC14
         // Shows massively bleeding at 0.75x the max bleed rate.
         if (ent.Comp.BleedAmount > ent.Comp.MaxBleedAmount * 0.75f)
         {

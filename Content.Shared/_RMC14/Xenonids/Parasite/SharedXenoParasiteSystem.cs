@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
@@ -74,6 +75,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
 
     private const CollisionGroup LeapCollisionGroup = CollisionGroup.InteractImpassable;
     private const CollisionGroup ThrownCollisionGroup = CollisionGroup.InteractImpassable | CollisionGroup.BarricadeImpassable;
@@ -383,6 +385,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     private void OnVictimBurstMapInit(Entity<VictimBurstComponent> burst, ref MapInitEvent args)
     {
         _appearance.SetData(burst, BurstVisuals.Visuals, VictimBurstState.Burst);
+        _unrevivable.MakeUnrevivable(burst.Owner);
     }
 
     private void OnVictimUpdateMobState(Entity<VictimBurstComponent> burst, ref UpdateMobStateEvent args)

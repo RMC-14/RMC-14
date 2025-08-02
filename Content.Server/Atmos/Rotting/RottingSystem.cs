@@ -43,10 +43,6 @@ public sealed class RottingSystem : SharedRottingSystem
     {
         if (args.Handled)
             return;
-
-        if (TryComp<PerishableComponent>(uid, out var perishable) && perishable.IgnoreTemperature)
-            return;
-
         args.Handled = component.CurrentTemperature < Atmospherics.T0C + 0.85f;
     }
 
