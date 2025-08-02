@@ -139,12 +139,29 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 }
             }
 
-            if (_announce.Count == 0)
-                continue;
+            if (_announce.Count > 0)
+            {
+                var popup = Loc.GetString("rmc-hive-supports-castes", ("castes", string.Join(", ", _announce)));
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, popup, hive.AnnounceSound, PopupType.Large);
+                EvoScreech(hive);
+            }
 
-            var popup = Loc.GetString("rmc-hive-supports-castes", ("castes", string.Join(", ", _announce)));
-            _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, popup, hive.AnnounceSound, PopupType.Large);
-            EvoScreech(hive);
+            if (!hive.AnnouncedQueenDeathCooldownOver && hive.CurrentQueen == null && hive.NewQueenAt.HasValue && roundTime >= hive.NewQueenAt.Value)
+            {
+                var queenPopup = Loc.GetString("rmc-queen-death-cooldown-over");
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, queenPopup, hive.AnnounceSound);
+                hive.AnnouncedQueenDeathCooldownOver = true;
+                Dirty(hiveId, hive);
+            }
+
+            if (!hive.AnnouncedHiveCoreCooldownOver && hive.NewCoreAt.HasValue && roundTime >= hive.NewCoreAt)
+            {
+                var corePopup = Loc.GetString("rmc-hive-core-cooldown-over");
+                _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, corePopup, hive.AnnounceSound);
+                hive.AnnouncedHiveCoreCooldownOver = true;
+                Dirty(hiveId, hive);
+            }
+
         }
 
         var time = _timing.CurTime;
