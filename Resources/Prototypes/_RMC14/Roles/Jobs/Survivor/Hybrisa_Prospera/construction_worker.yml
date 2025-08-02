@@ -1,0 +1,62 @@
+- type: job
+  parent: CMSurvivorEngineer
+  id: RMCSurvivorHybrisaConstructionWorker
+  name: rmc-job-name-survivor-construction-worker
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorHybrisaConstructionWorker
+  startingGear: RMCGearSurvivorHybrisaConstructionWorker
+  spawnMenuRoleName: Construction Worker (Hybrisa Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetHybrisaConstructionWorker
+
+- type: startingGear
+  parent: RMCGearSurvivorBase
+  id: RMCGearSurvivorHybrisaConstructionWorker
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianEngineerWorker
+    pocket2: RMCPouchToolsFill
+    back: CMSatchelEngineerMinerSurvivorFill
+    shoes: RMCShoesJackboots
+  storage:
+    back:
+    - WeaponNailgun
+    - CMSheetMetal30
+
+- type: playTimeTracker
+  id: RMCJobSurvivorHybrisaConstructionWorker
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetHybrisaConstructionWorker
+  name: hybrisa construction worker colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCHandsVeteranInsulated, RMCHardhatOrange, RMCHazardVest ]
+    - [ RMCHandsVeteranInsulated, RMCHardhatOrange, RMCHazardVest ]
+    - [ CMHandsInsulated, RMCWeldingGoggles, RMCOuterEngineeringUtilityOversuit ]
+    randomGearOther:
+    -
+      - [ CMBeltUtilityFilled ]
+      - [ RMCBeltHolsterNailgun ]

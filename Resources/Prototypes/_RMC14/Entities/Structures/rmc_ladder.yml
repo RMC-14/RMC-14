@@ -36,3 +36,13 @@
   components:
   - type: Sprite
     state: ladder11
+
+- type: entity
+  parent: RMCLadder
+  id: RMCLadderHatch
+  suffix: Hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_tunnel.rsi
+    state: maintenancehatch_alt
+    offset: 0, 0.2

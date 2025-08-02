@@ -447,4 +447,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCQueenBuildingBoostRemoteRange =
         CVarDef.Create("rmc.queen_building_boost_remote_range", 50f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCAutomaticCommanderPromotion =
+        CVarDef.Create("rmc.automatic_commander_promotion", true, CVar.REPLICATED | CVar.SERVER);
 }

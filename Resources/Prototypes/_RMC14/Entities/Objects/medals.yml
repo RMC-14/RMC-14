@@ -177,3 +177,84 @@
   name: blue award ribbon
   description: A very prestigious blue ribbon awarded to civilians for placing first in a UNMC-sponsored event. Such awards require significant amounts of time and dedication to achieve.
 
+# Liaison Medals
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalBronzeNametag
+  name: bronze name badge
+  description: A bronze name badge.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze_nametag.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/bronze.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalBronzeNametag
+  id: RMCMedalBronzeNametagService
+  name: junior executive name badge
+  description: An engraved bronze badge, containing the wearer's name, rank, and department. This one is given to those who have just begun to climb the Corporate ladder.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalSilverNametag
+  name: silver name badge
+  description: A silver name badge.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/silver_nametag.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/silver.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalSilverNametag
+  id: RMCMedalSilverNametagService
+  name: executive name badge
+  description: An engraved bright silver badge, containing the wearer's name, rank, and department. This one is given to those who have proven their worth to Weston-Yamada as a valuable employee.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalGoldNametag
+  name: gold name badge
+  description: A prestigious golden name badge.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/gold_nametag.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/gold.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalGoldNametag
+  id: RMCMedalGoldNametagService
+  name: senior executive name badge
+  description: An engraved golden badge, containing the wearer's name, rank, and department. This one is rare, awarded to those who have shown their dedication to the Company, and has been deemed both a skilled and reliable asset.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalPlatinumNametag
+  name: gold and black name badge
+  description: A very prestigious gold-black name badge, handed out to those deemed worthy by the chief executives.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/plat_nametag.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/plat_nametag.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalPlatinumNametag
+  id: RMCMedalPlatinumNametagService
+  name: executive specialist name badge
+  description: An engraved gold-and-black badge, containing the wearer's name, rank, and department. The highest rank most executives can reach within their lifetimes, it signifies ones influence, skill, and importance to the Weston-Yamada Corporation.
+

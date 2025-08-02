@@ -111,6 +111,19 @@
     damage:
       types:
         Heat: 1
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+    reactions:
+    - reagents: [WeedKiller, PlantBGone]
+      methods: [Touch]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          types:
+            Heat: 4
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier

@@ -31,6 +31,7 @@
   icon: "CMJobIconASO"
   requireAdminNotify: true
   joinNotifyCrew: false
+  marineAuthorityLevel: 13
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ASO
@@ -51,6 +52,7 @@
         RMCSkillNavigations: 1
         RMCSkillOverwatch: 1
         RMCSkillPilot: 2
+        RMCSkillResearch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1

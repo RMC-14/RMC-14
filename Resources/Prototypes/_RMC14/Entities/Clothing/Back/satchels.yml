@@ -42,11 +42,30 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/black.rsi
 
 - type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackFillSurvivorConstable
+  suffix: Survivor, Constable
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCHandcuffs
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelBlue
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/blue.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelNorm
+  name: satchel
+  description: A trendy-looking satchel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/norm.rsi
 
 - type: entity
   parent: CMSatchel
@@ -313,6 +332,17 @@
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
 
 - type: entity
+  parent: CMSatchelMarineIntel
+  id: RMCSatchelMarineIntelSatchel
+  name: UNMC lightweight expedition satchel
+  description: A heavy-duty IMP based satchel, reinforced with kevlar so it doesn't rip. Can quickly be accessed with only one hand. Usually issued to UNMC intelligence officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/intel.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: CMSatchelMarineIntel # Reskin for FORECON
   id: RMCSatchelMarineLogisticsBig
   name: UNMC logistics IMP backpack
@@ -542,6 +572,39 @@
   - type: Storage
     grid:
     - 0,0,9,1 # 15
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFreelancerMedic
+  suffix: Filled, Freelancer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMRollerBedSpawnFolded
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFreelancerStandard
+  suffix: Filled, Freelancer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFreelancerLeader
+  suffix: Filled, Freelancer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: RMCRangefinder
+    - id: RMCExplosivePlastic
+    - id: RMCExplosivePlastic
 
 - type: entity
   parent: RMCSatchelLightpack
