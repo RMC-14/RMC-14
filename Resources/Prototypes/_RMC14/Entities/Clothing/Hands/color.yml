@@ -22,7 +22,7 @@
 - type: entity
   parent: CMHandsBlackMarine
   id: CMHandsInsulated
-  name: marine insulated gloves
+  name: insulated gloves
   description: These gloves will protect the wearer from electric shocks.
   components:
   - type: Sprite
