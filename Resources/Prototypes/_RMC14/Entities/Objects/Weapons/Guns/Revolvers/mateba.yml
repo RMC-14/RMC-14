@@ -84,6 +84,7 @@
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
+      rmc-bslot-barrel: 0.215, 0.19
       rmc-aslot-barrel: 0.215, 0.19
       rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
@@ -133,6 +134,7 @@
           - RMCAttachmentS6ReflexSight
   - type: AttachableHolderVisuals
     offsets:
+      rmc-bslot-barrel: 0.215, 0.19
       rmc-aslot-barrel: 0.215, 0.19
       rmc-aslot-rail: -0.11, 0.22
   - type: ItemCamouflage
