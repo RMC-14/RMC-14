@@ -20,6 +20,8 @@ public sealed partial class HasStatusEffect : EntityEffectCondition
 
     public override string GuidebookExplanation(IPrototypeManager prototype)
     {
-        return "";
+        return Loc.GetString("rmc14-reagent-effect-condition-guidebook-has-status-effect",
+            ("key", Key),
+            ("reversed", Reversed));
     }
 }
