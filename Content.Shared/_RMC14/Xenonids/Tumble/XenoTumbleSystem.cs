@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
@@ -11,6 +12,7 @@ using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Tumble;
@@ -22,6 +24,7 @@ public sealed class XenoTumbleSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
@@ -81,7 +84,7 @@ public sealed class XenoTumbleSystem : EntitySystem
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, 30, animated: false, compensateFriction: true);
+        _throwing.TryThrow(xeno, diff, 30, animated: false);
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
     }
 
@@ -114,6 +117,8 @@ public sealed class XenoTumbleSystem : EntitySystem
         if (_net.IsServer)
             _stun.TryParalyze(args.Target, xeno.Comp.StunTime, true);
 
+        StopTumble(xeno);
+
         var origin = _transform.GetMapCoordinates(xeno);
         _sizeStun.KnockBack(args.Target, origin, xeno.Comp.ImpactRange, xeno.Comp.ImpactRange, 10);
 
@@ -133,5 +138,14 @@ public sealed class XenoTumbleSystem : EntitySystem
 
         xeno.Comp.Target = null;
         Dirty(xeno);
+    }
+
+    private void StopTumble(EntityUid xeno)
+    {
+        if (_physicsQuery.TryGetComponent(xeno, out var physics))
+        {
+            _physics.SetLinearVelocity(xeno, Vector2.Zero, body: physics);
+            _physics.SetBodyStatus(xeno, physics, BodyStatus.OnGround);
+        }
     }
 }
