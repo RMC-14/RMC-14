@@ -460,7 +460,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         args.Handled = true;
         var doAfter = new DoAfterArgs(EntityManager, xeno, finalBuildTime, ev, xeno)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            RootEntity = true
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
@@ -864,6 +865,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, xenoStructure, xenoStructure)
         {
             BreakOnMove = true,
+            RootEntity = true
         };
 
         _doAfter.TryStartDoAfter(doAfter);
