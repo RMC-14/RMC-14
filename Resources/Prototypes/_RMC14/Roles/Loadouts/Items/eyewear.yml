@@ -30,6 +30,12 @@
     eyes: RMCHipsterGlasses
 
 - type: loadout
+  id: HippieGlassesRMC
+  cost: 2
+  equipment:
+    eyes: RMCHippieGlasses
+
+- type: loadout
   id: GlassesTriMaxYellowRMC
   cost: 2
   equipment:
@@ -136,3 +142,45 @@
   cost: 2
   equipment:
     eyes: RMCSunglasses
+
+- type: loadout
+  id: HippieGlassesBloodredRMC
+  cost: 2
+  equipment:
+    eyes: RMCHippieGlassesBloodred
+
+- type: loadout
+  id: HippieGlassesGreenRMC
+  cost: 2
+  equipment:
+    eyes: RMCHippieGlassesGreen
+
+- type: loadout
+  id: HippieGlassesMidnightRMC
+  cost: 2
+  equipment:
+    eyes: RMCHippieGlassesMidnight
+
+- type: loadout
+  id: HippieGlassesNightblueRMC
+  cost: 2
+  equipment:
+    eyes: RMCHippieGlassesNightblue
+
+- type: loadout
+  id: HippieGlassesPinkRMC
+  cost: 2
+  equipment:
+    eyes: RMCHippieGlassesPink
+
+- type: loadout
+  id: HippieGlassesSunriseRMC
+  cost: 2
+  equipment:
+    eyes: RMCHippieGlassesSunrise
+
+- type: loadout
+  id: HippieGlassesSunsetRMC
+  cost: 2
+  equipment:
+    eyes: RMCHippieGlassesSunset
