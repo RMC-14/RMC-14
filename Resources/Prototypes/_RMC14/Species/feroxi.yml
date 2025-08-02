@@ -22,8 +22,6 @@
     Chest: MobFeroxiTorso
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -64,11 +62,11 @@
     Chest:
       points: 1
       required: false
-    Underwear:
+    UndergarmentBottom:
       points: 1
       required: true
       defaultMarkings: [ RMCUnderwearBoxersBlue ]
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: true
       defaultMarkings: [ RMCUndershirtStandard ]
