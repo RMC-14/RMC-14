@@ -73,6 +73,15 @@
   - type: Sprite
     state: cl_spawn
 
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleLiaisonYou
+  name: A Typical Weston-Yamada Liaison
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: corp_liaison
+
 - type: playTimeTracker
   id: CMJobLiaison
   isHumanoid: true
