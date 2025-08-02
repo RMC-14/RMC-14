@@ -13,6 +13,9 @@
     state: solaris_interior
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: solaris_interior
 
 - type: entity
@@ -29,6 +32,9 @@
     state: solaris_interior_r
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: solaris_interior_r
 
 - type: entity
@@ -45,6 +51,9 @@
     state: solaris_interior_h
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: solaris_interior_r
 
 - type: entity
@@ -61,6 +70,9 @@
     state: solaris_rock
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: solaris_rock
 
 - type: entity

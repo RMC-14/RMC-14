@@ -14,6 +14,9 @@
     state: rock
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rock
 
 - type: entity
@@ -29,6 +32,9 @@
     state: rock_border
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rock_border
 
 - type: entity
@@ -55,6 +61,9 @@
     state: metal
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
 
 # Colony
@@ -73,6 +82,9 @@
     state: strata_bare_outpost_
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: strata_bare_outpost_
 
 - type: entity
@@ -89,6 +101,9 @@
     state: strata_ribbed_outpost_
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: strata_ribbed_outpost_
 
 - type: entity
@@ -106,6 +121,9 @@
     state: strata_hull
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: strata_ribbed_outpost_
 
 # Medical
@@ -215,6 +233,9 @@
     state: metal
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: metal
 
 - type: entity
@@ -232,6 +253,9 @@
     state: rwall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 - type: entity
@@ -249,6 +273,9 @@
     state: hwall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rwall
 
 # Research
