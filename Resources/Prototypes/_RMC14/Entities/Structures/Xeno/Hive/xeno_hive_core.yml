@@ -83,6 +83,7 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
+  - type: RMCTrackable
 
 - type: entity
   id: HiveCoreXenoConstructionNode

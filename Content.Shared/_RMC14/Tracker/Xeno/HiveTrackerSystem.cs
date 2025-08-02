@@ -1,12 +1,10 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Alert;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -32,7 +30,7 @@ public sealed class HiveTrackerSystem : EntitySystem
 
     public override void Initialize()
     {
-        // TODO RMC14 resin tracker, hive leader tracker
+        // TODO RMC14 resin tracker
         SubscribeLocalEvent<HiveTrackerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerClickedAlertEvent>(OnClickedAlert);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerAltClickedAlertEvent>(OnAltClickedAlert);
@@ -45,9 +43,6 @@ public sealed class HiveTrackerSystem : EntitySystem
 
     private void OnRemove(Entity<HiveTrackerComponent> ent, ref ComponentRemove args)
     {
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
-
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
@@ -60,16 +55,21 @@ public sealed class HiveTrackerSystem : EntitySystem
         if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
 
-        args.Handled = true;
-        // TODO: if queen gets stored on the hive entity just use that instead of searching for it
-        var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent, HiveMemberComponent, XenoComponent>();
-        while (granters.MoveNext(out var uid, out var granter, out var member, out var xeno))
-        {
-            if (member.Hive != hive.Owner)
-                continue;
+        EntityUid? target = null;
 
-            _xenoWatch.Watch(ent.Owner, (uid, member));
-        }
+        // Watch the entity currently being tracked.
+        if (TryComp(ent.Comp.Target, out HiveMemberComponent? targetHive) && targetHive.Hive == hive.Owner)
+            target = ent.Comp.Target.Value;
+
+        // Watch the queen if the tracking target is not a xeno.
+        if (!HasComp<XenoComponent>(target))
+            target = hive.Comp.CurrentQueen;
+
+        if (target == null)
+            return;
+
+        args.Handled = true;
+        _xenoWatch.Watch(ent.Owner, target.Value);
     }
 
     private void OnAltClickedAlert(Entity<HiveTrackerComponent> ent, ref HiveTrackerAltClickedAlertEvent args)
@@ -145,10 +145,6 @@ public sealed class HiveTrackerSystem : EntitySystem
     private void UpdateDirection(Entity<HiveTrackerComponent> ent, MapCoordinates? coordinates = null)
     {
         _alerts.ClearAlertCategory(ent, HiveTrackerCategory);
-
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
-
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
@@ -204,9 +200,6 @@ public sealed class HiveTrackerSystem : EntitySystem
         var query = EntityQueryEnumerator<HiveTrackerComponent>();
         while (query.MoveNext(out var uid, out var tracker))
         {
-            if (!TryComp(uid, out HiveMemberComponent? member))
-                return;
-
             if (time < tracker.UpdateAt)
                 continue;
 
@@ -226,18 +219,17 @@ public sealed class HiveTrackerSystem : EntitySystem
             }
 
             // If the tracker is not tracking an entity, try to find a new target.
-            var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent>();
-            while (trackableQuery.MoveNext(out var trackableUid, out _))
+            var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, HiveMemberComponent>();
+            while (trackableQuery.MoveNext(out var trackableUid, out _, out var targetMember))
             {
-                if(tracker.Mode == new ProtoId<TrackerModePrototype>())
+                if (!TryComp(uid, out HiveMemberComponent? member))
                     break;
 
                 _prototypeManager.TryIndex(tracker.Mode, out var trackerMode);
-
                 if (trackerMode?.Component == null)
                     break;
 
-                if (!TryComp(trackableUid, out HiveMemberComponent? targetMember) || member.Hive != targetMember.Hive)
+                if (member.Hive != targetMember.Hive)
                     continue;
 
                 var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();

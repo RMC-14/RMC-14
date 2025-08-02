@@ -322,11 +322,11 @@
     - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
-    mode: Queen
     trackerModes:
     - Queen
     - HiveLeader
     - Tunnel
+    - HiveCore
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
