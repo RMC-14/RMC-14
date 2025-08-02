@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9ab207cd7ffba86a0411d7058645fb8f2a7895f3/icons/obj/items/paper.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/paperwork_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/paperwork_righthand.dmi, paper_stamp-provost and stamp-provost made by pursuitinashes (discord) based off of paper_stamp-marine and stamp-deny. paper_stamp-clf, paper_stamp-spp, paper_stamp-tse, and paper_stamp-free-press created by crazy1112345 (discord). stamp-clf, stamp-spp, stamp-tse, and stamp-free-press created by crazy1112345, based on stamp-marine.",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9ab207cd7ffba86a0411d7058645fb8f2a7895f3/icons/obj/items/paper.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/paperwork_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/paperwork_righthand.dmi, paper_stamp-provost and stamp-provost made by pursuitinashes (discord) based off of paper_stamp-marine and stamp-deny. paper_stamp-clf, paper_stamp-spp, paper_stamp-tse, and paper_stamp-free-press created by crazy1112345 (discord). stamp-clf, stamp-spp, stamp-tse, and stamp-free-press created by crazy1112345, based on stamp-marine. weya_pen made by SharkSnake98",
   "size": {
     "x": 32,
     "y": 32
@@ -286,6 +286,9 @@
     },
     {
       "name": "fountain_pen"
+    },
+    {
+      "name": "weya_pen"
     },
     {
       "name": "pen-equipped-SUITSTORAGE",
