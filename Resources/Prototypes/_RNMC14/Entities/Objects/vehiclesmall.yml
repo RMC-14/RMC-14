@@ -13,7 +13,6 @@
     baseSprintSpeed: 1
   - type: Tag
     tags:
-    - DoorBumpOpener
     - FootstepSound
   - type: Physics
     bodyType: KinematicController
@@ -23,7 +22,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.35
+          radius: 0.65
         density: 1000
         mask:
         - MobMask
@@ -56,6 +55,8 @@
           collection: MetalBreak
       - !type:DoActsBehavior # TODO RMC14 spawn wreckage
         acts: ["Destruction"]
+  - type: MobCollision
+  - type: RMCMobCollision
 
 - type: entity
   parent: RNMCVehicleSmallBase
