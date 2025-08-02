@@ -10,7 +10,7 @@
     - SeniorEnlistedAdvisor
     - PrimaryLandingZone
   - type: GrantTacMapAlert
-
+  - type: HeadsetAutoSquad
 
 # Alpha
 - type: entity
@@ -24,7 +24,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
 
 - type: entity
@@ -36,7 +35,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
@@ -59,7 +57,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
@@ -74,7 +71,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
       - CMEncryptionKeyEngineer
       - CMEncryptionKeyCommon
 
@@ -87,7 +83,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyAlpha
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
 
@@ -104,7 +99,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
 
 - type: entity
@@ -116,7 +110,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
@@ -139,7 +132,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
@@ -154,7 +146,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
       - CMEncryptionKeyEngineer
       - CMEncryptionKeyCommon
 
@@ -167,7 +158,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyBravo
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
 
@@ -184,7 +174,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
 
 - type: entity
@@ -196,7 +185,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
@@ -219,7 +207,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
@@ -234,7 +221,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
       - CMEncryptionKeyEngineer
       - CMEncryptionKeyCommon
 
@@ -247,7 +233,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCharlie
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
 
@@ -264,7 +249,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
 
 - type: entity
@@ -276,7 +260,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
@@ -299,7 +282,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
@@ -314,7 +296,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
       - CMEncryptionKeyEngineer
       - CMEncryptionKeyCommon
 
@@ -327,7 +308,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyDelta
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
 
@@ -344,7 +324,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
 
 - type: entity
@@ -356,7 +335,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
@@ -371,7 +349,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
@@ -394,7 +371,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
       - CMEncryptionKeyEngineer
       - CMEncryptionKeyCommon
 
@@ -407,7 +383,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyEcho
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
 
@@ -424,7 +399,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
 
 - type: entity
@@ -436,7 +410,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
   - type: RMCHeadset
@@ -451,7 +424,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
   - type: RMCHeadset
@@ -474,7 +446,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyEngineer
       - CMEncryptionKeyCommon
 
@@ -487,7 +458,6 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
 
