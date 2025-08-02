@@ -735,3 +735,9 @@
       - id: RMCPatchUnitedNationsSquare
         name: United Nations flag shoulder patch
         amount: 15
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+        amount: 10
+      - id: RMCGuidebookSOP
+        amount: 10

@@ -5,10 +5,8 @@
   id: RMCBible
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/bible.rsi
+    sprite: _RMC14/Objects/Misc/Books/Bibles/bible.rsi
     state: icon
-  - type: Item
-    sprite: _RMC14/Objects/Misc/bible.rsi
   - type: UseDelay
     delay: 10.0
   - type: MeleeWeapon
@@ -40,8 +38,8 @@
   suffix: Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/books.rsi
-    state: tome_hefa
+    sprite: _RMC14/Objects/Misc/Books/Tomes/hefa.rsi
+    state: icon
   - type: Storage
     maxItemSize: Small
     grid:
