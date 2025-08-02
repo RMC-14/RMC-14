@@ -1,7 +1,6 @@
 - type: job
   parent: RMCJobSyntheticColony
   id: RMCSyntheticColonyHybrisaEngineer
-  playTimeTracker: RMCJobSyntheticColonyHybrisaEngineer
   startingGear: RMCGearSyntheticColonistHybrisaEngineer
   spawnMenuRoleName: Engineer Synth (Hybrisa Survivor)
   special:
@@ -103,10 +102,6 @@
     - WeaponNailgun
     - CMSheetMetal20
     - CMSheetPlasteel10
-
-- type: playTimeTracker
-  id: RMCJobSyntheticColonyHybrisaEngineer
-  isHumanoid: true
 
 - type: entity
   id: RMCSurvivorPresetHybrisaSynthEngineer
