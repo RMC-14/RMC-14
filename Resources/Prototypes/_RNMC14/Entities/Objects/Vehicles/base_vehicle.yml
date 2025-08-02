@@ -1,0 +1,65 @@
+- type: entity
+  abstract: true
+  id: RNMCVehicleBase
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: MobMover
+  - type: DoAfter
+  - type: InputMover
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: KinematicController
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1
+  - type: Tag
+    tags:
+    - FootstepSound
+  - type: Clickable
+  - type: Appearance
+  - type: RotationVisuals
+    defaultRotation: 0
+    horizontalRotation: 0
+  - type: ContainerContainer
+    containers:
+      rmc-mech-pilot: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepBorg
+  - type: Strap
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior # TODO RMC14 spawn wreckage
+        acts: ["Destruction"]
+
+- type: entity
+  abstract: true
+  parent: RNMCVehicleBase
+  id: RNMCVehicleSmallBase
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.65
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobCollision
+  - type: RMCMobCollision
