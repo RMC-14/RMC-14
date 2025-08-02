@@ -1,0 +1,117 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCWeaponRifleL24B
+  name: L24B rifle
+  description: A rare sight, this rifle is seen most commonly in the hands of the Three Suns Empires Royal Crown Marines units. This particular model was modified to facilitate RMC operations in tight quarters.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/inhand.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/icon.rsi
+    - state: bolt-open
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24B/inhand.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: RMCSSG45Shoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 2
+    recoilUnwielded: 2
+    scatterWielded: 3
+    scatterUnwielded: 10
+    baseFireRate: 2.75
+    burstScatterMult: 1
+    modifiers:
+      Burst:
+        fireDelay: 0.225
+        maxScatterModifier: 6
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0
+        maxScatterModifier: 6
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.3
+    accuracyMultiplierUnwielded: 0.90
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL24
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL24
+          - RMCMagazineRifleL24AP
+          - RMCMagazineRifleL24Extended
+          - RMCMagazineRifleL24HEAP
+          - RMCMagazineRifleL24Incendiary
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: AttachableHolder
+    randomAttachmentChance: 1
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+        random:
+        - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+        random:
+        - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentL24BStock
+        whitelist:
+          tags:
+          - RMCAttachmentL24BStock
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentU7UnderbarrelShotgun
+        whitelist:
+          tags:
+          - RMCAttachmentU7UnderbarrelShotgun
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.906, 0.03125
+      rmc-aslot-rail: -0.0175, 0.19
+      rmc-aslot-stock: -0.469, 0.01
+      rmc-aslot-underbarrel: 0.31375, -0.315
+
+
+- type: Tag
+  id: RMCWeaponRifleL24B
+
