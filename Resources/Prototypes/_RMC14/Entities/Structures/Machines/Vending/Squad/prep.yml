@@ -130,6 +130,8 @@
         amount: 2
       - id: RMCWebbingDropPouch
         amount: 1
+      - id: RMCWebbingDropPouchBlack
+        amount: 1
       - id: CMWebbingHolster
         amount: 1
     - name: Armor
