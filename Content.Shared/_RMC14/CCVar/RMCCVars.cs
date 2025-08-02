@@ -126,9 +126,6 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCActiveInputMoverEnabled =
         CVarDef.Create("rmc.active_input_mover_enabled", true, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<string> RMCAdminFaxAreaMap =
-        CVarDef.Create("rmc.admin_fax_area_map", "Maps/_RMC14/admin_fax.yml", CVar.REPLICATED | CVar.SERVER);
-
     public static readonly CVarDef<int> RMCBioscanInitialDelaySeconds =
         CVarDef.Create("rmc.bioscan_initial_delay_seconds", 300, CVar.REPLICATED | CVar.SERVER);
 
