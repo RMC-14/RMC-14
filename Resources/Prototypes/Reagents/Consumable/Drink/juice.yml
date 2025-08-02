@@ -170,3 +170,18 @@
   physicalDesc: reagent-physical-desc-sweet
   flavor: cherry
   color: "#84031a"
+
+- type: reagent ##RMC14
+  id: JuiceMango
+  name: reagent-name-juice-mango
+  parent: BaseJuice
+  desc: reagent-desc-juice-mango
+  physicalDesc: reagent-physical-desc-citric
+  flavor: mango
+  color: "#FFBF34"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/orangejuiceglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false

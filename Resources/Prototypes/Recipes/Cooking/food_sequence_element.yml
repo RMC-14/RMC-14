@@ -1580,3 +1580,23 @@
 #  name: food-sequence-cotton-burger-content-among-pequeno
 #  sprites:
 #  - sprite: Objects/Fun/pequeno.rsi
+
+- type: foodSequenceElement
+  id: Mango
+  scale: 0.8, 0.8
+  name: food-sequence-content-mango
+  sprites:
+  - sprite: _RMC14/Objects/Kitchen/Plants/mango.rsi
+    state: produce
+  tags:
+  - Fruit
+
+- type: foodSequenceElement
+  id: MangoBurger
+  scale: 0.8, 0.8
+  name: food-sequence-burger-content-mango
+  sprites:
+  - sprite: _RMC14/Objects/Kitchen/Plants/mango.rsi
+    state: produce
+  tags:
+  - Fruit
