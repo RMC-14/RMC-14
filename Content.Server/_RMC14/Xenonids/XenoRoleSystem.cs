@@ -134,7 +134,9 @@ public sealed class XenoRoleSystem : EntitySystem
         }
 
         int rank;
-        if (time > _rankFiveTime)
+        if (!profile.PlaytimePerks)
+            rank = 1;
+        else if (time > _rankFiveTime)
             rank = 5;
         else if (time > _rankFourTime)
             rank = 4;
@@ -142,8 +144,6 @@ public sealed class XenoRoleSystem : EntitySystem
             rank = 3;
         else if (time > _rankTwoTime)
             rank = 2;
-        else if (!profile.PlaytimePerks)
-            rank = 1;
         else
             rank = 0;
 
