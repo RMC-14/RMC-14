@@ -209,6 +209,7 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
     - name: Mask
       choices: { CMMask: 1 }
