@@ -135,6 +135,7 @@
     - accuracyAddMult: 0.25
       damageFalloffAddMult: -0.3
       damageAddMult: -0.2
+      rangeFlat: 1
     - conditions:
         wieldedOnly: true
       recoilFlat: 2
