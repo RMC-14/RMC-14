@@ -220,8 +220,8 @@
   - type: DropshipAmmo
     ammoType: minirocket
     explosion:
-      total: 640
-      slope: 10
+      total: 850
+      slope: 8
       max: 40
     impactEffects:
     - RMCEffectExplosionParticle
