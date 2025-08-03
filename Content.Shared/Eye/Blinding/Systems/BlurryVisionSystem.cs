@@ -1,8 +1,6 @@
-using System.Linq;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Inventory;
-using Content.Shared._RMC14.Medical.TemporaryBlurryVision;
 
 namespace Content.Shared.Eye.Blinding.Systems;
 
@@ -28,17 +26,7 @@ public sealed class BlurryVisionSystem : EntitySystem
         if (!Resolve(ent.Owner, ref ent.Comp, false))
             return;
 
-        var maxModificatorStrength = 0;
-
-        if (TryComp<TemporaryBlurryVisionComponent>(ent, out var comp))
-        {
-            if (comp.TemporaryBlurModificators.Count != 0)
-            {
-                maxModificatorStrength = comp.TemporaryBlurModificators.Max(mod => mod.EffectStrength);
-            }
-        }
-
-        var ev = new GetBlurEvent(Math.Max(ent.Comp.EyeDamage, maxModificatorStrength));
+        var ev = new GetBlurEvent(ent.Comp.EyeDamage);
         RaiseLocalEvent(ent, ev);
 
         var blur = Math.Clamp(ev.Blur, 0, BlurryVisionComponent.MaxMagnitude);
