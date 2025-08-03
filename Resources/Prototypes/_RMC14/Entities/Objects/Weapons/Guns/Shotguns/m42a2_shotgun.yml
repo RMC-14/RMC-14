@@ -84,5 +84,13 @@
     - RMCWeaponShotgunM42A2
     - RMCWeaponShotgun
 
+- type: entity
+  parent: WeaponShotgunM42A2
+  id: RMCWeaponShotgunM42A2Filled
+  suffix: Filled
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot
+
 - type: Tag
   id: RMCWeaponShotgunM42A2

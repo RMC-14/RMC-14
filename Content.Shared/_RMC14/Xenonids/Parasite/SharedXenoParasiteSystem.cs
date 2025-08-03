@@ -368,8 +368,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimInfectedExamined(Entity<VictimInfectedComponent> victim, ref ExaminedEvent args)
     {
-        if (HasComp<XenoComponent>(args.Examiner) || (CompOrNull<GhostComponent>(args.Examiner)?.CanGhostInteract ?? false))
-            args.PushMarkup("This creature is impregnated.");
+        if (HasComp<XenoComponent>(args.Examiner))
+            args.PushMarkup("This one is hosting a sister! She will emerge in time.");
+
+        else if (HasComp<GhostComponent>(args.Examiner))
+            args.PushMarkup("This creature is infected.");
     }
 
     private void OnVictimInfectedRejuvenate(Entity<VictimInfectedComponent> victim, ref RejuvenateEvent args)

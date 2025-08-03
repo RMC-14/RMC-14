@@ -310,14 +310,6 @@
         amount: 15
 
 - type: entity
-  parent: ColMarTechSurplus
-  id: RMCColMarTechSurplusPVE
-  suffix: PVE
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/squad_prep.rsi
-
-- type: entity
   parent: ColMarTechBase
   id: ColMarTechMunitions
   name: ColMarTech automated munition squad vendor
@@ -463,14 +455,6 @@
         amount: 2
       - id: RMCMagazineSMGNailgun
         amount: 2
-
-- type: entity
-  parent: ColMarTechUtilities
-  id: RMCColMarTechUtilitiesPVE
-  suffix: PVE
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
 
 - type: entity
   parent: ColMarTechBase
