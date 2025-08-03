@@ -1,0 +1,72 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMPlatoonCommanderPVE
+  name: cm-job-name-platoon-commander
+  description: cm-job-description-platoon-commander
+  playTimeTracker: CMJobPlatoonCommanderPVE
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobPlatoonCommanderPVE
+      time: 36000 # 10 hours
+    RMCRankSecondLT: []
+  weight: 5
+  startingGear: CMGearPlatco
+  icon: "CMJobIconPlatoonCommander"
+  requireAdminNotify: true
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-co
+  accessGroups:
+  - PlatcoAccess
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillPilot: 2
+        RMCSkillNavigations: 1
+        RMCSkillEndurance: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+        RMCSkillSpecialistWeapons: 7
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-platoon-commander
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: platco
+
+- type: startingGear
+  id: CMGearPlatco
+  equipment:
+    id: CMIDCardStaffOfficer
+
+- type: playTimeTracker
+  id: CMJobPlatoonCommanderPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointPlatcoSunRiders
+  name: sun riders platoon commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMPlatoonCommanderPVE
+  - type: Sprite
+    state: marine_spawn

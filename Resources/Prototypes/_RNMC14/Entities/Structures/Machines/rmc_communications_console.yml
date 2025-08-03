@@ -1,0 +1,37 @@
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCOverwatchConsoleSunRiders
+  name: overwatch console
+  description: State of the art machinery for giving orders to a squad.
+  suffix: Sun Riders
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: overwatch
+    overrideDir: West
+    enableOverrideDir: true
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.OverwatchConsoleUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessPlatco" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.OverwatchConsoleUI.Key:
+        type: OverwatchConsoleBui
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: RequiresSkill
+    skills:
+      RMCSkillOverwatch: 1
+  - type: OverwatchConsole
+    group: SunRiders
+  - type: TacticalMapComputer
+  - type: SupplyDropComputer

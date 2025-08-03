@@ -455,3 +455,15 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetTSEPAFill
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerPlatoonCommander
+  name: platoon commander locker
+  components:
+  - type: AccessReader
+    access: [["CMAccessPlatco"]]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetGoldenArrowPlatoonCommanderFill

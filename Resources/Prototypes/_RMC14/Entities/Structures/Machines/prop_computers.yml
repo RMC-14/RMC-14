@@ -95,7 +95,7 @@
   components:
   - type: Sprite
     state: engineering_terminal
-    
+
 - type: entity
   parent: RMCPropComputerBase
   id: RMCStationAlertComputer

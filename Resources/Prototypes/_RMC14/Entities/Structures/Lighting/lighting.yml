@@ -253,6 +253,9 @@
       On: bptube1
       Broken: bptube-broken
       Burned: bptube-burned
+  - type: PointLight
+    color: "#DAE2FF"
+    energy: 0.35
 
 # Light Bulbs
 
@@ -400,3 +403,6 @@
       On: bbulb1
       Broken: bbulb-broken
       Burned: bbulb-burned
+  - type: PointLight
+    color: "#DAE2FF"
+    energy: 0.5

@@ -1,0 +1,64 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMSectionSergeantPVE
+  name: cm-job-name-section-sergeant
+  description: cm-job-description-section-sergeant
+  playTimeTracker: CMJobSectionSergeantPVE
+  ranks:
+    RMCRankGunnerySergeant: []
+  startingGear: CMGearSquadLeader
+  dummyStartingGear: CMGearSquadLeaderEquipped
+  icon: "CMJobIconSquadLeader"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-platco
+  accessGroups:
+  - SquadLeader
+  overwatchSortPriority: -6
+  overwatchShowName: true
+  overwatchRoleName: Squad Leader
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillVehicles: 1
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillPowerLoader: 1
+        RMCSkillPilot: 2
+        RMCSkillSurgery: 1
+        RMCSkillCqc: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: leader
+
+- type: playTimeTracker
+  id: CMJobSectionSergeantPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSectionSergeantSunRiders
+  name: sun riders section sergeant spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSectionSergeantPVE
+  - type: Sprite
+    state: marine_spawn
