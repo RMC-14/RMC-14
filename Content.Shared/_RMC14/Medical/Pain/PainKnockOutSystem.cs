@@ -23,14 +23,6 @@ public sealed class PainKnockOutSystem : EntitySystem
         SubscribeLocalEvent<PainKnockOutComponent, UpdateMobStateEvent>(OnMobStateUpdate);
     }
 
-    private void OnComponentRemove(EntityUid uid, PainKnockOutComponent knockout, ComponentRemove args)
-    {
-        if (TryComp<MobThresholdsComponent>(uid, out var thresholds))
-        {
-            EnableAliveState(uid, knockout, thresholds);
-        }
-    }
-
     // temporarily making the Alive state unavailable, we save the previous Critical threshold to the PainKnockOutComponent
     private void BlockAliveState(EntityUid uid, PainKnockOutComponent knockout, MobThresholdsComponent thresholds)
     {
@@ -55,6 +47,14 @@ public sealed class PainKnockOutSystem : EntitySystem
         _mobThresholds.SetMobStateThreshold(uid, knockout.previousCritThreshold, MobState.Critical, thresholds);
         _mobThresholds.SetMobStateThreshold(uid, knockout.previousAliveThreshold, MobState.Alive, thresholds);
         Dirty(uid, knockout);
+    }
+
+    private void OnComponentRemove(EntityUid uid, PainKnockOutComponent knockout, ref ComponentRemove args)
+    {
+        if (TryComp<MobThresholdsComponent>(uid, out var thresholds))
+        {
+            EnableAliveState(uid, knockout, thresholds);
+        }
     }
 
     private void OnStatusEffectAdded(Entity<PainKnockOutComponent> ent, ref StatusEffectAddedEvent args)
