@@ -369,7 +369,6 @@ public sealed class RMCConstructionSystem : EntitySystem
         // If the stack amount is equal to the default amount, use the default material cost.
         // Otherwise, use the material cost times the stack amount.
         var totalAmount = args.Amount / entry.Amount; // So a stack of 20 with an amount of 4 and a cost of 1 is correctly 5 cost
-        var totalAmount = args.Amount / entry.Amount;
         var cost = (args.Amount == entry.Amount) ? entry.MaterialCost : totalAmount * entry.MaterialCost;
 
         if (TryComp<StackComponent>(ent.Owner, out var stack))
