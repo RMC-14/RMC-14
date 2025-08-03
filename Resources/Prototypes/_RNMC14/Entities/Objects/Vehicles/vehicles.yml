@@ -41,3 +41,4 @@
     baseSprintSpeed: 7.5
   - type: TileFrictionModifier
     modifier: 0.005
+  - type: NoRotateOnInteract
