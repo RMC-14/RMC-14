@@ -22,7 +22,9 @@
     - state: red
     - sprite: Objects/Fun/figurines.rsi
     state: bartender
-  - type: RandomPatronFigurineSpawner # TODO RMC14 max 1 of each if any have yet to be picked at least once, to guarantee variety
+  - type: RandomSpawner # Ronstation - Replace patron figurines with our own set of figurines.
+    prototypes: # Ronstation
+    - RNMCFigurinePatronRifleman # Ronstation
 
 - type: entity
   parent: RMCBaseFigurinePatron
