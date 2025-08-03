@@ -202,9 +202,9 @@
   - type: DropshipAmmo
     travelTime: 5
     explosion:
-      total: 850
-      slope: 5.5
-      max: 30
+      total: 1850
+      slope: 3.2
+      max: 32
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoRocket
@@ -245,8 +245,8 @@
   - type: DropshipAmmo
     travelTime: 6
     explosion:
-      total: 950
-      slope: 6.25
+      total: 2000
+      slope: 5.5
       max: 40
     fire:
       type: RMCTileFireBanshee

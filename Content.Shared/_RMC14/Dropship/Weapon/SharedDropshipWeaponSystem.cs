@@ -1164,17 +1164,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     _rmcImplosion.Implode(flight.Implosion, target);
                 }
 
-                if (flight.Explosion != null)
-                {
-                    _rmcExplosion.QueueExplosion(target,
-                        flight.Explosion.Type,
-                        flight.Explosion.Total,
-                        flight.Explosion.Slope,
-                        flight.Explosion.Max,
-                        uid
-                    );
-                }
-
                 if (flight.Fire != null)
                 {
                     var chain = _onCollide.SpawnChain();
@@ -1230,6 +1219,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                                 );
                             }
                         }
+                    }
+
+                    if (flight.Explosion != null)
+                    {
+                        _rmcExplosion.QueueExplosion(target,
+                            flight.Explosion.Type,
+                            flight.Explosion.Total,
+                            flight.Explosion.Slope,
+                            flight.Explosion.Max,
+                            uid,
+                            canCreateVacuum: false
+                        );
                     }
                 }
 
