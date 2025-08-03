@@ -40,5 +40,5 @@
     baseWalkSpeed: 5
     baseSprintSpeed: 7.5
   - type: TileFrictionModifier
-    modifier: 0.005
+    modifier: 0.4
   - type: NoRotateOnInteract
