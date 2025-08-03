@@ -8,6 +8,7 @@ rmc-bslot-barrel = Mateba Barrel
 rmc-aslot-rail = Rail
 rmc-aslot-stock = Stock
 rmc-aslot-underbarrel = Underbarrel
+rmc-aslot-harness = Harness
 
 rmc-attachable-activation-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wielded to activate {THE($attachable)}!
 rmc-attachable-activation-fail-not-held = {CAPITALIZE(THE($holder))} must be held to activate {THE($attachable)}!

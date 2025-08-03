@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed being able to place sandbags in dropships
-    type: Fix
-  id: 1589
-  time: '2025-04-18T06:00:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6175
-- author: Vermidia
-  changes:
-  - message: Fixed burrow not taking at least 1 second to unburrow at a minimum.
-    type: Fix
-  - message: Fixed tremor cooldown being too high (45 > 30)
-    type: Fix
-  - message: Fixed burrow stunning too long on unburrow (4>3 seconds)
-    type: Fix
-  id: 1590
-  time: '2025-04-19T05:49:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6181
-- author: CyberTropic
-  changes:
-  - message: Added Sunsets to round start, and Sunrises to Marine Major.
-    type: Add
-  id: 1591
-  time: '2025-04-19T05:48:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6174
-- author: Arykh
-  changes:
-  - message: Fixed error sprite appearing when attaching paper to closets, lockers,
-      and fridges.
-    type: Fix
-  id: 1592
-  time: '2025-04-19T06:00:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6178
 - author: DummeHytteOst
   changes:
   - message: Fixed shale tiles (blue rock) not being semi weedable.
@@ -4884,5 +4851,37 @@
   id: 2089
   time: '2025-07-25T22:49:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7246
+- author: DummeHytteOst
+  changes:
+  - message: Fixed USCM being mentioned in a few places, and changed them correctly
+      to UNMC.
+    type: Fix
+  id: 2090
+  time: '2025-07-30T22:30:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7329
+- author: MoonlightHollow
+  changes:
+  - message: ASO now has Research access and skill
+    type: Add
+  id: 2091
+  time: '2025-07-30T22:33:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7262
+- author: noctyrnal
+  changes:
+  - message: Added the 'UNCSS Haurchefant', a PMC shipmap for PVE, designed for slighter
+      smaller max pops than Sun Rider sessions.
+    type: Add
+  id: 2092
+  time: '2025-08-01T08:44:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7335
+- author: noctyrnal
+  changes:
+  - message: Resprited the SSG45 and AK4047.
+    type: Tweak
+  - message: Resprited the worn and inhand sprites for the RIVAL shotguns.
+    type: Tweak
+  id: 2093
+  time: '2025-08-01T22:02:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7346
 Name: RMC14
 Order: -1

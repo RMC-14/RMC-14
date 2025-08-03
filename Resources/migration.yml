@@ -1358,3 +1358,7 @@ RMCCrateM79: RMCCrateM85A1
 BoxBeaker: RMCBoxBeaker
 BoxPillCanister: RMCBoxPillCanister
 BoxSyringe: RMCBoxSyringe
+
+# 2025-08-01
+WeaponRifleSSG45: RMCWeaponRifleSSG45
+
