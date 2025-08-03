@@ -150,7 +150,7 @@ public sealed class RMCConstructionSystem : EntitySystem
                     return containerSlot.ContainedEntity.Value;
             }
         }
-        
+
         return null;
     }
 
@@ -185,17 +185,20 @@ public sealed class RMCConstructionSystem : EntitySystem
         var userTile = userCoords.ToVector2i(EntityManager, _mapManager, _transform);
         var buildTile = coordinates.ToVector2i(EntityManager, _mapManager, _transform);
 
-        if (userTile != buildTile)
+        if (proto.Type == RMCConstructionType.Structure && userTile != buildTile)
             return false;
 
         if (proto.Skill is { } skill && !_skills.HasSkill(user, skill, proto.RequiredSkillLevel))
             return false;
 
-        if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out _, direction: direction, collision: proto.RestrictedCollisionGroup))
-            return false;
+        if (proto.Type == RMCConstructionType.Structure)
+        {
+            if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out _, direction: direction, collision: proto.RestrictedCollisionGroup))
+                return false;
 
-        if (proto.RestrictedTags is { } tags && _rmcMap.TileHasAnyTag(coordinates, tags))
-            return false;
+            if (proto.RestrictedTags is { } tags && _rmcMap.TileHasAnyTag(coordinates, tags))
+                return false;
+        }
 
         var attempt = new RMCConstructionAttemptEvent(coordinates, proto.Name);
         RaiseLocalEvent(ref attempt);
@@ -241,17 +244,20 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
+        if (proto.Type == RMCConstructionType.Structure)
         {
-            _popup.PopupEntity(popup ?? $"Cannot build {proto.Name} here.", ent, user, PopupType.SmallCaution);
-            return false;
-        }
+            if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
+            {
+                _popup.PopupEntity(popup ?? $"Cannot build {proto.Name} here.", ent, user, PopupType.SmallCaution);
+                return false;
+            }
 
-        if (proto.RestrictedTags is { } tags && _rmcMap.TileHasAnyTag(coordinates, tags))
-        {
-            var message = Loc.GetString("rmc-construction-not-proper-surface", ("construction", proto.Name));
-            _popup.PopupEntity(message, ent, user, PopupType.SmallCaution);
-            return false;
+            if (proto.RestrictedTags is { } tags && _rmcMap.TileHasAnyTag(coordinates, tags))
+            {
+                var message = Loc.GetString("rmc-construction-not-proper-surface", ("construction", proto.Name));
+                _popup.PopupEntity(message, ent, user, PopupType.SmallCaution);
+                return false;
+            }
         }
 
         if (proto.MaterialCost is { } materialCost && TryComp<StackComponent>(ent.Owner, out var stack))
@@ -283,9 +289,9 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(doAfterTime), ev, ent, ent)
         {
-            BreakOnMove = true,
+            BreakOnMove = proto.Type == RMCConstructionType.Structure,
             BreakOnDamage = false,
-            MovementThreshold = 0.5f,
+            MovementThreshold = proto.Type == RMCConstructionType.Structure ? 0.5f : float.MaxValue,
             DuplicateCondition = DuplicateConditions.SameEvent,
             CancelDuplicate = true
         };
@@ -305,6 +311,14 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         var direction = transform.LocalRotation.GetCardinalDir();
         var coordinates = transform.Coordinates;
+
+        if (!_prototype.TryIndex<RMCConstructionPrototype>(protoID, out var proto))
+            return false;
+
+        if (proto.Type == RMCConstructionType.Item)
+        {
+            coordinates = transform.Coordinates;
+        }
 
         return BuildAtLocation(ent, user, protoID, amount, coordinates, direction, ghostId);
     }
@@ -355,6 +369,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         // If the stack amount is equal to the default amount, use the default material cost.
         // Otherwise, use the material cost times the stack amount.
         var totalAmount = args.Amount / entry.Amount; // So a stack of 20 with an amount of 4 and a cost of 1 is correctly 5 cost
+        var totalAmount = args.Amount / entry.Amount;
         var cost = (args.Amount == entry.Amount) ? entry.MaterialCost : totalAmount * entry.MaterialCost;
 
         if (TryComp<StackComponent>(ent.Owner, out var stack))
@@ -374,21 +389,40 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (!Deleted(ent))
             UpdateStackAmountUI(ent);
 
-        if (args.Amount > 1)
+        if (entry.Type == RMCConstructionType.Item)
         {
-            SpawnMultiple(entry.Prototype, args.Amount, coordinates);
+            var userTransform = Transform(args.User);
+            if (args.Amount > 1)
+            {
+                SpawnMultiple(entry.Prototype, args.Amount, userTransform.Coordinates);
+            }
+            else
+            {
+                var built = SpawnAtPosition(entry.Prototype, userTransform.Coordinates);
+                if (TryComp<StackComponent>(built, out var builtStack))
+                {
+                    _stack.TryMergeToHands(built, args.User);
+                }
+            }
         }
         else
         {
-            var built = SpawnAtPosition(entry.Prototype, coordinates);
+            if (args.Amount > 1)
+            {
+                SpawnMultiple(entry.Prototype, args.Amount, coordinates);
+            }
+            else
+            {
+                var built = SpawnAtPosition(entry.Prototype, coordinates);
 
-            if (!entry.NoRotate)
-                _transform.SetLocalRotation(built, args.Direction.ToAngle());
+                if (!entry.NoRotate)
+                    _transform.SetLocalRotation(built, args.Direction.ToAngle());
 
             // This is so you won't be stuck inside of a construction you build
             // Removes collision with the construction until you leave
-            if (!HasComp<BarricadeComponent>(built))
-                MakeConstructionImmuneToCollision(built, args.User);
+                if (!HasComp<BarricadeComponent>(built))
+                    MakeConstructionImmuneToCollision(built, args.User);
+            }
         }
 
         if (args.GhostId != null)

@@ -113,7 +113,7 @@ public sealed class RMCConstructionBui : BoundUserInterface
 
                 button.OnPressed += _ =>
                 {
-                    StartGhostPlacement(build);
+                    HandleConstruction(build, stack);
                 };
 
                 control.Button.SetWidth = 250;
@@ -123,10 +123,22 @@ public sealed class RMCConstructionBui : BoundUserInterface
 
         control.Button.OnPressed += _ =>
         {
-            StartGhostPlacement(build);
+            HandleConstruction(build, build.Amount);
         };
 
         _window?.ConstructionContainer.AddChild(control);
+    }
+
+    private void HandleConstruction(RMCConstructionPrototype prototype, int amount)
+    {
+        if (prototype.Type == RMCConstructionType.Item)
+        {
+            SendMessage(new RMCConstructionBuiMsg(prototype.ID, amount));
+        }
+        else
+        {
+            StartGhostPlacement(prototype);
+        }
     }
 
     private void StartGhostPlacement(RMCConstructionPrototype prototype)

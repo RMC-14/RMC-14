@@ -1,6 +1,7 @@
 - type: rmcConstruction
   id: RMCGrilleBuild
   name: grille
+  constructionType: Structure
   prototype: RMCGrille
   noRotate: true
   doAfterTime: 2
@@ -11,6 +12,7 @@
 - type: rmcConstruction
   id: RMCFenceBuild
   name: fence
+  constructionType: Structure
   prototype: CMFence
   noRotate: true
   doAfterTime: 2

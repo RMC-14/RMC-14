@@ -104,9 +104,16 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         if (_isPlacementActive && _currentPrototype != null && _currentConstructionItem != null)
         {
-            if (_currentGhost == null)
-                CreateCursorFollowingGhost();
-            UpdateGhostPosition();
+            if (_currentPrototype.Type == RMCConstructionType.Structure)
+            {
+                if (_currentGhost == null)
+                    CreateCursorFollowingGhost();
+                UpdateGhostPosition();
+            }
+            else
+            {
+                ClearCurrentGhost();
+            }
         }
         else
         {
@@ -338,13 +345,21 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (args.State != BoundKeyState.Down)
             return false;
 
-        if (_isPlacementActive && _currentGhost != null && _currentPrototype != null && _currentConstructionItem != null)
+        if (_isPlacementActive && _currentPrototype != null && _currentConstructionItem != null)
         {
-            var mousePos = SnapToGrid(_inputManager.MouseScreenPosition);
-            if (mousePos.IsValid(EntityManager))
+            if (_currentPrototype.Type == RMCConstructionType.Item)
             {
-                PlaceStructureAtLocation(mousePos);
+                StartItemConstruction();
                 return true;
+            }
+            else if (_currentGhost != null)
+            {
+                var mousePos = SnapToGrid(_inputManager.MouseScreenPosition);
+                if (mousePos.IsValid(EntityManager))
+                {
+                    PlaceStructureAtLocation(mousePos);
+                    return true;
+                }
             }
         }
 
@@ -355,6 +370,31 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private void StartItemConstruction()
+    {
+        var player = _playerManager.LocalEntity;
+        if (player == null || _currentPrototype == null || _currentConstructionItem == null)
+            return;
+
+        var playerCoords = EntityManager.GetComponent<TransformComponent>(player.Value).Coordinates;
+
+        if (!CheckConstructionConditionsForGhost(_currentPrototype, playerCoords, _currentDirection, player.Value, _currentConstructionItem.Value))
+        {
+            StartFlash();
+            return;
+        }
+
+        var msg = new RMCConstructionGhostBuildMessage(
+            _currentPrototype.ID,
+            _currentPrototype.Amount,
+            GetNetCoordinates(playerCoords),
+            _currentDirection,
+            Random.Shared.Next());
+
+        RaiseNetworkEvent(msg);
+        StopPlacement();
     }
 
     private void PlaceStructureAtLocation(EntityCoordinates coords)
@@ -460,11 +500,14 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (HasComp<DisableConstructionComponent>(user))
             return false;
 
-        if (_transformSystem.GetGrid(loc) is { } gridId && HasComp<DropshipComponent>(gridId))
-            return false;
+        if (prototype.Type == RMCConstructionType.Structure)
+        {
+            if (_transformSystem.GetGrid(loc) is { } gridId && HasComp<DropshipComponent>(gridId))
+                return false;
 
-        if (prototype.RestrictedTags != null && _rmcMap.TileHasAnyTag(loc, prototype.RestrictedTags))
-            return false;
+            if (prototype.RestrictedTags != null && _rmcMap.TileHasAnyTag(loc, prototype.RestrictedTags))
+                return false;
+        }
 
         return true;
     }

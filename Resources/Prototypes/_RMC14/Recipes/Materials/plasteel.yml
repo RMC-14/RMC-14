@@ -1,6 +1,7 @@
 - type: rmcConstruction
   id: RMCPlasteelBarricadeFoldableBuild
   name: folding plasteel barricade
+  constructionType: Structure
   prototype: CMBarricadePlasteelDoor
   doAfterTime: 4
   doAfterTimeMin: 2
@@ -11,6 +12,7 @@
 - type: rmcConstruction
   id: RMCPlasteelBarricadeBuild
   name: plasteel barricade
+  constructionType: Structure
   prototype: RMCBarricadePlasteel
   doAfterTime: 8
   doAfterTimeMin: 2
@@ -21,6 +23,7 @@
 - type: rmcConstruction
   id: RMCReinforcedWindowFrameBuild
   name: reinforced window frame
+  constructionType: Structure
   prototype: RMCWindowFrameColonyReinforced
   noRotate: true
   doAfterTime: 4
@@ -31,6 +34,7 @@
 - type: rmcConstruction
   id: RMCPlasteelRodBuild
   name: plasteel rod
+  constructionType: Item
   prototype: CMRodPlasteel1
   doAfterTime: 0
   doAfterTimeMin: 0
@@ -44,6 +48,7 @@
 - type: rmcConstruction
   id: RMCMetalCrateBuild
   name: metal crate
+  constructionType: Structure
   prototype: RMCCrateMetalBuildable
   restrictedCollisionGroup: MidImpassable
   noRotate: true
