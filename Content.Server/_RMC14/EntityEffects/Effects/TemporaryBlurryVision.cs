@@ -17,16 +17,8 @@ public sealed partial class TemporaryBlurryVision : EntityEffect
 
     public override void Effect(EntityEffectBaseArgs args)
     {
-        var time = Time;
-
-        if (args is EntityEffectReagentArgs reagentArgs)
-        {
-            time *= reagentArgs.Scale.Float();
-        }
-
         var scale = (args as EntityEffectReagentArgs)?.Scale ?? 1;
-        var modificator = new TemporaryBlurModificator(TimeSpan.FromSeconds(Time * scale.Float()), Blur);
         var blurrySys = args.EntityManager.EntitySysManager.GetEntitySystem<TemporaryBlurryVisionSystem>();
-        blurrySys.AddTemporaryBlurModificator(args.TargetEntity, modificator);
+        blurrySys.AddTemporaryBlurModificator(args.TargetEntity, TimeSpan.FromSeconds(Time * scale.Float()), Blur);
     }
 }

@@ -189,10 +189,10 @@ public sealed partial class PainSystem : EntitySystem
             UpdateCurrentPainPercentage(uid, pain);
 
             var painLevels = pain.PainLevels.OrderBy(level => level.Threshold).ToList(); // in case someone writes it in the wrong order
-            bool isExpectedUpdated = false;
-            int expectedPainLevel = 0;
+            var isExpectedUpdated = false;
+            var expectedPainLevel = 0;
 
-            for (int i = 0; i < painLevels.Count(); i++)
+            for (var i = 0; i < painLevels.Count; i++)
             {
                 if (painLevels[i].Threshold < pain.CurrentPainPercentage)
                 {
@@ -211,12 +211,12 @@ public sealed partial class PainSystem : EntitySystem
                 DirtyField(uid, pain, nameof(PainComponent.CurrentPainLevel));
             }
 
-            if (!painLevels.Any() || !isExpectedUpdated)
-                    continue;
+            if (painLevels.Count == 0 || !isExpectedUpdated)
+                continue;
 
             var currentEffectList = painLevels[pain.CurrentPainLevel].LevelEffects;
 
-            if (!currentEffectList.Any())
+            if (currentEffectList.Count == 0)
                 continue;
 
             var args = new EntityEffectBaseArgs(uid, EntityManager);

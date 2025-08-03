@@ -10,12 +10,18 @@ public sealed class TemporaryBlurryVisionSystem : EntitySystem
     [ValidatePrototypeId<StatusEffectPrototype>]
 
     [Dependency] private readonly BlurryVisionSystem _blur = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<TemporaryBlurryVisionComponent, GetBlurEvent>(OnGetBlur);
     }
 
+    public void AddTemporaryBlurModificator(EntityUid uid, TimeSpan duration, int strength, TemporaryBlurryVisionComponent? blur = null)
+    {
+        var mod = new TemporaryBlurModificator(duration + _timing.CurTime, strength);
+        AddTemporaryBlurModificator(uid, mod, blur);
+    }
     public void AddTemporaryBlurModificator(EntityUid uid, TemporaryBlurModificator mod, TemporaryBlurryVisionComponent? blur = null)
     {
         blur = EnsureComp<TemporaryBlurryVisionComponent>(uid);
@@ -23,22 +29,34 @@ public sealed class TemporaryBlurryVisionSystem : EntitySystem
         blur.TemporaryBlurModificators.Add(mod);
         _blur.UpdateBlurMagnitude(uid);
         Dirty(uid, blur);
-
-        Timer.Spawn(mod.Duration, () => RemoveTemporaryBlurModificator(uid, mod, blur));
-    }
-
-    private void RemoveTemporaryBlurModificator(EntityUid uid, TemporaryBlurModificator mod, TemporaryBlurryVisionComponent? blur = null)
-    {
-        if (!Resolve(uid, ref blur))
-            return;
-
-        blur.TemporaryBlurModificators.Remove(mod);
-        _blur.UpdateBlurMagnitude(uid);
-        Dirty(uid, blur);
     }
 
     private void OnGetBlur(EntityUid uid, TemporaryBlurryVisionComponent comp, ref GetBlurEvent args)
     {
+        if (comp.TemporaryBlurModificators.Count == 0)
+            return;
+
         args.Blur = comp.TemporaryBlurModificators.Max(mod => mod.EffectStrength);
+    }
+
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+        var blurQuery = EntityQueryEnumerator<TemporaryBlurryVisionComponent>();
+        while (blurQuery.MoveNext(out var uid, out var blur))
+        {
+            if (time < blur.NextUpdateTime)
+                continue;
+
+            blur.NextUpdateTime = time + blur.UpdateRate;
+
+            if (blur.TemporaryBlurModificators.Any(mod => time > mod.ExpireAt))
+            {
+                blur.TemporaryBlurModificators.RemoveAll(mod => _timing.CurTime > mod.ExpireAt);
+                _blur.UpdateBlurMagnitude(uid);
+            }
+
+            Dirty(uid, blur);
+        }
     }
 }
