@@ -1,14 +1,10 @@
 <p align="center"> <img alt="Space Station 14" width="400" height="400" src="https://github.com/user-attachments/assets/320ad459-8997-4e5b-9f7e-fc7e7d7dcb73" /></p>
 
-RMC-14 is an asymmetric game, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
+VMC-14 is an asymmetric game, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
 
-This is the primary repo for RMC-14. To prevent people forking Robust Toolbox, a "content" pack is loaded by the client and server. This content pack contains everything needed to play the game on one specific server.
+This is the primary repo for VMC-14, a fork of RMC-14. To prevent people forking Robust Toolbox, a "content" pack is loaded by the client and server. This content pack contains everything needed to play the game on one specific server.
 
-If you want to host or create content for RMC-14, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
-
-## Links
-
-[RMC-14 Community Wiki](https://wiki.rouny-ss14.com/) | [Discord](https://discord.gg/rouny) | [SS14 Steam Launcher](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Standalone Launcher Download](https://spacestation14.io/about/nightlies/)
+If you want to host or create content for VMC-14, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
 
 ## Contributing
 
@@ -24,7 +20,7 @@ We are happy to accept contributions from anybody. Get in Discord if you want to
 
 ## License
 
-All code for the content repository is licensed under [MIT](https://github.com/space-wizards/space-station-14/blob/master/LICENSE.TXT).
+All code for the content repository is licensed under AGPL-3.0-or-later license.
 
 Most assets are licensed under [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/) unless stated otherwise. Assets have their license and the copyright in the metadata file. [Example](https://github.com/space-wizards/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json).
 
