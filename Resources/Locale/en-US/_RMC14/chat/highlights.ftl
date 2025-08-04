@@ -32,15 +32,15 @@ highlights-military-warden = Military Warden, Warden, "MP", "Alert", Brig, "Perm
 highlights-military-police = Military Police, "MP", "Alert", Brig, "Perma", Loose, Colonist, Survivor, "SOP", Arrest, Detain, Appeal
 
 # Other
-highlights-corporate-liaison =
-highlights-correspondent = 
-highlights-mess-technician = 
+highlights-corporate-liaison = Corporate Liaison, "CL", Liaison, "WeYa", We-Ya
+highlights-correspondent = Correspondent, "CC", News
+highlights-mess-technician = Mess Technician, "MST", Mess Tech, "Mess", Kitchen, Food, Hungry
 
 # Marines
-highlights-squad-leader = 
-highlights-fireteam-leader =
-highlights-smart-gun-operator =
-highlights-weapons-specialist =
-highlights-combat-technician =
-highlights-hospital-corpsman =
-highlights-rifleman = 
+highlights-squad-leader = Squad Leader, "SL", Command, Queen, "OB", Coords, Coordinates, Supply, Tacmap, Comms, Map, "FT", Fireteam, Squad
+highlights-fireteam-leader = Fireteam Leader, "FTL", "JTAC", "CAS", Normandy, "FT", Fireteam, Coords, Coordinates, "SL", Command
+highlights-smart-gun-operator = Smart Gun Operator, "SGO", "SG", "SL", Command
+highlights-weapons-specialist = Weapons Specialist, "WS", "SADAR", Grenadier, Scout, Pyro, "AMR", Sniper, "SL", Command
+highlights-combat-technician = Combat Technician, "CT", "ComTech", Engineer, Barricade, Cade, "SL", Command
+highlights-hospital-corpsman = Hospital Corpsman, "HM", Corpsman, "Medic", Injured, Infected, Hugged, "SL", Command
+highlights-rifleman = Rifleman, "RFN", "SL", Command
