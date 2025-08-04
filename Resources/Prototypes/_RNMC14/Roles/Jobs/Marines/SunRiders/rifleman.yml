@@ -37,7 +37,6 @@
         RMCSkillFireman: 3
         RMCSkillSpecialistWeapons: 7
         RMCSkillFirearms: 1 # yes this is PVE parity
-    - type: SquadMember
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-rifleman
