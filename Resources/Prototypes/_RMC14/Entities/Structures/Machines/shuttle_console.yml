@@ -84,7 +84,7 @@
 
 - type: entity
   parent: CMComputerDropshipCamerasAlamo
-  id: CMComputerDropshipCamerasNormandy
+  id: RMCComputerDropshipCamerasNormandy
   name: camera controls
   description: A computer to monitor cameras linked to the dropship.
   suffix: Normandy
