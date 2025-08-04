@@ -42,3 +42,6 @@
   - type: TileFrictionModifier
     modifier: 0.4
   - type: NoRotateOnInteract
+  - type: Puller
+    needsHands: false
+  - type: Hands
