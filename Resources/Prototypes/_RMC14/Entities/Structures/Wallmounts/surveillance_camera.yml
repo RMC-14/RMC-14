@@ -86,6 +86,8 @@
   - type: RMCCameraComputer
     protoIds:
     - RMCSurveillanceCameraAlmayer
+    - RMCSurveillanceCameraAlamo
+    - RMCSurveillanceCameraNormandy
   - type: WallMount
     arc: 360
 
