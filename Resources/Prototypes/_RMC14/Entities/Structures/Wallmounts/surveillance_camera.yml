@@ -110,8 +110,8 @@
 - type: entity
   parent: MarkerBase
   id: RMCMonitorCameraLandingZone
-  name: Landing zone camera
-  suffix: "Landing Zone"
+  name: landing zone camera
+  suffix: "LZ Detector"
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/camera.rsi
