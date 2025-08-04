@@ -75,7 +75,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     /// <summary>
     /// Enabled antistuck detection so if an NPC is in the same spot for a while it will re-path.
     /// </summary>
-    public bool AntiStuck = true;
+    public bool AntiStuck = False; // hmmmm
 
     private bool _enabled;
 

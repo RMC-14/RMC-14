@@ -127,37 +127,39 @@ public sealed partial class NPCSteeringSystem
                     return SteeringObstacleStatus.Completed;
             }
             // Try climbing obstacles
-            else if ((component.Flags & PathFlags.Climbing) != 0x0 && isClimbable)
-            {
-                if (TryComp<ClimbingComponent>(uid, out var climbing))
-                {
-                    if (climbing.IsClimbing)
-                    {
-                        return SteeringObstacleStatus.Completed;
-                    }
-                    else if (climbing.NextTransition != null)
-                    {
-                        return SteeringObstacleStatus.Continuing;
-                    }
+            // else if ((component.Flags & PathFlags.Climbing) != 0x0 && isClimbable)
+            // {
+            //     if (TryComp<ClimbingComponent>(uid, out var climbing))
+            //     {
+            //         if (climbing.IsClimbing)
+            //         {
+            //             return SteeringObstacleStatus.Completed;
+            //         }
+            //         else if (climbing.NextTransition != null)
+            //         {
+            //             return SteeringObstacleStatus.Continuing;
+            //         }
 
-                    var climbableQuery = GetEntityQuery<ClimbableComponent>();
+            //         var climbableQuery = GetEntityQuery<ClimbableComponent>();
 
-                    // Get the relevant obstacle
-                    foreach (var ent in obstacleEnts)
-                    {
-                        if (climbableQuery.TryGetComponent(ent, out var table) &&
-                            _climb.CanVault(table, uid, uid, out _) &&
-                            _climb.TryClimb(uid, uid, ent, out id, table, climbing))
-                        {
-                            component.DoAfterId = id;
-                            return SteeringObstacleStatus.Continuing;
-                        }
-                    }
-                }
+            //         // Get the relevant obstacle
+            //         foreach (var ent in obstacleEnts)
+            //         {
+            //             if (climbableQuery.TryGetComponent(ent, out var table) &&
+            //                 _climb.CanVault(table, uid, uid, out _) &&
+            //                 _climb.TryClimb(uid, uid, ent, out id, table, climbing))
+            //             {
+            //                 component.DoAfterId = id;
+            //                 return SteeringObstacleStatus.Continuing;
+            //             }
+            //         }
+            //     }
 
-                if (obstacleEnts.Count == 0)
-                    return SteeringObstacleStatus.Completed;
-            }
+            //     if (obstacleEnts.Count == 0)
+            //         return SteeringObstacleStatus.Completed;
+            // }
+            // I have no idea why and i don't want to know why, but this makes NPCs stuck on most obstacles.
+
             // Try smashing obstacles.
             else if ((component.Flags & PathFlags.Smashing) != 0x0)
             {
@@ -207,7 +209,7 @@ public sealed partial class NPCSteeringSystem
             return;
         }
 
-        foreach (var ent in _mapSystem.GetLocalAnchoredEntities(poly.GraphUid, grid, poly.Box))
+        foreach (var ent in _mapSystem.GetLocalAnchoredEntities(poly.GraphUid, grid, poly.Box)) // why anchored
         {
             if (!_physicsQuery.TryGetComponent(ent, out var body) ||
                 !body.Hard ||

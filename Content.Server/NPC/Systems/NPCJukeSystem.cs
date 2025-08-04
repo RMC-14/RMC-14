@@ -201,6 +201,7 @@ public sealed class NPCJukeSystem : EntitySystem
 
                 //     args.Steering.Interest[i] = MathF.Max(args.Steering.Interest[i], result);
                 // }
+                // dont need juking
                 return;
             }
 
