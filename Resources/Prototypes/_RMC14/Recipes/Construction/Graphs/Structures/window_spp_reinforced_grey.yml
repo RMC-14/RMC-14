@@ -1,0 +1,50 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCWindowSPPGreyReinforced
+  start: start
+  graph:
+  - node: start # not currently buildable
+
+  - node: windowFrameSPPGreyReinforced
+    entity: RMCWindowFrameSPPReinforcedGrey
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 2
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Anchoring
+        doAfter: 2
+        duplicateConditions: All
+
+    - to: windowSPPGreyReinforced
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: CMGlassReinforced
+        amount: 2
+        doAfter: 2
+
+  - node: windowSPPGreyReinforced
+    entity: RMCWindowSPPReinforcedGrey
+    edges:
+    - to: windowFrameSPPGreyReinforced
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 2
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+      - tool: Prying
+      - tool: Screwing

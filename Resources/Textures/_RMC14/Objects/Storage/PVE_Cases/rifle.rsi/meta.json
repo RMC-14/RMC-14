@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken and modified from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/69c55cd83d32f977f73bd0b7cfbb55af8524a56a/icons/obj/items/storage/kits.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "lid_closed"
+    },
+    {
+      "name": "lid_open"
+    },
+    {
+      "name": "gun"
+    }
+  ]
+}
