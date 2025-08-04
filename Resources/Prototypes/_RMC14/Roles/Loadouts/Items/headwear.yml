@@ -70,3 +70,27 @@
   cost: 2
   equipment:
     head: RMCHeadBandSquad
+
+- type: loadout
+  id: HeadBeanieRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBeanie
+
+- type: loadout
+  id: HeadBeanieTanRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBeanieTan
+
+- type: loadout
+  id: HeadBeanieGreenRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBeanieGreen
+
+- type: loadout
+  id: HeadBeanieGrayRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBeanieGray
