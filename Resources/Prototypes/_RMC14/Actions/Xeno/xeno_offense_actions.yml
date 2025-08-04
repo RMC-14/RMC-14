@@ -128,6 +128,8 @@
     event: !type:XenoTailStabEvent
   - type: XenoTailStabAction
   - type: RMCDazeableAction
+  - type: ActionInRangeUnobstructed
+    range: 2.5
 
 - type: entity
   id: ActionXenoTailSlam
