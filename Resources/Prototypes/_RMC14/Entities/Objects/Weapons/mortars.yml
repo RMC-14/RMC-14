@@ -196,7 +196,9 @@
   - type: Transform
     anchored: true
   - type: Eye
+    zoom: 0.5, 0.5
     drawFov: false
+  - type: RMCStaticZoomLevel
   - type: RMCCamera
     id: RMCMortarKit
   - type: MortarCamera

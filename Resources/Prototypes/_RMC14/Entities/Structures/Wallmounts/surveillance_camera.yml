@@ -19,6 +19,8 @@
     needsPower: false # TODO RMC14 power
   - type: ExtensionCableReceiver
   - type: Eye
+    zoom: 0.5, 0.5
+  - type: RMCStaticZoomLevel
   - type: Damageable
     damageContainer: Inorganic
   - type: Sprite
