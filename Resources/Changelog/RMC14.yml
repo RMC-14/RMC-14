@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed shale tiles (blue rock) not being semi weedable.
-    type: Fix
-  - message: Fixed hardy weed nodes being placeable on semi weedable tiles, but hardy
-      weeds can still spread over semi weedable tiles.
-    type: Fix
-  id: 1593
-  time: '2025-04-19T06:02:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6148
-- author: J C Denton
-  changes:
-  - message: Shiva's Snowball now has more props.
-    type: Add
-  - message: 'Replaced some placeholder guns in Shiva''s with their intended gun:
-      Basira rifles, Spearhead revlvers, HG 37-12 pump shotguns, and Type 23 shotguns.'
-    type: Tweak
-  - message: Fixed Shiva's LZ-2 Bio-lab shutters not being connected to buttons.
-    type: Fix
-  id: 1594
-  time: '2025-04-19T06:42:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6164
 - author: Dygon
   changes:
   - message: Sentry projectiles now home in on their target.
@@ -4883,5 +4861,26 @@
   id: 2093
   time: '2025-08-01T22:02:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7346
+- author: SharkSnake98
+  changes:
+  - message: Added Breakwater Strand, a small base designed for duel ERT/PvE purposes.
+    type: Add
+  id: 2094
+  time: '2025-08-04T01:16:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6844
+- author: SharkSnake98
+  changes:
+  - message: Added 8 Trijent Survs
+    type: Add
+  - message: Added the Trucker Survivour base
+    type: Add
+  - message: Added RD's jumpsuit, purple beret, laborer's overalls, and the blue trucker
+      cap
+    type: Add
+  - message: Added the WeYa Sec. icon
+    type: Add
+  id: 2095
+  time: '2025-08-04T01:20:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7056
 Name: RMC14
 Order: -1
