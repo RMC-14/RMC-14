@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 
@@ -17,6 +18,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetDamageFalloffEvent>>(OnRangedModsGetDamageFalloff);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetWeaponAccuracyEvent>>(OnRangedModsGetWeaponAccuracy);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunGetAmmoSpreadEvent>>(OnRangedModsGetScatterFlat);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
     }
 
@@ -178,6 +180,19 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.BurstScatterMult += modSet.BurstScatterAddMult;
+        }
+    }
+
+    private void OnRangedModsGetScatterFlat(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GunGetAmmoSpreadEvent> args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.Spread += Angle.FromDegrees(modSet.ScatterFlat) / 2;
+            if (args.Args.Spread < 0)
+                args.Args.Spread = 0;
         }
     }
 }

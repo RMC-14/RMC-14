@@ -64,6 +64,7 @@ cm-xeno-fortify-cant-toggle-crest = We can't lower our crest while fortifying!
 rmc-xeno-headbutt-too-far = We can't headbutt from this distance with our crest lowered!
 
 # Leap
+cm-xeno-leap-blocked = We cannot do that while squeezing and scuttling!
 cm-xeno-leap-cancelled = We cancel our leap!
 
 # Plant weeds

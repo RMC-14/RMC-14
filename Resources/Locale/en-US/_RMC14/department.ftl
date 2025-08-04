@@ -12,7 +12,7 @@ cm-department-Requisitions-description = Dispense supplies to the marines.
 
 # marines
 department-CMSquad = Marines
-cm-department-Marine-description = They form the main fighting body of the Almayer and are sent planetside to fight all kinds of dangers throughout the Neroid Sector.
+cm-department-Marine-description = They form the main fighting body of the Almayer and are sent planetside to fight all kinds of dangers throughout the Zypheron Sector.
 
 # engineering
 department-CMEngineering = Engineering

@@ -16,9 +16,12 @@ rmc-loadout-group-foods-packaged = Food (packaged)
 rmc-loadout-group-foods-healthy = Food (healthy)
 rmc-loadout-group-role-specific = Role specific
 rmc-loadout-group-pins = Pins
+rmc-loadout-group-civilian = Civilian only (Restricted)
+
 
 rmc-loadout-group-role-specific-ID = Commanding Officer (ID)
 rmc-loadout-group-synthetic-uniform = Synthetic Uniforms
+rmc-loadout-group-synthetic-accessories = Synthetic Uniform Accessories
 rmc-loadout-group-synthetic-glasses = Synthetic Glasses
 rmc-loadout-group-synthetic-shoes = Synthetic Shoes
 rmc-loadout-group-synthetic-headwear = Synthetic Headwear

@@ -27,7 +27,7 @@
       - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
-      - id: RMCM79Case
+      - id: RMCM85A1Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
       - id: RMCKitEngineering
@@ -201,7 +201,7 @@
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 18
     - name: Radio Keys
       entries:
@@ -290,6 +290,8 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: RMCWebbingDropPouch
       - id: CMWebbingHolster

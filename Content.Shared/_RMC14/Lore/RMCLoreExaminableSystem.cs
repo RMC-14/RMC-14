@@ -42,7 +42,7 @@ public sealed class DetailExaminableSystem : EntitySystem
             Act = () =>
             {
                 var markup = new FormattedMessage();
-                markup.AddMarkupPermissive(ent.Comp.Content);
+                markup.AddMarkupPermissive(Loc.GetString(ent.Comp.Content));
                 _examine.SendExamineTooltip(user, ent, markup, false, false);
             },
             Text = Loc.GetString("lore-examinable-verb-text"),

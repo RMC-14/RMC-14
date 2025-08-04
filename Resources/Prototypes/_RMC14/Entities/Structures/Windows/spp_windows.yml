@@ -1,0 +1,228 @@
+- type: entity
+  parent: RMCWindowFrameColonyReinforced
+  id: RMCWindowFrameSPPReinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/spp_frame.rsi
+    state: uppwall_window_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/spp_frame.rsi
+    state: uppwall_window_frame0
+  - type: IconSmooth
+    key: walls
+    base: uppwall_window_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowSPPReinforced
+    node: windowFrameSPPReinforced
+
+- type: entity
+  parent: RMCWindowFrameSPPReinforced
+  id: RMCWindowFrameSPPReinforcedGrey
+  suffix: Grey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/spp_grey_frame.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/spp_grey_frame.rsi
+  - type: Construction
+    graph: RMCWindowSPPGreyReinforced
+    node: windowFrameSPPGreyReinforced
+
+- type: entity
+  parent: RMCWindowFrameSPPReinforced
+  id: RMCWindowFrameSPPReinforcedWhite
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/spp_white_frame.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/spp_white_frame.rsi
+  - type: Construction
+    graph: RMCWindowSPPWhiteReinforced
+    node: windowFrameSPPWhiteReinforced
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowSPPReinforced
+  name: military grade window
+  description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/spp_window.rsi
+    state: uppwall_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/spp_window.rsi
+    state: uppwall_window0
+  - type: IconSmooth
+    key: walls
+    base: uppwall_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameSPPReinforced
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowSPPReinforced
+    node: windowSPPReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameSPPReinforced
+    sound:
+      collection: WindowShatter
+
+- type: entity
+  parent: RMCWindowSPPReinforced
+  id: RMCWindowSPPReinforcedGrey
+  suffix: Grey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/spp_grey_window.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/spp_grey_window.rsi
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameSPPGreyReinforced
+  - type: Construction
+    graph: RMCWindowSPPGreyReinforced
+    node: windowSPPGreyReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameSPPReinforcedGrey
+    sound:
+      collection: WindowShatter
+
+- type: entity
+  parent: RMCWindowSPPReinforced
+  id: RMCWindowSPPReinforcedWhite
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/spp_white_window.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/spp_white_window.rsi
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameSPPWhiteReinforced
+  - type: Construction
+    graph: RMCWindowSPPWhiteReinforced
+    node: windowSPPWhiteReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameSPPReinforcedWhite
+    sound:
+      collection: WindowShatter
+
+- type: entity
+  parent: CMBaseWindowIndestructible
+  id: RMCWindowSPPHull
+  name: hull window
+  description: A glass window. Something tells you this one is somehow indestructible.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/spp_window.rsi
+    state: uppwall_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/spp_window.rsi
+    state: uppwall_window0
+  - type: IconSmooth
+    key: walls
+    base: uppwall_window
+    mode: CardinalFlags
+
+- type: entity
+  parent: RMCWindowSPPHull
+  id: RMCWindowSPPHullGrey
+  suffix: Grey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/spp_grey_window.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/spp_grey_window.rsi
+
+- type: entity
+  parent: RMCWindowSPPHull
+  id: RMCWindowSPPHullWhite
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/spp_white_window.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/spp_white_window.rsi
+

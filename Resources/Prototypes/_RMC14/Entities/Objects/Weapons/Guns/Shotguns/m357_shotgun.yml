@@ -16,6 +16,8 @@
       path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg
     closeSound:
       path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/doublebarrel.rsi
   - type: BallisticAmmoProvider
     cycleable: true
     whitelist:
@@ -32,7 +34,7 @@
     baseFireRate: 0.7
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.15
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplierUnwielded: 0.5
   - type: Construction
     graph: M357Sawn
     node: start
