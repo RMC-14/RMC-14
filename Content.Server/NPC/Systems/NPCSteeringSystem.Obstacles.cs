@@ -158,7 +158,7 @@ public sealed partial class NPCSteeringSystem
             //     if (obstacleEnts.Count == 0)
             //         return SteeringObstacleStatus.Completed;
             // }
-            // I have no idea why and i don't want to know why, but this makes NPCs stuck on most obstacles.
+            // dont need it
 
             // Try smashing obstacles.
             else if ((component.Flags & PathFlags.Smashing) != 0x0)
@@ -209,7 +209,7 @@ public sealed partial class NPCSteeringSystem
             return;
         }
 
-        foreach (var ent in _mapSystem.GetLocalAnchoredEntities(poly.GraphUid, grid, poly.Box)) // why anchored
+        foreach (var ent in _mapSystem.GetLocalAnchoredEntities(poly.GraphUid, grid, poly.Box))
         {
             if (!_physicsQuery.TryGetComponent(ent, out var body) ||
                 !body.Hard ||

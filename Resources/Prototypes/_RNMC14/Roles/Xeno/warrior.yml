@@ -1,0 +1,10 @@
+- type: job
+  parent: CMJobXenoBase
+  id: CMXenoWarriorNPC
+  name: cm-job-name-xeno-warrior
+  playTimeTracker: CMJobXenoWarriorNPC
+
+
+- type: playTimeTracker
+  id: CMJobXenoWarriorNPC
+  isXeno: true

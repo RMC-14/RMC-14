@@ -1,65 +1,22 @@
 - type: entity
-  name: drone
-  parent:
-  - MobXeno
-  - RMCXenoMobCollision
-  id: CMMobXenoDroneNPC
+  parent: CMXenoDrone
+  id: CMXenoDroneNPC
+  name: Drone
+  description: An alien drone.
+  suffix:
   components:
-  - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
-    drawdepth: Mobs
-    offset: 0,0.2
-    layers:
-    - map: ["enum.DamageStateVisualLayers.Base"]
-      state: running
+  - type: HTN
+    rootTask:
+      task: CMXenoCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
   - type: MobThresholds
     thresholds:
       0: Alive
       400: Critical
-      410: Dead
-  - type: MeleeWeapon
-    damage:
-      groups:
-        Brute: 30
-  - type: MovementSpeedModifier
-    baseSprintSpeed: 4
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.45
-        density: 450
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
-  - type: Evasion
-    evasion: 20
-  - type: XenoPlasma
-    plasma: 1000
-    maxPlasma: 1000
-    plasmaRegenOnWeeds: 4.5
+      450: Dead
   - type: Xeno
     role: CMXenoDroneNPC
-    actionIds:
-    - ActionXenoPlantWeeds
-    - ActionXenoRest
-    hudOffset: -0.1,0.15
-    tier: 1
-  - type: Tackle
-    max: 4
-    stunMin: 3
-    stunMax: 4
-  - type: WhitelistPickup
-    whitelist:
-      components:
-      - XenoParasite
-      - XenoEgg
-      - XenoFruit
-  - type: MultiHandedHolder
-    items:
-    - hands: 2
-      whitelist:
-        components:
-        - XenoEgg

@@ -319,7 +319,6 @@
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
     - enum.RMCCameraUiKey.Key
-  - type: ActiveInputMover
   - type: HiveTracker
   - type: RequireProjectileTarget
     active: false
