@@ -5,7 +5,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.AcidBloodSplash;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
 [Access(typeof(AcidBloodSplashSystem))]
 public sealed partial class AcidBloodSplashComponent : Component
 {
@@ -59,5 +59,5 @@ public sealed partial class AcidBloodSplashComponent : Component
     public TimeSpan SplashCooldown = TimeSpan.FromSeconds(5);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan NextSplashAvailable = new(0);
+    public TimeSpan NextSplashAvailable;
 }

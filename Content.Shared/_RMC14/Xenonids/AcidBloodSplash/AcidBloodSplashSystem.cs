@@ -4,6 +4,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Random;
+using Content.Shared.Coordinates;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.AcidBloodSplash;
 
@@ -16,6 +18,8 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
+
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
 
@@ -38,6 +42,9 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
     private void OnDamageChanged(EntityUid uid, AcidBloodSplashComponent comp, ref DamageChangedEvent args)
     {
+        if (_netManager.IsClient)
+            return;
+
         var time = _timing.CurTime;
         if (comp.NextSplashAvailable > time)
             return;
@@ -50,9 +57,6 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
         // activate acid splash only when damage is big enough
         if (args.DamageDelta.GetTotal() < comp.MinimalTriggerDamage)
-            return;
-
-        if (!TryComp(uid, out TransformComponent? xform))
             return;
 
         var damageDict = args.DamageDelta.DamageDict;
@@ -71,8 +75,8 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             return;
 
         var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.
-        var targets = _entityLookup.GetEntitiesInRange(xform.Coordinates, comp.StandardSplashRadius);
-        var closeRangeTargets = _entityLookup.GetEntitiesInRange(xform.Coordinates, comp.CloseSplashRadius);
+        var targets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.StandardSplashRadius);
+        var closeRangeTargets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.CloseSplashRadius);
         foreach (var target in targets)
         {
             if (!_xeno.CanAbilityAttackTarget(uid, target))
