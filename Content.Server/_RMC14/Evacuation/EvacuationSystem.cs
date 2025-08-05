@@ -18,6 +18,7 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
 
     private EntityQuery<EvacuationDoorComponent> _evacuationDoorQuery;
+    private EntityQuery<EvacuationComputerComponent> _evacuationComputerQuery;
 
     private readonly HashSet<Entity<EvacuationDoorComponent>> _doors = new();
 
@@ -25,6 +26,7 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
     {
         base.Initialize();
         _evacuationDoorQuery = GetEntityQuery<EvacuationDoorComponent>();
+        _evacuationComputerQuery = GetEntityQuery<EvacuationComputerComponent>();
     }
 
     protected override void LaunchEvacuationFTL(EntityUid grid, float crashLandChance, SoundSpecifier? launchSound)
@@ -67,6 +69,11 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
                 {
                     door.Locked = false;
                     Dirty(child, door);
+                }
+                if (_evacuationComputerQuery.TryComp(child, out var computer))
+                {
+                    computer.Mode = EvacuationComputerMode.Crashed;
+                    Dirty(child, computer);
                 }
             }
 

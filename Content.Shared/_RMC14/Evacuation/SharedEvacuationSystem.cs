@@ -306,6 +306,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         }
 
         var gridTransform = Transform(gridId);
+        var overloaded = false;
         if (ent.Comp.MaxMobs is { } maxMobs)
         {
             var mobs = 0;
@@ -333,15 +334,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     mobs++;
 
                     if (mobs > maxMobs && ent.Comp.Mode != EvacuationComputerMode.Crashed)
-                    {
-                        ent.Comp.Mode = EvacuationComputerMode.Crashed;
-                        _popup.PopupClient("The evacuation pod is overloaded with this many people inside!", ent, user, PopupType.LargeCaution);
-
-                        var time = _timing.CurTime;
-                        var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
-                        detonating.DetonateAt = time + ent.Comp.DetonateDelay;
-                        detonating.EjectAt = time + ent.Comp.EjectDelay;
-                    }
+                        overloaded = true;
                 }
 
                 if (_doorQuery.TryComp(uid, out var door))
@@ -355,14 +348,21 @@ public abstract class SharedEvacuationSystem : EntitySystem
         }
 
         _audio.PlayPredicted(ent.Comp.WarmupSound, ent, user);
-
-        if (ent.Comp.Mode == EvacuationComputerMode.Crashed)
-            return;
-
         ent.Comp.Mode = EvacuationComputerMode.Travelling;
         Dirty(ent);
 
         var crashChance = IsEvacuationComplete() ? 0 : ent.Comp.EarlyCrashChance;
+        if (overloaded)
+        {
+            crashChance = 1.0f;
+            _popup.PopupPredicted("The evacuation pod is overloaded with this many people inside!", ent, null, PopupType.LargeCaution);
+
+            var time = _timing.CurTime;
+            var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
+            detonating.DetonateAt = time + ent.Comp.DetonateDelay;
+            detonating.EjectAt = time + ent.Comp.EjectDelay;
+        }
+
         LaunchEvacuationFTL(gridId, crashChance, ent.Comp.LaunchSound);
     }
 
