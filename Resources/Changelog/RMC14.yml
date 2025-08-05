@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Sentry projectiles now home in on their target.
-    type: Fix
-  id: 1595
-  time: '2025-04-19T06:47:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6160
 - author: BramvanZijp
   changes:
   - message: The RTO Backpack is now marked as recommended for FTLs and SLs.
@@ -4882,5 +4875,12 @@
   id: 2095
   time: '2025-08-04T01:20:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7056
+- author: VictorJob
+  changes:
+  - message: Added new barbed wire item sprites.
+    type: Add
+  id: 2096
+  time: '2025-08-05T03:47:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5455
 Name: RMC14
 Order: -1
