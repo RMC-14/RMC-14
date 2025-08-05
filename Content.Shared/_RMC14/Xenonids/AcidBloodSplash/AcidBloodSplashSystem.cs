@@ -14,6 +14,8 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
 
@@ -36,7 +38,8 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
     private void OnDamageChanged(EntityUid uid, AcidBloodSplashComponent comp, ref DamageChangedEvent args)
     {
-        if (comp.NextSplashAvailable > _timing.CurTime)
+        var time = _timing.CurTime;
+        if (comp.NextSplashAvailable > time)
             return;
 
         if (_mobState.IsDead(uid))
@@ -53,20 +56,39 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             return;
 
         var damageDict = args.DamageDelta.DamageDict;
-        var probability = comp.BaseSplashTriggerProbability;
-        probability += (float)args.DamageDelta.GetTotal() * comp.DamageProbabilityMultiplier;
+        var triggerProbability = comp.BaseSplashTriggerProbability; // probability of splash activation
+        triggerProbability += (float)args.DamageDelta.GetTotal() * comp.DamageProbabilityMultiplier;
 
         foreach (var (type, _) in damageDict)
         {
             if (_bruteTypes.Contains(type) && damageDict[type] > 0)
-                probability += comp.BruteDamageProbabilityModificator;
+                triggerProbability += comp.BruteDamageProbabilityModificator;
         }
 
         // TODO: increase probability from sharp and edge weapon + from damage in chest
 
-        if (_random.NextFloat() > probability)
+        if (_random.NextFloat() > triggerProbability)
             return;
 
-        var test = _entityLookup.GetEntitiesInRange(xform.Coordinates, comp.CloseSplashRadius);
+        var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.
+        var targets = _entityLookup.GetEntitiesInRange(xform.Coordinates, comp.StandardSplashRadius);
+        var closeRangeTargets = _entityLookup.GetEntitiesInRange(xform.Coordinates, comp.CloseSplashRadius);
+        foreach (var target in targets)
+        {
+            if (!_xeno.CanAbilityAttackTarget(uid, target))
+                continue;
+
+            var hitProbability = comp.BaseHitProbability - i * 0.05;
+
+            if (closeRangeTargets.Contains(target))
+                hitProbability += 0.3;
+
+            if (_random.NextFloat() > hitProbability)
+                continue;
+
+            var damage = _damageable.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, comp.Damage), origin: uid, tool: uid);
+            comp.NextSplashAvailable = time + comp.SplashCooldown;
+            i++;
+        }
     }
 }
