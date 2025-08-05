@@ -20,7 +20,7 @@
       - Bureau
     - type: Skills
       skills:
-        RMCSkillPolice: 2
+        RMCSkillPolice: 0 # RMC14
         RMCSkillCqc: 3
         RMCSkillFirearms: 1
         RMCSkillFireman: 2

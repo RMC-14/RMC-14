@@ -24,7 +24,7 @@
     - type: Skills
       skills:
         RMCSkillFirearms: 2
-        RMCSkillPolice: 2
+        RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 2
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2

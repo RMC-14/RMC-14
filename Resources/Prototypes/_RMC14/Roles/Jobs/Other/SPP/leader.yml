@@ -33,7 +33,7 @@
         RMCSkillLeadership: 1
         RMCSkillMedical: 1
         RMCSkillVehicles: 1
-        RMCSkillPolice: 1
+        RMCSkillPolice: 0 # RMC14
     - type: MarineOrders
     - type: SquadArmorWearer
       leader: true
