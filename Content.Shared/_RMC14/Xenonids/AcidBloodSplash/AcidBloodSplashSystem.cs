@@ -6,6 +6,10 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Random;
 using Content.Shared.Coordinates;
 using Robust.Shared.Network;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared._RMC14.Emote;
+using Content.Shared.Popups;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.AcidBloodSplash;
 
@@ -19,8 +23,10 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
-
+    private static readonly ProtoId<EmotePrototype> ScreamProto = "Scream";
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
 
     private readonly HashSet<ProtoId<DamageTypePrototype>> _bruteTypes = [];
@@ -93,6 +99,12 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             var damage = _damageable.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, comp.Damage), origin: uid, tool: uid);
             comp.NextSplashAvailable = time + comp.SplashCooldown;
             i++;
+
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-others", ("target", target)), target, Filter.PvsExcept(target), true, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-self"), target, target, PopupType.MediumCaution);
+
+            if (_random.NextFloat() < 0.6f)
+                _emote.TryEmoteWithChat(target, ScreamProto);
         }
     }
 }
