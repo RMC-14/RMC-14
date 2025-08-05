@@ -33,6 +33,8 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: CMWebbing
       - id: CMWebbingHolster
@@ -226,8 +228,6 @@
       - id: CMRollerBed
         points: 4
       - id: CMStasisBag
-        points: 6
-      - id: CMMiniTank
         points: 6
       - id: CMMiniTank
         points: 6

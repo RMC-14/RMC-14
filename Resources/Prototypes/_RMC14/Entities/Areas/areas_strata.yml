@@ -52,6 +52,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaStrata
@@ -69,6 +70,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -94,6 +96,9 @@
   parent: RMCAreaStrataExteriorLandingZones
   id: RMCAreaStrataExteriorLandingZonesLz2
   name: Landing Zone 2 Pad - Rocky Fields
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorLandingZones
@@ -102,11 +107,16 @@
   components:
   - type: Sprite
     state: nearlz2
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataInteriorLandingZones
   id: RMCAreaStrataInteriorLandingZonesLz1
   name: Landing Zone 1 Pad - Mining Aerodrome
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataInteriorLandingZones
@@ -115,6 +125,8 @@
   components:
   - type: Sprite
     state: nearlz1
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -131,6 +143,8 @@
   components:
   - type: Sprite
     state: lzcaves
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -144,21 +158,33 @@
   parent: RMCAreaStrataExteriorMarsh
   id: RMCAreaStrataExteriorMarshSpringMarshes
   name: Geothermal Springs Marshes
+  components:
+  - type: Area
+    linkedLz: list(dropship_lz1, dropship_lz2)
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
   id: RMCAreaStrataExteriorMarshWaterMarshes
   name: Geothermal Water Marshes
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
   id: RMCAreaStrataExteriorMarshIslandMarshes
   name: Geothermal Island Marshes
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
   id: RMCAreaStrataExteriorMarshRelayMarshes
   name: Geothermal Relay Marshes
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
@@ -167,6 +193,8 @@
   components:
   - type: Sprite
     state: marshcenter
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
@@ -175,6 +203,8 @@
   components:
   - type: Sprite
     state: marshriver
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
@@ -183,6 +213,8 @@
   components:
   - type: Sprite
     state: marshship
+  - type: Area
+    linkedLz: list(dropship_lz1, dropship_lz2)
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
@@ -191,6 +223,8 @@
   components:
   - type: Sprite
     state: marshwater
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataInterior
@@ -233,6 +267,8 @@
   components:
   - type: Sprite
     state: path
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -241,6 +277,8 @@
   components:
   - type: Sprite
     state: path
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -249,6 +287,8 @@
   components:
   - type: Sprite
     state: path
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -339,7 +379,7 @@
 - type: entity
   parent: RMCAreaStrataInterior
   id: RMCAreaStrataInteriorShuttleSof
-  name: UPP-DS-3 'Voron'
+  name: SPP-DS-3 'Voron'
   components:
   - type: Sprite
     state: outpost_engi_3
@@ -347,7 +387,7 @@
 - type: entity
   parent: RMCAreaStrataInterior
   id: RMCAreaStrataInteriorSupplyShuttleSof
-  name: UPP-DS-3 'Volk'
+  name: SPP-DS-3 'Volk'
   components:
   - type: Sprite
     state: outpost_engi_3
@@ -414,6 +454,7 @@
     state: dorms_0
   - type: Area
     minimapColor: "#4d3619e7"
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataInteriorMiningOutpost
@@ -482,6 +523,7 @@
     state: offices
   - type: Area
     minimapColor: "#2d3fa2ee"
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaStrataInterior
@@ -593,7 +635,7 @@
 
 - type: entity
   parent: RMCAreaStrataInterior
-  id: RMCAreaStrataInteriorBball 
+  id: RMCAreaStrataInteriorBball
   name: Outpost - Basket Ball Court
   components:
   - type: Sprite
@@ -603,7 +645,7 @@
 
 - type: entity
   parent: RMCAreaStrataInterior
-  id: RMCAreaStrataInteriorBballCave 
+  id: RMCAreaStrataInteriorBballCave
   name: Outpost - B-Ball Caves
   components:
   - type: Sprite
