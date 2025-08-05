@@ -24,10 +24,30 @@ public sealed partial class AcidBloodSplashComponent : Component
     [DataField, AutoNetworkedField]
     public float GibSplashRadius = (float)(5 / Math.Sqrt(Math.PI)); // a circle equal in area to a square with a side of 5 (5x5 tiles)
 
-    // Substitution of gib chance
+    /// <summary>
+    /// Probability of trigger acid splash after minimal damage check, may be increased
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float BaseSplashTriggerProbability = 0.2f;
+
+    /// <summary>
+    /// Substitution of gib chance
+    /// </summary>
     // TODO: remove when xeno can be gibbed
     [DataField, AutoNetworkedField]
-    public float BaseDeathSplashChance = 0.05f;
+    public float BaseDeathSplashProbability = 0.05f;
+
+    /// <summary>
+    /// How much probability increase if damage type is brute
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float BruteDamageProbabilityModificator = 0.05f;
+
+    /// <summary>
+    /// How much probability increase with additional damage
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float DamageProbabilityMultiplier = 0.33f;
 
     [DataField, AutoNetworkedField]
     public TimeSpan SplashCooldown = TimeSpan.FromSeconds(5);
