@@ -32,7 +32,7 @@ highlights-military-warden = Military Warden, Warden, "MP", "Alert", Brig, "Perm
 highlights-military-police = Military Police, "MP", "Alert", Brig, "Perma", Loose, Colonist, Survivor, "SOP", Arrest, Detain, Appeal
 
 # Other
-highlights-corporate-liaison = Corporate Liaison, "CL", Liaison, "WeYa", We-Ya
+highlights-corporate-liaison = Corporate Liaison, "CL", Liaison, Weston-Yamada, Weston Yamada, "WeYa", We-Ya
 highlights-correspondent = Correspondent, "CC", News
 highlights-mess-technician = Mess Technician, "MST", Mess Tech, "Mess", Kitchen, Food, Hungry
 
