@@ -388,7 +388,7 @@ public sealed partial class ShuttleSystem
 
         // RMC14
         Dirty(entity.Owner, entity.Comp1);
-        var beforeFTL = new BeforeFTLStartedEvent(uid);
+        var beforeFTL = new BeforeFTLStartedEvent();
         RaiseLocalEvent(uid, ref beforeFTL);
 
         // Leave audio at the old spot
@@ -483,6 +483,10 @@ public sealed partial class ShuttleSystem
         _physics.SetAngularVelocity(uid, 0f, body: body);
 
         var target = entity.Comp1.TargetCoordinates;
+
+        //RMC14
+        var ev = new BeforeFTLFinishedEvent();
+        RaiseLocalEvent(entity, ref ev);
 
         MapId mapId;
 

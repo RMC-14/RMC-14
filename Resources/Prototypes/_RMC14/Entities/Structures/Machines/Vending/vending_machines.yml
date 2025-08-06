@@ -443,6 +443,7 @@
     #ClueScanner: 3
     #Camera: 8
     #CameraFilm: 8
+    RMCWhistle: 5
     RMCSunglasses: 2 #Contraband
     RMCBoxDonut: 2 #Contraband
 
@@ -533,6 +534,8 @@
     PestSpray: 20
     Syringe: 5
     PlantBag: 5
+    RMCToolSpade: 3
+    RMCToolHatchet: 3
     # AmmoniaBottle: 10 #Premium
     # DiethylamineBottle: 5 #Premium
     HydroponicsToolSpade: 3
@@ -597,6 +600,7 @@
     GarlicSeeds: 3
     OnionSeeds: 3
     OnionRedSeeds: 3
+    MangoSeeds: 3
 
 
 # Dinnerware

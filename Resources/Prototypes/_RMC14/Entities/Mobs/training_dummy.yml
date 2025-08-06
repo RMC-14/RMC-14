@@ -1,0 +1,43 @@
+- type: entity
+  parent: CMBaseMobSpeciesOrganic
+  id: RMCTrainingDummy
+  name: training dummy
+  description: A training dummy used by the UNMC to simulate a humanoid body. Feels almost too lifelike.
+  suffix: RMC14
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearTrainingDummy ]
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-synthetic
+  - type: RMCTrainingDummy
+    removeComponents:
+    - type: CanEnterCryostorage
+    - type: Hunger
+    - type: Infectable
+    - type: MindContainer
+    - type: NewPlayerLabel
+    - type: Perishable
+    - type: SSDIndicator
+    - type: TacticalMapTracked
+    - type: Thirst
+    - type: Vocal
+
+- type: startingGear
+  id: RMCGearTrainingDummy
+  equipment:
+    jumpsuit: JumpsuitMarine
+    shoes: RMCShoesJackboots
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnRMCTrainingDummy
+  name: RMC Training Dummy Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Human/parts.rsi
+      state: full
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCTrainingDummy

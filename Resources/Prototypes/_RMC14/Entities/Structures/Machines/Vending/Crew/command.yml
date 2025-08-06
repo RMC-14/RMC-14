@@ -962,6 +962,12 @@
       - id: CMWebbingHolster
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
+    - name: Books
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////

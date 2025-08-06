@@ -23,6 +23,7 @@
     - type: RMCUserBulkyArmorIncapable
     - type: Skills
       skills:
+        RMCSkillEndurance: 0
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: CMVendorUser
@@ -56,6 +57,15 @@
     job_id: CMCorrespondent
   - type: Sprite
     state: marine_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleCorrespondent
+  name: Correspondent
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: combat_correspondent
 
 - type: playTimeTracker
   id: CMJobCorrespondent

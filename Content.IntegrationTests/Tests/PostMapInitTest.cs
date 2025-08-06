@@ -91,6 +91,7 @@ namespace Content.IntegrationTests.Tests
             "GoldenArrowLarge",
             "OCP-583",
             "Haurchefant",
+            "ChancesRepaired",
             "Breakwater_Strand"
         };
 

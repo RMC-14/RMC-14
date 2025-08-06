@@ -235,6 +235,8 @@
         crate: RMCCrateGearPackFlareCAS
       - cost: 2000
         crate: RMCCrateGearFulton
+      - cost: 4000
+        crate: RMCCrateGearParachute
     - name: Medical
       entries:
       - cost: 3200

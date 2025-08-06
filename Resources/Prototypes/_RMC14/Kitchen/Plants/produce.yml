@@ -1,4 +1,4 @@
-﻿
+
 - type: entity
   name: plump-helmet
   parent: FoodProduceBase
@@ -111,3 +111,41 @@
   - type: Tag
     tags:
     - Vegetable
+
+- type: entity
+  name: mango
+  parent: FoodProduceBase
+  id: FoodMango
+  description: "MANGO MANGO MANGO"
+  components:
+  - type: FlavorProfile
+    flavors:
+      - sweet
+      - fruity
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 5
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/mango.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Produce
+    seedId: mango
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceMango
+        Quantity: 10
+  - type: Tag
+    tags:
+    - Fruit
+  - type: FoodSequenceElement
+    entries:
+      Taco: Mango
+      Burger: MangoBurger
