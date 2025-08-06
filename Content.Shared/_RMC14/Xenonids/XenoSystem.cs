@@ -9,6 +9,7 @@ using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -120,6 +121,7 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
+        SubscribeLocalEvent<XenoComponent, MeleeAttackAttemptEvent>(OnXenoMeleeAttackAttempt);
         SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
@@ -218,9 +220,30 @@ public sealed partial class XenoSystem : EntitySystem
         }
 
         if (_xenoNestedQuery.HasComp(target) &&
-            _victimInfectedQuery.HasComp(target))
+            _victimInfectedQuery.HasComp(target) && !args.Disarm)
         {
             args.Cancel();
+        }
+    }
+
+    private void OnXenoMeleeAttackAttempt(Entity<XenoComponent> xeno, ref MeleeAttackAttemptEvent args)
+    {
+        if (!TryComp<XenoNestComponent>(GetEntity(args.Target), out var nest) || nest.Nested == null
+            || !_hive.FromSameHive(xeno.Owner, GetEntity(args.Target)))
+            return;
+
+        var attacker = GetNetEntity(xeno);
+        args.Target = GetNetEntity(nest.Nested.Value);
+
+        switch (args.Attack)
+        {
+            case LightAttackEvent attack:
+                args.Attack = new LightAttackEvent(args.Target, attacker, attack.Coordinates);
+                break;
+
+            case DisarmAttackEvent disarm:
+                args.Attack = new DisarmAttackEvent(args.Target, disarm.Coordinates);
+                break;
         }
     }
 
