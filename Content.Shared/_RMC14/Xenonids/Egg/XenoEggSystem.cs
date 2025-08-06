@@ -184,10 +184,20 @@ public sealed class XenoEggSystem : EntitySystem
 
         args.Handled = true;
 
-        if (TryComp(xeno, out XenoAttachedOvipositorComponent? attached))
-            DetachOvipositor((xeno, attached));
-        else
-            AttachOvipositor(xeno.Owner);
+        if (TryComp(xeno, out XenoOvipositorCapableComponent? ovipositorCapable))
+        {
+            if (TryComp(xeno, out XenoAttachedOvipositorComponent? attached))
+            {
+                DetachOvipositor((xeno, attached));
+                ovipositorCapable.Attached = false;
+            }
+            else
+            {
+                AttachOvipositor(xeno.Owner);
+                ovipositorCapable.Attached = true;
+            }
+        }
+
     }
 
     private void OnXenoAttachedMapInit(Entity<XenoAttachedOvipositorComponent> attached, ref MapInitEvent args)
