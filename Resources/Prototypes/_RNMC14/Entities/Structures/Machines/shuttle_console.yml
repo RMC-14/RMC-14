@@ -1,0 +1,60 @@
+- type: entity
+  parent: CMComputerDropshipWeapons
+  id: RNMCComputerDropshipWeaponsHalf
+  suffix: alternate, half
+  description: A flight computer that can be used for autopilot or long-range flights.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Structures/Machines/shuttle_console.rsi
+    state: consolecenterhalf
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,0.3,0.5,0.5"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - LowImpassable
+
+- type: entity
+  parent: CMComputerDropshipNavigation
+  id: RNMCComputerDropshipNavigationHalfRight
+  suffix: alternate, half, right
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Structures/Machines/shuttle_console.rsi
+    state: consolehalfright
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.5,0.3,0.25,0.5"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - LowImpassable
+
+- type: entity
+  parent: CMComputerDropshipNavigation
+  id: RNMCComputerDropshipNavigationHalfLeft
+  suffix: alternate, half, left
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Structures/Machines/shuttle_console.rsi
+    state: consolehalfleft
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,0.3,-0.5,0.5"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - LowImpassable
