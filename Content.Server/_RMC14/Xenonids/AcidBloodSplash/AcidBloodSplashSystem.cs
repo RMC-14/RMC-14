@@ -10,8 +10,9 @@ using Content.Shared.Chat.Prototypes;
 using Content.Shared._RMC14.Emote;
 using Content.Shared.Popups;
 using Robust.Shared.Player;
+using Content.Shared._RMC14.Xenonids;
 
-namespace Content.Shared._RMC14.Xenonids.AcidBloodSplash;
+namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
 public sealed class AcidBloodSplashSystem : EntitySystem
 {
@@ -48,9 +49,6 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
     private void OnDamageChanged(EntityUid uid, AcidBloodSplashComponent comp, ref DamageChangedEvent args)
     {
-        if (_netManager.IsClient)
-            return;
-
         var time = _timing.CurTime;
         if (comp.NextSplashAvailable > time)
             return;
@@ -103,7 +101,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-others", ("target", target)), target, Filter.PvsExcept(target), true, PopupType.SmallCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-self"), target, target, PopupType.MediumCaution);
 
-            if (_random.NextFloat() < 0.6f)
+            if (_random.NextFloat() < 0.6f) // TODO: don't activate when target don't feel pain
                 _emote.TryEmoteWithChat(target, ScreamProto);
         }
     }
