@@ -459,6 +459,7 @@
   description: Tracks the Corporate Liaison.
 
 - type: alert
+  parent: SquadTracker
   id: SquadTrackerPMCTeamLeader
   category: SquadTracker
   icons:
