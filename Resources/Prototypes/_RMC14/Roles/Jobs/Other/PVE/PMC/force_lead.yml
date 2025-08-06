@@ -39,6 +39,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
+  hidden: true
 
 - type: entity
   parent: CMSpawnPointJobBase

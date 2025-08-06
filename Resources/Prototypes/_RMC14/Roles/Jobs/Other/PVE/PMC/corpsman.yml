@@ -33,6 +33,7 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
+  hidden: true
 
 - type: entity
   parent: CMSpawnPointJobBase
