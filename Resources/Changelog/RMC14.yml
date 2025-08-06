@@ -1,55 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Fight or Flight not curing daze.
-    type: Fix
-  - message: Dazed disabled actions is now clearer.
-    type: Tweak
-  id: 1601
-  time: '2025-04-19T08:27:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6185
-- author: Vermidia
-  changes:
-  - message: Add eggsac carrier strain, who can generate eggs and plant them off hive
-      weeds.
-    type: Add
-  - message: Fixed player parasites having 1 sec too short leap time (1 > 2 seconds).
-    type: Fix
-  - message: AI parasites now instant leap, but only try to leap every 5 seconds while
-      active.
-    type: Fix
-  - message: Fixed eggs not becoming fragile eggs off weeds.
-    type: Fix
-  id: 1602
-  time: '2025-04-19T08:43:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6113
-- author: BramvanZijp
-  changes:
-  - message: The MP riot control locker will now unlock automatically if the alert
-      level is set to blue or above.
-    type: Add
-  - message: Marines can no longer go into gun safes, nor be locked in them by an
-      unluckily timed alert level change.
-    type: Remove
-  - message: MP armory gun safes can now once again be locked/unlocked manually, requiring
-      armory access to do so.
-    type: Tweak
-  - message: Fixed alert level locked safes/doors only opening on their exact target
-      alert level, but not above it, such as red alert safes closing on delta.
-    type: Fix
-  - message: Fixed alert level locked safes locking while still being open if the
-      alert level drops, they now close first.
-    type: Fix
-  id: 1603
-  time: '2025-04-19T09:13:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6152
-- author: Dygon
-  changes:
-  - message: Evacuation can now be authorized while on red or delta alert.
-    type: Tweak
-  id: 1604
-  time: '2025-04-19T09:54:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5496
 - author: noctyrn
   changes:
   - message: Added SPP Spawners.
@@ -4881,5 +4830,41 @@
   id: 2101
   time: '2025-08-06T03:51:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7210
+- author: Max_Power
+  changes:
+  - message: Fixed Loader Pamphlet giving Endurance 2 instead of Engineering 1, letting
+      the Loader use the C4 in their kit.
+    type: Fix
+  id: 2102
+  time: '2025-08-06T03:54:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7220
+- author: J C Denton
+  changes:
+  - message: Fax Responder roles now spawn with their corresponding stamps and pen.
+    type: Add
+  - message: Fixed Asphalt and Cement tiles not hiding wires and dispo system.
+    type: Fix
+  - message: Fixed Queen and Xenonid roles in lobby using naked marine sprites.
+    type: Fix
+  - message: ICB Liaison, Survivor and not, now have their respective icons.
+    type: Fix
+  id: 2103
+  time: '2025-08-06T03:54:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7215
+- author: Tunguso4ka
+  changes:
+  - message: Added dropship double and triple doors.
+    type: Add
+  id: 2104
+  time: '2025-08-06T03:53:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7217
+- author: Ian321
+  changes:
+  - message: The examine text for the flare gun, winter wyvern handcannon and mateba
+      now explains how to fire them into the air.
+    type: Tweak
+  id: 2105
+  time: '2025-08-06T03:54:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7222
 Name: RMC14
 Order: -1
