@@ -985,6 +985,7 @@
     noTunnel: true
     unweedable: true
     weatherEnabled: false
+    paradropping: false
 
 - type: entity
   parent: RMCAreaStrataInteriorCheckpoints
