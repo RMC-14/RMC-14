@@ -226,13 +226,17 @@ public sealed class DropshipSystem : SharedDropshipSystem
             return;
         }
 
+        dropship.LastLocked.TryGetValue(args.DoorLocation, out var lastLocked);
         var time = _timing.CurTime;
-        if (time < dropship.LastLocked + dropship.LockCooldown)
+        if (time < lastLocked + dropship.LockCooldown)
             return;
 
-        dropship.Locked = !dropship.Locked;
-        dropship.LastLocked = time;
-        SetAllDocks(grid, dropship.Locked);
+        if (!dropship.LastLocked.TryAdd(args.DoorLocation, time))
+            dropship.LastLocked[args.DoorLocation] = time;
+        Dirty(grid, dropship);
+
+        SetDocks(grid, args.DoorLocation);
+        OnRefreshUI((grid, dropship), ref args);
     }
 
     public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null)
@@ -421,7 +425,19 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destinations.Add(destination);
             }
 
-            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations);
+            var locked = new Dictionary<DoorLocation, bool>();
+            var enumerator = Transform(grid).ChildEnumerator;
+            while (enumerator.MoveNext(out var child))
+            {
+                if (_dockingQuery.HasComp(child) &&
+                    _doorBoltQuery.TryComp(child, out var bolt) &&
+                    _doorQuery.TryComp(child, out var door))
+                {
+                    locked.TryAdd(door.Location, bolt.BoltsDown);
+                }
+            }
+
+            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, locked);
             _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
             return;
         }
@@ -466,15 +482,49 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
     }
 
-    private void SetAllDocks(EntityUid dropship, bool locked)
+    private void SetDocks(EntityUid dropship, DoorLocation location)
     {
+        var shouldLock = false;
+
+        // Lock all doors if at least one is unlocked.
+        if (location == DoorLocation.None)
+        {
+            var enumerator2 = Transform(dropship).ChildEnumerator;
+            while (enumerator2.MoveNext(out var child))
+            {
+                if (!_dockingQuery.HasComp(child))
+                    continue;
+
+                if (!_doorBoltQuery.TryComp(child, out var bolt))
+                    continue;
+
+                if (bolt.BoltsDown)
+                    continue;
+
+                shouldLock = true;
+                break;
+            }
+        }
+
         var enumerator = Transform(dropship).ChildEnumerator;
         while (enumerator.MoveNext(out var child))
         {
             if (!_dockingQuery.HasComp(child))
                 continue;
 
-            if (locked)
+            if (!_doorBoltQuery.TryComp(child, out var bolt))
+                continue;
+
+            // Only lock/unlock doors with the same location as the pressed button.
+            if (location != DoorLocation.None)
+            {
+                if (!_doorQuery.TryComp(child, out var door) || door.Location != location)
+                    continue;
+
+                shouldLock = !bolt.BoltsDown;
+            }
+
+            if (shouldLock)
                 LockDoor(child);
             else
                 UnlockDoor(child);

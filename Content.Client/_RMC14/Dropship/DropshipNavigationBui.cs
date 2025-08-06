@@ -1,5 +1,6 @@
 ﻿using Content.Client.Message;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared.Doors.Components;
 using Content.Shared.Shuttles.Systems;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -53,7 +54,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window = this.CreateWindow<DropshipNavigationWindow>();
         _window.OnClose += OnClose;
         SetFlightHeader("Flight Controls");
-        SetDoorHeader("Lockdown");
+        SetDoorHeader("Door Controls");
 
         if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
             _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
@@ -80,7 +81,10 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             ResetDestinationButtons();
         };
 
-        _window.LockdownButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg());
+        _window.LockdownButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.None));
+        _window.LockdownButtonAft.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Aft));
+        _window.LockdownButtonPort.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Port));
+        _window.LockdownButtonStarboard.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Starboard));
         _entities.System<DropshipSystem>().Uis.Add(this);
     }
 
@@ -140,6 +144,17 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             _destinations[button] = name;
             _window.DestinationsContainer.AddChild(button);
         }
+
+        var locked = destinations.DoorLockStatus;
+        locked.TryGetValue(DoorLocation.Aft, out var aftStatus);
+        locked.TryGetValue(DoorLocation.Port, out var portStatus);
+        locked.TryGetValue(DoorLocation.Starboard, out var starboardStatus);
+        var lockdownStatus = aftStatus && portStatus && starboardStatus;
+
+        _window.LockdownButton.Text = lockdownStatus ? "Lift Lockdown" : "Lockdown";
+        _window.LockdownButtonAft.Text = aftStatus ? "Unlock Aft" : "Lock Aft";
+        _window.LockdownButtonPort.Text = portStatus ? "Unlock Port" : "Lock Port";
+        _window.LockdownButtonStarboard.Text = starboardStatus ? "Unlock Starboard" : "Lock Starboard";
     }
 
     private void Set(DropshipNavigationTravellingBuiState travelling)
@@ -169,24 +184,24 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             case FTLState.Starting:
                 SetFlightHeader("Launch in progress");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Launching in T-{time}s to {destination}"));
-                _window.LockdownButton.Disabled = false;
+                SetLockDownDisabled(false);
                 break;
             case FTLState.Travelling:
                 SetFlightHeader($"In flight: {destination}");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Time until destination: T-{time}s"));
-                _window.LockdownButton.Disabled = true;
+                SetLockDownDisabled(true);
                 SetCancelDisabled(false);
                 break;
             case FTLState.Arriving:
                 SetFlightHeader($"Final Approach: {destination}");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Time until landing: T-{time}s"));
-                _window.LockdownButton.Disabled = true;
+                SetLockDownDisabled(true);
                 SetCancelDisabled(true);
                 break;
             case FTLState.Cooldown:
                 SetFlightHeader("Refueling in progress");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Ready to launch in T-{time}s"));
-                _window.LockdownButton.Disabled = false;
+                SetLockDownDisabled(false);
                 SetCancelDisabled(true);
                 break;
             default:
@@ -221,7 +236,19 @@ public sealed class DropshipNavigationBui : BoundUserInterface
     {
         if (_window == null)
             return;
+
         _window.CancelButton.Button.Disabled = disabled;
+    }
+
+    private void SetLockDownDisabled(bool disabled)
+    {
+        if (_window == null)
+            return;
+
+        _window.LockdownButton.Button.Disabled = disabled;
+        _window.LockdownButtonAft.Button.Disabled = disabled;
+        _window.LockdownButtonPort.Button.Disabled = disabled;
+        _window.LockdownButtonStarboard.Button.Disabled = disabled;
     }
 
     private void ResetDestinationButtons()
