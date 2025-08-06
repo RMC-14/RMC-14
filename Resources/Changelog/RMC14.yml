@@ -1,69 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: The XM51 case no longer holds 8 of any item.
-    type: Fix
-  id: 1630
-  time: '2025-04-22T23:26:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6241
-- author: Dygon
-  changes:
-  - message: Invisible snipers now have their mob collision disabled.
-    type: Fix
-  id: 1631
-  time: '2025-04-22T23:27:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6236
-- author: SigmaTheDragon
-  changes:
-  - message: Fixed floating pixels in two Eggsac Carrier sprites.
-    type: Fix
-  id: 1632
-  time: '2025-04-22T23:29:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6233
-- author: Dygon
-  changes:
-  - message: Fixed shooting with the M13 auto pistol having too much scatter.
-    type: Fix
-  id: 1633
-  time: '2025-04-22T23:28:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6235
-- author: noctyrnal
-  changes:
-  - message: Added the General's Armoured Beret for High Command General.
-    type: Add
-  - message: The "General's" clothing has been resprited.
-    type: Tweak
-  id: 1634
-  time: '2025-04-22T23:30:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6229
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed vamp lurker tail jab not doing 50 damage (was 35)
-    type: Fix
-  - message: Fixed vamp lurker tail jab slowing the lurker
-    type: Fix
-  - message: Wall slamming a marine with tail jab will now stun and slow them for
-      0.5 seconds
-    type: Tweak
-  id: 1635
-  time: '2025-04-22T23:32:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6225
-- author: DummeHytteOst
-  changes:
-  - message: Weeds and nodes now have their intended .333 damage reduction multiplier.
-    type: Fix
-  id: 1636
-  time: '2025-04-22T23:33:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6215
-- author: to4no_fix
-  changes:
-  - message: The dropship system now automatically scans for xenonids on board after
-      take off. If any are detected (excluding corpses), a Red Alert is set and marines
-      are notified with a global announcement.
-    type: Add
-  id: 1637
-  time: '2025-04-22T23:37:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6184
 - author: Dygon
   changes:
   - message: Evacuation doors(pods, lifeboats) are now unable to be pryed open while
@@ -4705,5 +4640,67 @@
   id: 2130
   time: '2025-08-06T04:09:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7273
+- author: yagwog
+  changes:
+  - message: Stamps not working correctly with tags
+    type: Fix
+  - message: Bottom margin not correctly extending for tags
+    type: Fix
+  - message: made buttons nicer to look at.
+    type: Fix
+  id: 2131
+  time: '2025-08-06T04:14:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7288
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The X17 riot charge no longer requires police skill to use.
+    type: Tweak
+  id: 2132
+  time: '2025-08-06T04:15:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7293
+- author: Dygon
+  changes:
+  - message: Getting hit by a starshell projectile no longer moves you around.
+    type: Fix
+  id: 2133
+  time: '2025-08-06T04:13:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7281
+- author: Max_Power
+  changes:
+  - message: Added a sensor tower to CORSAT
+    type: Add
+  id: 2134
+  time: '2025-08-06T04:12:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7279
+- author: Dygon
+  changes:
+  - message: Xenos can now track the hive core.
+    type: Tweak
+  - message: Clicking the hive tracker now watches the xeno being tracked.
+    type: Fix
+  id: 2135
+  time: '2025-08-06T04:15:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7290
+- author: noctyrnal
+  changes:
+  - message: Added random spawners for food vendors and food / drinks.
+    type: Add
+  id: 2136
+  time: '2025-08-06T04:11:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7277
+- author: Dygon
+  changes:
+  - message: A shuttle landing on a fire tile will no longer ignite it's passengers.
+    type: Fix
+  id: 2137
+  time: '2025-08-06T04:12:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7280
+- author: Ian321
+  changes:
+  - message: The barrel of the mateba is now visible again.
+    type: Fix
+  id: 2138
+  time: '2025-08-06T04:15:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7291
 Name: RMC14
 Order: -1
