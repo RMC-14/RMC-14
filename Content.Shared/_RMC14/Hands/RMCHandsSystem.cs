@@ -235,7 +235,7 @@ public abstract class RMCHandsSystem : EntitySystem
             case RMCStorageEjectState.Unequip:
                 return false;
             case RMCStorageEjectState.Open:
-                _storage.OpenStorageUI(item, user, storage, false, false);
+                _storage.OpenStorageUI(item, user, storage, false);
                 return true;
         }
 
