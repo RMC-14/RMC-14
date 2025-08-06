@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: The name of the current planet map is now included in the server status
-      information (visible in server browsers/external tools).
-    type: Add
-  id: 1661
-  time: '2025-04-28T23:23:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6291
 - author: DummeHytteOst
   changes:
   - message: Xenonids can destroy morgues & crematoriums.
@@ -4668,5 +4660,12 @@
   id: 2161
   time: '2025-08-06T04:29:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7349
+- author: Ian321
+  changes:
+  - message: the headsets in surplus vendors now come with the public channel
+    type: Tweak
+  id: 2162
+  time: '2025-08-06T04:31:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7360
 Name: RMC14
 Order: -1
