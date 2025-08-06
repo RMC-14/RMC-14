@@ -99,7 +99,7 @@
     jumpsuit: CMJumpsuitSPPEngi
     outerClothing: RMCArmorSPPRifleman
     gloves: RMCHandsVeteranInsulated
-    shoes: CMBootsBlackFilled
+    shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponRifleType71Flamer
     id: RMCIDSPP
     belt: RMCType71BeltFilled
