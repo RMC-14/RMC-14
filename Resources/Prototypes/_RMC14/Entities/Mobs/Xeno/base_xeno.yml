@@ -3,17 +3,8 @@
   id: CMXenoCompound
   branches:
   - tasks:
-
     - !type:HTNCompoundTask
       task: CMXenoMeleeCombatCompound
-
-        - !type:HTNPrimitiveTask
-          operator: !type:UtilityOperator
-            proto: NearbyAlive
-
-        - !type:HTNPrimitiveTask
-          operator: !type:MoveToOperator
-
   - tasks:
     - !type:HTNCompoundTask
       task: IdleCompound

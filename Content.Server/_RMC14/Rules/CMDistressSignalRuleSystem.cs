@@ -183,7 +183,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 // rnmc edit start
     private bool _checkRoundEndConditions;
 
-    private bool _spawnPlayerXenos;
+    private int _spawnXenoAmount;
 // rnmc edit end
     private bool _queenBuildingBoostEnabled;
     private TimeSpan _queenBoostDuration;
@@ -261,7 +261,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
         // RNMC edit start
         Subs.CVar(_config, RMCCVars.RNMCCheckRoundEndConditions, v => _checkRoundEndConditions = v, true);
-        Subs.CVar(_config, RMCCVars.RNMCSpawnPlayerXenos, v => _spawnPlayerXenos = v, true);
+        Subs.CVar(_config, RMCCVars.RNMCSpawnXenoAmount, v => _spawnXenoAmount = v, true);
         // RNMC edit end
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoost, v => _queenBuildingBoostEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostDurationMinutes, v => _queenBoostDuration = TimeSpan.FromMinutes(v), true);
@@ -357,11 +357,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 {
                     Log.Error($"Failed to find player with id {playerId} during xeno selection.");
                     return null;
-                }
-
-                if (_spawnPlayerXenos == false)
-                {
-                    return;
                 }
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
@@ -582,9 +577,20 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _hive.SetHive(xenoEnt, comp.Hive);
                 return xenoEnt;
             }
+            // rnmc edit start
 
-            var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
-            var totalSurvivors = (int) Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor);
+            var totalXenos = 0;
+
+            if (_spawnXenoAmount < 0)
+            {
+                totalXenos = (int)Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));  // overrides amount of xenos if the xeno amount is above or is 0
+            }
+            else if (_spawnXenoAmount < 0 || _spawnXenoAmount == 0)
+            {
+                totalXenos = _spawnXenoAmount;
+            }
+            // rnmc edit end
+                var totalSurvivors = (int) Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor);
             totalSurvivors = (int) Math.Clamp(totalSurvivors, _minimumSurvivors, _maximumSurvivors);
             var marines = ev.PlayerPool.Count - totalXenos - totalSurvivors;
             var jobSlotScaling = _config.GetCVar(RMCCVars.RMCJobSlotScaling);

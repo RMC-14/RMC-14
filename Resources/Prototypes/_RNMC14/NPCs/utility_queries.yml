@@ -1,8 +1,1 @@
-- type: utilityQuery
-  id: NearbyAlive
-  query:
-    - !type:ComponentQuery
-      components:
-      - type: MobThresholds
-  considerations:
-    - !type:TargetIsAliveCon
+

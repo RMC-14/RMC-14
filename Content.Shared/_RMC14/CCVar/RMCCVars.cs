@@ -439,8 +439,8 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RNMCCheckRoundEndConditions =
         CVarDef.Create("rmc.check_end_round_conditions", true, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<bool> RNMCSpawnPlayerXenos =
-        CVarDef.Create("rmc.spawn_player_xenos", true, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<int> RNMCSpawnXenoAmount =
+        CVarDef.Create("rmc.xeno_amount", -1, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE); // determines how much xenos to spawn. returns to standard counting if it's below 0.
     // rnmc edit end
 
     public static readonly CVarDef<bool> RMCQueenBuildingBoost =
