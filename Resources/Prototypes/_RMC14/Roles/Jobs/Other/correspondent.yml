@@ -55,6 +55,15 @@
   - type: Sprite
     state: marine_spawn
 
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleCorrespondent
+  name: Correspondent
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: combat_correspondent
+
 - type: playTimeTracker
   id: CMJobCorrespondent
   isHumanoid: true
