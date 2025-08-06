@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added a 25 hour Queen playtime requirement for giving out jellies because
-      if I have to delete one more dogshit jelly from the database I am going to die.
-    type: Tweak
-  id: 1617
-  time: '2025-04-20T16:39:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6200
-- author: DrSmugleaf
-  changes:
-  - message: Added XO and CL stamps. This also fixes the color for some stamps.
-    type: Add
-  - message: Fixed the rangefinder being usable on the Almayer.
-    type: Fix
-  id: 1618
-  time: '2025-04-20T17:47:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6202
 - author: Vermidia
   changes:
   - message: Fixed normal xeno ranks not showing up.
@@ -4727,5 +4710,22 @@
   id: 2117
   time: '2025-08-06T04:00:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7238
+- author: Vermidia
+  changes:
+  - message: Fixed enhanced spitter acid not taking 2 rolls and/or extinguisher hits
+      to get rid of.
+    type: Fix
+  id: 2118
+  time: '2025-08-06T04:03:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7253
+- author: Vermidia
+  changes:
+  - message: Fixed Dancer being able to fill traps with acid.
+    type: Fix
+  - message: Fixed Valkyrie not being able to fill traps with acid.
+    type: Fix
+  id: 2119
+  time: '2025-08-06T04:04:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7254
 Name: RMC14
 Order: -1
