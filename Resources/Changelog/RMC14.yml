@@ -1,40 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed normal xeno ranks not showing up.
-    type: Fix
-  id: 1619
-  time: '2025-04-20T23:37:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6203
-- author: Vermidia
-  changes:
-  - message: Fixed parasites attempting to jump while held.
-    type: Fix
-  id: 1620
-  time: '2025-04-20T23:37:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6204
-- author: DrSmugleaf
-  changes:
-  - message: Fixed autoinjector inhand error sprites.
-    type: Fix
-  - message: Fixed marines and xenos lighting others on fire when trying to pat them
-      out.
-    type: Fix
-  - message: Fixed magazine box crafting not working.
-    type: Fix
-  - message: Fixed admin area SPP name.
-    type: Fix
-  - message: Fixed a bug where fireman carry would delete you.
-    type: Fix
-  - message: Fixed deoiviing while in Queen eye getting you stuck in Queen eye.
-    type: Fix
-  - message: Fixed M13 belt working inconsistently.
-    type: Fix
-  - message: Fixed your ghost while observing being layered under mobs.
-    type: Fix
-  id: 1621
-  time: '2025-04-20T23:44:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6205
 - author: DrSmugleaf
   changes:
   - message: Fixed not being able to authorize evacuation during hijack or red alert.
@@ -4727,5 +4691,29 @@
   id: 2119
   time: '2025-08-06T04:04:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7254
+- author: Dygon
+  changes:
+  - message: Barricades no longer block humanoid melee attacks
+    type: Fix
+  - message: Barricades no longer occasionally block attacks made from the back.
+    type: Fix
+  id: 2120
+  time: '2025-08-06T04:06:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7258
+- author: Vermidia
+  changes:
+  - message: Fixed flaregun flares and airburst starshells ignites applying for too
+      long. Starshell ignites also no longer do less damage.
+    type: Fix
+  id: 2121
+  time: '2025-08-06T04:05:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7255
+- author: lyxcaster
+  changes:
+  - message: Backpacks now have a delay to open when using the click-to-open option.
+    type: Fix
+  id: 2122
+  time: '2025-08-06T04:05:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7257
 Name: RMC14
 Order: -1
