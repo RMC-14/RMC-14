@@ -1,41 +1,4 @@
 ﻿Entries:
-- author: noctyrn
-  changes:
-  - message: Added SPP Spawners.
-    type: Add
-  id: 1605
-  time: '2025-04-19T10:07:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5972
-- author: Vermidia
-  changes:
-  - message: Fixed critical grace activating if you were already in crit.
-    type: Fix
-  id: 1606
-  time: '2025-04-19T11:36:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6188
-- author: N0lim
-  changes:
-  - message: Fixed lesser drones being able to plant new weed nodes in 6x6 area instead
-      of 5x5 from other nodes.
-    type: Fix
-  id: 1607
-  time: '2025-04-20T01:59:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6170
-- author: Dygon
-  changes:
-  - message: Invisible entities no longer show popups to nearby players.
-    type: Fix
-  id: 1608
-  time: '2025-04-20T02:00:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6173
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added the vampire lurker strain. A new strain that turns lurker into
-      a silent assassin, with abilities that can heal itself.
-    type: Add
-  id: 1609
-  time: '2025-04-20T02:02:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6108
 - author: Vermidia
   changes:
   - message: Fixed xenos from being able to destroy crates with melee.
@@ -4866,5 +4829,60 @@
   id: 2105
   time: '2025-08-06T03:54:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7222
+- author: Utmanarn
+  changes:
+  - message: Added the option for ghosts to opt in to being teleported over to game
+      masters that need props for an event.
+    type: Add
+  - message: Added the ability for game masters to call over ghosts who have signed
+      up for being a prop to their location.
+    type: Add
+  id: 2106
+  time: '2025-08-06T03:57:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7230
+- author: Arykh
+  changes:
+  - message: Fixed the EOD heavy armor being slighty slower than intended.
+    type: Fix
+  - message: Fixed the M3-G4 grenadier and HEFA knight armor being slighty faster
+      than intended.
+    type: Fix
+  - message: Fixed the PT-LT firesuit and the T-20 fire response coat not having any
+      slowdowns.
+    type: Fix
+  - message: Fixed the Paramedic utility fatigues not having the right properties.
+    type: Fix
+  - message: Fixed the M3-VL ballistic and flak vests having too much bio armor.
+    type: Fix
+  - message: Fixed the Tartarus-Mining utility uniform having too much bullet armor.
+    type: Fix
+  id: 2107
+  time: '2025-08-06T03:58:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7235
+- author: x5tink
+  changes:
+  - message: Mangos
+    type: Add
+  id: 2108
+  time: '2025-08-06T03:56:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7226
+- author: Dygon
+  changes:
+  - message: Fixed barricades not preventing weeds from spreading past them.
+    type: Fix
+  - message: Adjusted the spread delay of hive weeds(3s > 1.25s), hardy weeds(3s >
+      3.125s), and regular weeds(3s > 3.33s)
+    type: Fix
+  id: 2109
+  time: '2025-08-06T03:55:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7225
+- author: Dygon
+  changes:
+  - message: Platforms, barricades and open doors/shutters/podlocks no longer block
+      resin structures.
+    type: Fix
+  id: 2110
+  time: '2025-08-06T03:58:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7234
 Name: RMC14
 Order: -1
