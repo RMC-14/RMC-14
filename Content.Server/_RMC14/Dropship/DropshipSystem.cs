@@ -221,7 +221,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         if (TryComp(grid, out FTLComponent? ftl) &&
-            ftl.State is FTLState.Travelling or FTLState.Arriving)
+            ftl.State is FTLState.Travelling or FTLState.Arriving &&
+            args.DoorLocation != DoorLocation.Aft)
         {
             return;
         }
