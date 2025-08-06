@@ -114,7 +114,7 @@ public sealed class AreaInfoSystem : EntitySystem
             ceilingLevel = 3;
             severityToUse = hasPylonProtection ? (short)6 : (short)4;
         }
-        else if (!_area.CanSupplyDrop(coordinates.ToMap(_entityManager, _transform)) || !_area.CanMortarFire(coordinates))
+        else if (!_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)) || !_area.CanMortarFire(coordinates))
         {
             ceilingLevel = 2;
             severityToUse = (short)3;
