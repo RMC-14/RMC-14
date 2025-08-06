@@ -5,12 +5,12 @@ using Robust.Shared.Timing;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Random;
 using Content.Shared.Coordinates;
-using Robust.Shared.Network;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared._RMC14.Emote;
 using Content.Shared.Popups;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids;
+using System.Linq;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
@@ -23,7 +23,6 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
@@ -81,9 +80,11 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         Spawn(comp.BloodSpawnerPrototype, uid.ToCoordinates()); // probability inside prototype
 
         var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.
-        var targets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.StandardSplashRadius);
+        var targetsSet = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.StandardSplashRadius);
         var closeRangeTargets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.CloseSplashRadius);
-        foreach (var target in targets)
+        var targetsList = targetsSet.ToList(); // shuffle don't work on HashSet
+        _random.Shuffle(targetsList);
+        foreach (var target in targetsList)
         {
             if (!_xeno.CanAbilityAttackTarget(uid, target))
                 continue;

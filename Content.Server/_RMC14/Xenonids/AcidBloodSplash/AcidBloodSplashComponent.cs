@@ -2,7 +2,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Content.Server.Spawners.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
