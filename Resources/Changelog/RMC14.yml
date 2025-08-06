@@ -1,68 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed grenade launchers being able to shoot past 7 tiles.
-    type: Fix
-  id: 1668
-  time: '2025-05-03T21:34:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6338
-- author: CyberTropic
-  changes:
-  - message: Colony floodlights now use colony power.
-    type: Add
-  id: 1669
-  time: '2025-05-04T06:52:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6263
-- author: noctyrnal
-  changes:
-  - message: Added synthetic vendors.
-    type: Add
-  - message: Added Experimental Meson Goggles, The Custom Nailgun Holster, Compact
-      Defib and Smartpacks. These are exclusive to UNMC Synthetics.
-    type: Add
-  id: 1670
-  time: '2025-05-04T06:55:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6320
-- author: Vermidia
-  changes:
-  - message: Fixed xeno structures (tunnel, hivecore) showing up with the sensor tower
-      active.
-    type: Fix
-  id: 1671
-  time: '2025-05-04T06:57:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5715
-- author: Dygon
-  changes:
-  - message: Fixed underbarrel extinguishers not being attachable to the M4SPR, M4SPR
-      Custom Rifle, and M54CMK1.
-    type: Fix
-  - message: Fixed underbarrel shotgun not being attachable to the M4SPR Custom Rifle.
-    type: Fix
-  - message: Fixed barrel chargers not being attachable to the XM88.
-    type: Fix
-  - message: Fixed underbarrel grenade launchers being attachable to the M16.
-    type: Fix
-  id: 1672
-  time: '2025-05-04T07:02:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6316
-- author: J C Denton
-  changes:
-  - message: Destroyed Hydro insert on LV-624 now contains SSG-45s and their ammo
-      instead of the placeholder M54C.
-    type: Tweak
-  id: 1673
-  time: '2025-05-04T07:11:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6335
-- author: Ian321
-  changes:
-  - message: Playing DP now requires 5 hours of DCC time, up from 2.
-    type: Tweak
-  - message: Playing GP now requires 5 hours of DP, up from 0. Existing GP time also
-      contributes to this requirement.
-    type: Tweak
-  id: 1674
-  time: '2025-05-04T07:15:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5698
 - author: Dygon
   changes:
   - message: Fixed HIRR baton slugs having their acid removed from them when fired.
@@ -4633,5 +4569,57 @@
   id: 2168
   time: '2025-08-06T04:46:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7386
+- author: BarteG44
+  changes:
+  - message: Clicking on people now pats them on the back instead of hugging
+    type: Tweak
+  id: 2169
+  time: '2025-08-06T06:04:48.597386+00:00'
+  url: null
+- author: DrSmugleaf
+  changes:
+  - message: Fixed survivors not spawning.
+    type: Fix
+  id: 2170
+  time: '2025-08-06T06:03:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7393
+- author: Binbagg
+  changes:
+  - message: Eviscerate now breaks after 0.5 tiles instead of 0.3
+    type: Fix
+  id: 2171
+  time: '2025-08-06T06:03:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7389
+- author: Vermidia
+  changes:
+  - message: Fixed not being able to choose the healer drone strain.
+    type: Fix
+  id: 2172
+  time: '2025-08-06T06:02:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7388
+- author: Vermidia
+  changes:
+  - message: Fixed hive core and pylons roofs not blocking medevac, fultoning, lasing,
+      or supply drops.
+    type: Fix
+  id: 2173
+  time: '2025-08-06T06:03:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7387
+- author: BarteG44
+  changes:
+  - message: Added an "on" sprite for the extinguisher
+    type: Add
+  id: 2174
+  time: '2025-08-06T06:04:48.602371+00:00'
+  url: null
+- author: BarteG44
+  changes:
+  - message: Added Helmet Garb variants for hats
+    type: Add
+  - message: Headbands can now be put on helmets
+    type: Tweak
+  id: 2175
+  time: '2025-08-06T06:04:48.602958+00:00'
+  url: null
 Name: RMC14
 Order: -1
