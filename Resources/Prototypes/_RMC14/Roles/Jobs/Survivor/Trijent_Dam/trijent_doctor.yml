@@ -1,0 +1,58 @@
+﻿- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorTrijentDoctor
+  name: cm-job-name-survivor-trijent-doctor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorTrijentDoctor
+  startingGear: RMCGearSurvivorTrijentDoctor
+  spawnMenuRoleName: Trijent Doctor (Trijent Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetTrijentDoctor
+
+- type: startingGear
+  parent: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorTrijentDoctor
+  equipment:
+    head: CMHeadCapSurgBlue
+    shoes: RMCShoesWhite
+    jumpsuit: CMScrubsBlue
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrijentDoctor
+  name: survivor trijent doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorTrijentDoctor
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetDoctor
+  id: RMCGearSurvivorPresetTrijentDoctor
+  name: trijent doctor colonist preset
+  categories: [ HideSpawnMenu ]

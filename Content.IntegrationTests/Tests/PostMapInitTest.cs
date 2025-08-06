@@ -91,7 +91,8 @@ namespace Content.IntegrationTests.Tests
             "GoldenArrowLarge",
             "OCP-583",
             "Haurchefant",
-            "ChancesRepaired"
+            "ChancesRepaired",
+            "Breakwater_Strand"
         };
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";
