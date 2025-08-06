@@ -14,7 +14,7 @@ highlights-security-officer = Security Officer, Secoff, Officer, Security, "Sec"
 highlights-warden = Warden, "Ward", Security, "Sec"
 
 # Cargo
-highlights-cargo-technician = Cargo Technician, Cargo Tech, "Cargo"
+# highlights-cargo-technician = Cargo Technician, Cargo Tech, "Cargo" // RMC14
 highlights-salvage-specialist = Salvage Specialist, Salvager, Salvage, "Salv", "Cargo", Miner
 
 # Engineering
