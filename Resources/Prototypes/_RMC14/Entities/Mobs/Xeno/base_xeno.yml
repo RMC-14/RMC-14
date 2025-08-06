@@ -7,7 +7,21 @@
       task: CMXenoMeleeCombatCompound
   - tasks:
     - !type:HTNCompoundTask
+      task: MoveToAliveCompound
+  - tasks:
+    - !type:HTNCompoundTask
       task: IdleCompound
+
+- type: htnCompound
+  id: MoveToAliveCompound
+  branches:
+    - tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:UtilityOperator
+            proto: NearbyAlive
+
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
 
 # Selects a target in melee and tries to attack it.
 - type: htnCompound

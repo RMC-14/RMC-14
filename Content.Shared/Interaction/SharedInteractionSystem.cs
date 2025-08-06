@@ -604,7 +604,7 @@ namespace Content.Shared.Interaction
         public float UnobstructedDistance(
             MapCoordinates origin,
             MapCoordinates other,
-            int collisionMask = (int) InRangeUnobstructedMask,
+            int collisionMask = (int)InRangeUnobstructedMask,
             Ignored? predicate = null)
         {
             var dir = other.Position - origin.Position;
@@ -643,6 +643,16 @@ namespace Content.Shared.Interaction
         /// <returns>
         ///     True if the two points are within a given range without being obstructed.
         /// </returns>
+
+        private const CollisionGroup InRangeUnobstructedMaskNPC = CollisionGroup.None;
+        public extern bool InRangeUnobstructedNPC(
+            MapCoordinates origin,
+            MapCoordinates other,
+            float range = InteractionRange,
+            CollisionGroup collisionMask = InRangeUnobstructedMaskNPC,
+            Ignored? predicate = null,
+            bool checkAccess = true);
+
         public bool InRangeUnobstructed(
             MapCoordinates origin,
             MapCoordinates other,
@@ -676,7 +686,7 @@ namespace Content.Shared.Interaction
                 length = MaxRaycastRange;
             }
 
-            var ray = new CollisionRay(origin.Position, dir.Normalized(), (int) collisionMask);
+            var ray = new CollisionRay(origin.Position, dir.Normalized(), (int)collisionMask);
             var rayResults = _broadphase.IntersectRayWithPredicate(origin.MapId, ray, length, predicate.Invoke, false).ToList();
 
             return rayResults.Count == 0;
@@ -1416,7 +1426,7 @@ namespace Content.Shared.Interaction
                 return;
 
             if (!TryComp(uidB, out MetaDataComponent? metaB) || metaB.EntityPaused)
-                return ;
+                return;
 
             // TODO Struct event
             var ev = new ContactInteractionEvent(uidB.Value);
