@@ -1,74 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to authorize evacuation during hijack or red alert.
-    type: Fix
-  - message: Reworded overwatch console squad message chat message to be clearer.
-    type: Tweak
-  id: 1622
-  time: '2025-04-21T00:16:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6208
-- author: Magicocity1
-  changes:
-  - message: Fixed M13's vending with a magazine in them.
-    type: Fix
-  id: 1623
-  time: '2025-04-21T00:17:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6206
-- author: CyberTropic
-  changes:
-  - message: Fixed hybrisa rain opacity.
-    type: Fix
-  id: 1624
-  time: '2025-04-21T00:17:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6207
-- author: DrSmugleaf
-  changes:
-  - message: Fixed default names for Research and CL quarters airlocks.
-    type: Fix
-  - message: Fixed duplicated tables on the Almayer, incorrect disposal tubes, incorrect
-      tiles, and some rotated props.
-    type: Fix
-  id: 1625
-  time: '2025-04-21T01:20:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6209
-- author: DrSmugleaf
-  changes:
-  - message: Fixed sitting next to someone pushing you away
-    type: Fix
-  id: 1626
-  time: '2025-04-21T01:38:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6210
-- author: Dygon
-  changes:
-  - message: Transferring contents between containers with item slots now adheres
-      to whitelists.
-    type: Fix
-  - message: Containers with item slots will now prioritize inserting themselves into
-      another container before attempting to insert their contents.
-    type: Fix
-  id: 1627
-  time: '2025-04-22T08:53:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6213
-- author: Vermidia
-  changes:
-  - message: Fixed tunnels blocking travel if they were too full. They now block travel
-      if the destination tunnel is too full.
-    type: Fix
-  - message: Fixed dead parasites getting stuck in tunnels.
-    type: Fix
-  - message: Non-hivemembers can now examine tunnels to see if they contain something.
-    type: Fix
-  id: 1628
-  time: '2025-04-22T23:23:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6231
-- author: Vermidia
-  changes:
-  - message: Fixed Ravager's empower range being too small (4 > 5.078)
-    type: Fix
-  id: 1629
-  time: '2025-04-22T23:27:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6242
 - author: MetalSage
   changes:
   - message: The XM51 case no longer holds 8 of any item.
@@ -4715,5 +4645,65 @@
   id: 2122
   time: '2025-08-06T04:05:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7257
+- author: CyberTropic
+  changes:
+  - message: Added edges to Soro grass tiles.
+    type: Add
+  id: 2123
+  time: '2025-08-06T04:08:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7261
+- author: Max_Power
+  changes:
+  - message: Added pickup, equip and drop sounds for binoculars, bags, armors, helmets
+      and boots!
+    type: Add
+  - message: Added a new sound for turning off Armor lights!
+    type: Add
+  id: 2124
+  time: '2025-08-06T04:09:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7269
+- author: Dygon
+  changes:
+  - message: Training grenades no longer explode without priming when shot from a
+      grenade launcher, and now regain their original size after 'exploding.
+    type: Fix
+  id: 2125
+  time: '2025-08-06T04:09:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7268
+- author: Dygon
+  changes:
+  - message: Signal flares shot from a flare gun can no longer be pulled around.
+    type: Fix
+  id: 2126
+  time: '2025-08-06T04:08:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7265
+- author: Vermidia
+  changes:
+  - message: Fixed Crusher passive not reducing charge and defensive shield cooldowns.
+    type: Fix
+  id: 2127
+  time: '2025-08-06T04:09:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7270
+- author: Ian321
+  changes:
+  - message: Added admin-only training dummy.
+    type: Add
+  id: 2128
+  time: '2025-08-06T04:07:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7260
+- author: Dygon
+  changes:
+  - message: The Valkyrie's High Gallop ability now knocks back grenades again.
+    type: Fix
+  id: 2129
+  time: '2025-08-06T04:08:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7267
+- author: noctyrnal
+  changes:
+  - message: SOF radio is now readable.
+    type: Fix
+  id: 2130
+  time: '2025-08-06T04:09:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7273
 Name: RMC14
 Order: -1
