@@ -1,8 +1,7 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Audio;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
@@ -53,15 +52,18 @@ public sealed partial class AcidBloodSplashComponent : Component
     /// <summary>
     /// How much probability increase with additional damage
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public float DamageProbabilityMultiplier = 0.33f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan SplashCooldown = TimeSpan.FromSeconds(5);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    [DataField, AutoPausedField]
     public TimeSpan NextSplashAvailable;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>)), AutoNetworkedField]
+    [DataField]
     public string BloodSpawnerPrototype = "RMCDecalSpawnerAcidBloodSplash";
+
+    [DataField]
+    public SoundSpecifier AcidSplashSound = new SoundCollectionSpecifier("XenoAcidSizzle");
 }
