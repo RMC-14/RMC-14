@@ -441,7 +441,7 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false, compensateFriction: true);
+        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
     }
 
     private void OnXenoChargeStop(Entity<XenoChargeComponent> xeno, ref StopThrowEvent args)
