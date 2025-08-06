@@ -1,0 +1,60 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMSquadLeaderPVE
+  name: cm-job-name-squad-leader
+  description: cm-job-description-squad-leader
+  playTimeTracker: CMJobSquadLeaderPVE
+  ranks:
+    RMCRankSergeant: []
+  startingGear: CMGearSquadLeader
+  dummyStartingGear: CMGearSquadLeaderEquipped
+  icon: "CMJobIconFireteamLeader"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-section-sergeant
+  accessGroups:
+  - Rifleman
+  overwatchSortPriority: -6
+  overwatchShowName: true
+  overwatchRoleName: Squad Leader
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillPowerLoader: 1
+        RmcSkillPilot: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: tl
+
+- type: playTimeTracker
+  id: CMJobSquadLeaderPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSquadLeaderSunRiders
+  name: sun riders squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSquadLeaderPVE
+  - type: Sprite
+    state: marine_spawn

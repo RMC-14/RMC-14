@@ -10,6 +10,7 @@
   id: CMFloorPlating
   name: tiles-cm-plating
   sprite: /Textures/_RMC14/Tiles/floors/plating.png
+  isSubfloor: true
   friction: 1
 
 - type: tile

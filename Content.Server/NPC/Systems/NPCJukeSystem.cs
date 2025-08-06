@@ -141,66 +141,68 @@ public sealed class NPCJukeSystem : EntitySystem
             // TODO: Ranged away juking
             if (_npcMeleeQuery.TryGetComponent(uid, out var melee))
             {
-                if (!_melee.TryGetWeapon(uid, out var weaponUid, out var weapon))
-                    return;
+                // if (!_melee.TryGetWeapon(uid, out var weaponUid, out var weapon))
+                //     return;
 
-                if (!HasComp<TransformComponent>(melee.Target))
-                    return;
+                // if (!HasComp<TransformComponent>(melee.Target))
+                //     return;
 
-                var cdRemaining = weapon.NextAttack - _timing.CurTime;
-                var attackCooldown = TimeSpan.FromSeconds(1f / _melee.GetAttackRate(weaponUid, uid, weapon));
+                // var cdRemaining = weapon.NextAttack - _timing.CurTime;
+                // var attackCooldown = TimeSpan.FromSeconds(1f / _melee.GetAttackRate(weaponUid, uid, weapon));
 
-                // Might as well get in range.
-                if (cdRemaining < attackCooldown * 0.45f)
-                    return;
+                // // Might as well get in range.
+                // if (cdRemaining < attackCooldown * 0.45f)
+                //     return;
 
-                // If we get whacky boss mobs might need nearestpos that's more of a PITA
-                // so will just use this for now.
-                var obstacleDirection = _transform.GetWorldPosition(melee.Target) - args.WorldPosition;
+                // // If we get whacky boss mobs might need nearestpos that's more of a PITA
+                // // so will just use this for now.
+                // var obstacleDirection = _transform.GetWorldPosition(melee.Target) - args.WorldPosition;
 
-                if (obstacleDirection == Vector2.Zero)
-                {
-                    obstacleDirection = _random.NextVector2();
-                }
+                // if (obstacleDirection == Vector2.Zero)
+                // {
+                //     obstacleDirection = _random.NextVector2();
+                // }
 
-                // If they're moving away then pursue anyway.
-                // If just hit then always back up a bit.
-                if (cdRemaining < attackCooldown * 0.90f &&
-                    _physicsQuery.TryGetComponent(melee.Target, out var targetPhysics) &&
-                    Vector2.Dot(targetPhysics.LinearVelocity, obstacleDirection) > 0f)
-                {
-                    return;
-                }
+                // // If they're moving away then pursue anyway.
+                // // If just hit then always back up a bit.
+                // if (cdRemaining < attackCooldown * 0.90f &&
+                //     _physicsQuery.TryGetComponent(melee.Target, out var targetPhysics) &&
+                //     Vector2.Dot(targetPhysics.LinearVelocity, obstacleDirection) > 0f)
+                // {
+                //     return;
+                // }
 
-                if (cdRemaining < TimeSpan.FromSeconds(1f / _melee.GetAttackRate(weaponUid, uid, weapon)) * 0.45f)
-                    return;
+                // if (cdRemaining < TimeSpan.FromSeconds(1f / _melee.GetAttackRate(weaponUid, uid, weapon)) * 0.45f)
+                //     return;
 
-                // TODO: Probably add in our bounds and target bounds for ideal distance.
-                var idealDistance = weapon.Range * 4f;
-                var obstacleDistance = obstacleDirection.Length();
+                // // TODO: Probably add in our bounds and target bounds for ideal distance.
+                // var idealDistance = weapon.Range * 4f;
+                // var obstacleDistance = obstacleDirection.Length();
 
-                if (obstacleDistance > idealDistance || obstacleDistance == 0f)
-                {
-                    // Don't want to get too far.
-                    return;
-                }
+                // if (obstacleDistance > idealDistance || obstacleDistance == 0f)
+                // {
+                //     // Don't want to get too far.
+                //     return;
+                // }
 
-                obstacleDirection = args.OffsetRotation.RotateVec(obstacleDirection);
-                var norm = obstacleDirection.Normalized();
+                // obstacleDirection = args.OffsetRotation.RotateVec(obstacleDirection);
+                // var norm = obstacleDirection.Normalized();
 
-                var weight = obstacleDistance <= args.Steering.Radius
-                    ? 1f
-                    : (idealDistance - obstacleDistance) / idealDistance;
+                // var weight = obstacleDistance <= args.Steering.Radius
+                //     ? 1f
+                //     : (idealDistance - obstacleDistance) / idealDistance;
 
-                for (var i = 0; i < SharedNPCSteeringSystem.InterestDirections; i++)
-                {
-                    var result = -Vector2.Dot(norm, NPCSteeringSystem.Directions[i]) * weight;
+                // for (var i = 0; i < SharedNPCSteeringSystem.InterestDirections; i++)
+                // {
+                //     var result = -Vector2.Dot(norm, NPCSteeringSystem.Directions[i]) * weight;
 
-                    if (result < 0f)
-                        continue;
+                //     if (result < 0f)
+                //         continue;
 
-                    args.Steering.Interest[i] = MathF.Max(args.Steering.Interest[i], result);
-                }
+                //     args.Steering.Interest[i] = MathF.Max(args.Steering.Interest[i], result);
+                // }
+                // dont need it
+                return;
             }
 
             args.Steering.CanSeek = false;

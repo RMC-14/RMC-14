@@ -66,21 +66,21 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
-          - RMCM5Bayonet
+          - RMCAttachmentBarrel
       rmc-aslot-rail:
         startingAttachable: RMCAttachmentHuntingScope
         whitelist:
           tags:
-          - RMCAttachmentHuntingScope
+          - RMCAttachmentRail
       rmc-aslot-stock:
         locked: true
         startingAttachable: RMCAttachmentHuntingStock
         whitelist:
           tags:
-          - RMCAttachmentHuntingStock
+          - RMCAttachmentStock
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.80, 0.06
+      rmc-aslot-barrel: 0.80, 0
       rmc-aslot-rail: -0.28, 0.06
       rmc-aslot-stock: -0.74, -0.14
   - type: ItemCamouflage

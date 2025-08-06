@@ -180,6 +180,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private int _hijackMinBurrowed;
     private int _xenosMinimum;
     private bool _usingCustomOperationName;
+// rnmc edit start
+    private bool _checkRoundEndConditions;
+// rnmc edit end
     private bool _queenBuildingBoostEnabled;
     private TimeSpan _queenBoostDuration;
     private float _queenBoostSpeedMultiplier;
@@ -254,6 +257,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCHijackShipWeight, v => _hijackShipWeight = v, true);
         Subs.CVar(_config, RMCCVars.RMCMinimumHijackBurrowed, v => _hijackMinBurrowed = v, true);
         Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
+        // RNMC edit start
+        Subs.CVar(_config, RMCCVars.RNMCCheckRoundEndConditions, v => _checkRoundEndConditions = v, true);
+        // RNMC edit end
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoost, v => _queenBuildingBoostEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostDurationMinutes, v => _queenBoostDuration = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostSpeedMultiplier, v => _queenBoostSpeedMultiplier = v, true);
@@ -349,7 +355,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     Log.Error($"Failed to find player with id {playerId} during xeno selection.");
                     return null;
                 }
-
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
                 var xenoEnt = SpawnXenoEnt(ent, player, doBurst);
@@ -569,7 +574,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _hive.SetHive(xenoEnt, comp.Hive);
                 return xenoEnt;
             }
-
             var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
             var totalSurvivors = (int) Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor);
             totalSurvivors = (int) Math.Clamp(totalSurvivors, _minimumSurvivors, _maximumSurvivors);
@@ -1180,6 +1184,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void CheckRoundShouldEnd()
     {
+    // rnmc edit start
+            var checkRoundEndConditions = _config.GetCVar(RMCCVars.RNMCCheckRoundEndConditions);
+        if (checkRoundEndConditions == false)
+        {
+            return;
+        }
+    // rnmc edit end
         var query = QueryActiveRules();
         while (query.MoveNext(out var uid, out _, out var distress, out var gameRule))
         {

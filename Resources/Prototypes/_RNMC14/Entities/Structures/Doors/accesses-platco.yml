@@ -1,0 +1,7 @@
+- type: entity
+  parent: CMAirlockSecure
+  id: CMAirlockSecureLockedPlatco
+  suffix: Platoon Commander, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessPlatco"]]

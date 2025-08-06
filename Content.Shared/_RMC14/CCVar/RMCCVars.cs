@@ -435,6 +435,10 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> HidePlayerIdentities =
         CVarDef.Create("rmc.hide_player_identities", true, CVar.REPLICATED | CVar.SERVER);
+    // rnmc edit start
+    public static readonly CVarDef<bool> RNMCCheckRoundEndConditions =
+        CVarDef.Create("rnmc.check_end_round_conditions", true, CVar.REPLICATED | CVar.SERVER);
+    // rnmc edit end
 
     public static readonly CVarDef<bool> RMCQueenBuildingBoost =
     CVarDef.Create("rmc.queen_building_boost", true, CVar.REPLICATED | CVar.SERVER);
