@@ -1,7 +1,9 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Damage;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Content.Server.Spawners.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
@@ -61,6 +63,6 @@ public sealed partial class AcidBloodSplashComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextSplashAvailable;
 
-    //[DataField, AutoNetworkedField]
-    //public Entity<RandomDecalSpawnerComponent> BloodSpawner;
+    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>)), AutoNetworkedField]
+    public string BloodSpawnerPrototype = "RMCDecalSpawnerAcidBloodSplash";
 }

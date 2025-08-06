@@ -78,6 +78,8 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         if (_random.NextFloat() > triggerProbability)
             return;
 
+        Spawn(comp.BloodSpawnerPrototype, uid.ToCoordinates()); // probability inside prototype
+
         var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.
         var targets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.StandardSplashRadius);
         var closeRangeTargets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.CloseSplashRadius);
