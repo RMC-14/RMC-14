@@ -1,218 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed xenos from being able to destroy crates with melee.
-    type: Fix
-  - message: Fixed dragging crates not slowing you down.
-    type: Fix
-  id: 1610
-  time: '2025-04-20T02:04:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6139
-- author: paige404
-  changes:
-  - message: Particularly large-snouted members of their species should now be able
-      to fit their noses into their gas masks.
-    type: Fix
-  id: 1611
-  time: '2025-04-20T06:53:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5965
-- author: Vermidia
-  changes:
-  - message: Fixed rounds not ending 25 minutes after hijack begins. (It's a xeno
-      minor)
-    type: Fix
-  - message: Changed some round end texts.
-    type: Tweak
-  id: 1612
-  time: '2025-04-20T08:35:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6177
-- author: Magicocity1
-  changes:
-  - message: Added the M13 Automatic Pistol, get it from your weapon vendor today!
-    type: Add
-  - message: Added a M276 belt variant for the M13.
-    type: Add
-  - message: Added magazine boxes for the M13, the brighter the trim the greater the
-      magazine capacity!
-    type: Add
-  id: 1613
-  time: '2025-04-20T08:39:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6163
-- author: to4no_fix
-  changes:
-  - message: Reworked announcements about latejoin and earlyleave of Marines. Late
-      joining of CO/XO/SEA is accompanied by a large announcement with a sound signal.
-      SEA has its own sound signal. Late joining of the head of department (squad
-      leader) is accompanied by a message on the radio channel of the department (squad
-      radio channel) and the radio channel of Almaer. Late joining of an ordinary
-      employee of the department (squad) is accompanied by a message on the radio
-      channel of the department (squad). At early leave, an announcement occurs according
-      to the same logic, only without a large announcement.
-    type: Tweak
-  id: 1614
-  time: '2025-04-20T10:13:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6014
-- author: DrSmugleaf
-  changes:
-  - message: Added Queen Eye. The Queen can enter this mode while in ovi, letting
-      her move around and see anywhere that has weeds remotely. She can also use her
-      AOE heal, and build remotely, while in this mode.
-    type: Add
-  - message: Added xeno late join from lobby.
-    type: Add
-  - message: Added mob collision. This also adds Shift+R to rest for marines and resting
-      for xenos disabling collision. This also ports wide attacks to instead be a
-      single-target thrust attack instead for both marines and xenos. Big xenos cannot
-      be pushed by smaller ones, while the Queen will push aside and stun any xeno
-      that she moves over. Hive leader xenos can also tackle other xenos if they are
-      blocking the way.
-    type: Add
-  - message: Ported Dancer Praetorian Dodge disabling mob collision for its duration,
-      and Lurker invisibility being disabled if they bump into a marine.
-    type: Add
-  - message: Added chat message to marines within 12 tiles of an overwatch console
-      when a squad message is sent from it.
-    type: Add
-  - message: Added being able to pop out the dropship weapons and security cameras
-      UIs.
-    type: Add
-  - message: Added Nic Boone to the in-game credits. If you want your name added,
-      just bask!
-    type: Add
-  - message: Dylovene temporarily heals genetic damage until cryo chems are added.
-    type: Add
-  - message: Added shakers, red onions, olive oil, vinegar, spades, hatchets, scythes
-      to the mess tech vendors.
-    type: Add
-  - message: Added the Royal Crown Marines Smart Gun Operator admin-only ghost role,
-      to be part of an ERT in the future.
-    type: Add
-  - message: Added Survivor guidebook entry by Frog6645
-    type: Add
-  - message: Make all RMC UIs remember their position when being reopened.
-    type: Fix
-  - message: Fixed surgery UI briefly flickering after doing a step and eating your
-      inputs.
-    type: Fix
-  - message: Fixed dropships starting offset by half a tile on the Almayer.
-    type: Fix
-  - message: Fixed not hearing shotgun pump sound if pressed quickly after shooting,
-      buggy pump shotgun cooldown graphic, and other jank when shooting guns with
-      cooldowns.
-    type: Fix
-  - message: Fixed weed killer firing on the Almayer if a dropship goes on flyby before
-      any departs for an LZ.
-    type: Fix
-  - message: Fixed being able to cancel repairing a hive construction and still healing
-      it.
-    type: Fix
-  - message: Fixed stasis bags and body bags not fitting into crates.
-    type: Fix
-  - message: Fixed defibs not healing genetic damage.
-    type: Fix
-  - message: Fixed pressurized reagent canisters being drinkable.
-    type: Fix
-  - message: FIxed thrown light bulbs doing 5 damage instead of 1.25.
-    type: Fix
-  - message: Fixed the MAR-50 having a firerate of 5 instead of 3.33.
-    type: Fix
-  - message: Fixed the plant bag having a smaller than intended stroage.
-    type: Fix
-  - message: Fixed Arithrazine overdosing at half the intended amount.
-    type: Fix
-  - message: Fixed Provost Team Leader skills being incorrect.
-    type: Fix
-  - message: Fixed OB warheads drawing under racks.
-    type: Fix
-  - message: Fixed crates dropping 2 stacks of 1 wood instead of 1 stack of 2 wood.
-    type: Fix
-  - message: Fixed TV description.
-    type: Fix
-  - message: Fixed All-In-One Grinder only fitting 6 items instead of 10.
-    type: Fix
-  - message: Fixed IOs not being able to buy M276 pattern combat toolbelt rigs.
-    type: Fix
-  - message: Fixed the circuit board vendor in engineering not having autolathe circuit
-      boards.
-    type: Fix
-  - message: Fixed the access locked weya med plus vendor being labelled as all access
-      on the entity spawn menu.
-    type: Fix
-  - message: Fixed not being able to deconstruct multiple walls, window frames, and
-      tables at the same time.
-    type: Fix
-  - message: Fixed the resin whisperer hivelord being able to stack multiple weed
-      nodes on the same tile. You can still refresh weed nodes to make them start
-      spreading weeds around them again.
-    type: Fix
-  - message: Fixed planet we-ya med pluses not being all access.
-    type: Fix
-  - message: Fixed Trijent having a defib with no battery.
-    type: Fix
-  - message: Fixed the tactical map not showing some marines.
-    type: Fix
-  - message: Fixed rejuvenate nearby marines button not showing up for non host admins.
-    type: Fix
-  - message: Fixed infinite firerate attachments.
-    type: Fix
-  - message: Fixed the MAC15 being able to attach a bipod.
-    type: Fix
-  - message: Fixed 4 plasteel rods refining into 1 plasteel sheet instead of 2 to
-      1.
-    type: Fix
-  - message: Fixed being able to change a dropship's weapon ammo while in flight.
-    type: Fix
-  - message: Fixed xeno tunnels deleting every xeno except the first when destroyed.
-      Xenos will now be pushed out of it first before deleting the tunnel.
-    type: Fix
-  - message: Fixed being able to stack resin whisperer nodes on top of hive weeds
-      without destroying the hive weed tile.
-    type: Fix
-  - message: Fixed xeno corrosive acid layering over items instead of under, making
-      it easier to see the item that is being acided.
-    type: Fix
-  - message: Fixed not being able to click yourself with a fire extinguisher to put
-      yourself out.
-    type: Fix
-  - message: Fixed the anti-theft shutters in second floor engineering not starting
-      closed. The button to open them is in the CE's office.
-    type: Fix
-  - message: Fixed the Corporate Liaison's office buttons and shutters not working.
-    type: Fix
-  - message: Fixed a visual bug with warriors crashing into crates and hydroponics
-      trays during lunges.
-    type: Fix
-  - message: Fixed dropping aggressive grabs making someone get stuck.
-    type: Fix
-  - message: Fixed buckets not fitting into soda dispensers and chem dispensers.
-    type: Fix
-  - message: Fixed xenos patting away 10 fire stacks instead of 5 per pat.
-    type: Fix
-  - message: Fixed promote hive leader popups appearing in weird spots when watching
-      a xeno.
-    type: Fix
-  - message: Fixed Warrior Lunge not connecting if the target is adjacent to the Warrior
-      when the lunge ends.
-    type: Fix
-  - message: Fixed the Queen sometimes not getting health and plasma regen from weeds
-      while in ovi.
-    type: Fix
-  - message: Fixed preplaced sticky and fast resin slowing you down.
-    type: Fix
-  - message: Fixed flashbangs stunning MP for longer than 2.5 seconds.
-    type: Fix
-  - message: Made CPR popups bigger.
-    type: Tweak
-  id: 1615
-  time: '2025-04-20T14:07:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6196
-- author: VictorJob
-  changes:
-  - message: Added animations for parasite
-    type: Add
-  id: 1616
-  time: '2025-04-20T15:34:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6168
 - author: DrSmugleaf
   changes:
   - message: Added a 25 hour Queen playtime requirement for giving out jellies because
@@ -4884,5 +4670,62 @@
   id: 2110
   time: '2025-08-06T03:58:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7234
+- author: path-to-aaru
+  changes:
+  - message: Xeno announcements for queen death cooldown and hive core destruction
+      cooldown
+    type: Add
+  id: 2111
+  time: '2025-08-06T04:02:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7252
+- author: PursuitInAshes
+  changes:
+  - message: Admins and GMs can now disable deadchat by using `setdchat`.
+    type: Add
+  id: 2112
+  time: '2025-08-06T04:00:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7240
+- author: FallingDownofMadness
+  changes:
+  - message: A parachute crate in the cargo catalog
+    type: Add
+  id: 2113
+  time: '2025-08-06T04:00:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7239
+- author: Tunguso4ka
+  changes:
+  - message: You can now store flashbangs, lighters, radios and donuts in security
+      rig.
+    type: Add
+  - message: Added 5 whistles to SecVend.
+    type: Add
+  id: 2114
+  time: '2025-08-06T04:01:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7242
+- author: Dygon
+  changes:
+  - message: Boilers now inject neurotoxin again instead of acid while neuro gas is
+      selected.
+    type: Fix
+  - message: Using Tail Stab on an entity that didn't get hit by it now plays the
+      correct sound effect.
+    type: Fix
+  id: 2115
+  time: '2025-08-06T04:01:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7244
+- author: noctyrnal
+  changes:
+  - message: The M13 has recieved new sprites.
+    type: Tweak
+  id: 2116
+  time: '2025-08-06T04:02:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7249
+- author: Tunguso4ka
+  changes:
+  - message: RMC Undergarments now uses upstream marking category.
+    type: Tweak
+  id: 2117
+  time: '2025-08-06T04:00:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7238
 Name: RMC14
 Order: -1
