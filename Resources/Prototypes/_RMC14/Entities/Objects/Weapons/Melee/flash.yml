@@ -23,10 +23,6 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-#      enum.FlashVisuals.Burnt:
-#        enum.FlashVisualLayers.BaseLayer:
-#          True: { state: burnt }
-#          False: { state: flash }
       enum.FlashVisuals.Flashing:
         enum.FlashVisualLayers.LightLayer:
           True: { visible: true }
