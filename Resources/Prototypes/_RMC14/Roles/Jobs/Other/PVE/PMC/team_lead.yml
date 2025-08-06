@@ -37,7 +37,6 @@
       prefix: rmc-job-prefix-pmc-standard
     - type: RMCPointing
     - type: RMCTrackable
-  hidden: true
 
 - type: entity
   parent: CMSpawnPointJobBase

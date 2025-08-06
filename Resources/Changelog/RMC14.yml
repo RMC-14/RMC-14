@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You can now toggle storage like pouches and armor to either eject the
-      first item, the last item, or open the storage when you click on it. This toggle
-      can be accessed with a verb in the right click menu.
-    type: Add
-  id: 1667
-  time: '2025-05-03T21:29:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4536
 - author: Vermidia
   changes:
   - message: Fixed grenade launchers being able to shoot past 7 tiles.
@@ -4629,5 +4620,18 @@
   id: 2167
   time: '2025-08-06T04:35:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7376
+- author: DrSmugleaf
+  changes:
+  - message: Fixed cassettes being too quiet.
+    type: Fix
+  - message: Fixed Praetorian round end messages not showing.
+    type: Fix
+  - message: Fixed Haurchefant not loading properly.
+    type: Fix
+  - message: Fixed PMC roles not showing on the list on PvE.
+    type: Fix
+  id: 2168
+  time: '2025-08-06T04:46:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7386
 Name: RMC14
 Order: -1
