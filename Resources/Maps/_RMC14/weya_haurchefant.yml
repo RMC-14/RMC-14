@@ -564,7 +564,7 @@ entities:
             335: -2,-21
             336: -2,-22
     - type: BecomesStation
-      id: WEYA Haurchefant
+      id: Haurchefant
     - type: MapLight
     - type: Roof
       data: {}

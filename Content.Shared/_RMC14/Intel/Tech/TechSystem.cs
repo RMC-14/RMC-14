@@ -21,7 +21,6 @@ public sealed class TechSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
-    [Dependency] private readonly SharedRequisitionsSystem _req = default!;
 
     public override void Initialize()
     {
@@ -67,7 +66,7 @@ public sealed class TechSystem : EntitySystem
 
     private void OnTechWarhead(TechWarheadEvent ev)
     {
-        _req.CreateSpecialDelivery(ev.Warhead);
+        _requisitions.CreateSpecialDelivery(ev.Warhead);
     }
 
     private void OnControlConsoleBeforeOpen(Entity<TechControlConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
