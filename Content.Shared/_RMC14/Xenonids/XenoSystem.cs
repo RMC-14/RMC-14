@@ -2,12 +2,14 @@ using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -19,6 +21,7 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
@@ -118,6 +121,7 @@ public sealed partial class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
+        SubscribeLocalEvent<XenoComponent, MeleeAttackAttemptEvent>(OnXenoMeleeAttackAttempt);
         SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
@@ -216,9 +220,30 @@ public sealed partial class XenoSystem : EntitySystem
         }
 
         if (_xenoNestedQuery.HasComp(target) &&
-            _victimInfectedQuery.HasComp(target))
+            _victimInfectedQuery.HasComp(target) && !args.Disarm)
         {
             args.Cancel();
+        }
+    }
+
+    private void OnXenoMeleeAttackAttempt(Entity<XenoComponent> xeno, ref MeleeAttackAttemptEvent args)
+    {
+        if (!TryComp<XenoNestComponent>(GetEntity(args.Target), out var nest) || nest.Nested == null
+            || !_hive.FromSameHive(xeno.Owner, GetEntity(args.Target)))
+            return;
+
+        var attacker = GetNetEntity(xeno);
+        args.Target = GetNetEntity(nest.Nested.Value);
+
+        switch (args.Attack)
+        {
+            case LightAttackEvent attack:
+                args.Attack = new LightAttackEvent(args.Target, attacker, attack.Coordinates);
+                break;
+
+            case DisarmAttackEvent disarm:
+                args.Attack = new DisarmAttackEvent(args.Target, disarm.Coordinates);
+                break;
         }
     }
 
@@ -420,7 +445,7 @@ public sealed partial class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool canAttackBarricades = false, bool canAttackWindows = false)
     {
         if (xeno == target)
             return false;
@@ -437,6 +462,12 @@ public sealed partial class XenoSystem : EntitySystem
 
         if (_xenoNestedQuery.HasComp(target))
             return false;
+
+        if (canAttackBarricades && HasComp<BarricadeComponent>(target))
+            return true;
+
+        if (canAttackWindows && HasComp<DestroyOnXenoPierceScissorComponent>(target))
+            return true;
 
         return HasComp<MarineComponent>(target) || HasComp<XenoComponent>(target);
     }

@@ -28,7 +28,7 @@ public sealed partial class Antitoxic : RMCChemicalEffect
         var healing = PotencyPerSecond * 2;
         return $"Heals [color=green]{healing}[/color] toxin damage and removes [color=green]1.25[/color] units of toxic chemicals from the bloodstream.\n" +
                $"Overdoses cause [color=red]{ActualPotency}[/color] toxin damage.\n" +
-               $"Critical overdoses cause [color=red]{ActualPotency}[/color] brute and burn damage, [color=red]{ActualPotency * 3}[/color] toxin damage, and cause [color=red]5[/color] seconds of unconsciousness with a [color=red]5%[/color] chance.";
+               $"Critical overdoses cause [color=red]{ActualPotency}[/color] brute and [color=red]{ActualPotency}[/color] burn damage, [color=red]{ActualPotency * 3}[/color] toxin damage, and cause [color=red]5[/color] seconds of unconsciousness with a [color=red]5%[/color] chance";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -49,6 +49,7 @@ public sealed partial class Antitoxic : RMCChemicalEffect
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
+        // TODO RMC14 eye damage
         var damage = new DamageSpecifier();
         damage.DamageDict[ToxinGroup] = potency;
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);

@@ -90,7 +90,7 @@
     belt: CMBeltMarine
     gloves: RMCHandsVeteranPMC
     shoes: RMCBootsPMCFilled
-    suitstorage: WeaponRifleSSG45
+    suitstorage: RMCWeaponRifleSSG45
     back: RMCBackpackWelderPMC
     pocket1: RMCPouchToolsSocFill
     pocket2: RMCPouchConstructionFillFull

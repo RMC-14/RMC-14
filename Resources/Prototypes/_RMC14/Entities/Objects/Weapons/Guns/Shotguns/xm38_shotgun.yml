@@ -26,8 +26,8 @@
     baseFireRate: 1.666
     burstScatterMult: 5
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.15
-    accuracyMultiplierUnwielded: 0.9
+    accuracyMultiplier: 1.20
+    accuracyMultiplierUnwielded: 0.95
   - type: RMCMagneticItem
   - type: GunDamageModifier
     multiplier: 1

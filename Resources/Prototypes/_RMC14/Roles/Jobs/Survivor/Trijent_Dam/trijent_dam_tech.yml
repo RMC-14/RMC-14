@@ -1,0 +1,59 @@
+﻿- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorTrijentDamTech
+  name: cm-job-name-survivor-trijent-dam-tech
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorTrijentDamTech
+  startingGear: RMCGearSurvivorTrijentDamTech
+  spawnMenuRoleName: Dam Maintenance Technician (Trijent Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetTrijentDamTech
+
+- type: startingGear
+  parent: RMCGearSurvivorEngineer
+  id: RMCGearSurvivorTrijentDamTech
+  equipment:
+    head: RMCHardhatOrange
+    jumpsuit: CMJumpsuitMaintTech
+    outerClothing: RMCHazardVest
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrijentDamTech
+  name: survivor dam maintenance technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorTrijentDamTech
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetEngineer
+  id: RMCGearSurvivorPresetTrijentDamTech
+  name: dam maintenance technician colonist preset
+  categories: [ HideSpawnMenu ]

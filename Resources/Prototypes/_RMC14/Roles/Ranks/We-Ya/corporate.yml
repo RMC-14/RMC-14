@@ -1,17 +1,26 @@
 - type: rank
+  id: RMCRankWeYaTrainee
+  name: Trainee
+  prefix: Trn.
+  paygrade: WYC1
+
+- type: rank
   id: RMCRankWeYaJuniorExecutive
   name: Junior Executive
   prefix: Jr. Exec.
+  paygrade: WYC2
 
 - type: rank
   id: RMCRankWeYaExecutive
   name: Executive
   prefix: Exec.
+  paygrade: WYC3
 
 - type: rank
   id: RMCRankWeYaSeniorExecutive
   name: Senior Executive
   prefix: Sr. Exec.
+  paygrade: WYC4
 
 - type: rank
   id: RMCRankWeYaExecutiveSpecialist
@@ -29,26 +38,31 @@
   id: RMCRankWeYaAssistantManager
   name: Assistant Manager
   prefix: Assis. Mng.
+  paygrade: WYC7
 
 - type: rank
   id: RMCRankWeYaDivisionManager
   name: Division Manager
   prefix: Div. Mng.
+  paygrade: WYC8
 
 - type: rank
   id: RMCRankWeYaChiefExecutive
   name: Chief Executive
   prefix: Chief. Exec.
+  paygrade: WYC9
 
 - type: rank
   id: RMCRankWeYaDeputyDirector
   name: Deputy Director
   prefix: Dep. Director
+  paygrade: WYC10
 
 - type: rank
   id: RMCRankWeYaDirector
   name: Director
   prefix: Director
+  paygrade: WYC11
 
 # Lawyers
 - type: rank
@@ -60,3 +74,10 @@
   id: RMCRankWeYaLegalSupervisor
   name: Legal Supervisor
   prefix: Legal Spvsr.
+
+# Pilots
+- type: rank
+  id: RMCRankWeYaPilotOfficer
+  name: Captain
+  prefix: Capt
+  paygrade: WYPO2

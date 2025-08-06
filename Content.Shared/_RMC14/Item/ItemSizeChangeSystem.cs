@@ -20,6 +20,7 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
             before: new[] { typeof(AttachableHolderSystem) });
 
         SubscribeLocalEvent<ChangeItemSizeOnTimerTriggerComponent, RMCActiveTimerTriggerEvent>(OnChangeItemSizeOnTimerTrigger);
+        SubscribeLocalEvent<ChangeItemSizeOnTimerTriggerComponent, RMCTriggerEvent>(OnTriggered);
 
         InitItemSizes();
     }
@@ -40,7 +41,21 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
 
     private void OnChangeItemSizeOnTimerTrigger(Entity<ChangeItemSizeOnTimerTriggerComponent> ent, ref RMCActiveTimerTriggerEvent args)
     {
+        if (TryComp(ent, out ItemComponent? item))
+        {
+            ent.Comp.OriginalSize = item.Size;
+            Dirty(ent);
+        }
+
         _itemSystem.SetSize(ent, ent.Comp.Size);
+    }
+
+    private void OnTriggered(Entity<ChangeItemSizeOnTimerTriggerComponent> ent, ref RMCTriggerEvent args)
+    {
+        if (ent.Comp.OriginalSize == null)
+            return;
+
+        _itemSystem.SetSize(ent, ent.Comp.OriginalSize.Value);
     }
 
     private void InitItemSizes()

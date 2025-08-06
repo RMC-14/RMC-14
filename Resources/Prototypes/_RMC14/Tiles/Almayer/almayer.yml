@@ -8,6 +8,13 @@
     collection: FootstepFloor
   itemDrop: CMTileItemSteel
   heatCapacity: 10000
+  friction: 1
+
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMTileBaseUnpryable
+  deconstructTools: [ ]
 
 - type: tile
   parent: CMTileBase
@@ -45,6 +52,7 @@
   blockAnchoring: true
   blockConstruction: true
   weedsSpreadable: false
+  friction: 1
 
 - type: tile
   parent: CMFloorSteel

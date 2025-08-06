@@ -12,28 +12,24 @@
   tags:
   - CMAccessMarinePrep
   - CMAccessFTLPrep
-  - CMAccessDropship
 
 - type: accessGroup
   id: WeaponSpec
   tags:
   - CMAccessMarinePrep
   - CMAccessSpecPrep
-  - CMAccessDropship
 
 - type: accessGroup
   id: SmartGunOperator
   tags:
   - CMAccessMarinePrep
   - CMAccessSmartPrep
-  - CMAccessDropship
 
 - type: accessGroup
   id: HospitalCorpsman
   tags:
   - CMAccessMarinePrep
   - CMAccessMedPrep
-  - CMAccessDropship
   - CMAccessMedical
 
 - type: accessGroup
@@ -41,7 +37,6 @@
   tags:
   - CMAccessMarinePrep
   - CMAccessCombatTechPrep
-  - CMAccessDropship
   - CMAccessColonyEngineering
 
 # this exists because other squad members will have their own equipment vendors.
@@ -50,4 +45,3 @@
   tags:
   - CMAccessMarineRifleman
   - CMAccessMarinePrep
-  - CMAccessDropship

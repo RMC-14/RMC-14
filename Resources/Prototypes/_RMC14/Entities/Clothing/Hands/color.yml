@@ -12,9 +12,17 @@
     fiberColor: fibers-black
 
 - type: entity
+  parent: RMCHandsBlack
+  id: RMCHandsCombat
+  name: combat gloves
+  description: These tactical gloves are somewhat fire and impact resistant.
+  components:
+  - type: Insulated
+
+- type: entity
   parent: CMHandsBlackMarine
   id: CMHandsInsulated
-  name: marine insulated gloves
+  name: insulated gloves
   description: These gloves will protect the wearer from electric shocks.
   components:
   - type: Sprite
@@ -87,7 +95,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/purple.rsi
 
-- type: entity 
+- type: entity
   parent: CMHandsInsulated
   id: CMHandsBlackInsulated
   name: black insulated gloves
