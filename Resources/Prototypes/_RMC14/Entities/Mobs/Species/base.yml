@@ -68,6 +68,10 @@
     - Blinded
     - Deaf
     - Unconscious
+  - type: InteractionPopup
+    successChance: 1
+    interactSuccessString: rmc-patting-success-generic
+    messagePerceivedByOthers: rmc-patting-success-generic-others
   - type: Blindable
   - type: Tag
     tags:
