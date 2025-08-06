@@ -644,15 +644,6 @@ namespace Content.Shared.Interaction
         ///     True if the two points are within a given range without being obstructed.
         /// </returns>
 
-        private const CollisionGroup InRangeUnobstructedMaskNPC = CollisionGroup.None;
-        public extern bool InRangeUnobstructedNPC(
-            MapCoordinates origin,
-            MapCoordinates other,
-            float range = InteractionRange,
-            CollisionGroup collisionMask = InRangeUnobstructedMaskNPC,
-            Ignored? predicate = null,
-            bool checkAccess = true);
-
         public bool InRangeUnobstructed(
             MapCoordinates origin,
             MapCoordinates other,
