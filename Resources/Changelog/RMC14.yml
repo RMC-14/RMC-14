@@ -1,76 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Sentries will no longer shoot at walls.
-    type: Fix
-  id: 1649
-  time: '2025-04-26T03:14:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6224
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed marines not being thrown, blinded and stunned from explosions.
-    type: Fix
-  - message: Fixed Cluster OB not having a shockwave effect.
-    type: Fix
-  id: 1650
-  time: '2025-04-26T03:15:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6199
-- author: MetalSage
-  changes:
-  - message: Added the Tesla Coil Sentry, an automated defense structure that targets
-      enemies and applies debuffs like stun, slow, and daze.
-    type: Add
-  - message: Added the Dazed effect with a visual overlay, applied by sources like
-      the Tesla Coil.
-    type: Add
-  id: 1651
-  time: '2025-04-26T03:22:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6195
-- author: BramvanZijp
-  changes:
-  - message: Fixed Engine Coolers & Fuel Enhancers sprite being inverted when attached
-      to a dropship.
-    type: Fix
-  id: 1652
-  time: '2025-04-26T03:39:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6172
-- author: DummeHytteOst
-  changes:
-  - message: Hive and normal nodes health have been reduced from 33 to 11.
-    type: Fix
-  - message: Hardy nodes health have been increased from 10 to 11.
-    type: Fix
-  id: 1653
-  time: '2025-04-26T03:44:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6249
-- author: Magicocity1
-  changes:
-  - message: Fixed the pilot vendor not having M13 autopistols.
-    type: Fix
-  id: 1654
-  time: '2025-04-26T03:47:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6275
-- author: MetalSage
-  changes:
-  - message: Now you can't get into the tunnels if you're too far away from them.
-    type: Fix
-  id: 1655
-  time: '2025-04-28T23:08:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6295
-- author: MetalSage
-  changes:
-  - message: Correcting the inability of the larva to crawl out of the body
-    type: Fix
-  id: 1656
-  time: '2025-04-28T23:08:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6296
-- author: MetalSage
-  changes:
-  - message: Fixed inability to take admin roles and foxtrot roles
-    type: Fix
-  id: 1657
-  time: '2025-04-28T23:10:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6293
 - author: MetalSage
   changes:
   - message: Now the queen does not stun xenomorphs on her ovipositor, when resting,
@@ -4670,5 +4598,76 @@
   id: 2149
   time: '2025-08-06T04:20:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7312
+- author: Dygon
+  changes:
+  - message: We-Ya PMC's can use their tracker again.
+    type: Fix
+  id: 2150
+  time: '2025-08-06T04:27:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7342
+- author: Vermidia
+  changes:
+  - message: Fixed acid sprays not extinguish fires
+    type: Fix
+  id: 2151
+  time: '2025-08-06T04:25:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7326
+- author: Dygon
+  changes:
+  - message: Tail Stab can hit folding barricades again.
+    type: Fix
+  - message: Tail Stab can't hit through walls anymore.
+    type: Fix
+  id: 2152
+  time: '2025-08-06T04:25:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7325
+- author: Vermidia
+  changes:
+  - message: Fixed healer drone sacrifice not extinguishing and removing debuffs from
+      a target.
+    type: Fix
+  id: 2153
+  time: '2025-08-06T04:26:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7334
+- author: Vermidia
+  changes:
+  - message: Fixed not being able to tackle nested hosts. Trying to attack/tackle
+      a nest will also now redirect the attack to the occupant, if it's from a xeno.
+    type: Fix
+  - message: Fixed nest sprites always using the south sprite.
+    type: Fix
+  id: 2154
+  time: '2025-08-06T04:26:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7338
+- author: Vermidia
+  changes:
+  - message: Fixed being able to paradrop in certain areas
+    type: Fix
+  - message: Area Info alert now shows if you can paradrop in an area.
+    type: Tweak
+  id: 2155
+  time: '2025-08-06T04:24:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7323
+- author: DummeHytteOst
+  changes:
+  - message: Added a box of beakers, that holds 7 beakers.
+    type: Add
+  id: 2156
+  time: '2025-08-06T04:26:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7330
+- author: Dygon
+  changes:
+  - message: Vampire Lurker's Tail Jab can now be used on windows.
+    type: Fix
+  id: 2157
+  time: '2025-08-06T04:25:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7327
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the We-Ya security guard survivor on LV-624 not having We-YA IFF
+    type: Fix
+  id: 2158
+  time: '2025-08-06T04:28:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7344
 Name: RMC14
 Order: -1
