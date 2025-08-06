@@ -32,6 +32,8 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: CMVendorUser
+      points: 45
     - type: Skills
       skills:
         RMCSkillConstruction: 2
