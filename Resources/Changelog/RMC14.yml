@@ -1,28 +1,6 @@
 ﻿Entries:
 - author: MetalSage
   changes:
-  - message: Now the queen does not stun xenomorphs on her ovipositor, when resting,
-      or even after her death.
-    type: Fix
-  id: 1658
-  time: '2025-04-28T23:10:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6292
-- author: noctyrnal
-  changes:
-  - message: The M13 has received new sprites.
-    type: Tweak
-  id: 1659
-  time: '2025-04-28T23:09:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6297
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed resting cancelling the evolution do-after.
-    type: Fix
-  id: 1660
-  time: '2025-04-28T23:22:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6298
-- author: MetalSage
-  changes:
   - message: The name of the current planet map is now included in the server status
       information (visible in server browsers/external tools).
     type: Add
@@ -4669,5 +4647,26 @@
   id: 2158
   time: '2025-08-06T04:28:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7344
+- author: OmerF-afk
+  changes:
+  - message: Fixed ABR40 mags not being refillable
+    type: Fix
+  id: 2159
+  time: '2025-08-06T04:29:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7357
+- author: Ian321
+  changes:
+  - message: dogtags can now be worn around the neck
+    type: Tweak
+  id: 2160
+  time: '2025-08-06T04:29:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7355
+- author: shibechef
+  changes:
+  - message: Turning off playtime benefits now works for all xeno ages
+    type: Fix
+  id: 2161
+  time: '2025-08-06T04:29:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7349
 Name: RMC14
 Order: -1
