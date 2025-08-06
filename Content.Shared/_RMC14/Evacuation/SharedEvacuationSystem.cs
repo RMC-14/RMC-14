@@ -338,16 +338,14 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
             if (mobs.Count > maxMobs)
             {
-                ent.Comp.Mode = EvacuationComputerMode.Crashed;
                 _popup.PopupPredicted("The evacuation pod is overloaded with this many people inside!", ent, null, PopupType.LargeCaution);
+                ent.Comp.Mode = EvacuationComputerMode.Crashed;
+                Dirty(ent);
 
                 var time = _timing.CurTime;
                 var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
                 detonating.DetonateAt = time + ent.Comp.DetonateDelay;
                 detonating.EjectAt = time + ent.Comp.EjectDelay;
-
-                Dirty(ent);
-                return;
             }
         }
 
