@@ -740,7 +740,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 {
                     for (var i = 0; i < totalSurvivors; i++)
                     {
-                        if (selectedSurvivors < totalSurvivors)
+                        if (selectedSurvivors >= totalSurvivors)
                             break;
 
                         if (survivorCandidates.Count <= 0)
