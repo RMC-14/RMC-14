@@ -118,7 +118,7 @@
         points: 10
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
         points: 10
-      - id: RMCAttachmentM42A1WoodenStock
+      - id: RMCAttachmentM42A2WoodenStock
         points: 10
       - id: RMCAttachmentM63Stock
         points: 10
