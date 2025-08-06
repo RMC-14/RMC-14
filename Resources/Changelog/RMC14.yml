@@ -1,125 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Evacuation doors(pods, lifeboats) are now unable to be pryed open while
-      locked.
-    type: Fix
-  - message: Being outside the docking area when a lifeboat has left will now instantly
-      kill you.
-    type: Fix
-  id: 1638
-  time: '2025-04-22T23:39:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5617
-- author: Vermidia
-  changes:
-  - message: Information tags put into the memorial now show up at round end.
-    type: Add
-  - message: You can no longer strip dogtags off of people.
-    type: Fix
-  - message: You can take off info tags from dogtags in your hand if their owner no
-      longer exists, which will leave the dogtag behind on the ground to mark where
-      they died.
-    type: Add
-  - message: Info tags now look different from dogtags, and have sprites depending
-      on how many are joined.
-    type: Tweak
-  id: 1639
-  time: '2025-04-22T23:41:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6237
-- author: DrSmugleaf
-  changes:
-  - message: 'Fixed 4 performance issues: One with long rounds getting worse as entities
-      outside your vision that were colliding before exiting it keep having their
-      collision computed for the rest of the round, one when applying large XenoComponent
-      states, one with leftover colliding dead mobs having part of their collision
-      still ran despite being dead, and one with the client running code over the
-      actions of all entities on the screen, instead of just your own.'
-    type: Fix
-  - message: Fixed parasites leaving you blinded after they fall off. Some things
-      are too soul to be true, even in 13.
-    type: Fix
-  - message: Fixed We-Ya PMCs not having unique suffixes on the entity spawn menu.
-    type: Fix
-  - message: Fixed getting stuck in the dropship after unbuckling on inner seats.
-    type: Fix
-  id: 1640
-  time: '2025-04-23T00:02:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6244
-- author: MetalSage
-  changes:
-  - message: Fixed stuck in raised rock edges on Hybrisa
-    type: Fix
-  id: 1641
-  time: '2025-04-23T00:45:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6239
-- author: DrSmugleaf
-  changes:
-  - message: Fixed an error that would make your client stutter and flicker.
-    type: Fix
-  - message: Fixed WeYa PMCs not having WeYa IFF.
-    type: Fix
-  - message: Reverted weed resistance fix until it accounts for weed explosion resistance
-      and total health.
-    type: Fix
-  id: 1642
-  time: '2025-04-23T04:20:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6247
-- author: DrSmugleaf
-  changes:
-  - message: Updated the Roadmap.
-    type: Tweak
-  - message: Fixed a bug where letting go of someone while buckled would make them
-      bug out.
-    type: Fix
-  - message: Fixed being able to pull while resting.
-    type: Fix
-  - message: Fixed incorrect rest keybind name in controls.
-    type: Fix
-  - message: Fixed strip attachments window spam.
-    type: Fix
-  id: 1643
-  time: '2025-04-23T05:02:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6248
-- author: CyberTropic
-  changes:
-  - message: Fixed corpse spawner breaking.
-    type: Fix
-  id: 1644
-  time: '2025-04-25T13:42:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6262
-- author: Dygon
-  changes:
-  - message: "Fixed The Boiler's \u2018Bombard\u2019 ability having a 20 second cooldown\
-      \ instead of 30."
-    type: Fix
-  id: 1645
-  time: '2025-04-26T03:01:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6282
-- author: Vermidia
-  changes:
-  - message: Fixed Healer sacrifice not gibbing if you didn't have max transferred
-      health.
-    type: Fix
-  id: 1646
-  time: '2025-04-26T03:03:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6281
-- author: Dygon
-  changes:
-  - message: Resting will now interrupt and prevent the use of all actions with a
-      DoAfter.
-    type: Fix
-  id: 1647
-  time: '2025-04-26T03:02:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6280
-- author: CyberTropic
-  changes:
-  - message: Added missing entities, tiles, props, tall grass to LV624.
-    type: Add
-  - message: Added unroofed area at the underground lake.
-    type: Add
-  id: 1648
-  time: '2025-04-26T03:08:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6277
 - author: Ian321
   changes:
   - message: Sentries will no longer shoot at walls.
@@ -4702,5 +4581,94 @@
   id: 2138
   time: '2025-08-06T04:15:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7291
+- author: Varen
+  changes:
+  - message: Added green stripes on 1984 AP magazine
+    type: Add
+  id: 2139
+  time: '2025-08-06T04:23:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7320
+- author: J C Denton
+  changes:
+  - message: Fixed Admin Fax phones being in Almayer network and other Fax's mapping
+      issues.
+    type: Fix
+  id: 2140
+  time: '2025-08-06T04:18:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7300
+- author: SharkSnake98
+  changes:
+  - message: Added the soulful selleck facial hair
+    type: Add
+  - message: Added files and folder for RMC14 facial hair
+    type: Add
+  id: 2141
+  time: '2025-08-06T04:19:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7305
+- author: DummeHytteOst
+  changes:
+  - message: Centered the M37-17 Sprite.
+    type: Fix
+  id: 2142
+  time: '2025-08-06T04:22:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7316
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Survivor rolling has been reworked, now every survivor job has an equal
+      chance of rolling. Civilian survivor no longer rolls last.
+    type: Tweak
+  id: 2143
+  time: '2025-08-06T04:21:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7313
+- author: Dygon
+  changes:
+  - message: Fixed the shotgun choke not increasing the range of any shot projectiles
+      by 1.
+    type: Fix
+  - message: The attachment effect examine now shows the stun duration multiplier
+      if the attachment applies one.
+    type: Tweak
+  - message: Weapons with a modified fire rate show the correct use delay visual.
+    type: Fix
+  id: 2144
+  time: '2025-08-06T04:19:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7306
+- author: DummeHytteOst
+  changes:
+  - message: Added the Multitool or Security access tuner(SAT), to the Aghost loadout.
+    type: Add
+  id: 2145
+  time: '2025-08-06T04:21:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7314
+- author: noctyrnal
+  changes:
+  - message: Chances Claim and Fiorina Science Annex now use "Urban" camo, similar
+      to Hybrisa.
+    type: Tweak
+  id: 2146
+  time: '2025-08-06T04:22:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7318
+- author: noctyrnal
+  changes:
+  - message: Gibbing a person as a queen will now pop up text, cause the target to
+      shake and make their dropped items splatter out.
+    type: Add
+  id: 2147
+  time: '2025-08-06T04:18:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7301
+- author: Whisper
+  changes:
+  - message: RMC tips will start appearing again.
+    type: Fix
+  id: 2148
+  time: '2025-08-06T04:20:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7308
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Resprited the MP, corpsman, and intel armor vests.
+    type: Tweak
+  id: 2149
+  time: '2025-08-06T04:20:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7312
 Name: RMC14
 Order: -1
