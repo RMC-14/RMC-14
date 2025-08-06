@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Xenonids can destroy morgues & crematoriums.
-    type: Add
-  - message: You can now climb morgues & crematoriums.
-    type: Add
-  - message: Morgues are no longer unachorable.
-    type: Fix
-  - message: You can now damage hospital dividers, primarily found on hybrisa.
-    type: Fix
-  id: 1662
-  time: '2025-04-28T23:24:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6287
-- author: Dygon
-  changes:
-  - message: The kill area outside the docking bay doesn't despawn anymore.
-    type: Tweak
-  id: 1663
-  time: '2025-04-28T23:28:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6253
 - author: DrSmugleaf
   changes:
   - message: Added CLF Cell Commander, CLF Soldier, and colonist admin ghost roles.
@@ -4667,5 +4647,22 @@
   id: 2162
   time: '2025-08-06T04:31:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7360
+- author: Timemaster99
+  changes:
+  - message: Added pre-made chat highlights for marine roles. Can be enabled by checking
+      "Auto-fill the highlights with the character's information" in Accessibility
+      Options.
+    type: Add
+  id: 2163
+  time: '2025-08-06T04:32:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7367
+- author: Vermidia
+  changes:
+  - message: Fixed gases being blocked from spreading on tiles containing different
+      gases.
+    type: Fix
+  id: 2164
+  time: '2025-08-06T04:32:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7366
 Name: RMC14
 Order: -1
