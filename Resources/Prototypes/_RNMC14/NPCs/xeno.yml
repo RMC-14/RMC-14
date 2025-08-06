@@ -1,6 +1,13 @@
 - type: htnCompound
   id: XenoCompoundLeap
   branches:
+        - !type:HTNPrimitiveTask
+          operator: !type:UtilityOperator
+            proto: NearbyAlive
+
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+
     - tasks:
         - !type:HTNCompoundTask
           task: RMCParasiteLeap

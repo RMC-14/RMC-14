@@ -182,6 +182,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private bool _usingCustomOperationName;
 // rnmc edit start
     private bool _checkRoundEndConditions;
+
+    private bool _spawnPlayerXenos;
 // rnmc edit end
     private bool _queenBuildingBoostEnabled;
     private TimeSpan _queenBoostDuration;
@@ -259,6 +261,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCDistressXenosMinimum, v => _xenosMinimum = v, true);
         // RNMC edit start
         Subs.CVar(_config, RMCCVars.RNMCCheckRoundEndConditions, v => _checkRoundEndConditions = v, true);
+        Subs.CVar(_config, RMCCVars.RNMCSpawnPlayerXenos, v => _spawnPlayerXenos = v, true);
         // RNMC edit end
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoost, v => _queenBuildingBoostEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCQueenBuildingBoostDurationMinutes, v => _queenBoostDuration = TimeSpan.FromMinutes(v), true);
@@ -356,6 +359,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     return null;
                 }
 
+                if (_spawnPlayerXenos == false)
+                {
+                    return;
+                }
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
                 var xenoEnt = SpawnXenoEnt(ent, player, doBurst);

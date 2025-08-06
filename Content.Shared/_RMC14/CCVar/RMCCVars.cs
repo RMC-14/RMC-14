@@ -438,6 +438,9 @@ public sealed partial class RMCCVars : CVars
     // rnmc edit start
     public static readonly CVarDef<bool> RNMCCheckRoundEndConditions =
         CVarDef.Create("rmc.check_end_round_conditions", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RNMCSpawnPlayerXenos =
+        CVarDef.Create("rmc.spawn_player_xenos", true, CVar.REPLICATED | CVar.SERVER);
     // rnmc edit end
 
     public static readonly CVarDef<bool> RMCQueenBuildingBoost =
