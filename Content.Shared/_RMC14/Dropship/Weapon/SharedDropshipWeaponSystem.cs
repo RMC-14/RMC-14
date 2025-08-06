@@ -259,6 +259,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         MakeDropshipTarget(ent, abbreviation);
+        _physics.SetBodyType(ent, BodyType.Static);
     }
 
     private void OnActiveFlareExamined(Entity<DropshipTargetComponent> ent, ref ExaminedEvent args)
