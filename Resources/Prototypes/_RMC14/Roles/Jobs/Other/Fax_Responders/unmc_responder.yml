@@ -12,6 +12,7 @@
   supervisors: cm-job-supervisors-staff
   accessGroups:
   - ShipMasterAccess
+  - RMCWeYa
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,11 +43,13 @@
     head: RMCHeadCapFlippable
     id: RMCIDCardUNMCResponder
     ears: CMHeadsetHighCommand
-    eyes: RMCSunglasses
-    back: CMSatchel
+    eyes: RMCGlassesMedicalHUDGlasses
+    back: CMSatchelFilledFaxResponder
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
+  inhand:
+    - CMStampMarine
 
 - type: entity
   parent: CMIDCardGold
