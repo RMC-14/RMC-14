@@ -319,7 +319,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (validateEv.Invalid)
             return;
 
-        if (!_rmcActions.CanUseActionPopup(user, actionEnt))
+        if (!_rmcActions.CanUseActionPopup(user, actionEnt, GetEntity(ev.EntityTarget)))
             return;
 
         // All checks passed. Perform the action!
@@ -424,8 +424,10 @@ public abstract class SharedActionsSystem : EntitySystem
         if (_whitelist.IsBlacklistPass(comp.Blacklist, target))
             return false;
 
-        if (_actionQuery.Comp(uid).CheckCanInteract && !_actionBlocker.CanInteract(user, target))
+        // RMC14
+        if (_actionQuery.Comp(uid).CheckCanInteract && !_actionBlocker.CanInteract(user, target) && ent.Comp.TargetCheckCanInteract)
             return false;
+        // RMC14
 
         if (user == target)
             return comp.CanTargetSelf;

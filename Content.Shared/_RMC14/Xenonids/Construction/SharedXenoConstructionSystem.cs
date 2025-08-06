@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -18,12 +19,14 @@ using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
@@ -95,6 +98,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+    private static readonly ProtoId<TagPrototype> PlatformTag = "Platform";
 
     public override void Initialize()
     {
@@ -510,7 +514,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         args.Handled = true;
-        
+
         // TODO RMC14 stop collision for mobs until they move off
         if (_net.IsServer)
         {
@@ -1068,13 +1072,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (!CanPlaceXenoStructure(xeno, target, out var popupType))
-        {
-            popupType += "-structure";
-            _popup.PopupClient(Loc.GetString(popupType), xeno, xeno, PopupType.SmallCaution);
-            return false;
-        }
-
         var ev = new XenoConstructionRangeEvent(xeno.Comp.BuildRange);
         RaiseLocalEvent(xeno, ref ev);
 
@@ -1102,6 +1099,19 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
                 return false;
+            }
+
+            if (!HasComp<BarricadeComponent>(uid))
+            {
+                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid))  &&
+                    !_tags.HasTag(uid.Value, PlatformTag) &&
+                    !HasComp<DoorComponent>(uid) ||
+                    TryComp(uid, out DoorComponent? door) &&
+                    door.State != DoorState.Open)
+                {
+                    _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
+                    return false;
+                }
             }
         }
 

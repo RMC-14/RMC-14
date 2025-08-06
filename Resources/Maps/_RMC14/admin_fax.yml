@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/15/2025 14:33:28
-  entityCount: 2364
+  time: 07/23/2025 17:56:45
+  entityCount: 2376
 maps:
 - 1
 grids:
@@ -110,7 +110,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: Map Entity
+      name: Fax Responder Outpost
     - type: Transform
     - type: Map
       mapPaused: True
@@ -187,14 +187,6 @@ entities:
           tiles: AQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAABKAAAAAAAAUAAAAAAAAEoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAABXAAAAAAAASgAAAAAAAFAAAAAAAABKAAAAAAAAWAAAAAAAAEsAAAAAAABLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAVwAAAAAAAEoAAAAAAABQAAAAAAAASgAAAAAAAFgAAAAAAABLAAAAAAAASwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAFcAAAAAAABKAAAAAAAAUAAAAAAAAEoAAAAAAABYAAAAAAAASwAAAAAAAEsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAASgAAAAAAAFAAAAAAAABKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAAAASgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAA==
           version: 7
     - type: Broadphase
-    - type: Physics
-      bodyStatus: InAir
-      angularDamping: 0.05
-      linearDamping: 0.05
-      fixedRotation: False
-      bodyType: Dynamic
-    - type: Fixtures
-      fixtures: {}
     - type: OccluderTree
     - type: SpreaderGrid
     - type: GridPathfinding
@@ -2788,26 +2780,38 @@ entities:
         38,-42: RMCAreaSpace
         39,-42: RMCAreaSpace
         39,-41: RMCAreaSpace
-    - type: Shuttle
-      dampingModifier: 0.25
-    - type: GridAtmosphere
-      version: 2
-      data:
-        chunkSize: 4
-    - type: GasTileOverlay
+        -2,-31: RMCAreaERTFax
+        -2,-32: RMCAreaERTFax
+        -2,-33: RMCAreaERTFax
+        -1,-31: RMCAreaERTFax
+        -1,-32: RMCAreaERTFax
+        -1,-33: RMCAreaERTFax
+        0,-31: RMCAreaERTFax
+        0,-32: RMCAreaERTFax
+        0,-33: RMCAreaERTFax
+        1,-32: RMCAreaERTFax
+        1,-33: RMCAreaERTFax
+        2,-31: RMCAreaERTFax
+        2,-32: RMCAreaERTFax
+        2,-33: RMCAreaERTFax
+        1,-31: RMCAreaERTFax
+        -1,-34: RMCAreaERTFax
+        -1,-35: RMCAreaERTFax
+        -1,-36: RMCAreaERTFax
+        -1,-37: RMCAreaERTFax
+        0,-34: RMCAreaERTFax
+        0,-35: RMCAreaERTFax
+        0,-36: RMCAreaERTFax
+        0,-37: RMCAreaERTFax
+        1,-34: RMCAreaERTFax
+        1,-35: RMCAreaERTFax
+        1,-36: RMCAreaERTFax
+        1,-37: RMCAreaERTFax
+        2,-34: RMCAreaERTFax
+        2,-35: RMCAreaERTFax
+        2,-36: RMCAreaERTFax
+        2,-37: RMCAreaERTFax
     - type: ImplicitRoof
-- proto: Ashtray
-  entities:
-  - uid: 501
-    components:
-    - type: Transform
-      pos: 2.987543,-16.509848
-      parent: 2
-  - uid: 862
-    components:
-    - type: Transform
-      pos: 8.01651,-16.5572
-      parent: 2
 - proto: CigaretteSpent
   entities:
   - uid: 1683
@@ -4805,6 +4809,16 @@ entities:
     - type: Transform
       pos: 49.677963,-27.145884
       parent: 2
+  - uid: 2367
+    components:
+    - type: Transform
+      pos: 7.6883583,-37.477432
+      parent: 2
+  - uid: 2369
+    components:
+    - type: Transform
+      pos: 38.5589,-12.140884
+      parent: 2
 - proto: CMStampCMB
   entities:
   - uid: 1189
@@ -4843,6 +4857,16 @@ entities:
     components:
     - type: Transform
       pos: 49.92012,-27.260035
+      parent: 2
+  - uid: 2366
+    components:
+    - type: Transform
+      pos: 7.6987762,-37.289932
+      parent: 2
+  - uid: 2370
+    components:
+    - type: Transform
+      pos: 38.725563,-12.168663
       parent: 2
 - proto: CMStampMarine
   entities:
@@ -10095,7 +10119,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -13679.537
+      secondsUntilStateChange: -16009.752
       state: Opening
   - uid: 1278
     components:
@@ -10157,6 +10181,16 @@ entities:
       parent: 2
 - proto: RMCAshtray
   entities:
+  - uid: 501
+    components:
+    - type: Transform
+      pos: 2.987543,-16.509848
+      parent: 2
+  - uid: 862
+    components:
+    - type: Transform
+      pos: 8.01651,-16.5572
+      parent: 2
   - uid: 1682
     components:
     - type: Transform
@@ -10304,6 +10338,51 @@ entities:
     components:
     - type: Transform
       pos: 25.28659,-11.454615
+      parent: 2
+- proto: RMCCalendarColonist
+  entities:
+  - uid: 2371
+    components:
+    - type: Transform
+      pos: 37.5,-11.5
+      parent: 2
+  - uid: 2372
+    components:
+    - type: Transform
+      pos: 27.324848,-4.7070217
+      parent: 2
+- proto: RMCCalendarSPP
+  entities:
+  - uid: 2376
+    components:
+    - type: Transform
+      pos: -3.5,-29.5
+      parent: 2
+- proto: RMCCalendarTWE
+  entities:
+  - uid: 2374
+    components:
+    - type: Transform
+      pos: 22.961037,-24.530527
+      parent: 2
+- proto: RMCCalendarUNMC
+  entities:
+  - uid: 1405
+    components:
+    - type: Transform
+      pos: 6.5,-12.5
+      parent: 2
+  - uid: 2373
+    components:
+    - type: Transform
+      pos: 4.5,-12.5
+      parent: 2
+- proto: RMCCalendarWeYa
+  entities:
+  - uid: 2375
+    components:
+    - type: Transform
+      pos: 31.5,-24.5
       parent: 2
 - proto: RMCCampfire
   entities:
@@ -12476,6 +12555,8 @@ entities:
     - type: Transform
       pos: 6.5004425,-33.85356
       parent: 2
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCRotaryPhone
   entities:
   - uid: 141
@@ -12485,15 +12566,21 @@ entities:
     - type: Transform
       pos: 6.952858,-37.11934
       parent: 2
+    - type: RotaryPhone
+      canDnd: True
+      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 493
     components:
     - type: MetaData
-      name: USCM-HC Communications Office
+      name: UNMC-HC Communications Office
     - type: Transform
       pos: 3.001381,-16.039557
       parent: 2
+    - type: RotaryPhone
+      canDnd: True
+      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 861
@@ -12503,6 +12590,9 @@ entities:
     - type: Transform
       pos: 8.06543,-16.076128
       parent: 2
+    - type: RotaryPhone
+      canDnd: True
+      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 1224
@@ -12512,6 +12602,9 @@ entities:
     - type: Transform
       pos: 27.281536,-10.829494
       parent: 2
+    - type: RotaryPhone
+      canDnd: True
+      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 1406
@@ -12521,6 +12614,9 @@ entities:
     - type: Transform
       pos: 37.682404,-13.022226
       parent: 2
+    - type: RotaryPhone
+      canDnd: True
+      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 1700
@@ -12530,6 +12626,9 @@ entities:
     - type: Transform
       pos: 23.30077,-28.107748
       parent: 2
+    - type: RotaryPhone
+      canDnd: True
+      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 1908
@@ -12539,6 +12638,9 @@ entities:
     - type: Transform
       pos: 34.997738,-25.30221
       parent: 2
+    - type: RotaryPhone
+      canDnd: True
+      category: Comms Relay
     - type: Fixtures
       fixtures: {}
   - uid: 2047
@@ -12548,6 +12650,9 @@ entities:
     - type: Transform
       pos: 49.822044,-27.54003
       parent: 2
+    - type: RotaryPhone
+      canDnd: True
+      category: Comms Relay
     - type: Fixtures
       fixtures: {}
 - proto: RMCSensorTower
@@ -12640,12 +12745,26 @@ entities:
       rot: 3.141592653589793 rad
       pos: 42.5,-11.5
       parent: 2
+- proto: RMCStampCLF
+  entities:
+  - uid: 2368
+    components:
+    - type: Transform
+      pos: 38.44084,-12.140884
+      parent: 2
 - proto: RMCStampFreePress
   entities:
   - uid: 2049
     components:
     - type: Transform
       pos: 49.39041,-27.23834
+      parent: 2
+- proto: RMCStampSPP
+  entities:
+  - uid: 2365
+    components:
+    - type: Transform
+      pos: 8.120754,-37.49063
       parent: 2
 - proto: RMCStampTSE
   entities:
@@ -15746,13 +15865,6 @@ entities:
     components:
     - type: Transform
       pos: 20.339493,-28.16487
-      parent: 2
-- proto: SpawnPointLatejoin
-  entities:
-  - uid: 1405
-    components:
-    - type: Transform
-      pos: 17.5,-21.5
       parent: 2
 - proto: WarpPoint
   entities:

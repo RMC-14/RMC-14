@@ -30,7 +30,7 @@
       - id: CMJumpsuitOperations
         name: operations uniform
         recommended: true
-      - id: CMHandsBlackMarine
+      - id: CMHandsBlackInsulated
     - name: Jacket
       choices: { CMCoat: 1}
       entries:
@@ -182,6 +182,8 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
@@ -449,6 +451,8 @@
       #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
       - id: RMCBackpackRTO
       - id: CMSatchelMarineIntel
+      - id: RMCSatchelMarineIntelChestrig
+      - id: RMCSatchelMarineIntelSatchel
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
@@ -463,6 +467,8 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
@@ -842,6 +848,8 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
@@ -950,9 +958,17 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+    - name: Books
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -1085,6 +1101,8 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbingBrown
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
       - id: RMCWebbingDropPouch
@@ -1227,6 +1245,8 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
     - name: Spare Equipment
       jobs:
@@ -1389,6 +1409,8 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
@@ -1519,6 +1541,8 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster

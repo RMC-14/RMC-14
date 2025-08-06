@@ -43,6 +43,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
     private const string SquadTrackerCategory = "SquadTracker";
     private const string SquadLeaderMode = "SquadLeader";
+    private const string FireteamLeader = "FireteamLeader";
 
     public override void Initialize()
     {
@@ -138,9 +139,6 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
     private void OnRemove(Entity<SquadLeaderTrackerComponent> ent, ref ComponentRemove args)
     {
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
-
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
@@ -460,9 +458,6 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     {
         _alerts.ClearAlertCategory(ent, SquadTrackerCategory);
 
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
-
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
@@ -564,8 +559,8 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             return;
 
         _squadLeaders.Clear();
-        var squadLeaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
-        while (squadLeaders.MoveNext(out var uid, out _, out var member))
+        var squadLeaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent, RMCTrackableComponent>();
+        while (squadLeaders.MoveNext(out var uid, out _, out var member, out _))
         {
             if (member.Squad is not { } squad)
                 continue;
@@ -617,7 +612,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
             if (_squadMemberQuery.TryComp(uid, out var squadMember) && squadMember.Squad is { } squad)
             {
-                if (_fireteamMemberQuery.TryComp(uid, out var fireteamMember) && tracker.Mode == SquadLeaderMode)
+                if (_fireteamMemberQuery.TryComp(uid, out var fireteamMember) && tracker.Mode == FireteamLeader)
                 {
                     var fireteamIndex = fireteamMember.Fireteam;
                     if (fireteamIndex >= 0 &&

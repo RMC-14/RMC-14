@@ -238,6 +238,7 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost
   id: CMSatchelSecurityFilledProvost
   components:
   - type: StorageFill
@@ -246,6 +247,7 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost Dep Mar
   id: CMSatchelSecurityFilledProvostDeputyMarshal
   components:
   - type: StorageFill
@@ -254,6 +256,7 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost Mar
   id: CMSatchelSecurityFilledProvostMarshal
   components:
   - type: StorageFill
@@ -261,9 +264,9 @@
     - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
     - id: RMCTabletCO
 
-
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost TL
   id: CMSatchelSecurityFilledProvostTeamLeader
   components:
   - type: StorageFill
@@ -273,12 +276,35 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  suffix: Provost Enf
   id: CMSatchelSecurityFilledProvostEnforcer
   components:
   - type: StorageFill
     contents:
     - id: RMCPacketGrenadeFlashBang
     - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
+
+- type: entity
+  parent: CMSatchel
+  id: CMSatchelFilledFaxResponder
+  suffix: Fax Responder
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledFaxResponder
+  suffix: Fax Responder
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenFountain
+    - id: CMStampApproved
+    - id: CMStampDenied
 
 - type: entity
   parent: CMSatchel
@@ -330,6 +356,17 @@
       Snow: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
       Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchelMarineIntel
+  id: RMCSatchelMarineIntelSatchel
+  name: UNMC lightweight expedition satchel
+  description: A heavy-duty IMP based satchel, reinforced with kevlar so it doesn't rip. Can quickly be accessed with only one hand. Usually issued to UNMC intelligence officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/intel.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: CMSatchelMarineIntel # Reskin for FORECON

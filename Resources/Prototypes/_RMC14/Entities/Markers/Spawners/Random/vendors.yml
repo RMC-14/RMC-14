@@ -1,0 +1,19 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomVendor
+  name: random food vendor spawner
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Structures/Machines/VendingMachines/random.rsi
+      state: icon
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+    - CMVendorSnack
+    - CMVendorCola
+    - CMVendorCoffee
+    chance: 0.95
+    rarePrototypes:
+    - CMVendorSodaSoviet
+    rareChance: 0.05
