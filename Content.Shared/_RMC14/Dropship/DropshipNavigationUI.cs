@@ -14,12 +14,13 @@ public sealed class DropshipNavigationDestinationsBuiState(NetEntity? flyBy, Lis
 }
 
 [Serializable, NetSerializable]
-public sealed class DropshipNavigationTravellingBuiState(FTLState state, StartEndTime time, string destination, string departureLocation) : BoundUserInterfaceState
+public sealed class DropshipNavigationTravellingBuiState(FTLState state, StartEndTime time, string destination, string departureLocation, Dictionary<DoorLocation, bool> doorLockStatus) : BoundUserInterfaceState
 {
     public readonly FTLState State = state;
     public readonly StartEndTime Time = time;
     public readonly string Destination = destination;
     public readonly string DepartureLocation = departureLocation;
+    public readonly Dictionary<DoorLocation, bool> DoorLockStatus = doorLockStatus;
 }
 
 [Serializable, NetSerializable]

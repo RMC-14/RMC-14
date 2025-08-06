@@ -145,16 +145,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             _window.DestinationsContainer.AddChild(button);
         }
 
-        var locked = destinations.DoorLockStatus;
-        locked.TryGetValue(DoorLocation.Aft, out var aftStatus);
-        locked.TryGetValue(DoorLocation.Port, out var portStatus);
-        locked.TryGetValue(DoorLocation.Starboard, out var starboardStatus);
-        var lockdownStatus = aftStatus && portStatus && starboardStatus;
-
-        _window.LockdownButton.Text = lockdownStatus ? "Lift Lockdown" : "Lockdown";
-        _window.LockdownButtonAft.Text = aftStatus ? "Unlock Aft" : "Lock Aft";
-        _window.LockdownButtonPort.Text = portStatus ? "Unlock Port" : "Lock Port";
-        _window.LockdownButtonStarboard.Text = starboardStatus ? "Unlock Starboard" : "Lock Starboard";
+        RefreshDoorLockStatus(destinations.DoorLockStatus);
     }
 
     private void Set(DropshipNavigationTravellingBuiState travelling)
@@ -207,6 +198,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             default:
                 return;
         }
+
+        RefreshDoorLockStatus(travelling.DoorLockStatus);
 
         var startEndTime = travelling.Time;
         _window.ProgressBar.MinValue = 0;
@@ -274,6 +267,22 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             return;
 
         SendPredictedMessage(new DropshipNavigationCancelMsg());
+    }
+
+    private void RefreshDoorLockStatus(Dictionary<DoorLocation, bool> dooorLockStatus)
+    {
+        if (_window == null)
+            return;
+
+        dooorLockStatus.TryGetValue(DoorLocation.Aft, out var aftStatus);
+        dooorLockStatus.TryGetValue(DoorLocation.Port, out var portStatus);
+        dooorLockStatus.TryGetValue(DoorLocation.Starboard, out var starboardStatus);
+        var lockdownStatus = aftStatus && portStatus && starboardStatus;
+
+        _window.LockdownButton.Text = lockdownStatus ? "Lift Lockdown" : "Lockdown";
+        _window.LockdownButtonAft.Text = aftStatus ? "Unlock Aft" : "Lock Aft";
+        _window.LockdownButtonPort.Text = portStatus ? "Unlock Port" : "Lock Port";
+        _window.LockdownButtonStarboard.Text = starboardStatus ? "Unlock Starboard" : "Lock Starboard";
     }
 
     public void Update()

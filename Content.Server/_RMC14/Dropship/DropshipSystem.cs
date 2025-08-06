@@ -400,6 +400,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (Transform(computer).GridUid is not { } grid)
             return;
 
+        var doorLockStatus = GetDoorLockStatus(grid);
+
         if (!TryComp(grid, out FTLComponent? ftl) ||
             !ftl.Running ||
             ftl.State == FTLState.Available)
@@ -425,19 +427,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destinations.Add(destination);
             }
 
-            var locked = new Dictionary<DoorLocation, bool>();
-            var enumerator = Transform(grid).ChildEnumerator;
-            while (enumerator.MoveNext(out var child))
-            {
-                if (_dockingQuery.HasComp(child) &&
-                    _doorBoltQuery.TryComp(child, out var bolt) &&
-                    _doorQuery.TryComp(child, out var door))
-                {
-                    locked.TryAdd(door.Location, bolt.BoltsDown);
-                }
-            }
-
-            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, locked);
+            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, doorLockStatus);
             _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
             return;
         }
@@ -459,7 +449,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             }
         }
 
-        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName);
+        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName, doorLockStatus);
         _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
     }
 
@@ -529,6 +519,23 @@ public sealed class DropshipSystem : SharedDropshipSystem
             else
                 UnlockDoor(child);
         }
+    }
+
+    private Dictionary<DoorLocation, bool> GetDoorLockStatus(EntityUid dropship)
+    {
+        var doorLockStatus = new Dictionary<DoorLocation, bool>();
+        var enumerator = Transform(dropship).ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            if (_dockingQuery.HasComp(child) &&
+                _doorBoltQuery.TryComp(child, out var bolt) &&
+                _doorQuery.TryComp(child, out var door))
+            {
+                doorLockStatus.TryAdd(door.Location, bolt.BoltsDown);
+            }
+        }
+
+        return doorLockStatus;
     }
 
     public void LockDoor(Entity<DoorBoltComponent?> door)
