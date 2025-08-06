@@ -1,46 +1,4 @@
 ﻿Entries:
-- author: BramvanZijp
-  changes:
-  - message: The RTO Backpack is now marked as recommended for FTLs and SLs.
-    type: Tweak
-  id: 1596
-  time: '2025-04-19T06:52:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6153
-- author: QuietlyWhisper
-  changes:
-  - message: Added Hailey Morgan figurine.
-    type: Add
-  id: 1597
-  time: '2025-04-19T06:54:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6182
-- author: Whisper
-  changes:
-  - message: Updated guidebook with more controls.
-    type: Add
-  id: 1598
-  time: '2025-04-19T06:53:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6183
-- author: Whisper
-  changes:
-  - message: Added the armor vest to MP, IO, and Corpsmen equipment vendors. It has
-      no movement speed modifier, minimal armor, and no armor light. It does not protect
-      against sentinel slowing spit stuns, and comes with two storage slots.
-    type: Add
-  - message: Parasites no longer have a chance to be a ghost role, no longer allowing
-      you to bypass intentional role cooldowns.
-    type: Fix
-  - message: Hazard vests and jackets can no longer hold items in the suit storage
-      slot. Armor or armored vests must be used instead. Survivors retain the ability
-      to put items in the suit storage slot regardless of it being restricted.
-    type: Tweak
-  - message: Restructured the MP vendor. You can now also take both a beret and helmet.
-    type: Tweak
-  - message: A few minor SOP clarifications. Major change includes all civilians are
-      free to deploy at their discretion.
-    type: Tweak
-  id: 1599
-  time: '2025-04-19T08:08:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6141
 - author: Tunguso4ka
   changes:
   - message: Added Skrells - new amphibious humanoid species.
@@ -4882,5 +4840,42 @@
   id: 2096
   time: '2025-08-05T03:47:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5455
+- author: SharkSnake98
+  changes:
+  - message: Added a CL Guidebook entry
+    type: Add
+  - message: Added a few lines to the Correspondent, Liaison, and Doctor YML for guidebook
+      photos
+    type: Add
+  id: 2097
+  time: '2025-08-06T03:48:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7113
+- author: Dygon
+  changes:
+  - message: Lunge, Tumble, Headbutt and Charge consistently hit their target again.
+    type: Fix
+  - message: Lunge, Tumble and Headbutt won't move past their target anymore after
+      hitting them.
+    type: Fix
+  id: 2098
+  time: '2025-08-06T03:50:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7209
+- author: SharkSnake98
+  changes:
+  - message: Added Repaired Chances Claim
+    type: Add
+  - message: Added a Chance's Claim sign
+    type: Add
+  id: 2099
+  time: '2025-08-06T03:50:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7206
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added medical action examine button. This can be used to see the status
+      of a marine, such as if they're unrevivable, dead, bleeding, or unconscious.
+    type: Add
+  id: 2100
+  time: '2025-08-06T03:49:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7172
 Name: RMC14
 Order: -1
