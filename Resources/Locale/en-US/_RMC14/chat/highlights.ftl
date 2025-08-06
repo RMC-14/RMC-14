@@ -44,3 +44,24 @@ highlights-weapons-specialist = Weapons Specialist, "WS", "SADAR", Grenadier, Sc
 highlights-combat-technician = Combat Technician, "CT", "ComTech", Engineer, Barricade, Cade, "SL", Command
 highlights-hospital-corpsman = Hospital Corpsman, "HM", Corpsman, "Medic", Injured, Infected, Hugged, "SL", Command
 highlights-rifleman = Rifleman, "RFN", "SL", Command
+
+# Xenonids
+
+highlights-xeno-boiler = Boiler, "Pat"
+highlights-xeno-burrower = Burrower, "Pat", Tunnel, Weed, Trap
+highlights-xeno-carrier = Carrier, "Pat", Parasite, Weed, Cluster, Morhper, Infect, Trap
+highlights-xeno-crusher = Crusher, "Pat"
+highlights-xeno-defender = Defender, "Pat"
+highlights-xeno-drone = "Drone", "Pat", Weed, Cluster, Heal
+highlights-xeno-hivelord = Hivelord, "Pat", Weed, Cluster
+highlights-xeno-larva = Larva, "Pat"
+highlights-xeno-lesser-drone = "Lesser Drone", "Pat", "Lesser", Weed
+highlights-xeno-lurker = Lurker, "Pat"
+highlights-xeno-parasite = Parasite
+highlights-xeno-praetorian = Praetorian, "Pat"
+highlights-xeno-queen = "Queen", "Pat", "Mom", "Mother"
+highlights-xeno-ravager = Ravager, "Pat"
+highlights-xeno-runner = Runner, "Pat", Capture
+highlights-xeno-sentinel = Sentinel, "Pat"
+highlights-xeno-spitter = Spitter, "Pat"
+highlights-xeno-warrior = Warrior, "Pat

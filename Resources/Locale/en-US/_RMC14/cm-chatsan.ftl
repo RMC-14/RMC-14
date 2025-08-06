@@ -543,12 +543,10 @@ cm-chatsan-word-xigma = xigma
 cm-chatsan-replacement-xigma = prime
 
 cm-chatsan-word-para = para
-cm-chatsan-word-parasite = parasite
-cm-chatsan-replacement-parasite = child
+cm-chatsan-replacement-parasite = parasite
 
 cm-chatsan-word-paras = paras
-cm-chatsan-word-parasites = parasites
-cm-chatsan-replacement-parasites = children
+cm-chatsan-replacement-parasites = parasites
 
 cm-chatsan-word-barricade = barricade
 cm-chatsan-word-cade = cade
@@ -654,12 +652,6 @@ cm-chatsan-word-disk = disk
 cm-chatsan-word-disc = disc
 cm-chatsan-replacement-disk = memory wheel
 
-cm-chatsan-word-canteen = canteen
-cm-chatsan-replacement-canteen = liquid carrier
-
-cm-chatsan-word-canteens = canteens
-cm-chatsan-replacement-canteens = liquid carriers
-
 cm-chatsan-word-flashlight = flashlight
 cm-chatsan-replacement-flashlight = glow tube
 
@@ -703,3 +695,39 @@ cm-chatsan-replacement-folder = sheet holder
 
 cm-chatsan-word-folders = folders
 cm-chatsan-replacement-folders = sheet holders
+
+cm-chatsan-word-zerker = zerker
+cm-chatsan-replacement-zerker = berserker
+
+cm-chatsan-word-zerkers = zerkers
+cm-chatsan-word-replacement-zerkers = berserkers
+
+cm-chatsan-word-rav = rav
+cm-chatsan-word-replacement-rav = ravager
+
+cm-chatsan-word-ravs = ravs
+cm-chatsan-word-replacement-ravs = ravagers
+
+cm-chatsan-word-prae = prae
+cm-chatsan-word-replacement-prae = praetorian
+
+cm-chatsan-word-praes = praes
+cm-chatsan-word-replacement-praes = praetorians
+
+cm-chatsan-word-hivey = hivey
+cm-chatsan-word-replacement-hivey = hivelord
+
+cm-chatsan-word-hiveys = hiveys
+cm-chatsan-word-replacement-hiveys = hivelords
+
+cm-chatsan-word-cap = cap
+cm-chatsan-word-replacement-cap = capture
+
+cm-chatsan-word-caps = caps
+cm-chatsan-word-replacement-caps = captures
+
+cm-chatsan-word-capped = capped
+cm-chatsan-word-replacement-capped = captured
+
+cm-chatsan-word-phero = phero
+cm-chatsan-word-replacement-phero = pheromone
