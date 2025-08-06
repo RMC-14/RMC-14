@@ -10,7 +10,7 @@
     - scenarioName: fallen_ship
       scenarioProbability: 0.1
     - scenarioName: asset_protection
-      scenarioProbability: 0.1
+      scenarioProbability: 0.9
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivor: -1
@@ -31,17 +31,14 @@
     survivorJobScenarios:
       asset_protection:
         CMSurvivorCorporate:
-        - CMSurvivorLV624CorporateDomeCL: 1
+        - CMSurvivorLV624CorporateDomeCL: -1
         CMSurvivorDoctor:
-        - CMSurvivorLV624CorporateDomeMedic: 1
+        - CMSurvivorLV624CorporateDomeCL: -1
         CMSurvivorEngineer:
-        - CMSurvivorLV624CorporateDomeEng: 1
+        - CMSurvivorLV624CorporateDomeCL: -1
         CMSurvivorSecurity:
-        - CMSurvivorLV624CorporateDomeGoonLead: 1
-        - CMSurvivorLV624CorporateDomeGoon: 5
+        - CMSurvivorLV624CorporateDomeCL: -1
     
-        
-
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
