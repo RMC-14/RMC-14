@@ -391,8 +391,8 @@
     PestSpray: 20
     Syringe: 5
     PlantBag: 5
-    HydroponicsToolSpade: 3
-    HydroponicsToolHatchet: 3
+    RMCToolSpade: 3
+    RMCToolHatchet: 3
     HydroponicsToolScythe: 3
 
 
