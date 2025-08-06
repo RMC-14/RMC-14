@@ -37,6 +37,10 @@
     damageContainer: Xeno
   - type: Destructible
     thresholds: []
+  - type: RMCMedicalExamine
+    simple: true
+    deadText: rmc-medical-examine-dead-simple-mob
+  - type: RMCBlockMedicalExamine
   - type: MobState
     allowedStates:
     - Alive
