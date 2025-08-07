@@ -13,6 +13,9 @@ public sealed partial class VehicleComponent : Component
     public EntityUid? Other;
 
     [DataField, AutoNetworkedField]
+    public EntityUid? DriverSeat;
+
+    [DataField, AutoNetworkedField]
     public float Range = SharedInteractionSystem.InteractionRange + 0.1f;
 
     [DataField, AutoNetworkedField]
@@ -26,4 +29,7 @@ public sealed partial class VehicleComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> Watching = new();
 }

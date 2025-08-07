@@ -1,5 +1,8 @@
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared._RMC14.Vehicle.Events;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -19,6 +22,8 @@ public abstract class SharedVehicleSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     public override void Initialize()
@@ -28,6 +33,9 @@ public abstract class SharedVehicleSystem : EntitySystem
         SubscribeLocalEvent<VehicleComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<VehicleComponent, VehicleEnterDoAfterEvent>(OnVehicleEnterDoAfter);
         SubscribeLocalEvent<VehicleComponent, DoAfterAttemptEvent<VehicleEnterDoAfterEvent>>(OnVehicleEnterDoAfterAttempt);
+        SubscribeLocalEvent<VehicleDriverSeatComponent, StrapAttemptEvent>(OnStrapAttempt);
+        SubscribeLocalEvent<VehicleDriverSeatComponent, StrappedEvent>(OnStrapped);
+        SubscribeLocalEvent<VehicleDriverSeatComponent, UnstrappedEvent>(OnUnstrapped);
     }
 
     private void OnActivateInWorld(Entity<VehicleComponent> ent, ref ActivateInWorldEvent args)
@@ -120,5 +128,51 @@ public abstract class SharedVehicleSystem : EntitySystem
         Dirty(ent);
 
         //_rmcTeleporter.HandlePulling(user, coordinates);
+    }
+
+    private void OnStrapAttempt(Entity<VehicleDriverSeatComponent> ent, ref StrapAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var buckle = args.Buckle;
+        if (!_skills.HasSkills(buckle.Owner, ent.Comp.Skills))
+        {
+            if (args.Popup)
+                _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", ent)), buckle, args.User);
+
+            args.Cancelled = true;
+            return;
+        }
+    }
+
+    private void OnStrapped(Entity<VehicleDriverSeatComponent> ent, ref StrappedEvent args)
+    {
+        var vehicle = ent.Comp.Vehicle;
+
+        if (vehicle is not { } other)
+            return;
+
+        if (!TryComp<VehicleComponent>(vehicle, out var comp))
+            return;
+
+        var entComp = (other, comp);
+
+        Watch(args.Buckle.Owner, entComp);
+    }
+    private void OnUnstrapped(Entity<VehicleDriverSeatComponent> ent, ref UnstrappedEvent args)
+    {
+        // args.Buckle component is connected to the player entity.
+        // Unwatch(); // TODO: Get the paramenters for the Unwatch.
+    }
+
+    protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<VehicleComponent?> toWatch) {}
+
+    protected virtual void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
+    {
+        if (!Resolve(watcher, ref watcher.Comp))
+            return;
+
+        _eye.SetTarget(watcher, null);
     }
 }
