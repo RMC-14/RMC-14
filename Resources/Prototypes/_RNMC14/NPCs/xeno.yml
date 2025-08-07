@@ -1,0 +1,12 @@
+- type: htnCompound
+  id: XenoCompoundLeap
+  branches:
+    - tasks:
+        - !type:HTNCompoundTask
+          task: RMCParasiteLeap
+    - tasks:
+        - !type:HTNCompoundTask
+          task: MeleeCombatCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: IdleCompound

@@ -1,0 +1,60 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMRiflemanPVE
+  name: cm-job-name-rifleman
+  description: cm-job-description-rifleman
+  playTimeTracker: CMJobRiflemanPVE
+  startingGear: CMGearRifleman
+  dummyStartingGear: CMGearRiflemanEquipped
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobRiflemanPVE
+      time: 54000 # 15 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobRiflemanPVE
+      time: 14400 # 4 hours
+    RMCRankPrivate: []
+  accessGroups:
+  - Rifleman
+  hasIcon: false
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 2
+        RMCSkillFireman: 3
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillFirearms: 1 # yes this is PVE parity
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: private
+
+- type: playTimeTracker
+  id: CMJobRiflemanPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRiflemanSunRiders
+  name: sun riders rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRiflemanPVE
+  - type: Sprite
+    state: marine_spawn

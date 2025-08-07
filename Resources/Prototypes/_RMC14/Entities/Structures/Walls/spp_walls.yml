@@ -1,0 +1,71 @@
+﻿- type: entity
+  parent: CMWallReinforced
+  id: RMCWallSPPReinforced
+  name: reinforced walls
+  description: A thick and chunky metal wall. The surface is barren and imposing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/spp_wall.rsi
+    state: uppwall_interior
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/spp_wall.rsi
+    state: uppwall_interior
+  - type: IconSmooth
+    key: walls
+    base: uppwall_interior
+
+- type: entity
+  parent: RMCWallSPPReinforced
+  id: RMCWallSPPGreyReinforced
+  suffix: Grey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/spp_grey_wall.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/spp_grey_wall.rsi
+
+- type: entity
+  parent: RMCWallSPPReinforced
+  id: RMCWallSPPWhiteReinforced
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/spp_white_wall.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/spp_white_wall.rsi
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallSPPHull
+  name: ribbed hull walls
+  description: "A thick and chunky metal wall. The surface is barren and imposing."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/spp_wall.rsi
+    state: uppwall_interior
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/spp_wall.rsi
+    state: uppwall_interior
+  - type: IconSmooth
+    key: walls
+    base: uppwall_interior
+
+- type: entity
+  parent: RMCWallSPPHull
+  id: RMCWallSPPGreyHull
+  suffix: Grey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/spp_grey_wall.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/spp_grey_wall.rsi
+
+- type: entity
+  parent: RMCWallSPPHull
+  id: RMCWallSPPWhiteHull
+  suffix: White
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/spp_white_wall.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/spp_white_wall.rsi

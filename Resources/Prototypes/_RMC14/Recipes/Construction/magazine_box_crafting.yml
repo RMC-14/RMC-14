@@ -10,9 +10,6 @@
   targetNode: RMCBoxMagazineRifleM54CEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M54C mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
   iconColor: "#7b8246"
   objectType: Item
 
@@ -25,9 +22,6 @@
   targetNode: RMCBoxMagazineRifleM54CAPEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M54C mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
   iconColor: "#7b8246"
   objectType: Item
 
@@ -40,9 +34,6 @@
   targetNode: RMCBoxMagazineRifleM54CExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M54C mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
   iconColor: "#7b8246"
   objectType: Item
 
@@ -55,9 +46,6 @@
   targetNode: RMCBoxBulletsRifleEmpty
   category: construction-category-cm-box-magazine
   description: A 10x24mm ammunition box. Used to refill M54C MK1, MK2, M4SPR and M54CE2 HAR magazines. It comes with a leather strap allowing to wear it on the back.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
   iconColor: "#7b8246"
   objectType: Item
 
@@ -70,9 +58,6 @@
   targetNode: RMCBoxBulletsRifleAPEmpty
   category: construction-category-cm-box-magazine
   description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK2, and M4SPR AP magazines. It comes with a leather strap allowing to wear it on the back.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
   iconColor: "#7b8246"
   objectType: Item
 
@@ -86,9 +71,6 @@
   targetNode: RMCBoxMagazineSMGM63Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M63 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: smg_box
   iconColor: "#727e90"
   objectType: Item
 
@@ -101,9 +83,6 @@
   targetNode: RMCBoxMagazineSMGM63APEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M63 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: smg_box
   iconColor: "#727e90"
   objectType: Item
 
@@ -116,9 +95,6 @@
   targetNode: RMCBoxMagazineSMGM63ExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M63 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: smg_box
   iconColor: "#727e90"
   objectType: Item
 
@@ -131,9 +107,6 @@
   targetNode: RMCBoxBulletsSMGEmpty
   category: construction-category-cm-box-magazine
   description: A 10x20mm ammunition box. Used to refill M63 HV and extended magazines. It comes with a leather strap allowing to wear it on the back.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: smg_box
   iconColor: "#727e90"
   objectType: Item
 
@@ -146,9 +119,6 @@
   targetNode: RMCBoxBulletsSMGAPEmpty
   category: construction-category-cm-box-magazine
   description: A 10x20mm armor-piercing ammunition box. Used to refill M63 AP magazines. It comes with a leather strap allowing to wear it on the back.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: smg_box
   iconColor: "#727e90"
   objectType: Item
 
@@ -162,9 +132,6 @@
   targetNode: RMCBoxMagazineRifleM4SPREmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M4SPR mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
   iconColor: "#695d42"
   objectType: Item
 
@@ -177,9 +144,6 @@
   targetNode: RMCBoxMagazineRifleM4SPRAPEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M4SPR mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
   iconColor: "#695d42"
   objectType: Item
 
@@ -192,9 +156,6 @@
   targetNode: RMCBoxMagazineRifleM4SPRExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M4SPR mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
   iconColor: "#695d42"
   objectType: Item
 
@@ -208,9 +169,6 @@
   targetNode: RMCBoxMagazinePistolM1984Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M1984 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: pistol_box
   iconColor: "#b2976e"
   objectType: Item
 
@@ -223,9 +181,6 @@
   targetNode: RMCBoxMagazinePistolM1984APEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M1984 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: pistol_box
   iconColor: "#b2976e"
   objectType: Item
 
@@ -239,9 +194,6 @@
   targetNode: RMCBoxMagazinePistolM77APEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M77 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: pistol_box
   iconColor: "#7c7e83"
   objectType: Item
 
@@ -255,9 +207,6 @@
   targetNode: RMCBoxMagazinePistolMK80Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular MK80 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: pistol_box
   iconColor: "#4a4a4a"
   objectType: Item
 
@@ -271,9 +220,6 @@
   targetNode: RMCBoxMagazinePistolSU6Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular SU-6 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: pistol_box
   iconColor: "#6b5c58"
   objectType: Item
 
@@ -287,9 +233,6 @@
   targetNode: RMCBoxMagazineRevolverM44Empty
   category: construction-category-cm-box-magazine
   description: A box for holding many speedloaders with a carrying handle.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: pistol_box
   iconColor: "#727e90"
   objectType: Item
 
@@ -302,9 +245,6 @@
   targetNode: RMCBoxMagazineRevolverM44MarksmanEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding many marksman speedloaders with a carrying handle.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: pistol_box
   iconColor: "#727e90"
   objectType: Item
 
@@ -318,9 +258,6 @@
   targetNode: RMCBoxMagazinePistolM13Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M13 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: smg_box
   iconColor: "#7c4c1b"
   objectType: Item
 
@@ -333,9 +270,6 @@
   targetNode: RMCBoxMagazinePistolM13ExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M13 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: smg_box
   iconColor: "#7c4c1b"
   objectType: Item
 
@@ -348,10 +282,21 @@
   targetNode: RMCBoxMagazinePistolM13DrumEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain drum M13 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: smg_box
   iconColor: "#7c4c1b"
+  objectType: Item
+
+# M34 Incinerator
+
+- type: construction
+  parent: RMC
+  name: Flamer Tank Box (UT-Napthal Fuel)
+  id: RMCBoxFlamerTankEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxFlamerTankEmpty
+  category: construction-category-cm-box-magazine
+  description: A flamer tank box that can contain UT-Napthal fuel tanks.
+  iconColor: "#3d3832"
   objectType: Item
 
 # Nailgun
@@ -364,9 +309,6 @@
   targetNode: RMCBoxMagazineSMGNailgunEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain nailgun mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: supply_box
   iconColor: "#709bff"
   objectType: Item
 
@@ -380,9 +322,6 @@
   targetNode: RMCBoxShellsBuckshotEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
   iconColor: "#944444"
   objectType: Item
 
@@ -395,9 +334,6 @@
   targetNode: RMCBoxShellsSlugsEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
   iconColor: "#578e75"
   objectType: Item
 
@@ -410,9 +346,6 @@
   targetNode: RMCBoxShellsFlechetteEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
   iconColor: "#6551a0"
   objectType: Item
 
@@ -425,9 +358,6 @@
   targetNode: RMCBoxShellsIncendiaryEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
   iconColor: "#c6cdd3"
   objectType: Item
 
@@ -440,10 +370,6 @@
   # targetNode: RMCBoxShellsBeanbagEmpty
   # category: construction-category-cm-box-magazine
   # description: A box for holding shells.
-  # icon:
-    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    # state: shell_box
-    # color: "#5786be"
   # objectType: Item
 
 - type: construction
@@ -455,9 +381,6 @@
   targetNode: RMCBoxShellsIncendiaryBuckshotEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
   iconColor: "#c6cdd3"
   objectType: Item
 
@@ -470,9 +393,6 @@
   targetNode: RMCBoxShellsBreachingEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: shell_box
   iconColor: "#595959"
   objectType: Item
 
@@ -487,9 +407,6 @@
   targetNode: RMCBoxMREEmpty
   category: construction-category-cm-box-magazine
   description: A box of MREs. Nutritious, but not delicious.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: supply_box
   iconColor: "#887b67"
   objectType: Item
 
@@ -502,9 +419,6 @@
   targetNode: RMCBoxPackFlareEmpty
   category: construction-category-cm-box-magazine
   description: A box of M94 marking flare packs, to brighten up your day.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: supply_box
   iconColor: "#887b67"
   objectType: Item
 
@@ -517,9 +431,6 @@
   targetNode: RMCBoxPackFlareCASEmpty
   category: construction-category-cm-box-magazine
   description: A box of M89 signal flare packs, to mark up the way.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: supply_box
   iconColor: "#887b67"
   objectType: Item
 
@@ -532,9 +443,6 @@
   targetNode: RMCBoxFlashlightsEmpty
   category: construction-category-cm-box-magazine
   description: A box of flashlights to brighten your day!
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: supply_box
   iconColor: "#887b67"
   objectType: Item
 
@@ -547,9 +455,6 @@
   targetNode: RMCBoxMagazinePowerCellsHigh
   category: construction-category-cm-box-magazine
   description: A box of High-Capacity Power Cells to keep your electronics going all night long!
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: supply_box
   iconColor: "#887b67"
   objectType: Item
 
@@ -591,6 +496,19 @@
 
     # AK4047
     - to: RMCBoxMagazineRifleAK4047Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    # SSG45
+    - to: RMCBoxMagazineRifleSSG45Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazineRifleSSG45APEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -713,6 +631,13 @@
         amount: 1
         doAfter: 0.25
 
+    # M34 Incinerator
+    - to: RMCBoxFlamerTankEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # Nailgun
     - to: RMCBoxMagazineSMGNailgunEmpty
       steps:
@@ -805,6 +730,12 @@
   - node: RMCBoxBulletsRifleAPEmpty
     entity: RMCBoxBulletsRifleAPEmpty
 
+  # SSG45
+  - node: RMCBoxMagazineRifleSSG45Empty
+    entity: RMCBoxMagazineRifleSSG45Empty
+  - node: RMCBoxMagazineRifleSSG45APEmpty
+    entity: RMCBoxMagazineRifleSSG45APEmpty
+
   #AK4047
   - node: RMCBoxMagazineRifleAK4047Empty
     entity: RMCBoxMagazineRifleAK4047Empty
@@ -872,6 +803,10 @@
   # XM88
   - node: RMCBoxBullets458Empty
     entity: RMCBoxBullets458Empty
+
+  # M34 Incinerator
+  - node: RMCBoxFlamerTankEmpty
+    entity: RMCBoxFlamerTankEmpty
 
   # Shotgun
   - node: RMCBoxShellsBuckshotEmpty

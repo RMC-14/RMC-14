@@ -1,0 +1,22 @@
+- type: entity
+  parent: CMXenoDrone
+  id: CMXenoDroneNPC
+  name: Drone
+  description: An alien drone.
+  suffix:
+  components:
+  - type: HTN
+    rootTask:
+      task: CMXenoCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      450: Dead
+  - type: Xeno
+    role: CMXenoDroneNPC

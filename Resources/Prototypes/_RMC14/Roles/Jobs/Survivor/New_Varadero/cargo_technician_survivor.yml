@@ -18,7 +18,6 @@
         RMCSkillConstruction: 2
         RMCSkillVehicles: 3
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -27,6 +26,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetCargoTechnician
+  useLoadoutOfJob: CMSurvivorEngineer
 
 - type: startingGear
   id: RMCGearSurvivorCargoTechnician

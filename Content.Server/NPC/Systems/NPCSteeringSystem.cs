@@ -75,7 +75,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     /// <summary>
     /// Enabled antistuck detection so if an NPC is in the same spot for a while it will re-path.
     /// </summary>
-    public bool AntiStuck = true;
+    public bool AntiStuck = false; // hmmmm
 
     private bool _enabled;
 
@@ -205,7 +205,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
         if (!Resolve(uid, ref component, false))
             return;
 
-        if (EntityManager.TryGetComponent(uid, out InputMoverComponent? controller))
+        if (TryComp(uid, out InputMoverComponent? controller))
         {
             controller.CurTickSprintMovement = Vector2.Zero;
 
