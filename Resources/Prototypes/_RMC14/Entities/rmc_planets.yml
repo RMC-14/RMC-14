@@ -42,7 +42,7 @@
         - CMSurvivorLV624CorporateDomeGoonEngineer: 1
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorSecurity:
-        - CMSurvivorLV624CorporateDomeGoonLeader: 1
+        - CMSurvivorLV624CorporateDomeGoonLead: 1
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorScientist:
         - CMSurvivorLV624CorporateDomeGoon: -1
