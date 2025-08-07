@@ -3,7 +3,7 @@
   id: CMXenoDroneNPC
   name: Drone
   description: An alien drone.
-  suffix:
+  suffix: AI
   components:
   - type: HTN
     rootTask:
