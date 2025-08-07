@@ -697,7 +697,7 @@ cm-chatsan-word-folders = folders
 cm-chatsan-replacement-folders = sheet holders
 
 cm-chatsan-word-zerker = zerker
-cm-chatsan-replacement-zerker = berserker
+cm-chatsan-word-replacement-zerker = berserker
 
 cm-chatsan-word-zerkers = zerkers
 cm-chatsan-word-replacement-zerkers = berserkers
