@@ -319,7 +319,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (validateEv.Invalid)
             return;
 
-        if (!_rmcActions.CanUseActionPopup(user, actionEnt))
+        if (!_rmcActions.CanUseActionPopup(user, actionEnt, GetEntity(ev.EntityTarget)))
             return;
 
         // All checks passed. Perform the action!

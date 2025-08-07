@@ -54,7 +54,7 @@
     back: CMSatchelFillSurvivor # TODO RMC14 secure leather satchel
     id: CMIDCardLiaisonColony
     pocket1: RMCPouchSurvivalFill
-    pocket2: RMCPouchDocument
+    pocket2: CMClipboard # RMC14, replace with document pouch when fixed
 
 - type: entity
   parent: CMSpawnPointJobBase

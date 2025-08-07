@@ -1,0 +1,71 @@
+﻿- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorTrijentGoon
+  name: rmc-job-name-survivor-trijent-goon
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorTrijentGoon
+  startingGear: RMCGearSurvivorTrijentGoon
+  hasIcon: true
+  icon: RMCJobIconWeYaSec
+  spawnMenuRoleName: Trijent Security Guard (Trijent Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetTrijentGoon
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorTrijentGoon
+  equipment:
+    head: RMCHeadCapWestonYamadaDark
+    jumpsuit: CMJumpsuitLiaisonBlueKutjevoGoon
+    ears: RMCHeadsetDistressWeYa
+    shoes: RMCBootsCorporate
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrijentGoon
+  name: trijent goon spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorTrijentGoon
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: RMCJobSurvivorTrijentGoon
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetTrijentGoon
+  name: trijent goon colonist preset
+  categories: [ HideSpawnMenu ]
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconWeYaSec
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_sec
