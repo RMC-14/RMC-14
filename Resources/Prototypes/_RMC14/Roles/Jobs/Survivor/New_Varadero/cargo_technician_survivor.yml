@@ -29,6 +29,7 @@
   useLoadoutOfJob: CMSurvivorEngineer
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorCargoTechnician
   equipment:
     jumpsuit: RMCJumpsuitCivilianBrown
@@ -38,7 +39,6 @@
     gloves: CMHandsBrown
     id: CMIDCardColonistEngineer
     ears: CMHeadsetColony
-    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchToolsFill
 # TODO RMC Meson Goggles
 

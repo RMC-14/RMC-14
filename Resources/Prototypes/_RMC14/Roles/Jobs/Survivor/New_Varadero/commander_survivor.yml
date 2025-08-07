@@ -57,6 +57,7 @@
   hidden: true
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorCommanderNewVaradero
   equipment:
     ears: RMCHeadsetMarineDistress
@@ -67,7 +68,6 @@
     back: CMSatchelFillSurvivor
     belt: RMCM1984BeltFilled
     id: CMIDCardGold
-    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
 
 - type: entity

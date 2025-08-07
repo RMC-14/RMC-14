@@ -81,7 +81,9 @@
     sprite: _RMC14/Structures/Windows/almayer_window.rsi
     state: alm_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: alm_rwindow
     mode: CardinalFlags
 
@@ -98,7 +100,9 @@
     sprite: _RMC14/Structures/Windows/almayer_window.rsi
     state: alm_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: alm_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -156,7 +160,9 @@
     sprite: _RMC14/Structures/Windows/white_reinforced_window.rsi
     state: white_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: white_rwindow
     mode: CardinalFlags
 
@@ -173,7 +179,9 @@
     sprite: _RMC14/Structures/Windows/white_reinforced_window.rsi
     state: white_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: white_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -228,7 +236,9 @@
     sprite: _RMC14/Structures/Windows/colony_window.rsi
     state: col_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: col_window
     mode: CardinalFlags
   - type: Repairable
@@ -280,7 +290,9 @@
     sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
     state: col_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: col_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -338,7 +350,9 @@
     state: col_rwindow0
     color: "#aba9a9"
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: col_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -393,7 +407,9 @@
     sprite: _RMC14/Structures/Windows/wood_window.rsi
     state: wood_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: wood_window
     mode: CardinalFlags
   - type: Repairable
@@ -445,7 +461,9 @@
     sprite: _RMC14/Structures/Windows/wood_rwindow.rsi
     state: wood_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: wood_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -500,7 +518,9 @@
     sprite: _RMC14/Structures/Windows/ai_rwindow.rsi
     state: ai_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: ai_rwindow
     mode: CardinalFlags
   - type: Repairable

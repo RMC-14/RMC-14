@@ -28,6 +28,7 @@
       preset: RMCGearSurvivorPresetLV624CargoTechnician
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorLV624CargoTechnician
   equipment:
     jumpsuit: RMCJumpsuitKhakiWorkwearJacketless
@@ -36,7 +37,6 @@
     shoes: RMCShoesLaceup
     id: CMIDCardColonistEngineer
     ears: CMHeadsetColony
-    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchToolsFill
 # TODO RMC Meson Goggles
 

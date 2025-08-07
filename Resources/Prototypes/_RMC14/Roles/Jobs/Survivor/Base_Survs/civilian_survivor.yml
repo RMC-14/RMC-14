@@ -51,6 +51,9 @@
     id: CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
+  inhand:
+  - RMCFlashlightOn
+  - CMCrowbarRed
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack

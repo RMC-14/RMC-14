@@ -27,6 +27,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorTrucker
   equipment:
     ears: CMHeadsetColony
@@ -35,7 +36,6 @@
     shoes: RMCShoesJackboots
     back: CMSatchelEngineerSurvivorFill
     id: CMIDCardColonist
-    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchToolsFill
 
 - type: entity

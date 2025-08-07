@@ -31,6 +31,7 @@
     - type: RMCAllowSuitStorage
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorGoon
   equipment:
     id: RMCIDCardPMC
@@ -43,7 +44,6 @@
     back: RMCSatchelLightpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
     suitstorage: RMCWeaponRifleM54CWhite
-    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidPMCFill
   storage:
     back:
