@@ -16,6 +16,9 @@ public sealed partial class AcidBloodSplashComponent : Component
     public FixedPoint2 MinimalTriggerDamage = 12;
 
     [DataField]
+    public bool IsActivateSplashOnGib = true;
+
+    [DataField]
     public float CloseSplashRadius = (float)(1 / Math.Sqrt(Math.PI)); // a circle equal in area to a square with a side of 1 (single tile)
 
     [DataField]
@@ -37,11 +40,11 @@ public sealed partial class AcidBloodSplashComponent : Component
     public float BaseHitProbability = 0.65f;
 
     /// <summary>
-    /// Substitution of gib chance
+    /// Substitution of base gib chance
     /// </summary>
     // TODO: remove when xeno can be gibbed
     [DataField]
-    public float BaseDeathSplashProbability = 0.05f;
+    public float BaseGibSplashProbability = 0.05f;
 
     /// <summary>
     /// How much probability increase if damage type is brute
@@ -55,6 +58,13 @@ public sealed partial class AcidBloodSplashComponent : Component
     [DataField]
     public float DamageProbabilityMultiplier = 0.33f;
 
+    /// <summary>
+    /// Substitution of coefficient that increases chance of gib depending on difference of health between dead and crit state
+    /// </summary>
+    // TODO: remove when xeno can be gibbed
+    [DataField]
+    public float DamageSplashGibMultiplier = 0.5f;
+
     [DataField]
     public TimeSpan SplashCooldown = TimeSpan.FromSeconds(5);
 
@@ -62,7 +72,7 @@ public sealed partial class AcidBloodSplashComponent : Component
     public TimeSpan NextSplashAvailable;
 
     [DataField]
-    public string BloodSpawnerPrototype = "RMCDecalSpawnerAcidBloodSplash";
+    public string BloodDecalSpawnerPrototype = "RMCDecalSpawnerAcidBloodSplash";
 
     [DataField]
     public SoundSpecifier AcidSplashSound = new SoundCollectionSpecifier("XenoAcidSizzle");

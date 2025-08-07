@@ -11,6 +11,8 @@ using Content.Shared.Popups;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Audio.Systems;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using System.Linq;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
@@ -27,6 +29,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly MobThresholdSystem _thresholds = default!;
 
     private static readonly ProtoId<EmotePrototype> ScreamProto = "Scream";
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
@@ -36,6 +39,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<AcidBloodSplashComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<AcidBloodSplashComponent, MobStateChangedEvent>(OnDeath);
 
         _bruteTypes.Clear();
 
@@ -46,6 +50,63 @@ public sealed class AcidBloodSplashSystem : EntitySystem
                 _bruteTypes.Add(type);
             }
         }
+    }
+
+    private void ActivateSplash(EntityUid uid, AcidBloodSplashComponent comp, float splashRadius)
+    {
+        Spawn(comp.BloodDecalSpawnerPrototype, uid.ToCoordinates()); // create decal, probability inside prototype
+
+        var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.
+        var targetsSet = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), splashRadius);
+        var closeRangeTargets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.CloseSplashRadius);
+        var targetsList = targetsSet.ToList(); // shuffle don't work on HashSet
+        _random.Shuffle(targetsList);
+        foreach (var target in targetsList)
+        {
+            if (!_xeno.CanAbilityAttackTarget(uid, target))
+                continue;
+
+            var hitProbability = comp.BaseHitProbability - i * 0.05;
+
+            if (closeRangeTargets.Contains(target))
+                hitProbability += 0.3;
+
+            if (_random.NextFloat() > hitProbability)
+                continue;
+
+            var damage = _damageable.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, comp.Damage), origin: uid, tool: uid);
+            comp.NextSplashAvailable = _timing.CurTime + comp.SplashCooldown;
+            i++;
+
+            _audio.PlayPvs(comp.AcidSplashSound, target);
+
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-others", ("target", target)), target, Filter.PvsExcept(target), true, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-self"), target, target, PopupType.MediumCaution);
+
+            if (_random.NextFloat() < 0.6f) // TODO: don't activate when target don't feel pain
+                _emote.TryEmoteWithChat(target, ScreamProto);
+        }
+    }
+
+    // TODO: remove when xeno can be gibbed and rewrite depending on new Event
+    private void OnDeath(EntityUid uid, AcidBloodSplashComponent comp, ref MobStateChangedEvent args)
+    {
+        if (args.Component.CurrentState != MobState.Dead || !comp.IsActivateSplashOnGib)
+            return;
+
+        var gibProbability = comp.BaseGibSplashProbability;
+
+        if (TryComp<MobThresholdsComponent>(uid, out var thresholds))
+        {
+            var crit = _thresholds.GetThresholdForState(uid, MobState.Critical, thresholds);
+            var dead = _thresholds.GetThresholdForState(uid, MobState.Dead, thresholds);
+            gibProbability += (float)(dead - crit) * comp.DamageSplashGibMultiplier;
+        }
+
+        if (_random.NextFloat() > gibProbability)
+            return;
+
+        ActivateSplash(uid, comp, comp.GibSplashRadius);
     }
 
     private void OnDamageChanged(EntityUid uid, AcidBloodSplashComponent comp, ref DamageChangedEvent args)
@@ -79,37 +140,6 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         if (_random.NextFloat() > triggerProbability)
             return;
 
-        Spawn(comp.BloodSpawnerPrototype, uid.ToCoordinates()); // probability inside prototype
-
-        var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.
-        var targetsSet = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.StandardSplashRadius);
-        var closeRangeTargets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.CloseSplashRadius);
-        var targetsList = targetsSet.ToList(); // shuffle don't work on HashSet
-        _random.Shuffle(targetsList);
-        foreach (var target in targetsList)
-        {
-            if (!_xeno.CanAbilityAttackTarget(uid, target))
-                continue;
-
-            var hitProbability = comp.BaseHitProbability - i * 0.05;
-
-            if (closeRangeTargets.Contains(target))
-                hitProbability += 0.3;
-
-            if (_random.NextFloat() > hitProbability)
-                continue;
-
-            var damage = _damageable.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, comp.Damage), origin: uid, tool: uid);
-            comp.NextSplashAvailable = time + comp.SplashCooldown;
-            i++;
-
-            _audio.PlayPvs(comp.AcidSplashSound, target);
-
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-others", ("target", target)), target, Filter.PvsExcept(target), true, PopupType.SmallCaution);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-self"), target, target, PopupType.MediumCaution);
-
-            if (_random.NextFloat() < 0.6f) // TODO: don't activate when target don't feel pain
-                _emote.TryEmoteWithChat(target, ScreamProto);
-        }
+        ActivateSplash(uid, comp, comp.StandardSplashRadius);
     }
 }
