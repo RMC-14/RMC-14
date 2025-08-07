@@ -71,7 +71,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             if (closeRangeTargets.Contains(target))
                 hitProbability += 0.3;
 
-            if (_random.NextFloat() > hitProbability)
+            if (_random.NextFloat() < hitProbability)
                 continue;
 
             var damage = _damageable.TryChangeDamage(target, _xeno.TryApplyXenoSlashDamageMultiplier(target, comp.Damage), origin: uid, tool: uid);
@@ -103,7 +103,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             gibProbability += (float)(damage - dead) * comp.DamageSplashGibMultiplier;
         }
 
-        if (_random.NextFloat() > gibProbability)
+        if (_random.NextFloat() < gibProbability)
             return;
 
         ActivateSplash(uid, comp, comp.GibSplashRadius);
@@ -137,7 +137,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
         // TODO: increase probability from sharp and edge weapon + from damage in chest
 
-        if (_random.NextFloat() > triggerProbability)
+        if (_random.NextFloat() < triggerProbability)
             return;
 
         ActivateSplash(uid, comp, comp.StandardSplashRadius);
