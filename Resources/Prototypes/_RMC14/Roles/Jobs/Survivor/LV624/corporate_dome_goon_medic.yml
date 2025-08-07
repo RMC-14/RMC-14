@@ -1,11 +1,11 @@
 - type: job
-  parent: CMSurvivorCorporate
-  id: CMSurvivorLV624CorporateDomeCL
-  name: rmc-job-name-survivor-lv624-corporate-liaison
+  parent: CMSurvivorDoctor
+  id: CMSurvivorLV624CorporateDomeGoonMedic
+  name: rmc-job-name-pmc-corporate-goon-medic
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624CorporateDomeCL
-  spawnMenuRoleName: Paranoid Corporate Liaison (LV624 Special Survivor)
-  startingGear: RMCGearSurvivorLV624CorporateLiaison
+  playTimeTracker: CMJobSurvivorLV624CorporateDomeGoonMedic
+  spawnMenuRoleName: We-Ya Goon Medic (Survivor Special)
+  startingGear: RMCGearSurvivorGoon
   special:
   - !type:AddComponentSpecial
     components:
@@ -15,8 +15,8 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
-    - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetLV624CorporateLiaison
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -25,15 +25,15 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  greeting: rmc-job-greeting-corporate-dome-cl
+  greeting: rmc-job-greeting-corporate-dome-goon-medic
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorLV624CorporateDomeCL
-  name: special survivor lv624 coporate liaison spawn point
+  id: RMCSpawnPointSurvivorLV624CorporateDomeGoonMedic
+  name: special survivor lv624 goon medic spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorLV624CorporateDomeCL
+    job_id: CMSurvivorLV624CorporateDomeGoonMedic
   - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
@@ -42,10 +42,10 @@
       state: surv_wy
 
 - type: playTimeTracker
-  id: CMJobSurvivorLV624CorporateDomeCL
+  id: CMJobSurvivorLV624CorporateDomeGoonMedic
   isHumanoid: true
 
 - type: entity
-  parent: RMCSurvivorPresetCorporate
-  id: RMCGearSurvivorPresetLV624CorporateDomeCL
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetLV624CorporateDomeGoonMedic
   name: lv624 colonist preset
