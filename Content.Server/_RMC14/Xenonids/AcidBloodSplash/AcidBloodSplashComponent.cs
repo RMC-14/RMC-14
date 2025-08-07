@@ -72,7 +72,7 @@ public sealed partial class AcidBloodSplashComponent : Component
     public float DamageSplashGibMultiplier = 0.5f;
 
     [DataField]
-    public TimeSpan SplashCooldown = TimeSpan.FromSeconds(5);
+    public TimeSpan SplashCooldown = TimeSpan.FromSeconds(3);
 
     [DataField, AutoPausedField]
     public TimeSpan NextSplashAvailable;
