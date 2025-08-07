@@ -54,7 +54,7 @@ While this is the most ergonomic communications system, it only works on the Alm
 To make sure your message went through, check that it appeared both in the channel color, and in the [color=#808080][italic]whisper color.[/italic][/color] 
 Keep in mind that if you hold down a movement key before focusing the chat window, you'll keep moving in that direction as long as you don't release it.
 
-Listening to every channel can get overwhelming if you are in a command position. For your first game, you may consider using [color=#ffff00][bold][keybind=UseSecondary][/bold][/color] on your headset and selecting [bold][italic]Tune Radio[/italic][/bold]. This will allow you to mute channels individually. Try to listen to more channels each round as you get the hang of reading quickly.
+Listening to every channel can get overwhelming if you are in a command position. For your first game, you may consider using [color=#ffff00][bold][keybind="UIRightClick"][/bold][/color] on your headset and selecting [bold][italic]Tune Radio[/italic][/bold]. This will allow you to mute channels individually. Try to listen to more channels each round as you get the hang of reading quickly.
 
 
 ###The Telephone System
@@ -102,7 +102,7 @@ They are able to access the tactical map, and make announcements that work regar
 
 Overwatch Consoles open a status window, enabling you to make announcements to their specific squad by clicking the [bold]Message Squad[/bold] button, and read the status of all marines in that squad. This message is displayed in [color=#3399ff][bold]Blue[/bold][/color] and plays a morse code sound. This message has no cooldown. 
 It is intended to remind marines to stick to their assigned leaders, and to communicate important information like Queen or Tier 3 locations, or the locations of other squads.
-It also allows Overwatch to see through the eyes of any squad member with a camera(but not read any messages they send or receive), allowing for unidirectional communication in the other direction. 
+It also allows Overwatch to see through the eyes of any squad member with a camera (but not read any messages they send or receive), allowing for unidirectional communication in the other direction. 
 
 The Groundside Operations Console makes announcements (consisting of a loud, booming sound and the message, colored [color=#ff0000][bold]RED[/bold][/color] and signed by your name) that are heard by the whole faction, including non-combat personnel and FORECON (but not Survivors). This is generally done by the [color=#009900][bold]Commander[/bold][/color] or [color=#99ff66][bold]Duty Officer[/bold][/color]. This operates on a short cooldown. 
 
@@ -143,13 +143,13 @@ At the start of the operation, it's a good idea to inform CIC of the type of opp
 	<GuideEntityEmbed Entity="RMCLaserDesignator" Caption="Laser Designator"/>
 </Box>
 
-The rest of the Leaders' communications duties is acting as a liason with the support departments. 
+The rest of the Leaders' communications duties consist of acting as a liason with the support departments. 
 
-Use your laser designator in rangefinder mode, by hitting [color=#ffff00][bold][keybind=AltActivateItemInHand][/bold][/color] or [color=#ffff00][bold][keybind=AltActivateItemInWorld][/bold][/color] on it, to obtain coordinates for supply drops. 
+Use your laser designator in rangefinder mode, by hitting [color=#ffff00][bold][keybind="AltActivateItemInHand"][/bold][/color] or [color=#ffff00][bold][keybind="AltActivateItemInWorld"][/bold][/color] on it, to obtain coordinates for supply drops. 
 Send those to your squad Overwatch, and relay any item requests from your squad to Requisitions using the Req channel ([color=#b17324]:u[/color]), or the Requisitions phone under the Almayer tab. 
 
 Make sure to speak on JTAC ([color=#ad3b98]:j[/color]) when using your laser designator or throwing flares in order to tell the pilot that you need their attention. 
-You may also use the radio to ask Pilots to look at flares for scouting purposes. If using the Designator, attach your CAS ID, which is the first letter of your squad coupled with the LD number (which is found by Examining the LD with [color=#ffff00][bold][keybind="ExamineEntity"][/bold][/color].
+You may also use the radio to ask Pilots to look at flares for scouting purposes. If using the Designator, attach your CAS ID, which is the first letter of your squad coupled with the LD number (which is found by Examining the LD with [color=#ffff00][bold][keybind="ExamineEntity"][/bold][/color]).
 
 
 ###How to communicate as Flight Crew
