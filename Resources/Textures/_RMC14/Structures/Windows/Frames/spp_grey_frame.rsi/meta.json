@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/0afcb527e30cb9d24151005c28f095d704b24c83/icons/turf/walls/upp_grey_windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "uppwall_window_frame0"
+    },
+    {
+      "name": "uppwall_window_frame1"
+    },
+    {
+      "name": "uppwall_window_frame2"
+    },
+    {
+      "name": "uppwall_window_frame3"
+    },
+    {
+      "name": "uppwall_window_frame4"
+    },
+    {
+      "name": "uppwall_window_frame5"
+    },
+    {
+      "name": "uppwall_window_frame6"
+    },
+    {
+      "name": "uppwall_window_frame7"
+    },
+    {
+      "name": "uppwall_window_frame8"
+    },
+    {
+      "name": "uppwall_window_frame9"
+    },
+    {
+      "name": "uppwall_window_frame10"
+    },
+    {
+      "name": "uppwall_window_frame11"
+    },
+    {
+      "name": "uppwall_window_frame12"
+    },
+    {
+      "name": "uppwall_window_frame13"
+    },
+    {
+      "name": "uppwall_window_frame14"
+    },
+    {
+      "name": "uppwall_window_frame15"
+    }
+  ]
+}

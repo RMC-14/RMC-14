@@ -10,4 +10,7 @@ public sealed partial class ChangeItemSizeOnTimerTriggerComponent : Component
 {
     [DataField, AutoNetworkedField]
     public ProtoId<ItemSizePrototype> Size = "Ginormous";
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<ItemSizePrototype>? OriginalSize;
 }

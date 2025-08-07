@@ -20,6 +20,7 @@
       - Bureau
     - type: Skills
       skills:
+        RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2

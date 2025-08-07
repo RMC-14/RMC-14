@@ -1,0 +1,111 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaHF
+  name: Haurchefant
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: base_icon
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFHypersleepStorageA
+  name: Hypersleep Storage
+  components:
+  - type: Sprite
+    state: medical
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFHypersleepGearLockers
+  name: Hypersleep Gear Lockers
+  components:
+  - type: Sprite
+    state: derelictship
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFMessHall
+  name: Mess Hall
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFBathroom
+  name: Bathroom
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFDisposals
+  name: Disposals
+  components:
+  - type: Sprite
+    state: recycling
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFMedical
+  name: Medical
+  components:
+  - type: Sprite
+    state: medical
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFBriefRoom
+  name: Briefing Room
+  components:
+  - type: Sprite
+    state: caves_central
+
+- type: entity
+  parent: RMCAreaHFBriefRoom
+  id: RMCAreaHFCommandDeck
+  name: Force Command Deck
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFPrep
+  name: Force Prep
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaHFPrep
+  id: RMCAreaHFArmoury
+  name: Force Armoury
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFHangar
+  name: Hangar
+  components:
+  - type: Sprite
+    state: lz
+
+- type: entity
+  parent: RMCAreaHF
+  id: RMCAreaHFOOB
+  name: Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    alwaysPowered: true
