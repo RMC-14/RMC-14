@@ -98,9 +98,9 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
         if (TryComp<MobThresholdsComponent>(uid, out var thresholds) && TryComp<DamageableComponent>(uid, out var damageable))
         {
-            var health = damageable.Damage.GetTotal();
+            var damage = damageable.Damage.GetTotal();
             var dead = _thresholds.GetThresholdForState(uid, MobState.Dead, thresholds);
-            gibProbability += (float)(health - dead) * comp.DamageSplashGibMultiplier;
+            gibProbability += (float)(damage - dead) * comp.DamageSplashGibMultiplier;
         }
 
         if (_random.NextFloat() > gibProbability)
