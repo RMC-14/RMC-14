@@ -1,23 +1,22 @@
 - type: job
   parent: CMSurvivorSecurity
-  id: CMSurvivorLV624CorporateDomeGoon
-  name: rmc-job-name-pmc-corporate-goon
+  id: CMSurvivorLV624CorporateDomeGoonEngineer
+  name: rmc-job-name-pmc-corporate-goon-engineer
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624CorporateDomeGoon
-  spawnMenuRoleName: We-Ya Goon (Survivor Special)
+  playTimeTracker: CMJobSurvivorLV624CorporateDomeGoonEngineer
+  spawnMenuRoleName: We-Ya Goon Engineer (Survivor Special)
   startingGear: RMCGearSurvivorGoon
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
         RMCSkillEndurance: 2
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 0 # RMC14
-        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
         RMCSkillVehicles: 1
     - type: RMCSurvivor
     - type: MotionDetectorTracked
@@ -31,11 +30,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorLV624CorporateDomeGoon
-  name: special survivor lv624 goon spawn point
+  id: RMCSpawnPointSurvivorLV624CorporateDomeGoonEngineer
+  name: special survivor lv624 goon engineer spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorLV624CorporateDomeGoon
+    job_id: CMSurvivorLV624CorporateDomeGoonEngineer
   - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
@@ -44,10 +43,10 @@
       state: surv_wy
 
 - type: playTimeTracker
-  id: CMJobSurvivorLV624CorporateDomeGoon
+  id: CMJobSurvivorLV624CorporateDomeGoonEngineer
   isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
-  id: RMCGearSurvivorPresetLV624CorporateDomeGoon
+  id: RMCGearSurvivorPresetLV624CorporateDomeGoonEngineer
   name: lv624 colonist preset

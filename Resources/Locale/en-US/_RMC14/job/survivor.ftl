@@ -97,7 +97,7 @@ rmc-job-greeting-corporate-dome-goon = You are a Corporate Security Officer!
   You are a Corporate Security Officer stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from the Marshals Offices to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
-	
+
 rmc-job-greeting-corporate-dome-goon-lead = You are a Corporate Security Lead!
 
   You are aware of the xenonid threat.
@@ -117,7 +117,7 @@ rmc-job-greeting-corporate-dome-goon-medic = You are a Corporate Security Medic!
   You are a Corporate Security Medic stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from the Medbay to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]	
-	
+
 rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technician!
 
   You are aware of the xenonid threat.
