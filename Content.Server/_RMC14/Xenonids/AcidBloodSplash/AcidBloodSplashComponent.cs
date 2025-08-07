@@ -40,6 +40,12 @@ public sealed partial class AcidBloodSplashComponent : Component
     public float BaseHitProbability = 0.65f;
 
     /// <summary>
+    /// Probability that target will scream after hit
+    /// </summary>
+    [DataField]
+    public float TargetScreamProbability = 0.6f;
+
+    /// <summary>
     /// Substitution of base gib chance
     /// </summary>
     // TODO: remove when xeno can be gibbed

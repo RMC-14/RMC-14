@@ -83,7 +83,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-others", ("target", target)), target, Filter.PvsExcept(target), true, PopupType.SmallCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-self"), target, target, PopupType.MediumCaution);
 
-            if (_random.NextFloat() < 0.6f) // TODO: don't activate when target don't feel pain
+            if (_random.NextFloat() < comp.TargetScreamProbability) // TODO: don't activate when target don't feel pain
                 _emote.TryEmoteWithChat(target, ScreamProto);
         }
     }
