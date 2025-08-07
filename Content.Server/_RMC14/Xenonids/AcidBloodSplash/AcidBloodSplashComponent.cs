@@ -59,7 +59,7 @@ public sealed partial class AcidBloodSplashComponent : Component
     public float DamageProbabilityMultiplier = 0.33f;
 
     /// <summary>
-    /// Substitution of coefficient that increases chance of gib depending on difference of health between dead and crit state
+    /// Substitution of coefficient that increases chance of gib depending on health after death
     /// </summary>
     // TODO: remove when xeno can be gibbed
     [DataField]

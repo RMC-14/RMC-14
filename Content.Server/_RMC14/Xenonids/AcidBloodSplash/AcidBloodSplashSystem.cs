@@ -88,7 +88,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         }
     }
 
-    // TODO: remove when xeno can be gibbed and rewrite depending on new Event
+    // TODO: remove when xeno can be gibbed and rewrite depending on new event
     private void OnDeath(EntityUid uid, AcidBloodSplashComponent comp, ref MobStateChangedEvent args)
     {
         if (args.Component.CurrentState != MobState.Dead || !comp.IsActivateSplashOnGib)
@@ -96,11 +96,11 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
         var gibProbability = comp.BaseGibSplashProbability;
 
-        if (TryComp<MobThresholdsComponent>(uid, out var thresholds))
+        if (TryComp<MobThresholdsComponent>(uid, out var thresholds) && TryComp<DamageableComponent>(uid, out var damageable))
         {
-            var crit = _thresholds.GetThresholdForState(uid, MobState.Critical, thresholds);
+            var health = damageable.Damage.GetTotal();
             var dead = _thresholds.GetThresholdForState(uid, MobState.Dead, thresholds);
-            gibProbability += (float)(dead - crit) * comp.DamageSplashGibMultiplier;
+            gibProbability += (float)(health - dead) * comp.DamageSplashGibMultiplier;
         }
 
         if (_random.NextFloat() > gibProbability)
