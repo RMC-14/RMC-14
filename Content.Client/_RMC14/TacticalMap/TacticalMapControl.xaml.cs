@@ -82,7 +82,7 @@ public sealed partial class TacticalMapControl : TextureRect
     public int LineLimit;
     public bool Drawing { get; set; }
     public bool IsCanvas { get; set; } = false;
-    public LabelMode CurrentLabelMode { get; set; } = LabelMode.Tactical;
+    public LabelMode CurrentLabelMode { get; set; } = LabelMode.Area;
     public bool StraightLineMode { get; set; } = false;
     public bool LabelEditMode { get; set; } = false;
     public Color Color;

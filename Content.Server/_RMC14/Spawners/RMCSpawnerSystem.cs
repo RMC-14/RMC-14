@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Events;
 using Content.Server.Humanoid.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -125,6 +126,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         _corpseSpawners.Clear();
 
         var roundDuration = _gameTicker.RoundDuration();
+
         var timedQuery = EntityQueryEnumerator<TimedDespawnOnLandingComponent>();
         while (timedQuery.MoveNext(out var uid, out var comp))
         {

@@ -43,6 +43,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
     private const string SquadTrackerCategory = "SquadTracker";
     private const string SquadLeaderMode = "SquadLeader";
+    private const string FireteamLeader = "FireteamLeader";
 
     public override void Initialize()
     {
@@ -138,9 +139,6 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
     private void OnRemove(Entity<SquadLeaderTrackerComponent> ent, ref ComponentRemove args)
     {
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
-
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
@@ -294,7 +292,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         var netMember = GetNetEntity(marineId.Value);
         var job = _originalRoleQuery.CompOrNull(marineId.Value)?.Job;
-        var marine = new SquadLeaderTrackerMarine(netMember, job, Name(marineId.Value));
+        var marine = new SquadLeaderTrackerMarine(netMember, job, _rank.GetSpeakerRankName(marineId.Value) ?? Name(marineId.Value));
         ref var fireteam = ref ent.Comp.Fireteams.Fireteams[member.Fireteam];
         fireteam ??= new SquadLeaderTrackerFireteam();
 
@@ -400,7 +398,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     {
         var netMember = GetNetEntity(member);
         var job = _originalRoleQuery.CompOrNull(member)?.Job;
-        var marine = new SquadLeaderTrackerMarine(netMember, job, Name(member));
+        var marine = new SquadLeaderTrackerMarine(netMember, job, _rank.GetSpeakerRankName(member) ?? Name(member));
         if (_fireteamMemberQuery.TryComp(member, out var fireteamMember) &&
             fireteamMember.Fireteam >= 0 &&
             fireteamMember.Fireteam < fireteamData.Fireteams.Length)
@@ -459,9 +457,6 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     private void UpdateDirection(Entity<SquadLeaderTrackerComponent> ent, MapCoordinates? coordinates = null, string squad = "")
     {
         _alerts.ClearAlertCategory(ent, SquadTrackerCategory);
-
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
 
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
@@ -564,8 +559,8 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             return;
 
         _squadLeaders.Clear();
-        var squadLeaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
-        while (squadLeaders.MoveNext(out var uid, out _, out var member))
+        var squadLeaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent, RMCTrackableComponent>();
+        while (squadLeaders.MoveNext(out var uid, out _, out var member, out _))
         {
             if (member.Squad is not { } squad)
                 continue;
@@ -617,7 +612,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
             if (_squadMemberQuery.TryComp(uid, out var squadMember) && squadMember.Squad is { } squad)
             {
-                if (_fireteamMemberQuery.TryComp(uid, out var fireteamMember) && tracker.Mode == SquadLeaderMode)
+                if (_fireteamMemberQuery.TryComp(uid, out var fireteamMember) && tracker.Mode == FireteamLeader)
                 {
                     var fireteamIndex = fireteamMember.Fireteam;
                     if (fireteamIndex >= 0 &&

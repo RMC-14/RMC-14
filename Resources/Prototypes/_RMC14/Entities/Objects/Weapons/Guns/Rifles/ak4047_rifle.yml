@@ -31,9 +31,9 @@
     - Burst
     - FullAuto
     recoilUnwielded: 4
-    scatterWielded: 3
-    scatterUnwielded: 10
-    baseFireRate: 2.5
+    scatterWielded: 4
+    scatterUnwielded: 11
+    baseFireRate: 4
     burstScatterMult: 1
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.3
@@ -92,10 +92,10 @@
           - RMCAttachmentFlamer
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.84, 0.00
-      rmc-aslot-rail: 0, 0.09
-      rmc-aslot-stock: -0.65, -0.09
-      rmc-aslot-underbarrel: 0.2, -0.313
+      rmc-aslot-barrel: 0.84, 0
+      rmc-aslot-rail: 0, 0.1
+      rmc-aslot-stock: -0.65, 0
+      rmc-aslot-underbarrel: 0.3, -0.283
   - type: Tag
     tags:
     - RMCWeaponRifleAK4047

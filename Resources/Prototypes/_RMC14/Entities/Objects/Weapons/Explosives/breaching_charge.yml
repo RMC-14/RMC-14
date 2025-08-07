@@ -41,6 +41,23 @@
   - type: Tag
     tags:
     - RMCExplosiveBreachingCharge
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 1
+
+- type: entity
+  parent: RMCExplosiveBreachingCharge
+  id: RMCExplosiveBreachingChargeRubber
+  name: X17 riot charge
+  description: An explosive device used to break into areas while protecting the user from the blast. Unlike the standard breaching charge, the X17 deploys a cone spray of rubber pellets to incapacitate rather than kill.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Explosives/satchel_charge_rubber.rsi
+    state: icon
+    layers:
+    - state: icon
+      map: ["base"]
+  # TODO Shrapnel volume 20
 
 - type: entity
   parent: RMCExplosiveBreachingCharge

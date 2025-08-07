@@ -13,8 +13,26 @@ public sealed partial class RoofingEntityComponent : Component
     public bool CanCAS;
 
     [DataField, AutoNetworkedField]
-    public bool CanMortar;
+    public bool CanMortarPlace;
+
+    [DataField, AutoNetworkedField]
+    public bool CanMortarFire;
 
     [DataField, AutoNetworkedField]
     public bool CanOrbitalBombard;
+
+    [DataField, AutoNetworkedField]
+    public bool CanMedevac;
+
+    [DataField, AutoNetworkedField]
+    public bool CanFulton;
+
+    [DataField, AutoNetworkedField]
+    public bool CanSupplyDrop;
+
+    [DataField, AutoNetworkedField]
+    public bool CanLase;
+
+    [DataField, AutoNetworkedField]
+    public bool CanParadrop;
 }

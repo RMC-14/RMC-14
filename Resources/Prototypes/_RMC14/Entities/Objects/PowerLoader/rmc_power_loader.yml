@@ -76,6 +76,7 @@
   name: power loader # TODO RMC14 name
   description: An old but trusted design used in warehouses, constructions and military ships everywhere. # TODO RMC14 description
   components:
+  - type: RMCAllowStrapMovement
   - type: PowerLoader
     skills:
       all:
