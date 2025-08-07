@@ -86,7 +86,7 @@
   parent: RMCStockAttachmentCollapsibleBase
   id: RMCAttachmentM42A2CollapsibleStock
   name: M42A2 collapsible stock
-  description: A wire stock for the M42A2 , used to help with recoil control.
+  description: A wire stock for the M42A2, used to help with recoil control.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/desert.rsi
