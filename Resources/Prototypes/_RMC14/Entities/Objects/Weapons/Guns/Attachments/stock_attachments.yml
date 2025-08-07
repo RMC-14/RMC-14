@@ -96,7 +96,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentM42A2WoodenStock
+    - RMCAttachmentM42A2CollapsibleStock
   - type: Appearance
   - type: AttachableToggleable
     doAfterBreakOnMove: false
@@ -1054,7 +1054,7 @@
   id: RMCAttachmentM42A1WoodenStock
 
 - type: Tag
-  id: RMCAttachmentM42A2WoodenStock
+  id: RMCAttachmentM42A2CollapsibleStock
 
 - type: Tag
   id: RMCXM51StockBurst
