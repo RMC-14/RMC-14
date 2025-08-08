@@ -735,11 +735,29 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     }
                 }
 
+                bool HasValidSurvivorCandidates()
+                {
+                    // Check that there are still valid candidates left
+                    foreach (var (_, otherPlayersLists) in survivorCandidates)
+                    {
+                        foreach (var otherPlayers in otherPlayersLists)
+                        {
+                            if (otherPlayers.Count > 0)
+                                return true;
+                        }
+                    }
+
+                    return false;
+                }
+
                 var selectedSurvivors = 0;
                 for (var prio = priorities - 1; prio >= 0; prio--)
                 {
-                    for (var i = 0; i < totalSurvivors; i++)
+                    while (selectedSurvivors < totalSurvivors)
                     {
+                        if (!HasValidSurvivorCandidates())
+                            break;
+
                         if (selectedSurvivors >= totalSurvivors)
                             break;
 
