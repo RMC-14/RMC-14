@@ -354,8 +354,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destCoords = destCoords.Offset(-physics.LocalCenter);
         }
 
-        destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
-
         _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
         if (hijack)
