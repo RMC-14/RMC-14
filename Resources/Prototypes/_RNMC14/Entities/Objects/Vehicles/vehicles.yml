@@ -14,10 +14,10 @@
     layers:
     - map: ["movement"]
       state: speed-buggy
-      sprite: _RNMC14/Objects/speed_buggy.rsi
+      sprite: _RNMC14/Objects/Vehicles/speed_buggy.rsi
     - map: ["light"] # Somehow, it doesn't show up when an user turns on the light.
       state: light-speed-buggy
-      sprite: _RNMC14/Objects/speed_buggy.rsi
+      sprite: _RNMC14/Objects/Vehicles/speed_buggy.rsi
       shader: unshaded
       visible: false
   - type: SpriteMovement
