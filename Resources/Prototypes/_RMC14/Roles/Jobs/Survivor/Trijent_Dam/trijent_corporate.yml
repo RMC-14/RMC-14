@@ -1,0 +1,54 @@
+﻿- type: job
+  parent: CMSurvivorCorporate
+  id: CMSurvivorTrijentCorporate
+  name: cm-job-name-survivor-trijent-corporate
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorTrijentCorporate
+  spawnMenuRoleName: Trijent Corporation Liaison (Trijent Survivor)
+  startingGear: RMCGearSurvivorTrijentCorporate
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetTrijentCorporate
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorTrijentCorporate
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonIvy
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrijentCorporate
+  name: survivor trijent liaison spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorTrijentCorporate
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCorporate
+  id: RMCGearSurvivorPresetTrijentCorporate
+  name: trijent liaison preset
+  categories: [ HideSpawnMenu ]

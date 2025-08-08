@@ -30,6 +30,10 @@ rmc-playtime-tracker-job-name-survivor-military = Military Survivor
 rmc-playtime-tracker-job-name-survivor-co = Survivor CO
 rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
 
+cm-job-name-survivor-trucker = Trucker Colonist
+
+cm-job-name-survivor-scientist = Scientist Colonist
+
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
 
@@ -140,6 +144,9 @@ CMJobSurvivorHybrisaXenoarchaeologist = Xenoarchaeologist
 rmc-job-name-survivor-xenobiologist = Xenobiologist
 CMJobSurvivorHybrisaXenobiologist = Xenobiologist
 
+rmc-job-name-survivor-pizza-galaxy = Civilian - Pizza Galaxy Delivery Driver
+CMJobSurvivorHybrisaPizzaGalaxy = Civilian - Pizza Galaxy Delivery Driver
+
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
 
 rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
@@ -169,3 +176,21 @@ rmc-job-prefix-fire-protection-specialist = FPPB
 rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
+
+# Trijent survs
+
+rmc-job-name-survivor-trijent-chaplain = Trijent Dam Chaplain
+
+rmc-job-name-survivor-trijent-goon = Trijent Dam Security
+
+cm-job-name-survivor-trijent-doctor = Trijent Dam Doctor
+
+cm-job-name-survivor-trijent-researcher = Trijent Dam Researcher
+
+cm-job-name-survivor-trijent-trucker = Trijent Dam Heavy Vehicle Operator
+
+cm-job-name-survivor-trijent-engi-hydro = Hydro Electric Engineer
+
+cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
+
+cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison

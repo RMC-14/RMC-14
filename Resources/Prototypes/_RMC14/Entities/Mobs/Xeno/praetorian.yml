@@ -220,6 +220,7 @@
     - type: RMCRooted
   - type: XenoHighGallop
   - type: XenoHidden
+  - type: AcidTrap
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -242,7 +243,6 @@
     name: rmc-xeno-dancer-name
     description: rmc-xeno-dancer-description
     popup: rmc-xeno-dancer-popup
-  - type: AcidTrap
   - type: CMArmor
     xenoArmor: 20
   - type: XenoClaws

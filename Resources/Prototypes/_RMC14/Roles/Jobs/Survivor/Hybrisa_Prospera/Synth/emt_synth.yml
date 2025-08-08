@@ -105,7 +105,7 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
-    - [ RMCArmorParamedicGreen, RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCCoatParamedicGreen, RMCJumpsuitEMTGreen, CMHandsLatex ]
     - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
-    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCArmorHelmetParamedic, RMCBeltMedicalDefibAnalyzerFilled, RMCHandsCombat ]
+    - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCArmorHelmetParamedic, RMCBeltMedicalDefibAnalyzerFilled, RMCHandsCombat ]
