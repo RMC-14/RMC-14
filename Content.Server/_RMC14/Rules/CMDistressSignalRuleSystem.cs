@@ -735,12 +735,44 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     }
                 }
 
+                bool HasValidSurvivorCandidates()
+                {
+                    // Check that there are still valid candidates left
+                    foreach (var (_, playerList) in survivorCandidates)
+                    {
+                        foreach (var players in playerList)
+                        {
+                            if (players.Count > 0)
+                                return true;
+                        }
+                    }
+
+                    return false;
+                }
+
+                bool HasValidPrioritySurvivorCandidates(int priority)
+                {
+                    // Check that there are still valid candidates left, with a certain priority
+                    foreach (var (_, playerList) in survivorCandidates)
+                    {
+                        var list = playerList[priority];
+
+                        if (list.Count > 0)
+                            return true;
+                    }
+
+                    return false;
+                }
+
                 var selectedSurvivors = 0;
                 for (var prio = priorities - 1; prio >= 0; prio--)
                 {
-                    for (var i = 0; i < totalSurvivors; i++)
+                    while (selectedSurvivors < totalSurvivors)
                     {
-                        if (selectedSurvivors >= totalSurvivors)
+                        if (!HasValidSurvivorCandidates())
+                            break;
+
+                        if (!HasValidPrioritySurvivorCandidates(prio))
                             break;
 
                         if (survivorCandidates.Count <= 0)
