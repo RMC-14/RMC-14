@@ -772,13 +772,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         if (!HasValidSurvivorCandidates())
                             break;
 
-                        if (selectedSurvivors >= totalSurvivors)
+                        if (!HasValidPrioritySurvivorCandidates(prio))
                             break;
 
                         if (survivorCandidates.Count <= 0)
-                            break;
-
-                        if (!HasValidPrioritySurvivorCandidates(prio))
                             break;
 
                         var (job, players) = _random.Pick(survivorCandidates);
