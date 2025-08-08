@@ -38,3 +38,7 @@
     - state: abed
   - type: VehicleExit
   - type: Vehicle
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static

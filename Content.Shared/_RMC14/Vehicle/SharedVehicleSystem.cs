@@ -162,8 +162,10 @@ public abstract class SharedVehicleSystem : EntitySystem
     }
     private void OnUnstrapped(Entity<VehicleDriverSeatComponent> ent, ref UnstrappedEvent args)
     {
-        // args.Buckle component is connected to the player entity.
-        // Unwatch(); // TODO: Get the paramenters for the Unwatch.
+        if (_net.IsClient && args.Buckle.Owner == _player.LocalEntity && _player.LocalSession != null)
+            Unwatch(args.Buckle.Owner, _player.LocalSession);
+        else if (TryComp(args.Buckle.Owner, out ActorComponent? actor))
+            Unwatch(args.Buckle.Owner, actor.PlayerSession);
     }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<VehicleComponent?> toWatch) {}
