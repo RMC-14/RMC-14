@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added lightning effects when it rains.
-    type: Add
-  - message: Fixed rmclight command for ambient lighting changes.
-    type: Fix
-  id: 1677
-  time: '2025-05-04T08:30:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6337
 - author: noctyrnal
   changes:
   - message: Added Long Messy, Pulato Long, Pulato Long 2 and Ponytail 9 hairs.
@@ -4619,5 +4610,12 @@
   id: 2177
   time: '2025-08-08T22:33:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7421
+- author: snebl
+  changes:
+  - message: Normandy walls are no longer all named "alamo wall".
+    type: Fix
+  id: 2178
+  time: '2025-08-08T22:34:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7417
 Name: RMC14
 Order: -1
