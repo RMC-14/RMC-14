@@ -525,7 +525,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateMoveLabel(args.OldPosition, args.NewPosition, true, false, user);
     }
 
-    private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
+    private enum LabelOperation
+    {
+        Create,
+        Edit,
+        Delete
+    }
+
+        private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
     {
         var user = args.Actor;
         HandleQueenEyeMove(user, args.Position);
@@ -564,13 +571,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _ui.TryOpenUi(computer.Owner, TacticalMapComputerUi.Key, user);
         UpdateMapData((computer, computer.Comp));
         UpdateTacticalMapComputerState((computer.Owner, computer.Comp));
-    }
-
-    private enum LabelOperation
-    {
-        Create,
-        Edit,
-        Delete
     }
 
     private void UpdateIndividualLabel(Vector2i position, string text, bool marine, bool xeno, EntityUid user, LabelOperation operation)
