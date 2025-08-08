@@ -6,6 +6,7 @@ using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -45,6 +46,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
     private EntityQuery<MarineMapTrackedComponent> _marineMapTrackedQuery;
@@ -767,7 +769,7 @@ public override void Initialize()
         }
 
         var status = TacticalMapBlipStatus.Alive;
-        if (_rottingQuery.HasComp(ent))
+        if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
             status = TacticalMapBlipStatus.Undefibabble;
         else if (_mobState.IsDead(ent))
             status = TacticalMapBlipStatus.Defibabble;
