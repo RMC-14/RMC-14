@@ -725,6 +725,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void UpdateSquadBackground(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
+        //Don't get job background if we have a squad, and if we do and it doesn't have it's own background
+        //Still don't apply it
         if (!_squad.TryGetMemberSquad(tracked.Owner, out var squad))
             return;
 
