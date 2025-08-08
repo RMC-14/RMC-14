@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Rules;
 using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
@@ -35,6 +36,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -65,7 +67,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private TimeSpan _announceCooldown;
     private TimeSpan _mapUpdateEvery;
 
-public override void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
 
@@ -126,6 +128,7 @@ public override void Initialize()
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
             subs =>
             {
+                subs.Event<BoundUIOpenedEvent>(OnComputerBUIOpened);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
             });
 
@@ -257,7 +260,7 @@ public override void Initialize()
             else
                 ent.Comp.Color = squad.Color;
         }
-        else if (ent.Comp.Background != null) // If we lose a squad update icon to refresh background if needed
+        else if (ent.Comp.Background != null)
             UpdateIcon(ent);
     }
 
@@ -316,6 +319,26 @@ public override void Initialize()
     private void OnUserBUIOpened(Entity<TacticalMapUserComponent> ent, ref BoundUIOpenedEvent args)
     {
         EnsureComp<ActiveTacticalMapUserComponent>(ent);
+        UpdateTacticalMapState(ent);
+    }
+
+    private void OnComputerBUIOpened(Entity<TacticalMapComputerComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        UpdateTacticalMapComputerState(ent);
+    }
+
+    private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
+    {
+        var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        var state = new TacticalMapBuiState(mapName);
+        _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
+    }
+
+    private void UpdateTacticalMapComputerState(Entity<TacticalMapComputerComponent> computer)
+    {
+        var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        var state = new TacticalMapBuiState(mapName);
+        _ui.SetUiState(computer.Owner, TacticalMapComputerUi.Key, state);
     }
 
     private void OnUserBUIClosed(Entity<TacticalMapUserComponent> ent, ref BoundUIClosedEvent args)
@@ -502,6 +525,47 @@ public override void Initialize()
         UpdateMoveLabel(args.OldPosition, args.NewPosition, true, false, user);
     }
 
+    private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
+    {
+        var user = args.Actor;
+        HandleQueenEyeMove(user, args.Position);
+    }
+
+    private void HandleQueenEyeMove(EntityUid user, Vector2i position)
+    {
+        if (!TryComp<QueenEyeActionComponent>(user, out var queenEyeComp) ||
+            queenEyeComp.Eye == null)
+            return;
+
+        var eye = queenEyeComp.Eye.Value;
+
+        if (!TryGetTacticalMap(out var map) ||
+            !TryComp<MapGridComponent>(map.Owner, out var grid))
+            return;
+
+        var queenTransform = Transform(user);
+        var eyeTransform = Transform(eye);
+        var mapTransform = Transform(map.Owner);
+
+        if (queenTransform.MapID != mapTransform.MapID)
+            return;
+
+        var tileCoords = new Vector2(position.X, position.Y);
+        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
+
+        _transform.SetWorldPosition(eye, worldPos.Position);
+    }
+
+    public void OpenComputerMap(Entity<TacticalMapComputerComponent?> computer, EntityUid user)
+    {
+        if (!Resolve(computer, ref computer.Comp, false))
+            return;
+
+        _ui.TryOpenUi(computer.Owner, TacticalMapComputerUi.Key, user);
+        UpdateMapData((computer, computer.Comp));
+        UpdateTacticalMapComputerState((computer.Owner, computer.Comp));
+    }
+
     private enum LabelOperation
     {
         Create,
@@ -605,37 +669,6 @@ public override void Initialize()
         return false;
     }
 
-    private void OnUserQueenEyeMoveMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
-    {
-        var user = args.Actor;
-        HandleQueenEyeMove(user, args.Position);
-    }
-
-    private void HandleQueenEyeMove(EntityUid user, Vector2i position)
-    {
-        if (!TryComp<QueenEyeActionComponent>(user, out var queenEyeComp) ||
-            queenEyeComp.Eye == null)
-            return;
-
-        var eye = queenEyeComp.Eye.Value;
-
-        if (!TryGetTacticalMap(out var map) ||
-            !TryComp<MapGridComponent>(map.Owner, out var grid))
-            return;
-
-        var queenTransform = Transform(user);
-        var eyeTransform = Transform(eye);
-        var mapTransform = Transform(map.Owner);
-
-        if (queenTransform.MapID != mapTransform.MapID)
-            return;
-
-        var tileCoords = new Vector2(position.X, position.Y);
-        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
-
-        _transform.SetWorldPosition(eye, worldPos.Position);
-    }
-
     private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked, MobState mobState)
     {
         if (!tracked.Comp.TrackDead && mobState == MobState.Dead)
@@ -692,8 +725,6 @@ public override void Initialize()
 
     private void UpdateSquadBackground(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
-        //Don't get job background if we have a squad, and if we do and it doesn't have it's own background
-        //Still don't apply it
         if (!_squad.TryGetMemberSquad(tracked.Owner, out var squad))
             return;
 
