@@ -254,8 +254,6 @@ public sealed class TacticalMapSettingsManager
             {
                 writer.WriteLine("  - \"" + unsetKey + "\"");
             }
-
-            _logger.Debug($"Saved tactical map settings with {modifiedSettings.Count()} modified settings");
         }
         catch (Exception ex)
         {
@@ -277,8 +275,6 @@ public sealed class TacticalMapSettingsManager
 
     public TacticalMapSettings LoadSettings(string? planetId = null)
     {
-        _logger.Debug($"Loading settings for planet: {planetId ?? "global"}");
-
         var settings = new TacticalMapSettings
         {
             ZoomFactor = GetSettingValue<float>("ZoomFactor", planetId, 1.0f),
@@ -301,8 +297,6 @@ public sealed class TacticalMapSettingsManager
             )
         };
 
-        _logger.Debug($"Loaded settings for planet {planetId ?? "global"}: Zoom={settings.ZoomFactor}, BlipSize={settings.BlipSizeMultiplier}");
-
         if (!string.IsNullOrEmpty(planetId))
         {
             CopyGlobalSettingsToMapIfNeeded(planetId);
@@ -317,8 +311,6 @@ public sealed class TacticalMapSettingsManager
 
         if (!hasMapSpecificSettings)
         {
-            _logger.Debug($"No planet-specific settings found for planet {planetId}, copying global settings");
-
             var globalSettings = _currentSettings.Where(kvp => !kvp.Key.Contains("_")).ToList();
             foreach (var (key, setting) in globalSettings)
             {
@@ -342,11 +334,8 @@ public sealed class TacticalMapSettingsManager
     {
         var settingKey = GetSettingKey(key, planetId);
 
-        _logger.Debug($"Getting setting {key} for planet {planetId ?? "global"} (key: {settingKey})");
-
         if (_currentSettings.TryGetValue(settingKey, out var setting))
         {
-            _logger.Debug($"Found planet-specific setting: {setting.Value}");
             if (setting.Value is T typedValue)
                 return typedValue;
         }
@@ -356,13 +345,11 @@ public sealed class TacticalMapSettingsManager
             var globalKey = GetSettingKey(key, null);
             if (_currentSettings.TryGetValue(globalKey, out var globalSetting))
             {
-                _logger.Debug($"Using global fallback setting: {globalSetting.Value}");
                 if (globalSetting.Value is T typedValue)
                     return typedValue;
             }
         }
 
-        _logger.Debug($"Using default value: {defaultValue}");
         return defaultValue;
     }
 
@@ -383,8 +370,6 @@ public sealed class TacticalMapSettingsManager
         {
             _modifiedSettings.Add(settingKey);
         }
-
-        _logger.Debug($"Set setting {key} = {value} for planet {planetId ?? "global"} (key: {settingKey})");
     }
 
     public void SaveSettings(TacticalMapSettings settings, string? planetId = null)
