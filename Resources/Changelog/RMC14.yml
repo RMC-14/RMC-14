@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed HIRR baton slugs having their acid removed from them when fired.
-    type: Fix
-  id: 1675
-  time: '2025-05-04T08:05:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6267
 - author: Ian321
   changes:
   - message: The Corporate Liaison now slowly gains vendor points over time.
@@ -4621,5 +4614,12 @@
   id: 2175
   time: '2025-08-06T06:04:48.602958+00:00'
   url: null
+- author: J C Denton
+  changes:
+  - message: Fixed a variant of ICB CL not having an icon.
+    type: Fix
+  id: 2176
+  time: '2025-08-08T22:31:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7394
 Name: RMC14
 Order: -1
