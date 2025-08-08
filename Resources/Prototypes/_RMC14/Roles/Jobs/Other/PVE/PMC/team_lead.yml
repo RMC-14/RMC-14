@@ -35,6 +35,7 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
+    - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
   hidden: true
