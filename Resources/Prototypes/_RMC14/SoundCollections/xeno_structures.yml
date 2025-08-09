@@ -4,3 +4,9 @@
     - /Audio/_RMC14/Xeno/alien_resin_build1.ogg
     - /Audio/_RMC14/Xeno/alien_resin_build2.ogg
     - /Audio/_RMC14/Xeno/alien_resin_build3.ogg
+
+- type: soundCollection
+  id: RMCXenoPry
+  files:
+    - /Audio/_RMC14/Xeno/alien_doorpry1.ogg
+    - /Audio/_RMC14/Xeno/alien_doorpry2.ogg
