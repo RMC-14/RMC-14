@@ -21,6 +21,7 @@ public enum DropshipTerminalWeaponsScreen
     Medevac,
     Fulton,
     Paradrop,
+    TacMap,
 }
 
 [Serializable, NetSerializable]
