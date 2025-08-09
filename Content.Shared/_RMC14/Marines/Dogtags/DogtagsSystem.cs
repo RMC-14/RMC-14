@@ -16,6 +16,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Coordinates;
+using Content.Shared._RMC14.Medical.Unrevivable;
 
 namespace Content.Shared._RMC14.Marines.Dogtags;
 
@@ -30,6 +31,7 @@ public sealed class DogtagsSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
     readonly EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillPolice";
     readonly int SkillRequired = 2;
@@ -128,16 +130,16 @@ public sealed class DogtagsSystem : EntitySystem
             return false;
         }
 
-        if (!_rotting.IsRotten(wearer) &&
-            !HasComp<CMDefibrillatorBlockedComponent>(wearer) &&
-            !HasComp<VictimBurstComponent>(wearer) &&
-            !_skills.HasSkill(taker, Skill, SkillRequired))
+        if (_rotting.IsRotten(wearer) ||
+            _unrevivableSystem.IsUnrevivable(wearer) ||
+            HasComp<CMDefibrillatorBlockedComponent>(wearer) ||
+            _skills.HasSkill(taker, Skill, SkillRequired))
         {
-            reason = Loc.GetString("rmc-dogtags-can-be-saved");
-            return false;
+            return true;
         }
 
-        return true;
+        reason = Loc.GetString("rmc-dogtags-can-be-saved");
+        return false;
     }
 
     private void OnGetVerbTags(Entity<TakeableTagsComponent> tags, ref GetVerbsEvent<EquipmentVerb> args)
