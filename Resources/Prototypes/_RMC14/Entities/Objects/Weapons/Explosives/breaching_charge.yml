@@ -58,9 +58,6 @@
     - state: icon
       map: ["base"]
   # TODO Shrapnel volume 20
-  - type: RequiresSkill
-    skills:
-      RMCSkillPolice: 1
 
 - type: entity
   parent: RMCExplosiveBreachingCharge

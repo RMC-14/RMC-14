@@ -83,6 +83,12 @@
     setDamage:
       types:
         Blunt: 40
+  - type: Tag
+    tags:
+    - RMCSentry
+
+- type: Tag
+  id: RMCSentry
 
 - type: entity
   parent: RMCSentry
@@ -377,7 +383,7 @@
   parent: RMCSentry
   id: RMCSentryMiniFire
   name: UN 45-FM mini sentry
-  description: The Mini Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't. 
+  description: The Mini Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UN 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
   components:
   - type: RMCFireProjectile
   - type: Sprite

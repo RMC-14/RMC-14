@@ -49,6 +49,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -64,6 +65,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     weatherEnabled: false
@@ -82,6 +84,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     weatherEnabled: false
@@ -144,6 +147,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false

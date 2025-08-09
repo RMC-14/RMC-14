@@ -85,3 +85,24 @@
     id: RMCSurveillanceCameraAlmayer
   - type: WallMount
     arc: 360
+
+- type: entity
+  parent: MarkerBase
+  id: RMCMonitorCameraLandingZone
+  name: Landing zone camera
+  suffix: "Landing Zone"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/camera.rsi
+    layers:
+    - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
+      state: camera
+      cycle: true
+    state: camera
+    cycle: true
+  - type: Eye
+    zoom: 0.9, 0.9
+    pvsScale: 1.5
+    drawFov: false
+  - type: FTLSmashImmune
+  - type: NoFTL

@@ -10,18 +10,28 @@
   - type: Sprite
     layers:
     - state: supply_box
-      color: "#887b67"
+      color: "#767b56"
     - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#b2bdc4"
     - state: supply_box_powercell
-      color: "#e0d5c2"
+      color: "#767b56"
+    - state: supply_box_powercell_colour
+      color: "#8df06f"
     - state: supply_lid_closed
       map: [ "lid" ]
-      color: "#887b67"
+      color: "#767b56"
   - type: CMItemSlots
     count: 8
     slot:
       whitelist:
         tags:
         - RMCPowerCellHigh
+
+- type: entity
+  parent: RMCBoxMagazinePowerCellsHigh
+  id: RMCBoxMagazinePowerCellsHighFilled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCPowerCellHigh
