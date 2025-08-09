@@ -1,0 +1,41 @@
+- type: entity
+  id: RugTigerBengal
+  parent: RMCCarpetBaseNonIconsmooth
+  name: bengal tiger rug
+  description: A luxurious rug made from the hide of a majestic bengal tiger.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/bengal.rsi
+    state: full
+    noRot: true
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/bengal.rsi
+  - type: Clickable
+
+- type: entity
+  id: RugTigerWhite
+  parent: RMCCarpetBaseNonIconsmooth
+  name: white tiger rug
+  description: A rare and pristine white tiger rug, both beautiful and controversial.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/white_bengal.rsi
+    state: full
+    noRot: true
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/white_bengal.rsi
+  - type: Clickable
+
+- type: entity
+  id: RugTigerGray
+  parent: RMCCarpetBaseNonIconsmooth
+  name: gray tiger rug
+  description: A subdued gray tiger rug, ideal for minimalist exotic décor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/gray_bengal.rsi
+    state: full
+    noRot: true
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/gray_bengal.rsi
+  - type: Clickable
