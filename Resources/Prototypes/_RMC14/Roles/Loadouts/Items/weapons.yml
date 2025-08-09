@@ -5,3 +5,39 @@
   storage:
     back:
     - RMCD18Case
+
+- type: loadout
+  id: CustomM1984RMC
+  cost: 4
+  inhand:
+    - RMCGunCasePistolM1984Custom
+
+- type: loadout
+  id: CustomM44RMC
+  cost: 4
+  inhand:
+    - RMCGunCasePistolM44Custom
+
+- type: loadout
+  id: HG45AguilaCaseRMC
+  cost: 4
+  inhand:
+    - RMCGunCasePistolHG45Aguila
+
+- type: loadout
+  id: HG45MarinaCaseRMC
+  cost: 4
+  inhand:
+    - RMCGunCasePistolHG45Marina
+
+- type: loadout
+  id: T73CaseRMC
+  cost: 4
+  inhand:
+    - RMCGunCasePistolT73
+
+- type: loadout
+  id: ZHNK72CaseRMC
+  cost: 4
+  inhand:
+    - RMCGunCasePistolZHNK72
