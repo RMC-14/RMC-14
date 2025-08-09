@@ -29,6 +29,7 @@
   overwatchSortPriority: -5
   overwatchRoleName: Fire Team Leaders
   roleWeight: 1
+  displayWeight: 5
   special:
   - !type:AddComponentSpecial
     components:
