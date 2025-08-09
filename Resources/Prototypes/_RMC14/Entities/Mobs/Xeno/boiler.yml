@@ -105,6 +105,8 @@
     chance: 0.25
     stunMin: 3
     stunMax: 4
+  - type: AcidBloodSplash
+    isActivateSplashOnGib: false
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
