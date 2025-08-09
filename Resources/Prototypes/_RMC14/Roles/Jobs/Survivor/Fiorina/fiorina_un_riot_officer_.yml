@@ -10,7 +10,6 @@
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: Fiorina Riot Officer (Survivor)
-  icon: "CMJobIconMilitaryPolice"
   special:
   - !type:AddComponentSpecial
     components:
