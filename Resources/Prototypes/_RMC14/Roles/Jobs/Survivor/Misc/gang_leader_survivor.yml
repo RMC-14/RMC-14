@@ -15,11 +15,12 @@
         RMCSkillConstruction: 1
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
-        RMCSkillCQC: 2
+        RMCSkillCqc: 2
         RMCSkillFirearms: 1
         RMCSkillLeadership: 1
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetGangLeader
+    - type: MarineOrders
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -30,9 +31,9 @@
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
-  id: RMCGearSurvivorPrisoner
+  id: RMCGearSurvivorGangLeader
   equipment:
-    uniform: RMCJumpsuitOrange
+    jumpsuit: RMCJumpsuitOrange
     back: RMCSatchelCivilianFill
     shoes: RMCShoesOrange
     pocket2: RMCPouchGeneralMedium
@@ -50,7 +51,7 @@
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorPrisoner
+  id: CMJobSurvivorGangLeader
   isHumanoid: true
 
 - type: entity

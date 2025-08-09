@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorISR
   spawnMenuRoleName: Interstellar Sapient-Life Rights Observer (Survivor)
   icon: "RMCJobIconBureauObserver"
+  hasIcon: true
   ranks:
     RMCRankIHROObserver: []
   accessGroups:

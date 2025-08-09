@@ -3,8 +3,8 @@
   id: CMSurvivorFiorinaDoctor
   name: cm-job-name-survivor-fiorina-doctor
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorFiorinaMedicalTechnician
-  startingGear: RMCGearSurvivorFiorinaMedicalTechnician
+  playTimeTracker: CMJobSurvivorFiorinaDoctor
+  startingGear: RMCGearSurvivorFiorinaDoctor
   spawnMenuRoleName: Fiorina Doctor (Fiorina Survivor)
   special:
   - !type:AddComponentSpecial
