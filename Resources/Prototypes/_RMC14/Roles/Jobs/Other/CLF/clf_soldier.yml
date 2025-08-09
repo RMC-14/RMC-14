@@ -19,7 +19,7 @@
       skills:
         RMCSkillFirearms: 1
         RMCSkillMeleeWeapons: 1
-        RMCSkillPolice: 2
+        RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 1
         RMCSkillConstruction: 1
         RMCSkillEngineer: 1
