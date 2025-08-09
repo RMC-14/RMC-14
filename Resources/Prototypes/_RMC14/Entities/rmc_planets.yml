@@ -67,10 +67,10 @@
       - CMSurvivorFiorinaDoctor: 3
       CMSurvivorEngineer:
       - CMSurvivorFiorinaEngineer: 2
-      # CMSurvivorSecurity:
-      #  CMSurvivorPrisoner: 2
-      #  Fiorina Prison Guard: 2
-      #  United Americas Riot Officer: 2
+      CMSurvivorSecurity:
+      - CMSurvivorPrisoner: 2
+      - CMSurvivorFiorinaPrisonGuard: 2
+      - CMSurvivorFiorinaRiotOfficer: 2
       CMSurvivorScientist:
       - CMSurvivorFiorinaResearcher: 2
 

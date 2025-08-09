@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorCMBDeputy
   id: CMSurvivorFiorinaRiotOfficer
-  name: rmc-job-name-survivor-riot-officer
+  name: cm-job-name-survivor-riot-officer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorFiorinaRiotOfficer
   ranks:
@@ -35,13 +35,8 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetCMBDeputy
-    # - type: TacticalMapIcon
-    #   icon:
-    #     sprite: _RMC14/Interface/map_blips.rsi
-    #     state: mp
-    #   background:
-    #     sprite: _RMC14/Interface/map_blips.rsi
-    #     state: background_ua
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-riot-officer
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
