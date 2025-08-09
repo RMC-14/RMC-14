@@ -12,6 +12,9 @@
     state: rock
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rock
 
 - type: entity
@@ -26,6 +29,9 @@
     state: rock_border
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: rock_border
 
 
@@ -43,6 +49,9 @@
     state: colony
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: colony
 
 - type: entity
@@ -59,6 +68,9 @@
     state: colonyr
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: colonyr
 
 - type: entity
@@ -75,4 +87,7 @@
     state: colonyh
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: colonyr
