@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorFiorinaResearcher
   startingGear: RMCGearSurvivorFiorinaResearcher
+  accessGroups:
+  - ColonistMedical
   spawnMenuRoleName: Fiorina Researcher (Fiorina Survivor)
   special:
   - !type:AddComponentSpecial

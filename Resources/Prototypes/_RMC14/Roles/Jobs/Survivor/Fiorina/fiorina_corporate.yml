@@ -4,8 +4,10 @@
   name: cm-job-name-survivor-fiorina-corporate-liaison
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorFiorinaCorporateLiaison
-  spawnMenuRoleName: Corporate Liaison (Fiorina Survivor)
   startingGear: RMCGearSurvivorFiorinaCorporateLiaison
+  accessGroups:
+  - ColonistCorporate
+  spawnMenuRoleName: Corporate Liaison (Fiorina Survivor)
   special:
   - !type:AddComponentSpecial
     components:

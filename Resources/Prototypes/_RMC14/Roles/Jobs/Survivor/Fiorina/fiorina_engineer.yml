@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorFiorinaEngineer
   startingGear: RMCGearSurvivorFiorinaEngineer
+  accessGroups:
+  - ColonistEngi
   spawnMenuRoleName: Fiorina Engineer (Fiorina Survivor)
   special:
   - !type:AddComponentSpecial

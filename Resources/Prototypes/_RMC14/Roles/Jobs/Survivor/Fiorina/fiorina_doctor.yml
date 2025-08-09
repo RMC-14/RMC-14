@@ -5,6 +5,8 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorFiorinaDoctor
   startingGear: RMCGearSurvivorFiorinaDoctor
+  accessGroups:
+  - ColonistMedical
   spawnMenuRoleName: Fiorina Doctor (Fiorina Survivor)
   special:
   - !type:AddComponentSpecial
