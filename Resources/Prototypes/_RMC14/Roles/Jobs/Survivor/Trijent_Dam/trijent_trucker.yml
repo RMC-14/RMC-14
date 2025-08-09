@@ -3,7 +3,6 @@
   id: CMSurvivorTrijentTrucker
   name: cm-job-name-survivor-trijent-trucker
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorTrijentTrucker
   startingGear: RMCGearSurvivorTrijentTrucker
   spawnMenuRoleName: Trijent Heavy Vehicle Operator (Trijent Survivor)
   special:
@@ -47,10 +46,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorTrijentTrucker
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetTrucker
