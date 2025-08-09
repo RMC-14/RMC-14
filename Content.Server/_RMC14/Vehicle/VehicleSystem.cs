@@ -71,6 +71,8 @@ public sealed class VehicleSystem : SharedVehicleSystem
             ent.Comp.DriverSeat = uid;
             driverSeatComp.Vehicle = ent.Owner;
         }
+
+        Dirty(ent);
     }
 
     protected override void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<VehicleComponent?> toWatch)
