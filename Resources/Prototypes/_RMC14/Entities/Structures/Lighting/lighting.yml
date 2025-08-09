@@ -38,6 +38,7 @@
     graph: CMLightFixture
     node: tubeLight
   - type: RMCBreakLightOnAttack
+  - type: RMCLightOffset
   - type: InteractedBlacklist
     blacklist:
       components:
