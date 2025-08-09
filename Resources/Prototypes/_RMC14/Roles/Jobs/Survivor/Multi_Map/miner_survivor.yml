@@ -29,6 +29,7 @@
   useLoadoutOfJob: CMSurvivor
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorMiner
   equipment:
     head: RMCHardhatOrange
@@ -39,7 +40,6 @@
     shoes: RMCShoesJackboots
     back: CMSatchelEngineerMinerSurvivorFill
     id: CMIDCardColonist
-    pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchToolsFill
   inhand:
     - RMCPickaxe

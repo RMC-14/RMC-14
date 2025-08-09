@@ -117,6 +117,13 @@
     node: Flashlight
 
 - type: entity
+  parent: RMCFlashlight
+  id: RMCFlashlightOn
+  suffix: On
+  components:
+  - type: RMCLightStartsOnInit
+
+- type: entity
   parent: RMCFlashlightBase
   id: RMCFlashlightPen
   name: penlight
