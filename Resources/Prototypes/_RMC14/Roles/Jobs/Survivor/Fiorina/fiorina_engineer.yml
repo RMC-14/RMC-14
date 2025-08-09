@@ -33,7 +33,7 @@
   id: RMCGearSurvivorFiorinaEngineer
   equipment:
     jumpsuit: RMCJumpsuitKhakiWorkwear
-    outerClothing: RMCHazardVest # TODO: Blue Coveralls
+    outerClothing: RMCHazardVest # TODO RMC14: Blue Coveralls
     back: CMSatchelEngineerSurvivorFill
     shoes: RMCShoesJackboots
     head: RMCHardhatOrange
