@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the M890 tactical shotgun on Fiorina being a ghost item.
-    type: Fix
-  - message: Fixed the MK80 attachment spawning on Hybrisa.
-    type: Fix
-  id: 1684
-  time: '2025-05-04T23:39:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6350
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added settings to disable emote sounds per species. These are separate
-      from the voiceline settings that toggle grenade callouts, for example. A new
-      tab has been added in the options tab for both of these settings, the Voicelines
-      tab next to the Audio tab.
-    type: Add
-  id: 1685
-  time: '2025-05-05T00:42:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4138
 - author: DrSmugleaf
   changes:
   - message: Fixed large amount of xenonid eggs on one spot lagging the client.
@@ -4614,5 +4595,28 @@
   id: 2184
   time: '2025-08-08T22:37:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7407
+- author: DrSmugleaf
+  changes:
+  - message: Fixed dropships landing offset by half a tile.
+    type: Fix
+  - message: Fixed alamo and normandy cockpits locking in flight.
+    type: Fix
+  - message: Fixed armor vests not being patron-nameable.
+    type: Fix
+  - message: Disabled smoke creation until it works correctly.
+    type: Fix
+  - message: Fixed the popup that shows when trying to activate lifeboat sentries
+      outside of an emergency showing up for everyone instead of just the user.
+    type: Fix
+  id: 2185
+  time: '2025-08-08T22:52:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7427
+- author: DrSmugleaf
+  changes:
+  - message: Potential fix for the physics engine crapping out mid-round during PvE.
+    type: Fix
+  id: 2186
+  time: '2025-08-09T00:39:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7430
 Name: RMC14
 Order: -1
