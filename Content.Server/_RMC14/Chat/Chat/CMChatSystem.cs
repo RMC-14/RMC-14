@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Content.Server.Chat.Managers;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
@@ -8,6 +9,8 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Radio;
+using Content.Shared.Speech;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -23,6 +26,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
     private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";
@@ -127,6 +131,12 @@ public sealed class CMChatSystem : SharedCMChatSystem
         float audioVolume = 0,
         NetUserId? author = null)
     {
+        if (channel == ChatChannel.Radio && source != default)
+        {
+            ChatMessageToManyRadio(message, wrappedMessage, filter, source, hideChat, colorOverride, recordReplay, audioPath, audioVolume, author);
+            return;
+        }
+
         _chat.ChatMessageToManyFiltered(
             filter,
             channel,
@@ -139,6 +149,65 @@ public sealed class CMChatSystem : SharedCMChatSystem
             audioPath,
             audioVolume
         );
+    }
+
+    // cursed code
+    private void ChatMessageToManyRadio(
+        string message,
+        string wrappedMessage,
+        Filter filter,
+        EntityUid source,
+        bool hideChat = false,
+        Color? colorOverride = null,
+        bool recordReplay = false,
+        string? audioPath = null,
+        float audioVolume = 0,
+        NetUserId? author = null)
+    {
+        var hivemindMessage = $";{message}";
+
+        if (!_chatSystem.TryProccessRadioMessage(source, hivemindMessage, out var processedMessage, out var channel))
+            return;
+
+        var transformSpeakerEv = new TransformSpeakerNameEvent(source, Name(source));
+        RaiseLocalEvent(source, transformSpeakerEv);
+
+        var speechVerb = _chatSystem.GetSpeechVerb(source, processedMessage);
+        var sanitizedMessage = SanitizeMessageReplaceWords(source, processedMessage);
+
+        var finalColor = colorOverride ?? channel?.Color ?? Color.White;
+        var finalWrappedMessage = FormatRadioMessage(transformSpeakerEv.VoiceName, sanitizedMessage, speechVerb, channel);
+
+        _chat.ChatMessageToManyFiltered(
+            filter,
+            ChatChannel.Radio,
+            sanitizedMessage,
+            finalWrappedMessage,
+            source,
+            hideChat,
+            recordReplay,
+            finalColor,
+            audioPath,
+            audioVolume
+        );
+    }
+
+    private string FormatRadioMessage(string speakerName, string message, SpeechVerbPrototype speechVerb, RadioChannelPrototype? channel)
+    {
+        var channelName = channel?.Name ?? "Unknown";
+        var verb = speechVerb.SpeechVerbStrings.FirstOrDefault() ?? "says";
+
+        var channelColor = channel?.Color.ToHex() ?? "#FFFFFF";
+
+        var formattedMessage = $"[color={channelColor}][bold]\\[{Loc.GetString(channelName)}\\][/bold][/color] [bold]{speakerName}[/bold] {verb}, \"{message}\"";
+
+        if (speechVerb.Bold)
+            formattedMessage = $"[bold]{formattedMessage}[/bold]";
+
+        if (speechVerb.FontSize != 12)
+            formattedMessage = $"[font size={speechVerb.FontSize}]{formattedMessage}[/font]";
+
+        return formattedMessage;
     }
 
     public List<string>? TryMultiBroadcast(EntityUid source, string message)
