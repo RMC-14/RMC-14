@@ -27,7 +27,7 @@ CMJobSurvivorTrucker = Trucker Colonist
 
 cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
 CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
-cm-job-prefix-survivor-icb = ICB
+cm-job-prefix-survivor-icb = ICB Rep.
 
 cm-job-name-survivor-isr = Interstellar Sapient-Life Rights Observer
 CMJobSurvivorISR = Interstellar Sapient-Life Rights Observer
