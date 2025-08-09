@@ -41,10 +41,10 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorGangLeader
-  name: prisoner survivor spawn point
+  name: survivor gang leader spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorPrisoner
+    job_id: CMSurvivorGangLeader
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

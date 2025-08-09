@@ -41,7 +41,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorPrisoner
-  name: prisoner survivor spawn point
+  name: survivor prisoner spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivorPrisoner
