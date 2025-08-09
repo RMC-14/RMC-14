@@ -125,7 +125,7 @@
       - CMSurvivorMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
-      - CMSurvivorICB: 2
+      - CMSurvivorVaraderoICB: 2
       CMSurvivorDoctor:
       - CMSurvivorMedicalTechnician: 3
       CMSurvivorEngineer:
