@@ -25,11 +25,23 @@ CMJobSurvivorPriest = Priest Colonist
 cm-job-name-survivor-trucker = Trucker Colonist
 CMJobSurvivorTrucker = Trucker Colonist
 
+cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
+CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
+cm-job-prefix-survivor-icb = ICB
+
+cm-job-name-survivor-isr = Interstellar Sapient-Life Rights Observer
+CMJobSurvivorISR = Interstellar Sapient-Life Rights Observer
+
 cm-job-name-survivor-scientist = Scientist Colonist
 CMSurvivorScientist = Scientist Colonist
 
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
+
+# misc survs
+
+cm-job-name-survivor-prisoner = Prisoner
+CMSurvivorPrisoner = Prisoner
 
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
@@ -100,10 +112,6 @@ CMJobSurvivorTechnician = New Varadero Engineering Technician
 
 cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
 CMJobSurvivorUNPeacekeeper = United Nations Peacekeeper
-
-cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
-CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
-cm-job-prefix-survivor-icb = ICB
 
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 RMCSurvivorNewVaraderoResearcher = United Nations Peacekeeper
@@ -212,3 +220,14 @@ CMSurvivorTrijentDamTech = Dam Maintenance Technician
 
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
+
+# Fiorina Science Annex Survs
+
+cm-job-name-survivor-fiorina-corporate-liaison = Fiorina Corporate Liaison
+CMSurvivorFiorinaCorporateLiaison = Fiorina Corporate Liaison
+
+cm-job-name-survivor-fiorina-doctor = Fiorina Doctor
+CMSurvivorFiorinaDoctor = Fiorina Doctor
+
+cm-job-name-survivor-fiorina-researcher = Fiorina Researcher
+CMSurvivorFiorinaResearcher = Fiorina Researcher
