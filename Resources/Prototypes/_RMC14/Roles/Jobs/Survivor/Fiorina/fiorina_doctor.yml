@@ -1,0 +1,52 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorFiorinaDoctor
+  name: cm-job-name-survivor-fiorina-doctor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorFiorinaMedicalTechnician
+  startingGear: RMCGearSurvivorFiorinaMedicalTechnician
+  spawnMenuRoleName: Fiorina Doctor (Fiorina Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetDoctor
+
+- type: startingGear
+  parent: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorFiorinaDoctor
+  equipment:
+    jumpsuit: RMCScrubsLightBlue
+    head: ArmorHelmetPMC # TODO: W-Y armored cap
+    ears: RMCHeadsetDistressWeYa
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaDoctor
+  name: survivor fiorina doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorFiorinaDoctor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorFiorinaDoctor
+  isHumanoid: true
