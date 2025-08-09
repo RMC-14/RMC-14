@@ -468,6 +468,12 @@
         },
         {
             "name": "weya_depdirector"
+        },
+        {
+            "name": "hudsquad_dp"
+        },
+        {
+            "name": "hudsquad_gp"
         }
     ]
 }
