@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
@@ -9,13 +7,8 @@ using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Input;
-using Robust.Shared.Log;
-using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -436,6 +429,9 @@ public sealed partial class TacticalMapControl : TextureRect
         SpriteSystem system = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
         SpriteSpecifier.Rsi backgroundRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "background");
         SpriteSpecifier.Rsi defibbableRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "defibbable");
+        SpriteSpecifier.Rsi defibbableRsi2 = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "defibbable2");
+        SpriteSpecifier.Rsi defibbableRsi3 = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "defibbable3");
+        SpriteSpecifier.Rsi defibbableRsi4 = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "defibbable4");
         SpriteSpecifier.Rsi undefibbableRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "undefibbable");
         SpriteSpecifier.Rsi hiveLeaderRsi = new(new ResPath("_RMC14/Interface/map_blips.rsi"), "xenoleader");
         Texture background = system.Frame0(backgroundRsi);
@@ -446,7 +442,7 @@ public sealed partial class TacticalMapControl : TextureRect
         handle.DrawTextureRect(Texture, textureRect);
 
         DrawModeBorder(handle, actualTopLeft, actualSize, overlayScale);
-        DrawBlips(handle, system, background, defibbableRsi, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale);
+        DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale);
         DrawLines(handle, overlayScale, actualTopLeft);
         DrawPreviewLine(handle, overlayScale, actualTopLeft);
         DrawLabels(handle, overlayScale, actualTopLeft);
@@ -479,8 +475,8 @@ public sealed partial class TacticalMapControl : TextureRect
     }
 
     private void DrawBlips(DrawingHandleScreen handle, SpriteSystem system, Texture background,
-        SpriteSpecifier.Rsi defibbableRsi, SpriteSpecifier.Rsi undefibbableRsi,
-        SpriteSpecifier.Rsi hiveLeaderRsi, Vector2 actualTopLeft, float overlayScale)
+        SpriteSpecifier.Rsi defibbableRsi, SpriteSpecifier.Rsi defibbableRsi2, SpriteSpecifier.Rsi defibbableRsi3, SpriteSpecifier.Rsi defibbableRsi4,
+        SpriteSpecifier.Rsi undefibbableRsi, SpriteSpecifier.Rsi hiveLeaderRsi, Vector2 actualTopLeft, float overlayScale)
     {
         if (_blips == null)
             return;
@@ -501,6 +497,15 @@ public sealed partial class TacticalMapControl : TextureRect
             {
                 case TacticalMapBlipStatus.Defibabble:
                     handle.DrawTextureRect(system.Frame0(defibbableRsi), rect);
+                    break;
+                case TacticalMapBlipStatus.Defibabble2:
+                    handle.DrawTextureRect(system.Frame0(defibbableRsi2), rect);
+                    break;
+                case TacticalMapBlipStatus.Defibabble3:
+                    handle.DrawTextureRect(system.Frame0(defibbableRsi3), rect);
+                    break;
+                case TacticalMapBlipStatus.Defibabble4:
+                    handle.DrawTextureRect(system.Frame0(defibbableRsi4), rect);
                     break;
                 case TacticalMapBlipStatus.Undefibabble:
                     handle.DrawTextureRect(system.Frame0(undefibbableRsi), rect);
