@@ -1,0 +1,117 @@
+# BASE
+- type: entity
+  abstract: true
+#  parent: BaseStockPart
+  parent: CMStockPartBase
+  id: RNMCStockPartBase
+  name: stock part
+  suffix: RNMC
+  description: What?
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+
+- type: entity
+  abstract: true
+  parent: BaseStructureDynamic
+  id: RNMCStockPartLargeBase
+  name: large stock part
+  suffix: RNMC
+  description: What?
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+
+# RATING 1
+
+# TODO RMC14 these, bring them back with a stack type instead of a machine part component
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartSmallEngine
+  name: small engine
+  description: A small engine used to power small vehicles.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: small_engine
+  #- type: MachinePart
+  #  part: SmallEngine
+  #  rating: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-small_engine
+      right:
+      - state: inhand-right-small_engine
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartSmallTransmission
+  name: small transmission
+  description: A small transmission that allows vehicles to adjust their speed. Used for small vehicles.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: small_transmission
+  #- type: MachinePart
+  #  part: SmallTransmission
+  #  rating: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-small_transmission
+      right:
+      - state: inhand-right-small_transmission
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartWheel
+  name: wheel
+  description: A wheel that is needed for vehicles to move.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: wheel
+  #- type: MachinePart
+  #  part: Wheel
+  #  rating: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-wheel
+      right:
+      - state: inhand-right-wheel
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartSteeringWheel
+  name: steering wheel
+  description: Used to steer a wheeled vehicle.
+  suffix: Rating 1
+  components:
+  - type: Sprite # Need wieldable inhands.
+    sprite: _RNMC14/Objects/Misc/Stock_Parts/steering_wheel.rsi
+    state: icon
+  - type: Item # TODO: Make it wieldable.
+    sprite: _RNMC14/Objects/Misc/Stock_Parts/steering_wheel.rsi
+    #heldprefix: "wielded"
+  #- type: Appearance
+  - type: Wieldable
+  #- type: MachinePart
+  #  part: SteeringWheel
+  #  rating: 1
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartShockAbsorber
+  name: shock absorber
+  description: A spring to make for smoother rides for vehicles.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: shock_absorber
+  #- type: MachinePart
+  #  part: ShockAbsorber
+  #  rating: 1
