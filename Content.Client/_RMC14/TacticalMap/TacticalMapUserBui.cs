@@ -1,9 +1,11 @@
+using System.Numerics;
 using Content.Client._RMC14.UserInterface;
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Localization;
+using Robust.Shared.Maths;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Localization;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -12,26 +14,89 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
 {
     protected override TacticalMapWindow? Window { get; set; }
     private bool _refreshed;
+    private string? _currentMapName;
 
     protected override void Open()
     {
         base.Open();
+
+        EntityUid? mapEntity = null;
+
+        if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user) && user.Map != null)
+        {
+            mapEntity = user.Map.Value;
+        }
+
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
+
+        if (mapEntity != null)
+        {
+            Window.SetMapEntity(_currentMapName);
+        }
 
         TabContainer.SetTabTitle(Window.Wrapper.MapTab, Loc.GetString("ui-tactical-map-tab-map"));
         TabContainer.SetTabVisible(Window.Wrapper.MapTab, true);
 
-        if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user) &&
-            user.Map != null &&
+        if (mapEntity != null)
+        {
+            Window.Wrapper.SetMapEntity(_currentMapName);
+        }
+
+        if (user?.Map != null &&
             EntMan.TryGetComponent(user.Map.Value, out AreaGridComponent? areaGrid))
         {
             Window.Wrapper.UpdateTexture((user.Map.Value, areaGrid));
+        }
+
+        try
+        {
+            var settingsManager = IoCManager.Resolve<TacticalMapSettingsManager>();
+            var settings = settingsManager.LoadSettings(_currentMapName);
+            if (_currentMapName != null)
+            {
+                Window.Wrapper.LoadMapSpecificSettings(settings, _currentMapName);
+            }
+        }
+        catch
+        {
         }
 
         Refresh();
 
         Window.Wrapper.SetupUpdateButton(msg => SendPredictedMessage(msg));
         Window.Wrapper.Map.OnQueenEyeMove += position => SendPredictedMessage(new TacticalMapQueenEyeMoveMsg(position));
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        if (state is TacticalMapBuiState tacticalState)
+        {
+            _currentMapName = tacticalState.MapName;
+            Window?.SetMapEntity(_currentMapName);
+            Window?.Wrapper.SetMapEntity(_currentMapName);
+        }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing && Window?.Wrapper != null)
+        {
+            try
+            {
+                var settingsManager = IoCManager.Resolve<TacticalMapSettingsManager>();
+                var currentSettings = Window.Wrapper.GetCurrentSettings();
+
+                currentSettings.WindowSize = new Vector2(Window.SetSize.X, Window.SetSize.Y);
+                currentSettings.WindowPosition = new Vector2(Window.Position.X, Window.Position.Y);
+
+                settingsManager.SaveSettings(currentSettings, _currentMapName);
+            }
+            catch
+            {
+            }
+        }
+
+        base.Dispose(disposing);
     }
 
     public void Refresh()
