@@ -172,45 +172,45 @@
     - !type:TileBarricadeClear
   rmcPrototype: RMCWoodenBarricadeBuild
 
-- type: construction
-  parent: RMC
-  name: Folding Metal Barricade
-  id: CMBarricadeMetalDoor
-  graph: BarricadeMetalDoorGraph
-  startNode: start
-  targetNode: nodeBarricadeMetalDoor
-  category: construction-category-cm-structures
-  description: A barricade that can be folded or opened to allow marines through.
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: folding_metal
-  conditions:
-    - !type:TileNotBlocked
-    - !type:TileBarricadeClear
-  rmcPrototype: RMCMetalBarricadeFoldableBuild
+# - type: construction
+#   parent: RMC
+#   name: Folding Metal Barricade
+#   id: CMBarricadeMetalDoor
+#   graph: BarricadeMetalDoorGraph
+#   startNode: start
+#   targetNode: nodeBarricadeMetalDoor
+#   category: construction-category-cm-structures
+#   description: A barricade that can be folded or opened to allow marines through.
+#   objectType: Structure
+#   placementMode: SnapgridCenter
+#   canBuildInImpassable: false
+#   icon:
+#     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+#     state: folding_metal
+#   conditions:
+#     - !type:TileNotBlocked
+#     - !type:TileBarricadeClear
+#   rmcPrototype: RMCMetalBarricadeFoldableBuild
 
-- type: construction
-  parent: RMC
-  name: Folding Plasteel Barricade
-  id: CMBarricadePlasteelDoor
-  graph: BarricadePlasteelDoorGraph
-  startNode: start
-  targetNode: nodeBarricadePlasteelDoor
-  category: construction-category-cm-structures
-  description: A barricade that can be folded or opened to allow marines through. Made from hardened plasteel.
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: folding_plasteel
-  conditions:
-    - !type:TileNotBlocked
-    - !type:TileBarricadeClear
-  rmcPrototype: RMCPlasteelBarricadeFoldableBuild
+# - type: construction
+#   parent: RMC
+#   name: Folding Plasteel Barricade
+#   id: CMBarricadePlasteelDoor
+#   graph: BarricadePlasteelDoorGraph
+#   startNode: start
+#   targetNode: nodeBarricadePlasteelDoor
+#   category: construction-category-cm-structures
+#   description: A barricade that can be folded or opened to allow marines through. Made from hardened plasteel.
+#   objectType: Structure
+#   placementMode: SnapgridCenter
+#   canBuildInImpassable: false
+#   icon:
+#     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+#     state: folding_plasteel
+#   conditions:
+#     - !type:TileNotBlocked
+#     - !type:TileBarricadeClear
+#   rmcPrototype: RMCPlasteelBarricadeFoldableBuild
 
 #lighting
 - type: construction
