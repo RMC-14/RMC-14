@@ -56,7 +56,7 @@
       #  amount: 2
       - id: RMCCaseFlamer
         amount: 2
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         amount: 3
       - id: RMCXM51Case
         amount: 3
@@ -97,6 +97,10 @@
       - id: CMWebbingBrown
         amount: 2
       - id: CMWebbingBlack
+        amount: 2
+      - id: RMCWebbingLegPouch
+        amount: 2
+      - id: RMCWebbingLegPouchBlack
         amount: 2
       - id: CMWebbing
         amount: 5
@@ -554,6 +558,8 @@
         amount: 7
       - id: RMCAttachmentSuppressor
         amount: 7
+      - id: RMCAttachmentShotgunChoke
+        amount: 5
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope
@@ -596,7 +602,7 @@
         amount: 10
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A1WoodenStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5

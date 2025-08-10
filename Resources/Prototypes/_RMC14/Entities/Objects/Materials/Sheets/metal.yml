@@ -39,7 +39,7 @@
       buildable:
       - RMCBarbedWireBuild
       - RMCMetalBarricadeBuild
-      - RMCMetalBarricadeFoldableBuild
+      # - RMCMetalBarricadeFoldableBuild # AI is fucked up w these doors
       - RMCHandrailBuild
       # - RMCDividerConstruction
       # APC frame
@@ -194,7 +194,7 @@
   components:
     - type: RMCConstructionItem
       buildable:
-      - RMCPlasteelBarricadeFoldableBuild
+      # - RMCPlasteelBarricadeFoldableBuild # ai is fucked up w these doors
       - RMCPlasteelBarricadeBuild
       - RMCDividerConstruction
       - RMCReinforcedWindowFrameBuild

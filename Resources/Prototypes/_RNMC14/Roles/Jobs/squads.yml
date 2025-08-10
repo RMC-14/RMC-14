@@ -1,0 +1,23 @@
+- type: entity
+  id: SquadSunRiders
+  name: Sun Riders
+  components:
+  - type: SquadTeam
+    color: "#4148C8"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad
+    radio: SunRiders
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    maxRoles:
+      CMSquadLeaderPVE: 2
+      CMSmartGunOperatorPVE: 2
+      CMHospitalCorpsmanPVE: 1
+      CMRiflemanPVE: 4
+      CMSectionSergeantPVE: 1
+      CMPlatoonCommanderPVE: 1
+    group: SunRiders

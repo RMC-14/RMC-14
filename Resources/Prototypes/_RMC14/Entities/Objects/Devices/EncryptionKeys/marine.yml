@@ -142,7 +142,7 @@
   components:
   - type: EncryptionKey
     channels:
-    - MarineAlpha
-    defaultChannel: MarineAlpha
+    - SunRiders
+    defaultChannel: SunRiders
   - type: Sprite
     state: delta_key

@@ -66,7 +66,7 @@
     cm-chatsan-word-engie: cm-chatsan-replacement-engie
     cm-chatsan-word-engineer: cm-chatsan-replacement-engineer
     cm-chatsan-word-comtech: cm-chatsan-replacement-comtech
-    cm-chatsan-word-combat-technitian: cm-chatsan-replacement-combat-technitian
+    cm-chatsan-word-combat-technician: cm-chatsan-replacement-combat-technician
     cm-chatsan-word-corpsman: cm-chatsan-replacement-corpsman
     cm-chatsan-word-medic: cm-chatsan-replacement-medic
     cm-chatsan-word-doc: cm-chatsan-replacement-doc
@@ -195,10 +195,10 @@
     cm-chatsan-word-parasite: cm-chatsan-replacement-parasite
     cm-chatsan-word-paras: cm-chatsan-replacement-parasites
     cm-chatsan-word-parasites: cm-chatsan-replacement-parasites
-    cm-chatsan-word-baricade: cm-chatsan-replacement-baricades
-    cm-chatsan-word-cade: cm-chatsan-replacement-baricades
-    cm-chatsan-word-baricades: cm-chatsan-replacement-baricades
-    cm-chatsan-word-cades: cm-chatsan-replacement-baricades
+    cm-chatsan-word-barricade: cm-chatsan-replacement-barricades
+    cm-chatsan-word-cade: cm-chatsan-replacement-barricades
+    cm-chatsan-word-barricades: cm-chatsan-replacement-barricades
+    cm-chatsan-word-cades: cm-chatsan-replacement-barricades
     cm-chatsan-word-barbed: cm-chatsan-replacement-barbed
     cm-chatsan-word-barbs: cm-chatsan-replacement-barbed-wires
     cm-chatsan-word-barbed-wire: cm-chatsan-replacement-barbed-wires
@@ -249,10 +249,8 @@
     cm-chatsan-word-lightbulb: cm-chatsan-replacement-light-bulb
     cm-chatsan-word-light-bulbs: cm-chatsan-replacement-light-bulbs
     cm-chatsan-word-lightbulbs: cm-chatsan-replacement-light-bulbs
-    cm-chatsan-word-case: cm-chatsan-replacement-case
-    cm-chatsan-word-crate: cm-chatsan-replacement-case
-    cm-chatsan-word-cases: cm-chatsan-replacement-cases
-    cm-chatsan-word-crates: cm-chatsan-replacement-cases
+    cm-chatsan-word-crate: cm-chatsan-replacement-crate
+    cm-chatsan-word-crates: cm-chatsan-replacement-crates
     cm-chatsan-word-gunshot: cm-chatsan-replacement-gunshot
     cm-chatsan-word-gunshots: cm-chatsan-replacement-gunshots
     cm-chatsan-word-paper: cm-chatsan-replacement-paper

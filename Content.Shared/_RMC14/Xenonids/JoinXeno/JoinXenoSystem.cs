@@ -94,7 +94,7 @@ public sealed class JoinXenoSystem : EntitySystem
         if (!TryComp<GhostComponent>(user, out var ghostComp))
             return false;
 
-        if (!HasComp<JoinXenoCooldownIgnoreComponent>(user))
+        if (HasComp<JoinXenoCooldownIgnoreComponent>(user))
             return true;
 
         // If the game has been going on longer than the death ignore time, then check how long since the ghost has died

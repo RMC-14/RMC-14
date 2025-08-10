@@ -1,0 +1,54 @@
+- type: job
+  parent: CMJobBase
+  id: CMPMCOperatorPVE
+  name: rmc-job-name-pmc-standard
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: CMJobPMCOperativePVE
+  ranks:
+    RMCRankWeYaOperator: []
+  startingGear: RMCJobPMCOperatorPVE
+  icon: RMCJobIconPMCStandard
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Operator (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-standard
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCOperatorPVE
+  name: weya pmc operator spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: CMPMCOperatorPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: startingGear
+  id: RMCJobPMCOperatorPVE
+  equipment:
+    id: RMCIDCardPMC
+
+- type: playTimeTracker
+  id: CMJobPMCOperativePVE

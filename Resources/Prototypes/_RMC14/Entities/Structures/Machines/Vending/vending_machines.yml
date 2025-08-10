@@ -135,7 +135,7 @@
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
-    DrinkHotCoffee: 25
+    RMCCoffeeCupFilled: 25
     DrinkTeacup: 25
     DrinkHotCoco: 25
 
@@ -643,6 +643,10 @@
       - id: ReagentContainerOliveoil
         amount: 12
       - id: FoodCondimentBottleVinegar
+        amount: 12
+      - id: ReagentContainerCornmeal
+        amount: 12
+      - id: ReagentContainerMayo
         amount: 12
 
 # PVE

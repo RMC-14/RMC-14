@@ -1,8 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Synth;
-using Content.Shared._RMC14.Xenonids.Dodge;
-using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Jittering;
 using Content.Shared.Popups;
@@ -51,19 +49,17 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         Dirty(xeno, active);
 
         _popup.PopupClient(Loc.GetString("cm-xeno-paralyzing-slash-activate"), xeno, xeno);
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoParalyzingSlashActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoParalyzingSlashActionEvent)
-                _actions.SetToggled(actionId, true);
+            _actions.SetToggled(action.AsNullable(), true);
         }
     }
 
     private void OnXenoParalyzingSlashRemoved(Entity<XenoActiveParalyzingSlashComponent> xeno, ref ComponentShutdown args)
     {
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoParalyzingSlashActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoParalyzingSlashActionEvent)
-                _actions.SetToggled(actionId, false);
+            _actions.SetToggled(action.AsNullable(), false);
         }
     }
 

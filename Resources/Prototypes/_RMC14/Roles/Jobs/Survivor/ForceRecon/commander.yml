@@ -39,6 +39,7 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: RMCPointing
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon-co
     - type: CommandAccent
@@ -57,6 +58,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
     - type: SpotterWhitelist
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
   hidden: true
 
 - type: startingGear

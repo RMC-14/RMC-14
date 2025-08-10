@@ -16,6 +16,7 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarricadeImpassable
         - BarbedBarricade
         layer:
         - Opaque
@@ -52,7 +53,6 @@
     - KnockedDown
     - SlowedDown
     - Stutter
-    - SeeingRainbows
     - Electrocution
     - ForcedSleep
     - TemporaryBlindness
@@ -357,6 +357,7 @@
   - type: RMCDisarmable
   - type: StunOnExplosionReceived
   - type: DeafenWhileCrit
+  - type: RMCStopDropRollVisuals
   - type: XenoToggleChargingDamage
     damage:
       types:
@@ -383,3 +384,4 @@
     whitelist:
       components:
       - Xeno
+  - type: RMCHealthIcons

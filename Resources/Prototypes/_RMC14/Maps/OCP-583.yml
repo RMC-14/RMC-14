@@ -7,7 +7,9 @@
   randomRotation: false
   stations:
     OCP-583:
-      stationProto: NanotrasenCentralCommand
+      stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
           mapNameTemplate: 'OCP-583'
+        - type: StationJobs
+          availableJobs: {}

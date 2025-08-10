@@ -1,0 +1,24 @@
+﻿
+- type: gameMap
+  id: Bridget
+  mapName: Colonel Bridget
+  mapPath: /Maps/_RNMC14/bridget.yml
+  minPlayers: 200 # enforce admin-only
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    Bridget:
+      stationProto: StandardUNMCWarship
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'UNS Colonel Bridget'
+      - type: StationJobs
+        availableJobs:
+          #Command
+          CMPlatoonCommanderPVE: [1, 1]
+
+          #Marines
+          CMSquadLeaderPVE: [2, 2]
+          CMSmartGunOperatorPVE: [2, 2]
+          CMHospitalCorpsmanPVE: [1, 1]
+          CMRiflemanPVE: [ 4, 4 ]

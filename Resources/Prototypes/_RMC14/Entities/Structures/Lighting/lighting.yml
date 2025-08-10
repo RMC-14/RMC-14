@@ -19,6 +19,12 @@
     layers:
     - state: tube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#FFEFD2"
+    energy: 1
+    radius: 10
+    softness: 1
+    offset: "0, -0.5"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: tube-empty
@@ -46,6 +52,8 @@
     layers:
     - state: btube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#D2E3EC"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: btube-empty
@@ -81,6 +89,8 @@
     layers:
     - state: bptube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#D2E3EC"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bptube-empty
@@ -211,6 +221,8 @@
     layers:
     - state: btube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: btube-empty
@@ -246,6 +258,8 @@
     layers:
     - state: bptube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bptube-empty
@@ -253,6 +267,9 @@
       On: bptube1
       Broken: bptube-broken
       Burned: bptube-burned
+  - type: PointLight
+    color: "#DAE2FF"
+    energy: 0.35
 
 # Light Bulbs
 
@@ -393,6 +410,8 @@
     layers:
     - state: bbulb1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightBulbBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bbulb-empty
@@ -400,3 +419,6 @@
       On: bbulb1
       Broken: bbulb-broken
       Burned: bbulb-burned
+  - type: PointLight
+    color: "#DAE2FF"
+    energy: 0.5

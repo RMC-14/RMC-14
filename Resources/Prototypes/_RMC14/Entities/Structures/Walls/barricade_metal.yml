@@ -21,13 +21,12 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.38"
+          bounds: "-0.49,-0.49,0.49,-0.25"
         density: 500
         mask:
         - FullTileMask
         layer:
         - TableLayer
-        - LowImpassable
         - BarricadeImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
@@ -35,6 +34,11 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
+  - type: DirectionalAttackBlocker
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+    fullProtection: true
+  - type: RMCLungeProtection
   - type: InteractionOutline
   - type: RMCDropshipBlocked
   - type: GenericVisualizer

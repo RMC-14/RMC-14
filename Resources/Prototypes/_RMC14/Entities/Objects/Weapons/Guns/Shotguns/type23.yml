@@ -27,6 +27,7 @@
     burstScatterMult: 5
   - type: BallisticAmmoProvider
     capacity: 5 # One in chamber 4 in tube we don't have chambering yet
+    proto: RMCShellShotgunHeavyBuckshot #try it
     whitelist:
       tags: #Heavy shells
       - RMCShellShotgunHeavyBuckshot

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Lathe.Prototypes;
@@ -32,6 +33,25 @@ public abstract class SharedLatheSystem : EntitySystem
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         BuildInverseRecipeDictionary();
+    }
+
+    /// <summary>
+    /// Get the set of all recipes that a lathe could possibly ever create (e.g., if all techs were unlocked).
+    /// </summary>
+    public HashSet<ProtoId<LatheRecipePrototype>> GetAllPossibleRecipes(LatheComponent component)
+    {
+        var recipes = new HashSet<ProtoId<LatheRecipePrototype>>();
+        foreach (var pack in component.StaticPacks)
+        {
+            recipes.UnionWith(_proto.Index(pack).Recipes);
+        }
+
+        foreach (var pack in component.DynamicPacks)
+        {
+            recipes.UnionWith(_proto.Index(pack).Recipes);
+        }
+
+        return recipes;
     }
 
     /// <summary>
@@ -139,7 +159,7 @@ public abstract class SharedLatheSystem : EntitySystem
         if (proto.ResultReagents is { } resultReagents)
         {
             return ContentLocalizationManager.FormatList(resultReagents
-                .Select(p => Loc.GetString("lathe-menu-result-reagent-display", ("reagent", _proto.Index(p.Key).LocalizedName), ("amount", p.Value)))
+                .Select(p => Loc.GetString("lathe-menu-result-reagent-display", ("reagent", _proto.IndexReagent(p.Key).LocalizedName), ("amount", p.Value)))
                 .ToList());
         }
 
@@ -166,7 +186,7 @@ public abstract class SharedLatheSystem : EntitySystem
         {
             // We only use the first one for the description since these descriptions don't combine very well.
             var reagent = resultReagents.First().Key;
-            return _proto.Index(reagent).LocalizedDescription;
+            return _proto.IndexReagent(reagent).LocalizedDescription;
         }
 
         return string.Empty;
