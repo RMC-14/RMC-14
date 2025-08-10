@@ -1,0 +1,15 @@
+
+- type: Tag
+  id: RNMCStockPartSmallEngine
+
+- type: Tag
+  id: RNMCStockPartSmallTransmission
+
+- type: Tag
+  id: RNMCStockPartWheel
+
+- type: Tag
+  id: RNMCStockPartSteeringWheel
+
+- type: Tag
+  id: RNMCStockPartShockAbsorber

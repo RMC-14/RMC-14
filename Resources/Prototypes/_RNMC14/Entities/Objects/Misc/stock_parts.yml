@@ -45,6 +45,9 @@
       - state: inhand-left-small_engine
       right:
       - state: inhand-right-small_engine
+  - type: Tag
+    tags:
+    - RNMCStockPartSmallEngine
 
 - type: entity
   parent: RNMCStockPartBase
@@ -64,6 +67,9 @@
       - state: inhand-left-small_transmission
       right:
       - state: inhand-right-small_transmission
+  - type: Tag
+    tags:
+    - RNMCStockPartSmallTransmission
 
 - type: entity
   parent: RNMCStockPartBase
@@ -83,6 +89,9 @@
       - state: inhand-left-wheel
       right:
       - state: inhand-right-wheel
+  - type: Tag
+    tags:
+    - RNMCStockPartWheel
 
 - type: entity
   parent: RNMCStockPartBase
@@ -102,6 +111,9 @@
   #- type: MachinePart
   #  part: SteeringWheel
   #  rating: 1
+  - type: Tag
+    tags:
+    - RNMCStockPartSteeringWheel
 
 - type: entity
   parent: RNMCStockPartBase
@@ -115,3 +127,6 @@
   #- type: MachinePart
   #  part: ShockAbsorber
   #  rating: 1
+  - type: Tag
+    tags:
+    - RNMCStockPartShockAbsorber
