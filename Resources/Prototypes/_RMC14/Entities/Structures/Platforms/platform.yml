@@ -635,6 +635,7 @@
   id: RMCPlatformAlmayer
   name: raised metal edge
   description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
+  suffix: Almayer
   components:
   - type: Sprite
     state: platform_sm
@@ -644,6 +645,7 @@
   id: RMCPlatformAlmayerCorner
   name: raised metal corner
   description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  suffix: Almayer
   components:
   - type: Sprite
     state: platform_sm_deco
