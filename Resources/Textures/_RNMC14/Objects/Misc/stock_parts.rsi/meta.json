@@ -42,6 +42,9 @@
       },
       {
         "name": "shock_absorber"
+      },
+      {
+        "name": "pedal"
       }
     ]
 }

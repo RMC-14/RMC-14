@@ -130,3 +130,19 @@
   - type: Tag
     tags:
     - RNMCStockPartShockAbsorber
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartPedal
+  name: pedal
+  description: A foot-operated lever for vehicles, usually used to control throttle, brake, and clutch in automobiles; or rudders in aircraft or spacecraft.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: pedal
+  #- type: MachinePart
+  #  part: Pedal
+  #  rating: 1
+  - type: Tag
+    tags:
+    - RNMCStockPartPedal
