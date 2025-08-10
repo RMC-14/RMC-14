@@ -13,3 +13,7 @@
 
 - type: Tag
   id: RNMCStockPartShockAbsorber
+
+# UPSTREAM PARTS WITH TAGS:
+- type: Tag
+  id: CMStockPartMatterBin
