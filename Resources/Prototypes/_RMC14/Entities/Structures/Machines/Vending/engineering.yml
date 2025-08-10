@@ -210,9 +210,9 @@
     sections:
     - name: Equipment
       entries:
-      - id: ClothingHeadHatHoodBioScientist
+      - id: RMCHoodBioGeneral # TODO scientist bio hood
         amount: 2
-      - id: ClothingOuterBioScientist
+      - id: RMCSuitBioGeneral # TODO scientist bio suit
         amount: 2
       - id: CMJumpsuitResearch
         amount: 2
@@ -225,8 +225,8 @@
       - id: RemoteSignaller
         amount: 4
       # Tank transfer valve
-      # Timer
-
+      - id: RMCTimerTrigger
+        amount: 4
 
 # Robotics
 - type: entity

@@ -1,0 +1,80 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: CMSurvivorTrucker
+  name: cm-job-name-survivor-trucker
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorTrucker
+  startingGear: RMCGearSurvivorTrucker
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillVehicles: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetTrucker
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  id: RMCGearSurvivorTrucker
+  equipment:
+    ears: CMHeadsetColony
+    head: RMCYellowCap
+    jumpsuit: RMCJumpsuitLaborersOveralls
+    shoes: RMCShoesJackboots
+    back: CMSatchelEngineerSurvivorFill
+    id: CMIDCardColonist
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchToolsFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrucker
+  name: survivor trucker spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorTrucker
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetTrucker
+  name: trucker colonist preset
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorTrucker
+  name: trucker colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorTrucker
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorTrucker
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorTrucker
+

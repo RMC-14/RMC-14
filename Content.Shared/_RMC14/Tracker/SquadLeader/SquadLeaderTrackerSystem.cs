@@ -139,9 +139,6 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
     private void OnRemove(Entity<SquadLeaderTrackerComponent> ent, ref ComponentRemove args)
     {
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
-
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)
             return;
@@ -460,9 +457,6 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     private void UpdateDirection(Entity<SquadLeaderTrackerComponent> ent, MapCoordinates? coordinates = null, string squad = "")
     {
         _alerts.ClearAlertCategory(ent, SquadTrackerCategory);
-
-        if(ent.Comp.Mode == new ProtoId<TrackerModePrototype>())
-            return;
 
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
         if(trackerMode == null)

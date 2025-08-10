@@ -28,6 +28,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
@@ -417,6 +418,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -434,6 +436,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -470,6 +473,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -503,6 +507,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -612,6 +617,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -630,6 +636,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -658,6 +665,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -676,6 +684,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -694,6 +703,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -775,6 +785,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -816,6 +827,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -844,6 +856,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -928,6 +941,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -946,6 +960,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -956,6 +971,21 @@
   components:
   - type: Sprite
     state: marshwater
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: false
+    paradropping: false
 
 - type: entity
   parent: RMCAreaStrataInteriorCheckpoints

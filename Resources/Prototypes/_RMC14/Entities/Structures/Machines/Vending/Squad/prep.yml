@@ -112,7 +112,7 @@
         amount: 15
       - id: CMHandsBlackMarine
         amount: 15
-      - id: CMHeadset
+      - id: RMCHeadsetShip
         amount: 15
       - id: ArmorHelmetM10
         amount: 15
@@ -522,7 +522,7 @@
         amount: 3
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A1WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
       - id: RMCAttachmentM63ArmBrace
         amount: 2

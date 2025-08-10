@@ -24,6 +24,7 @@
     mortarFire: false # TODO RMC14 true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     powerNet: savannah

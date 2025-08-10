@@ -31,9 +31,9 @@
     - Burst
     - FullAuto
     recoilUnwielded: 4
-    scatterWielded: 3
-    scatterUnwielded: 10
-    baseFireRate: 2.5
+    scatterWielded: 4
+    scatterUnwielded: 11
+    baseFireRate: 4
     burstScatterMult: 1
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.3

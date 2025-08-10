@@ -18,7 +18,7 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     public FireteamData Fireteams = new();
 
     [DataField, AutoNetworkedField]
-    public ProtoId<TrackerModePrototype> Mode;
+    public ProtoId<TrackerModePrototype>? Mode;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Target;
