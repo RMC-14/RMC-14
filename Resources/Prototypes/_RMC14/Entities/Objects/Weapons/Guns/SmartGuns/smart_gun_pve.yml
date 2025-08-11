@@ -1,0 +1,204 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  id: RMCSmartGunPVE
+  name: ML66A heavy support gun
+  description: The actual firearm in the Support Gun System. Essentially a heavy, mobile machinegun.
+  suffix: PVE
+  components:
+  - type: Wieldable
+  - type: Item
+    size: Huge
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 500
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: RMCAmmoEject
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: WieldDelay
+    baseDelay: 0.4
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+    - state: camo
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+    slots:
+    - suitStorage
+    - Back
+  - type: ItemCamouflage
+    colors:
+      Jungle: "#ccd08d"
+      Desert: "#ffd2a6"
+      Snow: "#ddcbc9"
+      Classic: "#c7e7d9"
+      Urban: "#acb8c7"
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 20
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    recoilWielded: 3
+    scatterWielded: 10
+    baseFireRate: 5
+    burstScatterMult: 4
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 4
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 80
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.05
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      cell_slot: !type:ContainerSlot { }
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSmartGun
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSmartGun
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: GunToggleableAmmo
+    settings:
+    - damage:
+        types:
+          Piercing: 30
+      armorPiercing: 0
+      name: rmc-toggleable-ammo-highly-precise
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_normal
+    - damage:
+        types:
+          Piercing: 20
+      armorPiercing: 40
+      name: rmc-toggleable-ammo-armor-shredding
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_ap
+  - type: RMCMagneticItem
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillSmartGun: 1
+  - type: GunSkilledRecoil
+    skills:
+      RMCSkillFirearms: 100
+  - type: GunDrainBatteryOnShoot
+  - type: GunRequireEquipped
+    whitelist:
+      components:
+      - SmartGunArmor
+  - type: GunToggleableRecoil
+  - type: GunToggleableAutoFire
+  - type: ToggleableMotionDetector
+  - type: MotionDetector
+    handToggleable: false
+    deactivateOnDrop: false
+    toggleSound: null
+  - type: SmartGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+      rmc-aslot-harness:
+        startingAttachable: RMCAttachmentSmartgunHarness
+        whitelist:
+          tags:
+          - RMCAttachmentSmartgunHarness
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.1875, 0.125
+      rmc-aslot-harness: -0.1875, 0.1
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all
+
+- type: entity
+  parent: RMCStockAttachmentCollapsibleBase
+  id: RMCAttachmentSmartgunHarness # TODO RMC14 - This should remove GunRequiresWield when active
+  name: ML66A heavy support gun harness
+  description: A specialized harness for the ML66A heavy support gun, assisting with recoil control and stability, while also allowing for easy manuvering of the weapon and even suspending it without a grip.
+  suffix: PVE, DO NOT MAP FOR PVP.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: smartgun_harness
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentSmartgunHarness
+  - type: AttachableToggleable
+    doAfter: 0.35
+    heldOnlyActivate: true
+    activatePopupText: attachable-popup-activate-lock
+    deactivatePopupText: attachable-popup-deactivate-unlock
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: smartgun_harness
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: smartgun_harness
+    actionName: Toggle ML66A Heavy Support Gun Harness
+    actionDesc: Lock the harness to your rig.
+  - type: AttachablePreventDropToggleable
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      accuracyAddMult: 0.2
+      recoilFlat: -2
+
+- type: Tag
+  id: RMCAttachmentSmartgunHarness

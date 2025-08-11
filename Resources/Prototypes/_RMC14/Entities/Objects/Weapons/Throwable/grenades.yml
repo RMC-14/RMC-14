@@ -109,9 +109,8 @@
     delay: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40smoke.rsi
-  - type: SpawnOnTerminate
-    spawn: RMCSmoke
-    projectileAdjust: false
+  - type: SpawnOnTrigger
+    proto: RMCSmoke
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger

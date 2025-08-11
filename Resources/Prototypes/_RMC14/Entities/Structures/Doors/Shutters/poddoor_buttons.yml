@@ -115,6 +115,14 @@
 
 - type: entity
   parent: RMCPodDoorButton
+  id: RMCPodDoorButtonSPP
+  suffix: Locked, SPP
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessSPPGeneral" ] ]
+
+- type: entity
+  parent: RMCPodDoorButton
   id: RMCPodDoorButtonHybrisaCavesLockdown
   name: Caves Lockdown
   suffix: Hybrisa

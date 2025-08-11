@@ -4,6 +4,8 @@
   name: rmc-job-name-survivor-cec-researcher
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorCECResearcher
+  ranks:
+    RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorCECResearcher
   accessGroups:
   - ColonistMedical

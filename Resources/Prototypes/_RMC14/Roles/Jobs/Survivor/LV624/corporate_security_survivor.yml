@@ -39,6 +39,7 @@
     jumpsuit: RMCJumsuitWhiteService
     outerClothing: RMCArmorVestWeYa
     ears: RMCHeadsetDistressWeYa
+    id: CMIDCardLiaisonColony
 
 - type: entity
   parent: CMSpawnPointJobBase

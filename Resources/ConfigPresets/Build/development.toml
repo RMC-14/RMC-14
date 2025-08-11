@@ -44,6 +44,7 @@ preload_grids = false
 see_own_notes = true
 
 [rmc]
+automatic_commander_promotion = false
 planet_map_vote = false
 
 [ic]
