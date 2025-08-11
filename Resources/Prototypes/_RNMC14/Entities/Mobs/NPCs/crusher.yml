@@ -1,15 +1,17 @@
 - type: entity
-  parent: CMXenoRunner
-  id: CMXenoRunnerNPC
-  name: Runner
-  description: A small red alien that looks like it could run fairly quickly...
+  parent: CMXenoCrusher
+  id: CMXenoCrusherNPC
   suffix: AI
   components:
   - type: MobThresholds
     thresholds:
       0: Alive
-      200: Critical
-      300: Dead
+      600: Critical
+      800: Dead
+  - type: NPCUseActionOnTarget
+    actionId: ActionXenoCharge
+  - type: Xeno
+    role: CMXenoCrusherNPC
   - type: HTN
     rootTask:
       task: CMXenoCompound
@@ -18,5 +20,3 @@
         true
       NavSmash: !type:Bool
         true
-  - type: Xeno
-    role: CMXenoRunnerNPC

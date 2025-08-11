@@ -1,0 +1,15 @@
+- type: entity
+  parent: CMXenoRavager
+  id: CMXenoRavagerNPC
+  suffix: AI
+  components:
+  - type: Xeno
+    role: CMXenoRavagerNPC
+  - type: HTN
+    rootTask:
+      task: CMXenoCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
