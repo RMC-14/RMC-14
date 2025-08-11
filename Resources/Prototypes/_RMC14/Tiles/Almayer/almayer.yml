@@ -11,6 +11,12 @@
   friction: 1
 
 - type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMTileBaseUnpryable
+  deconstructTools: [ ]
+
+- type: tile
   parent: CMTileBase
   id: CMFloorSteel
   name: tiles-cm-default

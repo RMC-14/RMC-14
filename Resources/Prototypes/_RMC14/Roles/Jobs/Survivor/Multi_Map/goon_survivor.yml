@@ -1,11 +1,13 @@
 - type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorGoon
-  name: cm-job-name-survivor-goon
+  name: rmc-job-name-pmc-corporate-goon
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorGoon
   startingGear: RMCGearSurvivorGoon
   spawnMenuRoleName: We-Ya Goon (Survivor)
+  icon: "RMCJobIconPMCGoonStandard"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -40,7 +42,7 @@
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
-    suitstorage: RMCWeaponRifleM54CWhite # TODO RMC14: Corporate semi-stripped (white)
+    suitstorage: RMCWeaponRifleM54CWhite
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidPMCFill
   storage:

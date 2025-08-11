@@ -102,6 +102,8 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
 
 - type: Tag
   id: CMMagazinePistolM1984
@@ -147,7 +149,15 @@
       tags:
       - CMCartridgePistol9mmAP
     proto: CMCartridgePistolM77AP
-  # Todo AP magazine sprite
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    layers:
+    - state: base_ap
+      map: ["enum.GunVisualLayers.Base"]
+    - state: base_ap-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: base_ap
 
 - type: Tag
   id: RMCMagazinePistolM1984AP

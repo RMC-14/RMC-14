@@ -2006,12 +2006,14 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await using var db = await GetDb();
             var marines = await db.DbContext.RMCPatronRoundEndMarineShoutouts
                 .Include(p => p.Patron)
+                .ThenInclude(p => p.Player)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
                 .ToListAsync();
 
             var xenos = await db.DbContext.RMCPatronRoundEndXenoShoutouts
                 .Include(p => p.Patron)
+                .ThenInclude(p => p.Player)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
                 .ToListAsync();

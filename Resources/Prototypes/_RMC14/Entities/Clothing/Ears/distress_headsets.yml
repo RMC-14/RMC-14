@@ -34,8 +34,11 @@
   parent: RMCHeadsetIconsCMB
   id: RMCHeadsetDistressBureau
   name: bureau earpiece
-  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
+  description: A sleek headset used by The Colony Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: cmb_headset
   - type: ContainerFill
     containers:
       key_slots:
@@ -43,10 +46,10 @@
 
 # For CMB and ICB survivors.
 - type: entity
-  parent: RMCHeadsetIconsCMB
+  parent: RMCHeadsetDistressBureau
   id: RMCHeadsetDistressBureauDamaged
   name: damaged bureau earpiece
-  description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
+  description: A sleek headset used by The Colony Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law. This one is pretty beat up, and seems to be missing a few frequencies.
   components:
   - type: ContainerFill
     containers:
@@ -202,6 +205,7 @@
   - type: RMCHeadset
     radioTextIncrease: 3
 
+# Survivor SOF/FORECON
 - type: entity
   parent: RMCHeadsetMarine
   id: RMCHeadsetForecon
@@ -240,10 +244,11 @@
 
 # For MARSOC
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetForecon
   id: RMCHeadsetMARSOC
   name: UNMC SOF headset
   description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
+  suffix: ERT
   components:
   - type: ContainerFill
     containers:

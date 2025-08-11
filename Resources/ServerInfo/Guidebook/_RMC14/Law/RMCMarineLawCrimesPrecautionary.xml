@@ -33,8 +33,8 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Being a hostile member of a legitimate and recognised faction.
-        \nPrisoners of war cannot be executed, unless they are an active threat to others.
+        Being a hostile member of a legitimate and recognised faction. (For example, CLF and SPP)
+        \nPrisoners of war cannot be executed. See [textlink="Third-Parties" link="RMCMarineSOPNONModThirdparty"] for more information and exceptions.
       </Box>
     </ColorBox>
 
