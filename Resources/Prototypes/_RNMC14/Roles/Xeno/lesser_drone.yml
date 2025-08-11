@@ -1,0 +1,10 @@
+- type: job
+  parent: CMJobXenoBase
+  id: CMXenoLesserDroneNPC
+  name: cm-job-name-xeno-lesser-drone
+  playTimeTracker: CMJobXenoLesserDroneNPC
+
+
+- type: playTimeTracker
+  id: CMJobXenoLesserDroneNPC
+  isXeno: true

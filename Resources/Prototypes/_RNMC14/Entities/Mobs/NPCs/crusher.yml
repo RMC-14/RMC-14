@@ -1,0 +1,22 @@
+- type: entity
+  parent: RMCXenoCrusher
+  id: CMXenoCrusherNPC
+  suffix: AI
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      600: Critical
+      800: Dead
+  - type: NPCUseActionOnTarget
+    actionId: ActionXenoCharge
+  - type: Xeno
+    role: CMXenoCrusherNPC
+  - type: HTN
+    rootTask:
+      task: CMXenoCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
