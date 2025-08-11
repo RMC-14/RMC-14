@@ -80,7 +80,6 @@ public sealed class RMCStandingSystem : EntitySystem
                                 rest.Resting = true;
                                 Dirty(ent, rest);
                             }
-
                         }
 
                         rest.LastToggleAt = time;
