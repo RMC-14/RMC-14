@@ -11,4 +11,4 @@ reagent-name-mango-agua-fresca = mango agua fresca
 reagent-desc-mango-agua-fresca = Perfect for any summer afternoon.
 
 reagent-name-mango-cooler = mango cooler
-reagent-desc-mango-cooler = Just milk and ice cream. So simple.
+reagent-desc-mango-cooler = A midsummer night's drink.
