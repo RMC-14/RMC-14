@@ -14,9 +14,8 @@ namespace Content.Server._RMC14.Admin;
 [AdminCommand(AdminFlags.Admin)]
 public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
-
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     public override string Command => "rmcdelayroundend";
     public override string Description => "Delay the round end while still allowing the end of round screen to show up";
