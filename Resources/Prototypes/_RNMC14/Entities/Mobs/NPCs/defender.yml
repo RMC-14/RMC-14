@@ -1,5 +1,4 @@
 - type: entity
-  abstract: true
   parent: CMXenoDefender
   id: CMXenoDefenderNPC
   suffix: AI
@@ -16,3 +15,7 @@
         true
       NavSmash: !type:Bool
         true
+      VisionRadius: !type:Single
+        30
+      AggroVisionRadius: !type:Single
+        30

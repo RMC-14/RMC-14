@@ -13,3 +13,7 @@
         true
       NavSmash: !type:Bool
         true
+      VisionRadius: !type:Single
+        30
+      AggroVisionRadius: !type:Single
+        30
