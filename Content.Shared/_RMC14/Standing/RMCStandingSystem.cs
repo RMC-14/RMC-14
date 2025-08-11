@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Evasion;
+using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Input;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
@@ -171,6 +171,7 @@ public sealed class RMCStandingSystem : EntitySystem
     private void OnRestStood(Entity<RMCRestComponent> ent, ref StoodEvent args)
     {
         ent.Comp.Resting = false;
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
         Dirty(ent);
     }
 

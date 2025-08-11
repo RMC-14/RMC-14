@@ -500,7 +500,7 @@ public abstract partial class SharedBuckleSystem
         if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
             _standing.Down(buckle, playSound: false, changeCollision: true);
         else
-            _standing.Stand(buckle);
+            _standing.Stand(buckle, force: true);
 
         _joints.RefreshRelay(buckle);
 
