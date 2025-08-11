@@ -35,7 +35,7 @@
   desc: reagent-desc-mango-cooler
   physicalDesc: reagent-physical-desc-sweet
   flavor: sweet
-  color: "#FFBF34"
+  color: "#C19128"
   metamorphicSprite:
     sprite: _RMC14/Objects/Consumable/Drinks/mango_cooler.rsi
     state: icon_empty

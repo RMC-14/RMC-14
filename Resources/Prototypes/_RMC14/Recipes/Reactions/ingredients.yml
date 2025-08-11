@@ -119,7 +119,19 @@
     JuiceMango:
       amount: 2
   products:
-    MangoAguaFresca: 2
+    MangoAguaFresca: 5
+
+- type: reaction
+  id: MangoCooler
+  reactants:
+    Vodka:
+      amount: 1
+    LemonLime:
+      amount: 1
+    JuiceMango:
+      amount: 1
+  products:
+    MangoCooler: 3
 
 - type: reaction
   id: CreateMeat
