@@ -1,13 +1,15 @@
+using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Unrevivable;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chat;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.Execution;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -17,23 +19,26 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
 public sealed class RMCBattleExecuteSystem : EntitySystem
 {
-    [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ISharedAdminLogManager _admin = default!;
-    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+
 
     public override void Initialize()
     {
@@ -71,13 +76,15 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
     {
         if (HasComp<RMCBattleExecutedComponent>(target) || HasComp<UnrevivableComponent>(target))
         {
-            var caneledMessage = $"You decide to not Execute {Name(target)}, as they are already far beyond revival.";
+            var cancelledMessage = $"You decide to not Execute {Name(target)}, as they are already far beyond revival.";
+            _popup.PopupClient(cancelledMessage, user, PopupType.MediumCaution);
+            return;
         }
 
         var ev = new RMCBattleExecuteEvent(GetNetEntity(user), GetNetEntity(target), executionComponent.Damage);
         var doAfterArgs = new DoAfterArgs(EntityManager,
             user,
-            TimeSpan.FromSeconds(executionComponent.BattleExecuteTimeSeconds),
+            executionComponent.BattleExecuteTimeSeconds,
             ev,
             target,
             target,
@@ -95,8 +102,8 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
             _admin.Add(LogType.RMCExecution,
                 LogImpact.High,
                 $"{ToPrettyString(user)}'s Execution of {ToPrettyString(target)} was cancelled.");
-            var caneledMessage = $"You decide to not Execute {Name(target)}.";
-            _popup.PopupClient(caneledMessage, user, PopupType.MediumCaution);
+            var cancelledMessage = $"You decide to not Execute {Name(target)}.";
+            _popup.PopupClient(cancelledMessage, user, PopupType.MediumCaution);
             return;
         }
 
@@ -123,7 +130,7 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
 
         foreach (var (bullet, _) in ev.Ammo)
         {
-            QueueDel(bullet);
+            Del(bullet);
         }
 
         _admin.Add(LogType.RMCExecution,
@@ -136,6 +143,11 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
         _audio.PlayPredicted(gun.SoundGunshot, args.Used.Value, user);
         var popupMessage = $"{Name(target)} WAS EXECUTED BY {Name(user)}!";
         _popup.PopupPredicted(popupMessage, target, user, PopupType.LargeCaution);
+        var chatMsg = $"[bold][font size=24][color=red]\n{Name(target)} WAS EXECUTED BY {Name(user)}!\n[/color][/font][/bold]";
+        var coordinates = _transform.GetMapCoordinates(target);
+        var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+        players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+        _rmcChat.ChatMessageToMany(chatMsg, chatMsg, players, ChatChannel.Local);
         EnsureComp<RMCBattleExecutedComponent>(target);
     }
 

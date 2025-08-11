@@ -16,5 +16,5 @@ public sealed partial class RMCBattleExecuteComponent : Component
     public DamageSpecifier Damage = new() { DamageDict = { ["Blunt"] = 200 } };
 
     [DataField, AutoNetworkedField]
-    public int BattleExecuteTimeSeconds = 2;
+    public TimeSpan BattleExecuteTimeSeconds = TimeSpan.FromSeconds(1);
 }

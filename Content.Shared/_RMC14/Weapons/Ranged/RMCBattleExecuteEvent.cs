@@ -11,10 +11,10 @@ public sealed partial class RMCBattleExecuteEvent : SimpleDoAfterEvent
     public NetEntity Target;
     public DamageSpecifier BattleExecuteDamage;
 
-    public RMCBattleExecuteEvent(NetEntity _user, NetEntity _target, DamageSpecifier _battleExecuteDamage)
+    public RMCBattleExecuteEvent(NetEntity user, NetEntity target, DamageSpecifier battleExecuteDamage)
     {
-        User = _user;
-        Target = _target;
-        BattleExecuteDamage = _battleExecuteDamage;
+        User = user;
+        Target = target;
+        BattleExecuteDamage = battleExecuteDamage;
     }
 }
