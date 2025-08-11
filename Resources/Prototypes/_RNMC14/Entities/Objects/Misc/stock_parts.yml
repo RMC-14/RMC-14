@@ -146,3 +146,31 @@
   - type: Tag
     tags:
     - RNMCStockPartPedal
+
+- type: entity
+  parent: [ SeatBase, RNMCStockPartLargeBase ]
+  id: RNMCStockPartVehicleSeat
+  name: vehicle seat
+  description: A seat for drivers or passengers to sit in a vehicle.
+  suffix: Rating 1
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: _RNMC14/Objects/Misc/stock_parts.rsi # Otherwise, it will default to 'Textures/Structures/Furniture/chairs.rsi'.
+    state: vehicle_seat
+    noRot: true
+  - type: Rotatable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - TableMask
+  - type: Tag
+    tags:
+    - RMCSeat
+    - RNMCStockPartVehicleSeat

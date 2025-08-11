@@ -17,6 +17,9 @@
 - type: Tag
   id: RNMCStockPartPedal
 
+- type: Tag
+  id: RNMCStockPartVehicleSeat
+
 # UPSTREAM PARTS WITH TAGS:
 - type: Tag
   id: CMStockPartMatterBin
