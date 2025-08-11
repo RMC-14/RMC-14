@@ -12,11 +12,11 @@
   - type: Item
     sprite: _RMC14/Objects/Devices/radio.rsi
   - type: RadioMicrophone
-    enabled: true
+    enabled: false
     broadcastChannel: ColonyHandheld
     ignoreXenos: true
   - type: RadioSpeaker
-    enabled: true
+    enabled: false
     channels:
     - ColonyHandheld
 
