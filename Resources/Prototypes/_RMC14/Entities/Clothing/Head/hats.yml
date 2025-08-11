@@ -469,17 +469,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/softcap/yellow_cap.rsi
 
-- type: entity
-  parent: CMHeadCap
-  id: RMCHeadCapWeYa
-  name: Weston-Yamada cap
-  description: Show off your megacorp pride with this stylish cap! Given to high-ranking employees during promotional events.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/PMC/weya_cap.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/PMC/weya_cap.rsi
-
 # surgical caps
 - type: entity
   parent: CMHeadCap

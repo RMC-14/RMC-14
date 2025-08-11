@@ -26,7 +26,7 @@
     - RMCWeYaThermos
 
 - type: loadout
-  id: RMCHeadCapWeYa
+  id: RMCHeadBeretWeYa
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -36,5 +36,5 @@
       time: 630000 # 175 hours
   storage:
     back:
-    - RMCHeadCapWeYa
+    - RMCHeadBeretWeYa
 
