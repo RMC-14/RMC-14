@@ -6,3 +6,9 @@ reagent-desc-rmc-peanut-butter = Creamy butter made from peanuts.
 
 reagent-name-rmc-milkshake = milkshake
 reagent-desc-rmc-milkshake = Just milk and ice cream. So simple.
+
+reagent-name-mango-agua-fresca = mango agua fresca
+reagent-desc-mango-agua-fresca = Perfect for any summer afternoon.
+
+reagent-name-mango-cooler = mango cooler
+reagent-desc-mango-cooler = Just milk and ice cream. So simple.

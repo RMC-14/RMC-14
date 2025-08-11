@@ -12,3 +12,33 @@
   metamorphicMaxFillLevels: 4
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
+
+- type: reagent
+  id: MangoAguaFresca
+  parent: BaseDrink
+  name: reagent-name-mango-agua-fresca
+  desc: reagent-desc-mango-agua-fresca
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#DFC6AF"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/mango-agua-fresca.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false
+
+- type: reagent
+  id: MangoCooler
+  parent: BaseDrink
+  name: reagent-name-mango-cooler
+  desc: reagent-desc-mango-cooler
+  physicalDesc: reagent-physical-desc-sweet
+  flavor: sweet
+  color: "#DFC6AF"
+  metamorphicSprite:
+    sprite: _RMC14/Objects/Consumable/Drinks/mango-cooler.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 4
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false

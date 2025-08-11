@@ -149,3 +149,19 @@
     - pasta
     - cheesy
     - bacon
+
+- type: entity
+  name: sticky mango rice
+  parent: FoodBowlBase
+  id: FoodRiceMango
+  description: It's a grand gesture that isn't the least bit grand.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - rice
+    - mango
+  - type: Sprite
+    layers:
+    - state: bowl
+    - state: mango-rice
+
