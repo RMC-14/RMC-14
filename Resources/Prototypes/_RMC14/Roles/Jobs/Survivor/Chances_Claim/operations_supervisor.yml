@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorOperationsSupervisor
   icon: "CMJobIconLiaison"
   hasIcon: true
+  greeting: rmc-job-greeting-chances-colonist
   ranks:
     RMCRankWeYaExecutiveSpecialist:
     - !type:RoleTimeRequirement

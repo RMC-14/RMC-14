@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesParamedic
   startingGear: RMCGearSurvivorChancesParamedic
   spawnMenuRoleName: Chance's Claim Paramedic (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:

@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesMedic
   startingGear: RMCGearSurvivorChancesMedic
   spawnMenuRoleName: Chance's Claim Medic (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:

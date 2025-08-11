@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesColonyMaintTech
   startingGear: RMCGearSurvivorChancesColonyMaintTech
   spawnMenuRoleName: Colony Maintenance Technician (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:

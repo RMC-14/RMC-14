@@ -215,6 +215,10 @@ CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
 # Chance's Colonists
 
+rmc-job-greeting-chances-colonist = You are a colonist living on LV-522. You are tasked by your employer, the Weston-Yamada Corporation, to preform your expected duties.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
 rmc-job-name-survivor-chances-trucker = Weston-Yamada Heavy Vehicle Operator
 rmc-job-description-survivor-chances-trucker = Operate heavy equipment in and around the colony.
 CMSurvivorChancesTrucker = Weston-Yamada Heavy Vehicle Operator

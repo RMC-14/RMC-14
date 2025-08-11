@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesMiner
   startingGear: RMCGearSurvivorChancesMiner
   spawnMenuRoleName: Mining Surveyor (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:

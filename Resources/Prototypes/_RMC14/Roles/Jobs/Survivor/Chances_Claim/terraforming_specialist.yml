@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesTerraformingSpecialist
   startingGear: RMCGearSurvivorChancesTerraformingSpecialist
   spawnMenuRoleName: Terraforming Specialist (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:

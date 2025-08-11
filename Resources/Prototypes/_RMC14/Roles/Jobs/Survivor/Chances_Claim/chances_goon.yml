@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesGoon
   startingGear: RMCGearSurvivorChancesGoon
   spawnMenuRoleName: Chance's Claim Corporate Security (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   hasIcon: true
   special:
   - !type:AddComponentSpecial

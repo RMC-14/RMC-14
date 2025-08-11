@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesAtmosProcessTech
   startingGear: RMCGearSurvivorChancesAtmosProcessTech
   spawnMenuRoleName: Atmospheric Processing Reactor Technician (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:

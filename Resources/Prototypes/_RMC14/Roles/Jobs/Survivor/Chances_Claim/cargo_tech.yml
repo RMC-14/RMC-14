@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesCargoTech
   startingGear: RMCGearSurvivorChancesCargoTech
   spawnMenuRoleName: Warehouse Worker (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:

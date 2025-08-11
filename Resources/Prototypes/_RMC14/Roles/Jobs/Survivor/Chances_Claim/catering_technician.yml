@@ -6,6 +6,7 @@
   playTimeTracker: CMJobSurvivorChancesCivilian
   startingGear: RMCGearSurvivorChancesCivilian
   spawnMenuRoleName: Catering Technician (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
   special:
   - !type:AddComponentSpecial
     components:
