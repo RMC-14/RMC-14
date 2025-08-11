@@ -263,6 +263,10 @@ namespace Content.Server.RoundEnd
 
         public void EndRound(TimeSpan? countdownTime = null)
         {
+            // RMC14
+            // BACK AT IT FOR ROUND TWO, GOTTA CHECK THIS SHIT HERE TOOOOOOOOOOOOOOOOOOOOOOOOO????!?!??!
+            if (_cfg.GetCVar(RMCCVars.RMCDelayRoundEnd)) return;
+            // RMC14
             if (_gameTicker.RunLevel != GameRunLevel.InRound) return;
             LastCountdownStart = null;
             ExpectedCountdownEnd = null;

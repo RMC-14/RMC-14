@@ -8,7 +8,7 @@ namespace Content.Server.Shuttles.Commands;
 /// <summary>
 /// Delays the round from ending via the shuttle call. Can still be ended via other means.
 /// </summary>
-[AdminCommand(AdminFlags.Fun)]
+[AdminCommand(AdminFlags.Host)]
 public sealed class DelayRoundEndCommand : LocalizedEntityCommands
 {
     [Dependency] private readonly EmergencyShuttleSystem _shuttleSystem = default!;

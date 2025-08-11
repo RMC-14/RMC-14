@@ -18,7 +18,7 @@ public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     public override string Command => "rmcdelayroundend";
-    public override string Description => "Delay the round end while still allowing the end of round screen to show up";
+    public override string Description => "Delay the round end.";
 
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
@@ -27,12 +27,12 @@ public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
         var chatMsg = "";
         var silent = false;
 
-        if (args.Length == 3)
-            chatMsg = args[2];
+        if (args.Length == 2)
+            chatMsg = args[1];
 
-        if (args.Length >= 2)
+        if (args.Length >= 1)
         {
-            if (!bool.TryParse(args[1], out var silentParsed))
+            if (!bool.TryParse(args[0], out var silentParsed))
             {
                 shell.WriteError(Loc.GetString("shell-invalid-bool")+": Silent must be a boolean.");
                 return;
@@ -40,22 +40,12 @@ public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
             silent = silentParsed;
         }
 
-        if (args.Length >= 1)
-        {
-            if (!bool.TryParse(args[0], out var value))
-            {
-                shell.WriteError(Loc.GetString("shell-invalid-bool")+": value must be a boolean.");
-                return;
-            }
-
-            if (value == currentValue)
-            {
-                shell.WriteLine($"Value is already {value}");
-                return;
-            }
-        }
+        _chatManager.SendAdminAnnouncement($"{shell.Player}, has set the round end delay to {!currentValue}");
 
         _cfg.SetCVar(RMCCVars.RMCDelayRoundEnd, !currentValue);
+
+        if (silent)
+            return;
 
         if (chatMsg == "")
         {
@@ -71,9 +61,6 @@ public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
             }
         }
 
-        if (silent)
-            return;
-
         _chatManager.ChatMessageToAll(ChatChannel.Local, chatMsg, chatMsg, default, false, true);
     }
 
@@ -81,9 +68,8 @@ public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
     {
         return args.Length switch
         {
-            1 => CompletionResult.FromHint("Value"),
-            2 => CompletionResult.FromHint("Silent"),
-            3 => CompletionResult.FromHint("Message"),
+            1 => CompletionResult.FromHint("Silent"),
+            2 => CompletionResult.FromHint("Message"),
             _ => CompletionResult.Empty,
         };
     }
