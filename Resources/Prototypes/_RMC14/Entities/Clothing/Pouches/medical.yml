@@ -203,7 +203,6 @@
     - id: CMBeakerLarge
     - id: CMBeaker
 
-
 # Auto-Injector Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
