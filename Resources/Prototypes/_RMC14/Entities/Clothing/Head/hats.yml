@@ -203,6 +203,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/ASO/beret_aso.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretPurple
+  name: purple beret
+  description: A stylish, if purple, beret.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase
@@ -316,6 +327,25 @@
         unfoldedLayer:
           True: {visible: false}
           False: {visible: true}
+
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCYellowCap
+  name: yellow cap
+  description: It's a baseball hat in a tasteless yellow color.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Soft/yellowsoft.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Soft/yellowsoft.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: Clothing/Head/Soft/yellowsoft.rsi
+      Desert: Clothing/Head/Soft/yellowsoft.rsi
+      Snow: Clothing/Head/Soft/yellowsoft.rsi
+      Classic: Clothing/Head/Soft/yellowsoft.rsi
+      Urban: Clothing/Head/Soft/yellowsoft.rsi
 
 - type: entity
   parent: RMCHeadCapFlippable
@@ -965,3 +995,16 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
+
+# Chaplain
+
+- type: entity
+  parent: ClothingHeadHatHoodNunHood
+  id: RMCHeadNunHood
+  name: nun hood
+  description: Maximum piety in this star system
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hoods/nun.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hoods/nun.rsi

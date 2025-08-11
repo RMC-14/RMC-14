@@ -20,6 +20,12 @@
   - type: Tag
     tags:
     - Binoculars
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/wirecutter_drop.ogg
   - type: Clothing
     quickEquip: false
     slots:

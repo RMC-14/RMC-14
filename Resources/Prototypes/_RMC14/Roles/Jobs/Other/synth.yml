@@ -23,6 +23,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 5
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 4
         RMCSkillConstruction: 3
         RMCSkillFirearms: 2

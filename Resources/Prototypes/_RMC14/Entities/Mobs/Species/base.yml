@@ -68,6 +68,10 @@
     - Blinded
     - Deaf
     - Unconscious
+  - type: InteractionPopup
+    successChance: 1
+    interactSuccessString: rmc-patting-success-generic
+    messagePerceivedByOthers: rmc-patting-success-generic-others
   - type: Blindable
   - type: Tag
     tags:
@@ -112,6 +116,8 @@
     damage:
       types:
         Heat: 1
+  - type: RMCRevivable
+  - type: RMCMedicalExamine
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -139,6 +145,7 @@
       enum.HolocardChangeUIKey.Key:
         type: HolocardChangeBoundUserInterface
         interactionRange: 0
+        requireInputValidation: false
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
@@ -159,9 +166,6 @@
   - type: ShortExamine
   - type: MaxDamage
     max: 719 # TODO RMC14 this should be per part and smaller
-  - type: Perishable
-    rotAfter: 300
-    ignoreTemperature: true
   - type: AtmosExposed
   - type: Temperature
     heatDamageThreshold: 325

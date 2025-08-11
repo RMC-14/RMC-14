@@ -57,7 +57,7 @@
       rmc-aslot-stock:
         whitelist:
           tags:
-          - RMCAttachmentM42A2WoodenStock
+          - RMCAttachmentM42A2CollapsibleStock
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -83,6 +83,14 @@
     tags:
     - RMCWeaponShotgunM42A2
     - RMCWeaponShotgun
+
+- type: entity
+  parent: WeaponShotgunM42A2
+  id: RMCWeaponShotgunM42A2Filled
+  suffix: Filled
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot
 
 - type: Tag
   id: RMCWeaponShotgunM42A2

@@ -1,2 +1,3 @@
-﻿sample:
+preload: false
+sample:
   filter: false

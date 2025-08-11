@@ -17,6 +17,8 @@
     bio: 20
     explosionArmor: 10
   - type: CMHardArmor
+  - type: RMCNameItemOnVend
+    item: Armor
 
 - type: entity
   parent: RMCArmorVest
@@ -45,11 +47,11 @@
 - type: entity
   parent: [ClothingOuterBase, RMCAllowSuitStorageClothingArmorMP, BaseStorageItem, RMCBaseUniformAccessoryItemOuterClothing]
   id: RMCArmorVestMP
-  name: MP armor vest
-  description: A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommend for direct combat or for deployment use against hostiles.
+  name: M3-XL pattern MP armor vest
+  description: A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommended for direct combat or for deployment use against hostiles.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/mp_armored_vest.rsi # TODO RCM14 someone should make a better sprite for this
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/mp.rsi
   - type: CMArmor
     melee: 0
     bullet: 20
@@ -80,16 +82,18 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+  - type: RMCNameItemOnVend
+    item: Armor
 
 # mild melee armor
 - type: entity
   parent: RMCArmorVestMP
   id: RMCArmorVestIO
-  name: intel armor vest
-  description: A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommend for direct combat.
+  name: M3-XL pattern intel armor vest
+  description: A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommended for direct combat.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armored_vest.rsi # TODO RCM14 someone should make a better sprite for this
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/intel.rsi
   - type: CMArmor
     melee: 10
     bullet: 10
@@ -99,10 +103,11 @@
 - type: entity
   parent: RMCArmorVestMP
   id: RMCArmorVestMedic
-  name: corpsman armor vest
+  name: M3-XL pattern corpsman armor vest
+  description: A type of M3-XL body armor, made specially for UNMC Corpsmen. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armored_vest.rsi # TODO RCM14 someone should make a better sprite for this
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/corpsman.rsi
   - type: CMArmor
     melee: 0
     bullet: 10

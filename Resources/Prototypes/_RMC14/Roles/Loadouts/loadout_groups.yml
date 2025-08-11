@@ -571,7 +571,7 @@
   - PatchWeYaRMCFury161
   - PatchTSERMC
   - PatchCECRMC
-  - PatchCLFRMC
+  # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
   - HeadCowboyHatLightRMC
   - HeadCowboyHatDarkRMC

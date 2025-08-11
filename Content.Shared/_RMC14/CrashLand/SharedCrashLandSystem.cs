@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
@@ -155,9 +155,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return false;
         }
 
-        if (!_area.CanCAS(location) ||
-            !_area.CanFulton(location) ||
-            !_area.CanSupplyDrop(_transform.ToMapCoordinates(location)))
+        if (!_area.CanParadrop(location))
             return false;
 
         // don't spawn inside of solid objects
