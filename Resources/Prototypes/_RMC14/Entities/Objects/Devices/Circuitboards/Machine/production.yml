@@ -36,7 +36,7 @@
 #    - type: Sprite
 #      state: power_mod
 ##    - type: MachineBoard
-##      prototype: PortableGeneratorPacman # TODO RMC14 pacman
+##      prototype: RMCPortableGenerator # TODO RMC14 buildable
 ##      requirements:
 ##        Capacitor: 1
 ##      materialRequirements:
@@ -57,7 +57,7 @@
 #    - type: Sprite
 #      state: power_mod
 #    - type: MachineBoard
-#      prototype: PortableGeneratorSuperPacman # TODO RMC14 super pacman
+#      prototype: RMCPortableGenerator2 # TODO RMC14 buildable
 ##      requirements:
 ##        Capacitor: 2
 ##      materialRequirements:
@@ -138,3 +138,27 @@
   components:
     - type: MachineBoard
       prototype: RMCArmylatheEmpty
+
+# - type: entity
+#   parent: CMBaseMachineCircuitboard
+#   id: RMCCircuitboardFireAlarm
+#   name: fire alarm machine board
+#   description: A machine printed circuit board for a fire alarm
+#   components:
+#     - type: MachineBoard
+#       prototype: RMCFireAlarm # TODO RMC14 Fire Alarm
+
+# - type: entity
+#   parent: CMBaseMachineCircuitboard
+#   id: RMCCircuitboardComputer
+#   name: computer circuit board
+#   description: A machine printed circuit board for a computer
+#   components:
+#     - type: MachineBoard
+#       prototype: RMCComputer # TODO RMC14 Computer building
+
+# - type: entity
+#   parent: DoorElectronics
+#   id: RMCElectronicsAirlock
+#   name: airlock electronics
+#   description: A machine printed circuit board for an airlock # TODO RMC14 Airlock Building

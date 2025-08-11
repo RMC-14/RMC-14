@@ -2,11 +2,13 @@ using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -347,7 +349,8 @@ public abstract class SharedDropshipSystem : EntitySystem
         EntityUid? user,
         bool hijack = false,
         float? startupTime = null,
-        float? hyperspaceTime = null)
+        float? hyperspaceTime = null,
+        bool offset = false)
     {
         return false;
     }
@@ -396,6 +399,25 @@ public abstract class SharedDropshipSystem : EntitySystem
         {
             var minutesLeft = Math.Max(1, (int)(_hijackInitialDelay - roundDuration).TotalMinutes);
             var msg = Loc.GetString("rmc-dropship-pre-hijack", ("minutes", minutesLeft));
+
+            if (predicted)
+                _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);
+            else
+                _popup.PopupEntity(msg, computer, user, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        var map = _transform.GetMap(user.Owner);
+
+        // Prevent shipside hijacks by immature queens.
+        if (HasComp<XenoMaturingComponent>(user) &&
+            !HasComp<RMCPlanetComponent>(map) ||
+            // Prevent double hijack.
+            TryComp(map, out EvacuationProgressComponent? evacuation) &&
+            evacuation.DropShipCrashed)
+        {
+            var msg = Loc.GetString("rmc-dropship-invalid-hijack");
 
             if (predicted)
                 _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);

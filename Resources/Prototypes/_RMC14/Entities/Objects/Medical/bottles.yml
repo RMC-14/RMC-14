@@ -217,3 +217,20 @@
   - type: CMRefillableSolution
     reagents:
       RMCAntiZed: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: RMCBottleMindbreaker
+  name: mindbreaker bottle
+  description: A small bottle. Contains mindbreaker toxin - Fucks up anyone who takes it.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: RMCMindbreakerToxin
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      RMCMindbreakerToxin: 60

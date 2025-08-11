@@ -126,9 +126,6 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCActiveInputMoverEnabled =
         CVarDef.Create("rmc.active_input_mover_enabled", true, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<string> RMCAdminFaxAreaMap =
-        CVarDef.Create("rmc.admin_fax_area_map", "Maps/_RMC14/admin_fax.yml", CVar.REPLICATED | CVar.SERVER);
-
     public static readonly CVarDef<int> RMCBioscanInitialDelaySeconds =
         CVarDef.Create("rmc.bioscan_initial_delay_seconds", 300, CVar.REPLICATED | CVar.SERVER);
 
@@ -428,7 +425,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.distress_xenos_minimum", 4, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> VolumeGainCassettes =
-        CVarDef.Create("rmc.volume_gain_cassettes", 0.5f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+        CVarDef.Create("rmc.volume_gain_cassettes", 0.33f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
     public static readonly CVarDef<float> VolumeGainHijackSong =
         CVarDef.Create("rmc.volume_gain_hijack_song", 0.5f, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
@@ -447,4 +444,10 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCQueenBuildingBoostRemoteRange =
         CVarDef.Create("rmc.queen_building_boost_remote_range", 50f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCAutomaticCommanderPromotion =
+        CVarDef.Create("rmc.automatic_commander_promotion", true, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDeadChatEnabled =
+        CVarDef.Create("rmc.dead_chat_enabled", true, CVar.SERVER | CVar.NOTIFY | CVar.REPLICATED);
 }

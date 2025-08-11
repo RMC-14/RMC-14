@@ -31,9 +31,6 @@ CMSurvivorScientist = Scientist Colonist
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
 
-cm-job-name-survivor-goon = We-Ya Corporate Security
-CMSurvivorGoon = We-Ya Corporate Security
-
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
@@ -147,6 +144,9 @@ CMJobSurvivorHybrisaXenoarchaeologist = Xenoarchaeologist
 rmc-job-name-survivor-xenobiologist = Xenobiologist
 CMJobSurvivorHybrisaXenobiologist = Xenobiologist
 
+rmc-job-name-survivor-pizza-galaxy = Civilian - Pizza Galaxy Delivery Driver
+CMJobSurvivorHybrisaPizzaGalaxy = Civilian - Pizza Galaxy Delivery Driver
+
 rmc-job-name-survivor-commercial-pilot = Weston-Yamada - Commercial Pilot
 
 rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
@@ -257,5 +257,4 @@ CMSurvivorChancesCargoTech = Warehouse Worker
 
 rmc-job-name-survivor-chances-goon = Chance's Claim Corporate Security
 CMSurvivorChancesGoon = Chance's Claim Corporate Security
-
 
