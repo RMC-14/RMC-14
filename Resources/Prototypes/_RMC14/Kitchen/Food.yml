@@ -73,6 +73,10 @@
           Quantity: 2
         - ReagentId: RMCPeanutButter
           Quantity: 3
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - nutty
 
 - type: entity
   name: peanut butter and jelly sandwich
@@ -160,6 +164,7 @@
     flavors:
     - rice
     - mango
+    - sweet
   - type: Sprite
     layers:
     - state: bowl

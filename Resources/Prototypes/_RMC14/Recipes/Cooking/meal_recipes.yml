@@ -170,3 +170,17 @@
     FoodMeatBacon: 1
   reagents:
     Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeRiceMango
+  name: mango recipe
+  result: FoodRiceMango
+  time: 15
+  group: Dessert
+  reagents:
+    Rice: 15
+    Milk: 10
+    Sugar: 5
+  solids:
+    FoodBowlBig: 1
+    FoodMango: 1

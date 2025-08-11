@@ -20,24 +20,24 @@
   desc: reagent-desc-mango-agua-fresca
   physicalDesc: reagent-physical-desc-sweet
   flavor: sweet
-  color: "#DFC6AF"
+  color: "#FFBF34"
   metamorphicSprite:
-    sprite: _RMC14/Objects/Consumable/Drinks/mango-agua-fresca.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/mango_agua_fresca.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 4
+  metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
 
 - type: reagent
   id: MangoCooler
-  parent: BaseDrink
+  parent: BaseAlcohol
   name: reagent-name-mango-cooler
   desc: reagent-desc-mango-cooler
   physicalDesc: reagent-physical-desc-sweet
   flavor: sweet
-  color: "#DFC6AF"
+  color: "#FFBF34"
   metamorphicSprite:
-    sprite: _RMC14/Objects/Consumable/Drinks/mango-cooler.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/mango_cooler.rsi
     state: icon_empty
   metamorphicMaxFillLevels: 4
   metamorphicFillBaseName: fill-

@@ -108,6 +108,20 @@
     RMCMilkshake: 2
 
 - type: reaction
+  id: MangoAguaFresca
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    Water:
+      amount: 2
+    Sugar:
+      amount: 1
+    JuiceMango:
+      amount: 2
+  products:
+    MangoAguaFresca: 2
+
+- type: reaction
   id: CreateMeat
   impact: Low
   quantized: true
