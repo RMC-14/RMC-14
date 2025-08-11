@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMXenoCrusher
+  parent: RMCXenoCrusher
   id: CMXenoCrusherNPC
   suffix: AI
   components:
