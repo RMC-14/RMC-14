@@ -9,7 +9,7 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin;
 
 /// <summary>
-/// Delays the round from ending via the shuttle call. Can still be ended via other means.
+/// Delays the round end even after the round end screen.
 /// </summary>
 [AdminCommand(AdminFlags.Admin)]
 public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
