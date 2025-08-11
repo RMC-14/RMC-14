@@ -34,7 +34,5 @@
       !type:RoleTimeRequirement
       role: CMJobLiaison
       time: 630000 # 175 hours
-  storage:
-    back:
-    - RMCHeadBeretWeYa
-
+  equipment:
+    head: RMCHeadBeretWeYa
