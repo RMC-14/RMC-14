@@ -44,7 +44,7 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
     {
         SubscribeLocalEvent<MarineComponent, GetVerbsEvent<AlternativeVerb>>(AlternativeInteract);
         SubscribeLocalEvent<MarineComponent, RMCBattleExecuteEvent>(ExecuteDoAfter);
-        SubscribeLocalEvent<MarineComponent, ExaminedEvent>(ExamineBody);
+        SubscribeLocalEvent<RMCBattleExecutedComponent, ExaminedEvent>(ExamineBody);
     }
 
     private void AlternativeInteract(Entity<MarineComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -64,7 +64,7 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
             {
                 Text = Loc.GetString("rmc-execution"),
                 Act = () => { Execute(user, target, executionComponent, handHeldItem.Value); },
-                Priority = 1
+                Priority = 100
             });
         }
     }
@@ -151,12 +151,8 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
         EnsureComp<RMCBattleExecutedComponent>(target);
     }
 
-    private void ExamineBody(Entity<MarineComponent> ent, ref ExaminedEvent args)
+    private void ExamineBody(Entity<RMCBattleExecutedComponent> ent, ref ExaminedEvent args)
     {
-        if (HasComp<RMCBattleExecutedComponent>(ent))
-        {
-            var msg = "[color=Fuchsia]Has obviously had their brain removed violently.[/color]";
-            args.PushMarkup(msg);
-        }
+        args.PushMarkup(Loc.GetString(ent.Comp.ExecutedText, ("victim", ent.Owner)));
     }
 }

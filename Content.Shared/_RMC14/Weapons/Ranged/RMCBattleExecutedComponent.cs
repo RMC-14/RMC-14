@@ -2,5 +2,9 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
-[RegisterComponent, NetworkedComponent]
-public sealed partial class RMCBattleExecutedComponent : Component;
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class RMCBattleExecutedComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public LocId ExecutedText = "rmc-executed";
+}
