@@ -104,23 +104,22 @@
   clickEvent: !type:OpenTacMapAlertEvent
 
 - type: alert
-  id: Pain
+  id: HumanoidPainHealth
+  category: Health
   icons:
-  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain.rsi
-    state: pain_level_0
-  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain.rsi
-    state: pain_level_1
-  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain.rsi
-    state: pain_level_2
-  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain.rsi
-    state: pain_level_3
-  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain.rsi
-    state: pain_level_4
-  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain.rsi
-    state: pain_level_5
-  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain.rsi
-    state: pain_level_6
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health0
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health1
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health2
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health3
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health4
+  - sprite: /Textures/_RMC14/Interface/Alerts/humanoid_pain_alive.rsi
+    state: health5
   minSeverity: 0
-  maxSeverity: 6
-  name: rmc-alerts-pain-name
-  description: rmc-alerts-pain-desc
+  maxSeverity: 5
+  name: alerts-health-name
+  description: alerts-health-desc

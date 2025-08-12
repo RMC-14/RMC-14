@@ -62,7 +62,7 @@ public sealed partial class PainComponent : Component
     public List<PainLevel> PainLevels = [];
 
     [DataField, AutoNetworkedField]
-    public ProtoId<AlertPrototype> Alert = "Pain";
+    public ProtoId<AlertPrototype> Alert = "HumanoidPainHealth";
 }
 
 [DataDefinition, Serializable, NetSerializable]

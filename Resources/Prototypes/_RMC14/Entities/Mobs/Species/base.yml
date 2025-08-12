@@ -342,6 +342,10 @@
       0: Alive
       150: Critical
       200: Dead
+    stateAlertDict:
+      Alive: HumanoidPainHealth
+      Critical: HumanCrit
+      Dead: HumanDead
   - type: MobStateActions
     actions:
       Critical:

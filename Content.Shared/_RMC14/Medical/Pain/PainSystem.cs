@@ -8,6 +8,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Alert;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Mobs.Events;
 
 namespace Content.Shared._RMC14.Medical.Pain;
 
@@ -31,8 +32,8 @@ public sealed partial class PainSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<PainComponent, ComponentInit>(OnPainInit);
         SubscribeLocalEvent<PainComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<PainComponent, BeforeAlertSeverityCheckEvent>(OnAlertSeverityCheck);
 
         _bruteTypes.Clear();
         _burnTypes.Clear();
@@ -72,9 +73,13 @@ public sealed partial class PainSystem : EntitySystem
         }
     }
 
-    private void OnPainInit(EntityUid uid, PainComponent pain, ref ComponentInit args)
+    private void OnAlertSeverityCheck(EntityUid uid, PainComponent pain, ref BeforeAlertSeverityCheckEvent args)
     {
-        _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
+        if (args.CurrentAlert == pain.Alert)
+        {
+            args.Severity = Math.Min((short)pain.CurrentPainLevel, _alerts.GetMaxSeverity(pain.Alert));
+            args.CancelUpdate = true;
+        }
     }
 
     private void OnDamageChanged(EntityUid uid, PainComponent comp, ref DamageChangedEvent args)
@@ -98,7 +103,8 @@ public sealed partial class PainSystem : EntitySystem
         DirtyField(uid, pain, nameof(PainComponent.CurrentPainLevel));
         DirtyField(uid, pain, nameof(PainComponent.NextPainLevelUpdateTime));
 
-        _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
+        if (pain.CurrentPainLevel <= _alerts.GetMaxSeverity(pain.Alert))
+            _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
     }
     public void AddPainModificator(EntityUid uid, TimeSpan duration, FixedPoint2 effectStrength, PainModificatorType type, PainComponent? pain = null)
     {
