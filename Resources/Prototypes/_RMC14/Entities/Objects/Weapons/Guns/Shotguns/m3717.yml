@@ -11,7 +11,7 @@
       state: icon
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m3717_inhands.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m3717/m3717_inhands.rsi
   - type: Gun
     shotsPerBurst: 1
     soundGunshot:

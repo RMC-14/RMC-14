@@ -120,13 +120,16 @@
       state: tail_attack
     useDelay: 10
   - type: TargetAction
-    range: 2
+    range: 2.5
     checkCanAccess: false
   - type: EntityTargetAction
+    targetCheckCanInteract: false
   - type: WorldTargetAction
     event: !type:XenoTailStabEvent
   - type: XenoTailStabAction
   - type: RMCDazeableAction
+  - type: ActionInRangeUnobstructed
+    range: 2.5
 
 - type: entity
   id: ActionXenoTailSlam
@@ -376,6 +379,7 @@
     range: 15
     checkCanAccess: false
   - type: EntityTargetAction
+    targetCheckCanInteract: false
   - type: WorldTargetAction
     event: !type:XenoSpitActionEvent
   - type: ActionBlockIfResting

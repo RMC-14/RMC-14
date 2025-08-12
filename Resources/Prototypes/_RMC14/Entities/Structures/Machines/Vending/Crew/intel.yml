@@ -127,9 +127,9 @@
       entries:
       - id: CMHeadsetIntel
       - id: CMMRE
-    - name: Gloves 
+    - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Armor
@@ -148,6 +148,8 @@
       - id: CMSatchelMarineIntel
         recommended: true
       - id: RMCSatchelMarineIntelChestrig
+        recommended: true
+      - id: RMCSatchelMarineIntelSatchel
         recommended: true
       - id: RMCBackpackRTO
     - name: Helmet
@@ -203,6 +205,8 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
       - id: RMCWebbingDropPouch

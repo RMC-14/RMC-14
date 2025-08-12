@@ -18,7 +18,14 @@
   - type: CMStorageVisualizer
     storageClosed: closedLayer
     storageOpen: openLayer
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
   - type: Clothing
+    equipSound:
+      collection: storageRustle
+    unequipSound:
+      collection: RMCEquipArmor
     quickEquip: false
     slots:
     - back

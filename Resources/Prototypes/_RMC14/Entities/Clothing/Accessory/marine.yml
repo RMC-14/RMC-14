@@ -28,3 +28,9 @@
     tags:
     - RipOffOnInfection
   - type: OverwatchCamera
+
+- type: entity
+  parent: RMCM5CameraGear
+  id: RMCCameraGearPMC
+  name: Mk3 TOCU headcam
+  description: A modification & ruggedisation of the camera gear fielded by the RCM, the Tactical Overwatch Camera Unit is used by Weston Yamada PMC forces that forgo a typical protective head-cover, allowing their handler to remain aware of the operatives current status.

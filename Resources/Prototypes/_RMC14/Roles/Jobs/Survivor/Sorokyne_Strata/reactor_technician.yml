@@ -41,7 +41,6 @@
     pocket2: RMCWelderIndustrial
   storage:
     back:
-    - CMSheetMetal20
     - RMCMaskGasSPP
 
 - type: entity
@@ -68,6 +67,6 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, CMSatchel, RMCShoesWhite ]
-    - [ RMCLabcoatShort, CMSatchel, RMCShoesLaceupBrown ]
-    - [ RMCHeadRadiationHood, RMCSuitRadiation, CMSatchel, RMCShoesLaceupBrown ]
+    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, RMCShoesWhite ]
+    - [ RMCLabcoatShort, RMCShoesLaceupBrown ]
+    - [ RMCHeadRadiationHood, RMCSuitRadiation, RMCShoesLaceupBrown ]

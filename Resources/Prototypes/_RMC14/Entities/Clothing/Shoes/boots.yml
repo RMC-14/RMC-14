@@ -44,7 +44,12 @@
     - state: icon
     - state: filled
       map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
   - type: Clothing
+    unequipSound:
+      collection: RMCEquipArmor
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
   - type: ContainerContainer
     containers:
@@ -84,6 +89,17 @@
         volume: -8
         maxDistance: 0
 
+- type: entity
+  parent: CMBootsBlack
+  id: RMCShoesCombat
+  name: combat boots
+  description: When you REALLY want to turn up the heat
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
+
 # Brown Boots
 - type: entity
   parent: CMBootsBlack
@@ -119,7 +135,7 @@
 
 # Corporate
 - type: entity
-  parent: [RMCItemSlotM5Bayonet, CMBootsBlack]
+  parent: CMBootsBlack
   id: RMCBootsCorporate
   name: rugged boots
   description: These synth-leather boots seem high quality when first worn, but quickly detoriate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
@@ -201,6 +217,7 @@
   id: RMCBootsRoyal
   name: L10 pattern combat boots
   description: Standard issue combat boots for combat scenarios or combat situations. Used by the Three Sun Empire's Royal Crown Marines.
+  suffix: TSE, RCM
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/rmc.rsi
