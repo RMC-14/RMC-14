@@ -108,7 +108,7 @@
       takeAll: CMArmor
       entries:
       - id: CMArmorM3Warden
-      - id: RMCArmorVestMP # TODO: Possible custom variant
+      - id: RMCArmorVestMP
       - id: CMHeadCapWarden
     - name: Handgun Case
       choices: { CMGunCase: 1 }
