@@ -573,3 +573,33 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/medic_patch.rsi
       state: helmet
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchOliveBranch
+  name: Interstellar Peace Group patch
+  description: A patch adorned with an olive branch, worn by members of the Interstellar Peace Group, a civilian organization. It stands for galactic peace, and universal empathy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/olive_branch_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/olive_branch_patch.rsi
+      state: patch
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-interstellar-peace-group-patch
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchPeace
+  name: peace symbol sticker
+  description: This planet is made of LOVE AND PEACE!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/peace_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/Misc/peace_patch.rsi
+      state: patch
