@@ -841,7 +841,7 @@
       takeAll: CMStandard
       entries:
       - id: CMArmorM3WO
-      - id: RMCArmorVestMP # TODO: Possible custom variant
+      - id: RMCArmorVestMP
       - id: CMArmorHelmetM10ChiefMP
       - id: CMHeadBeretCMP
     - name: Handgun Case
