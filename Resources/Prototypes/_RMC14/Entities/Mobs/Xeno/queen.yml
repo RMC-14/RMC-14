@@ -90,6 +90,7 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoSpikeResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode

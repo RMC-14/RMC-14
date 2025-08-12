@@ -140,6 +140,7 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoSpikeResin
 
 - type: entity
   parent: CMXenoDroneBase
