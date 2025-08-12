@@ -148,7 +148,7 @@
     - RNMCStockPartPedal
 
 - type: entity
-  parent: [ SeatBase, RNMCStockPartLargeBase ]
+  parent: [ SeatBase, ChairFolding, RNMCStockPartLargeBase ]
   id: RNMCStockPartVehicleSeat
   name: vehicle seat
   description: A seat for drivers or passengers to sit in a vehicle.
@@ -156,9 +156,15 @@
   components:
   - type: Transform
     noRot: false
+  - type: Foldable
   - type: Sprite
-    sprite: _RNMC14/Objects/Misc/stock_parts.rsi # Otherwise, it will default to 'Textures/Structures/Furniture/chairs.rsi'.
-    state: vehicle_seat
+    sprite: _RNMC14/Objects/Misc/Stock_Parts/vehicle_seat.rsi
+    layers:
+    - state: chair
+      map: ["unfoldedLayer"]
+    - state: chair_folded
+      map: ["foldedLayer"]
+      visible: false
     noRot: true
   - type: Rotatable
   - type: Fixtures
@@ -174,3 +180,13 @@
     tags:
     - RMCSeat
     - RNMCStockPartVehicleSeat
+
+- type: entity
+  parent: RNMCStockPartVehicleSeat
+  id: RNMCStockPartVehicleSeatFolded
+  suffix: folded, Rating 1
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: False

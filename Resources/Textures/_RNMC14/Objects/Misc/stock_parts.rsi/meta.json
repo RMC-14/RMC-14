@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Sprite made by Merrokitsune, using pallette taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/794d6668d4d1d1f767241c70b2171cbe92215421/icons/obj/items/stock_parts.dmi and https://github.com/cmss13-devs/cmss13/blob/31eabcb5240425983ca6b1cb1c2dfbde1312563a/icons/obj/items/stock_parts.dmi. wheel taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cc60c815011c0e55147dbdc7d160f890377275df/icons/obj/vehicles/arc.dmi. wheel taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3930ec0698c7acdda76e24cd226ed5a4e1e24d0d/icons/obj/vehicles/hardpoints/truck.dmi and modified by Merrokitsune, with pallette used to create inhand-left-wheel and inhand-right-wheel.",
+    "copyright": "Sprite made by Merrokitsune, using pallette taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/794d6668d4d1d1f767241c70b2171cbe92215421/icons/obj/items/stock_parts.dmi and https://github.com/cmss13-devs/cmss13/blob/31eabcb5240425983ca6b1cb1c2dfbde1312563a/icons/obj/items/stock_parts.dmi. wheel taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3930ec0698c7acdda76e24cd226ed5a4e1e24d0d/icons/obj/vehicles/hardpoints/truck.dmi and modified by Merrokitsune, with pallette used to create inhand-left-wheel and inhand-right-wheel.",
     "size": {
       "x": 32,
       "y": 32
@@ -45,10 +45,6 @@
       },
       {
         "name": "pedal"
-      },
-      {
-        "name": "vehicle_seat",
-        "directions": 4
       }
     ]
 }
