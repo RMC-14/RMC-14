@@ -479,6 +479,7 @@ public enum LogType
     /// </summary>
     Instrument = 103,
 
+    RMCAdminCommandLogging = 99999,
     RMCMarineAnnounce = 10000,
     RMCXenoAnnounce = RMCMarineAnnounce + 1,
     RMCNamedItem = RMCMarineAnnounce + 2,
