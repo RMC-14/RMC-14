@@ -45,6 +45,10 @@
       },
       {
         "name": "pedal"
+      },
+      {
+        "name": "vehicle_seat",
+        "directions": 4
       }
     ]
 }
