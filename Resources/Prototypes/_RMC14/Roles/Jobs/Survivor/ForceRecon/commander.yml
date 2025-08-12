@@ -58,8 +58,8 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
     - type: SpotterWhitelist
-  useLoadoutOfJob: RMCSurvivorCommandingOfficer
   hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
   parent: RMCGearForeconBase

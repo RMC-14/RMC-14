@@ -8,6 +8,7 @@
   spawnMenuRoleName: Trijent Dam Researcher (Trijent Survivor)
   accessGroups:
   - ColonistMedical
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorScientist
