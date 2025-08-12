@@ -55,5 +55,5 @@
   background: /Textures/_RMC14/Lobby/Evac.png
 
 - type: lobbyBackground
-  id: Nightmares
-  background: /Textures/_RMC14/Lobby/Nightmares.png
+  id: Intelligence
+  background: /Textures/_RMC14/Lobby/Intelligence.png
