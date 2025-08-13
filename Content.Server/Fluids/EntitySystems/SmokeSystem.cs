@@ -1,8 +1,10 @@
+using System.Linq;
 using Content.Server.Administration.Logs;
-using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
-using Content.Server.EntityEffects.Effects;
+using Content.Shared.EntityEffects.Effects;
 using Content.Server.Spreader;
+using Content.Shared.Body.Components;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -20,8 +22,6 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Linq;
-
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
 
 namespace Content.Server.Fluids.EntitySystems;
@@ -261,8 +261,24 @@ public sealed class SmokeSystem : EntitySystem
         if (!Resolve(smokeUid, ref component))
             return;
 
+        // RMC14 allow smoke to react without a bloodstream
         if (!TryComp<BloodstreamComponent>(entity, out var bloodstream))
+        {
+            var noBloodStreamSolution = solution.Clone();
+            var amount = FixedPoint2.Min(noBloodStreamSolution.Volume, component.TransferRate);
+            var finalSolution = noBloodStreamSolution.SplitSolution(amount);
+
+            foreach (var reagentQuantity in finalSolution.Contents.ToArray())
+            {
+                if (reagentQuantity.Quantity == FixedPoint2.Zero)
+                    continue;
+                var reagentProto = _prototype.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+
+                _reactive.ReactionEntity(entity, ReactionMethod.Touch, reagentProto, reagentQuantity, finalSolution);
+            }
+
             return;
+        }
 
         if (!_solutionContainerSystem.ResolveSolution(entity, bloodstream.ChemicalSolutionName, ref bloodstream.ChemicalSolution, out var chemSolution) || chemSolution.AvailableVolume <= 0)
             return;
@@ -278,7 +294,7 @@ public sealed class SmokeSystem : EntitySystem
         {
             if (reagentQuantity.Quantity == FixedPoint2.Zero)
                 continue;
-            var reagentProto = _prototype.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+            var reagentProto = _prototype.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
 
             _reactive.ReactionEntity(entity, ReactionMethod.Touch, reagentProto, reagentQuantity, transferSolution);
             if (!blockIngestion)
@@ -288,7 +304,7 @@ public sealed class SmokeSystem : EntitySystem
         if (blockIngestion)
             return;
 
-        if (_blood.TryAddToChemicals(entity, transferSolution, bloodstream))
+        if (_blood.TryAddToChemicals((entity, bloodstream), transferSolution))
         {
             // Log solution addition by smoke
             _logger.Add(LogType.ForceFeed, LogImpact.Medium, $"{ToPrettyString(entity):target} ingested smoke {SharedSolutionContainerSystem.ToPrettyString(transferSolution)}");
@@ -313,7 +329,7 @@ public sealed class SmokeSystem : EntitySystem
             if (reagentQuantity.Quantity == FixedPoint2.Zero)
                 continue;
 
-            var reagent = _prototype.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+            var reagent = _prototype.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
             reagent.ReactionTile(tile, reagentQuantity.Quantity, EntityManager, reagentQuantity.Reagent.Data);
         }
     }

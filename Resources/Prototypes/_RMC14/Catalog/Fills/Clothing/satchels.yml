@@ -79,3 +79,27 @@
     contents:
     - id: RMCRadioHandheldColony
     - id: RMCPowerCellSmartgun
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackSurvivorFill
+  suffix: Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+    - id: RMCMagazineSMGP90
+      amount: 2
+
+- type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackBartenderSynthFill
+  suffix: Bartender Synth, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkAlcoholGrenadine
+    - id: RMCDrinkAlcoholCognac
+    - id: RMCDrinkAlcoholTequila
+    - id: RMCDrinkAlcoholRum
+    - id: RMCBaseballBat

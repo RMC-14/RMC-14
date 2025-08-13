@@ -22,15 +22,17 @@
   icon: "CMJobIconStaffOfficer"
   requireAdminNotify: true
   joinNotifyCrew: false
+  marineAuthorityLevel: 12
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - MarineMain
+  - SO
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1

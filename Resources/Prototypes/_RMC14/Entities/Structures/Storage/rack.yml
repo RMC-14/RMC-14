@@ -64,3 +64,11 @@
     destroy: true
   - type: XenoCrusherChargable
     instantDestroy: true
+
+- type: entity
+  parent: CMRack
+  id: RMCRackSoro
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#98A3AB"

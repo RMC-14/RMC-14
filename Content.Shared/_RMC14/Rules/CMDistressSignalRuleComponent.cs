@@ -108,6 +108,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
         ("CMSurvivorDoctor", 3),
         ("CMSurvivorSecurity", 2),
         ("CMSurvivorCorporate", 2),
+        ("CMSurvivorScientist", 2),
         ("CMSurvivor", -1),
     };
 
@@ -162,6 +163,11 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public ResPath Thunderdome = new("/Maps/_RMC14/thunderdome.yml");
 
+    public List<string> AuxiliaryMaps = new() {
+        "/Maps/_RMC14/OCP-583.yml",
+        "/Maps/_RMC14/admin_fax.yml"
+    };
+
     [DataField]
     public ProtoId<JobPrototype> XenoSurvivorCorpseJob = "CMSurvivor";
 
@@ -200,4 +206,10 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public bool RequireXenoPlayers = true;
+
+    [DataField]
+    public bool QueenBoostRemoved;
+
+    [DataField]
+    public bool RecalculatedPower;
 }

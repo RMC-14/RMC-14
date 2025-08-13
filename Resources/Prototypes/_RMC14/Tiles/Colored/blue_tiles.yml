@@ -68,3 +68,9 @@
   parent: CMFloorSteelPlanetBlueBase
   id: CMFloorSteelPlanetBlueFull
   sprite: /Textures/_RMC14/Tiles/floors/bluefull.png
+
+- type: tile
+  parent: CMFloorSteelPlanetBlueBase
+  id: RMCFloorSteelPlanetBarber
+  sprite: /Textures/_RMC14/Tiles/floors/barber.png
+

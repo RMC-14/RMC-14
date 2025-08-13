@@ -106,6 +106,11 @@
     access: [["CMAccessBrig"]]
 
 - type: entity
+  parent: CMLockerPolice
+  id: RMCLockerPoliceSoro
+  name: security officer's locker
+
+- type: entity
   parent: CMLockerBase
   id: RMCLockerGunBase
   name: gun cabinet
@@ -217,6 +222,9 @@
     sprite: _RMC14/Structures/Storage/Lockers/qm.rsi
   - type: AccessReader
     access: [["CMAccessQM"]]
+  - type: StorageFill
+    contents:
+      - id: RMCMegaphone
 
 - type: entity
   parent: CMLockerBase
@@ -418,6 +426,31 @@
   parent: RMCLockerSmartGunOperatorOne
   id: RMCLockerSmartGunOperatorFour
   name: squad four smartgun operator locker
+
+- type: entity
+  parent: RMCLockerSquadLeader
+  id: RMCLockerSquadLeaderPMC
+  name: force lead locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCSLFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorPMCOne
+  name: squad one support gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCSGOFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorPMCOne
+  id: RMCLockerSmartGunOperatorPMCTwo
+  name: squad two support gunner locker
 
 - type: entity
   parent: RMCCabinet

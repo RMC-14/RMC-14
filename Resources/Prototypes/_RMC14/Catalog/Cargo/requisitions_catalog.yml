@@ -72,6 +72,12 @@
         crate: RMCCrateMagazineNapthalUT
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFire
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFireBlue
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFireSmoke
     - name: Attachments
       entries:
       - cost: 3000
@@ -227,6 +233,8 @@
         crate: RMCCrateGearPackFlareCAS
       - cost: 2000
         crate: RMCCrateGearFulton
+      - cost: 4000
+        crate: RMCCrateGearParachute
     - name: Medical
       entries:
       - cost: 3200
@@ -300,7 +308,7 @@
       - cost: 3000
         crate: RMCCrateXM51
       - cost: 4000
-        crate: RMCCrateM79
+        crate: RMCCrateM85A1
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000

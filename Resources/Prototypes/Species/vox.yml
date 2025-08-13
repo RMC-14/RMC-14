@@ -24,8 +24,6 @@
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     Chest: MobVoxTorso
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
     Eyes: MobVoxEyes
     LArm: MobVoxLArm
     RArm: MobVoxRArm
@@ -69,7 +67,7 @@
       points: 1
       required: false
     Chest:
-      points: 1
+      points: 2
       required: false
     Tail:
       points: 1

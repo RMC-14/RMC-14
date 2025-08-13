@@ -124,9 +124,9 @@
   components:
   - type: Sprite
     layers:
-    - state: smg_box
+    - state: rifle_box
       color: "#727e90"
-    - state: smg_box_marking
+    - state: rifle_box_marking
       color: "#7c4c1b"
     - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
@@ -156,9 +156,9 @@
   components:
   - type: Sprite
     layers:
-    - state: smg_box
+    - state: rifle_box
       color: "#727e90"
-    - state: smg_box_marking
+    - state: rifle_box_marking
       color: "#318b11"
     - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]

@@ -39,7 +39,7 @@
   - type: MaterialStorage
     storage:
       CMSteel: 800
-      CMGlass: 100
+      CMGlass: 53
     whitelist:
       components:
       - FloorTile
@@ -109,15 +109,14 @@
   - CMWrench
   - CMHeadset
   - CMRadioHandheld
-  #    - Welding mask (3750 metal, 1250 glass)
+  #    - Welding mask (3000 metal, 1000 glass)->(3750, 1250)
   - CMSheetGlassReinforced
   - CMRodMetal
   - RMCKitchenKnife
-  #    - Tape recorder (75 metal, 37 glass)
-  #    - Airlock electronics (62 metal, 62 glass)
-  #    - Fire alarm electronics (62 metal, 62 glass)
-  #    - Power control module (62 metal, 62 glass)
-  #    - Matter cartridge (37500 metal, 18750 glass)
+  #    - Tape recorder (60 metal, 30 glass)->(75, 37)
+  #    - Airlock electronics (50 metal, 50 glass)->(62, 62)
+  #    - Fire alarm electronics (50 metal, 50 glass)->(62, 62)
+  #    - Power control module (50 metal, 50 glass)->(62, 62)
   - RMCTablePartTan
   - RMCTablePartAlmayer
   - RMCTablePartReinforced
@@ -131,15 +130,15 @@
   - CMBeaker
   - CMBeakerLarge
   #    - CMDrinkingGlass (look in lathe recipes, just needs new ID)
-  #    - Console screen (250 glass)
-  #    - Igniter (625 metal, 62 glass)
-  #    - Signaller (1250 metal, 250 glass)
-  #    - Infrared sensor (1250 metal, 625 glass)
-  #    - Timer (625 metal, 62 glass)
-  #    - Proximity sensor (1000 metal, 250 glass)
+  #    - Console screen (200 glass)->(250)
+  #    - Igniter (500 metal, 50 glass)->(625, 62)
+  #    - Signaller (1000 metal, 200 glass)->(1250, 250)
+  #    - Infrared sensor (1000 metal, 500 glass)->(1250, 625)
+  #    - Timer (500 metal, 50 glass)->(625, 62)
+  #    - Proximity sensor (800 metal, 200 glass)->(1000, 250)
   - CMLightTube
   - CMLightBulb
-  #    - Glass ashtray (75 glass)
+  #    - Glass ashtray (60 glass)->(75)
   - CMHandLabeler
-#    - Camera assembly (875 metal, 375 glass)
-#    - Matrix assembly (9375 metal)
+#    - Camera assembly (700 metal, 300 glass)->(875, 375)
+#    - Matrix assembly (7500 metal)->(9375)

@@ -185,6 +185,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var ev = new DropshipHijackLandedEvent(map);
             RaiseLocalEvent(ref ev);
         }
+
+        ent.Comp.DepartureLocation = ent.Comp.Destination;
+        Dirty(ent);
     }
 
     private void OnFTLUpdated(Entity<DropshipComponent> ent, ref FTLUpdatedEvent args)
@@ -232,7 +235,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SetAllDocks(grid, dropship.Locked);
     }
 
-    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null)
+    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null, bool offset = false)
     {
         base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
 
@@ -351,7 +354,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destCoords = destCoords.Offset(-physics.LocalCenter);
         }
 
-        destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
+        if (offset)
+            destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
 
         _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
@@ -424,17 +428,23 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         var destinationName = string.Empty;
-        if (TryComp(grid, out DropshipComponent? dropship) &&
-            dropship.Destination is { } destinationUid)
+        var departureName = string.Empty;
+        if (TryComp(grid, out DropshipComponent? dropship))
         {
-            destinationName = Name(destinationUid);
-        }
-        else
-        {
-            Log.Error($"Found in-travel dropship {ToPrettyString(grid)} with invalid destination");
+            if (dropship.Destination is { } destinationUid)
+                destinationName = Name(destinationUid);
+            else
+            {
+                Log.Error($"Found in-travel dropship {ToPrettyString(grid)} with invalid destination");
+            }
+
+            if (dropship.DepartureLocation is { } departureUid)
+            {
+                departureName = Name(departureUid);
+            }
         }
 
-        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName);
+        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName);
         _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
     }
 

@@ -94,6 +94,7 @@
     - CMSurvivorDoctor
     - CMSurvivorEngineer
     - CMSurvivorSecurity
+    - CMSurvivorScientist
     - CMSurvivorCorporate
     - RMCSurvivorCommandingOfficer
     # Chance's Claim
@@ -113,6 +114,37 @@
     - CMSurvivorUNPeacekeeper
     - CMSurvivorICB
     - RMCSurvivorCommanderNewVaradero
+    # Sorokyne Strata
+    - CMJobSurvivorInfrastructureEngineer
+    - CMJobSurvivorReactorTechnician
+    - CMJobSurvivorArmedPoliceOfficer
+    - CMJobSurvivorArmyReservist
+    - CMJobSurvivorMoHDoctor
+    - CMJobSurvivorCECResearcher
+    - CMJobSurvivorSoroCivilian
+    - CMJobSurvivorFireProtectionSpecialist
+    - CMJobSurvivorSoroMiner
+    - CMJobSurvivorHalcyonDynamicsLiaison
+    # Hybrisa Prospera
+    - RMCSurvivorHybrisaCivilian
+    - RMCSurvivorHybrisaConstructionWorker
+    - RMCSurvivorHybrisaCorporateLiaison
+    - RMCSurvivorHybrisaCorporateSecurity
+    - RMCSurvivorHybrisaEngineer
+    - RMCSurvivorHybrisaEMTParamedic
+    - RMCSurvivorHybrisaFireProtectionSpecialist
+    - RMCSurvivorHybrisaGrindBarista
+    - RMCSurvivorHybrisaHeavyVehicleOperator
+    - RMCSurvivorHybrisaMaterialReprocessingTechnician
+    - RMCSurvivorHybrisaMedicalDoctor
+    - RMCSurvivorHybrisaOfficeWorker
+    - RMCSurvivorHybrisaCommercialPilot
+    - RMCSurvivorHybrisaPizzaGalaxy
+    - RMCSurvivorHybrisaTMCCMiner
+    - RMCSurvivorHybrisaTSEPAConstable
+    - RMCSurvivorHybrisaWeyamartEmployee
+    - RMCSurvivorHybrisaXenoarchaeologist
+    - RMCSurvivorHybrisaXenobiologist
 
 - type: entity
   id: CMJobsSurvivorCivilian
@@ -125,6 +157,17 @@
     - CMSurvivor
     - CMSurvivorBeachBum
     - CMSurvivorMiner
+    - CMJobSurvivorSoroCivilian
+    - CMJobSurvivorSoroMiner
+    - CMJobSurvivorFireProtectionSpecialist
+    - RMCSurvivorHybrisaCivilian
+    - RMCSurvivorHybrisaFireProtectionSpecialist
+    - RMCSurvivorHybrisaGrindBarista
+    - RMCSurvivorHybrisaMaterialReprocessingTechnician
+    - RMCSurvivorHybrisaOfficeWorker
+    - RMCSurvivorHybrisaPizzaGalaxy
+    - RMCSurvivorHybrisaTMCCMiner
+    - RMCSurvivorHybrisaWeyamartEmployee
 
 - type: entity
   id: CMJobsSurvivorEngineer
@@ -137,6 +180,11 @@
     - CMSurvivorEngineer
     - CMSurvivorTechnician
     - CMSurvivorCargoTechnician
+    - CMJobSurvivorReactorTechnician
+    - CMJobSurvivorInfrastructureEngineer
+    - RMCSurvivorHybrisaConstructionWorker
+    - RMCSurvivorHybrisaEngineer
+    - RMCSurvivorHybrisaHeavyVehicleOperator
 
 - type: entity
   id: CMJobsSurvivorMedical
@@ -148,6 +196,9 @@
     jobs:
     - CMSurvivorDoctor
     - CMSurvivorMedicalTechnician
+    - CMJobSurvivorMoHDoctor
+    - RMCSurvivorHybrisaMedicalDoctor
+    - RMCSurvivorHybrisaEMTParamedic
 
 - type: entity
   id: CMJobsSurvivorCorporate
@@ -159,6 +210,9 @@
     jobs:
     - CMSurvivorCorporate
     - CMSurvivorICB
+    - CMJobSurvivorHalcyonDynamicsLiaison
+    - RMCSurvivorHybrisaCorporateLiaison
+    - RMCSurvivorHybrisaCommercialPilot
 
 - type: entity
   id: CMJobsSurvivorSecurity
@@ -170,6 +224,23 @@
     jobs:
     - CMSurvivorSecurity
     - CMSurvivorUNPeacekeeper
+    - CMJobSurvivorArmedPoliceOfficer
+    - CMJobSurvivorArmyReservist
+    - RMCSurvivorHybrisaCorporateSecurity
+    - RMCSurvivorHybrisaTSEPAConstable
+
+- type: entity
+  id: CMJobsSurvivorScientist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-security-scientist-roles
+    color: White
+    jobs:
+    - CMSurvivorScientist
+    - CMJobSurvivorCECResearcher
+    - RMCSurvivorHybrisaXenoarchaeologist
+    - RMCSurvivorHybrisaXenobiologist
 
 - type: entity
   id: CMJobsSurvivorCommander

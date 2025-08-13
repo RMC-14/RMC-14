@@ -75,7 +75,7 @@ public sealed class XenoScissorCutSystem : EntitySystem
                 continue;
             }
 
-            if (!_xeno.CanAbilityAttackTarget(xeno, ent))
+            if (!_xeno.CanAbilityAttackTarget(xeno, ent, false, true))
                 continue;
             mobs.Add(ent);
         }

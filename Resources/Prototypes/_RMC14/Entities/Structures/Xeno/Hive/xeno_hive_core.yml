@@ -41,7 +41,7 @@
         acts: ["Destruction"]
   - type: RepairableXenoStructure
     plasmaCost: 1000
-    repairLength: 15
+    repairLength: 4
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:
@@ -83,6 +83,7 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
+  - type: RMCTrackable
 
 - type: entity
   id: HiveCoreXenoConstructionNode
@@ -142,7 +143,7 @@
         acts: ["Destruction"]
   - type: RepairableXenoStructure
     plasmaCost: 1000
-    repairLength: 15
+    repairLength: 4
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:

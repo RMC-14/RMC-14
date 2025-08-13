@@ -18,3 +18,8 @@ xeno-ui-select-destination-tunnel-title = Select Destination Tunnel
 xeno-ui-select-destination-tunnel-submit-text = Select Tunnel
 
 rmc-xeno-ui-burrowed-need-time = You ghosted too recently. You cannot become a burrowed larva until 2.5 minutes have passed ({$seconds} seconds remaining).
+
+rmc-xeno-tracker-target-Queen = Queen
+rmc-xeno-tracker-target-HiveLeader = Hive Leader
+rmc-xeno-tracker-target-Tunnel = Tunnel
+rmc-xeno-tracker-target-HiveCore = Hive Core

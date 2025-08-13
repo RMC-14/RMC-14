@@ -6,6 +6,7 @@
   - CMAccessBrig
   - CMAccessArmory
   - CMAccessMedical
+  - CMAccessResearch
   - CMAccessCE
   - CMAccessEngineering
   - CMAccessMaint
@@ -46,7 +47,6 @@
   tags:
   - CMAccessCommand
   - CMAccessDropship
-  - CMAccessPilot
   - CMAccessMarinePrep
   - CMAccessCombatTechPrep
   - CMAccessColonyEngineering

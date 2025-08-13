@@ -73,7 +73,7 @@ public abstract class SharedMedevacSystem : EntitySystem
         }
         else
         {
-            _popup.PopupClient("rmc-medevac-stretcher-failure", targetCoord, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-medevac-stretcher-failure"), targetCoord, args.User);
         }
     }
 

@@ -34,7 +34,7 @@
         amount: 4
       - id: CMBeltUtility
         amount: 4
-      - id: ClothingEyesGlassesMeson
+      - id: RMCWeldingGoggles
         amount: 4
       - id: RMCHelmetWelding
         amount: 4
@@ -163,7 +163,7 @@
       entries:
       - id: Igniter
         amount: 8
-      - id: TimerTrigger
+      - id: RMCTimerTrigger
         amount: 4
       - id: ProximitySensor
         amount: 4
@@ -210,9 +210,9 @@
     sections:
     - name: Equipment
       entries:
-      - id: ClothingHeadHatHoodBioScientist
+      - id: RMCHoodBioGeneral # TODO scientist bio hood
         amount: 2
-      - id: ClothingOuterBioScientist
+      - id: RMCSuitBioGeneral # TODO scientist bio suit
         amount: 2
       - id: CMJumpsuitResearch
         amount: 2
@@ -225,8 +225,8 @@
       - id: RemoteSignaller
         amount: 4
       # Tank transfer valve
-      # Timer
-
+      - id: RMCTimerTrigger
+        amount: 4
 
 # Robotics
 - type: entity

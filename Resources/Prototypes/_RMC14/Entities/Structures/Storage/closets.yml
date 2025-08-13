@@ -4,6 +4,7 @@
   id: CMClosetBaseUnanchored
   name: closet
   description: It's a basic storage unit.
+  suffix: Unanchored
   components:
   - type: Physics
     bodyType: Static
@@ -62,6 +63,7 @@
 - type: entity
   parent: CMClosetBaseUnanchored
   id: CMClosetBase
+  suffix: Anchored
   components:
   - type: Transform
     anchored: true
@@ -210,9 +212,20 @@
   parent: CMClosetBaseUnanchored
   id: RMCClosetGoldenArrowGear
   name: personal locker
-  description: An immobile storag unit.
+  description: An immobile storage unit.
+  suffix: PvE, Sun Riders
   components:
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetGoldenArrowFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetPMCGear
+  suffix: PvE, PMC
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCGearFill

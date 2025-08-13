@@ -1,4 +1,4 @@
-﻿using Content.Shared.Roles;
+using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
@@ -220,7 +220,7 @@ public sealed partial class CCVars
     /// Whether clients which cannot be checked due to a rate limit will be denied
     /// </summary>
     public static readonly CVarDef<bool> GameIPIntelRejectRateLimited =
-        CVarDef.Create("game.ipintel_reject_ratelimited", false, CVar.SERVERONLY);
+        CVarDef.Create("game.ipintel_reject_ratelimited", true, CVar.SERVERONLY);
 
     /// <summary>
     /// Whether clients which cannot be checked due to an error of some form will be denied
@@ -263,7 +263,7 @@ public sealed partial class CCVars
     /// Maximum amount of requests per Day. For free you get 500.
     /// </summary>
     public static readonly CVarDef<int> GameIPIntelMaxDay =
-        CVarDef.Create("game.ipintel_request_limit_daily", 500, CVar.SERVERONLY);
+        CVarDef.Create("game.ipintel_request_limit_daily", 2000, CVar.SERVERONLY);
 
     /// <summary>
     /// Amount of seconds to add to the exponential backoff with every failed request.
@@ -385,6 +385,12 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool> ContrabandExamine =
         CVarDef.Create("game.contraband_examine", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    ///     If true, contraband examination is only possible while wearing an item with `ShowContrabandDetailsComponent`. Requires `ContrabandExamine` to be true as well.
+    /// </summary>
+    public static readonly CVarDef<bool> ContrabandExamineOnlyInHUD =
+        CVarDef.Create("game.contraband_examine_only_in_hud", false, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
     ///     Size of the lookup area for adding entities to the context menu
