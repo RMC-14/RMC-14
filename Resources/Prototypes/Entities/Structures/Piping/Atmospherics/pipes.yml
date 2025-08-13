@@ -65,8 +65,6 @@
     bodyType: static
   - type: StaticPrice
     price: 30
-  - type: VentCrawlable
-  - type: VentExit
 
 - type: entity
   abstract: true
@@ -159,8 +157,6 @@
     guides:
     - Pipes
     - PipeNetworks
-  - type: VentCrawlable
-    travelDirection: Longitudinal
 
 - type: entity
   parent: GasPipeBase
@@ -211,8 +207,6 @@
     guides:
     - Pipes
     - PipeNetworks
-  - type: VentCrawlable
-    travelDirection: SWBend
 
 - type: entity
   parent: GasPipeBase
@@ -256,8 +250,6 @@
     guides:
     - Pipes
     - PipeNetworks
-  - type: VentCrawlable
-    travelDirection: TSouth
 
 - type: entity
   parent: GasPipeBase
@@ -303,8 +295,6 @@
     guides:
     - Pipes
     - PipeNetworks
-  - type: VentCrawlable
-    travelDirection: Fourway
 
 - type: entity
   id: GasPipeBroken

@@ -104,3 +104,5 @@
     prefix: lesser
   - type: FixedIdentity
     name: cm-job-name-xeno-lesser-drone
+  - type: VentCrawler
+    ventCrawlIcon: lesser

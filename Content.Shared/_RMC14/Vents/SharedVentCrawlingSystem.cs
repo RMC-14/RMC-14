@@ -16,6 +16,10 @@ using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Eye;
 using Content.Shared.Destructible;
+using Content.Shared.Popups;
+using Content.Shared.Coordinates;
+using Content.Shared.Actions.Events;
+using Content.Shared.Actions;
 
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
@@ -31,6 +35,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     private bool _relativeMovement;
     public override void Initialize()
@@ -46,6 +52,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         SubscribeLocalEvent<VentCrawlableComponent, AnchorStateChangedEvent>(OnVentAnchorChanged);
 
         SubscribeLocalEvent<VentCrawlingComponent, MoveInputEvent>(OnVentCrawlingInput);
+        SubscribeLocalEvent<VentCrawlingComponent, ComponentInit>(OnVentCrawlingStart);
+        SubscribeLocalEvent<VentCrawlingComponent, ComponentRemove>(OnVentCrawlingEnd);
 
         SubscribeLocalEvent<RMCTrayCrawlerComponent, GetVisMaskEvent>(OnTrayGetVis);
 
@@ -107,13 +115,25 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
     private void OnVentEntranceInteract(Entity<VentEntranceComponent> vent, ref InteractHandEvent args)
     {
-        if (args.Handled || (TryComp<WeldableComponent>(vent, out var weld) && weld.IsWelded))
+        if (args.Handled)
             return;
+
+        if (TryComp<WeldableComponent>(vent, out var weld) && weld.IsWelded)
+        {
+            _popup.PopupPredicted(Loc.GetString("rmc-vent-crawling-welded"), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
 
         if (!TryComp<VentCrawlerComponent>(args.User, out var crawl) || !TryGetVent(vent, out var comp, out var container))
             return;
 
-        if ((comp.MaxEntities != null && container.ContainedEntities.Count > comp.MaxEntities) || _container.IsEntityInContainer(args.User))
+        if ((comp.MaxEntities != null && container.ContainedEntities.Count > comp.MaxEntities))
+        {
+            _popup.PopupPredicted(Loc.GetString("rmc-vent-crawling-full"), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
+        if (_container.IsEntityInContainer(args.User))
             return;
 
         var evn = new VentEnterAttemptEvent();
@@ -140,12 +160,23 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
     private void OnVentEnterDoafter(Entity<VentEntranceComponent> vent, ref VentEnterDoafterEvent args)
     {
         RemCompDeferred<JitteringComponent>(vent);
-        if (args.Handled || args.Cancelled || (TryComp<WeldableComponent>(vent, out var weld) && weld.IsWelded))
+        if (args.Handled || args.Cancelled)
             return;
 
-        if (!TryGetVent(vent, out var comp, out var container) ||
-            (comp.MaxEntities != null && container.ContainedEntities.Count > comp.MaxEntities))
+        if (TryComp<WeldableComponent>(vent, out var weld) && weld.IsWelded)
+        {
+            _popup.PopupPredicted(Loc.GetString("rmc-vent-crawling-welded"), args.User, args.User, PopupType.SmallCaution);
             return;
+        }
+
+        if (!TryGetVent(vent, out var comp, out var container))
+            return;
+
+        if (comp.MaxEntities != null && container.ContainedEntities.Count > comp.MaxEntities)
+        {
+            _popup.PopupPredicted(Loc.GetString("rmc-vent-crawling-full"), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
 
         var evn = new VentEnterAttemptEvent();
 
@@ -160,11 +191,13 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
         _container.Insert(args.User, container);
         EnsureComp<VentCrawlingComponent>(args.User);
+
         if (TryComp<RMCTrayCrawlerComponent>(args.User, out var scanner))
         {
             scanner.Enabled = true;
             Dirty(args.User, scanner);
             _eye.RefreshVisibilityMask(args.User);
+            EnsureComp<VentSightComponent>(args.User);
         }
 
     }
@@ -190,6 +223,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
             scanner.Enabled = false;
             Dirty(args.User, scanner);
             _eye.RefreshVisibilityMask(args.User);
+            RemComp<VentSightComponent>(args.User);
         }
     }
 
@@ -234,6 +268,24 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         return true;
     }
 
+    private void OnVentCrawlingStart(Entity<VentCrawlingComponent> ent, ref ComponentInit args)
+    {
+        var actions = _actions.GetActions(ent);
+        foreach (var action in actions)
+        {
+            _actions.SetEnabled(action.AsNullable(), false);
+        }
+    }
+
+    private void OnVentCrawlingEnd(Entity<VentCrawlingComponent> ent, ref ComponentRemove args)
+    {
+        var actions = _actions.GetActions(ent);
+        foreach (var action in actions)
+        {
+            _actions.SetEnabled(action.AsNullable(), true);
+        }
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
@@ -264,7 +316,10 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                     continue;
 
                 if ((ventDes.MaxEntities != null && containerDes.ContainedEntities.Count > ventDes.MaxEntities))
+                {
+                    _popup.PopupPredicted(Loc.GetString("rmc-vent-crawling-full"), uid, uid, PopupType.SmallCaution);
                     continue;
+                }
 
                 _container.Insert(uid, containerDes);
                 crawling.NextVentMoveTime = time + crawler.VentCrawlDelay;
@@ -274,18 +329,25 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                 {
                     _audio.PlayPredicted(ventDes.TravelSound, uidDes, uid);
                     crawling.NextVentCrawlSound = time + crawler.VentCrawlSoundDelay;
+                    _popup.PopupPredictedCoordinates(Loc.GetString("rmc-vent-crawling-moving"), _transform.GetMoverCoordinates(uid), uid, PopupType.SmallCaution);
                 }
 
                 Dirty(uid, crawling);
                 break;
             }
 
-            if (travelled || (TryComp<WeldableComponent>(uid, out var weld) && weld.IsWelded))
+            if (travelled)
                 continue;
 
             if (HasComp<VentExitComponent>(container.Owner) &&
                 vent.TravelDirection.HasDirection(PipeDirectionHelpers.ToPipeDirection(crawling.TravelDirection.Value)))
             {
+                if (TryComp<WeldableComponent>(container.Owner, out var weld) && weld.IsWelded)
+                {
+                    _popup.PopupPredicted(Loc.GetString("rmc-vent-crawling-welded"), uid, uid, PopupType.SmallCaution);
+                    continue;
+                }
+
                 var ev = new VentExitDoafterEvent();
 
                 var doafter = new DoAfterArgs(EntityManager, uid, crawler.VentExitDelay, ev, container.Owner, container.Owner)

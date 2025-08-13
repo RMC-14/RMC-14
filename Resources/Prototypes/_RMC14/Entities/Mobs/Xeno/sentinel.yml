@@ -96,3 +96,5 @@
     name: cm-job-name-xeno-sentinel
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT1
+  - type: VentCrawler
+    ventCrawlIcon: sentinel

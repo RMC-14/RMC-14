@@ -41,7 +41,7 @@ public sealed class VentCrawlIconOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (!_entity.TryGetComponent<VentCrawlingComponent>(_players.LocalEntity, out var crawl))
+        if (!_entity.HasComponent<VentSightComponent>(_players.LocalEntity))
             return;
 
         var handle = args.WorldHandle;
@@ -88,7 +88,7 @@ public sealed class VentCrawlIconOverlay : Overlay
         var texture = _sprite.GetFrame(icon, _timing.CurTime);
 
         //TODO properly center texture
-        var position = (bound.Center + sprite.Offset) + new Vector2(-0.25f, -0.25f);
+        var position = (bound.Center + sprite.Offset) + new Vector2(-0.5f, -0.5f);
         handle.DrawTexture(texture, position);
     }
 }

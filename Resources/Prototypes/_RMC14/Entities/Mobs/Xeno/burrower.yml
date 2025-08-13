@@ -123,3 +123,5 @@
     name: cm-job-name-xeno-burrower
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT2
+  - type: VentCrawler
+    ventCrawlIcon: burrower

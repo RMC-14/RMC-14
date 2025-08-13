@@ -156,6 +156,8 @@
   - type: XenoEvolution
     strains:
     - RMCXenoRunnerAcider
+  - type: VentCrawler
+    ventCrawlIcon: runner
 
 - type: entity
   parent: CMXenoRunnerBase
@@ -261,3 +263,5 @@
         components:
         - XenoHeavy
   - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: runner

@@ -354,7 +354,10 @@ public sealed class XenoDevourSystem : EntitySystem
             if (HasComp<InfectStopOnDeathComponent>(devouredEnt))
                 continue;
 
+            _popup.PopupClient(Loc.GetString("rmc-vent-crawling-devoured"), ent, ent, PopupType.SmallCaution);
+
             args.Cancel();
+            return;
         }
     }
 

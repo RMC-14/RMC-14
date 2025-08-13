@@ -114,3 +114,5 @@
     name: cm-job-name-xeno-spitter
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT2
+  - type: VentCrawler
+    ventCrawlIcon: spitter

@@ -1348,3 +1348,10 @@ RMCIDCardMarshal: RMCIDCardCMBMarshal
 
 # 2025-07-20
 RMCJumpsuitMarshal: RMCMarshalCMBUniform
+
+# 2025-08-12
+GasPipeHalf: RMCGasPipeHalf
+GasPipeStraight: RMCGasPipeStraight
+GasPipeBend: RMCGasPipeBend
+GasPipeTJunction: RMCGasPipeTJunction
+GasPipeFourway: RMCGasPipeFourway

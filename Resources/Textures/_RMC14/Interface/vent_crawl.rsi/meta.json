@@ -3,8 +3,8 @@
   "license": "CC-BY-SA-4.0",
   "copyright": "Made by Vermidia",
   "size": {
-    "x": 16,
-    "y": 16
+    "x": 32,
+    "y": 32
   },
   "states": [
     {
@@ -17,7 +17,7 @@
       "name": "unknown"
     },
     {
-      "name": "vamp"
+      "name": "vampire"
     },
     {
       "name": "acider"
