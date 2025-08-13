@@ -27,6 +27,9 @@
     noMovementLayers:
       movement:
         state: speed-buggy
+  - type: Construction
+    graph: RNMCSpeedBuggy
+    node: speedBuggy
   - type: ToggleableVisuals # Somehow, it doesn't show up when an user turns on the light.
     spriteLayer: light
   - type: UnpoweredFlashlight

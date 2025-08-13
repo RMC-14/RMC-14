@@ -1,0 +1,17 @@
+# Speed Buggy
+- type: construction
+  parent: RMC
+  name: speed buggy
+  id: RNMCSpeedBuggy
+  graph: RNMCSpeedBuggy
+  startNode: start
+  targetNode: speedBuggy
+  category: construction-category-cm-utilities
+  description: A basic speed buggy for when you need transportation
+  objectType: Item
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+  icon:
+    sprite: _RNMC14/Objects/Vehicles/speed_buggy.rsi
+    state: speed-buggy
