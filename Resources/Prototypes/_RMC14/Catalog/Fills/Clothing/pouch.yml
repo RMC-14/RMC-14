@@ -234,7 +234,7 @@
 - type: entity
   parent: RMCPouchSurvival
   id: RMCPouchSurvivalFillRadioOff
-  suffix: Filled
+  suffix: Filled Radio OFF
   components:
   - type: StorageFill
     contents:
