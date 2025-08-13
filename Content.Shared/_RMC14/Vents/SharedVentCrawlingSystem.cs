@@ -57,6 +57,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         SubscribeLocalEvent<VentCrawlingComponent, MoveInputEvent>(OnVentCrawlingInput);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentInit>(OnVentCrawlingStart);
         SubscribeLocalEvent<VentCrawlingComponent, ComponentRemove>(OnVentCrawlingEnd);
+        SubscribeLocalEvent<VentCrawlingComponent, EntGotRemovedFromContainerMessage>(OnVentCrawlingRemove);
 
         SubscribeLocalEvent<RMCTrayCrawlerComponent, GetVisMaskEvent>(OnTrayGetVis);
 
@@ -234,13 +235,17 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         _audio.PlayPredicted(vent.Comp.ExitSound, vent, args.User);
 
         _transform.AttachToGridOrMap(args.User);
-        RemCompDeferred<VentCrawlingComponent>(args.User);
-        if (TryComp<RMCTrayCrawlerComponent>(args.User, out var scanner))
+    }
+
+    private void OnVentCrawlingRemove(Entity<VentCrawlingComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        RemCompDeferred<VentCrawlingComponent>(ent);
+        if (TryComp<RMCTrayCrawlerComponent>(ent, out var scanner))
         {
             scanner.Enabled = false;
-            Dirty(args.User, scanner);
-            _eye.RefreshVisibilityMask(args.User);
-            RemComp<VentSightComponent>(args.User);
+            Dirty(ent.Owner, scanner);
+            _eye.RefreshVisibilityMask(ent.Owner);
+            RemComp<VentSightComponent>(ent);
         }
     }
 
