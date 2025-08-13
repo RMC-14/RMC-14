@@ -87,6 +87,7 @@
     id: RMCTileFireGreen
     extinguishInstantly: false
     patExtinguishMultiplier: 2
+    sprayExtinguishMultiplier: 3
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.666
     sprintSpeedModifier: 0.666

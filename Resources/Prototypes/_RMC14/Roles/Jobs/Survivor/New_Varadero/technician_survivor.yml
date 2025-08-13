@@ -40,7 +40,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorTechnician
-  name: survivor icb spawn point
+  name: survivor engineering technician spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor

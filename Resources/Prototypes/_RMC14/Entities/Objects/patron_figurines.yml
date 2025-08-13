@@ -1652,4 +1652,36 @@
     transferAmounts:
     - 5
   - type: RMCFlask
- 
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCargoNahami
+  name: Cargo Nahami figurine
+  description: "That's cargo Nahami, one of the very many Nahami. It says on the bottom that you can redeem this at requisitions for one free HEDP."
+  components:
+  - type: Sprite
+    state: cargo_nahami
+  - type: PatronFigurine
+    id: 170878ed-76ac-4a49-89cb-3f14bb222a09
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSamsonParker
+  name: Samson Parker figurine
+  description: "An Alpha squad leader willing to give up his life for his men! Reckless but with a big heart, always seeking to make the best out of the worst situations and NOT die in the process..."
+  components:
+  - type: Sprite
+    state: samson_parker
+  - type: PatronFigurine
+    id: 46516d2f-b180-49de-9ac0-25112fa4e259
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSilasAlatus
+  name: Silas Alatus figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: silas_alatus
+  - type: PatronFigurine
+    id: f5dc8f9d-1f7b-467a-8c6d-52cb3c8152b6

@@ -22,6 +22,8 @@
   - type: Speech
     speechVerb: Plant
     allowedEmotes: ['Chirp']
+  - type: TypingIndicator
+    proto: diona
   - type: Vocal
     sounds:
       Male: RMCMaleDiona
