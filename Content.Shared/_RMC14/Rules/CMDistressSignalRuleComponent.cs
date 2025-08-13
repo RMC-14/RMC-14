@@ -169,7 +169,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     };
 
     [DataField]
-    public ProtoId<JobPrototype> XenoSurvivorCorpseJob = "CMSurvivorLarva";
+    public ProtoId<JobPrototype> XenoSurvivorCorpseJob = "CMSurvivorHost";
 
     [DataField]
     public TimeSpan XenoSurvivorCorpseBurstDelay = TimeSpan.FromSeconds(0);
