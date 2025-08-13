@@ -1,0 +1,18 @@
+- type: entity
+  id: RNMCCrateSmallVehicleParts
+  parent: RMCCrateConstruction
+  name: small vehicle parts crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: RNMCStockPartWheel
+        amount: 4
+      - id: RNMCStockPartSmallEngine
+      - id: CMStockPartMatterBin
+      - id: RNMCStockPartSmallTransmission
+      - id: RNMCStockPartShockAbsorber
+        amount: 4
+      - id: RNMCStockPartVehicleSeatFolded
+      - id: RNMCStockPartSteeringWheel
+      - id: RNMCStockPartPedal
+        amount: 2
