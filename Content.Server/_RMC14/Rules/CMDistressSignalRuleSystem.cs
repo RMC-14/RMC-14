@@ -78,6 +78,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Preferences;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.StatusEffect;
 using Robust.Server.Audio;
@@ -168,7 +169,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private float _marinesPerSurvivor;
     private float _maximumSurvivors;
     private float _minimumSurvivors;
-    private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
     private readonly TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
@@ -244,7 +244,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCMarinesPerSurvivor, v => _marinesPerSurvivor = v, true);
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMaximum, v => _maximumSurvivors = v, true);
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMinimum, v => _minimumSurvivors = v, true);
-        Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
         Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
@@ -686,19 +685,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (comp.SpawnSurvivors)
             {
-                // Shuffle survivor jobs and ensure civilian survivor stays at the bottom, as civ survivor has infinite slots
-                var compCopy = comp;
-                IEnumerable<(ProtoId<JobPrototype> Job, int Amount)> jobs = comp.SurvivorJobs
-                    .Where(entry => entry.Job != compCopy.CivilianSurvivorJob)
-                    .OrderBy(_ => _random.Next());
-
-                if (comp.SurvivorJobs.TryFirstOrNull(entry => entry.Job == compCopy.CivilianSurvivorJob, out var civJob))
-                {
-                    jobs = jobs.Append(civJob.Value);
-                }
-
-                comp.SurvivorJobs = jobs.ToList();
-
                 var survivorCandidates = new Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]>();
                 foreach (var job in comp.SurvivorJobs)
                 {
@@ -749,31 +735,94 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     }
                 }
 
-                var selectedSurvivors = 0;
-                for (var i = priorities - 1; i >= 0; i--)
+                bool HasValidSurvivorCandidates()
                 {
-                    foreach (var (job, players) in survivorCandidates)
+                    // Check that there are still valid candidates left
+                    foreach (var (_, playerList) in survivorCandidates)
                     {
-                        var list = players[i];
-                        var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
-                        while (list.Count > 0 && (ignoreLimit || selectedSurvivors < totalSurvivors))
+                        foreach (var players in playerList)
                         {
-                            if (SpawnSurvivor(job, list, out var stop) is { } id)
-                            {
-                                foreach (var (_, otherPlayersLists) in survivorCandidates)
-                                {
-                                    foreach (var otherPlayers in otherPlayersLists)
-                                    {
-                                        otherPlayers.Remove(id);
-                                    }
-                                }
+                            if (players.Count > 0)
+                                return true;
+                        }
+                    }
 
-                                if (!ignoreLimit)
-                                    selectedSurvivors++;
+                    return false;
+                }
+
+                bool HasValidPrioritySurvivorCandidates(int priority)
+                {
+                    // Check that there are still valid candidates left, with a certain priority
+                    foreach (var (_, playerList) in survivorCandidates)
+                    {
+                        var list = playerList[priority];
+
+                        if (list.Count > 0)
+                            return true;
+                    }
+
+                    return false;
+                }
+
+                var selectedSurvivors = 0;
+                for (var prio = priorities - 1; prio >= 0; prio--)
+                {
+                    while (selectedSurvivors < totalSurvivors)
+                    {
+                        if (!HasValidSurvivorCandidates())
+                            break;
+
+                        if (!HasValidPrioritySurvivorCandidates(prio))
+                            break;
+
+                        if (survivorCandidates.Count <= 0)
+                            break;
+
+                        var (job, players) = _random.Pick(survivorCandidates);
+
+                        // Jobs that ignore the maximum limit roll seperately
+                        if (comp.IgnoreMaximumSurvivorJobs.Contains(job))
+                            continue;
+
+                        var list = players[prio];
+
+                        if (list.Count <= 0)
+                            continue;
+
+                        if (SpawnSurvivor(job, list, out var stop) is { } id)
+                        {
+                            foreach (var (_, otherPlayersLists) in survivorCandidates)
+                            {
+                                foreach (var otherPlayers in otherPlayersLists)
+                                {
+                                    otherPlayers.Remove(id);
+                                }
                             }
 
-                            if (stop)
-                                break;
+                            selectedSurvivors++;
+                        }
+                    }
+
+                    // Roll the jobs that ignore the maximum limit now
+                    foreach (var job in comp.IgnoreMaximumSurvivorJobs)
+                    {
+                        if (!survivorCandidates.TryGetValue(job, out var players))
+                            continue;
+
+                        var list = players[prio];
+
+                        if (list.Count <= 0)
+                            continue;
+
+                        if (SpawnSurvivor(job, list, out var stop) is { } id)
+                        {
+                            foreach (var (_, otherPlayersLists) in survivorCandidates)
+                            {
+                                foreach (var otherPlayers in otherPlayersLists)
+                                {
+                                    otherPlayers.Remove(id);
+                                }
+                            }
                         }
                     }
                 }
@@ -816,7 +865,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (xform.GridUid != shipGrids.Value)
                         continue;
 
-                    if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f))
+                    if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f, offset: true))
                         continue;
 
                     break;
@@ -1864,13 +1913,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
             catch (Exception e)
             {
-                Log.Error($"Error loading admin fax area:\n{e}");
+                Log.Error($"Error loading {path} map:\n{e}");
             }
 
             return false;
         }
 
-        SpawnMap(new ResPath(_adminFaxAreaMap), out _);
+        foreach (string _map in comp.AuxiliaryMaps)
+        {
+            SpawnMap(new ResPath(_map), out _);
+        }
+
         if (SpawnMap(comp.Thunderdome, out var mapEnt))
             EnsureComp<ThunderdomeMapComponent>(mapEnt.Value);
     }

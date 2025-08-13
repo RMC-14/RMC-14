@@ -40,7 +40,7 @@
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteran
     ears: RMCHeadsetDistressHalcyon
-    pocket2: RMCPouchDocument
+    pocket2: CMClipboard # RMC14, replace with document pouch when fixed
   storage:
     back:
     - CMSheetMetal20
