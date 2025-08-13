@@ -352,7 +352,7 @@
   minLimit: 0
   maxLimit: 1
   loadouts:
-  - CMPenClicky
+  - DrinkCanAleRMC
 
 # Chief MP
 - type: loadoutGroup

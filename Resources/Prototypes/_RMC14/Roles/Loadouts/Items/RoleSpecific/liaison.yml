@@ -1,6 +1,6 @@
 ﻿# Corporate Liaison
 - type: loadout
-  id: CMPenClicky
+  id: DrinkCanAleRMC
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -10,5 +10,5 @@
       time: 90000 # 25 hours
   storage:
     back:
-    - CMPenClicky
+    - CMDrinkCanAle
 
