@@ -38,7 +38,6 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
 
     private bool _relativeMovement;
     public override void Initialize()
@@ -226,7 +225,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         if (!TryGetVent(vent, out var comp, out var container))
             return;
 
-        if (_rmcMap.IsTileBlocked(vent.Owner.ToCoordinates()))
+        if (_rmcmap.IsTileBlocked(vent.Owner.ToCoordinates()))
             return;
 
         args.Handled = true;
@@ -370,7 +369,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                     continue;
                 }
 
-                if (_rmcMap.IsTileBlocked(container.Owner.ToCoordinates()))
+                if (_rmcmap.IsTileBlocked(container.Owner.ToCoordinates()))
                     return;
 
                 var ev = new VentExitDoafterEvent();
