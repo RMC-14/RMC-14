@@ -366,3 +366,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonManager
+  name: manager's suit
+  description: It's a suit worn by those with the know-how to achieve the position of "Corporate Manager".
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/managers_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/managers_uniform.rsi
