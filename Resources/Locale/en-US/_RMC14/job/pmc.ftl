@@ -76,7 +76,7 @@ rmc-job-name-pmc-pve-force-command = Force Command
 
 # Executives
 
-rmc-ghost-role-information-corp-exec-description = You are an employee of the Weston-Yamada Corporation. You are to support and maintain Weston-Yamada's interests
+rmc-ghost-role-information-corp-exec-description = You are an employee of the Weston-Yamada Corporation. You are to support and maintain Weston-Yamada's interests.
 
 rmc-ghost-name-corp-exec-supervisor = Corporate Executive Supervisor (Neutral)
 rmc-job-name-corp-exec-supervisor = Corporate Executive Supervisor
