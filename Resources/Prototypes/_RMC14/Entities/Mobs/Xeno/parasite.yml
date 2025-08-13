@@ -37,9 +37,6 @@
     unlockAt: 0
     emoteSounds: Larva
     muteOnSpawn: true
-  - type: XenoPlasma
-    maxPlasma: 10
-    plasmaRegenOnWeeds: 0.1
   - type: XenoHide
   - type: Fixtures
     fixtures:
