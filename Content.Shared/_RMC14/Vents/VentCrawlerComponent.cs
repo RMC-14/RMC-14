@@ -21,4 +21,7 @@ public sealed partial class VentCrawlerComponent : Component
     [DataField, AutoNetworkedField]
     public string VentCrawlIcon = "unknown";
 
+    [DataField, AutoNetworkedField]
+    public LocId VentCrawlExamine = "rmc-vent-crawling-entrance-xeno";
+
 }

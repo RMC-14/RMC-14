@@ -20,6 +20,7 @@ using Content.Shared.Popups;
 using Content.Shared.Coordinates;
 using Content.Shared.Actions.Events;
 using Content.Shared.Actions;
+using Content.Shared.Examine;
 
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
@@ -41,6 +42,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
     private bool _relativeMovement;
     public override void Initialize()
     {
+        SubscribeLocalEvent<VentEntranceComponent, ExaminedEvent>(OnVentEntranceExamine);
         SubscribeLocalEvent<VentEntranceComponent, InteractHandEvent>(OnVentEntranceInteract);
         SubscribeLocalEvent<VentEntranceComponent, VentEnterDoafterEvent>(OnVentEnterDoafter);
 
@@ -58,6 +60,17 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
         SubscribeLocalEvent<RMCTrayCrawlerComponent, GetVisMaskEvent>(OnTrayGetVis);
 
         Subs.CVar(_config, CCVars.RelativeMovement, v => _relativeMovement = v, true);
+    }
+
+    private void OnVentEntranceExamine(Entity<VentEntranceComponent> vent, ref ExaminedEvent args)
+    {
+        if (!TryComp<VentCrawlerComponent>(args.Examiner, out var crawler))
+            return;
+
+        if (TryComp<WeldableComponent>(vent, out var weld) && weld.IsWelded)
+            return;
+
+        args.PushMarkup(Loc.GetString(crawler.VentCrawlExamine));
     }
 
     private void OnTrayGetVis(Entity<RMCTrayCrawlerComponent> ent, ref GetVisMaskEvent args)
