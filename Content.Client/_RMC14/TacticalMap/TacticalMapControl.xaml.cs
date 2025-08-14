@@ -489,11 +489,11 @@ public sealed partial class TacticalMapControl : TextureRect
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
             UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
 
-            handle.DrawTextureRect(blip.Background != null ? system.Frame0(blip.Background) : background, rect, blip.Color);
-            handle.DrawTextureRect(system.Frame0(blip.Image), rect);
+            handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blip.Color);
+            handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect);
 
             if (blip.HiveLeader)
-                handle.DrawTextureRect(system.Frame0(hiveLeaderRsi), rect);
+                handle.DrawTextureRect(system.GetFrame(hiveLeaderRsi, curTime), rect);
 
             var defibTexture = blip.Status switch
             {
@@ -504,10 +504,8 @@ public sealed partial class TacticalMapControl : TextureRect
                 TacticalMapBlipStatus.Undefibabble => undefibbableRsi,
                 _ => null,
             };
-            if (defibTexture == null)
-                continue;
-
-            handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect);
+            if (defibTexture != null)
+                handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect);
         }
     }
 
