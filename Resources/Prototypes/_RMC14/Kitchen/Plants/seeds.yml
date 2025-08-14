@@ -178,15 +178,15 @@
 - type: entity
   parent: SeedBase
   name: packet of mango seeds
-  id: MangoSeeds
+  id: RMCMangoSeeds
   components:
     - type: Seed
-      seedId: mango
+      seedId: rmcmango
     - type: Sprite
       sprite: _RMC14/Objects/Kitchen/Plants/mango.rsi
 
 - type: seed
-  id: mango
+  id: rmcmango
   name: seeds-mango-name
   noun: seeds-noun-seeds
   displayName: seeds-mango-display-name
