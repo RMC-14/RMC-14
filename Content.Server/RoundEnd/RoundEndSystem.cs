@@ -336,7 +336,7 @@ namespace Content.Server.RoundEnd
         {
             if (_gameTicker.RunLevel != GameRunLevel.PostRound) return;
             // RMC14
-            //This is the thing that actually ends the fucking round????? why 30 Million different methods lul
+            // This is the thing that actually ends the fucking round????? why 30 Million different methods lul
             if (_cfg.GetCVar(RMCCVars.RMCDelayRoundEnd)) return;
             // RMC14
             Reset();
