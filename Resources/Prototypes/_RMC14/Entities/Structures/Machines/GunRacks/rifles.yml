@@ -187,3 +187,109 @@
       - WeaponRifleM54CMK1
       item_5:
       - WeaponRifleM54CMK1
+
+# SSG45
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackSSG45Empty
+  name: SSG45 gun rack
+  suffix: SSG45, Empty
+  description: AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, Weston-Yamada comissioned racks with fixed slots which only fit SSG45 rifles. Some say they were cheaper, and some say the main reason was operators' ability to easily break anything more complex than a tungsten ball.
+  components:
+  - type: ContainerContainer
+    containers:
+      item_1: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_2: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_3: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_4: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+      item_5: !type:ContainerSlot
+        showEnts: False
+        occludes: True
+        ent: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/ssg45_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      item_2:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      item_3:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      item_4:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      item_5:
+        name: SSG45
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCWeaponRifleSSG45
+
+- type: entity
+  parent: RMCGunRackSSG45Empty
+  id: RMCGunRackSSG45Filled
+  suffix: SSG45, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleSSG45Stripped
+      item_2:
+      - RMCWeaponRifleSSG45Stripped
+      item_3:
+      - RMCWeaponRifleSSG45Stripped
+      item_4:
+      - RMCWeaponRifleSSG45Stripped
+      item_5:
+      - RMCWeaponRifleSSG45Stripped

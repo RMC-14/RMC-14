@@ -7,11 +7,11 @@ namespace Content.Shared._RMC14.Medical.Defibrillator;
 public sealed partial class CMDefibrillatorBlockedComponent : Component
 {
     [DataField]
-    public LocId Popup = "defibrillator-unrevivable";
+    public LocId Popup = "rmc-defibrillator-unrevivable";
 
     [DataField]
-    public LocId Examine = "rmc-defib-suicide";
+    public LocId Examine = "rmc-defibrillator-unrevivable";
 
     [DataField, AutoNetworkedField]
-    public bool ShowOnExamine = true;
+    public bool ShowOnExamine = false;
 }

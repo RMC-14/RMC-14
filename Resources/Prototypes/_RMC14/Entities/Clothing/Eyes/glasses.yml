@@ -231,7 +231,7 @@
   parent: [ClothingEyesBase, BaseToggleClothing]
   id: RMCGlassesReagentHUDGlasses
   name: reagent scanner HUD goggles
-  description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
+  description: These goggles are probably of use to someone who isn't holding a rifle and actively seeking to lower their combat life expectancy.
   components:
   - type: Item
     storedRotation: 0

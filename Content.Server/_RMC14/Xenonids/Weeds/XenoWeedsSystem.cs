@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Server.Atmos.Components;
 using Content.Server.Spreader;
@@ -9,9 +10,11 @@ using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Maps;
+using Content.Shared.Physics;
 using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -29,6 +32,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly PhysicsSystem _physics = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
 
@@ -114,6 +118,15 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                             weedsToReplace = anchoredId;
                     }
                 }
+
+                // Do a raycast to see if any entities with offset fixtures are blocking the spread
+                var weedPosition = _transform.GetMoverCoordinates(uid).Position;
+                var ray = new CollisionRay(weedPosition, cardinal.CardinalToIntVec(), (int)CollisionGroup.BarricadeImpassable);
+                var intersect = _physics.IntersectRayWithPredicate(Transform(uid).MapID, ray, 0.6f, e => !Transform(e).Anchored);
+                var results = intersect.Select(r => r.HitEntity).ToHashSet();
+
+                if (results.Count > 0)
+                    blocked = true;
 
                 if (blocked)
                     continue;

@@ -173,7 +173,7 @@
         amount: 3
       - id: RMCAttachmentM63Stock
         amount: 3
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 3
       - id: RMCAttachmentM63ArmBrace
         amount: 1
@@ -205,7 +205,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 4
 
 - type: entity
