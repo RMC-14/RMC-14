@@ -82,6 +82,10 @@
         {
             "name": "speed-buggy_18",
             "directions": 4
+        },
+        {
+            "name": "speed-buggy_destroyed",
+            "directions": 4
         }
     ]
 }

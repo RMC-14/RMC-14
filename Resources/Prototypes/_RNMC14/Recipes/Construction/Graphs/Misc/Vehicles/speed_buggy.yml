@@ -459,3 +459,29 @@
       steps:
       - tool: Anchoring
         doAfter: 5
+
+  - node: destroyedSpeedBuggyFrame
+    entity: RNMCSpeedBuggyFrameDestroyed
+    edges:
+      - to: missingMetalSheetUnsecuredFallback
+        steps:
+          - tool: Welding
+            doAfter: 5
+        completed:
+          - !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 8
+  - node: missingMetalSheetUnsecuredFallback # Fallback
+    entity: RNMCSpeedBuggyFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingMetalSheet
+      steps:
+      - material: CMSteel
+        amount: 15
+        doAfter: 4
+    - to: secondStageUnsecured
+      steps:
+      - tool: Screwing
+        doAfter: 4
