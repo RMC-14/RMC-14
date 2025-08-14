@@ -191,9 +191,9 @@
   noun: seeds-noun-seeds
   displayName: seeds-mango-display-name
   plantRsi: _RMC14/Objects/Kitchen/Plants/mango.rsi
-  packetPrototype: MangoSeeds
+  packetPrototype: RMCMangoSeeds
   productPrototypes:
-    - FoodMango
+    - RMCFoodMango
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6
