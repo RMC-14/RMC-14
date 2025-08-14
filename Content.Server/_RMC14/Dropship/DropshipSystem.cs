@@ -476,27 +476,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void SetDocks(EntityUid dropship, DoorLocation location)
     {
         var shouldLock = false;
+        var doors = new HashSet<Entity<DoorBoltComponent>>();
 
         // Lock all doors if at least one is unlocked.
-        if (location == DoorLocation.None)
-        {
-            var enumerator2 = Transform(dropship).ChildEnumerator;
-            while (enumerator2.MoveNext(out var child))
-            {
-                if (!_dockingQuery.HasComp(child))
-                    continue;
-
-                if (!_doorBoltQuery.TryComp(child, out var bolt))
-                    continue;
-
-                if (bolt.BoltsDown)
-                    continue;
-
-                shouldLock = true;
-                break;
-            }
-        }
-
         var enumerator = Transform(dropship).ChildEnumerator;
         while (enumerator.MoveNext(out var child))
         {
@@ -506,19 +488,29 @@ public sealed class DropshipSystem : SharedDropshipSystem
             if (!_doorBoltQuery.TryComp(child, out var bolt))
                 continue;
 
-            // Only lock/unlock doors with the same location as the pressed button.
+            doors.Add((child, bolt));
+
+            if (bolt.BoltsDown)
+                continue;
+
+            shouldLock = true;
+        }
+
+        foreach (var door in doors)
+        {
             if (location != DoorLocation.None)
             {
-                if (!_doorQuery.TryComp(child, out var door) || door.Location != location)
+                // Only lock/unlock doors with the same location as the pressed button.
+                if (!_doorQuery.TryComp(door, out var doorComp) || doorComp.Location != location)
                     continue;
 
-                shouldLock = !bolt.BoltsDown;
+                shouldLock = !door.Comp.BoltsDown;
             }
 
             if (shouldLock)
-                LockDoor(child);
+                LockDoor(door.Owner);
             else
-                UnlockDoor(child);
+                UnlockDoor(door.Owner);
         }
     }
 
