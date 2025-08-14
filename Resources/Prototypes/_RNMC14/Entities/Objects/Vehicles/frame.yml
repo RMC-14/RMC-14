@@ -1,3 +1,5 @@
+# SMALL VEHICLES
+# Speed Buggy
 - type: entity
   id: RNMCSpeedBuggyFrame
   parent: BaseStructureDynamic
