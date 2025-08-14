@@ -41,5 +41,9 @@
     {
       "name": "mess_extension_roof"
     }
+    ,
+    {
+      "name": "mp_extension_roof"
+    }
   ]
 }

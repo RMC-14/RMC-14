@@ -2,8 +2,8 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCStandardFolded
-  name: folded UNMC field tent
-  description: A standard UNMC Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
+  name: folded UNMC Field Tent
+  description: A standard UNMC Field Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
       size: Huge
@@ -134,8 +134,8 @@
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCExtendedFolded
-  name: folded UNMC extended field tent
-  description:  A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
+  name: folded UNMC Extended Field Tent
+  description: A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
       size: Huge
@@ -208,7 +208,7 @@
   parent: BaseItem
   id: RMCTentUNMCExtendedMessFolded
   name: folded UNMC Mess Tent
-  description: A standard UNMC Mess Tent. This one comes equipped with a kitchen and dining utilities. Unfold in a suitable location to maximize meal handouts ENTRANCE TO THE SOUTH.
+  description: A standard UNMC Mess Tent. This one comes equipped with a kitchen and dining utilities. Unfold in a suitable location to maximize meal handouts. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
       size: Huge
@@ -258,3 +258,58 @@
           mode: Reactive
           offset: 1.5, -1.5
         # TODO RMC14: Food processor
+
+- type: entity
+  parent: BaseItem
+  id: RMCTentUNMCExtendedMPFolded
+  name: folded UNMC Military Police Tent
+  description: A standard UNMC Military Police Tent. This one comes equipped with a single detention cell and detainee handling equipment. Unfold in a suitable location to maximize order enforcement. ENTRANCE TO THE SOUTH.
+  components:
+    - type: Item
+      size: Huge
+    - type: Sprite
+      sprite: _RMC14/Objects/Tents/folded_tents.rsi
+      layers:
+        - state: big_tent
+        - state: mp_big
+    - type: RMCDeployable
+      deployArea:
+        !type:PhysShapeAabb
+        bounds: "-0.4,0.6,3.4,4.4"
+      collapseToolPrototype: CMEntrenchingTool
+      deploySetups:
+        - prototype: RMCTentUNMCExtendedMP
+          mode: ReactiveParental
+          offset: -0.2, 0
+        - prototype: CMChair
+          offset: -0.5, 0.5
+          angle: 270
+        - prototype: CMTable
+          offset: -1.5, 0.5
+        - prototype: CMTable
+          offset: -1.5, -0.5
+        - prototype: RMCMonitorCameraAlmayer # TODO RMC14: replace with crime record console
+          mode: Reactive
+          offset: -1.5, 0.5
+          angle: 90
+        - prototype: RMCRotaryPhoneMPTent
+          mode: Reactive
+          offset: -1.5, -0.5
+        - prototype: CMWindowReinforcedDirectional
+          mode: Reactive
+          offset: 0.5, 0.5
+          angle: 270
+        - prototype: CMWindoorSecureBrigPowered
+          mode: Reactive
+          offset: 0.5, -0.5
+          angle: 270
+        - prototype: CMToiletEmpty
+          mode: Reactive
+          offset: 1.5, 0.5
+          angle: 270
+        - prototype: CMBed
+          offset: 1.5, -0.5
+        - prototype: CMLockerPolice
+          offset: 0.5, -1.5
+        - prototype: CMLockerPolice
+          offset: 1.5, -1.5

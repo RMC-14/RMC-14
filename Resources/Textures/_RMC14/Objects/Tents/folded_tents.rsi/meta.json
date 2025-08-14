@@ -26,6 +26,9 @@
       "name": "req_big"
     },
     {
+      "name": "mp_big"
+    },
+    {
       "name": "inhand-left",
       "directions": 4
     },

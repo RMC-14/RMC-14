@@ -90,3 +90,8 @@
   parent: RMCRotaryPhone
   id: RMCRotaryPhoneMessTent
   name: Mess Tent
+
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneMPTent
+  name: Military Police Tent

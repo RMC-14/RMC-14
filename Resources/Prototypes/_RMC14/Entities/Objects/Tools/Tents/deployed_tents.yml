@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseStructure
   id: RMCTentBase
-  name: UNMC field tent
+  name: UNMC Field Tent
   description: A standard UNMC Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
   placement:
     mode: SnapgridCenter
@@ -15,7 +15,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Tents/deployed_tents.rsi
     offset: 1,0
-    drawdepth: OverMobs
+    drawdepth: Overdoors
     layers:
     - state: standard_frame
     - state: standard_canvas
@@ -54,6 +54,7 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+        - InteractImpassable
       fix-2: # Right Wall
         shape:
           !type:PhysShapeAabb
@@ -67,6 +68,7 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+        - InteractImpassable
       fix-3: # Back Wall
         shape:
           !type:PhysShapeAabb
@@ -80,6 +82,7 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+        - InteractImpassable
   - type: CollisionWake
     enabled: false
   - type: Damageable
@@ -144,7 +147,7 @@
 - type: entity
   parent: RMCTentBase
   id: RMCTentUNMCExtended
-  name: UNMC extended field tent
+  name: UNMC Extended Field Tent
   description: A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
@@ -181,6 +184,7 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+        - InteractImpassable
       fix-2: # Lower Right Wall
         shape:
           !type:PhysShapeAabb
@@ -194,6 +198,7 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+        - InteractImpassable
       fix-3: # Back Wall
         shape:
           !type:PhysShapeAabb
@@ -207,6 +212,7 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+        - InteractImpassable
       fix-4: # Upper Right Wall
         shape:
           !type:PhysShapeAabb
@@ -220,6 +226,7 @@
         - MidImpassable
         - LowImpassable
         - Opaque
+        - InteractImpassable
       fix-5: # Front Wall
         shape:
           !type:PhysShapeAabb
@@ -233,7 +240,7 @@
         - MidImpassable
         - LowImpassable
         - Opaque
-
+        - InteractImpassable
 - type: entity
   parent: RMCTentUNMCExtended
   id: RMCTentUNMCExtendedReq
@@ -241,9 +248,6 @@
   description: A standard UNMC Requisitions Tent. Now, you can enjoy req line anywhere you go! Unfold in a suitable location to maximize resource distribution. ASRS not included. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tents/deployed_tents.rsi
-    offset: 1,0
-    drawdepth: OverMobs
     layers:
     - state: standard_frame
     - state: standard_canvas
@@ -270,12 +274,9 @@
   parent: RMCTentUNMCExtended
   id: RMCTentUNMCExtendedMess
   name: UNMC Mess Tent
-  description: A standard UNMC Mess Tent. This one comes equipped with a kitchen and dining utilities. Unfold in a suitable location to maximize meal handouts ENTRANCE TO THE SOUTH.
+  description: A standard UNMC Mess Tent. This one comes equipped with a kitchen and dining utilities. Unfold in a suitable location to maximize meal handouts. ENTRANCE TO THE SOUTH.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tents/deployed_tents.rsi
-    offset: 1,0
-    drawdepth: OverMobs
     layers:
     - state: standard_frame
     - state: standard_canvas
@@ -297,3 +298,32 @@
     - "standard_roof"
     - "extension_roof"
     - "mess_extension_roof"
+
+- type: entity
+  parent: RMCTentUNMCExtended
+  id: RMCTentUNMCExtendedMP
+  name: UNMC Military Police Tent
+  description: A standard UNMC Military Police Tent. This one comes equipped with a single detention cell and detainee handling equipment. Unfold in a suitable location to maximize order enforcement. ENTRANCE TO THE SOUTH.
+  components:
+  - type: Sprite
+    layers:
+    - state: standard_frame
+    - state: standard_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: extension_frame
+    - state: extension_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer2" ]
+    - state: standard_roof
+      map: [ "enum.ItemCamouflageLayers.Layer3", "standard_roof" ]
+    - state: extension_roof
+      map: [ "enum.ItemCamouflageLayers.Layer4", "extension_roof" ]
+    - state: mp_extension_roof
+      map: [ "mp_extension_roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.0
+    changeRate: 6.0
+    reactToMouse: false
+    fadeLayers:
+    - "standard_roof"
+    - "extension_roof"
+    - "mp_extension_roof"
