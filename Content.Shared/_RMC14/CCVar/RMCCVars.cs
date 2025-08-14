@@ -452,5 +452,5 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.dead_chat_enabled", true, CVar.SERVER | CVar.NOTIFY | CVar.REPLICATED);
 
     public static readonly CVarDef<bool> RMCDelayRoundEnd =
-    CVarDef.Create("rmc.delay_round_end", false, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.delay_round_end", false, CVar.SERVER | CVar.SERVERONLY);
 }
