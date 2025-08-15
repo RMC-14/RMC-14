@@ -1,0 +1,73 @@
+﻿- type: job
+  parent: CMSurvivorTrucker
+  id: CMSurvivorChancesTrucker
+  name: rmc-job-name-survivor-chances-trucker
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesTrucker
+  startingGear: RMCGearSurvivorChancesTrucker
+  spawnMenuRoleName: Weston-Yamada Heavy Vehicle Operator (Chances Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillVehicles: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorTrucker
+  id: RMCGearSurvivorChancesTrucker
+  equipment:
+    head: RMCHeadCapTruckerBlue
+    jumpsuit: RMCJumpsuitBlueWorkwear
+    outerClothing: RMCCoatBomberGrey
+    gloves: RMCHandsBlack
+    eyes: RMCGogglesM1A1Ballistic
+    mask: RMCMaskRebreather
+    # hand: Vehicle Wheels
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesTrucker
+  name: chances trucker spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesTrucker
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesTrucker
+  name: chances trucker ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesTrucker
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesTrucker
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesTrucker
