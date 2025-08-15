@@ -1,13 +1,17 @@
 - type: job
-  parent: CMSurvivorICB
-  id: CMSurvivorVaraderoICB
-  name: cm-job-name-survivor-icb
+  parent: CMSurvivor
+  id: CMSurvivorISR
+  name: cm-job-name-survivor-isr
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorVaraderoICB
-  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
-  startingGear: RMCGearSurvivorVaraderoICB
+  playTimeTracker: CMJobSurvivorISR
+  spawnMenuRoleName: Interstellar Sapient-Life Rights Observer (Survivor)
+  icon: "RMCJobIconBureauObserver"
+  hasIcon: true
   ranks:
-    RMCRankICBCorporateLiaison: []
+    RMCRankIHROObserver: []
+  accessGroups:
+  - ColonistObserver
+  startingGear: RMCGearSurvivorISR
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,31 +30,31 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-    - type: JobPrefix
-      prefix: cm-job-prefix-survivor-icb
-  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorICB
-  id: RMCGearSurvivorVaraderoICB
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorISR
   equipment:
-    jumpsuit: CMJumpsuitLiaisonBlack
-    eyes: RMCSunglasses
-  inhand:
-  - CMClipboard
+    ears: CMHeadsetColony
+    jumpsuit: CMJumpsuitLiaisonBrown
+    shoes: RMCShoesLaceupBrown
+    back: CMSatchelFillSurvivor
+    head: ArmorHelmetM10
+    pocket2: CMClipboard # RMC14, replace with document pouch when fixed
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorVaraderoICB
-  name: survivor icb spawn point
+  id: RMCSpawnPointSurvivorISR
+  name: survivor isr spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMSurvivorISR
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorVaraderoICB
+  id: CMJobSurvivorISR
   isHumanoid: true
