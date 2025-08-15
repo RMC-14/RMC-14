@@ -115,7 +115,7 @@
 - type: entity
   name: mango
   parent: FoodProduceBase
-  id: FoodMango
+  id: RMCFoodMango
   description: "MANGO MANGO MANGO"
   components:
   - type: FlavorProfile
@@ -140,12 +140,12 @@
   - type: Extractable
     juiceSolution:
       reagents:
-      - ReagentId: JuiceMango
+      - ReagentId: RMCJuiceMango
         Quantity: 10
   - type: Tag
     tags:
     - Fruit
   - type: FoodSequenceElement
     entries:
-      Taco: Mango
-      Burger: MangoBurger
+      Taco: RMCMango
+      Burger: RMCMangoBurger
