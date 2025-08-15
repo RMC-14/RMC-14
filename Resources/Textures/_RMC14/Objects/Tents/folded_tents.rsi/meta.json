@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/commit/d5b119380250ea512db2a5319e36592c7f604250",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base_tent"
+    },
+    {
+      "name": "big_tent"
+    },
+    {
+      "name": "cmd_base"
+    },
+    {
+      "name": "med_base"
+    },
+    {
+      "name": "mess_big"
+    },
+    {
+      "name": "req_big"
+    },
+    {
+      "name": "mp_big"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}
