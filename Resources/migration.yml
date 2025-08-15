@@ -1403,3 +1403,7 @@ ChairOfficeDark: CMChairOfficeWhite
 Grille: RMCGrille
 GrilleBroken: RMCGrilleBroken
 PlasmaReinforcedWindowDirectional: RMCWindowPhoronReinforcedDirectional
+ShowcaseRobot: RMCShowcaseRobot
+ShowcaseRobotMarauder: RMCShowcaseRobotMarauder
+CarpetChapel: RMCCarpetChapel
+CarpetSBlue: RMCCarpetSBlue
