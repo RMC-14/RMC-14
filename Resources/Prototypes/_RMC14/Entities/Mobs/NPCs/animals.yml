@@ -1,4 +1,16 @@
 - type: entity
+  id: RMCSimpleMob
+  name: abstract simple mob
+  abstract: true
+  components:
+  - type: ShortExamine
+  - type: RMCRevivable
+  - type: RMCMedicalExamine
+    simple: true
+    deadText: rmc-medical-examine-dead-simple-mob
+  - type: CrashLandable
+
+- type: entity
   id: RMCSmallHost
   name: abstract small host
   abstract: true
@@ -9,7 +21,6 @@
   - type: XenoNestable
   - type: RMCNightVisionVisible
   - type: InfectStopOnDeath
-  - type: CrashLandable
   - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
@@ -19,7 +30,7 @@
     coldDamageThreshold: 0
 
 - type: entity
-  parent: [MobMonkey, RMCSmallHost]
+  parent: [RMCSimpleMob, MobMonkey, RMCSmallHost]
   id: CMMobMonkey
   suffix: CM
   components:
@@ -27,7 +38,7 @@
     prob: 0
 
 - type: entity
-  parent: [MobKobold, RMCSmallHost]
+  parent: [RMCSimpleMob, MobKobold, RMCSmallHost]
   id: CMMobKobold
   suffix: CM
   components:
@@ -35,7 +46,7 @@
     prob: 0
 
 - type: entity
-  parent: MobMouse
+  parent: [RMCSimpleMob, MobMouse]
   id: CMMobMouse
   suffix: CM
   components:
@@ -50,7 +61,7 @@
     coldDamageThreshold: 0
 
 - type: entity
-  parent: MobMouse1
+  parent: [RMCSimpleMob, MobMouse1]
   id: CMMobMouse1
   suffix: CM
   components:
@@ -64,7 +75,7 @@
     coldDamageThreshold: 0
 
 - type: entity
-  parent: MobMouse2
+  parent: [RMCSimpleMob, MobMouse2]
   id: CMMobMouse2
   suffix: CM
   components:
@@ -85,7 +96,7 @@
 
 - type: entity
   name: rat
-  parent: SimpleMobBase
+  parent: [RMCSimpleMob, SimpleMobBase]
   id: RMCMobRat
   description: It's a small laboratory rat.
   suffix: RMC
@@ -295,7 +306,7 @@
         Base: splat-3
 
 - type: entity
-  parent: MobCorgiPuppy
+  parent: [RMCSimpleMob, MobCorgiPuppy]
   id: CMMobWiggles
   name: Mister Wiggles
   description: It's a corgi puppy. MISTER WIGGLES!! HE IS THE GREATEST!
@@ -312,7 +323,7 @@
     coldDamageThreshold: 0
 
 - type: entity
-  parent: MobCatCalico
+  parent: [RMCSimpleMob, MobCatCalico]
   id: CMMobJones
   name: Jones
   description: A tough, old stray whose origin no one seems to know.
@@ -329,7 +340,7 @@
     coldDamageThreshold: 0
 
 - type: entity
-  parent: MobCatCalico
+  parent: [RMCSimpleMob, MobCatCalico]
   id: RMCMobOrion
   name: Orion
   description: A domesticated, feline pet. The collar says 'Orion'.
@@ -346,7 +357,7 @@
     coldDamageThreshold: 0
 
 - type: entity
-  parent: MobCat
+  parent: [RMCSimpleMob, MobCat]
   id: RMCMobGarry
   name: Garry
   description: Her fur has the look and feel of velvet, and her tail quivers occasionally.
