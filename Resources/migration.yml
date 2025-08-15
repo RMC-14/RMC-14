@@ -1364,3 +1364,9 @@ WeaponRifleSSG45: RMCWeaponRifleSSG45
 
 # 2025-08-07
 RMCAttachmentM42A2WoodenStock: RMCAttachmentM42A2CollapsibleStock
+
+# 2025-08-14
+SpawnPointLatejoin: RMCSpawnPointLatejoin
+SpawnPointObserver: RMCSpawnPointObserver
+WallInvisible: RMCWallInvisibleBulletPassible
+
