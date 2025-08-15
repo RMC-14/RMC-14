@@ -48,7 +48,7 @@
         maxVol: 50
   - type: Injector #TODO RMC14 can't draw blood
     minimumTransferAmount: 50
-    maximumTransferAmount : 50
+    maximumTransferAmount: 50
     transferAmount: 50
     delay: 30
     delayPerVolume: 0
@@ -67,7 +67,3 @@
         reagents:
         - ReagentId: RMCChloralhydrate
           Quantity: 50
-
-
-
-
