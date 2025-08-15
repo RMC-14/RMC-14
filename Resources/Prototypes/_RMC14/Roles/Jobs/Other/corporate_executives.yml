@@ -429,7 +429,7 @@
         RMCSkillEngineer: 1
         RMCSkillExecution: 1
         RMCSkillPolice: 2
-        RMCSkillFiremanCarry: 1
+        RMCSkillFireman: 1
         RMCSkillIntel: 2
         RMCSkillFirearms: 1
     - type: RMCTrackable
@@ -499,11 +499,14 @@
     - type: Skills
       skills:
         RMCSkillEndurance: 2
-        RMCSkillLeadership: 1
+        RMCSkillLeadership: 3
         RMCSkillOverwatch: 1
         RMCSkillVehicles: 1
         RMCSkillMedical: 1
         RMCSkillEngineer: 1
+        RMCSkillExecution: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 1
         RMCSkillIntel: 2
         RMCSkillFirearms: 1
     - type: RMCTrackable

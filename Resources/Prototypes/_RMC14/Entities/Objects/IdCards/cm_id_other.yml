@@ -116,10 +116,10 @@
 - type: entity
   parent: CMIDCardLiaison
   id: RMCIDCardExecutiveCorporateSpecialist
-  name: executive corporate specialist ID card
+  name: executive legal specialist ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSpecialist
+    job: CMCorporateExecutiveSupervisorLegal
 
 - type: entity
   parent: CMIDCardLiaison
@@ -127,7 +127,7 @@
   name: executive corporate supervisor ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSupervisor
+    job: CMCorporateExecutiveSpecialistLegal
 
 - type: entity
   parent: CMIDCardLiaison
