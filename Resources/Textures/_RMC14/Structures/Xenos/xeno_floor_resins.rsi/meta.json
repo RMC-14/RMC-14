@@ -1,12 +1,15 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Sprites by Aleksh",
+  "copyright": "Fast, sticky, and sticky_weak sprites by Aleksh, Resin_spike by Sargeantmuffinman (taken from CM-SS13 https://cm-ss13.com/w/images/b/b1/Resin_spike.png).",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
+    {
+      "name": "Resin_spike"
+    },
     {
       "name": "fast",
       "delays": [

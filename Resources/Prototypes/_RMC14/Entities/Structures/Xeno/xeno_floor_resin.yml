@@ -104,3 +104,28 @@
   - type: ResinSpeedupModifier
     hiveSpeedModifier: 1.33 #MOVE_DELAY * 0.8 on CM, stacks with weed speed
 
+  - type: entity
+    parent: XenoBaseFloorResin
+    id: XenoSpikeResin
+    name: resin spikes
+    description: Resin formed into hardened points, shaped to skewer prey who walk across it.
+    components:
+    - type: Sprite
+      state: Resin_spike
+    - type: XenoConstructionPlasmaCost
+      plasma: 100
+    - type: HiveConstructionLimited
+      id: XenoSpikeResin
+    - type: StepTrigger
+      requiredTriggeredSpeed: 0
+      intersectRatio: 0.1
+    - type: DamageUserOnTrigger
+      damage:
+        types:
+          Piercing: 8
+    - type: SoundOnTrigger
+      sound:
+        path: /Audio/_RMC14/Xeno/alien_claw_flesh1.ogg
+        params:
+          variation: 0.2
+
