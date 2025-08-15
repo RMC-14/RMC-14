@@ -167,5 +167,6 @@ public readonly record struct OverwatchMarine(
     OverwatchLocation Location,
     string AreaName,
     Vector2? LeaderDistance,
-    ProtoId<RankPrototype>? Rank
+    ProtoId<RankPrototype>? Rank,
+    LocId? RoleOverride
 );
