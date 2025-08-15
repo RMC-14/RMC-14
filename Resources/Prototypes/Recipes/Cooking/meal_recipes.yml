@@ -2179,8 +2179,8 @@
     FoodCakeBatter: 2
   reagents:
     Sugar: 30
-    Nitrogen: 10
-    Plasma: 10
+    RMCNitrogen: 10
+    RMCPhoron: 10
 
 - type: microwaveMealRecipe
   id: RecipeFoodBakedChevreChaud
