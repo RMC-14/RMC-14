@@ -12,7 +12,7 @@
     RMCRankSPPMladshiyLeytenant: []
   weight: 5
   startingGear: CMGearPlatco
-  icon: "CMJobIconPlatoonCommander"
+  icon: "RMCJobIconSPPPlatco"
   requireAdminNotify: true
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
