@@ -8,7 +8,7 @@
     RMCRankSPPStarshyna: []
   startingGear: CMGearSquadLeader
   dummyStartingGear: CMGearSquadLeaderEquipped
-  icon: "RMCJobIconSPPLeader"
+  icon: "RMCJobIconSPPPlatoonSergeant"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-platco
   accessGroups:
