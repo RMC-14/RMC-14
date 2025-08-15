@@ -180,3 +180,46 @@
   storage:
     back:
     - RMCHelmetGarbWire
+
+- type: loadout
+  id: ChaplainPatchRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbChaplainPatch
+
+- type: loadout
+  id: PeaceFlairRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbPeaceFlair
+
+- type: loadout
+  id: IoFlairRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbIoFlair
+
+- type: loadout
+  id: TerraTekFlairRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbTerraTekFlair
+
+- type: loadout
+  id: UNMCFlairRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbUNMCFlair
+
+- type: loadout
+  id: MovieTicketRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbMovieTicket
+
