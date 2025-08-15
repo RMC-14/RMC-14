@@ -3,6 +3,7 @@
   parent: CMBaseStructure
   name: grille
   description: A flimsy lattice of metal rods.
+  suffix: RMC
   components:
     - type: MeleeSound
       soundGroups:
@@ -102,6 +103,7 @@
   parent: CMBaseStructure
   name: grille
   description: A flimsy lattice of metal rods. It has seen better days.
+  suffix: RMC
   components:
     - type: Sprite
       drawdepth: Walls
