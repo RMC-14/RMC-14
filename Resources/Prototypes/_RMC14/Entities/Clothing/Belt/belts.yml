@@ -155,7 +155,7 @@
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #      - # TODO circuit board
+      - RMCCircuitboard
       components:
       - Welder
       - PowerCell
@@ -198,7 +198,8 @@
       - RodMetal1
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #     - # TODO circuit board, stock parts
+      - RMCCircuitboard
+      # TODO stock parts
       components:
       - Welder
       - PowerCell
@@ -264,7 +265,7 @@
       - RMCShellShotgun
       - RMCNailgunCompact
       - RMCNailgunTactical
-      #      - # TODO circuit board
+      #      - # TODO analyzer
       components:
       - Welder
       - PowerCell
