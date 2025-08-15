@@ -1,0 +1,17 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorHost
+  name: cm-job-name-survivor-host
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorHost
+  
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearHostSurvivorBase
+  equipment:
+    pocket1: RMCPouchSurvivalFillRadioOff
+
+- type: playTimeTracker
+  id: CMJobSurvivorHost
+  isHumanoid: true
+
