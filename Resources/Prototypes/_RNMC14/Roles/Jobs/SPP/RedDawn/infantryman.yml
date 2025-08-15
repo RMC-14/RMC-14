@@ -1,0 +1,68 @@
+- type: job
+  parent: CMJobBase
+  id: CMSPPInfantrymanPVE
+  name: cm-job-name-infantryman
+  description: cm-job-description-rifleman
+  playTimeTracker: CMJobSPPInfantrymanPVE
+  startingGear: CMGearRifleman
+  dummyStartingGear: RMCGearSPPRifleman
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  ranks:
+    RMCRankSPPMladshiySerzhant:
+    - !type:RoleTimeRequirement
+      role: CMJobSPPInfantrymanPVE
+      time: 21600 # 6 hours, roughly 2 and a half ops
+    RMCRankSPPEfreitor:
+    - !type:RoleTimeRequirement
+      role: CMJobSPPInfantrymanPVE
+      time: 7200 # 2 hours, roughly one op
+    RMCRankSPPRyadovoy: []
+  accessGroups:
+  - CMSPPInfantrymanAccess
+  hasIcon: false
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 2
+        RMCSkillFireman: 3
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillFirearms: 1 # yes this is PVE parity
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: private
+
+- type: playTimeTracker
+  id: CMJobSPPInfantrymanPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointInfantrymanRedDawn
+  name: red dawn rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSPPInfantrymanPVE
+  - type: Sprite
+    state: marine_spawn

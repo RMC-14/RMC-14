@@ -318,6 +318,12 @@
     },
     {
       "name": "supply_box_powercell_colour"
+    },
+    {
+      "name": "pistol_box_73"
+    },
+    {
+      "name": "pistol_box_92"
     }
   ]
 }

@@ -1,0 +1,53 @@
+- type: accessGroup
+  id: CMSPPShipmasterAccess
+  tags:
+  - RMCAccessSPPArmory
+  - RMCAccessSPPCommando
+  - RMCAccessSPPEngineering
+  - RMCAccessSPPflight
+  - RMCAccessSPPGeneral
+  - RMCAccessSPPLeadership
+  - RMCAccessSPPMedical
+  - RMCAccessSPPResearch
+  - RMCAccessSPPSecurity
+  - RMCAccessSPPSeniorLead
+  - CMAccessDropship
+
+- type: accessGroup
+  id: CMSPPInfantrymanAccess
+  tags:
+  - RMCAccessSPPGeneral
+  - RMCAccessSPPflight
+
+- type: accessGroup
+  id: CMSPPMachinegunnerAccess
+  tags:
+  - RMCAccessSPPGeneral
+  - RMCAccessSPPflight
+  - RMCAccessSPPMachinegunner
+
+- type: accessGroup
+  id: CMSPPSanitarAccess
+  tags:
+  - RMCAccessSPPGeneral
+  - RMCAccessSPPMedical
+  - RMCAccessSPPflight
+
+- type: accessGroup
+  id: CMSPPSquadSergeantAccess
+  tags:
+  - RMCAccessSPPGeneral
+  - RMCAccessSPPSecurity
+  - RMCAccessSPPflight
+  - CMAccessDropship
+
+- type: accessGroup
+  id: CMSPPPlatoonSergeantAccess
+  tags:
+  - RMCAccessSPPGeneral
+  - RMCAccessSPPSecurity
+  - RMCAccessSPPflight
+  - RMCAccessSPPArmory
+  - RMCAccessSPPLeadership
+  - RMCAccessSPPMedical
+  - CMAccessDropship

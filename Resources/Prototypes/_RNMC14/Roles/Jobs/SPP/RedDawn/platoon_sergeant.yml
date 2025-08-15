@@ -1,0 +1,74 @@
+- type: job
+  parent: CMJobBase
+  id: CMSPPPlatoonSergeantPVE
+  name: cm-job-name-platoon-sergeant
+  description: cm-job-description-section-sergeant
+  playTimeTracker: CMJobSPPPlatoonSergeantPVE
+  ranks:
+    RMCRankSPPStarshyna: []
+  startingGear: CMGearSquadLeader
+  dummyStartingGear: CMGearSquadLeaderEquipped
+  icon: "RMCJobIconSPPPlatoonSergeant"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-platco
+  accessGroups:
+  - CMSPPSquadSergeantAccess
+  overwatchSortPriority: -6
+  overwatchShowName: true
+  overwatchRoleName: Squad Leader
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 3
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillVehicles: 1
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillPowerLoader: 1
+        RMCSkillPilot: 2
+        RMCSkillSurgery: 1
+        RMCSkillCqc: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-platoon-sergeant
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: leader
+
+- type: playTimeTracker
+  id: CMJobSPPPlatoonSergeantPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointPlatoonSergeantRedDawn
+  name: red dawn platoon sergeant spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSSPPlatoonSergeantPVE
+  - type: Sprite
+    state: marine_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPPlatoonSergeant
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_sl_a

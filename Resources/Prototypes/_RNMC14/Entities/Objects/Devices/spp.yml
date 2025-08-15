@@ -1,0 +1,11 @@
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyRedDawn
+  name: red dawn encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - RedDawn
+    defaultChannel: RedDawn
+  - type: Sprite
+    state: alpha_key

@@ -191,8 +191,6 @@
   components:
   - type: Sprite
     state: tube1
-  - type: PointLight
-    enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightTube
     unarmedHitShock: 0
@@ -211,6 +209,10 @@
     - On
     - Off
     - Toggle
+  - type: PointLight
+    color: "#e7c0a4"
+    energy: 0.5
+    enabled: true
 
 - type: entity
   parent: CMLightFixture
@@ -268,7 +270,7 @@
       Broken: bptube-broken
       Burned: bptube-burned
   - type: PointLight
-    color: "#DAE2FF"
+    color: "#e7c0a4"
     energy: 0.35
 
 # Light Bulbs
@@ -380,8 +382,6 @@
   components:
   - type: Sprite
     state: bulb1
-  - type: PointLight
-    enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightBulb
     unarmedHitShock: 0
@@ -400,6 +400,20 @@
     - On
     - Off
     - Toggle
+  - type: PointLight
+    color: "#e7c0a4"
+    energy: 0.5
+    enabled: true
+
+- type: entity
+  parent: CMLightFixtureSmall
+  id: CMLightFixtureSmallRed
+  suffix: Red
+  components:
+  - type: PointLight
+    color: "#832121"
+    energy: 0.5
+    enabled: true
 
 - type: entity
   parent: CMLightFixtureSmall

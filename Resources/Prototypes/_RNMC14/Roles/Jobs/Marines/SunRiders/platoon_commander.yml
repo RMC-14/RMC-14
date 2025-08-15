@@ -17,11 +17,16 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - PlatcoAccess
+  - CMAccessPlatco
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
     - type: Skills
       skills:
         RMCSkillPilot: 2

@@ -21,3 +21,27 @@
       CMSectionSergeantPVE: 1
       CMPlatoonCommanderPVE: 1
     group: SunRiders
+
+- type: entity
+  id: SquadRedDawn
+  name: Red Dawn
+  components:
+  - type: SquadTeam
+    color: "#DE3A3A"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad
+    radio: RedDawn
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    maxRoles:
+      CMSPPSquadSergeantPVE: 2
+      CMSPPMachinegunnerPVE: 2
+      CMSPPSanitarPVE: 1
+      CMSPPInfantrymanPVE: 4
+      CMSPPPlatoonSergeantPVE: 1
+      CMSPPPlatoonCommanderPVE: 1
+    group: RedDawn

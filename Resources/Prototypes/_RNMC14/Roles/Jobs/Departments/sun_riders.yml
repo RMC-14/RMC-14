@@ -3,7 +3,7 @@
   id: CMSunRiders
   name: department-CMsunriders
   description: cm-department-sun-riders
-  color: "#DE3A3A"
+  color: "#4148C8"
   roles:
   - CMRiflemanPVE
   - CMHospitalCorpsmanPVE
@@ -11,5 +11,5 @@
   - CMSquadLeaderPVE
   - CMSectionSergeantPVE
   - CMPlatoonCommanderPVE
-  departmentRadio: null
+  departmentRadio: CMSunRiders
   headOfDepartment: CMPlatoonCommanderPVE

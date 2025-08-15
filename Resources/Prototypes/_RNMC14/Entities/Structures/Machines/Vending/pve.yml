@@ -1,0 +1,223 @@
+# Marine
+
+- type: entity
+  parent: ColMarTechSurplus
+  id: RMCUnTechSurplusPVE
+  name: UnTech Surplus Uniform Vendor
+  description: An automated supply rack hooked up to a small storage of standard UPP uniforms.
+  suffix: PVE, SPP
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Structures/Machines/VendingMachines/UnTech/uniformvendor.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "RMCAccessSPPGeneral"
+    hackable: true
+    sections:
+    - name: Standard Equipment
+      entries:
+      - id: RMCBootsSPPBlackFilled
+        name: Military Combat Boots
+        amount: 15
+      - id: CMJumpsuitSPP
+        name: Naval Infantry Uniform
+        amount: 15
+      - id: RMCHandsCombat
+        name: Combat Gloves
+        amount: 15
+      - id: RMCHeadsetSPP
+        name: Radio Headset
+        amount: 15
+      - id: RMCCameraGearSPP
+        name: 1PN77M 'Periskop' camera unit
+        amount: 15
+    - name: Webbings
+      entries:
+      - id: CMWebbingBlack
+        name: Webbing, Black
+        amount: 10
+      - id: CMWebbingBrown
+        name: Webbing, Brown
+        amount: 10
+      - id: RMCWebbingLegPouch
+        name: Leg Pouch, Camo Conforming
+        amount: 10
+      - id: RMCWebbingLegPouchBlack
+        name: Leg Pouch, Black
+        amount: 10
+      - id: RMCWebbingDropPouch
+        amount: 2
+    - name: Armor
+      entries:
+      - id: CMArmorHelmetUPPNaval
+        name: 6b82 Combat Helmet (Green)
+        amount: 15
+      - id: CMArmorHelmetUPPNavalDesert
+        name: 6b82 Combat Helmet (Brown)
+      - id: CMArmorSPP6b72
+        name: 6B72-03 Pattern Vest
+        amount: 15
+      - id: RMCArmorSPP
+        name: UM5 personal armor
+        amount: 15
+    - name: Backpack
+      entries:
+      - id: RMCSatchelSPP
+        name: SPP Satchel
+        amount: 15
+    - name: Restricted Backpack
+      entries:
+      - id: RMCBackpackRTO
+        amount: 1
+    - name: Belts
+      entries:
+      - id: RMCBeltSPPBrown
+        amount: 15
+      - id: RMCBeltGrenade
+        amount: 10
+      - id: RMCBeltHolsterPistolSPP
+        amount: 15
+      - id: RMCM82FHolster
+        amount: 5
+      - id: RMCBeltUtilityGeneral
+        amount: 5
+    - name: Pouches
+      entries:
+      - id: RMCPouchFirstAid
+        amount: 15
+      - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
+        amount: 15
+      - id: RMCPouchMagazine
+        amount: 15
+      - id: RMCPouchGeneralMedium
+        amount: 15
+      - id: RMCPouchMagazinePistol
+        amount: 15
+      - id: RMCPouchPistol
+        amount: 15
+    - name: Restricted Pouches
+      entries:
+      - id: RMCPouchConstruction
+        amount: 1
+      - id: RMCPouchExplosive
+        amount: 1
+      - id: RMCPouchFirstResponder
+        amount: 2
+      - id: RMCPouchMagazinePistolLarge
+        amount: 2
+      - id: RMCPouchToolsFill
+        amount: 1
+      - id: RMCPouchFuelTank
+        amount: 1
+      - id: RMCPouchShotgun
+        amount: 1
+    - name: Mask
+      entries:
+      - id: RMCMaskGasSPP
+        amount: 15
+    - name: Miscellaneous
+      entries:
+      - id: RMCGogglesBallistic
+        name: Ballistic goggles
+        amount: 10
+      - id: RMCGogglesBallisticBlack
+        name: Prescription ballistic goggles
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        name: Firearm Lubricant
+        amount: 15
+      - id: RMCPatchSPPNaval
+        amount: 15
+      - id: RMCPatchSPP
+        amount: 15
+
+- type: entity
+  parent: ColMarTechUtilities
+  id: RMCUnTechUtilitiesPVE
+  name: UnTech Automated Utilities Squad Vendor
+  description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any UPP Rifleman.
+  suffix: PVE, SPP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "RMCAccessSPPGeneral"
+    hackable: true
+    sections:
+    - name: Food
+      entries:
+      - id: CMMRESPP
+        name: MRE
+        amount: 5
+    - name: Medical
+      entries:
+      - id: CMGauze10
+        amount: 15
+      - id: CMOintment10
+        amount: 15
+      - id: CMEmergencyAutoInjector
+        name: Emergency Autoinjector
+        amount: 15
+      - id: CMBicaridineAutoInjector
+        amount: 15
+      - id: CMKelotaneAutoInjector
+        amount: 15
+      - id: CMTricordrazineAutoInjector
+        amount: 15
+    - name: Tools
+      entries:
+      - id: CMEntrenchingTool
+        amount: 2
+      - id: CMScrewdriver
+        amount: 5
+      - id: CMWirecutter
+        amount: 5
+      - id: CMCrowbar
+        amount: 5
+      - id: CMWrench
+        amount: 5
+      - id: CMMultitool
+        name: Multitool
+        amount: 5
+      - id: CMWelder
+        amount: 1
+    - name: Explosives
+      entries:
+      - id: RMCExplosivePlastic
+        amount: 2
+      - id: RMCExplosiveBreachingCharge
+        amount: 2
+    - name: Flare and Light
+      entries:
+      - id: RMCBoxPackFlareSPP
+        name: Box of Flares
+        amount: 1
+      - id: CMPackFlareSPP
+        amount: 10
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolNP92
+        amount: 2
+      - id: RMCWeaponPistolT73
+        amount: 2
+    - name: Miscellaneous
+      entries:
+      - id: CMFireExtinguisher
+        name: Extinguisher
+        amount: 5
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
+        amount: 1
+      - id: CMRollerBed
+        amount: 2
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
+        amount: 5
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentTwoPointSling
+        amount: 5
+      - id: RMCM5Bayonet
+        amount: 25
