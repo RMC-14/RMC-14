@@ -1,0 +1,61 @@
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaJungle
+  name: The Jungle
+  suffix: The Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: base_icon
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+    CAS: true
+    fulton: true
+    lasing: true
+    mortarPlacement: true
+    mortarFire: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: false
+    unweedable: false
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaJungle
+  id: RMCAreaJungleLZ
+  name: LZ
+
+- type: entity
+  parent: RMCAreaJungle
+  id: RMCAreaJungles
+  name: Jungles
+
+- type: entity
+  parent: RMCAreaJungle
+  id: RMCAreaJungleNorth
+  name: North Jungles
+
+- type: entity
+  parent: RMCAreaJungle
+  id: RMCAreaJungleUncharted
+  name: Uncharted Territories
+
+- type: entity
+  parent: RMCAreaJungle
+  id: RMCAreaJungleFarmField
+  name: Farm Field
+
+- type: entity
+  parent: RMCAreaJungle
+  id: RMCAreaJunglePrud
+  name: Mayakovskiy's Prud
+
+- type: entity
+  parent: RMCAreaJungle
+  id: RMCAreaJungleBeach
+  name: Beach
