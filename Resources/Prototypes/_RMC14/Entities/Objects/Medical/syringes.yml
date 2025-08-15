@@ -58,6 +58,8 @@
   id: RMCSyringeLethalPrefilled
   suffix: RMC14, Filled
   components:
+  - type: Label
+    currentLabel: reagent-name-rmc-chloral-hydrate
   - type: Injector
     toggleState: Inject
   - type: SolutionContainerManager
