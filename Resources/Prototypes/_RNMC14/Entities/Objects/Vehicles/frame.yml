@@ -5,6 +5,8 @@
   parent: BaseStructureDynamic
   name: speed buggy frame
   description: A speed buggy under construction.
+  placement:
+    mode: PlaceFree
   components:
   - type: Sprite
     sprite: _RNMC14/Objects/Vehicles/parts.rsi
@@ -12,13 +14,24 @@
     layers:
     - state: speed-buggy_0
       map: [ "enum.ConstructionVisuals.Layer" ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.65
+        density: 750
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
   - type: Appearance
   - type: Rotatable
   - type: Construction
     graph: RNMCSpeedBuggy
     node: frameUnready
   - type: Damageable
-    damageContainer: StructuralInorganic
+    damageContainer: Inorganic
     damageModifierSet: Metallic
   - type: Destructible
     thresholds:
@@ -81,7 +94,8 @@
   parent: BaseStructureDynamic
   name: destroyed speed buggy frame
   description: This speed buggy has seen better days.
-  suffix: Ready
+  placement:
+    mode: PlaceFree
   components:
   - type: Sprite
     sprite: _RNMC14/Objects/Vehicles/parts.rsi
@@ -97,8 +111,19 @@
   - type: Construction
     graph: RNMCSpeedBuggy
     node: destroyedSpeedBuggyFrame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.65
+        density: 750
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
   - type: Damageable
-    damageContainer: StructuralInorganic
+    damageContainer: Inorganic
     damageModifierSet: Metallic
   - type: Destructible
     thresholds:
@@ -228,7 +253,8 @@
   parent: BaseStructureDynamic
   name: disabled speed buggy frame
   description: This speed buggy has seen better days.
-  suffix: Ready
+  placement:
+    mode: PlaceFree
   components:
   - type: Sprite
     sprite: _RNMC14/Objects/Vehicles/parts.rsi
@@ -244,6 +270,17 @@
   - type: Construction
     graph: RNMCSpeedBuggy
     node: disabledSpeedBuggyFrame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.65
+        density: 750
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
