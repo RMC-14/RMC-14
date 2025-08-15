@@ -695,6 +695,39 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/first_responder_windbreaker.rsi
 
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerBrown
+  name: brown windbreaker
+  description: A brown windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_brown.rsi
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerGrey
+  name: grey windbreaker
+  description: A grey windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_grey.rsi
+
+- type: entity
+  parent: RMCJacketWindbreaker
+  id: RMCJacketWindbreakerExpedition
+  name: expedition windbreaker
+  description: A brown windbreaker with various patches tying it to one of the first explorations into this sector.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_expedition.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Windbreakers/windbreaker_expedition.rsi
+
 
 # priest robes
 - type: entity
