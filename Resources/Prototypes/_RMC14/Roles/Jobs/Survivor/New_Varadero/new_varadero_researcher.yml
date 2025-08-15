@@ -8,7 +8,7 @@
   spawnMenuRoleName: New Varadero Researcher (NV Survivor)
   accessGroups:
   - ColonistMedical
-  useLoadoutOfJob: CMSurvivorScientist
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorScientist

@@ -18,7 +18,6 @@
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: People's Armed Police Officer (Sorokyne Survivor)
-  useLoadoutOfJob: CMSurvivorSecurity
   special:
   - !type:AddComponentSpecial
     components:
@@ -43,6 +42,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase

@@ -91,6 +91,7 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistHybrisaCivilian
