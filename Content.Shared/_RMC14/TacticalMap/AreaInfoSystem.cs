@@ -107,12 +107,12 @@ public sealed class AreaInfoSystem : EntitySystem
         if (!_area.CanOrbitalBombard(coordinates, out var roofed))
         {
             ceilingLevel = 4;
-            severityToUse = hasHiveCoreProtection ? (short)7 : (short)5;
+            severityToUse = (short)5;
         }
         else if (!_area.CanCAS(coordinates))
         {
             ceilingLevel = 3;
-            severityToUse = hasPylonProtection ? (short)6 : (short)4;
+            severityToUse = (short)4;
         }
         else if (!_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)) || !_area.CanMortarFire(coordinates))
         {
@@ -183,10 +183,6 @@ public sealed class AreaInfoSystem : EntitySystem
             restrictedActions.Add("Resin Structures");
 
         var protectionSource = "";
-        if (hasHiveCoreProtection)
-            protectionSource = "\nProtection: Hive Core";
-        else if (hasPylonProtection)
-            protectionSource = "\nProtection: Hive Pylon";
 
         var restrictionsStr = $"\nCeiling level: {ceilingLevel}{protectionSource}";
 
