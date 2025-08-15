@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaConstructionWorker
   name: rmc-job-name-survivor-construction-worker
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorHybrisaConstructionWorker
   startingGear: RMCGearSurvivorHybrisaConstructionWorker
   spawnMenuRoleName: Construction Worker (Hybrisa Survivor)
   special:
@@ -40,10 +39,6 @@
     back:
     - WeaponNailgun
     - CMSheetMetal30
-
-- type: playTimeTracker
-  id: RMCJobSurvivorHybrisaConstructionWorker
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetEngineer
