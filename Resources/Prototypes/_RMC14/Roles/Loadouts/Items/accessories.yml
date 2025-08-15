@@ -14,3 +14,10 @@
     back:
     - RMCSquadArmband
 
+
+- type: loadout
+  id: PatchPeaceRMC
+  cost: 1
+  storage:
+    back:
+    - RMCPatchPeace
