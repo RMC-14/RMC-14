@@ -5,14 +5,30 @@
   components:
   - type: StorageFill
     contents:
-      - id: RNMCStockPartWheel
-        amount: 4
       - id: RNMCStockPartSmallEngine
       - id: CMStockPartMatterBin
       - id: RNMCStockPartSmallTransmission
       - id: RNMCStockPartShockAbsorber
         amount: 4
+
+- type: entity
+  id: RNMCCrateVehicleControls
+  parent: RMCCrateConstruction
+  name: vehicle controls crate
+  components:
+  - type: StorageFill
+    contents:
       - id: RNMCStockPartVehicleSeatFolded
       - id: RNMCStockPartSteeringWheel
       - id: RNMCStockPartPedal
         amount: 2
+
+- type: entity
+  id: RNMCCrateSpareTires
+  parent: RMCCrateConstruction
+  name: spare tires crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: RNMCStockPartWheel
+        amount: 4
