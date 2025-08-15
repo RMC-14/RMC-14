@@ -83,7 +83,7 @@
 
 - type: trackerMode
   id: SupervisorWeYaSpecialist
-  job: CMCorporateCMCorporateExecutiveSpecialistLegal
+  job: CMCorporateExecutiveSpecialistLegal
 
 - type: trackerMode
   id: ProvostMarshal
