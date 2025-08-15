@@ -2,6 +2,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
+  - RMCXenoVentCrawler
   id: CMXenoParasite
   name: Parasite
   components:
@@ -123,3 +124,5 @@
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
     name: cm-job-name-xeno-parasite
+  - type: VentCrawler
+    ventCrawlIcon: parasite

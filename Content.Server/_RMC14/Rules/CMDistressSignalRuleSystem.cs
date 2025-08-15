@@ -1272,7 +1272,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (!xeno.ContributesToVictory)
                     continue;
 
-                if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                if (HasComp<ThunderdomeMapComponent>(xform.MapUid) || _containers.IsEntityInContainer(xenoId))
                     continue;
 
                 if (_mobState.IsAlive(xenoId, mobState) &&
