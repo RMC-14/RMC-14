@@ -127,7 +127,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
 
         var damageDict = args.DamageDelta.DamageDict;
         var triggerProbability = comp.BaseSplashTriggerProbability; // probability of splash activation
-        triggerProbability += (float)args.DamageDelta.GetTotal() * comp.DamageProbabilityMultiplier;
+        triggerProbability += (float)args.DamageDelta.GetTotal() * comp.DamageTriggerProbabilityMultiplier;
 
         foreach (var (type, _) in damageDict)
         {
