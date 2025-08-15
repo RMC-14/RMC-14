@@ -485,3 +485,55 @@
       steps:
       - tool: Screwing
         doAfter: 4
+
+  - node: disabledSpeedBuggyFrame
+    entity: RNMCSpeedBuggyFrameDisabled
+    edges:
+    - to: missingWheel2Fallback
+      steps:
+      - tag: RNMCStockPartWheel
+        name: wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: wheel
+        doAfter: 1
+    - to: missingShockAbsorberUnsecuredFallback
+      steps:
+      - tool: Anchoring
+        doAfter: 4
+  - node: missingWheel2Fallback # Fallback
+    entity: RNMCSpeedBuggyFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingWheel3
+      steps:
+      - tag: RNMCStockPartWheel
+        name: wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: wheel
+        doAfter: 1
+    - to: missingWheel1
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartWheel
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingShockAbsorberUnsecuredFallback # Fallback
+    entity: RNMCSpeedBuggyFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to:  missingWheel1
+      steps:
+      - tool: Anchoring
+        doAfter: 4
+    - to: missingShockAbsorber4
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartShockAbsorber
+      steps:
+      - tool: Prying
+        doAfter: 1

@@ -73,6 +73,8 @@
           missingWheel4: { state: speed-buggy_17 }
           missingWheelUnsecured: { state: speed-buggy_18 }
           missingMetalSheetUnsecuredFallback: { state: speed-buggy_9 } # Fallback
+          missingShockAbsorberUnsecuredFallback: { state: speed-buggy_14 } # Fallback
+          missingWheel2Fallback: { state: speed-buggy_15 } #Fallback
 
 - type: entity
   id: RNMCSpeedBuggyFrameDestroyed
@@ -220,3 +222,167 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+
+- type: entity
+  id: RNMCSpeedBuggyFrameDisabled
+  parent: BaseStructureDynamic
+  name: disabled speed buggy frame
+  description: This speed buggy has seen better days.
+  suffix: Ready
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Vehicles/parts.rsi
+    noRot: true
+    layers:
+    - state: speed-buggy_14
+      map: [ "enum.ConstructionVisuals.Layer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          disabledSpeedBuggyFrame: { state: speed-buggy_14 }
+  - type: Construction
+    graph: RNMCSpeedBuggy
+    node: disabledSpeedBuggyFrame
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger: # Excess damage, don't spawn entities
+        !type:DamageTrigger
+        damage: 250
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMRodMetal1:
+            min: 0
+            max: 5
+          RMCCableCoil:
+            min: 0
+            max: 2
+          CMSheetMetal1:
+            min: 0
+            max: 5
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMRodMetal1:
+            min: 5
+            max: 10
+          RNMCStockPartSmallEngine:
+            min: 0
+            max: 1
+          CMStockPartMatterBin:
+            min: 0
+            max: 1
+          RNMCStockPartSmallTransmission:
+            min: 0
+            max: 1
+          RMCFlashlight:
+            min: 0
+            max: 1
+          RNMCStockPartSteeringWheel:
+            min: 0
+            max: 1
+          RNMCStockPartPedal:
+            min: 0
+            max: 2
+          RMCCableCoil:
+            min: 1
+            max: 4
+          RNMCStockPartVehicleSeat:
+            min: 0
+            max: 1
+          CMSheetMetal1:
+            min: 1
+            max: 10
+          RNMCStockPartShockAbsorber:
+            min: 1
+            max: 4
+          RNMCStockPartWheel:
+            min: 1
+            max: 4
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RNMCSpeedBuggyFrame:
+            min: 1
+            max: 1
+          RNMCStockPartSmallEngine:
+            min: 0
+            max: 1
+          CMStockPartMatterBin:
+            min: 0
+            max: 1
+          RNMCStockPartSmallTransmission:
+            min: 0
+            max: 1
+          RMCFlashlight:
+            min: 0
+            max: 1
+          RNMCStockPartSteeringWheel:
+            min: 0
+            max: 1
+          RNMCStockPartPedal:
+            min: 0
+            max: 2
+          RMCCableCoil:
+            min: 1
+            max: 4
+          RNMCStockPartVehicleSeat:
+            min: 0
+            max: 1
+          CMSheetMetal1:
+            min: 1
+            max: 10
+          RNMCStockPartShockAbsorber:
+            min: 1
+            max: 4
+          RNMCStockPartWheel:
+            min: 1
+            max: 4
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+        - !type:DoActsBehavior
+          acts: ["Destruction"]
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            RNMCSpeedBuggyFrameDestroyed:
+              min: 1
+              max: 1
+            RNMCStockPartShockAbsorber:
+              min: 1
+              max: 4
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
