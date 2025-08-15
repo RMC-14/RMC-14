@@ -1,4 +1,4 @@
-﻿- type: reagent
+- type: reagent
   parent: CMReagent
   id: RMCMolecularAcid
   name: reagent-name-rmcmolecularacid
@@ -113,3 +113,58 @@
           conditions:
             - !type:ReagentThreshold
               min: 5
+
+- type: reagent
+  parent: CMReagent
+  id: RMCChloralhydrate
+  name: reagent-name-rmc-chloral-hydrate
+  desc: reagent-desc-rmc-chloral-hydrate
+  physicalDesc: reagent-physical-desc-nondescript
+  color: "#000067"
+  flavor: bitter
+  unknown: true
+  toxin: true
+  overdose: 15
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !type:HealthChange # Toxic 1
+        damage:
+          groups:
+            Toxin: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          groups:
+            Toxin: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          groups:
+            Toxin: 2.5
+      - !type:Emote # Sedative 6
+        emote: Yawn
+        showInChat: true
+        probability: 0.25 #TODO makes them confused and eventually sleepy
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        key: Unconscious
+        component: RMCUnconscious
+        type: Add
+        time: 3
+        refresh: false
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Asphyxiation: 15
+
