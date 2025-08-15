@@ -1,0 +1,6 @@
+
+- type: tile
+  id: RMCFloorCatwalkStrata
+  name: tiles-cm-catwalk
+  suffix: strata
+  sprite: /Textures/_RMC14/Structures/catwalk.rsi/strata_catwalk.png

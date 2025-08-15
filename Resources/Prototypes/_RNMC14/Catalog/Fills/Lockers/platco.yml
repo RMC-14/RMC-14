@@ -4,9 +4,9 @@
   suffix: Platoon Commander
   table: !type:AllSelector
     children:
-    - id: CMBootsBlackFilled
-    - id: RMCJumpsuitSunRiders
-    - id: RMCHeadsetGoldenArrow
+    - id: CMMilitary
+    - id: RMCJumpsuitSPPArmy
+    - id: RMCHeadsetSPPPVE
     - id: CMJumpsuitBO
     - id: CMHeadCapOfficer
     - id: CMHeadCapPeakedService

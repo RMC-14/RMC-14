@@ -1,0 +1,47 @@
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockSPP
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Structures/Doors/Airlocks/spp.rsi
+
+- type: entity
+  parent: RMCAirlockSPP
+  id: RMCAirlockSPPSecure
+  suffix: SPP, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessSPPGeneral"]]
+
+- type: entity
+  parent: RMCAirlockSPP
+  id: RMCAirlockSPPSecureMedical
+  suffix: SPP Medical, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessSPPMedical"]]
+
+- type: entity
+  parent: RMCAirlockSPP
+  id: RMCAirlockSPPSecureSecurity
+  suffix: SPP Security, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessSPPSecurity"]]
+
+- type: entity
+  parent: RMCAirlockSPP
+  id: RMCAirlockSPPSecureLeadership
+  suffix: SPP Leadership, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessSPPLeadership"]]
+
+- type: entity
+  parent: RMCAirlockSPP
+  id: RMCAirlockSPPSecureSeniorLeadership
+  suffix: SPP Senior Leadership, Locked
+  components:
+  - type: AccessReader
+    access: [["RMCAccessSPPSeniorLead"]]

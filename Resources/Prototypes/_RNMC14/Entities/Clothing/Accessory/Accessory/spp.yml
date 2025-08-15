@@ -1,0 +1,5 @@
+- type: entity
+  parent: RMCM5CameraGear
+  id: RMCCameraGearSPP
+  name: 1PN77M 'Periskop' camera unit
+  description: Replacing last generation head-mounted-sights, the "Periskop" brings several improvements over its' predecessors in the areas of ergonomics and technology. Thanks to its' superior camera systems and redesigned optical suite, which has improved both officer overwatch and personal combat capabilities, the unit has seen wide adoption among all UPP branches.

@@ -1,0 +1,6 @@
+- type: entity
+  parent: RMCWeaponLMGQYJ72
+  id: RMCWeaponLMGQYJ72PVE
+  components:
+  - type: GunIFF
+  - type: IFFToggle

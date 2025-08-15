@@ -27,6 +27,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
     - type: Skills
       skills:
         RMCSkillEndurance: 2

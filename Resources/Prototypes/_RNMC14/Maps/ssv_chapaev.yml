@@ -1,0 +1,24 @@
+- type: gameMap
+  id: Chapaev
+  mapName: "SSV Chapaev"
+  mapPath: /Maps/_RNMC14/ssv_chapaev.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    Chapaev:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'SSV Chapaev'
+        - type: StationJobs
+          availableJobs:
+            # Command
+            CMSSPPlatoonCommanderPVE: [1, 1]
+
+            # Operatives
+            CMSPPPlatoonSergeantPVE: [1, 1]
+            CMSSPSquadSergeantPVE: [2, 2]
+            CMSPPMachinegunnerPVE: [2, 2]
+            CMSPPSanitarPVE: [1, 1]
+            CMSPPInfantrymanPVE: [ 4, 4 ]

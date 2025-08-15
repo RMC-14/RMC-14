@@ -1,0 +1,74 @@
+- type: job
+  parent: CMJobBase
+  id: CMSPPSanitarPVE
+  name: cm-job-name-sanitar
+  description: cm-job-description-hospital-corpsman
+  playTimeTracker: CMJobSSPSanitarPVE
+  ranks:
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSSPSanitarPVE
+      time: 252000 # 70 hours
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSSPSanitarPVE
+      time: 36000 # 10 hours
+    RMCRankPrivateFirstClass: []
+  startingGear: CMGearHospitalCorpsman
+  dummyStartingGear: CMGearHospitalCorpsmanEquipped
+  icon: "RMCJobIconSPPMedic"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - CMSPPSanitarAccess
+  overwatchSortPriority: -2
+  overwatchRoleName: Sanitar
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillPowerLoader: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 1
+        RMCSkillPilot: 1
+        RMCSkillVehicles: 2
+    - type: CMVendorUser
+      points: 45
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-sanitar
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: medic
+
+- type: playTimeTracker
+  id: CMJobSSPSanitarPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSanitarRedDawn
+  name: red dawn sanitar spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSSPSanitarPVE
+  - type: Sprite
+    state: marine_spawn
