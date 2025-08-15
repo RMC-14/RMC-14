@@ -324,8 +324,10 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             return null;
 
         _hive.SetSameHive(xeno.Owner, para.Value);
+        _rmcObstacleSlamming.MakeImmune(para.Value);
         _transform.DropNextTo(para.Value, xeno.Owner);
         // Small throw
+
         _throw.TryThrow(para.Value, _random.NextAngle().RotateVec(Vector2.One), 3);
 
         return para;
