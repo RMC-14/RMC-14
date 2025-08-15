@@ -1,0 +1,23 @@
+- type: entity
+  id: RMCCobweb1
+  parent: Cobweb1
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: Structures/Decoration/cobweb.rsi # TODO RMC14: replace with parity sprite
+    state: cobweb1
+    drawdepth: OverMobs #We want this to appear below doors but above mobs
+  - type: Icon
+    sprite: Structures/Decoration/cobweb.rsi
+    state: cobweb1
+
+- type: entity
+  id: RMCCobweb2
+  parent: Cobweb2
+  components:
+  - type: Sprite
+    sprite: Structures/Decoration/cobweb.rsi # TODO RMC14: replace with parity sprite
+    state: cobweb2
+  - type: Icon
+    sprite: Structures/Decoration/cobweb.rsi
+    state: cobweb2

@@ -489,3 +489,18 @@
     state: bcarpet09
   - type: Icon
     state: bcarpet09
+
+- type: entity
+  id: RMCCarpetChapel
+  parent: CarpetChapel
+  suffix: RMC
+
+- type: entity
+  id: RMCCarpetSBlue
+  parent: CarpetSBlue
+  suffix: RMC, Sky Blue
+
+- type: entity
+  id: RMCCarpet
+  parent: Carpet
+  suffix: RMC, Red

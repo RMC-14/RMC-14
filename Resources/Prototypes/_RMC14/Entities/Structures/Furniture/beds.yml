@@ -153,3 +153,8 @@
     folded: true
   - type: Strap
     enabled: false
+
+- type: entity
+  id: RMCDogBed
+  parent: DogBed
+  suffix: RMC
