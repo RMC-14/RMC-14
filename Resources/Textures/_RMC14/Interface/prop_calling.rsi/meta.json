@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "github.com/coldmanicy",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "RMC_observeraction_joining"
+    },
+    {
+      "name": "RMC_observeraction_not_joining"
+    },
+    {
+      "name": "RMC_observeraction_call_props"
+    }
+  ]
+}

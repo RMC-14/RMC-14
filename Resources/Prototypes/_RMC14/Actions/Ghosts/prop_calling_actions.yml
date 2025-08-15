@@ -6,8 +6,8 @@
   components:
   - type: Action
     checkCanInteract: false
-    icon: { sprite: _RMC14/Interface/Alerts/xeno_health.rsi, state: health_0 }
-    iconOn: { sprite: _RMC14/Interface/Alerts/xeno_health.rsi, state: health_full }
+    icon: { sprite: _RMC14/Interface/prop_calling.rsi, state: RMC_observeraction_not_joining }
+    iconOn: { sprite: _RMC14/Interface/prop_calling.rsi, state: RMC_observeraction_joining }
 
 - type: entity
   id: ActionCallProps
@@ -17,7 +17,7 @@
   components:
   - type: Action
     icon:
-      sprite: _RMC14/Interface/Alerts/xeno_health.rsi
-      state: health_full
+      sprite: _RMC14/Interface/prop_calling.rsi
+      state: RMC_observeraction_call_props
   - type: InstantAction
     event: !type:CallOverPropsEvent
