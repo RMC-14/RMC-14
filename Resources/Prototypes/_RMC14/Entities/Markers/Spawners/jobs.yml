@@ -1,0 +1,23 @@
+# Used for cm_ignoredPrototypes.yml and migrations
+- type: entity
+  id: RMCSpawnPointObserver
+  parent: SpawnPointObserver
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+      - state: green
+      - sprite: Mobs/Ghosts/ghost_human.rsi
+        state: icon
+    state: observer
+  - type: SpawnPoint
+    spawn_type: Observer
+
+- type: entity
+  id: RMCSpawnPointLatejoin
+  parent: SpawnPointLatejoin
+  components:
+  - type: Sprite
+    state: green
+  - type: SpawnPoint
+    spawn_type: LateJoin

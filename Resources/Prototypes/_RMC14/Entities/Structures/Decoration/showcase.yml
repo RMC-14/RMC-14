@@ -1,0 +1,9 @@
+- type: entity
+  id: RMCShowcaseRobot
+  parent: ShowcaseRobot
+  suffix: RMC
+
+- type: entity
+  id: RMCShowcaseRobotMarauder
+  parent: ShowcaseRobotMarauder
+  suffix: RMC
