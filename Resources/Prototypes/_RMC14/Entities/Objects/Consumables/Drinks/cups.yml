@@ -12,7 +12,7 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 20
+        maxVol: 30
   - type: Drink
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
@@ -34,6 +34,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - DrinkGlass
 
 - type: entity
   parent: RMCCoffeeCup
@@ -43,10 +46,10 @@
     - type: SolutionContainerManager
       solutions:
         drink:
-          maxVol: 20
+          maxVol: 30
           reagents:
           - ReagentId: RMCCoffee
-            Quantity: 20
+            Quantity: 30
 
 - type: entity
   parent: RMCCoffeeCup
