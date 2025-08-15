@@ -335,6 +335,9 @@ public sealed class FiremanCarrySystem : EntitySystem
                     continue;
                 }
 
+                var targetXform = Transform(target);
+                if (targetXform.ParentUid != carrier)
+                    continue;
                 var parent = _transform.GetMoverCoordinates(target).EntityId;
                 if (target == parent)
                     continue;
