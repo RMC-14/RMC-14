@@ -71,7 +71,8 @@ public sealed class RMCFultonSystem : EntitySystem
             return;
         }
 
-        if (HasComp<PerishableComponent>(target) && !_rotting.IsRotten(target) || _unrevivable.IsUnrevivable(target))
+        if (HasComp<PerishableComponent>(target) && !_rotting.IsRotten(target) ||
+            HasComp<RMCRevivableComponent>(target) && !_unrevivable.IsUnrevivable(target))
         {
             _popup.PopupClient(Loc.GetString("rmc-fulton-not-unrevivable", ("fulton", used), ("target", target)), target, user);
             return;

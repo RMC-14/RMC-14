@@ -118,8 +118,9 @@ public sealed class HealthScannerBui : BoundUserInterface
             _window.HealthBar.MinValue = 0;
             _window.HealthBar.MaxValue = 100;
 
-            if (_entities.HasComponent<VictimBurstComponent>(target) || _rot.IsRotten(target) || _unrevivable.IsUnrevivable(target)
-                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target) && _mob.IsDead(target))
+            if (_mob.IsDead(target) && (_entities.HasComponent<VictimBurstComponent>(target) ||
+                _rot.IsRotten(target) || _unrevivable.IsUnrevivable(target) ||
+                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target)))
             {
                 isPermaDead = true;
                 _window.HealthBar.Value = 100;
