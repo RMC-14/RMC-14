@@ -43,6 +43,7 @@ public sealed class HealthScannerBui : BoundUserInterface
     private readonly SharedWoundsSystem _wounds;
     private readonly RMCUnrevivableSystem _unrevivable;
     private readonly MobStateSystem _mob;
+    private readonly RMCUnrevivableSystem _unrevivable;
 
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> BloodPackSkill = new() { ["RMCSkillSurgery"] = 1 };
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> DefibSkill = new() { ["RMCSkillMedical"] = 2 };
@@ -53,6 +54,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
         _skills = _entities.System<SkillsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
+        _rot = _entities.System<SharedRottingSystem>();
         _unrevivable = _entities.System<RMCUnrevivableSystem>();
         _mob = _entities.System<MobStateSystem>();
     }
@@ -115,9 +117,9 @@ public sealed class HealthScannerBui : BoundUserInterface
             _window.HealthBar.MinValue = 0;
             _window.HealthBar.MaxValue = 100;
 
-            if (_unrevivable.IsUnrevivable(target) ||
-                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target) &&
-                _mob.IsDead(target))
+            if (_mob.IsDead(target) && (_entities.HasComponent<VictimBurstComponent>(target) ||
+                _rot.IsRotten(target) || _unrevivable.IsUnrevivable(target) ||
+                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target)))
             {
                 isPermaDead = true;
                 _window.HealthBar.Value = 100;
