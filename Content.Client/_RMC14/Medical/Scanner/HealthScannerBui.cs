@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Medical.HUD;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.HUD.Systems;
 using Content.Shared._RMC14.Medical.Scanner;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Atmos.Rotting;
@@ -43,6 +44,7 @@ public sealed class HealthScannerBui : BoundUserInterface
     private readonly SharedWoundsSystem _wounds;
     private readonly SharedRottingSystem _rot;
     private readonly MobStateSystem _mob;
+    private readonly RMCUnrevivableSystem _unrevivable;
 
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> BloodPackSkill = new() { ["RMCSkillSurgery"] = 1 };
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> DefibSkill = new() { ["RMCSkillMedical"] = 2 };
@@ -54,6 +56,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         _skills = _entities.System<SkillsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
         _rot = _entities.System<SharedRottingSystem>();
+        _unrevivable = _entities.System<RMCUnrevivableSystem>();
         _mob = _entities.System<MobStateSystem>();
     }
 
@@ -115,7 +118,7 @@ public sealed class HealthScannerBui : BoundUserInterface
             _window.HealthBar.MinValue = 0;
             _window.HealthBar.MaxValue = 100;
 
-            if (_entities.HasComponent<VictimBurstComponent>(target) || _rot.IsRotten(target) ||
+            if (_entities.HasComponent<VictimBurstComponent>(target) || _rot.IsRotten(target) || _unrevivable.IsUnrevivable(target)
                 _entities.HasComponent<CMDefibrillatorBlockedComponent>(target) && _mob.IsDead(target))
             {
                 isPermaDead = true;
