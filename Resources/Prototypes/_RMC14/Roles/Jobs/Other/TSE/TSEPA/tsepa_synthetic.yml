@@ -35,6 +35,9 @@
         RMCSkillJtac: 1
         RMCSkillIntel: 1
         RMCSkillDomestics: 2
+    - type: NpcFactionMember
+      factions:
+      - TSE
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

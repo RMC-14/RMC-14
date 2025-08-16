@@ -39,7 +39,7 @@
     thresholds: []
   - type: RMCMedicalExamine
     simple: true
-    deadText: rmc-medical-examine-dead-simple-mob
+    deadText: rmc-medical-examine-dead-xeno
   - type: RMCBlockMedicalExamine
   - type: MobState
     allowedStates:

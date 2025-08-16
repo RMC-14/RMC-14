@@ -11,7 +11,6 @@ using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -42,7 +41,7 @@ public sealed class HealthScannerBui : BoundUserInterface
     private readonly ShowHolocardIconsSystem _holocardIcons;
     private readonly SkillsSystem _skills;
     private readonly SharedWoundsSystem _wounds;
-    private readonly SharedRottingSystem _rot;
+    private readonly RMCUnrevivableSystem _unrevivable;
     private readonly MobStateSystem _mob;
     private readonly RMCUnrevivableSystem _unrevivable;
 
