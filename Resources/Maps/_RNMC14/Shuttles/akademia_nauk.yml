@@ -63,6 +63,7 @@ entities:
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+        enabled: true
     - type: DecalGrid
       chunkCollection:
         version: 2
