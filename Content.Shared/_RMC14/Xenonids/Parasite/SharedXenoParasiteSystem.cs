@@ -641,7 +641,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
             else
             {
-                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
+                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid) || _unrevivable.IsUnrevivable(uid)))
                 {
                     if (infected.SpawnedLarva != null)
                         TryBurst((uid, infected));

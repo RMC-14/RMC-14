@@ -6,7 +6,7 @@
   suffix: GuideBookEntity
   components:
   - type: Sprite
-    sprite: _RMC14/Interface/map_blips.rsi
+    sprite: /Textures/_RMC14/Interface/map_blips.rsi
 
 # Tier 0
 - type: entity

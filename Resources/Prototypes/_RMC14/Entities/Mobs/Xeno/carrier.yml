@@ -94,7 +94,7 @@
     prefix: carrier
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: carrier
   - type: XenoInhands
     prefix: carrier

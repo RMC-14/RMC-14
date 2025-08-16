@@ -30,7 +30,7 @@
       prefix: cm-job-prefix-correspondent # TODO RMC14 combat correspondent is CC
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: correspondent
   hasIcon: false
 

@@ -107,7 +107,7 @@
     prefix: runner
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: runner
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
