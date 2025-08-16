@@ -1,5 +1,6 @@
 using System.Globalization;
 using Content.Client._RMC14.Medical.HUD;
+using Content.Client.Atmos.Rotting;
 using Content.Client.Message;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Marines.Skills;
@@ -43,7 +44,7 @@ public sealed class HealthScannerBui : BoundUserInterface
     private readonly SharedWoundsSystem _wounds;
     private readonly RMCUnrevivableSystem _unrevivable;
     private readonly MobStateSystem _mob;
-    private readonly RMCUnrevivableSystem _unrevivable;
+    private readonly RottingSystem _rot;
 
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> BloodPackSkill = new() { ["RMCSkillSurgery"] = 1 };
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> DefibSkill = new() { ["RMCSkillMedical"] = 2 };
@@ -54,9 +55,9 @@ public sealed class HealthScannerBui : BoundUserInterface
         _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
         _skills = _entities.System<SkillsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
-        _rot = _entities.System<SharedRottingSystem>();
         _unrevivable = _entities.System<RMCUnrevivableSystem>();
         _mob = _entities.System<MobStateSystem>();
+        _rot = _entities.System<RottingSystem>();
     }
 
     protected override void Open()
