@@ -10,6 +10,7 @@
     skills:
       all:
         RMCSkillVehicles: 1
+  - type: Pullable
   - type: Sprite
     drawdepth: Mobs
     noRot: true
