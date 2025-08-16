@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaWeyamartEmployee
   name: rmc-job-name-survivor-hybrisa-weyamart-employee
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHybrisaWeyamartEmployee
   startingGear: RMCGearSurvivorHybrisaWeyamartEmployee
   spawnMenuRoleName: Civilian - Weyamart Employee (Hybrisa Survivor)
   special:
@@ -45,10 +44,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHybrisaWeyamartEmployee
-  isHumanoid: true
 
 - type: entity
   parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]

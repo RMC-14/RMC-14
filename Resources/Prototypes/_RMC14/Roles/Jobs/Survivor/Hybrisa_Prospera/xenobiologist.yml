@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaXenobiologist
   name: rmc-job-name-survivor-xenobiologist
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHybrisaXenobiologist
   startingGear: RMCGearSurvivorHybrisaXenobiologist
   spawnMenuRoleName: Xenobiologist (Hybrisa Survivor)
   special:
@@ -43,10 +42,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHybrisaXenobiologist
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetScientist

@@ -3,7 +3,6 @@
   id: CMSurvivorTrijentResearcher
   name: cm-job-name-survivor-trijent-researcher
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorTrijentResearcher
   startingGear: RMCGearSurvivorTrijentResearcher
   spawnMenuRoleName: Trijent Dam Researcher (Trijent Survivor)
   accessGroups:
@@ -30,10 +29,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: RMCJobSurvivorTrijentResearcher
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetScientist

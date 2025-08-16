@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaCivilian
   name: rmc-job-name-survivor-hybrisa-civilian
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHybrisaCivilian
   startingGear: RMCGearSurvivorHybrisaCivilian
   spawnMenuRoleName: Civilian (Hybrisa Survivor)
   special:
@@ -40,10 +39,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHybrisaCivilian
-  isHumanoid: true
 
 - type: entity
   parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
