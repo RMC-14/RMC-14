@@ -14,7 +14,7 @@
       role: CMJobSSPSanitarPVE
       time: 36000 # 10 hours
     RMCRankPrivateFirstClass: []
-  startingGear: CMGearHospitalCorpsman
+  startingGear: CMGearSanitarSPP
   dummyStartingGear: CMGearHospitalCorpsmanEquipped
   icon: "RMCJobIconSPPMedic"
   joinNotifyCrew: false
@@ -72,3 +72,16 @@
     job_id: CMSSPSanitarPVE
   - type: Sprite
     state: marine_spawn
+
+- type: startingGear
+  id: CMGearSanitarSPP
+  equipment:
+    id: CMDogtagSanitar
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagSanitar
+  name: Sanitar's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSPPSanitarPVE
