@@ -4,7 +4,7 @@
   name: cm-job-name-infantryman
   description: cm-job-description-rifleman
   playTimeTracker: CMJobSPPInfantrymanPVE
-  startingGear: CMGearRifleman
+  startingGear: CMGearRiflemanSPP
   dummyStartingGear: RMCGearSPPRifleman
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
@@ -66,3 +66,16 @@
     job_id: CMSPPInfantrymanPVE
   - type: Sprite
     state: marine_spawn
+
+- type: startingGear
+  id: CMGearRiflemanSPP
+  equipment:
+    id: CMDogtagInfantryman
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagInfantryman
+  name: Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSPPInfantrymanPVE

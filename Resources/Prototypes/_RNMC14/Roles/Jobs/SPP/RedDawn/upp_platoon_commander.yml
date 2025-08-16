@@ -11,7 +11,7 @@
       time: 36000 # 10 hours
     RMCRankSPPMladshiyLeytenant: []
   weight: 5
-  startingGear: CMGearPlatco
+  startingGear: CMGearPlatoonCommanderSPP
   icon: "RMCJobIconSPPPlatco"
   requireAdminNotify: true
   joinNotifyCrew: false
@@ -80,3 +80,16 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: upp_slt
+
+- type: startingGear
+  id: CMGearPlatoonCommanderSPP
+  equipment:
+    id: CMDogtagPlatoonCommander
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagMachinegunner
+  name: Platoon Commander's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSPPPlatoonCommanderPVE
