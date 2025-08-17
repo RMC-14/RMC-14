@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: RMCJobRibbonBase
   id: CMCorrespondent
   name: cm-job-name-correspondent
   description: cm-job-description-correspondent
@@ -23,15 +23,15 @@
     - type: RMCUserBulkyArmorIncapable
     - type: Skills
       skills:
+        RMCSkillEndurance: 0
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: cm-job-prefix-correspondent # TODO RMC14 combat correspondent is CC
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: correspondent
-    - type: RMCRibbon
   hasIcon: false
 
 - type: startingGear
@@ -55,6 +55,15 @@
     job_id: CMCorrespondent
   - type: Sprite
     state: marine_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleCorrespondent
+  name: Correspondent
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: combat_correspondent
 
 - type: playTimeTracker
   id: CMJobCorrespondent

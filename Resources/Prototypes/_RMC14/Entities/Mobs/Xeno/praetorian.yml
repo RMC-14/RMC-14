@@ -98,7 +98,7 @@
     range: 7
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: praetorian
   - type: SlowOnPull
     slowdowns:
@@ -220,6 +220,7 @@
     - type: RMCRooted
   - type: XenoHighGallop
   - type: XenoHidden
+  - type: AcidTrap
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -242,7 +243,6 @@
     name: rmc-xeno-dancer-name
     description: rmc-xeno-dancer-description
     popup: rmc-xeno-dancer-popup
-  - type: AcidTrap
   - type: CMArmor
     xenoArmor: 20
   - type: XenoClaws

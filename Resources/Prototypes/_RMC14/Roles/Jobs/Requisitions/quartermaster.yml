@@ -23,6 +23,7 @@
   icon: "CMJobIconQuartermaster"
   requireAdminNotify: true
   joinNotifyCrew: false
+  marineAuthorityLevel: 6
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM
@@ -33,6 +34,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillIntel: 1
@@ -49,7 +51,7 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cargo
     - type: RMCTrackable
 

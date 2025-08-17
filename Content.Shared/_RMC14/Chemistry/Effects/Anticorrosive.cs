@@ -21,8 +21,8 @@ public sealed partial class Anticorrosive : RMCChemicalEffect
             healing += PotencyPerSecond * 0.5f;
 
         return $"Heals [color=green]{healing}[/color] burn damage.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond}[/color] brute and toxin damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] brute and toxin damage";
+               $"Overdoses cause [color=red]{PotencyPerSecond}[/color] brute and [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
+               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] brute and [color=red]{PotencyPerSecond * 5}[/color] toxin damage";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

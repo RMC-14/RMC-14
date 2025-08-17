@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Random;
-using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
@@ -99,8 +98,16 @@ public sealed class RMCProjectileSystem : EntitySystem
         }
     }
 
-    public void SetProjectileFalloffWeaponMult(Entity<RMCProjectileDamageFalloffComponent> projectile, FixedPoint2 mult)
+    public void SetProjectileFalloffWeaponMult(Entity<RMCProjectileDamageFalloffComponent> projectile, FixedPoint2 mult, float range)
     {
+        var count = 0;
+        while (projectile.Comp.Thresholds.Count > count)
+        {
+            var threshold = projectile.Comp.Thresholds[count];
+            projectile.Comp.Thresholds[count] = threshold with { Range = threshold.Range + range };
+            count++;
+        }
+
         projectile.Comp.WeaponMult = mult;
         Dirty(projectile);
     }
