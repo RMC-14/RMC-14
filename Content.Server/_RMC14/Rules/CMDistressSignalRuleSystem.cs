@@ -1272,7 +1272,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (!xeno.ContributesToVictory)
                     continue;
 
-                if (HasComp<ThunderdomeMapComponent>(xform.MapUid) || _containers.IsEntityInContainer(xenoId))
+                if (HasComp<ThunderdomeMapComponent>(xform.MapUid) ||
+                    (_containers.IsEntityInContainer(xenoId) && !HasComp<XenoEvolutionGranterComponent>(xenoId))) //Queen counts as alive in tunnels/pipes
                     continue;
 
                 if (_mobState.IsAlive(xenoId, mobState) &&
