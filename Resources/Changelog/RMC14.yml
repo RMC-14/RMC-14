@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added the ability to examine armor values with a button.
-    type: Add
-  id: 1693
-  time: '2025-05-10T03:25:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6361
 - author: Arcticular1
   changes:
   - message: Changed D50 in hand + wielded sprites.
@@ -4630,5 +4623,12 @@
   id: 2193
   time: '2025-08-17T23:31:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7530
+- author: TsjipTsjip
+  changes:
+  - message: Reworded the appeal processor delegation process to be more clear.
+    type: Fix
+  id: 2194
+  time: '2025-08-17T23:43:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7445
 Name: RMC14
 Order: -1
