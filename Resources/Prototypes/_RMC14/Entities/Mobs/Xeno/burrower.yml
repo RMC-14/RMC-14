@@ -6,6 +6,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
@@ -122,3 +123,5 @@
     name: cm-job-name-xeno-burrower
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT2
+  - type: VentCrawler
+    ventCrawlIcon: burrower
