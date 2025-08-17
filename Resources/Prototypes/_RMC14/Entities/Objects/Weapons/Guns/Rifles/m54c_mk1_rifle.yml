@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M54C assault rifle MK1
-  id: WeaponRifleM54CMK1
+  id: RMCWeaponRifleM54CMK1
   description: An older design of the Assault Rifle commonly used by the Marine Corps. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
@@ -105,8 +105,8 @@
     - RMCWeaponRifleM54CMK1
 
 - type: entity
-  parent: WeaponRifleM54CMK1
-  id: WeaponRifleM54CMK1Unloaded
+  parent: RMCWeaponRifleM54CMK1
+  id: RMCWeaponRifleM54CMK1Unloaded
   suffix: Unloaded
   components:
   - type: ItemSlots
@@ -125,8 +125,8 @@
         startingItem: null
 
 - type: entity
-  parent: WeaponRifleM54CMK1
-  id: WeaponRifleM54CMK1AP
+  parent: RMCWeaponRifleM54CMK1
+  id: RMCWeaponRifleM54CMK1AP
   components:
   - type: ItemSlots
     slots:

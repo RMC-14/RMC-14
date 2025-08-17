@@ -1364,3 +1364,11 @@ WeaponRifleSSG45: RMCWeaponRifleSSG45
 
 # 2025-08-07
 RMCAttachmentM42A2WoodenStock: RMCAttachmentM42A2CollapsibleStock
+
+# 2025-08-17
+WeaponRifleM54C: RMCWeaponRifleM54C
+WeaponRifleM54CE2: RMCWeaponRifleM54CE2
+WeaponRifleM54CMK1: RMCWeaponRifleM54CMK1
+WeaponRifleM54CMK1Unloaded: RMCWeaponRifleM54CMK1Unloaded
+WeaponRifleM54CMK1AP: RMCWeaponRifleM54CMK1AP
+WeaponRifleM54CStripped: RMCWeaponRifleM54CStripped
