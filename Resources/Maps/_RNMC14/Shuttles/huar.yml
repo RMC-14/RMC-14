@@ -31,7 +31,7 @@ entities:
     mapInit: true
     components:
     - type: MetaData
-      name: huar
+      name: Huar
     - type: Transform
       pos: -0.48186493,-0.5181155
       parent: invalid
