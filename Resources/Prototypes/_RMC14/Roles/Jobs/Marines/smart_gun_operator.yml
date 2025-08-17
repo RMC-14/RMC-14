@@ -47,7 +47,7 @@
       prefix: cm-job-prefix-gun-operator
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: smartgunner
 
 - type: startingGear
