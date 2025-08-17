@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Custom SPR doing slightly too much damage base (31 > 26)
-    type: Fix
-  id: 1692
-  time: '2025-05-10T03:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6360
 - author: Whisper
   changes:
   - message: Added the ability to examine armor values with a button.
@@ -4630,5 +4623,12 @@
   id: 2192
   time: '2025-08-17T23:02:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7523
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to CPR crit marines on PvE
+    type: Fix
+  id: 2193
+  time: '2025-08-17T23:31:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7530
 Name: RMC14
 Order: -1
