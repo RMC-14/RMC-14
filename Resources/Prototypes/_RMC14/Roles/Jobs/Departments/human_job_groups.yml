@@ -125,6 +125,26 @@
     - CMJobSurvivorFireProtectionSpecialist
     - CMJobSurvivorSoroMiner
     - CMJobSurvivorHalcyonDynamicsLiaison
+    # Hybrisa Prospera
+    - RMCSurvivorHybrisaCivilian
+    - RMCSurvivorHybrisaConstructionWorker
+    - RMCSurvivorHybrisaCorporateLiaison
+    - RMCSurvivorHybrisaCorporateSecurity
+    - RMCSurvivorHybrisaEngineer
+    - RMCSurvivorHybrisaEMTParamedic
+    - RMCSurvivorHybrisaFireProtectionSpecialist
+    - RMCSurvivorHybrisaGrindBarista
+    - RMCSurvivorHybrisaHeavyVehicleOperator
+    - RMCSurvivorHybrisaMaterialReprocessingTechnician
+    - RMCSurvivorHybrisaMedicalDoctor
+    - RMCSurvivorHybrisaOfficeWorker
+    - RMCSurvivorHybrisaCommercialPilot
+    - RMCSurvivorHybrisaPizzaGalaxy
+    - RMCSurvivorHybrisaTMCCMiner
+    - RMCSurvivorHybrisaTSEPAConstable
+    - RMCSurvivorHybrisaWeyamartEmployee
+    - RMCSurvivorHybrisaXenoarchaeologist
+    - RMCSurvivorHybrisaXenobiologist
 
 - type: entity
   id: CMJobsSurvivorCivilian
@@ -140,6 +160,14 @@
     - CMJobSurvivorSoroCivilian
     - CMJobSurvivorSoroMiner
     - CMJobSurvivorFireProtectionSpecialist
+    - RMCSurvivorHybrisaCivilian
+    - RMCSurvivorHybrisaFireProtectionSpecialist
+    - RMCSurvivorHybrisaGrindBarista
+    - RMCSurvivorHybrisaMaterialReprocessingTechnician
+    - RMCSurvivorHybrisaOfficeWorker
+    - RMCSurvivorHybrisaPizzaGalaxy
+    - RMCSurvivorHybrisaTMCCMiner
+    - RMCSurvivorHybrisaWeyamartEmployee
 
 - type: entity
   id: CMJobsSurvivorEngineer
@@ -154,6 +182,9 @@
     - CMSurvivorCargoTechnician
     - CMJobSurvivorReactorTechnician
     - CMJobSurvivorInfrastructureEngineer
+    - RMCSurvivorHybrisaConstructionWorker
+    - RMCSurvivorHybrisaEngineer
+    - RMCSurvivorHybrisaHeavyVehicleOperator
 
 - type: entity
   id: CMJobsSurvivorMedical
@@ -166,6 +197,8 @@
     - CMSurvivorDoctor
     - CMSurvivorMedicalTechnician
     - CMJobSurvivorMoHDoctor
+    - RMCSurvivorHybrisaMedicalDoctor
+    - RMCSurvivorHybrisaEMTParamedic
 
 - type: entity
   id: CMJobsSurvivorCorporate
@@ -178,6 +211,8 @@
     - CMSurvivorCorporate
     - CMSurvivorICB
     - CMJobSurvivorHalcyonDynamicsLiaison
+    - RMCSurvivorHybrisaCorporateLiaison
+    - RMCSurvivorHybrisaCommercialPilot
 
 - type: entity
   id: CMJobsSurvivorSecurity
@@ -191,6 +226,8 @@
     - CMSurvivorUNPeacekeeper
     - CMJobSurvivorArmedPoliceOfficer
     - CMJobSurvivorArmyReservist
+    - RMCSurvivorHybrisaCorporateSecurity
+    - RMCSurvivorHybrisaTSEPAConstable
 
 - type: entity
   id: CMJobsSurvivorScientist
@@ -202,6 +239,8 @@
     jobs:
     - CMSurvivorScientist
     - CMJobSurvivorCECResearcher
+    - RMCSurvivorHybrisaXenoarchaeologist
+    - RMCSurvivorHybrisaXenobiologist
 
 - type: entity
   id: CMJobsSurvivorCommander

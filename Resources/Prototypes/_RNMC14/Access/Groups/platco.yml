@@ -1,0 +1,22 @@
+﻿# all ship-side access
+# CO uses this.
+- type: accessGroup
+  id: PlatcoAccess
+  tags:
+  - CMAccessAlpha # Squad prep access
+  - CMAccessArmory # MP weapon vault
+  - CMAccessBravo # Squad prep access
+  - CMAccessCharlie # Squad prep access
+  - CMAccessCommand # all command level doors, including bridge. May need to be split.
+  - CMAccessCrewman # access for dropship maintenance doors
+  - CMAccessDelta # Squad prep access
+  - CMAccessDropship # access to open dropship doors
+  - CMAccessEngineering # ship-side engineering
+  - CMAccessMaint # maints
+  - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
+  - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - CMAccessMedPrep # hospital corpsman
+  - CMAccessPilot # dropship pilot door access
+  - CMAccessSmartPrep # smart gun operator
+  - CMAccessSpecPrep # weapons specialist
+  - CMAccessPlatco

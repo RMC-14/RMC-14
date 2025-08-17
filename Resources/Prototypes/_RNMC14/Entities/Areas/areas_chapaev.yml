@@ -1,0 +1,56 @@
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaChapaev
+  name: SSV Chapaev
+  suffix: SSV Chapaev
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: base_icon
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaChapaev
+  id: RMCAreaChapaevMedicalAndArmory
+  name: SSV Chapaev - Medical & Armory
+
+- type: entity
+  parent: RMCAreaChapaev
+  id: RMCAreaChapaevHangar
+  name: SSV Chapaev - Hangar
+
+- type: entity
+  parent: RMCAreaChapaev
+  id: RMCAreaChapaevPlatco
+  name: SSV Chapaev - Platoon Commander Office
+
+- type: entity
+  parent: RMCAreaChapaev
+  id: RMCAreaChapaevCanteenAndDorms
+  name: SSV Chapaev - Canteen & Dorms
+
+- type: entity
+  parent: RMCAreaChapaev
+  id: RMCAreaChapaevBriefing
+  name: SSV Chapaev - Briefing Room
+
+- type: entity
+  parent: RMCAreaChapaev
+  id: RMCAreaChapaevHypersleep
+  name: SSV Chapaev - Hypersleep

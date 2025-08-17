@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.Physics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -39,7 +40,7 @@ public sealed partial class XenoLeapingComponent : Component
     public bool DestroyObjects;
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier Damage;
+    public DamageSpecifier Damage = new ();
 
     [DataField, AutoNetworkedField]
     public EntProtoId? HitEffect;
@@ -49,4 +50,10 @@ public sealed partial class XenoLeapingComponent : Component
 
     [DataField, AutoNetworkedField]
     public int TargetCameraShakeStrength;
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup IgnoredCollisionGroupLarge;
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup IgnoredCollisionGroupSmall;
 }

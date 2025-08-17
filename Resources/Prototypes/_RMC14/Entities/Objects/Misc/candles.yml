@@ -38,7 +38,8 @@
     - type: FireVisuals
       sprite: _RMC14/Objects/Misc/candles.rsi
       normalState: candle1_lit
-    - type: ToggleableLightVisuals
+    - type: ItemTogglePointLight
+    - type: ToggleableVisuals
       spriteLayer: null
       inhandVisuals:
         left:

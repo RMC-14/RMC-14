@@ -1,0 +1,17 @@
+- type: radioChannel
+  id: SunRiders
+  name: chat-radio-sun-riders
+  keycode: "1"
+  frequency: 1493
+  color: "#4c6e96"
+  longRange: true
+  tower: true
+
+- type: radioChannel
+  id: RedDawn
+  name: chat-radio-red-dawn
+  keycode: "2"
+  frequency: 1494
+  color: "#aa4242"
+  longRange: true
+  tower: true

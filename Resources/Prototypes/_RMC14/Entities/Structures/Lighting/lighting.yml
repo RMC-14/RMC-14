@@ -19,6 +19,12 @@
     layers:
     - state: tube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#FFEFD2"
+    energy: 1
+    radius: 10
+    softness: 1
+    offset: "0, -0.5"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: tube-empty
@@ -46,6 +52,8 @@
     layers:
     - state: btube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#D2E3EC"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: btube-empty
@@ -81,6 +89,8 @@
     layers:
     - state: bptube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#D2E3EC"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bptube-empty
@@ -181,8 +191,6 @@
   components:
   - type: Sprite
     state: tube1
-  - type: PointLight
-    enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightTube
     unarmedHitShock: 0
@@ -201,6 +209,10 @@
     - On
     - Off
     - Toggle
+  - type: PointLight
+    color: "#e7c0a4"
+    energy: 0.5
+    enabled: true
 
 - type: entity
   parent: CMLightFixture
@@ -211,6 +223,8 @@
     layers:
     - state: btube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: btube-empty
@@ -246,6 +260,8 @@
     layers:
     - state: bptube1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightTubeBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bptube-empty
@@ -253,6 +269,9 @@
       On: bptube1
       Broken: bptube-broken
       Burned: bptube-burned
+  - type: PointLight
+    color: "#e7c0a4"
+    energy: 0.35
 
 # Light Bulbs
 
@@ -363,8 +382,6 @@
   components:
   - type: Sprite
     state: bulb1
-  - type: PointLight
-    enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightBulb
     unarmedHitShock: 0
@@ -383,6 +400,20 @@
     - On
     - Off
     - Toggle
+  - type: PointLight
+    color: "#e7c0a4"
+    energy: 0.5
+    enabled: true
+
+- type: entity
+  parent: CMLightFixtureSmall
+  id: CMLightFixtureSmallRed
+  suffix: Red
+  components:
+  - type: PointLight
+    color: "#832121"
+    energy: 0.5
+    enabled: true
 
 - type: entity
   parent: CMLightFixtureSmall
@@ -393,6 +424,8 @@
     layers:
     - state: bbulb1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightBulbBlue
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bbulb-empty
@@ -400,3 +433,6 @@
       On: bbulb1
       Broken: bbulb-broken
       Burned: bbulb-burned
+  - type: PointLight
+    color: "#DAE2FF"
+    energy: 0.5

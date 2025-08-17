@@ -33,7 +33,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly SharedLabelSystem _label = default!;
+    [Dependency] private readonly LabelSystem _label = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCIconLabelSystem _rmcIconLabel = default!;
@@ -222,8 +222,8 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         var removed = beakerSolution.Comp.Solution.RemoveReagent(args.Reagent, args.Amount);
 
-        if (_solution.TryAddReagent(buffer.Value, args.Reagent, removed, out var accepted))
-            removed -= accepted;
+        _solution.TryAddReagent(buffer.Value, args.Reagent, removed, out var accepted);
+        removed -= accepted;
 
         if (removed > FixedPoint2.Zero)
             _solution.TryAddReagent(beakerSolution, args.Reagent, removed);
@@ -245,6 +245,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         _solutionTransfer.Transfer(args.Actor, beaker, beakerSolution, ent, buffer.Value, beakerSolution.Comp.Solution.Volume);
         Dirty(ent);
+        RefreshUIs(ent);
     }
 
     private void OnBufferModeMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterBufferModeMsg args)
@@ -277,8 +278,8 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
         if (!TryGetBeaker(ent, out _, out _, out var beakerSolution))
             return;
 
-        if (_solution.TryAddReagent(beakerSolution, args.Reagent, removed, out var accepted))
-            removed -= accepted;
+        _solution.TryAddReagent(beakerSolution, args.Reagent, removed, out var accepted);
+        removed -= accepted;
 
         if (removed > FixedPoint2.Zero)
             _solution.TryAddReagent(buffer.Value, args.Reagent, removed);
@@ -305,6 +306,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         _solutionTransfer.Transfer(args.Actor, ent, buffer.Value, beaker, beakerSolution, buffer.Value.Comp.Solution.Volume);
         Dirty(ent);
+        RefreshUIs(ent);
     }
 
     private void OnSetPillAmountMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterSetPillAmountMsg args)

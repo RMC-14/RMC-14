@@ -1,0 +1,19 @@
+- type: entity
+  parent: CMXenoLesserDrone
+  id: CMXenoLesserDroneNPC
+  suffix: AI
+  components:
+  - type: Xeno
+    role: CMXenoLesserDroneNPC
+  - type: HTN
+    rootTask:
+      task: CMXenoCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      VisionRadius: !type:Single
+        30
+      AggroVisionRadius: !type:Single
+        30

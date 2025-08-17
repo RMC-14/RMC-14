@@ -1,0 +1,13 @@
+- type: utilityQuery
+  id: NearbyAlive
+  query:
+    - !type:ComponentQuery
+      components:
+      - type: MobState
+      allowedStates:
+      - Alive
+      - Critical # go fuck yourself mr. serializer
+      - Dead
+  considerations:
+    - !type:TargetIsAliveCon
+      curve: !type:BoolCurve

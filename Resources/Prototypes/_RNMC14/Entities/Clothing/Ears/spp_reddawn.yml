@@ -1,0 +1,9 @@
+- type: entity
+  parent: RMCHeadsetSPPAbstract
+  id: RMCHeadsetSPPRedDawn
+  name: SPP headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyRedDawn

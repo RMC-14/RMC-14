@@ -7,7 +7,21 @@
       task: CMXenoMeleeCombatCompound
   - tasks:
     - !type:HTNCompoundTask
+      task: MoveToAliveCompound
+  - tasks:
+    - !type:HTNCompoundTask
       task: IdleCompound
+
+- type: htnCompound
+  id: MoveToAliveCompound
+  branches:
+    - tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:UtilityOperator
+            proto: NearbyAlive
+
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
 
 # Selects a target in melee and tries to attack it.
 - type: htnCompound
@@ -177,6 +191,7 @@
         density: 185
         mask:
         - MobMask
+        - BarricadeImpassable
         - BarbedBarricade
         layer:
         - MobLayer
@@ -319,8 +334,12 @@
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
     - enum.RMCCameraUiKey.Key
-  - type: ActiveInputMover
   - type: HiveTracker
+    mode: Queen
+    trackerModes:
+    - Queen
+    - HiveLeader
+    - Tunnel
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
@@ -378,6 +397,7 @@
     whitelist:
       components:
       - Marine
+  - type: EmoteCooldown
 
 - type: entity
   abstract: true

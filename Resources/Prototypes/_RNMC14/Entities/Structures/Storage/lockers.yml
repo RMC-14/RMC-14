@@ -1,0 +1,11 @@
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: RMCClosetChapaevGear
+  name: machinegunner locker
+  description: An immobile storage unit.
+  suffix: PvE, Red Dawn
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCChapaevMachinegunnerFill

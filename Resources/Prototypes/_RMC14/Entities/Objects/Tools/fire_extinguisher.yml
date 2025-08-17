@@ -26,11 +26,11 @@
     sprite: _RMC14/Objects/fire_extinguisher.rsi
     layers:
     - state: fire_extinguisher
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: fire_extinguisher } # TODO RMC14
           False: { state: fire_extinguisher }
   - type: InteractedBlacklist
@@ -63,11 +63,11 @@
     sprite: _RMC14/Objects/fire_extinguisher_mini.rsi
     layers:
     - state: minife1
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: minife0 } # TODO RMC14
           False: { state: minife1 }
   - type: Tag

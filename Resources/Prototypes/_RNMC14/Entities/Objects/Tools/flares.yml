@@ -1,0 +1,45 @@
+- type: entity
+  name: R52 flare
+  parent: CMFlare
+  id: CMFlareSPP
+  description: A red UPPAC-issued flare.
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Misc/Flares/r52.rsi
+    layers:
+      - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+        state: flare
+      - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+        state: flare_flame
+        color: "#FFA7A7"
+        visible: false
+      - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+        state: overlay
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/Flares/r52.rsi
+
+- type: entity
+  parent: RMCBoxPackFlareEmpty
+  id: RMCBoxPackFlareSPP
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMPackFlareSPP
+
+- type: entity
+  parent: CMPackFlareBase
+  id: CMPackFlareSPP
+  name: R52 marking flare pack
+  description: A packet of fourteen R52 Marking Flares. Carried by SPPAC soldiers to light dark areas that cannot be reached with the usual Shoulder Lamp.
+  suffix: Filled, SPP
+  components:
+  - type: CMItemSlots
+    startingItem: CMFlareSPP
+    count: 14
+  - type: Sprite
+    sprite: _RNMC14/Objects/Storage/packets.rsi
+    layers:
+    - state: r52_e
+      map: [ "emptyLayer" ]
+    - state: r52
+      map: [ "fullLayer" ]

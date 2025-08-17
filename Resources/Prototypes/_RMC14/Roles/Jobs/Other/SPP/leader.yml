@@ -16,6 +16,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCTrackable
     - type: NpcFactionMember
       factions:
       - SPP
@@ -131,4 +132,4 @@
   id: RMCJobIconSPPLeader
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: upp_sl
+    state: upp_sl_a

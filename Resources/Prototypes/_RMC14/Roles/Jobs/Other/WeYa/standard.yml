@@ -174,7 +174,7 @@
     belt: CMM77BeltFilled
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
-    suitstorage: WeaponRifleSSG45
+    suitstorage: RMCWeaponRifleSSG45
   storage:
     back:
     - RMCGrenadeBlastM12

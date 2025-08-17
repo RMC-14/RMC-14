@@ -1,0 +1,1 @@
+rmc-access-spp-machinegunner = Machinegunner

@@ -1,0 +1,21 @@
+- type: entity
+  parent: CMXenoDefender
+  id: CMXenoDefenderNPC
+  suffix: AI
+  components:
+  - type: NPCUseActionOnTarget
+    actionId: ActionXenoCharge
+  - type: Xeno
+    role: CMXenoDefenderNPC
+  - type: HTN
+    rootTask:
+      task: CMXenoCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      VisionRadius: !type:Single
+        30
+      AggroVisionRadius: !type:Single
+        30

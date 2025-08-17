@@ -1,0 +1,100 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaCB
+  name: Colonel Bridget
+  suffix: Colonel Bridget
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: base_icon
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaGA
+  id: RMCAreaCBHypersleep
+  name: Hypersleep
+  components:
+  - type: Sprite
+    state: medical
+
+- type: entity
+  parent: RMCAreaCB
+  id: RMCAreaCBHypersleepGearLockers
+  name: Hypersleep Gear Lockers
+  components:
+  - type: Sprite
+    state: derelictship
+
+- type: entity
+  parent: RMCAreaCB
+  id: RMCAreaCBMessHall
+  name: Mess Hall
+
+- type: entity
+  parent: RMCAreaCB
+  id: RMCAreaCBMedical
+  name: Medical
+  components:
+  - type: Sprite
+    state: medical
+
+- type: entity
+  parent: RMCAreaCB
+  id: RMCAreaCBBriefRoom
+  name: Briefing Room
+  components:
+  - type: Sprite
+    state: caves_central
+
+- type: entity
+  parent: RMCAreaCBBriefRoom
+  id: RMCAreaCBCommandDeck
+  name: Platoon Command Deck
+
+- type: entity
+  parent: RMCAreaCB
+  id: RMCAreaCBPrep
+  name: Platoon Prep
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaCB
+  id: RMCAreaCBHangar
+  name: Hangar
+  components:
+  - type: Sprite
+    state: lz
+
+- type: entity
+  parent: RMCAreaCB
+  id: RMCAreaCBSupply
+  name: Supply
+  components:
+  - type: Sprite
+    state: maints
+
+- type: entity
+  parent: RMCAreaCB
+  id: RMCAreaCBEngineering
+  name: Engineering
+  components:
+  - type: Sprite
+    state: power0

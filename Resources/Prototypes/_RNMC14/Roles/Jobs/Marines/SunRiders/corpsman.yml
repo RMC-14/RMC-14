@@ -1,0 +1,71 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMHospitalCorpsmanPVE
+  name: cm-job-name-hospital-corpsman
+  description: cm-job-description-hospital-corpsman
+  playTimeTracker: CMJobCorpsmanPVE
+  ranks:
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobCorpsmanPVE
+      time: 252000 # 70 hours
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobCorpsmanPVE
+      time: 36000 # 10 hours
+    RMCRankPrivateFirstClass: []
+  startingGear: CMGearHospitalCorpsman
+  dummyStartingGear: CMGearHospitalCorpsmanEquipped
+  icon: "CMJobIconHospitalCorpsman"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - HospitalCorpsman
+  overwatchSortPriority: -2
+  overwatchRoleName: Hospital Corpsman
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillPowerLoader: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 1
+        RMCSkillPilot: 1
+        RMCSkillVehicles: 2
+    - type: CMVendorUser
+      points: 45
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-hospital-corpsman
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: medic
+
+- type: playTimeTracker
+  id: CMJobCorpsmanPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointCorpsmanSunRiders
+  name: sun riders corpsman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMHospitalCorpsmanPVE
+  - type: Sprite
+    state: marine_spawn

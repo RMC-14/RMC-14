@@ -84,6 +84,8 @@
         - ReagentId: FourteenLoko
           Quantity: 30
         maxVol: 50
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-thirteen-loko
 
 - type: entity
   parent: CMDrinkCanBase
@@ -239,6 +241,8 @@
     sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
   - type: Item
     sprite: _RMC14/Objects/Consumable/Drinks/boda.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-boda
 
 - type: entity
   parent: CMDrinkCanCola

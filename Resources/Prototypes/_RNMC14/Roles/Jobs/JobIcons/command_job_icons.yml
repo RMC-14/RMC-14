@@ -1,0 +1,6 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconPlatoonCommander
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: platco

@@ -25,6 +25,7 @@
   icon: "CMJobIconChiefMP"
   requireAdminNotify: true
   joinNotifyCrew: false
+  marineAuthorityLevel: 11
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP
@@ -57,6 +58,7 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: cmp
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearChiefMP
