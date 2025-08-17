@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added shockwave effect to the HE orbital bombardment warhead.
-    type: Add
-  id: 1688
-  time: '2025-05-10T02:36:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6385
-- author: Arykh
-  changes:
-  - message: Fixed the health analyzer lying about Arithrazine's OD.
-    type: Fix
-  id: 1689
-  time: '2025-05-10T02:39:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6354
 - author: Ramiris
   changes:
   - message: 'Fixed clothing camo, you can now rep your CamoTech:tm: weapons on your
@@ -4630,5 +4616,19 @@
   id: 2188
   time: '2025-08-16T23:05:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7415
+- author: UnicornOnLSD
+  changes:
+  - message: RTOs inhands fixed.
+    type: Fix
+  id: 2189
+  time: '2025-08-17T22:40:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7520
+- author: noctyrnal
+  changes:
+  - message: The PVE server now has 2 unique dropships.
+    type: Add
+  id: 2190
+  time: '2025-08-17T22:39:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7527
 Name: RMC14
 Order: -1
