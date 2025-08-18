@@ -185,6 +185,21 @@
       types:
         Slash: 22
 
+- type: entity
+  parent: CMM2132Machete
+  id: RMCCombatRapier
+  name: combat rapier
+  description: The M600 Rapier is a combat rapier occasionally used by UNMC personell. Its blade is made with bohron nanotube reinforced titatium and its grip is covered in high quality synth rubber. Despite all the effort in producing it, it isn't really better than the standard marine machete, and so was only distributed through a waiting list of those that request it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/combat_rapier.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Melee/combat_rapier.rsi
+    size: Large
+  - type: Tag
+    tags:
+    - RMCCombatRapier
+
 - type: Tag
   id: RMCCeremonialSword
 
@@ -193,3 +208,6 @@
 
 - type: Tag
   id: RMCM2100Machete
+
+- type: Tag
+  id: RMCCombatRapier
