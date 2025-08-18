@@ -202,9 +202,63 @@
 # Rapier Pouch
 - type: entity
   parent: [ Clothing, ClothingSlotBase ]
+  id: RMCPouchCORapier
+  name: H7B pattern M600C rapier sheath
+  description: A fancy leather sheath used to carry the M600C rapier. Can be strapped to the pouch slot.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/co_rapier_sheath.rsi
+    state: sheath
+  - type: Item
+    size: Large
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
+  - type: ItemSlots
+    slots:
+      item:
+        name: Rapier
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCCombatRapier
+  - type: ItemMapper
+    mapLayers:
+      sheath-rapier:
+        whitelist:
+          tags:
+          - RMCCombatRapier
+  - type: Appearance
+  - type: UsableWhileDevoured
+  - type: Tag
+    tags:
+    - Pouch
+  - type: CMHolster
+  - type: CMItemSlots
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCPouchCORapier
+  id: RMCPouchCORapierFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+          - RMCCORapier
+
+- type: entity
+  parent: [ Clothing, ClothingSlotBase ]
   id: RMCPouchRapier
   name: H7A pattern M600 rapier sheath
-  description: A fancy black leather pouch used to carry the M600 rapier. Can be strapped to the pouch slot.
+  description: A fancy black leather sheath used to carry the M600 rapier. Can be strapped to the pouch slot.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/combat_rapier_sheath.rsi

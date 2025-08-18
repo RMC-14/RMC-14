@@ -49,7 +49,7 @@
     id: CMIDCardCommandingOfficer
 
 - type: loadout
-  id: RapierRMC
+  id: CORapierRMC
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -58,4 +58,4 @@
       time: 252000 # 70 hours
   storage:
     back:
-    - RMCPouchRapierFilled
+    - RMCPouchCORapierFilled

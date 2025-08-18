@@ -187,9 +187,24 @@
 
 - type: entity
   parent: CMM2132Machete
+  id: RMCCORapier
+  name: ceremonial rapier
+  description: The M600C Rapier is a ceremonial rapier occasionally used by high ranked UNMC officers. Its blade is made with bohron nanotube-reinforced titatium, its grip is covered in high quality synth rubber and it's guard made with real gold. Despite all the effort in producing it, it isn't really better than the standard marine machete, and so is only distributed through a waiting list composed of officers that request it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/co_rapier.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Melee/co_rapier.rsi
+    size: Large
+  - type: Tag
+    tags:
+    - RMCCombatRapier
+
+- type: entity
+  parent: CMM2132Machete
   id: RMCCombatRapier
   name: combat rapier
-  description: The M600 Rapier is a combat rapier occasionally used by UNMC personell. Its blade is made with bohron nanotube-reinforced titatium and its grip is covered in high quality synth rubber. Despite all the effort in producing it, it isn't really better than the standard marine machete, and so is only distributed through a waiting list of high ranking officers that request it.
+  description: The M600 Rapier is a rarity. Less than 20 were produced as a feasibily experiment, utilizing cutting-edge technology to make an advanced melee weapon. Despite all the efforts it wasn't much better than a standard machete, so production was abandoned.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/combat_rapier.rsi
@@ -199,6 +214,14 @@
   - type: Tag
     tags:
     - RMCCombatRapier
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 40
+  - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 20
 
 - type: Tag
   id: RMCCeremonialSword
