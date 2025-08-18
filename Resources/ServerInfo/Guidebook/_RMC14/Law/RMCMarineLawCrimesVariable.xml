@@ -51,17 +51,17 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow a lawful order from a superior person of rank or position, or disrespecting someone of a higher rank or position that is not an officer.\nDisrespecting a superior Officer is under minor crimes.
+        Failing to follow a lawful order from a superior person of rank or position, or disrespecting someone of a higher rank or position.\nDisrespecting an [bold]Officer[/bold] is charged as [bold]Disrespecting a Superior Officer[/bold] and is under [textlink="Minor Crimes" link="RMCMarineLawCrimesMinor"].
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        An order which is not personally directed, or disrespecting someone of a higher rank or position that is not an officer.\n[bold]7.5 minutes.[/bold]
+        Failing to follow an order which is not personally directed.\n\nOR\n\nDisrespecting someone of a higher rank or position.\n[bold]7.5 minutes.[/bold]
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        An order personally directed at a person in question using either their name or clearly communicating its meant for them.\n[bold]15 minutes.[/bold]
+        Failing to follow an order personally directed at a person in question using either their name or clearly communicating its meant for them.\n[bold]15 minutes.[/bold]
       </Box>
     </ColorBox>
 
