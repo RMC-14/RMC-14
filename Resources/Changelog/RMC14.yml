@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Changed D50 in hand + wielded sprites.
-    type: Tweak
-  id: 1694
-  time: '2025-05-10T03:26:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6364
 - author: Dygon
   changes:
   - message: Fixed the duration of the slow and daze effects applied by tesla turrets
@@ -4630,5 +4623,13 @@
   id: 2194
   time: '2025-08-17T23:43:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7445
+- author: DrSmugleaf
+  changes:
+  - message: Reverted survivor spawning to how it worked in previous updates, until
+      it sometimes crashing the server on round start is fixed.
+    type: Fix
+  id: 2195
+  time: '2025-08-18T07:20:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7534
 Name: RMC14
 Order: -1
