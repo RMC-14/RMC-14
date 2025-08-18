@@ -10,6 +10,7 @@
     anchored: false
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/computer.rsi
@@ -73,6 +74,22 @@
     state: security_cam
 
 - type: entity
+  parent: RMCSecurityCameraConsole
+  id: RMCDropshipWeaponsConsoleProp
+  name: dropship weapons controls
+  components:
+  - type: Sprite
+    drawdepth: Objects
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    netsync: true
+    energy: 1
+    offset: "0,0"
+    color: "#FFEFD2"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+
+- type: entity
   parent: RMCPropComputerBase
   id: RMCSecurityRecordsConsole
   name: security records
@@ -95,7 +112,7 @@
   components:
   - type: Sprite
     state: engineering_terminal
-    
+
 - type: entity
   parent: RMCPropComputerBase
   id: RMCStationAlertComputer
