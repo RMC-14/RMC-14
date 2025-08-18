@@ -40,7 +40,7 @@
 - type: entity
   parent: RMCSpawnerERTShuttle
   id: RMCSpawnerERTShuttleCMB
-  suffix: cmb
+  suffix: CMB
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml"
@@ -48,7 +48,23 @@
 - type: entity
   parent: RMCSpawnerERTShuttle
   id: RMCSpawnerERTShuttleZSPA
-  suffix: zspa
+  suffix: ZSPA
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ert_zspa_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerShuttleCMB
+  suffix: cmb
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/cmb_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerShuttleZSPA
+  suffix: zspa
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/zspa_shuttle.yml"
