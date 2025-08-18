@@ -7,7 +7,7 @@
   components:
   - type: Hunger
   - type: Icon # It will not have an icon in the adminspawn menu without this. Body parts seem fine for whatever reason.
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: full
   - type: Thirst
   - type: Butcherable
