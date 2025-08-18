@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added medical optics, point-buyable for most squad roles and usable without
-      any skills. The corpsman helmet no longer inherently gives a medical HUD, instead
-      it comes with an integrated visor that gives you a medical HUD.
-    type: Add
-  - message: Added welding visors, point-buyable for most squad roles and usable without
-      any skills. The technician helmet no longer inherently protects your eyes from
-      welding, instead it comes with an integrated welding visor.
-    type: Add
-  - message: Added squad optic, integrated into most marine helmets, and only activatable
-      if you have nothing else to show marine icons. It shows marine icons.
-    type: Add
-  - message: Added the m10 welding helmet, combat technicians can now choose between
-      it and the technician helmet.
-    type: Add
-  - message: The M11C, M30, M10 pattern officer now have integrated visors.
-    type: Add
-  - message: Fixed M12 and XM12 not having an additional visor slot.
-    type: Fix
-  - message: Fixed the NV optic not glowing slightly when on.
-    type: Fix
-  id: 1696
-  time: '2025-05-10T03:32:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6366
 - author: Arcticular1
   changes:
   - message: Fixed Mateba, M59a and Winter Wyvern being able to be melted!
@@ -4630,5 +4605,12 @@
   id: 2196
   time: '2025-08-18T21:04:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7544
+- author: x5tink
+  changes:
+  - message: Returned Inap pill bottle name
+    type: Fix
+  id: 2197
+  time: '2025-08-18T21:08:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7536
 Name: RMC14
 Order: -1
