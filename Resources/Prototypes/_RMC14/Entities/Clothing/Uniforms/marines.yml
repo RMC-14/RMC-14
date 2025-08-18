@@ -154,7 +154,7 @@
   id: RMCJumpsuitSunRiders
   components:
   - type: UniformAccessoryHolder
-    startingAccessories: [ RMCPatchSolarDevils ]
+    startingAccessories: [ RMCPatchSunRiders ]
 
 # Supply
 

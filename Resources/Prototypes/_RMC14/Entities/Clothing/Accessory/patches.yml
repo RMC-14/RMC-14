@@ -262,23 +262,23 @@
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/forecon_patch.rsi
       state: helmet
 
-# SOLAR DEVILS
+# SUN RIDERS (CM13 Solar Devils)
 - type: entity
   parent: RMCPatchBase
-  id: RMCPatchSolarDevils
-  name: UNMC Solar Devils patch
-  description: A fire-resistant shoulder patch, worn by the men and women of the 3rd Battalion 'Solar Devils', part of the UNMC 2nd Division, 1st Regiment.
+  id: RMCPatchSunRiders
+  name: UNMC Sun Rider patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the 3rd Battalion 'Sun Riders', part of the UNMC 2nd Division, 1st Regiment.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/sun_rider_patch.rsi
     state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/sun_rider_patch.rsi
       state: patch
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/solar_devil_patch.rsi
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/sun_rider_patch.rsi
       state: helmet
 
 # WEYA
