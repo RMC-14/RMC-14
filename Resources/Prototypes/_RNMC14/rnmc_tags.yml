@@ -1,0 +1,25 @@
+
+- type: Tag
+  id: RNMCStockPartSmallEngine
+
+- type: Tag
+  id: RNMCStockPartSmallTransmission
+
+- type: Tag
+  id: RNMCStockPartWheel
+
+- type: Tag
+  id: RNMCStockPartSteeringWheel
+
+- type: Tag
+  id: RNMCStockPartShockAbsorber
+
+- type: Tag
+  id: RNMCStockPartPedal
+
+- type: Tag
+  id: RNMCStockPartVehicleSeat
+
+# UPSTREAM PARTS WITH TAGS:
+- type: Tag
+  id: CMStockPartMatterBin

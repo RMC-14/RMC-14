@@ -92,6 +92,9 @@
 #  - type: MachinePart
 #    part: MatterBin
 #    rating: 1
+  - type: Tag # Ronstation
+    tags: # Ronstation
+    - CMStockPartMatterBin # Ronstation
 
 # RATING 2
 

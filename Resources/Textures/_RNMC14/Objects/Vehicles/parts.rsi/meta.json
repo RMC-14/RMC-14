@@ -1,0 +1,91 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Sprite made by Merrokitsune, using pallette taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cc60c815011c0e55147dbdc7d160f890377275df/icons/obj/vehicles/arc.dmi. speed-buggy_0 until speed-buggy_8 has pallette taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/794d6668d4d1d1f767241c70b2171cbe92215421/icons/obj/items/stock_parts.dmi and https://github.com/cmss13-devs/cmss13/blob/31eabcb5240425983ca6b1cb1c2dfbde1312563a/icons/obj/items/stock_parts.dmi. speed-buggy_8 has pallette taken from cmss13 at3 at https://github.com/cmss13-devs/cmss13/blob/9dd2c0d0a1c21e3c9bddbad1321c63fd886f61cf/icons/obj/objects.",
+    "size": {
+      "x": 64,
+      "y": 64
+    },
+    "states": [
+        {
+            "name": "speed-buggy_0",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_1",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_2",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_3",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_4",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_5",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_6",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_7",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_8",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_9",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_10",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_11",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_12",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_13",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_14",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_15",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_16",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_17",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_18",
+            "directions": 4
+        },
+        {
+            "name": "speed-buggy_destroyed",
+            "directions": 4
+        }
+    ]
+}

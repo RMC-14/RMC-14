@@ -1,0 +1,539 @@
+- type: constructionGraph
+  parent: RMC
+  id: RNMCSpeedBuggy
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: frameUnready
+      steps:
+      - material: CMRodMetal
+        amount: 20
+        doAfter: 5
+
+  # Stage 1
+  - node: frameUnready
+    entity: RNMCSpeedBuggyFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingEngine
+      steps:
+      - tool: Welding
+        doAfter: 5
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 20
+      - !type:DeleteEntity
+      steps:
+      - tool: Prying
+        doAfter: 2
+  - node: missingEngine
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingMatterBin
+      steps:
+      - tag: RNMCStockPartSmallEngine
+        name: small engine
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: small_engine
+        doAfter: 2
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 20
+      - !type:DeleteEntity
+      steps:
+      - tool: Welding
+        doAfter: 5
+  - node: missingMatterBin
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingTransmission
+      steps:
+      - tag: CMStockPartMatterBin
+        name: matter bin
+        icon:
+          sprite: _RMC14/Objects/Misc/stock_parts.rsi
+          state: matter_bin
+        doAfter: 2
+    - to: missingEngine
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartSmallEngine
+      steps:
+      - tool: Prying
+        doAfter: 2
+  - node: missingTransmission
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: firstStageUnsecured
+      steps:
+      - tag: RNMCStockPartSmallTransmission
+        name: small transmission
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: small_transmission
+        doAfter: 2
+    - to: missingMatterBin
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMStockPartMatterBin
+      steps:
+      - tool: Prying
+        doAfter: 2
+  - node: firstStageUnsecured
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to:  missingFlashlight
+      steps:
+      - tool: Anchoring
+        doAfter: 6
+    - to: missingTransmission
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartSmallTransmission
+      steps:
+      - tool: Prying
+        doAfter: 2
+
+  # Stage 2
+  - node: missingFlashlight
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingSteeringWheel
+      steps:
+      - tag: Flashlight
+        name: flashlight
+        icon:
+          sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
+          state: flashlight
+        doAfter: 1
+    - to: firstStageUnsecured
+      steps:
+      - tool: Anchoring
+        doAfter: 6
+  - node: missingSteeringWheel
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingPedal1
+      steps:
+      - tag: RNMCStockPartSteeringWheel
+        name: steering wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/Stock_Parts/steering_wheel.rsi
+          state: icon
+        doAfter: 1
+    - to: missingFlashlight
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCFlashlight
+      steps:
+      - tool: Prying
+        doAfter: 2
+  - node: missingPedal1
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingPedal2
+      steps:
+      - tag: RNMCStockPartPedal
+        name: pedal
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: pedal
+        doAfter: 1
+    - to: missingSteeringWheel
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartSteeringWheel
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingPedal2
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to:  missingWires
+      steps:
+      - tag: RNMCStockPartPedal
+        name: pedal
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: pedal
+        doAfter: 1
+    - to: missingPedal1
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartPedal
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingWires
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingVehicleSeat
+      steps:
+      - tag: CableCoil
+        name: cable coil
+        icon:
+          sprite: _RMC14/Objects/Power/coil.rsi
+          state: coil3
+          color: "#FF0000"
+        amount: 8
+        doAfter: 3
+    - to: missingPedal2
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartPedal
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingVehicleSeat
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: secondStageUnsecured
+      steps:
+      - tag: RNMCStockPartVehicleSeat
+        name: vehicle seat
+        icon:
+          sprite: _RNMC14/Objects/Misc/Stock_Parts/vehicle_seat.rsi
+          state: chair
+        doAfter: 1
+    - to: missingWires
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCCableCoil
+        amount: 8
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: secondStageUnsecured
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to:  missingMetalSheetUnsecured
+      steps:
+      - tool: Screwing
+        doAfter: 4
+    - to: missingVehicleSeat
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartVehicleSeatFolded
+      steps:
+      - tool: Prying
+        doAfter: 1
+
+  # 15 Metal Sheets
+  - node: missingMetalSheetUnsecured # Unsecured
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingMetalSheet
+      steps:
+      - material: CMSteel
+        amount: 15
+        doAfter: 4
+    - to: secondStageUnsecured
+      steps:
+      - tool: Screwing
+        doAfter: 4
+  - node: missingMetalSheet # Secured
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to:  missingShockAbsorber1
+      steps:
+      - tool: Welding
+        doAfter: 6
+    - to: missingMetalSheetUnsecured
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 15
+      steps:
+      - tool: Prying
+        doAfter: 2
+
+  # 4 Shock Absorbers
+  - node: missingShockAbsorber1
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingShockAbsorber2
+      steps:
+      - tag: RNMCStockPartShockAbsorber
+        name: shock absorber
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: shock_absorber
+        doAfter: 1
+    - to: missingMetalSheetUnsecured
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 15
+      steps:
+      - tool: Welding
+        doAfter: 6
+  - node: missingShockAbsorber2
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingShockAbsorber3
+      steps:
+      - tag: RNMCStockPartShockAbsorber
+        name: shock absorber
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: shock_absorber
+        doAfter: 1
+    - to: missingShockAbsorber1
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartShockAbsorber
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingShockAbsorber3
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingShockAbsorber4
+      steps:
+      - tag: RNMCStockPartShockAbsorber
+        name: shock absorber
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: shock_absorber
+        doAfter: 1
+    - to: missingShockAbsorber2
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartShockAbsorber
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingShockAbsorber4
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingShockAbsorberUnsecured
+      steps:
+      - tag: RNMCStockPartShockAbsorber
+        name: shock absorber
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: shock_absorber
+        doAfter: 1
+    - to: missingShockAbsorber3
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartShockAbsorber
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingShockAbsorberUnsecured # Secured
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to:  missingWheel1
+      steps:
+      - tool: Anchoring
+        doAfter: 4
+    - to: missingShockAbsorber4
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartShockAbsorber
+      steps:
+      - tool: Prying
+        doAfter: 1
+
+  # 4 Wheels
+  - node: missingWheel1
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingWheel2
+      steps:
+      - tag: RNMCStockPartWheel
+        name: wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: wheel
+        doAfter: 1
+    - to: missingShockAbsorberUnsecured
+      steps:
+      - tool: Anchoring
+        doAfter: 4
+  - node: missingWheel2
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingWheel3
+      steps:
+      - tag: RNMCStockPartWheel
+        name: wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: wheel
+        doAfter: 1
+    - to: missingWheel1
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartWheel
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingWheel3
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingWheel4
+      steps:
+      - tag: RNMCStockPartWheel
+        name: wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: wheel
+        doAfter: 1
+    - to: missingWheel2
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartWheel
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingWheel4
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingWheelUnsecured
+      steps:
+      - tag: RNMCStockPartWheel
+        name: wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: wheel
+        doAfter: 1
+    - to: missingWheel3
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartWheel
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingWheelUnsecured
+    entity: RNMCSpeedBuggyFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to:  speedBuggy
+      steps:
+      - tool: Anchoring
+        doAfter: 5
+    - to: missingWheel4
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartWheel
+      steps:
+      - tool: Prying
+        doAfter: 1
+
+  - node: speedBuggy
+    entity: RNMCVehicleSmallSpeedBuggy
+    edges:
+    - to: missingWheelUnsecured
+      steps:
+      - tool: Anchoring
+        doAfter: 5
+
+  - node: destroyedSpeedBuggyFrame
+    entity: RNMCSpeedBuggyFrameDestroyed
+    edges:
+      - to: missingMetalSheetUnsecuredFallback
+        steps:
+          - tool: Welding
+            doAfter: 5
+        completed:
+          - !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 8
+  - node: missingMetalSheetUnsecuredFallback # Fallback
+    entity: RNMCSpeedBuggyFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingMetalSheet
+      steps:
+      - material: CMSteel
+        amount: 15
+        doAfter: 4
+    - to: secondStageUnsecured
+      steps:
+      - tool: Screwing
+        doAfter: 4
+
+  - node: disabledSpeedBuggyFrame
+    entity: RNMCSpeedBuggyFrameDisabled
+    edges:
+    - to: missingWheel2Fallback
+      steps:
+      - tag: RNMCStockPartWheel
+        name: wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: wheel
+        doAfter: 1
+    - to: missingShockAbsorberUnsecuredFallback
+      steps:
+      - tool: Anchoring
+        doAfter: 4
+  - node: missingWheel2Fallback # Fallback
+    entity: RNMCSpeedBuggyFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to: missingWheel3
+      steps:
+      - tag: RNMCStockPartWheel
+        name: wheel
+        icon:
+          sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+          state: wheel
+        doAfter: 1
+    - to: missingWheel1
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartWheel
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: missingShockAbsorberUnsecuredFallback # Fallback
+    entity: RNMCSpeedBuggyFrame
+    actions:
+    - !type:AppearanceChange
+    edges:
+    - to:  missingWheel1
+      steps:
+      - tool: Anchoring
+        doAfter: 4
+    - to: missingShockAbsorber4
+      completed:
+      - !type:SpawnPrototype
+        prototype: RNMCStockPartShockAbsorber
+      steps:
+      - tool: Prying
+        doAfter: 1

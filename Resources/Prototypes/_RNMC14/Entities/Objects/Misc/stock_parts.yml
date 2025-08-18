@@ -1,0 +1,192 @@
+# BASE
+- type: entity
+  abstract: true
+#  parent: BaseStockPart
+  parent: CMStockPartBase
+  id: RNMCStockPartBase
+  name: stock part
+  suffix: RNMC
+  description: What?
+  components:
+  - type: Sprite
+    sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+
+- type: entity
+  abstract: true
+  parent: BaseStructureDynamic
+  id: RNMCStockPartLargeBase
+  name: large stock part
+  suffix: RNMC
+  description: What?
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: _RNMC14/Objects/Misc/stock_parts.rsi
+
+# RATING 1
+
+# TODO RMC14 these, bring them back with a stack type instead of a machine part component
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartSmallEngine
+  name: small engine
+  description: A small engine used to power small vehicles.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: small_engine
+  #- type: MachinePart
+  #  part: SmallEngine
+  #  rating: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-small_engine
+      right:
+      - state: inhand-right-small_engine
+  - type: Tag
+    tags:
+    - RNMCStockPartSmallEngine
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartSmallTransmission
+  name: small transmission
+  description: A small transmission that allows vehicles to adjust their speed. Used for small vehicles.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: small_transmission
+  #- type: MachinePart
+  #  part: SmallTransmission
+  #  rating: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-small_transmission
+      right:
+      - state: inhand-right-small_transmission
+  - type: Tag
+    tags:
+    - RNMCStockPartSmallTransmission
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartWheel
+  name: wheel
+  description: A wheel that is needed for vehicles to move.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: wheel
+  #- type: MachinePart
+  #  part: Wheel
+  #  rating: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-wheel
+      right:
+      - state: inhand-right-wheel
+  - type: Tag
+    tags:
+    - RNMCStockPartWheel
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartSteeringWheel
+  name: steering wheel
+  description: Used to steer a wheeled vehicle.
+  suffix: Rating 1
+  components:
+  - type: Sprite # Need wieldable inhands.
+    sprite: _RNMC14/Objects/Misc/Stock_Parts/steering_wheel.rsi
+    state: icon
+  - type: Item # TODO: Make it wieldable.
+    sprite: _RNMC14/Objects/Misc/Stock_Parts/steering_wheel.rsi
+    #heldprefix: "wielded"
+  #- type: Appearance
+  - type: Wieldable
+  #- type: MachinePart
+  #  part: SteeringWheel
+  #  rating: 1
+  - type: Tag
+    tags:
+    - RNMCStockPartSteeringWheel
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartShockAbsorber
+  name: shock absorber
+  description: A spring to make for smoother rides for vehicles.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: shock_absorber
+  #- type: MachinePart
+  #  part: ShockAbsorber
+  #  rating: 1
+  - type: Tag
+    tags:
+    - RNMCStockPartShockAbsorber
+
+- type: entity
+  parent: RNMCStockPartBase
+  id: RNMCStockPartPedal
+  name: pedal
+  description: A foot-operated lever for vehicles, usually used to control throttle, brake, and clutch in automobiles; or rudders in aircraft or spacecraft.
+  suffix: Rating 1
+  components:
+  - type: Sprite
+    state: pedal
+  #- type: MachinePart
+  #  part: Pedal
+  #  rating: 1
+  - type: Tag
+    tags:
+    - RNMCStockPartPedal
+
+- type: entity
+  parent: [ SeatBase, ChairFolding, RNMCStockPartLargeBase ]
+  id: RNMCStockPartVehicleSeat
+  name: vehicle seat
+  description: A seat for drivers or passengers to sit in a vehicle.
+  suffix: Rating 1
+  components:
+  - type: Transform
+    noRot: false
+  - type: Foldable
+  - type: Sprite
+    sprite: _RNMC14/Objects/Misc/Stock_Parts/vehicle_seat.rsi
+    layers:
+    - state: chair
+      map: ["unfoldedLayer"]
+    - state: chair_folded
+      map: ["foldedLayer"]
+      visible: false
+    noRot: true
+  - type: Rotatable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 100
+        mask:
+        - TableMask
+  - type: Tag
+    tags:
+    - RMCSeat
+    - RNMCStockPartVehicleSeat
+
+- type: entity
+  parent: RNMCStockPartVehicleSeat
+  id: RNMCStockPartVehicleSeatFolded
+  suffix: folded, Rating 1
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: False

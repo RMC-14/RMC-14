@@ -1,0 +1,13 @@
+# gives vehicle skill / bypasses limit
+- type: entity
+  parent: CMPamphlet
+  id: CMPamphletVehicles
+  name: vehicles instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has a vehicle insignia. The title reads 'Moving on the move - a practical guide to a Vehicle Crewman'.
+  components:
+    - type: Sprite
+      state: pamphlet_vehicle
+    - type: SkillPamphlet
+      addSkills:
+        RMCSkillVehicles: 1
+      bypassLimit: true
