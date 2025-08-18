@@ -16,7 +16,7 @@
     time: 18000 # 5 hours
   - !type:RoleTimeRequirement
     role: CMJobDoctor
-    time: 18000 # 5 hours
+    time: 7200 # 2 hours
   ranks:
     RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorDoctor
