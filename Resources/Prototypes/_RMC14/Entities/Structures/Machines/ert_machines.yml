@@ -36,3 +36,19 @@
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ert_tse_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleCMB
+  suffix: cmb
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_cmb_shuttle.yml"
+
+- type: entity
+  parent: RMCSpawnerERTShuttle
+  id: RMCSpawnerERTShuttleZSPA
+  suffix: cmb
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/ert_zspa_shuttle.yml"
