@@ -5,10 +5,3 @@
   storage:
     back:
     - RMCD18Case
-
-- type: loadout
-  id: RapierRMC
-  cost: 3
-  storage:
-    back:
-    - RMCPouchRapierFilled

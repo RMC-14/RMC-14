@@ -47,3 +47,15 @@
       inverted: true # if you have atleast 175 hours you get the colonel ID, so invert this
   equipment:
     id: CMIDCardCommandingOfficer
+
+- type: loadout
+  id: RapierRMC
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 252000 # 70 hours
+  storage:
+    back:
+    - RMCPouchRapierFilled
