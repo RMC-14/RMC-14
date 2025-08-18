@@ -1,6 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-4.0, sprites by Sigma Draconis",
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprites by Sigma Draconis",
   "size": {
       "x": 32,
       "y": 32
