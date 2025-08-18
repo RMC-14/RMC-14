@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the duration of the slow and daze effects applied by tesla turrets
-      being too low. Super slow 4 > 6, daze 8 > 10 for most and 8 > 15 for the overclocked.
-    type: Fix
-  id: 1695
-  time: '2025-05-10T03:33:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6374
 - author: Vermidia
   changes:
   - message: Added medical optics, point-buyable for most squad roles and usable without
@@ -4631,5 +4623,12 @@
   id: 2195
   time: '2025-08-18T07:20:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7534
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the synth survival pouch having the wrong handheld radio.
+    type: Fix
+  id: 2196
+  time: '2025-08-18T21:04:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7544
 Name: RMC14
 Order: -1
