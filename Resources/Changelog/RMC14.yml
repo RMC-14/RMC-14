@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Fixed Mateba, M59a and Winter Wyvern being able to be melted!
-    type: Fix
-  - message: Changed M59a to have the same stats as a MK1 but with added IFF.
-    type: Tweak
-  - message: Fixed the Mateba not having the correct ammo loaded.
-    type: Fix
-  - message: Fixed the Mateba not being able to use barrel attachments and mateba
-      barrels at the same time.
-    type: Fix
-  id: 1697
-  time: '2025-05-10T03:34:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6301
 - author: Magicocity1
   changes:
   - message: The M13 and M44 now appear in the pistol pouch when inside it
@@ -4612,5 +4598,12 @@
   id: 2197
   time: '2025-08-18T21:08:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7536
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the red EMT paramedic uniform being named "Item".
+    type: Fix
+  id: 2198
+  time: '2025-08-18T21:13:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7543
 Name: RMC14
 Order: -1
