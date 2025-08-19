@@ -12,36 +12,36 @@
 - files: [lizard_hiss_3.ogg]
   copyright: '"hiss.ogg" by Skyrat-SS13'
   license: CC-BY-SA
-  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/892
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/blob/595b17aaeaaf9fec87550bf1f8242fa9bb8e1d92/modular_skyrat/modules/emotes/sound/voice/hiss.ogg
 
 - files: [lizard_purr.ogg]
-  copyright: '"raptor_purr.ogg" by Skyrat-SS13'
-  license: CC-BY-SA
-  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/892
+  copyright: '"raptor_purr.ogg" by Citadel-Station-13'
+  license: CC-BY-SA-3.0
+  source: https://github.com/BlackMajor/Citadel-Station-13/blob/c2b09cf3ee949e9454a10d8f8fa40296bf435428/modular_citadel/sound/voice/raptor_purr.ogg
 
 - files: [lizard_rattle.ogg]
   copyright: '"rattle.ogg" by Skyrat-SS13'
-  license: CC-BY-SA
-  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/1925
+  license: CC-BY-SA-3.0
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/blob/c45bc517706f5708c107fdcb018115a4a6b7320b/modular_skyrat/modules/emotes/sound/voice/rattle.ogg
 
 - files: [lizard_scream_1.ogg]
-  copyright: '"lizard_scream_1.ogg" by BeeStation-Hornet'
-  license: CC0
-  source: https://github.com/BeeStation/BeeStation-Hornet/pull/2407
+  copyright: 'by n Beats on YT'
+  license: CC-BY-SA-3.0
+  source: youtube.com/watch?v=RQzI5ldSXkg
 
 - files: [lizard_scream_2.ogg]
-  copyright: '"lizard_scream_2.ogg" by BeeStation-Hornet'
-  license: CC0
-  source: https://github.com/BeeStation/BeeStation-Hornet/pull/2407
+  copyright: 'by n Beats on YT'
+  license: CC-BY-SA-3.0
+  source: youtube.com/watch?v=RQzI5ldSXkg
 
 - files: [lizard_scream_3.ogg]
-  copyright: '"lizard_scream_3.ogg" by BeeStation-Hornet'
+  copyright: 'sihiL'
   license: CC0
-  source: https://github.com/BeeStation/BeeStation-Hornet/pull/2407
+  source: freesound.org/people/-sihiL/sounds/213842
 
 - files: [lizard_scream_4.ogg]
-  copyright: '"scream_lizard.ogg" by BeeStation-Hornet'
+  copyright: 'sihiL, edited by Lord Saladin'
   license: CC0
-  source: https://github.com/BeeStation/BeeStation-Hornet/pull/2407
+  source: freesound.org/people/-sihiL/sounds/213842
 
 
