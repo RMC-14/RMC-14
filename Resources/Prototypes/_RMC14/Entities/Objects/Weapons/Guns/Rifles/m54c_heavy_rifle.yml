@@ -82,6 +82,12 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM54CE2Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM54CE2Stock
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -95,7 +101,7 @@
     offsets:
       rmc-aslot-barrel: 0.75, 0.03125
       rmc-aslot-rail: 0.125, 0.185
-      rmc-aslot-stock: -0.875, 0.0325
+      rmc-aslot-stock: -1, 0
       rmc-aslot-underbarrel: 0.37, -0.3125
   - type: ItemCamouflage
     camouflageVariations:
