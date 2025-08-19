@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Arcticular1
-  changes:
-  - message: Added dress blues jacket, dress blues uniform, dress blue officer hat,
-      marine formal service jacket, and marine service peaked cap to the CO clothing
-      rack.
-    type: Add
-  - message: Added M54C rubber magazine to the CO weapon rack.
-    type: Add
-  - message: Replaced insulated gloves with deluxe combat gloves in the CO equipment
-      rack.
-    type: Tweak
-  id: 1699
-  time: '2025-05-10T03:39:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6363
 - author: Dutch-VanDerLinde
   changes:
   - message: Added functionality for CQC skill. CQC skill will now allow you to do
@@ -4608,5 +4594,12 @@
   id: 2199
   time: '2025-08-19T17:07:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6913
+- author: DummeHytteOst
+  changes:
+  - message: Fixed a typo in the guidebook.
+    type: Fix
+  id: 2200
+  time: '2025-08-19T17:52:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7542
 Name: RMC14
 Order: -1
