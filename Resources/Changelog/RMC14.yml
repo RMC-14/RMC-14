@@ -1,40 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added shockwave effect to the HE orbital bombardment warhead.
-    type: Add
-  id: 1688
-  time: '2025-05-10T02:36:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6385
-- author: Arykh
-  changes:
-  - message: Fixed the health analyzer lying about Arithrazine's OD.
-    type: Fix
-  id: 1689
-  time: '2025-05-10T02:39:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6354
-- author: Ramiris
-  changes:
-  - message: 'Fixed clothing camo, you can now rep your CamoTech:tm: weapons on your
-      back/belt!'
-    type: Fix
-  id: 1690
-  time: '2025-05-10T03:16:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6325
-- author: crazy1112345
-  changes:
-  - message: Added faction stamps for SPP, CLF, TSE, and the Free Press.
-    type: Add
-  id: 1691
-  time: '2025-05-10T03:20:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6310
-- author: Vermidia
-  changes:
-  - message: Fixed Custom SPR doing slightly too much damage base (31 > 26)
-    type: Fix
-  id: 1692
-  time: '2025-05-10T03:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6360
 - author: Whisper
   changes:
   - message: Added the ability to examine armor values with a button.
@@ -4630,5 +4594,41 @@
   id: 2188
   time: '2025-08-16T23:05:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7415
+- author: UnicornOnLSD
+  changes:
+  - message: RTOs inhands fixed.
+    type: Fix
+  id: 2189
+  time: '2025-08-17T22:40:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7520
+- author: noctyrnal
+  changes:
+  - message: The PVE server now has 2 unique dropships.
+    type: Add
+  id: 2190
+  time: '2025-08-17T22:39:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7527
+- author: DrSmugleaf
+  changes:
+  - message: Fixed buggy movement speed while wielding some guns, causing rubberbanding
+      when moving across weeds for example.
+    type: Fix
+  id: 2191
+  time: '2025-08-17T23:03:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7528
+- author: Shromply
+  changes:
+  - message: Added the M3 MOPP Suit.
+    type: Add
+  id: 2192
+  time: '2025-08-17T23:02:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7523
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to CPR crit marines on PvE
+    type: Fix
+  id: 2193
+  time: '2025-08-17T23:31:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7530
 Name: RMC14
 Order: -1
