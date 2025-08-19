@@ -343,7 +343,4 @@
     - BorgChassis
   chatMessages: ["rmc-emote-r-purr"]
   chatTriggers:
-    - purr
-    - purrs
-    - purring
-    - purred
+    - purrs!!
