@@ -363,6 +363,7 @@
   loadouts:
   - ColIDCardRMC
   - ColNormalIDCardRMC
+  - CORapierRMC
 
 # Chief MP
 - type: loadoutGroup
