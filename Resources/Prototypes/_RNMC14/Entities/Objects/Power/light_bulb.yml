@@ -1,0 +1,15 @@
+- type: entity
+  parent: CMLightBulb
+  id: RNMCLightBulbRed
+  suffix: Red
+  components:
+  - type: LightBulb
+    color: "#FF0000"
+
+- type: entity
+  parent: CMLightBulb
+  id: RNMCLightBulbGreen
+  suffix: Green
+  components:
+  - type: LightBulb
+    color: "#00FF00"
