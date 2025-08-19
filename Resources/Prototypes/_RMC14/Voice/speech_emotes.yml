@@ -302,12 +302,7 @@
     - BorgChassis
   chatMessages: ["rmc-emote-r-hiss"]
   chatTriggers:
-    - hiss
-    - hiss.
-    - hiss!
-    - hisses
-    - hisses.
-    - hisses!
+    - hisses!!
 
 - type: emote
   id: RMCReptileRattle
