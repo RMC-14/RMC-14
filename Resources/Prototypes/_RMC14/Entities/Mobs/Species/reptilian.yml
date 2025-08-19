@@ -18,7 +18,7 @@
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
-    allowedEmotes: ['Thump']
+    allowedEmotes: ['Thump', 'Weh', 'Hew']
   - type: BodyEmotes
     soundsId: ReptilianBodyEmotes
   - type: TypingIndicator

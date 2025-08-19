@@ -5,6 +5,14 @@
       path: /Audio/Voice/Reptilian/reptilian_scream.ogg
     Laugh:
       path: /Audio/Animals/lizard_happy.ogg
+    Weh:
+      path: /Audio/Items/Toys/weh.ogg
+      params:
+        variation: 0.125
+    Hew:
+      path: /Audio/Items/Toys/hew.ogg
+      params:
+        variation: 0.125
 
 - type: emoteSounds
   parent: [RMCBaseMaleSounds, RMCUnisexReptilian]
