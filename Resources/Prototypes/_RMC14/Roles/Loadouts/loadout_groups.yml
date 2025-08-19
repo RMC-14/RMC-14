@@ -352,10 +352,11 @@
   id: CommandingOfficerRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 10
   loadouts:
   - ColBeretRMC
   - LtColBeretRMC
+  - CORapierRMC
 
 - type: loadoutGroup
   id: CommandingOfficerIDRMC
@@ -363,7 +364,6 @@
   loadouts:
   - ColIDCardRMC
   - ColNormalIDCardRMC
-  - CORapierRMC
 
 # Chief MP
 - type: loadoutGroup
