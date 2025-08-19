@@ -285,3 +285,70 @@
     - warbles
     - warbles.
     - warbles!
+
+# Reptilian
+
+- type: emote
+  id: RMCReptileHiss
+  name: rmc-emote-name-r-hiss
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/xeno_emotes.rsi/hiss.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-r-hiss"]
+  chatTriggers:
+    - hiss
+    - hiss.
+    - hiss!
+    - hisses
+    - hisses.
+    - hisses!
+
+- type: emote
+  id: RMCReptileRattle
+  name: rmc-emote-name-r-rattle
+  category: Hands
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/snarl.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-r-rattle"]
+  chatTriggers:
+    - rattle
+    - rattles
+    - rattling
+    - rattled
+    - rattle tail
+    - rattles tail
+    - rattles their tail
+    - rattles her tail
+    - rattles his tail
+    - rattles its tail
+
+- type: emote
+  id: RMCReptilePurr
+  name: rmc-emote-name-r-purr
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/purr.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-r-purr"]
+  chatTriggers:
+    - purr
+    - purrs
+    - purring
+    - purred

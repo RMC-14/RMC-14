@@ -1,0 +1,47 @@
+
+- files: [lizard_hiss_1.ogg]
+  copyright: '"snake_hissing1.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/23972
+
+- files: [lizard_hiss_2.ogg]
+  copyright: '"snake_hissing2.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/23972
+
+- files: [lizard_hiss_3.ogg]
+  copyright: '"hiss.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/892
+
+- files: [lizard_purr.ogg]
+  copyright: '"raptor_purr.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/892
+
+- files: [lizard_rattle.ogg]
+  copyright: '"rattle.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/1925
+
+- files: [lizard_scream_1.ogg]
+  copyright: '"lizard_scream_1.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/4112
+
+- files: [lizard_scream_2.ogg]
+  copyright: '"lizard_scream_2.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/4112
+
+- files: [lizard_scream_3.ogg]
+  copyright: '"lizard_scream_3.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/4112
+
+- files: [lizard_scream_4.ogg]
+  copyright: '"scream_lizard.ogg" by Skyrat-SS13'
+  license: GNU AGPL v3
+  source: https://github.com/Skyrat-SS13/Skyrat-tg/pull/892
+
+
