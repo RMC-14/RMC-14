@@ -136,7 +136,7 @@
   - type: Item
     heldPrefix: produce
   - type: Produce
-    seedId: mango
+    seedId: rmcmango
   - type: Extractable
     juiceSolution:
       reagents:
