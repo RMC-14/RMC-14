@@ -1,0 +1,75 @@
+﻿- type: job
+  parent: CMSurvivorEngineer
+  id: CMSurvivorChancesCargoTech
+  name: rmc-job-name-survivor-cargo-tech
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesCargoTech
+  startingGear: RMCGearSurvivorChancesCargoTech
+  spawnMenuRoleName: Warehouse Worker (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillEngineer: 2
+        RMCSkillVehicles: 3
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  id: RMCGearSurvivorChancesCargoTech
+  equipment:
+    back: CMSatchelEngineerSurvivorFill
+    head: RMCHeadCapFlippable
+    shoes: RMCShoesBlack
+    id: CMIDCardColonistEngineer
+    ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchToolsFill
+    jumpsuit: RMCJumpsuitKhakiWorkwearJacketless
+    gloves: CMHandsBrown
+    mask: RMCMaskRebreather
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesCargoTech
+  name: warehouse worker spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesCargoTech
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesCargoTech
+  name: warehouse worker ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesCargoTech
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesCargoTech
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesCargoTech
