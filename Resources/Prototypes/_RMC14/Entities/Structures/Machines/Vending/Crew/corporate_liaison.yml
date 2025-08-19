@@ -56,6 +56,12 @@
 #      - id: PinkWorkwear
       - id: RMCJumpsuitLiaisonGreenWorkwear
         amount: 1
+      - id: RMCJumpsuitLiaisonCargoShorts
+        amount: 1
+      - id: RMCJumpsuitLiaisonLegalUniform
+        amount: 1
+      - id: RMCJumpsuitLiaisonDisco
+        amount: 1
     - name: Coat
       entries:
       - id: RMCJacketCorporateBlack
@@ -67,6 +73,10 @@
       - id: RMCJacketCorporateBlue
         amount: 1
       - id: RMCJacketCorporateFormal
+        amount: 1
+      - id: RMCCorporateLogisticsJacket
+        amount: 1
+      - id: RMCCorporateDutyJacket
         amount: 1
       - id: RMCWeYaBrownVest
         amount: 1
