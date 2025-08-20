@@ -58,3 +58,18 @@
         - MachineMask
         layer:
         - LowImpassable
+
+- type: entity
+  parent: CMComputerDropshipCamerasAlamo
+  id: RNMCComputerDropshipCamerasAlamoWallmount
+  name: camera controls
+  description: A computer to monitor cameras linked to the dropship.
+  components:
+  - type: WallMount
+    arc: 90
+  - type: Sprite
+    sprite: _RNMC14/Structures/Machines/wallmount_computers.rsi
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: generic
