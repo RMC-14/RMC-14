@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 251.0.1-fixtures-fix
+  engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/07/2025 02:07:01
-  entityCount: 79
+  time: 08/20/2025 14:03:29
+  entityCount: 80
 maps: []
 grids:
 - 1
@@ -29,6 +29,7 @@ entities:
   entities:
   - uid: 1
     mapInit: true
+    paused: true
     components:
     - type: MetaData
       name: Huar
@@ -39,20 +40,20 @@ entities:
       chunks:
         0,0:
           ind: 0,0
-          tiles: AAAAAAAAAQAAAAAAAgAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABAAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAAAAAAAABgAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABAAAAAAABwAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAA
-          version: 6
+          tiles: AAAAAAAAAAEAAAAAAAACAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAQAAAAAAAAFAAAAAAAABQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAAAAAAAAAABgAAAAAAAAUAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAABAAAAAAAAAcAAAAAAAAFAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAUAAAAAAAAFAAAAAAAABQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
+          version: 7
         -1,0:
           ind: -1,0
-          tiles: AwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAgAAAAAACAAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAACQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAA
-          version: 6
+          tiles: AwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAACAAAAAAAACAAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAABQAAAAAAAAUAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAUAAAAAAAAJAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAFAAAAAAAABwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAABQAAAAAAAAUAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAUAAAAAAAAFAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
+          version: 7
         0,-1:
           ind: 0,-1
-          tiles: AwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABAAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAAAAAAAABgAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAgAAAAAACgAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAgAAAAAACgAAAAAAAgAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAA
-          version: 6
+          tiles: AwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAABAAAAAAAAAUAAAAAAAAFAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAAAAAAAAAAGAAAAAAAABQAAAAAAAAUAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAACAAAAAAAACgAAAAAAAAUAAAAAAAAFAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAgAAAAAAAAoAAAAAAAACAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
+          version: 7
         -1,-1:
           ind: -1,-1
-          tiles: AwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAACQAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAABQAAAAAABQAAAAAACgAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAgAAAAAACgAAAAAA
-          version: 6
+          tiles: AwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAFAAAAAAAABQAAAAAAAAUAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAABQAAAAAAAAUAAAAAAAAFAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAFAAAAAAAABQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAFAAAAAAAABQAAAAAAAAkAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAABQAAAAAAAAUAAAAAAAAKAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAACAAAAAAAACgAAAAAAAA==
+          version: 7
     - type: Broadphase
     - type: Physics
       bodyStatus: InAir
@@ -66,6 +67,7 @@ entities:
     - type: SpreaderGrid
       updateAccumulator: 0.23339128
     - type: Shuttle
+      dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -80,113 +82,22 @@ entities:
         tiles:
           0,0:
             0: 13079
-            1: 34952
           0,-1:
             0: 29489
-            1: 32776
           -1,0:
             0: 34828
-            1: 8738
-          0,1:
-            1: 1928
           -1,-1:
             0: 51328
-            1: 8466
-          -1,1:
-            1: 3106
           0,-2:
-            1: 4576
-            2: 16384
-            3: 32768
-          1,-2:
-            1: 4352
-          1,-1:
-            1: 272
+            0: 49152
           -1,-2:
-            4: 8192
-            1: 4576
-            5: 16384
+            0: 24576
         uniqueMixes:
         - volume: 2500
           temperature: 293.15
           moles:
           - 21.824879
           - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          immutable: True
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 19.492283
-          moles:
-          - 0.0004280915
-          - 0.0016104393
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 19.492283
-          moles:
-          - 0.0003229462
-          - 0.0012148927
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 32.95817
-          moles:
-          - 0.00025608807
-          - 0.00096337905
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 32.95817
-          moles:
-          - 0.00039398164
-          - 0.0014821215
           - 0
           - 0
           - 0
@@ -229,10 +140,12 @@ entities:
         params:
           volume: -1
         path: /Audio/_RMC14/Dropship/dropship_incoming.ogg
+    - type: ImplicitRoof
 - proto: CMAlamoCockpit
   entities:
   - uid: 24
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 0.5,1.5
@@ -254,12 +167,12 @@ entities:
             - -0.49,0.49
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - BulletImpassable
           - InteractImpassable
@@ -292,69 +205,17 @@ entities:
       mode: Active
 - proto: CMAlamoDoorAft
   entities:
-  - uid: 45
-    mapInit: true
+  - uid: 7
     components:
     - type: Transform
+      rot: 3.141592653589793 rad
       pos: 0.5,-3.5
       parent: 1
-    - type: DeviceNetwork
-      address: 6D49-8A3B
-      receiveFrequency: 1280
-    - type: XenoToggleChargingDamage
-      destroyDamage: 1000
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - TableLayer
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - TableLayer
-          - HighImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-        rmc_dropship_blocked:
-          shape: !type:PhysShapeCircle
-            radius: 0.49
-            position: 0,0
-          mask:
-          - DropshipImpassable
-          layer: []
-          density: 1
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 48
-    - type: DoorBolt
-      powered: True
-    - type: RMCPowerReceiver
-      mode: Active
 - proto: CMAlamoDoorPort
   entities:
   - uid: 6
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -377,12 +238,12 @@ entities:
             - -0.49,0.49
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - BulletImpassable
           - InteractImpassable
@@ -413,70 +274,17 @@ entities:
       powered: True
     - type: RMCPowerReceiver
       mode: Active
-  - uid: 7
-    mapInit: true
+  - uid: 66
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -1.5,-0.5
       parent: 1
-    - type: DeviceNetwork
-      address: 4510-825D
-      receiveFrequency: 1280
-    - type: XenoToggleChargingDamage
-      destroyDamage: 1000
-    - type: Fixtures
-      fixtures:
-        fix1:
-          shape: !type:PolygonShape
-            radius: 0.01
-            vertices:
-            - -0.49,-0.49
-            - 0.49,-0.49
-            - 0.49,0.49
-            - -0.49,0.49
-          mask:
-          - Impassable
-          - TableLayer
-          - HighImpassable
-          - LowImpassable
-          - InteractImpassable
-          layer:
-          - TableLayer
-          - HighImpassable
-          - BulletImpassable
-          - InteractImpassable
-          - Opaque
-          density: 100
-          hard: True
-          restitution: 0
-          friction: 0.4
-        rmc_dropship_blocked:
-          shape: !type:PhysShapeCircle
-            radius: 0.49
-            position: 0,0
-          mask:
-          - DropshipImpassable
-          layer: []
-          density: 1
-          hard: True
-          restitution: 0
-          friction: 0.4
-    - type: ContainerContainer
-      containers:
-        board: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 66
-    - type: DoorBolt
-      powered: True
-    - type: RMCPowerReceiver
-      mode: Active
 - proto: CMAlamoDoorStarboard
   entities:
   - uid: 3
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -499,12 +307,12 @@ entities:
             - -0.49,0.49
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - BulletImpassable
           - InteractImpassable
@@ -537,6 +345,7 @@ entities:
       mode: Active
   - uid: 4
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -559,12 +368,12 @@ entities:
             - -0.49,0.49
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - BulletImpassable
           - InteractImpassable
@@ -599,6 +408,7 @@ entities:
   entities:
   - uid: 44
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -2.5,-5.5
@@ -615,13 +425,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -646,6 +456,7 @@ entities:
   entities:
   - uid: 35
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.5,-3.5
@@ -662,13 +473,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -691,6 +502,7 @@ entities:
           friction: 0.4
   - uid: 36
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.5,-3.5
@@ -707,13 +519,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -738,6 +550,7 @@ entities:
   entities:
   - uid: 43
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,-5.5
@@ -754,13 +567,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -785,6 +598,7 @@ entities:
   entities:
   - uid: 42
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.5,-5.5
@@ -801,13 +615,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -832,6 +646,7 @@ entities:
   entities:
   - uid: 39
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.5,-5.5
@@ -848,13 +663,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -879,6 +694,7 @@ entities:
   entities:
   - uid: 33
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,-3.5
@@ -895,13 +711,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -926,6 +742,7 @@ entities:
   entities:
   - uid: 34
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,-3.5
@@ -942,13 +759,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -973,6 +790,7 @@ entities:
   entities:
   - uid: 40
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,-5.5
@@ -989,13 +807,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1020,6 +838,7 @@ entities:
   entities:
   - uid: 41
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 3.5,-5.5
@@ -1036,13 +855,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1067,6 +886,7 @@ entities:
   entities:
   - uid: 26
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -2.5,-2.5
@@ -1083,13 +903,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1114,6 +934,7 @@ entities:
   entities:
   - uid: 31
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,-2.5
@@ -1130,13 +951,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1161,6 +982,7 @@ entities:
   entities:
   - uid: 32
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,-2.5
@@ -1177,13 +999,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1208,6 +1030,7 @@ entities:
   entities:
   - uid: 25
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 3.5,-2.5
@@ -1224,13 +1047,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1255,6 +1078,7 @@ entities:
   entities:
   - uid: 38
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.5,-4.5
@@ -1271,13 +1095,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1302,6 +1126,7 @@ entities:
   entities:
   - uid: 27
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -2.5,-1.5
@@ -1318,13 +1143,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1349,6 +1174,7 @@ entities:
   entities:
   - uid: 30
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,-1.5
@@ -1365,13 +1191,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1396,6 +1222,7 @@ entities:
   entities:
   - uid: 29
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,-1.5
@@ -1412,13 +1239,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1443,6 +1270,7 @@ entities:
   entities:
   - uid: 28
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 3.5,-1.5
@@ -1459,13 +1287,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1490,6 +1318,7 @@ entities:
   entities:
   - uid: 22
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.5,1.5
@@ -1506,13 +1335,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1537,6 +1366,7 @@ entities:
   entities:
   - uid: 37
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.5,-4.5
@@ -1553,13 +1383,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1584,6 +1414,7 @@ entities:
   entities:
   - uid: 23
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.5,1.5
@@ -1600,13 +1431,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1631,6 +1462,7 @@ entities:
   entities:
   - uid: 9
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,3.5
@@ -1647,13 +1479,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1678,6 +1510,7 @@ entities:
   entities:
   - uid: 8
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,3.5
@@ -1694,13 +1527,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1725,6 +1558,7 @@ entities:
   entities:
   - uid: 17
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,4.5
@@ -1741,13 +1575,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1772,6 +1606,7 @@ entities:
   entities:
   - uid: 11
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.5,4.5
@@ -1788,13 +1623,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1819,6 +1654,7 @@ entities:
   entities:
   - uid: 16
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 0.5,4.5
@@ -1835,13 +1671,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1866,6 +1702,7 @@ entities:
   entities:
   - uid: 15
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.5,4.5
@@ -1882,13 +1719,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1913,6 +1750,7 @@ entities:
   entities:
   - uid: 18
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,4.5
@@ -1929,13 +1767,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -1960,6 +1798,7 @@ entities:
   entities:
   - uid: 69
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.5,3.5
@@ -1968,6 +1807,7 @@ entities:
   entities:
   - uid: 46
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 0.5,3.5
@@ -1976,6 +1816,7 @@ entities:
   entities:
   - uid: 70
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.5,3.5
@@ -1984,6 +1825,7 @@ entities:
   entities:
   - uid: 12
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,5.5
@@ -2000,13 +1842,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2031,6 +1873,7 @@ entities:
   entities:
   - uid: 2
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.5,5.5
@@ -2047,13 +1890,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2076,6 +1919,7 @@ entities:
           friction: 0.4
   - uid: 5
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.5,5.5
@@ -2092,13 +1936,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2121,6 +1965,7 @@ entities:
           friction: 0.4
   - uid: 13
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 0.5,5.5
@@ -2137,13 +1982,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2168,6 +2013,7 @@ entities:
   entities:
   - uid: 10
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,5.5
@@ -2184,13 +2030,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2215,6 +2061,7 @@ entities:
   entities:
   - uid: 51
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -2222,6 +2069,7 @@ entities:
       parent: 1
   - uid: 52
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -2229,6 +2077,7 @@ entities:
       parent: 1
   - uid: 53
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -2236,6 +2085,7 @@ entities:
       parent: 1
   - uid: 54
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -2243,6 +2093,7 @@ entities:
       parent: 1
   - uid: 55
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -2250,6 +2101,7 @@ entities:
       parent: 1
   - uid: 56
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -2257,24 +2109,28 @@ entities:
       parent: 1
   - uid: 59
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.7512729,0.5
       parent: 1
   - uid: 62
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -0.25199187,0.5
       parent: 1
   - uid: 63
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.7209734,0.5
       parent: 1
   - uid: 64
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 1.2216918,0.5
@@ -2283,6 +2139,7 @@ entities:
   entities:
   - uid: 49
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -2290,6 +2147,7 @@ entities:
       parent: 1
   - uid: 50
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -2299,6 +2157,7 @@ entities:
   entities:
   - uid: 47
     mapInit: true
+    paused: true
     components:
     - type: Transform
       parent: 24
@@ -2306,17 +2165,9 @@ entities:
       nextSound: -870.8297461
     - type: Physics
       canCollide: False
-  - uid: 48
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 45
-    - type: EmitSoundOnCollide
-      nextSound: -870.8297461
-    - type: Physics
-      canCollide: False
   - uid: 65
     mapInit: true
+    paused: true
     components:
     - type: Transform
       parent: 6
@@ -2324,17 +2175,9 @@ entities:
       nextSound: -870.8297461
     - type: Physics
       canCollide: False
-  - uid: 66
-    mapInit: true
-    components:
-    - type: Transform
-      parent: 7
-    - type: EmitSoundOnCollide
-      nextSound: -870.8297461
-    - type: Physics
-      canCollide: False
   - uid: 67
     mapInit: true
+    paused: true
     components:
     - type: Transform
       parent: 3
@@ -2344,6 +2187,7 @@ entities:
       canCollide: False
   - uid: 68
     mapInit: true
+    paused: true
     components:
     - type: Transform
       parent: 4
@@ -2355,44 +2199,58 @@ entities:
   entities:
   - uid: 74
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 1
   - uid: 75
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 0.5,-3.5
       parent: 1
   - uid: 76
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,0.5
       parent: 1
   - uid: 77
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,-0.5
       parent: 1
   - uid: 78
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,-0.5
       parent: 1
   - uid: 79
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,0.5
+      parent: 1
+- proto: RMCExtinguisherCabinetAltFilled
+  entities:
+  - uid: 80
+    components:
+    - type: Transform
+      pos: -0.5,1.5
       parent: 1
 - proto: RMCLightFixtureDoubleAlwaysPowered
   entities:
   - uid: 60
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -2400,6 +2258,7 @@ entities:
       parent: 1
   - uid: 61
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -2408,210 +2267,23 @@ entities:
 - proto: RMCNanoMed
   entities:
   - uid: 72
-    mapInit: true
-    components:
-    - type: Transform
-      pos: 2.5,-2.5
-      parent: 1
-    - type: CMSolutionRefiller
-      rechargeAt: 3.7027167
-    - type: CMAutomatedVendor
-      sections:
-      - hasBoxes: False
-        holidays: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - giveMapBlip: null
-          giveIcon: null
-          name: null
-          amount: 2
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: 2
-          max: 2
-          linkedEntries: []
-          box: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          id: CMTricordrazineAutoInjectorNoSkill
-        - giveMapBlip: null
-          giveIcon: null
-          name: null
-          amount: 4
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: 4
-          max: 4
-          linkedEntries: []
-          box: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          id: CMGauze10
-        - giveMapBlip: null
-          giveIcon: null
-          name: null
-          amount: 4
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: 4
-          max: 4
-          linkedEntries: []
-          box: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          id: CMOintment10
-        takeOne: null
-        takeAll: null
-        choices: null
-        name: Supplies
-      - hasBoxes: False
-        holidays: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - giveMapBlip: null
-          giveIcon: null
-          name: null
-          amount: 3
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: 3
-          max: 3
-          linkedEntries: []
-          box: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          id: CMHealthAnalyzer
-        takeOne: null
-        takeAll: null
-        choices: null
-        name: Utility
-  - uid: 73
-    mapInit: true
     components:
     - type: Transform
       pos: -1.5,-2.5
       parent: 1
-    - type: CMSolutionRefiller
-      rechargeAt: 3.73605
-    - type: CMAutomatedVendor
-      sections:
-      - hasBoxes: False
-        holidays: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - giveMapBlip: null
-          giveIcon: null
-          name: null
-          amount: 2
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: 2
-          max: 2
-          linkedEntries: []
-          box: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          id: CMTricordrazineAutoInjectorNoSkill
-        - giveMapBlip: null
-          giveIcon: null
-          name: null
-          amount: 4
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: 4
-          max: 4
-          linkedEntries: []
-          box: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          id: CMGauze10
-        - giveMapBlip: null
-          giveIcon: null
-          name: null
-          amount: 4
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: 4
-          max: 4
-          linkedEntries: []
-          box: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          id: CMOintment10
-        takeOne: null
-        takeAll: null
-        choices: null
-        name: Supplies
-      - hasBoxes: False
-        holidays: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - giveMapBlip: null
-          giveIcon: null
-          name: null
-          amount: 3
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: 3
-          max: 3
-          linkedEntries: []
-          box: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          id: CMHealthAnalyzer
-        takeOne: null
-        takeAll: null
-        choices: null
-        name: Utility
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
+      parent: 1
 - proto: RMCSurveillanceCameraAlmayer
   entities:
   - uid: 71
     mapInit: true
+    paused: true
     components:
+    - type: MetaData
+      name: Huar Bay
     - type: Transform
       pos: -0.5,0.5
       parent: 1
@@ -2621,6 +2293,7 @@ entities:
   entities:
   - uid: 57
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -2628,6 +2301,7 @@ entities:
       parent: 1
   - uid: 58
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -2637,6 +2311,7 @@ entities:
   entities:
   - uid: 20
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: 2.5,2.5
@@ -2653,13 +2328,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2684,6 +2359,7 @@ entities:
   entities:
   - uid: 21
     mapInit: true
+    paused: true
     components:
     - type: Transform
       pos: -1.5,2.5
@@ -2700,13 +2376,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2731,6 +2407,7 @@ entities:
   entities:
   - uid: 14
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -2748,13 +2425,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2777,6 +2454,7 @@ entities:
           friction: 0.4
   - uid: 19
     mapInit: true
+    paused: true
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -2794,13 +2472,13 @@ entities:
             - -0.5,0.5
           mask:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - InteractImpassable
           layer:
           - Impassable
-          - TableLayer
+          - MidImpassable
           - HighImpassable
           - LowImpassable
           - BulletImpassable
@@ -2821,4 +2499,20 @@ entities:
           hard: True
           restitution: 0
           friction: 0.4
+- proto: RNMCLightFixtureSmallGreen
+  entities:
+  - uid: 45
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,-1.5
+      parent: 1
+- proto: RNMCLightFixtureSmallRed
+  entities:
+  - uid: 48
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -2.5,-1.5
+      parent: 1
 ...
