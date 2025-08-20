@@ -64,11 +64,13 @@
   id: RNMCComputerDropshipCamerasAlamoWallmount
   name: camera controls
   description: A computer to monitor cameras linked to the dropship.
+  suffix: Wallmount
   components:
   - type: WallMount
     arc: 90
   - type: Sprite
     sprite: _RNMC14/Structures/Machines/wallmount_computers.rsi
+    offset: 0,-0.5
     layers:
     - state: computer
     - state: generic_keyboard
