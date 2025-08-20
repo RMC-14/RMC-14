@@ -54,7 +54,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_intel
-  hidden: false #TODO RMC14
+  hidden: true #TODO RMC14
 
 - type: startingGear
   id: CMGearVC
