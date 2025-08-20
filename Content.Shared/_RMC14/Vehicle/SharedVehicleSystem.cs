@@ -101,6 +101,7 @@ public abstract class SharedVehicleSystem : EntitySystem
         }
     }
 
+    // TODO RMC: This should probably take the VehicleEnterComponent instead.
     private void OnVehicleEnterDoAfter(Entity<VehicleComponent> ent, ref VehicleEnterDoAfterEvent args)
     {
         var user = args.User;

@@ -13,7 +13,7 @@ public sealed partial class VehicleSystem : SharedVehicleSystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
-    private EntityUid? _vehicleInteriorsMap = null;
+    private EntityUid? _vehicleInteriorsMap = null; // TODO RMC: Need to reset these two on round restart.
     private int _interiorIndex = 0;
 
     public override void Initialize()
@@ -25,14 +25,16 @@ public sealed partial class VehicleSystem : SharedVehicleSystem
 
     private void OnSpawnVehicleInterior(Entity<VehicleComponent> ent, ref ComponentInit args)
     {
-        if (!HasComp<VehicleEnterComponent>(ent))
+        if (!TryComp<VehicleEnterComponent>(ent, out var enterComp))
             return; // No recursive map spawning please.
 
         if (_vehicleInteriorsMap is null)
             _vehicleInteriorsMap = _mapSystem.CreateMap();
 
         var vehicleInteriorsMapTransform = Transform((EntityUid)_vehicleInteriorsMap);
-        var interior = new ResPath("/Maps/_RMC14/Vehicles/vehicle_testing_interior_driving.yml"); // TODO: Change this to use the VehicleComponent to make it possible to change the vehicle interrior.
+
+        if (enterComp.InteriorPath is not { } interior)
+            return;
 
         if (!_mapLoader.TryLoadGrid(vehicleInteriorsMapTransform.MapID, interior, out var interiorGrid, offset: new Vector2(_interiorIndex * 100, _interiorIndex * 100)))
             return;

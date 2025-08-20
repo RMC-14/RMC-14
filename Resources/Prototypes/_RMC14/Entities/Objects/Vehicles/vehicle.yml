@@ -40,6 +40,7 @@
   description: test
   components:
   - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/vehicle_testing_interior_driving.yml
 
 - type: entity
   id: RMCVehicleExitArea
