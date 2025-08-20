@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 using System.Numerics;
 
 namespace Content.Server._RMC14.Vehicle;
-public sealed class VehicleSystem : SharedVehicleSystem
+public sealed partial class VehicleSystem : SharedVehicleSystem
 {
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
@@ -22,6 +22,7 @@ public sealed class VehicleSystem : SharedVehicleSystem
         base.Initialize();
 
         SubscribeLocalEvent<VehicleComponent, ComponentInit>(OnSpawnVehicleInterior);
+        InitializeVehicleMovement();
     }
 
     private void OnSpawnVehicleInterior(Entity<VehicleComponent> ent, ref ComponentInit args)

@@ -5,7 +5,18 @@
   - type: Vehicle
   - type: Clickable
   - type: Physics
-    bodyType: Static
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 1000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -16,6 +27,10 @@
     isCorrodible: false
   - type: MobMover
   - type: DoAfter
+  - type: InputMover
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1
 
 
 - type: entity

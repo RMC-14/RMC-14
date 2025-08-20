@@ -5,6 +5,8 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -23,6 +25,7 @@ public abstract class SharedVehicleSystem : EntitySystem
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedMoverController _mover = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     public override void Initialize()
@@ -157,14 +160,22 @@ public abstract class SharedVehicleSystem : EntitySystem
 
         var entComp = (other, comp);
 
+        _mover.SetRelay(args.Buckle.Owner, other);
+
         Watch(args.Buckle.Owner, entComp);
     }
+
     private void OnUnstrapped(Entity<VehicleDriverSeatComponent> ent, ref UnstrappedEvent args)
     {
         if (_net.IsClient && args.Buckle.Owner == _player.LocalEntity && _player.LocalSession != null)
             Unwatch(args.Buckle.Owner, _player.LocalSession);
         else if (TryComp(args.Buckle.Owner, out ActorComponent? actor))
             Unwatch(args.Buckle.Owner, actor.PlayerSession);
+
+        if (ent.Comp.Vehicle is not { } other)
+            return;
+
+        RemCompDeferred<MovementRelayTargetComponent>(other);
     }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<VehicleComponent?> toWatch) {}
