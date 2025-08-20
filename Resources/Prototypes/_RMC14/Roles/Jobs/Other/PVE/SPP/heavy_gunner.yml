@@ -1,6 +1,6 @@
 - type: job
   parent: CMJobBase
-  id: CMPMCGunnerPVE
+  id: RMCSPPHeavyGunnerPVE
   name: rmc-job-name-spp-gunner
   description: rmc-ghost-role-information-spp-pve-description
   playTimeTracker: RMCJobSPPHeavyGunnerPVE
