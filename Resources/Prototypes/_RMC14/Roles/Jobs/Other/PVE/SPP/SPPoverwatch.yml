@@ -3,7 +3,7 @@
   id: RMCSPPPlatCoPVE
   name: rmc-job-name-spp-overwatch
   description: rmc-ghost-role-information-spp-pve-description
-  playTimeTracker: RMCSPPPlatCoPVE
+  playTimeTracker: RMCJobSPPPlatCoPVE
   ranks:
     RMCRankSPPMladshiyLeytenant: []
   startingGear: RMCSPPPlatCoPVEGear
