@@ -57,5 +57,5 @@
       role: CMJobCommandingOfficer
       time: 252000 # 70 hours
   equipment:
-    pocket2:
+    Pocket2:
     - RMCPouchCORapierFilled
