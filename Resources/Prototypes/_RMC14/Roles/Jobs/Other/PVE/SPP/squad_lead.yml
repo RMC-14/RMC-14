@@ -6,7 +6,7 @@
   playTimeTracker: RMCSPPSquadLeadPVE
   ranks:
     RMCRankSPPSerzhant: []
-  startingGear: RMCJobSPPSquadLeadPVE
+  startingGear: RMCJobSPPSquadLeadPVEGear
   icon: "RMCJobIconSPPRifleman"
   joinNotifyCrew: false
   accessGroups:
@@ -52,7 +52,7 @@
     state: pmc_spawn
 
 - type: startingGear
-  id: RMCJobSPPSquadLeadPVE
+  id: RMCJobSPPSquadLeadPVEGear
   equipment:
     id: RMCIDSPP
     ears: RMCHeadsetSPP

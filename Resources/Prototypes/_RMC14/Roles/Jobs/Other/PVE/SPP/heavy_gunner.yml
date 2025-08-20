@@ -6,7 +6,7 @@
   playTimeTracker: RMCJobSPPHeavyGunnerPVE
   ranks:
     RMCRankSPPMladshiySerzhant: []
-  startingGear: RMCJobSPPHeavyGunnerPVE
+  startingGear: RMCJobSPPHeavyGunnerPVEGear
   icon: "RMCJobIconSPPEngineer"
   joinNotifyCrew: false
   accessGroups:
@@ -47,7 +47,7 @@
     state: spp_spawn
 
 - type: startingGear
-  id: RMCJobSPPHeavyGunnerPVE
+  id: RMCJobSPPHeavyGunnerPVEGear
   equipment:
     id: RMCIDSPP
     ears: RMCHeadsetSPP

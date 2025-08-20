@@ -6,7 +6,7 @@
   playTimeTracker: RMCJobSPPSectionLeadPVE
   ranks:
     RMCRankSPPStarshiySerzhant: []
-  startingGear: RMCJobSPPSectionLeadPVE
+  startingGear: RMCJobSPPSectionLeadPVEGear
   icon: "RMCJobIconSPPLeader"
   joinNotifyCrew: false
   accessGroups:
@@ -53,7 +53,7 @@
     state: spp_spawn
 
 - type: startingGear
-  id: RMCJobSPPSectionLeadPVE
+  id: RMCJobSPPSectionLeadPVEGear
   equipment:
     id: RMCIDSPP
     ears: RMCHeadsetSPP

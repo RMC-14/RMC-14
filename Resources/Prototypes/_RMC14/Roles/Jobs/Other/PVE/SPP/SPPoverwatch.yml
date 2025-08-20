@@ -6,7 +6,7 @@
   playTimeTracker: RMCSPPPlatCoPVE
   ranks:
     RMCRankSPPMladshiyLeytenant: []
-  startingGear: RMCSPPPlatCoPVE
+  startingGear: RMCSPPPlatCoPVEGear
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   accessGroups:
@@ -54,7 +54,7 @@
     state: spp_spawn
 
 - type: startingGear
-  id: RMCSPPPlatCoPVE
+  id: RMCSPPPlatCoPVEGear
   equipment:
     id: RMCIDSPP
     ears: RMCHeadsetSPP

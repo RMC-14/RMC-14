@@ -6,7 +6,7 @@
   playTimeTracker: RMCJobSPPSectionLeadPVE
   ranks:
    RMCRankSPPRyadovoy: []
-  startingGear: RMCJobSPPRiflemanPVE
+  startingGear: RMCJobSPPRiflemanPVEGear
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   accessGroups:
@@ -45,7 +45,7 @@
     job_id: RMCSPPRiflemanPVE
 
 - type: startingGear
-  id: RMCJobSPPRiflemanPVE
+  id: RMCJobSPPRiflemanPVEGear
   equipment:
     id: RMCIDSPP
     ears: RMCHeadsetSPP

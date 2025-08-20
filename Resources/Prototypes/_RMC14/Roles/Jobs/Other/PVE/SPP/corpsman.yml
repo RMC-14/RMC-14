@@ -6,7 +6,7 @@
   playTimeTracker: RMCJobSPPMedicPVE
   ranks:
     RMCRankSPPMladshiySerzhant: []
-  startingGear: RMCJobSPPCorpsmanPVE
+  startingGear: RMCJobSPPCorpsmanPVEGear
   icon: "RMCJobIconSPPMedic"
   joinNotifyCrew: false
   accessGroups:
@@ -47,7 +47,7 @@
     state: spp_spawn
 
 - type: startingGear
-  id: RMCJobSPPCorpsmanPVE
+  id: RMCJobSPPCorpsmanPVEGear
   equipment:
     id: RMCIDSPP
     ears: RMCHeadsetSPP
