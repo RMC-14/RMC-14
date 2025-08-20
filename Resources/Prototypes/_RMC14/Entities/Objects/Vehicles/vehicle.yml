@@ -5,18 +5,18 @@
   - type: Vehicle
   - type: Clickable
   - type: Physics
-    bodyType: KinematicController
+    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeCircle
-          radius: 0.35
+          !type:PhysShapeAabb
+          bounds: "-0.5,-1,0.5,1"
         density: 1000
         mask:
-        - MobMask
+        - LargeMobMask
         layer:
-        - MobLayer
+        - LargeMobLayer
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -29,8 +29,8 @@
   - type: DoAfter
   - type: InputMover
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 1
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
 
 
 - type: entity

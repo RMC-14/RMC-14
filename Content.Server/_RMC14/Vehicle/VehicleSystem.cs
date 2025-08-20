@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Ladder;
 using Content.Shared._RMC14.Vehicle;
 using Robust.Server.GameObjects;
 using Robust.Shared.EntitySerialization.Systems;
@@ -22,7 +21,6 @@ public sealed partial class VehicleSystem : SharedVehicleSystem
         base.Initialize();
 
         SubscribeLocalEvent<VehicleComponent, ComponentInit>(OnSpawnVehicleInterior);
-        InitializeVehicleMovement();
     }
 
     private void OnSpawnVehicleInterior(Entity<VehicleComponent> ent, ref ComponentInit args)
