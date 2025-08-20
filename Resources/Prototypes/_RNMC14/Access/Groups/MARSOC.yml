@@ -1,0 +1,10 @@
+- type: accessGroup
+  id: MARSOCAccessPVE
+  tags:
+  - CMAccessMARSOC
+
+- type: accessGroup
+  id: MARSOCSmartgunnerAccessPVE
+  tags:
+  - CMAccessMARSOC
+  - CMAccessMARSOCSmartgunner

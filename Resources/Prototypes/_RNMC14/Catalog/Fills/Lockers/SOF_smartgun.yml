@@ -1,0 +1,18 @@
+
+- type: entityTable
+  id: RMCSOFSmartgunFill
+  name: smartgunner locker
+  suffix: SOF Smartgunner
+  table: !type:AllSelector
+    children:
+    - id: RMCPowerCellSmartgun
+    - id: RMCPowerCellSmartgun
+    - id: RMCMagazineSmartGunirradiated
+    - id: RMCMagazineSmartGunirradiated
+    - id: RMCMagazineSmartGunirradiated
+    - id: RMCMagazineSmartGunirradiated
+    - id: RMCMagazineSmartGunirradiated
+    - id: CMArmorSmartGunCombatHarness
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunWhiteOut
+    - id: RMCPouchDrumPMC

@@ -1,0 +1,79 @@
+- type: job
+  parent: CMJobBase
+  id: CMSOFTeamLeaderPVE
+  name: rmc-job-name-marine-raider-leader
+  playTimeTracker: CMJobSOFTeamLeaderPVE
+  ranks:
+    RMCRankSergeant: []
+  startingGear: RMCGearSOFTeamLeader
+  dummyStartingGear: RMCGearMarineRaiderLeader
+  icon: RMCJobIconMarineRaider
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-co
+  accessGroups:
+  - CMAccessMARSOC
+  - ShipMasterAccess
+  overwatchSortPriority: -6
+  overwatchShowName: true
+  overwatchRoleName: SOF Team Leader
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillPowerLoader: 1
+        RMCSkillPilot: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: hudsquad_soctl_a
+    - type: Sleeping
+
+- type: playTimeTracker
+  id: CMJobSOFTeamLeaderPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointTeamLeaderSOF
+  name: SOF team leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSOFTeamLeaderPVE
+  - type: Sprite
+    state: marine_spawn
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagSOFTeamLeader
+  name: SOF Team Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSOFTeamLeaderPVE
+
+- type: startingGear
+  id: RMCGearSOFTeamLeader
+  equipment:
+    id: CMDogtagSOFTeamLeader

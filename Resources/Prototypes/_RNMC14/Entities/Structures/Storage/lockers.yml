@@ -9,3 +9,27 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCChapaevMachinegunnerFill
+
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: RMCClosetBaseZuluGear
+  name: smartgunner locker
+  description: An immobile storage unit.
+  suffix: PvE, MARSOC
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCSOFSmartgunFill
+
+- type: entity
+  parent: CMClosetBaseUnanchored
+  id: RMCClosetBaseZuluPersonalGear
+  name: personal locker
+  description: An immobile storage unit.
+  suffix: PvE, MARSOC
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCSOFPersonalFill

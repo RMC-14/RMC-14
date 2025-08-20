@@ -56,6 +56,7 @@
     heldPrefix: green
   - type: Access
     groups:
+    - CMSPPShipmasterAccess
     - ShipMasterAccess
     - Colony
     - Corp

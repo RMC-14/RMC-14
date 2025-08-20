@@ -1,0 +1,7 @@
+- type: accessLevel
+  id: CMAccessMARSOC
+  name: MARSOC
+
+- type: accessLevel
+  id: CMAccessMARSOCSmartgunner
+  name: MARSOC Smartgunner

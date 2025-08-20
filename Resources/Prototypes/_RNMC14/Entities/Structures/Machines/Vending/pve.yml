@@ -513,3 +513,240 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+
+
+ # MARSOC
+
+- type: entity
+  parent: ColMarTechSurplus
+  id: RMCMarsocTechSurplusPVE
+  name: SecretTech Surplus Uniform Vendor
+  description: An automated supply rack hooked up to a small storage of standard MARSOC uniforms. Very specops.
+  suffix: PVE, MARSOC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "RMCAccessSPPGeneral"
+    hackable: true
+    sections:
+    - name: Standard Equipment
+      entries:
+      - id: CMBootsBlackFilled
+        amount: 15
+      - id: RMCJumpsuitMarsoc
+        amount: 15
+      - id: RMCHandsCombat
+        amount: 15
+      - id: RMCHeadsetMARSOC
+        amount: 15
+      - id: RMCM5CameraGear
+        amount: 15
+    - name: Webbings
+      entries:
+      - id: CMWebbingBlack
+        name: Webbing, Black
+        amount: 10
+      - id: CMWebbingBrown
+        name: Webbing, Brown
+        amount: 10
+      - id: RMCWebbingLegPouch
+        name: Leg Pouch, Camo Conforming
+        amount: 10
+      - id: RMCWebbingLegPouchBlack
+        name: Leg Pouch, Black
+        amount: 10
+      - id: RMCWebbingDropPouch
+        amount: 2
+    - name: Armor
+      entries:
+      - id: RMCArmorHelmetMARSOC
+        amount: 15
+      - id: RMCArmorMARSOC
+        amount: 15
+    - name: Backpack
+      entries:
+      - id: RMCSatchelMARSOC
+        amount: 15
+    - name: Restricted Backpack
+      entries:
+      - id: RMCBackpackRTO
+        amount: 1
+    - name: Belts
+      entries:
+      - id: CMBeltMarine
+        amount: 15
+      - id: RMCBeltGrenade
+        amount: 10
+      - id: RMCBeltHolsterPistol
+        amount: 15
+      - id: RMCM82FHolster
+        amount: 5
+      - id: RMCBeltUtilityGeneral
+        amount: 5
+    - name: Pouches
+      entries:
+      - id: RMCPouchFirstAid
+        amount: 15
+      - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
+        amount: 15
+      - id: RMCPouchMagazineLarge
+        amount: 15
+      - id: RMCPouchGeneralLarge
+        amount: 15
+      - id: RMCPouchMagazinePistolLarge
+        amount: 15
+      - id: RMCPouchPistol
+        amount: 15
+    - name: Restricted Pouches
+      entries:
+      - id: RMCPouchConstruction
+        amount: 1
+      - id: RMCPouchExplosive
+        amount: 1
+      - id: RMCPouchFirstResponder
+        amount: 2
+      - id: RMCPouchToolsSocFill
+        amount: 1
+      - id: RMCPouchFuelTank
+        amount: 1
+      - id: RMCPouchShotgunLarge
+        amount: 1
+    - name: Mask
+      entries:
+      - id: CMMaskGas
+        amount: 15
+      - id: RMCMaskBalaclavaMARSOC
+        amount: 15
+      - id: RMCMaskTornScarfBlack
+        amount: 15
+      - id: RMCMaskScarfBlack
+        amount: 15
+    - name: Miscellaneous
+      entries:
+      - id: RMCGogglesBallistic
+        name: Ballistic goggles
+        amount: 10
+      - id: RMCGogglesBallisticBlack
+        name: Prescription ballistic goggles
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        amount: 15
+
+- type: entity
+  parent: ColMarTechUtilities
+  id: RMCMarsocUtilitiesPVE
+  name: SecretTech Automated Utilities Squad Vendor
+  description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any MARSOC Rifleman.
+  suffix: PVE, MARSOC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/prep.rsi
+  - type: CMAutomatedVendor
+    access:
+    - "RMCAccessSPPGeneral"
+    hackable: true
+    sections:
+    - name: Essential
+      entries:
+      - id: RMCVisorNightVision
+    - name: Food
+      entries:
+      - id: CMMRE
+        name: MRE
+        amount: 5
+    - name: Medical
+      entries:
+      - id: CMGauze10
+        amount: 15
+      - id: CMOintment10
+        amount: 15
+      - id: CMEmergencyAutoInjector
+        name: Emergency Autoinjector
+        amount: 15
+      - id: CMBicaridineAutoInjector
+        amount: 15
+      - id: CMKelotaneAutoInjector
+        amount: 15
+      - id: CMTricordrazineAutoInjector
+        amount: 15
+      - id: CMEpinephrineAutoInjector
+        amount: 15
+      - id: CMDexalinPlusAutoInjector
+        amount: 15
+      - id: CMInaprovalineAutoInjector
+        amount: 15
+      - id: CMPillCanisterBicaridine
+        amount: 15
+      - id: CMPillCanisterDexalin
+        amount: 15
+      - id: CMPillCanisterDylovene
+        amount: 15
+      - id: CMPillCanisterKelotane
+        amount: 15
+      - id: CMPillCanisterInaprovaline
+        amount: 15
+      - id: CMHealthAnalyzer
+        amount: 15
+      - id: CMSynthGraft
+        amount: 15
+      - id: CMSurgicalLine
+        amount: 15
+      - id: CMDefibrillator
+        amount: 15
+      - id: CMStasisBagFolded
+        amount: 15
+    - name: Tools
+      entries:
+      - id: CMEntrenchingTool
+        amount: 15
+      - id: CMScrewdriver
+        amount: 15
+      - id: CMWirecutter
+        amount: 15
+      - id: CMCrowbar
+        amount: 15
+      - id: CMWrench
+        amount: 15
+      - id: CMMultitool
+        name: Multitool
+        amount: 15
+      - id: CMWelder
+        amount: 15
+    - name: Explosives
+      entries:
+      - id: RMCExplosivePlastic
+        amount: 8
+      - id: RMCExplosiveBreachingCharge
+        amount: 4
+    - name: Flare and Light
+      entries:
+      - id: RMCBoxPackFlare
+        amount: 10
+    - name: Sidearms
+      entries:
+      - id: RMCGunCasePistolSmart
+        amount: 6
+      - id: RMCGunCasePistolMK80
+        amount: 6
+    - name: Miscellaneous
+      entries:
+      - id: CMFireExtinguisher
+        name: Extinguisher
+        amount: 15
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
+        amount: 15
+      - id: CMRollerBed
+        amount: 6
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
+        amount: 6
+      - id: RMCAttachmentRailFlashlight
+        amount: 15
+      - id: RMCAttachmentTwoPointSling
+        amount: 15
+      - id: RMCM5Bayonet
+        amount: 25

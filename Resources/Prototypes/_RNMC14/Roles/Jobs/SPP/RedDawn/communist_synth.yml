@@ -1,0 +1,155 @@
+- type: job
+  parent: CMJobBase
+  id: RMCJobSyntheticSPP
+  name: rmc-job-name-synth-commie
+  description: rmc-job-description-synth
+  playTimeTracker: RMCJobSyntheticCommunist
+  ranks:
+    RMCRankMasterSergeant: [ ]
+  startingGear: RMCGearSyntheticEquippedSPP
+  dummyStartingGear: RMCGearSyntheticEquippedSPP
+  icon: "RMCJobIconSPPSynth"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  whitelisted: true
+  supervisors: cm-job-supervisors-co-spp
+  accessGroups:
+  - CMSPPShipmasterAccess
+  - Synth
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 4
+        RMCSkillSurgery: 3
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 5
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 3
+        RMCSkillIntel: 2
+        RMCSkillDomestics: 2
+        RMCSkillNavigations: 1
+        RMCSkillSpecialistWeapons: 9
+        RMCSkillLeadership: 2
+    - type: CMVendorUser
+      points: 45
+    - type: MarineOrders
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-synth
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      canUseGuns: true
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      # TODO darksight instead of night vision
+      - type: NightVision
+        innate: true
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      - type: RMCLeapProtection
+        inherentStunDuration: 3
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
+      - type: RMCSuicide
+        damage: { }
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSyntheticEquippedSPP
+  equipment:
+    gloves: RMCHandsCombat
+    shoes: RMCBootsSPPBlackFilled
+    id: RMCIDCardSynthSPP
+    ears: RMCHeadsetSPP
+    belt: CMBeltUtilityFilled
+    suitstorage: RMCWeaponRifleType73
+    outerClothing: CMArmorSPP6b72
+    back: RMCWeaponShotgunType23
+    jumpsuit: RMCJumpsuitSPPWebbing
+    mask: CMMaskCoif
+    pocket2: RMCPouchExplosiveFilledHEFA
+    pocket1: RMCPouchShotgun
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSynthSPP
+  name: SPP synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCJobSynthetic
+  - type: Sprite
+    state: syn_spawn
+
+- type: playTimeTracker
+  id: RMCJobSyntheticCommunist
+  isHumanoid: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSynth
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_synth
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardSynthSPP
+  name: SPP synth ID card
+  components:
+  - type: PresetIdCard
+    job: RMCJobSyntheticSPP

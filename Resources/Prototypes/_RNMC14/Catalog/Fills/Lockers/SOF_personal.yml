@@ -1,0 +1,11 @@
+
+- type: entityTable
+  id: RMCSOFPersonalFill
+  name: personal locker
+  suffix: SOF Personal
+  table: !type:AllSelector
+    children:
+    - id: CMBootsBlackFilled
+    - id: RMCJumpsuitMarsoc
+    - id: RMCHandsCombat
+    - id: RMCHeadsetMARSOC

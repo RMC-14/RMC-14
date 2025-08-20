@@ -1,0 +1,12 @@
+- type: department
+  parent: CMDepartmentBase
+  id: CMSOF
+  name: department-CMSOF
+  description: cm-department-SOF
+  color: "#4148C8"
+  roles:
+  - CMSOFTeamLeaderPVE
+  - CMSOFRiflemanPVE
+  - CMSOFSmartgunPVE
+  departmentRadio: arineSOF
+  headOfDepartment: CMSOFTeamLeaderPVE

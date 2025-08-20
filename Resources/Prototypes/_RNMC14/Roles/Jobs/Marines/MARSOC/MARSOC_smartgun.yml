@@ -1,0 +1,79 @@
+- type: job
+  parent: CMJobBase
+  id: CMSOFSmartgunPVE
+  name: rmc-job-name-marine-raider-smartgun
+  playTimeTracker: CMJobSOFSmartgunPVE
+  ranks:
+    RMCRankSergeant: []
+  startingGear: RMCGearSOFSmartgun
+  dummyStartingGear: RMCGearMarineRaider
+  icon: RMCJobIconMarineRaider
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-co
+  accessGroups:
+  - CMAccessMARSOCSmartgunner
+  - ShipMasterAccess
+  overwatchSortPriority: -6
+  overwatchShowName: true
+  overwatchRoleName: SOF Smartgunner
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 2
+        RMCSkillSmartGun: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillPowerLoader: 1
+        RMCSkillPilot: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-gun-operator
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: hudsquad_soctl_a
+    - type: Sleeping
+
+- type: playTimeTracker
+  id: CMJobSOFSmartgunPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSmartgunSOF
+  name: SOF smartgunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSOFSmartgunPVE
+  - type: Sprite
+    state: marine_spawn
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagSOFSmartgun
+  name: SOF Smartgunner's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSOFSmartgunPVE
+
+- type: startingGear
+  id: RMCGearSOFSmartgun
+  equipment:
+    id: CMDogtagSOFSmartgun

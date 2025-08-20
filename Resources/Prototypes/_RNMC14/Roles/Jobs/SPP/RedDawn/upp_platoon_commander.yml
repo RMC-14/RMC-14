@@ -1,27 +1,30 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMPlatoonCommanderPVE
+  id: CMSSPPlatoonCommanderPVE
   name: cm-job-name-platoon-commander
   description: cm-job-description-platoon-commander
-  playTimeTracker: CMJobPlatoonCommanderPVE
+  playTimeTracker: CMJobSSPPlatoonCommanderPVE
   ranks:
-    RMCRankFirstLT:
+    RMCRankSPPStarshiyLeytenant:
     - !type:RoleTimeRequirement
-      role: CMJobPlatoonCommanderPVE
+      role: CMJobSSPPlatoonCommanderPVE
       time: 36000 # 10 hours
-    RMCRankSecondLT: []
+    RMCRankSPPMladshiyLeytenant: []
   weight: 5
-  startingGear: CMGearPlatco
-  icon: "CMJobIconPlatoonCommander"
+  startingGear: RMCGearSPPPlatoonCommander
+  icon: "RMCJobIconSPPPlatco"
   requireAdminNotify: true
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - CMAccessPlatco
+  - CMSPPShipmasterAccess
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -57,29 +60,36 @@
         sprite: _RMC14/Interface/map_blips.rsi
         state: platco
 
-- type: startingGear
-  id: CMGearPlatco
-  equipment:
-    id: CMIDCardPlatoonCommander
-
-- type: entity
-  parent: CMIDCardSilver
-  id: CMIDCardPlatoonCommander
-  name: platoon commander ID card
-  components:
-  - type: PresetIdCard
-    job: CMPlatoonCommanderPVE
-
 - type: playTimeTracker
-  id: CMJobPlatoonCommanderPVE
+  id: CMJobSSPPlatoonCommanderPVE
   isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointPlatcoSunRiders
-  name: sun riders platoon commander spawn point
+  id: CMSpawnPointPlatcoRedDawn
+  name: red dawn platoon commander spawn point
   components:
   - type: SpawnPoint
-    job_id: CMPlatoonCommanderPVE
+    job_id: CMSSPPlatoonCommanderPVE
   - type: Sprite
     state: marine_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPPlatco
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_slt
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagPlatoonCommanderSPP
+  name: Platoon Commander's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSPPPlatoonCommanderPVE
+
+- type: startingGear
+  id: RMCGearSPPPlatoonCommander
+  equipment:
+    id: CMDogtagPlatoonCommanderSPP
