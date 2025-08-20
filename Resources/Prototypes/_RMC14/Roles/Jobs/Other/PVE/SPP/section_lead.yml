@@ -3,7 +3,7 @@
   id: RMCSPPSectionLeadPVE
   name: rmc-job-name-spp-sectionsergeant
   description: rmc-ghost-role-information-spp-pve-description
-  playTimeTracker: CMJobSPPSectionLeadPVE
+  playTimeTracker: RMCJobSPPSectionLeadPVE
   ranks:
     RMCRankSPPStarshiySerzhant: []
   startingGear: RMCJobSPPSectionLeadPVE

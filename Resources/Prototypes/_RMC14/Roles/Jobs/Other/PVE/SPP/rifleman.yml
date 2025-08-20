@@ -3,7 +3,7 @@
   id: RMCSPPRiflemanPVE
   name: rmc-job-name-spp-rifleman
   description: rmc-ghost-role-information-spp-pve-description
-  playTimeTracker: RMCJobSPPRiflemanPVE
+  playTimeTracker: RMCJobSPPSectionLeadPVE
   ranks:
    RMCRankSPPRyadovoy: []
   startingGear: RMCJobSPPRiflemanPVE

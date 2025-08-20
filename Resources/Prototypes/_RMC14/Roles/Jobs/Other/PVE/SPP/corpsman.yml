@@ -3,7 +3,7 @@
   id: RMCSPPCorpsmanPVE
   name: rmc-job-name-spp-corpsman
   description: rmc-ghost-role-information-spp-pve-description
-  playTimeTracker: CMJobSPPMedicPVE
+  playTimeTracker: RMCJobSPPMedicPVE
   ranks:
     RMCRankSPPMladshiySerzhant: []
   startingGear: RMCJobSPPCorpsmanPVE

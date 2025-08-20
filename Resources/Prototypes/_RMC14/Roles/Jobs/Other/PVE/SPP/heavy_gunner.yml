@@ -41,7 +41,7 @@
   suffix: PVE
   components:
   - type: SpawnPoint
-    job_id: RMCSpawnPointSPPGunnerPVE
+    job_id: RMCSPPHeavyGunnerPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: spp_spawn
