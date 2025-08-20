@@ -37,6 +37,10 @@
     damageContainer: Xeno
   - type: Destructible
     thresholds: []
+  - type: RMCMedicalExamine
+    simple: true
+    deadText: rmc-medical-examine-dead-xeno
+  - type: RMCBlockMedicalExamine
   - type: MobState
     allowedStates:
     - Alive
@@ -322,11 +326,11 @@
     - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
-    mode: Queen
     trackerModes:
     - Queen
     - HiveLeader
     - Tunnel
+    - HiveCore
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
@@ -339,10 +343,10 @@
   - type: MotionDetectorTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
   - type: Evasion
@@ -384,6 +388,7 @@
     whitelist:
       components:
       - Marine
+  - type: EmoteCooldown
 
 - type: entity
   abstract: true

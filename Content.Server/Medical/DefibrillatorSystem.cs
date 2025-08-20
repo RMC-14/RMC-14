@@ -196,9 +196,6 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        if (!_powerCell.TryUseActivatableCharge(uid, user: user))
-            return;
-
         var selfEvent = new SelfBeforeDefibrillatorZapsEvent(user, uid, target);
         RaiseLocalEvent(user, selfEvent);
 
@@ -218,6 +215,10 @@ public sealed class DefibrillatorSystem : EntitySystem
 
         if (!TryComp<MobStateComponent>(target, out var mob) ||
             !TryComp<MobThresholdsComponent>(target, out var thresholds))
+            return;
+
+        // RMC14 to fix last charge not being usable
+        if (!_powerCell.TryUseActivatableCharge(uid, user: user))
             return;
 
         _audio.PlayPvs(component.ZapSound, uid);

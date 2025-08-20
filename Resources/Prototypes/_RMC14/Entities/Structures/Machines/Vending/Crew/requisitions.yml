@@ -56,7 +56,7 @@
       #  amount: 2
       - id: RMCCaseFlamer
         amount: 2
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         amount: 3
       - id: RMCXM51Case
         amount: 3
@@ -97,6 +97,10 @@
       - id: CMWebbingBrown
         amount: 2
       - id: CMWebbingBlack
+        amount: 2
+      - id: RMCWebbingLegPouch
+        amount: 2
+      - id: RMCWebbingLegPouchBlack
         amount: 2
       - id: CMWebbing
         amount: 5
@@ -598,7 +602,7 @@
         amount: 10
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5
@@ -674,7 +678,7 @@
         amount: 40
     - name: Radio
       entries:
-      - id: CMHeadset
+      - id: RMCHeadsetShip
         amount: 5
       - id: CMEncryptionKeyAlpha
         amount: 5
@@ -731,3 +735,9 @@
       - id: RMCPatchUnitedNationsSquare
         name: United Nations flag shoulder patch
         amount: 15
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+        amount: 10
+      - id: RMCGuidebookSOP
+        amount: 10

@@ -1,0 +1,44 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_by_faction/uscm.dmi colors edited",
+    "states": [
+        {
+            "name": "base"
+        },
+        {
+            "name": "base-1"
+        },
+        {
+            "name": "base-2"
+        },
+        {
+            "name": "base-3"
+        },
+        {
+            "name": "base-4"
+        },
+        {
+            "name": "base-5"
+        },
+        {
+            "name": "base-unshaded-1"
+        },
+        {
+            "name": "base-unshaded-2"
+        },
+        {
+            "name": "base-unshaded-3"
+        },
+        {
+            "name": "base-unshaded-4"
+        },
+        {
+            "name": "base-unshaded-5"
+        }
+    ]
+}

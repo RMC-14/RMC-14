@@ -1,0 +1,76 @@
+- type: entity
+  parent: CMWeaponPistolM1984
+  id: RMCWeaponPistolL54
+  name: L54 service pistol # TSE service pistol - same stats as the M1984
+  description: Standard issue semi-automatic service pistol of the TSEPA. Chambered in 9mm, it is comparable to the popular M1984 pistol utilized by the UNMC.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolL54
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54.rsi
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mk80.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolL54
+        startingItem: RMCMagazinePistolL54
+
+- type: entity
+  parent: RMCWeaponPistolT73
+  id: RMCWeaponPistolL54Empty
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolT73
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolL54
+  name: L54 magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolL54
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistol9mm
+    proto: CMCartridgePistol9mm
+    capacity: 12
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l54.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+
+- type: Tag
+  id: RMCWeaponPistolL54
+
+- type: Tag
+  id: RMCMagazinePistolL54

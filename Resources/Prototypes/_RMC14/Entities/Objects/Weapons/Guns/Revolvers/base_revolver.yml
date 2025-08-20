@@ -43,9 +43,9 @@
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
     soundEject:
-      path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_44mag_open_chamber.ogg
     soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_44mag_speed_loader.ogg
   - type: Appearance
   - type: RMCNameItemOnVend
     item: Sidearm

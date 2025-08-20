@@ -573,7 +573,6 @@
   - AccessoriesRMC
   - PaperworkRMC
   - RecreationalRMC
-  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -582,12 +581,14 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - CivilianOnlyRMC
 
 - type: roleLoadout
   id: JobCMLiaison
   points: 7
   groups:
   - MarineLeatherBackpack
+  - LiaisonRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
@@ -595,7 +596,6 @@
   - AccessoriesRMC
   - PaperworkRMC
   - RecreationalRMC
-  - PlushiesRMC
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
@@ -604,6 +604,7 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
   - SmokablesRMC
+  - CivilianOnlyRMC
 
 - type: roleLoadout
   id: JobCMMessTech
@@ -707,6 +708,135 @@
   - WeaponsRMC
   - CannedDrinksRMC
   - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+
+# Survivors
+# They don't have access to some loadout categories
+- type: roleLoadout
+  id: JobCMSurvivor
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobRMCJobSyntheticColony
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorCorporate
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorDoctor
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorEngineer
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorScientist
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobCMSurvivorSecurity
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+  - SmokablesRMC
+  - CivilianOnlyRMC
+
+- type: roleLoadout
+  id: JobRMCSurvivorCommandingOfficer
+  points: 7
+  groups:
+  - EyewearRMC
+  - MasksRMC
+  - PaperworkRMC
+  - RecreationalRMC
+  - CannedDrinksRMC
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC

@@ -8,6 +8,7 @@
   dummyStartingGear: CMGearRiflemanEquipped
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+  marineAuthorityLevel: 1
   supervisors: cm-job-supervisors-sl
   ranks:
     RMCRankLanceCorporal:
@@ -37,7 +38,7 @@
       prefix: cm-job-prefix-rifleman
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: private
 
 - type: startingGear

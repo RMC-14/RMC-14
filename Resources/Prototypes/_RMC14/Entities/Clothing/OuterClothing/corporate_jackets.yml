@@ -118,3 +118,14 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cl_fur_coat.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cl_fur_coat.rsi
+
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCVestBrown
+  name: brown vest
+  description: A casual tan vest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/brown_vest.rsi
