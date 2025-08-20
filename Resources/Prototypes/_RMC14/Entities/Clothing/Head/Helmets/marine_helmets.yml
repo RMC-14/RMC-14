@@ -117,7 +117,7 @@
     visorsToAdd:
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
-    
+
 
 - type: entity
   parent: CMArmorHelmetM10Medic
@@ -158,6 +158,24 @@
     visorsToAdd:
     - RMCVisorSquadIntegrated
     - RMCVisorWeldingIntegrated
+
+- type: entity
+  parent: CMArmorHelmetM10Tech
+  id: CMArmorHelmetM50
+  name: M50 tanker helmet
+  description: The lightweight M50 tanker helmet is designed for use by armored crewmen in the USCM. It offers low weight protection, and allows agile movement inside the confines of an armored vehicle. Features a toggleable welding screen for eye protection.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m50/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m50/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m50/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m50/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m50/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m50/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m50/urban.rsi
 
 - type: entity
   parent: ArmorHelmetM10

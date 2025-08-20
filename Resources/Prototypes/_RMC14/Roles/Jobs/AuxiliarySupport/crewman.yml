@@ -1,0 +1,81 @@
+﻿- type: job
+  parent: CMJobSquadBase
+  id: CMVehicleCrewman
+  name: cm-job-name-vc
+  description: cm-job-description-vc
+  playTimeTracker: CMJobVehicleCrewman
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 36000 # 10 hours
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankCorporal: []
+  startingGear: CMGearVC
+  icon: "CMJobIconVehicleCrewman"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-co
+  accessGroups:
+  - VehicleCrewman
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 1
+        RMCSkillVehicles: 3
+        RMCSkillPowerLoader: 2
+        RMCSkillOverwatch: 1
+    - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-vc
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadEcho
+    - type: SquadArmorWearer
+    - type: SquadNameOverride
+      name: cm-job-name-vc
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: vc
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_intel
+  hidden: false #TODO RMC14
+
+- type: startingGear
+  id: CMGearVC
+  equipment:
+    jumpsuit: CMJumpsuitMarineTanker
+    shoes: CMBootsBlackFilled
+    id: CMDogtagCrewman
+    ears: CMHeadsetCrewman
+    outerClothing: CMCoatTanker
+    back: CMSatchelMarine
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointCrewman
+  name: vehicle crewman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMVehicleCrewman
+  - type: Sprite
+    state: vc_spawn
+
+- type: playTimeTracker
+  id: CMJobVehicleCrewman
+  isHumanoid: true
