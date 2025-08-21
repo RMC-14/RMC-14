@@ -12,7 +12,7 @@
   ranks:
     RMCRankGunnerySergeant: [ ]
   accessGroups:
-  - CMAccessMARSOC
+  - MARSOCAccessPVE
   - ShipMasterAccess
   hasIcon: false
   roleWeight: 1

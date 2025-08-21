@@ -11,7 +11,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - CMAccessMARSOC
+  - MARSOCAccessPVE
   - ShipMasterAccess
   overwatchSortPriority: -6
   overwatchShowName: true
@@ -50,6 +50,10 @@
         sprite: _RMC14/Interface/map_blips.rsi
         state: hudsquad_soctl_a
     - type: Sleeping
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: hudsquad_soctl_a
 
 - type: playTimeTracker
   id: CMJobSOFTeamLeaderPVE

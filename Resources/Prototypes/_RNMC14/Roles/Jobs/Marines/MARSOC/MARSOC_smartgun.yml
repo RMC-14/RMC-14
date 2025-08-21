@@ -11,7 +11,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - CMAccessMARSOCSmartgunner
+  - MARSOCSmartgunnerAccessPVE
   - ShipMasterAccess
   overwatchSortPriority: -6
   overwatchShowName: true
