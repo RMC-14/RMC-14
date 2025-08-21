@@ -3,8 +3,8 @@
 - type: entity
   parent: RNMCVehicleSmallBase
   id: RNMCVehicleSmallSpeedBuggy
-  name: speed buggy # TODO RMC14 name
-  description: A speedy buggy. You can go almost anywhere with it. # TODO RMC14 description
+  name: speed buggy
+  description: A speedy buggy. You can go almost anywhere with it.
   components:
   - type: RMCAllowStrapMovement
   - type: PowerLoader
