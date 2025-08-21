@@ -22,7 +22,7 @@
     - state: light-speed-buggy
       shader: unshaded
       visible: false
-      map: [ "light" ] # Somehow, it doesn't show up when an user turns on the light.
+      map: [ "light" ]
   - type: SpriteMovement
     movementLayers:
       movement:
@@ -33,7 +33,7 @@
   - type: Construction
     graph: RNMCSpeedBuggy
     node: speedBuggy
-  - type: ToggleableVisuals # Somehow, it doesn't show up when an user turns on the light.
+  - type: ToggleableVisuals
     spriteLayer: light
   - type: HandheldLight
     blinkingBehaviourId: blinking
