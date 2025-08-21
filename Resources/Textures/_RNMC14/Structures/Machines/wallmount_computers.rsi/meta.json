@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/JeserTheFox/cmss13/blob/8b53d19e444edb5cb0fdc14296541810b353b9aa/icons/obj/vehicles/interiors/general.dmi and modified by Merrokitsune for RNMC-14.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+    "states": [
+        {
+            "name": "computer",
+            "directions": 4
+        },
+        {
+            "name": "broken",
+            "directions": 4
+        },
+        {
+            "name": "generic",
+            "directions": 4
+        },
+        {
+            "name": "generic_keyboard",
+            "directions": 4
+        }
+    ]
+}

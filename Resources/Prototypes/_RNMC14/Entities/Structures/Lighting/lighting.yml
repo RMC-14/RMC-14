@@ -1,0 +1,126 @@
+# Light Bulb, Always powered
+- type: entity
+  parent: CMLightFixtureSmallAlwaysPowered
+  id: RNMCLightFixtureSmallRedAlwaysPowered
+  suffix: Red, Always Powered
+  components:
+  - type: Sprite # Temporary until I (or someone else) can come up with extra sprites.
+    state: bulb1
+    layers:
+    - state: bulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    energy: 1.0
+    radius: 6
+    softness: 1.1
+    enabled: true
+    color: "#FF0000"
+  - type: PoweredLightVisuals
+    spriteStateMap: # Temporary until I (or someone else) can come up with extra sprites.
+      Empty: bulb-empty
+      Off: bulb0
+      On: bulb1
+      Broken: bulb-broken
+      Burned: bulb-burned
+
+- type: entity
+  parent: CMLightFixtureSmallAlwaysPowered
+  id: RNMCLightFixtureSmallGreenAlwaysPowered
+  suffix: Green, Always Powered
+  components:
+  - type: Sprite # Temporary until I (or someone else) can come up with extra sprites.
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    energy: 1.0
+    radius: 6
+    softness: 1.1
+    enabled: true
+    color: "#00FF00"
+  - type: PoweredLightVisuals
+    spriteStateMap: # Temporary until I (or someone else) can come up with extra sprites.
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned
+
+# Light Bulb, Empty
+- type: entity
+  parent: CMLightFixtureSmallEmpty
+  id: RNMCLightFixtureSmallRedEmpty
+  suffix: Red, Empty
+  components:
+  - type: Sprite # Temporary until I (or someone else) can come up with extra sprites.
+    state: bulb1
+    layers:
+    - state: bulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap: # Temporary until I (or someone else) can come up with extra sprites.
+      Empty: bulb-empty
+      Off: bulb0
+      On: bulb1
+      Broken: bulb-broken
+      Burned: bulb-burned
+
+- type: entity
+  parent: CMLightFixtureSmallEmpty
+  id: RNMCLightFixtureSmallGreenEmpty
+  suffix: Green, Empty
+  components:
+  - type: Sprite
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned
+
+# Light Bulb
+- type: entity
+  parent: CMLightFixtureSmall
+  id: RNMCLightFixtureSmallRed
+  suffix: Red, RNMC # Added the RNMC tag to prevent confusion with the existing CMLightFixtureSmallRed prototype. RNMCLightFixtureSmallRed actually creates red light.
+  components:
+  #- type: Sprite # Temporary until I (or someone else) can come up with extra sprites.
+  #  state: bbulb1
+  #  layers:
+  #  - state: bbulb1
+  #    map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RNMCLightBulbRed
+  #- type: PoweredLightVisuals
+  #  spriteStateMap: # Temporary until I (or someone else) can come up with extra sprites.
+  #    Empty: bbulb-empty
+  #    Off: bbulb0
+  #    On: bbulb1
+  #    Broken: bbulb-broken
+  #    Burned: bbulb-burned
+
+- type: entity
+  parent: CMLightFixtureSmall
+  id: RNMCLightFixtureSmallGreen
+  suffix: Green
+  components:
+  - type: Sprite # Temporary until I (or someone else) can come up with extra sprites.
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLight
+    hasLampOnSpawn: RNMCLightBulbGreen
+  - type: PoweredLightVisuals
+    spriteStateMap: # Temporary until I (or someone else) can come up with extra sprites.
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned

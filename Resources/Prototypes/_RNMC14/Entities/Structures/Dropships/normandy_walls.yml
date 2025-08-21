@@ -80,3 +80,27 @@
     state: "6"
   - type: Occluder
     enabled: false
+
+- type: entity
+  parent: RNMCBaseNormandyWall
+  id: RNMCNormandyWall7
+  suffix: RNMC, 7
+  components:
+  - type: Sprite
+    state: "7"
+  - type: Icon
+    state: "7"
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RNMCBaseNormandyWall
+  id: RNMCNormandyWall8
+  suffix: RNMC, 8
+  components:
+  - type: Sprite
+    state: "8"
+  - type: Icon
+    state: "8"
+  - type: Occluder
+    enabled: false
