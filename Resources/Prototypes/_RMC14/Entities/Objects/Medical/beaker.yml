@@ -151,7 +151,7 @@
   parent: RMCBeakerBaseMetallic
   id: RMCBeakerHighCapacity
   name: high-capacity beaker
-  description: A beaker with an enlarged holding capacity, made with blue-tinted plexiglass in order to withstand greater pressure. Can hold up to 300 units.
+  description: A beaker with an enlarged holding capacity, made with blue-tinted plexiglass in order to withstand greater pressure. Can hold up to 500 units.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/high_capacity_beaker.rsi
@@ -168,13 +168,13 @@
   - type: SolutionContainerManager
     solutions:
       beaker:
-        maxVol: 300
+        maxVol: 500
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: beakerbluespace
   - type: SolutionTransfer
     transferAmount: 100
-    maxTransferAmount: 300
+    maxTransferAmount: 500
     canChangeTransferAmount: true
     transferAmounts:
     - 5
@@ -190,6 +190,7 @@
     - 120
     - 240
     - 300
+    - 500
   - type: Openable
     opened: true
     closeable: true
