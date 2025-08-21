@@ -6,6 +6,7 @@
   name: speed buggy # TODO RMC14 name
   description: A speedy buggy. You can go almost anywhere with it. # TODO RMC14 description
   components:
+  - type: RMCAllowStrapMovement
   - type: PowerLoader
     skills:
       all:
