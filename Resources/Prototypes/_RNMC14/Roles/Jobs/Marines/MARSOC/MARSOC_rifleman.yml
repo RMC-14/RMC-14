@@ -10,7 +10,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   ranks:
-    RMCRankGunnerySergeant: [ ]
+    RMCRankSergeant: []
   accessGroups:
   - MARSOCAccessPVE
   - ShipMasterAccess
