@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added ear deafness, certain loud noises will prevent you from hearing
-      chat and sounds.
-    type: Add
-  id: 1701
-  time: '2025-05-10T03:58:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6279
 - author: Vermidia
   changes:
   - message: Fixed how stamina works. It's been overhauled, so you can no longer shake
@@ -4605,5 +4597,12 @@
   id: 2201
   time: '2025-08-21T23:01:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7307
+- author: BadaBoomie
+  changes:
+  - message: Fixes a minor typo in the supreme taco
+    type: Fix
+  id: 2202
+  time: '2025-08-21T23:52:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7529
 Name: RMC14
 Order: -1
