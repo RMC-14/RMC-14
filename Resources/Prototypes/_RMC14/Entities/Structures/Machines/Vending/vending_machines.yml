@@ -248,6 +248,12 @@
   id: CMVendorCigs
   startingInventory:
     RMCCigarettePackLuckySloths: 50
+    RMCCigarettePackArcturianAce: 50
+    RMCCigarettePackLadyFingers: 50
+    RMCCigarettePackEmeraldGreens: 50
+    RMCCigarettePackElectroGolds: 50
+    RMCCigarettePackSolRedsTurquoise: 25
+    RMCCigarettePackSolRedsYellow: 25
     RMCTarbackTube: 20
     RMCMatchboxFull: 15
     RMCLighter: 25
