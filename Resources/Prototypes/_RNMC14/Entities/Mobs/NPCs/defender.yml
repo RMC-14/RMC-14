@@ -32,10 +32,8 @@
       400: Dead
 
 - type: entity
-  parent: CMXenoWarriorNPC
-  id: CMXenoWarriorNPCStrong
-  name: Warrior
-  description: A beefy alien with an armored carapace.
+  parent: CMXenoDefenderNPC
+  id: CMXenoDefenderNPCStrong
   suffix: AI, Strong
   components:
   - type: MobThresholds

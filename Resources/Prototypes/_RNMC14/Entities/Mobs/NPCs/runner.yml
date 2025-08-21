@@ -49,7 +49,7 @@
 
 - type: entity
   parent: CMXenoRunnerNPC
-  id: CMXenoRunnerNPCStrong
+  id: CMXenoRunnerNPCOverpowered
   suffix: AI, OVERPOWERED
   components:
   - type: MobThresholds

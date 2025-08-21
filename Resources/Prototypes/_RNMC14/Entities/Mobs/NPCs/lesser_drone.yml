@@ -30,7 +30,7 @@
 
 - type: entity
   parent: CMXenoLesserDroneNPC
-  id: CMXenoLesserDroneNPCWeak
+  id: CMXenoLesserDroneNPCStrong
   suffix: AI, Strong
   components:
   - type: MobThresholds
