@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Added functionality for CQC skill. CQC skill will now allow you to do
-      aggressive grabs faster, do extra unarmed damage, let you disarm/tackle other
-      marines better, and decrease inventory strip times.
-    type: Add
-  id: 1700
-  time: '2025-05-10T03:54:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6359
-- author: Dutch-VanDerLinde
-  changes:
   - message: Added ear deafness, certain loud noises will prevent you from hearing
       chat and sounds.
     type: Add
@@ -4601,5 +4592,18 @@
   id: 2200
   time: '2025-08-19T17:52:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7542
+- author: SharkSnake98
+  changes:
+  - message: Added a significant amount of clothing items.
+    type: Add
+  - message: Added a large collection of items to the Liaison's Wardrobe.
+    type: Add
+  - message: Added clothing loadout items to the respective loadouts.
+    type: Add
+  - message: Changed/resprited the rounded prescription glasses/hippie glasses.
+    type: Tweak
+  id: 2201
+  time: '2025-08-21T23:01:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7307
 Name: RMC14
 Order: -1
