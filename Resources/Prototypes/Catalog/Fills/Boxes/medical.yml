@@ -7,7 +7,7 @@
   - type: StorageFill
     contents:
       - id: Syringe
-        amount: 6
+        amount: 0 # RMC bugfix
   - type: Sprite
     layers:
       - state: box
