@@ -41,7 +41,6 @@
         RMCSkillPilot: 1
     - type: MarineOrders
     - type: SquadArmorWearer
-      leader: true
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-gun-operator
