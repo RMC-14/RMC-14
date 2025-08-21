@@ -1,7 +1,7 @@
 - type: entity
   parent: CMXenoRavager
   id: CMXenoRavagerNPC
-  suffix: AI
+  suffix: AI, Original
   components:
   - type: Xeno
     role: CMXenoRavagerNPC
@@ -17,3 +17,44 @@
         30
       AggroVisionRadius: !type:Single
         30
+
+- type: entity
+  parent: CMXenoRavagerNPC
+  id: CMXenoRavagerNPCWeak
+  suffix: AI, Weak
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      600: Dead
+      500: Critical
+
+- type: entity
+  parent: CMXenoRavagerNPC
+  id: CMXenoRavagerNPCStrong
+  suffix: AI, Strong
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      1000: Dead
+      900: Critical
+
+- type: entity
+  parent: CMXenoRavagerNPC
+  id: CMXenoRavagerNPCBOSSFIGHT
+  suffix: AI, !!!BOSS FIGHT!!!
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      2000: Dead
+      1900: Critical
+  - type: Tag
+    tags:
+    - FootstepSound
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: XenoFootstepLarge
+      params:
+        volume: -6
