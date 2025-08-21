@@ -1,0 +1,82 @@
+- type: job
+  parent: CMJobBase
+  id: CMSPPMachinegunnerPVE
+  name: cm-job-name-machinegunner
+  description: cm-job-description-smart-gun-operator
+  playTimeTracker: CMJobSPPMachinegunnerPVE
+  ranks:
+    RMCRankSPPStarshiySerzhant:
+    - !type:RoleTimeRequirement
+      role: CMJobSPPMachinegunnerPVE
+      time: 21600 # 6 hours, roughly 2 and a half ops
+    RMCRankSPPSerzhant:
+    - !type:RoleTimeRequirement
+      role: CMJobSPPMachinegunnerPVE
+      time: 7200 # 2 hours, roughly one op
+    RMCRankSPPMladshiySerzhant: []
+  startingGear: RMCGearSPPMachinegunner
+  dummyStartingGear: CMGearSmartGunOperator
+  icon: "RMCJobIconSPPSpecialist"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  accessGroups:
+  - CMSPPMachinegunnerAccess
+  overwatchSortPriority: -3
+  overwatchShowName: true
+  overwatchRoleName: Machinegunner
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillSmartGun: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-machinegunner
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: smartgunner
+
+- type: playTimeTracker
+  id: CMJobSPPMachinegunnerPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointMachinegunnerRedDawn
+  name: red dawn machinegunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSPPMachinegunnerPVE
+  - type: Sprite
+    state: marine_spawn
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagMachinegunnerSPP
+  name: Machinegunner's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSPPMachinegunnerPVE
+
+- type: startingGear
+  id: RMCGearSPPMachinegunner
+  equipment:
+    id: CMDogtagMachinegunnerSPP

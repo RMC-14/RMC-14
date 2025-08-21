@@ -1,0 +1,18 @@
+- type: gameMap
+  id: Zulu
+  mapName: "Base Zulu"
+  mapPath: /Maps/_RNMC14/base_zulu.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    Zulu:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Base Zulu'
+        - type: StationJobs
+          availableJobs:
+            CMSOFTeamLeaderPVE: [1, 1]
+            CMSOFRiflemanPVE: [4, 4]
+            CMSOFSmartgunPVE: [ 1, 1 ]

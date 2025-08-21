@@ -1,0 +1,75 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMSOFRiflemanPVE
+  name: rmc-job-name-marine-raider
+  description: cm-job-description-rifleman
+  playTimeTracker: CMJobSOFRiflemanPVE
+  startingGear: RMCGearSOFRifleman
+  dummyStartingGear: RMCGearMarineRaider
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  ranks:
+    RMCRankGunnerySergeant: [ ]
+  accessGroups:
+  - MARSOCAccessPVE
+  - ShipMasterAccess
+  hasIcon: false
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 2
+        RMCSkillFireman: 3
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillFirearms: 2 # yes this is PVE parity
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: private
+    - type: Sleeping
+
+- type: playTimeTracker
+  id: CMJobSOFRiflemanPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRiflemanSOF
+  name: SOF rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSOFRiflemanPVE
+  - type: Sprite
+    state: marine_spawn
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagSOFRifleman
+  name: SOF Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSOFRiflemanPVE
+
+- type: startingGear
+  id: RMCGearSOFRifleman
+  equipment:
+    id: CMDogtagSOFRifleman
