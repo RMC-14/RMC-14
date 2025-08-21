@@ -799,12 +799,12 @@ public override void Initialize()
         }
 
         var status = TacticalMapBlipStatus.Alive;
-        if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
-            status = TacticalMapBlipStatus.Undefibabble;
-        else if (_mobState.IsDead(ent))
+        if (_mobState.IsDead(ent))
         {
             var stage = _unrevivableSystem.GetUnrevivableStage(ent.Owner, 5);
-            if (stage <= 1)
+            if (_rottingQuery.HasComp(ent) || _unrevivableSystem.IsUnrevivable(ent))
+                status = TacticalMapBlipStatus.Undefibabble;
+            else if (stage <= 1)
                 status = TacticalMapBlipStatus.Defibabble;
             else if (stage == 2)
                 status = TacticalMapBlipStatus.Defibabble2;

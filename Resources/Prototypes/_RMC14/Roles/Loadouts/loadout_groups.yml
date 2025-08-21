@@ -364,6 +364,15 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+# Corporate Liaison
+- type: loadoutGroup
+  id: LiaisonRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - DrinkCanAleRMC
+
 # Chief MP
 - type: loadoutGroup
   id: ChiefMPRoleSpecificRMC
