@@ -11,4 +11,4 @@ CMJobSectionSergeant = Section Sergeant
 
 # SOF
 
-cm-job-name-marine-raider-smartgun = Marine Raider Smartgunner
+rmc-job-name-marine-raider-smartgun = Marine Raider Smartgunner
