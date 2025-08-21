@@ -1,136 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed large amount of xenonid eggs on one spot lagging the client.
-    type: Fix
-  id: 1686
-  time: '2025-05-05T00:42:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6352
-- author: CyberTropic
-  changes:
-  - message: Fixed Shiva loading error.
-    type: Fix
-  id: 1687
-  time: '2025-05-07T23:37:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6371
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added shockwave effect to the HE orbital bombardment warhead.
-    type: Add
-  id: 1688
-  time: '2025-05-10T02:36:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6385
-- author: Arykh
-  changes:
-  - message: Fixed the health analyzer lying about Arithrazine's OD.
-    type: Fix
-  id: 1689
-  time: '2025-05-10T02:39:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6354
-- author: Ramiris
-  changes:
-  - message: 'Fixed clothing camo, you can now rep your CamoTech:tm: weapons on your
-      back/belt!'
-    type: Fix
-  id: 1690
-  time: '2025-05-10T03:16:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6325
-- author: crazy1112345
-  changes:
-  - message: Added faction stamps for SPP, CLF, TSE, and the Free Press.
-    type: Add
-  id: 1691
-  time: '2025-05-10T03:20:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6310
-- author: Vermidia
-  changes:
-  - message: Fixed Custom SPR doing slightly too much damage base (31 > 26)
-    type: Fix
-  id: 1692
-  time: '2025-05-10T03:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6360
-- author: Whisper
-  changes:
-  - message: Added the ability to examine armor values with a button.
-    type: Add
-  id: 1693
-  time: '2025-05-10T03:25:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6361
-- author: Arcticular1
-  changes:
-  - message: Changed D50 in hand + wielded sprites.
-    type: Tweak
-  id: 1694
-  time: '2025-05-10T03:26:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6364
-- author: Dygon
-  changes:
-  - message: Fixed the duration of the slow and daze effects applied by tesla turrets
-      being too low. Super slow 4 > 6, daze 8 > 10 for most and 8 > 15 for the overclocked.
-    type: Fix
-  id: 1695
-  time: '2025-05-10T03:33:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6374
-- author: Vermidia
-  changes:
-  - message: Added medical optics, point-buyable for most squad roles and usable without
-      any skills. The corpsman helmet no longer inherently gives a medical HUD, instead
-      it comes with an integrated visor that gives you a medical HUD.
-    type: Add
-  - message: Added welding visors, point-buyable for most squad roles and usable without
-      any skills. The technician helmet no longer inherently protects your eyes from
-      welding, instead it comes with an integrated welding visor.
-    type: Add
-  - message: Added squad optic, integrated into most marine helmets, and only activatable
-      if you have nothing else to show marine icons. It shows marine icons.
-    type: Add
-  - message: Added the m10 welding helmet, combat technicians can now choose between
-      it and the technician helmet.
-    type: Add
-  - message: The M11C, M30, M10 pattern officer now have integrated visors.
-    type: Add
-  - message: Fixed M12 and XM12 not having an additional visor slot.
-    type: Fix
-  - message: Fixed the NV optic not glowing slightly when on.
-    type: Fix
-  id: 1696
-  time: '2025-05-10T03:32:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6366
-- author: Arcticular1
-  changes:
-  - message: Fixed Mateba, M59a and Winter Wyvern being able to be melted!
-    type: Fix
-  - message: Changed M59a to have the same stats as a MK1 but with added IFF.
-    type: Tweak
-  - message: Fixed the Mateba not having the correct ammo loaded.
-    type: Fix
-  - message: Fixed the Mateba not being able to use barrel attachments and mateba
-      barrels at the same time.
-    type: Fix
-  id: 1697
-  time: '2025-05-10T03:34:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6301
-- author: Magicocity1
-  changes:
-  - message: The M13 and M44 now appear in the pistol pouch when inside it
-    type: Fix
-  id: 1698
-  time: '2025-05-10T03:36:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6276
-- author: Arcticular1
-  changes:
-  - message: Added dress blues jacket, dress blues uniform, dress blue officer hat,
-      marine formal service jacket, and marine service peaked cap to the CO clothing
-      rack.
-    type: Add
-  - message: Added M54C rubber magazine to the CO weapon rack.
-    type: Add
-  - message: Replaced insulated gloves with deluxe combat gloves in the CO equipment
-      rack.
-    type: Tweak
-  id: 1699
-  time: '2025-05-10T03:39:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6363
 - author: Dutch-VanDerLinde
   changes:
   - message: Added functionality for CQC skill. CQC skill will now allow you to do
@@ -4618,5 +4486,120 @@
   id: 2186
   time: '2025-08-09T00:39:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7430
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed health analyzers not showing permadead marines as permadead
+    type: Fix
+  id: 2187
+  time: '2025-08-16T23:01:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7487
+- author: Ian321
+  changes:
+  - message: Dog-tags can now be taken from unrevivable marines.
+    type: Fix
+  - message: Unrevivable marines are now displayed correctly on the map.
+    type: Fix
+  - message: The tactical map now tracks the state of rotting with more detail.
+    type: Tweak
+  - message: The unrevivable medi-hud icon now only shows on dead people.
+    type: Fix
+  - message: Rotten bodies can no longer be hosts.
+    type: Fix
+  - message: Health scanner now correctly states if a body is unrevivable.
+    type: Fix
+  - message: Rotten bodies can now be fultoned again.
+    type: Fix
+  id: 2188
+  time: '2025-08-16T23:05:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7415
+- author: UnicornOnLSD
+  changes:
+  - message: RTOs inhands fixed.
+    type: Fix
+  id: 2189
+  time: '2025-08-17T22:40:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7520
+- author: noctyrnal
+  changes:
+  - message: The PVE server now has 2 unique dropships.
+    type: Add
+  id: 2190
+  time: '2025-08-17T22:39:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7527
+- author: DrSmugleaf
+  changes:
+  - message: Fixed buggy movement speed while wielding some guns, causing rubberbanding
+      when moving across weeds for example.
+    type: Fix
+  id: 2191
+  time: '2025-08-17T23:03:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7528
+- author: Shromply
+  changes:
+  - message: Added the M3 MOPP Suit.
+    type: Add
+  id: 2192
+  time: '2025-08-17T23:02:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7523
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to CPR crit marines on PvE
+    type: Fix
+  id: 2193
+  time: '2025-08-17T23:31:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7530
+- author: TsjipTsjip
+  changes:
+  - message: Reworded the appeal processor delegation process to be more clear.
+    type: Fix
+  id: 2194
+  time: '2025-08-17T23:43:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7445
+- author: DrSmugleaf
+  changes:
+  - message: Reverted survivor spawning to how it worked in previous updates, until
+      it sometimes crashing the server on round start is fixed.
+    type: Fix
+  id: 2195
+  time: '2025-08-18T07:20:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7534
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the synth survival pouch having the wrong handheld radio.
+    type: Fix
+  id: 2196
+  time: '2025-08-18T21:04:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7544
+- author: x5tink
+  changes:
+  - message: Returned Inap pill bottle name
+    type: Fix
+  id: 2197
+  time: '2025-08-18T21:08:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7536
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the red EMT paramedic uniform being named "Item".
+    type: Fix
+  id: 2198
+  time: '2025-08-18T21:13:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7543
+- author: SharkSnake98
+  changes:
+  - message: Added a Liaison role-specific loadout section
+    type: Add
+  - message: Adjusted the items in the Liaison's Automated Briefcase to match parity
+      and no longer use upstream items
+    type: Tweak
+  id: 2199
+  time: '2025-08-19T17:07:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6913
+- author: DummeHytteOst
+  changes:
+  - message: Fixed a typo in the guidebook.
+    type: Fix
+  id: 2200
+  time: '2025-08-19T17:52:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7542
 Name: RMC14
 Order: -1

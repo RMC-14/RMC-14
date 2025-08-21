@@ -3,11 +3,11 @@
   id: RMCWeYaClipboard
   cost: 1
   effects:
-    - !type:JobRequirementLoadoutEffect
-      requirement:
-        !type:RoleTimeRequirement
-        role: CMJobLiaison
-        time: 90000 # 25 hours
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 90000 # 25 hours
   storage:
     back:
       - RMCWeYaClipboard
