@@ -1,0 +1,15 @@
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonSOFMedspec
+  suffix: Locked, SOF Medical Specialist
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMARSOCMedspec" ] ]
+
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonSOFEngispec
+  suffix: Locked, SOF Engineering Specialist
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMARSOCEngispec" ] ]

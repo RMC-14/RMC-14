@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.CodeAnalysis.ExternalAccess.CompilerDeveloperSDK</name>
+    </assembly>
+    <members>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.CompilerDeveloperSdk.RequestContext.Workspace">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.LanguageServer.Handler.RequestContext.Workspace"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.CompilerDeveloperSdk.RequestContext.Solution">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.LanguageServer.Handler.RequestContext.Solution"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.CompilerDeveloperSdk.RequestContext.Document">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.LanguageServer.Handler.RequestContext.Document"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.CompilerDeveloperSdk.RequestContext.GetRequiredDocument">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.LanguageServer.Handler.RequestContext.GetRequiredDocument"/>
+        </member>
+    </members>
+</doc>

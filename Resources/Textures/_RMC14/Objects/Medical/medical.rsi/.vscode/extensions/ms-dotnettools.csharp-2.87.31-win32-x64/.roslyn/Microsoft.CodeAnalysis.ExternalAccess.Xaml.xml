@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.CodeAnalysis.ExternalAccess.Xaml</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.ExportXamlLspServiceFactoryAttribute">
+            <summary>
+            Defines an easy to use subclass for <see cref="T:Microsoft.CodeAnalysis.LanguageServer.ExportLspServiceFactoryAttribute"/> with the Roslyn languages contract name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.ExportXamlStatelessLspServiceAttribute">
+            <summary>
+            Defines an easy to use subclass for <see cref="T:Microsoft.CodeAnalysis.LanguageServer.ExportStatelessLspServiceAttribute"/> with the Roslyn languages contract name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IClientCapabilityProvider">
+            <summary>
+            Represents a provider for checking the support for dynamically registering capabilities.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IClientCapabilityProvider.IsDynamicRegistrationSupported(System.String)">
+            <summary>
+            Checks whether the client supports dynamically registering the capability for the given method name.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IClientRequestManager">
+            <summary>
+            Manages sending requests to the client
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IDescriptionService">
+            <summary>
+            Represents a service that can be imported via MEF to provide descriptions for a symbol.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IDescriptionService.GetDescriptionAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Project,System.Threading.CancellationToken)">
+            <summary>
+            Gets the description for the given symbol.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IDescriptionService.GetMarkupContent(System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.TaggedText},System.String,System.Boolean)">
+            <summary>
+            Converts the given <paramref name="tags"/> to markdown content if supported.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IInitializationService">
+            <summary>
+            Represents a service to be exported via MEF for language server initialization.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IInitializationService.OnInitializedAsync(Microsoft.CodeAnalysis.ExternalAccess.Xaml.IClientRequestManager,Microsoft.CodeAnalysis.ExternalAccess.Xaml.IClientCapabilityProvider,System.Threading.CancellationToken)">
+            <summary>
+            Called when the language server is being initialized.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.ILocationService">
+            <summary>
+            Represents a service  can be imported via MEF to provide location information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.Xaml.ILocationService.GetSymbolLocationsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Project,System.Threading.CancellationToken)">
+            <summary>
+            Gets the locations for the given symbol in the given project.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.Xaml.ILocationService.GetLocationAsync(Microsoft.CodeAnalysis.TextDocument,Microsoft.CodeAnalysis.Text.TextSpan,System.Threading.CancellationToken)">
+            <summary>
+            Gets the location for a text span in a document document.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IOnInitializedService">
+            <summary>
+            Represents a service to be exported via MEF for language server initialization.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IOnInitializedService.OnInitializedAsync(Microsoft.CodeAnalysis.ExternalAccess.Xaml.IClientRequestManager,Roslyn.LanguageServer.Protocol.ClientCapabilities,System.Threading.CancellationToken)">
+            <summary>
+            Called when the language server is being initialized.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.IResolveCachedDataService">
+            <summary>
+            Represents a service to convert between a large data object + document identifier and request resolve data.
+            </summary>
+            <remarks>
+            The data is held in a short-term cache and the service is provided to implementers of <see cref="T:Microsoft.CodeAnalysis.ExternalAccess.Xaml.XamlRequestHandlerFactoryBase`2" />
+            </remarks>
+        </member>
+    </members>
+</doc>

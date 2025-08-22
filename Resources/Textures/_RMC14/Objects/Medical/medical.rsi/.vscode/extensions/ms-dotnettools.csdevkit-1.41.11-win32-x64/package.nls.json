@@ -1,0 +1,168 @@
+{
+	"extension.title": "C# Dev Kit",
+	"extension.description": "Official C# extension from Microsoft",
+	"commands.openSolution": "Open Solution",
+	"commands.closeSolution": "Close Solution",
+	"commands.addNewProject": "New Project...",
+	"commands.addNewProjectFromNewFileMenu": ".NET: New Project...",
+	"commands.addExistingProject": "Add Existing Project...",
+	"commands.buildSolution": "Build",
+	"commands.rebuildSolution": "Rebuild",
+	"commands.cleanSolution": "Clean",
+	"commands.removeProject": "Remove",
+	"commands.deleteItem": "Delete",
+	"commands.addNewFile": "New File...",
+	"commands.addNewFileFromNewFileMenu": ".NET: New File...",
+	"commands.addProjectReference": "Add Project Reference",
+	"commands.removeProjectReference": "Remove Project Reference",
+	"commands.addExistingFile": "Add Existing File...",
+	"commands.openInTerminal": "Open In Integrated Terminal",
+	"commands.showEntitlementsStatus": "Show entitlement status",
+	"commands.signIntoVsAccount": "Sign into Visual Studio account",
+	"commands.rename": "Rename...",
+	"commands.copyPath": "Copy Path",
+	"commands.copyRelativePath": "Copy Relative Path",
+	"commands.revealFileInOS.windows": "Reveal in File Explorer",
+	"commands.revealFileInOS.mac": "Reveal in Finder",
+	"commands.revealFileInOS.linux": "Open Containing Folder",
+	"commands.newSolutionFolder": "New Solution Folder...",
+	"commands.renameSolutionFolder": "Rename Solution Folder...",
+	"commands.removeSolutionFolder": "Remove",
+	"commands.newFolder": "New Folder...",
+	"commands.removeItem": "Remove",
+	"commands.openProjectsLogsView": "Open project system logs",
+	"commands.hotReload": "Hot Reload",
+	"commands.showHotReloadPanel": "Show Hot Reload output",
+	"commands.projectDebugLaunch": "Start New Instance",
+	"commands.noDebugProjectLaunch": "Start without Debugging",
+	"commands.stepIntoProjectLaunch": "Step into New Instance",
+	"commands.fileDebugLaunch": "Debug project associated with this file",
+	"commands.noDebugFileLaunch": "Run project associated with this file",
+	"commands.selectStartupProject": "Select C# Startup Project",
+	"commands.selectLaunchConfiguration": "Select Launch Configuration",
+	"commands.selectLaunchTargetFramework": "Select Launch Target Framework",
+	"commands.installDotnetSdk": "Install .NET SDK",
+	"commands.syncWithActiveItem": "Sync with Active Document",
+	"commands.addNuGetPackage": "Add NuGet Package...",
+	"commands.updateNuGetPackage": "Update NuGet Package...",
+	"commands.removeNuGetPackage": "Remove NuGet Package...",
+	"commands.selectActiveConfiguration": "Select a Configuration...",
+	"commands.openCoverageReport": "Open Coverage Report...",
+	"commands.saveSolutionFile": "Create a Solution File",
+	"commands.manageUserSecrets": "Manage User Secrets",
+	"submenus.debug": "Debug",
+	"views.solutionExplorer": "Solution Explorer",
+	"viewContent.openSolution": {
+		"message": "[Open Solution](command:csdevkit.openSolution)",
+		"comment": [
+			"{Locked='](command:csdevkit.openSolution'}",
+			"Do not translate the 'command:*' part inside of the '(..)'. It is an internal command syntax for VS Code",
+			"Please make sure there is no space between the right bracket and left parenthesis:  ]( this is an internal syntax for links"
+		]
+	},
+	"viewContent.noWorkspace": {
+		"message": "You can [open a folder containing a .NET project or solution](command:vscode.openFolder), or create a new .NET project.\n[Create .NET Project](command:csdevkit.addNewProject)",
+		"comment": [
+			"{Locked='](command:vscode.openFolder'}",
+			"{Locked='](command:vscode.addNewProject'}",
+			"Do not translate the 'command:*' part inside of the '(..)'. It is an internal command syntax for VS Code",
+			"Please make sure there is no space between the right bracket and left parenthesis:  ]( this is an internal syntax for links"
+		]
+	},
+	"configurations.dotnet.autoDetect": "Controls auto detection of dotnet tasks.",
+	"configurations.dotnet.preferVisualStudioCodeFileSystemWatcher": "Controls whether the extension uses the default Visual Studio Code File System Watcher. This is recommended if you have a files.watcherExclude setting.",
+	"configurations.dotnet.automaticallyCreateSolutionInWorkspace": "Automatically create a solution file in the workspace if one does not exist. This may not work correctly for all cases.",
+	"configurations.dotnet.previewSolution-freeWorkspaceMode": "[Preview] Prevent the automatic creation of solution files in workspaces that do not already contain one. This feature takes priority over the 'Automatically Create Solution In Workspace' setting, even if it is enabled.",
+	"configurations.dotnet.workingWithTestSignedSdk": "Working with ad-hoc signed SDK on a Mac computer. This option forces the C# Dev Kit extension to work in a slower compatible mode, and should only be turned on environment when it is essential.",
+	"configurations.dotnet.useLegacyDotnetResolution": "Use the legacy dotnet resolution. This is a temporary option to workaround potential issues with the new logic.",
+	"configurations.dotnet.testWindow.useTestingPlatformProtocol": "Enables projects that are using Microsoft.Testing.Platform to communicate via Microsoft.Testing.Platform server protocol instead of using VSTest Translation Layer protocol. See https://aka.ms/mtp-overview for more information.",
+	"configurations.dotnet.testWindow.disableAutoDiscovery": "Disable automatic test discovery when test binaries change on disk. This can avoid file locking issues when building large solutions.",
+	"configurations.dotnet.testWindow.disableBuildOnRefresh": "Disable automatic build when triggering a test discovery refresh. If this option is set, you must manually build your tests before refresh to make sure they are up to date.",
+	"configurations.dotnet.testWindow.disableBuildOnRun": "Disable automatic build before running tests. If this option is set, you must manually build your tests before running to make sure they are up to date.",
+	"configurations.dotnet.testWindow.skipTargetFrameworkCompatibilityCheck": "Disable checks for projects with compatible target frameworks. This may cause unstable or broken test behavior. Use at your own risk.",
+	"configurations.dotnet.testWindow.enableTestExplorerDiff": "Enables the Test Explorer to show the diff of the test results.",
+	"configurations.dotnet.testWindow.testExplorerVerbosity": {
+		"message": "Sets the verbosity of logging in the 'C# DevKit - Test Explorer' output window",
+		"comment": [
+			"{Locked='](https://aka.ms/vscode/dotnet/testExplorerVerbosity)'}",
+			"Do not translate http link"
+		]
+	},
+	"configurations.dotnet.testWindow.testExplorerVerbosity.minimal": "Show minimal details in 'C# devkit - Test Explorer' output window.",
+	"configurations.dotnet.testWindow.testExplorerVerbosity.diagnostic": "Show diagnostic information in 'C# devkit - Test Explorer' output window.",
+	"configurations.dotnet.testWindow.testExplorerVerbosity.trace": "Includes Platform logs.",
+	"configurations.dotnet.automaticallySyncWithActiveItem": "Enables/disables the feature for the extension to automatically track the currently active item in the editor and highlight it within the Solution Explorer.",
+	"configurations.nuget.autoOpenOutputWindowOnRestore": "Controls whether to automatically open the NuGet output window when restoring packages.",
+	"configurations.debugger.hotReload": "[Experimental] Enables C# Hot Reload while debugging.",
+	"configurations.debugger.hotReloadOnSave": "When true, saving a file will automatically apply changes when Hot Reload is available.",
+	"configurations.debugger.hotReloadVerbosity": "The verbosity of logging in the Output Panel for '.NET Hot Reload'. The order of levels from least verbose to most verbose is: 'minimal' < 'detailed' < 'diagnostic' (default: 'minimal')",
+	"configurations.debugger.hotReloadVerbosity.minimal": "Show only minimal information.",
+	"configurations.debugger.hotReloadVerbosity.detailed": "Show detailed information about how changes are found and applied to the target process.",
+	"configurations.debugger.hotReloadVerbosity.diagnostic": "Show diagnostic information on each step of a hot reload operation. Useful when diagnosing unexpected behaviors.",
+	"configurations.debugger.debugConsoleVerbosity": {
+		"message": "Sets the log level for messages sent by the debugger for the Debug Console. [Learn more...](https://aka.ms/vscode/dotnet/debugConsoleVerbosity)",
+		"comment": [
+			"{Locked='](https://aka.ms/vscode/dotnet/debugConsoleVerbosity)'}",
+			"Do not translate http link"
+		]
+	},
+	"configurations.debugger.debugConsoleVerbosity.minimal": "Show minimal details in the debug console. Additional information is available in the 'C# Debugger' output window channel.",
+	"configurations.debugger.debugConsoleVerbosity.verbose": "Show all information in the debug console.",
+	"configurations.preview.improvedLaunchExperience": "[Preview] Enables an improved launch experience with UI for choosing startup projects and launch configurations. VS Code must be restarted for changes to take effect.",
+	"configurations.nuget.includePrerelease.description": "Include prerelease package versions for all NuGet package operations.",
+	"dotnet.taskDefinition.type.description": "The dotnet task to customize.",
+	"dotnet.taskDefinition.file.description": "File associated with the task. Can be omitted.",
+	"testContent.noTests": "Build your C# test projects to view the tests here.",
+	"walkthroughs.title": "Get Started with C# Dev Kit",
+	"walkthroughs.description": "Your first steps to set up your .NET environment with powerful, easy-to-use tooling.",
+	"walkthroughs.steps.signInStep.title": "Connect account",
+	"walkthroughs.steps.signInStep.description": {
+		"message": "You can sign in with your Microsoft account. If you have a Visual Studio subscription, you can get information about your subscription after you've signed in.\n[Connect](command:csdevkit.signIntoVsAccount)",
+		"comment": [
+			"{Locked='](command:csdevkit.signIntoVsAccount)'}",
+			"Do not translate the 'command:*' part inside of the '(..)'. It is an internal command syntax for VS Code"
+		]
+	},
+	"walkthroughs.steps.setupEnvironmentStep.title": "Set up your environment",
+	"walkthroughs.steps.setupEnvironmentStep.description": {
+		"message": "The .NET SDK is required to build with .NET in VS Code.\n[Install .NET SDK](command:csdevkit.installDotnetSdk.fromWalkthrough)"
+	},
+	"walkthroughs.steps.openWorkspaceStep.title": "Open your folder",
+	"walkthroughs.steps.openWorkspaceStep.description": {
+		"message": "Open your solution folder. Supported project types include:\n   - ASP.NET Core web projects\n   - .NET Console app projects\n   - .NET class library projects.\n[Open Folder](command:workbench.action.files.openFolder)",
+		"comment": [
+			"{Locked='](command:workbench.action.files.openFolder)'}",
+			"Do not translate the 'command:*' part inside of the '(..)'. It is an internal command syntax for VS Code"
+		]
+	},
+	"walkthroughs.steps.openWorkspaceStep.media.altText": "Open Folder",
+	"walkthroughs.steps.createNewProjectStep.title": "Create your .NET project",
+	"walkthroughs.steps.createNewProjectStep.description": {
+		"message": "Choose your project template from the command palette to scaffold your project.\nOnce your project is created, you can view your files in the Solution Explorer.\n[Choose project template](command:csdevkit.searchProjectFromCommandPalette)",
+		"comment": [
+			"{Locked='](command:csdevkit.searchProjectFromCommandPalette)'}",
+			"Do not translate the 'command:*' part inside of the '(..)'. It is an internal command syntax for VS Code"
+		]
+	},
+	"walkthroughs.steps.createNewProjectStep.media.altText": "Create Project",
+	"walkthroughs.steps.launchDebugAndTestStep.title": "Launch, debug, and test",
+	"walkthroughs.steps.launchDebugAndTestStep.description": {
+		"message": "Run and debug your application using the debugger. [Learn More...](https://code.visualstudio.com/docs/csharp/debugging).\n\nThe Test Explorer allows you to view, run, and manage all test cases in your project. [Learn More...](https://code.visualstudio.com/docs/languages/csharp).\n\n[Show Run and Debug View](command:workbench.view.debug)",
+		"comment": [
+			"{Locked='](https://code.visualstudio.com/docs/csharp/debugging)'}",
+			"{Locked='](https://code.visualstudio.com/docs/languages/csharp)'}",
+			"Do not translate http link",
+			"{Locked='](command:workbench.view.debug)'}",
+			"Do not translate the 'command:*' part inside of the '(..)'. It is an internal command syntax for VS Code"
+		]
+	},
+	"walkthroughs.steps.launchDebugAndTestStep.media.altText": "Run and Debug View",
+	"walkthroughs.steps.learnMoreStep.title": "Learn More",
+	"walkthroughs.steps.learnMoreStep.description": {
+		"message": "Explore all the features the C# extension has to offer by looking for “.NET:” in the Command Palette.\n[Open Command Palette](command:csdevkit.searchFromCommandPalette)",
+		"comment": [
+			"{Locked='](command:csdevkit.searchFromCommandPalette)'}",
+			"Do not translate the 'command:*' part inside of the '(..)'. It is an internal command syntax for VS Code"
+		]
+	}
+}

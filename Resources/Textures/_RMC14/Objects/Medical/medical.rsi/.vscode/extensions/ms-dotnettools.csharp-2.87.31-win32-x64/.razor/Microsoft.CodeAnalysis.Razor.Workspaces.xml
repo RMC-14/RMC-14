@@ -1,0 +1,1673 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.CodeAnalysis.Razor.Workspaces</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.ITagHelperResolver.GetTagHelpersAsync(Microsoft.CodeAnalysis.Project,Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshot,System.Threading.CancellationToken)">
+            <summary>
+             Gets the available <see cref="T:Microsoft.AspNetCore.Razor.Language.TagHelperDescriptor">tag helpers</see> from the specified
+             <see cref="T:Microsoft.CodeAnalysis.Project"/> using the given <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshot"/> to provide a
+             <see cref="T:Microsoft.AspNetCore.Razor.Language.RazorProjectEngine"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.LanguageServerFeatureOptions.IncludeProjectKeyInGeneratedFilePath">
+            <summary>
+            Whether the file path for the generated C# documents should utilize the project key to
+            ensure a unique file path per project.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.LanguageServerFeatureOptions.SupportsSoftSelectionInCompletion">
+            <summary>
+            Indicates that client supports soft selection in completion list, meaning that typing a commit 
+            character with a soft-selected item will not commit that item.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.LanguageServerFeatureOptions.UseVsCodeCompletionTriggerCharacters">
+            <summary>
+            Indicates that VSCode-compatible completion trigger character set should be used
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.LanguageServerFeatureOptions.DoNotInitializeMiscFilesProjectFromWorkspace">
+            <summary>
+            Indicates whether the language server's miscellanous files project will be initialized with
+            all Razor files found under the workspace root path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.LanguageServerFeatureOptions.ForceRuntimeCodeGeneration">
+            <summary>
+            When enabled, design time code will not be generated. All tooling, except formatting, will be using runtime code generation.
+            </summary>
+            <remarks>
+            This is now always <see langword="true" /> but cannot be removed entirely until the legacy editor is removed.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Workspaces.Protocol.SemanticTokens.ProvideSemanticTokensResponse">
+            <summary>
+            Transports C# semantic token responses from the Razor LS client to the Razor LS.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.RazorComponentSearchEngine.TryLocateComponentAsync(Microsoft.AspNetCore.Razor.Language.TagHelperDescriptor,Microsoft.CodeAnalysis.Razor.ProjectSystem.ISolutionQueryOperations,System.Threading.CancellationToken)">
+            <summary>
+             Search for a component in a project based on its tag name and fully qualified name.
+            </summary>
+            <param name="tagHelper">
+             A <see cref="T:Microsoft.AspNetCore.Razor.Language.TagHelperDescriptor"/> to find the corresponding Razor component for.
+            </param>
+            <param name="solutionQueryOperations">
+             An <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ISolutionQueryOperations"/> to enumerate project snapshots.
+            </param>
+            <param name="cancellationToken">
+             A token that is checked to cancel work.
+            </param>
+            <returns>
+             The corresponding <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.IDocumentSnapshot"/> if found, <see langword="null"/> otherwise.
+            </returns>
+            <remarks>
+             This method makes several assumptions about the nature of components. First,
+             it assumes that a component a given name "Name" will be located in a file
+             "Name.razor". Second, it assumes that the namespace the component is present in
+             has the same name as the assembly its corresponding tag helper is loaded from.
+             Implicitly, this method inherits any assumptions made by TrySplitNamespaceAndType.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">
+             Thrown if <paramref name="tagHelper"/> is <see langword="null"/>.
+            </exception>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.ArgumentCannotBeNullOrEmpty">
+            <summary>Value cannot be null or an empty string.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Directive">
+            <summary>directive</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.DirectiveSnippetDescription">
+            <summary>Insert a directive code snippet
+            [Tab] to navigate between elements, [Enter] to complete</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Invalid_Offset">
+            <summary>Invalid offset.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.PositionCharacter_Outside_Range">
+            <summary>Character '{0}' outside of the {1} range of '{2}' was queried. The document may not be up to date.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatPositionCharacter_Outside_Range(System.Object,System.Object,System.Object)">
+            <summary>Character '{0}' outside of the {1} range of '{2}' was queried. The document may not be up to date.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.PositionLine_Outside_Range">
+            <summary>Line '{0}' outside of the {1} range of '{2}' was queried. The document may not be up to date.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatPositionLine_Outside_Range(System.Object,System.Object,System.Object)">
+            <summary>Line '{0}' outside of the {1} range of '{2}' was queried. The document may not be up to date.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Unknown_mapping_behavior">
+            <summary>Unknown mapping behavior</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Unknown_RazorMetaCode">
+            <summary>Attempted to visit a RazorMetaCode other than '{' or '}'.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Format_operation_changed_nonwhitespace">
+            <summary>A format operation is being abandoned because it would add or delete non-whitespace content.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Edit_at_adds">
+            <summary>Edit at {0} adds the non-whitespace content '{1}'.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatEdit_at_adds(System.Object,System.Object)">
+            <summary>Edit at {0} adds the non-whitespace content '{1}'.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Edit_at_deletes">
+            <summary>Edit at {0} deletes the non-whitespace content '{1}'.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatEdit_at_deletes(System.Object,System.Object)">
+            <summary>Edit at {0} deletes the non-whitespace content '{1}'.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Format_operation_changed_diagnostics">
+            <summary>A format operation is being abandoned because it would introduce or remove one of more diagnostics.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Diagnostics_before">
+            <summary>Diagnostics before:</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Diagnostics_after">
+            <summary>Diagnostics after:</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Language_Services_Missing_Service">
+            <summary>Razor language services not configured properly, missing language service '{0}'.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatLanguage_Services_Missing_Service(System.Object)">
+            <summary>Razor language services not configured properly, missing language service '{0}'.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Not_Available_In">
+            <summary>Not available in</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.TagHelper_Attribute_Glyph">
+            <summary>Razor TagHelper Attribute Glyph</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.TagHelper_Element_Glyph">
+            <summary>Razor TagHelper Element Glyph</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Create_Component_FromTag_Title">
+            <summary>Create component from tag</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.ExtractTo_CodeBehind_Title">
+            <summary>Extract block to code behind</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.ExtractTo_Component_Title">
+            <summary>Extract element to new component</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Generate_Async_Event_Handler_Title">
+            <summary>Generate Async Event Handler '{0}'</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatGenerate_Async_Event_Handler_Title(System.Object)">
+            <summary>Generate Async Event Handler '{0}'</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Generate_Event_Handler_Title">
+            <summary>Generate Event Handler '{0}'</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatGenerate_Event_Handler_Title(System.Object)">
+            <summary>Generate Event Handler '{0}'</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.ReTrigger_Completions_Title">
+            <summary>"Re-trigger completions..."</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Blazor_directive_attributes">
+            <summary>Blazor directive attributes</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Promote_using_directive_to">
+            <summary>Promote using directive to {0}</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatPromote_using_directive_to(System.Object)">
+            <summary>Promote using directive to {0}</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Wrap_attributes">
+            <summary>Wrap attributes</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Unsupported_argument_kind">
+            <summary>Unsupported argument kind: '{0}'.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatUnsupported_argument_kind(System.Object)">
+            <summary>Unsupported argument kind: '{0}'.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Unsupported_argument_type">
+            <summary>Unsupported argument type: '{0}'.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatUnsupported_argument_type(System.Object)">
+            <summary>Unsupported argument type: '{0}'.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Unsupported_Razor_extension_0">
+            <summary>Unsupported Razor extension: '{0}'.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatUnsupported_Razor_extension_0(System.Object)">
+            <summary>Unsupported Razor extension: '{0}'.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Unsupported_razor_project_info_version_encountered">
+            <summary>Unsupported razor project info version encounted.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.Simplify_Tag_To_SelfClosing_Title">
+            <summary>Simplify tag to self-closing</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.IncompatibleProject_MiscFiles">
+            <summary>The Razor editor utilizes the Razor Source Generator. {0} appears to not be part of any project, so the source generator is not present and the editing experience will be limited. No more messages will be logged for this scenario.</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatIncompatibleProject_MiscFiles(System.Object)">
+            <summary>The Razor editor utilizes the Razor Source Generator. {0} appears to not be part of any project, so the source generator is not present and the editing experience will be limited. No more messages will be logged for this scenario.</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.IncompatibleProject_NotAnAdditionalFile">
+            <summary>The Razor editor utilizes the Razor Source Generator, which requires *.razor and *.cshtml files to be AdditionalFiles in the project. {0} appears to come from '{1}', which has Razor documents but this file is not an AdditionalFile, so the editing experienc ...</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatIncompatibleProject_NotAnAdditionalFile(System.Object,System.Object)">
+            <summary>The Razor editor utilizes the Razor Source Generator, which requires *.razor and *.cshtml files to be AdditionalFiles in the project. {0} appears to come from '{1}', which has Razor documents but this file is not an AdditionalFile, so the editing experienc ...</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.IncompatibleProject_NoAdditionalFiles">
+            <summary>The Razor editor utilizes the Razor Source Generator, which requires *.razor and *.cshtml files to be AdditionalFiles in the project. {0} appears to come from '{1}', which has no Razor documents that are AdditionalFiles, so the editing experience will be l ...</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatIncompatibleProject_NoAdditionalFiles(System.Object,System.Object)">
+            <summary>The Razor editor utilizes the Razor Source Generator, which requires *.razor and *.cshtml files to be AdditionalFiles in the project. {0} appears to come from '{1}', which has no Razor documents that are AdditionalFiles, so the editing experience will be l ...</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.ExtractTo_Css_Title">
+            <summary>Extract to {0}.css</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Workspaces.Resources.SR.FormatExtractTo_Css_Title(System.Object)">
+            <summary>Extract to {0}.css</summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.CodeActions.UnformattedRemappingCSharpCodeActionResolver">
+            <summary>
+            Resolves and remaps the code action, without running formatting passes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.CodeActions.UnformattedRemappingCSharpCodeActionResolver.#ctor(Microsoft.CodeAnalysis.Razor.DocumentMapping.IDocumentMappingService)">
+            <summary>
+            Resolves and remaps the code action, without running formatting passes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.CodeActions.ICodeActionProvider.ProvideAsync(Microsoft.CodeAnalysis.Razor.CodeActions.RazorCodeActionContext,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.Razor.CodeActions.Models.RazorVSInternalCodeAction},System.Threading.CancellationToken)">
+            <summary>
+            Takes code actions provided by a child language, and provides code actions that should be returned to the LSP client.
+            </summary>
+            <remarks>
+            The list of code actions returned from all providers will be combined together in a list. A null result and an empty
+            result are effectively the same.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.CodeActions.Models.RazorVSInternalCodeAction.Order">
+            <summary>
+            The order code actions should appear. This is not serialized as its just used in the code actions service
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.CodeActions.Razor.CodeBlockService.CreateFormattedTextEdit(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.String,Microsoft.CodeAnalysis.Razor.Formatting.RazorFormattingOptions)">
+            <summary>
+             Creates a <see cref="T:Roslyn.LanguageServer.Protocol.TextEdit"/> that will place the formatted generated method within a @code block in the file.
+            </summary>
+            <param name="code">
+             The <see cref="T:Microsoft.AspNetCore.Razor.Language.RazorCodeDocument"/> of the file where the generated method will be placed.
+            </param>
+            <param name="templateWithMethodSignature">
+             The skeleton of the generated method where a <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/> should be placed
+             anywhere that needs to have some indenting, <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.InitialIndent"/> anywhere that
+             needs some initial indenting.
+             It should look something like:
+              <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.InitialIndent"/><see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/>public void MethodName()
+              <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.InitialIndent"/><see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/>{
+              <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.InitialIndent"/><see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/><see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/>throw new NotImplementedException();
+              <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.InitialIndent"/><see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/>}
+            </param>
+            <param name="options">
+             The <see cref="T:Microsoft.CodeAnalysis.Razor.Formatting.RazorFormattingOptions"/> that contains information about indentation.
+            </param>
+            <returns>
+             A <see cref="T:Roslyn.LanguageServer.Protocol.TextEdit"/> that will place the formatted generated method within a @code block in the file.
+            </returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.CodeActions.Razor.CodeBlockService.IsLineEmpty(Microsoft.CodeAnalysis.Text.TextLine)">
+            <summary>
+             Determines whether the line is empty.
+            </summary>
+            <param name="textLine">The line to check.</param>
+            <returns>true if the line is empty, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.CodeActions.IRoslynCodeActionHelpers.GetSimplifiedTextEditsAsync(Microsoft.CodeAnalysis.Razor.ProjectSystem.DocumentContext,System.Uri,Roslyn.LanguageServer.Protocol.TextEdit,System.Threading.CancellationToken)">
+            <summary>
+            Apply the edit to the specified document, get Roslyn to simplify it, and return the simplified edit
+            </summary>
+            <param name="documentContext">The Razor document context for the edit</param>
+            <param name="codeBehindUri">If present, the Roslyn document to apply the edit to. Otherwise the generated C# document will be used</param>
+            <param name="edit">The edit to apply</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Completion.CompletionSortTextHelper">
+            <summary>
+            Provides pre-filled sort text items to make setting <see cref="P:Microsoft.CodeAnalysis.Razor.Completion.RazorCompletionItem.SortText"/> consistent.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Completion.CompletionSortTextHelper.DefaultSortPriority">
+            <summary>
+            The default sort priority. Typically this means an LSP client will fall-back to sorting the completion item
+            based off of the displayed label in the completion list.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Completion.CompletionSortTextHelper.HighSortPriority">
+            <summary>
+            A high sort priority. Displayed above <see cref="P:Microsoft.CodeAnalysis.Razor.Completion.CompletionSortTextHelper.DefaultSortPriority"/> items.
+            </summary>
+            <remarks>
+            Note how this property doesn't take into account the actual completion items content. Ultimately this property
+            simply returns whitespace. The reason it returns whitespace is that whitespace is alphabetically ordered at the
+            top of all other characters. Meaning, for a reasonable client to interpret this sort priority it'll sort by the
+            whitespace sort text then will need to fallback to something else to handle collisions (items that have the same
+            sort text). The only reasonable fallback will be the display text of a completion item; meaning, we'll have all
+            of our "high priority" completion items appear above any other completion item because it'll first sort by whitespace
+            and then by display text.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Completion.CompletionTriggerAndCommitCharacters.TransitionCharacter">
+            <summary>
+             Trigger character that can trigger both Razor and Delegation completion
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Completion.CompletionTriggerAndCommitCharacters.AllCommitCharacters">
+            <summary>
+            This is the intersection of C# and HTML commit characters.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Completion.Delegation.DelegatedCompletionHelper">
+            <summary>
+            Helper methods for C# and HTML completion ("delegated" completion) that are used both in LSP and cohosting
+            completion handler code.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Completion.Delegation.DelegatedCompletionHelper.RewriteContext(Roslyn.LanguageServer.Protocol.VSInternalCompletionContext,Microsoft.CodeAnalysis.Razor.Protocol.RazorLanguageKind,Microsoft.CodeAnalysis.Razor.Completion.CompletionTriggerAndCommitCharacters)">
+            <summary>
+            Modifies completion context if needed so that it's acceptable to the delegated language.
+            </summary>
+            <param name="context">Original completion context passed to the completion handler</param>
+            <param name="languageKind">Language of the completion position</param>
+            <param name="triggerAndCommitCharacters">Per-client set of trigger and commit characters</param>
+            <returns>Possibly modified completion context</returns>
+            <remarks>For example, if we invoke C# completion in Razor via @ character, we will not
+            want C# to see @ as the trigger character and instead will transform completion context
+            into "invoked" and "explicit" rather than "typing", without a trigger character</remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Completion.Delegation.DelegatedCompletionHelper.RewriteCSharpResponse(Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionList,System.Int32,Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,Roslyn.LanguageServer.Protocol.Position,Microsoft.CodeAnalysis.Razor.Completion.RazorCompletionOptions)">
+            <summary>
+            Modifies C# completion response to be usable by Razor.
+            </summary>
+            <returns>
+            Possibly modified completion response.
+            </returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Completion.Delegation.DelegatedCompletionHelper.TryGetProvisionalCompletionInfo(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,Roslyn.LanguageServer.Protocol.VSInternalCompletionContext,Microsoft.CodeAnalysis.Razor.DocumentMapping.DocumentPositionInfo,Microsoft.CodeAnalysis.Razor.DocumentMapping.IDocumentMappingService,Microsoft.CodeAnalysis.Razor.Protocol.Completion.CompletionPositionInfo@)">
+            <summary>
+            Returns possibly update document position info and provisional edit (if any)
+            </summary>
+            <remarks>
+            Provisional completion happens when typing something like @DateTime. in a document.
+            In this case the '.' initially is parsed as belonging to HTML. However, we want to
+            show C# member completion in this case, so we want to make a temporary change to the
+            generated C# code so that '.' ends up in C#. This method will check for such case,
+            and provisional completion case is detected, will update position language from HTML
+            to C# and will return a temporary edit that should be made to the generated document
+            in order to add the '.' to the generated C# contents.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Completion.Delegation.DesignTimeHelperResponseRewriter">
+            <summary>
+             Removes Razor design-time helpers from a C# completion list.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Completion.Delegation.SnippetResponseRewriter">
+            <summary>
+            Modifies delegated snippet completion items
+            </summary>
+            <remarks>
+            At the moment primarily used to remove the C# "using" snippet because we have our own
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Completion.ICompletionResolveContext">
+            <summary>
+            Marker interface to make the CompletionListCache API easier to use
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Completion.RazorCompletionItem.SortText">
+            <summary>
+            A string that is used to alphabetically sort the completion item.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Completion.RazorCompletionItem.#ctor(Microsoft.CodeAnalysis.Razor.Completion.RazorCompletionItemKind,System.String,System.String,System.String,System.Object,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.Razor.Completion.RazorCommitCharacter},System.Boolean)">
+            <summary>
+            Creates a new Razor completion item
+            </summary>
+            <param name="kind">The type of completion item this is. Used for icons and resolving extra information like tooltip text.</param>
+            <param name="displayText">The text to display in the completion list.</param>
+            <param name="insertText">Content to insert when completion item is committed.</param>
+            <param name="sortText">A string that is used to alphabetically sort the completion item. If omitted defaults to <paramref name="displayText"/>.</param>
+            <param name="descriptionInfo">An object that provides description information for this completion item.</param>
+            <param name="commitCharacters">Characters that can be used to commit the completion item.</param>
+            <param name="isSnippet">Indicates whether the completion item's <see cref="P:Microsoft.CodeAnalysis.Razor.Completion.RazorCompletionItem.InsertText"/> is an LSP snippet or not.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="displayText"/> or <paramref name="insertText"/> are <see langword="null"/>.</exception>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Diagnostics.RazorTranslateDiagnosticsService">
+            <summary>
+            Contains several methods for mapping and filtering Razor and C# diagnostics. It allows for
+            translating code diagnostics from one representation into another, such as from C# to Razor.
+            </summary>
+            <param name="documentMappingService">The <see cref="T:Microsoft.CodeAnalysis.Razor.DocumentMapping.IDocumentMappingService"/>.</param>
+            <param name="loggerFactory">The <see cref="T:Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory"/>.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Diagnostics.RazorTranslateDiagnosticsService.#ctor(Microsoft.CodeAnalysis.Razor.DocumentMapping.IDocumentMappingService,Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory)">
+            <summary>
+            Contains several methods for mapping and filtering Razor and C# diagnostics. It allows for
+            translating code diagnostics from one representation into another, such as from C# to Razor.
+            </summary>
+            <param name="documentMappingService">The <see cref="T:Microsoft.CodeAnalysis.Razor.DocumentMapping.IDocumentMappingService"/>.</param>
+            <param name="loggerFactory">The <see cref="T:Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory"/>.</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Diagnostics.RazorTranslateDiagnosticsService.TranslateAsync(Microsoft.CodeAnalysis.Razor.Protocol.RazorLanguageKind,Roslyn.LanguageServer.Protocol.Diagnostic[],Microsoft.CodeAnalysis.Razor.ProjectSystem.IDocumentSnapshot,System.Threading.CancellationToken)">
+            <summary>
+             Translates code diagnostics from one representation into another.
+            </summary>
+            <param name="diagnosticKind">
+             The <see cref="T:Microsoft.CodeAnalysis.Razor.Protocol.RazorLanguageKind"/> of the <see cref="T:Microsoft.CodeAnalysis.Diagnostic"/> objects
+             included in <paramref name="diagnostics"/>.
+            </param>
+            <param name="diagnostics">
+             An array of <see cref="T:Microsoft.CodeAnalysis.Diagnostic"/> objects to translate.
+            </param>
+            <param name="documentSnapshot">
+             The <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.IDocumentSnapshot"/> for the code document associated with the diagnostics.
+            </param>
+            <param name="cancellationToken">A token that can be checked to cancel work.</param>
+            <returns>An array of translated diagnostics</returns>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.DocumentMapping.DocumentPositionInfo">
+            <summary>
+            Represents a position in a document. If <see cref="P:Microsoft.CodeAnalysis.Razor.DocumentMapping.DocumentPositionInfo.LanguageKind"/> is Razor then the position will be
+            in the host document, otherwise it will be in the corresponding generated document.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.DocumentMapping.DocumentPositionInfo.#ctor(Microsoft.CodeAnalysis.Razor.Protocol.RazorLanguageKind,Roslyn.LanguageServer.Protocol.Position,System.Int32)">
+            <summary>
+            Represents a position in a document. If <see cref="P:Microsoft.CodeAnalysis.Razor.DocumentMapping.DocumentPositionInfo.LanguageKind"/> is Razor then the position will be
+            in the host document, otherwise it will be in the corresponding generated document.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.DocumentMapping.MappingBehavior.Inclusive">
+             <summary>
+             Inclusive mapping behavior will attempt to map overlapping or intersecting generated ranges with a provided projection range.
+            
+             Behavior:
+                 - Overlaps > 1 generated range = No mapping
+                 - Intersects > 1 generated range = No mapping
+                 - Overlaps 1 generated range = Will reduce the provided range down to the generated range.
+                 - Intersects 1 generated range = Will use the generated range mappings
+             </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.DocumentMapping.MappingBehavior.Inferred">
+             <summary>
+             Inferred mapping behavior will attempt to map overlapping, intersecting or inbetween generated ranges with a provided projection range.
+            
+             Behavior: Everything `Inclusive` does +
+                 - No mappings in document = No mapping
+                 - Inbetween two mappings = Maps inbetween the two generated ranges
+                 - Inbetween one mapping and end of document = Maps end of mapping to the end of document
+                 - Inbetween beginning of document and one mapping = No mapping
+                     o Usually errors flow forward in the document space (not backwards) which is why we don't map this scenario.
+             </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.DocumentMapping.PreferAttributeNameDocumentPositionInfoStrategy">
+            <summary>
+            A projection strategy that, when given a position that occurs anywhere in an attribute name, will return the projection
+            for the position at the start of the attribute name, ignoring any prefix or suffix. eg given any location within the
+            attribute "@bind-Value:after", it will return the projection at the point of the word "Value" therein.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.DocumentMapping.RazorEditHelper.MapCSharpEditsAsync(System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.Razor.Protocol.RazorTextChange},Microsoft.CodeAnalysis.Razor.ProjectSystem.IDocumentSnapshot,Microsoft.CodeAnalysis.Razor.DocumentMapping.IDocumentMappingService,Microsoft.CodeAnalysis.Razor.Telemetry.ITelemetryReporter,System.Threading.CancellationToken)">
+            <summary>
+            Maps the given text edits for a razor file based on changes in csharp. It special
+            cases usings directives to insure they are added correctly. All other edits
+            are applied if they map to the razor document.
+            </summary>
+            <remarks>
+            Note that the changes coming in are in the generated C# file. This method will map them appropriately.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.DocumentMapping.RazorEditHelper.NormalizeEdits(System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.Razor.Protocol.RazorTextChange},Microsoft.CodeAnalysis.Razor.Telemetry.ITelemetryReporter,System.Threading.CancellationToken)">
+             <summary>
+             Go through edits and make sure a few things are true:
+            
+             <list type="number">
+             <item>
+              No edit is added twice. This can happen if a rename happens.
+             </item>
+             <item>
+              No edit overlaps with another edit. If they do throw to capture logs but choose the first
+              edit to at least not completely fail. It's possible this will need to be tweaked later.
+             </item>
+             </list>
+             </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.DocumentMapping.RazorEditHelper.TextChangeBuilder.AddDirectlyMappedEdits(System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.Razor.Protocol.RazorTextChange},Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.Threading.CancellationToken)">
+            <summary>
+            For all edits that are not mapped to using directives, add them directly to the builder.
+            Edits that are not mapped are skipped, and using directive changes are handled by <see cref="M:Microsoft.CodeAnalysis.Razor.DocumentMapping.RazorEditHelper.TextChangeBuilder.AddUsingsChanges(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.Collections.Immutable.ImmutableArray{System.String},System.Collections.Immutable.ImmutableArray{System.String},System.Threading.CancellationToken)"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.DocumentMapping.RazorEditHelper.TextChangeBuilder.AddUsingsChanges(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.Collections.Immutable.ImmutableArray{System.String},System.Collections.Immutable.ImmutableArray{System.String},System.Threading.CancellationToken)">
+             <summary>
+             Given a set of new and removed usings, adds text changes to this builder using the following logic:
+            
+             <list type="number">
+             <item>
+             If there are no existing usings the new usings are added at the top of the document following any page, component, or namespace directives.
+             </item>
+            
+             <item>
+             If there are existing usings but they are in a continous block, replace that block with the new ordered set of usings.
+             </item>
+            
+             <item>
+             If for some reason a user has usings not in a single block (allows for whitespace), then replace the first block of using directives
+             with the set of usings within that block that have not been removed AND the new usings. The remaining directives outside the block are removed
+             as needed.
+             </item>
+             </list>
+             </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.CodeActions.VSCodeActionParams">
+            <summary>
+            We can't use the CodeActionParams defined in MS.VS.LS.Protocol, so need our own version, because the platform only
+            converts on read, not write. ie, if it gets a request for a CodeActionParams, it will happily deserialize the Context
+            property to VSInternalCodeActionContext, but in our case we need to send a request to our CustomMessageTarget, and so
+            we need the Context property serialized as the internal type.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.Completion.CompletionPositionInfo">
+            <summary>
+            Completion-related information about a position.
+            </summary>
+            <param name="ProvisionalTextEdit">Text edit that should be applied to generated C# document prior to invoking completion</param>
+            <remarks>
+            Provisional completion happens when the user just type "." in something like @DateTime.
+            and the dot is initially in HTML rather than C#. Since we don't want HTML completions
+            in that case, we cheat and modify C# buffer immediately but temporarily, not waiting for
+            reparse/regen, before showing completion.
+            </remarks>
+            <param name="DocumentPositionInfo">Document position mapping data for language mappings</param>
+            <param name="ShouldIncludeDelegationSnippets">Indicates that snippets should be added to delegated completion list (currently for HTML only)</param>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Protocol.Completion.CompletionPositionInfo.#ctor(Roslyn.LanguageServer.Protocol.TextEdit,Microsoft.CodeAnalysis.Razor.DocumentMapping.DocumentPositionInfo,System.Boolean)">
+            <summary>
+            Completion-related information about a position.
+            </summary>
+            <param name="ProvisionalTextEdit">Text edit that should be applied to generated C# document prior to invoking completion</param>
+            <remarks>
+            Provisional completion happens when the user just type "." in something like @DateTime.
+            and the dot is initially in HTML rather than C#. Since we don't want HTML completions
+            in that case, we cheat and modify C# buffer immediately but temporarily, not waiting for
+            reparse/regen, before showing completion.
+            </remarks>
+            <param name="DocumentPositionInfo">Document position mapping data for language mappings</param>
+            <param name="ShouldIncludeDelegationSnippets">Indicates that snippets should be added to delegated completion list (currently for HTML only)</param>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Protocol.Completion.CompletionPositionInfo.ProvisionalTextEdit">
+            <summary>Text edit that should be applied to generated C# document prior to invoking completion</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Protocol.Completion.CompletionPositionInfo.DocumentPositionInfo">
+            <summary>Document position mapping data for language mappings</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Protocol.Completion.CompletionPositionInfo.ShouldIncludeDelegationSnippets">
+            <summary>Indicates that snippets should be added to delegated completion list (currently for HTML only)</summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.CustomMessageNames">
+            <summary>
+            This lists all of the LSP methods that we support  that are not part of the LSP spec, or LSP++
+            </summary>
+            <remarks>
+            Handlers for these methods live in either the RazorCustomMessageTarget class in this repo for VS,
+            or in various TypeScript files in https://github.com/dotnet/vscode-csharp for VS Code.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.DocumentPresentation.RazorTextPresentationParams">
+            <summary>
+            Class representing the parameters sent for a textDocument/_vs_textPresentation request, plus
+            a host document version.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.DocumentPresentation.RazorUriPresentationParams">
+            <summary>
+            Class representing the parameters sent for a textDocument/_vs_uriPresentation request, plus
+            a host document version.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.DocumentPresentation.TextPresentationParams">
+            <summary>
+            Class representing the parameters sent for a textDocument/_vs_textPresentation request.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.DocumentPresentation.UriPresentationParams">
+            <summary>
+            Class representing the parameters sent for a textDocument/_vs_uriPresentation request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Protocol.IClientCapabilitiesService.CanGetClientCapabilities">
+            <summary>
+            Indicates whether capabilities have been sent by the client, and therefore where a call to ClientCapabilities would succeed
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.IDelegatedParams">
+            <summary>
+            Interface for delegated params that enables sharing of code in RazorCustomMessageTarget
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Protocol.JsonHelpers.JsonSerializerOptions">
+            <summary>
+            Serializer options to use when serializing or deserializing a Roslyn LSP type
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Protocol.JsonHelpers.Convert``2(``0)">
+            <summary>
+            Converts an LSP object to a different LSP object, either by casting or serializing and deserializing
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Protocol.JsonHelpers.ConvertAll``2(``0[])">
+            <summary>
+            Converts an array of LSP objects to a different LSP object, either by casting or serializing and deserializing
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Protocol.LanguageServerConstants.CodeActions.UnformattedRemap">
+            <summary>
+            Remaps without formatting the resolved code action edit
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Protocol.LanguageServerConstants.CodeActions.Default">
+            <summary>
+            Remaps and formats the resolved code action edit
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.RazorTextChange">
+            <summary>
+            A representation of a Roslyn TextChange that can be serialized with System.Text.Json. Also needs to match
+            https://github.com/dotnet/vscode-csharp/blob/main/src/razor/src/rpc/serverTextChange.ts for VS Code.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.RazorTextSpan">
+            <summary>
+            A representation of a Roslyn TextSpan that can be serialized with System.Text.Json. Also needs to match
+            https://github.com/dotnet/vscode-csharp/blob/main/src/razor/src/rpc/serverTextSpan.ts for VS Code.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Protocol.TextDocumentIdentifierAndVersion">
+            <summary>
+            A serializable pairing of <see cref="P:Microsoft.CodeAnalysis.Razor.Protocol.TextDocumentIdentifierAndVersion.TextDocumentIdentifier"/> and a version. This
+            should be used over <see cref="T:Roslyn.LanguageServer.Protocol.VersionedTextDocumentIdentifier"/> because when serializing
+            and deserializing that class, if the <see cref="P:Microsoft.CodeAnalysis.Razor.Protocol.TextDocumentIdentifierAndVersion.TextDocumentIdentifier"/> is a <see cref="T:Roslyn.LanguageServer.Protocol.VSTextDocumentIdentifier"/>
+            it will lose the project context information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Protocol.TextDocumentIdentifierAndVersion.#ctor(Roslyn.LanguageServer.Protocol.TextDocumentIdentifier,System.Int32)">
+            <summary>
+            A serializable pairing of <see cref="P:Microsoft.CodeAnalysis.Razor.Protocol.TextDocumentIdentifierAndVersion.TextDocumentIdentifier"/> and a version. This
+            should be used over <see cref="T:Roslyn.LanguageServer.Protocol.VersionedTextDocumentIdentifier"/> because when serializing
+            and deserializing that class, if the <see cref="P:Microsoft.CodeAnalysis.Razor.Protocol.TextDocumentIdentifierAndVersion.TextDocumentIdentifier"/> is a <see cref="T:Roslyn.LanguageServer.Protocol.VSTextDocumentIdentifier"/>
+            it will lose the project context information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.FoldingRanges.FoldingRangeService.FixFoldingRangeStart(Roslyn.LanguageServer.Protocol.FoldingRange,Microsoft.AspNetCore.Razor.Language.RazorCodeDocument)">
+            <summary>
+            Fixes the start of a range so that the offset of the first line is the last character on that line. This makes
+            it so collapsing will still show the text instead of just "..."
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.AddUsingsHelper.TryExtractNamespace(System.String,System.String@,System.String@)">
+            <summary>
+            Extracts the namespace from a C# add using statement provided by Visual Studio
+            </summary>
+            <param name="csharpAddUsing">Add using statement of the form `using System.X;`</param>
+            <param name="namespace">Extract namespace `System.X`</param>
+            <param name="prefix">The prefix to show, before the namespace, if any</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.AddUsingsHelper.GetInsertUsingTextEdit(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.String,Microsoft.AspNetCore.Razor.PooledObjects.PooledArrayBuilder{Microsoft.CodeAnalysis.Razor.Formatting.AddUsingsHelper.RazorUsingDirective}@)">
+            <summary>
+            Generates a <see cref="T:Roslyn.LanguageServer.Protocol.TextEdit"/> to insert a new using directive into the Razor code document, at the right spot among existing using directives.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.AddUsingsHelper.GetInsertUsingTextEdit(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.String)">
+            <summary>
+            Generates a <see cref="T:Roslyn.LanguageServer.Protocol.TextEdit"/> to insert a new using directive into the Razor code document, at the top of the file.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingContext.GetIndentations">
+            <summary>A Dictionary of int (line number) to IndentationContext.</summary>
+            <remarks>
+            Don't use this to discover the indentation level you should have, use
+            <see cref="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingContext.TryGetIndentationLevel(System.Int32,System.Int32@)"/> which operates on the position rather than just the line.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingContext.GetIndentationLevelString(System.Int32)">
+            <summary>
+            Generates a string of indentation based on a specific indentation level. For instance, inside of a C# method represents 1 indentation level. A method within a class would have indentaiton level of 2 by default etc.
+            </summary>
+            <param name="indentationLevel">The indentation level to represent</param>
+            <returns>A whitespace string representing the indentation level based on the configuration.</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingContext.GetIndentationOffsetForLevel(System.Int32)">
+            <summary>
+            Given a level, returns the corresponding offset.
+            </summary>
+            <param name="level">A value representing the indentation level.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingContext.DEBUG_ValidateComponents(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,Microsoft.AspNetCore.Razor.Language.RazorCodeDocument)">
+            <summary>
+            It can be difficult in the testing infrastructure to correct constructs input files that work consistently across
+            context changes, so this method validates that the number of components isn't changing due to lost tag help info.
+            Without this guarantee its hard to reason about test behaviour/failures.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.AddIndentationToMethod(System.String,System.Int32,System.Boolean,System.Int32)">
+            <summary>
+             Adds indenting to the method.
+            </summary>
+            <param name="method">
+             The method to add indenting to. The method should be marked with <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/> where an indent is wanted
+            </param>
+            <param name="tabSize">
+             The indentation size
+            </param>
+            <param name="insertSpaces">
+             Use spaces for indentation.
+            </param>
+            <param name="startingIndent">
+             The size of the any existing indent.
+            </param>
+            <returns>The indented method.</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.AddIndentationToMethod(System.String,System.Int32,System.Boolean,System.Int32,System.Int32,Microsoft.CodeAnalysis.Text.SourceText)">
+            <summary>
+             Adds indenting to the method.
+            </summary>
+            <param name="method">
+             The method to add indenting to. The method should be marked with <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/> where an indent is wanted
+             and <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.InitialIndent"/> where some initial indent is needed.
+            </param>
+            <param name="tabSize">
+             The indentation size
+            </param>
+            <param name="insertSpaces">
+            Use spaces for indentation.
+            </param>
+            <param name="startAbsoluteIndex">
+             The absolute index of the beginning of the class in the C# file the method will be added to.
+            </param>
+            <param name="numCharacterBefore">
+             The number of characters on the line before where startAbsoluteIndex is in the source.
+            </param>
+            <param name="source">
+             The contents of the C# file.
+            </param>
+            <returns>The indented method.</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.AddIndentationToMethod(System.String,System.Int32,System.Boolean,System.Int32,System.Int32,Microsoft.AspNetCore.Razor.Language.RazorSourceDocument)">
+            <summary>
+             Adds indenting to the method.
+            </summary>
+            <param name="method">
+             The method to add indenting to. The method should be marked with <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.Indent"/> where an indent is wanted
+             and <see cref="F:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.InitialIndent"/> where some initial indent is needed.
+            </param>
+            <param name="tabSize">
+             The indentation size
+            </param>
+            <param name="insertSpaces"></param>
+            <param name="startAbsoluteIndex">
+             The absolute index of the beginning of the code block in the Razor file where the method will be added to.
+            </param>
+            <param name="numCharacterBefore">
+             The number of characters on the line before where startAbsoluteIndex is in the source.
+            </param>
+            <param name="source">
+             The <see cref="T:Microsoft.AspNetCore.Razor.Language.RazorSourceDocument"/> of the razor file the method is being added to.
+            </param>
+            <returns>The indented method.</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.CountNonWhitespaceChars(Microsoft.CodeAnalysis.Text.SourceText,System.Int32,System.Int32)">
+            <summary>
+            Counts the number of non-whitespace characters in a given span of text.
+            </summary>
+            <param name="text">The source text</param>
+            <param name="start">Inclusive position for where to start counting</param>
+            <param name="endExclusive">Exclusive for where to stop counting</param>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.GetIndentationString(System.Int32,System.Boolean,System.Int32)">
+            <summary>
+            Given a <paramref name="indentation"/> amount of characters, generate a string representing the configured indentation.
+            </summary>
+            <param name="indentation">An amount of characters to represent the indentation.</param>
+            <param name="insertSpaces">Whether spaces are used for indentation.</param>
+            <param name="tabSize">The size of a tab and indentation.</param>
+            <returns>A whitespace string representation indentation.</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.NaivelyUnindentSubstring(Microsoft.CodeAnalysis.Text.SourceText,Microsoft.CodeAnalysis.Text.TextSpan,System.Text.StringBuilder)">
+             <summary>
+             Unindents a span of text with a few caveats:
+            
+             1. This assumes consistency in tabs/spaces for starting whitespace per line
+             2. This doesn't format the text, just attempts to remove leading whitespace in a uniform way
+             3. It will never remove non-whitespace
+            
+             This was made with extracting code into a new file in mind because it's not trivial to format that text and make
+             sure the indentation is right. Use with caution.
+             </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.FormattingUtilities.FixHtmlTextEdits(Microsoft.CodeAnalysis.Text.SourceText,Roslyn.LanguageServer.Protocol.TextEdit[])">
+            <summary>
+            Sometimes the Html language server will send back an edit that contains a tilde, because the generated
+            document we send them has lots of tildes. In those cases, we need to do some extra work to compute the
+            minimal text edits
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.IndentationContext.ExistingIndentation">
+            <summary>
+            The number of characters of indentation there are on this line
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.IndentationContext.ExistingIndentationSize">
+            <summary>
+            The amount of visual indentation there is on this line, taking into account tab size
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Formatting.CSharpFormattingPass">
+            <summary>
+            Gets edits in Razor files, and returns edits to Razor files, with nicely formatted Html
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.CSharpFormattingPass.#ctor(Microsoft.CodeAnalysis.Razor.DocumentMapping.IDocumentMappingService,Microsoft.CodeAnalysis.Razor.Workspaces.IHostServicesProvider,Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory)">
+            <summary>
+            Gets edits in Razor files, and returns edits to Razor files, with nicely formatted Html
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Formatting.CSharpOnTypeFormattingPass">
+            <summary>
+            Gets edits in C# files, and returns edits to Razor files, with nicely formatted Html
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.CSharpOnTypeFormattingPass.#ctor(Microsoft.CodeAnalysis.Razor.DocumentMapping.IDocumentMappingService,Microsoft.CodeAnalysis.Razor.Workspaces.IHostServicesProvider,Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory)">
+            <summary>
+            Gets edits in C# files, and returns edits to Razor files, with nicely formatted Html
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Formatting.HtmlFormattingPass">
+            <summary>
+            Gets edits in Razor files, and returns edits to Razor files, with nicely formatted Html
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.HtmlFormattingPass.#ctor(Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory)">
+            <summary>
+            Gets edits in Razor files, and returns edits to Razor files, with nicely formatted Html
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Formatting.HtmlOnTypeFormattingPass">
+            <summary>
+            Gets edits in Html files, and returns edits to Razor files, with nicely formatted Html
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.HtmlOnTypeFormattingPass.#ctor(Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory)">
+            <summary>
+            Gets edits in Html files, and returns edits to Razor files, with nicely formatted Html
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.CSharpDocumentGenerator">
+             <summary>
+             Generates a C# document in order to get Roslyn formatting behaviour on a Razor document
+             </summary>
+             <remarks>
+             <para>
+             The general theory is to take a Razor syntax tree and convert it to something that looks to Roslyn like a C#
+             document, in a way that accurately represents the indentation constructs that a Razor user is expressing when
+             they write the Razor code.
+             </para>
+             <para>
+             For example, given the following Razor file:
+             <code>
+             &lt;div&gt;
+                 @if (true)
+                 {
+                     // Some code
+                 }
+             &lt;/div&gt;
+            
+             @code {
+                 private string Name { get; set; }
+             }
+             </code>
+             </para>
+             <para>
+             The generator will go through that syntax tree and produce the following C# document:
+             <code>
+             // &lt;div&gt;
+                 @if (true)
+                 {
+                     // Some code
+                 }
+             // &lt;/div&gt;
+            
+             class F
+             {
+                 private string Name { get; set; }
+             }
+             </code>
+             </para>
+             <para>
+             The class definition is clearly not present in the source Razor document, but it represents the intended
+             indentation that the user would expect to see for the property declaration. Additionally the indentation
+             of the @if block is recorded, so that after formatting the C#, which Roslyn will set back to column 0, we
+             reapply it so we end up with the C# indentation and Html indentation combined.
+             </para>
+             <para>
+             For more complete examples, the full test log for every formatting test includes the generated C# document.
+             </para>
+             <para>
+             A final important note about this class, whilst it is a SyntaxVisitor, it is not intended to be a general
+             purpose one, and things won't work as expected if the Visit method is called on arbitrary nodes. The visit
+             methods are implemented with the assumption they will only see a node if it is the first one on a line of
+             a Razor file.
+             </para>
+             </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.CSharpDocumentGenerator.Generator._elementEndLine">
+            <summary>
+            The line number of the last line of the current element, if we're inside one.
+            </summary>
+            <remarks>
+            This is used to track if the syntax node at the start of each line is parented by an element node, without
+            having to do lots of tree traversal.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.CSharpDocumentGenerator.Generator._ignoreUntilLine">
+            <summary>
+            The line number of the last line of a block where formatting should be completely ignored
+            </summary>
+            <remarks>
+            Some Html constructs, namely &lt;textarea&gt; and &lt;pre&gt;, should not be formatted at all, and we essentially
+            need to treat them as multiline Razor comments. This field is used to track the line number of the last line of such
+            an element, so we can ignore every line in it without having to do lots of tree traversal to check "are we parented
+            by a pre tag" etc.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo">
+            <summary>
+            Represents the state of a line in the generated C# document.
+            </summary>
+            <param name="ProcessIndentation">Whether the formatted document text to the left the first non-whitespace character should be applied to the origin document</param>
+            <param name="ProcessFormatting">Whether the formatted document text to the right of the first non-whitespace character should be applied to the origin document</param>
+            <param name="CheckForNewLines">Whether the origin document text could have overflowed to multiple lines in the formatted document</param>
+            <param name="SkipPreviousLine">Whether to skip the previous line in the formatted document, since it doesn't represent anything in the origin document</param>
+            <param name="SkipNextLine">Whether to skip the next line in the formatted document, since it doesn't represent anything in the origin document</param>
+            <param name="SkipNextLineIfBrace">Whether to skip the next line in the formatted document, like <see cref="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.SkipNextLine" />, but only skips if the next line is a brace</param>
+            <param name="HtmlIndentLevel">The indent level that the Html formatter applied to this line</param>
+            <param name="OriginOffset">How many characters after the first non-whitespace character of the origin line should be skipped before applying formatting</param>
+            <param name="FormattedLength">How many characters of the origin line the formatted line represents</param>
+            <param name="FormattedOffset">How many characters after the first non-whitespace character of the formatted line should be skipped before applying formatting</param>
+            <param name="FormattedOffsetFromEndOfLine">How many characters before the end of the formatted line should be skipped before applying formatting</param>
+            <param name="AdditionalIndentation">An arbitrary string representing additional indentation to apply to this line</param>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Represents the state of a line in the generated C# document.
+            </summary>
+            <param name="ProcessIndentation">Whether the formatted document text to the left the first non-whitespace character should be applied to the origin document</param>
+            <param name="ProcessFormatting">Whether the formatted document text to the right of the first non-whitespace character should be applied to the origin document</param>
+            <param name="CheckForNewLines">Whether the origin document text could have overflowed to multiple lines in the formatted document</param>
+            <param name="SkipPreviousLine">Whether to skip the previous line in the formatted document, since it doesn't represent anything in the origin document</param>
+            <param name="SkipNextLine">Whether to skip the next line in the formatted document, since it doesn't represent anything in the origin document</param>
+            <param name="SkipNextLineIfBrace">Whether to skip the next line in the formatted document, like <see cref="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.SkipNextLine" />, but only skips if the next line is a brace</param>
+            <param name="HtmlIndentLevel">The indent level that the Html formatter applied to this line</param>
+            <param name="OriginOffset">How many characters after the first non-whitespace character of the origin line should be skipped before applying formatting</param>
+            <param name="FormattedLength">How many characters of the origin line the formatted line represents</param>
+            <param name="FormattedOffset">How many characters after the first non-whitespace character of the formatted line should be skipped before applying formatting</param>
+            <param name="FormattedOffsetFromEndOfLine">How many characters before the end of the formatted line should be skipped before applying formatting</param>
+            <param name="AdditionalIndentation">An arbitrary string representing additional indentation to apply to this line</param>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.ProcessIndentation">
+            <summary>Whether the formatted document text to the left the first non-whitespace character should be applied to the origin document</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.ProcessFormatting">
+            <summary>Whether the formatted document text to the right of the first non-whitespace character should be applied to the origin document</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.CheckForNewLines">
+            <summary>Whether the origin document text could have overflowed to multiple lines in the formatted document</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.SkipPreviousLine">
+            <summary>Whether to skip the previous line in the formatted document, since it doesn't represent anything in the origin document</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.SkipNextLine">
+            <summary>Whether to skip the next line in the formatted document, since it doesn't represent anything in the origin document</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.SkipNextLineIfBrace">
+            <summary>Whether to skip the next line in the formatted document, like <see cref="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.SkipNextLine" />, but only skips if the next line is a brace</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.HtmlIndentLevel">
+            <summary>The indent level that the Html formatter applied to this line</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.OriginOffset">
+            <summary>How many characters after the first non-whitespace character of the origin line should be skipped before applying formatting</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.FormattedLength">
+            <summary>How many characters of the origin line the formatted line represents</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.FormattedOffset">
+            <summary>How many characters after the first non-whitespace character of the formatted line should be skipped before applying formatting</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.FormattedOffsetFromEndOfLine">
+            <summary>How many characters before the end of the formatted line should be skipped before applying formatting</summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Formatting.New.CSharpFormattingPass.LineInfo.AdditionalIndentation">
+            <summary>An arbitrary string representing additional indentation to apply to this line</summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Formatting.RazorFormattingService.NormalizeLineEndings(Microsoft.CodeAnalysis.Text.SourceText,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.Text.TextChange})">
+            <summary>
+            This method counts the occurrences of CRLF and LF line endings in the original text. 
+            If LF line endings are more prevalent, it removes any CR characters from the text changes 
+            to ensure consistency with the LF style.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.GoToDefinition.IRazorComponentDefinitionService">
+            <summary>
+             Go to Definition support for Razor components.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.ProjectSystem.AbstractRazorProjectInfoDriver.StartInitialization">
+            <summary>
+            MUST be called in the constructor of any <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.AbstractRazorProjectInfoDriver"/> descendent
+            to kick off initialization.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.ProjectSystem.Extensions.Matches(Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectKey,Microsoft.CodeAnalysis.Project)">
+            <summary>
+            Returns <see langword="true"/> if this <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectKey"/> matches the given <see cref="T:Microsoft.CodeAnalysis.Project"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.ProjectSystem.HostProject.FilePath">
+            <summary>
+            Gets the full path to the .csproj file for this project
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.ProjectSystem.HostProject.IntermediateOutputPath">
+            <summary>
+            Gets the full path to the folder under 'obj' where the project.razor.bin file will live
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.ProjectSystem.HostProject.DisplayName">
+            <summary>
+            An extra user-friendly string to show in the VS navigation bar to help the user, of the form "{ProjectFileName} ({Flavor})"
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.ProjectSystem.IDocumentSnapshot.GetCSharpSyntaxTreeAsync(System.Threading.CancellationToken)">
+            <summary>
+             Gets the Roslyn syntax tree for the generated C# for this Razor document
+            </summary>
+            <remarks>
+             ⚠️ Should be used sparingly in language server scenarios.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.ProjectSystem.IProjectSnapshot.FilePath">
+            <summary>
+            Gets the full path to the .csproj file for this project
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.ProjectSystem.IProjectSnapshot.IntermediateOutputPath">
+            <summary>
+            Gets the full path to the folder under 'obj' where the project.razor.bin file will live
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.IRazorProjectInfoDriver">
+            <summary>
+            Handles project changes and notifies listeners of project updates and removal.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.ProjectSystem.ISolutionQueryOperations.GetProjects">
+            <summary>
+            Returns all Razor project snapshots.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.ProjectSystem.ISolutionQueryOperations.GetProjectsContainingDocument(System.String)">
+            <summary>
+             Returns all Razor valid project snapshots that contain the given document file path.
+            </summary>
+            <param name="documentFilePath">A file path to a Razor document.</param>
+            <remarks>
+             In multi-targeting scenarios, this will return a project for each target that the
+             contains the document.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.Legacy.ILegacyDocumentSnapshot">
+            <summary>
+             Provides document snapshot members used by the legacy editor.
+            </summary>
+            <remarks>
+             This interface should only be accessed by the legacy editor.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.Legacy.ILegacyProjectSnapshot">
+            <summary>
+             Provides project snapshot members used by the legacy editor.
+            </summary>
+            <remarks>
+             This interface should only be accessed by the legacy editor.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectKey">
+            <summary>
+            A very light wrapper around a file path, used to ensure consistency across the code base for what constitutes the unique
+            identifier for a project.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshot.GetRelatedDocumentFilePaths(System.String)">
+            <summary>
+            If the provided document file path references an import document, gets the other
+            documents in the project that include directives specified by the provided document.
+            Otherwise returns an empty array.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager._projectMap">
+            <summary>
+            A map of <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectKey"/> to <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager.Entry"/>, which wraps a <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectState"/>
+            and lazily creates a <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshot"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager._openDocumentSet">
+            <summary>
+            The set of open documents.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager._isSolutionClosing">
+            <summary>
+            Determines whether or not the solution is closing.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager._notificationQueue">
+            <summary>
+             A queue of ordered notifications to process.
+            </summary>
+            <remarks>
+             ⚠️ This field must only be accessed when running on the dispatcher.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager._processingNotifications">
+            <summary>
+             <see langword="true"/> while <see cref="F:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager._notificationQueue"/> is being processed.
+            </summary>
+            <remarks>
+             ⚠️ This field must only be accessed when running on the dispatcher.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager.#ctor(Microsoft.CodeAnalysis.Razor.ProjectEngineHost.IProjectEngineFactoryProvider,Microsoft.CodeAnalysis.Razor.ProjectSystem.RazorCompilerOptions,Microsoft.CodeAnalysis.Razor.Workspaces.LanguageServerFeatureOptions,Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory,System.Action{Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager.Updater})">
+            <summary>
+            Constructs an instance of <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectSnapshotManager"/>.
+            </summary>
+            <param name="projectEngineFactoryProvider">The <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectEngineHost.IProjectEngineFactoryProvider"/> to
+            use when creating <see cref="T:Microsoft.CodeAnalysis.Razor.ProjectSystem.ProjectState"/>.</param>
+            <param name="compilerOptions">Options used to control Razor compilation.</param>
+            <param name="featureOptions">The <see cref="T:Microsoft.CodeAnalysis.Razor.Workspaces.LanguageServerFeatureOptions"/> to use.</param>
+            <param name="loggerFactory">The <see cref="T:Microsoft.CodeAnalysis.Razor.Logging.ILoggerFactory"/> to use.</param>
+            <param name="initializer">An optional callback to set up the initial set of projects and documents.
+            Note that this is called during construction, so it does not run on the dispatcher and notifications
+            will not be sent.</param>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.RazorSyntaxFacts.TryGetAttributeNameAbsoluteIndex(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.Int32,System.Int32@)">
+            <summary>
+            Given an absolute index positioned in an attribute, finds the absolute index of the part of the
+            attribute that represents the attribute name. eg. for @bi$$nd-Value it will find the absolute index
+            of "Value"
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.RazorSyntaxFacts.TryGetFullAttributeNameSpan(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.Int32,Microsoft.CodeAnalysis.Text.TextSpan@)">
+            <summary>
+            Gets the span of the entire "name" part of an attribute, if the <paramref name="absoluteIndex"/> is anywhere within it,
+            including any prefix or suffix
+            For example given "&lt;Goo @bi$$nd-Value:after="val" /&gt;" with the cursor at $$, it would return the span from "@" to "r".
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.RazorSyntaxFacts.TryGetComponentParameterNameFromFullAttributeName(System.String,System.ReadOnlySpan{System.Char}@,System.ReadOnlySpan{System.Char}@)">
+            <summary>
+            For example given "&lt;Goo @bi$$nd-Value:after="val" /&gt;", it would return the span from "V" to "e".
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Remote.IRemoteJsonService">
+            <summary>
+            Marker interface to indicate that an OOP service should use Json for communication
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.SemanticTokens.IRazorSemanticTokensInfoService.GetSemanticTokensAsync(Microsoft.CodeAnalysis.Razor.ProjectSystem.DocumentContext,Microsoft.CodeAnalysis.Text.LinePositionSpan,System.Boolean,System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Gets the int array representing the semantic tokens for the given range.
+            </summary>
+            <remarks>See https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_semanticTokens for details about the int array</remarks>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.SemanticTokens.SemanticRange.FromRazor">
+            <summary>
+            If we produce a token, and a delegated server produces a token, we want to prefer ours, so we use this flag to help our
+            sort algorithm, that way we can avoid the perf hit of actually finding duplicates, and just take the first instance that
+            covers a range.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Serialization.MessagePack.Formatters.TopLevelFormatter`1">
+            <summary>
+             A message pack formatter that can be serialized at the top-level.
+             It will create a <see cref="T:Microsoft.CodeAnalysis.Razor.Serialization.MessagePack.Formatters.SerializerCachingOptions"/> instance if one isn't
+             passed to <see cref="T:MessagePack.MessagePackSerializer"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Serialization.MessagePack.Formatters.ValueFormatter`1">
+            <summary>
+             A message package formatter that cannot be serialized at the top-level. It expects a
+             <see cref="T:Microsoft.CodeAnalysis.Razor.Serialization.MessagePack.Formatters.SerializerCachingOptions"/> instance to be passed to it.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Serialization.MessagePack.Formatters.ValueFormatter`1.Skim(MessagePack.MessagePackReader@,Microsoft.CodeAnalysis.Razor.Serialization.MessagePack.Formatters.SerializerCachingOptions)">
+            <summary>
+             Partially deserializes an object and ensures that any cached references are handled. Descendents should override
+             this method if they support skimming.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Settings.ClientSettings">
+            <summary>
+            Settings that are set and handled on the client, but needed by the LSP Server to function correctly. When these are
+            updated a workspace/didchangeconfiguration should be sent from client to the server. Then the server requests
+            workspace/configuration to get the latest settings. For VS, the razor protocol also handles this and serializes the
+            settings back to the server.
+            </summary>
+            <param name="ClientSpaceSettings"></param>
+            <param name="ClientCompletionSettings"></param>
+            <param name="AdvancedSettings"></param>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Settings.ClientSettings.#ctor(Microsoft.CodeAnalysis.Razor.Settings.ClientSpaceSettings,Microsoft.CodeAnalysis.Razor.Settings.ClientCompletionSettings,Microsoft.CodeAnalysis.Razor.Settings.ClientAdvancedSettings)">
+            <summary>
+            Settings that are set and handled on the client, but needed by the LSP Server to function correctly. When these are
+            updated a workspace/didchangeconfiguration should be sent from client to the server. Then the server requests
+            workspace/configuration to get the latest settings. For VS, the razor protocol also handles this and serializes the
+            settings back to the server.
+            </summary>
+            <param name="ClientSpaceSettings"></param>
+            <param name="ClientCompletionSettings"></param>
+            <param name="AdvancedSettings"></param>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Settings.ClientSettings.ClientSpaceSettings">
+            <summary></summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Settings.ClientSettings.ClientCompletionSettings">
+            <summary></summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Settings.ClientSettings.AdvancedSettings">
+            <summary></summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Telemetry.ITelemetryReporter.ReportRequestTiming(System.String,System.String,System.TimeSpan,System.TimeSpan,Microsoft.CodeAnalysis.Razor.Telemetry.TelemetryResult)">
+            <summary>
+            Reports timing data for an lsp request
+            </summary>
+            <param name="name">The method name</param>
+            <param name="language">The language for the request</param>
+            <param name="queuedDuration">How long the request was in the queue before it was handled by code</param>
+            <param name="requestDuration">How long it took to handle the request</param>
+            <param name="result">The result of handling the request</param>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Telemetry.TelemetryThresholds">
+            <summary>
+            A set of constants used to reduce the telemetry emitted to the set that help us understand
+            which LSP is taking the most time in the case that the overall call is lengthy.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.TextDifferencing.SourceTextDiffer.RentArray(System.Int32)">
+            <summary>
+             Rents a char array of at least <paramref name="minimumLength"/> from the shared array pool.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.TextDifferencing.SourceTextDiffer.ReturnArray(System.Char[],System.Boolean)">
+            <summary>
+             Returns a char array to the shared array pool.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.TextDifferencing.SourceTextDiffer.EnsureBuffer(System.Char[]@,System.Int32)">
+            <summary>
+             Ensures that <paramref name="array"/> references a char array of at least <paramref name="minimumLength"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.TextDifferencing.TextDiffer.IntArray">
+            <summary>
+             This is a simple wrapper for either a single small int array, or
+             an array of int array pages.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.TextDifferencing.TextDiffer.IntArray.RentArray(System.Int32)">
+            <summary>
+             Rents an int array of at least <paramref name="minimumLength"/> from the shared array pool.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.TextDifferencing.TextDiffer.IntArray.ReturnArray(System.Int32[],System.Boolean)">
+            <summary>
+             Returns an int array to the shared array pool.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Threading.CancellationSeries">
+            <summary>
+            Produces a series of <see cref="T:System.Threading.CancellationToken"/> objects such that requesting a new token
+            causes the previously issued token to be cancelled.
+            </summary>
+            <remarks>
+            <para>Consuming code is responsible for managing overlapping asynchronous operations.</para>
+            <para>This class has a lock-free implementation to minimise latency and contention.</para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Threading.CancellationSeries.#ctor(System.Threading.CancellationToken)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.CodeAnalysis.Razor.Threading.CancellationSeries"/>.
+            </summary>
+            <param name="token">An optional cancellation token that, when cancelled, cancels the last
+            issued token and causes any subsequent tokens to be issued in a cancelled state.</param>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Threading.CancellationSeries.HasActiveToken">
+            <summary>
+            Determines if the cancellation series has an active token which has not been cancelled.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Threading.CancellationSeries.CreateNext(System.Threading.CancellationToken)">
+            <summary>
+            Creates the next <see cref="T:System.Threading.CancellationToken"/> in the series, ensuring the last issued
+            token (if any) is cancelled first.
+            </summary>
+            <param name="token">An optional cancellation token that, when cancelled, cancels the
+            returned token.</param>
+            <returns>
+            A cancellation token that will be cancelled when either:
+            <list type="bullet">
+            <item><see cref="M:Microsoft.CodeAnalysis.Razor.Threading.CancellationSeries.CreateNext(System.Threading.CancellationToken)"/> is called again</item>
+            <item>The token passed to this method (if any) is cancelled</item>
+            <item>The token passed to the constructor (if any) is cancelled</item>
+            <item><see cref="M:Microsoft.CodeAnalysis.Razor.Threading.CancellationSeries.Dispose"/> is called</item>
+            </list>
+            </returns>
+            <exception cref="T:System.ObjectDisposedException">This object has been disposed.</exception>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Threading.TaskExtensions.VerifyCompleted(System.Threading.Tasks.ValueTask)">
+            <summary>
+            Asserts the <see cref="T:System.Threading.Tasks.ValueTask"/> passed has already been completed.
+            </summary>
+            <remarks>
+            This is useful for a specific case: sometimes you might be calling an API that is "sometimes" async, and you're
+            calling it from a synchronous method where you know it should have completed synchronously. This is an easy
+            way to assert that while silencing any compiler complaints.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Threading.TaskExtensions.VerifyCompleted``1(System.Threading.Tasks.ValueTask{``0})">
+            <summary>
+            Asserts the <see cref="T:System.Threading.Tasks.ValueTask"/> passed has already been completed.
+            </summary>
+            <remarks>
+            This is useful for a specific case: sometimes you might be calling an API that is "sometimes" async, and you're
+            calling it from a synchronous method where you know it should have completed synchronously. This is an easy
+            way to assert that while silencing any compiler complaints.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Tooltip.IComponentAvailabilityService.GetComponentAvailabilityAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+             Returns an array of projects that contain the specified document and whether the
+             given component or tag helper type name is available within it.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.UriExtensions.GetDocumentFilePath(System.Uri)">
+            <summary>
+             Converts the specified <see cref="T:System.Uri"/> into a file path that matches
+             a Roslyn <see cref="P:Microsoft.CodeAnalysis.TextDocument.FilePath"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue.#ctor(System.TimeSpan,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.ValueTask},System.Threading.CancellationToken)">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2"/>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`1">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`1.#ctor(System.TimeSpan,System.Func{System.Collections.Immutable.ImmutableArray{`0},System.Threading.CancellationToken,System.Threading.Tasks.ValueTask},System.Collections.Generic.IEqualityComparer{`0},System.Action,System.Threading.CancellationToken)">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2"/>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2">
+            <summary>
+            A queue where items can be added to to be processed in batches after some delay has passed. When processing
+            happens, all the items added since the last processing point will be passed along to be worked on.  Rounds of
+            processing happen serially, only starting up after a previous round has completed.
+            <para>
+            Failure to complete a particular batch (either due to cancellation or some faulting error) will not prevent
+            further batches from executing. The only thing that will permanently stop this queue from processing items is if
+            the <see cref="T:System.Threading.CancellationToken"/> passed to the constructor switches to <see
+            cref="P:System.Threading.CancellationToken.IsCancellationRequested"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._delay">
+            <summary>
+            Delay we wait after finishing the processing of one batch and starting up on then.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._equalityComparer">
+            <summary>
+            Equality comparer uses to dedupe items if present.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._idleAction">
+            <summary>
+            Fired when all batches have finished being processed, and the queue is waiting for an AddWork call.
+            </summary>
+            <remarks>
+            This is a best-effort signal with no guarantee that more work won't be queued, and hence the queue
+            going non-idle, immediately after (or during!) the event firing.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._processBatchAsync">
+            <summary>
+            Callback to actually perform the processing of the next batch of work.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._entireQueueCancellationToken">
+            <summary>
+            Cancellation token controlling the entire queue.  Once this is triggered, we don't want to do any more work
+            at all.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._cancellationSeries">
+            <summary>
+            Cancellation series we use so we can cancel individual batches of work if requested.  The client of the
+            queue can cancel existing work by either calling <see cref="M:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2.CancelExistingWork"/> directly, or passing <see
+            langword="true"/> to <see cref="M:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2.AddWork(`0,System.Boolean)"/>.  Work in the queue that has not started will be
+            immediately discarded. The cancellation token passed to <see cref="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._processBatchAsync"/> will be triggered
+            allowing the client callback to cooperatively cancel the current batch of work it is performing.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._gate">
+            <summary>
+            Lock we will use to ensure the remainder of these fields can be accessed in a thread-safe
+            manner.  When work is added we'll place the data into <see cref="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._nextBatch"/>.
+            We'll then kick of a task to process this in the future if we don't already have an
+            existing task in flight for that.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._nextBatch">
+            <summary>
+            Data added that we want to process in our next update task.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._nextBatchCancellationToken">
+            <summary>
+            CancellationToken controlling the next batch of items to execute.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._uniqueItems">
+            <summary>
+            Used if <see cref="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._equalityComparer"/> is present to ensure only unique items are added to <see
+            cref="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._nextBatch"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._updateTask">
+            <summary>
+            Task kicked off to do the next batch of processing of <see cref="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._nextBatch"/>. These
+            tasks form a chain so that the next task only processes when the previous one completes.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._taskInFlight">
+            <summary>
+            Whether or not there is an existing task in flight that will process the current batch
+            of <see cref="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._nextBatch"/>.  If there is an existing in flight task, we don't need to
+            kick off a new one if we receive more work before it runs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2.CancelExistingWork">
+            <summary>
+            Cancels any outstanding work in this queue.  Work that has not yet started will never run. Work that is in
+            progress will request cancellation in a standard best effort fashion.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2.WaitUntilCurrentBatchCompletesAsync">
+            <summary>
+            Waits until the current batch of work completes and returns the last value successfully computed from <see
+            cref="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._processBatchAsync"/>.  If the last <see cref="F:Microsoft.CodeAnalysis.Razor.Utilities.AsyncBatchingWorkQueue`2._processBatchAsync"/> canceled or failed, then a
+            corresponding canceled or faulted task will be returned that propagates that outwards.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Utilities.FilePathNormalizer.GetNormalizedDirectoryName(System.String)">
+            <summary>
+             Returns the directory portion of the given file path in normalized form.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Utilities.FilePathNormalizer.NormalizeCore(System.ReadOnlySpan{System.Char},System.Span{System.Char})">
+            <summary>
+             Normalizes the given <paramref name="source"/> file path and writes the result in <paramref name="destination"/>.
+            </summary>
+            <param name="source">The span to normalize.</param>
+            <param name="destination">The span to write to.</param>
+            <returns>
+             Returns a tuple containing the start index and length of the normalized path within <paramref name="destination"/>.
+            </returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Utilities.TagHelperCache.TryAddOrGet_NoLock(Microsoft.AspNetCore.Razor.Utilities.Checksum,Microsoft.AspNetCore.Razor.Language.TagHelperDescriptor)">
+            <summary>
+             Try to add the given tag helper to the cache. If it already exists, return the cached instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Razor.Utilities.UrlDecoder.CharToHexLookup">
+            <summary>
+             Map from an ASCII char to its hex value, e.g. arr['b'] == 11. 0xFF means it's not a hex digit.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Razor.Utilities.WrapWithTagHelper.TryGetValidWrappingRange(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,Microsoft.CodeAnalysis.Text.LinePositionSpan,Microsoft.CodeAnalysis.Text.LinePositionSpan@)">
+            <summary>
+            Returns the range to use for wrapping a selection with a tag.
+            </summary>
+            <returns>Returns null if the range specified is not valid</returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Text.SourceTextExtensions.GetEncompassingTextChangeRange(Microsoft.CodeAnalysis.Text.SourceText,Microsoft.CodeAnalysis.Text.SourceText)">
+            <summary>
+            Gets the minimal range of text that changed between the two versions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Text.SourceTextExtensions.TryGetLastNonWhitespaceOffset(Microsoft.CodeAnalysis.Text.SourceText,Microsoft.CodeAnalysis.Text.TextSpan,System.Int32@)">
+            <summary>
+             <para>
+              Given the source text and the current span, we start at the ending span location and iterate towards the start
+              until we've reached a non-whitespace character.
+             </para>
+             <para>
+              For instance, "  abcdef  " would have a last non-whitespace offset of 7 to correspond to the character 'f'.
+             </para>
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Text.SourceTextExtensions.MinimizeTextChanges(Microsoft.CodeAnalysis.Text.SourceText,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.Text.TextChange})">
+            <summary>
+            Applies the set of edits specified, and returns the minimal set needed to make the same changes
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Text.SourceTextExtensions.MinimizeTextChanges(Microsoft.CodeAnalysis.Text.SourceText,System.Collections.Immutable.ImmutableArray{Microsoft.CodeAnalysis.Text.TextChange},Microsoft.CodeAnalysis.Text.SourceText@)">
+            <summary>
+            Applies the set of edits specified, and returns the minimal set needed to make the same changes
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Text.SourceTextExtensions.HasLFLineEndings(Microsoft.CodeAnalysis.Text.SourceText)">
+            <summary>
+            Determines if the given <see cref="T:Microsoft.CodeAnalysis.Text.SourceText"/> has more LF line endings ('\n') than CRLF line endings ('\r\n').
+            </summary>
+            <param name="text">The <see cref="T:Microsoft.CodeAnalysis.Text.SourceText"/> to examine.</param>
+            <returns>
+            <c>true</c> if the <see cref="T:Microsoft.CodeAnalysis.Text.SourceText"/> is deemed to use LF line endings; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ProjectExtensions.GetTagHelpersAsync(Microsoft.CodeAnalysis.Project,Microsoft.AspNetCore.Razor.Language.RazorProjectEngine,Microsoft.CodeAnalysis.Razor.Telemetry.ITelemetryReporter,System.Threading.CancellationToken)">
+            <summary>
+             Gets the available <see cref="T:Microsoft.AspNetCore.Razor.Language.TagHelperDescriptor">tag helpers</see> from the specified
+             <see cref="T:Microsoft.CodeAnalysis.Project"/> using the given <see cref="T:Microsoft.AspNetCore.Razor.Language.RazorProjectEngine"/>.
+            </summary>
+            <remarks>
+             A telemetry event will be reported to <paramref name="telemetryReporter"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ProjectExtensions.TryGetSourceGeneratedDocumentFromHintNameAsync(Microsoft.CodeAnalysis.Project,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Finds source generated documents by iterating through all of them. In OOP there are better options!
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ProjectExtensions.TryGetHintNameFromGeneratedDocumentUri(Microsoft.CodeAnalysis.Project,System.Uri,System.String@)">
+            <summary>
+            Finds source generated documents by iterating through all of them. In OOP there are better options!
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.TextDocumentExtensions.TryComputeHintNameFromRazorDocument(Microsoft.CodeAnalysis.TextDocument,System.String@)">
+            <summary>
+            This method tries to compute the source generated hint name for a Razor document using only string manipulation
+            </summary>
+            <remarks>
+            This should only be used in the devenv process. In OOP we can look at the actual generated run result to find this
+            information.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Razor.Language.RazorCodeDocumentExtensions.GetOrParseCSharpSyntaxTree(Microsoft.AspNetCore.Razor.Language.RazorCodeDocument,System.Threading.CancellationToken)">
+            <summary>
+             Retrieves a cached Roslyn <see cref="T:Microsoft.CodeAnalysis.SyntaxTree"/> from the generated C# document.
+             If a tree has not yet been cached, a new one will be parsed and added to the cache.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Razor.Language.Syntax.RazorSyntaxNodeExtensions.GetOutermostNode(Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxNode)">
+            <summary>
+            Walks up the tree through the <paramref name="owner"/>'s parents to find the outermost node that starts at the same position.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Razor.Language.Syntax.RazorSyntaxNodeExtensions.IsNextTo(Microsoft.AspNetCore.Razor.Language.Syntax.RazorSyntaxNode,Microsoft.AspNetCore.Razor.Language.Syntax.RazorSyntaxNode,Microsoft.CodeAnalysis.Text.SourceText)">
+            <summary>
+            Determines if <paramref name="firstNode"/> is immediately followed by <paramref name="secondNode"/> in the source text ignoring whitespace.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Razor.Language.Syntax.RazorSyntaxNodeExtensions.FindInnermostNode(Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxNode,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Finds the innermost SyntaxNode for a given location in source, within a given node.
+            </summary>
+            <param name="node">The parent node to search inside.</param>
+            <param name="index">The location to find the innermost node at.</param>
+            <param name="includeWhitespace">Whether to include whitespace in the search.</param>
+            <param name="walkMarkersBack">When true, if there are multiple <see cref="F:Microsoft.AspNetCore.Razor.Language.SyntaxKind.Marker"/> tokens in a single location, return the parent node of the
+            first one in the tree.</param>
+        </member>
+        <member name="M:Roslyn.LanguageServer.Protocol.LspExtensions.WithUri(Roslyn.LanguageServer.Protocol.TextDocumentIdentifier,System.Uri)">
+            <summary>
+            Returns a copy of the passed in <see cref="T:Roslyn.LanguageServer.Protocol.TextDocumentIdentifier"/> with the passed in <see cref="T:System.Uri"/>.
+            </summary>
+        </member>
+        <member name="P:Roslyn.LanguageServer.Protocol.LspFactory.DefaultPosition">
+            <summary>
+             Returns a <see cref="T:Roslyn.LanguageServer.Protocol.Position"/> for line 0 and character 0.
+            </summary>
+        </member>
+        <member name="P:Roslyn.LanguageServer.Protocol.LspFactory.DefaultRange">
+            <summary>
+             Returns a <see cref="T:Roslyn.LanguageServer.Protocol.Position"/> for starting line 0 and character 0,
+             and ending line 0 and character 0.
+            </summary>
+        </member>
+        <member name="T:Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionList">
+            <summary>
+            A subclass of the LSP protocol <see cref="T:Roslyn.LanguageServer.Protocol.VSInternalCompletionList"/> that ensures correct serialization between LSP servers.
+            </summary>
+            <remarks>
+            This is the same as the LSP protocol <see cref="T:Roslyn.LanguageServer.Protocol.VSInternalCompletionList"/> except that it strongly types the <see cref="P:Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionList.Items"/> property,
+            because our custom message target gets handled by a JsonRpc connection set up by the editor, that has no Roslyn converters.
+            </remarks>
+        </member>
+        <member name="P:Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionList.Items">
+            <summary>
+            The completion items.
+            </summary>
+        </member>
+        <member name="T:Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionParams">
+             <summary>
+             A replacement of the LSP protocol <see cref="T:Roslyn.LanguageServer.Protocol.CompletionParams"/> that ensures correct serialization between LSP servers.
+             </summary>
+             <remarks>
+             This is the same as the LSP protocol <see cref="T:Roslyn.LanguageServer.Protocol.CompletionParams"/> except that it strongly types the <see cref="P:Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionParams.Context"/> property as VSInternalCompletionContext,
+             because our custom message target gets handled by a JsonRpc connection set up by the editor, that has no Roslyn converters.
+             Without using this class, we lose VSInternalCompletionContext.InvokeKind property when calling Roslyn or HTML servers from Razor
+             which results in default value of "Invoked" to be used and can cause overly aggressive completion list.
+            
+             See original CompletionParams here https://github.com/dotnet/roslyn/blob/98d41b80f6a192230c045a6576e2a283a407980b/src/LanguageServer/Protocol/Protocol/CompletionParams.cs
+             </remarks>
+        </member>
+        <member name="P:Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionParams.Context">
+            <summary>
+            The completion context. This is only available if the client specifies the
+            client capability <see cref="P:Roslyn.LanguageServer.Protocol.CompletionSetting.ContextSupport"/>.
+            </summary>
+        </member>
+        <member name="P:Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionParams.PartialResultToken">
+            <inheritdoc/>
+        </member>
+        <member name="P:Roslyn.LanguageServer.Protocol.RazorVSInternalCompletionParams.WorkDoneProgress">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

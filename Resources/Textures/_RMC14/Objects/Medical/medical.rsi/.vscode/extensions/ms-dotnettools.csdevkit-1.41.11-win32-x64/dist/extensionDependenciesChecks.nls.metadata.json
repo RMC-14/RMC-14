@@ -1,0 +1,11 @@
+{
+	"messages": [
+		"The {0} extension requires version {1} or greater of the C# ({2}) extension. Please upgrade.",
+		"Upgrade"
+	],
+	"keys": [
+		"upgradeCSharp",
+		"upgradeButtonCaption"
+	],
+	"filePath": "extensionDependenciesChecks"
+}

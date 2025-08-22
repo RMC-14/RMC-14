@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>rzls</name>
+    </assembly>
+    <members>
+        <member name="F:Microsoft.AspNetCore.Razor.LanguageServer.CustomExportAssemblyLoader._loadedAssemblies">
+            <summary>
+            Cache assemblies that are already loaded by AssemblyName comparison
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNetCore.Razor.LanguageServer.CustomExportAssemblyLoader._baseDirectory">
+            <summary>
+            Base directory to search for <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)"/> if initial load fails
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Razor.LanguageServer.LspLogger">
+            <summary>
+            ILogger implementation that logs via the window/logMessage LSP method
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Razor.LanguageServer.LspLogger.#ctor(System.String,Microsoft.AspNetCore.Razor.LanguageServer.Hosting.Logging.LogLevelProvider,Microsoft.AspNetCore.Razor.LanguageServer.Hosting.IClientConnection)">
+            <summary>
+            ILogger implementation that logs via the window/logMessage LSP method
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,35 @@
+{
+	"messages": [
+		"Microsoft Dev Box",
+		"GitHub Codespaces",
+		"This software is licensed",
+		"This software is licensed to",
+		"under a Visual Studio Enterprise subscription",
+		"under a Visual Studio Pro subscription",
+		"under a Microsoft Dev Box subscription",
+		"under a GitHub Codespaces subscription",
+		"under an individual license",
+		"Valid until:",
+		"Sign in to use your Visual Studio subscription benefits.",
+		"Sign In",
+		"Close",
+		"Sign in to use your Visual Studio subscription benefits"
+	],
+	"keys": [
+		"strings.devBoxSubscription",
+		"strings.codeSpacesSubscription",
+		"strings.softwareIsLicensed",
+		"strings.softwareIsLicensedTo",
+		"strings.underVsEnterpriseSubscription",
+		"strings.underVsProSubscription",
+		"strings.underDevBoxSubscription",
+		"strings.underCodeSpacesSubscription",
+		"strings.underIndividualLicense",
+		"strings.expirationDateHeader",
+		"strings.signInRequest",
+		"strings.signInBtn",
+		"strings.dismissBtn",
+		"strings.entitlementsSignInReason"
+	],
+	"filePath": "services\\identity\\strings"
+}

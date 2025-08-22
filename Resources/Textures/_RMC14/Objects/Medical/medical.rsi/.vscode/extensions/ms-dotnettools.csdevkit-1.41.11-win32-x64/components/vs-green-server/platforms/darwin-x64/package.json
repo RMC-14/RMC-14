@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "dependencies": {
+    "@microsoft/visualstudio-code-servicehost.darwin-x64": "0.2.419-beta",
+    "@microsoft/visualstudio-controller.darwin-x64": "0.2.419-beta",
+    "@microsoft/visualstudio-reliability-monitor.darwin-x64": "0.2.419-beta",
+    "@microsoft/visualstudio-server-samples-sayhello.darwin-x64": "0.2.419-beta",
+    "@microsoft/visualstudio-server-shared.darwin-x64": "0.2.419-beta",
+    "@microsoft/visualstudio-server.darwin-x64": "0.2.419-beta"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://devdiv.visualstudio.com/DevDiv/_git/vs-green-server",
+    "branch": "main",
+    "commit": "add23c541d4b253a971449d8c2128d860a8baf05"
+  }
+}

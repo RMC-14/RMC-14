@@ -1,0 +1,9 @@
+{
+	"messages": [
+		"Unable to provide debug configurations: "
+	],
+	"keys": [
+		"error.provideDebugConfigurations"
+	],
+	"filePath": "debugger\\strings"
+}

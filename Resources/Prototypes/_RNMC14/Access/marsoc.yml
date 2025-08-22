@@ -5,3 +5,11 @@
 - type: accessLevel
   id: CMAccessMARSOCSmartgunner
   name: MARSOC Smartgunner
+
+- type: accessLevel
+  id: CMAccessMARSOCMedspec
+  name: MARSOC Medical Specialist
+
+- type: accessLevel
+  id: CMAccessMARSOCEngispec
+  name: MARSOC Engineering Specialist

@@ -1,0 +1,32 @@
+- type: entity
+  parent: [ BaseItem, RMCPowerCellSlotUnremovableSuper ]
+  id: RMCVisorNightVisionIntegrated
+  name: night vision optic
+  description: An insertable visor HUD into a standard UNMC helmet. This type gives a form of night vision and is standard issue in units with regular funding. It can be inserted into a recharger to recharge its internal battery.
+  suffix: Integrated
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+    state: nvg_sight
+  - type: Item
+    size: Tiny
+  - type: PowerCellDraw
+    enabled: false
+    drawRate: 0
+  - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: nvg_sight_right
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: nvg_sight_down
+  - type: NightVisionVisor
+  - type: ToggleVisor
+    ignoreRedundancy: true
+  - type: ComponentToggler
+    components:
+    - type: PointLight
+      enabled: true
+      radius: 1.1
+      softness: 1
+      color: "#008000"

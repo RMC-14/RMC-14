@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticManager.RequestRefresh">
+            <summary>
+            Refreshes hot reload diagnostics.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticManager.Register(System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticSourceProvider})">
+            <summary>
+            Registers providers of hot reload diagnostics. Callers are responsible for refreshing diagnostics after registration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticManager.Unregister(System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticSourceProvider})">
+            <summary>
+            Unregisters providers of hot reload diagnostics. Callers are responsible for refreshing diagnostics after un-registration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticManager.Providers">
+            <summary>
+            Providers.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticSource">
+            <summary>
+            Source of hot reload diagnostics.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticSource.DocumentId">
+            <summary>
+            Text document for which diagnostics are provided.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticSource.GetDiagnosticsAsync(Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.HotReloadRequestContext,System.Threading.CancellationToken)">
+            <summary>
+            Provides list of diagnostics for the given document.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticSourceProvider">
+            <summary>
+            Provides diagnostic sources.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticSourceProvider.IsDocument">
+            <summary>
+            True if this provider is for documents. False if it is for a workspace, i.e. for unopened documents.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IHotReloadDiagnosticSourceProvider.CreateDiagnosticSourcesAsync(Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.HotReloadRequestContext,System.Threading.CancellationToken)">
+            <summary>
+            Creates the diagnostic sources.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IVisualDiagnosticsLanguageService">
+            <summary>
+            Workspace service responsible for starting a Visual Diagnostic session on the LSP server
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.Contracts.IVisualDiagnosticsLanguageService.InitializeAsync(Microsoft.ServiceHub.Framework.IServiceBroker,System.Threading.CancellationToken)">
+            <summary>
+            Initialize the diagnostic host
+            </summary>
+            <param name="serviceBroker">Service broker</param>
+            <param name="token">Cancellation token</param>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.VisualDiagnosticsServiceFactory">
+            <summary>
+            LSP Service responsible for loading IVisualDiagnosticsLanguageService workspace service and delegate the broker service to the workspace service,
+            and handling MAUI XAML/C#/CSS/Razor Hot Reload support
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.VisualDiagnostics.VisualDiagnosticsServiceFactory.#ctor(Microsoft.CodeAnalysis.LanguageServer.LspWorkspaceRegistrationService)">
+            <summary>
+            LSP Service responsible for loading IVisualDiagnosticsLanguageService workspace service and delegate the broker service to the workspace service,
+            and handling MAUI XAML/C#/CSS/Razor Hot Reload support
+            </summary>
+        </member>
+    </members>
+</doc>

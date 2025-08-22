@@ -1,12 +1,12 @@
 - type: job
   parent: CMJobSquadBase
   id: CMSOFRiflemanPVE
-  name: rmc-job-name-marine-raider
+  name: rmc-job-name-marine-raider-PVE
   description: cm-job-description-rifleman
   playTimeTracker: CMJobSOFRiflemanPVE
   startingGear: RMCGearSOFRifleman
   dummyStartingGear: RMCGearMarineRaider
-  icon: "CMJobIconEmpty"
+  icon: CMJobIconSOFRifleman
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   ranks:
@@ -14,7 +14,6 @@
   accessGroups:
   - MARSOCAccessPVE
   - ShipMasterAccess
-  hasIcon: false
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -43,8 +42,8 @@
       prefix: cm-job-prefix-rifleman
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
-        state: private
+        sprite: _RNMC14/Interface/map_blips.rsi
+        state: sof_rifleman
     - type: Sleeping
 
 - type: playTimeTracker

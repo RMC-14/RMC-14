@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.GeneratorExtensions">
+            <summary>
+            Nothing should be using these extensions, but they are kept here for now for back compat
+            in case an older razor generator is using a newer Roslyn.
+            </summary>
+        </member>
+    </members>
+</doc>

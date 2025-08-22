@@ -1,0 +1,74 @@
+- type: job
+  parent: CMJobSquadBase
+  id: CMSOFMedspecPVE
+  name: rmc-job-name-marine-raider-medspec-PVE
+  description: cm-job-description-hospital-corpsman
+  playTimeTracker: CMJobSOFMedspecPVE
+  startingGear: RMCGearSOFMedspec
+  dummyStartingGear: RMCGearMarineRaider
+  icon: CMJobIconSOFCorpsman
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  ranks:
+    RMCRankGunnerySergeant: []
+  accessGroups:
+  - MARSOCMedspecAccessPVE
+  - ShipMasterAccess
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 2
+        RMCSkillFireman: 3
+        RMCSkillSpecialistWeapons: 7
+        RMCSkillFirearms: 1 # less firearms skills because fuck you thats why
+        RMCSkillJtac: 1
+        RMCSkillMedical: 5 # ummmmm medic better than rifleman
+        RMCSkillMeleeWeapons: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-SOF-medspec
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RNMC14/Interface/map_blips.rsi
+        state: sof_corpsman
+    - type: Sleeping
+
+- type: playTimeTracker
+  id: CMJobSOFMedspecPVE
+  isHumanoid: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointMedspecSOF
+  name: SOF medical specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSOFMedspecPVE
+  - type: Sprite
+    state: marine_spawn
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagSOFMedspec
+  name: SOF Medical Specialist's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMSOFMedspecPVE
+
+- type: startingGear
+  id: RMCGearSOFMedspec
+  equipment:
+    id: CMDogtagSOFMedspec

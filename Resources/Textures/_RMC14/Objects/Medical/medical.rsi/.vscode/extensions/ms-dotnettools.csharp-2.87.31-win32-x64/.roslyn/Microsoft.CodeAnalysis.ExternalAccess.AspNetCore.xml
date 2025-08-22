@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.CodeAnalysis.ExternalAccess.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.AddPackage.AspNetCoreInstallPackageData">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.AddPackage.InstallPackageData"/>
+            <param name="packageNamespaceName">The fully qualified name of the namespace that should be added as a
+            <c>using/Import</c> in the file if not already present. Should be of the form <c>A.B.C.D</c> only.</param>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.AddPackage.AspNetCoreInstallPackageData.#ctor(System.String,System.String,System.String,System.String)">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.AddPackage.InstallPackageData"/>
+            <param name="packageNamespaceName">The fully qualified name of the namespace that should be added as a
+            <c>using/Import</c> in the file if not already present. Should be of the form <c>A.B.C.D</c> only.</param>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.AddPackage.AspNetCoreAddPackageCodeAction.TryCreateCodeActionAsync(Microsoft.CodeAnalysis.Document,System.Int32,Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.AddPackage.AspNetCoreInstallPackageData,System.Threading.CancellationToken)">
+            <summary>
+            Try to create the top level 'Add Nuget Package' code action to add to a lightbulb.
+            </summary>
+            <param name="document">The document the fix is being offered in.</param>
+            <param name="position">The location where the fix is offered.  This will also influence where the using/Import
+            directive is added.</param>
+            <param name="installPackageData">Information about the package to be added.</param>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreCSharpVirtualCharService.Instance">
+            <inheritdoc cref="F:Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars.CSharpVirtualCharService.Instance"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreCSharpVirtualCharService.TryConvertToVirtualChars(Microsoft.CodeAnalysis.SyntaxToken)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.IVirtualCharService.TryConvertToVirtualChars(Microsoft.CodeAnalysis.SyntaxToken)"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar.RuneValue">
+            <summary>
+            Returns the Unicode scalar value as an integer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar.SurrogateChar">
+            <inheritdoc cref="F:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar.SurrogateChar"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar.Span">
+            <inheritdoc cref="F:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar.Span"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar.Value">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar.Value"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar.ToString">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar.ToString"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar.Equals(System.Object)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar.Equals(System.Object)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar.Equals(Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar.Equals(Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar.GetHashCode">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar.GetHashCode"/>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence"/>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.Empty">
+            <inheritdoc cref="F:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.Empty"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.IsDefault">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.IsDefault"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.Length">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.Length"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.Item(System.Int32)">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.Item(System.Int32)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.GetSubSequence(Microsoft.CodeAnalysis.Text.TextSpan)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.GetSubSequence(Microsoft.CodeAnalysis.Text.TextSpan)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.Find(System.Int32)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.Find(System.Int32)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.CreateString">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.CreateString"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.FromBounds(Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence,Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.FromBounds(Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence,Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.IndexOf(Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.IndexOf(Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.Contains(Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualChar)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.Contains(Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualChar)"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.GetEnumerator">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.GetEnumerator"/>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreVirtualCharSequence.Enumerator">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.Enumerator"/>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreBraceMatchingResult">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.BraceMatching.BraceMatchingResult"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreBraceMatchingResult.#ctor(Microsoft.CodeAnalysis.Text.TextSpan,Microsoft.CodeAnalysis.Text.TextSpan)">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.BraceMatching.BraceMatchingResult"/>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute">
+            <summary>
+            Use this attribute to export a <see cref="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.IAspNetCoreEmbeddedLanguageBraceMatcher"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute.Name">
+            <summary>
+            Name of the brace matcher.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute.Language">
+            <summary>
+            Name of the containing language hosting the embedded language.  e.g. C# or VB.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.IAspNetCoreEmbeddedLanguageBraceMatcher.FindBraces(Microsoft.CodeAnalysis.SemanticModel,Microsoft.CodeAnalysis.SyntaxToken,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.BraceMatching.IBraceMatcher.FindBracesAsync(Microsoft.CodeAnalysis.Document,System.Int32,Microsoft.CodeAnalysis.BraceMatching.BraceMatchingOptions,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreEmbeddedLanguageClassificationContext.SyntaxToken">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.Classification.EmbeddedLanguageClassificationContext.SyntaxToken"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreEmbeddedLanguageClassificationContext.SemanticModel">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.Classification.EmbeddedLanguageClassificationContext.SemanticModel"/>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreEmbeddedLanguageClassificationContext.CancellationToken">
+            <inheritdoc cref="P:Microsoft.CodeAnalysis.Classification.EmbeddedLanguageClassificationContext.CancellationToken"/>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageClassifierAttribute">
+            <summary>
+            Use this attribute to export a <see cref="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.IAspNetCoreEmbeddedLanguageClassifier"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageClassifierAttribute.Name">
+            <summary>
+            Name of the classifier.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageClassifierAttribute.Language">
+            <summary>
+            Name of the containing language hosting the embedded language.  e.g. C# or VB.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.IAspNetCoreEmbeddedLanguageClassifier">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.Classification.IEmbeddedLanguageClassifier"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.IAspNetCoreEmbeddedLanguageClassifier.RegisterClassifications(Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.AspNetCoreEmbeddedLanguageClassificationContext)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.Classification.IEmbeddedLanguageClassifier.RegisterClassifications(Microsoft.CodeAnalysis.Classification.EmbeddedLanguageClassificationContext)"/>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute">
+            <summary>
+            Use this attribute to export a <see cref="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.IAspNetCoreEmbeddedLanguageDocumentHighlighter"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute.Name">
+            <summary>
+            Name of the classifier.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute.Language">
+            <summary>
+            Name of the containing language hosting the embedded language.  e.g. C# or VB.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.IAspNetCoreEmbeddedLanguageDocumentHighlighter">
+            <inheritdoc cref="T:Microsoft.CodeAnalysis.DocumentHighlighting.IEmbeddedLanguageDocumentHighlighter"/>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages.IAspNetCoreEmbeddedLanguageDocumentHighlighter.GetDocumentHighlights(Microsoft.CodeAnalysis.SemanticModel,Microsoft.CodeAnalysis.SyntaxToken,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc cref="M:Microsoft.CodeAnalysis.DocumentHighlighting.IEmbeddedLanguageDocumentHighlighter.GetDocumentHighlights(Microsoft.CodeAnalysis.Document,Microsoft.CodeAnalysis.SemanticModel,Microsoft.CodeAnalysis.SyntaxToken,System.Int32,Microsoft.CodeAnalysis.DocumentHighlighting.HighlightingOptions,System.Threading.CancellationToken)"/>
+        </member>
+    </members>
+</doc>

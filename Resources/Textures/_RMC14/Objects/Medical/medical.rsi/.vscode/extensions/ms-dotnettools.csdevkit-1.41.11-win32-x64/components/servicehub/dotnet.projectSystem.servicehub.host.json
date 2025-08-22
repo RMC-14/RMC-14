@@ -1,0 +1,16 @@
+{
+	"$schema": "../../src/servicehub.host.schema.json",
+	"hostExecutable": "%DOTNET_PROJECTSYSTEM_HOST_ENTRYPOINT%",
+	"hostArgs": [
+		"%DOTNET_PROJECTSYSTEM_HOST_EXECCOMMAND%",
+		"%DOTNET_PROJECTSYSTEM_HOST_INPUT%",
+		"$HOSTID",
+		"$PIPE",
+		"$TELEMETRYSESSION"
+	],
+	"additionalEnvironmentVariables": {
+		"DOTNET_ROOT": "%PRJHOST_DOTNET_ROOT%",
+		"DOTNET_ROLL_FORWARD_TO_PRERELEASE": "%PRJHOST_ROLL_FORWARD_TO_PRERELEASE%",
+		"DOTNET_ROLL_FORWARD": "%PRJHOST_ROLL_FORWARD%"
+	}
+}
