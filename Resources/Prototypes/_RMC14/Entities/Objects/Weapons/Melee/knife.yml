@@ -68,6 +68,7 @@
   - type: Tool
     qualities:
     - Cutting
+    speedModifier: 0.8
     useSound:
       path: /Audio/Items/wirecutter.ogg
 
