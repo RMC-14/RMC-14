@@ -46,10 +46,10 @@
       - Civilian
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: xo
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_shipside
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
