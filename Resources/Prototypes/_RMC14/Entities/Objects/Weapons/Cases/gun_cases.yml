@@ -198,7 +198,7 @@
     - 0,0,7,1
     whitelist:
       tags:
-      - WeaponRifleM54CE2
+      - RMCWeaponRifleM54CE2
       - CMMagazineRifleM54CE2
       - RMCAttachmentRailFlashlight
       - RMCAttachmentBipod
