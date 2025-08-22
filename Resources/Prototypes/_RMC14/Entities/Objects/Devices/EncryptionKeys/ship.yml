@@ -13,6 +13,13 @@
   - type: Sprite
     sprite: _RMC14/Objects/Devices/encryption_keys.rsi
     state: cypherkey
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 
 # Common

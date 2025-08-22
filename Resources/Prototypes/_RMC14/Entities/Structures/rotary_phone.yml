@@ -80,3 +80,10 @@
     isCorrodible: false
   - type: BlockEntityStorage
   - type: Undisposable
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
