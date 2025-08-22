@@ -1,4 +1,4 @@
-<p align="center"> <img width="480" height="480" alt="logo-full" src="https://github.com/user-attachments/assets/d7df6bfe-cbad-48b1-b50e-7c24fce0d733"/></p>
+<p align="center"> <img width="288" height="288" alt="image" src="https://github.com/user-attachments/assets/2256af89-8cb3-4a79-9dd1-8f092e1b15d8"/></p>
 
 RNMC-14 is an asymmetric game, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
 
