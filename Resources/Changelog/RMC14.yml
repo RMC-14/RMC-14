@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed neurotoxin gas not causing blurry vision.
-    type: Fix
-  id: 1703
-  time: '2025-05-10T04:05:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6381
-- author: Vermidia
-  changes:
   - message: Fixed morgues preventing rot
     type: Fix
   id: 1704
@@ -4600,5 +4593,12 @@
   id: 2203
   time: '2025-08-22T02:05:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6666
+- author: ProspectorAres
+  changes:
+  - message: Added a new lobby Screen
+    type: Add
+  id: 2204
+  time: '2025-08-22T02:19:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7478
 Name: RMC14
 Order: -1
