@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed health analyzers not showing clone damage when it's present
-    type: Fix
-  - message: Added medical advice to the health analyzer
-    type: Add
-  id: 1706
-  time: '2025-05-10T04:28:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6378
-- author: Vermidia
-  changes:
   - message: Changed holocard sprites to be more distinct
     type: Tweak
   id: 1707
@@ -4596,5 +4587,14 @@
   id: 2206
   time: '2025-08-22T02:30:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7039
+- author: BramvanZijp
+  changes:
+  - message: Added an MP Vest to the Military Warden and Chief MP's vendors.
+    type: Add
+  - message: The Chief MP can no longer access the MP equipment vendor.
+    type: Remove
+  id: 2207
+  time: '2025-08-22T02:46:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6860
 Name: RMC14
 Order: -1
