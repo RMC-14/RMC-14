@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Changed the option name "Xeno wide swing" to "Xenonid thrust attack".
-    type: Tweak
-  id: 1708
-  time: '2025-05-10T04:33:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6365
 - author: SharkSnake98
   changes:
   - message: Added 4 new vests for the Corporate Liaison.
@@ -4598,5 +4591,12 @@
   id: 2208
   time: '2025-08-22T02:48:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7470
+- author: Max_Power
+  changes:
+  - message: Fixed the smartgunner harness being acidable.
+    type: Fix
+  id: 2209
+  time: '2025-08-22T02:55:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7439
 Name: RMC14
 Order: -1
