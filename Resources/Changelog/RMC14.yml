@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Airburst grenades now rebound at the angle of incidence instead of always
-      rebounding at 180 degrees.
-    type: Tweak
-  - message: Airburst grenade projectiles now receive the overpenetration penalty
-      only when a target is directly impacted by the grenade. For example, with the
-      Hornet grenade, you can potentially hit all 15 projectiles if you aim directly
-      in front of a target, instead of the previous limit of 5.
-    type: Fix
-  id: 1705
-  time: '2025-05-10T04:24:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6368
 - author: Vermidia
   changes:
   - message: Fixed health analyzers not showing clone damage when it's present
@@ -4601,5 +4588,13 @@
   id: 2205
   time: '2025-08-22T02:26:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7480
+- author: Arykh
+  changes:
+  - message: The M44 combat revolver given to MPs will now come pre-loaded with marksman
+      cartridges.
+    type: Tweak
+  id: 2206
+  time: '2025-08-22T02:30:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7039
 Name: RMC14
 Order: -1
