@@ -27,7 +27,7 @@ public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
         var chatMsg = "";
         var silent = false;
 
-        if (args.Length == 2)
+        if (args.Length >= 2)
             chatMsg = args[1];
 
         if (args.Length >= 1)
