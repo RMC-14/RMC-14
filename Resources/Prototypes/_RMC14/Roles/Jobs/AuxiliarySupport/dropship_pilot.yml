@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: CMPilotDropship
   name: cm-job-name-dropship-pilot
@@ -52,7 +52,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: pilot
+        state: dp
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
