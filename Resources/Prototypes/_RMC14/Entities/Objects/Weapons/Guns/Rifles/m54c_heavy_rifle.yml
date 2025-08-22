@@ -15,7 +15,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
   - type: Tag
     tags:
-    - WeaponRifleM54CE2
+    - RMCWeaponRifleM54CE2
   - type: Gun
     shotsPerBurst: 5
     selectedMode: FullAuto
