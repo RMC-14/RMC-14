@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed morgues preventing rot
-    type: Fix
-  id: 1704
-  time: '2025-05-10T04:05:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6392
 - author: Dygon
   changes:
   - message: Airburst grenades now rebound at the angle of incidence instead of always
@@ -4600,5 +4593,13 @@
   id: 2204
   time: '2025-08-22T02:19:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7478
+- author: BramvanZijp
+  changes:
+  - message: The Commanding Officer's Smartgun will no longer cause your hitbox to
+      become wider while you have it equipped or held.
+    type: Fix
+  id: 2205
+  time: '2025-08-22T02:26:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7480
 Name: RMC14
 Order: -1
