@@ -1,8 +1,0 @@
-schemaVersion: 0.0.1
-isProduction: true
-accountableOwners:
-  service: 061a231c-aae1-4057-a42d-c8bb2be21e3a
-routing:
-  defaultAreaPath:
-    org: devdiv
-    path: DevDiv\NET Developer Experience\CSharp and VB IDE\VSCode\CSharp Dev Kit

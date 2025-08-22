@@ -1,5 +1,0 @@
-{
-	"$schema": "../../src/servicehub.host.schema.json",
-	"hostExecutable": "%COMPONENT_MICROSOFT_VISUALSTUDIO_CODE_SERVICEHOST%/%SERVICEHUB_HOST_ENTRYPOINT%",
-	"hostArgs": ["$HOSTID", "$PIPE", "$TELEMETRYSESSION"]
-}
