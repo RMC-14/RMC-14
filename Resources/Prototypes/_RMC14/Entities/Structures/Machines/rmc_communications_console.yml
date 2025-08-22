@@ -117,6 +117,10 @@
   - type: GuideHelp
     guides:
     - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCOverwatchConsole
@@ -152,6 +156,10 @@
   - type: GuideHelp
     guides:
     - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCTacticalMapTable
