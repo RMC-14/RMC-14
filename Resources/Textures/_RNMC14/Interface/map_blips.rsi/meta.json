@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, https://github.com/cmss13-devs/cmss13/blob/2a8e4b86f79b1b75ffa94bf5a721fb5c52b51598/icons/mob/hud/marine_hud.dmil, marsoc sprites edited by github noctyrnal and Harriet",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+    "states": [
+        {
+            "name": "sof_corpsman"
+        },
+        {
+            "name": "sof_engineer"
+        },
+        {
+            "name": "sof_sg"
+        },
+        {
+            "name": "sof_sl"
+        },
+        {
+      "name": "sof_rifleman"
+        }
+    ]
+}

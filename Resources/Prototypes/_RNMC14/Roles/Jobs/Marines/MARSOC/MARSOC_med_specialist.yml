@@ -1,18 +1,18 @@
 - type: job
   parent: CMJobSquadBase
-  id: CMSOFRiflemanPVE
-  name: rmc-job-name-marine-raider-PVE
-  description: cm-job-description-rifleman
-  playTimeTracker: CMJobSOFRiflemanPVE
-  startingGear: RMCGearSOFRifleman
+  id: CMSOFMedspecPVE
+  name: rmc-job-name-marine-raider-medspec-PVE
+  description: cm-job-description-hospital-corpsman
+  playTimeTracker: CMJobSOFMedspecPVE
+  startingGear: RMCGearSOFMedspec
   dummyStartingGear: RMCGearMarineRaider
-  icon: CMJobIconSOFRifleman
+  icon: CMJobIconSOFCorpsman
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   ranks:
-    RMCRankSergeant: []
+    RMCRankGunnerySergeant: []
   accessGroups:
-  - MARSOCAccessPVE
+  - MARSOCMedspecAccessPVE
   - ShipMasterAccess
   roleWeight: 1
   special:
@@ -33,42 +33,42 @@
         RMCSkillVehicles: 2
         RMCSkillFireman: 3
         RMCSkillSpecialistWeapons: 7
-        RMCSkillFirearms: 2 # yes this is PVE parity
+        RMCSkillFirearms: 1 # less firearms skills because fuck you thats why
         RMCSkillJtac: 1
-        RMCSkillMedical: 2
+        RMCSkillMedical: 5 # ummmmm medic better than rifleman
         RMCSkillMeleeWeapons: 1
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: cm-job-prefix-rifleman
+      prefix: cm-job-prefix-SOF-medspec
     - type: TacticalMapIcon
       icon:
         sprite: _RNMC14/Interface/map_blips.rsi
-        state: sof_rifleman
+        state: sof_corpsman
     - type: Sleeping
 
 - type: playTimeTracker
-  id: CMJobSOFRiflemanPVE
+  id: CMJobSOFMedspecPVE
   isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointRiflemanSOF
-  name: SOF rifleman spawn point
+  id: CMSpawnPointMedspecSOF
+  name: SOF medical specialist spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSOFRiflemanPVE
+    job_id: CMSOFMedspecPVE
   - type: Sprite
     state: marine_spawn
 
 - type: entity
   parent: CMIDCardStandardDogtag
-  id: CMDogtagSOFRifleman
-  name: SOF Rifleman's dogtags
+  id: CMDogtagSOFMedspec
+  name: SOF Medical Specialist's dogtags
   components:
   - type: PresetIdCard
-    job: CMSOFRiflemanPVE
+    job: CMSOFMedspecPVE
 
 - type: startingGear
-  id: RMCGearSOFRifleman
+  id: RMCGearSOFMedspec
   equipment:
-    id: CMDogtagSOFRifleman
+    id: CMDogtagSOFMedspec

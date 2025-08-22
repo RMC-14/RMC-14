@@ -136,6 +136,16 @@
       - id: RMCGogglesM1A1Ballistic
         name: Ballistic Goggles, laser-shaded (brown)
         amount: 10
+      - id: RMCHelmetGarbNightVision
+        amount: 15
+      - id: RMCHelmetGarbNettingUrban
+        amount: 15
+      - id: RMCHelmetGarbNettingJungle
+        amount: 15
+      - id: RMCHelmetGarbNettingDesert
+        amount: 15
+      - id: RMCRC6RiotShield
+        amount: 15
       - id: RMCPatchSolarDevils
         amount: 15
       - id: RMCPatchUNMC
@@ -358,6 +368,16 @@
         name: firearm lubricant
         amount: 15
       - id: ArmorHelmetPMC
+        amount: 15
+      - id: RMCHelmetGarbNightVision
+        amount: 15
+      - id: RMCHelmetGarbNettingUrban
+        amount: 15
+      - id: RMCHelmetGarbNettingJungle
+        amount: 15
+      - id: RMCHelmetGarbNettingDesert
+        amount: 15
+      - id: RMCRC6RiotShield
         amount: 15
 
 - type: entity

@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: CMSOFSmartgunPVE
-  name: rmc-job-name-marine-raider-smartgun
+  name: rmc-job-name-marine-raider-smartgun-PVE
   playTimeTracker: CMJobSOFSmartgunPVE
   ranks:
     RMCRankSergeant: []
@@ -9,7 +9,7 @@
   dummyStartingGear: RMCGearMarineRaider
   icon: RMCJobIconMarineRaider
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  supervisors: cm-job-supervisors-sl
   accessGroups:
   - MARSOCSmartgunnerAccessPVE
   - ShipMasterAccess
@@ -46,7 +46,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
-        state: hudsquad_soctl_a
+        state: sof_sg
     - type: Sleeping
 
 - type: playTimeTracker

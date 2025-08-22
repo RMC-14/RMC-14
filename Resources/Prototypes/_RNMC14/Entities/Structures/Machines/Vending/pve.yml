@@ -663,31 +663,6 @@
         amount: 15
       - id: CMOintment10
         amount: 15
-      - id: CMEmergencyAutoInjector
-        name: Emergency Autoinjector
-        amount: 15
-      - id: CMBicaridineAutoInjector
-        amount: 15
-      - id: CMKelotaneAutoInjector
-        amount: 15
-      - id: CMTricordrazineAutoInjector
-        amount: 15
-      - id: CMEpinephrineAutoInjector
-        amount: 15
-      - id: CMDexalinPlusAutoInjector
-        amount: 15
-      - id: CMInaprovalineAutoInjector
-        amount: 15
-      - id: CMPillCanisterBicaridine
-        amount: 15
-      - id: CMPillCanisterDexalin
-        amount: 15
-      - id: CMPillCanisterDylovene
-        amount: 15
-      - id: CMPillCanisterKelotane
-        amount: 15
-      - id: CMPillCanisterInaprovaline
-        amount: 15
       - id: CMHealthAnalyzer
         amount: 15
       - id: CMSynthGraft
@@ -695,8 +670,6 @@
       - id: CMSurgicalLine
         amount: 15
       - id: CMDefibrillator
-        amount: 15
-      - id: CMStasisBagFolded
         amount: 15
     - name: Tools
       entries:

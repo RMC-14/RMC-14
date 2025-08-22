@@ -1,0 +1,20 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconSOFRifleman
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_soc_rifleman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconSOFCorpsman
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_soc_corpsman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconSOFEngineer
+  icon:
+    sprite: _RNMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_soc_engineer

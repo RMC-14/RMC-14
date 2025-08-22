@@ -1,0 +1,45 @@
+- type: entity
+  parent: CMBaseHealingItem
+  id: CMProfessionalSurgicalLine
+  name: professional surgical line
+  description: A roll of military-grade surgical line, able to seamlessly sew up any wound. Also works as a robust fishing line for maritime deployments. This one is of exceptional quality, made of red color to show your superiority over green-colored hobos.
+  components:
+  - type: Tag
+    tags:
+    - CMSurgicalLine
+  - type: Sprite
+    sprite: _RNMC14/Objects/Medical/medical.rsi
+    state: line_pro
+  - type: Item
+    heldPrefix: line_pro
+  - type: WoundTreater
+    wound: Brute
+    treats: false
+    group: Brute
+    consumable: false
+    scalingDoAfter: 0.1
+    damage: -10
+    minimumDoAfter: 0.5
+    canUseUnskilled: false
+    skills:
+      RMCSkillMedical: 5
+    treatBeginSound:
+      path: "/Audio/_RMC14/Medical/bandage.ogg"
+    treatEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+    userPopup: cm-surgical-line-user-popup
+    targetPopup: cm-surgical-line-target-popup
+    othersPopup: cm-surgical-line-others-popup
+    targetStartPopup: cm-surgical-line-start-target-popup
+    userFinishPopup: cm-surgical-line-finish-user-popup
+    targetFinishPopup: cm-surgical-line-finish-target-popup
+    othersFinishPopup: cm-surgical-line-finish-others-popup
+    noneSelfPopup: cm-surgical-line-none-self-popup
+    noneOtherPopup: cm-surgical-line-none-other-popup
+    noWoundsOnUserPopup: cm-wounds-already-treated-self-popup
+    noWoundsOnTargetPopup: cm-wounds-already-treated-target-popup
+  - type: MedicallyUnskilledDoAfter
+    min: 2
+    doAfter: 3
+  - type: StackPrice
+    price: 10

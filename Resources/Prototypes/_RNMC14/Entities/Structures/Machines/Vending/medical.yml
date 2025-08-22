@@ -1,0 +1,103 @@
+- type: entity
+  parent: ColMarTechBaseAnchorable
+  id: CMVendorMedicalMARSOC
+  name: We-Ya-Med Plus Plus
+  description: Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM). Specifically designed to hold way more than the normal version, just for you.
+  suffix: MARSOC, no item limits
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: CMSolutionRefiller
+    randomizeReagentsPlanetside: true
+    current: 1200
+    max: 1200
+    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    rechargeCooldown: 4
+    reagents:
+    - CMBicaridine
+    - CMKelotane
+    - CMDylovene
+    - CMDexalin
+    - CMDexalinPlus
+    - CMTricordrazine
+    - CMEpinephrine
+    - CMInaprovaline
+#    - CMOxycodone # TODO RMC14
+#    - CMTramadol # TODO RMC14
+#    - CMPeridaxon # TODO RMC14
+    whitelist:
+      components:
+      - Hypospray
+      - Vial
+      tags:
+      - Bottle
+  - type: CMAutomatedVendor # TODO RMC14 different ui style
+    hackable: true
+    randomUnstockAmount: -1 # -1 is between 1 and the original amount
+    randomEmptyChance: 0.25 # 25% chance
+    sections:
+    - name: Essential
+      entries:
+      - id: CMProfessionalSurgicalLine
+        amount: 1
+        recommended: true
+    - name: Field supplies
+      entries:
+      - id: CMBurnKit10
+      - id: CMTraumaKit10
+      - id: CMOintment10
+      - id: CMGauze10
+#      - id: CMSplints10 # TODO RMC14
+#        amount: 6
+    - name: Autoinjectors
+      entries:
+      - id: CMBicaridineAutoInjector
+      - id: CMDexalinPlusAutoInjector
+      - id: CMEpinephrineAutoInjector
+      - id: CMInaprovalineAutoInjector
+      - id: CMKelotaneAutoInjector
+#      - id: CMOxycodoneAutoinjector # TODO RMC14
+#        amount: 3
+#      - id: CMTramadolAutoinjector # TODO RMC14
+#        amount: 3
+      - id: CMTricordrazineAutoInjector
+    - name: Liquid bottles
+      entries:
+      - id: CMBottleBicaridine
+      - id: CMBottleDylovene
+      - id: CMBottleDexalin
+      - id: CMBottleInaprovaline
+      - id: CMBottleKelotane
+#      - id: CMBottleOxycodone # TODO RMC14
+#        amount: 3
+#      - id: CMBottlePeridaxon # TODO RMC14
+#        amount: 3
+#      - id: CMBottleTramadol # TODO RMC14
+#        amount: 3
+    - name: Pill bottles
+      entries:
+      - id: CMPillCanisterBicaridine
+      - id: CMPillCanisterDexalin
+      - id: CMPillCanisterDylovene
+      - id: CMPillCanisterInaprovaline
+      - id: CMPillCanisterKelotane
+#      - id: CMPillCanisterPeridaxon # TODO RMC14
+#        amount: 2
+#      - id: CMPillCanisterTramadol # TODO RMC14
+#        amount: 2
+    - name: Medical utilities
+      entries:
+      - id: CMDefibrillator
+      - id: CMSurgicalLine
+      - id: CMSynthGraft
+      - id: CMHyposprayFilledTricord
+      - id: CMHealthAnalyzer
+      - id: CMBeltMedical
+      - id: RMCGlassesMedicalHUDGlasses
+      - id: CMStasisBagFolded
+      - id: CMSyringe
+  - type: AccessReader
+    access: [["CMAccessMARSOCMedspec"]]

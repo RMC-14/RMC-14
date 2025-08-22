@@ -8,5 +8,7 @@
   - CMSOFTeamLeaderPVE
   - CMSOFRiflemanPVE
   - CMSOFSmartgunPVE
+  - CMSOFMedspecPVE
+  - CMSOFEngispecPVE
   departmentRadio: MarineSOF
   headOfDepartment: CMSOFTeamLeaderPVE

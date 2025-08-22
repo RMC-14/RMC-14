@@ -16,3 +16,5 @@
             CMSOFTeamLeaderPVE: [1, 1]
             CMSOFRiflemanPVE: [4, 4]
             CMSOFSmartgunPVE: [ 1, 1 ]
+            CMSOFMedspecPVE: [1, 1]
+            CMSOFEngispecPVE: [1, 1]

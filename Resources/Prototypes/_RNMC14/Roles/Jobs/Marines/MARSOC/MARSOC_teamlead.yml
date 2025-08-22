@@ -1,10 +1,10 @@
 - type: job
   parent: CMJobBase
   id: CMSOFTeamLeaderPVE
-  name: rmc-job-name-marine-raider-leader
+  name: rmc-job-name-marine-raider-leader-PVE
   playTimeTracker: CMJobSOFTeamLeaderPVE
   ranks:
-    RMCRankGunnerySergeant: [ ]
+    RMCRankMasterSergeant: [ ]
   startingGear: RMCGearSOFTeamLeader
   dummyStartingGear: RMCGearMarineRaiderLeader
   icon: RMCJobIconMarineRaider
@@ -47,8 +47,8 @@
       prefix: cm-job-prefix-squad-leader
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
-        state: hudsquad_soctl_a
+        sprite: _RNMC14/Interface/map_blips.rsi
+        state: sof_sl
     - type: Sleeping
     - type: SquadLeader
       icon:
