@@ -4,7 +4,7 @@
   name: rmc-job-name-marine-raider-leader
   playTimeTracker: CMJobSOFTeamLeaderPVE
   ranks:
-    RMCRankSergeant: []
+    RMCRankGunnerySergeant: [ ]
   startingGear: RMCGearSOFTeamLeader
   dummyStartingGear: RMCGearMarineRaiderLeader
   icon: RMCJobIconMarineRaider

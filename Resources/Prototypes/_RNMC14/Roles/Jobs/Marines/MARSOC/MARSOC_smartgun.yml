@@ -39,7 +39,6 @@
         RMCSkillSpecialistWeapons: 7
         RMCSkillPowerLoader: 1
         RMCSkillPilot: 1
-    - type: MarineOrders
     - type: SquadArmorWearer
     - type: RMCPointing
     - type: JobPrefix
