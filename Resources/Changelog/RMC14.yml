@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Changed holocard sprites to be more distinct
-    type: Tweak
-  id: 1707
-  time: '2025-05-10T04:29:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6367
 - author: DummeHytteOst
   changes:
   - message: Changed the option name "Xeno wide swing" to "Xenonid thrust attack".
@@ -4596,5 +4589,14 @@
   id: 2207
   time: '2025-08-22T02:46:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6860
+- author: SharkSnake98
+  changes:
+  - message: Added 5 new icons for Halcyon, from trainee to exec. spec.
+    type: Add
+  - message: Added the executive halcyon icon to Sorokyne CorpSurv
+    type: Add
+  id: 2208
+  time: '2025-08-22T02:48:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7470
 Name: RMC14
 Order: -1
