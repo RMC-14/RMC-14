@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-3.0",
+  "copyright": "Logo and Sprite made by Merrokitsune for RNMC-14.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "unmc1"
+    },
+    {
+      "name": "unmc2"
+    },
+    {
+      "name": "unmc3"
+    },
+    {
+      "name": "unmc4"
+    },
+    {
+      "name": "unmc5"
+    },
+    {
+      "name": "unmc6"
+    },
+    {
+      "name": "unmc7"
+    },
+    {
+      "name": "unmc8"
+    },
+    {
+      "name": "unmc9"
+    }
+  ]
+}
