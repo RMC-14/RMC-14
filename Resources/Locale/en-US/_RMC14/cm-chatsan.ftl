@@ -543,10 +543,12 @@ cm-chatsan-word-xigma = xigma
 cm-chatsan-replacement-xigma = prime
 
 cm-chatsan-word-para = para
-cm-chatsan-replacement-parasite = parasite
+cm-chatsan-word-parasite = parasite
+cm-chatsan-replacement-parasite = child
 
 cm-chatsan-word-paras = paras
-cm-chatsan-replacement-parasites = parasites
+cm-chatsan-word-parasites = parasites
+cm-chatsan-replacement-parasites = children
 
 cm-chatsan-word-barricade = barricade
 cm-chatsan-word-cade = cade

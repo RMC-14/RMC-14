@@ -192,7 +192,9 @@
     cm-chatsan-word-sigma: cm-chatsan-replacement-sigma
     cm-chatsan-word-xigma: cm-chatsan-replacement-xigma
     cm-chatsan-word-para: cm-chatsan-replacement-parasite
+    cm-chatsan-word-parasite: cm-chatsan-replacement-parasite
     cm-chatsan-word-paras: cm-chatsan-replacement-parasites
+    cm-chatsan-word-parasites: cm-chatsan-replacement-parasites
     cm-chatsan-word-barricade: cm-chatsan-replacement-barricades
     cm-chatsan-word-cade: cm-chatsan-replacement-barricades
     cm-chatsan-word-barricades: cm-chatsan-replacement-barricades
