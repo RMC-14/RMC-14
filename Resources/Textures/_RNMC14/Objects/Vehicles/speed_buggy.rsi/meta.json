@@ -36,28 +36,6 @@
       {
         "name": "light-speed-buggy",
         "directions": 4
-      },
-      {
-        "name": "light-speed-buggy-moving",
-        "directions": 4,
-        "delays": [
-            [
-              0.1,
-              0.1
-            ],
-            [
-              0.1,
-              0.1
-            ],
-            [
-              0.1,
-              0.1
-            ],
-            [
-              0.1,
-              0.1
-            ]
-        ]
       }
     ]
 }
