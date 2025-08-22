@@ -1,4 +1,4 @@
-License: Not Finalized
+License: CC-BY-NC-3.0
 Copyright: Logos made by Merrokitsune for RNMC-14.
 Files:
 - Resources/Textures/_RNMC14/Logo/logo-full.png
