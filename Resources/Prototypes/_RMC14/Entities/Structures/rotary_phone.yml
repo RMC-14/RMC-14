@@ -38,6 +38,13 @@
           Ear: { state: rotary_phone_ear }
   - type: WallMount
     arc: 360
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCRotaryPhone

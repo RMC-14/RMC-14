@@ -577,6 +577,13 @@
           Ring: { state: ring }
           Ear: { state: ear }
   - type: Undisposable
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: CMSatchel
