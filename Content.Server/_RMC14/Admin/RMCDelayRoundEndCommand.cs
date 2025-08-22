@@ -27,6 +27,12 @@ public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
         var chatMsg = "";
         var silent = false;
 
+        if (args.Length >= 3)
+        {
+            shell.WriteError("Expected 1-2 args got 3 or more");
+            return;
+        }
+
         if (args.Length >= 2)
             chatMsg = args[1];
 
