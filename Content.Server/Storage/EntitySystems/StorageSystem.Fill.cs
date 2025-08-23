@@ -66,8 +66,7 @@ public sealed partial class StorageSystem
         }
 
         // we order the items from biggest to smallest to try and reduce poor placement in the grid.
-        var sortedItems = items
-            .OrderByDescending(x => ItemSystem.GetItemShape(x.Comp).GetArea());
+        var sortedItems = items; // RMC 14
 
         ClearCantFillReasons();
         foreach (var ent in sortedItems)

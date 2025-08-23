@@ -41,6 +41,16 @@
         amount: 4
 
 - type: entity
+  id: RMCCrateClothingWebbingBlack
+  parent: RMCCrateBase
+  name: black webbing crate (x4)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCWebbingBlackSmall
+        amount: 4
+
+- type: entity
   id: RMCCrateClothingWebbingVest
   parent: RMCCrateBase
   name: brown and black webbing crate (x2 each)

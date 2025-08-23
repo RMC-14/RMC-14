@@ -79,6 +79,7 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
     - name: Books
       entries:
       - id: RMCGuidebookLawMarine
@@ -108,7 +109,7 @@
       takeAll: CMStandard
       entries:
       - id: CMHandsBlackMarine
-      - id: CMHeadsetCMP
+      - id: RMCHeadsetMW
       - id: CMBootsBlackFilled
     - name: Helmet
       choices: { CMHelmet: 1 }
