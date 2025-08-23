@@ -253,7 +253,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/corsat.yml
-    camouflage: Jungle
+    camouflage: Classic
     inRotation: false
 
 - type: entity
