@@ -64,10 +64,10 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         { "t-T", "chatsan-cries" }, // RMC14
         { "t_T", "chatsan-cries" }, // RMC14
         { "t~T", "chatsan-cries" }, // RMC14
-        { "T.T", "cm-chatsan-emote-sobs" }, // RMC14
-        { "T-T", "cm-chatsan-emote-sobs" }, // RMC14
-        { "T_T", "cm-chatsan-emote-sobs" }, // RMC14
-        { "T~T", "cm-chatsan-emote-sobs" }, // RMC14
+        { "T.T", "rmc-chatsan-emote-sobs" }, // RMC14
+        { "T-T", "rmc-chatsan-emote-sobs" }, // RMC14
+        { "T_T", "rmc-chatsan-emote-sobs" }, // RMC14
+        { "T~T", "rmc-chatsan-emote-sobs" }, // RMC14
         { ":u", "chatsan-smiles-smugly" },
         { ":v", "chatsan-smiles-smugly" },
         { ">:i", "chatsan-annoyed" },
