@@ -7,7 +7,7 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Admin;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Host)]
-public sealed class RMCResetAHelpRelayCommand
+public sealed class RMCResetAHelpRelayCommand : ToolshedCommand
 {
     [CommandImplementation]
     public async Task Run([CommandInvocationContext] IInvocationContext ctx)
