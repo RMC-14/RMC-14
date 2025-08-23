@@ -57,6 +57,9 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<RMCNightmareScenario>? NightmareScenarios;
+
+    [DataField, AutoNetworkedField]
+    public bool InRotation = true;
 }
 
 [DataDefinition]

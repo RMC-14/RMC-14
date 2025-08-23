@@ -1719,7 +1719,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (SelectedPlanetMap != null)
             return SelectedPlanetMap.Value;
 
-        var planet = _random.Pick(_rmcPlanet.GetCandidates());
+        var planet = _random.Pick(_rmcPlanet.GetCandidatesInRotation());
         SelectedPlanetMap = planet;
         return planet;
     }
@@ -1745,7 +1745,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
             return;
 
-        var planets = _rmcPlanet.GetCandidates();
+        var planets = _rmcPlanet.GetCandidatesInRotation();
         if (!_useCarryoverVoting)
         {
             foreach (var planet in planets)
