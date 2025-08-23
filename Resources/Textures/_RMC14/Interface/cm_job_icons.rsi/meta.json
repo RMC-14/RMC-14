@@ -468,6 +468,21 @@
         },
         {
             "name": "weya_depdirector"
+        },
+        {
+            "name": "hc_exec"
+        },
+        {
+            "name": "hc_execspec"
+        },
+        {
+            "name": "hc_jrexec"
+        },
+        {
+            "name": "hc_srexec"
+        },
+        {
+            "name": "hc_trainee"
         }
     ]
 }
