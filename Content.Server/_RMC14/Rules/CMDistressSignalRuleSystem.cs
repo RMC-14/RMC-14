@@ -1671,17 +1671,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             component.AresGreetingDone = true;
 
             if (component.StartARESAnnouncements)
-                _marineAnnounce.AnnounceARES(default, "ARES. Online. Good morning, marines.", component.AresGreetingAudio,"rmc-announcement-ares-online");
+                _marineAnnounce.AnnounceARESStaging(default, "ARES. Online. Good morning, marines.", component.AresGreetingAudio,"rmc-announcement-ares-online");
         }
 
         if (!component.AresMapDone && announcementTime >= component.AresMapDelay)
         {
             component.AresMapDone = true;
 
-            if (SelectedPlanetMap != null && component.StartARESAnnouncements)
+            if (SelectedPlanetMap != null &&
+                component.StartARESAnnouncements &&
+                SelectedPlanetMap.Value.Comp.Announcement is { } announcement)
             {
-                var announcement = SelectedPlanetMap.Value.Comp.Announcement;
-                _marineAnnounce.AnnounceARES(default, announcement, announcement: "rmc-announcement-ares-map");
+                _marineAnnounce.AnnounceARESStaging(default, announcement, announcement: "rmc-announcement-ares-map");
             }
         }
 
