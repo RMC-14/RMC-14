@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The M4SPR custom scout rifle now has a quick 2-shot burst.
-    type: Tweak
-  id: 1710
-  time: '2025-05-10T04:46:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6372
 - author: J C Denton
   changes:
   - message: Admin Fax Outpost now has newly added SPP, TSE, CLF and Press stamps.
@@ -4599,5 +4592,13 @@
   id: 2210
   time: '2025-08-22T03:09:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7082
+- author: UnicornOnLSD
+  changes:
+  - message: Removed SO job scaling. CIC will now have 4 SO slots at any pop, up to
+      5 at 160+ pop.
+    type: Remove
+  id: 2211
+  time: '2025-08-23T09:17:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6712
 Name: RMC14
 Order: -1
