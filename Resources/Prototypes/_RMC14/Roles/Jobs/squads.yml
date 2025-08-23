@@ -252,6 +252,13 @@
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_mp
+    maxRoles:
+      CMCombatTech: 0
+      CMHospitalCorpsman: 0
+      CMSmartGunOperator: 0
+      CMWeaponsSpecialist: 0
+      CMFireteamLeader: 0
+      CMSquadLeader: 1
     canSupplyDrop: false
     group: Military Police
     leaderIcon:
