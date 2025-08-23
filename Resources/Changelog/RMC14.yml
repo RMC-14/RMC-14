@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added edges to snow and ice tiles.
-    type: Add
-  id: 1712
-  time: '2025-05-12T00:23:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6403
 - author: Vermidia
   changes:
   - message: Fixed ghost marine HUD toggle action not hiding marine health bars.
@@ -4604,5 +4597,20 @@
   id: 2212
   time: '2025-08-23T22:23:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7565
+- author: DrSmugleaf
+  changes:
+  - message: Added chat repeated messages, where a message will get x2, x3, x4 and
+      so on added to the end of it in your chat history when someone repeatedly sends
+      the same message over a short period of time.
+    type: Add
+  - message: Fixed Normandy not being able to load guns.
+    type: Fix
+  - message: Fixed zombie spawners not working after spawning more than 100.
+    type: Fix
+  - message: Fixed corpsmen not being able to use the medical vendor in PvE.
+    type: Fix
+  id: 2213
+  time: '2025-08-23T22:42:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7587
 Name: RMC14
 Order: -1
