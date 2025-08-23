@@ -252,6 +252,11 @@
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_mp
+    blacklistedSquadArmor:
+      - Helmet
+      - Goggles
+      - Armor
+      - Gloves
     maxRoles:
       CMCombatTech: 0
       CMHospitalCorpsman: 0
