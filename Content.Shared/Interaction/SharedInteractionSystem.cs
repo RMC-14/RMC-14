@@ -99,9 +99,6 @@ namespace Content.Shared.Interaction
 
         public delegate bool Ignored(EntityUid entity);
 
-        // RMC14
-        [Dependency] private readonly SharedRMCLagCompensationSystem _lagCompensation = default!;
-
         public override void Initialize()
         {
             _ignoreUiRangeQuery = GetEntityQuery<IgnoreUIRangeComponent>();
@@ -693,8 +690,7 @@ namespace Content.Shared.Interaction
             CollisionGroup collisionMask = InRangeUnobstructedMask,
             Ignored? predicate = null,
             bool popup = false,
-            bool overlapCheck = true,
-            bool lagCompensated = false)
+            bool overlapCheck = true)
         {
             if (!Resolve(other, ref other.Comp))
                 return false;
@@ -707,23 +703,15 @@ namespace Content.Shared.Interaction
                 return ev.InRange;
             }
 
-            // RMC14
-            var otherCoordinates = other.Comp.Coordinates;
-            var otherAngle = other.Comp.LocalRotation;
-            if (lagCompensated && TryComp(origin, out ActorComponent? originActor))
-                (otherCoordinates, otherAngle) = _lagCompensation.GetCoordinatesAngle(other, originActor.PlayerSession);
-            // RMC14
-
             return InRangeUnobstructed(origin,
                 other,
-                otherCoordinates,
-                otherAngle,
+                other.Comp.Coordinates,
+                other.Comp.LocalRotation,
                 range,
                 collisionMask,
                 predicate,
                 popup,
-                overlapCheck,
-                lagCompensated: lagCompensated);
+                overlapCheck);
         }
 
         /// <summary>
@@ -763,8 +751,7 @@ namespace Content.Shared.Interaction
             CollisionGroup collisionMask = InRangeUnobstructedMask,
             Ignored? predicate = null,
             bool popup = false,
-            bool overlapCheck = true,
-            bool lagCompensated = false)
+            bool overlapCheck = true)
         {
             Ignored combinedPredicate = e => e == origin.Owner || (predicate?.Invoke(e) ?? false);
             var inRange = true;
@@ -818,10 +805,7 @@ namespace Content.Shared.Interaction
                 // Out of range so don't raycast.
                 else if (distance > range)
                 {
-                    if (lagCompensated)
-                        originPos = _transform.GetMapCoordinates(origin, xform: origin.Comp);
-                    else
-                        inRange = false;
+                    inRange = false;
                 }
                 else
                 {
@@ -1301,8 +1285,7 @@ namespace Content.Shared.Interaction
             Entity<TransformComponent?> target,
             float range = InteractionRange,
             CollisionGroup collisionMask = InRangeUnobstructedMask,
-            Ignored? predicate = null,
-            bool lagCompensated = false)
+            Ignored? predicate = null)
         {
             if (user == target)
                 return true;
@@ -1313,7 +1296,7 @@ namespace Content.Shared.Interaction
             if (!Resolve(target, ref target.Comp))
                 return false;
 
-            return IsAccessible(user, target) && InRangeUnobstructed(user, target, range, collisionMask, predicate, lagCompensated: lagCompensated);
+            return IsAccessible(user, target) && InRangeUnobstructed(user, target, range, collisionMask, predicate);
         }
 
         /// <summary>
