@@ -703,3 +703,5 @@ cm-chatsan-replacement-folder = sheet holder
 
 cm-chatsan-word-folders = folders
 cm-chatsan-replacement-folders = sheet holders
+
+cm-chatsan-emote-sobs = sobs
