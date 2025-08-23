@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Admin Fax Outpost now has newly added SPP, TSE, CLF and Press stamps.
-    type: Tweak
-  id: 1711
-  time: '2025-05-12T00:23:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6404
 - author: CyberTropic
   changes:
   - message: Added edges to snow and ice tiles.
@@ -4600,5 +4593,16 @@
   id: 2211
   time: '2025-08-23T09:17:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6712
+- author: Shromply
+  changes:
+  - message: Added SPP equivalents for the PVE UNMC gear vendors.
+    type: Add
+  - message: Added PVE SPP roles.
+    type: Add
+  - message: Added the Type 71 gun rack.
+    type: Add
+  id: 2212
+  time: '2025-08-23T22:23:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7565
 Name: RMC14
 Order: -1
