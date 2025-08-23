@@ -468,4 +468,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCLobbyStartPaused =
         CVarDef.Create("rmc.lobby_start_paused", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCChatRepeatHistory =
+        CVarDef.Create("rmc.chat_repeat_history", 4, CVar.REPLICATED | CVar.SERVER);
 }
