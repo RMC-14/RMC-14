@@ -73,7 +73,7 @@
     access: [ [ "CMAccessArmory" ] ]
   - type: RequiresSkill
     skills:
-      RMCSkillOverwatch: 0 # So that CL may use it.
+      RMCSkillOverwatch: 0 # In case Warden or CMP OW skill gets removed for some reason
 
 - type: entity
   parent: RMCOverwatchConsoleMP
