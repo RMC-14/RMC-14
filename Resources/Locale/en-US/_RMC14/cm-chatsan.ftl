@@ -206,25 +206,25 @@ cm-chatsan-word-sl = sl
 cm-chatsan-replacement-sl = tall leader
 
 cm-chatsan-word-commanding-officer = commanding officer
-cm-chatsan-replacement-commanding-officer = tall queen
+cm-chatsan-replacement-commanding-officer = tall empress
 
 cm-chatsan-word-comm-officer = comm officer
-cm-chatsan-replacement-comm-officer = tall queen
+cm-chatsan-replacement-comm-officer = tall empress
 
 cm-chatsan-word-co = co
-cm-chatsan-replacement-co = tall queen
+cm-chatsan-replacement-co = tall empress
 
 cm-chatsan-word-staff-officer = staff officer
 cm-chatsan-replacement-staff-officer = young tall queen
 
 cm-chatsan-word-xo = xo
-cm-chatsan-replacement-xo = young tall queen
+cm-chatsan-replacement-xo = tall queen
 
 cm-chatsan-word-executive-officer = executive officer
-cm-chatsan-replacement-executive-officer = young tall queen
+cm-chatsan-replacement-executive-officer = tall queen
 
 cm-chatsan-word-exec-officer = exec officer
-cm-chatsan-replacement-exec-officer = young tall queen
+cm-chatsan-replacement-exec-officer = tall queen
 
 cm-chatsan-word-senior-enlisted = senior enlisted
 cm-chatsan-replacement-senior-enlisted = young tall queen
