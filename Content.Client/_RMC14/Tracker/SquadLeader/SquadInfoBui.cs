@@ -164,7 +164,9 @@ public sealed class SquadInfoBui : BoundUserInterface
         if (member.Role is { } role &&
             _prototype.TryIndex(role, out var job))
         {
-            if (_prototype.TryIndex(job.Icon, out var icon))
+            if (member.IconOverride != null)
+                row.RoleIcon.Texture = _sprite.Frame0(member.IconOverride);
+            else if (_prototype.TryIndex(job.Icon, out var icon))
                 row.RoleIcon.Texture = _sprite.Frame0(icon.Icon);
 
             row.RoleBackground.Texture = background;

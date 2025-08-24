@@ -22,6 +22,7 @@ namespace Content.Client._RMC14.Overwatch;
 public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 {
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly ILocalizationManager _localization = default!;
 
     private const string GreenColor = "#229132";
     private const string RedColor = "#A42625";
@@ -283,7 +284,9 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 string? rankName = null;
                 if (marine.Role != null)
                 {
-                    if (_prototypes.TryIndex(marine.Role, out var job))
+                    if (marine.RoleOverride is { } roleOverride && _localization.TryGetString(roleOverride, out var localizedName))
+                        roleName = localizedName;
+                    else if (_prototypes.TryIndex(marine.Role, out var job))
                         roleName = job.LocalizedName;
 
                     var role = roles.GetOrNew(marine.Role.Value, out var present);
