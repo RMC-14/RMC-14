@@ -13,3 +13,4 @@ name = "normandy"
 
 [rmc]
 planet_map_vote = false
+lobby_start_paused = true

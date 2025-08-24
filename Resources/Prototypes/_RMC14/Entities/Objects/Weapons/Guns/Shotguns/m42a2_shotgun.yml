@@ -57,7 +57,7 @@
       rmc-aslot-stock:
         whitelist:
           tags:
-          - RMCAttachmentM42A2WoodenStock
+          - RMCAttachmentM42A2CollapsibleStock
       rmc-aslot-underbarrel:
         whitelist:
           tags:

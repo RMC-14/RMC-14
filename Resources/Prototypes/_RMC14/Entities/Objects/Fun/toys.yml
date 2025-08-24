@@ -145,7 +145,7 @@
   parent: CMPlushieBase
   id: RMCPlushieAlec
   name: conspicuous plush
-  description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hyper allergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
+  description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hypoallergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
   suffix: DO NOT MAP
   components:
   - type: Sprite

@@ -133,7 +133,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         if (!foundAny) // there is no one 0_0
             return;
 
-        _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-senior-command-found"));
+        _marineAnnounce.AnnounceARESStaging(ares, Loc.GetString("rmc-marine-command-override-no-senior-command-found"));
 
         _adaptationTimerEndTime = _gameTiming.CurTime + TimeSpan.FromMinutes(1);
     }
@@ -176,7 +176,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
             if (jobProto.MarineAuthorityLevel >= _seniorAuthorityLevel) // Senior command found
             {
-                _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-senior-command-found"));
+                _marineAnnounce.AnnounceARESStaging(ares, Loc.GetString("rmc-marine-command-override-senior-command-found"));
                 return;
             }
 
@@ -198,7 +198,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
         if (candidates.Count == 0) // No candidates found
         {
-            _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
+            _marineAnnounce.AnnounceARESStaging(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
             return;
         }
 
@@ -212,7 +212,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
             if (highestRankCandidates == null) // All entities have invalid rank (in this case it is impossible) or an empty dataset was passed
             {
-                _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
+                _marineAnnounce.AnnounceARESStaging(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
                 return;
             }
 
@@ -254,7 +254,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         if (_accessesAdded)
             announceText = $"{announceText}\n{Loc.GetString("rmc-marine-command-override-access-added")}";
 
-        _marineAnnounce.AnnounceARES(ares, announceText, null, null);
+        _marineAnnounce.AnnounceARESStaging(ares, announceText, null, null);
 
     }
 
