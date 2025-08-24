@@ -59,3 +59,27 @@
   - type: Sprite
     overrideDir: South
     enableOverrideDir: false
+
+# Military Police
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleMP
+  suffix: MP
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: Military Police
+  - type: AccessReader
+    access: [ [ "CMAccessArmory" ] ]
+  - type: RequiresSkill
+    skills:
+      RMCSkillOverwatch: 0 # In case Warden or CMP OW skill gets removed for some reason
+
+- type: entity
+  parent: RMCOverwatchConsoleMP
+  id: RMCOverwatchConsoleMPRotating
+  suffix: MP, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
