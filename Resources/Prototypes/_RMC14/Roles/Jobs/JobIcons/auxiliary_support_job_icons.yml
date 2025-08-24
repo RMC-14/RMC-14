@@ -32,3 +32,10 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_io
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconVehicleCrewman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_tc

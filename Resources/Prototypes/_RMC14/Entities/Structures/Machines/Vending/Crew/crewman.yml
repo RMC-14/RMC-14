@@ -1,0 +1,237 @@
+﻿# TODO: Vehicle parts delivery system
+
+# Weapons rack
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechVehicleCrewmanWeapon
+  name: ColMarTech Vehicle Crewman Weapon Rack
+  description: An automated weapon rack hooked up to a small storage of standard-issue weapons. Can be accessed only by the Vehicle Crewmen.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCrewman" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMVehicleCrewman
+    sections:
+    - name: Primary Firearms
+      entries:
+      - id: WeaponRifleM4SPR
+        amount: 2
+      - id: WeaponSMGM63
+        amount: 2
+      - id: WeaponShotgunM42A2
+        amount: 2
+      - id: WeaponRifleM54C
+        amount: 2
+    - name: Primary Ammunition
+      entries:
+      - id: RMCBoxShotgunBuckshot
+        amount: 6
+      - id: RMCBoxShotgunFlechette
+        amount: 6
+      - id: RMCBoxShotgunSlugs
+        amount: 6
+      - id: CMMagazineRifleM4SPR
+        amount: 12
+      - id: CMMagazineSMGM63
+        amount: 12
+      - id: CMMagazineRifleM54C
+        amount: 12
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolM77
+        amount: 2
+      - id: RMCWeaponRevolverM44
+        amount: 2
+      - id: CMWeaponPistolM1984
+        amount: 2
+      - id: RMCWeaponPistolM13
+        amount: 2
+      - id: RMCWeaponPistolM82F
+        amount: 2
+    - name: Sidearm Ammunition
+      entries:
+      - id: CMMagazinePistolM77AP
+        amount: 10
+      - id: RMCSpeedLoaderM44
+        amount: 10
+      - id: CMMagazinePistolM1984
+        amount: 10
+      - id: RMCMagazinePistolM1984AP
+        amount: 6
+      - id: CMMagazinePistolMK80
+        amount: 8
+      - id: RMCMagazinePistolM13Ext
+        amount: 10
+      - id: RMCMagazinePistolM13Drum
+        amount: 6 #Drums aren't fully implemented -- supposed to have high jam chance and slow to reload...
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentRailFlashlight
+        amount: 4
+      - id: RMCAttachmentFlashlightGrip
+        amount: 4
+      - id: RMCAttachmentMagneticHarness
+        amount: 2
+    - name: Utilities
+      entries:
+      - id: RMCFlashlight
+        amount: 2
+      - id: RMCM5Bayonet
+        amount: 2
+      - id: RMCPackFlareCAS
+        amount: 1
+      - id: CMPackFlare
+        amount: 10
+      - id: RMCScabbardMacheteFilled
+        amount: 2
+
+# Equipment Rack
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechVehicleCrewmanEquipment
+  name: ColMarTech Vehicle Crewman Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Vehicle Crewmen standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCrewman" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMVehicleCrewman
+    sections:
+    - name: Standard Equipment
+      takeAll: CMEquipment
+      entries:
+      - id: CMHandsInsulated
+      - id: RMCArmorM3MediumTanker
+      - id: CMArmorHelmetM50
+      - id: RMCVisorMedical
+      - id: RMCWeldingKit
+      - id: CMMRE
+    - name: Personal Sidearm
+      choices: { CMSidearm: 1 }
+      entries:
+      - id: RMCWeaponPistolM77
+      - id: RMCMK80
+    - name: Belts
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltMarine
+        recommended: true
+      - id: RMCBeltHolsterSMGPouch
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
+      - id: RMCBeltHolsterRevolver
+      - id: RMCM82FHolster
+      - id: RMCM276ShotgunShellLoadingRig
+      - id: CMBeltUtilityFilled
+    - name: Pouches
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment)
+        recommended: true
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+        recommended: true
+      - id: RMCPouchFirstResponder
+      - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchMagazineLarge
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchShotgunLarge
+      - id: RMCPouchPistol
+        #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+      - id: RMCPouchToolsFill
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingBlack
+        recommended: true
+      - id: RMCWebbingDropPouch
+      - id: CMWebbing
+      - id: CMWebbingHolster
+    - name: Masks
+      choices: { CMMasks: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+      - id: RMCMaskRebreather
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentAngledGrip
+        points: 10
+      - id: RMCAttachmentExtendedBarrel
+        points: 10
+      - id: RMCAttachmentGyroscopicStabilizer
+        points: 10
+      - id: RMCAttachmentLaserSight
+        points: 10
+      - id: RMCAttachmentU7UnderbarrelShotgun
+        points: 10
+      - id: RMCAttachmentM42A2CollapsibleStock
+        points: 10
+      - id: RMCAttachmentM63Stock
+        points: 10
+      - id: RMCAttachmentM54CStockSolid
+        points: 10
+      - id: RMCAttachmentRecoilCompensator
+        points: 10
+      - id: RMCAttachmentS5RedDotSight
+        points: 10
+      - id: RMCAttachmentSuppressor
+        points: 10
+      - id: RMCAttachmentVerticalGrip
+        points: 10
+    - name: Ammunition
+      entries:
+      - id: CMMagazineRifleM4SPRAP
+        points: 10
+      - id: CMMagazineRifleM4SPRExt
+        points: 10
+      - id: CMMagazineSMGM63AP
+        points: 10
+      - id: CMMagazineSMGM63Ext
+        points: 10
+      - id: CMGrenadeHighExplosive
+        points: 10
+      - id: CMMagazineRifleM54CAP
+        points: 10
+      - id: CMMagazineRifleM54CExt
+        points: 10
+      - id: RMCSpeedLoaderM44
+        points: 10
+    - name: Utilities
+      entries:
+      - id: RMCBinoculars
+        points: 10
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
+        points: 5
+      - id: RMCPouchFuelTank
+        points: 5
+      - id: RMCFulton20
+        points: 5
+      - id: RMCPouchShotgunLarge
+        points: 10
+      - id: RMCMotionDetector
+        points: 15
+      - id: RMCExplosivePlastic
+        points: 10
+      - id: CMRollerBedSpawnFolded
+        points: 5
+      - id: RMCWhistle
+        points: 5

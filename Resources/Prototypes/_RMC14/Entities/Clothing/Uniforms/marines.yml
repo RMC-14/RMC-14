@@ -124,13 +124,20 @@
 
 # Tanker
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitMarineTanker
-  name: UNMC tanker uniform
+  name: vehicle crewman uniform
+  description: A uniform worn by vehicle crewmen of the UNMC. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
-
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/urban.rsi
 # CBRN
 
 - type: entity
@@ -436,6 +443,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/crewchief.rsi
+
+
 
 # Civilian
 
