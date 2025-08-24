@@ -39,6 +39,7 @@
   overwatchShowName: true
   overwatchRoleName: Squad Leader
   roleWeight: 1
+  displayWeight: 6
   special:
   - !type:AddComponentSpecial
     components:
