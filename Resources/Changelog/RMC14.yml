@@ -1,110 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added functionality for CQC skill. CQC skill will now allow you to do
-      aggressive grabs faster, do extra unarmed damage, let you disarm/tackle other
-      marines better, and decrease inventory strip times.
-    type: Add
-  id: 1700
-  time: '2025-05-10T03:54:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6359
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added ear deafness, certain loud noises will prevent you from hearing
-      chat and sounds.
-    type: Add
-  id: 1701
-  time: '2025-05-10T03:58:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6279
-- author: Vermidia
-  changes:
-  - message: Fixed how stamina works. It's been overhauled, so you can no longer shake
-      someone in stamina crit, and different stamina levels will slow you down different
-      amounts.
-    type: Fix
-  - message: Fixed Neurotoxin not dazing.
-    type: Fix
-  id: 1702
-  time: '2025-05-10T04:02:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6388
-- author: Vermidia
-  changes:
-  - message: Fixed neurotoxin gas not causing blurry vision.
-    type: Fix
-  id: 1703
-  time: '2025-05-10T04:05:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6381
-- author: Vermidia
-  changes:
-  - message: Fixed morgues preventing rot
-    type: Fix
-  id: 1704
-  time: '2025-05-10T04:05:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6392
-- author: Dygon
-  changes:
-  - message: Airburst grenades now rebound at the angle of incidence instead of always
-      rebounding at 180 degrees.
-    type: Tweak
-  - message: Airburst grenade projectiles now receive the overpenetration penalty
-      only when a target is directly impacted by the grenade. For example, with the
-      Hornet grenade, you can potentially hit all 15 projectiles if you aim directly
-      in front of a target, instead of the previous limit of 5.
-    type: Fix
-  id: 1705
-  time: '2025-05-10T04:24:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6368
-- author: Vermidia
-  changes:
-  - message: Fixed health analyzers not showing clone damage when it's present
-    type: Fix
-  - message: Added medical advice to the health analyzer
-    type: Add
-  id: 1706
-  time: '2025-05-10T04:28:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6378
-- author: Vermidia
-  changes:
-  - message: Changed holocard sprites to be more distinct
-    type: Tweak
-  id: 1707
-  time: '2025-05-10T04:29:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6367
-- author: DummeHytteOst
-  changes:
-  - message: Changed the option name "Xeno wide swing" to "Xenonid thrust attack".
-    type: Tweak
-  id: 1708
-  time: '2025-05-10T04:33:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6365
-- author: SharkSnake98
-  changes:
-  - message: Added 4 new vests for the Corporate Liaison.
-    type: Add
-  id: 1709
-  time: '2025-05-10T04:44:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6230
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The M4SPR custom scout rifle now has a quick 2-shot burst.
-    type: Tweak
-  id: 1710
-  time: '2025-05-10T04:46:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6372
-- author: J C Denton
-  changes:
-  - message: Admin Fax Outpost now has newly added SPP, TSE, CLF and Press stamps.
-    type: Tweak
-  id: 1711
-  time: '2025-05-12T00:23:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6404
-- author: CyberTropic
-  changes:
-  - message: Added edges to snow and ice tiles.
-    type: Add
-  id: 1712
-  time: '2025-05-12T00:23:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6403
 - author: Vermidia
   changes:
   - message: Fixed ghost marine HUD toggle action not hiding marine health bars.
@@ -4601,5 +4495,122 @@
   id: 2200
   time: '2025-08-19T17:52:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7542
+- author: SharkSnake98
+  changes:
+  - message: Added a significant amount of clothing items.
+    type: Add
+  - message: Added a large collection of items to the Liaison's Wardrobe.
+    type: Add
+  - message: Added clothing loadout items to the respective loadouts.
+    type: Add
+  - message: Changed/resprited the rounded prescription glasses/hippie glasses.
+    type: Tweak
+  id: 2201
+  time: '2025-08-21T23:01:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7307
+- author: BadaBoomie
+  changes:
+  - message: Fixes a minor typo in the supreme taco
+    type: Fix
+  id: 2202
+  time: '2025-08-21T23:52:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7529
+- author: x5tink
+  changes:
+  - message: New medals for longer playtimes, re-ordered ribbons playtime hours.
+    type: Add
+  id: 2203
+  time: '2025-08-22T02:05:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6666
+- author: ProspectorAres
+  changes:
+  - message: Added a new lobby Screen
+    type: Add
+  id: 2204
+  time: '2025-08-22T02:19:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7478
+- author: BramvanZijp
+  changes:
+  - message: The Commanding Officer's Smartgun will no longer cause your hitbox to
+      become wider while you have it equipped or held.
+    type: Fix
+  id: 2205
+  time: '2025-08-22T02:26:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7480
+- author: Arykh
+  changes:
+  - message: The M44 combat revolver given to MPs will now come pre-loaded with marksman
+      cartridges.
+    type: Tweak
+  id: 2206
+  time: '2025-08-22T02:30:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7039
+- author: BramvanZijp
+  changes:
+  - message: Added an MP Vest to the Military Warden and Chief MP's vendors.
+    type: Add
+  - message: The Chief MP can no longer access the MP equipment vendor.
+    type: Remove
+  id: 2207
+  time: '2025-08-22T02:46:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6860
+- author: SharkSnake98
+  changes:
+  - message: Added 5 new icons for Halcyon, from trainee to exec. spec.
+    type: Add
+  - message: Added the executive halcyon icon to Sorokyne CorpSurv
+    type: Add
+  id: 2208
+  time: '2025-08-22T02:48:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7470
+- author: Max_Power
+  changes:
+  - message: Fixed the smartgunner harness being acidable.
+    type: Fix
+  id: 2209
+  time: '2025-08-22T02:55:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7439
+- author: Gabrote42
+  changes:
+  - message: The Guidebook now contains a guide on Marine Communications, detailing
+      the mechanics and best practices of all Marine communication methods.
+    type: Add
+  id: 2210
+  time: '2025-08-22T03:09:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7082
+- author: UnicornOnLSD
+  changes:
+  - message: Removed SO job scaling. CIC will now have 4 SO slots at any pop, up to
+      5 at 160+ pop.
+    type: Remove
+  id: 2211
+  time: '2025-08-23T09:17:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6712
+- author: Shromply
+  changes:
+  - message: Added SPP equivalents for the PVE UNMC gear vendors.
+    type: Add
+  - message: Added PVE SPP roles.
+    type: Add
+  - message: Added the Type 71 gun rack.
+    type: Add
+  id: 2212
+  time: '2025-08-23T22:23:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7565
+- author: DrSmugleaf
+  changes:
+  - message: Added chat repeated messages, where a message will get x2, x3, x4 and
+      so on added to the end of it in your chat history when someone repeatedly sends
+      the same message over a short period of time.
+    type: Add
+  - message: Fixed Normandy not being able to load guns.
+    type: Fix
+  - message: Fixed zombie spawners not working after spawning more than 100.
+    type: Fix
+  - message: Fixed corpsmen not being able to use the medical vendor in PvE.
+    type: Fix
+  id: 2213
+  time: '2025-08-23T22:42:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7587
 Name: RMC14
 Order: -1

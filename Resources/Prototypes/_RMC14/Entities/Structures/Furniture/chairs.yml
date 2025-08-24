@@ -26,6 +26,8 @@
   components:
   - type: Transform
     anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Foldable
     anchorOnUnfold: true
   - type: Sprite
@@ -62,7 +64,7 @@
   - type: Foldable
     folded: true
   - type: Strap
-    enabled: False
+    enabled: false
 
 - type: entity
   parent: CMSeatBase

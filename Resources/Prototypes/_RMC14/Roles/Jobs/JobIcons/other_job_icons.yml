@@ -21,6 +21,13 @@
 
 - type: jobIcon
   parent: CMJobIconBase
+  id: RMCJobIconHalcyonExec
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hc_exec
+
+- type: jobIcon
+  parent: CMJobIconBase
   id: RMCJobIconPMCSynthetic
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
