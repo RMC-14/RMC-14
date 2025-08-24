@@ -1,12 +1,18 @@
-﻿using Content.Client.Weapons.Melee;
+using Content.Client.Weapons.Melee;
 using Content.Shared._RMC14.Input;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Stealth;
+using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Content.Client._RMC14.Weapons.Melee;
 
@@ -19,6 +25,7 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
     [Dependency] private readonly MeleeWeaponSystem _melee = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     public override void Initialize()
     {
@@ -56,5 +63,76 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 
         if (weapon.WidePrimary)
             _melee.ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
+    }
+
+    /// <summary>
+    /// Gets the closest entity that was sprite clicked.
+    /// Prioritizes entities that are not xenos.
+    /// </summary>
+    /// <param name="clickCoords">Mouse Click Coordinates</param>
+    /// <param name="clickedEntities">All Entities that are under the clickCoords</param>
+    /// <param name="newTarget"></param>
+    /// <returns></returns>
+    public bool TryGetAlternativeXenoAttackTarget(MapCoordinates clickCoords, List<EntityUid> clickedEntities, [NotNullWhen(true)] out EntityUid? newTarget)
+    {
+        newTarget = null;
+        var tackleableEnts = clickedEntities;
+
+        var compareDistance = new Comparison<EntityUid>((EntityUid a, EntityUid b) =>
+        {
+            var coordA = _transform.GetMapCoordinates(a);
+            var coordB = _transform.GetMapCoordinates(b);
+
+            var distanceA = (coordA.Position - clickCoords.Position).Length();
+            var distanceB = (coordB.Position - clickCoords.Position).Length();
+
+            if (distanceA > distanceB)
+            {
+                return 1;
+            }
+            else if (distanceA < distanceB)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        });
+
+        List<EntityUid> nonMarineTargets = new();
+        List<EntityUid> marineTargets = new();
+
+        foreach (var ent in tackleableEnts)
+        {
+            if (!HasComp<TackleableComponent>(ent))
+            {
+                continue;
+            }
+
+            if (HasComp<MarineComponent>(ent))
+            {
+                nonMarineTargets.Add(ent);
+                continue;
+            }
+
+            marineTargets.Add(ent);
+        }
+
+        // Prioritze marine entities for targeting
+        if (marineTargets.Count > 0)
+        {
+            marineTargets.Sort(compareDistance);
+            newTarget = marineTargets.First();
+            return true;
+        }
+
+        if (nonMarineTargets.Count > 0)
+        {
+            nonMarineTargets.Sort(compareDistance);
+            newTarget = nonMarineTargets.First();
+            return true;
+        }
+        return false;
     }
 }

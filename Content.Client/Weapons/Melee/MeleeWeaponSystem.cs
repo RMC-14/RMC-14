@@ -1,7 +1,9 @@
 using System.Linq;
+using Content.Client._RMC14.Weapons.Melee;
 using Content.Client.Gameplay;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Tackle;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
 using Content.Shared.Hands.Components;
@@ -33,6 +35,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly MapSystem _map = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly RMCMeleeWeaponSystem _RMCMelee = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 
@@ -206,7 +209,16 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         EntityUid? target = null;
 
         if (_stateManager.CurrentState is GameplayStateBase screen)
+        {
             target = screen.GetClickedEntity(mousePos);
+
+            //RMC14
+            if (HasComp<XenoComponent>(attacker) &&
+            _RMCMelee.TryGetAlternativeXenoAttackTarget(mousePos, screen.GetClickableEntities(mousePos).ToList(), out var altTarget))
+            {
+                target = altTarget;
+            }
+        }
 
         var attackerPos = TransformSystem.GetMapCoordinates(attacker);
         if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
@@ -225,7 +237,16 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         EntityUid? target = null;
 
         if (_stateManager.CurrentState is GameplayStateBase screen)
+        {
             target = screen.GetClickedEntity(mousePos);
+
+            //RMC14
+            if (HasComp<XenoComponent>(attacker) &&
+            _RMCMelee.TryGetAlternativeXenoAttackTarget(mousePos, screen.GetClickableEntities(mousePos).ToList(), out var altTarget))
+            {
+                target = altTarget;
+            }
+        }
 
         // Don't light-attack if interaction will be handling this instead
         if (Interaction.CombatModeCanHandInteract(attacker, target))
