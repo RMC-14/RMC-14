@@ -65,6 +65,12 @@
       accuracyAddMult: -0.05
   - type: AttachablePrying
   - type: DeleteOnExplosion
+  - type: Tool
+    qualities:
+    - Cutting
+    speedModifier: 0.8
+    useSound:
+      path: /Audio/Items/wirecutter.ogg
 
 - type: entity
   name: M11 throwing knife
