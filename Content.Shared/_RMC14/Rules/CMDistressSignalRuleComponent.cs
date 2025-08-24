@@ -165,7 +165,8 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     public List<string> AuxiliaryMaps = new() {
         "/Maps/_RMC14/OCP-583.yml",
-        "/Maps/_RMC14/admin_fax.yml"
+        "/Maps/_RMC14/admin_fax.yml",
+        "/Maps/_RMC14/Breakwater_Strand.yml"
     };
 
     [DataField]
