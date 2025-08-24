@@ -1060,8 +1060,8 @@ WeldingFuelTankFull: RMCTankReagentFuel
 WaterTankFull: RMCTankReagentWater
 
 # 2024-12-24
-WeaponRifleM54CCamo: WeaponRifleM54C
-WeaponRifleM54CE2Camo: WeaponRifleM54CE2
+#WeaponRifleM54CCamo: WeaponRifleM54C
+#WeaponRifleM54CE2Camo: WeaponRifleM54CE2
 WeaponRifleM4SPRCamo: WeaponRifleM4SPR
 WeaponSMGM63Camo: WeaponSMGM63
 WeaponShotgunM42A2Camo: WeaponShotgunM42A2
