@@ -118,6 +118,7 @@
     tags:
     - Sidearm
     - RMCWeaponPistolHandcannonGold
+  - type: RMCBattleExecute
 
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
