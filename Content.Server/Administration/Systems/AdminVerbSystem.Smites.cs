@@ -30,6 +30,8 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Electrocution;
+using Content.Shared.Humanoid.Prototypes;
+using Content.Server.Humanoid.Systems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
@@ -84,8 +86,10 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly SuperBonkSystem _superBonkSystem = default!;
     [Dependency] private readonly SlipperySystem _slipperySystem = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _xenoParasite = default!;
+    [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
 
     private static readonly EntProtoId MouseProto = "CMMobMouse";
+    private static readonly ProtoId<RandomHumanoidSettingsPrototype> RiflemanProto = "RMCUnassignedRifleman";
 
     // All smite verbs have names so invokeverb works.
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)
@@ -961,5 +965,23 @@ public sealed partial class AdminVerbSystem
             Message = "Chestburst into mouse",
         };
         args.Verbs.Add(chestburstMouse);
+
+        Verb chestburstRifleman = new()
+        {
+            Text = "Chestburst into rifleman",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Effects/burst.rsi"), "bursted_stand"),
+            Act = () =>
+            {
+                var rifleman = _randomHumanoid.SpawnRandomHumanoid(RiflemanProto, _transformSystem.GetMoverCoordinates(args.Target), "");
+                var infected = EnsureComp<VictimInfectedComponent>(args.Target);
+                _xenoParasite.InsertLarva((args.Target, infected), rifleman);
+                _xenoParasite.SetBurstSound((args.Target, infected), new SoundPathSpecifier("/Audio/Voice/Human/wilhelm_scream.ogg"));
+                _xenoParasite.TryStartBurst((args.Target, infected));
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Chestburst into rifleman",
+        };
+        args.Verbs.Add(chestburstRifleman);
     }
 }
