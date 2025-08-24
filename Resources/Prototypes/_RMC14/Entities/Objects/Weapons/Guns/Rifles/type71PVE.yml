@@ -5,3 +5,6 @@
   components:
   - type: RMCSelectiveFire
     baseFireRate: 3.5
+
+- type: Tag
+  id: RMCMagazineRifleType71PVE
