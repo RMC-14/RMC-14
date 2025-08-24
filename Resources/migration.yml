@@ -409,14 +409,14 @@ CMMagazineRifleM41A: CMMagazineRifleM54C
 CMMagazineRifleM41AAP: CMMagazineRifleM54CAP
 CMMagazineRifleM41AExt: CMMagazineRifleM54CExt
 CMAttachmentM41ASolidStock: RMCAttachmentM54CStockSolid
-WeaponRifleM41A: WeaponRifleM54C
+# WeaponRifleM41A: WeaponRifleM54C
 CMCrateBoxMagazineRifleM41A: RMCCrateBoxMagazineRifleM54C
 CMCrateBoxMagazineRifleM41AAP: RMCCrateBoxMagazineRifleM54CAP
 CMCrateBoxMagazineRifleM41AExt: RMCCrateBoxMagazineRifleM54CExt
 #CMCrateM41A: RMCCrateM54C
 CMCrateM41AE2: RMCCrateM54CE2
 CMMagazineRifleM41AE2: CMMagazineRifleM54CE2
-WeaponRifleM41AE2: WeaponRifleM54CE2
+# WeaponRifleM41AE2: WeaponRifleM54CE2
 
 # 2024-06-23
 FloorTileItemReinforced: PartRodMetal1
