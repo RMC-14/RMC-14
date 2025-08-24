@@ -58,5 +58,5 @@
     - id: RMCMortarShellHE
       amount: 3
     - id: CMWrench
-    - id: RMCRangefinder
+    - id: RMCLaserDesignator
       amount: 2
