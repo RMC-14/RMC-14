@@ -22,7 +22,7 @@
       types:
         Blunt: 6
   - type: Gun
-    projectileSpeed: 40
+    projectileSpeed: 20
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
