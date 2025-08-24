@@ -3,6 +3,16 @@
   parent: Coffee
   color: "#704435"
 
+- type: reagent
+  id: RMCTea
+  parent: Tea
+  color: "#8a5a3a"
+
+- type: reagent
+  id: RMCHotCocoa
+  parent: HotCocoa
+  color: "#664300"
+
 - type: entity
   parent: DrinkBaseMug
   id: RMCCoffeeCup

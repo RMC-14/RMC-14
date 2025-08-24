@@ -135,9 +135,9 @@
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
-    RMCCoffeeCupFilled: 25
-    DrinkTeacup: 25
-    DrinkHotCoco: 25
+    RMCDrinkCoffee: 25
+    RMCDrinkTea: 25
+    RMCDrinkHotCocoa: 25
 
 
 # Snack
