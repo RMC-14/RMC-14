@@ -175,6 +175,8 @@
         points: 15
       - id: RMCWebbingDropPouch
         points: 15
+      - id: RMCWebbingDropPouchBlack
+        points: 15
       - id: CMWebbingHolster
         points: 15
       - id: RMCScabbardMacheteFilled
