@@ -5,6 +5,7 @@ using Content.Server._RMC14.Marines;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
@@ -1065,6 +1066,15 @@ public override void Initialize()
             {
                 UpdateUserData((tunnelUserId, tunnelUserComp), map);
             }
-        }
+
+            var dropshipWeapons = EntityQueryEnumerator<TacticalMapComputerComponent, DropshipTerminalWeaponsComponent>();
+            while (dropshipWeapons.MoveNext(out var weaponsId, out var weaponsComputer, out var weapons))
+            {
+                if (!_ui.IsUiOpen(weaponsId, DropshipTerminalWeaponsUi.Key))
+                    continue;
+
+                UpdateMapData((weaponsId, weaponsComputer), map);
+            }
+            }
     }
 }
