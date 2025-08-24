@@ -66,6 +66,7 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
             NewPlayerVisuals.One => see.OneLabel,
             NewPlayerVisuals.Two => see.TwoLabel,
             NewPlayerVisuals.Three => see.ThreeLabel,
+            NewPlayerVisuals.Four => see.FourLabel,
             _ => null,
         };
 
