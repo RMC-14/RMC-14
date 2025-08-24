@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b0bca8ef7dedf94a30f456544bec6ef3aaa7ec8a/icons/obj/items/syringe.dmi, Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1d28964d37f9b95773580cca3471a2a4f5c03eb0/icons/obj/items/reagentfillings.dmi , en from cev-eris https://github.com/discordia-space/CEV-Eris/commit/989b7b343045f30120c198ee100c9fee7ff8a989, bluespace syringe sprites modified by EmoGarbage404 (github), cryo syringe sprites by Ubaser, cmss13 sprites modified by Vermidia",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "syringe1"
+    },
+    {
+      "name": "syringe2"
+    },
+    {
+      "name": "syringe3"
+    },
+    {
+      "name": "syringe"
+    },
+    {
+      "name": "draw"
+    },
+    {
+      "name": "inject"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-fill-1",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-fill-1",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-fill-2",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-fill-2",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-fill-3",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-fill-3",
+      "directions": 4
+    }
+  ]
+}
