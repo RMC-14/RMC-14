@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Evasion;
+using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Input;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
@@ -75,9 +75,11 @@ public sealed class RMCStandingSystem : EntitySystem
                             if (_standing.IsDown(ent))
                                 _popup.PopupClient(Loc.GetString("rmc-standing-keep-lying"), ent, ent, PopupType.Medium);
 
-                            rest.Resting = true;
-                            Dirty(ent, rest);
-                            _standing.Down(ent);
+                            if (_standing.Down(ent))
+                            {
+                                rest.Resting = true;
+                                Dirty(ent, rest);
+                            }
                         }
 
                         rest.LastToggleAt = time;
@@ -171,6 +173,7 @@ public sealed class RMCStandingSystem : EntitySystem
     private void OnRestStood(Entity<RMCRestComponent> ent, ref StoodEvent args)
     {
         ent.Comp.Resting = false;
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
         Dirty(ent);
     }
 
