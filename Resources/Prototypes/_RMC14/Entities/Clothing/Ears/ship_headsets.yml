@@ -134,7 +134,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-      - CMEncryptionKeyRequisition
+      - RMCEncryptionKeyCargotech
   - type: GrantSquadLeaderTracker
     defaultMode: Quartermaster
     trackerModes:
