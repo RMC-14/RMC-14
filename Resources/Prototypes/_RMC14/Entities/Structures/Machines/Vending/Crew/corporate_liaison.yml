@@ -28,6 +28,10 @@
         amount: 1
       - id: CMJumpsuitLiaisonCorporateFormal
         amount: 1
+      - id: RMCJumpsuitGreySuitPants
+        amount: 1
+      - id: RMCJumpsuitWornSuit
+        amount: 1
       - id: CMJumpsuitLiaison
         amount: 1
       - id: CMJumpsuitLiaisonCharcoal
@@ -40,20 +44,48 @@
         amount: 1
       - id: CMJumpsuitLiaisonSuspenders
         amount: 1
-#      - id: LiaisonsSkirt
-#      - id: TraineesUniform
+      - id: RMCJumpsuitLiaisonSkirt
+        amount: 1
+      - id: RMCJumpsuitWEYATrainee
+        amount: 1
       - id: CMJumpsuitLiaisonIvy
         amount: 1
-#      - id: OrangeOutfit
+      - id: RMCJumpsuitLiaisonOrange
+        amount: 1
       - id: CMJumpsuitLiaisonField
         amount: 1
       - id: RMCJumpsuitLiaisonFieldSuitskirt
+        amount: 1
+      - id: RMCJumpsuitBlackPantsUniform
+        amount: 1
+      - id: RMCJumpsuitBluePantsUniform
+        amount: 1
+      - id: RMCJumpsuitBlackTailored
+        amount: 1
+      - id: RMCJumpsuitBurgundyTailored
+        amount: 1
+      - id: RMCJumpsuitCharcoalTailored
+        amount: 1
+      - id: RMCJumpsuitNavyTailored
+        amount: 1
+      - id: RMCJumpsuitCheckeredTailored
+        amount: 1
+      - id: RMCJumpsuitJetblackExecutiveSuit
+        amount: 1
+      - id: RMCJumpsuitFemJetblackExecutiveSuit
         amount: 1
       - id: CMJumpsuitLiaisonOutingRed
         amount: 1
       - id: CMJumpsuitLiaisonOuting
         amount: 1
-#      - id: PinkWorkwear
+      - id: RMCJumpsuitBlueWorkwear
+        amount: 1
+      - id: RMCJumpsuitLiaisonGreyWorkwear
+        amount: 1
+      - id: RMCJumpsuitLiaisonPinkWorkwear
+        amount: 1
+      - id: RMCJumpsuitLiaisonKhakiWorkwear
+        amount: 1
       - id: RMCJumpsuitLiaisonGreenWorkwear
         amount: 1
     - name: Coat
@@ -68,6 +100,18 @@
         amount: 1
       - id: RMCJacketCorporateFormal
         amount: 1
+      - id: RMCFancySuitJacketBlack
+        amount: 1
+      - id: RMCFancySuitJacketBlue
+        amount: 1
+      - id: RMCFancySuitJacketPurp
+        amount: 1
+      - id: RMCFancySuitJacketRed
+        amount: 1
+      - id: RMCFancySuitJacketBrown
+        amount: 1
+      - id: RMCFancySuitJacketLightBrown
+        amount: 1
       - id: RMCWeYaBrownVest
         amount: 1
       - id: RMCWeYaBlueVest
@@ -78,37 +122,72 @@
         amount: 1
       - id: RMCWeYaFurCoat
         amount: 1
-#      - id:RMCweYaFurCoat
-#        amount: 1
-#      - id: GreyBomberJacket
-#        amount: 1
-#      - id: RedBomberJacket
-#        amount: 1
-#      - id: KhakiBomberJacket
-#        amount: 1
-#      - id: BrownBomberJacket
-#        amount: 1
-#      - id: BlackBomberJacket
-#        amount: 1
+      - id: RMCCoatBureauTrenchCoatBeige
+        amount: 1
+      - id: RMCCoatBureauTrenchCoatBrown
+        amount: 1
+      - id: RMCCoatBureauTrenchCoatGrey
+        amount: 1
+      - id: RMCCoatBomberGrey
+        amount: 1
+      - id: RMCCoatBomberRed
+        amount: 1
+      - id: RMCCoatBomberKhaki
+        amount: 1
+      - id: RMCCoatBomber
+        amount: 1
+      - id: RMCCoatBomberBlack
+        amount: 1
 #      - id: LiaisonsWinterCoat
-#        amount: 1
-#      - id: Labcoat
-#        amount: 1
-#      - id: Grey Vest
-#        amount: 1
-#      - id: Brown Vest
-#        amount: 1
-#      - id: Tan Vest
-#        amount: 1
-#    - name: Ties
-#      entries:
-#      - id: BlackTie
-#      - id: RedTie
-#      - id: PurpleTie
-#      - id: BlueTie
-#      - id: GreenTie
-#      - id: GoldTie
-#      - id: SpecialTie
+#        amount:
+      - id: RMCCoatHoboBrown
+        amount: 1
+      - id: RMCCoatHoboDarkBlue
+        amount: 1
+      - id: RMCCoatHoboRed
+        amount: 1
+      - id: RMCJacketWindbreaker
+        amount: 1
+      - id: RMCJacketWindbreakerBrown
+        amount: 1
+      - id: RMCJacketWindbreakerGrey
+        amount: 1
+      - id: RMCJacketWindbreakerExpedition
+        amount: 1
+      - id: RMCLabcoat
+        amount: 1
+      - id: RMCLabcoatBrown
+        amount: 1
+      - id: RMCVestGrey
+        amount: 1
+      - id: RMCVestBrown
+        amount: 1
+      - id: RMCVestTan
+        amount: 1
+    - name: Hats
+      entries:
+      - id: RMCHeadCapWestonYamadaDark
+        amount: 1
+      - id: RMCHeadCivilianTanBeret
+        amount: 1
+      - id: RMCHeadCivilianWhiteBeret
+        amount: 1
+      - id: RMCHeadCivilianBlackBeret
+        amount: 1
+      - id: RMCHeadCivilianBrownBeret
+        amount: 1
+      - id: RMCHeadFedoraTan
+        amount: 1
+      - id: RMCHeadFedoraBrown
+        amount: 1
+      - id: RMCHeadFedoraGrey
+        amount: 1
+      - id: RMCHeadCowboyHatLight
+        amount: 1
+      - id: RMCHeadCowboyHatDark
+        amount: 1
+      #  BlackBeret
+      #  WhiteBeret
     - name: Glasses
       entries:
       - id: RMCGlassesMarineRpg #Placeholder
@@ -119,28 +198,51 @@
         amount: 1
       - id: RMCGlassesAviators
         amount: 1
+      - id: RMCGlassesAviatorsSilver
+        amount: 1
       - id: RMCSunglasses
         amount: 1
-#      - id: Prescription Sunglasses
+      - id: RMCPrescriptionSunglasses
+        amount: 1
       - id: RMCHipsterGlasses
+        amount: 1
+      - id: RMCGlassesMonocle
         amount: 1
     - name: Gloves
       entries:
-      - id: CMHandsBrown #Placeholder
+      - id: CMHandsBrown
         amount: 1
-#      - id: BlackGloves
-#      - id: DressGloves
+      - id: RMCHandsBlack
+        amount: 1
+      - id: CMHandsWhiteDress
+        amount: 1
+      - id: RMCHandsLeatherBlack
+        amount: 1
     - name: Shoes
       entries:
       - id: RMCShoesLaceup
         amount: 1
       - id: RMCShoesLaceupBrown
         amount: 1
+      - id: RMCShoesFancyLeather
+        amount: 1
       - id: RMCShoesBlack
         amount: 1
-#      - id: CorporateBoots
-#    - name: Hats
-#      entries:
-#      - id: BlackBeret
-#      - id: WhiteBeret
-#      - id: Fedora
+      - id: RMCBootsCorporate
+        amount: 1
+    - name: Ties
+      entries:
+      - id: RMCTieBlack
+        amount: 1
+      - id: RMCTie
+        amount: 1
+      - id: RMCTieGold
+        amount: 1
+      - id: RMCTieGreen
+        amount: 1
+      - id: RMCTiePurple
+        amount: 1
+      - id: RMCTieRed
+        amount: 1
+      - id: RMCTieHorrible
+        amount: 1

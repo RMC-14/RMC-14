@@ -4,11 +4,11 @@
   name: rmc-job-name-forecon-synth
   description: rmc-job-description-forecon
   playTimeTracker: RMCJobSurvivorSynthForecon
-  ranks: 
+  ranks:
     RMCRankMasterSergeant : [ ]
   supervisors: cm-job-supervisors-co
   accessGroups: # TODO RMC14 verify parity access groups with FORECON synthetic, i can't find the actual file that stores this
-  - ColonistEngi 
+  - ColonistEngi
   - ShipMasterAccess # TODO RMC14 here until we have the id console
   - Synth
   startingGear: RMCGearForeconSynthetic
@@ -42,13 +42,13 @@
         RMCSkillNavigations: 1
     - type: MarineOrders
     - type: TacticalMapIcon
-      icon: 
-        sprite: _RMC14/Interface/map_blips.rsi
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: forecon_synth
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
-      whitelist: 
-        tags: 
+      whitelist:
+        tags:
         - RMCSquadFORECON
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
@@ -108,7 +108,7 @@
 
 - type: startingGear
   id: RMCGearForeconSynthetic
-  equipment: 
+  equipment:
     id: RMCIDCardSynth
     back: CMSatchelFillColonySynthetic # TODO RMC14 check loadouts for synth survivors to see if there's a backpack category
     jumpsuit: CMJumpsuitMaintTech
@@ -119,17 +119,17 @@
   inhand:
     - RMCMotionDetector
     - CMFirstAidKitFilled
-    
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointForeconSynth
   name: forecon synthetic spawn point
-  components: 
+  components:
   - type: SpawnPoint
     job_id: RMCSurvivorForeconSynth
   - type: Sprite
     state: syn_spawn
-    
+
 - type: playTimeTracker
   id: RMCJobSurvivorSynthForecon
   isHumanoid: true

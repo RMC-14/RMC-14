@@ -588,6 +588,7 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - LiaisonRoleSpecificRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
