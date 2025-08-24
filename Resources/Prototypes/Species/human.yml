@@ -99,83 +99,83 @@
 - type: humanoidBaseSprite
   id: MobHumanHead
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: head_m
 
 - type: humanoidBaseSprite
   id: MobHumanHeadMale
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: head_m
 
 - type: humanoidBaseSprite
   id: MobHumanHeadFemale
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: head_f
 
 - type: humanoidBaseSprite
   id: MobHumanTorso
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: torso_m
 
 - type: humanoidBaseSprite
   id: MobHumanTorsoMale
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: torso_m
 
 - type: humanoidBaseSprite
   id: MobHumanTorsoFemale
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: torso_f
 
 - type: humanoidBaseSprite
   id: MobHumanLLeg
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: l_leg
 
 - type: humanoidBaseSprite
   id: MobHumanLArm
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: l_arm
 
 - type: humanoidBaseSprite
   id: MobHumanLHand
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: l_hand
 
 - type: humanoidBaseSprite
   id: MobHumanLFoot
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: l_foot
 
 - type: humanoidBaseSprite
   id: MobHumanRLeg
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: r_leg
 
 - type: humanoidBaseSprite
   id: MobHumanRArm
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: r_arm
 
 - type: humanoidBaseSprite
   id: MobHumanRHand
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: r_hand
 
 - type: humanoidBaseSprite
   id: MobHumanRFoot
   baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC14
     state: r_foot

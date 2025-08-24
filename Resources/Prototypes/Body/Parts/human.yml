@@ -20,7 +20,7 @@
   parent: [PartHuman, BaseTorso]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "torso_m"
   - type: Extractable
     juiceSolution:
@@ -36,7 +36,7 @@
   parent: [PartHuman, BaseHead]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "head_m"
   - type: Extractable
     juiceSolution:
@@ -52,7 +52,7 @@
   parent: [PartHuman, BaseLeftArm]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "l_arm"
 
 - type: entity
@@ -61,7 +61,7 @@
   parent: [PartHuman, BaseRightArm]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "r_arm"
 
 - type: entity
@@ -70,7 +70,7 @@
   parent: [PartHuman, BaseLeftHand]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "l_hand"
 
 - type: entity
@@ -79,7 +79,7 @@
   parent: [PartHuman, BaseRightHand]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "r_hand"
 
 - type: entity
@@ -88,7 +88,7 @@
   parent: [PartHuman, BaseLeftLeg]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "l_leg"
 
 - type: entity
@@ -97,7 +97,7 @@
   parent: [PartHuman, BaseRightLeg]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "r_leg"
 
 - type: entity
@@ -106,7 +106,7 @@
   parent: [PartHuman, BaseLeftFoot]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "l_foot"
 
 - type: entity
@@ -115,5 +115,5 @@
   parent: [PartHuman, BaseRightFoot]
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/parts.rsi
+    sprite: _RNMC14/Mobs/Species/Human/parts.rsi # RNMC-14
     state: "r_foot"
