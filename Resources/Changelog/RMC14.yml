@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The M4SPR custom scout rifle now has a quick 2-shot burst.
-    type: Tweak
-  id: 1710
-  time: '2025-05-10T04:46:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6372
-- author: J C Denton
-  changes:
-  - message: Admin Fax Outpost now has newly added SPP, TSE, CLF and Press stamps.
-    type: Tweak
-  id: 1711
-  time: '2025-05-12T00:23:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6404
-- author: CyberTropic
-  changes:
-  - message: Added edges to snow and ice tiles.
-    type: Add
-  id: 1712
-  time: '2025-05-12T00:23:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6403
 - author: Vermidia
   changes:
   - message: Fixed ghost marine HUD toggle action not hiding marine health bars.
@@ -4599,5 +4578,39 @@
   id: 2210
   time: '2025-08-22T03:09:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7082
+- author: UnicornOnLSD
+  changes:
+  - message: Removed SO job scaling. CIC will now have 4 SO slots at any pop, up to
+      5 at 160+ pop.
+    type: Remove
+  id: 2211
+  time: '2025-08-23T09:17:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6712
+- author: Shromply
+  changes:
+  - message: Added SPP equivalents for the PVE UNMC gear vendors.
+    type: Add
+  - message: Added PVE SPP roles.
+    type: Add
+  - message: Added the Type 71 gun rack.
+    type: Add
+  id: 2212
+  time: '2025-08-23T22:23:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7565
+- author: DrSmugleaf
+  changes:
+  - message: Added chat repeated messages, where a message will get x2, x3, x4 and
+      so on added to the end of it in your chat history when someone repeatedly sends
+      the same message over a short period of time.
+    type: Add
+  - message: Fixed Normandy not being able to load guns.
+    type: Fix
+  - message: Fixed zombie spawners not working after spawning more than 100.
+    type: Fix
+  - message: Fixed corpsmen not being able to use the medical vendor in PvE.
+    type: Fix
+  id: 2213
+  time: '2025-08-23T22:42:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7587
 Name: RMC14
 Order: -1

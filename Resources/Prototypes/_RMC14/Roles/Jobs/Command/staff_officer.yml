@@ -48,6 +48,7 @@
         RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMStaffOfficer
       points: 45
     - type: RMCPointing
     - type: JobPrefix

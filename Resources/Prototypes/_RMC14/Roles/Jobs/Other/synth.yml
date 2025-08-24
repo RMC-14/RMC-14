@@ -42,6 +42,7 @@
         RMCSkillDomestics: 2
         RMCSkillNavigations: 1
     - type: CMVendorUser
+      id: RMCJobSynthetic
       points: 45
     - type: MarineOrders
     - type: DemoSpecWhitelist

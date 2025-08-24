@@ -1,0 +1,64 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPSectionLeadPVE
+  name: rmc-job-name-spp-sectionsergeant
+  description: rmc-ghost-role-information-spp-pve-description
+  playTimeTracker: RMCJobSPPSectionLeadPVE
+  ranks:
+    RMCRankSPPStarshiySerzhant: []
+  startingGear: RMCJobSPPSectionLeadPVEGear
+  icon: "RMCJobIconSPPLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - SquadLeader
+  spawnMenuRoleName: SPP Section Sergeant (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 1
+        RMCSkillSurgery: 1
+        RMCSkillJtac: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-sectionsergeant
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSectionLeadPVE
+  name: spp section lead spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCSPPSectionLeadPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+
+- type: startingGear
+  id: RMCJobSPPSectionLeadPVEGear
+  equipment:
+    id: RMCIDSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: RMCJobSPPSectionLeadPVE

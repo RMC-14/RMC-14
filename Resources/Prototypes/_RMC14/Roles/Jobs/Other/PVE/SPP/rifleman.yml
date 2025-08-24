@@ -1,0 +1,56 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPRiflemanPVE
+  name: rmc-job-name-spp-rifleman
+  description: rmc-ghost-role-information-spp-pve-description
+  playTimeTracker: RMCJobSPPRiflemanPVE
+  ranks:
+   RMCRankSPPRyadovoy: []
+  startingGear: RMCJobSPPRiflemanPVEGear
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - Rifleman
+  spawnMenuRoleName: SPP Rifleman (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-rifleman-pve
+  hidden: true
+
+
+- type: entity
+  id: RMCSpawnPointSPPRiflemanPVE
+  name: spp rifleman spawn point
+  suffix: PVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: SpawnPoint
+    job_id: RMCSPPRiflemanPVE
+
+- type: startingGear
+  id: RMCJobSPPRiflemanPVEGear
+  equipment:
+    id: RMCIDSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: RMCJobSPPRiflemanPVE
