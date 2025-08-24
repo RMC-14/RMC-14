@@ -1,5 +1,6 @@
 using Content.Client.Weapons.Melee;
 using Content.Shared._RMC14.Input;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Weapons.Melee;
@@ -99,8 +100,8 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
             }
         });
 
-        List<EntityUid> xenoTargets = new();
-        List<EntityUid> nonXenoTargets = new();
+        List<EntityUid> nonMarineTargets = new();
+        List<EntityUid> marineTargets = new();
 
         foreach (var ent in tackleableEnts)
         {
@@ -109,27 +110,27 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
                 continue;
             }
 
-            if (HasComp<XenoComponent>(ent))
+            if (HasComp<MarineComponent>(ent))
             {
-                xenoTargets.Add(ent);
+                nonMarineTargets.Add(ent);
                 continue;
             }
 
-            nonXenoTargets.Add(ent);
+            marineTargets.Add(ent);
         }
 
-        // Prioritze nonXenoTargets for targeting
-        if (nonXenoTargets.Count > 0)
+        // Prioritze marine entities for targeting
+        if (marineTargets.Count > 0)
         {
-            nonXenoTargets.Sort(compareDistance);
-            newTarget = nonXenoTargets.First();
+            marineTargets.Sort(compareDistance);
+            newTarget = marineTargets.First();
             return true;
         }
 
-        if (xenoTargets.Count > 0)
+        if (nonMarineTargets.Count > 0)
         {
-            xenoTargets.Sort(compareDistance);
-            newTarget = xenoTargets.First();
+            nonMarineTargets.Sort(compareDistance);
+            newTarget = nonMarineTargets.First();
             return true;
         }
         return false;
