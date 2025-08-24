@@ -349,7 +349,7 @@
     - 0,0,9,1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54C
+    - id: RMCWeaponRifleM54C
     - id: RMCAttachmentAngledGrip
     - id: RMCAttachmentSuppressor
     - id: RMCAttachmentExtendedBarrel

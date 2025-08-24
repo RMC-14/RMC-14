@@ -20,7 +20,7 @@
         amount: 30
       - id: WeaponSMGM63
         amount: 60
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 60
       - id: WeaponRifleM4SPR
         amount: 20

@@ -94,15 +94,15 @@
   - type: ContainerFill
     containers:
       item_1:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
       item_2:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
       item_3:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
       item_4:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
       item_5:
-      - WeaponRifleM54C
+      - RMCWeaponRifleM54C
 
 # M54C Mk 1
 
@@ -178,15 +178,15 @@
   - type: ContainerFill
     containers:
       item_1:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
       item_2:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
       item_3:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
       item_4:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
       item_5:
-      - WeaponRifleM54CMK1
+      - RMCWeaponRifleM54CMK1
 
 # SSG45
 

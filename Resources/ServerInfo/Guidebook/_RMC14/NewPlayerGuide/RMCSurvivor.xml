@@ -141,7 +141,7 @@
 
   The M16 is a direct upgrade to the AR10. It sports a higher fire rate, accuracy, and a similar damage per bullet to the AR10, making it a reliable weapon. The M16 has very far falloff as well and responds well to attachments. This is one of the most reliable guns that you can come across as a survivor and typically when it is present, ammo for it is plentiful. Use the M16 as a brawling gun in the backline of your group or to shoot xenonids attacking your cades with the intention to put serious hurt out.
 
-  <GuideEntityEmbed Entity="WeaponRifleM54C"/> <GuideEntityEmbed Entity="WeaponRifleM54CMK1"/> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom"/>
+  <GuideEntityEmbed Entity="RMCWeaponRifleM54C"/> <GuideEntityEmbed Entity="RMCWeaponRifleM54CMK1"/> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom"/>
 
   Highly standardized marine weapons. Ammo for these weapons is best conserved for bigger fights and the holding phase, however they are incredibly useful for brawling if used properly. The M4SPR allows full movement speed while wielded, the MK2 has high DPS, and the MK1 is like the MK2 but slighly better overall. Use these as you would as a marine but more conservatively. You cannot call requisitions for a supply drop... usually.
 

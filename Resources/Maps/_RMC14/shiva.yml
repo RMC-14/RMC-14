@@ -129737,7 +129737,7 @@ entities:
     - type: Transform
       pos: 172.5,99.5
       parent: 1
-- proto: WeaponRifleM54C
+- proto: RMCWeaponRifleM54C
   entities:
   - uid: 270
     components:
@@ -129774,14 +129774,14 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: WeaponRifleM54CE2
+- proto: RMCWeaponRifleM54CE2
   entities:
   - uid: 17132
     components:
     - type: Transform
       pos: 114.5,70.5
       parent: 1
-- proto: WeaponRifleM54CMK1
+- proto: RMCWeaponRifleM54CMK1
   entities:
   - uid: 387
     components:
@@ -129807,7 +129807,7 @@ entities:
     - type: Transform
       pos: 166.5,35.5
       parent: 1
-- proto: WeaponRifleM54CStripped
+- proto: RMCWeaponRifleM54CStripped
   entities:
   - uid: 17135
     components:
