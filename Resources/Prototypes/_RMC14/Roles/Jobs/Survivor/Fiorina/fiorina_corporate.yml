@@ -1,14 +1,13 @@
 - type: job
   parent: CMSurvivorCorporate
-  id: CMSurvivorICB
-  name: cm-job-name-survivor-icb
+  id: CMSurvivorFiorinaCorporateLiaison
+  name: cm-job-name-survivor-fiorina-corporate-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorICB
-  spawnMenuRoleName: Interstellar Commerce Bureau Liaison (Survivor)
-  icon: "RMCJobIconICBLiaison"
-  ranks:
-    RMCRankICBCorporateLiaison: []
-  startingGear: RMCGearSurvivorICB
+  playTimeTracker: CMJobSurvivorFiorinaCorporateLiaison
+  startingGear: RMCGearSurvivorFiorinaCorporateLiaison
+  accessGroups:
+  - ColonistCorporate
+  spawnMenuRoleName: Corporate Liaison (Fiorina Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,36 +23,33 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
+      - WeYa
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-    - type: JobPrefix
-      prefix: cm-job-prefix-survivor-icb
   useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate
-  id: RMCGearSurvivorICB
+  id: RMCGearSurvivorFiorinaCorporateLiaison
   equipment:
-    ears: RMCHeadsetDistressBureauDamaged
-    jumpsuit: RMCJumpsuitLiaisonGreyWorkwear
-    head: RMCHardhatWhite
-    outerClothing: RMCHazardVestBlack
-    eyes: RMCGlassesAviators
-    gloves: CMHandsInsulated
+    jumpsuit: CMJumpsuitLiaison
+    eyes: RMCHipsterGlasses
+    outerClothing: RMCArmorVestWeYa
+    shoes: RMCShoesLaceupBrown
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorICB
-  name: survivor icb spawn point
+  id: RMCSpawnPointSurvivorFiorinaCorporateLiaison
+  name: survivor fiorina coporate liaison spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMSurvivorFiorinaCorporateLiaison
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
 - type: playTimeTracker
-  id: CMJobSurvivorICB
+  id: CMJobSurvivorFiorinaCorporateLiaison
   isHumanoid: true
