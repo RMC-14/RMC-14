@@ -164,7 +164,7 @@ public sealed class RMCAirShotSystem : EntitySystem
         var ev = new AirShotDoAfterEvent(GetNetCoordinates(shooterCoordinates));
         var doAfter = new DoAfterArgs(EntityManager, shooter, ent.Comp.PreparationTime, ev, ent)
         {
-            BreakOnMove = true,
+            BreakOnMove = ent.Comp.DoAfterBreakOnMove,
             NeedHand = true,
             BreakOnHandChange = true,
             MovementThreshold = 0.5f,
