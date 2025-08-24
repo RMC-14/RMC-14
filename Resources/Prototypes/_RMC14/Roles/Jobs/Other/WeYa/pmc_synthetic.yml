@@ -7,7 +7,7 @@
   ranks:
     RMCRankWeYaPMCSynthetic: [ ]
   startingGear: RMCGearPMCSynthetic
-  icon: "RMCJobIconSynth"
+  icon: "RMCJobIconPMCSynthetic"
   joinNotifyCrew: false
   accessGroups:
   - RMCWeYa
@@ -99,7 +99,7 @@
     # eyes: RMCGogglesMeson // TODO RMC14 mesons
     back: RMCPMCSyntheticSmartpack
     belt: RMCBeltMedicBagPMCFilled
-    suitstorage: RMCFireAxe # TODO RMC14 maintenance jack // if hybrisa synthsurv can get away with it i can
+    suitstorage: RMCScabbardMacheteFilled # TODO RMC14 maintenance jack 
     jumpsuit: RMCJumpsuitVeteranPMCSynth
     outerClothing: RMCArmorM4PMCSynthFilled
     shoes: RMCBootsPMCFilled
