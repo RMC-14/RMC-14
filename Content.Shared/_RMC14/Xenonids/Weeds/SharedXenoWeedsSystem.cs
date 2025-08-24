@@ -96,6 +96,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         SubscribeLocalEvent<XenoWeedsSpreadingComponent, MapInitEvent>(OnSpreadingMapInit);
 
+        SubscribeLocalEvent<ResinSpikeDamageComponent, ComponentShutdown>(OnModifierShutdown);
+        SubscribeLocalEvent<ResinSpikeDamageComponent, StartCollideEvent>(OnResinSpikeStartCollide);
+        SubscribeLocalEvent<ResinSpikeDamageComponent, EndCollideEvent>(OnResinSpikeEndCollide);
+
         SubscribeLocalEvent<ResinSlowdownModifierComponent, ComponentShutdown>(OnModifierShutdown);
         SubscribeLocalEvent<ResinSlowdownModifierComponent, StartCollideEvent>(OnResinSlowdownStartCollide);
         SubscribeLocalEvent<ResinSlowdownModifierComponent, EndCollideEvent>(OnResinSlowdownEndCollide);
@@ -450,6 +454,19 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     {
         var other = args.OtherEntity;
         if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoSlowResin)
+            _toUpdate.Add(other);
+    }
+    private void OnResinSpikeStartCollide(Entity<ResinSpikeDamageComponent> ent, ref StartCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoResinSpikes)
+            _toUpdate.Add(other);
+    }
+
+    private void OnResinSpikeEndCollide(Entity<ResinSpikeDamageComponent> ent, ref EndCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoResinSpikes)
             _toUpdate.Add(other);
     }
 
