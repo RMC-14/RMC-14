@@ -25,6 +25,8 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Robust.Shared.Physics;
+using System.Linq;
 
 namespace Content.Shared.Buckle;
 
@@ -408,8 +410,14 @@ public abstract partial class SharedBuckleSystem
         var gotEv = new BuckledEvent(strap, buckle);
         RaiseLocalEvent(buckle, ref gotEv, true);
 
-        if (TryComp<PhysicsComponent>(buckle, out var physics))
+        if (TryComp<PhysicsComponent>(buckle, out var physics) && TryComp<FixturesComponent>(buckle, out var fixtures))
+        {
             _physics.ResetDynamics(buckle, physics);
+            // RMC14
+            var fixture = fixtures.Fixtures.First();
+            _physics.SetHard(buckle, fixture.Value, false);
+            // RMC14
+        }
 
         DebugTools.AssertEqual(xform.ParentUid, strap.Owner);
     }
@@ -475,6 +483,14 @@ public abstract partial class SharedBuckleSystem
 
         var buckleXform = Transform(buckle);
         var oldBuckledXform = Transform(strap);
+
+        // RMC14
+        if (TryComp<FixturesComponent>(buckle, out var fixtures))
+        {
+            var fixture = fixtures.Fixtures.First();
+            _physics.SetHard(buckle, fixture.Value, true);
+        }
+        // RMC14
 
         if (buckleXform.ParentUid == strap.Owner && !Terminating(oldBuckledXform.ParentUid))
         {
