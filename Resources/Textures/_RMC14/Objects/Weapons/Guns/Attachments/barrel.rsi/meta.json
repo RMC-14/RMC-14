@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/barrel.dmi, npz92_suppressor by github noctyrnal, ebarrel and hbarrel resprite by VictorJob",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/barrel.dmi, npz92_suppressor by github noctyrnal. Ebarrel, hbarrel and suppressor resprite by VictorJob",
   "size": {
     "x": 32,
     "y": 32
