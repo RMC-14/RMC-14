@@ -14,6 +14,9 @@
   id: RMCCartridgeRevolver44
 
 - type: Tag
+  id: RMCCartridgeRevolver44Marksman
+
+- type: Tag
   id: RCMCartridgePistol9mmSquashHead
 
 - type: Tag

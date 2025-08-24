@@ -228,7 +228,6 @@
       - RMCSurvivorHybrisaXenoarchaeologist: 2
       - RMCSurvivorHybrisaXenobiologist: 2
 
-
 - type: entity
   id: RMCPlanetSorokyne
   name: LV-976 Sorokyne Strata
@@ -255,3 +254,30 @@
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
       - CMJobSurvivorCECResearcher: 2
+
+- type: entity
+  id: RMCPlanetArcticValley
+  name: Arctic Valley
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/arctic_valley.yml
+    camouflage: Snow
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetCorsat
+  name: CORSAT
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/corsat.yml
+    camouflage: Classic
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetHybrisaRepaired
+  name: LV-759 Hybrisa Prospera (Repaired)
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/hybrisa_greenshift.yml
+    camouflage: Urban
+    inRotation: false

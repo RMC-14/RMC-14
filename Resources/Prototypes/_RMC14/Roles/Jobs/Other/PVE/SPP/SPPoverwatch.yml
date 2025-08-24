@@ -1,0 +1,68 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPPlatCoPVE
+  name: rmc-job-name-spp-overwatch
+  description: rmc-ghost-role-information-spp-pve-description
+  playTimeTracker: RMCJobSPPPlatCoPVE
+  ranks:
+    RMCRankSPPMladshiyLeytenant: []
+  startingGear: RMCSPPPlatCoPVEGear
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - SO
+  spawnMenuRoleName: SPP Platoon Commander (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillCqc: 1
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 4
+        RMCSkillExecution: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-overwatch
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPPlatCoPVE
+  name: spp platoon commander spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCSPPPlatCoPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+
+- type: startingGear
+  id: RMCSPPPlatCoPVEGear
+  equipment:
+    id: RMCIDSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPPOfficer
+    outerClothing: RMCCoatSPP
+    head: CMHeadCapSPPBeret
+    shoes: CMBootsBlackFilled
+
+
+- type: playTimeTracker
+  id: RMCJobSPPPlatCoPVE

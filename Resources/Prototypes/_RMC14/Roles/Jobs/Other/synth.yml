@@ -42,6 +42,7 @@
         RMCSkillDomestics: 2
         RMCSkillNavigations: 1
     - type: CMVendorUser
+      id: RMCJobSynthetic
       points: 45
     - type: MarineOrders
     - type: DemoSpecWhitelist
@@ -53,7 +54,7 @@
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
     - type: MeleeWeapon
       soundHit:

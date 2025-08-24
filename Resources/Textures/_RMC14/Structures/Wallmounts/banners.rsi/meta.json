@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprites by discord user CyberTropic, Crow(noctrn), designs by discord user Noisrevni(noisrevni)",
+  "size": {
+    "x": 96,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blankflag"
+    },
+    {
+      "name": "blankflag_worn"
+    },
+    {
+      "name": "clfflag"
+    },
+    {
+      "name": "clfflag_worn"
+    },
+    {
+      "name": "unmcflag"
+    },
+    {
+      "name": "unmcflag_worn"
+    },
+    {
+      "name": "sppflag"
+    },
+    {
+      "name": "sppflag_worn"
+    },
+    {
+      "name": "tseflag"
+    },
+    {
+      "name": "tseflag_worn"
+    },
+    {
+      "name": "unflag"
+    },
+    {
+      "name": "unflag_worn"
+    }
+  ]
+}
