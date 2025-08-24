@@ -232,6 +232,15 @@ cm-chatsan-replacement-senior-enlisted = young tall queen
 cm-chatsan-word-senior-enlisted-advisor = senior enlisted advisor
 cm-chatsan-replacement-senior-enlisted-advisor = young tall queen
 
+rmc-chatsan-word-auxiliary-support-officer = auxiliary support officer
+rmc-chatsan-replacement-auxiliary-support-officer = young tall queen
+
+rmc-chatsan-word-aux-support-officer = aux support officer
+rmc-chatsan-replacement-aux-support-officer = young tall queen
+
+rmc-chatsan-word-aso = aso
+rmc-chatsan-replacement-aso = young tall queen
+
 cm-chatsan-word-lz = lz
 cm-chatsan-replacement-lz = metal bird perch
 

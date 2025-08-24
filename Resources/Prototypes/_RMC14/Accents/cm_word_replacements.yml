@@ -82,6 +82,9 @@
     cm-chatsan-word-exec-officer: cm-chatsan-replacement-exec-officer
     cm-chatsan-word-senior-enlisted: cm-chatsan-replacement-senior-enlisted
     cm-chatsan-word-senior-enlisted-advisor: cm-chatsan-replacement-senior-enlisted-advisor
+    rmc-chatsan-word-auxiliary-support-officer: rmc-chatsan-replacement-auxiliary-support-officer
+    rmc-chatsan-word-aux-support-officer: rmc-chatsan-replacement-aux-support-officer
+    rmc-chatsan-word-aso: rmc-chatsan-replacement-aso
     cm-chatsan-word-lz: cm-chatsan-replacement-lz
     cm-chatsan-word-shoot: cm-chatsan-replacement-shoot
     cm-chatsan-word-felinid: cm-chatsan-replacement-felinid
