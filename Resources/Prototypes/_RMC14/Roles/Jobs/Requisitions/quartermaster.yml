@@ -44,6 +44,8 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
+    - type: CMVendorUser
+      id: CMQuartermaster
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-quartermaster

@@ -1,0 +1,58 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPHeavyGunnerPVE
+  name: rmc-job-name-spp-gunner
+  description: rmc-ghost-role-information-spp-pve-description
+  playTimeTracker: RMCJobSPPHeavyGunnerPVE
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  startingGear: RMCJobSPPHeavyGunnerPVEGear
+  icon: "RMCJobIconSPPEngineer"
+  joinNotifyCrew: false
+  accessGroups:
+  - SmartGunOperator
+  spawnMenuRoleName: SPP Heavy Gunner (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSmartGun: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-gunner
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPGunnerPVE
+  name: spp heavy gunner spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCSPPHeavyGunnerPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+
+- type: startingGear
+  id: RMCJobSPPHeavyGunnerPVEGear
+  equipment:
+    id: RMCIDSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: RMCJobSPPHeavyGunnerPVE
