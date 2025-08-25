@@ -568,8 +568,15 @@ public abstract class SharedMortarSystem : EntitySystem
 
     private void OnMortarLinkLaserDesignatorDoAfter(Entity<MortarComponent> mortar, ref LinkMortarLaserDesignatorDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Handled)
             return;
+
+        if (args.Cancelled)
+        {
+            mortar.Comp.IsLinking = false;
+            Dirty(mortar);
+            return;
+        }
 
         args.Handled = true;
 
