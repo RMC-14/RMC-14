@@ -62,3 +62,4 @@ rmc-job-name-forecon-spotter = Recon Spotter
 
 rmc-job-name-recruit = Recruit
 rmc-job-description-recruit = Follow orders and learn from those above you. Get yelled at by an instructor. Graduate to become a marine.
+rmc-job-prefix-recruit = RCT
