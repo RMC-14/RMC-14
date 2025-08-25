@@ -676,6 +676,10 @@ namespace Content.Server.GameTicking
 
             PlayersJoinedRoundNormally = 0;
 
+            //RMC14
+            //Adding this because I do not fucking trust admins to actually remember to turn this shit off...
+            _cfg.SetCVar(RMCCVars.RMCDelayRoundEnd, false);
+            //RMC14
             RunLevel = GameRunLevel.PreRoundLobby;
             RandomizeLobbyBackground();
             ResettingCleanup();
