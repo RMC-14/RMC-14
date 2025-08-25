@@ -586,7 +586,7 @@
     addSkills:
       RMCSkillSpecialistWeapons: 1
     addComps:
-    - type: PyroWhitelistComponent
+    - type: PyroWhitelist
 
 - type: entity
   parent: RMCPamphletAdmin
