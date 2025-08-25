@@ -8,6 +8,7 @@
   accessGroups:
   - ColonistCorporate
   spawnMenuRoleName: Halcyon Dynamics Liaison (Sorokyne Survivor)
+  icon: "RMCJobIconHalcyonExec"
   special:
   - !type:AddComponentSpecial
     components:

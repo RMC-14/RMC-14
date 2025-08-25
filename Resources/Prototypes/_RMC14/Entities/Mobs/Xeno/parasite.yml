@@ -1,8 +1,9 @@
 - type: entity
+  abstract: true
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
-  id: CMXenoParasite
+  id: CMXenoParasiteBase
   name: Parasite
   components:
   - type: GuideHelp
@@ -90,8 +91,6 @@
     allowedEmotes: [ "XenoRoar" ]
   - type: RMCSize
     size: Small
-  - type: ParasiteAI
-  - type: SleepNPC
   - type: CanEscapeInventory
     baseResistTime: 1
   - type: HTN
@@ -102,7 +101,7 @@
         3.0
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: parasite
   - type: AddAccentClothing
     accent: ReplacementAccent
@@ -123,3 +122,10 @@
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
     name: cm-job-name-xeno-parasite
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: CMXenoParasite
+  components:
+  - type: SleepNPC
+  - type: ParasiteAI

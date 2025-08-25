@@ -701,6 +701,9 @@ namespace Content.Server.GameTicking
                 UpdateInfoText();
 
                 ReqWindowAttentionAll();
+
+                if (_cfg.GetCVar(RMCCVars.RMCLobbyStartPaused))
+                    PauseStart();
             }
         }
 
