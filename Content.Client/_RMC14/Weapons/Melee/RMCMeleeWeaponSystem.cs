@@ -1,3 +1,4 @@
+using Content.Client._RMC14.Xenonids.Hive;
 using Content.Client.Weapons.Melee;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Marines;
@@ -5,6 +6,8 @@ using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -25,7 +28,8 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
     [Dependency] private readonly MeleeWeaponSystem _melee = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly XenoHiveSystem _hive = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {
@@ -66,14 +70,15 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
     }
 
     /// <summary>
-    /// Gets the closest entity that was sprite clicked.
-    /// Prioritizes entities that are not xenos.
+    /// Gets the closest alive mob that was sprite clicked.
+    /// Prioritizes mobs that are not hive members.
     /// </summary>
+    /// <param name="attacker"></param>
     /// <param name="clickCoords">Mouse Click Coordinates</param>
     /// <param name="clickedEntities">All Entities that are under the clickCoords</param>
     /// <param name="newTarget"></param>
     /// <returns></returns>
-    public bool TryGetAlternativeXenoAttackTarget(MapCoordinates clickCoords, List<EntityUid> clickedEntities, [NotNullWhen(true)] out EntityUid? newTarget)
+    public bool TryGetAlternativeXenoAttackTarget(EntityUid attacker, MapCoordinates clickCoords, List<EntityUid> clickedEntities, [NotNullWhen(true)] out EntityUid? newTarget)
     {
         newTarget = null;
         var tackleableEnts = clickedEntities;
@@ -100,39 +105,40 @@ public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
             }
         });
 
-        List<EntityUid> nonMarineTargets = new();
-        List<EntityUid> marineTargets = new();
+        List<EntityUid> hiveMobTargets = new();
+        List<EntityUid> nonHiveMobTargets = new();
 
         foreach (var ent in tackleableEnts)
         {
-            if (!HasComp<TackleableComponent>(ent))
+            if (!HasComp<MobStateComponent>(ent) ||
+                _mobState.IsDead(ent))
             {
                 continue;
             }
 
-            if (HasComp<MarineComponent>(ent))
+            if (_hive.FromSameHive(attacker, ent))
             {
-                nonMarineTargets.Add(ent);
+                hiveMobTargets.Add(ent);
                 continue;
             }
-
-            marineTargets.Add(ent);
+            nonHiveMobTargets.Add(ent);
         }
 
-        // Prioritze marine entities for targeting
-        if (marineTargets.Count > 0)
+        // Prioritze non-hive entities for targeting
+        if (nonHiveMobTargets.Count > 0)
         {
-            marineTargets.Sort(compareDistance);
-            newTarget = marineTargets.First();
+            nonHiveMobTargets.Sort(compareDistance);
+            newTarget = nonHiveMobTargets.First();
             return true;
         }
 
-        if (nonMarineTargets.Count > 0)
+        if (hiveMobTargets.Count > 0)
         {
-            nonMarineTargets.Sort(compareDistance);
-            newTarget = nonMarineTargets.First();
+            hiveMobTargets.Sort(compareDistance);
+            newTarget = hiveMobTargets.First();
             return true;
         }
+
         return false;
     }
 }

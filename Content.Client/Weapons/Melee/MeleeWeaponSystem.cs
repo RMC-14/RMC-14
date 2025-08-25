@@ -214,7 +214,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
             //RMC14
             if (HasComp<XenoComponent>(attacker) &&
-            _RMCMelee.TryGetAlternativeXenoAttackTarget(mousePos, screen.GetClickableEntities(mousePos).ToList(), out var altTarget))
+            _RMCMelee.TryGetAlternativeXenoAttackTarget(attacker, mousePos, screen.GetClickableEntities(mousePos).ToList(), out var altTarget))
             {
                 target = altTarget;
             }
@@ -242,7 +242,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
             //RMC14
             if (HasComp<XenoComponent>(attacker) &&
-            _RMCMelee.TryGetAlternativeXenoAttackTarget(mousePos, screen.GetClickableEntities(mousePos).ToList(), out var altTarget))
+            _RMCMelee.TryGetAlternativeXenoAttackTarget(attacker, mousePos, screen.GetClickableEntities(mousePos).ToList(), out var altTarget))
             {
                 target = altTarget;
             }
