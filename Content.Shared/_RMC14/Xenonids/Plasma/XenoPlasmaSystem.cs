@@ -100,6 +100,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         if (self.Owner == target ||
             HasComp<XenoAttachedOvipositorComponent>(args.Target) ||
             !TryComp(target, out XenoPlasmaComponent? otherXeno) ||
+            otherXeno.Plasma == otherXeno.MaxPlasma ||
             !TryRemovePlasma((self, self), args.Amount))
         {
             return;
