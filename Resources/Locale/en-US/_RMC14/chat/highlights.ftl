@@ -49,7 +49,7 @@ highlights-rifleman = Rifleman, "RFN", "SL", Command
 
 highlights-boiler = Boiler, "Pat"
 highlights-burrower = Burrower, "Pat", Tunnel, "Weed", Trap
-highlights-carrier = Carrier, "Pat", Parasite, "Weed", Cluster, Morhper, "Infect", Trap, Capture
+highlights-carrier = Carrier, "Pat", Parasite, "Weed", Cluster, Morpher, "Infect", Trap, Capture
 highlights-crusher = Crusher, "Pat"
 highlights-defender = Defender, "Pat"
 highlights-drone = "Drone", "Pat", "Weed", Cluster, Heal, Capture
