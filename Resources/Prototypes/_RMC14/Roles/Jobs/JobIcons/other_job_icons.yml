@@ -19,6 +19,13 @@
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_syn_forecon
 
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconHalcyonExec
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hc_exec
+
 # WEYA Job Icons
 - type: jobIcon
   parent: CMJobIconBase
