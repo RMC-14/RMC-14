@@ -1,46 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added the Charger Crusher, a xenonid strain that loses defensive shield,
-      some armor, and some damage in exchange for charge being momentum-based. The
-      further you go, the more damage and speed you will gain up to a maximum, indicated
-      by your roar. Your armor also becomes directional, strongest on the front, but
-      you can no longer lock the direction that you are facing. Sprites by Alekshh
-      and Sigma Draconis.
-    type: Add
-  - message: Added the admin-only SOF marine raider deathsquad ghost role.
-    type: Add
-  - message: Xenonid side armor is now displayed separately on the armor alert for
-      xenonids that have them, such as the Steelcrest Defender.
-    type: Add
-  - message: Fixed Vanguard Praetorian pierce sometimes hitting the same target multiple
-      times if they are in-between tiles.
-    type: Fix
-  - message: Fixed jellies and medals getting cut off at 200 characters instead of
-      1000. This also adds a character count to the UI.
-    type: Fix
-  - message: Fix ID card roles getting cut off at 30 characters.
-    type: Fix
-  - message: Fixed incendiary orbital warheads crashing the game. This reenables them.
-    type: Fix
-  - message: Fixed uniforms being butcherable. This also fixes the right click menu
-      on them bouncing after a delay.
-    type: Fix
-  - message: Fixed being able to put webbings on uniforms that are within a storage
-      container such as inside a bag.
-    type: Fix
-  - message: Fixed xenonid eggs not being destroyed by weed killer.
-    type: Fix
-  - message: Fixed RMC admin UIs being too tall or wide.
-    type: Fix
-  - message: Made defibrillating, surgery, and lasing have a threshold of 0.5 moved
-      tiles before breaking the doafter, up from 0.3.
-    type: Tweak
-  id: 1722
-  time: '2025-05-12T12:56:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6419
-- author: DrSmugleaf
-  changes:
   - message: Fixed revolver bullets being invisible for the user that is shooting
       them.
     type: Fix
@@ -4603,5 +4563,19 @@
   id: 2222
   time: '2025-08-26T03:49:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7484
+- author: DummeHytteOst
+  changes:
+  - message: Added a handful of chatsans for xenonids, making some shorthand words
+      turn into their full word, e.g. prae becomes praetorian, zerker becomes berserker,
+      hivey becomes hivelord, and so on.
+    type: Add
+  - message: Added basic highlight presets for each xenonid caste, check your settings
+      if you wish to change the highlight color.
+    type: Add
+  - message: Deleted a few xenonid chatsans that would make xenonids say liquid carrier.
+    type: Remove
+  id: 2223
+  time: '2025-08-26T04:09:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7410
 Name: RMC14
 Order: -1
