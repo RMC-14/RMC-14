@@ -81,6 +81,7 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMCommandingOfficer
       points: 120
     - type: RMCPointing
     - type: JobPrefix

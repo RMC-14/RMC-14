@@ -84,6 +84,18 @@
     job: CMLiaison
 
 - type: entity
+  parent: CMIDCardSilver
+  id: CMIDCardPMC
+  name: pmc holo-badge
+  description: A corporate holo-badge. It has a unique uncapped bottom.
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: pmc
+  - type: ItemIFF
+    faction: FactionWeYa
+
+- type: entity
   parent: CMIDCardLiaison
   id: CMIDCardLiaisonColony
   name: liaison ID card

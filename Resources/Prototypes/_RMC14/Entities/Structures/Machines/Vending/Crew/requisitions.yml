@@ -20,7 +20,7 @@
         amount: 30
       - id: WeaponSMGM63
         amount: 60
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 60
       - id: WeaponRifleM4SPR
         amount: 20
@@ -104,7 +104,11 @@
         amount: 2
       - id: CMWebbing
         amount: 5
+      - id: RMCWebbingBlackSmall
+        amount: 5
       - id: RMCWebbingDropPouch
+        amount: 2
+      - id: RMCWebbingDropPouchBlack
         amount: 2
       - id: CMWebbingHolster
         amount: 2
