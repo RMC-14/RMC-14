@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed ghost marine HUD toggle action not hiding marine health bars.
-    type: Fix
-  id: 1713
-  time: '2025-05-12T00:35:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6396
 - author: Dutch-VanDerLinde
   changes:
   - message: You will no longer see job icons of factions you are not apart of. For
@@ -4612,5 +4605,12 @@
   id: 2213
   time: '2025-08-23T22:42:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7587
+- author: Aurallianz
+  changes:
+  - message: Fixed chemist pouch not having rmc-specific beakers.
+    type: Fix
+  id: 2214
+  time: '2025-08-26T03:37:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7459
 Name: RMC14
 Order: -1
