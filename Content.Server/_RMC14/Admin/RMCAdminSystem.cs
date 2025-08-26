@@ -189,6 +189,4 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
 
         return humanoid;
     }
-
-
 }
