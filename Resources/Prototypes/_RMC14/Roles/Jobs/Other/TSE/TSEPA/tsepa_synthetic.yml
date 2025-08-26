@@ -6,7 +6,7 @@
   description: rmc-job-description-tsepa-synth
   playTimeTracker: RMCJobTSEPASynthetic
   ranks:
-    RMCRankMasterSergeant: [ ]
+    RMCRankTSEPAConstable: [ ]
   startingGear: RMCGearTSEPASynthetic
   icon: "RMCJobIconTSEPASynth"
   joinNotifyCrew: false

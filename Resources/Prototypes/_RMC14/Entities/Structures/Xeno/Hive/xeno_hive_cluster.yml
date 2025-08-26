@@ -1,7 +1,7 @@
 - type: entity
   id: HiveClusterXeno
   parent: BaseHiveStructure
-  name: Hive Cluster
+  name: hive cluster
   description: A large clump of gooey mass. It rhythmically pulses, as if its pumping something into the weeds below...
   components:
   - type: Sprite
@@ -53,7 +53,7 @@
 - type: entity
   id: HiveClusterXenoConstructionNode
   parent: BaseHiveStructureNode
-  name: Hive Cluster
+  name: hive cluster
   description: A large clump of gooey mass. Looks like a marker for something.
   components:
   - type: Sprite

@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM54CMK1
+      - id: RMCWeaponRifleM54CMK1
         amount: 2
       - id: CMMagazineRifleM54CMK1
         amount: 2

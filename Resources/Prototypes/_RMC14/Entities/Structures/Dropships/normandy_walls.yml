@@ -708,6 +708,9 @@
       offset: 0.5, 0.5
   - type: Icon
     state: "61"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall62]
@@ -757,6 +760,9 @@
       offset: 0.5, 0.5
   - type: Icon
     state: "65"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall66]
@@ -971,6 +977,9 @@
       offset: 0.5, 0.5
   - type: Icon
     state: "84"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMNormandyWall84, CMAlamoWall84Flipped]
@@ -985,6 +994,9 @@
     - state: "84_flipped"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
       offset: 0.5, 0.5
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall85]
