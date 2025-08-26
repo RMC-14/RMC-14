@@ -288,6 +288,27 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        var contacts = _physics.GetContactingEntities(ent);
+        EntityUid? nearestResinDoor = null;
+        float? nearestResinDoorDistance = null;
+        foreach (var contact in contacts)
+        {
+            if (HasComp<DoorComponent>(contact) && HasComp<ResinDoorComponent>(contact) &&
+                _physics.TryGetDistance(ent, contact, out var contactDistance) &&
+                (nearestResinDoorDistance is null || nearestResinDoorDistance > contactDistance))
+            {
+                nearestResinDoor = contact;
+                nearestResinDoorDistance = contactDistance;
+            }
+        }
+
+        if (nearestResinDoor is not null)
+        {
+            PreventCollideComponent collisionPreventComp = new();
+            collisionPreventComp.Uid = nearestResinDoor.Value;
+            AddComp(ent, collisionPreventComp);
+        }
+
         if (TryComp(ent, out FixturesComponent? fixtures))
         {
             var fixture = fixtures.Fixtures.First();
@@ -297,6 +318,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteLeapStopped(Entity<XenoParasiteComponent> ent, ref XenoLeapStoppedEvent args)
     {
+        RemComp<PreventCollideComponent>(ent);
+
         if (TryComp(ent, out FixturesComponent? fixtures))
         {
             var fixture = fixtures.Fixtures.First();
