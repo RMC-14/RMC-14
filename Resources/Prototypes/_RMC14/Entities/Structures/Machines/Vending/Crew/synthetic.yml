@@ -41,8 +41,6 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
-      - id: CMWebbingSurgicalBlue
-      - id: CMWebbingSurgicalGreen
     - name: Shoes
       choices: { RMCShoes: 1 }
       entries:
@@ -275,6 +273,10 @@
         points: 4
       - id: CMSynthGraft
         points: 4
+      - id: CMWebbingSurgicalBlue
+        points: 15
+      - id: CMWebbingSurgicalGreen
+        points: 15
     - name: Other Supplies
       entries:
       - id: RMCBinoculars
@@ -304,6 +306,11 @@
         points: 2
       - id: RMCFlashlightPen
         points: 2
+      - id: CMSatchelMarineLogistics
+        points: 15
+      - id: RMCSatchelMarineIntelChestrig
+        points: 15
+        
 
 - type: entity
   parent: ColMarTechBase
