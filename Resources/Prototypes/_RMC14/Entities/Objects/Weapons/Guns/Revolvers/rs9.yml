@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverRSh9
   name: RSh-9 Assault Revolver
-  description: The RSh-9 Assault Revolver is a highly unusual weapon, originally designed for CQB Room clearing on request for counter-terrorism units. This one uses the smaller 9x39 cartridge instead of the 12.7x55mm Cartridge it was originally chambered in, It is still nothing short of the ultimate man killing device.
+  description: An old, unusual and bulky revolver that was quickly phased out by other more popular revolvers. Chambered in 9x39mm and prized by law enforcement for its immense stopping power.
   components:
   - type: Tag
     tags:
@@ -60,31 +60,7 @@
       rmc-aslot-underbarrel: 0.375, -0.1825
 
 - type: entity
-  id: RMCBaseSpeedLoaderRsh9
-  name: "RSh-9 Speed Loader (9x39)"
   parent: BaseItem
-  abstract: true
-  components:
-  - type: Item
-    size: Small
-  - type: Tag
-    tags:
-    - RMCMagazineRevolver
-    - RMCSpeedLoaderRsh9
-  - type: SpeedLoader
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - RMCCartridgeRevolverRsh9
-    capacity: 6
-  - type: Sprite
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
-
-- type: entity
-  parent: RMCBaseSpeedLoaderRsh9
   id: RMCSpeedLoaderRsh9
   description: A six round load of 9x39 Armor Penetrating rounds, designed to defeat most modern body-armor.
   components:
@@ -101,8 +77,22 @@
     zeroVisible: false
   - type: BallisticAmmoProvider
     proto: RMCCartridgeRevolverRsh9
+    whitelist:
+      tags:
+      - RMCCartridgeRevolverRsh9
     capacity: 6
   - type: Appearance
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoaderRsh9
+  - type: SpeedLoader
 
 - type: entity
   id: RMCCartridgeRevolverRsh9
