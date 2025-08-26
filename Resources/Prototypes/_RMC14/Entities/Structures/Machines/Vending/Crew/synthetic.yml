@@ -18,6 +18,7 @@
       entries:
       # /obj/item/coin/marine/synth
       # /obj/item/device/defibrillator/synthetic
+      - id: RMCSynthResetKey
       - id: RMCHeadsetSynth
     - name: Uniform
       choices: { CMUniform: 1 }
