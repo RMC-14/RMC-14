@@ -131,6 +131,8 @@
       - cost: 2000
         crate: RMCCrateClothingWebbing
       - cost: 2000
+        crate: RMCCrateClothingWebbingBlack
+      - cost: 2000
         crate: RMCCrateClothingWebbingVest
       - cost: 2000
         crate: RMCCrateClothingWebbingKnife

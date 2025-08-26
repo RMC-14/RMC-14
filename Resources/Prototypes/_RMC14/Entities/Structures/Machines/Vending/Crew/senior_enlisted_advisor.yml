@@ -84,6 +84,7 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
     - name: Books
       entries:

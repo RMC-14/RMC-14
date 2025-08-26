@@ -122,6 +122,19 @@
     state: webbing
 
 - type: entity
+  parent: CMWebbing
+  id: RMCWebbingBlackSmall
+  name: black webbing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
+    state: webbing
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
+      state: equipped
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingBlack
   name: black webbing vest
