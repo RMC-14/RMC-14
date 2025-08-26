@@ -119,7 +119,9 @@ public sealed class XenoPlasmaSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("cm-xeno-plasma-transferred-to-self", ("plasma", args.Amount), ("target", self.Owner), ("total", otherXeno.Plasma)), target, target);
 
         _audio.PlayPredicted(self.Comp.PlasmaTransferSound, self, self);
-        args.Repeat = true;
+
+        if (otherXeno.Plasma != otherXeno.MaxPlasma)
+            args.Repeat = true;
     }
 
     private void OnNewXenoEvolved(Entity<XenoPlasmaComponent> newXeno, ref NewXenoEvolvedEvent args)
