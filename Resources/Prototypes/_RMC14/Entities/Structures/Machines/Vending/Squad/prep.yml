@@ -23,7 +23,7 @@
         amount: 15
       - id: WeaponSMGM63
         amount: 30
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 30
         recommended: true
     - name: Primary ammunition
@@ -524,7 +524,7 @@
         amount: 3
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A1WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
       - id: RMCAttachmentM63ArmBrace
         amount: 2

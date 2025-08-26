@@ -20,7 +20,7 @@
         amount: 30
       - id: WeaponSMGM63
         amount: 60
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 60
       - id: WeaponRifleM4SPR
         amount: 20
@@ -604,7 +604,7 @@
         amount: 10
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A1WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5

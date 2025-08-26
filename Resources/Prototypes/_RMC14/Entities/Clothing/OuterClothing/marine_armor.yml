@@ -769,6 +769,8 @@
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
+  - type: Corrodible
+    isCorrodible: false
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
   - type: ItemCamouflage

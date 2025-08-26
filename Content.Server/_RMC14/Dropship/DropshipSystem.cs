@@ -235,7 +235,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SetAllDocks(grid, dropship.Locked);
     }
 
-    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null)
+    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null, bool offset = false)
     {
         base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
 
@@ -354,7 +354,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destCoords = destCoords.Offset(-physics.LocalCenter);
         }
 
-        destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
+        if (offset)
+            destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
 
         _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
@@ -367,13 +368,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 _audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
                 var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
-                _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+                _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
 
                 var generalQuartersText = Loc.GetString("rmc-announcement-general-quarters");
                 Timer.Spawn(TimeSpan.FromSeconds(10), () =>
                 {
                     _alertLevelSystem.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
-                    _marineAnnounce.AnnounceARES(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
+                    _marineAnnounce.AnnounceARESStaging(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
                 });
             }
 

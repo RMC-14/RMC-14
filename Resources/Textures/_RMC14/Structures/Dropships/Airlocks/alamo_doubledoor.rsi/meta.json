@@ -24,7 +24,14 @@
       ]
     },
     {
-      "name": "door_deny"
+      "name": "door_deny",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
     },
     {
       "name": "door_locked"
