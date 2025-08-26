@@ -60,4 +60,10 @@ public sealed partial class CMAutomatedVendorComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float? RandomEmptyChance;
+
+    /// <summary>
+    ///     Whether to eject all contents when the vendor is destroyed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool EjectContentsOnDestruction = false;
 }
