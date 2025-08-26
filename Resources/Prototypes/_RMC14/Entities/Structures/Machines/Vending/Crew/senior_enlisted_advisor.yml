@@ -86,11 +86,11 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
     - name: Books
       entries:
       - id: RMCGuidebookLawMarine
       - id: RMCGuidebookSOP
-
 
 - type: entity
   parent: ColMarTechBase

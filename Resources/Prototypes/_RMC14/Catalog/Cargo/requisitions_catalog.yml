@@ -139,7 +139,9 @@
       - cost: 3000
         crate: RMCCrateClothingWebbingHolster
       - cost: 2000
-        crate: RMCCrateClothingWebbingPouch
+        crate: RMCCrateClothingDropPouch
+      - cost: 3000
+        crate: RMCCrateClothingDropPouchBlack
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
     - name: Engineering
