@@ -21,8 +21,8 @@ namespace Content.Client._RMC14.Overwatch;
 [UsedImplicitly]
 public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ILocalizationManager _localization = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private const string GreenColor = "#229132";
     private const string RedColor = "#A42625";
