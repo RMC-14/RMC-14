@@ -152,8 +152,8 @@
 - type: vendingMachineInventory
   id: RMCVendorCoffeeSimple
   startingInventory:
-    DrinkHotCoffee: 40
-    DrinkHotCoco: 25 #Contraband
+    RMCDrinkCoffee: 40
+    RMCDrinkHotCocoa: 25 #Contraband
 
 
 # Snack
