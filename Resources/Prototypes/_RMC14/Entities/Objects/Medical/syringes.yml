@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: Syringe
   id: CMSyringe
   suffix: RMC14
@@ -33,3 +33,39 @@
   components:
   - type: Injector
     toggleState: Inject
+
+- type: entity
+  parent: CMSyringe
+  id: RMCSyringeLethal
+  name: lethal injection syringe
+  description: A syringe used for lethal injections.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/lethal_syringe.rsi
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 50
+  - type: Injector #TODO RMC14 can't draw blood
+    minTransferAmount: 50
+    maxTransferAmount: 50
+    transferAmount: 50
+    delay: 30
+    delayPerVolume: 0
+
+- type: entity
+  parent: RMCSyringeLethal
+  id: RMCSyringeLethalPrefilled
+  suffix: RMC14, Filled
+  components:
+  - type: Label
+    currentLabel: reagent-name-rmc-chloral-hydrate
+  - type: Injector
+    toggleState: Inject
+  - type: SolutionContainerManager
+    solutions:
+      injector:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCChloralhydrate
+          Quantity: 50

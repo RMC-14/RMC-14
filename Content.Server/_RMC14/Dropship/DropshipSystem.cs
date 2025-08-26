@@ -368,13 +368,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 _audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
                 var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
-                _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+                _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
 
                 var generalQuartersText = Loc.GetString("rmc-announcement-general-quarters");
                 Timer.Spawn(TimeSpan.FromSeconds(10), () =>
                 {
                     _alertLevelSystem.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
-                    _marineAnnounce.AnnounceARES(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
+                    _marineAnnounce.AnnounceARESStaging(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
                 });
             }
 
