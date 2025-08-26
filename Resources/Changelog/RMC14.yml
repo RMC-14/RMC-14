@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed crate drag slowdown mispredicting. (Rubberbanding when you pull
-      them)
-    type: Fix
-  id: 1715
-  time: '2025-05-12T12:05:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6407
 - author: Dygon
   changes:
   - message: Entities hit by the sniper's flak ammo area of effect now show that they
@@ -4610,5 +4602,12 @@
   id: 2215
   time: '2025-08-26T03:39:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7620
+- author: Aurallianz
+  changes:
+  - message: Fixed knives not being able to cut fences.
+    type: Fix
+  id: 2216
+  time: '2025-08-26T03:40:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7458
 Name: RMC14
 Order: -1
