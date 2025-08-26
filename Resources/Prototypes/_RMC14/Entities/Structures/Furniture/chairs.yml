@@ -242,6 +242,8 @@
   components:
   - type: Sprite
     state: officechair_dark
+  - type: Rotatable
+    rotateWhileAnchored: true
   - type: Construction
     graph: CMSeat
     node: chairOfficeDark
