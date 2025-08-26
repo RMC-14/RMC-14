@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: mmails
-  changes:
-  - message: CO sabre to CO weapons vendor
-    type: Add
-  id: 1727
-  time: '2025-05-12T19:13:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5985
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed throwing knives damaging the user
-    type: Fix
-  id: 1728
-  time: '2025-05-12T21:35:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6431
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed vampire lurker and berserker being able to heal while on fire
@@ -4580,5 +4566,32 @@
   id: 2227
   time: '2025-08-26T04:17:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7586
+- author: Djvarik and J C Denton
+  changes:
+  - message: Circuitboards now fit in the M276 Pattern Toolbelt Rig, M277 Pattern
+      Construction Rig, and tools pouch.
+    type: Fix
+  - message: Hive structures are now properly capitalized.
+    type: Fix
+  - message: The warden now has their proper headset, which is mechanically identical
+      to the CMP's.
+    type: Add
+  - message: Electro Cigs and WeYa Cigs vendors.
+    type: Add
+  - message: 3-slot Black Webbing has been ported and can now be found in many vendors.
+    type: Add
+  - message: The correspondent vendor now contains the correspondent cap and grey
+      fedora.
+    type: Add
+  id: 2228
+  time: '2025-08-26T04:28:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6970
+- author: x5tink
+  changes:
+  - message: Black Drop Pouches
+    type: Add
+  id: 2229
+  time: '2025-08-26T04:29:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7163
 Name: RMC14
 Order: -1
