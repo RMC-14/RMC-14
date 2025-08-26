@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed berserker ravager eviscerate not stunning if you have 4 or more
-      rage.
-    type: Fix
-  id: 1726
-  time: '2025-05-12T18:47:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6426
 - author: mmails
   changes:
   - message: CO sabre to CO weapons vendor
@@ -4577,5 +4569,16 @@
   id: 2226
   time: '2025-08-26T04:15:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6945
+- author: noctyrnal
+  changes:
+  - message: Updated the sprites for the M54C Mk1, M54C Mk2, M54C2, M54CE2, M59A and
+      the Smartgun.
+    type: Tweak
+  - message: Fixed a copyrighted rifle being visible on certain vendors. It now correctly
+      has an M54C in the texture instead.
+    type: Fix
+  id: 2227
+  time: '2025-08-26T04:17:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7586
 Name: RMC14
 Order: -1
