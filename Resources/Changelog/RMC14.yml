@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Entities hit by the sniper's flak ammo area of effect now show that they
-      got hit.
-    type: Fix
-  id: 1716
-  time: '2025-05-12T12:09:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6390
-- author: Vermidia
-  changes:
-  - message: Fixed high levels of neurotoxin not deafening
-    type: Fix
-  id: 1717
-  time: '2025-05-12T12:10:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6393
 - author: Whisper
   changes:
   - message: Civilian Correspondent and Liaison may no longer equip marine armor.
@@ -4609,5 +4594,22 @@
   id: 2216
   time: '2025-08-26T03:40:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7458
+- author: rokudara-sen
+  changes:
+  - message: Added Mhelp information to the first time join message.
+    type: Add
+  id: 2217
+  time: '2025-08-26T03:42:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7610
+- author: blueisdumb
+  changes:
+  - message: Added two new tails for Vulpkanins and Felinids
+    type: Add
+  - message: Fixed Animated Tails for felinids showing on the marking customization
+      tab.
+    type: Fix
+  id: 2218
+  time: '2025-08-26T03:41:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7085
 Name: RMC14
 Order: -1
