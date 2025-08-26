@@ -48,8 +48,5 @@
   components:
   - type: SpawnPoint
     job_id: RMCRecruit
-  - type: SquadSpawner
-    squad: SquadAlpha # TODO: Change to "SquadUnassigned" once #7425 is merged.
-    role: RMCRecruit
   - type: Sprite
     state: recruit_spawn
