@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Civilian Correspondent and Liaison may no longer equip marine armor.
-      Non-combat armor such as press armor and emergency ballistic vests provided
-      by code red situations are not affected.
-    type: Tweak
-  id: 1718
-  time: '2025-05-12T12:14:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6331
 - author: DrSmugleaf
   changes:
   - message: Added a right click verb for patrons to reapply their custom weapon and
@@ -4611,5 +4602,12 @@
   id: 2218
   time: '2025-08-26T03:41:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7085
+- author: Vermidia
+  changes:
+  - message: Added lethal injection syringes
+    type: Add
+  id: 2219
+  time: '2025-08-26T03:43:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7506
 Name: RMC14
 Order: -1
