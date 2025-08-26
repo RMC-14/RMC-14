@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed survivor pill packets and MREs showing their contents outside them
-      and the storage UI being buggy until the contents are interacted with.
-    type: Fix
-  id: 1724
-  time: '2025-05-12T15:33:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6421
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Praetorians being able to gain shield by shooting spit at walls.
-    type: Fix
-  - message: Fixed xenonids being able to build resin through walls.
-    type: Fix
-  id: 1725
-  time: '2025-05-12T17:38:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6424
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed berserker ravager eviscerate not stunning if you have 4 or more
@@ -4576,5 +4559,23 @@
   id: 2224
   time: '2025-08-26T04:13:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7428
+- author: monomethylhydrazine
+  changes:
+  - message: Fixed Fiorina's LZ1 name spelling "hangar" as "hanger"
+    type: Fix
+  id: 2225
+  time: '2025-08-26T04:16:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7554
+- author: Shromply
+  changes:
+  - message: Added the Custom M1984 and Custom M44, as well as the HG-45 'Aguila'
+      and HG-45 'Marina'.
+    type: Add
+  - message: Added the Custom M1984/M44, HG-45s, ZHNK-72 and T73 to the weapon loadout
+      category.
+    type: Add
+  id: 2226
+  time: '2025-08-26T04:15:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6945
 Name: RMC14
 Order: -1
