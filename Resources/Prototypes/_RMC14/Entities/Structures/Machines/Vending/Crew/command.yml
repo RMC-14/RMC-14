@@ -551,7 +551,7 @@
     - name: Commander's Primary
       takeOne: CMProtagGun
       entries:
-      - id: WeaponRifleM59A
+      - id: RMCWeaponRifleM59A
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun

@@ -365,7 +365,7 @@
       - CMMagazineRifleM54C
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54C
+    - id: RMCWeaponRifleM54C
     - id: CMMagazineRifleM54C
     - id: CMMagazineRifleM54C
     - id: CMMagazineRifleM54C
@@ -384,13 +384,13 @@
     - 0,0,7,1
     whitelist:
       tags:
-      - WeaponRifleM54CE2
+      - RMCWeaponRifleM54CE2
       - CMMagazineRifleM54CE2
       - RMCAttachmentRailFlashlight
       - RMCAttachmentBipod
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54CE2
+    - id: RMCWeaponRifleM54CE2
     - id: CMMagazineRifleM54CE2
     - id: CMMagazineRifleM54CE2HT
 
@@ -495,7 +495,7 @@
       - CMMagazineRifleM54CMK1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54CMK1
+    - id: RMCWeaponRifleM54CMK1
     - id: CMMagazineRifleM54CMK1
     - id: CMMagazineRifleM54CMK1
 
@@ -515,7 +515,7 @@
       - CMMagazineRifleM54CMK1AP
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54CMK1AP
+    - id: RMCWeaponRifleM54CMK1AP
     - id: CMMagazineRifleM54CMK1AP
     - id: CMMagazineRifleM54CMK1AP
 
@@ -535,7 +535,7 @@
       - CMMagazineRifleM54C
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54C
+    - id: RMCWeaponRifleM54C
     - id: CMMagazineRifleM54C
     - id: CMMagazineRifleM54C
     - id: CMMagazineRifleM54C

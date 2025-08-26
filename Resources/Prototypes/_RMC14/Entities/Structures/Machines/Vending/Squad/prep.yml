@@ -23,7 +23,7 @@
         amount: 15
       - id: WeaponSMGM63
         amount: 30
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 30
         recommended: true
     - name: Primary ammunition
