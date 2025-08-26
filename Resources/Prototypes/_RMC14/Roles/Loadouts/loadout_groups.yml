@@ -242,9 +242,15 @@
   id: WeaponsRMC
   name: rmc-loadout-group-weapons
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 7
   loadouts:
   - HoldoutPistolRMC
+  - CustomM1984RMC
+  - CustomM44RMC
+  - HG45AguilaCaseRMC
+  - HG45MarinaCaseRMC
+  - T73CaseRMC
+  - ZHNK72CaseRMC
 
 # Canned Drinks
 - type: loadoutGroup
