@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed revolver bullets being invisible for the user that is shooting
-      them.
-    type: Fix
-  - message: Fixed sentries doing double the intended damage.
-    type: Fix
-  id: 1723
-  time: '2025-05-12T15:07:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6420
-- author: DrSmugleaf
-  changes:
   - message: Fixed survivor pill packets and MREs showing their contents outside them
       and the storage UI being buggy until the contents are interacted with.
     type: Fix
@@ -4577,5 +4567,14 @@
   id: 2223
   time: '2025-08-26T04:09:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7410
+- author: J C Denton
+  changes:
+  - message: Fixed ICBL survivor not spawning with a weapon.
+    type: Fix
+  - message: Fixed Varadero ICBL survivor having a wrong loadout.
+    type: Fix
+  id: 2224
+  time: '2025-08-26T04:13:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7428
 Name: RMC14
 Order: -1
