@@ -64,4 +64,4 @@ highlights-ravager = Ravager, "Pat"
 highlights-runner = Runner, "Pat", Capture
 highlights-sentinel = Sentinel, "Pat"
 highlights-spitter = Spitter, "Pat"
-highlights-warrior = Warrior, "Pat
+highlights-warrior = Warrior, "Pat"
