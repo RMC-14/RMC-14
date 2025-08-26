@@ -1,0 +1,63 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPSquadLeadPVE
+  name: rmc-job-name-spp-squadlead
+  description: rmc-ghost-role-information-spp-pve-description
+  playTimeTracker: RMCJobSPPSquadLeadPVE
+  ranks:
+    RMCRankSPPSerzhant: []
+  startingGear: RMCJobSPPSquadLeadPVEGear
+  icon: "RMCJobIconSPPRifleman"
+  joinNotifyCrew: false
+  accessGroups:
+  - FTL
+  spawnMenuRoleName: SPP Squad Lead (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 1
+        RMCSkillJtac: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-squadlead
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPSquadLeadPVE
+  name: weya pmc team lead spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCSPPSquadLeadPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: startingGear
+  id: RMCJobSPPSquadLeadPVEGear
+  equipment:
+    id: RMCIDSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: RMCJobSPPSquadLeadPVE
