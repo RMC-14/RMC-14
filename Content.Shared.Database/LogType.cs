@@ -479,7 +479,6 @@ public enum LogType
     /// </summary>
     Instrument = 103,
 
-    RMCAdminCommandLogging = 99999,
     RMCMarineAnnounce = 10000,
     RMCXenoAnnounce = RMCMarineAnnounce + 1,
     RMCNamedItem = RMCMarineAnnounce + 2,
@@ -519,4 +518,5 @@ public enum LogType
     RMCXenoNest = RMCMarineAnnounce + 36,
     RMCVend = RMCMarineAnnounce + 37,
     RMCRoundEnd = RMCMarineAnnounce + 38,
+    RMCAdminCommandLogging = RMCMarineAnnounce + 39,
 }
