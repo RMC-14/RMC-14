@@ -1,36 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added a right click verb for patrons to reapply their custom weapon and
-      armor name, removing it from the previously named item and adding it to a new
-      one.
-    type: Add
-  id: 1719
-  time: '2025-05-12T12:16:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6417
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added the berserker ravager, a new strain which turns the ravager into
-      a terrifying melee monster. They can build up rage which increases their attack
-      speed, movement speed, and allows them to heal while slashing.
-    type: Add
-  id: 1720
-  time: '2025-05-12T12:29:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6394
-- author: Vermidia
-  changes:
-  - message: Fixed groundside xenos not becoming burrowed larva once hijack begins.
-    type: Fix
-  - message: Ported hijack burrowed larva surge. When hivecore is up, burrowed larva
-      will be generated overtime depending on the initial disparity in numbers between
-      marines and xenos. It generates slightly faster each time a new burrowed is
-      made but speedup resets if hivecore is destroyed.
-    type: Add
-  id: 1721
-  time: '2025-05-12T12:39:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6418
-- author: DrSmugleaf
-  changes:
   - message: Added the Charger Crusher, a xenonid strain that loses defensive shield,
       some armor, and some damage in exchange for charge being momentum-based. The
       further you go, the more damage and speed you will gain up to a maximum, indicated
@@ -4609,5 +4579,29 @@
   id: 2219
   time: '2025-08-26T03:43:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7506
+- author: Ian321
+  changes:
+  - message: admin smite "Chestburst into rifleman"
+    type: Add
+  - message: '"unassigned" squad for admins to use'
+    type: Add
+  id: 2220
+  time: '2025-08-26T03:49:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7425
+- author: monomethylhydrazine
+  changes:
+  - message: Fixed cargo tech headsets not having engi and command radio channels,
+      tuned out by default.
+    type: Fix
+  id: 2221
+  time: '2025-08-26T03:48:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7479
+- author: N0lim
+  changes:
+  - message: Fixed parasite having plasma
+    type: Fix
+  id: 2222
+  time: '2025-08-26T03:49:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7484
 Name: RMC14
 Order: -1
