@@ -273,10 +273,6 @@
         points: 4
       - id: CMSynthGraft
         points: 4
-      - id: CMWebbingSurgicalBlue
-        points: 15
-      - id: CMWebbingSurgicalGreen
-        points: 15
     - name: Other Supplies
       entries:
       - id: RMCBinoculars
@@ -306,10 +302,6 @@
         points: 2
       - id: RMCFlashlightPen
         points: 2
-      - id: CMSatchelMarineLogistics
-        points: 15
-      - id: RMCSatchelMarineIntelChestrig
-        points: 15
         
 
 - type: entity
@@ -344,6 +336,14 @@
       # maintenance jack - 15 Points
       # portable dialysis machine - 15 Points
       - id: RMCTelescopicBaton
+        points: 15
+      - id: CMWebbingSurgicalBlue
+        points: 15
+      - id: CMWebbingSurgicalGreen
+        points: 15
+      - id: CMSatchelMarineLogistics
+        points: 15
+      - id: RMCSatchelMarineIntelChestrig
         points: 15
 
 - type: entity
