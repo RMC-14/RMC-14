@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: You will no longer see job icons of factions you are not apart of. For
-      example, if you have a WeYa PMC headset and you see a marine, they will have
-      a generic 'UN' icon instead of their marine one.
-    type: Tweak
-  id: 1714
-  time: '2025-05-12T12:03:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6369
-- author: Dutch-VanDerLinde
-  changes:
   - message: Fixed crate drag slowdown mispredicting. (Rubberbanding when you pull
       them)
     type: Fix
@@ -4612,5 +4603,12 @@
   id: 2214
   time: '2025-08-26T03:37:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7459
+- author: Aurallianz
+  changes:
+  - message: PMC ID card is available
+    type: Fix
+  id: 2215
+  time: '2025-08-26T03:39:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7620
 Name: RMC14
 Order: -1
