@@ -422,8 +422,8 @@
 - type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitEMT
-  description: A set of EMT - Paramedic fatigues, this one is red.
   name: EMT - Paramedic uniform
+  description: A set of EMT - Paramedic fatigues, this one is red.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
