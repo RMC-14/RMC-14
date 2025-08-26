@@ -192,8 +192,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (TryComp<RMCVendorUserRechargeComponent>(args.User, out var recharge) &&
-            TryComp<CMVendorUserComponent>(args.User, out var vendorUser))
+        if (TryComp<CMVendorUserComponent>(args.User, out var vendorUser) &&
+            TryComp<RMCVendorUserRechargeComponent>(args.User, out var recharge))
         {
             var ticks = (_gameTiming.CurTime - recharge.LastUpdate) / recharge.TimePerUpdate;
             var points = (int)Math.Floor(ticks * recharge.PointsPerUpdate);
@@ -231,13 +231,14 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (vendor.Comp.Jobs.Count == 0)
             return;
 
-        if (_mind.TryGetMind(args.User, out var mindId, out _))
+        _mind.TryGetMind(args.User, out var mindId, out _);
+        foreach (var job in vendor.Comp.Jobs)
         {
-            foreach (var job in vendor.Comp.Jobs)
-            {
-                if (_job.MindHasJobWithId(mindId, job.Id))
-                    return;
-            }
+            if (mindId.Valid && _job.MindHasJobWithId(mindId, job.Id))
+                return;
+
+            if (vendorUser?.Id == job)
+                return;
         }
 
         _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
