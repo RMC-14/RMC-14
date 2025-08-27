@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed vampire lurker and berserker being able to heal while on fire
-    type: Fix
-  id: 1729
-  time: '2025-05-12T21:39:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6430
 - author: DrSmugleaf
   changes:
   - message: Fixed Charger Crusher not having its stomp ability.
@@ -4593,5 +4586,13 @@
   id: 2229
   time: '2025-08-26T04:29:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7163
+- author: J C Denton
+  changes:
+  - message: Fixed an inaccessible area on LV-522 being accessible by melting it's
+      entrance podlocks.
+    type: Fix
+  id: 2230
+  time: '2025-08-27T03:01:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7626
 Name: RMC14
 Order: -1
