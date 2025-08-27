@@ -2,8 +2,10 @@ using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.EUI;
 using Content.Server.Actions;
+using Content.Server.Roles.Jobs;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Mutiny;
+using Content.Shared._RMC14.Synth;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Mind.Components;
@@ -20,6 +22,7 @@ public sealed class MutinySystem : SharedMutinySystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
     [Dependency] private readonly EuiManager _euis = default!;
+    [Dependency] private readonly JobSystem _jobs = default!;
 
     public override void Initialize()
     {
@@ -156,6 +159,15 @@ public sealed class MutinySystem : SharedMutinySystem
             return;
 
         if (!args.Target.IsValid() || HasComp<MutineerComponent>(args.Target) || !HasComp<MarineComponent>(args.Target))
+            return;
+
+        if (!TryComp<MindContainerComponent>(args.Target, out var mind) || !mind.HasMind)
+            return;
+
+        if (_jobs.MindHasJobWithId(mind.Mind, "CMMilitaryPolice") ||
+            _jobs.MindHasJobWithId(mind.Mind, "CMMilitaryWarden") ||
+            _jobs.MindHasJobWithId(mind.Mind, "CMChiefMP") ||
+            HasComp<SynthComponent>(args.Target))
             return;
 
         if (!TryComp<ActorComponent>(args.Target, out var actor))
