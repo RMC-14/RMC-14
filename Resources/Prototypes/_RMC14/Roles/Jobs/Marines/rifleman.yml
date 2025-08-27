@@ -148,6 +148,8 @@
   parent: MobHuman
   name: Wounded marine
   categories: [ DoNotMap, HideSpawnMenu ]
+  removeComponents:
+    - type: SSDIndicator
   components:
   - type: Loadout
     prototypes: [ CMGearRiflemanEquipped ]
