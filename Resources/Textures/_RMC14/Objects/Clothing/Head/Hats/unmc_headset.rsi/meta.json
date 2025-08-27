@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/de8d4b8f26e3fbc43bcfea4452d2a8087fb3cc63/icons/obj/items/clothing/hats/hats_by_faction/UA.dmi,%20https://github.com/cmss13-devs/cmss13/blob/de8d4b8f26e3fbc43bcfea4452d2a8087fb3cc63/icons/mob/humans/onmob/clothing/head/hats_by_faction/UA.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/pull/10310. hat accessory added by SharkSnake98",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,14 @@
     },
     {
       "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "helmet",
+      "directions": 4
+    },
+        {
+      "name": "hat",
       "directions": 4
     }
   ]

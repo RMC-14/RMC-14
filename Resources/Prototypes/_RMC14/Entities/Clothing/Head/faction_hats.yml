@@ -169,3 +169,10 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/unmc_headset.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/unmc_headset.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/unmc_headset.rsi
+      state: helmet
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/unmc_headset.rsi
+      state: hat
