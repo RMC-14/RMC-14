@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Eye;
@@ -26,11 +27,14 @@ using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
@@ -77,6 +81,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
@@ -142,6 +149,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoAnnounceStructureDestructionComponent, DestructionEventArgs>(OnXenoStructureDestruction);
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
+
+        SubscribeLocalEvent<ResinDoorComponent, BeforeDoorClosedEvent>(OnXenoDoorBeforeClose);
+        SubscribeLocalEvent<ResinDoorComponent, DoorStateChangedEvent>(OnXenoDoorStateChange);
 
         SubscribeNetworkEvent<XenoOrderConstructionClickEvent>(OnXenoOrderConstructionClick);
         SubscribeNetworkEvent<XenoOrderConstructionCancelEvent>(OnXenoOrderConstructionCancel);
@@ -987,6 +997,45 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             QueueDel(args.Target);
     }
 
+    private void OnXenoDoorBeforeClose(Entity<ResinDoorComponent> resinDoor, ref BeforeDoorClosedEvent args)
+    {
+        List<EntityUid> xenoBodies = new();
+        foreach (var ent in _door.GetColliding(resinDoor))
+        {
+            if (HasComp<XenoComponent>(ent) && _mobState.IsDead(ent))
+            {
+                xenoBodies.Add(ent);
+            }
+        }
+
+        // Set all xeno bodies collision to "false" so the resin door will close
+        foreach (var xeno in xenoBodies)
+        {
+            _physics.SetCanCollide(xeno, false);
+        }
+    }
+
+    private void OnXenoDoorStateChange(Entity<ResinDoorComponent> resinDoor, ref DoorStateChangedEvent args)
+    {
+        if (args.State != DoorState.Closed)
+        {
+            return;
+        }
+        List<EntityUid> xenoBodies = new();
+        foreach (var ent in _door.GetColliding(resinDoor))
+        {
+            if (HasComp<XenoComponent>(ent) && _mobState.IsDead(ent))
+            {
+                xenoBodies.Add(ent);
+            }
+        }
+
+        // Set all xeno bodies collision to "true" so the resin door will push them out
+        foreach (var xeno in xenoBodies)
+        {
+            _physics.SetCanCollide(xeno, true);
+        }
+    }
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
