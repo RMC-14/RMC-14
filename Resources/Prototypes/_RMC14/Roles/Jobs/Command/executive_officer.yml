@@ -60,6 +60,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
+    - type: MutinyImmune
 
 - type: startingGear
   id: CMGearExecutiveOfficer

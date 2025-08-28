@@ -164,10 +164,7 @@ public sealed class MutinySystem : SharedMutinySystem
         if (!TryComp<MindContainerComponent>(args.Target, out var mind) || !mind.HasMind)
             return;
 
-        if (_jobs.MindHasJobWithId(mind.Mind, "CMMilitaryPolice") ||
-            _jobs.MindHasJobWithId(mind.Mind, "CMMilitaryWarden") ||
-            _jobs.MindHasJobWithId(mind.Mind, "CMChiefMP") ||
-            HasComp<SynthComponent>(args.Target))
+        if (HasComp<MutinyImmuneComponent>(args.Target) || HasComp<SynthComponent>(args.Target))
             return;
 
         if (!TryComp<ActorComponent>(args.Target, out var actor))
