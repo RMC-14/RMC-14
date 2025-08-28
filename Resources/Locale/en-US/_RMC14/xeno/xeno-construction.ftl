@@ -35,8 +35,8 @@ rmc-xeno-construction-resin-hole-finished-acid = {$xeno} pressurises the resin t
 rmc-xeno-construction-resin-hole-finished-acid-self = We pressurise the resin trap with acid!
 rmc-xeno-construction-resin-hole-finished-gas = {$xeno} presurises the resin trap with gas!
 rmc-xeno-construction-resin-hole-finished-gas-self = We pressurise the resin trap with gas!
-rmc-xeno-construction-resin-hole-filling-parasite = We start placing the parasite into the resin trap.
-rmc-xeno-construction-resin-hole-finished-parasite = We place a parasite in the resin trap.
+rmc-xeno-construction-resin-hole-filling-parasite = We start placing the child into the resin trap.
+rmc-xeno-construction-resin-hole-finished-parasite = We place a child in the resin trap.
 rmc-xeno-construction-resin-hole-enter-parasite = {CAPITALIZE($parasite)} crawls into the resin trap.
 
 rmc-xeno-construction-resin-hole-uproot = We start uprooting the node so we can put the resin hole in its place...
@@ -47,7 +47,7 @@ rmc-xeno-construction-resin-hole-gas = It's filled with pressurised gas.
 rmc-xeno-construction-resin-hole-acid = It's filled with pressurised acid.
 
 rmc-xeno-construction-resin-hole-empty-name = empty
-rmc-xeno-construction-resin-hole-parasite-name = parasite
+rmc-xeno-construction-resin-hole-parasite-name = child
 rmc-xeno-construction-resin-hole-gas-name = gas
 rmc-xeno-construction-resin-hole-acid-name = acid
 
@@ -88,13 +88,13 @@ rmc-xeno-construction-repair-structure-success = We have successfully repaired t
 rmc-xeno-construction-repair-structure-no-damage-failure = The {$struct} is in good condition, you don't need to repair it.
 rmc-xeno-construction-repair-structure-insufficient-plasma-warn = The {$struct} requires {$remainingPlasma} more plasma to repair it.
 
-rmc-xeno-construction-egg-morpher-no-parasites = There are no parasites in the egg morpher!
+rmc-xeno-construction-egg-morpher-no-parasites = There are no children in the egg morpher!
 rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite = You can't put that in the egg morpher!
 rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already full!
 
 rmc-xeno-egg-morpher-return-self = {CAPITALIZE($parasite)} crawls into the egg morpher.
 
-rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} parasites.
+rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} children.
 
 rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
 rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.

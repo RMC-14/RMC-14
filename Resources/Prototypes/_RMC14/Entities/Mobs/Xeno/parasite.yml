@@ -4,7 +4,8 @@
   - CMXenoUndeveloped
   - CMXenoFlammable
   id: CMXenoParasiteBase
-  name: Parasite
+  name: Child
+  suffix: Parasite
   components:
   - type: GuideHelp
     guides:

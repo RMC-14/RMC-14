@@ -48,8 +48,8 @@ highlights-rifleman = Rifleman, "RFN", "SL", Command
 # Xenonids
 
 highlights-boiler = Boiler, "Pat"
-highlights-burrower = Burrower, "Pat", Tunnel, "Weed", Trap
-highlights-carrier = Carrier, "Pat", Parasite, "Weed", Cluster, Morpher, "Infect", Trap, Capture
+highlights-burrower = Burrower, "Pat", Tunnel, "Weed", Trap, Traps
+highlights-carrier = Carrier, "Pat", Parasite, "Weed", Cluster, Morpher, "Infect", Trap, Traps, Capture, child, children
 highlights-crusher = Crusher, "Pat"
 highlights-defender = Defender, "Pat"
 highlights-drone = "Drone", "Pat", "Weed", Cluster, Heal, Capture
@@ -57,7 +57,7 @@ highlights-hivelord = Hivelord, "Pat", "Weed", Cluster
 highlights-larva = Larva, "Pat"
 highlights-lesser-drone = "Lesser Drone", "Pat", "Lesser", "Weed"
 highlights-lurker = Lurker, "Pat"
-highlights-parasite = Parasite, "Infect"
+highlights-parasite = Parasite, "Infect", child, children
 highlights-praetorian = Praetorian, "Pat"
 highlights-queen = "Queen", "Mom", "Mother", "Tall Lurker", "Tuber"
 highlights-ravager = Ravager, "Pat"
