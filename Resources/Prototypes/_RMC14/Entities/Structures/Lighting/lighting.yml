@@ -416,3 +416,19 @@
       On: bbulb1
       Broken: bbulb-broken
       Burned: bbulb-burned
+
+- type: entity
+  parent: CMLightFixtureSmall
+  id: RMCLightFixtureSmallRed
+  components:
+  - type: Sprite
+    color: "#C02526"
+  - type: PoweredLight
+    hasLampOnSpawn: RMCLightBulbBlue
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned
