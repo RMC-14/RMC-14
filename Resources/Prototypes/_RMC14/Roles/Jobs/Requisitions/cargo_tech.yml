@@ -35,6 +35,8 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+    - type: CMVendorUser
+      id: CMCargoTech
     - type: JobPrefix
       prefix: cm-job-prefix-cargotech
     - type: TacticalMapIcon
