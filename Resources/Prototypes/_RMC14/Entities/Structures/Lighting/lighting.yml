@@ -284,6 +284,7 @@
     - state: bulb1
       map: ["enum.PoweredLightLayers.Base"]
   - type: PointLight
+    color: "#FFEFD2"
     energy: 1.0
     radius: 6
     softness: 1.1
@@ -311,6 +312,8 @@
     layers:
     - state: bbulb1
       map: ["enum.PoweredLightLayers.Base"]
+  - type: PointLight
+    color: "#D2E3EC"
   - type: PoweredLightVisuals
     spriteStateMap:
       Empty: bbulb-empty
@@ -318,6 +321,15 @@
       On: bbulb1
       Broken: bbulb-broken
       Burned: bbulb-burned
+
+- type: entity
+  parent: CMLightFixtureSmallAlwaysPowered
+  id: RMCLightFixtureSmallRedAlwaysPowered
+  components:
+  - type: Sprite
+    color: "#C02526"
+  - type: PointLight
+    color: "#C02526"
 
 # Light Bulb, Empty
 - type: entity
@@ -424,11 +436,4 @@
   - type: Sprite
     color: "#C02526"
   - type: PoweredLight
-    hasLampOnSpawn: RMCLightBulbBlue
-  - type: PoweredLightVisuals
-    spriteStateMap:
-      Empty: bbulb-empty
-      Off: bbulb0
-      On: bbulb1
-      Broken: bbulb-broken
-      Burned: bbulb-burned
+    hasLampOnSpawn: RMCLightBulbRed
