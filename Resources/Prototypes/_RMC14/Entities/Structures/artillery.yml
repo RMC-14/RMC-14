@@ -1,0 +1,50 @@
+﻿- type: entity
+  id: RMCAntiAirProp
+  name: IX-50 MGAD Cannon
+  description: "The IX-50 is a state-of-the-art Micro-Gravity and Air Defense system capable of independently tracking and neutralizing threats with rockets strapped onto them."
+  suffix: Prop
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,0.49,3.49,2.49"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/artillery.rsi
+    offset: 1.5, 0.5
+    state: anti_air_cannon
+  - type: Clickable
+
+- type: entity
+  parent: RMCAntiAirProp
+  id: RMCAntiAirPropFlipped
+  suffix: Prop, Flipped
+  components:
+  - type: Sprite
+    state: anti_air_cannon_f
+
+- type: entity
+  parent: RMCAntiAirProp
+  id: RMCRailgunProp
+  name: "'BURST' MAC Planetary Battery"
+  description: "The 'BURST' MAC Planetary Battery is an advanced magnetic mass accelerator cannon which utilises a long linear system of magnetic coils to propel metal payloads at incredible speeds."
+
+- type: entity
+  parent: RMCRailgunProp
+  id: RMCRailgunPropFlipped
+  suffix: Prop, Flipped
+  components:
+  - type: Sprite
+    state: anti_air_cannon_f
