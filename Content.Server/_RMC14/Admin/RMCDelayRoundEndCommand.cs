@@ -19,8 +19,6 @@ public sealed class RMCDelayRoundEndCommand : LocalizedEntityCommands
 
     public override string Command => "rmcdelayroundend";
     public override string Description => "Delay the round end.";
-
-
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var currentValue = _cfg.GetCVar(RMCCVars.RMCDelayRoundEnd);
