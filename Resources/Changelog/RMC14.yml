@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DummeHytteOst
   changes:
-  - message: Fixed being able to attach underbarrel flamethrowers on shotguns.
-    type: Fix
-  id: 1747
-  time: '2025-05-20T03:38:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6441
-- author: DummeHytteOst
-  changes:
   - message: You can now deconstruct rollerbeds with a wrench.
     type: Add
   - message: Rollerbeds no longer drop upstream metal sheets when destroyed.
@@ -4588,5 +4581,14 @@
   id: 2247
   time: '2025-08-29T05:03:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7463
+- author: Ian321
+  changes:
+  - message: Admin only pamphlets for every skill and level.
+    type: Add
+  - message: Recruit job and rank for events.
+    type: Add
+  id: 2248
+  time: '2025-08-29T05:04:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7616
 Name: RMC14
 Order: -1
