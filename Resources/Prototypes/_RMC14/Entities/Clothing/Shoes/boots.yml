@@ -116,6 +116,40 @@
   id: CMBootsBrownFilled
   suffix: Filled
 
+# Urban Boots
+- type: entity
+  parent: CMBootsBlack
+  id: CMBootsUrban
+  name: urban boots
+  description: Don't go walkin' slow, the devil's on the loose.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/urban.rsi
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, CMBootsUrban]
+  id: CMBootsUrbanFilled
+  suffix: Filled
+
+# Grey Boots
+- type: entity
+  parent: CMBootsBlack
+  id: CMBootsGrey
+  name: grey boots
+  description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time. These are grey.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/grey.rsi
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, CMBootsGrey]
+  id: CMBootsGreyFilled
+  suffix: Filled
+
 # Jungle Boots
 - type: entity
   parent: CMBootsBlack
