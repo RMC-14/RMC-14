@@ -1,9 +1,11 @@
+using System.Numerics;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Camera;
 using Content.Shared.Chat;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage;
@@ -19,6 +21,8 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
@@ -34,6 +38,7 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedCameraRecoilSystem _cameraRecoil = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -90,6 +95,10 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
             target,
             handHeldItem);
         _doAfter.TryStartDoAfter(doAfterArgs);
+
+        var selfMsg = Loc.GetString("rmc-execute-start-self", ("target", Name(target)), ("gun", Name(handHeldItem)));
+        var othersMsg = Loc.GetString("rmc-execute-start-others", ("user", Name(user)), ("target", Name(target)), ("gun", Name(handHeldItem)));
+        _popup.PopupPredicted(selfMsg, othersMsg, user, user, PopupType.LargeCaution);
     }
 
     private void ExecuteDoAfter(Entity<MarineComponent> ent, ref RMCBattleExecuteEvent args)
@@ -136,16 +145,39 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
         _admin.Add(LogType.RMCExecution,
             LogImpact.High,
             $"{ToPrettyString(user)}'s Execution of {ToPrettyString(target)} Succeeded!");
+
+        if (TryComp<WieldableComponent>(args.Used.Value, out var wieldable))
+        {
+            if (!wieldable.Wielded)
+            {
+                var recoilScalar = gun.CameraRecoilScalarModified;
+
+                var userCoords = _transform.GetWorldPosition(user);
+                var targetCoords = _transform.GetWorldPosition(target);
+                var direction = targetCoords - userCoords;
+
+                if (direction == Vector2.Zero)
+                    direction = new Vector2(0, -1);
+
+                var kick = direction.Normalized() * recoilScalar;
+                _cameraRecoil.KickCamera(user, kick);
+            }
+        }
+
         //ToDo RMC14 Make this head damage.
         _damageable.TryChangeDamage(target, args.BattleExecuteDamage, true);
         _mobState.ChangeMobState(target, MobState.Dead);
         _unrevivable.MakeUnrevivable(target);
-        _audio.PlayPredicted(gun.SoundGunshot, args.Used.Value, user);
+
+        _audio.PlayPredicted(gun.SoundGunshotModified, args.Used.Value, user);
+
         var popupMessage = $"{Name(target)} WAS EXECUTED BY {Name(user)}!";
         _popup.PopupPredicted(popupMessage, target, user, PopupType.LargeCaution);
+
         var chatMsg = $"[bold][font size=24][color=red]\n{Name(target)} WAS EXECUTED BY {Name(user)}!\n[/color][/font][/bold]";
         var coordinates = _transform.GetMapCoordinates(target);
         var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
         _rmcChat.ChatMessageToMany(chatMsg, chatMsg, players, ChatChannel.Local);
         EnsureComp<RMCBattleExecutedComponent>(target);
