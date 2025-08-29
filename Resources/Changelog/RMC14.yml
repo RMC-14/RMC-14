@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Added more shark plushie colours
-    type: Add
-  id: 1741
-  time: '2025-05-20T03:24:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6423
 - author: J C Denton
   changes:
   - message: Fixed corporate survivor job having no description.
@@ -4595,5 +4588,12 @@
   id: 2241
   time: '2025-08-29T04:49:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7647
+- author: N0lim
+  changes:
+  - message: Fixed repeating plasma transmission when the target has full plasma
+    type: Fix
+  id: 2242
+  time: '2025-08-29T04:55:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7648
 Name: RMC14
 Order: -1
