@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed tasers, beanbags, and rubbers not doing stamina damage
-    type: Fix
-  id: 1736
-  time: '2025-05-20T03:03:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6445
 - author: DummeHytteOst
   changes:
   - message: Fixed Warrior punch ability damage being 25 instead of 27.5
@@ -4592,5 +4585,12 @@
   id: 2236
   time: '2025-08-29T04:10:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7438
+- author: DummeHytteOst
+  changes:
+  - message: Fixed mango juice flavor not displaying correctly.
+    type: Fix
+  id: 2237
+  time: '2025-08-29T04:38:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7497
 Name: RMC14
 Order: -1
