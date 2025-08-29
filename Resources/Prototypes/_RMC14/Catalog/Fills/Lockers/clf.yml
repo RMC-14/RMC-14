@@ -2,6 +2,6 @@
   id: RMCClosetCLFSGOFill
   table: !type:AllSelector
     children:
-    - id: RMCWeaponLMGM60
-    - id: RMCMagazineLMGM60
+    - id: RMCWeaponMar50LMG
+    - id: RMCMagazineMar50LMG
       amount: 5
