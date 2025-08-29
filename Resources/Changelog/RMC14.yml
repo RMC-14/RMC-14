@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Charger Crusher not having its stomp ability.
-    type: Fix
-  - message: Fixed orbital cannon not showing fuel requirements for incendiary OBs.
-    type: Fix
-  - message: Fixed rounds not starting.
-    type: Fix
-  id: 1730
-  time: '2025-05-12T22:39:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6433
 - author: noctyrnal
   changes:
   - message: Fixed the camo on the CLF and Royal smartguns.
@@ -4594,5 +4583,13 @@
   id: 2230
   time: '2025-08-27T03:01:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7626
+- author: UnicornOnLSD
+  changes:
+  - message: SLs can now choose between B12 (recommended) and M4 for free (instead
+      of having to buy the M4)
+    type: Add
+  id: 2231
+  time: '2025-08-29T03:41:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6564
 Name: RMC14
 Order: -1
