@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crazy1112345
-  changes:
-  - message: Adds playtime ribbons for CL and Correspondent
-    type: Add
-  id: 1746
-  time: '2025-05-20T03:36:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6327
 - author: DummeHytteOst
   changes:
   - message: Fixed being able to attach underbarrel flamethrowers on shotguns.
@@ -4586,5 +4579,14 @@
   id: 2246
   time: '2025-08-29T04:59:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7475
+- author: DummeHytteOst
+  changes:
+  - message: The hive pylon has gotten a map blip, and is now visible on the tactical
+      map for xenonids, you can view the new map blip in the xenonid map icons guide
+      book page.
+    type: Add
+  id: 2247
+  time: '2025-08-29T05:03:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7463
 Name: RMC14
 Order: -1
