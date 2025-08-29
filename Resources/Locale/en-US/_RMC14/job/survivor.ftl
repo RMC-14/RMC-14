@@ -39,8 +39,6 @@ cm-job-prefix-survivor-icb = ICB Rep.
 cm-job-name-survivor-isr = Interstellar Sapient-Life Rights Observer
 CMJobSurvivorISR = Interstellar Sapient-Life Rights Observer
 
-cm-job-name-survivor-scientist = Scientist Colonist
-
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
 
@@ -142,7 +140,7 @@ rmc-job-greeting-corporate-dome-goon-medic = You are a Corporate Security Medic!
 
   You are a Corporate Security Medic stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from the Medbay to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
 
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]	
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technician!
 
@@ -167,9 +165,6 @@ cm-job-name-survivor-medical-technician = New Varadero Medical Technician
 cm-job-name-survivor-technician = New Varadero Engineering Technician
 
 cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
-
-cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
-cm-job-prefix-survivor-icb = ICB
 
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 
