@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed lightning continuing to happening after weather is over
-    type: Fix
-  id: 1735
-  time: '2025-05-20T03:00:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6457
 - author: Vermidia
   changes:
   - message: Fixed tasers, beanbags, and rubbers not doing stamina damage
@@ -4591,5 +4584,13 @@
   id: 2235
   time: '2025-08-29T04:09:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7412
+- author: Max_Power
+  changes:
+  - message: Fixed smartgunner armor letting you store weapons that aren't smartguns
+      in their suit storage.
+    type: Fix
+  id: 2236
+  time: '2025-08-29T04:10:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7438
 Name: RMC14
 Order: -1
