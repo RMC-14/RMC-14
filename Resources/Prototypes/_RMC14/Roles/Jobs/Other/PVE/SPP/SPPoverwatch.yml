@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - SO
+  - Rifleman
   spawnMenuRoleName: SPP Platoon Commander (PVE)
   special:
   - !type:AddComponentSpecial
