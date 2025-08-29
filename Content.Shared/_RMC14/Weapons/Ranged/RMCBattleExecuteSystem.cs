@@ -50,6 +50,15 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
         SubscribeLocalEvent<MarineComponent, GetVerbsEvent<AlternativeVerb>>(AlternativeInteract);
         SubscribeLocalEvent<MarineComponent, RMCBattleExecuteEvent>(ExecuteDoAfter);
         SubscribeLocalEvent<RMCBattleExecutedComponent, ExaminedEvent>(ExamineBody);
+        SubscribeLocalEvent<RMCBattleExecuteComponent, ExaminedEvent>(OnGunExecuteExamined);
+    }
+
+    private void OnGunExecuteExamined(Entity<RMCBattleExecuteComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(RMCBattleExecuteComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-examine-text-execute"));
+        }
     }
 
     private void AlternativeInteract(Entity<MarineComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
