@@ -7,7 +7,7 @@
   randomRotation: false
   stations:
     Haurchefant:
-      stationProto: UNMCHighCommand
+      stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
           mapNameTemplate: 'UNCSS Haurchefant'
