@@ -42,6 +42,7 @@
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: CMVendorUser
+      id: CMLiaison
       points: 40
     - type: RMCVendorUserRecharge
       maxPoints: 50
@@ -51,7 +52,7 @@
       prefix: cm-job-prefix-liaison
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cl
     - type: RMCTrackable
 
