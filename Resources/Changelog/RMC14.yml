@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed skill-locked visors not deactivating correctly on equip.
-    type: Fix
-  id: 1749
-  time: '2025-05-21T03:32:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6503
-- author: Vermidia
-  changes:
   - message: Fixed arachnids not making a sound on infect.
     type: Fix
   id: 1750
@@ -4592,5 +4585,29 @@
   id: 2249
   time: '2025-08-29T05:07:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7556
+- author: SharkSnake98
+  changes:
+  - message: Arcturian Ace, Lady Fingers, Emerald Greens, Kierlan Electro Golds, Sol
+      Reds, and Sol Yellows, added to cig machines and loadout options
+    type: Add
+  - message: WeYa Sequoia beer containing 50u, as well as a beer pack
+    type: Add
+  - message: Straight Razor, a toggleable knife
+    type: Add
+  - message: Urban boots, Grey Boots, and Grey Gloves
+    type: Add
+  - message: A new Misc. section in the loadouts page
+    type: Add
+  - message: UNMC Chaplain patch, Io Flair, Peace Flair, Terratek Flair, UNMC Flair,
+      and movie ticket helmet garbs
+    type: Add
+  - message: All Boots! Magazines, as well as a new, nonparity magazine, the WeYa
+      Orrery
+    type: Add
+  - message: UNMC Headset headwear
+    type: Add
+  id: 2250
+  time: '2025-08-29T05:10:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7078
 Name: RMC14
 Order: -1
