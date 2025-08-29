@@ -1,7 +1,6 @@
 - type: job
   parent: RMCJobSyntheticColony
   id: RMCSyntheticColonyHybrisaXenoarch
-  playTimeTracker: RMCJobSyntheticColonyHybrisaXenoarch
   startingGear: RMCGearSyntheticColonistHybrisaXenoarch
   spawnMenuRoleName: Xenoarchaeologist Synthetic (Hybrisa Survivor)
   special:
@@ -91,6 +90,7 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -99,10 +99,6 @@
     jumpsuit: RMCJumpsuitCivilianScientist
     back: CMSatchelMedical
     shoes: RMCShoesWhite
-
-- type: playTimeTracker
-  id: RMCJobSyntheticColonyHybrisaXenoarch
-  isHumanoid: true
 
 - type: entity
   id: RMCSurvivorPresetHybrisaSynthXenoarch

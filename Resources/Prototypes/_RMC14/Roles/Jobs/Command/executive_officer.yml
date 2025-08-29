@@ -44,7 +44,9 @@
     - type: MarineOrders
     - type: CMVendorUser
       id: CMExecutiveOfficer
-      points: 120
+      points: 45
+      extraPoints:
+        Specialist: 120
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-executive-officer

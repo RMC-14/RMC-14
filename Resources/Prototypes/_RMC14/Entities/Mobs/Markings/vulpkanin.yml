@@ -389,6 +389,26 @@
     - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
       state: dalmatian
 
+- type: marking
+  id: VulpTailAustralianShepherd
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/australianshepherd_tail.rsi
+      state: m_tail_australianshepherd_primary
+    - sprite: _RMC14/Mobs/Vulpkanin/australianshepherd_tail.rsi
+      state: m_tail_australianshepherd_secondary
+
+- type: marking
+  id: VulpTailStraight
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Vulpkanin]
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/straight_tail.rsi
+      state: m_tail_straighttail_primary
+
 # Body Markings (Chest)
 - type: marking
   id: VulpBellyCrest
@@ -800,3 +820,23 @@
   sprites:
     - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
       state: dalmatian_wag
+
+- type: marking
+  id: VulpTailAustralianShepherdAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/australianshepherd_tail.rsi
+      state: m_tail_australianshepherd_primary_wag
+    - sprite: _RMC14/Mobs/Vulpkanin/australianshepherd_tail.rsi
+      state: m_tail_australianshepherd_secondary_wag
+
+- type: marking
+  id: VulpTailStraightAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Vulpkanin/straight_tail.rsi
+      state: m_tail_straighttail_primary_wag

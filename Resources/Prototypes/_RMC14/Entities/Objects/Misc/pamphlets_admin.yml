@@ -1,0 +1,669 @@
+# Every skill at every level with related components.
+
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletAdmin
+  suffix: ADMIN
+  abstract: true
+  components:
+  - type: SkillPamphlet
+    bypassLimit: true
+
+# Antagonist
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminAntagonist1
+  name: antagonist 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillAntagonist: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminAntagonist2
+  name: antagonist 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillAntagonist: 2
+
+# Construction
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminConstruction1
+  name: construction 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillConstruction: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminConstruction2
+  name: construction 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillConstruction: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminConstruction3
+  name: construction 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillConstruction: 3
+
+# CQC
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminCQC1
+  name: cqc 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillCqc: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminCQC2
+  name: cqc 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillCqc: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminCQC3
+  name: cqc 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillCqc: 3
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminCQC4
+  name: cqc 4 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillCqc: 4
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminCQC5
+  name: cqc 5 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillCqc: 5
+
+# Domestics
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminDomestics1
+  name: domestics 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillDomestics: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminDomestics2
+  name: domestics 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillDomestics: 2
+
+# Endurance
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEndurance1
+  name: endurance 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEndurance: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEndurance2
+  name: endurance 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEndurance: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEndurance3
+  name: endurance 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEndurance: 3
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEndurance4
+  name: endurance 4 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEndurance: 4
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEndurance5
+  name: endurance 5 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEndurance: 5
+
+# Engineer
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEngineer1
+  name: engineer 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEngineer2
+  name: engineer 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEngineer3
+  name: engineer 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 3
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminEngineer4
+  name: engineer 4 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 4
+
+# Execution
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminExecution1
+  name: execution 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillExecution: 1
+
+# Firearms
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminFirearms1
+  name: firearms 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFirearms: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminFirearms2
+  name: firearms 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFirearms: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminFirearms3
+  name: firearms 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFirearms: 3
+
+# Fireman
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminFireman1
+  name: fireman 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFireman: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminFireman2
+  name: fireman 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFireman: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminFireman3
+  name: fireman 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFireman: 3
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminFireman4
+  name: fireman 4 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFireman: 4
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminFireman5
+  name: fireman 5 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillFireman: 5
+
+# Intel
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminIntel1
+  name: intel 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillIntel: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminIntel2
+  name: intel 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillIntel: 2
+
+# Jtac
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminJtac1
+  name: jtac 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillJtac: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminJtac2
+  name: jtac 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillJtac: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminJtac3
+  name: jtac 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillJtac: 3
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminJtac4
+  name: jtac 4 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillJtac: 4
+
+# Leadership
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminLeadership1
+  name: leadership 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillLeadership: 1
+    addComps:
+    - type: MarineOrders
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminLeadership2
+  name: leadership 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillLeadership: 2
+    addComps:
+    - type: MarineOrders
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminLeadership3
+  name: leadership 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillLeadership: 3
+    addComps:
+    - type: MarineOrders
+
+
+# Medical
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminMedical1
+  name: medical 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillMedical: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminMedical2
+  name: medical 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminMedical3
+  name: medical 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillMedical: 3
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminMedical4
+  name: medical 4 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillMedical: 4
+
+# Melee Weapons
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminMeleeWeapons1
+  name: melee weapons 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillMeleeWeapons: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminMeleeWeapons2
+  name: melee weapons 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillMeleeWeapons: 2
+
+# Navigations
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminNavigations1
+  name: navigations 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillNavigations: 1
+
+# Overwatch
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminOverwatch1
+  name: overwatch 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillOverwatch: 1
+
+# Pilot
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminPilot1
+  name: pilot 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPilot: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminPilot2
+  name: pilot 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPilot: 2
+
+# Police
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminPolice1
+  name: police 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPolice: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminPolice2
+  name: police 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPolice: 2
+
+# Power Loader
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminPowerLoader1
+  name: power loader 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPowerLoader: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminPowerLoader2
+  name: power loader 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillPowerLoader: 2
+
+# Research
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminResearch1
+  name: research 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillResearch: 1
+
+# Smart Gun
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminSmartGun1
+  name: smart gun 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSmartGun: 1
+
+# Specialist Weapons
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminWeaponsSpecialistDemolitionist
+  name: demolitionist specialist instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSpecialistWeapons: 1
+    addComps:
+    - type: DemoSpecWhitelist
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminWeaponsSpecialistGrenadier
+  name: grenadier specialist instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSpecialistWeapons: 1
+    addComps:
+    - type: GrenadeSpecWhitelist
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminWeaponsSpecialistPyro
+  name: pyro specialist instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSpecialistWeapons: 1
+    addComps:
+    - type: PyroWhitelist
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminWeaponsSpecialistScout
+  name: scout specialist instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSpecialistWeapons: 1
+    addComps:
+    - type: ScoutWhitelist
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminWeaponsSpecialistSniper
+  name: sniper specialist instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSpecialistWeapons: 1
+    addComps:
+    - type: SniperWhitelist
+
+# Surgery
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminSurgery1
+  name: surgery 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSurgery: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminSurgery2
+  name: surgery 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSurgery: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminSurgery3
+  name: surgery 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillSurgery: 3
+
+# Vehicles
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminVehicles1
+  name: vehicles 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminVehicles2
+  name: vehicles 2 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillVehicles: 2
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminVehicles3
+  name: vehicles 3 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillVehicles: 3
