@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Binbagg
-  changes:
-  - message: Fixed Valkyrie not having corrosive acid.
-    type: Fix
-  id: 1733
-  time: '2025-05-20T02:56:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6485
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed deafness audio clipping while crit.
@@ -4592,5 +4585,13 @@
   id: 2233
   time: '2025-08-29T04:04:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7442
+- author: Dygon
+  changes:
+  - message: Dropships can now independently lock or unlock the aft port and starboard
+      doors.
+    type: Tweak
+  id: 2234
+  time: '2025-08-29T04:07:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7400
 Name: RMC14
 Order: -1
