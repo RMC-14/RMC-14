@@ -301,6 +301,12 @@
   id: CMVendorCigs
   startingInventory:
     RMCCigarettePackLuckySloths: 50
+    RMCCigarettePackArcturianAce: 50
+    RMCCigarettePackLadyFingers: 50
+    RMCCigarettePackEmeraldGreens: 50
+    RMCCigarettePackElectroGolds: 50
+    RMCCigarettePackSolRedsTurquoise: 25
+    RMCCigarettePackSolRedsYellow: 25
     RMCTarbackTube: 20
     RMCMatchboxFull: 15
     RMCLighter: 25
@@ -317,13 +323,13 @@
 - type: vendingMachineInventory
   id: RMCVendorCigsFree
   startingInventory:
-    #ElectroGoldCigPack: 99
+    RMCCigarettePackElectroGolds: 99
     RMCCigarettePackLuckySloths: 99
     #TradingCardCigPack: 99
-    #LadyFingerCigPack: 99
+    RMCCigarettePackLadyFingers: 99
     RMCCigarettePackWeYaGold: 99
-    #EmeraldGreenCigPack: 99
-    #ArcturianAceCigPack: 99
+    RMCCigarettePackEmeraldGreens: 99
+    RMCCigarettePackArcturianAce: 99
     RMCCigarettePackExecutiveSelect: 99
     RMCCigarCase: 99
     RMCTarbackTube: 99
@@ -350,11 +356,11 @@
 - type: vendingMachineInventory
   id: RMCVendorCigsElectro
   startingInventory:
-    #ElectroGoldCigPack: 20
+    RMCCigarettePackElectroGolds: 20
     RMCCigarettePackLuckySloths: 20
-    #LadyFingerCigPack: 20
-    #SpiritCigPack: 10
-    #SpiritYellowCigPack: 10
+    RMCCigarettePackLadyFingers: 20
+    RMCCigarettePackSolRedsTurquoise: 10
+    RMCCigarettePackSolRedsYellow: 10
     RMCTarbackTube: 10
     RMCMatchboxFull: 5
     CMElectroMatchbook: 5
@@ -378,8 +384,8 @@
   id: RMCVendorCigsWeYa
   startingInventory:
     RMCCigarettePackWeYaGold: 15
-    #EmeraldGreenCigPack: 30
-    #ArcturianAceCigPack: 10
+    RMCCigarettePackEmeraldGreens: 30
+    RMCCigarettePackArcturianAce: 10
     #BalajiImperialCigPack: 10
     RMCCigarettePackExecutiveSelect: 0 #Random between 0-2
     RMCMatchboxFull: 5
