@@ -1,33 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Civilian survivors now spawn with random outfits.
-    type: Tweak
-  id: 1751
-  time: '2025-05-21T03:49:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6405
-- author: AlexisMoonlight
-  changes:
-  - message: Added MW stamp.
-    type: Add
-  id: 1752
-  time: '2025-05-21T03:51:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6500
-- author: Dygon
-  changes:
-  - message: Fixed Praetorian acid ball and non-airburst grenades having lost their
-      max amount of times that they can hit the same target when splitting.
-    type: Fix
-  id: 1753
-  time: '2025-05-21T03:57:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6497
-- author: Dygon
-  changes:
-  - message: Fixed cutting a cheese wheel only giving you 4 wedges instead of 6.
-    type: Fix
-  id: 1754
-  time: '2025-05-21T03:59:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6498
 - author: Tyzemol
   changes:
   - message: Fixed Berserker Ravager Apprehend bonus movement speed being removed
@@ -4609,5 +4580,38 @@
   id: 2251
   time: '2025-08-29T06:06:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7455
+- author: PursuitInAshes
+  changes:
+  - message: Added a repaired version of Sorokyne for use in PVE.
+    type: Add
+  id: 2252
+  time: '2025-08-29T23:48:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7653
+- author: x5tink
+  changes:
+  - message: Fixed the requisitions vendor not having M4SPR extended magazines.
+    type: Fix
+  id: 2253
+  time: '2025-08-29T23:50:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7718
+- author: noctyrnal
+  changes:
+  - message: Executing someone via the Mateba or Winter Wyvern will have recoil when
+      one-handed, and a popup when starting.
+    type: Tweak
+  id: 2254
+  time: '2025-08-29T23:49:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7720
+- author: Dygon
+  changes:
+  - message: The Dropship Part Fabricator can now print the LAU-229 Rocket Pod, which
+      can be loaded with AGR-59 'Mini-Mike' and AGR-59-I 'Mini-Mike' ammunition; each
+      pod holds six rockets.
+    type: Add
+  - message: Dropship weapons now update their loaded ammo sprite after every shot.
+    type: Fix
+  id: 2255
+  time: '2025-08-29T23:48:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7341
 Name: RMC14
 Order: -1
