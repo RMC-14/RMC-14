@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed arachnids not making a sound on infect.
-    type: Fix
-  id: 1750
-  time: '2025-05-21T03:33:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6502
 - author: Dutch-VanDerLinde
   changes:
   - message: Civilian survivors now spawn with random outfits.
@@ -4609,5 +4602,12 @@
   id: 2250
   time: '2025-08-29T05:10:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7078
+- author: Aurallianz
+  changes:
+  - message: Admins can delay the round-end properly.
+    type: Add
+  id: 2251
+  time: '2025-08-29T06:06:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7455
 Name: RMC14
 Order: -1
