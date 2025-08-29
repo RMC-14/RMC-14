@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed the camo on the CLF and Royal smartguns.
-    type: Tweak
-  id: 1731
-  time: '2025-05-16T14:08:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6467
 - author: Vermidia
   changes:
   - message: Fixed ravagers having the wrong tacmap icon
@@ -4591,5 +4584,12 @@
   id: 2231
   time: '2025-08-29T03:41:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6564
+- author: Ian321
+  changes:
+  - message: Overfull pods now bolt open after exploding
+    type: Fix
+  id: 2232
+  time: '2025-08-29T03:56:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7396
 Name: RMC14
 Order: -1
