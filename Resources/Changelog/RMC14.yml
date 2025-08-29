@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: crazy1112345
   changes:
-  - message: Added Fax Responder Ghost/Admin Roles.
-    type: Add
-  - message: Added CLF ranks.
-    type: Add
-  - message: Added High Command Admin Roles.
-    type: Add
-  id: 1745
-  time: '2025-05-20T03:34:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6271
-- author: crazy1112345
-  changes:
   - message: Adds playtime ribbons for CL and Correspondent
     type: Add
   id: 1746
@@ -4590,5 +4579,12 @@
   id: 2245
   time: '2025-08-29T04:56:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7474
+- author: J C Denton
+  changes:
+  - message: Fixed some Survivor Jobs not spawning with their job-specific loadouts.
+    type: Fix
+  id: 2246
+  time: '2025-08-29T04:59:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7475
 Name: RMC14
 Order: -1
