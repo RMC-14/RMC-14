@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed ravagers having the wrong tacmap icon
-    type: Fix
-  id: 1732
-  time: '2025-05-17T01:29:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6458
 - author: Binbagg
   changes:
   - message: Fixed Valkyrie not having corrosive acid.
@@ -4591,5 +4584,13 @@
   id: 2232
   time: '2025-08-29T03:56:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7396
+- author: Aurallianz
+  changes:
+  - message: Added battlefield executions, performed by a commanding officer with
+      a sidearm.
+    type: Add
+  id: 2233
+  time: '2025-08-29T04:04:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7442
 Name: RMC14
 Order: -1
