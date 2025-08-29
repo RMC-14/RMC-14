@@ -53,8 +53,8 @@
         state: background_shipside
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetNoGun
-  useLoadoutOfJob: RMCSurvivorCommandingOfficer
   hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorCommanderNewVaradero

@@ -26,6 +26,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack

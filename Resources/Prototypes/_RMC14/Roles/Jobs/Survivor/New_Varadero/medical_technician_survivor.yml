@@ -26,7 +26,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetMedicalTechnician
-  useLoadoutOfJob: CMSurvivorDoctor
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorDoctor
