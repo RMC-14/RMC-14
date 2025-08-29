@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: 'LV-759 got updated with guns, P90s, SSG-45, HG 37-12s, Spearhead Revolvers
-      and Incinerators: check out the Police Authority armory, Biogenomic lab as a
-      whole and the streets north of it.'
-    type: Tweak
-  - message: Vault area north of caves checkpoint now has a missing MOU53 shotgun.
-    type: Tweak
-  id: 1740
-  time: '2025-05-20T03:14:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6462
 - author: x5tink
   changes:
   - message: Added more shark plushie colours
@@ -4594,5 +4583,17 @@
   id: 2240
   time: '2025-08-29T04:44:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7625
+- author: x5tink
+  changes:
+  - message: Fixed synth reset key being normal size instead of small.
+    type: Fix
+  - message: Fixed the synth vendor not having synth reset keys, marine logistics
+      IMP backpack, or the UNMC expedition chestrig.
+    type: Fix
+  - message: Fixed engineer belts not being able to hold synth reset keys.
+    type: Fix
+  id: 2241
+  time: '2025-08-29T04:49:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7647
 Name: RMC14
 Order: -1
