@@ -3,7 +3,6 @@
   id: CMSurvivorLV624CorporateLiaison
   name: rmc-job-name-survivor-lv624-corporate-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624CorporateLiaison
   spawnMenuRoleName: Corporate Liaison (LV624 Survivor)
   startingGear: RMCGearSurvivorLV624CorporateLiaison
   special:
@@ -46,10 +45,6 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorLV624CorporateLiaison
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCorporate

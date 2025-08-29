@@ -3,7 +3,7 @@
   id: CMJobSurvivorSoroMiner
   name: rmc-job-name-survivor-soro-miner
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorSoroMiner
+  playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorSoroMiner
   spawnMenuRoleName: Miner (Sorokyne Survivor)
   special:
@@ -56,10 +56,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorSoroMiner
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian

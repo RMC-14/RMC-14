@@ -3,7 +3,7 @@
   id: CMJobSurvivorArmyReservist
   name: rmc-job-name-survivor-army-reservist
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorArmyReservist
+  playTimeTracker: CMJobSurvivorSecurity
   ranks:
     RMCRankSPPStrsh:
     - !type:RoleTimeRequirement
@@ -75,10 +75,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorArmyReservist
-  isHumanoid: true
 
 - type: entity
   id: RMCGearSurvivorPresetArmyReservist
