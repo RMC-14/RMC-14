@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed Warrior punch ability damage being 25 instead of 27.5
-    type: Fix
-  id: 1737
-  time: '2025-05-20T03:04:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6464
-- author: Vermidia
-  changes:
-  - message: Fixed taken burrowed larva dying in transit.
-    type: Fix
-  id: 1738
-  time: '2025-05-20T03:08:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6435
 - author: J C Denton
   changes:
   - message: Fixed the SSG-45 having a 1.1x damage multiplier instead of 1.25x.
@@ -4592,5 +4578,21 @@
   id: 2237
   time: '2025-08-29T04:38:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7497
+- author: Shromply
+  changes:
+  - message: Buffed the Type 71s firerate by one for PVE only, hopefully making it
+      just about on par with the Mk1.
+    type: Add
+  id: 2238
+  time: '2025-08-29T04:43:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7599
+- author: BramvanZijp
+  changes:
+  - message: Fixed not properly reassigning a new owner to a CO Primary Weapon's after
+      they become unrevivable.
+    type: Fix
+  id: 2239
+  time: '2025-08-29T04:42:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7567
 Name: RMC14
 Order: -1
