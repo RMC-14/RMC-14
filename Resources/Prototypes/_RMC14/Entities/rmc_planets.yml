@@ -282,3 +282,12 @@
     map: /Maps/_RMC14/hybrisa_greenshift.yml
     camouflage: Urban
     inRotation: false
+
+- type: entity
+  id: RMCPlanetSorokyneRepaired
+  name: LV-976 - Sorokyne Strata (Repaired)
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/sorokyne_repaired.yml
+    camouflage: Jungle
+    inRotation: false
