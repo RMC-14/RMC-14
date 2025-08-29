@@ -135,10 +135,9 @@
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
-    RMCCoffeeCupFilled: 25 # ?
-    DrinkHotCoffee: 25 # $1.5
-    DrinkTeacup: 25 # $3
-    DrinkHotCoco: 25 # $15
+    RMCDrinkCoffee: 25 # ?
+    RMCDrinkTea: 25 # $1.5
+    RMCDrinkHotCocoa: 25
     #IceCup #Contraband
 
 - type: entity
@@ -153,8 +152,8 @@
 - type: vendingMachineInventory
   id: RMCVendorCoffeeSimple
   startingInventory:
-    DrinkHotCoffee: 40
-    DrinkHotCoco: 25 #Contraband
+    RMCDrinkCoffee: 40
+    RMCDrinkHotCocoa: 25 #Contraband
 
 
 # Snack
