@@ -45,3 +45,35 @@
   components:
   - type: PresetIdCard
     job: RMCCLFCellCommander
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFCommanderPVE
+  name: clf commander's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFCommanderPVE
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFDoctorPVE
+  name: clf doctor's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFDoctorPVE
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFHeavyGunnerPVE
+  name: clf heavy gunner's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFHeavyGunnerPVE
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFStandardPVE
+  name: clf standard's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFStandardPVE

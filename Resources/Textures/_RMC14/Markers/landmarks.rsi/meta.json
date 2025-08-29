@@ -504,7 +504,10 @@
       "name": "surv_wy"
     },
     {
-      "name": "recruit_spawn"
+      "name": "clf_spawn"
+    },
+    {
+     "name": "recruit_spawn"
     }
   ]
 }
