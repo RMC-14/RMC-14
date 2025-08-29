@@ -502,6 +502,9 @@
     },
     {
       "name": "surv_wy"
+    },
+    {
+      "name": "clf_spawn"
     }
   ]
 }
