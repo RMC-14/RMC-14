@@ -3,7 +3,6 @@
   id: CMSurvivorTrijentGoon
   name: rmc-job-name-survivor-trijent-goon
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorTrijentGoon
   startingGear: RMCGearSurvivorTrijentGoon
   hasIcon: true
   icon: RMCJobIconWeYaSec
@@ -52,10 +51,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: RMCJobSurvivorTrijentGoon
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

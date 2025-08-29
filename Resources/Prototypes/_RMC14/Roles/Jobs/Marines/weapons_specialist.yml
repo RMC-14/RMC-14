@@ -45,6 +45,7 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
     - type: CMVendorUser
+      id: CMWeaponsSpecialist
       points: 45
       extraPoints:
         Specialist: 120
@@ -53,7 +54,7 @@
       prefix: cm-job-prefix-weapons-specialist
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: spec
 
 - type: startingGear

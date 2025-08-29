@@ -140,6 +140,13 @@ marking-VulpTailFluffy = Vulpkanin Fluffy (no wag)
 
 marking-VulpTailDalmation = Dalmation
 
+marking-VulpTailAustralianShepherd = Australian Shepherd
+marking-VulpTailAustralianShepherd-m_tail_australianshepherd_primary = Primary
+marking-VulpTailAustralianShepherd-m_tail_australianshepherd_secondary = Secondary
+
+marking-VulpTailStraight = Straight
+marking-VulpTailStraight-m_tail_straighttail_primary = Primary
+
 
 marking-VulpBellyCrest-belly_crest = Belly
 marking-VulpBellyCrest = Vulpkanin Belly Crest

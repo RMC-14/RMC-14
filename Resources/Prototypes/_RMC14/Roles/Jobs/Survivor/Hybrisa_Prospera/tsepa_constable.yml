@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaTSEPAConstable
   name: rmc-job-name-tsepa-constable
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorHybrisaTSEPAConstable
   ranks:
     RMCRankTSEPASergeant:
     - !type:RoleTimeRequirement
@@ -57,10 +56,6 @@
     id: RMCIDCardTSEPA
     back: RMCSatchelBlackFillSurvivorConstable
     ears: RMCHeadsetTSEPA
-
-- type: playTimeTracker
-  id: RMCJobSurvivorHybrisaTSEPAConstable
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

@@ -1,7 +1,6 @@
 - type: job
   parent: RMCJobSyntheticColony
   id: RMCSyntheticColonyHybrisaDetective
-  playTimeTracker: RMCJobSyntheticColonyHybrisaDetective
   startingGear: RMCGearSyntheticColonistHybrisaDetective
   spawnMenuRoleName: Detective Synth (Hybrisa Survivor)
   special:
@@ -33,7 +32,7 @@
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
     - type: NpcFactionMember
       factions:
@@ -100,10 +99,6 @@
     shoes: CMBootsBlackFilled
     gloves: RMCHandsBlack
     belt: RMCBeltSecurityWeYaFilled
-
-- type: playTimeTracker
-  id: RMCJobSyntheticColonyHybrisaDetective
-  isHumanoid: true
 
 - type: entity
   id: RMCSurvivorPresetHybrisaSynthDetective

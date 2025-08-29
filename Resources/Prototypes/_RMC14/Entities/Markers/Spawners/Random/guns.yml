@@ -293,7 +293,7 @@
     - RMCWeaponMar50LMG: RMCMagazineMar50LMG
     - WeaponShotgunCustomBuilt: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponLauncherDisposable: RMCSpawnerRandomRocketsDisposable
-    - WeaponRifleM54C: CMMagazineRifleM54C
+    - RMCWeaponRifleM54C: CMMagazineRifleM54C
     - WeaponShotgunM890: RMCSpawnerRandomShotgunBoxes
     - RMCWeaponLauncherM85A1: RMCSpawnerRandomGrenadePackets
 
