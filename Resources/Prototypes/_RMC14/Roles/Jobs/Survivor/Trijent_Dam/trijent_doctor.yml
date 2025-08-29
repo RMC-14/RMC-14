@@ -3,7 +3,6 @@
   id: CMSurvivorTrijentDoctor
   name: cm-job-name-survivor-trijent-doctor
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorTrijentDoctor
   startingGear: RMCGearSurvivorTrijentDoctor
   spawnMenuRoleName: Trijent Doctor (Trijent Survivor)
   special:
@@ -26,6 +25,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetTrijentDoctor
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorDoctor
@@ -46,10 +46,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorTrijentDoctor
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetDoctor

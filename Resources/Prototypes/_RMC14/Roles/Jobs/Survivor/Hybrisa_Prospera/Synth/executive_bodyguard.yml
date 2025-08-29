@@ -1,7 +1,6 @@
 - type: job
   parent: RMCJobSyntheticColony
   id: RMCSyntheticColonyHybrisaExecBodyguard
-  playTimeTracker: RMCJobSyntheticColonyHybrisaExecBodyguard
   startingGear: RMCGearSyntheticColonistHybrisaExecBodyguard
   spawnMenuRoleName: Executive Bodyguard (Hybrisa Survivor)
   special:
@@ -91,6 +90,7 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -99,10 +99,6 @@
     outerClothing: RMCHazardVestBlack
   inhand:
     - RMCScabbardMacheteFilled
-
-- type: playTimeTracker
-  id: RMCJobSyntheticColonyHybrisaExecBodyguard
-  isHumanoid: true
 
 - type: entity
   id: RMCSurvivorPresetHybrisaSynthExecBodyguard

@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaCommercialPilot
   name: rmc-job-name-survivor-commercial-pilot
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorHybrisaCommercialPilot
   spawnMenuRoleName: Commercial Pilot (Hybrisa Survivor)
   startingGear: RMCGearSurvivorHybrisaCommercialPilot
   hasIcon: false
@@ -36,6 +35,7 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: MarineOrders
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -48,10 +48,6 @@
     shoes: RMCShoesLaceup
     jumpsuit: RMCJumpsuitLiaisonPilot
     outerClothing: RMCCoatWeYaPilot
-
-- type: playTimeTracker
-  id: RMCJobSurvivorHybrisaCommercialPilot
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCorporate

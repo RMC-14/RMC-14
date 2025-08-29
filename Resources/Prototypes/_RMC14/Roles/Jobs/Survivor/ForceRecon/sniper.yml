@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconSniper
   name: rmc-job-name-forecon-sniper
-  playTimeTracker: RMCJobSurvivorSniperForecon
   startingGear: RMCGearForeconSniper
   icon: "RMCJobIconForeconSniper"
   spawnMenuRoleName: FORECON Sniper (Survivor)
@@ -45,10 +44,6 @@
   equipment:
     outerClothing: RMCArmorUDEPForeconFilled
     # todo sniper facepaint
-
-- type: playTimeTracker
-  id: RMCJobSurvivorSniperForecon
-  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

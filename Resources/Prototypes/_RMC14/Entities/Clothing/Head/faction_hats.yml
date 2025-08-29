@@ -157,3 +157,22 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_quartermaster.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_quartermaster.rsi
+
+#UNMC Headset
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadUNMCHeadset
+  name: UNMC headset
+  description: A headset typically found in use by radio-operators and officers. This one appears to be malfunctioning.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/unmc_headset.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/unmc_headset.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/unmc_headset.rsi
+      state: helmet
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/unmc_headset.rsi
+      state: hat

@@ -3,7 +3,6 @@
   id: CMSurvivorLV624Archeologist
   name: rmc-job-name-survivor-lv624-archeologist
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624Archeologist
   startingGear: RMCGearSurvivorLV624Archeologist
   spawnMenuRoleName: Archeologist (LV624 Survivor)
   special:
@@ -27,6 +26,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetLV624Archeologist
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorScientist
@@ -53,10 +53,6 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorLV624Archeologist
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetScientist
