@@ -3,7 +3,7 @@
   id: CMSurvivorFiorinaEngineer
   name: rmc-job-name-survivor-fiorina-engineer
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorFiorinaEngineer
+  playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorFiorinaEngineer
   accessGroups:
   - ColonistEngi
@@ -52,7 +52,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorFiorinaEngineer
-  isHumanoid: true

@@ -4,7 +4,7 @@
   id: CMSurvivorGangLeader
   name: cm-job-name-survivor-gang-leader
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorGangLeader
+  playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorGangLeader
   spawnMenuRoleName: Gang Leader (Survivor)
   special:
@@ -50,10 +50,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorGangLeader
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian

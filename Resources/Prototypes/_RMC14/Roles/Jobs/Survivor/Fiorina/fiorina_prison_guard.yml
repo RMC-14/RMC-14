@@ -3,7 +3,7 @@
   id: CMSurvivorFiorinaPrisonGuard
   name: rmc-job-name-pmc-corporate-goon
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorFiorinaPrisonGuard
+  playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaPrisonGuard
   accessGroups:
   - ColonistSec
@@ -47,7 +47,3 @@
     gloves: RMCHandsVeteran
     shoes: RMCShoesJackboots
     id: CMIDCardLiaisonColony
-
-- type: playTimeTracker
-  id: RMCJobSurvivorFiorinaPrisonGuard
-  isHumanoid: true

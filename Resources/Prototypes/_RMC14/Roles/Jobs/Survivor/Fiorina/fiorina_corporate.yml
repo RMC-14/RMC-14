@@ -3,7 +3,7 @@
   id: CMSurvivorFiorinaCorporateLiaison
   name: cm-job-name-survivor-fiorina-corporate-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorFiorinaCorporateLiaison
+  playTimeTracker: CMJobSurvivorCorporate
   startingGear: RMCGearSurvivorFiorinaCorporateLiaison
   accessGroups:
   - ColonistCorporate
@@ -49,7 +49,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorFiorinaCorporateLiaison
-  isHumanoid: true

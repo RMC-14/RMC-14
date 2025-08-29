@@ -3,7 +3,7 @@
   id: CMSurvivorFiorinaDoctor
   name: cm-job-name-survivor-fiorina-doctor
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorFiorinaDoctor
+  playTimeTracker: CMJobSurvivorDoctor
   startingGear: RMCGearSurvivorFiorinaDoctor
   accessGroups:
   - ColonistMedical
@@ -49,7 +49,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorFiorinaDoctor
-  isHumanoid: true

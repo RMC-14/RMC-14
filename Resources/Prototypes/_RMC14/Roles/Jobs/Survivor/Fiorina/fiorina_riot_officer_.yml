@@ -3,7 +3,7 @@
   id: CMSurvivorFiorinaRiotOfficer
   name: cm-job-name-survivor-riot-officer
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorFiorinaRiotOfficer
+  playTimeTracker: CMJobSurvivorSecurity
   ranks:
     RMCRankCivilianOfficer: []
   startingGear: RMCGearSurvivorFiorinaRiotOfficer
@@ -61,7 +61,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorFiorinaRiotOfficer
-  isHumanoid: true

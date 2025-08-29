@@ -4,7 +4,7 @@
   id: CMSurvivorPrisoner
   name: cm-job-name-survivor-prisoner
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorPrisoner
+  playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorPrisoner
   spawnMenuRoleName: Prisoner (Survivor)
   special:
@@ -50,10 +50,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorPrisoner
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian
