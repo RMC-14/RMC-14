@@ -32,8 +32,6 @@ rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
 
 cm-job-name-survivor-trucker = Trucker Colonist
 
-cm-job-name-survivor-scientist = Scientist Colonist
-
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
 
