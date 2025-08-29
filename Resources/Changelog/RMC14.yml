@@ -1,34 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed corporate survivor job having no description.
-    type: Fix
-  id: 1742
-  time: '2025-05-20T03:29:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6479
-- author: J C Denton
-  changes:
-  - message: 'Added 2 corpse spawners: WeYa PMC and Corporate Supervisor.'
-    type: Add
-  - message: Fixed CMB Deputy corpse not having their jacket.
-    type: Fix
-  id: 1743
-  time: '2025-05-20T03:30:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6470
-- author: Vermidia
-  changes:
-  - message: Felinids can now take a new cat snout marking and can also have whiskers.
-    type: Add
-  - message: Felinids can now be any color. Their current colors have shifted slightly
-      because of this.
-    type: Add
-  - message: Felinids can now stop wagging their tail.
-    type: Add
-  - message: Various emotes now have their own icons.
-    type: Add
-  id: 1744
-  time: '2025-05-20T03:32:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6456
 - author: crazy1112345
   changes:
   - message: Added Fax Responder Ghost/Admin Roles.
@@ -4595,5 +4565,30 @@
   id: 2242
   time: '2025-08-29T04:55:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7648
+- author: ExponentialWizard
+  changes:
+  - message: Fixed scoping not facing seat direction while buckled
+    type: Fix
+  id: 2243
+  time: '2025-08-29T04:57:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7464
+- author: Max_Power
+  changes:
+  - message: Fixed the M82F Flare Gun having a 1.15x wielded accuracy and 0.95x unwielded
+      accuracy multiplier instead of 1x wielded and 0.5x unwielded.
+    type: Fix
+  - message: Fixed the Basira-Armstrong rifle having a 1x wielded accuracy and 0.95x
+      unwielded accuracy multiplier instead of 1.35x wielded and 0.35x unwielded.
+    type: Fix
+  id: 2244
+  time: '2025-08-29T04:58:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7482
+- author: Aurallianz
+  changes:
+  - message: ~ commands are now logged.
+    type: Add
+  id: 2245
+  time: '2025-08-29T04:56:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7474
 Name: RMC14
 Order: -1
