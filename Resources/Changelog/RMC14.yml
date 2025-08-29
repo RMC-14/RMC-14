@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: J C Denton
   changes:
-  - message: Fixed the SSG-45 having a 1.1x damage multiplier instead of 1.25x.
-    type: Fix
-  id: 1739
-  time: '2025-05-20T03:12:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6472
-- author: J C Denton
-  changes:
   - message: 'LV-759 got updated with guns, P90s, SSG-45, HG 37-12s, Spearhead Revolvers
       and Incinerators: check out the Police Authority armory, Biogenomic lab as a
       whole and the streets north of it.'
@@ -4594,5 +4587,12 @@
   id: 2239
   time: '2025-08-29T04:42:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7567
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the green EMT coat being red instead of green.
+    type: Fix
+  id: 2240
+  time: '2025-08-29T04:44:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7625
 Name: RMC14
 Order: -1
