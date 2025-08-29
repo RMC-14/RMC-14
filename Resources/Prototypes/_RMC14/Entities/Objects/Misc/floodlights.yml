@@ -203,6 +203,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: Appearance
+  - type: Eye
 
 # Engineer Ship Light
 
