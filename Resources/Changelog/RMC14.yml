@@ -1,65 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to load weapons onto the Normandy.
-    type: Fix
-  - message: Fixed FORECON survivors only spawning on the first round that Chance's
-      Claim is chosen.
-    type: Fix
-  - message: Fixed custom cassettes being deathly quiet.
-    type: Fix
-  - message: Fixed Praetorian acid ball cooldown for real this time.
-    type: Fix
-  - message: Fixed skill examine sometimes showing some skills that are set to a value
-      of 0.
-    type: Fix
-  id: 1777
-  time: '2025-05-21T22:12:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6519
-- author: DrSmugleaf
-  changes:
-  - message: Fixed custom cassettes not being able to be paused.
-    type: Fix
-  id: 1778
-  time: '2025-05-21T22:56:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6520
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed survivors not spawning with a fireaxe as random gear.
-    type: Fix
-  id: 1779
-  time: '2025-06-01T10:20:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6578
-- author: noctyrnal
-  changes:
-  - message: Added the Two-Point Sling for PVE - A magnetic harness that offers benefits
-      when one handing a gun.
-    type: Add
-  id: 1780
-  time: '2025-06-01T10:21:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6591
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the pump shotgun only holding 9 shells instead of 10.
-    type: Fix
-  id: 1781
-  time: '2025-06-01T10:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6577
-- author: Vermidia
-  changes:
-  - message: Fixed using tail seize during melee cooldown not properly cancelling
-      the ability.
-    type: Fix
-  id: 1782
-  time: '2025-06-01T10:23:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6599
-- author: DummeHytteOst
-  changes:
-  - message: Fixed being able to attach a bipod to the Mar-50.
-    type: Fix
-  id: 1783
-  time: '2025-06-01T10:25:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6583
 - author: CyberTropic
   changes:
   - message: Added APC status lights.
@@ -4513,5 +4452,62 @@
   id: 2277
   time: '2025-08-30T02:26:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7607
+- author: BramvanZijp
+  changes:
+  - message: Added a Purple new player tag that SEA's and AGhosts will see for players
+      with under 1 hour of playtime as a job.
+    type: Add
+  id: 2278
+  time: '2025-08-30T03:30:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7585
+- author: PursuitInAshes
+  changes:
+  - message: XO now requires five hours of MP Department playtime. (0 Hrs -> 5 Hrs)
+    type: Tweak
+  id: 2279
+  time: '2025-08-30T03:30:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7075
+- author: noctyrnal
+  changes:
+  - message: SEAs now have patches in their equipment vendor.
+    type: Fix
+  - message: Added a patch for SEAs.
+    type: Add
+  id: 2280
+  time: '2025-08-30T03:31:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7595
+- author: Vixting
+  changes:
+  - message: Boiler bombard, tunnel creation, planting eggs, ravager eviscerate, and
+      praetorian acid ball now root the entity in place while they are being used,
+      preventing them from being moved by others to cancel their doafter.
+    type: Add
+  id: 2281
+  time: '2025-08-30T04:00:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6988
+- author: Elysium206
+  changes:
+  - message: Disabler's now have a melee stun function similar to Drive Stunning!
+    type: Add
+  id: 2282
+  time: '2025-08-30T04:01:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7363
+- author: Vixting
+  changes:
+  - message: Added live tacticalmap to dropship console
+    type: Add
+  id: 2283
+  time: '2025-08-30T04:40:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7017
+- author: monomethylhydrazine
+  changes:
+  - message: removed duplicate flashlight entry in XO vendor
+    type: Remove
+  - message: moved welding visors in XO vendor to their own subheading + made them
+      recommended
+    type: Tweak
+  id: 2284
+  time: '2025-08-30T10:02:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6741
 Name: RMC14
 Order: -1

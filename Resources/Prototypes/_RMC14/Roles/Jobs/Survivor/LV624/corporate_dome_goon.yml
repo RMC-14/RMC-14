@@ -3,9 +3,11 @@
   id: CMSurvivorLV624CorporateDomeGoon
   name: rmc-job-name-pmc-corporate-goon
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624CorporateDomeGoon
+  playTimeTracker: CMJobSurvivor
   spawnMenuRoleName: We-Ya Goon (Survivor Special)
   startingGear: RMCGearSurvivorGoon
+  icon: "RMCJobIconPMCGoonStandard"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,10 +44,6 @@
       state: green
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv_wy
-
-- type: playTimeTracker
-  id: CMJobSurvivorLV624CorporateDomeGoon
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
