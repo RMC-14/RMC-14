@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Timemaster99
-  changes:
-  - message: Fixed tactical compact nailguns not fitting into tool storages.
-    type: Fix
-  id: 1759
-  time: '2025-05-21T13:53:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6505
 - author: J C Denton
   changes:
   - message: PMC corpse spawners on Hybrisa Biogenom and Cave Camp, Solaris Lambda
@@ -4613,5 +4606,13 @@
   id: 2259
   time: '2025-08-30T00:04:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7499
+- author: NotInButIn
+  changes:
+  - message: Updated the UIs for the orbital cannon, tech tree, mortar, playtime stats,
+      dropship fabricator, and xenonid strain confirmation.
+    type: Tweak
+  id: 2260
+  time: '2025-08-30T00:07:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7042
 Name: RMC14
 Order: -1
