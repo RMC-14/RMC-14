@@ -1,35 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to load weapons onto the Normandy.
-    type: Fix
-  - message: Fixed FORECON survivors only spawning on the first round that Chance's
-      Claim is chosen.
-    type: Fix
-  - message: Fixed custom cassettes being deathly quiet.
-    type: Fix
-  - message: Fixed Praetorian acid ball cooldown for real this time.
-    type: Fix
-  - message: Fixed skill examine sometimes showing some skills that are set to a value
-      of 0.
-    type: Fix
-  id: 1777
-  time: '2025-05-21T22:12:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6519
-- author: DrSmugleaf
-  changes:
-  - message: Fixed custom cassettes not being able to be paused.
-    type: Fix
-  id: 1778
-  time: '2025-05-21T22:56:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6520
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed survivors not spawning with a fireaxe as random gear.
-    type: Fix
-  id: 1779
-  time: '2025-06-01T10:20:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6578
 - author: noctyrnal
   changes:
   - message: Added the Two-Point Sling for PVE - A magnetic harness that offers benefits
@@ -4513,5 +4482,29 @@
   id: 2277
   time: '2025-08-30T02:26:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7607
+- author: BramvanZijp
+  changes:
+  - message: Added a Purple new player tag that SEA's and AGhosts will see for players
+      with under 1 hour of playtime as a job.
+    type: Add
+  id: 2278
+  time: '2025-08-30T03:30:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7585
+- author: PursuitInAshes
+  changes:
+  - message: XO now requires five hours of MP Department playtime. (0 Hrs -> 5 Hrs)
+    type: Tweak
+  id: 2279
+  time: '2025-08-30T03:30:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7075
+- author: noctyrnal
+  changes:
+  - message: SEAs now have patches in their equipment vendor.
+    type: Fix
+  - message: Added a patch for SEAs.
+    type: Add
+  id: 2280
+  time: '2025-08-30T03:31:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7595
 Name: RMC14
 Order: -1
