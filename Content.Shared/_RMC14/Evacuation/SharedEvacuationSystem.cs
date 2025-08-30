@@ -308,39 +308,22 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var gridTransform = Transform(gridId);
         if (ent.Comp.MaxMobs is { } maxMobs)
         {
-            var mobs = 0;
+            var mobs = new HashSet<EntityUid>();
             var children = gridTransform.ChildEnumerator;
             while (children.MoveNext(out var uid))
             {
-                var mob = _mobStateQuery.HasComp(uid);
-                if (!mob)
+                if (_mobStateQuery.HasComp(uid))
                 {
-                    if (TryComp(uid, out ContainerManagerComponent? containerManager))
-                    {
-                        foreach (var container in _container.GetAllContainers(uid, containerManager))
-                        {
-                            if (container.ContainedEntities.Any(_mobStateQuery.HasComp))
-                            {
-                                mob = true;
-                                break;
-                            }
-                        }
-                    }
+                    mobs.Add(uid);
                 }
-
-                if (mob)
+                else if (TryComp(uid, out ContainerManagerComponent? containerManager))
                 {
-                    mobs++;
-
-                    if (mobs > maxMobs && ent.Comp.Mode != EvacuationComputerMode.Crashed)
+                    foreach (var container in _container.GetAllContainers(uid, containerManager))
                     {
-                        ent.Comp.Mode = EvacuationComputerMode.Crashed;
-                        _popup.PopupClient(Loc.GetString("rmc-evacuation-computer-overload"), ent, user, PopupType.LargeCaution);
-
-                        var time = _timing.CurTime;
-                        var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
-                        detonating.DetonateAt = time + ent.Comp.DetonateDelay;
-                        detonating.EjectAt = time + ent.Comp.EjectDelay;
+                        foreach (var mob in container.ContainedEntities.Where(_mobStateQuery.HasComp).ToList())
+                        {
+                            mobs.Add(mob);
+                        }
                     }
                 }
 
@@ -351,6 +334,18 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     Dirty(uid, evacuationDoor);
                     _door.TryClose(uid, door);
                 }
+            }
+
+            if (mobs.Count > maxMobs)
+            {
+                _popup.PopupPredicted(Loc.GetString("rmc-evacuation-computer-overload"), ent, user, PopupType.LargeCaution);
+                ent.Comp.Mode = EvacuationComputerMode.Crashed;
+                Dirty(ent);
+
+                var time = _timing.CurTime;
+                var detonating = EnsureComp<DetonatingEvacuationComputerComponent>(ent);
+                detonating.DetonateAt = time + ent.Comp.DetonateDelay;
+                detonating.EjectAt = time + ent.Comp.EjectDelay;
             }
         }
 
@@ -440,7 +435,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
         if (progress.Enabled)
         {
-            _marineAnnounce.AnnounceARES(
+            _marineAnnounce.AnnounceARESStaging(
                 null,
                 Loc.GetString("rmc-evacuation-start-announcement"),
                 startSound
@@ -450,7 +445,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         }
         else
         {
-            _marineAnnounce.AnnounceARES(
+            _marineAnnounce.AnnounceARESStaging(
                 null,
                 Loc.GetString("rmc-evacuation-cancelled-announcement"),
                 cancelSound
@@ -527,7 +522,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 }
 
                 areas.Append(Loc.GetString("rmc-evacuation-progress-announcement"));
-                _marineAnnounce.AnnounceARES(null, areas.ToString());
+                _marineAnnounce.AnnounceARESStaging(null, areas.ToString());
             }
 
             if (progress.NextUpdate > time)
@@ -550,7 +545,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 if (progress.LastPower.TryGetValue(areaId, out var lastPower) &&
                     lastPower != powered)
                 {
-                    _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-evacuation-goal-percents", ("area", areaId), ("powered", powered)));
+                    _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-evacuation-goal-percents", ("area", areaId), ("powered", powered)));
                 }
 
                 progress.LastPower[areaId] = powered;
@@ -595,7 +590,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
                 if (progress.Progress >= progress.Required)
                 {
-                    _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-evacuation-goal-100-percent"));
+                    _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-evacuation-goal-100-percent"));
                     _xenoAnnounce.AnnounceAll(default, Loc.GetString("rmc-xeno-evacuation-goal-100-percent"));
                     SetPumpAppearance(EvacuationPumpVisuals.Full);
                     var ev = new EvacuationProgressEvent(100);
@@ -603,7 +598,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 }
                 else if (progress.Progress >= progress.Required * 0.75)
                 {
-                    _marineAnnounce.AnnounceARES(null, MarinePercentageString(75));
+                    _marineAnnounce.AnnounceARESStaging(null, MarinePercentageString(75));
 
                     var xenoAnnounce = Loc.GetString("rmc-xeno-evacuation-goal-75-percent");
                     if (onAreas.Length > 0)
@@ -617,7 +612,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 }
                 else if (progress.Progress >= progress.Required * 0.5)
                 {
-                    _marineAnnounce.AnnounceARES(null, MarinePercentageString(50));
+                    _marineAnnounce.AnnounceARESStaging(null, MarinePercentageString(50));
 
                     var xenoAnnounce = Loc.GetString("rmc-xeno-evacuation-goal-50-percent");
                     if (onAreas.Length > 0)
@@ -636,7 +631,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     else
                         marineAnnounce += Loc.GetString("rmc-evacuation-restore-power-areas", ("areas", offAreas));
 
-                    _marineAnnounce.AnnounceARES(null, marineAnnounce);
+                    _marineAnnounce.AnnounceARESStaging(null, marineAnnounce);
 
                     var xenoAnnounce = Loc.GetString("rmc-xeno-evacuation-goal-25-percent");
                     if (onAreas.Length > 0)
@@ -694,7 +689,9 @@ public abstract class SharedEvacuationSystem : EntitySystem
                         var evacuationDoor = EnsureComp<EvacuationDoorComponent>(child);
                         evacuationDoor.Locked = false;
                         Dirty(child, evacuationDoor);
-                        _door.TryOpenAndBolt(child, door);
+
+                        // Bypass the checks in TryOpenAndBolt:
+                        _door.SetState(child, DoorState.Emagging, door);
                     }
                 }
             }

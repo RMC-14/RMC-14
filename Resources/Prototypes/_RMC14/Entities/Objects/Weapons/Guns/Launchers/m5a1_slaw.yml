@@ -1,0 +1,76 @@
+- type: entity
+  parent: RMCBaseWeaponLauncher
+  id: RMCWeaponLauncherDisposable
+  name: M5A1 SLAW
+  description: The M5A1 SLAW is a lightweight one-shot anti-armor weapon capable of engaging enemy vehicles at ranges up to 1,000m. Fully disposable, the rocket's launcher is discarded after firing. When stowed, the SLAW system consists of a watertight carbon-fiber composite blast tube, inside of which is an aluminum launch tube containing the missile. The weapon is fired by pushing a charge button on the trigger grip. It is sighted and fired from the shoulder.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
+    layers:
+      - state: icon
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
+  - type: BallisticAmmoProvider
+    proto: RMCRocket84mmAntiArmor
+    cycleable: false
+  - type: RMCFoldableGun
+    foldDelay: 2
+    foldText: rmc-gun-foldable-launcher-fold-self
+    foldTextOthers: rmc-gun-foldable-launcher-fold-others
+    finishText: rmc-gun-foldable-launcher-fold-finish-self
+    finishTextOthers: rmc-gun-foldable-launcher-fold-finish-others
+    toggleFoldSound:
+      path: /Audio/_RMC14/Weapons/Handling/component_pickup.ogg
+      params:
+        variation: 0.2
+    foldedEntity: RMCWeaponLauncherDisposableFolded
+
+- type: entity
+  parent: [BaseItem, RMCBaseMeleeWeapon]
+  id: RMCWeaponLauncherDisposableFolded
+  name: M5A1 SLAW
+  description: An M5A1 SLAW Anti-Tank RPG, compacted for easier storage.
+  suffix: Folded
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
+    state: icon-folded
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
+    equippedPrefix: folded
+    quickEquip: false
+    slots:
+    - suitStorage
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
+    heldPrefix: folded
+    size: Normal
+  - type: RMCFoldableGun
+    foldDelay: 4
+    foldText: rmc-gun-foldable-launcher-unfold-self
+    foldTextOthers: rmc-gun-foldable-launcher-unfold-others
+    finishText: rmc-gun-foldable-launcher-unfold-finish-self
+    finishTextOthers: rmc-gun-foldable-launcher-unfold-finish-others
+    toggleFoldSound:
+      path: /Audio/_RMC14/Weapons/Handling/component_pickup.ogg
+      params:
+        variation: 0.2
+    foldedEntity: RMCWeaponLauncherDisposable
+    examineText: rmc-gun-foldable-launcher-examine-unfold
+    onActivate: true
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipGun
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCRustleGun
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 5
+    soundHit:
+      collection: GenericHit

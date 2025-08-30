@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMAlamoDoor
+  parent: RMCDropshipDoorBase
   id: CMNormandyDoor
   name: normandy crew hatch
   components:
@@ -7,33 +7,36 @@
     sprite: _RMC14/Structures/Dropships/normandy.rsi
 
 - type: entity
-  parent: CMAlamoDoorAft
+  parent: RMCDropshipDoorAftBase
   id: CMNormandyDoorAft
-  suffix: Aft
+  name: normandy cargo door
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    sprite: _RMC14/Structures/Dropships/Airlocks/normandy_cargo.rsi
 
 - type: entity
-  parent: CMAlamoDoorPort
+  parent: RMCDropshipDoorPortBase
   id: CMNormandyDoorPort
-  suffix: Port
+  name: normandy crew hatch
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    sprite: _RMC14/Structures/Dropships/Airlocks/normandy_doubledoor.rsi
 
 - type: entity
-  parent: CMAlamoDoorStarboard
+  parent: RMCDropshipDoorStarboardBase
   id: CMNormandyDoorStarboard
-  suffix: Starboard
+  name: normandy crew hatch
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    sprite: _RMC14/Structures/Dropships/Airlocks/normandy_doubledoor.rsi
 
 - type: entity
-  parent: CMAlamoCockpit
+  parent: RMCDropshipCockpitBase
   id: CMNormandyCockpit
   suffix: Normandy
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/normandy.rsi
+  - type: RemoveComponents
+    components:
+    - type: DoorBolt

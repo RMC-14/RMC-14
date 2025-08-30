@@ -201,7 +201,8 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    state: green
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
   - type: Transform
     anchored: true
   - type: Physics

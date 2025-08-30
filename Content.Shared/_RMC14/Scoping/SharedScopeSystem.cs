@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
@@ -29,6 +29,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -238,9 +239,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (!CanScopePopup(scope, user))
             return null;
 
-        // TODO RMC14 make this work properly with rotations
-        var xform = Transform(user);
-        var cardinalDir = xform.LocalRotation.GetCardinalDir();
+        var cardinalDir = _transform.GetWorldRotation(user).GetCardinalDir();
         var ev = new ScopeDoAfterEvent(cardinalDir);
         var zoomLevel = GetCurrentZoomLevel(scope);
         var doAfter = new DoAfterArgs(EntityManager, user, zoomLevel.DoAfter, ev, scope, null, scope)

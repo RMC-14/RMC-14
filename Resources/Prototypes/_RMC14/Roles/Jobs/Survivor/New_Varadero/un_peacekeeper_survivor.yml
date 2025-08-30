@@ -3,7 +3,7 @@
   id: CMSurvivorUNPeacekeeper
   name: cm-job-name-survivor-un-peacekeeper
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorUNPeacekeeper
+  playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorUNPeacekeeper
   spawnMenuRoleName: UN Peacekeeper (NV Survivor)
   special:
@@ -21,7 +21,6 @@
         RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 2
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -30,6 +29,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetUNPeacekeeper
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
@@ -50,10 +50,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorUNPeacekeeper
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetSecurity

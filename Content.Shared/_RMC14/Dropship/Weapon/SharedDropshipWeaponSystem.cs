@@ -30,6 +30,7 @@ using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -68,6 +69,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly NameModifierSystem _name = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -102,8 +104,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
         SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
 
-        SubscribeLocalEvent<ActiveFlareSignalComponent, ExaminedEvent>(OnActiveFlareExamined);
-
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, MapInitEvent>(OnTerminalMapInit);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIOpenedEvent>(OnTerminalBUIOpened);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIClosedEvent>(OnTerminalBUIClosed);
@@ -111,6 +111,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipTargetComponent, MapInitEvent>(OnDropshipTargetMapInit);
         SubscribeLocalEvent<DropshipTargetComponent, ComponentRemove>(OnDropshipTargetRemove);
         SubscribeLocalEvent<DropshipTargetComponent, EntityTerminatingEvent>(OnDropshipTargetRemove);
+        SubscribeLocalEvent<DropshipTargetComponent, ExaminedEvent>(OnActiveFlareExamined);
+
+        SubscribeLocalEvent<ActiveFlareSignalComponent, RefreshNameModifiersEvent>(OnRefreshNameModifier);
 
         SubscribeLocalEvent<DropshipTargetEyeComponent, ComponentRemove>(OnDropshipTargetEyeRemove);
         SubscribeLocalEvent<DropshipTargetEyeComponent, EntityTerminatingEvent>(OnDropshipTargetEyeRemove);
@@ -250,9 +253,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         MakeDropshipTarget(ent, abbreviation);
+        _physics.SetBodyType(ent, BodyType.Static);
     }
 
-    private void OnActiveFlareExamined(Entity<ActiveFlareSignalComponent> ent, ref ExaminedEvent args)
+    private void OnActiveFlareExamined(Entity<DropshipTargetComponent> ent, ref ExaminedEvent args)
     {
         if (ent.Comp.Abbreviation is { } id)
             args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine-id", ("id", id)));
@@ -582,6 +586,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
         _appearance.SetData(ammo, DropshipAmmoVisuals.Fill, ammo.Comp.Rounds);
+        _powerloader.SyncAppearance(Transform(weapon.Value).ParentUid);
         Dirty(ammo);
 
         _audio.PlayPvs(ammo.Comp.SoundCockpit, weapon.Value);
@@ -607,7 +612,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundMarker = ammo.Comp.SoundMarker,
             SoundGround = ammo.Comp.SoundGround,
             SoundImpact = ammo.Comp.SoundImpact,
-            ImpactEffect = ammo.Comp.ImpactEffect,
+            ImpactEffects = ammo.Comp.ImpactEffects,
             Explosion = ammo.Comp.Explosion,
             Fire = ammo.Comp.Fire,
             SoundEveryShots = ammo.Comp.SoundEveryShots,
@@ -695,7 +700,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsTargetsNext(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsTargetsNextMsg args)
     {
-        ent.Comp.TargetsPage = Math.Min(ent.Comp.Targets.Count % 5, ent.Comp.TargetsPage + 1);
+        ent.Comp.TargetsPage = Math.Min(ent.Comp.Targets.Count / 5, ent.Comp.TargetsPage + 1);
         Dirty(ent);
         RefreshWeaponsUI(ent);
     }
@@ -836,14 +841,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
         }
 
+        if (!IsValidTarget(ent.Comp.Target.Value))
+        {
+            RemovePvsActors(ent);
+            SetTarget(ent, null);
+            Dirty(ent);
+            return;
+        }
+
         var coordinates = _transform.GetMoverCoordinates(ent.Comp.Target.Value);
 
         // Can't drop underground
         if (!CasDebug)
         {
-            if(!_area.CanCAS(coordinates) ||
-               !_area.CanFulton(coordinates) ||
-               !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)))
+            if(!_area.CanCAS(coordinates))
             {
                 if (_net.IsClient)
                 {
@@ -879,6 +890,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             RemComp<ActiveParaDropComponent>(dropship);
         }
         RefreshWeaponsUI(ent);
+    }
+
+    private void OnRefreshNameModifier(Entity<ActiveFlareSignalComponent> ent, ref RefreshNameModifiersEvent args)
+    {
+        if (ent.Comp.Abbreviation == null)
+            return;
+
+        args.AddModifier(ent.Comp.Abbreviation);
     }
 
     private void UpdateTarget(Entity<DropshipTerminalWeaponsComponent> ent, EntityUid target)
@@ -1026,6 +1045,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         AddComp(ent, target, true);
         Dirty(ent, target);
 
+        _name.RefreshNameModifiers(ent.Owner);
         _physics.SetBodyType(ent, BodyType.Static);
 
         return true;
@@ -1119,8 +1139,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                     spread = _random.NextVector2(-flight.BulletSpread, flight.BulletSpread + 1);
 
                 var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
-                if (flight.ImpactEffect != null)
-                    Spawn(flight.ImpactEffect, target, rotation: _random.NextAngle());
+                foreach (var effect in flight.ImpactEffects)
+                {
+                    Spawn(effect, target, rotation: _random.NextAngle());
+                }
 
                 if (flight.Damage != null)
                 {

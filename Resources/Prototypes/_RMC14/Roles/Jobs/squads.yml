@@ -26,7 +26,7 @@
     accessLevels:
     - CMAccessAlpha
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_alpha
 
 - type: entity
@@ -41,7 +41,7 @@
     accessLevels:
     - CMAccessBravo
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_bravo
 
 - type: entity
@@ -56,7 +56,7 @@
     accessLevels:
     - CMAccessCharlie
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_charlie
 
 - type: entity
@@ -71,7 +71,7 @@
     accessLevels:
     - CMAccessDelta
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_delta
 
 - type: entity
@@ -88,7 +88,7 @@
     - CMAccessCharlie
     - CMAccessDelta
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_foxtrot
     canSupplyDrop: false
 
@@ -106,7 +106,7 @@
     - CMAccessCharlie
     - CMAccessDelta
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_echo
 
 - type: entity
@@ -121,7 +121,7 @@
     - Armor
     radio: MarineIntel
     minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
+     sprite: /Textures/_RMC14/Interface/map_blips.rsi
      state: background_intel
     canSupplyDrop: false
     maxRoles:
@@ -155,7 +155,7 @@
     - Gloves
     radio: SPP
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_spp
     canSupplyDrop: false
     group: SPP
@@ -180,7 +180,7 @@
     - Gloves
     radio: WEYA
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_pmc
     canSupplyDrop: false
     group: WeYa
@@ -205,7 +205,7 @@
     - Gloves
     radio: Colony
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_free
     canSupplyDrop: false
     group: Freelancer
@@ -230,7 +230,7 @@
     - Gloves
     radio: TSE
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_twe
     canSupplyDrop: false
     group: Royal Marines
@@ -255,7 +255,7 @@
     - Gloves
     radio: Provost
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_twe
     canSupplyDrop: false
     group: Provost
@@ -277,7 +277,7 @@
     - Gloves
     radio: MarineSOF
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_forecon
     canSupplyDrop: false
     group: FORECON
@@ -301,7 +301,7 @@
     radio: MarineSOF
     accessLevels: []
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_sof
     group: SOF
     leaderIcon:
@@ -325,10 +325,30 @@
     - Gloves
     radio: Colony
     minimapBackground:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_spp
     canSupplyDrop: false
     group: CLF
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: clf_sl
+
+- type: entity
+  parent: SquadBase
+  id: SquadUnassigned
+  name: Unassigned
+  components:
+  - type: SquadTeam
+    color: "#000000"
+    radio: MarineCommon
+    accessLevels: [] # Get them assigned before gearing up.
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background
+    canSupplyDrop: false
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    maxRoles: {}

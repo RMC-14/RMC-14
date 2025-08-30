@@ -21,6 +21,7 @@ namespace Content.Client._RMC14.Overwatch;
 [UsedImplicitly]
 public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 {
+    [Dependency] private readonly ILocalizationManager _localization = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private const string GreenColor = "#229132";
@@ -237,12 +238,12 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 if (EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch))
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, overwatch.CanOrbitalBombardment);
-                    monitor.MessageSquadContainer.Visible = overwatch.CanMessageSquad;
+                    monitor.MessageSquadButton.Visible = overwatch.CanMessageSquad;
                 }
                 else
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, false);
-                    monitor.MessageSquadContainer.Visible = false;
+                    monitor.MessageSquadButton.Visible = false;
                 }
 
                 _squadViews[squad.Id] = monitor;
@@ -279,10 +280,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
             foreach (var marine in marines)
             {
-                var roleName = Loc.GetString("rmc-overwatch-squad-view-role-none");
+                var roleName = "None";
+                string? rankName = null;
                 if (marine.Role != null)
                 {
-                    if (_prototypes.TryIndex(marine.Role, out var job))
+                    if (marine.RoleOverride is { } roleOverride && _localization.TryGetString(roleOverride, out var localizedName))
+                        roleName = localizedName;
+                    else if (_prototypes.TryIndex(marine.Role, out var job))
                         roleName = job.LocalizedName;
 
                     var role = roles.GetOrNew(marine.Role.Value, out var present);
@@ -306,7 +310,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     roles[marine.Role.Value] = role;
                 }
 
-                var name = marine.Name;
+                if (marine.Rank != null)
+                {
+                    if (_prototypes.TryIndex(marine.Rank, out var rank))
+                        rankName = rank.Prefix;
+                }
+
+                var name = rankName != null ? $"{rankName} {marine.Name}" : marine.Name;
                 if (!squadRows.TryGetValue(marine.Id, out var row))
                 {
                     var watchButton = new Button
@@ -487,10 +497,24 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
             rolesList.Sort((a, b) => a.Priority.CompareTo(b.Priority));
 
+            var i = 0;
+            BoxContainer? currentRowContainer = null;
+
             foreach (var (roleId, deployed, alive, all, displayName, _) in rolesList)
             {
                 if (!_prototypes.TryIndex(roleId, out JobPrototype? role))
                     continue;
+
+                if (i % 2 == 0)
+                {
+                    currentRowContainer = new BoxContainer
+                    {
+                        Orientation = LayoutOrientation.Horizontal,
+                        HorizontalExpand = true,
+                        SeparationOverride = 5
+                    };
+                    monitor.RolesContainer.AddChild(currentRowContainer);
+                }
 
                 string roleDeployed;
                 string roleAlive;
@@ -527,19 +551,26 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 aliveLabel.SetMarkupPermissive(roleAlive);
 
                 var roleNamePanel = CreatePanel(thickness: new Thickness(0, 0, 0, 1));
+                var roleNameLabel = new RichTextLabel
+                {
+                    Margin = new Thickness(0, 3, 0, 3)
+                };
+                roleNameLabel.SetMarkupPermissive($"[bold]{role.OverwatchRoleName}[/bold]");
+
                 roleNamePanel.AddChild(new BoxContainer
                 {
                     Orientation = LayoutOrientation.Horizontal,
                     Children =
                     {
                         new Control { HorizontalExpand = true },
-                        new Label { Text = role.OverwatchRoleName },
+                        roleNameLabel,
                         new Control { HorizontalExpand = true },
                     },
                     Margin = margin,
                 });
 
                 var panel = CreatePanel();
+                panel.HorizontalExpand = true;
                 panel.AddChild(new BoxContainer
                 {
                     Orientation = LayoutOrientation.Vertical,
@@ -569,7 +600,8 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         },
                     },
                 });
-                monitor.RolesContainer.AddChild(panel);
+                i++;
+                currentRowContainer?.AddChild(panel);
             }
 
             var totalAlive = Loc.GetString("rmc-overwatch-squad-view-role-alive", ("count", allAlive));
@@ -577,18 +609,27 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             totalAliveLabel.SetMarkupPermissive(totalAlive);
 
             var totalPanel = CreatePanel();
+            totalPanel.HorizontalExpand = true;
             var totalLivingPanel = CreatePanel(thickness: new Thickness(0, 0, 0, 1));
+
+            var totalLivingLabel = new RichTextLabel();
+            totalLivingLabel.SetMarkupPermissive(Loc.GetString("rmc-overwatch-squad-view-total-living-label"));
+
             totalLivingPanel.AddChild(new BoxContainer
             {
                 Orientation = LayoutOrientation.Horizontal,
                 Children =
                 {
                     new Control { HorizontalExpand = true },
-                    new Label { Text = Loc.GetString("rmc-overwatch-squad-view-total-living-label") },
+                    totalLivingLabel,
                     new Control { HorizontalExpand = true },
                 },
                 Margin = margin,
             });
+
+            var totalCountLabel = new RichTextLabel();
+            totalCountLabel.SetMarkupPermissive(Loc.GetString("rmc-overwatch-squad-view-marines-total", ("count", marines.Count)));
+
             totalPanel.AddChild(new BoxContainer
             {
                 Orientation = LayoutOrientation.Vertical,
@@ -602,7 +643,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         Children =
                         {
                             new Control { HorizontalExpand = true },
-                            new Label { Text = Loc.GetString("rmc-overwatch-squad-view-marines-total", ("count", marines.Count)) },
+                            totalCountLabel,
                             new Control { HorizontalExpand = true },
                         },
                     },

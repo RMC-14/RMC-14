@@ -29,6 +29,7 @@
     state: Zombie
   - type: CorpseSpawner
     spawn: RMCZombifiedColonist
+    skipLimit: true
 
 # Civilian
 
@@ -98,7 +99,7 @@
 
 - type: randomHumanoidSettings
   parent: RMCZombifiedCorpse
-  id: RMCZombifiedLiaison
+  id: RMCZombifiedGoon
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseWeYaGoon ]
@@ -113,7 +114,7 @@
 
 - type: randomHumanoidSettings
   parent: RMCZombifiedCorpse
-  id: RMCZombifiedWeYaGoon
+  id: RMCZombifiedLiaison
   components:
   - type: Loadout
     prototypes:
@@ -128,7 +129,7 @@
   suffix: WeYa Goon
   components:
   - type: CorpseSpawner
-    spawn: RMCZombifiedWeYaGoon
+    spawn: RMCZombifiedGoon
 
 - type: randomHumanoidSettings
   parent: RMCZombifiedCorpse

@@ -32,14 +32,17 @@
       skills:
         RMCSkillConstruction: 1
         RMCSkillDomestics: 2
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 1
         RMCSkillFirearms: 2
         RMCSkillFireman: 1
+    - type: CMVendorUser
+      id: CMMessTech
     - type: JobPrefix
       prefix: cm-job-prefix-messtech
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mst
 
 - type: startingGear
