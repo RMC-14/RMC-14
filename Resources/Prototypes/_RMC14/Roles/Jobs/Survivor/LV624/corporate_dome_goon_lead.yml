@@ -12,7 +12,6 @@
     components:
     - type: Skills
       skills:
-        RMCSkillConstruction: 1
         RMCSkillMedical: 1
         RMCSkillEndurance: 2
         RMCSkillCqc: 1
