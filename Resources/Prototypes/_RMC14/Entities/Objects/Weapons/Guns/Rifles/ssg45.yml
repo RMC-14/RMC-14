@@ -22,8 +22,6 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
-  - type: RMCLoreExaminable
-    content: rmc-lore-examinable-ssg-45
   - type: Gun
     selectedMode: FullAuto
     availableModes:
