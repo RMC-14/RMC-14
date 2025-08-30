@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Tyzemol
-  changes:
-  - message: Fixed Berserker Ravager Apprehend bonus movement speed being removed
-      after an attack instead of lasting for the full 5 seconds.
-    type: Fix
-  id: 1755
-  time: '2025-05-21T04:03:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6422
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed weeds being able to spread onto fire tiles.
@@ -4613,5 +4605,12 @@
   id: 2255
   time: '2025-08-29T23:48:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7341
+- author: J C Denton
+  changes:
+  - message: Baseball bats now fit into bags.
+    type: Tweak
+  id: 2256
+  time: '2025-08-30T00:01:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7721
 Name: RMC14
 Order: -1
