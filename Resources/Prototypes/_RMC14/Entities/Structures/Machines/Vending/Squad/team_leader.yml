@@ -41,6 +41,8 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
+      - id: CMMagazineRifleM4SPRExt
+        points: 10
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -51,25 +53,29 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
+      - id: RMCMagazinePistolM13Drum
+        points: 15
+      # - id: RMCSpeedLoader44Heavy
+      #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
+      # - id: RMCMagazinePistolM1984HP
+      #   points: 5
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
         points: 10
-    #- id: CMM44HeavySpeedLoader
-    #  points: 10
-    #- id: CMM1984HPMagazine
-    #  points: 5
-    #- id: CMM1984APMagazine
-    #  points: 5
     - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
         points: 10
       - id: RMCGunCasePistolSmart
         points: 15
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 30
     - name: Armors
       entries:
@@ -86,14 +92,16 @@
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         points: 15
-      #- id: RMCWeldingGoggles
-      #  points: 3
+      - id: RMCWeldingGoggles
+        points: 3
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
         name: autoinjector pouch (Full)
         points: 15
       - id: CMHandsInsulated
+        points: 3
+      - id: CMHandsBlackInsulated
         points: 3
     - name: Engineering Supplies
       entries:
@@ -167,6 +175,11 @@
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
       - id: RMCVendorBundleCrewFireteamLeader
+    - name: Gloves
+      choices: { CMHands: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -174,10 +187,11 @@
       - id: CMBeltMarine
         recommended: true
       - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterM13
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
@@ -211,10 +225,14 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbing
-      - id: CMWebbingPouch
+      - id: RMCWebbingBlackSmall
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }

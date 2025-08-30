@@ -12,9 +12,11 @@
   accessGroups:
   - Colonist
   - HospitalCorpsman
+  spawnMenuRoleName: SPP Squad Leader
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCTrackable
     - type: NpcFactionMember
       factions:
       - SPP
@@ -76,6 +78,10 @@
     rules: rmc-ghost-role-information-spp-rules
     reregister: false
     job: RMCSPPLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
@@ -108,7 +114,7 @@
     shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponRifleType71
     id: RMCIDSPP
-    belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
+    belt: RMCBeltHolsterRevolverZHNK72Fill
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchFuelTankFilledExtinguisher

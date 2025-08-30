@@ -10,6 +10,27 @@
   id: CMFloorPlating
   name: tiles-cm-plating
   sprite: /Textures/_RMC14/Tiles/floors/plating.png
+  friction: 1
+
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingDamage1
+  sprite: /Textures/_RMC14/Tiles/floors/platingdmg1.png
+
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingDamage2
+  sprite: /Textures/_RMC14/Tiles/floors/platingdmg2.png
+
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingDamage3
+  sprite: /Textures/_RMC14/Tiles/floors/platingdmg3.png
+
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingScorched
+  sprite: /Textures/_RMC14/Tiles/floors/panelscorched.png
 
 - type: tile
   parent: CMFloorStripedBase
@@ -55,13 +76,16 @@
   parent: CMFloorStripedBase
   id: CMFloorPlatingBot
   sprite: /Textures/_RMC14/Tiles/floors/platebot.png
+  friction: 1
 
 - type: tile
   parent: CMFloorStripedBase
   id: CMFloorPlatingBotCyan
   sprite: /Textures/_RMC14/Tiles/floors/platebotc.png
+  friction: 1
 
 - type: tile
   parent: CMFloorStripedBase
   id: CMFloorPlatingWarnplate
   sprite: /Textures/_RMC14/Tiles/floors/warnplate_singular.png
+  friction: 1

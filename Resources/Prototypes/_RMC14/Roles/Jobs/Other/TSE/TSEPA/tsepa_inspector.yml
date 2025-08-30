@@ -11,7 +11,7 @@
   icon: "RMCJobIconTSEPAInspector"
   joinNotifyCrew: false
   accessGroups:
-  - ColonistSec
+  - ColonistTSEPAInspector
   special:
   - !type:AddComponentSpecial
     components:
@@ -35,26 +35,20 @@
     - type: CommandAccent
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-inspector
+    - type: RMCTrackable
   hidden: true
 
 - type: startingGear
   id: RMCGearTSEPAInspector
   equipment:
-    head: RMCHeadBeretTSEPA
+    head: RMCHeadCapTSEPAPeaked
     ears: RMCHeadsetTSEPA
     jumpsuit: RMCJumpsuitTSEPA
-    outerClothing: RMCArmourM4TSEPAChief
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
-    suitstorage: WeaponRifleL83A2
-    id: RMCIDCardTSEPA
+    id: RMCIDCardTSEPAGold
     belt: RMCBeltHolsterRevolverSpearheadFill
     back: RMCSatchelTSEPA
-  storage:
-    back:
-    - RMCMagazineRifleL83A2
-    - RMCMagazineRifleL83A2
-    - RMCMagazineRifleL83A2AP
 
 - type: entity
   parent: CMSpawnPointJobBase

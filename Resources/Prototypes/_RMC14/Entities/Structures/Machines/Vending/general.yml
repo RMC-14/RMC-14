@@ -18,23 +18,23 @@
       - id: RMCCassettePlayer
         amount: 50
       - id: RMCCassetteTapeWigWoo1
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeMendax
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeNighty
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeGoodShowOldChap
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeRedQwesta
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeBolgarich
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeQwertyquerty
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapePigeonBeans
-        amount: 15
+        amount: 10
       - id: RMCCassetteTapeCustom
-        amount: 30
+        amount: 20
     - name: Cards
       entries: []
     - name: Other
@@ -44,4 +44,40 @@
       - id: CMPen
         amount: 10
       - id: d20Dice
+        amount: 10
+    - name: Magazines
+      entries:
+      - id: RMCMagazineBootsN160
+        amount: 10
+      - id: RMCMagazineBootsN07
+        amount: 10
+      - id: RMCMagazineBootsN45
+        amount: 10
+      - id: RMCMagazineBootsN54
+        amount: 10
+      - id: RMCMagazineBootsN55
+        amount: 10
+      - id: RMCMagazineBootsN58
+        amount: 10
+      - id: RMCMagazineBootsN70
+        amount: 10
+      - id: RMCMagazineBootsN113
+        amount: 10
+      - id: RMCMagazineBootsN117
+        amount: 10
+      - id: RMCMagazineBootsN120
+        amount: 10
+      - id: RMCMagazineBootsN125
+        amount: 10
+      - id: RMCMagazineBootsN131
+        amount: 10
+      - id: RMCMagazineBootsN150
+        amount: 10
+      - id: RMCMagazineBootsN189
+        amount: 10
+      - id: RMCMagazineWeYaOrrery
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN175
+        amount: 10
+      - id: RMCMagazineWeYaOrreryN184
         amount: 10

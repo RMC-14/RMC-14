@@ -1,15 +1,17 @@
 using System.Globalization;
 using Content.Client._RMC14.Medical.HUD;
+using Content.Client.Atmos.Rotting;
 using Content.Client.Message;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Medical.HUD;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.HUD.Systems;
 using Content.Shared._RMC14.Medical.Scanner;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -40,8 +42,9 @@ public sealed class HealthScannerBui : BoundUserInterface
     private readonly ShowHolocardIconsSystem _holocardIcons;
     private readonly SkillsSystem _skills;
     private readonly SharedWoundsSystem _wounds;
-    private readonly SharedRottingSystem _rot;
+    private readonly RMCUnrevivableSystem _unrevivable;
     private readonly MobStateSystem _mob;
+    private readonly RottingSystem _rot;
 
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> BloodPackSkill = new() { ["RMCSkillSurgery"] = 1 };
     private Dictionary<EntProtoId<SkillDefinitionComponent>, int> DefibSkill = new() { ["RMCSkillMedical"] = 2 };
@@ -52,8 +55,9 @@ public sealed class HealthScannerBui : BoundUserInterface
         _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
         _skills = _entities.System<SkillsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
-        _rot = _entities.System<SharedRottingSystem>();
+        _unrevivable = _entities.System<RMCUnrevivableSystem>();
         _mob = _entities.System<MobStateSystem>();
+        _rot = _entities.System<RottingSystem>();
     }
 
     protected override void Open()
@@ -114,8 +118,9 @@ public sealed class HealthScannerBui : BoundUserInterface
             _window.HealthBar.MinValue = 0;
             _window.HealthBar.MaxValue = 100;
 
-            if (_entities.HasComponent<VictimBurstComponent>(target) || _rot.IsRotten(target) ||
-                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target) && _mob.IsDead(target))
+            if (_mob.IsDead(target) && (_entities.HasComponent<VictimBurstComponent>(target) ||
+                _rot.IsRotten(target) || _unrevivable.IsUnrevivable(target) ||
+                _entities.HasComponent<CMDefibrillatorBlockedComponent>(target)))
             {
                 isPermaDead = true;
                 _window.HealthBar.Value = 100;
@@ -177,7 +182,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         {
             foreach (var reagent in uiState.Chemicals.Contents)
             {
-                if (!_prototype.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? prototype))
+                if (!_prototype.TryIndexReagent(reagent.Reagent.Prototype, out ReagentPrototype? prototype))
                     continue;
 
                 if (prototype.Unknown)

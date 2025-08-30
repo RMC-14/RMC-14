@@ -30,8 +30,8 @@
     baseFireRate: 1.25
     burstScatterMult: 5
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplier: 1.35
+    accuracyMultiplierUnwielded: 0.35
   - type: UniqueAction
   - type: BreechLoaded
     needOpenClose: true
@@ -130,6 +130,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: RMCBulletRifleHunting
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

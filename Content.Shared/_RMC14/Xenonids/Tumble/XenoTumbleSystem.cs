@@ -1,6 +1,8 @@
-﻿using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using System.Numerics;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
@@ -10,6 +12,7 @@ using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Tumble;
@@ -21,14 +24,17 @@ public sealed class XenoTumbleSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -111,15 +117,14 @@ public sealed class XenoTumbleSystem : EntitySystem
         if (_net.IsServer)
             _stun.TryParalyze(args.Target, xeno.Comp.StunTime, true);
 
+        StopTumble(xeno);
+
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(args.Target);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.ImpactRange;
-        _throwing.TryThrow(args.Target, diff, 10);
+        _sizeStun.KnockBack(args.Target, origin, xeno.Comp.ImpactRange, xeno.Comp.ImpactRange, 10);
 
         _damageable.TryChangeDamage(
             args.Target,
-            xeno.Comp.Damage,
+            _xeno.TryApplyXenoSlashDamageMultiplier(args.Target, xeno.Comp.Damage),
             origin: xeno,
             tool: xeno,
             armorPiercing: xeno.Comp.ArmorPiercing
@@ -133,5 +138,14 @@ public sealed class XenoTumbleSystem : EntitySystem
 
         xeno.Comp.Target = null;
         Dirty(xeno);
+    }
+
+    private void StopTumble(EntityUid xeno)
+    {
+        if (_physicsQuery.TryGetComponent(xeno, out var physics))
+        {
+            _physics.SetLinearVelocity(xeno, Vector2.Zero, body: physics);
+            _physics.SetBodyStatus(xeno, physics, BodyStatus.OnGround);
+        }
     }
 }

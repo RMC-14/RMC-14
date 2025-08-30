@@ -32,10 +32,14 @@
 
 - type: entity
   abstract: true
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetIconsTSE
   id: RMCHeadsetTSEAbstract
   components:
   - type: GrantSquadLeaderTracker
+    defaultMode: InspectorTSEPA
+    trackerModes:
+    - InspectorTSEPA
+    - SeniorConstableTSEPA
   - type: GrantTacMapAlert
 
 - type: entity

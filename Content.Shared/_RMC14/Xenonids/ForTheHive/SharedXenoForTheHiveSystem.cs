@@ -1,26 +1,27 @@
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Vents;
+using Content.Shared._RMC14.Xenonids.Acid;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Chat;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
+using Content.Shared.Damage;
+using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
-using Robust.Shared.Timing;
-using Content.Shared.Damage;
-using Content.Shared._RMC14.Xenonids.Acid;
-using Robust.Shared.Map.Components;
-using Content.Shared.Interaction;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Robust.Shared.Map;
-using Content.Shared.Movement.Systems;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.ForTheHive;
 
@@ -59,6 +60,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
         SubscribeLocalEvent<ActiveForTheHiveComponent, ComponentRemove>(OnForTheHiveGone);
 
         SubscribeLocalEvent<ActiveForTheHiveComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
+        SubscribeLocalEvent<ActiveForTheHiveComponent, VentEnterAttemptEvent>(OnVentCrawlAttempt);
     }
 
 
@@ -217,7 +219,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                         var damage = ((burnRange - distance) * maxBurnDamage) / burnRange;
 
-                        _damage.TryChangeDamage(mob, active.BaseDamage * damage, true, origin: xeno, tool: xeno);
+                        _damage.TryChangeDamage(mob, _xeno.TryApplyXenoAcidDamageMultiplier(mob, active.BaseDamage * damage), true, origin: xeno, tool: xeno);
 
                     }
 
@@ -270,5 +272,11 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
     protected virtual void ForTheHiveRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
     {
+    }
+
+    private void OnVentCrawlAttempt(Entity<ActiveForTheHiveComponent> xeno, ref VentEnterAttemptEvent args)
+    {
+        _popup.PopupClient(Loc.GetString("rmc-vent-crawling-primed"), xeno, PopupType.SmallCaution);
+        args.Cancel();
     }
 }

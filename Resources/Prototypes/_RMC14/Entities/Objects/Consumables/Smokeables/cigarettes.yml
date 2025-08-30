@@ -2,7 +2,7 @@
   parent: CigPackBase
   id: CMCigarettePackLuckySlothsMini
   name: lucky sloths mini packet
-  description: These four-packs of Luckies come in every MRE. They're not as good as the Habana Reals that come in the LACN MREs, but at least they're free.
+  description: These four-packs of Luckies come in every MRE. They're not as good as the Embassy Crowns found in some TSE MREs, but at least they're free.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_4.rsi
@@ -216,7 +216,7 @@
   parent: RMCCigarettePackLuckySloths
   id: RMCCigarettePackWeYaGold
   name: We-Ya gold packet
-  description: Paving Better Worlds, and rolling better cigarettes. These fancy cigarettes are Weston-Yamada's entry into the market. Comes backed by a fierce legal team.
+  description: Paving Better Worlds, and rolling better cigarettes. These fancy cigarettes are Weston-Yamada's entry into the premium tobacco market. Comes backed by a fierce legal team.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
@@ -237,3 +237,63 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
       state: helmet
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackArcturianAce
+  name: arcturian ace
+  description: An entry level brand of cigarettes with a bright blue packaging. You're guessing these aren't really good for you, but it doesn't matter when it's Arcturian baby!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/arcturian_ace.rsi
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackLadyFingers
+  name: lady fingers
+  description: These intensely strong unfiltered menthol cigarettes don't seem very ladylike. They don't seem very fingerlike for that matter, either. Smoking may kill, but poor branding is almost as bad.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lady_fingers.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-lady-fingers
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackElectroGolds
+  name: Kierlan electro golds
+  description: Lovingly machine-rolled for YOUR pleasure. For when you want to look cool and the risk of a slow horrible death isn't really a factor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/electro_golds.rsi
+  - type: RMCLoreExaminable #TODO: Replace "premier station" with whatever the station gets named
+    content: rmc-lore-examinable-kierland-electro-golds
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackEmeraldGreens
+  name: emerald greens
+  description: They remind you of a gross, tar-filled version of Ireland. These cheap cigarettes are Weston-Yamada's entry into the general market.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/emerald_greens.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-emerald-greens
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackSolRedsTurquoise
+  name: turquoise sol reds
+  description: Claims to be all-natural and organic, with no additives. Not much better for your health than other brands, but they taste good and are highly addictive.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/sol_reds.rsi
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackSolRedsYellow
+  name: yellow sol reds
+  description: Claims to be all-natural and organic, with no additives. Not much better for your health than other brands, but they taste good and are highly addictive. This type seems to have a more mellow flavor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/sol_reds_yellow.rsi

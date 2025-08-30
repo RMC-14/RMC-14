@@ -4,9 +4,11 @@ rmc-attachable-holder-strip-ui-empty-slot = nothing
 rmc-verb-strip-attachables = Strip Attachables
 
 rmc-aslot-barrel = Barrel
+rmc-bslot-barrel = Mateba Barrel
 rmc-aslot-rail = Rail
 rmc-aslot-stock = Stock
 rmc-aslot-underbarrel = Underbarrel
+rmc-aslot-harness = Harness
 
 rmc-attachable-activation-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wielded to activate {THE($attachable)}!
 rmc-attachable-activation-fail-not-held = {CAPITALIZE(THE($holder))} must be held to activate {THE($attachable)}!
@@ -59,6 +61,8 @@ rmc-attachable-examine-ranged-recoil = [color={$colour}]{$sign}{$recoil}[/color]
 rmc-attachable-examine-ranged-damage = [color={$colour}]{$sign}{$damage}[/color] ranged damage multiplier.
 rmc-attachable-examine-ranged-projectile-speed = [color={$colour}]{$sign}{$projectileSpeed}[/color] projectile speed.
 rmc-attachable-examine-ranged-damage-falloff = [color={$colour}]{$sign}{$falloff}[/color] falloff multiplier.
+rmc-attachable-examine-ranged-range = [color={$colour}]{$sign}{$falloff}[/color] projectile range.
+rmc-attachable-examine-ranged-projectile-stun-duration = [color={$colour}]{$sign}{$stunDurationMult}[/color] stun duration multiplier.
 
 rmc-attachable-examine-melee-damage = [color={$colour}]{$sign}{$damage}[/color] melee damage.
 

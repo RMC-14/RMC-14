@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseStructure
   id: RMCBaseDoorInvincible
@@ -162,6 +162,8 @@
   - type: XenoToggleChargingDamage
     stageLoss: 2
     percentageDamage: 0.25
+  - type: XenoCrusherChargable
+    instantDestroy: true
 
 - type: entity
   abstract: true

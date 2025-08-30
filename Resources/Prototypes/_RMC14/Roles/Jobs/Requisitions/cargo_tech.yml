@@ -31,14 +31,17 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 1
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+    - type: CMVendorUser
+      id: CMCargoTech
     - type: JobPrefix
       prefix: cm-job-prefix-cargotech
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cargo
 
 - type: startingGear

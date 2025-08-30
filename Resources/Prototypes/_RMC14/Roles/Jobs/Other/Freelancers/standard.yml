@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: Freelancer Conscript
   special:
   - !type:AddComponentSpecial
     components:
@@ -23,8 +24,9 @@
       skills:
         RMCSkillFireman: 1
         RMCSkillConstruction: 2
-        RMCSkillEngineer: 1
+        RMCSkillEngineer: 2
         RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-freelancer-standard
@@ -64,6 +66,10 @@
     job: CMFreelancerRifleman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadFreelancer
 
@@ -79,13 +85,19 @@
     job: CMFreelancerRifleman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadFreelancer
 
 - type: startingGear
   id: RMCGearFreelancerStandard
   equipment:
-    back: RMCSatchelLightpack
+    back: RMCSatchelLightpackFreelancerStandard
+    belt: RMCMAR40BeltFilled
+    suitstorage: WeaponRifleMAR40
     gloves: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitFreelancer
     outerClothing: CMArmorFreelancer
@@ -93,6 +105,7 @@
     id: RMCIDCardFreelancer
     ears: RMCHeadsetDistressDukes
     pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchExplosiveFilledHEDP
 
 - type: playTimeTracker
   id: RMCJobFreelancerStandard

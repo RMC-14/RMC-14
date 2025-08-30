@@ -1,0 +1,275 @@
+- type: entity
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
+  id: RMCWeaponPistolT73
+  name: Type 73 pistol
+  description: The Type 73 is the once-standard issue sidearm of the SPP. Replaced by the NP92 in SPP use, it remains popular with veteran SPP troops due to familiarity and extra power. Due to an extremely large amount being produced, they tend to end up in the hands of forces attempting to arm themselves on a budget. Users include the Socialist Progressive Peoples, Colonial Liberation Front, and just about any mercenary or pirate group out there.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolT73
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/t73.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/t73.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Gun
+    shotsPerBurst: 3
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_88m4_v7.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 5
+    scatterUnwielded: 5
+    baseFireRate: 2.5
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolT73
+        startingItem: RMCMagazinePistolT73
+  - type: GunDamageModifier
+    multiplier: 1.30
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.71, 0.125
+      rmc-aslot-rail: 0.06, 0.185
+
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolT74
+  name: Type 74 pistol
+  description: The Type 74 is the designation for a specially modified Type 73 with an integrated laser sight system, multiple lightning cuts to reduce weight in order to allow a higher pressure round to be used with the same recoil sping, and a more comfortable grip. Due to the adoption of the NP92, the Type 74 was produced in limited numbers, because of this it is typically only issued on request to high-ranking officers
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolT74
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/t74.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/t74.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Gun
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mk80.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    scatterWielded: 4
+    scatterUnwielded: 4
+    baseFireRate: 2.5
+    burstScatterMult: 5
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolT73
+          - RMCMagazinePistolT74Impact
+        startingItem: RMCMagazinePistolT73
+  - type: GunDamageModifier
+    multiplier: 1.30
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.71, 0.125
+      rmc-aslot-rail: 0.06, 0.185
+
+- type: entity
+  parent: RMCWeaponPistolT73
+  id: RMCWeaponPistolT73Empty
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolT73
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolT73
+  name: Type 73 magazine (7.62x25mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolT73
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolT73
+    proto: RMCCartridgePistolT73
+    capacity: 9
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/t73.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolT74Impact
+  name: Type 74 impact magazine (7.62x25mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolT74Impact
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolT74Impact
+    proto: RMCCartridgePistolT74Impact
+    capacity: 9
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/t73.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: impact-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: impact
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolT73
+  name: bullet (7.62x25mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+
+- type: entity
+  id: RMCCartridgePistolT73
+  name: cartridge (7.62x25mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolT73
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolT73
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolT74Impact
+  name: bullet (7.62x25mm impact)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: RMCStunOnHit
+    maxRange: 4.5
+    stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+
+- type: entity
+  id: RMCCartridgePistolT74Impact
+  name: cartridge (7.62x25mm impact)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolT74Impact
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolT74Impact
+
+- type: Tag
+  id: RMCWeaponPistolT73
+
+- type: Tag
+  id: RMCWeaponPistolT74
+
+- type: Tag
+  id: RMCMagazinePistolT73
+
+- type: Tag
+  id: RMCMagazinePistolT74Impact
+
+- type: Tag
+  id: RMCCartridgePistolT73
+
+- type: Tag
+  id: RMCCartridgePistolT74Impact

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original Sprite by Aleksh, Modified by Ramiris",
+  "copyright": "Original Sprite by Aleksh, Modified by Ramiris and github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -36,6 +36,9 @@
     },
     {
       "name": "rifle_box_71"
+    },
+    {
+      "name": "rifle_box_generic"
     },
     {
       "name": "rifle_ammo_full_mags_base"
@@ -110,12 +113,6 @@
       "name": "shell"
     },
     {
-      "name": "shell_lid"
-    },
-    {
-      "name": "shell_box"
-    },
-    {
       "name": "shell_ammo_low_color"
     },
     {
@@ -141,15 +138,6 @@
     },
     {
       "name": "shell_box_buckshot"
-    },
-    {
-      "name": "shell_box_breaching"
-    },
-    {
-      "name": "shell_box_flechette"
-    },
-    {
-      "name": "shell_box_slugs"
     },
     {
       "name": "pistol"
@@ -194,16 +182,7 @@
       "name": "pistol_box_44"
     },
     {
-      "name": "shell_box_incendiary"
-    },
-    {
-      "name": "shell_box_marking"
-    },
-    {
       "name": "shell_lid_marking"
-    },
-    {
-      "name": "shell_box_beanbag"
     },
     {
       "name": "smallshell"
@@ -248,6 +227,18 @@
       "name": "supply_ammo_medium"
     },
     {
+      "name": "supply_ammo_small_high"
+    },
+    {
+      "name": "supply_ammo_small_full"
+    },
+    {
+      "name": "supply_ammo_small_low"
+    },
+    {
+      "name": "supply_ammo_small_medium"
+    },
+    {
       "name": "supply_lid_closed"
     },
     {
@@ -257,40 +248,76 @@
       "name": "supply_box"
     },
     {
-      "name": "supply_box_casflare"
+      "name": "supply_lid_small_closed"
+    },
+    {
+      "name": "supply_lid_small_open"
+    },
+    {
+      "name": "supply_lid_small_closed_marking"
+    },
+    {
+      "name": "supply_lid_small_open_marking"
+    },
+    {
+      "name": "supply_box_small"
+    },
+    {
+      "name": "supply_box_small_marking"
     },
     {
       "name": "supply_box_flashlight"
     },
     {
-      "name": "supply_box_food"
+      "name": "supply_box_flare"
     },
     {
-      "name": "supply_box_lightflare"
+      "name": "supply_box_flare_colour"
     },
     {
-      "name": "supply_box_logo_clf"
+      "name": "supply_box_small_food"
     },
     {
-      "name": "supply_box_logo_spp"
-    },
-    {
-      "name": "supply_box_logo_un"
-    },
-    {
-      "name": "supply_box_logo_unmc"
-    },
-    {
-      "name": "supply_box_logo_weya"
-    },
-    {
-      "name": "supply_box_nail"
+      "name": "supply_box_small_nail"
     },
     {
       "name": "supply_box_powercell"
     },
     {
-      "name": "old"
+      "name": "fire"
+    },
+    {
+      "name": "flamer_box"
+    },
+    {
+      "name": "flamer_lid"
+    },
+    {
+      "name": "flamer_ammo_full_base"
+    },
+    {
+      "name": "flamer_ammo_full_color"
+    },
+    {
+      "name": "flamer_ammo_high_base"
+    },
+    {
+      "name": "flamer_ammo_high_color"
+    },
+    {
+      "name": "flamer_ammo_medium_base"
+    },
+    {
+      "name": "flamer_ammo_medium_color"
+    },
+    {
+      "name": "flamer_ammo_low_base"
+    },
+    {
+      "name": "flamer_ammo_low_color"
+    },
+    {
+      "name": "supply_box_powercell_colour"
     }
   ]
 }

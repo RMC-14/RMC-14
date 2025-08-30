@@ -13,6 +13,8 @@
     max: 200
     evolvesTo: [ ]
   - type: XenoHidden
+  - type: FixedIdentity
+    name: rmc-rouny
 
 - type: entity
   parent:
@@ -28,6 +30,8 @@
     max: 200
     evolvesTo: [ ]
   - type: XenoHidden
+  - type: FixedIdentity
+    name: rmc-wehny
 
 - type: entity
   parent:
@@ -143,7 +147,7 @@
     prefix: lesser
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: lesser_carrier
   - type: Evasion
     evasion: 10
@@ -176,3 +180,5 @@
         components:
         - XenoHeavy
   - type: XenoHidden
+  - type: FixedIdentity
+    name: rmc-lesser-carrier

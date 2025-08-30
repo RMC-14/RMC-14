@@ -7,7 +7,7 @@
   randomRotation: false
   stations:
     Dev:
-      stationProto: StandardNanotrasenStation
+      stationProto: StandardUNMCWarship
       components:
       - type: StationNameSetup
         mapNameTemplate: "Dev"

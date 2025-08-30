@@ -22,6 +22,7 @@
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 0
         RMCSkillFireman: 1
         RMCSkillMedical: 3
@@ -31,10 +32,10 @@
       prefix: cm-job-prefix-doctor
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: doctor
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_medical
 
 - type: startingGear
@@ -65,6 +66,15 @@
     job_id: CMDoctor
   - type: Sprite
     state: doc_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleDoctor
+  name: Doctor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: doctor
 
 - type: playTimeTracker
   id: CMJobDoctor

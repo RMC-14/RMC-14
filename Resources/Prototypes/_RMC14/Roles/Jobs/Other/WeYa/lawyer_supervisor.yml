@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA Corporate Executive Supervisor
   special:
   - !type:AddComponentSpecial
     components:
@@ -25,6 +26,7 @@
         RMCSkillFirearms: 0
         RMCSkillEndurance: 0
         RMCSkillVehicles: 1
+    - type: RMCTrackable
 
 - type: playTimeTracker
   id: RMCJobWeYaLawyerSupervisor
@@ -33,7 +35,7 @@
   id: RMCJobWeYaLawyerSupervisor
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetDistressPMC
+    ears: RMCHeadsetDistressLawyerWeYa
     jumpsuit: CMJumpsuitLiaisonBlack
     # TODO RMC14 "neck: black tie"
     outerClothing: RMCJacketCorporateBlack
@@ -73,4 +75,8 @@
     job: RMCWeYaLawyerSupervisor
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial

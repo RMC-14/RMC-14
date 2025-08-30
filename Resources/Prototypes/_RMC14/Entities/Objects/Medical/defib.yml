@@ -10,13 +10,13 @@
     layers:
     - state: defib
     - state: defib_on
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
       visible: false
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
   - type: Item
@@ -84,6 +84,10 @@
     enabled: false
     useRate: 66
   - type: RMCPowerUsageDisplay
+  - type: UseOnSynthBlocked
+    whitelist:
+      components:
+        - Marine
 
 - type: entity
   id: CMDefibrillatorEmpty
@@ -119,3 +123,59 @@
     - Pouch
   - type: PowerCellDraw
     useRate: 132
+
+- type: entity
+  parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
+  id: RMCSynthResetKey
+  name: WeYa synthetic reset key
+  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/reset_key.rsi
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+  - type: PowerCellDraw
+    enabled: false
+    useRate: 1000
+  - type: RMCPowerUsageDisplay
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 1
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+  - type: Defibrillator
+    zapSound:
+      path: /Audio/_RMC14/Medical/reset_key_release.ogg
+      params:
+        volume: -6
+    chargeSound:
+      path: /Audio/_RMC14/Medical/reset_key_powerup.ogg
+      params:
+        volume: -8
+    failureSound:
+      path: /Audio/_RMC14/Medical/reset_key_shortbeep.ogg
+      params:
+        volume: -6
+    successSound:
+      path: /Audio/_RMC14/Medical/reset_key_boot_on.ogg
+      params:
+        volume: -6
+  - type: UseOnSynthBlocked
+    reversed: true
+    popup: rmc-species-synth-reset-key-invalid
+    whitelist:
+      components:
+        - Marine
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Devices/reset_key.rsi
+    heldPrefix: null
+  - type: Tag
+    tags:
+    - RMCSynthResetKey

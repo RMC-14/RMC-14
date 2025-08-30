@@ -22,8 +22,8 @@
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobSkrellTorso
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Eyes: MobSkrellEyes
     HeadTop: MobHumanoidAnyMarking
     LArm: MobSkrellLArm
@@ -54,11 +54,11 @@
     Chest:
       points: 1
       required: false
-    Underwear:
+    UndergarmentBottom:
       points: 1
       required: true
       defaultMarkings: [ RMCUnderwearBoxersBlue ]
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: true
       defaultMarkings: [ RMCUndershirtStandard ]
