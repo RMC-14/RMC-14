@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Dutch-VanDerLinde
   changes:
-  - message: Fixed civilian survivors not spawning with primary weapons.
-    type: Fix
-  id: 1770
-  time: '2025-05-21T15:01:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6510
-- author: Dutch-VanDerLinde
-  changes:
   - message: Added the synthetic race for admin use
     type: Add
   id: 1771
@@ -4517,5 +4510,12 @@
   id: 2270
   time: '2025-08-30T00:40:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7134
+- author: Vixting
+  changes:
+  - message: Fixed the Tunnel UI breaking.
+    type: Fix
+  id: 2271
+  time: '2025-08-30T00:50:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7581
 Name: RMC14
 Order: -1
