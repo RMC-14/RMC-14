@@ -370,6 +370,8 @@
         amount: 2
     - name: Extended ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 8
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
