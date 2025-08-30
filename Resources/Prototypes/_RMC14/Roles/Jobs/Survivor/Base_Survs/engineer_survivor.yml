@@ -31,6 +31,7 @@
   useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorEngineer
   equipment:
     head: RMCHardhatWhite
@@ -42,7 +43,6 @@
     shoes: RMCShoesJackboots
     back: CMSatchelEngineerSurvivorFill
     id: CMIDCardColonistEngineer
-    pocket1: RMCPouchSurvivalFill
     pocket2: RMCWelderIndustrial
 
 - type: entity

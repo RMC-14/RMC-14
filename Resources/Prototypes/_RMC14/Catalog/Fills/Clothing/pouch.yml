@@ -219,6 +219,19 @@
 - type: entity
   parent: RMCPouchSurvival
   id: RMCPouchSurvivalFill
+  suffix: Filled, No Flashlight, No Crowbar
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPacketPillsTricordrazine
+    - id: CMGauze10
+    - id: RMCRadioHandheldColony
+    - id: RMCM5Bayonet
+      # 5 splints
+
+- type: entity
+  parent: RMCPouchSurvival
+  id: RMCPouchSurvivalFillFull
   suffix: Filled
   components:
   - type: StorageFill
