@@ -37,6 +37,9 @@
   - type: VentEntrance
   - type: CollideOnAnchor
   - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
   - type: Transform
     anchored: true
   - type: NodeContainer
