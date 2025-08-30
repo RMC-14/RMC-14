@@ -1,0 +1,29 @@
+﻿- type: entity
+  parent: BaseItem
+  name: ACS-930 atmospheric composition scanner
+  id: RMCAtmosScanner
+  description: A bulky, awkward device produced by the Weston-Yamada Corporation. Gives a readout of the local atmospheric composition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/atmos_scanner.rsi
+    layers:
+    - state: icon
+  - type: GasAnalyzer
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-atmospheric-composition-scanner
+  - type: ActivatableUI
+    inHandsOnly: true
+    singleUser: true
+    requireActiveHand: false
+    key: enum.GasAnalyzerUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.GasAnalyzerUiKey.Key:
+        type: GasAnalyzerBoundUserInterface
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.GasAnalyzerVisuals.Enabled:
+        enabled:
+          True: { state: working }
+          False: { state: icon }

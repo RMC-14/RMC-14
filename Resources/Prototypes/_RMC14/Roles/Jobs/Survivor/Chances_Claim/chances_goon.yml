@@ -1,0 +1,75 @@
+﻿- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorChancesGoon
+  name: rmc-job-name-survivor-chances-goon
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorChancesGoon
+  startingGear: RMCGearSurvivorChancesGoon
+  spawnMenuRoleName: Chance's Claim Corporate Security (Chance's Colonist)
+  greeting: rmc-job-greeting-chances-colonist
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+        RMCSkillVehicles: 1
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+
+- type: startingGear
+  parent: RMCGearSurvivorGoon
+  id: RMCGearSurvivorChancesGoon
+  equipment:
+    jumpsuit: RMCJumpsuitBlueWorkwearChancesGoon
+    head: RMCHeadCapWestonYamadaDark
+    mask: RMCMaskRebreather
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorChancesGoon
+  name: chances goon spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorChancesGoon
+  isHumanoid: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorChancesGoon
+  name: chances claim corporate security ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorChancesGoon
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorChancesGoon
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorChancesGoon
