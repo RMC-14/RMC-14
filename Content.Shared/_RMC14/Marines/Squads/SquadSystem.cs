@@ -59,7 +59,6 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
     private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";
@@ -825,7 +824,7 @@ public sealed class SquadSystem : EntitySystem
     {
         color = default;
 
-        if (!_entMan.TryGetComponent<SquadMemberComponent>(entity, out var comp))
+        if (!TryComp(entity, out SquadMemberComponent? comp))
             return false;
 
         color = accessible && comp.AccessibleBackgroundColor != null
