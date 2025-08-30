@@ -1,101 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added cassette tapes and the cassette player. These can be bought in
-      Rec-Vends, one is next to the outer eastern wall of lower medbay, left of briefing.
-      Tapes can be inserted into a player, and the player worn in either one of your
-      ear slots. Each cassette is named after the artist who created the tracks that
-      it contains. There is one more cassette, the custom cassette, that allows you
-      to listen to any song file on your computer in ogg format. Cassette songs can
-      only be heard by the person that is wearing the cassette player.
-    type: Add
-  - message: Added being able to examine xenonids with Shift+Left Click to see their
-      armor values.
-    type: Add
-  - message: Added an examine button to see a humanoid's skills.
-    type: Add
-  - message: Removed the "not holding anything" and "not hurt" examine text from xenos,
-      they will only show up if they are holding something or are hurt.
-    type: Tweak
-  - message: Replaced placeholder Berserker Ravager sprites and ability icons. New
-      sprites by Aleksh and Sigma Draconis, icons by Aleksh.
-    type: Tweak
-  - message: Changed the letter for SPP Command radio to make room for the FORECON
-      radio channel.
-    type: Tweak
-  - message: Updated the Roadmap.
-    type: Tweak
-  - message: Fixed Praetorian acid ball being able to hurt friendly xenos if it detonates
-      on top of one.
-    type: Fix
-  - message: Fixed Praetorian acid ball going on cooldown if cancelled or used without
-      enough plasma.
-    type: Fix
-  - message: Fixed Resin Whisperer not being able to build through windows and all
-      xenos not being able to build resin through a corner.
-    type: Fix
-  - message: Fixed Resin Whisperer Hivelord not being able to open doors by just left
-      clicking them without holding Alt while on weeds.
-    type: Fix
-  - message: Fixed the brief delay before a door opens when opened from afar by a
-      Resin Whisperer Hivelord.
-    type: Fix
-  - message: Fixed resin doors showing a Pry Door verb.
-    type: Fix
-  - message: Fixed being able to use the incinerator unit through some walls.
-    type: Fix
-  - message: Fixed rangefinder and laser designator dots being hidden by xenonids
-      and other mobs with night vision enabled.
-    type: Fix
-  - message: Fixed the headset radio transmission sound playing when talking near
-      shortwave radios and other items that transmit your messages over radio.
-    type: Fix
-  - message: Fixed reagent tanks getting stuck on chairs.
-    type: Fix
-  - message: Fixed larva and parasites not being able to hide under reagent tanks.
-    type: Fix
-  - message: Fixed the xenonid hide action making it look like you aren't hiding on
-      your screen.
-    type: Fix
-  - message: Fixed xenonid eggs being hidden by dead bodies.
-    type: Fix
-  - message: Fixed xenonids not being able to click themselves or a nesting surface
-      with the blocked hand to devour or nest a marine while pulling them.
-    type: Fix
-  - message: Fixed xenonids not being able to click themselves while in combat mode
-      to devour a marine while pulling them.
-    type: Fix
-  - message: Fixed Berserker Ravager being able to keep its rage stacks by attacking
-      the air.
-    type: Fix
-  - message: Fixed Berserker Ravager losing partial rage stacks too quickly (0.5s
-      for all stacks > 3s for one stack).
-    type: Fix
-  - message: Fixed Berserker Ravager being 17% too fast at base and 25% too fast at
-      maximum rage stacks.
-    type: Fix
-  - message: Fixed resisting fire removing 20 stacks instead of 10.
-    type: Fix
-  - message: Fixed explosions moving nested humanoids.
-    type: Fix
-  - message: Fixed being able to get stuck in Queen eye when detaching from ovi.
-    type: Fix
-  - message: Fixed some planet maps having upstream flashbangs instead of RMC14 flashbangs.
-    type: Fix
-  - message: Fixed being able to hide in graves.
-    type: Fix
-  - message: Fixed Queen not being able to detach from ovi while resting.
-    type: Fix
-  - message: Fixed landing zone turrets on one LZ activating when a dropship lands
-      on a different LZ. The ones in the other LZ will remain inactive even if a dropship
-      later lands there, until dropships are able to drop turrets during their first
-      landing sequence.
-    type: Fix
-  - message: Fixed being able to put resin traps on the same tile as Almayer ladders.
-    type: Fix
-  id: 1768
-  time: '2025-05-21T14:45:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6486
 - author: to4no_fix
   changes:
   - message: Weapons specialists now get custom icons, role names, and radio prefixes
@@ -4609,5 +4512,12 @@
   id: 2268
   time: '2025-08-30T00:34:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7492
+- author: Ian321
+  changes:
+  - message: Everything communications related now has link to the relevant guide.
+    type: Tweak
+  id: 2269
+  time: '2025-08-30T00:36:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7583
 Name: RMC14
 Order: -1
