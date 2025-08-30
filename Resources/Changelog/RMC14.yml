@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: Community members
-  changes:
-  - message: Adds a plethora of Xenonid guides.
-    type: Add
-  id: 1772
-  time: '2025-05-21T18:11:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6303
-- author: Dygon
-  changes:
-  - message: Fixed fire from incendiary projectiles dealing 33% less damage than intended
-      and having a 50% longer duration than intended.
-    type: Fix
-  - message: You no longer need to move before you start taking double fire damage
-      when a fire tile spawns below you.
-    type: Fix
-  - message: Fixed fortifying as a defender while on a fire tile preventing taking
-      double fire damage.
-    type: Fix
-  - message: The fire effect applied by fire tiles spawned from the AGM-99 'Napalm'
-      now lasts 50% longer, making it harder to extinguish.
-    type: Fix
-  id: 1773
-  time: '2025-05-21T18:11:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6513
 - author: DrSmugleaf
   changes:
   - message: Add volume sliders for hijack themes and cassettes in Options > Audio.
@@ -4519,5 +4495,19 @@
   id: 2272
   time: '2025-08-30T00:52:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7340
+- author: Dygon
+  changes:
+  - message: Closed shutters and bolted doors now block larvae and parasites.
+    type: Fix
+  id: 2273
+  time: '2025-08-30T01:12:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6554
+- author: Spaghetti-bit
+  changes:
+  - message: Added more reptilian emotes; hiss, rattle, purr, more scream variation.
+    type: Add
+  id: 2274
+  time: '2025-08-30T01:12:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7553
 Name: RMC14
 Order: -1
