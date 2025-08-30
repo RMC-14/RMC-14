@@ -181,6 +181,8 @@ public sealed class XenoLungeSystem : EntitySystem
         {
             _statusEffects.TryRemoveStatusEffect(ent, effect);
         }
+
+        RemCompDeferred<XenoLungeStunnedComponent>(ent.Owner);
     }
 
     private void OnAttackAttempt(Entity<XenoLungeComponent> ent, ref MeleeAttackAttemptEvent args)
@@ -203,7 +205,7 @@ public sealed class XenoLungeSystem : EntitySystem
         var query = EntityQueryEnumerator<XenoLungeStunnedComponent>();
         while (query.MoveNext(out var uid, out var stunned))
         {
-            if (time < stunned.ExpireAt && _statusEffects.HasStatusEffect(uid, Stun))
+            if (time < stunned.ExpireAt)
                 continue;
 
             RemCompDeferred<XenoLungeStunnedComponent>(uid);
