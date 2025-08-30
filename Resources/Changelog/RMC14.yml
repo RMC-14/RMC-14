@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed weeds being able to spread onto fire tiles.
-    type: Fix
-  id: 1756
-  time: '2025-05-21T04:07:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6471
-- author: noctyrnal
-  changes:
-  - message: Changed the hitbox of filing cabinets to make them less obtrusive.
-    type: Tweak
-  id: 1757
-  time: '2025-05-21T04:06:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6461
 - author: noctyrnal
   changes:
   - message: Added loadouts to UNMC Synthetics.
@@ -4612,5 +4598,19 @@
   id: 2256
   time: '2025-08-30T00:01:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7721
+- author: ExponentialWizard
+  changes:
+  - message: Fixed dead things rendering behind rollerbeds.
+    type: Fix
+  id: 2257
+  time: '2025-08-30T00:02:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7465
+- author: noctyrnal
+  changes:
+  - message: You can now move while firing the Mateba or Winter Wyvern in the air.
+    type: Tweak
+  id: 2258
+  time: '2025-08-30T00:03:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7593
 Name: RMC14
 Order: -1
