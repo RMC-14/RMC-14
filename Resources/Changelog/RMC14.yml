@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added the Two-Point Sling for PVE - A magnetic harness that offers benefits
-      when one handing a gun.
-    type: Add
-  id: 1780
-  time: '2025-06-01T10:21:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6591
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed the pump shotgun only holding 9 shells instead of 10.
@@ -4506,5 +4498,14 @@
   id: 2280
   time: '2025-08-30T03:31:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7595
+- author: Vixting
+  changes:
+  - message: Boiler bombard, tunnel creation, planting eggs, ravager eviscerate, and
+      praetorian acid ball now root the entity in place while they are being used,
+      preventing them from being moved by others to cancel their doafter.
+    type: Add
+  id: 2281
+  time: '2025-08-30T04:00:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6988
 Name: RMC14
 Order: -1
