@@ -2,7 +2,7 @@
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: M42A2 pump shotgun
   id: WeaponShotgunM42A2
-  description: An Armat Battlefield Systems modern take on an all-time classic, combining close range firepower with long-term reliability. Requires a pump.
+  description: An AEGIS modern take on an all-time classic, combining close range firepower with long-term reliability. Requires a pump.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
@@ -57,7 +57,7 @@
       rmc-aslot-stock:
         whitelist:
           tags:
-          - RMCAttachmentM42A2WoodenStock
+          - RMCAttachmentM42A2CollapsibleStock
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -83,6 +83,14 @@
     tags:
     - RMCWeaponShotgunM42A2
     - RMCWeaponShotgun
+
+- type: entity
+  parent: WeaponShotgunM42A2
+  id: RMCWeaponShotgunM42A2Filled
+  suffix: Filled
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot
 
 - type: Tag
   id: RMCWeaponShotgunM42A2

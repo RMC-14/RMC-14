@@ -28,7 +28,25 @@
       - CMSurvivorLV624SecurityGuard: 2
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
-
+    survivorJobScenarios:
+      asset_protection:  
+        CMSurvivor:
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorCorporate:
+        - CMSurvivorLV624CorporateDomeCL: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorDoctor:
+        - CMSurvivorLV624CorporateDomeGoonMedic: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorEngineer:
+        - CMSurvivorLV624CorporateDomeGoonEngineer: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorSecurity:
+        - CMSurvivorLV624CorporateDomeGoonLead: 1
+        - CMSurvivorLV624CorporateDomeGoon: -1
+        CMSurvivorScientist:
+        - CMSurvivorLV624CorporateDomeGoon: -1
+    
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -53,7 +71,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
-    camouflage: Classic
+    camouflage: Urban
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
@@ -66,6 +84,32 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    survivorJobs:
+    - CMSurvivor: -1
+    - CMSurvivorCorporate: 2
+    - CMSurvivorDoctor: 3
+    - CMSurvivorEngineer: 4
+    - CMSurvivorSecurity: 2
+    - CMSurvivorScientist: 2
+    survivorJobInserts:
+      CMSurvivor:
+      - CMSurvivorTrijentTrucker: -1
+      - CMSurvivorMiner: -1
+      - CMSurvivorTrijentChaplain: 1
+      CMSurvivorCorporate:
+      - CMSurvivorICB: 1
+      - CMSurvivorTrijentCorporate: 1
+      CMSurvivorDoctor:
+      - CMSurvivorTrijentDoctor: 3
+      CMSurvivorEngineer:
+      - CMSurvivorTrijentEngiHydro: 2
+      - CMSurvivorTrijentDamTech: 2
+      CMSurvivorSecurity:
+      - CMSurvivorTrijentGoon: 1
+      - CMSurvivorCMBDeputy: 1
+      CMSurvivorScientist:
+      - CMSurvivorTrijentResearcher: 2
+
 
 - type: entity
   id: RMCPlanetVaradero
@@ -99,7 +143,7 @@
       - CMSurvivorMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
-      - CMSurvivorICB: 2
+      - CMSurvivorVaraderoICB: 2
       CMSurvivorDoctor:
       - CMSurvivorMedicalTechnician: 3
       CMSurvivorEngineer:
@@ -125,7 +169,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/chances.yml
-    camouflage: Classic
+    camouflage: Urban
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
     selectRandomSurvivorInsert: false
     survivorJobs:
@@ -185,7 +229,6 @@
       - RMCSurvivorHybrisaXenoarchaeologist: 2
       - RMCSurvivorHybrisaXenobiologist: 2
 
-
 - type: entity
   id: RMCPlanetSorokyne
   name: LV-976 Sorokyne Strata
@@ -212,3 +255,39 @@
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
       - CMJobSurvivorCECResearcher: 2
+
+- type: entity
+  id: RMCPlanetArcticValley
+  name: Arctic Valley
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/arctic_valley.yml
+    camouflage: Snow
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetCorsat
+  name: CORSAT
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/corsat.yml
+    camouflage: Classic
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetHybrisaRepaired
+  name: LV-759 Hybrisa Prospera (Repaired)
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/hybrisa_greenshift.yml
+    camouflage: Urban
+    inRotation: false
+
+- type: entity
+  id: RMCPlanetSorokyneRepaired
+  name: LV-976 - Sorokyne Strata (Repaired)
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/sorokyne_repaired.yml
+    camouflage: Jungle
+    inRotation: false

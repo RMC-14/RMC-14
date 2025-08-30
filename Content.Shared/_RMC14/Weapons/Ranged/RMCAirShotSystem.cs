@@ -129,8 +129,14 @@ public sealed class RMCAirShotSystem : EntitySystem
 
     private void OnAirShotExamined(Entity<RMCAirShotComponent> ent, ref ExaminedEvent args)
     {
-        if (ent.Comp.LastFlareId is { } id)
-            args.PushMarkup(Loc.GetString("rmc-flare-gun-examine", ("id", id)));
+        using (args.PushGroup(nameof(RMCAirShotComponent), 5))
+        {
+            if (ent.Comp.RequiredSkills == null || _skills.HasAllSkills(args.Examiner, ent.Comp.RequiredSkills))
+                args.PushMarkup(Loc.GetString("rmc-gun-shoot-air-examine", ("harm", ent.Comp.RequiresCombat)));
+
+            if (ent.Comp.LastFlareId is { } id)
+                args.PushMarkup(Loc.GetString("rmc-flare-gun-examine", ("id", id)));
+        }
     }
 
     /// <summary>
@@ -158,7 +164,7 @@ public sealed class RMCAirShotSystem : EntitySystem
         var ev = new AirShotDoAfterEvent(GetNetCoordinates(shooterCoordinates));
         var doAfter = new DoAfterArgs(EntityManager, shooter, ent.Comp.PreparationTime, ev, ent)
         {
-            BreakOnMove = true,
+            BreakOnMove = ent.Comp.DoAfterBreakOnMove,
             NeedHand = true,
             BreakOnHandChange = true,
             MovementThreshold = 0.5f,

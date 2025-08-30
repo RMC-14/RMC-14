@@ -161,9 +161,9 @@
     explosionArmor: 35
   - type: RMCArmorSpeedTier
     speedTier: heavy
-  - type: ClothingSpeedModifier
-    walkModifier: 0.62
-    sprintModifier: 0.62
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LOWHEAVY
+    walkModifier: 0.64
+    sprintModifier: 0.64
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -379,6 +379,11 @@
     bullet: 25
     bio: 15
     explosionArmor: 40
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
+    walkModifier: 0.62
+    sprintModifier: 0.62
   - type: Corrodible
     isCorrodible: false
   - type: RMCGrantLeapProtection
@@ -593,11 +598,11 @@
   - type: CMArmor
     melee: 15
     bullet: 30
-    bio: 15
+    bio: 5
     explosionArmor: 10
   - type: Storage
     grid:
-    - 0,0,1,1 # 2 slots
+    - 0,0,1,1 # 1 slots
   - type: RMCBulkyArmor
     isBulky: false
   - type: ItemCamouflage
@@ -679,7 +684,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM35
   name: M35 pyrotechnician armor
-  description: A custom set of M35 armor designed for use by Marine Pyrotechnicians.
+  description: A custom set of M35 armor designed for use by UNMC Pyrotechnicians.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
@@ -694,6 +699,21 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/urban.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
+  - type: FirewalkArmor
+    whitelist:
+      components:
+      - PyroWhitelist
+    addComponentsOnFirewalk:
+    - type: RMCImmuneToFireTileDamage
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
+    auraColor: "#03FCC6"
 
 # m45
 - type: entity
@@ -764,6 +784,8 @@
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
+  - type: Corrodible
+    isCorrodible: false
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
   - type: ItemCamouflage

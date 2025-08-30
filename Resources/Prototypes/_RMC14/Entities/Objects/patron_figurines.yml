@@ -1652,4 +1652,75 @@
     transferAmounts:
     - 5
   - type: RMCFlask
- 
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCargoNahami
+  name: Cargo Nahami figurine
+  description: "That's cargo Nahami, one of the very many Nahami. It says on the bottom that you can redeem this at requisitions for one free HEDP."
+  components:
+  - type: Sprite
+    state: cargo_nahami
+  - type: PatronFigurine
+    id: 170878ed-76ac-4a49-89cb-3f14bb222a09
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSamsonParker
+  name: Samson Parker figurine
+  description: "An Alpha squad leader willing to give up his life for his men! Reckless but with a big heart, always seeking to make the best out of the worst situations and NOT die in the process..."
+  components:
+  - type: Sprite
+    state: samson_parker
+  - type: PatronFigurine
+    id: 46516d2f-b180-49de-9ac0-25112fa4e259
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSilasAlatus
+  name: Silas Alatus figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: silas_alatus
+  - type: PatronFigurine
+    id: f5dc8f9d-1f7b-467a-8c6d-52cb3c8152b6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKasuni
+  name: Kasuni figurine
+  description: "Kasuni is fix, will be ok soon."
+  components:
+  - type: Sprite
+    state: kasuni
+  - type: PatronFigurine
+    id: e77df185-91a7-417a-9f38-fd7b24071703
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAltairFlamecoat
+  name: Altair Flamecoat figurine
+  description: "The most chittery Close Air Support the Corps can offer."
+  components:
+  - type: Sprite
+    state: altair_flamecoat
+  - type: PatronFigurine
+    id: e3c176f8-b089-4897-98ae-e3365ea82426
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRikkiNakesone
+  name: Rikki Nakesone figurine
+  description: "When one loaf of banana bread isn't enough."
+  components:
+  - type: Sprite
+    state: rikki_nakesone
+  - type: PatronFigurine
+    id: ecb46485-1660-4b92-99b9-21ad29b46a17
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+      params:
+        volume: 5
+        maxDistance: 1

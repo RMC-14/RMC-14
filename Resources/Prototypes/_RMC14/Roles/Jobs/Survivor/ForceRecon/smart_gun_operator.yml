@@ -2,7 +2,6 @@
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconSmartgunOperator
   name: cm-job-name-smart-gun-operator
-  playTimeTracker: RMCJobSurvivorSmartgunOperatorForecon
   startingGear: RMCGearForeconSmartgunOperator
   icon: "CMJobIconSmartGunOperator"
   requirements:
@@ -29,7 +28,7 @@
         RMCSkillVehicles: 0
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: smartgunner
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
@@ -42,10 +41,6 @@
       prefix: cm-job-prefix-gun-operator
     - type: SpotterWhitelist
   hidden: true
-
-- type: playTimeTracker
-  id: RMCJobSurvivorSmartgunOperatorForecon
-  isHumanoid: true
 
 - type: startingGear
   parent: RMCGearForeconBase

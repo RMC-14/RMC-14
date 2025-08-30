@@ -27,7 +27,6 @@ public sealed class RMCSpawnerSystem : EntitySystem
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
     private readonly Dictionary<EntProtoId, List<Entity<ItemPoolSpawnerComponent>>> _itemPools = new();
     private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
-    private readonly List<Entity<AegisSpawnerComponent>> _aegisSpawners = new();
 
     private int _maxCorpses;
     private int _corpsesSpawned;
@@ -78,17 +77,17 @@ public sealed class RMCSpawnerSystem : EntitySystem
         if (ent.Comp.Prototypes.Count <= 0)
             return;
 
-        var (gunID, ammoID) = _random.Pick(ent.Comp.Prototypes);
+        var (gunId, ammoId) = _random.Pick(ent.Comp.Prototypes);
 
-        var entitesToSpawn = new Dictionary<EntProtoId, int>()
+        var entitiesToSpawn = new Dictionary<EntProtoId, int>()
         {
-            [gunID] = 1,
-            [ammoID] = _random.Next(ent.Comp.MinMagazines, ent.Comp.MaxMagazines)
+            [gunId] = 1,
+            [ammoId] = _random.Next(ent.Comp.MinMagazines, ent.Comp.MaxMagazines)
         };
 
         if (_random.Prob(ent.Comp.ChanceToSpawn))
         {
-            foreach ((var protoID, var amount) in entitesToSpawn)
+            foreach (var (protoId, amount) in entitiesToSpawn)
             {
                 for (var i = 0; i < amount; i++) // spawn in the amount of entities
                 {
@@ -96,7 +95,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
                     var xOffset = _random.NextFloat(-offset, offset);
                     var yOffset = _random.NextFloat(-offset, offset); // Offset it randomly
                     var coordinates = _transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Offset(new Vector2(xOffset, yOffset));
-                    Spawn(protoID, coordinates);
+                    Spawn(protoId, coordinates);
                 }
             }
         }
@@ -125,7 +124,6 @@ public sealed class RMCSpawnerSystem : EntitySystem
         _spawners.Clear();
         _itemPools.Clear();
         _corpseSpawners.Clear();
-        _aegisSpawners.Clear();
 
         var roundDuration = _gameTicker.RoundDuration();
 
@@ -148,10 +146,17 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
         foreach (var spawner in _corpseSpawners)
         {
-            if (_corpsesSpawned >= _maxCorpses)
+            if (!spawner.Comp.SkipLimit)
+            {
+                if (_corpsesSpawned >= _maxCorpses)
+                    continue;
+
+                _corpsesSpawned++;
+            }
+
+            if (spawner.Comp.Spawn == null)
                 continue;
 
-            _corpsesSpawned++;
             var corpse = _randomHumanoid.SpawnRandomHumanoid(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner), MetaData(spawner).EntityName);
             EnsureComp<IntelRecoverCorpseObjectiveComponent>(corpse);
         }

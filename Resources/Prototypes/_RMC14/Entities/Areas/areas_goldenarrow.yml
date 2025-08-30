@@ -16,6 +16,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: true
@@ -180,3 +181,5 @@
   components:
   - type: Sprite
     state: oob
+  - type: Area
+    alwaysPowered: true

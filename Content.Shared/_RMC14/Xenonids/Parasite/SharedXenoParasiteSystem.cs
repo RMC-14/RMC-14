@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
@@ -74,6 +75,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
 
     private const CollisionGroup LeapCollisionGroup = CollisionGroup.InteractImpassable;
     private const CollisionGroup ThrownCollisionGroup = CollisionGroup.InteractImpassable | CollisionGroup.BarricadeImpassable;
@@ -368,8 +370,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimInfectedExamined(Entity<VictimInfectedComponent> victim, ref ExaminedEvent args)
     {
-        if (HasComp<XenoComponent>(args.Examiner) || (CompOrNull<GhostComponent>(args.Examiner)?.CanGhostInteract ?? false))
-            args.PushMarkup("This creature is impregnated.");
+        if (HasComp<XenoComponent>(args.Examiner))
+            args.PushMarkup("This one is hosting a sister! She will emerge in time.");
+
+        else if (HasComp<GhostComponent>(args.Examiner))
+            args.PushMarkup("This creature is infected.");
     }
 
     private void OnVictimInfectedRejuvenate(Entity<VictimInfectedComponent> victim, ref RejuvenateEvent args)
@@ -380,6 +385,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     private void OnVictimBurstMapInit(Entity<VictimBurstComponent> burst, ref MapInitEvent args)
     {
         _appearance.SetData(burst, BurstVisuals.Visuals, VictimBurstState.Burst);
+        _unrevivable.MakeUnrevivable(burst.Owner);
     }
 
     private void OnVictimUpdateMobState(Entity<VictimBurstComponent> burst, ref UpdateMobStateEvent args)
@@ -635,7 +641,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
             else
             {
-                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
+                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid) || _unrevivable.IsUnrevivable(uid)))
                 {
                     if (infected.SpawnedLarva != null)
                         TryBurst((uid, infected));
@@ -950,7 +956,18 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
         spawned = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
+        LinkLarvaToVictim(victim, spawned);
+    }
 
+    public void InsertLarva(Entity<VictimInfectedComponent> victim, EntityUid spawned)
+    {
+        var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
+        _container.InsertOrDrop(spawned, larvaContainer);
+        LinkLarvaToVictim(victim, spawned);
+    }
+
+    private void LinkLarvaToVictim(Entity<VictimInfectedComponent> victim, EntityUid spawned)
+    {
         if (HasComp<XenoComponent>(spawned))
             _hive.SetHive(spawned, victim.Comp.Hive);
 

@@ -7,9 +7,7 @@
   randomRotation: false
   stations:
     AdminFax:
-      stationProto: StandardUNMCWarship
+      stationProto: UNMCHighCommand
       components:
         - type: StationNameSetup
           mapNameTemplate: 'We-Ya Office'
-        - type: StationJobs
-          availableJobs: {}

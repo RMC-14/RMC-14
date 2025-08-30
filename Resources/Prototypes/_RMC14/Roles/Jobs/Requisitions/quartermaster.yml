@@ -34,6 +34,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillIntel: 1
@@ -42,6 +43,9 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
+    - type: CMVendorUser
+      id: CMQuartermaster
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
@@ -50,7 +54,7 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cargo
     - type: RMCTrackable
 

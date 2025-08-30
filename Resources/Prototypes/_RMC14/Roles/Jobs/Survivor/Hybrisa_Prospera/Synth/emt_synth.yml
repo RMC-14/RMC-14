@@ -1,7 +1,6 @@
 - type: job
   parent: RMCJobSyntheticColony
   id: RMCSyntheticColonyHybrisaEMT
-  playTimeTracker: RMCJobSyntheticColonyHybrisaEMT
   startingGear: RMCGearSyntheticColonistHybrisaEMT
   spawnMenuRoleName: EMT Synthetic (Hybrisa Survivor)
   special:
@@ -33,7 +32,7 @@
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
     - type: NpcFactionMember
       factions:
@@ -91,6 +90,7 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -99,10 +99,6 @@
     back: CMSatchelMedical
     shoes: RMCShoesWhite
 
-- type: playTimeTracker
-  id: RMCJobSyntheticColonyHybrisaEMT
-  isHumanoid: true
-
 - type: entity
   id: RMCSurvivorPresetHybrisaSynthEMT
   name: survivor synth hybrisa EMT preset
@@ -110,7 +106,7 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
-    - [ RMCArmorParamedicGreen, RMCJumpsuitEMTGreen, CMHandsLatex ]
+    - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCPouchMedkit, CMHandsLatex ]
+    - [ RMCCoatParamedicGreen, RMCJumpsuitEMTGreen, CMHandsLatex ]
     - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
-    - [ RMCArmorParamedic, RMCJumpsuitEMT, RMCArmorHelmetParamedic, RMCBeltMedicalDefibAnalyzerFilled, RMCHandsCombat ]
+    - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCArmorHelmetParamedic, RMCBeltMedicalDefibAnalyzerFilled, RMCHandsCombat ]

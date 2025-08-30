@@ -184,6 +184,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_blue.rsi
 
 - type: entity
+  parent: CMJumpsuitLiaisonBlue
+  id: CMJumpsuitLiaisonBlueKutjevoGoon
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYaBlack
+
+- type: entity
   parent: [CMJumpsuitLiaison, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitLiaisonOrange
   name: orange outfit
@@ -358,3 +366,146 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/stowaway.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonSkirt
+  name: liaison's skirt
+  description: A black cardigan with a red skirt, quite fancy!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_skirt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_skirt.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitWEYATrainee
+  name: trainee's uniform
+  description: It's a uniform with the WEYA insignia on it, with the words "Trainee" stamped below.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/trainee.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/trainee.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitBlackTailored
+  name: black tailored suit
+  description: A black suit and red tie. Very formal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/black_tailored.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/black_tailored.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitBurgundyTailored
+  name: burgundy tailored suit
+  description: A burgundy suit and black tie. Somewhat formal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/burgundy_tailored.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/burgundy_tailored.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitCharcoalTailored
+  name: charcoal tailored suit
+  description: A charcoal suit and red tie. Very professional.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/charcoal_tailored.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/charcoal_tailored.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitNavyTailored
+  name: navy tailored suit
+  description: A navy suit and red tie, intended for the ship's finest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/navy_tailored.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/navy_tailored.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitCheckeredTailored
+  name: checkered tailored suit
+  description: That's a very nice suit you have there. Shame if something were to happen to it, eh?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/checkered_tailored.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/checkered_tailored.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitJetblackExecutiveSuit
+  name: jet-black executive suit
+  description: A formal black suit and red tie, intended for the ship's finest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/jetblack_suit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/jetblack_suit.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitFemJetblackExecutiveSuit
+  name: fem jet-black executive suit
+  description: A formal trouser suit for women, intended for the ship's finest.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/jetblack_suit_fem.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/jetblack_suit_fem.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitBlackPantsUniform
+  name: simple white shirt with black pants
+  description: It's a very simple looking white shirt and black pants.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/black_pants_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/black_pants_uniform.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitBluePantsUniform
+  name: simple white shirt with blue pants
+  description: A classy shirt and tie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/blue_pants_uniform.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/blue_pants_uniform.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitWornSuit
+  name: worn suit
+  description: A washed out white shirt with a black tie and brown slacks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_brown.rsi
+
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitGreySuitPants
+  name: grey suit pants
+  description: A washed out white shirt with a red tie and black slacks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/detective_grey.rsi

@@ -3,7 +3,7 @@
   id: CMSurvivorTechnician
   name: cm-job-name-survivor-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorTechnician
+  playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorTechnician
   spawnMenuRoleName: Engineering Technician (NV Survivor)
   special:
@@ -27,7 +27,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetTechnician
-  useLoadoutOfJob: CMSurvivorEngineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorEngineer
@@ -40,7 +40,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorTechnician
-  name: survivor icb spawn point
+  name: survivor engineering technician spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -48,10 +48,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorTechnician
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetEngineer

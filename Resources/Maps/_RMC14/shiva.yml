@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/20/2025 21:13:49
-  entityCount: 17334
+  time: 08/04/2025 03:00:16
+  entityCount: 17336
 maps:
 - 1
 grids:
@@ -116691,6 +116691,18 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 107.5,76.5
       parent: 1
+- proto: RMCMonitorCameraLandingZone
+  entities:
+  - uid: 17335
+    components:
+    - type: Transform
+      pos: 23.5,32.5
+      parent: 1
+  - uid: 17336
+    components:
+    - type: Transform
+      pos: 22.5,139.5
+      parent: 1
 - proto: RMCMotionDetector
   entities:
   - uid: 14871
@@ -129725,7 +129737,7 @@ entities:
     - type: Transform
       pos: 172.5,99.5
       parent: 1
-- proto: WeaponRifleM54C
+- proto: RMCWeaponRifleM54C
   entities:
   - uid: 270
     components:
@@ -129762,14 +129774,14 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: WeaponRifleM54CE2
+- proto: RMCWeaponRifleM54CE2
   entities:
   - uid: 17132
     components:
     - type: Transform
       pos: 114.5,70.5
       parent: 1
-- proto: WeaponRifleM54CMK1
+- proto: RMCWeaponRifleM54CMK1
   entities:
   - uid: 387
     components:
@@ -129795,7 +129807,7 @@ entities:
     - type: Transform
       pos: 166.5,35.5
       parent: 1
-- proto: WeaponRifleM54CStripped
+- proto: RMCWeaponRifleM54CStripped
   entities:
   - uid: 17135
     components:

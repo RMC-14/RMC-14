@@ -77,12 +77,6 @@ entities:
           tiles: AAAAAAAAQQEAAAAAQQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAQQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
           version: 6
     - type: Broadphase
-    - type: Physics
-      bodyStatus: InAir
-      angularDamping: 0.05
-      linearDamping: 0.05
-      fixedRotation: False
-      bodyType: Dynamic
     - type: Fixtures
       fixtures: {}
     - type: Gravity
@@ -93,332 +87,28 @@ entities:
         version: 2
         nodes: []
     - type: OccluderTree
-    - type: Shuttle
     - type: RadiationGridResistance
     - type: GravityShake
       shakeTimes: 10
-    - type: GridAtmosphere
-      version: 2
-      data:
-        tiles:
-          -4,0:
-            0: 65535
-          -4,1:
-            0: 65535
-          -3,0:
-            0: 65535
-          -3,1:
-            0: 65533
-            1: 2
-          -2,0:
-            0: 65503
-            2: 32
-          -2,1:
-            0: 65535
-          -2,2:
-            0: 65535
-          -1,0:
-            0: 65535
-          -1,1:
-            0: 65535
-          -1,2:
-            0: 65535
-          -4,-3:
-            0: 61440
-          -4,-2:
-            0: 65535
-          -4,-1:
-            0: 65535
-          -3,-3:
-            0: 61440
-          -3,-2:
-            0: 65535
-          -3,-1:
-            0: 65535
-          -2,-4:
-            0: 65520
-          -2,-3:
-            0: 65535
-          -2,-2:
-            0: 65535
-          -2,-1:
-            0: 65535
-          -1,-4:
-            0: 65535
-          -1,-3:
-            0: 65535
-          -1,-2:
-            0: 65535
-          -1,-1:
-            0: 65535
-          0,4:
-            0: 61183
-          0,5:
-            0: 61166
-          0,6:
-            0: 14
-          1,4:
-            0: 65535
-          1,5:
-            0: 65535
-          1,6:
-            0: 65535
-          1,7:
-            0: 15
-          2,4:
-            0: 65535
-          2,5:
-            0: 65535
-          2,6:
-            0: 4095
-          3,4:
-            0: 65535
-          3,5:
-            0: 65535
-          3,6:
-            0: 53247
-          3,7:
-            0: 12
-          0,0:
-            0: 65535
-          0,1:
-            0: 65535
-          0,2:
-            0: 65535
-          0,3:
-            0: 65535
-          1,0:
-            0: 65535
-          1,1:
-            0: 65527
-            1: 8
-          1,2:
-            0: 65535
-          1,3:
-            0: 65535
-          2,0:
-            0: 4369
-            3: 8738
-          2,2:
-            0: 65535
-          2,3:
-            0: 65535
-          3,0:
-            0: 65535
-          3,2:
-            0: 65535
-          3,3:
-            0: 65535
-          3,1:
-            0: 61166
-          0,-4:
-            0: 65527
-          0,-3:
-            0: 65535
-          0,-2:
-            0: 65535
-          0,-1:
-            0: 65535
-          1,-4:
-            0: 30576
-          1,-3:
-            0: 65399
-          1,-2:
-            0: 63327
-            4: 32
-          1,-1:
-            0: 65535
-          2,-2:
-            0: 4096
-            3: 8738
-          2,-1:
-            0: 4369
-            3: 8738
-          3,-1:
-            0: 65262
-          3,-2:
-            0: 61152
-          4,-2:
-            0: 65520
-          4,-1:
-            0: 65535
-          5,-2:
-            0: 65520
-          5,-1:
-            0: 65535
-          6,-2:
-            0: 65520
-          6,-1:
-            0: 65535
-          7,-2:
-            0: 65520
-          7,-1:
-            0: 63487
-            1: 2048
-          -5,0:
-            0: 52428
-          -5,-3:
-            0: 32768
-          -5,-2:
-            0: 51336
-          -5,-1:
-            0: 52428
-          4,0:
-            0: 65535
-          4,1:
-            0: 65535
-          4,2:
-            0: 65535
-          4,3:
-            0: 65535
-          5,0:
-            0: 65535
-          5,1:
-            0: 65535
-          5,2:
-            0: 65535
-          5,3:
-            0: 65535
-          6,0:
-            0: 65535
-          6,1:
-            0: 65535
-          6,2:
-            0: 65535
-          6,3:
-            0: 63351
-          7,0:
-            0: 30583
-          7,1:
-            0: 4375
-          7,2:
-            0: 4369
-          7,3:
-            0: 4096
-          8,-2:
-            0: 30576
-          8,-1:
-            0: 30327
-            1: 256
-          4,4:
-            0: 30583
-          4,5:
-            0: 30583
-          4,6:
-            0: 30583
-          4,7:
-            0: 7
-          -4,2:
-            0: 26367
-          -1,3:
-            0: 15
-          2,1:
-            0: 4369
-            3: 2
-          -5,1:
-            0: 52428
-          -4,3:
-            0: 26222
-          -3,3:
-            0: 15
-          -2,3:
-            0: 15
-          -4,4:
-            0: 238
-          -3,4:
-            0: 255
-          -2,4:
-            0: 255
-          -1,4:
-            0: 255
-          -5,2:
-            0: 204
-          -3,2:
-            0: 35071
-          0,-5:
-            0: 28672
-          -1,-5:
-            0: 61440
-          2,-3:
-            3: 12834
-        uniqueMixes:
-        - volume: 2500
-          temperature: 293.15
-          moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 293.15
-          moles:
-          - 22.831823
-          - 85.89114
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 293.14975
-          moles:
-          - 20.078888
-          - 75.53487
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 293.15
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 293.14978
-          moles:
-          - 22.831823
-          - 85.89114
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        chunkSize: 4
-    - type: GasTileOverlay
+    - type: MapAtmosphere
+      space: False
+      mixture:
+        volume: 2500
+        immutable: True
+        temperature: 293.15
+        moles:
+        - 21.8124
+        - 81.1594
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
     - type: BecomesStation
       id: Dev
     - type: SpreaderGrid
@@ -6649,17 +6339,6 @@ entities:
     - type: Transform
       pos: 7.6382103,16.08618
       parent: 2
-    - type: SolutionContainerManager
-      solutions:
-        absorbed:
-          temperature: 293.15
-          canReact: True
-          maxVol: 50
-          name: null
-          reagents:
-          - data: null
-            ReagentId: Water
-            Quantity: 25
 - proto: PortableGeneratorSuperPacman
   entities:
   - uid: 1225
@@ -7531,7 +7210,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -1.808915,-3.4607978
       parent: 2
-- proto: WeaponRifleM54C
+- proto: RMCWeaponRifleM54C
   entities:
   - uid: 1323
     components:
@@ -7543,7 +7222,7 @@ entities:
     - type: Transform
       pos: -3.5531578,1.2044238
       parent: 2
-- proto: WeaponRifleM54CE2
+- proto: RMCWeaponRifleM54CE2
   entities:
   - uid: 1325
     components:
