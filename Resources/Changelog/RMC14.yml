@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: PMC corpse spawners on Hybrisa Biogenom and Cave Camp, Solaris Lambda
-      and ETA labs.
-    type: Add
-  - message: Corporate Supervisor corpse spawners on 624 Hydro Nightmare insert, Northwest
-      colony streets on Hybrisa.
-    type: Add
-  id: 1760
-  time: '2025-05-21T13:56:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6496
 - author: noctyrnal
   changes:
   - message: Added TSEPA personnel, Hybrisa's policing force, and their respective
@@ -4614,5 +4603,12 @@
   id: 2260
   time: '2025-08-30T00:07:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7042
+- author: ExponentialWizard
+  changes:
+  - message: fixed incorrect standing/resting states when unbuckling
+    type: Fix
+  id: 2261
+  time: '2025-08-30T00:21:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7462
 Name: RMC14
 Order: -1
