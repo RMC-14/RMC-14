@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed using tail seize during melee cooldown not properly cancelling
-      the ability.
-    type: Fix
-  id: 1782
-  time: '2025-06-01T10:23:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6599
 - author: DummeHytteOst
   changes:
   - message: Fixed being able to attach a bipod to the Mar-50.
@@ -4507,5 +4499,12 @@
   id: 2282
   time: '2025-08-30T04:01:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7363
+- author: Vixting
+  changes:
+  - message: Added live tacticalmap to dropship console
+    type: Add
+  id: 2283
+  time: '2025-08-30T04:40:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7017
 Name: RMC14
 Order: -1
