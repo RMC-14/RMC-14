@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added TSEPA personnel, Hybrisa's policing force, and their respective
-      gear - Designed for the PVE server.
-    type: Add
-  - message: Added new colony jobs for PVE.
-    type: Add
-  - message: The pistol belt has new urban camo.
-    type: Tweak
-  - message: Added a spearhead revolver belt.
-    type: Tweak
-  id: 1761
-  time: '2025-05-21T14:05:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6414
 - author: Dutch-VanDerLinde
   changes:
   - message: Added FORECON Marine survivors to Chance's claim.
@@ -4610,5 +4596,12 @@
   id: 2261
   time: '2025-08-30T00:21:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7462
+- author: shibechef
+  changes:
+  - message: Flare guns are significantly less likely to shoot through walls.
+    type: Fix
+  id: 2262
+  time: '2025-08-30T00:24:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7546
 Name: RMC14
 Order: -1
