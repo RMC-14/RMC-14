@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the pump shotgun only holding 9 shells instead of 10.
-    type: Fix
-  id: 1781
-  time: '2025-06-01T10:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6577
 - author: Vermidia
   changes:
   - message: Fixed using tail seize during melee cooldown not properly cancelling
@@ -4507,5 +4500,12 @@
   id: 2281
   time: '2025-08-30T04:00:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6988
+- author: Elysium206
+  changes:
+  - message: Disabler's now have a melee stun function similar to Drive Stunning!
+    type: Add
+  id: 2282
+  time: '2025-08-30T04:01:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7363
 Name: RMC14
 Order: -1
