@@ -1,0 +1,176 @@
+
+- type: entity
+  parent: SeedBase
+  name: packet of plump spores
+  id: PlumpSeeds
+  components:
+  - type: Seed
+    seedId: plump
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/plump.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of grass seeds
+  id: GrassSeeds
+  components:
+  - type: Seed
+    seedId: grass
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/grass.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of white beet seeds
+  id: WhiteBeetSeeds
+  components:
+  - type: Seed
+    seedId: whitebeet
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/whitebeet.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of peanut seeds
+  id: PeanutSeeds
+  components:
+  - type: Seed
+    seedId: peanut
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/peanut.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of sunflower seeds
+  id: SunflowerSeeds
+  components:
+  - type: Seed
+    seedId: sunflower
+  - type: Sprite
+    sprite: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
+
+- type: seed
+  id: plump
+  name: seeds-plump-name
+  noun: seeds-noun-spores
+  displayName: seeds-plump-display-name
+  plantRsi: _RMC14/Objects/Kitchen/Plants/plump.rsi
+  packetPrototype: PlumpSeeds
+  productPrototypes:
+  - FoodMushroomPlump
+  lifespan: 25
+  maturation: 8
+  production: 7
+  yield: 4
+  potency: 1
+  growthStages: 3
+  lightTolerance: 6
+  waterConsumption: 0.60
+  nutrientConsumption: 0.50
+  idealHeat: 288
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 25
+      PotencyDivisor: 25
+
+- type: seed
+  id: peanut
+  name: seeds-peanut-name
+  noun: seeds-noun-seeds
+  displayName: seeds-peanut-display-name
+  plantRsi: _RMC14/Objects/Kitchen/Plants/peanut.rsi
+  packetPrototype: PeanutSeeds
+  harvestRepeat: Repeat
+  productPrototypes:
+  - FoodPeanut
+  lifespan: 55
+  maturation: 6
+  production: 6
+  yield: 6
+  potency: 10
+  growthStages: 6
+  lightTolerance: 6
+  waterConsumption: 0.60
+  nutrientConsumption: 0.50
+  idealHeat: 288
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 25
+      PotencyDivisor: 25
+
+- type: seed
+  id: sunflower
+  name: seeds-sunflower-name
+  noun: seeds-noun-seeds
+  displayName: seeds-sunflower-display-name
+  plantRsi: _RMC14/Objects/Kitchen/Plants/sunflower.rsi
+  packetPrototype: SunflowerSeeds
+  productPrototypes:
+  - FoodSunflower
+  lifespan: 25
+  maturation: 6
+  production: 7
+  yield: 5
+  potency: 1
+  growthStages: 3
+  lightTolerance: 6
+  waterConsumption: 0.60
+  nutrientConsumption: 0.50
+  idealHeat: 288
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 25
+      PotencyDivisor: 25
+
+- type: seed
+  id: whitebeet
+  name: seeds-whitebeet-name
+  noun: seeds-noun-seeds
+  displayName: seeds-whitebeet-display-name
+  plantRsi: _RMC14/Objects/Kitchen/Plants/whitebeet.rsi
+  packetPrototype: WhiteBeetSeeds
+  productPrototypes:
+  - FoodWhiteBeet
+  lifespan: 60
+  maturation: 6
+  production: 6
+  yield: 6
+  potency: 10
+  growthStages: 6
+  lightTolerance: 6
+  waterConsumption: 0.60
+  nutrientConsumption: 0.50
+  idealHeat: 288
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 25
+      PotencyDivisor: 25
+
+- type: seed
+  id: grass
+  name: seeds-grass-name
+  noun: seeds-noun-seeds
+  displayName: seeds-grass-display-name
+  plantRsi: _RMC14/Objects/Kitchen/Plants/grass.rsi
+  packetPrototype: GrassSeeds
+  productPrototypes:
+  - FoodGrass
+  lifespan: 60
+  maturation: 6
+  production: 6
+  yield: 6
+  potency: 10
+  growthStages: 2
+  lightTolerance: 6
+  waterConsumption: 0.60
+  nutrientConsumption: 0.50
+  idealHeat: 288
+  chemicals:
+    Nutriment:
+      Min: 1
+      Max: 25
+      PotencyDivisor: 25

@@ -3,6 +3,8 @@
   id: RMCKitHonorGuard
   name: honor guard kit
   components:
+  - type: Item
+    size: Ginormous
   - type: Storage
     maxItemSize: Ginormous
     grid:
@@ -13,7 +15,7 @@
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: StorageFill
     contents:
-    # - id: RMCHeadsetMPHonor         TODO: CO tracker
+    - id: RMCHeadsetMPHonor
     # - id: CMPacketPillsOxycodone    TODO: Pain system
     - id: CMPacketPillsKelotane
     - id: CMPacketPillsBicaridine

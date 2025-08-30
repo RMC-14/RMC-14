@@ -15,7 +15,7 @@
     sprite: _RMC14/Objects/Weapons/Melee/flash.rsi
   - type: LimitedCharges
     maxCharges: 5
-    charges: 5
+    lastCharges: 5
   - type: AutoRecharge
     rechargeDuration: 15
   - type: UseDelay

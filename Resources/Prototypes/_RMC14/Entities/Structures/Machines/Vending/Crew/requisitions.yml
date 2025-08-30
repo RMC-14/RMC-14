@@ -1,7 +1,6 @@
 # REQUISITIONS
 
 # ARMAMENTS VENDOR
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoGuns
@@ -33,8 +32,10 @@
         amount: 50
       - id: CMWeaponPistolM1984
         amount: 50
-      #- id: CMWeaponFlareM82F
-      #  amount: 20
+      - id: RMCWeaponPistolM13
+        amount: 50
+      - id: RMCWeaponPistolM82F
+        amount: 20
     - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
@@ -99,7 +100,7 @@
         amount: 2
       - id: CMWebbing
         amount: 5
-      - id: CMWebbingPouch
+      - id: RMCWebbingDropPouch
         amount: 2
       - id: CMWebbingHolster
         amount: 2
@@ -125,8 +126,8 @@
         amount: 2
       - id: RMCBackpackRTO
         amount: 2
-      #- id: Parachute
-      #  amount: 20
+      - id: RMCParachute
+        amount: 20
       - id: RMCSatchelGrenadeSpec
         amount: 2
     - name: Belts
@@ -136,6 +137,8 @@
       - id: CMBeltMarine
         amount: 15
       - id: RMCBeltHolsterPistol
+        amount: 10
+      - id: RMCBeltHolsterM13
         amount: 10
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
@@ -186,7 +189,7 @@
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         amount: 1
-      - id: RMCPouchBayonet
+      - id: RMCPouchBayonetFill
         name: Bayonet Sheath (Full)
         amount: 2
       - id: RMCPouchGeneralMedium
@@ -310,7 +313,6 @@
         boxSlots: 3
 
 #AMMUNITION VENDOR
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAmmo
@@ -344,6 +346,8 @@
         amount: 80
       - id: CMMagazinePistolM1984
         amount: 100
+      - id: RMCMagazinePistolM13
+        amount: 100
     - name: Armor-piercing ammunition
       entries:
       - id: CMMagazinePistolM77AP
@@ -361,6 +365,10 @@
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
+        amount: 8
+      - id: RMCMagazinePistolM13Ext
+        amount: 10
+      - id: RMCMagazinePistolM13Drum
         amount: 8
     - name: Special ammunition
       entries:
@@ -401,12 +409,15 @@
     - name: Magazine Boxes
       hasBoxes: true
       entries:
-#      - name: Magazine Box (M10 x 22)
-#        box: RMCMagazine10
-#      - name: Magazine Box (Ext M10 x 14)
-#        box: RMCMagazineExtended10
-#      - name: Magazine Box (Drum M10 x 12)
-#        box: RMCMagazineDrum10
+      - id: RMCBoxMagazinePistolM13
+        name: Magazine Box (M13 x 22)
+        box: RMCMagazinePistolM13
+      - id: RMCBoxMagazinePistolM13Ext
+        name: Magazine Box (Ext M13 x 14)
+        box: RMCMagazinePistolM13Ext
+      - id: RMCBoxMagazinePistolM13Drum
+        name: Magazine Box (Drum M13 x 12)
+        box: RMCMagazinePistolM13Drum
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -518,8 +529,8 @@
         name: rifle ammunition box (10x24mm AP) (M54C)
         box: CMMagazineRifleM54CAP
         boxSlots: 15 # 600 / 40
- #ATTACHMENTS VENDOR
 
+#ATTACHMENTS VENDOR
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAttachments
@@ -543,6 +554,8 @@
         amount: 7
       - id: RMCAttachmentSuppressor
         amount: 7
+      - id: RMCAttachmentShotgunChoke
+        amount: 5
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope
@@ -601,12 +614,12 @@
         amount: 5
 
 #UNIFORM VENDOR
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoUniform
   name: ColMarTech surplus uniform vendor
   description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
+  suffix: Requisitions
   components:
   - type: AccessReader
     access:
@@ -701,3 +714,20 @@
         amount: 30
       - id: RMCM5CameraGear
         amount: 3
+      - id: RMCPatchFallingFalcons
+        amount: 15
+      - id: RMCPatchFallingFalconsAlt
+        name: Falling Falcons UN shoulder patch
+        amount: 15
+      - id: RMCPatchFallingFalconsLarge
+        name: Falling Falcons large chest patch
+        amount: 15
+      - id: RMCPatchUNMC
+        name: UNMC shoulder patch
+        amount: 15
+      - id: RMCPatchUnitedNations
+        name: United Nations shoulder patch
+        amount: 15
+      - id: RMCPatchUnitedNationsSquare
+        name: United Nations flag shoulder patch
+        amount: 15

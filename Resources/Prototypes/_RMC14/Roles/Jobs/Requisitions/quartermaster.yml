@@ -22,16 +22,10 @@
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: cargo
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -53,6 +47,11 @@
       prefix: cm-job-prefix-quartermaster
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: cargo
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearQuartermaster
@@ -81,3 +80,13 @@
 - type: playTimeTracker
   id: CMJobQuartermaster
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleQM
+  name: The QM
+  description: The Quartermaster.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: quartermaster

@@ -101,7 +101,7 @@
   parent: RMCRangefinder
   id: RMCLaserDesignatorSpotter
   name: spotter's laser designator
-  description: "A specially-designed laser designator, issued to USCM spotters, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something. Additionally, a trained spotter can laze targets for a USCM marksman, increasing the speed of target acquisition. A targeting beam will connect the binoculars to the target, but it may inherit the user's cloak, if possible."
+  description: "A specially-designed laser designator, issued to UNMC spotters, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something. Additionally, a trained spotter can laze targets for a UNMC marksman, increasing the speed of target acquisition. A targeting beam will connect the binoculars to the target, but it may inherit the user's cloak, if possible."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -145,6 +145,7 @@
   - type: PointLight
     enabled: true
     radius: 3
+  - type: RMCNightVisionVisibleInView
 
 - type: entity
   parent: RMCRangefinderTarget
@@ -157,17 +158,12 @@
   - type: LaserDesignatorTarget
 
 - type: entity
+  parent: RMCRangefinderTarget
   id: RMCLaserDropshipTarget
   name: blinking laser
   components:
-  - type: Transform
-    anchored: true
   - type: Sprite
-    sprite: _RMC14/Effects/laser.rsi
     state: laser_target3
-  - type: PointLight
-    enabled: true
-    radius: 3
   - type: TimedDespawn
     lifetime: 1
 

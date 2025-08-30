@@ -1,6 +1,9 @@
+using Content.Shared.Damage;
+using Content.Shared.Physics;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Leap;
@@ -35,4 +38,22 @@ public sealed partial class XenoLeapingComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool DestroyObjects;
+
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier Damage = new ();
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? HitEffect;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan TargetJitterTime;
+
+    [DataField, AutoNetworkedField]
+    public int TargetCameraShakeStrength;
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup IgnoredCollisionGroupLarge;
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup IgnoredCollisionGroupSmall;
 }

@@ -10,7 +10,7 @@
     - state: condisposal
       map: [ "enum.DisposalUnitVisualLayers.Unanchored" ]
     - state: disposal
-      map: [ "enum.DisposalUnitVisualLayers.Base" ]
+      map: [ "enum.DisposalUnitVisualLayers.Base", "enum.DisposalUnitVisualLayers.BaseCharging" ]
     - state: disposal-flush
       map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
     - state: dispover-charge
@@ -53,3 +53,7 @@
     blacklist:
       components:
       - Xeno
+  - type: XenoToggleChargingDamage
+    stageLoss: 2
+    minimumStage: 2
+    unanchor: true

@@ -72,6 +72,25 @@
       amount: 1
 
 - type: entity
+  parent: RMCPouchMedicalSoc
+  id: RMCPouchMedicalSocMarineRaiderFill
+  suffix: Filled
+  components:
+  - type: StorageFill # TODO RMC14
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMTraumaKit10
+      amount: 2
+    - id: CMBurnKit10
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    - id: CMEmergencyAutoInjector
+      amount: 2
+    - id: CMFireExtinguisherPortable
+    - id: Stimpack
+      amount: 3
+
+- type: entity
   parent: RMCPouchMedicalSocDutch
   id: RMCPouchMedicalSocDutchUnmarked
   name: tactical medical pouch
@@ -121,7 +140,9 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-    # todo rmc14 roller cryobag
+    - id: CMRollerBedSpawnFolded
+    - id: CMFireExtinguisherPortable
+    - id: CMStasisBagFolded
 
 
 # Vial Pouch
@@ -216,7 +237,6 @@
     - id: CMEmergencyAutoInjector
       amount: 1
 
-
 # Syringe Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -243,93 +263,3 @@
     contents:
     - id: CMSyringe
       amount: 6
-
-
-# MedKit Pouch
-- type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchMedkit
-  name: medical kit pouch
-  description: It's specifically made to hold medical items.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/medkit.rsi
-  - type: StorageStoreSkillRequired
-    entries:
-    - whitelist:
-        tags:
-        - DiscreteHealthAnalyzer
-        - Dropper
-        - Pill
-        - Bottle
-        - Syringe
-        - PillCanister
-        - CMTraumaKit
-        - CMBurnKit
-        - CMOintment
-        - Brutepack
-        - CMBloodPack
-      # - TODO RMC14 splint
-        - CMAutoInjector
-      # - TODO RMC14 syringe case
-        - CMSurgicalCase
-        - CMFireExtinguisherPortable
-        - CMRollerItem
-        - CMSurgicalLine
-        - CMSynthGraft
-        - BodyBag
-#       - TODO RMC14 fixovein
-        - Hypospray
-        components:
-        - Hypospray
-      skills:
-        all:
-          RMCSkillMedical: 2
-  - type: Storage
-    grid:
-    - 0,0,13,1 #7 slots
-    maxItemSize: Large
-    whitelist:
-      tags:
-      - DiscreteHealthAnalyzer
-      - Dropper
-      - Pill
-      - Bottle
-      - Syringe
-      - PillCanister
-      - CMTraumaKit
-      - CMBurnKit
-      - CMOintment
-      - Brutepack
-      - CMBloodPack
-      #      - TODO RMC14 splint
-      - CMAutoInjector
-      #      - TODO RMC14 syringe case
-      - CMSurgicalCase
-      - CMFireExtinguisherPortable
-      - CMRollerItem
-      - CMSurgicalLine
-      - CMSynthGraft
-      - BodyBag
-#      - TODO RMC14 fixovein
-      - Hypospray
-      components:
-      - Hypospray
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - CMSurgicalCase
-
-- type: entity
-  parent: RMCPouchMedkit
-  id: RMCPouchMedkitFill
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMTraumaKit10
-    - id: CMBurnKit10
-    # splint
-    - id: CMBicaridineAutoInjector
-    - id: CMKelotaneAutoInjector

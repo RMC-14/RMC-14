@@ -22,9 +22,6 @@
   accessGroups:
   - Rifleman
   hasIcon: false
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: private
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -38,6 +35,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-rifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: private
 
 - type: startingGear
   id: CMGearRifleman

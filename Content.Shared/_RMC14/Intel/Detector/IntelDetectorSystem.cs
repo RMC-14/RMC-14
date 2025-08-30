@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.MotionDetector;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
@@ -15,6 +16,7 @@ public sealed class IntelDetectorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedCMInventorySystem _rmcInventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -119,12 +121,14 @@ public sealed class IntelDetectorSystem : EntitySystem
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                detector.Blips.Add(_transform.GetMapCoordinates(tracked));
+                detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), false));
             }
 
             if (detector.Blips.Count == 0)
             {
-                _audio.PlayPvs(detector.ScanEmptySound, uid);
+                if (_rmcInventory.TryGetUserHoldingOrStoringItem(uid, out var user))
+                    _audio.PlayEntity(detector.ScanEmptySound, user, uid);
+
                 continue;
             }
 

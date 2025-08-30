@@ -1,5 +1,8 @@
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
@@ -66,6 +69,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafen = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     public override void Initialize()
     {
@@ -274,10 +279,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
     {
-        if (_status.HasStatusEffect(victim, "Muted", null) && _status.HasStatusEffect(victim, "TemporaryBlindness", null))
+        if (_status.HasStatusEffect(victim, "Unconscious", null))
         {
-            _status.TryRemoveStatusEffect(victim, "Muted");
-            _status.TryRemoveStatusEffect(victim, "TemporaryBlindness");
+            _status.TryRemoveStatusEffect(victim, "Unconscious");
         }
         _standing.Stand(victim);
     }
@@ -327,6 +331,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         var ev = new AttachParasiteDoAfterEvent();
         var delay = parasite.Comp.ManualAttachDelay;
+
+        if (parasite.Owner == user)
+            delay = parasite.Comp.SelfAttachDelay;
 
         if (HasComp<TrapParasiteComponent>(parasite))
             delay = TimeSpan.Zero;
@@ -431,9 +438,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         infectable.BeingInfected = true;
         Dirty(victim, infectable);
 
-        _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
-        _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
-        _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
+        _size.TryKnockOut(victim, parasite.Comp.ParalyzeTime, true);
         RefreshIncubationMultipliers(victim);
 
         _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
@@ -533,7 +538,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 _inventory.TryUnequip(infectedVictim, "mask", true, true, true);
 
                 var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
-                victimComp.Hive = _hive.GetHive(uid)?.Owner;
+                SetHive((infectedVictim, victimComp), _hive.GetHive(uid)?.Owner);
 
                 // TODO RMC14 also do damage to the parasite
                 EnsureComp<ParasiteSpentComponent>(uid);
@@ -572,21 +577,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
             // spawn the larva
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
-            {
-                var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
-                var spawned = SpawnInContainerOrDrop(infected.BurstSpawn, uid, larvaContainer.ID);
-
-                if (HasComp<XenoComponent>(spawned))
-                    _hive.SetHive(spawned, infected.Hive);
-
-                infected.CurrentStage = 6;
-                infected.SpawnedLarva = spawned;
-                Dirty(uid, infected);
-
-                EnsureComp<BursterComponent>(spawned, out var burster);
-                burster.BurstFrom = uid;
-                Dirty(spawned, burster);
-            }
+                SpawnLarva((uid, infected), out _);
 
             // Stages
             // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
@@ -688,9 +679,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return;
 
         //TODO Minor limb damage and causes pain
-        _stun.TryParalyze(victim, knockdownTime, false);
-        _status.TryAddStatusEffect(victim, "Muted", knockdownTime, true, "Muted");
-        _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
+        _size.TryKnockOut(victim, knockdownTime, true);
         _jitter.DoJitter(victim, jitterTime, false);
         _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
 
@@ -731,6 +720,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             NeedHand = false,
             BreakOnDamage = false,
             BreakOnMove = false,
+            BreakOnRest = false,
             Hidden = true,
             CancelDuplicate = true,
             BlockDuplicate = true,
@@ -788,7 +778,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_container.TryGetContainer(ent, ent.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
+            {
                 RemCompDeferred<BursterComponent>(larva);
+                var invc = EnsureComp<RMCTemporaryInvincibilityComponent>(larva);
+                invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
+                Dirty(larva, invc);
+            }
+
             _container.EmptyContainer(container, destination: coords);
         }
 
@@ -860,9 +856,37 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     public void TryStartBurst(Entity<VictimInfectedComponent> burst)
     {
-        burst.Comp.BurstAt = TimeSpan.Zero;
-        Dirty(burst);
+        SetBurstDelay(burst, TimeSpan.Zero);
         TryBurst(burst);
+    }
+
+    public void SetBurstDelay(Entity<VictimInfectedComponent> burst, TimeSpan time)
+    {
+        burst.Comp.BurstAt = _timing.CurTime + time;
+        Dirty(burst);
+    }
+
+    public void SetHive(Entity<VictimInfectedComponent> burst, EntityUid? hive)
+    {
+        burst.Comp.Hive = hive;
+        Dirty(burst);
+    }
+
+    public void SpawnLarva(Entity<VictimInfectedComponent> victim, out EntityUid spawned)
+    {
+        var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
+        spawned = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
+
+        if (HasComp<XenoComponent>(spawned))
+            _hive.SetHive(spawned, victim.Comp.Hive);
+
+        victim.Comp.CurrentStage = 6;
+        victim.Comp.SpawnedLarva = spawned;
+        Dirty(victim);
+
+        EnsureComp<BursterComponent>(spawned, out var burster);
+        burster.BurstFrom = victim.Owner;
+        Dirty(spawned, burster);
     }
 }
 

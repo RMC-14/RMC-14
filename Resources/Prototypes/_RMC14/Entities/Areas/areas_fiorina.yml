@@ -18,6 +18,7 @@
     OB: true
     supplyDrop: true
     minimapColor: '#6C6767D8'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaFiorina
@@ -155,6 +156,7 @@
     supplyDrop: true
     landingZone: true
     minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
@@ -197,6 +199,7 @@
     state: shuttle
   - type: Area
     linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -207,6 +210,7 @@
     state: shuttle2
   - type: Area
     linkedLz: dropship_lz2
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorina
@@ -224,6 +228,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorinaStation

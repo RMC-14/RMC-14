@@ -15,16 +15,24 @@ using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Database;
+using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.GameTicking;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
+using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
@@ -47,12 +55,14 @@ namespace Content.Shared._RMC14.Dropship.Weapon;
 
 public abstract class SharedDropshipWeaponSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly DropshipUtilitySystem _dropshipUtility = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
@@ -88,8 +98,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, ExaminedEvent>(OnFlareSignalExamined);
         SubscribeLocalEvent<FlareSignalComponent, DroppedEvent>(OnFlareSignalDropped);
         SubscribeLocalEvent<FlareSignalComponent, ThrownEvent>(OnFlareSignalThrown);
+        SubscribeLocalEvent<FlareSignalComponent, GrenadeContentThrownEvent>(OnFlareSignalGrenadeContentThrown);
         SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
         SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
+
+        SubscribeLocalEvent<ActiveFlareSignalComponent, ExaminedEvent>(OnActiveFlareExamined);
 
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, MapInitEvent>(OnTerminalMapInit);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIOpenedEvent>(OnTerminalBUIOpened);
@@ -112,6 +125,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsChooseWeaponMsg>(OnWeaponsChooseWeaponMsg);
                 subs.Event<DropshipTerminalWeaponsChooseMedevacMsg>(OnWeaponsChooseMedevacMsg);
                 subs.Event<DropshipTerminalWeaponsChooseFultonMsg>(OnWeaponsChooseFultonMsg);
+                subs.Event<DropshipTerminalWeaponsChooseParaDropMsg>(OnWeaponsChooseParaDropMsg);
                 subs.Event<DropshipTerminalWeaponsFireMsg>(OnWeaponsFireMsg);
                 subs.Event<DropshipTerminalWeaponsNightVisionMsg>(OnWeaponsNightVisionMsg);
                 subs.Event<DropshipTerminalWeaponsExitMsg>(OnWeaponsExitMsg);
@@ -127,6 +141,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsFultonPreviousMsg>(OnWeaponsFultonPrevious);
                 subs.Event<DropshipTerminalWeaponsFultonNextMsg>(OnWeaponsFultonNext);
                 subs.Event<DropshipTerminalWeaponsFultonSelectMsg>(OnWeaponsFultonSelect);
+                subs.Event<DropShipTerminalWeaponsParaDropTargetSelectMsg>(OnWeaponsParaDropSelect);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
@@ -213,6 +228,34 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (IsFlareLit(ent))
             args.Cancel();
+    }
+
+    private void OnFlareSignalGrenadeContentThrown(Entity<FlareSignalComponent> ent, ref GrenadeContentThrownEvent args)
+    {
+        if (!TryComp(args.Source, out ProjectileComponent? projectile))
+            return;
+
+        var id = ComputeNextId();
+        var abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
+        if (projectile.Shooter != null)
+            abbreviation = GetUserAbbreviation(projectile.Shooter.Value, id);
+
+        if (projectile.Weapon != null)
+        {
+            if (TryComp(projectile.Weapon, out RMCAirShotComponent? airShot))
+            {
+                airShot.LastFlareId = abbreviation;
+                Dirty(projectile.Weapon.Value, airShot);
+            }
+        }
+
+        MakeDropshipTarget(ent, abbreviation);
+    }
+
+    private void OnActiveFlareExamined(Entity<ActiveFlareSignalComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.Abbreviation is { } id)
+            args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine-id", ("id", id)));
     }
 
     private void OnTerminalMapInit(Entity<DropshipTerminalWeaponsComponent> ent, ref MapInitEvent args)
@@ -442,6 +485,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SetScreenUtility<RMCFultonComponent>(ent, args.First, Fulton);
     }
 
+    private void OnWeaponsChooseParaDropMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseParaDropMsg args)
+    {
+        SetScreenUtility<RMCParaDropComponent>(ent, args.First, Paradrop);
+    }
+
     private void OnWeaponsFireMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMsg args)
     {
         if (_net.IsClient)
@@ -569,6 +617,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (ammo.Comp.DeleteOnEmpty && ammo.Comp.Rounds <= 0)
             QueueDel(ammo);
+
+        _adminLog.Add(LogType.RMCDropshipWeapon, $"{ToPrettyString(args.Actor)} fired {ToPrettyString(weapon)} at {ToPrettyString(target)}");
     }
 
     private void OnWeaponsNightVisionMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsNightVisionMsg args)
@@ -751,6 +801,86 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         RefreshWeaponsUI(ent);
     }
 
+    private void OnWeaponsParaDropSelect(Entity<DropshipTerminalWeaponsComponent> ent, ref DropShipTerminalWeaponsParaDropTargetSelectMsg args)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        if (ent.Comp.Target == null)
+        {
+            if (_net.IsClient)
+            {
+                var msg = Loc.GetString("rmc-dropship-paradrop-lock-no-target");
+                _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+            }
+            RefreshWeaponsUI(ent);
+            return;
+        }
+
+        if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
+            dropship.Comp.AttachmentPoints.Count == 0)
+            return;
+
+        // Only select a target while travelling
+        if (!CasDebug)
+        {
+            if (!TryComp(dropship, out FTLComponent? ftl) ||
+                ftl.State != FTLState.Travelling)
+            {
+                if (_net.IsClient)
+                {
+                    var msg = Loc.GetString("rmc-dropship-paradrop-lock-target-not-flying");
+                    _popup.PopupCursor(msg, args.Actor, PopupType.SmallCaution);
+                }
+                return;
+            }
+        }
+
+        var coordinates = _transform.GetMoverCoordinates(ent.Comp.Target.Value);
+
+        // Can't drop underground
+        if (!CasDebug)
+        {
+            if(!_area.CanCAS(coordinates) ||
+               !_area.CanFulton(coordinates) ||
+               !_area.CanSupplyDrop(_transform.ToMapCoordinates(coordinates)))
+            {
+                if (_net.IsClient)
+                {
+                    var msg = Loc.GetString("rmc-laser-designator-not-cas");
+                    _popup.PopupCursor(msg, args.Actor);
+                }
+                return;
+            }
+        }
+
+        // Open the doors so people can jump out
+        if (args.On)
+        {
+            var enumerator = Transform(dropship).ChildEnumerator;
+            while (enumerator.MoveNext(out var child))
+            {
+                if (!TryComp(child, out DoorComponent? door) ||
+                    door.Location != DoorLocation.Aft ||
+                    !TryComp(child, out DoorBoltComponent? doorBolt) ||
+                    door.State == DoorState.Open)
+                    continue;
+
+                _door.StartOpening(child);
+                _door.TrySetBoltDown((child,doorBolt), true);
+            }
+
+            var paraDrop = EnsureComp<ActiveParaDropComponent>(dropship);
+            paraDrop.DropTarget = ent.Comp.Target;
+            Dirty(dropship, paraDrop);
+        }
+        else
+        {
+            RemComp<ActiveParaDropComponent>(dropship);
+        }
+        RefreshWeaponsUI(ent);
+    }
+
     private void UpdateTarget(Entity<DropshipTerminalWeaponsComponent> ent, EntityUid target)
     {
         RemovePvsActors(ent);
@@ -887,6 +1017,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return true;
 
         if (!IsFlareLit(ent))
+            return false;
+
+        if (ent.Comp.Abbreviation == null)
             return false;
 
         var target = new DropshipTargetComponent { Abbreviation = ent.Comp.Abbreviation };
@@ -1090,7 +1223,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var query = EntityQueryEnumerator<ActiveLaserDesignatorComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var active, out var xform))
         {
-            if (!_transform.InRange(xform.Coordinates, active.Origin, 0.1f))
+            if (!_transform.InRange(xform.Coordinates, active.Origin, active.BreakRange))
                 RemCompDeferred<ActiveLaserDesignatorComponent>(uid);
         }
     }

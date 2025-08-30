@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CCVar;
+﻿using Content.Shared._RMC14.Admin;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
@@ -41,6 +42,9 @@ public sealed class ScalingSystem : EntitySystem
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!ev.LateJoin || !HasComp<MarineComponent>(ev.Mob))
+            return;
+
+        if (HasComp<RMCAdminSpawnedComponent>(ev.Mob))
             return;
 
         if (ev.JobId is not { } jobId ||
@@ -130,6 +134,10 @@ public sealed class ScalingSystem : EntitySystem
         var vendors = EntityQueryEnumerator<CMAutomatedVendorComponent>();
         while (vendors.MoveNext(out var vendorId, out var vendor))
         {
+            var scale = scaling.Comp.Scale;
+            if (!vendor.Scaling)
+                scale = 1;
+
             foreach (var section in vendor.Sections)
             {
                 for (var i = 0; i < section.Entries.Count; i++)
@@ -138,7 +146,7 @@ public sealed class ScalingSystem : EntitySystem
                     if (entry.Amount is not { } amount || entry.Box != null)
                         continue;
 
-                    amount = (int) Math.Round(amount * scaling.Comp.Scale);
+                    amount = (int) Math.Round(amount * scale);
                     section.Entries[i] = entry with
                     {
                         Amount = amount,

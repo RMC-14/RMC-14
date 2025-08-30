@@ -1,0 +1,117 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPMedic
+  name: rmc-job-name-spp-medic
+  description: rmc-job-description-spp-medic
+  playTimeTracker: CMJobSPPMedic
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  startingGear: RMCGearSPPMedic
+  icon: "RMCJobIconSPPMedic"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  spawnMenuRoleName: SPP Medic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-medic
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPMedicHostile
+  name: spp ghost role medic
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPMedic
+
+- type: entity
+  id: RMCRandomHumanoidSPPMedicFriendly
+  name: spp ghost role medic
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPMedicFriendly
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-hostile-medic
+    description: rmc-ghost-role-information-spp-hostile-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPMedic
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: randomHumanoidSettings
+  parent: RMCSPPMedic
+  id: RMCSPPMedicFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-friendly-medic
+    description: rmc-ghost-role-information-spp-friendly-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPMedic
+    raffle:
+      settings: short
+    requirements:
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: startingGear
+  id: RMCGearSPPMedic
+  equipment:
+    head: CMHeadCapSPP
+    ears: RMCHeadsetSPPMedic
+    ears2: RMCM5CameraGear
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: CMJumpsuitSPPMedic
+    outerClothing: RMCArmorSPPSupport
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    suitstorage: RMCWeaponSMGType64
+    id: RMCIDSPP
+    belt: CMBeltMedicBagFilled
+    back: RMCSatchelSPPMedic
+    pocket1: RMCPouchMedkitFillSPP
+    pocket2: RMCPouchMagazineType64
+
+- type: playTimeTracker
+  id: CMJobSPPMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_med

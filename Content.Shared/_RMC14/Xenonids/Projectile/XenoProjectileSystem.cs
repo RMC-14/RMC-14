@@ -1,9 +1,11 @@
-﻿using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -28,16 +30,19 @@ public sealed class XenoProjectileSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly CMPoweredLightSystem _rmcPoweredLight = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<ProjectileComponent> _projectileQuery;
+    private EntityQuery<PreventAttackLightOffComponent> _preventAttackLightOffQuery;
 
     public override void Initialize()
     {
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
+        _preventAttackLightOffQuery = GetEntityQuery<PreventAttackLightOffComponent>();
 
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
@@ -46,7 +51,17 @@ public sealed class XenoProjectileSystem : EntitySystem
 
     private void OnPreventCollide(Entity<XenoProjectileComponent> ent, ref PreventCollideEvent args)
     {
-        if (args.Cancelled || ent.Comp.DeleteOnFriendlyXeno)
+        if (args.Cancelled)
+            return;
+
+        if (_preventAttackLightOffQuery.HasComp(args.OtherEntity) &&
+            _rmcPoweredLight.IsOff(args.OtherEntity))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (ent.Comp.DeleteOnFriendlyXeno)
             return;
 
         if (_hive.FromSameHive(ent.Owner, args.OtherEntity) &&
@@ -65,6 +80,9 @@ public sealed class XenoProjectileSystem : EntitySystem
 
             return;
         }
+
+        if (HasComp<XenoComponent>(args.Target))
+            args.Damage = _xeno.TryApplyXenoProjectileDamageMultiplier(args.Target, args.Damage);
 
         if (_projectileQuery.TryComp(ent, out var projectile) &&
             projectile.Shooter is { } shooter)
@@ -118,7 +136,7 @@ public sealed class XenoProjectileSystem : EntitySystem
             FiredProjectiles = new List<EntityUid>(shots)
         };
 
-        if (target != null && !_xeno.CanAbilityAttackTarget(xeno, target.Value, true))
+        if (target != null && HasComp<MobStateComponent>(target) && !_xeno.CanAbilityAttackTarget(xeno, target.Value))
             target = null;
 
         var originalDiff = targetMap.Position - origin.Position;

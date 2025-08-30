@@ -43,13 +43,14 @@
         Asphyxiation: 3
     damage:
       types:
-        Heat: 17.5
+        Heat: 35
     barricadeDamage:
       types:
-        Heat: 11.5
+        Heat: 8.5
     whitelist:
       components:
       - Marine
+      - Xeno
   - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
 
 - type: entity
@@ -111,7 +112,7 @@
       components:
       - Marine
   - type: DeleteOnExplosion
-  
+
 - type: entity
   id: RMCSmokeRunner
   name: acid smoke

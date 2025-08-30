@@ -1,0 +1,22 @@
+<Document>
+  #Crusher, Tier 3
+  <GuideEntityEmbed Entity="RMCXenoCrusher"/>
+  ##Playing as a Crusher
+  Make use of your high armor pool and explosion resistance to protect sisters and walk enemies down. Crushers become immune to grenade stuns and get multiple passives.
+
+  Never charge into a horde of hosts with no knowledge, you are very slow and will be vulnerable to the demolitions specialist as you have no escape abilities, this means you must play crusher with lots of info.
+
+  To push in, you should first start with a charge and defensive shield at the start, so that your slashes can regenerate the cooldown. Use stomp to disrupt hosts while you slash them and then disengage.
+
+  Your slashes will slow targets and deal adjacent damage to any targets nearby, they also reduce ability cooldowns.
+
+  ##Abilities:
+  - [bold][color=green]PASSIVE[/color][/bold]: Your slashes cleave targets, allowing them to hit multiple enemies at once in its direction for a lessened damage amount.
+  - [bold][color=green]PASSIVE[/color][/bold]: Your slashes reduce ability cooldowns and slow down enemies.
+  - [bold]Charge[/bold]: Click on a tile to charge at. after a delay, you will bash anybody in the way dealing massive damage to them and reduce your charge cooldown.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCharge"/>
+  - [bold]Stomp[/bold]: Stomp on the ground in a AOE that stuns all targets nearby briefly. When used directly atop a downed target, it will inflict heavy damage.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoStomp"/>
+  - [bold]Defensive Shield[/bold]: Gain a temporary shield that blocks and reduces damage, it also has a short timer of high explosive invulnerability.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoDefensiveShield"/>
+</Document>

@@ -8,9 +8,6 @@ namespace Content.Shared._RMC14.Atmos;
 public sealed partial class IgniteOnProjectileHitComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int Stacks = 20;
-
-    [DataField, AutoNetworkedField]
     public int Intensity = 30;
 
     [DataField, AutoNetworkedField]

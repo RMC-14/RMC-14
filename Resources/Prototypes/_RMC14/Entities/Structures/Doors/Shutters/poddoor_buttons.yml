@@ -37,9 +37,63 @@
 - type: entity
   parent: RMCPodDoorButton
   id: RMCPodDoorButtonWeYa
-  name: button
-  suffix: locked, weya
-  description: A remote control-switch for a door.
+  suffix: Locked, We-Ya
   components:
   - type: AccessReader
     access: [ [ "RMCAccessWeYa" ] ]
+
+- type: entity
+  parent: RMCPodDoorButtonWeYa
+  id: RMCPodDoorButtonWeYaOfficeDoor
+  name: Office Door Shutter
+  components:
+  - type: RMCDoorButton
+    id: cl_office_door
+
+- type: entity
+  parent: RMCPodDoorButtonWeYa
+  id: RMCPodDoorButtonWeYaOfficeWindows
+  name: Office Windows Shutters
+  components:
+  - type: RMCDoorButton
+    id: cl_office_windows
+
+- type: entity
+  parent: RMCPodDoorButtonWeYa
+  id: RMCPodDoorButtonWeYaOfficeRoomDivider
+  name: Room Divider
+  components:
+  - type: RMCDoorButton
+    id: RoomDivider
+
+- type: entity
+  parent: RMCPodDoorButtonWeYa
+  id: RMCPodDoorButtonWeYaOfficeEvacPod
+  name: Evac Pod Door Control
+  components:
+  - type: RMCDoorButton
+    id: cl_evac
+
+- type: entity
+  parent: RMCPodDoorButtonWeYa
+  id: RMCPodDoorButtonWeYaOfficeQuarterDoor
+  name: Quarter Door Shutter
+  components:
+  - type: RMCDoorButton
+    id: cl_quarter_door
+
+- type: entity
+  parent: RMCPodDoorButtonWeYa
+  id: RMCPodDoorButtonWeYaOfficeMaintenanceDoor
+  name: Maintenance Door Shutter
+  components:
+  - type: RMCDoorButton
+    id: cl_quarter_maintenance
+
+- type: entity
+  parent: RMCPodDoorButtonWeYa
+  id: RMCPodDoorButtonWeYaOfficeQuarterWindows
+  name: Quarter Windows Shutters
+  components:
+  - type: RMCDoorButton
+    id: cl_quarter_windows

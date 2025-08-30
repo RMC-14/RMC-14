@@ -29,10 +29,13 @@ public static class Identity
         var whitelistSystem = ent.System<EntityWhitelistSystem>();
         if (viewer != null &&
             ent.TryGetComponent(uid, out FixedIdentityComponent? fixedIdentity) &&
-            fixedIdentity.Name is { } name &&
+            fixedIdentity.Name is { } nameId &&
             whitelistSystem.IsWhitelistPass(fixedIdentity.Whitelist, viewer.Value))
         {
-            return name;
+            var name = Loc.GetString(nameId);
+            var ev = new RMCGetFixedIdentityEvent(name);
+            ent.EventBus.RaiseLocalEvent(uid, ref ev);
+            return ev.Name;
         }
 
         if (!ent.TryGetComponent<IdentityComponent>(uid, out var identity))
@@ -60,9 +63,15 @@ public static class Identity
     ///     This is an extension method because of its simplicity, and if it was any harder to call it might not
     ///     be used enough for loc.
     /// </summary>
-    public static EntityUid Entity(EntityUid uid, IEntityManager ent)
+    /// <param name="viewer">
+    ///     If this entity can see through identities, this method will always return the actual target entity.
+    /// </param>
+    public static EntityUid Entity(EntityUid uid, IEntityManager ent, EntityUid? viewer = null)
     {
         if (!ent.TryGetComponent<IdentityComponent>(uid, out var identity))
+            return uid;
+
+        if (viewer != null && CanSeeThroughIdentity(uid, viewer.Value, ent))
             return uid;
 
         return identity.IdentityEntitySlot.ContainedEntity ?? uid;

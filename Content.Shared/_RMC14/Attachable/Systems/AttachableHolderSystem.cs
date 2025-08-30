@@ -51,7 +51,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableDetachDoAfterEvent>(OnDetachDoAfter);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachToSlotMessage>(OnAttachableHolderAttachToSlotMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
-        SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, GunShotEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
         SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
@@ -85,6 +84,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GetFireModesEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetDamageFalloffEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetWeaponAccuracyEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GunGetAmmoSpreadEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, DroppedEvent>(RelayEvent);
 
 
@@ -244,30 +244,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         RaiseLocalEvent(holder.Comp.SupercedingAttachable.Value, activateInWorldEvent);
 
         args.Handled = activateInWorldEvent.Handled;
-    }
-
-    private void OnAttachableHolderAttemptShoot(Entity<AttachableHolderComponent> holder, ref AttemptShootEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (holder.Comp.SupercedingAttachable == null)
-            return;
-
-        args.Cancelled = true;
-
-        if (!TryComp<GunComponent>(holder.Owner, out var holderGunComponent) ||
-            holderGunComponent.ShootCoordinates == null ||
-            !TryComp<GunComponent>(holder.Comp.SupercedingAttachable,
-                out var attachableGunComponent))
-        {
-            return;
-        }
-
-        _gun.AttemptShoot(args.User,
-            holder.Comp.SupercedingAttachable.Value,
-            attachableGunComponent,
-            holderGunComponent.ShootCoordinates.Value);
     }
 
     private void OnAttachableHolderUniqueAction(Entity<AttachableHolderComponent> holder, ref UniqueActionEvent args)
@@ -650,19 +626,16 @@ public sealed class AttachableHolderSystem : EntitySystem
 
     private void ToggleAttachable(EntityUid userUid, string slotId)
     {
-        if (!TryComp<HandsComponent>(userUid, out var handsComponent) ||
-            !TryComp<AttachableHolderComponent>(handsComponent.ActiveHandEntity, out var holderComponent))
+        if (_hands.GetActiveItem(userUid) is not { } active ||
+            !TryComp<AttachableHolderComponent>(active, out var holderComponent))
         {
             return;
         }
 
-        var active = handsComponent.ActiveHandEntity;
         if (!holderComponent.Running || !_actionBlocker.CanInteract(userUid, active))
             return;
 
-        if (!_container.TryGetContainer(active.Value,
-                slotId,
-                out var container) || container.Count <= 0)
+        if (!_container.TryGetContainer(active, slotId, out var container) || container.Count <= 0)
             return;
 
         var attachableUid = container.ContainedEntities[0];
@@ -670,32 +643,27 @@ public sealed class AttachableHolderSystem : EntitySystem
         if (!HasComp<AttachableToggleableComponent>(attachableUid))
             return;
 
-        if (!TryComp<AttachableToggleableComponent>(attachableUid, out var toggleableComponent))
-            return;
-
-        var ev = new AttachableToggleStartedEvent(active.Value, userUid, slotId);
+        var ev = new AttachableToggleStartedEvent(active, userUid, slotId);
         RaiseLocalEvent(attachableUid, ref ev);
     }
 
     private void FieldStripHeldItem(EntityUid userUid)
     {
-        if (!TryComp<HandsComponent>(userUid, out var handsComponent) ||
-            !TryComp<AttachableHolderComponent>(handsComponent.ActiveHandEntity, out var holderComponent))
+        if (_hands.GetActiveItem(userUid) is not { } active ||
+            !TryComp<AttachableHolderComponent>(active, out var holderComponent))
         {
             return;
         }
 
-        EntityUid holderUid = handsComponent.ActiveHandEntity.Value;
-
-        if (!holderComponent.Running || !_actionBlocker.CanInteract(userUid, holderUid))
+        if (!holderComponent.Running || !_actionBlocker.CanInteract(userUid, active))
             return;
 
-        foreach (var verb in _verbSystem.GetLocalVerbs(holderUid, userUid, typeof(Verb)))
+        foreach (var verb in _verbSystem.GetLocalVerbs(active, userUid, typeof(Verb)))
         {
             if (!verb.Text.Equals(Loc.GetString("rmc-verb-strip-attachables")))
                 continue;
 
-            _verbSystem.ExecuteVerb(verb, userUid, holderUid);
+            _verbSystem.ExecuteVerb(verb, userUid, active);
             break;
         }
     }
@@ -704,6 +672,25 @@ public sealed class AttachableHolderSystem : EntitySystem
     {
         holder.Comp.SupercedingAttachable = supercedingAttachable;
         Dirty(holder);
+    }
+
+    public bool TryGetInhandSupercedingGun(EntityUid user, out EntityUid attachable, [NotNullWhen(true)] out GunComponent? gunComp)
+    {
+        attachable = default;
+
+        if (_hands.GetActiveItem(user) is not { } active ||
+            !TryComp(active, out AttachableHolderComponent? holderComp) ||
+            holderComp.SupercedingAttachable == null)
+        {
+            gunComp = null;
+            return false;
+        }
+
+        if(!TryComp(holderComp.SupercedingAttachable, out gunComp))
+            return false;
+
+        attachable = holderComp.SupercedingAttachable.Value;
+        return true;
     }
 
     public bool TryGetSlotId(EntityUid holderUid, EntityUid attachableUid, [NotNullWhen(true)] out string? slotId)

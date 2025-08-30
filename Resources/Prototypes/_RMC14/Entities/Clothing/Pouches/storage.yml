@@ -31,20 +31,6 @@
     grid:
     - 0,0,3,1 #4 slots
 
-
-# Large General Pouch
-- type: entity
-  parent: RMCPouchGeneral
-  id: RMCPouchGeneralLarge
-  name: large general pouch
-  description: A general-purpose pouch used to carry more differently sized items.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_drop.rsi
-  - type: Storage
-    grid:
-    - 0,0,5,1 #6 slot
-
 - type: entity
   parent: RMCPouchGeneralLarge
   id: RMCPouchGeneralLargeBureauObserverFill
@@ -95,6 +81,13 @@
 
 - type: entity
   parent: RMCPouchSurvival
+  id: RMCPouchSurvivalBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+
+- type: entity
+  parent: RMCPouchSurvival
   id: RMCPouchSurvivalFill
   suffix: Filled
   components:
@@ -107,6 +100,13 @@
     - id: RMCRadioHandheldColony
     - id: RMCM5Bayonet
       # 5 splints
+
+- type: entity
+  parent: [ RMCPouchSurvivalBlack, RMCPouchSurvivalFill ]
+  id: RMCPouchSurvivalBlackFilled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
 
 
 # Survival Synth Pouch
@@ -211,6 +211,17 @@
       tags:
       - Sidearm
 
+#Filled Command Pouch
+- type: entity
+  parent: RMCPouchCommand
+  id: RMCPouchCommandFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
+
 
 # Magazine Pouch
 - type: entity
@@ -250,6 +261,25 @@
     grid:
     - 0,0,7,1 #4 slots
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargeMP5
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGMP5
+      amount: 4
+
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineType64
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGType64
+      amount: 4
 
 # Pistol Magazine Pouch
 - type: entity
@@ -300,6 +330,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/medium_shotshells.rsi
+    layers:
+    - state: icon
+    - state: half
+      visible: false
+    - state: full
+      visible: false
   - type: Storage
     grid:
     - 0,0,9,1 #5 slots
@@ -312,7 +348,24 @@
     items:
       tags:
       - RMCShellShotgun
-
+  - type: Tag
+    tags:
+    - Pouch
+    - RMCPouchShotgunShells
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 # Large Shotgun Shell Pouch
 - type: entity
@@ -334,6 +387,20 @@
     items:
       tags:
       - RMCShellShotgun
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 - type: entity
   parent: RMCPouchShotgunLarge
@@ -608,6 +675,22 @@
     - id: CMMultitool
     - id: CMWrench
 
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocMarineRaiderFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMCrowbar
+    - id: RMCCableCoil
+    - id: CMMultitool
+    - id: CMWrench
+    - id: RMCExplosivePlastic
+      amount: 2
+
 
 # Sling Pouch
 - type: entity
@@ -637,3 +720,35 @@
 #    grid:
 #    - 0,0,2,1 #3 slots
 #whitelist: # TODO RMC14 add cassettes
+
+# Drum Pouch
+- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchDrumPMC
+  name: smartgun drum pouch
+  description: A heavy pouch designed for carrying a surplus of smargun drums.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/wy_sgdrums_ammo.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1 #3 slots
+    whitelist:
+      tags:
+      - RMCMagazineSmartGun
+      - RMCMagazineSmartGunirradiated
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCPouchDrumPMC
+  id: RMCPouchDrumPMCFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGunirradiated
+      amount: 3
+
+- type: Tag
+  id: RMCPouchShotgunShells

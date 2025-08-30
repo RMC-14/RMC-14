@@ -123,6 +123,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/general.rsi
 
+
+- type: entity
+  parent: RMCHeadCapGeneral
+  id: RMCHeadBeretGeneral
+  name: armored general's beret
+  description: A sturdy general officer's beret. More protective and stylish than it seems. Please don't ditch this for a helmet like a punk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_general.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_general.rsi
+
 # Quartermaster hats
 - type: entity
   parent: CMHeadCapCargo

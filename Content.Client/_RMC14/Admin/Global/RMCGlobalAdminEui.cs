@@ -31,6 +31,7 @@ public sealed class RMCGlobalAdminEui : BaseEui
         TabContainer.SetTabTitle(_window.MarinesTab, "Marines");
         TabContainer.SetTabTitle(_window.XenosTab, "Xenos");
         TabContainer.SetTabTitle(_window.TacticalMapTab, "Tactical Map");
+        TabContainer.SetTabTitle(_window.FactionsTab, "Factions");
 
         _window.RefreshButton.OnPressed += OnRefresh;
         _window.OpenCentered();
@@ -45,6 +46,7 @@ public sealed class RMCGlobalAdminEui : BaseEui
         _window.Squads.DisposeAllChildren();
         _window.XenoTiers.DisposeAllChildren();
         _window.TacticalMapHistory.DisposeAllChildren();
+        _window.Factions.DisposeAllChildren();
 
         foreach (var cVar in _config.GetRegisteredCVars())
         {
@@ -147,6 +149,76 @@ public sealed class RMCGlobalAdminEui : BaseEui
             _window.TacticalMapLabel.Text = $"Selected: Round {s.TacticalMapLines.RoundId} by {s.TacticalMapLines.Actor}";
             _window.TacticalMap.Texture = Texture.Transparent;
             _window.TacticalMap.Lines.AddRange(s.TacticalMapLines.Lines);
+        }
+
+        foreach (var (left, value) in s.Factions)
+        {
+            var factionBox = new BoxContainer()
+            {
+                Orientation = LayoutOrientation.Vertical,
+            };
+            factionBox.AddChild(new Label { Text = $"{left}:", MinWidth = 50 });
+
+            foreach (var right in s.Factions.Keys)
+            {
+                if (left == right)
+                    continue;
+
+                var innerBox = new BoxContainer()
+                {
+                    Orientation = LayoutOrientation.Horizontal,
+                };
+
+                var group = new ButtonGroup();
+                var friendly = new Button()
+                {
+                    Text = "+",
+                    ToggleMode = true,
+                    Pressed = value.Friendly.Contains(right),
+                    Group = group,
+                };
+                friendly.OnPressed += _ =>
+                {
+                    SendMessage(new RMCAdminFactionMsg(RMCAdminFactionMsgType.Friendly, left, right));
+                };
+                innerBox.AddChild(friendly);
+
+                var neutral = new Button()
+                {
+                    Text = "=",
+                    ToggleMode = true,
+                    Pressed = !(value.Friendly.Contains(right) || value.Hostile.Contains(right)),
+                    Group = group,
+                };
+                neutral.OnPressed += _ =>
+                {
+                    SendMessage(new RMCAdminFactionMsg(RMCAdminFactionMsgType.Neutral, left, right));
+                };
+                innerBox.AddChild(neutral);
+
+                var hostile = new Button()
+                {
+                    Text = "-",
+                    ToggleMode = true,
+                    Pressed = value.Hostile.Contains(right),
+                    Group = group,
+                };
+                hostile.OnPressed += _ =>
+                {
+                    SendMessage(new RMCAdminFactionMsg(RMCAdminFactionMsgType.Hostile, left, right));
+                };
+                innerBox.AddChild(hostile);
+
+                innerBox.AddChild(new Label { Text = $"{right}", MinWidth = 50 });
+                factionBox.AddChild(innerBox);
+            }
+
+            factionBox.AddChild(new HSeparator
+            {
+                Color = Color.FromHex("#4972A1"),
+                Margin = new Thickness(0, 10),
+            });
+            _window.Factions.AddChild(factionBox);
         }
     }
 

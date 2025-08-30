@@ -1,10 +1,8 @@
-﻿using Robust.Shared.Map;
-
-namespace Content.Shared._RMC14.MotionDetector;
+﻿namespace Content.Shared._RMC14.MotionDetector;
 
 public interface IDetectorComponent
 {
-    public List<MapCoordinates> Blips { get; set; }
+    public List<Blip> Blips { get; set; }
 
     public TimeSpan LastScan { get; set; }
 

@@ -2,7 +2,7 @@
   parent: RMCBaseMarineArmorLight
   id: RMCArmorM4RLight
   name: M4R pattern CMB light armor
-  description: A dark set of armor, which is a modification of the security variant of Armat Systems M3 armor. Designed for riot control and protest suppression in mind. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it. The laws of the Earth stretch beyond the Sol.
+  description: A dark set of armor, which is a modification of the security variant of Aegis Battlefield Armaments M3 armor. Designed for riot control and protest suppression in mind. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it. The laws of the Earth stretch beyond the Sol.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_light_armor.rsi
@@ -27,7 +27,7 @@
   parent: RMCBaseMarineArmorLight
   id: RMCArmorM4RMedium
   name: M4R pattern CMB armor
-  description: A dark set of armor, which is a modification of the security variant of Armat Systems M3 armor. Designed for riot control and protest suppression in mind. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it. The laws of the Earth stretch beyond the Sol.
+  description: A dark set of armor, which is a modification of the security variant of Aegis Battlefield Armaments M3 armor. Designed for riot control and protest suppression in mind. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it. The laws of the Earth stretch beyond the Sol.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_heavy_armor.rsi

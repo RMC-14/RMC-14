@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Xenonids.Fruit;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -32,10 +33,10 @@ public sealed class XenoFruitChooseBui : BoundUserInterface
     protected override void Open()
     {
         base.Open();
-        _window = new XenoFruitChooseWindow();
-        _window.OnClose += Close;
 
+        _window = this.CreateWindow<XenoFruitChooseWindow>();
         _buttons.Clear();
+
         var group = new ButtonGroup();
         if (EntMan.TryGetComponent(Owner, out XenoFruitPlanterComponent? xeno))
         {
@@ -65,13 +66,6 @@ public sealed class XenoFruitChooseBui : BoundUserInterface
         }
 
         Refresh();
-        _window.OpenCentered();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _window?.Dispose();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

@@ -25,7 +25,7 @@ public sealed partial class XenoParasiteThrowerComponent : Component
     public int CurParasites = 0;
 
     [DataField]
-    public TimeSpan ThrownParasiteStunDuration = TimeSpan.FromSeconds(5);
+    public TimeSpan ThrownParasiteStunDuration = TimeSpan.FromSeconds(7.5); //5 seconds in practice to account for less xeno stun time
 
     [DataField]
     public TimeSpan ThrownParasiteCooldown = TimeSpan.FromSeconds(2);
@@ -41,16 +41,14 @@ public sealed partial class XenoParasiteThrowerComponent : Component
 [Serializable, NetSerializable]
 public enum ParasiteOverlayVisuals
 {
-	Resting,
-	Downed,
-	States
+    States
 }
 
 [Serializable, NetSerializable]
 public enum ParasiteOverlayLayers : int
 {
-	RightArm = 0,
-	Head = 1,
-	LeftArm = 2,
-	Back = 3
+    RightArm = 0,
+    Head = 1,
+    LeftArm = 2,
+    Back = 3
 }

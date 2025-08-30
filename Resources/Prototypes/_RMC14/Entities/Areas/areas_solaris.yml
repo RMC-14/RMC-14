@@ -41,6 +41,7 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredGround
@@ -526,6 +527,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#812DA2EE'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2CavesLambda
@@ -575,6 +577,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -593,6 +596,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#A22D2DEE'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBase
@@ -624,6 +628,7 @@
     noTunnel: true
     unweedable: true
     buildSpecial: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -673,6 +678,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -751,6 +757,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Caves
@@ -840,6 +847,7 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -858,6 +866,7 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -877,6 +886,7 @@
     supplyDrop: true
     minimapColor: '#A22D2DEE'
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -896,6 +906,7 @@
     supplyDrop: true
     minimapColor: '#3DBF75EE'
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -914,6 +925,7 @@
     OB: true
     supplyDrop: true
     minimapColor: '#2D3FA2EE'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -932,6 +944,7 @@
     OB: true
     supplyDrop: true
     minimapColor: '#C19504E7'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -951,6 +964,7 @@
     supplyDrop: false
     minimapColor: '#3DBF75EE'
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -968,6 +982,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -985,6 +1000,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1002,6 +1018,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1019,6 +1036,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1036,6 +1054,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1053,6 +1072,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1072,6 +1092,7 @@
     supplyDrop: true
     linkedLz: dropship_lz1
     landingZone: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1112,6 +1133,7 @@
     supplyDrop: false
     linkedLz: dropship_lz1
     landingZone: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
@@ -1188,6 +1210,7 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideEngineering
@@ -1213,6 +1236,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1230,6 +1254,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1247,6 +1272,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1264,6 +1290,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1281,6 +1308,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1298,6 +1326,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1316,6 +1345,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#2D1342EE'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1333,6 +1363,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1350,6 +1381,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1367,6 +1399,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1381,11 +1414,17 @@
   parent: RMCAreaBigredv2Landing
   id: RMCAreaBigredv2LandingConsole
   name: LZ1 'Telecomms'
+  components:
+  - type: Area
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Landing
   id: RMCAreaBigredv2LandingConsole2
   name: LZ2 'Cargo'
+  components:
+  - type: Area
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1404,6 +1443,7 @@
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1422,6 +1462,7 @@
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1440,6 +1481,7 @@
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1458,6 +1500,7 @@
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1475,3 +1518,4 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false

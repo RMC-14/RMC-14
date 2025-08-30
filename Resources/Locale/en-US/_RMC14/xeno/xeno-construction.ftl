@@ -10,9 +10,12 @@ rmc-xeno-construction-remote-construct = We focus our plasma into the weeds belo
 rmc-xeno-construction-remote-open-door = We focus our connection to the resin and remotely open the resin door.
 rmc-xeno-construction-remote-close-door = We focus our connection to the resin and remotely close the resin door.
 
+rmc-xeno-construction-no-map = The ground isn't solid.
 rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
 rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.
+rmc-xeno-construction-blocked = We can't make this here.
 rmc-xeno-construction-blocked-resin-hole = There's something built here already.
+rmc-xeno-construction-blocked-structure = There's something built here already.
 rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
 rmc-xeno-construction-dead-body = The body is in the way!
 
@@ -71,6 +74,8 @@ rmc-xeno-construction-default-area-name = Unknown
 
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
 rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
+rmc-xeno-construction-tunnel-examine-not-xeno-empty = [color=purple][italic]It's a dark abyss...[/italic][/color]
+rmc-xeno-construction-tunnel-examine-not-xeno = [color=purple][italic]It's a dark abyss with a few little...lights...almost like something is watching.[/italic][/color]
 
 rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
 rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!
@@ -93,3 +98,6 @@ rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras
 
 rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
 rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.
+
+rmc-xeno-construction-no-map-structure = The ground isn't solid.
+rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!

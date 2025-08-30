@@ -2,11 +2,14 @@
 server_name = "normandy"
 
 [game]
-desc = "Inspired by CMSS13 from Byond! Join and play as a marine, responding to a mysterious distress signal, or a xenonid, building out your hive and defending it from the marines."
-hostname = "[EN][MRP] Rouny's Marine Corps Normandy [US East]"
+desc = "Official RMC special PvE gamemode, run by a gamemaster."
+hostname = "[EN][HRP] PvE Rouny's Marine Corps Normandy [US East]"
 
 [hub]
-tags = "lang:en,region:am_n_e,rp:med"
+tags = "lang:en,region:am_n_e,rp:high"
 
 [loki]
 name = "normandy"
+
+[rmc]
+planet_map_vote = false

@@ -25,6 +25,9 @@
         - MachineMask
         layer:
         - MobMask
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine 
   - type: Destructible
     thresholds:
     - trigger:

@@ -37,9 +37,6 @@
   overwatchSortPriority: -6
   overwatchShowName: true
   overwatchRoleName: Squad Leader
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: leader
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -69,6 +66,11 @@
       prefix: cm-job-prefix-squad-leader
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: leader
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearSquadLeader

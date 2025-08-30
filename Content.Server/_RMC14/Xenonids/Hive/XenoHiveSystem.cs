@@ -1,25 +1,40 @@
-﻿using Content.Server._RMC14.Announce;
+using Content.Server._RMC14.Announce;
 using Content.Server.GameTicking;
+using Content.Server.Popups;
+using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Chat;
 using Content.Shared.GameTicking;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
+using Robust.Server.Audio;
+using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Data;
 using IConfigurationManager = Robust.Shared.Configuration.IConfigurationManager;
 
 namespace Content.Server._RMC14.Xenonids.Hive;
 
 public sealed class XenoHiveSystem : SharedXenoHiveSystem
 {
+    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
 
     private readonly List<string> _announce = [];
     private readonly EntProtoId _defaultHive = "CMXenoHive";
@@ -33,6 +48,9 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         base.Initialize();
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
 
+        SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
+        SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentShutdown>(OnBurrowedSurgeShutdown);
+
         Subs.CVar(_config,
             RMCCVars.RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes,
             v => _lateJoinsPerBurrowedLarvaEarlyThreshold = TimeSpan.FromMinutes(v),
@@ -44,6 +62,9 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!ev.LateJoin || !HasComp<MarineComponent>(ev.Mob))
+            return;
+
+        if (HasComp<RMCAdminSpawnedComponent>(ev.Mob))
             return;
 
         if (ev.JobId is not { } jobId ||
@@ -69,9 +90,18 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             hive.LateJoinMarines -= lateJoinsPer;
-            hive.BurrowedLarva++;
-            Dirty(uid, hive);
+            IncreaseBurrowedLarva((uid, hive), 1);
         }
+    }
+
+    private void OnBurrowedSurgeStartup(Entity<HijackBurrowedSurgeComponent> hive, ref ComponentStartup args)
+    {
+        _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hive, Loc.GetString("rmc-xeno-burrowed-surge-start"));
+    }
+
+    private void OnBurrowedSurgeShutdown(Entity<HijackBurrowedSurgeComponent> hive, ref ComponentShutdown args)
+    {
+        _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hive, Loc.GetString("rmc-xeno-burrowed-surge-end"));
     }
 
     public override void Update(float frameTime)
@@ -114,6 +144,34 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
             var popup = Loc.GetString("rmc-hive-supports-castes", ("castes", string.Join(", ", _announce)));
             _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, popup, hive.AnnounceSound, PopupType.Large);
+            EvoScreech(hive);
+        }
+
+        var time = _timing.CurTime;
+        var surge = EntityQueryEnumerator<HijackBurrowedSurgeComponent, HiveComponent>();
+        while (surge.MoveNext(out var id, out var burrowed, out var hive))
+        {
+            if (time < burrowed.NextSurgeAt)
+                continue;
+
+            if (GetHiveCore((id, hive)) == null)
+            {
+                //Reset time between if no core
+                if (burrowed.SurgeEvery != burrowed.ResetSurgeTime)
+                    burrowed.SurgeEvery = burrowed.ResetSurgeTime;
+                continue;
+            }
+
+            IncreaseBurrowedLarva(1);
+            burrowed.PooledLarva--;
+            if (burrowed.PooledLarva < 1)
+                RemCompDeferred<HijackBurrowedSurgeComponent>(id);
+
+            if (burrowed.SurgeEvery > burrowed.MinSurgeTime)
+                burrowed.SurgeEvery -= burrowed.ReduceSurgeBy;
+
+            burrowed.NextSurgeAt = time + burrowed.SurgeEvery;
+
         }
     }
 
@@ -125,5 +183,33 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         var ent = Spawn(proto ?? _defaultHive);
         _metaData.SetEntityName(ent, name);
         return ent;
+    }
+
+    public void EvoScreech(HiveComponent hive)
+    {
+        if (hive.CurrentQueen is not { } queen)
+            return;
+
+        // Get the map that the queen is on
+        var map = _transform.GetMapId(queen);
+        var mapFilter = Filter.BroadcastMap(map);
+
+        foreach (var session in mapFilter.Recipients)
+        {
+            if (session.AttachedEntity is not { } recipient)
+                continue;
+
+            if (HasComp<XenoComponent>(recipient))
+                continue;
+
+            var popupText = Loc.GetString(HasComp<SynthComponent>(recipient)
+                ? "rmc-hive-supports-castes-synth"
+                : "rmc-hive-supports-castes-human");
+
+            popupText = $"[bold][font size=24][color=red]\n{popupText}\n[/color][/font][/bold]";
+
+            _audio.PlayEntity(hive.MarineAnnounceSound, recipient, recipient);
+            _rmcChat.ChatMessageToOne(ChatChannel.Radio, popupText, popupText, default, false, session.Channel);
+        }
     }
 }

@@ -5,6 +5,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideCommunicationsTowers
   - type: Transform
     anchored: true
   - type: Physics

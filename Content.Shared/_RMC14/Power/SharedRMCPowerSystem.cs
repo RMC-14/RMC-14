@@ -16,6 +16,7 @@ using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
+using Content.Shared.Toggleable;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee;
@@ -54,6 +55,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     private EntityQuery<RMCApcComponent> _apcQuery;
     private EntityQuery<AppearanceComponent> _appearanceQuery;
     private EntityQuery<RMCAreaPowerComponent> _areaPowerQuery;
+    private EntityQuery<AreaComponent> _areaQuery;
     private EntityQuery<RMCPowerReceiverComponent> _powerReceiverQuery;
 
     public override void Initialize()
@@ -61,6 +63,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         _apcQuery = GetEntityQuery<RMCApcComponent>();
         _appearanceQuery = GetEntityQuery<AppearanceComponent>();
         _areaPowerQuery = GetEntityQuery<RMCAreaPowerComponent>();
+        _areaQuery = GetEntityQuery<AreaComponent>();
         _powerReceiverQuery = GetEntityQuery<RMCPowerReceiverComponent>();
 
         SubscribeLocalEvent<RMCApcComponent, MapInitEvent>(OnApcUpdate);
@@ -73,7 +76,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCApcComponent, ActivatableUIOpenAttemptEvent>(OnApcActivatableUIOpenAttempt);
         SubscribeLocalEvent<RMCApcComponent, ExaminedEvent>(OnApcExamined);
 
-        SubscribeLocalEvent<RMCPowerReceiverComponent, MapInitEvent>(OnReceiverUpdate);
+        SubscribeLocalEvent<RMCPowerReceiverComponent, MapInitEvent>(OnReceiverMapInit);
         SubscribeLocalEvent<RMCPowerReceiverComponent, EntParentChangedMessage>(OnReceiverUpdate);
         SubscribeLocalEvent<RMCPowerReceiverComponent, ComponentRemove>(OnReceiverRemove);
         SubscribeLocalEvent<RMCPowerReceiverComponent, EntityTerminatingEvent>(OnReceiverRemove);
@@ -311,6 +314,11 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             if (markup != null)
                 args.PushMarkup(markup);
         }
+    }
+
+    protected virtual void OnReceiverMapInit(Entity<RMCPowerReceiverComponent> ent, ref MapInitEvent args)
+    {
+        OnReceiverUpdate(ent, ref args);
     }
 
     private void OnReceiverUpdate<T>(Entity<RMCPowerReceiverComponent> ent, ref T args)
@@ -739,6 +747,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (!_areaPowerQuery.Resolve(area, ref area.Comp, false))
             return false;
 
+        if (_areaQuery.TryComp(area, out var areaComponent) && areaComponent.AlwaysPowered)
+            return true;
+
         foreach (var apcId in area.Comp.Apcs)
         {
             if (!_apcQuery.TryComp(apcId, out var apc))
@@ -830,7 +841,10 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                 while (lights.MoveNext(out var uid, out _, out var xform))
                 {
                     if (xform.MapID == map)
+                    {
+                        _appearance.SetData(uid, ToggleableVisuals.Enabled, powered);
                         _pointLight.SetEnabled(uid, powered);
+                    }
                 }
             }
         }

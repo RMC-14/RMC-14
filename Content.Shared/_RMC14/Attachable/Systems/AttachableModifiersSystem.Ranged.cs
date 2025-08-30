@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 
@@ -17,6 +18,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetDamageFalloffEvent>>(OnRangedModsGetDamageFalloff);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetWeaponAccuracyEvent>>(OnRangedModsGetWeaponAccuracy);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunGetAmmoSpreadEvent>>(OnRangedModsGetScatterFlat);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
     }
 
@@ -90,10 +92,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 _cmGunSystem.RefreshGunDamageMultiplier(args.Holder);
 
                 if (attachable.Comp.FireModeMods != null)
-                {
                     _rmcSelectiveFireSystem.RefreshFireModes(args.Holder, true);
-                    break;
-                }
 
                 _rmcSelectiveFireSystem.RefreshModifiableFireModeValues(args.Holder);
                 break;
@@ -117,7 +116,11 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
             // Fire rate is shots per second. Fire delay is the interval between shots. They are inversely proportionate to each other.
             // First we divide 1 second by the fire rate to get our current fire delay, then we add the delay modifier, then we divide 1 by the result again to get the modified fire rate.
             var fireDelayMod = args.Args.Gun.Comp.SelectedMode == SelectiveFire.Burst ? modSet.FireDelayFlat / 2f : modSet.FireDelayFlat;
-            args.Args.FireRate = 1f / (1f / args.Args.FireRate + fireDelayMod);
+            var fireRate = 1f / (1f / args.Args.FireRate + fireDelayMod);
+            if (float.IsInfinity(fireRate))
+                continue;
+
+            args.Args.FireRate = fireRate;
         }
     }
 
@@ -177,6 +180,17 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.BurstScatterMult += modSet.BurstScatterAddMult;
+        }
+    }
+
+    private void OnRangedModsGetScatterFlat(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GunGetAmmoSpreadEvent> args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.Spread += Angle.FromDegrees(modSet.ScatterFlat);
         }
     }
 }

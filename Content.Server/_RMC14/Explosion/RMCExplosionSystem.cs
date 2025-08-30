@@ -59,7 +59,7 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
 
     private void OnTrigger(TriggerEvent ev)
     {
-        var rmcEv = new RMCTriggerEvent(ev.Handled);
+        var rmcEv = new RMCTriggerEvent(ev.User, ev.Handled);
         RaiseLocalEvent(ev.Triggered, ref rmcEv);
         ev.Handled = rmcEv.Handled;
     }

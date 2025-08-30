@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Heal;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Salve;
 using Robust.Client.GameObjects;
 
@@ -26,9 +27,9 @@ public sealed class XenoSalveVisualsSystem : VisualizerSystem<XenoSalveVisualsCo
 
         string layerState = "salved";
 
-        if (AppearanceSystem.TryGetData(uid, XenoHealerVisuals.Downed, out bool downed) && downed)
+        if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out bool downed) && downed)
             layerState += "_downed";
-        else if (AppearanceSystem.TryGetData(uid, XenoHealerVisuals.Resting, out bool resting) && resting)
+        else if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
             layerState += "_rest";
 
         sprite.LayerSetState(layer, layerState);

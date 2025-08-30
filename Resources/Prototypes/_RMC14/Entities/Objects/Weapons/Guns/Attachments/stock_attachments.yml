@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCAttachableBase
   id: RMCStockAttachmentBase
@@ -61,11 +61,6 @@
   - type: AttachableWieldDelayMods
     modifiers:
       - delay: 0.4
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -102,11 +97,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentMOU53Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -143,11 +133,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentType23Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableWieldDelayMods
     modifiers:
       - delay: 0.3
@@ -186,7 +171,7 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentXM51Stock # TODO RMC14 burst
+  id: RMCAttachmentXM51Stock
   name: XM51 stock
   description: A specialized stock designed for XM51 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility.
   components:
@@ -214,6 +199,12 @@
         types:
           Blunt: 10
   - type: AttachableWeaponRangedMods
+    fireModeMods:
+    - conditions:
+        whitelist:
+          tags:
+          - RMCXM51StockBurst
+      extraFireModes: Burst
     modifiers:
     - conditions:
         wieldedOnly: true
@@ -461,6 +452,11 @@
     - conditions:
         activeOnly: true
       delay: 0.2
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 5
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -666,6 +662,11 @@
     - conditions:
         activeOnly: true
       delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -800,11 +801,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentXM88Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 5
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -849,11 +845,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentHG3712Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -869,11 +860,65 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentHG3712Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentSSG45Stock
+  name: SSG45 solid stock
+  description: Intergrated into the SSG45. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: ssg45_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentSSG45Stock
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL83A2Stock
+  name: L83A2 solid stock
+  description: Intergrated into the L83A2. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: l83a2_a
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentL83A2Stock
+
+- type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentAK4047StockCollapsible
+  name: AK-4047 folding stock
+  description: The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: ak4047_stock
+  - type: AttachableToggleable
+    active: true
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: ak4047_stock
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      state: ak4047_stock-on
+    actionName: Toggle AK-4047 Folding Stock
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentAK4047StockCollapsible
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
@@ -886,6 +931,9 @@
 
 - type: Tag
   id: RMCAttachmentM42A2WoodenStock
+
+- type: Tag
+  id: RMCXM51StockBurst
 
 - type: Tag
   id: RMCAttachmentXM51Stock
@@ -949,3 +997,12 @@
 
 - type: Tag
   id: RMCAttachmentType71Stock
+
+- type: Tag
+  id: RMCAttachmentSSG45Stock
+
+- type: Tag
+  id: RMCAttachmentL83A2Stock
+
+- type: Tag
+  id: RMCAttachmentAK4047StockCollapsible

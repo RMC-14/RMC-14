@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -87,7 +88,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 foreach (var reagent in solution.Contents)
                 {
                     var name = reagent.Reagent.Prototype;
-                    if (_prototypes.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
+                    if (_prototypes.TryIndexReagent(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
                         name = reagentProto.LocalizedName;
 
                     args.PushText($"{reagent.Quantity.Float():F2} units of {name}");
@@ -189,6 +190,9 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private void OnEmptySolutionGetVerbs(Entity<RMCEmptySolutionComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        if (!args.CanAccess || !args.CanComplexInteract)
+            return;
+
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solutionEnt, out _) ||
             solutionEnt.Value.Comp.Solution.Volume <= FixedPoint2.Zero)
         {
@@ -227,7 +231,6 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         }
 
         _solution.SplitSolution(solutionEnt.Value, args.Amount);
-        Log.Info(solutionEnt.Value.Comp.Solution.Volume.ToString());
         DispenserUpdated(ent);
     }
 
@@ -236,7 +239,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         if (!_itemSlots.TryGetSlot(ent, ent.Comp.ContainerSlotId, out var slot))
             return;
 
-        _itemSlots.TryEjectToHands(ent, slot, args.Actor);
+        _itemSlots.TryEjectToHands(ent, slot, args.Actor, true);
         Dirty(ent);
     }
 

@@ -15,22 +15,16 @@
     RMCRankFirstLT:
     - !type:RoleTimeRequirement
       role: CMJobCMO
-      time: 36000 # 10 hours
+      time: 252000 # 70 hours
     RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearCMO
   icon: "CMJobIconCMO"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCMO
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: doctor
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -53,6 +47,14 @@
       prefix: cm-job-prefix-cmo
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: doctor
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearCMO
@@ -87,3 +89,13 @@
 - type: playTimeTracker
   id: CMJobCMO
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCMO
+  name: The CMO
+  description: The Chief Medical Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_medical_officer

@@ -1,0 +1,64 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseMaterialDoor
+  id: RMCBaseMaterialDoor
+  name: door
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    snapCardinals: false
+  - type: Airtight
+    fixVacuum: true
+    noAirWhenFullyAirBlocked: false
+  - type: RadiationBlocker
+    resistance: 3
+  - type: PlacementReplacement
+    key: walls
+  - type: RMCDropshipBlocked
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  - type: AirlockReceiverXenoClaws
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: DamageMultiplierFlags
+    flags: Breaching
+  - type: Corrodible
+    isCorrodible: true
+    timeToApply: 4
+
+- type: entity
+  id: RMCSandstoneDoor
+  name: sandstone door
+  parent: RMCBaseMaterialDoor
+  description: It opens and closes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/doorrunedsand.rsi
+    color: "#b29082"
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    bumpOpen: false
+    clickOpen: true
+    canCrush: false
+    closeTimeOne: 0.2
+    closeTimeTwo: 0.6
+    openTimeOne: 0.6
+    openTimeTwo: 0.2
+    openingAnimationTime: 1.2
+    closingAnimationTime: 1.2

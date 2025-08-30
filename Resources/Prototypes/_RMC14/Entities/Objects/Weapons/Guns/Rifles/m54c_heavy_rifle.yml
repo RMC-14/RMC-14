@@ -1,6 +1,6 @@
 ﻿- type: entity
   name: M54CE2 heavy assault rifle
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleM54CE2
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
@@ -16,19 +16,20 @@
   - type: Tag
     tags:
     - WeaponRifleM54CE2
-    - RMCGunBipodFullAuto
   - type: Gun
     shotsPerBurst: 5
-    selectedMode: SemiAuto
+    selectedMode: FullAuto
     availableModes:
     - SemiAuto
     - Burst
+    - FullAuto
     soundGunshot:
       collection: CMM54CShoot
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     - Burst
+    - FullAuto
     recoilUnwielded: 5
     scatterWielded: 10
     scatterUnwielded: 20
@@ -82,12 +83,12 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentBipod
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals

@@ -1,4 +1,4 @@
-﻿<scanner:HealthScannerWindow
+<scanner:HealthScannerWindow
     xmlns="https://spacestation14.io"
     xmlns:scanner="clr-namespace:Content.Client._RMC14.Medical.Scanner"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
@@ -44,6 +44,12 @@
                 </PanelContainer.PanelOverride>
                 <RichTextLabel Name="OxygenLabel" Access="Public" Margin="5 2" />
             </PanelContainer>
+            <PanelContainer Margin="0 0 5 0" Name="CloneBox" Access="Public">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BorderColor="#4972A1" BorderThickness="2" />
+                </PanelContainer.PanelOverride>
+                <RichTextLabel Name="CloneLabel" Access="Public" Margin="5 2" />
+            </PanelContainer>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Text="Holocard:" MinWidth="80" Modulate="#5B88B0" />
@@ -78,6 +84,11 @@
                 <RichTextLabel Name="UnknownReagentsLabel" Access="Public" Margin="5 2" />
             </PanelContainer>
             <BoxContainer Name="ChemicalsContainer" Access="Public" Orientation="Vertical" />
+        </BoxContainer>
+        <Label Name="MedicalAdviceLabel" Access="Public" Text="Medical Advice" Margin="0 20 0 0" />
+        <cc:HSeparator Name="MedicalAdviceSeparator" Access="Public" Color="#4972A1" Margin="0 0 0 5" />
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Name="AdviceContainer" Access="Public" Orientation="Vertical" />
         </BoxContainer>
     </BoxContainer>
 </scanner:HealthScannerWindow>

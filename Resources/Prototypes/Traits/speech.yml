@@ -1,18 +1,20 @@
+## If you add a new trait, make sure to add the corresponding component to the whitelist in \Resources\Prototypes\Entities\Mobs\Player\clone.yml so it gets copied to clones correctly!
+#
 ## Free
 #
-##- type: trait
-##  id: Accentless
-##  name: trait-accentless-name
-##  description: trait-accentless-desc
-##  category: SpeechTraits
+#- type: trait
+#  id: Accentless
+#  name: trait-accentless-name
+#  description: trait-accentless-desc
+#  category: SpeechTraits
 ##  cost: 2
-##  components:
-##  - type: Accentless
-##    removes:
-##    - type: LizardAccent
-##    - type: MothAccent
-##    - type: ReplacementAccent
-##      accent: dwarf
+#  components:
+#  - type: Accentless
+#    removes:
+#    - type: LizardAccent
+#    - type: MothAccent
+#    - type: ReplacementAccent
+#      accent: dwarf
 #
 ## 1 Cost
 #
@@ -33,7 +35,6 @@
 #  cost: 1
 #  components:
 #  - type: PirateAccent
-#    yarrChance: 0.1
 #
 #- type: trait
 #  id: CowboyAccent

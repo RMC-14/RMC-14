@@ -1,0 +1,121 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPSpecialist
+  name: rmc-job-name-spp-specialist
+  description: rmc-job-description-spp-specialist
+  playTimeTracker: CMJobSPPSpecialist
+  ranks:
+    RMCRankSPPSerzhant: []
+  startingGear: RMCGearSPPSpecialist
+  icon: "RMCJobIconSPPSpecialist"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  spawnMenuRoleName: SPP Specialist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-specialist
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPSpecialistHostile
+  name: spp ghost role specialist
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPSpecialist
+
+- type: entity
+  id: RMCRandomHumanoidSPPSpecialistFriendly
+  name: spp ghost role specialist
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPSpecialistFriendly
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPSpecialist
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-hostile-specialist
+    description: rmc-ghost-role-information-spp-hostile-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPSpecialist
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: randomHumanoidSettings
+  parent: RMCSPPSpecialist
+  id: RMCSPPSpecialistFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-friendly-specialist
+    description: rmc-ghost-role-information-spp-friendly-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPSpecialist
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: startingGear
+  id: RMCGearSPPSpecialist
+  equipment:
+    head: ArmorHelmetSPPHeavy
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPHeavySpecialist
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    suitstorage: RMCWeaponLMGQYJ72
+    id: RMCIDSPP
+    belt: RMCT73BeltFilled
+    back: RMCSatchelSPPRifleman
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledC4SPP
+  storage:
+    back:
+    - RMCMotionDetector
+
+- type: playTimeTracker
+  id: CMJobSPPSpecialist
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSpecialist
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_spec

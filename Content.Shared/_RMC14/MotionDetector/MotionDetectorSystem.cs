@@ -28,6 +28,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCGunBatterySystem _rmcGunBattery = default!;
+    [Dependency] private readonly SharedCMInventorySystem _rmcInventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -94,6 +95,9 @@ public sealed class MotionDetectorSystem : EntitySystem
     private void OnMotionDetectorGetVerbs(Entity<MotionDetectorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        if (!ent.Comp.CanToggleRange)
             return;
 
         var user = args.User;
@@ -305,13 +309,15 @@ public sealed class MotionDetectorSystem : EntitySystem
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
-                detector.Blips.Add(_transform.GetMapCoordinates(tracked));
+                detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
             }
 
             UpdateAppearance((uid, detector));
             if (detector.Blips.Count == 0)
             {
-                _audio.PlayPvs(detector.ScanEmptySound, uid);
+                if (_rmcInventory.TryGetUserHoldingOrStoringItem(uid, out var user))
+                    _audio.PlayEntity(detector.ScanEmptySound, user, uid);
+
                 continue;
             }
 

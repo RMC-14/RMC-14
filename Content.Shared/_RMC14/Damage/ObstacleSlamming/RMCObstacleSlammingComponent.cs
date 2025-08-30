@@ -13,9 +13,6 @@ namespace Content.Shared._RMC14.Damage.ObstacleSlamming;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCObstacleSlammingComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public float MinimumSpeed = 4.5f;
-
     /// <summary>
     /// MOB_SIZE_COEFF in CM
     /// </summary>
@@ -29,7 +26,7 @@ public sealed partial class RMCObstacleSlammingComponent : Component
     public float ThrowSpeedCoefficient = 0.2f;
 
     [DataField, AutoNetworkedField]
-    public float KnockbackPower = 1;
+    public float KnockbackPower = 0.3f;
 
     [DataField, AutoNetworkedField]
     public float KnockBackSpeed = 3;

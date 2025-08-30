@@ -23,6 +23,7 @@
   - type: Area
     linkedLz: dropship_lz1
     minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -35,6 +36,7 @@
   - type: Area
     linkedLz: dropship_lz2
     minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -81,6 +83,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShivaInterior
@@ -102,6 +105,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShivaInteriorOob
@@ -465,6 +469,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaShivaInterior

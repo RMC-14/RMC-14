@@ -1,0 +1,22 @@
+﻿- type: entity
+  parent: BaseStorageItem
+  id: RMCStoragePlantBag
+  name: plant bag
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/plant_bag.rsi
+    state: icon
+  - type: Storage
+    grid:
+    - 0,0,19,5 # TODO RMC14 13,5 when stacking produce is in
+    maxItemSize: Small
+    quickInsert: true
+    quickInsertCooldown: 0.1
+    areaInsert: true
+    whitelist:
+      components:
+      - Produce
+      - Seed
+  - type: Dumpable
+  - type: FixedItemSizeStorage

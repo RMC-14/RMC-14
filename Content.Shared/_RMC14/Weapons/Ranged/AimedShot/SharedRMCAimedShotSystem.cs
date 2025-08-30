@@ -165,6 +165,9 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
             var targeted = EnsureComp<TargetedProjectileComponent>(projectile);
             targeted.Target = target;
             Dirty(projectile, targeted);
+
+            var ev2 = new ShotByAimedShotEvent(ent, target);
+            RaiseLocalEvent(projectile, ref ev2);
         }
 
         RemoveTarget(ent, target);
@@ -309,9 +312,16 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
 }
 
 /// <summary>
-///     Raised on a projectile when it's shot using the aimed shot action.
+///     Raised on a gun when it shoots using the aimed shot action.
 /// </summary>
 /// <param name="Target">The target of the aimed shot.</param>
 [ByRefEvent]
 public record struct AimedShotEvent(EntityUid Target);
+
+/// <summary>
+///     Raised on a projectile when it was shot using the aimed shot action.
+/// </summary>
+/// <param name="Target">The target of the aimed shot.</param>
+[ByRefEvent]
+public record struct ShotByAimedShotEvent(EntityUid Gun, EntityUid Target);
 

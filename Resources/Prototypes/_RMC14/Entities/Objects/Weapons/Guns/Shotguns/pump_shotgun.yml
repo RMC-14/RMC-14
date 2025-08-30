@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: M42A2 pump shotgun
   id: WeaponShotgunM42A2
@@ -24,6 +24,7 @@
     baseFireRate: 0.5
     burstScatterMult: 5
   - type: BallisticAmmoProvider
+    capacity: 10 # todo change to 9 when bullet chambering is added
     whitelist:
       tags:
       - RMCShellShotgunBuckshot
@@ -44,6 +45,7 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentShotgunChoke
           - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:
@@ -63,13 +65,12 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentFlamer
           - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, 0.06
       rmc-aslot-rail: -0.025, 0.125
-      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-stock: -0.40625, 0.03125
       rmc-aslot-underbarrel: 0.25, -0.31
   - type: ItemCamouflage
     camouflageVariations:

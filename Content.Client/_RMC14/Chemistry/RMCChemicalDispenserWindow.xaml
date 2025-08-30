@@ -30,7 +30,7 @@
             <Label Text="{Loc rmc-chem-dispenser-beaker}" MinWidth="100" />
             <Label Name="BeakerStatus" Access="Public" Text="{Loc rmc-chem-dispenser-no-beaker}" />
             <Control HorizontalExpand="True" />
-            <Button Name="EjectBeakerButton" Access="Public" Text="{Loc rmc-chem-dispenser-eject-beaker}" />
+            <Button Name="EjectBeakerButton" Access="Public" Text="{Loc rmc-chem-dispenser-eject-beaker}" StyleClasses="OpenBoth" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc rmc-chem-dispenser-contents}" MinWidth="100" VerticalAlignment="Top" />

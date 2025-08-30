@@ -317,3 +317,11 @@ marking-RMCHumanHairEmobun = Emo Little Bun (RMC)
 marking-RMCHumanHairTaper = Taper (RMC)
 
 marking-RMCHumanHairGentlebraid = Gentle Braid (RMC)
+
+marking-RMCHumanHairLongMessy = Long Messy (RMC)
+
+marking-RMCHumanHairPulatoLong = PulatoLong (RMC)
+
+marking-RMCHumanHairPulatoLong2 = PulatoLong 2 (RMC)
+
+marking-RMCHumanHairPonytail9 = Ponytail 9 (RMC)

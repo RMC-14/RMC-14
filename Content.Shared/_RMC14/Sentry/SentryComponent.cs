@@ -59,6 +59,9 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> DelaySkill = "RMCSkillConstruction";
+
+    [DataField, AutoNetworkedField]
+    public bool HomingShots = true;
 }
 
 [Serializable, NetSerializable]

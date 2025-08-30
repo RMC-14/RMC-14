@@ -1,0 +1,112 @@
+﻿# HEFA Granmdmaster
+- type: job
+  parent: CMJobBase
+  id: CMHEFAShrapnelsworn
+  name: rmc-job-name-hefa-grandmaster
+  description: rmc-ghost-name-hefa-friendly-shrapnelsworn
+  playTimeTracker: CMJobHEFAShrapnelsworn
+  ranks:
+    RMCRankHEFASer: []
+  startingGear: RMCGearHEFAShrapnelsworn
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 1
+        RMCSkillFirearms: 1
+    - type: GrenadeSpecWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-hefa-grandmaster
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidHEFAShrapnelswornHostile
+  name: hefa ghost role grandmaster
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelsworn
+
+- type: entity
+  id: RMCRandomHumanoidHEFAShrapnelswornFriendly
+  name: hefa ghost role grandmaster
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelswornFriendly
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCHEFAShrapnelsworn
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-hefa-hostile-grandmaster
+    description: rmc-ghost-role-information-hefa-hostile-description
+    rules: rmc-ghost-role-information-hefa-rules
+    reregister: false
+    job: CMHEFAShrapnelsworn
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+  - type: RandomMetadata
+    nameSegments:
+    - RMCNamesHEFA
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCHEFAShrapnelswornFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-hefa-friendly-grandmaster
+    description: rmc-ghost-role-information-hefa-friendly-description
+    rules: rmc-ghost-role-information-hefa-rules
+    reregister: false
+    job: CMHEFAShrapnelsworn
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+  - type: RandomMetadata
+    nameSegments:
+    - RMCNamesHEFA
+
+- type: startingGear
+  id: RMCGearHEFAShrapnelsworn
+  equipment:
+    head: RMCArmorHelmetHEFA
+    jumpsuit: RMCJumpsuitHEFA
+    outerClothing: RMCArmorMercenaryHEFA
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    suitstorage: WeaponLauncherM83HEFA
+    id: RMCIDCardHEFAShrapnelsworn
+    belt: RMCBeltGrenadeHEFA
+    back: RMCSatchelHEFAFill
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchExplosiveFilledHEFA
+
+- type: playTimeTracker
+  id: CMJobHEFAShrapnelsworn

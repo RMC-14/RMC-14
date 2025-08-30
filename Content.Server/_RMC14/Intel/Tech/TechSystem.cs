@@ -1,3 +1,4 @@
+using Content.Server.GameTicking.Events;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Humanoid.Components;
 using Content.Server.Spawners.Components;
@@ -31,6 +32,12 @@ public sealed class ServerTechSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<TechCryoMarinesEvent>(OnTechCryoMarines);
         SubscribeLocalEvent<TechCryoSpecEvent>(OnTechCryoSpec);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
+    }
+
+    private void OnRoundStart(RoundStartingEvent ev)
+    {
+        _cryoMarinesPurchased = false;
     }
 
     private void OnTechCryoMarines(TechCryoMarinesEvent ev)

@@ -28,9 +28,6 @@
   overwatchSortPriority: -4
   overwatchShowName: true
   overwatchRoleName: Specialist
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: spec
   roleWeight: 1
   special:
   - !type:AddComponentSpecial
@@ -53,6 +50,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-weapons-specialist
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: spec
 
 - type: startingGear
   id: CMGearWeaponsSpecialist

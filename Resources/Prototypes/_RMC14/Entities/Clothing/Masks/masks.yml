@@ -4,8 +4,8 @@
   abstract: true
   components:
   - type: HideLayerClothing
-    slots:
-    - Snout
+    layers:
+      Snout: Mask
     hideOnToggle: true
 
 - type: entity
@@ -27,6 +27,23 @@
     tags:
     - GasMask
 
+- type: entity
+  parent: CMMaskGas
+  id: RMCMaskGasSPP
+  name: ShMB/4 gasmask
+  description: The standard issue gasmask utilized by the SPP Vanguard Collective and many SPP civilian organizations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/spp_gasmask.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/spp_gasmask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+
 - type: Tag
   id: GasMask
 
@@ -42,6 +59,12 @@
     sprite: _RMC14/Objects/Clothing/Mask/sterile.rsi
   - type: Item
     storedRotation: -90
+  - type: Tag
+    tags:
+    - SterileMask
+
+- type: Tag
+  id: SterileMask
 
 - type: entity # TODO RMC14 this needs a lizard sprite
   parent: ClothingMaskGas
@@ -68,7 +91,7 @@
     - Mask
   - type: Item
     size: Small
-    
+
 - type: entity
   parent: CMBaseMask
   id: RMCMaskKutjevoRespirator
@@ -192,6 +215,23 @@
 
 - type: entity
   parent: RMCMaskBalaclava
+  id: RMCMaskBalaclavaPMC
+  name: M8 pattern armored balaclava
+  description: An armored balaclava designed to conceal both the identity of the operator and act as an air-filter.
+  components:
+  - type: CMArmor
+    melee: 10
+    bio: 30
+    explosionArmor: 10
+
+- type: entity
+  parent: RMCMaskBalaclavaPMC
+  id: RMCMaskBalaclavaMARSOC
+  name: SOF armored balaclava
+  description: Designed for maximum protection -- and badassery. Provides protection against facial attacks, filters toxins, and conceals the wearer's identity.
+
+- type: entity
+  parent: RMCMaskBalaclava
   id: RMCMaskBalaclavaSkullBlue
   name: skull balaclava
   description: The face of your nightmares. Or at least that's how you imagined it'd be. Additionally protects against the cold.
@@ -228,7 +268,7 @@
     size: Small
 
 - type: entity
-  parent: CMBaseMask
+  parent: [CMBaseMask, RMCHelmetGarbToggleableBase]
   id: RMCVisorSWAT
   name: TC2 CMB riot shield
   description: Yellowish protective glass piece, can be lifted up when needed, makes you see everything in yellow.
@@ -245,6 +285,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+      state: helmet-down
 
 
 # Keffiyehs

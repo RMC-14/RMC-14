@@ -1,0 +1,119 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPEngineer
+  name: rmc-job-name-spp-engineer
+  description: rmc-job-description-spp-engineer
+  playTimeTracker: CMJobSPPEngineer
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  startingGear: RMCGearSPPEngineer
+  icon: "RMCJobIconSPPEngineer"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - CombatTech
+  spawnMenuRoleName: SPP Sapper
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillVehicles: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-engineer
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSPPEngineerHostile
+  name: spp ghost role engineer
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPEngineer
+
+- type: entity
+  id: RMCRandomHumanoidSPPEngineerFriendly
+  name: spp ghost role engineer
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPEngineerFriendly
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPEngineer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-hostile-engineer
+    description: rmc-ghost-role-information-spp-hostile-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPEngineer
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: randomHumanoidSettings
+  parent: RMCSPPEngineer
+  id: RMCSPPEngineerFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-spp-friendly-engineer
+    description: rmc-ghost-role-information-spp-friendly-description
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPEngineer
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
+
+- type: startingGear
+  id: RMCGearSPPEngineer
+  equipment:
+    head: ArmorHelmetSPPEngineer
+    ears: RMCHeadsetSPPEngineer
+    eyes: RMCWeldingGoggles
+    mask: CMMaskGas
+    jumpsuit: CMJumpsuitSPPEngi
+    outerClothing: RMCArmorSPPRifleman
+    gloves: RMCHandsVeteranInsulated
+    shoes: CMBootsBlackFilled
+    suitstorage: RMCWeaponRifleType71Flamer
+    id: RMCIDSPP
+    belt: RMCType71BeltFilled
+    back: RMCSatchelSPPWelderEngineer
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchConstructionFillFull
+  inhand:
+    - RMCToolWebbingSmallFilled
+
+- type: playTimeTracker
+  id: CMJobSPPEngineer
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPEngineer
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_sapper

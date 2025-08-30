@@ -2,3 +2,29 @@
   id: RMCWeYa
   tags:
   - RMCAccessWeYa
+
+
+- type: accessGroup
+  id: RMCWeYaExec
+  tags:
+  - RMCAccessWeYa
+  - CMAccessCommand
+  - CMAccessResearch
+  - CMAccessMedical
+  - CMAccessMedPrep
+
+- type: accessGroup
+  id: RMCWeYaExecColony
+  tags:
+  - RMCAccessWeYa
+  - CMAccessCommand
+  - CMAccessResearch
+  - CMAccessMedical
+  - CMAccessMedPrep
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+  - CMAccessColonyCommand

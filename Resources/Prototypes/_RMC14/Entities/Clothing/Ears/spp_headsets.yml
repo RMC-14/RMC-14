@@ -9,7 +9,7 @@
 - type: radioChannel
   id: SPPCommand
   name: chat-radio-spp-command
-  keycode: "k"
+  keycode: "="
   frequency: 1252
   color: "#9b0612"
   longRange: true
@@ -38,14 +38,26 @@
   color: "#9b0612"
   longRange: true
 
+- type: radioChannel
+  id: Halcyon
+  name: chat-radio-halcyon
+  keycode: "#"
+  frequency: 2125
+  color: "#F46D29"
+  longRange: true
+  tower: true
+
 - type: entity
-  abstract: true
   parent: CMEncryptionKey
   id: RMCEncryptionKeySPP
   name: SPP radio encryption key
   components:
   - type: Sprite
     state: upp_key
+  - type: EncryptionKey
+    channels:
+    - SPP
+    defaultChannel: SPP
 
 - type: entity
   parent: RMCEncryptionKeySPP
@@ -86,17 +98,40 @@
     defaultChannel: SPP
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyHalcyon
+  name: Halcyon radio encryption key
+  components:
+  - type: Sprite
+    state: upp_key
+  - type: EncryptionKey
+    channels:
+    - Halcyon
+    defaultChannel: Halcyon
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIconsSPP
+  id: RMCHeadsetSPPAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderSpp
+    trackerModes:
+    - LeaderSpp
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPP
-  name: SPP-CMD headset
+  name: SPP headset
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyColony
+      - RMCEncryptionKeySPP
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPCommand
   name: SPP-CMD headset
   components:
@@ -104,10 +139,9 @@
     containers:
       key_slots:
       - RMCEncryptionKeySPPCommand
-      - CMEncryptionKeyColony
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPEngineer
   name: SPP-CCT headset
   components:
@@ -115,10 +149,9 @@
     containers:
       key_slots:
       - RMCEncryptionKeySPPEngineer
-      - CMEncryptionKeyColony
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPMedic
   name: SPP-MED headset
   components:
@@ -126,4 +159,39 @@
     containers:
       key_slots:
       - RMCEncryptionKeySPPMedic
+
+- type: entity
+  parent: RMCHeadsetIconsSPP
+  id: RMCHeadsetDistressSPP
+  name: SPP colony headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
       - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetDistressSPP
+  id: RMCHeadsetSPPPaP
+  name: SPP PaP headset
+  description: A special headset used by the People's Armed Police of the SPP.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPP
+      - CMEncryptionKeyColony
+  - type: Sprite
+    state: sec_headset
+
+- type: entity
+  parent: RMCHeadsetDistressSPP
+  id: RMCHeadsetDistressHalcyon
+  name: halcyon corporate headset
+  description: A headset commonly worn by Halcyon Dynamics corporate personnel.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+      - RMCEncryptionKeyHalcyon
