@@ -455,7 +455,7 @@
       # - TODO RMC14 RMCAssembly
       # - TODO RMC14 RMCStockParts
       - RMCExplosiveBreachingCharge
-      # - TODO RMC14 RMCSynthResetKey
+      - RMCSynthResetKey
       components:
       - TrayScanner
       - ComputerBoard
@@ -475,7 +475,7 @@
         # - TODO RMC14 RMCAssembly
         # - TODO RMC14 RMCStockParts
         - RMCExplosiveBreachingCharge
-        # - TODO RMC14 RMCSynthResetKey
+        - RMCSynthResetKey
         components:
         - TrayScanner
         - ComputerBoard

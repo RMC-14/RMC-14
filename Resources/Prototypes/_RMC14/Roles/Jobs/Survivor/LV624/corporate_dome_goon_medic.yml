@@ -1,0 +1,51 @@
+- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorLV624CorporateDomeGoonMedic
+  name: rmc-job-name-pmc-corporate-goon-medic
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorLV624CorporateDomeGoonMedic
+  spawnMenuRoleName: We-Ya Goon Medic (Survivor Special)
+  startingGear: RMCGearSurvivorGoon
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  greeting: rmc-job-greeting-corporate-dome-goon-medic
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624CorporateDomeGoonMedic
+  name: special survivor lv624 goon medic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorLV624CorporateDomeGoonMedic
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy
+
+- type: playTimeTracker
+  id: CMJobSurvivorLV624CorporateDomeGoonMedic
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetLV624CorporateDomeGoonMedic
+  name: lv624 colonist preset
