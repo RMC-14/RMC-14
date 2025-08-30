@@ -1,0 +1,10 @@
+- type: entity
+  parent: RMCWeaponPistolMK45
+  id: RMCWeaponPistolHG45Aguila
+  name: HG-45 'Aguila' pistol
+  description: A version of the MK-45 sold on the civilian firearms market, commonly purchased by newly commissioned officers in a desperate bid to impress their comrades. Must be cocked after loading a fresh magazine, chambered in .45 Automagnum.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/HG45Aguila.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/HG45Aguila.rsi

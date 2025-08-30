@@ -57,6 +57,7 @@
         RMCSkillVehicles: 1
         RMCSkillPolice: 1
     - type: CMVendorUser
+      id: CMSquadLeader
       points: 45
     - type: MarineOrders
     - type: SquadArmorWearer

@@ -3,7 +3,7 @@
   id: CMSurvivorVaraderoICB
   name: cm-job-name-survivor-icb
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorVaraderoICB
+  playTimeTracker: CMJobSurvivorCorporate
   spawnMenuRoleName: Interstellar Commerce Bureau Liaison (NV Survivor)
   startingGear: RMCGearSurvivorVaraderoICB
   ranks:
@@ -17,6 +17,8 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -26,7 +28,7 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-icb
-  useLoadoutOfJob: CMSurvivorCorporate
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorICB
@@ -49,6 +51,8 @@
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
-- type: playTimeTracker
-  id: CMJobSurvivorVaraderoICB
-  isHumanoid: true
+- type: entity
+  parent: RMCSurvivorPresetCorporate
+  id: RMCGearSurvivorPresetICB
+  name: icb colonist preset
+  categories: [ HideSpawnMenu ]
