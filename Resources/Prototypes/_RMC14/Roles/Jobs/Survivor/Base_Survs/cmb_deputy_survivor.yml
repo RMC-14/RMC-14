@@ -6,7 +6,6 @@
   id: CMSurvivorCMBDeputy
   name: rmc-job-name-survivor-cmb-deputy
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorCMBDeputy
   ranks:
     RMCRankCMBDeputy: []
   startingGear: RMCGearSurvivorCMBDeputy
@@ -39,11 +38,12 @@
       preset: RMCGearSurvivorPresetCMBDeputy
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: deputy
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_cmb
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity

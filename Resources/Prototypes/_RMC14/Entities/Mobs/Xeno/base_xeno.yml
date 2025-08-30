@@ -39,7 +39,7 @@
     thresholds: []
   - type: RMCMedicalExamine
     simple: true
-    deadText: rmc-medical-examine-dead-simple-mob
+    deadText: rmc-medical-examine-dead-xeno
   - type: RMCBlockMedicalExamine
   - type: MobState
     allowedStates:
@@ -343,10 +343,10 @@
   - type: MotionDetectorTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xeno
     background:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
   - type: Evasion

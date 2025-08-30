@@ -6,7 +6,7 @@
   suffix: GuideBookEntity
   components:
   - type: Sprite
-    sprite: _RMC14/Interface/map_blips.rsi
+    sprite: /Textures/_RMC14/Interface/map_blips.rsi
 
 # Tier 0
 - type: entity
@@ -270,3 +270,12 @@
   components:
   - type: Sprite
     state: recovery_node
+
+- type: entity
+  parent: RMCBaseMapIcon
+  id: RMCPylonMapIcon
+  name: hive pylon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: pylon
