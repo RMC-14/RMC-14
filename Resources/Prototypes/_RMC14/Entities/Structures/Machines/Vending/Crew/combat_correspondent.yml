@@ -1,3 +1,5 @@
+# EQUIPMENT VENDOR
+
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewCombatCorrespondent
@@ -17,55 +19,80 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
-      # Portable Press Fax Machine - /obj/item/device/fax_backpack
-      - id: RMCCameraBroadcasting
+        name: Essential Reporter's Set
       - id: CMSatchel
+        name: Leather Satchel
+      - id: RMCCameraBroadcasting
+        name: Press Broadcasting Camera
+        recommended: true
+    #- name: Civilian Equipment TODO - Some way to ensure only the civilian correspondent can buy this
+    #  takeAll: CMStandard
+    #  entries:
+    #  - id: PortableFaxMachine
+    #    name: Portable Press Fax Machine
+    #    recommended: true
     - name: Uniform
       choices: { CMUniform: 1 }
       entries:
       - id: RMCJumpsuitCorrespondentBlack
-        name: black uniform
+        name: Black Uniform
       - id: RMCJumpsuitCorrespondentOrange
-        name: orange uniform
+        name: Orange Uniform
       - id: RMCJumpsuitCorrespondentRed
-        name: red uniform
+        name: Red Uniform
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
       - id: CMArmorPress
+        name: Combat Correspondent's Armor
+        recommended: true
       - id: RMCCoatCorrespondentBlue
-        name: blue vest
-      # black vest
+        name: Blue Vest
+      - id: RMCHazardVestBlack
+        name: Black Vest
       - id: RMCCoatCorrespondentBlack
-        name: black coat
+        name: Black Coat
       - id: RMCCoatCorrespondentGreen
-        name: green coat
+        name: Green Coat
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
       - id: CMArmorHelmetPress
+        name: Combat Correspondent's Helmet
+        recommended: true
+      - id: RMCHeadCapCorrespondent
+        name: Combat Correspondent's Cap
+      - id: RMCHeadCapFedoraGrey
+        name: Fedora
     - name: Refills
       entries:
-      # /obj/item/device/camera 10
-      # /obj/item/device/camera_film 5
-      # /obj/item/device/toner 5
-      # /obj/item/storage/box/tapes 15
-      - id: CMPaper
-        amount: 30
+      #- id: /obj/item/device/camera
+      #  name: Camera
+      #  points: 10
+      #- id: /obj/item/device/camera_film
+      #  name: Camera Film
+      #  points: 5
+      #- id: /obj/item/device/toner
+      #  name: Toner
+      # points: 5
+      #- id: /obj/item/storage/box/tapes
+      #  name: Regulation Tapes
+      #  points: 15
+      - id: CMPaperBin30
+        name: Paper Bin
+        points: 10
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewCombatCorrespondent
-  name: essential reporter's set
-  description: Contains a pen and a clipboard, a flashlight and binoculars.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/paper.rsi
-    state: pen
+    sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
+    state: flashlight
   - type: CMVendorBundle
     bundle:
     - RMCFlashlight
     - CMPen
     - RMCBinoculars
     - CMClipboard # notepad
-    # taperecorder
+    #- taperecorder

@@ -23,8 +23,6 @@ public sealed class XenoAnnounceCommand : IConsoleCommand
         }
 
         var message = string.Join(" ", args);
-        message = $"\n[bold][color=#7575F3][font size=24]Queen Mother Psychic Directive[/font][/color][/bold]\n\n[color=red][font size=14]{message}[/font][/color]\n\n";
-        var sound = new BioscanComponent().XenoSound;
-        xenoAnnounce.AnnounceAll(default, message, sound);
+        xenoAnnounce.AnnounceQueenMother(message);
     }
 }

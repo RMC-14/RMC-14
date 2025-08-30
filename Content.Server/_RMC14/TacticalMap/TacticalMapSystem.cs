@@ -933,7 +933,7 @@ public override void Initialize()
                     }
                 }
 
-                _marineAnnounce.AnnounceARES(user, "The UNMC tactical map has been updated.", sound);
+                _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
 

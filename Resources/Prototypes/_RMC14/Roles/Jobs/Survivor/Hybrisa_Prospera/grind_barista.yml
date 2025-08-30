@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaGrindBarista
   name: rmc-job-name-survivor-grind-barista
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHybrisaGrindBarista
   startingGear: RMCGearSurvivorHybrisaGrindBarista
   spawnMenuRoleName: Daily Grind Barista (Hybrisa Survivor)
   special:
@@ -24,6 +23,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -40,10 +40,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHybrisaGrindBarista
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian

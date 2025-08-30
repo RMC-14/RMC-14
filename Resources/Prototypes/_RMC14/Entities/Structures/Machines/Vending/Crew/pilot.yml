@@ -90,7 +90,9 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
     - name: Glasses
       choices: { CMGlasses: 1 }
@@ -193,7 +195,7 @@
         amount: 4
       - id: WeaponShotgunM42A2
         amount: 4
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 4
     - name: Primary Ammunition
       entries:

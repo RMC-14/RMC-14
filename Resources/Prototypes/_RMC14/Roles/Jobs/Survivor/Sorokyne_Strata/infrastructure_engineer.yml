@@ -3,7 +3,7 @@
   id: CMJobSurvivorInfrastructureEngineer
   name: rmc-job-name-survivor-infrastructure-engineer
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorInfrastructureEngineer
+  playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorInfrastructureEngineer
   accessGroups:
   - ColonistEngi
@@ -30,7 +30,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorEngineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -58,10 +58,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorInfrastructureEngineer
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetEngineer
