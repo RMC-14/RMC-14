@@ -40,10 +40,18 @@
     - type: JobPrefix
       prefix: cm-job-prefix-militarypolice
     - type: CommandAccent
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadMP
+    - type: SquadArmorWearer
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
 
 - type: startingGear
   id: CMGearMilitaryPolice
