@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -230,14 +231,14 @@ public sealed class XenoNestSystem : EntitySystem
         var nestCoordinates = ent.Owner.ToCoordinates();
         var offset = direction switch
         {
-            Direction.South => new Vector2(0, -0.25f),
-            Direction.East => new Vector2(0.5f, 0),
-            Direction.North => new Vector2(0, 0.5f),
-            Direction.West => new Vector2(-0.5f, 0),
+            Direction.South => new Vector2(0, -0.52f),
+            Direction.East => new Vector2(0.52f, 0),
+            Direction.North => new Vector2(0, 0.52f),
+            Direction.West => new Vector2(-0.52f, 0),
             _ => Vector2.Zero,
         };
 
-        var nest = SpawnAttachedTo(ent.Comp.Nest, nestCoordinates);
+        var nest = SpawnAttachedTo(ent.Comp.Nest, nestCoordinates, rotation: direction.Value.ToAngle());
         _transform.SetCoordinates(nest, nestCoordinates.Offset(offset));
 
         _hive.SetSameHive(args.User, nest);
@@ -255,7 +256,7 @@ public sealed class XenoNestSystem : EntitySystem
         Dirty(victim, nestedComp);
 
         _transform.SetCoordinates(victim, nest.ToCoordinates());
-        _transform.SetLocalRotation(victim, direction.Value.ToAngle());
+        _transform.SetLocalRotation(victim, Angle.Zero);
 
         _standing.Stand(victim, force: true);
 

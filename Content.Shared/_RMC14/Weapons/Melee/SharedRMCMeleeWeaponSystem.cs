@@ -228,8 +228,9 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     /// <param name="user">The entity doing the attack</param>
     /// <param name="attack">The <see cref="AttackEvent"/></param>
     /// <param name="newAttack">The new <see cref="AttackEvent"/></param>
+    /// <param name="range">The range of the attack</param>
     /// <returns>True if the attack hasn't been modified, or if it is modified and still valid</returns>
-    public bool AttemptOverrideAttack(EntityUid target, Entity<MeleeWeaponComponent> weapon, EntityUid user, AttackEvent attack, out AttackEvent newAttack)
+    public bool AttemptOverrideAttack(EntityUid target, Entity<MeleeWeaponComponent> weapon, EntityUid user, AttackEvent attack, out AttackEvent newAttack, float range = 1.5f)
     {
         var targetPosition = _transform.GetMoverCoordinates(target).Position;
         var userPosition = _transform.GetMoverCoordinates(user).Position;
@@ -237,7 +238,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
                 (targetPosition -
                  userPosition).ToWorldAngle(),
                 0,
-                1.5f,
+                range,
                 _transform.GetMapId(user),
                 user)
             .ToList());

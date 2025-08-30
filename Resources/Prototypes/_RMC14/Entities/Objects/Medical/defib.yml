@@ -139,7 +139,7 @@
       visible: false
   - type: PowerCellDraw
     enabled: false
-    useRate: 500 # change to 1000 when defib power drawing is fixed
+    useRate: 1000
   - type: RMCPowerUsageDisplay
   - type: RequiresSkill
     skills:
@@ -173,6 +173,9 @@
       components:
         - Marine
   - type: Item
-    size: Normal
+    size: Small
     sprite: _RMC14/Objects/Devices/reset_key.rsi
     heldPrefix: null
+  - type: Tag
+    tags:
+    - RMCSynthResetKey

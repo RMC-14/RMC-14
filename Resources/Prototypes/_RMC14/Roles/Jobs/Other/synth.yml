@@ -23,6 +23,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 5
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 4
         RMCSkillConstruction: 3
         RMCSkillFirearms: 2
@@ -41,8 +42,8 @@
         RMCSkillDomestics: 2
         RMCSkillNavigations: 1
     - type: CMVendorUser
+      id: RMCJobSynthetic
       points: 45
-    - type: MarineOrders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -52,7 +53,7 @@
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
     - type: MeleeWeapon
       soundHit:

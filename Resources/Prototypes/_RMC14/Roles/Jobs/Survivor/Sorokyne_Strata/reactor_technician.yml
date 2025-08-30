@@ -3,7 +3,7 @@
   id: CMJobSurvivorReactorTechnician
   name: rmc-job-name-survivor-reactor-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorReactorTechnician
+  playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorReactorTechnician
   accessGroups:
   - ColonistEngi
@@ -23,7 +23,6 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetReactorTechnician
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
@@ -31,6 +30,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -41,7 +41,6 @@
     pocket2: RMCWelderIndustrial
   storage:
     back:
-    - CMSheetMetal20
     - RMCMaskGasSPP
 
 - type: entity
@@ -56,10 +55,6 @@
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
-- type: playTimeTracker
-  id: CMJobSurvivorReactorTechnician
-  isHumanoid: true
-
 - type: entity
   parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetReactorTechnician
@@ -68,6 +63,6 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, CMSatchel, RMCShoesWhite ]
-    - [ RMCLabcoatShort, CMSatchel, RMCShoesLaceupBrown ]
-    - [ RMCHeadRadiationHood, RMCSuitRadiation, CMSatchel, RMCShoesLaceupBrown ]
+    - [ RMCHeadCapSPPCivilianPlantWorker, RMCLabcoatShort, RMCShoesWhite ]
+    - [ RMCLabcoatShort, RMCShoesLaceupBrown ]
+    - [ RMCHeadRadiationHood, RMCSuitRadiation, RMCShoesLaceupBrown ]

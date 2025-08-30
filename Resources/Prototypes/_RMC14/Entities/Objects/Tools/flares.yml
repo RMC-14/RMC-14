@@ -176,15 +176,17 @@
   - type: Sprite
     layers:
     - state: supply_box
-      color: "#887b67"
+      color: "#646a3c"
     - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#867872"
-    - state: supply_box_lightflare
-      color: "#e0d5c2"
+    - state: supply_box_flare
+      color: "#646a3c"
+    - state: supply_box_flare_colour
+      color: "#f0c16f"
     - state: supply_lid_closed
       map: [ "lid" ]
-      color: "#887b67"
+      color: "#646a3c"
 
 - type: entity
   parent: RMCBoxPackFlareEmpty
@@ -215,15 +217,17 @@
   - type: Sprite
     layers:
     - state: supply_box
-      color: "#887b67"
+      color: "#646a3c"
     - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#867872"
-    - state: supply_box_casflare
-      color: "#e0d5c2"
+    - state: supply_box_flare
+      color: "#646a3c"
+    - state: supply_box_flare_colour
+      color: "#f06f6f"
     - state: supply_lid_closed
       map: [ "lid" ]
-      color: "#887b67"
+      color: "#646a3c"
 
 - type: entity
   parent: RMCBoxPackFlareCASEmpty
@@ -344,6 +348,7 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnProjectileHit
+    duration: 3
   - type: TriggerOnFixedDistanceStop
     delay: 0
   - type: IgnorePredictionHide

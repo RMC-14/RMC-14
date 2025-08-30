@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Webbing;
 public sealed partial class WebbingComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Rsi? PlayerSprite = new(new ResPath("_RMC14/Objects/Clothing/Webbing/webbing.rsi"), "equipped");
+    public Rsi? PlayerSprite;
 
     [DataField(required: true)]
     public ComponentRegistry Components = new();

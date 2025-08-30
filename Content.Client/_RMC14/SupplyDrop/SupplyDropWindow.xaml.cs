@@ -65,6 +65,6 @@ public sealed partial class SupplyDropWindow : DefaultWindow
         CooldownBar.MinValue = (float) LastUpdateAt.TotalSeconds;
         CooldownBar.MaxValue = (float) NextUpdateAt.TotalSeconds;
         CooldownBar.Value = (float) (LastUpdateAt.TotalSeconds + NextUpdateAt.TotalSeconds - time.TotalSeconds);
-        CooldownLabel.Text = Loc.GetString("rmc-supply-drop-seconds-until-launch", ("seconds", ((int) cooldown.TotalSeconds)));
+        CooldownLabel.Text = Loc.GetString("ui-supply-drop-console-cooldown", ("time", (int) cooldown.TotalSeconds));
     }
 }

@@ -509,7 +509,6 @@
         probability: 0.05
 
 # Zombie Cure
-
 - type: reagent
   parent: [ CMReagent, AmbuzolPlus ]
   id: RMCAntiZed

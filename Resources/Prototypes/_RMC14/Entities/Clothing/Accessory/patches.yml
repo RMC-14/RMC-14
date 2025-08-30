@@ -243,6 +243,24 @@
       SquadEcho: RMCPatchFallingFalconsEcho
       SquadFoxtrot: RMCPatchFallingFalconsFoxtrot
 
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchSEA
+  name: UNMC Senior Enlisted Advisor patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the Falling Falcons, the 2nd battalion of the 4th brigade of the UNMC. The bottom reads "THIS WE'LL DEFEND" in silver embroidery.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/sea_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/sea_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/UN/sea_patch.rsi
+      state: helmet
+
 # FORECON
 - type: entity
   parent: RMCPatchBase

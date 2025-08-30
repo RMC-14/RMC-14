@@ -191,7 +191,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Sauces/franks.rsi
   - type: RMCLoreExaminable
-    content: Supposedly designed as a middle-ground flavor between ketchup and cayenne, this brand of spicy goodness achieved critical acclaim throughout UN space within both colonies and vessels alike. The sudden and widespread adoption was curiously timed with the near-simultaneous shelving of the original 'ULTRA' hot sauce
+    content: rmc-lore-examinable-red-hot-bottle
 
 - type: entity
   parent: RMCCondimentHotsauce

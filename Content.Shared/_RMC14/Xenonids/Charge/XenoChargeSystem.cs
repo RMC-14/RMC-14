@@ -441,7 +441,7 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         Dirty(xeno);
 
         _rmcObstacleSlamming.MakeImmune(xeno);
-        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false, compensateFriction: true);
+        _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
     }
 
     private void OnXenoChargeStop(Entity<XenoChargeComponent> xeno, ref StopThrowEvent args)
@@ -666,7 +666,6 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         if (_xenoToggleChargingQuery.TryComp(ent, out var charging))
             ent.Comp.Stage = Math.Min(charging.MaxStage, ent.Comp.Stage);
 
-        Log.Warning(ent.Comp.Stage.ToString());
         Dirty(ent);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }

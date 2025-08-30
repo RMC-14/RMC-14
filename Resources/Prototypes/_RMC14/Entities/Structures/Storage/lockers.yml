@@ -428,6 +428,31 @@
   name: squad four smartgun operator locker
 
 - type: entity
+  parent: RMCLockerSquadLeader
+  id: RMCLockerSquadLeaderPMC
+  name: force lead locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCSLFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorOne
+  id: RMCLockerSmartGunOperatorPMCOne
+  name: squad one support gunner locker
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetPMCSGOFill
+
+- type: entity
+  parent: RMCLockerSmartGunOperatorPMCOne
+  id: RMCLockerSmartGunOperatorPMCTwo
+  name: squad two support gunner locker
+
+- type: entity
   parent: RMCCabinet
   id: RMCCabinetTSEPAInspector
   name: inspector's cabinet

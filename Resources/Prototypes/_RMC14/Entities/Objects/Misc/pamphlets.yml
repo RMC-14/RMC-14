@@ -80,7 +80,7 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_ass
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: spotter
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
@@ -154,9 +154,9 @@
     state: pamphlet_loader
   - type: SkillPamphlet
     addSkills:
-      RMCSkillEndurance: 1
+      RMCSkillEngineer: 1
     skillCap:
-      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
     giveJobTitle: rmc-job-name-loader
     givePrefix: rmc-job-prefix-loader
     isAppendPrefix: false
@@ -164,7 +164,7 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_load
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: loader
     bypassLimit: true
     jobWhitelists:
@@ -193,7 +193,7 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_mortar
     giveMapBlip:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: mortar
     bypassLimit: true
     jobWhitelists:

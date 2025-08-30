@@ -30,7 +30,7 @@
       - id: CMJumpsuitOperations
         name: operations uniform
         recommended: true
-      - id: CMHandsBlackMarine
+      - id: CMHandsBlackInsulated
     - name: Jacket
       choices: { CMCoat: 1}
       entries:
@@ -182,7 +182,10 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Mask
@@ -448,6 +451,8 @@
       #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
       - id: RMCBackpackRTO
       - id: CMSatchelMarineIntel
+      - id: RMCSatchelMarineIntelChestrig
+      - id: RMCSatchelMarineIntelSatchel
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
@@ -462,8 +467,12 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
     - name: Huds
       choices: { CMHud: 1 }
@@ -545,7 +554,7 @@
     - name: Commander's Primary
       takeOne: CMProtagGun
       entries:
-      - id: WeaponRifleM59A
+      - id: RMCWeaponRifleM59A
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
@@ -840,7 +849,10 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
     - name: Hats
@@ -870,13 +882,18 @@
       - id: CMJumpsuitWO
       - id: CMHeadsetCMP
       - id: CMBootsBlackFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10ChiefMP
     - name: Armor
-      jobs:
-      - CMChiefMP
-      takeAll: CMStandard
+      choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3WO
-      - id: CMArmorHelmetM10ChiefMP
+      - id: RMCArmorVestMP
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
       - id: CMHeadBeretCMP
     - name: Handgun Case
       jobs:
@@ -947,8 +964,19 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
+      - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+    - name: Books
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: RMCGuidebookLawMarine
+      - id: RMCGuidebookSOP
     # ////////////////////////////////////
     # Chief Engineer
     # ////////////////////////////////////
@@ -1081,9 +1109,12 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbingBrown
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: CMWebbingHolster
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)
     # CE Deployment Gear
@@ -1222,6 +1253,8 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
     - name: Spare Equipment
       jobs:
@@ -1384,8 +1417,11 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
     - name: Spare Equipment
       jobs:
       - CMCMO
@@ -1405,6 +1441,7 @@
       - id: CMJumpsuitBO
       - id: RMCJumpsuitASOBlack
       - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOFormalAlt
       - id: RMCJumpsuitASOBlackAlt
       - id: RMCJumpsuitASOOperations
     - name: Outer Wear
@@ -1416,6 +1453,7 @@
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite
       - id: RMCCoatASOBlackAlt
+      - id: RMCCoatASOWhiteAlt
     - name: Headset
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1432,7 +1470,7 @@
     - name: Bag
       jobs:
       - CMAuxiliarySupportOfficer
-      choices: { CMHelmet: 1 }
+      choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineTech
       - id: CMSatchel
@@ -1455,15 +1493,14 @@
       - CMAuxiliarySupportOfficer
       choices: { CMHelmet: 1 }
       entries:
+      - id: RMCHeadCapASO
+      - id: RMCHeadCapPeakedASO
+      - id: RMCHeadBeretASO
       - id: RMCHeadBeret
-        recommended: true
       # TODO patrol and officer cap
       - id: RMCHeadCapFlippable
-        recommended: true
       - id: CMHeadCapPeakedService
-        recommended: true
       - id: CMHeadBeretTan
-        recommended: true
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer
@@ -1512,5 +1549,8 @@
       - id: CMWebbingBrown
       - id: CMWebbingBlack
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster

@@ -22,7 +22,6 @@
     - name: Handheld Defense
       takeOne: CMHandheldDefense
       entries:
-      - id: RMCTesla
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
       - id: RMCSentry
@@ -132,7 +131,7 @@
         points: 12
       - id: RMCCaseFlamer
         points: 12
-      - id: RMCM79Case
+      - id: RMCM85A1Case
         points: 24
     #- id: CMM56DHeavyMachineGun
     #  points: 24
@@ -216,9 +215,9 @@
       - id: CMVendorBundleCombatTechnicianApparel
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-    - name: Gloves 
+    - name: Gloves
       choices: { CMHands: 1 }
-      entries: 
+      entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
     - name: Helmet
@@ -298,8 +297,12 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCToolWebbingSmallFilled
         name: small tool webbing (Full)

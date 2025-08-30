@@ -7,6 +7,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoRunnerBase
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
@@ -107,7 +108,7 @@
     prefix: runner
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: runner
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
@@ -155,6 +156,8 @@
   - type: XenoEvolution
     strains:
     - RMCXenoRunnerAcider
+  - type: VentCrawler
+    ventCrawlIcon: runner
 
 - type: entity
   parent: CMXenoRunnerBase
@@ -260,3 +263,5 @@
         components:
         - XenoHeavy
   - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: runner
