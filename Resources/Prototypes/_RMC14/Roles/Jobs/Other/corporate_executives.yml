@@ -195,7 +195,7 @@
     jumpsuit: CMJumpsuitLiaisonIvy
     shoes: RMCShoesLaceup
     back: CMSatchel
-    id: CMIDCardPMC
+    id: CMIDCardPMCExecutive
     ears: RMCHeadsetDistressWeYa
 
 - type: playTimeTracker
@@ -268,7 +268,7 @@
     back: CMSatchel
     belt: RMCBeltHolsterPistolWeYaMK80Fill
     outerClothing: RMCJacketCorporateManager
-    id: CMIDCardPMC
+    id: CMIDCardPMCExecutive
     ears: RMCHeadsetDistressPMCDirector
     head: RMCHeadCapManager
 
@@ -469,7 +469,7 @@
     back: CMSatchel
     belt: GoldHandcannonBeltFilled
     outerClothing: RMCArmorPMCDirector
-    id: CMIDCardPMC
+    id: CMIDCardPMCExecutive
     ears: RMCHeadsetDistressPMCDirector
     head: ArmorHelmetPMCDirector
 

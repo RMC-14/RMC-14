@@ -97,7 +97,7 @@
 
 - type: entity
   parent: CMIDCardLiaison
-  id: CMIDCardPMC
+  id: CMIDCardPMCExecutive
   name: corporate holo-badge
   description: A corporate holo-badge in standard corporate orange and white. It has a unique uncapped bottom. It is fingerprint locked with 5-X clearance level. Commonly held by corporate managers.
   suffix: WeYa
