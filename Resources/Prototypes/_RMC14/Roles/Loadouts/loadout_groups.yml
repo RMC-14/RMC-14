@@ -428,9 +428,11 @@
   id: LiaisonRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 3
   loadouts:
-  - DrinkCanAleRMC
+  - RMCWeYaClipboard
+  - RMCWeYaThermos
+  - RMCHeadBeretWeYa
 
 # Chief MP
 - type: loadoutGroup
