@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added the synthetic race for admin use
-    type: Add
-  id: 1771
-  time: '2025-05-21T16:17:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6273
 - author: Community members
   changes:
   - message: Adds a plethora of Xenonid guides.
@@ -4517,5 +4510,14 @@
   id: 2271
   time: '2025-08-30T00:50:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7581
+- author: SharkSnake98
+  changes:
+  - message: Added the DrinksGlass component to the flasks/canteens and faction cups
+    type: Add
+  - message: Changed the faction cups total reagent storage to 30u
+    type: Tweak
+  id: 2272
+  time: '2025-08-30T00:52:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7340
 Name: RMC14
 Order: -1
