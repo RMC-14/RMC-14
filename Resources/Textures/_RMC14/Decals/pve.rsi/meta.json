@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/structures/machinery/bolt_terminal.dmi",
+  "copyright": "Taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/structures/machinery/bolt_terminal.dmi, YellowSign made by SharkSnake98 on Github",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,9 @@
     },
     {
       "name": "closed2"
+    },
+    {
+      "name": "yellow_sign"
     }
   ]
 }

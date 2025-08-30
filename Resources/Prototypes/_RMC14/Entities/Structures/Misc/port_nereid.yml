@@ -1,0 +1,24 @@
+﻿- type: entity
+  parent: CMBaseStructure
+  id: RMCAncientObelisk
+  name: ancient obelisk
+  description: A strange basalt obelisk, coated in strange red symbols which hurt your eyes. You don't know if you should cry, scream, laugh, worship, or run away.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: OverMobs
+    sprite: _RMC14/Structures/obelisk.rsi
+    state: obelisk
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-2.25,0.25,0"
+        density: 190
+        layer:
+        - MobMask
