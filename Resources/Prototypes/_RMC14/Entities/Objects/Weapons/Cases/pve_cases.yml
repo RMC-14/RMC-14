@@ -1,0 +1,269 @@
+
+- type: entity
+  parent: RMCCaseBase
+  id: RMCBasePVEEquipmentCase
+  abstract: true
+  name: base equipment case
+  description: A gun case.
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - state: gun
+      map: [ gun ]
+      visible: false
+    - state: lid_closed
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed }
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+  - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+# Guns
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseM42A2
+  name: M42A2 shotgun case
+  description: A heavy case for storing an M42A2 pump-action shotgun, an Armat Battlefield Systems modern take on an all-time classic.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/shotgun.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponShotgunM42A2
+      - RMCHandful
+      - RMCAttachmentM42A2CollapsibleStock
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponShotgunM42A2Filled
+    - id: RMCAttachmentM42A2CollapsibleStock
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponShotgunM42A2
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseM5SPR
+  name: M5SPR battle rifle case
+  description: A large case for storing an M5SPR, a modified UNMC battle rifle equipped with HV-P Rounds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/rifle.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM5SPR
+      - CMMagazineRifleM4SPR
+      - CMMagazineRifleM4SPRAP
+      - CMMagazineRifleM4SPRExt
+      - RMCMagazineRifleM5SPRHVP
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM5SPR
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+    - id: RMCMagazineRifleM5SPRHVP
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCWeaponRifleM5SPR
+
+# Sentry
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseSentry
+  name: UN 571-C Sentry Gun case
+  description: A gun case containing the UA 571-C sentry unit and a spare drum.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/sentry.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - RMCSentry
+      - RMCMagazineSentry
+  - type: StorageFill
+    contents:
+    - id: RMCSentry
+    - id: RMCMagazineSentry
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCSentry
+
+# Misc
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseFlamerFuel
+  name: M34 fuel canister case
+  description: A heavy case containing six fuel canisters for the M34 incinerator unit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/flamer_fuel.rsi
+    layers:
+    - state: base
+    - state: ammo_1
+      map: [ ammo_1 ]
+      visible: false
+    - state: ammo_2
+      map: [ ammo_2 ]
+      visible: false
+    - state: ammo_3
+      map: [ ammo_3 ]
+      visible: false
+    - state: ammo_4
+      map: [ ammo_4 ]
+      visible: false
+    - state: ammo_5
+      map: [ ammo_5 ]
+      visible: false
+    - state: ammo_6
+      map: [ ammo_6 ]
+      visible: false
+    - state: lid_closed
+      map: [ lid ]
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCTankFlamer
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+    - id: RMCTankFlamer
+  - type: ItemMapper
+    mapLayers:
+      ammo_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCTankFlamer
+      ammo_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCTankFlamer
+
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseMotionDetector
+  name: motion detectors case
+  description: A case containing four individual handheld motion detectors.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/md.rsi
+    layers:
+    - state: base
+    - state: ammo_1
+      map: [ ammo_1 ]
+      visible: false
+    - state: ammo_2
+      map: [ ammo_2 ]
+      visible: false
+    - state: ammo_3
+      map: [ ammo_3 ]
+      visible: false
+    - state: ammo_4
+      map: [ ammo_4 ]
+      visible: false
+    - state: lid_closed
+      map: [ lid ]
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCDetector
+  - type: StorageFill
+    contents:
+    - id: RMCMotionDetector
+    - id: RMCMotionDetector
+    - id: RMCMotionDetector
+    - id: RMCMotionDetector
+  - type: ItemMapper
+    mapLayers:
+      ammo_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCDetector
+      ammo_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCDetector
+      ammo_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCDetector
+      ammo_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCDetector

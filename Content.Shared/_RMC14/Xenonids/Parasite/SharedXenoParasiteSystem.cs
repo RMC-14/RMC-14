@@ -1,7 +1,11 @@
+using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Medical.Unrevivable;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
@@ -10,6 +14,7 @@ using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors.Components;
 using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
@@ -25,17 +30,19 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
-using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -55,9 +62,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -67,6 +74,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+
+    private const CollisionGroup LeapCollisionGroup = CollisionGroup.InteractImpassable;
+    private const CollisionGroup ThrownCollisionGroup = CollisionGroup.InteractImpassable | CollisionGroup.BarricadeImpassable;
 
     public override void Initialize()
     {
@@ -85,6 +97,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, PullAttemptEvent>(OnParasiteTryPull);
         SubscribeLocalEvent<XenoParasiteComponent, GettingPickedUpAttemptEvent>(OnParasiteTryPickup);
         SubscribeLocalEvent<XenoParasiteComponent, BeforeDamageChangedEvent>(OnParasiteBeforeDamageChanged);
+        SubscribeLocalEvent<XenoParasiteComponent, XenoLeapAttemptEvent>(OnParasiteLeapAttempt);
+        SubscribeLocalEvent<XenoParasiteComponent, XenoLeapDoAfterEvent>(OnParasiteLeapDoAfter);
+        SubscribeLocalEvent<XenoParasiteComponent, XenoLeapStoppedEvent>(OnParasiteLeapStopped);
+        SubscribeLocalEvent<XenoParasiteComponent, ThrownEvent>(OnParasiteThrown);
+        SubscribeLocalEvent<XenoParasiteComponent, LandEvent>(OnParasiteLand);
 
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
@@ -248,6 +265,69 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private void OnParasiteLeapAttempt(Entity<XenoParasiteComponent> ent, ref XenoLeapAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var contacts = _physics.GetContactingEntities(ent);
+        foreach (var contact in contacts)
+        {
+            // Unable to leap while underneath an airlock
+            if (HasComp<DoorComponent>(contact) && !HasComp<ResinDoorComponent>(contact))
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-leap-blocked"), Transform(ent).Coordinates, ent);
+                args.Cancelled = true;
+                break;
+            }
+        }
+    }
+
+    private void OnParasiteLeapDoAfter(Entity<XenoParasiteComponent> ent, ref XenoLeapDoAfterEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (TryComp(ent, out FixturesComponent? fixtures))
+        {
+            var fixture = fixtures.Fixtures.First();
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask | (int) LeapCollisionGroup);
+        }
+    }
+
+    private void OnParasiteLeapStopped(Entity<XenoParasiteComponent> ent, ref XenoLeapStoppedEvent args)
+    {
+        if (TryComp(ent, out FixturesComponent? fixtures))
+        {
+            var fixture = fixtures.Fixtures.First();
+            if ((fixture.Value.CollisionMask & (int) CollisionGroup.AirlockLayer) == 0)
+                return;
+
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ (int) LeapCollisionGroup);
+        }
+    }
+
+    private void OnParasiteThrown(Entity<XenoParasiteComponent> ent, ref ThrownEvent args)
+    {
+        if (TryComp(ent, out FixturesComponent? fixtures))
+        {
+            var fixture = fixtures.Fixtures.First();
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask | (int)ThrownCollisionGroup);
+        }
+    }
+
+    private void OnParasiteLand(Entity<XenoParasiteComponent> ent, ref LandEvent args)
+    {
+        if (TryComp(ent, out FixturesComponent? fixtures))
+        {
+            var fixture = fixtures.Fixtures.First();
+            if ((fixture.Value.CollisionMask & (int) CollisionGroup.AirlockLayer & (int) CollisionGroup.BarricadeImpassable) != 0)
+                return;
+
+            _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, fixture.Value.CollisionMask ^ (int) ThrownCollisionGroup);
+        }
+    }
+
     protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
     {
     }
@@ -275,10 +355,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimInfectedRemoved(Entity<VictimInfectedComponent> victim, ref ComponentRemove args)
     {
-        if (_status.HasStatusEffect(victim, "Muted", null) && _status.HasStatusEffect(victim, "TemporaryBlindness", null))
+        if (_status.HasStatusEffect(victim, "Unconscious", null))
         {
-            _status.TryRemoveStatusEffect(victim, "Muted");
-            _status.TryRemoveStatusEffect(victim, "TemporaryBlindness");
+            _status.TryRemoveStatusEffect(victim, "Unconscious");
         }
         _standing.Stand(victim);
     }
@@ -291,8 +370,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimInfectedExamined(Entity<VictimInfectedComponent> victim, ref ExaminedEvent args)
     {
-        if (HasComp<XenoComponent>(args.Examiner) || (CompOrNull<GhostComponent>(args.Examiner)?.CanGhostInteract ?? false))
-            args.PushMarkup("This creature is impregnated.");
+        if (HasComp<XenoComponent>(args.Examiner))
+            args.PushMarkup("This one is hosting a sister! She will emerge in time.");
+
+        else if (HasComp<GhostComponent>(args.Examiner))
+            args.PushMarkup("This creature is infected.");
     }
 
     private void OnVictimInfectedRejuvenate(Entity<VictimInfectedComponent> victim, ref RejuvenateEvent args)
@@ -303,6 +385,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     private void OnVictimBurstMapInit(Entity<VictimBurstComponent> burst, ref MapInitEvent args)
     {
         _appearance.SetData(burst, BurstVisuals.Visuals, VictimBurstState.Burst);
+        _unrevivable.MakeUnrevivable(burst.Owner);
     }
 
     private void OnVictimUpdateMobState(Entity<VictimBurstComponent> burst, ref UpdateMobStateEvent args)
@@ -328,6 +411,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         var ev = new AttachParasiteDoAfterEvent();
         var delay = parasite.Comp.ManualAttachDelay;
+
+        if (parasite.Owner == user)
+            delay = parasite.Comp.SelfAttachDelay;
 
         if (HasComp<TrapParasiteComponent>(parasite))
             delay = TimeSpan.Zero;
@@ -432,8 +518,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         infectable.BeingInfected = true;
         Dirty(victim, infectable);
 
-        _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
-        _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
+        _size.TryKnockOut(victim, parasite.Comp.ParalyzeTime, true);
         RefreshIncubationMultipliers(victim);
 
         _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
@@ -447,7 +532,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         RemCompDeferred<ParasiteAIComponent>(parasite);
         var ev = new XenoParasiteInfectEvent(victim, parasite.Owner);
-        RaiseLocalEvent(victim, ref ev, true);
+        RaiseLocalEvent(victim, ev, true);
 
         ParasiteLeapHit(parasite);
         return true;
@@ -556,7 +641,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
             else
             {
-                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
+                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid) || _unrevivable.IsUnrevivable(uid)))
                 {
                     if (infected.SpawnedLarva != null)
                         TryBurst((uid, infected));
@@ -674,9 +759,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return;
 
         //TODO Minor limb damage and causes pain
-        _stun.TryParalyze(victim, knockdownTime, false);
-        _status.TryAddStatusEffect(victim, "Muted", knockdownTime, true, "Muted");
-        _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
+        _size.TryKnockOut(victim, knockdownTime, true);
         _jitter.DoJitter(victim, jitterTime, false);
         _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
 
@@ -873,7 +956,18 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
         spawned = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
+        LinkLarvaToVictim(victim, spawned);
+    }
 
+    public void InsertLarva(Entity<VictimInfectedComponent> victim, EntityUid spawned)
+    {
+        var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
+        _container.InsertOrDrop(spawned, larvaContainer);
+        LinkLarvaToVictim(victim, spawned);
+    }
+
+    private void LinkLarvaToVictim(Entity<VictimInfectedComponent> victim, EntityUid spawned)
+    {
         if (HasComp<XenoComponent>(spawned))
             _hive.SetHive(spawned, victim.Comp.Hive);
 
@@ -897,5 +991,4 @@ public sealed partial class LarvaBurstDoAfterEvent : SimpleDoAfterEvent
 /// </summary>
 /// <param name="Target">The Entity who was infected</param>
 /// <param name="Parasite">The Parasite who infected the Target</param>
-[ByRefEvent]
 public record struct XenoParasiteInfectEvent(EntityUid Target, EntityUid Parasite);

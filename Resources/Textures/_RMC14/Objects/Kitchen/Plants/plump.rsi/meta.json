@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CM13 at https://github.com/cmss13-devs/cmss13/blob/19b1608adacb02b87f9fe5c461e652cd60a11307/icons/obj/items/harvest.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+      {
+          "name": "dead"
+      },
+      {
+          "name": "harvest"
+      },
+      {
+          "name": "produce"
+      },
+      {
+          "name": "seed"
+      },
+      {
+          "name": "stage-1"
+      },
+      {
+          "name": "stage-2"
+      },
+      {
+          "name": "stage-3"
+      }
+  ]
+}

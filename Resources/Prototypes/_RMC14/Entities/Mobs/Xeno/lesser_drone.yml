@@ -91,7 +91,7 @@
     prefix: lesser
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: lesser_drone
   - type: AcidTrap
     trapLevel: 1
@@ -101,3 +101,5 @@
     evasion: 10
   - type: XenoInhands
     prefix: lesser
+  - type: FixedIdentity
+    name: cm-job-name-xeno-lesser-drone

@@ -1,0 +1,58 @@
+﻿- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: RMCSmartFridge
+  name: smart chemical storage
+  description: A refrigerated storage unit for medicine and chemical storage.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/smart_fridge.rsi
+    layers:
+    - state: smartfridge
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.4,0.25,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ActivatableUI
+    key: enum.RMCSmartFridgeUI.Key
+  - type: ActivatableUIRequiresPower
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: false # TODO RMC14 power
+  - type: Appearance
+  - type: GuideHelp
+    guides:
+    - Chemicals
+    - Chemist
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: UserInterface
+    interfaces:
+      enum.RMCSmartFridgeUI.Key:
+        type: RMCSmartFridgeBui
+  - type: RMCSmartFridge

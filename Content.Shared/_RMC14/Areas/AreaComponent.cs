@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.WeedKiller;
+using Content.Shared._RMC14.WeedKiller;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Areas;
@@ -24,6 +24,9 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Medevac;
+
+    [DataField, AutoNetworkedField]
+    public bool Paradropping;
 
     [DataField("OB"), AutoNetworkedField]
     public bool OB;
@@ -54,6 +57,9 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool HijackEvacuationArea;
+
+    [DataField, AutoNetworkedField]
+    public bool AlwaysPowered = false;
 
     // TODO RMC14 does this need to be a double?
     [DataField, AutoNetworkedField]

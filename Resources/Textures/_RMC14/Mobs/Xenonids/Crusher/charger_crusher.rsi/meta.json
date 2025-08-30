@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "crusher_thrown_1",
+      "directions": 4
+    },
+    {
+      "name": "crusher_thrown_2",
+      "directions": 4
+    },
+    {
+      "name": "crusher_thrown_3",
+      "directions": 4
+    },
+    {
+      "name": "crusher_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "crusher_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "crusher_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "crusher_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "thrown",
+      "directions": 4
+    },
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "crusher_downed_0"
+    },
+    {
+      "name": "crusher_downed_1"
+    },
+    {
+      "name": "crusher_downed_2"
+    },
+    {
+      "name": "crusher_downed_3"
+    },
+    {
+      "name": "crusher_rest_0"
+    },
+    {
+      "name": "crusher_rest_1"
+    },
+    {
+      "name": "crusher_rest_2"
+    },
+    {
+      "name": "crusher_rest_3"
+    },
+    {
+      "name": "crusher_thrown_0",
+      "directions": 4
+    }
+  ]
+}

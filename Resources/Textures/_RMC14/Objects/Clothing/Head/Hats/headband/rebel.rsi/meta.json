@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/de8d4b8f26e3fbc43bcfea4452d2a8087fb3cc63/icons/obj/items/clothing/hats/hats_by_faction/CLF.dmi and https://github.com/cmss13-devs/cmss13/blob/de8d4b8f26e3fbc43bcfea4452d2a8087fb3cc63/icons/mob/humans/onmob/clothing/helmet_garb/headbands.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-HELMET",
+      "directions": 4
+    }
+  ]
+}

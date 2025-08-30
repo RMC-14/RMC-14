@@ -35,11 +35,13 @@
     tags:
     - HideContextMenu
   - type: RMCIgniteOnCollide
+    maxStacks: 20
     tileDamage:
       types:
         Heat: 0.5
   - type: DamageOnCollide
     damageDead: false
+    fire: true
     damage:
       types:
         Heat: 45
@@ -60,6 +62,7 @@
   - type: RMCScorchEffectOnSpawn
     decalTag: burnt
     tileLimit: 3
+  - type: BlockWeeds
 
 - type: entity
   parent: RMCTileFire
@@ -84,6 +87,7 @@
     id: RMCTileFireGreen
     extinguishInstantly: false
     patExtinguishMultiplier: 2
+    sprayExtinguishMultiplier: 3
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.666
     sprintSpeedModifier: 0.666
@@ -98,6 +102,32 @@
 
 - type: entity
   parent: RMCTileFire
+  id: RMCTileFireBlue
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: blue_4
+  - type: PointLight
+    color: "#069420"
+  - type: RMCIgniteOnCollide
+    intensity: 40
+    duration: 45
+  - type: TileFire
+    id: RMCTileFireBlue
+    extinguishInstantly: false
+    patExtinguishMultiplier: 2
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: blue_1 }
+          Two: { state: blue_2 }
+          Three: { state: blue_3 }
+          Four: { state: blue_4 }
+
+- type: entity
+  parent: RMCTileFire
   id: RMCTileFireOB
   components:
   - type: Sprite
@@ -108,6 +138,7 @@
   - type: PointLight
     color: "#8fcbeb"
   - type: RMCIgniteOnCollide
+    maxStacks: 70
     intensity: 80
     duration: 70
   - type: TileFire
@@ -124,6 +155,34 @@
 
 - type: entity
   parent: RMCTileFire
+  id: RMCTileFireOBAegis
+  components:
+  - type: Sprite
+    color: "#ffffff"
+    layers:
+    - map: [ "base" ]
+      state: purple_4
+  - type: PointLight
+    color: "#faeffa"
+  - type: RMCIgniteOnCollide
+    intensity: 80
+    duration: 70
+  - type: TileFire
+    id: RMCTileFireOBAegis
+    extinguishInstantly: false
+  - type: RMCFireImmunityBypass  # This component allows it to bypass fire immunity
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: purple_1 }
+          Two: { state: purple_2 }
+          Three: { state: purple_3 }
+          Four: { state: purple_4 }
+
+
+- type: entity
+  parent: RMCTileFire
   id: RMCTileFireLaser
   components:
   - type: Sprite
@@ -137,6 +196,8 @@
         Heat: 100
   - type: RMCIgniteOnCollide
     maxStacks: 5
+    intensity: 75
+    duration: 5
     tileDamage:
       types:
         Heat: 0.13
@@ -159,3 +220,16 @@
   components:
   - type: TileFire
     duration: 30
+  - type: RMCIgniteOnCollide
+    maxStacks: 60
+    intensity: 60
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireMiniMike
+  components:
+  - type: TileFire
+    duration: 20
+  - type: RMCIgniteOnCollide
+    maxStacks: 25
+    intensity: 25

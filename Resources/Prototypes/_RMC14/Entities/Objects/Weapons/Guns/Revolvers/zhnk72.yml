@@ -1,0 +1,169 @@
+﻿- type: entity
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
+  id: RMCWeaponRevolverZHNK72
+  name: ZHNK-72 revolver
+  description: The ZHNK-72 is a SPP designed revolver. The ZHNK-72 is used by the SPP armed forces in a policing role as well as limited numbers in the hands of SNCOs.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolverZHNK72
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/zhnk72.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/zhnk72.rsi
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoaderZHNK72
+      - RMCCartridgeRevolverZHNK72
+    proto: RMCCartridgeRevolverZHNK72
+    capacity: 7
+    chambers: [ True, True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null, null ]
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_1.ogg
+    soundEmpty:
+      path: /Audio/_RMC14/Weapons/Guns/gun_cmb_click1.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 0
+    recoilUnwielded: 3
+    scatterWielded: 5
+    scatterUnwielded: 12
+    baseFireRate: 3.5
+    burstScatterMult: 4
+  - type: GunDamageModifier
+    multiplier: 1.2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.1
+      rmc-aslot-rail: -0.14, 0.158
+      rmc-aslot-underbarrel: 0.38, -0.17
+
+- type: entity
+  parent: RMCWeaponRevolverZHNK72
+  id: RMCWeaponRevolverZHNK72Empty
+  suffix: Empty
+  components:
+  - type: RevolverAmmoProvider
+    proto: null
+    chambers:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+
+- type: entity
+  id: RMCBaseSpeedLoaderZHNK72
+  name: "Speed loader (7.62mm)"
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoaderZHNK72
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRevolverZHNK72
+    capacity: 7
+  - type: Sprite
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  parent: RMCBaseSpeedLoaderZHNK72
+  id: RMCSpeedLoaderZHNK72
+  name: "ZHNK-72 Speed loader (7.62mm)"
+  description: A revolver speed loader.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/zhnk72.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 7
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolverZHNK72
+    capacity: 7
+  - type: Appearance
+
+- type: entity
+  id: RMCCartridgeRevolverZHNK72
+  name: cartridge (7.62mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolverZHNK72
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolverZHNK72
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolverZHNK72
+  name: bullet (7.62mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 70
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 1
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 20
+
+- type: Tag
+  id: RMCWeaponRevolverZHNK72
+
+- type: Tag
+  id: RMCSpeedLoaderZHNK72
+
+- type: Tag
+  id: RMCCartridgeRevolverZHNK72

@@ -1,0 +1,87 @@
+# Divide original costs by 37.5 each - except plastic which is 20
+# For all non-stackable/sheet items, multiply original costs by 1.25 rounded down
+# Example: M40 is 4250 x 1.25 = 5312 / 37.5 = 142 CMSteel
+- type: latheRecipe
+  id: RMCM40GrenadeCasing
+  result: RMCM40GrenadeCasing
+  completetime: 4
+  materials:
+    CMSteel: 142 # 5312
+
+- type: latheRecipe
+  id: RMCM15GrenadeCasing
+  result: RMCM15GrenadeCasing
+  completetime: 4
+  materials:
+    CMSteel: 233 # 8750
+
+- type: latheRecipe
+  id: RMCM20MineCasing
+  result: RMCM20MineCasing
+  completetime: 4
+  materials:
+    CMSteel: 125 # 4687
+
+- type: latheRecipe
+  id: RMCC4PlasticCasing
+  result: RMCC4PlasticCasing
+  completetime: 4
+  materials:
+    CMSteel: 250 # 9375
+    RMCPlastic: 125 # 2500
+
+- type: latheRecipe
+  id: RMC84mmRocketTube
+  result: RMC84mmRocketTube
+  completetime: 4
+  materials:
+    CMSteel: 250 # 9375
+
+- type: latheRecipe
+  id: RMC84mmRocketWarhead
+  result: RMC84mmRocketWarhead
+  completetime: 4
+  materials:
+    CMSteel: 375 # 14062
+
+- type: latheRecipe
+  id: RMC80mmMortarShell
+  result: RMC80mmMortarShell
+  completetime: 4
+  materials:
+    CMSteel: 625 # 23437
+
+- type: latheRecipe
+  id: RMC80mmMortarWarhead
+  result: RMC80mmMortarWarhead
+  completetime: 4
+  materials:
+    CMSteel: 375 # 14062
+
+- type: latheRecipe
+  id: RMC80mmMortarCameraWarhead
+  result: RMC80mmMortarCameraWarhead
+  completetime: 4
+  materials:
+    CMSteel: 500 # 18750
+
+- type: latheRecipe
+  id: RMCCustomM34A1FuelTankCase
+  result: RMCCustomM34A1FuelTankCase
+  completetime: 4
+  materials:
+    CMSteel: 125 # 4687
+
+- type: latheRecipe
+  id: RMCCustomM34TFuelTankCase
+  result: RMCCustomM34TFuelTankCase
+  completetime: 4
+  materials:
+    CMSteel: 125 # 4687
+
+- type: latheRecipe
+  id: RMCCustomM34A1SmokeTankCase
+  result: RMCCustomM34A1SmokeTankCase
+  completetime: 4
+  materials:
+    CMSteel: 125 # 4687

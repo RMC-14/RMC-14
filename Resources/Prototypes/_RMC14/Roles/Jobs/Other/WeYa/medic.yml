@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Medic
   special:
   - !type:AddComponentSpecial
     components:
@@ -46,6 +47,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCMedic
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCMedic
+  name: weya pmc medic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCMedic
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCMedic
@@ -58,6 +70,10 @@
     job: RMCPMCMedic
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 

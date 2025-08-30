@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/effects/strata_decals.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "grime1_1"
+    },
+    {
+      "name": "grime1_2"
+    },
+    {
+      "name": "grime1_3"
+    },
+    {
+      "name": "grime1_4"
+    },
+    {
+      "name": "grime2_1"
+    },
+    {
+      "name": "grime2_2"
+    },
+    {
+      "name": "grime2_3"
+    },
+    {
+      "name": "grime2_4"
+    },
+    {
+      "name": "grime3_1"
+    },
+    {
+      "name": "grime3_2"
+    },
+    {
+      "name": "grime3_3"
+    },
+    {
+      "name": "grime3_4"
+    },
+    {
+      "name": "grime4_1"
+    },
+    {
+      "name": "grime4_2"
+    },
+    {
+      "name": "grime4_3"
+    },
+    {
+      "name": "grime4_4"
+    },
+    {
+      "name": "soro_mud_1"
+    },
+    {
+      "name": "soro_mud_2"
+    },
+    {
+      "name": "soro_mud_3"
+    },
+    {
+      "name": "soro_mud_4"
+    },
+    {
+      "name": "soro_mud_5"
+    },
+    {
+      "name": "soro_mud_6"
+    },
+    {
+      "name": "soro_mud_7"
+    },
+    {
+      "name": "soro_mud_8"
+    }
+  ]
+}

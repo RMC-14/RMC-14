@@ -1,0 +1,64 @@
+- type: entity
+  parent: CMHeadCapMP
+  id: RMCHeadCapTSEPA
+  name: tsepa cap
+  description: A cap for TSEPA constables. Wots all this then?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretTSE
+  name: tse beret
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tse_beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tse_beret.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretTSEPA
+  name: tsepa beret
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_beret.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPA
+  id: RMCHeadCapTSEPAPeaked
+  name: peaked tsepa cap
+  description: A dark peaked cap enscribed with the powerful silver & red Sakura flower shaped emblem of the TSEPA. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  suffix: Silver and Red
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPAPeaked
+  id: RMCHeadCapTSEPAPeakedGoldSilver
+  description: A dark peaked cap enscribed with the powerful silver & gold Sakura flower shaped emblem of the TSEPA. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  suffix: Silver and Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked_rank_2.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked_rank_2.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPAPeaked
+  id: RMCHeadCapTSEPAPeakedGold
+  description: A dark peaked cap enscribed with the powerful red & gold Sakura flower shaped emblem of the TSEPA, more commonly used by higher ranking Constables & TSEPA personnel. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+  suffix: Gold
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked_rank_3.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/TSE/tsepa_cap_peaked_rank_3.rsi

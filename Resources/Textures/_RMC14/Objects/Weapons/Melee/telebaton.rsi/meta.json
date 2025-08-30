@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a7dd814ed7c7773a3b910f03ae597c885635a32a/icons/obj/items/weapons/melee/non_lethal.dmi, https://github.com/cmss13-devs/cmss13/blob/a7dd814ed7c7773a3b910f03ae597c885635a32a/icons/mob/humans/onmob/inhands/weapons/melee/non_lethal_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/a7dd814ed7c7773a3b910f03ae597c885635a32a/icons/mob/humans/onmob/inhands/weapons/melee/non_lethal_lefthand.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "telebaton_off"
+    },
+    {
+      "name": "telebaton_on"
+    },
+    {
+      "name": "on-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "off-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "off-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "on-inhand-left",
+      "directions": 4
+    }
+  ]
+}

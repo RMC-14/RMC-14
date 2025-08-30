@@ -46,6 +46,9 @@ reagent-desc-cmimidazoline = Used for treating non-genetic eye trauma. Generally
 reagent-name-cmclonexadone = Clonexadone
 reagent-desc-cmclonexadone = Advanced cryogenic medicine made from cryoxadone. Treats most types of tissue damage. Requires temperatures below 170K to to metabolise correctly.
 
+reagent-name-rmcrussianred = Russian Red
+reagent-desc-rmcrussianred = An emergency radiation treatment. The list of potential side effects include retinal damage and unconsciousness.
+
 # Medical Icon Labels
 rmc-tricordazine-container-label-text = TI
 rmc-bicaridine-container-label-text = BI
@@ -57,5 +60,24 @@ rmc-first-aid-container-label-text = FA
 rmc-emergency-medicine-container-label-text = EM
 rmc-dexalin-plus-container-label-text = D+
 rmc-epinephrine-container-label-text = EP
+rmc-merabic-container-label-text = MB
+rmc-russianred-container-label-text = Rr
 
 rmc-custom-container-label-text = {$customLabel}
+
+# Antidepressants
+reagent-name-rmcmethylphenidate = Methylphenidate
+reagent-desc-rmcmethylphenidate = A commonly prescribed psychostimulant that increases activity of the central nervous system. Often used to treat attention deficit hyperactivity disorder (ADHD) and narcolepsy. This drug improves performance primarily in the executive function in the prefrontal cortex (reasoning, inhibiting behaviors, organizing, problem solving, planning ect.)
+
+reagent-name-rmccitalopram = Citalopram
+reagent-desc-rmccitalopram = Citalopram is a drug used to treat depression, obsessive-compulsive disorder and panic disorder. It is considered safe for consumption and has been commonly available since 1998.
+
+reagent-name-rmcparoxetine = Paroxetine
+reagent-desc-rmcparoxetine = Very powerful antidepressant used to treat: major depressive disorder (MDD), obsessive-compulsive disorder (OCD), social anxiety disorder (SAD), panic disorder, posttraumatic stress disorder (PTSD), generalized anxiety disorder (GAD) and prenmenstrual dysphoric disorder (PMDD). Prolonged use may have side effects.
+
+antidepressant-effect-rmcmethylphenidate = Your mind feels focused and undivided.
+antidepressant-effect-rmccitalopram = Your mind feels stable... a little stable.
+antidepressant-effect-rmcparoxetine = Your mind feels much more stable.
+
+reagent-name-rmcantized = AntiZed
+reagent-desc-rmcantized = A chemical designed for use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".

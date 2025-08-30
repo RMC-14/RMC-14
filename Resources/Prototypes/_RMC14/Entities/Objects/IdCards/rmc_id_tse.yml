@@ -1,0 +1,47 @@
+﻿- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardTSEPA
+  name: TSEPA silver badge
+  description: The silver badge which represents that the wearer is a TSEPA Constable. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/tsepa_silver.rsi
+    state: tsepa
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/tsepa_silver.rsi
+  - type: ItemIFF
+    faction: FactionTSE
+
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardTSEPASilverGold
+  name: TSEPA silver gold badge
+  description: The silver with gold accents badge which represents that the wearer is a TSEPA Senior Constable. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/tsepa_silver_gold.rsi
+    state: tsepa
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/tsepa_silver_gold.rsi
+  - type: ItemIFF
+    faction: FactionTSE
+
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardTSEPAGold
+  name: TSEPA gold badge
+  description: The gold badge which represents that the wearer is a TSEPA Inspector. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/tsepa_gold.rsi
+    state: tsepa
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/tsepa_gold.rsi
+  - type: ItemIFF
+    faction: FactionTSE

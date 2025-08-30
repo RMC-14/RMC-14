@@ -15,11 +15,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
     - type: Skills
       skills:
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-corp-exec-supervisor
+    - type: RMCTrackable
   hasIcon: false
   hidden: true
 
@@ -51,7 +55,7 @@
 - type: startingGear
   id: RMCGearCorporateExecutiveSupervisor
   equipment:
-    ears: RMCHeadsetDistressWeYaColony # TODO RMC14 tape recorder
+    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateBlack
@@ -81,6 +85,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -89,6 +96,7 @@
         RMCSkillFireman: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-corp-exec-specialist
+    - type: RMCTrackable
   hasIcon: false
   hidden: true
 
@@ -120,7 +128,7 @@
 - type: startingGear
   id: RMCGearCorporateExecutiveSpecialist
   equipment:
-    ears: RMCHeadsetDistressWeYaColony # TODO RMC14 tape recorder
+    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
     back: CMSatchel
     jumpsuit: CMJumpsuitLiaisonBlue
     outerClothing: RMCJacketCorporateBlue

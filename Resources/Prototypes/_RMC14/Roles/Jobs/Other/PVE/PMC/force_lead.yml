@@ -1,0 +1,62 @@
+- type: job
+  parent: CMJobBase
+  id: CMPMCForceLeadPVE
+  name: rmc-job-name-pmc-pve-force-leader
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: CMJobPMCForceLeadPVE
+  ranks:
+    RMCRankWeYaForceLeader: []
+  startingGear: RMCJobPMCForceLeadPVE
+  icon: RMCJobIconPMCLeader
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  - SquadLeader
+  spawnMenuRoleName: WEYA PMC Force Lead (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 1
+        RMCSkillJtac: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-standard
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCForceLeadPVE
+  name: weya pmc force lead spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: CMPMCForceLeadPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: startingGear
+  id: RMCJobPMCForceLeadPVE
+  equipment:
+    id: RMCIDCardPMC
+
+- type: playTimeTracker
+  id: CMJobPMCForceLeadPVE

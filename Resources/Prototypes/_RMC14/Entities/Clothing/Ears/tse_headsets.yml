@@ -1,0 +1,63 @@
+﻿- type: radioChannel
+  id: TSE
+  name: chat-radio-tse
+  keycode: "'" # I hate this
+  frequency: 1551
+  color: "#9a1228"
+  longRange: true
+  tower: true
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyTSE
+  name: TSE radio encryption key
+  components:
+  - type: Sprite
+    state: cmp_key
+  - type: EncryptionKey
+    channels:
+    - TSE
+    defaultChannel: TSE
+
+- type: entity
+  parent: RMCEncryptionKeyTSE
+  id: RMCEncryptionKeyTSEPA
+  name: TSEPA radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - TSE
+    - Colony
+    defaultChannel: TSE
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIconsTSE
+  id: RMCHeadsetTSEAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: InspectorTSEPA
+    trackerModes:
+    - InspectorTSEPA
+    - SeniorConstableTSEPA
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetTSEAbstract
+  id: RMCHeadsetTSE
+  name: TSE headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyTSE
+
+- type: entity
+  parent: RMCHeadsetTSEAbstract
+  id: RMCHeadsetTSEPA
+  name: TSEPA headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyTSEPA

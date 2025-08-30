@@ -1,4 +1,4 @@
-# Bureau Deputy
+# CMB Deputy
 - type: job
   parent: CMJobBase
   id: CMBureauDeputy
@@ -33,6 +33,7 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-deputy
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: entity
@@ -58,6 +59,10 @@
     job: CMBureauDeputy
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -66,17 +71,18 @@
     head: RMCHeadCapBureau
     # face cigar
     # shoulder holster with revolver and two magazines
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetDistressBureau
     back: CMSatchelSecurity
     gloves: RMCHandsVeteran
-    jumpsuit: RMCJumpsuitMarshal
-    outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
-    # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
+    jumpsuit: RMCMarshalCMBUniform
+    outerClothing: RMCCoatBureauDeputy # add telebaton binoculars/range
     belt: CMBeltSecurityMarshalFilled
     shoes: RMCBootsPMCFilled
-    id: RMCIDCardDeputy
-    ears: CMHeadsetMPO
-    pocket1: RMCPouchFirstAidERT
-    pocket2: RMCPouchShotgun
+    id: RMCIDCardCMBDeputy
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchShotgunLargeBuckshot
+    suitstorage: RMCWeaponShotgunM3717
 
 - type: playTimeTracker
   id: RMCJobBureauDeputy

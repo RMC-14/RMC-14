@@ -102,6 +102,11 @@
   - type: RMCRepairable
   - type: RMCNameItemOnVend
     item: Sentry
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 40
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCBaseTesla
@@ -221,3 +226,4 @@
     fireDelay: 3
     stunDuration: 2
     slowDuration: 0
+    dazeDuration: 15

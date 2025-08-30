@@ -45,12 +45,14 @@ public abstract partial class SharedBuckleSystem
         }
         else
         {
+            if (!TryComp(args.Dragged, out BuckleComponent? buckle) ||
+                !CanBuckle(args.Dragged, args.User, uid, true, out var _, buckle))
+                return;
+
+            // RMC14
             var delay = component.BuckleDoafterTime;
-            if (TryComp(args.Dragged, out BuckleComponent? buckle) &&
-                buckle.BuckleDelay != null)
-            {
+            if (buckle.BuckleDelay != null)
                 delay = buckle.BuckleDelay.Value;
-            }
 
             var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new BuckleDoAfterEvent(), args.Dragged, args.Dragged, uid)
             {
@@ -76,6 +78,11 @@ public abstract partial class SharedBuckleSystem
         {
             return false;
         }
+
+        // RMC14
+        if (!strapComp.Enabled)
+            return false;
+        // RMC14
 
         bool Ignored(EntityUid entity) => entity == userUid || entity == buckleUid || entity == targetUid;
 
@@ -210,6 +217,9 @@ public abstract partial class SharedBuckleSystem
     private void AddUnbuckleVerb(EntityUid uid, BuckleComponent component, GetVerbsEvent<InteractionVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || !component.Buckled)
+            return;
+
+        if (!CanUnbuckle((uid, component), args.User, false))
             return;
 
         InteractionVerb verb = new()

@@ -2,3 +2,13 @@
   id: bobda
   flavorType: Base
   description: flavor-base-savory
+
+- type: flavor
+  id: rmcwhiskey
+  flavorType: Complex
+  description: rmc-flavor-complex-whiskey
+
+- type: flavor
+  id: rmcmango
+  flavorType: Complex
+  description: rmc-flavor-complex-mango

@@ -4,11 +4,12 @@
   name: Evolve
   description: Evolve to the next caste of xenonid or choose a strain if one is available.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: evolve
+  - type: InstantAction
     event: !type:XenoOpenEvolutionsActionEvent
 
 - type: entity
@@ -17,16 +18,17 @@
   name: De-evolve
   description: Devolve to the previous caste of xenonid. [color=red]You won't get your evolution points refunded![/color]
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: xeno_deevolve
+  - type: InstantAction
     event: !type:XenoOpenDevolveActionEvent
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoEvolve
+  id: RMCGuidebookActionXenoEvolve
   name: Evolve
   description: Evolve to the next caste of xenonid or choose a strain if one is available.
   categories: [ HideSpawnMenu ]

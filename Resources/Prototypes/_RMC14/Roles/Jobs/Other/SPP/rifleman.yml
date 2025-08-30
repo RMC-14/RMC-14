@@ -11,6 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - Colonist
+  spawnMenuRoleName: SPP Conscript
   special:
   - !type:AddComponentSpecial
     components:
@@ -19,6 +20,7 @@
       - SPP
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
     - type: SquadArmorWearer
     - type: JobPrefix
@@ -59,6 +61,10 @@
     job: RMCSPPRifleman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadSPP
 
@@ -85,7 +91,7 @@
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPRifleman
     gloves: RMCHandsVeteranSPP
-    shoes: CMBootsBlackFilled
+    shoes: RMCBootsSPPFilled
     suitstorage: RMCWeaponRifleType71
     id: RMCIDSPP
     belt: RMCType71BeltFilled

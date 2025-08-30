@@ -2,16 +2,20 @@ using System.Numerics;
 using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -23,7 +27,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
 using Content.Shared.Wall;
@@ -37,6 +41,7 @@ namespace Content.Shared._RMC14.Vendors;
 public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 {
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -54,6 +59,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly SquadSystem _squads = default!;
+    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -119,6 +126,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnMapInit(Entity<CMAutomatedVendorComponent> ent, ref MapInitEvent args)
     {
+        var transform = Transform(ent.Owner);
         _entries.Clear();
         _boxEntries.Clear();
         foreach (var section in ent.Comp.Sections)
@@ -134,6 +142,24 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
                 entry.Multiplier = entry.Amount;
                 entry.Max = entry.Amount;
+
+                // Scale the vendors if it's a colony vendor
+                if (_rmcPlanet.IsOnPlanet(transform))
+                {
+                    if (entry.Amount is not { } originalAmount)
+                        continue;
+
+                    if (ent.Comp.RandomUnstockAmount is { } randomUnstock)
+                    {
+                        if (randomUnstock == -1)
+                            entry.Amount = _random.Next(1, originalAmount);
+                        else
+                            entry.Amount = _random.Next(1, randomUnstock);
+                    }
+
+                    if (ent.Comp.RandomEmptyChance is { } emptyChance && _random.Prob(emptyChance))
+                        entry.Amount = 0;
+                }
             }
         }
 
@@ -166,8 +192,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (TryComp<RMCVendorUserRechargeComponent>(args.User, out var recharge) &&
-            TryComp<CMVendorUserComponent>(args.User, out var vendorUser))
+        if (TryComp<CMVendorUserComponent>(args.User, out var vendorUser) &&
+            TryComp<RMCVendorUserRechargeComponent>(args.User, out var recharge))
         {
             var ticks = (_gameTiming.CurTime - recharge.LastUpdate) / recharge.TimePerUpdate;
             var points = (int)Math.Floor(ticks * recharge.PointsPerUpdate);
@@ -205,13 +231,14 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (vendor.Comp.Jobs.Count == 0)
             return;
 
-        if (_mind.TryGetMind(args.User, out var mindId, out _))
+        _mind.TryGetMind(args.User, out var mindId, out _);
+        foreach (var job in vendor.Comp.Jobs)
         {
-            foreach (var job in vendor.Comp.Jobs)
-            {
-                if (_job.MindHasJobWithId(mindId, job.Id))
-                    return;
-            }
+            if (mindId.Valid && _job.MindHasJobWithId(mindId, job.Id))
+                return;
+
+            if (vendorUser?.Id == job)
+                return;
         }
 
         _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
@@ -264,7 +291,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (TryComp(ent, out AccessReaderComponent? accessReader))
         {
             var access = ent.Comp.Hacked ? new List<ProtoId<AccessLevelPrototype>>() : ent.Comp.Access;
-            _accessReader.SetAccesses(ent, accessReader,access);
+            _accessReader.SetAccesses((ent, accessReader), access);
         }
     }
 
@@ -334,7 +361,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 if (!_job.MindHasJobWithId(mindId, job.Id))
                     validJob = false;
                 else
+                {
                     validJob = true;
+                    break;
+                }
             }
         }
 
@@ -503,6 +533,35 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
+        if (entry.GiveSquadRoleName != null || entry.GiveIcon != null)
+        {
+            var overrideComp = EnsureComp<RMCVendorRoleOverrideComponent>(actor);
+            overrideComp.GiveSquadRoleName = entry.GiveSquadRoleName;
+            overrideComp.IsAppendSquadRoleName = entry.IsAppendSquadRoleName;
+            overrideComp.GiveIcon = entry.GiveIcon;
+            Dirty(actor, overrideComp);
+
+            _squads.UpdateSquadTitle(actor);
+        }
+
+        if (entry.GiveMapBlip != null)
+        {
+            var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(actor);
+            mapBlip.Icon = entry.GiveMapBlip;
+            Dirty(actor, mapBlip);
+        }
+
+        if (entry.GivePrefix != null)
+        {
+            var jobPrefix = EnsureComp<JobPrefixComponent>(actor);
+            if (entry.IsAppendPrefix)
+                jobPrefix.AdditionalPrefix = entry.GivePrefix;
+            else
+                jobPrefix.Prefix = entry.GivePrefix.Value;
+
+            Dirty(actor, jobPrefix);
+        }
+
         if (_net.IsClient)
             return;
 
@@ -552,12 +611,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (!_prototypes.Index(toVend).HasComponent<ItemComponent>())
-        {
-            SpawnAtPosition(toVend, player.ToCoordinates());
-            return;
-        }
-
         var spawn = SpawnNextToOrDrop(toVend, vendor);
         var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
@@ -578,6 +631,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         var ev = new RMCAutomatedVendedUserEvent(spawn);
         RaiseLocalEvent(player, ref ev);
+
+        _adminLog.Add(LogType.RMCVend, $"{ToPrettyString(player)} vended {ToPrettyString(spawn)} from vendor {ToPrettyString(vendor)}");
     }
 
     private bool Grab(EntityUid player, EntityUid item)
@@ -593,7 +648,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return _hands.TryPickupAnyHand(player, item);
         }
 
-        if (_cmInventory.TryEquipClothing(player, (item, clothing)))
+        if (_cmInventory.TryEquipClothing(player, (item, clothing), doRangeCheck: false))
             return true;
 
         return _hands.TryPickupAnyHand(player, item);

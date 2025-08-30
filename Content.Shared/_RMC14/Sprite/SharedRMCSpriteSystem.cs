@@ -51,4 +51,18 @@ public abstract class SharedRMCSpriteSystem : EntitySystem
         ent.Comp.Color = color;
         Dirty(ent);
     }
+
+    public DrawDepth.DrawDepth GetDrawDepth(EntityUid ent, DrawDepth.DrawDepth current = DrawDepth.DrawDepth.Mobs)
+    {
+        var ev = new GetDrawDepthEvent(current);
+        RaiseLocalEvent(ent, ref ev);
+        return ev.DrawDepth;
+    }
+
+    public virtual DrawDepth.DrawDepth UpdateDrawDepth(EntityUid sprite)
+    {
+        var depth = GetDrawDepth(sprite);
+        _appearance.SetData(sprite, RMCSpriteDrawDepth.Key, depth);
+        return depth;
+    }
 }

@@ -39,16 +39,11 @@
   joinNotifyCrew: true
   latejoinArrivalSound:
     path: /Audio/_RMC14/Announcements/ARES/attention_jingle.ogg
+  marineAuthorityLevel: 5
   supervisors: cm-job-supervisors-co
   whitelisted: true
   accessGroups:
   - MarineMain
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: sea
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_medical
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -74,6 +69,7 @@
         RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMSeniorEnlistedAdvisor
       points: 45
     - type: RMCPointing
     - type: JobPrefix
@@ -83,11 +79,12 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: sea
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_medical
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor

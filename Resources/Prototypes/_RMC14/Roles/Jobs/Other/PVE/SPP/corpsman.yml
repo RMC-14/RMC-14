@@ -1,0 +1,58 @@
+- type: job
+  parent: CMJobBase
+  id: RMCSPPCorpsmanPVE
+  name: rmc-job-name-spp-corpsman
+  description: rmc-ghost-role-information-spp-pve-description
+  playTimeTracker: RMCJobSPPCorpsmanPVE
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  startingGear: RMCJobSPPCorpsmanPVEGear
+  icon: "RMCJobIconSPPMedic"
+  joinNotifyCrew: false
+  accessGroups:
+  - HospitalCorpsman
+  spawnMenuRoleName: SPP Corpsman (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillEndurance: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-corpsman
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSPPCorpsmanPVE
+  name: spp corpsman spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCSPPCorpsmanPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+
+- type: startingGear
+  id: RMCJobSPPCorpsmanPVEGear
+  equipment:
+    id: RMCIDSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: RMCJobSPPCorpsmanPVE

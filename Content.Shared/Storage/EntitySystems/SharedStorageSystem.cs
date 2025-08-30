@@ -1,6 +1,7 @@
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.ActionBlocker;
@@ -21,26 +22,27 @@ using Content.Shared.Item;
 using Content.Shared.Lock;
 using Content.Shared.Materials;
 using Content.Shared.Popups;
+using Content.Shared.Rounding;
 using Content.Shared.Stacks;
 using Content.Shared.Storage.Components;
-using Content.Shared.Tag;
-using Content.Shared.Timing;
 using Content.Shared.Storage.Events;
+using Content.Shared.Tag;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Storage.EntitySystems;
@@ -48,7 +50,6 @@ namespace Content.Shared.Storage.EntitySystems;
 public abstract class SharedStorageSystem : EntitySystem
 {
     [Dependency] private   readonly IConfigurationManager _cfg = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] private   readonly IPrototypeManager _prototype = default!;
     [Dependency] protected readonly IRobustRandom Random = default!;
     [Dependency] private   readonly ISharedAdminLogManager _adminLog = default!;
@@ -74,6 +75,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
     // RMC14
     [Dependency] protected readonly RMCStorageSystem RMCStorage = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
     private EntityQuery<StackComponent> _stackQuery;
@@ -85,8 +87,7 @@ public abstract class SharedStorageSystem : EntitySystem
     /// </summary>
     public bool NestedStorage = true;
 
-    [ValidatePrototypeId<ItemSizePrototype>]
-    public const string DefaultStorageMaxItemSize = "Normal";
+    public static readonly ProtoId<ItemSizePrototype> DefaultStorageMaxItemSize = "Normal";
 
     public const float AreaInsertDelayPerItem = 0.075f;
     private static AudioParams _audioParams = AudioParams.Default
@@ -118,6 +119,10 @@ public abstract class SharedStorageSystem : EntitySystem
 
     protected readonly List<string> CantFillReasons = [];
 
+    // Caching for various checks
+    private readonly Dictionary<Vector2i, ulong> _ignored = new();
+    private List<Box2i> _itemShape = new();
+
     /// <inheritdoc />
     public override void Initialize()
     {
@@ -147,16 +152,16 @@ public abstract class SharedStorageSystem : EntitySystem
         SubscribeLocalEvent<StorageComponent, OpenStorageImplantEvent>(OnImplantActivate);
         SubscribeLocalEvent<StorageComponent, AfterInteractEvent>(AfterInteract);
         SubscribeLocalEvent<StorageComponent, DestructionEventArgs>(OnDestroy);
-        SubscribeLocalEvent<BoundUserInterfaceMessageAttempt>(OnBoundUIAttempt);
+        SubscribeLocalEvent<StorageComponent, BoundUserInterfaceMessageAttempt>(OnBoundUIAttempt);
         SubscribeLocalEvent<StorageComponent, BoundUIOpenedEvent>(OnBoundUIOpen);
         SubscribeLocalEvent<StorageComponent, LockToggledEvent>(OnLockToggled);
-        SubscribeLocalEvent<MetaDataComponent, StackCountChangedEvent>(OnStackCountChanged);
-
         SubscribeLocalEvent<StorageComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
         SubscribeLocalEvent<StorageComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
         SubscribeLocalEvent<StorageComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
-
         SubscribeLocalEvent<StorageComponent, AreaPickupDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<StorageComponent, GotReclaimedEvent>(OnReclaimed);
+
+        SubscribeLocalEvent<MetaDataComponent, StackCountChangedEvent>(OnStackCountChanged);
 
         SubscribeAllEvent<OpenNestedStorageEvent>(OnStorageNested);
         SubscribeAllEvent<StorageTransferItemEvent>(OnStorageTransfer);
@@ -165,7 +170,7 @@ public abstract class SharedStorageSystem : EntitySystem
         SubscribeAllEvent<StorageInsertItemIntoLocationEvent>(OnInsertItemIntoLocation);
         SubscribeAllEvent<StorageSaveItemLocationEvent>(OnSaveItemLocation);
 
-        SubscribeLocalEvent<StorageComponent, GotReclaimedEvent>(OnReclaimed);
+        SubscribeLocalEvent<ItemSizeChangedEvent>(OnItemSizeChanged);
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.OpenBackpack, InputCmdHandler.FromDelegate(HandleOpenBackpack, handle: false))
@@ -175,6 +180,23 @@ public abstract class SharedStorageSystem : EntitySystem
         Subs.CVar(_cfg, CCVars.NestedStorage, OnNestedStorageCvar, true);
 
         UpdatePrototypeCache();
+    }
+
+    private void OnItemSizeChanged(ref ItemSizeChangedEvent ev)
+    {
+        var itemEnt = new Entity<ItemComponent?>(ev.Entity, null);
+
+        if (!TryGetStorageLocation(itemEnt, out var container, out var storage, out var loc))
+        {
+            return;
+        }
+
+        UpdateOccupied((container.Owner, storage));
+
+        if (!ItemFitsInGridLocation((itemEnt.Owner, itemEnt.Comp), (container.Owner, storage), loc))
+        {
+            ContainerSystem.Remove(itemEnt.Owner, container, force: true);
+        }
     }
 
     private void OnNestedStorageCvar(bool obj)
@@ -232,6 +254,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
+        // TODO: This should update all entities in storage as well.
         if (args.ByType.ContainsKey(typeof(ItemSizePrototype))
             || (args.Removed?.ContainsKey(typeof(ItemSizePrototype)) ?? false))
         {
@@ -241,7 +264,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void UpdatePrototypeCache()
     {
-        _defaultStorageMaxItemSize = _prototype.Index<ItemSizePrototype>(DefaultStorageMaxItemSize);
+        _defaultStorageMaxItemSize = _prototype.Index(DefaultStorageMaxItemSize);
         _sortedSizes.Clear();
         _sortedSizes.AddRange(_prototype.EnumeratePrototypes<ItemSizePrototype>());
         _sortedSizes.Sort();
@@ -261,6 +284,9 @@ public abstract class SharedStorageSystem : EntitySystem
     {
         storageComp.Container = ContainerSystem.EnsureContainer<Container>(uid, StorageComponent.ContainerId);
         UpdateAppearance((uid, storageComp, null));
+
+        // Make sure the initial starting grid is okay.
+        UpdateOccupied((uid, storageComp));
     }
 
     /// <summary>
@@ -331,6 +357,26 @@ public abstract class SharedStorageSystem : EntitySystem
                 new("/Textures/Interface/VerbIcons/open.svg.192dpi.png"));
         }
         args.Verbs.Add(verb);
+    }
+
+    /// <summary>
+    /// Tries to get the storage location of an item.
+    /// </summary>
+    public bool TryGetStorageLocation(Entity<ItemComponent?> itemEnt, [NotNullWhen(true)] out BaseContainer? container, [NotNullWhen(true)] out StorageComponent? storage, out ItemStorageLocation loc)
+    {
+        loc = default;
+        storage = null;
+
+        if (!ContainerSystem.TryGetContainingContainer(itemEnt.Owner, out container) ||
+            container.ID != StorageComponent.ContainerId ||
+            !TryComp(container.Owner, out storage) ||
+            !_itemQuery.Resolve(itemEnt, ref itemEnt.Comp, false))
+        {
+            return false;
+        }
+
+        loc = storage.StoredItems[itemEnt];
+        return true;
     }
 
     public void OpenStorageUI(EntityUid uid, EntityUid actor, StorageComponent? storageComp = null, bool silent = true, bool doAfter = true)
@@ -656,8 +702,11 @@ public abstract class SharedStorageSystem : EntitySystem
             return;
 
         // If the user's active hand is empty, try pick up the item.
-        if (player.Comp.ActiveHandEntity == null)
+        if (!_sharedHandsSystem.TryGetActiveItem(player.AsNullable(), out var activeItem))
         {
+            if (_rmcHands.TryStorageEjectHand(player, item))
+                return;
+
             _adminLog.Add(
                 LogType.Storage,
                 LogImpact.Low,
@@ -677,11 +726,11 @@ public abstract class SharedStorageSystem : EntitySystem
         _adminLog.Add(
             LogType.Storage,
             LogImpact.Low,
-            $"{ToPrettyString(player):player} is interacting with {ToPrettyString(item):item} while it is stored in {ToPrettyString(storage):storage} using {ToPrettyString(player.Comp.ActiveHandEntity):used}");
+            $"{ToPrettyString(player):player} is interacting with {ToPrettyString(item):item} while it is stored in {ToPrettyString(storage):storage} using {ToPrettyString(activeItem):used}");
 
         // Else, interact using the held item
         if (_interactionSystem.InteractUsing(player,
-                player.Comp.ActiveHandEntity.Value,
+                activeItem.Value,
                 item,
                 Transform(item).Coordinates,
                 checkCanInteract: false))
@@ -734,14 +783,23 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void OnStorageTransfer(StorageTransferItemEvent msg, EntitySessionEventArgs args)
     {
-        if (!TryGetEntity(msg.ItemEnt, out var itemEnt))
+        if (!TryGetEntity(msg.ItemEnt, out var itemUid) || !TryComp(itemUid, out ItemComponent? itemComp))
             return;
 
         var localPlayer = args.SenderSession.AttachedEntity;
+        var itemEnt = new Entity<ItemComponent?>(itemUid.Value, itemComp);
 
-        if (!TryComp(localPlayer, out HandsComponent? handsComp) || !_sharedHandsSystem.TryPickup(localPlayer.Value, itemEnt.Value, handsComp: handsComp, animate: false))
+        // Validate the source storage
+        if (!TryGetStorageLocation(itemEnt, out var container, out _, out _) ||
+            !ValidateInput(args, GetNetEntity(container.Owner), out _, out _))
+        {
+            return;
+        }
+
+        if (!TryComp(localPlayer, out HandsComponent? handsComp) || !_sharedHandsSystem.TryPickup(localPlayer.Value, itemEnt, handsComp: handsComp, animate: false))
             return;
 
+        // Validate the target storage
         if (!ValidateInput(args, msg.StorageEnt, msg.ItemEnt, out var player, out var storage, out var item, held: true))
             return;
 
@@ -777,7 +835,7 @@ public abstract class SharedStorageSystem : EntitySystem
         UpdateAppearance((ent.Owner, ent.Comp, null));
     }
 
-    private void OnBoundUIAttempt(BoundUserInterfaceMessageAttempt args)
+    private void OnBoundUIAttempt(Entity<StorageComponent> ent, ref BoundUserInterfaceMessageAttempt args)
     {
         if (args.UiKey is not StorageComponent.StorageUiKey.Key ||
             _openStorageLimit == -1 ||
@@ -825,14 +883,14 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (!entity.Comp.StoredItems.ContainsKey(args.Entity))
         {
-            if (!TryGetAvailableGridSpace((entity.Owner, entity.Comp), (args.Entity, null), out var location))
+            if (!CMInventoryExtensions.TryGetFirst(entity, args.Entity, out var location))
             {
                 ContainerSystem.Remove(args.Entity, args.Container, force: true);
                 return;
             }
 
-            entity.Comp.StoredItems[args.Entity] = location.Value;
-            Dirty(entity, entity.Comp);
+            entity.Comp.StoredItems[args.Entity] = location;
+            AddOccupiedEntity(entity, args.Entity, location);
         }
 
         UpdateAppearance((entity, entity.Comp, null));
@@ -848,7 +906,11 @@ public abstract class SharedStorageSystem : EntitySystem
         if (args.Container.ID != StorageComponent.ContainerId)
             return;
 
-        entity.Comp.StoredItems.Remove(args.Entity);
+        if (entity.Comp.StoredItems.Remove(args.Entity, out var loc))
+        {
+            RemoveOccupiedEntity(entity, args.Entity, loc);
+        }
+
         Dirty(entity, entity.Comp);
 
         UpdateAppearance((entity, entity.Comp, null));
@@ -919,6 +981,12 @@ public abstract class SharedStorageSystem : EntitySystem
         _appearance.SetData(uid, StorageVisuals.Capacity, capacity, appearance);
         _appearance.SetData(uid, StorageVisuals.Open, isOpen, appearance);
         _appearance.SetData(uid, SharedBagOpenVisuals.BagState, isOpen ? SharedBagState.Open : SharedBagState.Closed, appearance);
+
+        if (TryComp<StorageFillVisualizerComponent>(uid, out var storageFillVisualizerComp))
+        {
+            var level = ContentHelpers.RoundToLevels(used, capacity, storageFillVisualizerComp.MaxFillLevels);
+            _appearance.SetData(uid, StorageFillVisuals.FillLevel, level, appearance);
+        }
 
         // HideClosedStackVisuals true sets the StackVisuals.Hide to the open state of the storage.
         // This is for containers that only show their contents when open. (e.g. donut boxes)
@@ -1069,7 +1137,7 @@ public abstract class SharedStorageSystem : EntitySystem
             return false;
 
         uid.Comp.StoredItems[insertEnt] = location;
-        Dirty(uid, uid.Comp);
+        AddOccupiedEntity((uid.Owner, uid.Comp), insertEnt, location);
 
         if (Insert(uid,
                 insertEnt,
@@ -1083,6 +1151,7 @@ public abstract class SharedStorageSystem : EntitySystem
             return true;
         }
 
+        RemoveOccupiedEntity((uid.Owner, uid.Comp), insertEnt, location);
         uid.Comp.StoredItems.Remove(insertEnt);
         return false;
     }
@@ -1190,10 +1259,10 @@ public abstract class SharedStorageSystem : EntitySystem
     {
         if (!Resolve(ent.Owner, ref ent.Comp)
             || !Resolve(player.Owner, ref player.Comp)
-            || player.Comp.ActiveHandEntity == null)
+            || !_sharedHandsSystem.TryGetActiveItem(player, out var activeItem))
             return false;
 
-        var toInsert = player.Comp.ActiveHandEntity;
+        var toInsert = activeItem;
 
         if (!CanInsert(ent, toInsert.Value, player.Owner, out var reason, ent.Comp))
         {
@@ -1201,7 +1270,7 @@ public abstract class SharedStorageSystem : EntitySystem
             return false;
         }
 
-        if (!_sharedHandsSystem.CanDrop(player, toInsert.Value, player.Comp))
+        if (!_sharedHandsSystem.CanDrop(player, toInsert.Value))
         {
             _popupSystem.PopupClient(Loc.GetString("comp-storage-cant-drop", ("entity", toInsert.Value)), ent, player);
             return false;
@@ -1245,9 +1314,14 @@ public abstract class SharedStorageSystem : EntitySystem
         if (!ItemFitsInGridLocation(itemEnt, storageEnt, location.Position, location.Rotation))
             return false;
 
-        storageEnt.Comp.StoredItems[itemEnt] = location;
+        if (storageEnt.Comp.StoredItems.Remove(itemEnt, out var existing))
+        {
+            RemoveOccupiedEntity((storageEnt.Owner, storageEnt.Comp), itemEnt, existing);
+        }
+
+        storageEnt.Comp.StoredItems.Add(itemEnt, location);
+        AddOccupiedEntity((storageEnt.Owner, storageEnt.Comp), itemEnt, location);
         UpdateUI(storageEnt);
-        Dirty(storageEnt, storageEnt.Comp);
         return true;
     }
 
@@ -1296,15 +1370,17 @@ public abstract class SharedStorageSystem : EntitySystem
         {
             for (var x = storageBounding.Left; x <= storageBounding.Right; x++)
             {
-                for (var angle = startAngle; angle <= Angle.FromDegrees(360 - startAngle); angle += Math.PI / 2f)
+                // RMC14
+                // for (var angle = startAngle; angle <= Angle.FromDegrees(360 - startAngle); angle += Math.PI / 2f)
+                // {
+                var location = new ItemStorageLocation(Angle.Zero, (x, y));
+                if (ItemFitsInGridLocation(itemEnt, storageEnt, location))
                 {
-                    var location = new ItemStorageLocation(0, (x, y));
-                    if (ItemFitsInGridLocation(itemEnt, storageEnt, location))
-                    {
-                        storageLocation = location;
-                        return true;
-                    }
+                    storageLocation = location;
+                    return true;
                 }
+                // }
+                // RMC14
             }
         }
 
@@ -1390,8 +1466,86 @@ public abstract class SharedStorageSystem : EntitySystem
         Entity<StorageComponent?> storageEnt,
         ItemStorageLocation location)
     {
-        return ItemFitsInGridLocation(itemEnt, storageEnt, location.Position, location.Rotation);
+        if (!Resolve(itemEnt, ref itemEnt.Comp) || !Resolve(storageEnt, ref storageEnt.Comp))
+            return false;
+
+        var position = location.Position;
+        var rotation = location.Rotation;
+        var gridBounds = storageEnt.Comp.Grid.GetBoundingBox();
+        if (!gridBounds.Contains(position))
+            return false;
+
+        var itemShape = ItemSystem.GetAdjustedItemShape(storageEnt, itemEnt, rotation, position);
+
+        foreach (var box in itemShape)
+        {
+            for (var offsetY = box.Bottom; offsetY <= box.Top; offsetY++)
+            {
+                for (var offsetX = box.Left; offsetX <= box.Right; offsetX++)
+                {
+                    var pos = (offsetX, offsetY);
+
+                    if (!IsGridSpaceEmpty(itemEnt, storageEnt, pos))
+                        return false;
+                }
+            }
+        }
+
+        return true;
     }
+
+    // private bool ItemFitsInGridLocation(
+    //     Dictionary<Vector2i, ulong> occupied,
+    //     IReadOnlyList<Box2i> itemShape,
+    //     Dictionary<Vector2i, ulong> ignored)
+    // {
+    //     // We pre-cache the occupied / ignored tiles upfront and then can just check each tile 1-by-1.
+    //     // We do it by chunk so we can avoid dictionary overhead.
+    //     foreach (var box in itemShape)
+    //     {
+    //         var chunkEnumerator = new ChunkIndicesEnumerator(box, StorageComponent.ChunkSize);
+    //
+    //         while (chunkEnumerator.MoveNext(out var chunk))
+    //         {
+    //             var chunkOrigin = chunk.Value * StorageComponent.ChunkSize;
+    //
+    //             // Box may not necessarily be in 1 chunk so clamp it.
+    //             var left = Math.Max(chunkOrigin.X, box.Left);
+    //             var bottom = Math.Max(chunkOrigin.Y, box.Bottom);
+    //             var right = Math.Min(chunkOrigin.X + StorageComponent.ChunkSize - 1, box.Right);
+    //             var top = Math.Min(chunkOrigin.Y + StorageComponent.ChunkSize - 1, box.Top);
+    //
+    //             // Assume it's occupied if no data.
+    //             if (!occupied.TryGetValue(chunkOrigin, out var occupiedMask))
+    //             {
+    //                 return false;
+    //             }
+    //
+    //             var ignoredMask = ignored.GetValueOrDefault(chunkOrigin);
+    //
+    //             for (var x = left; x <= right; x++)
+    //             {
+    //                 for (var y = bottom; y <= top; y++)
+    //                 {
+    //                     var index = new Vector2i(x, y);
+    //                     var chunkRelative = SharedMapSystem.GetChunkRelative(index, StorageComponent.ChunkSize);
+    //                     var flag = SharedMapSystem.ToBitmask(chunkRelative, StorageComponent.ChunkSize);
+    //
+    //                     // Ignore it
+    //                     if ((ignoredMask & flag) == flag)
+    //                         continue;
+    //
+    //                     if ((occupiedMask & flag) == flag)
+    //                     {
+    //                         return false;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    //
+    //     return true;
+    // }
 
     /// <summary>
     /// Checks if an item fits into a specific spot on a storage grid.
@@ -1409,7 +1563,7 @@ public abstract class SharedStorageSystem : EntitySystem
         if (!gridBounds.Contains(position))
             return false;
 
-        var itemShape = ItemSystem.GetAdjustedItemShape((storageEnt, storageEnt.Comp), itemEnt, rotation, position);
+        var itemShape = ItemSystem.GetAdjustedItemShape(storageEnt, itemEnt, rotation, position);
 
         foreach (var box in itemShape)
         {
@@ -1466,6 +1620,148 @@ public abstract class SharedStorageSystem : EntitySystem
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Checks if a space on a grid is valid and not occupied by any other pieces.
+    /// </summary>
+    // public bool IsGridSpaceEmpty(Entity<StorageComponent?> storageEnt, Vector2i location, Dictionary<Vector2i, ulong>? ignored = null)
+    // {
+    //     if (!Resolve(storageEnt, ref storageEnt.Comp))
+    //         return false;
+    //
+    //     var chunkOrigin = SharedMapSystem.GetChunkIndices(location, StorageComponent.ChunkSize) * StorageComponent.ChunkSize;
+    //
+    //     // No entry so assume it's occupied.
+    //     if (!storageEnt.Comp.OccupiedGrid.TryGetValue(chunkOrigin, out var occupiedMask))
+    //         return false;
+    //
+    //     var chunkRelative = SharedMapSystem.GetChunkRelative(location, StorageComponent.ChunkSize);
+    //     var occupiedIndex = SharedMapSystem.ToBitmask(chunkRelative);
+    //
+    //     if (ignored?.TryGetValue(chunkOrigin, out var ignoredMask) == true && (ignoredMask & occupiedIndex) == occupiedIndex)
+    //     {
+    //         return true;
+    //     }
+    //
+    //     if ((occupiedMask & occupiedIndex) != 0x0)
+    //     {
+    //         return false;
+    //     }
+    //
+    //     return true;
+    // }
+
+    /// <summary>
+    /// Updates the occupied grid mask for the entity.
+    /// </summary>
+    protected void UpdateOccupied(Entity<StorageComponent> ent)
+    {
+        ent.Comp.OccupiedGrid.Clear();
+        RemoveOccupied(ent.Comp.Grid, ent.Comp.OccupiedGrid);
+
+        Dirty(ent);
+
+        foreach (var (stent, storedItem) in ent.Comp.StoredItems)
+        {
+            if (!_itemQuery.TryGetComponent(stent, out var itemComp))
+                continue;
+
+            AddOccupiedEntity(ent, (stent, itemComp), storedItem);
+        }
+    }
+
+    private void AddOccupiedEntity(Entity<StorageComponent> storageEnt, Entity<ItemComponent?> itemEnt, ItemStorageLocation location)
+    {
+        AddOccupied((storageEnt, storageEnt), itemEnt, location, storageEnt.Comp.OccupiedGrid);
+
+        Dirty(storageEnt);
+    }
+
+    private void AddOccupied(Entity<StorageComponent?> storageEnt, Entity<ItemComponent?> itemEnt, ItemStorageLocation location, Dictionary<Vector2i, ulong> occupied)
+    {
+        var adjustedShape = ItemSystem.GetAdjustedItemShape(storageEnt, (itemEnt.Owner, itemEnt.Comp), location);
+        AddOccupied(adjustedShape, occupied);
+    }
+
+    private void RemoveOccupied(IReadOnlyList<Box2i> adjustedShape, Dictionary<Vector2i, ulong> occupied)
+    {
+        foreach (var box in adjustedShape)
+        {
+            var chunks = new ChunkIndicesEnumerator(box, StorageComponent.ChunkSize);
+
+            while (chunks.MoveNext(out var chunk))
+            {
+                var chunkOrigin = chunk.Value * StorageComponent.ChunkSize;
+
+                var left = Math.Max(box.Left, chunkOrigin.X);
+                var bottom = Math.Max(box.Bottom, chunkOrigin.Y);
+                var right = Math.Min(box.Right, chunkOrigin.X + StorageComponent.ChunkSize - 1);
+                var top = Math.Min(box.Top, chunkOrigin.Y + StorageComponent.ChunkSize - 1);
+                var existing = occupied.GetValueOrDefault(chunkOrigin, ulong.MaxValue);
+
+                // Unmark all of the tiles that we actually have.
+                for (var x = left; x <= right; x++)
+                {
+                    for (var y = bottom; y <= top; y++)
+                    {
+                        var index = new Vector2i(x, y);
+                        var chunkRelative = SharedMapSystem.GetChunkRelative(index, StorageComponent.ChunkSize);
+
+                        var flag = SharedMapSystem.ToBitmask(chunkRelative, StorageComponent.ChunkSize);
+                        existing &= ~flag;
+                    }
+                }
+
+                // My kingdom for collections.marshal
+                occupied[chunkOrigin] = existing;
+            }
+        }
+    }
+
+    private void AddOccupied(IReadOnlyList<Box2i> adjustedShape, Dictionary<Vector2i, ulong> occupied)
+    {
+        foreach (var box in adjustedShape)
+        {
+            // Reduce dictionary access from every tile to just once per chunk.
+            // Makes this more complicated but dictionaries are slow af.
+            // This is how we get savings over IsGridSpaceEmpty.
+            var chunkEnumerator = new ChunkIndicesEnumerator(box, StorageComponent.ChunkSize);
+
+            while (chunkEnumerator.MoveNext(out var chunk))
+            {
+                var chunkOrigin = chunk.Value * StorageComponent.ChunkSize;
+                var existing = occupied.GetOrNew(chunkOrigin);
+
+                // Box may not necessarily be in 1 chunk so clamp it.
+                var left = Math.Max(chunkOrigin.X, box.Left);
+                var bottom = Math.Max(chunkOrigin.Y, box.Bottom);
+                var right = Math.Min(chunkOrigin.X + StorageComponent.ChunkSize - 1, box.Right);
+                var top = Math.Min(chunkOrigin.Y + StorageComponent.ChunkSize - 1, box.Top);
+
+                for (var x = left; x <= right; x++)
+                {
+                    for (var y = bottom; y <= top; y++)
+                    {
+                        var index = new Vector2i(x, y);
+                        var chunkRelative = SharedMapSystem.GetChunkRelative(index, StorageComponent.ChunkSize);
+                        var flag = SharedMapSystem.ToBitmask(chunkRelative, StorageComponent.ChunkSize);
+                        existing |= flag;
+                    }
+                }
+
+                occupied[chunkOrigin] = existing;
+            }
+        }
+    }
+
+    private void RemoveOccupiedEntity(Entity<StorageComponent> storageEnt, Entity<ItemComponent?> itemEnt, ItemStorageLocation location)
+    {
+        var adjustedShape = ItemSystem.GetAdjustedItemShape((storageEnt, storageEnt), (itemEnt.Owner, itemEnt.Comp), location);
+
+        RemoveOccupied(adjustedShape, storageEnt.Comp.OccupiedGrid);
+
+        Dirty(storageEnt);
     }
 
     /// <summary>
@@ -1567,6 +1863,8 @@ public abstract class SharedStorageSystem : EntitySystem
             UpdateUI(container.Owner);
         }
     }
+
+
 
     private void HandleOpenBackpack(ICommonSession? session)
     {
@@ -1681,7 +1979,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (held)
         {
-            if (!_sharedHandsSystem.IsHolding(player, itemUid, out _))
+            if (!_sharedHandsSystem.IsHolding(player.AsNullable(), itemUid, out _))
                 return false;
         }
         else
