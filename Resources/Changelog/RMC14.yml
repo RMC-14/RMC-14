@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added loadouts to UNMC Synthetics.
-    type: Add
-  id: 1758
-  time: '2025-05-21T13:52:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6349
 - author: Timemaster99
   changes:
   - message: Fixed tactical compact nailguns not fitting into tool storages.
@@ -4612,5 +4605,13 @@
   id: 2258
   time: '2025-08-30T00:03:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7593
+- author: Ian321
+  changes:
+  - message: Choosing a weapons spec and reading a job pamphlet now update your role
+      and icon in the squad tracker and overwatch.
+    type: Tweak
+  id: 2259
+  time: '2025-08-30T00:04:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7499
 Name: RMC14
 Order: -1
