@@ -37,3 +37,17 @@
     contents:
     - id: RMCMortarShellFlare
       amount: 6
+
+- type: entity
+  parent: RMCCrateMortarAmmo
+  id: RMCCrateMortarShellMixed
+  name: M402 mixed mortar shells crate (x2 HE, x2 Incend, X2 Flare/Camera)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMortarShellFlare
+      amount: 2
+    - id: RMCMortarShellIncendiary
+      amount: 2
+    - id: RMCMortarShellHE
+      amount: 2
