@@ -15,6 +15,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_ice
 
 - type: entity
@@ -33,6 +36,9 @@
     - Wall
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_r
 
 - type: entity
@@ -49,6 +55,9 @@
     state: shiva_fab
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab
 
 - type: entity
@@ -65,6 +74,9 @@
     state: shiva_fab_r
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_r
 
 - type: entity
@@ -81,6 +93,9 @@
     state: shiva_fab_oj
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_oj
 
 - type: entity
@@ -97,6 +112,9 @@
     state: shiva_fab_blu
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_blu
 
 - type: entity
@@ -113,6 +131,9 @@
     state: shiva_fab_pnk
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_pnk
 
 - type: entity
@@ -129,6 +150,9 @@
     state: shiva_fab_wht
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_wht
 
 - type: entity
@@ -145,4 +169,7 @@
     state: shiva_fab_red
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
+    - doors
     base: shiva_fab_red

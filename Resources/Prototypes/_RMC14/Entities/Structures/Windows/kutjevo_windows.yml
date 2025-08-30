@@ -9,7 +9,9 @@
     sprite: _RMC14/Structures/Windows/Frames/kutjevo_frame.rsi
     state: kutjevo_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: kutjevo_frame
     mode: CardinalFlags
   - type: Construction
@@ -27,7 +29,9 @@
     sprite: _RMC14/Structures/Windows/Frames/kutjevo_rframe.rsi
     state: kutjevo_rframe0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: kutjevo_rframe
     mode: CardinalFlags
   - type: Construction
@@ -47,7 +51,9 @@
     sprite: _RMC14/Structures/Windows/kutjevo_window.rsi
     state: kutjevo_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: kutjevo_window
     mode: CardinalFlags
   - type: Repairable
@@ -99,7 +105,9 @@
     sprite: _RMC14/Structures/Windows/kutjevo_rwindow.rsi
     state: kutjevo_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: kutjevo_rwindow
     mode: CardinalFlags
   - type: Repairable
@@ -156,7 +164,9 @@
     sprite: _RMC14/Structures/Windows/kutjevo_rwindow.rsi
     state: kutjevo_rwindow0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: kutjevo_rwindow
     mode: CardinalFlags
 
