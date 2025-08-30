@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: One additional variant for Navigation Console (transport shuttle) and
-      Passenger Seat (dark seat).
-    type: Add
-  id: 1763
-  time: '2025-05-21T14:33:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6501
 - author: CyberTropic
   changes:
   - message: Changed floodlight brightness values, no more blinding floodlights
@@ -4601,5 +4593,16 @@
   id: 2263
   time: '2025-08-30T00:25:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7444
+- author: Vermidia
+  changes:
+  - message: Added vent crawling. T0s, most T1s, and some T2s can vent crawl to move
+      quickly through pipes from one location to the next.
+    type: Add
+  - message: Non-Queen xenos in containers (tunnels, vents) no longer count as alive
+      for round end checks.
+    type: Fix
+  id: 2264
+  time: '2025-08-30T00:27:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7485
 Name: RMC14
 Order: -1
