@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Changed floodlight brightness values, no more blinding floodlights
-    type: Tweak
-  id: 1764
-  time: '2025-05-21T14:35:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6465
 - author: RangerXVII
   changes:
   - message: '''Officer'' and ''OW'' will no longer be changed in the dwarf accent.'
@@ -4604,5 +4597,16 @@
   id: 2264
   time: '2025-08-30T00:27:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7485
+- author: Shromply
+  changes:
+  - message: Gave the SPP and PMC roles pilot 1. (PVE)
+    type: Fix
+  - message: Fixed the PMC SGs rank and icon. (PVE)
+    type: Fix
+  - message: Fixed the SPP Officer not being able to access gear racks. (PVE)
+    type: Fix
+  id: 2265
+  time: '2025-08-30T00:31:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7705
 Name: RMC14
 Order: -1
