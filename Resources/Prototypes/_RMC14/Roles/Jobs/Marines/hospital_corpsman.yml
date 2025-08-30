@@ -32,6 +32,7 @@
   overwatchSortPriority: -2
   overwatchRoleName: Hospital Corpsmen
   roleWeight: 1
+  displayWeight: 2
   special:
   - !type:AddComponentSpecial
     components:
