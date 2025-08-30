@@ -14,6 +14,21 @@
   - type: ItemTogglePointLight
 
 - type: entity
+  abstract: true
+  parent: CheapLighter
+  id: RMCLighterCheapBase
+  components:
+  - type: Item
+    size: Tiny
+    sprite: _RMC14/Objects/Tools/Lighters/basic.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: RMCLighter
+  - type: ItemTogglePointLight
+
+- type: entity
   name: zippo lighter
   description: A fancy steel Zippo lighter. Ignite in style.
   parent: RMCLighterBase
@@ -36,7 +51,7 @@
       shader: unshaded
   - type: Item
     size: Tiny
-    sprite: Objects/Tools/lighters.rsi
+    sprite: _RMC14/Objects/Tools/Lighters/zippo.rsi
   - type: Clothing
     quickEquip: false
     slots:
@@ -46,6 +61,15 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/zippo.rsi
       state: helmet
+  - type: ToggleableVisuals
+    spriteLayer: lighter_flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        shader: unshaded
+      right:
+      - state: inhand-right-flame
+        shader: unshaded
 
 - type: entity
   name: We-Ya executive zippo lighter
@@ -76,7 +100,7 @@
 - type: entity
   name: cheap lighter
   description: A cheap-as-free lighter.
-  parent: RMCLighterBase
+  parent: RMCLighterCheapBase
   id: RMCLighter
   components:
   - type: Item
@@ -102,6 +126,7 @@
       map: ["flame"]
       visible: false
       shader: unshaded
+
   - type: ToggleableVisuals
     spriteLayer: lighter_flame
     inhandVisuals:
