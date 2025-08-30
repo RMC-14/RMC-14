@@ -13,6 +13,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
@@ -41,6 +42,8 @@ public sealed class XenoLungeSystem : EntitySystem
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
+
+    private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
 
     public override void Initialize()
     {
@@ -200,7 +203,7 @@ public sealed class XenoLungeSystem : EntitySystem
         var query = EntityQueryEnumerator<XenoLungeStunnedComponent>();
         while (query.MoveNext(out var uid, out var stunned))
         {
-            if (time < stunned.ExpireAt)
+            if (time < stunned.ExpireAt && _statusEffects.HasStatusEffect(uid, Stun))
                 continue;
 
             RemCompDeferred<XenoLungeStunnedComponent>(uid);
