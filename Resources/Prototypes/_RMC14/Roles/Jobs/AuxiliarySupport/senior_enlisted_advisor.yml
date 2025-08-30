@@ -85,6 +85,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_medical
     - type: RMCTrackable
+    - type: MutinyImmune
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor
