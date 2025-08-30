@@ -370,13 +370,15 @@
         amount: 2
     - name: Extended ammunition
       entries:
-      - id: CMMagazineSMGM63Ext
-        amount: 10
-      - id: CMMagazineRifleM54CExt
-        amount: 8
       - id: RMCMagazinePistolM13Ext
         amount: 10
       - id: RMCMagazinePistolM13Drum
+        amount: 8
+      - id: CMMagazineSMGM63Ext
+        amount: 10
+      - id: CMMagazineRifleM4SPRExt
+        amount: 10
+      - id: CMMagazineRifleM54CExt
         amount: 8
     - name: Special ammunition
       entries:
