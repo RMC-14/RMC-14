@@ -1020,6 +1020,6 @@ public override void Initialize()
 
                 UpdateMapData((weaponsId, weaponsComputer), map);
             }
-            }
+        }
     }
 }
