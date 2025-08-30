@@ -44,7 +44,7 @@
   parent: BaseStorageItem
   id: RMCD18Case
   name: D18 pistol case
-  description: A fairly decorated and ceremonial box containing a CLF D18 and a single additional magazine for it. I guess those CLF folk really care about their craftsmanship and prose rather than practicality, eh?
+  description: A fairly decorated and sturdy box containing a D18 Hummingbird and a single additional magazine for it. If the gun doesn't make you feel secure, the box sure does.
   components:
   - type: Item
     size: Small
