@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added FORECON Marine survivors to Chance's claim.
-    type: Add
-  - message: Added the Survivor CO job preference.
-    type: Add
-  id: 1762
-  time: '2025-05-21T14:28:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6315
 - author: J C Denton
   changes:
   - message: One additional variant for Navigation Console (transport shuttle) and
@@ -4603,5 +4594,12 @@
   id: 2262
   time: '2025-08-30T00:24:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7546
+- author: Utmanarn
+  changes:
+  - message: Added icons for the prop calling UI buttons.
+    type: Add
+  id: 2263
+  time: '2025-08-30T00:25:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7444
 Name: RMC14
 Order: -1
