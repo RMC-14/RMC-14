@@ -309,6 +309,93 @@
           Quantity: 30
         maxVol: 50
 
+- type: entity
+  parent: DrinkCanPack
+  id: RMCBeerPack
+  name: Sequoia beer pack
+  description: A pack of Sequoia beer cans.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/beer_pack.rsi
+    layers:
+    - state: 6-pack-1
+      map: ["6-pack-1"]
+      visible: false
+    - state: 6-pack-2
+      map: ["6-pack-2"]
+      visible: false
+    - state: 6-pack-3
+      map: ["6-pack-3"]
+      visible: false
+    - state: 6-pack-4
+      map: ["6-pack-4"]
+      visible: false
+    - state: 6-pack-5
+      map: ["6-pack-5"]
+      visible: false
+    - state: 6-pack-6
+      map: ["6-pack-6"]
+      visible: false
+  - type: Item
+    size: Normal
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkCanSequoiaBeer
+      amount: 6
+  - type: Storage
+    grid:
+    - 0,0,11,1
+    whitelist:
+      tags:
+      - SequoiaBeer
+    hideStackVisualsWhenClosed: false
+  - type: ItemCounter
+    count:
+      tags: [SequoiaBeer]
+    composite: true
+    layerStates:
+    - 6-pack-1
+    - 6-pack-2
+    - 6-pack-3
+    - 6-pack-4
+    - 6-pack-5
+    - 6-pack-6
+  - type: Appearance
+  - type: DeleteOnContainerEmpty
+
+- type: entity
+  parent: CMDrinkCanBase
+  id: RMCDrinkCanSequoiaBeer
+  name: Weston-Yamada sequoia beer
+  description: "Pretty good when you get past the fact that it tastes like piss. Canned by the Weston-Yamada Corporation."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/beer_pack.rsi
+    layers:
+    - state: icon
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: icon}
+          False: {state: icon}
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Drinks/beer_pack.rsi
+  - type: Tag
+    tags:
+     - SequoiaBeer
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        reagents:
+        - ReagentId: Beer
+          Quantity: 50
+        maxVol: 50
+
+- type: Tag
+  id: SequoiaBeer
+
 # BOBDA
 - type: entity
   parent: CMDrinkCanBase

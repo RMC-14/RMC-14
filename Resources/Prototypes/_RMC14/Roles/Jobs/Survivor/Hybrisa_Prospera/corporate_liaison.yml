@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaCorporateLiaison
   name: cm-job-name-liaison
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorHybrisaCorporateLiaison
   spawnMenuRoleName: Corporate Liaison (Hybrisa Survivor)
   startingGear: RMCGearSurvivorHybrisaCorporateLiaison
   special:
@@ -25,6 +24,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -45,10 +45,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: RMCJobSurvivorHybrisaCorporateLiaison
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCorporate
