@@ -33,6 +33,7 @@
         RMCSkillOverwatch: 1
         RMCSkillMedical: 1
         RMCSkillJtac: 1
+        RMCSkillPilot: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
