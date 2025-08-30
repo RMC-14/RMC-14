@@ -2,20 +2,88 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.OrbitalCannon"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
-    Title="Orbital Cannon Console"
-    MinSize="400 300">
-    <BoxContainer Orientation="Vertical">
-        <RichTextLabel Text="[bold]Warhead status[/bold]" />
-        <ui:BlueHorizontalSeparator />
-        <RichTextLabel Name="WarheadStatusLabel" Access="Public" />
-        <RichTextLabel Text="[bold]Fuel status[/bold]" Margin="0 20 0 0" />
-        <ui:BlueHorizontalSeparator />
-        <Label Name="FuelStatusLabel" Access="Public" HorizontalExpand="True" />
-        <Label Name="FuelRequirementsLabel" Access="Public" Margin="0 20 0 0" />
-        <RichTextLabel Text="[bold]Tray status[/bold]" Margin="0 20 0 0" />
-        <ui:BlueHorizontalSeparator />
-        <Button Name="TrayButtonOne" Access="Public" StyleClasses="OpenBoth" />
-        <Button Name="TrayButtonTwo" Access="Public" StyleClasses="OpenBoth" />
-        <RichTextLabel Name="TrayButtonLabel" Access="Public" />
-    </BoxContainer>
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc rmc-ui-ob-console-name}"
+    MinSize="450 350">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat 
+                BorderColor="#3A3A3A" 
+                BorderThickness="1" 
+                BackgroundColor="#1A1A1A" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="4">
+            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BorderColor="#3A3A3A" 
+                        BorderThickness="0 0 0 1" 
+                        BackgroundColor="#252525" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="4">
+                    <RichTextLabel Text="{Loc rmc-ui-ob-console-title}" HorizontalAlignment="Center" />
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BorderColor="#3A3A3A" 
+                        BorderThickness="1" 
+                        BackgroundColor="#252525" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="4">
+                    <RichTextLabel Text="{Loc rmc-ui-ob-warhead-status}" />
+                    <Label Name="WarheadStatusLabel" Access="Public" Margin="4 2" />
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BorderColor="#3A3A3A" 
+                        BorderThickness="1" 
+                        BackgroundColor="#252525" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="4">
+                    <RichTextLabel Text="{Loc rmc-ui-ob-fuel-status}" />
+                    <Label Name="FuelStatusLabel" Access="Public" Margin="4 2" />
+                    <ProgressBar Name="FuelProgressBar" Access="Public" 
+                               MinValue="0" MaxValue="6" 
+                               Margin="4 4 4 8" HorizontalExpand="True"/>
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BorderColor="#3A3A3A" 
+                        BorderThickness="1" 
+                        BackgroundColor="#252525" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="4">
+                    <RichTextLabel Text="{Loc rmc-ui-ob-fuel-instruction-title}" />
+                    <Label Name="FuelRequirementsLabel" Access="Public" Margin="4 2" />
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer HorizontalExpand="True" Margin="0 0 0 8">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat 
+                        BorderColor="#3A3A3A" 
+                        BorderThickness="1" 
+                        BackgroundColor="#252525" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="4">
+                    <RichTextLabel Text="{Loc rmc-ui-ob-tray-status}" />
+                    <BoxContainer Orientation="Horizontal" Margin="2">
+                        <Button Name="TrayButtonOne" Access="Public" 
+                               StyleClasses="OpenBoth" MinWidth="120"
+                               Margin="0 0 4 0"/>
+                        <Control HorizontalExpand="True"/>
+                        <Button Name="TrayButtonTwo" Access="Public" 
+                               StyleClasses="OpenBoth" MinWidth="120"
+                               Margin="4 0 0 0"/>
+                    </BoxContainer>
+                    <Label Name="TrayButtonLabel" Access="Public" Margin="4 2" HorizontalAlignment="Center"/>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
 </controls:OrbitalCannonWindow>
