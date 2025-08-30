@@ -12,7 +12,6 @@ namespace Content.Shared._RMC14.Chat;
 public abstract class SharedCMChatSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IEntityManager _ent = default!;
     [Dependency] private readonly SquadSystem _squadSystem = default!;
     public override void Initialize()
     {
@@ -100,7 +99,7 @@ public abstract class SharedCMChatSystem : EntitySystem
         var colorMode = _config.GetCVar(RMCCVars.RMCChatSquadColorMode);
         Color? squadColor = null;
 
-        if (colorMode == true && _squadSystem.TryGetSquadMemberColor(_ent.GetEntity(msg.SenderEntity), out var color, accessible: true))
+        if (colorMode == true && _squadSystem.TryGetSquadMemberColor(GetEntity(msg.SenderEntity), out var color, accessible: true))
             squadColor = color;
 
         if (squadColor != null)
