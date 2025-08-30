@@ -15,6 +15,8 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
     [ViewVariables]
     private MarineCommunicationsComputerWindow? _window;
 
+    private MarineAnnounceSystem? _marineAnnounce;
+
     protected override void Open()
     {
         base.Open();
@@ -50,8 +52,11 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
         else
             _window.OverwatchButton.Visible = false;
 
+        _window.Text.OnTextChanged += args => OnTextChanged((int) Rope.CalcTotalLength(args.TextRope));
+
         _window.Send.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsComputerMsg( Rope.Collapse(_window.Text.TextRope)));
         OnStateUpdate();
+        OnTextChanged(0);
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -88,5 +93,15 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             EntMan.TryGetComponent<MarineCommunicationsComputerComponent>(Owner, out var computer) &&
             computer.CanCreateEcho;
         _window.EchoSeparator.Visible = _window.EchoButton.Visible;
+    }
+
+    private void OnTextChanged(int textLength)
+    {
+        if (_window == null)
+            return;
+
+        _marineAnnounce ??= EntMan.System<MarineAnnounceSystem>();
+        _window.CharacterCount.Text = $"{textLength} / {_marineAnnounce.CharacterLimit}";
+        _window.Send.Disabled = textLength == 0;
     }
 }
