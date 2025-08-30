@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.GameTicking;
 using Content.Shared._RMC14.Rules;
@@ -15,22 +15,23 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 
-public sealed class JoinXenoSystem : EntitySystem
+public abstract class SharedJoinXenoSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] protected readonly SharedActionsSystem _actions = default!;
+    [Dependency] protected readonly DialogSystem _dialog = default!;
+    [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] protected readonly INetManager _net = default!;
+    [Dependency] protected readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
+    [Dependency] protected readonly IGameTiming _timing = default!;
+    [Dependency] protected readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] protected readonly IConfigurationManager _config = default!;
+    [Dependency] protected readonly SharedPopupSystem _popup = default!;
 
     public int ClientBurrowedLarva { get; private set; }
+    public LarvaQueueStatusEvent? ClientQueueStatus { get; private set; }
 
-    private TimeSpan _burrowedLarvaDeathTime;
-    private TimeSpan _burrowedLarvaDeathIgnoreTime;
+    protected TimeSpan _burrowedLarvaDeathTime;
+    protected TimeSpan _burrowedLarvaDeathIgnoreTime;
 
     public override void Initialize()
     {
@@ -39,10 +40,14 @@ public sealed class JoinXenoSystem : EntitySystem
         SubscribeLocalEvent<JoinXenoComponent, MapInitEvent>(OnJoinXenoMapInit);
         SubscribeLocalEvent<JoinXenoComponent, JoinXenoActionEvent>(OnJoinXenoAction);
         SubscribeLocalEvent<JoinXenoComponent, JoinXenoBurrowedLarvaEvent>(OnJoinXenoBurrowedLarva);
+        SubscribeLocalEvent<JoinXenoComponent, JoinLarvaQueueEvent>(OnJoinLarvaQueue);
 
         if (_net.IsClient)
         {
             SubscribeNetworkEvent<BurrowedLarvaStatusEvent>(OnBurrowedLarvaStatus);
+            SubscribeNetworkEvent<LarvaQueueStatusEvent>(OnLarvaQueueStatus);
+            SubscribeNetworkEvent<LarvaPromptEvent>(OnLarvaPrompt);
+            SubscribeNetworkEvent<LarvaPromptCancelledEvent>(OnLarvaPromptCancelled);
         }
         else
         {
@@ -50,15 +55,127 @@ public sealed class JoinXenoSystem : EntitySystem
             SubscribeLocalEvent<BurrowedLarvaChangedEvent>(OnBurrowedLarvaChanged);
             SubscribeNetworkEvent<JoinBurrowedLarvaRequest>(OnJoinBurrowedLarva);
             SubscribeNetworkEvent<BurrowedLarvaStatusRequest>(OnBurrowedLarvaStatusRequest);
+            SubscribeNetworkEvent<JoinLarvaQueueRequest>(OnJoinLarvaQueueRequest);
+            SubscribeNetworkEvent<LeaveLarvaQueueRequest>(OnLeaveLarvaQueueRequest);
+            SubscribeNetworkEvent<LarvaQueueStatusRequest>(OnLarvaQueueStatusRequest);
+            SubscribeNetworkEvent<AcceptLarvaPromptRequest>(OnAcceptLarvaPrompt);
+            SubscribeNetworkEvent<DeclineLarvaPromptRequest>(OnDeclineLarvaPrompt);
         }
 
         Subs.CVar(_config, RMCCVars.RMCLateJoinsBurrowedLarvaDeathTime, v => _burrowedLarvaDeathTime = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsBurrowedLarvaDeathTimeIgnoreBeforeMinutes, v => _burrowedLarvaDeathIgnoreTime = TimeSpan.FromMinutes(v), true);
     }
 
+    protected virtual void OnJoinLarvaQueueRequest(JoinLarvaQueueRequest msg, EntitySessionEventArgs args) { }
+    protected virtual void OnLeaveLarvaQueueRequest(LeaveLarvaQueueRequest msg, EntitySessionEventArgs args) { }
+    protected virtual void OnAcceptLarvaPrompt(AcceptLarvaPromptRequest msg, EntitySessionEventArgs args) { }
+    protected virtual void OnDeclineLarvaPrompt(DeclineLarvaPromptRequest msg, EntitySessionEventArgs args) { }
+
+    protected virtual void OnLarvaPrompt(LarvaPromptEvent ev) { }
+    protected virtual void OnLarvaPromptCancelled(LarvaPromptCancelledEvent ev) { }
+
+    private void OnLarvaQueueStatusRequest(LarvaQueueStatusRequest msg, EntitySessionEventArgs args)
+    {
+        SendQueueStatus(args.SenderSession);
+    }
+
+    private void OnLarvaQueueStatus(LarvaQueueStatusEvent ev)
+    {
+        ClientQueueStatus = ev;
+    }
+
+    private void OnJoinLarvaQueue(Entity<JoinXenoComponent> ent, ref JoinLarvaQueueEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Hive, out var hive))
+            return;
+
+        if (!TryComp(hive, out HiveComponent? hiveComp))
+            return;
+
+        if (!TryComp(ent, out ActorComponent? actor))
+            return;
+
+        var queue = EnsureComp<LarvaQueueComponent>(hive.Value);
+
+        if (queue.PlayerQueue.Contains(actor.PlayerSession.UserId))
+        {
+            var alreadyInMsg = Loc.GetString("rmc-xeno-queue-already-in");
+            _popup.PopupEntity(alreadyInMsg, ent.Owner, ent.Owner, PopupType.MediumCaution);
+            return;
+        }
+
+        if (queue.PlayerQueue.Count >= queue.MaxQueueSize)
+        {
+            var fullMsg = Loc.GetString("rmc-xeno-queue-full");
+            _popup.PopupEntity(fullMsg, ent.Owner, ent.Owner, PopupType.MediumCaution);
+            return;
+        }
+
+        queue.PlayerQueue.Enqueue(actor.PlayerSession.UserId);
+        Dirty(hive.Value, queue);
+
+        var joinedMsg = Loc.GetString("rmc-xeno-queue-joined", ("position", queue.PlayerQueue.Count));
+        _popup.PopupEntity(joinedMsg, ent.Owner, ent.Owner, PopupType.Medium);
+
+        if (_net.IsServer)
+        {
+            var scanEvent = new ScanExistingLarvaeEvent();
+            RaiseLocalEvent(hive.Value, ref scanEvent);
+        }
+
+        SendQueueStatusToAll((hive.Value, hiveComp), (hive.Value, queue));
+    }
+
+    private void SendQueueStatus(ICommonSession? to)
+    {
+        if (_net.IsClient)
+            return;
+
+        var query = EntityQueryEnumerator<ActiveGameRuleComponent, CMDistressSignalRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out _, out var comp, out _))
+        {
+            if (!TryComp(comp.Hive, out HiveComponent? hive) ||
+                !TryComp(comp.Hive, out LarvaQueueComponent? queue))
+                continue;
+
+            if (to != null)
+            {
+                var position = GetQueuePosition(queue, to.UserId);
+                var inQueue = position > 0;
+                var totalAvailable = hive.BurrowedLarva + queue.PendingLarvae.Count;
+                var statusEv = new LarvaQueueStatusEvent(position, queue.PlayerQueue.Count,
+                    totalAvailable, queue.PendingLarvae.Count, inQueue);
+                RaiseNetworkEvent(statusEv, to);
+            }
+            else
+            {
+                SendQueueStatusToAll((comp.Hive, hive), (comp.Hive, queue));
+            }
+            break;
+        }
+    }
+
+    protected virtual void SendQueueStatusToAll(Entity<HiveComponent> hive, Entity<LarvaQueueComponent> queue) { }
+
+    private int GetQueuePosition(LarvaQueueComponent queue, NetUserId userId)
+    {
+        var position = 1;
+        foreach (var queuedUserId in queue.PlayerQueue)
+        {
+            if (queuedUserId == userId)
+                return position;
+            position++;
+        }
+        return 0;
+    }
+
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         ClientBurrowedLarva = 0;
+        ClientQueueStatus = null;
         SendLarvaStatus(null);
     }
 
@@ -80,13 +197,31 @@ public sealed class JoinXenoSystem : EntitySystem
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var hiveId, out var hive))
         {
-            if (hive.BurrowedLarva <= 0)
-                continue;
+            var totalAvailable = hive.BurrowedLarva;
+            if (TryComp<LarvaQueueComponent>(hiveId, out var queue))
+                totalAvailable += queue.PendingLarvae.Count;
 
-            options.Add(new DialogOption("Burrowed Larva", new JoinXenoBurrowedLarvaEvent(GetNetEntity(hiveId))));
+            if (totalAvailable > 0)
+            {
+                options.Add(new DialogOption($"Immediate Larva ({totalAvailable} available)",
+                    new JoinXenoBurrowedLarvaEvent(GetNetEntity(hiveId))));
+            }
+
+            var queueText = "Join Larva Queue";
+            if (TryComp<LarvaQueueComponent>(hiveId, out var queueComp))
+            {
+                queueText += $" ({queueComp.PlayerQueue.Count} waiting)";
+            }
+            options.Add(new DialogOption(queueText, new JoinLarvaQueueEvent(GetNetEntity(hiveId))));
         }
 
-        _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Xenonids");
+        if (options.Count == 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-no-hives"), user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        _dialog.OpenOptions(ent, "Join as Xeno", options, "Available Options");
     }
 
     public bool CanJoinXeno(EntityUid user)
@@ -94,10 +229,14 @@ public sealed class JoinXenoSystem : EntitySystem
         if (!TryComp<GhostComponent>(user, out var ghostComp))
             return false;
 
+        if (!TryComp<ActorComponent>(user, out var actor))
+            return false;
+
+        var gameStatus = _rmcGameTicker.PlayerGameStatuses.GetValueOrDefault(actor.PlayerSession.UserId);
+
         if (HasComp<JoinXenoCooldownIgnoreComponent>(user))
             return true;
 
-        // If the game has been going on longer than the death ignore time, then check how long since the ghost has died
         if (_gameTicker.RoundDuration() > _burrowedLarvaDeathIgnoreTime)
         {
             var timeSinceDeath = _timing.CurTime.Subtract(ghostComp.TimeOfDeath);
@@ -113,17 +252,7 @@ public sealed class JoinXenoSystem : EntitySystem
         return true;
     }
 
-    private void OnJoinXenoBurrowedLarva(Entity<JoinXenoComponent> ent, ref JoinXenoBurrowedLarvaEvent args)
-    {
-        if (!TryGetEntity(args.Hive, out var hive) ||
-            !TryComp(hive, out HiveComponent? hiveComp) ||
-            !TryComp(ent, out ActorComponent? actor))
-        {
-            return;
-        }
-
-        _hive.JoinBurrowedLarva((hive.Value, hiveComp), actor.PlayerSession);
-    }
+    protected virtual void OnJoinXenoBurrowedLarva(Entity<JoinXenoComponent> ent, ref JoinXenoBurrowedLarvaEvent args) { }
 
     private void OnBurrowedLarvaStatus(BurrowedLarvaStatusEvent ev)
     {
@@ -139,34 +268,16 @@ public sealed class JoinXenoSystem : EntitySystem
     private void OnPlayerJoinedLobby(ref RMCPlayerJoinedLobbyEvent ev)
     {
         SendLarvaStatus(ev.Player);
+        SendQueueStatus(ev.Player);
     }
 
     private void OnBurrowedLarvaChanged(ref BurrowedLarvaChangedEvent ev)
     {
         SendLarvaStatus(null);
+        SendQueueStatus(null);
     }
 
-    private void OnJoinBurrowedLarva(JoinBurrowedLarvaRequest msg, EntitySessionEventArgs args)
-    {
-        if (!_rmcGameTicker.PlayerGameStatuses.TryGetValue(args.SenderSession.UserId, out var status) ||
-            status == PlayerGameStatus.JoinedGame)
-        {
-            return;
-        }
-
-        var query = EntityQueryEnumerator<CMDistressSignalRuleComponent>();
-        while (query.MoveNext(out var comp))
-        {
-            if (!TryComp(comp.Hive, out HiveComponent? hive) ||
-                !_hive.JoinBurrowedLarva((comp.Hive, hive), args.SenderSession))
-            {
-                continue;
-            }
-
-            _rmcGameTicker.PlayerJoinGame(args.SenderSession);
-            break;
-        }
-    }
+    protected virtual void OnJoinBurrowedLarva(JoinBurrowedLarvaRequest msg, EntitySessionEventArgs args) { }
 
     private void OnBurrowedLarvaStatusRequest(BurrowedLarvaStatusRequest msg, EntitySessionEventArgs args)
     {
@@ -213,6 +324,51 @@ public sealed class JoinXenoSystem : EntitySystem
             return;
 
         var ev = new JoinBurrowedLarvaRequest();
+        RaiseNetworkEvent(ev);
+    }
+
+    public void ClientJoinLarvaQueue()
+    {
+        if (_net.IsServer)
+            return;
+
+        var ev = new JoinLarvaQueueRequest();
+        RaiseNetworkEvent(ev);
+    }
+
+    public void ClientLeaveLarvaQueue()
+    {
+        if (_net.IsServer)
+            return;
+
+        var ev = new LeaveLarvaQueueRequest();
+        RaiseNetworkEvent(ev);
+    }
+
+    public void RequestLarvaQueueStatus()
+    {
+        if (_net.IsServer)
+            return;
+
+        var ev = new LarvaQueueStatusRequest();
+        RaiseNetworkEvent(ev);
+    }
+
+    public void AcceptLarvaPrompt(NetEntity larva)
+    {
+        if (_net.IsServer)
+            return;
+
+        var ev = new AcceptLarvaPromptRequest(larva);
+        RaiseNetworkEvent(ev);
+    }
+
+    public void DeclineLarvaPrompt(NetEntity larva)
+    {
+        if (_net.IsServer)
+            return;
+
+        var ev = new DeclineLarvaPromptRequest(larva);
         RaiseNetworkEvent(ev);
     }
 }
