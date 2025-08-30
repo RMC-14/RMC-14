@@ -20,7 +20,7 @@
         amount: 30
       - id: WeaponSMGM63
         amount: 60
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 60
       - id: WeaponRifleM4SPR
         amount: 20
@@ -104,7 +104,11 @@
         amount: 2
       - id: CMWebbing
         amount: 5
+      - id: RMCWebbingBlackSmall
+        amount: 5
       - id: RMCWebbingDropPouch
+        amount: 2
+      - id: RMCWebbingDropPouchBlack
         amount: 2
       - id: CMWebbingHolster
         amount: 2
@@ -366,6 +370,8 @@
         amount: 2
     - name: Extended ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 8
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
@@ -673,6 +679,8 @@
     - name: Gloves
       entries:
       - id: CMHandsBrown
+        amount: 40
+      - id: RMCHandsGreyMarine
         amount: 40
       - id: CMHandsBlackMarine
         amount: 40

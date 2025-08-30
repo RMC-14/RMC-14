@@ -122,6 +122,19 @@
     state: webbing
 
 - type: entity
+  parent: CMWebbing
+  id: RMCWebbingBlackSmall
+  name: black webbing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
+    state: webbing
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_black_small.rsi
+      state: equipped
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingBlack
   name: black webbing vest
@@ -297,6 +310,47 @@
       - CMFirstAidKit
       - RMCBoxStorage
   - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      blacklist:
+        components:
+        - Bible
+        tags:
+        - CMFirstAidKit
+        - RMCBoxStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingDropPouchBlack
+  name: black drop pouch
+  description: A convenient pouch to carry loose items around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
+    state: drop_pouch_black
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    blacklist:
+      components:
+      - Bible
+      tags:
+      - CMFirstAidKit
+      - RMCBoxStorage
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_black.rsi
+      state: equipped
     components:
     - type: Storage
       maxItemSize: Normal

@@ -59,10 +59,6 @@
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
-- type: playTimeTracker
-  id: CMJobSurvivorScientist
-  isHumanoid: true
-
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetScientist
@@ -87,6 +83,11 @@
     - state: red
   - type: RandomHumanoidSpawner
     settings: RMCSurvivorScientist
+
+- type: playTimeTracker
+  id: CMJobSurvivorScientist
+  name: rmc-playtime-tracker-job-name-survivor-scientist
+  isHumanoid: true
 
 - type: randomHumanoidSettings
   parent: RMCSettingsGhostRole

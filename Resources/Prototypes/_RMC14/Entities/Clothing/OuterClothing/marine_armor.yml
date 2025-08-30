@@ -684,7 +684,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM35
   name: M35 pyrotechnician armor
-  description: A custom set of M35 armor designed for use by Marine Pyrotechnicians.
+  description: A custom set of M35 armor designed for use by UNMC Pyrotechnicians.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
@@ -699,6 +699,21 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/urban.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+  - type: RMCImmuneToIgnition
+    immuneToDirectHits: false
+  - type: FirewalkArmor
+    whitelist:
+      components:
+      - PyroWhitelist
+    addComponentsOnFirewalk:
+    - type: RMCImmuneToFireTileDamage
+      bypassWhitelist:
+        components:
+        - RMCFireImmunityBypass
+    auraColor: "#03FCC6"
 
 # m45
 - type: entity
@@ -769,6 +784,8 @@
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
+  - type: Corrodible
+    isCorrodible: false
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
   - type: ItemCamouflage
