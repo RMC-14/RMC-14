@@ -1,0 +1,755 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 264.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 08/18/2025 14:16:12
+  entityCount: 97
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  3: Space
+  1: CMFloorPlating
+  10: CMShuttleTileRasputin1
+  2: CMShuttleTileRasputin14
+  8: CMShuttleTileRasputin15
+  12: CMShuttleTileRasputin2
+  7: CMShuttleTileRasputin3
+  4: CMShuttleTileRasputin4
+  5: CMShuttleTileRasputin5
+  9: CMShuttleTileRasputin6
+  11: CMShuttleTileRasputin7
+  6: CMShuttleTileRasputin8
+  0: RMCFloorEmpty
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      pos: -1.625,0.4375
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AAAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAABAAAAAAAAAAAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAEAAAAAAAABAAAAAAAABAAAAAAAAAUAAAAAAAAGAAAAAAAAAQAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAABAAAAAAAAAQAAAAAAAAcAAAAAAAAIAAAAAAAABwAAAAAAAAEAAAAAAAABAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAQAAAAAAAAEAAAAAAAAHAAAAAAAACAAAAAAAAAcAAAAAAAABAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAEAAAAAAAACAAAAAAAABwAAAAAAAAgAAAAAAAAHAAAAAAAAAgAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAACAAAAAAAAAgAAAAAAAAcAAAAAAAAIAAAAAAAABwAAAAAAAAIAAAAAAAACAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAQAAAAAAAAIAAAAAAAAJAAAAAAAACgAAAAAAAAsAAAAAAAACAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAAAAAAAAAABAAAAAAAACAAAAAAAAAcAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAAAAAAAAAAAQAAAAAAAAgAAAAAAAAHAAAAAAAACAAAAAAAAAEAAAAAAAAAAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAQAAAAAAAAEAAAAAAAAIAAAAAAAABwAAAAAAAAgAAAAAAAABAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAEAAAAAAAABAAAAAAAACAAAAAAAAAcAAAAAAAAIAAAAAAAAAQAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAMAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: ImplicitRoof
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        2,13: RMCAreaShuttleERT
+        2,12: RMCAreaShuttleERT
+        2,11: RMCAreaShuttleERT
+        2,9: RMCAreaShuttleERT
+        2,10: RMCAreaShuttleERT
+        2,8: RMCAreaShuttleERT
+        2,7: RMCAreaShuttleERT
+        2,6: RMCAreaShuttleERT
+        2,5: RMCAreaShuttleERT
+        2,4: RMCAreaShuttleERT
+        2,3: RMCAreaShuttleERT
+        2,2: RMCAreaShuttleERT
+        2,1: RMCAreaShuttleERT
+        2,0: RMCAreaShuttleERT
+        3,13: RMCAreaShuttleERT
+        3,12: RMCAreaShuttleERT
+        3,11: RMCAreaShuttleERT
+        3,10: RMCAreaShuttleERT
+        3,9: RMCAreaShuttleERT
+        3,8: RMCAreaShuttleERT
+        3,7: RMCAreaShuttleERT
+        3,6: RMCAreaShuttleERT
+        3,5: RMCAreaShuttleERT
+        3,4: RMCAreaShuttleERT
+        3,3: RMCAreaShuttleERT
+        3,2: RMCAreaShuttleERT
+        3,1: RMCAreaShuttleERT
+        3,0: RMCAreaShuttleERT
+        4,13: RMCAreaShuttleERT
+        4,12: RMCAreaShuttleERT
+        4,11: RMCAreaShuttleERT
+        4,10: RMCAreaShuttleERT
+        4,9: RMCAreaShuttleERT
+        4,8: RMCAreaShuttleERT
+        4,7: RMCAreaShuttleERT
+        4,6: RMCAreaShuttleERT
+        4,5: RMCAreaShuttleERT
+        4,4: RMCAreaShuttleERT
+        4,3: RMCAreaShuttleERT
+        4,2: RMCAreaShuttleERT
+        4,1: RMCAreaShuttleERT
+        4,0: RMCAreaShuttleERT
+        5,0: RMCAreaShuttleERT
+        5,1: RMCAreaShuttleERT
+        5,2: RMCAreaShuttleERT
+        5,3: RMCAreaShuttleERT
+        5,4: RMCAreaShuttleERT
+        5,5: RMCAreaShuttleERT
+        5,6: RMCAreaShuttleERT
+        5,7: RMCAreaShuttleERT
+        5,8: RMCAreaShuttleERT
+        5,9: RMCAreaShuttleERT
+        5,10: RMCAreaShuttleERT
+        5,11: RMCAreaShuttleERT
+        6,0: RMCAreaShuttleERT
+        6,1: RMCAreaShuttleERT
+        6,2: RMCAreaShuttleERT
+        6,3: RMCAreaShuttleERT
+        6,4: RMCAreaShuttleERT
+        6,5: RMCAreaShuttleERT
+        6,6: RMCAreaShuttleERT
+        6,7: RMCAreaShuttleERT
+        6,9: RMCAreaShuttleERT
+        6,10: RMCAreaShuttleERT
+        6,11: RMCAreaShuttleERT
+        6,8: RMCAreaShuttleERT
+        1,11: RMCAreaShuttleERT
+        1,10: RMCAreaShuttleERT
+        1,9: RMCAreaShuttleERT
+        1,8: RMCAreaShuttleERT
+        1,7: RMCAreaShuttleERT
+        1,6: RMCAreaShuttleERT
+        1,5: RMCAreaShuttleERT
+        1,4: RMCAreaShuttleERT
+        1,3: RMCAreaShuttleERT
+        1,2: RMCAreaShuttleERT
+        1,1: RMCAreaShuttleERT
+        1,0: RMCAreaShuttleERT
+        0,11: RMCAreaShuttleERT
+        0,10: RMCAreaShuttleERT
+        0,9: RMCAreaShuttleERT
+        0,8: RMCAreaShuttleERT
+        0,7: RMCAreaShuttleERT
+        0,6: RMCAreaShuttleERT
+        0,5: RMCAreaShuttleERT
+        0,4: RMCAreaShuttleERT
+        0,3: RMCAreaShuttleERT
+        0,2: RMCAreaShuttleERT
+        0,1: RMCAreaShuttleERT
+        0,0: RMCAreaShuttleERT
+- proto: CMAdvFirstAidKitFilled
+  entities:
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 5.5,4.5
+      parent: 1
+- proto: CMBeltMedicBagFilled
+  entities:
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+- proto: CMComputerDropshipNavigationERT
+  entities:
+  - uid: 90
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,12.5
+      parent: 1
+- proto: CMHealthAnalyzer
+  entities:
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 5.5,4.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+- proto: CMLightFixture
+  entities:
+  - uid: 93
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,9.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,2.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,2.5
+      parent: 1
+- proto: CMLightFixtureSmall
+  entities:
+  - uid: 97
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,11.5
+      parent: 1
+- proto: CMNormandyDoor
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,5.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,5.5
+      parent: 1
+- proto: CMNormandyDoorAft
+  entities:
+  - uid: 18
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,0.5
+      parent: 1
+- proto: CMPlatform
+  entities:
+  - uid: 76
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 77
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,3.5
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 84
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,3.5
+      parent: 1
+- proto: CMRack
+  entities:
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 5.5,4.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+- proto: CMSeatPassenger
+  entities:
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 2.7709599,11
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 2.2397099,11
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 4.7943974,11
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.77096,10
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.2475224,10
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 4.23971,11
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.7631474,10
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.2709599,10
+      parent: 1
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 2.2553349,9.5
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 2.7787724,9.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 4.255335,9.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 4.755335,9.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,7.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,7.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,8.5
+      parent: 1
+- proto: CMSeatPilot
+  entities:
+  - uid: 89
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,11.5
+      parent: 1
+- proto: RMCBoxZiptie
+  entities:
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+- proto: RMCERTShuttleEngineLeft01
+  entities:
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+- proto: RMCERTShuttleEngineLeft02
+  entities:
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+- proto: RMCERTShuttleEngineLeft03
+  entities:
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+- proto: RMCERTShuttleEngineRight01
+  entities:
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
+- proto: RMCERTShuttleEngineRight02
+  entities:
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 6.5,1.5
+      parent: 1
+- proto: RMCERTShuttleEngineRight03
+  entities:
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 6.5,2.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard12
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard14
+  entities:
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard15
+  entities:
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 1.5,10.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 1.5,2.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 2.5,12.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard16
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 6.5,4.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 5.5,2.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 5.5,8.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 6.5,6.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 5.5,10.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard17
+  entities:
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard18
+  entities:
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 5.5,3.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard19
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 1.5,11.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 2.5,13.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard21
+  entities:
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 2.5,11.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 1.5,7.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard22
+  entities:
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 4.5,11.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard23
+  entities:
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 5.5,11.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 4.5,13.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard24
+  entities:
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 3.5,13.5
+      parent: 1
+- proto: RMCERTShuttleWallStandardEngineLeft
+  entities:
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+- proto: RMCERTShuttleWallStandardEngineRight
+  entities:
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+- proto: RMCPlatformCornerSmall
+  entities:
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 4.5,2.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,2.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,2.5
+      parent: 1
+- proto: RMCStairs
+  entities:
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 1
+- proto: RMCToolboxMechanicalGreenFilled
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+- proto: RMCTornadoEngineLeft61
+  entities:
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+- proto: RMCTornadoEngineLeft66
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 0.5,10.5
+      parent: 1
+- proto: RMCTornadoEngineLeft71
+  entities:
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+- proto: RMCTornadoEngineRight65
+  entities:
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+- proto: RMCTornadoEngineRight70
+  entities:
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 6.5,10.5
+      parent: 1
+- proto: RMCTornadoEngineRight74
+  entities:
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 6.5,11.5
+      parent: 1
+- proto: RMCUtilityAttachmentPoint
+  entities:
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
+...
