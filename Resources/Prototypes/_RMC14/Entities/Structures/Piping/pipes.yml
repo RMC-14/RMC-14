@@ -6,6 +6,16 @@
     size: Small
     shape: null
   - type: VentExit
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
+      rmc_vent_container: !type:Container
+        showEnts: False
+        occludes: True
+        ents: []
 
 - type: entity
   parent: [RMCBasePipe, GasPipeHalf]
