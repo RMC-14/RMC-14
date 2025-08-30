@@ -91,6 +91,7 @@
     marines: true
     xenos: true
   - type: ViewIntelObjectives
+  - type: VentSight
 
 # proto for player ghosts specifically
 - type: entity
