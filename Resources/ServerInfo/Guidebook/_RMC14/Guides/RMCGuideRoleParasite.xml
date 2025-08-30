@@ -1,6 +1,6 @@
 <Document>
   #Parasite
-  <GuideEntityEmbed Entity="CMXenoParasite"/>
+  <GuideEntityEmbed Entity="CMXenoParasite" Caption="Child / Parasite"/>
   ##How to play as a Parasite
   Parasites are unique from regular Xenonid gameplay, they are expendable and help infect captured hosts, or can attempt to hide under objects to catch unsuspecting victims.
 
