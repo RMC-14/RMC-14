@@ -5,12 +5,12 @@ using Robust.Shared.Console;
 
 namespace Content.Server._RMC14.Admin;
 
-[AdminCommand(AdminFlags.Admin)]
-public sealed class RMCRecalculatePower : LocalizedEntityCommands
+[AdminCommand(AdminFlags.Admin), AdminCommand(AdminFlags.Debug)]
+public sealed class RMCFixPower : LocalizedEntityCommands
 {
     [Dependency] private readonly SharedRMCPowerSystem _power = default!;
 
-    public override string Command => "rmcrecalcualtepower";
+    public override string Command => "fixpower";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {

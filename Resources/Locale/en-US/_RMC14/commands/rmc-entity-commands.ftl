@@ -1,2 +1,2 @@
-cmd-rmcrecalcualtepower-desc = Force the RMCPowerSystem to recalculate all power related entities.
-cmd-rmcrecalcualtepower-help = Usage: rmcrecalcualtepower
+cmd-fixpower-desc = Force the RMCPowerSystem to recalculate all power related entities.
+cmd-fixpower-help = Usage: fixpower
