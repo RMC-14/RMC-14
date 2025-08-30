@@ -17,8 +17,6 @@
     contents:
     - id: CMArmorB12
     - id: CMArmorHelmetM11
-
-
 - type: entity
   id: RMCCrateRestrictedEquipmentIntelSupportKit
   parent: RMCCrateBase
