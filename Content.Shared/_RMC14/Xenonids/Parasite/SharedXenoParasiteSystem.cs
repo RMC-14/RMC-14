@@ -123,7 +123,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         SubscribeLocalEvent<BursterComponent, MoveInputEvent>(OnTryMove);
         IntializeAI();
-        
     }
 
     private void OnInfectableActivate(Entity<InfectableComponent> ent, ref ActivateInWorldEvent args)

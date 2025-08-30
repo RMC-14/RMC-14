@@ -48,7 +48,7 @@ public sealed partial class VictimInfectedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan BurstDelay = TimeSpan.FromMinutes(8);
-    
+
     /// <summary>
     ///     When the larva should be kicked out after the intial burst time.
     /// </summary>
@@ -150,10 +150,16 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField]
     public DamageSpecifier InfectionDamage = new() { DamageDict = new() { { "Blunt", 1 } } };
-
+    
+    /// <summary>
+    ///     How long the do-after of the larva bursting takes.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan BurstDoAfterDelay = TimeSpan.FromSeconds(3);
 
+    /// <summary>
+    /// How long larva is invincible after bursting
+    /// </summary>
     [DataField]
     public TimeSpan LarvaInvincibilityTime = TimeSpan.FromSeconds(1);
 }
