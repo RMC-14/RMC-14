@@ -1,10 +1,10 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(JoinXenoSystem))]
+[Access(typeof(SharedJoinXenoSystem))]
 public sealed partial class JoinXenoComponent : Component
 {
     [DataField, AutoNetworkedField]

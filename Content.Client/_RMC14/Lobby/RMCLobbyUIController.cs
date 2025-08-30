@@ -23,13 +23,13 @@ public sealed class RMCLobbyUIController : UIController
 
     public void OpenJoinXenoWindow()
     {
-        var system = EntityManager.System<JoinXenoSystem>();
+        var system = EntityManager.System<SharedJoinXenoSystem>();
         RefreshWindow(system.ClientBurrowedLarva);
     }
 
     private void RefreshWindow(int larva)
     {
-        var system = EntityManager.System<JoinXenoSystem>();
+        var system = EntityManager.System<SharedJoinXenoSystem>();
         if (_joinXenoWindow == null || _joinXenoWindow.Disposed)
         {
             _joinXenoWindow = new JoinXenoWindow();
