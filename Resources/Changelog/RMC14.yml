@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Add volume sliders for hijack themes and cassettes in Options > Audio.
-    type: Add
-  id: 1774
-  time: '2025-05-21T18:13:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6514
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed FORECON CO not being rolled first.
@@ -4509,5 +4502,17 @@
   id: 2274
   time: '2025-08-30T01:12:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7553
+- author: Gabrote42
+  changes:
+  - message: The general chat sanitizer now replaces t.t crying emoticons (and its
+      variants) with "sobs"
+    type: Tweak
+  - message: The xenonid chat sanitizer now replaces more Command and High Command
+      roles plus honor guards with their hivemind equivalents, and uses different
+      terms for existing ones
+    type: Tweak
+  id: 2275
+  time: '2025-08-30T01:38:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7692
 Name: RMC14
 Order: -1
