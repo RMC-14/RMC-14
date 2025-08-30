@@ -8,6 +8,10 @@ namespace Content.Shared.DoAfter;
 [DataDefinition]
 public sealed partial class DoAfterArgs
 {
+    //RMC
+    [DataField]
+    public bool RootEntity;
+
     /// <summary>
     ///     The entity invoking do_after
     /// </summary>
@@ -287,6 +291,9 @@ public sealed partial class DoAfterArgs
         DuplicateCondition = other.DuplicateCondition;
         ForceVisible = other.ForceVisible;
         BreakOnRest = other.BreakOnRest;
+
+        //RMC
+        RootEntity = other.RootEntity;
 
         // Networked
         NetUser = other.NetUser;

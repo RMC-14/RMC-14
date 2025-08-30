@@ -68,6 +68,9 @@ rmc-job-name-pmc-bodyguard-lead = Security Lead
 rmc-ghost-name-pmc-bodyguard-lead = Weston-Yamada Goon Leader (Executive Bodyguard Detail)
 
 rmc-job-name-pmc-corporate-goon = We-Ya Corporate Security
+rmc-job-name-pmc-corporate-goon-engi = We-Ya Corporate Security Technician
+rmc-job-name-pmc-corporate-goon-medic = We-Ya Corporate Security Medic
+rmc-job-name-pmc-corporate-goon-leader = We-Ya Corporate Security Lead
 
 rmc-job-name-pmc-pve-team-leader = Team Leader
 rmc-job-name-pmc-pve-force-leader = Force Leader

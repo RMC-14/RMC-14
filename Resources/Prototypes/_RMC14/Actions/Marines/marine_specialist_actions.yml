@@ -1,0 +1,53 @@
+﻿- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionSpecialistBase
+  name: Spec Ability
+  abstract: true
+  components:
+  - type: ActionBlockIfDevoured
+
+- type: entity
+  parent: RMCActionSpecialistBase
+  id: RMCActionGhilliePreparePosition
+  name: Prepare Position
+  description: Use the ghillie suit and the nearby environment to become near invisible.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: prepare_position
+    useDelay: 8
+    priority: -9
+    itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:GhillieSuitPreparePositionActionEvent
+
+- type: entity
+  parent: RMCActionSpecialistBase
+  id: RMCActionToggleCloak
+  name: Toggle Cloak
+  description: Enable or Disable your Thermal Cloak
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
+      state: icon
+    useDelay: 0.5
+    itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:ThermalCloakTurnInvisibleActionEvent
+
+- type: entity
+  parent: RMCActionSpecialistBase
+  id: RMCActionFireShield
+  name: Activate Fire Shield
+  description: Activate your armor's FIREWALK protocol for a short duration.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/marine_firewalk_actions.rsi
+      state: firewalk
+    useDelay: 21 # 15 cooldown + 6 firewalk time from CMSS13
+    priority: 3
+  - type: InstantAction
+    event: !type:FirewalkActivateActionEvent

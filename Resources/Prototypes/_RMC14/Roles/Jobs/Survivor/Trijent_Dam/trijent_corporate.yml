@@ -3,7 +3,6 @@
   id: CMSurvivorTrijentCorporate
   name: cm-job-name-survivor-trijent-corporate
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorTrijentCorporate
   spawnMenuRoleName: Trijent Corporation Liaison (Trijent Survivor)
   startingGear: RMCGearSurvivorTrijentCorporate
   special:
@@ -24,6 +23,7 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetTrijentCorporate
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate
@@ -42,10 +42,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorTrijentCorporate
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCorporate

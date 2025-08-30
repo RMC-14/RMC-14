@@ -42,6 +42,7 @@
         RMCSkillJtac: 1
         RMCSkillVehicles: 1
     - type: CMVendorUser
+      id: CMCombatTech
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
