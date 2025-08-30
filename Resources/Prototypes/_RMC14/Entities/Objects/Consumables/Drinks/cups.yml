@@ -3,6 +3,16 @@
   parent: Coffee
   color: "#704435"
 
+- type: reagent
+  id: RMCTea
+  parent: Tea
+  color: "#8a5a3a"
+
+- type: reagent
+  id: RMCHotCocoa
+  parent: HotCocoa
+  color: "#664300"
+
 - type: entity
   parent: DrinkBaseMug
   id: RMCCoffeeCup
@@ -13,7 +23,7 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 20
+        maxVol: 30
   - type: Drink
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
@@ -35,6 +45,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - DrinkGlass
 
 - type: entity
   parent: RMCCoffeeCup
@@ -44,10 +57,10 @@
     - type: SolutionContainerManager
       solutions:
         drink:
-          maxVol: 20
+          maxVol: 30
           reagents:
           - ReagentId: RMCCoffee
-            Quantity: 20
+            Quantity: 30
 
 - type: entity
   parent: RMCCoffeeCup
