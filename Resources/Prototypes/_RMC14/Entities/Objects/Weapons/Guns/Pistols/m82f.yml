@@ -22,7 +22,7 @@
       types:
         Blunt: 6
   - type: Gun
-    projectileSpeed: 40
+    projectileSpeed: 20
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -56,8 +56,8 @@
       ballistic-ammo: !type:Container
         ents: [ ]
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.15
-    accuracyMultiplierUnwielded: 0.95
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.5
   - type: Appearance
   - type: RMCNameItemOnVend
     item: Sidearm

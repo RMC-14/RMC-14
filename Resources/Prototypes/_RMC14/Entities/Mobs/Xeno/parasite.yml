@@ -3,6 +3,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
+  - RMCXenoVentCrawler
   id: CMXenoParasiteBase
   name: Child
   suffix: Parasite
@@ -124,6 +125,8 @@
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
     name: cm-job-name-xeno-parasite
+  - type: VentCrawler
+    ventCrawlIcon: parasite
 
 - type: entity
   parent: CMXenoParasiteBase
