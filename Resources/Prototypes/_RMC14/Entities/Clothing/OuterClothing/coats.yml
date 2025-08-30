@@ -312,7 +312,7 @@
 # Tanker
 - type: entity
   parent: [RMCBaseJacketButtonable, RMCBaseJacket]
-  id: CMCoatTanker
+  id: RMCCoatTanker
   name: tanker jacket
   description: A comfortable jacket provided to anyone expected to operate near or inside heavy machinery. Special material within the arms jams up any machinery it gets caught up in, protecting the wearer from injury.
   components:

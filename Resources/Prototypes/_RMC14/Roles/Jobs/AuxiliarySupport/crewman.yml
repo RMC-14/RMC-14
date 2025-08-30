@@ -62,8 +62,8 @@
     jumpsuit: CMJumpsuitMarineTanker
     shoes: CMBootsBlackFilled
     id: CMDogtagCrewman
-    ears: CMHeadsetCrewman
-    outerClothing: CMCoatTanker
+    ears: RMCHeadsetCrewman
+    outerClothing: RMCCoatTanker
     back: CMSatchelMarine
 
 - type: entity

@@ -24,7 +24,7 @@
         amount: 2
       - id: WeaponShotgunM42A2
         amount: 2
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 2
     - name: Primary Ammunition
       entries:
@@ -64,10 +64,8 @@
         amount: 6
       - id: CMMagazinePistolMK80
         amount: 8
-      - id: RMCMagazinePistolM13Ext
+      - id: RMCMagazinePistolM13
         amount: 10
-      - id: RMCMagazinePistolM13Drum
-        amount: 6 #Drums aren't fully implemented -- supposed to have high jam chance and slow to reload...
     - name: Attachments
       entries:
       - id: RMCAttachmentRailFlashlight
@@ -144,7 +142,6 @@
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
         name: flare pouch (Full)
       - id: RMCPouchGeneralLarge
@@ -162,7 +159,9 @@
       - id: CMWebbingBlack
         recommended: true
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
     - name: Masks
       choices: { CMMasks: 1 }
@@ -191,6 +190,8 @@
       - id: RMCAttachmentRecoilCompensator
         points: 10
       - id: RMCAttachmentS5RedDotSight
+        points: 10
+      - id: RMCAttachmentS6ReflexSight
         points: 10
       - id: RMCAttachmentSuppressor
         points: 10

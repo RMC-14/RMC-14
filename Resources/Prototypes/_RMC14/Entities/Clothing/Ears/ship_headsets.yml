@@ -529,7 +529,7 @@
 # Tanker headset
 - type: entity
   parent: RMCHeadsetShip
-  id: CMHeadsetCrewman
+  id: RMCHeadsetCrewman
   name: marine vehicle crew radio headset
   description: Used by UNMC vehicle crew, features a non-standard brace.
   components:
