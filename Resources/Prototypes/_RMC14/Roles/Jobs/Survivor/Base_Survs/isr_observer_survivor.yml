@@ -1,0 +1,60 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorISR
+  name: cm-job-name-survivor-isr
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorISR
+  spawnMenuRoleName: Interstellar Sapient-Life Rights Observer (Survivor)
+  icon: "RMCJobIconBureauObserver"
+  hasIcon: true
+  ranks:
+    RMCRankIHROObserver: []
+  accessGroups:
+  - ColonistObserver
+  startingGear: RMCGearSurvivorISR
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCorporate
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorISR
+  equipment:
+    ears: CMHeadsetColony
+    jumpsuit: CMJumpsuitLiaisonBrown
+    shoes: RMCShoesLaceupBrown
+    back: CMSatchelFillSurvivor
+    head: ArmorHelmetM10
+    pocket2: CMClipboard # RMC14, replace with document pouch when fixed
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorISR
+  name: survivor isr spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorISR
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: playTimeTracker
+  id: CMJobSurvivorISR
+  isHumanoid: true
