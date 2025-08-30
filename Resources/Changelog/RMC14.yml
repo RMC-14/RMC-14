@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: mmails
-  changes:
-  - message: Ported SOME synthetic clothing items as well as some tools for synthetics
-      and relevant sprites for tools i did not know how to code
-    type: Add
-  id: 1776
-  time: '2025-05-21T22:09:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6289
 - author: DrSmugleaf
   changes:
   - message: Fixed not being able to load weapons onto the Normandy.
@@ -4514,5 +4506,12 @@
   id: 2276
   time: '2025-08-30T02:11:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7541
+- author: Shromply
+  changes:
+  - message: Added the HVHI-P ammunition type and magazine for the M5SPR. (PVE)
+    type: Add
+  id: 2277
+  time: '2025-08-30T02:26:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7607
 Name: RMC14
 Order: -1
