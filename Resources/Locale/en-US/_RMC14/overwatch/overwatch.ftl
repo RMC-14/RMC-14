@@ -96,3 +96,5 @@ rmc-overwatch-squad-message-title = Squad Message
 
 rmc-overwatch-squad-message-ok = Ok
 rmc-overwatch-squad-message-cancel = Cancel
+
+rmc-overwatch-hide-squad-info = Hide Squad Info

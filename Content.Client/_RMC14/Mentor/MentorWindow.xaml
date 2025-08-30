@@ -16,7 +16,7 @@
                         <BoxContainer Name="Players" Access="Public" Orientation="Vertical"
                                       VerticalExpand="True" />
                     </ScrollContainer>
-                    <Button Name="DeMentorButton" Access="Public" Text="{Loc rmc-mentor-demenor}"
+                    <Button Name="DeMentorButton" Access="Public" Text="{Loc rmc-mentor-dementor}"
                             StyleClasses="OpenBoth" />
                 </BoxContainer>
         </PanelContainer>

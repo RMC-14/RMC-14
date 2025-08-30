@@ -1,7 +1,7 @@
 rmc-mentor-window-title = Mentor Help
 
-rmc-mentor-remenor = Re-mentor
-rmc-mentor-demenor = De-Mentor
+rmc-mentor-rementor = Re-mentor
+rmc-mentor-dementor = De-Mentor
 
 rmc-mentor-claim = Claim
 rmc-mentor-unclaim = Unclaim
