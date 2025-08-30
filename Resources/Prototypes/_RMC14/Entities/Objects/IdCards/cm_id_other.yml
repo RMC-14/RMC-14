@@ -97,6 +97,20 @@
 
 - type: entity
   parent: CMIDCardLiaison
+  id: CMIDCardPMCExecutive
+  name: corporate holo-badge
+  description: A corporate holo-badge in standard corporate orange and white. It has a unique uncapped bottom. It is fingerprint locked with 5-X clearance level. Commonly held by corporate managers.
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: pmc
+  - type: ItemIFF
+    faction: FactionWeYa
+  - type: PresetIdCard
+    job: CMLiaison
+
+- type: entity
+  parent: CMIDCardLiaison
   id: CMIDCardLiaisonColony
   name: liaison ID card
   components:
@@ -114,10 +128,10 @@
 - type: entity
   parent: CMIDCardLiaison
   id: RMCIDCardExecutiveCorporateSpecialist
-  name: executive corporate specialist ID card
+  name: executive legal specialist ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSpecialist
+    job: CMCorporateExecutiveSupervisorLegal
 
 - type: entity
   parent: CMIDCardLiaison
@@ -125,7 +139,7 @@
   name: executive corporate supervisor ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSupervisor
+    job: CMCorporateExecutiveSpecialistLegal
 
 - type: entity
   parent: CMIDCardLiaison
