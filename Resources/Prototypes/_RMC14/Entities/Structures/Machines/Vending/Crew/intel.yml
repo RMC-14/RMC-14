@@ -209,7 +209,9 @@
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -239,7 +241,7 @@
         amount: 4
       - id: WeaponShotgunM42A2
         amount: 4
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 4
     - name: Primary Ammunition
       entries:

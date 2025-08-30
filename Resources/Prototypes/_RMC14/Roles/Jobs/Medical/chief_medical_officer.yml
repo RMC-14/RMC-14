@@ -43,6 +43,8 @@
         RMCSkillPolice: 1
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
+    - type: CMVendorUser
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
@@ -51,10 +53,10 @@
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: doctor
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
 
