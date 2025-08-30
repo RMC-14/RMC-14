@@ -215,6 +215,19 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         }
     }
 
+    public IEnumerable<KeyValuePair<string, TimeSpan>> FetchPlaytimeJobIdByRoles()
+    {
+        var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>();
+
+        foreach (var job in jobsToMap)
+        {
+            if (_roles.TryGetValue(job.PlayTimeTracker, out var locJobName))
+            {
+                yield return new KeyValuePair<string, TimeSpan>(job.ID, locJobName);
+            }
+        }
+    }
+
     public IReadOnlyDictionary<string, TimeSpan> GetPlayTimes(ICommonSession session)
     {
         if (session != _playerManager.LocalSession)

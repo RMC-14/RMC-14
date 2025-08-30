@@ -3,7 +3,6 @@
   id: CMSurvivorLV624CorporateDomeCL
   name: rmc-job-name-survivor-lv624-corporate-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorLV624CorporateDomeCL
   spawnMenuRoleName: Paranoid Corporate Liaison (LV624 Special Survivor)
   startingGear: RMCGearSurvivorLV624CorporateLiaison
   special:
@@ -15,6 +14,10 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 1
         RMCSkillFirearms: 1
+        RMCSkillLeadership: 3
+        RMCSkillIntel: 2
+        RMCSkillMedical: 1
+        RMCSkillOverwatch: 1
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetLV624CorporateLiaison
     - type: RMCSurvivor
@@ -25,6 +28,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: MarineOrders
   greeting: rmc-job-greeting-corporate-dome-cl
 
 - type: entity
@@ -40,10 +44,6 @@
       state: green
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv_wy
-
-- type: playTimeTracker
-  id: CMJobSurvivorLV624CorporateDomeCL
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCorporate

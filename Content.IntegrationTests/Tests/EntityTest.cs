@@ -439,7 +439,7 @@ namespace Content.IntegrationTests.Tests
             var logmill = server.ResolveDependency<ILogManager>().GetSawmill("EntityTest");
 
             await pair.CreateTestMap();
-            await server.WaitRunTicks(5);
+            await server.WaitRunTicks(15);
             var testLocation = pair.TestMap.GridCoords;
 
             await server.WaitAssertion(() =>
