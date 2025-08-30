@@ -3,7 +3,7 @@
   id: CMSurvivorUNPeacekeeper
   name: cm-job-name-survivor-un-peacekeeper
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorUNPeacekeeper
+  playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorUNPeacekeeper
   spawnMenuRoleName: UN Peacekeeper (NV Survivor)
   special:
@@ -21,15 +21,15 @@
         RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 2
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetUNPeacekeeper
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
@@ -46,18 +46,13 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorUNPeacekeeper
-  isHumanoid: true
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
   id: RMCGearSurvivorPresetUNPeacekeeper
   name: un peacekeeper colonist preset
+  categories: [ HideSpawnMenu ]

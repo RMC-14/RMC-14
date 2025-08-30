@@ -52,6 +52,13 @@
   - type: OverwatchConsole
     canMessageSquad: false
   - type: TacticalMapComputer
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -107,6 +114,13 @@
   - type: OverwatchConsole
   - type: TacticalMapComputer
   - type: SupplyDropComputer
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCOverwatchConsole
@@ -139,6 +153,13 @@
   - type: TacticalMapComputer
   - type: EmitSoundOnUIOpen
     sound: null
+  - type: GuideHelp
+    guides:
+    - RMCGuideMarineCommunications
+    - RMCLanguage
+    - RMCGuideCommunicationsTowers
+    - RMCGuideRoleCombatTechnician
+    - RMCGuideRoleMaintenanceTechnician
 
 - type: entity
   parent: RMCTacticalMapTable
@@ -261,6 +282,8 @@
       enum.LifeboatComputerUi.Key:
         type: LifeboatComputerBui
   - type: LifeboatComputer
+  - type: AccessReader
+    access: [ [ "CMAccessDropship" ], [ "CMAccessCommand" ] ] # replace Command with Senior access
   - type: ActivatableUIBlacklist
     blacklist:
       components:

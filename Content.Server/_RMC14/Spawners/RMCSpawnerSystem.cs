@@ -1,10 +1,13 @@
+using System.Numerics;
 using Content.Server.GameTicking;
+using Content.Server.GameTicking.Events;
 using Content.Server.Humanoid.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -22,6 +25,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
     [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
+    private readonly Dictionary<EntProtoId, List<Entity<ItemPoolSpawnerComponent>>> _itemPools = new();
     private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
 
     private int _maxCorpses;
@@ -33,6 +37,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
+        SubscribeLocalEvent<GunSpawnerComponent, MapInitEvent>(OnGunSpawnMapInit);
         SubscribeLocalEvent<RandomTimedDespawnComponent, MapInitEvent>(OnTimedDespawnMapInit);
 
         Subs.CVar(_config, RMCCVars.RMCSpawnerMaxCorpses, v => _maxCorpses = v, true);
@@ -67,13 +72,45 @@ public sealed class RMCSpawnerSystem : EntitySystem
         }
     }
 
+    private void OnGunSpawnMapInit(Entity<GunSpawnerComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.Prototypes.Count <= 0)
+            return;
+
+        var (gunId, ammoId) = _random.Pick(ent.Comp.Prototypes);
+
+        var entitiesToSpawn = new Dictionary<EntProtoId, int>()
+        {
+            [gunId] = 1,
+            [ammoId] = _random.Next(ent.Comp.MinMagazines, ent.Comp.MaxMagazines)
+        };
+
+        if (_random.Prob(ent.Comp.ChanceToSpawn))
+        {
+            foreach (var (protoId, amount) in entitiesToSpawn)
+            {
+                for (var i = 0; i < amount; i++) // spawn in the amount of entities
+                {
+                    var offset = ent.Comp.Offset;
+                    var xOffset = _random.NextFloat(-offset, offset);
+                    var yOffset = _random.NextFloat(-offset, offset); // Offset it randomly
+                    var coordinates = _transform.ToMapCoordinates(ent.Owner.ToCoordinates()).Offset(new Vector2(xOffset, yOffset));
+                    Spawn(protoId, coordinates);
+                }
+            }
+        }
+
+        if (ent.Comp.DeleteAfterSpawn)
+            QueueDel(ent.Owner);
+    }
+
     private void OnTimedDespawnMapInit(Entity<RandomTimedDespawnComponent> ent, ref MapInitEvent args)
     {
         var time = ent.Comp.Min;
         if (ent.Comp.Max > TimeSpan.Zero)
             time = _random.Next(ent.Comp.Min, ent.Comp.Max + TimeSpan.FromSeconds(1));
 
-        EnsureComp<TimedDespawnComponent>(ent).Lifetime = (float) time.TotalSeconds;
+        EnsureComp<TimedDespawnComponent>(ent).Lifetime = (float)time.TotalSeconds;
     }
 
     public void StartDespawnOnLanding(Entity<TimedDespawnOnLandingComponent> landing)
@@ -85,9 +122,11 @@ public sealed class RMCSpawnerSystem : EntitySystem
     public override void Update(float frameTime)
     {
         _spawners.Clear();
+        _itemPools.Clear();
         _corpseSpawners.Clear();
 
         var roundDuration = _gameTicker.RoundDuration();
+
         var timedQuery = EntityQueryEnumerator<TimedDespawnOnLandingComponent>();
         while (timedQuery.MoveNext(out var uid, out var comp))
         {
@@ -107,10 +146,17 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
         foreach (var spawner in _corpseSpawners)
         {
-            if (_corpsesSpawned >= _maxCorpses)
+            if (!spawner.Comp.SkipLimit)
+            {
+                if (_corpsesSpawned >= _maxCorpses)
+                    continue;
+
+                _corpsesSpawned++;
+            }
+
+            if (spawner.Comp.Spawn == null)
                 continue;
 
-            _corpsesSpawned++;
             var corpse = _randomHumanoid.SpawnRandomHumanoid(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner), MetaData(spawner).EntityName);
             EnsureComp<IntelRecoverCorpseObjectiveComponent>(corpse);
         }
@@ -121,30 +167,61 @@ public sealed class RMCSpawnerSystem : EntitySystem
             _spawners.GetOrNew(comp.Id).Add((uid, comp));
         }
 
-        if (_spawners.Count == 0)
-            return;
-
-        var players = _gameTicker.PlayersJoinedRoundNormally;
-        foreach (var spawners in _spawners.Values)
+        if (_spawners.Count > 0)
         {
-            _random.Shuffle(spawners);
-
-            var spawned = 0;
-            foreach (var spawner in spawners)
+            var players = _gameTicker.PlayersJoinedRoundNormally;
+            foreach (var spawners in _spawners.Values)
             {
-                var coordinates = _transform.ToMapCoordinates(spawner.Owner.ToCoordinates());
-                QueueDel(spawner);
+                _random.Shuffle(spawners);
 
-                var max = Math.Max(1, players / spawner.Comp.Ratio);
-                if (max <= spawned)
-                    continue;
-
-                foreach (var spawn in spawner.Comp.Prototypes)
+                var spawned = 0;
+                foreach (var spawner in spawners)
                 {
-                    Spawn(spawn, coordinates);
-                }
+                    var coordinates = _transform.ToMapCoordinates(spawner.Owner.ToCoordinates());
+                    QueueDel(spawner);
 
-                spawned++;
+                    var max = Math.Max(1, players / spawner.Comp.Ratio);
+                    if (max <= spawned)
+                        continue;
+
+                    foreach (var spawn in spawner.Comp.Prototypes)
+                    {
+                        Spawn(spawn, coordinates);
+                    }
+
+                    spawned++;
+                }
+            }
+        }
+
+        var itemPools = EntityQueryEnumerator<ItemPoolSpawnerComponent>();
+        while (itemPools.MoveNext(out var uid, out var comp))
+        {
+            _itemPools.GetOrNew(comp.Id).Add((uid, comp));
+        }
+
+        if (_itemPools.Count > 0)
+        {
+            foreach (var items in _itemPools.Values)
+            {
+                _random.Shuffle(items);
+
+                var spawned = 0;
+                foreach (var item in items)
+                {
+                    var coordinates = _transform.ToMapCoordinates(item.Owner.ToCoordinates());
+                    QueueDel(item);
+
+                    if (item.Comp.Quota <= spawned)
+                        continue;
+
+                    foreach (var spawn in item.Comp.Prototypes)
+                    {
+                        Spawn(spawn, coordinates);
+                    }
+
+                    spawned++;
+                }
             }
         }
     }

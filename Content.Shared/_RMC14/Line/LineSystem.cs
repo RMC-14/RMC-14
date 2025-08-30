@@ -37,7 +37,7 @@ public sealed class LineSystem : EntitySystem
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
-    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, out EntityUid? blocker)
+    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, out EntityUid? blocker, bool hitBlocker = false)
     {
         blocker = null;
         start = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(start));
@@ -70,13 +70,16 @@ public sealed class LineSystem : EntitySystem
 
             var direction = (entityCoords.Position - lastCoords.Position).ToWorldAngle();
             var blocked = IsTileBlocked(grid, entityCoords, direction, out blocker);
-            if (blocked)
+            if (blocked && !hitBlocker)
                 break;
 
             lastCoords = entityCoords;
             var mapCoords = _transform.ToMapCoordinates(entityCoords);
             tiles.Add(new LineTile(mapCoords, time + delayPer * delay));
             delay++;
+
+            if (blocked)
+                break;
         }
 
         return tiles;

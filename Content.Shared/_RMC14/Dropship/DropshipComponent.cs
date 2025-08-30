@@ -1,3 +1,4 @@
+using Content.Shared.Doors.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -17,6 +18,9 @@ public sealed partial class DropshipComponent : Component
     public EntityUid? Destination;
 
     [DataField, AutoNetworkedField]
+    public EntityUid? DepartureLocation;
+
+    [DataField, AutoNetworkedField]
     public bool Crashed;
 
     [DataField, AutoNetworkedField]
@@ -32,13 +36,10 @@ public sealed partial class DropshipComponent : Component
     public SoundSpecifier UnidentifledlifesignsSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/unidentified_lifesigns.ogg");
 
     [DataField, AutoNetworkedField]
-    public bool Locked;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan LockCooldown = TimeSpan.FromSeconds(1);
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastLocked;
+    [DataField, AutoNetworkedField]
+    public Dictionary<DoorLocation, TimeSpan> LastLocked = new ();
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> AttachmentPoints = new();
@@ -81,4 +82,7 @@ public sealed partial class DropshipComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan ExplodeTime = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan CancelFlightTime = TimeSpan.FromSeconds(10);
 }

@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -25,7 +26,7 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popups = default!;
-    [Dependency] private readonly SharedRottingSystem _rotting = default!;
+    [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
 
@@ -77,9 +78,7 @@ public sealed class CPRSystem : EntitySystem
 
         args.Handled = true;
 
-        // TODO RMC14 make this not use rotting
-        if (_net.IsServer)
-            _rotting.ReduceAccumulator(target, TimeSpan.FromSeconds(7));
+        _unrevivable.AddRevivableTime(target, TimeSpan.FromSeconds(7));
 
         if (!TryComp(target, out DamageableComponent? damageable) ||
             !damageable.Damage.DamageDict.TryGetValue(HealType, out damage))
@@ -146,8 +145,11 @@ public sealed class CPRSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_mobState.IsAlive(ent) || _rotting.IsRotten(ent))
+        if (_mobState.IsAlive(ent) ||
+            (_mobState.IsDead(ent) && _unrevivable.IsUnrevivable(ent)))
+        {
             args.Cancelled = true;
+        }
     }
 
     private bool CanCPRPopup(EntityUid performer, EntityUid target, bool start, out FixedPoint2 damage)

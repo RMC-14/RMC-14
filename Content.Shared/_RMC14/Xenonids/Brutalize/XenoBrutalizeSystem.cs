@@ -1,16 +1,16 @@
 using System.Linq;
-using Content.Shared.Mobs.Components;
+using Content.Shared._RMC14.Shields;
+using Content.Shared._RMC14.Xenonids.Charge;
+using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Content.Shared._RMC14.Xenonids.Charge;
-using Content.Shared.Actions;
-using Content.Shared._RMC14.Shields;
 
 namespace Content.Shared._RMC14.Xenonids.Brutalize;
 
@@ -24,6 +24,7 @@ public sealed class XenoBrutalizeSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -78,19 +79,20 @@ public sealed class XenoBrutalizeSystem : EntitySystem
 
     private void RefreshCooldowns(Entity<XenoBrutalizeComponent> xeno, int hits)
     {
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _actions.GetActions(xeno))
         {
-            if ((action.BaseEvent is XenoChargeActionEvent || action.BaseEvent is XenoDefensiveShieldActionEvent)
-                && action.Cooldown != null)
+            var actionEvent = _actions.GetEvent(action);
+            if ((actionEvent is XenoChargeActionEvent || actionEvent is XenoDefensiveShieldActionEvent)
+                && action.Comp.Cooldown != null)
             {
                 //Additional cooldown only on Charge
-                var cooldownEnd = action.Cooldown.Value.End - (xeno.Comp.BaseCooldownReduction +
-                    (action.BaseEvent is XenoChargeActionEvent ? hits * xeno.Comp.AddtionalCooldownReductions : TimeSpan.Zero));
+                var cooldownEnd = action.Comp.Cooldown.Value.End - (xeno.Comp.BaseCooldownReduction +
+                    (actionEvent is XenoChargeActionEvent ? hits * xeno.Comp.AddtionalCooldownReductions : TimeSpan.Zero));
 
-                if (cooldownEnd < action.Cooldown.Value.Start)
-                    _actions.ClearCooldown(actionId);
+                if (cooldownEnd < action.Comp.Cooldown.Value.Start)
+                    _actions.ClearCooldown(action.AsNullable());
                 else
-                    _actions.SetCooldown(actionId, action.Cooldown.Value.Start, cooldownEnd);
+                    _actions.SetCooldown(action.AsNullable(), action.Comp.Cooldown.Value.Start, cooldownEnd);
             }
         }
     }

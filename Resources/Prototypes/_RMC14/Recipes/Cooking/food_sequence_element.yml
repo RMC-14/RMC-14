@@ -1,0 +1,19 @@
+- type: foodSequenceElement
+  id: RMCMango
+  scale: 0.8, 0.8
+  name: rmc-food-sequence-content-mango
+  sprites:
+  - sprite: _RMC14/Objects/Kitchen/Plants/mango.rsi
+    state: produce
+  tags:
+  - Fruit
+
+- type: foodSequenceElement
+  id: RMCMangoBurger
+  scale: 0.8, 0.8
+  name: rmc-food-sequence-burger-content-mango
+  sprites:
+  - sprite: _RMC14/Objects/Kitchen/Plants/mango.rsi
+    state: produce
+  tags:
+  - Fruit

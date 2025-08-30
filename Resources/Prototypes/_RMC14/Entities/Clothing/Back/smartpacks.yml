@@ -26,7 +26,8 @@
       - state: equipped-BACKPACK
       - sprite: _RMC14/Objects/Clothing/Back/Smartpacks/smartpack_overlay.rsi
         state: lamp-off
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       back:

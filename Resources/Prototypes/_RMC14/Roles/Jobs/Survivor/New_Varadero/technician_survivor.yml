@@ -3,7 +3,7 @@
   id: CMSurvivorTechnician
   name: cm-job-name-survivor-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorTechnician
+  playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorTechnician
   spawnMenuRoleName: Engineering Technician (NV Survivor)
   special:
@@ -19,15 +19,15 @@
         RMCSkillPowerLoader: 2
         RMCSkillVehicles: 1
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetTechnician
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorEngineer
@@ -40,22 +40,17 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorTechnician
-  name: survivor icb spawn point
+  name: survivor engineering technician spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorTechnician
-  isHumanoid: true
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
   parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetTechnician
   name: technician colonist preset
+  categories: [ HideSpawnMenu ]

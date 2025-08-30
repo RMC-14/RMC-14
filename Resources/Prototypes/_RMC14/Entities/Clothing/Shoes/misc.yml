@@ -35,6 +35,18 @@
     sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi
 
 - type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesFancyLeather
+  name: fancy leather shoes
+  description: A fancy pair of leather shoes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/fancy_leather.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/fancy_leather.rsi
+
+
+- type: entity
   parent: CMBootsBlack
   id: RMCShoesJackboots
   name: jackboots
@@ -93,3 +105,15 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Misc/sandals.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Misc/sandals.rsi
+
+# Snow
+- type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesSnow
+  name: snow boots
+  description: When your feet are as cold as your heart
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi

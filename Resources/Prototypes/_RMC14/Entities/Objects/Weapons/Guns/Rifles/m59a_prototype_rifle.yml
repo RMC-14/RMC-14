@@ -1,18 +1,18 @@
 ﻿- type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M59A prototype rifle
-  id: WeaponRifleM59A
+  id: RMCWeaponRifleM59A
   description: A prototype M59A, an experimental rifle platform built to outperform the standard M54C. Back issue only. Uses standard MK1 & MK2 rifle magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi #TODO RMC: Change when new sprites
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi
     layers:
     - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi #TODO RMC: Change when new sprites
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -59,8 +59,6 @@
     enabled: true
   - type: IFFToggle
     requireIDLock: true
-
-
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -118,10 +116,10 @@
           #TODO RMC: add adv underbarrel flamer here when it is added
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.8125, 0.03125
+      rmc-aslot-barrel: 0.8445, 0.03125
       rmc-aslot-rail: 0.1, 0.09375
       rmc-aslot-stock: -0.78, 0.0325
-      rmc-aslot-underbarrel: 0.35, -0.343
+      rmc-aslot-underbarrel: 0.374, -0.373
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m59a/jungle.rsi

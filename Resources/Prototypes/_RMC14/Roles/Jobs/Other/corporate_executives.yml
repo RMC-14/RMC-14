@@ -15,11 +15,15 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
     - type: Skills
       skills:
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-corp-exec-supervisor
+    - type: RMCTrackable
   hasIcon: false
   hidden: true
 
@@ -81,6 +85,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -89,6 +96,7 @@
         RMCSkillFireman: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-corp-exec-specialist
+    - type: RMCTrackable
   hasIcon: false
   hidden: true
 

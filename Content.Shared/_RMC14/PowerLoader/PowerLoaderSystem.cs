@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Fabricator;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Map;
@@ -72,7 +73,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, StrappedEvent>(OnStrapped);
         SubscribeLocalEvent<PowerLoaderComponent, UnstrappedEvent>(OnUnstrapped);
         SubscribeLocalEvent<PowerLoaderComponent, PowerLoaderGrabDoAfterEvent>(OnGrabDoAfter);
-        SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity);
+        SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity, after: [typeof(SharedHandsSystem)]);
         SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnUserGrab);
         SubscribeLocalEvent<PowerLoaderComponent, DestructionEventArgs>(OnDestruction);
 
@@ -98,6 +99,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
         SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
         SubscribeLocalEvent<DropshipEnginePointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+
+        SubscribeLocalEvent<DropshipFabricatorPrintableComponent, PowerLoaderInteractEvent>(OnDropshipPartPowerLoaderInteract);
 
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, KnockedDownEvent>(OnActivePilotStunned);
@@ -155,7 +158,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
-        if (_hands.EnumerateHands(buckle).Count(h => h.Container?.ContainedEntity == null) < 2)
+        if (_hands.CountFreeHands(buckle.Owner) < 2)
         {
             if (args.Popup)
                 _popup.PopupClient(Loc.GetString("rmc-power-loader-hands-occupied", ("mech", ent)), buckle, args.User);
@@ -200,19 +203,20 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnGetUsedEntity(Entity<PowerLoaderComponent> ent, ref GetUsedEntityEvent args)
     {
+        args.Used = null;
         foreach (var buckled in GetBuckled(ent))
         {
             if (!TryComp(buckled, out HandsComponent? hands))
                 continue;
 
-            if (!_hands.TryGetActiveHand((buckled, hands), out var hand) ||
-                !TryComp(hand.HeldEntity, out VirtualItemComponent? virtualItem) ||
+            if (!_hands.TryGetActiveItem((buckled, hands), out var held) ||
+                !TryComp(held, out VirtualItemComponent? virtualItem) ||
                 !TryComp(virtualItem.BlockingEntity, out PowerLoaderVirtualItemComponent? item))
             {
                 continue;
             }
 
-            foreach (var contained in _hands.EnumerateHeld(ent))
+            foreach (var contained in _hands.EnumerateHeld(ent.Owner))
             {
                 if (contained == item.Grabbed)
                 {
@@ -228,6 +232,18 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnUserGrab(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
     {
+        if (!TryComp(ent, out StrapComponent? strap))
+            return;
+
+        var grab = new PowerLoaderGrabEvent(ent, args.Target, strap.BuckledEntities);
+        RaiseLocalEvent(args.Target, ref grab);
+
+        if (grab.ToGrab != null)
+        {
+            PickUp(ent, grab.ToGrab.Value);
+            return;
+        }
+
         if (!CanPickupPopup(ent, args.Target, out var delay))
             return;
 
@@ -244,10 +260,10 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnDestruction(Entity<PowerLoaderComponent> ent, ref DestructionEventArgs args)
     {
-        var held = _hands.EnumerateHeld(ent).ToList();
+        var held = _hands.EnumerateHeld(ent.Owner).ToList();
         foreach (var item in held)
         {
-            _hands.TryDrop(ent, item);
+            _hands.TryDrop(ent.Owner, item);
         }
     }
 
@@ -396,7 +412,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
 
         InsertPoint(user, contained, slot);
-        SyncAppearance(ent);
+        SyncAppearance(ent.Owner);
     }
 
     private void OnDropshipAttach(Entity<DropshipUtilityPointComponent> ent, ref DropshipAttachDoAfterEvent args)
@@ -444,7 +460,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             SyncHands((user, user.Comp));
         }
 
-        SyncAppearance(ent);
+        SyncAppearance(ent.Owner);
     }
 
     private void OnDropshipDetach(Entity<DropshipUtilityPointComponent> ent, ref DropshipDetachDoAfterEvent args)
@@ -519,6 +535,33 @@ public sealed class PowerLoaderSystem : EntitySystem
     {
         if (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead)
             OnActivePilotStunned(ent, ref args);
+    }
+
+    private void OnDropshipPartPowerLoaderInteract(Entity<DropshipFabricatorPrintableComponent> ent, ref PowerLoaderInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp(args.Target, out DropshipFabricatorComponent? fabricator) ||
+            !HasComp<DropshipFabricatorPointsComponent>(fabricator.Account))
+            return;
+
+        args.Handled = true;
+
+        var delayMultiplier = 1f;
+        if (TryComp(args.PowerLoader, out MovementRelayTargetComponent? relay))
+            delayMultiplier = _skills.GetSkillDelayMultiplier(relay.Source, ent.Comp.RecycleSkill);
+
+        var delay = ent.Comp.Delay * delayMultiplier;
+        var ev = new DropshipFabricatoreRecycleDoafterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, args.PowerLoader, delay, ev, args.Target, args.Target, args.Used)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.PowerLoader, out var loader))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private bool CanAttachPopup(
@@ -666,7 +709,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private bool HasFreeHands(Entity<PowerLoaderComponent?> user)
     {
-        return _hands.EnumerateHands(user).Any(h => h.HeldEntity == null);
+        return _hands.CountFreeHands(user.Owner) > 0;
     }
 
     private bool CanPickupPopup(
@@ -710,32 +753,42 @@ public sealed class PowerLoaderSystem : EntitySystem
         var virtualContainer = _container.EnsureContainer<Container>(loader, loader.Comp.VirtualContainerId);
         foreach (var buckled in GetBuckled(loader))
         {
+            foreach (var hand in _hands.EnumerateHeld(buckled).ToArray())
+            {
+                Del(hand);
+            }
+
             foreach (var virt in virtualContainer.ContainedEntities.ToArray())
             {
                 _virtualItem.DeleteInHandsMatching(buckled, virt);
                 _container.Remove(virt, virtualContainer);
-                QueueDel(virt);
+
+                if (_net.IsServer || IsClientSide(virt))
+                    Del(virt);
             }
         }
 
         var toSpawn = new List<(EntityUid? Grabbed, EntProtoId Virtual, string? Name, HandLocation Location)>();
-        foreach (var hand in _hands.EnumerateHands(loader))
+        foreach (var handId in _hands.EnumerateHands(loader.Owner))
         {
-            if (hand.HeldEntity is not { } held)
+            if (!_hands.TryGetHand(loader.Owner, handId, out var hand))
+                continue;
+
+            if (!_hands.TryGetHeldItem(loader.Owner, handId, out var held))
             {
-                var virtualSide = hand.Location == HandLocation.Right
+                var virtualSide = hand.Value.Location == HandLocation.Right
                     ? loader.Comp.VirtualRight
                     : loader.Comp.VirtualLeft;
 
-                toSpawn.Add((null, virtualSide, null, hand.Location));
+                toSpawn.Add((null, virtualSide, null, hand.Value.Location));
                 continue;
             }
 
             if (_powerLoaderGrabbableQuery.TryComp(held, out var grabbable))
             {
-                var id = hand.Location == HandLocation.Right ? grabbable.VirtualRight : grabbable.VirtualLeft;
-                var name = Name(held);
-                toSpawn.Add((held, id, name, hand.Location));
+                var id = hand.Value.Location == HandLocation.Right ? grabbable.VirtualRight : grabbable.VirtualLeft;
+                var name = Name(held.Value);
+                toSpawn.Add((held, id, name, hand.Value.Location));
             }
         }
 
@@ -753,7 +806,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
             foreach (var buckled in GetBuckled(loader))
             {
-                if (_hands.EnumerateHands(buckled).TryFirstOrDefault(h => h.Location == location, out var hand) &&
+                if (_hands.EnumerateHands(buckled).TryFirstOrDefault(h => _hands.TryGetHand(buckled, h, out var h2) && h2.Value.Location == location, out var hand) &&
                     _virtualItem.TrySpawnVirtualItemInHand(virtualEnt.Value, buckled, out var virt, empty: hand))
                 {
                     EnsureComp<UnremoveableComponent>(virt.Value);
@@ -795,10 +848,13 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         foreach (var buckled in GetBuckled(loader))
         {
-            if (_hands.GetActiveHand(buckled) is not { } active)
+            if (_hands.GetActiveHand(buckled) is not { } activeId ||
+                !_hands.TryGetHand(buckled, activeId, out var active))
+            {
                 continue;
+            }
 
-            if (_hands.EnumerateHands(loader).TryFirstOrDefault(h => h.Location == active.Location, out var loaderHand))
+            if (_hands.EnumerateHands(loader.Owner).TryFirstOrDefault(h => _hands.TryGetHand(loader.Owner, h, out var h2) && h2.Value.Location == active.Value.Location, out var loaderHand))
             {
                 _hands.DoPickup(loader, loaderHand, target);
                 SyncHands(loader);
@@ -807,8 +863,11 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
-    private void SyncAppearance(Entity<DropshipWeaponPointComponent> point)
+    public void SyncAppearance(Entity<DropshipWeaponPointComponent?> point)
     {
+        if (!Resolve(point, ref point.Comp, logMissing: false))
+            return;
+
         if (!_container.TryGetContainer(point, point.Comp.WeaponContainerSlotId, out var weaponContainer) ||
             weaponContainer.ContainedEntities.Count == 0)
         {
@@ -817,15 +876,17 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
-        var hasAmmo = false;
         var hasRounds = false;
+        var maxRounds = 0;
+        var rounds = 0;
         if (_container.TryGetContainer(point, point.Comp.AmmoContainerSlotId, out var ammoContainer))
         {
             foreach (var contained in ammoContainer.ContainedEntities)
             {
                 if (TryComp(contained, out DropshipAmmoComponent? ammo))
                 {
-                    hasAmmo = true;
+                    rounds = ammo.Rounds;
+                    maxRounds = ammo.MaxRounds;
 
                     // TODO RMC14 partial reloads? or hide it anyways if below the threshold
                     if (ammo.Rounds >= ammo.RoundsPerShot)
@@ -840,9 +901,25 @@ public sealed class PowerLoaderSystem : EntitySystem
                 continue;
 
             SpriteSpecifier.Rsi? rsi;
-            if (hasAmmo && hasRounds)
+            if (rounds > 0 && hasRounds)
+            {
                 rsi = weapon.AmmoAttachedSprite;
-            else if (hasAmmo)
+
+                if (rsi != null &&
+                    weapon.AmmoAttachedSprite != null &&
+                    rounds != maxRounds)
+                {
+                    foreach (var ammoCount in weapon.AmmoSpriteThresholds)
+                    {
+                        if (ammoCount > rounds)
+                            continue;
+
+                        rsi = new SpriteSpecifier.Rsi(rsi.RsiPath, weapon.AmmoAttachedSprite.RsiState + "_" + ammoCount);
+                        break;
+                    }
+                }
+            }
+            else if (rounds > 0)
                 rsi = weapon.AmmoEmptyAttachedSprite;
             else
                 rsi = weapon.WeaponAttachedSprite;

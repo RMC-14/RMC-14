@@ -3,7 +3,7 @@
   id: CMSurvivorCargoTechnician
   name: cm-job-name-survivor-cargo-technician
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorCargoTechnician
+  playTimeTracker: CMJobSurvivorEngineer
   startingGear: RMCGearSurvivorCargoTechnician
   spawnMenuRoleName: Cargo Technician (NV Survivor)
   special:
@@ -18,15 +18,15 @@
         RMCSkillConstruction: 2
         RMCSkillVehicles: 3
     - type: RMCSurvivor
-    - type: RMCRibbon
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - Survivor
+      - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetCargoTechnician
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorCargoTechnician
@@ -49,18 +49,13 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite # TODO: Replace with landmark sprite
+  - type: Sprite
     layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - sprite: _RMC14/Markers/cm_jobs.rsi
-      state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorCargoTechnician
-  isHumanoid: true
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
 
 - type: entity
   parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetCargoTechnician
   name: cargo technician colonist preset
+  categories: [ HideSpawnMenu ]

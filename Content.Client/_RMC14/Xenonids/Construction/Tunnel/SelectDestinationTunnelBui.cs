@@ -481,7 +481,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         {
             return blip with
             {
-                Background = new SpriteSpecifier.Rsi(new("_RMC14/Interface/map_blips.rsi"), "background"),
+                Background = new SpriteSpecifier.Rsi(new("/Textures/_RMC14/Interface/map_blips.rsi"), "background"),
                 HiveLeader = true
             };
         }
@@ -490,7 +490,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         {
             return blip with
             {
-                Background = new SpriteSpecifier.Rsi(new("_RMC14/Interface/map_blips.rsi"), "background"),
+                Background = new SpriteSpecifier.Rsi(new("/Textures/_RMC14/Interface/map_blips.rsi"), "background"),
                 HiveLeader = true
             };
         }
@@ -595,6 +595,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
 
         _window = this.CreateWindow<SelectDestinationTunnelWindow>();
         _window.SelectButton.Disabled = true;
+        _window.SetBlipUpdateCallback(() => UpdateBlips());
 
         var wrapper = _window.TacticalMapWrapper;
         TabContainer.SetTabVisible(wrapper.CanvasTab, false);

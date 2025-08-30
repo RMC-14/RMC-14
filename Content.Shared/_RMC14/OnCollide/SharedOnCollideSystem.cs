@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -61,6 +62,9 @@ public abstract class SharedOnCollideSystem : EntitySystem
         if (_hive.FromSameHive(ent.Owner, other))
             return;
 
+        if (ent.Comp.Fire && HasComp<RMCImmuneToFireTileDamageComponent>(other))
+            return;
+
         if (HasComp<UncloakOnHitComponent>(ent.Owner))
             _cloak.TrySetInvisibility(other, false, true);
 
@@ -85,7 +89,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
             _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
         }
 
-        _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
+        _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze, ent.Comp.AcidComboResists);
 
         if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
         {
