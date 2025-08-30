@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: RangerXVII
-  changes:
-  - message: '''Officer'' and ''OW'' will no longer be changed in the dwarf accent.'
-    type: Fix
-  id: 1765
-  time: '2025-05-21T14:34:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6476
-- author: AlexisMoonlight
-  changes:
-  - message: Added medbay, We-Ya Med Plus, and Blood dispenser access to pilots and
-      dropship crew chiefs.
-    type: Add
-  id: 1766
-  time: '2025-05-21T14:37:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6494
-- author: Vermidia
-  changes:
-  - message: Fixed Acider Runner's For the Hive radius being slightly too small.
-    type: Fix
-  id: 1767
-  time: '2025-05-21T14:38:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6463
 - author: DrSmugleaf
   changes:
   - message: Added cassette tapes and the cassette player. These can be bought in
@@ -4608,5 +4586,28 @@
   id: 2265
   time: '2025-08-30T00:31:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7705
+- author: x5tink
+  changes:
+  - message: Added Intel support crate to req.
+    type: Add
+  - message: Enabled Red dot attachment crate and HAR ammo crate.
+    type: Fix
+  id: 2266
+  time: '2025-08-30T00:33:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7717
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the EMT - paramedic uniforms stating another color than they are.
+    type: Fix
+  id: 2267
+  time: '2025-08-30T00:34:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7549
+- author: Vermidia
+  changes:
+  - message: Fixed parasites spawning from carriers sometimes taking collision damage.
+    type: Fix
+  id: 2268
+  time: '2025-08-30T00:34:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7492
 Name: RMC14
 Order: -1
