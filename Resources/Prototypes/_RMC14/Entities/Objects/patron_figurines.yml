@@ -1784,7 +1784,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRedMachinaSwiftcleave
   name: Red 'Machina' Swiftcleave figurine
-  #description: ""
+  description: "Not much can be said apart from this figure having some style to it. The Beret, the smart pistol having ivory colored engravings, a miniature plasma turret sits atop the left shoulder next to the light. But one thing that may catch your eye is the words, \"To a place where...\"written on the bottom of the stand."
   components:
   - type: Sprite
     state: red_machina_swiftcleave
