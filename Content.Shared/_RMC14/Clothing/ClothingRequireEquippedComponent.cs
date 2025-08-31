@@ -12,4 +12,7 @@ public sealed partial class ClothingRequireEquippedComponent : Component
 
     [DataField, AutoNetworkedField]
     public string DenyReason = "rmc-wear-smart-gun-required";
+
+    [DataField, AutoNetworkedField]
+    public bool AutoUnequip = false;
 }

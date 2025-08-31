@@ -285,3 +285,30 @@
     - warbles
     - warbles.
     - warbles!
+
+# Reptilian
+
+- type: emote
+  id: RMCReptileRattle
+  name: rmc-emote-name-r-rattle
+  category: Hands
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/snarl.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-r-rattle"]
+  chatTriggers:
+    - rattle
+    - rattles
+    - rattling
+    - rattled
+    - rattle tail
+    - rattles tail
+    - rattles their tail
+    - rattles her tail
+    - rattles his tail
+    - rattles its tail

@@ -1,0 +1,51 @@
+- type: job
+  parent: CMSurvivorCorporate
+  id: CMSurvivorLV624CorporateDomeCL
+  name: rmc-job-name-survivor-lv624-corporate-liaison
+  description: cm-job-description-survivor
+  spawnMenuRoleName: Paranoid Corporate Liaison (LV624 Special Survivor)
+  startingGear: RMCGearSurvivorLV624CorporateLiaison
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 3
+        RMCSkillIntel: 2
+        RMCSkillMedical: 1
+        RMCSkillOverwatch: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetLV624CorporateLiaison
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: MarineOrders
+  greeting: rmc-job-greeting-corporate-dome-cl
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624CorporateDomeCL
+  name: special survivor lv624 coporate liaison spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorLV624CorporateDomeCL
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy
+
+- type: entity
+  parent: RMCSurvivorPresetCorporate
+  id: RMCGearSurvivorPresetLV624CorporateDomeCL
+  name: lv624 colonist preset

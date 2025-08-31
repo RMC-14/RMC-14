@@ -3,7 +3,7 @@
   id: CMJobSurvivorCECResearcher
   name: rmc-job-name-survivor-cec-researcher
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorCECResearcher
+  playTimeTracker: CMJobSurvivorScientist
   ranks:
     RMCRankCivilianDoctor: []
   startingGear: RMCGearSurvivorCECResearcher
@@ -32,7 +32,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorScientist
+  useLoadoutOfJob: CMSurvivorScientist # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -54,10 +54,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorCECResearcher
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetScientist
