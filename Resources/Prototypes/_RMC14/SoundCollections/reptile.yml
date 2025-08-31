@@ -1,0 +1,14 @@
+- type: soundCollection
+  id: RMCReptilianScreams
+  files:
+  - /Audio/_RMC14/Voice/Reptilian/lizard_scream_1.ogg
+  - /Audio/_RMC14/Voice/Reptilian/lizard_scream_2.ogg
+  - /Audio/_RMC14/Voice/Reptilian/lizard_scream_3.ogg
+  - /Audio/Voice/Reptilian/reptilian_scream.ogg
+
+- type: soundCollection
+  id: RMCReptilianHisses
+  files:
+  - /Audio/_RMC14/Voice/Reptilian/lizard_hiss_1.ogg
+  - /Audio/_RMC14/Voice/Reptilian/lizard_hiss_2.ogg
+  - /Audio/_RMC14/Voice/Reptilian/lizard_hiss_3.ogg

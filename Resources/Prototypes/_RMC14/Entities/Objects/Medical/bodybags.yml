@@ -132,6 +132,8 @@
       visible: false
     - state: bodybag_open
       map: ["enum.StorageVisualLayers.Door"]
+    - map: ["enum.HolocardContainerVisualLayers.Base"]
+      visible: false
     - state: paper
       sprite: _RMC14/Objects/Medical/bodybags.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
@@ -151,6 +153,7 @@
       - MedevacStretcher
       tags:
       - CMRollerItem
+  - type: HolocardContainer
 
 - type: entity
   parent: CMStasisBag

@@ -90,7 +90,9 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
     - name: Glasses
       choices: { CMGlasses: 1 }
@@ -118,7 +120,7 @@
         points: 10
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
         points: 10
-      - id: RMCAttachmentM42A1WoodenStock
+      - id: RMCAttachmentM42A2CollapsibleStock
         points: 10
       - id: RMCAttachmentM63Stock
         points: 10
@@ -193,7 +195,7 @@
         amount: 4
       - id: WeaponShotgunM42A2
         amount: 4
-      - id: WeaponRifleM54C
+      - id: RMCWeaponRifleM54C
         amount: 4
     - name: Primary Ammunition
       entries:

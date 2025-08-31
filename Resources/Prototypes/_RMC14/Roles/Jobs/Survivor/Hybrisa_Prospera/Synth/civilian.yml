@@ -1,7 +1,6 @@
 - type: job
   parent: RMCJobSyntheticColony
   id: RMCSyntheticColonyHybrisaCivilian
-  playTimeTracker: RMCJobSyntheticColonyHybrisaCivilian
   startingGear: RMCGearSyntheticColonistHybrisaCivilian
   spawnMenuRoleName: Civilian Synth (Hybrisa Survivor)
   special:
@@ -33,7 +32,7 @@
     - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: synth
     - type: NpcFactionMember
       factions:
@@ -91,16 +90,13 @@
       - type: IVDripTarget
       - type: RMCSuicide
         damage: { }
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
   id: RMCGearSyntheticColonistHybrisaCivilian
   inhand:
     - RMCFireAxe # todo maintenance jack
-
-- type: playTimeTracker
-  id: RMCJobSyntheticColonyHybrisaCivilian
-  isHumanoid: true
 
 - type: entity
   id: RMCSurvivorPresetHybrisaSynthCivilian

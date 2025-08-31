@@ -1,9 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Buckle;
+using Content.Shared._RMC14.Standing;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Alert;
-using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
@@ -24,10 +25,9 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Robust.Shared.Physics;
-using System.Linq;
 
 namespace Content.Shared.Buckle;
 
@@ -474,9 +474,9 @@ public abstract partial class SharedBuckleSystem
     private void Unbuckle(Entity<BuckleComponent> buckle, Entity<StrapComponent> strap, EntityUid? user)
     {
         if (user == buckle.Owner)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled themselves from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} unbuckled themselves from {ToPrettyString(strap):strap}");
         else if (user != null)
-            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{user} unbuckled {buckle} from {strap}");
+            _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):user} unbuckled {ToPrettyString(buckle):target} from {ToPrettyString(strap):strap}");
 
         _audio.PlayPredicted(strap.Comp.UnbuckleSound, strap, user);
 
@@ -513,7 +513,7 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(strap, StrapVisuals.State, strap.Comp.BuckledEntities.Count != 0);
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
 
-        if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
+        if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle) || TryComp(buckle, out RMCRestComponent? rest) && rest.Resting == true)
             _standing.Down(buckle, playSound: false, changeCollision: true);
         else
             _standing.Stand(buckle);
