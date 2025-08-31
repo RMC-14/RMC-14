@@ -65,6 +65,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-squad-leader
+    - type: SeeNewPlayers # RNMC-14 - Fireteam leaders need to know who's new and teach them.
     - type: ViewIntelObjectives
     - type: CommandAccent
     - type: TacticalMapIcon

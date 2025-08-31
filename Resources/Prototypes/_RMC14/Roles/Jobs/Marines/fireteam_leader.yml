@@ -44,6 +44,7 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-fireteam-leader
+    - type: SeeNewPlayers # RNMC-14 - Fireteam leaders need to know who's new and teach them.
     - type: TacticalMapIcon
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
