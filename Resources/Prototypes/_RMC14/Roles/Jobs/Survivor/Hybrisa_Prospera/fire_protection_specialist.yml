@@ -3,7 +3,6 @@
   id: RMCSurvivorHybrisaFireProtectionSpecialist
   name: rmc-job-name-survivor-fire-protection-specialist-hybrisa
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorHybrisaFireProtectionSpecialist
   startingGear: RMCGearSurvivorHybrisaFireProtectionSpecialist
   spawnMenuRoleName: Fire Protection Specialist (Hybrisa Survivor)
   special:
@@ -26,6 +25,7 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: rmc-job-prefix-fire-protection-specialist-hybrisa
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
@@ -42,10 +42,6 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: playTimeTracker
-  id: CMJobSurvivorHybrisaFireProtectionSpecialist
-  isHumanoid: true
 
 - type: entity
   parent: RMCSurvivorPresetCivilian

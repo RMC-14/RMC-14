@@ -1,0 +1,104 @@
+<Document>
+  # Scout Specialist: The Silent Hunter
+
+  ## Eyes on the Enemy, Precision Fire
+  Difficulty: [color=#FF8C00]Hard[/color]
+
+  The Scout Specialist serves as the UNMC’s silent edge, adept at penetrating enemy lines, gathering critical battlefield intelligence, and executing precise takedowns of high-value targets.
+  Utilizing the advanced M68 Thermal Cloak for stealth and the versatile M4SPR Custom Battle Rifle for decisive engagements, the Scout provides unparalleled reconnaissance and surgical strike capabilities.
+
+  ## Standard Issue Kit
+  The Scout deploys equipped with the following important equipment:
+  <Box> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom"/> <GuideEntityEmbed Entity="RMCBackpackScout"/> <GuideEntityEmbed Entity="RMCLaserDesignatorScout"/></Box>
+
+  ## Core Capabilities & Equipment
+
+  ### M68 Thermal Cloak: The Art of Invisibility
+  <GuideEntityEmbed Entity="RMCBackpackScout" HorizontalAlignment="Left"/>
+  The first thing you'll notice is your [bold]permanent, no-charge cloaking device[/bold]. This is your primary tool for infiltration and survival. Pretty sweet, right? However, it comes with critical limitations:
+
+  - [bold]Firing Restriction[/bold]: You are [italic]unable to fire weapons while cloaked[/italic] [color=#FF0000]and for approximately 2-3 seconds immediately after de-cloaking[/color]. Plan your engagements accordingly.
+  - [bold]Grenade Priming Disabled[/bold]: You cannot prime grenades while cloaked.
+
+  - Despite these, your cloak allows for significant interaction:
+
+  - You [bold]can grab items[/bold] while cloaked.
+  - You [bold]can throw items[/bold].
+  - You [bold]can perform melee actions[/bold] (e.g stabbing with your combat knife) on critically wounded Xenomorphs while cloaked.
+  - You [bold]can laze targets[/bold] for Close Air Support (CAS) or Orbital Bombardment (OB).
+
+  ### M4SPR Custom Battle Rifle: The Surgical Tool
+  <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom" HorizontalAlignment="Left"/>
+  While not necessarily the highest raw damage dealer, the M4SPR Custom Battle Rifle is prized for its accuracy, versatility, and crippling effects. Its unique ammo and attachment compatibility allow for tailored performance.
+
+  <Box>[bold]Ammunition Types[/bold]:</Box>
+  <Box>[bold]HV Standard [/bold]: [color=#ADD8E6]Most accurate[/color], with high Armor Piercing capability, for general precision work and consistent damage.</Box>
+  <Box>[bold]HV Impact [/bold]: [color=#FFFF00]Knocks down targets[/color] (effective up to Tier 2 Xenomorphs), excellent for disruption, halting charges, and creating follow-up opportunities.</Box>
+  <Box>[bold]HV Incendiary [/bold]: [color=#FFA500]Ignites targets[/color], causing damage over time, useful for securing kills on fleeing targets or forcing enemies to disengage/relocate. [italic]Ineffective against flame-immune targets like Queens/Ravagers[/italic].</Box>
+  -   [bold]Crippling Shots[/bold]: Hits from the M4SPR tend to severely damage targets. This makes it exceptionally effective against agile or dangerous foes, even if it doesn't kill them outright in one shot. [color=#FFD700]Mind your fire discipline; friendly fire with this weapon is devastating.[/color]
+  -   [bold]Ammunition Economy[/bold]: Specialized M4SPR ammunition is scarce and costly. Reserve it for targets where its unique effects are most impactful (e.g. high-priority Xenos, dangerous enemy specialists). Use your secondary for lesser threats.
+
+  ## Gameplay: The Art of Recon
+
+  ### Stealth & Evasion:
+
+  -   [bold]Mastering the Cloak[/bold]: Your cloak is incredibly difficult for most Xenos to detect, especially amidst weeds or in low light. You can often walk directly past entire enemy forces unnoticed.
+  -   [bold]The Hunter Becomes the Hunted[/bold]: If you suspect a Xenomorph is actively and skillfully hunting *you* (not just generally searching), it's often wiser to disengage and relocate rather than waiting for them to leave. Your survival is paramount.
+  -   [bold]Constant Vigilance[/bold]: Always be checking your surroundings. Always have an escape route or a contingency plan.
+
+  ### Intelligence & Fire Support Coordination:
+  -   [bold]The Power of Information[/bold]: Your Scout Designators give you tremendous power if Mortar and CAS assets are responsive.
+  -   [bold]Typical Targeting[/bold]: While Squad Leaders/Fireteam leaders often direct CAS at the frontline, your role is very suited to help fire support like Mortar coordinates or OB's for critical rear-echelon targets like Xenomorph Recovery nodes, forcing them to pull back or disrupt their infrastructure.
+
+  ##  Strategies: The Art of Sabotage
+
+  There are several effective ways to play the scout. A common and highly impactful approach is focusing on ambushes:
+ <Box> The "Burn and Stun" </Box>
+  Execute devastating ambushes by first [italic]tagging your target with a single incendiary shot[/italic] to apply a persistent burn.
+  Immediately following this, [bold]swiftly switch to your HV Impact magazine[/bold] and unleash a volley. This forces the Xenomorph to either endure continuous burn damage while being pummeled and stunned by impact rounds, or attempt to roll and extinguish the flames, which self-stuns them for an easy takedown.
+  Crucially, the Impact rounds also [italic]stun targets[/italic], effectively neutralizing their special abilities like Leap or Pounce, leaving them vulnerable and controlled.
+
+  <Box>Tag, You're It, and On Fire!</Box>
+  This isn't about instant kills, but about being an absolute persistent nuisance, especially to lone Xenos or small, vulnerable groups.
+   - Make sure you've got those HV Incendiary rounds ready. A suppressor on your M4SPR is your best friend here.
+   - Cloak, get close (but not *too* close) to an isolated Xeno or a small group that's a bit separated. De-cloak just long enough to pop one or two incendiary rounds into a target, then immediately re-cloak and *move* Don't stick around to admire your handiwork from that spot.
+   - The Xeno is now on fire, taking damage over time, and probably a bit panicked. They might try to roll, or they might just be annoyed and easier for your frontline to deal with.
+   - Find a new angle, a new target, or even the same target if they haven't learned their lesson. The key is to be unpredictable and not give them a consistent spot to hunt you down. This tactic is great for softening up patrols or making lone flankers regret their life choices without you having to commit to a full-on firefight. It's psychological warfare with a fiery bonus.
+
+  # Common Mistakes & How to Avoid Them
+
+  Becoming an effective scout requires not just knowing what to do, but also what *not* to do. Here are some common pitfalls:
+
+  <Box>[bold]Over-Reliance on Cloak / "Invincibility Syndrome"[/bold]:</Box>
+  -   [color=#FF0000]Thinking that cloak makes you a literal god. You start strolling through Xeno parties like you own the place or camp one spot for ages.[/color]
+  -   [color=#00FF00] Remember the cloak has limitations (partial visibility to keen eyes). Always assess risk, move purposefully, and be aware that skilled Xenos *can* spot you. Don't get complacent.[/color]
+
+  <Box>[bold]Hotel California Syndrome (No Exit Strategy)[/bold]:</Box>
+  -   [color=#FF0000]You sneak deep into the hive, feeling like a champ, then realize you have no idea how to get out when things go south.[/color]
+  -   [color=#00FF00] Before any risky maneuver, identify multiple escape routes. What's Plan B if a Crusher decides to say hello? Mentally rehearse what you'll do if discovered. Your agility and cloak are for survival, not just infiltration.[/color]
+
+  <Box>[bold]Shooting Flies with a Cannon (Ammo Mismanagement)[/bold]:</Box>
+  -   [color=#FF0000]Dumping your precious Impact or Incendiary rounds from the M4SPR into a lone, already-dying Drone[/color]
+  -   [color=#00FF00] Treat your M4SPR ammo as a precious resource. Use it for HVTs, targets requiring specific debuffs, or when its precision is absolutely necessary. Rely on your secondary for lesser engagements.[/color]
+
+  <Box>[bold]The Silent Treatment (But Not in a Good Way)[/bold]:</Box>
+  -   [color=#FF0000]You spot the Queen, three Crushers, and a party bus full of Warriors heading for the FOB... and you tell no one. Or you call in an OB right on top of your buddies.[/color]
+  -   [color=#00FF00] You are the eyes and ears. Effective, concise communication is as critical as your combat skills. Let your team know what you see and what you intend to do, especially if it impacts them.[/color]
+
+  <Box>[bold]Fumbling the Ambush (De-Cloak Limitations & Predictability)[/bold]:</Box>
+  -   [color=#FF0000]De-cloaking and instantly mashing the fire button, forgetting about that 2-3 second "wake-up" time for your gun. Or always popping out from behind the *same* rock.[/color]
+  -   [color=#00FF00] Practice the de-cloak-to-fire timing. When ambushing, de-cloak slightly *before* you need to fire. Vary your de-cloak locations to be less predictable.[/color]
+
+  <Box>[bold]The "Look at Me, I'm a Firefly!" Mistake:[/bold]:</Box>
+  -   [color=#FF0000]Accidentally leaving your armor's suitlight on, making your "invisible" silhouette a glowing beacon.[/color]
+  -   [color=#00FF00]Double-check your suitlight status frequently, especially after getting revived or changing gear. It's a simple mistake that can completely negate your stealth.[/color]
+
+  ## Signing Off
+
+  So there you have it – a glimpse into the shadowy world of the Scout Specialist. It's a demanding role, no doubt about it, one that asks for more than just a quick trigger finger.
+  You're part saboteur, part intelligence operative, part precision killer, and all mind games. Mastering the cloak, your rifle, and the art of not being where the enemy expects you to be is a constant learning curve.
+
+  You'll make mistakes – everyone does – but hopefully, knowing some of the common slip-ups will help you sidestep a few. Remember these words: your mind is your greatest weapon. The rest is just gear.
+  Now get out there, stay unseen, and give those Xenos something new to have nightmares about. Good hunting. Try not to get stepped on.
+
+</Document>
