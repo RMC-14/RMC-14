@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed being able to attach a bipod to the Mar-50.
-    type: Fix
-  id: 1783
-  time: '2025-06-01T10:25:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6583
 - author: CyberTropic
   changes:
   - message: Added APC status lights.
@@ -4506,5 +4499,15 @@
   id: 2283
   time: '2025-08-30T04:40:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7017
+- author: monomethylhydrazine
+  changes:
+  - message: removed duplicate flashlight entry in XO vendor
+    type: Remove
+  - message: moved welding visors in XO vendor to their own subheading + made them
+      recommended
+    type: Tweak
+  id: 2284
+  time: '2025-08-30T10:02:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6741
 Name: RMC14
 Order: -1
