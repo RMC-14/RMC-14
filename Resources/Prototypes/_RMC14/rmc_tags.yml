@@ -123,3 +123,6 @@
   
 - type: Tag
   id: RMCPinpointer
+
+- type: Tag
+  id: RMCSynthResetKey

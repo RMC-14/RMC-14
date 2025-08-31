@@ -140,14 +140,15 @@ public sealed class XenoProjectileSystem : EntitySystem
             target = null;
 
         var originalDiff = targetMap.Position - origin.Position;
+        var halfDeviation = deviation / 2;
         for (var i = 0; i < shots; i++)
         {
-            var projTarget = targetMap;
-            if (deviation != Angle.Zero)
-            {
-                var angle = _random.NextAngle(-deviation / 2, deviation / 2);
-                projTarget = new MapCoordinates(origin.Position + angle.RotateVec(originalDiff), targetMap.MapId);
-            }
+            // center projectile has no deviation; others are randomly offset within deviation
+            var angleOffset = Angle.Zero;
+            if (i > 0 && deviation != Angle.Zero)
+                angleOffset = _random.NextAngle(-halfDeviation, halfDeviation);
+
+            var projTarget = new MapCoordinates(origin.Position + angleOffset.RotateVec(originalDiff), targetMap.MapId);
 
             var diff = projTarget.Position - origin.Position;
             var xenoVelocity = _physics.GetMapLinearVelocity(xeno);

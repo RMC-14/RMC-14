@@ -13,4 +13,5 @@
 
 - type: playTimeTracker
   id: RMCJobSurvivorCO
+  name: rmc-playtime-tracker-job-name-survivor-co
   isHumanoid: true

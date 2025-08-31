@@ -19,6 +19,9 @@
         reagents:
         - ReagentId: Water
           Quantity: 60
+  - type: Tag
+    tags:
+    - DrinkGlass
   - type: SolutionTransfer
     transferAmount: 60
     maxTransferAmount: 60

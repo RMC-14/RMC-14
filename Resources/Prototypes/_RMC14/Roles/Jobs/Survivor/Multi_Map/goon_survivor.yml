@@ -3,7 +3,6 @@
   id: CMSurvivorGoon
   name: rmc-job-name-pmc-corporate-goon
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorGoon
   startingGear: RMCGearSurvivorGoon
   spawnMenuRoleName: We-Ya Goon (Survivor)
   icon: "RMCJobIconPMCGoonStandard"
@@ -29,6 +28,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorGoon
@@ -65,7 +65,3 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: playTimeTracker
-  id: CMJobSurvivorGoon
-  isHumanoid: true
