@@ -3,7 +3,7 @@ using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 using Content.Shared._RMC14.Medical.Pain;
 
-namespace Content.Server._RMC14.EntityEffects.Effects;
+namespace Content.Shared._RMC14.EntityEffects.Effects;
 
 public sealed partial class DecreasePain : EntityEffect
 {

@@ -2,7 +2,7 @@ using Content.Shared._RMC14.Medical.TemporaryBlurryVision;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._RMC14.EntityEffects.Effects;
+namespace Content.Shared._RMC14.EntityEffects.Effects;
 
 public sealed partial class TemporaryBlurryVision : EntityEffect
 {
