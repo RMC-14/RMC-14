@@ -58,6 +58,14 @@
 
 - type: entity
   parent: RMCOverheadFuelLine1
+  id: RMCOverheadFuelLine1Offset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0.319, 0
+
+- type: entity
+  parent: RMCOverheadFuelLine1
   id: RMCOverheadFuelLine2
   components:
   - type: Sprite
