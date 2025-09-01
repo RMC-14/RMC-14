@@ -3,6 +3,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.StatusEffect;
 using Content.Shared.Mobs.Events;
+using Content.Shared.Rejuvenate;
 
 namespace Content.Shared._RMC14.Medical.Pain;
 
@@ -33,7 +34,7 @@ public sealed class PainKnockOutSystem : EntitySystem
         knockout.previousCritThreshold = _mobThresholds.GetThresholdForState(uid, MobState.Critical, thresholds);
         var alive = _mobThresholds.GetThresholdForState(uid, MobState.Alive, thresholds);
         knockout.previousAliveThreshold = alive;
-        _mobThresholds.SetMobStateThreshold(uid, alive, MobState.Critical, thresholds);
+        _mobThresholds.SetMobStateThreshold(uid, alive + 1, MobState.Critical, thresholds); // +1 needed to rejuvenation working propertly
         Dirty(uid, knockout);
     }
 

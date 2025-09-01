@@ -1,4 +1,5 @@
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.Rejuvenate;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -15,6 +16,7 @@ public sealed class TemporaryBlurryVisionSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<TemporaryBlurryVisionComponent, GetBlurEvent>(OnGetBlur);
+        SubscribeLocalEvent<TemporaryBlurryVisionComponent, RejuvenateEvent>(OnRejuvenate);
     }
 
     public void AddTemporaryBlurModificator(EntityUid uid, TimeSpan duration, int strength, TemporaryBlurryVisionComponent? blur = null)
@@ -37,6 +39,12 @@ public sealed class TemporaryBlurryVisionSystem : EntitySystem
             return;
 
         args.Blur = comp.TemporaryBlurModificators.Max(mod => mod.EffectStrength);
+    }
+
+    private void OnRejuvenate(EntityUid uid, TemporaryBlurryVisionComponent comp, ref RejuvenateEvent args)
+    {
+        RemComp<TemporaryBlurryVisionComponent>(uid);
+        _blur.UpdateBlurMagnitude(uid);
     }
 
     public override void Update(float frameTime)

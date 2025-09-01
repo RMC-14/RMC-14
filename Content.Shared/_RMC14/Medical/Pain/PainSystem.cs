@@ -9,6 +9,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Alert;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Events;
+using Content.Shared.Rejuvenate;
 
 namespace Content.Shared._RMC14.Medical.Pain;
 
@@ -34,6 +35,7 @@ public sealed partial class PainSystem : EntitySystem
     {
         SubscribeLocalEvent<PainComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<PainComponent, BeforeAlertSeverityCheckEvent>(OnAlertSeverityCheck);
+        SubscribeLocalEvent<PainComponent, RejuvenateEvent>(OnRejuvenate);
 
         _bruteTypes.Clear();
         _burnTypes.Clear();
@@ -71,6 +73,16 @@ public sealed partial class PainSystem : EntitySystem
                 _airlossTypes.Add(type);
             }
         }
+    }
+
+    // TODO: fix movement speed effect
+    private void OnRejuvenate(EntityUid uid, PainComponent pain, ref RejuvenateEvent args)
+    {
+        pain.PainModificators = [];
+        pain.CurrentPain = 0;
+        pain.CurrentPainPercentage = 0;
+        pain.CurrentPainLevel = 0;
+        _alerts.ShowAlert(uid, pain.Alert, 0);
     }
 
     private void OnAlertSeverityCheck(EntityUid uid, PainComponent pain, ref BeforeAlertSeverityCheckEvent args)
