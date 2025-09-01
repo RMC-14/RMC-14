@@ -30,6 +30,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - DrinkGlass
 
 - type: entity
   parent: RMCDrinkCoffee
@@ -41,3 +44,41 @@
     sprite: _RMC14/Objects/Consumable/Drinks/coffee_joe.rsi
     state: base
     layers: []
+
+- type: entity
+  parent: RMCDrinkCoffee
+  id: RMCDrinkTea
+  name: Duke Purple tea
+  description: An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/tea.rsi
+    state: base
+    layers: []
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCTea
+          Quantity: 30
+
+- type: entity
+  parent: RMCDrinkCoffee
+  id: RMCDrinkHotCocoa
+  name: dutch hot cocoa
+  description: Made in Space South America.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/hot_cocoa.rsi
+    state: base
+    layers: []
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCHotCocoa
+          Quantity: 30
+
+

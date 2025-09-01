@@ -518,5 +518,7 @@ public enum LogType
     RMCXenoNest = RMCMarineAnnounce + 36,
     RMCVend = RMCMarineAnnounce + 37,
     RMCRoundEnd = RMCMarineAnnounce + 38,
-    RMCIdModify = RMCMarineAnnounce + 39
+    RMCExecution =  RMCMarineAnnounce + 39,
+    RMCAdminCommandLogging = RMCMarineAnnounce + 40,
+    RMCIdModify = RMCMarineAnnounce + 41,
 }

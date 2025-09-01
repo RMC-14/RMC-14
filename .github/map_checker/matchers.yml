@@ -33,3 +33,11 @@
   entityMatchers:
   - ".*"
 
+- id: "AllowStampsOnWarshipMaps"
+  type: "Whitelist"
+  on_paths:
+  - "almayer.yml"
+  - "savannah.yml"
+  entityMatchers:
+  - "CMStamp.*" # All stamps.
+

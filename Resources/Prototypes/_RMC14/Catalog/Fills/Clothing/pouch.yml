@@ -232,6 +232,21 @@
       # 5 splints
 
 - type: entity
+  parent: RMCPouchSurvival
+  id: RMCPouchSurvivalFillRadioOff
+  suffix: Filled Radio OFF
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFlashlight
+    - id: CMCrowbarRed
+    - id: CMPacketPillsTricordrazine
+    - id: CMGauze10
+    - id: RMCRadioHandheldColonyOff
+    - id: RMCM5Bayonet
+      # 5 splints
+
+- type: entity
   parent: [ RMCPouchSurvivalBlack, RMCPouchSurvivalFill ]
   id: RMCPouchSurvivalBlackFilled
   components:
