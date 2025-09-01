@@ -47,9 +47,6 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public EntProtoId LarvaEnt = "CMXenoLarva";
 
     [DataField]
-    public EntProtoId<IFFFactionComponent> NoFaction = "FactionNone";
-
-    [DataField]
     public EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
 
     [DataField]
