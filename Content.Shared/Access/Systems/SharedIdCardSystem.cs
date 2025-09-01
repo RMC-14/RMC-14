@@ -350,4 +350,23 @@ public abstract class SharedIdCardSystem : EntitySystem
             _toRename.Clear();
         }
     }
+
+    //RMC14
+    public bool TryChangeOriginalOwner(EntityUid uid, EntityUid? player, IdCardComponent? id = null)
+    {
+        if (!Resolve(uid, ref id))
+            return false;
+
+        if (player == null)
+            return false;
+
+        if (id.OriginalOwner == player)
+            return true;
+
+        id.OriginalOwner = player.Value;
+        Dirty(uid, id);
+        UpdateEntityName(uid, id);
+        return true;
+    }
+    //RMC14
 }

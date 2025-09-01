@@ -5,7 +5,7 @@
   suffix: Command, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessCommand"]]
 
 - type: entity
   parent: CMAirlockCommand
@@ -13,7 +13,7 @@
   suffix: Command, Locked
   components:
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessCommand"]]
 
 - type: entity
   parent: CMAirlockMaint
@@ -21,7 +21,7 @@
   suffix: Command, Locked, Maint
   components:
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessCommand"]]
   - type: PaintableAirlock
     department: CMCommand
 

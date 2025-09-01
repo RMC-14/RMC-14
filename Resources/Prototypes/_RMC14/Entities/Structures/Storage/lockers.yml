@@ -83,7 +83,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/staff.rsi
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessCommand"]]
 
 - type: entity
   parent: CMLockerBase
