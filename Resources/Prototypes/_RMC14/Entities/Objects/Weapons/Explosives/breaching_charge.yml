@@ -79,6 +79,12 @@
       - XenoTunnel
   - type: RMCExplosiveDelete
     delay: 10
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 4
+    initialBeepDelay: 0
+    beepInterval: 0.5
     whitelist:
       components:
       - XenoTunnel
