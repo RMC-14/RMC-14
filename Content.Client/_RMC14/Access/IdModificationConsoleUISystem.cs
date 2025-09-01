@@ -1,4 +1,3 @@
-using Content.Client._RMC14.Chemistry.Master;
 using Content.Shared._RMC14.Marines.Access;
 using Content.Shared._RMC14.UserInterface;
 using Robust.Client.Timing;

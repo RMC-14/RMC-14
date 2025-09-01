@@ -4,14 +4,13 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Marines.Access;
 
-[Serializable, NetSerializable]
-
+[Serializable] [NetSerializable]
 public enum IdModificationConsoleUIKey
 {
-    Key
+    Key,
 }
 
-[Serializable, NetSerializable]
+[Serializable] [NetSerializable]
 public sealed class IdModificationConsoleAccessChangeBuiMsg(ProtoId<AccessLevelPrototype> access, bool add)
     : BoundUserInterfaceMessage
 {
@@ -19,36 +18,33 @@ public sealed class IdModificationConsoleAccessChangeBuiMsg(ProtoId<AccessLevelP
     public readonly bool Add = add;
 }
 
-[Serializable, NetSerializable]
+[Serializable] [NetSerializable]
 public sealed class IdModificationConsoleMultipleAccessChangeBuiMsg(string type, string accessGroup)
     : BoundUserInterfaceMessage
 {
-    public readonly string Type = type;
     public readonly string AccessList = accessGroup;
+    public readonly string Type = type;
 }
 
-[Serializable, NetSerializable]
-public sealed class IdModificationConsoleSignInBuiMsg()
-    : BoundUserInterfaceMessage;
+[Serializable] [NetSerializable]
+public sealed class IdModificationConsoleSignInBuiMsg : BoundUserInterfaceMessage;
 
-[Serializable, NetSerializable]
-public sealed class IdModificationConsoleSignInTargetBuiMsg()
-    : BoundUserInterfaceMessage;
+[Serializable] [NetSerializable]
+public sealed class IdModificationConsoleSignInTargetBuiMsg : BoundUserInterfaceMessage;
 
-[Serializable, NetSerializable]
+[Serializable] [NetSerializable]
 public sealed class IdModificationConsoleIFFChangeBuiMsg(bool revoke)
     : BoundUserInterfaceMessage
 {
     public readonly bool Revoke = revoke;
 }
 
-[Serializable, NetSerializable]
+[Serializable] [NetSerializable]
 public sealed class IdModificationConsoleJobChangeBuiMsg(ProtoId<AccessGroupPrototype> accessGroup)
     : BoundUserInterfaceMessage
 {
     public readonly ProtoId<AccessGroupPrototype> AccessGroup = accessGroup;
 }
 
-[Serializable, NetSerializable]
-public sealed class IdModificationConsoleTerminateConfirmBuiMsg()
-    : BoundUserInterfaceMessage;
+[Serializable] [NetSerializable]
+public sealed class IdModificationConsoleTerminateConfirmBuiMsg : BoundUserInterfaceMessage;

@@ -5,12 +5,12 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="Identification Console"
     MinSize="600 600">
-    <BoxContainer Orientation="Vertical" >
-        <PanelContainer Margin = "0 0 0 10">
+    <BoxContainer Orientation="Vertical">
+        <PanelContainer Margin="0 0 0 10">
             <PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat BackgroundColor="#162031" BorderColor="#162031"
-                                   BorderThickness="4"/>
-                </PanelContainer.PanelOverride>
+                                       BorderThickness="4" />
+            </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical">
                 <BoxContainer Orientation="Horizontal">
                     <RichTextLabel Name="SignInTargetName" Access="Public" Text="" HorizontalExpand="True" />
@@ -18,21 +18,22 @@
                 </BoxContainer>
                 <userInterface:BlueHorizontalSeparator />
                 <BoxContainer Orientation="Horizontal">
-                    <Button Name="SignInTargetButton" Access="Public" Text="Insert Id To Modify" StyleClasses="OpenBoth" HorizontalExpand="True"/>
+                    <Button Name="SignInTargetButton" Access="Public" Text="Insert Id To Modify"
+                            StyleClasses="OpenBoth" HorizontalExpand="True" />
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal">
-                    <RichTextLabel Name="SignInTargetAccount" Access="Public" Text="null" StyleClasses="OpenBoth"/>
+                    <RichTextLabel Name="SignInTargetAccount" Access="Public" Text="null" StyleClasses="OpenBoth" />
                 </BoxContainer>
             </BoxContainer>
         </PanelContainer>
 
-        <PanelContainer Margin = "0 0 0 10" Access="Public" Name="TabsContainer" Visible="False">
+        <PanelContainer Margin="0 0 0 10" Access="Public" Name="TabsContainer" Visible="False">
             <PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat BackgroundColor="#162031" BorderColor="#162031"
                                        BorderThickness="4" />
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical">
-                <BoxContainer Name="Tabs" Access="Public" Orientation="Horizontal"/>
+                <BoxContainer Name="Tabs" Access="Public" Orientation="Horizontal" />
             </BoxContainer>
         </PanelContainer>
 
@@ -43,22 +44,28 @@
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
                 <BoxContainer Name="AccessHeader" Access="Public" Orientation="Horizontal">
-                    <RichTextLabel Text="Access List" HorizontalExpand="True"/>
-                    <Button Name="GrantAllGroupButton" Access="Public" HorizontalExpand="True" Text="✔ Grant All Access" Modulate="LimeGreen" SetHeight="30" StyleClasses="ButtonSquare"/>
-                    <Button Name="RevokeAllGroupButton" Access="Public" HorizontalExpand="True" Text="✘ Revoke All Access" Modulate="Maroon" SetHeight="30" StyleClasses="ButtonSquare"/>
+                    <RichTextLabel Text="Access List" HorizontalExpand="True" />
+                    <Button Name="GrantAllGroupButton" Access="Public" HorizontalExpand="True"
+                            Text="✔ Grant All Access" Modulate="LimeGreen" SetHeight="30" StyleClasses="ButtonSquare" />
+                    <Button Name="RevokeAllGroupButton" Access="Public" HorizontalExpand="True"
+                            Text="✘ Revoke All Access" Modulate="Maroon" SetHeight="30" StyleClasses="ButtonSquare" />
                 </BoxContainer>
                 <userInterface:BlueHorizontalSeparator />
-                <BoxContainer  Orientation="Horizontal" HorizontalExpand="True">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                        <Button Name="IFF" Access="Public" HorizontalExpand="True" Text="Grant IFF" ModulateSelfOverride="LimeGreen" SetHeight="30" StyleClasses="ButtonSquare"/>
-                        <BoxContainer Name="AccessGroups" Access="Public" Orientation="Vertical" HorizontalExpand="True"/>
+                        <Button Name="IFF" Access="Public" HorizontalExpand="True" Text="Grant IFF"
+                                ModulateSelfOverride="LimeGreen" SetHeight="30" StyleClasses="ButtonSquare" />
+                        <BoxContainer Name="AccessGroups" Access="Public" Orientation="Vertical"
+                                      HorizontalExpand="True" />
                     </BoxContainer>
                     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-                            <Button Name="GrantAllButton" Access="Public" HorizontalExpand="True" Visible="False" Text="✔ Grant All" Modulate="LimeGreen" SetHeight="30" StyleClasses="ButtonSquare"/>
-                            <Button Name="RevokeAllButton" Access="Public" HorizontalExpand="True" Visible="False" Text="✘ Revoke All" Modulate="Maroon" SetHeight="30" StyleClasses="ButtonSquare"/>
+                            <Button Name="GrantAllButton" Access="Public" HorizontalExpand="True" Visible="False"
+                                    Text="✔ Grant All" Modulate="LimeGreen" SetHeight="30" StyleClasses="ButtonSquare" />
+                            <Button Name="RevokeAllButton" Access="Public" HorizontalExpand="True" Visible="False"
+                                    Text="✘ Revoke All" Modulate="Maroon" SetHeight="30" StyleClasses="ButtonSquare" />
                         </BoxContainer>
-                        <BoxContainer Name="Accesses" Access="Public" Orientation="Vertical" HorizontalExpand="True"/>
+                        <BoxContainer Name="Accesses" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
                     </BoxContainer>
                 </BoxContainer>
             </BoxContainer>
@@ -71,17 +78,20 @@
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
                 <BoxContainer Access="Public" Orientation="Horizontal">
-                    <RichTextLabel Text="Job List" HorizontalExpand="True"/>
-                    <Button Name="Terminate" Access="Public" HorizontalExpand="True" Text="Dishonorable Discharge" Modulate="Red" SetHeight="30" StyleClasses="ButtonSquare"/>
-                    <Button Name="TerminateConfirm" Access="Public" HorizontalExpand="True" Visible="False" Text="Confirm? This cannot be undone." Modulate="Maroon" SetHeight="30" StyleClasses="ButtonSquare"/>
+                    <RichTextLabel Text="Job List" HorizontalExpand="True" />
+                    <Button Name="Terminate" Access="Public" HorizontalExpand="True" Text="Dishonorable Discharge"
+                            Modulate="Red" SetHeight="30" StyleClasses="ButtonSquare" />
+                    <Button Name="TerminateConfirm" Access="Public" HorizontalExpand="True" Visible="False"
+                            Text="Confirm? This cannot be undone." Modulate="Maroon" SetHeight="30"
+                            StyleClasses="ButtonSquare" />
                 </BoxContainer>
                 <userInterface:BlueHorizontalSeparator />
-                <BoxContainer  Orientation="Horizontal" HorizontalExpand="True">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                        <BoxContainer Name="JobGroups" Access="Public" Orientation="Vertical" HorizontalExpand="True"/>
+                        <BoxContainer Name="JobGroups" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
                     </BoxContainer>
                     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                        <BoxContainer Name="Jobs" Access="Public" Orientation="Vertical" HorizontalExpand="True"/>
+                        <BoxContainer Name="Jobs" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
                     </BoxContainer>
                 </BoxContainer>
             </BoxContainer>

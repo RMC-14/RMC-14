@@ -5,7 +5,6 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Access;
 
 [GenerateTypedNameReferences]
-
 public sealed partial class IdModificationConsoleWindow : DefaultWindow
 {
     public IdModificationConsoleWindow()

@@ -8,6 +8,7 @@ namespace Content.Client._RMC14.Access;
 public sealed partial class IdModificationConsoleAccessGroupButton : Control
 {
     public string Tag = "";
+
     public IdModificationConsoleAccessGroupButton()
     {
         RobustXamlLoader.Load(this);

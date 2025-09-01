@@ -1,13 +1,9 @@
 using System.Linq;
 using Content.Shared._RMC14.Marines.Access;
-using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.UserInterface;
-using Content.Shared.Access;
 using Content.Shared.Access.Components;
-using Content.Shared.Roles;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 
@@ -15,160 +11,27 @@ namespace Content.Client._RMC14.Access;
 
 public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableBui
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-
-    private readonly ContainerSystem _container;
-
-    public IdModificationConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-        _container = EntMan.System<ContainerSystem>();
-    }
-
-    private readonly HashSet<IdModificationConsoleAccessGroupButton> _accessGroupButtons = new();
-    private string _currentAccessGroup = "";
     private readonly HashSet<IdModificationConsoleAccessButton> _accessButtons = new();
 
-    private readonly HashSet<IdModificationConsoleAccessGroupButton> _jobGroupButtons = new();
-    private string _currentJobGroup = "";
+    private readonly HashSet<IdModificationConsoleAccessGroupButton> _accessGroupButtons = new();
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
+
+    private readonly ContainerSystem _container;
     private readonly HashSet<IdModificationConsoleAccessButton> _jobButtons = new();
+
+    private readonly HashSet<IdModificationConsoleAccessGroupButton> _jobGroupButtons = new();
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    private readonly HashSet<IdModificationConsoleTabButton> tabs = new();
+    private string _currentAccessGroup = "";
+    private string _currentJobGroup = "";
 
     private IdModificationConsoleWindow? _window;
 
     private string currenttab = "";
-    private readonly HashSet<IdModificationConsoleTabButton> tabs = new();
 
-    protected override void Open()
+    public IdModificationConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        base.Open();
-
-        _window = this.CreateWindow<IdModificationConsoleWindow>();
-
-        if (!EntMan.TryGetComponent(Owner, out IdModificationConsoleComponent? console))
-            return;
-        TryContainerEntity(Owner, console.TargetIdSlot, out var target);
-        EntMan.TryGetComponent(target, out MetaDataComponent? metaData);
-        EntMan.TryGetComponent(target, out IdCardComponent? targetCardComponent);
-        EntMan.TryGetComponent(target, out AccessComponent? targetCardAccessComponent);
-
-        _window.SignInButton.OnPressed += _ =>
-        {
-                SendPredictedMessage(new IdModificationConsoleSignInBuiMsg());
-        };
-
-        _window.SignInTargetButton.OnPressed += _ =>
-        {
-                SendPredictedMessage(new IdModificationConsoleSignInTargetBuiMsg());
-        };
-
-        var tab1 = new IdModificationConsoleTabButton();
-        tab1.TabButton.Text = "Access";
-        tab1.TabButton.Disabled = true;
-        tab1.TabButton.OnPressed += _ =>
-        {
-            _window.AccessGroups.RemoveAllChildren();
-            _currentAccessGroup = "";
-            _window.Accesses.RemoveAllChildren();
-            currenttab = "Access";
-            tab1.TabButton.Disabled = true;
-
-            foreach (var button in _accessGroupButtons)
-            {
-                _window.AccessGroups.AddChild(button);
-            }
-
-            _window.GrantAllButton.Visible = false;
-            _window.RevokeAllButton.Visible = false;
-            Refresh();
-        };
-        tabs.Add(tab1);
-        _window.Tabs.AddChild(tab1);
-
-        _window.GrantAllButton.OnPressed += _ =>
-        {
-            SendPredictedMessage(new IdModificationConsoleMultipleAccessChangeBuiMsg("GrantAll", _currentAccessGroup));
-            foreach (var button in _accessButtons)
-            {
-                button.AccessButton.ModulateSelfOverride = Color.Green;
-            }
-        };
-
-        _window.RevokeAllButton.OnPressed += _ =>
-        {
-            SendPredictedMessage(new IdModificationConsoleMultipleAccessChangeBuiMsg("RevokeAll", _currentAccessGroup));
-            foreach (var button in _accessButtons)
-            {
-                button.AccessButton.ModulateSelfOverride = null;
-            }
-        };
-
-        _window.GrantAllGroupButton.OnPressed += _ =>
-        {
-            SendPredictedMessage(new IdModificationConsoleMultipleAccessChangeBuiMsg("GrantAllGroup", _currentAccessGroup));
-            foreach (var button in _accessButtons)
-            {
-                button.AccessButton.ModulateSelfOverride = Color.Green;
-            }
-        };
-
-        _window.RevokeAllGroupButton.OnPressed += _ =>
-        {
-            SendPredictedMessage(new IdModificationConsoleMultipleAccessChangeBuiMsg("RevokeAllGroup", _currentAccessGroup));
-            foreach (var button in _accessButtons)
-            {
-                button.AccessButton.ModulateSelfOverride = null;
-            }
-        };
-
-        _window.IFF.OnPressed += _ =>
-        {
-            SendPredictedMessage(new IdModificationConsoleIFFChangeBuiMsg(console.HasIFF));
-            Refresh();
-        };
-
-        DisplayAccessGroups(console);
-
-        // Jobs
-        var tab2 = new IdModificationConsoleTabButton();
-        tab2.TabButton.Text = "Jobs";
-        tab2.TabButton.OnPressed += _ =>
-        {
-            currenttab = "Jobs";
-            _currentJobGroup = "";
-            tab2.TabButton.Disabled = true;
-            Refresh();
-        };
-        tabs.Add(tab2);
-        _window.Tabs.AddChild(tab2);
-
-        _window.Terminate.OnPressed += _ =>
-        {
-            _window.Terminate.Visible = false;
-            _window.TerminateConfirm.Visible = true;
-        };
-
-        _window.TerminateConfirm.OnPressed += _ =>
-        {
-            _window.TerminateConfirm.Text = "ID Terminated";
-            _window.TerminateConfirm.Disabled =  true;
-            SendPredictedMessage(new IdModificationConsoleTerminateConfirmBuiMsg());
-        };
-
-        DisplayJobGroups(console);
-
-        // Todo RMC14 add rank demotion and promotion.
-        // var tab3 = new IdModificationConsoleTabButton();
-        // tab3.TabButton.Text = "Ranks";
-        // tab3.TabButton.OnPressed += _ =>
-        // {
-        //     currenttab = "Ranks";
-        //     tab3.TabButton.Disabled = true;
-        //     Refresh();
-        // };
-        // tabs.Add(tab3);
-        // _window.Tabs.AddChild(tab3);
-
-        Refresh();
+        _container = EntMan.System<ContainerSystem>();
     }
 
     public void Refresh()
@@ -226,7 +89,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             {
                 case "Access":
                     _window.AccessContainer.Visible = true;
-                    AccessGroupRefresh(console,  targetCardAccessComponent);
+                    AccessGroupRefresh(console, targetCardAccessComponent);
                     AccessButtonRefresh(targetCardAccessComponent);
                     RefreshIFFButton(console);
                     break;
@@ -246,6 +109,141 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             _window.JobContainer.Visible = false;
             // _window.RanksContainer.Visible = false;
         }
+    }
+
+    protected override void Open()
+    {
+        base.Open();
+
+        _window = this.CreateWindow<IdModificationConsoleWindow>();
+
+        if (!EntMan.TryGetComponent(Owner, out IdModificationConsoleComponent? console))
+            return;
+        TryContainerEntity(Owner, console.TargetIdSlot, out var target);
+        EntMan.TryGetComponent(target, out MetaDataComponent? metaData);
+        EntMan.TryGetComponent(target, out IdCardComponent? targetCardComponent);
+        EntMan.TryGetComponent(target, out AccessComponent? targetCardAccessComponent);
+
+        _window.SignInButton.OnPressed += _ =>
+        {
+            SendPredictedMessage(new IdModificationConsoleSignInBuiMsg());
+        };
+
+        _window.SignInTargetButton.OnPressed += _ =>
+        {
+            SendPredictedMessage(new IdModificationConsoleSignInTargetBuiMsg());
+        };
+
+        var tab1 = new IdModificationConsoleTabButton();
+        tab1.TabButton.Text = "Access";
+        tab1.TabButton.Disabled = true;
+        tab1.TabButton.OnPressed += _ =>
+        {
+            _window.AccessGroups.RemoveAllChildren();
+            _currentAccessGroup = "";
+            _window.Accesses.RemoveAllChildren();
+            currenttab = "Access";
+            tab1.TabButton.Disabled = true;
+
+            foreach (var button in _accessGroupButtons)
+            {
+                _window.AccessGroups.AddChild(button);
+            }
+
+            _window.GrantAllButton.Visible = false;
+            _window.RevokeAllButton.Visible = false;
+            Refresh();
+        };
+        tabs.Add(tab1);
+        _window.Tabs.AddChild(tab1);
+
+        _window.GrantAllButton.OnPressed += _ =>
+        {
+            SendPredictedMessage(new IdModificationConsoleMultipleAccessChangeBuiMsg("GrantAll", _currentAccessGroup));
+            foreach (var button in _accessButtons)
+            {
+                button.AccessButton.ModulateSelfOverride = Color.Green;
+            }
+        };
+
+        _window.RevokeAllButton.OnPressed += _ =>
+        {
+            SendPredictedMessage(new IdModificationConsoleMultipleAccessChangeBuiMsg("RevokeAll", _currentAccessGroup));
+            foreach (var button in _accessButtons)
+            {
+                button.AccessButton.ModulateSelfOverride = null;
+            }
+        };
+
+        _window.GrantAllGroupButton.OnPressed += _ =>
+        {
+            SendPredictedMessage(
+                new IdModificationConsoleMultipleAccessChangeBuiMsg("GrantAllGroup", _currentAccessGroup));
+            foreach (var button in _accessButtons)
+            {
+                button.AccessButton.ModulateSelfOverride = Color.Green;
+            }
+        };
+
+        _window.RevokeAllGroupButton.OnPressed += _ =>
+        {
+            SendPredictedMessage(
+                new IdModificationConsoleMultipleAccessChangeBuiMsg("RevokeAllGroup", _currentAccessGroup));
+            foreach (var button in _accessButtons)
+            {
+                button.AccessButton.ModulateSelfOverride = null;
+            }
+        };
+
+        _window.IFF.OnPressed += _ =>
+        {
+            SendPredictedMessage(new IdModificationConsoleIFFChangeBuiMsg(console.HasIFF));
+            Refresh();
+        };
+
+        DisplayAccessGroups(console);
+
+        // Jobs
+        var tab2 = new IdModificationConsoleTabButton();
+        tab2.TabButton.Text = "Jobs";
+        tab2.TabButton.OnPressed += _ =>
+        {
+            currenttab = "Jobs";
+            _currentJobGroup = "";
+            tab2.TabButton.Disabled = true;
+            Refresh();
+        };
+        tabs.Add(tab2);
+        _window.Tabs.AddChild(tab2);
+
+        _window.Terminate.OnPressed += _ =>
+        {
+            _window.Terminate.Visible = false;
+            _window.TerminateConfirm.Visible = true;
+        };
+
+        _window.TerminateConfirm.OnPressed += _ =>
+        {
+            _window.TerminateConfirm.Text = "ID Terminated";
+            _window.TerminateConfirm.Disabled = true;
+            SendPredictedMessage(new IdModificationConsoleTerminateConfirmBuiMsg());
+        };
+
+        DisplayJobGroups(console);
+
+        // Todo RMC14 add rank demotion and promotion.
+        // var tab3 = new IdModificationConsoleTabButton();
+        // tab3.TabButton.Text = "Ranks";
+        // tab3.TabButton.OnPressed += _ =>
+        // {
+        //     currenttab = "Ranks";
+        //     tab3.TabButton.Disabled = true;
+        //     Refresh();
+        // };
+        // tabs.Add(tab3);
+        // _window.Tabs.AddChild(tab3);
+
+        Refresh();
     }
 
     private void RefreshIFFButton(IdModificationConsoleComponent console)
@@ -305,12 +303,14 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
                         accessButton.AccessButton.Text = Loc.GetString(accessPrototype.Name);
                         accessButton.Tag = accessPrototype.Name;
                     }
+
                     accessButton.AccessButton.HorizontalExpand = true;
                     accessButton.AccessButton.SetHeight = 30;
                     accessButton.AccessButton.OnPressed += _ =>
                     {
                         ToggleAccessButtonColor(accessButton);
-                        SendPredictedMessage(new IdModificationConsoleAccessChangeBuiMsg(access, accessButton.AccessButton.ModulateSelfOverride != null));
+                        SendPredictedMessage(new IdModificationConsoleAccessChangeBuiMsg(access,
+                            accessButton.AccessButton.ModulateSelfOverride != null));
                         Refresh();
                     };
 
@@ -363,14 +363,16 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
                         jobButton.AccessButton.Text = Loc.GetString(jobPrototype.Name);
                         jobButton.Tag = jobPrototype.Name;
                     }
+
                     jobButton.AccessButton.HorizontalExpand = true;
                     jobButton.AccessButton.SetHeight = 30;
                     jobButton.AccessButton.OnPressed += _ =>
                     {
                         foreach (var jobButtonsToClear in _jobButtons)
                         {
-                            jobButtonsToClear.AccessButton.Disabled =  true;
+                            jobButtonsToClear.AccessButton.Disabled = true;
                         }
+
                         jobButton.AccessButton.ModulateSelfOverride = Color.Green;
                         SendPredictedMessage(new IdModificationConsoleJobChangeBuiMsg(jobPrototype));
                         Refresh();
@@ -399,7 +401,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
     {
         foreach (var button in _accessButtons)
         {
-            if(button.AccessButton.Text == null)
+            if (button.AccessButton.Text == null)
                 return;
 
             foreach (var tag in access.Tags)
@@ -415,6 +417,7 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             }
         }
     }
+
     private void ToggleAccessButtonColor(IdModificationConsoleAccessButton accessButton)
     {
         accessButton.AccessButton.ModulateSelfOverride =
@@ -440,28 +443,18 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
                         continue;
                     counter++;
                     if (targetCardAccessComponent.Tags.Contains(accessLevel))
-                    {
                         counterCompete++;
-                    }
                 }
 
                 if (counterCompete >= counter)
-                {
                     obj.AccessButton.Text = $"[ ◆ ] {text}";
-                }
                 else if (counterCompete > 0)
-                {
                     obj.AccessButton.Text = $"[ ◈ ] {text}";
-                }
                 else
-                {
                     obj.AccessButton.Text = $"[ ◇ ] {text}";
-                }
             }
             else
-            {
                 obj.AccessButton.Text = obj.Tag;
-            }
 
             if (obj.Tag == _currentAccessGroup)
                 continue;

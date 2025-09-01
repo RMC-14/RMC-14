@@ -1,20 +1,12 @@
 using System.Collections.Frozen;
-using System.Linq;
-using System.Threading;
-using Content.Shared._RMC14.Chemistry.Reagent;
-using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
-using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
-using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -24,6 +16,7 @@ namespace Content.Shared._RMC14.Marines.Access;
 
 public sealed class IdModificationConsoleSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
@@ -32,10 +25,12 @@ public sealed class IdModificationConsoleSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
-    private FrozenDictionary<string, AccessGroupPrototype> _accessGroup = FrozenDictionary<string, AccessGroupPrototype>.Empty;
-    private FrozenDictionary<string, AccessLevelPrototype> _accessLevel = FrozenDictionary<string, AccessLevelPrototype>.Empty;
+    private FrozenDictionary<string, AccessGroupPrototype> _accessGroup =
+        FrozenDictionary<string, AccessGroupPrototype>.Empty;
+
+    private FrozenDictionary<string, AccessLevelPrototype> _accessLevel =
+        FrozenDictionary<string, AccessLevelPrototype>.Empty;
 
     public override void Initialize()
     {
@@ -58,7 +53,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         ReloadAccessPrototypes();
     }
 
-    private void OnJobChangeMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleJobChangeBuiMsg args)
+    private void OnJobChangeMsg(Entity<IdModificationConsoleComponent> ent,
+        ref IdModificationConsoleJobChangeBuiMsg args)
     {
         if (!ent.Comp.Authenticated)
             return;
@@ -76,16 +72,19 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(tag);
         }
 
-        _adminLogger.Add(LogType.RMCIdModify, LogImpact.Low,
+        _adminLogger.Add(LogType.RMCIdModify,
+            LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
     }
 
-    private void OnTerminateConfirmMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleTerminateConfirmBuiMsg args)
+    private void OnTerminateConfirmMsg(Entity<IdModificationConsoleComponent> ent,
+        ref IdModificationConsoleTerminateConfirmBuiMsg args)
     {
         if (!ent.Comp.Authenticated)
             return;
 
-        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) || !TryComp(uid, out ItemIFFComponent? iff) || !TryComp(uid, out IdCardComponent? idCard) || !TryComp(uid, out AccessComponent? access))
+        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) || !TryComp(uid, out ItemIFFComponent? iff) ||
+            !TryComp(uid, out IdCardComponent? idCard) || !TryComp(uid, out AccessComponent? access))
             return;
 
         _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
@@ -105,11 +104,13 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         _rank.SetRank(idCard.OriginalOwner, "RMCRankCivilian");
         _metaData.SetEntityName(uid.Value, $"{MetaData(idCard.OriginalOwner).EntityName} (Civilian)");
 
-        _adminLogger.Add(LogType.RMCIdModify, LogImpact.High,
+        _adminLogger.Add(LogType.RMCIdModify,
+            LogImpact.High,
             $"{ToPrettyString(args.Actor):player} has terminated {ToPrettyString(uid):entity} & {ToPrettyString(idCard.OriginalOwner):player}");
     }
 
-    private void OnIFFChangeMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleIFFChangeBuiMsg args)
+    private void OnIFFChangeMsg(Entity<IdModificationConsoleComponent> ent,
+        ref IdModificationConsoleIFFChangeBuiMsg args)
     {
         if (!ent.Comp.Authenticated)
             return;
@@ -121,15 +122,16 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         {
             _iff.SetIdFaction((uid.Value, iff), ent.Comp.Faction);
             ent.Comp.HasIFF = true;
-            _adminLogger.Add(LogType.RMCIdModify, LogImpact.Medium,
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Medium,
                 $"{ToPrettyString(args.Actor):player} has revoked the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
-
         }
         else if (args.Revoke)
         {
             _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
             ent.Comp.HasIFF = false;
-            _adminLogger.Add(LogType.RMCIdModify, LogImpact.Low,
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has granted the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
         }
 
@@ -137,18 +139,18 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnSignInTargetMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleSignInTargetBuiMsg args)
+    private void OnSignInTargetMsg(Entity<IdModificationConsoleComponent> ent,
+        ref IdModificationConsoleSignInTargetBuiMsg args)
     {
         if (TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var id))
         {
             ContainerOutHandler(ent, args.Actor, ent.Comp.TargetIdSlot);
-            _adminLogger.Add(LogType.RMCIdModify, LogImpact.Low,
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has ejected from {ent.Comp.TargetIdSlot} from: {ent.Owner:entity}");
         }
         else
-        {
             ContainerInHandler(ent, args.Actor, ent.Comp.TargetIdSlot);
-        }
     }
 
     private void OnSignInMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleSignInBuiMsg args)
@@ -156,19 +158,23 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (TryContainerEntity(ent, ent.Comp.PrivilegedIdSlot, out var id))
         {
             ContainerOutHandler(ent, args.Actor, ent.Comp.PrivilegedIdSlot);
-            _adminLogger.Add(LogType.RMCIdModify, LogImpact.Low,
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has ejected from {ent.Comp.PrivilegedIdSlot} from: {ent.Owner:entity}");
         }
         else
         {
             ContainerInHandler(ent, args.Actor, ent.Comp.PrivilegedIdSlot);
-            if(ent.Comp.Authenticated)
+            if (ent.Comp.Authenticated)
                 return;
-            _popup.PopupClient($"This id is missing the {Loc.GetString(ent.Comp.Access)}", args.Actor, PopupType.MediumCaution);
+            _popup.PopupClient($"This id is missing the {Loc.GetString(ent.Comp.Access)}",
+                args.Actor,
+                PopupType.MediumCaution);
         }
     }
 
-    private void OnMultipleAccessChangeMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleMultipleAccessChangeBuiMsg args)
+    private void OnMultipleAccessChangeMsg(Entity<IdModificationConsoleComponent> ent,
+        ref IdModificationConsoleMultipleAccessChangeBuiMsg args)
     {
         if (!ent.Comp.Authenticated)
             return;
@@ -181,21 +187,27 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             case "GrantAll":
                 foreach (var accessToAdd in ent.Comp.AccessList)
                 {
-                    if (!_prototype.TryIndex(accessToAdd, out var accessPrototype) || accessPrototype.AccessGroup != args.AccessList)
+                    if (!_prototype.TryIndex(accessToAdd, out var accessPrototype) ||
+                        accessPrototype.AccessGroup != args.AccessList)
                         continue;
                     access.Tags.Add(accessPrototype);
                 }
-                _adminLogger.Add(LogType.RMCIdModify, LogImpact.Medium,
+
+                _adminLogger.Add(LogType.RMCIdModify,
+                    LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has granted all accesses for {args.AccessList} on {uid:entity}");
                 break;
             case "RevokeAll":
                 foreach (var accessToRemove in ent.Comp.AccessList)
                 {
-                    if (!_prototype.TryIndex(accessToRemove, out var accessPrototype) || accessPrototype.AccessGroup != args.AccessList)
+                    if (!_prototype.TryIndex(accessToRemove, out var accessPrototype) ||
+                        accessPrototype.AccessGroup != args.AccessList)
                         continue;
                     access.Tags.Remove(accessToRemove);
                 }
-                _adminLogger.Add(LogType.RMCIdModify, LogImpact.Medium,
+
+                _adminLogger.Add(LogType.RMCIdModify,
+                    LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has revoked all accesses for {args.AccessList} on {uid:entity}");
                 break;
             case "GrantAllGroup":
@@ -203,7 +215,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 {
                     access.Tags.Add(accessToAdd);
                 }
-                _adminLogger.Add(LogType.RMCIdModify, LogImpact.Medium,
+
+                _adminLogger.Add(LogType.RMCIdModify,
+                    LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has granted all accesses on {uid:entity}");
                 break;
             case "RevokeAllGroup":
@@ -211,14 +225,18 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 {
                     access.Tags.Remove(accessToRemove);
                 }
-                _adminLogger.Add(LogType.RMCIdModify, LogImpact.Medium,
+
+                _adminLogger.Add(LogType.RMCIdModify,
+                    LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has revoked all accesses on {uid:entity}");
                 break;
         }
+
         Dirty(ent);
     }
 
-    private void OnAccessChangeMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleAccessChangeBuiMsg args)
+    private void OnAccessChangeMsg(Entity<IdModificationConsoleComponent> ent,
+        ref IdModificationConsoleAccessChangeBuiMsg args)
     {
         if (!ent.Comp.Authenticated)
             return;
@@ -229,14 +247,20 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (args.Add)
         {
             access.Tags.Add(args.Access);
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Low,
+                $"{ToPrettyString(args.Actor):player} has granted {args.Access} to {uid:entity}");
         }
         else
         {
             access.Tags.Remove(args.Access);
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Low,
+                $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {uid:entity}");
         }
     }
 
-
+    //TODO RMC14 add ranks tab
 
     // private void RankUpdate(Entity<IdCardComponent> card, RankPrototype Rank)
     // {
@@ -290,9 +314,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
     private bool ContainerInHandler(Entity<IdModificationConsoleComponent> ent, EntityUid user)
     {
-        if(!_hands.TryGetActiveItem(user, out var handItem) ||
-           !TryComp(handItem, out IdCardComponent? idCardComponent) ||
-           !TryComp(handItem, out AccessComponent? accessComponent))
+        if (!_hands.TryGetActiveItem(user, out var handItem) ||
+            !TryComp(handItem, out IdCardComponent? idCardComponent) ||
+            !TryComp(handItem, out AccessComponent? accessComponent))
             return false;
 
         if (accessComponent.Tags.Contains(ent.Comp.Access))
@@ -303,20 +327,16 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
     private bool ContainerInHandler(Entity<IdModificationConsoleComponent> ent, EntityUid user, string containerType)
     {
-        if(!_hands.TryGetActiveItem(user, out var handItem) ||
-           !TryComp(handItem, out IdCardComponent? idCardComponent) ||
-           !TryComp(handItem, out AccessComponent? accessComponent))
+        if (!_hands.TryGetActiveItem(user, out var handItem) ||
+            !TryComp(handItem, out IdCardComponent? idCardComponent) ||
+            !TryComp(handItem, out AccessComponent? accessComponent))
             return false;
 
         if (accessComponent.Tags.Contains(ent.Comp.Access) && containerType == ent.Comp.PrivilegedIdSlot)
-        {
-            ent.Comp.Authenticated =  true;
-        }
+            ent.Comp.Authenticated = true;
 
         if (TryComp(handItem, out ItemIFFComponent? iff) && containerType == ent.Comp.TargetIdSlot)
-        {
             ent.Comp.HasIFF = iff.Faction == ent.Comp.Faction;
-        }
 
         var container = _container.EnsureContainer<ContainerSlot>(ent, containerType);
         _container.Insert(handItem.Value, container);
@@ -331,16 +351,18 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (contained == null)
             return false;
         _container.Remove(contained.Value, container);
-        if(containerType == ent.Comp.PrivilegedIdSlot)
+        if (containerType == ent.Comp.PrivilegedIdSlot)
             ent.Comp.Authenticated = false;
-        if(containerType == ent.Comp.TargetIdSlot)
+        if (containerType == ent.Comp.TargetIdSlot)
             ent.Comp.HasIFF = false;
         _hands.PickupOrDrop(user, contained.Value);
         Dirty(ent);
         return true;
     }
 
-    private bool TryContainerEntity(Entity<IdModificationConsoleComponent> ent, string containerType, out EntityUid? contained)
+    private bool TryContainerEntity(Entity<IdModificationConsoleComponent> ent,
+        string containerType,
+        out EntityUid? contained)
     {
         var container = _container.EnsureContainer<ContainerSlot>(ent, containerType);
         contained = container.ContainedEntity;
@@ -363,18 +385,19 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         {
             if (accessLevel.Faction == ent.Comp.Faction && !accessLevel.Hidden)
             {
-                if(accessLevel.Name != null && accessLevel.Name.Contains("protobaseaccess"))
+                if (accessLevel.Name != null && accessLevel.Name.Contains("protobaseaccess"))
                     accessGroups.Add(accessLevel);
                 else
                     accessList.Add(accessLevel);
             }
             else if (accessLevel.Faction == ent.Comp.Faction && accessLevel.Hidden)
             {
-                if(accessLevel.Name != null && !accessLevel.Name.Contains("protobaseaccess"))
+                if (accessLevel.Name != null && !accessLevel.Name.Contains("protobaseaccess"))
                     accessListHidden.Add(accessLevel);
             }
         }
-        ent.Comp.AccessGroups =  accessGroups;
+
+        ent.Comp.AccessGroups = accessGroups;
         ent.Comp.AccessList = accessList;
         ent.Comp.HiddenAccessList = accessListHidden;
 
@@ -386,7 +409,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         {
             if (accessGroup.Faction == ent.Comp.Faction && !accessGroup.Hidden)
             {
-                if(accessGroup.Name != null && accessGroup.Name.Contains("protobaseaccess"))
+                if (accessGroup.Name != null && accessGroup.Name.Contains("protobaseaccess"))
                     groupGroups.Add(accessGroup);
                 else
                     groupList.Add(accessGroup);
@@ -397,7 +420,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             //         groupListHidden.Add(accessGroup);
             // }
         }
-        ent.Comp.JobGroups =  groupGroups;
+
+        ent.Comp.JobGroups = groupGroups;
         ent.Comp.JobList = groupList;
     }
 }
