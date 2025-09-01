@@ -11,6 +11,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.GameTicking;
@@ -262,6 +263,10 @@ namespace Content.Server.RoundEnd
 
         public void EndRound(TimeSpan? countdownTime = null)
         {
+            // RMC14
+            // BACK AT IT FOR ROUND TWO, GOTTA CHECK THIS SHIT HERE TOOOOOOOOOOOOOOOOOOOOOOOOO????!?!??!
+            if (_cfg.GetCVar(RMCCVars.RMCDelayRoundEnd)) return;
+            // RMC14
             if (_gameTicker.RunLevel != GameRunLevel.InRound) return;
             LastCountdownStart = null;
             ExpectedCountdownEnd = null;
@@ -330,6 +335,10 @@ namespace Content.Server.RoundEnd
         private void AfterEndRoundRestart()
         {
             if (_gameTicker.RunLevel != GameRunLevel.PostRound) return;
+            // RMC14
+            // This is the thing that actually ends the fucking round????? why 30 Million different methods lul
+            if (_cfg.GetCVar(RMCCVars.RMCDelayRoundEnd)) return;
+            // RMC14
             Reset();
             _gameTicker.RestartRound();
         }

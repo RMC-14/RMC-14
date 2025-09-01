@@ -1,0 +1,259 @@
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaBerkley
+  suffix: Berkley Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/berkley.rsi
+    state: berkley
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: false # TODO RMC14 true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    powerNet: berkley
+    hijackEvacuationArea: false
+    hijackEvacuationWeight: 0
+    hijackEvacuationType: None
+  - type: IntelRescueSurvivorArea
+
+# BRIG
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyBrig
+  name: Brig
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: security
+
+- type: entity
+  parent:  RMCAreaBerkleyBrig
+  id: RMCAreaBerkleyBrigOB
+  name: Orbital Cannon Room
+
+- type: entity
+  parent:  RMCAreaBerkleyBrig
+  id: RMCAreaBerkleyPointDefense
+  name: Point Defense
+
+# COMMAND
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyCIC
+  name: Combat Information Center
+  components:
+  - type: Sprite
+    state: command
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+
+- type: entity
+  parent:  RMCAreaBerkleyCIC
+  id: RMCAreaBerkleyLiaison
+  name: Liaison Office
+
+- type: entity
+  parent:  RMCAreaBerkleyCIC
+  id: RMCAreaBerkleyCICingOfficer
+  name: Commanding Officer Bunks
+
+- type: entity
+  parent:  RMCAreaBerkleyCIC
+  id: RMCAreaBerkleyCryo
+  name: Command Cryo
+
+- type: entity
+  parent:  RMCAreaBerkleyCIC
+  id: RMCAreaBerkleyIO
+  name: IO office
+  components:
+  - type: Area
+    retrieveItemObjective: true
+
+# MEDICAL
+
+- type: entity
+  parent: RMCAreaBerkley
+  id: RMCAreaBerkleyMedical
+  name: Medical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/berkley.rsi
+    state: medical
+  - type: IntelRecoverCorpsesArea
+
+- type: entity
+  parent:  RMCAreaBerkleyMedical
+  id: RMCAreaBerkleyMedicalResearch
+  name: Research
+  components:
+  - type: Area
+    retrieveItemObjective: true
+
+# Requisitions
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyRequisitions
+  name: Requisitions
+  components:
+  - type: Sprite
+    state: requi
+
+- type: entity
+  parent:  RMCAreaBerkleyRequisitions
+  id: RMCAreaBerkleyHangarPort
+  name: Hangar Port
+
+- type: entity
+  parent:  RMCAreaBerkleyRequisitions
+  id: RMCAreaBerkleyHangarStarboard
+  name: Hangar Starboard
+
+- type: entity
+  parent:  RMCAreaBerkleyRequisitions
+  id: RMCAreaBerkleyPilotsRoom
+  name: Pilots Room
+
+- type: entity
+  parent:  RMCAreaBerkleyRequisitions
+  id: RMCAreaBerkleyCanteen
+  name: Canteen
+
+# PREP
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyAlphaBravo
+  name: Alpha-Bravo Preparation
+  components:
+  - type: Sprite
+    state: alpha_bravo
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyAlpha
+  name: Alpha Preparation
+  components:
+  - type: Sprite
+    state: alpha
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyBravo
+  name: Bravo Preparation
+  components:
+  - type: Sprite
+    state: bravo
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyCharlieDelta
+  name: Charlie-Delta Preparation
+  components:
+  - type: Sprite
+    state: charlie_delta
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyCharlie
+  name: Charlie Preparation
+  components:
+  - type: Sprite
+    state: charlie
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyDelta
+  name: Delta Preparation
+  components:
+  - type: Sprite
+    state: delta
+
+# ENGI
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyEngineering
+  name: Engineering
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+#    hijackEvacuationArea: true
+#    hijackEvacuationWeight: 0.2
+#    hijackEvacuationType: Add
+
+# Pumps
+- type: entity
+  abstract: true
+  parent: RMCAreaBerkley
+  id: RMCAreaBerkleyPumpBase
+  components:
+  - type: Sprite
+    state: pump
+  - type: Area
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+
+- type: entity
+  parent:  RMCAreaBerkleyPumpBase
+  id: RMCAreaBerkleyPumpStarboardBow
+  name: Starboard Bow Pump
+
+- type: entity
+  parent:  RMCAreaBerkleyPumpBase
+  id: RMCAreaBerkleyPumpStarboardQuarter
+  name: Starboard Quarter Pump
+
+- type: entity
+  parent:  RMCAreaBerkleyPumpBase
+  id: RMCAreaBerkleyPumpPortBow
+  name: Port Bow Pump
+
+- type: entity
+  parent:  RMCAreaBerkleyPumpBase
+  id: RMCAreaBerkleyPumpPortQuarter
+  name: Port Quarter Pump
+
+# OTHER
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyCorridor
+  name: Amidship Corridor
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleySEA
+  name: SEA Office
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyBriefing
+  name: Briefing
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyLifeboat
+  name: Lifeboat Docking
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleySynthetic
+  name: Synthetic Storage
+
+- type: entity
+  parent:  RMCAreaBerkley
+  id: RMCAreaBerkleyPress
+  name: Correspondent

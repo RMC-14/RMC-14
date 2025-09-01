@@ -156,6 +156,7 @@
       - RMCNailgunCompact
       - RMCNailgunTactical
       - RMCCircuitboard
+      - RMCSynthResetKey
       components:
       - Welder
       - PowerCell
@@ -199,6 +200,7 @@
       - RMCNailgunCompact
       - RMCNailgunTactical
       - RMCCircuitboard
+      - RMCSynthResetKey
       # TODO stock parts
       components:
       - Welder
@@ -265,6 +267,7 @@
       - RMCShellShotgun
       - RMCNailgunCompact
       - RMCNailgunTactical
+      - RMCSynthResetKey
       #      - # TODO analyzer
       components:
       - Welder

@@ -1365,6 +1365,13 @@ WeaponRifleSSG45: RMCWeaponRifleSSG45
 # 2025-08-07
 RMCAttachmentM42A2WoodenStock: RMCAttachmentM42A2CollapsibleStock
 
+# 2025-08-12
+GasPipeHalf: RMCGasPipeHalf
+GasPipeStraight: RMCGasPipeStraight
+GasPipeBend: RMCGasPipeBend
+GasPipeTJunction: RMCGasPipeTJunction
+GasPipeFourway: RMCGasPipeFourway
+
 # 2025-08-17
 WeaponRifleM54C: RMCWeaponRifleM54C
 WeaponRifleM54CE2: RMCWeaponRifleM54CE2

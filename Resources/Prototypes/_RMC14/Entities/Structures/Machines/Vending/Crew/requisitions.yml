@@ -370,6 +370,8 @@
         amount: 2
     - name: Extended ammunition
       entries:
+      - id: CMMagazineRifleM4SPRExt
+        amount: 8
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
@@ -677,6 +679,8 @@
     - name: Gloves
       entries:
       - id: CMHandsBrown
+        amount: 40
+      - id: RMCHandsGreyMarine
         amount: 40
       - id: CMHandsBlackMarine
         amount: 40
