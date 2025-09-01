@@ -36,16 +36,19 @@ using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Content.Shared.Tag;
+using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -87,6 +90,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
@@ -110,7 +114,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> PlatformTag = "Platform";
 
-    private const float ResinDoorXenoCorpsePushForce = 1000f;
+    private static readonly string ResinDoorCorpseAddCollisionTag = "ResinDoorCorpseCollisionDelay";
+
+    // Multiplier force to push out corpses
+    private const float ResinDoorCorpsePushForce = 20f;
+    private TimeSpan ResinDoorBufferDelay = TimeSpan.FromSeconds(0.5);
 
     public override void Initialize()
     {
@@ -1004,19 +1012,28 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoDoorBeforeClose(Entity<ResinDoorComponent> resinDoor, ref BeforeDoorClosedEvent args)
     {
-        List<EntityUid> xenoBodies = new();
+        if (args.Partial)
+        {
+            return;
+        }
+        if (!TryComp<DoorComponent>(resinDoor, out var doorComp))
+        {
+            return;
+        }
 
+        List<EntityUid> bodies = new();
         foreach (var ent in _lookup.GetEntitiesIntersecting(resinDoor))
         {
-            if (HasComp<XenoComponent>(ent) && _mobState.IsDead(ent))
+            if (_mobState.IsDead(ent))
             {
-                xenoBodies.Add(ent);
+                bodies.Add(ent);
             }
 
-            // Set all xeno bodies collision to "false" so the resin door will close
-            foreach (var xeno in xenoBodies)
+            // Set all bodies collision to "false" so the resin door will close
+            foreach (var body in bodies)
             {
-                _physics.SetCanCollide(xeno, false);
+                _physics.SetCanCollide(body, false);
+                //_useDelay.SetLength(body, doorComp.CloseTimeOne + doorComp.CloseTimeTwo + ResinDoorBufferDelay, ResinDoorCorpseAddCollisionTag);
             }
         }
     }
@@ -1034,67 +1051,69 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
         MapCoordinates resinDoorCoords = _transform.GetMapCoordinates(resinDoor);
+        var resinDoorIndices = _mapSystem.TileIndicesFor(grid, gridComp, resinDoorCoords);
         Dictionary<Vector2, MapCoordinates> freeTiles = new();
-        List<Vector2> adjacentDirections = new List<Vector2>
-        {   new Vector2(1,0),
-            new Vector2(-1,0),
-            new Vector2(0,1),
-            new Vector2(0,-1)};
+        List<Vector2i> adjacentDirections = new List<Vector2i>
+        {   new Vector2i(1,0),
+            new Vector2i(-1,0),
+            new Vector2i(0,1),
+            new Vector2i(0,-1)};
         foreach (var dir in adjacentDirections)
         {
-            Vector2i adjacentTilePos = (Vector2i)dir;
-            adjacentTilePos.X += ((int)resinDoorCoords.X);
-            adjacentTilePos.Y += ((int)resinDoorCoords.Y);
+            Vector2i adjacentTileIndices = resinDoorIndices + dir;
 
-            var adjacentTile = _mapSystem.GetTileRef((grid, gridComp), adjacentTilePos);
-            if (!_turf.IsTileBlocked(adjacentTile, CollisionGroup.MobMask, 0.001f))
+
+            var adjacentTile = _mapSystem.GetTileRef((grid, gridComp), adjacentTileIndices);
+            if (!_turf.IsTileBlocked(adjacentTile, CollisionGroup.MobMask))
             {
-                freeTiles.Add(dir, _mapSystem.GridTileToWorld(resinDoor, gridComp, adjacentTilePos));
+                freeTiles.Add(dir, _transform.ToMapCoordinates(_turf.GetTileCenter(adjacentTile)));
             }
         }
 
-        List<EntityUid> xenoBodies = new();
+        List<EntityUid> bodies = new();
         foreach (var ent in _lookup.GetEntitiesIntersecting(resinDoor))
         {
-            if (HasComp<XenoComponent>(ent) && _mobState.IsDead(ent))
+            if (_mobState.IsDead(ent))
             {
-                xenoBodies.Add(ent);
+                bodies.Add(ent);
             }
         }
 
-        // Set all xeno bodies collision to "true"
+        // Set all bodies collision to "true"
         // Apply velocity towards the nearest free tile
-        foreach (var xeno in xenoBodies)
+        foreach (var body in bodies)
         {
-            _physics.SetCanCollide(xeno, true);
+            _physics.SetCanCollide(body, true);
 
-            MapCoordinates xenoCoords = _transform.GetMapCoordinates(xeno);
+            MapCoordinates bodyCoords = _transform.GetMapCoordinates(body);
 
-            Vector2? closestDir = null;
+            MapCoordinates? closestCoords = null;
             float? closestFreeTileDistance = null;
             foreach (var (dir, coords) in freeTiles)
             {
-                float distance = (xenoCoords.Position - coords.Position).Length();
+                float distance = (bodyCoords.Position - coords.Position).Length();
                 if (closestFreeTileDistance is null)
                 {
                     closestFreeTileDistance = distance;
-                    closestDir = dir;
+                    closestCoords = coords;
                     continue;
                 }
 
                 if (closestFreeTileDistance > distance)
                 {
                     closestFreeTileDistance = distance;
-                    closestDir = dir;
+                    closestCoords = coords;
                     continue;
                 }
             }
 
-            if (closestDir is null)
+            if (closestCoords is null || !TryComp<PhysicsComponent>(body, out var bodyPhysicsComp))
             {
                 continue;
             }
-            _physics.ApplyLinearImpulse(xeno, -closestDir.Value * ResinDoorXenoCorpsePushForce);
+            var moveDir = (closestCoords.Value.Position - bodyCoords.Position).Normalized();
+            _physics.ApplyLinearImpulse(body, moveDir * bodyPhysicsComp.Mass * ResinDoorCorpsePushForce);
+            _door.TryOpen(resinDoor);
         }
     }
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
@@ -1213,7 +1232,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (!HasComp<BarricadeComponent>(uid))
             {
-                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid))  &&
+                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid)) &&
                     !_tags.HasTag(uid.Value, PlatformTag) &&
                     !HasComp<DoorComponent>(uid) ||
                     TryComp(uid, out DoorComponent? door) &&
@@ -1525,4 +1544,5 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         RemCompDeferred<QueenBuildingBoostComponent>(queen);
     }
+
 }

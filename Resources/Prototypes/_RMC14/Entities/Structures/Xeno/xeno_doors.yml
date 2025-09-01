@@ -94,6 +94,7 @@
   - type: XenoToggleChargingDamage
     stageLoss: 2
     destroy: true
+  - type: PreventCollideWithDead
 
 - type: entity
   parent: DoorXenoResin
