@@ -228,7 +228,8 @@
     damage:
       types:
         Slash: 20
-
+        
+- type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife]
   id: RMCStraightRazor
   name: straight razor
