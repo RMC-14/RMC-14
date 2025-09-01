@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
@@ -244,7 +245,12 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void OnToggleEvacuationMsg(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerToggleEvacuationMsg args)
     {
-        _ui.CloseUi(ent.Owner, MarineControlComputerUi.Key, args.Actor);
+        if (_ui.HasUi(ent.Owner, MarineControlComputerUi.Key))
+            _ui.CloseUi(ent.Owner, MarineControlComputerUi.Key, args.Actor);
+
+        if (_ui.HasUi(ent.Owner, MarineCommunicationsComputerUI.Key))
+            _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key, args.Actor);
+
         if (!ent.Comp.CanEvacuate)
             return;
 

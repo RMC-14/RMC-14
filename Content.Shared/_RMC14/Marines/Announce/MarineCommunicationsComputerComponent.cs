@@ -34,6 +34,9 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
     public bool CanGiveMedals;
 
     [DataField, AutoNetworkedField]
+    public bool CanInitiateEvac;
+
+    [DataField, AutoNetworkedField]
     public string? AnnounceName;
 
     /*
